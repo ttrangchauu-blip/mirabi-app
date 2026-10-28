@@ -33,18 +33,18 @@ function close() { fireEvent.press(screen.getByRole('button', { name: 'Đóng c�
 beforeEach(async () => {
   jest.clearAllMocks();
   await AsyncStorage.clear();
-  (request as jest.Mock).mockImplementation(async (path: string) => path.includes('statistics') ? stats
-    : path.includes('insights') ? { message: 'Bạn thường hoàn thành phiên 25 phút.', suggested_minutes: 25 }
-    : { answer: 'Quang hợp chuyển ánh sáng thành năng lượng.' });
+  (request as jest.Mock).mockImplementation(async (path: string) => path.includes('statistics') ? stats : {});
 });
 afterEach(() => { jest.restoreAllMocks(); });
 
-test('main room shows only a compact stats strip and four tools; desktop tools open beside the visible timer', async () => {
+test('main room shows only a compact stats strip and two tools; desktop tools open beside the visible timer', async () => {
   const current = timer(); setup(current, 1440); await ready();
   expect(screen.getByLabelText('Còn lại 25:00')).toBeTruthy();
   expect(screen.getByTestId('focus-room')).toBeTruthy();
   expect(screen.queryByText(/Tỷ lệ hoàn thành/)).toBeNull();
-  expect(screen.queryByPlaceholderText('Bạn muốn hiểu phần nào?')).toBeNull();
+  expect(screen.getByRole('button', { name: 'Nghe đọc' })).toBeTruthy();
+  expect(screen.queryByRole('button', { name: 'AI giải đề' })).toBeNull();
+  expect(screen.queryByRole('button', { name: 'AI tóm tắt' })).toBeNull();
   expect(screen.queryByRole('button', { name: 'Lưu thời gian' })).toBeNull();
   fireEvent.press(screen.getByRole('button', { name: 'Ghi chú học tập' }));
   expect(screen.getByTestId('focus-side-panel')).toBeTruthy();
@@ -53,16 +53,12 @@ test('main room shows only a compact stats strip and four tools; desktop tools o
   close(); expect(current.toggle).not.toHaveBeenCalled();
 });
 
-test('mobile statistics and coach open in a bottom sheet and apply advice only after confirmation', async () => {
-  const current = timer(); setup(current); await ready();
+test('mobile statistics open in a bottom sheet', async () => {
+  setup(); await ready();
   fireEvent.press(screen.getByRole('button', { name: 'Mở thống kê học tập' }));
   expect(screen.getByTestId('focus-bottom-sheet')).toBeTruthy();
   expect(screen.getByText(/Tỷ lệ hoàn thành: 75%/)).toBeTruthy();
-  fireEvent.press(screen.getByRole('button', { name: 'AI phân tích thói quen' }));
-  await screen.findByText('Bạn thường hoàn thành phiên 25 phút.');
-  expect(current.configure).not.toHaveBeenCalled();
-  fireEvent.press(screen.getByRole('button', { name: 'Xác nhận dùng phiên 25 phút' }));
-  expect(current.configure).toHaveBeenCalledWith({ focusMinutes: 25 });
+  expect(screen.queryByRole('button', { name: 'AI phân tích thói quen' })).toBeNull();
 });
 
 test('sound selection, playback and volume remain accessible inside the audio panel', async () => {
@@ -82,31 +78,16 @@ test('sound selection, playback and volume remain accessible inside the audio pa
   expect(current.toggle).not.toHaveBeenCalled();
 });
 
-test('tutor and standalone reading share the answer without resetting the running timer', async () => {
+test('reading speaks the typed text without resetting the running timer', async () => {
   const current = { ...timer(), running: true, seconds: 1400 }; setup(current); await ready();
-  fireEvent.press(screen.getByRole('button', { name: 'AI giải đề' }));
-  fireEvent.changeText(screen.getByPlaceholderText('Bạn muốn hiểu phần nào?'), 'Quang hợp là gì?');
-  fireEvent.press(screen.getByRole('button', { name: 'Hỏi AI gia sư' }));
-  await screen.findByText('Quang hợp chuyển ánh sáng thành năng lượng.');
-  expect(request).toHaveBeenCalledWith('/api/ai/study/tutor', { method: 'POST', body: { text: 'Quang hợp là gì?' } });
-  fireEvent.press(screen.getByRole('button', { name: 'Đọc câu trả lời' }));
+  fireEvent.press(screen.getByRole('button', { name: 'Nghe đọc' }));
+  fireEvent.changeText(screen.getByLabelText('Văn bản cần đọc'), 'Quang hợp chuyển ánh sáng thành năng lượng.');
+  fireEvent.press(screen.getByRole('button', { name: 'Đọc nội dung' }));
   expect(Speech.speak).toHaveBeenCalledWith('Quang hợp chuyển ánh sáng thành năng lượng.', expect.objectContaining({ language: 'vi-VN' }));
-  close(); fireEvent.press(screen.getByRole('button', { name: 'AI đọc' }));
-  expect(screen.getByLabelText('Văn bản cần đọc').props.value).toBe('Quang hợp chuyển ánh sáng thành năng lượng.');
   fireEvent.press(screen.getByRole('button', { name: 'Dừng đọc' }));
   expect(Speech.stop).toHaveBeenCalled();
+  expect(request).not.toHaveBeenCalledWith(expect.stringContaining('/api/ai'), expect.anything());
   expect(current.toggle).not.toHaveBeenCalled(); expect(current.reset).not.toHaveBeenCalled();
-});
-
-test('summary uses the shared tutor service and keeps its result when its panel is reopened', async () => {
-  setup(); await ready();
-  fireEvent.press(screen.getByRole('button', { name: 'AI tóm tắt' }));
-  fireEvent.changeText(screen.getByLabelText('Văn bản cần tóm tắt'), 'Cây sử dụng ánh sáng để tạo năng lượng.');
-  fireEvent.press(screen.getByRole('button', { name: 'Tóm tắt nội dung' }));
-  await screen.findByText('Quang hợp chuyển ánh sáng thành năng lượng.');
-  expect(request).toHaveBeenCalledWith('/api/ai/study/tutor', { method: 'POST', body: { text: expect.stringContaining('Cây sử dụng ánh sáng để tạo năng lượng.') } });
-  close(); fireEvent.press(screen.getByRole('button', { name: 'AI tóm tắt' }));
-  expect(screen.getByText('Quang hợp chuyển ánh sáng thành năng lượng.')).toBeTruthy();
 });
 
 test('notes and session goals load and save under the existing user-scoped keys', async () => {
@@ -142,7 +123,7 @@ test('focus mode reduces secondary UI while still allowing tools and pausing', a
   const current = { ...timer(), running: true, seconds: 1490 }; setup(current, 1440); await ready();
   expect(screen.getByTestId('active-focus-mode')).toBeTruthy();
   expect(screen.getByText('MỘT CHÚT TRỢ GIÚP, KHI BẠN CẦN')).toBeTruthy();
-  fireEvent.press(screen.getByRole('button', { name: 'AI giải đề' }));
+  fireEvent.press(screen.getByRole('button', { name: 'Nghe đọc' }));
   expect(screen.getByTestId('focus-side-panel')).toBeTruthy();
   fireEvent.press(screen.getByRole('button', { name: 'Tạm dừng' }));
   expect(current.toggle).toHaveBeenCalledTimes(1);

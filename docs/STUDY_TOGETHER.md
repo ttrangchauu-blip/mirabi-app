@@ -70,7 +70,7 @@ dependency, `APIError` codes, the in-memory rate limiter and the additive startu
   admin queue: `GET /api/admin/social/reports`, `POST /api/admin/social/reports/{id}/resolve`
   `{"action": "dismiss" | "disable_user"}`. Disabling also invalidates the user's tokens.
 - Search and every view of another person return only: id, display name, avatar preset, pet, pet name, pet level and
-  public code. Never email, role, AI history, reflections, personal goals or notes.
+  public code. Never email, role, personal goals or notes.
 - Friend codes can be looked up exactly (`POST /api/users/lookup`, also from the friend QR code `MIRABI-FRIEND:<code>`).
   Unfriending, like blocking, cancels pending room invitations between the two; accepting an invitation checks the
   friendship again. Friends visit each other's pet room: see [friend-visits.md](friend-visits.md).

@@ -46,15 +46,11 @@ Its preview dimensions also govern tool layout, keeping tools inside the phone.
 
 ## Tools and data
 
-- Tutor: existing `/api/ai/study/tutor` endpoint and shared AI Engine.
-- Summary: the same tutor endpoint, with an explicit instruction to summarize only
-  the submitted text (input capped to keep the request under 5,000 characters).
-- Read: existing device speech, for supplied text, tutor answers, notes or summaries.
+- Read: existing device speech, for typed text or notes.
   Speech stops when leaving this screen/account; closing its panel can keep playback.
 - Notes and session goal: existing per-user AsyncStorage keys; content remains
   available when a panel closes and after reload. Storage failures are visible.
-- Statistics and coaching: existing authenticated statistics and insights endpoints.
-  Model suggestions still require a separate confirmation before settings change.
+- Statistics: existing authenticated statistics endpoints.
 
 ## Verification — 2026-10-23
 

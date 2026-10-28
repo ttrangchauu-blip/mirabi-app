@@ -1,4 +1,3 @@
-import json
 from datetime import datetime, timedelta
 from typing import Literal
 from fastapi import APIRouter, Depends, HTTPException, Query
@@ -10,7 +9,6 @@ from sqlalchemy.orm import Session
 from .db import get_db
 from .models import StudySession, User, as_utc, utcnow
 from .study_statistics import preferences, settings_dict, statistics, valid_timezone
-from .ai_client import call_ai_engine, AIServiceError
 from .schemas import StudyInput
 from .security import current_user
 from .progression import award_study_exp
@@ -145,25 +143,6 @@ def record_pomodoro(cycle: str, data: PomodoroEvent, user: User = Depends(curren
     if changed and data.event == "completed":
         maybe_start_walk(user, db)
     return {"id": row.id, "status": row.status, "xp_awarded": awarded, "statistics": statistics(db, user.id)}
-
-
-@router.post("/pomodoro-insights")
-async def pomodoro_insights(user: User = Depends(current_user), db: Session = Depends(get_db)):
-    facts = statistics(db, user.id, "month")
-    db.commit()
-    if facts["history_completed"] < 5 or facts["active_days"] < 3:
-        return {"sufficient_data": False, "message": "Chưa đủ dữ liệu. Hãy hoàn thành ít nhất 5 phiên trong 3 ngày học.",
-                "suggested_minutes": None}
-    durations = facts["duration_counts"]
-    suggested = max(durations, key=lambda item: item["completed"])["minutes"] if durations else None
-    try:
-        result = await call_ai_engine({"user_id": user.id, "feature_key": "pomodoro_coach",
-                                       "user_input": "Phân tích thói quen học tập từ dữ liệu tổng hợp đã xác thực.",
-                                       "context": {"study_facts": json.dumps(facts, ensure_ascii=False)}})
-    except AIServiceError as exc:
-        raise HTTPException(exc.status_code, detail={"code": exc.code})
-    return {"sufficient_data": True, "message": result["text"], "suggested_minutes": suggested,
-            "run_id": result["run_id"], "facts": facts}
 
 
 @router.post("/pomodoro/{cycle}")

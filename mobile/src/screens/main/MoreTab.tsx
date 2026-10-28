@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import type { User } from '../../auth/AuthContext';
@@ -8,7 +8,6 @@ import { Text } from '../../components/Typography';
 import { petById } from '../../pets';
 import { appTheme as t } from '../../theme';
 import { Avatar, Button, Card, IconCircle, IconName, ScreenHeader, SectionHeader } from '../../ui/kit';
-import { AIAdminScreen } from './AIAdminScreen';
 
 const FEATURES: { icon: IconName; title: string; subtitle: string; color: string; bg: string }[] = [
   { icon: 'newspaper-outline', title: 'Bảng tin', subtitle: 'Lan tỏa điều tích cực', color: '#A3326B', bg: '#FCE4F0' },
@@ -28,11 +27,9 @@ const SETTINGS: { icon: IconName; label: string }[] = [
 export function MoreTab({ user, onOpenProfile, onOpenRoom, onOpenFeed }: {
   user: User; onOpenProfile: () => void; onOpenRoom?: () => void; onOpenFeed?: () => void;
 }) {
-  const [showAIAdmin, setShowAIAdmin] = useState(false);
   const confirmLogout = useConfirmLogout();
   const pet = petById(user.pet);
 
-  if (showAIAdmin && user.role === 'admin') return <AIAdminScreen onBack={() => setShowAIAdmin(false)} />;
 
   return (
     <>
@@ -65,7 +62,6 @@ export function MoreTab({ user, onOpenProfile, onOpenRoom, onOpenFeed }: {
       </View>
 
       <SectionHeader title="Cài đặt" />
-      {user.role === 'admin' && <Pressable onPress={() => setShowAIAdmin(true)} style={styles.adminEntry} accessibilityRole="button"><IconCircle name="hardware-chip-outline" /><View style={styles.flex}><Text style={styles.settingLabel}>AI Admin</Text><Text style={styles.tileSub}>Manage agents, models and prompts</Text></View><Ionicons name="chevron-forward" size={18} color={t.muted} /></Pressable>}
       <Card style={styles.settings}>
         {SETTINGS.map((s, i) => (
           <Pressable key={s.label} onPress={() => showAlert(s.label, 'Cấu hình chi tiết sẽ được bổ sung theo yêu cầu sản phẩm.')}
@@ -93,7 +89,6 @@ const styles = StyleSheet.create({
   tileTitle: { fontSize: 16, fontWeight: '800', color: t.ink, marginTop: 12 },
   tileSub: { fontSize: 13, color: t.muted, marginTop: 2 },
   settings: { paddingVertical: 6 },
-  adminEntry: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: '#FFFFFF', padding: 14, borderRadius: 18, marginBottom: 10 },
   setting: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 10, minHeight: 52 },
   divider: { borderTopWidth: 1, borderTopColor: t.tint },
   settingLabel: { flex: 1, fontSize: 16, fontWeight: '700', color: t.ink },

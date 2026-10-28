@@ -1,4 +1,3 @@
-import json
 from datetime import datetime, timedelta, timezone
 
 from sqlalchemy import select
@@ -81,33 +80,6 @@ def test_preferences_persist_and_are_private(client):
     assert client.get("/api/study/pomodoro-statistics").status_code == 401
 
 
-def test_ai_requires_data_and_receives_only_own_aggregates(client, db, monkeypatch):
-    headers = bearer(signup(client).json()["access_token"])
-    other = signup(client, email="private@example.com").json()
-    assert not client.post("/api/study/pomodoro-insights", headers=headers).json()["sufficient_data"]
-    user = db.scalar(select(User).where(User.email == "aqua@example.com"))
-    now = datetime.now(timezone.utc)
-    for offset in (0, 0, 1, 1, 2):
-        session(db, user.id, now - timedelta(days=offset), zone="UTC")
-    db.commit()
-
-    async def fake_run(payload):
-        assert payload["user_id"] == user.id
-        assert payload["feature_key"] == "pomodoro_coach"
-        assert set(payload["context"]) == {"study_facts"}
-        facts = json.loads(payload["context"]["study_facts"])
-        assert facts["history_completed"] == 5
-        assert "email" not in payload["context"]["study_facts"]
-        return {"text": "Bạn đã hoàn thành 5 phiên học.", "run_id": 1}
-
-    monkeypatch.setattr("app.study.call_ai_engine", fake_run)
-    result = client.post("/api/study/pomodoro-insights", headers=headers).json()
-    assert result["suggested_minutes"] == 25
-    assert result["sufficient_data"]
-    assert client.get("/api/study/pomodoro-settings", headers=headers).json()["focus_minutes"] == 25
-    assert not client.post("/api/study/pomodoro-insights", headers=bearer(other["access_token"])).json()["sufficient_data"]
-
-
 def test_legacy_sessions_remain_counted_without_migration_backfill(client, db):
     signup(client)
     user = db.scalar(select(User).where(User.email == "aqua@example.com"))
@@ -131,56 +103,6 @@ def test_midnight_rate_uses_start_cohort_and_dst_uses_calendar_days(client, db):
     assert result["current_streak"] == 2
     assert result["today_sessions"] == 1
     assert result["started"] == 0 and result["completion_rate"] == 0
-
-
-def test_ai_unavailable_returns_error_without_reward_or_settings_change(client, db, monkeypatch):
-    from app.ai_client import AIServiceError
-    headers = bearer(signup(client).json()["access_token"])
-    user = db.scalar(select(User).where(User.email == "aqua@example.com"))
-    for offset in (0, 0, 1, 1, 2):
-        session(db, user.id, datetime.now(timezone.utc) - timedelta(days=offset), zone="UTC")
-    db.commit()
-
-    async def unavailable(payload):
-        raise AIServiceError("ai_service_unavailable")
-
-    monkeypatch.setattr("app.study.call_ai_engine", unavailable)
-    assert client.post("/api/study/pomodoro-insights", headers=headers).status_code == 503
-    assert not db.scalars(select(ExpEvent).where(ExpEvent.source == "study")).all()
-    assert client.get("/api/study/pomodoro-settings", headers=headers).json()["focus_minutes"] == 25
-
-
-def test_coach_runs_through_shared_engine_and_persists_authorized_run(client, db, monkeypatch):
-    import httpx
-    from ai_engine.app import app as engine_app
-    from ai_engine.engine import PROVIDERS
-    from app.config import settings
-    from app.models import AIRun, AIUsageLog
-
-    token = signup(client).json()["access_token"]
-    user = db.scalar(select(User).where(User.email == "aqua@example.com"))
-    for offset in (0, 0, 1, 1, 2):
-        session(db, user.id, datetime.now(timezone.utc) - timedelta(days=offset), zone="UTC")
-    db.commit()
-    monkeypatch.setattr(settings, "backend_ai_service_token", "integration-test-token")
-    monkeypatch.setenv("AI_SERVICE_TOKEN", "integration-test-token")
-    monkeypatch.setenv("OPENAI_API_KEY", "test-provider-key")
-
-    async def provider(model, prompt, parameters, max_output_tokens):
-        assert '"history_completed": 5' in prompt
-        assert "Không tự thay đổi cài đặt" in prompt
-        return "Bạn đã hoàn thành 5 phiên học.", 30, 12
-
-    monkeypatch.setitem(PROVIDERS, "openai", provider)
-    original_client = httpx.AsyncClient
-    monkeypatch.setattr("app.ai_client.httpx.AsyncClient", lambda **kwargs: original_client(
-        transport=httpx.ASGITransport(app=engine_app), **kwargs))
-    response = client.post("/api/study/pomodoro-insights", headers=bearer(token))
-    assert response.status_code == 200
-    db.expire_all()
-    run = db.get(AIRun, response.json()["run_id"])
-    assert run.user_id == user.id and run.feature_key == "pomodoro_coach" and run.status == "succeeded"
-    assert db.scalar(select(AIUsageLog).where(AIUsageLog.run_id == run.id)).outcome == "success"
 
 
 def test_dashboard_study_summary_matches_focus_statistics(client, db):

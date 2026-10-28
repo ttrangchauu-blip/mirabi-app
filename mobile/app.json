@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Mirabi",
-    "slug": "refmi-mobile",
+    "slug": "mirabi-app",
     "version": "0.1.0",
     "icon": "./assets/icon.png",
     "ios": {
@@ -15,7 +15,14 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#EEF6FD"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.CAMERA"
+      ]
     },
     "web": {
       "name": "Mirabi",
@@ -46,6 +53,12 @@
           "recordAudioAndroid": false
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "391c9c8e-07e9-46db-9337-db936bc81df0"
+      }
+    },
+    "owner": "mirabi-team"
   }
 }

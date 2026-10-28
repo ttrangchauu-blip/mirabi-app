@@ -60,13 +60,8 @@ class Settings(BaseSettings):
     # IANA zone whose calendar days define the login streak (one check-in per local day).
     login_streak_timezone: str = "Asia/Ho_Chi_Minh"
     database_url: str = "sqlite:///./refmi.db"
-    openai_model: str = "gpt-4.1-mini"
-    ai_timeout_seconds: int = 20
-    ai_max_retries: int = 1
-    ai_max_output_tokens: int = 500
-    ai_admin_emails: str = ""
-    ai_service_url: str = "http://127.0.0.1:8002"
-    backend_ai_service_token: str = ""
+    # Comma-separated accounts that get the admin role (moderating user reports); synced on startup and login.
+    admin_emails: str = ""
     cors_origins: str = "http://localhost:8081,http://127.0.0.1:8081,http://localhost:8082,http://127.0.0.1:8082,http://localhost:19006"
     # Redirect plain HTTP to HTTPS and send HSTS. Defaults to on in production.
     force_https: bool | None = None
@@ -116,12 +111,8 @@ class Settings(BaseSettings):
         return [x.strip() for x in self.cors_origins.split(",") if x.strip()]
 
     @property
-    def ai_admin_email_list(self) -> set[str]:
-        return {x.strip().lower() for x in self.ai_admin_emails.split(",") if x.strip()}
-
-    @property
-    def ai_service_token(self) -> str:
-        return self.backend_ai_service_token
+    def admin_email_list(self) -> set[str]:
+        return {x.strip().lower() for x in self.admin_emails.split(",") if x.strip()}
 
     @model_validator(mode="after")
     def check_production_safety(self):

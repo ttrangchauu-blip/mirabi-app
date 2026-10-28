@@ -159,6 +159,3 @@ class UserTaskComplete(BaseModel):
 class CareerQuiz(BaseModel):
     interests: list[str] = Field(min_length=1, max_length=10)
 
-class ReflectionInput(BaseModel):
-    text: str = Field(min_length=1, max_length=5000)
-    mood: Optional[str] = None

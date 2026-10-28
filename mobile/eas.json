@@ -13,7 +13,7 @@
         "simulator": false
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://REPLACE-WITH-CLOUD-RUN-URL"
+        "EXPO_PUBLIC_API_URL": "https://mirabi-api.onrender.com"
       }
     }
   }

@@ -12,7 +12,6 @@ A runnable MVP scaffold inspired by the provided reference image. It includes:
 - Community posts and reactions
 - Avatar customization, room inventory, daily quests
 - Private pet memory album with automatic milestones, manual captures, filters, favorites, download and privacy-safe sharing
-- Optional AI features executed by the separate AI Engine process
 - English & Math learning games (vocabulary, grammar, arithmetic, missing numbers, comparison, order of operations)
   with server-side scoring, progress, review list and EXP — see [docs/LEARNING_GAMES.md](docs/LEARNING_GAMES.md)
 
@@ -216,28 +215,7 @@ Backend `.env` (full list with comments in [backend/.env.example](backend/.env.e
 - `DATABASE_URL`: defaults to SQLite
 - `CORS_ORIGINS`: only needed for the Expo web build; `*` is rejected in production
 - `EMAIL_BACKEND` / `SMTP_*`: password reset delivery
-- `AI_SERVICE_URL` / `BACKEND_AI_SERVICE_TOKEN`: private AI Engine address and shared service credential
-- `OPENAI_MODEL`: default model registered by the business backend; provider credentials are configured only in `ai_engine/.env`
-
-### Run the separate AI Engine
-
-The business backend and AI Engine run as separate processes. Copy `ai_engine/.env.example` to `ai_engine/.env`, set a random
-`AI_SERVICE_TOKEN` equal to backend `BACKEND_AI_SERVICE_TOKEN`, and put `OPENAI_API_KEY` only in `ai_engine/.env`.
-Both processes use the existing database; only the business backend applies migrations.
-
-From the repository root, start these in separate terminals:
-
-```powershell
-# Terminal 1: business API
-cd backend
-.\.venv\Scripts\python.exe -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8011
-
-# Terminal 2: AI Engine
-cd ..
-backend\.venv\Scripts\python.exe -m uvicorn ai_engine.app:app --reload --host 127.0.0.1 --port 8002 --env-file ai_engine\.env
-```
-
-Keep port 8002 private. The mobile app continues to call only the backend on port 8011.
+- `ADMIN_EMAILS`: optional, comma-separated accounts that get the admin role (moderating user reports)
 
 Mobile `.env`:
 - `EXPO_PUBLIC_API_URL`: backend base URL. Everything prefixed `EXPO_PUBLIC_` is bundled into the app and
@@ -260,7 +238,6 @@ Mobile `.env`:
   [docs/friend-visits.md](docs/friend-visits.md) (friends, friend code/QR, visits, greetings, cheers, study invites).
 - Memory album: `GET/POST /api/memories`, `GET/PATCH/DELETE /api/memories/{id}`,
   `GET /api/memories/pending`, `POST /api/memories/{id}/acknowledge`
-- `POST /api/ai/reflection`
 - Learning games: `/api/learning/catalog`, `/api/learning/lessons/{id}`, `/api/learning/sessions` (+ `/current`,
   `/{id}/answer|hint|reveal|miss|next|pause|resume|extend|complete|abandon|result`), `/api/learning/review`,
   `/api/learning/progress`. See [docs/LEARNING_GAMES.md](docs/LEARNING_GAMES.md).

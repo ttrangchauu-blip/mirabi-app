@@ -1,0 +1,15 @@
+/backend/
+/ai_engine/
+**/node_modules/
+**/.expo/
+**/.venv/
+**/__pycache__/
+**/.env
+**/.env.*
+!**/.env.example
+**/*.db
+**/.pytest*/
+**/coverage/
+.local-preview/
+.pet-assets-backup-*/
+**/*.log

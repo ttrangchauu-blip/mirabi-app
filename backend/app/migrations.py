@@ -53,16 +53,6 @@ ADDED_COLUMNS: dict[str, list[tuple[str, str]]] = {
     "learning_sessions": [("game", "VARCHAR(20)")],
     "learning_vocab_entries": [("difficulty", "INTEGER"), ("cefr", "VARCHAR(2)"), ("audio_ref", "VARCHAR(200)"),
                                ("content_version", "INTEGER NOT NULL DEFAULT 1"), ("review_notes", "TEXT")],
-    "ai_models": [
-        ("input_cost_microusd_per_1k", "INTEGER"),
-        ("output_cost_microusd_per_1k", "INTEGER"),
-    ],
-    "ai_feature_configs": [
-        ("model_parameters", "TEXT NOT NULL DEFAULT '{}'"),
-        ("max_output_tokens", "INTEGER NOT NULL DEFAULT 500"),
-        ("timeout_seconds", "INTEGER NOT NULL DEFAULT 20"),
-    ],
-    "ai_runs": [("prompt_version", "VARCHAR(40)")],
     "login_streak_days": [("popup_claim_key", "VARCHAR(64)")],
     "user_reports": [("message_id", "INTEGER"), ("message_body", "VARCHAR(500)")],
     "social_profiles": [("allow_room_visits", "BOOLEAN NOT NULL DEFAULT 1"),
@@ -157,13 +147,6 @@ def backfill_vocab_difficulty(conn) -> None:
                          WHERE difficulty IS NULL"""))
 
 
-AI_TABLES = (
-    "ai_audit_logs", "ai_evaluations", "ai_prompt_versions", "ai_agents", "ai_models",
-    "ai_feedback", "ai_usage_logs", "ai_runs", "ai_messages", "ai_conversations",
-    "ai_memories", "ai_user_context", "ai_knowledge_documents", "ai_feature_configs",
-)
-
-
 # Study Together tables, children first. They are created by `upgrade_schema` (create_all) like every new table.
 STUDY_TOGETHER_TABLES = (
     "friend_pet_exp_grants", "room_visit_interactions", "study_room_messages", "social_notifications", "team_quest_events", "team_quest_members", "team_quests", "study_room_participants",
@@ -177,11 +160,4 @@ def downgrade_study_together_schema(engine: Engine) -> None:
     study_sessions (pomodoro_cycle 'room<id>') and their EXP stay, like any other study history."""
     with engine.begin() as conn:
         for table in STUDY_TOGETHER_TABLES:
-            conn.execute(text(f'DROP TABLE IF EXISTS "{table}"'))
-
-
-def downgrade_ai_schema(engine: Engine) -> None:
-    """Remove only the AI tables introduced by this migration (irreversible data loss)."""
-    with engine.begin() as conn:
-        for table in AI_TABLES:
             conn.execute(text(f'DROP TABLE IF EXISTS "{table}"'))

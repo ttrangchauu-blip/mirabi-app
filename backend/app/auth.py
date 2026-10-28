@@ -47,7 +47,7 @@ def register(data: RegisterInput, request: Request, db: Session = Depends(get_db
         raise APIError(409, "email_taken", "Email already registered")
     display_name = data.display_name or data.email.split("@")[0][:80] or "Lunaria"
     user = User(email=data.email, password_hash=hash_password(data.password), display_name=display_name,
-                role="admin" if data.email.lower() in settings.ai_admin_email_list else "user")
+                role="admin" if data.email.lower() in settings.admin_email_list else "user")
     db.add(user)
     try:
         db.flush()
@@ -73,7 +73,7 @@ def login(data: LoginInput, request: Request, db: Session = Depends(get_db),
     if user.status != "active":
         raise APIError(403, "account_disabled", "This account is disabled")
     # Admin assignment follows backend deployment configuration, not client input.
-    expected_role = "admin" if user.email.lower() in settings.ai_admin_email_list else "user"
+    expected_role = "admin" if user.email.lower() in settings.admin_email_list else "user"
     if user.role != expected_role:
         user.role = expected_role
     if password_needs_rehash(user.password_hash):

@@ -13,10 +13,6 @@ os.environ.update({
     # Study Together tests drive the room clock and sweeps explicitly.
     "STUDY_ROOM_TICK_SECONDS": "0",
     "EMAIL_BACKEND": "disabled",
-    # Never reach a real AI engine or provider from a local .env; tests opt in with the `ai_engine` fixture.
-    "BACKEND_AI_SERVICE_TOKEN": "",
-    "AI_SERVICE_URL": "http://ai-engine.test",
-    "OPENAI_API_KEY": "",
 })
 
 import pytest
@@ -72,20 +68,6 @@ def client():
             _copy_content(to_pristine=True)
             _pristine["fingerprint"] = _content_fingerprint()
         yield c
-
-@pytest.fixture()
-def ai_engine(monkeypatch):
-    """Route backend -> AI engine calls to the in-process engine app (providers are still patched per test)."""
-    import httpx
-    from ai_engine.app import app as engine_app
-    from app.config import settings
-
-    monkeypatch.setattr(settings, "backend_ai_service_token", "integration-test-token")
-    monkeypatch.setenv("AI_SERVICE_TOKEN", "integration-test-token")
-    original_client = httpx.AsyncClient
-    monkeypatch.setattr("app.ai_client.httpx.AsyncClient", lambda **kwargs: original_client(
-        transport=httpx.ASGITransport(app=engine_app), **kwargs))
-    return engine_app
 
 @pytest.fixture()
 def clock(monkeypatch):

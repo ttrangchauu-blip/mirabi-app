@@ -1,6 +1,4 @@
-# One image for both hosted services (render.yaml, docs/deploy-test.md):
-#   business API: APP_MODULE=app.main:app (default)
-#   AI Engine:    APP_MODULE=ai_engine.app:app
+# Image for the hosted business API (render.yaml, docs/deploy-test.md).
 FROM python:3.12-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -13,7 +11,6 @@ COPY backend/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY backend/app ./app
-COPY ai_engine /srv/ai_engine
 
 RUN useradd --create-home --uid 10001 appuser
 USER appuser

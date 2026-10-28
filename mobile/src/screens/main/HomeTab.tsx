@@ -84,14 +84,18 @@ export function HomeTab({ user, dashboard, onNavigate, onOpenProfile, onOpenStre
   const [petSpace, setPetSpace] = useState<PetSpace | null>(null);
   const [petSpaceError, setPetSpaceError] = useState(false);
   const serverTimeOffset = useRef(0);
+  // Only the latest load may update the frame: an older answer arriving late (e.g. sent before the gift was confirmed) is stale.
+  const petSpaceLoad = useRef(0);
   const loadPetSpace = useCallback(async () => {
+    const load = ++petSpaceLoad.current;
     try {
       const result = normalizePetSpace(await request('/api/pet/space'));
+      if (load !== petSpaceLoad.current) return;
       setPetSpaceError(false);
       if (result?.server_now) serverTimeOffset.current = new Date(result.server_now).getTime() - Date.now();
       setPetSpace(result);
     }
-    catch (e) { setPetSpaceError(true); showError('Không tải được trạng thái đi dạo', e); }
+    catch (e) { if (load === petSpaceLoad.current) { setPetSpaceError(true); showError('Không tải được trạng thái đi dạo', e); } }
   }, []);
   useEffect(() => { void loadPetSpace(); }, [loadPetSpace, petSpaceVersion]);
   // Keep the frame in sync when the last quest is completed from another tab or

@@ -10,7 +10,6 @@
 | Community | Read/create/like posts | Comments, groups, reporting, moderation, image upload |
 | Companion | Theme field and placeholder mascot | Asset pipeline, evolution states, interaction animations |
 | Room | Inventory list placeholder | User inventory, purchase/equip transactions |
-| AI reflection | Optional OpenAI Responses API + local fallback | Prompt evaluation, safety checks, privacy retention policy |
 | Auth | Email/password (Argon2id), short-lived JWT + rotating refresh tokens, logout, password reset by email code, rate limiting, SecureStore session restore | Email verification, deep-link reset, shared (Redis) rate limiting, Alembic migrations |
 
 ## Suggested production data model
@@ -20,11 +19,9 @@
 - career_profiles, assessment_questions, assessment_answers, career_recommendations
 - community_posts, comments, reactions, groups, memberships, reports, moderation_actions
 - pets, pet_states, inventory_items, user_inventory, room_layouts
-- reflection_sessions, reflection_messages, consent_records
 
 ## Architecture
 Mobile app -> FastAPI REST API -> SQL database
-Optional AI service is called server-side only. Never put an AI provider key in the mobile app.
 
 ## Backend API modules
 Each feature router lives in its own `backend/app` module and is registered in `backend/app/main.py`:
@@ -40,7 +37,6 @@ Each feature router lives in its own `backend/app` module and is registered in `
 | `profile.py` | Profile, pet adoption, onboarding |
 | `companion.py` | Pet room, daily quests, walks and collection |
 | `tasks.py` | Personal scheduled tasks and calendar occurrences |
-| `reflection.py` | AI reflection with local fallback |
 | `friends.py` | Study Together: social profile and privacy, search, friend requests, blocks, reports (+ admin queue) |
 | `study_rooms.py` | Study Together: rooms, invitations, server-driven group session, summaries, history, background sweep |
 | `team_quests.py` | Study Together: cooperative room quests from fixed templates |

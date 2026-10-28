@@ -10,7 +10,6 @@ import { appTheme } from '../../theme';
 import { Button } from '../../ui/kit';
 import { useConfirm } from '../../ui/ConfirmDialog';
 import { Text, TextInput } from '../../components/Typography';
-import { request, showError } from './shared';
 import type { FocusTimer } from './MainApp';
 import { FocusRoom } from './FocusRoom';
 import { FocusToolPanel } from './FocusToolPanel';
@@ -18,24 +17,18 @@ import { FocusSoundSettings, FocusTimeSettings, noSoundOption, soundOptions } fr
 import { PomodoroCompletion, PomodoroStatistics, StudyStatsBar, useStudyStatistics } from './PomodoroStatistics';
 import { focusTheme as f } from './focusSpaceTheme';
 
-type Panel = 'time' | 'sound' | 'tutor' | 'read' | 'summary' | 'notes' | 'statistics';
-type AITool = 'tutor' | 'summary';
+type Panel = 'time' | 'sound' | 'read' | 'notes' | 'statistics';
 const toolInfo = {
   time: { title: 'Nhịp học của bạn', subtitle: 'Một nhịp vừa sức để đi được đường dài.' },
   sound: { title: 'Âm thanh của căn phòng', subtitle: 'Chọn một khoảng nền để tâm trí nhẹ hơn.' },
-  tutor: { title: 'AI giải đề', subtitle: 'Cùng gỡ từng ý khó, từng bước một.' },
-  read: { title: 'AI đọc', subtitle: 'Thả lỏng đôi mắt, lắng nghe điều bạn đang học.' },
-  summary: { title: 'AI tóm tắt', subtitle: 'Giữ lại ý chính, dành chỗ cho điều mới.' },
+  read: { title: 'Nghe đọc', subtitle: 'Thả lỏng đôi mắt, lắng nghe điều bạn đang học.' },
   notes: { title: 'Ghi chú học tập', subtitle: 'Một nơi nhỏ cho những điều muốn nhớ.' },
   statistics: { title: 'Hành trình tập trung', subtitle: 'Nhìn lại nhịp học và những bước tiến của bạn.' },
 };
 const tools = [
-  { id: 'tutor' as const, icon: 'sparkles-outline' as const, label: 'Giải đề', accessible: 'AI giải đề' },
-  { id: 'read' as const, icon: 'volume-medium-outline' as const, label: 'Đọc', accessible: 'AI đọc' },
-  { id: 'summary' as const, icon: 'reader-outline' as const, label: 'Tóm tắt', accessible: 'AI tóm tắt' },
+  { id: 'read' as const, icon: 'volume-medium-outline' as const, label: 'Đọc', accessible: 'Nghe đọc' },
   { id: 'notes' as const, icon: 'create-outline' as const, label: 'Ghi chú', accessible: 'Ghi chú học tập' },
 ];
-const emptyAI = { tutor: { input: '', answer: '', busy: false }, summary: { input: '', answer: '', busy: false } };
 
 type Props = { timer: FocusTimer; petId: string; petName: string | null; petLevel: number; userId: number };
 
@@ -43,7 +36,6 @@ export function PomodoroPanel({ timer, petId, petName, petLevel, userId }: Props
   const { width } = useViewportSize();
   const desktop = width >= 1024;
   const [panel, setPanel] = useState<Panel | null>(null);
-  const [ai, setAI] = useState(emptyAI);
   const [reading, setReading] = useState(false);
   const [readText, setReadText] = useState('');
   const [note, setNote] = useState('');
@@ -56,13 +48,12 @@ export function PomodoroPanel({ timer, petId, petName, petLevel, userId }: Props
   const owner = useRef(userId); owner.current = userId;
   const mounted = useRef(true);
   const speechRun = useRef(0);
-  const requests = useRef(new Set<AITool>());
   const opener = useRef<View | null>(null);
   const toolRefs = useRef<Partial<Record<Panel, View | null>>>({});
   const noteKey = `mirabi.study.note:${userId}`;
   const goalKey = `mirabi.study.goal:${userId}`;
   useEffect(() => { mounted.current = true; return () => { mounted.current = false; void Speech.stop(); }; }, []);
-  useEffect(() => { setAI(emptyAI); setPanel(null); setReadText(''); setReading(false); speechRun.current += 1; requests.current.clear(); void Speech.stop(); }, [userId]);
+  useEffect(() => { setPanel(null); setReadText(''); setReading(false); speechRun.current += 1; void Speech.stop(); }, [userId]);
   useEffect(() => {
     let disposed = false;
     setNotesReady(false); setNote(''); setGoal('');
@@ -74,7 +65,7 @@ export function PomodoroPanel({ timer, petId, petName, petLevel, userId }: Props
   const closePanel = useCallback(() => { setPanel(null); opener.current?.focus(); }, []);
   function openPanel(next: Panel) {
     opener.current = toolRefs.current[next] ?? null;
-    if (next === 'read' && !readText.trim()) setReadText(ai.tutor.answer || ai.summary.answer || note);
+    if (next === 'read' && !readText.trim()) setReadText(note);
     setPanel(current => current === next ? null : next);
   }
   async function saveLocal(kind: 'note' | 'goal', value: string) {
@@ -85,20 +76,6 @@ export function PomodoroPanel({ timer, petId, petName, petLevel, userId }: Props
       await AsyncStorage.setItem(kind === 'note' ? noteKey : goalKey, value);
       if (mounted.current && owner.current === requestedBy) setNoteStatus('Đã lưu trên thiết bị này');
     } catch { if (mounted.current && owner.current === requestedBy) setNoteStatus('Chưa lưu được. Giữ công cụ mở và thử chỉnh sửa lại.'); }
-  }
-  async function askAI(kind: AITool) {
-    const text = ai[kind].input.trim();
-    if (!text || requests.current.has(kind)) return;
-    requests.current.add(kind);
-    const requestedBy = userId;
-    setAI(current => ({ ...current, [kind]: { ...current[kind], busy: true } }));
-    try {
-      const result = await request('/api/ai/study/tutor', { method: 'POST', body: {
-        text: kind === 'summary' ? `Tóm tắt văn bản sau bằng tiếng Việt, giữ đúng thông tin, nêu các ý chính ngắn gọn. Không thêm dữ kiện ngoài văn bản.\n\n${text}` : text,
-      } });
-      if (mounted.current && owner.current === requestedBy) setAI(current => ({ ...current, [kind]: { ...current[kind], answer: result.answer } }));
-    } catch (error) { if (mounted.current && owner.current === requestedBy) showError('AI gia sư hiện chưa sẵn sàng', error); }
-    finally { if (mounted.current && owner.current === requestedBy) { requests.current.delete(kind); setAI(current => ({ ...current, [kind]: { ...current[kind], busy: false } })); } }
   }
   function speak(text: string) {
     if (!text.trim()) return;
@@ -127,7 +104,6 @@ export function PomodoroPanel({ timer, petId, petName, petLevel, userId }: Props
   const startTitle = timer.running ?'Tạm dừng' : paused ? 'Tiếp tục' : timer.phase === 'focus' ? desktop ? 'Bắt đầu tập trung' : 'Bắt đầu' : 'Bắt đầu nghỉ';
   const currentSound = soundOptions.find(sound => sound.id === timer.sound) ?? soundOptions[0];
   const hasPanel = desktop && !!panel;
-  const aiKind = panel === 'tutor' || panel === 'summary' ? panel : null;
   const clockSize = desktop ? 236 : 194;
   const clockRadius = clockSize / 2 - 7;
 
@@ -143,19 +119,10 @@ export function PomodoroPanel({ timer, petId, petName, petLevel, userId }: Props
       {!notesReady ? <Button title="Thử mở lại sổ tay" variant="secondary" onPress={() => setNoteRetry(v => v + 1)} /> : null}
     </> : panel === 'read' ? <>
       <Text style={s.fieldLabel}>Nội dung muốn nghe</Text>
-      <TextInput value={readText} onChangeText={setReadText} accessibilityLabel="Văn bản cần đọc" placeholder="Dán nội dung, hoặc dùng câu trả lời từ gia sư…" multiline maxLength={6000} textAlignVertical="top" style={[s.input, s.longInput]} />
-      <View style={s.wrap}>{ai.tutor.answer ? <Button title="Dùng lời giải" variant="secondary" onPress={() => setReadText(ai.tutor.answer)} /> : null}{note ? <Button title="Dùng ghi chú" variant="secondary" onPress={() => setReadText(note)} /> : null}{ai.summary.answer ? <Button title="Dùng bản tóm tắt" variant="secondary" onPress={() => setReadText(ai.summary.answer)} /> : null}</View>
+      <TextInput value={readText} onChangeText={setReadText} accessibilityLabel="Văn bản cần đọc" placeholder="Dán nội dung bạn muốn nghe…" multiline maxLength={6000} textAlignVertical="top" style={[s.input, s.longInput]} />
+      {note ? <View style={s.wrap}><Button title="Dùng ghi chú" variant="secondary" onPress={() => setReadText(note)} /></View> : null}
       <Button title={reading ? 'Dừng đọc' : 'Đọc nội dung'} icon={reading ? 'stop' : 'volume-medium-outline'} disabled={!reading && !readText.trim()} onPress={() => reading ? stopReading() : speak(readText)} />
       <Text style={s.caption}>Giọng đọc tiếng Việt trên thiết bị. Bạn có thể đóng bảng và tiếp tục nghe trong lúc học.</Text>
-    </> : aiKind ? <>
-      <Text style={s.fieldLabel}>{aiKind === 'tutor' ? 'Bạn đang vướng ở đâu?' : 'Nội dung cần tóm tắt'}</Text>
-      <TextInput value={ai[aiKind].input} onChangeText={value => setAI(current => ({ ...current, [aiKind]: { ...current[aiKind], input: value } }))}
-        accessibilityLabel={aiKind === 'tutor' ? 'Câu hỏi cho AI' : 'Văn bản cần tóm tắt'} placeholder={aiKind === 'tutor' ? 'Bạn muốn hiểu phần nào?' : 'Dán bài học hoặc đoạn văn vào đây…'} multiline maxLength={aiKind === 'tutor' ? 5000 : 4700} textAlignVertical="top" style={[s.input, s.longInput]} />
-      <Text style={s.caption}>{aiKind === 'tutor' ? 'Gửi câu hỏi để nhận lời giải từng bước.' : 'Chỉ tóm tắt nội dung bạn gửi, giữ lại các ý chính.'}</Text>
-      <Button title={aiKind === 'tutor' ? 'Hỏi AI gia sư' : 'Tóm tắt nội dung'} icon="sparkles-outline" loading={ai[aiKind].busy} disabled={!ai[aiKind].input.trim()} onPress={() => { void askAI(aiKind); }} />
-      {ai[aiKind].answer ? <View style={s.answer}><Text style={s.answerLabel}>{aiKind === 'tutor' ? 'CÙNG HIỂU BÀI' : 'NHỮNG Ý CHÍNH'}</Text><Text selectable style={s.answerText}>{ai[aiKind].answer}</Text>
-        <Button title={reading ? 'Dừng đọc' : 'Đọc câu trả lời'} icon={reading ? 'stop' : 'volume-medium-outline'} variant="secondary" onPress={() => reading ? stopReading() : speak(ai[aiKind].answer)} />
-      </View> : null}
     </> : null;
 
   return <View testID="mirabi-focus-space" style={[s.layout, desktop && s.desktopLayout]}>
@@ -246,5 +213,4 @@ const s = StyleSheet.create({
   toolIcon: { position: 'relative', height: 36, width: 38, borderRadius: 13, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,.6)' }, toolIconActive: { backgroundColor: '#D7E9F1' }, toolLabel: { color: f.muted, fontSize: 12, fontWeight: '700' }, toolLabelActive: { color: f.blue }, readingDot: { position: 'absolute', right: 3, top: 3, height: 5, width: 5, borderRadius: 3, backgroundColor: '#739C83' },
   fieldLabel: { fontSize: 13, fontWeight: '800', color: f.ink }, input: { borderWidth: 1, borderColor: f.line, backgroundColor: '#FFFFFF', borderRadius: 15, paddingHorizontal: 14, paddingVertical: 13, fontSize: 14, lineHeight: 22, color: f.ink, minWidth: 0 },
   longInput: { minHeight: 155 }, notebook: { minHeight: 280, backgroundColor: '#FFFEFA', lineHeight: 27 }, caption: { color: f.muted, fontSize: 12, lineHeight: 19 }, wrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 7 },
-  answer: { backgroundColor: '#EDF4F4', borderRadius: 16, padding: 16, gap: 12 }, answerLabel: { color: '#628392', fontSize: 9, letterSpacing: 1.5, fontWeight: '800' }, answerText: { color: f.ink, fontSize: 14, lineHeight: 23 },
 });

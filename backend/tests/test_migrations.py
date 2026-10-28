@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine, inspect, text
-from app.migrations import STUDY_TOGETHER_TABLES, downgrade_ai_schema, downgrade_study_together_schema, upgrade_schema
+from app.migrations import STUDY_TOGETHER_TABLES, downgrade_study_together_schema, upgrade_schema
 
 
 def test_study_together_tables_upgrade_idempotently_and_roll_back_alone(tmp_path):
@@ -62,8 +62,6 @@ def test_upgrade_adds_columns_without_losing_data(tmp_path):
     columns = {c["name"] for c in inspector.get_columns("users")}
     assert {"status", "token_version", "updated_at", "pet", "pet_name", "onboarded_at"} <= columns
     assert inspector.has_table("refresh_tokens") and inspector.has_table("password_reset_tokens")
-    assert inspector.has_table("ai_conversations") and inspector.has_table("ai_memories")
-    assert inspector.has_table("ai_usage_logs") and inspector.has_table("ai_feature_configs")
     assert "role" in columns
     walk_columns = {c["name"] for c in inspector.get_columns("pet_walks")}
     assert "task_cycle_id" in walk_columns
@@ -79,6 +77,3 @@ def test_upgrade_adds_columns_without_losing_data(tmp_path):
         assert conn.execute(text("SELECT mode, duration_seconds, pomodoro_cycle FROM study_sessions")).one() == ("focus", 300, None)
     with engine.connect() as conn:
         assert conn.execute(text("SELECT study_type FROM study_sessions")).scalar_one() == "self_study"
-    downgrade_ai_schema(engine)
-    assert not inspect(engine).has_table("ai_conversations")
-    assert inspect(engine).has_table("users")

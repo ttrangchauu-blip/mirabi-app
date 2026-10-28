@@ -65,11 +65,3 @@ curl -X POST http://localhost:8000/api/study/sessions \
   -H 'Authorization: Bearer YOUR_TOKEN' \
   -d '{"mode":"focus","duration_seconds":1500,"completed":true}'
 ```
-
-Ask for a reflection:
-```bash
-curl -X POST http://localhost:8000/api/ai/reflection \
-  -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer YOUR_TOKEN' \
-  -d '{"text":"Hôm nay mình hơi mất động lực","mood":"mệt"}'
-```

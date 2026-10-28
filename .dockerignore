@@ -1,4 +1,4 @@
-# Only the Dockerfile, backend/ and ai_engine/ are needed for the backend image. Never ship .env or databases.
+# Only the Dockerfile and backend/ are needed for the backend image. Never ship .env or databases.
 .git/
 .gitignore
 .local-preview/

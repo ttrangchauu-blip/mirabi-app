@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Text, TextInput } from '../../components/Typography';
 import { Button, Chip } from '../../ui/kit';
 import { useReduceMotion } from '../../components/useReduceMotion';
-import { request, showError } from './shared';
+import { request } from './shared';
 import type { FocusTimer } from './MainApp';
 import { focusTheme as f } from './focusSpaceTheme';
 
@@ -13,14 +13,9 @@ export const studyMinutes = (seconds: number) => Math.round(seconds / 60 * 10) /
 export function useStudyStatistics(timer: FocusTimer, userId: number) {
   const [stats, setStats] = useState<any>(null);
   const [period, setPeriod] = useState('week');
-  const [insight, setInsight] = useState<any>(null);
-  const [busy, setBusy] = useState(false);
   const [error, setError] = useState(false);
   const [retry, setRetry] = useState(0);
-  const owner = useRef(userId); owner.current = userId;
-  const mounted = useRef(true);
-  useEffect(() => { mounted.current = true; return () => { mounted.current = false; }; }, []);
-  useEffect(() => { setStats(null); setInsight(null); setBusy(false); }, [userId]);
+  useEffect(() => { setStats(null); }, [userId]);
   useEffect(() => {
     let disposed = false;
     const refresh = () => { if (timer.ready) void request(`/api/study/pomodoro-statistics?period=${period}`).then(data => {
@@ -31,22 +26,13 @@ export function useStudyStatistics(timer: FocusTimer, userId: number) {
     return () => { disposed = true; clearInterval(id); listener.remove(); };
     // pending.length changes when a started/ended session reaches the server, so early endings show up at once.
   }, [period, timer.completion, timer.pending.length, timer.ready, timer.dailyGoalMinutes, timer.settingsVersion, userId, retry]);
-  async function analyze() {
-    if (busy) return;
-    const requestedBy = userId; setBusy(true);
-    try {
-      const result = await request('/api/study/pomodoro-insights', { method: 'POST' });
-      if (mounted.current && owner.current === requestedBy) setInsight(result);
-    } catch (e) { if (mounted.current && owner.current === requestedBy) showError('Chưa thể phân tích', e); }
-    finally { if (mounted.current && owner.current === requestedBy) setBusy(false); }
-  }
-  return { stats, period, setPeriod, insight, setInsight, busy, error, analyze, retry: () => setRetry(v => v + 1) };
+  return { stats, period, setPeriod, error, retry: () => setRetry(v => v + 1) };
 }
 export type StudyStatisticsState = ReturnType<typeof useStudyStatistics>;
 
 export function StudyStatsBar({ data, onPress, triggerRef }: { data: StudyStatisticsState; onPress: () => void; triggerRef?: React.Ref<View> }) {
   const { stats, error } = data;
-  return <Pressable ref={triggerRef} testID="study-stats-bar" accessibilityRole="button" accessibilityLabel="Mở thống kê học tập" accessibilityHint="Xem biểu đồ, mục tiêu và AI phân tích thói quen" onPress={onPress} style={s.strip}>
+  return <Pressable ref={triggerRef} testID="study-stats-bar" accessibilityRole="button" accessibilityLabel="Mở thống kê học tập" accessibilityHint="Xem biểu đồ và mục tiêu học tập" onPress={onPress} style={s.strip}>
     <View style={s.metric}><Ionicons name="time-outline" size={17} color={f.blue} /><View><Text style={s.metricValue}>{stats ? `${studyMinutes(stats.today_seconds)} phút` : '—'}</Text><Text style={s.metricLabel}>Hôm nay</Text></View></View>
     <View style={s.metric}><Ionicons name="checkmark-circle-outline" size={17} color="#748D7B" /><View><Text style={s.metricValue}>{stats ? `${stats.today_sessions} phiên` : '—'}</Text><Text style={s.metricLabel}>Hoàn thành</Text></View></View>
     <View style={s.metric}><Ionicons name="flame-outline" size={17} color="#A37D68" /><View><Text style={s.metricValue}>{stats ? `${stats.current_streak} ngày` : '—'}</Text><Text style={s.metricLabel}>{error ? 'Thử tải lại' : 'Chuỗi học'}</Text></View></View>
@@ -78,9 +64,9 @@ export function PomodoroCompletion({ timer }: { timer: FocusTimer }) {
   </Animated.View>;
 }
 
-/** Detail view lives inside the same tool panel as notes, audio and AI. */
+/** Detail view lives inside the same tool panel as notes and audio. */
 export function PomodoroStatistics({ timer, data }: { timer: FocusTimer; data: StudyStatisticsState }) {
-  const { stats, period, setPeriod, insight, setInsight, busy, error, analyze } = data;
+  const { stats, period, setPeriod, error } = data;
   const [goal, setGoal] = useState(String(timer.dailyGoalMinutes));
   useEffect(() => { setGoal(String(timer.dailyGoalMinutes)); }, [timer.dailyGoalMinutes]);
   return <>
@@ -108,13 +94,6 @@ export function PomodoroStatistics({ timer, data }: { timer: FocusTimer; data: S
       <View style={s.row}><TextInput value={goal} onChangeText={setGoal} keyboardType="number-pad" maxLength={4} style={s.input} accessibilityLabel="Mục tiêu học mỗi ngày" /><Text style={s.caption}>phút mỗi ngày</Text></View>
       <Button title="Lưu mục tiêu" variant="secondary" disabled={!/^\d+$/.test(goal) || +goal < 1 || +goal > 1440} onPress={() => timer.configure({ dailyGoalMinutes: +goal })} />
       <View style={s.divider} />
-      <View style={s.row}><Ionicons name="sparkles-outline" size={20} color={f.blue} /><Text style={s.title}>Hiểu nhịp học của bạn</Text></View>
-      <Text style={s.caption}>AI đọc lịch sử học của riêng bạn, gợi ý nhẹ nhàng và không tự đổi thời lượng.</Text>
-      <Button title="AI phân tích thói quen" icon="sparkles-outline" loading={busy} onPress={() => { void analyze(); }} />
-      {insight ? <Text style={s.insight}>{insight.message}</Text> : null}
-      {insight?.suggested_minutes && !timer.running ? <Button title={`Xác nhận dùng phiên ${insight.suggested_minutes} phút`} variant="secondary" onPress={() => {
-        timer.configure({ focusMinutes: insight.suggested_minutes }); setInsight(null);
-      }} /> : null}
       <Text style={s.caption}>Study Streak độc lập với chuỗi đăng nhập. Mỗi ngày có ít nhất một phiên tập trung hợp lệ được tính một lần. Phiên kết thúc sớm vẫn được tính số phút đã học và EXP, nhưng không tính là phiên hoàn thành và không tăng chuỗi.</Text>
     </> : !error ? <Text style={s.copy}>Đang tải nhật ký học tập…</Text> : null}
     {timer.pending.length ? <Text style={s.caption}>Có phiên đang chờ đồng bộ. Dữ liệu được gửi lại tự động.</Text> : null}
@@ -134,5 +113,5 @@ const s = StyleSheet.create({
   bar: { backgroundColor: '#93B6C2', width: '70%', maxWidth: 23, borderRadius: 4 }, axis: { fontSize: 8, color: f.muted, height: 17, marginTop: 5 },
   track: { height: 5, backgroundColor: '#E3E9E7', borderRadius: 4, overflow: 'hidden' }, progress: { backgroundColor: '#8DAF9F', height: 5, borderRadius: 4 },
   input: { borderWidth: 1, borderColor: f.line, borderRadius: 12, padding: 12, color: f.ink, width: 80, backgroundColor: '#FFFFFF' },
-  divider: { height: 1, backgroundColor: f.line, marginVertical: 8 }, hour: { backgroundColor: f.cream, padding: 10, borderRadius: 10, gap: 2 }, insight: { backgroundColor: '#EDF4F5', color: f.ink, padding: 15, borderRadius: 14, fontSize: 13, lineHeight: 22 },
+  divider: { height: 1, backgroundColor: f.line, marginVertical: 8 }, hour: { backgroundColor: f.cream, padding: 10, borderRadius: 10, gap: 2 },
 });

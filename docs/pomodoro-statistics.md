@@ -1,12 +1,11 @@
-# Pomodoro statistics and coaching
+# Pomodoro statistics
 
 The existing `study_sessions` table remains the source of truth. An additive,
 idempotent startup migration adds `started_at`, `ended_at`, `timezone`, and
 `status`. `pomodoro_settings` stores one preferences row per user. Existing
 completed Pomodoro records still count; their `created_at` is the completion
 timestamp and the user's current timezone is the fallback for legacy records.
-No aggregate/streak/recommendation tables are required. Shared AI run, message
-and usage tables keep coaching history.
+No aggregate/streak/recommendation tables are required.
 
 ## Rules
 
@@ -28,7 +27,7 @@ and usage tables keep coaching history.
   minutes, `STUDY_DAILY_EXP_CAP`). Sessions ended early (cancelled) still add
   their studied minutes (and EXP) but are not completed sessions and do not extend
   the streak. Unfinished, under-60-second and break sessions earn nothing; each session is awarded once. Reading statistics,
-  achieving streaks, changing goals and requesting coaching award no XP.
+  achieving streaks and changing goals award no XP.
 - Background sound plays only while a focus session runs, pauses with it and is
   turned off when the session is ended early. Focus mode (opt-in) hides in-app
   toasts and notification banners while a focus session runs.
@@ -57,13 +56,6 @@ and usage tables keep coaching history.
   - `GET /api/study/streak`: `current_streak`, `longest_streak`, `active_days`.
     This is the study streak; the login streak stays at `GET /api/streak`.
 - `GET /api/dashboard` → `study` uses the same aggregates for the Home screen.
-- `POST /api/study/pomodoro-insights`: requires five completed sessions across
-  at least three study days. Otherwise returns an explicit insufficient-data
-  response without calling AI. The backend forwards only the authenticated
-  user's aggregates to registered feature `pomodoro_coach` through the shared
-  service-token client. Provider failures remain visible; no invented fallback.
-  Suggested duration is the user's most commonly completed duration. The UI
-  applies it only after the user presses the confirmation button.
 
 The client persists an ordered per-account event queue and retries every 15
 seconds. Settings are restored from the server on login; unsynchronized settings
@@ -84,8 +76,7 @@ npm.cmd test -- --runInBand __tests__/pomodoro.test.tsx __tests__/pomodoro-panel
 ```
 
 Install backend requirements including `tzdata` (needed for IANA zones on Windows).
-The AI integration test uses the real shared HTTP/engine contract and a stub
-provider; it makes no paid provider request. Device notification delivery and
+Device notification delivery and
 real audio output require a device/browser manual check.
 
 Validation on 2026-10-23: 12 focused backend tests, 17 frontend tests (timer,

@@ -30,14 +30,18 @@ export function usePetReward(onConfirmed: () => void) {
   const [returnAt, setReturnAt] = useState<number | null>(null);
   const busy = useRef(false);
   const mounted = useRef(true);
+  // Bumped by every check and confirmation, so an older answer arriving late never brings a confirmed popup back.
+  const checkId = useRef(0);
   useEffect(() => () => { mounted.current = false; }, []);
 
   /** Resolves to the pending reward (or null), or undefined when the backend couldn't be reached. */
   const check = useCallback(async (): Promise<PendingPetReward | null | undefined> => {
+    const id = ++checkId.current;
     try {
       const space = await request('/api/pet/space');
       if (!mounted.current) return undefined;
       const next = pendingRewardFrom(space);
+      if (id !== checkId.current) return next;
       setPending(next);
       const seconds = Number(space?.seconds_left);
       setReturnAt(space?.status === 'walking' && seconds > 0 ? Date.now() + seconds * 1000 : null);
@@ -59,6 +63,7 @@ export function usePetReward(onConfirmed: () => void) {
   }, [returnAt, check]);
 
   const confirmed = useCallback(() => {
+    checkId.current += 1;
     setPending(null); setError(null); setVersion((v) => v + 1); onConfirmed();
   }, [onConfirmed]);
 

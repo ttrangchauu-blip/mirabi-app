@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
 from sqlalchemy import select
 
-from . import ai_admin, auth, campus, career, community, companion, dashboard, profile, reflection, study, tasks, streaks
+from . import auth, campus, career, community, companion, dashboard, profile, study, tasks, streaks
 from . import friends, notifications, realtime, room_chat, study_rooms, study_together, team_quests
 from . import learning, learning_history, memories, pet_room, room_visits
 from .learning_content import seed_learning_content
@@ -16,14 +16,14 @@ from .config import settings
 from .db import SessionLocal, engine
 from .errors import install_error_handlers
 from .migrations import upgrade_schema
-from .models import AIAgent, AIFeatureConfig, AIModel, AIPromptVersion, CommunityPost, User, utcnow
+from .models import CommunityPost, User
 from .security import hash_password
 
 
 def startup():
     upgrade_schema(engine)
     with SessionLocal() as db:
-        allowed_admins = settings.ai_admin_email_list
+        allowed_admins = settings.admin_email_list
         if allowed_admins:
             for existing_admin in db.scalars(select(User).where(User.role == "admin", ~User.email.in_(allowed_admins))):
                 existing_admin.role = "user"
@@ -32,32 +32,8 @@ def startup():
         else:
             for existing_admin in db.scalars(select(User).where(User.role == "admin")):
                 existing_admin.role = "user"
-        from .ai_features import reflection as reflection_feature, study_tutor, task_planner, pomodoro_coach
-        for feature in (reflection_feature, task_planner, study_tutor, pomodoro_coach):
-            if db.get(AIAgent, feature.FEATURE_KEY) is None:
-                db.add(AIAgent(feature_key=feature.FEATURE_KEY, name=feature.NAME,
-                               description=feature.DESCRIPTION, source_module=feature.__name__))
-            if db.get(AIFeatureConfig, feature.FEATURE_KEY) is None:
-                db.add(AIFeatureConfig(feature_key=feature.FEATURE_KEY, provider="openai",
-                                       model=settings.openai_model, prompt_version="1",
-                                       system_prompt=feature.SYSTEM_PROMPT))
-                db.flush()
-            if db.scalar(select(AIPromptVersion.id).where(AIPromptVersion.feature_key == feature.FEATURE_KEY,
-                                                          AIPromptVersion.version == 1)) is None:
-                config = db.get(AIFeatureConfig, feature.FEATURE_KEY)
-                seed_actor_id = db.scalar(select(User.id).where(User.role == "admin").order_by(User.id).limit(1))
-                if seed_actor_id is None:
-                    seed_actor_id = db.scalar(select(User.id).order_by(User.id).limit(1))
-                # Older local DBs created this column as NOT NULL; attribute the initial
-                # managed prompt to an existing operator/account for compatibility.
-                if seed_actor_id is not None:
-                    db.add(AIPromptVersion(feature_key=feature.FEATURE_KEY, version=1, status="published",
-                                           system_prompt=config.system_prompt, created_by_user_id=seed_actor_id,
-                                           published_at=utcnow()))
         # Built-in English/Math lessons; publishes a new version only when a lesson's content changed.
         seed_learning_content(db)
-        if db.scalar(select(AIModel.id).where(AIModel.provider == "openai", AIModel.model == settings.openai_model)) is None:
-            db.add(AIModel(provider="openai", model=settings.openai_model))
         if not db.scalar(select(CommunityPost.id).limit(1)):
             # The demo post author has a random password and cannot sign in.
             demo = User(
@@ -160,8 +136,6 @@ for feature_router in (
     companion.router,
     companion.legacy_room_router,
     tasks.router,
-    reflection.router,
-    ai_admin.router,
     friends.router,
     study_together.router,
     team_quests.router,

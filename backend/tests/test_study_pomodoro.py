@@ -31,18 +31,3 @@ def test_pomodoro_completion_rejects_invalid_key(client):
     response = client.post("/api/study/pomodoro/short?duration_seconds=1500", headers=bearer(token))
     assert response.status_code == 422
 
-
-def test_study_tutor_uses_authenticated_ai_engine_contract(client, monkeypatch):
-    token = signup(client, email="study-tutor@example.com").json()["access_token"]
-
-    async def fake_run(payload):
-        assert payload["feature_key"] == "study_tutor"
-        assert payload["user_input"] == "Explain photosynthesis"
-        assert payload["context"] == {"user_input": "Explain photosynthesis"}
-        return {"text": "Plants convert light into energy.", "provider": "test", "run_id": 42}
-
-    monkeypatch.setattr("app.reflection.call_ai_engine", fake_run)
-    response = client.post("/api/ai/study/tutor", headers=bearer(token),
-                           json={"text": "Explain photosynthesis"})
-    assert response.status_code == 200
-    assert response.json()["answer"] == "Plants convert light into energy."

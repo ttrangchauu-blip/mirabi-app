@@ -45,8 +45,6 @@ function fixture(userId) {
       if(pathname==='/api/dashboard') result={user,study:{total_minutes:75,today_sessions:3,daily_goal:3},daily_quests:[],scheduled_tasks:[],pet_walk:'rested'};
       if(pathname==='/api/study/pomodoro-settings') result=init.method==='PUT'?JSON.parse(init.body):prefs;
       if(pathname==='/api/study/pomodoro-statistics') result=stats;
-      if(pathname==='/api/study/pomodoro-insights') result={sufficient_data:true,message:'Bạn đã hoàn thành 12 phiên trong tuần này. Các phiên 25 phút thường được hoàn thành vào buổi tối. Hãy giữ nhịp học vừa sức.',suggested_minutes:25};
-      if(pathname==='/api/ai/study/tutor') result={answer:'1. Xác định ý chính của đoạn văn. 2. Ghi lại những dữ kiện quan trọng. 3. Ôn tập bằng cách tự giải thích lại.'};
       if(pathname.startsWith('/api/study/pomodoro/')) result={status:JSON.parse(init.body).event,statistics:stats,xp_awarded:0};
       return new Response(JSON.stringify(result),{status:200,headers:{'Content-Type':'application/json'}});
     };
@@ -78,12 +76,9 @@ for (const device of [{ name: 'phone-preview', width: 1440, height: 1000 }, { na
     })()`);
     if (!toolsVisible) throw new Error(`Study toolbar is below the visible app area: ${device.name}`);
 
-      await c.click('AI tóm tắt'); await c.wait(`!!document.querySelector('[data-testid="focus-bottom-sheet"]')`); await pause(300);
+      await c.click('Nghe đọc'); await c.wait(`!!document.querySelector('[data-testid="focus-bottom-sheet"]')`); await pause(300);
+      await c.fill('Văn bản cần đọc','Cây xanh dùng ánh sáng để tạo năng lượng.');
       await c.capture(`${device.name}-tool-sheet.png`);
-      await c.fill('Văn bản cần tóm tắt','Cây xanh dùng ánh sáng để tạo năng lượng.');
-      await c.click('Tóm tắt nội dung');
-      await c.wait(`document.body.innerText.includes('Xác định ý chính')`);
-      await c.capture(`${device.name}-summary-result.png`);
       const sheetWidth = await c.evaluate(`document.querySelector('[data-testid="focus-bottom-sheet"]').getBoundingClientRect().width`);
       if(sheetWidth>device.width) throw new Error('Bottom sheet overflows');
       await c.click('Đóng công cụ');
@@ -93,7 +88,7 @@ for (const device of [{ name: 'phone-preview', width: 1440, height: 1000 }, { na
       noHorizontalOverflow: true,
       toolbarVisibleWithoutScrolling: true,
       responsivePanel: true,
-      summaryResultRendered: true, statisticsSheetRendered: true,
+      statisticsSheetRendered: true,
     },errors:c.errors});
     console.log(JSON.stringify({device:device.name,passed:true,errors:c.errors.length}));
   } finally { c.ws.close(); await fetch(`http://127.0.0.1:9223/json/close/${c.targetId}`); }
