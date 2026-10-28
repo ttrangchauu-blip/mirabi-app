@@ -1,7 +1,13 @@
 # Render Blueprint for the test backend (docs/deploy-test.md). The service builds the root Dockerfile.
 # Values marked `sync: false` are asked for once when the Blueprint is created; they never live in git.
-envVarGroups:
-  - name: mirabi-shared
+# Render only asks for them on services, not in environment groups, so every variable lives on the service.
+services:
+  - type: web
+    name: mirabi-api
+    runtime: docker
+    plan: free
+    region: singapore
+    healthCheckPath: /health
     envVars:
       - key: ENVIRONMENT
         value: production
@@ -11,20 +17,9 @@ envVarGroups:
       # plain-HTTP health check with 307.
       - key: FORCE_HTTPS
         value: "false"
-
-services:
-  - type: web
-    name: mirabi-api
-    runtime: docker
-    plan: free
-    region: singapore
-    healthCheckPath: /health
-    envVars:
-      - fromGroup: mirabi-shared
       - key: JWT_SECRET
         generateValue: true
       - key: EMAIL_BACKEND
         value: disabled
       - key: ADMIN_EMAILS
         sync: false
-
