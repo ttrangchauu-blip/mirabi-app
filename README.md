@@ -305,6 +305,8 @@ limitations: [docs/STUDY_TOGETHER.md](docs/STUDY_TOGETHER.md).
 - The schema upgrader is additive only; use Alembic for anything more complex.
 
 ## Production checklist
+Test deployment (Cloud Run + PostgreSQL + Firebase App Distribution): [docs/deploy-cloud-run.md](docs/deploy-cloud-run.md).
+
 - Set `ENVIRONMENT=production`, a strong `JWT_SECRET`, explicit `CORS_ORIGINS`, and `EMAIL_BACKEND=smtp`.
 - Terminate TLS in front of the API and run uvicorn with `--proxy-headers --forwarded-allow-ips=<proxy IP>` so
   HTTPS detection, the HTTPS redirect and per-IP rate limits see the real scheme and client address.

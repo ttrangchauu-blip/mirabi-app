@@ -1,0 +1,19 @@
+# Same rules as .gcloudignore, for local docker builds.
+.git/
+.gitignore
+.local-preview/
+.pet-assets-backup-*/
+.venv/
+docs/
+mobile/
+README.md
+package-lock.json
+**/.env
+**/*.db
+**/*.log
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
+**/.pytest-*/
+backend/tests/
+backend/scripts/
