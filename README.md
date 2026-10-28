@@ -305,7 +305,7 @@ limitations: [docs/STUDY_TOGETHER.md](docs/STUDY_TOGETHER.md).
 - The schema upgrader is additive only; use Alembic for anything more complex.
 
 ## Production checklist
-Test deployment (Cloud Run + PostgreSQL + Firebase App Distribution): [docs/deploy-cloud-run.md](docs/deploy-cloud-run.md).
+Free test deployment (Render + Neon PostgreSQL + Firebase App Distribution): [docs/deploy-test.md](docs/deploy-test.md).
 
 - Set `ENVIRONMENT=production`, a strong `JWT_SECRET`, explicit `CORS_ORIGINS`, and `EMAIL_BACKEND=smtp`.
 - Terminate TLS in front of the API and run uvicorn with `--proxy-headers --forwarded-allow-ips=<proxy IP>` so

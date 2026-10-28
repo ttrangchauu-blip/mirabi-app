@@ -1,4 +1,4 @@
-# Same rules as .gcloudignore, for local docker builds.
+# Only the Dockerfile, backend/ and ai_engine/ are needed for the backend image. Never ship .env or databases.
 .git/
 .gitignore
 .local-preview/

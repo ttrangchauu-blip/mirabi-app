@@ -1,0 +1,57 @@
+# Render Blueprint for the test backend (docs/deploy-test.md). Both services build the root Dockerfile.
+# Values marked `sync: false` are asked for once when the Blueprint is created; they never live in git.
+envVarGroups:
+  - name: mirabi-shared
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: DATABASE_URL  # Neon connection string, postgresql://...?sslmode=require
+        sync: false
+      # Render's edge already redirects HTTP to HTTPS; the app's own redirect would answer the internal
+      # plain-HTTP health check with 307.
+      - key: FORCE_HTTPS
+        value: "false"
+
+services:
+  - type: web
+    name: mirabi-api
+    runtime: docker
+    plan: free
+    region: singapore
+    healthCheckPath: /health
+    envVars:
+      - fromGroup: mirabi-shared
+      - key: JWT_SECRET
+        generateValue: true
+      - key: EMAIL_BACKEND
+        value: disabled
+      - key: AI_SERVICE_URL  # https://mirabi-ai.onrender.com (shown on the mirabi-ai service page)
+        sync: false
+      - key: BACKEND_AI_SERVICE_TOKEN
+        fromService:
+          type: web
+          name: mirabi-ai
+          envVarKey: AI_SERVICE_TOKEN
+      - key: AI_ADMIN_EMAILS
+        sync: false
+
+  - type: web
+    name: mirabi-ai
+    runtime: docker
+    plan: free
+    region: singapore
+    envVars:
+      - fromGroup: mirabi-shared
+      - key: APP_MODULE
+        value: ai_engine.app:app
+      - key: AI_SERVICE_ROLE
+        value: engine
+      - key: AI_SERVICE_TOKEN
+        generateValue: true
+      # Settings are validated on import; production requires a strong secret even though this service issues no tokens.
+      - key: JWT_SECRET
+        generateValue: true
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4.1-mini
