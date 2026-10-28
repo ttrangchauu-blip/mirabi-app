@@ -1,0 +1,113 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+running_water	running water	noun	4	home	nước máy	nước chảy từ vòi trong nhà	The old house had no running water.	Ngôi nhà cũ không có nước máy.		
+water_tank	water tank	noun	4	home	bồn nước, téc nước	bồn chứa nước đặt trên mái nhà	The water tank on the roof is empty.	Bồn nước trên mái nhà hết nước rồi.		
+sliding_door	sliding door	noun	4	home	cửa lùa, cửa trượt	cửa mở bằng cách trượt sang ngang	A sliding door leads to the balcony.	Một cánh cửa lùa dẫn ra ban công.		
+cellar	cellar	noun	4	home	hầm chứa đồ	căn hầm dưới nhà để cất rượu, than, đồ cũ	We keep wine in the cellar.	Chúng tôi cất rượu dưới hầm.		/ˈselə/
+porch	porch	noun	4	home	hiên nhà, mái hiên trước cửa	chỗ có mái che ngay trước cửa ra vào	Leave the parcel on the porch.	Để bưu kiện ở hiên nhà nhé.		/pɔːtʃ/
+patio	patio	noun	4	home	sân lát gạch (sau nhà)	khoảng sân lát đá cạnh nhà để ngồi chơi, ăn uống	We had dinner on the patio.	Chúng tôi ăn tối ngoài sân sau nhà.		/ˈpætiəʊ/
+pantry	pantry	noun	4	home	phòng để đồ ăn khô	phòng nhỏ hoặc tủ cạnh bếp để chứa thực phẩm	There's rice and flour in the pantry.	Có gạo và bột mì trong phòng để đồ ăn.	larder	/ˈpæntri/
+nursery.room	nursery	noun	4	home	phòng trẻ sơ sinh	phòng ngủ dành cho em bé trong nhà	They painted the nursery yellow for the new baby.	Họ sơn phòng em bé màu vàng để đón con.		/ˈnɜːsəri/
+shed.garden	shed	noun	4	home	nhà kho nhỏ (trong vườn)	chòi gỗ ngoài vườn để dụng cụ, xe đạp	The lawnmower is in the shed.	Máy cắt cỏ ở trong nhà kho ngoài vườn.		/ʃed/
+driveway	driveway	noun	4	home	lối xe vào nhà	đường riêng từ đường lớn dẫn vào ga-ra	Don't park in the driveway.	Đừng đỗ xe ở lối xe vào nhà.	drive	/ˈdraɪvweɪ/
+doorstep	doorstep	noun	4	home	bậc cửa, ngay trước cửa	bậc thềm ngay ngoài cửa chính	The postman left a box on the doorstep.	Người đưa thư để một cái hộp ở bậc cửa.		/ˈdɔːstep/
+blind.window	blind	noun	4	home	rèm cuốn, rèm sáo	rèm kéo lên xuống hoặc có nan để che cửa sổ	Pull down the blinds, the sun is too bright.	Kéo rèm xuống đi, nắng chói quá.		/blaɪnd/
+duvet	duvet	noun	4	home	chăn bông có vỏ bọc	chăn dày nhồi lông hoặc bông, lồng trong vỏ chăn	I need a thicker duvet for winter.	Tôi cần một cái chăn bông dày hơn cho mùa đông.		/ˈduːveɪ/
+detergent	detergent	noun	4	home	bột giặt, nước giặt	chất tẩy dùng để giặt quần áo	Don't use too much detergent.	Đừng dùng quá nhiều bột giặt.	washing powder	/dɪˈtɜːdʒənt/
+bleach	bleach	noun	4	home	thuốc tẩy	hóa chất mạnh để tẩy trắng, diệt khuẩn	Clean the toilet with bleach.	Cọ bồn cầu bằng thuốc tẩy.		/bliːtʃ/
+counter.kitchen	counter	noun	4	home	mặt bếp, kệ bếp	mặt phẳng trong bếp để sơ chế đồ ăn	Leave the shopping on the kitchen counter.	Để đồ mua về trên mặt bếp nhé.	worktop|countertop	/ˈkaʊntə/
+drain	drain	noun	4	home	lỗ thoát nước, cống	ống hoặc lỗ cho nước bẩn chảy đi	Hair has blocked the drain in the shower.	Tóc làm tắc lỗ thoát nước trong buồng tắm.		/dreɪn/
+pipe	pipe	noun	4	home	đường ống nước	ống dẫn nước, khí trong nhà	A water pipe burst in the kitchen.	Một đường ống nước trong bếp bị vỡ.		/paɪp/
+mould	mould	noun	4	home	nấm mốc	vết mốc xanh, đen trên tường ẩm	There's mould on the bathroom ceiling.	Trần phòng tắm có nấm mốc.	mold	/məʊld/
+landlady	landlady	noun	4	home	bà chủ nhà (cho thuê)	người phụ nữ cho thuê nhà, phòng	Our landlady is very kind.	Bà chủ nhà của chúng tôi rất tốt bụng.		/ˈlændleɪdi/
+deposit.rent	deposit	noun	4	home	tiền đặt cọc (thuê nhà)	tiền đưa trước khi thuê, trả lại khi dọn đi	We paid a deposit of one month's rent.	Chúng tôi đặt cọc một tháng tiền nhà.		/dɪˈpɒzɪt/
+townhouse	townhouse	noun	4	home	nhà phố	nhà cao, hẹp, nhiều tầng trong thành phố	They live in a four-storey townhouse.	Họ sống trong một căn nhà phố bốn tầng.		/ˈtaʊnhaʊs/
+polish	polish	verb	4	home	đánh bóng	chà đồ gỗ, kim loại cho sáng bóng	She polished the wooden table.	Cô ấy đánh bóng chiếc bàn gỗ.		/ˈpɒlɪʃ/
+slam	slam	verb	4	home	đóng sầm (cửa)	đóng cửa thật mạnh gây tiếng động lớn	Please don't slam the door.	Làm ơn đừng đóng sầm cửa.		/slæm/
+renovate	renovate	verb	4	home	cải tạo, tu sửa (nhà)	sửa lớn, làm mới lại nhà cũ	They renovated the kitchen last year.	Năm ngoái họ đã cải tạo lại nhà bếp.		/ˈrenəveɪt/
+install	install	verb	4	home	lắp đặt	gắn thiết bị như máy lạnh, bình nóng lạnh vào nhà	We're installing a new air conditioner.	Chúng tôi đang lắp một chiếc điều hòa mới.		/ɪnˈstɔːl/
+rearrange	rearrange	verb	4	home	sắp xếp lại	thay đổi vị trí đồ đạc trong phòng	Let's rearrange the furniture in the living room.	Mình sắp xếp lại đồ đạc trong phòng khách đi.		/ˌriːəˈreɪndʒ/
+drip	drip	verb	4	home	nhỏ giọt	nước rơi từng giọt từ vòi, mái	The tap keeps dripping all night.	Vòi nước cứ nhỏ giọt suốt đêm.		/drɪp/
+soak	soak	verb	4	home	ngâm (trong nước)	để quần áo, bát đĩa trong nước một lúc cho dễ sạch	Soak the pan in hot water before you wash it.	Ngâm cái chảo vào nước nóng trước khi rửa.		/səʊk/
+furnished	furnished	adjective	4	home	có sẵn nội thất	nhà, phòng cho thuê đã có đồ đạc	We rented a furnished flat.	Chúng tôi thuê một căn hộ có sẵn nội thất.		/ˈfɜːnɪʃt/
+cramped	cramped	adjective	4	home	chật chội	phòng quá nhỏ so với số người, đồ đạc	Five people in one room is very cramped.	Năm người ở một phòng thì rất chật chội.		/kræmpt/
+spotless	spotless	adjective	4	home	sạch bong, không một vết bẩn	nhà cửa được lau chùi hoàn toàn sạch	The kitchen was spotless after she cleaned it.	Nhà bếp sạch bong sau khi cô ấy lau dọn.		/ˈspɒtləs/
+filthy	filthy	adjective	4	home	bẩn thỉu, dơ bẩn	cực kỳ bẩn, lâu ngày không dọn	The bathroom was filthy when we moved in.	Phòng tắm bẩn thỉu khi chúng tôi mới dọn đến.		/ˈfɪlθi/
+sparkling	sparkling	adjective	4	home	sáng bóng, sáng loáng	bề mặt sạch đến mức lấp lánh	After cleaning, the windows were sparkling.	Sau khi lau, cửa kính sáng loáng.		/ˈspɑːklɪŋ/
+wobbly	wobbly	adjective	4	home	lung lay, cọc cạch	bàn ghế chân không vững, bị lắc	This table is wobbly. One leg is too short.	Cái bàn này bị cọc cạch. Một chân bị ngắn.		/ˈwɒbli/
+squeaky	squeaky	adjective	4	home	kêu ken két	cửa, bản lề phát ra tiếng rít khi mở	The bedroom door is squeaky.	Cửa phòng ngủ kêu ken két.		/ˈskwiːki/
+damp	damp	adjective	4	home	ẩm thấp	nhà, tường hơi ướt, không khô ráo	The walls are damp in the rainy season.	Tường nhà bị ẩm vào mùa mưa.		/dæmp/
+well-lit	well-lit	adjective	4	home	đủ ánh sáng, sáng sủa	phòng có nhiều đèn hoặc ánh nắng	I need a well-lit desk for studying.	Tôi cần một góc bàn đủ ánh sáng để học.		/ˌwel ˈlɪt/
+airy	airy	adjective	4	home	thoáng đãng	phòng rộng, nhiều gió và ánh sáng	The bedroom is light and airy.	Phòng ngủ sáng sủa và thoáng đãng.		/ˈeəri/
+stuffy	stuffy	adjective	4	home	bí, ngột ngạt	phòng thiếu không khí, cần mở cửa	It's stuffy in here. Open a window.	Trong này ngột ngạt quá. Mở cửa sổ ra đi.		/ˈstʌfi/
+blocked	blocked	adjective	4	home	bị tắc	bồn rửa, cống nước không chảy được	The kitchen sink is blocked again.	Bồn rửa trong bếp lại bị tắc rồi.	clogged	/blɒkt/
+fragile	fragile	adjective	4	home	dễ vỡ	đồ thủy tinh, sứ cần cẩn thận khi chuyển nhà	Be careful with that box. It's fragile.	Cẩn thận cái hộp đó. Đồ dễ vỡ đấy.		/ˈfrædʒaɪl/
+thoroughly	thoroughly	adverb	4	home	kỹ lưỡng, triệt để	làm sạch, kiểm tra thật kỹ không bỏ sót	Clean the bathroom thoroughly once a week.	Hãy dọn phòng tắm thật kỹ mỗi tuần một lần.		/ˈθʌrəli/
+utility_room	utility room	noun	5	home	phòng giặt giũ, chứa đồ	phòng nhỏ đặt máy giặt và đồ dọn dẹp	The washing machine is in the utility room.	Máy giặt để trong phòng giặt giũ.	laundry room	
+detached_house	detached house	noun	5	home	nhà riêng biệt lập	nhà đứng riêng, không chung tường với nhà khác	They live in a large detached house.	Họ sống trong một căn nhà riêng biệt lập rộng lớn.		
+terraced_house	terraced house	noun	5	home	nhà liền kề (dãy)	một trong dãy nhà chung tường hai bên	We grew up in a small terraced house.	Chúng tôi lớn lên trong một căn nhà liền kề nhỏ.	row house	
+roller_shutter	roller shutter	noun	5	home	cửa cuốn	cửa kim loại cuộn lên xuống ở mặt tiền nhà	He pulled down the roller shutter at night.	Buổi tối anh ấy kéo cửa cuốn xuống.		
+gas_cylinder	gas cylinder	noun	5	home	bình ga	bình chứa khí ga để đun nấu	We need to change the gas cylinder.	Nhà mình phải thay bình ga rồi.	gas bottle	
+extension_cord	extension cord	noun	5	home	ổ cắm nối dài	dây điện có ổ cắm để cắm thiết bị ở xa	Use an extension cord for the lamp.	Dùng ổ cắm nối dài cho cái đèn.	extension lead	
+air_out	air out	phrasal_verb	5	home	làm thoáng, phơi cho thoáng	mở cửa hoặc phơi để hết mùi, ẩm	Open the windows to air out the room.	Mở cửa sổ để căn phòng thoáng khí.	air	
+under_one_roof	under one roof	idiom	5	home	chung một mái nhà	nhiều người, nhiều thế hệ sống cùng một nhà	Three generations live under one roof.	Ba thế hệ sống chung dưới một mái nhà.		
+a_roof_over_your_head	a roof over your head	idiom	5	home	chỗ che mưa che nắng	có nơi để ở, dù đơn sơ	As long as you have a roof over your head, you'll be fine.	Miễn là có chỗ che mưa che nắng, bạn sẽ ổn thôi.		
+home_away_from_home	home away from home	idiom	5	home	nơi thân thuộc như nhà mình	chỗ mình thấy thoải mái như ở nhà	This café is my home away from home.	Quán cà phê này là ngôi nhà thứ hai của tôi.	home from home	
+walls_have_ears	walls have ears	idiom	5	home	tai vách mạch rừng	nhắc nói nhỏ vì người khác có thể nghe thấy	Be careful what you say. The walls have ears.	Cẩn thận lời nói. Tai vách mạch rừng đấy.		
+landing.stairs	landing	noun	5	home	chiếu nghỉ, đầu cầu thang	khoảng sàn ở đầu hoặc giữa cầu thang	The bathroom is on the landing.	Phòng tắm nằm ở đầu cầu thang.		/ˈlændɪŋ/
+lease	lease	noun	5	home	hợp đồng thuê nhà	giấy tờ ký giữa chủ nhà và người thuê	We signed a one-year lease.	Chúng tôi đã ký hợp đồng thuê nhà một năm.		/liːs/
+plumbing	plumbing	noun	5	home	hệ thống ống nước	toàn bộ ống, vòi nước trong nhà	The plumbing in this old house needs fixing.	Hệ thống ống nước trong ngôi nhà cũ này cần sửa.		/ˈplʌmɪŋ/
+bungalow	bungalow	noun	5	home	nhà một tầng	ngôi nhà chỉ có tầng trệt	My grandparents moved to a bungalow so they wouldn't need stairs.	Ông bà tôi chuyển sang nhà một tầng để khỏi phải leo cầu thang.		/ˈbʌŋɡələʊ/
+house-hunting	house-hunting	noun	5	home	việc đi tìm nhà	đi xem nhiều nơi để mua hoặc thuê	We spent the weekend house-hunting.	Chúng tôi dành cả cuối tuần để đi tìm nhà.		/ˈhaʊs hʌntɪŋ/
+do-it-yourself	do-it-yourself	noun	5	home	tự tay sửa sang, làm đồ (trong nhà)	tự sửa chữa, trang trí nhà mà không thuê thợ	My dad loves do-it-yourself projects.	Bố tôi rất thích tự tay sửa sang đồ đạc.	DIY	/ˌduː ɪt jɔːˈself/
+gutter	gutter	noun	5	home	máng xối	máng dọc mép mái để dẫn nước mưa	The gutter is full of leaves.	Máng xối đầy lá cây.		/ˈɡʌtə/
+banister	banister	noun	5	home	tay vịn cầu thang	thanh vịn dọc theo cầu thang	Hold on to the banister.	Vịn vào tay vịn cầu thang nhé.	bannister|handrail	/ˈbænɪstə/
+hinge	hinge	noun	5	home	bản lề	khớp kim loại giúp cửa đóng mở được	The door hinge needs some oil.	Bản lề cửa cần tra chút dầu.		/hɪndʒ/
+peephole	peephole	noun	5	home	mắt thần (trên cửa)	lỗ nhỏ trên cửa để nhìn xem ai bên ngoài	Look through the peephole before you open the door.	Nhìn qua mắt thần trước khi mở cửa.	spyhole	/ˈpiːphəʊl/
+padlock	padlock	noun	5	home	ổ khóa móc	khóa có quai cong để khóa cổng, rương	We put a padlock on the gate.	Chúng tôi gắn một ổ khóa móc lên cổng.		/ˈpædlɒk/
+redecorate	redecorate	verb	5	home	sơn sửa, trang trí lại	sơn tường, đổi đồ để căn phòng trông mới	We're going to redecorate the bedroom.	Chúng tôi sẽ sơn sửa lại phòng ngủ.		/riːˈdekəreɪt/
+assemble	assemble	verb	5	home	lắp ráp (đồ nội thất)	ráp các bộ phận lại theo hướng dẫn	It took two hours to assemble the wardrobe.	Mất hai tiếng để lắp ráp cái tủ quần áo.	put together	/əˈsembl/
+furnish	furnish	verb	5	home	trang bị nội thất	mua và đặt đồ đạc vào nhà	They furnished the flat with second-hand furniture.	Họ trang bị nội thất cho căn hộ bằng đồ cũ.		/ˈfɜːnɪʃ/
+declutter	declutter	verb	5	home	dọn bớt đồ thừa	bỏ bớt những thứ không cần cho nhà gọn hơn	I need to declutter my wardrobe.	Tôi cần dọn bớt đồ thừa trong tủ quần áo.		/ˌdiːˈklʌtə/
+disinfect	disinfect	verb	5	home	khử trùng	dùng hóa chất diệt vi khuẩn trên bề mặt	Disinfect the kitchen counters regularly.	Hãy thường xuyên khử trùng mặt bếp.		/ˌdɪsɪnˈfekt/
+unblock	unblock	verb	5	home	thông (cống, bồn bị tắc)	làm cho nước chảy được lại	We called a plumber to unblock the toilet.	Chúng tôi gọi thợ đến thông bồn cầu.	unclog	/ʌnˈblɒk/
+overflow	overflow	verb	5	home	tràn ra	nước quá đầy chảy ra ngoài bồn, chậu	The bath overflowed and flooded the floor.	Bồn tắm bị tràn làm ngập cả sàn.		/ˌəʊvəˈfləʊ/
+relocate	relocate	verb	5	home	chuyển nơi ở	dọn đến sống ở thành phố, khu vực khác	We relocated to Da Nang last year.	Năm ngoái chúng tôi chuyển đến Đà Nẵng sống.		/ˌriːləʊˈkeɪt/
+unfurnished	unfurnished	adjective	5	home	không có nội thất	nhà cho thuê trống, chưa có đồ đạc	The flat is cheaper because it's unfurnished.	Căn hộ rẻ hơn vì không có nội thất.		/ʌnˈfɜːnɪʃt/
+shabby	shabby	adjective	5	home	sờn cũ, tồi tàn	đồ đạc, phòng cũ kỹ, phai màu	The sofa looks a bit shabby now.	Cái sofa giờ trông hơi sờn cũ.		/ˈʃæbi/
+run-down	run-down	adjective	5	home	xuống cấp	nhà, khu nhà lâu không được sửa chữa	They bought a run-down house and repaired it.	Họ mua một căn nhà xuống cấp rồi sửa lại.		/ˌrʌn ˈdaʊn/
+vacant	vacant	adjective	5	home	bỏ trống	nhà, phòng không có người ở	The flat next door has been vacant for months.	Căn hộ bên cạnh bỏ trống mấy tháng nay.		/ˈveɪkənt/
+sturdy	sturdy	adjective	5	home	chắc chắn, vững chãi	bàn ghế, đồ đạc làm chắc, khó hỏng	We need a sturdy table for the kids.	Chúng tôi cần một chiếc bàn chắc chắn cho bọn trẻ.		/ˈstɜːdi/
+creaky	creaky	adjective	5	home	kêu cọt kẹt	sàn gỗ, cầu thang cũ kêu khi bước lên	The old house has creaky floors.	Ngôi nhà cũ có sàn gỗ kêu cọt kẹt.		/ˈkriːki/
+domestic	domestic	adjective	5	home	(thuộc) việc nhà, gia đình	liên quan đến nhà cửa và việc trong nhà	Cooking and cleaning are domestic tasks.	Nấu ăn và dọn dẹp là những việc nhà.		/dəˈmestɪk/
+draughty	draughty	adjective	5	home	lùa gió, có gió lọt vào	nhà, phòng có khe hở khiến gió lạnh lọt vào	The old windows make the room draughty.	Những ô cửa sổ cũ khiến căn phòng bị gió lùa.	drafty	/ˈdrɑːfti/
+soundproof	soundproof	adjective	5	home	cách âm	phòng, tường không cho tiếng ồn lọt qua	He plays the drums in a soundproof room.	Anh ấy chơi trống trong một căn phòng cách âm.		/ˈsaʊndpruːf/
+mouldy	mouldy	adjective	5	home	bị mốc	có nấm mốc do ẩm lâu ngày	The bread in the cupboard has gone mouldy.	Bánh mì trong tủ đã bị mốc.	moldy	/ˈməʊldi/
+built-in	built-in	adjective	5	home	âm tường, gắn liền	tủ, kệ được làm liền vào tường	The bedroom has a built-in wardrobe.	Phòng ngủ có tủ quần áo âm tường.		/ˌbɪlt ˈɪn/
+cluttered	cluttered	adjective	5	home	chất đầy đồ, ngổn ngang	phòng, bàn có quá nhiều đồ vật	My desk is so cluttered that I can't work.	Bàn tôi ngổn ngang đồ đến mức không làm việc được.		/ˈklʌtəd/
+leaky	leaky	adjective	5	home	bị rò, bị dột	vòi, ống, mái nhà để nước chảy ra	We need to fix the leaky roof before the rain.	Chúng tôi cần sửa mái nhà bị dột trước mùa mưa.		/ˈliːki/
+securely	securely	adverb	5	home	chắc chắn, an toàn	khóa, đóng cửa cẩn thận để không ai vào được	Make sure the doors are securely locked.	Hãy chắc chắn các cửa đã được khóa cẩn thận.		/sɪˈkjʊəli/
+spotlessly	spotlessly	adverb	5	home	sạch tinh tươm	dùng trước clean để nhấn mạnh rất sạch	Her kitchen is always spotlessly clean.	Nhà bếp của cô ấy lúc nào cũng sạch tinh tươm.		/ˈspɒtləsli/
+put_your_house_in_order	put your house in order	idiom	6	home	thu xếp lại việc của mình	giải quyết vấn đề của bản thân trước khi chê người khác	You should put your own house in order first.	Bạn nên thu xếp lại việc của mình trước đã.	put your own house in order	
+skeleton_in_the_cupboard	skeleton in the cupboard	idiom	6	home	bí mật đáng xấu hổ	chuyện cũ trong nhà mà ai cũng muốn giấu	Every family has a skeleton in the cupboard.	Gia đình nào cũng có một bí mật đáng xấu hổ.	skeleton in the closet	
+sweep_under_the_carpet	sweep under the carpet	idiom	6	home	ỉm đi, che giấu (vấn đề)	cố giấu chuyện rắc rối thay vì giải quyết	Don't sweep the problem under the carpet.	Đừng ỉm vấn đề đi như thế.	sweep under the rug	
+nothing_to_write_home_about	nothing to write home about	idiom	6	home	chẳng có gì đặc sắc	bình thường, không đáng để kể	The hotel was okay, but nothing to write home about.	Khách sạn cũng được, nhưng chẳng có gì đặc sắc.		
+everything_but_the_kitchen_sink	everything but the kitchen sink	idiom	6	home	mang theo đủ thứ trên đời	mang quá nhiều đồ, gần như mọi thứ trong nhà	She packed everything but the kitchen sink for a weekend trip.	Đi chơi cuối tuần mà cô ấy mang theo đủ thứ trên đời.		
+potter_about	potter about	phrasal_verb	6	home	loay hoay việc lặt vặt	thong thả làm những việc nhỏ quanh nhà, vườn	Grandpa likes to potter about in the garden.	Ông thích loay hoay làm việc lặt vặt ngoài vườn.	potter around|putter around	
+skirting_board	skirting board	noun	6	home	len chân tường	thanh gỗ chạy dọc chân tường sát sàn	Dust collects along the skirting boards.	Bụi bám dọc theo len chân tường.	baseboard	
+upkeep	upkeep	noun	6	home	chi phí duy trì nhà cửa	tiền và công sức để giữ nhà luôn tốt	The upkeep of a big house is expensive.	Chi phí duy trì một căn nhà lớn rất tốn kém.		/ˈʌpkiːp/
+threshold	threshold	noun	6	home	ngưỡng cửa	thanh gỗ hoặc đá dưới khung cửa ra vào	He stopped at the threshold and took off his shoes.	Anh ấy dừng ở ngưỡng cửa và cởi giày.		/ˈθreʃhəʊld/
+evict	evict	verb	6	home	đuổi (người thuê) ra khỏi nhà	chủ nhà bắt người thuê dọn đi, thường vì nợ tiền	The landlord evicted them for not paying the rent.	Chủ nhà đuổi họ đi vì không trả tiền thuê.		/ɪˈvɪkt/
+sublet	sublet	verb	6	home	cho thuê lại	cho người khác thuê lại nhà, phòng mình đang thuê	I sublet my room while I was abroad.	Tôi cho thuê lại phòng trong thời gian ra nước ngoài.	sublease	/ˌsʌbˈlet/
+house-sit	house-sit	verb	6	home	trông nhà hộ	ở lại chăm nom nhà khi chủ nhà đi vắng	I'm house-sitting for my aunt while she's on holiday.	Tôi đang trông nhà hộ dì trong lúc dì đi nghỉ.		/ˈhaʊs sɪt/
+hoard	hoard	verb	6	home	tích trữ, giữ khư khư	giữ lại quá nhiều đồ không dùng đến	My grandmother hoards plastic bags.	Bà tôi tích trữ túi ni lông.		/hɔːd/
+insulate	insulate	verb	6	home	cách nhiệt	lót vật liệu để giữ nhà mát hoặc ấm	We insulated the roof to keep the house cool.	Chúng tôi cách nhiệt mái để giữ nhà mát mẻ.		/ˈɪnsjuleɪt/
+uninhabitable	uninhabitable	adjective	6	home	không thể ở được	nhà quá hỏng, nguy hiểm để sống	After the flood, the house was uninhabitable.	Sau trận lũ, ngôi nhà không thể ở được nữa.		/ˌʌnɪnˈhæbɪtəbl/
+semi-detached	semi-detached	adjective	6	home	(nhà) song lập	nhà chung một bức tường với một nhà bên cạnh	They live in a semi-detached house.	Họ sống trong một căn nhà song lập.		/ˌsemi dɪˈtætʃt/
+pristine	pristine	adjective	6	home	như mới, tinh tươm	đồ đạc, nhà cửa còn nguyên vẹn, rất sạch	The flat was in pristine condition.	Căn hộ còn trong tình trạng như mới.		/ˈprɪstiːn/
+dilapidated	dilapidated	adjective	6	home	đổ nát, xập xệ	nhà cửa cũ, hư hỏng nặng	They bought a dilapidated old house in the village.	Họ mua một căn nhà cũ xập xệ trong làng.		/dɪˈlæpɪdeɪtɪd/
+rickety	rickety	adjective	6	home	ọp ẹp, sắp gãy	bàn ghế, cầu thang yếu, lung lay	Be careful on those rickety stairs.	Cẩn thận với cái cầu thang ọp ẹp đó.		/ˈrɪkəti/
+lived-in	lived-in	adjective	6	home	có hơi ấm người ở	căn nhà trông ấm cúng, có dấu vết sinh hoạt	I like the lived-in feel of her kitchen.	Tôi thích cảm giác có hơi ấm người ở trong căn bếp của cô ấy.		/ˈlɪvd ɪn/
+house-proud	house-proud	adjective	6	home	mê chăm chút nhà cửa	rất kỹ tính trong việc giữ nhà sạch đẹp	My aunt is so house-proud that she cleans every day.	Dì tôi mê chăm chút nhà cửa đến mức ngày nào cũng lau dọn.		/ˈhaʊs praʊd/
+self-contained	self-contained	adjective	6	home	khép kín (căn hộ, phòng)	có bếp, nhà vệ sinh riêng, không dùng chung	I rent a self-contained room near the university.	Tôi thuê một phòng khép kín gần trường đại học.		/ˌself kənˈteɪnd/
+underfoot	underfoot	adverb	6	home	dưới chân, vướng chân	đồ đạc vương vãi trên sàn chỗ mình đi	There were toys underfoot everywhere.	Đồ chơi vương vãi dưới chân khắp nơi.		/ˌʌndəˈfʊt/
+ajar	ajar	adverb	6	home	hé mở (cửa)	cửa không đóng hẳn, để hở một chút	Leave the door ajar so the cat can come in.	Để cửa hé mở cho con mèo vào được.		/əˈdʒɑː/

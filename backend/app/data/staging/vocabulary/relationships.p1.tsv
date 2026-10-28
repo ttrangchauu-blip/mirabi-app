@@ -1,0 +1,87 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+friend	friend	noun	1	relationships	bạn, bạn bè	người mình quen thân, quý mến và hay chơi cùng	She is my friend from school.	Cô ấy là bạn học của tôi.		/frend/
+best_friend	best friend	collocation	1	relationships	bạn thân nhất	người bạn mình thân hơn tất cả	Nam has been my best friend since we were five.	Nam là bạn thân nhất của tôi từ năm năm tuổi.
+boyfriend	boyfriend	noun	1	relationships	bạn trai, người yêu (nam)	người con trai mình đang yêu, đang hẹn hò	Her boyfriend gave her flowers.	Bạn trai tặng hoa cho cô ấy.		/ˈbɔɪfrend/
+girlfriend	girlfriend	noun	1	relationships	bạn gái, người yêu (nữ)	người con gái mình đang yêu, đang hẹn hò	He met his girlfriend at university.	Anh ấy gặp bạn gái ở trường đại học.		/ˈɡɜːlfrend/
+friendly	friendly	adjective	1	relationships	thân thiện	dễ gần, cư xử tốt với mọi người	Our new classmate is very friendly.	Bạn cùng lớp mới của chúng tôi rất thân thiện.		/ˈfrendli/
+make_friends	make friends	collocation	1	relationships	kết bạn	bắt đầu làm bạn với người mới quen	It's easy to make friends at summer camp.	Ở trại hè rất dễ kết bạn.
+meet.person	meet	verb	1	relationships	gặp, làm quen (lần đầu)	lần đầu gặp ai đó và biết họ	I met my wife at a party.	Tôi quen vợ tôi ở một bữa tiệc.		/miːt/
+hug	hug	verb	1	relationships	ôm	vòng tay ôm ai để thể hiện tình cảm	She hugged her friend goodbye.	Cô ấy ôm tạm biệt bạn.		/hʌɡ/
+kiss	kiss	verb	1	relationships	hôn	chạm môi vào ai để thể hiện tình cảm	He kissed her on the cheek.	Anh ấy hôn lên má cô ấy.		/kɪs/
+miss.person	miss	verb	1	relationships	nhớ (ai)	buồn vì người mình thương đang ở xa	I miss you so much.	Anh nhớ em nhiều lắm.		/mɪs/
+each_other	each other	pronoun	1	relationships	nhau, lẫn nhau	hai hay nhiều người làm việc gì cho người kia	The two friends help each other with homework.	Hai người bạn giúp nhau làm bài tập.	one another
+enemy	enemy	noun	1	relationships	kẻ thù	người ghét mình hoặc mình ghét, đối đầu với mình	He has no enemies; everyone likes him.	Anh ấy không có kẻ thù nào, ai cũng quý anh.		/ˈenəmi/
+shake_hands	shake hands	collocation	1	relationships	bắt tay	nắm tay ai để chào hỏi hoặc đồng ý	They shook hands and smiled.	Họ bắt tay và mỉm cười.
+hold_hands	hold hands	collocation	1	relationships	nắm tay nhau	hai người nắm tay khi đi cùng nhau	The couple held hands as they walked.	Cặp đôi nắm tay nhau khi đi dạo.
+friendship	friendship	noun	2	relationships	tình bạn	mối quan hệ giữa những người bạn	Our friendship began in primary school.	Tình bạn của chúng tôi bắt đầu từ hồi tiểu học.		/ˈfrendʃɪp/
+relationship	relationship	noun	2	relationships	mối quan hệ, chuyện tình cảm	quan hệ giữa hai người, nhất là quan hệ yêu đương	They have been in a relationship for two years.	Họ đã yêu nhau được hai năm.		/rɪˈleɪʃnʃɪp/
+partner	partner	noun	2	relationships	người yêu, bạn đời	cách nói trung tính về người mình đang yêu hoặc sống cùng	You can bring your partner to the party.	Bạn có thể đưa người yêu đến bữa tiệc.		/ˈpɑːtnə/
+couple	couple	noun	2	relationships	cặp đôi	hai người đang yêu nhau hoặc là vợ chồng	They make a lovely couple.	Họ là một cặp đôi đẹp.		/ˈkʌpl/
+fall_in_love	fall in love	collocation	2	relationships	phải lòng, bắt đầu yêu	khi bắt đầu có tình cảm yêu đương với ai	They fell in love on holiday.	Họ phải lòng nhau trong kỳ nghỉ.
+first_love	first love	collocation	2	relationships	mối tình đầu	người hoặc cuộc tình mình yêu lần đầu tiên	You never forget your first love.	Người ta không bao giờ quên được mối tình đầu.
+love_letter	love letter	collocation	2	relationships	thư tình	lá thư viết để bày tỏ tình yêu	He wrote her a love letter every week.	Tuần nào anh ấy cũng viết cho cô một bức thư tình.
+ex	ex	noun	2	relationships	người yêu cũ, vợ/chồng cũ	người mình đã từng yêu hoặc từng cưới	She is still friends with her ex.	Cô ấy vẫn làm bạn với người yêu cũ.		/eks/
+single.unattached	single	adjective	2	relationships	độc thân	không có vợ, chồng hay người yêu	Are you single or do you have a girlfriend?	Bạn còn độc thân hay đã có bạn gái rồi?		/ˈsɪŋɡl/
+romantic	romantic	adjective	2	relationships	lãng mạn	liên quan đến tình yêu, gợi cảm xúc yêu đương	We had a romantic dinner by the river.	Chúng tôi đã có bữa tối lãng mạn bên bờ sông.		/rəʊˈmæntɪk/
+popular.people	popular	adjective	2	relationships	được nhiều người yêu mến	có nhiều bạn bè, ai cũng thích	She is the most popular girl in our class.	Cô ấy là bạn nữ được yêu mến nhất lớp tôi.		/ˈpɒpjələ/
+dear	dear	adjective	2	relationships	thân yêu, thân mến	người mình quý trọng và yêu thương	She is a dear friend of mine.	Cô ấy là một người bạn thân yêu của tôi.		/dɪə/
+unfriendly	unfriendly	adjective	2	relationships	không thân thiện, khó gần	cư xử lạnh lùng, không muốn làm quen	The new neighbours seem a bit unfriendly.	Hàng xóm mới có vẻ hơi khó gần.		/ʌnˈfrendli/
+stranger	stranger	noun	2	relationships	người lạ	người mình chưa từng quen biết	Don't talk to strangers.	Đừng nói chuyện với người lạ.		/ˈstreɪndʒə/
+old_friend	old friend	collocation	2	relationships	bạn cũ, bạn lâu năm	người bạn đã quen từ rất lâu	I met an old friend at the market today.	Hôm nay tôi gặp một người bạn cũ ở chợ.
+close_friend	close friend	collocation	2	relationships	bạn thân	người bạn gần gũi, có thể tâm sự	Only a few close friends came to the party.	Chỉ vài người bạn thân đến dự bữa tiệc.
+hang_out	hang out	phrasal_verb	2	relationships	đi chơi, la cà (cùng bạn bè)	dành thời gian rảnh ở bên bạn bè, không có việc gì cụ thể	We usually hang out at the coffee shop after school.	Sau giờ học chúng tôi hay la cà ở quán cà phê.
+meet_up	meet up	phrasal_verb	2	relationships	gặp mặt, hẹn gặp	hẹn trước rồi gặp nhau ở đâu đó	Let's meet up for lunch next week.	Tuần sau mình hẹn gặp nhau ăn trưa nhé.
+come_over	come over	phrasal_verb	2	relationships	sang nhà chơi	đến nhà ai đó để chơi, thăm	Do you want to come over this evening?	Tối nay bạn có muốn sang nhà mình chơi không?
+get_to_know	get to know	collocation	2	relationships	làm quen, tìm hiểu (ai)	dần dần hiểu thêm về một người	I'd like to get to know you better.	Mình muốn tìm hiểu bạn nhiều hơn.
+introduce	introduce	verb	2	relationships	giới thiệu (ai với ai)	khi giúp hai người chưa quen biết nhau	Let me introduce you to my sister.	Để tôi giới thiệu bạn với em gái tôi.		/ˌɪntrəˈdjuːs/
+go_on_a_date	go on a date	collocation	2	relationships	đi hẹn hò	đi chơi riêng với người mình thích	We went on a date to the cinema.	Chúng tôi đi hẹn hò ở rạp chiếu phim.
+spend_time_with	spend time with	collocation	2	relationships	dành thời gian cho, ở bên (ai)	ở cùng bạn bè, người thân để vui vẻ	I love spending time with my friends.	Tôi thích dành thời gian bên bạn bè.
+break_up	break up	phrasal_verb	2	relationships	chia tay (người yêu)	khi hai người yêu nhau kết thúc mối quan hệ	She broke up with her boyfriend last month.	Cô ấy chia tay bạn trai tháng trước.	split up
+argue	argue	verb	2	relationships	cãi nhau	nói to tiếng với nhau vì không đồng ý	My brother and I argue about everything.	Tôi và anh trai cãi nhau về mọi chuyện.		/ˈɑːɡjuː/
+argument.quarrel	argument	noun	2	relationships	cuộc cãi vã	lần hai người cãi nhau, to tiếng với nhau	They had an argument about money.	Họ đã cãi nhau vì chuyện tiền bạc.	quarrel|row	/ˈɑːɡjumənt/
+forgive	forgive	verb	2	relationships	tha thứ	thôi giận ai sau khi họ làm sai với mình	Please forgive me. I didn't mean it.	Hãy tha thứ cho mình. Mình không cố ý.		/fəˈɡɪv/
+apologise	apologise	verb	2	relationships	xin lỗi (ai)	nhận lỗi khi làm người khác buồn hoặc giận	You should apologise to your sister.	Con nên xin lỗi em gái đi.	apologize	/əˈpɒlədʒaɪz/
+trust	trust	verb	2	relationships	tin tưởng	tin rằng ai đó trung thực, không làm hại mình	I trust my best friend completely.	Tôi hoàn toàn tin tưởng bạn thân của mình.		/trʌst/
+respect	respect	verb	2	relationships	tôn trọng	coi trọng ý kiến, cảm xúc và quyền của người khác	We don't always agree, but we respect each other.	Chúng tôi không phải lúc nào cũng đồng ý nhưng luôn tôn trọng nhau.		/rɪˈspekt/
+care_about	care about	phrasal_verb	2	relationships	quan tâm đến, thương (ai)	thấy người đó quan trọng với mình	I really care about you.	Mình thật sự quan tâm đến bạn.
+lie_to	lie to	phrasal_verb	2	relationships	nói dối (ai)	nói điều không thật với ai đó	He lied to his girlfriend about where he was.	Anh ta nói dối bạn gái về chỗ mình đã đi.
+politely	politely	adverb	2	relationships	lịch sự, lễ độ	cách nói, cách cư xử đúng phép với người khác	She politely said no to the invitation.	Cô ấy lịch sự từ chối lời mời.		/pəˈlaɪtli/
+forever	forever	adverb	2	relationships	mãi mãi	lời hứa về tình bạn, tình yêu không bao giờ hết	We will be friends forever.	Chúng mình sẽ là bạn mãi mãi.		/fərˈevə/
+close.intimate	close	adjective	3	relationships	thân thiết, gần gũi	có quan hệ tình cảm gắn bó với ai	My sister and I are very close.	Tôi và chị gái rất thân thiết.		/kləʊs/
+loyal	loyal	adjective	3	relationships	trung thành, chung thủy (với bạn bè)	luôn đứng về phía bạn bè, không bỏ rơi họ	He is a loyal friend who never lets me down.	Anh ấy là người bạn trung thành, chưa bao giờ làm tôi thất vọng.		/ˈlɔɪəl/
+engaged	engaged	adjective	3	relationships	đã đính hôn	đã hứa sẽ cưới nhau	They got engaged last Christmas.	Họ đã đính hôn vào Giáng sinh năm ngoái.		/ɪnˈɡeɪdʒd/
+serious.relationship	serious	adjective	3	relationships	nghiêm túc (trong tình cảm)	mối quan hệ yêu đương có ý định lâu dài	Is it a serious relationship?	Đó có phải là một mối quan hệ nghiêm túc không?		/ˈsɪəriəs/
+crush	crush	noun	3	relationships	sự cảm nắng, người mình thầm thích	tình cảm yêu thích ai đó mà chưa nói ra	I had a crush on my English teacher.	Hồi đó tôi cảm nắng thầy dạy tiếng Anh.		/krʌʃ/
+ask_out	ask out	phrasal_verb	3	relationships	rủ đi chơi, mời hẹn hò	ngỏ lời mời người mình thích đi chơi riêng	He finally asked her out.	Cuối cùng anh ấy cũng rủ cô ấy đi chơi.
+go_out_with	go out with	phrasal_verb	3	relationships	hẹn hò với, quen (ai)	đang có quan hệ yêu đương với ai	How long have you been going out with him?	Bạn quen anh ấy được bao lâu rồi?
+first_date	first date	collocation	3	relationships	buổi hẹn hò đầu tiên	lần đầu tiên hai người đi chơi riêng với nhau	I was so nervous on our first date.	Tôi đã rất hồi hộp trong buổi hẹn đầu tiên.
+true_love	true love	collocation	3	relationships	tình yêu đích thực	tình yêu chân thành và bền lâu	Do you believe in true love?	Bạn có tin vào tình yêu đích thực không?
+propose.marriage	propose	verb	3	relationships	cầu hôn	ngỏ lời xin cưới người mình yêu	He proposed to her on the beach.	Anh ấy cầu hôn cô trên bãi biển.		/prəˈpəʊz/
+engagement.marriage	engagement	noun	3	relationships	lễ đính hôn, sự đính hôn	lời hứa hoặc buổi lễ hai người hứa sẽ cưới nhau	They announced their engagement on Sunday.	Họ thông báo đính hôn vào Chủ nhật.		/ɪnˈɡeɪdʒmənt/
+engagement_ring	engagement ring	collocation	3	relationships	nhẫn đính hôn	chiếc nhẫn tặng khi cầu hôn	She showed us her engagement ring.	Cô ấy khoe với chúng tôi chiếc nhẫn đính hôn.
+dump.partner	dump	verb	3	relationships	đá (người yêu), bỏ rơi	cách nói suồng sã: đột ngột chia tay người yêu	She dumped him after only two weeks.	Cô ấy đá anh ta chỉ sau hai tuần.		/dʌmp/
+cheat_on	cheat on	phrasal_verb	3	relationships	ngoại tình, lừa dối (người yêu)	có quan hệ tình cảm với người khác sau lưng người yêu	He cheated on his wife.	Anh ta ngoại tình sau lưng vợ.
+get_over.breakup	get over	phrasal_verb	3	relationships	quên được, vượt qua (sau chia tay)	hết buồn sau khi chia tay hoặc mất ai đó	It took her months to get over him.	Cô ấy mất nhiều tháng mới quên được anh ta.
+fall_out	fall out	phrasal_verb	3	relationships	cãi nhau rồi giận nhau, nghỉ chơi	cãi nhau đến mức không còn thân như trước	I fell out with my best friend over a boy.	Tôi giận nhau với bạn thân vì một cậu con trai.
+make_up.reconcile	make up	phrasal_verb	3	relationships	làm lành, làm hòa	trở lại thân thiện sau khi cãi nhau	They argued, but they made up the next day.	Họ cãi nhau nhưng hôm sau đã làm lành.
+apology	apology	noun	3	relationships	lời xin lỗi	lời nói thừa nhận mình sai với người khác	I think you owe her an apology.	Tôi nghĩ bạn nợ cô ấy một lời xin lỗi.		/əˈpɒlədʒi/
+misunderstanding	misunderstanding	noun	3	relationships	sự hiểu lầm	khi hiểu sai ý hoặc hành động của người khác	It was just a misunderstanding.	Đó chỉ là một sự hiểu lầm thôi.		/ˌmɪsʌndəˈstændɪŋ/
+disagreement	disagreement	noun	3	relationships	sự bất đồng	khi hai người có ý kiến khác nhau	We had a small disagreement about the plan.	Chúng tôi có chút bất đồng về kế hoạch.		/ˌdɪsəˈɡriːmənt/
+tease	tease	verb	3	relationships	trêu, trêu chọc	nói đùa về ai, thường là vui vẻ, không ác ý	My brothers always tease me about my hair.	Mấy anh trai tôi lúc nào cũng trêu tóc tôi.		/tiːz/
+make_fun_of	make fun of	collocation	3	relationships	chế giễu, giễu cợt	cười nhạo ai đó một cách ác ý	It's not nice to make fun of other people.	Chế giễu người khác là không hay.
+blame	blame	verb	3	relationships	đổ lỗi, trách	nói rằng ai đó có lỗi khi có chuyện không hay	Don't blame me for your mistakes!	Đừng đổ lỗi cho tôi vì sai lầm của bạn!		/bleɪm/
+insult	insult	verb	3	relationships	lăng mạ, sỉ nhục	nói hoặc làm điều thô lỗ khiến người khác thấy bị xúc phạm	He insulted her in front of everyone.	Anh ta sỉ nhục cô ấy trước mặt mọi người.		/ɪnˈsʌlt/
+comfort.console	comfort	verb	3	relationships	an ủi	nói, làm gì để người đang buồn thấy đỡ hơn	She comforted her friend after the bad news.	Cô ấy an ủi bạn sau khi nhận tin xấu.		/ˈkʌmfət/
+support.emotional	support	verb	3	relationships	ủng hộ, động viên	giúp đỡ tinh thần cho bạn bè, người thân	My friends supported me when I lost my job.	Bạn bè đã động viên tôi khi tôi mất việc.		/səˈpɔːt/
+hurt_someones_feelings	hurt someone's feelings	collocation	3	relationships	làm tổn thương (ai), làm (ai) buồn lòng	nói hoặc làm điều khiến người khác buồn	Be careful not to hurt someone's feelings when you joke.	Khi đùa nhớ cẩn thận đừng làm ai buồn lòng.
+let_down	let down	phrasal_verb	3	relationships	làm (ai) thất vọng	không làm điều người khác tin tưởng mình sẽ làm	Don't worry, I won't let you down.	Đừng lo, mình sẽ không làm bạn thất vọng đâu.
+count_on	count on	phrasal_verb	3	relationships	trông cậy vào, tin cậy vào	tin rằng ai đó sẽ giúp mình khi cần	You can always count on me.	Bạn luôn có thể trông cậy vào mình.	rely on|depend on
+be_there_for	be there for	phrase	3	relationships	luôn ở bên (ai)	có mặt và giúp đỡ khi người kia gặp khó khăn	Good friends are there for you in hard times.	Bạn tốt luôn ở bên bạn những lúc khó khăn.
+look_up_to	look up to	phrasal_verb	3	relationships	kính trọng, ngưỡng mộ	coi ai đó là tấm gương để học theo	I've always looked up to my older cousin.	Tôi luôn ngưỡng mộ anh họ.
+keep_a_promise	keep a promise	collocation	3	relationships	giữ lời hứa	làm đúng điều mình đã hứa	He always keeps his promises.	Anh ấy luôn giữ lời hứa.	keep your word
+break_a_promise	break a promise	collocation	3	relationships	thất hứa	không làm điều mình đã hứa	She broke her promise to call me.	Cô ấy thất hứa, không gọi cho tôi.
+keep_a_secret	keep a secret	collocation	3	relationships	giữ bí mật	không kể với ai điều người khác tâm sự	Can you keep a secret?	Bạn có giữ bí mật được không?
+have_a_lot_in_common	have a lot in common	collocation	3	relationships	có nhiều điểm chung	cùng sở thích, suy nghĩ giống nhau	We have a lot in common, so we never get bored.	Chúng tôi có nhiều điểm chung nên chẳng bao giờ thấy chán.
+understanding.caring	understanding	adjective	3	relationships	thấu hiểu, biết cảm thông	sẵn sàng lắng nghe và thông cảm cho người khác	My girlfriend is very understanding when I work late.	Bạn gái tôi rất thông cảm khi tôi làm việc muộn.		/ˌʌndəˈstændɪŋ/
+welcoming	welcoming	adjective	3	relationships	niềm nở, đón tiếp nồng hậu	chào đón người mới một cách thân thiện	The family was very welcoming to me.	Gia đình ấy đón tiếp tôi rất niềm nở.		/ˈwelkəmɪŋ/
+awkward.situation	awkward	adjective	3	relationships	ngượng ngùng, khó xử	cảm giác không thoải mái giữa hai người	There was an awkward silence after he spoke.	Sau khi anh ấy nói là một khoảng im lặng ngượng ngùng.		/ˈɔːkwəd/

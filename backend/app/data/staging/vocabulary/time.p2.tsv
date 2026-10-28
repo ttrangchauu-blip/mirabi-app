@@ -1,0 +1,109 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+appointment	appointment	noun	3	time	cuộc hẹn, lịch hẹn	giờ đã hẹn gặp bác sĩ, thợ cắt tóc hay người làm việc	I have a dentist appointment at ten.	Tôi có lịch hẹn nha sĩ lúc mười giờ.		/əˈpɔɪntmənt/
+schedule.noun	schedule	noun	3	time	lịch trình	danh sách việc cần làm theo giờ, theo ngày	I have a busy schedule this week.	Tuần này lịch trình của tôi rất bận.		/ˈʃedjuːl/
+moment	moment	noun	3	time	khoảnh khắc, chốc lát	một khoảng thời gian rất ngắn	It was the happiest moment of my life.	Đó là khoảnh khắc hạnh phúc nhất đời tôi.		/ˈməʊmənt/
+decade	decade	noun	3	time	thập kỷ	khoảng thời gian mười năm	The city has changed a lot in the last decade.	Thành phố đã thay đổi nhiều trong thập kỷ qua.		/ˈdekeɪd/
+century	century	noun	3	time	thế kỷ	khoảng thời gian một trăm năm	This temple is three centuries old.	Ngôi chùa này đã ba thế kỷ tuổi.		/ˈsentʃəri/
+dawn	dawn	noun	3	time	bình minh, rạng đông	lúc trời bắt đầu sáng	Farmers often get up at dawn.	Nông dân thường dậy lúc rạng đông.		/dɔːn/
+anniversary	anniversary	noun	3	time	ngày kỷ niệm	ngày đánh dấu một sự kiện xảy ra vào cùng ngày những năm trước	Today is our tenth wedding anniversary.	Hôm nay là kỷ niệm mười năm ngày cưới của chúng tôi.		/ˌænɪˈvɜːsəri/
+occasion	occasion	noun	3	time	dịp	thời điểm diễn ra một sự kiện đặc biệt	I wear this dress only on special occasions.	Tôi chỉ mặc chiếc váy này vào những dịp đặc biệt.		/əˈkeɪʒn/
+lifetime	lifetime	noun	3	time	cả cuộc đời	khoảng thời gian một người sống	I've seen many changes in my lifetime.	Tôi đã chứng kiến nhiều thay đổi trong suốt cuộc đời mình.		/ˈlaɪftaɪm/
+diary.planner	diary	noun	3	time	sổ ghi lịch hẹn	sổ ghi các cuộc hẹn, việc cần làm theo từng ngày	Let me check my diary.	Để tôi xem sổ lịch hẹn đã.	planner	/ˈdaɪəri/
+fathers_day	Father's Day	noun	3	time	Ngày của Cha	ngày con cái bày tỏ lòng biết ơn với cha	We took Dad out for lunch on Father's Day.	Chúng tôi đưa bố đi ăn trưa vào Ngày của Cha.
+national_day	National Day	noun	3	time	ngày Quốc khánh	ngày lễ kỷ niệm thành lập nước; ở Việt Nam là 2 tháng 9	Vietnam's National Day is on 2 September.	Ngày Quốc khánh Việt Nam là ngày 2 tháng 9.
+new_years_eve	New Year's Eve	noun	3	time	đêm giao thừa (dương lịch)	đêm 31 tháng 12, trước ngày đầu năm mới	We stayed up until midnight on New Year's Eve.	Chúng tôi thức đến nửa đêm vào đêm giao thừa.
+mid-autumn_festival	Mid-Autumn Festival	noun	3	time	Tết Trung thu	rằm tháng Tám âm lịch, trẻ em rước đèn, ăn bánh trung thu	Children carry lanterns at the Mid-Autumn Festival.	Trẻ em rước đèn vào dịp Tết Trung thu.
+halloween	Halloween	noun	3	time	lễ hội hóa trang Halloween	ngày 31 tháng 10, trẻ em hóa trang và đi xin kẹo	Kids dress up as ghosts on Halloween.	Trẻ con hóa trang thành ma vào dịp Halloween.		/ˌhæləʊˈiːn/
+postpone	postpone	verb	3	time	hoãn lại	trang trọng: dời việc gì sang thời điểm muộn hơn	The match was postponed because of the rain.	Trận đấu bị hoãn vì trời mưa.	put off	/pəˈspəʊn/
+cancel	cancel	verb	3	time	hủy bỏ	quyết định một việc đã lên lịch sẽ không diễn ra	They cancelled the concert.	Họ đã hủy buổi hòa nhạc.		/ˈkænsl/
+last.continue	last	verb	3	time	kéo dài	động từ: diễn ra trong một khoảng thời gian	The meeting lasted two hours.	Cuộc họp kéo dài hai tiếng.		/lɑːst/
+pass.time	pass	verb	3	time	trôi qua	thời gian dần qua đi	Time passes quickly when you're having fun.	Thời gian trôi qua nhanh khi bạn vui vẻ.		/pɑːs/
+rush	rush	verb	3	time	vội vã, hấp tấp	làm gì quá nhanh vì gấp gáp	Don't rush, we have plenty of time.	Đừng vội, chúng ta còn nhiều thời gian.		/rʌʃ/
+oversleep	oversleep	verb	3	time	ngủ quên	ngủ quá giờ định dậy	I overslept and missed the bus.	Tôi ngủ quên và lỡ chuyến xe buýt.		/ˌəʊvəˈsliːp/
+temporary	temporary	adjective	3	time	tạm thời	chỉ kéo dài trong một thời gian ngắn	This is only a temporary job.	Đây chỉ là công việc tạm thời.		/ˈtemprəri/
+recent	recent	adjective	3	time	gần đây	tính từ: xảy ra không lâu trước	Is this a recent photo?	Đây là ảnh mới chụp gần đây à?		/ˈriːsnt/
+current.now	current	adjective	3	time	hiện tại, hiện hành	đang diễn ra hoặc đang dùng vào lúc này	What is your current address?	Địa chỉ hiện tại của bạn là gì?		/ˈkʌrənt/
+previous	previous	adjective	3	time	trước đó	xảy ra hoặc tồn tại trước cái hiện tại	My previous job was in a bank.	Công việc trước đây của tôi là ở ngân hàng.		/ˈpriːviəs/
+latest	latest	adjective	3	time	mới nhất	gần đây nhất, cập nhật nhất	Have you seen her latest film?	Bạn đã xem bộ phim mới nhất của cô ấy chưa?		/ˈleɪtɪst/
+due	due	adjective	3	time	đến hạn, phải nộp	phải hoàn thành, trả hoặc xảy ra vào một thời điểm	The homework is due on Monday.	Bài tập về nhà phải nộp vào thứ Hai.		/djuː/
+brief.short	brief	adjective	3	time	ngắn ngủi	kéo dài trong một thời gian ngắn	We had a brief chat before class.	Chúng tôi trò chuyện chốc lát trước giờ học.		/briːf/
+nowadays	nowadays	adverb	3	time	ngày nay	so sánh hiện tại với ngày xưa	Nowadays, most people have a smartphone.	Ngày nay hầu hết mọi người đều có điện thoại thông minh.	these days	/ˈnaʊədeɪz/
+currently	currently	adverb	3	time	hiện nay, hiện đang	ở thời điểm hiện tại (trang trọng hơn now)	She is currently living in Hue.	Hiện nay cô ấy đang sống ở Huế.		/ˈkʌrəntli/
+lately	lately	adverb	3	time	dạo gần đây	một giai đoạn gần đây, thường đi với thì hiện tại hoàn thành	I've been very tired lately.	Dạo gần đây tôi rất mệt.		/ˈleɪtli/
+frequently	frequently	adverb	3	time	thường xuyên	xảy ra nhiều lần (trang trọng hơn often)	Buses run frequently in the city centre.	Xe buýt chạy thường xuyên ở trung tâm thành phố.		/ˈfriːkwəntli/
+occasionally	occasionally	adverb	3	time	đôi khi, lâu lâu	không thường xuyên, ít hơn sometimes	We occasionally eat out.	Lâu lâu chúng tôi mới ăn ngoài.		/əˈkeɪʒnəli/
+regularly	regularly	adverb	3	time	đều đặn	xảy ra theo những khoảng thời gian cố định	You should exercise regularly.	Bạn nên tập thể dục đều đặn.		/ˈreɡjələli/
+eventually	eventually	adverb	3	time	cuối cùng rồi cũng	sau một quá trình dài, nhiều trở ngại	We got lost, but eventually we found the hotel.	Chúng tôi bị lạc nhưng cuối cùng rồi cũng tìm ra khách sạn.	in the end	/ɪˈventʃuəli/
+immediately	immediately	adverb	3	time	ngay lập tức	không chậm trễ chút nào	Call me immediately if anything happens.	Gọi cho tôi ngay lập tức nếu có chuyện gì xảy ra.	instantly	/ɪˈmiːdiətli/
+afterwards	afterwards	adverb	3	time	sau đó, kế đó	sau sự việc vừa được nhắc đến	We had dinner and afterwards we watched a film.	Chúng tôi ăn tối và sau đó xem phim.	afterward	/ˈɑːftəwədz/
+forever	forever	adverb	3	time	mãi mãi	trong thời gian không bao giờ kết thúc	I'll love you forever.	Anh sẽ yêu em mãi mãi.		/fərˈevə/
+someday	someday	adverb	3	time	một ngày nào đó	vào một thời điểm chưa biết trong tương lai	I want to visit Japan someday.	Một ngày nào đó tôi muốn đến Nhật Bản.	one day|some day	/ˈsʌmdeɪ/
+overnight	overnight	adverb	3	time	qua đêm	trong suốt đêm hoặc đến sáng hôm sau	We stayed overnight at a hotel.	Chúng tôi ở lại qua đêm tại khách sạn.		/ˌəʊvəˈnaɪt/
+since	since	preposition	3	time	từ (khi)	từ một thời điểm trong quá khứ đến bây giờ	I've lived here since 2015.	Tôi đã sống ở đây từ năm 2015.		/sɪns/
+while	while	conjunction	3	time	trong khi	hai việc xảy ra cùng lúc	I listen to music while I cook.	Tôi nghe nhạc trong khi nấu ăn.		/waɪl/
+in_time	in time	collocation	3	time	kịp lúc	đủ sớm để không bị lỡ việc gì	We got to the station just in time.	Chúng tôi đến ga vừa kịp lúc.
+in_advance	in advance	collocation	3	time	trước (thời hạn)	làm sẵn trước khi một việc diễn ra	Please book your tickets in advance.	Vui lòng đặt vé trước.	ahead of time|beforehand
+on_schedule	on schedule	collocation	3	time	đúng tiến độ	việc diễn ra theo đúng thời gian đã định	The project is on schedule.	Dự án đang đúng tiến độ.
+from_time_to_time	from time to time	collocation	3	time	lâu lâu, đôi lúc	tần suất không đều, thỉnh thoảng mới có một lần	I still visit my old school from time to time.	Lâu lâu tôi vẫn ghé thăm trường cũ.	every now and then|once in a while
+these_days	these days	collocation	3	time	dạo này, thời buổi này	nói về tình hình hiện nay so với trước	Everything is so expensive these days.	Thời buổi này cái gì cũng đắt.	nowadays
+for_a_while	for a while	collocation	3	time	một lúc, một thời gian	trong một khoảng thời gian không quá dài	Let's sit here for a while.	Mình ngồi đây một lúc nhé.
+all_day_long	all day long	collocation	3	time	suốt cả ngày	từ sáng đến tối không ngừng	I've been working all day long.	Tôi đã làm việc suốt cả ngày.
+so_far	so far	collocation	3	time	cho đến nay	tính từ trước tới thời điểm hiện tại	So far, everything is going well.	Cho đến nay mọi việc đều suôn sẻ.
+from_now_on	from now on	collocation	3	time	từ giờ trở đi	bắt đầu từ lúc này và kéo dài về sau	From now on, I'll get up earlier.	Từ giờ trở đi tôi sẽ dậy sớm hơn.
+the_other_day	the other day	collocation	3	time	hôm nọ, mấy hôm trước	một ngày gần đây, không nói rõ ngày nào	I saw your brother the other day.	Hôm nọ tôi gặp anh trai bạn.
+at_last	at last	collocation	3	time	cuối cùng cũng	nói khi điều mong đợi từ lâu đã xảy ra	At last, the holidays are here!	Cuối cùng kỳ nghỉ cũng đến!	finally
+in_the_end	in the end	collocation	3	time	rốt cuộc thì	kết quả sau cùng khi đã cân nhắc, thay đổi nhiều lần	In the end, we decided to stay home.	Rốt cuộc thì chúng tôi quyết định ở nhà.	eventually
+as_soon_as	as soon as	conjunction	3	time	ngay khi	việc này xảy ra liền sau việc kia	Call me as soon as you arrive.	Gọi cho tôi ngay khi bạn đến nơi.
+waste_time	waste time	collocation	3	time	lãng phí thời gian	dùng thời gian vào việc vô ích	Don't waste time on your phone.	Đừng lãng phí thời gian vào điện thoại.
+take_your_time	take your time	phrase	3	time	cứ từ từ	bảo ai không cần vội, cứ làm thong thả	Take your time, there's no rush.	Cứ từ từ, không có gì phải vội.
+run_late	run late	collocation	3	time	bị trễ, chậm hơn dự định	đang chậm so với giờ hẹn hoặc lịch trình	Sorry, I'm running late.	Xin lỗi, tôi đang bị trễ.
+put_off	put off	phrasal_verb	3	time	trì hoãn	cách nói thân mật: dời việc sang sau, thường vì không muốn làm	Stop putting off your homework!	Đừng có trì hoãn làm bài tập nữa!	postpone
+make_an_appointment	make an appointment	collocation	3	time	đặt lịch hẹn	hẹn trước giờ gặp bác sĩ, ngân hàng, cơ quan	I need to make an appointment with the doctor.	Tôi cần đặt lịch hẹn với bác sĩ.
+time_zone	time zone	collocation	3	time	múi giờ	vùng trên trái đất dùng chung một giờ	London and Hanoi are in different time zones.	London và Hà Nội ở hai múi giờ khác nhau.
+lunar_calendar	lunar calendar	collocation	3	time	âm lịch	lịch tính theo chu kỳ của mặt trăng	Tet is based on the lunar calendar.	Tết được tính theo âm lịch.
+date_of_birth	date of birth	collocation	3	time	ngày sinh	ngày tháng năm sinh, thường ghi trên giấy tờ	Please write your date of birth here.	Vui lòng ghi ngày sinh của bạn vào đây.
+public_holiday	public holiday	collocation	3	time	ngày nghỉ lễ	ngày lễ được nghỉ làm theo quy định nhà nước	Banks are closed on public holidays.	Ngân hàng đóng cửa vào ngày nghỉ lễ.	bank holiday
+every_other_day	every other day	collocation	3	time	cách ngày một lần	hai ngày một lần, ngày có ngày không	I go running every other day.	Tôi chạy bộ cách ngày một lần.
+fortnight	fortnight	noun	4	time	hai tuần	cách nói Anh-Anh cho khoảng 14 ngày	I'm going on holiday for a fortnight.	Tôi sẽ đi nghỉ hai tuần.		/ˈfɔːtnaɪt/
+dusk	dusk	noun	4	time	hoàng hôn, chạng vạng	lúc trời bắt đầu tối sau khi mặt trời lặn	The street lights come on at dusk.	Đèn đường bật sáng lúc chạng vạng.		/dʌsk/
+era	era	noun	4	time	thời đại, kỷ nguyên	một giai đoạn lịch sử có đặc điểm riêng	We live in the digital era.	Chúng ta sống trong thời đại số.		/ˈɪərə/
+frequency	frequency	noun	4	time	tần suất	số lần một việc xảy ra trong một khoảng thời gian	The frequency of buses is higher in the morning.	Tần suất xe buýt vào buổi sáng dày hơn.		/ˈfriːkwənsi/
+duration	duration	noun	4	time	thời lượng	tổng thời gian từ lúc bắt đầu đến khi kết thúc	Please stay seated for the duration of the flight.	Vui lòng ngồi yên trong suốt chuyến bay.		/djuˈreɪʃn/
+interval	interval	noun	4	time	khoảng cách thời gian	thời gian giữa hai lần, hai sự việc	Take the medicine at four-hour intervals.	Uống thuốc cách nhau bốn tiếng một lần.		/ˈɪntəvl/
+timeline	timeline	noun	4	time	dòng thời gian, tiến độ	chuỗi sự kiện, công việc xếp theo thời gian	We need a clear timeline for the project.	Chúng ta cần một tiến độ rõ ràng cho dự án.		/ˈtaɪmlaɪn/
+countdown	countdown	noun	4	time	sự đếm ngược	đếm lùi thời gian tới một sự kiện	The countdown to New Year has begun.	Cuộc đếm ngược đến năm mới đã bắt đầu.		/ˈkaʊntdaʊn/
+eve	eve	noun	4	time	hôm trước (một sự kiện)	ngày hoặc buổi tối ngay trước một dịp quan trọng	We were busy on the eve of the wedding.	Chúng tôi bận rộn vào hôm trước đám cưới.		/iːv/
+childrens_day	Children's Day	noun	4	time	ngày Quốc tế Thiếu nhi	ngày 1 tháng 6, ngày dành cho trẻ em	Kids get presents on Children's Day.	Trẻ em được nhận quà vào ngày Quốc tế Thiếu nhi.
+womens_day	Women's Day	noun	4	time	ngày Quốc tế Phụ nữ	ngày 8 tháng 3, tặng hoa và quà cho phụ nữ	We gave our teacher flowers on Women's Day.	Chúng tôi tặng hoa cô giáo vào ngày Quốc tế Phụ nữ.	International Women's Day
+reschedule	reschedule	verb	4	time	dời lịch, đổi lịch	sắp xếp lại thời gian cho một việc đã hẹn	Can we reschedule our meeting for Friday?	Chúng ta dời cuộc họp sang thứ Sáu được không?		/ˌriːˈʃedjuːl/
+schedule.verb	schedule	verb	4	time	lên lịch	sắp xếp để việc gì diễn ra vào một thời gian cụ thể	The meeting is scheduled for three o'clock.	Cuộc họp được lên lịch vào lúc ba giờ.		/ˈʃedjuːl/
+arrange.plan	arrange	verb	4	time	sắp xếp (thời gian, cuộc hẹn)	lên kế hoạch giờ giấc, địa điểm cho một việc	Let's arrange a time to meet.	Hãy sắp xếp một thời gian để gặp nhau.		/əˈreɪndʒ/
+expire	expire	verb	4	time	hết hạn	giấy tờ, thẻ, hợp đồng không còn hiệu lực	My passport expires next year.	Hộ chiếu của tôi hết hạn vào năm sau.		/ɪkˈspaɪə/
+extend.time	extend	verb	4	time	kéo dài thêm (thời hạn)	cho thêm thời gian so với dự kiến	Can I extend the deadline by two days?	Tôi có thể kéo dài hạn chót thêm hai ngày được không?		/ɪkˈstend/
+renew	renew	verb	4	time	làm mới, gia hạn (giấy tờ)	làm thủ tục để giấy tờ, hợp đồng tiếp tục có hiệu lực	I need to renew my passport.	Tôi cần gia hạn hộ chiếu.		/rɪˈnjuː/
+annual	annual	adjective	4	time	hằng năm, thường niên	diễn ra mỗi năm một lần	The school has an annual sports day.	Trường có ngày hội thể thao thường niên.	yearly	/ˈænjuəl/
+punctual	punctual	adjective	4	time	luôn đúng giờ, giữ giờ giấc	tính từ chỉ người luôn đến hoặc làm việc đúng giờ	Our teacher is always punctual.	Thầy giáo của chúng tôi luôn đúng giờ.		/ˈpʌŋktʃuəl/
+overdue	overdue	adjective	4	time	quá hạn	đã trễ so với thời hạn phải trả, phải nộp	This library book is overdue.	Cuốn sách thư viện này đã quá hạn.		/ˌəʊvəˈdjuː/
+permanent	permanent	adjective	4	time	lâu dài, cố định	kéo dài mãi hoặc rất lâu, không phải tạm thời	She finally got a permanent job.	Cuối cùng cô ấy cũng có công việc lâu dài.		/ˈpɜːmənənt/
+upcoming	upcoming	adjective	4	time	sắp tới	sắp diễn ra trong thời gian gần	Are you ready for the upcoming exam?	Bạn đã sẵn sàng cho kỳ thi sắp tới chưa?		/ˈʌpkʌmɪŋ/
+former	former	adjective	4	time	cũ, cựu (từng là)	trước kia từng là, từng giữ vị trí đó	He is a former student of this school.	Anh ấy là cựu học sinh của trường này.		/ˈfɔːmə/
+prompt	prompt	adjective	4	time	mau lẹ, nhanh chóng	được làm ngay, không chậm trễ	Thank you for your prompt reply.	Cảm ơn bạn đã trả lời nhanh chóng.		/prɒmpt/
+frequent	frequent	adjective	4	time	diễn ra thường xuyên	tính từ: xảy ra nhiều lần	He is a frequent visitor here.	Anh ấy là khách thường xuyên ghé đây.		/ˈfriːkwənt/
+available.free	available	adjective	4	time	rảnh, có thời gian	có thời gian để gặp ai hoặc làm việc gì	Are you available on Friday afternoon?	Chiều thứ Sáu bạn có rảnh không?		/əˈveɪləbl/
+outdated	outdated	adjective	4	time	lỗi thời, cũ	không còn hợp thời hoặc không còn đúng	This map is outdated.	Tấm bản đồ này đã lỗi thời.		/ˌaʊtˈdeɪtɪd/
+up-to-date	up-to-date	adjective	4	time	cập nhật, mới nhất	có thông tin mới nhất, theo kịp hiện tại	Is this information up-to-date?	Thông tin này có được cập nhật mới nhất không?	up to date	/ˌʌp tə ˈdeɪt/
+time-consuming	time-consuming	adjective	4	time	tốn thời gian	cần rất nhiều thời gian để làm	Cooking at home can be time-consuming.	Nấu ăn ở nhà có thể rất tốn thời gian.		/ˈtaɪm kənsjuːmɪŋ/
+hectic	hectic	adjective	4	time	bận rộn, tất bật	có quá nhiều việc trong ít thời gian	I had a hectic day at work.	Tôi đã có một ngày làm việc tất bật.		/ˈhektɪk/
+short-term	short-term	adjective	4	time	ngắn hạn	diễn ra hoặc có tác dụng trong thời gian ngắn	This is only a short-term plan.	Đây chỉ là kế hoạch ngắn hạn.		/ˌʃɔːt ˈtɜːm/
+long-term	long-term	adjective	4	time	dài hạn, lâu dài	trong một khoảng thời gian dài về sau	Smoking causes long-term health problems.	Hút thuốc gây ra các vấn đề sức khỏe lâu dài.		/ˌlɒŋ ˈtɜːm/
+constantly	constantly	adverb	4	time	liên tục, không ngừng	xảy ra suốt, gần như không dừng	The phone rings constantly.	Điện thoại reo liên tục.		/ˈkɒnstəntli/
+meanwhile	meanwhile	adverb	4	time	trong khi đó	cùng lúc với việc vừa nhắc đến	I cooked dinner. Meanwhile, my sister set the table.	Tôi nấu bữa tối. Trong khi đó, em gái tôi dọn bàn.		/ˈmiːnwaɪl/
+beforehand	beforehand	adverb	4	time	từ trước, sẵn trước	làm trước khi một việc diễn ra	Let me know beforehand if you can't come.	Báo trước cho tôi nếu bạn không đến được.	in advance	/bɪˈfɔːhænd/
+previously	previously	adverb	4	time	trước đây	vào thời gian trước thời điểm đang nói	She previously worked as a nurse.	Trước đây cô ấy làm y tá.		/ˈpriːviəsli/
+temporarily	temporarily	adverb	4	time	một cách tạm thời	trạng từ: chỉ trong một thời gian ngắn	The shop is temporarily closed.	Cửa hàng tạm thời đóng cửa.		/ˈtemprərəli/
+permanently	permanently	adverb	4	time	vĩnh viễn, hẳn luôn	trạng từ: mãi mãi hoặc rất lâu dài	He moved to Canada permanently.	Anh ấy chuyển hẳn sang Canada sinh sống.		/ˈpɜːmənəntli/
+instantly	instantly	adverb	4	time	tức thì, ngay tức khắc	xảy ra ngay trong khoảnh khắc đó	The pain stopped instantly.	Cơn đau dừng lại ngay tức khắc.	immediately	/ˈɪnstəntli/
+shortly	shortly	adverb	4	time	ngay sau đây, trong ít phút nữa	sắp xảy ra trong thời gian rất ngắn (trang trọng)	The train will arrive shortly.	Tàu sẽ đến trong ít phút nữa.		/ˈʃɔːtli/
+throughout	throughout	preposition	4	time	suốt từ đầu đến cuối	trong toàn bộ một khoảng thời gian	It rained throughout the night.	Trời mưa suốt đêm.		/θruːˈaʊt/
+within	within	preposition	4	time	trong vòng	không quá một khoảng thời gian	Please reply within three days.	Vui lòng trả lời trong vòng ba ngày.		/wɪˈðɪn/
+whenever	whenever	conjunction	4	time	bất cứ khi nào	vào bất kỳ lúc nào, mỗi lần	Call me whenever you need help.	Hãy gọi tôi bất cứ khi nào bạn cần giúp.		/wenˈevə/

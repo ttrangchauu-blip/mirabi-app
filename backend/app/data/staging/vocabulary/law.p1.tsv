@@ -1,0 +1,87 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+law	law	noun	1	law	luật, pháp luật	hệ thống quy tắc do nhà nước đặt ra, mọi người phải tuân theo	Everyone must follow the law.	Mọi người đều phải tuân theo pháp luật.		/lɔː/
+police	police	noun	1	law	cảnh sát, công an	lực lượng giữ trật tự và bắt tội phạm	The police came very quickly.	Cảnh sát đã đến rất nhanh.		/pəˈliːs/
+crime	crime	noun	1	law	tội ác, tội phạm	hành vi trái pháp luật như trộm cắp, giết người	Crime in this city is going down.	Tội phạm ở thành phố này đang giảm.		/kraɪm/
+prison	prison	noun	1	law	nhà tù	nơi giam giữ người phạm tội	He spent five years in prison.	Anh ta đã ở tù năm năm.	jail	/ˈprɪzn/
+judge.court	judge	noun	1	law	thẩm phán, quan tòa	người xử án trong phiên tòa	The judge listened to both sides.	Thẩm phán đã lắng nghe cả hai bên.		/dʒʌdʒ/
+court.law	court	noun	1	law	tòa án	nơi xét xử các vụ án	The case will go to court next month.	Vụ án sẽ được đưa ra tòa vào tháng sau.		/kɔːt/
+lawyer	lawyer	noun	1	law	luật sư	người tư vấn và bào chữa về pháp luật	You should talk to a lawyer first.	Bạn nên nói chuyện với luật sư trước.	attorney	/ˈlɔːjə/
+steal	steal	verb	1	law	ăn trộm, lấy cắp	lén lấy đồ của người khác	Someone stole my bike last night.	Ai đó đã lấy trộm xe đạp của tôi tối qua.		/stiːl/
+thief	thief	noun	1	law	kẻ trộm	người lén lấy đồ của người khác, không dùng vũ lực	The thief ran away with my bag.	Tên trộm đã chạy mất cùng cái túi của tôi.		/θiːf/
+kill	kill	verb	1	law	giết	làm cho người hoặc con vật chết	The man was killed in the attack.	Người đàn ông đã bị giết trong vụ tấn công.		/kɪl/
+vote	vote	verb	1	law	bỏ phiếu	chọn người hoặc ý kiến trong một cuộc bầu cử, biểu quyết	Did you vote in the last election?	Bạn có đi bỏ phiếu trong cuộc bầu cử vừa rồi không?		/vəʊt/
+president	president	noun	1	law	tổng thống, chủ tịch nước	người đứng đầu một quốc gia	The president will visit Japan next week.	Tổng thống sẽ thăm Nhật Bản vào tuần tới.		/ˈprezɪdənt/
+government	government	noun	1	law	chính phủ	cơ quan điều hành, quản lý một đất nước	The government will build more schools.	Chính phủ sẽ xây thêm nhiều trường học.		/ˈɡʌvənmənt/
+king	king	noun	1	law	vua, nhà vua	người đàn ông đứng đầu một vương quốc	The king lived in a big palace.	Nhà vua sống trong một cung điện lớn.		/kɪŋ/
+queen	queen	noun	1	law	nữ hoàng, hoàng hậu	người phụ nữ đứng đầu vương quốc hoặc vợ của vua	The queen waved to the people.	Nữ hoàng vẫy tay chào người dân.		/kwiːn/
+rule.regulation	rule	noun	1	law	luật lệ, quy định	điều mọi người phải làm theo ở trường, nơi làm việc, trò chơi	You must not break the rules.	Bạn không được vi phạm quy định.		/ruːl/
+right.entitlement	right	noun	1	law	quyền, quyền lợi	điều mà mỗi người được phép có hoặc làm theo luật	Every child has the right to go to school.	Mọi trẻ em đều có quyền được đi học.		/raɪt/
+free.liberty	free	adjective	1	law	tự do (không bị giam giữ)	không bị nhốt, không bị người khác kiểm soát	After ten years, he was free again.	Sau mười năm, anh ấy lại được tự do.		/friː/
+election	election	noun	1	law	cuộc bầu cử	khi người dân bỏ phiếu chọn người lãnh đạo	The next election is in May.	Cuộc bầu cử tiếp theo diễn ra vào tháng Năm.		/ɪˈlekʃn/
+prisoner	prisoner	noun	1	law	tù nhân	người đang bị giam trong nhà tù	The prisoners eat lunch at noon.	Các tù nhân ăn trưa lúc giữa trưa.		/ˈprɪznə/
+rob	rob	verb	1	law	cướp	lấy tiền, đồ của người hoặc nơi nào đó, thường dùng vũ lực	Two men robbed the bank yesterday.	Hai người đàn ông đã cướp ngân hàng hôm qua.		/rɒb/
+robber	robber	noun	1	law	tên cướp	người lấy tài sản bằng vũ lực hoặc đe dọa	The robber had a gun.	Tên cướp có một khẩu súng.		/ˈrɒbə/
+gun	gun	noun	1	law	khẩu súng	vũ khí bắn đạn	Police officers here do not carry guns.	Cảnh sát ở đây không mang súng.		/ɡʌn/
+prime_minister	prime minister	collocation	1	law	thủ tướng	người đứng đầu chính phủ ở nhiều nước	The prime minister met the workers.	Thủ tướng đã gặp gỡ các công nhân.
+police_station	police station	collocation	1	law	đồn cảnh sát, đồn công an	nơi làm việc của cảnh sát, nơi đến trình báo	I went to the police station to report my lost bag.	Tôi đến đồn công an để trình báo việc mất túi.
+call_the_police	call the police	collocation	1	law	gọi cảnh sát	khi gặp trộm cướp hoặc chuyện nguy hiểm	Call the police! Someone is in my house!	Gọi cảnh sát đi! Có người trong nhà tôi!
+break_the_law	break the law	collocation	1	law	vi phạm pháp luật	làm điều mà luật pháp cấm	If you drive too fast, you break the law.	Nếu lái xe quá nhanh, bạn vi phạm pháp luật.
+break_the_rules	break the rules	collocation	1	law	vi phạm nội quy, phạm luật lệ	không làm theo quy định của trường, công ty, trò chơi	He was punished for breaking the rules.	Cậu ấy bị phạt vì vi phạm nội quy.
+follow_the_rules	follow the rules	collocation	1	law	tuân thủ quy định	làm đúng theo luật lệ đã đặt ra	Please follow the rules in the library.	Vui lòng tuân thủ quy định trong thư viện.
+against_the_law	against the law	collocation	1	law	trái pháp luật, phạm luật	nói về việc bị luật cấm	Stealing is against the law.	Trộm cắp là trái pháp luật.
+go_to_prison	go to prison	collocation	1	law	đi tù, vào tù	bị tòa xử phải ở trong nhà tù	If he is guilty, he will go to prison.	Nếu có tội, anh ta sẽ phải vào tù.	go to jail
+vote_for	vote for	phrasal_verb	1	law	bỏ phiếu cho, bầu cho	chọn ủng hộ một người hoặc đảng trong bầu cử	Who did you vote for?	Bạn đã bầu cho ai?
+traffic_police	traffic police	collocation	1	law	cảnh sát giao thông	cảnh sát làm nhiệm vụ trên đường, kiểm tra xe cộ	The traffic police stopped my car.	Cảnh sát giao thông đã dừng xe tôi lại.
+guilty.law	guilty	adjective	2	law	có tội	khi tòa kết luận ai đó đã phạm tội	The court decided that he was guilty.	Tòa án kết luận rằng anh ta có tội.		/ˈɡɪlti/
+innocent	innocent	adjective	2	law	vô tội	không phạm tội mà mình bị cáo buộc	She says she is innocent.	Cô ấy nói rằng mình vô tội.		/ˈɪnəsnt/
+legal	legal	adjective	2	law	hợp pháp	được pháp luật cho phép	Is it legal to park here?	Đỗ xe ở đây có hợp pháp không?		/ˈliːɡl/
+illegal	illegal	adjective	2	law	bất hợp pháp	bị pháp luật cấm	It is illegal to sell drugs.	Buôn bán ma túy là bất hợp pháp.		/ɪˈliːɡl/
+illegally	illegally	adverb	2	law	một cách bất hợp pháp	làm việc gì trái với pháp luật	The car was parked illegally.	Chiếc xe đã đỗ trái phép.		/ɪˈliːɡəli/
+political	political	adjective	2	law	thuộc về chính trị	liên quan đến chính phủ, đảng phái, quyền lực	They talked about political problems.	Họ nói về các vấn đề chính trị.		/pəˈlɪtɪkl/
+violent	violent	adjective	2	law	bạo lực, hung bạo	dùng sức mạnh để làm hại người khác	He was sent to prison for a violent crime.	Hắn bị vào tù vì một tội ác bạo lực.		/ˈvaɪələnt/
+missing	missing	adjective	2	law	mất tích	người không rõ đang ở đâu, gia đình phải báo cảnh sát	The police are looking for a missing child.	Cảnh sát đang tìm một đứa trẻ mất tích.		/ˈmɪsɪŋ/
+criminal.person	criminal	noun	2	law	tội phạm, kẻ phạm tội	người đã làm điều trái pháp luật	The police caught the criminal at the airport.	Cảnh sát đã bắt được tên tội phạm ở sân bay.		/ˈkrɪmɪnl/
+robbery	robbery	noun	2	law	vụ cướp	việc lấy tài sản bằng vũ lực hoặc đe dọa	There was a robbery at the bank today.	Hôm nay có một vụ cướp ở ngân hàng.		/ˈrɒbəri/
+theft	theft	noun	2	law	tội trộm cắp, vụ trộm	việc lấy đồ của người khác mà không dùng vũ lực	Car theft is common in big cities.	Trộm xe hơi khá phổ biến ở các thành phố lớn.		/θeft/
+murder	murder	noun	2	law	vụ giết người, tội giết người	việc cố ý giết người	The police are investigating a murder.	Cảnh sát đang điều tra một vụ giết người.		/ˈmɜːdə/
+punishment	punishment	noun	2	law	sự trừng phạt, hình phạt	điều phải chịu khi làm sai hoặc phạm tội	The punishment for theft is a fine or prison.	Hình phạt cho tội trộm cắp là nộp phạt hoặc ngồi tù.		/ˈpʌnɪʃmənt/
+arrest	arrest	verb	2	law	bắt giữ	khi cảnh sát bắt người bị nghi phạm tội	The police arrested two young men.	Cảnh sát đã bắt giữ hai thanh niên.		/əˈrest/
+under_arrest	under arrest	collocation	2	law	bị bắt giữ	câu cảnh sát nói khi bắt ai đó	You are under arrest!	Anh đã bị bắt!
+obey.law	obey	verb	2	law	tuân theo, chấp hành	làm theo luật, lệnh hoặc quy định	All drivers must obey the law.	Tất cả tài xế phải chấp hành pháp luật.		/əˈbeɪ/
+elect	elect	verb	2	law	bầu, bầu chọn	người dân bỏ phiếu chọn ai đó vào một chức vụ	She was elected mayor last year.	Bà ấy được bầu làm thị trưởng năm ngoái.		/ɪˈlekt/
+ban	ban	verb	2	law	cấm	khi chính quyền hoặc tổ chức chính thức không cho làm gì nữa	The city banned smoking in parks.	Thành phố đã cấm hút thuốc trong công viên.		/bæn/
+release.prison	release	verb	2	law	thả, trả tự do	cho người bị giam được ra khỏi tù	He was released from prison last week.	Anh ta được ra tù tuần trước.		/rɪˈliːs/
+witness	witness	noun	2	law	nhân chứng	người đã nhìn thấy sự việc xảy ra	The police need witnesses to the accident.	Cảnh sát cần nhân chứng của vụ tai nạn.		/ˈwɪtnəs/
+victim	victim	noun	2	law	nạn nhân	người bị hại trong một vụ phạm tội	The victim was taken to hospital.	Nạn nhân đã được đưa đến bệnh viện.		/ˈvɪktɪm/
+evidence.law	evidence	noun	2	law	bằng chứng, chứng cứ	thứ chứng minh ai đó có tội hay vô tội	There is no evidence against him.	Không có bằng chứng nào chống lại anh ta.		/ˈevɪdəns/
+suspect.person	suspect	noun	2	law	nghi phạm	người bị cảnh sát nghi là đã phạm tội	The police are talking to the suspect now.	Cảnh sát đang thẩm vấn nghi phạm.		/ˈsʌspekt/
+detective	detective	noun	2	law	thám tử	cảnh sát hoặc người chuyên điều tra các vụ án	The detective found an important clue.	Thám tử đã tìm thấy một manh mối quan trọng.		/dɪˈtektɪv/
+fingerprint	fingerprint	noun	2	law	dấu vân tay	dấu do đầu ngón tay để lại, dùng để tìm tội phạm	They found his fingerprints on the window.	Họ tìm thấy dấu vân tay của hắn trên cửa sổ.		/ˈfɪŋɡəprɪnt/
+trial	trial	noun	2	law	phiên tòa, sự xét xử	khi tòa án xem xét một vụ án để quyết định có tội hay không	The trial lasted three days.	Phiên tòa kéo dài ba ngày.		/ˈtraɪəl/
+justice	justice	noun	2	law	công lý	sự đối xử đúng đắn, công bằng theo pháp luật	The family wants justice for their son.	Gia đình muốn đòi công lý cho con trai họ.		/ˈdʒʌstɪs/
+voter	voter	noun	2	law	cử tri	người có quyền đi bỏ phiếu	Many young voters did not vote.	Nhiều cử tri trẻ đã không đi bỏ phiếu.		/ˈvəʊtə/
+candidate	candidate	noun	2	law	ứng cử viên	người ra tranh cử một chức vụ	There are three candidates for mayor.	Có ba ứng cử viên cho chức thị trưởng.		/ˈkændɪdət/
+minister	minister	noun	2	law	bộ trưởng	người đứng đầu một bộ trong chính phủ	The health minister visited the hospital.	Bộ trưởng Bộ Y tế đã đến thăm bệnh viện.		/ˈmɪnɪstə/
+mayor	mayor	noun	2	law	thị trưởng	người đứng đầu chính quyền một thành phố	The mayor opened the new bridge.	Thị trưởng đã khánh thành cây cầu mới.		/meə/
+politics	politics	noun	2	law	chính trị	hoạt động của chính phủ, đảng phái và việc nắm quyền	He is not interested in politics.	Anh ấy không quan tâm đến chính trị.		/ˈpɒlətɪks/
+politician	politician	noun	2	law	chính trị gia	người làm chính trị, thường được bầu vào chức vụ	Many people do not trust politicians.	Nhiều người không tin các chính trị gia.		/ˌpɒləˈtɪʃn/
+party.politics	party	noun	2	law	đảng, đảng phái chính trị	nhóm người có chung quan điểm, tranh cử để nắm quyền	Which party won the election?	Đảng nào đã thắng cuộc bầu cử?		/ˈpɑːti/
+freedom	freedom	noun	2	law	sự tự do	quyền được làm, nói, nghĩ điều mình muốn	People fought hard for their freedom.	Người dân đã đấu tranh gian khổ vì tự do.		/ˈfriːdəm/
+democracy	democracy	noun	2	law	nền dân chủ	chế độ trong đó người dân bầu ra người lãnh đạo	In a democracy, people choose their leaders.	Trong một nền dân chủ, người dân chọn người lãnh đạo.		/dɪˈmɒkrəsi/
+commit_a_crime	commit a crime	collocation	2	law	phạm tội, gây án	làm một việc trái pháp luật	He said he did not commit the crime.	Anh ta nói mình không phạm tội.
+human_rights	human rights	collocation	2	law	nhân quyền, quyền con người	những quyền cơ bản mà mọi người đều có	Every country must respect human rights.	Mọi quốc gia phải tôn trọng nhân quyền.
+the_right_to_vote	the right to vote	collocation	2	law	quyền bầu cử	quyền được đi bỏ phiếu của công dân	Women did not always have the right to vote.	Không phải lúc nào phụ nữ cũng có quyền bầu cử.
+go_to_court	go to court	collocation	2	law	ra tòa, kiện ra tòa	đưa một tranh chấp hoặc vụ án đến tòa án giải quyết	They decided to go to court.	Họ quyết định đưa nhau ra tòa.
+lock_up	lock up	phrasal_verb	2	law	tống giam, nhốt lại	đưa ai vào tù hoặc nơi giam giữ	People like him should be locked up.	Những kẻ như hắn nên bị tống giam.
+break_into	break into	phrasal_verb	2	law	đột nhập (để trộm)	vào nhà, xe của người khác bằng cách phá cửa	Someone broke into our house last night.	Có kẻ đã đột nhập vào nhà chúng tôi tối qua.
+vote_against	vote against	phrasal_verb	2	law	bỏ phiếu phản đối, bỏ phiếu chống	không ủng hộ một người hoặc đề xuất khi bỏ phiếu	Most people voted against the plan.	Hầu hết mọi người đã bỏ phiếu chống kế hoạch.
+win_an_election	win an election	collocation	2	law	thắng cử, đắc cử	được nhiều phiếu nhất trong cuộc bầu cử	It is hard to win an election without money.	Rất khó thắng cử nếu không có tiền.
+fight_crime	fight crime	collocation	2	law	chống tội phạm	nỗ lực ngăn chặn và giảm tội phạm	The city needs more police to fight crime.	Thành phố cần thêm cảnh sát để chống tội phạm.
+get_caught	get caught	collocation	2	law	bị bắt, bị phát hiện	bị người khác phát hiện ra khi làm điều sai	He stole a phone but got caught.	Hắn ăn cắp điện thoại nhưng bị phát hiện.
+report_a_crime	report a crime	collocation	2	law	trình báo tội phạm, báo án	đến hoặc gọi cảnh sát để kể lại vụ việc	You can report a crime online.	Bạn có thể báo án qua mạng.
+crime_scene	crime scene	collocation	2	law	hiện trường vụ án	nơi tội ác đã xảy ra	Nobody may enter the crime scene.	Không ai được vào hiện trường vụ án.
+pass_a_law	pass a law	collocation	2	law	thông qua một đạo luật	khi quốc hội đồng ý ban hành luật mới	They passed a law against smoking in bars.	Họ đã thông qua luật cấm hút thuốc trong quán bar.
+election_day	election day	collocation	2	law	ngày bầu cử	ngày người dân đi bỏ phiếu	Schools are closed on election day.	Trường học được nghỉ vào ngày bầu cử.
+election_results	election results	collocation	2	law	kết quả bầu cử	số phiếu và người thắng sau khi bầu cử	We are waiting for the election results.	Chúng tôi đang chờ kết quả bầu cử.
+vice_president	vice president	collocation	2	law	phó tổng thống, phó chủ tịch	người đứng thứ hai sau tổng thống	The vice president will speak tonight.	Phó tổng thống sẽ phát biểu tối nay.
+police_force	police force	collocation	2	law	lực lượng cảnh sát	toàn bộ cảnh sát của một nước hoặc thành phố	She joined the police force at twenty.	Cô ấy gia nhập lực lượng cảnh sát năm hai mươi tuổi.

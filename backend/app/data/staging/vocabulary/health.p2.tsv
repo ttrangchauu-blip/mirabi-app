@@ -1,0 +1,100 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+treat.illness	treat	verb	3	health	điều trị, chữa trị	bác sĩ dùng thuốc hoặc phương pháp để chữa bệnh	The doctors treated him for a broken leg.	Các bác sĩ đã điều trị chân gãy cho anh ấy.		/triːt/
+treatment	treatment	noun	3	health	sự điều trị, phương pháp chữa trị	cách bác sĩ chữa một bệnh	She is getting treatment for her back pain.	Cô ấy đang được điều trị chứng đau lưng.		/ˈtriːtmənt/
+heal	heal	verb	3	health	lành lại, làm lành	vết thương, xương gãy dần khỏi	The cut on my finger healed quickly.	Vết đứt trên ngón tay tôi lành nhanh.		/hiːl/
+cure	cure	verb	3	health	chữa khỏi	làm cho một bệnh hết hẳn	Doctors still cannot cure the common cold.	Các bác sĩ vẫn chưa thể chữa khỏi bệnh cảm thông thường.		/kjʊə/
+recovery	recovery	noun	3	health	sự hồi phục	quá trình khỏe lại sau bệnh, mổ, chấn thương	We wish you a quick recovery.	Chúc bạn mau chóng hồi phục.		/rɪˈkʌvəri/
+surgery	surgery	noun	3	health	phẫu thuật, việc mổ	phương pháp chữa bệnh bằng cách mổ, thường không đếm được	He needs surgery on his heart.	Anh ấy cần phẫu thuật tim.		/ˈsɜːdʒəri/
+surgeon	surgeon	noun	3	health	bác sĩ phẫu thuật	bác sĩ chuyên mổ cho bệnh nhân	The surgeon said the operation went well.	Bác sĩ phẫu thuật nói ca mổ diễn ra tốt đẹp.		/ˈsɜːdʒən/
+pharmacist	pharmacist	noun	3	health	dược sĩ	người bán và tư vấn thuốc ở hiệu thuốc	Ask the pharmacist how to take this medicine.	Hãy hỏi dược sĩ cách uống thuốc này.	chemist	/ˈfɑːməsɪst/
+swallow	swallow	verb	3	health	nuốt	đưa thức ăn, thuốc từ miệng xuống họng	It hurts when I swallow.	Tôi bị đau khi nuốt.		/ˈswɒləʊ/
+faint	faint	verb	3	health	ngất, xỉu	bất tỉnh trong thời gian ngắn vì nóng, đói, mất máu	She fainted in the hot sun.	Cô ấy bị ngất dưới trời nắng nóng.	pass out	/feɪnt/
+vomit	vomit	verb	3	health	nôn mửa	cách nói trang trọng, dùng trong y khoa	The patient vomited twice during the night.	Bệnh nhân nôn hai lần trong đêm.		/ˈvɒmɪt/
+shiver	shiver	verb	3	health	run rẩy	cơ thể run lên vì lạnh hoặc sốt	He was shivering with fever.	Anh ấy run lên vì sốt.		/ˈʃɪvə/
+scratch.itch	scratch	verb	3	health	gãi	dùng móng tay cào lên chỗ ngứa	Try not to scratch the mosquito bites.	Cố đừng gãi chỗ muỗi đốt.		/skrætʃ/
+stretch.muscle	stretch	verb	3	health	giãn cơ, duỗi người	kéo căng cơ trước hoặc sau khi tập	Always stretch before you go running.	Luôn giãn cơ trước khi đi chạy.		/stretʃ/
+examine.patient	examine	verb	3	health	khám (bệnh)	bác sĩ xem xét cơ thể người bệnh	The doctor examined my throat.	Bác sĩ khám họng cho tôi.		/ɪɡˈzæmɪn/
+snore	snore	verb	3	health	ngáy	phát ra tiếng ồn khi thở lúc ngủ	My husband snores so loudly that I can't sleep.	Chồng tôi ngáy to đến nỗi tôi không ngủ được.		/snɔː/
+infection	infection	noun	3	health	sự nhiễm trùng	bệnh do vi khuẩn hoặc vi-rút xâm nhập cơ thể	Keep the cut clean to avoid infection.	Giữ vết đứt sạch sẽ để tránh nhiễm trùng.		/ɪnˈfekʃn/
+allergy	allergy	noun	3	health	chứng dị ứng	cơ thể phản ứng xấu với thức ăn, phấn hoa, bụi	I have an allergy to peanuts.	Tôi bị dị ứng đậu phộng.		/ˈælədʒi/
+rash	rash	noun	3	health	phát ban, mẩn đỏ	nhiều nốt đỏ nổi trên da	The baby has a rash on her face.	Em bé bị nổi mẩn đỏ trên mặt.		/ræʃ/
+wound	wound	noun	3	health	vết thương	chỗ bị thương sâu do dao, súng, tai nạn	The nurse cleaned the wound.	Y tá đã rửa vết thương.		/wuːnd/
+scar	scar	noun	3	health	vết sẹo	dấu vết còn lại trên da sau khi vết thương lành	He has a scar on his chin.	Anh ấy có một vết sẹo ở cằm.		/skɑː/
+swollen	swollen	adjective	3	health	sưng, sưng phồng	bộ phận cơ thể to lên sau khi bị thương, bị đốt	My ankle is swollen after the fall.	Mắt cá chân tôi bị sưng sau cú ngã.		/ˈswəʊlən/
+hiccups	hiccups	noun	3	health	nấc cụt	những tiếng nấc liên tục không kiểm soát được	I get hiccups when I eat too fast.	Tôi bị nấc khi ăn quá nhanh.	hiccoughs	/ˈhɪkʌps/
+pulse	pulse	noun	3	health	mạch, nhịp mạch	nhịp đập của tim cảm nhận được ở cổ tay	The nurse checked my pulse.	Y tá kiểm tra mạch cho tôi.		/pʌls/
+organ.body	organ	noun	3	health	cơ quan, nội tạng	bộ phận bên trong cơ thể như tim, gan, phổi	The heart is a very important organ.	Tim là một cơ quan rất quan trọng.		/ˈɔːɡən/
+liver	liver	noun	3	health	gan	cơ quan lọc chất độc trong cơ thể	Drinking too much alcohol can damage your liver.	Uống quá nhiều rượu có thể làm hại gan.		/ˈlɪvə/
+kidney	kidney	noun	3	health	thận	một trong hai cơ quan lọc máu và tạo ra nước tiểu	Drink water to keep your kidneys healthy.	Uống nước để giữ cho thận khỏe mạnh.		/ˈkɪdni/
+eyesight	eyesight	noun	3	health	thị lực	khả năng nhìn của mắt	My eyesight is getting worse, so I need glasses.	Thị lực của tôi đang kém đi nên tôi cần đeo kính.		/ˈaɪsaɪt/
+hearing.sense	hearing	noun	3	health	thính lực, khả năng nghe	khả năng nghe của tai	Loud music can damage your hearing.	Nhạc to có thể làm hỏng thính lực của bạn.		/ˈhɪərɪŋ/
+crutch	crutch	noun	3	health	cái nạng	gậy chống dưới nách giúp người bị đau chân đi lại	He walked on crutches for six weeks.	Anh ấy phải chống nạng trong sáu tuần.		/krʌtʃ/
+thermometer	thermometer	noun	3	health	nhiệt kế	dụng cụ đo thân nhiệt	Put the thermometer under your tongue.	Đặt nhiệt kế dưới lưỡi.		/θəˈmɒmɪtə/
+protein	protein	noun	3	health	chất đạm	chất có trong thịt, cá, trứng, đậu, giúp xây dựng cơ bắp	Eggs and fish are rich in protein.	Trứng và cá giàu chất đạm.		/ˈprəʊtiːn/
+depression	depression	noun	3	health	bệnh trầm cảm	tình trạng buồn bã kéo dài, cần được điều trị	She was treated for depression after losing her job.	Cô ấy được điều trị trầm cảm sau khi mất việc.		/dɪˈpreʃn/
+dental	dental	adjective	3	health	thuộc về răng, nha khoa	liên quan đến răng và việc chữa răng	Regular dental check-ups are important.	Khám răng định kỳ là rất quan trọng.		/ˈdentl/
+physical	physical	adjective	3	health	thuộc về thể chất	liên quan đến cơ thể, không phải tinh thần	Physical activity helps you sleep better.	Hoạt động thể chất giúp bạn ngủ ngon hơn.		/ˈfɪzɪkl/
+mental	mental	adjective	3	health	thuộc về tinh thần	liên quan đến tâm trí, suy nghĩ, cảm xúc	Stress can affect your mental and physical health.	Căng thẳng có thể ảnh hưởng đến sức khỏe tinh thần và thể chất của bạn.		/ˈmentl/
+pregnant	pregnant	adjective	3	health	có thai, mang bầu	người phụ nữ đang mang em bé trong bụng	My sister is pregnant with her first baby.	Chị tôi đang mang thai đứa con đầu lòng.		/ˈpreɡnənt/
+disabled	disabled	adjective	3	health	khuyết tật	có một phần cơ thể hoặc trí tuệ không hoạt động bình thường	The building has a lift for disabled people.	Tòa nhà có thang máy cho người khuyết tật.		/dɪsˈeɪbld/
+hygiene	hygiene	noun	3	health	vệ sinh	việc giữ cơ thể, đồ vật sạch sẽ để phòng bệnh	Good hygiene stops germs from spreading.	Giữ vệ sinh tốt giúp ngăn vi trùng lây lan.		/ˈhaɪdʒiːn/
+lifestyle	lifestyle	noun	3	health	lối sống	cách sống hằng ngày: ăn uống, ngủ nghỉ, vận động	He changed his lifestyle after his heart attack.	Ông ấy đã thay đổi lối sống sau cơn nhồi máu cơ tim.		/ˈlaɪfstaɪl/
+therapy	therapy	noun	3	health	liệu pháp, trị liệu	cách chữa bệnh lâu dài, không dùng phẫu thuật	She goes to therapy once a week.	Cô ấy đi trị liệu mỗi tuần một lần.		/ˈθerəpi/
+ward.hospital	ward	noun	3	health	khu bệnh, phòng bệnh	phòng lớn có nhiều giường trong bệnh viện	The children's ward is on the second floor.	Khu bệnh nhi ở tầng hai.		/wɔːd/
+physically	physically	adverb	3	health	về mặt thể chất	nói về cơ thể, sức lực	The job is physically hard.	Công việc này vất vả về mặt thể chất.		/ˈfɪzɪkli/
+mentally	mentally	adverb	3	health	về mặt tinh thần	nói về tâm trí, cảm xúc	After the exams I felt mentally tired.	Sau kỳ thi tôi thấy mệt mỏi về tinh thần.		/ˈmentəli/
+healthily	healthily	adverb	3	health	một cách lành mạnh	ăn uống, sống theo cách tốt cho sức khỏe	I try to eat healthily during the week.	Tôi cố gắng ăn uống lành mạnh trong tuần.		/ˈhelθɪli/
+balanced_diet	balanced diet	collocation	3	health	chế độ ăn cân bằng	ăn đủ các nhóm chất với lượng hợp lý	A balanced diet includes fruit, vegetables and protein.	Chế độ ăn cân bằng gồm trái cây, rau và chất đạm.
+blood_pressure	blood pressure	noun	3	health	huyết áp	áp lực của máu trong mạch, bác sĩ thường đo	The nurse will check your blood pressure.	Y tá sẽ đo huyết áp cho bạn.
+heart_attack	heart attack	noun	3	health	cơn nhồi máu cơ tim	khi tim đột ngột bị thiếu máu, rất nguy hiểm	He had a heart attack at the age of fifty.	Ông ấy bị nhồi máu cơ tim năm năm mươi tuổi.
+pass_out	pass out	phrasal_verb	3	health	ngất đi, bất tỉnh	cách nói thông thường, khi bị ngất vì nóng, mệt	It was so hot that two runners passed out.	Trời nóng đến mức hai vận động viên bị ngất.	faint
+fall_ill	fall ill	collocation	3	health	đổ bệnh, lâm bệnh	bắt đầu bị ốm, thường đột ngột	She fell ill during her holiday.	Cô ấy đổ bệnh trong kỳ nghỉ.	fall sick|get sick
+put_on_weight	put on weight	collocation	3	health	tăng cân	trở nên nặng hơn, thường do ăn nhiều	I put on weight over the holidays.	Tôi tăng cân trong kỳ nghỉ lễ.	gain weight
+cut_down_on	cut down on	phrasal_verb	3	health	cắt giảm, ăn uống bớt	dùng ít đi đồ có hại như đường, muối, cà phê	You should cut down on sugar.	Bạn nên ăn bớt đường.
+get_over.illness	get over	phrasal_verb	3	health	khỏi (bệnh), vượt qua	hết hẳn một bệnh nhẹ như cảm, cúm	It took me a week to get over the flu.	Tôi mất một tuần mới khỏi cúm.
+out_of_breath	out of breath	collocation	3	health	hụt hơi, thở không ra hơi	sau khi chạy hoặc leo cầu thang	I was out of breath after climbing the stairs.	Tôi thở không ra hơi sau khi leo cầu thang.	short of breath
+side_effect	side effect	noun	3	health	tác dụng phụ	ảnh hưởng không mong muốn của thuốc	This medicine may have side effects such as headaches.	Thuốc này có thể gây tác dụng phụ như đau đầu.
+food_poisoning	food poisoning	noun	3	health	ngộ độc thực phẩm	bị ốm do ăn đồ ăn bẩn hoặc hỏng	Half the guests got food poisoning from the fish.	Một nửa số khách bị ngộ độc thực phẩm vì món cá.
+eye_drops	eye drops	noun	3	health	thuốc nhỏ mắt	thuốc nước dùng để nhỏ vào mắt	Use these eye drops twice a day.	Dùng thuốc nhỏ mắt này hai lần một ngày.
+get_vaccinated	get vaccinated	collocation	3	health	đi tiêm phòng	tiêm vắc-xin để phòng bệnh	Children should get vaccinated against measles.	Trẻ em nên được tiêm phòng sởi.
+blood_test	blood test	noun	3	health	xét nghiệm máu	lấy máu để kiểm tra bệnh	The doctor sent me for a blood test.	Bác sĩ cho tôi đi xét nghiệm máu.
+take_your_temperature	take your temperature	collocation	3	health	cặp nhiệt độ, đo thân nhiệt	dùng nhiệt kế đo xem có bị sốt không	Sit down and let me take your temperature.	Ngồi xuống để mẹ cặp nhiệt độ cho con.
+family_doctor	family doctor	noun	3	health	bác sĩ gia đình	bác sĩ khám bệnh thường xuyên cho cả gia đình	You should talk to your family doctor first.	Bạn nên nói chuyện với bác sĩ gia đình trước.	GP
+pull_a_muscle	pull a muscle	collocation	3	health	bị căng cơ	làm cơ bị giãn quá mức khi tập luyện	I pulled a muscle in my leg playing football.	Tôi bị căng cơ chân khi đá bóng.
+twist_your_ankle	twist your ankle	collocation	3	health	bị trẹo mắt cá chân	khi bước hụt, chân bị lật	Be careful on the stairs or you'll twist your ankle.	Cẩn thận trên cầu thang kẻo bị trẹo chân.
+skip_meals	skip meals	collocation	3	health	bỏ bữa	không ăn một bữa chính, thói quen có hại	Skipping meals is bad for your health.	Bỏ bữa không tốt cho sức khỏe.
+take_it_easy	take it easy	phrase	3	health	nghỉ ngơi, đừng gắng sức	lời khuyên cho người mới ốm dậy hoặc đang mệt	The doctor told me to take it easy for a few days.	Bác sĩ bảo tôi nghỉ ngơi, đừng gắng sức vài ngày.
+in_good_shape	in good shape	collocation	3	health	có thể lực tốt	cơ thể khỏe và săn chắc nhờ vận động	She runs every day, so she's in good shape.	Cô ấy chạy bộ mỗi ngày nên có thể lực tốt.	in shape
+suffer_from	suffer from	phrasal_verb	4	health	mắc, bị (bệnh)	bị một bệnh hoặc vấn đề sức khỏe, thường lâu dài	My mother suffers from back pain.	Mẹ tôi bị đau lưng.
+come_down_with	come down with	phrasal_verb	4	health	bị mắc (bệnh nhẹ)	bắt đầu bị một bệnh như cảm, cúm	I think I'm coming down with a cold.	Tôi nghĩ mình sắp bị cảm rồi.
+diabetes	diabetes	noun	4	health	bệnh tiểu đường	bệnh do lượng đường trong máu quá cao	People with diabetes must watch how much sugar they eat.	Người bị tiểu đường phải chú ý lượng đường mình ăn.		/ˌdaɪəˈbiːtiːz/
+asthma	asthma	noun	4	health	bệnh hen suyễn	bệnh làm khó thở, hay lên cơn khi gặp bụi, khói	My brother has asthma, so he can't run for long.	Em trai tôi bị hen suyễn nên không chạy lâu được.		/ˈæsmə/
+stroke.illness	stroke	noun	4	health	đột quỵ, tai biến	khi mạch máu trong não bị tắc hoặc vỡ	My grandfather had a stroke and can't walk well now.	Ông tôi bị đột quỵ và giờ đi lại khó khăn.		/strəʊk/
+migraine	migraine	noun	4	health	chứng đau nửa đầu	cơn đau đầu rất nặng, thường kèm buồn nôn	Bright lights give her a migraine.	Ánh sáng chói làm cô ấy bị đau nửa đầu.		/ˈmiːɡreɪn/
+insomnia	insomnia	noun	4	health	chứng mất ngủ	tình trạng khó ngủ kéo dài nhiều đêm	Stress at work gave him insomnia.	Căng thẳng công việc khiến anh ấy mất ngủ.		/ɪnˈsɒmniə/
+fatigue	fatigue	noun	4	health	sự mệt mỏi kéo dài	cảm giác rất mệt, thường là triệu chứng của bệnh	Fatigue is a common symptom of the illness.	Mệt mỏi là một triệu chứng phổ biến của bệnh này.		/fəˈtiːɡ/
+nutrition	nutrition	noun	4	health	dinh dưỡng	việc ăn uống đủ chất để cơ thể khỏe mạnh	Good nutrition is important for young children.	Dinh dưỡng tốt rất quan trọng với trẻ nhỏ.		/njuˈtrɪʃn/
+nutrient	nutrient	noun	4	health	chất dinh dưỡng	chất cơ thể cần, như vitamin, đạm, khoáng chất	Vegetables are full of nutrients.	Rau củ chứa đầy chất dinh dưỡng.		/ˈnjuːtriənt/
+obese	obese	adjective	4	health	béo phì	quá béo đến mức có hại cho sức khỏe	More and more children are becoming obese.	Ngày càng nhiều trẻ em bị béo phì.		/əʊˈbiːs/
+infectious	infectious	adjective	4	health	truyền nhiễm	bệnh do vi khuẩn, vi-rút gây ra và lây được	Measles is a very infectious disease.	Sởi là một bệnh truyền nhiễm rất mạnh.		/ɪnˈfekʃəs/
+infect	infect	verb	4	health	lây nhiễm, làm nhiễm bệnh	vi khuẩn, vi-rút truyền sang người hoặc vết thương	The virus can infect people of all ages.	Vi-rút có thể lây nhiễm cho người ở mọi lứa tuổi.		/ɪnˈfekt/
+outbreak	outbreak	noun	4	health	sự bùng phát (dịch bệnh)	khi một bệnh đột nhiên xuất hiện ở nhiều người	There was an outbreak of flu at the school.	Đã có một đợt bùng phát cúm ở trường.		/ˈaʊtbreɪk/
+spine	spine	noun	4	health	cột sống	chuỗi xương chạy dọc giữa lưng	Sitting badly can hurt your spine.	Ngồi sai tư thế có thể làm hại cột sống.		/spaɪn/
+vein	vein	noun	4	health	tĩnh mạch, ven	mạch máu đưa máu về tim, nơi y tá lấy máu	The nurse found a vein in my arm.	Y tá tìm thấy ven trên cánh tay tôi.		/veɪn/
+digest	digest	verb	4	health	tiêu hóa	cơ thể phân giải thức ăn sau khi ăn	Some people can't digest milk easily.	Một số người không dễ tiêu hóa sữa.		/daɪˈdʒest/
+dehydrated	dehydrated	adjective	4	health	mất nước	cơ thể thiếu nước do nóng, nôn, tiêu chảy	Drink more water or you'll get dehydrated.	Uống thêm nước đi kẻo bị mất nước.		/ˌdiːhaɪˈdreɪtɪd/
+nauseous	nauseous	adjective	4	health	nôn nao, buồn nôn (trang trọng)	cách nói trang trọng hơn của cảm giác muốn nôn	The medicine made me feel nauseous.	Thuốc làm tôi thấy nôn nao.		/ˈnɔːziəs/
+specialist	specialist	noun	4	health	bác sĩ chuyên khoa	bác sĩ chuyên chữa một loại bệnh hoặc bộ phận	My doctor sent me to a skin specialist.	Bác sĩ của tôi giới thiệu tôi đến bác sĩ chuyên khoa da liễu.		/ˈspeʃəlɪst/
+prescribe	prescribe	verb	4	health	kê đơn (thuốc)	bác sĩ ghi thuốc người bệnh cần dùng	The doctor prescribed some cream for my rash.	Bác sĩ kê cho tôi một loại kem bôi chỗ phát ban.		/prɪˈskraɪb/
+dose	dose	noun	4	health	liều thuốc, liều lượng	lượng thuốc uống mỗi lần	Do not take more than the stated dose.	Không được uống quá liều đã ghi.		/dəʊs/
+antibiotic	antibiotic	noun	4	health	thuốc kháng sinh	thuốc diệt vi khuẩn gây bệnh	Antibiotics don't work against a cold.	Thuốc kháng sinh không có tác dụng với cảm lạnh.		/ˌæntibaɪˈɒtɪk/
+ointment	ointment	noun	4	health	thuốc mỡ	thuốc dạng kem đặc để bôi lên da	Put this ointment on the burn twice a day.	Bôi thuốc mỡ này lên vết bỏng hai lần một ngày.		/ˈɔɪntmənt/
+capsule	capsule	noun	4	health	viên nang	thuốc có vỏ bọc mềm, bên trong là bột hoặc nước	Take one capsule with water.	Uống một viên nang với nước.		/ˈkæpsjuːl/
+therapist	therapist	noun	4	health	nhà trị liệu	người chữa bệnh bằng liệu pháp, thường về tâm lý	Talking to a therapist helped her a lot.	Nói chuyện với nhà trị liệu đã giúp cô ấy rất nhiều.		/ˈθerəpɪst/
+counselling	counselling	noun	4	health	sự tư vấn tâm lý	nói chuyện với chuyên gia để vượt qua khó khăn tinh thần	The school offers free counselling to students.	Trường cung cấp dịch vụ tư vấn tâm lý miễn phí cho học sinh.	counseling	/ˈkaʊnsəlɪŋ/
+anxiety.disorder	anxiety	noun	4	health	chứng rối loạn lo âu	vấn đề sức khỏe tinh thần, lo lắng kéo dài khó kiểm soát	He is getting help for his anxiety.	Anh ấy đang được giúp đỡ để điều trị chứng rối loạn lo âu.		/æŋˈzaɪəti/
+burnout	burnout	noun	4	health	tình trạng kiệt sức vì làm việc quá sức	mệt mỏi cả thể chất lẫn tinh thần vì áp lực kéo dài	Working twelve hours a day led to burnout.	Làm việc mười hai tiếng mỗi ngày dẫn đến kiệt sức.		/ˈbɜːnaʊt/
+fracture	fracture	noun	4	health	chỗ gãy xương, vết nứt xương	xương bị gãy hoặc nứt, thường thấy trên phim chụp	The X-ray showed a small fracture in her wrist.	Phim X-quang cho thấy một chỗ nứt nhỏ ở cổ tay cô ấy.		/ˈfræktʃə/
+immune	immune	adjective	4	health	miễn dịch (với bệnh)	cơ thể không bị mắc một bệnh nào đó nữa	Once you've had chickenpox, you're usually immune to it.	Một khi đã bị thủy đậu, bạn thường sẽ miễn dịch với nó.		/ɪˈmjuːn/
+addiction	addiction	noun	4	health	sự nghiện, chứng nghiện	không thể dừng dùng một chất hoặc làm một việc	He is fighting his addiction to cigarettes.	Anh ấy đang chiến đấu với chứng nghiện thuốc lá.		/əˈdɪkʃn/
+addicted	addicted	adjective	4	health	bị nghiện	không thể ngừng dùng thứ gì, như thuốc lá, rượu, điện thoại	Many teenagers are addicted to their phones.	Nhiều thiếu niên bị nghiện điện thoại.		/əˈdɪktɪd/

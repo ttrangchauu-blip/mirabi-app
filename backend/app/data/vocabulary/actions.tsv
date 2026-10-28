@@ -1,0 +1,301 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic	source	status
+walk	walk	verb	1	actions	đi bộ	di chuyển bằng hai chân, không chạy	I walk to school every day.	Tôi đi bộ đến trường mỗi ngày.		/wɔːk/	mirabi-ai-2026-10	active
+run.move	run	verb	1	actions	chạy	di chuyển nhanh bằng chân	The dog runs to the door.	Con chó chạy ra cửa.		/rʌn/	mirabi-ai-2026-10	active
+jump	jump	verb	1	actions	nhảy, bật lên	bật người lên khỏi mặt đất bằng chân	The cat jumped onto the table.	Con mèo nhảy lên bàn.		/dʒʌmp/	mirabi-ai-2026-10	active
+sit	sit	verb	1	actions	ngồi	ở tư thế ngồi trên ghế, trên sàn	Please sit here.	Mời bạn ngồi đây.		/sɪt/	mirabi-ai-2026-10	active
+stand	stand	verb	1	actions	đứng	ở tư thế thẳng người trên hai chân	Don't stand on the chair!	Đừng đứng lên ghế!		/stænd/	mirabi-ai-2026-10	active
+sit_down	sit down	phrasal_verb	1	actions	ngồi xuống	chuyển từ tư thế đứng sang ngồi	Sit down, please.	Mời ngồi xuống.			mirabi-ai-2026-10	active
+stand_up	stand up	phrasal_verb	1	actions	đứng dậy	chuyển từ tư thế ngồi hoặc nằm sang đứng	Stand up when the teacher comes in.	Hãy đứng dậy khi cô giáo vào lớp.			mirabi-ai-2026-10	active
+open.door	open	verb	1	actions	mở	làm cho cửa, hộp, sách không còn đóng	Can you open the window?	Bạn mở cửa sổ được không?		/ˈəʊpən/	mirabi-ai-2026-10	active
+close.shut	close	verb	1	actions	đóng	làm cho cửa, hộp, sách không còn mở	Please close the door.	Làm ơn đóng cửa lại.	shut	/kləʊz/	mirabi-ai-2026-10	active
+push	push	verb	1	actions	đẩy	dùng tay hoặc người làm vật đi ra xa mình	Push the door to open it.	Đẩy cửa để mở.		/pʊʃ/	mirabi-ai-2026-10	active
+pull	pull	verb	1	actions	kéo	dùng tay làm vật đi về phía mình	Pull the door, don't push it.	Kéo cửa, đừng đẩy.		/pʊl/	mirabi-ai-2026-10	active
+throw	throw	verb	1	actions	ném	dùng tay đẩy vật bay đi trong không khí	Throw the ball to me.	Ném bóng cho tôi.		/θrəʊ/	mirabi-ai-2026-10	active
+catch.object	catch	verb	1	actions	bắt lấy, chụp lấy	giữ lấy vật đang bay hoặc rơi về phía mình	I threw the keys and she caught them.	Tôi ném chùm chìa khóa và cô ấy bắt được.		/kætʃ/	mirabi-ai-2026-10	active
+hold	hold	verb	1	actions	cầm, nắm	giữ vật trong tay	Can you hold my bag for a minute?	Bạn cầm giúp tôi cái túi một lát được không?		/həʊld/	mirabi-ai-2026-10	active
+carry	carry	verb	1	actions	mang, xách, bế	cầm hoặc đỡ vật, người và mang đi theo	She is carrying a heavy box.	Cô ấy đang bê một chiếc hộp nặng.		/ˈkæri/	mirabi-ai-2026-10	active
+put	put	verb	1	actions	đặt, để	đưa vật vào một chỗ nào đó	Put your bag on the table.	Để túi của bạn lên bàn.		/pʊt/	mirabi-ai-2026-10	active
+take.grab	take	verb	1	actions	cầm lấy, lấy	đưa tay lấy một vật	Take a pen from the box.	Lấy một cây bút trong hộp.		/teɪk/	mirabi-ai-2026-10	active
+give.gift	give	verb	1	actions	cho, tặng	đưa cho người khác một vật để họ giữ luôn	My aunt gave me a new bike.	Cô tôi đã tặng tôi một chiếc xe đạp mới.		/ɡɪv/	mirabi-ai-2026-10	active
+bring	bring	verb	1	actions	mang đến, đem lại (đây)	mang vật hoặc người đến chỗ người nói	Bring your book tomorrow.	Ngày mai mang sách đến nhé.		/brɪŋ/	mirabi-ai-2026-10	active
+get.receive	get	verb	1	actions	nhận được	có được một thứ người khác gửi, tặng	I got a letter from my friend.	Tôi nhận được thư của bạn.		/ɡet/	mirabi-ai-2026-10	active
+make.create	make	verb	1	actions	làm ra, tạo ra	tạo nên một vật mới từ nguyên liệu	She made a paper boat.	Cô ấy làm một chiếc thuyền giấy.		/meɪk/	mirabi-ai-2026-10	active
+do.perform	do	verb	1	actions	làm (một việc)	thực hiện một việc, một hoạt động: do homework	What are you doing?	Bạn đang làm gì vậy?		/duː/	mirabi-ai-2026-10	active
+go	go	verb	1	actions	đi	di chuyển từ chỗ này đến chỗ khác, rời xa người nói	Let's go to the park.	Mình đi công viên đi.		/ɡəʊ/	mirabi-ai-2026-10	active
+come	come	verb	1	actions	đến, tới	di chuyển về phía người nói	Come here, please.	Lại đây nào.		/kʌm/	mirabi-ai-2026-10	active
+kick	kick	verb	1	actions	đá	dùng chân đánh mạnh vào vật	He kicked the ball into the street.	Cậu ấy đá quả bóng ra đường.		/kɪk/	mirabi-ai-2026-10	active
+hit	hit	verb	1	actions	đánh, đập trúng	dùng tay hoặc vật đập mạnh vào thứ gì	Don't hit your brother!	Đừng đánh em!		/hɪt/	mirabi-ai-2026-10	active
+cut	cut	verb	1	actions	cắt	dùng dao, kéo chia vật thành phần nhỏ	Cut the paper in half.	Cắt đôi tờ giấy.		/kʌt/	mirabi-ai-2026-10	active
+touch	touch	verb	1	actions	chạm, sờ	đặt tay hoặc da lên vật	Don't touch the paint, it's wet.	Đừng chạm vào sơn, sơn còn ướt.		/tʌtʃ/	mirabi-ai-2026-10	active
+look	look	verb	1	actions	nhìn	hướng mắt về phía ai, cái gì	Look at me!	Nhìn tôi này!		/lʊk/	mirabi-ai-2026-10	active
+find	find	verb	1	actions	tìm thấy	thấy được thứ mình đang tìm	I can't find my keys.	Tôi không tìm thấy chìa khóa.		/faɪnd/	mirabi-ai-2026-10	active
+look_for	look for	phrasal_verb	1	actions	tìm, tìm kiếm	đi tìm thứ bị mất hoặc đang cần	I'm looking for my phone.	Tôi đang tìm điện thoại.			mirabi-ai-2026-10	active
+pick_up.lift	pick up	phrasal_verb	1	actions	nhặt lên, nhấc lên	cầm vật từ dưới đất, trên bàn lên	Please pick up your toys.	Con nhặt đồ chơi lên đi.			mirabi-ai-2026-10	active
+turn_on	turn on	phrasal_verb	1	actions	bật (thiết bị)	làm cho đèn, máy bắt đầu chạy	Turn on the light, please.	Bật đèn lên giúp mình.	switch on		mirabi-ai-2026-10	active
+turn_off	turn off	phrasal_verb	1	actions	tắt (thiết bị)	làm cho đèn, máy ngừng chạy	Turn off the TV and go to bed.	Tắt ti vi rồi đi ngủ đi.	switch off		mirabi-ai-2026-10	active
+come_in	come in	phrasal_verb	1	actions	vào (nhà, phòng)	bước vào bên trong; hay dùng để mời ai vào	Come in and sit down.	Vào đi rồi ngồi xuống.			mirabi-ai-2026-10	active
+move	move	verb	1	actions	di chuyển, dịch chuyển	đổi vị trí của mình hoặc của vật	Can you move your chair a little?	Bạn dịch ghế một chút được không?		/muːv/	mirabi-ai-2026-10	active
+climb	climb	verb	1	actions	leo, trèo	dùng tay chân đi lên cây, thang, núi	The boy climbed the tree.	Cậu bé trèo lên cây.		/klaɪm/	mirabi-ai-2026-10	active
+fall	fall	verb	1	actions	rơi, ngã xuống	từ trên cao đi xuống đất, không kiểm soát được	The apple fell from the tree.	Quả táo rơi từ trên cây xuống.		/fɔːl/	mirabi-ai-2026-10	active
+stop	stop	verb	1	actions	dừng lại	không tiếp tục di chuyển hoặc làm gì nữa	Stop! There's a car coming.	Dừng lại! Có xe đang tới.		/stɒp/	mirabi-ai-2026-10	active
+use	use	verb	1	actions	dùng, sử dụng	cầm, điều khiển một vật để làm việc gì	Can I use your pen?	Tôi dùng bút của bạn được không?		/juːz/	mirabi-ai-2026-10	active
+show	show	verb	1	actions	cho xem, chỉ cho	đưa vật ra để người khác nhìn	Show me your new shoes!	Cho tớ xem đôi giày mới của cậu!		/ʃəʊ/	mirabi-ai-2026-10	active
+slowly	slowly	adverb	1	actions	chậm, từ từ	làm, di chuyển với tốc độ thấp	Please walk slowly.	Làm ơn đi chậm thôi.		/ˈsləʊli/	mirabi-ai-2026-10	active
+quickly	quickly	adverb	1	actions	nhanh, nhanh chóng	làm, di chuyển trong thời gian ngắn	Come quickly!	Đến nhanh lên!		/ˈkwɪkli/	mirabi-ai-2026-10	active
+take_a_photo	take a photo	collocation	1	actions	chụp ảnh	dùng máy ảnh hoặc điện thoại để chụp	Can you take a photo of us?	Bạn chụp giúp chúng tôi một tấm ảnh được không?	take a picture		mirabi-ai-2026-10	active
+break.smash	break	verb	1	actions	làm vỡ, làm gãy	làm vật tách thành nhiều mảnh	Who broke the window?	Ai làm vỡ cửa sổ?		/breɪk/	mirabi-ai-2026-10	active
+make.cause	make	verb	2	actions	khiến, làm cho	gây ra một cảm xúc hay trạng thái: make someone laugh	This film always makes me cry.	Bộ phim này lúc nào cũng làm tôi khóc.		/meɪk/	mirabi-ai-2026-10	active
+take.time	take	verb	2	actions	mất (bao nhiêu thời gian)	nói về thời gian cần để làm một việc	It takes ten minutes to walk to school.	Đi bộ đến trường mất mười phút.		/teɪk/	mirabi-ai-2026-10	active
+get.fetch	get	verb	2	actions	đi lấy (mang về)	đi đến chỗ khác lấy vật rồi mang lại	Can you get me a glass of water?	Bạn lấy giúp tôi cốc nước được không?	fetch	/ɡet/	mirabi-ai-2026-10	active
+get.become	get	verb	2	actions	trở nên	thay đổi sang trạng thái mới: get tired, get cold	It's getting dark.	Trời đang tối dần.		/ɡet/	mirabi-ai-2026-10	active
+take.carry	take	verb	2	actions	mang đi, đem theo (đến nơi khác)	mang vật hoặc người từ đây đến một nơi khác	Take an umbrella with you.	Mang theo ô đi.		/teɪk/	mirabi-ai-2026-10	active
+keep.hold	keep	verb	2	actions	giữ, giữ lại	tiếp tục có một vật, không trả lại hay vứt đi	You can keep this book.	Bạn có thể giữ cuốn sách này.		/kiːp/	mirabi-ai-2026-10	active
+give_back	give back	phrasal_verb	2	actions	trả lại	đưa lại vật cho người chủ của nó	Can you give my pen back?	Bạn trả lại tôi cây bút được không?			mirabi-ai-2026-10	active
+go_back	go back	phrasal_verb	2	actions	quay lại (nơi cũ)	trở về chỗ mình đã ở trước đó	I left my phone at home, so I went back.	Tôi để quên điện thoại ở nhà nên quay lại lấy.			mirabi-ai-2026-10	active
+come_back	come back	phrasal_verb	2	actions	trở lại (đây)	quay về chỗ người nói đang ở	Come back soon!	Sớm quay lại nhé!			mirabi-ai-2026-10	active
+go_out	go out	phrasal_verb	2	actions	ra ngoài	rời khỏi nhà để đi đâu đó	Don't go out without a coat.	Đừng ra ngoài mà không mặc áo khoác.			mirabi-ai-2026-10	active
+go_away	go away	phrasal_verb	2	actions	đi chỗ khác, tránh ra	rời khỏi chỗ đang ở; cũng dùng để đuổi ai	Go away, I'm busy!	Đi chỗ khác đi, tôi đang bận!			mirabi-ai-2026-10	active
+go_up	go up	phrasal_verb	2	actions	đi lên	di chuyển lên tầng trên, lên chỗ cao hơn	Go up the stairs and turn left.	Đi lên cầu thang rồi rẽ trái.			mirabi-ai-2026-10	active
+get_out	get out	phrasal_verb	2	actions	ra khỏi	bước ra khỏi xe, phòng, nơi chật hẹp	Get out of the car, please.	Mời ra khỏi xe.			mirabi-ai-2026-10	active
+put_away	put away	phrasal_verb	2	actions	cất đi	đặt đồ vào chỗ của nó sau khi dùng xong	Put your clothes away.	Cất quần áo đi.			mirabi-ai-2026-10	active
+put_down	put down	phrasal_verb	2	actions	đặt xuống	để vật đang cầm xuống bàn, sàn	Put the knife down slowly.	Từ từ đặt con dao xuống.			mirabi-ai-2026-10	active
+take_out	take out	phrasal_verb	2	actions	lấy ra	lấy vật ra khỏi túi, hộp, ngăn kéo	She took out her phone.	Cô ấy lấy điện thoại ra.			mirabi-ai-2026-10	active
+throw_away	throw away	phrasal_verb	2	actions	vứt đi	bỏ vật không cần nữa vào thùng rác	Don't throw away that box.	Đừng vứt cái hộp đó đi.	throw out		mirabi-ai-2026-10	active
+run_away	run away	phrasal_verb	2	actions	bỏ chạy	chạy đi thật nhanh để thoát khỏi ai, cái gì	The thief ran away when he saw the police.	Tên trộm bỏ chạy khi thấy cảnh sát.			mirabi-ai-2026-10	active
+lie_down	lie down	phrasal_verb	2	actions	nằm xuống	chuyển sang tư thế nằm để nghỉ	I feel tired. I need to lie down.	Tôi thấy mệt. Tôi cần nằm xuống.			mirabi-ai-2026-10	active
+lie.recline	lie	verb	2	actions	nằm	ở tư thế nằm trên giường, trên sàn	The cat is lying on the sofa.	Con mèo đang nằm trên ghế sofa.		/laɪ/	mirabi-ai-2026-10	active
+look_around	look around	phrasal_verb	2	actions	nhìn quanh	đưa mắt nhìn mọi phía xung quanh	She looked around but saw nobody.	Cô ấy nhìn quanh nhưng không thấy ai.			mirabi-ai-2026-10	active
+turn_around	turn around	phrasal_verb	2	actions	quay người lại	quay người để nhìn về phía sau	Turn around and look at me.	Quay lại nhìn tôi này.	turn round		mirabi-ai-2026-10	active
+turn.rotate	turn	verb	2	actions	xoay, vặn	làm vật quay quanh một trục: turn the key	Turn the key to the right.	Vặn chìa khóa sang phải.		/tɜːn/	mirabi-ai-2026-10	active
+bend	bend	verb	2	actions	uốn cong, gập	làm vật thẳng thành cong; gập tay, chân, lưng	Bend your knees.	Hãy gập đầu gối.		/bend/	mirabi-ai-2026-10	active
+shake	shake	verb	2	actions	lắc	di chuyển vật lên xuống hoặc qua lại thật nhanh	Shake the bottle before you open it.	Lắc chai trước khi mở.		/ʃeɪk/	mirabi-ai-2026-10	active
+nod	nod	verb	2	actions	gật đầu	đưa đầu lên xuống để đồng ý hoặc chào	He nodded and smiled.	Anh ấy gật đầu và mỉm cười.		/nɒd/	mirabi-ai-2026-10	active
+wave.hand	wave	verb	2	actions	vẫy tay	đưa tay qua lại để chào hoặc gọi ai	The children waved goodbye.	Bọn trẻ vẫy tay chào tạm biệt.		/weɪv/	mirabi-ai-2026-10	active
+point.finger	point	verb	2	actions	chỉ (tay)	đưa ngón tay về phía ai, cái gì	Don't point at people.	Đừng chỉ tay vào người khác.		/pɔɪnt/	mirabi-ai-2026-10	active
+clap	clap	verb	2	actions	vỗ tay	đập hai lòng bàn tay vào nhau	Everyone clapped at the end of the song.	Mọi người vỗ tay khi bài hát kết thúc.		/klæp/	mirabi-ai-2026-10	active
+hug	hug	verb	2	actions	ôm	vòng tay ôm lấy người khác	She hugged her mother.	Cô ấy ôm mẹ.		/hʌɡ/	mirabi-ai-2026-10	active
+press	press	verb	2	actions	ấn, nhấn	dùng ngón tay đè lên nút, phím	Press the red button.	Nhấn nút màu đỏ.		/pres/	mirabi-ai-2026-10	active
+lift	lift	verb	2	actions	nhấc lên, nâng lên	đưa vật từ thấp lên cao	This box is too heavy to lift.	Cái hộp này nặng quá không nhấc lên được.		/lɪft/	mirabi-ai-2026-10	active
+raise.hand	raise	verb	2	actions	giơ (tay) lên	đưa tay hoặc một bộ phận cơ thể lên cao	Raise your hand if you know the answer.	Ai biết câu trả lời thì giơ tay lên.		/reɪz/	mirabi-ai-2026-10	active
+drop	drop	verb	2	actions	đánh rơi	để vật rơi khỏi tay, thường không cố ý	Careful, don't drop the glass!	Cẩn thận, đừng làm rơi cái cốc!		/drɒp/	mirabi-ai-2026-10	active
+knock.door	knock	verb	2	actions	gõ (cửa)	đập nhẹ tay vào cửa để báo mình đến	Please knock before you come in.	Hãy gõ cửa trước khi vào.		/nɒk/	mirabi-ai-2026-10	active
+wipe	wipe	verb	2	actions	lau, chùi	dùng khăn, giấy làm sạch bề mặt	Wipe the table after dinner.	Lau bàn sau bữa tối nhé.		/waɪp/	mirabi-ai-2026-10	active
+fold	fold	verb	2	actions	gấp	gập giấy, vải để thành nhỏ hơn	Fold the paper in two.	Gấp đôi tờ giấy lại.		/fəʊld/	mirabi-ai-2026-10	active
+tie	tie	verb	2	actions	buộc, thắt	nối dây với nhau hoặc dùng dây giữ vật	Tie your shoes.	Buộc dây giày đi.		/taɪ/	mirabi-ai-2026-10	active
+hang	hang	verb	2	actions	treo	gắn vật lên cao để nó buông xuống	Hang your coat on the hook.	Treo áo khoác lên móc.		/hæŋ/	mirabi-ai-2026-10	active
+fill	fill	verb	2	actions	đổ đầy, làm đầy	cho nước, đồ vào cho đến khi đầy	Fill the bottle with water.	Đổ đầy nước vào chai.		/fɪl/	mirabi-ai-2026-10	active
+hide	hide	verb	2	actions	giấu, trốn	để vật hoặc mình ở nơi người khác không thấy	He hid the present under the bed.	Anh ấy giấu món quà dưới gầm giường.		/haɪd/	mirabi-ai-2026-10	active
+hurry	hurry	verb	2	actions	vội vàng, khẩn trương	làm hoặc đi nhanh vì không có nhiều thời gian	Hurry, the bus is coming!	Nhanh lên, xe buýt đến rồi!		/ˈhʌri/	mirabi-ai-2026-10	active
+follow	follow	verb	2	actions	đi theo	đi ngay phía sau ai	Follow me, please.	Mời đi theo tôi.		/ˈfɒləʊ/	mirabi-ai-2026-10	active
+cross	cross	verb	2	actions	băng qua, đi qua	đi từ bên này sang bên kia đường, sông	Look both ways before you cross the road.	Nhìn hai bên trước khi băng qua đường.		/krɒs/	mirabi-ai-2026-10	active
+enter	enter	verb	2	actions	bước vào, đi vào	vào bên trong một nơi (cách nói trang trọng)	Please enter through the side door.	Vui lòng đi vào bằng cửa bên.		/ˈentə/	mirabi-ai-2026-10	active
+leave.depart	leave	verb	2	actions	rời đi, rời khỏi	đi khỏi một nơi	She left the room without a word.	Cô ấy rời khỏi phòng mà không nói một lời.		/liːv/	mirabi-ai-2026-10	active
+pass.hand	pass	verb	2	actions	chuyền, đưa (cho ai)	đưa vật cho người ngồi gần, nhất là trên bàn ăn	Could you pass the salt, please?	Bạn chuyền giúp tôi lọ muối được không?		/pɑːs/	mirabi-ai-2026-10	active
+hold_hands	hold hands	collocation	2	actions	nắm tay nhau	hai người cầm tay nhau khi đi, khi đứng	They walked along the beach, holding hands.	Họ nắm tay nhau đi dọc bãi biển.			mirabi-ai-2026-10	active
+take_a_look	take a look	collocation	2	actions	xem qua, nhìn thử	nhìn nhanh để kiểm tra hoặc tìm hiểu	Can I take a look at your photos?	Tôi xem qua ảnh của bạn được không?	have a look		mirabi-ai-2026-10	active
+take_a_seat	take a seat	phrase	2	actions	mời ngồi	lời mời lịch sự để ai đó ngồi xuống	Please take a seat. The doctor will see you soon.	Mời anh ngồi. Bác sĩ sẽ khám cho anh ngay.	have a seat		mirabi-ai-2026-10	active
+make_a_noise	make a noise	collocation	2	actions	làm ồn, gây tiếng động	tạo ra âm thanh to hoặc khó chịu	Don't make a noise, the baby is sleeping.	Đừng làm ồn, em bé đang ngủ.			mirabi-ai-2026-10	active
+make_a_mistake	make a mistake	collocation	2	actions	mắc lỗi	làm sai một việc gì	Everybody makes a mistake sometimes.	Ai cũng có lúc mắc lỗi.			mirabi-ai-2026-10	active
+carefully	carefully	adverb	2	actions	một cách cẩn thận	làm chậm rãi, chú ý để không hỏng hay gây tai nạn	Carry the eggs carefully.	Bê trứng cẩn thận nhé.		/ˈkeəfəli/	mirabi-ai-2026-10	active
+gently	gently	adverb	2	actions	một cách nhẹ nhàng	làm với ít lực, không mạnh tay	Close the door gently.	Đóng cửa nhẹ nhàng thôi.		/ˈdʒentli/	mirabi-ai-2026-10	active
+suddenly	suddenly	adverb	2	actions	đột nhiên, bỗng nhiên	xảy ra nhanh, không báo trước	Suddenly, the lights went out.	Đột nhiên đèn tắt phụt.		/ˈsʌdənli/	mirabi-ai-2026-10	active
+careful.handling	careful	adjective	2	actions	cẩn thận, thận trọng	chú ý để không làm hỏng đồ, không bị thương	Be careful with that knife!	Cẩn thận với con dao đó!		/ˈkeəfl/	mirabi-ai-2026-10	active
+gentle.touch	gentle	adjective	2	actions	nhẹ tay, dịu dàng	dùng ít lực, không làm đau hay làm hỏng	Be gentle with the baby.	Nhẹ tay với em bé nhé.		/ˈdʒentl/	mirabi-ai-2026-10	active
+still.motionless	still	adjective	2	actions	yên, không cử động	không nhúc nhích, không di chuyển	Keep still while I take your photo.	Giữ yên nhé, để tôi chụp ảnh.		/stɪl/	mirabi-ai-2026-10	active
+try	try	verb	2	actions	thử, cố gắng	làm thử một việc hoặc cố làm cho được	Try to open the jar.	Thử mở cái lọ xem.		/traɪ/	mirabi-ai-2026-10	active
+lose.object	lose	verb	2	actions	làm mất, đánh mất	không còn biết vật của mình ở đâu	I lost my umbrella on the bus.	Tôi làm mất ô trên xe buýt.		/luːz/	mirabi-ai-2026-10	active
+make.force	make	verb	3	actions	bắt (ai) phải làm	buộc người khác làm việc họ không muốn	My mum made me clean my room.	Mẹ bắt tôi dọn phòng.		/meɪk/	mirabi-ai-2026-10	active
+make_an_effort	make an effort	collocation	3	actions	cố gắng, nỗ lực	bỏ công sức ra để làm việc gì	Please make an effort to arrive on time.	Hãy cố gắng đến đúng giờ.			mirabi-ai-2026-10	active
+make_room	make room	collocation	3	actions	dọn chỗ, chừa chỗ	dịch người hoặc đồ đạc để có chỗ trống	Can you make room for one more person?	Bạn chừa chỗ cho thêm một người được không?			mirabi-ai-2026-10	active
+take_away.remove	take away	phrasal_verb	3	actions	mang đi, dọn đi	đem vật ra khỏi một nơi hay khỏi tay ai	The waiter took away our plates.	Người phục vụ dọn đĩa của chúng tôi đi.			mirabi-ai-2026-10	active
+take_turns	take turns	collocation	3	actions	thay phiên nhau	mỗi người lần lượt làm một việc	The children take turns on the slide.	Bọn trẻ thay phiên nhau chơi cầu trượt.	take it in turns		mirabi-ai-2026-10	active
+give_out	give out	phrasal_verb	3	actions	phát (cho nhiều người)	chia vật cho từng người trong một nhóm	The teacher gave out the test papers.	Cô giáo phát bài kiểm tra.	hand out		mirabi-ai-2026-10	active
+give_away	give away	phrasal_verb	3	actions	cho đi, tặng không	cho người khác đồ của mình mà không lấy tiền	She gave away all her old clothes.	Cô ấy đem cho hết quần áo cũ.			mirabi-ai-2026-10	active
+bring_back	bring back	phrasal_verb	3	actions	mang về, đem trả lại	mang vật về lại chỗ cũ hoặc về cho ai	Please bring back my book tomorrow.	Mai nhớ mang trả sách cho tớ nhé.			mirabi-ai-2026-10	active
+get_back.recover	get back	phrasal_verb	3	actions	lấy lại	có lại vật mình đã cho mượn hoặc đánh mất	Did you get your money back?	Bạn đã lấy lại được tiền chưa?			mirabi-ai-2026-10	active
+put_back	put back	phrasal_verb	3	actions	đặt lại chỗ cũ	trả vật về đúng vị trí ban đầu	Put the milk back in the fridge.	Cất sữa lại vào tủ lạnh.			mirabi-ai-2026-10	active
+put_together	put together	phrasal_verb	3	actions	lắp ráp	ghép các bộ phận lại thành một vật hoàn chỉnh	It took two hours to put the bed together.	Mất hai tiếng để lắp xong cái giường.	assemble		mirabi-ai-2026-10	active
+put_out	put out	phrasal_verb	3	actions	dập tắt	làm cho lửa, nến, thuốc lá ngừng cháy	They put out the fire quickly.	Họ nhanh chóng dập tắt đám cháy.			mirabi-ai-2026-10	active
+turn_over	turn over	phrasal_verb	3	actions	lật lại, lật sang mặt kia	quay mặt dưới lên trên; trở mình khi nằm	Turn over the page.	Lật sang trang.			mirabi-ai-2026-10	active
+turn_up.volume	turn up	phrasal_verb	3	actions	vặn to, tăng (âm lượng, nhiệt độ)	làm cho máy chạy mạnh hơn, kêu to hơn	Turn up the music, I love this song!	Vặn to nhạc lên, tớ thích bài này!			mirabi-ai-2026-10	active
+turn_down.volume	turn down	phrasal_verb	3	actions	vặn nhỏ, giảm (âm lượng, nhiệt độ)	làm cho máy chạy yếu hơn, kêu nhỏ hơn	Please turn down the TV, I'm studying.	Vặn nhỏ ti vi đi, tớ đang học.			mirabi-ai-2026-10	active
+hold_on.grip	hold on	phrasal_verb	3	actions	bám chặt, giữ chặt	nắm chắc để không bị rơi, bị ngã	Hold on tight, the bus is moving.	Bám chặt vào, xe buýt chạy rồi.			mirabi-ai-2026-10	active
+let_go_of	let go of	collocation	3	actions	buông ra, thả ra	thôi không nắm, không giữ vật nữa	Don't let go of the rope!	Đừng buông dây ra!			mirabi-ai-2026-10	active
+sit_up	sit up	phrasal_verb	3	actions	ngồi thẳng dậy	ngồi dậy từ tư thế nằm hoặc ngồi thẳng lưng	Sit up straight at the table.	Ngồi thẳng lưng ở bàn ăn.			mirabi-ai-2026-10	active
+bend_down	bend down	phrasal_verb	3	actions	cúi xuống	cúi thân người về phía trước và xuống thấp	He bent down to pick up a coin.	Anh ấy cúi xuống nhặt một đồng xu.			mirabi-ai-2026-10	active
+stand_still	stand still	collocation	3	actions	đứng im một chỗ	đứng mà không cử động	Stand still while I fix your hair.	Đứng im để mẹ chải tóc cho.			mirabi-ai-2026-10	active
+fall_over	fall over	phrasal_verb	3	actions	ngã nhào, ngã lăn ra	mất thăng bằng và ngã xuống đất	The little boy fell over and cried.	Cậu bé ngã nhào và khóc.			mirabi-ai-2026-10	active
+fall_off	fall off	phrasal_verb	3	actions	ngã khỏi, rơi khỏi	rơi xuống từ xe, ngựa, mép bàn	She fell off her bike.	Cô ấy ngã khỏi xe đạp.			mirabi-ai-2026-10	active
+look_back	look back	phrasal_verb	3	actions	ngoái lại nhìn	quay đầu nhìn về phía sau	He walked away without looking back.	Anh ấy bỏ đi mà không ngoái lại nhìn.			mirabi-ai-2026-10	active
+step_back	step back	phrasal_verb	3	actions	lùi lại	bước về phía sau một bước	Please step back from the edge.	Xin hãy lùi lại khỏi mép.			mirabi-ai-2026-10	active
+step	step	verb	3	actions	bước	nhấc chân đặt sang một chỗ khác	Step inside, please.	Mời bước vào trong.		/step/	mirabi-ai-2026-10	active
+lean	lean	verb	3	actions	dựa, tựa	đặt người hoặc vật nghiêng vào tường, cửa	Don't lean on the door.	Đừng dựa vào cửa.		/liːn/	mirabi-ai-2026-10	active
+crawl	crawl	verb	3	actions	bò	di chuyển bằng tay và đầu gối	The baby is learning to crawl.	Em bé đang tập bò.		/krɔːl/	mirabi-ai-2026-10	active
+slip	slip	verb	3	actions	trượt chân	bị trượt trên mặt ướt hoặc trơn	Be careful, you might slip on the wet floor.	Cẩn thận, bạn có thể trượt chân trên sàn ướt.		/slɪp/	mirabi-ai-2026-10	active
+roll	roll	verb	3	actions	lăn	di chuyển bằng cách quay tròn trên mặt đất	The ball rolled under the car.	Quả bóng lăn xuống gầm xe.		/rəʊl/	mirabi-ai-2026-10	active
+reach.hand	reach	verb	3	actions	với (tay)	duỗi tay ra để lấy hoặc chạm vào vật	I can't reach the top shelf.	Tôi không với tới ngăn trên cùng.		/riːtʃ/	mirabi-ai-2026-10	active
+grab	grab	verb	3	actions	chộp lấy, vồ lấy	cầm lấy thật nhanh và mạnh	He grabbed my arm.	Anh ấy chộp lấy tay tôi.		/ɡræb/	mirabi-ai-2026-10	active
+squeeze	squeeze	verb	3	actions	bóp, vắt	ép mạnh bằng tay: squeeze a lemon, squeeze a hand	Squeeze the toothpaste from the bottom.	Bóp kem đánh răng từ dưới lên.		/skwiːz/	mirabi-ai-2026-10	active
+punch	punch	verb	3	actions	đấm	đánh mạnh bằng nắm tay	He punched the wall in anger.	Anh ấy đấm vào tường vì tức giận.		/pʌntʃ/	mirabi-ai-2026-10	active
+tap	tap	verb	3	actions	gõ nhẹ	chạm nhẹ và nhanh bằng ngón tay lên vai, bàn, màn hình	Tap the screen twice to open the photo.	Gõ nhẹ hai lần vào màn hình để mở ảnh.		/tæp/	mirabi-ai-2026-10	active
+scratch	scratch	verb	3	actions	gãi, cào	dùng móng tay chà lên da	Don't scratch your mosquito bites.	Đừng gãi chỗ muỗi đốt.		/skrætʃ/	mirabi-ai-2026-10	active
+rub	rub	verb	3	actions	xoa, dụi, chà xát	đưa tay qua lại trên bề mặt và ấn nhẹ	She rubbed her eyes and woke up.	Cô ấy dụi mắt rồi tỉnh dậy.		/rʌb/	mirabi-ai-2026-10	active
+wrap	wrap	verb	3	actions	gói, quấn	bọc giấy, vải quanh một vật	I wrapped the present in red paper.	Tôi gói món quà bằng giấy đỏ.		/ræp/	mirabi-ai-2026-10	active
+untie	untie	verb	3	actions	cởi (nút buộc), tháo dây	làm cho dây đang buộc lỏng ra	Can you untie this knot?	Bạn gỡ được cái nút này không?		/ʌnˈtaɪ/	mirabi-ai-2026-10	active
+tear	tear	verb	3	actions	xé, làm rách	kéo mạnh làm giấy, vải rách ra	Don't tear the page!	Đừng xé trang sách!		/teə/	mirabi-ai-2026-10	active
+stick.glue	stick	verb	3	actions	dán	gắn vật này vào vật khác bằng keo, băng dính	Stick the photo in your notebook.	Dán bức ảnh vào vở của bạn.		/stɪk/	mirabi-ai-2026-10	active
+empty.container	empty	verb	3	actions	đổ hết ra, làm rỗng	lấy hết đồ, nước ra khỏi hộp, túi, thùng	Empty your pockets, please.	Vui lòng lấy hết đồ trong túi ra.		/ˈempti/	mirabi-ai-2026-10	active
+spill	spill	verb	3	actions	làm đổ (chất lỏng)	vô tình làm nước, sữa tràn ra ngoài	I spilled coffee on my shirt.	Tôi làm đổ cà phê lên áo.		/spɪl/	mirabi-ai-2026-10	active
+chase	chase	verb	3	actions	đuổi theo	chạy theo để bắt kịp ai, con gì	The dog chased the cat around the garden.	Con chó đuổi theo con mèo quanh vườn.		/tʃeɪs/	mirabi-ai-2026-10	active
+rush	rush	verb	3	actions	lao đi, chạy vội	di chuyển rất nhanh vì có việc gấp	She rushed to the hospital.	Cô ấy vội vã đến bệnh viện.		/rʌʃ/	mirabi-ai-2026-10	active
+swing	swing	verb	3	actions	đánh đu, vung	chuyển động qua lại từ một điểm treo; vung tay, vung gậy	The children are swinging in the park.	Bọn trẻ đang đánh đu trong công viên.		/swɪŋ/	mirabi-ai-2026-10	active
+slide	slide	verb	3	actions	trượt (trên mặt trơn)	di chuyển êm trên mặt phẳng trơn	The kids slid down the hill on the snow.	Lũ trẻ trượt xuống đồi trên tuyết.		/slaɪd/	mirabi-ai-2026-10	active
+replace	replace	verb	3	actions	thay, thay thế	bỏ vật cũ, hỏng và đặt vật mới vào chỗ đó	I need to replace the battery in my watch.	Tôi cần thay pin đồng hồ.		/rɪˈpleɪs/	mirabi-ai-2026-10	active
+remove	remove	verb	3	actions	tháo ra, gỡ bỏ	lấy vật ra khỏi chỗ của nó (cách nói trang trọng)	Please remove your shoes before entering.	Vui lòng tháo giày trước khi vào.		/rɪˈmuːv/	mirabi-ai-2026-10	active
+shake_your_head	shake your head	collocation	3	actions	lắc đầu	quay đầu qua lại để nói không	Why are you shaking your head?	Sao bạn lại lắc đầu?			mirabi-ai-2026-10	active
+on_purpose	on purpose	phrase	3	actions	cố ý, cố tình	làm việc gì có chủ đích, không phải tình cờ	He broke the glass on purpose.	Anh ấy cố tình làm vỡ cái cốc.	deliberately		mirabi-ai-2026-10	active
+by_accident	by accident	phrase	3	actions	vô tình, không cố ý	xảy ra mà không định trước	I deleted the photo by accident.	Tôi vô tình xóa mất bức ảnh.	accidentally		mirabi-ai-2026-10	active
+upside_down	upside down	adverb	3	actions	lộn ngược	phần trên ở dưới, phần dưới ở trên	You're holding the map upside down.	Bạn đang cầm ngược tấm bản đồ đấy.			mirabi-ai-2026-10	active
+inside_out	inside out	adverb	3	actions	lộn trái (mặt trong ra ngoài)	mặc áo, lộn túi với mặt trong ở bên ngoài	Your T-shirt is inside out.	Áo phông của bạn đang mặc trái kìa.			mirabi-ai-2026-10	active
+backwards	backwards	adverb	3	actions	lùi về sau, về phía sau	di chuyển theo hướng sau lưng mình	He took a step backwards.	Anh ấy lùi lại một bước.	backward	/ˈbækwədz/	mirabi-ai-2026-10	active
+forwards	forwards	adverb	3	actions	về phía trước	di chuyển theo hướng trước mặt mình	Lean forwards a little.	Hãy nghiêng người về phía trước một chút.	forward	/ˈfɔːwədz/	mirabi-ai-2026-10	active
+tightly	tightly	adverb	3	actions	chặt	nắm, buộc, đóng thật chặt	Hold my hand tightly.	Nắm chặt tay mẹ nhé.		/ˈtaɪtli/	mirabi-ai-2026-10	active
+steady	steady	adjective	3	actions	vững, chắc	không rung, không lắc, không đổ	Hold the ladder steady while I climb.	Giữ thang cho vững trong lúc tôi leo nhé.		/ˈstedi/	mirabi-ai-2026-10	active
+sudden	sudden	adjective	3	actions	đột ngột	xảy ra rất nhanh và không báo trước: sudden movement	Don't make any sudden movements near the dog.	Đừng cử động đột ngột gần con chó.		/ˈsʌdn/	mirabi-ai-2026-10	active
+rough.handling	rough	adjective	3	actions	mạnh tay, thô bạo	đối xử, cầm nắm không nhẹ nhàng	Don't be so rough with the toys.	Đừng mạnh tay với đồ chơi thế.		/rʌf/	mirabi-ai-2026-10	active
+turn_back	turn back	phrasal_verb	3	actions	quay đầu lại, quay trở về	không đi tiếp nữa mà quay về hướng cũ	It started to rain, so we turned back.	Trời bắt đầu mưa nên chúng tôi quay về.			mirabi-ai-2026-10	active
+hand.give	hand	verb	3	actions	trao, đưa tận tay	đưa vật trực tiếp vào tay người khác	She handed me the letter.	Cô ấy trao cho tôi lá thư.		/hænd/	mirabi-ai-2026-10	active
+look_up.raise_eyes	look up	phrasal_verb	3	actions	ngước lên, nhìn lên	đưa mắt nhìn lên phía trên	She looked up from her book and smiled.	Cô ấy ngước lên khỏi cuốn sách và mỉm cười.			mirabi-ai-2026-10	active
+blow	blow	verb	3	actions	thổi	đẩy hơi ra từ miệng	Blow out the candles!	Thổi nến đi!		/bləʊ/	mirabi-ai-2026-10	active
+dig	dig	verb	3	actions	đào	dùng tay, xẻng tạo lỗ trong đất	The dog is digging a hole in the garden.	Con chó đang đào một cái hố trong vườn.		/dɪɡ/	mirabi-ai-2026-10	active
+keep.continue	keep	verb	3	actions	cứ, tiếp tục (làm gì)	dùng với động từ -ing: keep walking, keep trying	Keep walking, we're nearly there.	Cứ đi tiếp, sắp đến nơi rồi.		/kiːp/	mirabi-ai-2026-10	active
+set_up.assemble	set up	phrasal_verb	3	actions	dựng lên, bày sẵn	dựng lều, kê bàn ghế, lắp thiết bị để sẵn sàng dùng	We set up the tent before dark.	Chúng tôi dựng lều trước khi trời tối.			mirabi-ai-2026-10	active
+kneel	kneel	verb	4	actions	quỳ (gối)	hạ người xuống cho đầu gối chạm đất	She knelt down to talk to the child.	Cô ấy quỳ xuống để nói chuyện với đứa trẻ.		/niːl/	mirabi-ai-2026-10	active
+lay	lay	verb	4	actions	đặt nằm xuống	đặt vật hoặc người nằm trên một bề mặt	Lay the baby on the bed.	Đặt em bé nằm xuống giường.		/leɪ/	mirabi-ai-2026-10	active
+place	place	verb	4	actions	đặt (đúng chỗ, cẩn thận)	để vật vào một vị trí nhất định (trang trọng hơn put)	Place the cups on the tray.	Đặt những chiếc cốc lên khay.		/pleɪs/	mirabi-ai-2026-10	active
+lower.move	lower	verb	4	actions	hạ xuống	đưa vật hoặc tay từ cao xuống thấp	Slowly lower your arms.	Từ từ hạ tay xuống.		/ˈləʊə/	mirabi-ai-2026-10	active
+drag	drag	verb	4	actions	kéo lê	kéo vật nặng trên mặt đất	He dragged the heavy bag across the floor.	Anh ấy kéo lê chiếc túi nặng trên sàn.		/dræɡ/	mirabi-ai-2026-10	active
+twist	twist	verb	4	actions	vặn, xoắn	xoay mạnh một vật hoặc một phần cơ thể	Twist the lid to open the jar.	Vặn nắp để mở lọ.		/twɪst/	mirabi-ai-2026-10	active
+grip	grip	verb	4	actions	nắm chặt, siết chặt	giữ thật chặt bằng tay	She gripped the handle and pulled hard.	Cô ấy nắm chặt tay cầm và kéo mạnh.		/ɡrɪp/	mirabi-ai-2026-10	active
+slap	slap	verb	4	actions	tát	đánh bằng lòng bàn tay mở	She slapped him across the face.	Cô ấy tát vào mặt anh ta.		/slæp/	mirabi-ai-2026-10	active
+pat	pat	verb	4	actions	vỗ về, vỗ nhẹ	vỗ nhẹ bằng lòng bàn tay để an ủi, khen	He patted the dog on the head.	Anh ấy vỗ nhẹ lên đầu con chó.		/pæt/	mirabi-ai-2026-10	active
+tickle	tickle	verb	4	actions	cù (lét)	chạm nhẹ vào người khác để làm họ cười	Stop tickling me!	Đừng cù tớ nữa!		/ˈtɪkl/	mirabi-ai-2026-10	active
+wink	wink	verb	4	actions	nháy mắt	nhắm nhanh một mắt để ra hiệu, để đùa	He winked at me and smiled.	Anh ấy nháy mắt với tôi rồi mỉm cười.		/wɪŋk/	mirabi-ai-2026-10	active
+blink	blink	verb	4	actions	chớp mắt	nhắm rồi mở cả hai mắt thật nhanh	The light was so bright that I blinked.	Ánh sáng chói đến nỗi tôi phải chớp mắt.		/blɪŋk/	mirabi-ai-2026-10	active
+stare	stare	verb	4	actions	nhìn chằm chằm	nhìn ai, cái gì rất lâu không rời mắt	It's rude to stare at people.	Nhìn chằm chằm người khác là bất lịch sự.		/steə/	mirabi-ai-2026-10	active
+yawn	yawn	verb	4	actions	ngáp	há to miệng hít sâu khi buồn ngủ, chán	He yawned and went to bed.	Anh ấy ngáp rồi đi ngủ.		/jɔːn/	mirabi-ai-2026-10	active
+hop	hop	verb	4	actions	nhảy lò cò	nhảy bằng một chân	Can you hop on one leg?	Bạn có thể nhảy lò cò một chân không?		/hɒp/	mirabi-ai-2026-10	active
+bounce	bounce	verb	4	actions	nảy, bật lên	chạm mặt đất rồi bật trở lên	The ball bounced twice and went out.	Quả bóng nảy hai lần rồi ra ngoài.		/baʊns/	mirabi-ai-2026-10	active
+spin	spin	verb	4	actions	quay tròn, xoay tít	quay rất nhanh quanh một điểm	The dancer can spin on one foot.	Vũ công có thể xoay tròn trên một chân.		/spɪn/	mirabi-ai-2026-10	active
+flip	flip	verb	4	actions	lật nhanh, tung (đồng xu)	lật vật sang mặt kia bằng một động tác nhanh	Let's flip a coin to decide.	Mình tung đồng xu để quyết định nhé.		/flɪp/	mirabi-ai-2026-10	active
+float	float	verb	4	actions	nổi	ở trên mặt nước, không chìm	Wood floats on water.	Gỗ nổi trên mặt nước.		/fləʊt/	mirabi-ai-2026-10	active
+sink.water	sink	verb	4	actions	chìm	đi xuống dưới mặt nước	Stones sink in water.	Đá chìm trong nước.		/sɪŋk/	mirabi-ai-2026-10	active
+march.walk	march	verb	4	actions	diễu hành, bước đều	đi thành hàng với bước chân đều nhau	The soldiers marched through the city.	Những người lính diễu hành qua thành phố.		/mɑːtʃ/	mirabi-ai-2026-10	active
+wander	wander	verb	4	actions	đi lang thang, đi thơ thẩn	đi chậm, không có mục đích rõ ràng	We wandered around the old town.	Chúng tôi đi lang thang quanh phố cổ.		/ˈwɒndə/	mirabi-ai-2026-10	active
+fasten	fasten	verb	4	actions	thắt, cài chặt	đóng khóa, cài dây cho chắc: fasten a seat belt	Please fasten your seat belt.	Vui lòng thắt dây an toàn.		/ˈfɑːsn/	mirabi-ai-2026-10	active
+unfold	unfold	verb	4	actions	mở ra (vật đã gấp)	trải vật gấp như giấy, bản đồ ra cho phẳng	He unfolded the map on the table.	Anh ấy mở tấm bản đồ ra trên bàn.		/ʌnˈfəʊld/	mirabi-ai-2026-10	active
+unwrap	unwrap	verb	4	actions	bóc (giấy gói), mở gói	bỏ lớp giấy, vải bọc bên ngoài	The children unwrapped their presents.	Bọn trẻ bóc quà.		/ʌnˈræp/	mirabi-ai-2026-10	active
+attach	attach	verb	4	actions	gắn, đính, buộc vào	nối hoặc gắn vật này vào vật khác	Attach the label to your suitcase.	Gắn nhãn vào vali của bạn.		/əˈtætʃ/	mirabi-ai-2026-10	active
+swap	swap	verb	4	actions	đổi cho nhau, hoán đổi	đưa vật của mình và nhận vật của người khác	Can we swap seats?	Chúng ta đổi chỗ cho nhau được không?	switch	/swɒp/	mirabi-ai-2026-10	active
+gather.collect	gather	verb	4	actions	gom lại, thu gom	lấy nhiều vật từ nhiều chỗ về một chỗ	She gathered her things and left.	Cô ấy gom đồ đạc rồi rời đi.		/ˈɡæðə/	mirabi-ai-2026-10	active
+spread.out	spread	verb	4	actions	trải ra, giăng ra	mở rộng vật ra trên một bề mặt	We spread a blanket on the grass.	Chúng tôi trải một tấm chăn trên bãi cỏ.		/spred/	mirabi-ai-2026-10	active
+stack	stack	verb	4	actions	xếp chồng	đặt vật này lên trên vật kia thành chồng	Stack the plates on the shelf.	Xếp chồng đĩa lên kệ.	pile up	/stæk/	mirabi-ai-2026-10	active
+knock_over	knock over	phrasal_verb	4	actions	làm đổ, xô ngã	vô tình chạm vào khiến vật đổ xuống	The cat knocked over a glass of milk.	Con mèo làm đổ cốc sữa.			mirabi-ai-2026-10	active
+trip_over	trip over	phrasal_verb	4	actions	vấp phải	chân va vào vật gì và suýt ngã	I tripped over a box in the dark.	Tôi vấp phải một cái hộp trong bóng tối.			mirabi-ai-2026-10	active
+step_on	step on	phrasal_verb	4	actions	giẫm lên	đặt chân lên trên vật gì	Sorry, I stepped on your foot!	Xin lỗi, tôi giẫm lên chân bạn rồi!			mirabi-ai-2026-10	active
+move_over	move over	phrasal_verb	4	actions	xích qua, dịch sang	dịch người sang bên để nhường chỗ ngồi	Move over a bit so I can sit down.	Xích qua một chút cho tôi ngồi với.			mirabi-ai-2026-10	active
+pull_down	pull down	phrasal_verb	4	actions	kéo xuống	kéo vật từ trên cao xuống	Pull down the blinds, the sun is too bright.	Kéo rèm xuống đi, nắng chói quá.			mirabi-ai-2026-10	active
+pull_out.remove	pull out	phrasal_verb	4	actions	rút ra, kéo ra, nhổ ra	kéo vật ra khỏi chỗ nó đang nằm	The dentist pulled out my bad tooth.	Nha sĩ nhổ chiếc răng sâu của tôi.			mirabi-ai-2026-10	active
+take_apart	take apart	phrasal_verb	4	actions	tháo rời	tách một vật ra thành từng bộ phận	He took apart the old radio to see how it worked.	Anh ấy tháo rời chiếc radio cũ để xem nó hoạt động thế nào.			mirabi-ai-2026-10	active
+take_down	take down	phrasal_verb	4	actions	gỡ xuống, tháo xuống	lấy vật đang treo, đang dựng xuống	We took down the Christmas decorations.	Chúng tôi gỡ đồ trang trí Giáng sinh xuống.			mirabi-ai-2026-10	active
+hold_up.show	hold up	phrasal_verb	4	actions	giơ lên (cho xem)	nâng vật lên cao để mọi người nhìn thấy	She held up her prize for the camera.	Cô ấy giơ giải thưởng lên trước máy quay.			mirabi-ai-2026-10	active
+get_away	get away	phrasal_verb	4	actions	chạy thoát, tẩu thoát	thoát khỏi nơi nguy hiểm hay người đang đuổi	The thief got away on a motorbike.	Tên trộm tẩu thoát bằng xe máy.			mirabi-ai-2026-10	active
+keep_away_from	keep away from	phrasal_verb	4	actions	tránh xa	không đến gần ai, cái gì	Keep away from the fire!	Tránh xa đống lửa ra!	stay away from		mirabi-ai-2026-10	active
+hand_over	hand over	phrasal_verb	4	actions	giao nộp, trao lại	đưa vật cho người có quyền giữ nó	The boy handed over the money to the police.	Cậu bé giao nộp số tiền cho cảnh sát.			mirabi-ai-2026-10	active
+get_out_of_the_way	get out of the way	collocation	4	actions	tránh ra, tránh đường	dịch sang bên để không chắn lối đi	Get out of the way! The car is coming!	Tránh ra! Xe đang tới!			mirabi-ai-2026-10	active
+sit_back	sit back	phrasal_verb	4	actions	ngồi tựa lưng ra sau	ngồi thoải mái, dựa lưng vào ghế	Sit back and enjoy the film.	Hãy ngồi tựa lưng và thưởng thức bộ phim.			mirabi-ai-2026-10	active
+firmly	firmly	adverb	4	actions	chắc chắn, mạnh và chắc	nắm, giữ, ấn một cách chắc tay	Press firmly on the button.	Ấn mạnh và chắc vào nút.		/ˈfɜːmli/	mirabi-ai-2026-10	active
+sideways	sideways	adverb	4	actions	sang ngang, nghiêng sang bên	di chuyển hay quay về một bên	The crab walks sideways.	Con cua đi ngang.		/ˈsaɪdweɪz/	mirabi-ai-2026-10	active
+upwards	upwards	adverb	4	actions	lên phía trên, hướng lên	di chuyển hoặc nhìn về phía cao hơn	The smoke rose upwards.	Khói bốc lên trên.	upward	/ˈʌpwədz/	mirabi-ai-2026-10	active
+upright	upright	adjective	4	actions	thẳng đứng, thẳng lưng	ở tư thế thẳng, không nghiêng, không nằm	Keep the bottle upright.	Giữ chai đứng thẳng.		/ˈʌpraɪt/	mirabi-ai-2026-10	active
+unsteady	unsteady	adjective	4	actions	không vững, loạng choạng	dễ ngã, dễ đổ vì không giữ được thăng bằng	The old man was unsteady on his feet.	Ông cụ đi đứng loạng choạng.		/ʌnˈstedi/	mirabi-ai-2026-10	active
+shaky	shaky	adjective	4	actions	run rẩy, run run	tay, chân, giọng nói run lên vì sợ, lạnh, mệt	My hands were shaky before the exam.	Tay tôi run run trước giờ thi.		/ˈʃeɪki/	mirabi-ai-2026-10	active
+awkward	awkward	adjective	4	actions	không thoải mái, gượng gạo (tư thế)	tư thế hoặc động tác khó chịu, không tự nhiên	I slept in an awkward position and my neck hurts.	Tôi ngủ sai tư thế nên bị đau cổ.		/ˈɔːkwəd/	mirabi-ai-2026-10	active
+clumsy	clumsy	adjective	4	actions	vụng về, hậu đậu	hay làm rơi, làm đổ, va vấp đồ vật	I'm so clumsy, I broke another cup.	Tôi hậu đậu quá, lại làm vỡ thêm một cái cốc.		/ˈklʌmzi/	mirabi-ai-2026-10	active
+graceful	graceful	adjective	4	actions	uyển chuyển, duyên dáng	cử động nhẹ nhàng, đẹp mắt	She is a graceful dancer.	Cô ấy là một vũ công uyển chuyển.		/ˈɡreɪsfl/	mirabi-ai-2026-10	active
+manual	manual	adjective	4	actions	bằng tay, chân tay	làm bằng sức tay chứ không dùng máy	Carrying bricks is hard manual work.	Khuân gạch là công việc tay chân nặng nhọc.		/ˈmænjuəl/	mirabi-ai-2026-10	active
+shake_hands	shake hands	collocation	4	actions	bắt tay	nắm tay người khác để chào, chúc mừng, thỏa thuận	The two leaders shook hands.	Hai nhà lãnh đạo bắt tay nhau.			mirabi-ai-2026-10	active
+slam	slam	verb	4	actions	đóng sầm, đập mạnh	đóng cửa hoặc đặt vật xuống rất mạnh, gây tiếng to	Don't slam the door!	Đừng đóng sầm cửa!		/slæm/	mirabi-ai-2026-10	active
+splash	splash	verb	4	actions	té nước, làm bắn nước	làm nước bắn tung tóe	The kids splashed water at each other.	Bọn trẻ té nước vào nhau.		/splæʃ/	mirabi-ai-2026-10	active
+look_away	look away	phrasal_verb	4	actions	quay mặt đi, nhìn chỗ khác	thôi không nhìn vào ai, cái gì nữa	She looked away when I smiled at her.	Cô ấy quay mặt đi khi tôi cười với cô ấy.			mirabi-ai-2026-10	active
+hold_your_breath	hold your breath	collocation	4	actions	nín thở	giữ hơi trong người, không thở ra	Can you hold your breath under water?	Bạn có thể nín thở dưới nước không?			mirabi-ai-2026-10	active
+light.fire	light	verb	4	actions	thắp, châm lửa	làm cho nến, bếp, lửa bắt đầu cháy	She lit a candle.	Cô ấy thắp một ngọn nến.		/laɪt/	mirabi-ai-2026-10	active
+crouch	crouch	verb	5	actions	ngồi thụp xuống, khom người	gập gối, hạ thấp người sát đất	He crouched behind the car to hide.	Anh ấy ngồi thụp sau chiếc xe để trốn.		/kraʊtʃ/	mirabi-ai-2026-10	active
+tiptoe	tiptoe	verb	5	actions	đi nhón chân	đi bằng đầu ngón chân để không gây tiếng động	She tiptoed past the sleeping baby.	Cô ấy nhón chân đi qua em bé đang ngủ.		/ˈtɪptəʊ/	mirabi-ai-2026-10	active
+stumble	stumble	verb	5	actions	sẩy chân, bước hụt	bước hụt hoặc vấp, suýt ngã	He stumbled on the stairs.	Anh ấy sẩy chân trên cầu thang.		/ˈstʌmbl/	mirabi-ai-2026-10	active
+shrug	shrug	verb	5	actions	nhún vai	nâng hai vai lên để tỏ ý không biết, không quan tâm	When I asked him, he just shrugged.	Khi tôi hỏi, anh ấy chỉ nhún vai.		/ʃrʌɡ/	mirabi-ai-2026-10	active
+glance	glance	verb	5	actions	liếc nhìn	nhìn nhanh trong chốc lát	She glanced at her watch.	Cô ấy liếc nhìn đồng hồ.		/ɡlɑːns/	mirabi-ai-2026-10	active
+peek	peek	verb	5	actions	nhìn trộm, hé nhìn	nhìn nhanh và lén, qua khe hở	No peeking! Close your eyes.	Không được nhìn trộm! Nhắm mắt lại.	peep	/piːk/	mirabi-ai-2026-10	active
+seize	seize	verb	5	actions	túm lấy, nắm chặt lấy (bất ngờ)	nắm lấy đột ngột và rất mạnh	He seized my arm and pulled me back.	Anh ấy túm chặt tay tôi và kéo lại.		/siːz/	mirabi-ai-2026-10	active
+snatch	snatch	verb	5	actions	giật lấy, cướp giật	lấy nhanh khỏi tay người khác	A man snatched her bag and ran.	Một gã đàn ông giật túi của cô ấy rồi chạy.		/snætʃ/	mirabi-ai-2026-10	active
+grasp	grasp	verb	5	actions	nắm lấy, nắm chắc	nắm vật thật chắc trong tay	She grasped the rope with both hands.	Cô ấy nắm chắc sợi dây bằng cả hai tay.		/ɡrɑːsp/	mirabi-ai-2026-10	active
+toss	toss	verb	5	actions	tung, quăng nhẹ	ném nhẹ, tùy tiện hoặc ném lên cao	He tossed his keys onto the table.	Anh ấy quăng chùm chìa khóa lên bàn.		/tɒs/	mirabi-ai-2026-10	active
+dash	dash	verb	5	actions	lao nhanh, chạy vụt	chạy thật nhanh trong quãng ngắn vì vội	She dashed out of the house.	Cô ấy lao vụt ra khỏi nhà.		/dæʃ/	mirabi-ai-2026-10	active
+stroll	stroll	verb	5	actions	tản bộ, đi dạo	đi bộ chậm rãi, thong thả để thư giãn	We strolled along the beach after dinner.	Chúng tôi tản bộ dọc bãi biển sau bữa tối.		/strəʊl/	mirabi-ai-2026-10	active
+sneak	sneak	verb	5	actions	lẻn, lén lút đi	đi nhẹ nhàng để không ai thấy	He sneaked out of the house at night.	Anh ta lẻn ra khỏi nhà vào ban đêm.		/sniːk/	mirabi-ai-2026-10	active
+creep	creep	verb	5	actions	rón rén, trườn chậm	di chuyển chậm và lặng lẽ, sát mặt đất	The cat crept towards the bird.	Con mèo rón rén tiến lại gần con chim.		/kriːp/	mirabi-ai-2026-10	active
+poke	poke	verb	5	actions	chọc, thọc	đẩy nhanh ngón tay hoặc vật nhọn vào	Stop poking me!	Đừng chọc tớ nữa!		/pəʊk/	mirabi-ai-2026-10	active
+pinch	pinch	verb	5	actions	véo, cấu	kẹp da giữa ngón cái và ngón trỏ	My little sister pinched my arm.	Em gái véo tay tôi.		/pɪntʃ/	mirabi-ai-2026-10	active
+crush	crush	verb	5	actions	đè bẹp, nghiền nát	ép mạnh khiến vật bị bẹp, vỡ vụn	Don't crush the eggs at the bottom of the bag.	Đừng để trứng ở đáy túi bị đè bẹp.		/krʌʃ/	mirabi-ai-2026-10	active
+smash	smash	verb	5	actions	đập vỡ tan	làm vỡ thành nhiều mảnh bằng lực mạnh	The ball smashed the window.	Quả bóng làm vỡ tan cửa kính.		/smæʃ/	mirabi-ai-2026-10	active
+snap	snap	verb	5	actions	bẻ gãy (đánh tách)	làm gãy đột ngột với tiếng kêu khô	He snapped the stick in two.	Anh ấy bẻ gãy đôi cái que.		/snæp/	mirabi-ai-2026-10	active
+sway	sway	verb	5	actions	lắc lư, đu đưa	nghiêng chậm qua lại	The trees swayed in the wind.	Hàng cây đu đưa trong gió.		/sweɪ/	mirabi-ai-2026-10	active
+insert	insert	verb	5	actions	cho vào, đưa vào (khe, lỗ)	đặt vật vào trong một khe, một lỗ	Insert your card into the machine.	Cho thẻ của bạn vào máy.		/ɪnˈsɜːt/	mirabi-ai-2026-10	active
+scatter	scatter	verb	5	actions	rải, rắc	ném vật nhỏ ra nhiều hướng khác nhau	She scattered seeds over the garden.	Cô ấy rải hạt giống khắp vườn.		/ˈskætə/	mirabi-ai-2026-10	active
+stroke.pet	stroke	verb	5	actions	vuốt ve	đưa tay nhẹ nhàng nhiều lần trên lông, tóc	She stroked the cat's soft fur.	Cô ấy vuốt ve bộ lông mềm của con mèo.		/strəʊk/	mirabi-ai-2026-10	active
+nimble	nimble	adjective	5	actions	khéo léo, nhanh nhẹn (tay chân)	cử động nhanh, nhẹ và chính xác	The old man still has nimble fingers.	Ông cụ vẫn có những ngón tay khéo léo.		/ˈnɪmbl/	mirabi-ai-2026-10	active
+sluggish	sluggish	adjective	5	actions	chậm chạp, uể oải	cử động chậm, thiếu năng lượng	I feel sluggish after a big lunch.	Tôi thấy uể oải sau bữa trưa no nê.		/ˈslʌɡɪʃ/	mirabi-ai-2026-10	active
+brisk	brisk	adjective	5	actions	rảo bước, nhanh nhẹn	đi, làm nhanh và đầy năng lượng: a brisk walk	We went for a brisk walk after dinner.	Chúng tôi rảo bước đi bộ sau bữa tối.		/brɪsk/	mirabi-ai-2026-10	active
+deliberate	deliberate	adjective	5	actions	có chủ đích, có tính toán	được làm cố ý, không phải tình cờ (tính từ)	It was a deliberate push, not an accident.	Đó là một cú đẩy cố ý, không phải tai nạn.		/dɪˈlɪbərət/	mirabi-ai-2026-10	active
+motionless	motionless	adjective	5	actions	bất động	hoàn toàn không cử động	The cat sat motionless, watching the mouse.	Con mèo ngồi bất động, theo dõi con chuột.		/ˈməʊʃnləs/	mirabi-ai-2026-10	active
+steadily	steadily	adverb	5	actions	đều đặn, vững vàng	chuyển động đều, không nhanh không chậm, không rung	The boat moved steadily across the lake.	Con thuyền đi đều đặn qua hồ.		/ˈstedɪli/	mirabi-ai-2026-10	active
+clumsily	clumsily	adverb	5	actions	một cách vụng về	làm không khéo, dễ làm đổ vỡ	He clumsily dropped his phone into the water.	Anh ấy vụng về làm rơi điện thoại xuống nước.		/ˈklʌmzɪli/	mirabi-ai-2026-10	active
+make_up_for	make up for	phrasal_verb	5	actions	bù đắp, đền bù	làm điều tốt để bù lại lỗi hay thiệt hại	I'll buy you lunch to make up for being late.	Tôi sẽ mời bạn ăn trưa để bù cho việc đến muộn.			mirabi-ai-2026-10	active
+make_out	make out	phrasal_verb	5	actions	nhìn ra, đọc ra (một cách khó khăn)	phải cố gắng mới thấy rõ, nghe rõ hoặc đọc được	I can't make out the words on that sign.	Tôi không đọc ra được chữ trên tấm biển đó.			mirabi-ai-2026-10	active
+hold_out	hold out	phrasal_verb	5	actions	chìa ra, đưa ra	duỗi tay ra phía trước để đưa hoặc nhận vật	She held out her hand to shake mine.	Cô ấy chìa tay ra để bắt tay tôi.			mirabi-ai-2026-10	active
+hold_back	hold back	phrasal_verb	5	actions	ngăn lại, giữ lại	ngăn người hoặc vật tiến lên phía trước	The police held back the crowd.	Cảnh sát ngăn đám đông lại.			mirabi-ai-2026-10	active
+get_hold_of	get hold of	collocation	5	actions	nắm được, tóm được	với tới và nắm chắc lấy vật gì	Try to get hold of the rope!	Cố nắm lấy sợi dây đi!			mirabi-ai-2026-10	active
+lend_a_hand	lend a hand	idiom	5	actions	giúp một tay	giúp ai làm việc, nhất là việc chân tay	Can you lend a hand with these boxes?	Bạn giúp một tay chuyển mấy cái hộp này được không?	give a hand		mirabi-ai-2026-10	active
+put_aside	put aside	phrasal_verb	5	actions	đặt sang một bên, gác lại	tạm để vật hoặc việc qua một bên	She put aside her book and listened.	Cô ấy đặt cuốn sách sang một bên và lắng nghe.	set aside		mirabi-ai-2026-10	active
+make_way	make way	collocation	5	actions	nhường lối (cho ai đi qua)	dịch sang bên cho người, xe khác đi qua	Make way for the ambulance!	Tránh đường cho xe cứu thương!			mirabi-ai-2026-10	active
+tuck	tuck	verb	5	actions	nhét, giắt (vào cho gọn)	đẩy mép vải, giấy vào chỗ hẹp cho gọn	Tuck your shirt in.	Sơ vin áo vào đi.		/tʌk/	mirabi-ai-2026-10	active
+shake_off	shake off	phrasal_verb	5	actions	giũ sạch, rũ bỏ	lắc mạnh để vật bám trên người rơi ra	The dog shook off the water.	Con chó giũ sạch nước trên người.			mirabi-ai-2026-10	active
+loosely	loosely	adverb	5	actions	lỏng, không chặt	buộc, cầm, giữ một cách lỏng lẻo	Tie the rope loosely.	Buộc dây lỏng thôi.		/ˈluːsli/	mirabi-ai-2026-10	active
+wriggle	wriggle	verb	5	actions	ngọ nguậy, vặn vẹo	xoay, vặn người qua lại liên tục	The baby wriggled in my arms.	Em bé ngọ nguậy trong vòng tay tôi.		/ˈrɪɡl/	mirabi-ai-2026-10	active
+pass_on	pass on	phrasal_verb	5	actions	chuyền tiếp, đưa tiếp	đưa vật mình nhận được cho người tiếp theo	Read this note and pass it on.	Đọc tờ giấy này rồi chuyền tiếp nhé.			mirabi-ai-2026-10	active
+turn_your_back_on	turn your back on	idiom	5	actions	quay lưng với	quay người đi; nghĩa bóng: bỏ rơi, không giúp ai	Never turn your back on a friend in trouble.	Đừng bao giờ quay lưng với người bạn đang gặp khó khăn.			mirabi-ai-2026-10	active
+lift_a_finger	lift a finger	idiom	5	actions	động tay động chân (giúp)	thường dùng phủ định: không chịu giúp gì cả	He never lifts a finger to help at home.	Ở nhà anh ta chẳng bao giờ động tay giúp việc gì.			mirabi-ai-2026-10	active
+fling	fling	verb	6	actions	quăng, vứt mạnh	ném mạnh và không cẩn thận, thường vì giận	She was so angry that she wanted to fling the phone across the room.	Cô ấy giận đến mức muốn quăng điện thoại sang bên kia phòng.		/flɪŋ/	mirabi-ai-2026-10	active
+hurl	hurl	verb	6	actions	ném mạnh, phóng mạnh	ném thật mạnh và xa	The angry fans hurled bottles onto the pitch.	Cổ động viên giận dữ ném mạnh chai lọ xuống sân.		/hɜːl/	mirabi-ai-2026-10	active
+shove	shove	verb	6	actions	xô mạnh, đẩy mạnh	đẩy người, vật một cách thô bạo	Stop shoving! Wait your turn.	Đừng xô đẩy nữa! Chờ đến lượt đi.		/ʃʌv/	mirabi-ai-2026-10	active
+nudge	nudge	verb	6	actions	huých nhẹ, hích	đẩy nhẹ bằng khuỷu tay để ra hiệu	She nudged me and pointed at the door.	Cô ấy huých nhẹ tôi và chỉ ra cửa.		/nʌdʒ/	mirabi-ai-2026-10	active
+yank	yank	verb	6	actions	giật mạnh	kéo thật mạnh và đột ngột	He yanked the door open.	Anh ấy giật mạnh cửa mở ra.		/jæŋk/	mirabi-ai-2026-10	active
+jerk.move	jerk	verb	6	actions	giật nảy, chuyển động giật cục	chuyển động đột ngột, mạnh một cái	The bus jerked forward and I almost fell.	Xe buýt giật mạnh về phía trước làm tôi suýt ngã.		/dʒɜːk/	mirabi-ai-2026-10	active
+tug	tug	verb	6	actions	giật giật, kéo nhẹ	kéo nhẹ nhiều lần để gây chú ý	The little girl tugged at her mother's sleeve.	Cô bé giật giật tay áo mẹ.		/tʌɡ/	mirabi-ai-2026-10	active
+shatter	shatter	verb	6	actions	vỡ tan tành, vỡ vụn	vỡ đột ngột thành rất nhiều mảnh nhỏ	The glass fell and shattered on the floor.	Chiếc cốc rơi xuống và vỡ tan tành trên sàn.		/ˈʃætə/	mirabi-ai-2026-10	active
+crumple	crumple	verb	6	actions	vò nhàu, vò nát	bóp giấy, vải thành nhiều nếp nhăn	He crumpled the letter and threw it away.	Anh ấy vò nát lá thư rồi vứt đi.		/ˈkrʌmpl/	mirabi-ai-2026-10	active
+dangle	dangle	verb	6	actions	đung đưa lủng lẳng	treo lỏng và đu đưa nhẹ	Her legs dangled over the edge of the bridge.	Đôi chân cô ấy đung đưa lủng lẳng bên mép cầu.		/ˈdæŋɡl/	mirabi-ai-2026-10	active
+wobble	wobble	verb	6	actions	lung lay, lắc lư (như sắp đổ)	lắc qua lại vì không vững	The table wobbles because one leg is short.	Cái bàn lung lay vì có một chân ngắn.		/ˈwɒbl/	mirabi-ai-2026-10	active
+fumble	fumble	verb	6	actions	lần mò, lóng ngóng	dùng tay vụng về khi tìm hoặc cầm vật	He fumbled for his keys in the dark.	Anh ấy lần mò tìm chìa khóa trong bóng tối.		/ˈfʌmbl/	mirabi-ai-2026-10	active
+rummage	rummage	verb	6	actions	lục lọi, lục tung	tìm kiếm bằng cách đảo tung đồ đạc	She rummaged through her bag for a pen.	Cô ấy lục lọi túi xách tìm cây bút.		/ˈrʌmɪdʒ/	mirabi-ai-2026-10	active
+fidget	fidget	verb	6	actions	cựa quậy, ngồi không yên	cử động tay chân liên tục vì chán hoặc lo	Stop fidgeting and sit still!	Đừng cựa quậy nữa, ngồi yên đi!		/ˈfɪdʒɪt/	mirabi-ai-2026-10	active
+beckon	beckon	verb	6	actions	vẫy gọi, ra hiệu lại gần	ra hiệu bằng tay để ai đến gần	The teacher beckoned me to come to the front.	Cô giáo vẫy tay gọi tôi lên phía trước.		/ˈbekən/	mirabi-ai-2026-10	active
+flinch	flinch	verb	6	actions	co rúm lại, rụt lại	co người lại vì đau hoặc sợ	He didn't flinch when the doctor gave him the injection.	Cậu ấy không hề co rúm lại khi bác sĩ tiêm.		/flɪntʃ/	mirabi-ai-2026-10	active
+stagger	stagger	verb	6	actions	đi lảo đảo, loạng choạng bước	bước đi không vững như sắp ngã	He staggered home after the long run.	Anh ấy lảo đảo đi về nhà sau cuộc chạy dài.		/ˈstæɡə/	mirabi-ai-2026-10	active
+lurch	lurch	verb	6	actions	chao mạnh, nghiêng đột ngột	bất ngờ lao hoặc nghiêng mạnh về một phía	The boat lurched and we all fell over.	Con thuyền chao mạnh và tất cả chúng tôi ngã nhào.		/lɜːtʃ/	mirabi-ai-2026-10	active
+sprawl	sprawl	verb	6	actions	nằm ườn, nằm dài	nằm hoặc ngồi duỗi thẳng tay chân thoải mái	He sprawled on the sofa after work.	Anh ấy nằm ườn trên ghế sofa sau giờ làm.		/sprɔːl/	mirabi-ai-2026-10	active
+cling	cling	verb	6	actions	níu chặt, bám riết lấy	ôm hoặc giữ chặt lấy, không chịu buông	The child was clinging to his mother's leg.	Đứa trẻ níu chặt lấy chân mẹ.		/klɪŋ/	mirabi-ai-2026-10	active
+make_do_with	make do with	phrasal_verb	6	actions	xoay xở với, dùng tạm	dùng tạm thứ có sẵn dù không đủ tốt	We had no plates, so we made do with paper.	Không có đĩa nên chúng tôi dùng tạm giấy.			mirabi-ai-2026-10	active
+at_arms_length	at arm's length	idiom	6	actions	cách một sải tay, giữ khoảng cách	cầm vật xa người; nghĩa bóng: không để ai lại quá gần	He held the smelly sock at arm's length.	Anh ấy cầm chiếc tất bốc mùi ra thật xa người.			mirabi-ai-2026-10	active
+pull_your_weight	pull your weight	idiom	6	actions	làm tròn phần việc của mình	đóng góp công sức ngang với người khác trong nhóm	If you want to stay in the team, you have to pull your weight.	Nếu muốn ở lại trong nhóm, bạn phải làm tròn phần việc của mình.			mirabi-ai-2026-10	active
+drag_your_feet	drag your feet	idiom	6	actions	lề mề, chần chừ	cố tình làm chậm vì không muốn làm	Stop dragging your feet and finish your homework.	Đừng lề mề nữa, làm xong bài tập đi.			mirabi-ai-2026-10	active

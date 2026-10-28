@@ -1,0 +1,80 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+news	news	noun	1	media	tin tức	thông tin về sự việc mới xảy ra trên báo, đài, TV hay mạng	I read the news every morning.	Tôi đọc tin tức mỗi sáng.		/njuːz/
+newspaper	newspaper	noun	1	media	tờ báo	báo in trên giấy, ra hằng ngày hoặc hằng tuần	My grandfather buys a newspaper every day.	Ông tôi mua một tờ báo mỗi ngày.	paper	/ˈnjuːzpeɪpə/
+video	video	noun	1	media	đoạn video	hình ảnh động được quay lại, xem trên mạng hoặc điện thoại	He made a funny video of his cat.	Anh ấy làm một đoạn video vui về con mèo của mình.		/ˈvɪdiəʊ/
+post.noun	post	noun	1	media	bài đăng	nội dung (chữ, ảnh, video) được đưa lên mạng xã hội	Her last post got a lot of likes.	Bài đăng gần nhất của cô ấy được rất nhiều lượt thích.		/pəʊst/
+post.verb	post	verb	1	media	đăng (bài, ảnh) lên mạng	đưa nội dung lên mạng xã hội cho người khác xem	I posted a photo of my lunch.	Tôi đã đăng một tấm ảnh bữa trưa của mình.		/pəʊst/
+channel	channel	noun	1	media	kênh truyền hình	mỗi kênh trên TV phát những chương trình riêng	What channel is the football on?	Bóng đá chiếu trên kênh nào vậy?		/ˈtʃænl/
+magazine	magazine	noun	1	media	tạp chí	ấn phẩm có nhiều ảnh, ra hằng tuần hoặc hằng tháng	She reads a fashion magazine on the bus.	Cô ấy đọc một tạp chí thời trang trên xe buýt.		/ˌmæɡəˈziːn/
+radio	radio	noun	1	media	đài, máy radio	thiết bị để nghe tin tức và âm nhạc qua sóng	My dad turns on the radio in the car.	Bố tôi bật đài trong xe hơi.		/ˈreɪdiəʊ/
+programme	programme	noun	1	media	chương trình (truyền hình, phát thanh)	nội dung được phát trên TV hoặc đài	This programme is about wild animals.	Chương trình này nói về động vật hoang dã.	program	/ˈprəʊɡræm/
+comment	comment	noun	1	media	lời bình luận	ý kiến viết dưới bài đăng, video hoặc bài báo	Thanks for your nice comment!	Cảm ơn lời bình luận dễ thương của bạn!		/ˈkɒment/
+like.social	like	verb	1	media	bấm thích (bài đăng)	nhấn nút thích trên mạng xã hội	Please like this video if you enjoyed it.	Hãy bấm thích video này nếu bạn thấy hay nhé.		/laɪk/
+share.social	share	verb	1	media	chia sẻ (bài đăng, đường link)	đăng lại nội dung lên trang của mình cho bạn bè xem	She shared the news with all her friends online.	Cô ấy đã chia sẻ tin đó với tất cả bạn bè trên mạng.		/ʃeə/
+follow.social	follow	verb	1	media	theo dõi (tài khoản trên mạng)	bấm theo dõi để thấy bài đăng mới của ai đó	I follow a lot of cooking accounts.	Tôi theo dõi rất nhiều tài khoản nấu ăn.		/ˈfɒləʊ/
+reader	reader	noun	1	media	người đọc, độc giả	người đọc báo, tạp chí hay trang tin	The magazine has many young readers.	Tạp chí có nhiều độc giả trẻ.		/ˈriːdə/
+ad	ad	noun	1	media	mẩu quảng cáo	đoạn video, hình ảnh giới thiệu sản phẩm để bán hàng	There are too many ads on this website.	Trang web này có quá nhiều quảng cáo.	advert|advertisement	/æd/
+selfie	selfie	noun	1	media	ảnh tự sướng, ảnh selfie	ảnh tự chụp chính mình bằng điện thoại	We took a selfie in front of the lake.	Chúng tôi chụp một tấm ảnh tự sướng trước hồ.		/ˈselfi/
+emoji	emoji	noun	1	media	biểu tượng cảm xúc	hình nhỏ như mặt cười dùng trong tin nhắn, bình luận	She sent me a heart emoji.	Cô ấy gửi cho tôi một biểu tượng trái tim.		/ɪˈməʊdʒi/
+good_news	good news	collocation	1	media	tin vui, tin tốt	khi báo một điều tốt đẹp vừa xảy ra	I have some good news for you!	Tôi có tin vui cho bạn đây!
+bad_news	bad news	collocation	1	media	tin xấu, tin buồn	khi báo một điều không hay vừa xảy ra	I'm sorry, but I have bad news.	Tôi rất tiếc, nhưng tôi có tin xấu.
+evening_news	evening news	collocation	1	media	bản tin buổi tối	chương trình thời sự phát vào buổi tối trên TV	My parents never miss the evening news.	Bố mẹ tôi không bao giờ bỏ lỡ bản tin buổi tối.
+read_the_news	read the news	collocation	1	media	đọc tin tức	đọc báo hoặc tin trên mạng để biết chuyện mới	My mum reads the news on her phone.	Mẹ tôi đọc tin tức trên điện thoại.
+watch_the_news	watch the news	collocation	1	media	xem thời sự	xem bản tin trên truyền hình	We watch the news after dinner.	Chúng tôi xem thời sự sau bữa tối.
+listen_to_the_radio	listen to the radio	collocation	1	media	nghe đài	bật đài để nghe tin tức, nhạc	My grandma listens to the radio every morning.	Bà tôi nghe đài mỗi sáng.
+turn_on_the_radio	turn on the radio	collocation	1	media	bật đài	mở máy radio lên để nghe	Can you turn on the radio, please?	Bạn bật đài lên giúp mình được không?
+on_the_radio	on the radio	collocation	1	media	trên đài phát thanh	nói về thứ được phát qua đài	I heard this song on the radio.	Tôi nghe bài hát này trên đài.
+on_television	on television	collocation	1	media	trên truyền hình, trên TV	nói về thứ được chiếu trên TV	The match is on television tonight.	Trận đấu được chiếu trên truyền hình tối nay.
+watch_a_video	watch a video	collocation	1	media	xem video	xem một đoạn video trên mạng hay điện thoại	Let's watch a video about pandas.	Cùng xem một video về gấu trúc nhé.
+funny_video	funny video	collocation	1	media	video hài	đoạn video gây cười trên mạng	My brother sends me funny videos every day.	Anh tôi gửi cho tôi video hài mỗi ngày.
+make_a_video	make a video	collocation	1	media	làm video (để đăng lên mạng)	quay và tự làm một đoạn video để chia sẻ	We made a video for our class project.	Chúng tôi đã làm một video cho dự án của lớp.
+take_a_selfie	take a selfie	collocation	1	media	chụp ảnh tự sướng	tự chụp ảnh mình bằng điện thoại	Let's take a selfie together!	Cùng chụp ảnh tự sướng nào!
+change_the_channel	change the channel	collocation	1	media	chuyển kênh	bấm sang kênh khác khi xem TV	This show is boring. Can I change the channel?	Chương trình này chán quá. Mình chuyển kênh được không?	switch channels
+journalist	journalist	noun	2	media	nhà báo	người làm nghề viết tin, bài cho báo chí	She works as a journalist for a big newspaper.	Cô ấy làm nhà báo cho một tờ báo lớn.		/ˈdʒɜːnəlɪst/
+reporter	reporter	noun	2	media	phóng viên	người đi lấy tin và đưa tin tại hiện trường	The reporter asked the mayor a question.	Phóng viên đặt một câu hỏi cho thị trưởng.		/rɪˈpɔːtə/
+article	article	noun	2	media	bài báo	bài viết đăng trên báo, tạp chí hay trang tin	I read an interesting article about sleep.	Tôi đã đọc một bài báo thú vị về giấc ngủ.		/ˈɑːtɪkl/
+headline	headline	noun	2	media	tiêu đề (bài báo)	dòng chữ lớn ở đầu bài báo hay bản tin	The headline was about the big storm.	Tiêu đề bài báo nói về cơn bão lớn.		/ˈhedlaɪn/
+follower	follower	noun	2	media	người theo dõi (trên mạng xã hội)	người bấm theo dõi tài khoản của ai đó	He has ten thousand followers.	Anh ấy có mười nghìn người theo dõi.		/ˈfɒləʊə/
+viewer	viewer	noun	2	media	người xem (truyền hình, video)	người xem một chương trình TV hoặc video trên mạng	The show has millions of viewers.	Chương trình có hàng triệu người xem.		/ˈvjuːə/
+listener	listener	noun	2	media	thính giả	người nghe một chương trình phát thanh hay podcast	The radio host answered questions from listeners.	Người dẫn chương trình trả lời câu hỏi của thính giả.		/ˈlɪsnə/
+like.noun	like	noun	2	media	lượt thích	số lần người khác bấm thích bài đăng	My photo got fifty likes.	Ảnh của tôi được năm mươi lượt thích.		/laɪk/
+share.noun	share	noun	2	media	lượt chia sẻ	số lần một bài đăng được người khác chia sẻ lại	The video has over a thousand shares.	Video có hơn một nghìn lượt chia sẻ.		/ʃeə/
+interview.press	interview	verb	2	media	phỏng vấn (để viết bài, đưa tin)	nhà báo hỏi ai đó để đưa lên báo, đài	A TV reporter interviewed the young singer.	Một phóng viên truyền hình đã phỏng vấn ca sĩ trẻ.		/ˈɪntəvjuː/
+report.news	report	verb	2	media	đưa tin, tường thuật	báo, đài kể lại sự việc cho công chúng	The newspaper reported the accident on page two.	Tờ báo đã đưa tin về vụ tai nạn ở trang hai.		/rɪˈpɔːt/
+film.record	film	verb	2	media	quay phim, ghi hình	dùng máy quay hoặc điện thoại để ghi lại sự việc	She filmed the parade on her phone.	Cô ấy quay lại cuộc diễu hành bằng điện thoại.		/fɪlm/
+tag	tag	verb	2	media	gắn thẻ (ai đó trong bài đăng)	ghi tên tài khoản của bạn bè vào ảnh hay bài đăng	Don't tag me in that ugly photo!	Đừng gắn thẻ tôi vào tấm ảnh xấu đó!		/tæɡ/
+advertise	advertise	verb	2	media	quảng cáo (sản phẩm, dịch vụ)	giới thiệu trên báo, TV, mạng để nhiều người mua	The shop advertises on the radio.	Cửa hàng quảng cáo trên đài phát thanh.		/ˈædvətaɪz/
+advertising	advertising	noun	2	media	ngành quảng cáo, việc quảng cáo	công việc làm quảng cáo nói chung	She got a job in advertising.	Cô ấy có được một việc làm trong ngành quảng cáo.		/ˈædvətaɪzɪŋ/
+poster	poster	noun	2	media	áp phích, tấm poster	tờ giấy lớn có hình, dán lên tường để quảng cáo	There is a poster for the new film at the bus stop.	Có một tấm áp phích phim mới ở trạm xe buýt.		/ˈpəʊstə/
+profile	profile	noun	2	media	trang cá nhân	trang giới thiệu bản thân trên mạng xã hội	She updated her profile with a new photo.	Cô ấy cập nhật trang cá nhân với một tấm ảnh mới.		/ˈprəʊfaɪl/
+account.social	account	noun	2	media	tài khoản (mạng xã hội)	tên đăng ký để đăng bài, theo dõi người khác trên mạng	I made a new account for my cooking videos.	Tôi lập một tài khoản mới cho các video nấu ăn của mình.		/əˈkaʊnt/
+hashtag	hashtag	noun	2	media	thẻ bắt đầu bằng dấu thăng (#)	cụm từ có dấu # để gom các bài đăng cùng chủ đề	Use this hashtag to join the contest.	Hãy dùng hashtag này để tham gia cuộc thi.		/ˈhæʃtæɡ/
+meme	meme	noun	2	media	ảnh chế, meme	ảnh hoặc clip hài được chế lại và lan truyền trên mạng	He sent me a funny meme about Mondays.	Anh ấy gửi cho tôi một ảnh chế hài về ngày thứ Hai.		/miːm/
+filter.photo	filter	noun	2	media	bộ lọc ảnh	hiệu ứng làm đẹp hay đổi màu ảnh trước khi đăng	She always uses a filter on her selfies.	Cô ấy luôn dùng bộ lọc cho ảnh tự sướng.		/ˈfɪltə/
+unfollow	unfollow	verb	2	media	bỏ theo dõi	thôi không theo dõi tài khoản của ai đó nữa	I unfollowed him because he posts too much.	Tôi bỏ theo dõi anh ta vì anh ta đăng bài quá nhiều.		/ʌnˈfɒləʊ/
+subscribe	subscribe	verb	2	media	đăng ký theo dõi (kênh, báo)	đăng ký để nhận video mới hoặc báo định kỳ	Subscribe to my channel for more videos!	Hãy đăng ký kênh của mình để xem thêm video nhé!		/səbˈskraɪb/
+blog	blog	noun	2	media	trang blog, nhật ký trên mạng	trang web cá nhân nơi ai đó viết bài thường xuyên	She writes a blog about travel.	Cô ấy viết một trang blog về du lịch.		/blɒɡ/
+blogger	blogger	noun	2	media	người viết blog	người thường xuyên viết bài trên blog	The blogger reviews new phones.	Người viết blog đó đánh giá điện thoại mới.		/ˈblɒɡə/
+live.broadcast	live	adverb	2	media	trực tiếp (phát sóng)	phát ngay lúc sự việc đang diễn ra, không phải ghi lại	The concert will be shown live on TV.	Buổi hòa nhạc sẽ được truyền hình trực tiếp.		/laɪv/
+story.news	story	noun	2	media	mẩu tin, bài viết (về một sự việc)	một tin được báo, đài đưa lên	The main story today is about the floods.	Tin chính hôm nay là về lũ lụt.		/ˈstɔːri/
+presenter	presenter	noun	2	media	người dẫn chương trình (truyền hình, đài)	người giới thiệu và dẫn dắt một chương trình phát sóng	The presenter smiled and said good evening.	Người dẫn chương trình mỉm cười và chào buổi tối.	host	/prɪˈzentə/
+latest	latest	adjective	2	media	mới nhất	nói về tin tức, số báo, video vừa ra gần đây nhất	Have you heard the latest news?	Bạn đã nghe tin mới nhất chưa?		/ˈleɪtɪst/
+fake	fake	adjective	2	media	giả, bị làm giả	nói về ảnh, tài khoản, tin không có thật	That photo of the shark is fake.	Tấm ảnh con cá mập đó là ảnh giả.		/feɪk/
+fake_news	fake news	collocation	2	media	tin giả	tin sai sự thật được cố tình lan truyền	Don't share fake news online.	Đừng chia sẻ tin giả trên mạng.
+breaking_news	breaking news	collocation	2	media	tin nóng, tin mới nhận	tin quan trọng vừa xảy ra, được đưa ngay	We interrupt this programme for breaking news.	Chúng tôi tạm ngắt chương trình để đưa tin nóng.
+front_page	front page	collocation	2	media	trang nhất	trang đầu tiên của tờ báo, nơi có tin quan trọng	The story was on the front page.	Tin đó nằm trên trang nhất.
+news_channel	news channel	collocation	2	media	kênh tin tức	kênh truyền hình chuyên phát tin tức cả ngày	He always watches the same news channel.	Anh ấy luôn xem cùng một kênh tin tức.
+social_media	social media	collocation	2	media	mạng xã hội	các trang, ứng dụng để đăng bài và kết nối mọi người	Teenagers spend hours on social media.	Thanh thiếu niên dành hàng giờ trên mạng xã hội.
+local_news	local news	collocation	2	media	tin địa phương	tin về chuyện xảy ra ở khu vực mình sống	The fire was on the local news.	Vụ cháy được đưa trên tin địa phương.
+world_news	world news	collocation	2	media	tin thế giới, tin quốc tế	tin về các sự việc ở những nước khác	I like to read world news in English.	Tôi thích đọc tin thế giới bằng tiếng Anh.	international news
+radio_station	radio station	collocation	2	media	đài phát thanh (nơi phát sóng)	cơ quan hay kênh phát chương trình trên sóng radio	She works at a local radio station.	Cô ấy làm việc ở một đài phát thanh địa phương.
+radio_show	radio show	collocation	2	media	chương trình radio	một chương trình cụ thể phát trên đài	He hosts a radio show about music.	Anh ấy dẫn một chương trình radio về âm nhạc.
+morning_paper	morning paper	collocation	2	media	tờ báo buổi sáng	tờ báo đọc lúc sáng sớm, thường kèm cà phê	Dad reads the morning paper with his coffee.	Bố đọc báo buổi sáng cùng ly cà phê.
+friend_request	friend request	collocation	2	media	lời mời kết bạn	yêu cầu kết bạn gửi qua mạng xã hội	I got a friend request from my old teacher.	Tôi nhận được lời mời kết bạn từ thầy giáo cũ.
+profile_picture	profile picture	collocation	2	media	ảnh đại diện	ảnh nhỏ hiện cạnh tên trên trang cá nhân	She changed her profile picture again.	Cô ấy lại đổi ảnh đại diện.	profile photo
+leave_a_comment	leave a comment	collocation	2	media	để lại bình luận	viết ý kiến của mình dưới bài đăng, video	Please leave a comment below.	Hãy để lại bình luận bên dưới nhé.
+delete_a_post	delete a post	collocation	2	media	xóa bài đăng	gỡ bài mình đã đăng khỏi mạng xã hội	He deleted the post after an hour.	Anh ấy xóa bài đăng sau một tiếng.
+skip_the_ad	skip the ad	collocation	2	media	bỏ qua quảng cáo	bấm nút để không phải xem hết đoạn quảng cáo	You can skip the ad after five seconds.	Bạn có thể bỏ qua quảng cáo sau năm giây.
+magazine_cover	magazine cover	collocation	2	media	bìa tạp chí	trang ngoài cùng của tạp chí, thường có ảnh lớn	The actor was on the magazine cover.	Nam diễn viên xuất hiện trên bìa tạp chí.
+online_newspaper	online newspaper	collocation	2	media	báo điện tử, báo mạng	tờ báo đăng tin trên Internet thay vì in giấy	Most people now read online newspapers.	Phần lớn mọi người giờ đọc báo điện tử.
+news_feed	news feed	collocation	2	media	bảng tin (mạng xã hội)	danh sách bài đăng mới hiện ra khi mở ứng dụng	My news feed is full of cat videos.	Bảng tin của tôi toàn video mèo.	feed

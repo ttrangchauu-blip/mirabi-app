@@ -1,0 +1,100 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+chop	chop	verb	3	food	thái, băm (thành miếng nhỏ)	dùng dao cắt rau, thịt thành nhiều miếng	Chop the onions and garlic.	Thái hành tây và tỏi.		/tʃɒp/
+slice.verb	slice	verb	3	food	thái lát	cắt thành những miếng mỏng, phẳng	Can you slice the tomatoes for me?	Bạn thái lát cà chua giúp tôi được không?		/slaɪs/
+slice.piece	slice	noun	3	food	lát, miếng mỏng	một miếng mỏng cắt ra từ bánh mì, thịt, bánh	Would you like another slice of cake?	Bạn có muốn thêm một miếng bánh nữa không?		/slaɪs/
+stir	stir	verb	3	food	khuấy, đảo	dùng thìa hoặc đũa đảo đều món ăn, đồ uống	Stir the soup so it doesn't burn.	Khuấy nồi canh để khỏi bị cháy.		/stɜː/
+steam	steam	verb	3	food	hấp	nấu chín bằng hơi nước nóng	We steamed the fish with ginger.	Chúng tôi hấp cá với gừng.		/stiːm/
+roast	roast	verb	3	food	quay (thịt, gà, vịt)	nướng nguyên miếng thịt trong lò hoặc trên lửa	My uncle roasted a whole pig for the party.	Chú tôi quay cả một con lợn cho bữa tiệc.		/rəʊst/
+chew	chew	verb	3	food	nhai	nghiền thức ăn trong miệng bằng răng	Chew your food slowly.	Hãy nhai thức ăn thật chậm.		/tʃuː/
+swallow.food	swallow	verb	3	food	nuốt	cho thức ăn, đồ uống trôi xuống họng	Chew well before you swallow.	Nhai kỹ trước khi nuốt.		/ˈswɒləʊ/
+sip	sip	verb	3	food	nhấp, uống từng ngụm nhỏ	uống chậm từng chút một, thường với đồ uống nóng	She sipped her hot tea by the window.	Cô ấy nhấp từng ngụm trà nóng bên cửa sổ.		/sɪp/
+serve.food	serve	verb	3	food	dọn (món) ra, phục vụ	mang thức ăn ra cho người ăn	Serve the soup while it is hot.	Dọn canh ra khi còn nóng.		/sɜːv/
+squeeze.juice	squeeze	verb	3	food	vắt (lấy nước)	ấn mạnh quả chanh, cam để lấy nước	Squeeze some lime juice over the fish.	Vắt ít nước chanh lên cá.		/skwiːz/
+melt	melt	verb	3	food	làm tan chảy (bơ, sô-cô-la)	đun nóng cho bơ, sô-cô-la chảy lỏng ra	Melt the butter in a small pan.	Đun chảy bơ trong một cái chảo nhỏ.		/melt/
+spread.butter	spread	verb	3	food	phết	trải một lớp mỏng bơ, mứt lên bánh	She spread butter on her toast.	Cô ấy phết bơ lên lát bánh mì nướng.		/spred/
+heat_up	heat up	phrasal_verb	3	food	hâm nóng (đồ ăn)	làm nóng lại đồ ăn đã nguội	I'll heat up the soup in the microwave.	Tôi sẽ hâm nóng canh trong lò vi sóng.	warm up
+skip_a_meal	skip a meal	collocation	3	food	bỏ bữa	không ăn một bữa nào đó trong ngày	It's not healthy to skip meals.	Bỏ bữa là không tốt cho sức khỏe.
+raw	raw	adjective	3	food	sống (chưa nấu chín)	thực phẩm chưa qua nấu nướng	Don't eat raw chicken.	Đừng ăn thịt gà sống.		/rɔː/
+juicy	juicy	adjective	3	food	mọng nước	quả hoặc thịt có nhiều nước, ăn rất ngon	These oranges are sweet and juicy.	Những quả cam này ngọt và mọng nước.		/ˈdʒuːsi/
+crispy	crispy	adjective	3	food	giòn (đồ chiên, nướng)	lớp ngoài khô và giòn như đồ chiên	I love crispy fried chicken.	Tôi rất thích gà rán giòn.	crisp	/ˈkrɪspi/
+creamy	creamy	adjective	3	food	béo ngậy, mịn như kem	có nhiều kem hoặc sữa, mềm mịn	This soup is thick and creamy.	Món súp này đặc và béo ngậy.		/ˈkriːmi/
+oily	oily	adjective	3	food	nhiều dầu	món ăn có nhiều dầu ăn	The fried rice is too oily.	Món cơm rang nhiều dầu quá.		/ˈɔɪli/
+frozen	frozen	adjective	3	food	đông lạnh	thực phẩm được làm đông để giữ lâu	We keep frozen fish in the freezer.	Chúng tôi để cá đông lạnh trong ngăn đá.		/ˈfrəʊzn/
+rotten	rotten	adjective	3	food	thối, hỏng	thực phẩm để lâu bị hư, có mùi khó chịu	Throw away that rotten apple.	Vứt quả táo thối đó đi.		/ˈrɒtn/
+homemade	homemade	adjective	3	food	nhà làm, tự làm	đồ ăn làm ở nhà, không mua ở cửa hàng	Nothing is better than homemade bread.	Không gì ngon hơn bánh mì nhà làm.	home-made	/ˌhəʊmˈmeɪd/
+tender.meat	tender	adjective	3	food	mềm (thịt)	thịt nấu kỹ, dễ cắt, dễ nhai	The beef is so tender.	Thịt bò mềm quá.		/ˈtendə/
+well-done	well-done	adjective	3	food	chín kỹ (thịt bò)	thịt nấu chín hoàn toàn, bên trong không còn hồng	I'd like my steak well-done, please.	Cho tôi miếng bít tết chín kỹ nhé.		/ˌwelˈdʌn/
+starving	starving	adjective	3	food	đói lả, đói meo	khẩu ngữ: rất đói, mạnh hơn hungry	When's dinner? I'm starving!	Khi nào ăn tối vậy? Con đói lả rồi!		/ˈstɑːvɪŋ/
+sugary	sugary	adjective	3	food	nhiều đường	đồ ăn, đồ uống chứa nhiều đường	Try to avoid sugary drinks.	Hãy cố tránh đồ uống nhiều đường.		/ˈʃʊɡəri/
+hungrily	hungrily	adverb	3	food	(ăn) một cách thèm thuồng vì đói	ăn nhanh và nhiều vì đang đói	The kids ate hungrily after football.	Bọn trẻ ăn lấy ăn để sau trận bóng.		/ˈhʌŋɡrəli/
+freshly	freshly	adverb	3	food	vừa mới (làm, nướng, xay)	dùng trước baked, made, cut: mới làm xong	I love the smell of freshly baked bread.	Tôi thích mùi bánh mì vừa mới nướng.		/ˈfreʃli/
+steak	steak	noun	3	food	miếng bít tết	miếng thịt bò dày để nướng hoặc áp chảo	He ordered a steak with chips.	Anh ấy gọi một miếng bít tết với khoai tây chiên.		/steɪk/
+bacon	bacon	noun	3	food	thịt xông khói	thịt lợn ướp muối, hun khói rồi thái lát	We had bacon and eggs for breakfast.	Chúng tôi ăn thịt xông khói và trứng vào bữa sáng.		/ˈbeɪkən/
+papaya	papaya	noun	3	food	quả đu đủ	quả dài, ruột màu cam, nhiều hạt đen	Green papaya salad is a popular dish.	Gỏi đu đủ xanh là một món phổ biến.		/pəˈpaɪə/
+avocado	avocado	noun	3	food	quả bơ	quả vỏ xanh, ruột béo, hay làm sinh tố	Avocado smoothies are popular in Vietnam.	Sinh tố bơ rất phổ biến ở Việt Nam.		/ˌævəˈkɑːdəʊ/
+peach	peach	noun	3	food	quả đào	quả mềm, vỏ có lông tơ, hạt to	These peaches are soft and sweet.	Những quả đào này mềm và ngọt.		/piːtʃ/
+lime	lime	noun	3	food	quả chanh ta, chanh xanh	quả nhỏ vỏ xanh, rất chua, hay vắt vào phở	Add a little lime and chilli to your pho.	Cho thêm chút chanh và ớt vào bát phở của bạn.		/laɪm/
+ginger	ginger	noun	3	food	gừng	củ có vị cay nóng, dùng nấu ăn hoặc pha trà	Ginger tea is good when you have a cold.	Trà gừng rất tốt khi bạn bị cảm.		/ˈdʒɪndʒə/
+lettuce	lettuce	noun	3	food	rau xà lách	rau lá xanh, thường ăn sống	Wash the lettuce before you make the salad.	Rửa xà lách trước khi làm món rau trộn.		/ˈletɪs/
+spice	spice	noun	3	food	gia vị (hạt, vỏ, rễ khô)	như quế, hồi, tiêu, dùng tạo mùi vị cho món ăn	Indian food uses a lot of spices.	Món ăn Ấn Độ dùng rất nhiều gia vị.		/spaɪs/
+vinegar	vinegar	noun	3	food	giấm	chất lỏng chua dùng trộn gỏi, làm nước chấm	Mix the vinegar with sugar and garlic.	Trộn giấm với đường và tỏi.		/ˈvɪnɪɡə/
+dumpling	dumpling	noun	3	food	bánh bao, há cảo	vỏ bột bọc nhân thịt hoặc rau rồi hấp, luộc	We ate steamed dumplings in Chinatown.	Chúng tôi ăn há cảo hấp ở khu phố Tàu.		/ˈdʌmplɪŋ/
+takeaway	takeaway	noun	3	food	đồ ăn mang về	món mua ở nhà hàng mang về nhà ăn	Let's get a takeaway tonight. I'm too tired to cook.	Tối nay mua đồ ăn mang về nhé. Mình mệt quá không nấu nổi.	takeout	/ˈteɪkəweɪ/
+tip.money	tip	noun	3	food	tiền boa, tiền típ	tiền thêm cho người phục vụ để cảm ơn	We left a small tip for the waiter.	Chúng tôi để lại ít tiền boa cho người phục vụ.		/tɪp/
+teaspoon	teaspoon	noun	3	food	thìa cà phê	thìa nhỏ dùng khuấy trà hoặc đong gia vị	Add one teaspoon of sugar.	Cho một thìa cà phê đường.		/ˈtiːspuːn/
+wok	wok	noun	3	food	chảo sâu lòng (chảo xào)	chảo tròn, đáy sâu dùng xào ở lửa lớn	Heat the oil in a wok and add the vegetables.	Đun nóng dầu trong chảo sâu lòng rồi cho rau vào.		/wɒk/
+vitamin	vitamin	noun	3	food	vi-ta-min	chất cơ thể cần, có trong rau quả	Oranges are full of vitamin C.	Cam chứa rất nhiều vi-ta-min C.		/ˈvɪtəmɪn/
+fat.nutrient	fat	noun	3	food	chất béo	chất dinh dưỡng có trong dầu, mỡ, bơ	This food is high in fat and sugar.	Món này có nhiều chất béo và đường.		/fæt/
+porridge	porridge	noun	3	food	cháo	món nấu từ gạo hoặc yến mạch với nhiều nước	When I was sick, my mother made me rice porridge.	Khi tôi ốm, mẹ nấu cháo cho tôi.	congee	/ˈpɒrɪdʒ/
+mint	mint	noun	3	food	rau bạc hà, rau húng	rau thơm mùi mát, ăn kèm bún, nem	Fresh mint makes spring rolls taste better.	Rau húng tươi làm nem cuốn ngon hơn.		/mɪnt/
+basil	basil	noun	3	food	húng quế	rau thơm lá xanh, mùi hơi cay, ăn kèm phở	Put some basil leaves on top of the noodles.	Cho vài lá húng quế lên trên bát phở.		/ˈbæzl/
+loaf	loaf	noun	3	food	ổ bánh mì	một khối bánh mì nướng nguyên, chưa thái	I bought a loaf of bread for breakfast.	Tôi mua một ổ bánh mì cho bữa sáng.		/ləʊf/
+smoothie	smoothie	noun	3	food	sinh tố	đồ uống xay từ trái cây với sữa hoặc đá	I'd like a mango smoothie, please.	Cho tôi một ly sinh tố xoài.		/ˈsmuːði/
+pepper.vegetable	pepper	noun	3	food	ớt chuông	quả to, rỗng ruột, màu xanh, đỏ, vàng, không cay	She added red and green peppers to the salad.	Cô ấy cho ớt chuông đỏ và xanh vào món rau trộn.	bell pepper	/ˈpepə/
+soy_sauce	soy sauce	noun	3	food	xì dầu, nước tương	nước chấm màu nâu đen làm từ đậu nành	Dip the dumplings in soy sauce.	Chấm há cảo vào xì dầu.	soya sauce
+fish_sauce	fish sauce	noun	3	food	nước mắm	nước chấm làm từ cá ủ muối, rất quen thuộc ở Việt Nam	No Vietnamese meal is complete without fish sauce.	Bữa cơm Việt nào cũng không thể thiếu nước mắm.
+water_spinach	water spinach	noun	3	food	rau muống	rau thân rỗng, hay luộc hoặc xào tỏi	Water spinach with garlic is a common dish.	Rau muống xào tỏi là một món ăn phổ biến.	morning glory
+cutting_board	cutting board	noun	3	food	cái thớt	tấm gỗ hoặc nhựa để thái thịt, rau	Wash the cutting board after cutting raw meat.	Rửa thớt sau khi thái thịt sống.	chopping board
+rice_cooker	rice cooker	noun	3	food	nồi cơm điện	nồi điện dùng để nấu cơm	Put the rice and water in the rice cooker.	Cho gạo và nước vào nồi cơm điện.
+main_course	main course	collocation	3	food	món chính	món ăn chính trong bữa có nhiều món	For the main course, I'll have the fish.	Món chính thì tôi chọn món cá.	main dish
+side_dish	side dish	collocation	3	food	món ăn kèm, món phụ	món nhỏ ăn cùng món chính	Kimchi is a popular side dish in Korea.	Kim chi là món ăn kèm phổ biến ở Hàn Quốc.
+set_the_table	set the table	collocation	3	food	bày bàn ăn, dọn bát đũa	đặt bát, đũa, thìa lên bàn trước bữa ăn	Can you help me set the table for dinner?	Con giúp mẹ bày bát đũa cho bữa tối nhé?	lay the table
+help_yourself	help yourself	phrase	3	food	cứ tự nhiên (lấy đồ ăn)	câu mời khách tự lấy thức ăn, đồ uống	There's plenty of food, so help yourself.	Đồ ăn còn nhiều, cứ tự nhiên nhé.
+junk_food	junk food	collocation	3	food	đồ ăn vặt kém lành mạnh	đồ ăn nhiều đường, muối, mỡ nhưng ít dinh dưỡng	Try to eat less junk food.	Hãy cố ăn ít đồ ăn vặt không lành mạnh.
+street_food	street food	collocation	3	food	đồ ăn đường phố	món ăn bán ở vỉa hè, xe đẩy	Hanoi is famous for its street food.	Hà Nội nổi tiếng với đồ ăn đường phố.
+table_for_two	table for two	phrase	3	food	bàn cho hai người	câu nói với nhân viên khi vào nhà hàng	Good evening. A table for two, please.	Chào anh. Cho tôi một bàn hai người.
+book_a_table	book a table	collocation	3	food	đặt bàn (nhà hàng)	gọi điện hoặc đặt trước chỗ ngồi ở nhà hàng	I've booked a table for eight o'clock.	Tôi đã đặt bàn lúc tám giờ.	reserve a table
+whisk	whisk	verb	4	food	đánh (trứng, kem) cho bông	dùng phới đánh nhanh trứng, kem cho nổi bọt	Whisk the eggs and sugar together.	Đánh trứng với đường cho bông lên.		/wɪsk/
+stir-fry	stir-fry	verb	4	food	xào	nấu nhanh trên lửa lớn, đảo liên tục	Stir-fry the beef with onions for three minutes.	Xào thịt bò với hành tây trong ba phút.		/ˈstɜːfraɪ/
+grate	grate	verb	4	food	bào, nạo	chà thực phẩm lên dụng cụ có lỗ để thành sợi nhỏ	Grate some cheese over the pasta.	Bào ít phô mai lên mì Ý.		/ɡreɪt/
+mash	mash	verb	4	food	nghiền nhuyễn	ép nát khoai, chuối cho mịn	Mash the potatoes with a little butter.	Nghiền khoai tây với một chút bơ.		/mæʃ/
+sprinkle	sprinkle	verb	4	food	rắc	rải lên một ít muối, đường, hành	Sprinkle some spring onions on the rice.	Rắc ít hành lá lên cơm.		/ˈsprɪŋkl/
+marinate	marinate	verb	4	food	ướp	ngâm thịt, cá trong gia vị trước khi nấu	Marinate the pork in fish sauce and garlic.	Ướp thịt lợn với nước mắm và tỏi.		/ˈmærɪneɪt/
+season.verb	season	verb	4	food	nêm gia vị	cho muối, tiêu… vào món ăn cho vừa miệng	Season the soup with salt and pepper.	Nêm canh với muối và tiêu.		/ˈsiːzn/
+simmer	simmer	verb	4	food	đun liu riu, ninh nhỏ lửa	nấu ở mức gần sôi trong thời gian dài	Let the soup simmer for an hour.	Để nồi canh ninh nhỏ lửa trong một tiếng.		/ˈsɪmə/
+stew	stew	verb	4	food	hầm	nấu chậm thịt, rau trong ít nước, có nắp đậy	She stewed the beef with carrots.	Cô ấy hầm thịt bò với cà rốt.		/stjuː/
+drain.food	drain	verb	4	food	chắt nước, để ráo	bỏ nước đi sau khi luộc hoặc rửa thực phẩm	Drain the noodles and add the sauce.	Chắt nước khỏi mì rồi cho nước sốt vào.		/dreɪn/
+thaw	thaw	verb	4	food	rã đông	để đồ đông lạnh mềm lại trước khi nấu	Thaw the chicken in the fridge overnight.	Rã đông thịt gà trong tủ lạnh qua đêm.	defrost	/θɔː/
+dine	dine	verb	4	food	dùng bữa (trang trọng)	ăn tối, nhất là ở nơi sang trọng	We dined at a hotel by the lake.	Chúng tôi dùng bữa tối tại một khách sạn bên hồ.		/daɪn/
+crave	crave	verb	4	food	thèm (một món ăn)	rất muốn ăn một món cụ thể	I always crave something sweet after dinner.	Tôi luôn thèm đồ ngọt sau bữa tối.		/kreɪv/
+gulp	gulp	verb	4	food	nốc, uống ừng ực	uống nhanh từng ngụm lớn	He gulped down a glass of cold water.	Anh ấy nốc ừng ực một cốc nước lạnh.		/ɡʌlp/
+nibble	nibble	verb	4	food	nhấm nháp, gặm từng chút	ăn từng miếng rất nhỏ	She nibbled a cookie while she read.	Cô ấy vừa đọc sách vừa nhấm nháp chiếc bánh quy.		/ˈnɪbl/
+digest	digest	verb	4	food	tiêu hóa	cơ thể biến thức ăn thành chất nuôi dưỡng	Some people can't digest milk easily.	Một số người khó tiêu hóa sữa.		/daɪˈdʒest/
+toast.drink	toast	verb	4	food	nâng ly chúc mừng	cùng nâng cốc và chúc ai đó trong bữa tiệc	We toasted the happy couple at the wedding.	Chúng tôi nâng ly chúc mừng đôi vợ chồng trong đám cưới.		/təʊst/
+cut_down_on	cut down on	phrasal_verb	4	food	ăn, uống ít đi	khi muốn dùng ít đường, muối, cà phê hơn trước	The doctor told me to cut down on sugar.	Bác sĩ bảo tôi ăn ít đường đi.
+eat_up	eat up	phrasal_verb	4	food	ăn hết, ăn sạch	ăn hết phần thức ăn của mình	Eat up your vegetables, or you won't get dessert.	Ăn hết rau đi, không thì không có tráng miệng.
+go_off	go off	phrasal_verb	4	food	bị ôi, bị hỏng (đồ ăn)	sữa, thịt để lâu bị chua, có mùi	The milk has gone off. It smells terrible.	Sữa bị hỏng rồi. Mùi kinh khủng.
+greasy	greasy	adjective	4	food	ngấy mỡ, nhờn mỡ	món ăn quá nhiều mỡ, ăn vào thấy ngán	I don't like greasy food late at night.	Tôi không thích đồ ăn nhiều mỡ vào đêm khuya.		/ˈɡriːsi/
+bland	bland	adjective	4	food	nhạt nhẽo, không đậm đà	món ăn ít gia vị, không có vị rõ ràng	Hospital food is often bland.	Đồ ăn bệnh viện thường nhạt nhẽo.		/blænd/
+stale	stale	adjective	4	food	cũ, mất ngon (bánh)	bánh mì, bánh quy để lâu bị cứng hoặc ỉu	This bread is stale. Let's buy a new loaf.	Bánh mì này cũ rồi. Mua ổ mới đi.		/steɪl/
+chewy	chewy	adjective	4	food	dai	phải nhai nhiều mới nuốt được	The beef was too chewy.	Thịt bò dai quá.		/ˈtʃuːi/
+crunchy	crunchy	adjective	4	food	giòn sần sật	cứng giòn khi cắn như rau sống, hạt, táo	Carrots are crunchy and sweet.	Cà rốt giòn và ngọt.		/ˈkrʌntʃi/
+mild.taste	mild	adjective	4	food	dịu, ít cay	món ăn có vị nhẹ, không cay nồng	This curry is mild, so children can eat it.	Món cà ri này ít cay nên trẻ con ăn được.		/maɪld/
+rare.meat	rare	adjective	4	food	tái (thịt bò)	thịt chỉ nấu sơ, bên trong còn đỏ	He likes his steak rare.	Anh ấy thích ăn bít tết tái.		/reə/
+savoury	savoury	adjective	4	food	mặn (không phải món ngọt)	món có vị mặn hoặc cay, trái với món ngọt	Do you prefer sweet or savoury snacks?	Bạn thích đồ ăn vặt ngọt hay mặn?	savory	/ˈseɪvəri/
+filling	filling	adjective	4	food	chắc bụng, no lâu	món ăn làm no nhanh và lâu đói	Sticky rice is cheap and filling.	Xôi vừa rẻ vừa chắc bụng.		/ˈfɪlɪŋ/
+appetizing	appetizing	adjective	4	food	trông ngon mắt, hấp dẫn	đồ ăn có vẻ ngoài, mùi thơm làm người ta muốn ăn	The food looked very appetizing.	Đồ ăn trông rất ngon mắt.	appetising	/ˈæpɪtaɪzɪŋ/
+overcooked	overcooked	adjective	4	food	nấu quá chín, quá lửa	đồ ăn nấu quá lâu nên khô hoặc nhũn	The vegetables were overcooked and soft.	Rau bị nấu quá chín nên nhũn cả.		/ˌəʊvəˈkʊkt/
+undercooked	undercooked	adjective	4	food	chưa chín kỹ	đồ ăn nấu chưa đủ, ăn dễ đau bụng	Undercooked chicken can make you sick.	Thịt gà chưa chín kỹ có thể làm bạn bị ốm.		/ˌʌndəˈkʊkt/
+edible	edible	adjective	4	food	ăn được	có thể ăn mà không độc hại	Not all mushrooms are edible.	Không phải loại nấm nào cũng ăn được.		/ˈedəbl/
+fizzy	fizzy	adjective	4	food	có ga	đồ uống sủi bọt như nước ngọt, soda	Fizzy drinks are bad for your teeth.	Đồ uống có ga không tốt cho răng.		/ˈfɪzi/

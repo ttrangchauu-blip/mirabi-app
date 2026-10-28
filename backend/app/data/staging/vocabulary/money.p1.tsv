@@ -1,0 +1,102 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+money	money	noun	1	money	tiền, tiền bạc	từ chung chỉ tiền để mua bán, chi tiêu	I don't have much money this month.	Tháng này tôi không có nhiều tiền.		/ˈmʌni/
+cash	cash	noun	1	money	tiền mặt	tiền giấy và tiền xu, không phải thẻ hay chuyển khoản	Do you have any cash with you?	Bạn có mang theo tiền mặt không?		/kæʃ/
+coin	coin	noun	1	money	đồng xu	tiền bằng kim loại, hình tròn nhỏ	He found a coin under the sofa.	Anh ấy tìm thấy một đồng xu dưới ghế sofa.		/kɔɪn/
+rich	rich	adjective	1	money	giàu	có nhiều tiền, nhiều tài sản	She wants to be rich one day.	Cô ấy muốn một ngày nào đó trở nên giàu.		/rɪtʃ/
+poor.money	poor	adjective	1	money	nghèo	có rất ít tiền, sống thiếu thốn	They were too poor to buy new shoes.	Họ nghèo đến mức không mua nổi giày mới.		/pɔː/
+spend.money	spend	verb	1	money	tiêu (tiền)	dùng tiền để mua thứ gì đó	How much do you spend on food each week?	Mỗi tuần bạn tiêu bao nhiêu tiền cho ăn uống?		/spend/
+save.money	save	verb	1	money	tiết kiệm, để dành (tiền)	giữ tiền lại thay vì tiêu, khác nghĩa "lưu" trên máy tính	I save a little money every week.	Tôi để dành một ít tiền mỗi tuần.		/seɪv/
+earn	earn	verb	1	money	kiếm được (tiền)	nhận tiền nhờ làm việc	She earns ten million dong a month.	Cô ấy kiếm được mười triệu đồng một tháng.		/ɜːn/
+dollar	dollar	noun	1	money	đồng đô la	đơn vị tiền của Mỹ và một số nước khác	This book costs ten dollars.	Cuốn sách này giá mười đô la.		/ˈdɒlə/
+pound.money	pound	noun	1	money	đồng bảng Anh	đơn vị tiền của nước Anh, khác nghĩa "pao" đo cân nặng	The ticket is twenty pounds.	Vé giá hai mươi bảng Anh.		/paʊnd/
+dong	dong	noun	1	money	đồng (tiền Việt Nam)	đơn vị tiền tệ của Việt Nam	A bowl of pho costs fifty thousand dong.	Một bát phở giá năm mươi nghìn đồng.		/dɒŋ/
+cent	cent	noun	1	money	xu cent (1/100 đô la)	đơn vị tiền nhỏ, 100 cent bằng 1 đô la hoặc 1 euro	The pen costs ninety cents.	Cây bút giá chín mươi xu.		/sent/
+euro	euro	noun	1	money	đồng euro	đơn vị tiền chung của nhiều nước châu Âu	The hotel costs eighty euros a night.	Khách sạn giá tám mươi euro một đêm.		/ˈjʊərəʊ/
+bank_card	bank card	noun	1	money	thẻ ngân hàng	thẻ nhựa ngân hàng cấp để rút tiền, thanh toán	I left my bank card at home.	Tôi để quên thẻ ngân hàng ở nhà.
+credit_card	credit card	noun	1	money	thẻ tín dụng	thẻ để mua trước, trả tiền cho ngân hàng sau	Can I pay with a credit card?	Tôi trả bằng thẻ tín dụng được không?
+bank_account	bank account	noun	1	money	tài khoản ngân hàng	nơi ngân hàng giữ tiền cho bạn	I need a bank account to get paid.	Tôi cần một tài khoản ngân hàng để nhận lương.
+pocket_money	pocket money	noun	1	money	tiền tiêu vặt	tiền bố mẹ cho con cái để tiêu	My parents give me pocket money every week.	Bố mẹ cho tôi tiền tiêu vặt mỗi tuần.
+piggy_bank	piggy bank	noun	1	money	heo đất, ống heo	hộp nhỏ hình con lợn để trẻ em bỏ tiền tiết kiệm	She puts her coins in a piggy bank.	Cô bé bỏ những đồng xu vào heo đất.
+lucky_money	lucky money	noun	1	money	tiền lì xì, tiền mừng tuổi	tiền trong phong bao đỏ dịp Tết	Children get lucky money at Tet.	Trẻ em được nhận tiền lì xì vào dịp Tết.
+make_money	make money	collocation	1	money	kiếm tiền, làm ra tiền	cách nói thông dụng về việc có thu nhập	He wants to make money from his photos.	Anh ấy muốn kiếm tiền từ những bức ảnh của mình.
+pay_in_cash	pay in cash	collocation	1	money	trả bằng tiền mặt	thanh toán bằng tiền giấy, không dùng thẻ	Is it OK if I pay in cash?	Tôi trả bằng tiền mặt có được không?
+keep_the_change	keep the change	phrase	1	money	khỏi thối lại (tiền thừa)	nói khi muốn người bán, tài xế giữ tiền thừa	Here you are, keep the change!	Gửi anh, khỏi thối lại nhé!
+its_on_me	it's on me	phrase	1	money	để tôi trả, tôi mời	nói khi muốn trả tiền cho cả nhóm	Put your money away, it's on me.	Cất tiền đi, để tôi trả.
+lose_money	lose money	collocation	1	money	mất tiền, bị lỗ	khi tiền bị mất hoặc làm ăn, đầu tư không có lời	He lost money on his new shop.	Anh ấy bị lỗ với cửa hàng mới.
+save_up	save up	phrasal_verb	1	money	dành dụm (để mua gì)	để dành tiền dần dần cho một mục đích	I'm saving up for a new bike.	Tôi đang dành dụm để mua xe đạp mới.
+pay_back	pay back	phrasal_verb	1	money	trả lại (tiền đã mượn)	trả tiền cho người đã cho mình mượn	I'll pay you back tomorrow.	Mai tôi sẽ trả lại tiền cho bạn.
+owe	owe	verb	1	money	nợ (tiền ai)	khi bạn còn phải trả tiền cho ai đó	I owe my brother fifty dollars.	Tôi nợ anh trai năm mươi đô la.		/əʊ/
+tax	tax	noun	1	money	thuế	tiền phải nộp cho nhà nước	Everyone has to pay tax.	Ai cũng phải đóng thuế.		/tæks/
+debt	debt	noun	1	money	món nợ, khoản nợ	số tiền bạn đang nợ người khác hoặc ngân hàng	He paid all his debts last year.	Năm ngoái anh ấy đã trả hết nợ.		/det/
+loan	loan	noun	1	money	khoản vay	tiền vay, thường từ ngân hàng, phải trả lại kèm lãi	She got a loan to buy a house.	Cô ấy được một khoản vay để mua nhà.		/ləʊn/
+savings	savings	noun	1	money	tiền tiết kiệm	số tiền đã để dành được	She used her savings to buy a laptop.	Cô ấy dùng tiền tiết kiệm để mua máy tính xách tay.		/ˈseɪvɪŋz/
+afford	afford	verb	1	money	có đủ tiền (để mua, làm gì)	thường dùng với can/can't	We can't afford a new car.	Chúng tôi không đủ tiền mua xe mới.		/əˈfɔːd/
+i_cant_afford_it	I can't afford it	phrase	1	money	tôi không đủ tiền mua	nói khi thứ gì đó quá đắt so với túi tiền	I love this bag, but I can't afford it.	Tôi rất thích cái túi này nhưng tôi không đủ tiền mua.
+cash_machine	cash machine	noun	1	money	máy rút tiền (ATM)	máy ngoài đường hoặc ở ngân hàng để rút tiền mặt	Is there a cash machine near here?	Gần đây có máy rút tiền không?	cashpoint
+budget	budget	noun	2	money	ngân sách	số tiền dự định chi cho một việc trong thời gian nhất định	Our budget for the trip is five million dong.	Ngân sách cho chuyến đi của chúng tôi là năm triệu đồng.		/ˈbʌdʒɪt/
+banknote	banknote	noun	2	money	tiền giấy, tờ tiền	tiền bằng giấy hoặc polymer, khác với tiền xu	He paid with a new banknote.	Anh ấy trả bằng một tờ tiền mới.	note|bill	/ˈbæŋknəʊt/
+penny	penny	noun	2	money	đồng xu penny	tiền xu nhỏ của Anh, 100 penny bằng 1 bảng	I found a penny on the street.	Tôi nhặt được một đồng penny trên đường.		/ˈpeni/
+withdraw	withdraw	verb	2	money	rút (tiền)	lấy tiền ra khỏi tài khoản ngân hàng hoặc máy ATM	I need to withdraw some money.	Tôi cần rút một ít tiền.		/wɪðˈdrɔː/
+deposit.bank	deposit	verb	2	money	gửi (tiền vào tài khoản)	đưa tiền vào ngân hàng	She deposits some money in the bank every Monday.	Thứ Hai nào cô ấy cũng gửi một ít tiền vào ngân hàng.		/dɪˈpɒzɪt/
+waste.money	waste	verb	2	money	phung phí, lãng phí (tiền)	tiêu tiền vào thứ không cần thiết	Don't waste your money on junk food.	Đừng phí tiền vào đồ ăn vặt.		/weɪst/
+fee	fee	noun	2	money	phí, lệ phí	tiền trả cho một dịch vụ, như phí thẻ, phí thành viên	There is a small fee for this card.	Thẻ này mất một khoản phí nhỏ.		/fiː/
+payday	payday	noun	2	money	ngày lĩnh lương	ngày công ty trả lương hằng tháng	I'll buy it after payday.	Tôi sẽ mua nó sau ngày lĩnh lương.		/ˈpeɪdeɪ/
+debit_card	debit card	noun	2	money	thẻ ghi nợ	thẻ trừ tiền trực tiếp từ tài khoản của bạn	I pay for everything with my debit card.	Tôi trả mọi thứ bằng thẻ ghi nợ.
+open_an_account	open an account	collocation	2	money	mở tài khoản (ngân hàng)	khi đăng ký một tài khoản mới ở ngân hàng	I want to open an account at this bank.	Tôi muốn mở tài khoản ở ngân hàng này.
+pay_the_bills	pay the bills	collocation	2	money	trả các hóa đơn	trả tiền điện, nước, nhà… hằng tháng	He works two jobs to pay the bills.	Anh ấy làm hai công việc để trả các hóa đơn.
+a_waste_of_money	a waste of money	collocation	2	money	phí tiền	nói về thứ đã mua mà không đáng	That film was a waste of money.	Bộ phim đó thật phí tiền.
+short_of_money	short of money	collocation	2	money	thiếu tiền, kẹt tiền	khi không có đủ tiền cần thiết	We're a bit short of money this month.	Tháng này chúng tôi hơi kẹt tiền.	short of cash
+millionaire	millionaire	noun	2	money	triệu phú	người có tài sản từ một triệu (đô la) trở lên	He became a millionaire at thirty.	Anh ấy trở thành triệu phú ở tuổi ba mươi.		/ˌmɪljəˈneə/
+billionaire	billionaire	noun	2	money	tỷ phú	người có tài sản từ một tỷ (đô la) trở lên	She is one of the richest billionaires in Asia.	Bà ấy là một trong những tỷ phú giàu nhất châu Á.		/ˌbɪljəˈneə/
+lottery	lottery	noun	2	money	xổ số	trò mua vé số để có cơ hội trúng tiền	She buys a lottery ticket every week.	Cô ấy mua một tờ vé số mỗi tuần.		/ˈlɒtəri/
+win_the_lottery	win the lottery	collocation	2	money	trúng xổ số	khi vé số của bạn trúng giải	What would you do if you won the lottery?	Bạn sẽ làm gì nếu trúng xổ số?
+safe.box	safe	noun	2	money	két sắt	hộp sắt chắc chắn có khóa để cất tiền, đồ quý	The hotel room has a small safe.	Phòng khách sạn có một két sắt nhỏ.		/seɪf/
+interest.bank	interest	noun	2	money	tiền lãi	tiền ngân hàng trả thêm cho tiền gửi hoặc thu thêm khi cho vay	The bank pays five percent interest a year.	Ngân hàng trả lãi năm phần trăm một năm.		/ˈɪntrəst/
+income	income	noun	2	money	thu nhập	tổng số tiền bạn nhận được từ công việc, đầu tư…	Their family income is quite low.	Thu nhập của gia đình họ khá thấp.		/ˈɪnkʌm/
+balance.account	balance	noun	2	money	số dư (tài khoản)	số tiền còn lại trong tài khoản	My bank balance is very low.	Số dư tài khoản ngân hàng của tôi rất thấp.		/ˈbæləns/
+worth	worth	adjective	2	money	trị giá, đáng giá	có giá trị bằng một số tiền nào đó	This old watch is worth a lot of money.	Chiếc đồng hồ cũ này trị giá rất nhiều tiền.		/wɜːθ/
+valuable	valuable	adjective	2	money	có giá trị, đáng tiền	bán được nhiều tiền	Keep your valuable things in the safe.	Hãy cất đồ có giá trị vào két sắt.		/ˈvæljuəbl/
+cheaply	cheaply	adverb	2	money	một cách rẻ, với giá rẻ	làm gì đó mà tốn ít tiền	You can eat cheaply at the night market.	Bạn có thể ăn uống rẻ ở chợ đêm.		/ˈtʃiːpli/
+wisely	wisely	adverb	2	money	một cách khôn ngoan	nói về việc dùng tiền hợp lý, có suy nghĩ	Spend your money wisely.	Hãy tiêu tiền một cách khôn ngoan.		/ˈwaɪzli/
+transfer.money	transfer	verb	2	money	chuyển (tiền), chuyển khoản	gửi tiền từ tài khoản này sang tài khoản khác	I'll transfer the money to you tonight.	Tối nay tôi sẽ chuyển tiền cho bạn.		/trænsˈfɜː/
+exchange.money	exchange	verb	2	money	đổi (tiền)	đổi tiền nước này sang tiền nước khác	Where can I exchange dollars for dong?	Tôi có thể đổi đô la sang tiền đồng ở đâu?		/ɪksˈtʃeɪndʒ/
+invest	invest	verb	2	money	đầu tư	bỏ tiền vào việc gì để mong có lời sau này	My dad wants to invest in gold.	Bố tôi muốn đầu tư vào vàng.		/ɪnˈvest/
+insurance	insurance	noun	2	money	bảo hiểm	trả tiền định kỳ để được bồi thường khi gặp rủi ro	Do you have travel insurance?	Bạn có bảo hiểm du lịch không?		/ɪnˈʃʊərəns/
+charge.fee	charge	verb	2	money	tính phí, lấy (tiền)	khi bên bán, ngân hàng yêu cầu trả một số tiền, khác nghĩa "sạc"	The bank charges two dollars for each transfer.	Ngân hàng tính phí hai đô la cho mỗi lần chuyển khoản.		/tʃɑːdʒ/
+my_treat	my treat	phrase	2	money	tôi đãi, tôi mời	nói khi mời ai đó ăn uống và mình trả tiền	Order anything you like, it's my treat.	Cứ gọi món gì bạn thích, tôi đãi.
+split_the_bill	split the bill	collocation	2	money	chia tiền hóa đơn	khi mỗi người trả một phần tiền ăn uống	Let's split the bill this time.	Lần này mình chia tiền nhé.
+top_up	top up	phrasal_verb	2	money	nạp tiền (điện thoại, thẻ, ví)	thêm tiền vào tài khoản điện thoại hoặc ví điện tử	I need to top up my phone.	Tôi cần nạp tiền điện thoại.
+account_number	account number	noun	2	money	số tài khoản	dãy số của tài khoản ngân hàng	Please send me your account number.	Bạn gửi tôi số tài khoản nhé.
+bank_transfer	bank transfer	noun	2	money	chuyển khoản ngân hàng	việc chuyển tiền qua ngân hàng (danh từ)	You can pay by bank transfer.	Bạn có thể thanh toán bằng chuyển khoản ngân hàng.
+pay_tax	pay tax	collocation	2	money	nộp thuế, đóng thuế	khi người dân, công ty đưa tiền thuế cho nhà nước	Shops must pay tax on what they sell.	Các cửa hàng phải nộp thuế trên hàng họ bán.	pay taxes
+donate	donate	verb	2	money	quyên góp, ủng hộ (tiền)	cho tiền để giúp người khác hoặc tổ chức từ thiện	We donated money to the flood victims.	Chúng tôi đã quyên góp tiền cho nạn nhân lũ lụt.		/dəʊˈneɪt/
+cash_prize	cash prize	noun	2	money	giải thưởng tiền mặt	giải thưởng bằng tiền khi thắng cuộc thi	The winner gets a cash prize.	Người thắng sẽ nhận giải thưởng tiền mặt.
+pay_off	pay off	phrasal_verb	2	money	trả hết (nợ)	trả xong toàn bộ khoản nợ, khoản vay	It took us ten years to pay off the loan.	Chúng tôi mất mười năm để trả hết khoản vay.
+get_rich	get rich	collocation	2	money	làm giàu, trở nên giàu	khi ai đó có thêm nhiều tiền	Nobody gets rich by doing nothing.	Không ai trở nên giàu bằng việc ngồi không.
+wealthy	wealthy	adjective	2	money	giàu có	trang trọng hơn rich, có nhiều tiền và tài sản	He comes from a wealthy family.	Anh ấy xuất thân từ một gia đình giàu có.		/ˈwelθi/
+broke	broke	adjective	2	money	cháy túi, hết sạch tiền	khẩu ngữ, khi bạn không còn đồng nào	I can't go out tonight, I'm broke.	Tối nay tôi không đi chơi được, tôi cháy túi rồi.		/brəʊk/
+financial	financial	adjective	2	money	(thuộc về) tài chính	liên quan đến tiền bạc, ngân hàng	The company has financial problems.	Công ty đang gặp vấn đề tài chính.		/faɪˈnænʃl/
+currency	currency	noun	2	money	tiền tệ	loại tiền của một quốc gia	The currency of Japan is the yen.	Tiền tệ của Nhật Bản là đồng yên.		/ˈkʌrənsi/
+pension	pension	noun	2	money	lương hưu	tiền nhận hằng tháng sau khi nghỉ hưu	My grandfather lives on his pension.	Ông tôi sống bằng lương hưu.		/ˈpenʃn/
+wealth	wealth	noun	2	money	sự giàu có, của cải	tổng số tiền và tài sản của ai đó	He made his wealth from hotels.	Ông ấy làm giàu từ khách sạn.		/welθ/
+investment	investment	noun	2	money	khoản đầu tư, sự đầu tư	tiền bỏ ra với mong muốn có lời	Buying land is a good investment.	Mua đất là một khoản đầu tư tốt.		/ɪnˈvestmənt/
+expense	expense	noun	2	money	khoản chi, chi phí	tiền phải chi cho một việc	Rent is my biggest expense.	Tiền thuê nhà là khoản chi lớn nhất của tôi.		/ɪkˈspens/
+scam	scam	noun	2	money	trò lừa đảo (lấy tiền)	mánh khóe lừa người khác để chiếm tiền	Don't click that link, it's a scam.	Đừng bấm vào đường link đó, đó là lừa đảo.		/skæm/
+interest_rate	interest rate	noun	2	money	lãi suất	tỷ lệ phần trăm tiền lãi ngân hàng tính hoặc trả	The interest rate on this loan is high.	Lãi suất của khoản vay này cao.
+online_banking	online banking	noun	2	money	ngân hàng trực tuyến	dùng ứng dụng, trang web để giao dịch ngân hàng	I pay my bills with online banking.	Tôi trả các hóa đơn bằng ngân hàng trực tuyến.
+e-wallet	e-wallet	noun	2	money	ví điện tử	ứng dụng trên điện thoại để lưu tiền và thanh toán	Many young people pay with an e-wallet.	Nhiều bạn trẻ thanh toán bằng ví điện tử.		/ˈiː wɒlɪt/
+in_debt	in debt	phrase	2	money	đang mắc nợ	tình trạng còn nợ tiền chưa trả	After the wedding, they were in debt.	Sau đám cưới, họ đang mắc nợ.
+cost_of_living	cost of living	noun	2	money	chi phí sinh hoạt	mức tiền cần để sống ở một nơi (ăn, ở, đi lại)	The cost of living in Hanoi is going up.	Chi phí sinh hoạt ở Hà Nội đang tăng.
+health_insurance	health insurance	noun	2	money	bảo hiểm y tế	bảo hiểm chi trả tiền khám chữa bệnh	Students must buy health insurance.	Sinh viên phải mua bảo hiểm y tế.
+savings_account	savings account	noun	2	money	tài khoản tiết kiệm	tài khoản ngân hàng để gửi tiền lấy lãi	I opened a savings account for my son.	Tôi đã mở một tài khoản tiết kiệm cho con trai.
+cheque	cheque	noun	2	money	séc, tấm séc	giấy ngân hàng ghi số tiền để trả thay tiền mặt	He paid by cheque.	Anh ấy trả bằng séc.	check	/tʃek/
+worthless	worthless	adjective	3	money	vô giá trị, không đáng một xu	không bán được tiền hoặc rất ít	The old coins turned out to be worthless.	Những đồng xu cũ hóa ra lại vô giá trị.		/ˈwɜːθləs/
+affordable	affordable	adjective	3	money	giá phải chăng, vừa túi tiền	đủ rẻ để nhiều người mua được	We are looking for an affordable flat.	Chúng tôi đang tìm một căn hộ giá phải chăng.		/əˈfɔːdəbl/
+economical	economical	adjective	3	money	tiết kiệm, đỡ tốn kém	dùng ít tiền, ít xăng, ít điện…	This small car is very economical.	Chiếc xe nhỏ này rất tiết kiệm.		/ˌiːkəˈnɒmɪkl/
+well-off	well-off	adjective	3	money	khá giả	có đủ tiền để sống thoải mái	Her parents are quite well-off.	Bố mẹ cô ấy khá giả.	well off	/ˌwel ˈɒf/
+wasteful	wasteful	adjective	3	money	hoang phí, lãng phí	dùng tiền, đồ đạc nhiều hơn mức cần	It's wasteful to buy things you never use.	Mua những thứ bạn không bao giờ dùng là hoang phí.		/ˈweɪstfl/
+due.payment	due	adjective	3	money	đến hạn (phải trả)	khi một khoản tiền phải được trả vào ngày đó	The rent is due on Friday.	Tiền nhà đến hạn phải trả vào thứ Sáu.		/djuː/
+fortune	fortune	noun	3	money	gia tài, khoản tiền rất lớn	số tiền hoặc tài sản rất nhiều	He made a fortune selling phones.	Ông ấy kiếm được cả gia tài nhờ bán điện thoại.		/ˈfɔːtʃuːn/
+borrower	borrower	noun	3	money	người vay (tiền)	người hoặc công ty đi vay tiền	The bank checks every borrower carefully.	Ngân hàng kiểm tra kỹ từng người vay.		/ˈbɒrəʊə/
+lender	lender	noun	3	money	người cho vay, bên cho vay	người hoặc tổ chức cho vay tiền	Banks are the biggest lenders.	Ngân hàng là bên cho vay lớn nhất.		/ˈlendə/
+cashback	cashback	noun	3	money	tiền hoàn lại	một phần tiền được trả lại khi mua hàng bằng thẻ, ví	This card gives you two percent cashback.	Thẻ này hoàn lại cho bạn hai phần trăm.		/ˈkæʃbæk/

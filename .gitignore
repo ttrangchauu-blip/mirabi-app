@@ -1,0 +1,12 @@
+**/node_modules/
+**/.expo/
+**/.venv/
+**/__pycache__/
+**/.env
+**/*.db
+**/.pytest_cache/
+**/coverage/
+.local-preview/
+.pet-assets-backup-*/
+**/.pytest-*/
+**/*.log

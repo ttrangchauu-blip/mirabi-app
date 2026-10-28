@@ -1,0 +1,103 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+net.income	net	adjective	4	money	ròng, thực nhận (sau thuế, phí)	số tiền còn lại sau khi đã trừ thuế và chi phí	My net salary is fifteen million dong.	Lương thực nhận của tôi là mười lăm triệu đồng.	nett	/net/
+gross.income	gross	adjective	4	money	tổng, gộp (trước thuế)	số tiền trước khi trừ thuế và chi phí	His gross income is higher than he thinks.	Tổng thu nhập trước thuế của anh ấy cao hơn anh ấy nghĩ.		/ɡrəʊs/
+teller	teller	noun	4	money	giao dịch viên ngân hàng	nhân viên ngồi quầy nhận, trả tiền cho khách	The teller counted the money twice.	Giao dịch viên đếm tiền hai lần.		/ˈtelə/
+pawnshop	pawnshop	noun	4	money	tiệm cầm đồ	nơi cho vay tiền khi bạn để lại đồ có giá trị	He took his watch to a pawnshop.	Anh ấy mang đồng hồ ra tiệm cầm đồ.		/ˈpɔːnʃɒp/
+vault	vault	noun	4	money	kho tiền, hầm két	phòng kín, rất chắc chắn trong ngân hàng để giữ tiền, vàng	The gold is kept in the bank's vault.	Vàng được cất trong kho tiền của ngân hàng.		/vɔːlt/
+buck	buck	noun	4	money	đô (đô la, tiếng lóng)	khẩu ngữ của người Mỹ, Úc khi nói về đô la	Can you lend me ten bucks?	Cho tôi mượn mười đô được không?		/bʌk/
+quid	quid	noun	4	money	bảng Anh (tiếng lóng)	khẩu ngữ của người Anh khi nói về bảng Anh	The taxi cost twenty quid.	Taxi hết hai mươi bảng.		/kwɪd/
+credit_score	credit score	noun	4	money	điểm tín dụng	con số ngân hàng dùng để xem bạn có đáng tin khi vay không	A good credit score helps you get a loan.	Điểm tín dụng tốt giúp bạn được vay tiền.
+credit_limit	credit limit	noun	4	money	hạn mức tín dụng	số tiền tối đa được tiêu bằng thẻ tín dụng	I've reached my credit limit.	Tôi đã dùng hết hạn mức tín dụng.
+stock_exchange	stock exchange	noun	4	money	sở giao dịch chứng khoán	tổ chức, tòa nhà nơi cổ phiếu được mua bán	The company is on the Ho Chi Minh City Stock Exchange.	Công ty được niêm yết trên Sở giao dịch chứng khoán TP. Hồ Chí Minh.
+tax_return	tax return	noun	4	money	tờ khai thuế	giấy khai thu nhập nộp cho cơ quan thuế mỗi năm	I have to send my tax return by March.	Tôi phải nộp tờ khai thuế trước tháng Ba.
+passive_income	passive income	noun	4	money	thu nhập thụ động	tiền kiếm được mà không cần làm việc hằng ngày, như tiền cho thuê nhà	Renting out a flat gives her a passive income.	Cho thuê căn hộ mang lại cho cô ấy thu nhập thụ động.
+within_budget	within budget	phrase	4	money	trong phạm vi ngân sách	khi chi tiêu không vượt quá số tiền đã định	We finished the house within budget.	Chúng tôi xây xong nhà trong phạm vi ngân sách.
+splash_out	splash out	phrasal_verb	4	money	vung tiền, chịu chi	tiêu nhiều tiền cho thứ gì đó để tự thưởng	We splashed out on a nice dinner for her birthday.	Chúng tôi chịu chi một bữa tối sang trọng cho sinh nhật cô ấy.
+go_dutch	go Dutch	idiom	4	money	chia đôi tiền, ai trả phần nấy	khi đi ăn, đi chơi mỗi người tự trả tiền của mình	On our first date, we went Dutch.	Trong buổi hẹn đầu tiên, chúng tôi ai trả phần nấy.
+overdraft	overdraft	noun	4	money	khoản thấu chi	khi ngân hàng cho bạn tiêu quá số tiền có trong tài khoản	I have a small overdraft at the moment.	Hiện giờ tôi đang có một khoản thấu chi nhỏ.		/ˈəʊvədrɑːft/
+cryptocurrency	cryptocurrency	noun	4	money	tiền điện tử, tiền mã hóa	tiền số như Bitcoin, không do ngân hàng phát hành	He lost half his savings on cryptocurrency.	Anh ấy mất một nửa tiền tiết kiệm vì tiền điện tử.	crypto	/ˈkrɪptəʊkʌrənsi/
+bankruptcy	bankruptcy	noun	4	money	sự phá sản	tình trạng không thể trả nợ (danh từ)	The shop is close to bankruptcy.	Cửa hàng sắp phá sản.		/ˈbæŋkrʌptsi/
+miser	miser	noun	4	money	kẻ hà tiện, người keo kiệt	người tích trữ tiền và rất ghét tiêu tiền	The old miser lived in a tiny room full of money.	Lão hà tiện sống trong một căn phòng nhỏ đầy tiền.		/ˈmaɪzə/
+lavish	lavish	adjective	4	money	xa hoa, hoành tráng	tốn rất nhiều tiền, trông rất đắt	They had a lavish wedding in a five-star hotel.	Họ tổ chức một đám cưới xa hoa ở khách sạn năm sao.		/ˈlævɪʃ/
+frugally	frugally	adverb	4	money	một cách đạm bạc, tằn tiện	sống, tiêu tiền rất ít, chỉ những thứ cần	They live frugally and save half their income.	Họ sống tằn tiện và tiết kiệm một nửa thu nhập.		/ˈfruːɡəli/
+extravagantly	extravagantly	adverb	4	money	một cách phung phí	tiêu tiền quá mức cần thiết	He spends extravagantly on clothes.	Anh ấy chi tiêu phung phí cho quần áo.		/ɪkˈstrævəɡəntli/
+counterfeit	counterfeit	adjective	5	money	giả (tiền, hàng)	được làm giả để lừa người khác	Police found a bag of counterfeit money.	Cảnh sát tìm thấy một túi tiền giả.	fake	/ˈkaʊntəfɪt/
+loaded	loaded	adjective	5	money	giàu sụ, lắm tiền	tiếng lóng, nói về người có rất nhiều tiền	Her new boyfriend is loaded.	Bạn trai mới của cô ấy giàu sụ.		/ˈləʊdɪd/
+affluent	affluent	adjective	5	money	sung túc, giàu có	trang trọng, thường nói về khu vực, tầng lớp	They live in an affluent part of the city.	Họ sống ở một khu giàu có của thành phố.		/ˈæfluənt/
+prosperous	prosperous	adjective	5	money	thịnh vượng, phát đạt	giàu lên và làm ăn thành công	We wish you a prosperous new year.	Chúc bạn một năm mới thịnh vượng.		/ˈprɒspərəs/
+well-to-do	well-to-do	adjective	5	money	khá giả, có của ăn của để	thuộc gia đình có tiền, sống dư dả	She was born into a well-to-do family.	Cô ấy sinh ra trong một gia đình khá giả có của ăn của để.		/ˌwel tə ˈduː/
+monetary	monetary	adjective	5	money	(thuộc) tiền tệ	liên quan đến tiền của một quốc gia, lãi suất	The central bank controls monetary policy.	Ngân hàng trung ương điều hành chính sách tiền tệ.		/ˈmʌnɪtri/
+taxable	taxable	adjective	5	money	chịu thuế, phải đóng thuế	thu nhập, hàng hóa mà nhà nước có thể thu thuế	Is this bonus taxable?	Khoản thưởng này có phải chịu thuế không?		/ˈtæksəbl/
+outstanding.debt	outstanding	adjective	5	money	chưa thanh toán, còn nợ	khoản tiền vẫn chưa được trả	You have an outstanding bill of two hundred dollars.	Bạn còn một hóa đơn chưa thanh toán hai trăm đô la.		/aʊtˈstændɪŋ/
+overdrawn	overdrawn	adjective	5	money	bị âm tài khoản	đã tiêu nhiều hơn số tiền trong tài khoản	I'm fifty pounds overdrawn.	Tài khoản của tôi đang âm năm mươi bảng.		/ˌəʊvəˈdrɔːn/
+fixed.rate	fixed	adjective	5	money	cố định (lãi suất, giá)	không thay đổi trong suốt thời gian vay, gửi	We chose a loan with a fixed rate for three years.	Chúng tôi chọn khoản vay có lãi suất cố định trong ba năm.		/fɪkst/
+materialistic	materialistic	adjective	5	money	thực dụng, coi trọng vật chất	quá quan tâm đến tiền bạc và đồ đắt tiền	Some people think young people are too materialistic.	Một số người cho rằng giới trẻ quá coi trọng vật chất.		/məˌtɪəriəˈlɪstɪk/
+lavishly	lavishly	adverb	5	money	một cách xa hoa	chi tiêu, trang trí rất tốn kém	The hotel room was lavishly decorated.	Phòng khách sạn được trang trí xa hoa.		/ˈlævɪʃli/
+affordably	affordably	adverb	5	money	với giá phải chăng	làm gì đó mà không quá tốn tiền	You can travel affordably by bus.	Bạn có thể đi du lịch với giá phải chăng bằng xe buýt.		/əˈfɔːdəbli/
+sparingly	sparingly	adverb	5	money	một cách dè sẻn, hạn chế	chỉ dùng một ít, không phung phí	Use your credit card sparingly.	Hãy dùng thẻ tín dụng một cách dè sẻn.		/ˈspeərɪŋli/
+splurge	splurge	verb	5	money	vung tiền mua sắm	tiêu nhiều tiền một lúc vào thứ mình thích	I splurged on a new pair of shoes.	Tôi đã vung tiền mua một đôi giày mới.		/splɜːdʒ/
+forge.money	forge	verb	5	money	làm giả (tiền, chữ ký, giấy tờ)	làm bản sao giả để lừa người khác	He was caught forging banknotes.	Anh ta bị bắt vì làm giả tiền giấy.		/fɔːdʒ/
+hoard	hoard	verb	5	money	tích trữ, găm giữ	cất giấu nhiều tiền, vàng hoặc hàng hóa, không dùng đến	People hoard gold when prices go up.	Người ta tích trữ vàng khi giá cả tăng.		/hɔːd/
+accumulate	accumulate	verb	5	money	tích lũy, tích góp	gom dần dần thành nhiều tiền, tài sản	He accumulated a lot of money over the years.	Qua nhiều năm, ông ấy tích lũy được rất nhiều tiền.		/əˈkjuːmjəleɪt/
+reimburse	reimburse	verb	5	money	hoàn lại (chi phí)	trả lại cho ai số tiền họ đã tự chi trước	The company will reimburse your travel costs.	Công ty sẽ hoàn lại chi phí đi lại cho bạn.		/ˌriːɪmˈbɜːs/
+bribe	bribe	verb	5	money	hối lộ, đút lót	đưa tiền cho ai để họ làm điều sai trái giúp mình	He tried to bribe the police officer.	Anh ta tìm cách hối lộ viên cảnh sát.		/braɪb/
+economise	economise	verb	5	money	chi tiêu dè sẻn, tiết giảm	cắt bớt chi tiêu vì đang cần tiết kiệm	We need to economise on electricity.	Chúng ta cần tiết giảm tiền điện.	economize	/ɪˈkɒnəmaɪz/
+allocate	allocate	verb	5	money	phân bổ (tiền)	chia tiền, nguồn lực cho từng việc cụ thể	We allocated ten percent of our income to savings.	Chúng tôi phân bổ mười phần trăm thu nhập cho tiết kiệm.		/ˈæləkeɪt/
+deduct	deduct	verb	5	money	khấu trừ, trừ (tiền)	lấy bớt một khoản ra khỏi tổng số tiền	Tax is deducted from your salary.	Thuế được khấu trừ vào lương của bạn.		/dɪˈdʌkt/
+diversify	diversify	verb	5	money	đa dạng hóa (đầu tư)	chia tiền vào nhiều loại đầu tư để bớt rủi ro	Experts say you should diversify your investments.	Chuyên gia khuyên bạn nên đa dạng hóa các khoản đầu tư.		/daɪˈvɜːsɪfaɪ/
+pawn	pawn	verb	5	money	cầm đồ, cầm cố	để lại đồ có giá trị ở tiệm để vay tiền	She pawned her ring to pay the rent.	Cô ấy cầm chiếc nhẫn để trả tiền nhà.		/pɔːn/
+bounce.cheque	bounce	verb	5	money	(séc) bị trả về	séc không được thanh toán vì tài khoản không đủ tiền	His cheque bounced, so we never got paid.	Tấm séc của anh ta bị trả về nên chúng tôi không nhận được tiền.		/baʊns/
+premium.insurance	premium	noun	5	money	phí bảo hiểm	tiền phải đóng định kỳ cho công ty bảo hiểm	My car insurance premium went up this year.	Phí bảo hiểm xe hơi của tôi năm nay tăng.		/ˈpriːmiəm/
+dividend	dividend	noun	5	money	cổ tức	phần lợi nhuận công ty chia cho người có cổ phần	The company pays a dividend twice a year.	Công ty trả cổ tức hai lần một năm.		/ˈdɪvɪdend/
+portfolio.investment	portfolio	noun	5	money	danh mục đầu tư	tập hợp các khoản đầu tư của một người	She has a mix of stocks and bonds in her portfolio.	Danh mục đầu tư của cô ấy có cả cổ phiếu và trái phiếu.		/pɔːtˈfəʊliəʊ/
+bond.finance	bond	noun	5	money	trái phiếu	giấy vay nợ của nhà nước, công ty, trả lãi cho người mua	Government bonds are a safe investment.	Trái phiếu chính phủ là một khoản đầu tư an toàn.		/bɒnd/
+asset	asset	noun	5	money	tài sản	thứ có giá trị mà một người, công ty sở hữu	Their house is their biggest asset.	Ngôi nhà là tài sản lớn nhất của họ.		/ˈæset/
+creditor	creditor	noun	5	money	chủ nợ	người hoặc công ty mà mình đang nợ tiền	The creditors want their money back.	Các chủ nợ muốn lấy lại tiền.		/ˈkredɪtə/
+debtor	debtor	noun	5	money	con nợ, người mắc nợ	người đang nợ tiền người khác	The debtor promised to pay by the end of the month.	Con nợ hứa sẽ trả vào cuối tháng.		/ˈdetə/
+return.investment	return	noun	5	money	lợi nhuận, tiền lời (từ đầu tư)	số tiền kiếm thêm được từ một khoản đầu tư	Real estate gives a good return.	Bất động sản mang lại lợi nhuận tốt.		/rɪˈtɜːn/
+beneficiary	beneficiary	noun	5	money	người thụ hưởng	người nhận tiền từ bảo hiểm, di chúc, chuyển khoản	His wife is the beneficiary of his life insurance.	Vợ anh ấy là người thụ hưởng bảo hiểm nhân thọ của anh.		/ˌbenɪˈfɪʃəri/
+direct_debit	direct debit	noun	5	money	trích nợ tự động	lệnh cho ngân hàng tự trừ tiền trả hóa đơn định kỳ	I pay my phone bill by direct debit.	Tôi trả hóa đơn điện thoại bằng trích nợ tự động.
+disposable_income	disposable income	noun	5	money	thu nhập khả dụng	tiền còn lại để tiêu sau khi trả thuế và chi phí cần thiết	Young people spend most of their disposable income on travel.	Giới trẻ dành phần lớn thu nhập khả dụng cho du lịch.
+financial_freedom	financial freedom	noun	5	money	tự do tài chính	khi có đủ tiền để sống mà không phụ thuộc vào lương	Her goal is to reach financial freedom by forty.	Mục tiêu của cô ấy là đạt tự do tài chính trước bốn mươi tuổi.
+run_up	run up	phrasal_verb	5	money	để (nợ, hóa đơn) chồng chất	tiêu nhiều đến mức nợ, hóa đơn tăng cao	He ran up huge debts on his credit cards.	Anh ấy để nợ thẻ tín dụng chồng chất.
+dip_into	dip into	phrasal_verb	5	money	lấy bớt (tiền để dành)	dùng một phần tiền tiết kiệm vì cần tiêu	We had to dip into our savings to fix the car.	Chúng tôi phải lấy bớt tiền tiết kiệm để sửa xe.
+break_the_bank	break the bank	idiom	5	money	tốn quá nhiều tiền	thường dùng ở thể phủ định: "không quá đắt"	A weekend at the beach won't break the bank.	Một cuối tuần ở biển sẽ không tốn quá nhiều tiền đâu.
+tighten_your_belt	tighten your belt	idiom	5	money	thắt lưng buộc bụng	chi tiêu ít đi vì đang khó khăn về tiền	If you lose your job, you will have to tighten your belt.	Nếu mất việc, bạn sẽ phải thắt lưng buộc bụng.	tighten one's belt
+save_for_a_rainy_day	save for a rainy day	idiom	5	money	tích cốc phòng cơ	để dành tiền cho lúc khó khăn bất ngờ	My mother always told me to save for a rainy day.	Mẹ tôi luôn dặn phải tích cốc phòng cơ.
+in_the_red	in the red	idiom	5	money	bị âm tiền, thua lỗ	tài khoản âm hoặc đang nợ, chi nhiều hơn thu	My bank account is in the red again.	Tài khoản ngân hàng của tôi lại bị âm rồi.
+live_beyond_your_means	live beyond your means	idiom	5	money	sống vượt quá khả năng tài chính	tiêu nhiều hơn số tiền mình kiếm được	If you live beyond your means, you will get into debt.	Nếu sống vượt quá khả năng tài chính, bạn sẽ mắc nợ.	live beyond one's means
+live_within_your_means	live within your means	idiom	5	money	sống trong khả năng tài chính	chỉ tiêu bằng hoặc ít hơn số tiền mình có	It's important to live within your means.	Sống trong khả năng tài chính của mình là điều quan trọng.	live within one's means
+money_doesnt_grow_on_trees	money doesn't grow on trees	idiom	5	money	tiền đâu phải lá mít	nói khi nhắc ai đừng tiêu tiền hoang	Turn off the lights, money doesn't grow on trees!	Tắt đèn đi, tiền đâu phải lá mít!
+from_rags_to_riches	from rags to riches	idiom	5	money	từ nghèo khó trở nên giàu có	câu chuyện người nghèo đổi đời thành giàu	His life went from rags to riches.	Cuộc đời ông ấy đi từ nghèo khó đến giàu có.	rags to riches
+destitute	destitute	adjective	6	money	cơ cực, bần cùng	trang trọng, nghèo đến mức không có cả thứ cần để sống	The war left many families destitute.	Chiến tranh khiến nhiều gia đình rơi vào cảnh bần cùng.		/ˈdestɪtjuːt/
+impoverished	impoverished	adjective	6	money	bị bần cùng hóa, nghèo khổ	trang trọng, trở nên rất nghèo, thường nói về vùng, cộng đồng	Many young people leave impoverished villages to find work.	Nhiều người trẻ rời những ngôi làng nghèo khổ để tìm việc.		/ɪmˈpɒvərɪʃt/
+insolvent	insolvent	adjective	6	money	mất khả năng thanh toán	thuật ngữ tài chính, không đủ tiền trả các khoản nợ	The bank was declared insolvent.	Ngân hàng bị tuyên bố mất khả năng thanh toán.		/ɪnˈsɒlvənt/
+fiscal	fiscal	adjective	6	money	(thuộc) tài khóa, ngân sách nhà nước	liên quan đến thuế và chi tiêu của chính phủ	The government announced a new fiscal policy.	Chính phủ công bố chính sách tài khóa mới.		/ˈfɪskl/
+cash-strapped	cash-strapped	adjective	6	money	thiếu tiền mặt, kẹt vốn	khẩu ngữ, thường nói về gia đình, tổ chức đang rất thiếu tiền	Cash-strapped families are buying cheaper food.	Những gia đình đang kẹt tiền mua thực phẩm rẻ hơn.		/ˈkæʃ stræpt/
+penny-pinching	penny-pinching	adjective	6	money	bủn xỉn, chắt bóp từng đồng	nghĩa chê, quá tiếc tiền kể cả khoản nhỏ	His penny-pinching boss never buys coffee for the team.	Ông sếp bủn xỉn của anh ấy không bao giờ mua cà phê cho cả nhóm.		/ˈpeni pɪntʃɪŋ/
+squander	squander	verb	6	money	phung phí, nướng sạch (tiền)	tiêu hoang, làm mất một khoản lớn một cách dại dột	He squandered his inheritance on cars and parties.	Anh ta nướng sạch tài sản thừa kế vào xe hơi và tiệc tùng.		/ˈskwɒndə/
+embezzle	embezzle	verb	6	money	biển thủ, tham ô	lấy trộm tiền của công ty, tổ chức mình làm việc	The manager embezzled millions from the company.	Viên quản lý đã biển thủ hàng triệu của công ty.		/ɪmˈbezl/
+launder	launder	verb	6	money	rửa (tiền)	làm cho tiền phạm pháp trông như tiền hợp pháp	The gang laundered money through a hotel.	Băng nhóm rửa tiền thông qua một khách sạn.		/ˈlɔːndə/
+default.loan	default	verb	6	money	vỡ nợ, không trả được nợ	thuật ngữ tài chính, không trả khoản vay đúng hạn	Many borrowers defaulted on their loans.	Nhiều người vay không trả được nợ.		/dɪˈfɔːlt/
+speculate	speculate	verb	6	money	đầu cơ	mua bán đất, cổ phiếu… để kiếm lời nhanh, chấp nhận rủi ro	Some people speculate on land prices.	Một số người đầu cơ vào giá đất.		/ˈspekjuleɪt/
+appreciate.value	appreciate	verb	6	money	tăng giá trị	tài sản, đồng tiền trở nên đáng giá hơn theo thời gian	Land in this area has appreciated quickly.	Đất ở khu này đã tăng giá trị nhanh chóng.		/əˈpriːʃieɪt/
+depreciate	depreciate	verb	6	money	mất giá, giảm giá trị	tài sản, đồng tiền trở nên kém giá trị hơn	A new car depreciates as soon as you buy it.	Xe mới bị mất giá ngay khi bạn mua.		/dɪˈpriːʃieɪt/
+collateral	collateral	noun	6	money	tài sản thế chấp	tài sản đưa cho ngân hàng giữ để đảm bảo khoản vay	He used his house as collateral for the loan.	Anh ấy dùng căn nhà làm tài sản thế chấp cho khoản vay.		/kəˈlætərəl/
+remittance	remittance	noun	6	money	kiều hối, tiền gửi về	tiền người làm việc ở nước ngoài gửi về cho gia đình	Remittances from overseas workers help many families.	Kiều hối từ người lao động ở nước ngoài giúp đỡ nhiều gia đình.		/rɪˈmɪtns/
+windfall	windfall	noun	6	money	món tiền trời cho	khoản tiền lớn bất ngờ có được	The tax refund was a nice windfall.	Khoản hoàn thuế là một món tiền trời cho.		/ˈwɪndfɔːl/
+spendthrift	spendthrift	noun	6	money	kẻ tiêu hoang	người tiêu tiền không suy nghĩ	Her brother is a spendthrift who never saves.	Anh trai cô ấy là kẻ tiêu hoang, chẳng bao giờ để dành.		/ˈspendθrɪft/
+denomination	denomination	noun	6	money	mệnh giá	giá trị ghi trên tờ tiền, đồng xu	The 500,000 dong note is the largest denomination.	Tờ 500.000 đồng là mệnh giá lớn nhất.		/dɪˌnɒmɪˈneɪʃn/
+mutual_fund	mutual fund	noun	6	money	quỹ tương hỗ, quỹ đầu tư	quỹ gom tiền nhiều người để đầu tư chung	She puts money into a mutual fund every month.	Mỗi tháng cô ấy bỏ tiền vào một quỹ đầu tư.
+bull_market	bull market	noun	6	money	thị trường giá lên	thời kỳ giá cổ phiếu tăng liên tục	Everyone makes money in a bull market.	Ai cũng kiếm được tiền khi thị trường giá lên.
+compound_interest	compound interest	noun	6	money	lãi kép	tiền lãi được tính cả trên tiền lãi đã có	Thanks to compound interest, small savings grow over time.	Nhờ lãi kép, khoản tiết kiệm nhỏ sẽ lớn dần theo thời gian.
+tax_evasion	tax evasion	noun	6	money	trốn thuế	hành vi phạm pháp cố tình không nộp thuế	The businessman went to prison for tax evasion.	Doanh nhân đó phải vào tù vì trốn thuế.
+pay_through_the_nose	pay through the nose	idiom	6	money	bị chém đẹp, trả giá cắt cổ	phải trả số tiền cao hơn nhiều so với đáng giá	We paid through the nose for a taxi at the airport.	Chúng tôi bị chém đẹp khi đi taxi ở sân bay.
+bring_home_the_bacon	bring home the bacon	idiom	6	money	kiếm tiền nuôi gia đình	người lo kinh tế chính trong nhà	In their family, the mother brings home the bacon.	Trong gia đình họ, người mẹ là người kiếm tiền nuôi cả nhà.
+on_a_shoestring	on a shoestring	idiom	6	money	với rất ít tiền	làm việc gì với số vốn, ngân sách cực kỳ ít	They started the café on a shoestring.	Họ mở quán cà phê với rất ít vốn.
+nest_egg	nest egg	idiom	6	money	khoản tiền dành dụm	tiền tiết kiệm lâu dài cho tương lai, tuổi già	They have a small nest egg for their old age.	Họ có một khoản tiền dành dụm nhỏ cho tuổi già.
+foot_the_bill	foot the bill	idiom	6	money	gánh chi phí, chịu trả tiền	trả toàn bộ chi phí, thường là khoản lớn	Who is going to foot the bill for the repairs?	Ai sẽ gánh chi phí sửa chữa?
+pick_up_the_tab	pick up the tab	idiom	6	money	trả tiền (thay cho mọi người)	trả tiền bữa ăn, cuộc vui cho người khác	The company picked up the tab for our dinner.	Công ty đã trả tiền bữa tối cho chúng tôi.
+fork_out	fork out	phrasal_verb	6	money	móc hầu bao (miễn cưỡng)	phải bỏ ra nhiều tiền dù không muốn	I had to fork out two million dong to fix my phone.	Tôi phải móc hầu bao hai triệu đồng để sửa điện thoại.	shell out
+rake_in	rake in	phrasal_verb	6	money	kiếm bộn tiền, hốt bạc	kiếm được rất nhiều tiền một cách dễ dàng	The new café is raking in money.	Quán cà phê mới đang hốt bạc.
+tide_over	tide over	phrasal_verb	6	money	giúp cầm cự (qua lúc khó khăn)	cho mượn tiền để ai đó vượt qua một thời gian ngắn	Can you lend me some money to tide me over until payday?	Bạn cho tôi mượn ít tiền để cầm cự đến ngày lĩnh lương được không?
+scrimp_and_save	scrimp and save	idiom	6	money	chắt chiu, dành dụm từng đồng	sống rất tằn tiện trong thời gian dài để có tiền	My parents scrimped and saved to send me to college.	Bố mẹ tôi chắt chiu từng đồng để cho tôi học đại học.

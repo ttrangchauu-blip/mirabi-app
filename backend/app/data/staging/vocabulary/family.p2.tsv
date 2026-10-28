@@ -1,0 +1,101 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+spoil.child	spoil	verb	3	family	nuông chiều (làm hư)	chiều con cháu quá mức đến mức trẻ hư	Grandparents often spoil their grandchildren.	Ông bà thường hay nuông chiều cháu.		/spɔɪl/
+apart	apart	adverb	3	family	xa nhau, riêng rẽ	vợ chồng hoặc người thân không sống cùng nhau	My parents have lived apart for two years.	Bố mẹ tôi đã sống xa nhau được hai năm.		/əˈpɑːt/
+wedding_anniversary	wedding anniversary	collocation	3	family	kỷ niệm ngày cưới	ngày trùng với ngày cưới, hằng năm	Today is my parents' twentieth wedding anniversary.	Hôm nay là kỷ niệm hai mươi năm ngày cưới của bố mẹ tôi.
+wedding_invitation	wedding invitation	collocation	3	family	thiệp cưới	tấm thiệp mời người khác đến dự đám cưới	We got a wedding invitation from our neighbours.	Chúng tôi nhận được thiệp cưới của nhà hàng xóm.
+best_man	best man	collocation	3	family	phù rể (chính)	người bạn thân đứng cạnh chú rể trong lễ cưới	His brother was the best man at the wedding.	Anh trai anh ấy làm phù rể trong đám cưới.
+bridesmaid	bridesmaid	noun	3	family	phù dâu	cô gái đi cùng, giúp đỡ cô dâu trong lễ cưới	I was a bridesmaid at my best friend's wedding.	Tôi làm phù dâu trong đám cưới của bạn thân.		/ˈbraɪdzmeɪd/
+baby_shower	baby shower	collocation	3	family	tiệc mừng sắp có em bé	bữa tiệc bạn bè tặng quà cho người sắp sinh	We are planning a baby shower for Linh.	Chúng tôi đang lên kế hoạch tổ chức tiệc mừng em bé cho Linh.
+family_gathering	family gathering	collocation	3	family	buổi họp mặt gia đình	dịp cả nhà và họ hàng tụ tập (giỗ, Tết, mừng thọ)	There is always lots of food at our family gatherings.	Buổi họp mặt gia đình nhà tôi lúc nào cũng nhiều đồ ăn.
+family_tradition	family tradition	collocation	3	family	truyền thống gia đình	thói quen, phong tục được cả nhà giữ qua nhiều đời	Making spring rolls at New Year is a family tradition.	Cuốn nem dịp năm mới là truyền thống của gia đình tôi.
+widow	widow	noun	3	family	góa phụ, người vợ góa	người phụ nữ có chồng đã mất	She has been a widow for ten years.	Bà ấy góa chồng đã mười năm.		/ˈwɪdəʊ/
+eldest_child	eldest child	collocation	3	family	con cả, con trưởng	người con sinh ra đầu tiên trong nhà	As the eldest child, I had to look after my brothers.	Là con cả, tôi phải trông các em trai.	oldest child
+youngest_child	youngest child	collocation	3	family	con út	người con nhỏ tuổi nhất trong nhà	The youngest child is often the most spoilt.	Con út thường được chiều chuộng nhất.
+middle_child	middle child	collocation	3	family	con giữa	người con không phải con cả cũng không phải con út	Being the middle child is not always easy.	Làm con giữa không phải lúc nào cũng dễ.
+lullaby	lullaby	noun	3	family	bài hát ru	bài hát nhẹ nhàng để ru em bé ngủ	My grandmother used to sing me a lullaby.	Ngày xưa bà thường hát ru tôi.		/ˈlʌləbaɪ/
+cot	cot	noun	3	family	cũi em bé	giường nhỏ có thanh chắn cho trẻ ngủ	The baby is sleeping in her cot.	Em bé đang ngủ trong cũi.	crib	/kɒt/
+pushchair	pushchair	noun	3	family	xe đẩy em bé	xe nhỏ có bánh để đẩy trẻ đi dạo	She pushed the pushchair around the lake.	Chị ấy đẩy xe em bé đi quanh hồ.	stroller|buggy	/ˈpʊʃtʃeə/
+change_a_nappy	change a nappy	collocation	3	family	thay tã, thay bỉm	thay tã bẩn cho em bé	Dad learned how to change a nappy.	Bố đã học cách thay tã cho em bé.	change a diaper
+family_business	family business	collocation	3	family	doanh nghiệp gia đình	công ty, cửa hàng do người trong nhà cùng làm	He took over the family business from his father.	Anh ấy tiếp quản việc kinh doanh của gia đình từ bố.
+spoilt	spoilt	adjective	4	family	hư (vì được nuông chiều)	trẻ đòi gì được nấy nên khó bảo	He's a spoilt child who never says thank you.	Cậu ấy là đứa trẻ hư, chẳng bao giờ biết cảm ơn.	spoiled	/spɔɪlt/
+obey	obey	verb	4	family	vâng lời, nghe lời	làm theo lời cha mẹ, người lớn bảo	Children should obey their parents.	Con cái nên vâng lời cha mẹ.		/əˈbeɪ/
+obedient	obedient	adjective	4	family	biết vâng lời, ngoan ngoãn	trẻ luôn làm theo lời người lớn	She was an obedient daughter.	Cô ấy là một người con gái ngoan ngoãn.		/əˈbiːdiənt/
+misbehave	misbehave	verb	4	family	quấy phá, không ngoan	trẻ cư xử sai, không nghe lời	The boys misbehaved all through dinner.	Bọn con trai quấy phá suốt bữa tối.		/ˌmɪsbɪˈheɪv/
+cheeky	cheeky	adjective	4	family	láo, hỗn (với người lớn)	trẻ nói năng thiếu lễ độ nhưng thường kiểu tinh nghịch	Don't be cheeky to your grandmother!	Không được hỗn với bà!		/ˈtʃiːki/
+respectful	respectful	adjective	4	family	lễ phép, kính trọng	cách cư xử của con cháu với ông bà, cha mẹ	She is always respectful to older people.	Cô ấy luôn lễ phép với người lớn tuổi.		/rɪˈspektfl/
+protective	protective	adjective	4	family	hay che chở, muốn bảo vệ	bố mẹ luôn muốn giữ con khỏi nguy hiểm	My dad is very protective of my little sister.	Bố tôi rất hay che chở cho em gái tôi.		/prəˈtektɪv/
+devoted	devoted	adjective	4	family	tận tụy, hết lòng	yêu thương và lo lắng hết mình cho gia đình	She is a devoted mother of three.	Cô ấy là người mẹ tận tụy của ba đứa con.		/dɪˈvəʊtɪd/
+family-oriented	family-oriented	adjective	4	family	coi trọng gia đình	người đặt gia đình lên hàng đầu	He is a family-oriented man who rarely works late.	Anh ấy là người coi trọng gia đình, hiếm khi làm việc muộn.		/ˈfæməli ˈɔːrientɪd/
+dependent	dependent	adjective	4	family	sống phụ thuộc	cần người khác (thường là bố mẹ) lo tiền và sinh hoạt	He is still dependent on his parents for money.	Anh ấy vẫn phụ thuộc vào bố mẹ về tiền bạc.		/dɪˈpendənt/
+unmarried	unmarried	adjective	4	family	chưa kết hôn	tình trạng hôn nhân trên giấy tờ, chưa từng cưới	Her aunt is unmarried and lives alone.	Dì của cô ấy chưa kết hôn và sống một mình.		/ˌʌnˈmærid/
+biological	biological	adjective	4	family	ruột, cùng huyết thống	cha mẹ hoặc con sinh ra, không phải nuôi	He was adopted and never met his biological father.	Anh ấy là con nuôi và chưa bao giờ gặp bố ruột.		/ˌbaɪəˈlɒdʒɪkl/
+inherit.property	inherit	verb	4	family	thừa kế (tài sản)	nhận nhà, đất, tiền của người thân đã mất	She inherited the house from her grandmother.	Cô ấy thừa kế ngôi nhà từ bà ngoại.		/ɪnˈherɪt/
+inheritance	inheritance	noun	4	family	tài sản thừa kế, của thừa kế	tiền, đất đai để lại cho người thân sau khi mất	The brothers argued about the inheritance.	Mấy anh em cãi nhau về tài sản thừa kế.		/ɪnˈherɪtəns/
+will.testament	will	noun	4	family	di chúc	giấy ghi cách chia tài sản sau khi mất	My grandfather left the farm to my mother in his will.	Ông tôi để lại trang trại cho mẹ tôi trong di chúc.		/wɪl/
+generation_gap	generation gap	collocation	4	family	khoảng cách thế hệ	sự khác biệt suy nghĩ giữa người già và người trẻ	There is a big generation gap between me and my grandparents.	Giữa tôi và ông bà có khoảng cách thế hệ lớn.
+extended_family	extended family	collocation	4	family	đại gia đình	gồm cả ông bà, cô chú, anh chị em họ	My extended family meets every Lunar New Year.	Đại gia đình tôi họp mặt vào mỗi dịp Tết.
+nuclear_family	nuclear family	collocation	4	family	gia đình hạt nhân	chỉ gồm bố mẹ và con cái	The nuclear family is now common in big cities.	Gia đình hạt nhân giờ rất phổ biến ở thành phố lớn.
+distant_relative	distant relative	collocation	4	family	họ hàng xa	người có quan hệ họ hàng nhưng không gần	He is a distant relative on my father's side.	Ông ấy là họ hàng xa bên nội tôi.
+adoption	adoption	noun	4	family	việc nhận con nuôi	thủ tục nhận nuôi một đứa trẻ làm con	They are thinking about adoption.	Họ đang tính đến chuyện nhận con nuôi.		/əˈdɒpʃn/
+foster_parents	foster parents	collocation	4	family	cha mẹ nuôi (tạm thời)	người nhận chăm sóc trẻ một thời gian, không nhận làm con	He lived with foster parents until he was twelve.	Cậu bé sống với cha mẹ nuôi tạm thời đến năm mười hai tuổi.
+birth_parents	birth parents	collocation	4	family	cha mẹ đẻ (của con nuôi)	bố mẹ đã sinh ra một đứa trẻ được người khác nuôi	She wants to find her birth parents.	Cô ấy muốn tìm cha mẹ đẻ của mình.
+maternity_leave	maternity leave	collocation	4	family	nghỉ thai sản	thời gian người mẹ nghỉ làm khi sinh con	She is on maternity leave for six months.	Chị ấy đang nghỉ thai sản sáu tháng.
+paternity_leave	paternity leave	collocation	4	family	chế độ nghỉ khi vợ sinh con	thời gian người bố được nghỉ làm khi có con	He took two weeks of paternity leave.	Anh ấy nghỉ hai tuần khi vợ sinh con.
+guardian	guardian	noun	4	family	người giám hộ	người lớn chịu trách nhiệm chăm sóc trẻ thay cha mẹ	Her uncle became her legal guardian.	Chú cô ấy trở thành người giám hộ hợp pháp.		/ˈɡɑːdiən/
+godmother	godmother	noun	4	family	mẹ đỡ đầu	người phụ nữ nhận đỡ đầu một đứa trẻ	My godmother sends me a card every birthday.	Sinh nhật nào mẹ đỡ đầu cũng gửi thiệp cho tôi.		/ˈɡɒdmʌðə/
+godfather	godfather	noun	4	family	bố đỡ đầu	người đàn ông nhận đỡ đầu một đứa trẻ	He asked his best friend to be his son's godfather.	Anh ấy nhờ bạn thân làm bố đỡ đầu cho con trai.		/ˈɡɒdfɑːðə/
+firstborn	firstborn	noun	4	family	con đầu lòng	đứa con được sinh ra đầu tiên	Their firstborn is now at university.	Con đầu lòng của họ giờ đã học đại học.		/ˈfɜːstbɔːn/
+identical_twins	identical twins	collocation	4	family	cặp song sinh cùng trứng	hai đứa trẻ sinh đôi giống hệt nhau	Even their mother can't tell the identical twins apart.	Ngay cả mẹ cũng không phân biệt được cặp song sinh cùng trứng.
+triplets	triplets	noun	4	family	sinh ba	ba đứa trẻ cùng một mẹ sinh ra một lần	She gave birth to triplets last week.	Tuần trước chị ấy sinh ba.		/ˈtrɪpləts/
+spouse	spouse	noun	4	family	vợ hoặc chồng, người phối ngẫu	từ trang trọng, hay gặp trong giấy tờ, biểu mẫu	Please write the name of your spouse.	Vui lòng ghi tên vợ hoặc chồng của bạn.		/spaʊs/
+widower	widower	noun	4	family	người đàn ông góa vợ	người đàn ông có vợ đã mất	He has been a widower since his wife died.	Ông ấy góa vợ từ khi vợ mất.		/ˈwɪdəʊə/
+breadwinner	breadwinner	noun	4	family	trụ cột kinh tế (gia đình)	người kiếm tiền chính nuôi cả nhà	My mother is the main breadwinner in our family.	Mẹ tôi là trụ cột kinh tế chính trong nhà.		/ˈbredwɪnə/
+stay-at-home	stay-at-home	adjective	4	family	ở nhà chăm con, làm nội trợ	bố hoặc mẹ không đi làm để chăm sóc gia đình	He is a stay-at-home dad.	Anh ấy là ông bố ở nhà chăm con.		/ˈsteɪ ət həʊm/
+head_of_household	head of household	collocation	4	family	chủ hộ	người đứng tên đại diện cho cả hộ gia đình	The form must be signed by the head of household.	Tờ khai phải do chủ hộ ký.
+family_values	family values	collocation	4	family	giá trị gia đình	những điều cả nhà coi trọng như yêu thương, hiếu thảo	Respect for the elderly is one of our family values.	Kính trọng người già là một trong những giá trị của gia đình tôi.
+family_background	family background	collocation	4	family	xuất thân gia đình	hoàn cảnh, điều kiện của gia đình nơi một người lớn lên	They come from very different family backgrounds.	Họ xuất thân từ những gia đình rất khác nhau.
+family_man	family man	collocation	4	family	người đàn ông của gia đình	người chồng, người bố dành nhiều thời gian cho vợ con	He's a real family man who loves cooking for his kids.	Anh ấy đúng là người đàn ông của gia đình, rất thích nấu ăn cho con.
+birth_certificate	birth certificate	collocation	4	family	giấy khai sinh	giấy tờ ghi ngày, nơi sinh và tên cha mẹ	You need a copy of your birth certificate.	Bạn cần một bản sao giấy khai sinh.
+mum-to-be	mum-to-be	noun	4	family	người sắp làm mẹ	phụ nữ đang mang thai đứa con sắp chào đời	The mum-to-be is due in July.	Người mẹ tương lai dự sinh vào tháng Bảy.	mom-to-be	/ˌmʌm tə ˈbiː/
+provide_for	provide for	phrasal_verb	4	family	chu cấp, lo cho (gia đình)	kiếm tiền để cả nhà có cái ăn, cái mặc	He works two jobs to provide for his family.	Anh ấy làm hai công việc để lo cho gia đình.
+settle_down	settle down	phrasal_verb	4	family	ổn định, yên bề gia thất	khi một người lập gia đình và sống ổn định	She wants to travel before she settles down.	Cô ấy muốn đi du lịch trước khi yên bề gia thất.
+pass_down	pass down	phrasal_verb	4	family	truyền lại (cho đời sau)	đồ vật, tục lệ, công thức được trao từ đời này sang đời khác	This recipe was passed down from my great-grandmother.	Công thức này được truyền lại từ cụ bà nhà tôi.	hand down
+name_after	name after	phrasal_verb	4	family	đặt tên theo (ai)	đặt tên con giống tên một người thân	He was named after his grandfather.	Cậu ấy được đặt tên theo ông nội.
+set_an_example	set an example	collocation	4	family	làm gương	cư xử tốt để con cái hoặc em nhỏ học theo	Parents should set an example for their children.	Cha mẹ nên làm gương cho con cái.
+quality_time	quality time	collocation	4	family	thời gian ý nghĩa bên nhau	thời gian dành trọn cho người thân, không bị phân tâm	I try to spend quality time with my kids at weekends.	Cuối tuần tôi cố dành thời gian thật ý nghĩa bên các con.
+role_model	role model	collocation	4	family	tấm gương (để noi theo)	người mà trẻ nhìn vào để học cách sống	My older sister has always been my role model.	Chị gái luôn là tấm gương của tôi.
+tuck_in	tuck in	phrasal_verb	4	family	đắp chăn (cho trẻ ngủ)	kéo chăn đắp kín cho con khi đi ngủ	Mum tucked me in and turned off the light.	Mẹ đắp chăn cho tôi rồi tắt đèn.
+parenting	parenting	noun	4	family	việc nuôi dạy con cái	cách cha mẹ chăm sóc và giáo dục con	She reads a lot of books about parenting.	Cô ấy đọc rất nhiều sách về nuôi dạy con.		/ˈpeərəntɪŋ/
+childcare	childcare	noun	4	family	việc trông giữ trẻ	dịch vụ hoặc công việc trông trẻ khi bố mẹ đi làm	Childcare is very expensive in big cities.	Chi phí trông giữ trẻ ở thành phố lớn rất đắt.		/ˈtʃaɪldkeə/
+nursing_home	nursing home	collocation	4	family	viện dưỡng lão	nơi chăm sóc người già cần giúp đỡ hằng ngày	Her grandmother lives in a nursing home.	Bà của cô ấy sống ở viện dưỡng lão.	care home
+wedding_reception	wedding reception	collocation	4	family	tiệc cưới	bữa tiệc chiêu đãi khách sau lễ cưới	Over three hundred guests came to the wedding reception.	Hơn ba trăm khách đến dự tiệc cưới.
+infant	infant	noun	4	family	trẻ nhũ nhi (dưới một tuổi)	từ trang trọng, hay dùng trong y tế, giấy tờ	This seat is for passengers travelling with an infant.	Ghế này dành cho hành khách đi cùng trẻ nhỏ dưới một tuổi.		/ˈɪnfənt/
+orphanage	orphanage	noun	4	family	trại trẻ mồ côi	nơi nuôi dưỡng trẻ không còn cha mẹ	She grew up in an orphanage.	Cô ấy lớn lên trong trại trẻ mồ côi.		/ˈɔːfənɪdʒ/
+dummy.baby	dummy	noun	4	family	núm vú giả, ti giả	đồ cao su cho em bé ngậm để dỗ	The baby stopped crying when she got her dummy.	Em bé nín khóc khi được ngậm ti giả.	pacifier	/ˈdʌmi/
+separated	separated	adjective	4	family	ly thân	vợ chồng chưa ly hôn nhưng không sống cùng nhau	Her parents are separated but not divorced.	Bố mẹ cô ấy ly thân nhưng chưa ly hôn.		/ˈsepəreɪtɪd/
+reunite	reunite	verb	4	family	đoàn tụ, sum họp	người thân gặp lại nhau sau thời gian xa cách	The family was reunited after twenty years.	Gia đình được đoàn tụ sau hai mươi năm.		/ˌriːjuːˈnaɪt/
+bury	bury	verb	4	family	chôn cất, an táng	đưa người đã mất xuống mộ	He was buried next to his wife.	Ông được an táng cạnh vợ.		/ˈberi/
+neglect	neglect	verb	4	family	bỏ bê, sao nhãng	không chăm lo cho con cái hay người thân	He worked so much that he neglected his family.	Anh ấy làm việc nhiều đến mức bỏ bê gia đình.		/nɪˈɡlekt/
+abandon	abandon	verb	4	family	bỏ rơi	bỏ con hoặc người thân lại, không quay về	The baby was abandoned outside a hospital.	Em bé bị bỏ rơi trước cửa một bệnh viện.		/əˈbændən/
+nag	nag	verb	4	family	cằn nhằn, nói mãi	nhắc đi nhắc lại khiến người kia khó chịu	My mum keeps nagging me to tidy my room.	Mẹ cứ cằn nhằn bắt tôi dọn phòng.		/næɡ/
+resemble	resemble	verb	4	family	giống (người thân)	có nét ngoại hình hoặc tính cách giống ai trong nhà	She closely resembles her grandmother.	Cô ấy rất giống bà ngoại.		/rɪˈzembl/
+due_date	due date	collocation	4	family	ngày dự sinh	ngày bác sĩ dự đoán em bé sẽ chào đời	My sister's due date is next Monday.	Ngày dự sinh của chị tôi là thứ Hai tuần sau.
+take_in	take in	phrasal_verb	4	family	cưu mang, nhận về nuôi	cho người không nơi nương tựa về sống cùng nhà	They took in their orphaned nephew.	Họ cưu mang đứa cháu mồ côi.
+curfew	curfew	noun	4	family	giờ phải về nhà	giờ muộn nhất bố mẹ cho phép con ở ngoài	My parents gave me a ten o'clock curfew.	Bố mẹ bắt tôi phải về nhà trước mười giờ.		/ˈkɜːfjuː/
+motherhood	motherhood	noun	4	family	thiên chức làm mẹ, việc làm mẹ	trạng thái và trải nghiệm khi trở thành mẹ	Motherhood changed her life completely.	Việc làm mẹ đã thay đổi hoàn toàn cuộc sống của cô ấy.		/ˈmʌðəhʊd/
+lovingly	lovingly	adverb	4	family	trìu mến, đầy yêu thương	cách làm việc gì cho người thân với nhiều tình cảm	She looked lovingly at her newborn son.	Cô ấy trìu mến nhìn đứa con trai mới sinh.		/ˈlʌvɪŋli/
+strictly	strictly	adverb	4	family	nghiêm khắc, khắt khe	cách cha mẹ dạy dỗ, đặt quy tắc cho con	We were brought up very strictly.	Chúng tôi được dạy dỗ rất nghiêm khắc.		/ˈstrɪktli/
+closely	closely	adverb	4	family	gần (về quan hệ họ hàng)	nói về mức độ họ hàng gần gũi	The two families are closely related.	Hai gia đình là họ hàng gần.		/ˈkləʊsli/
+discipline	discipline	verb	5	family	rèn kỷ luật, phạt để dạy	dạy trẻ biết nghe lời bằng quy tắc và hình phạt	Parents disagree about how to discipline children.	Cha mẹ bất đồng về cách rèn kỷ luật cho con.		/ˈdɪsəplɪn/
+pamper	pamper	verb	5	family	cưng chiều, chăm chút	lo cho ai từng chút để họ thấy thoải mái	Grandma loves to pamper us when we visit.	Bà rất thích cưng chiều chúng tôi mỗi khi về thăm.		/ˈpæmpə/
+lenient	lenient	adjective	5	family	dễ dãi, khoan dung	cha mẹ ít khi phạt hoặc dễ bỏ qua lỗi của con	My father was lenient, but my mother was strict.	Bố tôi dễ dãi còn mẹ tôi thì nghiêm khắc.		/ˈliːniənt/
+overprotective	overprotective	adjective	5	family	bao bọc quá mức	cha mẹ lo lắng đến mức không cho con tự làm gì	Her overprotective parents never let her go out alone.	Bố mẹ bao bọc quá mức nên không bao giờ cho cô ấy đi đâu một mình.		/ˌəʊvəprəˈtektɪv/
+disobedient	disobedient	adjective	5	family	không vâng lời, bướng	trẻ thường xuyên không làm theo lời người lớn	He was a disobedient child who never listened.	Cậu ấy là đứa trẻ bướng bỉnh, chẳng bao giờ nghe lời.		/ˌdɪsəˈbiːdiənt/
+disobey	disobey	verb	5	family	cãi lời, không vâng lời	làm trái lời cha mẹ hoặc người lớn	She disobeyed her parents and went to the party.	Cô ấy cãi lời bố mẹ và đi dự bữa tiệc.		/ˌdɪsəˈbeɪ/
+adolescent	adolescent	noun	5	family	thanh thiếu niên	người trong giai đoạn dậy thì, từ trang trọng	Adolescents often argue with their parents.	Thanh thiếu niên thường hay cãi nhau với bố mẹ.		/ˌædəˈlesnt/
+maternal	maternal	adjective	5	family	bên ngoại, thuộc về phía mẹ	chỉ họ hàng bên mẹ: maternal grandmother	My maternal grandparents live in Hue.	Ông bà ngoại tôi sống ở Huế.		/məˈtɜːnl/
+paternal	paternal	adjective	5	family	bên nội, thuộc về phía bố	chỉ họ hàng bên bố: paternal grandfather	My paternal grandfather was a teacher.	Ông nội tôi từng là giáo viên.		/pəˈtɜːnl/
+parental	parental	adjective	5	family	thuộc về cha mẹ	việc của cha mẹ: sự cho phép, sự giám sát	Children under 13 need parental permission.	Trẻ dưới 13 tuổi cần có sự cho phép của cha mẹ.		/pəˈrentl/
+heir	heir	noun	5	family	người thừa kế	người sẽ nhận tài sản hoặc vị trí của người thân	He is the only heir to his father's fortune.	Anh ấy là người thừa kế duy nhất tài sản của cha.		/eə/
+heirloom	heirloom	noun	5	family	vật gia truyền	đồ quý được giữ trong nhà qua nhiều thế hệ	This ring is a family heirloom.	Chiếc nhẫn này là vật gia truyền của gia đình.		/ˈeəluːm/
+sibling_rivalry	sibling rivalry	collocation	5	family	sự ganh đua giữa anh chị em	khi anh chị em tranh giành sự chú ý của bố mẹ	There was a lot of sibling rivalry between the two boys.	Hai cậu bé ganh đua với nhau rất nhiều.

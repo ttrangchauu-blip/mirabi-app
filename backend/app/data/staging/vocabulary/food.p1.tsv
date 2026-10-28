@@ -1,0 +1,105 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+food	food	noun	1	food	thức ăn, đồ ăn	nói chung về những thứ con người ăn hằng ngày	We need to buy some food for the weekend.	Chúng ta cần mua ít đồ ăn cho cuối tuần.		/fuːd/
+eat	eat	verb	1	food	ăn	cho thức ăn vào miệng, nhai và nuốt	I usually eat rice for dinner.	Tôi thường ăn cơm vào bữa tối.		/iːt/
+drink.verb	drink	verb	1	food	uống	đưa nước hoặc chất lỏng vào miệng rồi nuốt	You should drink more water every day.	Bạn nên uống nhiều nước hơn mỗi ngày.		/drɪŋk/
+drink.beverage	drink	noun	1	food	đồ uống, thức uống	thứ để uống như nước ngọt, trà, nước ép	Would you like a cold drink?	Bạn có muốn một ly đồ uống lạnh không?		/drɪŋk/
+meat	meat	noun	1	food	thịt	phần thịt động vật dùng làm thức ăn	My brother doesn't eat meat.	Em trai tôi không ăn thịt.		/miːt/
+beef	beef	noun	1	food	thịt bò	thịt của con bò dùng để nấu ăn	This soup is made with beef and noodles.	Món súp này được nấu với thịt bò và mì.		/biːf/
+pork	pork	noun	1	food	thịt lợn, thịt heo	thịt của con lợn dùng để nấu ăn	My mother cooked pork with eggs.	Mẹ tôi nấu thịt lợn kho trứng.		/pɔːk/
+chicken.meat	chicken	noun	1	food	thịt gà	thịt gà dùng làm món ăn, không phải con gà sống	We had fried chicken for lunch.	Chúng tôi ăn gà rán vào bữa trưa.		/ˈtʃɪkɪn/
+juice	juice	noun	1	food	nước ép	nước lấy từ trái cây hoặc rau	I'd like a glass of apple juice.	Tôi muốn một ly nước ép táo.		/dʒuːs/
+tea	tea	noun	1	food	trà, chè (đồ uống)	đồ uống pha từ lá trà khô	Do you want tea or coffee?	Bạn muốn uống trà hay cà phê?		/tiː/
+coffee	coffee	noun	1	food	cà phê	đồ uống pha từ hạt cà phê rang	He drinks a cup of coffee before work.	Anh ấy uống một tách cà phê trước khi đi làm.		/ˈkɒfi/
+cake	cake	noun	1	food	bánh ngọt, bánh kem	bánh nướng từ bột, đường, trứng, hay ăn dịp sinh nhật	We made a chocolate cake for her birthday.	Chúng tôi làm một chiếc bánh sô-cô-la cho sinh nhật cô ấy.		/keɪk/
+soup	soup	noun	1	food	súp, canh	món ăn lỏng nấu từ rau, thịt hoặc cá	This chicken soup is very hot.	Món súp gà này rất nóng.		/suːp/
+sugar	sugar	noun	1	food	đường (ăn)	chất ngọt cho vào đồ uống, món ăn	Do you take sugar in your coffee?	Bạn có cho đường vào cà phê không?		/ˈʃʊɡə/
+salt	salt	noun	1	food	muối	gia vị màu trắng có vị mặn	Add a little salt to the soup.	Cho thêm một chút muối vào súp.		/sɔːlt/
+noodles	noodles	noun	1	food	món sợi (mì, bún, phở)	món ăn dạng sợi làm từ bột mì hoặc bột gạo	Many Vietnamese people eat noodles for breakfast.	Nhiều người Việt Nam ăn các món sợi vào bữa sáng.	noodle	/ˈnuːdlz/
+sandwich	sandwich	noun	1	food	bánh mì kẹp	hai lát bánh mì kẹp thịt, trứng hoặc rau ở giữa	I made a cheese sandwich for lunch.	Tôi làm một chiếc bánh mì kẹp phô mai cho bữa trưa.		/ˈsænwɪtʃ/
+candy	candy	noun	1	food	kẹo	đồ ngọt nhỏ làm từ đường, trẻ em rất thích	Don't eat too much candy before dinner.	Đừng ăn quá nhiều kẹo trước bữa tối.	sweets	/ˈkændi/
+chocolate	chocolate	noun	1	food	sô-cô-la	đồ ngọt màu nâu làm từ hạt ca cao	She gave me a box of chocolates.	Cô ấy tặng tôi một hộp sô-cô-la.		/ˈtʃɒklət/
+fruit	fruit	noun	1	food	trái cây, hoa quả	phần ăn được, thường ngọt, của cây như táo, cam	Eat some fruit after lunch.	Hãy ăn ít trái cây sau bữa trưa.		/fruːt/
+potato	potato	noun	1	food	khoai tây	củ màu vàng nâu, dùng luộc, chiên hoặc nghiền	We had chicken and potatoes for dinner.	Chúng tôi ăn gà và khoai tây vào bữa tối.		/pəˈteɪtəʊ/
+tomato	tomato	noun	1	food	quả cà chua	quả đỏ mọng dùng nấu canh hoặc làm salad	Cut the tomatoes into small pieces.	Cắt cà chua thành miếng nhỏ.		/təˈmɑːtəʊ/
+carrot	carrot	noun	1	food	củ cà rốt	củ màu cam, ăn sống hoặc nấu chín	I put some carrots in the soup.	Tôi cho ít cà rốt vào súp.		/ˈkærət/
+onion	onion	noun	1	food	củ hành tây	củ tròn nhiều lớp, khi thái làm cay mắt	Cutting onions makes me cry.	Thái hành tây làm tôi chảy nước mắt.		/ˈʌnjən/
+butter	butter	noun	1	food	bơ (làm từ sữa)	chất béo màu vàng làm từ sữa, phết lên bánh mì	I like bread with butter.	Tôi thích bánh mì phết bơ.		/ˈbʌtə/
+cheese	cheese	noun	1	food	phô mai	thực phẩm làm từ sữa đông, có nhiều loại	This pizza has a lot of cheese.	Chiếc pizza này có rất nhiều phô mai.		/tʃiːz/
+cookie	cookie	noun	1	food	bánh quy	bánh nhỏ, mỏng, giòn và ngọt	She baked some cookies for the children.	Cô ấy nướng ít bánh quy cho bọn trẻ.	biscuit	/ˈkʊki/
+cup	cup	noun	1	food	cái tách, cái cốc có quai	đồ nhỏ có quai dùng để uống trà, cà phê	This cup is too hot to hold.	Cái tách này nóng quá không cầm được.		/kʌp/
+plate	plate	noun	1	food	cái đĩa	đồ dẹt, tròn để đựng thức ăn khi ăn	Put the fish on a big plate.	Đặt con cá lên một cái đĩa lớn.		/pleɪt/
+fork	fork	noun	1	food	cái nĩa, cái dĩa	dụng cụ có răng nhọn để xiên thức ăn	Children often eat with a spoon and a fork.	Trẻ em thường ăn bằng thìa và nĩa.		/fɔːk/
+glass.drinking	glass	noun	1	food	cái ly, cốc thủy tinh	đồ trong suốt để uống nước, không có quai	She broke a glass in the kitchen.	Cô ấy làm vỡ một cái ly trong bếp.		/ɡlɑːs/
+chopsticks	chopsticks	noun	1	food	đôi đũa	hai que dài dùng để gắp thức ăn	In Vietnam, we eat with chopsticks.	Ở Việt Nam, chúng tôi ăn bằng đũa.	chopstick	/ˈtʃɒpstɪks/
+sweet.taste	sweet	adjective	1	food	ngọt (vị)	vị của đường, mật ong	This mango is very sweet.	Quả xoài này rất ngọt.		/swiːt/
+salty	salty	adjective	1	food	mặn	có nhiều muối, vị như nước biển	The soup is too salty.	Món canh mặn quá.		/ˈsɔːlti/
+sour	sour	adjective	1	food	chua	vị như chanh, giấm	Green apples are a bit sour.	Táo xanh hơi chua.		/ˈsaʊə/
+bitter	bitter	adjective	1	food	đắng	vị như cà phê không đường, mướp đắng	Black coffee is too bitter for me.	Cà phê đen quá đắng đối với tôi.		/ˈbɪtə/
+full.stomach	full	adjective	1	food	no (bụng)	khi đã ăn đủ, không muốn ăn thêm	After the big dinner, everyone was full.	Sau bữa tối thịnh soạn, ai cũng no.		/fʊl/
+restaurant	restaurant	noun	1	food	nhà hàng	nơi trả tiền để ngồi ăn uống	Let's go to a Vietnamese restaurant tonight.	Tối nay mình đi nhà hàng Việt nhé.		/ˈrestrɒnt/
+lemon	lemon	noun	1	food	quả chanh vàng	quả chua màu vàng, vỏ dày	Add some lemon to your tea.	Cho thêm ít chanh vàng vào trà của bạn.		/ˈlemən/
+ice_cream	ice cream	noun	1	food	kem (ăn)	món tráng miệng lạnh làm từ sữa và đường	Children love ice cream in summer.	Trẻ em rất thích ăn kem vào mùa hè.
+a_cup_of_tea	a cup of tea	collocation	1	food	một tách trà	khi mời hoặc gọi một tách trà	Would you like a cup of tea?	Bạn có muốn một tách trà không?
+have_breakfast	have breakfast	collocation	1	food	ăn sáng	ăn bữa đầu tiên trong ngày	I have breakfast at seven o'clock.	Tôi ăn sáng lúc bảy giờ.
+fried_rice	fried rice	noun	1	food	cơm rang, cơm chiên	cơm xào với trứng, rau và thịt	My mum makes fried rice with eggs.	Mẹ tôi làm cơm rang trứng.
+green_tea	green tea	noun	1	food	trà xanh	trà pha từ lá chưa lên men, nước màu xanh nhạt	Green tea is very popular in Vietnam.	Trà xanh rất phổ biến ở Việt Nam.
+im_full	I'm full	phrase	1	food	tôi no rồi	câu nói lịch sự khi từ chối ăn thêm	No more rice, thank you. I'm full.	Thôi, cảm ơn. Tôi no rồi.
+meal	meal	noun	2	food	bữa ăn	một lần ăn chính trong ngày: sáng, trưa hoặc tối	We eat three meals a day.	Chúng tôi ăn ba bữa một ngày.		/miːl/
+dish.food	dish	noun	2	food	món ăn	một món được nấu theo cách riêng	Pho is a famous Vietnamese dish.	Phở là một món ăn nổi tiếng của Việt Nam.		/dɪʃ/
+fresh	fresh	adjective	2	food	tươi (thực phẩm)	thực phẩm mới hái, mới làm, chưa bị hỏng	We buy fresh fish at the market every morning.	Sáng nào chúng tôi cũng mua cá tươi ở chợ.		/freʃ/
+tasty	tasty	adjective	2	food	ngon, đậm vị	khen món ăn có hương vị hấp dẫn, thân mật hơn delicious	The street food here is cheap and tasty.	Đồ ăn đường phố ở đây rẻ mà ngon.	delicious	/ˈteɪsti/
+taste.verb	taste	verb	2	food	nếm	cho một chút vào miệng để thử vị	Taste the soup and see if it needs salt.	Nếm thử canh xem có cần thêm muối không.		/teɪst/
+taste.flavour	taste	noun	2	food	vị (của đồ ăn)	cảm giác ngọt, mặn, chua, đắng trên lưỡi	This fruit has a sweet taste.	Loại quả này có vị ngọt.		/teɪst/
+mix	mix	verb	2	food	trộn	cho các thứ vào với nhau rồi khuấy đều	Mix the flour with the eggs.	Trộn bột mì với trứng.		/mɪks/
+pour	pour	verb	2	food	rót, đổ (chất lỏng)	cho nước, sữa chảy từ bình vào cốc	Could you pour me some water?	Bạn rót cho tôi ít nước được không?		/pɔː/
+peel	peel	verb	2	food	gọt vỏ, bóc vỏ	bỏ lớp vỏ ngoài của quả hoặc củ	Peel the potatoes before you boil them.	Gọt vỏ khoai tây trước khi luộc.		/piːl/
+cabbage	cabbage	noun	2	food	bắp cải	rau có nhiều lá cuộn tròn thành bắp	My grandmother makes soup with cabbage.	Bà tôi nấu canh bắp cải.		/ˈkæbɪdʒ/
+cucumber	cucumber	noun	2	food	quả dưa chuột, dưa leo	quả dài màu xanh, thường ăn sống	There are a few slices of cucumber in this salad.	Có vài lát dưa chuột trong món rau trộn này.		/ˈkjuːkʌmbə/
+mushroom	mushroom	noun	2	food	nấm (ăn được)	loại nấm ăn được, hình chiếc ô nhỏ	We cooked the chicken with mushrooms.	Chúng tôi nấu gà với nấm.		/ˈmʌʃruːm/
+garlic	garlic	noun	2	food	tỏi	củ nhỏ nhiều tép, mùi hăng, dùng phi cho thơm	Fry the garlic until it smells good.	Phi tỏi cho đến khi dậy mùi thơm.		/ˈɡɑːlɪk/
+bean	bean	noun	2	food	hạt đậu, quả đậu	hạt hoặc quả của cây họ đậu dùng làm thức ăn	Green beans are good for your health.	Đậu cô ve rất tốt cho sức khỏe.		/biːn/
+pepper.spice	pepper	noun	2	food	hạt tiêu	gia vị cay, màu đen hoặc trắng, thường xay nhỏ	Add salt and pepper to the eggs.	Thêm muối và tiêu vào trứng.		/ˈpepə/
+chilli	chilli	noun	2	food	quả ớt	quả nhỏ màu đỏ hoặc xanh, rất cay	Be careful, these chillies are very hot.	Cẩn thận, mấy quả ớt này rất cay.	chili	/ˈtʃɪli/
+mango	mango	noun	2	food	quả xoài	quả nhiệt đới, khi chín có màu vàng, rất ngọt	We bought some mangoes at the market.	Chúng tôi mua ít xoài ở chợ.		/ˈmæŋɡəʊ/
+grape	grape	noun	2	food	quả nho	quả nhỏ mọc thành chùm, màu xanh hoặc tím	These grapes have no seeds.	Những quả nho này không có hạt.		/ɡreɪp/
+pineapple	pineapple	noun	2	food	quả dứa, quả thơm	quả to có vỏ sần và chùm lá nhọn trên đầu	Pineapple tastes sweet and a little sour.	Dứa có vị ngọt và hơi chua.		/ˈpaɪnæpl/
+watermelon	watermelon	noun	2	food	quả dưa hấu	quả to vỏ xanh, ruột đỏ, nhiều nước	People often eat watermelon during Tet.	Mọi người thường ăn dưa hấu trong dịp Tết.		/ˈwɔːtəmelən/
+strawberry	strawberry	noun	2	food	quả dâu tây	quả nhỏ màu đỏ, có hạt li ti bên ngoài	Da Lat is famous for its strawberries.	Đà Lạt nổi tiếng với dâu tây.		/ˈstrɔːbəri/
+coconut	coconut	noun	2	food	quả dừa	quả to vỏ cứng, bên trong có nước và cùi trắng	I drank fresh coconut water on the beach.	Tôi uống nước dừa tươi trên bãi biển.		/ˈkəʊkənʌt/
+pear	pear	noun	2	food	quả lê	quả mọng nước, phần dưới to hơn phần trên	This pear is soft and sweet.	Quả lê này mềm và ngọt.		/peə/
+shrimp	shrimp	noun	2	food	con tôm (món ăn)	hải sản nhỏ, khi nấu chín có màu hồng đỏ	We had grilled shrimp at the beach.	Chúng tôi ăn tôm nướng ở bãi biển.	prawn	/ʃrɪmp/
+seafood	seafood	noun	2	food	hải sản	cá, tôm, cua, mực… từ biển dùng làm thức ăn	Nha Trang is famous for fresh seafood.	Nha Trang nổi tiếng với hải sản tươi.		/ˈsiːfuːd/
+yogurt	yogurt	noun	2	food	sữa chua	thực phẩm làm từ sữa lên men, vị hơi chua	I eat yogurt with fruit for breakfast.	Tôi ăn sữa chua với trái cây vào bữa sáng.	yoghurt	/ˈjɒɡət/
+honey	honey	noun	2	food	mật ong	chất ngọt, sánh do ong làm ra	Put some honey in your tea.	Cho ít mật ong vào trà của bạn.		/ˈhʌni/
+sauce	sauce	noun	2	food	nước sốt	chất lỏng sánh rưới lên hoặc ăn kèm món ăn	This chicken comes with a sweet sauce.	Món gà này ăn kèm với nước sốt ngọt.		/sɔːs/
+salad	salad	noun	2	food	món rau trộn, xa lát	rau sống trộn với nước sốt	I'll have a green salad, please.	Cho tôi một đĩa rau trộn.		/ˈsæləd/
+sausage	sausage	noun	2	food	xúc xích	thịt xay nhồi trong vỏ dài	We grilled sausages in the garden.	Chúng tôi nướng xúc xích trong vườn.		/ˈsɒsɪdʒ/
+jam.fruit	jam	noun	2	food	mứt (dạng sệt)	trái cây nấu với đường, phết lên bánh mì	I like toast with strawberry jam.	Tôi thích bánh mì nướng phết mứt dâu.		/dʒæm/
+flour	flour	noun	2	food	bột mì	bột trắng xay từ lúa mì để làm bánh	You need flour, eggs and milk to make pancakes.	Bạn cần bột mì, trứng và sữa để làm bánh kếp.		/ˈflaʊə/
+pan	pan	noun	2	food	cái chảo	dụng cụ nấu dẹt, có cán, dùng để rán, xào	Heat some oil in a pan.	Đun nóng ít dầu trong chảo.	frying pan	/pæn/
+pot.cooking	pot	noun	2	food	cái nồi	đồ nấu sâu lòng, có nắp, dùng nấu canh, luộc	Put the pot of soup on the stove.	Đặt nồi canh lên bếp.		/pɒt/
+oven	oven	noun	2	food	lò nướng	thiết bị kín dùng để nướng bánh, nướng thịt	Bake the cake in the oven for thirty minutes.	Nướng bánh trong lò ba mươi phút.		/ˈʌvn/
+waiter	waiter	noun	2	food	người phục vụ bàn	người mang đồ ăn đến bàn trong nhà hàng	The waiter brought us the menu.	Người phục vụ mang thực đơn đến cho chúng tôi.		/ˈweɪtə/
+chef	chef	noun	2	food	đầu bếp (nhà hàng)	người nấu ăn chuyên nghiệp trong nhà hàng	The chef at this restaurant is from Hue.	Đầu bếp của nhà hàng này đến từ Huế.		/ʃef/
+straw.drinking	straw	noun	2	food	ống hút	ống nhỏ để hút nước uống từ cốc	Many cafés now use paper straws.	Nhiều quán cà phê giờ dùng ống hút giấy.		/strɔː/
+napkin	napkin	noun	2	food	khăn ăn, giấy ăn	miếng vải hoặc giấy để lau miệng khi ăn	Can I have a napkin, please?	Cho tôi xin một tờ giấy ăn nhé?	serviette	/ˈnæpkɪn/
+lemonade	lemonade	noun	2	food	nước chanh	đồ uống pha từ chanh, đường và nước	A glass of cold lemonade is perfect on a hot day.	Một ly nước chanh lạnh thật tuyệt vào ngày nóng.		/ˌleməˈneɪd/
+tofu	tofu	noun	2	food	đậu phụ	món làm từ đậu nành, mềm, màu trắng	Fried tofu with tomato sauce is a cheap, tasty dish.	Đậu phụ sốt cà chua là món rẻ mà ngon.	bean curd	/ˈtəʊfuː/
+pumpkin	pumpkin	noun	2	food	quả bí ngô, bí đỏ	quả to màu cam, dùng nấu canh, làm bánh	My mother cooks pumpkin soup in winter.	Mẹ tôi nấu canh bí đỏ vào mùa đông.		/ˈpʌmpkɪn/
+pancake	pancake	noun	2	food	bánh kếp	bánh mỏng, tròn, rán trên chảo	We had pancakes with honey for breakfast.	Chúng tôi ăn bánh kếp với mật ong vào bữa sáng.		/ˈpænkeɪk/
+peanut	peanut	noun	2	food	hạt lạc, đậu phộng	hạt nhỏ trong vỏ cứng, rang lên ăn rất bùi	Sticky rice with peanuts is a popular breakfast.	Xôi lạc là món ăn sáng phổ biến.	groundnut	/ˈpiːnʌt/
+toast.bread	toast	noun	2	food	bánh mì nướng	lát bánh mì được nướng giòn	I had toast and eggs for breakfast.	Tôi ăn bánh mì nướng và trứng vào bữa sáng.		/təʊst/
+eat_out	eat out	phrasal_verb	2	food	đi ăn ngoài, ăn nhà hàng	ăn ở nhà hàng thay vì nấu ở nhà	We usually eat out on Saturday night.	Chúng tôi thường đi ăn ngoài vào tối thứ Bảy.
+fast_food	fast food	collocation	2	food	đồ ăn nhanh	món làm và bán nhanh như hamburger, gà rán	Too much fast food is bad for you.	Ăn quá nhiều đồ ăn nhanh không tốt cho bạn.
+soft_drink	soft drink	collocation	2	food	nước ngọt (có ga)	đồ uống không cồn, thường có ga và đường	Children should not have too many soft drinks.	Trẻ em không nên uống quá nhiều nước ngọt.
+boiled_egg	boiled egg	collocation	2	food	trứng luộc	trứng nấu chín trong nước sôi	I eat a boiled egg every morning.	Sáng nào tôi cũng ăn một quả trứng luộc.
+spring_roll	spring roll	noun	2	food	nem rán, chả giò	món cuộn bánh đa nhân thịt, rau rồi rán giòn	My aunt makes the best spring rolls in the family.	Dì tôi làm nem rán ngon nhất nhà.
+cooking_oil	cooking oil	collocation	2	food	dầu ăn	dầu thực vật dùng để rán, xào	We need to buy a bottle of cooking oil.	Chúng ta cần mua một chai dầu ăn.
+noodle_soup	noodle soup	collocation	2	food	món sợi chan nước dùng	các món như phở, bún, mì ăn với nước dùng nóng	Pho is a kind of beef noodle soup.	Phở là một loại món sợi nấu với nước dùng bò.
+enjoy_your_meal	enjoy your meal	phrase	2	food	chúc ngon miệng	câu nói khi mời hoặc phục vụ người khác ăn	Here is your food. Enjoy your meal!	Đồ ăn của anh đây. Chúc anh ngon miệng!
+hot_chocolate	hot chocolate	collocation	2	food	sô-cô-la nóng	đồ uống nóng pha từ bột ca cao và sữa	A cup of hot chocolate is lovely on a cold night.	Một cốc sô-cô-la nóng thật dễ chịu vào đêm lạnh.
+mineral_water	mineral water	collocation	2	food	nước khoáng	nước đóng chai lấy từ nguồn tự nhiên	A bottle of mineral water, please.	Cho tôi một chai nước khoáng.
+milk_tea	milk tea	collocation	2	food	trà sữa	trà pha với sữa, thường có thêm trân châu	Many students buy milk tea after school.	Nhiều học sinh mua trà sữa sau giờ học.
+hot_pot	hot pot	noun	2	food	lẩu	nồi nước dùng đặt giữa bàn để nhúng thịt, rau	We had a seafood hot pot with our friends.	Chúng tôi ăn lẩu hải sản với bạn bè.	hotpot
+sticky_rice	sticky rice	noun	2	food	xôi, gạo nếp	gạo dẻo, thường đồ lên thành xôi	I often have sticky rice for breakfast.	Tôi thường ăn xôi vào bữa sáng.	glutinous rice
+steamed_rice	steamed rice	collocation	2	food	cơm trắng	gạo nấu chín, không thêm gì, ăn kèm thức ăn	Steamed rice is served with every meal.	Bữa nào cũng có cơm trắng.

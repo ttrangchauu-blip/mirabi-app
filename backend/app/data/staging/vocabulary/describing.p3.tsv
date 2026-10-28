@@ -1,0 +1,90 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+width	width	noun	3	describing	chiều rộng	khoảng cách từ bên này sang bên kia	Measure the width of the window.	Hãy đo chiều rộng của cửa sổ.		/wɪdθ/
+depth	depth	noun	3	describing	chiều sâu, độ sâu	khoảng cách từ mặt trên xuống đáy	What is the depth of the pool?	Hồ bơi sâu bao nhiêu?		/depθ/
+material	material	noun	3	describing	chất liệu, vật liệu	thứ dùng để làm ra đồ vật: gỗ, vải, nhựa	What material is this bag made of?	Cái túi này làm bằng chất liệu gì?		/məˈtɪəriəl/
+surface	surface	noun	3	describing	bề mặt	phần ngoài cùng hoặc mặt trên của một vật	The surface of the table is very smooth.	Bề mặt cái bàn rất nhẵn.		/ˈsɜːfɪs/
+similarity	similarity	noun	3	describing	sự giống nhau, điểm tương đồng	điểm giống nhau giữa hai người hoặc vật	There are many similarities between the two cities.	Có nhiều điểm tương đồng giữa hai thành phố.		/ˌsɪməˈlærəti/
+comparison	comparison	noun	3	describing	sự so sánh	việc xem hai thứ giống và khác nhau thế nào	Let's make a comparison between the two phones.	Hãy làm một phép so sánh giữa hai chiếc điện thoại.		/kəmˈpærɪsn/
+condition.state	condition	noun	3	describing	tình trạng	đồ vật còn tốt hay đã hỏng, cũ: xe, nhà, đồ cũ	The car is old, but its condition is good.	Chiếc xe đã cũ nhưng tình trạng còn tốt.		/kənˈdɪʃn/
+pattern	pattern	noun	3	describing	họa tiết, hoa văn	hình vẽ, đường nét lặp lại trên vải, gạch, giấy	I like the pattern on your shirt.	Tôi thích họa tiết trên áo của bạn.		/ˈpætn/
+rubber	rubber	noun	3	describing	cao su	chất liệu mềm, co giãn, làm lốp xe, ủng	The boots are made of rubber.	Đôi ủng được làm bằng cao su.		/ˈrʌbə/
+steel	steel	noun	3	describing	thép	kim loại rất cứng làm từ sắt, dùng để xây dựng, làm dao	The bridge is made of steel.	Cây cầu được làm bằng thép.		/stiːl/
+iron.metal	iron	noun	3	describing	sắt	kim loại cứng màu xám, dễ bị gỉ (không phải bàn là)	The old gate is made of iron.	Cánh cổng cũ được làm bằng sắt.		/ˈaɪən/
+bamboo	bamboo	noun	3	describing	tre	cây thân rỗng, dùng làm nhà, rổ, đũa	These chopsticks are made of bamboo.	Đôi đũa này được làm bằng tre.		/ˌbæmˈbuː/
+slightly	slightly	adverb	3	describing	hơi, một chút	mức độ nhỏ, đứng trước tính từ hoặc động từ (trang trọng hơn a bit)	This shirt is slightly bigger than that one.	Chiếc áo này hơi to hơn chiếc kia.	a little|a bit	/ˈslaɪtli/
+fairly	fairly	adverb	3	describing	khá, tương đối	mức độ vừa phải, ít hơn quite	The test was fairly easy.	Bài kiểm tra tương đối dễ.		/ˈfeəli/
+extremely	extremely	adverb	3	describing	cực kỳ	ở mức rất cao, mạnh hơn very	The box is extremely heavy.	Cái hộp cực kỳ nặng.		/ɪkˈstriːmli/
+absolutely.degree	absolutely	adverb	3	describing	hoàn toàn, tuyệt đối	đi với tính từ mạnh như tuyệt vời, khổng lồ, hoàn hảo	The view was absolutely amazing.	Khung cảnh hoàn toàn tuyệt vời.		/ˈæbsəluːtli/
+totally	totally	adverb	3	describing	hoàn toàn	văn nói, nhấn mạnh: hoàn toàn khác, hoàn toàn mới	The new version is totally different.	Phiên bản mới hoàn toàn khác.	completely	/ˈtəʊtəli/
+especially	especially	adverb	3	describing	đặc biệt là	nhấn mạnh một trường hợp nổi bật hơn những cái khác	I love flowers, especially red roses.	Tôi yêu hoa, đặc biệt là hoa hồng đỏ.		/ɪˈspeʃəli/
+mostly	mostly	adverb	3	describing	phần lớn, hầu hết	chiếm phần nhiều nhưng không phải tất cả	The walls are mostly white.	Các bức tường phần lớn màu trắng.		/ˈməʊstli/
+hardly	hardly	adverb	3	describing	hầu như không	gần như không có, gần như không làm được	I can hardly see anything in this dark room.	Tôi hầu như không thấy gì trong căn phòng tối này.		/ˈhɑːdli/
+roughly.approx	roughly	adverb	3	describing	khoảng chừng, đại khái	ước lượng con số không chính xác	The room is roughly five metres long.	Căn phòng dài khoảng chừng năm mét.	about|approximately	/ˈrʌfli/
+softly	softly	adverb	3	describing	khe khẽ, êm	âm thanh, ánh sáng nhỏ nhẹ, dịu: nói khẽ, nhạc êm	She spoke softly so the baby could sleep.	Cô ấy nói khe khẽ để em bé ngủ.		/ˈsɒftli/
+perfectly	perfectly	adverb	3	describing	hoàn hảo, vừa vặn	không có lỗi, rất phù hợp	The shoes fit perfectly.	Đôi giày vừa vặn hoàn hảo.		/ˈpɜːfɪktli/
+properly	properly	adverb	3	describing	đúng cách	theo cách đúng, như cần phải làm	Make sure the door is closed properly.	Hãy chắc rằng cửa đã được đóng đúng cách.		/ˈprɒpəli/
+rapidly	rapidly	adverb	3	describing	nhanh chóng	thay đổi, phát triển với tốc độ rất nhanh	The city is growing rapidly.	Thành phố đang phát triển nhanh chóng.		/ˈræpɪdli/
+shrink	shrink	verb	3	describing	co lại, nhỏ lại	quần áo, vật trở nên nhỏ hơn, ví dụ khi giặt nước nóng	My shirt will shrink if you wash it in hot water.	Áo của tôi sẽ bị co lại nếu bạn giặt bằng nước nóng.		/ʃrɪŋk/
+stretch.material	stretch	verb	3	describing	giãn ra, kéo căng	vải, dây bị kéo dài hoặc rộng ra (không nói về tập thể dục)	These jeans stretch when you wear them.	Chiếc quần jean này giãn ra khi bạn mặc.		/stretʃ/
+fade	fade	verb	3	describing	phai màu, nhạt dần	màu sắc, ánh sáng yếu đi theo thời gian	The colours faded in the sun.	Màu sắc bị phai dưới nắng.		/feɪd/
+polish	polish	verb	3	describing	đánh bóng	chà xát cho bề mặt sáng bóng: giày, đồ gỗ	He polishes his shoes every morning.	Anh ấy đánh bóng giày mỗi sáng.		/ˈpɒlɪʃ/
+sharpen	sharpen	verb	3	describing	mài sắc, gọt nhọn	làm cho dao sắc hơn hoặc bút chì nhọn hơn	I need to sharpen my pencil.	Tôi cần gọt bút chì.		/ˈʃɑːpən/
+stand_out	stand out	phrasal_verb	3	describing	nổi bật	dễ thấy hơn những thứ xung quanh nhờ màu sắc, kích thước	Her red coat stands out in the crowd.	Chiếc áo khoác đỏ của cô ấy nổi bật giữa đám đông.
+light_up	light up	phrasal_verb	3	describing	sáng bừng lên	trở nên sáng rực nhờ đèn, pháo hoa	The sky lit up with fireworks.	Bầu trời sáng bừng lên với pháo hoa.
+wear_out	wear out	phrasal_verb	3	describing	mòn, cũ nát	đồ vật hỏng dần vì dùng quá nhiều	My shoes wear out quickly because I walk a lot.	Giày của tôi mau mòn vì tôi đi bộ nhiều.
+ice_cold	ice cold	collocation	3	describing	lạnh buốt, lạnh như đá	đồ uống, nước rất lạnh	I'd like an ice cold drink, please.	Cho tôi một ly đồ uống lạnh buốt nhé.	ice-cold
+boiling_hot	boiling hot	collocation	3	describing	nóng hầm hập, nóng như thiêu	văn nói, thời tiết hoặc căn phòng rất nóng	It's boiling hot in here. Open the window!	Trong này nóng hầm hập. Mở cửa sổ ra đi!
+freezing_cold	freezing cold	collocation	3	describing	lạnh cóng	văn nói, rất lạnh đến mức run người	The water in the lake was freezing cold.	Nước trong hồ lạnh cóng.
+soaking_wet	soaking wet	collocation	3	describing	ướt sũng	ướt hoàn toàn, thường vì mưa	I forgot my umbrella and got soaking wet.	Tôi quên ô và bị ướt sũng.
+wide_open	wide open	collocation	3	describing	mở toang	cửa, cửa sổ, mắt mở hết cỡ	The door was wide open.	Cánh cửa mở toang.
+poor_quality	poor quality	collocation	3	describing	chất lượng kém	sản phẩm làm không tốt, dễ hỏng	These cheap shoes are poor quality.	Đôi giày rẻ này chất lượng kém.	low quality|poor-quality
+in_good_condition	in good condition	collocation	3	describing	trong tình trạng tốt	đồ cũ nhưng vẫn còn tốt, chưa hỏng	The old bike is still in good condition.	Chiếc xe đạp cũ vẫn còn trong tình trạng tốt.
+similar_to	similar to	collocation	3	describing	tương tự như, giống với	gần giống người hoặc vật khác	Your bag is similar to mine.	Túi của bạn giống với túi của tôi.
+compared_with	compared with	collocation	3	describing	so với	đặt hai thứ cạnh nhau để so sánh	Compared with my old phone, this one is very fast.	So với điện thoại cũ của tôi, chiếc này rất nhanh.	compared to
+pretty_much	pretty much	collocation	3	describing	gần như là	văn nói thân mật, nói điều gần đúng hoàn toàn	The two cars are pretty much the same.	Hai chiếc xe gần như là giống nhau.	almost
+the_opposite_of	the opposite of	collocation	3	describing	trái ngược với	nói về hai thứ hoàn toàn khác nhau	Hot is the opposite of cold.	Nóng trái ngược với lạnh.
+at_most	at most	collocation	3	describing	nhiều nhất, tối đa	con số hoặc mức cao nhất có thể	The box can hold ten books at most.	Cái hộp đựng được nhiều nhất mười cuốn sách.
+made_from	made from	collocation	3	describing	làm từ	nguyên liệu đã bị biến đổi, không còn nhìn thấy	Paper is made from wood.	Giấy được làm từ gỗ.
+navy_blue	navy blue	collocation	3	describing	xanh tím than, xanh hải quân	màu xanh dương rất đậm, gần như đen	He wore a navy blue suit.	Anh ấy mặc một bộ com-lê màu xanh tím than.	navy
+sky_blue	sky blue	collocation	3	describing	xanh da trời	màu xanh nhạt như bầu trời trong	She has a sky blue dress.	Cô ấy có một chiếc váy màu xanh da trời.
+more_and_more	more and more	collocation	3	describing	ngày càng nhiều, ngày càng	diễn tả sự tăng dần	The city is getting more and more crowded.	Thành phố ngày càng đông đúc.
+not_as_good_as	not as good as	collocation	3	describing	không tốt bằng	so sánh, cái này kém hơn cái kia	The new film is not as good as the old one.	Bộ phim mới không hay bằng phim cũ.
+far_too	far too	collocation	3	describing	quá mức, quá ư	nhấn mạnh điều gì vượt xa mức cần, mang ý không tốt	This jacket is far too big for you.	Chiếc áo khoác này quá rộng so với bạn.	way too
+quite_a_lot	quite a lot	collocation	3	describing	khá nhiều	số lượng hoặc mức độ tương đối lớn	The box weighs quite a lot.	Cái hộp khá nặng.
+even_more	even more	collocation	3	describing	thậm chí còn hơn nữa	nhấn mạnh mức độ tăng thêm khi so sánh	The second film was even more exciting.	Bộ phim thứ hai thậm chí còn hấp dẫn hơn nữa.
+covered_in	covered in	collocation	3	describing	phủ đầy	bề mặt có lớp gì đó phủ lên: bụi, bùn, tuyết	The car was covered in mud.	Chiếc xe phủ đầy bùn.	covered with
+like_new	like new	collocation	3	describing	như mới	đồ đã dùng nhưng còn rất tốt, gần như mới	I sold my old bike. It was like new.	Tôi đã bán chiếc xe đạp cũ. Nó vẫn còn như mới.
+by_hand	by hand	collocation	3	describing	bằng tay, thủ công	làm bằng tay chứ không bằng máy	These bags are made by hand.	Những chiếc túi này được làm thủ công.
+tiny_little	tiny little	collocation	3	describing	bé tí xíu, nhỏ xinh	văn nói, nhấn mạnh vật rất nhỏ, thường kèm cảm xúc	She lives in a tiny little house by the sea.	Cô ấy sống trong một ngôi nhà bé tí xíu bên bờ biển.
+deep_blue	deep blue	collocation	3	describing	xanh thẳm	màu xanh dương đậm và đẹp: biển, bầu trời	We swam in the deep blue sea.	Chúng tôi bơi trong làn nước biển xanh thẳm.
+little_by_little	little by little	collocation	3	describing	từng chút một	văn nói, thay đổi hoặc tiến bộ chậm rãi	Little by little, the room became brighter.	Từng chút một, căn phòng sáng dần lên.	bit by bit
+whats_it_like	what's it like	phrase	3	describing	Nó như thế nào?	hỏi để ai đó miêu tả một nơi, vật, trải nghiệm	You have a new flat. What's it like?	Bạn có căn hộ mới. Nó như thế nào?	what is it like
+its_hard_to_describe	it's hard to describe	phrase	3	describing	Khó tả lắm.	khi không tìm được lời để miêu tả điều gì	It's hard to describe. You need to see it.	Khó tả lắm. Bạn phải tự xem mới biết.	it is hard to describe
+cant_tell_the_difference	can't tell the difference	phrase	3	describing	không phân biệt được	khi hai thứ quá giống nhau	I can't tell the difference between the two colours.	Tôi không phân biệt được hai màu đó.	cannot tell the difference
+spot_the_difference	spot the difference	collocation	3	describing	tìm điểm khác nhau	trò chơi so sánh hai bức tranh gần giống nhau	The children love playing spot the difference.	Bọn trẻ rất thích chơi tìm điểm khác nhau.
+massive	massive	adjective	4	describing	đồ sộ, to và nặng	rất to và chắc nặng: tòa nhà, tảng đá, con tàu	A massive rock was blocking the road.	Một tảng đá đồ sộ chắn ngang đường.		/ˈmæsɪv/
+vast	vast	adjective	4	describing	rộng lớn, bao la	diện tích rất rộng: sa mạc, đại dương, cánh đồng	The desert is vast and empty.	Sa mạc rộng lớn và trống trải.		/vɑːst/
+compact	compact	adjective	4	describing	nhỏ gọn	chiếm ít chỗ nhưng đủ dùng: xe, máy ảnh, căn hộ	This compact camera fits in my pocket.	Chiếc máy ảnh nhỏ gọn này vừa túi áo của tôi.		/kəmˈpækt/
+hollow	hollow	adjective	4	describing	rỗng ruột	bên trong trống không: thân cây, quả bóng, ống	The old tree is hollow inside.	Cái cây già rỗng ruột bên trong.		/ˈhɒləʊ/
+bumpy	bumpy	adjective	4	describing	gập ghềnh, mấp mô	đường hoặc bề mặt có nhiều chỗ lồi lõm	We drove along a bumpy road.	Chúng tôi lái xe trên một con đường gập ghềnh.		/ˈbʌmpi/
+gigantic	gigantic	adjective	4	describing	khổng lồ, kếch xù	cực kỳ to, to hơn huge; thường gây ngạc nhiên	A gigantic wave hit the boat.	Một con sóng khổng lồ đập vào con thuyền.	huge|enormous	/dʒaɪˈɡæntɪk/
+miniature	miniature	adjective	4	describing	thu nhỏ, tí hon	bản nhỏ hơn rất nhiều so với vật thật: mô hình, đồ chơi	My son collects miniature cars.	Con trai tôi sưu tầm ô tô mô hình thu nhỏ.		/ˈmɪnətʃə/
+circular	circular	adjective	4	describing	hình tròn, có dạng tròn	trang trọng hơn tròn, nói về hình dạng phẳng: bàn, con đường, khu vực	The building has a circular shape.	Tòa nhà có dạng hình tròn.	round	/ˈsɜːkjələ/
+multicoloured	multicoloured	adjective	4	describing	nhiều màu	có nhiều màu khác nhau trên cùng một vật	She wore a multicoloured scarf.	Cô ấy quàng một chiếc khăn nhiều màu.	multicolored|multi-coloured	/ˌmʌltiˈkʌləd/
+delicate	delicate	adjective	4	describing	mỏng manh, tinh tế	dễ hỏng, cần nhẹ tay: đồ sứ, vải mỏng, cánh hoa	Wash this delicate dress by hand.	Hãy giặt tay chiếc váy mỏng manh này.		/ˈdelɪkət/
+blunt	blunt	adjective	4	describing	cùn	dao, kéo, bút chì không còn sắc	This knife is too blunt to cut bread.	Con dao này cùn quá, không cắt được bánh mì.		/blʌnt/
+pointed	pointed	adjective	4	describing	nhọn, có đầu nhọn	đầu hoặc mũi của vật thuôn nhọn: mũ, mái nhà, giày	The old house has a pointed roof.	Ngôi nhà cũ có mái nhọn.		/ˈpɔɪntɪd/
+vivid	vivid	adjective	4	describing	sống động, rực (màu)	màu đậm, mạnh, gây ấn tượng rõ; hay dùng trong văn viết	The painting is full of vivid colours.	Bức tranh đầy những màu sắc sống động.	bright	/ˈvɪvɪd/
+durable	durable	adjective	4	describing	bền	dùng được lâu mà không hỏng: vải, giày, vật liệu	These boots are made of durable leather.	Đôi bốt này được làm bằng da bền.		/ˈdjʊərəbl/
+fragile	fragile	adjective	4	describing	dễ vỡ	thủy tinh, đồ sứ, cần cầm cẩn thận	Be careful with that box. It's fragile.	Cẩn thận với cái hộp đó. Nó dễ vỡ.		/ˈfrædʒaɪl/
+sturdy	sturdy	adjective	4	describing	chắc chắn, vững chãi	bàn ghế, giày, cấu trúc khỏe, khó hỏng	We need a sturdy table for the heavy computer.	Chúng tôi cần một cái bàn chắc chắn để đặt máy tính nặng.		/ˈstɜːdi/
+flexible.material	flexible	adjective	4	describing	dẻo, dễ uốn	vật liệu cong được mà không gãy (không nói về cơ thể)	The plastic tube is soft and flexible.	Ống nhựa mềm và dẻo.		/ˈfleksəbl/
+identical	identical	adjective	4	describing	giống hệt nhau	hoàn toàn giống nhau, không có điểm khác	The two keys look identical.	Hai chiếc chìa khóa trông giống hệt nhau.		/aɪˈdentɪkl/
+genuine	genuine	adjective	4	describing	thật, chính hiệu	đồ da, đá quý, hàng hiệu thật, không phải hàng giả	Is this bag made of genuine leather?	Cái túi này có làm bằng da thật không?		/ˈdʒenjuɪn/
+worn-out	worn-out	adjective	4	describing	sờn rách, cũ mòn	quần áo, giày, đồ dùng đã dùng quá lâu	He threw away his worn-out shoes.	Anh ấy đã vứt đôi giày cũ mòn đi.	worn out	/ˌwɔːn ˈaʊt/
+dim	dim	adjective	4	describing	lờ mờ, tối mờ	ánh sáng yếu, không đủ sáng	The light in the hall is too dim to read.	Ánh đèn ở sảnh mờ quá, không đọc được.		/dɪm/
+king-size	king-size	adjective	4	describing	cỡ đại, cỡ lớn	giường, chăn, gói hàng to hơn cỡ thường	They bought a king-size bed.	Họ đã mua một chiếc giường cỡ đại.	king-sized	/ˈkɪŋ saɪz/
+off-white	off-white	adjective	4	describing	trắng ngà	màu trắng hơi ngả vàng hoặc xám	The walls are painted off-white.	Những bức tường được sơn màu trắng ngà.		/ˌɒf ˈwaɪt/
+cube	cube	noun	4	describing	hình lập phương, khối vuông	khối có sáu mặt vuông bằng nhau: viên đá, xúc xắc	Cut the cheese into small cubes.	Hãy cắt phô mai thành những khối vuông nhỏ.		/kjuːb/
+sphere	sphere	noun	4	describing	hình cầu, khối cầu	khối tròn đều mọi phía như quả bóng	The Earth is almost a perfect sphere.	Trái Đất gần như là một hình cầu hoàn hảo.		/sfɪə/
+shade.colour	shade	noun	4	describing	sắc độ, tông màu	mức đậm nhạt khác nhau của cùng một màu	I like this shade of green.	Tôi thích tông màu xanh lá này.		/ʃeɪd/

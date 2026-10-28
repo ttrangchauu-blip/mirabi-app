@@ -1,0 +1,50 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+small_business	small business	noun	2	business	doanh nghiệp nhỏ	công ty, cửa hàng có ít nhân viên và ít vốn	The government helps small businesses with cheap loans.	Chính phủ hỗ trợ doanh nghiệp nhỏ bằng các khoản vay lãi thấp.
+price_list	price list	noun	2	business	bảng giá	danh sách giá các sản phẩm, dịch vụ gửi cho khách	Could you send me your price list?	Bạn có thể gửi tôi bảng giá được không?
+manufacturer	manufacturer	noun	3	business	nhà sản xuất	công ty làm ra hàng hóa trong nhà máy	Toyota is a famous car manufacturer.	Toyota là một nhà sản xuất ô tô nổi tiếng.		/ˌmænjuˈfæktʃərə/
+exporter	exporter	noun	3	business	nhà xuất khẩu, nước xuất khẩu	công ty hoặc quốc gia bán hàng ra nước ngoài	Vietnam is a big rice exporter.	Việt Nam là một nước xuất khẩu gạo lớn.		/ekˈspɔːtə/
+logistics	logistics	noun	4	business	hậu cần, logistics	việc sắp xếp kho bãi, vận chuyển hàng hóa	He works for a logistics company at the port.	Anh ấy làm cho một công ty logistics ở cảng.		/ləˈdʒɪstɪks/
+inventory	inventory	noun	4	business	hàng tồn kho, danh mục hàng trong kho	danh sách và số lượng hàng một công ty đang có	We check our inventory every Friday.	Chúng tôi kiểm tra hàng tồn kho mỗi thứ Sáu.		/ˈɪnvəntri/
+wholesaler	wholesaler	noun	4	business	nhà bán buôn, người bán sỉ	người bán hàng số lượng lớn cho các cửa hàng	Shops buy their goods from a wholesaler.	Các cửa hàng mua hàng từ nhà bán buôn.		/ˈhəʊlseɪlə/
+subsidiary	subsidiary	noun	4	business	công ty con	công ty thuộc quyền sở hữu của một công ty lớn hơn	The bank has a subsidiary in Cambodia.	Ngân hàng có một công ty con ở Campuchia.		/səbˈsɪdiəri/
+acquisition	acquisition	noun	4	business	vụ mua lại (công ty)	việc một công ty mua một công ty khác	The acquisition cost them one billion dollars.	Vụ mua lại tốn của họ một tỷ đô la.		/ˌækwɪˈzɪʃn/
+tycoon	tycoon	noun	4	business	ông trùm (kinh doanh)	người rất giàu và có quyền lực trong một ngành	He is a famous real estate tycoon.	Ông ấy là một ông trùm bất động sản nổi tiếng.		/taɪˈkuːn/
+outsource	outsource	verb	4	business	thuê ngoài	giao một phần việc cho công ty khác làm	Many companies outsource their IT work.	Nhiều công ty thuê ngoài mảng công nghệ thông tin.		/ˈaʊtsɔːs/
+rebrand	rebrand	verb	4	business	đổi mới thương hiệu	thay tên, logo, hình ảnh của công ty, sản phẩm	The bank rebranded with a new green logo.	Ngân hàng đã đổi mới thương hiệu với logo màu xanh lá.		/ˌriːˈbrænd/
+corporate	corporate	adjective	4	business	(thuộc) công ty, doanh nghiệp	liên quan đến các công ty lớn	She left her corporate job to open a bakery.	Cô ấy bỏ công việc ở công ty lớn để mở tiệm bánh.		/ˈkɔːpərət/
+non-profit	non-profit	adjective	4	business	phi lợi nhuận	tổ chức không nhằm mục đích kiếm lời	She works for a non-profit organisation.	Cô ấy làm việc cho một tổ chức phi lợi nhuận.	nonprofit|not-for-profit	/ˌnɒn ˈprɒfɪt/
+thriving	thriving	adjective	4	business	đang phát đạt, thịnh vượng	công việc kinh doanh đang rất thành công	They have a thriving restaurant in the old town.	Họ có một nhà hàng đang làm ăn phát đạt ở phố cổ.		/ˈθraɪvɪŋ/
+exclusive.deal	exclusive	adjective	4	business	độc quyền	chỉ một bên được bán, phân phối hoặc dùng	The shop has exclusive rights to sell this brand.	Cửa hàng có độc quyền bán thương hiệu này.		/ɪkˈskluːsɪv/
+high-end	high-end	adjective	4	business	cao cấp, hạng sang	sản phẩm đắt tiền, chất lượng cao nhất	They only sell high-end watches.	Họ chỉ bán đồng hồ cao cấp.		/ˌhaɪ ˈend/
+seasonal	seasonal	adjective	4	business	theo mùa, thời vụ	chỉ xảy ra hoặc bán chạy vào một mùa nhất định	Selling mooncakes is a seasonal business.	Bán bánh trung thu là việc kinh doanh theo mùa.		/ˈsiːzənl/
+family-owned	family-owned	adjective	4	business	do gia đình sở hữu	công ty thuộc về một gia đình	It is a small family-owned hotel.	Đó là một khách sạn nhỏ do gia đình sở hữu.		/ˌfæməli ˈəʊnd/
+state-owned	state-owned	adjective	4	business	(thuộc sở hữu) nhà nước	công ty, doanh nghiệp do nhà nước làm chủ	He works for a state-owned bank.	Anh ấy làm việc cho một ngân hàng nhà nước.		/ˌsteɪt ˈəʊnd/
+premium.quality	premium	adjective	4	business	cao cấp, hảo hạng	hàng chất lượng tốt hơn và giá cao hơn loại thường	We sell premium coffee from Da Lat.	Chúng tôi bán cà phê hảo hạng từ Đà Lạt.		/ˈpriːmiəm/
+unprofitable	unprofitable	adjective	4	business	không có lãi, thua lỗ	việc kinh doanh không kiếm được tiền lời	They closed the unprofitable shops.	Họ đóng cửa những cửa hàng không có lãi.		/ʌnˈprɒfɪtəbl/
+defective	defective	adjective	4	business	bị lỗi (sản phẩm)	hàng hóa có lỗi sản xuất, không dùng tốt được	The company took back all the defective phones.	Công ty thu hồi tất cả điện thoại bị lỗi.	faulty	/dɪˈfektɪv/
+upmarket	upmarket	adjective	4	business	sang trọng, dành cho khách giàu	cửa hàng, khu vực, sản phẩm cho người có tiền	They opened an upmarket restaurant in District 1.	Họ mở một nhà hàng sang trọng ở Quận 1.	upscale	/ˌʌpˈmɑːkɪt/
+in-house	in-house	adjective	4	business	nội bộ (công ty tự làm)	do nhân viên của chính công ty làm, không thuê ngoài	We have an in-house design team.	Chúng tôi có đội thiết kế nội bộ.		/ˌɪn ˈhaʊs/
+profitably	profitably	adverb	4	business	một cách có lãi	làm kinh doanh mà kiếm được tiền lời	The farm is now run profitably.	Trang trại giờ đã hoạt động có lãi.		/ˈprɒfɪtəbli/
+jointly	jointly	adverb	4	business	cùng nhau, chung	hai hay nhiều bên cùng sở hữu, cùng làm	The hotel is jointly owned by two companies.	Khách sạn do hai công ty cùng sở hữu.		/ˈdʒɔɪntli/
+joint_venture	joint venture	noun	4	business	liên doanh	công ty hai bên cùng góp vốn thành lập	They set up a joint venture with a Japanese firm.	Họ thành lập một liên doanh với một công ty Nhật.
+profit_margin	profit margin	noun	4	business	biên lợi nhuận	phần trăm tiền lời trên giá bán	Supermarkets have small profit margins.	Siêu thị có biên lợi nhuận thấp.
+supply_chain	supply chain	noun	4	business	chuỗi cung ứng	các bước từ nguyên liệu, sản xuất đến khi hàng tới tay khách	Problems in the supply chain made the phones late.	Sự cố trong chuỗi cung ứng khiến điện thoại bị giao trễ.
+after-sales_service	after-sales service	noun	4	business	dịch vụ hậu mãi	sửa chữa, hỗ trợ khách hàng sau khi đã bán	This brand is famous for its after-sales service.	Thương hiệu này nổi tiếng với dịch vụ hậu mãi.
+cold_call	cold call	noun	4	business	cuộc gọi chào hàng (người lạ)	gọi điện cho người chưa quen để bán hàng	I get three cold calls a day from insurance companies.	Ngày nào tôi cũng nhận ba cuộc gọi chào hàng từ các công ty bảo hiểm.
+win-win_situation	win-win situation	noun	4	business	tình huống đôi bên cùng có lợi	khi cả hai bên trong thỏa thuận đều được lợi	The deal is a win-win situation for both companies.	Thỏa thuận là tình huống đôi bên cùng có lợi cho cả hai công ty.
+go_under	go under	phrasal_verb	4	business	sập tiệm, phá sản	khẩu ngữ, công ty thất bại và phải đóng cửa	Many small airlines went under last year.	Nhiều hãng hàng không nhỏ đã sập tiệm năm ngoái.
+branch_out	branch out	phrasal_verb	4	business	mở rộng sang (lĩnh vực mới)	bắt đầu làm thêm một loại sản phẩm, dịch vụ khác	The bookshop branched out into selling coffee.	Hiệu sách đã mở rộng sang bán cà phê.
+roll_out	roll out	phrasal_verb	4	business	tung ra, triển khai rộng rãi	đưa sản phẩm, dịch vụ mới đến nhiều nơi	The bank will roll out the new app next month.	Ngân hàng sẽ triển khai ứng dụng mới vào tháng sau.
+draw_up	draw up	phrasal_verb	4	business	soạn thảo (hợp đồng, kế hoạch)	viết ra một văn bản chính thức	The lawyer drew up the contract.	Luật sư đã soạn thảo hợp đồng.
+supply_and_demand	supply and demand	noun	4	business	cung và cầu	quy luật giá cả thay đổi theo lượng hàng và lượng người mua	Prices depend on supply and demand.	Giá cả phụ thuộc vào cung và cầu.
+win_a_contract	win a contract	collocation	4	business	giành được hợp đồng	được chọn làm một dự án sau khi cạnh tranh	Our company won a contract to build a new school.	Công ty chúng tôi đã giành được hợp đồng xây trường học mới.
+annual_report	annual report	noun	4	business	báo cáo thường niên	báo cáo tình hình kinh doanh của công ty mỗi năm	The annual report shows a big rise in profit.	Báo cáo thường niên cho thấy lợi nhuận tăng mạnh.
+business_model	business model	noun	4	business	mô hình kinh doanh	cách một công ty tạo ra tiền	Their business model is based on monthly fees.	Mô hình kinh doanh của họ dựa vào phí hằng tháng.
+buy_in_bulk	buy in bulk	collocation	4	business	mua sỉ, mua số lượng lớn	mua nhiều một lúc để được giá rẻ hơn	Restaurants save money by buying in bulk.	Nhà hàng tiết kiệm tiền bằng cách mua số lượng lớn.
+customer_base	customer base	noun	4	business	tập khách hàng	toàn bộ khách hàng thường xuyên của một công ty	The shop has a large customer base in the city.	Cửa hàng có tập khách hàng lớn trong thành phố.	client base
+selling_point	selling point	noun	4	business	điểm hấp dẫn khi bán	đặc điểm làm khách muốn mua sản phẩm	The big battery is the phone's main selling point.	Viên pin lớn là điểm hấp dẫn chính của chiếc điện thoại.
+quality_control	quality control	noun	4	business	kiểm soát chất lượng	kiểm tra sản phẩm để chắc chắn chúng không bị lỗi	Every product goes through quality control.	Mỗi sản phẩm đều qua khâu kiểm soát chất lượng.
+hit_the_market	hit the market	collocation	4	business	được tung ra thị trường	khi sản phẩm mới bắt đầu được bán	The new model will hit the market in spring.	Mẫu mới sẽ được tung ra thị trường vào mùa xuân.
+pleasure_doing_business_with_you	pleasure doing business with you	phrase	4	business	rất vui được làm ăn với anh/chị	câu lịch sự nói sau khi chốt một thỏa thuận	Thank you, it's a pleasure doing business with you.	Cảm ơn anh, rất vui được làm ăn với anh.
+competitive_advantage	competitive advantage	noun	4	business	lợi thế cạnh tranh	điều làm một công ty tốt hơn đối thủ	Low prices are our biggest competitive advantage.	Giá thấp là lợi thế cạnh tranh lớn nhất của chúng tôi.
+brand_image	brand image	noun	4	business	hình ảnh thương hiệu	cách khách hàng nhìn nhận và cảm nhận một thương hiệu	The scandal hurt the company's brand image.	Vụ bê bối đã làm tổn hại hình ảnh thương hiệu của công ty.

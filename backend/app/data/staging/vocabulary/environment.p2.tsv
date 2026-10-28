@@ -1,0 +1,97 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+environmental	environmental	adjective	3	environment	(thuộc về) môi trường	liên quan đến thiên nhiên, không khí, nước quanh ta	Plastic waste is a serious environmental problem.	Rác thải nhựa là một vấn đề môi trường nghiêm trọng.		/ɪnˌvaɪrənˈmentl/
+toxic	toxic	adjective	3	environment	độc hại	chứa chất độc, nguy hiểm cho người và sinh vật	The factory released toxic smoke.	Nhà máy đã thải ra khói độc hại.		/ˈtɒksɪk/
+natural_resources	natural resources	collocation	3	environment	tài nguyên thiên nhiên	những thứ có sẵn trong tự nhiên như nước, rừng, khoáng sản	We must use natural resources carefully.	Chúng ta phải sử dụng tài nguyên thiên nhiên một cách cẩn thận.
+renewable_energy	renewable energy	collocation	3	environment	năng lượng tái tạo	năng lượng không bao giờ cạn như gió, mặt trời, nước	Vietnam needs more renewable energy.	Việt Nam cần nhiều năng lượng tái tạo hơn.
+clean_energy	clean energy	collocation	3	environment	năng lượng sạch	năng lượng không thải khói bụi, khí độc ra môi trường	Electric buses run on clean energy.	Xe buýt điện chạy bằng năng lượng sạch.	green energy
+recyclable	recyclable	adjective	3	environment	có thể tái chế	vật liệu, đồ dùng có thể xử lý để làm ra đồ mới	Most paper is recyclable.	Hầu hết giấy đều có thể tái chế.		/ˌriːˈsaɪkləbl/
+reusable	reusable	adjective	3	environment	có thể tái sử dụng	đồ dùng được nhiều lần, không vứt sau một lần dùng	I bought a reusable water bottle.	Tôi đã mua một chiếc bình nước có thể tái sử dụng.		/ˌriːˈjuːzəbl/
+disposable	disposable	adjective	3	environment	dùng một lần rồi bỏ	nói về cốc, đũa, dao cạo... dùng xong là vứt	Try not to use disposable cups.	Hãy cố gắng không dùng cốc dùng một lần.		/dɪˈspəʊzəbl/
+recycled_paper	recycled paper	collocation	3	environment	giấy tái chế	giấy được làm lại từ giấy cũ	This notebook is made from recycled paper.	Quyển vở này được làm từ giấy tái chế.
+food_waste	food waste	collocation	3	environment	thực phẩm bị bỏ phí	thức ăn thừa, hỏng bị vứt đi	Restaurants produce a lot of food waste.	Các nhà hàng thải ra rất nhiều thực phẩm bị bỏ phí.
+landfill	landfill	noun	3	environment	bãi chôn lấp rác	nơi rác được đổ xuống hố lớn rồi lấp đất lên	Most of our rubbish ends up in landfill.	Phần lớn rác của chúng ta cuối cùng nằm ở bãi chôn lấp.		/ˈlændfɪl/
+dump.rubbish	dump	verb	3	environment	đổ (rác) bừa bãi	vứt rác, chất thải ở nơi không được phép	Someone dumped old furniture by the river.	Ai đó đã đổ đồ đạc cũ bên bờ sông.		/dʌmp/
+smog	smog	noun	3	environment	khói bụi mù mịt	lớp khói và bụi ô nhiễm bao phủ thành phố	The city was covered in smog this morning.	Sáng nay thành phố bị bao phủ trong khói bụi mù mịt.		/smɒɡ/
+air_quality	air quality	collocation	3	environment	chất lượng không khí	mức độ sạch hay ô nhiễm của không khí	The air quality is poor today, so wear a mask.	Hôm nay chất lượng không khí kém, nên hãy đeo khẩu trang.
+exhaust_fumes	exhaust fumes	collocation	3	environment	khói xe	khí thải từ ống xả của xe máy, ô tô	Exhaust fumes make the streets hard to breathe in.	Khói xe khiến việc hít thở trên đường phố trở nên khó khăn.
+toxic_chemicals	toxic chemicals	collocation	3	environment	hóa chất độc hại	các chất hóa học nguy hiểm cho sức khỏe và môi trường	The factory poured toxic chemicals into the river.	Nhà máy đã đổ hóa chất độc hại xuống sông.
+noise_pollution	noise pollution	collocation	3	environment	ô nhiễm tiếng ồn	tiếng ồn quá mức từ xe cộ, công trường gây khó chịu	Noise pollution makes it hard to sleep.	Ô nhiễm tiếng ồn khiến việc ngủ trở nên khó khăn.
+water_shortage	water shortage	collocation	3	environment	tình trạng thiếu nước	khi không có đủ nước sạch để dùng	The long dry season caused a water shortage.	Mùa khô kéo dài đã gây ra tình trạng thiếu nước.
+acid_rain	acid rain	collocation	3	environment	mưa axit	mưa có lẫn chất ô nhiễm, gây hại cho cây và nhà cửa	Acid rain can kill trees.	Mưa axit có thể giết chết cây cối.
+ozone_layer	ozone layer	collocation	3	environment	tầng ôzôn	lớp khí trên cao bảo vệ Trái Đất khỏi tia nắng có hại	The ozone layer protects us from the sun.	Tầng ôzôn bảo vệ chúng ta khỏi ánh nắng mặt trời.
+greenhouse_effect	greenhouse effect	collocation	3	environment	hiệu ứng nhà kính	khí trong khí quyển giữ nhiệt, làm Trái Đất nóng lên	The greenhouse effect makes the earth warmer.	Hiệu ứng nhà kính làm cho Trái Đất ấm hơn.
+carbon_dioxide	carbon dioxide	noun	3	environment	khí CO2	khí thải ra khi đốt nhiên liệu; cây xanh hấp thụ khí này	Cars produce a lot of carbon dioxide.	Ô tô thải ra rất nhiều khí CO2.
+sea_level	sea level	collocation	3	environment	mực nước biển	độ cao của mặt nước biển so với đất liền	The sea level is rising every year.	Mực nước biển đang dâng lên mỗi năm.
+atmosphere.air	atmosphere	noun	3	environment	bầu khí quyển	lớp không khí bao quanh Trái Đất	Cars release harmful gases into the atmosphere.	Ô tô thải khí độc hại vào bầu khí quyển.		/ˈætməsfɪə/
+iceberg	iceberg	noun	3	environment	tảng băng trôi	khối băng khổng lồ trôi nổi trên biển	The ship hit an iceberg.	Con tàu đã đâm vào một tảng băng trôi.		/ˈaɪsbɜːɡ/
+extinction	extinction	noun	3	environment	sự tuyệt chủng	khi một loài không còn cá thể nào sống	Many animals are in danger of extinction.	Nhiều loài động vật đang có nguy cơ tuyệt chủng.		/ɪkˈstɪŋkʃn/
+die_out	die out	phrasal_verb	3	environment	chết dần hết, biến mất	một loài, giống cây dần dần không còn tồn tại	Some kinds of fish may die out soon.	Một số loài cá có thể sớm biến mất.
+energy-saving	energy-saving	adjective	3	environment	tiết kiệm năng lượng	nói về bóng đèn, máy móc tốn ít điện	We changed to energy-saving light bulbs.	Chúng tôi đã đổi sang bóng đèn tiết kiệm năng lượng.	energy-efficient	/ˈenədʒi ˌseɪvɪŋ/
+coral_reef	coral reef	collocation	3	environment	rạn san hô	dải san hô dưới biển nông, nơi nhiều loài cá sinh sống	Nha Trang has beautiful coral reefs.	Nha Trang có những rạn san hô tuyệt đẹp.
+shore	shore	noun	3	environment	bờ (biển, hồ)	mép đất sát ngay chỗ nước biển hoặc hồ	We walked along the shore of the lake.	Chúng tôi đi dạo dọc bờ hồ.		/ʃɔː/
+cliff	cliff	noun	3	environment	vách đá	vách đá cao, dựng đứng, thường ở ven biển	Don't stand too close to the edge of the cliff.	Đừng đứng quá gần mép vách đá.		/klɪf/
+peak.mountain	peak	noun	3	environment	đỉnh núi	điểm cao nhất, nhọn của một ngọn núi	Fansipan is the highest peak in Vietnam.	Fansipan là đỉnh núi cao nhất Việt Nam.	summit	/piːk/
+slope	slope	noun	3	environment	sườn dốc	mặt đất nghiêng của đồi, núi	Tea is grown on the slopes of the hills.	Chè được trồng trên sườn đồi.		/sləʊp/
+plain.land	plain	noun	3	environment	đồng bằng	vùng đất rộng, bằng phẳng, ít đồi núi	Rice grows well on the plains.	Lúa phát triển tốt trên đồng bằng.		/pleɪn/
+bay	bay	noun	3	environment	vịnh	phần biển ăn sâu vào đất liền thành hình vòng cung	Ha Long Bay has thousands of islands.	Vịnh Hạ Long có hàng nghìn hòn đảo.		/beɪ/
+landscape	landscape	noun	3	environment	phong cảnh, cảnh quan	toàn bộ cảnh đất đai, núi đồi nhìn thấy được	The landscape in Ha Giang is amazing.	Phong cảnh ở Hà Giang thật tuyệt vời.		/ˈlændskeɪp/
+tide	tide	noun	3	environment	thủy triều	mực nước biển dâng lên rút xuống mỗi ngày	The tide comes in twice a day.	Thủy triều lên hai lần mỗi ngày.		/taɪd/
+spring.water	spring	noun	3	environment	mạch nước, suối nguồn	nơi nước tự nhiên chảy lên từ lòng đất	We filled our bottles at a mountain spring.	Chúng tôi đổ đầy chai ở một mạch nước trên núi.		/sprɪŋ/
+dam	dam	noun	3	environment	con đập	bức tường lớn chặn dòng sông để giữ nước hoặc làm thủy điện	The dam holds water for the dry season.	Con đập giữ nước cho mùa khô.		/dæm/
+green.eco	green	adjective	3	environment	xanh, vì môi trường	lối sống, sản phẩm thân thiện môi trường (không phải màu sắc)	Cycling to work is a green choice.	Đạp xe đi làm là một lựa chọn xanh.		/ɡriːn/
+go_green	go green	collocation	3	environment	sống xanh	thay đổi thói quen để bảo vệ môi trường	Our company decided to go green and stop using plastic.	Công ty chúng tôi quyết định sống xanh và ngừng dùng đồ nhựa.
+green_space	green space	collocation	3	environment	không gian xanh	công viên, vườn cây trong thành phố	The city needs more green space.	Thành phố cần thêm không gian xanh.
+save_the_planet	save the planet	collocation	3	environment	cứu lấy hành tinh	hành động để bảo vệ Trái Đất khỏi ô nhiễm, biến đổi khí hậu	Small actions can help save the planet.	Những hành động nhỏ có thể giúp cứu lấy hành tinh.
+earth_hour	Earth Hour	noun	3	environment	Giờ Trái Đất	sự kiện tắt đèn một giờ mỗi năm để tiết kiệm năng lượng	During Earth Hour, we switch off all the lights.	Trong Giờ Trái Đất, chúng tôi tắt hết đèn.
+use_up	use up	phrasal_verb	3	environment	dùng cạn, dùng hết	tiêu thụ hết sạch một nguồn tài nguyên	We are using up the earth's oil too fast.	Chúng ta đang dùng cạn dầu mỏ của Trái Đất quá nhanh.
+wind_turbine	wind turbine	collocation	3	environment	tua-bin gió	cột cao có cánh quạt quay để tạo ra điện từ gió	There are many wind turbines along the coast of Bac Lieu.	Có nhiều tua-bin gió dọc bờ biển Bạc Liêu.
+natural_gas	natural gas	collocation	3	environment	khí đốt tự nhiên	khí lấy từ lòng đất, dùng để nấu ăn và sản xuất điện	Many homes use natural gas for cooking.	Nhiều gia đình dùng khí đốt tự nhiên để nấu ăn.
+power_station	power station	collocation	3	environment	nhà máy điện	nơi sản xuất điện cho cả một khu vực	The power station burns coal to make electricity.	Nhà máy điện đốt than để tạo ra điện.	power plant
+hilly	hilly	adjective	3	environment	nhiều đồi	vùng đất có nhiều đồi	The north of Vietnam is very hilly.	Miền Bắc Việt Nam có rất nhiều đồi.		/ˈhɪli/
+mountainous	mountainous	adjective	3	environment	có nhiều núi	vùng đất có nhiều núi cao	Lao Cai is a mountainous province.	Lào Cai là một tỉnh có nhiều núi.		/ˈmaʊntənəs/
+coastal	coastal	adjective	3	environment	ven biển	nằm ở hoặc gần bờ biển	Coastal towns often have strong storms.	Các thị trấn ven biển thường có bão lớn.		/ˈkəʊstl/
+dusty	dusty	adjective	3	environment	đầy bụi	đường sá, không khí có nhiều bụi bẩn	The road to the village is dry and dusty.	Con đường vào làng khô và đầy bụi.		/ˈdʌsti/
+smoky	smoky	adjective	3	environment	đầy khói	không khí, căn phòng có nhiều khói	The air was smoky after the forest fire.	Không khí đầy khói sau vụ cháy rừng.		/ˈsməʊki/
+wasteful	wasteful	adjective	3	environment	hoang phí, phung phí	dùng nhiều hơn mức cần, để phí đồ, phí điện nước	Leaving the lights on all night is wasteful.	Để đèn sáng cả đêm thật phung phí.		/ˈweɪstfl/
+global	global	adjective	3	environment	toàn cầu	liên quan đến cả thế giới	Pollution is a global problem.	Ô nhiễm là một vấn đề toàn cầu.		/ˈɡləʊbl/
+man-made	man-made	adjective	3	environment	nhân tạo, do con người làm ra	không có sẵn trong tự nhiên	This lake is man-made.	Hồ này là hồ nhân tạo.		/ˌmæn ˈmeɪd/
+naturally	naturally	adverb	3	environment	một cách tự nhiên	tự xảy ra trong thiên nhiên, không do con người can thiệp	These plants grow naturally in the forest.	Những loài cây này mọc tự nhiên trong rừng.		/ˈnætʃrəli/
+wisely	wisely	adverb	3	environment	một cách hợp lý, khôn ngoan	dùng tài nguyên như điện, nước một cách có tính toán	We must use water wisely in the dry season.	Chúng ta phải dùng nước một cách hợp lý vào mùa khô.		/ˈwaɪzli/
+freshwater	freshwater	noun	3	environment	nước ngọt (không mặn)	nước ở sông, hồ, không phải nước biển; không phải đồ uống	Only a small part of the earth's water is freshwater.	Chỉ một phần nhỏ nước trên Trái Đất là nước ngọt.	fresh water	/ˈfreʃwɔːtə/
+harm	harm	verb	3	environment	gây hại	làm tổn hại đến sức khỏe, cây cối, động vật	Plastic bags can harm sea animals.	Túi ni lông có thể gây hại cho động vật biển.		/hɑːm/
+absorb	absorb	verb	3	environment	hấp thụ	cây, đất, biển hút vào nước, khí, nhiệt	Trees absorb water through their roots.	Cây hấp thụ nước qua rễ.		/əbˈzɔːb/
+shrink	shrink	verb	3	environment	thu hẹp lại	rừng, hồ, sông băng nhỏ dần đi	The forest is shrinking every year.	Khu rừng đang thu hẹp lại mỗi năm.		/ʃrɪŋk/
+rot	rot	verb	3	environment	thối rữa, mục nát	lá, gỗ, thức ăn bị phân hủy dần theo thời gian	Fallen leaves rot and make the soil rich.	Lá rụng thối rữa và làm đất màu mỡ.		/rɒt/
+packaging	packaging	noun	3	environment	bao bì	giấy, hộp, nhựa dùng để gói hàng hóa	Too much packaging creates a lot of waste.	Quá nhiều bao bì tạo ra rất nhiều rác.		/ˈpækɪdʒɪŋ/
+beach_clean-up	beach clean-up	collocation	3	environment	buổi dọn rác bãi biển	hoạt động tình nguyện nhặt rác trên bãi biển	Over a hundred students joined the beach clean-up.	Hơn một trăm học sinh đã tham gia buổi dọn rác bãi biển.	beach cleanup
+greenhouse_gas	greenhouse gas	collocation	4	environment	khí nhà kính	các loại khí như CO2 giữ nhiệt, làm Trái Đất nóng lên	Cars and factories produce greenhouse gases.	Ô tô và nhà máy tạo ra khí nhà kính.
+fossil_fuel	fossil fuel	collocation	4	environment	nhiên liệu hóa thạch	than, dầu, khí đốt hình thành từ xác sinh vật cổ	We need to stop depending on fossil fuels.	Chúng ta cần ngừng phụ thuộc vào nhiên liệu hóa thạch.
+nuclear_power	nuclear power	collocation	4	environment	năng lượng hạt nhân	điện được tạo ra từ phản ứng hạt nhân	Some countries get most of their electricity from nuclear power.	Một số nước lấy phần lớn điện từ năng lượng hạt nhân.	nuclear energy
+wind_farm	wind farm	collocation	4	environment	cánh đồng điện gió	khu vực có nhiều tua-bin gió đặt cùng nhau	A wind farm was built near the sea.	Một cánh đồng điện gió đã được xây gần biển.
+solar-powered	solar-powered	adjective	4	environment	chạy bằng năng lượng mặt trời	máy móc, đèn hoạt động nhờ ánh nắng	We have solar-powered lights in the garden.	Chúng tôi có đèn chạy bằng năng lượng mặt trời trong vườn.		/ˌsəʊlə ˈpaʊəd/
+non-renewable	non-renewable	adjective	4	environment	không tái tạo được	tài nguyên sẽ cạn kiệt khi dùng hết như than, dầu	Coal is a non-renewable resource.	Than đá là một tài nguyên không tái tạo được.		/ˌnɒn rɪˈnjuːəbl/
+energy_consumption	energy consumption	collocation	4	environment	mức tiêu thụ năng lượng	lượng điện, xăng dầu được sử dụng	Air conditioners increase energy consumption in summer.	Máy điều hòa làm tăng mức tiêu thụ năng lượng vào mùa hè.
+consume	consume	verb	4	environment	tiêu thụ	sử dụng năng lượng, tài nguyên, nhiên liệu	Big cars consume more fuel.	Những chiếc ô tô lớn tiêu thụ nhiều nhiên liệu hơn.		/kənˈsjuːm/
+generate	generate	verb	4	environment	tạo ra, sản xuất (điện)	làm ra năng lượng từ gió, nước, mặt trời	The dam generates electricity for the whole province.	Con đập sản xuất điện cho cả tỉnh.		/ˈdʒenəreɪt/
+cut_emissions	cut emissions	collocation	4	environment	cắt giảm khí thải	giảm lượng khí độc do xe cộ, nhà máy thải ra	Every country must cut emissions.	Mọi quốc gia đều phải cắt giảm khí thải.	reduce emissions
+cut_back_on	cut back on	phrasal_verb	4	environment	cắt giảm (việc dùng)	dùng ít đi một thứ như đồ nhựa, điện, thịt	We should cut back on plastic.	Chúng ta nên cắt giảm việc dùng đồ nhựa.
+switch_to	switch to	phrasal_verb	4	environment	chuyển sang dùng	thay thứ cũ bằng thứ khác tốt hơn cho môi trường	Many families have switched to solar energy.	Nhiều gia đình đã chuyển sang dùng năng lượng mặt trời.
+conserve	conserve	verb	4	environment	giữ gìn, tiết kiệm (tài nguyên)	dùng ít đi để tài nguyên không bị cạn	We must conserve water during the drought.	Chúng ta phải tiết kiệm nước trong thời gian hạn hán.		/kənˈsɜːv/
+preserve	preserve	verb	4	environment	bảo tồn, giữ nguyên	giữ rừng, cảnh quan không bị thay đổi, tàn phá	We must preserve this forest for our children.	Chúng ta phải bảo tồn khu rừng này cho con cháu.		/prɪˈzɜːv/
+restore	restore	verb	4	environment	khôi phục	đưa rừng, hồ, hệ sinh thái bị tàn phá về trạng thái tốt như cũ	They are trying to restore the polluted lake.	Họ đang cố gắng khôi phục hồ nước bị ô nhiễm.		/rɪˈstɔː/
+threaten	threaten	verb	4	environment	đe dọa	gây nguy hiểm cho sự tồn tại của loài vật, khu rừng	Pollution threatens many sea animals.	Ô nhiễm đe dọa nhiều loài động vật biển.		/ˈθretn/
+adapt	adapt	verb	4	environment	thích nghi	thay đổi để sống được trong điều kiện mới	Animals must adapt to a warmer climate.	Động vật phải thích nghi với khí hậu ấm hơn.		/əˈdæpt/
+filter	filter	verb	4	environment	lọc	cho nước, không khí đi qua để loại bỏ chất bẩn	Plants help filter the water in the lake.	Thực vật giúp lọc nước trong hồ.		/ˈfɪltə/
+environmentalist	environmentalist	noun	4	environment	nhà bảo vệ môi trường	người hoạt động để bảo vệ thiên nhiên	The environmentalists are against the new factory.	Các nhà bảo vệ môi trường phản đối nhà máy mới.		/ɪnˌvaɪrənˈmentəlɪst/
+nature_reserve	nature reserve	collocation	4	environment	khu bảo tồn thiên nhiên	vùng đất được bảo vệ cho động vật, thực vật sinh sống	Hunting is not allowed in the nature reserve.	Săn bắn bị cấm trong khu bảo tồn thiên nhiên.
+habitat_loss	habitat loss	collocation	4	environment	sự mất môi trường sống	khi nơi sống tự nhiên của loài vật bị phá hủy	Habitat loss is the biggest danger to wild animals.	Mất môi trường sống là mối nguy lớn nhất với động vật hoang dã.
+compost	compost	noun	4	environment	phân ủ hữu cơ	phân bón làm từ lá cây, rau thừa được ủ mục	We turn vegetable waste into compost.	Chúng tôi biến rác rau củ thành phân ủ hữu cơ.		/ˈkɒmpɒst/
+organic_waste	organic waste	collocation	4	environment	rác hữu cơ	rác từ thức ăn, rau củ, lá cây có thể tự phân hủy	Organic waste can be used to make compost.	Rác hữu cơ có thể được dùng để làm phân ủ.
+electronic_waste	electronic waste	collocation	4	environment	rác thải điện tử	điện thoại, máy tính cũ bị vứt bỏ	Old phones become electronic waste.	Điện thoại cũ trở thành rác thải điện tử.	e-waste
+single-use_plastic	single-use plastic	collocation	4	environment	nhựa dùng một lần	ống hút, túi, cốc nhựa chỉ dùng một lần rồi vứt	The government wants to reduce single-use plastic.	Chính phủ muốn giảm nhựa dùng một lần.
+oil_spill	oil spill	collocation	4	environment	sự cố tràn dầu	khi dầu từ tàu chở dầu tràn ra biển	The oil spill killed thousands of birds.	Sự cố tràn dầu đã giết chết hàng nghìn con chim.
+industrial_waste	industrial waste	collocation	4	environment	chất thải công nghiệp	chất thải do nhà máy, xí nghiệp thải ra	Industrial waste was dumped into the river.	Chất thải công nghiệp bị đổ xuống sông.
+light_pollution	light pollution	collocation	4	environment	ô nhiễm ánh sáng	quá nhiều đèn ban đêm khiến không nhìn thấy sao	Because of light pollution, we can't see the stars in the city.	Vì ô nhiễm ánh sáng, chúng ta không thể nhìn thấy sao trong thành phố.
+climate_crisis	climate crisis	collocation	4	environment	khủng hoảng khí hậu	tình trạng nguy cấp do biến đổi khí hậu gây ra	Young people are worried about the climate crisis.	Người trẻ lo lắng về cuộc khủng hoảng khí hậu.
+rising_sea_levels	rising sea levels	collocation	4	environment	mực nước biển dâng	mặt nước biển ngày càng cao do băng tan, đe dọa vùng ven biển	Rising sea levels are a threat to the Mekong Delta.	Mực nước biển dâng là mối đe dọa với Đồng bằng sông Cửu Long.
+car-free_day	car-free day	collocation	4	environment	ngày không xe	ngày hạn chế xe cộ trong thành phố để giảm ô nhiễm	The city holds a car-free day every month.	Thành phố tổ chức ngày không xe mỗi tháng.

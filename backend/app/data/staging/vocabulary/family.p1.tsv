@@ -1,0 +1,101 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+mum	mum	noun	1	family	mẹ (cách gọi thân mật)	cách con cái gọi hoặc nhắc đến mẹ trong đời thường	My mum makes the best soup.	Mẹ tớ nấu súp ngon nhất.	mom	/mʌm/
+dad	dad	noun	1	family	bố (cách gọi thân mật)	cách con cái gọi hoặc nhắc đến bố trong đời thường	My dad drives me to school every day.	Bố tớ chở tớ đi học mỗi ngày.		/dæd/
+child	child	noun	1	family	con (con cái)	người con của cha mẹ, dù còn nhỏ hay đã lớn	They have one child, a little girl.	Họ có một người con, là một bé gái.		/tʃaɪld/
+kid	kid	noun	1	family	con, đứa trẻ (cách nói thân mật)	cách nói thân mật về con cái hoặc trẻ nhỏ	Our kids love playing in the garden.	Bọn trẻ nhà tôi thích chơi ngoài vườn.		/kɪd/
+grandma	grandma	noun	1	family	bà (cách gọi thân mật)	cách cháu gọi bà nội hoặc bà ngoại	Grandma tells us stories every night.	Tối nào bà cũng kể chuyện cho chúng tôi nghe.	granny|gran	/ˈɡrænmɑː/
+grandpa	grandpa	noun	1	family	ông (cách gọi thân mật)	cách cháu gọi ông nội hoặc ông ngoại	Grandpa takes me fishing on Sundays.	Chủ nhật ông đưa tôi đi câu cá.	granddad|grandad	/ˈɡrænpɑː/
+grandparents	grandparents	noun	1	family	ông bà	cả ông và bà, nội hoặc ngoại	We visit our grandparents every summer.	Mùa hè nào chúng tôi cũng về thăm ông bà.		/ˈɡrænpeərənts/
+grandson	grandson	noun	1	family	cháu trai (của ông bà)	con trai của con mình	Their grandson is five years old.	Cháu trai của họ năm tuổi.		/ˈɡrænsʌn/
+granddaughter	granddaughter	noun	1	family	cháu gái (của ông bà)	con gái của con mình	She bought a doll for her granddaughter.	Bà mua một con búp bê cho cháu gái.		/ˈɡrændɔːtə/
+older_brother	older brother	collocation	1	family	anh trai	anh ruột, lớn tuổi hơn mình	My older brother is at university.	Anh trai tôi đang học đại học.	elder brother|big brother
+younger_brother	younger brother	collocation	1	family	em trai	em ruột là con trai, nhỏ tuổi hơn mình	My younger brother is only six.	Em trai tôi mới sáu tuổi.	little brother
+older_sister	older sister	collocation	1	family	chị gái	chị ruột, lớn tuổi hơn mình	My older sister helps me with my homework.	Chị gái giúp tôi làm bài tập.	elder sister|big sister
+younger_sister	younger sister	collocation	1	family	em gái	em ruột là con gái, nhỏ tuổi hơn mình	I share a room with my younger sister.	Tôi ở chung phòng với em gái.	little sister
+wedding	wedding	noun	1	family	đám cưới	lễ cưới và tiệc mừng của đôi vợ chồng mới	We are going to my cousin's wedding on Saturday.	Thứ Bảy này chúng tôi đi dự đám cưới của anh họ.		/ˈwedɪŋ/
+marry	marry	verb	1	family	cưới (ai), kết hôn với (ai)	khi nêu rõ người mình cưới: marry somebody	He married his best friend from school.	Anh ấy cưới cô bạn thân từ thời đi học.		/ˈmæri/
+married	married	adjective	1	family	đã có gia đình, đã kết hôn	tình trạng đang có vợ hoặc có chồng	Is your sister married?	Chị gái bạn đã lập gia đình chưa?		/ˈmærid/
+get_married	get married	collocation	1	family	lấy nhau, cưới nhau	hành động cưới, không cần nêu tên người kia	They got married last spring.	Họ cưới nhau vào mùa xuân năm ngoái.
+be_born	be born	collocation	1	family	được sinh ra, chào đời	nói về thời điểm hoặc nơi một người ra đời	I was born in Hanoi in 2005.	Tôi sinh ra ở Hà Nội năm 2005.
+have_a_baby	have a baby	collocation	1	family	sinh con, có em bé	khi một người mẹ sinh hoặc sắp sinh con	My aunt is going to have a baby in May.	Dì tôi sắp sinh em bé vào tháng Năm.
+family_member	family member	collocation	1	family	thành viên trong gia đình	bất kỳ người nào trong nhà	Every family member has a job at home.	Mỗi thành viên trong gia đình đều có việc ở nhà.
+live_with	live with	phrasal_verb	1	family	sống cùng, ở chung với	ở cùng một nhà với ai	I still live with my parents.	Tôi vẫn sống cùng bố mẹ.
+together	together	adverb	1	family	cùng nhau	khi mọi người trong nhà cùng làm một việc	Our family eats dinner together every evening.	Tối nào cả nhà tôi cũng ăn cơm cùng nhau.		/təˈɡeðə/
+first_name	first name	collocation	1	family	tên (không kèm họ)	tên gọi riêng của mỗi người, khác với họ	Her first name is Lan.	Tên của cô ấy là Lan.	given name
+take_care_of	take care of	collocation	1	family	chăm sóc, trông nom	trông em nhỏ, người già hoặc người ốm	She takes care of her little brother after school.	Sau giờ học, cô ấy trông em trai.	look after
+big_family	big family	collocation	1	family	gia đình đông người	gia đình có nhiều con hoặc nhiều thế hệ	I come from a big family with five children.	Tôi sinh ra trong một gia đình đông người với năm anh chị em.	large family
+marriage	marriage	noun	2	family	hôn nhân, cuộc hôn nhân	quan hệ vợ chồng được pháp luật công nhận	Their marriage has lasted forty years.	Cuộc hôn nhân của họ đã kéo dài bốn mươi năm.		/ˈmærɪdʒ/
+married_couple	married couple	collocation	2	family	cặp vợ chồng	hai người đã cưới nhau	A married couple lives next door.	Một cặp vợ chồng sống ở nhà bên cạnh.
+only_child	only child	collocation	2	family	con một	người không có anh chị em ruột	As an only child, she never had to share her toys.	Là con một, cô ấy chưa bao giờ phải chia đồ chơi.
+grandchild	grandchild	noun	2	family	cháu (của ông bà)	con của con mình, không phân biệt trai gái	They have six grandchildren.	Ông bà có sáu đứa cháu.		/ˈɡræntʃaɪld/
+niece	niece	noun	2	family	cháu gái (con của anh chị em)	con gái của anh, chị hoặc em mình	My niece is starting school this year.	Cháu gái tôi năm nay bắt đầu đi học.		/niːs/
+nephew	nephew	noun	2	family	cháu trai (con của anh chị em)	con trai của anh, chị hoặc em mình	I bought a toy car for my nephew.	Tôi mua một chiếc ô tô đồ chơi cho cháu trai.		/ˈnefjuː/
+mother-in-law	mother-in-law	noun	2	family	mẹ chồng, mẹ vợ	mẹ của chồng hoặc của vợ mình	My mother-in-law often cooks for us.	Mẹ chồng tôi hay nấu cơm cho chúng tôi.		/ˈmʌðər ɪn lɔː/
+father-in-law	father-in-law	noun	2	family	bố chồng, bố vợ	bố của chồng hoặc của vợ mình	Her father-in-law helped them buy a house.	Bố chồng cô ấy đã giúp họ mua nhà.		/ˈfɑːðər ɪn lɔː/
+stepmother	stepmother	noun	2	family	mẹ kế	vợ mới của bố, không phải mẹ ruột	She gets on well with her stepmother.	Cô ấy hòa thuận với mẹ kế.		/ˈstepmʌðə/
+stepfather	stepfather	noun	2	family	bố dượng	chồng mới của mẹ, không phải bố ruột	My stepfather taught me how to ride a bike.	Bố dượng dạy tôi đi xe đạp.		/ˈstepfɑːðə/
+surname	surname	noun	2	family	họ (trong họ tên)	phần họ trong tên, thường chung cả gia đình	In Vietnam, Nguyen is the most common surname.	Ở Việt Nam, Nguyễn là họ phổ biến nhất.	last name|family name	/ˈsɜːneɪm/
+family_tree	family tree	collocation	2	family	cây phả hệ, sơ đồ gia phả	sơ đồ cho thấy các thế hệ trong gia đình	We drew our family tree in class.	Chúng tôi vẽ cây phả hệ của gia đình mình trên lớp.
+teenager	teenager	noun	2	family	thiếu niên, tuổi teen	người từ 13 đến 19 tuổi	Their son is a teenager now.	Con trai họ giờ đã là thiếu niên.		/ˈtiːneɪdʒə/
+grown-up	grown-up	noun	2	family	người lớn (cách nói với trẻ em)	cách trẻ em gọi, hoặc nói với trẻ em về người lớn	Ask a grown-up to help you.	Con hãy nhờ người lớn giúp nhé.		/ˈɡrəʊn ʌp/
+childhood	childhood	noun	2	family	tuổi thơ, thời thơ ấu	quãng đời khi còn là trẻ con	I had a happy childhood in the countryside.	Tôi đã có một tuổi thơ hạnh phúc ở quê.		/ˈtʃaɪldhʊd/
+birth	birth	noun	2	family	sự ra đời, sự chào đời	lúc một em bé được sinh ra	We were so happy at the birth of our son.	Chúng tôi rất vui khi con trai chào đời.		/bɜːθ/
+pregnant	pregnant	adjective	2	family	có thai, mang bầu	người phụ nữ đang mang em bé trong bụng	My sister is pregnant with her first baby.	Chị tôi đang mang thai đứa con đầu lòng.		/ˈpreɡnənt/
+bride	bride	noun	2	family	cô dâu	người phụ nữ trong ngày cưới	The bride wore a long white dress.	Cô dâu mặc một chiếc váy trắng dài.		/braɪd/
+groom.wedding	groom	noun	2	family	chú rể	người đàn ông trong ngày cưới	The groom smiled at the bride.	Chú rể mỉm cười với cô dâu.	bridegroom	/ɡruːm/
+wedding_ring	wedding ring	collocation	2	family	nhẫn cưới	nhẫn vợ chồng đeo sau khi cưới	He never takes off his wedding ring.	Anh ấy không bao giờ tháo nhẫn cưới.
+honeymoon	honeymoon	noun	2	family	tuần trăng mật	chuyến đi của vợ chồng mới cưới	They went to Da Lat for their honeymoon.	Họ đi Đà Lạt hưởng tuần trăng mật.		/ˈhʌnimuːn/
+funeral	funeral	noun	2	family	đám tang, tang lễ	nghi lễ tiễn đưa người đã mất	The whole village came to the funeral.	Cả làng đến dự đám tang.		/ˈfjuːnərəl/
+name.baby	name	verb	2	family	đặt tên (cho con)	khi bố mẹ chọn tên cho em bé	They named their daughter Mai.	Họ đặt tên con gái là Mai.		/neɪm/
+naughty	naughty	adjective	2	family	hư, nghịch ngợm	nói về trẻ con không nghe lời	Don't be naughty, or you can't watch TV.	Đừng nghịch nữa, không thì con không được xem TV.		/ˈnɔːti/
+strict	strict	adjective	2	family	nghiêm khắc	cha mẹ đặt nhiều quy tắc và bắt con tuân theo	My parents were very strict about homework.	Bố mẹ tôi rất nghiêm khắc chuyện bài tập.		/strɪkt/
+loving	loving	adjective	2	family	giàu tình thương, đầy yêu thương	thể hiện nhiều tình cảm với người thân	She grew up in a loving family.	Cô ấy lớn lên trong một gia đình đầy yêu thương.		/ˈlʌvɪŋ/
+punish	punish	verb	2	family	phạt, trừng phạt	khi cha mẹ xử phạt con vì làm sai	Her parents punished her for lying.	Bố mẹ phạt cô bé vì tội nói dối.		/ˈpʌnɪʃ/
+behave	behave	verb	2	family	ngoan, cư xử đúng mực	người lớn dặn trẻ con giữ phép tắc	Please behave when we visit Grandma.	Sang nhà bà con nhớ ngoan nhé.		/bɪˈheɪv/
+cuddle	cuddle	verb	2	family	ôm ấp, âu yếm	ôm ai đó thật lâu để thể hiện tình thương	She cuddled the baby until he fell asleep.	Cô ấy ôm ấp em bé cho đến khi bé ngủ.		/ˈkʌdl/
+bathe.baby	bathe	verb	2	family	tắm cho (em bé)	lau rửa, tắm cho trẻ nhỏ	I bathe the baby every evening.	Tối nào tôi cũng tắm cho em bé.	bath	/beɪð/
+bedtime	bedtime	noun	2	family	giờ đi ngủ	thời điểm trẻ con phải lên giường	It's past your bedtime!	Đã quá giờ đi ngủ của con rồi!		/ˈbedtaɪm/
+bedtime_story	bedtime story	collocation	2	family	truyện kể trước khi ngủ	câu chuyện bố mẹ kể hoặc đọc cho con lúc đi ngủ	Dad reads me a bedtime story every night.	Tối nào bố cũng đọc cho tôi một câu chuyện trước khi ngủ.
+put_to_bed	put to bed	collocation	2	family	đưa (con) đi ngủ	cho trẻ lên giường và dỗ ngủ	I put the kids to bed at eight.	Tôi đưa bọn trẻ đi ngủ lúc tám giờ.
+family_meal	family meal	collocation	2	family	bữa cơm gia đình	bữa ăn cả nhà quây quần cùng nhau	Sunday lunch is our big family meal.	Bữa trưa Chủ nhật là bữa cơm gia đình lớn của nhà tôi.
+pocket_money	pocket money	collocation	2	family	tiền tiêu vặt	tiền bố mẹ cho con hằng tuần để tự tiêu	I save my pocket money to buy books.	Tôi để dành tiền tiêu vặt để mua sách.	allowance
+babysitter	babysitter	noun	2	family	người trông trẻ	người được nhờ trông con khi bố mẹ đi vắng	We need a babysitter for Saturday night.	Chúng tôi cần người trông trẻ tối thứ Bảy.		/ˈbeɪbisɪtə/
+newborn	newborn	noun	2	family	trẻ sơ sinh	em bé vừa mới chào đời	Newborns sleep most of the day.	Trẻ sơ sinh ngủ gần như cả ngày.		/ˈnjuːbɔːn/
+nappy	nappy	noun	2	family	tã, bỉm	đồ lót cho em bé, thường dùng một lần	Can you pass me a clean nappy?	Bạn đưa giúp tôi một cái tã sạch được không?	diaper	/ˈnæpi/
+family_reunion	family reunion	collocation	2	family	buổi đoàn tụ gia đình	khi người thân ở xa về họp mặt sau thời gian dài	We have a big family reunion every New Year.	Năm mới nào nhà tôi cũng có một buổi đoàn tụ lớn.
+divorced	divorced	adjective	2	family	đã ly hôn	tình trạng hôn nhân sau khi ly dị	His parents are divorced.	Bố mẹ anh ấy đã ly hôn.		/dɪˈvɔːst/
+housewife	housewife	noun	2	family	bà nội trợ	người phụ nữ ở nhà lo việc nhà, không đi làm	My grandmother was a housewife all her life.	Bà tôi làm nội trợ cả đời.		/ˈhaʊswaɪf/
+elderly	elderly	adjective	2	family	cao tuổi, lớn tuổi	cách nói lịch sự về người già	We should help our elderly neighbours.	Chúng ta nên giúp đỡ những người hàng xóm cao tuổi.		/ˈeldəli/
+kiss_goodnight	kiss goodnight	collocation	2	family	hôn chúc ngủ ngon	bố mẹ hôn con trước khi con đi ngủ	Mum always kisses us goodnight.	Mẹ luôn hôn chúc chúng tôi ngủ ngon.
+middle_name	middle name	collocation	3	family	tên đệm	phần tên nằm giữa họ và tên chính	My middle name is Thi, like my mother's.	Tên đệm của tôi là Thị, giống mẹ tôi.
+stepbrother	stepbrother	noun	3	family	anh/em trai con riêng (của bố dượng hoặc mẹ kế)	con trai riêng của vợ hoặc chồng mới của bố mẹ	My stepbrother and I go to the same school.	Tôi và anh trai con riêng của bố dượng học cùng trường.		/ˈstepbrʌðə/
+stepsister	stepsister	noun	3	family	chị/em gái con riêng (của bố dượng hoặc mẹ kế)	con gái riêng của vợ hoặc chồng mới của bố mẹ	I got a stepsister when my dad married again.	Khi bố tái hôn, tôi có thêm một người chị con riêng.		/ˈstepsɪstə/
+half-brother	half-brother	noun	3	family	anh/em trai cùng cha khác mẹ (hoặc ngược lại)	chỉ chung bố hoặc chỉ chung mẹ với mình	My half-brother is ten years younger than me.	Em trai cùng cha khác mẹ của tôi kém tôi mười tuổi.		/ˈhɑːf brʌðə/
+half-sister	half-sister	noun	3	family	chị/em gái cùng cha khác mẹ (hoặc ngược lại)	chỉ chung bố hoặc chỉ chung mẹ với mình	She has two half-sisters from her father's first marriage.	Cô ấy có hai chị em gái từ cuộc hôn nhân đầu của bố.		/ˈhɑːf sɪstə/
+son-in-law	son-in-law	noun	3	family	con rể	chồng của con gái mình	Their son-in-law is a doctor.	Con rể của họ là bác sĩ.		/ˈsʌn ɪn lɔː/
+daughter-in-law	daughter-in-law	noun	3	family	con dâu	vợ của con trai mình	She treats her daughter-in-law like her own child.	Bà đối xử với con dâu như con ruột.		/ˈdɔːtər ɪn lɔː/
+brother-in-law	brother-in-law	noun	3	family	anh/em rể, anh/em vợ, anh/em chồng	anh em trai của vợ/chồng, hoặc chồng của chị em mình	My brother-in-law fixed my car.	Anh rể đã sửa xe cho tôi.		/ˈbrʌðər ɪn lɔː/
+sister-in-law	sister-in-law	noun	3	family	chị/em dâu, chị/em vợ, chị/em chồng	chị em gái của vợ/chồng, hoặc vợ của anh em mình	My sister-in-law is a great cook.	Chị dâu tôi nấu ăn rất giỏi.		/ˈsɪstər ɪn lɔː/
+great-grandmother	great-grandmother	noun	3	family	cụ bà	mẹ của ông hoặc bà mình	My great-grandmother lived to be a hundred.	Cụ bà nhà tôi sống đến một trăm tuổi.		/ˌɡreɪt ˈɡrænmʌðə/
+great-grandfather	great-grandfather	noun	3	family	cụ ông	bố của ông hoặc bà mình	This house was built by my great-grandfather.	Ngôi nhà này do cụ ông nhà tôi xây.		/ˌɡreɪt ˈɡrænfɑːðə/
+toddler	toddler	noun	3	family	trẻ mới biết đi	trẻ khoảng một đến ba tuổi	Toddlers need to be watched all the time.	Trẻ mới biết đi cần được trông chừng liên tục.		/ˈtɒdlə/
+teenage	teenage	adjective	3	family	ở tuổi thiếu niên	nói về con cái trong độ tuổi 13 đến 19	They have two teenage daughters.	Họ có hai cô con gái tuổi thiếu niên.		/ˈtiːneɪdʒ/
+related	related	adjective	3	family	có họ hàng (với ai)	cùng chung dòng máu hoặc thông gia	Are you related to Mr Nam?	Bạn có họ hàng với ông Nam không?		/rɪˈleɪtɪd/
+single_parent	single parent	collocation	3	family	bố đơn thân, mẹ đơn thân	một mình nuôi con, không có vợ hoặc chồng bên cạnh	Being a single parent is hard work.	Làm cha mẹ đơn thân là việc rất vất vả.	lone parent
+single_mother	single mother	collocation	3	family	mẹ đơn thân	người mẹ một mình nuôi con	She raised three children as a single mother.	Bà đã nuôi ba đứa con với tư cách mẹ đơn thân.	single mum
+orphan	orphan	noun	3	family	trẻ mồ côi	đứa trẻ mất cả cha lẫn mẹ	He became an orphan at the age of seven.	Cậu bé trở thành trẻ mồ côi năm bảy tuổi.		/ˈɔːfn/
+pass_away	pass away	phrasal_verb	3	family	qua đời, mất	cách nói nhẹ nhàng, lịch sự về cái chết	Her grandfather passed away last year.	Ông của cô ấy đã qua đời năm ngoái.
+give_birth	give birth	collocation	3	family	sinh con, sinh nở	khi người mẹ sinh em bé ra	She gave birth to twins in the morning.	Sáng nay chị ấy đã sinh đôi.
+pregnancy	pregnancy	noun	3	family	thai kỳ, việc mang thai	khoảng thời gian người mẹ mang thai	She felt tired during her pregnancy.	Chị ấy thấy mệt trong suốt thai kỳ.		/ˈpreɡnənsi/
+start_a_family	start a family	collocation	3	family	sinh con đầu lòng, bắt đầu có con	khi vợ chồng quyết định có em bé	They want to start a family next year.	Họ muốn có con vào năm sau.
+family_friend	family friend	collocation	3	family	bạn của gia đình	người thân quen lâu năm với cả nhà	Uncle Tuan isn't really my uncle; he's a family friend.	Chú Tuấn không phải chú ruột, chú là bạn của gia đình tôi.
+family_life	family life	collocation	3	family	đời sống gia đình	sinh hoạt và mối quan hệ trong nhà	He works too much and has no time for family life.	Anh ấy làm việc quá nhiều, không có thời gian cho gia đình.
+household	household	noun	3	family	hộ gia đình, cả nhà	tất cả những người sống chung một nhà	Every household in the village has a garden.	Hộ gia đình nào trong làng cũng có vườn.		/ˈhaʊshəʊld/
+nanny	nanny	noun	3	family	bảo mẫu, vú nuôi	người được thuê trông con lâu dài, thường ở cùng nhà	The nanny takes the children to the park every day.	Bảo mẫu đưa bọn trẻ đi công viên mỗi ngày.		/ˈnæni/
+babysit	babysit	verb	3	family	trông trẻ (giúp)	trông con cho người khác trong lúc họ đi vắng	Can you babysit for us on Friday?	Thứ Sáu bạn trông con giúp chúng tôi được không?		/ˈbeɪbisɪt/
+praise	praise	verb	3	family	khen ngợi	khi bố mẹ khen con làm tốt việc gì	Parents should praise their children's efforts.	Cha mẹ nên khen ngợi sự cố gắng của con.		/preɪz/
+well-behaved	well-behaved	adjective	3	family	ngoan, lễ phép	trẻ con cư xử đúng mực, biết nghe lời	Your children are so well-behaved!	Con của chị ngoan quá!		/ˌwel bɪˈheɪvd/
+tell_off	tell off	phrasal_verb	3	family	mắng, la rầy	khi người lớn mắng trẻ vì làm sai	Mum told me off for coming home late.	Mẹ mắng tôi vì về nhà muộn.	scold
+bring_up	bring up	phrasal_verb	3	family	nuôi dạy, nuôi nấng	chăm sóc và dạy dỗ con cho đến khi lớn	She was brought up by her grandparents.	Cô ấy được ông bà nuôi dạy.	raise
+move_out	move out	phrasal_verb	3	family	ra ở riêng, dọn ra khỏi nhà	khi con cái rời nhà bố mẹ để sống riêng	I moved out when I was twenty.	Tôi ra ở riêng khi hai mươi tuổi.
+care_for	care for	phrasal_verb	3	family	chăm nom, phụng dưỡng	chăm sóc lâu dài cho người già hoặc người bệnh	She gave up her job to care for her elderly father.	Cô ấy bỏ việc để chăm nom người cha già.

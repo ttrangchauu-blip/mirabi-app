@@ -1,0 +1,108 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+time	time	noun	1	time	thời gian	khái niệm phút, giờ, ngày tháng trôi qua	I don't have much time today.	Hôm nay tôi không có nhiều thời gian.		/taɪm/
+day	day	noun	1	time	ngày	khoảng 24 giờ, từ sáng đến đêm	There are seven days in a week.	Một tuần có bảy ngày.		/deɪ/
+week	week	noun	1	time	tuần	bảy ngày liên tiếp	I see her every week.	Tuần nào tôi cũng gặp cô ấy.		/wiːk/
+month	month	noun	1	time	tháng	một trong mười hai phần của một năm	My birthday is next month.	Sinh nhật tôi vào tháng sau.		/mʌnθ/
+year	year	noun	1	time	năm	khoảng thời gian mười hai tháng	She is ten years old.	Cô bé mười tuổi.		/jɪə/
+hour	hour	noun	1	time	giờ, tiếng đồng hồ	khoảng thời gian 60 phút	The film is two hours long.	Bộ phim dài hai tiếng.		/ˈaʊə/
+minute	minute	noun	1	time	phút	khoảng thời gian 60 giây	The bus comes every ten minutes.	Cứ mười phút lại có một chuyến xe buýt.		/ˈmɪnɪt/
+today	today	adverb	1	time	hôm nay	ngày đang diễn ra lúc nói	Today is my first day at school.	Hôm nay là ngày đầu tiên tôi đi học.		/təˈdeɪ/
+tomorrow	tomorrow	adverb	1	time	ngày mai	ngày ngay sau hôm nay	I have an exam tomorrow.	Ngày mai tôi có bài thi.		/təˈmɒrəʊ/
+yesterday	yesterday	adverb	1	time	hôm qua	ngày ngay trước hôm nay	It rained all day yesterday.	Hôm qua trời mưa cả ngày.		/ˈjestədeɪ/
+now	now	adverb	1	time	bây giờ	thời điểm đang nói	I'm busy now.	Bây giờ tôi đang bận.		/naʊ/
+tonight	tonight	adverb	1	time	tối nay	buổi tối hoặc đêm của ngày hôm nay	What's on TV tonight?	Tối nay ti vi có chương trình gì?		/təˈnaɪt/
+morning	morning	noun	1	time	buổi sáng	khoảng thời gian từ lúc trời sáng đến trưa	I drink coffee every morning.	Sáng nào tôi cũng uống cà phê.		/ˈmɔːnɪŋ/
+afternoon	afternoon	noun	1	time	buổi chiều	khoảng thời gian từ trưa đến lúc chạng vạng	We play football in the afternoon.	Chúng tôi chơi bóng đá vào buổi chiều.		/ˌɑːftəˈnuːn/
+evening	evening	noun	1	time	buổi tối	từ chiều muộn đến lúc đi ngủ	What are you doing this evening?	Tối nay bạn làm gì?		/ˈiːvnɪŋ/
+night	night	noun	1	time	đêm, ban đêm	khoảng thời gian trời tối, lúc mọi người ngủ	The baby cried all night.	Em bé khóc suốt đêm.		/naɪt/
+weekend	weekend	noun	1	time	cuối tuần	thứ Bảy và Chủ nhật	What did you do last weekend?	Cuối tuần trước bạn đã làm gì?		/ˌwiːkˈend/
+birthday	birthday	noun	1	time	ngày sinh nhật	ngày kỷ niệm ngày mình được sinh ra	When is your birthday?	Sinh nhật bạn là khi nào?		/ˈbɜːθdeɪ/
+monday	Monday	noun	1	time	thứ Hai	ngày đầu tiên của tuần làm việc	I start work on Monday.	Tôi bắt đầu đi làm vào thứ Hai.		/ˈmʌndeɪ/
+tuesday	Tuesday	noun	1	time	thứ Ba	ngày sau thứ Hai	We have English on Tuesday.	Chúng tôi có tiết tiếng Anh vào thứ Ba.		/ˈtjuːzdeɪ/
+wednesday	Wednesday	noun	1	time	thứ Tư	ngày giữa tuần, sau thứ Ba	The shop is closed on Wednesday.	Cửa hàng đóng cửa vào thứ Tư.		/ˈwenzdeɪ/
+thursday	Thursday	noun	1	time	thứ Năm	ngày sau thứ Tư	Let's meet on Thursday.	Hẹn gặp nhau vào thứ Năm nhé.		/ˈθɜːzdeɪ/
+friday	Friday	noun	1	time	thứ Sáu	ngày làm việc cuối cùng trong tuần	I love Friday evenings.	Tôi thích những tối thứ Sáu.		/ˈfraɪdeɪ/
+saturday	Saturday	noun	1	time	thứ Bảy	ngày đầu tiên của cuối tuần	We play football on Saturday.	Chúng tôi chơi bóng đá vào thứ Bảy.		/ˈsætədeɪ/
+sunday	Sunday	noun	1	time	Chủ nhật	ngày cuối cùng của tuần	My family eats together on Sunday.	Gia đình tôi ăn cơm cùng nhau vào Chủ nhật.		/ˈsʌndeɪ/
+early	early	adjective	1	time	sớm	trước giờ thường lệ hoặc trước giờ hẹn	We took an early train.	Chúng tôi đi chuyến tàu sớm.		/ˈɜːli/
+late	late	adjective	1	time	muộn, trễ	sau giờ thường lệ hoặc sau giờ hẹn	The bus was late again.	Xe buýt lại đến muộn.		/leɪt/
+always	always	adverb	1	time	luôn luôn	lúc nào cũng vậy, không có ngoại lệ	He is always on time.	Anh ấy luôn đúng giờ.		/ˈɔːlweɪz/
+usually	usually	adverb	1	time	thường thường, như thường lệ	điều xảy ra trong phần lớn các lần	I usually go to bed at ten.	Tôi thường đi ngủ lúc mười giờ.		/ˈjuːʒuəli/
+often	often	adverb	1	time	hay, thường xuyên	xảy ra nhiều lần	We often go to the park.	Chúng tôi hay đi công viên.		/ˈɒfn/
+sometimes	sometimes	adverb	1	time	thỉnh thoảng	có lúc có, có lúc không; từ thông dụng nhất	Sometimes I walk to school.	Thỉnh thoảng tôi đi bộ đến trường.		/ˈsʌmtaɪmz/
+never	never	adverb	1	time	không bao giờ	chưa từng hoặc không lần nào	I never eat breakfast.	Tôi không bao giờ ăn sáng.		/ˈnevə/
+ago	ago	adverb	1	time	cách đây	đặt sau khoảng thời gian để nói về quá khứ	I met him two years ago.	Tôi gặp anh ấy cách đây hai năm.		/əˈɡəʊ/
+oclock	o'clock	adverb	1	time	giờ đúng	dùng khi nói giờ chẵn	It's three o'clock.	Bây giờ là ba giờ đúng.		/əˈklɒk/
+wait	wait	verb	1	time	chờ, đợi	ở lại cho đến khi ai đến hoặc điều gì xảy ra	Please wait here.	Vui lòng đợi ở đây.		/weɪt/
+before	before	preposition	1	time	trước (khi)	sớm hơn một thời điểm hay sự việc	Wash your hands before dinner.	Rửa tay trước bữa tối.		/bɪˈfɔː/
+after	after	preposition	1	time	sau (khi)	muộn hơn một thời điểm hay sự việc	We went for a walk after lunch.	Chúng tôi đi dạo sau bữa trưa.		/ˈɑːftə/
+what_time_is_it	what time is it	phrase	1	time	mấy giờ rồi	hỏi giờ hiện tại	Excuse me, what time is it?	Xin lỗi, mấy giờ rồi ạ?
+every_day	every day	collocation	1	time	ngày nào cũng, mỗi ngày	việc lặp lại hằng ngày	I walk the dog every day.	Ngày nào tôi cũng dắt chó đi dạo.
+last_night	last night	collocation	1	time	tối qua, đêm qua	buổi tối hoặc đêm của ngày hôm qua	Did you sleep well last night?	Đêm qua bạn ngủ ngon không?
+next_week	next week	collocation	1	time	tuần sau	tuần ngay sau tuần này	The test is next week.	Tuần sau có bài kiểm tra.
+in_the_morning	in the morning	collocation	1	time	vào buổi sáng	nói việc gì xảy ra trong buổi sáng	I study best in the morning.	Tôi học tốt nhất vào buổi sáng.
+at_night	at night	collocation	1	time	vào ban đêm	nói việc gì xảy ra lúc trời tối	I don't drink coffee at night.	Tôi không uống cà phê vào ban đêm.
+right_now	right now	collocation	1	time	ngay bây giờ	nhấn mạnh đúng thời điểm này	I need to go right now.	Tôi cần đi ngay bây giờ.
+half_past	half past	collocation	1	time	rưỡi (giờ rưỡi)	nói giờ hơn 30 phút	The class starts at half past seven.	Lớp học bắt đầu lúc bảy giờ rưỡi.
+january	January	noun	2	time	tháng Một	tháng đầu tiên của năm dương lịch	The new year starts in January.	Năm mới bắt đầu vào tháng Một.		/ˈdʒænjuəri/
+february	February	noun	2	time	tháng Hai	tháng thứ hai, tháng ngắn nhất năm	February is the shortest month.	Tháng Hai là tháng ngắn nhất.		/ˈfebruəri/
+march	March	noun	2	time	tháng Ba	tháng thứ ba của năm dương lịch	My sister was born in March.	Em gái tôi sinh vào tháng Ba.		/mɑːtʃ/
+april	April	noun	2	time	tháng Tư	tháng thứ tư của năm dương lịch	It's very hot here in April.	Ở đây tháng Tư rất nóng.		/ˈeɪprəl/
+may.month	May	noun	2	time	tháng Năm	tháng thứ năm của năm dương lịch	We have exams in May.	Chúng tôi thi vào tháng Năm.		/meɪ/
+june	June	noun	2	time	tháng Sáu	tháng thứ sáu của năm dương lịch	School ends in June.	Năm học kết thúc vào tháng Sáu.		/dʒuːn/
+july	July	noun	2	time	tháng Bảy	tháng thứ bảy của năm dương lịch	We go to the beach every July.	Tháng Bảy nào chúng tôi cũng đi biển.		/dʒuˈlaɪ/
+august	August	noun	2	time	tháng Tám	tháng thứ tám của năm dương lịch	It rains a lot in August.	Tháng Tám trời mưa nhiều.		/ˈɔːɡəst/
+september	September	noun	2	time	tháng Chín	tháng thứ chín của năm dương lịch	The school year starts in September.	Năm học bắt đầu vào tháng Chín.		/sepˈtembə/
+october	October	noun	2	time	tháng Mười	tháng thứ mười của năm dương lịch	My birthday is in October.	Sinh nhật tôi vào tháng Mười.		/ɒkˈtəʊbə/
+november	November	noun	2	time	tháng Mười Một	tháng thứ mười một của năm dương lịch	We have a school trip in November.	Chúng tôi có chuyến dã ngoại vào tháng Mười Một.		/nəʊˈvembə/
+december	December	noun	2	time	tháng Mười Hai	tháng cuối cùng của năm dương lịch	It's cold in December.	Tháng Mười Hai trời lạnh.		/dɪˈsembə/
+second.unit	second	noun	2	time	giây	đơn vị thời gian, một phần sáu mươi của phút	Wait a few seconds.	Đợi vài giây.		/ˈsekənd/
+noon	noon	noun	2	time	buổi trưa, 12 giờ trưa	đúng giữa ngày, lúc 12 giờ	We have lunch at noon.	Chúng tôi ăn trưa lúc 12 giờ.	midday	/nuːn/
+midnight	midnight	noun	2	time	nửa đêm	đúng 12 giờ đêm	The party ended at midnight.	Bữa tiệc kết thúc lúc nửa đêm.		/ˈmɪdnaɪt/
+weekday	weekday	noun	2	time	ngày thường (thứ Hai đến thứ Sáu)	các ngày đi làm, đi học trong tuần	I get up at six on weekdays.	Ngày thường tôi dậy lúc sáu giờ.		/ˈwiːkdeɪ/
+calendar	calendar	noun	2	time	tờ lịch, quyển lịch	vật ghi các ngày, tháng trong năm	There's a calendar on the wall.	Có một tờ lịch treo trên tường.		/ˈkælɪndə/
+past.time	past	noun	2	time	quá khứ	khoảng thời gian đã qua	Don't worry about the past.	Đừng bận tâm về quá khứ.		/pɑːst/
+present.now	present	noun	2	time	hiện tại	khoảng thời gian đang diễn ra	Live in the present.	Hãy sống cho hiện tại.		/ˈpreznt/
+future	future	noun	2	time	tương lai	khoảng thời gian sắp tới	What are your plans for the future?	Kế hoạch tương lai của bạn là gì?		/ˈfjuːtʃə/
+christmas	Christmas	noun	2	time	lễ Giáng sinh	ngày lễ 25 tháng 12	We put up a tree at Christmas.	Chúng tôi dựng cây thông vào dịp Giáng sinh.		/ˈkrɪsməs/
+new_year	New Year	noun	2	time	năm mới (dương lịch)	dịp đầu năm, ngày 1 tháng 1	We watched fireworks at New Year.	Chúng tôi xem pháo hoa vào dịp năm mới.
+lunar_new_year	Lunar New Year	noun	2	time	Tết Nguyên Đán	dịp lễ lớn nhất của Việt Nam, tính theo âm lịch	Lunar New Year is the biggest holiday in Vietnam.	Tết Nguyên Đán là dịp lễ lớn nhất ở Việt Nam.	Tet
+valentines_day	Valentine's Day	noun	2	time	ngày lễ tình nhân	ngày 14 tháng 2, các cặp đôi tặng quà cho nhau	He gave her roses on Valentine's Day.	Anh ấy tặng cô ấy hoa hồng vào ngày lễ tình nhân.
+mothers_day	Mother's Day	noun	2	time	Ngày của Mẹ	ngày con cái tặng quà, cảm ơn mẹ	I made a card for Mother's Day.	Tôi làm một tấm thiệp cho Ngày của Mẹ.
+daily	daily	adjective	2	time	hằng ngày	diễn ra mỗi ngày	Walking is part of my daily life.	Đi bộ là một phần cuộc sống hằng ngày của tôi.		/ˈdeɪli/
+weekly	weekly	adjective	2	time	hằng tuần	diễn ra mỗi tuần một lần	We have a weekly meeting on Monday.	Chúng tôi họp hằng tuần vào thứ Hai.		/ˈwiːkli/
+monthly	monthly	adjective	2	time	hằng tháng	diễn ra mỗi tháng một lần	My monthly phone bill is small.	Hóa đơn điện thoại hằng tháng của tôi không nhiều.		/ˈmʌnθli/
+once	once	adverb	2	time	một lần	đúng một lần, không hơn	I've been to Da Lat once.	Tôi đã đến Đà Lạt một lần.		/wʌns/
+twice	twice	adverb	2	time	hai lần	số lần là hai	I brush my teeth twice a day.	Tôi đánh răng hai lần một ngày.		/twaɪs/
+already	already	adverb	2	time	đã... rồi	việc xảy ra sớm hơn mong đợi hoặc trước lúc nói	I've already eaten.	Tôi đã ăn rồi.		/ɔːlˈredi/
+yet	yet	adverb	2	time	chưa (trong câu hỏi, câu phủ định)	hỏi hay nói việc gì đã xảy ra tính đến lúc này chưa	Have you finished yet?	Bạn xong chưa?		/jet/
+still	still	adverb	2	time	vẫn, vẫn còn	việc gì tiếp diễn, chưa dừng lại	Are you still at work?	Bạn vẫn còn ở chỗ làm à?		/stɪl/
+recently	recently	adverb	2	time	mới đây	một thời điểm không lâu trước lúc nói	I recently moved to Da Nang.	Tôi mới chuyển đến Đà Nẵng gần đây.		/ˈriːsntli/
+later	later	adverb	2	time	lát nữa, sau đó	vào một thời điểm sau lúc nói	I'll call you later.	Lát nữa tôi sẽ gọi cho bạn.		/ˈleɪtə/
+soon	soon	adverb	2	time	sắp, chẳng bao lâu nữa	trong khoảng thời gian ngắn sắp tới	Dinner will be ready soon.	Bữa tối sắp xong rồi.		/suːn/
+then	then	adverb	2	time	lúc đó, khi ấy	nói về một thời điểm trong quá khứ hoặc tương lai	I was a student then.	Lúc đó tôi còn là sinh viên.		/ðen/
+finally	finally	adverb	2	time	cuối cùng thì	sau một thời gian dài chờ đợi hoặc cố gắng	The bus finally came.	Cuối cùng thì xe buýt cũng đến.	at last	/ˈfaɪnəli/
+during	during	preposition	2	time	trong suốt, trong lúc	việc gì xảy ra bên trong một khoảng thời gian	Don't talk during the film.	Đừng nói chuyện trong lúc xem phim.		/ˈdjʊərɪŋ/
+until	until	preposition	2	time	cho đến khi	tới một thời điểm thì dừng	The shop is open until nine.	Cửa hàng mở đến chín giờ.	till	/ənˈtɪl/
+hurry	hurry	verb	2	time	vội vàng, khẩn trương	làm gì đó nhanh vì không còn nhiều thời gian	We hurried to catch the bus.	Chúng tôi vội vàng để bắt kịp xe buýt.		/ˈhʌri/
+celebrate	celebrate	verb	2	time	ăn mừng, đón (dịp lễ)	tổ chức vui vẻ vào ngày đặc biệt	We celebrate Tet with our family.	Chúng tôi đón Tết cùng gia đình.		/ˈselɪbreɪt/
+on_time	on time	collocation	2	time	đúng giờ	không sớm cũng không muộn so với giờ hẹn	The train arrived on time.	Tàu đến đúng giờ.
+at_the_moment	at the moment	collocation	2	time	lúc này, hiện giờ	đang diễn ra trong thời điểm hiện tại	She's busy at the moment.	Lúc này cô ấy đang bận.
+day_off	day off	collocation	2	time	ngày nghỉ	ngày không phải đi làm, đi học	I have a day off on Friday.	Thứ Sáu tôi được nghỉ một ngày.
+free_time	free time	collocation	2	time	thời gian rảnh	lúc không phải làm việc, học tập	What do you do in your free time?	Bạn làm gì vào thời gian rảnh?	spare time
+spend_time	spend time	collocation	2	time	dành thời gian	sử dụng thời gian của mình cho ai, việc gì	I like to spend time with my family.	Tôi thích dành thời gian bên gia đình.
+in_a_hurry	in a hurry	collocation	2	time	đang vội	không có nhiều thời gian nên phải làm nhanh	Sorry, I can't talk. I'm in a hurry.	Xin lỗi, tôi không nói chuyện được. Tôi đang vội.
+at_the_weekend	at the weekend	collocation	2	time	vào cuối tuần	nói việc gì xảy ra vào thứ Bảy, Chủ nhật	I sleep late at the weekend.	Vào cuối tuần tôi ngủ dậy muộn.	on the weekend
+the_day_after_tomorrow	the day after tomorrow	collocation	2	time	ngày kia	ngày sau ngày mai	We leave the day after tomorrow.	Ngày kia chúng tôi đi.
+the_day_before_yesterday	the day before yesterday	collocation	2	time	hôm kia	ngày trước hôm qua	I saw her the day before yesterday.	Tôi đã gặp cô ấy hôm kia.
+once_a_week	once a week	collocation	2	time	mỗi tuần một lần	tần suất một lần trong một tuần	I go swimming once a week.	Tôi đi bơi mỗi tuần một lần.
+how_often	how often	phrase	2	time	bao lâu một lần	câu hỏi về tần suất	How often do you see your grandparents?	Bao lâu bạn gặp ông bà một lần?
+quarter_past	quarter past	collocation	2	time	mười lăm phút (sau giờ chẵn)	nói giờ hơn 15 phút	It's quarter past nine.	Bây giờ là chín giờ mười lăm.	a quarter past
+quarter_to	quarter to	collocation	2	time	kém mười lăm	nói giờ còn 15 phút nữa là tới giờ chẵn	It's quarter to five.	Bây giờ là năm giờ kém mười lăm.	a quarter to
+half_an_hour	half an hour	collocation	2	time	nửa tiếng	khoảng thời gian 30 phút	I waited for half an hour.	Tôi đã đợi nửa tiếng.
+all_the_time	all the time	collocation	2	time	lúc nào cũng, suốt	xảy ra liên tục hoặc rất thường xuyên	She checks her phone all the time.	Cô ấy lúc nào cũng xem điện thoại.
+right_away	right away	collocation	2	time	liền, ngay đây	cách nói thân mật: làm ngay, không chần chừ	I'll do it right away.	Tôi sẽ làm liền đây.	straight away
+in_the_past	in the past	collocation	2	time	ngày xưa, trong quá khứ	nói về những gì đã xảy ra từ lâu	People didn't have phones in the past.	Ngày xưa người ta không có điện thoại.
+tell_the_time	tell the time	collocation	2	time	xem giờ, biết xem đồng hồ	đọc được giờ trên đồng hồ	My son is learning to tell the time.	Con trai tôi đang học xem đồng hồ.
+alarm_clock	alarm clock	collocation	2	time	đồng hồ báo thức	đồng hồ reo vào giờ đã đặt để đánh thức	I set my alarm clock for six.	Tôi đặt đồng hồ báo thức lúc sáu giờ.
+hurry_up	hurry up	phrasal_verb	2	time	nhanh lên	giục ai làm nhanh hơn vì sắp muộn	Hurry up, or we'll miss the bus!	Nhanh lên, không là lỡ xe buýt!

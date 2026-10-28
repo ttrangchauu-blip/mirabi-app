@@ -1,0 +1,107 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+suggest	suggest	verb	3	communication	gợi ý, đề xuất	nêu ra một ý kiến để người khác cân nhắc	I suggest we take a taxi.	Tôi đề xuất chúng ta đi taxi.		/səˈdʒest/
+mention	mention	verb	3	communication	nhắc đến, đề cập	nói đến điều gì một cách ngắn gọn	He didn't mention his new job.	Anh ấy không nhắc gì đến công việc mới.		/ˈmenʃn/
+discuss	discuss	verb	3	communication	thảo luận, bàn bạc	trao đổi ý kiến về một vấn đề	We need to discuss the plan for the trip.	Chúng ta cần bàn kế hoạch cho chuyến đi.		/dɪˈskʌs/
+argue	argue	verb	3	communication	cãi nhau, tranh cãi	nói chuyện gay gắt vì không cùng ý kiến	My brothers often argue about small things.	Các anh tôi hay cãi nhau vì những chuyện nhỏ.		/ˈɑːɡjuː/
+remind	remind	verb	3	communication	nhắc nhở	nói để ai đó không quên việc gì	Please remind me to call Mum.	Nhớ nhắc tôi gọi điện cho mẹ nhé.		/rɪˈmaɪnd/
+warn	warn	verb	3	communication	cảnh báo	báo trước cho ai về một nguy hiểm hay rắc rối	I warned you about the dog.	Tôi đã cảnh báo bạn về con chó rồi mà.		/wɔːn/
+refuse	refuse	verb	3	communication	từ chối, khước từ	nói thẳng rằng mình không làm hoặc không nhận	He refused to answer the question.	Anh ấy từ chối trả lời câu hỏi.		/rɪˈfjuːz/
+admit	admit	verb	3	communication	thừa nhận	nói ra rằng điều gì là đúng, thường là lỗi của mình	He admitted that he was wrong.	Anh ấy thừa nhận rằng mình đã sai.		/ədˈmɪt/
+deny	deny	verb	3	communication	phủ nhận, chối	nói rằng điều gì không đúng sự thật	She denied taking the money.	Cô ấy chối là không lấy tiền.		/dɪˈnaɪ/
+insist	insist	verb	3	communication	khăng khăng, nhất quyết	nói chắc chắn và không chịu đổi ý	He insisted on paying for dinner.	Anh ấy nhất quyết trả tiền bữa tối.		/ɪnˈsɪst/
+persuade	persuade	verb	3	communication	thuyết phục (ai làm gì)	dùng lý lẽ để khiến người khác đồng ý làm việc gì	I persuaded my dad to buy a new laptop.	Tôi đã thuyết phục bố mua máy tính xách tay mới.		/pəˈsweɪd/
+convince	convince	verb	3	communication	làm cho tin	khiến ai tin rằng điều gì là đúng	She convinced me that the story was true.	Cô ấy làm tôi tin rằng câu chuyện là thật.		/kənˈvɪns/
+announce	announce	verb	3	communication	thông báo, công bố	nói chính thức cho nhiều người cùng biết	The teacher announced the test results.	Thầy giáo công bố kết quả bài kiểm tra.		/əˈnaʊns/
+interrupt	interrupt	verb	3	communication	ngắt lời	chen vào khi người khác đang nói	Please don't interrupt me while I'm speaking.	Làm ơn đừng ngắt lời khi tôi đang nói.		/ˌɪntəˈrʌpt/
+gossip.verb	gossip	verb	3	communication	buôn chuyện, ngồi lê đôi mách	động từ: bàn tán chuyện riêng của người khác	They love to gossip about their neighbours.	Họ rất thích buôn chuyện về hàng xóm.		/ˈɡɒsɪp/
+gossip.noun	gossip	noun	3	communication	chuyện tầm phào, lời đồn nhảm	danh từ: những lời bàn tán về đời tư người khác	Don't believe all the gossip you hear.	Đừng tin hết những chuyện tầm phào bạn nghe được.		/ˈɡɒsɪp/
+communicate	communicate	verb	3	communication	giao tiếp, truyền đạt	trao đổi thông tin, suy nghĩ với người khác	It's hard to communicate in a new language.	Thật khó giao tiếp bằng một ngôn ngữ mới.		/kəˈmjuːnɪkeɪt/
+express	express	verb	3	communication	bày tỏ, diễn đạt	nói ra cảm xúc hay suy nghĩ của mình	He finds it hard to express his feelings.	Anh ấy thấy khó bày tỏ cảm xúc của mình.		/ɪkˈspres/
+respond	respond	verb	3	communication	phản hồi	đáp lại lời nói, thư từ (trang trọng hơn reply)	She didn't respond to my message.	Cô ấy không phản hồi tin nhắn của tôi.		/rɪˈspɒnd/
+contact	contact	verb	3	communication	liên lạc, liên hệ	tìm cách nói chuyện với ai qua điện thoại, thư	Please contact us if you have any questions.	Vui lòng liên hệ với chúng tôi nếu bạn có câu hỏi.		/ˈkɒntækt/
+translate	translate	verb	3	communication	dịch (sang ngôn ngữ khác)	chuyển lời nói, chữ viết sang một thứ tiếng khác	Can you translate this letter into English?	Bạn có thể dịch lá thư này sang tiếng Anh không?		/trænsˈleɪt/
+dial	dial	verb	3	communication	bấm số, quay số	nhấn số điện thoại để gọi	Dial the number and wait.	Bấm số rồi chờ.		/ˈdaɪəl/
+misunderstand	misunderstand	verb	3	communication	hiểu lầm, hiểu sai	động từ: hiểu sai ý người khác	Don't misunderstand me, I like your idea.	Đừng hiểu lầm tôi, tôi thích ý tưởng của bạn.		/ˌmɪsʌndəˈstænd/
+misunderstanding	misunderstanding	noun	3	communication	sự hiểu lầm	danh từ: tình huống hai bên hiểu sai ý nhau	It was just a small misunderstanding.	Đó chỉ là một hiểu lầm nhỏ.		/ˌmɪsʌndəˈstændɪŋ/
+apology	apology	noun	3	communication	lời xin lỗi	danh từ: điều nói hay viết ra để xin lỗi	Please accept my apology.	Xin hãy nhận lời xin lỗi của tôi.		/əˈpɒlədʒi/
+complaint	complaint	noun	3	communication	lời phàn nàn, lời khiếu nại	danh từ: điều nói ra khi không hài lòng	We received a complaint about the food.	Chúng tôi nhận được một lời phàn nàn về đồ ăn.		/kəmˈpleɪnt/
+request	request	noun	3	communication	lời đề nghị, lời yêu cầu	lời nhờ vả hoặc đề nghị một cách lịch sự	I have a small request.	Tôi có một đề nghị nhỏ.		/rɪˈkwest/
+greeting	greeting	noun	3	communication	lời chào	danh từ: lời nói hay cử chỉ khi gặp nhau	"Hello" is the most common greeting.	"Hello" là lời chào phổ biến nhất.		/ˈɡriːtɪŋ/
+speech	speech	noun	3	communication	bài phát biểu	bài nói trước đông người	He gave a short speech at the wedding.	Anh ấy có một bài phát biểu ngắn tại đám cưới.		/spiːtʃ/
+discussion	discussion	noun	3	communication	cuộc thảo luận	buổi trao đổi ý kiến về một chủ đề	We had a long discussion about money.	Chúng tôi đã có một cuộc thảo luận dài về tiền bạc.		/dɪˈskʌʃn/
+argument.quarrel	argument	noun	3	communication	cuộc cãi vã	lần tranh cãi gay gắt giữa hai người	They had an argument about the TV.	Họ đã cãi nhau vì cái TV.		/ˈɑːɡjumənt/
+gesture	gesture	noun	3	communication	cử chỉ, điệu bộ	cử động tay, đầu để diễn đạt ý	She made a gesture for me to sit down.	Cô ấy ra hiệu bảo tôi ngồi xuống.		/ˈdʒestʃə/
+formal	formal	adjective	3	communication	trang trọng	cách nói, viết dùng trong công việc, nơi nghiêm túc	Use formal language in a job letter.	Hãy dùng ngôn ngữ trang trọng trong thư xin việc.		/ˈfɔːml/
+informal	informal	adjective	3	communication	thân mật, không trang trọng	cách nói dùng với bạn bè, người nhà	"Hi" is more informal than "hello".	"Hi" thân mật hơn "hello".		/ɪnˈfɔːml/
+fluent	fluent	adjective	3	communication	lưu loát, trôi chảy	nói một ngôn ngữ dễ dàng, không vấp	She is fluent in three languages.	Cô ấy nói lưu loát ba thứ tiếng.		/ˈfluːənt/
+honestly	honestly	adverb	3	communication	thành thật mà nói	dùng khi nói thật lòng ý kiến của mình	Honestly, I didn't like the film.	Thành thật mà nói, tôi không thích bộ phim đó.	to be honest	/ˈɒnɪstli/
+briefly	briefly	adverb	3	communication	một cách ngắn gọn	nói hoặc giải thích trong ít lời	Let me briefly explain the rules.	Để tôi giải thích ngắn gọn luật chơi.		/ˈbriːfli/
+exactly	exactly	adverb	3	communication	đúng thế, chính xác	đáp lại để đồng ý hoàn toàn với ai	Exactly! That's what I wanted to say.	Đúng thế! Đó chính là điều tôi muốn nói.		/ɪɡˈzæktli/
+absolutely	absolutely	adverb	3	communication	chắc chắn rồi, hoàn toàn được	trả lời để nhấn mạnh sự đồng ý	Can I join you? Absolutely!	Mình tham gia được không? Chắc chắn rồi!		/ˈæbsəluːtli/
+cheers.thanks	cheers	interjection	3	communication	cảm ơn nha	cách cảm ơn rất thân mật trong tiếng Anh-Anh	Cheers, mate. See you later.	Cảm ơn nha bạn. Gặp lại sau.		/tʃɪəz/
+im_not_sure	I'm not sure	phrase	3	communication	tôi không chắc	khi chưa có câu trả lời chắc chắn	I'm not sure what time the film starts.	Tôi không chắc mấy giờ phim bắt đầu.	I am not sure
+what_do_you_mean	what do you mean	phrase	3	communication	ý bạn là gì	hỏi lại khi chưa rõ ý người nói	What do you mean? I don't understand.	Ý bạn là gì? Tôi không hiểu.
+i_see_what_you_mean	I see what you mean	phrase	3	communication	tôi hiểu ý bạn	cho thấy mình đã hiểu quan điểm người khác	I see what you mean, but I still disagree.	Tôi hiểu ý bạn, nhưng tôi vẫn không đồng ý.	I see your point
+to_be_honest	to be honest	phrase	3	communication	nói thật lòng thì	mở đầu khi sắp nói thẳng một ý kiến	To be honest, I don't like this restaurant.	Nói thật lòng thì tôi không thích nhà hàng này.	honestly
+in_other_words	in other words	phrase	3	communication	nói cách khác	diễn đạt lại một ý theo cách dễ hiểu hơn	He's not coming. In other words, we need a new player.	Anh ấy không đến. Nói cách khác, chúng ta cần người chơi mới.
+fair_enough	fair enough	phrase	3	communication	cũng có lý, được thôi	chấp nhận lời giải thích hay đề nghị của người khác	You're tired? Fair enough, we can go home.	Bạn mệt à? Được thôi, mình về nhà.
+no_worries	no worries	phrase	3	communication	không sao đâu mà	đáp lại lời cảm ơn hoặc xin lỗi một cách thoải mái	No worries, it happens to everyone.	Không sao đâu mà, ai cũng có lúc thế.
+dont_mention_it	don't mention it	phrase	3	communication	có gì đâu mà	đáp lại lời cảm ơn, ý nói việc nhỏ không đáng kể	Thanks for your help! Don't mention it.	Cảm ơn bạn đã giúp! Có gì đâu mà.
+id_love_to	I'd love to	phrase	3	communication	tôi rất sẵn lòng	nhận lời mời một cách nhiệt tình	Dinner on Friday? I'd love to!	Ăn tối thứ Sáu nhé? Mình rất sẵn lòng!	I would love to
+no_way	no way	phrase	3	communication	không đời nào	từ chối mạnh hoặc tỏ ý không tin	Lend him my car? No way!	Cho anh ta mượn xe của tôi á? Không đời nào!
+its_up_to_you	it's up to you	phrase	3	communication	tùy bạn quyết định	để người khác tự chọn	Pizza or noodles? It's up to you.	Pizza hay mì? Tùy bạn.	it is up to you
+that_reminds_me	that reminds me	phrase	3	communication	à, nhắc mới nhớ	khi lời người khác làm mình nhớ ra việc gì	Oh, that reminds me, I need to call Mum.	À, nhắc mới nhớ, tôi phải gọi cho mẹ.
+guess_what	guess what	phrase	3	communication	đoán xem nào	mở đầu khi sắp kể một tin bất ngờ	Guess what? I got the job!	Đoán xem nào? Mình được nhận việc rồi!
+im_sorry_to_hear_that	I'm sorry to hear that	phrase	3	communication	tôi rất tiếc khi nghe điều đó	an ủi, chia buồn khi nghe tin không vui	Your cat is sick? I'm sorry to hear that.	Con mèo của bạn bị ốm à? Tôi rất tiếc khi nghe vậy.
+bless_you	bless you	phrase	3	communication	sức khỏe nhé (khi ai hắt xì)	câu nói lịch sự khi người bên cạnh hắt hơi	Bless you! Do you have a cold?	Sức khỏe nhé! Bạn bị cảm à?
+make_yourself_at_home	make yourself at home	phrase	3	communication	cứ tự nhiên như ở nhà	mời khách thoải mái khi đến nhà mình	Come in and make yourself at home.	Mời vào, cứ tự nhiên như ở nhà nhé.
+say_hello_to	say hello to	phrase	3	communication	gửi lời chào tới	nhờ ai chuyển lời chào đến người khác	Say hello to your parents for me.	Cho mình gửi lời chào bố mẹ bạn nhé.
+how_have_you_been	how have you been	phrase	3	communication	dạo này bạn thế nào	hỏi thăm khi lâu ngày mới gặp lại	Hi Linh! How have you been?	Chào Linh! Dạo này bạn thế nào?
+nice_talking_to_you	nice talking to you	phrase	3	communication	rất vui được nói chuyện với bạn	lời chào lịch sự khi kết thúc cuộc trò chuyện	It was nice talking to you.	Rất vui được nói chuyện với bạn.
+i_didnt_catch_that	I didn't catch that	phrase	3	communication	tôi nghe không kịp	khi không nghe rõ điều người khác vừa nói	Sorry, I didn't catch that.	Xin lỗi, tôi nghe không kịp.	I did not catch that
+how_do_you_spell_it	how do you spell it	phrase	3	communication	đánh vần thế nào nhỉ	hỏi cách đánh vần một từ hay tên riêng	Nice name! How do you spell it?	Tên hay quá! Đánh vần thế nào nhỉ?
+could_you_speak_more_slowly	could you speak more slowly	phrase	3	communication	bạn nói chậm hơn được không	nhờ người khác nói chậm lại để dễ hiểu	Sorry, could you speak more slowly?	Xin lỗi, bạn nói chậm hơn được không?
+leave_a_message	leave a message	collocation	3	communication	để lại lời nhắn	nhắn lại khi người kia không nghe máy hoặc vắng mặt	She's out. Would you like to leave a message?	Cô ấy đi vắng rồi. Anh có muốn để lại lời nhắn không?
+wrong_number	wrong number	collocation	3	communication	gọi nhầm số	khi gọi điện tới số không phải người mình cần	Sorry, you have the wrong number.	Xin lỗi, anh gọi nhầm số rồi.
+missed_call	missed call	collocation	3	communication	cuộc gọi nhỡ	cuộc gọi đến mà mình không bắt máy	I have three missed calls from my boss.	Tôi có ba cuộc gọi nhỡ từ sếp.
+small_talk	small talk	collocation	3	communication	chuyện xã giao	trò chuyện nhẹ nhàng về thời tiết, công việc với người chưa thân	I'm not good at small talk at parties.	Tôi không giỏi nói chuyện xã giao ở các bữa tiệc.
+body_language	body language	collocation	3	communication	ngôn ngữ cơ thể	cách dùng nét mặt, tư thế, cử chỉ để thể hiện ý nghĩ	Her body language showed she was nervous.	Ngôn ngữ cơ thể cho thấy cô ấy đang lo lắng.
+eye_contact	eye contact	collocation	3	communication	giao tiếp bằng mắt	nhìn thẳng vào mắt người đang nói chuyện với mình	Make eye contact when you speak.	Hãy nhìn vào mắt người nghe khi bạn nói.
+speak_up	speak up	phrasal_verb	3	communication	nói to lên	nhờ người khác nói lớn hơn vì khó nghe	Could you speak up a little?	Bạn nói to lên một chút được không?
+bring_up	bring up	phrasal_verb	3	communication	khơi ra, nêu ra (chủ đề)	mở ra một vấn đề trong cuộc nói chuyện	Don't bring up money at dinner.	Đừng khơi chuyện tiền bạc trong bữa tối.
+go_on.continue	go on	phrasal_verb	3	communication	nói tiếp đi	khuyến khích người khác tiếp tục câu chuyện	Go on, I'm listening.	Nói tiếp đi, tôi đang nghe đây.
+manners	manners	noun	4	communication	phép lịch sự, cách cư xử	cách ăn nói, cư xử đúng mực (luôn ở số nhiều)	It's bad manners to talk during a film.	Nói chuyện khi đang xem phim là bất lịch sự.		/ˈmænəz/
+compliment	compliment	noun	4	communication	lời khen	lời nói tốt về ai hay điều gì	Thanks for the compliment!	Cảm ơn lời khen của bạn!		/ˈkɒmplɪmənt/
+praise	praise	verb	4	communication	khen ngợi, ca ngợi	khen ai, thường trước người khác, vì làm tốt	The teacher praised her for her hard work.	Cô giáo khen ngợi bạn ấy vì đã chăm chỉ.		/preɪz/
+criticise	criticise	verb	4	communication	chỉ trích, phê bình	nói ra lỗi hay điểm chưa tốt của ai	He criticised my plan in front of everyone.	Anh ta chỉ trích kế hoạch của tôi trước mặt mọi người.	criticize	/ˈkrɪtɪsaɪz/
+exaggerate	exaggerate	verb	4	communication	phóng đại, nói quá	kể một điều to tát hơn sự thật	He always exaggerates his stories.	Anh ta luôn kể chuyện quá lên.		/ɪɡˈzædʒəreɪt/
+accuse	accuse	verb	4	communication	buộc tội, cáo buộc	nói rằng ai đó đã làm điều sai	She accused me of lying.	Cô ấy buộc tội tôi nói dối.		/əˈkjuːz/
+confess	confess	verb	4	communication	thú nhận	nói ra điều mình đã giấu, thường là lỗi lầm	He confessed that he broke the vase.	Cậu ấy thú nhận đã làm vỡ cái bình.		/kənˈfes/
+reveal	reveal	verb	4	communication	tiết lộ	nói ra điều trước đó còn bí mật	She finally revealed her secret.	Cuối cùng cô ấy cũng tiết lộ bí mật của mình.		/rɪˈviːl/
+inform	inform	verb	4	communication	báo cho biết	cho ai biết thông tin một cách chính thức	Please inform us of any changes.	Vui lòng báo cho chúng tôi biết nếu có thay đổi.		/ɪnˈfɔːm/
+clarify	clarify	verb	4	communication	làm rõ	giải thích thêm để tránh hiểu nhầm	Can you clarify what you mean?	Bạn có thể làm rõ ý bạn không?		/ˈklærəfaɪ/
+emphasise	emphasise	verb	4	communication	nhấn mạnh	nói rõ rằng điều gì là đặc biệt quan trọng	The doctor emphasised the need for rest.	Bác sĩ nhấn mạnh việc cần nghỉ ngơi.	emphasize	/ˈemfəsaɪz/
+hint	hint	verb	4	communication	nói bóng gió, ám chỉ	gợi ý gián tiếp, không nói thẳng ra	She hinted that she wanted a new phone.	Cô ấy nói bóng gió rằng mình muốn có điện thoại mới.		/hɪnt/
+interpret	interpret	verb	4	communication	phiên dịch (lời nói)	dịch miệng trực tiếp giữa hai người nói hai thứ tiếng	My uncle interpreted for the visitors.	Chú tôi phiên dịch cho đoàn khách.		/ɪnˈtɜːprɪt/
+tease	tease	verb	4	communication	trêu chọc	nói đùa để chọc ai, đôi khi làm họ khó chịu	My friends tease me about my accent.	Bạn bè hay trêu giọng của tôi.		/tiːz/
+scold	scold	verb	4	communication	mắng, la rầy	nói giận dữ với ai, nhất là trẻ con, vì làm sai	Mum scolded me for coming home late.	Mẹ mắng tôi vì về nhà muộn.	tell off	/skəʊld/
+decline.invitation	decline	verb	4	communication	từ chối khéo	lịch sự từ chối lời mời hay đề nghị	She politely declined the invitation.	Cô ấy lịch sự từ chối lời mời.		/dɪˈklaɪn/
+persuasive	persuasive	adjective	4	communication	có sức thuyết phục	lời nói, lý lẽ khiến người khác dễ tin, dễ đồng ý	She is a very persuasive speaker.	Cô ấy là người nói chuyện rất có sức thuyết phục.		/pəˈsweɪsɪv/
+vague	vague	adjective	4	communication	mơ hồ, không rõ ràng	câu trả lời, lời giải thích thiếu chi tiết	His answer was very vague.	Câu trả lời của anh ấy rất mơ hồ.		/veɪɡ/
+blunt.direct	blunt	adjective	4	communication	thẳng thừng, bộc trực	nói thẳng không giữ ý, dễ làm người khác mất lòng	Sorry to be blunt, but your idea won't work.	Xin lỗi vì nói thẳng, nhưng ý tưởng của bạn sẽ không hiệu quả.		/blʌnt/
+frank	frank	adjective	4	communication	thẳng thắn	nói thật lòng, rõ ràng nhưng không thô lỗ	Let me be frank with you.	Để tôi nói thẳng thắn với bạn.		/fræŋk/
+sarcastic	sarcastic	adjective	4	communication	mỉa mai, châm chọc	nói ngược ý để chế giễu người khác	"Great job," he said in a sarcastic voice.	"Giỏi lắm," anh ta nói bằng giọng mỉa mai.		/sɑːˈkæstɪk/
+speechless	speechless	adjective	4	communication	không nói nên lời	quá ngạc nhiên hoặc xúc động đến mức không nói được	The news left me speechless.	Tin đó khiến tôi không nói nên lời.		/ˈspiːtʃləs/
+frankly	frankly	adverb	4	communication	nói thẳng ra	mở đầu câu khi sắp nói ý kiến thật, dù khó nghe	Frankly, I don't care.	Nói thẳng ra, tôi chẳng quan tâm.		/ˈfræŋkli/
+openly	openly	adverb	4	communication	một cách cởi mở, công khai	nói về điều gì mà không giấu giếm	We can talk openly about our problems.	Chúng ta có thể nói chuyện cởi mở về các vấn đề của mình.		/ˈəʊpənli/
+fluently	fluently	adverb	4	communication	một cách lưu loát	nói ngoại ngữ trôi chảy	He speaks Japanese fluently.	Anh ấy nói tiếng Nhật lưu loát.		/ˈfluːəntli/
+rumour	rumour	noun	4	communication	tin đồn	chuyện được truyền miệng, chưa biết thật hay không	There's a rumour that our teacher is leaving.	Có tin đồn rằng cô giáo của chúng tôi sắp nghỉ.	rumor	/ˈruːmə/
+slang	slang	noun	4	communication	tiếng lóng	từ ngữ rất thân mật, thường dùng trong giới trẻ	"Cool" is a common slang word.	"Cool" là một từ lóng phổ biến.		/slæŋ/
+excuse.reason	excuse	noun	4	communication	lời bào chữa, cái cớ	lý do đưa ra để biện hộ cho lỗi của mình	What's your excuse for being late?	Lý do bạn đến muộn là gì?		/ɪkˈskjuːs/
+tone	tone	noun	4	communication	giọng điệu	cách nói thể hiện cảm xúc như giận, vui, lạnh lùng	Don't speak to me in that tone.	Đừng nói với tôi bằng giọng đó.		/təʊn/
+dialect	dialect	noun	4	communication	phương ngữ, tiếng địa phương	cách nói riêng về từ ngữ, ngữ pháp của một vùng	People in the north speak a different dialect.	Người miền Bắc nói một phương ngữ khác.		/ˈdaɪəlekt/
+remark	remark	noun	4	communication	lời nhận xét	câu nói ngắn thể hiện ý kiến về ai hay điều gì	He made a rude remark about my hair.	Anh ta đưa ra lời nhận xét thô lỗ về tóc tôi.		/rɪˈmɑːk/
+announcement	announcement	noun	4	communication	lời thông báo	tin được thông báo chính thức cho nhiều người	Please listen to the announcement.	Vui lòng lắng nghe thông báo.		/əˈnaʊnsmənt/
+voicemail	voicemail	noun	4	communication	hộp thư thoại	lời nhắn ghi âm khi người kia không nghe máy	I left a voicemail for him.	Tôi đã để lại tin nhắn thoại cho anh ấy.		/ˈvɔɪsmeɪl/
+farewell	farewell	noun	4	communication	sự chia tay, lời từ biệt	buổi hay lời chia tay trang trọng khi ai rời đi lâu	We had a farewell party for our teacher.	Chúng tôi tổ chức tiệc chia tay cô giáo.		/ˌfeəˈwel/
+dialogue	dialogue	noun	4	communication	đoạn hội thoại	lời nói qua lại giữa các nhân vật hoặc người học	Read the dialogue with your partner.	Hãy đọc đoạn hội thoại với bạn cùng nhóm.	dialog	/ˈdaɪəlɒɡ/

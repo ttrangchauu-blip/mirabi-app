@@ -1,0 +1,101 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+think	think	verb	1	thinking	nghĩ, suy nghĩ	dùng đầu óc để cân nhắc hoặc có ý kiến về điều gì	I think it will rain today.	Tôi nghĩ hôm nay trời sẽ mưa.		/θɪŋk/
+idea	idea	noun	1	thinking	ý tưởng, ý kiến	điều mình nghĩ ra hoặc đề xuất	That's a great idea!	Đó là một ý tưởng tuyệt vời!		/aɪˈdɪə/
+know	know	verb	1	thinking	biết	có thông tin hoặc hiểu điều gì trong đầu	Do you know the answer?	Bạn có biết câu trả lời không?		/nəʊ/
+reason	reason	noun	1	thinking	lý do	điều giải thích vì sao một việc xảy ra	Tell me the reason why you are late.	Hãy cho tôi biết lý do bạn đến muộn.		/ˈriːzn/
+because	because	conjunction	1	thinking	bởi vì	dùng để nêu lý do, theo sau là cả một mệnh đề	I stayed at home because I was sick.	Tôi ở nhà vì tôi bị ốm.		/bɪˈkɒz/
+why	why	adverb	1	thinking	tại sao	từ để hỏi lý do	Why do you think so?	Tại sao bạn nghĩ vậy?		/waɪ/
+maybe	maybe	adverb	1	thinking	có lẽ, có thể	khi chưa chắc chắn, cách nói thân mật	Maybe he is right.	Có lẽ anh ấy đúng.	perhaps	/ˈmeɪbi/
+sure	sure	adjective	1	thinking	chắc chắn	tin chắc điều mình nói là đúng, cách nói thường ngày	Are you sure about that?	Bạn có chắc về điều đó không?	certain	/ʃʊə/
+true	true	adjective	1	thinking	đúng, có thật	đúng với sự thật, không sai	Is it true that you are moving to Hanoi?	Có thật là bạn sắp chuyển ra Hà Nội không?		/truː/
+false	false	adjective	1	thinking	sai, không đúng sự thật	không đúng sự thật, ví dụ trong câu hỏi đúng hay sai	Say if each sentence is true or false.	Hãy cho biết mỗi câu đúng hay sai.		/fɔːls/
+right.correct	right	adjective	1	thinking	đúng	câu trả lời, ý kiến không có lỗi	You are right, it is Monday today.	Bạn nói đúng, hôm nay là thứ Hai.	correct	/raɪt/
+wrong.incorrect	wrong	adjective	1	thinking	sai	câu trả lời, ý kiến không đúng	I think your answer is wrong.	Tôi nghĩ câu trả lời của bạn sai.	incorrect	/rɒŋ/
+mind	mind	noun	1	thinking	đầu óc, tâm trí	nơi con người suy nghĩ, ghi nhớ và cảm nhận	What is on your mind?	Bạn đang nghĩ gì trong đầu vậy?		/maɪnd/
+guess	guess	verb	1	thinking	đoán	nói câu trả lời khi không biết chắc	Can you guess how old I am?	Bạn đoán được tôi bao nhiêu tuổi không?		/ɡes/
+believe	believe	verb	1	thinking	tin, tin rằng	cho rằng điều gì là thật	I believe she is telling the truth.	Tôi tin cô ấy đang nói thật.		/bɪˈliːv/
+opinion	opinion	noun	1	thinking	ý kiến, quan điểm	điều một người nghĩ về một việc	What is your opinion of the film?	Bạn có ý kiến gì về bộ phim?		/əˈpɪnjən/
+so.therefore	so	conjunction	1	thinking	nên, vì vậy	nối hai ý, ý sau là kết quả của ý trước (văn nói)	It was raining, so we stayed at home.	Trời mưa nên chúng tôi ở nhà.		/səʊ/
+but	but	conjunction	1	thinking	nhưng	nối hai ý trái ngược nhau	The test was hard, but I passed.	Bài kiểm tra khó nhưng tôi vẫn đỗ.		/bʌt/
+if	if	conjunction	1	thinking	nếu	nêu điều kiện để một việc xảy ra	If it rains, we will stay at home.	Nếu trời mưa, chúng tôi sẽ ở nhà.		/ɪf/
+or	or	conjunction	1	thinking	hoặc, hay	nêu các lựa chọn	Do you want tea or coffee?	Bạn muốn uống trà hay cà phê?		/ɔː/
+decide	decide	verb	1	thinking	quyết định	chọn làm một việc sau khi suy nghĩ	I can't decide which shirt to buy.	Tôi không quyết định được nên mua áo nào.		/dɪˈsaɪd/
+understand	understand	verb	1	thinking	hiểu	biết ý nghĩa của điều được nói hay viết	Do you understand the question?	Bạn có hiểu câu hỏi không?		/ˌʌndəˈstænd/
+problem	problem	noun	1	thinking	vấn đề, chuyện khó	điều khó khăn cần được giải quyết	We have a problem with the car.	Chúng tôi gặp vấn đề với chiếc xe.		/ˈprɒbləm/
+example	example	noun	1	thinking	ví dụ	một trường hợp cụ thể để minh họa cho ý	Can you give me an example?	Bạn cho tôi một ví dụ được không?		/ɪɡˈzɑːmpl/
+fact	fact	noun	1	thinking	sự thật, điều có thật	điều chắc chắn đúng, có thể kiểm chứng	It is a fact that water boils at 100 degrees.	Nước sôi ở 100 độ là một sự thật.		/fækt/
+choose	choose	verb	1	thinking	chọn, lựa chọn	lấy một thứ trong nhiều thứ	You can choose any book you like.	Bạn có thể chọn bất kỳ cuốn sách nào bạn thích.		/tʃuːz/
+for_example	for example	phrase	1	thinking	ví dụ như	dùng trước khi nêu một ví dụ	I like fruit, for example apples and bananas.	Tôi thích trái cây, ví dụ như táo và chuối.	for instance
+im_not_sure	I'm not sure	phrase	1	thinking	tôi không chắc	khi chưa biết chắc câu trả lời	I'm not sure where she lives.	Tôi không chắc cô ấy sống ở đâu.
+probably	probably	adverb	2	thinking	có lẽ, nhiều khả năng	khi điều gì rất có thể xảy ra hoặc rất có thể đúng	It will probably rain tomorrow.	Có lẽ ngày mai trời sẽ mưa.		/ˈprɒbəbli/
+perhaps	perhaps	adverb	2	thinking	có lẽ, có thể (lịch sự)	khi chưa chắc chắn, cách nói lịch sự hơn maybe	Perhaps we should ask the teacher.	Có lẽ chúng ta nên hỏi cô giáo.	maybe	/pəˈhæps/
+compare	compare	verb	2	thinking	so sánh	xem hai hay nhiều thứ giống và khác nhau thế nào	Compare the two pictures and find five differences.	Hãy so sánh hai bức tranh và tìm năm điểm khác nhau.		/kəmˈpeə/
+difference	difference	noun	2	thinking	sự khác nhau, điểm khác biệt	điều làm hai thứ không giống nhau	What is the difference between these two words?	Hai từ này khác nhau thế nào?		/ˈdɪfrəns/
+similar	similar	adjective	2	thinking	giống nhau, tương tự	gần giống nhưng không hoàn toàn như nhau	Our ideas are very similar.	Ý tưởng của chúng tôi rất giống nhau.		/ˈsɪmələ/
+clear.understandable	clear	adjective	2	thinking	rõ ràng, dễ hiểu	ý kiến, lời giải thích không gây khó hiểu	Is everything clear?	Mọi thứ đã rõ ràng chưa?		/klɪə/
+point.idea	point	noun	2	thinking	ý, luận điểm	một ý nêu ra trong cuộc thảo luận hay bài viết	She made some interesting points in her talk.	Cô ấy đưa ra vài ý thú vị trong bài nói.		/pɔɪnt/
+imagine	imagine	verb	2	thinking	tưởng tượng	hình dung trong đầu một điều chưa có thật	Imagine you are on a beach.	Hãy tưởng tượng bạn đang ở trên bãi biển.		/ɪˈmædʒɪn/
+wonder	wonder	verb	2	thinking	tự hỏi, băn khoăn	muốn biết điều gì và cứ nghĩ về nó	I wonder why she left so early.	Tôi tự hỏi tại sao cô ấy về sớm thế.		/ˈwʌndə/
+solution	solution	noun	2	thinking	giải pháp, cách giải quyết	cách để xử lý một vấn đề	We need to find a solution to this problem.	Chúng ta cần tìm giải pháp cho vấn đề này.		/səˈluːʃn/
+cause	cause	noun	2	thinking	nguyên nhân	điều làm cho một việc xảy ra	What was the cause of the fire?	Nguyên nhân của vụ cháy là gì?		/kɔːz/
+effect	effect	noun	2	thinking	tác động, ảnh hưởng	sự thay đổi do một việc khác gây ra	Coffee has a strong effect on me.	Cà phê ảnh hưởng mạnh đến tôi.		/ɪˈfekt/
+result	result	noun	2	thinking	kết quả	điều xảy ra do một việc khác gây nên	The result of the test surprised everyone.	Kết quả bài kiểm tra khiến mọi người bất ngờ.		/rɪˈzʌlt/
+although	although	conjunction	2	thinking	mặc dù	nối hai ý trái ngược, đứng đầu mệnh đề	Although it was cold, we went swimming.	Mặc dù trời lạnh, chúng tôi vẫn đi bơi.	though	/ɔːlˈðəʊ/
+however	however	adverb	2	thinking	tuy nhiên	đầu câu hoặc giữa câu, nêu ý trái ngược với câu trước	The food was good. However, it was expensive.	Đồ ăn ngon. Tuy nhiên, nó đắt.		/haʊˈevə/
+memory.mind	memory	noun	2	thinking	trí nhớ	khả năng ghi nhớ của bộ óc	My grandfather has a very good memory.	Ông tôi có trí nhớ rất tốt.		/ˈmeməri/
+possible	possible	adjective	2	thinking	có thể (xảy ra, làm được)	điều có thể xảy ra hoặc làm được	Is it possible to finish today?	Có thể làm xong trong hôm nay không?		/ˈpɒsəbl/
+impossible	impossible	adjective	2	thinking	không thể (xảy ra, làm được)	điều không thể xảy ra hoặc không thể làm được	It's impossible to learn English in a week.	Không thể học tiếng Anh trong một tuần.		/ɪmˈpɒsəbl/
+decision	decision	noun	2	thinking	quyết định	điều mình chọn sau khi cân nhắc	It was a hard decision.	Đó là một quyết định khó khăn.		/dɪˈsɪʒn/
+choice	choice	noun	2	thinking	sự lựa chọn	việc chọn, hoặc thứ được chọn	You made the right choice.	Bạn đã lựa chọn đúng.		/tʃɔɪs/
+realise	realise	verb	2	thinking	nhận ra	bỗng hiểu ra hay biết ra một điều	I didn't realise it was so late.	Tôi không nhận ra là đã muộn thế.	realize	/ˈriːəlaɪz/
+notice	notice	verb	2	thinking	để ý thấy, nhận thấy	nhìn hay nghe thấy điều gì mà trước đó chưa để ý	Did you notice anything strange?	Bạn có để ý thấy điều gì lạ không?		/ˈnəʊtɪs/
+expect	expect	verb	2	thinking	nghĩ rằng sẽ, dự tính	cho rằng điều gì sẽ xảy ra	I expect the test will be easy.	Tôi nghĩ bài kiểm tra sẽ dễ.		/ɪkˈspekt/
+discuss	discuss	verb	2	thinking	thảo luận, bàn bạc	nói với nhau để trao đổi ý kiến về một việc	Let's discuss this problem tomorrow.	Ngày mai chúng ta bàn về vấn đề này nhé.		/dɪˈskʌs/
+exactly	exactly	adverb	2	thinking	chính xác, đúng vậy	dùng để đồng ý hoàn toàn với ai đó	Exactly! That's what I was trying to say.	Chính xác! Đó là điều tôi đang muốn nói.		/ɪɡˈzæktli/
+definitely	definitely	adverb	2	thinking	chắc chắn, nhất định	khi không có nghi ngờ gì	I will definitely come to your party.	Tôi nhất định sẽ đến bữa tiệc của bạn.		/ˈdefɪnətli/
+describe	describe	verb	2	thinking	mô tả, miêu tả	nói hoặc viết xem một thứ trông ra sao, như thế nào	Can you describe the man you saw?	Bạn có thể mô tả người đàn ông bạn đã thấy không?		/dɪˈskraɪb/
+unsure	unsure	adjective	2	thinking	không chắc chắn, phân vân	chưa biết chắc nên làm gì hay điều gì đúng	I'm unsure what to do next.	Tôi đang phân vân không biết làm gì tiếp theo.		/ʌnˈʃʊə/
+because_of	because of	preposition	2	thinking	vì, do	nêu lý do, theo sau là một danh từ	The game was cancelled because of the rain.	Trận đấu bị hủy vì trời mưa.
+first_of_all	first of all	phrase	2	thinking	trước hết, đầu tiên	khi nêu ý đầu tiên trong nhiều ý	First of all, let me thank you for coming.	Trước hết, cho tôi cảm ơn các bạn đã đến.	firstly
+think_about	think about	phrasal_verb	2	thinking	suy nghĩ về, cân nhắc	dành thời gian nghĩ về một việc trước khi quyết định	I need some time to think about it.	Tôi cần chút thời gian để suy nghĩ về việc đó.
+change_your_mind	change your mind	idiom	2	thinking	đổi ý	quyết định khác so với lúc đầu	If you change your mind, call me.	Nếu bạn đổi ý thì gọi cho tôi.
+i_see_what_you_mean	I see what you mean	phrase	2	thinking	tôi hiểu ý bạn	khi hiểu điều người khác muốn nói	I see what you mean, but I still don't agree.	Tôi hiểu ý bạn, nhưng tôi vẫn không đồng ý.
+thats_true	that's true	phrase	2	thinking	điều đó đúng	khi công nhận ý người khác vừa nói là đúng	That's true, the bus is always late.	Điều đó đúng, xe buýt lúc nào cũng trễ.
+thats_a_good_point	that's a good point	phrase	2	thinking	ý đó hay đấy	khi khen ý kiến của người khác là xác đáng	That's a good point. I didn't think of that.	Ý đó hay đấy. Tôi đã không nghĩ đến điều đó.	good point
+what_do_you_think	what do you think	phrase	2	thinking	bạn nghĩ sao	hỏi ý kiến của người khác	What do you think of my new haircut?	Bạn nghĩ sao về kiểu tóc mới của tôi?
+main_idea	main idea	collocation	2	thinking	ý chính	ý quan trọng nhất của bài đọc, bài nói	What is the main idea of this paragraph?	Ý chính của đoạn văn này là gì?
+make_a_choice	make a choice	collocation	2	thinking	đưa ra lựa chọn	chọn một trong các khả năng	It's time to make a choice.	Đã đến lúc phải đưa ra lựa chọn.
+think_of	think of	phrasal_verb	2	thinking	nghĩ ra, nghĩ đến	khi một ý tưởng, một cái tên nảy ra trong đầu	Can you think of a good name for the cat?	Bạn có nghĩ ra cái tên nào hay cho con mèo không?
+let_me_think	let me think	phrase	2	thinking	để tôi nghĩ xem	khi cần chút thời gian trước khi trả lời	Let me think... I believe it was in 2010.	Để tôi nghĩ xem... Tôi tin là vào năm 2010.
+doubt	doubt	verb	3	thinking	nghi ngờ, không tin lắm	nghĩ rằng điều gì có lẽ không đúng hoặc khó xảy ra	I doubt that he will come on time.	Tôi nghi là anh ấy sẽ không đến đúng giờ.		/daʊt/
+logic	logic	noun	3	thinking	lô-gíc, cách lập luận	cách suy nghĩ theo trình tự hợp lý	I can't follow the logic of his idea.	Tôi không theo kịp lô-gíc trong ý tưởng của anh ấy.		/ˈlɒdʒɪk/
+logical	logical	adjective	3	thinking	hợp lô-gíc	suy nghĩ hay kết luận theo đúng trình tự lập luận	It is the most logical answer.	Đó là câu trả lời hợp lô-gíc nhất.		/ˈlɒdʒɪkl/
+certain	certain	adjective	3	thinking	chắc chắn (trang trọng)	hoàn toàn tin rằng điều gì đúng, không còn nghi ngờ	I am certain that I locked the door.	Tôi chắc chắn là đã khóa cửa.	sure	/ˈsɜːtn/
+obvious	obvious	adjective	3	thinking	hiển nhiên, dễ thấy	điều dễ thấy, dễ hiểu, ai cũng nhận ra	The answer is obvious.	Câu trả lời rất hiển nhiên.		/ˈɒbviəs/
+option	option	noun	3	thinking	phương án	một trong những cách có thể chọn để làm	We have two options: wait or leave now.	Chúng ta có hai phương án: đợi hoặc đi ngay.		/ˈɒpʃn/
+prove	prove	verb	3	thinking	chứng minh	cho thấy điều gì là đúng bằng bằng chứng	Can you prove that you were at home?	Bạn có chứng minh được là bạn đã ở nhà không?		/pruːv/
+proof	proof	noun	3	thinking	bằng chứng xác thực	thứ cho thấy chắc chắn một điều là đúng	Do you have any proof?	Bạn có bằng chứng xác thực nào không?		/pruːf/
+reasonable	reasonable	adjective	3	thinking	có lý, hợp lẽ	đúng đắn và công bằng theo lẽ thường	That sounds like a reasonable idea.	Nghe có vẻ là một ý tưởng có lý.		/ˈriːznəbl/
+consider	consider	verb	3	thinking	cân nhắc, xem xét	suy nghĩ kỹ về điều gì trước khi quyết định	We are considering moving to the city.	Chúng tôi đang cân nhắc chuyển lên thành phố.		/kənˈsɪdə/
+suppose	suppose	verb	3	thinking	cho là, giả sử	nghĩ rằng điều gì có lẽ đúng, hoặc đặt ra một giả thiết	I suppose you are right.	Tôi cho là bạn đúng.		/səˈpəʊz/
+predict	predict	verb	3	thinking	dự đoán	nói trước điều sẽ xảy ra trong tương lai	Nobody can predict the future.	Không ai có thể dự đoán được tương lai.		/prɪˈdɪkt/
+discussion	discussion	noun	3	thinking	cuộc thảo luận	cuộc trao đổi ý kiến về một chủ đề	We had a long discussion about the plan.	Chúng tôi đã có một cuộc thảo luận dài về kế hoạch.		/dɪˈskʌʃn/
+argument.reasoning	argument	noun	3	thinking	lập luận, lý lẽ	các lý do đưa ra để chứng minh một ý kiến	Her argument was clear and strong.	Lập luận của cô ấy rõ ràng và chặt chẽ.		/ˈɑːɡjumənt/
+debate	debate	noun	3	thinking	cuộc tranh luận	cuộc thảo luận có hai phe với ý kiến trái ngược	There was a debate about school uniforms.	Đã có một cuộc tranh luận về đồng phục học sinh.		/dɪˈbeɪt/
+absolutely	absolutely	adverb	3	thinking	hoàn toàn (đồng ý)	dùng để nhấn mạnh sự đồng ý hay chắc chắn	You are absolutely right.	Bạn hoàn toàn đúng.		/ˈæbsəluːtli/
+obviously	obviously	adverb	3	thinking	rõ ràng là, hiển nhiên là	dùng khi điều mình nói ai cũng thấy	Obviously, we can't play outside in this rain.	Rõ ràng là chúng ta không thể chơi ngoài trời khi mưa thế này.		/ˈɒbviəsli/
+basically	basically	adverb	3	thinking	về cơ bản	khi tóm lại điều quan trọng nhất một cách đơn giản	Basically, the plan is good but too expensive.	Về cơ bản, kế hoạch thì tốt nhưng quá đắt.		/ˈbeɪsɪkli/
+mainly	mainly	adverb	3	thinking	chủ yếu	phần lớn, phần chính	The students are mainly from Hanoi.	Học sinh chủ yếu đến từ Hà Nội.	mostly	/ˈmeɪnli/
+unless	unless	conjunction	3	thinking	trừ khi, nếu không	việc sẽ xảy ra nếu điều kia không xảy ra	We will go out unless it rains.	Chúng tôi sẽ ra ngoài trừ khi trời mưa.		/ənˈles/
+instead	instead	adverb	3	thinking	thay vào đó	làm việc này thay cho việc khác	We didn't go out. Instead, we watched a film at home.	Chúng tôi không ra ngoài. Thay vào đó, chúng tôi xem phim ở nhà.		/ɪnˈsted/
+evidence	evidence	noun	3	thinking	bằng chứng	thông tin, sự việc cho thấy điều gì có thể đúng	There is no evidence that he took the money.	Không có bằng chứng nào cho thấy anh ta lấy tiền.		/ˈevɪdəns/
+conclusion	conclusion	noun	3	thinking	kết luận	điều mình quyết định là đúng sau khi suy nghĩ, xem xét	After a long talk, we came to a conclusion.	Sau một hồi nói chuyện, chúng tôi đã đi đến kết luận.		/kənˈkluːʒn/
+theory	theory	noun	3	thinking	giả thuyết, lý thuyết	một ý tưởng hay hệ thống ý tưởng để giải thích điều gì	I have a theory about why he left.	Tôi có một giả thuyết về lý do anh ấy rời đi.		/ˈθɪəri/
+suggest.propose	suggest	verb	3	thinking	đề xuất, gợi ý	nêu ra một ý để người khác cân nhắc	I suggest that we start early.	Tôi đề xuất chúng ta bắt đầu sớm.		/səˈdʒest/
+brainstorm	brainstorm	verb	3	thinking	động não, cùng nghĩ ý tưởng	cả nhóm nhanh chóng đưa ra thật nhiều ý tưởng	Let's brainstorm some ideas for the party.	Chúng ta cùng động não nghĩ vài ý tưởng cho bữa tiệc nhé.		/ˈbreɪnstɔːm/
+summarise	summarise	verb	3	thinking	tóm tắt	nói hoặc viết lại ngắn gọn các ý chính	Summarise the story in three sentences.	Hãy tóm tắt câu chuyện trong ba câu.	summarize	/ˈsʌməraɪz/
+persuade	persuade	verb	3	thinking	thuyết phục (ai làm gì)	khiến ai đó đồng ý làm việc gì bằng lý lẽ	She persuaded me to join the club.	Cô ấy đã thuyết phục tôi tham gia câu lạc bộ.		/pəˈsweɪd/
+convince	convince	verb	3	thinking	thuyết phục (ai tin điều gì)	làm cho ai đó tin rằng điều gì là đúng	He convinced me that he was telling the truth.	Anh ấy đã thuyết phục tôi tin rằng anh ấy nói thật.		/kənˈvɪns/
+definition	definition	noun	3	thinking	định nghĩa	câu giải thích chính xác nghĩa của một từ, một khái niệm	Look up the definition of this word.	Hãy tra định nghĩa của từ này.		/ˌdefɪˈnɪʃn/
+define	define	verb	3	thinking	định nghĩa, xác định rõ	nói chính xác một từ hay một khái niệm nghĩa là gì	How would you define success?	Bạn định nghĩa thành công như thế nào?		/dɪˈfaɪn/
+advantage	advantage	noun	3	thinking	ưu điểm, lợi thế	điều tốt, có lợi của một thứ hay một lựa chọn	One advantage of city life is the good transport.	Một ưu điểm của cuộc sống thành phố là giao thông thuận tiện.		/ədˈvɑːntɪdʒ/

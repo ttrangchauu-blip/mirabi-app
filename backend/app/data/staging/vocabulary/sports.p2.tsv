@@ -1,0 +1,101 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+tournament	tournament	noun	3	sports	giải đấu	chuỗi trận đấu nhiều đội tham gia để tìm ra đội thắng	Twenty teams took part in the tournament.	Hai mươi đội đã tham gia giải đấu.		/ˈtʊənəmənt/
+league	league	noun	3	sports	giải vô địch (theo mùa), liên đoàn	nhóm đội bóng thi đấu với nhau suốt một mùa giải	Which team is top of the league?	Đội nào đang đứng đầu giải?		/liːɡ/
+season.sport	season	noun	3	sports	mùa giải	khoảng thời gian trong năm diễn ra các trận đấu của giải	The new football season starts in August.	Mùa giải bóng đá mới bắt đầu vào tháng Tám.		/ˈsiːzn/
+trophy	trophy	noun	3	sports	chiếc cúp	cúp hoặc vật kỷ niệm trao cho người, đội vô địch	The captain lifted the trophy.	Đội trưởng nâng cao chiếc cúp.		/ˈtrəʊfi/
+skipping_rope	skipping rope	noun	3	sports	dây nhảy	sợi dây dùng để nhảy dây, tập thể lực	I bought a skipping rope to exercise at home.	Tôi mua một sợi dây nhảy để tập ở nhà.	jump rope
+opponent	opponent	noun	3	sports	đối thủ	người hoặc đội mình phải đấu cùng trong trận	His opponent was much taller than him.	Đối thủ của anh ấy cao hơn anh ấy nhiều.		/əˈpəʊnənt/
+defender	defender	noun	3	sports	hậu vệ	cầu thủ có nhiệm vụ ngăn đối phương ghi bàn	The defender stopped the ball before the goal.	Hậu vệ chặn bóng trước khung thành.		/dɪˈfendə/
+victory	victory	noun	3	sports	thắng lợi, chiến thắng	kết quả thắng trong trận đấu, cuộc thi (danh từ)	The fans celebrated the team's victory.	Cổ động viên ăn mừng chiến thắng của đội.		/ˈvɪktəri/
+defeat	defeat	noun	3	sports	thất bại, trận thua	kết quả thua trong trận đấu, cuộc thi (danh từ)	It was their first defeat this season.	Đó là trận thua đầu tiên của họ mùa này.		/dɪˈfiːt/
+penalty	penalty	noun	3	sports	quả phạt đền	cú sút phạt từ chấm 11 mét khi đối phương phạm lỗi	He missed the penalty.	Anh ấy đá hỏng quả phạt đền.		/ˈpenəlti/
+red_card	red card	noun	3	sports	thẻ đỏ	thẻ trọng tài đưa ra để đuổi cầu thủ khỏi sân	He got a red card and left the pitch.	Anh ấy nhận thẻ đỏ và rời sân.
+yellow_card	yellow card	noun	3	sports	thẻ vàng	thẻ trọng tài đưa ra để cảnh cáo cầu thủ phạm lỗi	The referee showed him a yellow card.	Trọng tài rút thẻ vàng cho anh ấy.
+half-time	half-time	noun	3	sports	giờ nghỉ giữa hiệp	khoảng nghỉ giữa hai hiệp của trận đấu	The score was 1-0 at half-time.	Tỉ số là 1-0 khi nghỉ giữa hiệp.	halftime	/ˌhɑːfˈtaɪm/
+first_half	first half	noun	3	sports	hiệp một	nửa đầu của trận đấu	Nobody scored in the first half.	Không ai ghi bàn trong hiệp một.
+scoreboard	scoreboard	noun	3	sports	bảng tỉ số	bảng lớn hiển thị điểm số ở nơi thi đấu	Look at the scoreboard: we are winning!	Nhìn bảng tỉ số kìa: mình đang thắng!		/ˈskɔːbɔːd/
+lap	lap	noun	3	sports	vòng (đua, chạy)	một vòng quanh đường chạy hoặc đường đua	She ran ten laps of the track.	Cô ấy chạy mười vòng quanh đường chạy.		/læp/
+athletics	athletics	noun	3	sports	điền kinh	các môn chạy, nhảy, ném trong thi đấu	He won three medals in athletics.	Anh ấy giành ba huy chương môn điền kinh.	track and field	/æθˈletɪks/
+gymnastics	gymnastics	noun	3	sports	thể dục dụng cụ	môn biểu diễn động tác khó trên xà, vòng, thảm	She has done gymnastics since she was five.	Cô ấy tập thể dục dụng cụ từ năm lên năm tuổi.		/dʒɪmˈnæstɪks/
+martial_arts	martial arts	noun	3	sports	võ thuật	các môn võ như karate, taekwondo, vovinam	Many children learn martial arts to stay safe.	Nhiều trẻ em học võ thuật để tự vệ.
+surfing	surfing	noun	3	sports	môn lướt sóng	đứng trên ván và lướt trên những con sóng biển	Surfing is popular in Australia.	Lướt sóng rất phổ biến ở Úc.		/ˈsɜːfɪŋ/
+horse_riding	horse riding	noun	3	sports	cưỡi ngựa	môn thể thao hoặc hoạt động cưỡi ngựa	She goes horse riding on Saturdays.	Cô ấy đi cưỡi ngựa vào các ngày thứ Bảy.	horseback riding
+rock_climbing	rock climbing	noun	3	sports	leo núi đá	môn leo lên vách đá bằng tay chân và dây an toàn	Rock climbing needs strong arms.	Leo núi đá cần đôi tay khỏe.
+long_jump	long jump	noun	3	sports	nhảy xa	môn chạy lấy đà rồi bật nhảy càng xa càng tốt	He won the long jump with 7.5 metres.	Anh ấy thắng môn nhảy xa với thành tích 7,5 mét.
+high_jump	high jump	noun	3	sports	nhảy cao	môn bật nhảy qua một thanh xà ngang	She is the best at the high jump in our school.	Cô ấy nhảy cao giỏi nhất trường tôi.
+close.contest	close	adjective	3	sports	sít sao, ngang ngửa	trận đấu, cuộc đua mà hai bên gần như bằng nhau	It was a close game, but we won 3-2.	Đó là một trận đấu sít sao, nhưng chúng tôi thắng 3-2.		/kləʊs/
+tough.match	tough	adjective	3	sports	khó khăn, gay go	trận đấu, đối thủ khó thắng	We have a tough match against the champions.	Chúng tôi có một trận đấu khó khăn với nhà vô địch.		/tʌf/
+goggles	goggles	noun	3	sports	kính bơi	kính đeo sát mắt khi bơi hoặc trượt tuyết	Don't forget your goggles for swimming.	Đừng quên kính bơi nhé.		/ˈɡɒɡlz/
+stopwatch	stopwatch	noun	3	sports	đồng hồ bấm giờ	đồng hồ dùng đo chính xác thời gian chạy, bơi	The coach timed us with a stopwatch.	Huấn luyện viên bấm giờ cho chúng tôi bằng đồng hồ bấm giờ.		/ˈstɒpwɒtʃ/
+olympic	Olympic	adjective	3	sports	(thuộc) Thế vận hội	đứng trước danh từ: Olympic champion, Olympic Games	He is an Olympic champion.	Anh ấy là một nhà vô địch Olympic.		/əˈlɪmpɪk/
+treadmill	treadmill	noun	3	sports	máy chạy bộ	máy có băng chuyền để chạy tại chỗ trong nhà	I run on the treadmill when it rains.	Tôi chạy trên máy chạy bộ khi trời mưa.		/ˈtredmɪl/
+dumbbell	dumbbell	noun	3	sports	quả tạ tay	tạ nhỏ cầm bằng một tay để tập cơ	She lifts small dumbbells at home.	Cô ấy tập với tạ tay nhỏ ở nhà.		/ˈdʌmbel/
+strength	strength	noun	3	sports	sức mạnh, sức lực	khả năng cơ bắp nâng, đẩy vật nặng	Swimming builds strength in your arms.	Bơi lội tăng sức mạnh cho đôi tay.		/streŋθ/
+workout	workout	noun	3	sports	buổi tập thể dục	một lượt tập luyện, thường ở phòng gym	I had a good workout this morning.	Sáng nay tôi có một buổi tập rất tốt.		/ˈwɜːkaʊt/
+personal_trainer	personal trainer	noun	3	sports	huấn luyện viên cá nhân	người hướng dẫn tập riêng cho từng người ở phòng gym	My personal trainer makes me work very hard.	Huấn luyện viên cá nhân bắt tôi tập rất chăm.
+sweaty	sweaty	adjective	3	sports	đẫm mồ hôi	nói về người, quần áo ướt mồ hôi sau khi tập	My shirt is sweaty after the game.	Áo tôi đẫm mồ hôi sau trận đấu.		/ˈsweti/
+miss_a_shot	miss a shot	collocation	3	sports	sút trượt, ném trượt	cú sút hoặc ném không vào khung thành, không vào rổ	He missed an easy shot in the last minute.	Anh ấy sút trượt một cú dễ ở phút cuối.
+home_team	home team	noun	3	sports	đội chủ nhà	đội thi đấu trên sân của mình	The home team won easily.	Đội chủ nhà thắng dễ dàng.
+world_record	world record	noun	3	sports	kỷ lục thế giới	thành tích tốt nhất từ trước đến nay trên thế giới	He holds the world record for the 100 metres.	Anh ấy giữ kỷ lục thế giới ở nội dung 100 mét.
+energetic	energetic	adjective	3	sports	tràn đầy năng lượng	nói về người hoặc hoạt động sôi nổi, khỏe khoắn	The players looked energetic in the second half.	Các cầu thủ trông tràn đầy năng lượng trong hiệp hai.		/ˌenəˈdʒetɪk/
+sit-up	sit-up	noun	3	sports	động tác gập bụng	nằm ngửa rồi nâng phần thân trên lên để tập cơ bụng	Do thirty sit-ups every day.	Mỗi ngày hãy gập bụng ba mươi cái.		/ˈsɪtʌp/
+winning	winning	adjective	3	sports	quyết định chiến thắng	đứng trước danh từ: winning goal, winning team	She scored the winning goal.	Cô ấy ghi bàn thắng quyết định.		/ˈwɪnɪŋ/
+compete	compete	verb	3	sports	thi đấu, tranh tài	tham gia một cuộc thi để giành chiến thắng	More than 200 countries compete in the Olympics.	Hơn 200 quốc gia tranh tài tại Thế vận hội.		/kəmˈpiːt/
+defend	defend	verb	3	sports	phòng ngự	ngăn đối phương ghi bàn, ghi điểm	We need to defend better in the second half.	Hiệp hai chúng ta cần phòng ngự tốt hơn.		/dɪˈfend/
+attack.sport	attack	verb	3	sports	tấn công	dâng lên tìm cách ghi bàn, ghi điểm	Our team attacked from the first minute.	Đội chúng tôi tấn công ngay từ phút đầu tiên.		/əˈtæk/
+pass.ball	pass	verb	3	sports	chuyền bóng	đá hoặc ném bóng cho đồng đội	Pass the ball to Nam, he's free!	Chuyền bóng cho Nam đi, cậu ấy đang trống!		/pɑːs/
+qualify	qualify	verb	3	sports	giành quyền vào (vòng sau)	đạt đủ thành tích để được dự vòng tiếp theo, giải lớn hơn	Vietnam qualified for the final round.	Việt Nam đã giành quyền vào vòng chung kết.		/ˈkwɒlɪfaɪ/
+kick_off	kick off	phrasal_verb	3	sports	bắt đầu trận đấu	trận bóng đá chính thức bắt đầu bằng quả giao bóng	The match kicks off at 8 pm.	Trận đấu bắt đầu lúc 8 giờ tối.
+cheer_on	cheer on	phrasal_verb	3	sports	cổ vũ, động viên (ai) cố lên	hò hét khích lệ người đang thi đấu	Thousands of fans came to cheer on the team.	Hàng nghìn cổ động viên đến cổ vũ cho đội.
+cool_down	cool down	phrasal_verb	3	sports	thả lỏng (sau khi tập)	tập nhẹ để cơ thể trở lại bình thường sau vận động mạnh	Walk slowly for five minutes to cool down.	Đi bộ chậm năm phút để thả lỏng.
+take_up.sport	take up	phrasal_verb	3	sports	bắt đầu chơi (một môn mới)	bắt đầu tập một môn thể thao hay một sở thích	I took up tennis last year.	Tôi bắt đầu chơi quần vợt từ năm ngoái.
+stay_in_shape	stay in shape	collocation	3	sports	giữ vóc dáng cân đối	tập luyện để cơ thể luôn khỏe và gọn	She runs every morning to stay in shape.	Cô ấy chạy mỗi sáng để giữ vóc dáng.	keep in shape
+break_a_record	break a record	collocation	3	sports	phá kỷ lục	đạt thành tích tốt hơn kỷ lục cũ	She broke the national record in the 200 metres.	Cô ấy phá kỷ lục quốc gia ở nội dung 200 mét.
+set_a_record	set a record	collocation	3	sports	lập kỷ lục	đạt thành tích tốt nhất, tạo ra kỷ lục mới	He set a new record in the long jump.	Anh ấy lập kỷ lục mới ở môn nhảy xa.
+out_of_breath	out of breath	collocation	3	sports	hụt hơi, thở không ra hơi	thở gấp sau khi chạy hoặc vận động mạnh	I was out of breath after running up the hill.	Tôi thở không ra hơi sau khi chạy lên đồi.
+sore_muscles	sore muscles	collocation	3	sports	đau nhức cơ	cơ bắp đau sau khi tập luyện nhiều	I had sore muscles after my first yoga class.	Tôi bị đau nhức cơ sau buổi yoga đầu tiên.
+athletic	athletic	adjective	3	sports	có thân hình khỏe khoắn, giỏi vận động	nói về người có cơ thể khỏe, nhanh nhẹn như vận động viên	He is tall and athletic.	Anh ấy cao và có thân hình khỏe khoắn.		/æθˈletɪk/
+competitive	competitive	adjective	3	sports	ham thắng, có tính cạnh tranh	người luôn muốn thắng; hoặc trận đấu có sự cạnh tranh	My brother is very competitive, he hates losing.	Anh tôi rất ham thắng, anh ấy ghét thua.		/kəmˈpetətɪv/
+professional.sport	professional	adjective	3	sports	chuyên nghiệp	chơi thể thao như một nghề và được trả lương	He wants to be a professional footballer.	Cậu ấy muốn trở thành cầu thủ bóng đá chuyên nghiệp.		/prəˈfeʃənl/
+amateur	amateur	adjective	3	sports	nghiệp dư	chơi thể thao vì thích, không nhận lương	He plays for an amateur team at the weekend.	Anh ấy chơi cho một đội nghiệp dư vào cuối tuần.		/ˈæmətə/
+skilful	skilful	adjective	3	sports	khéo léo, có kỹ thuật	cầu thủ, vận động viên chơi giỏi, nhiều kỹ thuật	He is a skilful player with the ball.	Anh ấy là một cầu thủ đi bóng rất khéo léo.	skillful	/ˈskɪlfl/
+flexible	flexible	adjective	3	sports	dẻo, dẻo dai	cơ thể có thể uốn cong, duỗi dễ dàng	Yoga makes your body more flexible.	Yoga giúp cơ thể bạn dẻo hơn.		/ˈfleksəbl/
+injured	injured	adjective	3	sports	bị chấn thương	vận động viên bị thương nên không thi đấu được	Our best player is injured and can't play today.	Cầu thủ giỏi nhất của chúng tôi bị chấn thương và không thể ra sân hôm nay.		/ˈɪndʒəd/
+fair.sport	fair	adjective	3	sports	công bằng, đúng luật	thi đấu, phân xử theo đúng luật, không thiên vị	The referee was fair to both teams.	Trọng tài công bằng với cả hai đội.		/feə/
+unfit	unfit	adjective	3	sports	thiếu thể lực	cơ thể yếu, mau mệt vì ít tập luyện	I'm so unfit, I can't run for five minutes.	Tôi yếu quá, không chạy nổi năm phút.		/ʌnˈfɪt/
+underwater	underwater	adverb	3	sports	dưới nước	bơi, lặn ở bên dưới mặt nước	Can you swim underwater?	Bạn có bơi dưới nước được không?		/ˌʌndəˈwɔːtə/
+away.match	away	adverb	3	sports	trên sân khách	thi đấu ở sân của đội khác	We play away next Saturday.	Thứ Bảy tới chúng tôi đá trên sân khách.		/əˈweɪ/
+championship	championship	noun	4	sports	giải vô địch	giải đấu lớn để tìm ra nhà vô địch	She won the national championship at sixteen.	Cô ấy vô địch giải quốc gia năm mười sáu tuổi.		/ˈtʃæmpiənʃɪp/
+title.sport	title	noun	4	sports	danh hiệu vô địch	vị trí nhà vô địch của một giải đấu	The team won the title for the third time.	Đội giành danh hiệu vô địch lần thứ ba.		/ˈtaɪtl/
+runner-up	runner-up	noun	4	sports	người về nhì, đội á quân	người hoặc đội xếp thứ hai trong cuộc thi	The runner-up got a silver medal.	Người về nhì nhận huy chương bạc.		/ˌrʌnərˈʌp/
+rival	rival	noun	4	sports	kình địch	người hoặc đội thường xuyên cạnh tranh với mình	The two clubs have been rivals for 100 years.	Hai câu lạc bộ là kình địch suốt 100 năm.		/ˈraɪvl/
+squad	squad	noun	4	sports	đội hình, đội tuyển	nhóm cầu thủ được chọn cho một giải hoặc trận đấu	He was picked for the national squad.	Anh ấy được chọn vào đội tuyển quốc gia.		/skwɒd/
+substitute	substitute	noun	4	sports	cầu thủ vào thay, cầu thủ dự bị	cầu thủ vào sân thay cho người khác	The substitute scored two minutes after coming on.	Cầu thủ vào thay đã ghi bàn hai phút sau khi vào sân.	sub	/ˈsʌbstɪtjuːt/
+striker	striker	noun	4	sports	tiền đạo	cầu thủ chơi trên cùng, có nhiệm vụ ghi bàn	Our striker scored twenty goals this season.	Tiền đạo của chúng tôi ghi hai mươi bàn mùa này.	forward	/ˈstraɪkə/
+spectator	spectator	noun	4	sports	khán giả (xem thi đấu)	người đến sân xem trận đấu, sự kiện thể thao	Over 40,000 spectators watched the final.	Hơn 40.000 khán giả đã xem trận chung kết.		/spekˈteɪtə/
+kit.sport	kit	noun	4	sports	bộ đồ thi đấu	quần áo, giày, dụng cụ dùng cho một môn thể thao	Don't forget your football kit tomorrow.	Mai đừng quên bộ đồ đá bóng nhé.		/kɪt/
+home_ground	home ground	noun	4	sports	sân nhà	sân thi đấu chính của một đội	They have never lost at their home ground.	Họ chưa bao giờ thua trên sân nhà.
+free_kick	free kick	noun	4	sports	quả đá phạt	cú đá được hưởng khi đối phương phạm lỗi	He scored from a free kick.	Anh ấy ghi bàn từ một quả đá phạt.
+corner.football	corner	noun	4	sports	quả phạt góc	cú đá từ góc sân khi bóng ra ngoài đường biên ngang	We got a corner in the last minute.	Chúng tôi được hưởng quả phạt góc ở phút cuối.	corner kick	/ˈkɔːnə/
+offside	offside	adjective	4	sports	việt vị	cầu thủ đứng sai vị trí khi nhận bóng trong bóng đá	The goal didn't count because he was offside.	Bàn thắng không được công nhận vì anh ấy việt vị.		/ˌɒfˈsaɪd/
+extra_time	extra time	noun	4	sports	hiệp phụ	thời gian đá thêm khi hai đội hòa sau 90 phút	The game went to extra time.	Trận đấu bước sang hiệp phụ.	overtime
+own_goal	own goal	noun	4	sports	bàn phản lưới nhà	bàn thắng do cầu thủ đưa bóng vào lưới đội mình	The defender scored an own goal by mistake.	Hậu vệ vô tình đá phản lưới nhà.
+foul	foul	noun	4	sports	lỗi (phạm luật)	hành động trái luật như đẩy, đá vào người đối thủ	The referee gave a foul against him.	Trọng tài thổi phạt lỗi của anh ấy.		/faʊl/
+relay_race	relay race	noun	4	sports	chạy tiếp sức	cuộc đua mỗi đội có nhiều người chạy nối tiếp nhau	Our class won the relay race.	Lớp tôi thắng cuộc chạy tiếp sức.	relay
+hurdle	hurdle	noun	4	sports	rào (chạy vượt rào)	thanh chắn vận động viên phải nhảy qua khi chạy	He fell over the last hurdle.	Anh ấy vấp ngã ở chiếc rào cuối cùng.		/ˈhɜːdl/
+wrestling	wrestling	noun	4	sports	đấu vật	môn hai người vật nhau, cố quật ngã đối thủ	Wrestling is one of the oldest sports.	Đấu vật là một trong những môn thể thao lâu đời nhất.		/ˈreslɪŋ/
+rowing	rowing	noun	4	sports	môn chèo thuyền	môn đua thuyền bằng mái chèo	She does rowing on the river every morning.	Sáng nào cô ấy cũng chèo thuyền trên sông.		/ˈrəʊɪŋ/
+sailing	sailing	noun	4	sports	môn thuyền buồm	điều khiển thuyền buồm để chơi hoặc thi đấu	Sailing is difficult when there is no wind.	Đi thuyền buồm thật khó khi không có gió.		/ˈseɪlɪŋ/
+scuba_diving	scuba diving	noun	4	sports	lặn có bình dưỡng khí	lặn sâu dưới biển với bình khí đeo trên lưng	We went scuba diving in Nha Trang.	Chúng tôi đi lặn biển ở Nha Trang.
+fierce	fierce	adjective	4	sports	quyết liệt, gay gắt	nói về sự cạnh tranh, trận đấu căng thẳng	There is fierce competition for places in the team.	Có sự cạnh tranh quyết liệt để có chỗ trong đội.		/fɪəs/
+shuttlecock	shuttlecock	noun	4	sports	quả cầu (cầu lông, đá cầu)	quả cầu có lông vũ dùng để đánh hoặc đá	Kids in Vietnam often kick a shuttlecock in the schoolyard.	Trẻ em Việt Nam hay đá cầu ở sân trường.		/ˈʃʌtlkɒk/
+mascot	mascot	noun	4	sports	linh vật	con vật hoặc nhân vật đại diện cho đội, giải đấu	The team's mascot is a big blue bird.	Linh vật của đội là một chú chim lớn màu xanh.		/ˈmæskɒt/
+chant	chant	verb	4	sports	hô vang	cổ động viên cùng hô một câu nhiều lần	The fans chanted the player's name.	Cổ động viên hô vang tên cầu thủ.		/tʃɑːnt/
+stamina	stamina	noun	4	sports	sức bền	khả năng vận động lâu mà không mệt	You need a lot of stamina to run a marathon.	Bạn cần sức bền tốt để chạy marathon.		/ˈstæmɪnə/
+flexibility	flexibility	noun	4	sports	độ dẻo dai	khả năng cơ thể uốn cong, duỗi dễ dàng	Stretching improves your flexibility.	Giãn cơ giúp tăng độ dẻo dai.		/ˌfleksəˈbɪləti/
+pace	pace	noun	4	sports	tốc độ, nhịp độ	tốc độ chạy, đi hoặc chơi của một người, một trận đấu	She kept a steady pace for the whole race.	Cô ấy giữ tốc độ đều suốt cuộc đua.		/peɪs/
+cramp	cramp	noun	4	sports	chuột rút	cơn co cơ đột ngột gây đau khi vận động	He got cramp in his leg and had to stop.	Anh ấy bị chuột rút ở chân và phải dừng lại.		/kræmp/
+fair_play	fair play	noun	4	sports	tinh thần chơi đẹp	thi đấu trung thực, tôn trọng luật và đối thủ	The team won a prize for fair play.	Đội đã nhận giải thưởng tinh thần chơi đẹp.
+team_spirit	team spirit	noun	4	sports	tinh thần đồng đội	sự đoàn kết, giúp đỡ nhau giữa các thành viên	Good team spirit helped us win.	Tinh thần đồng đội tốt đã giúp chúng tôi chiến thắng.
+dribble	dribble	verb	4	sports	rê bóng, dẫn bóng	đưa bóng đi bằng những cú chạm nhẹ liên tục	He dribbled past three defenders.	Anh ấy rê bóng qua ba hậu vệ.		/ˈdrɪbl/
+tackle	tackle	verb	4	sports	vào bóng, cướp bóng	lấy bóng khỏi chân hoặc tay đối phương	The defender tackled him hard.	Hậu vệ vào bóng rất mạnh với anh ấy.		/ˈtækl/

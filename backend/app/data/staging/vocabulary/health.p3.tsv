@@ -1,0 +1,97 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+relieve	relieve	verb	4	health	làm dịu, làm giảm (cơn đau)	làm cho cơn đau, triệu chứng bớt đi	This cream will relieve the itching.	Loại kem này sẽ làm dịu cơn ngứa.		/rɪˈliːv/
+inhale	inhale	verb	4	health	hít vào	đưa không khí, khói, thuốc vào phổi	Inhale slowly through your nose.	Hít vào chậm bằng mũi.		/ɪnˈheɪl/
+exhale	exhale	verb	4	health	thở ra	đẩy không khí ra khỏi phổi	Now exhale through your mouth.	Bây giờ thở ra bằng miệng.		/eksˈheɪl/
+numb	numb	adjective	4	health	tê, mất cảm giác	bộ phận cơ thể không cảm thấy gì vì lạnh hoặc thuốc tê	My fingers were numb with cold.	Các ngón tay tôi tê cóng vì lạnh.		/nʌm/
+limp	limp	verb	4	health	đi khập khiễng	bước đi không đều vì đau chân	He limped off the field with a bad knee.	Anh ấy đi khập khiễng ra khỏi sân vì đầu gối bị đau.		/lɪmp/
+operate.surgery	operate	verb	4	health	mổ, phẫu thuật cho	bác sĩ mổ để chữa bệnh cho ai đó	The doctors decided to operate on her leg.	Các bác sĩ quyết định mổ chân cho cô ấy.		/ˈɒpəreɪt/
+hygienic	hygienic	adjective	4	health	hợp vệ sinh	sạch sẽ, không có vi trùng	The kitchen must be kept hygienic.	Nhà bếp phải được giữ hợp vệ sinh.		/haɪˈdʒiːnɪk/
+posture	posture	noun	4	health	tư thế (đứng, ngồi)	cách giữ cơ thể khi ngồi hoặc đứng	Bad posture can cause back pain.	Tư thế sai có thể gây đau lưng.		/ˈpɒstʃə/
+fibre	fibre	noun	4	health	chất xơ	chất trong rau, ngũ cốc giúp tiêu hóa tốt	Brown rice is high in fibre.	Gạo lứt có nhiều chất xơ.	fiber	/ˈfaɪbə/
+self-care	self-care	noun	4	health	sự tự chăm sóc bản thân	việc chủ động giữ gìn sức khỏe thể chất và tinh thần	Getting enough sleep is an important part of self-care.	Ngủ đủ giấc là một phần quan trọng của việc tự chăm sóc bản thân.		/ˌselfˈkeə/
+medically	medically	adverb	4	health	về mặt y học	theo quan điểm, kiến thức y khoa	He is medically fit to work again.	Về mặt y học, anh ấy đủ sức khỏe để làm việc lại.		/ˈmedɪkli/
+stay_hydrated	stay hydrated	collocation	4	health	giữ đủ nước cho cơ thể	uống nước thường xuyên, nhất là khi nóng hoặc tập luyện	Remember to stay hydrated during the race.	Nhớ giữ đủ nước cho cơ thể trong suốt cuộc đua.
+mental_illness	mental illness	noun	4	health	bệnh tâm thần	bệnh ảnh hưởng đến suy nghĩ, cảm xúc, hành vi	Mental illness is nothing to be ashamed of.	Bệnh tâm thần không phải điều gì đáng xấu hổ.
+medical_history	medical history	noun	4	health	tiền sử bệnh	các bệnh và cách chữa mà một người đã có trước đây	The doctor asked about my medical history.	Bác sĩ hỏi về tiền sử bệnh của tôi.
+wisdom_tooth	wisdom tooth	noun	4	health	răng khôn	răng hàm mọc muộn nhất, ở cuối hàm	I had my wisdom tooth taken out last week.	Tuần trước tôi đã nhổ răng khôn.
+hay_fever	hay fever	noun	4	health	viêm mũi dị ứng phấn hoa	dị ứng phấn hoa vào mùa xuân, gây hắt hơi, ngứa mắt	I get hay fever every spring.	Mùa xuân nào tôi cũng bị viêm mũi dị ứng phấn hoa.
+stomach_bug	stomach bug	noun	4	health	chứng rối loạn tiêu hóa do vi-rút	bệnh nhẹ gây đau bụng, nôn, tiêu chảy vài ngày	She missed school because of a stomach bug.	Cô bé nghỉ học vì bị rối loạn tiêu hóa.
+digestive_system	digestive system	noun	4	health	hệ tiêu hóa	các cơ quan tiêu hóa thức ăn như dạ dày, ruột	Fibre helps your digestive system work well.	Chất xơ giúp hệ tiêu hóa của bạn hoạt động tốt.
+be_on_medication	be on medication	collocation	4	health	đang dùng thuốc điều trị	đang uống thuốc đều đặn theo đơn của bác sĩ	Are you on any medication at the moment?	Hiện tại bạn có đang dùng thuốc gì không?
+life_expectancy	life expectancy	noun	4	health	tuổi thọ trung bình	số năm trung bình một người được dự đoán sẽ sống	Life expectancy in Vietnam is about 74 years.	Tuổi thọ trung bình ở Việt Nam khoảng 74 năm.
+fight_off	fight off	phrasal_verb	4	health	chống lại (bệnh)	cơ thể đánh bại vi-rút, vi khuẩn	Vitamin C may help your body fight off colds.	Vitamin C có thể giúp cơ thể chống lại cảm lạnh.
+intensive_care	intensive care	noun	4	health	khoa hồi sức tích cực	khu chăm sóc bệnh nhân rất nặng trong bệnh viện	After the accident he spent a week in intensive care.	Sau vụ tai nạn anh ấy nằm một tuần ở khoa hồi sức tích cực.
+operating_theatre	operating theatre	noun	4	health	phòng mổ	phòng trong bệnh viện nơi bác sĩ phẫu thuật	The patient was taken to the operating theatre.	Bệnh nhân được đưa vào phòng mổ.	operating room
+make_a_full_recovery	make a full recovery	collocation	4	health	hồi phục hoàn toàn	khỏe lại hoàn toàn sau bệnh hoặc chấn thương	The doctors expect her to make a full recovery.	Các bác sĩ hy vọng cô ấy sẽ hồi phục hoàn toàn.
+panic_attack	panic attack	noun	4	health	cơn hoảng loạn	cơn sợ hãi đột ngột kèm tim đập nhanh, khó thở	She had a panic attack before the exam.	Cô ấy bị một cơn hoảng loạn trước kỳ thi.
+tooth_decay	tooth decay	noun	4	health	sâu răng	răng bị hỏng do vi khuẩn và đồ ngọt	Too many sweets can cause tooth decay.	Ăn quá nhiều kẹo có thể gây sâu răng.
+donate_blood	donate blood	collocation	4	health	hiến máu	cho máu của mình để giúp người bệnh	I donate blood twice a year.	Tôi hiến máu hai lần một năm.	give blood
+diagnose	diagnose	verb	5	health	chẩn đoán	bác sĩ xác định người bệnh mắc bệnh gì	She was diagnosed with diabetes last year.	Cô ấy được chẩn đoán mắc tiểu đường năm ngoái.		/ˈdaɪəɡnəʊz/
+under_the_weather	under the weather	idiom	5	health	hơi mệt, không được khỏe	cảm thấy hơi ốm nhưng không nặng	I'm feeling a bit under the weather today.	Hôm nay tôi thấy trong người hơi mệt.
+pandemic	pandemic	noun	5	health	đại dịch	dịch bệnh lan rộng ra nhiều nước trên thế giới	Schools closed during the pandemic.	Các trường học đóng cửa trong thời kỳ đại dịch.		/pænˈdemɪk/
+quarantine	quarantine	noun	5	health	sự cách ly (y tế)	giữ người hoặc vật nuôi riêng ra để bệnh không lây	Travellers had to stay in quarantine for two weeks.	Du khách phải cách ly trong hai tuần.		/ˈkwɒrəntiːn/
+acute	acute	adjective	5	health	cấp tính	bệnh đến đột ngột và nặng, trái với mãn tính	He was taken to hospital with acute stomach pain.	Anh ấy được đưa vào viện vì đau bụng cấp.		/əˈkjuːt/
+overdose	overdose	noun	5	health	sự quá liều	uống hoặc dùng thuốc nhiều quá mức an toàn	She was rushed to hospital after an overdose.	Cô ấy được đưa gấp vào viện sau khi dùng thuốc quá liều.		/ˈəʊvədəʊs/
+anaesthetic	anaesthetic	noun	5	health	thuốc gây mê, thuốc tê	thuốc làm mất cảm giác đau khi mổ	The operation is done under a general anaesthetic.	Ca mổ được thực hiện dưới gây mê toàn thân.	anesthetic	/ˌænəsˈθetɪk/
+relapse	relapse	noun	5	health	sự tái phát	bệnh quay trở lại sau khi đã đỡ	He had a relapse after leaving hospital too early.	Ông ấy bị tái phát sau khi xuất viện quá sớm.		/rɪˈlæps/
+critically	critically	adverb	5	health	một cách nguy kịch	bệnh hoặc bị thương rất nặng, có thể tử vong	Two people are critically ill in hospital.	Hai người đang trong tình trạng nguy kịch ở bệnh viện.		/ˈkrɪtɪkli/
+terminally	terminally	adverb	5	health	ở giai đoạn cuối	bệnh không chữa được và sẽ dẫn đến tử vong	She looks after terminally ill people at home.	Cô ấy chăm sóc những người bệnh giai đoạn cuối tại nhà.		/ˈtɜːmɪnəli/
+chronically	chronically	adverb	5	health	một cách mãn tính, kéo dài	bệnh kéo dài nhiều năm	Many chronically ill people need daily care.	Nhiều người bệnh mãn tính cần được chăm sóc hằng ngày.		/ˈkrɒnɪkli/
+orally	orally	adverb	5	health	qua đường uống	cách dùng thuốc bằng miệng	This medicine should be taken orally.	Thuốc này phải được dùng qua đường uống.		/ˈɔːrəli/
+internally	internally	adverb	5	health	ở bên trong cơ thể	nói về chảy máu, tổn thương bên trong	After the crash he was bleeding internally.	Sau vụ va chạm anh ấy bị chảy máu trong.		/ɪnˈtɜːnəli/
+wheeze	wheeze	verb	5	health	thở khò khè	thở có tiếng rít, thường do hen suyễn	The boy was wheezing and needed his inhaler.	Cậu bé thở khò khè và cần bình xịt.		/wiːz/
+dislocate	dislocate	verb	5	health	làm trật khớp	xương bị lệch ra khỏi khớp	He dislocated his shoulder playing rugby.	Anh ấy bị trật khớp vai khi chơi bóng bầu dục.		/ˈdɪsləkeɪt/
+paralysed	paralysed	adjective	5	health	bị liệt	không cử động được một phần cơ thể	She was paralysed from the waist down after the accident.	Cô ấy bị liệt nửa người dưới sau vụ tai nạn.	paralyzed	/ˈpærəlaɪzd/
+hereditary	hereditary	adjective	5	health	di truyền	bệnh truyền từ cha mẹ sang con cái	Some heart problems are hereditary.	Một số bệnh tim có tính di truyền.		/həˈredɪtri/
+sterile	sterile	adjective	5	health	vô trùng	hoàn toàn sạch, không có vi khuẩn	Doctors must use sterile equipment.	Bác sĩ phải dùng dụng cụ vô trùng.		/ˈsteraɪl/
+malnutrition	malnutrition	noun	5	health	suy dinh dưỡng	tình trạng cơ thể thiếu chất do ăn không đủ	Many children in poor areas suffer from malnutrition.	Nhiều trẻ em ở vùng nghèo bị suy dinh dưỡng.		/ˌmælnjuˈtrɪʃn/
+metabolism	metabolism	noun	5	health	sự trao đổi chất	quá trình cơ thể biến thức ăn thành năng lượng	Exercise can speed up your metabolism.	Tập thể dục có thể đẩy nhanh quá trình trao đổi chất.		/məˈtæbəlɪzəm/
+inflammation	inflammation	noun	5	health	chứng viêm	chỗ sưng, đỏ, nóng, đau trong cơ thể	This medicine reduces inflammation in the joints.	Thuốc này làm giảm viêm ở các khớp.		/ˌɪnfləˈmeɪʃn/
+outpatient	outpatient	noun	5	health	bệnh nhân ngoại trú	người khám chữa bệnh rồi về trong ngày, không nằm viện	He is being treated as an outpatient.	Anh ấy đang được điều trị ngoại trú.		/ˈaʊtpeɪʃnt/
+paediatrician	paediatrician	noun	5	health	bác sĩ nhi khoa	bác sĩ chuyên chữa bệnh cho trẻ em	Take the baby to a paediatrician if the fever continues.	Đưa bé đến bác sĩ nhi nếu vẫn còn sốt.	pediatrician	/ˌpiːdiəˈtrɪʃn/
+physiotherapy	physiotherapy	noun	5	health	vật lý trị liệu	chữa bệnh bằng bài tập, xoa bóp, nhiệt	After the knee operation she needed physiotherapy.	Sau ca mổ đầu gối, cô ấy cần tập vật lý trị liệu.	physical therapy	/ˌfɪziəʊˈθerəpi/
+psychiatrist	psychiatrist	noun	5	health	bác sĩ tâm thần	bác sĩ chữa các bệnh về tâm thần	The psychiatrist prescribed medicine for his depression.	Bác sĩ tâm thần đã kê thuốc trị trầm cảm cho anh ấy.		/saɪˈkaɪətrɪst/
+antibody	antibody	noun	5	health	kháng thể	chất cơ thể tạo ra để chống lại vi khuẩn, vi-rút	The vaccine helps your body make antibodies.	Vắc-xin giúp cơ thể tạo ra kháng thể.		/ˈæntibɒdi/
+frail	frail	adjective	5	health	yếu ớt, ốm yếu	người già hoặc người bệnh gầy yếu, dễ ngã	My grandmother is too frail to walk alone.	Bà tôi quá yếu để tự đi một mình.		/freɪl/
+bedridden	bedridden	adjective	5	health	nằm liệt giường	ốm nặng hoặc già yếu, không rời giường được	He has been bedridden since his stroke.	Ông ấy nằm liệt giường từ khi bị đột quỵ.		/ˈbedrɪdn/
+lethargic	lethargic	adjective	5	health	uể oải, lờ đờ	thiếu năng lượng, không muốn làm gì, thường do bệnh	The heat made everyone feel lethargic.	Cái nóng khiến ai cũng thấy uể oải.		/ləˈθɑːdʒɪk/
+immunise	immunise	verb	5	health	tiêm chủng, gây miễn dịch	cho ai đó tiêm vắc-xin để không mắc bệnh	All children should be immunised against polio.	Tất cả trẻ em đều nên được tiêm chủng phòng bại liệt.	immunize|vaccinate	/ˈɪmjunaɪz/
+run-down	run-down	adjective	5	health	suy nhược, dễ ốm	cơ thể yếu đi vì làm việc quá sức, thiếu nghỉ ngơi	I've been feeling run-down since I started my new job.	Tôi thấy suy nhược từ khi bắt đầu công việc mới.		/ˌrʌnˈdaʊn/
+life-threatening	life-threatening	adjective	5	health	đe dọa tính mạng	bệnh hoặc vết thương có thể gây chết người	Her injuries are not life-threatening.	Vết thương của cô ấy không đe dọa tính mạng.
+vital_signs	vital signs	noun	5	health	các dấu hiệu sinh tồn	mạch, nhịp thở, huyết áp, thân nhiệt của người bệnh	The nurse checks the patient's vital signs every hour.	Y tá kiểm tra các dấu hiệu sinh tồn của bệnh nhân mỗi giờ.
+pins_and_needles	pins and needles	idiom	5	health	cảm giác tê rần, kiến bò	cảm giác châm chích khi tay chân bị tê	I sat on my foot and now I've got pins and needles.	Tôi ngồi đè lên chân nên giờ bị tê rần.
+on_the_mend	on the mend	idiom	5	health	đang bình phục	đang khỏe dần lên sau khi ốm hoặc bị thương	Dad was very ill, but he's on the mend now.	Bố bị ốm nặng, nhưng giờ đang bình phục rồi.
+as_fit_as_a_fiddle	as fit as a fiddle	idiom	5	health	khỏe như vâm	rất khỏe mạnh, thường nói về người lớn tuổi	At eighty, my grandfather is as fit as a fiddle.	Ở tuổi tám mươi, ông tôi vẫn khỏe như vâm.
+get_a_second_opinion	get a second opinion	collocation	5	health	hỏi ý kiến bác sĩ khác	nhờ bác sĩ khác khám lại để chắc chắn về chẩn đoán	Before the operation, you should get a second opinion.	Trước khi mổ, bạn nên hỏi ý kiến một bác sĩ khác.
+flare_up	flare up	phrasal_verb	5	health	tái phát, bùng lên	bệnh mãn tính đột nhiên nặng lên trở lại	My asthma flares up in cold weather.	Bệnh hen của tôi tái phát khi trời lạnh.
+sleep_deprivation	sleep deprivation	noun	5	health	tình trạng thiếu ngủ	không được ngủ đủ trong thời gian dài	Sleep deprivation can affect your memory.	Thiếu ngủ có thể ảnh hưởng đến trí nhớ.
+nervous_breakdown	nervous breakdown	noun	5	health	suy sụp tinh thần	khi một người không chịu nổi áp lực, không sinh hoạt bình thường được	He had a nervous breakdown after years of stress.	Anh ấy bị suy sụp tinh thần sau nhiều năm căng thẳng.
+eating_disorder	eating disorder	noun	5	health	chứng rối loạn ăn uống	bệnh tâm lý khiến người bệnh ăn quá ít hoặc quá nhiều	Eating disorders are common among teenage girls.	Rối loạn ăn uống thường gặp ở các bạn gái tuổi teen.
+in_moderation	in moderation	collocation	5	health	có chừng mực, vừa phải	ăn uống, dùng thứ gì một lượng vừa phải	Chocolate is fine if you eat it in moderation.	Sô-cô-la không sao nếu bạn ăn có chừng mực.
+blood_transfusion	blood transfusion	noun	5	health	sự truyền máu	đưa máu của người khác vào cơ thể bệnh nhân	She lost a lot of blood and needed a blood transfusion.	Cô ấy mất nhiều máu và cần được truyền máu.
+bounce_back	bounce back	phrasal_verb	5	health	hồi phục nhanh	khỏe lại nhanh sau khi ốm hoặc gặp khó khăn	Children usually bounce back quickly after a cold.	Trẻ em thường hồi phục nhanh sau khi bị cảm.
+back_on_your_feet	back on your feet	idiom	5	health	khỏe lại, đứng dậy được	trở lại sinh hoạt bình thường sau khi ốm	Get some rest and you'll be back on your feet in no time.	Nghỉ ngơi đi, bạn sẽ sớm khỏe lại thôi.
+alleviate	alleviate	verb	6	health	làm giảm nhẹ	làm cho cơn đau, triệu chứng bớt nghiêm trọng	The drugs helped to alleviate his pain.	Thuốc đã giúp làm giảm nhẹ cơn đau của ông ấy.		/əˈliːvieɪt/
+benign	benign	adjective	6	health	lành tính	khối u không gây ung thư, không nguy hiểm	Luckily, the tumour was benign.	May mắn là khối u lành tính.		/bɪˈnaɪn/
+malignant	malignant	adjective	6	health	ác tính	khối u gây ung thư, có thể lan rộng	The doctors found a malignant tumour in his lung.	Các bác sĩ tìm thấy một khối u ác tính trong phổi ông ấy.		/məˈlɪɡnənt/
+prognosis	prognosis	noun	6	health	tiên lượng bệnh	dự đoán của bác sĩ về diễn biến của bệnh	The prognosis is good if the cancer is found early.	Tiên lượng sẽ tốt nếu ung thư được phát hiện sớm.		/prɒɡˈnəʊsɪs/
+remission	remission	noun	6	health	sự thuyên giảm	giai đoạn bệnh nặng như ung thư tạm lui đi	After two years of treatment, she is in remission.	Sau hai năm điều trị, bệnh của cô ấy đã thuyên giảm.		/rɪˈmɪʃn/
+asymptomatic	asymptomatic	adjective	6	health	không có triệu chứng	mắc bệnh nhưng không biểu hiện ra ngoài	Many people with the virus were asymptomatic.	Nhiều người nhiễm vi-rút không có triệu chứng.		/ˌeɪsɪmptəˈmætɪk/
+exacerbate	exacerbate	verb	6	health	làm trầm trọng thêm	khiến bệnh, triệu chứng nặng hơn	Smoking can exacerbate asthma.	Hút thuốc có thể làm bệnh hen nặng thêm.		/ɪɡˈzæsəbeɪt/
+contract.disease	contract	verb	6	health	mắc phải, nhiễm (bệnh)	cách nói trang trọng khi bị nhiễm một bệnh	He contracted malaria while travelling in Africa.	Anh ấy bị nhiễm sốt rét khi đi du lịch châu Phi.		/kənˈtrækt/
+abstain	abstain	verb	6	health	kiêng, tránh (rượu, thuốc lá)	tự kiềm chế không dùng thứ có hại	Patients must abstain from alcohol while taking this drug.	Bệnh nhân phải kiêng rượu trong khi dùng thuốc này.		/əbˈsteɪn/
+placebo	placebo	noun	6	health	giả dược	viên thuốc không có tác dụng, dùng để thử nghiệm	Half the patients were given a placebo.	Một nửa số bệnh nhân được cho dùng giả dược.		/pləˈsiːbəʊ/
+debilitating	debilitating	adjective	6	health	gây suy nhược	bệnh làm cơ thể yếu đi nhiều, khó sinh hoạt	Arthritis can be a debilitating disease.	Viêm khớp có thể là một căn bệnh gây suy nhược.		/dɪˈbɪlɪteɪtɪŋ/
+excruciating	excruciating	adjective	6	health	đau dữ dội, đau thấu xương	cơn đau cực kỳ khủng khiếp	He was in excruciating pain after breaking his leg.	Anh ấy đau dữ dội sau khi gãy chân.		/ɪkˈskruːʃieɪtɪŋ/
+holistic	holistic	adjective	6	health	toàn diện (cả thân và tâm)	cách chữa bệnh chăm sóc cả cơ thể lẫn tinh thần	The clinic takes a holistic approach to health.	Phòng khám áp dụng cách tiếp cận toàn diện về sức khỏe.		/həʊˈlɪstɪk/
+cardiac	cardiac	adjective	6	health	thuộc về tim	thuật ngữ y khoa liên quan đến tim	He died of cardiac arrest.	Ông ấy chết vì ngừng tim.		/ˈkɑːdiæk/
+clinically	clinically	adverb	6	health	về mặt lâm sàng	theo kết quả khám và xét nghiệm của bác sĩ	The new drug has been clinically tested.	Loại thuốc mới đã được thử nghiệm lâm sàng.		/ˈklɪnɪkli/
+intravenously	intravenously	adverb	6	health	qua đường tĩnh mạch	truyền thuốc, dịch thẳng vào ven	The drug is given intravenously in hospital.	Thuốc được truyền qua đường tĩnh mạch ở bệnh viện.		/ˌɪntrəˈviːnəsli/
+sparingly	sparingly	adverb	6	health	một lượng ít, tiết kiệm	dùng hoặc bôi thuốc ở mức vừa đủ, không nhiều	Apply the cream sparingly to the affected area.	Bôi một lượng kem nhỏ lên vùng bị ảnh hưởng.		/ˈspeərɪŋli/
+succumb_to	succumb to	phrasal_verb	6	health	không qua khỏi, chết vì (bệnh)	cách nói trang trọng khi chết vì bệnh hoặc vết thương	He finally succumbed to cancer at the age of 70.	Cuối cùng ông ấy không qua khỏi căn bệnh ung thư ở tuổi 70.
+a_clean_bill_of_health	a clean bill of health	idiom	6	health	được xác nhận hoàn toàn khỏe mạnh	khi bác sĩ kết luận ai đó không có bệnh gì	After the tests, the doctor gave me a clean bill of health.	Sau các xét nghiệm, bác sĩ kết luận tôi hoàn toàn khỏe mạnh.
+go_under_the_knife	go under the knife	idiom	6	health	lên bàn mổ	cách nói thân mật về việc phải phẫu thuật	She has to go under the knife next month.	Tháng sau cô ấy phải lên bàn mổ.
+kick_the_habit	kick the habit	idiom	6	health	cai, bỏ hẳn thói quen xấu	bỏ được thói nghiện như thuốc lá, rượu	After smoking for twenty years, he finally kicked the habit.	Sau hai mươi năm hút thuốc, cuối cùng ông ấy đã cai được.
+at_deaths_door	at death's door	idiom	6	health	cận kề cái chết	ốm rất nặng, tưởng như sắp chết	He was at death's door, but he recovered.	Ông ấy đã cận kề cái chết nhưng rồi hồi phục.
+take_a_toll_on	take a toll on	collocation	6	health	gây tổn hại cho	áp lực, công việc dần dần làm hại sức khỏe	Years of night shifts took a toll on his health.	Nhiều năm làm ca đêm đã gây tổn hại cho sức khỏe của anh ấy.
+black_and_blue	black and blue	idiom	6	health	bầm tím khắp người	người đầy vết bầm sau khi bị ngã hoặc bị đánh	After falling down the stairs, his legs were black and blue.	Sau khi ngã cầu thang, chân anh ấy bầm tím hết cả.

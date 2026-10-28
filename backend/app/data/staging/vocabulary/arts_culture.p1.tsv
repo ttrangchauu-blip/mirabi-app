@@ -1,0 +1,106 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+art	art	noun	1	arts_culture	nghệ thuật	hội họa, điêu khắc và các hình thức sáng tạo cái đẹp nói chung	She loves art and visits a museum every month.	Cô ấy yêu nghệ thuật và đi bảo tàng mỗi tháng.		/ɑːt/
+artist	artist	noun	1	arts_culture	nghệ sĩ	người sáng tác tác phẩm nghệ thuật như tranh, tượng	The artist showed us her new work.	Nữ nghệ sĩ cho chúng tôi xem tác phẩm mới của cô.		/ˈɑːtɪst/
+picture	picture	noun	1	arts_culture	bức tranh, bức hình	hình ảnh được vẽ hoặc chụp, nói chung	There is a picture of a cat on the wall.	Có một bức tranh con mèo trên tường.		/ˈpɪktʃə/
+draw	draw	verb	1	arts_culture	vẽ (bằng bút)	tạo hình bằng bút chì, bút mực, không dùng màu nước hay sơn	My son likes to draw animals.	Con trai tôi thích vẽ các con vật.		/drɔː/
+paint	paint	verb	1	arts_culture	vẽ bằng màu	vẽ tranh bằng màu nước hoặc sơn	She paints flowers in her free time.	Cô ấy vẽ hoa vào thời gian rảnh.		/peɪnt/
+story	story	noun	1	arts_culture	câu chuyện	lời kể về người và sự việc, có thật hoặc tưởng tượng	Grandma told us a story about her village.	Bà kể cho chúng tôi nghe một câu chuyện về ngôi làng của bà.		/ˈstɔːri/
+museum	museum	noun	1	arts_culture	bảo tàng	nơi trưng bày hiện vật lịch sử, tác phẩm nghệ thuật	We went to the museum on Sunday.	Chúng tôi đi bảo tàng vào Chủ nhật.		/mjuˈziːəm/
+festival	festival	noun	1	arts_culture	lễ hội	dịp vui chơi, nghi lễ chung của một cộng đồng	The village has a big festival every spring.	Làng có một lễ hội lớn vào mỗi mùa xuân.		/ˈfestɪvl/
+culture	culture	noun	1	arts_culture	văn hóa	phong tục, nghệ thuật, lối sống của một dân tộc	I want to learn about Japanese culture.	Tôi muốn tìm hiểu về văn hóa Nhật Bản.		/ˈkʌltʃə/
+poem	poem	noun	1	arts_culture	bài thơ	một tác phẩm thơ cụ thể	She wrote a short poem for her mother.	Cô ấy viết một bài thơ ngắn tặng mẹ.		/ˈpəʊɪm/
+writer	writer	noun	1	arts_culture	nhà văn	người viết truyện, viết sách	He wants to be a writer when he grows up.	Cậu ấy muốn trở thành nhà văn khi lớn lên.		/ˈraɪtə/
+painting	painting	noun	1	arts_culture	bức tranh (vẽ bằng màu)	tác phẩm vẽ bằng màu nước hoặc sơn dầu	This painting shows a small boat on the sea.	Bức tranh này vẽ một chiếc thuyền nhỏ trên biển.		/ˈpeɪntɪŋ/
+drawing	drawing	noun	1	arts_culture	bức vẽ (bằng bút chì)	hình vẽ bằng bút chì hoặc bút mực, không tô màu nước	The children put their drawings on the wall.	Bọn trẻ dán các bức vẽ của mình lên tường.		/ˈdrɔːɪŋ/
+traditional	traditional	adjective	1	arts_culture	cổ truyền, theo truyền thống	nói về món ăn, trang phục, phong tục có từ lâu đời	The ao dai is a traditional dress in Vietnam.	Áo dài là trang phục truyền thống ở Việt Nam.		/trəˈdɪʃənl/
+tradition	tradition	noun	1	arts_culture	truyền thống, tục lệ	thói quen, tập tục được giữ qua nhiều thế hệ	It is our tradition to eat together on the first day of the year.	Ăn cùng nhau vào ngày đầu năm là truyền thống của chúng tôi.		/trəˈdɪʃn/
+celebrate	celebrate	verb	1	arts_culture	đón, tổ chức (dịp lễ)	khi vui chơi, tổ chức nhân một ngày lễ, ngày đặc biệt	How do people celebrate Tet in your town?	Mọi người ở thị trấn của bạn đón Tết như thế nào?		/ˈselɪbreɪt/
+beautifully	beautifully	adverb	1	arts_culture	một cách đẹp đẽ	khen ai vẽ, hát, viết hoặc làm gì rất đẹp	She paints beautifully.	Cô ấy vẽ rất đẹp.		/ˈbjuːtɪfli/
+fairy_tale	fairy tale	noun	1	arts_culture	truyện cổ tích	truyện cho trẻ em có phép thuật, bà tiên, công chúa	My daughter reads a fairy tale every night.	Con gái tôi đọc một câu chuyện cổ tích mỗi tối.	fairytale
+once_upon_a_time	once upon a time	phrase	1	arts_culture	ngày xửa ngày xưa	câu mở đầu quen thuộc của truyện cổ tích	Once upon a time, there was a poor farmer.	Ngày xửa ngày xưa, có một người nông dân nghèo.
+tell_a_story	tell a story	collocation	1	arts_culture	kể chuyện	khi kể một câu chuyện cho người khác nghe	Dad tells us a story before bed.	Bố kể chuyện cho chúng tôi nghe trước khi đi ngủ.
+draw_a_picture	draw a picture	collocation	1	arts_culture	vẽ một bức tranh	vẽ bằng bút chì, bút màu trên giấy	Can you draw a picture of your house?	Con có thể vẽ một bức tranh về ngôi nhà của con không?
+write_a_poem	write a poem	collocation	1	arts_culture	làm một bài thơ	khi sáng tác một bài thơ	He wrote a poem for his teacher.	Cậu ấy làm một bài thơ tặng cô giáo.
+art_class	art class	collocation	1	arts_culture	giờ học vẽ, lớp mỹ thuật	tiết học vẽ ở trường hoặc lớp học vẽ bên ngoài	We made masks in art class today.	Hôm nay chúng tôi làm mặt nạ trong giờ học vẽ.
+visit_a_museum	visit a museum	collocation	1	arts_culture	tham quan bảo tàng	khi đến xem hiện vật ở bảo tàng	Our class will visit a museum next week.	Lớp chúng tôi sẽ đi tham quan bảo tàng vào tuần tới.
+happy_ending	happy ending	collocation	1	arts_culture	kết thúc có hậu	khi câu chuyện, vở kịch kết thúc vui vẻ	I like stories with a happy ending.	Tôi thích những câu chuyện có kết thúc có hậu.
+colour_in	colour in	phrasal_verb	1	arts_culture	tô màu (vào hình vẽ)	tô kín màu bên trong một hình có sẵn	Please colour in the flowers with your crayons.	Các con hãy dùng bút sáp tô màu những bông hoa.	color in
+lucky_money	lucky money	noun	1	arts_culture	tiền lì xì	tiền mừng tuổi trong phong bao đỏ dịp Tết	Children get lucky money from their grandparents at Tet.	Trẻ em nhận tiền lì xì từ ông bà vào dịp Tết.
+lunar_new_year	Lunar New Year	noun	1	arts_culture	Tết Nguyên đán	tết cổ truyền theo âm lịch ở Việt Nam và nhiều nước châu Á	Families get together during Lunar New Year.	Các gia đình sum họp trong dịp Tết Nguyên đán.
+go_to_the_theatre	go to the theatre	collocation	1	arts_culture	đi xem kịch	đi đến nhà hát xem một vở diễn	We sometimes go to the theatre on Saturday night.	Thỉnh thoảng chúng tôi đi xem kịch vào tối thứ Bảy.	go to the theater
+dress_up	dress up	phrasal_verb	1	arts_culture	hóa trang (thành)	mặc trang phục để giả làm nhân vật khác	The kids dressed up as animals for the festival.	Bọn trẻ hóa trang thành các con vật cho lễ hội.
+crayon	crayon	noun	1	arts_culture	bút sáp màu	dụng cụ tô màu của trẻ em làm bằng sáp	She drew a sun with a yellow crayon.	Cô bé vẽ mặt trời bằng bút sáp màu vàng.		/ˈkreɪɒn/
+paintbrush	paintbrush	noun	1	arts_culture	cọ vẽ	cây cọ dùng để vẽ tranh bằng màu	Wash your paintbrush after you finish.	Hãy rửa cọ vẽ sau khi vẽ xong.		/ˈpeɪntbrʌʃ/
+lantern	lantern	noun	1	arts_culture	đèn lồng	đèn có khung giấy hoặc vải, thường thấy dịp lễ hội	The children carried paper lanterns at night.	Bọn trẻ cầm đèn lồng giấy đi chơi vào buổi tối.		/ˈlæntən/
+temple	temple	noun	1	arts_culture	ngôi đền	nơi thờ thần, thánh hoặc người có công	Many people visit the temple on the first day of the year.	Nhiều người đi đền vào ngày đầu năm.		/ˈtempl/
+pagoda	pagoda	noun	1	arts_culture	ngôi chùa	nơi thờ Phật, thường có tháp nhiều tầng	There is an old pagoda near my house.	Có một ngôi chùa cổ gần nhà tôi.		/pəˈɡəʊdə/
+statue	statue	noun	1	arts_culture	bức tượng	hình người hoặc con vật làm bằng đá, đồng, gỗ	There is a big statue in the middle of the park.	Có một bức tượng lớn ở giữa công viên.		/ˈstætʃuː/
+stage	stage	noun	1	arts_culture	sân khấu	nơi diễn viên, ca sĩ đứng biểu diễn	The singer walked onto the stage.	Ca sĩ bước lên sân khấu.		/steɪdʒ/
+play.drama	play	noun	1	arts_culture	vở kịch	tác phẩm được diễn trên sân khấu	We watched a funny play at school.	Chúng tôi xem một vở kịch vui ở trường.		/pleɪ/
+theatre	theatre	noun	1	arts_culture	nhà hát (kịch)	nơi diễn kịch và các buổi biểu diễn sân khấu	The new theatre has five hundred seats.	Nhà hát mới có năm trăm chỗ ngồi.	theater	/ˈθɪətə/
+mask.costume	mask	noun	1	arts_culture	mặt nạ (hóa trang)	đồ che mặt dùng trong lễ hội, biểu diễn	He wore a tiger mask at the festival.	Cậu ấy đeo mặt nạ con hổ ở lễ hội.		/mɑːsk/
+firework	firework	noun	1	arts_culture	pháo hoa	loại pháo bắn lên trời tạo ánh sáng nhiều màu	We watched the fireworks from the roof.	Chúng tôi xem pháo hoa từ trên mái nhà.		/ˈfaɪəwɜːk/
+fairy	fairy	noun	1	arts_culture	nàng tiên, bà tiên	nhân vật có phép thuật trong truyện cổ tích	A kind fairy helped the poor girl.	Một bà tiên tốt bụng đã giúp cô gái nghèo.		/ˈfeəri/
+dragon	dragon	noun	1	arts_culture	con rồng	con vật huyền thoại, quen thuộc trong văn hóa Á Đông	Children love the big red dragon at the festival.	Trẻ em rất thích con rồng đỏ khổng lồ ở lễ hội.		/ˈdræɡən/
+childrens_book	children's book	noun	1	arts_culture	sách thiếu nhi	sách viết riêng cho trẻ em đọc	She writes and draws children's books.	Cô ấy viết và vẽ sách thiếu nhi.
+love_story	love story	collocation	1	arts_culture	chuyện tình	câu chuyện về tình yêu trong sách, phim, kịch	This book is a sad love story.	Cuốn sách này là một chuyện tình buồn.
+poet	poet	noun	2	arts_culture	nhà thơ	người sáng tác thơ	Xuan Dieu is a famous Vietnamese poet.	Xuân Diệu là một nhà thơ nổi tiếng của Việt Nam.		/ˈpəʊɪt/
+author	author	noun	2	arts_culture	tác giả	người viết ra một cuốn sách, bài viết cụ thể	Who is the author of this book?	Ai là tác giả của cuốn sách này?		/ˈɔːθə/
+novel	novel	noun	2	arts_culture	tiểu thuyết	truyện dài viết bằng văn xuôi	I am reading a novel about a family in Hanoi.	Tôi đang đọc một cuốn tiểu thuyết về một gia đình ở Hà Nội.		/ˈnɒvl/
+poetry	poetry	noun	2	arts_culture	thơ ca	thơ nói chung, thể loại thơ	She has loved poetry since she was a child.	Cô ấy yêu thơ ca từ khi còn nhỏ.		/ˈpəʊətri/
+literature	literature	noun	2	arts_culture	văn học	các tác phẩm văn chương như truyện, thơ, kịch	He studies English literature at university.	Anh ấy học văn học Anh ở đại học.		/ˈlɪtrətʃə/
+character.story	character	noun	2	arts_culture	nhân vật	người hoặc con vật trong truyện, phim, kịch	Who is your favourite character in the book?	Nhân vật bạn thích nhất trong cuốn sách là ai?		/ˈkærəktə/
+gallery	gallery	noun	2	arts_culture	phòng tranh, phòng trưng bày	nơi trưng bày và bán tranh, tác phẩm nghệ thuật	Her paintings are in a small gallery in the old town.	Tranh của cô ấy được bày ở một phòng tranh nhỏ trong phố cổ.		/ˈɡæləri/
+exhibition	exhibition	noun	2	arts_culture	cuộc triển lãm	sự kiện trưng bày tranh, ảnh, hiện vật cho công chúng xem	There is a photo exhibition at the city museum.	Có một cuộc triển lãm ảnh ở bảo tàng thành phố.		/ˌeksɪˈbɪʃn/
+sculpture	sculpture	noun	2	arts_culture	tác phẩm điêu khắc	tác phẩm tạo hình khối bằng đá, gỗ, kim loại	The garden is full of stone sculptures.	Khu vườn đầy những tác phẩm điêu khắc bằng đá.		/ˈskʌlptʃə/
+painter	painter	noun	2	arts_culture	họa sĩ	người vẽ tranh (không phải thợ sơn nhà)	Van Gogh is one of the most famous painters in the world.	Van Gogh là một trong những họa sĩ nổi tiếng nhất thế giới.		/ˈpeɪntə/
+portrait	portrait	noun	2	arts_culture	bức chân dung	tranh hoặc ảnh thể hiện khuôn mặt một người	The artist painted a portrait of the old king.	Người họa sĩ vẽ một bức chân dung vị vua già.		/ˈpɔːtreɪt/
+costume	costume	noun	2	arts_culture	trang phục biểu diễn, đồ hóa trang	quần áo diễn viên mặc hoặc dùng để hóa trang	The dancers wore colourful costumes.	Các vũ công mặc trang phục biểu diễn sặc sỡ.		/ˈkɒstjuːm/
+drama	drama	noun	2	arts_culture	kịch, nghệ thuật sân khấu	môn học hoặc thể loại kịch nói chung	She joined the drama club at school.	Cô ấy tham gia câu lạc bộ kịch ở trường.		/ˈdrɑːmə/
+scene	scene	noun	2	arts_culture	cảnh (trong vở kịch)	một đoạn của vở kịch, phim diễn ra ở một nơi	The last scene of the play made everyone cry.	Cảnh cuối của vở kịch khiến mọi người bật khóc.		/siːn/
+legend	legend	noun	2	arts_culture	truyền thuyết	chuyện xưa về nhân vật, sự kiện lịch sử, có yếu tố kỳ ảo	The legend says a golden turtle lives in the lake.	Truyền thuyết kể rằng có một con rùa vàng sống trong hồ.		/ˈledʒənd/
+performance	performance	noun	2	arts_culture	buổi biểu diễn	lần trình diễn kịch, múa, nhạc trước khán giả	The performance starts at eight o'clock.	Buổi biểu diễn bắt đầu lúc tám giờ.		/pəˈfɔːməns/
+ceremony	ceremony	noun	2	arts_culture	buổi lễ	sự kiện trang trọng diễn ra theo nghi thức	The opening ceremony of the festival was very beautiful.	Lễ khai mạc của lễ hội rất đẹp.		/ˈserəməni/
+custom	custom	noun	2	arts_culture	phong tục	cách làm quen thuộc của một cộng đồng, dân tộc	It is a custom to give red envelopes at Tet.	Tặng phong bao đỏ vào dịp Tết là một phong tục.		/ˈkʌstəm/
+palace	palace	noun	2	arts_culture	cung điện	nơi ở lớn và đẹp của vua, hoàng gia	The king lived in a beautiful palace.	Nhà vua sống trong một cung điện tráng lệ.		/ˈpæləs/
+puppet	puppet	noun	2	arts_culture	con rối	hình người, con vật được điều khiển bằng tay hoặc dây	The children laughed at the funny puppets.	Bọn trẻ cười thích thú với những con rối ngộ nghĩnh.		/ˈpʌpɪt/
+clay	clay	noun	2	arts_culture	đất sét	đất dẻo dùng để nặn tượng, làm gốm	The kids made small animals out of clay.	Bọn trẻ nặn những con vật nhỏ bằng đất sét.		/kleɪ/
+pottery	pottery	noun	2	arts_culture	đồ gốm	bát, bình, chum... làm từ đất sét nung	Bat Trang village is famous for its pottery.	Làng Bát Tràng nổi tiếng với đồ gốm.		/ˈpɒtəri/
+artwork	artwork	noun	2	arts_culture	tác phẩm nghệ thuật (nói chung)	tranh, tượng, ảnh... do nghệ sĩ hoặc học sinh làm ra	The school shows the students' artwork in the hall.	Nhà trường trưng bày tác phẩm của học sinh ở hội trường.		/ˈɑːtwɜːk/
+imagination	imagination	noun	2	arts_culture	trí tưởng tượng	khả năng nghĩ ra hình ảnh, câu chuyện mới	Good stories help kids use their imagination.	Những câu chuyện hay giúp trẻ sử dụng trí tưởng tượng.		/ɪˌmædʒɪˈneɪʃn/
+parade	parade	noun	2	arts_culture	cuộc diễu hành	đoàn người đi qua phố trong dịp lễ	We watched the festival parade from the street.	Chúng tôi xem đoàn diễu hành của lễ hội từ ngoài phố.		/pəˈreɪd/
+ancient	ancient	adjective	2	arts_culture	cổ xưa	rất xa xưa, từ hàng trăm, hàng nghìn năm trước	This ancient temple is over 1,000 years old.	Ngôi đền cổ này đã hơn 1.000 năm tuổi.		/ˈeɪnʃənt/
+creative	creative	adjective	2	arts_culture	sáng tạo	có nhiều ý tưởng mới, độc đáo	She is very creative and makes her own cards.	Cô ấy rất sáng tạo và tự làm thiệp.		/kriˈeɪtɪv/
+artistic	artistic	adjective	2	arts_culture	có năng khiếu nghệ thuật	nói về người giỏi vẽ, có cảm nhận tốt về cái đẹp	My sister is very artistic, so she wants to study design.	Em gái tôi rất có năng khiếu nghệ thuật nên muốn học thiết kế.		/ɑːˈtɪstɪk/
+cultural	cultural	adjective	2	arts_culture	thuộc về văn hóa	liên quan đến phong tục, nghệ thuật của một dân tộc	Hue has many cultural places to visit.	Huế có nhiều địa điểm văn hóa để tham quan.		/ˈkʌltʃərəl/
+handmade	handmade	adjective	2	arts_culture	làm bằng tay, thủ công	đồ vật làm bằng tay, không dùng máy	She sells handmade bags at the market.	Cô ấy bán túi làm thủ công ở chợ.		/ˌhændˈmeɪd/
+talented	talented	adjective	2	arts_culture	có tài, tài năng	người có khả năng đặc biệt về nghệ thuật	He is a talented young painter.	Anh ấy là một họa sĩ trẻ tài năng.		/ˈtæləntɪd/
+magical	magical	adjective	2	arts_culture	huyền ảo, kỳ diệu	đẹp và lạ như có phép thuật	The lanterns made the old town look magical.	Những chiếc đèn lồng khiến phố cổ trông thật huyền ảo.		/ˈmædʒɪkl/
+decorate	decorate	verb	2	arts_culture	trang trí	làm đẹp nhà cửa, đường phố cho dịp lễ, sự kiện	We decorate the house with flowers before Tet.	Chúng tôi trang trí nhà bằng hoa trước Tết.		/ˈdekəreɪt/
+perform	perform	verb	2	arts_culture	biểu diễn	hát, múa, diễn kịch trước khán giả	The students will perform a traditional dance.	Các học sinh sẽ biểu diễn một điệu múa truyền thống.		/pəˈfɔːm/
+admire	admire	verb	2	arts_culture	chiêm ngưỡng, ngắm nhìn thán phục	khi ngắm một thứ đẹp với sự thích thú	We stopped to admire the old paintings.	Chúng tôi dừng lại để chiêm ngưỡng những bức tranh cổ.		/ədˈmaɪə/
+act.stage	act	verb	2	arts_culture	diễn kịch, đóng vai	khi diễn viên diễn trên sân khấu hoặc trong phim	She has acted in many school plays.	Cô ấy đã diễn trong nhiều vở kịch ở trường.		/ækt/
+create.art	create	verb	2	arts_culture	sáng tác, tạo ra (tác phẩm)	khi nghệ sĩ làm ra một tác phẩm mới	The artist created this statue from old metal.	Người nghệ sĩ đã tạo ra bức tượng này từ kim loại cũ.		/kriˈeɪt/
+traditionally	traditionally	adverb	2	arts_culture	theo truyền thống	nói về việc thường được làm như vậy từ lâu đời	Traditionally, people eat sticky rice cake at Tet.	Theo truyền thống, người ta ăn bánh chưng vào dịp Tết.		/trəˈdɪʃənəli/
+aloud	aloud	adverb	2	arts_culture	thành tiếng, to lên	khi đọc cho người khác cùng nghe	The teacher read the poem aloud to the class.	Cô giáo đọc to bài thơ cho cả lớp nghe.		/əˈlaʊd/
+happily_ever_after	happily ever after	phrase	2	arts_culture	sống hạnh phúc mãi mãi về sau	câu kết quen thuộc của truyện cổ tích	The prince and the princess lived happily ever after.	Hoàng tử và công chúa sống hạnh phúc mãi mãi về sau.
+folk_tale	folk tale	noun	2	arts_culture	truyện dân gian	truyện được kể truyền miệng trong dân gian	Every country has its own folk tales.	Mỗi quốc gia đều có những truyện dân gian riêng.	folktale
+folk_song	folk song	noun	2	arts_culture	bài dân ca	bài hát truyền thống của một vùng, dân tộc	My grandmother still sings old folk songs.	Bà tôi vẫn hát những bài dân ca xưa.
+folk_dance	folk dance	noun	2	arts_culture	điệu múa dân gian	điệu múa truyền thống của một vùng, dân tộc	The girls learned a folk dance for the festival.	Các cô gái học một điệu múa dân gian cho lễ hội.
+lion_dance	lion dance	noun	2	arts_culture	múa lân	điệu múa với đầu lân dịp Tết, Trung thu	Children love watching the lion dance in the street.	Trẻ em rất thích xem múa lân ngoài phố.
+dragon_dance	dragon dance	noun	2	arts_culture	múa rồng	nhiều người cùng nâng một con rồng dài và múa	The dragon dance is the best part of the festival.	Múa rồng là phần hay nhất của lễ hội.
+mid-autumn_festival	Mid-Autumn Festival	noun	2	arts_culture	Tết Trung thu	rằm tháng Tám âm lịch, trẻ em rước đèn, phá cỗ	Children carry lanterns during the Mid-Autumn Festival.	Trẻ em rước đèn trong dịp Tết Trung thu.	Mid Autumn Festival
+modern_art	modern art	collocation	2	arts_culture	nghệ thuật hiện đại	phong cách nghệ thuật mới từ thế kỷ 20 trở đi	I don't understand much modern art.	Tôi không hiểu lắm về nghệ thuật hiện đại.
+short_story	short story	collocation	2	arts_culture	truyện ngắn	tác phẩm văn xuôi ngắn, có thể đọc trong một lần	She has written a book of short stories.	Cô ấy đã viết một cuốn sách gồm các truyện ngắn.
+bedtime_story	bedtime story	collocation	2	arts_culture	truyện kể trước giờ ngủ	câu chuyện bố mẹ kể hoặc đọc cho con trước khi ngủ	Mum reads me a bedtime story every night.	Mẹ đọc cho tôi một câu chuyện trước giờ ngủ mỗi tối.
+ghost_story	ghost story	collocation	2	arts_culture	truyện ma	câu chuyện đáng sợ về ma quỷ	We told ghost stories around the fire.	Chúng tôi kể chuyện ma quanh đống lửa.
+main_character	main character	collocation	2	arts_culture	nhân vật chính	nhân vật quan trọng nhất của truyện, phim	The main character is a young doctor.	Nhân vật chính là một bác sĩ trẻ.	protagonist
+play_the_role_of	play the role of	collocation	2	arts_culture	đóng vai (nhân vật)	khi diễn viên diễn một nhân vật trong vở kịch, phim	He played the role of a poor farmer.	Anh ấy đóng vai một người nông dân nghèo.
+family_tradition	family tradition	collocation	2	arts_culture	truyền thống gia đình	việc làm được gia đình giữ qua nhiều đời	Making spring rolls at Tet is a family tradition.	Làm nem rán dịp Tết là truyền thống của gia đình.
+art_supplies	art supplies	collocation	2	arts_culture	dụng cụ vẽ, họa cụ	giấy, màu, cọ và các đồ dùng để vẽ	I bought some art supplies for my son.	Tôi đã mua ít dụng cụ vẽ cho con trai.
+art_school	art school	collocation	2	arts_culture	trường mỹ thuật	trường đào tạo họa sĩ, nhà thiết kế	After high school, she went to art school.	Sau khi học xong cấp ba, cô ấy vào trường mỹ thuật.
+coloured_pencil	coloured pencil	noun	2	arts_culture	bút chì màu	bút chì có ruột màu để tô vẽ	I need a box of coloured pencils.	Tôi cần một hộp bút chì màu.	colored pencil
+traditional_festival	traditional festival	collocation	2	arts_culture	lễ hội truyền thống	lễ hội có từ lâu đời của một vùng, dân tộc	The village holds a traditional festival every spring.	Ngôi làng tổ chức lễ hội truyền thống vào mỗi mùa xuân.
+lantern_festival	lantern festival	noun	2	arts_culture	lễ hội đèn lồng	lễ hội thả hoặc treo đèn lồng, như ở Hội An	Hoi An has a lantern festival every full moon.	Hội An có lễ hội đèn lồng vào mỗi đêm rằm.
+go_to_the_pagoda	go to the pagoda	collocation	2	arts_culture	đi chùa	đến chùa lễ Phật, cầu bình an	Many families go to the pagoda on the first day of Tet.	Nhiều gia đình đi chùa vào mùng một Tết.
+school_play	school play	collocation	2	arts_culture	vở kịch của trường	vở kịch do học sinh diễn ở trường	My son has a small part in the school play.	Con trai tôi có một vai nhỏ trong vở kịch của trường.

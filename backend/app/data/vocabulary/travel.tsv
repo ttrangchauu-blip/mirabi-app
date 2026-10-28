@@ -1,0 +1,35 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic	source	status
+car	car	noun	1	travel	xe ô tô		We went to Hue by car.	Chúng tôi đi Huế bằng ô tô.		/kɑː/	mirabi-original	active
+bus	bus	noun	1	travel	xe buýt		I take the bus to school.	Tôi đi học bằng xe buýt.		/bʌs/	mirabi-original	active
+train	train	noun	1	travel	tàu hỏa		The train leaves at seven.	Tàu khởi hành lúc bảy giờ.		/treɪn/	mirabi-original	active
+plane	plane	noun	1	travel	máy bay		The plane landed safely.	Máy bay hạ cánh an toàn.	airplane|aeroplane	/pleɪn/	mirabi-original	active
+ticket	ticket	noun	1	travel	tấm vé		Two tickets to Hanoi, please.	Cho tôi hai vé đi Hà Nội.		/ˈtɪkɪt/	mirabi-original	active
+hotel	hotel	noun	1	travel	khách sạn		Our hotel is near the beach.	Khách sạn của chúng tôi gần bãi biển.		/həʊˈtel/	mirabi-original	active
+beach	beach	noun	1	travel	bãi biển		The children played on the beach.	Bọn trẻ chơi trên bãi biển.		/biːtʃ/	mirabi-original	active
+holiday	holiday	noun	1	travel	kỳ nghỉ		Where are you going on holiday?	Bạn đi nghỉ ở đâu?	vacation	/ˈhɒlədeɪ/	mirabi-original	active
+airport	airport	noun	2	travel	sân bay		We arrived at the airport early.	Chúng tôi đến sân bay sớm.		/ˈeəpɔːt/	mirabi-original	active
+passport	passport	noun	2	travel	hộ chiếu		Don't forget your passport.	Đừng quên hộ chiếu nhé.		/ˈpɑːspɔːt/	mirabi-original	active
+suitcase	suitcase	noun	2	travel	va li		My suitcase is too heavy.	Va li của tôi nặng quá.		/ˈsuːtkeɪs/	mirabi-original	active
+luggage	luggage	noun	2	travel	hành lý		How much luggage can I take?	Tôi được mang bao nhiêu hành lý?	baggage	/ˈlʌɡɪdʒ/	mirabi-original	active
+tourist	tourist	noun	2	travel	khách du lịch		Hoi An is full of tourists in summer.	Mùa hè Hội An đông khách du lịch.		/ˈtʊərɪst/	mirabi-original	active
+arrive	arrive	verb	2	travel	đến nơi		What time does the train arrive?	Mấy giờ tàu đến?		/əˈraɪv/	mirabi-original	active
+book.reserve	book	verb	2	travel	đặt chỗ	đặt trước phòng, vé hoặc bàn	I booked a room for two nights.	Tôi đã đặt phòng hai đêm.	reserve	/bʊk/	mirabi-original	active
+journey	journey	noun	3	travel	chuyến đi, hành trình		The journey took six hours.	Chuyến đi mất sáu tiếng.	trip	/ˈdʒɜːni/	mirabi-original	active
+destination	destination	noun	3	travel	điểm đến		Da Lat is a popular destination.	Đà Lạt là điểm đến được yêu thích.		/ˌdestɪˈneɪʃn/	mirabi-original	active
+sightseeing	sightseeing	noun	3	travel	việc tham quan		We went sightseeing in the old town.	Chúng tôi đi tham quan phố cổ.		/ˈsaɪtsiːɪŋ/	mirabi-original	active
+delay	delay	noun	3	travel	sự chậm trễ		There is a two-hour delay.	Chuyến bay bị trễ hai tiếng.		/dɪˈleɪ/	mirabi-original	active
+check_in	check in	phrasal_verb	3	travel	làm thủ tục	nhận phòng khách sạn hoặc lên máy bay	Please check in two hours before your flight.	Vui lòng làm thủ tục hai tiếng trước giờ bay.		/ˌtʃek ˈɪn/	mirabi-original	active
+souvenir	souvenir	noun	3	travel	quà lưu niệm		I bought some souvenirs for my friends.	Tôi mua vài món quà lưu niệm cho bạn bè.		/ˌsuːvəˈnɪə/	mirabi-original	active
+abroad	abroad	adverb	3	travel	ở nước ngoài		She wants to study abroad.	Cô ấy muốn đi du học nước ngoài.	overseas	/əˈbrɔːd/	mirabi-original	active
+fine.penalty	fine	noun	3	travel	tiền phạt	khi vi phạm luật lệ	He got a fine for parking there.	Anh ấy bị phạt vì đỗ xe ở đó.	penalty	/faɪn/	mirabi-original	active
+accommodation	accommodation	noun	4	travel	chỗ ở	nơi ở trong chuyến đi	The price includes accommodation.	Giá đã bao gồm chỗ ở.	lodging	/əˌkɒməˈdeɪʃn/	mirabi-original	active
+itinerary	itinerary	noun	4	travel	lịch trình chuyến đi		Our itinerary includes three cities.	Lịch trình của chúng tôi gồm ba thành phố.		/aɪˈtɪnərəri/	mirabi-original	active
+jet_lag	jet lag	noun	4	travel	mệt mỏi do lệch múi giờ		I had terrible jet lag after flying to Canada.	Tôi bị mệt do lệch múi giờ sau chuyến bay sang Canada.	jetlag	/ˈdʒet læɡ/	mirabi-original	active
+landmark	landmark	noun	4	travel	địa danh nổi tiếng		The Eiffel Tower is a famous landmark.	Tháp Eiffel là một địa danh nổi tiếng.		/ˈlændmɑːk/	mirabi-original	active
+customs	customs	noun	4	travel	hải quan		We waited an hour at customs.	Chúng tôi chờ một tiếng ở hải quan.		/ˈkʌstəmz/	mirabi-original	active
+off_the_beaten_track	off the beaten track	phrase	5	travel	nơi ít người biết đến	nơi xa vắng, ít khách du lịch	We stayed in a village off the beaten track.	Chúng tôi ở một ngôi làng hẻo lánh ít người biết.	off the beaten path		mirabi-original	active
+wanderlust	wanderlust	noun	5	travel	niềm đam mê xê dịch		Her wanderlust took her to forty countries.	Niềm đam mê xê dịch đưa cô ấy đến bốn mươi quốc gia.		/ˈwɒndəlʌst/	mirabi-original	active
+excursion	excursion	noun	5	travel	chuyến tham quan ngắn		We joined an excursion to Ha Long Bay.	Chúng tôi tham gia chuyến tham quan ngắn ở vịnh Hạ Long.	day trip	/ɪkˈskɜːʃn/	mirabi-original	active
+layover	layover	noun	5	travel	chặng quá cảnh		We have a three-hour layover in Bangkok.	Chúng tôi quá cảnh ba tiếng ở Bangkok.	stopover	/ˈleɪəʊvə/	mirabi-original	active
+sojourn	sojourn	noun	6	travel	thời gian lưu lại	ở một nơi trong một thời gian ngắn	After a brief sojourn in Paris, they returned home.	Sau một thời gian ngắn lưu lại Paris, họ trở về nhà.	stay	/ˈsɒdʒən/	mirabi-original	active
+globetrotter	globetrotter	noun	6	travel	người đi khắp thế giới		My uncle is a real globetrotter.	Chú tôi đúng là người đi khắp thế giới.		/ˈɡləʊbtrɒtə/	mirabi-original	active

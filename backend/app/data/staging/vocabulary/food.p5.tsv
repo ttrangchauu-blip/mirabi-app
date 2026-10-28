@@ -1,0 +1,19 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+vegan	vegan	adjective	3	food	thuần chay	không có thịt, cá, trứng, sữa hay sản phẩm từ động vật	This restaurant has a vegan menu.	Nhà hàng này có thực đơn thuần chay.		/ˈviːɡən/
+sugar-free	sugar-free	adjective	3	food	không đường	đồ ăn, đồ uống không chứa đường	My grandfather can only eat sugar-free cakes.	Ông tôi chỉ ăn được bánh không đường.		/ˌʃʊɡəˈfriː/
+low-fat	low-fat	adjective	3	food	ít béo	thực phẩm có rất ít chất béo	I always buy low-fat milk.	Tôi luôn mua sữa ít béo.		/ˌləʊˈfæt/
+canned	canned	adjective	3	food	đóng hộp	thực phẩm đựng trong hộp kim loại kín	We keep some canned fish for emergencies.	Chúng tôi để sẵn ít cá hộp phòng khi cần.	tinned	/kænd/
+dried	dried	adjective	3	food	khô, phơi khô, sấy khô	thực phẩm đã bỏ hết nước để giữ lâu	Dried mango is a popular snack.	Xoài sấy là món ăn vặt được ưa chuộng.		/draɪd/
+fatty	fatty	adjective	3	food	nhiều mỡ (thịt)	thịt hoặc món có nhiều phần mỡ	I don't like fatty pork.	Tôi không thích thịt lợn nhiều mỡ.		/ˈfæti/
+thick.soup	thick	adjective	3	food	đặc, sánh (súp, nước sốt)	chất lỏng có nhiều bột hoặc cái, không loãng	The corn soup is thick and creamy.	Súp ngô đặc sánh và béo ngậy.		/θɪk/
+lean.meat	lean	adjective	4	food	nạc (thịt)	thịt có rất ít mỡ	Choose lean meat if you want to lose weight.	Hãy chọn thịt nạc nếu bạn muốn giảm cân.		/liːn/
+pickled	pickled	adjective	4	food	muối chua, ngâm giấm	rau củ ngâm muối hoặc giấm cho chua	Pickled mustard greens go well with braised pork.	Dưa cải muối ăn rất hợp với thịt kho.		/ˈpɪkld/
+smoked	smoked	adjective	4	food	hun khói, xông khói	thịt, cá được hun bằng khói để có mùi riêng	We had smoked salmon on toast.	Chúng tôi ăn cá hồi xông khói với bánh mì nướng.		/sməʊkt/
+stuffed.full	stuffed	adjective	4	food	no căng bụng	khẩu ngữ: ăn quá no, không ăn thêm được	No dessert for me, thanks. I'm stuffed.	Tôi không ăn tráng miệng đâu, cảm ơn. Tôi no căng rồi.		/stʌft/
+watery	watery	adjective	4	food	loãng, nhạt nước	canh, súp, cà phê có quá nhiều nước, ít vị	The coffee here is weak and watery.	Cà phê ở đây nhạt và loãng.		/ˈwɔːtəri/
+seedless	seedless	adjective	4	food	không hạt	quả được trồng để không có hạt	Seedless grapes are easy for children to eat.	Nho không hạt rất dễ cho trẻ ăn.		/ˈsiːdləs/
+peckish	peckish	adjective	5	food	hơi đói, đói nhẹ	khẩu ngữ Anh: thấy muốn ăn chút gì đó	I'm feeling a bit peckish. Is there any fruit?	Tôi hơi đói. Có trái cây không?		/ˈpekɪʃ/
+soggy	soggy	adjective	5	food	ỉu, ướt nhão	đồ giòn bị ngấm nước, mất độ giòn	The chips went soggy in the box.	Khoai tây chiên bị ỉu trong hộp.		/ˈsɒɡi/
+mushy	mushy	adjective	5	food	nhão nhoét	đồ ăn nấu quá mềm, nát như bột nhão	The rice was overcooked and mushy.	Cơm bị nấu quá và nhão nhoét.		/ˈmʌʃi/
+boneless	boneless	adjective	5	food	đã rút xương, không xương	thịt, cá được bỏ hết xương	This restaurant serves boneless fish for kids.	Nhà hàng này phục vụ cá đã rút xương cho trẻ em.		/ˈbəʊnləs/
+dietary	dietary	adjective	5	food	(thuộc) chế độ ăn uống	liên quan đến việc ăn gì và kiêng gì	Please tell us about any dietary needs.	Vui lòng cho chúng tôi biết các yêu cầu về ăn uống của bạn.		/ˈdaɪətəri/

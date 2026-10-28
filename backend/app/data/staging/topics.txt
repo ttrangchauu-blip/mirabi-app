@@ -1,0 +1,37 @@
+daily_life	Đời sống	Sinh hoạt và việc hằng ngày
+home	Nhà cửa	Phòng ốc, đồ đạc và việc nhà
+family	Gia đình	Người thân, các mối quan hệ và việc nhà
+relationships	Các mối quan hệ	Bạn bè, tình cảm và ứng xử xã hội
+food	Ăn uống	Món ăn, đồ uống, nấu nướng và nhà hàng
+countryside	Nông thôn	Đồng ruộng, cây trồng, vật nuôi và làng quê
+school	Học tập	Trường lớp, đồ dùng và việc học
+thinking	Tư duy và lập luận	Ý kiến, phân tích và ngôn ngữ học thuật
+work	Công việc	Văn phòng, đồng nghiệp và công việc hằng ngày
+careers	Nghề nghiệp	Tên nghề, kỹ năng, tuyển dụng và sự nghiệp
+technology	Công nghệ	Máy tính, điện thoại và Internet
+science	Khoa học	Thí nghiệm, tự nhiên, vật lý, hóa học, sinh học, vũ trụ
+health	Sức khỏe	Cơ thể, bệnh tật và lối sống lành mạnh
+safety	An toàn và khẩn cấp	Tai nạn, cứu hộ và phòng tránh rủi ro
+travel	Du lịch	Chuyến đi, khách sạn và tham quan
+transport	Giao thông	Phương tiện, đường sá và đi lại
+emotions	Cảm xúc	Tâm trạng và cảm nhận
+personality	Tính cách	Tính cách, thái độ và hành vi
+environment	Môi trường	Thiên nhiên, ô nhiễm và bảo vệ môi trường
+weather	Thời tiết	Thời tiết, mùa, khí hậu và hiện tượng tự nhiên
+animals	Động vật	Các con vật và thế giới tự nhiên
+appearance	Ngoại hình	Dáng người, khuôn mặt và cách miêu tả người
+communication	Giao tiếp	Cụm từ và cách nói thông dụng
+time	Thời gian	Ngày tháng, tần suất, lịch trình và dịp đặc biệt
+shopping	Mua sắm	Cửa hàng, giá cả và thanh toán
+clothes	Trang phục	Quần áo, giày dép và phụ kiện
+money	Tiền bạc	Ngân hàng, chi tiêu, tiết kiệm và đầu tư
+business	Kinh doanh	Công ty, thị trường, bán hàng và marketing
+law	Pháp luật	Luật lệ, tòa án, chính quyền và bầu cử
+society	Xã hội	Cộng đồng, vấn đề xã hội và đời sống công dân
+media	Truyền thông	Báo chí, mạng xã hội và quảng cáo
+entertainment	Giải trí	Phim ảnh, âm nhạc, trò chơi và sở thích
+sports	Thể thao	Môn thể thao, luyện tập và thi đấu
+actions	Hành động	Động từ chỉ cử động và thao tác thường ngày
+describing	Miêu tả	Kích thước, hình dạng, màu sắc và tính chất
+arts_culture	Nghệ thuật và văn hóa	Hội họa, văn học, lễ hội và truyền thống
+city_places	Thành phố	Công trình, khu phố và dịch vụ công cộng

@@ -1,0 +1,313 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic	source	status
+head	head	noun	1	health	cái đầu	bộ phận cơ thể	My head hurts.	Tôi bị đau đầu.		/hed/	mirabi-original	active
+hand	hand	noun	1	health	bàn tay		Raise your hand if you know the answer.	Ai biết câu trả lời thì giơ tay lên.		/hænd/	mirabi-original	active
+eye	eye	noun	1	health	con mắt		She has big brown eyes.	Cô ấy có đôi mắt nâu to.		/aɪ/	mirabi-original	active
+tooth	tooth	noun	1	health	cái răng		Brush your teeth twice a day.	Hãy đánh răng hai lần mỗi ngày.	teeth	/tuːθ/	mirabi-original	active
+sick	sick	adjective	1	health	ốm, bị bệnh		I was sick yesterday.	Hôm qua tôi bị ốm.	ill	/sɪk/	mirabi-original	active
+hospital	hospital	noun	1	health	bệnh viện		He works at a children's hospital.	Anh ấy làm việc ở bệnh viện nhi.		/ˈhɒspɪtl/	mirabi-original	active
+medicine	medicine	noun	1	health	thuốc	thuốc chữa bệnh	Take this medicine after meals.	Uống thuốc này sau bữa ăn.		/ˈmedsn/	mirabi-original	active
+headache	headache	noun	2	health	chứng đau đầu		I have a terrible headache.	Tôi bị đau đầu kinh khủng.		/ˈhedeɪk/	mirabi-original	active
+fever	fever	noun	2	health	cơn sốt		The baby has a high fever.	Em bé bị sốt cao.	temperature	/ˈfiːvə/	mirabi-original	active
+cold.illness	cold	noun	2	health	cảm lạnh	bệnh, không phải thời tiết	I caught a cold last week.	Tuần trước tôi bị cảm lạnh.		/kəʊld/	mirabi-original	active
+dentist	dentist	noun	2	health	nha sĩ		I see the dentist twice a year.	Tôi đi khám nha sĩ hai lần một năm.		/ˈdentɪst/	mirabi-original	active
+exercise	exercise	verb	2	health	tập thể dục		My grandparents exercise every morning.	Ông bà tôi tập thể dục mỗi sáng.	work out	/ˈeksəsaɪz/	mirabi-original	active
+healthy	healthy	adjective	2	health	khỏe mạnh, lành mạnh		Eat healthy food and sleep well.	Hãy ăn đồ lành mạnh và ngủ đủ giấc.		/ˈhelθi/	mirabi-original	active
+rest	rest	verb	2	health	nghỉ ngơi		The doctor told me to rest for two days.	Bác sĩ dặn tôi nghỉ ngơi hai ngày.		/rest/	mirabi-original	active
+injury	injury	noun	3	health	chấn thương		He missed the match because of an injury.	Anh ấy lỡ trận đấu vì chấn thương.		/ˈɪndʒəri/	mirabi-original	active
+symptom	symptom	noun	3	health	triệu chứng		What are the symptoms of flu?	Cúm có những triệu chứng gì?		/ˈsɪmptəm/	mirabi-original	active
+prescription	prescription	noun	3	health	đơn thuốc		You need a prescription for this medicine.	Thuốc này cần có đơn của bác sĩ.		/prɪˈskrɪpʃn/	mirabi-original	active
+stomachache	stomachache	noun	3	health	đau bụng		Too much ice cream gave me a stomachache.	Ăn nhiều kem quá làm tôi đau bụng.	stomach ache	/ˈstʌməkeɪk/	mirabi-original	active
+allergic	allergic	adjective	3	health	bị dị ứng		I'm allergic to peanuts.	Tôi bị dị ứng đậu phộng.		/əˈlɜːdʒɪk/	mirabi-original	active
+recover	recover	verb	3	health	hồi phục	khỏe lại sau khi ốm	She is recovering from the flu.	Cô ấy đang hồi phục sau trận cúm.	get better	/rɪˈkʌvə/	mirabi-original	active
+diet	diet	noun	3	health	chế độ ăn uống		A balanced diet keeps you healthy.	Chế độ ăn cân bằng giúp bạn khỏe mạnh.		/ˈdaɪət/	mirabi-original	active
+mental_health	mental health	noun	4	health	sức khỏe tinh thần		Talking to friends is good for your mental health.	Trò chuyện với bạn bè tốt cho sức khỏe tinh thần.		/ˌmentl ˈhelθ/	mirabi-original	active
+chronic	chronic	adjective	4	health	mãn tính	bệnh kéo dài	He suffers from chronic back pain.	Ông ấy bị đau lưng mãn tính.		/ˈkrɒnɪk/	mirabi-original	active
+immune_system	immune system	noun	4	health	hệ miễn dịch		Sleep helps your immune system.	Giấc ngủ giúp hệ miễn dịch của bạn.		/ɪˈmjuːn ˌsɪstəm/	mirabi-original	active
+vaccine	vaccine	noun	4	health	vắc-xin		The vaccine protects children from measles.	Vắc-xin bảo vệ trẻ em khỏi bệnh sởi.		/ˈvæksiːn/	mirabi-original	active
+sprain	sprain	verb	4	health	bị bong gân		She sprained her ankle playing tennis.	Cô ấy bị bong gân mắt cá chân khi chơi quần vợt.	twist	/spreɪn/	mirabi-original	active
+well-being	well-being	noun	4	health	sự khỏe mạnh và hạnh phúc	về cả thể chất lẫn tinh thần	Exercise improves your well-being.	Tập thể dục giúp bạn khỏe mạnh và vui vẻ hơn.	wellbeing	/ˌwel ˈbiːɪŋ/	mirabi-original	active
+sedentary	sedentary	adjective	5	health	ít vận động		A sedentary lifestyle is bad for the heart.	Lối sống ít vận động có hại cho tim.	inactive	/ˈsedntri/	mirabi-original	active
+diagnosis	diagnosis	noun	5	health	sự chẩn đoán		The doctor made a quick diagnosis.	Bác sĩ đưa ra chẩn đoán rất nhanh.		/ˌdaɪəɡˈnəʊsɪs/	mirabi-original	active
+ailment	ailment	noun	5	health	bệnh nhẹ, chứng bệnh vặt		Herbal tea can help with minor ailments.	Trà thảo mộc giúp chữa các bệnh vặt.		/ˈeɪlmənt/	mirabi-original	active
+contagious	contagious	adjective	5	health	dễ lây lan		Chickenpox is very contagious.	Thủy đậu rất dễ lây.	infectious	/kənˈteɪdʒəs/	mirabi-original	active
+convalescence	convalescence	noun	6	health	thời kỳ dưỡng bệnh		She spent her convalescence at the seaside.	Bà ấy dưỡng bệnh ở vùng biển.	recovery	/ˌkɒnvəˈlesns/	mirabi-original	active
+hypochondriac	hypochondriac	noun	6	health	người hay lo mình mắc bệnh		He is a hypochondriac who visits the doctor every week.	Anh ấy là người hay lo mình có bệnh, tuần nào cũng đi khám.		/ˌhaɪpəˈkɒndriæk/	mirabi-original	active
+health	health	noun	1	health	sức khỏe	tình trạng của cơ thể và tinh thần	Smoking is bad for your health.	Hút thuốc có hại cho sức khỏe của bạn.		/helθ/	mirabi-ai-2026-10	active
+body	body	noun	1	health	cơ thể	toàn bộ phần thân thể của người hoặc con vật	Exercise is good for your body and mind.	Tập thể dục tốt cho cơ thể và tinh thần của bạn.		/ˈbɒdi/	mirabi-ai-2026-10	active
+ill	ill	adjective	1	health	ốm, không khỏe	thường đứng sau động từ: be ill, feel ill, fall ill	She was ill, so she stayed at home.	Cô ấy bị ốm nên ở nhà.	sick	/ɪl/	mirabi-ai-2026-10	active
+pain	pain	noun	1	health	cơn đau, sự đau đớn	cảm giác khó chịu khi bị thương hoặc bị bệnh	I have a pain in my leg.	Tôi bị đau ở chân.		/peɪn/	mirabi-ai-2026-10	active
+hurt	hurt	verb	1	health	đau, bị đau	khi một bộ phận cơ thể đang đau	My head hurts.	Đầu tôi đau.		/hɜːt/	mirabi-ai-2026-10	active
+cough	cough	verb	1	health	ho	đẩy mạnh hơi ra khỏi cổ họng khi bị cảm, đau họng	He coughed all night.	Anh ấy ho suốt đêm.		/kɒf/	mirabi-ai-2026-10	active
+heart.organ	heart	noun	1	health	tim, quả tim	cơ quan bơm máu đi khắp cơ thể	Your heart beats faster when you run.	Tim bạn đập nhanh hơn khi bạn chạy.		/hɑːt/	mirabi-ai-2026-10	active
+stomach	stomach	noun	1	health	dạ dày, bụng	nơi chứa thức ăn trong cơ thể	My stomach is full.	Bụng tôi no rồi.		/ˈstʌmək/	mirabi-ai-2026-10	active
+back.body	back	noun	1	health	lưng	phần phía sau cơ thể, từ cổ đến hông	My back hurts after work.	Lưng tôi đau sau giờ làm.		/bæk/	mirabi-ai-2026-10	active
+arm	arm	noun	1	health	cánh tay	phần cơ thể từ vai đến bàn tay	She hurt her arm.	Cô ấy bị đau cánh tay.		/ɑːm/	mirabi-ai-2026-10	active
+leg	leg	noun	1	health	cái chân, cẳng chân	phần cơ thể từ hông đến bàn chân, dùng để đi	He has long legs.	Anh ấy có đôi chân dài.		/leɡ/	mirabi-ai-2026-10	active
+foot	foot	noun	1	health	bàn chân	phần cuối của chân, dùng để đứng	My left foot is cold.	Bàn chân trái của tôi bị lạnh.		/fʊt/	mirabi-ai-2026-10	active
+ear	ear	noun	1	health	tai, cái tai	cơ quan dùng để nghe	I have a pain in my ear.	Tôi bị đau tai.		/ɪə/	mirabi-ai-2026-10	active
+nose	nose	noun	1	health	mũi, cái mũi	cơ quan để thở và ngửi	Breathe in through your nose.	Hãy hít vào bằng mũi.		/nəʊz/	mirabi-ai-2026-10	active
+neck	neck	noun	1	health	cổ (bộ phận cơ thể)	phần nối đầu với thân	My neck hurts.	Cổ tôi bị đau.		/nek/	mirabi-ai-2026-10	active
+shoulder	shoulder	noun	1	health	vai	phần nối cánh tay với thân	He carried the bag on his shoulder.	Anh ấy vác túi trên vai.		/ˈʃəʊldə/	mirabi-ai-2026-10	active
+knee	knee	noun	1	health	đầu gối	khớp ở giữa chân, giúp chân gập lại	I fell and hurt my knee.	Tôi bị ngã và đau đầu gối.		/niː/	mirabi-ai-2026-10	active
+finger	finger	noun	1	health	ngón tay	một trong năm phần dài ở cuối bàn tay	I cut my finger.	Tôi bị đứt ngón tay.		/ˈfɪŋɡə/	mirabi-ai-2026-10	active
+toe	toe	noun	1	health	ngón chân	một trong năm phần nhỏ ở đầu bàn chân	I hit my toe on the door.	Tôi bị va ngón chân vào cửa.		/təʊ/	mirabi-ai-2026-10	active
+blood	blood	noun	1	health	máu	chất lỏng màu đỏ chảy trong cơ thể	There was blood on his shirt.	Có máu trên áo anh ấy.		/blʌd/	mirabi-ai-2026-10	active
+bone	bone	noun	1	health	xương	phần cứng bên trong cơ thể	Milk is good for your bones.	Sữa tốt cho xương của bạn.		/bəʊn/	mirabi-ai-2026-10	active
+skin	skin	noun	1	health	da	lớp ngoài cùng bao phủ cơ thể	The sun can hurt your skin.	Ánh nắng có thể làm hại da của bạn.		/skɪn/	mirabi-ai-2026-10	active
+brain	brain	noun	1	health	não, bộ não	cơ quan trong đầu dùng để suy nghĩ	Sleep is good for your brain.	Ngủ tốt cho não của bạn.		/breɪn/	mirabi-ai-2026-10	active
+throat	throat	noun	1	health	cổ họng	phần bên trong cổ, nơi thức ăn và không khí đi qua	My throat hurts when I eat.	Cổ họng tôi đau khi ăn.		/θrəʊt/	mirabi-ai-2026-10	active
+chest	chest	noun	1	health	ngực	phần trước của thân, giữa cổ và bụng	He has a pain in his chest.	Anh ấy bị đau ngực.		/tʃest/	mirabi-ai-2026-10	active
+patient.person	patient	noun	1	health	bệnh nhân	người đang được bác sĩ khám hoặc chữa bệnh	The doctor has ten patients this morning.	Sáng nay bác sĩ có mười bệnh nhân.		/ˈpeɪʃnt/	mirabi-ai-2026-10	active
+pill	pill	noun	1	health	viên thuốc	thuốc dạng viên nhỏ để uống	Take one pill after each meal.	Uống một viên thuốc sau mỗi bữa ăn.	tablet	/pɪl/	mirabi-ai-2026-10	active
+weak.health	weak	adjective	1	health	yếu, không có sức	cơ thể mệt và yếu, nhất là sau khi ốm	She is still weak and needs rest.	Cô ấy vẫn còn yếu và cần nghỉ ngơi.		/wiːk/	mirabi-ai-2026-10	active
+fit.health	fit	adjective	1	health	khỏe mạnh, sung sức	có thể lực tốt nhờ tập luyện đều đặn	My grandfather is very fit for his age.	Ông tôi rất khỏe so với tuổi.		/fɪt/	mirabi-ai-2026-10	active
+breathe	breathe	verb	1	health	thở	hít không khí vào và thở ra	Breathe slowly and relax.	Hãy thở chậm và thư giãn.		/briːð/	mirabi-ai-2026-10	active
+die	die	verb	1	health	chết, qua đời	khi sự sống kết thúc vì bệnh hoặc tuổi già	My grandmother died last year.	Bà tôi đã qua đời năm ngoái.		/daɪ/	mirabi-ai-2026-10	active
+smoke.cigarette	smoke	verb	1	health	hút thuốc	hít khói thuốc lá vào	My father doesn't smoke.	Bố tôi không hút thuốc.		/sməʊk/	mirabi-ai-2026-10	active
+toothache	toothache	noun	1	health	đau răng	cơn đau ở răng	I have a toothache, so I can't eat.	Tôi bị đau răng nên không ăn được.		/ˈtuːθeɪk/	mirabi-ai-2026-10	active
+see_a_doctor	see a doctor	collocation	1	health	đi khám bác sĩ	khi bị ốm và cần bác sĩ khám	You should see a doctor about that cough.	Bạn nên đi khám bác sĩ về cơn ho đó.	go to the doctor		mirabi-ai-2026-10	active
+get_better	get better	collocation	1	health	khỏi dần, đỡ bệnh	sức khỏe tiến triển tốt lên sau khi ốm	I hope your mum gets better soon.	Mong mẹ bạn sớm khỏe lại.			mirabi-ai-2026-10	active
+feel_better.health	feel better	collocation	1	health	cảm thấy đỡ hơn	cảm giác của bản thân sau khi nghỉ ngơi hoặc uống thuốc	I feel better after a good sleep.	Tôi thấy đỡ hơn sau một giấc ngủ ngon.			mirabi-ai-2026-10	draft
+take_medicine	take medicine	collocation	1	health	uống thuốc	dùng thuốc theo lời bác sĩ	Take your medicine after dinner.	Hãy uống thuốc sau bữa tối.			mirabi-ai-2026-10	active
+have_a_cold	have a cold	collocation	1	health	đang bị cảm	đang hắt hơi, sổ mũi, hơi mệt	I have a cold, so I'm staying at home.	Tôi bị cảm nên sẽ ở nhà.			mirabi-ai-2026-10	active
+stay_in_bed.health	stay in bed	collocation	1	health	nằm nghỉ trên giường	khi ốm và cần nằm nghỉ cả ngày	The doctor told me to stay in bed for two days.	Bác sĩ bảo tôi nằm nghỉ trên giường hai ngày.			mirabi-ai-2026-10	draft
+get_well_soon.health	get well soon	phrase	1	health	chúc mau khỏe	lời chúc dành cho người đang ốm	Get well soon, Lan!	Chúc Lan mau khỏe nhé!			mirabi-ai-2026-10	active
+break_your_arm	break your arm	collocation	1	health	bị gãy tay	xương cánh tay bị gãy khi ngã hoặc va đập	Get down from the tree, or you'll break your arm!	Xuống khỏi cây đi, không thì gãy tay đấy!			mirabi-ai-2026-10	active
+healthy_food	healthy food	collocation	1	health	đồ ăn lành mạnh	thức ăn tốt cho sức khỏe như rau, trái cây	Children need healthy food to grow.	Trẻ em cần đồ ăn lành mạnh để lớn lên.			mirabi-ai-2026-10	active
+illness	illness	noun	2	health	sự ốm đau	khoảng thời gian hoặc tình trạng bị ốm	He missed school because of illness.	Cậu ấy nghỉ học vì ốm.		/ˈɪlnəs/	mirabi-ai-2026-10	active
+disease	disease	noun	2	health	căn bệnh	một loại bệnh cụ thể có tên, như bệnh tim, bệnh sốt rét	Heart disease is common in older people.	Bệnh tim phổ biến ở người lớn tuổi.		/dɪˈziːz/	mirabi-ai-2026-10	active
+sore	sore	adjective	2	health	đau nhức, đau rát	bộ phận cơ thể đau khi chạm vào hoặc khi dùng	My legs are sore after the long walk.	Chân tôi đau nhức sau chuyến đi bộ dài.		/sɔː/	mirabi-ai-2026-10	active
+ache	ache	verb	2	health	đau âm ỉ	cơn đau kéo dài, không dữ dội	My back aches after sitting all day.	Lưng tôi đau âm ỉ sau khi ngồi cả ngày.		/eɪk/	mirabi-ai-2026-10	active
+sneeze	sneeze	verb	2	health	hắt hơi	khi mũi bị kích thích, bị cảm hoặc dị ứng	Dust makes me sneeze.	Bụi làm tôi hắt hơi.		/sniːz/	mirabi-ai-2026-10	active
+sweat	sweat	verb	2	health	đổ mồ hôi	khi trời nóng, khi tập luyện hoặc khi sốt	I sweat a lot when I run.	Tôi đổ rất nhiều mồ hôi khi chạy.		/swet/	mirabi-ai-2026-10	active
+bleed	bleed	verb	2	health	chảy máu	khi bị đứt tay, bị thương	Your nose is bleeding.	Mũi bạn đang chảy máu.		/bliːd/	mirabi-ai-2026-10	active
+lung	lung	noun	2	health	phổi	cơ quan trong ngực dùng để thở	Smoking damages your lungs.	Hút thuốc làm hại phổi của bạn.		/lʌŋ/	mirabi-ai-2026-10	active
+thumb	thumb	noun	2	health	ngón tay cái	ngón ngắn và to nhất trên bàn tay	I hurt my thumb when I was playing volleyball.	Tôi bị đau ngón cái khi chơi bóng chuyền.		/θʌm/	mirabi-ai-2026-10	active
+wrist	wrist	noun	2	health	cổ tay	khớp nối giữa bàn tay và cánh tay	She wears a watch on her left wrist.	Cô ấy đeo đồng hồ ở cổ tay trái.		/rɪst/	mirabi-ai-2026-10	active
+ankle	ankle	noun	2	health	mắt cá chân	khớp nối giữa bàn chân và cẳng chân	He hurt his ankle during the match.	Anh ấy bị đau mắt cá chân trong trận đấu.		/ˈæŋkl/	mirabi-ai-2026-10	active
+muscle	muscle	noun	2	health	cơ bắp	phần thịt giúp cơ thể cử động	Swimming is good for your muscles.	Bơi lội tốt cho cơ bắp.		/ˈmʌsl/	mirabi-ai-2026-10	active
+tongue	tongue	noun	2	health	lưỡi	bộ phận trong miệng dùng để nếm và nói	Open your mouth and show me your tongue.	Há miệng ra và cho tôi xem lưỡi nào.		/tʌŋ/	mirabi-ai-2026-10	active
+clinic	clinic	noun	2	health	phòng khám	nơi khám bệnh nhỏ hơn bệnh viện	There is a small clinic near my house.	Gần nhà tôi có một phòng khám nhỏ.		/ˈklɪnɪk/	mirabi-ai-2026-10	active
+pharmacy	pharmacy	noun	2	health	hiệu thuốc, nhà thuốc	cửa hàng bán thuốc	You can buy this cream at any pharmacy.	Bạn có thể mua loại kem này ở bất kỳ hiệu thuốc nào.	chemist's|drugstore	/ˈfɑːməsi/	mirabi-ai-2026-10	active
+check-up	check-up	noun	2	health	buổi khám sức khỏe định kỳ	đi khám dù không bị ốm, để kiểm tra sức khỏe	I go for a check-up every year.	Năm nào tôi cũng đi khám sức khỏe định kỳ.	checkup	/ˈtʃekʌp/	mirabi-ai-2026-10	active
+blind	blind	adjective	2	health	mù, khiếm thị	không nhìn thấy được	He has been blind since birth.	Anh ấy bị mù từ khi sinh ra.		/blaɪnd/	mirabi-ai-2026-10	active
+deaf	deaf	adjective	2	health	điếc, khiếm thính	không nghe được hoặc nghe rất kém	My grandfather is a little deaf.	Ông tôi hơi bị điếc.		/def/	mirabi-ai-2026-10	active
+unhealthy	unhealthy	adjective	2	health	không lành mạnh, có hại cho sức khỏe	nói về thức ăn, thói quen, lối sống	Eating late at night is an unhealthy habit.	Ăn khuya là một thói quen không lành mạnh.		/ʌnˈhelθi/	mirabi-ai-2026-10	active
+dizzy	dizzy	adjective	2	health	chóng mặt	cảm giác mọi thứ quay vòng, sắp ngã	I felt dizzy when I stood up.	Tôi thấy chóng mặt khi đứng dậy.		/ˈdɪzi/	mirabi-ai-2026-10	active
+itchy	itchy	adjective	2	health	ngứa ngáy	cảm giác trên da khiến mình muốn gãi	These mosquito bites are really itchy.	Mấy vết muỗi đốt này ngứa quá.		/ˈɪtʃi/	mirabi-ai-2026-10	active
+painful	painful	adjective	2	health	đau, gây đau đớn	nói về vết thương, vết bỏng, việc chữa trị	The cut on my hand is very painful.	Vết đứt trên tay tôi rất đau.		/ˈpeɪnfl/	mirabi-ai-2026-10	active
+pale.health	pale	adjective	2	health	xanh xao, tái nhợt	sắc mặt nhợt nhạt vì ốm hoặc mệt	You look pale. Are you OK?	Trông bạn xanh xao quá. Bạn ổn chứ?		/peɪl/	mirabi-ai-2026-10	active
+medical	medical	adjective	2	health	thuộc về y tế, y khoa	liên quan đến khám chữa bệnh	She needs medical help right now.	Cô ấy cần được trợ giúp y tế ngay.		/ˈmedɪkl/	mirabi-ai-2026-10	active
+vitamin.health	vitamin	noun	2	health	vi-ta-min, sinh tố	chất cần cho cơ thể, có nhiều trong rau quả	Oranges are full of vitamin C.	Cam có rất nhiều vitamin C.		/ˈvɪtəmɪn/	mirabi-ai-2026-10	active
+calorie.health	calorie	noun	2	health	calo (đơn vị năng lượng)	đơn vị đo năng lượng có trong thức ăn	This cake has a lot of calories.	Cái bánh này có rất nhiều calo.		/ˈkæləri/	mirabi-ai-2026-10	active
+virus.disease	virus	noun	2	health	vi-rút gây bệnh	sinh vật rất nhỏ gây ra cảm cúm và nhiều bệnh khác	Flu is caused by a virus.	Cúm do vi-rút gây ra.		/ˈvaɪrəs/	mirabi-ai-2026-10	active
+germ	germ	noun	2	health	vi trùng, mầm bệnh	vật rất nhỏ gây bệnh, có trên tay, đồ vật	Wash your hands to kill the germs.	Hãy rửa tay để diệt vi trùng.		/dʒɜːm/	mirabi-ai-2026-10	active
+flu	flu	noun	2	health	bệnh cúm	bệnh do vi-rút, gây sốt, ho, đau mình	Half of my class has the flu.	Một nửa lớp tôi bị cúm.	influenza	/fluː/	mirabi-ai-2026-10	active
+cancer	cancer	noun	2	health	bệnh ung thư	bệnh nặng do tế bào phát triển bất thường	Smoking can cause lung cancer.	Hút thuốc có thể gây ung thư phổi.		/ˈkænsə/	mirabi-ai-2026-10	active
+x-ray	x-ray	noun	2	health	phim chụp X-quang	ảnh chụp xương hoặc bên trong cơ thể	The X-ray showed that his leg was broken.	Phim X-quang cho thấy chân anh ấy bị gãy.		/ˈeksreɪ/	mirabi-ai-2026-10	active
+injection	injection	noun	2	health	mũi tiêm, việc tiêm thuốc	đưa thuốc vào cơ thể bằng kim tiêm	The nurse gave me an injection in my arm.	Y tá tiêm cho tôi một mũi vào cánh tay.		/ɪnˈdʒekʃn/	mirabi-ai-2026-10	active
+operation.surgery	operation	noun	2	health	ca mổ, cuộc phẫu thuật	một lần bác sĩ mổ để chữa bệnh cho ai đó	My dad had an operation on his knee.	Bố tôi đã mổ đầu gối.		/ˌɒpəˈreɪʃn/	mirabi-ai-2026-10	active
+wheelchair	wheelchair	noun	2	health	xe lăn	ghế có bánh xe cho người không đi lại được	She has used a wheelchair since the accident.	Cô ấy phải dùng xe lăn từ sau vụ tai nạn.		/ˈwiːltʃeə/	mirabi-ai-2026-10	active
+bruise	bruise	noun	2	health	vết bầm tím	vết thâm trên da sau khi bị va đập	He has a big bruise on his leg.	Anh ấy có một vết bầm to ở chân.		/bruːz/	mirabi-ai-2026-10	active
+cut.wound	cut	noun	2	health	vết đứt, vết cắt	vết thương nhỏ trên da do dao, kính gây ra	Put some cream on that cut.	Hãy bôi chút kem lên vết đứt đó.		/kʌt/	mirabi-ai-2026-10	active
+backache	backache	noun	2	health	đau lưng	cơn đau ở lưng	Sitting all day gives me backache.	Ngồi cả ngày khiến tôi bị đau lưng.		/ˈbækeɪk/	mirabi-ai-2026-10	active
+earache	earache	noun	2	health	đau tai	cơn đau bên trong tai	The child has an earache and can't sleep.	Đứa trẻ bị đau tai và không ngủ được.		/ˈɪəreɪk/	mirabi-ai-2026-10	active
+painkiller	painkiller	noun	2	health	thuốc giảm đau	thuốc uống để bớt đau	Take a painkiller if your head still hurts.	Uống một viên thuốc giảm đau nếu bạn vẫn còn đau đầu.		/ˈpeɪnkɪlə/	mirabi-ai-2026-10	active
+sunburn	sunburn	noun	2	health	cháy nắng	da đỏ rát vì ở dưới nắng quá lâu	Wear a hat to avoid sunburn.	Hãy đội mũ để tránh bị cháy nắng.		/ˈsʌnbɜːn/	mirabi-ai-2026-10	active
+sore_throat	sore throat	collocation	2	health	đau họng	cổ họng đau rát, khó nuốt khi bị cảm	I have a sore throat and a runny nose.	Tôi bị đau họng và sổ mũi.			mirabi-ai-2026-10	active
+runny_nose	runny nose	collocation	2	health	sổ mũi, chảy nước mũi	nước mũi chảy liên tục khi bị cảm	Take a tissue, you have a runny nose.	Lấy khăn giấy đi, bạn đang chảy nước mũi kìa.			mirabi-ai-2026-10	active
+catch_a_cold	catch a cold	collocation	2	health	bị nhiễm lạnh, mắc cảm	bắt đầu bị cảm do lạnh hoặc lây từ người khác	Put on a coat or you'll catch a cold.	Mặc áo khoác vào kẻo bị cảm.			mirabi-ai-2026-10	active
+blow_your_nose	blow your nose	collocation	2	health	xì mũi	đẩy nước mũi ra vào khăn giấy	Here's a tissue. Blow your nose.	Khăn giấy đây. Xì mũi đi.			mirabi-ai-2026-10	active
+feel_sick	feel sick	collocation	2	health	buồn nôn	cảm giác muốn nôn, ví dụ khi đi xe	I always feel sick on long bus trips.	Tôi luôn thấy buồn nôn khi đi xe buýt đường dài.			mirabi-ai-2026-10	active
+throw_up	throw up	phrasal_verb	2	health	nôn, ói	cách nói thông thường khi thức ăn trào ra khỏi miệng	The baby threw up after drinking milk.	Em bé bị ói sau khi uống sữa.			mirabi-ai-2026-10	active
+lose_weight	lose weight	collocation	2	health	giảm cân	trở nên nhẹ cân hơn nhờ ăn uống, tập luyện	She wants to lose weight before summer.	Cô ấy muốn giảm cân trước mùa hè.			mirabi-ai-2026-10	active
+keep_fit	keep fit	collocation	2	health	giữ dáng, giữ sức khỏe	tập thể dục đều đặn để cơ thể khỏe	I go swimming to keep fit.	Tôi đi bơi để giữ sức khỏe.			mirabi-ai-2026-10	active
+have_a_temperature	have a temperature	collocation	2	health	bị sốt, người nóng	thân nhiệt cao hơn bình thường	You feel hot. I think you have a temperature.	Người con nóng quá. Mẹ nghĩ con bị sốt rồi.			mirabi-ai-2026-10	active
+doctors_appointment	doctor's appointment	collocation	2	health	lịch hẹn khám bệnh	giờ đã hẹn để gặp bác sĩ	I have a doctor's appointment at ten.	Tôi có lịch hẹn khám bệnh lúc mười giờ.			mirabi-ai-2026-10	active
+get_enough_sleep	get enough sleep	collocation	2	health	ngủ đủ giấc	ngủ đủ số giờ cơ thể cần	Teenagers need to get enough sleep.	Thanh thiếu niên cần ngủ đủ giấc.			mirabi-ai-2026-10	active
+drink_plenty_of_water	drink plenty of water	collocation	2	health	uống nhiều nước	lời khuyên khi trời nóng hoặc khi bị ốm	Drink plenty of water when you have a fever.	Hãy uống nhiều nước khi bị sốt.			mirabi-ai-2026-10	active
+junk_food.health	junk food	noun	2	health	đồ ăn vặt kém dinh dưỡng	đồ ăn nhanh, nhiều dầu mỡ, đường, ít chất bổ	Try to eat less junk food.	Hãy cố ăn ít đồ ăn vặt kém dinh dưỡng.			mirabi-ai-2026-10	active
+quit_smoking	quit smoking	collocation	2	health	bỏ thuốc lá	thôi hẳn việc hút thuốc	My uncle quit smoking last year.	Chú tôi đã bỏ thuốc lá năm ngoái.	give up smoking|stop smoking		mirabi-ai-2026-10	active
+take_a_deep_breath	take a deep breath	collocation	2	health	hít một hơi thật sâu	khi cần bình tĩnh hoặc khi bác sĩ khám phổi	Take a deep breath and hold it.	Hít một hơi thật sâu rồi nín thở.			mirabi-ai-2026-10	active
+work_out.exercise	work out	phrasal_verb	2	health	tập luyện thể lực	tập thể lực, thường ở phòng tập	He works out at the gym three times a week.	Anh ấy tập ở phòng gym ba lần một tuần.			mirabi-ai-2026-10	active
+treat.illness	treat	verb	3	health	điều trị, chữa trị	bác sĩ dùng thuốc hoặc phương pháp để chữa bệnh	The doctors treated him for a broken leg.	Các bác sĩ đã điều trị chân gãy cho anh ấy.		/triːt/	mirabi-ai-2026-10	active
+treatment	treatment	noun	3	health	sự điều trị, phương pháp chữa trị	cách bác sĩ chữa một bệnh	She is getting treatment for her back pain.	Cô ấy đang được điều trị chứng đau lưng.		/ˈtriːtmənt/	mirabi-ai-2026-10	active
+heal	heal	verb	3	health	lành lại, làm lành	vết thương, xương gãy dần khỏi	The cut on my finger healed quickly.	Vết đứt trên ngón tay tôi lành nhanh.		/hiːl/	mirabi-ai-2026-10	active
+cure	cure	verb	3	health	chữa khỏi	làm cho một bệnh hết hẳn	Doctors still cannot cure the common cold.	Các bác sĩ vẫn chưa thể chữa khỏi bệnh cảm thông thường.		/kjʊə/	mirabi-ai-2026-10	active
+recovery	recovery	noun	3	health	sự hồi phục	quá trình khỏe lại sau bệnh, mổ, chấn thương	We wish you a quick recovery.	Chúc bạn mau chóng hồi phục.		/rɪˈkʌvəri/	mirabi-ai-2026-10	active
+surgery	surgery	noun	3	health	phẫu thuật, việc mổ	phương pháp chữa bệnh bằng cách mổ, thường không đếm được	He needs surgery on his heart.	Anh ấy cần phẫu thuật tim.		/ˈsɜːdʒəri/	mirabi-ai-2026-10	active
+surgeon	surgeon	noun	3	health	bác sĩ phẫu thuật	bác sĩ chuyên mổ cho bệnh nhân	The surgeon said the operation went well.	Bác sĩ phẫu thuật nói ca mổ diễn ra tốt đẹp.		/ˈsɜːdʒən/	mirabi-ai-2026-10	active
+pharmacist	pharmacist	noun	3	health	dược sĩ	người bán và tư vấn thuốc ở hiệu thuốc	Ask the pharmacist how to take this medicine.	Hãy hỏi dược sĩ cách uống thuốc này.	chemist	/ˈfɑːməsɪst/	mirabi-ai-2026-10	active
+faint	faint	verb	3	health	ngất, xỉu	bất tỉnh trong thời gian ngắn vì nóng, đói, mất máu	She fainted in the hot sun.	Cô ấy bị ngất dưới trời nắng nóng.	pass out	/feɪnt/	mirabi-ai-2026-10	active
+vomit	vomit	verb	3	health	nôn mửa	cách nói trang trọng, dùng trong y khoa	The patient vomited twice during the night.	Bệnh nhân nôn hai lần trong đêm.		/ˈvɒmɪt/	mirabi-ai-2026-10	active
+shiver	shiver	verb	3	health	run rẩy	cơ thể run lên vì lạnh hoặc sốt	He was shivering with fever.	Anh ấy run lên vì sốt.		/ˈʃɪvə/	mirabi-ai-2026-10	active
+scratch.itch	scratch	verb	3	health	gãi	dùng móng tay cào lên chỗ ngứa	Try not to scratch the mosquito bites.	Cố đừng gãi chỗ muỗi đốt.		/skrætʃ/	mirabi-ai-2026-10	active
+stretch.muscle	stretch	verb	3	health	giãn cơ, duỗi người	kéo căng cơ trước hoặc sau khi tập	Always stretch before you go running.	Luôn giãn cơ trước khi đi chạy.		/stretʃ/	mirabi-ai-2026-10	active
+examine.patient	examine	verb	3	health	khám (bệnh)	bác sĩ xem xét cơ thể người bệnh	The doctor examined my throat.	Bác sĩ khám họng cho tôi.		/ɪɡˈzæmɪn/	mirabi-ai-2026-10	active
+infection	infection	noun	3	health	sự nhiễm trùng	bệnh do vi khuẩn hoặc vi-rút xâm nhập cơ thể	Keep the cut clean to avoid infection.	Giữ vết đứt sạch sẽ để tránh nhiễm trùng.		/ɪnˈfekʃn/	mirabi-ai-2026-10	active
+allergy	allergy	noun	3	health	chứng dị ứng	cơ thể phản ứng xấu với thức ăn, phấn hoa, bụi	I have an allergy to peanuts.	Tôi bị dị ứng đậu phộng.		/ˈælədʒi/	mirabi-ai-2026-10	active
+rash	rash	noun	3	health	phát ban, mẩn đỏ	nhiều nốt đỏ nổi trên da	The baby has a rash on her face.	Em bé bị nổi mẩn đỏ trên mặt.		/ræʃ/	mirabi-ai-2026-10	active
+wound	wound	noun	3	health	vết thương	chỗ bị thương sâu do dao, súng, tai nạn	The nurse cleaned the wound.	Y tá đã rửa vết thương.		/wuːnd/	mirabi-ai-2026-10	active
+swollen	swollen	adjective	3	health	sưng, sưng phồng	bộ phận cơ thể to lên sau khi bị thương, bị đốt	My ankle is swollen after the fall.	Mắt cá chân tôi bị sưng sau cú ngã.		/ˈswəʊlən/	mirabi-ai-2026-10	active
+hiccups	hiccups	noun	3	health	nấc cụt	những tiếng nấc liên tục không kiểm soát được	I get hiccups when I eat too fast.	Tôi bị nấc khi ăn quá nhanh.	hiccoughs	/ˈhɪkʌps/	mirabi-ai-2026-10	active
+pulse	pulse	noun	3	health	mạch, nhịp mạch	nhịp đập của tim cảm nhận được ở cổ tay	The nurse checked my pulse.	Y tá kiểm tra mạch cho tôi.		/pʌls/	mirabi-ai-2026-10	active
+organ.body	organ	noun	3	health	cơ quan, nội tạng	bộ phận bên trong cơ thể như tim, gan, phổi	The heart is a very important organ.	Tim là một cơ quan rất quan trọng.		/ˈɔːɡən/	mirabi-ai-2026-10	active
+liver	liver	noun	3	health	gan	cơ quan lọc chất độc trong cơ thể	Drinking too much alcohol can damage your liver.	Uống quá nhiều rượu có thể làm hại gan.		/ˈlɪvə/	mirabi-ai-2026-10	active
+kidney	kidney	noun	3	health	thận	một trong hai cơ quan lọc máu và tạo ra nước tiểu	Drink water to keep your kidneys healthy.	Uống nước để giữ cho thận khỏe mạnh.		/ˈkɪdni/	mirabi-ai-2026-10	active
+eyesight	eyesight	noun	3	health	thị lực	khả năng nhìn của mắt	My eyesight is getting worse, so I need glasses.	Thị lực của tôi đang kém đi nên tôi cần đeo kính.		/ˈaɪsaɪt/	mirabi-ai-2026-10	active
+hearing.sense	hearing	noun	3	health	thính lực, khả năng nghe	khả năng nghe của tai	Loud music can damage your hearing.	Nhạc to có thể làm hỏng thính lực của bạn.		/ˈhɪərɪŋ/	mirabi-ai-2026-10	active
+crutch	crutch	noun	3	health	cái nạng	gậy chống dưới nách giúp người bị đau chân đi lại	He walked on crutches for six weeks.	Anh ấy phải chống nạng trong sáu tuần.		/krʌtʃ/	mirabi-ai-2026-10	active
+thermometer	thermometer	noun	3	health	nhiệt kế	dụng cụ đo thân nhiệt	Put the thermometer under your tongue.	Đặt nhiệt kế dưới lưỡi.		/θəˈmɒmɪtə/	mirabi-ai-2026-10	active
+depression	depression	noun	3	health	bệnh trầm cảm	tình trạng buồn bã kéo dài, cần được điều trị	She was treated for depression after losing her job.	Cô ấy được điều trị trầm cảm sau khi mất việc.		/dɪˈpreʃn/	mirabi-ai-2026-10	active
+dental	dental	adjective	3	health	thuộc về răng, nha khoa	liên quan đến răng và việc chữa răng	Regular dental check-ups are important.	Khám răng định kỳ là rất quan trọng.		/ˈdentl/	mirabi-ai-2026-10	active
+physical	physical	adjective	3	health	thuộc về thể chất	liên quan đến cơ thể, không phải tinh thần	Physical activity helps you sleep better.	Hoạt động thể chất giúp bạn ngủ ngon hơn.		/ˈfɪzɪkl/	mirabi-ai-2026-10	active
+mental	mental	adjective	3	health	thuộc về tinh thần	liên quan đến tâm trí, suy nghĩ, cảm xúc	Stress can affect your mental and physical health.	Căng thẳng có thể ảnh hưởng đến sức khỏe tinh thần và thể chất của bạn.		/ˈmentl/	mirabi-ai-2026-10	active
+disabled	disabled	adjective	3	health	khuyết tật	có một phần cơ thể hoặc trí tuệ không hoạt động bình thường	The building has a lift for disabled people.	Tòa nhà có thang máy cho người khuyết tật.		/dɪsˈeɪbld/	mirabi-ai-2026-10	active
+hygiene	hygiene	noun	3	health	vệ sinh	việc giữ cơ thể, đồ vật sạch sẽ để phòng bệnh	Good hygiene stops germs from spreading.	Giữ vệ sinh tốt giúp ngăn vi trùng lây lan.		/ˈhaɪdʒiːn/	mirabi-ai-2026-10	active
+therapy	therapy	noun	3	health	liệu pháp, trị liệu	cách chữa bệnh lâu dài, không dùng phẫu thuật	She goes to therapy once a week.	Cô ấy đi trị liệu mỗi tuần một lần.		/ˈθerəpi/	mirabi-ai-2026-10	active
+ward.hospital	ward	noun	3	health	khu bệnh, phòng bệnh	phòng lớn có nhiều giường trong bệnh viện	The children's ward is on the second floor.	Khu bệnh nhi ở tầng hai.		/wɔːd/	mirabi-ai-2026-10	active
+physically.health	physically	adverb	3	health	về mặt thể chất	nói về cơ thể, sức lực	The job is physically hard.	Công việc này vất vả về mặt thể chất.		/ˈfɪzɪkli/	mirabi-ai-2026-10	active
+mentally	mentally	adverb	3	health	về mặt tinh thần	nói về tâm trí, cảm xúc	After the exams I felt mentally tired.	Sau kỳ thi tôi thấy mệt mỏi về tinh thần.		/ˈmentəli/	mirabi-ai-2026-10	active
+healthily	healthily	adverb	3	health	một cách lành mạnh	ăn uống, sống theo cách tốt cho sức khỏe	I try to eat healthily during the week.	Tôi cố gắng ăn uống lành mạnh trong tuần.		/ˈhelθɪli/	mirabi-ai-2026-10	active
+blood_pressure	blood pressure	noun	3	health	huyết áp	áp lực của máu trong mạch, bác sĩ thường đo	The nurse will check your blood pressure.	Y tá sẽ đo huyết áp cho bạn.			mirabi-ai-2026-10	active
+heart_attack	heart attack	noun	3	health	cơn nhồi máu cơ tim	khi tim đột ngột bị thiếu máu, rất nguy hiểm	He had a heart attack at the age of fifty.	Ông ấy bị nhồi máu cơ tim năm năm mươi tuổi.			mirabi-ai-2026-10	active
+pass_out	pass out	phrasal_verb	3	health	ngất đi, bất tỉnh	cách nói thông thường, khi bị ngất vì nóng, mệt	It was so hot that two runners passed out.	Trời nóng đến mức hai vận động viên bị ngất.	faint		mirabi-ai-2026-10	active
+fall_ill	fall ill	collocation	3	health	đổ bệnh, lâm bệnh	bắt đầu bị ốm, thường đột ngột	She fell ill during her holiday.	Cô ấy đổ bệnh trong kỳ nghỉ.	fall sick|get sick		mirabi-ai-2026-10	active
+put_on_weight.health	put on weight	collocation	3	health	tăng cân	trở nên nặng hơn, thường do ăn nhiều	I put on weight over the holidays.	Tôi tăng cân trong kỳ nghỉ lễ.	gain weight		mirabi-ai-2026-10	active
+cut_down_on.health	cut down on	phrasal_verb	3	health	cắt giảm, ăn uống bớt	dùng ít đi đồ có hại như đường, muối, cà phê	You should cut down on sugar.	Bạn nên ăn bớt đường.			mirabi-ai-2026-10	active
+get_over.illness	get over	phrasal_verb	3	health	khỏi (bệnh), vượt qua	hết hẳn một bệnh nhẹ như cảm, cúm	It took me a week to get over the flu.	Tôi mất một tuần mới khỏi cúm.			mirabi-ai-2026-10	active
+out_of_breath	out of breath	collocation	3	health	hụt hơi, thở không ra hơi	sau khi chạy hoặc leo cầu thang	I was out of breath after climbing the stairs.	Tôi thở không ra hơi sau khi leo cầu thang.	short of breath		mirabi-ai-2026-10	active
+side_effect	side effect	noun	3	health	tác dụng phụ	ảnh hưởng không mong muốn của thuốc	This medicine may have side effects such as headaches.	Thuốc này có thể gây tác dụng phụ như đau đầu.			mirabi-ai-2026-10	active
+eye_drops	eye drops	noun	3	health	thuốc nhỏ mắt	thuốc nước dùng để nhỏ vào mắt	Use these eye drops twice a day.	Dùng thuốc nhỏ mắt này hai lần một ngày.			mirabi-ai-2026-10	active
+get_vaccinated	get vaccinated	collocation	3	health	đi tiêm phòng	tiêm vắc-xin để phòng bệnh	Children should get vaccinated against measles.	Trẻ em nên được tiêm phòng sởi.			mirabi-ai-2026-10	active
+blood_test	blood test	noun	3	health	xét nghiệm máu	lấy máu để kiểm tra bệnh	The doctor sent me for a blood test.	Bác sĩ cho tôi đi xét nghiệm máu.			mirabi-ai-2026-10	active
+take_your_temperature	take your temperature	collocation	3	health	cặp nhiệt độ, đo thân nhiệt	dùng nhiệt kế đo xem có bị sốt không	Sit down and let me take your temperature.	Ngồi xuống để mẹ cặp nhiệt độ cho con.			mirabi-ai-2026-10	active
+family_doctor	family doctor	noun	3	health	bác sĩ gia đình	bác sĩ khám bệnh thường xuyên cho cả gia đình	You should talk to your family doctor first.	Bạn nên nói chuyện với bác sĩ gia đình trước.	GP		mirabi-ai-2026-10	active
+pull_a_muscle	pull a muscle	collocation	3	health	bị căng cơ	làm cơ bị giãn quá mức khi tập luyện	I pulled a muscle in my leg playing football.	Tôi bị căng cơ chân khi đá bóng.			mirabi-ai-2026-10	active
+twist_your_ankle	twist your ankle	collocation	3	health	bị trẹo mắt cá chân	khi bước hụt, chân bị lật	Be careful on the stairs or you'll twist your ankle.	Cẩn thận trên cầu thang kẻo bị trẹo chân.			mirabi-ai-2026-10	active
+skip_meals	skip meals	collocation	3	health	bỏ bữa	không ăn một bữa chính, thói quen có hại	Skipping meals is bad for your health.	Bỏ bữa không tốt cho sức khỏe.			mirabi-ai-2026-10	active
+take_it_easy.health	take it easy	phrase	3	health	nghỉ ngơi, đừng gắng sức	lời khuyên cho người mới ốm dậy hoặc đang mệt	The doctor told me to take it easy for a few days.	Bác sĩ bảo tôi nghỉ ngơi, đừng gắng sức vài ngày.			mirabi-ai-2026-10	active
+in_good_shape	in good shape	collocation	3	health	có thể lực tốt	cơ thể khỏe và săn chắc nhờ vận động	She runs every day, so she's in good shape.	Cô ấy chạy bộ mỗi ngày nên có thể lực tốt.	in shape		mirabi-ai-2026-10	active
+suffer_from	suffer from	phrasal_verb	4	health	mắc, bị (bệnh)	bị một bệnh hoặc vấn đề sức khỏe, thường lâu dài	My mother suffers from back pain.	Mẹ tôi bị đau lưng.			mirabi-ai-2026-10	active
+come_down_with	come down with	phrasal_verb	4	health	bị mắc (bệnh nhẹ)	bắt đầu bị một bệnh như cảm, cúm	I think I'm coming down with a cold.	Tôi nghĩ mình sắp bị cảm rồi.			mirabi-ai-2026-10	active
+diabetes	diabetes	noun	4	health	bệnh tiểu đường	bệnh do lượng đường trong máu quá cao	People with diabetes must watch how much sugar they eat.	Người bị tiểu đường phải chú ý lượng đường mình ăn.		/ˌdaɪəˈbiːtiːz/	mirabi-ai-2026-10	active
+asthma	asthma	noun	4	health	bệnh hen suyễn	bệnh làm khó thở, hay lên cơn khi gặp bụi, khói	My brother has asthma, so he can't run for long.	Em trai tôi bị hen suyễn nên không chạy lâu được.		/ˈæsmə/	mirabi-ai-2026-10	active
+stroke.illness	stroke	noun	4	health	đột quỵ, tai biến	khi mạch máu trong não bị tắc hoặc vỡ	My grandfather had a stroke and can't walk well now.	Ông tôi bị đột quỵ và giờ đi lại khó khăn.		/strəʊk/	mirabi-ai-2026-10	active
+migraine	migraine	noun	4	health	chứng đau nửa đầu	cơn đau đầu rất nặng, thường kèm buồn nôn	Bright lights give her a migraine.	Ánh sáng chói làm cô ấy bị đau nửa đầu.		/ˈmiːɡreɪn/	mirabi-ai-2026-10	active
+insomnia	insomnia	noun	4	health	chứng mất ngủ	tình trạng khó ngủ kéo dài nhiều đêm	Stress at work gave him insomnia.	Căng thẳng công việc khiến anh ấy mất ngủ.		/ɪnˈsɒmniə/	mirabi-ai-2026-10	active
+fatigue	fatigue	noun	4	health	sự mệt mỏi kéo dài	cảm giác rất mệt, thường là triệu chứng của bệnh	Fatigue is a common symptom of the illness.	Mệt mỏi là một triệu chứng phổ biến của bệnh này.		/fəˈtiːɡ/	mirabi-ai-2026-10	active
+obese	obese	adjective	4	health	béo phì	quá béo đến mức có hại cho sức khỏe	More and more children are becoming obese.	Ngày càng nhiều trẻ em bị béo phì.		/əʊˈbiːs/	mirabi-ai-2026-10	active
+infectious	infectious	adjective	4	health	truyền nhiễm	bệnh do vi khuẩn, vi-rút gây ra và lây được	Measles is a very infectious disease.	Sởi là một bệnh truyền nhiễm rất mạnh.		/ɪnˈfekʃəs/	mirabi-ai-2026-10	active
+infect	infect	verb	4	health	lây nhiễm, làm nhiễm bệnh	vi khuẩn, vi-rút truyền sang người hoặc vết thương	The virus can infect people of all ages.	Vi-rút có thể lây nhiễm cho người ở mọi lứa tuổi.		/ɪnˈfekt/	mirabi-ai-2026-10	active
+outbreak	outbreak	noun	4	health	sự bùng phát (dịch bệnh)	khi một bệnh đột nhiên xuất hiện ở nhiều người	There was an outbreak of flu at the school.	Đã có một đợt bùng phát cúm ở trường.		/ˈaʊtbreɪk/	mirabi-ai-2026-10	active
+spine	spine	noun	4	health	cột sống	chuỗi xương chạy dọc giữa lưng	Sitting badly can hurt your spine.	Ngồi sai tư thế có thể làm hại cột sống.		/spaɪn/	mirabi-ai-2026-10	active
+vein	vein	noun	4	health	tĩnh mạch, ven	mạch máu đưa máu về tim, nơi y tá lấy máu	The nurse found a vein in my arm.	Y tá tìm thấy ven trên cánh tay tôi.		/veɪn/	mirabi-ai-2026-10	active
+dehydrated	dehydrated	adjective	4	health	mất nước	cơ thể thiếu nước do nóng, nôn, tiêu chảy	Drink more water or you'll get dehydrated.	Uống thêm nước đi kẻo bị mất nước.		/ˌdiːhaɪˈdreɪtɪd/	mirabi-ai-2026-10	active
+nauseous	nauseous	adjective	4	health	nôn nao, buồn nôn (trang trọng)	cách nói trang trọng hơn của cảm giác muốn nôn	The medicine made me feel nauseous.	Thuốc làm tôi thấy nôn nao.		/ˈnɔːziəs/	mirabi-ai-2026-10	active
+specialist	specialist	noun	4	health	bác sĩ chuyên khoa	bác sĩ chuyên chữa một loại bệnh hoặc bộ phận	My doctor sent me to a skin specialist.	Bác sĩ của tôi giới thiệu tôi đến bác sĩ chuyên khoa da liễu.		/ˈspeʃəlɪst/	mirabi-ai-2026-10	active
+prescribe	prescribe	verb	4	health	kê đơn (thuốc)	bác sĩ ghi thuốc người bệnh cần dùng	The doctor prescribed some cream for my rash.	Bác sĩ kê cho tôi một loại kem bôi chỗ phát ban.		/prɪˈskraɪb/	mirabi-ai-2026-10	active
+dose	dose	noun	4	health	liều thuốc, liều lượng	lượng thuốc uống mỗi lần	Do not take more than the stated dose.	Không được uống quá liều đã ghi.		/dəʊs/	mirabi-ai-2026-10	active
+antibiotic	antibiotic	noun	4	health	thuốc kháng sinh	thuốc diệt vi khuẩn gây bệnh	Antibiotics don't work against a cold.	Thuốc kháng sinh không có tác dụng với cảm lạnh.		/ˌæntibaɪˈɒtɪk/	mirabi-ai-2026-10	active
+ointment	ointment	noun	4	health	thuốc mỡ	thuốc dạng kem đặc để bôi lên da	Put this ointment on the burn twice a day.	Bôi thuốc mỡ này lên vết bỏng hai lần một ngày.		/ˈɔɪntmənt/	mirabi-ai-2026-10	active
+capsule	capsule	noun	4	health	viên nang	thuốc có vỏ bọc mềm, bên trong là bột hoặc nước	Take one capsule with water.	Uống một viên nang với nước.		/ˈkæpsjuːl/	mirabi-ai-2026-10	active
+therapist	therapist	noun	4	health	nhà trị liệu	người chữa bệnh bằng liệu pháp, thường về tâm lý	Talking to a therapist helped her a lot.	Nói chuyện với nhà trị liệu đã giúp cô ấy rất nhiều.		/ˈθerəpɪst/	mirabi-ai-2026-10	active
+counselling	counselling	noun	4	health	sự tư vấn tâm lý	nói chuyện với chuyên gia để vượt qua khó khăn tinh thần	The school offers free counselling to students.	Trường cung cấp dịch vụ tư vấn tâm lý miễn phí cho học sinh.	counseling	/ˈkaʊnsəlɪŋ/	mirabi-ai-2026-10	active
+anxiety.disorder	anxiety	noun	4	health	chứng rối loạn lo âu	vấn đề sức khỏe tinh thần, lo lắng kéo dài khó kiểm soát	He is getting help for his anxiety.	Anh ấy đang được giúp đỡ để điều trị chứng rối loạn lo âu.		/æŋˈzaɪəti/	mirabi-ai-2026-10	active
+burnout	burnout	noun	4	health	tình trạng kiệt sức vì làm việc quá sức	mệt mỏi cả thể chất lẫn tinh thần vì áp lực kéo dài	Working twelve hours a day led to burnout.	Làm việc mười hai tiếng mỗi ngày dẫn đến kiệt sức.		/ˈbɜːnaʊt/	mirabi-ai-2026-10	active
+fracture	fracture	noun	4	health	chỗ gãy xương, vết nứt xương	xương bị gãy hoặc nứt, thường thấy trên phim chụp	The X-ray showed a small fracture in her wrist.	Phim X-quang cho thấy một chỗ nứt nhỏ ở cổ tay cô ấy.		/ˈfræktʃə/	mirabi-ai-2026-10	active
+immune	immune	adjective	4	health	miễn dịch (với bệnh)	cơ thể không bị mắc một bệnh nào đó nữa	Once you've had chickenpox, you're usually immune to it.	Một khi đã bị thủy đậu, bạn thường sẽ miễn dịch với nó.		/ɪˈmjuːn/	mirabi-ai-2026-10	active
+addiction	addiction	noun	4	health	sự nghiện, chứng nghiện	không thể dừng dùng một chất hoặc làm một việc	He is fighting his addiction to cigarettes.	Anh ấy đang chiến đấu với chứng nghiện thuốc lá.		/əˈdɪkʃn/	mirabi-ai-2026-10	active
+addicted	addicted	adjective	4	health	bị nghiện	không thể ngừng dùng thứ gì, như thuốc lá, rượu, điện thoại	Many teenagers are addicted to their phones.	Nhiều thiếu niên bị nghiện điện thoại.		/əˈdɪktɪd/	mirabi-ai-2026-10	active
+relieve	relieve	verb	4	health	làm dịu, làm giảm (cơn đau)	làm cho cơn đau, triệu chứng bớt đi	This cream will relieve the itching.	Loại kem này sẽ làm dịu cơn ngứa.		/rɪˈliːv/	mirabi-ai-2026-10	active
+inhale	inhale	verb	4	health	hít vào	đưa không khí, khói, thuốc vào phổi	Inhale slowly through your nose.	Hít vào chậm bằng mũi.		/ɪnˈheɪl/	mirabi-ai-2026-10	active
+exhale	exhale	verb	4	health	thở ra	đẩy không khí ra khỏi phổi	Now exhale through your mouth.	Bây giờ thở ra bằng miệng.		/eksˈheɪl/	mirabi-ai-2026-10	active
+numb.health	numb	adjective	4	health	tê, mất cảm giác	bộ phận cơ thể không cảm thấy gì vì lạnh hoặc thuốc tê	My fingers were numb with cold.	Các ngón tay tôi tê cóng vì lạnh.		/nʌm/	mirabi-ai-2026-10	active
+limp	limp	verb	4	health	đi khập khiễng	bước đi không đều vì đau chân	He limped off the field with a bad knee.	Anh ấy đi khập khiễng ra khỏi sân vì đầu gối bị đau.		/lɪmp/	mirabi-ai-2026-10	active
+operate.surgery	operate	verb	4	health	mổ, phẫu thuật cho	bác sĩ mổ để chữa bệnh cho ai đó	The doctors decided to operate on her leg.	Các bác sĩ quyết định mổ chân cho cô ấy.		/ˈɒpəreɪt/	mirabi-ai-2026-10	active
+hygienic	hygienic	adjective	4	health	hợp vệ sinh	sạch sẽ, không có vi trùng	The kitchen must be kept hygienic.	Nhà bếp phải được giữ hợp vệ sinh.		/haɪˈdʒiːnɪk/	mirabi-ai-2026-10	active
+posture.health	posture	noun	4	health	tư thế (đứng, ngồi)	cách giữ cơ thể khi ngồi hoặc đứng	Bad posture can cause back pain.	Tư thế sai có thể gây đau lưng.		/ˈpɒstʃə/	mirabi-ai-2026-10	active
+self-care.health	self-care	noun	4	health	sự tự chăm sóc bản thân	việc chủ động giữ gìn sức khỏe thể chất và tinh thần	Getting enough sleep is an important part of self-care.	Ngủ đủ giấc là một phần quan trọng của việc tự chăm sóc bản thân.		/ˌselfˈkeə/	mirabi-ai-2026-10	draft
+medically	medically	adverb	4	health	về mặt y học	theo quan điểm, kiến thức y khoa	He is medically fit to work again.	Về mặt y học, anh ấy đủ sức khỏe để làm việc lại.		/ˈmedɪkli/	mirabi-ai-2026-10	active
+stay_hydrated	stay hydrated	collocation	4	health	giữ đủ nước cho cơ thể	uống nước thường xuyên, nhất là khi nóng hoặc tập luyện	Remember to stay hydrated during the race.	Nhớ giữ đủ nước cho cơ thể trong suốt cuộc đua.			mirabi-ai-2026-10	active
+mental_illness	mental illness	noun	4	health	bệnh tâm thần	bệnh ảnh hưởng đến suy nghĩ, cảm xúc, hành vi	Mental illness is nothing to be ashamed of.	Bệnh tâm thần không phải điều gì đáng xấu hổ.			mirabi-ai-2026-10	active
+medical_history	medical history	noun	4	health	tiền sử bệnh	các bệnh và cách chữa mà một người đã có trước đây	The doctor asked about my medical history.	Bác sĩ hỏi về tiền sử bệnh của tôi.			mirabi-ai-2026-10	active
+wisdom_tooth	wisdom tooth	noun	4	health	răng khôn	răng hàm mọc muộn nhất, ở cuối hàm	I had my wisdom tooth taken out last week.	Tuần trước tôi đã nhổ răng khôn.			mirabi-ai-2026-10	active
+hay_fever	hay fever	noun	4	health	viêm mũi dị ứng phấn hoa	dị ứng phấn hoa vào mùa xuân, gây hắt hơi, ngứa mắt	I get hay fever every spring.	Mùa xuân nào tôi cũng bị viêm mũi dị ứng phấn hoa.			mirabi-ai-2026-10	active
+stomach_bug	stomach bug	noun	4	health	chứng rối loạn tiêu hóa do vi-rút	bệnh nhẹ gây đau bụng, nôn, tiêu chảy vài ngày	She missed school because of a stomach bug.	Cô bé nghỉ học vì bị rối loạn tiêu hóa.			mirabi-ai-2026-10	active
+digestive_system	digestive system	noun	4	health	hệ tiêu hóa	các cơ quan tiêu hóa thức ăn như dạ dày, ruột	Fibre helps your digestive system work well.	Chất xơ giúp hệ tiêu hóa của bạn hoạt động tốt.			mirabi-ai-2026-10	active
+be_on_medication	be on medication	collocation	4	health	đang dùng thuốc điều trị	đang uống thuốc đều đặn theo đơn của bác sĩ	Are you on any medication at the moment?	Hiện tại bạn có đang dùng thuốc gì không?			mirabi-ai-2026-10	active
+life_expectancy	life expectancy	noun	4	health	tuổi thọ trung bình	số năm trung bình một người được dự đoán sẽ sống	Life expectancy in Vietnam is about 74 years.	Tuổi thọ trung bình ở Việt Nam khoảng 74 năm.			mirabi-ai-2026-10	active
+fight_off	fight off	phrasal_verb	4	health	chống lại (bệnh)	cơ thể đánh bại vi-rút, vi khuẩn	Vitamin C may help your body fight off colds.	Vitamin C có thể giúp cơ thể chống lại cảm lạnh.			mirabi-ai-2026-10	active
+intensive_care	intensive care	noun	4	health	khoa hồi sức tích cực	khu chăm sóc bệnh nhân rất nặng trong bệnh viện	After the accident he spent a week in intensive care.	Sau vụ tai nạn anh ấy nằm một tuần ở khoa hồi sức tích cực.			mirabi-ai-2026-10	active
+operating_theatre	operating theatre	noun	4	health	phòng mổ	phòng trong bệnh viện nơi bác sĩ phẫu thuật	The patient was taken to the operating theatre.	Bệnh nhân được đưa vào phòng mổ.	operating room		mirabi-ai-2026-10	active
+make_a_full_recovery	make a full recovery	collocation	4	health	hồi phục hoàn toàn	khỏe lại hoàn toàn sau bệnh hoặc chấn thương	The doctors expect her to make a full recovery.	Các bác sĩ hy vọng cô ấy sẽ hồi phục hoàn toàn.			mirabi-ai-2026-10	active
+panic_attack	panic attack	noun	4	health	cơn hoảng loạn	cơn sợ hãi đột ngột kèm tim đập nhanh, khó thở	She had a panic attack before the exam.	Cô ấy bị một cơn hoảng loạn trước kỳ thi.			mirabi-ai-2026-10	active
+tooth_decay	tooth decay	noun	4	health	sâu răng	răng bị hỏng do vi khuẩn và đồ ngọt	Too many sweets can cause tooth decay.	Ăn quá nhiều kẹo có thể gây sâu răng.			mirabi-ai-2026-10	active
+donate_blood	donate blood	collocation	4	health	hiến máu	cho máu của mình để giúp người bệnh	I donate blood twice a year.	Tôi hiến máu hai lần một năm.	give blood		mirabi-ai-2026-10	active
+diagnose	diagnose	verb	5	health	chẩn đoán	bác sĩ xác định người bệnh mắc bệnh gì	She was diagnosed with diabetes last year.	Cô ấy được chẩn đoán mắc tiểu đường năm ngoái.		/ˈdaɪəɡnəʊz/	mirabi-ai-2026-10	active
+under_the_weather	under the weather	idiom	5	health	hơi mệt, không được khỏe	cảm thấy hơi ốm nhưng không nặng	I'm feeling a bit under the weather today.	Hôm nay tôi thấy trong người hơi mệt.			mirabi-ai-2026-10	active
+pandemic	pandemic	noun	5	health	đại dịch	dịch bệnh lan rộng ra nhiều nước trên thế giới	Schools closed during the pandemic.	Các trường học đóng cửa trong thời kỳ đại dịch.		/pænˈdemɪk/	mirabi-ai-2026-10	active
+quarantine	quarantine	noun	5	health	sự cách ly (y tế)	giữ người hoặc vật nuôi riêng ra để bệnh không lây	Travellers had to stay in quarantine for two weeks.	Du khách phải cách ly trong hai tuần.		/ˈkwɒrəntiːn/	mirabi-ai-2026-10	active
+acute	acute	adjective	5	health	cấp tính	bệnh đến đột ngột và nặng, trái với mãn tính	He was taken to hospital with acute stomach pain.	Anh ấy được đưa vào viện vì đau bụng cấp.		/əˈkjuːt/	mirabi-ai-2026-10	active
+overdose	overdose	noun	5	health	sự quá liều	uống hoặc dùng thuốc nhiều quá mức an toàn	She was rushed to hospital after an overdose.	Cô ấy được đưa gấp vào viện sau khi dùng thuốc quá liều.		/ˈəʊvədəʊs/	mirabi-ai-2026-10	active
+anaesthetic	anaesthetic	noun	5	health	thuốc gây mê, thuốc tê	thuốc làm mất cảm giác đau khi mổ	The operation is done under a general anaesthetic.	Ca mổ được thực hiện dưới gây mê toàn thân.	anesthetic	/ˌænəsˈθetɪk/	mirabi-ai-2026-10	active
+relapse	relapse	noun	5	health	sự tái phát	bệnh quay trở lại sau khi đã đỡ	He had a relapse after leaving hospital too early.	Ông ấy bị tái phát sau khi xuất viện quá sớm.		/rɪˈlæps/	mirabi-ai-2026-10	active
+critically	critically	adverb	5	health	một cách nguy kịch	bệnh hoặc bị thương rất nặng, có thể tử vong	Two people are critically ill in hospital.	Hai người đang trong tình trạng nguy kịch ở bệnh viện.		/ˈkrɪtɪkli/	mirabi-ai-2026-10	active
+terminally	terminally	adverb	5	health	ở giai đoạn cuối	bệnh không chữa được và sẽ dẫn đến tử vong	She looks after terminally ill people at home.	Cô ấy chăm sóc những người bệnh giai đoạn cuối tại nhà.		/ˈtɜːmɪnəli/	mirabi-ai-2026-10	active
+chronically	chronically	adverb	5	health	một cách mãn tính, kéo dài	bệnh kéo dài nhiều năm	Many chronically ill people need daily care.	Nhiều người bệnh mãn tính cần được chăm sóc hằng ngày.		/ˈkrɒnɪkli/	mirabi-ai-2026-10	active
+orally	orally	adverb	5	health	qua đường uống	cách dùng thuốc bằng miệng	This medicine should be taken orally.	Thuốc này phải được dùng qua đường uống.		/ˈɔːrəli/	mirabi-ai-2026-10	active
+internally	internally	adverb	5	health	ở bên trong cơ thể	nói về chảy máu, tổn thương bên trong	After the crash he was bleeding internally.	Sau vụ va chạm anh ấy bị chảy máu trong.		/ɪnˈtɜːnəli/	mirabi-ai-2026-10	active
+wheeze	wheeze	verb	5	health	thở khò khè	thở có tiếng rít, thường do hen suyễn	The boy was wheezing and needed his inhaler.	Cậu bé thở khò khè và cần bình xịt.		/wiːz/	mirabi-ai-2026-10	active
+dislocate	dislocate	verb	5	health	làm trật khớp	xương bị lệch ra khỏi khớp	He dislocated his shoulder playing rugby.	Anh ấy bị trật khớp vai khi chơi bóng bầu dục.		/ˈdɪsləkeɪt/	mirabi-ai-2026-10	active
+paralysed	paralysed	adjective	5	health	bị liệt	không cử động được một phần cơ thể	She was paralysed from the waist down after the accident.	Cô ấy bị liệt nửa người dưới sau vụ tai nạn.	paralyzed	/ˈpærəlaɪzd/	mirabi-ai-2026-10	active
+sterile	sterile	adjective	5	health	vô trùng	hoàn toàn sạch, không có vi khuẩn	Doctors must use sterile equipment.	Bác sĩ phải dùng dụng cụ vô trùng.		/ˈsteraɪl/	mirabi-ai-2026-10	active
+malnutrition	malnutrition	noun	5	health	suy dinh dưỡng	tình trạng cơ thể thiếu chất do ăn không đủ	Many children in poor areas suffer from malnutrition.	Nhiều trẻ em ở vùng nghèo bị suy dinh dưỡng.		/ˌmælnjuˈtrɪʃn/	mirabi-ai-2026-10	active
+metabolism	metabolism	noun	5	health	sự trao đổi chất	quá trình cơ thể biến thức ăn thành năng lượng	Exercise can speed up your metabolism.	Tập thể dục có thể đẩy nhanh quá trình trao đổi chất.		/məˈtæbəlɪzəm/	mirabi-ai-2026-10	active
+inflammation	inflammation	noun	5	health	chứng viêm	chỗ sưng, đỏ, nóng, đau trong cơ thể	This medicine reduces inflammation in the joints.	Thuốc này làm giảm viêm ở các khớp.		/ˌɪnfləˈmeɪʃn/	mirabi-ai-2026-10	active
+outpatient	outpatient	noun	5	health	bệnh nhân ngoại trú	người khám chữa bệnh rồi về trong ngày, không nằm viện	He is being treated as an outpatient.	Anh ấy đang được điều trị ngoại trú.		/ˈaʊtpeɪʃnt/	mirabi-ai-2026-10	active
+paediatrician	paediatrician	noun	5	health	bác sĩ nhi khoa	bác sĩ chuyên chữa bệnh cho trẻ em	Take the baby to a paediatrician if the fever continues.	Đưa bé đến bác sĩ nhi nếu vẫn còn sốt.	pediatrician	/ˌpiːdiəˈtrɪʃn/	mirabi-ai-2026-10	active
+physiotherapy	physiotherapy	noun	5	health	vật lý trị liệu	chữa bệnh bằng bài tập, xoa bóp, nhiệt	After the knee operation she needed physiotherapy.	Sau ca mổ đầu gối, cô ấy cần tập vật lý trị liệu.	physical therapy	/ˌfɪziəʊˈθerəpi/	mirabi-ai-2026-10	active
+psychiatrist	psychiatrist	noun	5	health	bác sĩ tâm thần	bác sĩ chữa các bệnh về tâm thần	The psychiatrist prescribed medicine for his depression.	Bác sĩ tâm thần đã kê thuốc trị trầm cảm cho anh ấy.		/saɪˈkaɪətrɪst/	mirabi-ai-2026-10	active
+antibody	antibody	noun	5	health	kháng thể	chất cơ thể tạo ra để chống lại vi khuẩn, vi-rút	The vaccine helps your body make antibodies.	Vắc-xin giúp cơ thể tạo ra kháng thể.		/ˈæntibɒdi/	mirabi-ai-2026-10	active
+frail	frail	adjective	5	health	yếu ớt, ốm yếu	người già hoặc người bệnh gầy yếu, dễ ngã	My grandmother is too frail to walk alone.	Bà tôi quá yếu để tự đi một mình.		/freɪl/	mirabi-ai-2026-10	active
+bedridden	bedridden	adjective	5	health	nằm liệt giường	ốm nặng hoặc già yếu, không rời giường được	He has been bedridden since his stroke.	Ông ấy nằm liệt giường từ khi bị đột quỵ.		/ˈbedrɪdn/	mirabi-ai-2026-10	active
+lethargic.health	lethargic	adjective	5	health	uể oải, lờ đờ	thiếu năng lượng, không muốn làm gì, thường do bệnh	The heat made everyone feel lethargic.	Cái nóng khiến ai cũng thấy uể oải.		/ləˈθɑːdʒɪk/	mirabi-ai-2026-10	active
+immunise	immunise	verb	5	health	tiêm chủng, gây miễn dịch	cho ai đó tiêm vắc-xin để không mắc bệnh	All children should be immunised against polio.	Tất cả trẻ em đều nên được tiêm chủng phòng bại liệt.	immunize|vaccinate	/ˈɪmjunaɪz/	mirabi-ai-2026-10	active
+run-down.health	run-down	adjective	5	health	suy nhược, dễ ốm	cơ thể yếu đi vì làm việc quá sức, thiếu nghỉ ngơi	I've been feeling run-down since I started my new job.	Tôi thấy suy nhược từ khi bắt đầu công việc mới.		/ˌrʌnˈdaʊn/	mirabi-ai-2026-10	active
+life-threatening	life-threatening	adjective	5	health	đe dọa tính mạng	bệnh hoặc vết thương có thể gây chết người	Her injuries are not life-threatening.	Vết thương của cô ấy không đe dọa tính mạng.			mirabi-ai-2026-10	active
+vital_signs	vital signs	noun	5	health	các dấu hiệu sinh tồn	mạch, nhịp thở, huyết áp, thân nhiệt của người bệnh	The nurse checks the patient's vital signs every hour.	Y tá kiểm tra các dấu hiệu sinh tồn của bệnh nhân mỗi giờ.			mirabi-ai-2026-10	active
+pins_and_needles	pins and needles	idiom	5	health	cảm giác tê rần, kiến bò	cảm giác châm chích khi tay chân bị tê	I sat on my foot and now I've got pins and needles.	Tôi ngồi đè lên chân nên giờ bị tê rần.			mirabi-ai-2026-10	active
+on_the_mend	on the mend	idiom	5	health	đang bình phục	đang khỏe dần lên sau khi ốm hoặc bị thương	Dad was very ill, but he's on the mend now.	Bố bị ốm nặng, nhưng giờ đang bình phục rồi.			mirabi-ai-2026-10	active
+as_fit_as_a_fiddle	as fit as a fiddle	idiom	5	health	khỏe như vâm	rất khỏe mạnh, thường nói về người lớn tuổi	At eighty, my grandfather is as fit as a fiddle.	Ở tuổi tám mươi, ông tôi vẫn khỏe như vâm.			mirabi-ai-2026-10	active
+get_a_second_opinion	get a second opinion	collocation	5	health	hỏi ý kiến bác sĩ khác	nhờ bác sĩ khác khám lại để chắc chắn về chẩn đoán	Before the operation, you should get a second opinion.	Trước khi mổ, bạn nên hỏi ý kiến một bác sĩ khác.			mirabi-ai-2026-10	active
+flare_up	flare up	phrasal_verb	5	health	tái phát, bùng lên	bệnh mãn tính đột nhiên nặng lên trở lại	My asthma flares up in cold weather.	Bệnh hen của tôi tái phát khi trời lạnh.			mirabi-ai-2026-10	active
+sleep_deprivation	sleep deprivation	noun	5	health	tình trạng thiếu ngủ	không được ngủ đủ trong thời gian dài	Sleep deprivation can affect your memory.	Thiếu ngủ có thể ảnh hưởng đến trí nhớ.			mirabi-ai-2026-10	active
+nervous_breakdown	nervous breakdown	noun	5	health	suy sụp tinh thần	khi một người không chịu nổi áp lực, không sinh hoạt bình thường được	He had a nervous breakdown after years of stress.	Anh ấy bị suy sụp tinh thần sau nhiều năm căng thẳng.			mirabi-ai-2026-10	active
+eating_disorder	eating disorder	noun	5	health	chứng rối loạn ăn uống	bệnh tâm lý khiến người bệnh ăn quá ít hoặc quá nhiều	Eating disorders are common among teenage girls.	Rối loạn ăn uống thường gặp ở các bạn gái tuổi teen.			mirabi-ai-2026-10	active
+in_moderation	in moderation	collocation	5	health	có chừng mực, vừa phải	ăn uống, dùng thứ gì một lượng vừa phải	Chocolate is fine if you eat it in moderation.	Sô-cô-la không sao nếu bạn ăn có chừng mực.			mirabi-ai-2026-10	active
+blood_transfusion	blood transfusion	noun	5	health	sự truyền máu	đưa máu của người khác vào cơ thể bệnh nhân	She lost a lot of blood and needed a blood transfusion.	Cô ấy mất nhiều máu và cần được truyền máu.			mirabi-ai-2026-10	active
+bounce_back	bounce back	phrasal_verb	5	health	hồi phục nhanh	khỏe lại nhanh sau khi ốm hoặc gặp khó khăn	Children usually bounce back quickly after a cold.	Trẻ em thường hồi phục nhanh sau khi bị cảm.			mirabi-ai-2026-10	active
+back_on_your_feet	back on your feet	idiom	5	health	khỏe lại, đứng dậy được	trở lại sinh hoạt bình thường sau khi ốm	Get some rest and you'll be back on your feet in no time.	Nghỉ ngơi đi, bạn sẽ sớm khỏe lại thôi.			mirabi-ai-2026-10	active
+alleviate	alleviate	verb	6	health	làm giảm nhẹ	làm cho cơn đau, triệu chứng bớt nghiêm trọng	The drugs helped to alleviate his pain.	Thuốc đã giúp làm giảm nhẹ cơn đau của ông ấy.		/əˈliːvieɪt/	mirabi-ai-2026-10	active
+benign	benign	adjective	6	health	lành tính	khối u không gây ung thư, không nguy hiểm	Luckily, the tumour was benign.	May mắn là khối u lành tính.		/bɪˈnaɪn/	mirabi-ai-2026-10	active
+malignant	malignant	adjective	6	health	ác tính	khối u gây ung thư, có thể lan rộng	The doctors found a malignant tumour in his lung.	Các bác sĩ tìm thấy một khối u ác tính trong phổi ông ấy.		/məˈlɪɡnənt/	mirabi-ai-2026-10	active
+prognosis	prognosis	noun	6	health	tiên lượng bệnh	dự đoán của bác sĩ về diễn biến của bệnh	The prognosis is good if the cancer is found early.	Tiên lượng sẽ tốt nếu ung thư được phát hiện sớm.		/prɒɡˈnəʊsɪs/	mirabi-ai-2026-10	active
+remission	remission	noun	6	health	sự thuyên giảm	giai đoạn bệnh nặng như ung thư tạm lui đi	After two years of treatment, she is in remission.	Sau hai năm điều trị, bệnh của cô ấy đã thuyên giảm.		/rɪˈmɪʃn/	mirabi-ai-2026-10	active
+asymptomatic	asymptomatic	adjective	6	health	không có triệu chứng	mắc bệnh nhưng không biểu hiện ra ngoài	Many people with the virus were asymptomatic.	Nhiều người nhiễm vi-rút không có triệu chứng.		/ˌeɪsɪmptəˈmætɪk/	mirabi-ai-2026-10	active
+exacerbate	exacerbate	verb	6	health	làm trầm trọng thêm	khiến bệnh, triệu chứng nặng hơn	Smoking can exacerbate asthma.	Hút thuốc có thể làm bệnh hen nặng thêm.		/ɪɡˈzæsəbeɪt/	mirabi-ai-2026-10	active
+contract.disease	contract	verb	6	health	mắc phải, nhiễm (bệnh)	cách nói trang trọng khi bị nhiễm một bệnh	He contracted malaria while travelling in Africa.	Anh ấy bị nhiễm sốt rét khi đi du lịch châu Phi.		/kənˈtrækt/	mirabi-ai-2026-10	active
+abstain	abstain	verb	6	health	kiêng, tránh (rượu, thuốc lá)	tự kiềm chế không dùng thứ có hại	Patients must abstain from alcohol while taking this drug.	Bệnh nhân phải kiêng rượu trong khi dùng thuốc này.		/əbˈsteɪn/	mirabi-ai-2026-10	active
+placebo	placebo	noun	6	health	giả dược	viên thuốc không có tác dụng, dùng để thử nghiệm	Half the patients were given a placebo.	Một nửa số bệnh nhân được cho dùng giả dược.		/pləˈsiːbəʊ/	mirabi-ai-2026-10	active
+debilitating	debilitating	adjective	6	health	gây suy nhược	bệnh làm cơ thể yếu đi nhiều, khó sinh hoạt	Arthritis can be a debilitating disease.	Viêm khớp có thể là một căn bệnh gây suy nhược.		/dɪˈbɪlɪteɪtɪŋ/	mirabi-ai-2026-10	active
+excruciating	excruciating	adjective	6	health	đau dữ dội, đau thấu xương	cơn đau cực kỳ khủng khiếp	He was in excruciating pain after breaking his leg.	Anh ấy đau dữ dội sau khi gãy chân.		/ɪkˈskruːʃieɪtɪŋ/	mirabi-ai-2026-10	active
+holistic	holistic	adjective	6	health	toàn diện (cả thân và tâm)	cách chữa bệnh chăm sóc cả cơ thể lẫn tinh thần	The clinic takes a holistic approach to health.	Phòng khám áp dụng cách tiếp cận toàn diện về sức khỏe.		/həʊˈlɪstɪk/	mirabi-ai-2026-10	active
+cardiac	cardiac	adjective	6	health	thuộc về tim	thuật ngữ y khoa liên quan đến tim	He died of cardiac arrest.	Ông ấy chết vì ngừng tim.		/ˈkɑːdiæk/	mirabi-ai-2026-10	active
+clinically	clinically	adverb	6	health	về mặt lâm sàng	theo kết quả khám và xét nghiệm của bác sĩ	The new drug has been clinically tested.	Loại thuốc mới đã được thử nghiệm lâm sàng.		/ˈklɪnɪkli/	mirabi-ai-2026-10	active
+intravenously	intravenously	adverb	6	health	qua đường tĩnh mạch	truyền thuốc, dịch thẳng vào ven	The drug is given intravenously in hospital.	Thuốc được truyền qua đường tĩnh mạch ở bệnh viện.		/ˌɪntrəˈviːnəsli/	mirabi-ai-2026-10	active
+sparingly.health	sparingly	adverb	6	health	một lượng ít, tiết kiệm	dùng hoặc bôi thuốc ở mức vừa đủ, không nhiều	Apply the cream sparingly to the affected area.	Bôi một lượng kem nhỏ lên vùng bị ảnh hưởng.		/ˈspeərɪŋli/	mirabi-ai-2026-10	active
+succumb_to	succumb to	phrasal_verb	6	health	không qua khỏi, chết vì (bệnh)	cách nói trang trọng khi chết vì bệnh hoặc vết thương	He finally succumbed to cancer at the age of 70.	Cuối cùng ông ấy không qua khỏi căn bệnh ung thư ở tuổi 70.			mirabi-ai-2026-10	active
+a_clean_bill_of_health	a clean bill of health	idiom	6	health	được xác nhận hoàn toàn khỏe mạnh	khi bác sĩ kết luận ai đó không có bệnh gì	After the tests, the doctor gave me a clean bill of health.	Sau các xét nghiệm, bác sĩ kết luận tôi hoàn toàn khỏe mạnh.			mirabi-ai-2026-10	active
+go_under_the_knife	go under the knife	idiom	6	health	lên bàn mổ	cách nói thân mật về việc phải phẫu thuật	She has to go under the knife next month.	Tháng sau cô ấy phải lên bàn mổ.			mirabi-ai-2026-10	active
+at_deaths_door	at death's door	idiom	6	health	cận kề cái chết	ốm rất nặng, tưởng như sắp chết	He was at death's door, but he recovered.	Ông ấy đã cận kề cái chết nhưng rồi hồi phục.			mirabi-ai-2026-10	active
+take_a_toll_on	take a toll on	collocation	6	health	gây tổn hại cho	áp lực, công việc dần dần làm hại sức khỏe	Years of night shifts took a toll on his health.	Nhiều năm làm ca đêm đã gây tổn hại cho sức khỏe của anh ấy.			mirabi-ai-2026-10	active
+black_and_blue	black and blue	idiom	6	health	bầm tím khắp người	người đầy vết bầm sau khi bị ngã hoặc bị đánh	After falling down the stairs, his legs were black and blue.	Sau khi ngã cầu thang, chân anh ấy bầm tím hết cả.			mirabi-ai-2026-10	active

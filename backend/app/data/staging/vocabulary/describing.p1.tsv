@@ -1,0 +1,99 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+big	big	adjective	1	describing	to, lớn	từ thông dụng nhất nói về kích thước của đồ vật, con vật, nơi chốn	They live in a big house near the park.	Họ sống trong một ngôi nhà to gần công viên.		/bɪɡ/
+small	small	adjective	1	describing	nhỏ, bé	kích thước hoặc số lượng không lớn	I want a small cup of coffee, please.	Cho tôi một cốc cà phê nhỏ nhé.		/smɔːl/
+good	good	adjective	1	describing	tốt, hay	khen chất lượng của đồ vật, bộ phim, ý tưởng	This is a good book.	Đây là một cuốn sách hay.		/ɡʊd/
+bad	bad	adjective	1	describing	tệ, kém	chê chất lượng hoặc nói về điều không tốt	The food at that place is really bad.	Đồ ăn ở chỗ đó thật sự rất tệ.		/bæd/
+new	new	adjective	1	describing	mới	vừa được làm ra, mua về hoặc chưa dùng lâu	I like your new bag.	Tôi thích cái túi mới của bạn.		/njuː/
+old.thing	old	adjective	1	describing	cũ	đồ vật đã có hoặc đã dùng từ lâu (không nói về tuổi người)	He still uses his old phone.	Anh ấy vẫn dùng chiếc điện thoại cũ.		/əʊld/
+long	long	adjective	1	describing	dài	chiều dài lớn: con đường, sợi dây, mái tóc	This is a very long road.	Đây là một con đường rất dài.		/lɒŋ/
+short.length	short	adjective	1	describing	ngắn	chiều dài nhỏ: sợi dây, cây bút, bài viết (không nói chiều cao người)	Write a short letter to your friend.	Hãy viết một lá thư ngắn cho bạn của em.		/ʃɔːt/
+nice	nice	adjective	1	describing	đẹp, dễ chịu	khen chung chung một cách thân thiện: đồ vật, nơi chốn, một ngày	What a nice garden!	Khu vườn đẹp quá!		/naɪs/
+great	great	adjective	1	describing	tuyệt, rất tốt	khen điều gì đó rất tốt, thường dùng trong văn nói	We had a great time at the beach.	Chúng tôi đã có một khoảng thời gian tuyệt vời ở bãi biển.		/ɡreɪt/
+interesting	interesting	adjective	1	describing	thú vị	sự vật, câu chuyện làm mình muốn tìm hiểu thêm	This is an interesting story.	Đây là một câu chuyện thú vị.		/ˈɪntrəstɪŋ/
+easy	easy	adjective	1	describing	dễ	không cần nhiều công sức để làm hoặc để hiểu	The test was very easy.	Bài kiểm tra rất dễ.		/ˈiːzi/
+difficult	difficult	adjective	1	describing	khó	cần nhiều công sức để làm hoặc để hiểu	This question is too difficult for me.	Câu hỏi này quá khó đối với tôi.	hard	/ˈdɪfɪkəlt/
+fast	fast	adjective	1	describing	nhanh, có tốc độ cao	tính từ, đứng trước danh từ: xe, tàu, máy tính, con vật	He has a very fast car.	Anh ấy có một chiếc xe rất nhanh.		/fɑːst/
+slow	slow	adjective	1	describing	chậm	tốc độ thấp, mất nhiều thời gian	The bus is slow today.	Hôm nay xe buýt chạy chậm.		/sləʊ/
+same	same	adjective	1	describing	giống nhau, cùng một	thường đi với mạo từ the, đứng trước danh từ	We have the same shoes.	Chúng tôi có đôi giày giống nhau.		/seɪm/
+different	different	adjective	1	describing	khác, khác nhau	không giống với người hay vật khác	These two cups are different colours.	Hai cái cốc này khác màu nhau.		/ˈdɪfrənt/
+full	full	adjective	1	describing	đầy	không còn chỗ trống bên trong	My glass is full.	Cốc của tôi đầy rồi.		/fʊl/
+empty	empty	adjective	1	describing	trống, rỗng	không chứa gì bên trong: hộp, chai, phòng	The bottle is empty.	Cái chai rỗng rồi.		/ˈempti/
+open.state	open	adjective	1	describing	mở, đang mở	cửa, hộp, cửa sổ không đóng	The window is open.	Cửa sổ đang mở.		/ˈəʊpən/
+closed	closed	adjective	1	describing	đóng, đã đóng	cửa, hộp, cửa sổ không mở	Keep the box closed.	Hãy để cái hộp đóng kín.		/kləʊzd/
+heavy	heavy	adjective	1	describing	nặng	có trọng lượng lớn, khó nhấc lên	This bag is too heavy for me.	Cái túi này quá nặng đối với tôi.		/ˈhevi/
+light.weight	light	adjective	1	describing	nhẹ	trọng lượng nhỏ, dễ mang theo	This box is very light.	Cái hộp này rất nhẹ.		/laɪt/
+high	high	adjective	1	describing	cao	khoảng cách từ mặt đất lên: núi, tường, kệ (không nói về người)	The wall is very high.	Bức tường rất cao.		/haɪ/
+low	low	adjective	1	describing	thấp	gần mặt đất: bàn, ghế, tường (không nói về người)	The table is too low for me.	Cái bàn quá thấp đối với tôi.		/ləʊ/
+wide	wide	adjective	1	describing	rộng	bề ngang lớn: đường, sông, cửa	The river is very wide here.	Ở đây con sông rất rộng.		/waɪd/
+wet	wet	adjective	1	describing	ướt	có dính nước hoặc chất lỏng	My shoes are wet.	Giày của tôi bị ướt.		/wet/
+dry	dry	adjective	1	describing	khô	không có nước, không ẩm	Are the clothes dry yet?	Quần áo khô chưa?		/draɪ/
+hard.solid	hard	adjective	1	describing	cứng	vật chắc, khó ấn lõm hay bẻ gãy	This bed is too hard.	Cái giường này cứng quá.		/hɑːd/
+soft	soft	adjective	1	describing	mềm	dễ ấn lõm, êm khi chạm vào	The pillow is very soft.	Cái gối rất mềm.		/sɒft/
+right.correct	right	adjective	1	describing	đúng	câu trả lời, cách làm không có lỗi	That is the right answer.	Đó là câu trả lời đúng.		/raɪt/
+wrong	wrong	adjective	1	describing	sai	câu trả lời, cách làm có lỗi, không đúng	I think your answer is wrong.	Tôi nghĩ câu trả lời của bạn sai.		/rɒŋ/
+colour	colour	noun	1	describing	màu sắc	đặc điểm như đỏ, xanh, vàng của sự vật	I like the colour of your dress.	Tôi thích màu chiếc váy của bạn.	color	/ˈkʌlə/
+red	red	adjective	1	describing	màu đỏ	màu của máu, quả cà chua chín	She has a red car.	Cô ấy có một chiếc ô tô màu đỏ.		/red/
+blue	blue	adjective	1	describing	màu xanh dương, xanh lam	màu của bầu trời trong và biển	He is wearing a blue shirt.	Anh ấy đang mặc áo sơ mi màu xanh dương.		/bluː/
+green	green	adjective	1	describing	màu xanh lá cây	màu của lá cây và cỏ	The grass is green after the rain.	Cỏ xanh mướt sau cơn mưa.		/ɡriːn/
+yellow	yellow	adjective	1	describing	màu vàng	màu của quả chanh vàng, hoa hướng dương	I bought some yellow flowers.	Tôi đã mua vài bông hoa màu vàng.		/ˈjeləʊ/
+black	black	adjective	1	describing	màu đen	màu tối nhất, màu của than	My cat is black.	Con mèo của tôi màu đen.		/blæk/
+white	white	adjective	1	describing	màu trắng	màu của tuyết, của sữa	The walls are white.	Những bức tường màu trắng.		/waɪt/
+brown	brown	adjective	1	describing	màu nâu	màu của đất, gỗ, sô-cô-la	She has a brown dog.	Cô ấy có một con chó màu nâu.		/braʊn/
+pink	pink	adjective	1	describing	màu hồng	màu đỏ nhạt pha trắng	The baby has a pink hat.	Em bé có một chiếc mũ màu hồng.		/pɪŋk/
+purple	purple	adjective	1	describing	màu tím	màu pha giữa đỏ và xanh dương	I love purple flowers.	Tôi rất thích hoa màu tím.		/ˈpɜːpl/
+grey	grey	adjective	1	describing	màu xám	màu pha giữa đen và trắng, màu tro	The sky is grey today.	Hôm nay bầu trời màu xám.	gray	/ɡreɪ/
+orange.colour	orange	adjective	1	describing	màu cam	màu pha giữa đỏ và vàng (không phải quả cam)	He painted the door orange.	Anh ấy sơn cánh cửa màu cam.		/ˈɒrɪndʒ/
+dark	dark	adjective	1	describing	tối	nơi chốn hoặc lúc thiếu ánh sáng	It is dark in this room.	Căn phòng này tối quá.		/dɑːk/
+round	round	adjective	1	describing	tròn	có hình như quả bóng hoặc cái đĩa	We have a round table in the kitchen.	Chúng tôi có một cái bàn tròn trong bếp.		/raʊnd/
+square.shape	square	noun	1	describing	hình vuông	hình có bốn cạnh bằng nhau và bốn góc vuông	Draw a square on the paper.	Hãy vẽ một hình vuông lên giấy.		/skweə/
+circle	circle	noun	1	describing	hình tròn, vòng tròn	hình tròn đều, mọi điểm cách đều tâm	The children sat in a circle.	Lũ trẻ ngồi thành một vòng tròn.		/ˈsɜːkl/
+size	size	noun	1	describing	kích cỡ, kích thước	độ to nhỏ của đồ vật, quần áo, giày	These two boxes are the same size.	Hai cái hộp này có cùng kích cỡ.		/saɪz/
+shape	shape	noun	1	describing	hình dạng	đường nét bên ngoài của vật: tròn, vuông, dài	What shape is the table?	Cái bàn có hình dạng gì?		/ʃeɪp/
+very	very	adverb	1	describing	rất	đứng trước tính từ hoặc trạng từ để nhấn mạnh	It is very cold today.	Hôm nay trời rất lạnh.		/ˈveri/
+really	really	adverb	1	describing	thật sự, thật là	nhấn mạnh trong văn nói, mạnh hơn rất một chút	This soup is really good.	Món súp này thật sự rất ngon.		/ˈrɪəli/
+too.excess	too	adverb	1	describing	quá (hơn mức cần)	đứng trước tính từ, mang ý không tốt: quá to, quá đắt	These shoes are too small for me.	Đôi giày này quá chật với tôi.		/tuː/
+so.degree	so	adverb	1	describing	thật là, rất	nhấn mạnh cảm xúc, đứng trước tính từ không kèm danh từ	The baby is so cute!	Em bé thật là dễ thương!		/səʊ/
+quickly	quickly	adverb	1	describing	nhanh, một cách nhanh chóng	làm việc gì đó trong thời gian ngắn	Please come quickly!	Hãy đến nhanh lên!		/ˈkwɪkli/
+slowly	slowly	adverb	1	describing	chậm rãi, từ từ	làm việc gì với tốc độ chậm	Please speak slowly.	Làm ơn nói chậm thôi.		/ˈsləʊli/
+well.manner	well	adverb	1	describing	tốt, giỏi	nói về cách làm một việc: hát hay, làm tốt	She sings very well.	Cô ấy hát rất hay.		/wel/
+a_lot	a lot	collocation	1	describing	nhiều, rất nhiều	đứng sau động từ hoặc trước từ so sánh hơn	I like this song a lot.	Tôi rất thích bài hát này.
+a_little	a little	collocation	1	describing	một chút, hơi	đứng trước tính từ hoặc từ so sánh hơn	The water is a little cold.	Nước hơi lạnh một chút.	a bit
+very_much	very much	collocation	1	describing	rất nhiều	đứng sau các động từ thích, yêu, cảm ơn	I like your new house very much.	Tôi rất thích ngôi nhà mới của bạn.
+more_than	more than	collocation	1	describing	nhiều hơn, hơn	so sánh số lượng hoặc mức độ	This bag costs more than that one.	Cái túi này đắt hơn cái kia.
+like.similar	like	preposition	1	describing	giống như	so sánh hai người hoặc vật có nét giống nhau	Her eyes are blue like the sea.	Mắt cô ấy xanh như biển.		/laɪk/
+than	than	conjunction	1	describing	hơn	đứng sau tính từ so sánh hơn	My room is bigger than yours.	Phòng của tôi to hơn phòng của bạn.		/ðæn/
+dark_blue	dark blue	collocation	1	describing	xanh đậm, xanh thẫm	màu xanh dương sẫm	He has a dark blue jacket.	Anh ấy có một chiếc áo khoác màu xanh đậm.
+light_blue	light blue	collocation	1	describing	xanh nhạt, xanh lơ	màu xanh dương nhạt	The baby's room is light blue.	Phòng của em bé màu xanh nhạt.
+what_colour_is_it	what colour is it	phrase	1	describing	Nó màu gì?	câu hỏi về màu sắc của một đồ vật	What colour is it? It's red.	Nó màu gì? Nó màu đỏ.	what color is it
+how_big_is_it	how big is it	phrase	1	describing	Nó to cỡ nào?	câu hỏi về kích thước của một đồ vật, nơi chốn	How big is it? Is it bigger than a car?	Nó to cỡ nào? Có to hơn ô tô không?
+large	large	adjective	2	describing	lớn, rộng	trang trọng hơn big; dùng cho cỡ áo, đồ uống, diện tích, số lượng	Can I have a large coffee, please?	Cho tôi một cốc cà phê cỡ lớn nhé.		/lɑːdʒ/
+huge	huge	adjective	2	describing	rất to, to tướng	mạnh hơn big nhiều, thường dùng trong văn nói	They live in a huge house.	Họ sống trong một ngôi nhà to tướng.		/hjuːdʒ/
+tiny	tiny	adjective	2	describing	nhỏ xíu, tí hon	rất nhỏ, nhỏ hơn small nhiều	There is a tiny bird in the tree.	Có một chú chim nhỏ xíu trên cây.		/ˈtaɪni/
+thick	thick	adjective	2	describing	dày	khoảng cách lớn giữa hai mặt: sách, tường, chăn	This book is very thick.	Cuốn sách này rất dày.		/θɪk/
+thin.object	thin	adjective	2	describing	mỏng	khoảng cách nhỏ giữa hai mặt: giấy, lát bánh, vải (không nói về người)	Cut the bread into thin pieces.	Hãy cắt bánh mì thành những lát mỏng.		/θɪn/
+deep	deep	adjective	2	describing	sâu	từ mặt trên xuống đáy rất xa: hồ, sông, hố	The lake is very deep.	Cái hồ rất sâu.		/diːp/
+narrow	narrow	adjective	2	describing	hẹp	bề ngang nhỏ: đường, cầu, phố	The street is too narrow for cars.	Con phố quá hẹp cho ô tô đi.		/ˈnærəʊ/
+quick	quick	adjective	2	describing	nhanh, chóng vánh	làm xong trong thời gian ngắn: cuộc gọi, bữa ăn, câu hỏi	Can I ask you a quick question?	Tôi hỏi bạn một câu nhanh được không?		/kwɪk/
+quiet.place	quiet	adjective	2	describing	yên tĩnh	nơi chốn ít tiếng ồn: thư viện, con phố, khu nhà	We live on a quiet street.	Chúng tôi sống trên một con phố yên tĩnh.		/ˈkwaɪət/
+real	real	adjective	2	describing	thật	không phải đồ giả, đồ chơi hay hình ảnh	Is that a real flower?	Đó có phải là hoa thật không?		/rɪəl/
+perfect	perfect	adjective	2	describing	hoàn hảo	tốt đến mức không có lỗi nào	The weather is perfect for a picnic.	Thời tiết thật hoàn hảo cho một buổi dã ngoại.		/ˈpɜːfɪkt/
+terrible	terrible	adjective	2	describing	kinh khủng, tồi tệ	rất tệ, gây khó chịu	The film was terrible.	Bộ phim thật kinh khủng.		/ˈterəbl/
+wonderful	wonderful	adjective	2	describing	tuyệt vời	rất tốt, đem lại niềm vui	We had a wonderful holiday.	Chúng tôi đã có một kỳ nghỉ tuyệt vời.		/ˈwʌndəfl/
+amazing	amazing	adjective	2	describing	đáng kinh ngạc	tốt hoặc đẹp đến mức làm mình ngạc nhiên	The view from the top is amazing.	Cảnh nhìn từ trên đỉnh thật đáng kinh ngạc.		/əˈmeɪzɪŋ/
+strange	strange	adjective	2	describing	lạ, kỳ lạ	khác thường, khó hiểu	I heard a strange noise last night.	Tối qua tôi nghe thấy một tiếng động lạ.		/streɪndʒ/
+normal	normal	adjective	2	describing	bình thường	đúng như thường lệ, như mong đợi	Is it normal for the TV to make this noise?	Ti vi phát ra tiếng này có bình thường không?		/ˈnɔːml/
+special	special	adjective	2	describing	đặc biệt	khác với thường ngày, quan trọng hơn	Today is a special day for our family.	Hôm nay là một ngày đặc biệt của gia đình chúng tôi.		/ˈspeʃl/
+simple	simple	adjective	2	describing	đơn giản	dễ hiểu, dễ làm, không có nhiều chi tiết	This is a simple game.	Đây là một trò chơi đơn giản.		/ˈsɪmpl/
+useful	useful	adjective	2	describing	hữu ích, có ích	giúp ích được cho việc gì đó	A map is very useful when you travel.	Bản đồ rất hữu ích khi bạn đi du lịch.		/ˈjuːsfl/
+excellent	excellent	adjective	2	describing	xuất sắc	rất tốt, chất lượng hơn hẳn	Your English is excellent.	Tiếng Anh của bạn thật xuất sắc.		/ˈeksələnt/
+sharp	sharp	adjective	2	describing	sắc, bén	dao, kéo cắt tốt hoặc vật có đầu nhọn	Be careful, the knife is very sharp.	Cẩn thận, con dao rất sắc.		/ʃɑːp/
+smooth	smooth	adjective	2	describing	mịn, nhẵn	bề mặt bằng phẳng, sờ không thấy gồ ghề	The table feels smooth.	Mặt bàn sờ vào thấy nhẵn.		/smuːð/
+shiny	shiny	adjective	2	describing	sáng bóng, bóng loáng	bề mặt phản chiếu ánh sáng: giày, xe, kim loại	He has shiny black shoes.	Anh ấy có đôi giày đen bóng loáng.		/ˈʃaɪni/
+bright.light	bright	adjective	2	describing	sáng, chói	có nhiều ánh sáng: mặt trời, đèn, căn phòng	The sun is very bright today.	Hôm nay mặt trời rất chói.		/braɪt/
+light.colour	light	adjective	2	describing	nhạt (màu)	màu có nhiều trắng, không đậm, đứng trước tên màu	I want a light colour for the bedroom.	Tôi muốn một màu nhạt cho phòng ngủ.		/laɪt/
+colourful	colourful	adjective	2	describing	sặc sỡ, nhiều màu	có nhiều màu sắc tươi	The market is full of colourful fruit.	Khu chợ đầy những loại trái cây sặc sỡ.	colorful	/ˈkʌləfl/
+straight	straight	adjective	2	describing	thẳng	không cong, không gấp khúc: đường, dây, hàng	Draw a straight line.	Hãy vẽ một đường thẳng.		/streɪt/
+flat.surface	flat	adjective	2	describing	phẳng, bằng phẳng	bề mặt không có chỗ lồi lõm, không dốc	The land here is very flat.	Vùng đất ở đây rất bằng phẳng.		/flæt/
+heart-shaped	heart-shaped	adjective	2	describing	hình trái tim	có hình dạng giống trái tim	She gave me a heart-shaped box of chocolates.	Cô ấy tặng tôi một hộp sô-cô-la hình trái tim.		/ˈhɑːt ʃeɪpt/
+opposite	opposite	adjective	2	describing	trái ngược, đối lập	hoàn toàn khác nhau: hướng, ý kiến, màu sắc	Black and white are opposite colours.	Đen và trắng là hai màu đối lập.		/ˈɒpəzɪt/
+useless	useless	adjective	2	describing	vô dụng, vô ích	không dùng được vào việc gì	This old key is useless now.	Chiếc chìa khóa cũ này giờ vô dụng rồi.		/ˈjuːsləs/

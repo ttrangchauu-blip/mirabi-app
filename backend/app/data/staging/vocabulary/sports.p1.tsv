@@ -1,0 +1,106 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+sport	sport	noun	1	sports	thể thao, môn thể thao	hoạt động vận động có luật chơi như bóng đá, bơi lội	Do you like sport?	Bạn có thích thể thao không?		/spɔːt/
+football	football	noun	1	sports	bóng đá	môn hai đội dùng chân đá bóng vào khung thành	The boys play football after school.	Các cậu bé chơi bóng đá sau giờ học.	soccer	/ˈfʊtbɔːl/
+ball	ball	noun	1	sports	quả bóng	vật tròn dùng để chơi thể thao	This is my new ball.	Đây là quả bóng mới của tôi.		/bɔːl/
+team	team	noun	1	sports	đội, đội tuyển	nhóm người cùng chơi, thi đấu với nhau	Our team has eleven players.	Đội của chúng tôi có mười một cầu thủ.		/tiːm/
+player	player	noun	1	sports	cầu thủ, người chơi	người tham gia chơi một môn thể thao	He is the best player in the team.	Anh ấy là cầu thủ giỏi nhất trong đội.		/ˈpleɪə/
+play.sport	play	verb	1	sports	chơi (một môn thể thao)	dùng với tên môn thể thao: play football, play tennis	We play tennis every Sunday.	Chúng tôi chơi quần vợt mỗi Chủ nhật.		/pleɪ/
+win	win	verb	1	sports	thắng, chiến thắng	giành phần thắng trong trận đấu, cuộc thi	Who won the game?	Ai đã thắng trận đấu?		/wɪn/
+lose.game	lose	verb	1	sports	thua (trận đấu)	không giành được phần thắng trong trận đấu, cuộc thi	We lost the game.	Chúng tôi đã thua trận.		/luːz/
+match.game	match	noun	1	sports	trận đấu	một lần hai đội hoặc hai người thi đấu với nhau	The match starts at seven.	Trận đấu bắt đầu lúc bảy giờ.		/mætʃ/
+goal.sport	goal	noun	1	sports	bàn thắng	khi bóng vào khung thành của đối phương	That was a great goal!	Đó là một bàn thắng tuyệt vời!		/ɡəʊl/
+score.result	score	noun	1	sports	tỉ số	số điểm hoặc số bàn thắng của hai bên trong trận đấu	What's the score now?	Tỉ số bây giờ là bao nhiêu?		/skɔː/
+point.score	point	noun	1	sports	điểm (trong thi đấu)	đơn vị tính kết quả trong một trận đấu, cuộc thi	Our team got ten points.	Đội chúng tôi được mười điểm.		/pɔɪnt/
+swim	swim	verb	1	sports	bơi	di chuyển trong nước bằng tay và chân	Can you swim?	Bạn biết bơi không?		/swɪm/
+swimming	swimming	noun	1	sports	môn bơi lội	môn thể thao di chuyển trong nước	Swimming is good for your body.	Bơi lội tốt cho cơ thể của bạn.		/ˈswɪmɪŋ/
+running	running	noun	1	sports	môn chạy bộ	hoạt động chạy để rèn luyện sức khỏe	Running in the morning makes me feel good.	Chạy bộ buổi sáng làm tôi thấy dễ chịu.		/ˈrʌnɪŋ/
+tennis	tennis	noun	1	sports	quần vợt	môn dùng vợt đánh bóng qua lưới trên sân	She plays tennis with her dad.	Cô ấy chơi quần vợt với bố.		/ˈtenɪs/
+basketball	basketball	noun	1	sports	bóng rổ	môn ném bóng vào rổ treo trên cao	He is tall, so he is good at basketball.	Anh ấy cao nên chơi bóng rổ giỏi.		/ˈbɑːskɪtbɔːl/
+volleyball	volleyball	noun	1	sports	bóng chuyền	môn hai đội đánh bóng bằng tay qua lưới cao	We play volleyball on the beach.	Chúng tôi chơi bóng chuyền trên bãi biển.		/ˈvɒlibɔːl/
+badminton	badminton	noun	1	sports	cầu lông	môn dùng vợt đánh quả cầu qua lưới	My mum plays badminton in the park.	Mẹ tôi chơi cầu lông trong công viên.		/ˈbædmɪntən/
+baseball	baseball	noun	1	sports	bóng chày	môn dùng gậy đánh bóng, phổ biến ở Mỹ và Nhật	Baseball is very popular in Japan.	Bóng chày rất phổ biến ở Nhật Bản.		/ˈbeɪsbɔːl/
+golf	golf	noun	1	sports	môn đánh gôn	môn dùng gậy đánh bóng nhỏ vào lỗ trên sân cỏ	My grandfather plays golf at the weekend.	Ông tôi chơi gôn vào cuối tuần.		/ɡɒlf/
+boxing	boxing	noun	1	sports	quyền anh	môn hai người đeo găng đấm nhau trên võ đài	He watches boxing on TV.	Anh ấy xem quyền anh trên ti vi.		/ˈbɒksɪŋ/
+cycling	cycling	noun	1	sports	môn đạp xe	đi xe đạp để tập luyện hoặc thi đấu	Cycling is my favourite sport.	Đạp xe là môn thể thao yêu thích của tôi.		/ˈsaɪklɪŋ/
+yoga	yoga	noun	1	sports	môn yoga	bài tập kéo giãn cơ thể kết hợp hít thở sâu	Yoga helps me relax.	Yoga giúp tôi thư giãn.		/ˈjəʊɡə/
+karate	karate	noun	1	sports	võ karate	môn võ Nhật Bản dùng tay và chân	My little brother learns karate.	Em trai tôi học võ karate.		/kəˈrɑːti/
+table_tennis	table tennis	noun	1	sports	bóng bàn	môn dùng vợt nhỏ đánh bóng trên mặt bàn	Let's play table tennis after lunch.	Chơi bóng bàn sau bữa trưa đi.	ping-pong
+gym	gym	noun	1	sports	phòng tập thể dục, phòng gym	nơi có máy móc, dụng cụ để tập luyện	I go to the gym three times a week.	Tôi đến phòng tập ba lần một tuần.		/dʒɪm/
+coach.trainer	coach	noun	1	sports	huấn luyện viên	người dạy và luyện tập cho vận động viên, đội bóng	The coach is happy with the team.	Huấn luyện viên hài lòng với cả đội.		/kəʊtʃ/
+fan.supporter	fan	noun	1	sports	cổ động viên, người hâm mộ	người yêu thích và ủng hộ một đội, một vận động viên	The fans sang for their team.	Các cổ động viên hát cổ vũ cho đội của họ.	supporter	/fæn/
+race.contest	race	noun	1	sports	cuộc đua	cuộc thi xem ai chạy, bơi hoặc đi nhanh nhất	Who won the race?	Ai đã thắng cuộc đua?		/reɪs/
+winner	winner	noun	1	sports	người thắng cuộc	người hoặc đội giành chiến thắng	The winner gets a big cup.	Người thắng cuộc nhận được một chiếc cúp lớn.		/ˈwɪnə/
+swimmer	swimmer	noun	1	sports	người bơi, vận động viên bơi	người biết bơi hoặc thi đấu môn bơi	She is a very fast swimmer.	Cô ấy là một người bơi rất nhanh.		/ˈswɪmə/
+run_a_race	run a race	collocation	1	sports	chạy đua	khi thi chạy xem ai đến đích trước	Let's run a race to the tree!	Mình chạy đua đến cái cây kia nhé!
+fit.healthy	fit	adjective	1	sports	khỏe khoắn, cân đối	nói về cơ thể khỏe nhờ chăm tập luyện	He runs every day to stay fit.	Anh ấy chạy mỗi ngày để giữ cơ thể khỏe khoắn.		/fɪt/
+fast.speed	fast	adverb	1	sports	nhanh	chạy, bơi, di chuyển với tốc độ cao (đứng sau động từ)	He can run very fast.	Anh ấy có thể chạy rất nhanh.		/fɑːst/
+swimming_pool	swimming pool	noun	1	sports	bể bơi, hồ bơi	nơi có nước sạch, sâu để mọi người bơi	The swimming pool is open until nine.	Bể bơi mở cửa đến chín giờ.	pool
+play_football	play football	collocation	1	sports	chơi bóng đá	đá bóng cùng bạn bè hoặc trong một đội	Do you want to play football with us?	Bạn có muốn chơi bóng đá với bọn mình không?	play soccer
+go_swimming	go swimming	collocation	1	sports	đi bơi	đến bể bơi, ra biển để bơi	We go swimming in summer.	Chúng tôi đi bơi vào mùa hè.
+go_cycling	go cycling	collocation	1	sports	đi đạp xe	đạp xe để tập luyện hoặc đi chơi	They often go cycling by the river.	Họ thường đi đạp xe dọc bờ sông.
+score_a_goal	score a goal	collocation	1	sports	ghi bàn	đưa bóng vào khung thành đối phương	He scored a goal in the last minute.	Anh ấy ghi bàn ở phút cuối cùng.
+hit_the_ball	hit the ball	collocation	1	sports	đánh bóng	dùng vợt, gậy hoặc tay đánh vào quả bóng	Hit the ball as hard as you can.	Hãy đánh bóng mạnh hết sức có thể.
+catch_the_ball	catch the ball	collocation	1	sports	bắt bóng	dùng tay giữ lấy quả bóng đang bay tới	Catch the ball, Tom!	Bắt bóng đi, Tom!
+watch_a_match	watch a match	collocation	1	sports	xem một trận đấu	theo dõi trận đấu ở sân hoặc trên ti vi	We watched a match on TV last night.	Tối qua chúng tôi xem một trận đấu trên ti vi.
+favourite_sport	favourite sport	collocation	1	sports	môn thể thao yêu thích	môn thể thao mình thích nhất	What is your favourite sport?	Môn thể thao yêu thích của bạn là gì?	favorite sport
+good_at_sports	good at sports	collocation	1	sports	giỏi thể thao	nói về người chơi được nhiều môn và chơi tốt	My sister is good at sports.	Chị tôi giỏi thể thao.
+athlete	athlete	noun	2	sports	vận động viên	người tập luyện và thi đấu thể thao	She wants to be a famous athlete.	Cô ấy muốn trở thành một vận động viên nổi tiếng.		/ˈæθliːt/
+champion	champion	noun	2	sports	nhà vô địch	người hoặc đội thắng giải đấu cao nhất	He was the world champion three times.	Anh ấy đã ba lần là nhà vô địch thế giới.		/ˈtʃæmpiən/
+medal	medal	noun	2	sports	huy chương	tấm kim loại trao cho người đạt thành tích cao	Each player got a medal.	Mỗi cầu thủ được nhận một huy chương.		/ˈmedl/
+prize	prize	noun	2	sports	giải thưởng	thứ trao cho người thắng cuộc thi	The first prize is a new bike.	Giải nhất là một chiếc xe đạp mới.		/praɪz/
+referee	referee	noun	2	sports	trọng tài	người điều khiển trận bóng đá, bóng rổ, quyền anh	The referee stopped the game.	Trọng tài đã dừng trận đấu.		/ˌrefəˈriː/
+goalkeeper	goalkeeper	noun	2	sports	thủ môn	cầu thủ đứng trong khung thành để bắt bóng	The goalkeeper caught the ball easily.	Thủ môn bắt bóng dễ dàng.	goalie	/ˈɡəʊlkiːpə/
+captain.team	captain	noun	2	sports	đội trưởng	người đứng đầu, chỉ huy một đội thể thao	Minh is the captain of our football team.	Minh là đội trưởng đội bóng của chúng tôi.		/ˈkæptɪn/
+teammate	teammate	noun	2	sports	đồng đội	người chơi cùng đội với mình	He passed the ball to a teammate.	Anh ấy chuyền bóng cho một đồng đội.		/ˈtiːmmeɪt/
+stadium	stadium	noun	2	sports	sân vận động	công trình lớn có khán đài để thi đấu thể thao	The stadium was full of fans.	Sân vận động chật kín cổ động viên.		/ˈsteɪdiəm/
+pitch.field	pitch	noun	2	sports	sân bóng (cỏ)	khu đất cỏ để chơi bóng đá, bóng bầu dục	The players walked onto the pitch.	Các cầu thủ bước ra sân.		/pɪtʃ/
+court.sport	court	noun	2	sports	sân (quần vợt, bóng rổ, cầu lông)	sân có vạch kẻ cho các môn dùng lưới hoặc rổ	There are two tennis courts in the park.	Có hai sân quần vợt trong công viên.		/kɔːt/
+track.running	track	noun	2	sports	đường chạy	vòng đường để chạy thi hoặc đua xe đạp	We run on the track at school.	Chúng tôi chạy trên đường chạy ở trường.		/træk/
+competition	competition	noun	2	sports	cuộc thi đấu	sự kiện nhiều người thi để tìm ra người giỏi nhất	He entered a swimming competition.	Anh ấy đã tham gia một cuộc thi bơi.		/ˌkɒmpəˈtɪʃn/
+training	training	noun	2	sports	sự tập luyện, buổi tập	thời gian vận động viên luyện tập để thi đấu	Football training is on Tuesday evening.	Buổi tập bóng đá vào tối thứ Ba.		/ˈtreɪnɪŋ/
+fitness	fitness	noun	2	sports	thể lực, sức khỏe thể chất	khả năng cơ thể vận động khỏe và bền	Swimming is great for your fitness.	Bơi lội rất tốt cho thể lực của bạn.		/ˈfɪtnəs/
+marathon	marathon	noun	2	sports	cuộc chạy marathon	cuộc chạy đường dài khoảng 42 km	He ran his first marathon last year.	Năm ngoái anh ấy chạy cuộc marathon đầu tiên.		/ˈmærəθən/
+rugby	rugby	noun	2	sports	bóng bầu dục	môn chơi bằng quả bóng hình bầu dục, phổ biến ở Anh	Rugby is a very hard sport.	Bóng bầu dục là môn thể thao rất vất vả.		/ˈrʌɡbi/
+hockey	hockey	noun	2	sports	khúc côn cầu	môn dùng gậy cong đánh bóng hoặc quả bóng dẹt	In Canada, people play hockey on ice.	Ở Canada người ta chơi khúc côn cầu trên băng.		/ˈhɒki/
+ice_skating	ice skating	noun	2	sports	trượt băng	môn đi giày có lưỡi trượt trên mặt băng	We went ice skating at the shopping centre.	Chúng tôi đã đi trượt băng ở trung tâm mua sắm.
+skate	skate	verb	2	sports	trượt (patin, ván, băng)	di chuyển trên giày trượt hoặc ván trượt	The children are skating in the park.	Lũ trẻ đang trượt patin trong công viên.		/skeɪt/
+ski	ski	verb	2	sports	trượt tuyết	di chuyển trên tuyết bằng hai tấm ván dài	I want to ski in Japan this winter.	Mùa đông này tôi muốn đi trượt tuyết ở Nhật.		/skiː/
+jog	jog	verb	2	sports	chạy bộ chậm	chạy chậm và đều để rèn luyện sức khỏe	My dad jogs around the lake every morning.	Bố tôi chạy bộ quanh hồ mỗi sáng.		/dʒɒɡ/
+train.practise	train	verb	2	sports	tập luyện (thể thao)	vận động viên luyện tập đều đặn để chuẩn bị thi đấu	The team trains five days a week.	Đội tập luyện năm ngày một tuần.		/treɪn/
+practise	practise	verb	2	sports	luyện tập (một kỹ năng)	làm đi làm lại một động tác để giỏi hơn	He practises kicking the ball every day.	Ngày nào cậu ấy cũng luyện sút bóng.	practice	/ˈpræktɪs/
+cheer	cheer	verb	2	sports	reo hò	hò hét vì vui mừng hoặc để động viên đội mình	The crowd cheered when he scored.	Đám đông reo hò khi anh ấy ghi bàn.		/tʃɪə/
+draw.result	draw	verb	2	sports	hòa (trận đấu)	hai đội có tỉ số bằng nhau khi trận đấu kết thúc	We drew 1-1 with the best team.	Chúng tôi hòa 1-1 với đội mạnh nhất.	tie	/drɔː/
+beat.defeat	beat	verb	2	sports	đánh bại (đối thủ)	thắng một người hoặc một đội khác	Vietnam beat Thailand 2-1.	Việt Nam đánh bại Thái Lan 2-1.		/biːt/
+support.team	support	verb	2	sports	ủng hộ, hâm mộ (một đội)	thường xuyên theo dõi và cổ vũ cho một đội bóng	Which team do you support?	Bạn ủng hộ đội nào?		/səˈpɔːt/
+stretch	stretch	verb	2	sports	giãn cơ, duỗi người	kéo dài tay chân trước hoặc sau khi tập	Always stretch before you run.	Luôn giãn cơ trước khi chạy.		/stretʃ/
+loser	loser	noun	2	sports	người thua cuộc	người hoặc đội thua trong trận đấu, cuộc thi	The loser said well done to the winner.	Người thua chúc mừng người thắng.		/ˈluːzə/
+final.match	final	noun	2	sports	trận chung kết	trận cuối cùng quyết định nhà vô địch	Our school team is in the final!	Đội trường chúng tôi đã vào chung kết!		/ˈfaɪnl/
+whistle	whistle	noun	2	sports	cái còi	dụng cụ thổi ra tiếng kêu to, trọng tài hay dùng	The match ends when the referee blows the whistle.	Trận đấu kết thúc khi trọng tài thổi còi.		/ˈwɪsl/
+net.sport	net	noun	2	sports	lưới (thể thao)	lưới căng giữa sân hoặc lưới trong khung thành	The ball hit the net.	Quả bóng chạm lưới.		/net/
+racket	racket	noun	2	sports	cái vợt	dụng cụ có lưới để đánh bóng tennis, cầu lông	I need a new badminton racket.	Tôi cần một cây vợt cầu lông mới.	racquet	/ˈrækɪt/
+team_sport	team sport	noun	2	sports	môn thể thao đồng đội	môn chơi theo đội như bóng đá, bóng chuyền	Football is a team sport.	Bóng đá là môn thể thao đồng đội.
+skateboard	skateboard	noun	2	sports	ván trượt	tấm ván có bánh xe nhỏ để đứng lên trượt	He goes to the park with his skateboard.	Cậu ấy ra công viên với tấm ván trượt.		/ˈskeɪtbɔːd/
+push-up	push-up	noun	2	sports	động tác chống đẩy	nằm sấp, dùng tay đẩy người lên xuống	I do twenty push-ups every morning.	Mỗi sáng tôi chống đẩy hai mươi cái.	press-up	/ˈpʊʃʌp/
+finish_line	finish line	noun	2	sports	vạch đích	vạch kết thúc cuộc đua	She was the first to cross the finish line.	Cô ấy là người đầu tiên vượt qua vạch đích.	finishing line
+gold_medal	gold medal	noun	2	sports	huy chương vàng	huy chương trao cho người đứng nhất	He won a gold medal in swimming.	Anh ấy giành huy chương vàng môn bơi.
+sports_centre	sports centre	noun	2	sports	trung tâm thể thao	nơi có sân, bể bơi, phòng tập cho mọi người	There is a new sports centre near my house.	Có một trung tâm thể thao mới gần nhà tôi.	sports center
+the_olympics	the Olympics	noun	2	sports	Thế vận hội, Olympic	đại hội thể thao lớn nhất thế giới, bốn năm một lần	She dreams of going to the Olympics.	Cô ấy mơ ước được dự Thế vận hội.	Olympics|the Olympic Games
+sporty	sporty	adjective	2	sports	mê thể thao, năng vận động	nói về người thích và hay chơi thể thao	My brother is very sporty.	Anh trai tôi rất mê thể thao.		/ˈspɔːti/
+indoor	indoor	adjective	2	sports	trong nhà	môn thể thao hay nơi tập ở bên trong tòa nhà	Badminton is an indoor sport.	Cầu lông là môn thể thao trong nhà.		/ˈɪndɔː/
+outdoor	outdoor	adjective	2	sports	ngoài trời	môn thể thao, nơi tập ở bên ngoài, không có mái che	We have an outdoor swimming pool.	Chúng tôi có một bể bơi ngoài trời.		/ˈaʊtdɔː/
+active.lifestyle	active	adjective	2	sports	năng động, hay vận động	nói về người thường xuyên tập luyện, đi lại nhiều	My grandma is still very active.	Bà tôi vẫn rất năng động.		/ˈæktɪv/
+hard.effort	hard	adverb	2	sports	chăm chỉ, hết sức	tập luyện, cố gắng với nhiều công sức	They trained hard for the final.	Họ tập luyện chăm chỉ cho trận chung kết.		/hɑːd/
+warm_up	warm up	phrasal_verb	2	sports	khởi động	tập nhẹ trước khi chơi thể thao để làm nóng cơ thể	Let's warm up for ten minutes.	Chúng ta khởi động mười phút nhé.
+work_out.exercise	work out	phrasal_verb	2	sports	tập thể dục, tập gym	tập luyện để khỏe mạnh, thường ở phòng tập	She works out at the gym after work.	Cô ấy tập gym sau giờ làm.
+keep_fit	keep fit	collocation	2	sports	giữ sức khỏe, giữ dáng	tập thể dục đều đặn để cơ thể khỏe mạnh	I swim twice a week to keep fit.	Tôi bơi hai lần một tuần để giữ sức khỏe.
+lift_weights	lift weights	collocation	2	sports	tập tạ, nâng tạ	nâng vật nặng để cơ bắp khỏe hơn	He lifts weights three times a week.	Anh ấy tập tạ ba lần một tuần.
+win_a_medal	win a medal	collocation	2	sports	giành huy chương	đạt thứ hạng cao trong một cuộc thi đấu	She hopes to win a medal this year.	Cô ấy hy vọng giành huy chương năm nay.
+come_first	come first	collocation	2	sports	về nhất, đứng thứ nhất	đạt vị trí cao nhất trong cuộc đua, cuộc thi	Lan came first in the 100 metres.	Lan về nhất ở nội dung 100 mét.
+do_yoga	do yoga	collocation	2	sports	tập yoga	luyện các tư thế yoga để thư giãn, dẻo dai	My mother does yoga before breakfast.	Mẹ tôi tập yoga trước bữa sáng.
+join_a_team	join a team	collocation	2	sports	gia nhập một đội	trở thành thành viên của một đội thể thao	I want to join a basketball team.	Tôi muốn gia nhập một đội bóng rổ.
+play_against	play against	phrasal_verb	2	sports	thi đấu với, gặp (đối thủ)	nói về đội hoặc người mà mình đấu cùng trong trận	We play against a strong team on Saturday.	Thứ Bảy chúng tôi đấu với một đội mạnh.
+dive	dive	verb	2	sports	nhảy cắm đầu xuống nước	nhảy xuống nước, đầu và tay xuống trước	He dived into the pool.	Anh ấy nhảy cắm đầu xuống bể bơi.		/daɪv/
+bowling	bowling	noun	2	sports	môn bowling	môn lăn quả bóng nặng để làm đổ các con ki	We went bowling on Friday night.	Tối thứ Sáu chúng tôi đi chơi bowling.		/ˈbəʊlɪŋ/
+boxer	boxer	noun	2	sports	võ sĩ quyền anh	người thi đấu môn quyền anh	The boxer trains for hours every day.	Võ sĩ quyền anh tập luyện hàng giờ mỗi ngày.		/ˈbɒksə/
+cyclist	cyclist	noun	2	sports	tay đua xe đạp	người thi đấu hoặc tập luyện môn đạp xe	The cyclists rode through the city.	Các tay đua xe đạp chạy qua thành phố.		/ˈsaɪklɪst/
+shoot.ball	shoot	verb	2	sports	sút (bóng), ném rổ	đá hoặc ném bóng về phía khung thành, rổ	He shot from far away and scored.	Anh ấy sút từ xa và ghi bàn.		/ʃuːt/

@@ -1,0 +1,74 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+orange_juice	orange juice	collocation	1	food	nước cam	nước ép từ quả cam	I drink orange juice every morning.	Sáng nào tôi cũng uống nước cam.
+a_glass_of_water	a glass of water	collocation	1	food	một ly nước	khi xin hoặc mời một ly nước lọc	Could I have a glass of water?	Cho tôi xin một ly nước được không?
+fried_egg	fried egg	collocation	1	food	trứng ốp la, trứng rán	trứng rán trên chảo, thường để nguyên lòng đỏ	I had a fried egg with my rice.	Tôi ăn cơm với một quả trứng ốp la.
+im_hungry	I'm hungry	phrase	1	food	tôi đói rồi	câu nói khi muốn được ăn	Mum, I'm hungry. What's for lunch?	Mẹ ơi, con đói rồi. Trưa nay ăn gì ạ?
+iced_tea	iced tea	collocation	1	food	trà đá	trà nguội cho thêm đá, rất phổ biến ở quán vỉa hè	A glass of iced tea costs very little in Hanoi.	Một cốc trà đá ở Hà Nội rất rẻ.
+cook_dinner	cook dinner	collocation	1	food	nấu bữa tối	chuẩn bị và nấu cơm tối	My dad usually cooks dinner on Sundays.	Bố tôi thường nấu bữa tối vào Chủ nhật.
+iced_coffee	iced coffee	collocation	2	food	cà phê đá	cà phê pha xong cho thêm đá	I'd like an iced coffee with milk.	Cho tôi một ly cà phê sữa đá.
+black_coffee	black coffee	collocation	2	food	cà phê đen	cà phê không cho sữa	He drinks black coffee without sugar.	Anh ấy uống cà phê đen không đường.
+instant_noodles	instant noodles	collocation	2	food	mì tôm, mì ăn liền	mì gói chỉ cần đổ nước sôi là ăn được	Students often eat instant noodles late at night.	Sinh viên thường ăn mì tôm vào đêm khuya.
+french_fries	French fries	noun	2	food	khoai tây chiên	khoai tây cắt thanh dài rồi chiên giòn	The children want burgers and French fries.	Bọn trẻ muốn ăn bánh mì kẹp và khoai tây chiên.	chips|fries
+fruit_salad	fruit salad	collocation	2	food	hoa quả dầm, salad trái cây	nhiều loại trái cây cắt nhỏ trộn với nhau	We had fruit salad for dessert.	Chúng tôi ăn hoa quả dầm tráng miệng.
+do_the_cooking	do the cooking	collocation	2	food	lo việc nấu nướng	đảm nhận việc nấu ăn trong nhà	My husband does the cooking at weekends.	Chồng tôi lo việc nấu nướng vào cuối tuần.
+cut_into_pieces	cut into pieces	collocation	2	food	cắt thành miếng	chia thực phẩm thành nhiều miếng nhỏ khi nấu	Cut the chicken into small pieces.	Cắt thịt gà thành miếng nhỏ.
+what_would_you_like	what would you like	phrase	2	food	bạn muốn dùng gì	câu hỏi lịch sự khi mời đồ ăn, đồ uống hoặc nhận gọi món	What would you like to drink?	Bạn muốn uống gì?
+ill_have	I'll have	phrase	2	food	cho tôi (món…)	câu mở đầu khi gọi món ở quán	I'll have the beef noodles, please.	Cho tôi bát phở bò.
+anything_else	anything else	phrase	2	food	còn gì nữa không	người phục vụ hỏi khách có gọi thêm không	Anything else for you, sir?	Anh còn gọi gì nữa không ạ?
+whats_for_dinner	what's for dinner	phrase	2	food	tối nay ăn gì	câu hỏi người nấu về món ăn bữa tối	Mum, what's for dinner tonight?	Mẹ ơi, tối nay ăn gì ạ?
+can_i_have_the_bill	can I have the bill	phrase	2	food	cho tôi xin hóa đơn	câu nói khi muốn thanh toán ở nhà hàng	Excuse me, can I have the bill, please?	Xin lỗi, cho tôi xin hóa đơn.	can I have the check
+condensed_milk	condensed milk	noun	3	food	sữa đặc	sữa cô đặc rất ngọt, dùng pha cà phê sữa	Vietnamese iced coffee is made with condensed milk.	Cà phê sữa đá Việt Nam được pha với sữa đặc.
+coconut_milk	coconut milk	noun	3	food	nước cốt dừa	nước béo vắt từ cùi dừa nạo, dùng nấu chè, cà ri	This curry is cooked with coconut milk.	Món cà ri này được nấu với nước cốt dừa.
+bean_sprouts	bean sprouts	noun	3	food	giá đỗ	mầm đậu xanh trắng, giòn, ăn kèm phở, bún	Put some bean sprouts in your noodle soup.	Cho ít giá vào bát phở của bạn.	bean sprout
+rice_noodles	rice noodles	noun	3	food	bánh phở, sợi gạo	sợi làm từ bột gạo, thường dẹt, dùng nấu phở	Pho is made with flat rice noodles.	Phở được làm từ bánh phở sợi dẹt.
+minced_meat	minced meat	collocation	3	food	thịt băm, thịt xay	thịt được băm hoặc xay nhỏ	Mix the minced meat with mushrooms for the spring rolls.	Trộn thịt băm với nấm để làm nem.	ground meat|mince
+pork_ribs	pork ribs	collocation	3	food	sườn lợn, sườn heo	phần xương sườn có thịt, hay nướng hoặc rim	Rice with grilled pork ribs is a popular lunch.	Cơm sườn nướng là món ăn trưa phổ biến.
+chicken_breast	chicken breast	collocation	3	food	ức gà	phần thịt ngực của con gà, ít mỡ	Chicken breast is low in fat.	Ức gà ít chất béo.
+sweet_and_sour	sweet and sour	collocation	3	food	chua ngọt	món có vị vừa chua vừa ngọt	We ordered sweet and sour fish.	Chúng tôi gọi món cá sốt chua ngọt.
+dipping_sauce	dipping sauce	collocation	3	food	nước chấm	nước sốt để chấm thức ăn vào trước khi ăn	Spring rolls taste better with a sweet dipping sauce.	Nem ăn ngon hơn khi chấm nước chấm chua ngọt.
+food_court	food court	noun	3	food	khu ẩm thực (trung tâm thương mại)	khu có nhiều quầy đồ ăn và chỗ ngồi chung	Let's meet at the food court on the top floor.	Gặp nhau ở khu ẩm thực tầng trên cùng nhé.
+light_meal	light meal	collocation	3	food	bữa ăn nhẹ	bữa ăn ít, dễ tiêu	I only want a light meal tonight.	Tối nay tôi chỉ muốn ăn nhẹ thôi.
+todays_special	today's special	collocation	3	food	món đặc biệt hôm nay	món nhà hàng giới thiệu riêng trong ngày	Today's special is grilled fish with rice.	Món đặc biệt hôm nay là cá nướng ăn với cơm.
+go_on_a_diet	go on a diet	collocation	3	food	ăn kiêng	ăn ít hoặc kiêng một số món để giảm cân	I'm going on a diet after the holidays.	Tôi sẽ ăn kiêng sau kỳ nghỉ.
+cut_up	cut up	phrasal_verb	3	food	cắt nhỏ ra	cắt thức ăn thành nhiều miếng để dễ ăn	Can you cut up the meat for the baby?	Bạn cắt nhỏ thịt cho em bé được không?
+cool_down.food	cool down	phrasal_verb	3	food	để nguội bớt (đồ ăn)	chờ món ăn, đồ uống bớt nóng	Let the soup cool down before you eat it.	Để canh nguội bớt rồi hãy ăn.
+its_on_me	it's on me	phrase	3	food	để tôi mời, tôi trả	khi muốn trả tiền bữa ăn, đồ uống cho người khác	Put your money away. It's on me.	Cất tiền đi. Để tôi mời.	my treat
+are_you_ready_to_order	are you ready to order	phrase	3	food	anh chị gọi món được chưa	người phục vụ hỏi khách đã chọn món chưa	Good evening. Are you ready to order?	Chào anh chị. Anh chị gọi món được chưa ạ?
+greedily	greedily	adverb	4	food	(ăn) một cách tham lam	ăn vội, ăn nhiều, không nhường ai	The boy greedily ate all the sweets.	Cậu bé tham lam ăn hết chỗ kẹo.		/ˈɡriːdɪli/
+boil_over	boil over	phrasal_verb	4	food	sôi trào ra	nước, sữa khi sôi bị tràn ra ngoài nồi	Watch the milk so it doesn't boil over.	Trông nồi sữa để nó không sôi trào ra.
+top_up	top up	phrasal_verb	4	food	rót thêm cho đầy	rót thêm đồ uống vào cốc còn vơi	Can I top up your tea?	Để tôi rót thêm trà cho bạn nhé?
+eat_in	eat in	phrasal_verb	4	food	ăn tại quán	ăn ngay tại quán thay vì mua mang về	Are you eating in or taking it away?	Anh ăn ở đây hay mang về?
+send_back	send back	phrasal_verb	4	food	trả lại (món ăn)	trả món cho nhà hàng vì món có vấn đề	My soup was cold, so I sent it back.	Súp của tôi bị nguội nên tôi trả lại.
+go_with	go with	phrasal_verb	4	food	ăn kèm hợp với	món hoặc nước chấm ăn chung thấy hợp vị	Which sauce goes with this chicken?	Loại nước sốt nào hợp với món gà này?
+cut_out	cut out	phrasal_verb	4	food	bỏ hẳn (món nào đó)	ngừng ăn hoặc uống hoàn toàn một thứ	I've cut out sugar from my diet.	Tôi đã bỏ hẳn đường khỏi chế độ ăn.
+snack_on	snack on	phrasal_verb	4	food	ăn vặt (món gì)	ăn chút đồ nhẹ giữa các bữa	I snack on nuts when I'm working.	Tôi hay ăn vặt các loại hạt khi làm việc.
+lose_your_appetite	lose your appetite	collocation	4	food	ăn mất ngon, chán ăn	không còn muốn ăn vì buồn, ốm hoặc vừa ăn vặt	Don't eat snacks now or you'll lose your appetite.	Đừng ăn vặt bây giờ kẻo lát nữa mất ngon.
+grab_a_bite	grab a bite	collocation	4	food	ăn vội chút gì	ăn nhanh một chút khi đang bận	Let's grab a bite before the film.	Mình ăn vội chút gì trước khi xem phim nhé.	grab a bite to eat
+place_an_order	place an order	collocation	4	food	đặt món	yêu cầu món ăn ở nhà hàng hoặc qua ứng dụng	I placed an order for two pizzas online.	Tôi đã đặt hai cái pizza trên mạng.
+split_the_bill	split the bill	collocation	4	food	chia tiền hóa đơn	mỗi người trả một phần tiền bữa ăn	Let's split the bill this time.	Lần này mình chia tiền nhé.
+ready_meal	ready meal	collocation	4	food	suất ăn làm sẵn	món đóng hộp bán ở siêu thị, chỉ cần hâm nóng	He lives alone and eats ready meals most nights.	Anh ấy sống một mình và hầu như tối nào cũng ăn đồ làm sẵn.
+set_menu	set menu	collocation	4	food	thực đơn suất cố định, set ăn	bữa có các món định sẵn với giá cố định	The set menu includes soup, a main course and dessert.	Set ăn gồm súp, món chính và tráng miệng.
+taste_buds	taste buds	noun	4	food	nụ vị giác	những điểm nhỏ trên lưỡi giúp cảm nhận vị	Spicy food wakes up your taste buds.	Đồ cay đánh thức vị giác của bạn.	taste bud
+thirstily	thirstily	adverb	5	food	(uống) một cách khát khao	uống nhanh và nhiều vì đang rất khát	The runners drank thirstily after the race.	Các vận động viên uống nước lấy uống để sau cuộc đua.		/ˈθɜːstɪli/
+wash_down	wash down	phrasal_verb	5	food	uống cho trôi (thức ăn)	uống nước sau khi ăn để thức ăn trôi xuống	He washed down his sandwich with a glass of milk.	Anh ấy uống một cốc sữa cho trôi chiếc bánh mì kẹp.
+fill_up_on	fill up on	phrasal_verb	5	food	ăn no bụng bằng (món gì)	ăn nhiều một món đến mức không ăn được món khác	Don't fill up on bread before the main course.	Đừng ăn no bánh mì trước khi có món chính.
+dish_up	dish up	phrasal_verb	5	food	múc thức ăn ra (bát, đĩa)	chia món từ nồi ra đĩa để dọn lên bàn	Dad dished up the rice and soup.	Bố múc cơm và canh ra bát.
+whip_up	whip up	phrasal_verb	5	food	nấu vội (một món)	làm nhanh một bữa ăn từ những gì có sẵn	I can whip up some fried rice in ten minutes.	Tôi có thể làm nhanh một đĩa cơm rang trong mười phút.
+tuck_in	tuck in	phrasal_verb	5	food	ăn ngon lành, ăn hăng say	khẩu ngữ: ăn nhiệt tình vì đói hoặc vì món ngon	The food arrived and everyone tucked in.	Đồ ăn được mang ra và ai nấy ăn ngon lành.
+live_on	live on	phrasal_verb	5	food	sống nhờ ăn (toàn món gì)	chỉ ăn một loại thức ăn trong thời gian dài	As a student, I lived on instant noodles.	Hồi sinh viên, tôi sống nhờ mì tôm.
+work_up_an_appetite	work up an appetite	collocation	5	food	vận động cho đói bụng	làm việc, tập luyện đến mức thấy đói	A long swim really works up an appetite.	Bơi lâu thật khiến người ta đói bụng.
+signature_dish	signature dish	collocation	5	food	món tủ, món đặc trưng	món nổi tiếng nhất của một đầu bếp, nhà hàng	Grilled fish is the chef's signature dish.	Cá nướng là món tủ của đầu bếp.
+comfort_food	comfort food	collocation	5	food	món ăn an ủi tinh thần	món quen thuộc, giản dị, ăn vào thấy dễ chịu	For me, rice porridge is the best comfort food.	Với tôi, cháo là món ăn an ủi tinh thần tuyệt nhất.
+eat_for_two	eat for two	idiom	5	food	ăn cho cả hai mẹ con	nói về phụ nữ mang thai cần ăn nhiều hơn	She's pregnant, so she's eating for two.	Cô ấy đang mang thai nên ăn cho cả hai mẹ con.
+sell_like_hot_cakes	sell like hot cakes	idiom	5	food	bán đắt như tôm tươi	hàng hóa bán rất nhanh và nhiều	Her homemade cakes sell like hot cakes.	Bánh nhà làm của cô ấy bán đắt như tôm tươi.	sell like hotcakes
+couch_potato	couch potato	idiom	5	food	người lười, suốt ngày nằm xem TV	khẩu ngữ chê người ít vận động, chỉ ngồi xem TV	Don't be a couch potato. Go outside and play!	Đừng có suốt ngày nằm xem TV. Ra ngoài chơi đi!
+whet_your_appetite	whet your appetite	idiom	6	food	kích thích sự thèm ăn	làm ai đó muốn ăn hoặc muốn biết thêm	These small dishes will whet your appetite for the main course.	Mấy món nhỏ này sẽ kích thích vị giác của bạn trước món chính.
+empty_calories	empty calories	collocation	6	food	ca-lo rỗng	năng lượng từ đồ nhiều đường, mỡ nhưng thiếu dinh dưỡng	Soft drinks are full of empty calories.	Nước ngọt chứa đầy ca-lo rỗng.
+a_square_meal	a square meal	idiom	6	food	bữa ăn tươm tất, đầy đủ	bữa ăn no, đủ chất	He hasn't had a square meal for days.	Đã mấy ngày anh ấy không được ăn một bữa tươm tất.
+foot_the_bill	foot the bill	idiom	6	food	đứng ra trả tiền, chịu chi	trả toàn bộ chi phí, thường là khoản lớn	The company footed the bill for the dinner.	Công ty đứng ra trả tiền bữa tối.
+in_a_pickle	in a pickle	idiom	6	food	gặp rắc rối, lâm vào thế khó	khi rơi vào tình huống khó xử	I lost my wallet and I'm in a real pickle.	Tôi làm mất ví và giờ đang gặp rắc rối to.
+butter_up	butter up	phrasal_verb	6	food	nịnh nọt, nịnh bợ	khen ai đó để được việc	He's buttering up his boss to get a day off.	Anh ta đang nịnh sếp để được nghỉ một ngày.
+cry_over_spilt_milk	cry over spilt milk	idiom	6	food	tiếc nuối chuyện đã rồi	buồn bực vì một việc đã xảy ra, không thể sửa	It's no use crying over spilt milk.	Tiếc nuối chuyện đã qua cũng chẳng ích gì.	cry over spilled milk
+packed_like_sardines	packed like sardines	idiom	6	food	chật như nêm	đông người đến mức chen chúc, không cựa được	On the morning bus, we were packed like sardines.	Trên chuyến xe buýt buổi sáng, chúng tôi chật như nêm.
+eat_humble_pie	eat humble pie	idiom	6	food	cúi đầu nhận sai	phải thừa nhận lỗi một cách muối mặt	After losing the bet, he had to eat humble pie.	Sau khi thua cược, anh ta đành phải cúi đầu nhận sai.
+a_hot_potato	a hot potato	idiom	6	food	vấn đề nóng, việc gai góc	chủ đề gây tranh cãi, ai cũng ngại xử lý	Food prices have become a political hot potato.	Giá lương thực đã trở thành một vấn đề chính trị nóng hổi.

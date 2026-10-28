@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "Mirabi",
+    "slug": "refmi-mobile",
+    "version": "0.1.0",
+    "icon": "./assets/icon.png",
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#EEF6FD"
+      }
+    },
+    "web": {
+      "name": "Mirabi",
+      "shortName": "Mirabi",
+      "themeColor": "#1A7BBF",
+      "backgroundColor": "#EAF7FD",
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-font",
+      "expo-asset",
+      "@react-native-community/datetimepicker",
+      "expo-audio",
+      "expo-notifications",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Mirabi dùng camera để quét mã QR kết bạn.",
+          "microphonePermission": false,
+          "recordAudioAndroid": false
+        }
+      ]
+    ]
+  }
+}

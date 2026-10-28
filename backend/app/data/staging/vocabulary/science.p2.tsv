@@ -1,0 +1,99 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+theory	theory	noun	3	science	lý thuyết, học thuyết	ý tưởng đã được kiểm chứng để giải thích một hiện tượng	Darwin's theory explains how animals change over time.	Học thuyết của Darwin giải thích động vật thay đổi theo thời gian ra sao.		/ˈθɪəri/
+hypothesis	hypothesis	noun	3	science	giả thuyết	điều phỏng đoán ban đầu, cần thí nghiệm để kiểm tra	Our hypothesis was that plants grow faster with music.	Giả thuyết của chúng tôi là cây lớn nhanh hơn khi nghe nhạc.		/haɪˈpɒθəsɪs/
+atom	atom	noun	3	science	nguyên tử	phần nhỏ nhất của một nguyên tố hóa học	Everything around us is made of atoms.	Mọi thứ quanh ta đều được tạo nên từ nguyên tử.		/ˈætəm/
+molecule	molecule	noun	3	science	phân tử	nhóm nguyên tử liên kết với nhau, như phân tử nước	A water molecule has two hydrogen atoms and one oxygen atom.	Một phân tử nước có hai nguyên tử hy-đrô và một nguyên tử ô-xy.		/ˈmɒlɪkjuːl/
+galaxy	galaxy	noun	3	science	thiên hà	tập hợp hàng tỷ ngôi sao trong vũ trụ	There are billions of galaxies in the universe.	Có hàng tỷ thiên hà trong vũ trụ.		/ˈɡæləksi/
+cell.biology	cell	noun	3	science	tế bào	đơn vị nhỏ nhất của sự sống, tạo nên cơ thể sinh vật	The human body is made of trillions of cells.	Cơ thể con người được tạo nên từ hàng nghìn tỷ tế bào.		/sel/
+fossil	fossil	noun	3	science	hóa thạch	dấu vết động vật, cây cối cổ xưa còn lại trong đá	They found a dinosaur fossil in the desert.	Họ tìm thấy một hóa thạch khủng long trong sa mạc.		/ˈfɒsl/
+equation	equation	noun	3	science	phương trình	biểu thức toán học có dấu bằng, cần tìm ẩn số	Can you solve this equation for x?	Bạn có giải được phương trình này để tìm x không?		/ɪˈkweɪʒn/
+fraction	fraction	noun	3	science	phân số	số chỉ một phần của tổng thể, như 1/2, 3/4	One half is a fraction.	Một phần hai là một phân số.		/ˈfrækʃn/
+formula	formula	noun	3	science	công thức (toán, hóa)	quy tắc viết bằng ký hiệu, như công thức tính diện tích	Use this formula to find the area of a circle.	Dùng công thức này để tính diện tích hình tròn.		/ˈfɔːmjələ/
+element.chemistry	element	noun	3	science	nguyên tố (hóa học)	chất cơ bản như sắt, vàng, ô-xy, không tách nhỏ hơn được	Gold is an element, but water is not.	Vàng là một nguyên tố, còn nước thì không.		/ˈelɪmənt/
+acid	acid	noun	3	science	a-xít	hóa chất có vị chua, loại mạnh có thể làm cháy da	Lemon juice contains a weak acid.	Nước chanh có chứa một loại a-xít yếu.		/ˈæsɪd/
+satellite.space	satellite	noun	3	science	vệ tinh	vật bay quanh một hành tinh, tự nhiên hay nhân tạo	The moon is the Earth's only natural satellite.	Mặt Trăng là vệ tinh tự nhiên duy nhất của Trái Đất.		/ˈsætəlaɪt/
+bacteria	bacteria	noun	3	science	vi khuẩn	sinh vật cực nhỏ, có loại có lợi, có loại gây bệnh	Some bacteria help us digest food.	Một số vi khuẩn giúp chúng ta tiêu hóa thức ăn.		/bækˈtɪəriə/
+evolution	evolution	noun	3	science	sự tiến hóa	quá trình sinh vật thay đổi dần qua hàng triệu năm	Evolution explains why birds have wings.	Sự tiến hóa giải thích vì sao chim có cánh.		/ˌiːvəˈluːʃn/
+sample.lab	sample	noun	3	science	mẫu (thí nghiệm)	một lượng nhỏ đất, nước, máu lấy ra để kiểm tra	The scientist took a sample of water from the river.	Nhà khoa học lấy một mẫu nước từ dòng sông.		/ˈsɑːmpl/
+evaporate	evaporate	verb	3	science	bay hơi	chất lỏng biến thành hơi khi nóng lên	The water in the bowl evaporated in the sun.	Nước trong bát đã bay hơi dưới nắng.		/ɪˈvæpəreɪt/
+expand	expand	verb	3	science	nở ra, giãn nở	vật to ra khi nóng lên	Metal expands when it gets hot.	Kim loại nở ra khi bị nóng.		/ɪkˈspænd/
+react	react	verb	3	science	phản ứng (hóa học)	hai chất gặp nhau và tạo ra chất mới	Baking soda reacts with vinegar and makes bubbles.	Muối nở phản ứng với giấm và tạo ra bọt khí.		/riˈækt/
+absorb	absorb	verb	3	science	hấp thụ, thấm hút	lấy vào chất lỏng, khí, ánh sáng, nhiệt	Dark colours absorb more heat than light colours.	Màu tối hấp thụ nhiều nhiệt hơn màu sáng.	take in	/əbˈzɔːb/
+reflect.light	reflect	verb	3	science	phản chiếu, phản xạ (ánh sáng)	ánh sáng, âm thanh chạm vào bề mặt rồi dội lại	A mirror reflects light.	Gương phản chiếu ánh sáng.		/rɪˈflekt/
+rotate	rotate	verb	3	science	tự quay (quanh trục)	quay tròn quanh một trục ở giữa	The Earth rotates once every twenty-four hours.	Trái Đất tự quay một vòng mỗi hai mươi bốn giờ.	spin	/rəʊˈteɪt/
+orbit	orbit	verb	3	science	quay quanh (theo quỹ đạo)	một thiên thể bay vòng quanh một thiên thể khác	The Earth orbits the sun.	Trái Đất quay quanh Mặt Trời.		/ˈɔːbɪt/
+evolve	evolve	verb	3	science	tiến hóa	sinh vật thay đổi dần qua rất nhiều thế hệ	Whales evolved from animals that lived on land.	Cá voi tiến hóa từ loài động vật sống trên cạn.		/ɪˈvɒlv/
+prove	prove	verb	3	science	chứng minh	đưa ra bằng chứng cho thấy điều gì là đúng	The experiment proved that his idea was right.	Thí nghiệm đã chứng minh ý tưởng của anh ấy là đúng.		/pruːv/
+biological	biological	adjective	3	science	(thuộc về) sinh học	liên quan đến sự sống và cơ thể sinh vật	Sleep is a biological need for all animals.	Ngủ là một nhu cầu sinh học của mọi loài vật.		/ˌbaɪəˈlɒdʒɪkl/
+physical.matter	physical	adjective	3	science	(thuộc về) vật lý, vật chất	liên quan đến vật chất, không làm thay đổi bản chất của chất	Melting ice is a physical change, not a chemical one.	Băng tan là một biến đổi vật lý, không phải biến đổi hóa học.		/ˈfɪzɪkl/
+electrical	electrical	adjective	3	science	(thuộc về) điện	liên quan đến điện, dây điện, thiết bị điện	The fire was caused by an electrical problem.	Vụ cháy là do sự cố về điện.		/ɪˈlektrɪkl/
+lunar	lunar	adjective	3	science	(thuộc về) mặt trăng	liên quan đến Mặt Trăng	The lunar surface is covered in dust.	Bề mặt mặt trăng phủ đầy bụi.		/ˈluːnə/
+acidic	acidic	adjective	3	science	có tính a-xít, chua	nói về chất có độ pH thấp, như giấm, nước chanh	Lemon juice is very acidic.	Nước chanh có tính a-xít rất cao.		/əˈsɪdɪk/
+microscopic	microscopic	adjective	3	science	cực nhỏ, chỉ thấy qua kính hiển vi	quá nhỏ để nhìn bằng mắt thường	Microscopic animals live in every drop of pond water.	Những sinh vật cực nhỏ sống trong từng giọt nước ao.		/ˌmaɪkrəˈskɒpɪk/
+mathematical	mathematical	adjective	3	science	(thuộc về) toán học	liên quan đến số, phép tính, toán	He has a strong mathematical mind.	Anh ấy có đầu óc toán học rất tốt.		/ˌmæθəˈmætɪkl/
+experimental	experimental	adjective	3	science	thử nghiệm, mang tính thực nghiệm	đang được thử, chưa dùng rộng rãi	The new medicine is still experimental.	Loại thuốc mới vẫn còn đang thử nghiệm.		/ɪkˌsperɪˈmentl/
+negative.number	negative	adjective	3	science	âm (số âm)	nói về số nhỏ hơn không, có dấu trừ	Minus five is a negative number.	Âm năm là một số âm.		/ˈneɡətɪv/
+positive.number	positive	adjective	3	science	dương (số dương)	nói về số lớn hơn không	Any number greater than zero is a positive number.	Mọi số lớn hơn không đều là số dương.		/ˈpɒzətɪv/
+parallel	parallel	adjective	3	science	song song	hai đường thẳng luôn cách đều nhau, không bao giờ gặp nhau	Draw two parallel lines on the paper.	Vẽ hai đường thẳng song song lên tờ giấy.		/ˈpærəlel/
+weightless	weightless	adjective	3	science	không trọng lượng	cảm giác lơ lửng khi ở ngoài vũ trụ	Astronauts are weightless in space and float around.	Phi hành gia không có trọng lượng trong vũ trụ và lơ lửng khắp nơi.		/ˈweɪtləs/
+scientifically	scientifically	adverb	3	science	một cách khoa học, về mặt khoa học	theo phương pháp, bằng chứng của khoa học	This idea has not been scientifically tested.	Ý tưởng này chưa được kiểm tra một cách khoa học.		/ˌsaɪənˈtɪfɪkli/
+approximately	approximately	adverb	3	science	xấp xỉ, khoảng chừng	gần đúng với một con số, không chính xác hoàn toàn	The sun is approximately 150 million kilometres from Earth.	Mặt Trời cách Trái Đất xấp xỉ 150 triệu ki-lô-mét.	roughly	/əˈprɒksɪmətli/
+accurately	accurately	adverb	3	science	một cách chính xác	đo, tính, ghi lại không sai lệch	Measure the liquid accurately before you mix it.	Đo chất lỏng thật chính xác trước khi trộn.		/ˈækjərətli/
+square_root	square root	noun	3	science	căn bậc hai	số nhân với chính nó ra số ban đầu, như √9 = 3	The square root of sixteen is four.	Căn bậc hai của mười sáu là bốn.
+right_angle	right angle	noun	3	science	góc vuông	góc 90 độ	A square has four right angles.	Hình vuông có bốn góc vuông.
+black_hole	black hole	noun	3	science	hố đen	vùng trong vũ trụ hút mọi thứ, kể cả ánh sáng	Nothing can escape from a black hole.	Không gì có thể thoát ra khỏi hố đen.
+light_year	light year	noun	3	science	năm ánh sáng	quãng đường ánh sáng đi được trong một năm	That star is ten light years away from us.	Ngôi sao đó cách chúng ta mười năm ánh sáng.	light-year
+boiling_point	boiling point	noun	3	science	điểm sôi	nhiệt độ mà chất lỏng bắt đầu sôi	The boiling point of water is 100 degrees Celsius.	Điểm sôi của nước là 100 độ C.
+freezing_point	freezing point	noun	3	science	điểm đóng băng	nhiệt độ mà chất lỏng bắt đầu đông lại	The freezing point of water is zero degrees Celsius.	Điểm đóng băng của nước là 0 độ C.
+life_cycle	life cycle	noun	3	science	vòng đời	các giai đoạn từ lúc sinh ra đến lúc chết của sinh vật	We learned about the life cycle of a butterfly.	Chúng tôi học về vòng đời của con bướm.
+food_chain	food chain	noun	3	science	chuỗi thức ăn	thứ tự loài này ăn loài kia trong tự nhiên	Grass, rabbits and foxes are part of a food chain.	Cỏ, thỏ và cáo là một phần của chuỗi thức ăn.
+water_cycle	water cycle	noun	3	science	vòng tuần hoàn của nước	nước bay hơi, thành mây, rơi xuống thành mưa rồi lặp lại	Rain is an important part of the water cycle.	Mưa là một phần quan trọng của vòng tuần hoàn nước.
+lab_report	lab report	noun	3	science	báo cáo thí nghiệm	bài viết ghi lại cách làm và kết quả một thí nghiệm	We have to hand in our lab report on Friday.	Chúng tôi phải nộp báo cáo thí nghiệm vào thứ Sáu.	laboratory report
+blast_off	blast off	phrasal_verb	3	science	rời bệ phóng, cất cánh (tên lửa)	tên lửa, tàu vũ trụ rời mặt đất bay lên	The rocket blasted off at six in the morning.	Tên lửa rời bệ phóng lúc sáu giờ sáng.	lift off
+the_milky_way	the Milky Way	noun	3	science	dải Ngân Hà	thiên hà chứa hệ Mặt Trời của chúng ta	Our sun is just one star in the Milky Way.	Mặt Trời của chúng ta chỉ là một ngôi sao trong dải Ngân Hà.	Milky Way
+chemical_reaction	chemical reaction	noun	3	science	phản ứng hóa học	quá trình các chất biến đổi thành chất mới	Fire is a chemical reaction that gives off heat and light.	Lửa là một phản ứng hóa học tỏa ra nhiệt và ánh sáng.
+scientific_method	scientific method	noun	3	science	phương pháp khoa học	các bước: đặt câu hỏi, giả thuyết, thí nghiệm, kết luận	The scientific method starts with a question.	Phương pháp khoa học bắt đầu bằng một câu hỏi.
+mental_maths	mental maths	noun	3	science	tính nhẩm	làm phép tính trong đầu, không dùng giấy bút	She is very quick at mental maths.	Cô ấy tính nhẩm rất nhanh.	mental math|mental arithmetic
+carbon_dioxide	carbon dioxide	noun	3	science	khí cac-bô-níc (CO2)	khí con người thở ra và cây xanh hấp thụ	Plants take in carbon dioxide and give out oxygen.	Cây xanh hấp thụ khí cac-bô-níc và thải ra khí ô-xy.
+make_a_prediction	make a prediction	collocation	3	science	đưa ra dự đoán	nói trước kết quả trước khi làm thí nghiệm	Make a prediction before you start the test.	Hãy đưa ra dự đoán trước khi bắt đầu thử nghiệm.
+under_a_microscope	under a microscope	collocation	3	science	dưới kính hiển vi	khi soi một vật bằng kính hiển vi	The cells look like small bricks under a microscope.	Dưới kính hiển vi, các tế bào trông như những viên gạch nhỏ.	under the microscope
+water_vapour	water vapour	noun	3	science	hơi nước (trong không khí)	nước ở thể khí, không nhìn thấy được trong không khí	Clouds form when water vapour cools down.	Mây hình thành khi hơi nước nguội đi.	water vapor
+round_up.number	round up	phrasal_verb	3	science	làm tròn lên	đổi một số thành số tròn lớn hơn gần nhất	Round up 4.7 to 5.	Làm tròn 4,7 lên thành 5.
+round_down.number	round down	phrasal_verb	3	science	làm tròn xuống	đổi một số thành số tròn nhỏ hơn gần nhất	Round down 3.2 to 3.	Làm tròn 3,2 xuống thành 3.
+turn_into.change	turn into	phrasal_verb	3	science	biến thành, chuyển thành	một chất đổi sang dạng, thể khác	When water freezes, it turns into ice.	Khi nước đông lại, nó biến thành băng.	change into
+electric_circuit	electric circuit	noun	3	science	mạch điện	đường dây khép kín cho dòng điện chạy qua	The bulb lights up when the electric circuit is complete.	Bóng đèn sáng khi mạch điện khép kín.
+law_of_gravity	law of gravity	noun	3	science	định luật hấp dẫn	quy luật giải thích vì sao các vật hút nhau	Newton explained the law of gravity.	Newton đã giải thích định luật hấp dẫn.
+heat_energy	heat energy	noun	3	science	nhiệt năng	năng lượng dưới dạng nhiệt	The sun gives us light and heat energy.	Mặt Trời cho chúng ta ánh sáng và nhiệt năng.	thermal energy
+scientific_discovery	scientific discovery	noun	3	science	phát hiện khoa học	điều mới mà các nhà khoa học tìm ra	The discovery of DNA was a great scientific discovery.	Việc tìm ra ADN là một phát hiện khoa học vĩ đại.
+lab_equipment	lab equipment	noun	3	science	dụng cụ thí nghiệm	ống nghiệm, cốc đong, kính hiển vi... dùng trong phòng thí nghiệm	Clean all the lab equipment after the lesson.	Hãy rửa sạch mọi dụng cụ thí nghiệm sau giờ học.	laboratory equipment
+decimal_point	decimal point	noun	3	science	dấu thập phân	dấu chấm hoặc dấu phẩy ngăn phần nguyên và phần lẻ	In English, we write a decimal point, not a comma.	Trong tiếng Anh, người ta viết dấu chấm thập phân chứ không dùng dấu phẩy.
+comet	comet	noun	4	science	sao chổi	thiên thể bằng băng và bụi, có đuôi sáng dài	A bright comet appeared in the sky last spring.	Một sao chổi sáng đã xuất hiện trên bầu trời mùa xuân năm ngoái.		/ˈkɒmɪt/
+asteroid	asteroid	noun	4	science	tiểu hành tinh	khối đá lớn bay quanh Mặt Trời	Many scientists believe an asteroid killed the dinosaurs.	Nhiều nhà khoa học tin rằng một tiểu hành tinh đã giết chết loài khủng long.		/ˈæstərɔɪd/
+nucleus.atom	nucleus	noun	4	science	hạt nhân (nguyên tử), nhân (tế bào)	phần ở giữa của nguyên tử hoặc tế bào	Electrons move around the nucleus of an atom.	Các electron chuyển động quanh hạt nhân nguyên tử.		/ˈnjuːkliəs/
+electron	electron	noun	4	science	điện tử, electron	hạt mang điện âm quay quanh hạt nhân nguyên tử	An electron is much smaller than an atom.	Một electron nhỏ hơn nguyên tử rất nhiều.		/ɪˈlektrɒn/
+compound.chemistry	compound	noun	4	science	hợp chất	chất tạo từ hai hay nhiều nguyên tố kết hợp với nhau	Water is a compound of hydrogen and oxygen.	Nước là hợp chất của hy-đrô và ô-xy.		/ˈkɒmpaʊnd/
+mixture	mixture	noun	4	science	hỗn hợp	các chất trộn lẫn nhưng không tạo thành chất mới	Salt water is a mixture, not a compound.	Nước muối là một hỗn hợp, không phải hợp chất.		/ˈmɪkstʃə/
+particle	particle	noun	4	science	hạt, phân tử nhỏ	phần cực nhỏ của vật chất	In a gas, the particles move very fast.	Trong chất khí, các hạt chuyển động rất nhanh.		/ˈpɑːtɪkl/
+friction	friction	noun	4	science	ma sát, lực ma sát	lực cản khi hai bề mặt cọ xát vào nhau	Friction between the tyres and the road helps the car stop.	Ma sát giữa lốp xe và mặt đường giúp xe dừng lại.		/ˈfrɪkʃn/
+mass.physics	mass	noun	4	science	khối lượng	lượng vật chất trong một vật, đo bằng ki-lô-gam	Your mass is the same on Earth and on the moon.	Khối lượng của bạn ở Trái Đất và trên Mặt Trăng là như nhau.		/mæs/
+organism	organism	noun	4	science	sinh vật (thuật ngữ sinh học)	bất kỳ cơ thể sống nào: vi khuẩn, cây, động vật	Bacteria are very small organisms.	Vi khuẩn là những sinh vật rất nhỏ.		/ˈɔːɡənɪzəm/
+photosynthesis	photosynthesis	noun	4	science	sự quang hợp	cây dùng ánh sáng để tạo thức ăn và thải ra ô-xy	Leaves make food through photosynthesis.	Lá cây tạo ra thức ăn nhờ quá trình quang hợp.		/ˌfəʊtəʊˈsɪnθəsɪs/
+geometry	geometry	noun	4	science	hình học	phần toán học về điểm, đường, góc, hình khối	In geometry we learn how to measure angles.	Trong hình học, chúng ta học cách đo góc.		/dʒiˈɒmətri/
+radiation	radiation	noun	4	science	bức xạ, phóng xạ	năng lượng phát ra dưới dạng tia, sóng, có thể gây hại	Too much radiation from the sun can damage your skin.	Quá nhiều bức xạ từ mặt trời có thể làm hại da.		/ˌreɪdiˈeɪʃn/
+gene	gene	noun	4	science	gen (di truyền)	phần trong tế bào quyết định đặc điểm truyền từ bố mẹ sang con	She got her blue eyes from her father's genes.	Cô ấy có đôi mắt xanh nhờ gen của bố.		/dʒiːn/
+condense	condense	verb	4	science	ngưng tụ	hơi nước gặp lạnh chuyển thành giọt nước	Steam condenses on the cold window.	Hơi nước ngưng tụ trên ô cửa kính lạnh.		/kənˈdens/
+contract.physics	contract	verb	4	science	co lại	vật nhỏ lại khi bị lạnh	Metal contracts when it gets cold.	Kim loại co lại khi bị lạnh.	shrink	/kənˈtrækt/
+conduct.electricity	conduct	verb	4	science	dẫn (điện, nhiệt)	cho điện hoặc nhiệt đi qua	Copper conducts electricity very well.	Đồng dẫn điện rất tốt.		/kənˈdʌkt/
+reproduce	reproduce	verb	4	science	sinh sản	sinh vật tạo ra con non, cây mới	Most plants reproduce by making seeds.	Hầu hết cây cối sinh sản bằng cách tạo ra hạt.		/ˌriːprəˈdjuːs/
+mutate	mutate	verb	4	science	đột biến	gen, vi-rút thay đổi khác với ban đầu	The virus mutated and became harder to treat.	Vi-rút đã đột biến và trở nên khó chữa hơn.		/mjuːˈteɪt/
+accelerate	accelerate	verb	4	science	tăng tốc	vật chuyển động nhanh dần lên	A ball accelerates as it rolls down a hill.	Quả bóng tăng tốc khi lăn xuống dốc.	speed up	/əkˈseləreɪt/
+extract	extract	verb	4	science	chiết xuất, tách ra	lấy một chất ra khỏi hỗn hợp, cây, đất	Scientists extract oil from the seeds.	Các nhà khoa học chiết xuất dầu từ hạt.		/ɪkˈstrækt/
+repel	repel	verb	4	science	đẩy nhau (nam châm)	hai cực giống nhau của nam châm đẩy ra xa nhau	Two north poles of magnets repel each other.	Hai cực bắc của nam châm đẩy nhau.		/rɪˈpel/
+dilute	dilute	verb	4	science	pha loãng	thêm nước để chất lỏng bớt đặc, bớt mạnh	Dilute the acid with water before you use it.	Hãy pha loãng a-xít với nước trước khi dùng.		/daɪˈluːt/
+decay	decay	verb	4	science	phân hủy, mục rữa	xác cây, động vật bị phân hủy dần	Dead leaves decay and feed the soil.	Lá chết phân hủy và làm đất màu mỡ.	rot	/dɪˈkeɪ/
+classify	classify	verb	4	science	phân loại	xếp sinh vật, chất vào các nhóm theo đặc điểm	Scientists classify animals into groups such as birds and fish.	Các nhà khoa học phân loại động vật thành các nhóm như chim và cá.		/ˈklæsɪfaɪ/
+atomic	atomic	adjective	4	science	(thuộc về) nguyên tử	liên quan đến nguyên tử hoặc năng lượng nguyên tử	Each element has its own atomic number.	Mỗi nguyên tố có số nguyên tử riêng.		/əˈtɒmɪk/
+molecular	molecular	adjective	4	science	(thuộc về) phân tử	liên quan đến phân tử	She studies the molecular structure of medicines.	Cô ấy nghiên cứu cấu trúc phân tử của thuốc.		/məˈlekjələ/
+radioactive	radioactive	adjective	4	science	phóng xạ, có tính phóng xạ	chất phát ra tia nguy hiểm cho sức khỏe	Radioactive waste must be stored very carefully.	Chất thải phóng xạ phải được lưu giữ hết sức cẩn thận.		/ˌreɪdiəʊˈæktɪv/
+soluble	soluble	adjective	4	science	hòa tan được	chất có thể tan trong nước hoặc chất lỏng khác	Sugar is soluble in water, but sand is not.	Đường hòa tan được trong nước, còn cát thì không.		/ˈsɒljəbl/
+opaque	opaque	adjective	4	science	không trong suốt, mờ đục	ánh sáng không đi xuyên qua được	Wood is opaque, so light cannot pass through it.	Gỗ không trong suốt nên ánh sáng không xuyên qua được.		/əʊˈpeɪk/

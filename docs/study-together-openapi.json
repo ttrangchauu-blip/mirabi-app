@@ -1,0 +1,3196 @@
+{
+ "openapi": "3.1.0",
+ "info": {
+  "title": "Mirabi API - Study Together",
+  "version": "0.2.0",
+  "description": "Subset of the live OpenAPI document (/docs). Regenerate with backend/scripts/export_study_together_openapi.py."
+ },
+ "paths": {
+  "/api/social/me": {
+   "get": {
+    "tags": [
+     "friends"
+    ],
+    "summary": "Get Social Settings",
+    "operationId": "get_social_settings_api_social_me_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   },
+   "patch": {
+    "tags": [
+     "friends"
+    ],
+    "summary": "Update Social Settings",
+    "operationId": "update_social_settings_api_social_me_patch",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/SocialSettingsPatch"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/users/search": {
+   "get": {
+    "tags": [
+     "friends"
+    ],
+    "summary": "Search Users",
+    "operationId": "search_users_api_users_search_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "q",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "minLength": 2,
+       "maxLength": 40,
+       "title": "Q"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 20,
+       "minimum": 1,
+       "default": 20,
+       "title": "Limit"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/users/lookup": {
+   "post": {
+    "tags": [
+     "friends"
+    ],
+    "summary": "Lookup User",
+    "description": "The short profile behind an exact friend code (typed, or read from a friend QR code \"MIRABI-FRIEND:<code>\").\nThe code goes in the body, not the URL, so it stays out of access logs.",
+    "operationId": "lookup_user_api_users_lookup_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CodeLookupInput"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/friend-requests": {
+   "post": {
+    "tags": [
+     "friends"
+    ],
+    "summary": "Send Friend Request",
+    "operationId": "send_friend_request_api_friend_requests_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/FriendRequestInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "tags": [
+     "friends"
+    ],
+    "summary": "List Friend Requests",
+    "operationId": "list_friend_requests_api_friend_requests_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "direction",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "enum": [
+        "incoming",
+        "outgoing"
+       ],
+       "type": "string",
+       "default": "incoming",
+       "title": "Direction"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/friend-requests/{request_id}/accept": {
+   "post": {
+    "tags": [
+     "friends"
+    ],
+    "summary": "Accept Friend Request",
+    "operationId": "accept_friend_request_api_friend_requests__request_id__accept_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "request_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Request Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/friend-requests/{request_id}/decline": {
+   "post": {
+    "tags": [
+     "friends"
+    ],
+    "summary": "Decline Friend Request",
+    "operationId": "decline_friend_request_api_friend_requests__request_id__decline_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "request_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Request Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/friend-requests/{request_id}": {
+   "delete": {
+    "tags": [
+     "friends"
+    ],
+    "summary": "Cancel Friend Request",
+    "operationId": "cancel_friend_request_api_friend_requests__request_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "request_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Request Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/friends": {
+   "get": {
+    "tags": [
+     "friends"
+    ],
+    "summary": "Get Friends",
+    "operationId": "get_friends_api_friends_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/friends/{user_id}": {
+   "delete": {
+    "tags": [
+     "friends"
+    ],
+    "summary": "Remove Friend",
+    "operationId": "remove_friend_api_friends__user_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "User Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/users/{user_id}/block": {
+   "post": {
+    "tags": [
+     "friends"
+    ],
+    "summary": "Block User",
+    "operationId": "block_user_api_users__user_id__block_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "User Id"
+      }
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "friends"
+    ],
+    "summary": "Unblock User",
+    "operationId": "unblock_user_api_users__user_id__block_delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "User Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/blocks": {
+   "get": {
+    "tags": [
+     "friends"
+    ],
+    "summary": "List Blocks",
+    "operationId": "list_blocks_api_blocks_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/users/{user_id}/report": {
+   "post": {
+    "tags": [
+     "friends"
+    ],
+    "summary": "Report User",
+    "operationId": "report_user_api_users__user_id__report_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "User Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ReportInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/admin/social/reports": {
+   "get": {
+    "tags": [
+     "friends"
+    ],
+    "summary": "Admin List Reports",
+    "operationId": "admin_list_reports_api_admin_social_reports_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "status",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "enum": [
+        "open",
+        "dismissed",
+        "actioned"
+       ],
+       "type": "string",
+       "default": "open",
+       "title": "Status"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/admin/social/reports/{report_id}/resolve": {
+   "post": {
+    "tags": [
+     "friends"
+    ],
+    "summary": "Admin Resolve Report",
+    "operationId": "admin_resolve_report_api_admin_social_reports__report_id__resolve_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "report_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Report Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ResolveReportInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/study-together/home": {
+   "get": {
+    "tags": [
+     "study-together"
+    ],
+    "summary": "Home",
+    "operationId": "home_api_study_together_home_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/team-quests/templates": {
+   "get": {
+    "tags": [
+     "team-quests"
+    ],
+    "summary": "List Templates",
+    "operationId": "list_templates_api_team_quests_templates_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/team-quests": {
+   "get": {
+    "tags": [
+     "team-quests"
+    ],
+    "summary": "List Quests",
+    "operationId": "list_quests_api_team_quests_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/team-quests/{quest_id}": {
+   "get": {
+    "tags": [
+     "team-quests"
+    ],
+    "summary": "Get Quest",
+    "operationId": "get_quest_api_team_quests__quest_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "quest_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Quest Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/team-quests/{quest_id}/join": {
+   "post": {
+    "tags": [
+     "team-quests"
+    ],
+    "summary": "Join Quest",
+    "operationId": "join_quest_api_team_quests__quest_id__join_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "quest_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Quest Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/study-rooms/{room_id}/team-quests": {
+   "post": {
+    "tags": [
+     "team-quests"
+    ],
+    "summary": "Create Quest",
+    "operationId": "create_quest_api_study_rooms__room_id__team_quests_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "room_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Room Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/QuestCreate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/study-rooms": {
+   "post": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "Create Room",
+    "operationId": "create_room_api_study_rooms_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "idempotency-key",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "maxLength": 64
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Idempotency-Key"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RoomCreate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "List Rooms",
+    "operationId": "list_rooms_api_study_rooms_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/study-rooms/current": {
+   "get": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "Get Current Room",
+    "operationId": "get_current_room_api_study_rooms_current_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/study-rooms/lookup": {
+   "post": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "Lookup Room",
+    "operationId": "lookup_room_api_study_rooms_lookup_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CodeInput"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/study-rooms/join": {
+   "post": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "Join By Code",
+    "operationId": "join_by_code_api_study_rooms_join_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CodeInput"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/study-rooms/{room_id}": {
+   "get": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "Get Room",
+    "operationId": "get_room_api_study_rooms__room_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "room_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Room Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "patch": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "Update Room",
+    "operationId": "update_room_api_study_rooms__room_id__patch",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "room_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Room Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RoomPatch"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/study-rooms/{room_id}/preview": {
+   "get": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "Get Room Preview",
+    "operationId": "get_room_preview_api_study_rooms__room_id__preview_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "room_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Room Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/study-rooms/{room_id}/join": {
+   "post": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "Join Room",
+    "description": "Join from an invitation or a friend's code room listed on the Study Together home.",
+    "operationId": "join_room_api_study_rooms__room_id__join_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "room_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Room Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/study-rooms/{room_id}/leave": {
+   "post": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "Leave Room",
+    "operationId": "leave_room_api_study_rooms__room_id__leave_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "room_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Room Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/study-rooms/{room_id}/invitations": {
+   "post": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "Invite To Room",
+    "operationId": "invite_to_room_api_study_rooms__room_id__invitations_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "room_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Room Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/InviteInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/study-rooms/{room_id}/start": {
+   "post": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "Start Session",
+    "operationId": "start_session_api_study_rooms__room_id__start_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "room_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Room Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/study-rooms/{room_id}/pause": {
+   "post": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "Pause Session",
+    "operationId": "pause_session_api_study_rooms__room_id__pause_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "room_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Room Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/study-rooms/{room_id}/resume": {
+   "post": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "Resume Session",
+    "operationId": "resume_session_api_study_rooms__room_id__resume_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "room_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Room Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/study-rooms/{room_id}/end": {
+   "post": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "End Session",
+    "operationId": "end_session_api_study_rooms__room_id__end_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "room_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Room Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/study-rooms/{room_id}/close": {
+   "post": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "Close Room",
+    "operationId": "close_room_api_study_rooms__room_id__close_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "room_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Room Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/study-rooms/{room_id}/heartbeat": {
+   "post": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "Heartbeat",
+    "description": "Presence for clients without a WebSocket; returns the snapshot so it doubles as the polling fallback.",
+    "operationId": "heartbeat_api_study_rooms__room_id__heartbeat_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "room_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Room Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/study-rooms/{room_id}/reactions": {
+   "post": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "Send Reaction",
+    "description": "Pet emotes and quick cheers: a fixed set (no free text), never stored, rate limited.",
+    "operationId": "send_reaction_api_study_rooms__room_id__reactions_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "room_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Room Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ReactionInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "202": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/room-invitations": {
+   "get": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "List Invitations",
+    "operationId": "list_invitations_api_room_invitations_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/room-invitations/{invitation_id}": {
+   "get": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "Get Invitation",
+    "description": "One invitation with its current `state`, also after it expired or its room closed (opened from a notification).",
+    "operationId": "get_invitation_api_room_invitations__invitation_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "invitation_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Invitation Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/room-invitations/{invitation_id}/accept": {
+   "post": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "Accept Invitation",
+    "operationId": "accept_invitation_api_room_invitations__invitation_id__accept_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "invitation_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Invitation Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/room-invitations/{invitation_id}/decline": {
+   "post": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "Decline Invitation",
+    "operationId": "decline_invitation_api_room_invitations__invitation_id__decline_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "invitation_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Invitation Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/group-sessions/history": {
+   "get": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "Get Session History",
+    "operationId": "get_session_history_api_group_sessions_history_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 50,
+       "minimum": 1,
+       "default": 20,
+       "title": "Limit"
+      }
+     },
+     {
+      "name": "before_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "integer",
+         "minimum": 1
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Before Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/group-sessions/{session_id}/summary": {
+   "get": {
+    "tags": [
+     "study-rooms"
+    ],
+    "summary": "Get Session Summary",
+    "operationId": "get_session_summary_api_group_sessions__session_id__summary_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/study-rooms/{room_id}/messages": {
+   "get": {
+    "tags": [
+     "room-chat"
+    ],
+    "summary": "List Messages",
+    "description": "Newest page first by cursor; items are returned oldest → newest for display.",
+    "operationId": "list_messages_api_study_rooms__room_id__messages_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "room_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Room Id"
+      }
+     },
+     {
+      "name": "before_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "integer",
+         "minimum": 1
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Before Id"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 50,
+       "minimum": 1,
+       "default": 30,
+       "title": "Limit"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "room-chat"
+    ],
+    "summary": "Send Message",
+    "operationId": "send_message_api_study_rooms__room_id__messages_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "room_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Room Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/MessageInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/study-rooms/{room_id}/messages/{message_id}": {
+   "delete": {
+    "tags": [
+     "room-chat"
+    ],
+    "summary": "Delete Message",
+    "description": "Unsend your own message, or (host) remove anyone's message in your room. Retry-safe.",
+    "operationId": "delete_message_api_study_rooms__room_id__messages__message_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "room_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Room Id"
+      }
+     },
+     {
+      "name": "message_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Message Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/notifications": {
+   "get": {
+    "tags": [
+     "notifications"
+    ],
+    "summary": "List Notifications",
+    "operationId": "list_notifications_api_notifications_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 50,
+       "minimum": 1,
+       "default": 20,
+       "title": "Limit"
+      }
+     },
+     {
+      "name": "before_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "integer",
+         "minimum": 1
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Before Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/notifications/read-all": {
+   "post": {
+    "tags": [
+     "notifications"
+    ],
+    "summary": "Mark All Read",
+    "operationId": "mark_all_read_api_notifications_read_all_post",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/notifications/{notification_id}/read": {
+   "post": {
+    "tags": [
+     "notifications"
+    ],
+    "summary": "Mark Read",
+    "operationId": "mark_read_api_notifications__notification_id__read_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "notification_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Notification Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/realtime/ticket": {
+   "post": {
+    "tags": [
+     "realtime"
+    ],
+    "summary": "Create Ticket",
+    "operationId": "create_ticket_api_realtime_ticket_post",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/personal-room/visit/{user_id}": {
+   "get": {
+    "tags": [
+     "room visits"
+    ],
+    "summary": "Visit Room",
+    "description": "A friend's saved room, read only: its name and layout, their pet and whether it is home. Unsaved changes on the\nowner's screen are never part of it, and opening it changes nothing (no walk is settled, no EXP).",
+    "operationId": "visit_room_api_personal_room_visit__user_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "User Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/personal-room/visit/{user_id}/greetings": {
+   "post": {
+    "tags": [
+     "room visits"
+    ],
+    "summary": "Send Greeting",
+    "description": "\"Chào pet\" or \"Động viên\": a notification to the host, also while their pet is out walking (it waits for them).",
+    "operationId": "send_greeting_api_personal_room_visit__user_id__greetings_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "User Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GreetingInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/personal-room/visit/{user_id}/study-invite": {
+   "post": {
+    "tags": [
+     "room visits"
+    ],
+    "summary": "Invite To Study",
+    "description": "\"Rủ học\": invite the host into the visitor's current study room, or into a new private room with the chosen\nsubject and rhythm (the room's own settings win when the visitor is already in one). Retry-safe.",
+    "operationId": "invite_to_study_api_personal_room_visit__user_id__study_invite_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "User Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/StudyInviteInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "CodeInput": {
+    "properties": {
+     "code": {
+      "type": "string",
+      "maxLength": 20,
+      "minLength": 4,
+      "title": "Code"
+     }
+    },
+    "type": "object",
+    "required": [
+     "code"
+    ],
+    "title": "CodeInput"
+   },
+   "CodeLookupInput": {
+    "properties": {
+     "public_code": {
+      "type": "string",
+      "maxLength": 40,
+      "minLength": 4,
+      "title": "Public Code"
+     }
+    },
+    "type": "object",
+    "required": [
+     "public_code"
+    ],
+    "title": "CodeLookupInput"
+   },
+   "FriendRequestInput": {
+    "properties": {
+     "user_id": {
+      "anyOf": [
+       {
+        "type": "integer",
+        "minimum": 1.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "User Id"
+     },
+     "public_code": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 20,
+        "minLength": 4
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Public Code"
+     }
+    },
+    "type": "object",
+    "title": "FriendRequestInput"
+   },
+   "GreetingInput": {
+    "properties": {
+     "kind": {
+      "type": "string",
+      "enum": [
+       "hello",
+       "cheer"
+      ],
+      "title": "Kind"
+     },
+     "message": {
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "study_well",
+         "keep_going",
+         "take_break",
+         "believe",
+         "proud"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Message"
+     },
+     "client_request_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 64,
+        "minLength": 8
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Client Request Id"
+     }
+    },
+    "type": "object",
+    "required": [
+     "kind"
+    ],
+    "title": "GreetingInput"
+   },
+   "HTTPValidationError": {
+    "properties": {
+     "detail": {
+      "items": {
+       "$ref": "#/components/schemas/ValidationError"
+      },
+      "type": "array",
+      "title": "Detail"
+     }
+    },
+    "type": "object",
+    "title": "HTTPValidationError"
+   },
+   "InviteInput": {
+    "properties": {
+     "user_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "type": "array",
+      "maxItems": 7,
+      "minItems": 1,
+      "title": "User Ids"
+     }
+    },
+    "type": "object",
+    "required": [
+     "user_ids"
+    ],
+    "title": "InviteInput"
+   },
+   "MessageInput": {
+    "properties": {
+     "body": {
+      "type": "string",
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Body"
+     },
+     "client_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 64,
+        "minLength": 8,
+        "pattern": "^[A-Za-z0-9_-]+$"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Client Id"
+     }
+    },
+    "type": "object",
+    "required": [
+     "body"
+    ],
+    "title": "MessageInput"
+   },
+   "QuestCreate": {
+    "properties": {
+     "template_key": {
+      "type": "string",
+      "enum": [
+       "daily_hour",
+       "focus_minutes",
+       "focus_cycles"
+      ],
+      "title": "Template Key"
+     }
+    },
+    "type": "object",
+    "required": [
+     "template_key"
+    ],
+    "title": "QuestCreate"
+   },
+   "ReactionInput": {
+    "properties": {
+     "reaction": {
+      "type": "string",
+      "enum": [
+       "cheer",
+       "clap",
+       "star",
+       "fire",
+       "coffee",
+       "heart"
+      ],
+      "title": "Reaction"
+     }
+    },
+    "type": "object",
+    "required": [
+     "reaction"
+    ],
+    "title": "ReactionInput"
+   },
+   "ReportInput": {
+    "properties": {
+     "reason": {
+      "type": "string",
+      "enum": [
+       "spam",
+       "harassment",
+       "inappropriate",
+       "impersonation",
+       "other"
+      ],
+      "title": "Reason"
+     },
+     "details": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 500
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Details"
+     },
+     "room_id": {
+      "anyOf": [
+       {
+        "type": "integer",
+        "minimum": 1.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Room Id"
+     },
+     "message_id": {
+      "anyOf": [
+       {
+        "type": "integer",
+        "minimum": 1.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Message Id"
+     }
+    },
+    "type": "object",
+    "required": [
+     "reason"
+    ],
+    "title": "ReportInput"
+   },
+   "ResolveReportInput": {
+    "properties": {
+     "action": {
+      "type": "string",
+      "enum": [
+       "dismiss",
+       "disable_user"
+      ],
+      "title": "Action"
+     }
+    },
+    "type": "object",
+    "required": [
+     "action"
+    ],
+    "title": "ResolveReportInput"
+   },
+   "RoomCreate": {
+    "properties": {
+     "name": {
+      "type": "string",
+      "maxLength": 60,
+      "minLength": 1,
+      "title": "Name"
+     },
+     "goal": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 160
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Goal"
+     },
+     "subject": {
+      "type": "string",
+      "enum": [
+       "general",
+       "math",
+       "literature",
+       "english",
+       "science",
+       "coding",
+       "language",
+       "exam",
+       "reading",
+       "work",
+       "other"
+      ],
+      "title": "Subject",
+      "default": "general"
+     },
+     "focus_minutes": {
+      "type": "integer",
+      "maximum": 90.0,
+      "minimum": 5.0,
+      "title": "Focus Minutes",
+      "default": 25
+     },
+     "break_minutes": {
+      "type": "integer",
+      "maximum": 30.0,
+      "minimum": 1.0,
+      "title": "Break Minutes",
+      "default": 5
+     },
+     "cycles": {
+      "type": "integer",
+      "maximum": 8.0,
+      "minimum": 1.0,
+      "title": "Cycles",
+      "default": 4
+     },
+     "max_members": {
+      "type": "integer",
+      "maximum": 8.0,
+      "minimum": 2.0,
+      "title": "Max Members",
+      "default": 4
+     },
+     "visibility": {
+      "type": "string",
+      "enum": [
+       "private",
+       "code"
+      ],
+      "title": "Visibility",
+      "default": "private"
+     },
+     "invitee_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "type": "array",
+      "maxItems": 7,
+      "title": "Invitee Ids"
+     }
+    },
+    "type": "object",
+    "required": [
+     "name"
+    ],
+    "title": "RoomCreate"
+   },
+   "RoomPatch": {
+    "properties": {
+     "name": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 60,
+        "minLength": 1
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Name"
+     },
+     "goal": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 160
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Goal"
+     },
+     "subject": {
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "general",
+         "math",
+         "literature",
+         "english",
+         "science",
+         "coding",
+         "language",
+         "exam",
+         "reading",
+         "work",
+         "other"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Subject"
+     },
+     "focus_minutes": {
+      "anyOf": [
+       {
+        "type": "integer",
+        "maximum": 90.0,
+        "minimum": 5.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Focus Minutes"
+     },
+     "break_minutes": {
+      "anyOf": [
+       {
+        "type": "integer",
+        "maximum": 30.0,
+        "minimum": 1.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Break Minutes"
+     },
+     "cycles": {
+      "anyOf": [
+       {
+        "type": "integer",
+        "maximum": 8.0,
+        "minimum": 1.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Cycles"
+     },
+     "max_members": {
+      "anyOf": [
+       {
+        "type": "integer",
+        "maximum": 8.0,
+        "minimum": 2.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Max Members"
+     },
+     "visibility": {
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "private",
+         "code"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Visibility"
+     }
+    },
+    "type": "object",
+    "title": "RoomPatch"
+   },
+   "SocialSettingsPatch": {
+    "properties": {
+     "presence_visibility": {
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "friends",
+         "nobody"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Presence Visibility"
+     },
+     "share_study_stats": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Share Study Stats"
+     },
+     "discoverable": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Discoverable"
+     },
+     "allow_room_visits": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Allow Room Visits"
+     },
+     "allow_study_invites": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Allow Study Invites"
+     }
+    },
+    "type": "object",
+    "title": "SocialSettingsPatch"
+   },
+   "StudyInviteInput": {
+    "properties": {
+     "subject": {
+      "type": "string",
+      "enum": [
+       "general",
+       "math",
+       "literature",
+       "english",
+       "science",
+       "coding",
+       "language",
+       "exam",
+       "reading",
+       "work",
+       "other"
+      ],
+      "title": "Subject",
+      "default": "general"
+     },
+     "focus_minutes": {
+      "type": "integer",
+      "maximum": 90.0,
+      "minimum": 5.0,
+      "title": "Focus Minutes",
+      "default": 25
+     },
+     "break_minutes": {
+      "type": "integer",
+      "maximum": 30.0,
+      "minimum": 1.0,
+      "title": "Break Minutes",
+      "default": 5
+     },
+     "cycles": {
+      "type": "integer",
+      "maximum": 8.0,
+      "minimum": 1.0,
+      "title": "Cycles",
+      "default": 2
+     },
+     "client_request_id": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 8,
+      "title": "Client Request Id"
+     }
+    },
+    "type": "object",
+    "required": [
+     "client_request_id"
+    ],
+    "title": "StudyInviteInput"
+   },
+   "ValidationError": {
+    "properties": {
+     "loc": {
+      "items": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "integer"
+        }
+       ]
+      },
+      "type": "array",
+      "title": "Location"
+     },
+     "msg": {
+      "type": "string",
+      "title": "Message"
+     },
+     "type": {
+      "type": "string",
+      "title": "Error Type"
+     },
+     "input": {
+      "title": "Input"
+     },
+     "ctx": {
+      "type": "object",
+      "title": "Context"
+     }
+    },
+    "type": "object",
+    "required": [
+     "loc",
+     "msg",
+     "type"
+    ],
+    "title": "ValidationError"
+   }
+  },
+  "securitySchemes": {
+   "HTTPBearer": {
+    "type": "http",
+    "description": "Access token from /api/auth/login",
+    "scheme": "bearer"
+   }
+  }
+ }
+}

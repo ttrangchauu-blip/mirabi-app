@@ -1,0 +1,104 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+blush	blush	verb	3	emotions	đỏ mặt	mặt đỏ lên vì ngượng hoặc xấu hổ	She blushed when he said she was pretty.	Cô ấy đỏ mặt khi anh ấy khen cô xinh.		/blʌʃ/
+giggle	giggle	verb	3	emotions	cười khúc khích	cười nhỏ liên tục, thường vì ngượng hoặc thấy buồn cười	The girls giggled at the back of the class.	Mấy cô bé cười khúc khích ở cuối lớp.		/ˈɡɪɡl/
+grin	grin	verb	3	emotions	cười toe toét	cười rộng miệng, để lộ răng, vì rất vui	He grinned when he saw his test score.	Cậu ấy cười toe toét khi thấy điểm bài kiểm tra.		/ɡrɪn/
+regret	regret	verb	3	emotions	hối tiếc	tiếc vì đã làm hoặc không làm việc gì	I regret not studying harder at school.	Tôi hối tiếc vì đã không học chăm hơn hồi đi học.		/rɪˈɡret/
+admire	admire	verb	3	emotions	ngưỡng mộ, khâm phục	quý trọng ai vì tài năng hoặc phẩm chất của họ	I admire people who work hard and never give up.	Tôi ngưỡng mộ những người làm việc chăm chỉ và không bao giờ bỏ cuộc.		/ədˈmaɪə/
+comfort	comfort	verb	3	emotions	an ủi, vỗ về	làm người đang buồn cảm thấy đỡ hơn	She comforted her friend after the bad news.	Cô ấy an ủi bạn mình sau tin buồn.		/ˈkʌmfət/
+annoy	annoy	verb	3	emotions	làm (ai) bực mình	khiến người khác khó chịu, mất kiên nhẫn	It annoys me when people talk during films.	Tôi bực mình khi có người nói chuyện lúc xem phim.		/əˈnɔɪ/
+embarrass	embarrass	verb	3	emotions	làm (ai) ngượng	khiến ai xấu hổ trước mặt người khác	Please don't embarrass me in front of my friends.	Mẹ đừng làm con ngượng trước mặt bạn bè nhé.		/ɪmˈbærəs/
+disappoint	disappoint	verb	3	emotions	làm (ai) thất vọng	không làm được điều người khác mong đợi ở mình	I don't want to disappoint my parents.	Tôi không muốn làm bố mẹ thất vọng.	let down	/ˌdɪsəˈpɔɪnt/
+loneliness	loneliness	noun	3	emotions	nỗi cô đơn	danh từ chỉ cảm giác cô đơn	Many old people suffer from loneliness.	Nhiều người già phải chịu nỗi cô đơn.		/ˈləʊnlinəs/
+excitement	excitement	noun	3	emotions	sự háo hức, phấn khích	danh từ chỉ cảm giác hào hứng	The children couldn't sleep because of the excitement.	Bọn trẻ không ngủ được vì quá háo hức.		/ɪkˈsaɪtmənt/
+relief	relief	noun	3	emotions	sự nhẹ nhõm	cảm giác khi nỗi lo đã qua	It was a relief to find my lost wallet.	Tìm lại được cái ví bị mất thật là nhẹ nhõm.		/rɪˈliːf/
+disappointment	disappointment	noun	3	emotions	sự thất vọng	danh từ chỉ cảm giác thất vọng	To our disappointment, the concert was cancelled.	Chúng tôi thất vọng vì buổi hòa nhạc bị hủy.		/ˌdɪsəˈpɔɪntmənt/
+fed_up	fed up	collocation	3	emotions	chán ngấy	đã chịu đựng điều gì quá lâu: fed up with	I'm fed up with this rainy weather.	Tôi chán ngấy thời tiết mưa này rồi.
+fond_of	fond of	collocation	3	emotions	quý mến, có cảm tình với	có tình cảm với ai/điều gì từ lâu: be fond of	My grandfather is very fond of his old dog.	Ông tôi rất quý con chó già của ông.
+crazy_about	crazy about	collocation	3	emotions	mê tít, phát cuồng vì	thích ai/điều gì cực kỳ nhiều (thân mật)	My sister is crazy about K-pop.	Em gái tôi mê tít nhạc K-pop.
+keen_on	keen on	collocation	3	emotions	ham thích, hăng hái với	thích một hoạt động (Anh-Anh): be keen on	He's very keen on football.	Anh ấy rất ham bóng đá.
+cant_stand	can't stand	collocation	3	emotions	không chịu nổi	ghét ai/điều gì đến mức không chịu được	I can't stand people who are always late.	Tôi không chịu nổi những người lúc nào cũng trễ hẹn.
+take_it_easy	take it easy	phrase	3	emotions	cứ bình tĩnh, thư giãn đi	khuyên ai đừng lo lắng hay vội vàng	Take it easy, we have plenty of time.	Cứ bình tĩnh, chúng ta còn nhiều thời gian.
+thank_goodness	thank goodness	phrase	3	emotions	ơn trời	nói khi nhẹ nhõm vì điều xấu đã không xảy ra	Thank goodness you're safe!	Ơn trời, bạn an toàn rồi!
+what_a_relief	what a relief	phrase	3	emotions	nhẹ cả người	nói khi nỗi lo vừa được giải tỏa	The test was cancelled? What a relief!	Bài kiểm tra bị hủy à? Nhẹ cả người!
+im_not_in_the_mood	I'm not in the mood	phrase	3	emotions	mình không có hứng	từ chối khéo vì tâm trạng không phù hợp	Sorry, I'm not in the mood for a party tonight.	Xin lỗi, tối nay mình không có hứng đi tiệc.
+poor_you	poor you	phrase	3	emotions	tội nghiệp bạn quá	nói để tỏ ra thông cảm khi ai gặp chuyện không may	You have to work all weekend? Poor you!	Bạn phải làm cả cuối tuần à? Tội nghiệp bạn quá!
+phew	phew	interjection	3	emotions	phù (nhẹ cả người)	thốt lên khi vừa thoát khỏi chuyện lo lắng hoặc mệt	Phew, we caught the last train!	Phù, chúng ta kịp chuyến tàu cuối rồi!		/fjuː/
+yuck	yuck	interjection	3	emotions	eo ơi, ghê quá	thốt lên khi thấy thứ gì kinh tởm	Yuck! There's a hair in my soup.	Eo ơi! Có sợi tóc trong bát súp của tôi.		/jʌk/
+hurt_someones_feelings	hurt someone's feelings	collocation	3	emotions	làm tổn thương (ai)	nói hay làm điều khiến người khác buồn lòng	It's easy to hurt someone's feelings without knowing it.	Rất dễ làm tổn thương người khác mà mình không biết.
+sadly.unfortunately	sadly	adverb	3	emotions	thật đáng buồn là	đứng đầu câu, nói về một sự thật đáng tiếc	Sadly, our old cat died last year.	Thật đáng buồn là con mèo già của chúng tôi đã chết năm ngoái.		/ˈsædli/
+angrily	angrily	adverb	3	emotions	một cách giận dữ	nói hay làm gì khi đang tức giận	"Go away!" she shouted angrily.	"Đi đi!" cô ấy giận dữ hét lên.		/ˈæŋɡrəli/
+nervously	nervously	adverb	3	emotions	một cách hồi hộp, lo lắng	làm gì với vẻ căng thẳng, bồn chồn	He laughed nervously before his speech.	Anh ấy cười một cách lo lắng trước bài phát biểu.		/ˈnɜːvəsli/
+calmly	calmly	adverb	3	emotions	một cách bình tĩnh	nói hay làm gì không hoảng hốt, không nóng giận	She calmly explained the problem.	Cô ấy bình tĩnh giải thích vấn đề.		/ˈkɑːmli/
+proudly	proudly	adverb	3	emotions	một cách tự hào	làm hay nói gì với niềm tự hào	He proudly showed us his new bike.	Cậu ấy tự hào khoe với chúng tôi chiếc xe đạp mới.		/ˈpraʊdli/
+excitedly	excitedly	adverb	3	emotions	một cách hào hứng	nói hay làm gì với vẻ rất phấn khích	The kids ran excitedly to the beach.	Lũ trẻ hào hứng chạy ra bãi biển.		/ɪkˈsaɪtɪdli/
+hopefully	hopefully	adverb	3	emotions	hy vọng là	đứng đầu câu, nói điều mình mong sẽ xảy ra	Hopefully, it won't rain tomorrow.	Hy vọng là mai trời không mưa.		/ˈhəʊpfəli/
+gladly	gladly	adverb	3	emotions	sẵn lòng, vui lòng	đồng ý làm gì một cách vui vẻ	I'll gladly help you move house.	Tôi sẵn lòng giúp bạn chuyển nhà.		/ˈɡlædli/
+thrilled	thrilled	adjective	4	emotions	vui sướng, mừng rơn	rất vui và phấn khích vì một tin tốt	She was thrilled to get a place at the university.	Cô ấy mừng rơn khi được nhận vào đại học.		/θrɪld/
+joyful	joyful	adjective	4	emotions	tràn ngập niềm vui	dùng cho người, dịp lễ, bầu không khí rất vui (văn viết)	It was a joyful day for the whole family.	Đó là một ngày tràn ngập niềm vui cho cả gia đình.		/ˈdʒɔɪfl/
+heartbroken	heartbroken	adjective	4	emotions	tan nát cõi lòng	vô cùng đau buồn, thường vì mất mát hay tình cảm tan vỡ	He was heartbroken when his dog died.	Anh ấy tan nát cõi lòng khi con chó của mình chết.		/ˈhɑːtbrəʊkən/
+gloomy	gloomy	adjective	4	emotions	ủ rũ, u sầu	buồn và không còn nhiều hy vọng	Why do you look so gloomy today?	Sao hôm nay trông bạn ủ rũ thế?		/ˈɡluːmi/
+grumpy	grumpy	adjective	4	emotions	cáu bẳn, gắt gỏng	tâm trạng khó chịu nhất thời, như khi mệt hay mới ngủ dậy	My dad is always grumpy in the morning.	Bố tôi lúc nào cũng cáu bẳn vào buổi sáng.		/ˈɡrʌmpi/
+irritated	irritated	adjective	4	emotions	cáu, khó chịu (vì bị làm phiền)	bực vì một điều cứ lặp đi lặp lại	I get irritated when my phone keeps ringing.	Tôi thấy cáu khi điện thoại cứ reo liên tục.		/ˈɪrɪteɪtɪd/
+furious	furious	adjective	4	emotions	giận điên người	tức giận ở mức rất cao	She was furious when she saw her broken car.	Cô ấy giận điên người khi thấy chiếc xe bị hỏng của mình.		/ˈfjʊəriəs/
+envious	envious	adjective	4	emotions	thèm muốn, đố kỵ	muốn có thứ mà người khác có: envious of	I'm envious of people who can travel a lot.	Tôi thèm được như những người có thể đi du lịch nhiều.		/ˈenviəs/
+isolated	isolated	adjective	4	emotions	cảm thấy bị cô lập	cảm giác tách biệt, không ai gần gũi, quan tâm	She felt isolated in the big city.	Cô ấy cảm thấy bị cô lập ở thành phố lớn.		/ˈaɪsəleɪtɪd/
+puzzled	puzzled	adjective	4	emotions	băn khoăn, khó hiểu	không hiểu nổi tại sao một việc lại xảy ra	He looked puzzled by the strange message.	Anh ấy có vẻ băn khoăn trước tin nhắn lạ.		/ˈpʌzld/
+insecure	insecure	adjective	4	emotions	tự ti, thiếu cảm giác an toàn	không tự tin về bản thân hoặc lo người khác không thích mình	She feels insecure about her English.	Cô ấy thấy tự ti về tiếng Anh của mình.		/ˌɪnsɪˈkjʊə/
+moved	moved	adjective	4	emotions	xúc động sâu sắc	khi xem phim, nghe câu chuyện hay bài hát làm mình rưng rưng	We were deeply moved by the story.	Chúng tôi vô cùng xúc động trước câu chuyện.		/muːvd/
+offended	offended	adjective	4	emotions	phật lòng, bị xúc phạm	buồn và giận vì lời nói thiếu tôn trọng của ai	He was offended by her rude comment.	Anh ấy phật lòng vì lời bình luận thô lỗ của cô ta.		/əˈfendɪd/
+depressing	depressing	adjective	4	emotions	gây chán nản, ảm đạm	nói về tin tức, thời tiết, nơi chốn làm người ta buồn	The news is so depressing these days.	Dạo này tin tức thật ảm đạm.		/dɪˈpresɪŋ/
+touching	touching	adjective	4	emotions	làm xúc động lòng người	nói về câu chuyện, cảnh tượng khiến người xem cảm động	It was a touching story about a boy and his dog.	Đó là một câu chuyện xúc động về một cậu bé và chú chó.		/ˈtʌtʃɪŋ/
+terrifying	terrifying	adjective	4	emotions	cực kỳ đáng sợ	nói về trải nghiệm làm người ta khiếp sợ	The storm last night was terrifying.	Cơn bão đêm qua cực kỳ đáng sợ.		/ˈterɪfaɪɪŋ/
+satisfying	satisfying	adjective	4	emotions	mang lại sự hài lòng	nói về công việc, kết quả làm mình thấy thỏa mãn	Finishing a difficult puzzle is very satisfying.	Giải xong một câu đố khó mang lại cảm giác rất hài lòng.		/ˈsætɪsfaɪɪŋ/
+thrilling	thrilling	adjective	4	emotions	ly kỳ, hồi hộp	nói về trận đấu, chuyến đi, câu chuyện gây phấn khích	It was a thrilling match from start to finish.	Đó là một trận đấu hồi hộp từ đầu đến cuối.		/ˈθrɪlɪŋ/
+horrified	horrified	adjective	4	emotions	kinh hoàng	rất sốc và sợ khi thấy điều khủng khiếp	We were horrified by the pictures of the war.	Chúng tôi kinh hoàng trước những bức ảnh chiến tranh.		/ˈhɒrɪfaɪd/
+restless	restless	adjective	4	emotions	bồn chồn, không yên	không ngồi yên được vì chán hoặc lo	The children became restless after an hour in the car.	Bọn trẻ trở nên bồn chồn sau một giờ ngồi trên xe.		/ˈrestləs/
+uneasy	uneasy	adjective	4	emotions	bất an, không yên lòng	cảm giác có điều gì đó không ổn	I had an uneasy feeling that someone was following me.	Tôi có cảm giác bất an rằng ai đó đang theo dõi mình.		/ʌnˈiːzi/
+content.feeling	content	adjective	4	emotions	mãn nguyện, bằng lòng	hài lòng với những gì mình đang có	He is content with a simple life.	Ông ấy bằng lòng với cuộc sống giản dị.		/kənˈtent/
+inspired	inspired	adjective	4	emotions	được truyền cảm hứng	muốn làm điều gì tốt sau khi thấy, nghe điều gì	I felt inspired after reading her story.	Tôi thấy được truyền cảm hứng sau khi đọc câu chuyện của cô ấy.		/ɪnˈspaɪəd/
+eager	eager	adjective	4	emotions	háo hức, nóng lòng (muốn làm)	rất muốn làm điều gì: eager to	The students were eager to start the trip.	Học sinh háo hức muốn bắt đầu chuyến đi.		/ˈiːɡə/
+desperate	desperate	adjective	4	emotions	tuyệt vọng, cùng đường	rất cần lối thoát hoặc giúp đỡ, sẵn sàng làm mọi thứ	He was desperate for help after he lost everything.	Anh ấy cùng đường và rất cần giúp đỡ sau khi mất tất cả.		/ˈdespərət/
+cross.angry	cross	adjective	4	emotions	dỗi, hơi giận (thân mật)	Anh-Anh, giận nhẹ, hay nói với trẻ con, người thân: cross with	Mum was cross with me for breaking the cup.	Mẹ hơi giận tôi vì làm vỡ cái cốc.		/krɒs/
+sympathy	sympathy	noun	4	emotions	sự thông cảm, chia buồn	thương và hiểu cho người đang gặp chuyện buồn	We sent a card to show our sympathy.	Chúng tôi gửi một tấm thiệp để bày tỏ sự chia buồn.		/ˈsɪmpəθi/
+pity	pity	noun	4	emotions	lòng thương hại	thương cho người yếu thế, thường kèm cảm giác mình ở trên họ	I don't want your pity, I want your help.	Tôi không cần bạn thương hại, tôi cần bạn giúp đỡ.		/ˈpɪti/
+affection	affection	noun	4	emotions	tình cảm trìu mến	sự yêu thương nhẹ nhàng với gia đình, bạn bè	She looked at her son with great affection.	Bà nhìn con trai với ánh mắt đầy trìu mến.		/əˈfekʃn/
+passion	passion	noun	4	emotions	niềm đam mê	sự yêu thích mãnh liệt với một hoạt động: passion for	He has a passion for cooking.	Anh ấy có niềm đam mê nấu ăn.		/ˈpæʃn/
+anxiety	anxiety	noun	4	emotions	sự lo âu	danh từ chỉ cảm giác lo lắng, bất an kéo dài	Exams can cause a lot of anxiety.	Các kỳ thi có thể gây ra nhiều lo âu.		/æŋˈzaɪəti/
+jealousy	jealousy	noun	4	emotions	sự ghen tuông, ghen tị	danh từ chỉ cảm giác ghen	His jealousy ruined their relationship.	Sự ghen tuông của anh ta đã phá hỏng mối quan hệ.		/ˈdʒeləsi/
+frustration	frustration	noun	4	emotions	sự bực bội, nản chí	cảm giác khi cố mãi mà không làm được	She kicked the door in frustration.	Cô ấy bực bội đá vào cánh cửa.		/frʌˈstreɪʃn/
+pride	pride	noun	4	emotions	niềm tự hào	cảm giác vui vì thành công của mình hoặc người thân	His parents watched him with pride.	Bố mẹ nhìn cậu ấy đầy tự hào.		/praɪd/
+shame	shame	noun	4	emotions	sự hổ thẹn, nỗi nhục	cảm giác xấu hổ vì đã làm điều sai	He felt deep shame for lying to his friend.	Anh ấy vô cùng hổ thẹn vì đã nói dối bạn.		/ʃeɪm/
+embarrassment	embarrassment	noun	4	emotions	sự ngượng ngùng	danh từ chỉ cảm giác ngượng	His face went red with embarrassment.	Mặt anh ấy đỏ lên vì ngượng.		/ɪmˈbærəsmənt/
+gratitude	gratitude	noun	4	emotions	lòng biết ơn	danh từ chỉ cảm giác biết ơn	I want to express my gratitude to all of you.	Tôi muốn bày tỏ lòng biết ơn tới tất cả các bạn.		/ˈɡrætɪtjuːd/
+desire	desire	noun	4	emotions	khát khao, mong muốn mạnh mẽ	sự muốn có hoặc muốn làm điều gì rất nhiều	She has a strong desire to help others.	Cô ấy có khát khao mạnh mẽ được giúp đỡ người khác.		/dɪˈzaɪə/
+delight	delight	noun	4	emotions	sự thích thú, vui thích	niềm vui khi nhận được điều mình thích	To my delight, she said yes.	Tôi vui thích vô cùng khi cô ấy đồng ý.		/dɪˈlaɪt/
+thrill	thrill	noun	4	emotions	cảm giác rộn ràng phấn khích	cảm giác hồi hộp sung sướng, như khi chơi trò mạo hiểm	Riding a roller coaster is a real thrill.	Đi tàu lượn siêu tốc là một cảm giác phấn khích thật sự.		/θrɪl/
+mood_swing	mood swing	collocation	4	emotions	tâm trạng thất thường	cảm xúc thay đổi đột ngột, lúc vui lúc buồn	Teenagers often have mood swings.	Tuổi mới lớn thường hay có tâm trạng thất thường.
+goosebumps	goosebumps	noun	4	emotions	nổi da gà	da nổi gai khi sợ, lạnh hoặc xúc động mạnh	That song always gives me goosebumps.	Bài hát đó lúc nào cũng làm tôi nổi da gà.	goose pimples	/ˈɡuːsbʌmps/
+adore	adore	verb	4	emotions	yêu quý hết mực, mê	mạnh hơn love, với người hoặc thứ mình rất thích	The children adore their grandmother.	Lũ trẻ yêu quý bà hết mực.		/əˈdɔː/
+sob	sob	verb	4	emotions	khóc nức nở	khóc to và thở gấp vì rất buồn	The little girl was sobbing in the corner.	Cô bé đang khóc nức nở trong góc.		/sɒb/
+tremble	tremble	verb	4	emotions	run lên (vì sợ, xúc động)	cơ thể run nhẹ không kiểm soát được	Her hands were trembling with fear.	Tay cô ấy run lên vì sợ.		/ˈtrembl/
+gasp	gasp	verb	4	emotions	há hốc miệng, sửng sốt	hít vào thật nhanh vì bất ngờ hoặc sợ	The audience gasped when he fell.	Khán giả há hốc miệng khi anh ấy ngã.		/ɡɑːsp/
+reassure	reassure	verb	4	emotions	trấn an	nói hay làm gì để người khác bớt lo	The doctor reassured me that it was nothing serious.	Bác sĩ trấn an tôi rằng không có gì nghiêm trọng.		/ˌriːəˈʃʊə/
+amuse	amuse	verb	4	emotions	làm (ai) buồn cười, mua vui	khiến người khác thấy vui, buồn cười	His funny stories always amuse the children.	Những câu chuyện vui của ông ấy luôn làm lũ trẻ thích thú.		/əˈmjuːz/
+burst_into_tears	burst into tears	collocation	4	emotions	òa khóc	bất chợt khóc to	When she heard the news, she burst into tears.	Khi nghe tin, cô ấy òa khóc.
+burst_out_laughing	burst out laughing	collocation	4	emotions	phá lên cười	bất chợt cười to	We all burst out laughing when we saw his face.	Tất cả chúng tôi phá lên cười khi thấy mặt anh ấy.
+break_down.cry	break down	phrasal_verb	4	emotions	gục khóc, suy sụp	không kìm được cảm xúc nữa và bật khóc	He broke down when he talked about his father.	Anh ấy gục khóc khi nói về cha mình.
+freak_out	freak out	phrasal_verb	4	emotions	phát hoảng, mất bình tĩnh	cách nói thân mật, khi quá sợ, sốc hoặc giận	She freaked out when she saw a mouse in the kitchen.	Cô ấy phát hoảng khi thấy con chuột trong bếp.
+get_over	get over	phrasal_verb	4	emotions	vượt qua (nỗi buồn, cú sốc)	trở lại bình thường sau một chuyện buồn	It took him months to get over his father's death.	Anh ấy mất nhiều tháng mới vượt qua được cái chết của cha.
+open_up.feelings	open up	phrasal_verb	4	emotions	mở lòng, chia sẻ	bắt đầu kể về cảm xúc, chuyện riêng của mình	It took a while for him to open up to me.	Phải một thời gian anh ấy mới mở lòng với tôi.
+cool_down.anger	cool down	phrasal_verb	4	emotions	nguôi giận	bình tĩnh lại sau khi tức giận	Wait until he cools down before you talk to him.	Đợi anh ấy nguôi giận rồi hãy nói chuyện.	cool off
+lose_your_temper	lose your temper	idiom	4	emotions	nổi nóng, mất bình tĩnh	không kiềm chế được cơn giận	Try not to lose your temper with the children.	Cố đừng nổi nóng với bọn trẻ.
+tears_of_joy	tears of joy	collocation	4	emotions	nước mắt hạnh phúc	khóc vì quá vui, xúc động	She cried tears of joy when she saw her son again.	Bà khóc trong nước mắt hạnh phúc khi gặp lại con trai.
+with_all_my_heart	with all my heart	phrase	4	emotions	bằng cả trái tim	nói khi yêu, mong ước điều gì rất chân thành	I love you with all my heart.	Anh yêu em bằng cả trái tim.
+drive_me_crazy	drive me crazy	idiom	4	emotions	làm mình phát điên	khi điều gì làm mình cực kỳ khó chịu	This noise is driving me crazy!	Tiếng ồn này làm tôi phát điên!	drive me mad
+dying_to	dying to	collocation	4	emotions	rất nóng lòng muốn	rất muốn làm điều gì (thân mật): be dying to	I'm dying to see the new film.	Tôi rất nóng lòng muốn xem bộ phim mới.
+sick_and_tired_of	sick and tired of	idiom	4	emotions	phát ngán đến tận cổ	mạnh hơn fed up, khi đã quá chán điều gì	I'm sick and tired of your excuses.	Tôi phát ngán đến tận cổ với những lời bào chữa của bạn.
+sorry_for_your_loss	sorry for your loss	phrase	4	emotions	xin chia buồn với bạn	nói với người vừa mất người thân	I'm so sorry for your loss.	Tôi xin chân thành chia buồn với bạn.
+worried_sick	worried sick	idiom	4	emotions	lo phát ốm	lo lắng đến cực độ	Where were you? I was worried sick!	Con đi đâu thế? Mẹ lo phát ốm!
+anxiously	anxiously	adverb	4	emotions	một cách lo âu	chờ đợi, nhìn... với vẻ lo lắng	They waited anxiously for the doctor.	Họ lo âu chờ bác sĩ.		/ˈæŋkʃəsli/
+gratefully	gratefully	adverb	4	emotions	một cách biết ơn	nhận hay nói gì với lòng biết ơn	She smiled gratefully at the nurse.	Cô ấy mỉm cười biết ơn với cô y tá.		/ˈɡreɪtfəli/
+eagerly	eagerly	adverb	4	emotions	một cách háo hức	chờ đợi hay làm gì với vẻ rất mong muốn	The fans eagerly waited for the singer.	Người hâm mộ háo hức chờ đợi ca sĩ.		/ˈiːɡəli/
+awkwardly	awkwardly	adverb	4	emotions	một cách ngượng nghịu	cười, nói... với vẻ lúng túng, không tự nhiên	He smiled awkwardly and looked away.	Anh ấy cười ngượng nghịu rồi nhìn đi chỗ khác.		/ˈɔːkwədli/
+thankfully	thankfully	adverb	4	emotions	may mà, thật may là	đứng đầu câu, khi nhẹ nhõm vì tránh được điều xấu	Thankfully, nobody was hurt.	May mà không ai bị thương.		/ˈθæŋkfəli/
+emotionally	emotionally	adverb	4	emotions	về mặt cảm xúc	nói về tình cảm, tâm lý của ai	After the long illness, she was emotionally tired.	Sau trận ốm dài, cô ấy kiệt sức về mặt cảm xúc.		/ɪˈməʊʃənəli/

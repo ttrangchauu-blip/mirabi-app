@@ -1,0 +1,291 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic	source	status
+bedroom	bedroom	noun	1	home	phòng ngủ	phòng có giường để ngủ	My bedroom is upstairs.	Phòng ngủ của tôi ở trên lầu.		/ˈbedruːm/	mirabi-ai-2026-10	active
+bathroom	bathroom	noun	1	home	phòng tắm	phòng có vòi sen, bồn rửa và thường có bồn cầu	The bathroom is next to the kitchen.	Phòng tắm ở cạnh nhà bếp.		/ˈbɑːθruːm/	mirabi-ai-2026-10	active
+living_room	living room	noun	1	home	phòng khách	phòng để cả nhà ngồi chơi, xem tivi, tiếp khách	We watch TV in the living room.	Chúng tôi xem tivi ở phòng khách.	sitting room|lounge		mirabi-ai-2026-10	active
+garden	garden	noun	1	home	khu vườn (của nhà)	đất trồng cây, hoa quanh nhà	My mum grows flowers in the garden.	Mẹ tôi trồng hoa trong vườn.		/ˈɡɑːdn/	mirabi-ai-2026-10	active
+wall	wall	noun	1	home	bức tường	mặt dựng đứng ngăn các phòng hoặc bao quanh nhà	There are family photos on the wall.	Trên tường có những bức ảnh gia đình.		/wɔːl/	mirabi-ai-2026-10	active
+floor.surface	floor	noun	1	home	sàn nhà	mặt dưới của căn phòng, nơi mình đi lại	Don't leave your shoes on the floor.	Đừng để giày trên sàn nhà.		/flɔː/	mirabi-ai-2026-10	active
+stairs	stairs	noun	1	home	cầu thang	các bậc để đi lên, đi xuống tầng	Be careful on the stairs.	Đi cầu thang cẩn thận nhé.		/steəz/	mirabi-ai-2026-10	active
+sofa	sofa	noun	1	home	ghế sofa, ghế dài có đệm	ghế êm cho hai, ba người ngồi ở phòng khách	Dad fell asleep on the sofa.	Bố ngủ quên trên ghế sofa.	couch	/ˈsəʊfə/	mirabi-ai-2026-10	active
+pillow	pillow	noun	1	home	cái gối	đồ mềm để kê đầu khi ngủ	I like a soft pillow.	Tôi thích gối mềm.		/ˈpɪləʊ/	mirabi-ai-2026-10	active
+blanket	blanket	noun	1	home	cái chăn, cái mền	đắp lên người cho ấm khi ngủ	It's cold, so take another blanket.	Trời lạnh, lấy thêm một cái chăn nữa đi.		/ˈblæŋkɪt/	mirabi-ai-2026-10	active
+lamp	lamp	noun	1	home	cái đèn (bàn, ngủ)	đèn nhỏ đặt trên bàn hoặc cạnh giường	I read by the lamp next to my bed.	Tôi đọc sách bên ngọn đèn cạnh giường.		/læmp/	mirabi-ai-2026-10	active
+light.lamp	light	noun	1	home	đèn (điện)	đèn chiếu sáng trong phòng, bật tắt bằng công tắc	Can you turn on the light?	Bạn bật đèn lên được không?		/laɪt/	mirabi-ai-2026-10	active
+fan.device	fan	noun	1	home	cái quạt	thiết bị tạo gió làm mát	It's so hot. Can you turn on the fan?	Nóng quá. Bạn bật quạt lên được không?		/fæn/	mirabi-ai-2026-10	active
+fridge	fridge	noun	1	home	tủ lạnh	thiết bị giữ đồ ăn, đồ uống luôn lạnh	Put the milk back in the fridge.	Cất sữa lại vào tủ lạnh đi.	refrigerator	/frɪdʒ/	mirabi-ai-2026-10	active
+toilet	toilet	noun	1	home	bồn cầu, nhà vệ sinh	chỗ đi vệ sinh trong nhà	Where's the toilet, please?	Cho hỏi nhà vệ sinh ở đâu ạ?		/ˈtɔɪlət/	mirabi-ai-2026-10	active
+table.furniture	table	noun	1	home	cái bàn	đồ đạc có mặt phẳng và chân, để ăn hay đặt đồ	Put the plates on the table.	Đặt đĩa lên bàn đi.		/ˈteɪbl/	mirabi-ai-2026-10	active
+mirror	mirror	noun	1	home	cái gương	mặt kính để soi mình	She looked in the mirror before she left.	Cô ấy soi gương trước khi đi.		/ˈmɪrə/	mirabi-ai-2026-10	active
+bin	bin	noun	1	home	thùng rác	thùng để bỏ rác trong nhà	Throw it in the bin, please.	Bỏ nó vào thùng rác giúp mình nhé.	dustbin|trash can	/bɪn/	mirabi-ai-2026-10	active
+flat.home	flat	noun	1	home	căn hộ	nơi ở gồm vài phòng trong một tòa nhà nhiều tầng	They live in a flat on the fifth floor.	Họ sống trong một căn hộ ở tầng năm.	apartment	/flæt/	mirabi-ai-2026-10	active
+home	home	noun	1	home	nhà, tổ ấm	nơi mình sống cùng gia đình	There's no place like home.	Không đâu bằng nhà mình.		/həʊm/	mirabi-ai-2026-10	active
+cupboard	cupboard	noun	1	home	tủ (có cửa)	tủ có cánh để cất bát đĩa, đồ ăn hay đồ dùng	The cups are in the cupboard.	Cốc ở trong tủ.		/ˈkʌbəd/	mirabi-ai-2026-10	active
+carpet	carpet	noun	1	home	thảm trải sàn	thảm phủ kín cả sàn phòng	We have a blue carpet in the bedroom.	Phòng ngủ nhà tôi trải thảm màu xanh.		/ˈkɑːpɪt/	mirabi-ai-2026-10	active
+shelf	shelf	noun	1	home	cái kệ, giá	tấm gỗ gắn tường hoặc trong tủ để đặt đồ	Put the books back on the shelf.	Đặt sách lại lên kệ đi.		/ʃelf/	mirabi-ai-2026-10	active
+curtain	curtain	noun	1	home	rèm cửa	tấm vải treo che cửa sổ	Can you close the curtains?	Bạn kéo rèm lại được không?		/ˈkɜːtn/	mirabi-ai-2026-10	active
+roof	roof	noun	1	home	mái nhà	phần che phía trên cùng của ngôi nhà	The roof leaks when it rains.	Mái nhà bị dột khi trời mưa.		/ruːf/	mirabi-ai-2026-10	active
+gate	gate	noun	1	home	cổng	cửa ở hàng rào hay lối vào sân nhà	Please close the gate behind you.	Nhớ đóng cổng sau khi vào nhé.		/ɡeɪt/	mirabi-ai-2026-10	active
+clean.adj	clean	adjective	1	home	sạch, sạch sẽ	không bẩn, không có bụi	Her house is always clean.	Nhà cô ấy lúc nào cũng sạch sẽ.		/kliːn/	mirabi-ai-2026-10	active
+dirty	dirty	adjective	1	home	bẩn	có bụi, vết bẩn, cần lau rửa	Your shoes are dirty. Take them off.	Giày con bẩn rồi. Cởi ra đi.		/ˈdɜːti/	mirabi-ai-2026-10	active
+broken	broken	adjective	1	home	bị hỏng, bị vỡ	đồ đạc, máy móc không dùng được nữa	The washing machine is broken again.	Máy giặt lại hỏng rồi.		/ˈbrəʊkən/	mirabi-ai-2026-10	active
+messy	messy	adjective	1	home	bừa bộn	phòng ốc đồ đạc vứt lung tung	Your room is so messy!	Phòng con bừa bộn quá!	untidy	/ˈmesi/	mirabi-ai-2026-10	active
+clean.verb	clean	verb	1	home	lau dọn, làm sạch	làm cho nhà cửa, đồ vật hết bẩn	I clean the house every Saturday.	Thứ Bảy nào tôi cũng lau dọn nhà.		/kliːn/	mirabi-ai-2026-10	active
+inside	inside	adverb	1	home	vào trong, ở trong nhà	vào bên trong nhà, phòng	It's raining. Let's go inside.	Trời mưa rồi. Mình vào trong nhà đi.	indoors	/ˌɪnˈsaɪd/	mirabi-ai-2026-10	active
+upstairs	upstairs	adverb	1	home	(ở) trên lầu, tầng trên	đi lên hoặc ở tầng trên của ngôi nhà	The children are playing upstairs.	Bọn trẻ đang chơi ở trên lầu.		/ˌʌpˈsteəz/	mirabi-ai-2026-10	active
+downstairs	downstairs	adverb	1	home	(ở) dưới nhà, tầng dưới	đi xuống hoặc ở tầng dưới của ngôi nhà	Breakfast is ready. Come downstairs!	Bữa sáng xong rồi. Xuống nhà đi!		/ˌdaʊnˈsteəz/	mirabi-ai-2026-10	active
+make_the_bed	make the bed	collocation	1	home	dọn giường	sắp xếp chăn gối gọn gàng sau khi ngủ dậy	Make the bed before you go to school.	Dọn giường trước khi đi học nhé.			mirabi-ai-2026-10	active
+do_the_dishes	do the dishes	collocation	1	home	rửa bát	rửa chén bát sau bữa ăn	It's my turn to do the dishes tonight.	Tối nay đến lượt tôi rửa bát.	wash the dishes|wash up		mirabi-ai-2026-10	active
+turn_on.home	turn on	phrasal_verb	1	home	bật (đèn, máy)	cho đèn hay thiết bị điện bắt đầu chạy	Turn on the light, please.	Bật đèn lên giúp mình.	switch on		mirabi-ai-2026-10	active
+turn_off.home	turn off	phrasal_verb	1	home	tắt (đèn, máy)	cho đèn hay thiết bị điện ngừng chạy	Turn off the TV and go to bed.	Tắt tivi rồi đi ngủ đi.	switch off		mirabi-ai-2026-10	active
+front_door	front door	noun	1	home	cửa chính	cửa trước của ngôi nhà, lối vào chính	Someone is knocking at the front door.	Có ai đang gõ cửa chính.			mirabi-ai-2026-10	active
+come_in.home	come in	phrase	1	home	mời vào	câu mời khách bước vào nhà, vào phòng	Come in and sit down.	Mời vào ngồi đi.			mirabi-ai-2026-10	active
+tidy_up	tidy up	phrasal_verb	1	home	dọn dẹp cho gọn	sắp xếp lại đồ đạc bừa bộn	Please tidy up your toys.	Con dọn đồ chơi cho gọn nhé.			mirabi-ai-2026-10	active
+clean_the_house	clean the house	collocation	1	home	dọn dẹp nhà cửa	quét, lau, sắp xếp cả ngôi nhà	We clean the house before Tet.	Chúng tôi dọn dẹp nhà cửa trước Tết.			mirabi-ai-2026-10	active
+water_the_plants	water the plants	collocation	1	home	tưới cây	cho cây trong nhà, ngoài vườn uống nước	Can you water the plants while I'm away?	Bạn tưới cây giúp tôi khi tôi đi vắng được không?			mirabi-ai-2026-10	active
+air_conditioner	air conditioner	noun	1	home	máy lạnh, điều hòa	máy làm mát không khí trong phòng	Turn off the air conditioner when you go out.	Tắt điều hòa khi ra ngoài nhé.	air con		mirabi-ai-2026-10	active
+washing_machine	washing machine	noun	1	home	máy giặt	máy giặt quần áo	Put your dirty clothes in the washing machine.	Cho quần áo bẩn vào máy giặt đi.			mirabi-ai-2026-10	active
+garage	garage	noun	2	home	nhà để xe, ga-ra	chỗ để ô tô, xe máy trong nhà	Dad parks the car in the garage.	Bố đỗ xe trong ga-ra.		/ˈɡærɑːʒ/	mirabi-ai-2026-10	active
+balcony	balcony	noun	2	home	ban công	phần nhô ra ngoài ở tầng trên, có lan can	We have breakfast on the balcony.	Chúng tôi ăn sáng ngoài ban công.		/ˈbælkəni/	mirabi-ai-2026-10	active
+yard.garden	yard	noun	2	home	cái sân	khoảng đất trống trước hoặc sau nhà	The kids are playing in the yard.	Bọn trẻ đang chơi ngoài sân.		/jɑːd/	mirabi-ai-2026-10	active
+ceiling	ceiling	noun	2	home	trần nhà	mặt phía trên của căn phòng	There's a spider on the ceiling.	Có một con nhện trên trần nhà.		/ˈsiːlɪŋ/	mirabi-ai-2026-10	active
+floor.storey	floor	noun	2	home	tầng (nhà)	một tầng trong tòa nhà	Our flat is on the third floor.	Căn hộ của chúng tôi ở tầng ba.		/flɔː/	mirabi-ai-2026-10	active
+ground_floor	ground floor	noun	2	home	tầng trệt	tầng sát mặt đất của tòa nhà	The kitchen is on the ground floor.	Nhà bếp ở tầng trệt.			mirabi-ai-2026-10	active
+lift.elevator	lift	noun	2	home	thang máy	máy đưa người lên xuống các tầng	Let's take the lift. The stairs are tiring.	Mình đi thang máy đi. Leo cầu thang mệt lắm.	elevator	/lɪft/	mirabi-ai-2026-10	active
+dining_room	dining room	noun	2	home	phòng ăn	phòng có bàn để cả nhà ăn cơm	We eat in the dining room on Sundays.	Chủ nhật chúng tôi ăn ở phòng ăn.			mirabi-ai-2026-10	active
+bookcase	bookcase	noun	2	home	tủ sách, giá sách	đồ đạc có nhiều ngăn để sách	The bookcase is full of old books.	Tủ sách đầy sách cũ.	bookshelf	/ˈbʊkkeɪs/	mirabi-ai-2026-10	active
+wardrobe	wardrobe	noun	2	home	tủ quần áo	tủ cao có cánh để treo quần áo	Hang your coat in the wardrobe.	Treo áo khoác vào tủ quần áo đi.		/ˈwɔːdrəʊb/	mirabi-ai-2026-10	active
+drawer	drawer	noun	2	home	ngăn kéo	hộp kéo ra đẩy vào trong bàn, tủ	The scissors are in the top drawer.	Cái kéo ở trong ngăn kéo trên cùng.		/drɔː/	mirabi-ai-2026-10	active
+armchair	armchair	noun	2	home	ghế bành	ghế êm một chỗ ngồi có chỗ gác tay	Grandpa always sits in that armchair.	Ông lúc nào cũng ngồi ở chiếc ghế bành đó.		/ˈɑːmtʃeə/	mirabi-ai-2026-10	active
+cushion	cushion	noun	2	home	gối tựa, gối ôm nhỏ	gối mềm đặt trên ghế, sofa	She put a cushion behind her back.	Cô ấy đặt một chiếc gối tựa sau lưng.		/ˈkʊʃn/	mirabi-ai-2026-10	active
+sheet.bed	sheet	noun	2	home	ga trải giường	tấm vải trải lên nệm	I change the sheets every week.	Tuần nào tôi cũng thay ga giường.	bedsheet	/ʃiːt/	mirabi-ai-2026-10	active
+coffee_table	coffee table	noun	2	home	bàn nước, bàn trà	bàn thấp đặt trước sofa ở phòng khách	Put your cup on the coffee table.	Đặt cốc lên bàn nước đi.			mirabi-ai-2026-10	active
+dining_table	dining table	noun	2	home	bàn ăn	bàn lớn để cả nhà ngồi ăn cơm	We bought a new dining table for six people.	Chúng tôi mua một chiếc bàn ăn mới cho sáu người.			mirabi-ai-2026-10	active
+switch.light	switch	noun	2	home	công tắc	nút bấm để bật tắt đèn, thiết bị	The light switch is next to the door.	Công tắc đèn ở cạnh cửa.		/swɪtʃ/	mirabi-ai-2026-10	active
+light_bulb	light bulb	noun	2	home	bóng đèn	bóng thủy tinh phát sáng lắp vào đèn	The light bulb in the kitchen has gone.	Bóng đèn trong bếp cháy rồi.	bulb		mirabi-ai-2026-10	active
+ceiling_fan	ceiling fan	noun	2	home	quạt trần	quạt gắn trên trần nhà	Turn on the ceiling fan, it's hot.	Bật quạt trần lên đi, nóng quá.			mirabi-ai-2026-10	active
+freezer	freezer	noun	2	home	tủ đông, ngăn đá	nơi giữ đồ ăn đông lạnh	There's ice cream in the freezer.	Có kem trong ngăn đá đấy.		/ˈfriːzə/	mirabi-ai-2026-10	active
+microwave	microwave	noun	2	home	lò vi sóng	thiết bị hâm nóng đồ ăn nhanh	Heat the soup in the microwave.	Hâm súp bằng lò vi sóng đi.		/ˈmaɪkrəweɪv/	mirabi-ai-2026-10	active
+heater	heater	noun	2	home	máy sưởi	thiết bị làm ấm phòng	Turn on the heater, it's freezing.	Bật máy sưởi lên đi, lạnh cóng rồi.		/ˈhiːtə/	mirabi-ai-2026-10	active
+toaster	toaster	noun	2	home	máy nướng bánh mì	máy nướng lát bánh mì	Put two slices of bread in the toaster.	Cho hai lát bánh mì vào máy nướng.		/ˈtəʊstə/	mirabi-ai-2026-10	active
+kettle	kettle	noun	2	home	ấm đun nước	đồ dùng nhà bếp để đun sôi nước	Can you put the kettle on?	Bạn bắc ấm nước lên được không?		/ˈketl/	mirabi-ai-2026-10	active
+vacuum_cleaner	vacuum cleaner	noun	2	home	máy hút bụi	máy hút bụi bẩn trên sàn, thảm	The vacuum cleaner is in the cupboard.	Máy hút bụi để trong tủ.	hoover		mirabi-ai-2026-10	active
+remote_control	remote control	noun	2	home	cái điều khiển từ xa	dùng để bật tắt, chuyển kênh tivi, máy lạnh	Where's the remote control?	Cái điều khiển đâu rồi?	remote		mirabi-ai-2026-10	active
+iron.appliance	iron	noun	2	home	bàn là, bàn ủi	thiết bị làm phẳng quần áo	Be careful, the iron is hot.	Cẩn thận, bàn là đang nóng đấy.		/ˈaɪən/	mirabi-ai-2026-10	active
+iron.press	iron	verb	2	home	là, ủi (quần áo)	dùng bàn là cho quần áo phẳng	I need to iron my shirt for tomorrow.	Tôi cần là chiếc áo sơ mi cho ngày mai.		/ˈaɪən/	mirabi-ai-2026-10	active
+laundry	laundry	noun	2	home	đồ giặt	quần áo bẩn cần giặt hoặc vừa giặt xong	There's a big pile of laundry on the bed.	Có một đống đồ giặt to trên giường.	washing	/ˈlɔːndri/	mirabi-ai-2026-10	active
+broom	broom	noun	2	home	cái chổi	dụng cụ có cán dài để quét nhà	The broom is behind the door.	Cái chổi ở sau cánh cửa.		/bruːm/	mirabi-ai-2026-10	active
+mop.tool	mop	noun	2	home	cây lau nhà	dụng cụ cán dài có đầu vải để lau sàn	Get the mop, I spilled some water.	Lấy cây lau nhà đi, tôi làm đổ nước rồi.		/mɒp/	mirabi-ai-2026-10	active
+bucket	bucket	noun	2	home	cái xô	đồ đựng nước có quai xách	Fill the bucket with water.	Đổ đầy nước vào xô.		/ˈbʌkɪt/	mirabi-ai-2026-10	active
+sponge	sponge	noun	2	home	miếng bọt biển	miếng mềm hút nước để rửa bát, lau chùi	Use a sponge to wash the dishes.	Dùng miếng bọt biển để rửa bát.		/spʌndʒ/	mirabi-ai-2026-10	active
+sink.basin	sink	noun	2	home	bồn rửa	chậu rửa có vòi nước trong bếp hoặc phòng tắm	Leave the dirty cups in the sink.	Để cốc bẩn trong bồn rửa.		/sɪŋk/	mirabi-ai-2026-10	active
+bathtub	bathtub	noun	2	home	bồn tắm	bồn lớn để ngâm mình tắm	The bathtub is too small for me.	Bồn tắm quá nhỏ với tôi.	bath	/ˈbɑːθtʌb/	mirabi-ai-2026-10	active
+tap.faucet	tap	noun	2	home	vòi nước	vòi vặn ra nước ở bồn rửa	Turn off the tap while you brush your teeth.	Khóa vòi nước khi đánh răng nhé.	faucet	/tæp/	mirabi-ai-2026-10	active
+doorbell	doorbell	noun	2	home	chuông cửa	chuông bấm ngoài cửa để báo có khách	I heard the doorbell ring.	Tôi nghe thấy chuông cửa reo.		/ˈdɔːbel/	mirabi-ai-2026-10	active
+comfortable	comfortable	adjective	2	home	êm ái, thoải mái	đồ đạc, phòng ốc dễ chịu khi dùng	This sofa is really comfortable.	Chiếc sofa này thật êm.	comfy	/ˈkʌmftəbl/	mirabi-ai-2026-10	active
+dusty.home	dusty	adjective	2	home	đầy bụi, bám bụi	đồ đạc lâu ngày không lau	The old books in the attic are very dusty.	Những cuốn sách cũ trên gác mái phủ đầy bụi.		/ˈdʌsti/	mirabi-ai-2026-10	active
+noisy	noisy	adjective	2	home	ồn ào	nhà, hàng xóm, đường phố gây nhiều tiếng ồn	Our neighbours are very noisy at night.	Hàng xóm nhà tôi rất ồn ào vào ban đêm.		/ˈnɔɪzi/	mirabi-ai-2026-10	active
+sweep	sweep	verb	2	home	quét (nhà)	dùng chổi làm sạch bụi, rác trên sàn	Can you sweep the kitchen floor?	Bạn quét sàn bếp được không?		/swiːp/	mirabi-ai-2026-10	active
+mop.verb	mop	verb	2	home	lau sàn bằng cây lau	dùng cây lau nhà và nước để làm sạch sàn	I mop the floor every evening.	Tối nào tôi cũng lau sàn.		/mɒp/	mirabi-ai-2026-10	active
+vacuum	vacuum	verb	2	home	hút bụi	dùng máy hút bụi làm sạch sàn, thảm	I vacuum the carpet twice a week.	Tôi hút bụi thảm mỗi tuần hai lần.	hoover	/ˈvækjuːm/	mirabi-ai-2026-10	active
+fold.home	fold	verb	2	home	gấp (quần áo, chăn)	gập gọn quần áo đã khô	Can you help me fold the clothes?	Bạn giúp tôi gấp quần áo được không?		/fəʊld/	mirabi-ai-2026-10	active
+lock	lock	verb	2	home	khóa (cửa)	dùng chìa khóa đóng chặt cửa lại	Did you lock the front door?	Bạn đã khóa cửa chính chưa?		/lɒk/	mirabi-ai-2026-10	active
+unlock	unlock	verb	2	home	mở khóa	dùng chìa khóa mở cửa đã khóa	I can't unlock the door. The key doesn't work.	Tôi không mở khóa cửa được. Chìa khóa không vặn được.		/ʌnˈlɒk/	mirabi-ai-2026-10	active
+fix.repair	fix	verb	2	home	sửa (đồ hỏng)	làm cho đồ đạc, máy móc dùng được lại	Dad fixed the broken chair.	Bố đã sửa chiếc ghế bị hỏng.	repair	/fɪks/	mirabi-ai-2026-10	active
+put_away.home	put away	phrasal_verb	2	home	cất đi, cất vào chỗ	để đồ về đúng chỗ của nó sau khi dùng	Put away your clothes, please.	Cất quần áo của con đi nhé.			mirabi-ai-2026-10	active
+hang_up.clothes	hang up	phrasal_verb	2	home	treo lên	treo áo, khăn lên móc	Hang up your coat in the hall.	Treo áo khoác ở hành lang đi.			mirabi-ai-2026-10	active
+plug_in	plug in	phrasal_verb	2	home	cắm điện	cắm phích của thiết bị vào ổ điện	Is the kettle plugged in?	Ấm nước đã cắm điện chưa?			mirabi-ai-2026-10	active
+move_in	move in	phrasal_verb	2	home	dọn đến ở	chuyển đồ đạc đến ở nhà mới	We moved in last month.	Chúng tôi dọn đến ở từ tháng trước.			mirabi-ai-2026-10	active
+do_the_housework	do the housework	collocation	2	home	làm việc nhà	lau dọn, giặt giũ, nấu nướng trong nhà	Everyone in my family helps to do the housework.	Mọi người trong nhà tôi đều giúp làm việc nhà.			mirabi-ai-2026-10	active
+take_out_the_rubbish	take out the rubbish	collocation	2	home	đổ rác	mang túi rác ra ngoài để vứt	It's your turn to take out the rubbish.	Đến lượt con đi đổ rác đấy.	take out the trash|take out the bins		mirabi-ai-2026-10	active
+set_the_table.home	set the table	collocation	2	home	bày bàn ăn	đặt bát, đũa, cốc lên bàn trước bữa ăn	Can you set the table for dinner?	Con bày bàn ăn tối được không?	lay the table		mirabi-ai-2026-10	active
+clear_the_table	clear the table	collocation	2	home	dọn bàn ăn	cất bát đĩa khỏi bàn sau bữa ăn	After dinner, the kids clear the table.	Sau bữa tối, bọn trẻ dọn bàn ăn.			mirabi-ai-2026-10	active
+pay_the_rent	pay the rent	collocation	2	home	trả tiền nhà	trả tiền thuê nhà hằng tháng	We pay the rent on the first of every month.	Chúng tôi trả tiền nhà vào ngày mùng một hằng tháng.			mirabi-ai-2026-10	active
+take_off_your_shoes	take off your shoes	collocation	2	home	cởi giày ra	bỏ giày dép trước khi bước vào nhà	Please take off your shoes before you come in.	Vui lòng cởi giày trước khi vào nhà.			mirabi-ai-2026-10	active
+next_door	next door	adverb	2	home	(ở) nhà bên cạnh	ngôi nhà hoặc căn hộ sát vách	A young couple lives next door.	Một cặp vợ chồng trẻ sống ở nhà bên cạnh.			mirabi-ai-2026-10	active
+whos_there	who's there	phrase	2	home	ai đấy?	hỏi khi nghe tiếng gõ cửa, chuông cửa	Someone knocked, and I asked, "Who's there?"	Có người gõ cửa và tôi hỏi: "Ai đấy?"			mirabi-ai-2026-10	active
+move_house	move house	collocation	3	home	chuyển nhà	dọn toàn bộ đồ đạc sang chỗ ở mới	We're moving house next week.	Tuần sau nhà tôi chuyển nhà.			mirabi-ai-2026-10	active
+move_out.home	move out	phrasal_verb	3	home	dọn đi, trả nhà	chuyển đồ ra khỏi nơi đang ở để đi chỗ khác	We have to move out by the end of the month.	Chúng tôi phải dọn đi trước cuối tháng.			mirabi-ai-2026-10	active
+for_rent	for rent	collocation	3	home	cho thuê	nhà, phòng đang tìm người thuê	There's a flat for rent near my school.	Có một căn hộ cho thuê gần trường tôi.	to let		mirabi-ai-2026-10	active
+share_a_flat	share a flat	collocation	3	home	ở ghép, ở chung căn hộ	sống cùng bạn bè trong một căn hộ để chia tiền thuê	I share a flat with two friends from university.	Tôi ở ghép với hai người bạn đại học.	share an apartment		mirabi-ai-2026-10	active
+block_of_flats	block of flats	noun	3	home	tòa chung cư	tòa nhà cao tầng gồm nhiều căn hộ	They live in a block of flats near the river.	Họ sống trong một tòa chung cư gần sông.	apartment building|apartment block		mirabi-ai-2026-10	active
+electricity_bill	electricity bill	noun	3	home	hóa đơn tiền điện	giấy báo số tiền điện phải trả hằng tháng	Our electricity bill is very high this month.	Hóa đơn tiền điện tháng này nhà tôi rất cao.			mirabi-ai-2026-10	active
+power_cut	power cut	noun	3	home	mất điện, cúp điện	khi điện bị ngắt đột ngột	There was a power cut last night, so we used candles.	Tối qua bị cúp điện nên chúng tôi dùng nến.	power outage|blackout		mirabi-ai-2026-10	active
+home_sweet_home	home sweet home	phrase	3	home	nhà mình vẫn là nhất	câu nói vui khi trở về nhà sau chuyến đi	After two weeks away, home sweet home!	Đi vắng hai tuần, về nhà vẫn là nhất!			mirabi-ai-2026-10	active
+around_the_house	around the house	collocation	3	home	(việc) trong nhà	những việc lặt vặt quanh nhà, trong nhà	My son helps a lot around the house.	Con trai tôi giúp rất nhiều việc trong nhà.			mirabi-ai-2026-10	active
+hang_out_the_washing	hang out the washing	collocation	3	home	phơi quần áo	treo đồ vừa giặt ra ngoài cho khô	It's sunny, so I'll hang out the washing.	Trời nắng nên tôi sẽ phơi quần áo.	hang out the laundry		mirabi-ai-2026-10	active
+load_the_dishwasher	load the dishwasher	collocation	3	home	xếp bát đĩa vào máy rửa bát	đặt bát đĩa bẩn vào máy trước khi bật	Can you load the dishwasher after dinner?	Sau bữa tối con xếp bát đĩa vào máy rửa bát được không?			mirabi-ai-2026-10	active
+spare_room	spare room	noun	3	home	phòng dành cho khách	phòng ngủ trống trong nhà, để khách ở lại	You can sleep in our spare room.	Bạn có thể ngủ ở phòng dành cho khách nhà mình.	guest room		mirabi-ai-2026-10	active
+bedside_table	bedside table	noun	3	home	tủ đầu giường	bàn nhỏ có ngăn đặt cạnh giường	My phone is on the bedside table.	Điện thoại của tôi ở trên tủ đầu giường.	nightstand		mirabi-ai-2026-10	active
+chest_of_drawers	chest of drawers	noun	3	home	tủ ngăn kéo	tủ thấp có nhiều ngăn kéo để quần áo	Your socks are in the chest of drawers.	Tất của con ở trong tủ ngăn kéo.			mirabi-ai-2026-10	active
+bunk_bed	bunk bed	noun	3	home	giường tầng	hai giường chồng lên nhau	My brother and I share a bunk bed.	Anh trai tôi và tôi ngủ chung một chiếc giường tầng.			mirabi-ai-2026-10	active
+mosquito_net	mosquito net	noun	3	home	màn chống muỗi, cái mùng	lưới treo quanh giường để muỗi không vào	We sleep under a mosquito net in summer.	Mùa hè chúng tôi ngủ trong màn chống muỗi.			mirabi-ai-2026-10	active
+picture_frame	picture frame	noun	3	home	khung ảnh	khung để lồng ảnh, tranh treo tường hay để bàn	There's a picture frame on her desk.	Có một khung ảnh trên bàn cô ấy.	photo frame		mirabi-ai-2026-10	active
+rubber_gloves	rubber gloves	noun	3	home	găng tay cao su	đeo khi rửa bát, cọ nhà vệ sinh	Wear rubber gloves when you clean the toilet.	Đeo găng tay cao su khi cọ bồn cầu nhé.			mirabi-ai-2026-10	active
+laundry_basket	laundry basket	noun	3	home	giỏ đựng đồ bẩn	giỏ để quần áo bẩn chờ giặt	Put your dirty socks in the laundry basket.	Bỏ tất bẩn vào giỏ đựng đồ bẩn đi.			mirabi-ai-2026-10	active
+bin_bag	bin bag	noun	3	home	túi đựng rác	túi ni lông lót trong thùng rác	We need more bin bags.	Nhà mình cần thêm túi đựng rác.	rubbish bag|garbage bag		mirabi-ai-2026-10	active
+water_heater	water heater	noun	3	home	bình nóng lạnh	thiết bị đun nóng nước để tắm	Turn on the water heater before your shower.	Bật bình nóng lạnh trước khi tắm nhé.			mirabi-ai-2026-10	active
+washing-up_liquid	washing-up liquid	noun	3	home	nước rửa bát	chất tẩy rửa dạng lỏng để rửa chén bát	We've run out of washing-up liquid.	Nhà mình hết nước rửa bát rồi.	washing up liquid|dish soap		mirabi-ai-2026-10	active
+hallway	hallway	noun	3	home	hành lang, sảnh vào nhà	lối đi ngay sau cửa chính dẫn vào các phòng	Leave your shoes in the hallway.	Để giày ở hành lang nhé.	hall	/ˈhɔːlweɪ/	mirabi-ai-2026-10	active
+attic	attic	noun	3	home	gác mái	phòng ngay dưới mái nhà, thường để đồ cũ	We keep our old toys in the attic.	Chúng tôi để đồ chơi cũ trên gác mái.	loft	/ˈætɪk/	mirabi-ai-2026-10	active
+basement	basement	noun	3	home	tầng hầm	tầng nằm dưới mặt đất của ngôi nhà	The washing machine is in the basement.	Máy giặt ở dưới tầng hầm.		/ˈbeɪsmənt/	mirabi-ai-2026-10	active
+study.room	study	noun	3	home	phòng làm việc, phòng đọc sách	phòng trong nhà để đọc sách, làm việc	My dad works from home in his study.	Bố tôi làm việc tại nhà trong phòng làm việc của ông.		/ˈstʌdi/	mirabi-ai-2026-10	active
+lawn	lawn	noun	3	home	bãi cỏ (quanh nhà)	khoảng cỏ được cắt tỉa trước hoặc sau nhà	The kids are playing on the lawn.	Bọn trẻ đang chơi trên bãi cỏ.		/lɔːn/	mirabi-ai-2026-10	active
+fence	fence	noun	3	home	hàng rào	vách bằng gỗ, sắt bao quanh vườn, sân	There's a wooden fence around the garden.	Có một hàng rào gỗ quanh khu vườn.		/fens/	mirabi-ai-2026-10	active
+fireplace	fireplace	noun	3	home	lò sưởi (âm tường)	chỗ đốt lửa trong tường để sưởi ấm phòng	We sat by the fireplace on cold evenings.	Những tối lạnh, chúng tôi ngồi bên lò sưởi.		/ˈfaɪəpleɪs/	mirabi-ai-2026-10	active
+doorknob	doorknob	noun	3	home	núm cửa tròn	tay nắm hình tròn để vặn mở cửa	Turn the doorknob and push.	Vặn núm cửa rồi đẩy.		/ˈdɔːnɒb/	mirabi-ai-2026-10	active
+tile	tile	noun	3	home	viên gạch lát	gạch men lát sàn hoặc ốp tường	The bathroom floor has white tiles.	Sàn phòng tắm được lát gạch trắng.		/taɪl/	mirabi-ai-2026-10	active
+rug	rug	noun	3	home	tấm thảm nhỏ	thảm trải một phần sàn, trước sofa hay giường	There's a small rug in front of the sofa.	Có một tấm thảm nhỏ trước ghế sofa.		/rʌɡ/	mirabi-ai-2026-10	active
+mattress	mattress	noun	3	home	cái nệm	đệm dày đặt trên giường	This mattress is too hard for me.	Cái nệm này quá cứng với tôi.		/ˈmætrəs/	mirabi-ai-2026-10	active
+plug.electric	plug	noun	3	home	phích cắm điện	đầu có chân kim loại để cắm vào ổ điện	Pull out the plug before you clean the kettle.	Rút phích cắm ra trước khi lau ấm đun nước.		/plʌɡ/	mirabi-ai-2026-10	active
+socket.wall	socket	noun	3	home	ổ cắm điện	lỗ cắm điện gắn trên tường	Is there a socket near the bed?	Gần giường có ổ cắm điện không?	power point|outlet	/ˈsɒkɪt/	mirabi-ai-2026-10	active
+dishwasher	dishwasher	noun	3	home	máy rửa bát	máy tự động rửa chén bát	Put the plates in the dishwasher.	Cho đĩa vào máy rửa bát đi.		/ˈdɪʃwɒʃə/	mirabi-ai-2026-10	active
+dryer	dryer	noun	3	home	máy sấy quần áo	máy làm khô quần áo sau khi giặt	Take the clothes out of the dryer.	Lấy quần áo ra khỏi máy sấy đi.	tumble dryer|clothes dryer	/ˈdraɪə/	mirabi-ai-2026-10	active
+hanger	hanger	noun	3	home	móc treo quần áo	móc bằng nhựa, gỗ để treo áo trong tủ	Put your shirt on a hanger.	Treo áo sơ mi lên móc đi.	coat hanger|clothes hanger	/ˈhæŋə/	mirabi-ai-2026-10	active
+dustpan	dustpan	noun	3	home	cái hốt rác	dụng cụ để hốt bụi, rác sau khi quét	Sweep the dirt into the dustpan.	Quét rác vào cái hốt rác.		/ˈdʌstpæn/	mirabi-ai-2026-10	active
+tablecloth	tablecloth	noun	3	home	khăn trải bàn	tấm vải phủ lên mặt bàn ăn	Mum put a clean tablecloth on the table.	Mẹ trải một tấm khăn trải bàn sạch lên bàn.		/ˈteɪblklɒθ/	mirabi-ai-2026-10	active
+houseplant	houseplant	noun	3	home	cây cảnh trong nhà	cây trồng trong chậu đặt trong phòng	Houseplants make a room feel fresh.	Cây cảnh trong nhà làm căn phòng thêm tươi mát.		/ˈhaʊsplɑːnt/	mirabi-ai-2026-10	active
+vase	vase	noun	3	home	bình hoa, lọ hoa	đồ đựng nước để cắm hoa	Put the flowers in a vase.	Cắm hoa vào bình đi.		/vɑːz/	mirabi-ai-2026-10	active
+candle	candle	noun	3	home	cây nến	que sáp có bấc để thắp sáng	We lit a candle when the lights went out.	Chúng tôi thắp một cây nến khi đèn tắt.		/ˈkændl/	mirabi-ai-2026-10	active
+ladder	ladder	noun	3	home	cái thang	dụng cụ có nhiều bậc để trèo lên cao	Hold the ladder while I change the bulb.	Giữ cái thang trong lúc tôi thay bóng đèn nhé.		/ˈlædə/	mirabi-ai-2026-10	active
+hammer	hammer	noun	3	home	cái búa	dụng cụ để đóng đinh	I need a hammer to put up this picture.	Tôi cần một cái búa để treo bức tranh này.		/ˈhæmə/	mirabi-ai-2026-10	active
+screw.metal	screw	noun	3	home	đinh vít, ốc vít	đinh có ren, vặn vào bằng tua vít	One of the screws on the door is loose.	Một con vít trên cánh cửa bị lỏng.		/skruː/	mirabi-ai-2026-10	active
+screwdriver	screwdriver	noun	3	home	cái tua vít	dụng cụ để vặn đinh vít	Can you pass me the screwdriver?	Đưa giúp tôi cái tua vít được không?		/ˈskruːdraɪvə/	mirabi-ai-2026-10	active
+stain.mark	stain	noun	3	home	vết bẩn, vết ố	vết khó tẩy trên thảm, quần áo, đồ đạc	There's a coffee stain on the carpet.	Có một vết cà phê trên thảm.		/steɪn/	mirabi-ai-2026-10	active
+tenant	tenant	noun	3	home	người thuê nhà	người trả tiền để ở nhà của người khác	The new tenants move in on Monday.	Những người thuê nhà mới sẽ dọn đến vào thứ Hai.		/ˈtenənt/	mirabi-ai-2026-10	active
+flatmate	flatmate	noun	3	home	bạn cùng nhà, bạn ở ghép	người ở chung căn hộ với mình	My flatmate always forgets to buy milk.	Bạn cùng nhà của tôi lúc nào cũng quên mua sữa.	roommate|housemate	/ˈflætmeɪt/	mirabi-ai-2026-10	active
+dust.verb	dust	verb	3	home	phủi bụi, lau bụi	dùng khăn làm sạch bụi trên đồ đạc	I dust the shelves every week.	Tuần nào tôi cũng lau bụi các kệ.		/dʌst/	mirabi-ai-2026-10	active
+scrub	scrub	verb	3	home	cọ, chà mạnh	cọ thật kỹ bằng bàn chải để tẩy vết bẩn	She scrubbed the bathroom floor until it was clean.	Cô ấy cọ sàn phòng tắm cho đến khi sạch.		/skrʌb/	mirabi-ai-2026-10	active
+store.keep	store	verb	3	home	cất giữ	để đồ ở một chỗ cho đến khi cần dùng	We store our winter clothes under the bed.	Chúng tôi cất quần áo mùa đông dưới gầm giường.		/stɔː/	mirabi-ai-2026-10	active
+leak	leak	verb	3	home	rò rỉ, bị dột	nước chảy ra qua chỗ thủng của ống, mái	The pipe under the sink is leaking.	Ống nước dưới bồn rửa đang bị rò rỉ.		/liːk/	mirabi-ai-2026-10	active
+flush	flush	verb	3	home	giật nước (bồn cầu)	xả nước cho sạch bồn cầu sau khi dùng	Don't forget to flush the toilet.	Đừng quên giật nước bồn cầu nhé.		/flʌʃ/	mirabi-ai-2026-10	active
+unplug	unplug	verb	3	home	rút phích điện	rút thiết bị ra khỏi ổ cắm	Unplug the iron when you've finished.	Rút phích bàn là khi bạn dùng xong.		/ʌnˈplʌɡ/	mirabi-ai-2026-10	active
+spill.home	spill	verb	3	home	làm đổ (nước, đồ lỏng)	vô ý làm chất lỏng tràn ra ngoài	I spilled coffee on the sofa.	Tôi làm đổ cà phê lên ghế sofa.		/spɪl/	mirabi-ai-2026-10	active
+decorate.home	decorate	verb	3	home	trang trí (nhà cửa)	làm cho nhà đẹp hơn bằng đồ trang trí, sơn mới	We decorated the house with flowers for Tet.	Chúng tôi trang trí nhà bằng hoa để đón Tết.		/ˈdekəreɪt/	mirabi-ai-2026-10	active
+spacious	spacious	adjective	3	home	rộng rãi	nhà, phòng có nhiều không gian	The new flat is bright and spacious.	Căn hộ mới sáng sủa và rộng rãi.	roomy	/ˈspeɪʃəs/	mirabi-ai-2026-10	active
+cosy	cosy	adjective	3	home	ấm cúng	căn phòng nhỏ nhưng ấm áp, dễ chịu	Their living room is small but cosy.	Phòng khách nhà họ nhỏ nhưng ấm cúng.	cozy	/ˈkəʊzi/	mirabi-ai-2026-10	active
+indoor	indoor	adjective	3	home	trong nhà	đồ vật, hoạt động ở trong nhà chứ không ngoài trời	We have an indoor plant in every room.	Phòng nào nhà tôi cũng có một chậu cây trong nhà.		/ˈɪndɔː/	mirabi-ai-2026-10	active
+electric	electric	adjective	3	home	chạy bằng điện	thiết bị dùng điện thay vì ga, củi	We bought an electric kettle.	Chúng tôi đã mua một chiếc ấm đun nước bằng điện.		/ɪˈlektrɪk/	mirabi-ai-2026-10	active
+indoors.home	indoors	adverb	3	home	ở trong nhà	ở trong nhà để tránh mưa, nắng, lạnh	Stay indoors when it's this hot.	Trời nóng thế này thì ở trong nhà đi.	inside	/ˌɪnˈdɔːz/	mirabi-ai-2026-10	draft
+tightly.home	tightly	adverb	3	home	chặt, kín	đóng nắp, cửa thật chặt để không hở	Close the lid tightly.	Đóng nắp thật chặt nhé.		/ˈtaɪtli/	mirabi-ai-2026-10	active
+estate_agent	estate agent	noun	4	home	người môi giới nhà đất	người giúp mua, bán, cho thuê nhà	The estate agent showed us three flats.	Người môi giới nhà đất dẫn chúng tôi đi xem ba căn hộ.	real estate agent		mirabi-ai-2026-10	active
+utility_bills	utility bills	noun	4	home	hóa đơn điện nước	các khoản phải trả cho điện, nước, ga, internet	The rent doesn't include utility bills.	Tiền thuê nhà chưa gồm hóa đơn điện nước.	utilities		mirabi-ai-2026-10	active
+studio_flat	studio flat	noun	4	home	căn hộ studio	căn hộ một phòng gồm cả chỗ ngủ và bếp	I rent a small studio flat in the city centre.	Tôi thuê một căn hộ studio nhỏ ở trung tâm thành phố.	studio apartment|studio		mirabi-ai-2026-10	active
+a_place_of_your_own	a place of your own	collocation	4	home	nhà riêng của mình	chỗ ở riêng, không phải sống chung với ai	It's nice to finally have a place of your own.	Cuối cùng có được chỗ ở riêng của mình thật tuyệt.			mirabi-ai-2026-10	active
+housewarming_party	housewarming party	noun	4	home	tiệc tân gia	bữa tiệc mời bạn bè đến mừng nhà mới	We're having a housewarming party on Saturday.	Thứ Bảy này chúng tôi tổ chức tiệc tân gia.	housewarming		mirabi-ai-2026-10	active
+settle_in	settle in	phrasal_verb	4	home	ổn định chỗ ở mới	quen dần với nhà mới, nơi ở mới	It took us a few weeks to settle in.	Chúng tôi mất vài tuần để ổn định chỗ ở mới.			mirabi-ai-2026-10	active
+rent_out	rent out	phrasal_verb	4	home	cho thuê (nhà, phòng)	chủ nhà để người khác trả tiền ở	They rent out the top floor to students.	Họ cho sinh viên thuê tầng trên cùng.	let out		mirabi-ai-2026-10	active
+lock_yourself_out	lock yourself out	collocation	4	home	bị nhốt ở ngoài (quên chìa khóa)	đóng cửa lại mà để chìa khóa bên trong	Take your keys so you don't lock yourself out.	Mang chìa khóa theo kẻo bị nhốt ở ngoài đấy.	get locked out		mirabi-ai-2026-10	active
+put_up.shelf	put up	phrasal_verb	4	home	lắp, treo lên (kệ, tranh)	gắn đồ lên tường	Can you help me put up these shelves?	Bạn giúp tôi lắp mấy cái kệ này được không?			mirabi-ai-2026-10	active
+fix_up	fix up	phrasal_verb	4	home	sửa sang lại	sửa chữa, trang trí lại nhà cũ cho đẹp	They bought an old house and fixed it up.	Họ mua một căn nhà cũ và sửa sang lại.	do up		mirabi-ai-2026-10	active
+fall_apart.home	fall apart	phrasal_verb	4	home	hỏng nát, rã ra từng mảnh	đồ đạc, nhà cũ quá nên vỡ, rời ra	This old chair is falling apart.	Cái ghế cũ này sắp rã ra từng mảnh rồi.			mirabi-ai-2026-10	active
+spring_cleaning	spring cleaning	noun	4	home	tổng vệ sinh nhà cửa	dọn dẹp thật kỹ toàn bộ ngôi nhà, thường mỗi năm một lần	We do our spring cleaning before the New Year.	Chúng tôi tổng vệ sinh nhà cửa trước Tết.			mirabi-ai-2026-10	active
+ironing_board	ironing board	noun	4	home	bàn để là quần áo	bàn hẹp có chân để đặt quần áo khi là	Put the ironing board away when you've finished.	Cất bàn để là quần áo đi khi bạn dùng xong.			mirabi-ai-2026-10	active
+washing_line	washing line	noun	4	home	dây phơi quần áo	sợi dây căng để phơi đồ đã giặt	The towels are drying on the washing line.	Khăn tắm đang phơi trên dây phơi.	clothesline		mirabi-ai-2026-10	active
+clothes_peg	clothes peg	noun	4	home	cái kẹp phơi quần áo	kẹp để giữ đồ trên dây phơi	I need more clothes pegs for these socks.	Tôi cần thêm kẹp phơi cho mấy đôi tất này.	clothespin|peg		mirabi-ai-2026-10	active
+running_water	running water	noun	4	home	nước máy	nước chảy từ vòi trong nhà	The old house had no running water.	Ngôi nhà cũ không có nước máy.			mirabi-ai-2026-10	active
+water_tank	water tank	noun	4	home	bồn nước, téc nước	bồn chứa nước đặt trên mái nhà	The water tank on the roof is empty.	Bồn nước trên mái nhà hết nước rồi.			mirabi-ai-2026-10	active
+sliding_door	sliding door	noun	4	home	cửa lùa, cửa trượt	cửa mở bằng cách trượt sang ngang	A sliding door leads to the balcony.	Một cánh cửa lùa dẫn ra ban công.			mirabi-ai-2026-10	active
+cellar	cellar	noun	4	home	hầm chứa đồ	căn hầm dưới nhà để cất rượu, than, đồ cũ	We keep wine in the cellar.	Chúng tôi cất rượu dưới hầm.		/ˈselə/	mirabi-ai-2026-10	active
+porch	porch	noun	4	home	hiên nhà, mái hiên trước cửa	chỗ có mái che ngay trước cửa ra vào	Leave the parcel on the porch.	Để bưu kiện ở hiên nhà nhé.		/pɔːtʃ/	mirabi-ai-2026-10	active
+patio	patio	noun	4	home	sân lát gạch (sau nhà)	khoảng sân lát đá cạnh nhà để ngồi chơi, ăn uống	We had dinner on the patio.	Chúng tôi ăn tối ngoài sân sau nhà.		/ˈpætiəʊ/	mirabi-ai-2026-10	active
+pantry	pantry	noun	4	home	phòng để đồ ăn khô	phòng nhỏ hoặc tủ cạnh bếp để chứa thực phẩm	There's rice and flour in the pantry.	Có gạo và bột mì trong phòng để đồ ăn.	larder	/ˈpæntri/	mirabi-ai-2026-10	active
+nursery.room	nursery	noun	4	home	phòng trẻ sơ sinh	phòng ngủ dành cho em bé trong nhà	They painted the nursery yellow for the new baby.	Họ sơn phòng em bé màu vàng để đón con.		/ˈnɜːsəri/	mirabi-ai-2026-10	active
+shed.garden	shed	noun	4	home	nhà kho nhỏ (trong vườn)	chòi gỗ ngoài vườn để dụng cụ, xe đạp	The lawnmower is in the shed.	Máy cắt cỏ ở trong nhà kho ngoài vườn.		/ʃed/	mirabi-ai-2026-10	active
+driveway	driveway	noun	4	home	lối xe vào nhà	đường riêng từ đường lớn dẫn vào ga-ra	Don't park in the driveway.	Đừng đỗ xe ở lối xe vào nhà.	drive	/ˈdraɪvweɪ/	mirabi-ai-2026-10	active
+doorstep	doorstep	noun	4	home	bậc cửa, ngay trước cửa	bậc thềm ngay ngoài cửa chính	The postman left a box on the doorstep.	Người đưa thư để một cái hộp ở bậc cửa.		/ˈdɔːstep/	mirabi-ai-2026-10	active
+blind.window	blind	noun	4	home	rèm cuốn, rèm sáo	rèm kéo lên xuống hoặc có nan để che cửa sổ	Pull down the blinds, the sun is too bright.	Kéo rèm xuống đi, nắng chói quá.		/blaɪnd/	mirabi-ai-2026-10	active
+duvet	duvet	noun	4	home	chăn bông có vỏ bọc	chăn dày nhồi lông hoặc bông, lồng trong vỏ chăn	I need a thicker duvet for winter.	Tôi cần một cái chăn bông dày hơn cho mùa đông.		/ˈduːveɪ/	mirabi-ai-2026-10	active
+detergent	detergent	noun	4	home	bột giặt, nước giặt	chất tẩy dùng để giặt quần áo	Don't use too much detergent.	Đừng dùng quá nhiều bột giặt.	washing powder	/dɪˈtɜːdʒənt/	mirabi-ai-2026-10	active
+bleach.home	bleach	noun	4	home	thuốc tẩy	hóa chất mạnh để tẩy trắng, diệt khuẩn	Clean the toilet with bleach.	Cọ bồn cầu bằng thuốc tẩy.		/bliːtʃ/	mirabi-ai-2026-10	active
+counter.kitchen	counter	noun	4	home	mặt bếp, kệ bếp	mặt phẳng trong bếp để sơ chế đồ ăn	Leave the shopping on the kitchen counter.	Để đồ mua về trên mặt bếp nhé.	worktop|countertop	/ˈkaʊntə/	mirabi-ai-2026-10	active
+drain	drain	noun	4	home	lỗ thoát nước, cống	ống hoặc lỗ cho nước bẩn chảy đi	Hair has blocked the drain in the shower.	Tóc làm tắc lỗ thoát nước trong buồng tắm.		/dreɪn/	mirabi-ai-2026-10	active
+pipe	pipe	noun	4	home	đường ống nước	ống dẫn nước, khí trong nhà	A water pipe burst in the kitchen.	Một đường ống nước trong bếp bị vỡ.		/paɪp/	mirabi-ai-2026-10	active
+mould	mould	noun	4	home	nấm mốc	vết mốc xanh, đen trên tường ẩm	There's mould on the bathroom ceiling.	Trần phòng tắm có nấm mốc.	mold	/məʊld/	mirabi-ai-2026-10	active
+landlady	landlady	noun	4	home	bà chủ nhà (cho thuê)	người phụ nữ cho thuê nhà, phòng	Our landlady is very kind.	Bà chủ nhà của chúng tôi rất tốt bụng.		/ˈlændleɪdi/	mirabi-ai-2026-10	active
+deposit.rent	deposit	noun	4	home	tiền đặt cọc (thuê nhà)	tiền đưa trước khi thuê, trả lại khi dọn đi	We paid a deposit of one month's rent.	Chúng tôi đặt cọc một tháng tiền nhà.		/dɪˈpɒzɪt/	mirabi-ai-2026-10	active
+townhouse	townhouse	noun	4	home	nhà phố	nhà cao, hẹp, nhiều tầng trong thành phố	They live in a four-storey townhouse.	Họ sống trong một căn nhà phố bốn tầng.		/ˈtaʊnhaʊs/	mirabi-ai-2026-10	active
+slam.home	slam	verb	4	home	đóng sầm (cửa)	đóng cửa thật mạnh gây tiếng động lớn	Please don't slam the door.	Làm ơn đừng đóng sầm cửa.		/slæm/	mirabi-ai-2026-10	active
+renovate	renovate	verb	4	home	cải tạo, tu sửa (nhà)	sửa lớn, làm mới lại nhà cũ	They renovated the kitchen last year.	Năm ngoái họ đã cải tạo lại nhà bếp.		/ˈrenəveɪt/	mirabi-ai-2026-10	active
+install	install	verb	4	home	lắp đặt	gắn thiết bị như máy lạnh, bình nóng lạnh vào nhà	We're installing a new air conditioner.	Chúng tôi đang lắp một chiếc điều hòa mới.		/ɪnˈstɔːl/	mirabi-ai-2026-10	active
+rearrange	rearrange	verb	4	home	sắp xếp lại	thay đổi vị trí đồ đạc trong phòng	Let's rearrange the furniture in the living room.	Mình sắp xếp lại đồ đạc trong phòng khách đi.		/ˌriːəˈreɪndʒ/	mirabi-ai-2026-10	active
+drip	drip	verb	4	home	nhỏ giọt	nước rơi từng giọt từ vòi, mái	The tap keeps dripping all night.	Vòi nước cứ nhỏ giọt suốt đêm.		/drɪp/	mirabi-ai-2026-10	active
+soak	soak	verb	4	home	ngâm (trong nước)	để quần áo, bát đĩa trong nước một lúc cho dễ sạch	Soak the pan in hot water before you wash it.	Ngâm cái chảo vào nước nóng trước khi rửa.		/səʊk/	mirabi-ai-2026-10	active
+furnished	furnished	adjective	4	home	có sẵn nội thất	nhà, phòng cho thuê đã có đồ đạc	We rented a furnished flat.	Chúng tôi thuê một căn hộ có sẵn nội thất.		/ˈfɜːnɪʃt/	mirabi-ai-2026-10	active
+cramped	cramped	adjective	4	home	chật chội	phòng quá nhỏ so với số người, đồ đạc	Five people in one room is very cramped.	Năm người ở một phòng thì rất chật chội.		/kræmpt/	mirabi-ai-2026-10	active
+spotless	spotless	adjective	4	home	sạch bong, không một vết bẩn	nhà cửa được lau chùi hoàn toàn sạch	The kitchen was spotless after she cleaned it.	Nhà bếp sạch bong sau khi cô ấy lau dọn.		/ˈspɒtləs/	mirabi-ai-2026-10	active
+filthy	filthy	adjective	4	home	bẩn thỉu, dơ bẩn	cực kỳ bẩn, lâu ngày không dọn	The bathroom was filthy when we moved in.	Phòng tắm bẩn thỉu khi chúng tôi mới dọn đến.		/ˈfɪlθi/	mirabi-ai-2026-10	active
+sparkling	sparkling	adjective	4	home	sáng bóng, sáng loáng	bề mặt sạch đến mức lấp lánh	After cleaning, the windows were sparkling.	Sau khi lau, cửa kính sáng loáng.		/ˈspɑːklɪŋ/	mirabi-ai-2026-10	active
+wobbly	wobbly	adjective	4	home	lung lay, cọc cạch	bàn ghế chân không vững, bị lắc	This table is wobbly. One leg is too short.	Cái bàn này bị cọc cạch. Một chân bị ngắn.		/ˈwɒbli/	mirabi-ai-2026-10	active
+squeaky	squeaky	adjective	4	home	kêu ken két	cửa, bản lề phát ra tiếng rít khi mở	The bedroom door is squeaky.	Cửa phòng ngủ kêu ken két.		/ˈskwiːki/	mirabi-ai-2026-10	active
+damp	damp	adjective	4	home	ẩm thấp	nhà, tường hơi ướt, không khô ráo	The walls are damp in the rainy season.	Tường nhà bị ẩm vào mùa mưa.		/dæmp/	mirabi-ai-2026-10	active
+well-lit	well-lit	adjective	4	home	đủ ánh sáng, sáng sủa	phòng có nhiều đèn hoặc ánh nắng	I need a well-lit desk for studying.	Tôi cần một góc bàn đủ ánh sáng để học.		/ˌwel ˈlɪt/	mirabi-ai-2026-10	active
+airy	airy	adjective	4	home	thoáng đãng	phòng rộng, nhiều gió và ánh sáng	The bedroom is light and airy.	Phòng ngủ sáng sủa và thoáng đãng.		/ˈeəri/	mirabi-ai-2026-10	active
+stuffy	stuffy	adjective	4	home	bí, ngột ngạt	phòng thiếu không khí, cần mở cửa	It's stuffy in here. Open a window.	Trong này ngột ngạt quá. Mở cửa sổ ra đi.		/ˈstʌfi/	mirabi-ai-2026-10	active
+blocked	blocked	adjective	4	home	bị tắc	bồn rửa, cống nước không chảy được	The kitchen sink is blocked again.	Bồn rửa trong bếp lại bị tắc rồi.	clogged	/blɒkt/	mirabi-ai-2026-10	active
+thoroughly.home	thoroughly	adverb	4	home	kỹ lưỡng, triệt để	làm sạch, kiểm tra thật kỹ không bỏ sót	Clean the bathroom thoroughly once a week.	Hãy dọn phòng tắm thật kỹ mỗi tuần một lần.		/ˈθʌrəli/	mirabi-ai-2026-10	active
+utility_room	utility room	noun	5	home	phòng giặt giũ, chứa đồ	phòng nhỏ đặt máy giặt và đồ dọn dẹp	The washing machine is in the utility room.	Máy giặt để trong phòng giặt giũ.	laundry room		mirabi-ai-2026-10	active
+detached_house	detached house	noun	5	home	nhà riêng biệt lập	nhà đứng riêng, không chung tường với nhà khác	They live in a large detached house.	Họ sống trong một căn nhà riêng biệt lập rộng lớn.			mirabi-ai-2026-10	active
+terraced_house	terraced house	noun	5	home	nhà liền kề (dãy)	một trong dãy nhà chung tường hai bên	We grew up in a small terraced house.	Chúng tôi lớn lên trong một căn nhà liền kề nhỏ.	row house		mirabi-ai-2026-10	active
+roller_shutter	roller shutter	noun	5	home	cửa cuốn	cửa kim loại cuộn lên xuống ở mặt tiền nhà	He pulled down the roller shutter at night.	Buổi tối anh ấy kéo cửa cuốn xuống.			mirabi-ai-2026-10	active
+gas_cylinder	gas cylinder	noun	5	home	bình ga	bình chứa khí ga để đun nấu	We need to change the gas cylinder.	Nhà mình phải thay bình ga rồi.	gas bottle		mirabi-ai-2026-10	active
+extension_cord	extension cord	noun	5	home	ổ cắm nối dài	dây điện có ổ cắm để cắm thiết bị ở xa	Use an extension cord for the lamp.	Dùng ổ cắm nối dài cho cái đèn.	extension lead		mirabi-ai-2026-10	active
+air_out	air out	phrasal_verb	5	home	làm thoáng, phơi cho thoáng	mở cửa hoặc phơi để hết mùi, ẩm	Open the windows to air out the room.	Mở cửa sổ để căn phòng thoáng khí.	air		mirabi-ai-2026-10	active
+a_roof_over_your_head	a roof over your head	idiom	5	home	chỗ che mưa che nắng	có nơi để ở, dù đơn sơ	As long as you have a roof over your head, you'll be fine.	Miễn là có chỗ che mưa che nắng, bạn sẽ ổn thôi.			mirabi-ai-2026-10	active
+home_away_from_home	home away from home	idiom	5	home	nơi thân thuộc như nhà mình	chỗ mình thấy thoải mái như ở nhà	This café is my home away from home.	Quán cà phê này là ngôi nhà thứ hai của tôi.	home from home		mirabi-ai-2026-10	active
+walls_have_ears	walls have ears	idiom	5	home	tai vách mạch rừng	nhắc nói nhỏ vì người khác có thể nghe thấy	Be careful what you say. The walls have ears.	Cẩn thận lời nói. Tai vách mạch rừng đấy.			mirabi-ai-2026-10	active
+landing.stairs	landing	noun	5	home	chiếu nghỉ, đầu cầu thang	khoảng sàn ở đầu hoặc giữa cầu thang	The bathroom is on the landing.	Phòng tắm nằm ở đầu cầu thang.		/ˈlændɪŋ/	mirabi-ai-2026-10	draft
+lease.home	lease	noun	5	home	hợp đồng thuê nhà	giấy tờ ký giữa chủ nhà và người thuê	We signed a one-year lease.	Chúng tôi đã ký hợp đồng thuê nhà một năm.		/liːs/	mirabi-ai-2026-10	active
+plumbing	plumbing	noun	5	home	hệ thống ống nước	toàn bộ ống, vòi nước trong nhà	The plumbing in this old house needs fixing.	Hệ thống ống nước trong ngôi nhà cũ này cần sửa.		/ˈplʌmɪŋ/	mirabi-ai-2026-10	active
+bungalow	bungalow	noun	5	home	nhà một tầng	ngôi nhà chỉ có tầng trệt	My grandparents moved to a bungalow so they wouldn't need stairs.	Ông bà tôi chuyển sang nhà một tầng để khỏi phải leo cầu thang.		/ˈbʌŋɡələʊ/	mirabi-ai-2026-10	active
+house-hunting	house-hunting	noun	5	home	việc đi tìm nhà	đi xem nhiều nơi để mua hoặc thuê	We spent the weekend house-hunting.	Chúng tôi dành cả cuối tuần để đi tìm nhà.		/ˈhaʊs hʌntɪŋ/	mirabi-ai-2026-10	active
+do-it-yourself	do-it-yourself	noun	5	home	tự tay sửa sang, làm đồ (trong nhà)	tự sửa chữa, trang trí nhà mà không thuê thợ	My dad loves do-it-yourself projects.	Bố tôi rất thích tự tay sửa sang đồ đạc.	DIY	/ˌduː ɪt jɔːˈself/	mirabi-ai-2026-10	active
+gutter	gutter	noun	5	home	máng xối	máng dọc mép mái để dẫn nước mưa	The gutter is full of leaves.	Máng xối đầy lá cây.		/ˈɡʌtə/	mirabi-ai-2026-10	active
+banister	banister	noun	5	home	tay vịn cầu thang	thanh vịn dọc theo cầu thang	Hold on to the banister.	Vịn vào tay vịn cầu thang nhé.	bannister|handrail	/ˈbænɪstə/	mirabi-ai-2026-10	active
+hinge	hinge	noun	5	home	bản lề	khớp kim loại giúp cửa đóng mở được	The door hinge needs some oil.	Bản lề cửa cần tra chút dầu.		/hɪndʒ/	mirabi-ai-2026-10	active
+peephole	peephole	noun	5	home	mắt thần (trên cửa)	lỗ nhỏ trên cửa để nhìn xem ai bên ngoài	Look through the peephole before you open the door.	Nhìn qua mắt thần trước khi mở cửa.	spyhole	/ˈpiːphəʊl/	mirabi-ai-2026-10	active
+padlock	padlock	noun	5	home	ổ khóa móc	khóa có quai cong để khóa cổng, rương	We put a padlock on the gate.	Chúng tôi gắn một ổ khóa móc lên cổng.		/ˈpædlɒk/	mirabi-ai-2026-10	active
+redecorate	redecorate	verb	5	home	sơn sửa, trang trí lại	sơn tường, đổi đồ để căn phòng trông mới	We're going to redecorate the bedroom.	Chúng tôi sẽ sơn sửa lại phòng ngủ.		/riːˈdekəreɪt/	mirabi-ai-2026-10	active
+assemble	assemble	verb	5	home	lắp ráp (đồ nội thất)	ráp các bộ phận lại theo hướng dẫn	It took two hours to assemble the wardrobe.	Mất hai tiếng để lắp ráp cái tủ quần áo.	put together	/əˈsembl/	mirabi-ai-2026-10	active
+furnish	furnish	verb	5	home	trang bị nội thất	mua và đặt đồ đạc vào nhà	They furnished the flat with second-hand furniture.	Họ trang bị nội thất cho căn hộ bằng đồ cũ.		/ˈfɜːnɪʃ/	mirabi-ai-2026-10	active
+declutter	declutter	verb	5	home	dọn bớt đồ thừa	bỏ bớt những thứ không cần cho nhà gọn hơn	I need to declutter my wardrobe.	Tôi cần dọn bớt đồ thừa trong tủ quần áo.		/ˌdiːˈklʌtə/	mirabi-ai-2026-10	active
+disinfect	disinfect	verb	5	home	khử trùng	dùng hóa chất diệt vi khuẩn trên bề mặt	Disinfect the kitchen counters regularly.	Hãy thường xuyên khử trùng mặt bếp.		/ˌdɪsɪnˈfekt/	mirabi-ai-2026-10	active
+unblock	unblock	verb	5	home	thông (cống, bồn bị tắc)	làm cho nước chảy được lại	We called a plumber to unblock the toilet.	Chúng tôi gọi thợ đến thông bồn cầu.	unclog	/ʌnˈblɒk/	mirabi-ai-2026-10	active
+overflow	overflow	verb	5	home	tràn ra	nước quá đầy chảy ra ngoài bồn, chậu	The bath overflowed and flooded the floor.	Bồn tắm bị tràn làm ngập cả sàn.		/ˌəʊvəˈfləʊ/	mirabi-ai-2026-10	active
+relocate.home	relocate	verb	5	home	chuyển nơi ở	dọn đến sống ở thành phố, khu vực khác	We relocated to Da Nang last year.	Năm ngoái chúng tôi chuyển đến Đà Nẵng sống.		/ˌriːləʊˈkeɪt/	mirabi-ai-2026-10	active
+unfurnished	unfurnished	adjective	5	home	không có nội thất	nhà cho thuê trống, chưa có đồ đạc	The flat is cheaper because it's unfurnished.	Căn hộ rẻ hơn vì không có nội thất.		/ʌnˈfɜːnɪʃt/	mirabi-ai-2026-10	active
+shabby	shabby	adjective	5	home	sờn cũ, tồi tàn	đồ đạc, phòng cũ kỹ, phai màu	The sofa looks a bit shabby now.	Cái sofa giờ trông hơi sờn cũ.		/ˈʃæbi/	mirabi-ai-2026-10	active
+run-down.home	run-down	adjective	5	home	xuống cấp	nhà, khu nhà lâu không được sửa chữa	They bought a run-down house and repaired it.	Họ mua một căn nhà xuống cấp rồi sửa lại.		/ˌrʌn ˈdaʊn/	mirabi-ai-2026-10	active
+vacant	vacant	adjective	5	home	bỏ trống	nhà, phòng không có người ở	The flat next door has been vacant for months.	Căn hộ bên cạnh bỏ trống mấy tháng nay.		/ˈveɪkənt/	mirabi-ai-2026-10	active
+creaky	creaky	adjective	5	home	kêu cọt kẹt	sàn gỗ, cầu thang cũ kêu khi bước lên	The old house has creaky floors.	Ngôi nhà cũ có sàn gỗ kêu cọt kẹt.		/ˈkriːki/	mirabi-ai-2026-10	active
+domestic.home	domestic	adjective	5	home	(thuộc) việc nhà, gia đình	liên quan đến nhà cửa và việc trong nhà	Cooking and cleaning are domestic tasks.	Nấu ăn và dọn dẹp là những việc nhà.		/dəˈmestɪk/	mirabi-ai-2026-10	active
+draughty	draughty	adjective	5	home	lùa gió, có gió lọt vào	nhà, phòng có khe hở khiến gió lạnh lọt vào	The old windows make the room draughty.	Những ô cửa sổ cũ khiến căn phòng bị gió lùa.	drafty	/ˈdrɑːfti/	mirabi-ai-2026-10	active
+soundproof	soundproof	adjective	5	home	cách âm	phòng, tường không cho tiếng ồn lọt qua	He plays the drums in a soundproof room.	Anh ấy chơi trống trong một căn phòng cách âm.		/ˈsaʊndpruːf/	mirabi-ai-2026-10	active
+mouldy	mouldy	adjective	5	home	bị mốc	có nấm mốc do ẩm lâu ngày	The bread in the cupboard has gone mouldy.	Bánh mì trong tủ đã bị mốc.	moldy	/ˈməʊldi/	mirabi-ai-2026-10	active
+built-in	built-in	adjective	5	home	âm tường, gắn liền	tủ, kệ được làm liền vào tường	The bedroom has a built-in wardrobe.	Phòng ngủ có tủ quần áo âm tường.		/ˌbɪlt ˈɪn/	mirabi-ai-2026-10	active
+cluttered	cluttered	adjective	5	home	chất đầy đồ, ngổn ngang	phòng, bàn có quá nhiều đồ vật	My desk is so cluttered that I can't work.	Bàn tôi ngổn ngang đồ đến mức không làm việc được.		/ˈklʌtəd/	mirabi-ai-2026-10	active
+leaky	leaky	adjective	5	home	bị rò, bị dột	vòi, ống, mái nhà để nước chảy ra	We need to fix the leaky roof before the rain.	Chúng tôi cần sửa mái nhà bị dột trước mùa mưa.		/ˈliːki/	mirabi-ai-2026-10	active
+securely	securely	adverb	5	home	chắc chắn, an toàn	khóa, đóng cửa cẩn thận để không ai vào được	Make sure the doors are securely locked.	Hãy chắc chắn các cửa đã được khóa cẩn thận.		/sɪˈkjʊəli/	mirabi-ai-2026-10	active
+spotlessly	spotlessly	adverb	5	home	sạch tinh tươm	dùng trước clean để nhấn mạnh rất sạch	Her kitchen is always spotlessly clean.	Nhà bếp của cô ấy lúc nào cũng sạch tinh tươm.		/ˈspɒtləsli/	mirabi-ai-2026-10	active
+put_your_house_in_order	put your house in order	idiom	6	home	thu xếp lại việc của mình	giải quyết vấn đề của bản thân trước khi chê người khác	You should put your own house in order first.	Bạn nên thu xếp lại việc của mình trước đã.	put your own house in order		mirabi-ai-2026-10	active
+skeleton_in_the_cupboard	skeleton in the cupboard	idiom	6	home	bí mật đáng xấu hổ	chuyện cũ trong nhà mà ai cũng muốn giấu	Every family has a skeleton in the cupboard.	Gia đình nào cũng có một bí mật đáng xấu hổ.	skeleton in the closet		mirabi-ai-2026-10	active
+sweep_under_the_carpet	sweep under the carpet	idiom	6	home	ỉm đi, che giấu (vấn đề)	cố giấu chuyện rắc rối thay vì giải quyết	Don't sweep the problem under the carpet.	Đừng ỉm vấn đề đi như thế.	sweep under the rug		mirabi-ai-2026-10	active
+everything_but_the_kitchen_sink	everything but the kitchen sink	idiom	6	home	mang theo đủ thứ trên đời	mang quá nhiều đồ, gần như mọi thứ trong nhà	She packed everything but the kitchen sink for a weekend trip.	Đi chơi cuối tuần mà cô ấy mang theo đủ thứ trên đời.			mirabi-ai-2026-10	active
+potter_about	potter about	phrasal_verb	6	home	loay hoay việc lặt vặt	thong thả làm những việc nhỏ quanh nhà, vườn	Grandpa likes to potter about in the garden.	Ông thích loay hoay làm việc lặt vặt ngoài vườn.	potter around|putter around		mirabi-ai-2026-10	active
+skirting_board	skirting board	noun	6	home	len chân tường	thanh gỗ chạy dọc chân tường sát sàn	Dust collects along the skirting boards.	Bụi bám dọc theo len chân tường.	baseboard		mirabi-ai-2026-10	active
+upkeep	upkeep	noun	6	home	chi phí duy trì nhà cửa	tiền và công sức để giữ nhà luôn tốt	The upkeep of a big house is expensive.	Chi phí duy trì một căn nhà lớn rất tốn kém.		/ˈʌpkiːp/	mirabi-ai-2026-10	active
+threshold	threshold	noun	6	home	ngưỡng cửa	thanh gỗ hoặc đá dưới khung cửa ra vào	He stopped at the threshold and took off his shoes.	Anh ấy dừng ở ngưỡng cửa và cởi giày.		/ˈθreʃhəʊld/	mirabi-ai-2026-10	active
+evict	evict	verb	6	home	đuổi (người thuê) ra khỏi nhà	chủ nhà bắt người thuê dọn đi, thường vì nợ tiền	The landlord evicted them for not paying the rent.	Chủ nhà đuổi họ đi vì không trả tiền thuê.		/ɪˈvɪkt/	mirabi-ai-2026-10	active
+sublet	sublet	verb	6	home	cho thuê lại	cho người khác thuê lại nhà, phòng mình đang thuê	I sublet my room while I was abroad.	Tôi cho thuê lại phòng trong thời gian ra nước ngoài.	sublease	/ˌsʌbˈlet/	mirabi-ai-2026-10	active
+house-sit	house-sit	verb	6	home	trông nhà hộ	ở lại chăm nom nhà khi chủ nhà đi vắng	I'm house-sitting for my aunt while she's on holiday.	Tôi đang trông nhà hộ dì trong lúc dì đi nghỉ.		/ˈhaʊs sɪt/	mirabi-ai-2026-10	active
+hoard	hoard	verb	6	home	tích trữ, giữ khư khư	giữ lại quá nhiều đồ không dùng đến	My grandmother hoards plastic bags.	Bà tôi tích trữ túi ni lông.		/hɔːd/	mirabi-ai-2026-10	active
+insulate	insulate	verb	6	home	cách nhiệt	lót vật liệu để giữ nhà mát hoặc ấm	We insulated the roof to keep the house cool.	Chúng tôi cách nhiệt mái để giữ nhà mát mẻ.		/ˈɪnsjuleɪt/	mirabi-ai-2026-10	active
+uninhabitable	uninhabitable	adjective	6	home	không thể ở được	nhà quá hỏng, nguy hiểm để sống	After the flood, the house was uninhabitable.	Sau trận lũ, ngôi nhà không thể ở được nữa.		/ˌʌnɪnˈhæbɪtəbl/	mirabi-ai-2026-10	active
+semi-detached	semi-detached	adjective	6	home	(nhà) song lập	nhà chung một bức tường với một nhà bên cạnh	They live in a semi-detached house.	Họ sống trong một căn nhà song lập.		/ˌsemi dɪˈtætʃt/	mirabi-ai-2026-10	active
+pristine.home	pristine	adjective	6	home	như mới, tinh tươm	đồ đạc, nhà cửa còn nguyên vẹn, rất sạch	The flat was in pristine condition.	Căn hộ còn trong tình trạng như mới.		/ˈprɪstiːn/	mirabi-ai-2026-10	active
+dilapidated	dilapidated	adjective	6	home	đổ nát, xập xệ	nhà cửa cũ, hư hỏng nặng	They bought a dilapidated old house in the village.	Họ mua một căn nhà cũ xập xệ trong làng.		/dɪˈlæpɪdeɪtɪd/	mirabi-ai-2026-10	active
+rickety	rickety	adjective	6	home	ọp ẹp, sắp gãy	bàn ghế, cầu thang yếu, lung lay	Be careful on those rickety stairs.	Cẩn thận với cái cầu thang ọp ẹp đó.		/ˈrɪkəti/	mirabi-ai-2026-10	active
+lived-in	lived-in	adjective	6	home	có hơi ấm người ở	căn nhà trông ấm cúng, có dấu vết sinh hoạt	I like the lived-in feel of her kitchen.	Tôi thích cảm giác có hơi ấm người ở trong căn bếp của cô ấy.		/ˈlɪvd ɪn/	mirabi-ai-2026-10	active
+house-proud	house-proud	adjective	6	home	mê chăm chút nhà cửa	rất kỹ tính trong việc giữ nhà sạch đẹp	My aunt is so house-proud that she cleans every day.	Dì tôi mê chăm chút nhà cửa đến mức ngày nào cũng lau dọn.		/ˈhaʊs praʊd/	mirabi-ai-2026-10	active
+self-contained	self-contained	adjective	6	home	khép kín (căn hộ, phòng)	có bếp, nhà vệ sinh riêng, không dùng chung	I rent a self-contained room near the university.	Tôi thuê một phòng khép kín gần trường đại học.		/ˌself kənˈteɪnd/	mirabi-ai-2026-10	active
+underfoot	underfoot	adverb	6	home	dưới chân, vướng chân	đồ đạc vương vãi trên sàn chỗ mình đi	There were toys underfoot everywhere.	Đồ chơi vương vãi dưới chân khắp nơi.		/ˌʌndəˈfʊt/	mirabi-ai-2026-10	active
+ajar	ajar	adverb	6	home	hé mở (cửa)	cửa không đóng hẳn, để hở một chút	Leave the door ajar so the cat can come in.	Để cửa hé mở cho con mèo vào được.		/əˈdʒɑː/	mirabi-ai-2026-10	active

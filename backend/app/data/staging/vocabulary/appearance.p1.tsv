@@ -1,0 +1,87 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+tall	tall	adjective	1	appearance	cao	nói về người có chiều cao lớn	My brother is very tall.	Anh trai tôi rất cao.		/tɔːl/
+short.height	short	adjective	1	appearance	thấp, lùn	nói về người có chiều cao dưới mức trung bình	She is short, but she plays basketball well.	Cô ấy thấp nhưng chơi bóng rổ giỏi.		/ʃɔːt/
+thin	thin	adjective	1	appearance	gầy	người ít thịt, cách nói trung tính	You look thin. Are you eating enough?	Trông bạn gầy quá. Bạn có ăn đủ không?		/θɪn/
+fat	fat	adjective	1	appearance	béo, mập	cách nói thẳng về người nhiều mỡ, dễ làm người nghe phật lòng	He was fat as a child, but now he plays a lot of sport.	Hồi nhỏ anh ấy béo, nhưng giờ anh ấy chơi thể thao rất nhiều.		/fæt/
+slim	slim	adjective	1	appearance	thon thả, mảnh mai	người gầy một cách đẹp, cân đối (lời khen)	She is tall and slim.	Cô ấy cao và thon thả.		/slɪm/
+beautiful	beautiful	adjective	1	appearance	đẹp (rất đẹp)	khen phụ nữ, em bé có vẻ đẹp nổi bật	The bride looked beautiful.	Cô dâu trông thật đẹp.		/ˈbjuːtɪfl/
+pretty	pretty	adjective	1	appearance	xinh, xinh xắn	nói về con gái, phụ nữ có nét đẹp dễ thương	Your daughter is so pretty!	Con gái bạn xinh quá!		/ˈprɪti/
+handsome	handsome	adjective	1	appearance	đẹp trai	khen đàn ông, con trai có vẻ ngoài đẹp	Her husband is tall and handsome.	Chồng cô ấy cao và đẹp trai.		/ˈhænsəm/
+ugly	ugly	adjective	1	appearance	xấu xí	có vẻ ngoài khó coi, không đẹp	I felt ugly with my new haircut.	Tôi thấy mình xấu xí với kiểu tóc mới.		/ˈʌɡli/
+cute	cute	adjective	1	appearance	dễ thương, đáng yêu	nói về em bé, người trẻ có vẻ ngoài đáng yêu	What a cute baby!	Em bé dễ thương quá!		/kjuːt/
+hair	hair	noun	1	appearance	tóc	phần lông mọc trên đầu người	She has beautiful hair.	Cô ấy có mái tóc đẹp.		/heə/
+face	face	noun	1	appearance	khuôn mặt	phần trước của đầu, có mắt, mũi, miệng	He has a kind face.	Anh ấy có khuôn mặt hiền hậu.		/feɪs/
+cheek	cheek	noun	1	appearance	má	hai bên khuôn mặt, dưới mắt	The baby has round pink cheeks.	Em bé có đôi má tròn, hồng hào.		/tʃiːk/
+curly	curly	adjective	1	appearance	xoăn	nói về tóc có nhiều lọn xoăn	My sister has curly hair.	Em gái tôi có mái tóc xoăn.		/ˈkɜːli/
+straight.hair	straight	adjective	1	appearance	thẳng (tóc)	nói về tóc suôn, không xoăn	She has long straight hair.	Cô ấy có mái tóc dài và thẳng.		/streɪt/
+blond	blond	adjective	1	appearance	vàng hoe (tóc)	tóc màu vàng, hay gặp ở người phương Tây	The boy has blond hair and blue eyes.	Cậu bé có tóc vàng hoe và mắt xanh.	blonde	/blɒnd/
+beard	beard	noun	1	appearance	râu (quai nón)	râu mọc ở cằm và hai bên má	My grandfather has a long white beard.	Ông tôi có bộ râu dài màu trắng.		/bɪəd/
+moustache	moustache	noun	1	appearance	ria mép	râu mọc phía trên môi trên	My dad has a moustache.	Bố tôi để ria mép.	mustache	/məˈstɑːʃ/
+look.appear	look	verb	1	appearance	trông (có vẻ)	nói về vẻ bề ngoài: trông vui, trông đẹp	You look happy today.	Hôm nay trông bạn vui thế.		/lʊk/
+look_like	look like	phrasal_verb	1	appearance	trông giống	khi ai đó có ngoại hình giống người khác	You look like your mother.	Bạn trông giống mẹ bạn.
+what_does_she_look_like	what does she look like	phrase	1	appearance	cô ấy trông thế nào?	hỏi về ngoại hình của một người	What does she look like? Is she tall?	Cô ấy trông thế nào? Cô ấy có cao không?	what does he look like
+look_good	look good	collocation	1	appearance	trông đẹp, trông ổn	khen vẻ ngoài, kiểu tóc, trang phục của ai	You look good in that photo.	Bạn trông đẹp trong bức ảnh đó.
+look_young	look young	collocation	1	appearance	trông trẻ	có vẻ ngoài ít tuổi	Your mum looks so young!	Mẹ bạn trông trẻ quá!
+look_tired	look tired	collocation	1	appearance	trông mệt mỏi	vẻ mặt cho thấy thiếu ngủ, mệt	You look tired. Did you sleep well?	Trông bạn mệt mỏi quá. Bạn ngủ có ngon không?
+long_hair	long hair	collocation	1	appearance	tóc dài	tóc để dài quá vai	She has long hair.	Cô ấy để tóc dài.
+short_hair	short hair	collocation	1	appearance	tóc ngắn	tóc cắt ngắn	He has short hair.	Anh ấy để tóc ngắn.
+black_hair	black hair	collocation	1	appearance	tóc đen	màu tóc phổ biến nhất ở người Việt	Most Vietnamese people have black hair.	Phần lớn người Việt có tóc đen.
+dark_hair	dark hair	collocation	1	appearance	tóc sẫm màu	tóc màu đen hoặc nâu đậm	She has dark hair and brown eyes.	Cô ấy có tóc sẫm màu và mắt nâu.
+brown_eyes	brown eyes	collocation	1	appearance	mắt nâu	nói về màu mắt	He has big brown eyes.	Anh ấy có đôi mắt nâu to.
+blue_eyes	blue eyes	collocation	1	appearance	mắt xanh	đôi mắt màu xanh dương	The baby has blue eyes.	Em bé có đôi mắt xanh.
+big_eyes	big eyes	collocation	1	appearance	mắt to	đôi mắt to, tròn	She has big eyes and a small nose.	Cô ấy có đôi mắt to và cái mũi nhỏ.
+round_face	round face	collocation	1	appearance	mặt tròn	khuôn mặt tròn, đầy đặn	He has a round face and short hair.	Anh ấy có khuôn mặt tròn và tóc ngắn.
+big_nose	big nose	collocation	1	appearance	mũi to	cái mũi to	The clown has a big red nose.	Chú hề có cái mũi to màu đỏ.
+long_legs	long legs	collocation	1	appearance	chân dài	đôi chân dài	Models usually have long legs.	Người mẫu thường có đôi chân dài.
+hair_colour	hair colour	collocation	1	appearance	màu tóc	màu của tóc	What's your natural hair colour?	Màu tóc tự nhiên của bạn là gì?	hair color
+eye_colour	eye colour	collocation	1	appearance	màu mắt	màu của mắt	Eye colour often comes from your parents.	Màu mắt thường được thừa hưởng từ bố mẹ.	eye color
+good-looking	good-looking	adjective	2	appearance	ưa nhìn, có ngoại hình đẹp	dùng được cho cả nam và nữ	He's a good-looking young man.	Anh ấy là một chàng trai trẻ ưa nhìn.		/ˌɡʊdˈlʊkɪŋ/
+attractive	attractive	adjective	2	appearance	hấp dẫn, cuốn hút	vẻ ngoài khiến người khác chú ý, có cảm tình	She is an attractive woman with a lovely smile.	Cô ấy là một phụ nữ cuốn hút với nụ cười dễ mến.		/əˈtræktɪv/
+overweight	overweight	adjective	2	appearance	thừa cân	cách nói lịch sự về người hơi béo	The doctor said I was a bit overweight.	Bác sĩ nói tôi hơi thừa cân.		/ˌəʊvəˈweɪt/
+skinny	skinny	adjective	2	appearance	gầy nhom, gầy nhẳng	người quá gầy, hơi có ý chê	He was a skinny boy, but now he's strong.	Hồi nhỏ anh ấy gầy nhom, nhưng giờ thì khỏe mạnh.		/ˈskɪni/
+plump	plump	adjective	2	appearance	đầy đặn, tròn trịa	người hơi béo, cách nói nhẹ nhàng, dễ nghe	My aunt is a short, plump woman.	Dì tôi là một người phụ nữ thấp, tròn trịa.		/plʌmp/
+chubby	chubby	adjective	2	appearance	mũm mĩm, bụ bẫm	thường nói về trẻ con, má phúng phính	Look at the baby's chubby cheeks!	Nhìn đôi má bụ bẫm của em bé kìa!		/ˈtʃʌbi/
+bald	bald	adjective	2	appearance	hói	người không còn tóc trên đầu	My uncle is completely bald.	Chú tôi hói hoàn toàn.		/bɔːld/
+wavy	wavy	adjective	2	appearance	gợn sóng, xoăn nhẹ	tóc uốn lượn nhẹ, không xoăn tít	She has shoulder-length wavy hair.	Cô ấy có mái tóc gợn sóng dài ngang vai.		/ˈweɪvi/
+fair.skin	fair	adjective	2	appearance	trắng (da)	nói về làn da sáng màu	She has fair skin and burns easily in the sun.	Cô ấy có làn da trắng và dễ bị cháy nắng.		/feə/
+fair.hair	fair	adjective	2	appearance	vàng nhạt (tóc)	nói về tóc màu sáng, vàng nhạt	The twins both have fair hair.	Cặp song sinh đều có tóc vàng nhạt.	blond|blonde	/feə/
+pale	pale	adjective	2	appearance	nhợt nhạt, xanh xao	da mặt trắng bệch vì ốm, mệt, sợ	You look pale. Are you ill?	Trông bạn xanh xao quá. Bạn bị ốm à?		/peɪl/
+tanned	tanned	adjective	2	appearance	rám nắng	da sạm màu đẹp sau khi phơi nắng	He came back from the beach tanned and relaxed.	Anh ấy đi biển về, da rám nắng và thư thái.	tan	/tænd/
+dark-haired	dark-haired	adjective	2	appearance	có tóc sẫm màu	người có tóc đen hoặc nâu đậm	A dark-haired woman opened the door.	Một người phụ nữ tóc sẫm màu ra mở cửa.		/ˌdɑːkˈheəd/
+smart.appearance	smart	adjective	2	appearance	bảnh bao, chỉn chu	người ăn mặc, đầu tóc gọn gàng, lịch sự	You look very smart in that suit.	Trông bạn rất bảnh bao trong bộ vest đó.		/smɑːt/
+haircut	haircut	noun	2	appearance	đầu tóc mới cắt; việc cắt tóc	kiểu tóc sau khi đi cắt	I like your new haircut!	Mình thích đầu tóc mới cắt của bạn!		/ˈheəkʌt/
+hairstyle	hairstyle	noun	2	appearance	kiểu tóc	cách để tóc, làm tóc nói chung	She changes her hairstyle every month.	Tháng nào cô ấy cũng đổi kiểu tóc.		/ˈheəstaɪl/
+ponytail	ponytail	noun	2	appearance	tóc đuôi ngựa	tóc buộc gọn ra sau đầu	She wears her hair in a ponytail.	Cô ấy buộc tóc đuôi ngựa.		/ˈpəʊniteɪl/
+fringe	fringe	noun	2	appearance	tóc mái	phần tóc cắt ngắn rủ xuống trán	I cut my fringe myself.	Tôi tự cắt tóc mái.	bangs	/frɪndʒ/
+plait	plait	noun	2	appearance	bím tóc	tóc tết thành dải	The girl has two long plaits.	Cô bé có hai bím tóc dài.	braid	/plæt/
+height	height	noun	2	appearance	chiều cao	độ cao của một người	What's your height?	Chiều cao của bạn là bao nhiêu?		/haɪt/
+beauty	beauty	noun	2	appearance	vẻ đẹp, sắc đẹp	nét đẹp về ngoại hình của một người	She is famous for her beauty.	Cô ấy nổi tiếng vì sắc đẹp.		/ˈbjuːti/
+appearance	appearance	noun	2	appearance	vẻ ngoài, ngoại hình	cách một người trông như thế nào	He cares a lot about his appearance.	Anh ấy rất chăm chút vẻ ngoài.		/əˈpɪərəns/
+eyebrow	eyebrow	noun	2	appearance	lông mày	đường lông phía trên mắt	She has thin, dark eyebrows.	Cô ấy có đôi lông mày mảnh và đậm màu.		/ˈaɪbraʊ/
+eyelash	eyelash	noun	2	appearance	lông mi	sợi lông mọc ở mép mí mắt	The baby has long eyelashes.	Em bé có lông mi dài.		/ˈaɪlæʃ/
+forehead	forehead	noun	2	appearance	trán	phần mặt phía trên lông mày	He has a high forehead.	Anh ấy có vầng trán cao.		/ˈfɔːhed/
+chin	chin	noun	2	appearance	cằm	phần dưới cùng của khuôn mặt	He has a small scar on his chin.	Anh ấy có một vết sẹo nhỏ trên cằm.		/tʃɪn/
+wrinkle	wrinkle	noun	2	appearance	nếp nhăn	đường nhăn trên da, nhất là khi về già	My grandmother has lots of wrinkles.	Bà tôi có rất nhiều nếp nhăn.		/ˈrɪŋkl/
+freckle	freckle	noun	2	appearance	tàn nhang	đốm nâu nhỏ trên da, nhất là ở mặt	She has freckles on her nose.	Cô ấy có tàn nhang trên mũi.		/ˈfrekl/
+dimple	dimple	noun	2	appearance	lúm đồng tiền	chỗ lõm nhỏ trên má khi cười	He has a dimple when he smiles.	Anh ấy có lúm đồng tiền khi cười.		/ˈdɪmpl/
+scar	scar	noun	2	appearance	vết sẹo	dấu vết còn lại trên da sau vết thương	He has a scar above his eye.	Anh ấy có một vết sẹo phía trên mắt.		/skɑː/
+pimple	pimple	noun	2	appearance	nốt mụn	nốt nhỏ sưng đỏ trên da mặt	I have a pimple on my forehead.	Tôi bị một nốt mụn trên trán.	spot|zit	/ˈpɪmpl/
+tattoo	tattoo	noun	2	appearance	hình xăm	hình vẽ vĩnh viễn trên da	He has a tattoo of a dragon on his arm.	Anh ấy có hình xăm con rồng trên tay.		/təˈtuː/
+make-up	make-up	noun	2	appearance	đồ trang điểm, lớp trang điểm	phấn, son dùng làm đẹp khuôn mặt	She doesn't wear much make-up.	Cô ấy không trang điểm đậm.	makeup	/ˈmeɪkʌp/
+lipstick	lipstick	noun	2	appearance	son môi	thỏi son tô lên môi	She is wearing red lipstick.	Cô ấy đang tô son đỏ.		/ˈlɪpstɪk/
+comb.hair	comb	verb	2	appearance	chải (tóc)	dùng lược làm tóc gọn gàng	Comb your hair before you go out.	Chải tóc đi trước khi ra ngoài.	brush	/kəʊm/
+shave	shave	verb	2	appearance	cạo râu	dùng dao cạo làm sạch râu trên mặt	My dad shaves every morning.	Bố tôi cạo râu mỗi sáng.		/ʃeɪv/
+dye	dye	verb	2	appearance	nhuộm (tóc)	đổi màu tóc bằng thuốc nhuộm	She dyed her hair red.	Cô ấy nhuộm tóc màu đỏ.		/daɪ/
+put_on_make-up	put on make-up	collocation	2	appearance	trang điểm	đánh phấn, tô son lên mặt	It takes her ten minutes to put on make-up.	Cô ấy mất mười phút để trang điểm.	put on makeup
+get_a_haircut	get a haircut	collocation	2	appearance	đi cắt tóc	ra tiệm để cắt tóc	I need to get a haircut this weekend.	Cuối tuần này tôi cần đi cắt tóc.	have a haircut
+look_old	look old	collocation	2	appearance	trông già	có vẻ ngoài nhiều tuổi	That photo makes me look old.	Bức ảnh đó làm tôi trông già.
+grey_hair	grey hair	collocation	2	appearance	tóc bạc	tóc chuyển màu trắng xám khi có tuổi	My dad has a lot of grey hair now.	Giờ bố tôi có nhiều tóc bạc.	gray hair
+dark_skin	dark skin	collocation	2	appearance	da ngăm	làn da màu sẫm	He has dark skin from working in the sun.	Anh ấy có làn da ngăm vì làm việc ngoài nắng.
+pretty_face	pretty face	collocation	2	appearance	gương mặt xinh xắn	khen một khuôn mặt dễ thương	She has a pretty face and a lovely smile.	Cô ấy có gương mặt xinh xắn và nụ cười dễ mến.
+white_teeth	white teeth	collocation	2	appearance	răng trắng	hàm răng trắng đẹp	He has a big smile and white teeth.	Anh ấy có nụ cười tươi và hàm răng trắng.
+medium_height	medium height	collocation	2	appearance	chiều cao trung bình	không cao cũng không thấp	He is of medium height.	Anh ấy cao trung bình.	average height
+beautifully	beautifully	adverb	2	appearance	đẹp, một cách đẹp đẽ	khi tóc, trang điểm được làm rất đẹp	Her hair was beautifully done for the wedding.	Tóc cô ấy được làm rất đẹp cho đám cưới.		/ˈbjuːtɪfli/
+you_look_great	you look great	phrase	2	appearance	trông bạn tuyệt lắm	câu khen ngoại hình khi gặp ai	You look great! Have you been on holiday?	Trông bạn tuyệt lắm! Bạn vừa đi nghỉ à?
+how_tall_are_you	how tall are you	phrase	2	appearance	bạn cao bao nhiêu?	hỏi chiều cao của ai đó	How tall are you? I'm one metre sixty.	Bạn cao bao nhiêu? Mình cao một mét sáu.
+youve_grown	you've grown	phrase	2	appearance	cháu lớn quá!	câu người lớn hay nói khi lâu ngày mới gặp trẻ con	Wow, you've grown so much!	Ôi, cháu lớn quá!	you have grown
+who_do_you_look_like	who do you look like	phrase	2	appearance	bạn giống ai trong nhà?	hỏi một người giống bố hay giống mẹ	Who do you look like, your mum or your dad?	Bạn giống ai, mẹ hay bố?

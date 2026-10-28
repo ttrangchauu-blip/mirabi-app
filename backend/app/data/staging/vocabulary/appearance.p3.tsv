@@ -1,0 +1,70 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+youthful	youthful	adjective	4	appearance	trẻ trung	vẻ ngoài tươi trẻ dù đã có tuổi	At sixty, she still has a youthful face.	Ở tuổi sáu mươi, bà ấy vẫn có gương mặt trẻ trung.		/ˈjuːθfl/
+glamorous	glamorous	adjective	4	appearance	quyến rũ, lộng lẫy, sang chảnh	vẻ đẹp hào nhoáng như ngôi sao	She looked glamorous in her evening dress.	Cô ấy trông lộng lẫy trong bộ váy dạ hội.		/ˈɡlæmərəs/
+photogenic	photogenic	adjective	4	appearance	ăn ảnh	người lên ảnh trông rất đẹp	She's very photogenic, so she looks good in every picture.	Cô ấy rất ăn ảnh nên bức nào trông cũng đẹp.		/ˌfəʊtəʊˈdʒenɪk/
+lanky	lanky	adjective	4	appearance	cao lêu nghêu, cao lòng khòng	người cao, gầy, tay chân dài, dáng hơi vụng	He was a lanky teenager with big feet.	Hồi thiếu niên cậu ấy cao lêu nghêu với đôi bàn chân to.		/ˈlæŋki/
+curvy	curvy	adjective	4	appearance	có đường cong, đẫy đà	phụ nữ có ngực, hông đầy đặn	The dress looks great on curvy women.	Chiếc váy trông rất đẹp trên những phụ nữ có đường cong.		/ˈkɜːvi/
+toned	toned	adjective	4	appearance	săn chắc	cơ thể có cơ săn lại nhờ tập luyện	She has toned arms from swimming.	Cô ấy có đôi tay săn chắc nhờ bơi lội.		/təʊnd/
+lean	lean	adjective	4	appearance	gầy gọn, ít mỡ	người thon gọn mà khỏe, không có mỡ thừa	Runners are usually lean.	Vận động viên chạy bộ thường có thân hình gầy gọn.		/liːn/
+bony	bony	adjective	4	appearance	xương xẩu, gầy lộ xương	người, bộ phận gầy đến mức thấy rõ xương	The old man had bony hands.	Ông cụ có đôi bàn tay xương xẩu.		/ˈbəʊni/
+well-groomed	well-groomed	adjective	4	appearance	chải chuốt, chỉn chu	người chăm chút kỹ tóc, râu, móng tay	He is always well-groomed for work.	Anh ấy luôn chải chuốt chỉn chu khi đi làm.		/ˌwelˈɡruːmd/
+unshaven	unshaven	adjective	4	appearance	râu ria lởm chởm	đàn ông không cạo râu mấy ngày	He looked tired and unshaven.	Anh ấy trông mệt mỏi, râu ria lởm chởm.		/ˌʌnˈʃeɪvn/
+rosy	rosy	adjective	4	appearance	hồng hào	má, da có màu hồng khỏe mạnh	The children came in from the snow with rosy cheeks.	Lũ trẻ từ ngoài tuyết vào với đôi má hồng hào.		/ˈrəʊzi/
+glossy	glossy	adjective	4	appearance	bóng mượt (tóc)	tóc khỏe, sáng bóng	She has thick, glossy hair.	Cô ấy có mái tóc dày, bóng mượt.		/ˈɡlɒsi/
+complexion	complexion	noun	4	appearance	nước da (mặt)	màu sắc và tình trạng của da mặt: hồng hào, xanh xao	She has a clear, healthy complexion.	Cô ấy có nước da sáng khỏe.		/kəmˈplekʃn/
+skin_tone	skin tone	collocation	4	appearance	tông da, màu da	màu da tự nhiên: sáng, trung bình, ngăm	Choose a foundation that matches your skin tone.	Hãy chọn kem nền hợp với tông da của bạn.
+acne	acne	noun	4	appearance	mụn trứng cá	tình trạng da nổi nhiều mụn, hay gặp ở tuổi dậy thì	Many teenagers suffer from acne.	Nhiều thanh thiếu niên bị mụn trứng cá.		/ˈækni/
+sideburns	sideburns	noun	4	appearance	tóc mai	tóc, râu mọc dài xuống hai bên má trước tai	He has long sideburns like a rock star.	Anh ấy để tóc mai dài như một ngôi sao nhạc rock.		/ˈsaɪdbɜːnz/
+stubble	stubble	noun	4	appearance	râu lún phún	râu ngắn mọc lại sau vài ngày không cạo	There was a bit of stubble on his chin.	Có ít râu lún phún trên cằm anh ấy.		/ˈstʌbl/
+highlights	highlights	noun	4	appearance	tóc nhuộm highlight	những lọn tóc được nhuộm sáng màu hơn	She had blonde highlights put in her hair.	Cô ấy nhuộm vài lọn highlight vàng trên tóc.		/ˈhaɪlaɪts/
+perm	perm	noun	4	appearance	kiểu tóc uốn (ở tiệm)	tóc uốn xoăn bằng hóa chất, giữ được lâu	My mum had a perm last week.	Tuần trước mẹ tôi đi uốn tóc.		/pɜːm/
+bob.hair	bob	noun	4	appearance	tóc bob (ngắn ngang cằm)	kiểu tóc nữ cắt ngắn đều ngang cằm	She cut her long hair into a short bob.	Cô ấy cắt mái tóc dài thành kiểu bob ngắn.		/bɒb/
+piercing	piercing	noun	4	appearance	khuyên xỏ (trên mũi, môi, rốn)	lỗ xỏ trên cơ thể để đeo khuyên	She has a piercing in her nose.	Cô ấy có một chiếc khuyên ở mũi.		/ˈpɪəsɪŋ/
+posture	posture	noun	4	appearance	tư thế, dáng đứng ngồi	cách giữ lưng, vai khi đứng hoặc ngồi	Good posture makes you look taller.	Tư thế tốt khiến bạn trông cao hơn.		/ˈpɒstʃə/
+lookalike	lookalike	noun	4	appearance	người giống hệt (người nổi tiếng)	người có ngoại hình rất giống một người khác	He works as a lookalike of a famous actor.	Anh ấy làm nghề đóng thế vì giống hệt một nam diễn viên nổi tiếng.		/ˈlʊkəlaɪk/
+six-pack	six-pack	noun	4	appearance	cơ bụng sáu múi	cơ bụng săn chắc chia thành múi	He trains every day to get a six-pack.	Anh ấy tập luyện mỗi ngày để có cơ bụng sáu múi.		/ˈsɪkspæk/
+high_cheekbones	high cheekbones	collocation	4	appearance	gò má cao	xương má nhô cao, khuôn mặt nổi bật	Many models have high cheekbones.	Nhiều người mẫu có gò má cao.
+square_jaw	square jaw	collocation	4	appearance	hàm vuông	quai hàm rộng, góc cạnh, trông nam tính	The actor has a strong square jaw.	Nam diễn viên có quai hàm vuông rất nam tính.
+pointed_chin	pointed chin	collocation	4	appearance	cằm nhọn	cằm thon nhỏ dần thành một điểm	She has a small face with a pointed chin.	Cô ấy có khuôn mặt nhỏ với chiếc cằm nhọn.
+thick_eyebrows	thick eyebrows	collocation	4	appearance	lông mày rậm	lông mày dày, đậm	He has thick eyebrows and dark eyes.	Anh ấy có lông mày rậm và đôi mắt đen.
+full_lips	full lips	collocation	4	appearance	môi dày, đầy đặn	đôi môi căng, dày	She has full lips and a wide smile.	Cô ấy có đôi môi đầy đặn và nụ cười rộng.
+thin_lips	thin lips	collocation	4	appearance	môi mỏng	đôi môi mỏng	He has thin lips and a long nose.	Anh ấy có đôi môi mỏng và chiếc mũi dài.
+straight_nose	straight nose	collocation	4	appearance	mũi thẳng, mũi dọc dừa	sống mũi thẳng, cao	She has a straight nose and big eyes.	Cô ấy có chiếc mũi dọc dừa và đôi mắt to.
+double_eyelids	double eyelids	collocation	4	appearance	mắt hai mí	mí mắt có nếp gấp rõ	She was born with double eyelids.	Cô ấy sinh ra đã có mắt hai mí.
+double_chin	double chin	collocation	4	appearance	cằm nọng, nọng cằm	lớp mỡ thừa dưới cằm	He got a double chin after putting on weight.	Anh ấy bị nọng cằm sau khi tăng cân.
+bags_under_the_eyes	bags under the eyes	collocation	4	appearance	bọng mắt	vùng da sưng phồng dưới mắt khi thiếu ngủ, về già	Bags under the eyes can make you look older.	Bọng mắt có thể khiến bạn trông già hơn.
+dark_circles	dark circles	collocation	4	appearance	quầng thâm mắt	vùng da thâm dưới mắt do thức khuya	I have dark circles because I slept badly.	Tôi bị quầng thâm mắt vì ngủ không ngon.
+split_ends	split ends	collocation	4	appearance	tóc chẻ ngọn	đuôi tóc bị tách đôi vì khô, hư tổn	Cut off your split ends every few months.	Cứ vài tháng hãy cắt phần tóc chẻ ngọn đi.
+facial_hair	facial hair	collocation	4	appearance	râu ria (nói chung)	râu, ria mọc trên mặt đàn ông	He has no facial hair at all.	Anh ấy không có chút râu ria nào.
+pierced_ears	pierced ears	collocation	4	appearance	tai bấm lỗ	tai được xỏ lỗ để đeo khuyên	She got her ears pierced when she was ten.	Cô ấy bấm lỗ tai năm mười tuổi.
+beer_belly	beer belly	collocation	4	appearance	bụng bia	bụng to của đàn ông do uống nhiều bia	My uncle has a big beer belly.	Chú tôi có cái bụng bia to.
+bald_patch	bald patch	collocation	4	appearance	chỗ hói	một mảng da đầu không còn tóc	He's trying to hide his bald patch.	Anh ấy đang cố giấu chỗ hói.
+plastic_surgery	plastic surgery	collocation	4	appearance	phẫu thuật thẩm mỹ	phẫu thuật để thay đổi khuôn mặt, cơ thể cho đẹp	She denies having plastic surgery.	Cô ấy phủ nhận việc đã phẫu thuật thẩm mỹ.	cosmetic surgery
+resemble	resemble	verb	4	appearance	giống (với)	có ngoại hình giống ai, cách nói trang trọng hơn look like	She closely resembles her grandmother.	Cô ấy rất giống bà của mình.		/rɪˈzembl/
+age.get_older	age	verb	4	appearance	già đi	vẻ ngoài thay đổi theo thời gian	He has aged a lot since his illness.	Ông ấy đã già đi nhiều từ khi bị bệnh.		/eɪdʒ/
+slouch	slouch	verb	4	appearance	ngồi, đứng khom lưng	dáng lưng còng, vai rũ xuống	Don't slouch at your desk.	Đừng ngồi khom lưng ở bàn học.		/slaʊtʃ/
+pluck	pluck	verb	4	appearance	nhổ (lông mày)	dùng nhíp nhổ bớt lông cho gọn	She plucks her eyebrows every week.	Tuần nào cô ấy cũng nhổ lông mày.		/plʌk/
+blow-dry	blow-dry	verb	4	appearance	sấy tạo kiểu (tóc)	dùng máy sấy và lược để làm khô và tạo kiểu tóc	The hairdresser washed and blow-dried my hair.	Thợ làm tóc gội và sấy tạo kiểu cho tôi.		/ˈbləʊdraɪ/
+wax	wax	verb	4	appearance	tẩy lông bằng sáp	dùng sáp nóng để loại bỏ lông trên da	She waxes her legs before summer.	Cô ấy tẩy lông chân bằng sáp trước mùa hè.		/wæks/
+bleach	bleach	verb	4	appearance	tẩy (tóc) cho sáng màu	dùng thuốc làm tóc nhạt màu trước khi nhuộm	He bleached his hair almost white.	Anh ấy tẩy tóc gần như trắng.		/bliːtʃ/
+moisturise	moisturise	verb	4	appearance	dưỡng ẩm (da)	thoa kem để da mềm, không khô	Moisturise your face every night.	Hãy dưỡng ẩm cho da mặt mỗi tối.	moisturize	/ˈmɔɪstʃəraɪz/
+glow.skin	glow	verb	4	appearance	(da) rạng rỡ, ửng sáng	da mặt trông tươi tắn, khỏe mạnh	Her skin was glowing after the holiday.	Da cô ấy rạng rỡ sau kỳ nghỉ.		/ɡləʊ/
+groom.self	groom	verb	4	appearance	chải chuốt (bản thân)	chăm sóc tóc, râu, móng cho gọn gàng, đẹp	He spends ages grooming himself in front of the mirror.	Anh ấy mất cả buổi chải chuốt trước gương.		/ɡruːm/
+beam	beam	verb	4	appearance	cười rạng rỡ	gương mặt tươi cười rất vui	She beamed with pride at her daughter.	Bà ấy cười rạng rỡ đầy tự hào nhìn con gái.		/biːm/
+makeover	makeover	noun	4	appearance	sự lột xác (ngoại hình)	thay đổi hoàn toàn kiểu tóc, trang điểm, quần áo	She had a complete makeover before the party.	Cô ấy đã lột xác hoàn toàn trước bữa tiệc.		/ˈmeɪkəʊvə/
+compliment	compliment	verb	4	appearance	khen ngợi	nói lời khen về vẻ ngoài, quần áo của ai	Everyone complimented her on her new hairstyle.	Ai cũng khen kiểu tóc mới của cô ấy.		/ˈkɒmplɪment/
+slim_down	slim down	phrasal_verb	4	appearance	giảm cân cho thon gọn	ăn kiêng, tập luyện để người gọn lại	He slimmed down before his wedding.	Anh ấy giảm cân cho thon gọn trước đám cưới.
+grow_out	grow out	phrasal_verb	4	appearance	để (tóc) dài ra	để kiểu tóc ngắn hay tóc nhuộm mọc dài hết	I'm growing out my fringe.	Tôi đang để tóc mái dài ra.
+shave_off	shave off	phrasal_verb	4	appearance	cạo sạch (râu, tóc)	cạo bỏ hoàn toàn bộ râu hay mái tóc	He shaved off his beard for the summer.	Anh ấy cạo sạch râu cho mùa hè.
+pin_up	pin up	phrasal_verb	4	appearance	kẹp, búi (tóc) lên	dùng kẹp giữ tóc lên cao	She pinned up her hair for the party.	Cô ấy kẹp tóc lên để đi dự tiệc.
+cover_up	cover up	phrasal_verb	4	appearance	che đi (khuyết điểm)	dùng phấn, quần áo che vết sẹo, mụn	She used make-up to cover up the scar.	Cô ấy dùng phấn trang điểm để che vết sẹo.
+freshen_up	freshen up	phrasal_verb	4	appearance	rửa mặt, chỉnh trang lại	rửa ráy, chải tóc cho tươi tỉnh sau chuyến đi	I'd like to freshen up before dinner.	Tôi muốn rửa mặt chỉnh trang lại trước bữa tối.
+stand_up_straight	stand up straight	collocation	4	appearance	đứng thẳng lưng	đứng ngay ngắn, không khom	Stand up straight and don't slouch.	Đứng thẳng lưng lên, đừng khom người.
+have_your_hair_done	have your hair done	collocation	4	appearance	đi làm tóc (ở tiệm)	nhờ thợ làm tóc gội, uốn, tạo kiểu	You should have your hair done before the wedding.	Bạn nên đi làm tóc trước đám cưới.	get your hair done
+look_your_age	look your age	collocation	4	appearance	trông đúng tuổi	vẻ ngoài phù hợp với số tuổi thật	You don't look your age at all!	Trông bạn trẻ hơn tuổi thật nhiều!
+keep_your_figure	keep your figure	collocation	4	appearance	giữ dáng	giữ cho cơ thể thon gọn, không tăng cân	How do you keep your figure after having three children?	Làm sao chị giữ được dáng sau ba lần sinh con?
+elegantly	elegantly	adverb	4	appearance	một cách thanh lịch	ăn mặc, đi đứng sang trọng, tinh tế	She was elegantly dressed in black.	Cô ấy diện đồ đen thanh lịch.		/ˈelɪɡəntli/
+remarkably	remarkably	adverb	4	appearance	đáng kinh ngạc, rất (đáng chú ý)	nói vẻ ngoài khác thường: trẻ, giống đến lạ	She looks remarkably young for her age.	Bà ấy trông trẻ đến kinh ngạc so với tuổi.		/rɪˈmɑːkəbli/
+physically	physically	adverb	4	appearance	về mặt ngoại hình, thể chất	nói về vẻ bề ngoài, cơ thể chứ không phải tính cách	He is physically attractive but not very kind.	Anh ấy có ngoại hình hấp dẫn nhưng không tốt bụng lắm.		/ˈfɪzɪkli/
+heavily	heavily	adverb	4	appearance	(vóc người) to nặng, đậm	dùng trong heavily built: thân hình to, nặng nề	The guard was a tall, heavily built man.	Người bảo vệ là một người đàn ông cao, to nặng.		/ˈhevɪli/
+unusually	unusually	adverb	4	appearance	khác thường, hơn hẳn bình thường	nói về đặc điểm ngoại hình hiếm gặp	She is unusually tall for a Vietnamese woman.	Cô ấy cao khác thường so với phụ nữ Việt Nam.		/ʌnˈjuːʒuəli/

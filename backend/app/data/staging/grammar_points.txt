@@ -1,0 +1,87 @@
+pronoun_subject	1	Đại từ nhân xưng chủ ngữ	I, you, he, she, it, we, they đứng trước động từ, làm chủ ngữ.
+pronoun_object	1	Đại từ tân ngữ	me, you, him, her, it, us, them đứng sau động từ hoặc giới từ.
+possessive_adjective	1	Tính từ sở hữu	my, your, his, her, its, our, their đứng trước danh từ.
+be_present	1	Động từ to be ở hiện tại	I am; he/she/it is; you/we/they are. Phủ định thêm not, câu hỏi đảo be lên trước.
+article_a_an	1	Mạo từ a / an	a trước âm phụ âm, an trước âm nguyên âm (theo cách đọc, không theo chữ viết).
+noun_plural	1	Danh từ số nhiều	Thường thêm -s; -s/-sh/-ch/-x/-o thêm -es; phụ âm + y → -ies; có dạng bất quy tắc.
+demonstratives	1	This / that / these / those	this/that + số ít, these/those + số nhiều; this/these ở gần, that/those ở xa.
+there_is_are	1	There is / There are	There is + danh từ số ít hoặc không đếm được; There are + danh từ số nhiều.
+have_has	1	Have / has	I/you/we/they have; he/she/it has. Phủ định và câu hỏi dùng do/does + have.
+present_simple_affirmative	1	Hiện tại đơn: câu khẳng định	Thói quen, sự thật: I/you/we/they + V; he/she/it + V-s/es.
+present_simple_negative_question	1	Hiện tại đơn: phủ định và câu hỏi	don't/doesn't + V nguyên mẫu; Do/Does + chủ ngữ + V nguyên mẫu?
+imperative	1	Câu mệnh lệnh	Dùng V nguyên mẫu để yêu cầu; Don't + V để cấm; Let's + V để rủ.
+can_cannot	1	Can / can't	can + V nguyên mẫu: khả năng, xin phép; không thêm -s, không dùng to.
+prep_place	1	Giới từ chỉ nơi chốn	in (trong), on (trên bề mặt), under, next to, behind, in front of, between.
+prep_time	1	Giới từ chỉ thời gian	at + giờ; on + ngày, thứ; in + tháng, năm, mùa, buổi.
+wh_questions	1	Câu hỏi Wh-	Từ để hỏi + trợ động từ/be + chủ ngữ + động từ? (What, Where, When, Who, Why, How...).
+possessive_s	1	Sở hữu cách 's	người/vật sở hữu + 's + vật bị sở hữu; danh từ số nhiều tận cùng -s chỉ thêm '.
+adverb_frequency	1	Trạng từ chỉ tần suất	always, usually, often, sometimes, never đứng trước động từ thường, sau be.
+present_continuous	2	Hiện tại tiếp diễn	am/is/are + V-ing: việc đang diễn ra lúc nói hoặc quanh thời điểm hiện tại.
+present_simple_vs_continuous	2	Hiện tại đơn và hiện tại tiếp diễn	Thói quen, sự thật → hiện tại đơn; việc đang xảy ra → hiện tại tiếp diễn. Động từ trạng thái ít dùng V-ing.
+past_simple_be	2	Quá khứ của to be: was / were	I/he/she/it was; you/we/they were.
+past_simple_affirmative	2	Quá khứ đơn: câu khẳng định	V-ed với động từ có quy tắc; động từ bất quy tắc dùng cột 2.
+past_simple_negative_question	2	Quá khứ đơn: phủ định và câu hỏi	didn't + V nguyên mẫu; Did + chủ ngữ + V nguyên mẫu?
+countable_uncountable	2	Danh từ đếm được và không đếm được	many + danh từ đếm được số nhiều, much + không đếm được; some ở câu khẳng định, any ở phủ định và câu hỏi.
+quantifier_few_little	2	A few / a little / few / little	a few/few + danh từ đếm được; a little/little + không đếm được; có a = một ít (đủ), không a = rất ít.
+comparative	2	So sánh hơn	tính từ ngắn + -er + than; more + tính từ dài + than; good → better, bad → worse.
+superlative	2	So sánh nhất	the + tính từ ngắn + -est; the most + tính từ dài; good → the best, bad → the worst.
+possessive_pronoun	2	Đại từ sở hữu	mine, yours, his, hers, ours, theirs thay cho tính từ sở hữu + danh từ.
+future_going_to	2	Tương lai với be going to	am/is/are going to + V: dự định đã có, hoặc dự đoán có dấu hiệu.
+future_will	2	Tương lai với will	will + V: quyết định lúc nói, lời hứa, dự đoán; won't = will not.
+article_the_zero	2	Mạo từ the và không dùng mạo từ	the cho vật đã xác định hoặc duy nhất; không dùng mạo từ khi nói chung chung với danh từ số nhiều/không đếm được.
+conjunction_basic	2	Liên từ cơ bản	and (thêm ý), but (đối lập), or (lựa chọn), so (kết quả), because (nguyên nhân).
+prep_movement	2	Giới từ chỉ chuyển động	into, out of, across, through, along, up, down, over, towards.
+adverb_manner	2	Trạng từ chỉ cách thức	tính từ + -ly (slow → slowly); good → well; fast, hard giữ nguyên.
+modal_must_have_to_should	2	Must / have to / should	must, have to: bắt buộc; should: lời khuyên; sau đó là V nguyên mẫu.
+verb_like_want	2	Like / want / would like	like, love, enjoy, hate + V-ing; want, would like + to V.
+present_perfect	3	Hiện tại hoàn thành	have/has + V3: trải nghiệm, kết quả còn liên quan tới hiện tại; ever, never, already, yet, just.
+present_perfect_for_since	3	Hiện tại hoàn thành với for / since	for + khoảng thời gian; since + mốc thời gian.
+present_perfect_vs_past_simple	3	Hiện tại hoàn thành và quá khứ đơn	Thời điểm cụ thể đã qua (yesterday, in 2019, ago) → quá khứ đơn; không nêu thời điểm, liên quan hiện tại → hiện tại hoàn thành.
+past_continuous	3	Quá khứ tiếp diễn	was/were + V-ing: việc đang diễn ra trong quá khứ; when + quá khứ đơn cắt ngang, while + tiếp diễn.
+future_arrangements	3	Các cách nói về tương lai	Lịch hẹn đã sắp xếp → hiện tại tiếp diễn; dự định → be going to; quyết định tức thì → will; lịch trình → hiện tại đơn.
+conditional_zero_first	3	Câu điều kiện loại 0 và loại 1	Loại 0: If + hiện tại đơn, hiện tại đơn (sự thật). Loại 1: If + hiện tại đơn, will + V (có thể xảy ra).
+modal_possibility	3	May / might / could	may, might, could + V: có thể, có lẽ (không chắc chắn).
+modal_obligation	3	Mustn't / don't have to / needn't	mustn't = không được phép; don't have to / needn't = không cần thiết.
+gerund_infinitive	3	Danh động từ và động từ nguyên mẫu	Có động từ theo sau là V-ing (enjoy, avoid, finish), có động từ theo sau là to V (decide, hope, plan); sau giới từ dùng V-ing.
+relative_clause_defining	3	Mệnh đề quan hệ xác định	who cho người, which cho vật, that cho cả hai, where cho nơi chốn; mệnh đề đứng ngay sau danh từ nó bổ nghĩa.
+passive_simple	3	Câu bị động hiện tại đơn và quá khứ đơn	am/is/are + V3; was/were + V3; by + người làm (nếu cần).
+comparison_as_as	3	So sánh bằng as ... as	as + tính từ/trạng từ + as; not as/so ... as; the same as.
+too_enough	3	Too và enough	too + tính từ (quá ... đến mức không); tính từ + enough, enough + danh từ (đủ).
+used_to	3	Used to	used to + V: thói quen trong quá khứ nay không còn; didn't use to; Did ... use to?
+question_tag	3	Câu hỏi đuôi	Khẳng định → đuôi phủ định, phủ định → đuôi khẳng định; dùng lại trợ động từ và đại từ.
+indefinite_pronoun	3	Đại từ bất định	some-/any-/no-/every- + one/body/thing/where; động từ chia số ít.
+reflexive_pronoun	3	Đại từ phản thân	myself, yourself, himself, herself, itself, ourselves, yourselves, themselves.
+dependent_preposition	3	Giới từ đi kèm	Nhiều tính từ, động từ đi với giới từ cố định: interested in, good at, depend on, afraid of.
+so_neither	3	So / Neither (đồng tình)	So + trợ động từ + chủ ngữ (khẳng định); Neither/Nor + trợ động từ + chủ ngữ (phủ định).
+adjective_ed_ing	3	Tính từ đuôi -ed và -ing	-ed: cảm xúc của người (bored); -ing: tính chất gây ra cảm xúc (boring).
+present_perfect_continuous	4	Hiện tại hoàn thành tiếp diễn	have/has been + V-ing: hành động kéo dài từ quá khứ tới nay, nhấn mạnh quá trình.
+past_perfect	4	Quá khứ hoàn thành	had + V3: việc xảy ra trước một việc/thời điểm khác trong quá khứ.
+conditional_second	4	Câu điều kiện loại 2	If + quá khứ đơn, would + V: không có thật hoặc khó xảy ra ở hiện tại; If I were...
+passive_advanced	4	Câu bị động nâng cao	Bị động ở các thì hoàn thành, tiếp diễn và sau động từ khuyết thiếu: has been done, is being done, can be done.
+reported_statement	4	Câu tường thuật: câu kể	said (that) + lùi thì: am → was, will → would, have done → had done; đổi đại từ, trạng từ.
+reported_question_command	4	Câu tường thuật: câu hỏi và mệnh lệnh	asked + if/whether hoặc từ để hỏi + chủ ngữ + động từ (không đảo); told/asked + tân ngữ + (not) to V.
+relative_clause_non_defining	4	Mệnh đề quan hệ không xác định; whose, whom	Thêm thông tin, có dấu phẩy, không dùng that; whose + danh từ (sở hữu), whom làm tân ngữ.
+modal_deduction	4	Suy luận với must / can't / might	must (chắc chắn đúng), can't (chắc chắn không), might/could (có thể); về quá khứ: + have V3.
+wish_present	4	Wish / If only (hiện tại)	wish + quá khứ đơn: ước điều trái với hiện tại; wish + could/would.
+contrast_linkers	4	Từ nối chỉ sự tương phản	although/even though + mệnh đề; despite/in spite of + danh từ/V-ing; however đứng đầu câu, sau dấu phẩy.
+verb_pattern_meaning	4	Động từ + to V / V-ing đổi nghĩa	remember/forget + to V (việc phải làm) và + V-ing (việc đã làm); stop to V / stop V-ing; try to V / try V-ing.
+causative	4	Thể nhờ bảo: have/get something done	have/get + vật + V3: nhờ người khác làm; have someone do, get someone to do.
+so_such_so_that	4	So / such ... that; so that; in order to	so + tính từ/trạng từ + that; such (a/an) + tính từ + danh từ + that; so that / in order to chỉ mục đích.
+future_continuous_perfect	4	Tương lai tiếp diễn và tương lai hoàn thành	will be + V-ing: đang diễn ra tại một thời điểm tương lai; will have + V3: hoàn thành trước một thời điểm tương lai.
+time_clauses	4	Mệnh đề thời gian và phối hợp thì	Sau when, after, before, as soon as, until nói về tương lai dùng hiện tại (không dùng will); phối hợp thì theo trình tự sự việc.
+adjective_order	4	Trật tự tính từ	Ý kiến → kích thước → tuổi → hình dạng → màu sắc → nguồn gốc → chất liệu → mục đích + danh từ.
+conditional_third	5	Câu điều kiện loại 3	If + had V3, would have V3: điều không có thật trong quá khứ.
+conditional_mixed	5	Câu điều kiện hỗn hợp	If + had V3, would + V (quá khứ → hiện tại); If + quá khứ đơn, would have V3.
+wish_past_would_rather	5	Wish (quá khứ), would rather, it's time	wish + had V3: tiếc về quá khứ; would rather + chủ ngữ + quá khứ đơn; It's (high) time + chủ ngữ + quá khứ đơn.
+inversion	5	Đảo ngữ	Never/Rarely/Seldom/Not only/Hardly/Only then... đứng đầu câu → trợ động từ đứng trước chủ ngữ.
+cleft_sentence	5	Câu chẻ (nhấn mạnh)	It is/was + phần nhấn mạnh + that/who ...; What + mệnh đề + is/was ...
+participle_clause	5	Mệnh đề phân từ	V-ing (chủ động), V3 (bị động), Having V3 (xảy ra trước) để rút gọn mệnh đề cùng chủ ngữ.
+passive_reporting	5	Bị động với động từ tường thuật	It is said/believed that + mệnh đề; chủ ngữ + is said/believed + to V / to have V3.
+modal_perfect	5	Động từ khuyết thiếu + have V3	should have V3 (lẽ ra nên), could have V3 (đã có thể), needn't have V3 (lẽ ra không cần).
+reporting_verbs	5	Động từ tường thuật	advise/warn/remind + tân ngữ + to V; deny/admit/suggest + V-ing; apologise for + V-ing.
+subjunctive	5	Thức giả định	suggest/insist/recommend that + chủ ngữ + V nguyên mẫu; It is essential/vital that + chủ ngữ + V nguyên mẫu.
+inversion_conditional	6	Đảo ngữ câu điều kiện	Should you + V (loại 1); Were + chủ ngữ + to V / Were it not for (loại 2); Had + chủ ngữ + V3 (loại 3).
+advanced_relative	6	Mệnh đề quan hệ nâng cao	giới từ + which/whom (in which, by whom); all/some/most of which/whom; whereby.
+emphasis_fronting	6	Nhấn mạnh và đảo thành phần	do/does/did + V để nhấn mạnh; đưa thành phần lên đầu câu; so/such đứng đầu kèm đảo ngữ.
+future_in_past	6	Tương lai trong quá khứ	was/were going to, would, was/were about to + V: điều sắp/định xảy ra khi nhìn từ quá khứ.
+advanced_linkers	6	Liên từ nâng cao	whereas, nevertheless, provided that, as long as, unless, otherwise, given that, in case.

@@ -1,0 +1,93 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+science	science	noun	1	science	khoa học	việc tìm hiểu thế giới tự nhiên bằng quan sát và thí nghiệm	Science helps us understand how the world works.	Khoa học giúp chúng ta hiểu thế giới vận hành ra sao.		/ˈsaɪəns/
+experiment	experiment	noun	1	science	thí nghiệm	việc làm thử có kế hoạch để kiểm tra một điều gì đó	We did an experiment with water and salt today.	Hôm nay chúng tôi làm một thí nghiệm với nước và muối.		/ɪkˈsperɪmənt/
+star.sky	star	noun	1	science	ngôi sao (trên trời)	điểm sáng trên bầu trời đêm, là quả cầu khí rất nóng	On a clear night you can see thousands of stars.	Vào đêm quang đãng, bạn có thể thấy hàng nghìn ngôi sao.		/stɑː/
+planet	planet	noun	1	science	hành tinh	thiên thể lớn quay quanh Mặt Trời, như Trái Đất, sao Hỏa	Mars is a red planet.	Sao Hỏa là một hành tinh màu đỏ.		/ˈplænɪt/
+moon	moon	noun	1	science	mặt trăng	thiên thể quay quanh Trái Đất, sáng vào ban đêm	The moon goes around the Earth.	Mặt Trăng quay quanh Trái Đất.		/muːn/
+space.universe	space	noun	1	science	vũ trụ, không gian vũ trụ	khoảng không bên ngoài bầu khí quyển của Trái Đất	She dreams of going to space one day.	Cô bé mơ một ngày được bay vào vũ trụ.		/speɪs/
+earth.planet	Earth	noun	1	science	Trái Đất	hành tinh nơi chúng ta đang sống	The Earth goes around the sun once a year.	Trái Đất quay quanh Mặt Trời mỗi năm một vòng.	the Earth	/ɜːθ/
+gas.state	gas	noun	1	science	chất khí	thể của vật chất như không khí, không có hình dạng cố định	Steam is water in the form of a gas.	Hơi nước là nước ở thể khí.		/ɡæs/
+liquid	liquid	noun	1	science	chất lỏng	thể của vật chất chảy được như nước, sữa, dầu	Water is a liquid at room temperature.	Ở nhiệt độ phòng, nước là chất lỏng.		/ˈlɪkwɪd/
+solid.state	solid	noun	1	science	chất rắn	thể của vật chất có hình dạng cố định như đá, gỗ	Ice is water in its solid form, and it is a solid.	Băng là nước ở thể rắn, nó là một chất rắn.		/ˈsɒlɪd/
+metal	metal	noun	1	science	kim loại	chất cứng như sắt, đồng, nhôm, dẫn điện tốt	Metal gets hot very quickly in the sun.	Kim loại nóng lên rất nhanh dưới nắng.		/ˈmetl/
+magnet	magnet	noun	1	science	nam châm	vật hút được sắt và các kim loại khác	The magnet picked up all the small nails.	Cục nam châm hút hết những chiếc đinh nhỏ.		/ˈmæɡnət/
+sunlight	sunlight	noun	1	science	ánh sáng mặt trời	ánh sáng chiếu từ Mặt Trời xuống Trái Đất	Plants need sunlight to grow.	Cây cần ánh sáng mặt trời để lớn.		/ˈsʌnlaɪt/
+heat	heat	noun	1	science	nhiệt, sức nóng	năng lượng làm cho vật nóng lên	Heat from the fire made the room warm.	Hơi nóng từ đống lửa làm căn phòng ấm lên.		/hiːt/
+spaceship	spaceship	noun	1	science	tàu vũ trụ	phương tiện chở người hoặc máy móc bay vào vũ trụ	The spaceship landed safely on the moon.	Con tàu vũ trụ đã hạ cánh an toàn xuống mặt trăng.	spacecraft	/ˈspeɪsʃɪp/
+rocket	rocket	noun	1	science	tên lửa	phương tiện phóng lên rất nhanh để bay vào vũ trụ	The rocket flew up into the sky with a loud noise.	Tên lửa bay vút lên trời với tiếng nổ lớn.		/ˈrɒkɪt/
+electricity	electricity	noun	1	science	điện (năng lượng điện)	năng lượng làm sáng đèn và chạy máy móc	We use electricity to light our homes.	Chúng ta dùng điện để thắp sáng nhà cửa.		/ɪˌlekˈtrɪsəti/
+rock.stone	rock	noun	1	science	đá (khoáng vật)	chất cứng tạo nên mặt đất và núi	This rock is millions of years old.	Hòn đá này đã có hàng triệu năm tuổi.	stone	/rɒk/
+measure	measure	verb	1	science	đo (kích thước, lượng)	dùng thước, cân, nhiệt kế để biết dài, nặng, nóng bao nhiêu	Measure the water before you pour it in.	Hãy đo lượng nước trước khi đổ vào.		/ˈmeʒə/
+weigh	weigh	verb	1	science	cân (đo khối lượng)	đặt lên cân để biết vật nặng bao nhiêu	Weigh the apples on the scale.	Cân những quả táo trên cái cân.		/weɪ/
+mix	mix	verb	1	science	trộn, pha trộn	cho hai hay nhiều chất vào với nhau	Mix the salt and the water in a glass.	Trộn muối với nước trong một cái cốc.		/mɪks/
+melt	melt	verb	1	science	tan chảy	chất rắn chuyển thành chất lỏng khi bị nóng	Ice melts quickly in the sun.	Đá tan nhanh dưới nắng.		/melt/
+float	float	verb	1	science	nổi (trên mặt nước)	không bị chìm, nằm trên mặt chất lỏng	Wood floats, but stone does not.	Gỗ thì nổi còn đá thì không.		/fləʊt/
+sink.water	sink	verb	1	science	chìm (xuống nước)	rơi xuống đáy nước vì nặng	A coin sinks to the bottom of the glass.	Đồng xu chìm xuống đáy cốc.		/sɪŋk/
+add.maths	add	verb	1	science	cộng (hai số)	làm phép cộng trong toán học	If you add three and four, you get seven.	Nếu bạn cộng ba với bốn, bạn được bảy.		/æd/
+equal.maths	equal	verb	1	science	bằng (kết quả phép tính)	dùng khi nói kết quả, như 2 + 2 = 4	Two plus two equals four.	Hai cộng hai bằng bốn.		/ˈiːkwəl/
+count.maths	count	verb	1	science	đếm	nói các số theo thứ tự để biết có bao nhiêu	Count the stars in this picture.	Hãy đếm số ngôi sao trong bức tranh này.		/kaʊnt/
+plus	plus	preposition	1	science	cộng (khi đọc phép tính)	dùng khi đọc dấu + trong phép tính	Six plus four is ten.	Sáu cộng bốn là mười.		/plʌs/
+minus	minus	preposition	1	science	trừ (khi đọc phép tính)	dùng khi đọc dấu − trong phép tính	Ten minus three is seven.	Mười trừ ba là bảy.		/ˈmaɪnəs/
+electric	electric	adjective	1	science	chạy bằng điện, (thuộc về) điện	nói về máy móc dùng điện hoặc tạo ra điện	My father drives an electric car.	Bố tôi lái xe ô tô điện.		/ɪˈlektrɪk/
+do_an_experiment	do an experiment	collocation	1	science	làm thí nghiệm	tiến hành thí nghiệm để kiểm tra một ý tưởng	Today we will do an experiment with magnets.	Hôm nay chúng ta sẽ làm thí nghiệm với nam châm.	carry out an experiment|conduct an experiment|perform an experiment
+night_sky	night sky	noun	1	science	bầu trời đêm	bầu trời lúc tối, có trăng và sao	The night sky is full of stars in the countryside.	Ở nông thôn, bầu trời đêm đầy sao.
+full_moon	full moon	noun	1	science	trăng tròn	khi thấy cả mặt trăng sáng tròn trên trời	There is a full moon tonight.	Tối nay trăng tròn.
+times_table	times table	noun	1	science	bảng cửu chương	bảng phép nhân trẻ em học thuộc	My son is learning his times tables.	Con trai tôi đang học bảng cửu chương.	multiplication table
+add_up	add up	phrasal_verb	1	science	cộng lại (tính tổng)	cộng nhiều số với nhau để ra tổng	Add up all the numbers in the box.	Hãy cộng tất cả các số trong ô lại.
+heat_up	heat up	phrasal_verb	1	science	làm nóng lên, nóng lên	tăng nhiệt độ của một vật	Heat up the water and watch what happens.	Đun nóng nước lên và xem điều gì xảy ra.
+outer_space	outer space	noun	1	science	ngoài vũ trụ, ngoài không gian	vùng rất xa bên ngoài Trái Đất	There is no air in outer space.	Ngoài vũ trụ không có không khí.
+look_at_the_stars	look at the stars	collocation	1	science	ngắm sao	nhìn lên bầu trời đêm để xem sao	We lay on the grass and looked at the stars.	Chúng tôi nằm trên cỏ ngắm sao.
+go_into_space	go into space	collocation	1	science	bay vào vũ trụ	rời Trái Đất bằng tàu, tên lửa	The first person to go into space was from Russia.	Người đầu tiên bay vào vũ trụ là người Nga.
+how_much_does_it_weigh	how much does it weigh	phrase	1	science	nó nặng bao nhiêu	hỏi cân nặng, khối lượng của một vật	This box is big, how much does it weigh?	Cái hộp này to quá, nó nặng bao nhiêu vậy?
+laboratory	laboratory	noun	2	science	phòng thí nghiệm	phòng có dụng cụ để làm thí nghiệm khoa học	The students wear glasses in the laboratory.	Học sinh đeo kính trong phòng thí nghiệm.	lab	/ləˈbɒrətri/
+physics	physics	noun	2	science	vật lý (môn học)	khoa học về lực, năng lượng, ánh sáng, chuyển động	Physics explains why things fall to the ground.	Vật lý giải thích vì sao đồ vật rơi xuống đất.		/ˈfɪzɪks/
+chemistry	chemistry	noun	2	science	hóa học (môn học)	khoa học về các chất và cách chúng biến đổi	In chemistry we learned what water is made of.	Trong môn hóa học chúng tôi học nước được tạo nên từ gì.		/ˈkemɪstri/
+biology	biology	noun	2	science	sinh học (môn học)	khoa học về sự sống của người, động vật, thực vật	She loves biology, especially studying plants.	Cô ấy yêu thích sinh học, nhất là tìm hiểu về cây cối.		/baɪˈɒlədʒi/
+gravity	gravity	noun	2	science	trọng lực, lực hấp dẫn	lực kéo mọi vật rơi xuống mặt đất	Gravity makes the apple fall from the tree.	Trọng lực làm quả táo rơi từ trên cây xuống.		/ˈɡrævəti/
+oxygen	oxygen	noun	2	science	khí ô-xy	khí trong không khí mà người và động vật cần để thở	People and animals need oxygen to live.	Người và động vật cần khí ô-xy để sống.		/ˈɒksɪdʒən/
+telescope	telescope	noun	2	science	kính thiên văn, kính viễn vọng	dụng cụ dùng để nhìn sao, hành tinh ở rất xa	Through the telescope, we could see the rings of Saturn.	Qua kính thiên văn, chúng tôi thấy được vành đai của sao Thổ.		/ˈtelɪskəʊp/
+microscope	microscope	noun	2	science	kính hiển vi	dụng cụ phóng to những vật rất nhỏ	We looked at a hair under the microscope.	Chúng tôi soi một sợi tóc dưới kính hiển vi.		/ˈmaɪkrəskəʊp/
+universe	universe	noun	2	science	vũ trụ (toàn bộ)	tất cả mọi thứ tồn tại: sao, hành tinh, thiên hà	The universe is bigger than we can imagine.	Vũ trụ lớn hơn chúng ta có thể tưởng tượng.		/ˈjuːnɪvɜːs/
+percentage	percentage	noun	2	science	tỷ lệ phần trăm	một phần tính trên một trăm	What percentage of the Earth is covered by water?	Bao nhiêu phần trăm bề mặt Trái Đất được bao phủ bởi nước?		/pəˈsentɪdʒ/
+lens	lens	noun	2	science	thấu kính	miếng kính cong dùng trong kính lúp, kính hiển vi, máy ảnh	The lens makes the small letters look bigger.	Thấu kính làm những chữ nhỏ trông to hơn.		/lenz/
+subtract	subtract	verb	2	science	trừ (làm phép trừ)	lấy một số bớt đi khỏi số khác	If you subtract five from twelve, you get seven.	Nếu lấy mười hai trừ năm, bạn được bảy.	take away	/səbˈtrækt/
+multiply	multiply	verb	2	science	nhân (làm phép nhân)	làm phép tính nhân hai số với nhau	Multiply six by three to get eighteen.	Nhân sáu với ba được mười tám.		/ˈmʌltɪplaɪ/
+divide	divide	verb	2	science	chia (làm phép chia)	làm phép chia một số cho số khác	If you divide twenty by four, you get five.	Nếu chia hai mươi cho bốn, bạn được năm.		/dɪˈvaɪd/
+calculate	calculate	verb	2	science	tính toán	dùng phép tính để tìm ra con số	Can you calculate the total cost?	Bạn có thể tính tổng chi phí không?	work out	/ˈkælkjuleɪt/
+observe	observe	verb	2	science	quan sát	nhìn kỹ để ghi nhận điều gì xảy ra trong thí nghiệm	Observe the colour of the water after five minutes.	Quan sát màu của nước sau năm phút.		/əbˈzɜːv/
+dissolve	dissolve	verb	2	science	hòa tan, tan (trong nước)	chất rắn trộn vào chất lỏng rồi biến mất trong đó	Sugar dissolves quickly in hot water.	Đường tan nhanh trong nước nóng.		/dɪˈzɒlv/
+discover	discover	verb	2	science	phát hiện ra, khám phá ra	tìm ra điều trước đó chưa ai biết	Who discovered the first planet outside our solar system?	Ai đã phát hiện ra hành tinh đầu tiên ngoài hệ Mặt Trời?		/dɪˈskʌvə/
+invent	invent	verb	2	science	phát minh	tạo ra một thứ mới chưa từng có	Thomas Edison invented many useful things.	Thomas Edison đã phát minh ra nhiều thứ hữu ích.		/ɪnˈvent/
+predict	predict	verb	2	science	dự đoán	nói trước điều sẽ xảy ra dựa trên hiểu biết	Scientists can predict when the next eclipse will happen.	Các nhà khoa học có thể dự đoán khi nào có nhật thực tiếp theo.		/prɪˈdɪkt/
+launch.rocket	launch	verb	2	science	phóng (tên lửa, tàu vũ trụ)	đưa tên lửa, vệ tinh bay lên vũ trụ	They will launch the rocket next Monday.	Họ sẽ phóng tên lửa vào thứ Hai tới.		/lɔːntʃ/
+attract.magnet	attract	verb	2	science	hút (nam châm)	nam châm kéo sắt, thép về phía nó	A magnet attracts iron but not wood.	Nam châm hút sắt nhưng không hút gỗ.		/əˈtrækt/
+explode	explode	verb	2	science	nổ, phát nổ	vỡ tung ra mạnh, thường kèm tiếng nổ và lửa	The gas exploded when it touched the flame.	Khí đã phát nổ khi chạm vào ngọn lửa.		/ɪkˈspləʊd/
+scientific	scientific	adjective	2	science	(thuộc về) khoa học	liên quan đến khoa học hoặc làm theo cách của khoa học	This is a scientific magazine for children.	Đây là tạp chí khoa học dành cho thiếu nhi.		/ˌsaɪənˈtɪfɪk/
+chemical	chemical	adjective	2	science	hóa học, (thuộc về) hóa chất	liên quan đến các chất và sự biến đổi của chúng	Rust is the result of a chemical change.	Gỉ sét là kết quả của một biến đổi hóa học.		/ˈkemɪkl/
+solar	solar	adjective	2	science	(thuộc về) mặt trời	liên quan đến Mặt Trời hoặc năng lượng mặt trời	Solar power comes from the sun.	Năng lượng mặt trời đến từ Mặt Trời.		/ˈsəʊlə/
+magnetic	magnetic	adjective	2	science	có từ tính, (thuộc về) nam châm	có thể hút sắt như nam châm	The fridge door is magnetic.	Cửa tủ lạnh có từ tính.		/mæɡˈnetɪk/
+transparent	transparent	adjective	2	science	trong suốt	cho ánh sáng đi qua, nhìn xuyên qua được	Glass is transparent, but wood is not.	Thủy tinh thì trong suốt, còn gỗ thì không.		/trænsˈpærənt/
+invisible	invisible	adjective	2	science	vô hình, không nhìn thấy được	quá nhỏ hoặc không có màu nên mắt không thấy	Air is invisible, but we can feel it.	Không khí thì vô hình nhưng ta cảm nhận được nó.		/ɪnˈvɪzəbl/
+times.maths	times	preposition	2	science	nhân (khi đọc phép tính)	dùng khi đọc dấu × trong phép tính	Three times four is twelve.	Ba nhân bốn là mười hai.		/taɪmz/
+solar_system	solar system	noun	2	science	hệ Mặt Trời	Mặt Trời cùng các hành tinh quay quanh nó	There are eight planets in our solar system.	Có tám hành tinh trong hệ Mặt Trời.
+shooting_star	shooting star	noun	2	science	sao băng	vệt sáng vụt qua bầu trời đêm	Make a wish when you see a shooting star.	Hãy ước một điều khi bạn thấy sao băng.	falling star
+test_tube	test tube	noun	2	science	ống nghiệm	ống thủy tinh nhỏ dùng trong phòng thí nghiệm	Pour a little water into the test tube.	Đổ một ít nước vào ống nghiệm.
+magnifying_glass	magnifying glass	noun	2	science	kính lúp	kính cầm tay làm vật nhỏ trông to hơn	The children looked at the insects with a magnifying glass.	Bọn trẻ quan sát côn trùng bằng kính lúp.
+cool_down	cool down	phrasal_verb	2	science	nguội đi, làm nguội	giảm nhiệt độ của một vật đang nóng	Let the metal cool down before you touch it.	Để kim loại nguội đi rồi hãy chạm vào.
+work_out.maths	work out	phrasal_verb	2	science	tính ra, giải ra	tìm ra đáp án của một bài toán	I can't work out the answer to this problem.	Tôi không tính ra được đáp án bài toán này.
+space_travel	space travel	noun	2	science	du hành vũ trụ	việc đi lại trong vũ trụ bằng tàu vũ trụ	Space travel is very expensive.	Du hành vũ trụ rất tốn kém.
+even_number	even number	noun	2	science	số chẵn	số chia hết cho hai, như 2, 4, 6	Four is an even number.	Bốn là một số chẵn.
+odd_number	odd number	noun	2	science	số lẻ	số không chia hết cho hai, như 1, 3, 5	Seven is an odd number.	Bảy là một số lẻ.
+divided_by	divided by	collocation	2	science	chia cho (khi đọc phép tính)	dùng khi đọc dấu ÷ trong phép tính	Twelve divided by three is four.	Mười hai chia cho ba là bốn.
+safety_goggles	safety goggles	noun	2	science	kính bảo hộ	kính đeo để bảo vệ mắt khi làm thí nghiệm	Always wear safety goggles in the lab.	Luôn đeo kính bảo hộ trong phòng thí nghiệm.	safety glasses
+lab_coat	lab coat	noun	2	science	áo blouse phòng thí nghiệm	áo trắng dài mặc khi làm việc trong phòng thí nghiệm	The scientist put on her white lab coat.	Nhà khoa học mặc chiếc áo blouse trắng vào.
+space_station	space station	noun	2	science	trạm vũ trụ	nơi các phi hành gia sống và làm việc ngoài vũ trụ	The astronauts stayed on the space station for six months.	Các phi hành gia ở trên trạm vũ trụ trong sáu tháng.
+living_things	living things	noun	2	science	các sinh vật sống	người, động vật, cây cối và mọi thứ có sự sống	All living things need water.	Mọi sinh vật sống đều cần nước.
+science_fair	science fair	noun	2	science	hội thi khoa học	nơi học sinh trưng bày dự án, thí nghiệm khoa học	Her project won first prize at the science fair.	Dự án của cô bé đoạt giải nhất ở hội thi khoa học.
+degree_celsius	degree Celsius	noun	2	science	độ C (độ Xen-xi-út)	đơn vị đo nhiệt độ, nước đông ở 0 và sôi ở 100	Water boils at one hundred degrees Celsius.	Nước sôi ở một trăm độ C.	degrees Celsius
+take_measurements	take measurements	collocation	2	science	đo đạc, lấy số đo	ghi lại các con số đo được trong thí nghiệm	We took measurements every ten minutes.	Chúng tôi đo đạc mười phút một lần.
+equals_sign	equals sign	noun	2	science	dấu bằng	ký hiệu = trong phép tính	Write the answer after the equals sign.	Viết đáp án sau dấu bằng.	equal sign
+science_museum	science museum	noun	2	science	bảo tàng khoa học	nơi trưng bày máy móc, mô hình khoa học cho mọi người xem	The kids loved the robots at the science museum.	Bọn trẻ rất thích những con rô-bốt ở bảo tàng khoa học.
+rocket_launch	rocket launch	noun	2	science	vụ phóng tên lửa	lúc tên lửa rời mặt đất bay lên	Thousands of people watched the rocket launch.	Hàng nghìn người đã xem vụ phóng tên lửa.
+space_suit	space suit	noun	2	science	bộ đồ du hành vũ trụ	bộ đồ đặc biệt giúp phi hành gia thở ngoài vũ trụ	A space suit is very heavy on Earth.	Bộ đồ du hành vũ trụ rất nặng khi ở trên Trái Đất.	spacesuit
+per_cent	per cent	noun	2	science	phần trăm (%)	dùng khi nói một con số trên một trăm	About seventy per cent of the human body is water.	Khoảng bảy mươi phần trăm cơ thể người là nước.	percent

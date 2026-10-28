@@ -1,0 +1,2493 @@
+{
+ "openapi": "3.1.0",
+ "info": {
+  "title": "Mirabi API - Learning games (English & Math)",
+  "version": "0.2.0",
+  "description": "Subset of the live OpenAPI document (/docs). Rules: docs/LEARNING_GAMES.md. Regenerate with backend/scripts/export_learning_openapi.py."
+ },
+ "paths": {
+  "/api/learning/tutorials": {
+   "get": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "The games whose first-time guide this account has finished",
+    "operationId": "tutorials_api_learning_tutorials_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Tutorials Api Learning Tutorials Get"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/learning/tutorials/{game}": {
+   "post": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Mark a game's guide as finished (idempotent)",
+    "operationId": "finish_tutorial_api_learning_tutorials__game__post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "game",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "enum": [
+        "word_shooter",
+        "meteor",
+        "gate",
+        "bridge",
+        "grammar",
+        "defense",
+        "math_bridge"
+       ],
+       "type": "string",
+       "title": "Game"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Finish Tutorial Api Learning Tutorials  Game  Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/catalog": {
+   "get": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Subjects with their levels, topics and lessons (no answers)",
+    "operationId": "catalog_api_learning_catalog_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/learning/lessons/{lesson_id}": {
+   "get": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "A lesson and its introduction (shown before playing)",
+    "operationId": "get_lesson_api_learning_lessons__lesson_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "lesson_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Lesson Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/sessions": {
+   "post": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Start a stage of a lesson",
+    "operationId": "start_session_api_learning_sessions_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "Idempotency-Key",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "pattern": "^[A-Za-z0-9_-]{8,64}$"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Idempotency-Key"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/SessionCreate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SessionOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Recent sessions",
+    "operationId": "list_sessions_api_learning_sessions_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 50,
+       "minimum": 1,
+       "default": 20,
+       "title": "Limit"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/play": {
+   "post": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Start an English game right away (no setup)",
+    "description": "Creates a paused stage of the game's lesson (the app shows a 3-2-1 countdown, then resumes it). The words or\nquestions are chosen from the user's level, history and review list: there is nothing to configure.",
+    "operationId": "quick_start_api_learning_play_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "Idempotency-Key",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "pattern": "^[A-Za-z0-9_-]{8,64}$"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Idempotency-Key"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/QuickStart"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SessionOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/review/sessions": {
+   "post": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Practise the open review items of a topic",
+    "operationId": "start_review_session_api_learning_review_sessions_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "Idempotency-Key",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "pattern": "^[A-Za-z0-9_-]{8,64}$"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Idempotency-Key"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ReviewSessionCreate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SessionOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/sessions/current": {
+   "get": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "The open (active or paused) session to resume, if any",
+    "operationId": "current_session_api_learning_sessions_current_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Current Session Api Learning Sessions Current Get"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/learning/sessions/{session_id}": {
+   "get": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Session state (to restore after reopening the app)",
+    "operationId": "get_session_api_learning_sessions__session_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SessionOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/sessions/{session_id}/intro": {
+   "get": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "The introduction of the lesson version this session uses",
+    "operationId": "get_session_intro_api_learning_sessions__session_id__intro_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/sessions/{session_id}/next": {
+   "post": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Open more turns (up to the game's target count)",
+    "operationId": "next_turns_api_learning_sessions__session_id__next_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/NextInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/EventOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/sessions/{session_id}/answer": {
+   "post": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Answer an open turn",
+    "operationId": "post_answer_api_learning_sessions__session_id__answer_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/AnswerInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/EventOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/sessions/{session_id}/hint": {
+   "post": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Show the next hint of an open turn",
+    "operationId": "post_hint_api_learning_sessions__session_id__hint_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/TurnEvent"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/EventOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/sessions/{session_id}/reveal": {
+   "post": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Show the answer (adds a re-practice turn)",
+    "operationId": "post_reveal_api_learning_sessions__session_id__reveal_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/TurnEvent"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/EventOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/sessions/{session_id}/miss": {
+   "post": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "A moving target reached the ground/base (Challenge)",
+    "operationId": "post_miss_api_learning_sessions__session_id__miss_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/TurnEvent"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/EventOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/sessions/{session_id}/pause": {
+   "post": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Pause: stops the clock and every target",
+    "operationId": "pause_session_api_learning_sessions__session_id__pause_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ControlInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/EventOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/sessions/{session_id}/resume": {
+   "post": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Resume a paused session",
+    "operationId": "resume_session_api_learning_sessions__session_id__resume_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ControlInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/EventOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/sessions/{session_id}/extend": {
+   "post": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Study longer after the time is up (Học thêm)",
+    "operationId": "extend_session_api_learning_sessions__session_id__extend_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ExtendInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/EventOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/sessions/{session_id}/complete": {
+   "post": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Finish the stage and claim its reward once",
+    "operationId": "complete_session_api_learning_sessions__session_id__complete_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ControlInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/EventOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/sessions/{session_id}/abandon": {
+   "post": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "End the session early (no completion reward)",
+    "operationId": "abandon_session_api_learning_sessions__session_id__abandon_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/AbandonInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/EventOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/sessions/{session_id}/result": {
+   "get": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Result of a finished session, with every answer",
+    "operationId": "session_result_api_learning_sessions__session_id__result_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "session_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Session Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ResultOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/review": {
+   "get": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "The user's “cần ôn” list, weakest first, grouped by topic",
+    "operationId": "review_list_api_learning_review_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "subject",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "enum": [
+          "english",
+          "math"
+         ],
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Subject"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/progress": {
+   "get": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Progress per word, grammar point and math problem type",
+    "operationId": "progress_api_learning_progress_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "subject",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "enum": [
+          "english",
+          "math"
+         ],
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Subject"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/vocabulary/history": {
+   "get": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Words met in the vocabulary games, most recent first, a page at a time",
+    "description": "`counts` are for the whole history (the filter tabs); `total` is the number of words matching the filter and\nsearch, of which `items` is the page from `offset`.",
+    "operationId": "history_api_learning_vocabulary_history_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "q",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "maxLength": 60
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "description": "English word or Vietnamese meaning",
+       "title": "Q"
+      },
+      "description": "English word or Vietnamese meaning"
+     },
+     {
+      "name": "filter",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "enum": [
+        "all",
+        "correct",
+        "review"
+       ],
+       "type": "string",
+       "default": "all",
+       "title": "Filter"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "default": 15,
+       "title": "Limit"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "default": 0,
+       "title": "Offset"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/vocabulary/history/{entry_key}": {
+   "get": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "One word: meaning, pronunciation, examples, results per game and every answer",
+    "operationId": "history_entry_api_learning_vocabulary_history__entry_key__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "entry_key",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Entry Key"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/vocabulary/practice": {
+   "post": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Practise chosen words, or the “Cần ôn” words, in a vocabulary game",
+    "description": "A review stage of the chosen game (lesson \"Tổng hợp\"): progress, the review list and this history update as in\nany stage; review stages earn no completion reward, so the reward rules are unchanged.",
+    "operationId": "practice_api_learning_vocabulary_practice_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "Idempotency-Key",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "pattern": "^[A-Za-z0-9_-]{8,64}$"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Idempotency-Key"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PracticeCreate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "AbandonInput": {
+    "properties": {
+     "reason": {
+      "type": "string",
+      "enum": [
+       "user_ended",
+       "time_up"
+      ],
+      "title": "Reason",
+      "default": "user_ended"
+     },
+     "client_event_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9_-]{8,64}$",
+        "description": "Idempotency key chosen by the app per action; a retry with the same id changes nothing."
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Client Event Id"
+     }
+    },
+    "type": "object",
+    "title": "AbandonInput"
+   },
+   "AnswerInput": {
+    "properties": {
+     "turn_id": {
+      "type": "string",
+      "maxLength": 32,
+      "minLength": 8,
+      "title": "Turn Id"
+     },
+     "client_event_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{8,64}$",
+      "title": "Client Event Id",
+      "description": "Idempotency key chosen by the app per action; a retry with the same id changes nothing."
+     },
+     "answer": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "items": {
+         "type": "string"
+        },
+        "type": "array"
+       }
+      ],
+      "title": "Answer",
+      "description": "Typed text or number, an option id, or the ordered token ids of a bridge."
+     }
+    },
+    "type": "object",
+    "required": [
+     "turn_id",
+     "client_event_id",
+     "answer"
+    ],
+    "title": "AnswerInput"
+   },
+   "ControlInput": {
+    "properties": {
+     "client_event_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9_-]{8,64}$",
+        "description": "Idempotency key chosen by the app per action; a retry with the same id changes nothing."
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Client Event Id"
+     }
+    },
+    "type": "object",
+    "title": "ControlInput"
+   },
+   "EventOut": {
+    "properties": {
+     "result": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/TurnResultOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "session": {
+      "$ref": "#/components/schemas/SessionOut"
+     },
+     "replayed": {
+      "type": "boolean",
+      "title": "Replayed",
+      "default": false
+     }
+    },
+    "type": "object",
+    "required": [
+     "result",
+     "session"
+    ],
+    "title": "EventOut"
+   },
+   "ExtendInput": {
+    "properties": {
+     "minutes": {
+      "type": "integer",
+      "maximum": 30.0,
+      "minimum": 1.0,
+      "title": "Minutes"
+     },
+     "client_event_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{8,64}$",
+      "title": "Client Event Id",
+      "description": "Idempotency key chosen by the app per action; a retry with the same id changes nothing."
+     }
+    },
+    "type": "object",
+    "required": [
+     "minutes",
+     "client_event_id"
+    ],
+    "title": "ExtendInput"
+   },
+   "HTTPValidationError": {
+    "properties": {
+     "detail": {
+      "items": {
+       "$ref": "#/components/schemas/ValidationError"
+      },
+      "type": "array",
+      "title": "Detail"
+     }
+    },
+    "type": "object",
+    "title": "HTTPValidationError"
+   },
+   "ItemResultOut": {
+    "properties": {
+     "turn_id": {
+      "type": "string",
+      "title": "Turn Id"
+     },
+     "position": {
+      "type": "integer",
+      "title": "Position"
+     },
+     "kind": {
+      "type": "string",
+      "title": "Kind"
+     },
+     "skill_label": {
+      "type": "string",
+      "title": "Skill Label"
+     },
+     "prompt": {
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Prompt"
+     },
+     "outcome": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Outcome"
+     },
+     "practice": {
+      "type": "boolean",
+      "title": "Practice"
+     },
+     "attempts": {
+      "type": "integer",
+      "title": "Attempts"
+     },
+     "hints_used": {
+      "type": "integer",
+      "title": "Hints Used"
+     },
+     "error_type": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Error Type"
+     },
+     "correct_answer": {
+      "type": "string",
+      "title": "Correct Answer"
+     },
+     "explanation": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Explanation"
+     },
+     "word": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/WordOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "type": "object",
+    "required": [
+     "turn_id",
+     "position",
+     "kind",
+     "skill_label",
+     "prompt",
+     "outcome",
+     "practice",
+     "attempts",
+     "hints_used",
+     "error_type",
+     "correct_answer",
+     "explanation"
+    ],
+    "title": "ItemResultOut"
+   },
+   "NextInput": {
+    "properties": {
+     "count": {
+      "type": "integer",
+      "maximum": 3.0,
+      "minimum": 1.0,
+      "title": "Count",
+      "default": 1
+     }
+    },
+    "type": "object",
+    "title": "NextInput"
+   },
+   "PracticeCreate": {
+    "properties": {
+     "game": {
+      "type": "string",
+      "enum": [
+       "word_shooter",
+       "meteor"
+      ],
+      "title": "Game",
+      "description": "word_shooter: Anh → Việt; meteor: Việt → Anh"
+     },
+     "entry_keys": {
+      "anyOf": [
+       {
+        "items": {
+         "type": "string"
+        },
+        "type": "array",
+        "maxItems": 12,
+        "minItems": 1
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Entry Keys",
+      "description": "Words to practise; omitted: the “Cần ôn” words, most recent first"
+     },
+     "mode": {
+      "type": "string",
+      "enum": [
+       "practice",
+       "challenge"
+      ],
+      "title": "Mode",
+      "default": "practice"
+     },
+     "duration_minutes": {
+      "type": "integer",
+      "maximum": 60.0,
+      "minimum": 5.0,
+      "title": "Duration Minutes",
+      "default": 15
+     },
+     "timezone": {
+      "type": "string",
+      "maxLength": 80,
+      "title": "Timezone",
+      "default": "UTC"
+     },
+     "start_paused": {
+      "type": "boolean",
+      "title": "Start Paused",
+      "description": "Create it paused (the app counts down 3-2-1, then /resume).",
+      "default": false
+     }
+    },
+    "type": "object",
+    "required": [
+     "game"
+    ],
+    "title": "PracticeCreate"
+   },
+   "QuickStart": {
+    "properties": {
+     "game": {
+      "type": "string",
+      "enum": [
+       "word_shooter",
+       "meteor",
+       "gate",
+       "bridge"
+      ],
+      "title": "Game",
+      "description": "word_shooter: Bắn từ tiếng Anh; meteor: Bắn thiên thạch Việt → Anh; gate: Chọn đáp án ngữ pháp; bridge: Sắp xếp câu. The content is picked by the backend from the user's progress."
+     },
+     "mode": {
+      "type": "string",
+      "enum": [
+       "practice",
+       "challenge"
+      ],
+      "title": "Mode",
+      "default": "practice"
+     },
+     "duration_minutes": {
+      "type": "integer",
+      "maximum": 60.0,
+      "minimum": 5.0,
+      "title": "Duration Minutes",
+      "default": 25
+     },
+     "timezone": {
+      "type": "string",
+      "maxLength": 80,
+      "title": "Timezone",
+      "default": "UTC"
+     }
+    },
+    "type": "object",
+    "required": [
+     "game"
+    ],
+    "title": "QuickStart"
+   },
+   "Ref": {
+    "properties": {
+     "id": {
+      "type": "integer",
+      "title": "Id"
+     },
+     "code": {
+      "type": "string",
+      "title": "Code"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "code",
+     "name"
+    ],
+    "title": "Ref"
+   },
+   "ResultOut": {
+    "properties": {
+     "session": {
+      "$ref": "#/components/schemas/SessionOut"
+     },
+     "counts": {
+      "additionalProperties": {
+       "type": "integer"
+      },
+      "type": "object",
+      "title": "Counts"
+     },
+     "items": {
+      "items": {
+       "$ref": "#/components/schemas/ItemResultOut"
+      },
+      "type": "array",
+      "title": "Items"
+     },
+     "open_review_count": {
+      "type": "integer",
+      "title": "Open Review Count"
+     }
+    },
+    "type": "object",
+    "required": [
+     "session",
+     "counts",
+     "items",
+     "open_review_count"
+    ],
+    "title": "ResultOut"
+   },
+   "ReviewSessionCreate": {
+    "properties": {
+     "topic_id": {
+      "type": "integer",
+      "title": "Topic Id"
+     },
+     "mode": {
+      "type": "string",
+      "enum": [
+       "practice",
+       "challenge"
+      ],
+      "title": "Mode",
+      "default": "practice"
+     },
+     "duration_minutes": {
+      "type": "integer",
+      "maximum": 60.0,
+      "minimum": 5.0,
+      "title": "Duration Minutes",
+      "default": 15
+     },
+     "timezone": {
+      "type": "string",
+      "maxLength": 80,
+      "title": "Timezone",
+      "default": "UTC"
+     },
+     "start_paused": {
+      "type": "boolean",
+      "title": "Start Paused",
+      "description": "Create it paused (the app counts down 3-2-1, then /resume).",
+      "default": false
+     }
+    },
+    "type": "object",
+    "required": [
+     "topic_id"
+    ],
+    "title": "ReviewSessionCreate"
+   },
+   "RewardOut": {
+    "properties": {
+     "status": {
+      "type": "string",
+      "title": "Status",
+      "description": "granted | capped | daily_cap_reached | daily_task | already_claimed | not_eligible | none"
+     },
+     "exp": {
+      "type": "integer",
+      "title": "Exp"
+     }
+    },
+    "type": "object",
+    "required": [
+     "status",
+     "exp"
+    ],
+    "title": "RewardOut"
+   },
+   "SessionCreate": {
+    "properties": {
+     "lesson_id": {
+      "type": "integer",
+      "title": "Lesson Id"
+     },
+     "mode": {
+      "type": "string",
+      "enum": [
+       "practice",
+       "challenge"
+      ],
+      "title": "Mode",
+      "default": "practice"
+     },
+     "duration_minutes": {
+      "type": "integer",
+      "maximum": 60.0,
+      "minimum": 5.0,
+      "title": "Duration Minutes",
+      "default": 25
+     },
+     "variant": {
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "mixed",
+         "gate",
+         "bridge",
+         "meteor",
+         "word_shooter"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Variant",
+      "description": "Grammar: mixed (default), gate or bridge. Vocabulary: meteor (Việt → Anh, default) or word_shooter (Anh → Việt)."
+     },
+     "timezone": {
+      "type": "string",
+      "maxLength": 80,
+      "title": "Timezone",
+      "description": "Device timezone; becomes the account timezone if none is set.",
+      "default": "UTC"
+     },
+     "start_paused": {
+      "type": "boolean",
+      "title": "Start Paused",
+      "description": "Create it paused (the app shows the session's lesson first; the clock starts with /resume).",
+      "default": false
+     }
+    },
+    "type": "object",
+    "required": [
+     "lesson_id"
+    ],
+    "title": "SessionCreate"
+   },
+   "SessionOut": {
+    "properties": {
+     "id": {
+      "type": "integer",
+      "title": "Id"
+     },
+     "status": {
+      "type": "string",
+      "enum": [
+       "active",
+       "paused",
+       "completed",
+       "failed",
+       "abandoned"
+      ],
+      "title": "Status"
+     },
+     "kind": {
+      "type": "string",
+      "enum": [
+       "lesson",
+       "review"
+      ],
+      "title": "Kind"
+     },
+     "mode": {
+      "type": "string",
+      "enum": [
+       "practice",
+       "challenge"
+      ],
+      "title": "Mode"
+     },
+     "game_type": {
+      "type": "string",
+      "title": "Game Type"
+     },
+     "variant": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Variant"
+     },
+     "game": {
+      "type": "string",
+      "title": "Game"
+     },
+     "subject": {
+      "$ref": "#/components/schemas/Ref"
+     },
+     "topic": {
+      "$ref": "#/components/schemas/Ref"
+     },
+     "level": {
+      "$ref": "#/components/schemas/Ref"
+     },
+     "lesson": {
+      "$ref": "#/components/schemas/Ref"
+     },
+     "duration_seconds": {
+      "type": "integer",
+      "title": "Duration Seconds"
+     },
+     "active_ms": {
+      "type": "integer",
+      "title": "Active Ms"
+     },
+     "remaining_ms": {
+      "type": "integer",
+      "title": "Remaining Ms"
+     },
+     "time_up": {
+      "type": "boolean",
+      "title": "Time Up"
+     },
+     "hearts": {
+      "type": "integer",
+      "title": "Hearts"
+     },
+     "hearts_max": {
+      "type": "integer",
+      "title": "Hearts Max"
+     },
+     "score": {
+      "type": "integer",
+      "title": "Score"
+     },
+     "combo": {
+      "type": "integer",
+      "title": "Combo"
+     },
+     "max_combo": {
+      "type": "integer",
+      "title": "Max Combo"
+     },
+     "required_count": {
+      "type": "integer",
+      "title": "Required Count"
+     },
+     "resolved_count": {
+      "type": "integer",
+      "title": "Resolved Count"
+     },
+     "pending_practice": {
+      "type": "integer",
+      "title": "Pending Practice"
+     },
+     "open_turns": {
+      "items": {
+       "$ref": "#/components/schemas/TurnOut"
+      },
+      "type": "array",
+      "title": "Open Turns"
+     },
+     "can_complete": {
+      "type": "boolean",
+      "title": "Can Complete"
+     },
+     "end_reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "End Reason"
+     },
+     "reward": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/RewardOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "version": {
+      "type": "integer",
+      "title": "Version"
+     },
+     "server_time": {
+      "type": "string",
+      "title": "Server Time"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "status",
+     "kind",
+     "mode",
+     "game_type",
+     "variant",
+     "game",
+     "subject",
+     "topic",
+     "level",
+     "lesson",
+     "duration_seconds",
+     "active_ms",
+     "remaining_ms",
+     "time_up",
+     "hearts",
+     "hearts_max",
+     "score",
+     "combo",
+     "max_combo",
+     "required_count",
+     "resolved_count",
+     "pending_practice",
+     "open_turns",
+     "can_complete",
+     "end_reason",
+     "reward",
+     "version",
+     "server_time"
+    ],
+    "title": "SessionOut"
+   },
+   "TurnEvent": {
+    "properties": {
+     "turn_id": {
+      "type": "string",
+      "maxLength": 32,
+      "minLength": 8,
+      "title": "Turn Id"
+     },
+     "client_event_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{8,64}$",
+      "title": "Client Event Id",
+      "description": "Idempotency key chosen by the app per action; a retry with the same id changes nothing."
+     }
+    },
+    "type": "object",
+    "required": [
+     "turn_id",
+     "client_event_id"
+    ],
+    "title": "TurnEvent"
+   },
+   "TurnOut": {
+    "properties": {
+     "turn_id": {
+      "type": "string",
+      "title": "Turn Id"
+     },
+     "position": {
+      "type": "integer",
+      "title": "Position"
+     },
+     "kind": {
+      "type": "string",
+      "title": "Kind"
+     },
+     "skill_label": {
+      "type": "string",
+      "title": "Skill Label"
+     },
+     "prompt": {
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Prompt"
+     },
+     "hints_shown": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Hints Shown"
+     },
+     "hints_total": {
+      "type": "integer",
+      "title": "Hints Total"
+     },
+     "attempts": {
+      "type": "integer",
+      "title": "Attempts"
+     },
+     "wrong_attempts": {
+      "type": "integer",
+      "title": "Wrong Attempts"
+     },
+     "practice": {
+      "type": "boolean",
+      "title": "Practice",
+      "description": "A re-practice turn after a revealed answer or a mistake in Học tập."
+     },
+     "travel_seconds": {
+      "type": "integer",
+      "title": "Travel Seconds",
+      "description": "Challenge only: time for the target to reach the ground/base. 0 = waits."
+     },
+     "on_screen_ms": {
+      "type": "integer",
+      "title": "On Screen Ms",
+      "description": "Play time since the turn was issued, so a reopened game puts each target back where it was instead of at the top."
+     }
+    },
+    "type": "object",
+    "required": [
+     "turn_id",
+     "position",
+     "kind",
+     "skill_label",
+     "prompt",
+     "hints_shown",
+     "hints_total",
+     "attempts",
+     "wrong_attempts",
+     "practice",
+     "travel_seconds",
+     "on_screen_ms"
+    ],
+    "title": "TurnOut"
+   },
+   "TurnResultOut": {
+    "properties": {
+     "turn_id": {
+      "type": "string",
+      "title": "Turn Id",
+      "description": "The turn this event resolved. A typed shot can hit another falling word than the one aimed at (the one closest to the ground whose answer matches)."
+     },
+     "event": {
+      "type": "string",
+      "title": "Event"
+     },
+     "correct": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Correct"
+     },
+     "outcome": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Outcome"
+     },
+     "resolved": {
+      "type": "boolean",
+      "title": "Resolved",
+      "default": false
+     },
+     "retry_allowed": {
+      "type": "boolean",
+      "title": "Retry Allowed",
+      "default": false
+     },
+     "error_type": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Error Type"
+     },
+     "score_delta": {
+      "type": "integer",
+      "title": "Score Delta",
+      "default": 0
+     },
+     "hearts_delta": {
+      "type": "integer",
+      "title": "Hearts Delta",
+      "default": 0
+     },
+     "combo": {
+      "type": "integer",
+      "title": "Combo",
+      "default": 0
+     },
+     "hint": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Hint"
+     },
+     "correct_answer": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Correct Answer",
+      "description": "Only once the turn is resolved or revealed."
+     },
+     "explanation": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Explanation"
+     },
+     "practice_added": {
+      "type": "boolean",
+      "title": "Practice Added",
+      "default": false
+     },
+     "word": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/WordOut"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Vocabulary: the English word and its Vietnamese meaning, once the turn is resolved or revealed."
+     }
+    },
+    "type": "object",
+    "required": [
+     "turn_id",
+     "event"
+    ],
+    "title": "TurnResultOut"
+   },
+   "ValidationError": {
+    "properties": {
+     "loc": {
+      "items": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "integer"
+        }
+       ]
+      },
+      "type": "array",
+      "title": "Location"
+     },
+     "msg": {
+      "type": "string",
+      "title": "Message"
+     },
+     "type": {
+      "type": "string",
+      "title": "Error Type"
+     },
+     "input": {
+      "title": "Input"
+     },
+     "ctx": {
+      "type": "object",
+      "title": "Context"
+     }
+    },
+    "type": "object",
+    "required": [
+     "loc",
+     "msg",
+     "type"
+    ],
+    "title": "ValidationError"
+   },
+   "WordOut": {
+    "properties": {
+     "en": {
+      "type": "string",
+      "title": "En"
+     },
+     "vi": {
+      "type": "string",
+      "title": "Vi"
+     },
+     "phonetic": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Phonetic"
+     }
+    },
+    "type": "object",
+    "required": [
+     "en",
+     "vi"
+    ],
+    "title": "WordOut"
+   }
+  },
+  "securitySchemes": {
+   "HTTPBearer": {
+    "type": "http",
+    "description": "Access token from /api/auth/login",
+    "scheme": "bearer"
+   }
+  }
+ }
+}

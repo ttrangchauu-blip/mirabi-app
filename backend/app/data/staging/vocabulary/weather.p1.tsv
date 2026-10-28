@@ -1,0 +1,97 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+sunny	sunny	adjective	1	weather	nắng, có nắng	trời có nhiều nắng, không mây	It's sunny today, so let's go to the beach.	Hôm nay trời nắng, mình đi biển đi.		/ˈsʌni/
+rainy	rainy	adjective	1	weather	có mưa, hay mưa	nói về ngày, mùa, thời tiết có mưa	I don't like rainy days.	Tôi không thích những ngày mưa.		/ˈreɪni/
+cloudy	cloudy	adjective	1	weather	nhiều mây	bầu trời có nhiều mây che	It's cloudy, but it isn't raining.	Trời nhiều mây nhưng không mưa.		/ˈklaʊdi/
+windy	windy	adjective	1	weather	có gió, lộng gió	trời có gió thổi mạnh	It's very windy by the sea today.	Hôm nay ngoài biển gió rất mạnh.		/ˈwɪndi/
+warm.weather	warm	adjective	1	weather	ấm, ấm áp	nhiệt độ dễ chịu, hơi nóng nhưng không quá nóng	It's warm today, so you don't need a coat.	Hôm nay trời ấm, nên bạn không cần áo khoác.		/wɔːm/
+cool.weather	cool	adjective	1	weather	mát, mát mẻ	nhiệt độ hơi lạnh một cách dễ chịu	The evenings are cool in autumn.	Buổi tối mùa thu trời mát mẻ.		/kuːl/
+wet.weather	wet	adjective	1	weather	ướt át, ẩm ướt	thời tiết hay mưa khiến mọi thứ ướt	The weather has been wet all week.	Thời tiết ẩm ướt suốt cả tuần.		/wet/
+dry.weather	dry	adjective	1	weather	khô ráo, không mưa	thời tiết nắng ráo, ít hơi ẩm	We hope it will be dry for the picnic.	Chúng tôi mong trời sẽ khô ráo cho buổi dã ngoại.		/draɪ/
+snowy	snowy	adjective	1	weather	có tuyết	thời tiết có tuyết rơi hoặc tuyết phủ	We had a snowy winter in Japan.	Chúng tôi đã có một mùa đông nhiều tuyết ở Nhật.		/ˈsnəʊi/
+season	season	noun	1	weather	mùa (trong năm)	một trong các khoảng thời gian như xuân, hạ, thu, đông	Summer is my favourite season.	Mùa hè là mùa tôi thích nhất.		/ˈsiːzn/
+spring.season	spring	noun	1	weather	mùa xuân	mùa giữa đông và hạ, cây cối đâm chồi	The weather is warm in spring.	Mùa xuân thời tiết ấm áp.		/sprɪŋ/
+summer	summer	noun	1	weather	mùa hè	mùa nóng nhất trong năm	It's very hot in summer.	Mùa hè trời rất nóng.		/ˈsʌmə/
+autumn	autumn	noun	1	weather	mùa thu	mùa giữa hạ và đông, lá cây chuyển vàng	Hanoi is beautiful in autumn.	Hà Nội đẹp vào mùa thu.	fall	/ˈɔːtəm/
+winter	winter	noun	1	weather	mùa đông	mùa lạnh nhất trong năm	It snows in winter in Sa Pa.	Ở Sa Pa có tuyết vào mùa đông.		/ˈwɪntə/
+temperature	temperature	noun	1	weather	nhiệt độ	mức nóng hay lạnh của không khí	The temperature today is 30 degrees.	Nhiệt độ hôm nay là 30 độ.		/ˈtemprətʃə/
+degree.temperature	degree	noun	1	weather	độ (nhiệt độ)	đơn vị đo mức nóng lạnh	It's 35 degrees outside.	Ngoài trời đang 35 độ.		/dɪˈɡriː/
+storm	storm	noun	1	weather	cơn bão, giông bão	thời tiết xấu có gió mạnh, mưa to, có thể có sấm sét	The storm knocked down many trees.	Cơn bão đã quật đổ nhiều cây.		/stɔːm/
+ice	ice	noun	1	weather	băng, nước đá	nước đông cứng lại khi trời rất lạnh	The lake is covered with ice.	Mặt hồ phủ một lớp băng.		/aɪs/
+fog	fog	noun	1	weather	sương mù	lớp hơi nước dày gần mặt đất làm khó nhìn	The fog was so thick that we couldn't see the road.	Sương mù dày đến nỗi chúng tôi không nhìn thấy đường.		/fɒɡ/
+rainbow	rainbow	noun	1	weather	cầu vồng	vòng cung nhiều màu trên trời sau cơn mưa	Look! There's a rainbow in the sky.	Nhìn kìa! Có cầu vồng trên trời.		/ˈreɪnbəʊ/
+umbrella	umbrella	noun	1	weather	cái ô, cái dù	vật dùng để che mưa, che nắng	She opened her umbrella when it started to rain.	Cô ấy mở ô khi trời bắt đầu mưa.		/ʌmˈbrelə/
+sunshine	sunshine	noun	1	weather	ánh nắng	ánh sáng và hơi ấm của mặt trời chiếu xuống	The children played in the sunshine.	Bọn trẻ chơi đùa dưới ánh nắng.		/ˈsʌnʃaɪn/
+heat	heat	noun	1	weather	cái nóng, sức nóng	nhiệt độ cao, oi bức khó chịu	I can't sleep in this heat.	Tôi không ngủ được trong cái nóng thế này.		/hiːt/
+snowman	snowman	noun	1	weather	người tuyết	hình người đắp bằng tuyết	The kids made a snowman in the garden.	Bọn trẻ đắp một người tuyết trong vườn.		/ˈsnəʊmæn/
+sunrise	sunrise	noun	1	weather	bình minh, lúc mặt trời mọc	lúc mặt trời bắt đầu xuất hiện vào buổi sáng	We got up early to watch the sunrise.	Chúng tôi dậy sớm để ngắm bình minh.		/ˈsʌnraɪz/
+sunset	sunset	noun	1	weather	hoàng hôn, lúc mặt trời lặn	lúc mặt trời khuất dần vào buổi chiều tối	The sunset over the sea was beautiful.	Hoàng hôn trên biển thật đẹp.		/ˈsʌnset/
+shine	shine	verb	1	weather	chiếu sáng (mặt trời)	mặt trời tỏa ánh nắng xuống	The sun is shining today.	Hôm nay mặt trời chiếu sáng rực rỡ.		/ʃaɪn/
+blow.wind	blow	verb	1	weather	thổi (gió)	gió di chuyển trong không khí	The wind is blowing hard tonight.	Đêm nay gió thổi mạnh.		/bləʊ/
+outdoors	outdoors	adverb	1	weather	ngoài trời	ở bên ngoài, không ở trong nhà	We ate outdoors because the weather was nice.	Chúng tôi ăn ngoài trời vì thời tiết đẹp.	outside	/ˌaʊtˈdɔːz/
+indoors	indoors	adverb	1	weather	trong nhà	ở bên trong một tòa nhà	It's raining, so let's play indoors.	Trời đang mưa, nên chúng ta chơi trong nhà nhé.	inside	/ˌɪnˈdɔːz/
+weather_forecast	weather forecast	collocation	1	weather	dự báo thời tiết	bản tin cho biết thời tiết những ngày tới	The weather forecast says it will rain tomorrow.	Dự báo thời tiết nói ngày mai trời sẽ mưa.	weather report
+bad_weather	bad weather	collocation	1	weather	thời tiết xấu	thời tiết mưa gió, lạnh, không thuận lợi	The match was stopped because of bad weather.	Trận đấu bị dừng vì thời tiết xấu.
+rainy_season	rainy season	collocation	1	weather	mùa mưa	thời gian trong năm có nhiều mưa	In Ho Chi Minh City, the rainy season starts in May.	Ở Thành phố Hồ Chí Minh, mùa mưa bắt đầu vào tháng Năm.	wet season
+dry_season	dry season	collocation	1	weather	mùa khô	thời gian trong năm ít hoặc không có mưa	The dry season is the best time to visit the south.	Mùa khô là thời điểm tốt nhất để đến thăm miền Nam.
+heavy_rain	heavy rain	collocation	1	weather	mưa to, mưa lớn	mưa nhiều và nặng hạt	Heavy rain flooded the streets.	Mưa to làm ngập các con phố.
+strong_wind	strong wind	collocation	1	weather	gió mạnh	gió thổi rất mạnh, có thể làm đổ cây	Strong winds blew the roof off the house.	Gió mạnh đã thổi bay mái nhà.
+blue_sky	blue sky	collocation	1	weather	trời xanh	bầu trời trong, không có mây	Look at the blue sky! It's a lovely day.	Nhìn bầu trời xanh kìa! Hôm nay thật đẹp trời.
+get_wet	get wet	collocation	1	weather	bị ướt	khi người, quần áo dính nước mưa	Take an umbrella or you'll get wet.	Mang ô theo, không thì bạn sẽ bị ướt.
+keep_warm	keep warm	collocation	1	weather	giữ ấm	mặc ấm hoặc làm gì đó để không bị lạnh	Wear a hat to keep warm.	Đội mũ vào để giữ ấm.	stay warm
+warm_clothes	warm clothes	collocation	1	weather	quần áo ấm	áo len, áo khoác dày mặc khi trời lạnh	Bring some warm clothes. It's cold in Da Lat.	Mang theo ít quần áo ấm nhé. Ở Đà Lạt lạnh lắm.
+bring_an_umbrella	bring an umbrella	collocation	1	weather	mang theo ô	cầm ô theo khi ra ngoài, phòng trời mưa	Don't forget to bring an umbrella.	Đừng quên mang theo ô nhé.	take an umbrella
+whats_the_weather_like	what's the weather like	phrase	1	weather	thời tiết thế nào?	câu hỏi về tình hình thời tiết ở một nơi	What's the weather like in Da Lat today?	Hôm nay thời tiết ở Đà Lạt thế nào?	how's the weather
+its_raining	it's raining	phrase	1	weather	trời đang mưa	câu nói khi mưa đang rơi	Look outside, it's raining!	Nhìn ra ngoài kìa, trời đang mưa!
+whats_the_temperature	what's the temperature	phrase	1	weather	nhiệt độ bao nhiêu?	câu hỏi trời đang nóng hay lạnh bao nhiêu độ	What's the temperature in Hanoi today?	Hôm nay ở Hà Nội nhiệt độ bao nhiêu?
+what_a_beautiful_day	what a beautiful day	phrase	1	weather	hôm nay đẹp trời quá	câu cảm thán khi thời tiết đẹp, nắng nhẹ	What a beautiful day! Let's go for a walk.	Hôm nay đẹp trời quá! Mình đi dạo đi.	what a lovely day
+humid	humid	adjective	2	weather	ẩm, oi ẩm	không khí có nhiều hơi nước, nóng và ngột ngạt	Saigon is hot and humid all year.	Sài Gòn nóng và ẩm quanh năm.		/ˈhjuːmɪd/
+foggy	foggy	adjective	2	weather	có sương mù	trời nhiều sương mù, khó nhìn xa	It's foggy this morning, so drive carefully.	Sáng nay trời có sương mù, nên hãy lái xe cẩn thận.		/ˈfɒɡi/
+stormy	stormy	adjective	2	weather	có bão, giông gió	thời tiết có gió mạnh, mưa to, biển động	We stayed at home on that stormy night.	Chúng tôi ở nhà vào đêm giông bão đó.		/ˈstɔːmi/
+icy	icy	adjective	2	weather	đóng băng, phủ băng	mặt đường, mặt hồ có băng, rất trơn	Be careful, the road is icy.	Cẩn thận, mặt đường đang đóng băng.		/ˈaɪsi/
+freezing	freezing	adjective	2	weather	lạnh cóng, rét buốt	rất lạnh, gần hoặc dưới 0 độ	It's freezing outside. Put on your coat.	Ngoài trời lạnh cóng. Mặc áo khoác vào.		/ˈfriːzɪŋ/
+chilly	chilly	adjective	2	weather	se lạnh, hơi lạnh	lạnh một chút, khiến hơi khó chịu	It gets chilly in the evening in Da Lat.	Buổi tối ở Đà Lạt trời se lạnh.		/ˈtʃɪli/
+boiling.weather	boiling	adjective	2	weather	nóng như thiêu	thời tiết cực kỳ nóng (cách nói thân mật)	It's boiling today! Let's go swimming.	Hôm nay nóng như thiêu! Đi bơi thôi.		/ˈbɔɪlɪŋ/
+muddy	muddy	adjective	2	weather	lầy lội, đầy bùn	đường, sân có nhiều bùn sau mưa	The road was muddy after the rain.	Con đường lầy lội sau cơn mưa.		/ˈmʌdi/
+clear.sky	clear	adjective	2	weather	quang đãng	bầu trời không mây, không mưa	The sky is clear tonight, so we can see the stars.	Đêm nay trời quang đãng nên chúng ta có thể nhìn thấy sao.		/klɪə/
+fine.weather	fine	adjective	2	weather	(trời) đẹp, nắng ráo	thời tiết tốt, khô ráo, không mưa	If it's fine tomorrow, we'll go to the beach.	Nếu mai trời đẹp, chúng ta sẽ đi biển.		/faɪn/
+bright.weather	bright	adjective	2	weather	sáng sủa, nắng tươi	trời có nhiều ánh nắng, không u ám	It was a bright, sunny morning.	Đó là một buổi sáng nắng tươi sáng sủa.		/braɪt/
+pleasant.weather	pleasant	adjective	2	weather	dễ chịu	thời tiết không quá nóng, không quá lạnh	The weather in spring is very pleasant.	Thời tiết mùa xuân rất dễ chịu.		/ˈpleznt/
+misty	misty	adjective	2	weather	có sương mờ	trời có màn sương mỏng	It was a misty morning in the mountains.	Đó là một buổi sáng sương mờ trên núi.		/ˈmɪsti/
+tropical	tropical	adjective	2	weather	nhiệt đới	thuộc vùng nóng ẩm gần xích đạo	Vietnam has a tropical climate.	Việt Nam có khí hậu nhiệt đới.		/ˈtrɒpɪkl/
+slippery	slippery	adjective	2	weather	trơn trượt	mặt đường ướt hoặc có băng, dễ ngã	The road is slippery after the rain.	Đường trơn trượt sau cơn mưa.		/ˈslɪpəri/
+thunder	thunder	noun	2	weather	sấm	tiếng nổ lớn trên trời khi có giông	The dog is scared of thunder.	Con chó sợ tiếng sấm.		/ˈθʌndə/
+lightning	lightning	noun	2	weather	tia chớp, sét	tia sáng lóe lên trên trời khi có giông	Stay indoors when there is lightning.	Hãy ở trong nhà khi có sét.		/ˈlaɪtnɪŋ/
+breeze	breeze	noun	2	weather	làn gió nhẹ	gió thổi nhẹ, mát và dễ chịu	A cool breeze came from the sea.	Một làn gió mát thổi từ biển vào.		/briːz/
+shower.rain	shower	noun	2	weather	cơn mưa rào	mưa ngắn, bất chợt rồi tạnh	There will be showers in the afternoon.	Buổi chiều sẽ có mưa rào.		/ˈʃaʊə/
+raindrop	raindrop	noun	2	weather	hạt mưa	giọt nước rơi từ trên trời khi mưa	Raindrops ran down the window.	Những hạt mưa chảy dọc ô cửa sổ.		/ˈreɪndrɒp/
+snowflake	snowflake	noun	2	weather	bông tuyết	mảnh tuyết nhỏ rơi từ trời	No two snowflakes are the same.	Không có hai bông tuyết nào giống nhau.		/ˈsnəʊfleɪk/
+thunderstorm	thunderstorm	noun	2	weather	cơn giông	mưa lớn kèm sấm chớp	A thunderstorm hit the city last night.	Một cơn giông đã ập xuống thành phố đêm qua.		/ˈθʌndəstɔːm/
+heatwave	heatwave	noun	2	weather	đợt nắng nóng	nhiều ngày liền nóng bất thường	Many old people got sick during the heatwave.	Nhiều người già bị ốm trong đợt nắng nóng.	heat wave	/ˈhiːtweɪv/
+typhoon	typhoon	noun	2	weather	bão (ở Thái Bình Dương)	bão rất mạnh hình thành trên Thái Bình Dương, kể cả Biển Đông	A typhoon is coming towards central Vietnam.	Một cơn bão đang tiến về miền Trung Việt Nam.		/taɪˈfuːn/
+hurricane	hurricane	noun	2	weather	bão (ở Đại Tây Dương), cuồng phong	bão rất mạnh hình thành ở vùng Đại Tây Dương, như ở Mỹ	The hurricane hit Florida last week.	Cơn bão đã đổ bộ vào Florida tuần trước.		/ˈhʌrɪkən/
+frost	frost	noun	2	weather	sương giá	lớp băng mỏng, trắng phủ trên cỏ, cây khi trời rất lạnh	There was frost on the grass this morning.	Sáng nay có sương giá trên cỏ.		/frɒst/
+mist	mist	noun	2	weather	màn sương mỏng	lớp hơi nước mỏng, nhẹ hơn sương mù	The mountains were covered in mist.	Núi non được bao phủ bởi màn sương mỏng.		/mɪst/
+puddle	puddle	noun	2	weather	vũng nước	chỗ nước mưa đọng lại trên mặt đất	The children jumped in the puddles.	Bọn trẻ nhảy vào những vũng nước.		/ˈpʌdl/
+shade	shade	noun	2	weather	bóng râm	chỗ mát, không có nắng chiếu vào	Let's sit in the shade of that tree.	Chúng ta ngồi dưới bóng râm của cái cây kia đi.		/ʃeɪd/
+snowball.ball	snowball	noun	2	weather	quả cầu tuyết	tuyết vo tròn lại để ném nhau	The children threw snowballs at each other.	Bọn trẻ ném cầu tuyết vào nhau.		/ˈsnəʊbɔːl/
+celsius	Celsius	noun	2	weather	độ C	thang đo nhiệt độ dùng ở Việt Nam	Water freezes at zero degrees Celsius.	Nước đóng băng ở 0 độ C.		/ˈselsiəs/
+minus	minus	preposition	2	weather	âm (dưới 0 độ)	dùng trước số đo nhiệt độ thấp hơn 0	It's minus five degrees in Moscow.	Ở Moscow đang âm năm độ.		/ˈmaɪnəs/
+freeze	freeze	verb	2	weather	đóng băng	nước biến thành băng khi trời rất lạnh	The lake freezes in winter.	Hồ đóng băng vào mùa đông.		/friːz/
+pour.rain	pour	verb	2	weather	(mưa) đổ như trút nước	mưa rất to, rất nhiều trong một lúc	It poured all afternoon.	Trời mưa như trút nước cả buổi chiều.		/pɔː/
+heavily	heavily	adverb	2	weather	(mưa) to, nặng hạt	mưa rơi nhiều và mạnh	It rained heavily last night.	Đêm qua trời mưa rất to.		/ˈhevɪli/
+warm_up.weather	warm up	phrasal_verb	2	weather	ấm lên	thời tiết, nhiệt độ trở nên ấm hơn	It will warm up next week.	Tuần sau trời sẽ ấm lên.
+heat_up.weather	heat up	phrasal_verb	2	weather	nóng dần lên	trời ngày càng nóng hơn, thường vào trưa hoặc đầu hè	It really heats up after ten o'clock.	Sau mười giờ trời nóng hẳn lên.
+cool_down.weather	cool down	phrasal_verb	2	weather	mát dần, dịu mát	trời bớt nóng, thường vào buổi tối	It cools down a lot after sunset.	Sau khi mặt trời lặn trời mát hơn nhiều.
+clear_up.weather	clear up	phrasal_verb	2	weather	(trời) tạnh ráo trở lại	mây tan, mưa tạnh, trời đẹp lên	I hope it clears up before the match.	Tôi hy vọng trời tạnh ráo trước trận đấu.
+blow_away	blow away	phrasal_verb	2	weather	(gió) thổi bay	gió mạnh cuốn một vật đi mất	Hold your hat or the wind will blow it away.	Giữ mũ đi kẻo gió thổi bay mất.
+come_out.sun	come out	phrasal_verb	2	weather	(mặt trời) ló ra	mặt trời xuất hiện sau mây hoặc sau mưa	The sun came out after the rain.	Mặt trời ló ra sau cơn mưa.
+dry_off	dry off	phrasal_verb	2	weather	lau khô người	làm khô người, quần áo sau khi bị mưa ướt	Come in and dry off with this towel.	Vào nhà và lau khô người bằng chiếc khăn này đi.
+light_rain	light rain	collocation	2	weather	mưa nhỏ, mưa nhẹ	mưa ít, hạt nhỏ	There will be light rain in the morning.	Buổi sáng sẽ có mưa nhỏ.
+heavy_snow	heavy snow	collocation	2	weather	tuyết rơi dày	tuyết rơi nhiều, phủ kín đường sá	Heavy snow closed the mountain roads.	Tuyết rơi dày khiến các con đường núi bị đóng.
+dark_clouds	dark clouds	collocation	2	weather	mây đen	mây dày màu xám đen, báo hiệu sắp mưa	Dark clouds are coming. It's going to rain.	Mây đen đang kéo tới. Trời sắp mưa rồi.
+below_zero	below zero	collocation	2	weather	dưới 0 độ	nhiệt độ thấp hơn 0 độ C	Last night the temperature fell below zero.	Đêm qua nhiệt độ xuống dưới 0 độ.	below freezing
+stop_raining	stop raining	collocation	2	weather	tạnh mưa	khi mưa ngừng rơi	Let's wait until it stops raining.	Chúng ta đợi đến khi tạnh mưa nhé.
+is_it_going_to_rain	is it going to rain	phrase	2	weather	trời có mưa không?	câu hỏi xem sắp tới trời có mưa không	Is it going to rain this afternoon?	Chiều nay trời có mưa không?
+whats_the_forecast_for_tomorrow	what's the forecast for tomorrow	phrase	2	weather	dự báo ngày mai thế nào?	hỏi về thời tiết dự báo cho ngày hôm sau	What's the forecast for tomorrow? Will it be sunny?	Dự báo ngày mai thế nào? Trời có nắng không?
+isnt_it_hot_today	isn't it hot today	phrase	2	weather	hôm nay nóng nhỉ?	câu bắt chuyện xã giao về thời tiết	Isn't it hot today? I need some water.	Hôm nay nóng nhỉ? Tôi cần chút nước.
+its_getting_cold	it's getting cold	phrase	2	weather	trời đang trở lạnh	nói khi nhiệt độ bắt đầu giảm	It's getting cold. Let's go inside.	Trời đang trở lạnh rồi. Vào trong thôi.

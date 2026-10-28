@@ -1,0 +1,108 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+bedroom	bedroom	noun	1	home	phòng ngủ	phòng có giường để ngủ	My bedroom is upstairs.	Phòng ngủ của tôi ở trên lầu.		/ˈbedruːm/
+bathroom	bathroom	noun	1	home	phòng tắm	phòng có vòi sen, bồn rửa và thường có bồn cầu	The bathroom is next to the kitchen.	Phòng tắm ở cạnh nhà bếp.		/ˈbɑːθruːm/
+living_room	living room	noun	1	home	phòng khách	phòng để cả nhà ngồi chơi, xem tivi, tiếp khách	We watch TV in the living room.	Chúng tôi xem tivi ở phòng khách.	sitting room|lounge	
+garden	garden	noun	1	home	khu vườn (của nhà)	đất trồng cây, hoa quanh nhà	My mum grows flowers in the garden.	Mẹ tôi trồng hoa trong vườn.		/ˈɡɑːdn/
+wall	wall	noun	1	home	bức tường	mặt dựng đứng ngăn các phòng hoặc bao quanh nhà	There are family photos on the wall.	Trên tường có những bức ảnh gia đình.		/wɔːl/
+floor.surface	floor	noun	1	home	sàn nhà	mặt dưới của căn phòng, nơi mình đi lại	Don't leave your shoes on the floor.	Đừng để giày trên sàn nhà.		/flɔː/
+stairs	stairs	noun	1	home	cầu thang	các bậc để đi lên, đi xuống tầng	Be careful on the stairs.	Đi cầu thang cẩn thận nhé.		/steəz/
+sofa	sofa	noun	1	home	ghế sofa, ghế dài có đệm	ghế êm cho hai, ba người ngồi ở phòng khách	Dad fell asleep on the sofa.	Bố ngủ quên trên ghế sofa.	couch	/ˈsəʊfə/
+pillow	pillow	noun	1	home	cái gối	đồ mềm để kê đầu khi ngủ	I like a soft pillow.	Tôi thích gối mềm.		/ˈpɪləʊ/
+blanket	blanket	noun	1	home	cái chăn, cái mền	đắp lên người cho ấm khi ngủ	It's cold, so take another blanket.	Trời lạnh, lấy thêm một cái chăn nữa đi.		/ˈblæŋkɪt/
+lamp	lamp	noun	1	home	cái đèn (bàn, ngủ)	đèn nhỏ đặt trên bàn hoặc cạnh giường	I read by the lamp next to my bed.	Tôi đọc sách bên ngọn đèn cạnh giường.		/læmp/
+light.lamp	light	noun	1	home	đèn (điện)	đèn chiếu sáng trong phòng, bật tắt bằng công tắc	Can you turn on the light?	Bạn bật đèn lên được không?		/laɪt/
+fan.device	fan	noun	1	home	cái quạt	thiết bị tạo gió làm mát	It's so hot. Can you turn on the fan?	Nóng quá. Bạn bật quạt lên được không?		/fæn/
+fridge	fridge	noun	1	home	tủ lạnh	thiết bị giữ đồ ăn, đồ uống luôn lạnh	Put the milk back in the fridge.	Cất sữa lại vào tủ lạnh đi.	refrigerator	/frɪdʒ/
+toilet	toilet	noun	1	home	bồn cầu, nhà vệ sinh	chỗ đi vệ sinh trong nhà	Where's the toilet, please?	Cho hỏi nhà vệ sinh ở đâu ạ?		/ˈtɔɪlət/
+table.furniture	table	noun	1	home	cái bàn	đồ đạc có mặt phẳng và chân, để ăn hay đặt đồ	Put the plates on the table.	Đặt đĩa lên bàn đi.		/ˈteɪbl/
+mirror	mirror	noun	1	home	cái gương	mặt kính để soi mình	She looked in the mirror before she left.	Cô ấy soi gương trước khi đi.		/ˈmɪrə/
+bin	bin	noun	1	home	thùng rác	thùng để bỏ rác trong nhà	Throw it in the bin, please.	Bỏ nó vào thùng rác giúp mình nhé.	dustbin|trash can	/bɪn/
+flat.home	flat	noun	1	home	căn hộ	nơi ở gồm vài phòng trong một tòa nhà nhiều tầng	They live in a flat on the fifth floor.	Họ sống trong một căn hộ ở tầng năm.	apartment	/flæt/
+home	home	noun	1	home	nhà, tổ ấm	nơi mình sống cùng gia đình	There's no place like home.	Không đâu bằng nhà mình.		/həʊm/
+cupboard	cupboard	noun	1	home	tủ (có cửa)	tủ có cánh để cất bát đĩa, đồ ăn hay đồ dùng	The cups are in the cupboard.	Cốc ở trong tủ.		/ˈkʌbəd/
+carpet	carpet	noun	1	home	thảm trải sàn	thảm phủ kín cả sàn phòng	We have a blue carpet in the bedroom.	Phòng ngủ nhà tôi trải thảm màu xanh.		/ˈkɑːpɪt/
+shelf	shelf	noun	1	home	cái kệ, giá	tấm gỗ gắn tường hoặc trong tủ để đặt đồ	Put the books back on the shelf.	Đặt sách lại lên kệ đi.		/ʃelf/
+curtain	curtain	noun	1	home	rèm cửa	tấm vải treo che cửa sổ	Can you close the curtains?	Bạn kéo rèm lại được không?		/ˈkɜːtn/
+roof	roof	noun	1	home	mái nhà	phần che phía trên cùng của ngôi nhà	The roof leaks when it rains.	Mái nhà bị dột khi trời mưa.		/ruːf/
+gate	gate	noun	1	home	cổng	cửa ở hàng rào hay lối vào sân nhà	Please close the gate behind you.	Nhớ đóng cổng sau khi vào nhé.		/ɡeɪt/
+clean.adj	clean	adjective	1	home	sạch, sạch sẽ	không bẩn, không có bụi	Her house is always clean.	Nhà cô ấy lúc nào cũng sạch sẽ.		/kliːn/
+dirty	dirty	adjective	1	home	bẩn	có bụi, vết bẩn, cần lau rửa	Your shoes are dirty. Take them off.	Giày con bẩn rồi. Cởi ra đi.		/ˈdɜːti/
+broken	broken	adjective	1	home	bị hỏng, bị vỡ	đồ đạc, máy móc không dùng được nữa	The washing machine is broken again.	Máy giặt lại hỏng rồi.		/ˈbrəʊkən/
+messy	messy	adjective	1	home	bừa bộn	phòng ốc đồ đạc vứt lung tung	Your room is so messy!	Phòng con bừa bộn quá!	untidy	/ˈmesi/
+clean.verb	clean	verb	1	home	lau dọn, làm sạch	làm cho nhà cửa, đồ vật hết bẩn	I clean the house every Saturday.	Thứ Bảy nào tôi cũng lau dọn nhà.		/kliːn/
+inside	inside	adverb	1	home	vào trong, ở trong nhà	vào bên trong nhà, phòng	It's raining. Let's go inside.	Trời mưa rồi. Mình vào trong nhà đi.	indoors	/ˌɪnˈsaɪd/
+upstairs	upstairs	adverb	1	home	(ở) trên lầu, tầng trên	đi lên hoặc ở tầng trên của ngôi nhà	The children are playing upstairs.	Bọn trẻ đang chơi ở trên lầu.		/ˌʌpˈsteəz/
+downstairs	downstairs	adverb	1	home	(ở) dưới nhà, tầng dưới	đi xuống hoặc ở tầng dưới của ngôi nhà	Breakfast is ready. Come downstairs!	Bữa sáng xong rồi. Xuống nhà đi!		/ˌdaʊnˈsteəz/
+make_the_bed	make the bed	collocation	1	home	dọn giường	sắp xếp chăn gối gọn gàng sau khi ngủ dậy	Make the bed before you go to school.	Dọn giường trước khi đi học nhé.		
+do_the_dishes	do the dishes	collocation	1	home	rửa bát	rửa chén bát sau bữa ăn	It's my turn to do the dishes tonight.	Tối nay đến lượt tôi rửa bát.	wash the dishes|wash up	
+turn_on	turn on	phrasal_verb	1	home	bật (đèn, máy)	cho đèn hay thiết bị điện bắt đầu chạy	Turn on the light, please.	Bật đèn lên giúp mình.	switch on	
+turn_off	turn off	phrasal_verb	1	home	tắt (đèn, máy)	cho đèn hay thiết bị điện ngừng chạy	Turn off the TV and go to bed.	Tắt tivi rồi đi ngủ đi.	switch off	
+front_door	front door	noun	1	home	cửa chính	cửa trước của ngôi nhà, lối vào chính	Someone is knocking at the front door.	Có ai đang gõ cửa chính.		
+come_in	come in	phrase	1	home	mời vào	câu mời khách bước vào nhà, vào phòng	Come in and sit down.	Mời vào ngồi đi.		
+tidy_up	tidy up	phrasal_verb	1	home	dọn dẹp cho gọn	sắp xếp lại đồ đạc bừa bộn	Please tidy up your toys.	Con dọn đồ chơi cho gọn nhé.		
+clean_the_house	clean the house	collocation	1	home	dọn dẹp nhà cửa	quét, lau, sắp xếp cả ngôi nhà	We clean the house before Tet.	Chúng tôi dọn dẹp nhà cửa trước Tết.		
+water_the_plants	water the plants	collocation	1	home	tưới cây	cho cây trong nhà, ngoài vườn uống nước	Can you water the plants while I'm away?	Bạn tưới cây giúp tôi khi tôi đi vắng được không?		
+air_conditioner	air conditioner	noun	1	home	máy lạnh, điều hòa	máy làm mát không khí trong phòng	Turn off the air conditioner when you go out.	Tắt điều hòa khi ra ngoài nhé.	air con	
+washing_machine	washing machine	noun	1	home	máy giặt	máy giặt quần áo	Put your dirty clothes in the washing machine.	Cho quần áo bẩn vào máy giặt đi.		
+garage	garage	noun	2	home	nhà để xe, ga-ra	chỗ để ô tô, xe máy trong nhà	Dad parks the car in the garage.	Bố đỗ xe trong ga-ra.		/ˈɡærɑːʒ/
+balcony	balcony	noun	2	home	ban công	phần nhô ra ngoài ở tầng trên, có lan can	We have breakfast on the balcony.	Chúng tôi ăn sáng ngoài ban công.		/ˈbælkəni/
+yard.garden	yard	noun	2	home	cái sân	khoảng đất trống trước hoặc sau nhà	The kids are playing in the yard.	Bọn trẻ đang chơi ngoài sân.		/jɑːd/
+ceiling	ceiling	noun	2	home	trần nhà	mặt phía trên của căn phòng	There's a spider on the ceiling.	Có một con nhện trên trần nhà.		/ˈsiːlɪŋ/
+floor.storey	floor	noun	2	home	tầng (nhà)	một tầng trong tòa nhà	Our flat is on the third floor.	Căn hộ của chúng tôi ở tầng ba.		/flɔː/
+ground_floor	ground floor	noun	2	home	tầng trệt	tầng sát mặt đất của tòa nhà	The kitchen is on the ground floor.	Nhà bếp ở tầng trệt.		
+lift.elevator	lift	noun	2	home	thang máy	máy đưa người lên xuống các tầng	Let's take the lift. The stairs are tiring.	Mình đi thang máy đi. Leo cầu thang mệt lắm.	elevator	/lɪft/
+dining_room	dining room	noun	2	home	phòng ăn	phòng có bàn để cả nhà ăn cơm	We eat in the dining room on Sundays.	Chủ nhật chúng tôi ăn ở phòng ăn.		
+bookcase	bookcase	noun	2	home	tủ sách, giá sách	đồ đạc có nhiều ngăn để sách	The bookcase is full of old books.	Tủ sách đầy sách cũ.	bookshelf	/ˈbʊkkeɪs/
+wardrobe	wardrobe	noun	2	home	tủ quần áo	tủ cao có cánh để treo quần áo	Hang your coat in the wardrobe.	Treo áo khoác vào tủ quần áo đi.		/ˈwɔːdrəʊb/
+drawer	drawer	noun	2	home	ngăn kéo	hộp kéo ra đẩy vào trong bàn, tủ	The scissors are in the top drawer.	Cái kéo ở trong ngăn kéo trên cùng.		/drɔː/
+armchair	armchair	noun	2	home	ghế bành	ghế êm một chỗ ngồi có chỗ gác tay	Grandpa always sits in that armchair.	Ông lúc nào cũng ngồi ở chiếc ghế bành đó.		/ˈɑːmtʃeə/
+cushion	cushion	noun	2	home	gối tựa, gối ôm nhỏ	gối mềm đặt trên ghế, sofa	She put a cushion behind her back.	Cô ấy đặt một chiếc gối tựa sau lưng.		/ˈkʊʃn/
+sheet.bed	sheet	noun	2	home	ga trải giường	tấm vải trải lên nệm	I change the sheets every week.	Tuần nào tôi cũng thay ga giường.	bedsheet	/ʃiːt/
+coffee_table	coffee table	noun	2	home	bàn nước, bàn trà	bàn thấp đặt trước sofa ở phòng khách	Put your cup on the coffee table.	Đặt cốc lên bàn nước đi.		
+dining_table	dining table	noun	2	home	bàn ăn	bàn lớn để cả nhà ngồi ăn cơm	We bought a new dining table for six people.	Chúng tôi mua một chiếc bàn ăn mới cho sáu người.		
+switch.light	switch	noun	2	home	công tắc	nút bấm để bật tắt đèn, thiết bị	The light switch is next to the door.	Công tắc đèn ở cạnh cửa.		/swɪtʃ/
+light_bulb	light bulb	noun	2	home	bóng đèn	bóng thủy tinh phát sáng lắp vào đèn	The light bulb in the kitchen has gone.	Bóng đèn trong bếp cháy rồi.	bulb	
+ceiling_fan	ceiling fan	noun	2	home	quạt trần	quạt gắn trên trần nhà	Turn on the ceiling fan, it's hot.	Bật quạt trần lên đi, nóng quá.		
+freezer	freezer	noun	2	home	tủ đông, ngăn đá	nơi giữ đồ ăn đông lạnh	There's ice cream in the freezer.	Có kem trong ngăn đá đấy.		/ˈfriːzə/
+microwave	microwave	noun	2	home	lò vi sóng	thiết bị hâm nóng đồ ăn nhanh	Heat the soup in the microwave.	Hâm súp bằng lò vi sóng đi.		/ˈmaɪkrəweɪv/
+heater	heater	noun	2	home	máy sưởi	thiết bị làm ấm phòng	Turn on the heater, it's freezing.	Bật máy sưởi lên đi, lạnh cóng rồi.		/ˈhiːtə/
+toaster	toaster	noun	2	home	máy nướng bánh mì	máy nướng lát bánh mì	Put two slices of bread in the toaster.	Cho hai lát bánh mì vào máy nướng.		/ˈtəʊstə/
+kettle	kettle	noun	2	home	ấm đun nước	đồ dùng nhà bếp để đun sôi nước	Can you put the kettle on?	Bạn bắc ấm nước lên được không?		/ˈketl/
+rice_cooker	rice cooker	noun	2	home	nồi cơm điện	thiết bị nấu cơm bằng điện	The rice cooker keeps the rice warm.	Nồi cơm điện giữ cơm luôn ấm.		
+vacuum_cleaner	vacuum cleaner	noun	2	home	máy hút bụi	máy hút bụi bẩn trên sàn, thảm	The vacuum cleaner is in the cupboard.	Máy hút bụi để trong tủ.	hoover	
+remote_control	remote control	noun	2	home	cái điều khiển từ xa	dùng để bật tắt, chuyển kênh tivi, máy lạnh	Where's the remote control?	Cái điều khiển đâu rồi?	remote	
+iron.appliance	iron	noun	2	home	bàn là, bàn ủi	thiết bị làm phẳng quần áo	Be careful, the iron is hot.	Cẩn thận, bàn là đang nóng đấy.		/ˈaɪən/
+iron.press	iron	verb	2	home	là, ủi (quần áo)	dùng bàn là cho quần áo phẳng	I need to iron my shirt for tomorrow.	Tôi cần là chiếc áo sơ mi cho ngày mai.		/ˈaɪən/
+laundry	laundry	noun	2	home	đồ giặt	quần áo bẩn cần giặt hoặc vừa giặt xong	There's a big pile of laundry on the bed.	Có một đống đồ giặt to trên giường.	washing	/ˈlɔːndri/
+broom	broom	noun	2	home	cái chổi	dụng cụ có cán dài để quét nhà	The broom is behind the door.	Cái chổi ở sau cánh cửa.		/bruːm/
+mop.tool	mop	noun	2	home	cây lau nhà	dụng cụ cán dài có đầu vải để lau sàn	Get the mop, I spilled some water.	Lấy cây lau nhà đi, tôi làm đổ nước rồi.		/mɒp/
+bucket	bucket	noun	2	home	cái xô	đồ đựng nước có quai xách	Fill the bucket with water.	Đổ đầy nước vào xô.		/ˈbʌkɪt/
+sponge	sponge	noun	2	home	miếng bọt biển	miếng mềm hút nước để rửa bát, lau chùi	Use a sponge to wash the dishes.	Dùng miếng bọt biển để rửa bát.		/spʌndʒ/
+sink.basin	sink	noun	2	home	bồn rửa	chậu rửa có vòi nước trong bếp hoặc phòng tắm	Leave the dirty cups in the sink.	Để cốc bẩn trong bồn rửa.		/sɪŋk/
+bathtub	bathtub	noun	2	home	bồn tắm	bồn lớn để ngâm mình tắm	The bathtub is too small for me.	Bồn tắm quá nhỏ với tôi.	bath	/ˈbɑːθtʌb/
+tap.faucet	tap	noun	2	home	vòi nước	vòi vặn ra nước ở bồn rửa	Turn off the tap while you brush your teeth.	Khóa vòi nước khi đánh răng nhé.	faucet	/tæp/
+doorbell	doorbell	noun	2	home	chuông cửa	chuông bấm ngoài cửa để báo có khách	I heard the doorbell ring.	Tôi nghe thấy chuông cửa reo.		/ˈdɔːbel/
+comfortable	comfortable	adjective	2	home	êm ái, thoải mái	đồ đạc, phòng ốc dễ chịu khi dùng	This sofa is really comfortable.	Chiếc sofa này thật êm.	comfy	/ˈkʌmftəbl/
+dusty	dusty	adjective	2	home	đầy bụi, bám bụi	đồ đạc lâu ngày không lau	The old books in the attic are very dusty.	Những cuốn sách cũ trên gác mái phủ đầy bụi.		/ˈdʌsti/
+noisy	noisy	adjective	2	home	ồn ào	nhà, hàng xóm, đường phố gây nhiều tiếng ồn	Our neighbours are very noisy at night.	Hàng xóm nhà tôi rất ồn ào vào ban đêm.		/ˈnɔɪzi/
+sweep	sweep	verb	2	home	quét (nhà)	dùng chổi làm sạch bụi, rác trên sàn	Can you sweep the kitchen floor?	Bạn quét sàn bếp được không?		/swiːp/
+mop.verb	mop	verb	2	home	lau sàn bằng cây lau	dùng cây lau nhà và nước để làm sạch sàn	I mop the floor every evening.	Tối nào tôi cũng lau sàn.		/mɒp/
+vacuum	vacuum	verb	2	home	hút bụi	dùng máy hút bụi làm sạch sàn, thảm	I vacuum the carpet twice a week.	Tôi hút bụi thảm mỗi tuần hai lần.	hoover	/ˈvækjuːm/
+wipe	wipe	verb	2	home	lau, chùi	dùng khăn làm sạch bề mặt	Please wipe the table after dinner.	Lau bàn sau bữa tối nhé.		/waɪp/
+fold	fold	verb	2	home	gấp (quần áo, chăn)	gập gọn quần áo đã khô	Can you help me fold the clothes?	Bạn giúp tôi gấp quần áo được không?		/fəʊld/
+lock	lock	verb	2	home	khóa (cửa)	dùng chìa khóa đóng chặt cửa lại	Did you lock the front door?	Bạn đã khóa cửa chính chưa?		/lɒk/
+unlock	unlock	verb	2	home	mở khóa	dùng chìa khóa mở cửa đã khóa	I can't unlock the door. The key doesn't work.	Tôi không mở khóa cửa được. Chìa khóa không vặn được.		/ʌnˈlɒk/
+fix.repair	fix	verb	2	home	sửa (đồ hỏng)	làm cho đồ đạc, máy móc dùng được lại	Dad fixed the broken chair.	Bố đã sửa chiếc ghế bị hỏng.	repair	/fɪks/
+put_away	put away	phrasal_verb	2	home	cất đi, cất vào chỗ	để đồ về đúng chỗ của nó sau khi dùng	Put away your clothes, please.	Cất quần áo của con đi nhé.		
+hang_up.clothes	hang up	phrasal_verb	2	home	treo lên	treo áo, khăn lên móc	Hang up your coat in the hall.	Treo áo khoác ở hành lang đi.		
+plug_in	plug in	phrasal_verb	2	home	cắm điện	cắm phích của thiết bị vào ổ điện	Is the kettle plugged in?	Ấm nước đã cắm điện chưa?		
+clean_up	clean up	phrasal_verb	2	home	dọn sạch	lau dọn sau khi làm bẩn, bày bừa	Let's clean up the kitchen after the party.	Mình dọn sạch nhà bếp sau bữa tiệc nhé.		
+move_in	move in	phrasal_verb	2	home	dọn đến ở	chuyển đồ đạc đến ở nhà mới	We moved in last month.	Chúng tôi dọn đến ở từ tháng trước.		
+do_the_housework	do the housework	collocation	2	home	làm việc nhà	lau dọn, giặt giũ, nấu nướng trong nhà	Everyone in my family helps to do the housework.	Mọi người trong nhà tôi đều giúp làm việc nhà.		
+take_out_the_rubbish	take out the rubbish	collocation	2	home	đổ rác	mang túi rác ra ngoài để vứt	It's your turn to take out the rubbish.	Đến lượt con đi đổ rác đấy.	take out the trash|take out the bins	
+set_the_table	set the table	collocation	2	home	bày bàn ăn	đặt bát, đũa, cốc lên bàn trước bữa ăn	Can you set the table for dinner?	Con bày bàn ăn tối được không?	lay the table	
+clear_the_table	clear the table	collocation	2	home	dọn bàn ăn	cất bát đĩa khỏi bàn sau bữa ăn	After dinner, the kids clear the table.	Sau bữa tối, bọn trẻ dọn bàn ăn.		
+pay_the_rent	pay the rent	collocation	2	home	trả tiền nhà	trả tiền thuê nhà hằng tháng	We pay the rent on the first of every month.	Chúng tôi trả tiền nhà vào ngày mùng một hằng tháng.		
+take_off_your_shoes	take off your shoes	collocation	2	home	cởi giày ra	bỏ giày dép trước khi bước vào nhà	Please take off your shoes before you come in.	Vui lòng cởi giày trước khi vào nhà.		
+next_door	next door	adverb	2	home	(ở) nhà bên cạnh	ngôi nhà hoặc căn hộ sát vách	A young couple lives next door.	Một cặp vợ chồng trẻ sống ở nhà bên cạnh.		
+whos_there	who's there	phrase	2	home	ai đấy?	hỏi khi nghe tiếng gõ cửa, chuông cửa	Someone knocked, and I asked, "Who's there?"	Có người gõ cửa và tôi hỏi: "Ai đấy?"		

@@ -1,0 +1,122 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+talkative	talkative	adjective	3	communication	hay nói, nói nhiều	thích nói chuyện, nói rất nhiều	My little sister is very talkative.	Em gái tôi rất hay nói chuyện.	chatty	/ˈtɔːkətɪv/
+spoken	spoken	adjective	3	communication	(thuộc) văn nói	ngôn ngữ dùng khi nói, không phải khi viết	Spoken English is often different from written English.	Tiếng Anh nói thường khác với tiếng Anh viết.		/ˈspəʊkən/
+written	written	adjective	3	communication	bằng văn bản	được viết ra chứ không chỉ nói miệng	Please give us a written answer.	Vui lòng cho chúng tôi câu trả lời bằng văn bản.		/ˈrɪtn/
+mother_tongue	mother tongue	collocation	4	communication	tiếng mẹ đẻ	ngôn ngữ đầu tiên một người học từ nhỏ	Vietnamese is my mother tongue.	Tiếng Việt là tiếng mẹ đẻ của tôi.	native language|first language
+native_speaker	native speaker	collocation	4	communication	người bản ngữ	người nói một ngôn ngữ từ khi còn nhỏ	Our teacher is a native speaker of English.	Giáo viên của chúng tôi là người bản ngữ tiếng Anh.
+offensive	offensive	adjective	4	communication	xúc phạm, khó nghe	lời nói khiến người khác bị tổn thương, bực bội	Please don't use offensive language.	Vui lòng không dùng lời lẽ xúc phạm.		/əˈfensɪv/
+respectful	respectful	adjective	4	communication	lễ phép, tôn trọng	nói năng thể hiện sự kính trọng với người khác	Be respectful when you talk to older people.	Hãy lễ phép khi nói chuyện với người lớn tuổi.		/rɪˈspektfl/
+bilingual	bilingual	adjective	4	communication	song ngữ, nói được hai thứ tiếng	nói thành thạo hai ngôn ngữ	Their children are bilingual.	Con của họ nói được hai thứ tiếng.		/baɪˈlɪŋɡwəl/
+outspoken	outspoken	adjective	4	communication	dám nói thẳng	công khai nói ý kiến của mình dù có thể gây tranh cãi	She is outspoken about women's rights.	Cô ấy thẳng thắn lên tiếng về quyền phụ nữ.		/aʊtˈspəʊkən/
+diplomatic	diplomatic	adjective	4	communication	mềm mỏng, có tính ngoại giao	ăn nói khéo để tránh gây mâu thuẫn	Try to be diplomatic when you say no.	Hãy cố mềm mỏng khi từ chối.		/ˌdɪpləˈmætɪk/
+get_through.phone	get through	phrasal_verb	4	communication	gọi được, kết nối được	khi cuối cùng cũng gọi điện được cho ai	I tried to call, but I couldn't get through.	Tôi đã cố gọi nhưng không gọi được.
+put_through	put through	phrasal_verb	4	communication	nối máy	nhân viên chuyển cuộc gọi tới người cần gặp	Can you put me through to the manager?	Bạn nối máy cho tôi gặp quản lý được không?
+talk_over	talk over	phrasal_verb	4	communication	bàn bạc kỹ	nói chuyện cẩn thận về một việc trước khi quyết định	Let's talk it over before we decide.	Hãy bàn bạc kỹ trước khi chúng ta quyết định.
+clear_up.misunderstanding	clear up	phrasal_verb	4	communication	làm sáng tỏ, giải tỏa (hiểu lầm)	giải thích để hết hiểu nhầm giữa hai bên	We need to clear up this misunderstanding.	Chúng ta cần giải tỏa hiểu lầm này.
+tell_off	tell off	phrasal_verb	4	communication	la mắng	mắng ai vì họ làm sai (cách nói thân mật)	The teacher told us off for talking in class.	Cô giáo mắng chúng tôi vì nói chuyện trong lớp.	scold
+talk_back	talk back	phrasal_verb	4	communication	cãi lại	trả lời hỗn với người lớn tuổi hoặc cấp trên	Don't talk back to your parents.	Đừng cãi lại bố mẹ.
+open_up	open up	phrasal_verb	4	communication	mở lòng	bắt đầu nói ra cảm xúc thật của mình	It took him months to open up to me.	Anh ấy mất nhiều tháng mới chịu mở lòng với tôi.
+pass_on.message	pass on	phrasal_verb	4	communication	chuyển lời	nói lại thông tin mình nhận được cho người khác	I'll pass on your message to her.	Tôi sẽ chuyển lời nhắn của bạn cho cô ấy.
+have_a_word_with	have a word with	collocation	4	communication	nói chuyện riêng với	trao đổi ngắn và riêng, thường về chuyện nghiêm túc	Can I have a word with you after class?	Cô nói chuyện riêng với em sau giờ học được không?
+pleased_to_meet_you	pleased to meet you	phrase	4	communication	rất hân hạnh được gặp bạn	cách nói trang trọng khi được giới thiệu với ai	Pleased to meet you, Mr Brown.	Rất hân hạnh được gặp ông, ông Brown.	nice to meet you
+i_owe_you_one	I owe you one	phrase	4	communication	tôi nợ bạn một lần	cảm ơn thân mật, hứa sẽ giúp lại sau	Thanks for helping me move. I owe you one.	Cảm ơn bạn đã giúp mình chuyển nhà. Mình nợ bạn một lần nhé.
+i_couldnt_agree_more	I couldn't agree more	phrase	4	communication	tôi hoàn toàn đồng ý	đồng tình mạnh mẽ với ý kiến vừa nghe	You're right. I couldn't agree more.	Bạn nói đúng. Tôi hoàn toàn đồng ý.	I could not agree more
+i_see_your_point	I see your point	phrase	4	communication	tôi hiểu quan điểm của bạn	thừa nhận ý người khác, thường trước khi nói ý mình	I see your point, but it's too expensive.	Tôi hiểu quan điểm của bạn, nhưng nó đắt quá.	I see what you mean
+by_all_means	by all means	phrase	4	communication	dĩ nhiên rồi, cứ tự nhiên	đồng ý cho phép một cách lịch sự, nhiệt tình	Can I bring a friend? By all means!	Tôi dẫn theo một người bạn được không? Dĩ nhiên rồi!
+not_at_all	not at all	phrase	4	communication	không phiền chút nào	đáp lại câu hỏi bạn có phiền không	Do you mind if I sit here? Not at all.	Tôi ngồi đây có phiền bạn không? Không phiền chút nào.
+would_you_mind	would you mind	phrase	4	communication	bạn có phiền ... không	nhờ ai làm gì một cách rất lịch sự	Would you mind closing the window?	Bạn có phiền đóng cửa sổ giúp không?
+do_me_a_favour	do me a favour	phrase	4	communication	giúp tôi một việc	mở đầu khi nhờ ai giúp đỡ	Can you do me a favour and feed my cat?	Bạn giúp mình một việc nhé, cho mèo của mình ăn được không?	do me a favor
+no_kidding	no kidding	phrase	4	communication	không đùa chứ, thật á	tỏ ý ngạc nhiên khi nghe tin bất ngờ	You won the lottery? No kidding!	Bạn trúng xổ số á? Không đùa chứ!
+i_beg_your_pardon	I beg your pardon	phrase	4	communication	xin lỗi, xin nhắc lại ạ	cách rất trang trọng để xin lỗi hoặc nhờ nhắc lại	I beg your pardon, could you repeat that?	Xin lỗi, ông có thể nhắc lại được không ạ?
+i_suppose_so	I suppose so	phrase	4	communication	chắc là vậy	đồng ý miễn cưỡng hoặc không chắc lắm	Can we go home now? I suppose so.	Giờ mình về được chưa? Chắc là được.
+id_rather_not	I'd rather not	phrase	4	communication	tôi không muốn thì hơn	từ chối nhẹ nhàng, lịch sự	I'd rather not talk about it.	Tôi không muốn nói về chuyện đó thì hơn.	I would rather not
+the_line_is_busy	the line is busy	phrase	4	communication	máy đang bận	khi gọi điện mà người kia đang có cuộc gọi khác	I tried to call, but the line is busy.	Tôi đã gọi nhưng máy đang bận.
+whos_calling	who's calling	phrase	4	communication	ai đang gọi đấy ạ	hỏi lịch sự tên người gọi điện đến	May I ask who's calling?	Cho tôi hỏi ai đang gọi đấy ạ?	who is calling
+can_i_take_a_message	can I take a message	phrase	4	communication	anh chị có muốn nhắn lại gì không	nghe máy hộ người vắng mặt và đề nghị ghi lời nhắn	She's not here right now. Can I take a message?	Cô ấy không có ở đây. Anh có muốn nhắn lại gì không?
+hold_the_line	hold the line	phrase	4	communication	xin vui lòng giữ máy	cách nói trang trọng nhờ người gọi chờ trên điện thoại	Please hold the line. I'll put you through.	Xin vui lòng giữ máy. Tôi sẽ nối máy cho anh.
+catch_you_later	catch you later	phrase	4	communication	gặp sau nhé	chào tạm biệt kiểu rất suồng sã, kiểu tiếng lóng	I have to go now. Catch you later!	Mình phải đi đây. Gặp sau nhé!	see you later
+phew	phew	interjection	4	communication	phù	thở phào khi thấy nhẹ nhõm hoặc mệt	Phew, we made it on time!	Phù, chúng ta đến kịp giờ rồi!		/fjuː/
+imply	imply	verb	5	communication	ngụ ý	nói gián tiếp để người nghe tự hiểu một điều	Are you implying that I'm lazy?	Bạn đang ngụ ý rằng tôi lười à?		/ɪmˈplaɪ/
+overhear	overhear	verb	5	communication	tình cờ nghe được	nghe thấy chuyện người khác nói mà không cố ý	I overheard them talking about the party.	Tôi tình cờ nghe họ nói về bữa tiệc.		/ˌəʊvəˈhɪə/
+eavesdrop	eavesdrop	verb	5	communication	nghe lén	cố ý nghe trộm chuyện riêng của người khác	It's rude to eavesdrop on other people.	Nghe lén chuyện người khác là bất lịch sự.		/ˈiːvzdrɒp/
+mumble	mumble	verb	5	communication	nói lầm bầm	nói nhỏ và không rõ, khó nghe	Don't mumble, I can't hear you.	Đừng lầm bầm, tôi không nghe được.		/ˈmʌmbl/
+stammer	stammer	verb	5	communication	nói lắp	nói ngắc ngứ, lặp lại âm vì lo lắng	He stammered when he met the director.	Anh ấy nói lắp khi gặp giám đốc.	stutter	/ˈstæmə/
+nag	nag	verb	5	communication	cằn nhằn	nhắc đi nhắc lại, phàn nàn liên tục	My mum nags me to clean my room.	Mẹ tôi cứ cằn nhằn bắt tôi dọn phòng.		/næɡ/
+flatter	flatter	verb	5	communication	tâng bốc, nịnh	khen quá lời, thường để được lợi	He flatters the boss all the time.	Anh ta suốt ngày nịnh sếp.		/ˈflætə/
+convey	convey	verb	5	communication	truyền tải	làm cho người khác hiểu một ý, một cảm xúc	It's hard to convey feelings in a text message.	Thật khó truyền tải cảm xúc qua tin nhắn.		/kənˈveɪ/
+confide	confide	verb	5	communication	tâm sự, giãi bày	kể chuyện riêng tư cho người mình tin tưởng	She confided in her best friend.	Cô ấy tâm sự với bạn thân.		/kənˈfaɪd/
+misinterpret	misinterpret	verb	5	communication	diễn giải sai	hiểu lời nói, hành động của ai theo nghĩa khác ý thật	He misinterpreted my silence as anger.	Anh ấy hiểu sai sự im lặng của tôi là đang giận.		/ˌmɪsɪnˈtɜːprɪt/
+correspond.letters	correspond	verb	5	communication	trao đổi thư từ	viết thư qua lại với ai trong thời gian dài	We corresponded for years before we met.	Chúng tôi viết thư qua lại nhiều năm trước khi gặp nhau.		/ˌkɒrəˈspɒnd/
+disclose	disclose	verb	5	communication	công bố, để lộ (thông tin kín)	chính thức cho biết thông tin vốn được giữ kín	The company did not disclose the price.	Công ty không công bố giá.		/dɪsˈkləʊz/
+tactful	tactful	adjective	5	communication	tế nhị, khéo ăn nói	nói năng cẩn thận để không làm ai phật lòng	She gave a tactful answer.	Cô ấy trả lời rất tế nhị.		/ˈtæktfl/
+apologetic	apologetic	adjective	5	communication	tỏ ra hối lỗi	thể hiện mình thấy có lỗi	He was very apologetic about the mistake.	Anh ấy tỏ ra rất hối lỗi về sai sót đó.		/əˌpɒləˈdʒetɪk/
+verbal	verbal	adjective	5	communication	bằng lời nói	được nói ra chứ không viết thành văn bản	We only have a verbal agreement.	Chúng tôi chỉ có thỏa thuận bằng lời nói.		/ˈvɜːbl/
+non-verbal	non-verbal	adjective	5	communication	không lời, phi ngôn ngữ	giao tiếp bằng cử chỉ, nét mặt thay vì lời nói	Smiling is a form of non-verbal communication.	Mỉm cười là một hình thức giao tiếp không lời.	nonverbal	/ˌnɒn ˈvɜːbl/
+concise	concise	adjective	5	communication	ngắn gọn, súc tích	nói, viết ít lời mà vẫn đủ ý	Keep your answer clear and concise.	Hãy trả lời rõ ràng và súc tích.	succinct	/kənˈsaɪs/
+courteous	courteous	adjective	5	communication	nhã nhặn, lịch thiệp	lịch sự và chu đáo, thường trong dịch vụ, công việc	The hotel staff were very courteous.	Nhân viên khách sạn rất lịch thiệp.		/ˈkɜːtiəs/
+colloquial	colloquial	adjective	5	communication	thông tục, khẩu ngữ	từ ngữ dùng khi nói chuyện hằng ngày, không dùng khi viết trang trọng	"Gonna" is a colloquial form of "going to".	"Gonna" là cách nói khẩu ngữ của "going to".		/kəˈləʊkwiəl/
+articulate.adj	articulate	adjective	5	communication	ăn nói rành mạch	diễn đạt ý tưởng rõ ràng, mạch lạc	She is an articulate young woman.	Cô ấy là một phụ nữ trẻ ăn nói rành mạch.		/ɑːˈtɪkjələt/
+eloquent	eloquent	adjective	5	communication	hùng hồn, có tài hùng biện	nói hay, giàu cảm xúc và có sức thuyết phục	He gave an eloquent speech.	Ông ấy có một bài phát biểu hùng hồn.		/ˈeləkwənt/
+inaudible	inaudible	adjective	5	communication	không nghe được	quá nhỏ để có thể nghe thấy	Her voice was almost inaudible.	Giọng cô ấy gần như không nghe được.		/ɪnˈɔːdəbl/
+hoarse	hoarse	adjective	5	communication	khàn giọng	giọng bị khàn vì ốm hoặc nói, hét nhiều	I was hoarse after the concert.	Tôi bị khàn giọng sau buổi hòa nhạc.		/hɔːs/
+long-winded	long-winded	adjective	5	communication	dài dòng	nói hay viết quá dài, gây chán	His speech was long-winded and boring.	Bài phát biểu của ông ấy dài dòng và nhàm chán.	verbose	/ˌlɒŋ ˈwɪndɪd/
+rhetorical	rhetorical	adjective	5	communication	(câu hỏi) tu từ	câu hỏi đặt ra không nhằm để được trả lời	Don't answer, it was a rhetorical question.	Đừng trả lời, đó là câu hỏi tu từ.		/rɪˈtɒrɪkl/
+explicit	explicit	adjective	5	communication	rõ ràng, tường minh	nói thẳng, cụ thể, không để ai hiểu lầm	She gave explicit instructions.	Cô ấy đưa ra chỉ dẫn rất rõ ràng.		/ɪkˈsplɪsɪt/
+candid	candid	adjective	5	communication	thật lòng, không che giấu	nói thật cả những điều khó nói	He was candid about his mistakes.	Anh ấy nói thật lòng về những sai lầm của mình.		/ˈkændɪd/
+coherent	coherent	adjective	5	communication	mạch lạc	lời nói, bài viết có ý rõ ràng và liên kết	Her answer was short but coherent.	Câu trả lời của cô ấy ngắn nhưng mạch lạc.		/kəʊˈhɪərənt/
+confidential	confidential	adjective	5	communication	bí mật, kín	thông tin không được kể cho người khác	This conversation is confidential.	Cuộc nói chuyện này là bí mật.		/ˌkɒnfɪˈdenʃl/
+tongue-tied	tongue-tied	adjective	5	communication	ấp úng, líu lưỡi	không nói được vì ngại ngùng hay lo lắng	I get tongue-tied when I talk to strangers.	Tôi bị ấp úng khi nói chuyện với người lạ.		/ˈtʌŋ taɪd/
+soft-spoken	soft-spoken	adjective	5	communication	ăn nói nhỏ nhẹ	có giọng nói dịu dàng, nhẹ nhàng	Her father is a kind, soft-spoken man.	Bố cô ấy là người tốt bụng, ăn nói nhỏ nhẹ.		/ˌsɒft ˈspəʊkən/
+jargon	jargon	noun	5	communication	biệt ngữ chuyên ngành	từ ngữ chuyên môn mà người ngoài ngành khó hiểu	The doctor explained it without medical jargon.	Bác sĩ giải thích mà không dùng thuật ngữ y khoa.		/ˈdʒɑːɡən/
+etiquette	etiquette	noun	5	communication	phép xã giao, nghi thức	quy tắc ứng xử lịch sự trong một hoàn cảnh	Phone etiquette is important at work.	Phép lịch sự khi gọi điện rất quan trọng nơi công sở.		/ˈetɪket/
+fluency	fluency	noun	5	communication	sự lưu loát	khả năng nói một ngôn ngữ trôi chảy	Reading every day improves your fluency.	Đọc mỗi ngày giúp bạn nói lưu loát hơn.		/ˈfluːənsi/
+intonation	intonation	noun	5	communication	ngữ điệu	sự lên xuống của giọng khi nói	Your intonation should rise at the end of a question.	Ngữ điệu của bạn nên lên cao ở cuối câu hỏi.		/ˌɪntəˈneɪʃn/
+heart-to-heart	heart-to-heart	noun	5	communication	cuộc nói chuyện chân thành	cuộc trò chuyện thẳng thắn, thân tình về cảm xúc	We had a heart-to-heart about our future.	Chúng tôi đã có cuộc nói chuyện chân thành về tương lai.		/ˌhɑːt tə ˈhɑːt/
+word_of_mouth	word of mouth	collocation	5	communication	sự truyền miệng	thông tin lan truyền qua lời kể của mọi người	The restaurant became famous by word of mouth.	Nhà hàng trở nên nổi tiếng nhờ truyền miệng.
+word_for_word	word for word	collocation	5	communication	nguyên văn, từng chữ một	nhắc lại, chép lại hoặc dịch đúng y từng chữ	He copied the speech word for word.	Anh ta chép bài phát biểu nguyên văn từng chữ.	verbatim
+speak_out	speak out	phrasal_verb	5	communication	lên tiếng (phản đối)	công khai nói lên ý kiến, nhất là để phản đối điều sai	She spoke out against the new rule.	Cô ấy đã lên tiếng phản đối quy định mới.
+butt_in	butt in	phrasal_verb	5	communication	chen ngang, xen vào	ngắt lời một cách thô lỗ khi người khác đang nói	Sorry to butt in, but dinner is ready.	Xin lỗi đã chen ngang, nhưng bữa tối xong rồi.
+blurt_out	blurt out	phrasal_verb	5	communication	buột miệng nói ra	nói điều gì đột ngột, không suy nghĩ trước	He blurted out the secret.	Anh ta buột miệng nói ra bí mật.
+talk_out_of	talk out of	phrasal_verb	5	communication	can ngăn, khuyên (ai) đừng làm	dùng lời lẽ để khuyên ai bỏ một ý định	My friends talked me out of quitting my job.	Bạn bè đã can tôi đừng bỏ việc.
+keep_me_posted	keep me posted	phrase	5	communication	nhớ báo tin cho tôi	nhờ ai cập nhật tình hình khi có tin mới	Keep me posted about the interview.	Nhớ báo tin cho tôi về buổi phỏng vấn nhé.
+get_to_the_point	get to the point	phrase	5	communication	đi thẳng vào vấn đề	nói ngay điều chính, không vòng vo	Please get to the point, I'm busy.	Làm ơn nói thẳng vào vấn đề đi, tôi đang bận.	cut to the chase
+cut_to_the_chase	cut to the chase	idiom	5	communication	vào thẳng chuyện chính	thành ngữ thân mật: bỏ qua phần rườm rà, nói ngay điều quan trọng	Let's cut to the chase. How much is it?	Vào thẳng chuyện chính nhé. Nó giá bao nhiêu?	get to the point
+spill_the_beans	spill the beans	idiom	5	communication	để lộ bí mật	vô tình hay cố ý kể ra điều đang được giữ kín	Who spilled the beans about the surprise party?	Ai đã để lộ chuyện bữa tiệc bất ngờ vậy?
+on_the_same_page	on the same page	idiom	5	communication	cùng chung suy nghĩ, hiểu ý nhau	khi mọi người hiểu và đồng ý cùng một kế hoạch	Let's make sure we're on the same page.	Hãy đảm bảo chúng ta hiểu ý nhau.
+break_the_news	break the news	collocation	5	communication	báo tin (thường là tin buồn)	thông báo một tin quan trọng cho người có liên quan	Who will break the news to her?	Ai sẽ báo tin cho cô ấy?
+strike_up_a_conversation	strike up a conversation	collocation	5	communication	bắt chuyện	bắt đầu nói chuyện với người lạ	He struck up a conversation with the woman next to him.	Anh ấy bắt chuyện với người phụ nữ ngồi cạnh.
+drop_me_a_line	drop me a line	phrase	5	communication	nhắn cho tôi vài dòng	lời dặn thân mật: viết thư hay nhắn tin cho mình	Drop me a line when you get to London.	Đến London thì nhắn cho mình vài dòng nhé.
+speak_your_mind	speak your mind	idiom	5	communication	nói thẳng suy nghĩ của mình	nói ra điều mình thật sự nghĩ, dù người khác có thể không thích	Don't be shy. Speak your mind.	Đừng ngại. Cứ nói thẳng suy nghĩ của bạn.
+im_all_ears	I'm all ears	idiom	5	communication	tôi xin lắng nghe đây	sẵn sàng, háo hức nghe ai đó kể	Tell me your plan. I'm all ears.	Kể kế hoạch của bạn đi. Mình xin lắng nghe đây.
+you_can_say_that_again	you can say that again	idiom	5	communication	chuẩn luôn, quá đúng	đồng ý hoàn toàn với điều người khác vừa nói	It's so hot today! You can say that again.	Hôm nay nóng quá! Chuẩn luôn.
+tell_me_about_it	tell me about it	idiom	5	communication	còn phải nói	đồng cảm vì mình cũng từng gặp điều tương tự	This traffic is terrible! Tell me about it.	Kẹt xe kinh khủng quá! Còn phải nói.
+long_story_short	long story short	phrase	5	communication	nói vắn tắt là	kể gọn một chuyện dài, đi thẳng đến kết quả	Long story short, we missed the train.	Nói vắn tắt là chúng tôi lỡ chuyến tàu.
+between_you_and_me	between you and me	phrase	5	communication	nói riêng giữa hai ta	khi kể điều không muốn người khác biết	Between you and me, I don't like his cooking.	Nói riêng giữa hai ta thôi, tôi không thích món anh ấy nấu.
+speak_of_the_devil	speak of the devil	idiom	5	communication	vừa nhắc Tào Tháo, Tào Tháo đến	khi người đang được nhắc đến bỗng xuất hiện	Speak of the devil, here comes Tom!	Vừa nhắc Tào Tháo, Tào Tháo đến! Tom kìa!
+curt	curt	adjective	6	communication	cộc lốc, xẵng	trả lời ngắn một cách thiếu lịch sự	He gave me a curt reply.	Anh ta trả lời tôi cộc lốc.	terse	/kɜːt/
+terse	terse	adjective	6	communication	cụt lủn, vắn tắt lạnh lùng	câu viết, lời đáp rất ngắn, thường do bực bội	He sent me a terse email.	Anh ấy gửi tôi một thư điện tử cụt lủn.	curt	/tɜːs/
+cryptic	cryptic	adjective	6	communication	khó hiểu, bí ẩn	lời nói có ý ẩn, khó đoán nghĩa	She left a cryptic message on my desk.	Cô ấy để lại một lời nhắn khó hiểu trên bàn tôi.		/ˈkrɪptɪk/
+garrulous	garrulous	adjective	6	communication	ba hoa, lắm lời	nói quá nhiều về chuyện không quan trọng	Our garrulous neighbour talked for an hour.	Ông hàng xóm lắm lời của chúng tôi nói suốt một tiếng.		/ˈɡærələs/
+verbose	verbose	adjective	6	communication	rườm rà, nhiều chữ thừa	văn viết, lời nói dùng quá nhiều từ không cần thiết	The report is too verbose.	Bản báo cáo quá rườm rà.	long-winded	/vɜːˈbəʊs/
+implicit	implicit	adjective	6	communication	ngầm, ẩn ý	được hiểu ngầm mà không nói thẳng ra	There was an implicit warning in his words.	Trong lời anh ấy có một lời cảnh báo ngầm.		/ɪmˈplɪsɪt/
+euphemism	euphemism	noun	6	communication	uyển ngữ, cách nói giảm nói tránh	từ nhẹ nhàng dùng thay cho từ khó nghe	"Passed away" is a euphemism for "died".	"Passed away" là cách nói giảm nói tránh của "died".		/ˈjuːfəmɪzəm/
+innuendo	innuendo	noun	6	communication	lời bóng gió ác ý	lời nói gián tiếp ngụ ý điều không hay về ai	The article was full of innuendo.	Bài báo đầy những lời bóng gió ác ý.		/ˌɪnjuˈendəʊ/
+rhetoric	rhetoric	noun	6	communication	lời lẽ hoa mỹ, tài hùng biện	lời nói hay để thuyết phục nhưng có thể thiếu thực chất	His speech was all rhetoric and no action.	Bài phát biểu của ông ta toàn lời lẽ hoa mỹ mà không có hành động.		/ˈretərɪk/
+banter	banter	noun	6	communication	lời trêu đùa qua lại	những câu đùa vui vẻ, thân thiện giữa bạn bè	I enjoy the friendly banter in our office.	Tôi thích những câu đùa vui thân thiện ở văn phòng.		/ˈbæntə/
+eloquence	eloquence	noun	6	communication	tài hùng biện	khả năng nói hay và thuyết phục	Everyone admired her eloquence.	Ai cũng ngưỡng mộ tài hùng biện của cô ấy.		/ˈeləkwəns/
+divulge	divulge	verb	6	communication	tiết lộ (điều bí mật)	trang trọng: để lộ thông tin lẽ ra phải giữ kín	He refused to divulge his sources.	Anh ấy từ chối tiết lộ nguồn tin của mình.		/daɪˈvʌldʒ/
+allude	allude	verb	6	communication	nhắc khéo đến	đề cập gián tiếp tới một chuyện mà không gọi thẳng tên	She alluded to her problems at home.	Cô ấy nhắc khéo đến những vấn đề ở nhà.		/əˈluːd/
+retort	retort	verb	6	communication	vặn lại, đáp trả	trả lời nhanh và gay gắt, thường khi bị chỉ trích	"That's not my problem," she retorted.	"Đó không phải chuyện của tôi," cô ấy vặn lại.		/rɪˈtɔːt/
+rebuke	rebuke	verb	6	communication	khiển trách	trang trọng: phê bình nghiêm khắc ai vì đã làm sai	The manager rebuked him for being rude.	Quản lý khiển trách anh ta vì thô lỗ.		/rɪˈbjuːk/
+digress	digress	verb	6	communication	lạc đề	nói lan man sang chuyện khác khi đang nói về một chủ đề	Sorry, I digress. Back to the main point.	Xin lỗi, tôi lạc đề rồi. Quay lại ý chính nhé.		/daɪˈɡres/
+reiterate	reiterate	verb	6	communication	nhắc lại để nhấn mạnh	trang trọng: nói lại điều đã nói để nhấn mạnh	Let me reiterate that safety comes first.	Tôi xin nhắc lại rằng an toàn là trên hết.		/riˈɪtəreɪt/
+articulate.verb	articulate	verb	6	communication	diễn đạt rõ ràng bằng lời	nói ra ý nghĩ, cảm xúc một cách mạch lạc	He found it hard to articulate his feelings.	Anh ấy thấy khó diễn đạt rõ cảm xúc của mình.		/ɑːˈtɪkjuleɪt/
+read_between_the_lines	read between the lines	idiom	6	communication	hiểu ý ngầm	đoán ra điều người khác muốn nói mà không nói thẳng	If you read between the lines, she's not happy.	Nếu hiểu ý ngầm, bạn sẽ thấy cô ấy không vui.
+put_in_a_good_word	put in a good word	idiom	6	communication	nói tốt cho, nói giúp	khen ai với người có quyền quyết định để giúp họ	Could you put in a good word for me with your boss?	Bạn nói tốt cho tôi với sếp bạn được không?
+get_a_word_in_edgeways	get a word in edgeways	idiom	6	communication	chen được một lời	thường dùng phủ định: người khác nói nhiều quá, không xen vào được	She talked so much that I couldn't get a word in edgeways.	Cô ấy nói nhiều đến mức tôi không chen được câu nào.	get a word in edgewise
+i_beg_to_differ	I beg to differ	phrase	6	communication	tôi xin phép không đồng ý	cách phản đối rất lịch sự, trang trọng	I beg to differ. I think the plan is too risky.	Tôi xin phép không đồng ý. Tôi nghĩ kế hoạch quá rủi ro.
+you_dont_say	you don't say	idiom	6	communication	thế à, ai mà ngờ	tỏ vẻ ngạc nhiên, thường mỉa mai vì điều quá hiển nhiên	He's late again? You don't say!	Anh ta lại đến muộn à? Thế à, ai mà ngờ!
+hear_it_on_the_grapevine	hear it on the grapevine	idiom	6	communication	nghe phong thanh	biết tin qua lời đồn, không phải tin chính thức	I heard it on the grapevine that she's getting married.	Tôi nghe phong thanh rằng cô ấy sắp cưới.
+mince_words	mince words	idiom	6	communication	nói tránh, rào đón	thường dùng phủ định: not mince words là nói thẳng không kiêng nể	She doesn't mince words.	Cô ấy nói thẳng chẳng kiêng nể gì.
+off_the_record	off the record	phrase	6	communication	nói không chính thức	nói riêng, không muốn bị ghi lại hay trích dẫn công khai	Off the record, the plan has already failed.	Nói không chính thức thì kế hoạch đã thất bại rồi.
+rumour_has_it	rumour has it	idiom	6	communication	nghe đồn là	mở đầu khi kể lại một tin đồn	Rumour has it that the shop is closing.	Nghe đồn là cửa hàng sắp đóng cửa.	rumor has it

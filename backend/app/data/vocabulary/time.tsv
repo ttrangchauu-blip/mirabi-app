@@ -1,0 +1,288 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic	source	status
+time	time	noun	1	time	thời gian	khái niệm phút, giờ, ngày tháng trôi qua	I don't have much time today.	Hôm nay tôi không có nhiều thời gian.		/taɪm/	mirabi-ai-2026-10	active
+day	day	noun	1	time	ngày	khoảng 24 giờ, từ sáng đến đêm	There are seven days in a week.	Một tuần có bảy ngày.		/deɪ/	mirabi-ai-2026-10	active
+week	week	noun	1	time	tuần	bảy ngày liên tiếp	I see her every week.	Tuần nào tôi cũng gặp cô ấy.		/wiːk/	mirabi-ai-2026-10	active
+month	month	noun	1	time	tháng	một trong mười hai phần của một năm	My birthday is next month.	Sinh nhật tôi vào tháng sau.		/mʌnθ/	mirabi-ai-2026-10	active
+year	year	noun	1	time	năm	khoảng thời gian mười hai tháng	She is ten years old.	Cô bé mười tuổi.		/jɪə/	mirabi-ai-2026-10	active
+hour	hour	noun	1	time	giờ, tiếng đồng hồ	khoảng thời gian 60 phút	The film is two hours long.	Bộ phim dài hai tiếng.		/ˈaʊə/	mirabi-ai-2026-10	active
+minute	minute	noun	1	time	phút	khoảng thời gian 60 giây	The bus comes every ten minutes.	Cứ mười phút lại có một chuyến xe buýt.		/ˈmɪnɪt/	mirabi-ai-2026-10	active
+today	today	adverb	1	time	hôm nay	ngày đang diễn ra lúc nói	Today is my first day at school.	Hôm nay là ngày đầu tiên tôi đi học.		/təˈdeɪ/	mirabi-ai-2026-10	active
+tomorrow	tomorrow	adverb	1	time	ngày mai	ngày ngay sau hôm nay	I have an exam tomorrow.	Ngày mai tôi có bài thi.		/təˈmɒrəʊ/	mirabi-ai-2026-10	active
+yesterday	yesterday	adverb	1	time	hôm qua	ngày ngay trước hôm nay	It rained all day yesterday.	Hôm qua trời mưa cả ngày.		/ˈjestədeɪ/	mirabi-ai-2026-10	active
+now	now	adverb	1	time	bây giờ	thời điểm đang nói	I'm busy now.	Bây giờ tôi đang bận.		/naʊ/	mirabi-ai-2026-10	active
+tonight	tonight	adverb	1	time	tối nay	buổi tối hoặc đêm của ngày hôm nay	What's on TV tonight?	Tối nay ti vi có chương trình gì?		/təˈnaɪt/	mirabi-ai-2026-10	active
+morning	morning	noun	1	time	buổi sáng	khoảng thời gian từ lúc trời sáng đến trưa	I drink coffee every morning.	Sáng nào tôi cũng uống cà phê.		/ˈmɔːnɪŋ/	mirabi-ai-2026-10	active
+afternoon	afternoon	noun	1	time	buổi chiều	khoảng thời gian từ trưa đến lúc chạng vạng	We play football in the afternoon.	Chúng tôi chơi bóng đá vào buổi chiều.		/ˌɑːftəˈnuːn/	mirabi-ai-2026-10	active
+evening	evening	noun	1	time	buổi tối	từ chiều muộn đến lúc đi ngủ	What are you doing this evening?	Tối nay bạn làm gì?		/ˈiːvnɪŋ/	mirabi-ai-2026-10	active
+night	night	noun	1	time	đêm, ban đêm	khoảng thời gian trời tối, lúc mọi người ngủ	The baby cried all night.	Em bé khóc suốt đêm.		/naɪt/	mirabi-ai-2026-10	active
+weekend	weekend	noun	1	time	cuối tuần	thứ Bảy và Chủ nhật	What did you do last weekend?	Cuối tuần trước bạn đã làm gì?		/ˌwiːkˈend/	mirabi-ai-2026-10	active
+birthday	birthday	noun	1	time	ngày sinh nhật	ngày kỷ niệm ngày mình được sinh ra	When is your birthday?	Sinh nhật bạn là khi nào?		/ˈbɜːθdeɪ/	mirabi-ai-2026-10	active
+monday	Monday	noun	1	time	thứ Hai	ngày đầu tiên của tuần làm việc	I start work on Monday.	Tôi bắt đầu đi làm vào thứ Hai.		/ˈmʌndeɪ/	mirabi-ai-2026-10	active
+tuesday	Tuesday	noun	1	time	thứ Ba	ngày sau thứ Hai	We have English on Tuesday.	Chúng tôi có tiết tiếng Anh vào thứ Ba.		/ˈtjuːzdeɪ/	mirabi-ai-2026-10	active
+wednesday	Wednesday	noun	1	time	thứ Tư	ngày giữa tuần, sau thứ Ba	The shop is closed on Wednesday.	Cửa hàng đóng cửa vào thứ Tư.		/ˈwenzdeɪ/	mirabi-ai-2026-10	active
+thursday	Thursday	noun	1	time	thứ Năm	ngày sau thứ Tư	Let's meet on Thursday.	Hẹn gặp nhau vào thứ Năm nhé.		/ˈθɜːzdeɪ/	mirabi-ai-2026-10	active
+friday	Friday	noun	1	time	thứ Sáu	ngày làm việc cuối cùng trong tuần	I love Friday evenings.	Tôi thích những tối thứ Sáu.		/ˈfraɪdeɪ/	mirabi-ai-2026-10	active
+saturday	Saturday	noun	1	time	thứ Bảy	ngày đầu tiên của cuối tuần	We play football on Saturday.	Chúng tôi chơi bóng đá vào thứ Bảy.		/ˈsætədeɪ/	mirabi-ai-2026-10	active
+sunday	Sunday	noun	1	time	Chủ nhật	ngày cuối cùng của tuần	My family eats together on Sunday.	Gia đình tôi ăn cơm cùng nhau vào Chủ nhật.		/ˈsʌndeɪ/	mirabi-ai-2026-10	active
+early	early	adjective	1	time	sớm	trước giờ thường lệ hoặc trước giờ hẹn	We took an early train.	Chúng tôi đi chuyến tàu sớm.		/ˈɜːli/	mirabi-ai-2026-10	active
+late	late	adjective	1	time	muộn, trễ	sau giờ thường lệ hoặc sau giờ hẹn	The bus was late again.	Xe buýt lại đến muộn.		/leɪt/	mirabi-ai-2026-10	active
+always	always	adverb	1	time	luôn luôn	lúc nào cũng vậy, không có ngoại lệ	He is always on time.	Anh ấy luôn đúng giờ.		/ˈɔːlweɪz/	mirabi-ai-2026-10	active
+usually	usually	adverb	1	time	thường thường, như thường lệ	điều xảy ra trong phần lớn các lần	I usually go to bed at ten.	Tôi thường đi ngủ lúc mười giờ.		/ˈjuːʒuəli/	mirabi-ai-2026-10	active
+often	often	adverb	1	time	hay, thường xuyên	xảy ra nhiều lần	We often go to the park.	Chúng tôi hay đi công viên.		/ˈɒfn/	mirabi-ai-2026-10	active
+sometimes	sometimes	adverb	1	time	thỉnh thoảng	có lúc có, có lúc không; từ thông dụng nhất	Sometimes I walk to school.	Thỉnh thoảng tôi đi bộ đến trường.		/ˈsʌmtaɪmz/	mirabi-ai-2026-10	active
+never	never	adverb	1	time	không bao giờ	chưa từng hoặc không lần nào	I never eat breakfast.	Tôi không bao giờ ăn sáng.		/ˈnevə/	mirabi-ai-2026-10	active
+ago	ago	adverb	1	time	cách đây	đặt sau khoảng thời gian để nói về quá khứ	I met him two years ago.	Tôi gặp anh ấy cách đây hai năm.		/əˈɡəʊ/	mirabi-ai-2026-10	active
+oclock	o'clock	adverb	1	time	giờ đúng	dùng khi nói giờ chẵn	It's three o'clock.	Bây giờ là ba giờ đúng.		/əˈklɒk/	mirabi-ai-2026-10	active
+wait	wait	verb	1	time	chờ, đợi	ở lại cho đến khi ai đến hoặc điều gì xảy ra	Please wait here.	Vui lòng đợi ở đây.		/weɪt/	mirabi-ai-2026-10	active
+before	before	preposition	1	time	trước (khi)	sớm hơn một thời điểm hay sự việc	Wash your hands before dinner.	Rửa tay trước bữa tối.		/bɪˈfɔː/	mirabi-ai-2026-10	active
+after	after	preposition	1	time	sau (khi)	muộn hơn một thời điểm hay sự việc	We went for a walk after lunch.	Chúng tôi đi dạo sau bữa trưa.		/ˈɑːftə/	mirabi-ai-2026-10	active
+what_time_is_it	what time is it	phrase	1	time	mấy giờ rồi	hỏi giờ hiện tại	Excuse me, what time is it?	Xin lỗi, mấy giờ rồi ạ?			mirabi-ai-2026-10	active
+every_day	every day	collocation	1	time	ngày nào cũng, mỗi ngày	việc lặp lại hằng ngày	I walk the dog every day.	Ngày nào tôi cũng dắt chó đi dạo.			mirabi-ai-2026-10	active
+last_night	last night	collocation	1	time	tối qua, đêm qua	buổi tối hoặc đêm của ngày hôm qua	Did you sleep well last night?	Đêm qua bạn ngủ ngon không?			mirabi-ai-2026-10	active
+next_week	next week	collocation	1	time	tuần sau	tuần ngay sau tuần này	The test is next week.	Tuần sau có bài kiểm tra.			mirabi-ai-2026-10	active
+in_the_morning	in the morning	collocation	1	time	vào buổi sáng	nói việc gì xảy ra trong buổi sáng	I study best in the morning.	Tôi học tốt nhất vào buổi sáng.			mirabi-ai-2026-10	active
+at_night	at night	collocation	1	time	vào ban đêm	nói việc gì xảy ra lúc trời tối	I don't drink coffee at night.	Tôi không uống cà phê vào ban đêm.			mirabi-ai-2026-10	active
+right_now	right now	collocation	1	time	ngay bây giờ	nhấn mạnh đúng thời điểm này	I need to go right now.	Tôi cần đi ngay bây giờ.			mirabi-ai-2026-10	active
+half_past	half past	collocation	1	time	rưỡi (giờ rưỡi)	nói giờ hơn 30 phút	The class starts at half past seven.	Lớp học bắt đầu lúc bảy giờ rưỡi.			mirabi-ai-2026-10	active
+january	January	noun	2	time	tháng Một	tháng đầu tiên của năm dương lịch	The new year starts in January.	Năm mới bắt đầu vào tháng Một.		/ˈdʒænjuəri/	mirabi-ai-2026-10	active
+february	February	noun	2	time	tháng Hai	tháng thứ hai, tháng ngắn nhất năm	February is the shortest month.	Tháng Hai là tháng ngắn nhất.		/ˈfebruəri/	mirabi-ai-2026-10	active
+march	March	noun	2	time	tháng Ba	tháng thứ ba của năm dương lịch	My sister was born in March.	Em gái tôi sinh vào tháng Ba.		/mɑːtʃ/	mirabi-ai-2026-10	active
+april	April	noun	2	time	tháng Tư	tháng thứ tư của năm dương lịch	It's very hot here in April.	Ở đây tháng Tư rất nóng.		/ˈeɪprəl/	mirabi-ai-2026-10	active
+may.month	May	noun	2	time	tháng Năm	tháng thứ năm của năm dương lịch	We have exams in May.	Chúng tôi thi vào tháng Năm.		/meɪ/	mirabi-ai-2026-10	active
+june	June	noun	2	time	tháng Sáu	tháng thứ sáu của năm dương lịch	School ends in June.	Năm học kết thúc vào tháng Sáu.		/dʒuːn/	mirabi-ai-2026-10	active
+july	July	noun	2	time	tháng Bảy	tháng thứ bảy của năm dương lịch	We go to the beach every July.	Tháng Bảy nào chúng tôi cũng đi biển.		/dʒuˈlaɪ/	mirabi-ai-2026-10	active
+august	August	noun	2	time	tháng Tám	tháng thứ tám của năm dương lịch	It rains a lot in August.	Tháng Tám trời mưa nhiều.		/ˈɔːɡəst/	mirabi-ai-2026-10	active
+september	September	noun	2	time	tháng Chín	tháng thứ chín của năm dương lịch	The school year starts in September.	Năm học bắt đầu vào tháng Chín.		/sepˈtembə/	mirabi-ai-2026-10	active
+october	October	noun	2	time	tháng Mười	tháng thứ mười của năm dương lịch	My birthday is in October.	Sinh nhật tôi vào tháng Mười.		/ɒkˈtəʊbə/	mirabi-ai-2026-10	active
+november	November	noun	2	time	tháng Mười Một	tháng thứ mười một của năm dương lịch	We have a school trip in November.	Chúng tôi có chuyến dã ngoại vào tháng Mười Một.		/nəʊˈvembə/	mirabi-ai-2026-10	active
+december	December	noun	2	time	tháng Mười Hai	tháng cuối cùng của năm dương lịch	It's cold in December.	Tháng Mười Hai trời lạnh.		/dɪˈsembə/	mirabi-ai-2026-10	active
+second.unit	second	noun	2	time	giây	đơn vị thời gian, một phần sáu mươi của phút	Wait a few seconds.	Đợi vài giây.		/ˈsekənd/	mirabi-ai-2026-10	active
+noon	noon	noun	2	time	buổi trưa, 12 giờ trưa	đúng giữa ngày, lúc 12 giờ	We have lunch at noon.	Chúng tôi ăn trưa lúc 12 giờ.	midday	/nuːn/	mirabi-ai-2026-10	active
+midnight	midnight	noun	2	time	nửa đêm	đúng 12 giờ đêm	The party ended at midnight.	Bữa tiệc kết thúc lúc nửa đêm.		/ˈmɪdnaɪt/	mirabi-ai-2026-10	active
+weekday	weekday	noun	2	time	ngày thường (thứ Hai đến thứ Sáu)	các ngày đi làm, đi học trong tuần	I get up at six on weekdays.	Ngày thường tôi dậy lúc sáu giờ.		/ˈwiːkdeɪ/	mirabi-ai-2026-10	active
+calendar	calendar	noun	2	time	tờ lịch, quyển lịch	vật ghi các ngày, tháng trong năm	There's a calendar on the wall.	Có một tờ lịch treo trên tường.		/ˈkælɪndə/	mirabi-ai-2026-10	active
+past.time	past	noun	2	time	quá khứ	khoảng thời gian đã qua	Don't worry about the past.	Đừng bận tâm về quá khứ.		/pɑːst/	mirabi-ai-2026-10	active
+present.now	present	noun	2	time	hiện tại	khoảng thời gian đang diễn ra	Live in the present.	Hãy sống cho hiện tại.		/ˈpreznt/	mirabi-ai-2026-10	active
+future	future	noun	2	time	tương lai	khoảng thời gian sắp tới	What are your plans for the future?	Kế hoạch tương lai của bạn là gì?		/ˈfjuːtʃə/	mirabi-ai-2026-10	active
+christmas	Christmas	noun	2	time	lễ Giáng sinh	ngày lễ 25 tháng 12	We put up a tree at Christmas.	Chúng tôi dựng cây thông vào dịp Giáng sinh.		/ˈkrɪsməs/	mirabi-ai-2026-10	active
+new_year	New Year	noun	2	time	năm mới (dương lịch)	dịp đầu năm, ngày 1 tháng 1	We watched fireworks at New Year.	Chúng tôi xem pháo hoa vào dịp năm mới.			mirabi-ai-2026-10	active
+valentines_day	Valentine's Day	noun	2	time	ngày lễ tình nhân	ngày 14 tháng 2, các cặp đôi tặng quà cho nhau	He gave her roses on Valentine's Day.	Anh ấy tặng cô ấy hoa hồng vào ngày lễ tình nhân.			mirabi-ai-2026-10	active
+mothers_day	Mother's Day	noun	2	time	Ngày của Mẹ	ngày con cái tặng quà, cảm ơn mẹ	I made a card for Mother's Day.	Tôi làm một tấm thiệp cho Ngày của Mẹ.			mirabi-ai-2026-10	active
+weekly	weekly	adjective	2	time	hằng tuần	diễn ra mỗi tuần một lần	We have a weekly meeting on Monday.	Chúng tôi họp hằng tuần vào thứ Hai.		/ˈwiːkli/	mirabi-ai-2026-10	active
+monthly	monthly	adjective	2	time	hằng tháng	diễn ra mỗi tháng một lần	My monthly phone bill is small.	Hóa đơn điện thoại hằng tháng của tôi không nhiều.		/ˈmʌnθli/	mirabi-ai-2026-10	active
+once	once	adverb	2	time	một lần	đúng một lần, không hơn	I've been to Da Lat once.	Tôi đã đến Đà Lạt một lần.		/wʌns/	mirabi-ai-2026-10	active
+twice	twice	adverb	2	time	hai lần	số lần là hai	I brush my teeth twice a day.	Tôi đánh răng hai lần một ngày.		/twaɪs/	mirabi-ai-2026-10	active
+already	already	adverb	2	time	đã... rồi	việc xảy ra sớm hơn mong đợi hoặc trước lúc nói	I've already eaten.	Tôi đã ăn rồi.		/ɔːlˈredi/	mirabi-ai-2026-10	active
+yet	yet	adverb	2	time	chưa (trong câu hỏi, câu phủ định)	hỏi hay nói việc gì đã xảy ra tính đến lúc này chưa	Have you finished yet?	Bạn xong chưa?		/jet/	mirabi-ai-2026-10	active
+still	still	adverb	2	time	vẫn, vẫn còn	việc gì tiếp diễn, chưa dừng lại	Are you still at work?	Bạn vẫn còn ở chỗ làm à?		/stɪl/	mirabi-ai-2026-10	active
+recently	recently	adverb	2	time	mới đây	một thời điểm không lâu trước lúc nói	I recently moved to Da Nang.	Tôi mới chuyển đến Đà Nẵng gần đây.		/ˈriːsntli/	mirabi-ai-2026-10	active
+later	later	adverb	2	time	lát nữa, sau đó	vào một thời điểm sau lúc nói	I'll call you later.	Lát nữa tôi sẽ gọi cho bạn.		/ˈleɪtə/	mirabi-ai-2026-10	active
+soon	soon	adverb	2	time	sắp, chẳng bao lâu nữa	trong khoảng thời gian ngắn sắp tới	Dinner will be ready soon.	Bữa tối sắp xong rồi.		/suːn/	mirabi-ai-2026-10	active
+then	then	adverb	2	time	lúc đó, khi ấy	nói về một thời điểm trong quá khứ hoặc tương lai	I was a student then.	Lúc đó tôi còn là sinh viên.		/ðen/	mirabi-ai-2026-10	active
+finally	finally	adverb	2	time	cuối cùng thì	sau một thời gian dài chờ đợi hoặc cố gắng	The bus finally came.	Cuối cùng thì xe buýt cũng đến.	at last	/ˈfaɪnəli/	mirabi-ai-2026-10	active
+during	during	preposition	2	time	trong suốt, trong lúc	việc gì xảy ra bên trong một khoảng thời gian	Don't talk during the film.	Đừng nói chuyện trong lúc xem phim.		/ˈdjʊərɪŋ/	mirabi-ai-2026-10	active
+until	until	preposition	2	time	cho đến khi	tới một thời điểm thì dừng	The shop is open until nine.	Cửa hàng mở đến chín giờ.	till	/ənˈtɪl/	mirabi-ai-2026-10	active
+celebrate.time	celebrate	verb	2	time	ăn mừng, đón (dịp lễ)	tổ chức vui vẻ vào ngày đặc biệt	We celebrate Tet with our family.	Chúng tôi đón Tết cùng gia đình.		/ˈselɪbreɪt/	mirabi-ai-2026-10	active
+on_time	on time	collocation	2	time	đúng giờ	không sớm cũng không muộn so với giờ hẹn	The train arrived on time.	Tàu đến đúng giờ.			mirabi-ai-2026-10	active
+at_the_moment	at the moment	collocation	2	time	lúc này, hiện giờ	đang diễn ra trong thời điểm hiện tại	She's busy at the moment.	Lúc này cô ấy đang bận.			mirabi-ai-2026-10	active
+at_the_weekend	at the weekend	collocation	2	time	vào cuối tuần	nói việc gì xảy ra vào thứ Bảy, Chủ nhật	I sleep late at the weekend.	Vào cuối tuần tôi ngủ dậy muộn.	on the weekend		mirabi-ai-2026-10	active
+the_day_after_tomorrow	the day after tomorrow	collocation	2	time	ngày kia	ngày sau ngày mai	We leave the day after tomorrow.	Ngày kia chúng tôi đi.			mirabi-ai-2026-10	active
+the_day_before_yesterday	the day before yesterday	collocation	2	time	hôm kia	ngày trước hôm qua	I saw her the day before yesterday.	Tôi đã gặp cô ấy hôm kia.			mirabi-ai-2026-10	active
+once_a_week	once a week	collocation	2	time	mỗi tuần một lần	tần suất một lần trong một tuần	I go swimming once a week.	Tôi đi bơi mỗi tuần một lần.			mirabi-ai-2026-10	active
+how_often	how often	phrase	2	time	bao lâu một lần	câu hỏi về tần suất	How often do you see your grandparents?	Bao lâu bạn gặp ông bà một lần?			mirabi-ai-2026-10	active
+quarter_past	quarter past	collocation	2	time	mười lăm phút (sau giờ chẵn)	nói giờ hơn 15 phút	It's quarter past nine.	Bây giờ là chín giờ mười lăm.	a quarter past		mirabi-ai-2026-10	active
+quarter_to	quarter to	collocation	2	time	kém mười lăm	nói giờ còn 15 phút nữa là tới giờ chẵn	It's quarter to five.	Bây giờ là năm giờ kém mười lăm.	a quarter to		mirabi-ai-2026-10	active
+half_an_hour	half an hour	collocation	2	time	nửa tiếng	khoảng thời gian 30 phút	I waited for half an hour.	Tôi đã đợi nửa tiếng.			mirabi-ai-2026-10	active
+all_the_time	all the time	collocation	2	time	lúc nào cũng, suốt	xảy ra liên tục hoặc rất thường xuyên	She checks her phone all the time.	Cô ấy lúc nào cũng xem điện thoại.			mirabi-ai-2026-10	active
+right_away	right away	collocation	2	time	liền, ngay đây	cách nói thân mật: làm ngay, không chần chừ	I'll do it right away.	Tôi sẽ làm liền đây.	straight away		mirabi-ai-2026-10	active
+in_the_past	in the past	collocation	2	time	ngày xưa, trong quá khứ	nói về những gì đã xảy ra từ lâu	People didn't have phones in the past.	Ngày xưa người ta không có điện thoại.			mirabi-ai-2026-10	active
+tell_the_time	tell the time	collocation	2	time	xem giờ, biết xem đồng hồ	đọc được giờ trên đồng hồ	My son is learning to tell the time.	Con trai tôi đang học xem đồng hồ.			mirabi-ai-2026-10	active
+appointment	appointment	noun	3	time	cuộc hẹn, lịch hẹn	giờ đã hẹn gặp bác sĩ, thợ cắt tóc hay người làm việc	I have a dentist appointment at ten.	Tôi có lịch hẹn nha sĩ lúc mười giờ.		/əˈpɔɪntmənt/	mirabi-ai-2026-10	active
+schedule.noun	schedule	noun	3	time	lịch trình	danh sách việc cần làm theo giờ, theo ngày	I have a busy schedule this week.	Tuần này lịch trình của tôi rất bận.		/ˈʃedjuːl/	mirabi-ai-2026-10	active
+moment	moment	noun	3	time	khoảnh khắc, chốc lát	một khoảng thời gian rất ngắn	It was the happiest moment of my life.	Đó là khoảnh khắc hạnh phúc nhất đời tôi.		/ˈməʊmənt/	mirabi-ai-2026-10	active
+decade	decade	noun	3	time	thập kỷ	khoảng thời gian mười năm	The city has changed a lot in the last decade.	Thành phố đã thay đổi nhiều trong thập kỷ qua.		/ˈdekeɪd/	mirabi-ai-2026-10	active
+century	century	noun	3	time	thế kỷ	khoảng thời gian một trăm năm	This temple is three centuries old.	Ngôi chùa này đã ba thế kỷ tuổi.		/ˈsentʃəri/	mirabi-ai-2026-10	active
+dawn	dawn	noun	3	time	bình minh, rạng đông	lúc trời bắt đầu sáng	Farmers often get up at dawn.	Nông dân thường dậy lúc rạng đông.		/dɔːn/	mirabi-ai-2026-10	active
+anniversary	anniversary	noun	3	time	ngày kỷ niệm	ngày đánh dấu một sự kiện xảy ra vào cùng ngày những năm trước	Today is our tenth wedding anniversary.	Hôm nay là kỷ niệm mười năm ngày cưới của chúng tôi.		/ˌænɪˈvɜːsəri/	mirabi-ai-2026-10	active
+occasion	occasion	noun	3	time	dịp	thời điểm diễn ra một sự kiện đặc biệt	I wear this dress only on special occasions.	Tôi chỉ mặc chiếc váy này vào những dịp đặc biệt.		/əˈkeɪʒn/	mirabi-ai-2026-10	active
+lifetime	lifetime	noun	3	time	cả cuộc đời	khoảng thời gian một người sống	I've seen many changes in my lifetime.	Tôi đã chứng kiến nhiều thay đổi trong suốt cuộc đời mình.		/ˈlaɪftaɪm/	mirabi-ai-2026-10	active
+diary.planner	diary	noun	3	time	sổ ghi lịch hẹn	sổ ghi các cuộc hẹn, việc cần làm theo từng ngày	Let me check my diary.	Để tôi xem sổ lịch hẹn đã.	planner	/ˈdaɪəri/	mirabi-ai-2026-10	active
+fathers_day	Father's Day	noun	3	time	Ngày của Cha	ngày con cái bày tỏ lòng biết ơn với cha	We took Dad out for lunch on Father's Day.	Chúng tôi đưa bố đi ăn trưa vào Ngày của Cha.			mirabi-ai-2026-10	active
+national_day	National Day	noun	3	time	ngày Quốc khánh	ngày lễ kỷ niệm thành lập nước; ở Việt Nam là 2 tháng 9	Vietnam's National Day is on 2 September.	Ngày Quốc khánh Việt Nam là ngày 2 tháng 9.			mirabi-ai-2026-10	active
+new_years_eve	New Year's Eve	noun	3	time	đêm giao thừa (dương lịch)	đêm 31 tháng 12, trước ngày đầu năm mới	We stayed up until midnight on New Year's Eve.	Chúng tôi thức đến nửa đêm vào đêm giao thừa.			mirabi-ai-2026-10	active
+halloween	Halloween	noun	3	time	lễ hội hóa trang Halloween	ngày 31 tháng 10, trẻ em hóa trang và đi xin kẹo	Kids dress up as ghosts on Halloween.	Trẻ con hóa trang thành ma vào dịp Halloween.		/ˌhæləʊˈiːn/	mirabi-ai-2026-10	active
+postpone	postpone	verb	3	time	hoãn lại	trang trọng: dời việc gì sang thời điểm muộn hơn	The match was postponed because of the rain.	Trận đấu bị hoãn vì trời mưa.	put off	/pəˈspəʊn/	mirabi-ai-2026-10	active
+cancel	cancel	verb	3	time	hủy bỏ	quyết định một việc đã lên lịch sẽ không diễn ra	They cancelled the concert.	Họ đã hủy buổi hòa nhạc.		/ˈkænsl/	mirabi-ai-2026-10	active
+last.continue	last	verb	3	time	kéo dài	động từ: diễn ra trong một khoảng thời gian	The meeting lasted two hours.	Cuộc họp kéo dài hai tiếng.		/lɑːst/	mirabi-ai-2026-10	active
+pass.time	pass	verb	3	time	trôi qua	thời gian dần qua đi	Time passes quickly when you're having fun.	Thời gian trôi qua nhanh khi bạn vui vẻ.		/pɑːs/	mirabi-ai-2026-10	active
+rush.time	rush	verb	3	time	vội vã, hấp tấp	làm gì quá nhanh vì gấp gáp	Don't rush, we have plenty of time.	Đừng vội, chúng ta còn nhiều thời gian.		/rʌʃ/	mirabi-ai-2026-10	active
+oversleep.time	oversleep	verb	3	time	ngủ quên	ngủ quá giờ định dậy	I overslept and missed the bus.	Tôi ngủ quên và lỡ chuyến xe buýt.		/ˌəʊvəˈsliːp/	mirabi-ai-2026-10	active
+temporary	temporary	adjective	3	time	tạm thời	chỉ kéo dài trong một thời gian ngắn	This is only a temporary job.	Đây chỉ là công việc tạm thời.		/ˈtemprəri/	mirabi-ai-2026-10	active
+recent	recent	adjective	3	time	gần đây	tính từ: xảy ra không lâu trước	Is this a recent photo?	Đây là ảnh mới chụp gần đây à?		/ˈriːsnt/	mirabi-ai-2026-10	active
+current.now	current	adjective	3	time	hiện tại, hiện hành	đang diễn ra hoặc đang dùng vào lúc này	What is your current address?	Địa chỉ hiện tại của bạn là gì?		/ˈkʌrənt/	mirabi-ai-2026-10	active
+previous	previous	adjective	3	time	trước đó	xảy ra hoặc tồn tại trước cái hiện tại	My previous job was in a bank.	Công việc trước đây của tôi là ở ngân hàng.		/ˈpriːviəs/	mirabi-ai-2026-10	active
+due.time	due	adjective	3	time	đến hạn, phải nộp	phải hoàn thành, trả hoặc xảy ra vào một thời điểm	The homework is due on Monday.	Bài tập về nhà phải nộp vào thứ Hai.		/djuː/	mirabi-ai-2026-10	active
+brief.short	brief	adjective	3	time	ngắn ngủi	kéo dài trong một thời gian ngắn	We had a brief chat before class.	Chúng tôi trò chuyện chốc lát trước giờ học.		/briːf/	mirabi-ai-2026-10	active
+nowadays	nowadays	adverb	3	time	ngày nay	so sánh hiện tại với ngày xưa	Nowadays, most people have a smartphone.	Ngày nay hầu hết mọi người đều có điện thoại thông minh.	these days	/ˈnaʊədeɪz/	mirabi-ai-2026-10	active
+currently	currently	adverb	3	time	hiện nay, hiện đang	ở thời điểm hiện tại (trang trọng hơn now)	She is currently living in Hue.	Hiện nay cô ấy đang sống ở Huế.		/ˈkʌrəntli/	mirabi-ai-2026-10	active
+lately	lately	adverb	3	time	dạo gần đây	một giai đoạn gần đây, thường đi với thì hiện tại hoàn thành	I've been very tired lately.	Dạo gần đây tôi rất mệt.		/ˈleɪtli/	mirabi-ai-2026-10	active
+frequently	frequently	adverb	3	time	thường xuyên	xảy ra nhiều lần (trang trọng hơn often)	Buses run frequently in the city centre.	Xe buýt chạy thường xuyên ở trung tâm thành phố.		/ˈfriːkwəntli/	mirabi-ai-2026-10	active
+occasionally	occasionally	adverb	3	time	đôi khi, lâu lâu	không thường xuyên, ít hơn sometimes	We occasionally eat out.	Lâu lâu chúng tôi mới ăn ngoài.		/əˈkeɪʒnəli/	mirabi-ai-2026-10	active
+regularly	regularly	adverb	3	time	đều đặn	xảy ra theo những khoảng thời gian cố định	You should exercise regularly.	Bạn nên tập thể dục đều đặn.		/ˈreɡjələli/	mirabi-ai-2026-10	active
+eventually	eventually	adverb	3	time	cuối cùng rồi cũng	sau một quá trình dài, nhiều trở ngại	We got lost, but eventually we found the hotel.	Chúng tôi bị lạc nhưng cuối cùng rồi cũng tìm ra khách sạn.	in the end	/ɪˈventʃuəli/	mirabi-ai-2026-10	active
+immediately	immediately	adverb	3	time	ngay lập tức	không chậm trễ chút nào	Call me immediately if anything happens.	Gọi cho tôi ngay lập tức nếu có chuyện gì xảy ra.	instantly	/ɪˈmiːdiətli/	mirabi-ai-2026-10	active
+afterwards	afterwards	adverb	3	time	sau đó, kế đó	sau sự việc vừa được nhắc đến	We had dinner and afterwards we watched a film.	Chúng tôi ăn tối và sau đó xem phim.	afterward	/ˈɑːftəwədz/	mirabi-ai-2026-10	active
+someday	someday	adverb	3	time	một ngày nào đó	vào một thời điểm chưa biết trong tương lai	I want to visit Japan someday.	Một ngày nào đó tôi muốn đến Nhật Bản.	one day|some day	/ˈsʌmdeɪ/	mirabi-ai-2026-10	active
+since	since	preposition	3	time	từ (khi)	từ một thời điểm trong quá khứ đến bây giờ	I've lived here since 2015.	Tôi đã sống ở đây từ năm 2015.		/sɪns/	mirabi-ai-2026-10	active
+while	while	conjunction	3	time	trong khi	hai việc xảy ra cùng lúc	I listen to music while I cook.	Tôi nghe nhạc trong khi nấu ăn.		/waɪl/	mirabi-ai-2026-10	active
+in_time	in time	collocation	3	time	kịp lúc	đủ sớm để không bị lỡ việc gì	We got to the station just in time.	Chúng tôi đến ga vừa kịp lúc.			mirabi-ai-2026-10	active
+in_advance	in advance	collocation	3	time	trước (thời hạn)	làm sẵn trước khi một việc diễn ra	Please book your tickets in advance.	Vui lòng đặt vé trước.	ahead of time|beforehand		mirabi-ai-2026-10	active
+on_schedule	on schedule	collocation	3	time	đúng tiến độ	việc diễn ra theo đúng thời gian đã định	The project is on schedule.	Dự án đang đúng tiến độ.			mirabi-ai-2026-10	active
+from_time_to_time	from time to time	collocation	3	time	lâu lâu, đôi lúc	tần suất không đều, thỉnh thoảng mới có một lần	I still visit my old school from time to time.	Lâu lâu tôi vẫn ghé thăm trường cũ.	every now and then|once in a while		mirabi-ai-2026-10	active
+these_days	these days	collocation	3	time	dạo này, thời buổi này	nói về tình hình hiện nay so với trước	Everything is so expensive these days.	Thời buổi này cái gì cũng đắt.	nowadays		mirabi-ai-2026-10	active
+for_a_while	for a while	collocation	3	time	một lúc, một thời gian	trong một khoảng thời gian không quá dài	Let's sit here for a while.	Mình ngồi đây một lúc nhé.			mirabi-ai-2026-10	active
+all_day_long	all day long	collocation	3	time	suốt cả ngày	từ sáng đến tối không ngừng	I've been working all day long.	Tôi đã làm việc suốt cả ngày.			mirabi-ai-2026-10	active
+so_far	so far	collocation	3	time	cho đến nay	tính từ trước tới thời điểm hiện tại	So far, everything is going well.	Cho đến nay mọi việc đều suôn sẻ.			mirabi-ai-2026-10	active
+from_now_on	from now on	collocation	3	time	từ giờ trở đi	bắt đầu từ lúc này và kéo dài về sau	From now on, I'll get up earlier.	Từ giờ trở đi tôi sẽ dậy sớm hơn.			mirabi-ai-2026-10	active
+the_other_day	the other day	collocation	3	time	hôm nọ, mấy hôm trước	một ngày gần đây, không nói rõ ngày nào	I saw your brother the other day.	Hôm nọ tôi gặp anh trai bạn.			mirabi-ai-2026-10	active
+at_last	at last	collocation	3	time	cuối cùng cũng	nói khi điều mong đợi từ lâu đã xảy ra	At last, the holidays are here!	Cuối cùng kỳ nghỉ cũng đến!	finally		mirabi-ai-2026-10	active
+in_the_end	in the end	collocation	3	time	rốt cuộc thì	kết quả sau cùng khi đã cân nhắc, thay đổi nhiều lần	In the end, we decided to stay home.	Rốt cuộc thì chúng tôi quyết định ở nhà.	eventually		mirabi-ai-2026-10	active
+as_soon_as	as soon as	conjunction	3	time	ngay khi	việc này xảy ra liền sau việc kia	Call me as soon as you arrive.	Gọi cho tôi ngay khi bạn đến nơi.			mirabi-ai-2026-10	active
+waste_time	waste time	collocation	3	time	lãng phí thời gian	dùng thời gian vào việc vô ích	Don't waste time on your phone.	Đừng lãng phí thời gian vào điện thoại.			mirabi-ai-2026-10	active
+take_your_time	take your time	phrase	3	time	cứ từ từ	bảo ai không cần vội, cứ làm thong thả	Take your time, there's no rush.	Cứ từ từ, không có gì phải vội.			mirabi-ai-2026-10	active
+run_late.time	run late	collocation	3	time	bị trễ, chậm hơn dự định	đang chậm so với giờ hẹn hoặc lịch trình	Sorry, I'm running late.	Xin lỗi, tôi đang bị trễ.			mirabi-ai-2026-10	active
+put_off.time	put off	phrasal_verb	3	time	trì hoãn	cách nói thân mật: dời việc sang sau, thường vì không muốn làm	Stop putting off your homework!	Đừng có trì hoãn làm bài tập nữa!	postpone		mirabi-ai-2026-10	active
+make_an_appointment	make an appointment	collocation	3	time	đặt lịch hẹn	hẹn trước giờ gặp bác sĩ, ngân hàng, cơ quan	I need to make an appointment with the doctor.	Tôi cần đặt lịch hẹn với bác sĩ.			mirabi-ai-2026-10	active
+time_zone	time zone	collocation	3	time	múi giờ	vùng trên trái đất dùng chung một giờ	London and Hanoi are in different time zones.	London và Hà Nội ở hai múi giờ khác nhau.			mirabi-ai-2026-10	active
+lunar_calendar	lunar calendar	collocation	3	time	âm lịch	lịch tính theo chu kỳ của mặt trăng	Tet is based on the lunar calendar.	Tết được tính theo âm lịch.			mirabi-ai-2026-10	active
+date_of_birth	date of birth	collocation	3	time	ngày sinh	ngày tháng năm sinh, thường ghi trên giấy tờ	Please write your date of birth here.	Vui lòng ghi ngày sinh của bạn vào đây.			mirabi-ai-2026-10	active
+public_holiday	public holiday	collocation	3	time	ngày nghỉ lễ	ngày lễ được nghỉ làm theo quy định nhà nước	Banks are closed on public holidays.	Ngân hàng đóng cửa vào ngày nghỉ lễ.	bank holiday		mirabi-ai-2026-10	active
+every_other_day	every other day	collocation	3	time	cách ngày một lần	hai ngày một lần, ngày có ngày không	I go running every other day.	Tôi chạy bộ cách ngày một lần.			mirabi-ai-2026-10	active
+fortnight	fortnight	noun	4	time	hai tuần	cách nói Anh-Anh cho khoảng 14 ngày	I'm going on holiday for a fortnight.	Tôi sẽ đi nghỉ hai tuần.		/ˈfɔːtnaɪt/	mirabi-ai-2026-10	active
+dusk	dusk	noun	4	time	hoàng hôn, chạng vạng	lúc trời bắt đầu tối sau khi mặt trời lặn	The street lights come on at dusk.	Đèn đường bật sáng lúc chạng vạng.		/dʌsk/	mirabi-ai-2026-10	active
+era	era	noun	4	time	thời đại, kỷ nguyên	một giai đoạn lịch sử có đặc điểm riêng	We live in the digital era.	Chúng ta sống trong thời đại số.		/ˈɪərə/	mirabi-ai-2026-10	active
+frequency	frequency	noun	4	time	tần suất	số lần một việc xảy ra trong một khoảng thời gian	The frequency of buses is higher in the morning.	Tần suất xe buýt vào buổi sáng dày hơn.		/ˈfriːkwənsi/	mirabi-ai-2026-10	active
+duration	duration	noun	4	time	thời lượng	tổng thời gian từ lúc bắt đầu đến khi kết thúc	Please stay seated for the duration of the flight.	Vui lòng ngồi yên trong suốt chuyến bay.		/djuˈreɪʃn/	mirabi-ai-2026-10	active
+interval	interval	noun	4	time	khoảng cách thời gian	thời gian giữa hai lần, hai sự việc	Take the medicine at four-hour intervals.	Uống thuốc cách nhau bốn tiếng một lần.		/ˈɪntəvl/	mirabi-ai-2026-10	active
+timeline	timeline	noun	4	time	dòng thời gian, tiến độ	chuỗi sự kiện, công việc xếp theo thời gian	We need a clear timeline for the project.	Chúng ta cần một tiến độ rõ ràng cho dự án.		/ˈtaɪmlaɪn/	mirabi-ai-2026-10	active
+countdown	countdown	noun	4	time	sự đếm ngược	đếm lùi thời gian tới một sự kiện	The countdown to New Year has begun.	Cuộc đếm ngược đến năm mới đã bắt đầu.		/ˈkaʊntdaʊn/	mirabi-ai-2026-10	active
+eve	eve	noun	4	time	hôm trước (một sự kiện)	ngày hoặc buổi tối ngay trước một dịp quan trọng	We were busy on the eve of the wedding.	Chúng tôi bận rộn vào hôm trước đám cưới.		/iːv/	mirabi-ai-2026-10	active
+childrens_day	Children's Day	noun	4	time	ngày Quốc tế Thiếu nhi	ngày 1 tháng 6, ngày dành cho trẻ em	Kids get presents on Children's Day.	Trẻ em được nhận quà vào ngày Quốc tế Thiếu nhi.			mirabi-ai-2026-10	active
+womens_day	Women's Day	noun	4	time	ngày Quốc tế Phụ nữ	ngày 8 tháng 3, tặng hoa và quà cho phụ nữ	We gave our teacher flowers on Women's Day.	Chúng tôi tặng hoa cô giáo vào ngày Quốc tế Phụ nữ.	International Women's Day		mirabi-ai-2026-10	active
+reschedule	reschedule	verb	4	time	dời lịch, đổi lịch	sắp xếp lại thời gian cho một việc đã hẹn	Can we reschedule our meeting for Friday?	Chúng ta dời cuộc họp sang thứ Sáu được không?		/ˌriːˈʃedjuːl/	mirabi-ai-2026-10	active
+schedule.verb	schedule	verb	4	time	lên lịch	sắp xếp để việc gì diễn ra vào một thời gian cụ thể	The meeting is scheduled for three o'clock.	Cuộc họp được lên lịch vào lúc ba giờ.		/ˈʃedjuːl/	mirabi-ai-2026-10	active
+arrange.plan	arrange	verb	4	time	sắp xếp (thời gian, cuộc hẹn)	lên kế hoạch giờ giấc, địa điểm cho một việc	Let's arrange a time to meet.	Hãy sắp xếp một thời gian để gặp nhau.		/əˈreɪndʒ/	mirabi-ai-2026-10	active
+expire	expire	verb	4	time	hết hạn	giấy tờ, thẻ, hợp đồng không còn hiệu lực	My passport expires next year.	Hộ chiếu của tôi hết hạn vào năm sau.		/ɪkˈspaɪə/	mirabi-ai-2026-10	active
+extend.time	extend	verb	4	time	kéo dài thêm (thời hạn)	cho thêm thời gian so với dự kiến	Can I extend the deadline by two days?	Tôi có thể kéo dài hạn chót thêm hai ngày được không?		/ɪkˈstend/	mirabi-ai-2026-10	active
+renew.time	renew	verb	4	time	làm mới, gia hạn (giấy tờ)	làm thủ tục để giấy tờ, hợp đồng tiếp tục có hiệu lực	I need to renew my passport.	Tôi cần gia hạn hộ chiếu.		/rɪˈnjuː/	mirabi-ai-2026-10	active
+annual	annual	adjective	4	time	hằng năm, thường niên	diễn ra mỗi năm một lần	The school has an annual sports day.	Trường có ngày hội thể thao thường niên.	yearly	/ˈænjuəl/	mirabi-ai-2026-10	active
+punctual	punctual	adjective	4	time	luôn đúng giờ, giữ giờ giấc	tính từ chỉ người luôn đến hoặc làm việc đúng giờ	Our teacher is always punctual.	Thầy giáo của chúng tôi luôn đúng giờ.		/ˈpʌŋktʃuəl/	mirabi-ai-2026-10	active
+permanent	permanent	adjective	4	time	lâu dài, cố định	kéo dài mãi hoặc rất lâu, không phải tạm thời	She finally got a permanent job.	Cuối cùng cô ấy cũng có công việc lâu dài.		/ˈpɜːmənənt/	mirabi-ai-2026-10	active
+upcoming	upcoming	adjective	4	time	sắp tới	sắp diễn ra trong thời gian gần	Are you ready for the upcoming exam?	Bạn đã sẵn sàng cho kỳ thi sắp tới chưa?		/ˈʌpkʌmɪŋ/	mirabi-ai-2026-10	active
+former.time	former	adjective	4	time	cũ, cựu (từng là)	trước kia từng là, từng giữ vị trí đó	He is a former student of this school.	Anh ấy là cựu học sinh của trường này.		/ˈfɔːmə/	mirabi-ai-2026-10	active
+prompt	prompt	adjective	4	time	mau lẹ, nhanh chóng	được làm ngay, không chậm trễ	Thank you for your prompt reply.	Cảm ơn bạn đã trả lời nhanh chóng.		/prɒmpt/	mirabi-ai-2026-10	active
+frequent	frequent	adjective	4	time	diễn ra thường xuyên	tính từ: xảy ra nhiều lần	He is a frequent visitor here.	Anh ấy là khách thường xuyên ghé đây.		/ˈfriːkwənt/	mirabi-ai-2026-10	active
+available.free	available	adjective	4	time	rảnh, có thời gian	có thời gian để gặp ai hoặc làm việc gì	Are you available on Friday afternoon?	Chiều thứ Sáu bạn có rảnh không?		/əˈveɪləbl/	mirabi-ai-2026-10	active
+outdated.time	outdated	adjective	4	time	lỗi thời, cũ	không còn hợp thời hoặc không còn đúng	This map is outdated.	Tấm bản đồ này đã lỗi thời.		/ˌaʊtˈdeɪtɪd/	mirabi-ai-2026-10	active
+hectic.time	hectic	adjective	4	time	bận rộn, tất bật	có quá nhiều việc trong ít thời gian	I had a hectic day at work.	Tôi đã có một ngày làm việc tất bật.		/ˈhektɪk/	mirabi-ai-2026-10	active
+short-term	short-term	adjective	4	time	ngắn hạn	diễn ra hoặc có tác dụng trong thời gian ngắn	This is only a short-term plan.	Đây chỉ là kế hoạch ngắn hạn.		/ˌʃɔːt ˈtɜːm/	mirabi-ai-2026-10	active
+long-term	long-term	adjective	4	time	dài hạn, lâu dài	trong một khoảng thời gian dài về sau	Smoking causes long-term health problems.	Hút thuốc gây ra các vấn đề sức khỏe lâu dài.		/ˌlɒŋ ˈtɜːm/	mirabi-ai-2026-10	active
+constantly	constantly	adverb	4	time	liên tục, không ngừng	xảy ra suốt, gần như không dừng	The phone rings constantly.	Điện thoại reo liên tục.		/ˈkɒnstəntli/	mirabi-ai-2026-10	active
+meanwhile	meanwhile	adverb	4	time	trong khi đó	cùng lúc với việc vừa nhắc đến	I cooked dinner. Meanwhile, my sister set the table.	Tôi nấu bữa tối. Trong khi đó, em gái tôi dọn bàn.		/ˈmiːnwaɪl/	mirabi-ai-2026-10	active
+beforehand	beforehand	adverb	4	time	từ trước, sẵn trước	làm trước khi một việc diễn ra	Let me know beforehand if you can't come.	Báo trước cho tôi nếu bạn không đến được.	in advance	/bɪˈfɔːhænd/	mirabi-ai-2026-10	active
+temporarily	temporarily	adverb	4	time	một cách tạm thời	trạng từ: chỉ trong một thời gian ngắn	The shop is temporarily closed.	Cửa hàng tạm thời đóng cửa.		/ˈtemprərəli/	mirabi-ai-2026-10	active
+permanently.time	permanently	adverb	4	time	vĩnh viễn, hẳn luôn	trạng từ: mãi mãi hoặc rất lâu dài	He moved to Canada permanently.	Anh ấy chuyển hẳn sang Canada sinh sống.		/ˈpɜːmənəntli/	mirabi-ai-2026-10	active
+instantly	instantly	adverb	4	time	tức thì, ngay tức khắc	xảy ra ngay trong khoảnh khắc đó	The pain stopped instantly.	Cơn đau dừng lại ngay tức khắc.	immediately	/ˈɪnstəntli/	mirabi-ai-2026-10	active
+shortly	shortly	adverb	4	time	ngay sau đây, trong ít phút nữa	sắp xảy ra trong thời gian rất ngắn (trang trọng)	The train will arrive shortly.	Tàu sẽ đến trong ít phút nữa.		/ˈʃɔːtli/	mirabi-ai-2026-10	active
+throughout	throughout	preposition	4	time	suốt từ đầu đến cuối	trong toàn bộ một khoảng thời gian	It rained throughout the night.	Trời mưa suốt đêm.		/θruːˈaʊt/	mirabi-ai-2026-10	active
+within	within	preposition	4	time	trong vòng	không quá một khoảng thời gian	Please reply within three days.	Vui lòng trả lời trong vòng ba ngày.		/wɪˈðɪn/	mirabi-ai-2026-10	active
+whenever	whenever	conjunction	4	time	bất cứ khi nào	vào bất kỳ lúc nào, mỗi lần	Call me whenever you need help.	Hãy gọi tôi bất cứ khi nào bạn cần giúp.		/wenˈevə/	mirabi-ai-2026-10	active
+ahead_of_schedule	ahead of schedule	collocation	4	time	sớm hơn kế hoạch	hoàn thành trước thời gian đã định	The new bridge was finished ahead of schedule.	Cây cầu mới được hoàn thành sớm hơn kế hoạch.			mirabi-ai-2026-10	active
+behind_schedule	behind schedule	collocation	4	time	chậm tiến độ	chậm hơn thời gian đã định	The project is two weeks behind schedule.	Dự án đang chậm tiến độ hai tuần.			mirabi-ai-2026-10	active
+in_the_meantime	in the meantime	collocation	4	time	trong lúc chờ đợi	trong khoảng thời gian trước khi việc khác xảy ra	The doctor will see you soon. In the meantime, please sit down.	Bác sĩ sẽ khám cho bạn ngay. Trong lúc chờ, mời bạn ngồi.			mirabi-ai-2026-10	active
+for_the_time_being	for the time being	collocation	4	time	tạm thời thì	hiện tại là như vậy, sau này có thể thay đổi	For the time being, I'm living with my parents.	Tạm thời thì tôi đang ở với bố mẹ.			mirabi-ai-2026-10	active
+once_in_a_while	once in a while	collocation	4	time	thi thoảng mới có một lần	không thường xuyên, cách một thời gian mới có	We go out for dinner once in a while.	Thi thoảng chúng tôi mới đi ăn tối bên ngoài.	from time to time|every now and then		mirabi-ai-2026-10	active
+every_now_and_then	every now and then	collocation	4	time	chốc chốc lại	lặp lại sau những khoảng thời gian không đều	Every now and then, I check my email.	Chốc chốc tôi lại kiểm tra thư.	from time to time|once in a while		mirabi-ai-2026-10	active
+sooner_or_later	sooner or later	collocation	4	time	sớm muộn gì	chắc chắn sẽ xảy ra, chỉ chưa biết lúc nào	Sooner or later, you'll have to tell him.	Sớm muộn gì bạn cũng phải nói với anh ấy.			mirabi-ai-2026-10	active
+at_the_last_minute	at the last minute	collocation	4	time	vào phút chót	ngay trước lúc một việc diễn ra hoặc hết hạn	He always changes his plans at the last minute.	Anh ấy luôn thay đổi kế hoạch vào phút chót.	at the eleventh hour		mirabi-ai-2026-10	active
+at_the_latest	at the latest	collocation	4	time	chậm nhất là	không được muộn hơn thời điểm này	Please send it by Friday at the latest.	Vui lòng gửi chậm nhất là thứ Sáu.			mirabi-ai-2026-10	active
+time_flies	time flies	idiom	4	time	thời gian trôi nhanh quá	nói khi thấy thời gian qua đi nhanh không ngờ	Time flies! It's already December.	Thời gian trôi nhanh quá! Đã tháng Mười Hai rồi.			mirabi-ai-2026-10	active
+run_out_of_time	run out of time	collocation	4	time	hết thời gian	không còn thời gian để làm xong việc gì	I ran out of time and couldn't finish the test.	Tôi hết giờ và không làm xong bài kiểm tra.			mirabi-ai-2026-10	active
+meet_a_deadline	meet a deadline	collocation	4	time	kịp hạn chót	hoàn thành công việc đúng thời hạn	We worked all night to meet the deadline.	Chúng tôi làm suốt đêm để kịp hạn chót.			mirabi-ai-2026-10	active
+leap_year	leap year	collocation	4	time	năm nhuận	năm có 366 ngày, tháng Hai có 29 ngày	2024 was a leap year.	Năm 2024 là năm nhuận.			mirabi-ai-2026-10	active
+catch_up.time	catch up	phrasal_verb	4	time	làm bù, bắt kịp (phần bị chậm)	làm cho xong phần việc bị chậm trễ	I need to catch up on my homework.	Tôi cần làm bù bài tập về nhà.			mirabi-ai-2026-10	active
+fall_behind.time	fall behind	phrasal_verb	4	time	tụt lại phía sau	bị chậm hơn tiến độ hoặc người khác	If you miss class, you'll fall behind.	Nếu nghỉ học, bạn sẽ bị tụt lại phía sau.			mirabi-ai-2026-10	active
+bring_forward	bring forward	phrasal_verb	4	time	dời lên sớm hơn	chuyển một sự kiện sang thời điểm sớm hơn dự định	The meeting has been brought forward to Monday.	Cuộc họp đã được dời lên thứ Hai.			mirabi-ai-2026-10	active
+better_late_than_never	better late than never	idiom	4	time	thà muộn còn hơn không	nói khi việc gì xảy ra trễ nhưng vẫn tốt	You finally called! Better late than never.	Cuối cùng bạn cũng gọi! Thà muộn còn hơn không.			mirabi-ai-2026-10	active
+millennium	millennium	noun	5	time	thiên niên kỷ	khoảng thời gian một nghìn năm	The city was built almost a millennium ago.	Thành phố được xây dựng gần một nghìn năm trước.		/mɪˈleniəm/	mirabi-ai-2026-10	active
+punctuality	punctuality	noun	5	time	tính đúng giờ	thói quen luôn đến và làm việc đúng hẹn	Punctuality is very important in Japan.	Tính đúng giờ rất quan trọng ở Nhật Bản.		/ˌpʌŋktʃuˈæləti/	mirabi-ai-2026-10	active
+milestone	milestone	noun	5	time	cột mốc quan trọng	sự kiện đánh dấu một giai đoạn mới trong đời hay công việc	Turning eighteen is an important milestone.	Tròn mười tám tuổi là một cột mốc quan trọng.		/ˈmaɪlstəʊn/	mirabi-ai-2026-10	active
+span	span	noun	5	time	quãng thời gian	độ dài thời gian từ đầu đến cuối	Over a span of ten years, he wrote five books.	Trong quãng thời gian mười năm, ông ấy viết năm cuốn sách.		/spæn/	mirabi-ai-2026-10	active
+eternity	eternity	noun	5	time	sự vĩnh hằng, cả thiên thu	thời gian vô tận; cũng dùng để than chờ quá lâu	We waited for an eternity at the bank.	Chúng tôi đợi ở ngân hàng lâu như cả thiên thu.		/ɪˈtɜːnəti/	mirabi-ai-2026-10	active
+lapse	lapse	noun	5	time	quãng gián đoạn	trang trọng: thời gian trôi qua giữa hai sự việc	After a lapse of five years, they met again.	Sau quãng gián đoạn năm năm, họ gặp lại nhau.		/læps/	mirabi-ai-2026-10	active
+easter	Easter	noun	5	time	lễ Phục sinh	ngày lễ Kitô giáo vào mùa xuân, có trứng Phục sinh	Children hunt for eggs at Easter.	Trẻ em đi tìm trứng vào lễ Phục sinh.		/ˈiːstə/	mirabi-ai-2026-10	active
+thanksgiving	Thanksgiving	noun	5	time	lễ Tạ ơn	ngày lễ ở Mỹ vào tháng 11, gia đình quây quần ăn gà tây	Americans eat turkey at Thanksgiving.	Người Mỹ ăn gà tây vào lễ Tạ ơn.		/ˌθæŋksˈɡɪvɪŋ/	mirabi-ai-2026-10	active
+chronological	chronological	adjective	5	time	theo trình tự thời gian	sắp xếp sự kiện từ trước đến sau	Put the events in chronological order.	Hãy sắp xếp các sự kiện theo trình tự thời gian.		/ˌkrɒnəˈlɒdʒɪkl/	mirabi-ai-2026-10	active
+simultaneous	simultaneous	adjective	5	time	đồng thời	tính từ: xảy ra cùng một lúc	The film had a simultaneous release in many countries.	Bộ phim được phát hành đồng thời ở nhiều nước.		/ˌsɪmlˈteɪniəs/	mirabi-ai-2026-10	active
+subsequent	subsequent	adjective	5	time	tiếp theo, xảy ra sau	tính từ: diễn ra sau một sự việc khác	The problem was fixed in subsequent years.	Vấn đề được khắc phục trong những năm tiếp theo.		/ˈsʌbsɪkwənt/	mirabi-ai-2026-10	active
+prior	prior	adjective	5	time	có từ trước	trang trọng: xảy ra hoặc tồn tại trước	No prior experience is needed.	Không cần kinh nghiệm có từ trước.		/ˈpraɪə/	mirabi-ai-2026-10	active
+eternal	eternal	adjective	5	time	vĩnh cửu, bất diệt	tồn tại mãi không bao giờ kết thúc	They promised eternal love.	Họ hứa hẹn tình yêu vĩnh cửu.		/ɪˈtɜːnl/	mirabi-ai-2026-10	active
+fleeting	fleeting	adjective	5	time	thoáng qua, chóng vánh	chỉ kéo dài trong chốc lát	It was just a fleeting moment of happiness.	Đó chỉ là một khoảnh khắc hạnh phúc thoáng qua.		/ˈfliːtɪŋ/	mirabi-ai-2026-10	active
+intermittent	intermittent	adjective	5	time	lúc có lúc không	dừng rồi lại tiếp tục nhiều lần	We had intermittent rain all day.	Cả ngày trời mưa lúc có lúc không.		/ˌɪntəˈmɪtənt/	mirabi-ai-2026-10	active
+imminent	imminent	adjective	5	time	sắp ập đến, cận kề	điều thường là xấu sắp xảy ra ngay	The storm is imminent.	Cơn bão sắp ập đến.		/ˈɪmɪnənt/	mirabi-ai-2026-10	active
+belated	belated	adjective	5	time	muộn (lời chúc, món quà)	đến muộn hơn lẽ ra phải đến	Happy belated birthday!	Chúc mừng sinh nhật muộn nhé!		/bɪˈleɪtɪd/	mirabi-ai-2026-10	active
+timely	timely	adjective	5	time	đúng lúc, kịp thời	xảy ra vào đúng thời điểm cần	Thanks for your timely help.	Cảm ơn sự giúp đỡ kịp thời của bạn.		/ˈtaɪmli/	mirabi-ai-2026-10	active
+forthcoming	forthcoming	adjective	5	time	sắp ra mắt, sắp được công bố	trang trọng: sắp diễn ra hoặc sắp phát hành	The band is working on its forthcoming album.	Ban nhạc đang thực hiện album sắp ra mắt.		/ˌfɔːθˈkʌmɪŋ/	mirabi-ai-2026-10	active
+premature	premature	adjective	5	time	quá sớm, sớm hơn bình thường	xảy ra trước thời điểm thích hợp	It's premature to celebrate now.	Bây giờ mà ăn mừng thì còn quá sớm.		/ˈpremətʃə/	mirabi-ai-2026-10	active
+simultaneously	simultaneously	adverb	5	time	cùng một lúc	trạng từ: hai việc diễn ra đồng thời	She can cook and talk on the phone simultaneously.	Cô ấy có thể vừa nấu ăn vừa nói điện thoại cùng một lúc.		/ˌsɪmlˈteɪniəsli/	mirabi-ai-2026-10	active
+subsequently	subsequently	adverb	5	time	về sau	trang trọng: sau sự việc vừa nhắc	He was injured and subsequently left the team.	Anh ấy bị chấn thương và về sau rời đội.		/ˈsʌbsɪkwəntli/	mirabi-ai-2026-10	active
+formerly	formerly	adverb	5	time	trước kia, xưa kia	trước đây từng là (trang trọng)	Ho Chi Minh City was formerly called Saigon.	Thành phố Hồ Chí Minh trước kia có tên là Sài Gòn.		/ˈfɔːməli/	mirabi-ai-2026-10	active
+annually	annually	adverb	5	time	mỗi năm một lần	trạng từ: việc được tổ chức theo từng năm	The festival is held annually.	Lễ hội được tổ chức mỗi năm một lần.	yearly	/ˈænjuəli/	mirabi-ai-2026-10	active
+procrastinate.time	procrastinate	verb	5	time	chần chừ, lần lữa	cứ để việc cần làm sang sau mãi	Stop procrastinating and start studying.	Đừng lần lữa nữa, bắt đầu học đi.		/prəˈkræstɪneɪt/	mirabi-ai-2026-10	active
+linger	linger	verb	5	time	nán lại	ở lại lâu hơn cần thiết	We lingered over coffee after dinner.	Chúng tôi nán lại uống cà phê sau bữa tối.		/ˈlɪŋɡə/	mirabi-ai-2026-10	active
+precede	precede	verb	5	time	xảy ra trước, đi trước	trang trọng: diễn ra trước một việc khác	A short speech preceded the dinner.	Một bài phát biểu ngắn diễn ra trước bữa tối.		/prɪˈsiːd/	mirabi-ai-2026-10	active
+coincide	coincide	verb	5	time	trùng (thời gian)	hai sự kiện xảy ra cùng một lúc	My birthday coincides with Tet this year.	Năm nay sinh nhật tôi trùng với dịp Tết.		/ˌkəʊɪnˈsaɪd/	mirabi-ai-2026-10	active
+recur	recur	verb	5	time	tái diễn, lặp lại	xảy ra lại nhiều lần	If the pain recurs, see a doctor.	Nếu cơn đau tái diễn, hãy đi khám bác sĩ.		/rɪˈkɜː/	mirabi-ai-2026-10	active
+overlap	overlap	verb	5	time	trùng nhau một phần	hai khoảng thời gian chồng lên nhau	The two classes overlap by ten minutes.	Hai lớp học bị trùng nhau mười phút.		/ˌəʊvəˈlæp/	mirabi-ai-2026-10	active
+defer	defer	verb	5	time	lùi thời hạn, bảo lưu	trang trọng: dời việc học, quyết định hay khoản thanh toán sang sau	She deferred her studies for a year.	Cô ấy bảo lưu việc học một năm.		/dɪˈfɜː/	mirabi-ai-2026-10	active
+await	await	verb	5	time	đang chờ đợi (trang trọng)	chờ một việc sắp xảy ra hoặc sắp có	We are awaiting the test results.	Chúng tôi đang chờ kết quả xét nghiệm.		/əˈweɪt/	mirabi-ai-2026-10	active
+prolong	prolong	verb	5	time	làm kéo dài	khiến việc gì kéo dài lâu hơn	Exercise can prolong your life.	Tập thể dục có thể kéo dài tuổi thọ.		/prəˈlɒŋ/	mirabi-ai-2026-10	active
+resume	resume	verb	5	time	tiếp tục lại	bắt đầu lại sau khi tạm dừng	The game will resume after the rain stops.	Trận đấu sẽ tiếp tục lại sau khi tạnh mưa.		/rɪˈzjuːm/	mirabi-ai-2026-10	active
+in_the_short_term	in the short term	collocation	5	time	trong ngắn hạn	xét kết quả trong thời gian ngắn sắp tới	In the short term, prices will go up.	Trong ngắn hạn, giá cả sẽ tăng.			mirabi-ai-2026-10	active
+around_the_clock	around the clock	idiom	5	time	suốt ngày đêm	24 giờ liên tục không nghỉ	Nurses work around the clock.	Các y tá làm việc suốt ngày đêm.	round the clock		mirabi-ai-2026-10	active
+in_no_time	in no time	idiom	5	time	chẳng mấy chốc	rất nhanh, trong thời gian rất ngắn	We'll be there in no time.	Chẳng mấy chốc chúng ta sẽ tới đó.			mirabi-ai-2026-10	active
+once_in_a_blue_moon	once in a blue moon	idiom	5	time	năm thì mười họa	rất hiếm khi xảy ra	I only eat fast food once in a blue moon.	Năm thì mười họa tôi mới ăn đồ ăn nhanh.			mirabi-ai-2026-10	active
+call_it_a_day.time	call it a day	idiom	5	time	nghỉ tay, dừng việc hôm nay	quyết định thôi làm việc vì đã đủ hoặc đã muộn	It's late. Let's call it a day.	Muộn rồi. Hôm nay nghỉ ở đây thôi.			mirabi-ai-2026-10	draft
+for_good	for good	idiom	5	time	luôn, dứt hẳn (không quay lại)	rời đi hoặc thay đổi hẳn, không trở lại như cũ	She left the country for good.	Cô ấy rời khỏi đất nước luôn, không quay lại.			mirabi-ai-2026-10	active
+at_short_notice	at short notice	collocation	5	time	được báo gấp	chỉ được báo trước rất ít thời gian	Thanks for coming at such short notice.	Cảm ơn bạn đã đến dù được báo gấp như vậy.	on short notice		mirabi-ai-2026-10	active
+only_a_matter_of_time	only a matter of time	phrase	5	time	chỉ là vấn đề thời gian	chắc chắn sẽ xảy ra, chỉ chưa biết khi nào	It's only a matter of time before he finds out.	Chỉ là vấn đề thời gian trước khi anh ta phát hiện ra.			mirabi-ai-2026-10	active
+on_the_dot	on the dot	idiom	5	time	đúng giờ không sai một phút	chính xác vào giờ đã nói	The train left at nine on the dot.	Tàu chạy đúng chín giờ không sai một phút.			mirabi-ai-2026-10	active
+night_owl.time	night owl	idiom	5	time	cú đêm, người hay thức khuya	người thích thức và làm việc vào ban đêm	I'm a night owl. I work best after midnight.	Tôi là cú đêm. Tôi làm việc hiệu quả nhất sau nửa đêm.			mirabi-ai-2026-10	active
+date_back	date back	phrasal_verb	5	time	có từ, có niên đại từ	nói về thời điểm một vật hay phong tục bắt đầu có	This house dates back to 1900.	Ngôi nhà này có từ năm 1900.			mirabi-ai-2026-10	active
+drag_on	drag on	phrasal_verb	5	time	kéo dài lê thê	diễn ra lâu hơn mong muốn, gây chán	The meeting dragged on for hours.	Cuộc họp kéo dài lê thê hàng giờ.			mirabi-ai-2026-10	active
+transient	transient	adjective	6	time	nhất thời	chỉ tồn tại trong một thời gian ngắn rồi qua đi	Her sadness was only transient.	Nỗi buồn của cô ấy chỉ là nhất thời.		/ˈtrænziənt/	mirabi-ai-2026-10	active
+perpetual	perpetual	adjective	6	time	triền miên, không dứt	kéo dài hoặc lặp lại liên tục, thường gây khó chịu	I'm tired of their perpetual arguments.	Tôi mệt mỏi với những cuộc cãi vã triền miên của họ.		/pəˈpetʃuəl/	mirabi-ai-2026-10	active
+sporadic	sporadic	adjective	6	time	thưa thớt, lác đác	xảy ra không đều, thỉnh thoảng mới có	Her phone calls became sporadic.	Những cuộc gọi của cô ấy trở nên thưa thớt.		/spəˈrædɪk/	mirabi-ai-2026-10	active
+interim	interim	adjective	6	time	lâm thời, tạm quyền	dùng trong lúc chờ người hay cái chính thức	He was named interim manager.	Anh ấy được bổ nhiệm làm quản lý tạm quyền.		/ˈɪntərɪm/	mirabi-ai-2026-10	active
+biannual	biannual	adjective	6	time	mỗi năm hai lần	diễn ra hai lần trong một năm	We have a biannual meeting.	Chúng tôi có cuộc họp mỗi năm hai lần.		/baɪˈænjuəl/	mirabi-ai-2026-10	active
+biennial	biennial	adjective	6	time	hai năm một lần	diễn ra cứ hai năm một lần	The art show is a biennial event.	Triển lãm nghệ thuật này diễn ra hai năm một lần.		/baɪˈeniəl/	mirabi-ai-2026-10	active
+antiquated	antiquated	adjective	6	time	cổ lỗ, lạc hậu	quá cũ, không còn phù hợp với thời nay	The office still uses antiquated computers.	Văn phòng vẫn dùng những chiếc máy tính cổ lỗ.		/ˈæntɪkweɪtɪd/	mirabi-ai-2026-10	active
+hitherto	hitherto	adverb	6	time	từ trước đến giờ	trang trọng, văn viết: tính đến thời điểm đó	This was a hitherto unknown fact.	Đây là một sự thật từ trước đến giờ chưa ai biết.		/ˌhɪðəˈtuː/	mirabi-ai-2026-10	active
+henceforth	henceforth	adverb	6	time	từ nay về sau	trang trọng: kể từ thời điểm này	Henceforth, all staff must wear a badge.	Từ nay về sau, mọi nhân viên phải đeo thẻ.		/ˌhensˈfɔːθ/	mirabi-ai-2026-10	active
+thereafter	thereafter	adverb	6	time	từ đó về sau	trang trọng: sau thời điểm vừa nói	He retired in 2010 and died shortly thereafter.	Ông nghỉ hưu năm 2010 và qua đời không lâu sau đó.		/ˌðeərˈɑːftə/	mirabi-ai-2026-10	active
+epoch	epoch	noun	6	time	thời kỳ bước ngoặt	một giai đoạn lịch sử mở đầu bằng sự kiện lớn	The internet started a new epoch in communication.	Internet mở ra một thời kỳ mới trong giao tiếp.		/ˈiːpɒk/	mirabi-ai-2026-10	active
+procrastination	procrastination	noun	6	time	thói chần chừ	danh từ: thói quen để việc cần làm sang sau	Procrastination is the thief of time.	Sự chần chừ là kẻ cắp thời gian.		/prəˌkræstɪˈneɪʃn/	mirabi-ai-2026-10	active
+elapse	elapse	verb	6	time	trôi đi (trang trọng)	thời gian qua đi kể từ một sự việc	Three years have elapsed since the accident.	Ba năm đã trôi đi kể từ vụ tai nạn.	pass	/ɪˈlæps/	mirabi-ai-2026-10	active
+dawdle.time	dawdle	verb	6	time	lề mề, la cà	làm hoặc đi rất chậm, mất thời gian	Don't dawdle, or we'll be late!	Đừng lề mề nữa, không là muộn đấy!		/ˈdɔːdl/	mirabi-ai-2026-10	active
+hasten	hasten	verb	6	time	làm xảy ra sớm hơn	khiến việc gì đến nhanh hơn dự tính	The rain hastened our return home.	Cơn mưa khiến chúng tôi về nhà sớm hơn.		/ˈheɪsn/	mirabi-ai-2026-10	active
+expedite	expedite	verb	6	time	xúc tiến nhanh (thủ tục)	trang trọng: đẩy nhanh một quy trình, giấy tờ	We paid extra to expedite the visa.	Chúng tôi trả thêm tiền để làm thị thực nhanh hơn.		/ˈekspədaɪt/	mirabi-ai-2026-10	active
+predate	predate	verb	6	time	có trước về niên đại	tồn tại sớm hơn một sự vật, sự việc khác	This temple predates the city itself.	Ngôi đền này còn có trước cả thành phố.		/ˌpriːˈdeɪt/	mirabi-ai-2026-10	active
+synchronise	synchronise	verb	6	time	chỉnh cho khớp giờ, đồng bộ	làm cho hai việc diễn ra cùng lúc hoặc giờ khớp nhau	Let's synchronise our watches.	Chúng ta hãy chỉnh đồng hồ cho khớp giờ.	synchronize	/ˈsɪŋkrənaɪz/	mirabi-ai-2026-10	active
+in_the_nick_of_time.time	in the nick of time	idiom	6	time	vừa kịp lúc trong gang tấc	đến hoặc làm xong ngay trước khi quá muộn	We arrived in the nick of time.	Chúng tôi đến vừa kịp lúc trong gang tấc.			mirabi-ai-2026-10	active
+at_the_eleventh_hour	at the eleventh hour	idiom	6	time	vào giờ chót, sát nút	ngay trước khi quá muộn	The deal was signed at the eleventh hour.	Thỏa thuận được ký vào giờ chót.	at the last minute		mirabi-ai-2026-10	active
+in_due_course	in due course	idiom	6	time	vào lúc thích hợp	trang trọng: khi đến đúng thời điểm, không cần vội	You will receive your results in due course.	Bạn sẽ nhận được kết quả vào lúc thích hợp.			mirabi-ai-2026-10	active
+day_in_day_out	day in day out	idiom	6	time	ngày này qua ngày khác	lặp đi lặp lại hằng ngày, thường gây nhàm chán	He does the same work day in day out.	Anh ấy làm cùng một việc ngày này qua ngày khác.			mirabi-ai-2026-10	active
+race_against_time	race against time	idiom	6	time	cuộc chạy đua với thời gian	khi phải làm thật nhanh trước khi quá muộn	Finding the lost child was a race against time.	Tìm đứa trẻ bị lạc là một cuộc chạy đua với thời gian.			mirabi-ai-2026-10	active
+for_the_foreseeable_future	for the foreseeable future	collocation	6	time	trong thời gian tới	trong khoảng tương lai có thể đoán trước được	The shop will stay closed for the foreseeable future.	Cửa hàng sẽ tiếp tục đóng cửa trong thời gian tới.			mirabi-ai-2026-10	active
+while_away	while away	phrasal_verb	6	time	tiêu khiển cho qua thời gian	thong thả làm gì đó để thời gian trôi qua dễ chịu	We whiled away the afternoon by the river.	Chúng tôi thong thả tiêu khiển cả buổi chiều bên bờ sông.			mirabi-ai-2026-10	active
+make_up_for_lost_time	make up for lost time	idiom	6	time	bù lại thời gian đã mất	làm thật nhiều để bù cho quãng thời gian bỏ lỡ	After years apart, they're making up for lost time.	Sau nhiều năm xa cách, họ đang bù lại thời gian đã mất.			mirabi-ai-2026-10	active

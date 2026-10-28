@@ -1,0 +1,107 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+approve	approve	verb	3	work	phê duyệt, chấp thuận	khi cấp trên đồng ý cho một kế hoạch, đề xuất	My manager approved my holiday request.	Quản lý đã duyệt đơn xin nghỉ của tôi.		/əˈpruːv/
+handle.deal	handle	verb	3	work	xử lý, đảm nhận	lo liệu một việc, một tình huống trong công việc	She handles all the customer complaints.	Cô ấy xử lý tất cả các khiếu nại của khách hàng.		/ˈhændl/
+confirm	confirm	verb	3	work	xác nhận	nói chắc rằng một việc là đúng hoặc chắc chắn diễn ra	Please confirm the time of the meeting.	Vui lòng xác nhận giờ họp.		/kənˈfɜːm/
+postpone	postpone	verb	3	work	hoãn lại	dời một việc đã định sang thời điểm muộn hơn	The meeting was postponed until next week.	Cuộc họp đã bị hoãn sang tuần sau.	put off	/pəˈspəʊn/
+forward.email	forward	verb	3	work	chuyển tiếp (email)	gửi email mình nhận được cho người khác	I'll forward his email to you.	Tôi sẽ chuyển tiếp email của anh ấy cho bạn.		/ˈfɔːwəd/
+draft.write	draft	verb	3	work	soạn bản nháp	viết bản đầu tiên của một lá thư, báo cáo	Can you draft a reply to this customer?	Bạn soạn bản nháp thư trả lời khách hàng này nhé?		/drɑːft/
+file.store	file	verb	3	work	lưu, sắp xếp hồ sơ	cất giấy tờ vào đúng tập, đúng tủ theo thứ tự	Please file these papers by date.	Vui lòng sắp xếp lưu các giấy tờ này theo ngày.		/faɪl/
+brainstorm	brainstorm	verb	3	work	cùng động não nghĩ ý tưởng	cả nhóm cùng đưa ra thật nhiều ý tưởng trong thời gian ngắn	Let's brainstorm some names for the new shop.	Hãy cùng nghĩ vài cái tên cho cửa hàng mới.		/ˈbreɪnstɔːm/
+submit	submit	verb	3	work	nộp, gửi (để duyệt)	gửi báo cáo, đơn từ cho cấp trên xem xét	Please submit your report by Friday.	Vui lòng nộp báo cáo trước thứ Sáu.		/səbˈmɪt/
+review.check	review	verb	3	work	xem xét lại, rà soát	đọc và kiểm tra lại một tài liệu, kế hoạch	The manager will review the plan tomorrow.	Ngày mai quản lý sẽ xem xét lại kế hoạch.		/rɪˈvjuː/
+present.show	present	verb	3	work	trình bày	nói cho người khác biết về một ý tưởng, kết quả	She presented her ideas to the team.	Cô ấy trình bày ý tưởng của mình với nhóm.		/prɪˈzent/
+arrange	arrange	verb	3	work	thu xếp, sắp xếp (lịch)	lên lịch, chuẩn bị cho một cuộc gặp, cuộc hẹn	I'll arrange a time to meet them.	Tôi sẽ thu xếp thời gian để gặp họ.		/əˈreɪndʒ/
+duty	duty	noun	3	work	nhiệm vụ, bổn phận	việc một người phải làm theo vị trí công việc của mình	Answering the phone is one of my duties.	Nghe điện thoại là một trong những nhiệm vụ của tôi.		/ˈdjuːti/
+responsibility	responsibility	noun	3	work	trách nhiệm	việc mình phải lo và phải chịu trách nhiệm về kết quả	Training new staff is my responsibility.	Đào tạo nhân viên mới là trách nhiệm của tôi.		/rɪˌspɒnsəˈbɪləti/
+shift.work	shift	noun	3	work	ca làm việc	một khoảng thời gian làm việc theo phiên	My shift starts at six in the morning.	Ca làm của tôi bắt đầu lúc sáu giờ sáng.		/ʃɪft/
+agenda	agenda	noun	3	work	chương trình họp	danh sách các vấn đề sẽ bàn trong cuộc họp	What's on the agenda for today's meeting?	Chương trình họp hôm nay có những gì?		/əˈdʒendə/
+paperwork	paperwork	noun	3	work	giấy tờ, thủ tục giấy tờ	việc điền và xử lý các loại giấy tờ	I spent all morning doing paperwork.	Tôi mất cả buổi sáng làm giấy tờ.		/ˈpeɪpəwɜːk/
+spreadsheet	spreadsheet	noun	3	work	bảng tính	bảng số liệu trên máy tính, như file Excel	I keep all the numbers in a spreadsheet.	Tôi lưu tất cả số liệu trong một bảng tính.		/ˈspredʃiːt/
+supervisor	supervisor	noun	3	work	người giám sát	người trực tiếp theo dõi, quản lý công việc của nhân viên	Ask your supervisor if you can leave early.	Hãy hỏi người giám sát xem bạn có được về sớm không.		/ˈsuːpəvaɪzə/
+priority	priority	noun	3	work	việc ưu tiên	việc quan trọng nhất cần làm trước	Finishing this project is our top priority.	Hoàn thành dự án này là ưu tiên hàng đầu của chúng tôi.		/praɪˈɒrəti/
+feedback	feedback	noun	3	work	ý kiến phản hồi, góp ý	nhận xét về công việc để người đó làm tốt hơn	My boss gave me some useful feedback.	Sếp đã cho tôi vài góp ý hữu ích.		/ˈfiːdbæk/
+attachment	attachment	noun	3	work	tệp đính kèm	tệp được gửi kèm theo email	Please check the attachment.	Vui lòng kiểm tra tệp đính kèm.		/əˈtætʃmənt/
+stationery	stationery	noun	3	work	văn phòng phẩm	giấy, bút, kẹp, phong bì… dùng trong văn phòng	We need to order more stationery.	Chúng ta cần đặt thêm văn phòng phẩm.		/ˈsteɪʃənri/
+workday	workday	noun	3	work	ngày làm việc	một ngày đi làm, thường từ thứ Hai đến thứ Sáu	A normal workday starts at eight.	Một ngày làm việc bình thường bắt đầu lúc tám giờ.	working day	/ˈwɜːkdeɪ/
+leave.absence	leave	noun	3	work	thời gian nghỉ phép	khoảng thời gian được công ty cho phép nghỉ làm	She's on leave until next Tuesday.	Cô ấy nghỉ phép đến thứ Ba tuần sau.		/liːv/
+photocopier	photocopier	noun	3	work	máy photocopy	máy sao chụp tài liệu trong văn phòng	The photocopier is broken again.	Máy photocopy lại hỏng rồi.	copier	/ˈfəʊtəʊkɒpiə/
+progress.work	progress	noun	3	work	tiến độ công việc	mức độ công việc đã làm được tới đâu	How much progress have you made on the report?	Bạn làm báo cáo tới đâu rồi?		/ˈprəʊɡres/
+target.work	target	noun	3	work	chỉ tiêu	con số hay kết quả phải đạt được trong công việc	We met our sales target this month.	Tháng này chúng tôi đã đạt chỉ tiêu doanh số.		/ˈtɑːɡɪt/
+badge.id	badge	noun	3	work	thẻ nhân viên, thẻ tên	thẻ đeo có tên, ảnh để ra vào công ty	You need your badge to enter the building.	Bạn cần thẻ nhân viên để vào tòa nhà.		/bædʒ/
+stressful	stressful	adjective	3	work	căng thẳng, gây áp lực	nói về công việc, tình huống làm người ta bị stress	Working in a hospital can be very stressful.	Làm việc ở bệnh viện có thể rất căng thẳng.		/ˈstresfl/
+flexible.work	flexible	adjective	3	work	linh hoạt (giờ giấc)	nói về giờ làm, cách làm việc có thể thay đổi theo nhu cầu	I have flexible working hours.	Tôi có giờ làm việc linh hoạt.		/ˈfleksəbl/
+punctual	punctual	adjective	3	work	đúng giờ	nói về người luôn đến đúng giờ hẹn, giờ làm	He is always punctual for meetings.	Anh ấy luôn đến họp đúng giờ.		/ˈpʌŋktʃuəl/
+efficient	efficient	adjective	3	work	hiệu quả (không lãng phí)	làm việc nhanh, tốt mà không phí thời gian, công sức	She's a very efficient worker.	Cô ấy là một nhân viên làm việc rất hiệu quả.		/ɪˈfɪʃnt/
+productive	productive	adjective	3	work	năng suất, làm được nhiều việc	khi một ngày, một người làm ra được nhiều kết quả	I had a very productive morning.	Tôi đã có một buổi sáng làm việc rất năng suất.		/prəˈdʌktɪv/
+challenging	challenging	adjective	3	work	nhiều thử thách	nói về công việc khó nhưng thú vị, cần cố gắng	My new job is challenging but fun.	Công việc mới của tôi đầy thử thách nhưng vui.		/ˈtʃælɪndʒɪŋ/
+remote.work	remote	adjective	3	work	từ xa (qua mạng)	nói về việc làm việc ở ngoài văn phòng qua Internet	Many companies now offer remote work.	Nhiều công ty giờ cho phép làm việc từ xa.		/rɪˈməʊt/
+due	due	adjective	3	work	đến hạn (phải nộp)	nói về việc phải nộp, phải hoàn thành vào một lúc nào đó	The report is due on Friday.	Báo cáo đến hạn nộp vào thứ Sáu.		/djuː/
+exhausting	exhausting	adjective	3	work	làm kiệt sức	nói về công việc làm người ta mệt rã rời	Working two jobs is exhausting.	Làm hai công việc một lúc thật kiệt sức.		/ɪɡˈzɔːstɪŋ/
+urgently	urgently	adverb	3	work	một cách gấp gáp	khi một việc cần làm ngay, không thể chờ	I need to speak to you urgently.	Tôi cần nói chuyện với bạn gấp.		/ˈɜːdʒəntli/
+in_charge_of	in charge of	collocation	3	work	phụ trách	khi ai đó được giao quản lý một việc, một nhóm	Who is in charge of this project?	Ai phụ trách dự án này?
+responsible_for	responsible for	collocation	3	work	chịu trách nhiệm về	khi một việc là phần việc, nghĩa vụ của ai	I'm responsible for the company website.	Tôi chịu trách nhiệm về trang web của công ty.
+meet_a_deadline	meet a deadline	collocation	3	work	kịp hạn chót	hoàn thành công việc đúng thời hạn	We worked all night to meet the deadline.	Chúng tôi làm cả đêm để kịp hạn chót.
+miss_a_deadline	miss a deadline	collocation	3	work	trễ hạn chót	không hoàn thành công việc đúng hạn	If we miss the deadline, the customer will be angry.	Nếu trễ hạn, khách hàng sẽ giận.
+annual_leave	annual leave	collocation	3	work	nghỉ phép năm	số ngày nghỉ có lương mỗi năm	I have twelve days of annual leave.	Tôi có mười hai ngày nghỉ phép năm.
+take_time_off	take time off	collocation	3	work	nghỉ làm một thời gian	nghỉ làm vài ngày để nghỉ ngơi hay lo việc riêng	I'm taking some time off next month.	Tháng sau tôi sẽ nghỉ làm một thời gian.
+call_in_sick	call in sick	collocation	3	work	gọi điện báo ốm	gọi cho công ty để báo hôm nay bị bệnh không đi làm	Tom called in sick this morning.	Sáng nay Tom đã gọi điện báo ốm.
+on_duty	on duty	collocation	3	work	đang trực, đang trong ca	khi đang trong ca làm việc	Two nurses are on duty tonight.	Tối nay có hai y tá trực.
+off_duty	off duty	collocation	3	work	hết ca, không trực	khi không ở trong giờ làm việc	The guard is off duty now.	Người bảo vệ giờ đã hết ca.
+under_pressure	under pressure	collocation	3	work	chịu áp lực	khi phải làm việc trong căng thẳng, gấp gáp	I work well under pressure.	Tôi làm việc tốt khi chịu áp lực.
+dress_code	dress code	collocation	3	work	quy định trang phục	quy định về cách ăn mặc ở nơi làm việc	The dress code here is quite formal.	Quy định trang phục ở đây khá trang trọng.
+filing_cabinet	filing cabinet	collocation	3	work	tủ hồ sơ	tủ có ngăn kéo để cất giấy tờ	The contracts are in the filing cabinet.	Các hợp đồng nằm trong tủ hồ sơ.
+get_back_to	get back to	phrasal_verb	3	work	trả lời lại (ai) sau	liên lạc lại với ai sau khi có thêm thông tin	I'll get back to you tomorrow.	Ngày mai tôi sẽ trả lời lại bạn.
+sort_out	sort out	phrasal_verb	3	work	thu xếp ổn thỏa	xử lý xong xuôi một rắc rối, một việc lộn xộn	Don't worry, I'll sort it out.	Đừng lo, tôi sẽ thu xếp ổn thỏa.
+hold_a_meeting	hold a meeting	collocation	3	work	tổ chức cuộc họp	khi công ty, nhóm mở một cuộc họp	We hold a meeting every Friday afternoon.	Chúng tôi tổ chức họp mỗi chiều thứ Sáu.
+best_regards	best regards	phrase	3	work	trân trọng (cuối thư)	lời chào lịch sự ở cuối email công việc	She ended the email with best regards and her name.	Cô ấy kết thúc email bằng lời chào trân trọng và tên mình.	kind regards
+follow_instructions	follow instructions	collocation	3	work	làm theo hướng dẫn	làm đúng như chỉ dẫn được giao	New staff must follow the instructions carefully.	Nhân viên mới phải làm theo hướng dẫn cẩn thận.
+work_environment	work environment	collocation	3	work	môi trường làm việc	điều kiện, không khí ở nơi làm việc	We have a friendly work environment.	Chúng tôi có môi trường làm việc thân thiện.	working environment
+take_on	take on	phrasal_verb	3	work	nhận làm thêm (việc)	đồng ý đảm nhận thêm một công việc, trách nhiệm	I can't take on any more work this week.	Tuần này tôi không thể nhận thêm việc nữa.
+heavy_workload	heavy workload	collocation	3	work	khối lượng công việc nặng	khi có quá nhiều việc phải làm	Nurses often have a heavy workload.	Y tá thường có khối lượng công việc nặng.
+office_party	office party	collocation	3	work	tiệc công ty	bữa tiệc cho nhân viên trong văn phòng, nhất là cuối năm	Are you going to the office party?	Bạn có đi tiệc công ty không?
+reply_all	reply all	collocation	3	work	trả lời tất cả (email)	trả lời cho mọi người có tên trong email	Please don't reply all to this email.	Vui lòng đừng bấm trả lời tất cả với email này.
+on_schedule	on schedule	collocation	3	work	đúng tiến độ	khi công việc diễn ra đúng kế hoạch thời gian	The project is on schedule.	Dự án đang đúng tiến độ.	on track
+behind_schedule	behind schedule	collocation	3	work	chậm tiến độ	khi công việc chậm hơn kế hoạch	We are two weeks behind schedule.	Chúng tôi đang chậm tiến độ hai tuần.
+conference_call	conference call	collocation	3	work	cuộc gọi hội nghị	cuộc gọi có nhiều người cùng tham gia để họp	I have a conference call with the London office.	Tôi có một cuộc gọi hội nghị với văn phòng London.
+team_building	team building	collocation	3	work	hoạt động gắn kết đội nhóm	hoạt động giúp nhân viên hiểu nhau và phối hợp tốt hơn	We go on a team building trip every year.	Năm nào chúng tôi cũng đi một chuyến team building.
+head_of_department	head of department	collocation	3	work	trưởng phòng	người đứng đầu một phòng ban	She is the head of department now.	Giờ cô ấy là trưởng phòng.
+subject_line	subject line	collocation	3	work	dòng tiêu đề (email)	dòng ghi chủ đề ở đầu một email	Write a clear subject line.	Hãy viết dòng tiêu đề rõ ràng.
+assign	assign	verb	4	work	phân công (việc)	khi quản lý giao một việc cụ thể cho ai làm	My manager assigned me a new project.	Quản lý đã phân công cho tôi một dự án mới.		/əˈsaɪn/
+supervise	supervise	verb	4	work	giám sát	theo dõi, kiểm tra công việc của người khác	She supervises twenty factory workers.	Cô ấy giám sát hai mươi công nhân nhà máy.		/ˈsuːpəvaɪz/
+prioritise	prioritise	verb	4	work	ưu tiên	quyết định việc nào quan trọng để làm trước	You need to prioritise your tasks.	Bạn cần ưu tiên các nhiệm vụ của mình.	prioritize	/praɪˈɒrətaɪz/
+coordinate	coordinate	verb	4	work	điều phối	sắp xếp để nhiều người, nhiều phần việc ăn khớp với nhau	Lan coordinates the work of three teams.	Lan điều phối công việc của ba nhóm.		/kəʊˈɔːdɪneɪt/
+collaborate	collaborate	verb	4	work	cộng tác	cùng làm việc với người khác để tạo ra kết quả chung	Our team collaborates with designers in Japan.	Nhóm chúng tôi cộng tác với các nhà thiết kế ở Nhật.		/kəˈlæbəreɪt/
+reschedule	reschedule	verb	4	work	dời lịch, đổi lịch	chuyển cuộc họp, cuộc hẹn sang thời gian khác	Can we reschedule the meeting to Thursday?	Chúng ta dời cuộc họp sang thứ Năm được không?		/ˌriːˈʃedjuːl/
+multitask	multitask	verb	4	work	làm nhiều việc cùng lúc	xử lý nhiều nhiệm vụ trong cùng một thời gian	In this job, you have to multitask.	Trong công việc này, bạn phải làm nhiều việc cùng lúc.		/ˌmʌltiˈtɑːsk/
+notify	notify	verb	4	work	thông báo (chính thức)	báo cho ai biết một việc, thường bằng văn bản	Please notify your manager if you are sick.	Vui lòng thông báo cho quản lý nếu bạn bị ốm.		/ˈnəʊtɪfaɪ/
+chair.meeting	chair	verb	4	work	chủ trì (cuộc họp)	điều khiển, dẫn dắt một cuộc họp	The director will chair the meeting.	Giám đốc sẽ chủ trì cuộc họp.		/tʃeə/
+cc	cc	verb	4	work	gửi kèm bản sao (email)	thêm ai vào ô cc để họ cũng nhận được email	Please cc me on all emails to the client.	Vui lòng cc cho tôi tất cả email gửi khách hàng.		/ˌsiːˈsiː/
+proofread	proofread	verb	4	work	đọc soát lỗi	đọc kỹ văn bản để tìm và sửa lỗi trước khi gửi	Can you proofread my report before I send it?	Bạn soát lỗi báo cáo giúp tôi trước khi gửi được không?		/ˈpruːfriːd/
+motivate	motivate	verb	4	work	tạo động lực	làm cho người khác muốn cố gắng làm việc	A good manager knows how to motivate the team.	Một quản lý giỏi biết cách tạo động lực cho nhóm.		/ˈməʊtɪveɪt/
+accomplish	accomplish	verb	4	work	đạt được, làm xong (việc khó)	làm xong một việc lớn sau nhiều nỗ lực	We accomplished a lot this week.	Tuần này chúng tôi đã làm được rất nhiều việc.		/əˈkʌmplɪʃ/
+memo	memo	noun	4	work	bản ghi nhớ nội bộ	thông báo ngắn gửi trong nội bộ công ty	The manager sent a memo about the new rules.	Quản lý đã gửi một bản ghi nhớ về quy định mới.		/ˈmeməʊ/
+cubicle	cubicle	noun	4	work	ô làm việc có vách ngăn	chỗ ngồi nhỏ được ngăn bằng vách trong văn phòng	I work in a small cubicle near the window.	Tôi làm việc trong một ô nhỏ gần cửa sổ.		/ˈkjuːbɪkl/
+attendee	attendee	noun	4	work	người tham dự	người có mặt tại cuộc họp, hội nghị	Each attendee will get a copy of the agenda.	Mỗi người tham dự sẽ nhận một bản chương trình họp.		/ˌætenˈdiː/
+burnout	burnout	noun	4	work	sự kiệt sức (vì công việc)	mệt mỏi cả thể chất lẫn tinh thần do làm việc quá sức lâu ngày	Working seventy hours a week can lead to burnout.	Làm bảy mươi tiếng một tuần có thể dẫn đến kiệt sức.		/ˈbɜːnaʊt/
+workaholic	workaholic	noun	4	work	người nghiện công việc	người làm việc quá nhiều, không biết nghỉ	My boss is a workaholic. He even works on Sundays.	Sếp tôi là người nghiện việc. Anh ấy làm cả Chủ nhật.		/ˌwɜːkəˈhɒlɪk/
+productivity	productivity	noun	4	work	năng suất lao động	lượng công việc làm được trong một khoảng thời gian	Short breaks can improve productivity.	Nghỉ ngắn có thể cải thiện năng suất.		/ˌprɒdʌkˈtɪvəti/
+workforce	workforce	noun	4	work	lực lượng lao động	toàn bộ người lao động của một công ty hay một nước	Women make up half of our workforce.	Phụ nữ chiếm một nửa lực lượng lao động của chúng tôi.		/ˈwɜːkfɔːs/
+timesheet	timesheet	noun	4	work	bảng chấm công	bảng ghi số giờ làm việc của nhân viên	Don't forget to fill in your timesheet.	Đừng quên điền bảng chấm công.	time sheet	/ˈtaɪmʃiːt/
+extension.phone	extension	noun	4	work	số máy lẻ	số nội bộ của từng điện thoại trong công ty	Call me on extension two one four.	Gọi cho tôi theo số máy lẻ hai một bốn.		/ɪkˈstenʃn/
+recipient	recipient	noun	4	work	người nhận (thư, email)	người được gửi email, thư hay tài liệu	Check the name of the recipient before you send the email.	Kiểm tra tên người nhận trước khi gửi email.		/rɪˈsɪpiənt/
+workstation	workstation	noun	4	work	chỗ làm việc (bàn và máy tính)	bàn làm việc có máy tính của một nhân viên	Please keep your workstation tidy.	Vui lòng giữ chỗ làm việc của bạn gọn gàng.		/ˈwɜːksteɪʃn/
+confidential	confidential	adjective	4	work	bảo mật, mật	nói về thông tin không được tiết lộ ra ngoài	This report is confidential. Don't share it.	Báo cáo này là tài liệu mật. Đừng chia sẻ nó.		/ˌkɒnfɪˈdenʃl/
+repetitive	repetitive	adjective	4	work	lặp đi lặp lại	nói về công việc phải làm một việc giống nhau nhiều lần	Factory work can be very repetitive.	Công việc ở nhà máy có thể rất lặp đi lặp lại.		/rɪˈpetətɪv/
+demanding	demanding	adjective	4	work	đòi hỏi cao, vất vả	nói về công việc cần nhiều thời gian, sức lực, kỹ năng	Nursing is a demanding job.	Nghề y tá là một công việc vất vả.		/dɪˈmɑːndɪŋ/
+hectic	hectic	adjective	4	work	bận tối mắt	nói về ngày, tuần có quá nhiều việc dồn dập	It's been a hectic week at the office.	Tuần này ở văn phòng bận tối mắt.		/ˈhektɪk/
+overworked	overworked	adjective	4	work	làm việc quá sức	nói về người phải làm quá nhiều việc	Many young doctors are overworked.	Nhiều bác sĩ trẻ phải làm việc quá sức.		/ˌəʊvəˈwɜːkt/
+overdue	overdue	adjective	4	work	quá hạn	nói về việc phải xong mà đã trễ hạn	This report is two weeks overdue.	Bản báo cáo này đã quá hạn hai tuần.		/ˌəʊvəˈdjuː/
+manageable	manageable	adjective	4	work	xoay xở được, kham được	nói về khối lượng việc tuy nhiều nhưng vẫn làm được	My workload is big but manageable.	Khối lượng việc của tôi lớn nhưng vẫn kham được.		/ˈmænɪdʒəbl/
+tight.deadline	tight	adjective	4	work	gấp, eo hẹp (thời gian)	nói về thời hạn, lịch làm việc có rất ít thời gian	We have a very tight deadline for this project.	Chúng tôi có thời hạn rất gấp cho dự án này.		/taɪt/
+time-consuming	time-consuming	adjective	4	work	tốn thời gian	nói về việc mất nhiều thời gian để làm	Writing reports by hand is time-consuming.	Viết báo cáo bằng tay rất tốn thời gian.		/ˈtaɪm kənsjuːmɪŋ/
+inefficient	inefficient	adjective	4	work	kém hiệu quả	nói về cách làm lãng phí thời gian, công sức	The old system is slow and inefficient.	Hệ thống cũ chậm và kém hiệu quả.		/ˌɪnɪˈfɪʃnt/
+virtual.meeting	virtual	adjective	4	work	trực tuyến (qua mạng)	nói về cuộc họp, sự kiện diễn ra qua Internet	We have a virtual meeting with the team in Singapore.	Chúng tôi có cuộc họp trực tuyến với nhóm ở Singapore.		/ˈvɜːtʃuəl/
+in-person	in-person	adjective	4	work	trực tiếp (gặp mặt)	nói về cuộc họp mà mọi người có mặt tại chỗ	We prefer in-person meetings to video calls.	Chúng tôi thích họp trực tiếp hơn gọi video.	face-to-face	/ˌɪn ˈpɜːsn/
+internal	internal	adjective	4	work	nội bộ	chỉ dùng hoặc diễn ra bên trong công ty	This is an internal email. Don't send it to customers.	Đây là email nội bộ. Đừng gửi cho khách hàng.		/ɪnˈtɜːnl/
+joint.shared	joint	adjective	4	work	chung (cùng thực hiện)	do hai hay nhiều người, nhóm cùng làm	The report was a joint effort by two teams.	Báo cáo là nỗ lực chung của hai nhóm.		/dʒɔɪnt/
+open-plan	open-plan	adjective	4	work	không gian mở (không vách ngăn)	nói về văn phòng rộng, mọi người ngồi chung không có phòng riêng	We work in an open-plan office.	Chúng tôi làm việc trong một văn phòng không gian mở.		/ˌəʊpən ˈplæn/

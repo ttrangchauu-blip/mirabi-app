@@ -1,0 +1,445 @@
+# Words already in the bank (do not add them again, except a genuinely different sense with its own key and context_vi)
+bear	bear	animals	con gấu
+bird	bird	animals	con chim
+butterfly	butterfly	animals	con bướm
+camouflage	camouflage	animals	sự ngụy trang
+carnivorous	carnivorous	animals	ăn thịt
+cat	cat	animals	con mèo
+chicken	chicken	animals	con gà
+cow	cow	animals	con bò
+dog	dog	animals	con chó
+dolphin	dolphin	animals	cá heo
+domesticated	domesticated	animals	đã được thuần hóa
+duck	duck	animals	con vịt
+elephant	elephant	animals	con voi
+extinct	extinct	animals	tuyệt chủng
+feed	feed	animals	cho ăn
+fish	fish	animals	con cá
+frog	frog	animals	con ếch
+habitat	habitat	animals	môi trường sống
+horse	horse	animals	con ngựa
+hunt	hunt	animals	săn mồi
+insect	insect	animals	côn trùng
+lion	lion	animals	con sư tử
+mammal	mammal	animals	động vật có vú
+migrate	migrate	animals	di cư
+monkey	monkey	animals	con khỉ
+mouse	mouse	animals	con chuột
+nocturnal	nocturnal	animals	hoạt động về đêm
+pet	pet	animals	thú cưng
+pig	pig	animals	con lợn
+predator	predator	animals	thú săn mồi
+prey	prey	animals	con mồi
+rabbit	rabbit	animals	con thỏ
+shark	shark	animals	cá mập
+sheep	sheep	animals	con cừu
+snake	snake	animals	con rắn
+species	species	animals	loài
+symbiosis	symbiosis	animals	sự cộng sinh
+tail	tail	animals	cái đuôi
+tiger	tiger	animals	con hổ
+wild	wild	animals	hoang dã
+wing	wing	animals	đôi cánh, cánh
+zoo	zoo	animals	sở thú, vườn bách thú
+a blessing in disguise	a_blessing_in_disguise	communication	trong cái rủi có cái may
+as soon as possible	as_soon_as_possible	communication	càng sớm càng tốt
+beat around the bush	beat_around_the_bush	communication	nói vòng vo
+bite the bullet	bite_the_bullet	communication	cắn răng chịu đựng
+break the ice	break_the_ice	communication	phá vỡ sự ngượng ngùng ban đầu
+by and large	by_and_large	communication	nhìn chung
+by the way	by_the_way	communication	nhân tiện
+call back	call_back	communication	gọi lại
+come up with	come_up_with	communication	nghĩ ra
+excuse me	excuse_me	communication	xin lỗi, cho hỏi
+find out	find_out	communication	tìm ra, phát hiện ra
+fine	fine.ok	communication	ổn, khỏe
+get the hang of	get_the_hang_of	communication	nắm được cách làm
+give up	give_up	communication	từ bỏ
+good morning	good_morning	communication	chào buổi sáng
+goodbye	goodbye	communication	tạm biệt
+hello	hello	communication	xin chào
+how much	how_much	communication	bao nhiêu tiền
+in a nutshell	in_a_nutshell	communication	tóm lại
+in my opinion	in_my_opinion	communication	theo ý kiến của tôi
+it depends	it_depends	communication	còn tùy
+keep in touch	keep_in_touch	communication	giữ liên lạc
+look forward to	look_forward_to	communication	mong chờ
+make a decision	make_a_decision	communication	đưa ra quyết định
+make sense	make_sense	communication	hợp lý, dễ hiểu
+nice to meet you	nice_to_meet_you	communication	rất vui được gặp bạn
+no problem	no_problem	communication	không sao, không có gì
+of course	of_course	communication	tất nhiên
+on the other hand	on_the_other_hand	communication	mặt khác
+please	please	communication	làm ơn, vui lòng
+point out	point_out	communication	chỉ ra
+see you later	see_you_later	communication	hẹn gặp lại
+sorry	sorry	communication	xin lỗi
+take part in	take_part_in	communication	tham gia
+thank you	thank_you	communication	cảm ơn
+you are welcome	you_are_welcome	communication	không có chi
+appliance	appliance	daily_life	thiết bị gia dụng
+bed	bed	daily_life	cái giường
+borrow	borrow	daily_life	mượn
+change	change.alter	daily_life	thay đổi
+change	change.money	daily_life	tiền thừa, tiền thối lại
+clutter	clutter	daily_life	đồ đạc bừa bộn
+commute	commute	daily_life	đi lại hằng ngày
+convenient	convenient	daily_life	tiện lợi
+date	date.calendar	daily_life	ngày tháng
+do the laundry	do_the_laundry	daily_life	giặt giũ quần áo
+door	door	daily_life	cánh cửa
+dwelling	dwelling	daily_life	nơi ở, chỗ ở
+errand	errand	daily_life	việc vặt
+frugal	frugal	daily_life	tằn tiện, chi tiêu dè sẻn
+furniture	furniture	daily_life	đồ nội thất
+get rid of	get_rid_of	daily_life	vứt bỏ, loại bỏ
+house	house	daily_life	ngôi nhà
+humdrum	humdrum	daily_life	đơn điệu, buồn tẻ
+key	key	daily_life	chìa khóa
+kitchen	kitchen	daily_life	nhà bếp
+landlord	landlord	daily_life	chủ nhà
+lend	lend	daily_life	cho mượn
+maintenance	maintenance	daily_life	việc bảo trì, bảo dưỡng
+make ends meet	make_ends_meet	daily_life	xoay xở đủ sống
+mundane	mundane	daily_life	tẻ nhạt, thường nhật
+neighbour	neighbour	daily_life	hàng xóm
+rent	rent	daily_life	thuê
+room	room	daily_life	căn phòng
+routine	routine	daily_life	nếp sinh hoạt hằng ngày
+rubbish	rubbish	daily_life	rác
+run out of	run_out_of	daily_life	hết, cạn
+shower	shower	daily_life	vòi hoa sen
+sleep	sleep	daily_life	ngủ
+tidy	tidy	daily_life	gọn gàng, ngăn nắp
+wake up	wake_up	daily_life	thức dậy
+wash	wash	daily_life	rửa, giặt
+window	window	daily_life	cửa sổ
+ambivalent	ambivalent	emotions	phân vân, cảm xúc lẫn lộn
+angry	angry	emotions	tức giận
+anxious	anxious	emotions	bồn chồn, lo âu
+apprehensive	apprehensive	emotions	e ngại
+bored	bored	emotions	chán
+calm	calm	emotions	bình tĩnh
+cheer up	cheer_up	emotions	vui lên
+confident	confident	emotions	tự tin
+disappointed	disappointed	emotions	thất vọng
+elated	elated	emotions	phấn khởi tột độ
+embarrassed	embarrassed	emotions	xấu hổ, ngượng
+empathy	empathy	emotions	sự đồng cảm
+excited	excited	emotions	hào hứng, phấn khích
+frustrated	frustrated	emotions	bực bội, nản lòng
+grateful	grateful	emotions	biết ơn
+happy	happy	emotions	vui vẻ, hạnh phúc
+jealous	jealous	emotions	ghen tị
+kind	kind	emotions	tốt bụng
+lonely	lonely	emotions	cô đơn
+love	love	emotions	yêu, rất thích
+melancholy	melancholy	emotions	nỗi u sầu
+nervous	nervous	emotions	hồi hộp
+nostalgic	nostalgic	emotions	hoài niệm
+optimistic	optimistic	emotions	lạc quan
+overwhelmed	overwhelmed	emotions	choáng ngợp
+pessimistic	pessimistic	emotions	bi quan
+proud	proud	emotions	tự hào
+relieved	relieved	emotions	nhẹ nhõm
+resentful	resentful	emotions	oán giận, bất bình
+sad	sad	emotions	buồn
+scared	scared	emotions	sợ hãi
+shy	shy	emotions	nhút nhát, rụt rè
+surprised	surprised	emotions	ngạc nhiên
+tired	tired	emotions	mệt mỏi
+worried	worried	emotions	lo lắng
+bank	bank.river	environment	bờ sông
+biodiversity	biodiversity	environment	đa dạng sinh học
+carbon footprint	carbon_footprint	environment	lượng khí thải carbon
+climate	climate	environment	khí hậu
+cloud	cloud	environment	đám mây
+cold	cold.weather	environment	lạnh
+conservation	conservation	environment	sự bảo tồn
+deforestation	deforestation	environment	nạn phá rừng
+depletion	depletion	environment	sự cạn kiệt
+drought	drought	environment	hạn hán
+ecosystem	ecosystem	environment	hệ sinh thái
+emission	emission	environment	khí thải
+endangered	endangered	environment	có nguy cơ tuyệt chủng
+energy	energy	environment	năng lượng
+environment	environment	environment	môi trường
+flood	flood	environment	lũ lụt
+flower	flower	environment	bông hoa
+forest	forest	environment	khu rừng
+global warming	global_warming	environment	sự nóng lên toàn cầu
+hot	hot	environment	nóng
+mitigate	mitigate	environment	giảm nhẹ
+mountain	mountain	environment	ngọn núi
+plastic	plastic	environment	nhựa
+pollution	pollution	environment	sự ô nhiễm
+protect	protect	environment	bảo vệ
+rain	rain	environment	mưa
+recycle	recycle	environment	tái chế
+renewable	renewable	environment	tái tạo được
+river	river	environment	dòng sông
+sea	sea	environment	biển
+sky	sky	environment	bầu trời
+snow	snow	environment	tuyết
+sun	sun	environment	mặt trời
+sustainable	sustainable	environment	bền vững
+tree	tree	environment	cái cây
+waste	waste	environment	rác thải, chất thải
+weather	weather	environment	thời tiết
+wind	wind	environment	gió
+adopt	adopt	family	nhận con nuôi
+ancestor	ancestor	family	tổ tiên
+aunt	aunt	family	cô, dì, bác gái
+baby	baby	family	em bé
+brother	brother	family	anh trai, em trai
+chore	chore	family	việc nhà
+cousin	cousin	family	anh chị em họ
+date	date.romantic	family	buổi hẹn hò
+daughter	daughter	family	con gái
+descendant	descendant	family	con cháu, hậu duệ
+divorce	divorce	family	ly hôn
+estranged	estranged	family	xa cách, không còn liên lạc
+family	family	family	gia đình
+father	father	family	bố, cha
+filial piety	filial_piety	family	lòng hiếu thảo
+generation	generation	family	thế hệ
+get along with	get_along_with	family	hòa thuận với
+grandfather	grandfather	family	ông
+grandmother	grandmother	family	bà
+grow up	grow_up	family	lớn lên, trưởng thành
+husband	husband	family	chồng
+in-laws	in-laws	family	gia đình bên vợ hoặc bên chồng
+kinship	kinship	family	quan hệ thân tộc
+look after	look_after	family	chăm sóc, trông nom
+matriarch	matriarch	family	người phụ nữ đứng đầu gia tộc
+mother	mother	family	mẹ
+nurture	nurture	family	nuôi dưỡng, vun đắp
+parents	parents	family	bố mẹ
+raise	raise	family	nuôi dạy
+relative	relative	family	họ hàng, người thân
+sibling	sibling	family	anh chị em ruột
+sister	sister	family	chị gái, em gái
+son	son	family	con trai
+take after	take_after	family	giống
+twin	twin	family	anh chị em sinh đôi
+uncle	uncle	family	chú, bác, cậu
+upbringing	upbringing	family	sự nuôi dạy, giáo dưỡng
+wife	wife	family	vợ
+appetite	appetite	food	cảm giác thèm ăn
+apple	apple	food	quả táo
+bake	bake	food	nướng bằng lò
+banana	banana	food	quả chuối
+bill	bill	food	hóa đơn
+boil	boil	food	luộc, đun sôi
+bowl	bowl	food	cái bát, cái tô
+bread	bread	food	bánh mì
+breakfast	breakfast	food	bữa sáng
+cook	cook	food	nấu ăn
+cuisine	cuisine	food	ẩm thực
+culinary	culinary	food	thuộc về nấu nướng
+delectable	delectable	food	ngon tuyệt
+delicious	delicious	food	ngon
+dessert	dessert	food	món tráng miệng
+dinner	dinner	food	bữa tối
+egg	egg	food	quả trứng
+fry	fry	food	chiên, rán
+gastronomy	gastronomy	food	nghệ thuật ẩm thực
+gourmet	gourmet	food	người sành ăn
+grill	grill	food	nướng trên vỉ
+hungry	hungry	food	đói
+ingredient	ingredient	food	nguyên liệu
+knife	knife	food	con dao
+leftovers	leftovers	food	đồ ăn thừa
+lunch	lunch	food	bữa trưa
+menu	menu	food	thực đơn
+milk	milk	food	sữa
+nutritious	nutritious	food	bổ dưỡng
+orange	orange	food	quả cam
+order	order	food	gọi món
+palatable	palatable	food	ngon miệng, dễ ăn
+portion	portion	food	khẩu phần
+recipe	recipe	food	công thức nấu ăn
+rice	rice	food	cơm, gạo
+snack	snack	food	đồ ăn vặt
+spicy	spicy	food	cay
+spoon	spoon	food	cái thìa, cái muỗng
+staple	staple	food	lương thực chính
+thirsty	thirsty	food	khát nước
+vegetable	vegetable	food	rau củ
+vegetarian	vegetarian	food	người ăn chay
+water	water	food	nước
+ailment	ailment	health	bệnh nhẹ, chứng bệnh vặt
+allergic	allergic	health	bị dị ứng
+chronic	chronic	health	mãn tính
+cold	cold.illness	health	cảm lạnh
+contagious	contagious	health	dễ lây lan
+convalescence	convalescence	health	thời kỳ dưỡng bệnh
+dentist	dentist	health	nha sĩ
+diagnosis	diagnosis	health	sự chẩn đoán
+diet	diet	health	chế độ ăn uống
+exercise	exercise	health	tập thể dục
+eye	eye	health	con mắt
+fever	fever	health	cơn sốt
+hand	hand	health	bàn tay
+head	head	health	cái đầu
+headache	headache	health	chứng đau đầu
+healthy	healthy	health	khỏe mạnh, lành mạnh
+hospital	hospital	health	bệnh viện
+hypochondriac	hypochondriac	health	người hay lo mình mắc bệnh
+immune system	immune_system	health	hệ miễn dịch
+injury	injury	health	chấn thương
+medicine	medicine	health	thuốc
+mental health	mental_health	health	sức khỏe tinh thần
+prescription	prescription	health	đơn thuốc
+recover	recover	health	hồi phục
+rest	rest	health	nghỉ ngơi
+sedentary	sedentary	health	ít vận động
+sick	sick	health	ốm, bị bệnh
+sprain	sprain	health	bị bong gân
+stomachache	stomachache	health	đau bụng
+symptom	symptom	health	triệu chứng
+tooth	tooth	health	cái răng
+vaccine	vaccine	health	vắc-xin
+well-being	well-being	health	sự khỏe mạnh và hạnh phúc
+academic	academic	school	thuộc về học thuật
+assignment	assignment	school	bài tập được giao
+board	board	school	cái bảng
+book	book	school	quyển sách
+chair	chair	school	cái ghế
+classroom	classroom	school	lớp học
+clock	clock	school	đồng hồ
+curriculum	curriculum	school	chương trình học
+degree	degree	school	bằng đại học
+desk	desk	school	cái bàn
+didactic	didactic	school	mang tính giáo huấn
+enrol	enrol	school	đăng ký nhập học
+eraser	eraser	school	cục tẩy
+erudite	erudite	school	uyên bác
+exam	exam	school	kỳ thi
+fail	fail	school	thi trượt
+homework	homework	school	bài tập về nhà
+knowledge	knowledge	school	kiến thức
+lesson	lesson	school	bài học, tiết học
+library	library	school	thư viện
+map	map	school	bản đồ
+memorize	memorize	school	học thuộc lòng
+notebook	notebook	school	quyển vở
+pass	pass	school	thi đỗ
+pedagogy	pedagogy	school	phương pháp sư phạm
+pen	pen	school	cái bút
+pencil	pencil	school	bút chì
+plagiarism	plagiarism	school	đạo văn
+revise	revise	school	ôn bài
+ruler	ruler	school	cái thước kẻ
+scholarship	scholarship	school	học bổng
+schoolbag	schoolbag	school	cặp sách
+student	student	school	học sinh
+subject	subject	school	môn học
+take notes	take_notes	school	ghi chép
+teacher	teacher	school	giáo viên
+thesis	thesis	school	luận văn
+timetable	timetable	school	thời khóa biểu
+tuition	tuition	school	học phí
+algorithm	algorithm	technology	thuật toán
+app	app	technology	ứng dụng
+artificial intelligence	artificial_intelligence	technology	trí tuệ nhân tạo
+bandwidth	bandwidth	technology	băng thông
+battery	battery	technology	pin
+charge	charge	technology	sạc
+computer	computer	technology	máy tính
+cutting-edge	cutting-edge	technology	tiên tiến nhất
+device	device	technology	thiết bị điện tử
+download	download	technology	tải xuống
+email	email	technology	thư điện tử
+encryption	encryption	technology	sự mã hóa
+game	game	technology	trò chơi điện tử
+hardware	hardware	technology	phần cứng
+internet	internet	technology	mạng Internet
+keyboard	keyboard	technology	bàn phím
+message	message	technology	tin nhắn
+obsolete	obsolete	technology	lỗi thời
+online	online	technology	trực tuyến
+password	password	technology	mật khẩu
+phone	phone	technology	điện thoại
+photo	photo	technology	bức ảnh
+privacy	privacy	technology	quyền riêng tư
+proprietary	proprietary	technology	độc quyền
+save	save	technology	lưu
+screen	screen	technology	màn hình
+search engine	search_engine	technology	công cụ tìm kiếm
+software	software	technology	phần mềm
+storage	storage	technology	dung lượng lưu trữ
+television	television	technology	ti vi
+troubleshoot	troubleshoot	technology	khắc phục sự cố
+ubiquitous	ubiquitous	technology	có mặt khắp nơi
+update	update	technology	cập nhật
+website	website	technology	trang web
+wireless	wireless	technology	không dây
+abroad	abroad	travel	ở nước ngoài
+accommodation	accommodation	travel	chỗ ở
+airport	airport	travel	sân bay
+arrive	arrive	travel	đến nơi
+beach	beach	travel	bãi biển
+book	book.reserve	travel	đặt chỗ
+bus	bus	travel	xe buýt
+car	car	travel	xe ô tô
+check in	check_in	travel	làm thủ tục
+customs	customs	travel	hải quan
+delay	delay	travel	sự chậm trễ
+destination	destination	travel	điểm đến
+excursion	excursion	travel	chuyến tham quan ngắn
+fine	fine.penalty	travel	tiền phạt
+globetrotter	globetrotter	travel	người đi khắp thế giới
+holiday	holiday	travel	kỳ nghỉ
+hotel	hotel	travel	khách sạn
+itinerary	itinerary	travel	lịch trình chuyến đi
+jet lag	jet_lag	travel	mệt mỏi do lệch múi giờ
+journey	journey	travel	chuyến đi, hành trình
+landmark	landmark	travel	địa danh nổi tiếng
+layover	layover	travel	chặng quá cảnh
+luggage	luggage	travel	hành lý
+off the beaten track	off_the_beaten_track	travel	nơi ít người biết đến
+passport	passport	travel	hộ chiếu
+plane	plane	travel	máy bay
+sightseeing	sightseeing	travel	việc tham quan
+sojourn	sojourn	travel	thời gian lưu lại
+souvenir	souvenir	travel	quà lưu niệm
+suitcase	suitcase	travel	va li
+ticket	ticket	travel	tấm vé
+tourist	tourist	travel	khách du lịch
+train	train	travel	tàu hỏa
+wanderlust	wanderlust	travel	niềm đam mê xê dịch
+apply for	apply_for	work	nộp đơn xin
+bank	bank.money	work	ngân hàng
+boss	boss	work	sếp
+busy	busy	work	bận rộn
+colleague	colleague	work	đồng nghiệp
+contract	contract	work	hợp đồng
+customer	customer	work	khách hàng
+deadline	deadline	work	hạn chót
+delegate	delegate	work	giao việc, ủy quyền
+doctor	doctor	work	bác sĩ
+driver	driver	work	tài xế, người lái xe
+employee	employee	work	nhân viên
+employer	employer	work	người sử dụng lao động
+entrepreneur	entrepreneur	work	doanh nhân khởi nghiệp
+experience	experience	work	kinh nghiệm
+farmer	farmer	work	nông dân
+freelance	freelance	work	làm tự do
+headhunt	headhunt	work	săn đầu người
+interview	interview	work	buổi phỏng vấn
+job	job	work	công việc, việc làm
+lucrative	lucrative	work	sinh lời, béo bở
+manager	manager	work	người quản lý
+meeting	meeting	work	cuộc họp
+negotiate	negotiate	work	đàm phán
+office	office	work	văn phòng
+police officer	police_officer	work	cảnh sát
+promotion	promotion	work	sự thăng chức
+redundancy	redundancy	work	sự cắt giảm nhân sự
+remuneration	remuneration	work	thù lao
+resign	resign	work	từ chức, xin nghỉ việc
+run	run	work	điều hành, quản lý
+salary	salary	work	tiền lương
+skill	skill	work	kỹ năng
+workload	workload	work	khối lượng công việc

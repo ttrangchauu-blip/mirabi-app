@@ -1,0 +1,99 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+nature	nature	noun	1	environment	thiên nhiên	thế giới cây cỏ, núi sông, muông thú không do con người tạo ra	We should spend more time in nature.	Chúng ta nên dành nhiều thời gian hơn với thiên nhiên.		/ˈneɪtʃə/
+earth	earth	noun	1	environment	Trái Đất	hành tinh nơi con người sinh sống	The earth is our only home.	Trái Đất là ngôi nhà duy nhất của chúng ta.		/ɜːθ/
+natural	natural	adjective	1	environment	tự nhiên, thuộc về thiên nhiên	có sẵn trong tự nhiên, không do con người làm ra	This park is famous for its natural beauty.	Công viên này nổi tiếng với vẻ đẹp tự nhiên.		/ˈnætʃrəl/
+air	air	noun	1	environment	không khí	thứ chúng ta hít thở hằng ngày	The air in the city is not clean.	Không khí ở thành phố không sạch.		/eə/
+ocean	ocean	noun	1	environment	đại dương	vùng nước mặn mênh mông, rộng hơn biển, như Thái Bình Dương	Many kinds of fish live in the ocean.	Nhiều loài cá sống ở đại dương.		/ˈəʊʃn/
+lake	lake	noun	1	environment	hồ (tự nhiên)	vùng nước rộng có đất bao quanh	We swam in the lake last summer.	Mùa hè năm ngoái chúng tôi bơi ở hồ.		/leɪk/
+hill	hill	noun	1	environment	ngọn đồi	vùng đất nhô cao nhưng thấp hơn núi	Our house is at the top of a hill.	Nhà chúng tôi ở trên đỉnh một ngọn đồi.		/hɪl/
+island	island	noun	1	environment	hòn đảo	vùng đất có nước bao quanh	Phu Quoc is a big island.	Phú Quốc là một hòn đảo lớn.		/ˈaɪlənd/
+grass	grass	noun	1	environment	cỏ	loại cây thấp, lá mỏng, mọc phủ mặt đất	The children are playing on the grass.	Bọn trẻ đang chơi trên bãi cỏ.		/ɡrɑːs/
+leaf	leaf	noun	1	environment	chiếc lá	bộ phận mỏng, thường màu xanh, mọc trên cành cây	A yellow leaf fell from the tree.	Một chiếc lá vàng rơi xuống từ cái cây.		/liːf/
+plant	plant	noun	1	environment	cây, thực vật	chỉ chung các loài cây cỏ sống trên đất hoặc trong nước	Plants need water to live.	Cây cần nước để sống.		/plɑːnt/
+ground	ground	noun	1	environment	mặt đất	bề mặt đất nơi ta đứng và đi lại	The leaves fell to the ground.	Những chiếc lá rơi xuống mặt đất.		/ɡraʊnd/
+land	land	noun	1	environment	đất liền	phần mặt đất, phân biệt với biển	After ten days at sea, we saw land.	Sau mười ngày trên biển, chúng tôi đã thấy đất liền.		/lænd/
+sand	sand	noun	1	environment	cát	những hạt nhỏ li ti ở bãi biển, sa mạc	The sand on this beach is white.	Cát ở bãi biển này màu trắng.		/sænd/
+rock	rock	noun	1	environment	tảng đá	khối đá lớn và cứng trong tự nhiên	He sat on a big rock by the sea.	Anh ấy ngồi trên một tảng đá lớn bên bờ biển.		/rɒk/
+stone	stone	noun	1	environment	hòn đá, viên đá	mẩu đá nhỏ có thể cầm trên tay	The boy threw a stone into the water.	Cậu bé ném một hòn đá xuống nước.		/stəʊn/
+wave.sea	wave	noun	1	environment	con sóng	nước biển nhô lên rồi đổ vào bờ	The waves are very big today.	Hôm nay sóng rất to.		/weɪv/
+smoke	smoke	noun	1	environment	khói	khí màu xám hoặc đen bốc lên khi đốt cháy	Black smoke came from the factory.	Khói đen bốc ra từ nhà máy.		/sməʊk/
+sunlight	sunlight	noun	1	environment	ánh sáng mặt trời	nguồn sáng tự nhiên mà cây cần để lớn	Plants need sunlight to grow.	Cây cần ánh sáng mặt trời để lớn.		/ˈsʌnlaɪt/
+desert	desert	noun	1	environment	sa mạc	vùng đất khô cằn, nhiều cát, rất ít mưa	It almost never rains in the desert.	Ở sa mạc hầu như không bao giờ có mưa.		/ˈdezət/
+jungle	jungle	noun	1	environment	rừng rậm	rừng nhiệt đới cây cối dày đặc, khó đi qua	Many animals live in the jungle.	Nhiều loài động vật sống trong rừng rậm.		/ˈdʒʌŋɡl/
+pond	pond	noun	1	environment	cái ao	vùng nước nhỏ, nhỏ hơn hồ	There are fish in the pond.	Có cá ở trong ao.		/pɒnd/
+waterfall	waterfall	noun	1	environment	thác nước	nơi nước sông suối đổ từ trên cao xuống	We took photos near the waterfall.	Chúng tôi chụp ảnh gần thác nước.		/ˈwɔːtəfɔːl/
+cave	cave	noun	1	environment	hang động	khoảng trống lớn trong núi đá hoặc dưới lòng đất	Phong Nha has many beautiful caves.	Phong Nha có nhiều hang động đẹp.		/keɪv/
+throw_away	throw away	phrasal_verb	1	environment	vứt đi	bỏ một vật vào thùng rác vì không cần nữa	Don't throw away old bottles.	Đừng vứt đi những cái chai cũ.	throw out
+clean_up	clean up	phrasal_verb	1	environment	dọn sạch	làm sạch một nơi có nhiều rác như bãi biển, công viên	We cleaned up the beach on Sunday.	Chúng tôi đã dọn sạch bãi biển vào Chủ nhật.
+pick_up_rubbish	pick up rubbish	collocation	1	environment	nhặt rác	cúi xuống lấy rác trên đất để bỏ vào thùng	The students picked up rubbish in the park.	Các học sinh nhặt rác trong công viên.	pick up litter|pick up trash
+plastic_bag	plastic bag	collocation	1	environment	túi ni lông	túi mỏng bằng nhựa, thường dùng khi đi chợ	Please say no to plastic bags.	Hãy nói không với túi ni lông.
+plastic_bottle	plastic bottle	collocation	1	environment	chai nhựa	chai đựng nước uống làm bằng nhựa	Put the plastic bottles in this box.	Hãy bỏ những chai nhựa vào chiếc hộp này.
+paper_bag	paper bag	collocation	1	environment	túi giấy	túi làm bằng giấy, dùng thay cho túi ni lông	The shop gave me a paper bag.	Cửa hàng đưa cho tôi một chiếc túi giấy.
+rubbish_bin	rubbish bin	collocation	1	environment	thùng rác	thùng để bỏ rác ở nhà hoặc nơi công cộng	Put your rubbish in the rubbish bin.	Hãy bỏ rác vào thùng rác.	litter bin|trash can|garbage can|dustbin
+plant_trees	plant trees	collocation	1	environment	trồng cây	đặt cây con xuống đất để phủ xanh đất trống	Our class planted trees near the school.	Lớp chúng tôi đã trồng cây gần trường.	plant a tree
+save_water	save water	collocation	1	environment	tiết kiệm nước	dùng nước ít hơn, không để lãng phí	We must save water in the dry season.	Chúng ta phải tiết kiệm nước vào mùa khô.
+save_energy	save energy	collocation	1	environment	tiết kiệm năng lượng	dùng ít điện, ga, xăng hơn	Turn off the lights to save energy.	Hãy tắt đèn để tiết kiệm năng lượng.
+fresh_air	fresh air	collocation	1	environment	không khí trong lành	không khí sạch, mát ở nơi nhiều cây, xa xe cộ	Let's go outside and get some fresh air.	Chúng ta ra ngoài hít thở không khí trong lành đi.
+turn_off_the_tap	turn off the tap	collocation	1	environment	khóa vòi nước	vặn vòi lại cho nước ngừng chảy, tránh lãng phí	Turn off the tap when you brush your teeth.	Hãy khóa vòi nước khi bạn đánh răng.	turn off the faucet
+turn_off_the_lights	turn off the lights	collocation	1	environment	tắt đèn	tắt điện khi ra khỏi phòng để tiết kiệm năng lượng	Please turn off the lights when you go out.	Hãy tắt đèn khi bạn đi ra ngoài.	switch off the lights
+clean_water	clean water	collocation	1	environment	nước sạch	nước không bị ô nhiễm, dùng được để ăn uống, tắm giặt	Many villages still do not have clean water.	Nhiều ngôi làng vẫn chưa có nước sạch.
+polluted	polluted	adjective	2	environment	bị ô nhiễm	không khí, nước, đất bị làm bẩn bởi chất độc hại	This river is very polluted.	Con sông này bị ô nhiễm nặng.		/pəˈluːtɪd/
+pollute	pollute	verb	2	environment	làm ô nhiễm	thải chất độc, rác bẩn vào không khí, nước, đất	Factories pollute the air.	Các nhà máy làm ô nhiễm không khí.		/pəˈluːt/
+climate_change	climate change	collocation	2	environment	biến đổi khí hậu	sự thay đổi lâu dài của nhiệt độ, thời tiết trên Trái Đất	Climate change is a big problem for the world.	Biến đổi khí hậu là một vấn đề lớn của thế giới.
+air_pollution	air pollution	collocation	2	environment	ô nhiễm không khí	không khí bị bẩn do khói xe, khói nhà máy	Air pollution is bad in big cities.	Ô nhiễm không khí rất tệ ở các thành phố lớn.
+water_pollution	water pollution	collocation	2	environment	ô nhiễm nguồn nước	sông, hồ, biển bị nhiễm bẩn bởi rác, hóa chất	Water pollution kills many fish.	Ô nhiễm nguồn nước giết chết nhiều cá.
+protect_the_environment	protect the environment	collocation	2	environment	bảo vệ môi trường	giữ cho thiên nhiên không bị ô nhiễm, tàn phá	We can all help protect the environment.	Tất cả chúng ta đều có thể góp phần bảo vệ môi trường.
+litter	litter	noun	2	environment	rác vứt bừa bãi	giấy, vỏ chai... bị vứt ra đường, công viên	The park was full of litter after the festival.	Công viên đầy rác sau lễ hội.		/ˈlɪtə/
+drop_litter	drop litter	collocation	2	environment	xả rác bừa bãi	vứt rác ra đường, nơi công cộng thay vì bỏ vào thùng	Please do not drop litter on the street.	Xin đừng xả rác bừa bãi trên đường phố.	litter
+no_littering	no littering	phrase	2	environment	cấm xả rác	dòng chữ thường thấy trên biển báo nơi công cộng	There is a no littering sign at the gate.	Có một biển cấm xả rác ở cổng.
+plastic_waste	plastic waste	collocation	2	environment	rác thải nhựa	túi, chai, hộp nhựa đã bị bỏ đi	Plastic waste is a danger to sea animals.	Rác thải nhựa là mối nguy hại cho động vật biển.
+plastic_straw	plastic straw	collocation	2	environment	ống hút nhựa	ống nhỏ bằng nhựa để hút nước uống, dùng một lần	Many cafes no longer give out plastic straws.	Nhiều quán cà phê không còn phát ống hút nhựa nữa.
+cloth_bag	cloth bag	collocation	2	environment	túi vải	túi bằng vải, dùng được nhiều lần khi đi chợ	I always take a cloth bag to the market.	Tôi luôn mang theo túi vải khi đi chợ.
+recycling_bin	recycling bin	collocation	2	environment	thùng rác tái chế	thùng riêng để bỏ giấy, chai, lon có thể tái chế	Put the cans in the recycling bin.	Hãy bỏ lon vào thùng rác tái chế.
+sort_rubbish	sort rubbish	collocation	2	environment	phân loại rác	chia rác thành các loại như nhựa, giấy, rác hữu cơ	We sort rubbish into three bins at home.	Ở nhà chúng tôi phân loại rác vào ba thùng.	sort waste|sort trash
+rubbish_dump	rubbish dump	collocation	2	environment	bãi rác	nơi đổ rác của cả một khu vực	The rubbish dump smells terrible in summer.	Bãi rác bốc mùi kinh khủng vào mùa hè.	garbage dump
+reuse	reuse	verb	2	environment	tái sử dụng	dùng lại một vật thay vì vứt đi	You can reuse glass jars for many things.	Bạn có thể tái sử dụng lọ thủy tinh vào nhiều việc.		/ˌriːˈjuːz/
+reduce_waste	reduce waste	collocation	2	environment	giảm rác thải	tạo ra ít rác hơn trong sinh hoạt hằng ngày	Buying less plastic helps reduce waste.	Mua ít đồ nhựa hơn giúp giảm rác thải.
+waste.verb	waste	verb	2	environment	lãng phí	dùng điện, nước, thức ăn... nhiều hơn mức cần thiết	Don't waste water when you wash the dishes.	Đừng lãng phí nước khi rửa bát.		/weɪst/
+switch_off	switch off	phrasal_verb	2	environment	tắt (đèn, thiết bị điện)	ngắt điện khi không dùng để tiết kiệm năng lượng	Switch off the fan when you leave the room.	Hãy tắt quạt khi bạn rời khỏi phòng.	turn off
+destroy	destroy	verb	2	environment	phá hủy, tàn phá	làm hư hại hoàn toàn rừng, nhà cửa, nơi sống	The fire destroyed a large part of the forest.	Đám cháy đã tàn phá một phần lớn khu rừng.		/dɪˈstrɔɪ/
+burn	burn	verb	2	environment	đốt	làm cháy rác, than, rơm rạ bằng lửa	Burning rubbish makes the air dirty.	Đốt rác làm không khí bị bẩn.		/bɜːn/
+melt	melt	verb	2	environment	tan chảy	băng, tuyết chuyển thành nước khi nóng lên	The ice at the North Pole is melting.	Băng ở Bắc Cực đang tan chảy.		/melt/
+cut_down	cut down	phrasal_verb	2	environment	chặt hạ (cây)	cắt cây để lấy gỗ hoặc lấy đất	They cut down many trees to build a road.	Họ đã chặt hạ nhiều cây để làm đường.	chop down
+flow	flow	verb	2	environment	chảy	nước sông, suối di chuyển liên tục theo một hướng	The river flows into the sea.	Con sông chảy ra biển.		/fləʊ/
+dry_up	dry up	phrasal_verb	2	environment	khô cạn	sông, hồ, giếng mất hết nước vì nắng hạn	The river dried up in the hot summer.	Con sông đã khô cạn vào mùa hè nóng bức.
+soil	soil	noun	2	environment	đất (trồng cây)	lớp đất mặt nơi cây cối mọc	This soil is good for growing vegetables.	Đất này tốt cho việc trồng rau.		/sɔɪl/
+mud	mud	noun	2	environment	bùn	đất trộn với nước, mềm và nhão	My shoes were covered in mud.	Giày của tôi dính đầy bùn.		/mʌd/
+dust	dust	noun	2	environment	bụi	những hạt rất nhỏ bay trong không khí từ đường sá, công trình	There is a lot of dust in the air near the new road.	Có rất nhiều bụi trong không khí gần con đường mới.		/dʌst/
+coast	coast	noun	2	environment	bờ biển, vùng ven biển	dải đất dài giáp với biển	Many fishing villages lie along the coast.	Nhiều làng chài nằm dọc bờ biển.		/kəʊst/
+valley	valley	noun	2	environment	thung lũng	vùng đất thấp nằm giữa hai dãy núi hoặc đồi	A small river runs through the valley.	Một con sông nhỏ chảy qua thung lũng.		/ˈvæli/
+volcano	volcano	noun	2	environment	núi lửa	núi có miệng phun ra lửa, khói và dung nham	The volcano is still active.	Ngọn núi lửa này vẫn còn hoạt động.		/vɒlˈkeɪnəʊ/
+stream.water	stream	noun	2	environment	dòng suối	dòng nước nhỏ chảy tự nhiên, nhỏ hơn sông	We drank cool water from a mountain stream.	Chúng tôi uống nước mát từ một con suối trên núi.		/striːm/
+rainforest	rainforest	noun	2	environment	rừng mưa nhiệt đới	rừng rậm ở vùng nóng, mưa nhiều quanh năm	The Amazon is the largest rainforest in the world.	Amazon là khu rừng mưa nhiệt đới lớn nhất thế giới.		/ˈreɪnfɒrɪst/
+woods	woods	noun	2	environment	khu rừng nhỏ	vùng nhiều cây, nhỏ hơn một khu rừng lớn (forest)	We went for a walk in the woods.	Chúng tôi đi dạo trong khu rừng nhỏ.		/wʊdz/
+wildlife	wildlife	noun	2	environment	động vật hoang dã	các loài thú, chim... sống tự do ngoài thiên nhiên	The national park is home to a lot of wildlife.	Vườn quốc gia là nơi sinh sống của nhiều động vật hoang dã.		/ˈwaɪldlaɪf/
+national_park	national park	collocation	2	environment	vườn quốc gia	khu thiên nhiên rộng được nhà nước bảo vệ	Cuc Phuong is a famous national park in Vietnam.	Cúc Phương là một vườn quốc gia nổi tiếng ở Việt Nam.
+bush	bush	noun	2	environment	bụi cây	cây thấp có nhiều cành mọc sát đất	A bird is hiding in the bush.	Một con chim đang trốn trong bụi cây.		/bʊʃ/
+root.plant	root	noun	2	environment	rễ cây	phần của cây nằm dưới đất, hút nước và chất dinh dưỡng	The roots of this tree go very deep.	Rễ của cái cây này ăn rất sâu.		/ruːt/
+branch.tree	branch	noun	2	environment	cành cây	phần mọc ra từ thân cây, mang lá	A bird is sitting on the branch.	Một con chim đang đậu trên cành cây.		/brɑːntʃ/
+trunk.tree	trunk	noun	2	environment	thân cây	phần thân chính, to và cứng của cây	The trunk of this old tree is very thick.	Thân của cây cổ thụ này rất to.		/trʌŋk/
+earthquake	earthquake	noun	2	environment	động đất	mặt đất rung lắc mạnh do chuyển động dưới lòng đất	The earthquake damaged many houses.	Trận động đất đã làm hư hại nhiều ngôi nhà.		/ˈɜːθkweɪk/
+forest_fire	forest fire	collocation	2	environment	cháy rừng	lửa lan rộng, thiêu rụi cây cối trong rừng	The forest fire burned for three days.	Vụ cháy rừng kéo dài ba ngày.	wildfire
+natural_disaster	natural disaster	collocation	2	environment	thiên tai	tai họa do thiên nhiên gây ra như bão, lũ, động đất	Floods are a common natural disaster in Vietnam.	Lũ lụt là một loại thiên tai phổ biến ở Việt Nam.
+solar_energy	solar energy	collocation	2	environment	năng lượng mặt trời	năng lượng lấy từ ánh nắng để tạo ra điện	Our school uses solar energy.	Trường của chúng tôi sử dụng năng lượng mặt trời.	solar power
+solar_panel	solar panel	collocation	2	environment	tấm pin mặt trời	tấm thiết bị đặt trên mái nhà, biến ánh nắng thành điện	We put solar panels on our roof.	Chúng tôi lắp tấm pin mặt trời trên mái nhà.
+wind_power	wind power	collocation	2	environment	năng lượng gió	điện tạo ra nhờ sức gió	Wind power is clean and cheap.	Năng lượng gió sạch và rẻ.	wind energy
+coal	coal	noun	2	environment	than đá	khoáng chất màu đen, đốt lên để tạo nhiệt và điện	Burning coal pollutes the air.	Việc đốt than đá gây ô nhiễm không khí.		/kəʊl/
+oil.fuel	oil	noun	2	environment	dầu mỏ	chất lỏng màu đen lấy từ lòng đất, dùng làm nhiên liệu	That country sells a lot of oil.	Đất nước đó bán rất nhiều dầu mỏ.		/ɔɪl/
+fuel	fuel	noun	2	environment	nhiên liệu	thứ được đốt để tạo năng lượng như xăng, than, củi	Cars need fuel to run.	Ô tô cần nhiên liệu để chạy.		/ˈfjuːəl/
+eco-friendly	eco-friendly	adjective	2	environment	thân thiện với môi trường	sản phẩm, lối sống ít gây hại cho thiên nhiên	These bags are eco-friendly.	Những chiếc túi này thân thiện với môi trường.	environmentally friendly	/ˌiːkəʊ ˈfrendli/
+earth_day	Earth Day	noun	2	environment	Ngày Trái Đất	ngày 22 tháng 4 hằng năm, cổ vũ việc bảo vệ môi trường	On Earth Day, we cleaned the streets.	Vào Ngày Trái Đất, chúng tôi đã dọn dẹp đường phố.
+harmful	harmful	adjective	2	environment	có hại	gây tổn hại cho sức khỏe con người hoặc môi trường	Plastic is harmful to sea animals.	Nhựa có hại cho động vật biển.		/ˈhɑːmfl/
+harmless	harmless	adjective	2	environment	vô hại	không gây tổn hại cho con người, động vật hay môi trường	This soap is harmless to plants.	Loại xà phòng này vô hại với cây cối.		/ˈhɑːmləs/
+sandy	sandy	adjective	2	environment	có nhiều cát	nói về bãi biển, vùng đất phủ đầy cát	We walked along the sandy beach.	Chúng tôi đi dạo dọc bãi biển đầy cát.		/ˈsændi/
+rocky	rocky	adjective	2	environment	lởm chởm đá	nói về nơi có nhiều đá, khó đi	The path to the top is rocky.	Con đường lên đỉnh lởm chởm đá.		/ˈrɒki/
+steep	steep	adjective	2	environment	dốc	đồi, núi, đường có độ nghiêng lớn	The hill is too steep to ride a bike up.	Ngọn đồi quá dốc để đạp xe lên.		/stiːp/
+keep_off_the_grass	keep off the grass	phrase	2	environment	không giẫm lên cỏ	dòng chữ trên biển báo ở công viên, bãi cỏ	The sign in the park says keep off the grass.	Tấm biển trong công viên ghi không giẫm lên cỏ.
+plastic_pollution	plastic pollution	collocation	2	environment	ô nhiễm nhựa	rác nhựa tràn ngập sông, biển, đất	Plastic pollution is killing sea turtles.	Ô nhiễm nhựa đang giết chết rùa biển.
+the_north_pole	the North Pole	noun	2	environment	Bắc Cực	điểm cực bắc của Trái Đất, phủ đầy băng	Polar bears live near the North Pole.	Gấu trắng sống gần Bắc Cực.
+the_south_pole	the South Pole	noun	2	environment	Nam Cực	điểm cực nam của Trái Đất, lạnh nhất hành tinh	It is very cold at the South Pole.	Ở Nam Cực trời rất lạnh.

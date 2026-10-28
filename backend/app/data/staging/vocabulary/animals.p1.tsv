@@ -1,0 +1,119 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+animal	animal	noun	1	animals	động vật, con vật	từ chung chỉ mọi loài vật	What is your favourite animal?	Con vật yêu thích của bạn là gì?		/ˈænɪml/
+ant	ant	noun	1	animals	con kiến	côn trùng nhỏ sống thành đàn, hay bò thành hàng	There are ants on the kitchen table.	Có kiến trên bàn bếp.		/ænt/
+bee	bee	noun	1	animals	con ong	côn trùng biết bay, làm ra mật	A bee is flying around the flowers.	Một con ong đang bay quanh những bông hoa.		/biː/
+spider	spider	noun	1	animals	con nhện	con vật tám chân, giăng tơ bắt mồi	There is a big spider in the bathroom.	Có một con nhện to trong phòng tắm.		/ˈspaɪdə/
+mosquito	mosquito	noun	1	animals	con muỗi	côn trùng nhỏ đốt người, hút máu	A mosquito bit me last night.	Tối qua một con muỗi đã đốt tôi.		/məˈskiːtəʊ/
+fly.insect	fly	noun	1	animals	con ruồi	côn trùng hay bay quanh thức ăn, rác	There's a fly in my soup!	Có một con ruồi trong bát súp của tôi!		/flaɪ/
+puppy	puppy	noun	1	animals	chó con	con chó còn nhỏ	Our puppy sleeps a lot.	Chú chó con của chúng tôi ngủ rất nhiều.		/ˈpʌpi/
+kitten	kitten	noun	1	animals	mèo con	con mèo còn nhỏ	The kitten is playing with a ball.	Chú mèo con đang chơi với quả bóng.		/ˈkɪtn/
+parrot	parrot	noun	1	animals	con vẹt	loài chim sặc sỡ, có thể bắt chước tiếng người	My uncle has a parrot that can say hello.	Chú tôi có một con vẹt biết nói xin chào.		/ˈpærət/
+owl	owl	noun	1	animals	con cú	loài chim săn mồi ban đêm, mắt to tròn	An owl sat in the tree all night.	Một con cú đậu trên cây suốt đêm.		/aʊl/
+eagle	eagle	noun	1	animals	chim đại bàng	loài chim săn mồi rất lớn, bay cao	The eagle flew high over the mountains.	Con đại bàng bay cao trên những ngọn núi.		/ˈiːɡl/
+penguin	penguin	noun	1	animals	chim cánh cụt	loài chim không bay được, sống ở vùng lạnh	Penguins can swim very fast.	Chim cánh cụt có thể bơi rất nhanh.		/ˈpeŋɡwɪn/
+wolf	wolf	noun	1	animals	con sói	thú hoang giống chó, sống theo bầy	We heard a wolf in the forest.	Chúng tôi nghe thấy tiếng một con sói trong rừng.		/wʊlf/
+fox	fox	noun	1	animals	con cáo	thú hoang lông đỏ, đuôi rậm, nổi tiếng ranh mãnh	A fox ran across the road.	Một con cáo chạy băng qua đường.		/fɒks/
+deer	deer	noun	1	animals	con hươu, con nai	thú ăn cỏ sống trong rừng, con đực có gạc	We saw a deer near the river.	Chúng tôi thấy một con nai gần bờ sông.		/dɪə/
+giraffe	giraffe	noun	1	animals	hươu cao cổ	thú châu Phi có cổ rất dài	A giraffe can eat leaves from tall trees.	Hươu cao cổ có thể ăn lá trên những cây cao.		/dʒəˈrɑːf/
+zebra	zebra	noun	1	animals	ngựa vằn	thú châu Phi có sọc đen trắng	Zebras have black and white stripes.	Ngựa vằn có sọc đen trắng.		/ˈzebrə/
+kangaroo	kangaroo	noun	1	animals	chuột túi, căng-gu-ru	thú ở Úc, nhảy bằng hai chân sau	A baby kangaroo lives in its mother's pouch.	Chuột túi con sống trong túi của mẹ.		/ˌkæŋɡəˈruː/
+panda	panda	noun	1	animals	gấu trúc	gấu lông đen trắng ở Trung Quốc, ăn tre	The panda is eating bamboo.	Con gấu trúc đang ăn tre.		/ˈpændə/
+whale	whale	noun	1	animals	cá voi	loài thú sống ở biển, cực kỳ to lớn	The blue whale is the biggest animal on Earth.	Cá voi xanh là động vật lớn nhất trên Trái Đất.		/weɪl/
+turtle	turtle	noun	1	animals	con rùa nước, rùa biển	loài rùa sống dưới nước, bơi bằng chân chèo	A turtle was swimming near the boat.	Một con rùa đang bơi gần thuyền.		/ˈtɜːtl/
+crocodile	crocodile	noun	1	animals	con cá sấu	bò sát lớn sống ở sông, hàm dài, răng sắc	Don't swim here, there are crocodiles!	Đừng bơi ở đây, có cá sấu đấy!		/ˈkrɒkədaɪl/
+camel	camel	noun	1	animals	con lạc đà	thú sống ở sa mạc, có bướu trên lưng	They crossed the desert on camels.	Họ băng qua sa mạc trên lưng lạc đà.		/ˈkæml/
+squirrel	squirrel	noun	1	animals	con sóc	thú nhỏ đuôi xù, hay leo cây, ăn hạt	A squirrel is hiding nuts under the tree.	Một con sóc đang giấu hạt dưới gốc cây.		/ˈskwɪrəl/
+bat.animal	bat	noun	1	animals	con dơi	con vật biết bay, ban ngày ngủ treo ngược	Bats come out at night.	Dơi ra ngoài vào ban đêm.		/bæt/
+rat	rat	noun	1	animals	con chuột cống	loài chuột to, hay sống ở cống rãnh	A big rat ran out of the drain.	Một con chuột cống to chạy ra khỏi cống.		/ræt/
+snail	snail	noun	1	animals	con ốc sên	con vật nhỏ bò chậm, mang vỏ trên lưng	The snail moves very slowly.	Con ốc sên di chuyển rất chậm.		/sneɪl/
+crab	crab	noun	1	animals	con cua	con vật có vỏ cứng, hai càng, bò ngang	A small crab was walking on the sand.	Một con cua nhỏ đang bò trên cát.		/kræb/
+octopus	octopus	noun	1	animals	con bạch tuộc	con vật biển có tám xúc tu	An octopus has eight arms.	Bạch tuộc có tám xúc tu.		/ˈɒktəpəs/
+goldfish	goldfish	noun	1	animals	cá vàng	cá cảnh màu cam nuôi trong bể	My sister keeps two goldfish in a bowl.	Em gái tôi nuôi hai con cá vàng trong bể.		/ˈɡəʊldfɪʃ/
+hamster	hamster	noun	1	animals	chuột hamster	thú cưng nhỏ, má phồng để chứa thức ăn	The hamster runs on its wheel at night.	Con chuột hamster chạy trên bánh xe vào ban đêm.		/ˈhæmstə/
+hippo	hippo	noun	1	animals	con hà mã	thú châu Phi to béo, ngâm mình dưới sông	A hippo spends most of the day in water.	Hà mã ở dưới nước gần như cả ngày.	hippopotamus	/ˈhɪpəʊ/
+worm	worm	noun	1	animals	con giun	con vật nhỏ thân mềm, dài, sống trong đất	The bird found a worm in the grass.	Con chim tìm thấy một con giun trong cỏ.		/wɜːm/
+fur	fur	noun	1	animals	bộ lông thú	lớp lông mềm, dày phủ khắp mình con vật	My cat has soft white fur.	Con mèo của tôi có bộ lông trắng mềm mại.		/fɜː/
+feather	feather	noun	1	animals	lông vũ, lông chim	từng chiếc lông phủ trên mình chim	I found a blue feather in the garden.	Tôi tìm thấy một chiếc lông chim màu xanh trong vườn.		/ˈfeðə/
+beak	beak	noun	1	animals	mỏ chim	phần miệng cứng, nhọn của loài chim	The bird held a seed in its beak.	Con chim ngậm một hạt trong mỏ.		/biːk/
+paw	paw	noun	1	animals	bàn chân (chó, mèo, gấu)	chân có móng và đệm thịt của thú	The dog gave me its paw.	Con chó đưa chân cho tôi.		/pɔː/
+nest	nest	noun	1	animals	tổ chim	nơi chim làm để đẻ trứng và nuôi con	There are three eggs in the nest.	Có ba quả trứng trong tổ.		/nest/
+cage	cage	noun	1	animals	cái lồng, cũi	đồ có song sắt để nhốt chim, thú	The bird is singing in its cage.	Con chim đang hót trong lồng.		/keɪdʒ/
+bark	bark	verb	1	animals	sủa	tiếng kêu của con chó	The dog barks when someone knocks.	Con chó sủa khi có người gõ cửa.		/bɑːk/
+meow	meow	verb	1	animals	kêu meo meo	tiếng kêu của con mèo	The cat meows when it is hungry.	Con mèo kêu meo meo khi đói.	miaow	/miˈaʊ/
+bite.animal	bite	verb	1	animals	cắn	khi con vật dùng răng ngoạm vào người, vật	Don't touch the dog, it might bite.	Đừng chạm vào con chó, nó có thể cắn đấy.		/baɪt/
+fly_away	fly away	phrasal_verb	1	animals	bay đi mất	khi chim, côn trùng bay khỏi chỗ đang đậu	The bird flew away when I opened the window.	Con chim bay đi mất khi tôi mở cửa sổ.
+furry	furry	adjective	1	animals	có nhiều lông, phủ đầy lông	nói về con vật có bộ lông dày khắp mình	The kids love furry animals like rabbits.	Bọn trẻ thích những con vật nhiều lông như thỏ.		/ˈfɜːri/
+wild_animal	wild animal	collocation	1	animals	thú hoang, con vật hoang dã	một con vật sống tự nhiên, không do người nuôi	It is dangerous to feed a wild animal.	Cho thú hoang ăn là việc nguy hiểm.
+walk_the_dog	walk the dog	collocation	1	animals	dắt chó đi dạo	việc đưa chó ra ngoài đi bộ hằng ngày	I walk the dog every morning.	Sáng nào tôi cũng dắt chó đi dạo.
+ladybird	ladybird	noun	2	animals	con bọ rùa	bọ cánh cứng nhỏ màu đỏ chấm đen	A ladybird landed on my hand.	Một con bọ rùa đậu lên tay tôi.	ladybug	/ˈleɪdibɜːd/
+dragonfly	dragonfly	noun	2	animals	con chuồn chuồn	côn trùng thân dài, bốn cánh mỏng, hay bay trên ao	Dragonflies fly low before it rains.	Chuồn chuồn bay thấp trước khi trời mưa.		/ˈdræɡənflaɪ/
+cockroach	cockroach	noun	2	animals	con gián	côn trùng màu nâu sống ở chỗ bẩn, ẩm	I saw a cockroach in the kitchen.	Tôi thấy một con gián trong bếp.		/ˈkɒkrəʊtʃ/
+beetle	beetle	noun	2	animals	con bọ cánh cứng	côn trùng có lớp cánh ngoài cứng, bóng	This beetle has a shiny green back.	Con bọ cánh cứng này có lưng xanh bóng.		/ˈbiːtl/
+caterpillar	caterpillar	noun	2	animals	con sâu bướm	ấu trùng ăn lá, sau này biến thành bướm	The caterpillar is eating a leaf.	Con sâu bướm đang ăn một chiếc lá.		/ˈkætəpɪlə/
+grasshopper	grasshopper	noun	2	animals	con châu chấu	côn trùng xanh, nhảy xa trên cỏ	A grasshopper jumped onto my shoe.	Một con châu chấu nhảy lên giày tôi.		/ˈɡrɑːshɒpə/
+jellyfish	jellyfish	noun	2	animals	con sứa	con vật biển thân trong, mềm, có thể chích người	Be careful, there are jellyfish in the water.	Cẩn thận, có sứa dưới nước đấy.		/ˈdʒelifɪʃ/
+starfish	starfish	noun	2	animals	con sao biển	con vật biển hình ngôi sao năm cánh	The children found a starfish on the beach.	Bọn trẻ tìm thấy một con sao biển trên bãi biển.		/ˈstɑːfɪʃ/
+seal.animal	seal	noun	2	animals	con hải cẩu	thú biển da trơn, hay nằm phơi nắng trên đá	A seal was lying on the rocks.	Một con hải cẩu đang nằm trên những tảng đá.		/siːl/
+dinosaur	dinosaur	noun	2	animals	khủng long	loài bò sát khổng lồ đã tuyệt chủng từ lâu	My son loves books about dinosaurs.	Con trai tôi thích sách về khủng long.		/ˈdaɪnəsɔː/
+gorilla	gorilla	noun	2	animals	khỉ đột	loài vượn to nhất, sống ở rừng châu Phi	The gorilla is very strong but gentle.	Khỉ đột rất khỏe nhưng hiền lành.		/ɡəˈrɪlə/
+chimpanzee	chimpanzee	noun	2	animals	con tinh tinh	loài vượn thông minh, rất giống người	Chimpanzees can use sticks as tools.	Tinh tinh có thể dùng que làm công cụ.	chimp	/ˌtʃɪmpænˈziː/
+leopard	leopard	noun	2	animals	báo hoa mai	thú họ mèo lớn, lông vàng có đốm đen hình hoa	A leopard can carry its food up a tree.	Báo hoa mai có thể tha mồi lên cây.		/ˈlepəd/
+cheetah	cheetah	noun	2	animals	báo săn (báo gê-pa)	loài thú chạy nhanh nhất trên cạn	The cheetah is the fastest animal on land.	Báo săn là con vật chạy nhanh nhất trên cạn.		/ˈtʃiːtə/
+polar_bear	polar bear	noun	2	animals	gấu Bắc Cực	gấu lông trắng sống ở vùng băng giá	Polar bears live on the ice.	Gấu Bắc Cực sống trên băng.
+koala	koala	noun	2	animals	gấu túi	thú nhỏ ở Úc, ôm cây, ăn lá bạch đàn	A koala sleeps up to twenty hours a day.	Gấu túi ngủ tới hai mươi tiếng mỗi ngày.		/kəʊˈɑːlə/
+rhino	rhino	noun	2	animals	con tê giác	thú lớn da dày, có sừng trên mũi	The rhino has a big horn on its nose.	Con tê giác có một chiếc sừng to trên mũi.	rhinoceros	/ˈraɪnəʊ/
+pigeon	pigeon	noun	2	animals	chim bồ câu	loài chim xám hay gặp ở quảng trường, thành phố	The old man is feeding the pigeons.	Ông cụ đang cho chim bồ câu ăn.		/ˈpɪdʒɪn/
+crow	crow	noun	2	animals	con quạ	loài chim to, lông đen, kêu to	A crow was sitting on the roof.	Một con quạ đang đậu trên mái nhà.		/krəʊ/
+sparrow	sparrow	noun	2	animals	chim sẻ	loài chim nhỏ màu nâu, rất phổ biến	Sparrows are looking for crumbs.	Những con chim sẻ đang tìm vụn bánh.		/ˈspærəʊ/
+swan	swan	noun	2	animals	thiên nga	chim nước lớn, lông trắng, cổ dài	Two swans are swimming on the lake.	Hai con thiên nga đang bơi trên hồ.		/swɒn/
+peacock	peacock	noun	2	animals	con công	chim có đuôi dài, xòe ra rất đẹp	The peacock opened its beautiful tail.	Con công xòe chiếc đuôi tuyệt đẹp.		/ˈpiːkɒk/
+ostrich	ostrich	noun	2	animals	đà điểu	loài chim lớn nhất, chạy nhanh, không bay được	An ostrich can run faster than a horse.	Đà điểu có thể chạy nhanh hơn ngựa.		/ˈɒstrɪtʃ/
+flamingo	flamingo	noun	2	animals	chim hồng hạc	chim nước chân dài, lông màu hồng	Flamingos often stand on one leg.	Chim hồng hạc thường đứng bằng một chân.		/fləˈmɪŋɡəʊ/
+lizard	lizard	noun	2	animals	con thằn lằn	bò sát nhỏ, bốn chân, đuôi dài	A lizard is resting on the warm wall.	Một con thằn lằn đang nằm trên bức tường ấm.		/ˈlɪzəd/
+tortoise	tortoise	noun	2	animals	con rùa cạn	loài rùa sống trên cạn, đi rất chậm	Our tortoise is fifty years old.	Con rùa cạn của chúng tôi đã năm mươi tuổi.		/ˈtɔːtəs/
+toad	toad	noun	2	animals	con cóc	giống ếch nhưng da khô, sần sùi	A toad has dry, bumpy skin.	Con cóc có làn da khô, sần sùi.		/təʊd/
+hedgehog	hedgehog	noun	2	animals	con nhím kiểng	thú nhỏ có gai ngắn, cuộn tròn khi sợ	The hedgehog rolled into a ball.	Con nhím kiểng cuộn tròn lại như quả bóng.		/ˈhedʒhɒɡ/
+guinea_pig	guinea pig	noun	2	animals	chuột lang	thú cưng nhỏ, tròn, không có đuôi	My daughter wants a guinea pig for her birthday.	Con gái tôi muốn một con chuột lang làm quà sinh nhật.
+claw	claw	noun	2	animals	móng vuốt	móng nhọn, sắc ở chân mèo, hổ, chim	The cat scratched the sofa with its claws.	Con mèo cào ghế sofa bằng móng vuốt.		/klɔː/
+horn	horn	noun	2	animals	sừng	phần cứng, nhọn mọc trên đầu hay mũi một số con vật	The rhinoceros uses its horn to fight.	Con tê giác dùng sừng để chiến đấu.		/hɔːn/
+fin	fin	noun	2	animals	vây cá	phần mỏng giúp cá bơi và giữ thăng bằng	We could see the shark's fin above the water.	Chúng tôi có thể thấy vây cá mập nhô trên mặt nước.		/fɪn/
+shell	shell	noun	2	animals	mai, vỏ (rùa, ốc, cua)	lớp vỏ cứng che thân một số con vật	The tortoise hid inside its shell.	Con rùa rụt vào trong mai.		/ʃel/
+whisker	whisker	noun	2	animals	râu (mèo, chuột)	sợi lông dài, cứng mọc hai bên mõm	Cats use their whiskers to feel things.	Mèo dùng râu để cảm nhận đồ vật.		/ˈwɪskə/
+trunk.elephant	trunk	noun	2	animals	vòi voi	cái mũi dài của con voi	The elephant picked up the fruit with its trunk.	Con voi dùng vòi nhặt quả lên.		/trʌŋk/
+purr	purr	verb	2	animals	kêu rừ rừ	tiếng mèo kêu khe khẽ khi thấy dễ chịu	The cat purrs when I stroke it.	Con mèo kêu rừ rừ khi tôi vuốt ve nó.		/pɜː/
+roar	roar	verb	2	animals	gầm, rống	tiếng kêu to, vang của sư tử, hổ	We heard the lion roar.	Chúng tôi nghe thấy tiếng sư tử gầm.		/rɔː/
+chirp	chirp	verb	2	animals	kêu chiêm chiếp, hót líu lo	tiếng kêu ngắn, cao của chim nhỏ	Birds were chirping outside my window.	Chim hót líu lo bên ngoài cửa sổ của tôi.	tweet	/tʃɜːp/
+buzz	buzz	verb	2	animals	kêu vo ve	tiếng ong, muỗi khi bay	A bee was buzzing around my head.	Một con ong bay vo ve quanh đầu tôi.		/bʌz/
+hiss	hiss	verb	2	animals	rít lên, kêu xì xì	tiếng rắn hoặc mèo phát ra khi đe dọa	The snake hissed at us.	Con rắn rít lên với chúng tôi.		/hɪs/
+howl	howl	verb	2	animals	tru, hú	tiếng kêu dài, rền của chó sói, chó	Wolves howl at night.	Chó sói tru vào ban đêm.		/haʊl/
+crawl	crawl	verb	2	animals	bò	con vật di chuyển sát mặt đất	An ant is crawling up the wall.	Một con kiến đang bò lên tường.		/krɔːl/
+hop	hop	verb	2	animals	nhảy tưng tưng	cách thỏ, chim, chuột túi di chuyển bằng những cú nhảy ngắn	The rabbit hopped across the grass.	Con thỏ nhảy tưng tưng qua bãi cỏ.		/hɒp/
+scratch.animal	scratch	verb	2	animals	cào	khi mèo, chó dùng móng cào vào người, đồ vật	The cat scratched my arm.	Con mèo cào vào tay tôi.		/skrætʃ/
+sting	sting	verb	2	animals	đốt, chích	khi ong, bọ cạp, sứa dùng ngòi đâm vào da	Bees only sting when they are scared.	Ong chỉ đốt khi chúng sợ hãi.		/stɪŋ/
+peck	peck	verb	2	animals	mổ	chim dùng mỏ để mổ, gõ	The bird pecked at the bread.	Con chim mổ vào mẩu bánh mì.		/pek/
+wag	wag	verb	2	animals	vẫy (đuôi)	chó lắc đuôi qua lại khi vui	The dog wags its tail when it sees me.	Con chó vẫy đuôi khi thấy tôi.		/wæɡ/
+chase	chase	verb	2	animals	đuổi theo, rượt	con vật chạy theo để bắt con khác	The dog chased the cat up a tree.	Con chó rượt con mèo lên cây.		/tʃeɪs/
+build_a_nest	build a nest	collocation	2	animals	làm tổ	khi chim tha cành, lá về để tạo tổ	The birds are building a nest in our roof.	Lũ chim đang làm tổ trên mái nhà chúng tôi.
+lay_eggs	lay eggs	collocation	2	animals	đẻ trứng	chim, rùa, côn trùng sinh con bằng trứng	Turtles lay eggs in the sand.	Rùa đẻ trứng trong cát.
+fluffy	fluffy	adjective	2	animals	lông bông xù, mềm mịn	nói về bộ lông mềm, phồng lên như bông	She has a fluffy white cat.	Cô ấy có một con mèo trắng lông bông xù.		/ˈflʌfi/
+tame	tame	adjective	2	animals	đã thuần, dạn người	con vật quen với người, không sợ, không hung dữ	The birds in the park are so tame they eat from your hand.	Chim trong công viên dạn đến mức ăn từ tay bạn.		/teɪm/
+fierce	fierce	adjective	2	animals	hung dữ, dữ tợn	con vật dễ tấn công, trông đáng sợ	Be careful, that dog is fierce.	Cẩn thận, con chó đó dữ lắm.		/fɪəs/
+poisonous	poisonous	adjective	2	animals	có độc	con vật chứa chất độc, nguy hiểm khi chạm vào hay ăn phải	Some frogs are poisonous to touch.	Một số loài ếch có độc khi chạm vào.		/ˈpɔɪzənəs/
+playful	playful	adjective	2	animals	ham chơi, hay đùa nghịch	nói về con vật thích chạy nhảy, chơi đùa	Kittens are very playful.	Mèo con rất ham chơi.		/ˈpleɪfl/
+stray	stray	adjective	2	animals	đi lạc, vô chủ	chó, mèo không có chủ, sống ngoài đường	She often feeds stray cats.	Cô ấy thường cho mèo hoang ăn.		/streɪ/
+vet	vet	noun	2	animals	bác sĩ thú y	người khám và chữa bệnh cho động vật	We took the dog to the vet.	Chúng tôi đưa con chó đến bác sĩ thú y.	veterinarian	/vet/
+collar.pet	collar	noun	2	animals	vòng cổ (chó, mèo)	vòng đeo quanh cổ thú cưng	The dog has a red collar with its name on it.	Con chó đeo vòng cổ màu đỏ có tên của nó.		/ˈkɒlə/
+leash	leash	noun	2	animals	dây dắt chó	sợi dây nối vào vòng cổ để dắt chó	Keep your dog on a leash in the park.	Hãy giữ chó bằng dây dắt khi ở công viên.	lead	/liːʃ/
+aquarium	aquarium	noun	2	animals	bể cá; thủy cung	bể kính nuôi cá, hoặc nơi trưng bày sinh vật biển	We have a small aquarium in the living room.	Nhà chúng tôi có một bể cá nhỏ trong phòng khách.		/əˈkweəriəm/
+pet_shop	pet shop	collocation	2	animals	cửa hàng thú cưng	nơi bán vật nuôi, thức ăn và đồ cho thú cưng	We bought a bird cage at the pet shop.	Chúng tôi mua một cái lồng chim ở cửa hàng thú cưng.	pet store
+pet_food	pet food	collocation	2	animals	thức ăn cho thú cưng	đồ ăn làm riêng cho chó, mèo	Pet food is on the bottom shelf.	Thức ăn cho thú cưng ở kệ dưới cùng.
+pet_owner	pet owner	collocation	2	animals	chủ nuôi thú cưng	người có nuôi chó, mèo hay con vật khác	Pet owners must clean up after their dogs.	Chủ nuôi thú cưng phải dọn chất thải của chó.
+animal_shelter	animal shelter	collocation	2	animals	trại cứu hộ động vật	nơi nhận chó mèo bị bỏ rơi và tìm chủ mới	We adopted our cat from an animal shelter.	Chúng tôi nhận nuôi con mèo từ trại cứu hộ động vật.
+keep_a_pet	keep a pet	collocation	2	animals	nuôi thú cưng	có một con vật nuôi để làm bạn trong nhà	Can I keep a pet in this flat?	Tôi có được nuôi thú cưng trong căn hộ này không?
+clean_the_cage	clean the cage	collocation	2	animals	dọn lồng, dọn chuồng	việc vệ sinh nơi ở của chim, chuột hamster	I clean the cage every Sunday.	Chủ nhật nào tôi cũng dọn lồng.
+good_boy	good boy	phrase	2	animals	ngoan lắm!	câu khen chó khi nó làm đúng lệnh	Sit! Good boy!	Ngồi! Ngoan lắm!	good girl
+does_it_bite	does it bite	phrase	2	animals	nó có cắn không?	hỏi chủ trước khi chạm vào chó, mèo lạ	Your dog is so cute. Does it bite?	Con chó của bạn dễ thương quá. Nó có cắn không?
+is_it_friendly	is it friendly	phrase	2	animals	nó có hiền không?	hỏi chủ trước khi lại gần một con vật lạ	Is it friendly? Can I touch it?	Nó có hiền không? Tôi sờ nó được không?
+dont_feed_the_animals	don't feed the animals	phrase	2	animals	không cho thú ăn	lời nhắc trên biển báo ở sở thú, công viên	Please don't feed the animals in the zoo.	Vui lòng không cho thú ăn trong sở thú.	do not feed the animals
+gently	gently	adverb	2	animals	nhẹ nhàng, nhẹ tay	khi vuốt ve, bế con vật cẩn thận, không mạnh tay	Hold the kitten gently.	Hãy bế mèo con thật nhẹ tay.		/ˈdʒentli/
+noisily	noisily	adverb	2	animals	ầm ĩ, ồn ào	nói về chim, thú kêu to, gây ồn	The birds were singing noisily outside.	Lũ chim hót ầm ĩ bên ngoài.		/ˈnɔɪzɪli/

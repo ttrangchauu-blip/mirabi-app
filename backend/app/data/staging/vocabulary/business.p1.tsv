@@ -1,0 +1,97 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+company	company	noun	1	business	công ty	tổ chức làm ăn, sản xuất hoặc bán hàng, dịch vụ	My uncle works for a big company.	Chú tôi làm việc cho một công ty lớn.		/ˈkʌmpəni/
+business.trade	business	noun	1	business	việc kinh doanh, việc làm ăn	hoạt động mua bán để kiếm tiền	Business is good this year.	Năm nay làm ăn tốt.		/ˈbɪznəs/
+business.firm	business	noun	1	business	doanh nghiệp, cơ sở kinh doanh	một công ty, cửa hàng cụ thể (đếm được)	She owns a small business in Da Nang.	Cô ấy sở hữu một doanh nghiệp nhỏ ở Đà Nẵng.		/ˈbɪznəs/
+product	product	noun	1	business	sản phẩm	thứ được làm ra để bán	This shop sells local products.	Cửa hàng này bán sản phẩm địa phương.		/ˈprɒdʌkt/
+brand	brand	noun	1	business	thương hiệu, nhãn hiệu	tên riêng của sản phẩm do một công ty làm ra	What brand is your phone?	Điện thoại của bạn là thương hiệu gì?		/brænd/
+profit	profit	noun	1	business	lợi nhuận, tiền lãi (kinh doanh)	số tiền kiếm được sau khi trừ hết chi phí	The shop made a big profit last month.	Tháng trước cửa hàng thu được lợi nhuận lớn.		/ˈprɒfɪt/
+goods	goods	noun	1	business	hàng hóa	những thứ được làm ra để mua bán	The goods will arrive on Monday.	Hàng hóa sẽ đến vào thứ Hai.		/ɡʊdz/
+sales_figures	sales figures	noun	2	business	số liệu doanh số	con số cho biết bán được bao nhiêu hàng, bao nhiêu tiền	Our sales figures went up in December.	Số liệu doanh số của chúng tôi tăng vào tháng Mười hai.
+market.economy	market	noun	1	business	thị trường	nơi hoặc nhóm người mua một loại hàng, khác nghĩa "chợ"	The company wants to sell its tea in the Japanese market.	Công ty muốn bán trà ở thị trường Nhật Bản.		/ˈmɑːkɪt/
+logo	logo	noun	1	business	biểu trưng, logo	hình ảnh đại diện cho một công ty	The logo of this company is a red apple.	Biểu trưng của công ty này là một quả táo đỏ.		/ˈləʊɡəʊ/
+owner	owner	noun	1	business	chủ (cửa hàng, công ty)	người sở hữu một cơ sở kinh doanh	The owner of the café is very friendly.	Chủ quán cà phê rất thân thiện.		/ˈəʊnə/
+deal	deal	noun	1	business	thỏa thuận, giao kèo	sự đồng ý giữa hai bên khi mua bán, làm ăn	We made a deal with a Korean company.	Chúng tôi đã đạt thỏa thuận với một công ty Hàn Quốc.		/diːl/
+partner.business	partner	noun	1	business	đối tác	người hoặc công ty cùng làm ăn với mình	He is my business partner.	Anh ấy là đối tác làm ăn của tôi.		/ˈpɑːtnə/
+start_a_business	start a business	collocation	1	business	khởi nghiệp, mở công ty	bắt đầu một việc kinh doanh của riêng mình	She wants to start a business after college.	Cô ấy muốn khởi nghiệp sau khi học xong đại học.
+business_owner	business owner	noun	1	business	chủ doanh nghiệp	người làm chủ một công ty, cửa hàng	Many business owners work every day of the week.	Nhiều chủ doanh nghiệp làm việc cả tuần.
+family_business	family business	noun	1	business	doanh nghiệp gia đình	công ty do các thành viên trong gia đình làm chủ và điều hành	He works in the family business.	Anh ấy làm việc trong doanh nghiệp của gia đình.
+online_business	online business	noun	1	business	kinh doanh trực tuyến	việc bán hàng, dịch vụ qua mạng	She runs an online business selling clothes.	Cô ấy kinh doanh trực tuyến, bán quần áo.
+its_a_deal	it's a deal	phrase	1	business	chốt nhé, đồng ý	nói khi chấp nhận một thỏa thuận, lời đề nghị	Ten bags for one hundred dollars, it's a deal!	Mười túi một trăm đô la, chốt nhé!
+sell_well	sell well	collocation	1	business	bán chạy	khi hàng được nhiều người mua	This new phone is selling well.	Chiếc điện thoại mới này đang bán chạy.
+open_a_shop	open a shop	collocation	1	business	mở cửa hàng	bắt đầu kinh doanh bằng một cửa hàng	My parents want to open a shop near the school.	Bố mẹ tôi muốn mở một cửa hàng gần trường.	open a store
+buy_and_sell	buy and sell	collocation	1	business	mua bán	việc mua hàng vào và bán ra để kiếm lời	They buy and sell used cars.	Họ mua bán xe hơi cũ.
+make_a_profit	make a profit	collocation	1	business	có lãi, kiếm được lời	khi thu nhiều hơn chi trong kinh doanh	The café made a profit in its first year.	Quán cà phê có lãi ngay từ năm đầu tiên.
+client	client	noun	2	business	khách hàng (dịch vụ)	người trả tiền cho công ty để được tư vấn, phục vụ	The lawyer has a meeting with a client.	Luật sư có cuộc hẹn với một khách hàng.		/ˈklaɪənt/
+competitor	competitor	noun	2	business	đối thủ cạnh tranh	công ty bán sản phẩm giống mình	Our prices are lower than our competitors'.	Giá của chúng tôi thấp hơn đối thủ cạnh tranh.		/kəmˈpetɪtə/
+startup	startup	noun	2	business	công ty khởi nghiệp	công ty mới thành lập, thường về công nghệ	He works for a startup in Ho Chi Minh City.	Anh ấy làm việc cho một công ty khởi nghiệp ở TP. Hồ Chí Minh.	start-up	/ˈstɑːtʌp/
+firm	firm	noun	2	business	hãng, công ty	thường là công ty luật, kế toán, tư vấn	She works for a law firm.	Cô ấy làm việc cho một hãng luật.		/fɜːm/
+digital_marketing	digital marketing	noun	2	business	tiếp thị số, marketing online	quảng bá sản phẩm qua mạng xã hội, website, email	She works in digital marketing.	Cô ấy làm trong ngành tiếp thị số.
+economy	economy	noun	2	business	nền kinh tế	hoạt động sản xuất, mua bán của một nước	The economy is growing fast.	Nền kinh tế đang tăng trưởng nhanh.		/ɪˈkɒnəmi/
+slogan	slogan	noun	2	business	khẩu hiệu (quảng cáo)	câu ngắn dễ nhớ dùng để quảng bá thương hiệu	"Just do it" is a famous slogan.	"Just do it" là một khẩu hiệu nổi tiếng.		/ˈsləʊɡən/
+loss.business	loss	noun	2	business	khoản lỗ, sự thua lỗ	khi chi nhiều hơn thu trong kinh doanh	The company had a loss of two billion dong.	Công ty lỗ hai tỷ đồng.		/lɒs/
+branch.office	branch	noun	2	business	chi nhánh	một văn phòng, cửa hàng của công ty ở nơi khác	The bank has a branch in every city.	Ngân hàng có chi nhánh ở mọi thành phố.		/brɑːntʃ/
+chain.store	chain	noun	2	business	chuỗi (cửa hàng, nhà hàng)	nhiều cửa hàng cùng tên do một công ty sở hữu	She works for a big coffee chain.	Cô ấy làm việc cho một chuỗi cà phê lớn.		/tʃeɪn/
+order.goods	order	noun	2	business	đơn hàng, đơn đặt hàng	yêu cầu mua hàng gửi tới công ty, khác nghĩa "gọi món"	We got a big order from Japan.	Chúng tôi nhận được một đơn hàng lớn từ Nhật Bản.		/ˈɔːdə/
+competition.market	competition	noun	2	business	sự cạnh tranh	khi các công ty tranh nhau khách hàng, khác nghĩa "cuộc thi"	There is a lot of competition between coffee shops.	Có rất nhiều sự cạnh tranh giữa các quán cà phê.		/ˌkɒmpəˈtɪʃn/
+growth	growth	noun	2	business	sự tăng trưởng	khi doanh số, công ty, kinh tế lớn lên	The company had fast growth last year.	Năm ngoái công ty tăng trưởng nhanh.		/ɡrəʊθ/
+trade	trade	noun	2	business	thương mại, sự buôn bán	việc mua bán hàng hóa, nhất là giữa các nước	Trade between Vietnam and Korea is growing.	Thương mại giữa Việt Nam và Hàn Quốc đang tăng.		/treɪd/
+consumer	consumer	noun	2	business	người tiêu dùng	người mua và dùng hàng hóa, dịch vụ	Consumers want cheaper and better products.	Người tiêu dùng muốn sản phẩm rẻ hơn và tốt hơn.		/kənˈsjuːmə/
+supplier	supplier	noun	2	business	nhà cung cấp	công ty bán hàng, nguyên liệu cho công ty khác	We buy our coffee beans from a local supplier.	Chúng tôi mua hạt cà phê từ một nhà cung cấp địa phương.		/səˈplaɪə/
+warehouse	warehouse	noun	2	business	nhà kho	tòa nhà lớn để chứa hàng hóa	The goods are kept in a warehouse.	Hàng hóa được cất trong nhà kho.		/ˈweəhaʊs/
+packaging	packaging	noun	2	business	bao bì	hộp, giấy, nhựa dùng để đóng gói sản phẩm	The packaging of this tea is beautiful.	Bao bì của loại trà này rất đẹp.		/ˈpækɪdʒɪŋ/
+agreement	agreement	noun	2	business	thỏa thuận, bản thỏa thuận	sự thống nhất chính thức giữa hai bên	The two companies signed an agreement.	Hai công ty đã ký một bản thỏa thuận.		/əˈɡriːmənt/
+e-commerce	e-commerce	noun	2	business	thương mại điện tử	mua bán hàng hóa qua Internet	E-commerce is growing fast in Vietnam.	Thương mại điện tử đang phát triển nhanh ở Việt Nam.		/ˈiː kɒmɜːs/
+campaign	campaign	noun	2	business	chiến dịch (quảng cáo)	loạt hoạt động quảng bá trong một thời gian	The new campaign uses famous singers.	Chiến dịch mới dùng các ca sĩ nổi tiếng.		/kæmˈpeɪn/
+compete	compete	verb	2	business	cạnh tranh	cố gắng giành khách hàng, thị trường với công ty khác	Small shops can't compete with big supermarkets.	Các cửa hàng nhỏ không thể cạnh tranh với siêu thị lớn.		/kəmˈpiːt/
+advertise	advertise	verb	2	business	quảng cáo	giới thiệu sản phẩm trên TV, mạng, báo để bán hàng	They advertise their new drink on TikTok.	Họ quảng cáo đồ uống mới trên TikTok.		/ˈædvətaɪz/
+export	export	verb	2	business	xuất khẩu	bán hàng ra nước ngoài	Vietnam exports a lot of rice and coffee.	Việt Nam xuất khẩu rất nhiều gạo và cà phê.		/ɪkˈspɔːt/
+import	import	verb	2	business	nhập khẩu	mua hàng từ nước ngoài về	We import wine from France.	Chúng tôi nhập khẩu rượu vang từ Pháp.		/ɪmˈpɔːt/
+launch.product	launch	verb	2	business	ra mắt, tung ra (sản phẩm)	đưa sản phẩm, dịch vụ mới ra thị trường	The company will launch a new phone in May.	Công ty sẽ ra mắt điện thoại mới vào tháng Năm.		/lɔːntʃ/
+expand	expand	verb	2	business	mở rộng (kinh doanh)	làm công ty lớn hơn, mở thêm cửa hàng, thị trường	They plan to expand into Thailand.	Họ dự định mở rộng sang Thái Lan.		/ɪkˈspænd/
+promote.product	promote	verb	2	business	quảng bá (sản phẩm)	giới thiệu để nhiều người biết và mua, khác nghĩa "thăng chức"	They gave away free cakes to promote the new shop.	Họ phát bánh miễn phí để quảng bá cửa hàng mới.		/prəˈməʊt/
+fail.business	fail	verb	2	business	thất bại, làm ăn đổ bể	khi công ty, cửa hàng không thành công, khác nghĩa "thi trượt"	Many new restaurants fail in their first year.	Nhiều nhà hàng mới đổ bể ngay trong năm đầu tiên.		/feɪl/
+produce.make	produce	verb	2	business	sản xuất, làm ra	tạo ra hàng hóa để bán	This factory produces shoes for export.	Nhà máy này sản xuất giày để xuất khẩu.		/prəˈdjuːs/
+sponsor	sponsor	verb	2	business	tài trợ	công ty trả tiền cho sự kiện, đội bóng để được quảng cáo	A milk company sponsors the football team.	Một công ty sữa tài trợ cho đội bóng.		/ˈspɒnsə/
+boost	boost	verb	2	business	thúc đẩy, làm tăng	làm cho doanh số, lợi nhuận tăng lên	The holiday season boosts sales.	Mùa lễ hội làm doanh số tăng mạnh.		/buːst/
+competitive	competitive	adjective	2	business	có tính cạnh tranh	giá, sản phẩm đủ tốt để cạnh tranh với công ty khác	We offer very competitive prices.	Chúng tôi đưa ra mức giá rất cạnh tranh.		/kəmˈpetətɪv/
+best-selling	best-selling	adjective	2	business	bán chạy nhất	sản phẩm được mua nhiều nhất	This is our best-selling product.	Đây là sản phẩm bán chạy nhất của chúng tôi.		/ˌbest ˈselɪŋ/
+low-cost	low-cost	adjective	2	business	giá rẻ, chi phí thấp	sản phẩm, dịch vụ tốn ít tiền	They fly with a low-cost airline.	Họ bay với một hãng hàng không giá rẻ.		/ˌləʊ ˈkɒst/
+global.business	global	adjective	2	business	toàn cầu	trên toàn thế giới, nói về thị trường, công ty	Samsung is a global brand.	Samsung là một thương hiệu toàn cầu.		/ˈɡləʊbl/
+private.company	private	adjective	2	business	tư nhân	thuộc sở hữu của cá nhân, không phải nhà nước	He works for a private company.	Anh ấy làm việc cho một công ty tư nhân.		/ˈpraɪvət/
+high-quality	high-quality	adjective	2	business	chất lượng cao	sản phẩm, dịch vụ rất tốt	We only use high-quality materials.	Chúng tôi chỉ dùng nguyên liệu chất lượng cao.		/ˌhaɪ ˈkwɒləti/
+overseas	overseas	adverb	2	business	ra nước ngoài, ở nước ngoài	bán hàng, làm ăn với nước khác	Most of our products are sold overseas.	Phần lớn sản phẩm của chúng tôi được bán ra nước ngoài.		/ˌəʊvəˈsiːz/
+internationally	internationally	adverb	2	business	trên phạm vi quốc tế	ở nhiều nước trên thế giới	The brand is now known internationally.	Thương hiệu giờ đã được biết đến trên phạm vi quốc tế.		/ˌɪntəˈnæʃnəli/
+business_plan	business plan	noun	2	business	kế hoạch kinh doanh	văn bản mô tả mục tiêu, chi phí và cách kiếm tiền của công ty	You need a good business plan to get a loan.	Bạn cần một kế hoạch kinh doanh tốt để được vay vốn.
+business_card	business card	noun	2	business	danh thiếp	thẻ nhỏ in tên, chức vụ, số điện thoại	Here is my business card.	Đây là danh thiếp của tôi.
+customer_service	customer service	noun	2	business	dịch vụ chăm sóc khách hàng	bộ phận, cách công ty giúp đỡ và trả lời khách	Call customer service if your order is late.	Hãy gọi dịch vụ chăm sóc khách hàng nếu đơn hàng đến trễ.
+brand_name	brand name	noun	2	business	tên thương hiệu	tên riêng gắn với sản phẩm của một công ty	People often pay more for a famous brand name.	Người ta thường trả nhiều tiền hơn cho một tên thương hiệu nổi tiếng.
+set_up	set up	phrasal_verb	2	business	thành lập, mở (công ty)	bắt đầu một doanh nghiệp, tổ chức mới	They set up the company in 2015.	Họ thành lập công ty vào năm 2015.
+close_down	close down	phrasal_verb	2	business	đóng cửa (hẳn)	cửa hàng, công ty ngừng hoạt động vĩnh viễn	The old bookshop closed down last year.	Hiệu sách cũ đã đóng cửa hẳn năm ngoái.	shut down
+head_office	head office	noun	2	business	trụ sở chính	văn phòng chính của một công ty có nhiều chi nhánh	Our head office is in Hanoi.	Trụ sở chính của chúng tôi ở Hà Nội.
+go_out_of_business	go out of business	collocation	2	business	phá sản, dẹp tiệm	khi công ty, cửa hàng phải ngừng kinh doanh vì lỗ	Many shops went out of business during the pandemic.	Nhiều cửa hàng phải dẹp tiệm trong đại dịch.
+sign_a_contract	sign a contract	collocation	2	business	ký hợp đồng	đặt chữ ký để đồng ý chính thức với các điều khoản	We signed a contract with a new supplier.	Chúng tôi đã ký hợp đồng với một nhà cung cấp mới.
+free_sample	free sample	noun	2	business	hàng dùng thử miễn phí	một ít sản phẩm cho khách thử để quảng cáo	They gave out free samples of the new coffee.	Họ phát hàng dùng thử miễn phí của loại cà phê mới.
+the_customer_is_always_right	the customer is always right	phrase	2	business	khách hàng luôn luôn đúng	câu nói quen thuộc trong bán hàng, phục vụ	In our shop, the customer is always right.	Ở cửa hàng chúng tôi, khách hàng luôn luôn đúng.
+make_a_loss	make a loss	collocation	2	business	bị lỗ	khi chi phí lớn hơn tiền thu về	The restaurant made a loss in its first year.	Nhà hàng bị lỗ trong năm đầu tiên.
+team_up_with	team up with	phrasal_verb	2	business	hợp tác với, bắt tay với	hai công ty cùng làm chung một dự án	The phone company teamed up with a bank.	Công ty điện thoại đã bắt tay với một ngân hàng.
+sales_target	sales target	noun	2	business	chỉ tiêu doanh số	số hàng hoặc số tiền bán được cần đạt	We reached our sales target in June.	Chúng tôi đạt chỉ tiêu doanh số vào tháng Sáu.
+price_war	price war	noun	2	business	cuộc chiến giá cả	khi các công ty liên tục hạ giá để giành khách	A price war between the two airlines made tickets very cheap.	Cuộc chiến giá cả giữa hai hãng bay khiến vé rất rẻ.
+take_off.business	take off	phrasal_verb	2	business	phát đạt nhanh, cất cánh	khi việc kinh doanh, sản phẩm bỗng thành công lớn	Her online shop really took off last year.	Cửa hàng online của cô ấy thực sự cất cánh vào năm ngoái.
+stock.goods	stock	noun	3	business	hàng tồn kho, hàng trong kho	lượng hàng cửa hàng, công ty đang có để bán	We have plenty of stock for the holidays.	Chúng tôi có nhiều hàng trong kho cho mùa lễ.		/stɒk/
+invoice	invoice	noun	3	business	hóa đơn (thương mại)	giấy công ty gửi để yêu cầu khách thanh toán	Please send us the invoice by email.	Vui lòng gửi hóa đơn cho chúng tôi qua email.		/ˈɪnvɔɪs/
+revenue	revenue	noun	3	business	doanh thu	tổng số tiền công ty thu được	The company's revenue grew by ten percent.	Doanh thu của công ty tăng mười phần trăm.		/ˈrevənjuː/
+capital.money	capital	noun	3	business	vốn	tiền dùng để mở hoặc phát triển việc kinh doanh, khác nghĩa "thủ đô"	They need more capital to open a second shop.	Họ cần thêm vốn để mở cửa hàng thứ hai.		/ˈkæpɪtl/
+partnership	partnership	noun	3	business	quan hệ đối tác, sự hợp tác	khi hai bên cùng làm ăn với nhau	The two brands started a partnership last year.	Hai thương hiệu bắt đầu hợp tác từ năm ngoái.		/ˈpɑːtnəʃɪp/
+founder	founder	noun	3	business	người sáng lập	người lập ra một công ty, tổ chức	The founder of the company is only twenty-five.	Người sáng lập công ty mới hai mươi lăm tuổi.		/ˈfaʊndə/
+headquarters	headquarters	noun	3	business	trụ sở chính, tổng hành dinh	nơi đặt văn phòng điều hành của tập đoàn lớn	The company's headquarters are in Singapore.	Trụ sở chính của công ty ở Singapore.		/ˌhedˈkwɔːtəz/
+corporation	corporation	noun	3	business	tập đoàn	công ty rất lớn, thường có nhiều công ty con	He works for a large oil corporation.	Ông ấy làm cho một tập đoàn dầu khí lớn.		/ˌkɔːpəˈreɪʃn/
+negotiation	negotiation	noun	3	business	cuộc đàm phán, sự thương lượng	quá trình bàn bạc để đi đến thỏa thuận (danh từ)	After long negotiations, they agreed on a price.	Sau nhiều cuộc đàm phán, họ đã thống nhất được giá.		/nɪˌɡəʊʃiˈeɪʃn/
+proposal	proposal	noun	3	business	bản đề xuất	kế hoạch, ý tưởng gửi cho khách hàng hoặc sếp xem xét	We sent a proposal to the client last week.	Tuần trước chúng tôi đã gửi bản đề xuất cho khách hàng.		/prəˈpəʊzl/
+retail	retail	noun	3	business	bán lẻ	việc bán hàng trực tiếp cho người tiêu dùng	She has worked in retail for ten years.	Cô ấy đã làm trong ngành bán lẻ mười năm.		/ˈriːteɪl/
+demand	demand	noun	3	business	nhu cầu (của thị trường)	lượng hàng mà người mua muốn mua	There is a high demand for electric bikes.	Nhu cầu về xe đạp điện đang cao.		/dɪˈmɑːnd/
+rival	rival	noun	3	business	đối thủ	công ty, người cạnh tranh trực tiếp với mình	Pepsi and Coca-Cola are old rivals.	Pepsi và Coca-Cola là đối thủ lâu năm.		/ˈraɪvl/
+target.aim	target	verb	3	business	nhắm vào (khách hàng)	chọn một nhóm người cụ thể để bán, quảng cáo	This ad targets young mothers.	Quảng cáo này nhắm vào các bà mẹ trẻ.		/ˈtɑːɡɪt/
+supply	supply	verb	3	business	cung cấp, cung ứng	bán hoặc đưa hàng, nguyên liệu cho người cần	This farm supplies vegetables to hotels.	Trang trại này cung cấp rau cho các khách sạn.		/səˈplaɪ/
+manufacture	manufacture	verb	3	business	sản xuất (bằng máy, quy mô lớn)	làm hàng hóa với số lượng lớn trong nhà máy	The factory manufactures car parts.	Nhà máy sản xuất linh kiện ô tô.		/ˌmænjuˈfæktʃə/
+establish	establish	verb	3	business	thành lập, gây dựng	trang trọng, lập ra một công ty, tổ chức lâu dài	The bank was established in 1990.	Ngân hàng được thành lập vào năm 1990.		/ɪˈstæblɪʃ/
+ship.send	ship	verb	3	business	gửi hàng, vận chuyển hàng	gửi hàng tới khách bằng tàu, xe, máy bay	We ship orders all over the country.	Chúng tôi giao đơn hàng đi khắp cả nước.		/ʃɪp/

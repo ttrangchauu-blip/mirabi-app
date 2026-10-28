@@ -1,0 +1,112 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+yes	yes	interjection	1	communication	vâng, có, đúng vậy	trả lời đồng ý hoặc xác nhận	Yes, I can come to your party.	Vâng, mình có thể đến bữa tiệc của bạn.		/jes/
+no	no	interjection	1	communication	không	trả lời phủ định hoặc từ chối	No, I don't like coffee.	Không, tôi không thích cà phê.		/nəʊ/
+hi	hi	interjection	1	communication	chào (thân mật)	lời chào ngắn, suồng sã với bạn bè, người quen	Hi, Lan! How are you?	Chào Lan! Bạn khỏe không?	hello	/haɪ/
+bye	bye	interjection	1	communication	tạm biệt nhé	cách chào tạm biệt ngắn gọn, thân mật	Bye, see you next week!	Tạm biệt, tuần sau gặp lại nhé!	goodbye	/baɪ/
+thanks	thanks	interjection	1	communication	cảm ơn nhé	lời cảm ơn ngắn gọn, thân mật	Thanks for the ride home.	Cảm ơn vì đã chở mình về nhà nhé.	thank you	/θæŋks/
+okay	okay	interjection	1	communication	được, đồng ý	đáp lại để đồng ý hoặc chấp nhận	Okay, let's meet at six.	Được, chúng ta gặp nhau lúc sáu giờ nhé.	ok	/əʊˈkeɪ/
+talk	talk	verb	1	communication	nói chuyện, trò chuyện	hai hay nhiều người trao đổi với nhau	We talked for hours last night.	Tối qua chúng tôi đã nói chuyện hàng giờ liền.		/tɔːk/
+say	say	verb	1	communication	nói (ra lời)	nói ra một câu, một từ cụ thể	What did she say to you?	Cô ấy đã nói gì với bạn?		/seɪ/
+tell	tell	verb	1	communication	kể, bảo cho biết	nói cho một người nào đó biết điều gì	Please tell me your phone number.	Làm ơn cho tôi biết số điện thoại của bạn.		/tel/
+ask	ask	verb	1	communication	hỏi	đặt câu hỏi để biết thông tin	Can I ask you a question?	Tôi hỏi bạn một câu được không?		/ɑːsk/
+speak	speak	verb	1	communication	nói (một ngôn ngữ), phát biểu	nói một thứ tiếng hoặc nói trước người khác	Do you speak English?	Bạn có nói tiếng Anh không?		/spiːk/
+answer.verb	answer	verb	1	communication	trả lời	động từ: đáp lại một câu hỏi	Please answer my question.	Làm ơn trả lời câu hỏi của tôi.		/ˈɑːnsə/
+answer.noun	answer	noun	1	communication	lời đáp, câu trả lời	danh từ: điều được nói ra để đáp lại câu hỏi	I'm still waiting for your answer.	Tôi vẫn đang chờ câu trả lời của bạn.		/ˈɑːnsə/
+question	question	noun	1	communication	câu hỏi	điều mình hỏi để biết thông tin	I have a question about the homework.	Em có một câu hỏi về bài tập về nhà.		/ˈkwestʃən/
+listen	listen	verb	1	communication	lắng nghe	chú ý nghe người khác nói	Please listen to me carefully.	Hãy lắng nghe tôi thật kỹ.		/ˈlɪsn/
+call.phone	call	verb	1	communication	gọi điện thoại	liên lạc với ai qua điện thoại	I'll call you tonight.	Tối nay mình sẽ gọi điện cho bạn.		/kɔːl/
+voice	voice	noun	1	communication	giọng nói	âm thanh phát ra khi một người nói	She has a very soft voice.	Cô ấy có giọng nói rất nhẹ nhàng.		/vɔɪs/
+letter.mail	letter	noun	1	communication	lá thư	thư viết tay hoặc in, gửi qua bưu điện	I wrote a letter to my grandma.	Tôi đã viết một lá thư cho bà.		/ˈletə/
+welcome	welcome	interjection	1	communication	chào mừng	lời chào đón khi ai đó đến nơi nào	Welcome to our home!	Chào mừng bạn đến nhà chúng tôi!		/ˈwelkəm/
+thank	thank	verb	1	communication	cảm ơn (ai đó)	động từ: bày tỏ lòng biết ơn với một người cụ thể	I want to thank my teacher.	Tôi muốn cảm ơn cô giáo của mình.		/θæŋk/
+hey	hey	interjection	1	communication	này, ê	gọi để thu hút sự chú ý của người quen	Hey, wait for me!	Này, đợi mình với!		/heɪ/
+wow	wow	interjection	1	communication	chà, ồ	thốt lên khi ngạc nhiên hoặc thán phục	Wow, your new bike is cool!	Chà, xe đạp mới của bạn ngầu quá!		/waʊ/
+really.surprise	really	interjection	1	communication	thật sao	hỏi lại khi ngạc nhiên trước điều vừa nghe	Really? I didn't know that!	Thật sao? Mình không biết chuyện đó!		/ˈrɪəli/
+good_afternoon	good afternoon	phrase	1	communication	chào buổi chiều	lời chào lịch sự khi gặp ai vào buổi chiều	Good afternoon, everyone.	Chào buổi chiều mọi người.
+good_evening	good evening	phrase	1	communication	chào buổi tối	lời chào khi gặp ai vào buổi tối (không phải chúc ngủ ngon)	Good evening, sir. How can I help you?	Chào buổi tối ông. Tôi có thể giúp gì ạ?
+good_night	good night	phrase	1	communication	chúc ngủ ngon	nói khi chia tay buổi tối hoặc trước khi đi ngủ	Good night, Mum. See you in the morning.	Chúc mẹ ngủ ngon. Sáng mai gặp lại mẹ.	goodnight
+how_are_you	how are you	phrase	1	communication	bạn có khỏe không	câu hỏi thăm sức khỏe khi gặp nhau	Hi Lan, how are you today?	Chào Lan, hôm nay bạn có khỏe không?
+im_fine	I'm fine	phrase	1	communication	tôi khỏe	câu đáp khi được hỏi thăm sức khỏe	I'm fine, thanks. And you?	Tôi khỏe, cảm ơn. Còn bạn?	I am fine
+see_you	see you	phrase	1	communication	hẹn gặp lại nhé	cách chào tạm biệt ngắn gọn, thân mật	Okay, see you!	Được rồi, hẹn gặp lại nhé!	see you later
+see_you_tomorrow	see you tomorrow	phrase	1	communication	hẹn mai gặp lại	chào tạm biệt khi sẽ gặp lại vào ngày hôm sau	Bye, see you tomorrow at school.	Tạm biệt, mai gặp lại ở trường nhé.
+thanks_a_lot	thanks a lot	phrase	1	communication	cảm ơn nhiều	cảm ơn thân mật, nhấn mạnh sự biết ơn	Thanks a lot for your help.	Cảm ơn bạn nhiều vì đã giúp đỡ.	thank you very much|thanks so much
+no_thanks	no thanks	phrase	1	communication	không, cảm ơn	từ chối lịch sự khi được mời thứ gì	No thanks, I'm full.	Không, cảm ơn, tôi no rồi.	no thank you
+yes_please	yes please	phrase	1	communication	vâng, cho tôi xin	nhận lời mời một cách lịch sự	Yes please, I'd love some cake.	Vâng, cho tôi xin một ít bánh.
+me_too	me too	phrase	1	communication	tôi cũng vậy	nói mình cũng có cảm giác, ý thích giống người kia	"I'm hungry." "Me too."	"Tôi đói rồi." "Tôi cũng vậy."
+i_dont_know	I don't know	phrase	1	communication	tôi không biết	khi không có thông tin để trả lời	Sorry, I don't know the answer.	Xin lỗi, tôi không biết câu trả lời.	I do not know
+i_dont_understand	I don't understand	phrase	1	communication	tôi không hiểu	khi chưa hiểu lời người khác nói	I'm sorry, I don't understand.	Xin lỗi, tôi không hiểu.	I do not understand
+good_luck	good luck	phrase	1	communication	chúc may mắn	chúc ai trước kỳ thi, buổi phỏng vấn, trận đấu	Good luck with your exam tomorrow!	Chúc bạn thi tốt ngày mai nhé!
+happy_birthday	happy birthday	phrase	1	communication	chúc mừng sinh nhật	lời chúc vào ngày sinh nhật của ai đó	Happy birthday, Minh!	Chúc mừng sinh nhật Minh!
+take_care	take care	phrase	1	communication	bảo trọng nhé, giữ gìn sức khỏe	lời dặn dò thân mật khi chia tay	Take care and call me soon.	Giữ gìn sức khỏe và sớm gọi cho mình nhé.
+whats_your_name	what's your name	phrase	1	communication	bạn tên là gì	câu hỏi tên khi mới gặp	Hi, what's your name?	Chào bạn, bạn tên là gì?	what is your name
+my_name_is	my name is	phrase	1	communication	tôi tên là	dùng để tự giới thiệu tên mình	Hello, my name is Hoa.	Xin chào, tôi tên là Hoa.
+how_old_are_you	how old are you	phrase	1	communication	bạn bao nhiêu tuổi	câu hỏi tuổi, thường dùng khi thân mật	How old are you, Nam?	Nam ơi, em bao nhiêu tuổi?
+where_are_you_from	where are you from	phrase	1	communication	bạn đến từ đâu	hỏi quê quán, quốc tịch khi làm quen	Where are you from, Anna?	Anna, bạn đến từ đâu?
+can_you_help_me	can you help me	phrase	1	communication	bạn giúp tôi được không	nhờ ai giúp đỡ một cách lịch sự	Excuse me, can you help me?	Xin lỗi, bạn giúp tôi được không?	could you help me
+here_you_are	here you are	phrase	1	communication	của bạn đây	nói khi đưa vật gì cho ai	Here you are. Enjoy your coffee.	Của bạn đây. Chúc bạn uống cà phê ngon miệng.	here you go
+thats_right	that's right	phrase	1	communication	đúng rồi	xác nhận điều người khác nói là đúng	That's right, the class starts at eight.	Đúng rồi, lớp học bắt đầu lúc tám giờ.	that is right
+chat	chat	verb	2	communication	tán gẫu, nói chuyện phiếm	nói chuyện thoải mái, thân mật về chuyện thường ngày	We chatted over coffee.	Chúng tôi tán gẫu bên ly cà phê.		/tʃæt/
+explain	explain	verb	2	communication	giải thích	nói rõ để người khác hiểu	Can you explain this rule again?	Bạn giải thích lại quy tắc này được không?		/ɪkˈspleɪn/
+agree	agree	verb	2	communication	đồng ý	có cùng ý kiến với người khác	I agree with you.	Tôi đồng ý với bạn.		/əˈɡriː/
+disagree	disagree	verb	2	communication	không đồng ý	có ý kiến khác với người khác	I'm sorry, but I disagree.	Tôi xin lỗi, nhưng tôi không đồng ý.		/ˌdɪsəˈɡriː/
+repeat	repeat	verb	2	communication	nhắc lại, lặp lại	nói lại điều vừa nói	Could you repeat your name, please?	Bạn có thể nhắc lại tên mình được không?		/rɪˈpiːt/
+shout	shout	verb	2	communication	hét lên, la to	nói rất to, thường vì giận hoặc để người ở xa nghe	Don't shout at your little brother.	Đừng quát em trai con.		/ʃaʊt/
+whisper	whisper	verb	2	communication	thì thầm	nói rất nhỏ để chỉ người bên cạnh nghe	She whispered the answer to me.	Cô ấy thì thầm câu trả lời cho tôi.		/ˈwɪspə/
+mean	mean	verb	2	communication	có nghĩa là	hỏi hoặc nói về ý nghĩa của một từ, một câu	What does this word mean?	Từ này có nghĩa là gì?		/miːn/
+spell	spell	verb	2	communication	đánh vần	nói hoặc viết từng chữ cái của một từ	Can you spell your last name?	Bạn có thể đánh vần họ của mình không?		/spel/
+invite	invite	verb	2	communication	mời	đề nghị ai đến dự tiệc, đi chơi cùng	She invited me to her wedding.	Cô ấy mời tôi đến dự đám cưới.		/ɪnˈvaɪt/
+promise	promise	verb	2	communication	hứa	nói chắc chắn rằng mình sẽ làm điều gì	I promise I'll be on time.	Tôi hứa sẽ đến đúng giờ.		/ˈprɒmɪs/
+reply	reply	verb	2	communication	hồi âm, đáp lại	trả lời một tin nhắn, lá thư hay lời nói	He hasn't replied to my email yet.	Anh ấy vẫn chưa trả lời thư điện tử của tôi.		/rɪˈplaɪ/
+introduce	introduce	verb	2	communication	giới thiệu	làm cho hai người biết tên nhau lần đầu	Let me introduce my friend Linh.	Để tôi giới thiệu bạn tôi, Linh.		/ˌɪntrəˈdjuːs/
+greet	greet	verb	2	communication	chào hỏi, chào đón	nói lời chào khi gặp ai	He greeted us with a big smile.	Anh ấy chào chúng tôi với nụ cười tươi.		/ɡriːt/
+apologise	apologise	verb	2	communication	xin lỗi (ai đó)	động từ: nhận lỗi với người khác	You should apologise to your sister.	Con nên xin lỗi chị gái đi.	apologize	/əˈpɒlədʒaɪz/
+complain	complain	verb	2	communication	phàn nàn, than phiền	nói rằng mình không hài lòng về điều gì	She complained about the noise.	Cô ấy phàn nàn về tiếng ồn.		/kəmˈpleɪn/
+text	text	verb	2	communication	nhắn tin	gửi tin nhắn qua điện thoại	Text me when you get home.	Về đến nhà thì nhắn tin cho mình nhé.		/tekst/
+conversation	conversation	noun	2	communication	cuộc trò chuyện	lần nói chuyện giữa hai hay nhiều người	We had a long conversation on the phone.	Chúng tôi đã có một cuộc trò chuyện dài qua điện thoại.		/ˌkɒnvəˈseɪʃn/
+joke	joke	noun	2	communication	câu chuyện cười, lời nói đùa	điều nói ra để làm người khác cười	He told a funny joke at dinner.	Anh ấy kể một câu chuyện cười trong bữa tối.		/dʒəʊk/
+accent	accent	noun	2	communication	giọng địa phương, chất giọng	cách phát âm riêng của một vùng hay một nước	She speaks English with a French accent.	Cô ấy nói tiếng Anh với giọng Pháp.		/ˈæksənt/
+invitation	invitation	noun	2	communication	lời mời, thiệp mời	lời hay giấy mời ai đến một sự kiện	Thank you for the invitation.	Cảm ơn bạn vì lời mời.		/ˌɪnvɪˈteɪʃn/
+polite	polite	adjective	2	communication	lịch sự, lễ phép	cư xử và nói năng tôn trọng người khác	It's polite to say thank you.	Nói cảm ơn là lịch sự.		/pəˈlaɪt/
+rude	rude	adjective	2	communication	thô lỗ, bất lịch sự	nói năng hay cư xử thiếu tôn trọng	It's rude to talk with your mouth full.	Vừa nhai vừa nói là bất lịch sự.	impolite	/ruːd/
+politely	politely	adverb	2	communication	một cách lịch sự	cách nói năng, hỏi han tôn trọng người khác	He politely asked for the bill.	Anh ấy lịch sự xin hóa đơn.		/pəˈlaɪtli/
+clearly	clearly	adverb	2	communication	một cách rõ ràng	nói hoặc giải thích để người khác dễ nghe, dễ hiểu	Please speak clearly into the microphone.	Vui lòng nói rõ ràng vào micro.		/ˈklɪəli/
+loudly	loudly	adverb	2	communication	một cách to, ầm ĩ	nói hoặc cười với âm lượng lớn	The children were laughing loudly.	Bọn trẻ đang cười rất to.		/ˈlaʊdli/
+quietly	quietly	adverb	2	communication	một cách khẽ khàng, nhỏ nhẹ	nói nhỏ để không làm phiền người khác	Please talk quietly in the library.	Vui lòng nói nhỏ trong thư viện.		/ˈkwaɪətli/
+actually	actually	adverb	2	communication	thật ra, thực ra	dùng khi nói sự thật hoặc sửa lại ý người khác	Actually, I'm not from Hanoi.	Thật ra, tôi không phải người Hà Nội.		/ˈæktʃuəli/
+anyway	anyway	adverb	2	communication	dù sao thì, thôi thì	dùng để chuyển chủ đề hoặc kết thúc câu chuyện	Anyway, I have to go now.	Dù sao thì, giờ tôi phải đi rồi.		/ˈeniweɪ/
+pardon	pardon	interjection	2	communication	xin lỗi, bạn nói gì cơ	lịch sự nhờ người khác nhắc lại vì chưa nghe rõ	Pardon? I didn't hear you.	Xin lỗi, bạn nói gì cơ? Tôi không nghe rõ.	pardon me	/ˈpɑːdn/
+congratulations	congratulations	interjection	2	communication	xin chúc mừng	chúc mừng thành công, tin vui của ai đó	Congratulations on your new job!	Chúc mừng bạn có công việc mới!		/kənˌɡrætʃuˈleɪʃnz/
+cheers.toast	cheers	interjection	2	communication	cạn ly, dô	nói khi cùng nâng ly chúc mừng	Cheers! Happy New Year!	Dô! Chúc mừng năm mới!		/tʃɪəz/
+well.pause	well	interjection	2	communication	à, ừm	từ đệm khi đang suy nghĩ hoặc bắt đầu câu trả lời	Well, I'm not really sure.	À, tôi cũng không chắc lắm.		/wel/
+oops	oops	interjection	2	communication	ối, úi	thốt lên khi lỡ làm sai hoặc làm rơi đồ	Oops, I dropped my phone.	Ối, mình làm rơi điện thoại rồi.		/ʊps/
+never_mind	never mind	phrase	2	communication	thôi bỏ qua đi, không sao đâu	bảo người khác đừng bận tâm về điều vừa nói	Never mind, I'll ask someone else.	Thôi không sao, tôi sẽ hỏi người khác.
+im_afraid_not	I'm afraid not	phrase	2	communication	e là không	trả lời không hoặc từ chối một cách lịch sự	I'm afraid not. The manager is out today.	E là không được. Hôm nay quản lý đi vắng rồi.
+could_you_say_that_again	could you say that again	phrase	2	communication	bạn nói lại được không	lịch sự nhờ người khác nhắc lại vì chưa nghe rõ	Sorry, could you say that again?	Xin lỗi, bạn nói lại được không?	can you say that again
+whats_up	what's up	phrase	2	communication	dạo này sao rồi, có gì mới không	lời chào hỏi rất thân mật giữa bạn bè	Hey Tom, what's up?	Này Tom, dạo này sao rồi?
+hows_it_going	how's it going	phrase	2	communication	mọi việc thế nào rồi	chào hỏi thân mật, hỏi tình hình chung	Hi Mai, how's it going?	Chào Mai, mọi việc thế nào rồi?
+long_time_no_see	long time no see	phrase	2	communication	lâu rồi không gặp	chào khi gặp lại người quen sau thời gian dài	Long time no see! You look great.	Lâu rồi không gặp! Trông bạn tuyệt lắm.
+nice_to_see_you	nice to see you	phrase	2	communication	rất vui được gặp lại bạn	nói khi gặp lại người đã quen, không phải lần đầu gặp	It's nice to see you again.	Rất vui được gặp lại bạn.
+sorry_im_late	sorry I'm late	phrase	2	communication	xin lỗi tôi đến muộn	xin lỗi khi đến trễ hẹn, trễ giờ học	Sorry I'm late, the traffic was terrible.	Xin lỗi tôi đến muộn, đường kẹt xe kinh khủng.
+just_a_moment	just a moment	phrase	2	communication	xin đợi một lát	lịch sự nhờ ai đó đợi trong chốc lát	Just a moment, please. I'll get the manager.	Xin đợi một lát. Tôi sẽ gọi quản lý.	just a minute|one moment
+hold_on	hold on	phrasal_verb	2	communication	giữ máy, đợi chút	khi nói điện thoại hoặc nhờ ai đợi trong giây lát	Hold on, I'll get a pen.	Đợi chút, để tôi lấy cây bút.	hang on
+hang_up	hang up	phrasal_verb	2	communication	cúp máy	kết thúc một cuộc gọi điện thoại	Please don't hang up yet.	Làm ơn đừng cúp máy vội.
+pick_up.phone	pick up	phrasal_verb	2	communication	nhấc máy, bắt máy	trả lời khi điện thoại đổ chuông	I called twice, but she didn't pick up.	Tôi gọi hai lần nhưng cô ấy không bắt máy.
+i_agree	I agree	phrase	2	communication	tôi đồng ý	bày tỏ cùng quan điểm với người vừa nói	I agree, it's a great idea.	Tôi đồng ý, đó là một ý tưởng hay.
+i_think_so	I think so	phrase	2	communication	tôi nghĩ là vậy	trả lời có nhưng chưa chắc chắn hoàn toàn	Is the shop still open? I think so.	Cửa hàng còn mở không? Tôi nghĩ là có.
+i_dont_think_so	I don't think so	phrase	2	communication	tôi không nghĩ vậy	trả lời không hoặc phản đối nhẹ nhàng	Is he coming? I don't think so.	Anh ấy có đến không? Tôi không nghĩ vậy.
+not_really	not really	phrase	2	communication	không hẳn	phủ định nhẹ nhàng, lịch sự	Do you like jazz? Not really.	Bạn có thích nhạc jazz không? Không hẳn.
+sounds_good	sounds good	phrase	2	communication	nghe hay đấy	đồng ý với một đề nghị, một kế hoạch	Pizza tonight? Sounds good!	Tối nay ăn pizza nhé? Nghe hay đấy!
+well_done	well done	phrase	2	communication	làm tốt lắm	khen ngợi ai vì đã làm tốt việc gì	Well done! You passed the test.	Làm tốt lắm! Bạn đã qua bài kiểm tra.	good job
+help_yourself	help yourself	phrase	2	communication	cứ tự nhiên lấy dùng	mời khách tự lấy đồ ăn, thức uống	Help yourself to some fruit.	Cứ tự nhiên lấy trái cây ăn nhé.
+after_you	after you	phrase	2	communication	mời bạn đi trước	nhường người khác đi hoặc làm trước một cách lịch sự	Please, after you.	Xin mời bạn đi trước.
+go_ahead	go ahead	phrase	2	communication	cứ tự nhiên, cứ làm đi	cho phép ai đó làm điều họ vừa xin phép	Can I use your phone? Sure, go ahead.	Tôi dùng điện thoại của bạn được không? Được, cứ tự nhiên.
+what_a_pity	what a pity	phrase	2	communication	tiếc quá	bày tỏ sự tiếc nuối khi nghe tin không vui	You can't come? What a pity!	Bạn không đến được à? Tiếc quá!	what a shame
+whats_wrong	what's wrong	phrase	2	communication	có chuyện gì vậy	hỏi han khi thấy ai buồn hoặc gặp rắc rối	You look sad. What's wrong?	Trông bạn buồn quá. Có chuyện gì vậy?	what is wrong
+why_not	why not	phrase	2	communication	được chứ, sao lại không	vui vẻ đồng ý với một lời đề nghị	Let's go to the beach. Why not?	Mình đi biển đi. Được chứ, sao lại không?
+my_pleasure	my pleasure	phrase	2	communication	niềm hân hạnh của tôi	đáp lại lời cảm ơn một cách trang trọng, lịch sự	Thank you for dinner. It was my pleasure.	Cảm ơn bạn vì bữa tối. Đó là niềm hân hạnh của tôi.
+dont_worry	don't worry	phrase	2	communication	đừng lo	trấn an người khác	Don't worry, everything will be fine.	Đừng lo, mọi chuyện sẽ ổn thôi.	do not worry
+it_doesnt_matter	it doesn't matter	phrase	2	communication	không quan trọng đâu	khi điều gì không gây ảnh hưởng, không cần bận tâm	It doesn't matter if you're a little late.	Bạn đến trễ một chút cũng không quan trọng đâu.	it does not matter
+have_a_nice_day	have a nice day	phrase	2	communication	chúc một ngày tốt lành	lời chào khi chia tay, thường nghe ở cửa hàng	Thanks for coming. Have a nice day!	Cảm ơn quý khách. Chúc một ngày tốt lành!	have a good day
+see_you_soon	see you soon	phrase	2	communication	hẹn sớm gặp lại	chào tạm biệt, mong sớm gặp lại	Bye, Grandma! See you soon.	Tạm biệt bà! Hẹn sớm gặp lại bà.
+get_well_soon	get well soon	phrase	2	communication	mau khỏe nhé	chúc người đang ốm nhanh bình phục	Get well soon, Lan!	Mau khỏe nhé Lan!
+i_see	I see	phrase	2	communication	tôi hiểu rồi	nói khi đã hiểu lời giải thích của ai	I see, so the bus leaves at six.	Tôi hiểu rồi, vậy xe buýt chạy lúc sáu giờ.

@@ -1,0 +1,75 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+peace	peace	noun	1	society	hòa bình	tình trạng không có chiến tranh, xung đột	Everyone wants to live in peace.	Ai cũng muốn được sống trong hòa bình.		/piːs/
+war	war	noun	1	society	chiến tranh	xung đột vũ trang giữa các nước hoặc các nhóm	My grandfather lived through the war.	Ông tôi đã sống qua thời chiến tranh.		/wɔː/
+church	church	noun	1	society	nhà thờ	nơi người theo đạo Thiên Chúa đến cầu nguyện	There is an old church in the village.	Có một nhà thờ cổ trong làng.		/tʃɜːtʃ/
+god	God	noun	1	society	Chúa, Thượng đế	đấng tối cao trong nhiều tôn giáo	Many people believe in God.	Nhiều người tin vào Chúa.		/ɡɒd/
+pray	pray	verb	1	society	cầu nguyện	nói với Chúa, Phật để cầu xin điều gì	She prays every night before bed.	Cô ấy cầu nguyện mỗi tối trước khi ngủ.		/preɪ/
+heaven	heaven	noun	1	society	thiên đường	nơi người tốt được lên sau khi chết, theo nhiều tôn giáo	She believes her mother is in heaven.	Cô ấy tin rằng mẹ mình đang ở trên thiên đường.		/ˈhevn/
+monk	monk	noun	1	society	nhà sư	người đàn ông tu hành, sống trong chùa	The monks get up at four every morning.	Các nhà sư thức dậy lúc bốn giờ mỗi sáng.		/mʌŋk/
+buddha	Buddha	noun	1	society	Đức Phật	người sáng lập đạo Phật	There is a big statue of Buddha on the hill.	Có một bức tượng Phật lớn trên đồi.		/ˈbʊdə/
+flag	flag	noun	1	society	lá cờ	tấm vải có màu sắc, biểu tượng của một quốc gia	The flag of Vietnam is red with a yellow star.	Lá cờ Việt Nam màu đỏ có ngôi sao vàng.		/flæɡ/
+homeless	homeless	adjective	1	society	vô gia cư	không có nhà để ở	The homeless man sleeps under the bridge.	Người đàn ông vô gia cư ngủ dưới gầm cầu.		/ˈhəʊmləs/
+charity	charity	noun	1	society	tổ chức từ thiện	tổ chức giúp người nghèo, người bệnh bằng tiền quyên góp	She works for a children's charity.	Cô ấy làm việc cho một tổ chức từ thiện vì trẻ em.		/ˈtʃærəti/
+volunteer.person	volunteer	noun	1	society	tình nguyện viên	người làm việc giúp đỡ người khác mà không nhận lương	We need more volunteers for the festival.	Chúng tôi cần thêm tình nguyện viên cho lễ hội.		/ˌvɒlənˈtɪə/
+help_others	help others	collocation	1	society	giúp đỡ người khác	làm việc tốt cho người xung quanh	My parents taught me to help others.	Bố mẹ dạy tôi phải biết giúp đỡ người khác.
+help_each_other	help each other	collocation	1	society	giúp đỡ lẫn nhau	mọi người cùng hỗ trợ nhau trong cộng đồng	In my village, people always help each other.	Ở làng tôi, mọi người luôn giúp đỡ lẫn nhau.
+help_out	help out	phrasal_verb	1	society	phụ giúp, giúp một tay	giúp ai đó làm việc, nhất là khi họ bận hoặc gặp khó khăn	I help out at the animal shelter on Sundays.	Tôi phụ giúp ở trại cứu hộ động vật vào Chủ nhật.	lend a hand
+give_away	give away	phrasal_verb	1	society	cho đi, cho không	tặng đồ của mình cho người khác mà không lấy tiền	She gave away all her old clothes.	Cô ấy đã cho hết quần áo cũ của mình.
+young_people	young people	collocation	1	society	giới trẻ, người trẻ	những người ở độ tuổi thanh thiếu niên và thanh niên	Many young people want to live in big cities.	Nhiều bạn trẻ muốn sống ở thành phố lớn.
+the_poor	the poor	collocation	1	society	người nghèo	nói chung về những người không có nhiều tiền	The money will be used to help the poor.	Số tiền sẽ được dùng để giúp đỡ người nghèo.
+the_rich	the rich	collocation	1	society	người giàu	nói chung về những người có nhiều tiền	The rich should pay more tax.	Người giàu nên đóng thuế nhiều hơn.
+poor_country	poor country	collocation	1	society	nước nghèo	quốc gia mà phần lớn người dân có thu nhập thấp	Many children in poor countries cannot go to school.	Nhiều trẻ em ở các nước nghèo không thể đến trường.
+rich_country	rich country	collocation	1	society	nước giàu	quốc gia có nền kinh tế mạnh, người dân thu nhập cao	Rich countries should help poor countries.	Các nước giàu nên giúp đỡ các nước nghèo.
+city_life	city life	collocation	1	society	cuộc sống thành thị	đời sống ở thành phố lớn, đông đúc, nhộn nhịp	City life is busy and noisy.	Cuộc sống thành thị bận rộn và ồn ào.
+a_better_life	a better life	collocation	1	society	cuộc sống tốt đẹp hơn	điều người ta mong muốn khi chuyển đi nơi khác, làm việc chăm chỉ	They moved to the city for a better life.	Họ chuyển lên thành phố để có cuộc sống tốt đẹp hơn.
+go_to_church	go to church	collocation	1	society	đi lễ nhà thờ	đến nhà thờ để dự lễ, cầu nguyện	My neighbours go to church every Sunday.	Hàng xóm của tôi đi lễ nhà thờ mỗi Chủ nhật.
+believe_in_god	believe in God	collocation	1	society	tin vào Chúa, tin có Thượng đế	có đức tin tôn giáo	Do you believe in God?	Bạn có tin vào Chúa không?
+society	society	noun	2	society	xã hội	tất cả mọi người sống cùng nhau trong một cộng đồng lớn, một đất nước	Old people are important members of society.	Người già là những thành viên quan trọng của xã hội.		/səˈsaɪəti/
+community	community	noun	2	society	cộng đồng	nhóm người sống cùng một nơi hoặc có chung điểm gì đó	Our community is small but friendly.	Cộng đồng của chúng tôi nhỏ nhưng thân thiện.		/kəˈmjuːnəti/
+population	population	noun	2	society	dân số	tổng số người sống ở một nơi	The population of Hanoi is over eight million.	Dân số Hà Nội là hơn tám triệu người.		/ˌpɒpjuˈleɪʃn/
+poverty	poverty	noun	2	society	sự nghèo đói, cảnh nghèo	tình trạng không có đủ tiền để sống	Many families live in poverty.	Nhiều gia đình sống trong cảnh nghèo đói.		/ˈpɒvəti/
+hunger	hunger	noun	2	society	cái đói, tình trạng thiếu ăn	khi con người không có đủ thức ăn	Millions of children suffer from hunger.	Hàng triệu trẻ em phải chịu cảnh thiếu ăn.		/ˈhʌŋɡə/
+citizen	citizen	noun	2	society	công dân	người dân có quyền và nghĩa vụ hợp pháp với một nước	Every citizen has the right to vote.	Mọi công dân đều có quyền bỏ phiếu.		/ˈsɪtɪzn/
+nation	nation	noun	2	society	quốc gia, dân tộc	một đất nước và người dân của nó	The whole nation watched the game.	Cả nước đã theo dõi trận đấu.		/ˈneɪʃn/
+religion	religion	noun	2	society	tôn giáo	niềm tin vào Chúa, thần linh và các nghi lễ đi kèm	Buddhism is the main religion in this area.	Phật giáo là tôn giáo chính ở khu vực này.		/rɪˈlɪdʒən/
+buddhism	Buddhism	noun	2	society	đạo Phật, Phật giáo	tôn giáo theo lời dạy của Đức Phật	Buddhism came to Vietnam a long time ago.	Phật giáo du nhập vào Việt Nam từ rất lâu.		/ˈbʊdɪzəm/
+buddhist	Buddhist	noun	2	society	Phật tử	người theo đạo Phật	My grandmother is a Buddhist.	Bà tôi là một Phật tử.		/ˈbʊdɪst/
+christian	Christian	noun	2	society	người theo đạo Cơ đốc, Kitô hữu	người tin theo Chúa Giê-su	He became a Christian when he was young.	Ông ấy theo đạo Cơ đốc từ khi còn trẻ.		/ˈkrɪstʃən/
+priest	priest	noun	2	society	linh mục, thầy tu	người làm lễ trong nhà thờ hoặc nơi thờ cúng	The priest spoke to the people in the church.	Linh mục nói chuyện với mọi người trong nhà thờ.		/priːst/
+nun	nun	noun	2	society	nữ tu, ni cô	người phụ nữ tu hành trong tu viện, chùa	The nuns take care of sick children.	Các nữ tu chăm sóc những đứa trẻ bị bệnh.		/nʌn/
+prayer	prayer	noun	2	society	lời cầu nguyện	những lời nói với Chúa, Phật khi cầu xin	She said a prayer for her sick son.	Cô ấy đọc một lời cầu nguyện cho đứa con bị ốm.		/preə/
+hell	hell	noun	2	society	địa ngục	nơi kẻ ác bị trừng phạt sau khi chết, theo nhiều tôn giáo	Some people believe bad people go to hell.	Một số người tin rằng kẻ ác sẽ xuống địa ngục.		/hel/
+refugee	refugee	noun	2	society	người tị nạn	người phải rời bỏ đất nước vì chiến tranh, nguy hiểm	Thousands of refugees crossed the border.	Hàng nghìn người tị nạn đã vượt biên giới.		/ˌrefjuˈdʒiː/
+immigrant	immigrant	noun	2	society	người nhập cư	người từ nước khác đến sống lâu dài	His parents were immigrants from China.	Bố mẹ anh ấy là người nhập cư từ Trung Quốc.		/ˈɪmɪɡrənt/
+beggar	beggar	noun	2	society	người ăn xin	người xin tiền, thức ăn của người khác trên đường	A beggar was sitting outside the market.	Một người ăn xin đang ngồi bên ngoài chợ.		/ˈbeɡə/
+equality	equality	noun	2	society	sự bình đẳng	khi mọi người có quyền và cơ hội như nhau	We believe in equality for all.	Chúng tôi tin vào sự bình đẳng cho tất cả mọi người.		/iˈkwɒləti/
+volunteer.verb	volunteer	verb	2	society	tình nguyện, xung phong làm	tự đề nghị làm việc gì mà không bị bắt buộc hay trả lương	She volunteered to teach English to poor children.	Cô ấy tình nguyện dạy tiếng Anh cho trẻ em nghèo.		/ˌvɒlənˈtɪə/
+beg	beg	verb	2	society	ăn xin	xin tiền hoặc thức ăn vì quá nghèo	The old man begs for money near the station.	Ông lão ăn xin gần nhà ga.		/beɡ/
+belong	belong	verb	2	society	thuộc về, gắn bó với	cảm thấy mình là một phần của nhóm, nơi chốn	Everyone wants to belong somewhere.	Ai cũng muốn được thuộc về một nơi nào đó.		/bɪˈlɒŋ/
+social	social	adjective	2	society	(thuộc) xã hội	liên quan đến xã hội và cuộc sống của mọi người trong đó	Poverty is a big social problem.	Nghèo đói là một vấn đề xã hội lớn.		/ˈsəʊʃl/
+public.adj	public	adjective	2	society	công cộng	dành cho mọi người dùng chung	Smoking is not allowed in public parks.	Không được hút thuốc trong công viên công cộng.		/ˈpʌblɪk/
+national	national	adjective	2	society	(thuộc) quốc gia	liên quan đến cả một đất nước	September 2nd is our National Day.	Ngày 2 tháng 9 là Quốc khánh của chúng ta.		/ˈnæʃnəl/
+equal.rights	equal	adjective	2	society	bình đẳng, ngang nhau	có cùng quyền, giá trị như người khác	Men and women should have equal rights.	Nam và nữ nên có quyền ngang nhau.		/ˈiːkwəl/
+peaceful.nonviolent	peaceful	adjective	2	society	ôn hòa, hòa bình	không dùng bạo lực	It was a peaceful protest.	Đó là một cuộc biểu tình ôn hòa.		/ˈpiːsfl/
+religious	religious	adjective	2	society	(thuộc) tôn giáo	liên quan đến tôn giáo, niềm tin	Christmas is a religious holiday for Christians.	Giáng sinh là ngày lễ tôn giáo của người theo đạo Cơ đốc.		/rɪˈlɪdʒəs/
+holy	holy	adjective	2	society	thánh, linh thiêng	thuộc về Chúa, thần thánh, được tôn thờ	Jerusalem is a holy city for many people.	Jerusalem là thành phố linh thiêng với nhiều người.		/ˈhəʊli/
+peacefully	peacefully	adverb	2	society	một cách ôn hòa	không dùng bạo lực, không gây gổ	The people marched peacefully through the city.	Người dân diễu hành ôn hòa qua thành phố.		/ˈpiːsfəli/
+unfairly	unfairly	adverb	2	society	một cách bất công	đối xử không đúng, không công bằng với ai	Women were treated unfairly at work.	Phụ nữ bị đối xử bất công ở nơi làm việc.		/ʌnˈfeəli/
+socially	socially	adverb	2	society	về mặt xã hội	xét theo cách sống, quan hệ với mọi người trong xã hội	Smoking is less socially accepted today.	Ngày nay hút thuốc ít được xã hội chấp nhận hơn.		/ˈsəʊʃəli/
+people_in_need	people in need	collocation	2	society	người gặp khó khăn, người cần giúp đỡ	những người thiếu ăn, thiếu tiền hoặc gặp hoạn nạn	The club collects food for people in need.	Câu lạc bộ quyên góp thức ăn cho người gặp khó khăn.
+the_homeless	the homeless	collocation	2	society	người vô gia cư	nói chung về những người không có nhà để ở	The church gives hot meals to the homeless.	Nhà thờ phát bữa ăn nóng cho người vô gia cư.
+the_elderly	the elderly	collocation	2	society	người già, người cao tuổi	nói chung về những người lớn tuổi trong xã hội	The young should respect the elderly.	Người trẻ nên kính trọng người già.	old people|elderly people
+street_children	street children	collocation	2	society	trẻ em đường phố	trẻ em không có nhà, sống và kiếm sống trên đường	The centre gives street children a place to sleep.	Trung tâm cho trẻ em đường phố một chỗ để ngủ.
+old_age	old age	collocation	2	society	tuổi già	giai đoạn cuối của cuộc đời	He lived alone in his old age.	Ông ấy sống một mình lúc tuổi già.
+world_peace	world peace	collocation	2	society	hòa bình thế giới	khi không có chiến tranh ở bất cứ đâu	Everyone hopes for world peace.	Mọi người đều mong có hòa bình thế giới.
+live_in_poverty	live in poverty	collocation	2	society	sống trong nghèo khó	không có đủ tiền cho nhu cầu cơ bản trong thời gian dài	Too many children still live in poverty.	Vẫn còn quá nhiều trẻ em sống trong nghèo khó.
+raise_money	raise money	collocation	2	society	gây quỹ, quyên tiền	tổ chức hoạt động để thu tiền giúp một mục đích tốt	The students raised money for the flood victims.	Các học sinh đã quyên tiền giúp nạn nhân lũ lụt.	raise funds
+give_to_charity	give to charity	collocation	2	society	làm từ thiện, ủng hộ tổ chức từ thiện	cho tiền hoặc đồ dùng cho một tổ chức từ thiện	He gives to charity every month.	Anh ấy ủng hộ tổ chức từ thiện mỗi tháng.
+volunteer_work	volunteer work	collocation	2	society	công việc tình nguyện	công việc giúp người khác mà không nhận tiền	She does volunteer work at the hospital.	Cô ấy làm công việc tình nguyện ở bệnh viện.	voluntary work
+local_community	local community	collocation	2	society	cộng đồng địa phương	những người sống ở cùng một khu vực	The new park is good for the local community.	Công viên mới có ích cho cộng đồng địa phương.
+public_place	public place	collocation	2	society	nơi công cộng	nơi ai cũng có thể đến như công viên, nhà ga	Do not smoke in public places.	Không hút thuốc ở nơi công cộng.
+move_to_the_city	move to the city	collocation	2	society	lên thành phố sinh sống	rời quê lên thành phố để tìm việc, học tập	Many young people move to the city to find work.	Nhiều người trẻ lên thành phố để tìm việc.
+food_bank	food bank	collocation	2	society	ngân hàng thực phẩm	nơi nhận thực phẩm quyên góp và phát miễn phí cho người nghèo	We take rice and milk to the food bank every week.	Mỗi tuần chúng tôi mang gạo và sữa đến ngân hàng thực phẩm.
+charity_event	charity event	collocation	2	society	sự kiện từ thiện	buổi biểu diễn, chạy bộ để gây quỹ từ thiện	Over five hundred people came to the charity event.	Hơn năm trăm người đã đến dự sự kiện từ thiện.
+fight_for	fight for	phrasal_verb	2	society	đấu tranh vì	cố gắng hết sức để có được quyền lợi, điều tốt đẹp	They fought for equal rights.	Họ đã đấu tranh vì quyền bình đẳng.
+join_in	join in	phrasal_verb	2	society	cùng tham gia	tham gia một hoạt động mà người khác đang làm	Everyone in the street joined in the clean-up.	Mọi người trong phố đều cùng tham gia dọn dẹp.

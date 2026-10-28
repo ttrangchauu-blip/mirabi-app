@@ -1,0 +1,113 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+nurse	nurse	noun	1	careers	y tá	người chăm sóc bệnh nhân trong bệnh viện, phòng khám	My sister is a nurse at a children's hospital.	Chị tôi là y tá ở một bệnh viện nhi.		/nɜːs/
+pilot	pilot	noun	1	careers	phi công	người lái máy bay	He wants to be a pilot when he grows up.	Cậu bé muốn trở thành phi công khi lớn lên.		/ˈpaɪlət/
+engineer	engineer	noun	1	careers	kỹ sư	người thiết kế, xây dựng máy móc, cầu đường, công trình	My uncle is an engineer. He builds bridges.	Chú tôi là kỹ sư. Chú ấy xây cầu.		/ˌendʒɪˈnɪə/
+postman	postman	noun	1	careers	người đưa thư	người mang thư và bưu phẩm đến từng nhà	The postman comes at ten every morning.	Người đưa thư đến lúc mười giờ mỗi sáng.	mailman	/ˈpəʊstmən/
+cleaner.person	cleaner	noun	1	careers	người dọn dẹp, lao công	người làm nghề quét dọn nhà cửa, văn phòng	The cleaner comes to our office every evening.	Người lao công đến văn phòng chúng tôi mỗi tối.		/ˈkliːnə/
+builder	builder	noun	1	careers	thợ xây	người làm nghề xây nhà, sửa nhà	The builders are working on our new house.	Các thợ xây đang làm ngôi nhà mới của chúng tôi.		/ˈbɪldə/
+soldier	soldier	noun	1	careers	người lính, bộ đội	người phục vụ trong quân đội	My grandfather was a soldier.	Ông tôi từng là bộ đội.		/ˈsəʊldʒə/
+secretary	secretary	noun	1	careers	thư ký	người lo giấy tờ, lịch hẹn, điện thoại cho sếp	Please leave a message with my secretary.	Vui lòng để lại lời nhắn cho thư ký của tôi.		/ˈsekrətri/
+vet	vet	noun	1	careers	bác sĩ thú y	người chữa bệnh cho động vật	We took our dog to the vet.	Chúng tôi đưa con chó đến bác sĩ thú y.	veterinarian|veterinary surgeon	/vet/
+gardener	gardener	noun	1	careers	người làm vườn	người làm nghề trồng và chăm sóc cây, vườn	The gardener cuts the grass every week.	Người làm vườn cắt cỏ mỗi tuần.		/ˈɡɑːdnə/
+look_for_a_job	look for a job	collocation	1	careers	tìm việc	đang đi tìm một công việc mới	I'm looking for a job in Da Nang.	Tôi đang tìm việc ở Đà Nẵng.
+find_a_job	find a job	collocation	1	careers	tìm được việc làm	khi đã kiếm được một công việc	It took me three months to find a job.	Tôi mất ba tháng mới tìm được việc.
+get_the_job	get the job	collocation	1	careers	được nhận vào làm	khi công ty đồng ý tuyển mình sau phỏng vấn	I got the job! I start on Monday.	Tôi được nhận rồi! Thứ Hai tôi bắt đầu làm.
+part-time_job	part-time job	collocation	1	careers	việc làm thêm, việc bán thời gian	công việc chỉ làm vài giờ mỗi ngày hoặc vài ngày mỗi tuần	Many students have a part-time job.	Nhiều sinh viên có việc làm thêm.
+full-time_job	full-time job	collocation	1	careers	việc làm toàn thời gian	công việc làm đủ giờ, thường tám tiếng mỗi ngày	She wants a full-time job after university.	Cô ấy muốn có việc làm toàn thời gian sau khi học xong đại học.
+factory_worker	factory worker	collocation	1	careers	công nhân nhà máy	người làm việc trong nhà máy, xí nghiệp	My parents are factory workers.	Bố mẹ tôi là công nhân nhà máy.
+what_do_you_do	what do you do	phrase	1	careers	bạn làm nghề gì	câu hỏi về nghề nghiệp khi mới quen ai đó	So, what do you do?	Vậy bạn làm nghề gì?	what's your job
+where_do_you_work	where do you work	phrase	1	careers	bạn làm việc ở đâu	câu hỏi về nơi ai đó đang đi làm	Where do you work now?	Giờ bạn làm việc ở đâu?
+work_as	work as	phrasal_verb	1	careers	làm nghề (gì)	nói về nghề hoặc vị trí của một người	She works as a nurse.	Cô ấy làm nghề y tá.
+dream_job	dream job	collocation	1	careers	công việc mơ ước	công việc mà mình rất muốn có	Being a pilot is my dream job.	Làm phi công là công việc mơ ước của tôi.
+office_job	office job	collocation	1	careers	công việc văn phòng	công việc làm ở văn phòng, ngồi bàn giấy	I don't want an office job. I like working outside.	Tôi không muốn làm văn phòng. Tôi thích làm việc ngoài trời.
+high_salary	high salary	collocation	1	careers	lương cao	khi một công việc trả nhiều tiền mỗi tháng	Doctors usually have a high salary.	Bác sĩ thường có lương cao.
+start_a_new_job	start a new job	collocation	1	careers	bắt đầu công việc mới	thời gian đầu làm ở một chỗ làm mới	I start a new job next week.	Tuần sau tôi bắt đầu công việc mới.
+career	career	noun	2	careers	sự nghiệp	quá trình làm việc, thăng tiến trong một nghề suốt nhiều năm	She had a long career as a teacher.	Bà ấy có một sự nghiệp dạy học lâu năm.		/kəˈrɪə/
+hire.employ	hire	verb	2	careers	thuê, tuyển (người)	khi công ty nhận người mới vào làm	The shop is hiring new staff.	Cửa hàng đang tuyển nhân viên mới.		/ˈhaɪə/
+fire.dismiss	fire	verb	2	careers	sa thải, đuổi việc	khi công ty cho ai nghỉ việc vì làm sai, làm kém	He was fired for being late every day.	Anh ta bị đuổi việc vì ngày nào cũng đi muộn.	sack	/ˈfaɪə/
+quit	quit	verb	2	careers	bỏ việc	tự ý thôi không làm công việc nữa	She quit her job to travel the world.	Cô ấy bỏ việc để đi du lịch vòng quanh thế giới.		/kwɪt/
+retire	retire	verb	2	careers	nghỉ hưu	thôi làm việc khi đã lớn tuổi	My father will retire next year.	Bố tôi sẽ nghỉ hưu vào năm sau.		/rɪˈtaɪə/
+train.teach	train	verb	2	careers	đào tạo	dạy kỹ năng cho nhân viên để họ làm được việc	The company trains all new staff for two weeks.	Công ty đào tạo tất cả nhân viên mới trong hai tuần.		/treɪn/
+earn.salary	earn	verb	2	careers	kiếm được (tiền lương)	nhận được tiền nhờ làm việc	How much does a nurse earn?	Một y tá kiếm được bao nhiêu tiền?		/ɜːn/
+unemployed	unemployed	adjective	2	careers	thất nghiệp	không có việc làm nhưng đang muốn đi làm	He has been unemployed for six months.	Anh ấy đã thất nghiệp sáu tháng.	jobless	/ˌʌnɪmˈplɔɪd/
+retired	retired	adjective	2	careers	đã nghỉ hưu	nói về người không còn đi làm vì đã lớn tuổi	My grandparents are retired.	Ông bà tôi đã nghỉ hưu.		/rɪˈtaɪəd/
+suitable.job	suitable	adjective	2	careers	phù hợp (với công việc)	khi người hoặc việc hợp với một yêu cầu	I think she is suitable for the job.	Tôi nghĩ cô ấy phù hợp với công việc này.		/ˈsuːtəbl/
+professional	professional	adjective	2	careers	chuyên nghiệp	làm việc giỏi, nghiêm túc, đúng chuẩn mực nghề nghiệp	He always looks very professional at work.	Anh ấy luôn trông rất chuyên nghiệp khi làm việc.		/prəˈfeʃənl/
+experienced	experienced	adjective	2	careers	có kinh nghiệm	đã làm một việc nhiều năm nên làm giỏi	We need an experienced driver.	Chúng tôi cần một tài xế có kinh nghiệm.		/ɪkˈspɪəriənst/
+well-paid	well-paid	adjective	2	careers	được trả lương cao	nói về công việc mang lại nhiều tiền	She has a well-paid job in a bank.	Cô ấy có một công việc lương cao ở ngân hàng.		/ˌwel ˈpeɪd/
+temporary.job	temporary	adjective	2	careers	tạm thời, ngắn hạn	nói về công việc chỉ làm trong thời gian ngắn	I found a temporary job for the summer.	Tôi tìm được một công việc tạm thời cho mùa hè.		/ˈtemprəri/
+permanent.job	permanent	adjective	2	careers	lâu dài, chính thức	nói về công việc, hợp đồng không có ngày kết thúc	After six months, they gave me a permanent job.	Sau sáu tháng, họ cho tôi làm chính thức.		/ˈpɜːmənənt/
+lawyer	lawyer	noun	2	careers	luật sư	người tư vấn pháp luật và bảo vệ khách hàng ở tòa	You should talk to a lawyer.	Bạn nên nói chuyện với một luật sư.		/ˈlɔːjə/
+mechanic	mechanic	noun	2	careers	thợ máy, thợ sửa xe	người sửa chữa ô tô, xe máy, máy móc	The mechanic fixed my motorbike in an hour.	Thợ sửa xe đã sửa xe máy của tôi trong một giờ.		/məˈkænɪk/
+hairdresser	hairdresser	noun	2	careers	thợ làm tóc	người cắt, nhuộm, tạo kiểu tóc	I go to the hairdresser every two months.	Tôi đi làm tóc hai tháng một lần.		/ˈheədresə/
+receptionist	receptionist	noun	2	careers	nhân viên lễ tân	người đón khách, nghe điện thoại ở quầy lễ tân	The receptionist asked me to wait.	Cô lễ tân bảo tôi đợi.		/rɪˈsepʃənɪst/
+assistant.helper	assistant	noun	2	careers	trợ lý	người giúp việc cho một người quản lý	My assistant will send you the details.	Trợ lý của tôi sẽ gửi cho bạn thông tin chi tiết.		/əˈsɪstənt/
+designer	designer	noun	2	careers	nhà thiết kế	người lên ý tưởng, vẽ mẫu cho quần áo, nhà cửa, sản phẩm	She is a designer at a fashion company.	Cô ấy là nhà thiết kế ở một công ty thời trang.		/dɪˈzaɪnə/
+accountant	accountant	noun	2	careers	kế toán viên	người lo sổ sách, tiền bạc, thuế cho công ty	The accountant checks the numbers every month.	Kế toán kiểm tra các con số hằng tháng.		/əˈkaʊntənt/
+electrician	electrician	noun	2	careers	thợ điện	người lắp đặt và sửa đường dây, thiết bị điện	We called an electrician to fix the lights.	Chúng tôi gọi thợ điện đến sửa đèn.		/ɪˌlekˈtrɪʃn/
+plumber	plumber	noun	2	careers	thợ sửa ống nước	người lắp và sửa ống nước, bồn rửa, nhà vệ sinh	The plumber fixed the kitchen tap.	Thợ sửa ống nước đã sửa vòi nước nhà bếp.		/ˈplʌmə/
+translator	translator	noun	2	careers	biên dịch viên	người dịch sách, tài liệu viết từ ngôn ngữ này sang ngôn ngữ khác	She works as a translator of English books.	Cô ấy làm biên dịch sách tiếng Anh.		/trænsˈleɪtə/
+fisherman	fisherman	noun	2	careers	ngư dân	người đánh bắt cá để kiếm sống	The fishermen go out to sea at night.	Ngư dân ra khơi vào ban đêm.		/ˈfɪʃəmən/
+photographer	photographer	noun	2	careers	thợ chụp ảnh, nhiếp ảnh gia	người chụp ảnh chuyên nghiệp	We hired a photographer for our wedding.	Chúng tôi thuê một thợ chụp ảnh cho đám cưới.		/fəˈtɒɡrəfə/
+tailor.person	tailor	noun	2	careers	thợ may	người may quần áo theo số đo của khách	My father's suits are made by a tailor.	Com-lê của bố tôi do thợ may đặt may.		/ˈteɪlə/
+babysitter	babysitter	noun	2	careers	người trông trẻ	người được trả tiền để trông trẻ khi bố mẹ vắng nhà	We need a babysitter for Saturday night.	Chúng tôi cần người trông trẻ tối thứ Bảy.		/ˈbeɪbisɪtə/
+model.job	model	noun	2	careers	người mẫu	người mặc quần áo để chụp ảnh, trình diễn thời trang	She works as a fashion model in Paris.	Cô ấy làm người mẫu thời trang ở Paris.		/ˈmɒdl/
+bonus	bonus	noun	2	careers	tiền thưởng	khoản tiền thêm ngoài lương khi làm tốt hoặc dịp cuối năm	Everyone got a bonus at the end of the year.	Mọi người đều được thưởng vào cuối năm.		/ˈbəʊnəs/
+strength.quality	strength	noun	2	careers	điểm mạnh	khả năng, phẩm chất tốt của một người khi làm việc	What are your strengths?	Điểm mạnh của bạn là gì?		/streŋθ/
+weakness.quality	weakness	noun	2	careers	điểm yếu	điều một người chưa làm tốt, cần cải thiện	My biggest weakness is public speaking.	Điểm yếu lớn nhất của tôi là nói trước đám đông.		/ˈwiːknəs/
+cv	CV	noun	2	careers	sơ yếu lý lịch	bản tóm tắt học vấn, kinh nghiệm, kỹ năng gửi khi xin việc	Please send your CV by email.	Vui lòng gửi CV qua email.	resume|curriculum vitae	/ˌsiː ˈviː/
+summer_job	summer job	collocation	2	careers	việc làm hè	công việc ngắn hạn làm trong kỳ nghỉ hè	I had a summer job at a hotel.	Tôi từng làm việc hè ở một khách sạn.
+lose_your_job	lose your job	collocation	2	careers	mất việc	khi bị cho nghỉ, không còn việc làm	Be careful, or you'll lose your job.	Cẩn thận đấy, không thì bạn sẽ mất việc.
+change_jobs	change jobs	collocation	2	careers	đổi việc, chuyển việc	bỏ công việc cũ để làm một công việc khác	He changes jobs every two years.	Anh ấy đổi việc hai năm một lần.
+get_promoted	get promoted	collocation	2	careers	được thăng chức	khi được lên vị trí cao hơn trong công ty	She got promoted to manager last month.	Tháng trước cô ấy được thăng chức lên quản lý.
+get_paid	get paid	collocation	2	careers	được trả lương, nhận lương	khi nhận tiền công cho việc mình làm	We get paid on the last day of the month.	Chúng tôi nhận lương vào ngày cuối tháng.
+tell_me_about_yourself	tell me about yourself	phrase	2	careers	hãy giới thiệu về bản thân	câu hỏi mở đầu quen thuộc trong buổi phỏng vấn xin việc	The first question was: tell me about yourself.	Câu hỏi đầu tiên là: hãy giới thiệu về bản thân.
+security_guard	security guard	collocation	2	careers	nhân viên bảo vệ	người canh gác tòa nhà, cửa hàng	The security guard checked my bag.	Nhân viên bảo vệ kiểm tra túi của tôi.
+construction_worker	construction worker	collocation	2	careers	công nhân xây dựng	người làm việc ở công trường xây dựng	Construction workers must wear helmets.	Công nhân xây dựng phải đội mũ bảo hộ.
+good_with_people	good with people	collocation	2	careers	khéo giao tiếp với mọi người	biết cách nói chuyện, làm việc tốt với người khác	She's good with people, so she'd be great in sales.	Cô ấy khéo giao tiếp nên sẽ làm bán hàng rất tốt.
+pay_well	pay well	collocation	2	careers	trả lương hậu	khi một công việc, công ty trả nhiều tiền	This job is hard, but it pays well.	Công việc này vất vả nhưng trả lương hậu.
+work_abroad	work abroad	collocation	2	careers	làm việc ở nước ngoài	đi sang nước khác để làm việc	My cousin wants to work abroad in Japan.	Em họ tôi muốn sang Nhật làm việc.
+job_offer	job offer	collocation	2	careers	lời mời làm việc	khi công ty chính thức đề nghị tuyển mình	I got two job offers last week.	Tuần trước tôi nhận được hai lời mời làm việc.
+job_title	job title	collocation	2	careers	chức danh	tên vị trí công việc, ví dụ trưởng phòng hay kế toán viên	What is your new job title?	Chức danh mới của bạn là gì?
+cover_letter	cover letter	collocation	2	careers	thư xin việc	thư gửi kèm CV giới thiệu bản thân và lý do ứng tuyển	Write a short cover letter with your CV.	Hãy viết một lá thư xin việc ngắn kèm CV.	covering letter
+application_form	application form	collocation	2	careers	mẫu đơn ứng tuyển	mẫu giấy có sẵn để người xin việc điền thông tin	Please fill in the application form.	Vui lòng điền vào mẫu đơn ứng tuyển.
+pay_rise	pay rise	collocation	2	careers	sự tăng lương	khi công ty trả lương cao hơn trước	I asked my boss for a pay rise.	Tôi đã xin sếp tăng lương.	raise|pay raise
+job_hunting	job hunting	collocation	2	careers	việc đi tìm việc	quá trình tìm kiếm và nộp đơn xin việc	Job hunting can take a long time.	Tìm việc có thể mất nhiều thời gian.
+training_course	training course	collocation	2	careers	khóa đào tạo	khóa học ngắn giúp nhân viên học kỹ năng mới	I'm going on a training course next week.	Tuần sau tôi đi học một khóa đào tạo.
+switch.career	switch	verb	3	careers	chuyển (sang nghề khác)	bỏ ngành nghề cũ để làm một lĩnh vực mới	He switched from teaching to marketing.	Anh ấy chuyển từ dạy học sang làm marketing.		/swɪtʃ/
+recruit	recruit	verb	3	careers	tuyển dụng	tìm và nhận người mới vào làm cho công ty	We are recruiting ten new engineers this year.	Năm nay chúng tôi tuyển mười kỹ sư mới.		/rɪˈkruːt/
+promote.job	promote	verb	3	careers	thăng chức (cho ai)	cho ai lên vị trí cao hơn trong công ty	They promoted her to team leader after one year.	Sau một năm họ thăng chức cho cô ấy lên trưởng nhóm.		/prəˈməʊt/
+employ	employ	verb	3	careers	thuê làm, sử dụng (lao động)	trả lương cho người làm việc lâu dài cho mình	The factory employs five hundred workers.	Nhà máy sử dụng năm trăm công nhân.		/ɪmˈplɔɪ/
+impress	impress	verb	3	careers	gây ấn tượng tốt	khiến người khác thấy mình giỏi, đáng nể	She impressed the interviewers with her English.	Cô ấy gây ấn tượng với người phỏng vấn nhờ tiếng Anh tốt.		/ɪmˈpres/
+reject.application	reject	verb	3	careers	loại, từ chối (hồ sơ)	khi công ty không chọn người nộp đơn	My application was rejected.	Hồ sơ của tôi đã bị loại.		/rɪˈdʒekt/
+reward.staff	reward	verb	3	careers	khen thưởng	tặng tiền, quà cho người làm việc tốt	The company rewards its best workers with a trip.	Công ty thưởng cho những nhân viên giỏi nhất một chuyến du lịch.		/rɪˈwɔːd/
+recommend.candidate	recommend	verb	3	careers	tiến cử, giới thiệu (người)	nói tốt về ai để họ được nhận vào làm	My old boss recommended me for this job.	Sếp cũ đã tiến cử tôi cho công việc này.		/ˌrekəˈmend/
+volunteer.work	volunteer	verb	3	careers	làm tình nguyện	làm việc không lấy lương để giúp người khác	She volunteers at a hospital on weekends.	Cuối tuần cô ấy làm tình nguyện ở một bệnh viện.		/ˌvɒlənˈtɪə/
+carpenter	carpenter	noun	3	careers	thợ mộc	người làm đồ gỗ như bàn ghế, cửa	The carpenter made a new table for us.	Thợ mộc đã đóng cho chúng tôi một cái bàn mới.		/ˈkɑːpəntə/
+architect	architect	noun	3	careers	kiến trúc sư	người thiết kế nhà cửa, công trình	An architect designed our new office.	Một kiến trúc sư đã thiết kế văn phòng mới của chúng tôi.		/ˈɑːkɪtekt/
+clerk	clerk	noun	3	careers	nhân viên văn thư	người làm việc giấy tờ trong văn phòng, ngân hàng	He works as a clerk in a bank.	Anh ấy làm nhân viên văn thư ở ngân hàng.		/klɑːk/
+labourer	labourer	noun	3	careers	người lao động chân tay	người làm việc nặng nhọc như bốc vác, xây dựng	He worked as a labourer on a farm.	Anh ấy làm lao động chân tay ở một trang trại.	laborer	/ˈleɪbərə/
+miner	miner	noun	3	careers	thợ mỏ	người làm việc dưới mỏ than, mỏ kim loại	Miners work deep under the ground.	Thợ mỏ làm việc sâu dưới lòng đất.		/ˈmaɪnə/
+barber	barber	noun	3	careers	thợ cắt tóc nam	người cắt tóc, cạo râu cho đàn ông	I get my hair cut at the barber's every month.	Tháng nào tôi cũng cắt tóc ở tiệm cắt tóc nam.		/ˈbɑːbə/
+director.company	director	noun	3	careers	giám đốc	người đứng đầu điều hành một công ty, một bộ phận lớn	The director will visit our office tomorrow.	Ngày mai giám đốc sẽ đến thăm văn phòng chúng tôi.		/dəˈrektə/
+trainee	trainee	noun	3	careers	học viên (được đào tạo nghề)	nhân viên mới đang được công ty đào tạo	The trainees spend a month in each department.	Các học viên làm ở mỗi phòng ban một tháng.		/ˌtreɪˈniː/
+intern	intern	noun	3	careers	thực tập sinh	sinh viên làm việc ngắn hạn để lấy kinh nghiệm	We have two summer interns this year.	Năm nay chúng tôi có hai thực tập sinh mùa hè.		/ˈɪntɜːn/
+applicant	applicant	noun	3	careers	người nộp đơn	người gửi đơn xin một công việc	We had over two hundred applicants for this job.	Chúng tôi có hơn hai trăm người nộp đơn cho công việc này.		/ˈæplɪkənt/
+candidate.job	candidate	noun	3	careers	ứng viên	người đang được xem xét cho một vị trí công việc	There are three candidates for the manager job.	Có ba ứng viên cho vị trí quản lý.		/ˈkændɪdət/
+interviewer	interviewer	noun	3	careers	người phỏng vấn	người đặt câu hỏi trong buổi phỏng vấn xin việc	The interviewer asked about my last job.	Người phỏng vấn hỏi về công việc trước của tôi.		/ˈɪntəvjuːə/
+profession	profession	noun	3	careers	nghề (chuyên môn)	nghề cần học lâu và có bằng cấp, như y, luật, dạy học	Teaching is a respected profession.	Dạy học là một nghề được kính trọng.		/prəˈfeʃn/
+field.area	field	noun	3	careers	lĩnh vực	một ngành, một mảng chuyên môn	She is an expert in the field of medicine.	Cô ấy là chuyên gia trong lĩnh vực y khoa.		/fiːld/
+vacancy.job	vacancy	noun	3	careers	vị trí còn trống	một công việc đang cần tuyển người	We have a vacancy for a receptionist.	Chúng tôi có một vị trí lễ tân còn trống.		/ˈveɪkənsi/
+application.job	application	noun	3	careers	hồ sơ xin việc	giấy tờ gửi cho công ty để xin một vị trí	We received your application yesterday.	Chúng tôi đã nhận được hồ sơ của bạn hôm qua.		/ˌæplɪˈkeɪʃn/
+qualification	qualification	noun	3	careers	trình độ, bằng cấp chuyên môn	bằng cấp hoặc kỹ năng đã được công nhận để làm một nghề	What qualifications do you need to be a nurse?	Cần bằng cấp gì để làm y tá?		/ˌkwɒlɪfɪˈkeɪʃn/
+requirement	requirement	noun	3	careers	yêu cầu	điều mà công ty đòi hỏi ở người xin việc	A driving licence is a requirement for this job.	Bằng lái xe là một yêu cầu cho công việc này.		/rɪˈkwaɪəmənt/
+position.job	position	noun	3	careers	vị trí, chức vụ	một công việc cụ thể trong công ty	I'm applying for the position of sales manager.	Tôi đang ứng tuyển vị trí trưởng phòng kinh doanh.		/pəˈzɪʃn/
+role.job	role	noun	3	careers	vai trò	phần việc và trách nhiệm của một người trong công ty	My role is to help new customers.	Vai trò của tôi là hỗ trợ khách hàng mới.		/rəʊl/
+achievement	achievement	noun	3	careers	thành tích	việc khó mà mình đã làm được nhờ cố gắng	Write your main achievements on your CV.	Hãy viết những thành tích chính vào CV.		/əˈtʃiːvmənt/
+ambition	ambition	noun	3	careers	hoài bão, tham vọng	mong muốn mạnh mẽ được thành công trong sự nghiệp	Her ambition is to open her own restaurant.	Hoài bão của cô ấy là mở nhà hàng riêng.		/æmˈbɪʃn/
+retirement	retirement	noun	3	careers	sự nghỉ hưu, tuổi hưu	khi thôi đi làm vì đã lớn tuổi	He enjoys his retirement by the sea.	Ông ấy tận hưởng tuổi nghỉ hưu bên bờ biển.		/rɪˈtaɪəmənt/
+wage	wage	noun	3	careers	tiền công	tiền trả cho người lao động, thường theo giờ hoặc theo tuần	Farm workers earn a low wage.	Công nhân nông trại nhận tiền công thấp.		/weɪdʒ/
+benefit.job	benefit	noun	3	careers	phúc lợi	thứ được hưởng thêm ngoài lương như bảo hiểm, ngày nghỉ	The job has good benefits, like free health care.	Công việc có phúc lợi tốt, như được chăm sóc sức khỏe miễn phí.		/ˈbenɪfɪt/
+certificate.course	certificate	noun	3	careers	chứng chỉ	giấy chứng nhận đã hoàn thành một khóa học	I have a certificate in first aid.	Tôi có chứng chỉ sơ cứu.		/səˈtɪfɪkət/
+internship	internship	noun	3	careers	kỳ thực tập	thời gian làm việc ngắn hạn để học kinh nghiệm	I did a three-month internship at a bank.	Tôi đã thực tập ba tháng ở một ngân hàng.		/ˈɪntɜːnʃɪp/
+leadership	leadership	noun	3	careers	khả năng lãnh đạo	kỹ năng dẫn dắt, quản lý người khác	She showed good leadership in the project.	Cô ấy thể hiện khả năng lãnh đạo tốt trong dự án.		/ˈliːdəʃɪp/

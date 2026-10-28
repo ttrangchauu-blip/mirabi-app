@@ -1,0 +1,106 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+health	health	noun	1	health	sức khỏe	tình trạng của cơ thể và tinh thần	Smoking is bad for your health.	Hút thuốc có hại cho sức khỏe của bạn.		/helθ/
+body	body	noun	1	health	cơ thể	toàn bộ phần thân thể của người hoặc con vật	Exercise is good for your body and mind.	Tập thể dục tốt cho cơ thể và tinh thần của bạn.		/ˈbɒdi/
+ill	ill	adjective	1	health	ốm, không khỏe	thường đứng sau động từ: be ill, feel ill, fall ill	She was ill, so she stayed at home.	Cô ấy bị ốm nên ở nhà.	sick	/ɪl/
+pain	pain	noun	1	health	cơn đau, sự đau đớn	cảm giác khó chịu khi bị thương hoặc bị bệnh	I have a pain in my leg.	Tôi bị đau ở chân.		/peɪn/
+hurt	hurt	verb	1	health	đau, bị đau	khi một bộ phận cơ thể đang đau	My head hurts.	Đầu tôi đau.		/hɜːt/
+cough	cough	verb	1	health	ho	đẩy mạnh hơi ra khỏi cổ họng khi bị cảm, đau họng	He coughed all night.	Anh ấy ho suốt đêm.		/kɒf/
+heart.organ	heart	noun	1	health	tim, quả tim	cơ quan bơm máu đi khắp cơ thể	Your heart beats faster when you run.	Tim bạn đập nhanh hơn khi bạn chạy.		/hɑːt/
+stomach	stomach	noun	1	health	dạ dày, bụng	nơi chứa thức ăn trong cơ thể	My stomach is full.	Bụng tôi no rồi.		/ˈstʌmək/
+back.body	back	noun	1	health	lưng	phần phía sau cơ thể, từ cổ đến hông	My back hurts after work.	Lưng tôi đau sau giờ làm.		/bæk/
+arm	arm	noun	1	health	cánh tay	phần cơ thể từ vai đến bàn tay	She hurt her arm.	Cô ấy bị đau cánh tay.		/ɑːm/
+leg	leg	noun	1	health	cái chân, cẳng chân	phần cơ thể từ hông đến bàn chân, dùng để đi	He has long legs.	Anh ấy có đôi chân dài.		/leɡ/
+foot	foot	noun	1	health	bàn chân	phần cuối của chân, dùng để đứng	My left foot is cold.	Bàn chân trái của tôi bị lạnh.		/fʊt/
+ear	ear	noun	1	health	tai, cái tai	cơ quan dùng để nghe	I have a pain in my ear.	Tôi bị đau tai.		/ɪə/
+nose	nose	noun	1	health	mũi, cái mũi	cơ quan để thở và ngửi	Breathe in through your nose.	Hãy hít vào bằng mũi.		/nəʊz/
+neck	neck	noun	1	health	cổ (bộ phận cơ thể)	phần nối đầu với thân	My neck hurts.	Cổ tôi bị đau.		/nek/
+shoulder	shoulder	noun	1	health	vai	phần nối cánh tay với thân	He carried the bag on his shoulder.	Anh ấy vác túi trên vai.		/ˈʃəʊldə/
+knee	knee	noun	1	health	đầu gối	khớp ở giữa chân, giúp chân gập lại	I fell and hurt my knee.	Tôi bị ngã và đau đầu gối.		/niː/
+finger	finger	noun	1	health	ngón tay	một trong năm phần dài ở cuối bàn tay	I cut my finger.	Tôi bị đứt ngón tay.		/ˈfɪŋɡə/
+toe	toe	noun	1	health	ngón chân	một trong năm phần nhỏ ở đầu bàn chân	I hit my toe on the door.	Tôi bị va ngón chân vào cửa.		/təʊ/
+blood	blood	noun	1	health	máu	chất lỏng màu đỏ chảy trong cơ thể	There was blood on his shirt.	Có máu trên áo anh ấy.		/blʌd/
+bone	bone	noun	1	health	xương	phần cứng bên trong cơ thể	Milk is good for your bones.	Sữa tốt cho xương của bạn.		/bəʊn/
+skin	skin	noun	1	health	da	lớp ngoài cùng bao phủ cơ thể	The sun can hurt your skin.	Ánh nắng có thể làm hại da của bạn.		/skɪn/
+brain	brain	noun	1	health	não, bộ não	cơ quan trong đầu dùng để suy nghĩ	Sleep is good for your brain.	Ngủ tốt cho não của bạn.		/breɪn/
+throat	throat	noun	1	health	cổ họng	phần bên trong cổ, nơi thức ăn và không khí đi qua	My throat hurts when I eat.	Cổ họng tôi đau khi ăn.		/θrəʊt/
+chest	chest	noun	1	health	ngực	phần trước của thân, giữa cổ và bụng	He has a pain in his chest.	Anh ấy bị đau ngực.		/tʃest/
+nurse	nurse	noun	1	health	y tá	người chăm sóc bệnh nhân trong bệnh viện	The nurse gave me some water.	Cô y tá đưa cho tôi một ít nước.		/nɜːs/
+patient.person	patient	noun	1	health	bệnh nhân	người đang được bác sĩ khám hoặc chữa bệnh	The doctor has ten patients this morning.	Sáng nay bác sĩ có mười bệnh nhân.		/ˈpeɪʃnt/
+pill	pill	noun	1	health	viên thuốc	thuốc dạng viên nhỏ để uống	Take one pill after each meal.	Uống một viên thuốc sau mỗi bữa ăn.	tablet	/pɪl/
+weak.health	weak	adjective	1	health	yếu, không có sức	cơ thể mệt và yếu, nhất là sau khi ốm	She is still weak and needs rest.	Cô ấy vẫn còn yếu và cần nghỉ ngơi.		/wiːk/
+fit.health	fit	adjective	1	health	khỏe mạnh, sung sức	có thể lực tốt nhờ tập luyện đều đặn	My grandfather is very fit for his age.	Ông tôi rất khỏe so với tuổi.		/fɪt/
+breathe	breathe	verb	1	health	thở	hít không khí vào và thở ra	Breathe slowly and relax.	Hãy thở chậm và thư giãn.		/briːð/
+die	die	verb	1	health	chết, qua đời	khi sự sống kết thúc vì bệnh hoặc tuổi già	My grandmother died last year.	Bà tôi đã qua đời năm ngoái.		/daɪ/
+smoke.cigarette	smoke	verb	1	health	hút thuốc	hít khói thuốc lá vào	My father doesn't smoke.	Bố tôi không hút thuốc.		/sməʊk/
+toothache	toothache	noun	1	health	đau răng	cơn đau ở răng	I have a toothache, so I can't eat.	Tôi bị đau răng nên không ăn được.		/ˈtuːθeɪk/
+see_a_doctor	see a doctor	collocation	1	health	đi khám bác sĩ	khi bị ốm và cần bác sĩ khám	You should see a doctor about that cough.	Bạn nên đi khám bác sĩ về cơn ho đó.	go to the doctor
+get_better	get better	collocation	1	health	khỏi dần, đỡ bệnh	sức khỏe tiến triển tốt lên sau khi ốm	I hope your mum gets better soon.	Mong mẹ bạn sớm khỏe lại.
+feel_better	feel better	collocation	1	health	cảm thấy đỡ hơn	cảm giác của bản thân sau khi nghỉ ngơi hoặc uống thuốc	I feel better after a good sleep.	Tôi thấy đỡ hơn sau một giấc ngủ ngon.
+take_medicine	take medicine	collocation	1	health	uống thuốc	dùng thuốc theo lời bác sĩ	Take your medicine after dinner.	Hãy uống thuốc sau bữa tối.
+have_a_cold	have a cold	collocation	1	health	đang bị cảm	đang hắt hơi, sổ mũi, hơi mệt	I have a cold, so I'm staying at home.	Tôi bị cảm nên sẽ ở nhà.
+stay_in_bed	stay in bed	collocation	1	health	nằm nghỉ trên giường	khi ốm và cần nằm nghỉ cả ngày	The doctor told me to stay in bed for two days.	Bác sĩ bảo tôi nằm nghỉ trên giường hai ngày.
+get_well_soon	get well soon	phrase	1	health	chúc mau khỏe	lời chúc dành cho người đang ốm	Get well soon, Lan!	Chúc Lan mau khỏe nhé!
+how_are_you_feeling	how are you feeling	phrase	1	health	bạn thấy trong người thế nào	câu hỏi thăm người đang ốm hoặc mệt	How are you feeling today?	Hôm nay bạn thấy trong người thế nào?
+wash_your_hands	wash your hands	collocation	1	health	rửa tay	giữ vệ sinh trước khi ăn, sau khi đi vệ sinh	Wash your hands before you eat.	Hãy rửa tay trước khi ăn.
+break_your_arm	break your arm	collocation	1	health	bị gãy tay	xương cánh tay bị gãy khi ngã hoặc va đập	Get down from the tree, or you'll break your arm!	Xuống khỏi cây đi, không thì gãy tay đấy!
+healthy_food	healthy food	collocation	1	health	đồ ăn lành mạnh	thức ăn tốt cho sức khỏe như rau, trái cây	Children need healthy food to grow.	Trẻ em cần đồ ăn lành mạnh để lớn lên.
+illness	illness	noun	2	health	sự ốm đau	khoảng thời gian hoặc tình trạng bị ốm	He missed school because of illness.	Cậu ấy nghỉ học vì ốm.		/ˈɪlnəs/
+disease	disease	noun	2	health	căn bệnh	một loại bệnh cụ thể có tên, như bệnh tim, bệnh sốt rét	Heart disease is common in older people.	Bệnh tim phổ biến ở người lớn tuổi.		/dɪˈziːz/
+sore	sore	adjective	2	health	đau nhức, đau rát	bộ phận cơ thể đau khi chạm vào hoặc khi dùng	My legs are sore after the long walk.	Chân tôi đau nhức sau chuyến đi bộ dài.		/sɔː/
+ache	ache	verb	2	health	đau âm ỉ	cơn đau kéo dài, không dữ dội	My back aches after sitting all day.	Lưng tôi đau âm ỉ sau khi ngồi cả ngày.		/eɪk/
+sneeze	sneeze	verb	2	health	hắt hơi	khi mũi bị kích thích, bị cảm hoặc dị ứng	Dust makes me sneeze.	Bụi làm tôi hắt hơi.		/sniːz/
+sweat	sweat	verb	2	health	đổ mồ hôi	khi trời nóng, khi tập luyện hoặc khi sốt	I sweat a lot when I run.	Tôi đổ rất nhiều mồ hôi khi chạy.		/swet/
+bleed	bleed	verb	2	health	chảy máu	khi bị đứt tay, bị thương	Your nose is bleeding.	Mũi bạn đang chảy máu.		/bliːd/
+lung	lung	noun	2	health	phổi	cơ quan trong ngực dùng để thở	Smoking damages your lungs.	Hút thuốc làm hại phổi của bạn.		/lʌŋ/
+thumb	thumb	noun	2	health	ngón tay cái	ngón ngắn và to nhất trên bàn tay	I hurt my thumb when I was playing volleyball.	Tôi bị đau ngón cái khi chơi bóng chuyền.		/θʌm/
+wrist	wrist	noun	2	health	cổ tay	khớp nối giữa bàn tay và cánh tay	She wears a watch on her left wrist.	Cô ấy đeo đồng hồ ở cổ tay trái.		/rɪst/
+ankle	ankle	noun	2	health	mắt cá chân	khớp nối giữa bàn chân và cẳng chân	He hurt his ankle during the match.	Anh ấy bị đau mắt cá chân trong trận đấu.		/ˈæŋkl/
+muscle	muscle	noun	2	health	cơ bắp	phần thịt giúp cơ thể cử động	Swimming is good for your muscles.	Bơi lội tốt cho cơ bắp.		/ˈmʌsl/
+tongue	tongue	noun	2	health	lưỡi	bộ phận trong miệng dùng để nếm và nói	Open your mouth and show me your tongue.	Há miệng ra và cho tôi xem lưỡi nào.		/tʌŋ/
+clinic	clinic	noun	2	health	phòng khám	nơi khám bệnh nhỏ hơn bệnh viện	There is a small clinic near my house.	Gần nhà tôi có một phòng khám nhỏ.		/ˈklɪnɪk/
+pharmacy	pharmacy	noun	2	health	hiệu thuốc, nhà thuốc	cửa hàng bán thuốc	You can buy this cream at any pharmacy.	Bạn có thể mua loại kem này ở bất kỳ hiệu thuốc nào.	chemist's|drugstore	/ˈfɑːməsi/
+check-up	check-up	noun	2	health	buổi khám sức khỏe định kỳ	đi khám dù không bị ốm, để kiểm tra sức khỏe	I go for a check-up every year.	Năm nào tôi cũng đi khám sức khỏe định kỳ.	checkup	/ˈtʃekʌp/
+blind	blind	adjective	2	health	mù, khiếm thị	không nhìn thấy được	He has been blind since birth.	Anh ấy bị mù từ khi sinh ra.		/blaɪnd/
+deaf	deaf	adjective	2	health	điếc, khiếm thính	không nghe được hoặc nghe rất kém	My grandfather is a little deaf.	Ông tôi hơi bị điếc.		/def/
+overweight	overweight	adjective	2	health	thừa cân	nặng hơn mức cân nặng tốt cho sức khỏe	The doctor said I was a bit overweight.	Bác sĩ nói tôi hơi thừa cân.		/ˌəʊvəˈweɪt/
+unhealthy	unhealthy	adjective	2	health	không lành mạnh, có hại cho sức khỏe	nói về thức ăn, thói quen, lối sống	Eating late at night is an unhealthy habit.	Ăn khuya là một thói quen không lành mạnh.		/ʌnˈhelθi/
+dizzy	dizzy	adjective	2	health	chóng mặt	cảm giác mọi thứ quay vòng, sắp ngã	I felt dizzy when I stood up.	Tôi thấy chóng mặt khi đứng dậy.		/ˈdɪzi/
+itchy	itchy	adjective	2	health	ngứa ngáy	cảm giác trên da khiến mình muốn gãi	These mosquito bites are really itchy.	Mấy vết muỗi đốt này ngứa quá.		/ˈɪtʃi/
+painful	painful	adjective	2	health	đau, gây đau đớn	nói về vết thương, vết bỏng, việc chữa trị	The cut on my hand is very painful.	Vết đứt trên tay tôi rất đau.		/ˈpeɪnfl/
+pale	pale	adjective	2	health	xanh xao, tái nhợt	sắc mặt nhợt nhạt vì ốm hoặc mệt	You look pale. Are you OK?	Trông bạn xanh xao quá. Bạn ổn chứ?		/peɪl/
+medical	medical	adjective	2	health	thuộc về y tế, y khoa	liên quan đến khám chữa bệnh	She needs medical help right now.	Cô ấy cần được trợ giúp y tế ngay.		/ˈmedɪkl/
+vitamin	vitamin	noun	2	health	vi-ta-min, sinh tố	chất cần cho cơ thể, có nhiều trong rau quả	Oranges are full of vitamin C.	Cam có rất nhiều vitamin C.		/ˈvɪtəmɪn/
+calorie	calorie	noun	2	health	calo (đơn vị năng lượng)	đơn vị đo năng lượng có trong thức ăn	This cake has a lot of calories.	Cái bánh này có rất nhiều calo.		/ˈkæləri/
+virus.disease	virus	noun	2	health	vi-rút gây bệnh	sinh vật rất nhỏ gây ra cảm cúm và nhiều bệnh khác	Flu is caused by a virus.	Cúm do vi-rút gây ra.		/ˈvaɪrəs/
+germ	germ	noun	2	health	vi trùng, mầm bệnh	vật rất nhỏ gây bệnh, có trên tay, đồ vật	Wash your hands to kill the germs.	Hãy rửa tay để diệt vi trùng.		/dʒɜːm/
+flu	flu	noun	2	health	bệnh cúm	bệnh do vi-rút, gây sốt, ho, đau mình	Half of my class has the flu.	Một nửa lớp tôi bị cúm.	influenza	/fluː/
+cancer	cancer	noun	2	health	bệnh ung thư	bệnh nặng do tế bào phát triển bất thường	Smoking can cause lung cancer.	Hút thuốc có thể gây ung thư phổi.		/ˈkænsə/
+x-ray	x-ray	noun	2	health	phim chụp X-quang	ảnh chụp xương hoặc bên trong cơ thể	The X-ray showed that his leg was broken.	Phim X-quang cho thấy chân anh ấy bị gãy.		/ˈeksreɪ/
+injection	injection	noun	2	health	mũi tiêm, việc tiêm thuốc	đưa thuốc vào cơ thể bằng kim tiêm	The nurse gave me an injection in my arm.	Y tá tiêm cho tôi một mũi vào cánh tay.		/ɪnˈdʒekʃn/
+operation.surgery	operation	noun	2	health	ca mổ, cuộc phẫu thuật	một lần bác sĩ mổ để chữa bệnh cho ai đó	My dad had an operation on his knee.	Bố tôi đã mổ đầu gối.		/ˌɒpəˈreɪʃn/
+wheelchair	wheelchair	noun	2	health	xe lăn	ghế có bánh xe cho người không đi lại được	She has used a wheelchair since the accident.	Cô ấy phải dùng xe lăn từ sau vụ tai nạn.		/ˈwiːltʃeə/
+bruise	bruise	noun	2	health	vết bầm tím	vết thâm trên da sau khi bị va đập	He has a big bruise on his leg.	Anh ấy có một vết bầm to ở chân.		/bruːz/
+cut.wound	cut	noun	2	health	vết đứt, vết cắt	vết thương nhỏ trên da do dao, kính gây ra	Put some cream on that cut.	Hãy bôi chút kem lên vết đứt đó.		/kʌt/
+backache	backache	noun	2	health	đau lưng	cơn đau ở lưng	Sitting all day gives me backache.	Ngồi cả ngày khiến tôi bị đau lưng.		/ˈbækeɪk/
+earache	earache	noun	2	health	đau tai	cơn đau bên trong tai	The child has an earache and can't sleep.	Đứa trẻ bị đau tai và không ngủ được.		/ˈɪəreɪk/
+painkiller	painkiller	noun	2	health	thuốc giảm đau	thuốc uống để bớt đau	Take a painkiller if your head still hurts.	Uống một viên thuốc giảm đau nếu bạn vẫn còn đau đầu.		/ˈpeɪnkɪlə/
+fat.nutrient	fat	noun	2	health	chất béo	chất trong thức ăn như dầu, mỡ, bơ	Fried food has a lot of fat.	Đồ chiên có nhiều chất béo.		/fæt/
+sunburn	sunburn	noun	2	health	cháy nắng	da đỏ rát vì ở dưới nắng quá lâu	Wear a hat to avoid sunburn.	Hãy đội mũ để tránh bị cháy nắng.		/ˈsʌnbɜːn/
+sore_throat	sore throat	collocation	2	health	đau họng	cổ họng đau rát, khó nuốt khi bị cảm	I have a sore throat and a runny nose.	Tôi bị đau họng và sổ mũi.
+runny_nose	runny nose	collocation	2	health	sổ mũi, chảy nước mũi	nước mũi chảy liên tục khi bị cảm	Take a tissue, you have a runny nose.	Lấy khăn giấy đi, bạn đang chảy nước mũi kìa.
+catch_a_cold	catch a cold	collocation	2	health	bị nhiễm lạnh, mắc cảm	bắt đầu bị cảm do lạnh hoặc lây từ người khác	Put on a coat or you'll catch a cold.	Mặc áo khoác vào kẻo bị cảm.
+blow_your_nose	blow your nose	collocation	2	health	xì mũi	đẩy nước mũi ra vào khăn giấy	Here's a tissue. Blow your nose.	Khăn giấy đây. Xì mũi đi.
+feel_sick	feel sick	collocation	2	health	buồn nôn	cảm giác muốn nôn, ví dụ khi đi xe	I always feel sick on long bus trips.	Tôi luôn thấy buồn nôn khi đi xe buýt đường dài.
+throw_up	throw up	phrasal_verb	2	health	nôn, ói	cách nói thông thường khi thức ăn trào ra khỏi miệng	The baby threw up after drinking milk.	Em bé bị ói sau khi uống sữa.
+lose_weight	lose weight	collocation	2	health	giảm cân	trở nên nhẹ cân hơn nhờ ăn uống, tập luyện	She wants to lose weight before summer.	Cô ấy muốn giảm cân trước mùa hè.
+keep_fit	keep fit	collocation	2	health	giữ dáng, giữ sức khỏe	tập thể dục đều đặn để cơ thể khỏe	I go swimming to keep fit.	Tôi đi bơi để giữ sức khỏe.
+have_a_temperature	have a temperature	collocation	2	health	bị sốt, người nóng	thân nhiệt cao hơn bình thường	You feel hot. I think you have a temperature.	Người con nóng quá. Mẹ nghĩ con bị sốt rồi.
+doctors_appointment	doctor's appointment	collocation	2	health	lịch hẹn khám bệnh	giờ đã hẹn để gặp bác sĩ	I have a doctor's appointment at ten.	Tôi có lịch hẹn khám bệnh lúc mười giờ.
+fresh_air	fresh air	collocation	2	health	không khí trong lành	không khí sạch ở ngoài trời, tốt cho sức khỏe	Let's go outside and get some fresh air.	Mình ra ngoài hít thở không khí trong lành đi.
+get_enough_sleep	get enough sleep	collocation	2	health	ngủ đủ giấc	ngủ đủ số giờ cơ thể cần	Teenagers need to get enough sleep.	Thanh thiếu niên cần ngủ đủ giấc.
+drink_plenty_of_water	drink plenty of water	collocation	2	health	uống nhiều nước	lời khuyên khi trời nóng hoặc khi bị ốm	Drink plenty of water when you have a fever.	Hãy uống nhiều nước khi bị sốt.
+junk_food	junk food	noun	2	health	đồ ăn vặt kém dinh dưỡng	đồ ăn nhanh, nhiều dầu mỡ, đường, ít chất bổ	Try to eat less junk food.	Hãy cố ăn ít đồ ăn vặt kém dinh dưỡng.
+quit_smoking	quit smoking	collocation	2	health	bỏ thuốc lá	thôi hẳn việc hút thuốc	My uncle quit smoking last year.	Chú tôi đã bỏ thuốc lá năm ngoái.	give up smoking|stop smoking
+take_a_deep_breath	take a deep breath	collocation	2	health	hít một hơi thật sâu	khi cần bình tĩnh hoặc khi bác sĩ khám phổi	Take a deep breath and hold it.	Hít một hơi thật sâu rồi nín thở.
+go_on_a_diet	go on a diet	collocation	2	health	ăn kiêng	bắt đầu ăn ít hoặc kiêng một số món để giảm cân	I'm going on a diet next week.	Tuần sau tôi sẽ bắt đầu ăn kiêng.
+work_out.exercise	work out	phrasal_verb	2	health	tập luyện thể lực	tập thể lực, thường ở phòng tập	He works out at the gym three times a week.	Anh ấy tập ở phòng gym ba lần một tuần.

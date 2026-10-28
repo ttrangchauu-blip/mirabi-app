@@ -1,0 +1,102 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+feel	feel	verb	1	emotions	cảm thấy	nói về cảm xúc hoặc trạng thái của bản thân: feel happy, feel sad	I feel happy when I'm with my friends.	Tôi cảm thấy vui khi ở bên bạn bè.		/fiːl/
+feeling	feeling	noun	1	emotions	cảm giác (trong lòng)	điều mình cảm nhận bên trong, như vui, buồn, sợ	I have a good feeling about this trip.	Tôi có cảm giác tốt về chuyến đi này.		/ˈfiːlɪŋ/
+like	like	verb	1	emotions	thích	thấy ai hay thứ gì dễ chịu, hợp ý mình	I like chocolate ice cream.	Tôi thích kem sô-cô-la.		/laɪk/
+hate	hate	verb	1	emotions	ghét	ngược với yêu, rất không thích ai/điều gì	I hate waking up early on Sundays.	Tôi ghét dậy sớm vào Chủ nhật.		/heɪt/
+cry	cry	verb	1	emotions	khóc	chảy nước mắt vì buồn, đau hoặc xúc động	The baby cried all night.	Em bé khóc suốt đêm.		/kraɪ/
+smile	smile	verb	1	emotions	mỉm cười	cười nhẹ không thành tiếng, khi vui hoặc thân thiện	She smiled at me when I came in.	Cô ấy mỉm cười với tôi khi tôi bước vào.		/smaɪl/
+laugh	laugh	verb	1	emotions	cười thành tiếng	cười to vì thấy điều gì buồn cười	Everyone laughed at his funny story.	Mọi người đều bật cười vì câu chuyện vui của anh ấy.		/lɑːf/
+glad	glad	adjective	1	emotions	mừng, vui (vì một việc)	vui vì một tin hay một việc cụ thể: I'm glad (that)...	I'm glad you came to my party.	Mình mừng vì bạn đã đến dự tiệc của mình.		/ɡlæd/
+afraid	afraid	adjective	1	emotions	sợ (điều gì)	thường đi với of, không đứng trước danh từ: be afraid of	My little brother is afraid of the dark.	Em trai tôi sợ bóng tối.	scared	/əˈfreɪd/
+upset.feeling	upset	adjective	1	emotions	buồn bực, phiền lòng	cảm thấy buồn và khó chịu vì chuyện không như ý	She was upset because she lost her phone.	Cô ấy buồn bực vì làm mất điện thoại.		/ʌpˈset/
+hope	hope	verb	1	emotions	hy vọng	mong một điều tốt sẽ xảy ra	I hope you feel better soon.	Mình hy vọng bạn sớm khỏe lại.		/həʊp/
+wish	wish	verb	1	emotions	ước	mong điều khó hoặc không thể xảy ra: I wish...	I wish I could fly.	Ước gì tôi có thể bay.		/wɪʃ/
+miss.person	miss	verb	1	emotions	nhớ (ai, nơi nào)	buồn vì không được ở gần người hay nơi mình yêu quý	I miss my grandmother so much.	Tôi nhớ bà tôi rất nhiều.		/mɪs/
+worry	worry	verb	1	emotions	lo, lo nghĩ (động từ)	hành động lo về ai/việc gì: worry about something	My mum always worries about me.	Mẹ tôi lúc nào cũng lo cho tôi.		/ˈwʌri/
+enjoy	enjoy	verb	1	emotions	thích thú, tận hưởng	cảm thấy vui khi làm việc gì: enjoy doing something	I really enjoyed the film.	Tôi rất thích bộ phim đó.		/ɪnˈdʒɔɪ/
+unhappy	unhappy	adjective	1	emotions	không vui, không hạnh phúc	buồn hoặc không hài lòng trong một thời gian	He was unhappy at his new school.	Cậu ấy không vui ở trường mới.		/ʌnˈhæpi/
+fear	fear	noun	1	emotions	nỗi sợ	cảm giác sợ hãi trước điều nguy hiểm	She has a fear of high places.	Cô ấy có nỗi sợ độ cao.		/fɪə/
+mood	mood	noun	1	emotions	tâm trạng	cảm xúc của mình trong một lúc, có thể tốt hoặc xấu	What kind of mood is he in today?	Hôm nay anh ấy đang có tâm trạng thế nào?		/muːd/
+surprise	surprise	noun	1	emotions	điều bất ngờ	một việc, món quà mà mình không ngờ tới	The party was a big surprise for her.	Bữa tiệc là một điều bất ngờ lớn với cô ấy.		/səˈpraɪz/
+scary	scary	adjective	1	emotions	đáng sợ	nói về thứ làm người khác sợ: phim, câu chuyện, nơi chốn	That film was too scary for me.	Bộ phim đó quá đáng sợ với tôi.	frightening	/ˈskeəri/
+boring	boring	adjective	1	emotions	nhàm chán, tẻ nhạt	nói về thứ làm người khác thấy chán (khác với bored)	The film was so boring that I fell asleep.	Bộ phim chán đến mức tôi ngủ quên.		/ˈbɔːrɪŋ/
+exciting	exciting	adjective	1	emotions	hấp dẫn, gây hào hứng	nói về sự việc làm người khác háo hức (khác với excited)	The football match was very exciting.	Trận bóng đá rất hấp dẫn.		/ɪkˈsaɪtɪŋ/
+interested	interested	adjective	1	emotions	quan tâm, thấy hứng thú	muốn biết thêm về điều gì: interested in	She is interested in music.	Cô ấy quan tâm đến âm nhạc.		/ˈɪntrəstɪd/
+pleased	pleased	adjective	1	emotions	vui lòng, vừa ý	vui vì một điều tốt, thường đi với with hoặc to	The teacher was pleased with our work.	Cô giáo vừa ý với bài làm của chúng tôi.		/pliːzd/
+scream	scream	verb	1	emotions	hét lên, thét	kêu to vì sợ, đau hoặc quá phấn khích	She screamed when she saw the spider.	Cô ấy hét lên khi nhìn thấy con nhện.		/skriːm/
+have_fun	have fun	collocation	1	emotions	vui chơi thỏa thích	có khoảng thời gian vui vẻ khi chơi, đi chơi	We had fun at the beach.	Chúng tôi đã vui chơi thỏa thích ở bãi biển.
+feel_better	feel better	collocation	1	emotions	cảm thấy khá hơn	khi nỗi buồn hoặc cơn mệt đã giảm bớt	A cup of tea will make you feel better.	Một tách trà sẽ giúp bạn cảm thấy khá hơn.
+have_a_bad_day	have a bad day	collocation	1	emotions	gặp một ngày tồi tệ	khi nhiều chuyện không như ý xảy ra trong ngày	I had a bad day at work today.	Hôm nay tôi gặp một ngày tồi tệ ở chỗ làm.
+calm_down	calm down	phrasal_verb	1	emotions	bình tĩnh lại	sau khi đang giận dữ, lo sợ hoặc quá kích động	Calm down and tell me what happened.	Bình tĩnh lại và kể cho tôi chuyện gì đã xảy ra.
+wow	wow	interjection	1	emotions	chà, ồ (thán phục)	thốt lên khi thấy điều gì tuyệt vời hay bất ngờ	Wow, your new room is beautiful!	Chà, phòng mới của bạn đẹp quá!		/waʊ/
+oh_no	oh no	phrase	1	emotions	ôi không	nói khi chợt nhận ra chuyện xấu vừa xảy ra	Oh no, I left my keys at home!	Ôi không, mình để quên chìa khóa ở nhà rồi!
+thats_great	that's great	phrase	1	emotions	tuyệt quá	đáp lại khi nghe một tin vui	You passed the exam? That's great!	Bạn đỗ rồi à? Tuyệt quá!
+dont_worry	don't worry	phrase	1	emotions	đừng lo	nói để an ủi, giúp người khác bớt lo	Don't worry, everything will be fine.	Đừng lo, mọi chuyện sẽ ổn thôi.
+i_cant_wait	I can't wait	phrase	1	emotions	mình nóng lòng quá	nói khi rất háo hức chờ đợi điều gì	We're going to Da Lat tomorrow. I can't wait!	Mai bọn mình đi Đà Lạt. Mình nóng lòng quá!
+happily	happily	adverb	1	emotions	một cách vui vẻ	làm việc gì với tâm trạng vui	The children played happily in the garden.	Bọn trẻ chơi đùa vui vẻ trong vườn.		/ˈhæpɪli/
+joy	joy	noun	2	emotions	niềm vui sướng	cảm giác rất vui, thường dùng trong văn viết	Her face was full of joy.	Gương mặt cô ấy tràn đầy niềm vui sướng.		/dʒɔɪ/
+emotion	emotion	noun	2	emotions	cảm xúc	tên gọi chung cho vui, buồn, giận, sợ...	He doesn't often show his emotions.	Anh ấy ít khi thể hiện cảm xúc.		/ɪˈməʊʃn/
+happiness	happiness	noun	2	emotions	niềm hạnh phúc	danh từ chỉ trạng thái hạnh phúc, vui vẻ lâu dài	Money can't buy happiness.	Tiền không mua được hạnh phúc.		/ˈhæpinəs/
+sadness	sadness	noun	2	emotions	nỗi buồn	danh từ chỉ cảm giác buồn	There was sadness in his eyes.	Có một nỗi buồn trong mắt anh ấy.		/ˈsædnəs/
+anger	anger	noun	2	emotions	sự tức giận	danh từ chỉ cảm giác giận dữ	She couldn't hide her anger.	Cô ấy không thể giấu được sự tức giận.		/ˈæŋɡə/
+laughter	laughter	noun	2	emotions	tiếng cười	âm thanh khi một hay nhiều người cười	The room was full of laughter.	Căn phòng tràn ngập tiếng cười.		/ˈlɑːftə/
+tear.eye	tear	noun	2	emotions	giọt nước mắt	nước chảy ra từ mắt khi khóc, thường dùng số nhiều tears	Tears ran down her face.	Nước mắt lăn dài trên má cô ấy.		/tɪə/
+dislike	dislike	verb	2	emotions	không thích	nhẹ hơn hate, cách nói lịch sự	I dislike noisy places.	Tôi không thích những nơi ồn ào.		/dɪsˈlaɪk/
+scare	scare	verb	2	emotions	làm (ai) sợ, dọa	khiến người khác hoảng sợ	You scared me! I didn't hear you come in.	Bạn làm mình sợ quá! Mình không nghe thấy bạn vào.	frighten	/skeə/
+frightened	frightened	adjective	2	emotions	hoảng sợ	sợ hãi vì điều gì bất ngờ hoặc nguy hiểm	The frightened cat hid under the bed.	Con mèo hoảng sợ trốn dưới gầm giường.	scared	/ˈfraɪtnd/
+hurt.feelings	hurt	adjective	2	emotions	bị tổn thương (tình cảm)	buồn vì lời nói hay việc làm của người khác	She felt hurt when nobody remembered her birthday.	Cô ấy thấy tổn thương khi không ai nhớ sinh nhật mình.		/hɜːt/
+confused	confused	adjective	2	emotions	bối rối (vì không hiểu)	không hiểu chuyện gì đang xảy ra hoặc phải làm gì	I was confused by the teacher's question.	Tôi bối rối trước câu hỏi của thầy giáo.		/kənˈfjuːzd/
+stressed	stressed	adjective	2	emotions	căng thẳng (vì áp lực)	khi có quá nhiều việc, bài vở, lo toan	I feel stressed before exams.	Tôi thấy căng thẳng trước các kỳ thi.	stressed out	/strest/
+relaxed	relaxed	adjective	2	emotions	thư thái, thoải mái	không lo lắng, cảm thấy dễ chịu và nhẹ nhàng	I feel relaxed after a hot bath.	Tôi thấy thư thái sau khi tắm nước nóng.		/rɪˈlækst/
+mad.angry	mad	adjective	2	emotions	tức điên	cách nói thân mật (Anh-Mỹ) cho rất giận: mad at someone	My dad was mad at me for coming home late.	Bố tôi tức điên với tôi vì về nhà muộn.		/mæd/
+annoying	annoying	adjective	2	emotions	gây bực mình, phiền phức	nói về người hay việc làm mình khó chịu	That noise is really annoying.	Tiếng ồn đó thật sự gây bực mình.		/əˈnɔɪɪŋ/
+surprising	surprising	adjective	2	emotions	đáng ngạc nhiên	nói về việc làm người khác bất ngờ	It's surprising that nobody came.	Thật đáng ngạc nhiên là không ai đến cả.		/səˈpraɪzɪŋ/
+disappointing	disappointing	adjective	2	emotions	đáng thất vọng	nói về kết quả, sự việc không tốt như mong đợi	The ending of the book was disappointing.	Phần kết của cuốn sách thật đáng thất vọng.		/ˌdɪsəˈpɔɪntɪŋ/
+relaxing	relaxing	adjective	2	emotions	giúp thư giãn	nói về hoạt động, nơi chốn làm mình thấy thư thái	We had a relaxing weekend in the countryside.	Chúng tôi đã có một cuối tuần thư giãn ở vùng quê.		/rɪˈlæksɪŋ/
+confusing	confusing	adjective	2	emotions	khó hiểu, gây rối trí	nói về thứ làm người khác bối rối	The instructions were really confusing.	Phần hướng dẫn thật sự rất khó hiểu.		/kənˈfjuːzɪŋ/
+upset.verb	upset	verb	2	emotions	làm (ai) buồn lòng	khiến người khác buồn, lo hoặc khó chịu	I didn't mean to upset you.	Mình không cố ý làm bạn buồn lòng.		/ʌpˈset/
+care_about	care about	phrasal_verb	2	emotions	quan tâm, để tâm đến	thấy ai/điều gì quan trọng với mình	He really cares about his family.	Anh ấy thực sự quan tâm đến gia đình.
+feel_like	feel like	collocation	2	emotions	có hứng (làm gì)	muốn làm gì ngay lúc đó: feel like doing something	I don't feel like going out tonight.	Tối nay tôi không có hứng đi chơi.
+feel_sorry_for	feel sorry for	collocation	2	emotions	thấy tội nghiệp cho (ai)	thương một người đang gặp chuyện không may	I feel sorry for the old man who lives alone.	Tôi thấy tội nghiệp cho ông cụ sống một mình.
+feel_terrible	feel terrible	collocation	2	emotions	thấy rất áy náy, thấy tệ	khi mình đã làm điều sai hoặc trong người rất khó chịu	I feel terrible about forgetting your birthday.	Mình thấy rất áy náy vì quên sinh nhật bạn.
+keep_calm	keep calm	collocation	2	emotions	giữ bình tĩnh	cố không hoảng hốt hay nổi nóng trong lúc khó khăn	Try to keep calm and listen to me.	Hãy cố giữ bình tĩnh và nghe tôi nói.
+in_a_good_mood	in a good mood	collocation	2	emotions	đang vui, tâm trạng tốt	nói về tâm trạng của ai trong lúc đó	The boss is in a good mood today.	Hôm nay sếp đang vui.
+in_a_bad_mood	in a bad mood	collocation	2	emotions	đang bực, tâm trạng tệ	nói về tâm trạng của ai trong lúc đó	Don't talk to him, he's in a bad mood.	Đừng nói chuyện với anh ấy, anh ấy đang bực.
+hooray	hooray	interjection	2	emotions	hoan hô	reo lên khi vui mừng, ăn mừng	Hooray! We won the game!	Hoan hô! Chúng ta thắng rồi!	hurray	/huˈreɪ/
+im_so_happy_for_you	I'm so happy for you	phrase	2	emotions	mình mừng cho bạn quá	nói khi bạn bè có tin vui	You got the job? I'm so happy for you!	Bạn được nhận việc rồi à? Mình mừng cho bạn quá!
+im_proud_of_you	I'm proud of you	phrase	2	emotions	mình tự hào về bạn	khen ngợi khi ai đó làm được điều tốt	You did a great job. I'm proud of you!	Bạn làm tốt lắm. Mình tự hào về bạn!
+what_a_pity	what a pity	phrase	2	emotions	tiếc quá	nói khi nghe chuyện đáng tiếc, không như mong muốn	You can't come? What a pity!	Bạn không đến được à? Tiếc quá!	what a shame
+im_sorry_to_hear_that	I'm sorry to hear that	phrase	2	emotions	mình rất tiếc khi nghe vậy	đáp lại khi ai đó kể chuyện buồn	I'm sorry to hear that your dog is sick.	Mình rất tiếc khi biết con chó của bạn bị ốm.
+how_are_you_feeling	how are you feeling	phrase	2	emotions	bạn thấy trong người thế nào	hỏi thăm tâm trạng hoặc sức khỏe của ai	How are you feeling today?	Hôm nay bạn thấy trong người thế nào?
+sadly.manner	sadly	adverb	2	emotions	một cách buồn bã	làm hay nói gì với vẻ buồn	She looked sadly at the empty room.	Cô ấy buồn bã nhìn căn phòng trống.		/ˈsædli/
+cheerfully	cheerfully	adverb	2	emotions	một cách vui tươi	làm gì với vẻ tươi vui, phấn khởi	She cheerfully said hello to everyone.	Cô ấy vui tươi chào mọi người.		/ˈtʃɪəfəli/
+homesick	homesick	adjective	3	emotions	nhớ nhà	buồn vì phải xa nhà, xa gia đình	She felt homesick during her first month abroad.	Cô ấy nhớ nhà trong tháng đầu ở nước ngoài.		/ˈhəʊmsɪk/
+shocked	shocked	adjective	3	emotions	bị sốc, bàng hoàng	rất bất ngờ và buồn vì một chuyện xấu	We were shocked by the news of the accident.	Chúng tôi bàng hoàng trước tin vụ tai nạn.		/ʃɒkt/
+annoyed	annoyed	adjective	3	emotions	bực mình	hơi tức vì chuyện nhỏ gây phiền	I was annoyed because the bus was late again.	Tôi bực mình vì xe buýt lại đến muộn.		/əˈnɔɪd/
+delighted	delighted	adjective	3	emotions	rất vui mừng	vui hơn pleased, thường khi nhận tin tốt: delighted to	We were delighted to hear your good news.	Chúng tôi rất vui mừng khi nghe tin tốt của bạn.		/dɪˈlaɪtɪd/
+amazed	amazed	adjective	3	emotions	kinh ngạc, sửng sốt	rất ngạc nhiên trước điều tuyệt vời hoặc khó tin	I was amazed at how fast she learned English.	Tôi kinh ngạc vì cô ấy học tiếng Anh nhanh đến vậy.		/əˈmeɪzd/
+terrified	terrified	adjective	3	emotions	khiếp sợ	sợ ở mức rất cao: terrified of	He is terrified of big dogs.	Anh ấy khiếp sợ những con chó to.		/ˈterɪfaɪd/
+guilty	guilty	adjective	3	emotions	cảm thấy có lỗi	áy náy vì mình đã làm điều sai: feel guilty	I feel guilty about lying to my mum.	Tôi thấy có lỗi vì đã nói dối mẹ.		/ˈɡɪlti/
+ashamed	ashamed	adjective	3	emotions	hổ thẹn	thấy xấu hổ vì mình đã làm điều sai trái: ashamed of	He was ashamed of what he had done.	Anh ấy hổ thẹn vì những gì mình đã làm.		/əˈʃeɪmd/
+embarrassing	embarrassing	adjective	3	emotions	gây ngượng, đáng xấu hổ	nói về tình huống làm mình ngượng trước người khác	Falling over on stage was so embarrassing.	Bị ngã trên sân khấu thật là ngượng.		/ɪmˈbærəsɪŋ/
+awkward	awkward	adjective	3	emotions	ngượng nghịu, khó xử	khi không biết nói gì hay làm gì cho phải	There was an awkward silence after his question.	Có một khoảng lặng khó xử sau câu hỏi của anh ấy.		/ˈɔːkwəd/
+worrying	worrying	adjective	3	emotions	đáng lo ngại	nói về tình hình, tin tức làm người ta lo	The rise in prices is very worrying.	Việc giá cả tăng lên rất đáng lo ngại.		/ˈwʌriɪŋ/
+shocking	shocking	adjective	3	emotions	gây sốc	nói về tin tức, sự việc làm người ta bàng hoàng	The news about the fire was shocking.	Tin về vụ cháy thật gây sốc.		/ˈʃɒkɪŋ/
+frustrating	frustrating	adjective	3	emotions	gây bực bội, nản lòng	nói về việc mình cố mãi mà không được	It's frustrating when the internet keeps stopping.	Thật bực bội khi mạng cứ bị ngắt liên tục.		/frʌˈstreɪtɪŋ/
+miserable	miserable	adjective	3	emotions	khổ sở, rất buồn	cảm thấy cực kỳ không vui, thường do hoàn cảnh	I felt miserable when I had the flu.	Tôi thấy khổ sở khi bị cúm.		/ˈmɪzrəbl/
+depressed	depressed	adjective	3	emotions	chán nản, suy sụp	buồn trong thời gian dài, không còn muốn làm gì	He felt depressed after losing his job.	Anh ấy suy sụp sau khi mất việc.		/dɪˈprest/
+down.mood	down	adjective	3	emotions	buồn, xuống tinh thần	cách nói thân mật: feel down	I've been feeling a bit down lately.	Dạo này tôi thấy hơi buồn.		/daʊn/
+hopeful	hopeful	adjective	3	emotions	đầy hy vọng	tin rằng điều mình mong sẽ xảy ra	We are hopeful that the weather will be good.	Chúng tôi hy vọng nhiều rằng thời tiết sẽ đẹp.		/ˈhəʊpfl/
+hopeless	hopeless	adjective	3	emotions	vô vọng, hết hy vọng	cảm thấy không còn chút hy vọng nào	After many failures, he felt hopeless.	Sau nhiều lần thất bại, anh ấy cảm thấy vô vọng.		/ˈhəʊpləs/
+motivated	motivated	adjective	3	emotions	có động lực	cảm thấy muốn cố gắng làm việc gì	I feel motivated when my teacher praises me.	Tôi thấy có động lực khi được cô giáo khen.		/ˈməʊtɪveɪtɪd/
+peaceful	peaceful	adjective	3	emotions	bình yên (trong lòng)	cảm giác yên ổn, không lo lắng	I feel peaceful when I walk by the sea.	Tôi thấy lòng bình yên khi đi dạo bên biển.		/ˈpiːsfl/
+satisfied	satisfied	adjective	3	emotions	hài lòng (vì đạt yêu cầu)	thấy kết quả đã đủ tốt như mong muốn: satisfied with	Are you satisfied with your exam results?	Bạn có hài lòng với kết quả thi không?		/ˈsætɪsfaɪd/
+uncomfortable	uncomfortable	adjective	3	emotions	không thoải mái, ngại	thấy ngại, không yên khi ở trong một hoàn cảnh nào đó	I feel uncomfortable when people stare at me.	Tôi thấy không thoải mái khi người ta nhìn chằm chằm vào mình.		/ʌnˈkʌmftəbl/
+touched	touched	adjective	3	emotions	cảm động (vì lòng tốt)	khi ai đó làm điều tử tế, quan tâm đến mình	I was touched by her kind letter.	Tôi rất cảm động vì lá thư ân cần của cô ấy.		/tʌtʃt/
+emotional	emotional	adjective	3	emotions	dễ xúc động, cảm xúc dâng trào	khi cảm xúc mạnh lên, khó kìm lại, có thể khóc	She got very emotional at her daughter's wedding.	Bà ấy rất xúc động trong đám cưới của con gái.		/ɪˈməʊʃənl/
+tense	tense	adjective	3	emotions	căng thẳng (người, bầu không khí)	lo lắng không thể thư giãn; cũng nói về không khí: a tense moment	The last minutes of the match were very tense.	Những phút cuối của trận đấu rất căng thẳng.		/tens/
+disgusted	disgusted	adjective	3	emotions	ghê tởm, kinh tởm	cảm giác rất khó chịu trước thứ bẩn thỉu hoặc hành vi xấu	I was disgusted by the smell of the rubbish.	Tôi thấy kinh tởm vì mùi rác.		/dɪsˈɡʌstɪd/
+in_tears	in tears	collocation	3	emotions	đang khóc, rơm rớm nước mắt	nói về người đang khóc lúc đó	She left the room in tears.	Cô ấy rời khỏi phòng trong nước mắt.
+panic	panic	verb	3	emotions	hoảng loạn	sợ đến mức không còn suy nghĩ bình tĩnh được	Don't panic! The fire exit is over there.	Đừng hoảng! Lối thoát hiểm ở đằng kia.		/ˈpænɪk/
+frown	frown	verb	3	emotions	cau mày	nhíu mày khi không vui, khó chịu hoặc đang nghĩ	She frowned when she read the message.	Cô ấy cau mày khi đọc tin nhắn.		/fraʊn/
+sigh	sigh	verb	3	emotions	thở dài	thở ra một hơi dài khi buồn, mệt hoặc nhẹ nhõm	He sighed and closed his book.	Anh ấy thở dài rồi gấp sách lại.		/saɪ/

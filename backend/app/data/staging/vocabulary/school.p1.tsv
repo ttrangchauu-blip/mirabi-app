@@ -1,0 +1,108 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+school	school	noun	1	school	trường học	nơi trẻ em và học sinh đến học mỗi ngày	My little brother walks to school every morning.	Em trai tôi đi bộ đến trường mỗi sáng.		/skuːl/
+class.group	class	noun	1	school	lớp (nhóm học sinh)	nhóm học sinh học cùng nhau với một giáo viên	There are thirty students in our class.	Lớp chúng tôi có ba mươi học sinh.		/klɑːs/
+learn	learn	verb	1	school	học, học được	tiếp thu một kiến thức hay kỹ năng mới	I want to learn how to swim this summer.	Tôi muốn học bơi vào mùa hè này.		/lɜːn/
+study	study	verb	1	school	học bài, học tập	ngồi đọc sách, làm bài để nắm kiến thức (khác learn là học được)	She studies in the library every evening.	Tối nào cô ấy cũng học bài ở thư viện.		/ˈstʌdi/
+teach	teach	verb	1	school	dạy	truyền kiến thức hoặc kỹ năng cho người khác	Mr Nam teaches English at my school.	Thầy Nam dạy tiếng Anh ở trường tôi.		/tiːtʃ/
+read	read	verb	1	school	đọc	nhìn chữ và hiểu nội dung sách, bài	Please read the first page.	Hãy đọc trang đầu tiên.		/riːd/
+write	write	verb	1	school	viết	dùng bút hoặc bàn phím để tạo ra chữ	Write your name at the top of the paper.	Hãy viết tên em ở đầu tờ giấy.		/raɪt/
+test.exam	test	noun	1	school	bài kiểm tra	bài làm ngắn để kiểm tra kiến thức trên lớp, nhỏ hơn kỳ thi	We have a maths test on Monday.	Thứ Hai chúng tôi có bài kiểm tra toán.		/test/
+word	word	noun	1	school	từ (vựng)	đơn vị nhỏ của ngôn ngữ, ví dụ khi học từ mới	How do you say this word?	Từ này đọc thế nào?		/wɜːd/
+page	page	noun	1	school	trang (sách, vở)	một mặt giấy trong sách hoặc vở	Open your books at page ten.	Các em mở sách trang mười.		/peɪdʒ/
+paper.sheet	paper	noun	1	school	giấy	vật liệu mỏng dùng để viết, in, vẽ	Take a piece of paper and a pen.	Lấy một tờ giấy và một cây bút.		/ˈpeɪpə/
+textbook	textbook	noun	1	school	sách giáo khoa	sách dùng để học một môn ở trường	Don't forget your English textbook.	Đừng quên sách giáo khoa tiếng Anh nhé.		/ˈtekstbʊk/
+dictionary	dictionary	noun	1	school	từ điển	sách hoặc ứng dụng giải nghĩa từ	You can find that word in a dictionary.	Bạn có thể tìm từ đó trong từ điển.		/ˈdɪkʃənri/
+classmate	classmate	noun	1	school	bạn cùng lớp	người học cùng lớp với mình	Lan is my classmate and my best friend.	Lan là bạn cùng lớp và là bạn thân nhất của tôi.		/ˈklɑːsmeɪt/
+maths	maths	noun	1	school	môn toán	môn học về con số và phép tính	Maths is my favourite subject.	Toán là môn học yêu thích của tôi.	math|mathematics	/mæθs/
+english	English	noun	1	school	tiếng Anh, môn tiếng Anh	tên ngôn ngữ, hoặc môn học ở trường	We have English three times a week.	Chúng tôi học tiếng Anh ba buổi một tuần.		/ˈɪŋɡlɪʃ/
+history.subject	history	noun	1	school	môn lịch sử	môn học về những việc đã xảy ra trong quá khứ	We have history on Tuesday.	Thứ Ba chúng tôi có tiết lịch sử.		/ˈhɪstri/
+alphabet	alphabet	noun	1	school	bảng chữ cái	tất cả chữ cái của một ngôn ngữ theo thứ tự	The English alphabet has 26 letters.	Bảng chữ cái tiếng Anh có 26 chữ cái.		/ˈælfəbet/
+letter.alphabet	letter	noun	1	school	chữ cái	một ký tự như A, B, C trong bảng chữ cái	The word cat has three letters.	Từ cat có ba chữ cái.		/ˈletə/
+sentence.grammar	sentence	noun	1	school	câu (văn)	một nhóm từ có nghĩa trọn vẹn, viết hoa ở đầu câu	Write a sentence with the word happy.	Hãy viết một câu có từ happy.		/ˈsentəns/
+glue	glue	noun	1	school	keo dán, hồ dán	chất dùng để dán giấy hoặc đồ vật	I need some glue to stick the picture.	Tôi cần ít keo để dán bức tranh.		/ɡluː/
+scissors	scissors	noun	1	school	cái kéo	dụng cụ có hai lưỡi để cắt giấy	Cut the paper with your scissors.	Hãy cắt tờ giấy bằng kéo.		/ˈsɪzəz/
+crayon	crayon	noun	1	school	bút sáp màu	bút màu bằng sáp trẻ em dùng để tô vẽ	The children are drawing with crayons.	Bọn trẻ đang vẽ bằng bút sáp màu.		/ˈkreɪɒn/
+playground	playground	noun	1	school	sân chơi	khu vui chơi ngoài trời ở trường hoặc công viên	The kids play football in the playground.	Bọn trẻ chơi bóng đá ở sân chơi.		/ˈpleɪɡraʊnd/
+break.recess	break	noun	1	school	giờ ra chơi	thời gian nghỉ ngắn giữa các tiết học	We eat snacks at break.	Chúng tôi ăn quà vặt vào giờ ra chơi.	recess	/breɪk/
+count	count	verb	1	school	đếm	nói các số theo thứ tự để biết có bao nhiêu	Can you count from one to twenty in English?	Em đếm từ một đến hai mươi bằng tiếng Anh được không?		/kaʊnt/
+add.maths	add	verb	1	school	cộng (phép tính)	phép toán gộp các số lại với nhau	If you add two and three, you get five.	Nếu cộng hai với ba, bạn được năm.		/æd/
+university	university	noun	1	school	trường đại học	nơi học sau phổ thông để lấy bằng cử nhân	My sister goes to university in Hanoi.	Chị tôi học đại học ở Hà Nội.		/ˌjuːnɪˈvɜːsəti/
+pencil_case	pencil case	collocation	1	school	hộp bút	hộp hoặc túi nhỏ đựng bút, thước, tẩy	There is a ruler in my pencil case.	Có một cây thước trong hộp bút của tôi.
+primary_school	primary school	collocation	1	school	trường tiểu học	trường cho trẻ khoảng 6 đến 11 tuổi	My son is in his last year of primary school.	Con trai tôi đang học năm cuối tiểu học.	elementary school
+high_school	high school	collocation	1	school	trường trung học phổ thông	trường cấp ba, học trước khi vào đại học	She finished high school last year.	Cô ấy học xong cấp ba năm ngoái.
+go_to_school	go to school	collocation	1	school	đi học	đến trường để học như mọi ngày	Children go to school from Monday to Friday.	Trẻ em đi học từ thứ Hai đến thứ Sáu.
+school_uniform	school uniform	collocation	1	school	đồng phục học sinh	quần áo giống nhau mà học sinh phải mặc	Our school uniform is a white shirt and blue trousers.	Đồng phục của chúng tôi là áo sơ mi trắng và quần xanh.
+school_bus	school bus	collocation	1	school	xe buýt trường học	xe đưa đón học sinh đi học và về nhà	The school bus comes at seven o'clock.	Xe buýt trường học đến lúc bảy giờ.
+raise_your_hand	raise your hand	collocation	1	school	giơ tay (phát biểu)	trong lớp, khi muốn nói hoặc trả lời	Raise your hand if you know the answer.	Giơ tay lên nếu em biết câu trả lời.	put up your hand|put your hand up
+ask_a_question	ask a question	collocation	1	school	đặt câu hỏi	hỏi điều mình chưa hiểu, nhất là trong giờ học	Don't be shy to ask a question.	Đừng ngại đặt câu hỏi nhé.
+good_at	good at	collocation	1	school	giỏi (môn gì, việc gì)	nói ai đó học tốt một môn hay làm tốt việc gì	Tom is good at maths but bad at English.	Tom giỏi toán nhưng kém tiếng Anh.
+do_homework	do homework	collocation	1	school	làm bài tập về nhà	làm bài giáo viên giao để làm ở nhà	I do my homework after dinner.	Tôi làm bài tập về nhà sau bữa tối.
+in_class	in class	collocation	1	school	trong giờ học	khi đang ở trong lớp và giáo viên đang dạy	Please don't use your phone in class.	Đừng dùng điện thoại trong giờ học nhé.
+colour_in	colour in	phrasal_verb	1	school	tô màu (hình vẽ sẵn)	tô màu kín bên trong một hình vẽ có sẵn	Colour in the picture of the cat.	Hãy tô màu bức tranh con mèo.	color in
+pupil	pupil	noun	2	school	học sinh (nhỏ tuổi)	cách nói Anh chỉ trẻ em đang đi học, nhất là cấp một	The pupils are waiting outside the classroom.	Các em học sinh đang đợi bên ngoài lớp học.		/ˈpjuːpl/
+term.semester	term	noun	2	school	học kỳ (năm học ba kỳ)	ở Anh, năm học chia thành ba kỳ, mỗi kỳ là một term	The new term starts in September.	Học kỳ mới bắt đầu vào tháng Chín.		/tɜːm/
+semester	semester	noun	2	school	học kỳ (năm học hai kỳ)	năm học chia thành hai kỳ, phổ biến ở đại học	The second semester ends in May.	Học kỳ hai kết thúc vào tháng Năm.		/sɪˈmestə/
+geography	geography	noun	2	school	môn địa lý	môn học về đất đai, sông núi và các nước	In geography we learn about rivers and mountains.	Trong giờ địa lý chúng tôi học về sông và núi.		/dʒiˈɒɡrəfi/
+mark.score	mark	noun	2	school	điểm (bài làm)	số điểm giáo viên chấm cho bài kiểm tra, bài tập	She got a good mark in the English test.	Cô ấy được điểm cao trong bài kiểm tra tiếng Anh.		/mɑːk/
+grade.year	grade	noun	2	school	khối lớp	năm học của học sinh, ví dụ lớp 5, lớp 9	My daughter is in grade five.	Con gái tôi đang học lớp năm.	year	/ɡreɪd/
+whiteboard	whiteboard	noun	2	school	bảng trắng	bảng viết bằng bút dạ, khác với bảng đen viết phấn	The teacher wrote the new words on the whiteboard.	Cô giáo viết từ mới lên bảng trắng.		/ˈwaɪtbɔːd/
+chalk	chalk	noun	2	school	phấn (viết bảng)	thỏi trắng dùng để viết lên bảng đen	There is no chalk left for the board.	Không còn phấn để viết bảng nữa.		/tʃɔːk/
+calculator	calculator	noun	2	school	máy tính cầm tay	máy nhỏ dùng để làm phép tính	You can use a calculator in this test.	Các em được dùng máy tính cầm tay trong bài kiểm tra này.		/ˈkælkjuleɪtə/
+sharpener	sharpener	noun	2	school	cái gọt bút chì	dụng cụ nhỏ để gọt nhọn bút chì	Can I borrow your sharpener?	Cho mình mượn cái gọt bút chì nhé?	pencil sharpener	/ˈʃɑːpənə/
+practise	practise	verb	2	school	luyện tập	làm đi làm lại để giỏi hơn một kỹ năng	You should practise speaking English every day.	Bạn nên luyện nói tiếng Anh mỗi ngày.	practice	/ˈpræktɪs/
+absent	absent	adjective	2	school	vắng mặt	không có mặt ở lớp khi điểm danh	Three students are absent today.	Hôm nay có ba học sinh vắng mặt.		/ˈæbsənt/
+present.attendance	present	adjective	2	school	có mặt	đang ở lớp khi điểm danh, trái với vắng mặt	Everyone is present today.	Hôm nay mọi người đều có mặt.		/ˈpreznt/
+kindergarten	kindergarten	noun	2	school	trường mẫu giáo	nơi trẻ nhỏ học và chơi trước khi vào lớp một	My son goes to kindergarten near our house.	Con trai tôi đi học mẫu giáo gần nhà.	nursery school	/ˈkɪndəɡɑːtn/
+essay	essay	noun	2	school	bài luận, bài văn	bài viết ngắn trình bày ý kiến về một chủ đề	Write an essay about your hometown.	Hãy viết một bài luận về quê hương em.		/ˈeseɪ/
+exercise.task	exercise	noun	2	school	bài tập (trong sách)	câu hỏi, bài luyện tập trong sách giáo khoa	Do exercises one and two on page twelve.	Làm bài tập một và hai ở trang mười hai.		/ˈeksəsaɪz/
+copy.write	copy	verb	2	school	chép lại	chép chữ hoặc bài từ bảng, từ sách vào vở	Copy these sentences into your notebook.	Chép những câu này vào vở.		/ˈkɒpi/
+cheat	cheat	verb	2	school	gian lận (khi thi)	nhìn bài người khác hoặc dùng tài liệu cấm khi làm bài	He was caught cheating in the exam.	Cậu ấy bị bắt gặp gian lận trong kỳ thi.		/tʃiːt/
+quiz	quiz	noun	2	school	bài kiểm tra ngắn	vài câu hỏi nhanh để kiểm tra bài cũ	We have a short quiz every Friday.	Thứ Sáu nào chúng tôi cũng có bài kiểm tra ngắn.		/kwɪz/
+canteen	canteen	noun	2	school	căng tin	nơi bán đồ ăn uống trong trường	Let's have lunch in the school canteen.	Mình ăn trưa ở căng tin trường nhé.		/kænˈtiːn/
+schoolyard	schoolyard	noun	2	school	sân trường	khoảng sân rộng bên trong trường học	The students are waiting in the schoolyard.	Học sinh đang đợi ở sân trường.		/ˈskuːljɑːd/
+correct.fix	correct	verb	2	school	chữa, sửa (lỗi)	giáo viên sửa lỗi sai trong bài làm	The teacher corrects our homework every day.	Cô giáo chữa bài tập về nhà của chúng tôi mỗi ngày.		/kəˈrekt/
+topic	topic	noun	2	school	chủ đề	vấn đề chính của bài học, bài viết hay cuộc nói chuyện	Today's topic is food.	Chủ đề hôm nay là đồ ăn.		/ˈtɒpɪk/
+project.school	project	noun	2	school	bài tập dự án	bài tập lớn, thường làm theo nhóm trong vài tuần	Our group is doing a project about our town.	Nhóm chúng tôi đang làm dự án về thị trấn của mình.		/ˈprɒdʒekt/
+grammar	grammar	noun	2	school	ngữ pháp	các quy tắc ghép từ thành câu	English grammar is not easy.	Ngữ pháp tiếng Anh không dễ.		/ˈɡræmə/
+vocabulary	vocabulary	noun	2	school	từ vựng	tất cả các từ của một ngôn ngữ mà mình biết hoặc học	Reading books helps you learn new vocabulary.	Đọc sách giúp bạn học thêm từ vựng mới.		/vəˈkæbjələri/
+pronounce	pronounce	verb	2	school	phát âm	nói âm của một từ cho đúng	How do you pronounce this word?	Từ này phát âm thế nào?		/prəˈnaʊns/
+meaning	meaning	noun	2	school	nghĩa (của từ)	điều mà một từ hay một câu muốn nói	What is the meaning of this word?	Nghĩa của từ này là gì?		/ˈmiːnɪŋ/
+translate	translate	verb	2	school	dịch (sang ngôn ngữ khác)	chuyển từ ngôn ngữ này sang ngôn ngữ khác	Translate this sentence into Vietnamese.	Hãy dịch câu này sang tiếng Việt.		/trænzˈleɪt/
+paragraph	paragraph	noun	2	school	đoạn văn	phần bài viết gồm vài câu, bắt đầu ở dòng mới	Read the first paragraph and answer the questions.	Đọc đoạn văn đầu tiên và trả lời câu hỏi.		/ˈpærəɡrɑːf/
+highlighter	highlighter	noun	2	school	bút dạ quang	bút màu sáng để tô lên chữ quan trọng	I use a yellow highlighter for key words.	Tôi dùng bút dạ quang màu vàng cho các từ khóa.		/ˈhaɪlaɪtə/
+marker	marker	noun	2	school	bút dạ, bút lông	bút mực to dùng viết lên bảng trắng hoặc giấy	This marker has no ink left.	Cây bút dạ này hết mực rồi.		/ˈmɑːkə/
+learner	learner	noun	2	school	người học	người đang học một điều gì, ví dụ một ngoại ngữ	This book is for learners of English.	Cuốn sách này dành cho người học tiếng Anh.		/ˈlɜːnə/
+worksheet	worksheet	noun	2	school	phiếu bài tập	tờ giấy có bài tập để học sinh làm	Finish the worksheet before the bell rings.	Làm xong phiếu bài tập trước khi chuông reo.		/ˈwɜːkʃiːt/
+flashcard	flashcard	noun	2	school	thẻ học từ	thẻ nhỏ có từ ở một mặt và nghĩa ở mặt kia	I learn new words with flashcards.	Tôi học từ mới bằng thẻ học từ.		/ˈflæʃkɑːd/
+underline	underline	verb	2	school	gạch chân	kẻ một đường dưới chữ để đánh dấu	Underline the verbs in each sentence.	Gạch chân các động từ trong mỗi câu.		/ˌʌndəˈlaɪn/
+beginner	beginner	noun	2	school	người mới học	người mới bắt đầu học một môn hay kỹ năng	This class is for beginners.	Lớp này dành cho người mới học.		/bɪˈɡɪnə/
+correctly	correctly	adverb	2	school	(làm, trả lời) đúng	theo cách đúng, không có lỗi	She answered all the questions correctly.	Cô ấy trả lời đúng tất cả các câu hỏi.		/kəˈrektli/
+college	college	noun	2	school	trường cao đẳng	nơi học sau phổ thông; ở Mỹ còn dùng để chỉ đại học	He wants to study art at college.	Cậu ấy muốn học mỹ thuật ở trường cao đẳng.		/ˈkɒlɪdʒ/
+education	education	noun	2	school	giáo dục, việc học hành	quá trình dạy và học ở trường	Every child has the right to an education.	Trẻ em nào cũng có quyền được học hành.		/ˌedʒuˈkeɪʃn/
+school_year	school year	collocation	2	school	năm học	thời gian từ khai giảng đến khi kết thúc năm học	The school year starts in September in Vietnam.	Ở Việt Nam, năm học bắt đầu vào tháng Chín.	academic year
+physical_education	physical education	collocation	2	school	môn thể dục	môn học vận động, chơi thể thao ở trường	We play basketball in physical education.	Chúng tôi chơi bóng rổ trong giờ thể dục.	PE
+foreign_language	foreign language	collocation	2	school	ngoại ngữ	ngôn ngữ của nước khác mà mình học	Do you speak any foreign languages?	Bạn có nói được ngoại ngữ nào không?
+head_teacher	head teacher	collocation	2	school	hiệu trưởng (trường phổ thông)	người đứng đầu một trường học	The head teacher gave a speech on the first day.	Thầy hiệu trưởng đã phát biểu vào ngày đầu tiên.	headteacher|principal|headmaster|headmistress
+exercise_book	exercise book	collocation	2	school	vở bài tập	quyển vở mỏng để làm bài ở trường	Write the answers in your exercise book.	Viết câu trả lời vào vở bài tập.
+hand_in	hand in	phrasal_verb	2	school	nộp (bài cho giáo viên)	đưa bài làm cho giáo viên chấm	Please hand in your homework on Friday.	Hãy nộp bài tập về nhà vào thứ Sáu.	turn in
+secondary_school	secondary school	collocation	2	school	trường trung học	trường cho học sinh khoảng 11 đến 18 tuổi	She teaches maths at a secondary school.	Cô ấy dạy toán ở một trường trung học.
+look_up	look up	phrasal_verb	2	school	tra (từ, thông tin)	tìm nghĩa của từ trong từ điển hoặc trên mạng	If you don't know a word, look it up.	Nếu không biết một từ, hãy tra nó.
+pay_attention	pay attention	collocation	2	school	chú ý, tập trung nghe	để ý kỹ điều đang được nói hoặc dạy	Please pay attention to the teacher.	Hãy chú ý nghe cô giáo.
+make_a_mistake	make a mistake	collocation	2	school	mắc lỗi	làm hoặc nói sai điều gì đó	Don't worry if you make a mistake.	Đừng lo nếu bạn mắc lỗi.
+write_down	write down	phrasal_verb	2	school	ghi lại, viết ra	viết thông tin ra giấy để khỏi quên	Write down the new words in your notebook.	Ghi lại các từ mới vào vở.
+fill_in	fill in	phrasal_verb	2	school	điền vào (chỗ trống)	viết từ còn thiếu vào chỗ trống hoặc vào mẫu đơn	Fill in the gaps with the correct words.	Điền từ đúng vào chỗ trống.
+class_monitor	class monitor	collocation	2	school	lớp trưởng	học sinh được chọn để quản lý và giúp đỡ lớp	Mai is the class monitor this year.	Năm nay Mai là lớp trưởng.	class president
+study_hard	study hard	collocation	2	school	học chăm chỉ	học nhiều và nghiêm túc	You need to study hard to pass the exam.	Bạn cần học chăm chỉ để thi đỗ.
+get_good_marks	get good marks	collocation	2	school	đạt điểm cao	có điểm tốt trong bài kiểm tra, bài thi	He always gets good marks in English.	Cậu ấy luôn đạt điểm cao môn tiếng Anh.	get good grades
+field_trip	field trip	collocation	2	school	chuyến đi thực tế	buổi học bên ngoài trường, ví dụ đến bảo tàng	Our class went on a field trip to the museum.	Lớp chúng tôi đi thực tế ở bảo tàng.	school trip
+sports_day	sports day	collocation	2	school	ngày hội thể thao	ngày học sinh thi chạy, nhảy và chơi thể thao ở trường	Parents can watch the races on sports day.	Phụ huynh có thể xem các cuộc đua vào ngày hội thể thao.
+favourite_subject	favourite subject	collocation	2	school	môn học yêu thích	môn mình thích học nhất	What is your favourite subject?	Môn học yêu thích của bạn là gì?	favorite subject
+take_a_test	take a test	collocation	2	school	làm bài kiểm tra	ngồi làm bài kiểm tra trên lớp	We will take a test at the end of the unit.	Chúng ta sẽ làm bài kiểm tra vào cuối bài học.	do a test
+study_for_an_exam	study for an exam	collocation	2	school	ôn thi	học bài để chuẩn bị cho một kỳ thi	She is studying for an exam tonight.	Tối nay cô ấy ôn thi.	revise for an exam
+take_an_exam	take an exam	collocation	2	school	đi thi, dự thi	làm bài trong một kỳ thi chính thức	I will take an exam in English next month.	Tháng sau tôi sẽ thi tiếng Anh.	sit an exam
+go_to_university	go to university	collocation	2	school	học đại học	trở thành sinh viên một trường đại học	She wants to go to university in Australia.	Cô ấy muốn học đại học ở Úc.	go to college
+coloured_pencil	coloured pencil	collocation	1	school	bút chì màu	bút chì có ruột màu dùng để tô vẽ	I have twelve coloured pencils in my bag.	Tôi có mười hai cây bút chì màu trong cặp.	colored pencil|colour pencil|color pencil	
+plus	plus	preposition	1	school	cộng (khi đọc phép tính)	dùng khi đọc phép cộng, ví dụ 2 + 3	Two plus three is five.	Hai cộng ba bằng năm.		/plʌs/
+minus	minus	preposition	1	school	trừ (khi đọc phép tính)	dùng khi đọc phép trừ, ví dụ 10 - 4	Ten minus four is six.	Mười trừ bốn bằng sáu.		/ˈmaɪnəs/
+answer_the_question	answer the question	collocation	1	school	trả lời câu hỏi	nói hoặc viết đáp án cho câu được hỏi	Read the text and answer the questions.	Đọc bài và trả lời các câu hỏi.	answer the questions	
+school_day	school day	collocation	1	school	ngày đi học	một ngày học bình thường ở trường	The school day starts at seven thirty.	Ngày học bắt đầu lúc bảy giờ ba mươi.		

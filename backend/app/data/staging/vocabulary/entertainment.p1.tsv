@@ -1,0 +1,86 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+film.movie	film	noun	1	entertainment	bộ phim	tác phẩm điện ảnh xem ở rạp, trên TV hoặc mạng	We watched a great film last night.	Tối qua chúng tôi đã xem một bộ phim rất hay.	movie	/fɪlm/
+music	music	noun	1	entertainment	âm nhạc	những bài hát, bản nhạc để nghe, hát, nhảy theo	I listen to music when I study.	Tôi nghe nhạc khi học bài.		/ˈmjuːzɪk/
+song	song	noun	1	entertainment	bài hát	một bản nhạc có lời để hát	This is my favourite song.	Đây là bài hát tôi thích nhất.		/sɒŋ/
+singer	singer	noun	1	entertainment	ca sĩ	người hát, nhất là người hát chuyên nghiệp	She wants to be a famous singer.	Cô ấy muốn trở thành một ca sĩ nổi tiếng.		/ˈsɪŋə/
+sing	sing	verb	1	entertainment	hát	dùng giọng để hát một bài hát	My sister sings in the shower.	Chị tôi hát trong lúc tắm.		/sɪŋ/
+dance	dance	verb	1	entertainment	nhảy, khiêu vũ	di chuyển cơ thể theo nhạc	Everyone danced at the party.	Mọi người đều nhảy ở bữa tiệc.		/dɑːns/
+play.game	play	verb	1	entertainment	chơi (trò chơi, game)	tham gia một trò chơi để giải trí	Do you want to play a game with us?	Bạn có muốn chơi một trò chơi với chúng mình không?		/pleɪ/
+play.instrument	play	verb	1	entertainment	đánh, chơi (đàn, nhạc cụ)	dùng một nhạc cụ để tạo ra âm nhạc	Can you play the piano?	Bạn có biết chơi đàn piano không?		/pleɪ/
+cinema	cinema	noun	1	entertainment	rạp chiếu phim	nơi có màn hình lớn để xem phim cùng nhiều người	There is a new cinema near my house.	Có một rạp chiếu phim mới gần nhà tôi.	movie theater|movie theatre	/ˈsɪnəmə/
+actor	actor	noun	1	entertainment	diễn viên	người đóng vai trong phim, kịch	Who is your favourite actor?	Diễn viên bạn thích nhất là ai?		/ˈæktə/
+fan.supporter	fan	noun	1	entertainment	người hâm mộ	người rất thích một ca sĩ, ban nhạc, bộ phim	The singer waved to her fans.	Ca sĩ vẫy tay chào người hâm mộ.		/fæn/
+star.celebrity	star	noun	1	entertainment	ngôi sao (người nổi tiếng)	diễn viên, ca sĩ rất nổi tiếng	She is a big star in Korea.	Cô ấy là một ngôi sao lớn ở Hàn Quốc.		/stɑː/
+show.event	show	noun	1	entertainment	buổi biểu diễn, chương trình giải trí	màn trình diễn ca nhạc, ảo thuật hay chương trình vui trên TV	The magic show starts at seven.	Buổi biểu diễn ảo thuật bắt đầu lúc bảy giờ.		/ʃəʊ/
+party.celebration	party	noun	1	entertainment	bữa tiệc	buổi gặp mặt có ăn uống, âm nhạc, vui chơi	Are you coming to my party on Saturday?	Thứ Bảy bạn có đến bữa tiệc của mình không?		/ˈpɑːti/
+cartoon	cartoon	noun	1	entertainment	phim hoạt hình	phim vẽ, thường dành cho trẻ em	My little brother loves cartoons.	Em trai tôi rất thích phim hoạt hình.		/kɑːˈtuːn/
+hobby	hobby	noun	1	entertainment	sở thích	việc mình thích làm lúc rảnh rỗi	My hobby is taking photos.	Sở thích của tôi là chụp ảnh.		/ˈhɒbi/
+toy	toy	noun	1	entertainment	đồ chơi	vật để trẻ em chơi	The baby is playing with a toy car.	Em bé đang chơi với chiếc ô tô đồ chơi.		/tɔɪ/
+doll	doll	noun	1	entertainment	búp bê	đồ chơi hình người nhỏ	She has a doll with long hair.	Cô bé có một con búp bê tóc dài.		/dɒl/
+teddy_bear	teddy bear	collocation	1	entertainment	gấu bông	đồ chơi mềm hình con gấu	He sleeps with his teddy bear.	Cậu bé ngủ cùng con gấu bông.
+kite	kite	noun	1	entertainment	con diều	đồ chơi làm bằng giấy, vải, thả bay trong gió	The kite flew high in the sky.	Con diều bay cao trên trời.		/kaɪt/
+puzzle	puzzle	noun	1	entertainment	trò chơi giải đố, câu đố	trò chơi phải suy nghĩ để tìm lời giải	This puzzle is too hard for me.	Trò giải đố này khó quá với tôi.		/ˈpʌzl/
+card.game	card	noun	1	entertainment	lá bài	một tấm trong bộ bài dùng để chơi	Each player gets five cards.	Mỗi người chơi được năm lá bài.		/kɑːd/
+guitar	guitar	noun	1	entertainment	đàn ghi-ta	nhạc cụ có dây, chơi bằng ngón tay	He bought a new guitar.	Anh ấy đã mua một cây đàn ghi-ta mới.		/ɡɪˈtɑː/
+piano	piano	noun	1	entertainment	đàn piano, dương cầm	nhạc cụ lớn có các phím đen trắng	She practises the piano every day.	Cô ấy tập đàn piano mỗi ngày.		/piˈænəʊ/
+joke	joke	noun	1	entertainment	câu chuyện cười, câu đùa	điều nói ra để làm người khác cười	His jokes always make me laugh.	Những câu đùa của anh ấy luôn làm tôi cười.		/dʒəʊk/
+enjoy	enjoy	verb	1	entertainment	thưởng thức, thấy thích	cảm thấy vui khi xem, nghe hay làm điều gì	Did you enjoy the concert?	Bạn có thích buổi hòa nhạc không?		/ɪnˈdʒɔɪ/
+clap	clap	verb	1	entertainment	vỗ tay	đập hai bàn tay vào nhau, thường sau buổi diễn	The audience clapped at the end of the song.	Khán giả vỗ tay khi bài hát kết thúc.		/klæp/
+fun	fun	adjective	1	entertainment	vui, thú vị	nói về hoạt động, buổi đi chơi làm mình thấy vui	The trip to the water park was really fun.	Chuyến đi công viên nước thật sự rất vui.		/fʌn/
+funny	funny	adjective	1	entertainment	buồn cười, hài hước	nói về điều làm người ta bật cười	The film was so funny.	Bộ phim buồn cười quá.		/ˈfʌni/
+boring	boring	adjective	1	entertainment	chán, tẻ nhạt	nói về phim, chương trình không có gì hấp dẫn	The story was boring, so I fell asleep.	Câu chuyện chán quá nên tôi ngủ quên.		/ˈbɔːrɪŋ/
+exciting	exciting	adjective	1	entertainment	thú vị, hấp dẫn, sôi động	nói về phim, trò chơi làm mình hào hứng	The game was very exciting.	Trò chơi rất hấp dẫn.		/ɪkˈsaɪtɪŋ/
+scary	scary	adjective	1	entertainment	đáng sợ	nói về phim, câu chuyện làm mình thấy sợ	I don't like scary films.	Tôi không thích phim đáng sợ.		/ˈskeəri/
+famous	famous	adjective	1	entertainment	nổi tiếng	được rất nhiều người biết đến	He is a famous actor.	Anh ấy là một diễn viên nổi tiếng.		/ˈfeɪməs/
+popular	popular	adjective	1	entertainment	được nhiều người yêu thích	nói về bài hát, phim, trò chơi có nhiều người thích	This game is very popular with teenagers.	Trò chơi này rất được thanh thiếu niên yêu thích.		/ˈpɒpjələ/
+favourite	favourite	adjective	1	entertainment	yêu thích nhất	nói về thứ mình thích hơn tất cả	What is your favourite film?	Bộ phim bạn yêu thích nhất là gì?	favorite	/ˈfeɪvərɪt/
+loud	loud	adjective	1	entertainment	to, ầm ĩ (âm thanh)	nói về nhạc, tiếng hát phát ra rất to	The music at the party was too loud.	Nhạc ở bữa tiệc to quá.		/laʊd/
+listen_to_music	listen to music	collocation	1	entertainment	nghe nhạc	mở bài hát để nghe, thư giãn	I like to listen to music on the bus.	Tôi thích nghe nhạc trên xe buýt.
+watch_a_film	watch a film	collocation	1	entertainment	xem phim	xem một bộ phim ở nhà hay ở rạp	Let's watch a film tonight.	Tối nay mình xem phim nhé.	watch a movie
+go_to_the_cinema	go to the cinema	collocation	1	entertainment	đi xem phim ở rạp	ra rạp để xem phim	We go to the cinema every Friday.	Chúng tôi đi xem phim ở rạp vào mỗi thứ Sáu.	go to the movies
+watch_cartoons	watch cartoons	collocation	1	entertainment	xem phim hoạt hình	xem các phim vẽ dành cho trẻ em	The kids watch cartoons on Sunday morning.	Bọn trẻ xem phim hoạt hình vào sáng Chủ nhật.
+play_the_guitar	play the guitar	collocation	1	entertainment	chơi đàn ghi-ta	dùng tay gảy đàn ghi-ta	My dad plays the guitar very well.	Bố tôi chơi đàn ghi-ta rất giỏi.
+play_cards	play cards	collocation	1	entertainment	chơi bài	chơi trò chơi dùng bộ bài	My grandparents play cards after lunch.	Ông bà tôi chơi bài sau bữa trưa.
+have_fun	have fun	collocation	1	entertainment	vui chơi, chơi vui vẻ	khi tận hưởng thời gian một cách vui vẻ	Have fun at the beach!	Đi biển chơi vui nhé!
+free_time	free time	collocation	1	entertainment	thời gian rảnh	lúc không phải học hay làm việc	What do you do in your free time?	Bạn làm gì vào thời gian rảnh?	spare time
+video_game	video game	collocation	1	entertainment	trò chơi điện tử	trò chơi trên máy tính, điện thoại hay máy chơi game	He plays video games after school.	Cậu ấy chơi trò chơi điện tử sau giờ học.	computer game
+hide_and_seek	hide and seek	collocation	1	entertainment	trò trốn tìm	trò chơi một người đi tìm những người đang trốn	The children played hide and seek in the park.	Bọn trẻ chơi trốn tìm trong công viên.	hide-and-seek
+music_video	music video	collocation	1	entertainment	video ca nhạc, MV	đoạn phim đi kèm một bài hát	Their new music video is so colourful.	Video ca nhạc mới của họ rất nhiều màu sắc.
+tell_a_joke	tell a joke	collocation	1	entertainment	kể chuyện cười	kể một câu chuyện ngắn để mọi người cười	Grandpa loves to tell a joke at dinner.	Ông rất thích kể chuyện cười trong bữa tối.
+fly_a_kite	fly a kite	collocation	1	entertainment	thả diều	cho diều bay lên trời bằng sợi dây	We fly a kite on windy days.	Chúng tôi thả diều vào những ngày nhiều gió.
+go_out	go out	phrasal_verb	1	entertainment	ra ngoài chơi (buổi tối)	rời nhà để đi ăn, xem phim, gặp bạn	Let's go out tonight!	Tối nay mình ra ngoài chơi đi!
+actress	actress	noun	2	entertainment	nữ diễn viên	người phụ nữ đóng vai trong phim, kịch	The actress won an award for her role.	Nữ diễn viên đã đoạt giải cho vai diễn của mình.		/ˈæktrəs/
+concert	concert	noun	2	entertainment	buổi hòa nhạc, buổi biểu diễn ca nhạc	sự kiện ca sĩ hay ban nhạc biểu diễn trước khán giả	We bought tickets for the concert.	Chúng tôi đã mua vé xem buổi hòa nhạc.		/ˈkɒnsət/
+band.music	band	noun	2	entertainment	ban nhạc	nhóm người cùng chơi nhạc và hát	My brother plays drums in a band.	Anh tôi chơi trống trong một ban nhạc.		/bænd/
+album	album	noun	2	entertainment	album nhạc	tập hợp nhiều bài hát phát hành cùng lúc	Their new album has twelve songs.	Album mới của họ có mười hai bài hát.		/ˈælbəm/
+lyrics	lyrics	noun	2	entertainment	lời bài hát	phần chữ được hát trong một bài hát	I know all the lyrics to this song.	Tôi thuộc hết lời bài hát này.		/ˈlɪrɪks/
+playlist	playlist	noun	2	entertainment	danh sách phát nhạc	danh sách những bài hát mình chọn để nghe	I made a playlist for the road trip.	Tôi đã tạo một danh sách nhạc cho chuyến đi.		/ˈpleɪlɪst/
+dancer	dancer	noun	2	entertainment	vũ công, người nhảy	người nhảy múa, nhất là để biểu diễn	She is a great dancer.	Cô ấy là một vũ công tuyệt vời.		/ˈdɑːnsə/
+instrument	instrument	noun	2	entertainment	nhạc cụ	đồ dùng để chơi nhạc như đàn, trống, sáo	Do you play an instrument?	Bạn có chơi nhạc cụ nào không?		/ˈɪnstrəmənt/
+drum	drum	noun	2	entertainment	cái trống	nhạc cụ đánh bằng tay hay dùi	He plays the drums in the school band.	Cậu ấy chơi trống trong ban nhạc của trường.		/drʌm/
+stage.performance	stage	noun	2	entertainment	sân khấu	nơi ca sĩ, diễn viên đứng biểu diễn trước khán giả	The band walked onto the stage.	Ban nhạc bước lên sân khấu.		/steɪdʒ/
+audience	audience	noun	2	entertainment	khán giả	nhóm người cùng xem một buổi diễn, bộ phim	The audience loved the show.	Khán giả rất thích buổi diễn.		/ˈɔːdiəns/
+crowd	crowd	noun	2	entertainment	đám đông	rất nhiều người tụ tập, ví dụ ở buổi hòa nhạc	A huge crowd waited outside the stadium.	Một đám đông khổng lồ chờ bên ngoài sân vận động.		/kraʊd/
+director.film	director	noun	2	entertainment	đạo diễn	người chỉ đạo diễn viên và quá trình làm phim	The director wanted to film the scene again.	Đạo diễn muốn quay lại cảnh đó.		/dəˈrektə/
+scene.film	scene	noun	2	entertainment	cảnh (phim)	một đoạn trong phim xảy ra ở một nơi, một lúc	The last scene made me cry.	Cảnh cuối làm tôi khóc.		/siːn/
+character.film	character	noun	2	entertainment	nhân vật (phim, truyện, game)	người hay con vật trong một câu chuyện	Who is your favourite character in the film?	Nhân vật bạn thích nhất trong phim là ai?		/ˈkærəktə/
+trailer	trailer	noun	2	entertainment	đoạn giới thiệu phim	video ngắn chiếu vài cảnh để quảng bá phim sắp ra	The trailer looks amazing!	Đoạn giới thiệu phim trông tuyệt quá!		/ˈtreɪlə/
+series.tv	series	noun	2	entertainment	phim bộ, loạt chương trình	phim hay chương trình có nhiều tập	I'm watching a new crime series.	Tôi đang xem một bộ phim hình sự mới.		/ˈsɪəriːz/
+episode	episode	noun	2	entertainment	tập (phim, chương trình)	một phần của phim bộ hay chương trình nhiều kỳ	I watched three episodes last night.	Tối qua tôi đã xem ba tập.		/ˈepɪsəʊd/
+subtitles	subtitles	noun	2	entertainment	phụ đề	chữ dịch lời thoại hiện ở cuối màn hình	I watch Korean films with subtitles.	Tôi xem phim Hàn có phụ đề.		/ˈsʌbtaɪtlz/
+comedy	comedy	noun	2	entertainment	phim hài	phim, chương trình làm khán giả cười	Let's watch a comedy tonight.	Tối nay xem phim hài đi.		/ˈkɒmədi/
+magician	magician	noun	2	entertainment	ảo thuật gia	người biểu diễn ảo thuật	The magician pulled a rabbit out of his hat.	Ảo thuật gia lôi một con thỏ ra khỏi chiếc mũ.		/məˈdʒɪʃn/
+magic	magic	noun	2	entertainment	ảo thuật	những trò làm vật biến mất, xuất hiện để mua vui	He learned magic from his uncle.	Cậu ấy học ảo thuật từ chú mình.		/ˈmædʒɪk/
+clown	clown	noun	2	entertainment	chú hề	người hóa trang mặt, mũi đỏ để làm trò cười	The clown made the children laugh.	Chú hề làm bọn trẻ cười.		/klaʊn/
+circus	circus	noun	2	entertainment	rạp xiếc, gánh xiếc	chương trình có người nhào lộn, thú diễn trò, chú hề	We went to the circus last weekend.	Cuối tuần trước chúng tôi đi xem xiếc.		/ˈsɜːkəs/
+chess	chess	noun	2	entertainment	cờ vua	trò chơi hai người trên bàn cờ ô đen trắng	My grandfather taught me to play chess.	Ông tôi dạy tôi chơi cờ vua.		/tʃes/
+karaoke	karaoke	noun	2	entertainment	karaoke, hát karaoke	hát theo nhạc có chữ chạy trên màn hình	We sang karaoke until midnight.	Chúng tôi hát karaoke đến nửa đêm.		/ˌkæriˈəʊki/
+balloon	balloon	noun	2	entertainment	bóng bay	quả bóng cao su bơm hơi để trang trí tiệc	The room was full of balloons.	Căn phòng đầy bóng bay.		/bəˈluːn/
+perform	perform	verb	2	entertainment	biểu diễn	hát, nhảy, diễn trước khán giả	The band will perform three new songs.	Ban nhạc sẽ biểu diễn ba bài hát mới.		/pəˈfɔːm/
+act.perform	act	verb	2	entertainment	diễn xuất	đóng vai trong phim, kịch	She has acted in many films.	Cô ấy đã diễn xuất trong nhiều bộ phim.		/ækt/
+collect	collect	verb	2	entertainment	sưu tầm	gom góp đồ vật làm sở thích, như tem, thẻ	My uncle collects old coins.	Chú tôi sưu tầm tiền xu cũ.		/kəˈlekt/
+relaxing	relaxing	adjective	2	entertainment	thư giãn, dễ chịu	nói về nhạc, hoạt động giúp mình thấy thoải mái	I like relaxing music before bed.	Tôi thích nhạc thư giãn trước khi ngủ.		/rɪˈlæksɪŋ/
+romantic	romantic	adjective	2	entertainment	lãng mạn	nói về phim, bài hát về tình yêu	They watched a romantic film together.	Họ cùng xem một bộ phim lãng mạn.		/rəʊˈmæntɪk/
+silly	silly	adjective	2	entertainment	ngớ ngẩn, ngộ nghĩnh	nói về trò đùa, trò chơi ngốc nghếch nhưng vui	We played silly games at the party.	Chúng tôi chơi mấy trò ngớ ngẩn ở bữa tiệc.		/ˈsɪli/
+loudly	loudly	adverb	2	entertainment	thật to, ầm ĩ	nói về cách hát, cười, cổ vũ phát ra tiếng lớn	The fans sang loudly with the band.	Người hâm mộ hát thật to cùng ban nhạc.		/ˈlaʊdli/
+free.charge	free	adverb	2	entertainment	miễn phí (vào cửa)	khi không phải trả tiền vé	Children under six get in free.	Trẻ em dưới sáu tuổi được vào cửa miễn phí.		/friː/

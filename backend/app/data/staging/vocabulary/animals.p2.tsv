@@ -1,0 +1,85 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+creature	creature	noun	3	animals	sinh vật, con vật	từ chung chỉ một con vật bất kỳ, nhất là con lạ hoặc nhỏ	Many strange creatures live at the bottom of the sea.	Nhiều sinh vật kỳ lạ sống dưới đáy biển.		/ˈkriːtʃə/
+wildlife	wildlife	noun	3	animals	thế giới động vật hoang dã	danh từ chung chỉ các loài thú, chim sống tự nhiên ở một vùng	The national park is full of wildlife.	Vườn quốc gia có rất nhiều động vật hoang dã.		/ˈwaɪldlaɪf/
+reptile	reptile	noun	3	animals	loài bò sát	nhóm động vật máu lạnh, da có vảy như rắn, thằn lằn	Snakes and lizards are reptiles.	Rắn và thằn lằn là loài bò sát.		/ˈreptaɪl/
+breed.type	breed	noun	3	animals	giống (chó, mèo...)	một loại riêng trong cùng một loài vật nuôi	What breed is your dog?	Chó của bạn là giống gì?		/briːd/
+cub	cub	noun	3	animals	thú con (sư tử, hổ, gấu)	con non của các loài thú dữ	The lion cubs are playing in the grass.	Những chú sư tử con đang chơi trong cỏ.		/kʌb/
+hive	hive	noun	3	animals	tổ ong	nơi đàn ong sống và làm mật	There is a bee hive in that old tree.	Có một tổ ong trong cái cây già kia.	beehive	/haɪv/
+web.spider	web	noun	3	animals	mạng nhện	lưới tơ mỏng do nhện giăng để bắt mồi	A fly got caught in the spider's web.	Một con ruồi bị mắc vào mạng nhện.	spider web|cobweb	/web/
+den	den	noun	3	animals	hang ổ (thú dữ)	chỗ ở kín của sói, cáo, sư tử	The fox carried the food back to its den.	Con cáo tha mồi về hang.		/den/
+burrow	burrow	noun	3	animals	hang đào (thỏ, chuột)	cái hang do con vật nhỏ tự đào dưới đất	The rabbit ran into its burrow.	Con thỏ chạy vào hang.		/ˈbʌrəʊ/
+antler	antler	noun	3	animals	gạc (hươu, nai)	sừng có nhiều nhánh trên đầu hươu, nai đực	The deer has huge antlers.	Con hươu có bộ gạc rất to.		/ˈæntlə/
+fang	fang	noun	3	animals	răng nanh	răng dài, nhọn của rắn, chó sói	The snake showed its fangs.	Con rắn nhe nanh ra.		/fæŋ/
+hoof	hoof	noun	3	animals	móng guốc	phần móng cứng ở chân ngựa, hươu, ngựa vằn	The horse has a stone stuck in its hoof.	Con ngựa bị kẹt một hòn đá trong móng guốc.		/huːf/
+mane	mane	noun	3	animals	bờm	lông dài trên cổ ngựa hoặc quanh đầu sư tử đực	The male lion has a thick mane.	Sư tử đực có bờm dày.		/meɪn/
+tusk	tusk	noun	3	animals	ngà	răng dài nhô ra ngoài miệng voi, lợn rừng	Elephants are killed for their tusks.	Voi bị giết để lấy ngà.		/tʌsk/
+scale.fish	scale	noun	3	animals	vảy (cá, rắn)	từng miếng nhỏ, cứng phủ trên da cá, bò sát	The fish has shiny silver scales.	Con cá có lớp vảy bạc óng ánh.		/skeɪl/
+pouch	pouch	noun	3	animals	túi (chuột túi)	túi da ở bụng thú mẹ để mang con	The baby kangaroo jumped back into the pouch.	Chuột túi con nhảy trở lại vào túi.		/paʊtʃ/
+hump	hump	noun	3	animals	cái bướu	phần u nhô lên trên lưng lạc đà	A camel stores fat in its hump.	Lạc đà dự trữ mỡ trong bướu.		/hʌmp/
+moth	moth	noun	3	animals	con bướm đêm, con ngài	côn trùng giống bướm, bay về phía ánh đèn ban đêm	A moth is flying around the lamp.	Một con bướm đêm đang bay quanh ngọn đèn.		/mɒθ/
+wasp	wasp	noun	3	animals	ong bắp cày	loài ong có sọc vàng đen, đốt rất đau	A wasp stung me on the arm.	Một con ong bắp cày đốt vào tay tôi.		/wɒsp/
+firefly	firefly	noun	3	animals	con đom đóm	côn trùng phát sáng vào ban đêm	We watched fireflies in the garden.	Chúng tôi ngắm đom đóm trong vườn.		/ˈfaɪəflaɪ/
+scorpion	scorpion	noun	3	animals	con bọ cạp	con vật có càng và đuôi cong có nọc độc	A scorpion was hiding under the rock.	Một con bọ cạp đang nấp dưới tảng đá.		/ˈskɔːpiən/
+flea	flea	noun	3	animals	con bọ chét	côn trùng nhỏ sống trên lông chó mèo, hút máu	Our cat has fleas again.	Con mèo của chúng tôi lại bị bọ chét.		/fliː/
+cricket.insect	cricket	noun	3	animals	con dế	côn trùng kêu ri ri vào ban đêm	I could hear crickets in the grass.	Tôi nghe thấy tiếng dế trong cỏ.		/ˈkrɪkɪt/
+seagull	seagull	noun	3	animals	chim mòng biển	chim biển lông trắng xám, hay kêu to	A seagull took my sandwich!	Một con mòng biển đã cướp bánh mì của tôi!	gull	/ˈsiːɡʌl/
+hawk	hawk	noun	3	animals	chim diều hâu	chim săn mồi cỡ vừa, mắt rất tinh	A hawk was flying over the field.	Một con diều hâu đang bay trên cánh đồng.		/hɔːk/
+swallow.bird	swallow	noun	3	animals	chim én	chim nhỏ đuôi chẻ, bay về khi mùa xuân đến	The swallows have come back this spring.	Chim én đã quay về vào mùa xuân này.		/ˈswɒləʊ/
+cobra	cobra	noun	3	animals	rắn hổ mang	rắn độc có thể bành cổ ra	The cobra raised its head.	Con rắn hổ mang ngóc đầu lên.		/ˈkəʊbrə/
+gecko	gecko	noun	3	animals	con thạch sùng, tắc kè	thằn lằn nhỏ bám tường, hay kêu chắt chắt	A gecko is catching insects on the ceiling.	Một con thạch sùng đang bắt côn trùng trên trần nhà.		/ˈɡekəʊ/
+eel	eel	noun	3	animals	con lươn	cá thân dài, trơn, giống rắn	The eel slipped out of his hands.	Con lươn tuột khỏi tay anh ấy.		/iːl/
+squid	squid	noun	3	animals	con mực	con vật biển thân dài, có mười xúc tu	The squid shot out black ink.	Con mực phun ra mực đen.		/skwɪd/
+coral	coral	noun	3	animals	san hô	sinh vật biển nhỏ tạo thành khối đá nhiều màu	Many fish live among the coral.	Nhiều loài cá sống giữa các rạn san hô.		/ˈkɒrəl/
+wild_boar	wild boar	noun	3	animals	lợn rừng	lợn hoang sống trong rừng, có răng nanh	A wild boar came out of the forest.	Một con lợn rừng chạy ra khỏi khu rừng.
+big_cat	big cat	collocation	3	animals	thú lớn họ mèo	cách gọi chung sư tử, hổ, báo	Lions and tigers are big cats.	Sư tử và hổ là những loài thú lớn họ mèo.
+sea_creature	sea creature	collocation	3	animals	sinh vật biển	một con vật sống dưới biển	The museum has models of strange sea creatures.	Bảo tàng có mô hình những sinh vật biển kỳ lạ.
+shed	shed	verb	3	animals	rụng lông	khi chó, mèo thay lông, lông rơi khắp nơi	Our dog sheds hair all over the sofa.	Con chó của chúng tôi rụng lông khắp ghế sofa.		/ʃed/
+hatch	hatch	verb	3	animals	nở (trứng)	khi con non chui ra khỏi vỏ trứng	The chicks hatched this morning.	Những chú chim non đã nở sáng nay.		/hætʃ/
+squeak	squeak	verb	3	animals	kêu chít chít	tiếng kêu cao, nhỏ của chuột	The mouse squeaked and ran away.	Con chuột kêu chít chít rồi chạy mất.		/skwiːk/
+growl	growl	verb	3	animals	gầm gừ	tiếng chó, thú kêu trầm trong cổ khi tức giận	The dog growled at the stranger.	Con chó gầm gừ với người lạ.		/ɡraʊl/
+flap	flap	verb	3	animals	vỗ (cánh)	chim đập cánh lên xuống	The bird flapped its wings and flew off.	Con chim vỗ cánh rồi bay đi.		/flæp/
+perch	perch	verb	3	animals	đậu (trên cành)	khi chim đậu trên cành cây, dây điện	A little bird perched on the fence.	Một chú chim nhỏ đậu trên hàng rào.		/pɜːtʃ/
+lick	lick	verb	3	animals	liếm	dùng lưỡi chạm vào, như chó liếm tay chủ	The dog licked my face.	Con chó liếm mặt tôi.		/lɪk/
+sniff	sniff	verb	3	animals	đánh hơi, hít ngửi	con vật ngửi để tìm hoặc nhận ra thứ gì	The dog sniffed my bag.	Con chó đánh hơi túi của tôi.		/snɪf/
+fetch	fetch	verb	3	animals	chạy đi nhặt về	trò chơi ném gậy, bóng để chó chạy đi mang về	My dog loves to fetch the ball.	Chó của tôi rất thích chạy đi nhặt bóng về.		/fetʃ/
+pet.stroke	pet	verb	3	animals	vuốt ve (con vật)	dùng tay xoa nhẹ lên lông chó, mèo	Can I pet your dog?	Tôi vuốt ve chó của bạn được không?	stroke	/pet/
+venomous	venomous	adjective	3	animals	có nọc độc	rắn, nhện, bọ cạp cắn hoặc chích để truyền nọc	Be careful, this snake is venomous.	Cẩn thận, con rắn này có nọc độc.		/ˈvenəməs/
+obedient	obedient	adjective	3	animals	vâng lời, biết nghe lệnh	chó được huấn luyện tốt, làm theo lệnh chủ	Our dog is very obedient.	Chó nhà tôi rất biết nghe lời.		/əˈbiːdiənt/
+harmless	harmless	adjective	3	animals	vô hại, không nguy hiểm	con vật không cắn, không gây hại cho người	Don't worry, this spider is harmless.	Đừng lo, con nhện này vô hại.		/ˈhɑːmləs/
+striped	striped	adjective	3	animals	có sọc, có vằn	con vật có những đường sọc trên lông, da	The tiger has a striped coat.	Con hổ có bộ lông vằn.		/straɪpt/
+spotted	spotted	adjective	3	animals	có đốm	con vật có những chấm tròn trên lông, da	A leopard has a spotted coat.	Báo hoa mai có bộ lông đốm.		/ˈspɒtɪd/
+fiercely	fiercely	adverb	3	animals	dữ dội, hung tợn	nói về cách con vật đánh nhau, bảo vệ con	The mother bear fiercely protects her cubs.	Gấu mẹ bảo vệ đàn con một cách quyết liệt.		/ˈfɪəsli/
+playfully	playfully	adverb	3	animals	một cách tinh nghịch, đùa giỡn	khi con vật cắn, cào nhẹ để chơi, không có ý hại	The puppy bit my finger playfully.	Chú chó con cắn ngón tay tôi một cách đùa giỡn.		/ˈpleɪfəli/
+gracefully	gracefully	adverb	3	animals	một cách uyển chuyển, duyên dáng	nói về dáng di chuyển đẹp, nhẹ nhàng của thiên nga, mèo	The swan moved gracefully across the lake.	Con thiên nga lướt đi uyển chuyển trên mặt hồ.		/ˈɡreɪsfəli/
+lazily	lazily	adverb	3	animals	một cách lười biếng, uể oải	khi con vật nằm dài, di chuyển chậm chạp	The cat lay lazily in the sun.	Con mèo nằm uể oải dưới nắng.		/ˈleɪzɪli/
+kennel	kennel	noun	3	animals	chuồng chó	cái nhà nhỏ cho chó ngủ ngoài sân	The dog sleeps in a kennel in the garden.	Con chó ngủ trong chuồng ngoài vườn.		/ˈkenl/
+treat.pet	treat	noun	3	animals	đồ ăn thưởng (cho thú cưng)	miếng ăn nhỏ để thưởng khi thú cưng ngoan	Give the dog a treat when it sits.	Hãy cho chó đồ ăn thưởng khi nó ngồi xuống.		/triːt/
+litter_box	litter box	noun	3	animals	khay vệ sinh cho mèo	khay đựng cát để mèo đi vệ sinh	Please clean the cat's litter box.	Hãy dọn khay vệ sinh của mèo đi.	litter tray
+in_the_wild	in the wild	collocation	3	animals	ngoài tự nhiên	con vật sống trong môi trường hoang dã, không bị nuôi nhốt	Pandas are rare in the wild.	Gấu trúc rất hiếm ngoài tự nhiên.
+guide_dog	guide dog	collocation	3	animals	chó dẫn đường	chó được huấn luyện để dắt người khiếm thị	Guide dogs are allowed in this shop.	Chó dẫn đường được phép vào cửa hàng này.
+guard_dog	guard dog	collocation	3	animals	chó canh gác	chó được nuôi để giữ nhà, trông kho	They keep a guard dog at the factory.	Họ nuôi một con chó canh gác ở nhà máy.
+a_school_of_fish	a school of fish	collocation	3	animals	một đàn cá	nhiều con cá bơi cùng nhau	A school of fish swam past the boat.	Một đàn cá bơi ngang qua thuyền.
+a_pack_of_wolves	a pack of wolves	collocation	3	animals	một bầy sói	nhiều con sói sống và săn mồi cùng nhau	A pack of wolves lives in these mountains.	Một bầy sói sống ở vùng núi này.
+a_swarm_of_bees	a swarm of bees	collocation	3	animals	một đàn ong	rất nhiều con ong bay cùng nhau	A swarm of bees flew out of the hive.	Một đàn ong bay ra khỏi tổ.
+a_flock_of_birds	a flock of birds	collocation	3	animals	một đàn chim	nhiều con chim bay cùng nhau	A flock of birds flew over the lake.	Một đàn chim bay qua mặt hồ.
+adopt_a_pet	adopt a pet	collocation	3	animals	nhận nuôi thú cưng	đón một con vật bị bỏ rơi về nuôi	Why not adopt a pet instead of buying one?	Sao không nhận nuôi thú cưng thay vì mua?
+pet_care	pet care	collocation	3	animals	việc chăm sóc thú cưng	cho ăn, tắm, khám bệnh cho vật nuôi	Pet care can be expensive.	Việc chăm sóc thú cưng có thể khá tốn kém.
+dog_lover	dog lover	collocation	3	animals	người yêu chó	người rất thích chó	My whole family are dog lovers.	Cả nhà tôi đều là những người yêu chó.
+feeding_time	feeding time	collocation	3	animals	giờ cho ăn	thời điểm thú ở sở thú hoặc vật nuôi được cho ăn	Feeding time at the zoo is three o'clock.	Giờ cho thú ăn ở sở thú là ba giờ.
+on_a_leash	on a leash	collocation	3	animals	được dắt bằng dây	nói về chó được buộc dây khi ra ngoài	Dogs must be kept on a leash here.	Chó phải được dắt bằng dây ở đây.	on a lead
+spin_a_web	spin a web	collocation	3	animals	giăng tơ	khi nhện nhả tơ tạo mạng	The spider is spinning a web in the corner.	Con nhện đang giăng tơ trong góc.
+hunt_for_food	hunt for food	collocation	3	animals	săn mồi, kiếm ăn	khi con vật đi tìm và bắt thức ăn	Owls hunt for food at night.	Cú đi săn mồi vào ban đêm.
+curl_up	curl up	phrasal_verb	3	animals	cuộn tròn	khi mèo, chó nằm co người lại để ngủ	The cat curled up on my bed.	Con mèo cuộn tròn trên giường tôi.
+roll_over	roll over	phrasal_verb	3	animals	lăn mình, nằm ngửa ra	lệnh cho chó lăn tròn hoặc nằm ngửa phơi bụng	Can your dog roll over?	Chó của bạn có biết lăn mình không?
+set_free	set free	phrasal_verb	3	animals	thả ra, trả tự do	thả con vật ra khỏi lồng hay bẫy	We set the bird free after its wing healed.	Chúng tôi thả con chim đi sau khi cánh nó lành.
+beware_of_the_dog	beware of the dog	phrase	3	animals	coi chừng chó dữ	dòng chữ trên biển treo ở cổng nhà	The sign on the gate said beware of the dog.	Tấm biển trên cổng ghi: coi chừng chó dữ.
+what_breed_is_it	what breed is it	phrase	3	animals	nó là giống gì vậy?	hỏi về giống của chó, mèo nhà người khác	What a beautiful cat! What breed is it?	Con mèo đẹp quá! Nó là giống gì vậy?
+amphibian	amphibian	noun	4	animals	loài lưỡng cư	động vật sống được cả dưới nước và trên cạn như ếch	Frogs and toads are amphibians.	Ếch và cóc là loài lưỡng cư.		/æmˈfɪbiən/
+rodent	rodent	noun	4	animals	loài gặm nhấm	nhóm động vật có răng cửa sắc như chuột, sóc	Mice and squirrels are rodents.	Chuột và sóc là loài gặm nhấm.		/ˈrəʊdnt/
+antenna	antenna	noun	4	animals	râu (côn trùng)	hai sợi dài trên đầu côn trùng để cảm nhận	The ant touched the food with its antennae.	Con kiến chạm vào thức ăn bằng râu.		/ænˈtenə/
+gill	gill	noun	4	animals	mang cá	bộ phận giúp cá thở dưới nước	Fish breathe through their gills.	Cá thở bằng mang.		/ɡɪl/
+otter	otter	noun	4	animals	con rái cá	thú nhỏ bơi giỏi, sống ven sông, ăn cá	An otter was floating on its back.	Một con rái cá đang nằm ngửa nổi trên mặt nước.		/ˈɒtə/
+seahorse	seahorse	noun	4	animals	cá ngựa	cá nhỏ có đầu giống đầu ngựa, bơi thẳng đứng	The male seahorse carries the babies.	Cá ngựa đực là con mang trứng.		/ˈsiːhɔːs/
+nibble	nibble	verb	4	animals	gặm, nhấm từng chút	ăn từng miếng rất nhỏ, như thỏ, chuột	The rabbit nibbled a carrot.	Con thỏ gặm nhấm củ cà rốt.		/ˈnɪbl/
+croak	croak	verb	4	animals	kêu ộp ộp	tiếng kêu trầm của ếch, nhái	The frogs croaked all night after the rain.	Ếch kêu ộp ộp suốt đêm sau cơn mưa.		/krəʊk/
+slimy	slimy	adjective	4	animals	nhớt, nhầy nhụa	nói về da ốc sên, lươn, giun trơn và ướt	Snails leave a slimy trail.	Ốc sên để lại một vệt nhớt.		/ˈslaɪmi/

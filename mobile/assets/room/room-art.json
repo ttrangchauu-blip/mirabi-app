@@ -1,0 +1,1630 @@
+{
+ "_comment": "Personal pet room artwork, shared by the app (src/room/art.ts) and the backend photo export (backend/app/pet_room.py), so the room on screen and the saved photo are drawn from the same shapes. Canvas 400 x 440, the floor starts at floorY. Surfaces fill the wall or the floor. Items are drawn around their anchor (floor items: feet at 0,0; wall items and rugs: centre at 0,0); @tokens are filled from the chosen variant. `box` is the item's extent around the anchor (without glows), used to keep it inside its area. Ids of surfaces, items and variants are stored in saved rooms: only ever add.",
+ "version": 2,
+ "canvas": {
+  "width": 400,
+  "height": 440,
+  "floorY": 292
+ },
+ "areas": {
+  "wall": [
+   4,
+   10,
+   396,
+   282
+  ],
+  "rug": [
+   2,
+   298,
+   398,
+   438
+  ],
+  "floor": [
+   2,
+   0,
+   398,
+   438
+  ]
+ },
+ "feet": [
+  304,
+  436
+ ],
+ "spots": {
+  "rug": {
+   "x": 200,
+   "feet": 372,
+   "size": 116
+  },
+  "guest": {
+   "x": 342,
+   "feet": 430,
+   "size": 84
+  }
+ },
+ "surfaces": {
+  "wall_cream": {
+   "kind": "wall",
+   "svg": "<defs><linearGradient id='wall_cream-shade' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#FFFFFF' stop-opacity='.38'/><stop offset='.5' stop-color='#FFFFFF' stop-opacity='0'/><stop offset='1' stop-color='#8A6A55' stop-opacity='.07'/></linearGradient></defs><rect width='400' height='292' fill='#F7EDE1'/><g fill='#E9D6C1' opacity='.55'><circle cx='28' cy='22' r='1.6'/><circle cx='60' cy='22' r='1.6'/><circle cx='92' cy='22' r='1.6'/><circle cx='124' cy='22' r='1.6'/><circle cx='156' cy='22' r='1.6'/><circle cx='188' cy='22' r='1.6'/><circle cx='220' cy='22' r='1.6'/><circle cx='252' cy='22' r='1.6'/><circle cx='284' cy='22' r='1.6'/><circle cx='316' cy='22' r='1.6'/><circle cx='348' cy='22' r='1.6'/><circle cx='380' cy='22' r='1.6'/><circle cx='12' cy='48' r='1.6'/><circle cx='44' cy='48' r='1.6'/><circle cx='76' cy='48' r='1.6'/><circle cx='108' cy='48' r='1.6'/><circle cx='140' cy='48' r='1.6'/><circle cx='172' cy='48' r='1.6'/><circle cx='204' cy='48' r='1.6'/><circle cx='236' cy='48' r='1.6'/><circle cx='268' cy='48' r='1.6'/><circle cx='300' cy='48' r='1.6'/><circle cx='332' cy='48' r='1.6'/><circle cx='364' cy='48' r='1.6'/><circle cx='396' cy='48' r='1.6'/><circle cx='28' cy='74' r='1.6'/><circle cx='60' cy='74' r='1.6'/><circle cx='92' cy='74' r='1.6'/><circle cx='124' cy='74' r='1.6'/><circle cx='156' cy='74' r='1.6'/><circle cx='188' cy='74' r='1.6'/><circle cx='220' cy='74' r='1.6'/><circle cx='252' cy='74' r='1.6'/><circle cx='284' cy='74' r='1.6'/><circle cx='316' cy='74' r='1.6'/><circle cx='348' cy='74' r='1.6'/><circle cx='380' cy='74' r='1.6'/><circle cx='12' cy='100' r='1.6'/><circle cx='44' cy='100' r='1.6'/><circle cx='76' cy='100' r='1.6'/><circle cx='108' cy='100' r='1.6'/><circle cx='140' cy='100' r='1.6'/><circle cx='172' cy='100' r='1.6'/><circle cx='204' cy='100' r='1.6'/><circle cx='236' cy='100' r='1.6'/><circle cx='268' cy='100' r='1.6'/><circle cx='300' cy='100' r='1.6'/><circle cx='332' cy='100' r='1.6'/><circle cx='364' cy='100' r='1.6'/><circle cx='396' cy='100' r='1.6'/><circle cx='28' cy='126' r='1.6'/><circle cx='60' cy='126' r='1.6'/><circle cx='92' cy='126' r='1.6'/><circle cx='124' cy='126' r='1.6'/><circle cx='156' cy='126' r='1.6'/><circle cx='188' cy='126' r='1.6'/><circle cx='220' cy='126' r='1.6'/><circle cx='252' cy='126' r='1.6'/><circle cx='284' cy='126' r='1.6'/><circle cx='316' cy='126' r='1.6'/><circle cx='348' cy='126' r='1.6'/><circle cx='380' cy='126' r='1.6'/><circle cx='12' cy='152' r='1.6'/><circle cx='44' cy='152' r='1.6'/><circle cx='76' cy='152' r='1.6'/><circle cx='108' cy='152' r='1.6'/><circle cx='140' cy='152' r='1.6'/><circle cx='172' cy='152' r='1.6'/><circle cx='204' cy='152' r='1.6'/><circle cx='236' cy='152' r='1.6'/><circle cx='268' cy='152' r='1.6'/><circle cx='300' cy='152' r='1.6'/><circle cx='332' cy='152' r='1.6'/><circle cx='364' cy='152' r='1.6'/><circle cx='396' cy='152' r='1.6'/><circle cx='28' cy='178' r='1.6'/><circle cx='60' cy='178' r='1.6'/><circle cx='92' cy='178' r='1.6'/><circle cx='124' cy='178' r='1.6'/><circle cx='156' cy='178' r='1.6'/><circle cx='188' cy='178' r='1.6'/><circle cx='220' cy='178' r='1.6'/><circle cx='252' cy='178' r='1.6'/><circle cx='284' cy='178' r='1.6'/><circle cx='316' cy='178' r='1.6'/><circle cx='348' cy='178' r='1.6'/><circle cx='380' cy='178' r='1.6'/></g><rect y='212' width='400' height='72' fill='#F2E3D2'/><rect x='11' y='224' width='68' height='48' rx='5' fill='none' stroke='#E8D5C0' stroke-width='2'/><rect x='89' y='224' width='68' height='48' rx='5' fill='none' stroke='#E8D5C0' stroke-width='2'/><rect x='167' y='224' width='68' height='48' rx='5' fill='none' stroke='#E8D5C0' stroke-width='2'/><rect x='245' y='224' width='68' height='48' rx='5' fill='none' stroke='#E8D5C0' stroke-width='2'/><rect x='323' y='224' width='68' height='48' rx='5' fill='none' stroke='#E8D5C0' stroke-width='2'/><rect y='206' width='400' height='8' rx='2' fill='#FFF9F1'/><rect y='213' width='400' height='2' fill='#7A5C48' opacity='.06'/><rect y='278' width='400' height='14' fill='#FFF9F1'/><rect y='278' width='400' height='2' fill='#FFFFFF' opacity='.6'/><rect width='400' height='292' fill='url(#wall_cream-shade)'/><rect width='400' height='6' fill='#FFF9F1'/><rect y='6' width='400' height='2' fill='#7A5C48' opacity='.05'/>",
+   "thumb": "0 0 400 292"
+  },
+  "wall_mint": {
+   "kind": "wall",
+   "svg": "<defs><linearGradient id='wall_mint-shade' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#FFFFFF' stop-opacity='.38'/><stop offset='.5' stop-color='#FFFFFF' stop-opacity='0'/><stop offset='1' stop-color='#8A6A55' stop-opacity='.07'/></linearGradient></defs><rect width='400' height='292' fill='#E5F1EA'/><g fill='#D9EBE0' opacity='1'><rect x='0' width='18' height='206'/><rect x='44' width='18' height='206'/><rect x='88' width='18' height='206'/><rect x='132' width='18' height='206'/><rect x='176' width='18' height='206'/><rect x='220' width='18' height='206'/><rect x='264' width='18' height='206'/><rect x='308' width='18' height='206'/><rect x='352' width='18' height='206'/><rect x='396' width='18' height='206'/></g><rect y='212' width='400' height='72' fill='#D7EADF'/><rect x='11' y='224' width='68' height='48' rx='5' fill='none' stroke='#C3DCCD' stroke-width='2'/><rect x='89' y='224' width='68' height='48' rx='5' fill='none' stroke='#C3DCCD' stroke-width='2'/><rect x='167' y='224' width='68' height='48' rx='5' fill='none' stroke='#C3DCCD' stroke-width='2'/><rect x='245' y='224' width='68' height='48' rx='5' fill='none' stroke='#C3DCCD' stroke-width='2'/><rect x='323' y='224' width='68' height='48' rx='5' fill='none' stroke='#C3DCCD' stroke-width='2'/><rect y='206' width='400' height='8' rx='2' fill='#F7FBF8'/><rect y='213' width='400' height='2' fill='#7A5C48' opacity='.06'/><rect y='278' width='400' height='14' fill='#F7FBF8'/><rect y='278' width='400' height='2' fill='#FFFFFF' opacity='.6'/><rect width='400' height='292' fill='url(#wall_mint-shade)'/><rect width='400' height='6' fill='#F7FBF8'/><rect y='6' width='400' height='2' fill='#7A5C48' opacity='.05'/>",
+   "thumb": "0 0 400 292"
+  },
+  "wall_lilac": {
+   "kind": "wall",
+   "svg": "<defs><linearGradient id='wall_lilac-shade' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#FFFFFF' stop-opacity='.38'/><stop offset='.5' stop-color='#FFFFFF' stop-opacity='0'/><stop offset='1' stop-color='#8A6A55' stop-opacity='.07'/></linearGradient></defs><rect width='400' height='292' fill='#EEE8F5'/><g fill='#E4DCF0' opacity='1'><rect x='0' width='4' height='206'/><rect x='22' width='4' height='206'/><rect x='44' width='4' height='206'/><rect x='66' width='4' height='206'/><rect x='88' width='4' height='206'/><rect x='110' width='4' height='206'/><rect x='132' width='4' height='206'/><rect x='154' width='4' height='206'/><rect x='176' width='4' height='206'/><rect x='198' width='4' height='206'/><rect x='220' width='4' height='206'/><rect x='242' width='4' height='206'/><rect x='264' width='4' height='206'/><rect x='286' width='4' height='206'/><rect x='308' width='4' height='206'/><rect x='330' width='4' height='206'/><rect x='352' width='4' height='206'/><rect x='374' width='4' height='206'/><rect x='396' width='4' height='206'/></g><rect y='212' width='400' height='72' fill='#E3DBF0'/><rect x='11' y='224' width='68' height='48' rx='5' fill='none' stroke='#D3C8E6' stroke-width='2'/><rect x='89' y='224' width='68' height='48' rx='5' fill='none' stroke='#D3C8E6' stroke-width='2'/><rect x='167' y='224' width='68' height='48' rx='5' fill='none' stroke='#D3C8E6' stroke-width='2'/><rect x='245' y='224' width='68' height='48' rx='5' fill='none' stroke='#D3C8E6' stroke-width='2'/><rect x='323' y='224' width='68' height='48' rx='5' fill='none' stroke='#D3C8E6' stroke-width='2'/><rect y='206' width='400' height='8' rx='2' fill='#FBF9FD'/><rect y='213' width='400' height='2' fill='#7A5C48' opacity='.06'/><rect y='278' width='400' height='14' fill='#FBF9FD'/><rect y='278' width='400' height='2' fill='#FFFFFF' opacity='.6'/><rect width='400' height='292' fill='url(#wall_lilac-shade)'/><rect width='400' height='6' fill='#FBF9FD'/><rect y='6' width='400' height='2' fill='#7A5C48' opacity='.05'/>",
+   "thumb": "0 0 400 292"
+  },
+  "wall_peach": {
+   "kind": "wall",
+   "svg": "<defs><linearGradient id='wall_peach-shade' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#FFFFFF' stop-opacity='.38'/><stop offset='.5' stop-color='#FFFFFF' stop-opacity='0'/><stop offset='1' stop-color='#8A6A55' stop-opacity='.07'/></linearGradient></defs><rect width='400' height='292' fill='#FAEAE2'/><g fill='#F2CFC2' opacity='.5'><path d='M40 29l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M80 29l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M120 29l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M160 29l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M200 29l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M240 29l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M280 29l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M320 29l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M360 29l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M20 63l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M60 63l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M100 63l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M140 63l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M180 63l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M220 63l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M260 63l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M300 63l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M340 63l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M380 63l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M40 97l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M80 97l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M120 97l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M160 97l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M200 97l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M240 97l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M280 97l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M320 97l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M360 97l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M20 131l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M60 131l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M100 131l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M140 131l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M180 131l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M220 131l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M260 131l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M300 131l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M340 131l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M380 131l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M40 165l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M80 165l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M120 165l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M160 165l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M200 165l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M240 165l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M280 165l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M320 165l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M360 165l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M20 199l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M60 199l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M100 199l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M140 199l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M180 199l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M220 199l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M260 199l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M300 199l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M340 199l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/><path d='M380 199l-4.2-4.1a2.6 2.6 0 0 1 4.2-3.2a2.6 2.6 0 0 1 4.2 3.2Z'/></g><rect y='212' width='400' height='72' fill='#F5DCD1'/><rect x='11' y='224' width='68' height='48' rx='5' fill='none' stroke='#EBC8BA' stroke-width='2'/><rect x='89' y='224' width='68' height='48' rx='5' fill='none' stroke='#EBC8BA' stroke-width='2'/><rect x='167' y='224' width='68' height='48' rx='5' fill='none' stroke='#EBC8BA' stroke-width='2'/><rect x='245' y='224' width='68' height='48' rx='5' fill='none' stroke='#EBC8BA' stroke-width='2'/><rect x='323' y='224' width='68' height='48' rx='5' fill='none' stroke='#EBC8BA' stroke-width='2'/><rect y='206' width='400' height='8' rx='2' fill='#FFF8F4'/><rect y='213' width='400' height='2' fill='#7A5C48' opacity='.06'/><rect y='278' width='400' height='14' fill='#FFF8F4'/><rect y='278' width='400' height='2' fill='#FFFFFF' opacity='.6'/><rect width='400' height='292' fill='url(#wall_peach-shade)'/><rect width='400' height='6' fill='#FFF8F4'/><rect y='6' width='400' height='2' fill='#7A5C48' opacity='.05'/>",
+   "thumb": "0 0 400 292"
+  },
+  "floor_wood_light": {
+   "kind": "floor",
+   "svg": "<defs><linearGradient id='floor_wood_light-g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#EFDCC5'/><stop offset='1' stop-color='#E3C6A6'/></linearGradient><linearGradient id='floor_wood_light-ao' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#5C4434' stop-opacity='.18'/><stop offset='1' stop-color='#5C4434' stop-opacity='0'/></linearGradient><radialGradient id='floor_wood_light-sheen' cx='.5' cy='.75' r='.6'><stop offset='0' stop-color='#FFFFFF' stop-opacity='.22'/><stop offset='1' stop-color='#FFFFFF' stop-opacity='0'/></radialGradient></defs><rect y='292' width='400' height='148' fill='url(#floor_wood_light-g)'/><path d='M-196 292L-608.7 440 M-169 292L-553.6 440 M-142 292L-498.5 440 M-115 292L-443.3 440 M-88 292L-388.2 440 M-61 292L-333 440 M-34 292L-277.9 440 M-7 292L-222.7 440 M20 292L-167.6 440 M47 292L-112.5 440 M74 292L-57.3 440 M101 292L-2.2 440 M128 292L53 440 M155 292L108.1 440 M182 292L163.2 440 M209 292L218.4 440 M236 292L273.5 440 M263 292L328.7 440 M290 292L383.8 440 M317 292L438.9 440 M344 292L494.1 440 M371 292L549.2 440 M398 292L604.4 440 M425 292L659.5 440 M452 292L714.6 440 M479 292L769.8 440 M506 292L824.9 440 M533 292L880.1 440 M560 292L935.2 440 M587 292L990.4 440 M614 292L1045.5 440 M-7.9 314H23.3 M5 331H39.4 M-9 344H27.9 M52.7 316H84.3 M12.8 361H52.9 M17.2 356H56.4 M72.4 333H107.2 M70.3 336H105.7 M44.5 373H86.9 M32.7 390H78.3 M114.8 318H146.8 M97.1 353H135.7 M78.3 390H123.9 M69.7 407H118.6 M141.4 335H176.5 M130.3 370H172.1 M118.6 407H167.4 M113.2 424H165.3 M178.5 320H210.8 M175.3 345H212.4 M172.4 368H213.8 M170 387H215 M211.9 337H247.4 M213.4 362H253.7 M214.9 385H259.6 M216.1 404H264.4 M243.6 322H276.3 M247.4 337H283 M263.9 402H311.8 M268.7 421H320.2 M269.7 307H299.5 M290.5 354H329.3 M294.5 363H335 M327.8 438H382.5 M310.3 324H343.4 M340.1 371H382.1 M345.8 380H389.5 M359.1 401H406.8 M331 309H361.2 M361.5 346H398.8 M403.5 397H450.5 M378.5 326H411.9 M393.9 311H424.5' stroke='#D2B391' stroke-width='1.3' fill='none' opacity='.75'/><rect y='292' width='400' height='148' fill='url(#floor_wood_light-sheen)'/><rect y='292' width='400' height='22' fill='url(#floor_wood_light-ao)'/>",
+   "thumb": "0 292 400 148"
+  },
+  "floor_wood_honey": {
+   "kind": "floor",
+   "svg": "<defs><linearGradient id='floor_wood_honey-g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#EBCBA5'/><stop offset='1' stop-color='#D9AE82'/></linearGradient><linearGradient id='floor_wood_honey-ao' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#5C4434' stop-opacity='.18'/><stop offset='1' stop-color='#5C4434' stop-opacity='0'/></linearGradient><radialGradient id='floor_wood_honey-sheen' cx='.5' cy='.75' r='.6'><stop offset='0' stop-color='#FFFFFF' stop-opacity='.22'/><stop offset='1' stop-color='#FFFFFF' stop-opacity='0'/></radialGradient></defs><rect y='292' width='400' height='148' fill='url(#floor_wood_honey-g)'/><path d='M-196 292L-608.7 440 M-169 292L-553.6 440 M-142 292L-498.5 440 M-115 292L-443.3 440 M-88 292L-388.2 440 M-61 292L-333 440 M-34 292L-277.9 440 M-7 292L-222.7 440 M20 292L-167.6 440 M47 292L-112.5 440 M74 292L-57.3 440 M101 292L-2.2 440 M128 292L53 440 M155 292L108.1 440 M182 292L163.2 440 M209 292L218.4 440 M236 292L273.5 440 M263 292L328.7 440 M290 292L383.8 440 M317 292L438.9 440 M344 292L494.1 440 M371 292L549.2 440 M398 292L604.4 440 M425 292L659.5 440 M452 292L714.6 440 M479 292L769.8 440 M506 292L824.9 440 M533 292L880.1 440 M560 292L935.2 440 M587 292L990.4 440 M614 292L1045.5 440 M-7.9 314H23.3 M5 331H39.4 M-9 344H27.9 M52.7 316H84.3 M12.8 361H52.9 M17.2 356H56.4 M72.4 333H107.2 M70.3 336H105.7 M44.5 373H86.9 M32.7 390H78.3 M114.8 318H146.8 M97.1 353H135.7 M78.3 390H123.9 M69.7 407H118.6 M141.4 335H176.5 M130.3 370H172.1 M118.6 407H167.4 M113.2 424H165.3 M178.5 320H210.8 M175.3 345H212.4 M172.4 368H213.8 M170 387H215 M211.9 337H247.4 M213.4 362H253.7 M214.9 385H259.6 M216.1 404H264.4 M243.6 322H276.3 M247.4 337H283 M263.9 402H311.8 M268.7 421H320.2 M269.7 307H299.5 M290.5 354H329.3 M294.5 363H335 M327.8 438H382.5 M310.3 324H343.4 M340.1 371H382.1 M345.8 380H389.5 M359.1 401H406.8 M331 309H361.2 M361.5 346H398.8 M403.5 397H450.5 M378.5 326H411.9 M393.9 311H424.5' stroke='#C29870' stroke-width='1.3' fill='none' opacity='.75'/><rect y='292' width='400' height='148' fill='url(#floor_wood_honey-sheen)'/><rect y='292' width='400' height='22' fill='url(#floor_wood_honey-ao)'/>",
+   "thumb": "0 292 400 148"
+  },
+  "floor_tile_cream": {
+   "kind": "floor",
+   "svg": "<defs><linearGradient id='floor_tile_cream-g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#F6EFE6'/><stop offset='1' stop-color='#EADDCD'/></linearGradient><linearGradient id='floor_tile_cream-ao' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#5C4434' stop-opacity='.18'/><stop offset='1' stop-color='#5C4434' stop-opacity='0'/></linearGradient><radialGradient id='floor_tile_cream-sheen' cx='.5' cy='.75' r='.6'><stop offset='0' stop-color='#FFFFFF' stop-opacity='.22'/><stop offset='1' stop-color='#FFFFFF' stop-opacity='0'/></radialGradient></defs><rect y='292' width='400' height='148' fill='url(#floor_tile_cream-g)'/><path d='M-196 292L-608.7 440 M-144 292L-502.5 440 M-92 292L-396.3 440 M-40 292L-290.1 440 M12 292L-183.9 440 M64 292L-77.7 440 M116 292L28.5 440 M168 292L134.6 440 M220 292L240.8 440 M272 292L347 440 M324 292L453.2 440 M376 292L559.4 440 M428 292L665.6 440 M480 292L771.8 440 M532 292L878 440 M584 292L984.2 440 M0 306H400 M0 324H400 M0 348H400 M0 380H400 M0 422H400' stroke='#DCCBB8' stroke-width='1.3' fill='none' opacity='.75'/><rect y='292' width='400' height='148' fill='url(#floor_tile_cream-sheen)'/><rect y='292' width='400' height='22' fill='url(#floor_tile_cream-ao)'/>",
+   "thumb": "0 292 400 148"
+  }
+ },
+ "items": {
+  "window": {
+   "mount": "wall",
+   "variants": [
+    {
+     "id": "morning",
+     "name": "Nắng sớm",
+     "swatch": "#CFE7F5",
+     "colors": {
+      "sky1": "#BFE0F2",
+      "sky2": "#F4F8F1",
+      "sun": "#FFE3A0",
+      "hill": "#BCD7B3",
+      "hill2": "#A3C69C",
+      "cloudop": ".95",
+      "starop": "0",
+      "curtain": "#F5DCCB",
+      "curtain2": "#E8C6B1",
+      "light": "#FFF0CF",
+      "lightop": ".5"
+     }
+    },
+    {
+     "id": "sunset",
+     "name": "Hoàng hôn",
+     "swatch": "#F8C9B5",
+     "colors": {
+      "sky1": "#F4B9A8",
+      "sky2": "#FBE3C6",
+      "sun": "#FFD08F",
+      "hill": "#D6B2C0",
+      "hill2": "#C29CB0",
+      "cloudop": ".7",
+      "starop": ".25",
+      "curtain": "#F0D3DB",
+      "curtain2": "#E0B9C5",
+      "light": "#FFD9BD",
+      "lightop": ".45"
+     }
+    },
+    {
+     "id": "starry",
+     "name": "Trời sao",
+     "swatch": "#7E8CC0",
+     "colors": {
+      "sky1": "#5E6CA6",
+      "sky2": "#A1ACD6",
+      "sun": "#FFF2C8",
+      "hill": "#7A88B4",
+      "hill2": "#6977A6",
+      "cloudop": "0",
+      "starop": "1",
+      "curtain": "#D9D3EC",
+      "curtain2": "#C2B9DE",
+      "light": "#D7E0FF",
+      "lightop": ".22"
+     }
+    }
+   ],
+   "light": {
+    "w": 80,
+    "len": 78
+   },
+   "spawn": [
+    200,
+    124
+   ],
+   "box": [
+    -107,
+    -95,
+    107,
+    86
+   ],
+   "thumb": "-113 -101 226 193",
+   "svg": "<defs><radialGradient id='window-glow'><stop offset='0' stop-color='@light' stop-opacity='.55'/><stop offset='1' stop-color='@light' stop-opacity='0'/></radialGradient><linearGradient id='window-sky' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='@sky1'/><stop offset='1' stop-color='@sky2'/></linearGradient><clipPath id='window-clip'><path d='M-46 62V-18A46 46 0 0 1 46 -18V62Z'/></clipPath></defs><ellipse class='glow' cx='0' cy='0' rx='104' ry='100' fill='url(#window-glow)'/><path d='M-55 72V-18A55 55 0 0 1 55 -18V72Z' fill='#6B5040' opacity='.08' transform='translate(3 4)'/><path d='M-55 72V-18A55 55 0 0 1 55 -18V72Z' fill='#FBF5EC'/><path d='M-50 66V-18A50 50 0 0 1 50 -18V66Z' fill='#E9DCCB'/><g clip-path='url(#window-clip)'><rect x='-48' y='-66' width='96' height='130' fill='url(#window-sky)'/><circle cx='20' cy='-30' r='22' fill='@sun' opacity='.3'/><circle cx='20' cy='-30' r='12' fill='@sun'/><g fill='#FFFFFF' opacity='@cloudop'><ellipse cx='-20' cy='-14' rx='17' ry='6'/><ellipse cx='-12' cy='-19' rx='10' ry='7'/><ellipse cx='26' cy='2' rx='12' ry='4'/></g><g fill='#FFFFFF' opacity='@starop'><circle cx='-26' cy='-40' r='1.5'/><circle cx='-6' cy='-52' r='1.1'/><circle cx='-34' cy='-6' r='1.2'/><circle cx='36' cy='-4' r='1.3'/><circle cx='4' cy='-22' r='1'/><circle cx='-16' cy='10' r='.9'/></g><path d='M-48 34Q-22 8 4 26T48 18V64H-48Z' fill='@hill'/><path d='M-48 46Q-10 26 26 42T48 40V64H-48Z' fill='@hill2'/><g fill='@hill2'><ellipse cx='-30' cy='24' rx='5' ry='8'/><rect x='-31' y='28' width='2' height='8'/></g><path d='M-40 -30L-26 -44L30 60L14 64Z' fill='#FFFFFF' opacity='.16'/></g><rect x='-2.5' y='-64' width='5' height='128' fill='#FBF5EC'/><rect x='-48' y='10' width='96' height='5' fill='#FBF5EC'/><rect x='-64' y='70' width='128' height='9' rx='3' fill='#FBF5EC'/><rect x='-64' y='77' width='128' height='3' rx='1.5' fill='#D9C7B3'/><rect x='-60' y='80' width='120' height='4' fill='#6B5040' opacity='.07'/><path d='M-92 -84Q-80 -10 -88 78Q-76 84 -62 78Q-70 10 -60 -84Z' fill='@curtain'/><path d='M-80 -82Q-74 -6 -78 76M-70 -82Q-66 0 -70 78' stroke='@curtain2' stroke-width='2' fill='none' opacity='.7'/><path d='M-92 6Q-74 14 -60 4' stroke='@curtain2' stroke-width='4' stroke-linecap='round' fill='none'/><g transform='scale(-1 1)'><path d='M-92 -84Q-80 -10 -88 78Q-76 84 -62 78Q-70 10 -60 -84Z' fill='@curtain'/><path d='M-80 -82Q-74 -6 -78 76M-70 -82Q-66 0 -70 78' stroke='@curtain2' stroke-width='2' fill='none' opacity='.7'/><path d='M-92 6Q-74 14 -60 4' stroke='@curtain2' stroke-width='4' stroke-linecap='round' fill='none'/></g><rect x='-100' y='-92' width='200' height='5' rx='2.5' fill='#C9AB8F'/><circle cx='-101' cy='-89.5' r='4.5' fill='#B8977A'/><circle cx='101' cy='-89.5' r='4.5' fill='#B8977A'/>"
+  },
+  "window_round": {
+   "mount": "wall",
+   "variants": [
+    {
+     "id": "morning",
+     "name": "Nắng sớm",
+     "swatch": "#CFE7F5",
+     "colors": {
+      "sky1": "#BFE0F2",
+      "sky2": "#F4F8F1",
+      "sun": "#FFE3A0",
+      "hill": "#BCD7B3",
+      "hill2": "#A3C69C",
+      "cloudop": ".95",
+      "starop": "0",
+      "curtain": "#F5DCCB",
+      "curtain2": "#E8C6B1",
+      "light": "#FFF0CF",
+      "lightop": ".5"
+     }
+    },
+    {
+     "id": "sunset",
+     "name": "Hoàng hôn",
+     "swatch": "#F8C9B5",
+     "colors": {
+      "sky1": "#F4B9A8",
+      "sky2": "#FBE3C6",
+      "sun": "#FFD08F",
+      "hill": "#D6B2C0",
+      "hill2": "#C29CB0",
+      "cloudop": ".7",
+      "starop": ".25",
+      "curtain": "#F0D3DB",
+      "curtain2": "#E0B9C5",
+      "light": "#FFD9BD",
+      "lightop": ".45"
+     }
+    },
+    {
+     "id": "starry",
+     "name": "Trời sao",
+     "swatch": "#7E8CC0",
+     "colors": {
+      "sky1": "#5E6CA6",
+      "sky2": "#A1ACD6",
+      "sun": "#FFF2C8",
+      "hill": "#7A88B4",
+      "hill2": "#6977A6",
+      "cloudop": "0",
+      "starop": "1",
+      "curtain": "#D9D3EC",
+      "curtain2": "#C2B9DE",
+      "light": "#D7E0FF",
+      "lightop": ".22"
+     }
+    }
+   ],
+   "light": {
+    "w": 56,
+    "len": 60
+   },
+   "spawn": [
+    300,
+    100
+   ],
+   "box": [
+    -51,
+    -51,
+    53,
+    55
+   ],
+   "thumb": "-57 -57 116 118",
+   "svg": "<defs><radialGradient id='window_round-glow'><stop offset='0' stop-color='@light' stop-opacity='.55'/><stop offset='1' stop-color='@light' stop-opacity='0'/></radialGradient><linearGradient id='window_round-sky' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='@sky1'/><stop offset='1' stop-color='@sky2'/></linearGradient><clipPath id='window_round-clip'><circle cx='0' cy='0' r='40'/></clipPath></defs><ellipse class='glow' cx='0' cy='0' rx='74' ry='70' fill='url(#window_round-glow)'/><circle cx='2' cy='4' r='50' fill='#6B5040' opacity='.1'/><circle cx='0' cy='0' r='50' fill='#FBF5EC'/><circle cx='0' cy='0' r='45' fill='#E9DCCB'/><g clip-path='url(#window_round-clip)'><rect x='-44' y='-44' width='88' height='88' fill='url(#window_round-sky)'/><circle cx='16' cy='-16' r='16' fill='@sun' opacity='.35'/><circle cx='16' cy='-16' r='9' fill='@sun'/><g fill='#FFFFFF' opacity='@cloudop'><ellipse cx='-14' cy='-6' rx='13' ry='5'/><ellipse cx='-8' cy='-10' rx='8' ry='6'/></g><g fill='#FFFFFF' opacity='@starop'><circle cx='-20' cy='-20' r='1.3'/><circle cx='-4' cy='-28' r='1'/><circle cx='-26' cy='4' r='1'/><circle cx='30' cy='6' r='1.1'/></g><path d='M-44 22Q-18 4 6 16T44 12V44H-44Z' fill='@hill'/><path d='M-44 32Q-6 18 22 30T44 28V44H-44Z' fill='@hill2'/><path d='M-30 -30L-18 -38L22 30L10 38Z' fill='#FFFFFF' opacity='.18'/></g><rect x='-2' y='-42' width='4' height='84' fill='#FBF5EC'/><rect x='-42' y='-2' width='84' height='4' fill='#FBF5EC'/><circle cx='0' cy='0' r='40' fill='none' stroke='#FFFFFF' stroke-opacity='.5' stroke-width='1.5'/>"
+  },
+  "painting_hills": {
+   "mount": "wall",
+   "variants": [
+    {
+     "id": "oak",
+     "name": "Khung gỗ sồi",
+     "swatch": "#CFA982",
+     "colors": {
+      "frame": "#D4AE88",
+      "frame2": "#B98F6A"
+     }
+    },
+    {
+     "id": "white",
+     "name": "Khung trắng",
+     "swatch": "#F2ECE4",
+     "colors": {
+      "frame": "#F8F3EC",
+      "frame2": "#DCCFC0"
+     }
+    },
+    {
+     "id": "mint",
+     "name": "Khung bạc hà",
+     "swatch": "#BFDCCF",
+     "colors": {
+      "frame": "#C4DFD2",
+      "frame2": "#9FC2B2"
+     }
+    }
+   ],
+   "flip": true,
+   "rotate": [
+    5,
+    10
+   ],
+   "spawn": [
+    60,
+    124
+   ],
+   "box": [
+    -39,
+    -46,
+    43,
+    38
+   ],
+   "thumb": "-45 -52 94 96",
+   "svg": "<rect x='-34' y='-24' width='76' height='60' rx='4' fill='#6B5040' opacity='.12'/><path d='M-16 -30L0 -42L16 -30' stroke='#B9A08A' stroke-width='1.3' fill='none'/><circle cx='0' cy='-42' r='2.2' fill='#A88B72'/><rect x='-38' y='-30' width='76' height='60' rx='4' fill='@frame'/><rect x='-38' y='26' width='76' height='4' rx='2' fill='@frame2'/><rect x='-32' y='-24' width='64' height='48' rx='2' fill='#FBF6EE'/><rect x='-28' y='-20' width='56' height='40' fill='#D9ECF2'/><circle cx='14' cy='-8' r='9' fill='#FFE7AE' opacity='.5'/><circle cx='14' cy='-8' r='5.5' fill='#FFE09A'/><path d='M-28 8Q-12 -6 2 4T28 0V20H-28Z' fill='#B9D4B0'/><path d='M-28 14Q-4 4 12 12T28 12V20H-28Z' fill='#9DC197'/><ellipse cx='-16' cy='-10' rx='7' ry='2.5' fill='#FFFFFF' opacity='.9'/>"
+  },
+  "painting_tulips": {
+   "mount": "wall",
+   "variants": [
+    {
+     "id": "peach",
+     "name": "Nền đào",
+     "swatch": "#F8DED3",
+     "colors": {
+      "bg": "#F8DED3",
+      "band": "#EDBCA8",
+      "f1": "#F09AA8",
+      "f2": "#F6C177"
+     }
+    },
+    {
+     "id": "lilac",
+     "name": "Nền tím nhạt",
+     "swatch": "#E7E0F3",
+     "colors": {
+      "bg": "#E7E0F3",
+      "band": "#C9BBE4",
+      "f1": "#B79BE0",
+      "f2": "#F3A9C0"
+     }
+    },
+    {
+     "id": "mint",
+     "name": "Nền bạc hà",
+     "swatch": "#DDEFE5",
+     "colors": {
+      "bg": "#DDEFE5",
+      "band": "#B5D6C4",
+      "f1": "#F2A7B5",
+      "f2": "#F7D584"
+     }
+    }
+   ],
+   "flip": true,
+   "rotate": [
+    5,
+    10
+   ],
+   "spawn": [
+    130,
+    100
+   ],
+   "box": [
+    -25,
+    -50,
+    29,
+    38
+   ],
+   "thumb": "-31 -56 66 100",
+   "svg": "<rect x='-20' y='-28' width='48' height='64' rx='4' fill='#6B5040' opacity='.12'/><path d='M-16 -34L0 -46L16 -34' stroke='#B9A08A' stroke-width='1.3' fill='none'/><circle cx='0' cy='-46' r='2.2' fill='#A88B72'/><rect x='-24' y='-34' width='48' height='66' rx='4' fill='#F8F3EC'/><rect x='-24' y='28' width='48' height='4' rx='2' fill='#DCCFC0'/><rect x='-19' y='-29' width='38' height='54' rx='2' fill='@bg'/><path d='M-6 18H6L4 6H-4Z' fill='#FBF3E8'/><path d='M-6 8H6' stroke='@band' stroke-width='2'/><path d='M0 6V-10M-2 6Q-10 -2 -10 -12M2 6Q10 -2 9 -11' stroke='#8DB48A' stroke-width='1.6' fill='none'/><path d='M-4 -12Q0 -24 4 -12Q0 -8 -4 -12Z' fill='@f1'/><path d='M-14 -13Q-10 -23 -6 -13Q-10 -9 -14 -13Z' fill='@f2'/><path d='M5 -12Q9 -22 13 -12Q9 -8 5 -12Z' fill='@f2'/><ellipse cx='-5' cy='4' rx='3' ry='1.5' fill='#8DB48A'/>"
+  },
+  "cork_board": {
+   "mount": "wall",
+   "variants": [
+    {
+     "id": "oak",
+     "name": "Khung gỗ sồi",
+     "swatch": "#CFA982",
+     "colors": {
+      "frame": "#D4AE88",
+      "frame2": "#B98F6A"
+     }
+    },
+    {
+     "id": "white",
+     "name": "Khung trắng",
+     "swatch": "#F2ECE4",
+     "colors": {
+      "frame": "#F8F3EC",
+      "frame2": "#DCCFC0"
+     }
+    }
+   ],
+   "flip": true,
+   "spawn": [
+    62,
+    120
+   ],
+   "box": [
+    -47,
+    -33,
+    51,
+    39
+   ],
+   "thumb": "-53 -39 110 84",
+   "svg": "<rect x='-42' y='-26' width='92' height='64' rx='5' fill='#6B5040' opacity='.12'/><rect x='-46' y='-32' width='92' height='64' rx='5' fill='@frame'/><rect x='-46' y='28' width='92' height='4' rx='2' fill='@frame2'/><rect x='-40' y='-26' width='80' height='52' rx='2' fill='#E9CDA6'/><g fill='#D6B48A' opacity='.6'><circle cx='-30' cy='-16' r='1'/><circle cx='-10' cy='18' r='1'/><circle cx='22' cy='-20' r='1.2'/><circle cx='30' cy='14' r='1'/><circle cx='4' cy='0' r='.9'/><circle cx='-22' cy='8' r='1.1'/></g><g transform='rotate(-6 -20 -6)'><rect x='-34' y='-20' width='26' height='26' rx='1.5' fill='#FFF3BE'/><path d='M-30 -12H-14M-30 -6H-16M-30 0H-20' stroke='#E3CD8A' stroke-width='1.6'/></g><g transform='rotate(5 16 -4)'><rect x='2' y='-22' width='30' height='36' rx='1.5' fill='#FFFFFF'/><rect x='5' y='-19' width='24' height='22' fill='#CFE6F2'/><path d='M5 3L13 -6L19 0L23 -4L29 3Z' fill='#A9CBA2'/><circle cx='24' cy='-13' r='3' fill='#FFE3A0'/></g><rect x='-12' y='8' width='22' height='14' rx='1.5' fill='#F9D3D8' transform='rotate(-3 -1 15)'/><circle cx='-21' cy='-19' r='2.6' fill='#F08C99'/><circle cx='17' cy='-21' r='2.6' fill='#7EB2D9'/><circle cx='-1' cy='9' r='2.4' fill='#86B989'/>"
+  },
+  "wall_shelf": {
+   "mount": "wall",
+   "variants": [
+    {
+     "id": "oak",
+     "name": "Gỗ sồi",
+     "swatch": "#D4AE88",
+     "colors": {
+      "wood": "#D9B691",
+      "wood2": "#B8916F"
+     }
+    },
+    {
+     "id": "white",
+     "name": "Trắng kem",
+     "swatch": "#F2ECE4",
+     "colors": {
+      "wood": "#F7F2EB",
+      "wood2": "#DCD0C2"
+     }
+    }
+   ],
+   "flip": true,
+   "spawn": [
+    336,
+    122
+   ],
+   "box": [
+    -51,
+    -31,
+    51,
+    47
+   ],
+   "thumb": "-57 -37 114 90",
+   "svg": "<rect x='-46' y='16' width='96' height='6' rx='3' fill='#6B5040' opacity='.1'/><path d='M-34 14V30L-24 14ZM34 14V30L24 14Z' fill='@wood2'/><rect x='-50' y='8' width='100' height='8' rx='3' fill='@wood'/><rect x='-50' y='13' width='100' height='3' rx='1.5' fill='@wood2'/><rect x='-42' y='-20' width='8' height='28' rx='1.5' fill='#C9BFE0'/><rect x='-33' y='-16' width='9' height='24' rx='1.5' fill='#A9CBBF'/><rect x='-23' y='-22' width='7' height='30' rx='1.5' fill='#F0B8A8'/><rect x='-14' y='-12' width='9' height='20' rx='1.5' fill='#F5DC9E' transform='rotate(14 -10 8)'/><path d='M-40 -14h4M-31 -10h5M-21 -16h3' stroke='#FFFFFF' stroke-width='1.2' opacity='.7'/><path d='M18 8H38L35 -6H21Z' fill='#F3E4D3'/><rect x='19' y='-8' width='18' height='3' rx='1.5' fill='#E7D2BC'/><path d='M28 -8Q22 -22 14 -24Q20 -14 28 -8ZM28 -8Q34 -22 42 -22Q36 -12 28 -8ZM28 -8Q28 -24 30 -30Q33 -18 28 -8Z' fill='#97BF92'/><path d='M36 10Q40 22 36 34Q34 40 38 46' stroke='#97BF92' stroke-width='1.5' fill='none'/><g fill='#A6CA9F'><ellipse cx='39' cy='22' rx='3' ry='2'/><ellipse cx='34' cy='32' rx='3' ry='2'/><ellipse cx='38' cy='42' rx='2.6' ry='1.8'/></g>"
+  },
+  "lantern_shelf": {
+   "mount": "wall",
+   "variants": [
+    {
+     "id": "oak",
+     "name": "Gỗ sồi",
+     "swatch": "#D4AE88",
+     "colors": {
+      "wood": "#D9B691",
+      "wood2": "#B8916F"
+     }
+    }
+   ],
+   "flip": true,
+   "spawn": [
+    336,
+    122
+   ],
+   "box": [
+    -51,
+    -45,
+    51,
+    31
+   ],
+   "thumb": "-57 -51 114 88",
+   "svg": "<defs><radialGradient id='lantern_shelf-glow'><stop offset='0' stop-color='#FFE7A8' stop-opacity='.8'/><stop offset='1' stop-color='#FFE7A8' stop-opacity='0'/></radialGradient></defs><ellipse class='glow' cx='6' cy='-14' rx='34' ry='30' fill='url(#lantern_shelf-glow)'/><rect x='-46' y='16' width='96' height='6' rx='3' fill='#6B5040' opacity='.1'/><path d='M-34 14V30L-24 14ZM34 14V30L24 14Z' fill='@wood2'/><rect x='-50' y='8' width='100' height='8' rx='3' fill='@wood'/><rect x='-50' y='13' width='100' height='3' rx='1.5' fill='@wood2'/><path d='M6 -34V-40' stroke='#B39579' stroke-width='1.5'/><path d='M-2 -40Q6 -48 14 -40' stroke='#B39579' stroke-width='1.6' fill='none'/><rect x='-8' y='-34' width='28' height='40' rx='9' fill='#FBEFD4'/><rect x='-8' y='-34' width='28' height='6' rx='3' fill='#E8CFA3'/><rect x='-8' y='2' width='28' height='6' rx='3' fill='#E8CFA3'/><path d='M10 -22A9 9 0 1 0 10 -4A7 7 0 1 1 10 -22Z' fill='#F5C55A'/><g fill='#F5D07A'><path d='M-30 -6l1.6 3.4 3.6.4-2.7 2.4.8 3.6-3.3-1.9-3.3 1.9.8-3.6-2.7-2.4 3.6-.4Z'/><path d='M34 -16l1.2 2.6 2.8.3-2.1 1.9.6 2.8-2.5-1.5-2.5 1.5.6-2.8-2.1-1.9 2.8-.3Z'/></g><path d='M-30 8V-4M34 8V-12' stroke='#D7C3A8' stroke-width='.8'/>"
+  },
+  "wall_clock": {
+   "mount": "wall",
+   "variants": [
+    {
+     "id": "mint",
+     "name": "Bạc hà",
+     "swatch": "#BFDCCF",
+     "colors": {
+      "rim": "#BFDCCF",
+      "rim2": "#8DB8A5"
+     }
+    },
+    {
+     "id": "peach",
+     "name": "Hồng đào",
+     "swatch": "#F3C7B5",
+     "colors": {
+      "rim": "#F3C7B5",
+      "rim2": "#D99C88"
+     }
+    },
+    {
+     "id": "butter",
+     "name": "Vàng bơ",
+     "swatch": "#F4E0A6",
+     "colors": {
+      "rim": "#F4E0A6",
+      "rim2": "#D7B866"
+     }
+    }
+   ],
+   "spawn": [
+    262,
+    60
+   ],
+   "box": [
+    -23,
+    -23,
+    26,
+    27
+   ],
+   "thumb": "-29 -29 61 62",
+   "svg": "<circle cx='2.5' cy='3.5' r='22' fill='#6B5040' opacity='.12'/><circle r='22' fill='@rim'/><circle r='17.5' fill='#FFFDF8'/><g fill='#CDBBA8'><rect x='-1' y='-15' width='2' height='4' rx='1'/><rect x='-1' y='11' width='2' height='4' rx='1'/><rect x='11' y='-1' width='4' height='2' rx='1'/><rect x='-15' y='-1' width='4' height='2' rx='1'/></g><path d='M0 0L-6 -6M0 0L8 -9' stroke='#7B6656' stroke-width='2' stroke-linecap='round'/><circle r='2' fill='@rim2'/><path d='M-14 -10A17 17 0 0 1 -6 -16' stroke='#FFFFFF' stroke-width='2' stroke-linecap='round' fill='none' opacity='.8'/>"
+  },
+  "garland": {
+   "mount": "wall",
+   "variants": [
+    {
+     "id": "warm",
+     "name": "Ánh vàng ấm",
+     "swatch": "#FFE0A0",
+     "colors": {
+      "b1": "#FFE19E",
+      "b2": "#FFD488",
+      "b3": "#FFEBB9",
+      "glow": "#FFE7A8"
+     }
+    },
+    {
+     "id": "pastel",
+     "name": "Nhiều màu pastel",
+     "swatch": "#F9C6D3",
+     "colors": {
+      "b1": "#F9C3D1",
+      "b2": "#BCDDF2",
+      "b3": "#FFE4A3",
+      "glow": "#FFF0DA"
+     }
+    }
+   ],
+   "spawn": [
+    200,
+    30
+   ],
+   "box": [
+    -89,
+    -12,
+    89,
+    20
+   ],
+   "thumb": "-95 -18 190 44",
+   "svg": "<defs><radialGradient id='garland-glow'><stop offset='0' stop-color='@glow' stop-opacity='.75'/><stop offset='1' stop-color='@glow' stop-opacity='0'/></radialGradient></defs><path d='M-84 -8Q-42 18 0 0Q42 18 84 -8' stroke='#B8A28E' stroke-width='1.4' fill='none'/><circle cx='-85' cy='-8' r='2.4' fill='#A88B72'/><circle cx='85' cy='-8' r='2.4' fill='#A88B72'/><circle class='glow' cx='-70' cy='6' r='11' fill='url(#garland-glow)'/><rect x='-72' y='-2' width='4' height='3.5' rx='1' fill='#CDB9A6'/><ellipse cx='-70' cy='5.5' rx='3.8' ry='4.8' fill='@b1'/><ellipse cx='-71.2' cy='4' rx='1.1' ry='1.6' fill='#FFFFFF' opacity='.7'/><circle class='glow' cx='-50' cy='13' r='11' fill='url(#garland-glow)'/><rect x='-52' y='5' width='4' height='3.5' rx='1' fill='#CDB9A6'/><ellipse cx='-50' cy='12.5' rx='3.8' ry='4.8' fill='@b2'/><ellipse cx='-51.2' cy='11' rx='1.1' ry='1.6' fill='#FFFFFF' opacity='.7'/><circle class='glow' cx='-30' cy='14.5' r='11' fill='url(#garland-glow)'/><rect x='-32' y='6.5' width='4' height='3.5' rx='1' fill='#CDB9A6'/><ellipse cx='-30' cy='14.0' rx='3.8' ry='4.8' fill='@b3'/><ellipse cx='-31.2' cy='12.5' rx='1.1' ry='1.6' fill='#FFFFFF' opacity='.7'/><circle class='glow' cx='-10' cy='10' r='11' fill='url(#garland-glow)'/><rect x='-12' y='2' width='4' height='3.5' rx='1' fill='#CDB9A6'/><ellipse cx='-10' cy='9.5' rx='3.8' ry='4.8' fill='@b1'/><ellipse cx='-11.2' cy='8' rx='1.1' ry='1.6' fill='#FFFFFF' opacity='.7'/><circle class='glow' cx='10' cy='10' r='11' fill='url(#garland-glow)'/><rect x='8' y='2' width='4' height='3.5' rx='1' fill='#CDB9A6'/><ellipse cx='10' cy='9.5' rx='3.8' ry='4.8' fill='@b2'/><ellipse cx='8.8' cy='8' rx='1.1' ry='1.6' fill='#FFFFFF' opacity='.7'/><circle class='glow' cx='30' cy='14.5' r='11' fill='url(#garland-glow)'/><rect x='28' y='6.5' width='4' height='3.5' rx='1' fill='#CDB9A6'/><ellipse cx='30' cy='14.0' rx='3.8' ry='4.8' fill='@b3'/><ellipse cx='28.8' cy='12.5' rx='1.1' ry='1.6' fill='#FFFFFF' opacity='.7'/><circle class='glow' cx='50' cy='13' r='11' fill='url(#garland-glow)'/><rect x='48' y='5' width='4' height='3.5' rx='1' fill='#CDB9A6'/><ellipse cx='50' cy='12.5' rx='3.8' ry='4.8' fill='@b1'/><ellipse cx='48.8' cy='11' rx='1.1' ry='1.6' fill='#FFFFFF' opacity='.7'/><circle class='glow' cx='70' cy='6' r='11' fill='url(#garland-glow)'/><rect x='68' y='-2' width='4' height='3.5' rx='1' fill='#CDB9A6'/><ellipse cx='70' cy='5.5' rx='3.8' ry='4.8' fill='@b2'/><ellipse cx='68.8' cy='4' rx='1.1' ry='1.6' fill='#FFFFFF' opacity='.7'/>"
+  },
+  "hanging_plant": {
+   "mount": "wall",
+   "variants": [
+    {
+     "id": "cream",
+     "name": "Chậu kem",
+     "swatch": "#F2E4D4",
+     "colors": {
+      "pot": "#F2E4D4",
+      "pot2": "#E2CDB6"
+     }
+    },
+    {
+     "id": "terracotta",
+     "name": "Chậu đất nung",
+     "swatch": "#E3A98D",
+     "colors": {
+      "pot": "#E7AF93",
+      "pot2": "#CF9175"
+     }
+    },
+    {
+     "id": "sage",
+     "name": "Chậu xanh xám",
+     "swatch": "#BFD6C2",
+     "colors": {
+      "pot": "#C4DAC7",
+      "pot2": "#A5C2AA"
+     }
+    }
+   ],
+   "flip": true,
+   "spawn": [
+    372,
+    70
+   ],
+   "box": [
+    -31,
+    -52,
+    26,
+    51
+   ],
+   "thumb": "-37 -58 69 115",
+   "svg": "<circle cx='0' cy='-48' r='3' fill='none' stroke='#C8AE93' stroke-width='1.5'/><path d='M0 -45L-15 -9M0 -45L15 -9M0 -45L-4 -9M0 -45L5 -9' stroke='#D2BA9F' stroke-width='1.2'/><path d='M-17 -10H17L13 10Q0 15 -13 10Z' fill='@pot'/><rect x='-18' y='-12' width='36' height='4' rx='2' fill='@pot2'/><path d='M-12 2H12' stroke='@pot2' stroke-width='2'/><path d='M-12 -11Q-26 6 -22 26Q-20 38 -26 50M8 -11Q22 6 18 22Q16 32 22 40M-2 -12Q-6 4 -4 18' stroke='#8BB487' stroke-width='1.5' fill='none'/><g fill='#9CC596'><ellipse cx='-22' cy='4' rx='4.2' ry='2.6' transform='rotate(-30 -22 4)'/><ellipse cx='-24' cy='18' rx='4.2' ry='2.6' transform='rotate(25 -24 18)'/><ellipse cx='-21' cy='32' rx='4' ry='2.4' transform='rotate(-25 -21 32)'/><ellipse cx='-25' cy='45' rx='3.8' ry='2.3' transform='rotate(20 -25 45)'/><ellipse cx='19' cy='6' rx='4.2' ry='2.6' transform='rotate(30 19 6)'/><ellipse cx='20' cy='20' rx='4' ry='2.5' transform='rotate(-25 20 20)'/><ellipse cx='20' cy='34' rx='3.6' ry='2.2' transform='rotate(25 20 34)'/><ellipse cx='-5' cy='14' rx='3.4' ry='2.2' transform='rotate(60 -5 14)'/></g><g fill='#B5D6AE'><ellipse cx='-6' cy='-16' rx='7' ry='3.4' transform='rotate(-35 -6 -16)'/><ellipse cx='7' cy='-17' rx='7' ry='3.4' transform='rotate(35 7 -17)'/><ellipse cx='0' cy='-20' rx='3.4' ry='7'/></g>"
+  },
+  "desk": {
+   "mount": "floor",
+   "variants": [
+    {
+     "id": "oak",
+     "name": "Gỗ sồi",
+     "swatch": "#DDBE9B",
+     "colors": {
+      "top": "#DFC09D",
+      "edge": "#BE9573",
+      "leg": "#B8916F",
+      "leg2": "#A47F62",
+      "body": "#D5B28E",
+      "body2": "#E1C4A3"
+     }
+    },
+    {
+     "id": "white",
+     "name": "Trắng kem",
+     "swatch": "#F4EFE8",
+     "colors": {
+      "top": "#FBF8F3",
+      "edge": "#E1D6CA",
+      "leg": "#EDE6DD",
+      "leg2": "#D8CDC1",
+      "body": "#F2ECE4",
+      "body2": "#FBF7F2"
+     }
+    },
+    {
+     "id": "mint",
+     "name": "Bạc hà",
+     "swatch": "#CDE5D9",
+     "colors": {
+      "top": "#D9ECE2",
+      "edge": "#B2D1C1",
+      "leg": "#C0DBCD",
+      "leg2": "#A5C6B6",
+      "body": "#CBE3D7",
+      "body2": "#DDEFE6"
+     }
+    }
+   ],
+   "role": "study",
+   "seat": {
+    "dx": -14,
+    "dy": 16,
+    "size": 108
+   },
+   "shadow": [
+    90,
+    7
+   ],
+   "flip": true,
+   "spawn": [
+    96,
+    318
+   ],
+   "box": [
+    -89,
+    -132,
+    89,
+    1
+   ],
+   "thumb": "-95 -138 190 145",
+   "svg": "<defs><radialGradient id='desk-glow'><stop offset='0' stop-color='#FFEAC0' stop-opacity='.75'/><stop offset='1' stop-color='#FFEAC0' stop-opacity='0'/></radialGradient></defs><ellipse class='glow' cx='40' cy='-96' rx='46' ry='30' fill='url(#desk-glow)'/><path d='M-68 -60L-71 -6M68 -60L71 -6' stroke='@leg2' stroke-width='4' stroke-linecap='round'/><rect x='22' y='-62' width='54' height='60' rx='3' fill='@body'/><rect x='72' y='-62' width='4' height='60' fill='@leg2' opacity='.5'/><rect x='27' y='-55' width='42' height='21' rx='2.5' fill='@body2'/><rect x='27' y='-30' width='42' height='22' rx='2.5' fill='@body2'/><rect x='42' y='-46' width='12' height='3' rx='1.5' fill='@edge'/><rect x='42' y='-21' width='12' height='3' rx='1.5' fill='@edge'/><rect x='24' y='-3' width='6' height='3' rx='1' fill='@leg2'/><rect x='68' y='-3' width='6' height='3' rx='1' fill='@leg2'/><path d='M-78 -62L-82 -1' stroke='@leg' stroke-width='6' stroke-linecap='round'/><rect x='-88' y='-74' width='176' height='10' rx='4' fill='@top'/><rect x='-88' y='-66' width='176' height='7' rx='3' fill='@edge'/><path d='M-84 -71H84' stroke='#FFFFFF' stroke-width='1.5' opacity='.45'/><rect x='-78' y='-82' width='36' height='8' rx='2' fill='#C5B8D8'/><rect x='-75' y='-89' width='31' height='7' rx='2' fill='#9FC2B5'/><rect x='-77' y='-96' width='34' height='7' rx='2' fill='#ECB3A4'/><path d='M-73 -79h26M-71 -86h21M-72 -93h24' stroke='#FFFFFF' stroke-width='1' opacity='.6'/><path d='M-30 -74L-26 -80H6L2 -74Z' fill='#FFFFFF'/><path d='M-26 -77H2' stroke='#D8E4EC' stroke-width='1'/><path d='M-12 -80V-74' stroke='#E6DCD0' stroke-width='1'/><path d='M-2 -79L12 -84' stroke='#F2C46D' stroke-width='2.2' stroke-linecap='round'/><path d='M-40 -86h11v11q-5.5 3-11 0Z' fill='#F7EADF'/><path d='M-29 -83q6 0 3.5 5.5-1.6 2-3.5.8' stroke='#E5CEB8' stroke-width='1.8' fill='none'/><ellipse cx='58' cy='-74' rx='13' ry='3' fill='#93ABA6'/><path d='M58 -74V-110L42 -122' fill='none' stroke='#93ABA6' stroke-width='3.5' stroke-linecap='round'/><path d='M24 -117Q25 -134 43 -130L54 -114Z' fill='#AFC8C0'/><path d='M24 -117L54 -114' stroke='#DCE8DA' stroke-width='2.5' stroke-linecap='round'/>"
+  },
+  "chair": {
+   "mount": "floor",
+   "variants": [
+    {
+     "id": "oak",
+     "name": "Gỗ sồi",
+     "swatch": "#DDBE9B",
+     "colors": {
+      "top": "#DFC09D",
+      "edge": "#BE9573",
+      "leg": "#B8916F",
+      "leg2": "#A47F62",
+      "body": "#D5B28E",
+      "body2": "#E1C4A3",
+      "cushion": "#F5C8B7"
+     }
+    },
+    {
+     "id": "white",
+     "name": "Trắng kem",
+     "swatch": "#F4EFE8",
+     "colors": {
+      "top": "#FBF8F3",
+      "edge": "#E1D6CA",
+      "leg": "#EDE6DD",
+      "leg2": "#D8CDC1",
+      "body": "#F2ECE4",
+      "body2": "#FBF7F2",
+      "cushion": "#BCD8EE"
+     }
+    },
+    {
+     "id": "mint",
+     "name": "Bạc hà",
+     "swatch": "#CDE5D9",
+     "colors": {
+      "top": "#D9ECE2",
+      "edge": "#B2D1C1",
+      "leg": "#C0DBCD",
+      "leg2": "#A5C6B6",
+      "body": "#CBE3D7",
+      "body2": "#DDEFE6",
+      "cushion": "#F6DE9B"
+     }
+    }
+   ],
+   "shadow": [
+    26,
+    5
+   ],
+   "spawn": [
+    150,
+    330
+   ],
+   "box": [
+    -26,
+    -89,
+    26,
+    1
+   ],
+   "thumb": "-32 -95 64 102",
+   "svg": "<path d='M-15 -82V-6M15 -82V-6' stroke='@leg2' stroke-width='4' stroke-linecap='round'/><rect x='-19' y='-88' width='38' height='34' rx='9' fill='@body'/><rect x='-15' y='-84' width='30' height='26' rx='7' fill='@cushion'/><path d='M-9 -78Q0 -74 9 -78' stroke='#FFFFFF' stroke-width='1.5' fill='none' opacity='.6'/><path d='M-25 -42H25L21 -34H-21Z' fill='@edge'/><ellipse cx='0' cy='-43' rx='25' ry='6' fill='@top'/><ellipse cx='0' cy='-45' rx='19' ry='4' fill='@cushion'/><path d='M-19 -34L-22 0M19 -34L22 0' stroke='@leg' stroke-width='4.5' stroke-linecap='round'/><path d='M-20 -18H20' stroke='@leg2' stroke-width='2.5'/>"
+  },
+  "side_table": {
+   "mount": "floor",
+   "variants": [
+    {
+     "id": "oak",
+     "name": "Gỗ sồi",
+     "swatch": "#DDBE9B",
+     "colors": {
+      "top": "#DFC09D",
+      "edge": "#BE9573",
+      "leg": "#B8916F",
+      "leg2": "#A47F62",
+      "body": "#D5B28E",
+      "body2": "#E1C4A3"
+     }
+    },
+    {
+     "id": "white",
+     "name": "Trắng kem",
+     "swatch": "#F4EFE8",
+     "colors": {
+      "top": "#FBF8F3",
+      "edge": "#E1D6CA",
+      "leg": "#EDE6DD",
+      "leg2": "#D8CDC1",
+      "body": "#F2ECE4",
+      "body2": "#FBF7F2"
+     }
+    },
+    {
+     "id": "mint",
+     "name": "Bạc hà",
+     "swatch": "#CDE5D9",
+     "colors": {
+      "top": "#D9ECE2",
+      "edge": "#B2D1C1",
+      "leg": "#C0DBCD",
+      "leg2": "#A5C6B6",
+      "body": "#CBE3D7",
+      "body2": "#DDEFE6"
+     }
+    }
+   ],
+   "shadow": [
+    30,
+    5
+   ],
+   "flip": true,
+   "spawn": [
+    320,
+    420
+   ],
+   "box": [
+    -32,
+    -72,
+    32,
+    2
+   ],
+   "thumb": "-38 -78 76 86",
+   "svg": "<ellipse cx='0' cy='-3' rx='16' ry='4' fill='@leg2'/><rect x='-3.5' y='-40' width='7' height='37' fill='@leg'/><path d='M-31 -46H31V-42Q0 -36 -31 -42Z' fill='@edge'/><ellipse cx='0' cy='-46' rx='31' ry='7.5' fill='@top'/><path d='M-22 -48Q0 -52 22 -48' stroke='#FFFFFF' stroke-width='1.2' fill='none' opacity='.5'/><path d='M-10 -51Q-12 -66 0 -66Q12 -66 10 -51Z' fill='#F6E9DE'/><ellipse cx='0' cy='-66' rx='5' ry='2' fill='#E8CDB9'/><circle cx='0' cy='-69' r='2' fill='#E8CDB9'/><path d='M10 -60Q18 -62 19 -68' stroke='#F6E9DE' stroke-width='3' stroke-linecap='round' fill='none'/><path d='M-9 -60Q-16 -60 -14 -55' stroke='#E8CDB9' stroke-width='2' fill='none'/><path d='M-6 -58H6' stroke='#F2B9A9' stroke-width='2'/><path d='M16 -50h9v-6h-9Z' fill='#FFFFFF'/><ellipse cx='20.5' cy='-56' rx='4.5' ry='1.4' fill='#D8B48C'/>"
+  },
+  "pouf": {
+   "mount": "floor",
+   "variants": [
+    {
+     "id": "peach",
+     "name": "Hồng đào",
+     "swatch": "#F6C9B8",
+     "colors": {
+      "a": "#F3C3B1",
+      "b": "#F9DACD",
+      "c": "#DFA390"
+     }
+    },
+    {
+     "id": "sage",
+     "name": "Xanh lá dịu",
+     "swatch": "#C5DCC0",
+     "colors": {
+      "a": "#BED7B9",
+      "b": "#D6E8D2",
+      "c": "#9BBC95"
+     }
+    },
+    {
+     "id": "lilac",
+     "name": "Tím nhạt",
+     "swatch": "#D6CBEA",
+     "colors": {
+      "a": "#D0C4E6",
+      "b": "#E4DCF2",
+      "c": "#AB9CCD"
+     }
+    },
+    {
+     "id": "sky",
+     "name": "Xanh trời",
+     "swatch": "#C2DCEE",
+     "colors": {
+      "a": "#BCD8EC",
+      "b": "#D7E8F4",
+      "c": "#90B8D6"
+     }
+    }
+   ],
+   "shadow": [
+    28,
+    5
+   ],
+   "spawn": [
+    262,
+    404
+   ],
+   "box": [
+    -28,
+    -36,
+    28,
+    0
+   ],
+   "thumb": "-34 -42 68 48",
+   "svg": "<rect x='-27' y='-28' width='54' height='27' rx='13' fill='@a'/><ellipse cx='0' cy='-27' rx='27' ry='8' fill='@b'/><path d='M-16 -22Q-18 -12 -16 -3M0 -20V-1M16 -22Q18 -12 16 -3' stroke='@c' stroke-width='1.4' fill='none' opacity='.6'/><circle cx='0' cy='-27' r='2.4' fill='@c'/><path d='M-18 -30Q0 -35 18 -30' stroke='#FFFFFF' stroke-width='1.5' fill='none' opacity='.55'/>"
+  },
+  "pet_cushion": {
+   "mount": "floor",
+   "variants": [
+    {
+     "id": "blue",
+     "name": "Xanh dương nhạt",
+     "swatch": "#BCD7EA",
+     "colors": {
+      "a": "#BFD9EC",
+      "b": "#DAEAF5",
+      "c": "#9DC0DA"
+     }
+    },
+    {
+     "id": "peach",
+     "name": "Hồng đào",
+     "swatch": "#F3C9B8",
+     "colors": {
+      "a": "#F4CBBA",
+      "b": "#FBE0D5",
+      "c": "#E1AE9A"
+     }
+    },
+    {
+     "id": "sage",
+     "name": "Xanh lá dịu",
+     "swatch": "#C5DCC0",
+     "colors": {
+      "a": "#C6DDC1",
+      "b": "#DFECDB",
+      "c": "#A6C5A0"
+     }
+    }
+   ],
+   "role": "rest",
+   "seat": {
+    "dx": 0,
+    "dy": -20,
+    "size": 104
+   },
+   "shadow": [
+    64,
+    6
+   ],
+   "spawn": [
+    318,
+    356
+   ],
+   "box": [
+    -65,
+    -33,
+    65,
+    10
+   ],
+   "thumb": "-71 -39 142 55",
+   "svg": "<ellipse cx='0' cy='-10' rx='64' ry='19' fill='@c'/><ellipse cx='0' cy='-14' rx='63' ry='18' fill='@a'/><ellipse cx='0' cy='-17' rx='48' ry='11' fill='@b'/><ellipse cx='0' cy='-17' rx='38' ry='7' fill='#FFFFFF' opacity='.18'/><path d='M-56 -22Q-30 -32 0 -32' stroke='#FFFFFF' stroke-width='2' fill='none' opacity='.5'/><g fill='@c' opacity='.7'><circle cx='-44' cy='-6' r='1.8'/><circle cx='-22' cy='-1' r='1.8'/><circle cx='0' cy='1' r='1.8'/><circle cx='22' cy='-1' r='1.8'/><circle cx='44' cy='-6' r='1.8'/></g>"
+  },
+  "pet_bed_basket": {
+   "mount": "floor",
+   "variants": [
+    {
+     "id": "natural",
+     "name": "Mây tự nhiên",
+     "swatch": "#D9B88F",
+     "colors": {
+      "a": "#DDBD95",
+      "b": "#C49F76",
+      "rim": "#E8CEA9",
+      "pillow": "#F8F0E6",
+      "stripe": "#F2C2B3"
+     }
+    },
+    {
+     "id": "white",
+     "name": "Mây trắng",
+     "swatch": "#F1EAE0",
+     "colors": {
+      "a": "#F2EBE1",
+      "b": "#D9CDBF",
+      "rim": "#FAF5EE",
+      "pillow": "#F9DCD4",
+      "stripe": "#FFFFFF"
+     }
+    }
+   ],
+   "role": "rest",
+   "seat": {
+    "dx": 0,
+    "dy": -28,
+    "size": 104
+   },
+   "shadow": [
+    66,
+    6
+   ],
+   "spawn": [
+    318,
+    360
+   ],
+   "box": [
+    -68,
+    -51,
+    68,
+    3
+   ],
+   "thumb": "-74 -57 148 66",
+   "svg": "<path d='M-66 -36Q-68 -2 -40 2H40Q68 -2 66 -36Z' fill='@a'/><path d='M-62 -26Q0 -16 62 -26M-60 -16Q0 -6 60 -16M-54 -6Q0 3 54 -6' stroke='@b' stroke-width='2' fill='none'/><path d='M-44 -34V0M-22 -32V2M0 -32V2M22 -32V2M44 -34V0' stroke='@b' stroke-width='1.4' opacity='.6'/><ellipse cx='0' cy='-36' rx='67' ry='13' fill='@rim'/><ellipse cx='0' cy='-36' rx='56' ry='9' fill='@pillow'/><path d='M-40 -38Q0 -30 40 -38' stroke='@stripe' stroke-width='3' fill='none' opacity='.7'/><path d='M-60 -42Q-30 -50 0 -49' stroke='#FFFFFF' stroke-width='2' fill='none' opacity='.45'/>"
+  },
+  "pet_house": {
+   "mount": "floor",
+   "variants": [
+    {
+     "id": "mint",
+     "name": "Bạc hà",
+     "swatch": "#CDE5D9",
+     "colors": {
+      "a": "#CFE6DA",
+      "b": "#B4D4C4",
+      "inner": "#7FA594",
+      "flag": "#F3B8A6"
+     }
+    },
+    {
+     "id": "peach",
+     "name": "Hồng đào",
+     "swatch": "#F6D3C4",
+     "colors": {
+      "a": "#F7D6C7",
+      "b": "#ECBBA7",
+      "inner": "#B98673",
+      "flag": "#9CC6E0"
+     }
+    },
+    {
+     "id": "lilac",
+     "name": "Tím nhạt",
+     "swatch": "#DDD3EE",
+     "colors": {
+      "a": "#DFD6EF",
+      "b": "#C9BBE3",
+      "inner": "#8F80B2",
+      "flag": "#F6D78E"
+     }
+    }
+   ],
+   "role": "rest",
+   "seat": {
+    "dx": 0,
+    "dy": 4,
+    "size": 104
+   },
+   "shadow": [
+    58,
+    6
+   ],
+   "flip": true,
+   "spawn": [
+    318,
+    340
+   ],
+   "box": [
+    -59,
+    -129,
+    59,
+    3
+   ],
+   "thumb": "-65 -135 130 144",
+   "svg": "<path d='M-58 0L0 -112L58 0Z' fill='@a'/><path d='M0 -112L58 0H34Z' fill='@b'/><path d='M-29 -56L0 -112M29 -56L0 -112' stroke='#FFFFFF' stroke-width='3' opacity='.35'/><path d='M-32 0Q-26 -58 0 -66Q26 -58 32 0Z' fill='@inner'/><path d='M-24 0Q-20 -46 0 -54Q4 -30 -6 0Z' fill='#000000' opacity='.08'/><path d='M-32 0Q-30 -40 -22 -50L-42 0Z' fill='@b' opacity='.8'/><rect x='-40' y='-2' width='80' height='4' rx='2' fill='@b'/><path d='M0 -112V-128' stroke='#B39579' stroke-width='2'/><path d='M0 -128L16 -123L0 -118Z' fill='@flag'/><path d='M-46 -30L-30 -24M46 -30L30 -24' stroke='@b' stroke-width='2'/><g fill='@flag'><path d='M-40 -26l3 7 3-6Z'/><path d='M34 -25l3 6 3-7Z'/></g>"
+  },
+  "bookcase": {
+   "mount": "floor",
+   "variants": [
+    {
+     "id": "oak",
+     "name": "Gỗ sồi",
+     "swatch": "#DDBE9B",
+     "colors": {
+      "top": "#DFC09D",
+      "edge": "#BE9573",
+      "leg": "#B8916F",
+      "leg2": "#A47F62",
+      "body": "#D5B28E",
+      "body2": "#E1C4A3",
+      "inner": "#C4A07E",
+      "basket": "#E8CDA8"
+     }
+    },
+    {
+     "id": "white",
+     "name": "Trắng kem",
+     "swatch": "#F4EFE8",
+     "colors": {
+      "top": "#FBF8F3",
+      "edge": "#E1D6CA",
+      "leg": "#EDE6DD",
+      "leg2": "#D8CDC1",
+      "body": "#F2ECE4",
+      "body2": "#FBF7F2",
+      "inner": "#E6DED4",
+      "basket": "#D9C2A4"
+     }
+    },
+    {
+     "id": "mint",
+     "name": "Bạc hà",
+     "swatch": "#CDE5D9",
+     "colors": {
+      "top": "#D9ECE2",
+      "edge": "#B2D1C1",
+      "leg": "#C0DBCD",
+      "leg2": "#A5C6B6",
+      "body": "#CBE3D7",
+      "body2": "#DDEFE6",
+      "inner": "#B4D2C3",
+      "basket": "#E8CDA8"
+     }
+    }
+   ],
+   "shadow": [
+    48,
+    6
+   ],
+   "flip": true,
+   "spawn": [
+    350,
+    312
+   ],
+   "box": [
+    -49,
+    -200,
+    49,
+    1
+   ],
+   "thumb": "-55 -206 110 213",
+   "svg": "<rect x='-46' y='-168' width='92' height='168' rx='4' fill='@body'/><rect x='40' y='-168' width='6' height='168' fill='@leg2' opacity='.45'/><rect x='-38' y='-160' width='76' height='46' fill='@inner'/><rect x='-38' y='-108' width='76' height='46' fill='@inner'/><rect x='-38' y='-56' width='76' height='46' fill='@inner'/><rect x='-36' y='-150' width='7' height='36' rx='1.2' fill='#C9BFE0'/><rect x='-34.5' y='-146' width='4' height='1.4' fill='#FFFFFF' opacity='.55'/><rect x='-28' y='-154' width='8' height='40' rx='1.2' fill='#A9CBBF'/><rect x='-26.5' y='-150' width='5' height='1.4' fill='#FFFFFF' opacity='.55'/><rect x='-19' y='-146' width='6' height='32' rx='1.2' fill='#F0B8A8'/><rect x='-17.5' y='-142' width='3' height='1.4' fill='#FFFFFF' opacity='.55'/><rect x='-12' y='-152' width='9' height='38' rx='1.2' fill='#F5DC9E'/><rect x='-10.5' y='-148' width='6' height='1.4' fill='#FFFFFF' opacity='.55'/><rect x='-2' y='-148' width='7' height='34' rx='1.2' fill='#BCD8EE'/><rect x='-0.5' y='-144' width='4' height='1.4' fill='#FFFFFF' opacity='.55'/><rect x='6' y='-124' width='8' height='30' rx='1.2' fill='#E7C7D6' transform='rotate(12 14 -114)'/><path d='M22 -114H34L32 -126H24Z' fill='#F3E4D3'/><path d='M28 -126Q22 -136 18 -136Q22 -130 28 -126ZM28 -126Q34 -137 38 -135Q34 -129 28 -126Z' fill='#97BF92'/><rect x='-36' y='-92' width='8' height='30' rx='1.2' fill='#F2C9B8'/><rect x='-34.5' y='-88' width='5' height='1.4' fill='#FFFFFF' opacity='.55'/><rect x='-27' y='-98' width='7' height='36' rx='1.2' fill='#B5D3C5'/><rect x='-25.5' y='-94' width='4' height='1.4' fill='#FFFFFF' opacity='.55'/><rect x='-19' y='-96' width='9' height='34' rx='1.2' fill='#D7CBEA'/><rect x='-17.5' y='-92' width='6' height='1.4' fill='#FFFFFF' opacity='.55'/><rect x='0' y='-92' width='26' height='22' rx='2' fill='#FFFFFF'/><rect x='3' y='-89' width='20' height='16' fill='#F9DDD2'/><circle cx='13' cy='-82' r='4' fill='#F3B9A6'/><rect x='0' y='-70' width='34' height='8' rx='2' fill='#B5D3C5'/><path d='M-34 -10H6L4 -40H-32Z' fill='@basket'/><path d='M-33 -30H5M-33 -20H5' stroke='#FFFFFF' stroke-width='1.2' opacity='.45'/><rect x='12' y='-26' width='24' height='16' rx='3' fill='#F6DE9B'/><rect x='12' y='-34' width='24' height='8' rx='3' fill='#F2C9B8'/><rect x='-46' y='-120' width='92' height='6' fill='@edge'/><rect x='-46' y='-68' width='92' height='6' fill='@edge'/><rect x='-46' y='-16' width='92' height='6' fill='@edge'/><rect x='-48' y='-172' width='96' height='8' rx='3' fill='@top'/><rect x='-44' y='-4' width='88' height='4' fill='@leg2' opacity='.6'/><path d='M-26 -172H-6L-8 -186H-24Z' fill='#F2E4D4'/><path d='M-16 -186Q-26 -198 -30 -196Q-26 -188 -16 -186ZM-16 -186Q-8 -200 -2 -198Q-6 -190 -16 -186Z' fill='#97BF92'/><rect x='8' y='-190' width='22' height='18' rx='2' fill='#FFFFFF'/><rect x='11' y='-187' width='16' height='12' fill='#CFE6F2'/>"
+  },
+  "cube_shelf": {
+   "mount": "floor",
+   "variants": [
+    {
+     "id": "oak",
+     "name": "Gỗ sồi",
+     "swatch": "#DDBE9B",
+     "colors": {
+      "top": "#DFC09D",
+      "edge": "#BE9573",
+      "leg": "#B8916F",
+      "leg2": "#A47F62",
+      "body": "#D5B28E",
+      "body2": "#E1C4A3",
+      "inner": "#C4A07E",
+      "basket": "#E8CDA8"
+     }
+    },
+    {
+     "id": "white",
+     "name": "Trắng kem",
+     "swatch": "#F4EFE8",
+     "colors": {
+      "top": "#FBF8F3",
+      "edge": "#E1D6CA",
+      "leg": "#EDE6DD",
+      "leg2": "#D8CDC1",
+      "body": "#F2ECE4",
+      "body2": "#FBF7F2",
+      "inner": "#E6DED4",
+      "basket": "#D9C2A4"
+     }
+    }
+   ],
+   "shadow": [
+    62,
+    6
+   ],
+   "flip": true,
+   "spawn": [
+    80,
+    430
+   ],
+   "box": [
+    -65,
+    -97,
+    65,
+    1
+   ],
+   "thumb": "-71 -103 142 110",
+   "svg": "<rect x='-62' y='-66' width='124' height='66' rx='4' fill='@body'/><rect x='56' y='-66' width='6' height='66' fill='@leg2' opacity='.45'/><rect x='-56' y='-58' width='34' height='48' rx='2' fill='@inner'/><rect x='-17' y='-58' width='34' height='48' rx='2' fill='@inner'/><rect x='22' y='-58' width='34' height='48' rx='2' fill='@inner'/><path d='M-54 -10H-24L-26 -38H-52Z' fill='@basket'/><path d='M-53 -30H-25M-53 -20H-25' stroke='#FFFFFF' stroke-width='1.2' opacity='.45'/><rect x='-14' y='-40' width='6' height='30' rx='1.2' fill='#C9BFE0'/><rect x='-12.5' y='-36' width='3' height='1.4' fill='#FFFFFF' opacity='.55'/><rect x='-7' y='-44' width='7' height='34' rx='1.2' fill='#F0B8A8'/><rect x='-5.5' y='-40' width='4' height='1.4' fill='#FFFFFF' opacity='.55'/><rect x='1' y='-38' width='6' height='28' rx='1.2' fill='#A9CBBF'/><rect x='2.5' y='-34' width='3' height='1.4' fill='#FFFFFF' opacity='.55'/><rect x='8' y='-42' width='7' height='32' rx='1.2' fill='#F5DC9E'/><rect x='9.5' y='-38' width='4' height='1.4' fill='#FFFFFF' opacity='.55'/><rect x='25' y='-22' width='28' height='12' rx='3' fill='#BCD8EE'/><rect x='25' y='-32' width='28' height='10' rx='3' fill='#F7D3C7'/><rect x='-64' y='-70' width='128' height='7' rx='3' fill='@top'/><path d='M-44 -70H-28L-30 -80H-42Z' fill='#F2E4D4'/><path d='M-36 -80V-96' stroke='#8DB48A' stroke-width='5' stroke-linecap='round'/><path d='M-36 -88h-5v-4M-36 -86h5v-5' stroke='#8DB48A' stroke-width='3' stroke-linecap='round' fill='none'/><rect x='12' y='-88' width='24' height='18' rx='2' fill='#FFFFFF'/><rect x='15' y='-85' width='18' height='12' fill='#F9DDD2'/>"
+  },
+  "plant_monstera": {
+   "mount": "floor",
+   "variants": [
+    {
+     "id": "terracotta",
+     "name": "Chậu đất nung",
+     "swatch": "#E3A98D",
+     "colors": {
+      "pot": "#E5AB8F",
+      "pot2": "#CF9175"
+     }
+    },
+    {
+     "id": "cream",
+     "name": "Chậu kem",
+     "swatch": "#F2E4D4",
+     "colors": {
+      "pot": "#F3E7D8",
+      "pot2": "#E0CDB7"
+     }
+    },
+    {
+     "id": "sage",
+     "name": "Chậu xanh xám",
+     "swatch": "#BFD6C2",
+     "colors": {
+      "pot": "#C4DAC7",
+      "pot2": "#A5C2AA"
+     }
+    }
+   ],
+   "shadow": [
+    26,
+    5
+   ],
+   "flip": true,
+   "spawn": [
+    44,
+    436
+   ],
+   "box": [
+    -58,
+    -136,
+    59,
+    1
+   ],
+   "thumb": "-64 -142 129 149",
+   "svg": "<path d='M-4 -42Q-12 -70 -28 -86M2 -42Q4 -80 12 -104M4 -42Q20 -62 34 -70M-2 -42Q-26 -50 -36 -54' stroke='#7FA97E' stroke-width='2.4' fill='none'/><g transform='rotate(-40 -30 -88)'><ellipse cx='-30' cy='-88' rx='22' ry='12' fill='#8DB98A'/><path d='M-48.7 -88H-11.3' stroke='#C7DFC0' stroke-width='1.2' opacity='.8'/></g><g transform='rotate(-75 13 -108)'><ellipse cx='13' cy='-108' rx='24' ry='13' fill='#9CC596'/><path d='M-7.399999999999999 -108H33.4' stroke='#C7DFC0' stroke-width='1.2' opacity='.8'/></g><g transform='rotate(25 34 -72)'><ellipse cx='34' cy='-72' rx='21' ry='11' fill='#86B286'/><path d='M16.150000000000002 -72H51.849999999999994' stroke='#C7DFC0' stroke-width='1.2' opacity='.8'/></g><g transform='rotate(10 -36 -55)'><ellipse cx='-36' cy='-55' rx='19' ry='10' fill='#9CC596'/><path d='M-52.15 -55H-19.85' stroke='#C7DFC0' stroke-width='1.2' opacity='.8'/></g><g transform='rotate(-100 0 -74)'><ellipse cx='0' cy='-74' rx='17' ry='10' fill='#A9CFA2'/><path d='M-14.45 -74H14.45' stroke='#C7DFC0' stroke-width='1.2' opacity='.8'/></g><path d='M-22 -40H22L17 -3Q0 2 -17 -3Z' fill='@pot'/><path d='M-17 -3Q0 2 17 -3L18 -10Q0 -6 -18 -10Z' fill='@pot2' opacity='.6'/><rect x='-24' y='-46' width='48' height='8' rx='3' fill='@pot2'/><path d='M-16 -30Q-14 -14 -12 -8' stroke='#FFFFFF' stroke-width='2' opacity='.35' fill='none'/>"
+  },
+  "plant_flowers": {
+   "mount": "floor",
+   "variants": [
+    {
+     "id": "pink",
+     "name": "Hoa hồng phấn",
+     "swatch": "#F6B8C4",
+     "colors": {
+      "f1": "#F4AEBD",
+      "f2": "#F9CDD6"
+     }
+    },
+    {
+     "id": "butter",
+     "name": "Hoa vàng bơ",
+     "swatch": "#F8DC8F",
+     "colors": {
+      "f1": "#F6D27E",
+      "f2": "#FBE4AE"
+     }
+    },
+    {
+     "id": "lilac",
+     "name": "Hoa tím nhạt",
+     "swatch": "#CDB8EA",
+     "colors": {
+      "f1": "#C7B0E8",
+      "f2": "#E0D3F4"
+     }
+    }
+   ],
+   "shadow": [
+    18,
+    4
+   ],
+   "flip": true,
+   "spawn": [
+    44,
+    436
+   ],
+   "box": [
+    -25,
+    -82,
+    26,
+    1
+   ],
+   "thumb": "-31 -88 63 95",
+   "svg": "<path d='M0 -30V-62M0 -34Q-12 -46 -16 -60M0 -34Q12 -46 16 -58M0 -40Q-5 -56 -6 -70' stroke='#86B286' stroke-width='1.8' fill='none'/><g transform='rotate(-30 -9 -44)'><ellipse cx='-9' cy='-44' rx='7' ry='3' fill='#9CC596'/><path d='M-14.95 -44H-3.05' stroke='#C7DFC0' stroke-width='1.2' opacity='.8'/></g><g transform='rotate(30 9 -46)'><ellipse cx='9' cy='-46' rx='7' ry='3' fill='#9CC596'/><path d='M3.05 -46H14.95' stroke='#C7DFC0' stroke-width='1.2' opacity='.8'/></g><g transform='translate(0 -64)'><circle cx='4.5' cy='0' r='4' fill='@f1'/><circle cx='1.4' cy='4.3' r='4' fill='@f1'/><circle cx='-3.6' cy='2.6' r='4' fill='@f1'/><circle cx='-3.6' cy='-2.6' r='4' fill='@f1'/><circle cx='1.4' cy='-4.3' r='4' fill='@f1'/><circle r='2.6' fill='#FFE7A6'/></g><g transform='translate(-16 -60)'><circle cx='4.5' cy='0' r='4' fill='@f2'/><circle cx='1.4' cy='4.3' r='4' fill='@f2'/><circle cx='-3.6' cy='2.6' r='4' fill='@f2'/><circle cx='-3.6' cy='-2.6' r='4' fill='@f2'/><circle cx='1.4' cy='-4.3' r='4' fill='@f2'/><circle r='2.6' fill='#FFE7A6'/></g><g transform='translate(16 -58)'><circle cx='4.5' cy='0' r='4' fill='@f2'/><circle cx='1.4' cy='4.3' r='4' fill='@f2'/><circle cx='-3.6' cy='2.6' r='4' fill='@f2'/><circle cx='-3.6' cy='-2.6' r='4' fill='@f2'/><circle cx='1.4' cy='-4.3' r='4' fill='@f2'/><circle r='2.6' fill='#FFE7A6'/></g><g transform='translate(-6 -72)'><circle cx='4.5' cy='0' r='4' fill='@f1'/><circle cx='1.4' cy='4.3' r='4' fill='@f1'/><circle cx='-3.6' cy='2.6' r='4' fill='@f1'/><circle cx='-3.6' cy='-2.6' r='4' fill='@f1'/><circle cx='1.4' cy='-4.3' r='4' fill='@f1'/><circle r='2.6' fill='#FFE7A6'/></g><path d='M-16 -30H16L13 -2Q0 2 -13 -2Z' fill='#F3E7D8'/><rect x='-18' y='-34' width='36' height='6' rx='3' fill='#E0CDB7'/><path d='M-14 -16H14' stroke='@f1' stroke-width='2' opacity='.6'/>"
+  },
+  "small_pot": {
+   "mount": "floor",
+   "variants": [
+    {
+     "id": "default",
+     "name": "Mặc định",
+     "swatch": "#F0B9A2",
+     "colors": {}
+    }
+   ],
+   "shadow": [
+    14,
+    3.5
+   ],
+   "flip": true,
+   "spawn": [
+    150,
+    420
+   ],
+   "box": [
+    -16,
+    -47,
+    16,
+    1
+   ],
+   "thumb": "-22 -53 44 60",
+   "svg": "<path d='M0 -22Q-2 -34 -10 -40Q-4 -40 0 -32Q2 -42 10 -46Q8 -34 0 -22Z' fill='#9CC596'/><path d='M0 -22V-32' stroke='#7FA97E' stroke-width='1.6'/><path d='M-13 -22H13L10 -2Q0 1 -10 -2Z' fill='#F0B9A2'/><rect x='-15' y='-26' width='30' height='6' rx='3' fill='#E2A58C'/><circle cx='-4' cy='-12' r='1.6' fill='#FFFFFF' opacity='.7'/><circle cx='4' cy='-10' r='1.6' fill='#FFFFFF' opacity='.7'/>"
+  },
+  "floor_lamp": {
+   "mount": "floor",
+   "variants": [
+    {
+     "id": "cream",
+     "name": "Chụp kem",
+     "swatch": "#F7DDB9",
+     "colors": {
+      "shade": "#F8E0BF",
+      "shade2": "#E6C394"
+     }
+    },
+    {
+     "id": "mint",
+     "name": "Chụp bạc hà",
+     "swatch": "#C7E3D5",
+     "colors": {
+      "shade": "#CBE5D8",
+      "shade2": "#A3CAB7"
+     }
+    },
+    {
+     "id": "peach",
+     "name": "Chụp hồng đào",
+     "swatch": "#F6CDBC",
+     "colors": {
+      "shade": "#F7D0C0",
+      "shade2": "#E6AF99"
+     }
+    }
+   ],
+   "shadow": [
+    22,
+    4.5
+   ],
+   "spawn": [
+    378,
+    316
+   ],
+   "box": [
+    -26,
+    -171,
+    26,
+    3
+   ],
+   "thumb": "-32 -177 64 186",
+   "svg": "<defs><radialGradient id='floor_lamp-glow'><stop offset='0' stop-color='#FFE9BC' stop-opacity='.7'/><stop offset='1' stop-color='#FFE9BC' stop-opacity='0'/></radialGradient></defs><ellipse class='glow' cx='0' cy='-140' rx='64' ry='52' fill='url(#floor_lamp-glow)'/><ellipse cx='0' cy='-3' rx='17' ry='4.5' fill='#B9A592'/><rect x='-2' y='-140' width='4' height='138' rx='2' fill='#B9A592'/><path d='M-25 -134L-16 -170H16L25 -134Z' fill='@shade'/><path d='M6 -170H16L25 -134H12Z' fill='@shade2'/><path d='M-16 -170H16' stroke='@shade2' stroke-width='3' stroke-linecap='round'/><path d='M-25 -134H25' stroke='@shade2' stroke-width='3.5' stroke-linecap='round'/><ellipse cx='0' cy='-132' rx='19' ry='3' fill='#FFF8E8'/><path d='M-19 -150H19' stroke='#FFFFFF' stroke-width='1.5' opacity='.6'/>"
+  },
+  "mushroom_lamp": {
+   "mount": "floor",
+   "variants": [
+    {
+     "id": "rose",
+     "name": "Hồng",
+     "swatch": "#F4B8B0",
+     "colors": {
+      "cap": "#F4B8B0",
+      "cap2": "#E79D94"
+     }
+    },
+    {
+     "id": "butter",
+     "name": "Vàng bơ",
+     "swatch": "#F6D98E",
+     "colors": {
+      "cap": "#F6D98E",
+      "cap2": "#E6C46E"
+     }
+    },
+    {
+     "id": "mint",
+     "name": "Bạc hà",
+     "swatch": "#B9DCCB",
+     "colors": {
+      "cap": "#B9DCCB",
+      "cap2": "#9CC6B2"
+     }
+    }
+   ],
+   "shadow": [
+    16,
+    3.5
+   ],
+   "spawn": [
+    236,
+    318
+   ],
+   "box": [
+    -23,
+    -45,
+    23,
+    1
+   ],
+   "thumb": "-29 -51 58 58",
+   "svg": "<defs><radialGradient id='mushroom_lamp-glow'><stop offset='0' stop-color='#FFE7B5' stop-opacity='.75'/><stop offset='1' stop-color='#FFE7B5' stop-opacity='0'/></radialGradient></defs><ellipse class='glow' cx='0' cy='-26' rx='34' ry='28' fill='url(#mushroom_lamp-glow)'/><path d='M-7 -20H7L8 -2Q0 1 -8 -2Z' fill='#FBF3E6'/><path d='M-22 -20Q-22 -44 0 -44Q22 -44 22 -20Z' fill='@cap'/><path d='M-22 -20Q0 -14 22 -20' fill='@cap2'/><g fill='#FFFFFF' opacity='.85'><circle cx='-10' cy='-32' r='3.2'/><circle cx='6' cy='-38' r='2.4'/><circle cx='12' cy='-26' r='2.8'/></g>"
+  },
+  "toy_ball": {
+   "mount": "floor",
+   "variants": [
+    {
+     "id": "pink",
+     "name": "Hồng",
+     "swatch": "#F6B5C2",
+     "colors": {
+      "a": "#F6B7C4",
+      "b": "#E595A8"
+     }
+    },
+    {
+     "id": "sky",
+     "name": "Xanh trời",
+     "swatch": "#B8D8EE",
+     "colors": {
+      "a": "#BAD9EE",
+      "b": "#8DBBDD"
+     }
+    },
+    {
+     "id": "butter",
+     "name": "Vàng bơ",
+     "swatch": "#F8DE97",
+     "colors": {
+      "a": "#F8DF99",
+      "b": "#E2BF66"
+     }
+    }
+   ],
+   "shadow": [
+    16,
+    3.5
+   ],
+   "flip": true,
+   "rotate": [
+    15,
+    45
+   ],
+   "spawn": [
+    262,
+    412
+   ],
+   "box": [
+    -16,
+    -31,
+    27,
+    3
+   ],
+   "thumb": "-22 -37 55 46",
+   "svg": "<path d='M10 -6Q20 -2 26 -1' stroke='@b' stroke-width='1.6' fill='none' stroke-linecap='round'/><circle cx='0' cy='-15' r='15' fill='@a'/><path d='M-12 -24Q0 -12 -4 2M-6 -29Q10 -18 8 0M4 -29Q-10 -14 12 -8M-15 -14Q0 -6 14 -20' stroke='@b' stroke-width='1.6' fill='none' opacity='.85'/><path d='M-9 -24A11 11 0 0 1 2 -27' stroke='#FFFFFF' stroke-width='2' fill='none' opacity='.5' stroke-linecap='round'/>"
+  },
+  "toy_blocks": {
+   "mount": "floor",
+   "variants": [
+    {
+     "id": "default",
+     "name": "Mặc định",
+     "swatch": "#F6E1A3",
+     "colors": {}
+    }
+   ],
+   "shadow": [
+    28,
+    4
+   ],
+   "flip": true,
+   "spawn": [
+    150,
+    424
+   ],
+   "box": [
+    -28,
+    -51,
+    26,
+    1
+   ],
+   "thumb": "-34 -57 66 64",
+   "svg": "<rect x='-27' y='-24' width='24' height='24' rx='3' fill='#F7C9B9'/><rect x='-27' y='-24' width='24' height='5' rx='2' fill='#FBDDD1'/><path d='M-15 -6l-4.5-4.3a2.8 2.8 0 0 1 4.5-3.4a2.8 2.8 0 0 1 4.5 3.4Z' fill='#E79A88'/><rect x='1' y='-24' width='24' height='24' rx='3' fill='#BFDCEB'/><rect x='1' y='-24' width='24' height='5' rx='2' fill='#D6E9F3'/><circle cx='13' cy='-10' r='5' fill='none' stroke='#86B5D3' stroke-width='2.4'/><g transform='rotate(-8 -1 -36)'><rect x='-13' y='-48' width='24' height='24' rx='3' fill='#F6E1A3'/><rect x='-13' y='-48' width='24' height='5' rx='2' fill='#FAEDC3'/><path d='M-1 -41l2.2 4.4 4.8.7-3.5 3.4.8 4.8-4.3-2.3-4.3 2.3.8-4.8-3.5-3.4 4.8-.7Z' fill='#E6C063'/></g>"
+  },
+  "toy_plush": {
+   "mount": "floor",
+   "variants": [
+    {
+     "id": "cream",
+     "name": "Gấu kem",
+     "swatch": "#E8CDAE",
+     "colors": {
+      "fur": "#E9CFB0",
+      "belly": "#F7E9D7",
+      "bow": "#F3B6C2"
+     }
+    },
+    {
+     "id": "pink",
+     "name": "Gấu hồng",
+     "swatch": "#F6D0D3",
+     "colors": {
+      "fur": "#F5CFD3",
+      "belly": "#FBE8EA",
+      "bow": "#9FCBE8"
+     }
+    },
+    {
+     "id": "sky",
+     "name": "Gấu xanh",
+     "swatch": "#CFE2F1",
+     "colors": {
+      "fur": "#CDE1F1",
+      "belly": "#EAF3FA",
+      "bow": "#F2CF78"
+     }
+    }
+   ],
+   "shadow": [
+    20,
+    4
+   ],
+   "flip": true,
+   "spawn": [
+    236,
+    426
+   ],
+   "box": [
+    -24,
+    -62,
+    24,
+    2
+   ],
+   "thumb": "-30 -68 60 76",
+   "svg": "<ellipse cx='-12' cy='-4' rx='7' ry='5' fill='@fur'/><ellipse cx='12' cy='-4' rx='7' ry='5' fill='@fur'/><ellipse cx='0' cy='-17' rx='15' ry='15' fill='@fur'/><ellipse cx='0' cy='-14' rx='9' ry='9' fill='@belly'/><ellipse cx='-15' cy='-22' rx='5' ry='7' fill='@fur' transform='rotate(25 -15 -22)'/><ellipse cx='15' cy='-22' rx='5' ry='7' fill='@fur' transform='rotate(-25 15 -22)'/><g transform='rotate(-8 0 -42)'><circle cx='-11' cy='-52' r='6' fill='@fur'/><circle cx='11' cy='-52' r='6' fill='@fur'/><circle cx='-11' cy='-52' r='3' fill='@belly'/><circle cx='11' cy='-52' r='3' fill='@belly'/><circle cx='0' cy='-41' r='14' fill='@fur'/><ellipse cx='0' cy='-36' rx='6.5' ry='5' fill='@belly'/><circle cx='-5' cy='-43' r='1.7' fill='#5C4A40'/><circle cx='5' cy='-43' r='1.7' fill='#5C4A40'/><ellipse cx='0' cy='-37.5' rx='2' ry='1.4' fill='#5C4A40'/><circle cx='-9' cy='-37' r='2.2' fill='#F4A9B4' opacity='.55'/><circle cx='9' cy='-37' r='2.2' fill='#F4A9B4' opacity='.55'/></g><path d='M-7 -29L0 -26L-7 -22ZM7 -29L0 -26L7 -22Z' fill='@bow'/><circle cx='0' cy='-25.5' r='2' fill='@bow'/>"
+  },
+  "rug_oval": {
+   "mount": "rug",
+   "variants": [
+    {
+     "id": "sage",
+     "name": "Xanh lá dịu",
+     "swatch": "#C5D9BE",
+     "colors": {
+      "a": "#C8DCC1",
+      "b": "#ADC8A5",
+      "c": "#D9E8D4"
+     }
+    },
+    {
+     "id": "peach",
+     "name": "Hồng đào",
+     "swatch": "#F4CDBE",
+     "colors": {
+      "a": "#F5D2C3",
+      "b": "#E8B3A0",
+      "c": "#FBE3D9"
+     }
+    },
+    {
+     "id": "lilac",
+     "name": "Tím nhạt",
+     "swatch": "#D9CFEB",
+     "colors": {
+      "a": "#DCD3EC",
+      "b": "#C1B3DE",
+      "c": "#EAE4F4"
+     }
+    },
+    {
+     "id": "sky",
+     "name": "Xanh trời",
+     "swatch": "#C6DEEF",
+     "colors": {
+      "a": "#C9E0F0",
+      "b": "#A6C8E2",
+      "c": "#DDEBF6"
+     }
+    }
+   ],
+   "role": "rug",
+   "seat": {
+    "dx": 0,
+    "dy": 0,
+    "size": 116
+   },
+   "spawn": [
+    200,
+    372
+   ],
+   "box": [
+    -119,
+    -32,
+    119,
+    35
+   ],
+   "thumb": "-125 -38 250 79",
+   "svg": "<ellipse cx='0' cy='3' rx='118' ry='31' fill='@b'/><ellipse cx='0' cy='0' rx='118' ry='31' fill='@a'/><ellipse cx='0' cy='0' rx='100' ry='24' fill='none' stroke='@b' stroke-width='3'/><ellipse cx='0' cy='0' rx='84' ry='18' fill='@c'/><ellipse cx='0' cy='0' rx='84' ry='18' fill='none' stroke='#FFFFFF' stroke-width='1.5' stroke-dasharray='4 6' opacity='.7'/><path d='M-90 -14Q-40 -26 20 -24' stroke='#FFFFFF' stroke-width='2' fill='none' opacity='.35'/>"
+  },
+  "rug_round": {
+   "mount": "rug",
+   "variants": [
+    {
+     "id": "peach",
+     "name": "Hồng đào",
+     "swatch": "#F4CDBE",
+     "colors": {
+      "a": "#F5D2C3",
+      "b": "#E8B3A0",
+      "c": "#FBE3D9"
+     }
+    },
+    {
+     "id": "cream",
+     "name": "Kem",
+     "swatch": "#F3E6D6",
+     "colors": {
+      "a": "#F4E8D9",
+      "b": "#E3D0BA",
+      "c": "#FBF5ED"
+     }
+    },
+    {
+     "id": "sky",
+     "name": "Xanh trời",
+     "swatch": "#C6DEEF",
+     "colors": {
+      "a": "#C9E0F0",
+      "b": "#A6C8E2",
+      "c": "#DDEBF6"
+     }
+    }
+   ],
+   "role": "rug",
+   "seat": {
+    "dx": 0,
+    "dy": 0,
+    "size": 116
+   },
+   "spawn": [
+    200,
+    372
+   ],
+   "box": [
+    -106,
+    -33,
+    107,
+    36
+   ],
+   "thumb": "-112 -39 225 81",
+   "svg": "<g fill='@b'><ellipse cx='90' cy='3' rx='15' ry='6'/><ellipse cx='84.6' cy='11.9' rx='15' ry='6'/><ellipse cx='68.9' cy='19.7' rx='15' ry='6'/><ellipse cx='45' cy='25.5' rx='15' ry='6'/><ellipse cx='15.6' cy='28.6' rx='15' ry='6'/><ellipse cx='-15.6' cy='28.6' rx='15' ry='6'/><ellipse cx='-45' cy='25.5' rx='15' ry='6'/><ellipse cx='-68.9' cy='19.7' rx='15' ry='6'/><ellipse cx='-84.6' cy='11.9' rx='15' ry='6'/><ellipse cx='-90' cy='3' rx='15' ry='6'/><ellipse cx='-84.6' cy='-5.9' rx='15' ry='6'/><ellipse cx='-68.9' cy='-13.7' rx='15' ry='6'/><ellipse cx='-45' cy='-19.5' rx='15' ry='6'/><ellipse cx='-15.6' cy='-22.6' rx='15' ry='6'/><ellipse cx='15.6' cy='-22.6' rx='15' ry='6'/><ellipse cx='45' cy='-19.5' rx='15' ry='6'/><ellipse cx='68.9' cy='-13.7' rx='15' ry='6'/><ellipse cx='84.6' cy='-5.9' rx='15' ry='6'/></g><g fill='@a'><ellipse cx='90' cy='0' rx='15' ry='6'/><ellipse cx='84.6' cy='8.9' rx='15' ry='6'/><ellipse cx='68.9' cy='16.7' rx='15' ry='6'/><ellipse cx='45' cy='22.5' rx='15' ry='6'/><ellipse cx='15.6' cy='25.6' rx='15' ry='6'/><ellipse cx='-15.6' cy='25.6' rx='15' ry='6'/><ellipse cx='-45' cy='22.5' rx='15' ry='6'/><ellipse cx='-68.9' cy='16.7' rx='15' ry='6'/><ellipse cx='-84.6' cy='8.9' rx='15' ry='6'/><ellipse cx='-90' cy='0' rx='15' ry='6'/><ellipse cx='-84.6' cy='-8.9' rx='15' ry='6'/><ellipse cx='-68.9' cy='-16.7' rx='15' ry='6'/><ellipse cx='-45' cy='-22.5' rx='15' ry='6'/><ellipse cx='-15.6' cy='-25.6' rx='15' ry='6'/><ellipse cx='15.6' cy='-25.6' rx='15' ry='6'/><ellipse cx='45' cy='-22.5' rx='15' ry='6'/><ellipse cx='68.9' cy='-16.7' rx='15' ry='6'/><ellipse cx='84.6' cy='-8.9' rx='15' ry='6'/></g><ellipse cx='0' cy='0' rx='92' ry='26' fill='@a'/><ellipse cx='0' cy='0' rx='72' ry='19' fill='@c'/><ellipse cx='0' cy='0' rx='34' ry='8.5' fill='@a'/><ellipse cx='0' cy='0' rx='34' ry='8.5' fill='none' stroke='#FFFFFF' stroke-width='1.5' opacity='.6'/>"
+  },
+  "rug_stripes": {
+   "mount": "rug",
+   "variants": [
+    {
+     "id": "sky",
+     "name": "Xanh trời",
+     "swatch": "#C6DEEF",
+     "colors": {
+      "a": "#D3E6F3",
+      "b": "#A8CAE3",
+      "c": "#BBD8EC"
+     }
+    },
+    {
+     "id": "rose",
+     "name": "Hồng phấn",
+     "swatch": "#F4CCD3",
+     "colors": {
+      "a": "#F7D9DE",
+      "b": "#E8AFBB",
+      "c": "#F1C1CB"
+     }
+    },
+    {
+     "id": "sage",
+     "name": "Xanh lá dịu",
+     "swatch": "#C5D9BE",
+     "colors": {
+      "a": "#D6E6D1",
+      "b": "#AECAA6",
+      "c": "#C3DABC"
+     }
+    }
+   ],
+   "role": "rug",
+   "seat": {
+    "dx": 0,
+    "dy": -2,
+    "size": 116
+   },
+   "spawn": [
+    200,
+    374
+   ],
+   "box": [
+    -115,
+    -29,
+    115,
+    35
+   ],
+   "thumb": "-121 -35 242 76",
+   "svg": "<path d='M-98 -26H98L114 30H-114Z' fill='@b'/><path d='M-98 -28H98L114 27H-114Z' fill='@a'/><path d='M-101 -16H101L104 -6H-104ZM-107 6H107L110 16H-110Z' fill='@c'/><path d='M-103 -12H103M-109 10H109' stroke='#FFFFFF' stroke-width='1.2' opacity='.5'/><g stroke='@b' stroke-width='1.6' stroke-linecap='round'><path d='M-108 28V34'/><path d='M-99 28V34'/><path d='M-90 28V34'/><path d='M-81 28V34'/><path d='M-72 28V34'/><path d='M-63 28V34'/><path d='M-54 28V34'/><path d='M-45 28V34'/><path d='M-36 28V34'/><path d='M-27 28V34'/><path d='M-18 28V34'/><path d='M-9 28V34'/><path d='M0 28V34'/><path d='M9 28V34'/><path d='M18 28V34'/><path d='M27 28V34'/><path d='M36 28V34'/><path d='M45 28V34'/><path d='M54 28V34'/><path d='M63 28V34'/><path d='M72 28V34'/><path d='M81 28V34'/><path d='M90 28V34'/><path d='M99 28V34'/><path d='M108 28V34'/></g>"
+  }
+ },
+ "vignette": "<defs><radialGradient id='room-vignette' cx='.5' cy='.52' r='.72'><stop offset='.62' stop-color='#5A4030' stop-opacity='0'/><stop offset='1' stop-color='#5A4030' stop-opacity='.14'/></radialGradient></defs><rect width='400' height='440' fill='url(#room-vignette)'/>"
+}

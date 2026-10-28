@@ -1,0 +1,106 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic
+walk	walk	verb	1	actions	đi bộ	di chuyển bằng hai chân, không chạy	I walk to school every day.	Tôi đi bộ đến trường mỗi ngày.		/wɔːk/
+run.move	run	verb	1	actions	chạy	di chuyển nhanh bằng chân	The dog runs to the door.	Con chó chạy ra cửa.		/rʌn/
+jump	jump	verb	1	actions	nhảy, bật lên	bật người lên khỏi mặt đất bằng chân	The cat jumped onto the table.	Con mèo nhảy lên bàn.		/dʒʌmp/
+sit	sit	verb	1	actions	ngồi	ở tư thế ngồi trên ghế, trên sàn	Please sit here.	Mời bạn ngồi đây.		/sɪt/
+stand	stand	verb	1	actions	đứng	ở tư thế thẳng người trên hai chân	Don't stand on the chair!	Đừng đứng lên ghế!		/stænd/
+sit_down	sit down	phrasal_verb	1	actions	ngồi xuống	chuyển từ tư thế đứng sang ngồi	Sit down, please.	Mời ngồi xuống.
+stand_up	stand up	phrasal_verb	1	actions	đứng dậy	chuyển từ tư thế ngồi hoặc nằm sang đứng	Stand up when the teacher comes in.	Hãy đứng dậy khi cô giáo vào lớp.
+open.door	open	verb	1	actions	mở	làm cho cửa, hộp, sách không còn đóng	Can you open the window?	Bạn mở cửa sổ được không?		/ˈəʊpən/
+close.shut	close	verb	1	actions	đóng	làm cho cửa, hộp, sách không còn mở	Please close the door.	Làm ơn đóng cửa lại.	shut	/kləʊz/
+push	push	verb	1	actions	đẩy	dùng tay hoặc người làm vật đi ra xa mình	Push the door to open it.	Đẩy cửa để mở.		/pʊʃ/
+pull	pull	verb	1	actions	kéo	dùng tay làm vật đi về phía mình	Pull the door, don't push it.	Kéo cửa, đừng đẩy.		/pʊl/
+throw	throw	verb	1	actions	ném	dùng tay đẩy vật bay đi trong không khí	Throw the ball to me.	Ném bóng cho tôi.		/θrəʊ/
+catch.object	catch	verb	1	actions	bắt lấy, chụp lấy	giữ lấy vật đang bay hoặc rơi về phía mình	I threw the keys and she caught them.	Tôi ném chùm chìa khóa và cô ấy bắt được.		/kætʃ/
+hold	hold	verb	1	actions	cầm, nắm	giữ vật trong tay	Can you hold my bag for a minute?	Bạn cầm giúp tôi cái túi một lát được không?		/həʊld/
+carry	carry	verb	1	actions	mang, xách, bế	cầm hoặc đỡ vật, người và mang đi theo	She is carrying a heavy box.	Cô ấy đang bê một chiếc hộp nặng.		/ˈkæri/
+put	put	verb	1	actions	đặt, để	đưa vật vào một chỗ nào đó	Put your bag on the table.	Để túi của bạn lên bàn.		/pʊt/
+take.grab	take	verb	1	actions	cầm lấy, lấy	đưa tay lấy một vật	Take a pen from the box.	Lấy một cây bút trong hộp.		/teɪk/
+give.gift	give	verb	1	actions	cho, tặng	đưa cho người khác một vật để họ giữ luôn	My aunt gave me a new bike.	Cô tôi đã tặng tôi một chiếc xe đạp mới.		/ɡɪv/
+bring	bring	verb	1	actions	mang đến, đem lại (đây)	mang vật hoặc người đến chỗ người nói	Bring your book tomorrow.	Ngày mai mang sách đến nhé.		/brɪŋ/
+get.receive	get	verb	1	actions	nhận được	có được một thứ người khác gửi, tặng	I got a letter from my friend.	Tôi nhận được thư của bạn.		/ɡet/
+make.create	make	verb	1	actions	làm ra, tạo ra	tạo nên một vật mới từ nguyên liệu	She made a paper boat.	Cô ấy làm một chiếc thuyền giấy.		/meɪk/
+do.perform	do	verb	1	actions	làm (một việc)	thực hiện một việc, một hoạt động: do homework	What are you doing?	Bạn đang làm gì vậy?		/duː/
+go	go	verb	1	actions	đi	di chuyển từ chỗ này đến chỗ khác, rời xa người nói	Let's go to the park.	Mình đi công viên đi.		/ɡəʊ/
+come	come	verb	1	actions	đến, tới	di chuyển về phía người nói	Come here, please.	Lại đây nào.		/kʌm/
+kick	kick	verb	1	actions	đá	dùng chân đánh mạnh vào vật	He kicked the ball into the street.	Cậu ấy đá quả bóng ra đường.		/kɪk/
+hit	hit	verb	1	actions	đánh, đập trúng	dùng tay hoặc vật đập mạnh vào thứ gì	Don't hit your brother!	Đừng đánh em!		/hɪt/
+cut	cut	verb	1	actions	cắt	dùng dao, kéo chia vật thành phần nhỏ	Cut the paper in half.	Cắt đôi tờ giấy.		/kʌt/
+touch	touch	verb	1	actions	chạm, sờ	đặt tay hoặc da lên vật	Don't touch the paint, it's wet.	Đừng chạm vào sơn, sơn còn ướt.		/tʌtʃ/
+look	look	verb	1	actions	nhìn	hướng mắt về phía ai, cái gì	Look at me!	Nhìn tôi này!		/lʊk/
+find	find	verb	1	actions	tìm thấy	thấy được thứ mình đang tìm	I can't find my keys.	Tôi không tìm thấy chìa khóa.		/faɪnd/
+look_for	look for	phrasal_verb	1	actions	tìm, tìm kiếm	đi tìm thứ bị mất hoặc đang cần	I'm looking for my phone.	Tôi đang tìm điện thoại.
+pick_up.lift	pick up	phrasal_verb	1	actions	nhặt lên, nhấc lên	cầm vật từ dưới đất, trên bàn lên	Please pick up your toys.	Con nhặt đồ chơi lên đi.
+turn_on	turn on	phrasal_verb	1	actions	bật (thiết bị)	làm cho đèn, máy bắt đầu chạy	Turn on the light, please.	Bật đèn lên giúp mình.	switch on
+turn_off	turn off	phrasal_verb	1	actions	tắt (thiết bị)	làm cho đèn, máy ngừng chạy	Turn off the TV and go to bed.	Tắt ti vi rồi đi ngủ đi.	switch off
+come_in	come in	phrasal_verb	1	actions	vào (nhà, phòng)	bước vào bên trong; hay dùng để mời ai vào	Come in and sit down.	Vào đi rồi ngồi xuống.
+move	move	verb	1	actions	di chuyển, dịch chuyển	đổi vị trí của mình hoặc của vật	Can you move your chair a little?	Bạn dịch ghế một chút được không?		/muːv/
+climb	climb	verb	1	actions	leo, trèo	dùng tay chân đi lên cây, thang, núi	The boy climbed the tree.	Cậu bé trèo lên cây.		/klaɪm/
+fall	fall	verb	1	actions	rơi, ngã xuống	từ trên cao đi xuống đất, không kiểm soát được	The apple fell from the tree.	Quả táo rơi từ trên cây xuống.		/fɔːl/
+stop	stop	verb	1	actions	dừng lại	không tiếp tục di chuyển hoặc làm gì nữa	Stop! There's a car coming.	Dừng lại! Có xe đang tới.		/stɒp/
+use	use	verb	1	actions	dùng, sử dụng	cầm, điều khiển một vật để làm việc gì	Can I use your pen?	Tôi dùng bút của bạn được không?		/juːz/
+show	show	verb	1	actions	cho xem, chỉ cho	đưa vật ra để người khác nhìn	Show me your new shoes!	Cho tớ xem đôi giày mới của cậu!		/ʃəʊ/
+slowly	slowly	adverb	1	actions	chậm, từ từ	làm, di chuyển với tốc độ thấp	Please walk slowly.	Làm ơn đi chậm thôi.		/ˈsləʊli/
+quickly	quickly	adverb	1	actions	nhanh, nhanh chóng	làm, di chuyển trong thời gian ngắn	Come quickly!	Đến nhanh lên!		/ˈkwɪkli/
+take_a_photo	take a photo	collocation	1	actions	chụp ảnh	dùng máy ảnh hoặc điện thoại để chụp	Can you take a photo of us?	Bạn chụp giúp chúng tôi một tấm ảnh được không?	take a picture
+break.smash	break	verb	1	actions	làm vỡ, làm gãy	làm vật tách thành nhiều mảnh	Who broke the window?	Ai làm vỡ cửa sổ?		/breɪk/
+make.cause	make	verb	2	actions	khiến, làm cho	gây ra một cảm xúc hay trạng thái: make someone laugh	This film always makes me cry.	Bộ phim này lúc nào cũng làm tôi khóc.		/meɪk/
+take.time	take	verb	2	actions	mất (bao nhiêu thời gian)	nói về thời gian cần để làm một việc	It takes ten minutes to walk to school.	Đi bộ đến trường mất mười phút.		/teɪk/
+get.fetch	get	verb	2	actions	đi lấy (mang về)	đi đến chỗ khác lấy vật rồi mang lại	Can you get me a glass of water?	Bạn lấy giúp tôi cốc nước được không?	fetch	/ɡet/
+get.become	get	verb	2	actions	trở nên	thay đổi sang trạng thái mới: get tired, get cold	It's getting dark.	Trời đang tối dần.		/ɡet/
+take.carry	take	verb	2	actions	mang đi, đem theo (đến nơi khác)	mang vật hoặc người từ đây đến một nơi khác	Take an umbrella with you.	Mang theo ô đi.		/teɪk/
+keep.hold	keep	verb	2	actions	giữ, giữ lại	tiếp tục có một vật, không trả lại hay vứt đi	You can keep this book.	Bạn có thể giữ cuốn sách này.		/kiːp/
+give_back	give back	phrasal_verb	2	actions	trả lại	đưa lại vật cho người chủ của nó	Can you give my pen back?	Bạn trả lại tôi cây bút được không?
+go_back	go back	phrasal_verb	2	actions	quay lại (nơi cũ)	trở về chỗ mình đã ở trước đó	I left my phone at home, so I went back.	Tôi để quên điện thoại ở nhà nên quay lại lấy.
+come_back	come back	phrasal_verb	2	actions	trở lại (đây)	quay về chỗ người nói đang ở	Come back soon!	Sớm quay lại nhé!
+go_out	go out	phrasal_verb	2	actions	ra ngoài	rời khỏi nhà để đi đâu đó	Don't go out without a coat.	Đừng ra ngoài mà không mặc áo khoác.
+go_away	go away	phrasal_verb	2	actions	đi chỗ khác, tránh ra	rời khỏi chỗ đang ở; cũng dùng để đuổi ai	Go away, I'm busy!	Đi chỗ khác đi, tôi đang bận!
+go_up	go up	phrasal_verb	2	actions	đi lên	di chuyển lên tầng trên, lên chỗ cao hơn	Go up the stairs and turn left.	Đi lên cầu thang rồi rẽ trái.
+get_out	get out	phrasal_verb	2	actions	ra khỏi	bước ra khỏi xe, phòng, nơi chật hẹp	Get out of the car, please.	Mời ra khỏi xe.
+put_away	put away	phrasal_verb	2	actions	cất đi	đặt đồ vào chỗ của nó sau khi dùng xong	Put your clothes away.	Cất quần áo đi.
+put_down	put down	phrasal_verb	2	actions	đặt xuống	để vật đang cầm xuống bàn, sàn	Put the knife down slowly.	Từ từ đặt con dao xuống.
+take_out	take out	phrasal_verb	2	actions	lấy ra	lấy vật ra khỏi túi, hộp, ngăn kéo	She took out her phone.	Cô ấy lấy điện thoại ra.
+throw_away	throw away	phrasal_verb	2	actions	vứt đi	bỏ vật không cần nữa vào thùng rác	Don't throw away that box.	Đừng vứt cái hộp đó đi.	throw out
+run_away	run away	phrasal_verb	2	actions	bỏ chạy	chạy đi thật nhanh để thoát khỏi ai, cái gì	The thief ran away when he saw the police.	Tên trộm bỏ chạy khi thấy cảnh sát.
+lie_down	lie down	phrasal_verb	2	actions	nằm xuống	chuyển sang tư thế nằm để nghỉ	I feel tired. I need to lie down.	Tôi thấy mệt. Tôi cần nằm xuống.
+lie.recline	lie	verb	2	actions	nằm	ở tư thế nằm trên giường, trên sàn	The cat is lying on the sofa.	Con mèo đang nằm trên ghế sofa.		/laɪ/
+look_around	look around	phrasal_verb	2	actions	nhìn quanh	đưa mắt nhìn mọi phía xung quanh	She looked around but saw nobody.	Cô ấy nhìn quanh nhưng không thấy ai.
+turn_around	turn around	phrasal_verb	2	actions	quay người lại	quay người để nhìn về phía sau	Turn around and look at me.	Quay lại nhìn tôi này.	turn round
+turn.rotate	turn	verb	2	actions	xoay, vặn	làm vật quay quanh một trục: turn the key	Turn the key to the right.	Vặn chìa khóa sang phải.		/tɜːn/
+bend	bend	verb	2	actions	uốn cong, gập	làm vật thẳng thành cong; gập tay, chân, lưng	Bend your knees.	Hãy gập đầu gối.		/bend/
+shake	shake	verb	2	actions	lắc	di chuyển vật lên xuống hoặc qua lại thật nhanh	Shake the bottle before you open it.	Lắc chai trước khi mở.		/ʃeɪk/
+nod	nod	verb	2	actions	gật đầu	đưa đầu lên xuống để đồng ý hoặc chào	He nodded and smiled.	Anh ấy gật đầu và mỉm cười.		/nɒd/
+wave.hand	wave	verb	2	actions	vẫy tay	đưa tay qua lại để chào hoặc gọi ai	The children waved goodbye.	Bọn trẻ vẫy tay chào tạm biệt.		/weɪv/
+point.finger	point	verb	2	actions	chỉ (tay)	đưa ngón tay về phía ai, cái gì	Don't point at people.	Đừng chỉ tay vào người khác.		/pɔɪnt/
+clap	clap	verb	2	actions	vỗ tay	đập hai lòng bàn tay vào nhau	Everyone clapped at the end of the song.	Mọi người vỗ tay khi bài hát kết thúc.		/klæp/
+hug	hug	verb	2	actions	ôm	vòng tay ôm lấy người khác	She hugged her mother.	Cô ấy ôm mẹ.		/hʌɡ/
+press	press	verb	2	actions	ấn, nhấn	dùng ngón tay đè lên nút, phím	Press the red button.	Nhấn nút màu đỏ.		/pres/
+lift	lift	verb	2	actions	nhấc lên, nâng lên	đưa vật từ thấp lên cao	This box is too heavy to lift.	Cái hộp này nặng quá không nhấc lên được.		/lɪft/
+raise.hand	raise	verb	2	actions	giơ (tay) lên	đưa tay hoặc một bộ phận cơ thể lên cao	Raise your hand if you know the answer.	Ai biết câu trả lời thì giơ tay lên.		/reɪz/
+drop	drop	verb	2	actions	đánh rơi	để vật rơi khỏi tay, thường không cố ý	Careful, don't drop the glass!	Cẩn thận, đừng làm rơi cái cốc!		/drɒp/
+knock.door	knock	verb	2	actions	gõ (cửa)	đập nhẹ tay vào cửa để báo mình đến	Please knock before you come in.	Hãy gõ cửa trước khi vào.		/nɒk/
+wipe	wipe	verb	2	actions	lau, chùi	dùng khăn, giấy làm sạch bề mặt	Wipe the table after dinner.	Lau bàn sau bữa tối nhé.		/waɪp/
+fold	fold	verb	2	actions	gấp	gập giấy, vải để thành nhỏ hơn	Fold the paper in two.	Gấp đôi tờ giấy lại.		/fəʊld/
+tie	tie	verb	2	actions	buộc, thắt	nối dây với nhau hoặc dùng dây giữ vật	Tie your shoes.	Buộc dây giày đi.		/taɪ/
+hang	hang	verb	2	actions	treo	gắn vật lên cao để nó buông xuống	Hang your coat on the hook.	Treo áo khoác lên móc.		/hæŋ/
+fill	fill	verb	2	actions	đổ đầy, làm đầy	cho nước, đồ vào cho đến khi đầy	Fill the bottle with water.	Đổ đầy nước vào chai.		/fɪl/
+hide	hide	verb	2	actions	giấu, trốn	để vật hoặc mình ở nơi người khác không thấy	He hid the present under the bed.	Anh ấy giấu món quà dưới gầm giường.		/haɪd/
+hurry	hurry	verb	2	actions	vội vàng, khẩn trương	làm hoặc đi nhanh vì không có nhiều thời gian	Hurry, the bus is coming!	Nhanh lên, xe buýt đến rồi!		/ˈhʌri/
+follow	follow	verb	2	actions	đi theo	đi ngay phía sau ai	Follow me, please.	Mời đi theo tôi.		/ˈfɒləʊ/
+cross	cross	verb	2	actions	băng qua, đi qua	đi từ bên này sang bên kia đường, sông	Look both ways before you cross the road.	Nhìn hai bên trước khi băng qua đường.		/krɒs/
+enter	enter	verb	2	actions	bước vào, đi vào	vào bên trong một nơi (cách nói trang trọng)	Please enter through the side door.	Vui lòng đi vào bằng cửa bên.		/ˈentə/
+leave.depart	leave	verb	2	actions	rời đi, rời khỏi	đi khỏi một nơi	She left the room without a word.	Cô ấy rời khỏi phòng mà không nói một lời.		/liːv/
+pass.hand	pass	verb	2	actions	chuyền, đưa (cho ai)	đưa vật cho người ngồi gần, nhất là trên bàn ăn	Could you pass the salt, please?	Bạn chuyền giúp tôi lọ muối được không?		/pɑːs/
+hold_hands	hold hands	collocation	2	actions	nắm tay nhau	hai người cầm tay nhau khi đi, khi đứng	They walked along the beach, holding hands.	Họ nắm tay nhau đi dọc bãi biển.
+take_a_look	take a look	collocation	2	actions	xem qua, nhìn thử	nhìn nhanh để kiểm tra hoặc tìm hiểu	Can I take a look at your photos?	Tôi xem qua ảnh của bạn được không?	have a look
+take_a_seat	take a seat	phrase	2	actions	mời ngồi	lời mời lịch sự để ai đó ngồi xuống	Please take a seat. The doctor will see you soon.	Mời anh ngồi. Bác sĩ sẽ khám cho anh ngay.	have a seat
+make_a_noise	make a noise	collocation	2	actions	làm ồn, gây tiếng động	tạo ra âm thanh to hoặc khó chịu	Don't make a noise, the baby is sleeping.	Đừng làm ồn, em bé đang ngủ.
+make_a_mistake	make a mistake	collocation	2	actions	mắc lỗi	làm sai một việc gì	Everybody makes a mistake sometimes.	Ai cũng có lúc mắc lỗi.
+carefully	carefully	adverb	2	actions	một cách cẩn thận	làm chậm rãi, chú ý để không hỏng hay gây tai nạn	Carry the eggs carefully.	Bê trứng cẩn thận nhé.		/ˈkeəfəli/
+gently	gently	adverb	2	actions	một cách nhẹ nhàng	làm với ít lực, không mạnh tay	Close the door gently.	Đóng cửa nhẹ nhàng thôi.		/ˈdʒentli/
+suddenly	suddenly	adverb	2	actions	đột nhiên, bỗng nhiên	xảy ra nhanh, không báo trước	Suddenly, the lights went out.	Đột nhiên đèn tắt phụt.		/ˈsʌdənli/
+careful.handling	careful	adjective	2	actions	cẩn thận, thận trọng	chú ý để không làm hỏng đồ, không bị thương	Be careful with that knife!	Cẩn thận với con dao đó!		/ˈkeəfl/
+gentle.touch	gentle	adjective	2	actions	nhẹ tay, dịu dàng	dùng ít lực, không làm đau hay làm hỏng	Be gentle with the baby.	Nhẹ tay với em bé nhé.		/ˈdʒentl/
+still.motionless	still	adjective	2	actions	yên, không cử động	không nhúc nhích, không di chuyển	Keep still while I take your photo.	Giữ yên nhé, để tôi chụp ảnh.		/stɪl/
+try	try	verb	2	actions	thử, cố gắng	làm thử một việc hoặc cố làm cho được	Try to open the jar.	Thử mở cái lọ xem.		/traɪ/
+lose.object	lose	verb	2	actions	làm mất, đánh mất	không còn biết vật của mình ở đâu	I lost my umbrella on the bus.	Tôi làm mất ô trên xe buýt.		/luːz/
