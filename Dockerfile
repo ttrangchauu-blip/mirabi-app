@@ -11,6 +11,9 @@ COPY backend/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY backend/app ./app
+# The personal room (pet_room.py) and memory cards (memories.py) read the app's artwork from /srv/mobile/assets.
+COPY mobile/assets/room/room-art.json /srv/mobile/assets/room/room-art.json
+COPY mobile/assets/pets /srv/mobile/assets/pets
 
 RUN useradd --create-home --uid 10001 appuser
 USER appuser

@@ -1,4 +1,5 @@
-# Only the Dockerfile and backend/ are needed for the backend image. Never ship .env or databases.
+# Only the Dockerfile, backend/ and the app artwork the API reads are needed for the backend image.
+# Never ship .env or databases.
 .git/
 .gitignore
 .local-preview/
@@ -6,6 +7,8 @@
 .venv/
 docs/
 mobile/
+!mobile/assets/room/room-art.json
+!mobile/assets/pets/*/Lv*.png
 README.md
 package-lock.json
 **/.env
