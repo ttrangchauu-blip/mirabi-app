@@ -190,8 +190,9 @@ Users created before this flow existed see the picker and tour on their next sig
   Bạn bè (friends, requests, friend code/QR and visits; formerly Cộng đồng, see
   [docs/friend-visits.md](docs/friend-visits.md)), Tiện ích (includes Bảng tin, the post feed).
   Screens live in [`mobile/src/screens/main/`](mobile/src/screens/main/); shared UI pieces in [`mobile/src/ui/kit.tsx`](mobile/src/ui/kit.tsx).
-- Designed for iPhone 15 Pro Max (430×932 pt). On a desktop browser the web build renders inside an iPhone 15 Pro Max
-  frame (Dynamic Island, status bar, home indicator, 59/34 pt safe areas); on devices the real safe areas are used.
+- Designed for Samsung Galaxy S23 Ultra (384×824 dp). On a desktop browser the web build renders inside a Galaxy S23 Ultra
+  frame (punch-hole camera, One UI status bar, three-button navigation bar, 32/48 dp safe areas); on devices the real safe
+  areas are used.
 
 ## Brand: logo and font
 - Logo files live in `mobile/assets/`: `logo.png` (full logo, login screen only), `logo-mark.png` (mascot only, spare), `icon.png` (app icon), `adaptive-icon.png` (Android, background `#EEF6FD`), `favicon.png` (web).

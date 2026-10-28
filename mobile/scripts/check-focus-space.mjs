@@ -55,7 +55,7 @@ function fixture(userId) {
 const oldPages = await (await fetch('http://127.0.0.1:9223/json/list')).json();
 for (const page of oldPages.filter(p=>p.type==='page' && p.url.startsWith('http://localhost:8081'))) await fetch(`http://127.0.0.1:9223/json/close/${page.id}`);
 const results = [];
-for (const device of [{ name: 'phone-preview', width: 1440, height: 1000 }, { name: 'mobile', width: 390, height: 844 }, { name: 'narrow', width: 320, height: 780 }]) {
+for (const device of [{ name: 'phone-preview', width: 1440, height: 1000 }, { name: 'mobile', width: 384, height: 824 }, { name: 'narrow', width: 320, height: 780 }]) {
   const c = await connect();
   try {
     await c.send('Page.enable'); await c.send('Runtime.enable');
@@ -69,7 +69,7 @@ for (const device of [{ name: 'phone-preview', width: 1440, height: 1000 }, { na
     await c.wait(`document.body.innerText.includes('75 phút')`); await pause(500);
     await c.capture(`${device.name}-focus.png`);
     const dimensions = await c.evaluate(`({viewport:innerWidth,page:document.documentElement.scrollWidth,space:document.querySelector('[data-testid="mirabi-focus-space"]').getBoundingClientRect().toJSON(),timer:document.querySelector('[aria-label="Còn lại 25:00"]')?.getBoundingClientRect().toJSON()})`);
-    if (device.name==='phone-preview' && dimensions.space.width > 430) throw new Error('App preview escaped phone layout');
+    if (device.name==='phone-preview' && dimensions.space.width > 384) throw new Error('App preview escaped phone layout');
     if (dimensions.page > device.width) throw new Error(`Horizontal overflow: ${JSON.stringify(dimensions)}`);
     const toolsVisible = await c.evaluate(`(() => {
       const tool = document.querySelector('[aria-label="Ghi chú học tập"]').getBoundingClientRect();
