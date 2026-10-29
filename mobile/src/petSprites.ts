@@ -1,18 +1,24 @@
 import { ImageSourcePropType } from 'react-native';
 import { petById, PetId } from './pets';
 
-/** What a pet is doing that has its own drawn animation. `idle` is the pet just standing around (blinking, waving). */
-export type PetActivity = 'walk' | 'study' | 'idle';
+/** What a pet is doing that has its own drawn animation. `idle` is the pet just standing around (blinking, waving).
+ * `moveRight` / `moveLeft` is the quick dart across a game's play field, drawn facing each way. */
+export type PetActivity = 'walk' | 'study' | 'idle' | 'moveRight' | 'moveLeft';
 
 /** Each sheet is a `cols` x `rows` grid of square frames, played left to right then top to bottom, cut from an
  * element's sheet by scripts/slice-sprite-sheet.mjs. `cycleMs` is one full loop: a relaxed stride, a slow breath over
- * the book, an unhurried round of blinks, waves and smiles. */
+ * the book, an unhurried round of blinks, waves and smiles, a brisk trot (a game's moves last a fraction of a second). */
 export type SpriteLayout = { cols: number; rows: number; cycleMs: number };
 export const SPRITE_LAYOUT: Record<PetActivity, SpriteLayout> = {
   walk: { cols: 8, rows: 1, cycleMs: 1200 },
   study: { cols: 8, rows: 1, cycleMs: 2400 },
   idle: { cols: 8, rows: 4, cycleMs: 4800 },
+  moveRight: { cols: 8, rows: 1, cycleMs: 640 },
+  moveLeft: { cols: 8, rows: 1, cycleMs: 640 },
 };
+
+/** The move strip for a pet heading right (1) or left (-1). */
+export const moveActivity = (facing: 1 | -1): PetActivity => (facing > 0 ? 'moveRight' : 'moveLeft');
 export const WALK_CYCLE_MS = SPRITE_LAYOUT.walk.cycleMs;
 
 /** Sheets per activity and pet, indexed by evolution stage (Lv.0 to Lv.6). A pet or stage without one keeps its
@@ -184,6 +190,29 @@ const SPRITES: Record<PetActivity, Partial<Record<PetId, (ImageSourcePropType | 
       require('../assets/pets/mist/idle/Lv4_Truong_Thanh_Idle.png'),
       require('../assets/pets/mist/idle/Lv5_Dai_Than_Idle.png'),
       require('../assets/pets/mist/idle/Lv6_Vua_Suong_Idle.png'),
+    ],
+  },
+  // Both ways cut from one two-row sheet in a shared box, so turning around does not shift the pet.
+  moveRight: {
+    cat: [
+      require('../assets/pets/mist/move/Lv0_Trung_Pet_Move_Right.png'),
+      require('../assets/pets/mist/move/Lv1_So_Sinh_Move_Right.png'),
+      require('../assets/pets/mist/move/Lv2_Phat_Trien_Move_Right.png'),
+      require('../assets/pets/mist/move/Lv3_Nang_Cao_Move_Right.png'),
+      require('../assets/pets/mist/move/Lv4_Truong_Thanh_Move_Right.png'),
+      require('../assets/pets/mist/move/Lv5_Dai_Than_Move_Right.png'),
+      require('../assets/pets/mist/move/Lv6_Vua_Suong_Move_Right.png'),
+    ],
+  },
+  moveLeft: {
+    cat: [
+      require('../assets/pets/mist/move/Lv0_Trung_Pet_Move_Left.png'),
+      require('../assets/pets/mist/move/Lv1_So_Sinh_Move_Left.png'),
+      require('../assets/pets/mist/move/Lv2_Phat_Trien_Move_Left.png'),
+      require('../assets/pets/mist/move/Lv3_Nang_Cao_Move_Left.png'),
+      require('../assets/pets/mist/move/Lv4_Truong_Thanh_Move_Left.png'),
+      require('../assets/pets/mist/move/Lv5_Dai_Than_Move_Left.png'),
+      require('../assets/pets/mist/move/Lv6_Vua_Suong_Move_Left.png'),
     ],
   },
 };

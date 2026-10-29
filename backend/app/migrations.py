@@ -41,11 +41,13 @@ ADDED_COLUMNS: dict[str, list[tuple[str, str]]] = {
         ("repeat_until", "DATE"),
         ("repeat_count", "INTEGER"),
     ],
+    "pet_evolutions": [("hatched_at", "TIMESTAMP")],
     "pet_walks": [
         ("task_cycle_id", "VARCHAR(10)"),
         ("rewarded_at", "TIMESTAMP"),
         ("reward_exp", "INTEGER NOT NULL DEFAULT 0"),
         ("rewards", "TEXT"),
+        ("location_id", "VARCHAR(20)"),
     ],
     "study_sessions": [("pomodoro_cycle", "VARCHAR(64)"), ("started_at", "TIMESTAMP"),
                        ("ended_at", "TIMESTAMP"), ("timezone", "VARCHAR(80)"), ("status", "VARCHAR(20)"),
@@ -99,6 +101,13 @@ def upgrade_schema(engine: Engine) -> None:
                 WHEN xp >= 800 THEN 2
                 WHEN xp >= 300 THEN 1
                 ELSE 0 END
+        """))
+        # Pets past Lv.0 before hatching was confirmed by the app have hatched; an egg waiting to hatch stays Lv.0.
+        conn.execute(text("UPDATE pet_evolutions SET hatched_at = updated_at WHERE hatched_at IS NULL AND level >= 1"))
+        conn.execute(text("""
+            UPDATE users SET level = 0 WHERE level > 0 AND pet_name IS NOT NULL AND EXISTS (
+                SELECT 1 FROM pet_evolutions pe WHERE pe.user_id = users.id AND pe.pet_id = users.pet
+                AND pe.hatched_at IS NULL)
         """))
 
 

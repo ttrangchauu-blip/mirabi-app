@@ -26,7 +26,7 @@ from .errors import APIError
 from . import learning_grammar_bank as grammar_bank
 from .learning_grammar import generate_grammar_items
 from .learning_vocab import POS_VI, bank_items, travel_for
-from .learning_engine import (DEFAULT_SCORING, HEART_ON_WRONG, MASTERED_AT, MOVING_KINDS, TYPED_TARGET_KINDS, VOCAB_KINDS,
+from .learning_engine import (DEFAULT_SCORING, answer_key, HEART_ON_WRONG, MASTERED_AT, MOVING_KINDS, TYPED_TARGET_KINDS, VOCAB_KINDS,
                               WRONG_POLICY, InvalidAnswer, check_bridge, check_choice, check_number, check_text,
                               compare_error_type, correct_outcome, default_variant, fmt, game_of, generate_math_items,
                               hearts_for, mastery_after, math_error_type, parse_number, score_for)
@@ -374,8 +374,12 @@ def _turn_out(item: LearningSessionItem, rules: dict, mode: str, active_ms: int)
     moving = mode == "challenge" and item.kind in MOVING_KINDS
     # A word's label holds the answer or the meaning ("cat – con mèo"): open turns only say what kind of question it is.
     label = OPEN_LABEL[item.kind] if item.kind in OPEN_LABEL and item.state != "resolved" else item.skill_label
+    prompt = _loads(item.prompt_json, {})
+    if item.kind in TYPED_TARGET_KINDS and item.state != "resolved":
+        # Falling words shoot as soon as the typed text is right: the app gets keys of the accepted answers, not them.
+        prompt["answer_keys"] = [answer_key(item.turn_id, a) for a in _loads(item.answer_json, {}).get("accepted", [])]
     return {"turn_id": item.turn_id, "position": item.position, "kind": item.kind, "skill_label": label,
-            "prompt": _loads(item.prompt_json, {}), "hints_shown": hints[:item.hints_used], "hints_total": len(hints),
+            "prompt": prompt, "hints_shown": hints[:item.hints_used], "hints_total": len(hints),
             "attempts": item.attempts, "wrong_attempts": item.wrong_attempts, "practice": item.practice_of_id is not None,
             "travel_seconds": item_travel(item, rules) if moving else 0,
             "on_screen_ms": max(0, active_ms - (item.issued_active_ms if item.issued_active_ms is not None else active_ms))}

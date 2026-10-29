@@ -122,7 +122,9 @@ export function ProfileCard({ person, busy, onAdd, onAnswer }: {
 }
 
 // ------------------------------------------------------------------------------------------------ friend list
-function FriendRow({ friend, onVisit, onMenu }: { friend: Friend; onVisit: (f: Friend) => void; onMenu?: (f: Friend) => void }) {
+function FriendRow({ friend, onVisit, onMenu, actionLabel = 'Ghé thăm' }: {
+  friend: Friend; onVisit: (f: Friend) => void; onMenu?: (f: Friend) => void; actionLabel?: string;
+}) {
   const pet = friend.pet_name ? `Pet ${friend.pet_name}` : 'Chưa có pet'; // the level shows in the avatar's art
   return (
     <View style={s.row} testID={`friend-${friend.id}`}>
@@ -132,7 +134,7 @@ function FriendRow({ friend, onVisit, onMenu }: { friend: Friend; onVisit: (f: F
         <Text style={s.sub} numberOfLines={1}>{friend.can_visit ? pet : `${pet} · Đang tắt ghé thăm`}</Text>
         <PresenceLabel presence={friend.presence} />
       </View>
-      <SmallButton title="Ghé thăm" variant="primary" disabled={!friend.can_visit} onPress={() => onVisit(friend)} />
+      <SmallButton title={actionLabel} variant="primary" disabled={!friend.can_visit} onPress={() => onVisit(friend)} />
       {onMenu ? (
         <Pressable onPress={() => onMenu(friend)} hitSlop={8} style={s.more} accessibilityRole="button" accessibilityLabel={`Tùy chọn cho ${friend.display_name}`}>
           <Ionicons name="ellipsis-vertical" size={18} color={t.muted} />
@@ -145,15 +147,16 @@ function FriendRow({ friend, onVisit, onMenu }: { friend: Friend; onVisit: (f: F
 /** Friend lists longer than this get a search by name. */
 const SEARCH_FROM = 6;
 
-/** Accepted friends with their pet and a "Ghé thăm" button, searchable by name once the list is long, with loading, error and empty states. */
-export function FriendDirectory({ friends, error, onRetry, onVisit, onMenu, emptyAction }: {
+/** Accepted friends with their pet and a "Ghé thăm" button (or `actionLabel`, e.g. "Thăm vườn"), searchable by name once the
+ * list is long, with loading, error and empty states. */
+export function FriendDirectory({ friends, error, onRetry, onVisit, onMenu, emptyAction, actionLabel, emptyBody }: {
   friends: Friend[] | null; error: unknown; onRetry: () => void; onVisit: (f: Friend) => void; onMenu?: (f: Friend) => void;
-  emptyAction?: React.ReactNode;
+  emptyAction?: React.ReactNode; actionLabel?: string; emptyBody?: string;
 }) {
   const [query, setQuery] = useState('');
   if (!friends) return error ? <ErrorState error={error} onRetry={onRetry} /> : <LoadingState label="Đang tải danh sách bạn bè…" />;
   if (friends.length === 0) {
-    return <Card><EmptyState icon="people-outline" title="Chưa có bạn bè" body="Kết bạn bằng mã hoặc mã QR để ghé phòng và cùng học nhé." action={emptyAction} /></Card>;
+    return <Card><EmptyState icon="people-outline" title="Chưa có bạn bè" body={emptyBody ?? 'Kết bạn bằng mã hoặc mã QR để ghé phòng và cùng học nhé.'} action={emptyAction} /></Card>;
   }
   const folded = foldName(query);
   const shown = folded ? friends.filter((f) => foldName(f.display_name).includes(folded)) : friends;
@@ -170,7 +173,7 @@ export function FriendDirectory({ friends, error, onRetry, onVisit, onMenu, empt
       <Card style={s.list}>
         {shown.length === 0
           ? <EmptyState icon="search-outline" title="Không tìm thấy bạn nào" body={`Không có bạn bè tên “${query.trim()}”.`} />
-          : shown.map((f) => <FriendRow key={f.id} friend={f} onVisit={onVisit} onMenu={onMenu} />)}
+          : shown.map((f) => <FriendRow key={f.id} friend={f} onVisit={onVisit} onMenu={onMenu} actionLabel={actionLabel} />)}
       </Card>
     </>
   );

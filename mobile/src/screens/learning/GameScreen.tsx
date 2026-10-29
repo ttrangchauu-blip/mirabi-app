@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Animated, BackHandler, Easing, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Animated, BackHandler, Easing, KeyboardAvoidingView, LayoutChangeEvent, Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { newIdempotencyKey } from '../../api/client';
 import { useViewportSize } from '../../components/MobileViewport';
@@ -10,6 +10,7 @@ import { LearningPrefs, speakEnglish } from '../../learning/prefs';
 import type { Intro, LearningSession, Turn, TurnResult } from '../../learning/types';
 import { useGameAssets } from '../../learning/useGameAssets';
 import { useGameClock } from '../../learning/useGameClock';
+import { answerKey } from '../../learning/answerKey';
 import { useLearningSession } from '../../learning/useLearningSession';
 import { appTheme as t } from '../../theme';
 import { Button, IconName, SoftInput } from '../../ui/kit';
@@ -17,8 +18,7 @@ import { useConfirm } from '../../ui/ConfirmDialog';
 import { useToast } from '../../ui/Toast';
 import { GateChoice, MathBridge, WordBridge } from './games/ChoiceGames';
 import { NumberPad, showNumber } from './games/NumberPad';
-import { Burst, BURST_MS, Flash, Playfield } from './games/Playfield';
-import { LetterInput } from './games/LetterInput';
+import { Burst, Flash, Playfield, Shot } from './games/Playfield';
 import { GameTutorial } from './GameTutorial';
 import { IntroContent } from './LessonIntro';
 
@@ -45,6 +45,9 @@ const PRACTICE_APPROACH_MS = 30000;
 const PRACTICE_STOP = 0.8;
 const NEXT_TARGET_AT = 0.45; // Thử thách: a second target appears when the first is this far along
 const EXTEND_MINUTES = 5;
+/** Falling words: every box filled but not a right answer, then a pause this long (still typing a longer equivalent?):
+ * it is sent and counts as a wrong answer, as before. A right answer is sent as soon as it is typed. */
+const WRONG_AFTER_MS = 700;
 
 type Notice = { text: string; tone: 'good' | 'bad' | 'info' } | null;
 
@@ -60,7 +63,9 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
   const [notice, setNotice] = useState<Notice>(null);
   const [flash, setFlash] = useState<Flash>(null);
   const [bursts, setBursts] = useState<Burst[]>([]);
-  const burstTimers = useRef(new Set<ReturnType<typeof setTimeout>>());
+  // Falling words answered right, held where they were until the pet's shot breaks them; and a wrong answer's shake.
+  const [shots, setShots] = useState<Shot[]>([]);
+  const [wrongKey, setWrongKey] = useState(0);
   const [draft, setDraft] = useState('');
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [scratchOpen, setScratchOpen] = useState(false);
@@ -114,18 +119,27 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
     return () => clearTimeout(timer);
   }, [notice]);
 
-  // A word's meaning (or English word) shown where it broke. It fades on its own time: it never pauses the game nor
-  // blocks typing or the next shot.
+  // A word's meaning (or English word) shown where it broke. It fades on the play field's effect clock (it stops while
+  // paused) and never blocks typing or the next shot; the play field says when it is gone.
+  const burstSeq = useRef(0);
   const addBurst = useCallback((burst: Omit<Burst, 'id'>) => {
-    const id = `${burst.position}-${Date.now()}`;
+    const id = `${burst.position}-${++burstSeq.current}`;
     setBursts((list) => [...list, { ...burst, id }]);
-    const timer = setTimeout(() => {
-      burstTimers.current.delete(timer);
-      setBursts((list) => list.filter((b) => b.id !== id));
-    }, BURST_MS);
-    burstTimers.current.add(timer);
   }, []);
-  useEffect(() => () => burstTimers.current.forEach(clearTimeout), []);
+  const dropBurst = useCallback((id: string) => setBursts((list) => list.filter((b) => b.id !== id)), []);
+  const dropShot = useCallback((id: string) => setShots((list) => list.filter((s) => s.id !== id)), []);
+  // The bullet reached the word: it breaks there and shows its meaning (Anh → Việt) or the pair to remember (Việt → Anh).
+  // Stable (the sound setting is read when it happens), so the shooter does not re-render with every game tick.
+  const prefsRef = useRef(prefs);
+  prefsRef.current = prefs;
+  const onImpact = useCallback((shot: Shot) => {
+    const w = shot.word;
+    if (!w) return;
+    addBurst(shot.turn.kind === 'word_spelling'
+      ? { position: shot.turn.position, progress: shot.progress, title: w.vi, sub: [w.en, w.phonetic].filter(Boolean).join(' '), tone: 'hit' }
+      : { position: shot.turn.position, progress: shot.progress, title: `${w.en} — ${w.vi}`, sub: w.phonetic, tone: 'hit' });
+    speakEnglish(w.en, prefsRef.current);
+  }, [addBurst]);
 
   const onResult = useCallback((response: { result: TurnResult | null }, aimed: Turn, targets: Turn[]) => {
     const r = response.result;
@@ -138,21 +152,18 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
       return; // shown in the question card
     } else if (r.correct) {
       setDraft('');
-      setFlash({ turnId: target.turn_id, kind: 'hit' });
       const points = r.score_delta ? ` +${r.score_delta}` : '';
       setNotice({ text: `Chính xác!${points}${r.combo > 1 ? ` · Combo x${r.combo}` : ''}`, tone: 'good' });
       if (TYPED.has(target.kind)) {
-        const english = word?.en ?? r.correct_answer ?? '';
-        // Anh → Việt reveals the meaning; Việt → Anh shows the English word that was recalled.
-        if (word) {
-          addBurst(target.kind === 'word_spelling'
-            ? { position: target.position, progress: progressAt(target), title: word.vi, sub: [word.en, word.phonetic].filter(Boolean).join(' '), tone: 'hit' }
-            : { position: target.position, progress: progressAt(target), title: word.en, sub: word.phonetic, tone: 'hit' });
-        }
-        if (english) speakEnglish(english, prefs);
-      }
+        // Shoot → hit → break → meaning: the word is not removed at once. It stays where it was (no longer falling, the
+        // backend has resolved it: it can never be missed or counted again) until the pet's bullet breaks it.
+        const shot: Shot = { id: target.turn_id, turn: target, progress: Math.min(1, progressAt(target)), aimed: target.turn_id === aimed.turn_id,
+          word: word ?? (r.correct_answer ? { en: r.correct_answer, vi: '', phonetic: null } : null) };
+        setShots((list) => (list.some((s) => s.id === shot.id) ? list : [...list, shot]));
+      } else setFlash({ turnId: target.turn_id, kind: 'hit' });
     } else if (r.event === 'answer' && r.retry_allowed) {
       setNotice({ text: `Chưa đúng, sửa lại nhé!${hearts}`, tone: 'bad' });
+      setWrongKey((k) => k + 1); // no shot: the pet shakes a little, the word keeps falling
     } else if (r.event === 'miss') {
       // A missed word shows its English–Vietnamese pair, to review it.
       const pair = word ? `${word.en} — ${word.vi}` : `Đáp án: ${r.correct_answer}`;
@@ -162,7 +173,7 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
       setDraft('');
       setFeedback(r); // wrong choice or "Xem đáp án": read the answer and explanation, then "Tiếp tục"
     }
-  }, [prefs, addBurst, progressAt]);
+  }, [addBurst, progressAt]);
 
   const act = useCallback((action: TurnAction, target: Turn, targets: Turn[] = [target]) =>
     ctl.run(() => learningApi.turn(session.id, action), (res) => onResult(res, target, targets)), [ctl, onResult, session.id]);
@@ -222,12 +233,45 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
     if (ok) void ctl.control(() => learningApi.abandon(session.id, 'user_ended'));
   };
 
+  // The pet, its bullets and the effects stop together with the falling words.
+  const fxRunning = ctl.running && !feedback && !intro && !ctl.offline;
+
   const timeUp = session.time_up && open.length === 0 && !session.can_complete && session.status === 'active' && !feedback;
   const disabled = ctl.busy || !ctl.running;
   const counting = ctl.countdown !== null;
+
+  // Falling words shoot by themselves: no "Bắn", no Enter. A typed text that is right for any falling word (its key is
+  // one of the keys the backend sent) is sent at once; the backend checks it and says which word it hit. Every box
+  // filled but not right is sent after a short pause and counts as wrong (the penalty is unchanged). The same text is
+  // never sent twice, so a wrong answer waits for a change.
+  const autoSent = useRef<string | null>(null);
+  const aimedTyped = !counting && turn && TYPED.has(turn.kind) ? turn : undefined;
+  useEffect(() => {
+    if (!aimedTyped || !draft.trim() || ctl.busy || !ctl.running || ctl.offline) return;
+    const key = `${aimedTyped.turn_id}|${draft}`;
+    if (autoSent.current === key) return;
+    const typed = open.filter((x) => TYPED.has(x.kind));
+    const send = () => { autoSent.current = key; submit(aimedTyped, draft); };
+    if (typed.some((x) => x.prompt.answer_keys?.includes(answerKey(x.turn_id, draft)))) { send(); return; }
+    const total = aimedTyped.prompt.letters?.reduce((a, b) => a + b, 0) ?? 0;
+    if (!total || draft.replace(/\s+/g, '').length < total) return;
+    // Without keys (an older backend) nothing can be known here: every box filled is sent at once, as Enter did.
+    const timer = setTimeout(send, typed.some((x) => x.prompt.answer_keys) ? WRONG_AFTER_MS : 0);
+    return () => clearTimeout(timer);
+  }, [draft, aimedTyped?.turn_id, ctl.busy, ctl.running, ctl.offline, open]); // eslint-disable-line react-hooks/exhaustive-deps
   // Nothing of the first question shows (or can be answered) before "Bắt đầu!".
   const shown = counting ? undefined : turn;
   const info = GAME_INFO[session.game];
+  // Falling words: the question card above the field and the help row under it keep their place and their height while
+  // words come and go (no word for a moment, a hint, a notice), so the field never moves and no word jumps on screen.
+  const falling = session.game_type === 'meteor';
+  const playfield = (
+    <Playfield variant={session.game === 'word_shooter' ? 'words' : session.game_type as 'meteor' | 'defense'} turns={counting ? [] : open} progress={progress}
+      selectedId={shown?.turn_id ?? null} onSelect={setSelectedId} petId={petId} petLevel={petLevel} reduceMotion={prefs.reduceMotion}
+      flash={flash} bursts={bursts} running={fxRunning} shots={shots} onImpact={onImpact} onShotDone={dropShot} onBurstDone={dropBurst}
+      wrongKey={wrongKey} sound={prefs.sound}
+      answer={session.game_type === 'meteor' && !counting ? { value: draft, onChange: setDraft, editable: !ctl.offline } : undefined} />
+  );
 
   return (
     <KeyboardAvoidingView style={styles.fill} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
@@ -241,7 +285,9 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
           </Pressable>
         </View>
       ) : null}
-      {shown ? <PromptCard turn={shown} game={info.name} notice={notice} /> : (
+      {falling ? (
+        <Steady testID="game-prompt-area">{shown ? <PromptCard turn={shown} game={info.name} notice={notice} /> : <PromptBlank />}</Steady>
+      ) : shown ? <PromptCard turn={shown} game={info.name} notice={notice} /> : (
         <View style={styles.waiting}>{counting ? null : ctl.busy ? <ActivityIndicator color={t.accent} /> : <Text style={styles.muted}>Chuẩn bị lượt tiếp theo…</Text>}</View>
       )}
       <View style={styles.playWrap}>
@@ -250,17 +296,13 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
           <Text style={[styles.notice, styles[notice.tone]]} accessibilityLiveRegion="polite">{notice.text}</Text>
         </View>
       ) : null}
+      {session.game_type === 'meteor' ? (
+        // The falling words are not in a scroll view: nothing can scroll them away (on the web focusing the answer field
+        // would otherwise move them).
+        <View style={[styles.fill, styles.playArea]}>{playfield}</View>
+      ) : (
       <ScrollView style={styles.fill} contentContainerStyle={styles.playArea} keyboardShouldPersistTaps="handled" scrollEnabled={!moving}>
-        {moving ? (
-          <Playfield variant={session.game === 'word_shooter' ? 'words' : session.game_type as 'meteor' | 'defense'} turns={counting ? [] : open} progress={progress}
-            selectedId={shown?.turn_id ?? null} onSelect={setSelectedId} petId={petId} petLevel={petLevel} reduceMotion={prefs.reduceMotion}
-            flash={flash} bursts={bursts}
-            input={shown && TYPED.has(shown.kind) ? (width) => (
-              // The answer boxes ride on the meteor being aimed at, right under its Vietnamese word.
-              <LetterInput key={shown.turn_id} letters={shown.prompt.letters} value={draft} onChange={setDraft} onSubmit={() => submit(shown, draft)}
-                disabled={disabled} editable={!ctl.offline} width={width} />
-            ) : undefined} />
-        ) : null}
+        {moving ? playfield : null}
         {shown && shown.kind === 'gate_choice' ? <GateChoice turn={shown} onChoose={(id) => submit(shown, id)} disabled={disabled} petId={petId} petLevel={petLevel} reduceMotion={prefs.reduceMotion} /> : null}
         {shown && shown.kind === 'bridge_order' ? <WordBridge key={shown.turn_id} turn={shown} onSubmit={(ids) => submit(shown, ids)} disabled={disabled} petId={petId} petLevel={petLevel} reduceMotion={prefs.reduceMotion} /> : null}
         {shown && (shown.kind === 'missing_number' || shown.kind === 'compare') ? (
@@ -278,8 +320,29 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
           </View>
         ) : null}
       </ScrollView>
+      )}
       </View>
-      {shown ? (
+      {falling ? (
+        <Steady testID="game-help-area">
+          <View style={styles.inputArea}>
+            <View style={styles.helpRow}>
+              <Pressable onPress={() => { if (shown) hint(shown); }} disabled={!shown || disabled || shown.hints_shown.length >= shown.hints_total}
+                accessibilityRole="button" accessibilityLabel={shown ? `Gợi ý, đã dùng ${shown.hints_shown.length} trên ${shown.hints_total}` : 'Gợi ý'}
+                style={[styles.help, (!shown || disabled || shown.hints_shown.length >= shown.hints_total) && styles.dimmed]}>
+                <Ionicons name="bulb-outline" size={16} color={t.accent} />
+                <Text style={styles.helpText}>{shown ? `Gợi ý ${shown.hints_shown.length}/${shown.hints_total}` : 'Gợi ý'}</Text>
+              </Pressable>
+              {shown?.kind !== 'word_spelling' ? ( // Anh → Việt: the word to type is already on screen
+                <Pressable onPress={() => { if (shown) reveal(shown); }} disabled={!shown || disabled} accessibilityRole="button" accessibilityLabel="Xem đáp án"
+                  style={[styles.help, (!shown || disabled) && styles.dimmed]}>
+                  <Ionicons name="eye-outline" size={16} color={t.accent} />
+                  <Text style={styles.helpText}>Xem đáp án</Text>
+                </Pressable>
+              ) : null}
+            </View>
+          </View>
+        </Steady>
+      ) : shown ? (
         <View style={styles.inputArea}>
           {shown.kind === 'math_input' ? (
             <NumberPad value={draft} onChange={setDraft} onSubmit={() => submit(shown, draft)} allowNegative={!!shown.prompt.allow_negative}
@@ -414,15 +477,38 @@ function Hud({ session, remaining, prefs, onPause }: { session: LearningSession;
   );
 }
 
+/** Never shorter than it has been: what it holds can change (or be gone for a moment) without moving what is under it. */
+function Steady({ children, testID }: { children: React.ReactNode; testID?: string }) {
+  const [height, setHeight] = useState(0);
+  const onLayout = (e: LayoutChangeEvent) => {
+    const h = Math.ceil(e.nativeEvent.layout.height);
+    setHeight((was) => Math.max(was, h));
+  };
+  return <View testID={testID} onLayout={onLayout} style={{ minHeight: height }}>{children}</View>;
+}
+
+/** The falling words' card while no word is falling (before "Bắt đầu!", or the next word is on its way): the same size. */
+function PromptBlank() {
+  return (
+    <View style={[styles.prompt, styles.promptCompact]} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+      <View style={styles.promptHead}>
+        <Text style={[styles.promptChip, styles.promptBlank]}> </Text>
+        <Text style={styles.promptInline}> </Text>
+      </View>
+      <Text style={styles.promptSub}> </Text>
+    </View>
+  );
+}
+
 function PromptCard({ turn, game, notice }: { turn: Turn; game: string; notice?: Notice }) {
   const p = turn.prompt;
   let main = '';
   let sub: string | null = null;
   if (turn.kind === 'vocab_typing') {
     main = p.meaning_vi ?? '';
-    sub = p.context_vi ? `Ngữ cảnh: ${p.context_vi}` : 'Gõ từ tiếng Anh rồi nhấn Enter hoặc Bắn';
+    sub = p.context_vi ? `Ngữ cảnh: ${p.context_vi}` : 'Gõ từ tiếng Anh: đúng là pet tự bắn';
   }
-  else if (turn.kind === 'word_spelling') { main = p.word ?? ''; sub = 'Gõ lại đúng từ này rồi nhấn Enter hoặc Bắn'; }
+  else if (turn.kind === 'word_spelling') { main = p.word ?? ''; sub = 'Gõ lại đúng từ này: đúng là pet tự bắn'; }
   else if (turn.kind === 'gate_choice') {
     main = p.sentence ?? '';
     sub = p.context_vi ? `Tình huống: ${p.context_vi}` : 'Chọn đáp án đúng để điền vào chỗ trống';
@@ -446,12 +532,15 @@ function PromptCard({ turn, game, notice }: { turn: Turn; game: string; notice?:
         {p.level ? <Text style={styles.promptLevel}>{p.level}</Text> : null}
       </View>
       {compact ? null : <Text style={styles.promptMain}>{main}</Text>}
-      {/* Falling words: "Chính xác!" / "Chưa đúng" takes the instruction's line for a moment, so it never covers a word. */}
-      {compact && notice ? (
+      {/* Falling words: one line under the word, at most two. "Chính xác!" / "Chưa đúng" takes it for a moment, the hints
+          take the instruction's place: the card keeps its height and the field under it never moves. */}
+      {compact ? (notice ? (
         <Text style={[styles.promptSub, styles.promptNotice, notice.tone === 'good' ? styles.noticeGood : notice.tone === 'bad' ? styles.noticeBad : null]}
           numberOfLines={2} accessibilityLiveRegion="polite">{notice.text}</Text>
-      ) : sub ? <Text style={styles.promptSub}>{sub}</Text> : null}
-      {turn.hints_shown.map((h, i) => (
+      ) : turn.hints_shown.length ? (
+        <Text style={[styles.promptSub, styles.hintInline]} numberOfLines={2}>💡 {turn.hints_shown.join(' · ')}</Text>
+      ) : sub ? <Text style={styles.promptSub} numberOfLines={2}>{sub}</Text> : null) : sub ? <Text style={styles.promptSub}>{sub}</Text> : null}
+      {compact ? null : turn.hints_shown.map((h, i) => (
         <View key={i} style={styles.hintRow}>
           <Ionicons name="bulb" size={14} color="#E9A23B" />
           <Text style={styles.hint}>{h}</Text>
@@ -524,17 +613,19 @@ const styles = StyleSheet.create({
   promptHead: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   promptChip: { fontSize: 11, fontWeight: '900', color: t.accent, backgroundColor: t.tint, textTransform: 'uppercase', letterSpacing: 0.4,
     borderRadius: 8, paddingHorizontal: 8, paddingVertical: 3, overflow: 'hidden' },
-  promptInline: { flex: 1, fontSize: 20, fontWeight: '900', color: t.ink },
+  promptInline: { flex: 1, fontSize: 17, fontWeight: '800', color: t.ink },
   promptLevel: { marginLeft: 'auto', fontSize: 11, fontWeight: '900', color: t.muted, borderWidth: 1, borderColor: t.border,
     borderRadius: 7, paddingHorizontal: 6, paddingVertical: 1 },
   promptMain: { fontSize: 24, fontWeight: '900', color: t.ink, marginTop: 6 },
   promptSub: { fontSize: 13, color: t.muted, marginTop: 4 },
   promptNotice: { fontWeight: '900' },
+  promptBlank: { backgroundColor: 'transparent' },
   noticeGood: { color: t.success },
   noticeBad: { color: t.danger },
   hintRow: { flexDirection: 'row', alignItems: 'flex-start', gap: 6, marginTop: 6, backgroundColor: '#FFF6E5', borderRadius: 10,
     paddingHorizontal: 8, paddingVertical: 5 },
   hint: { flex: 1, fontSize: 14, color: '#8A5A00', fontWeight: '700' },
+  hintInline: { color: '#8A5A00', fontWeight: '700' },
   // Floats over the top of the play area: showing it never moves the game down.
   noticeLayer: { position: 'absolute', top: 8, left: 0, right: 0, alignItems: 'center', zIndex: 5 },
   notice: { borderRadius: 999, paddingHorizontal: 14, paddingVertical: 7, fontWeight: '800', overflow: 'hidden', maxWidth: '92%', textAlign: 'center',

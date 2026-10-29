@@ -141,7 +141,7 @@ export function PomodoroPanel({ timer, petId, petName, petLevel, userId }: Props
           </Pressable>
         </View>
         <View style={[s.heroBody, desktop && s.heroDesktop]}>
-          <View style={s.sceneRegion}><View style={s.sceneFrame}><FocusRoom petId={petId} petName={petName} petLevel={petLevel} resting={timer.phase !== 'focus'} compact={!desktop || hasPanel} /></View></View>
+          <View style={s.sceneRegion}><View style={s.sceneFrame}><FocusRoom petId={petId} petName={petName} petLevel={petLevel} resting={timer.phase !== 'focus'} compact={!desktop || hasPanel} userId={userId} /></View></View>
           <View style={[s.timer, desktop ? { width: hasPanel ? 272 : 330 } : s.compactTimer]}>
             <View style={desktop ? s.timerReadout : s.compactReadout}>
             <View style={s.phase}><View style={[s.phaseDot, timer.phase !== 'focus' && s.breakDot]} /><Text style={s.phaseText}>{label.toUpperCase()}</Text></View>

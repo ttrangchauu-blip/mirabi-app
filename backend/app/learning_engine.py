@@ -6,6 +6,7 @@ number, never evaluated, and no AI is involved in deciding whether an answer is 
 """
 from __future__ import annotations
 
+import hashlib
 import random
 import re
 import unicodedata
@@ -124,6 +125,13 @@ def normalize_text(value: str) -> str:
     text = unicodedata.normalize("NFKC", value or "").translate(_APOSTROPHES).lower()
     text = re.sub(r"\s+", " ", text).strip()
     return text.strip(" .!?,;:").strip()
+
+
+def answer_key(turn_id: str, text: str) -> str:
+    """What the app compares a typed answer against to shoot as soon as it is right (falling words), without being sent
+    the answer: SHA-256 of the turn id and the normalized answer, first 16 hex digits. The backend still checks the
+    answer that is sent. Keep in sync with answerKey in mobile/src/learning/answerKey.ts."""
+    return hashlib.sha256(f"{turn_id}|{normalize_text(text)}".encode("utf-8")).hexdigest()[:16]
 
 
 class InvalidAnswer(ValueError):

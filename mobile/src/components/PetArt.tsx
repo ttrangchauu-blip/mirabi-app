@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Animated, Easing, Image, ImageSourcePropType } from 'react-native';
 import { petById, PetId } from '../pets';
-import { PetActivity, petSprite, SPRITE_LAYOUT, SpriteLayout, stageIndex, WALK_CYCLE_MS } from '../petSprites';
+import { moveActivity, PetActivity, petSprite, SPRITE_LAYOUT, SpriteLayout, stageIndex, WALK_CYCLE_MS } from '../petSprites';
 import { useReduceMotion } from './useReduceMotion';
 
 type Props = { pet?: string | null; size: number; stage?: number; /** No idle motion (e.g. small picker cards). */ still?: boolean; /** Add a visible alternating gait while the pet is exploring. */ walking?: boolean;
   /** Play the pet's study strip (reading its book) when it has one. */ studying?: boolean;
+  /** In a game, the pet darting right (1) or left (-1): plays its move strip for that way when it has one, otherwise
+   * it walks (and the caller mirrors the walk strip for left, see hasSprite). */ moving?: 1 | -1;
+  /** With `moving`: an unhurried stroll rather than a dart, the same strip at half speed. */ strolling?: boolean;
   /** A still, blurred one-colour shape of the pet: a stage that is not unlocked yet. */ silhouette?: boolean };
 
 const SILHOUETTE_COLOR = '#93A9BA';
@@ -77,18 +80,27 @@ export const restartFromZero = (value: Animated.Value, toValue: number, duration
   Animated.timing(value, { toValue: 0, duration: 0, useNativeDriver: true }),
 ]);
 
+/** A size in whole points. Scenes size the pet from their own width (89.5 points, say); on web a large image shrunk
+ * into a box that is not a whole number of pixels is drawn without smoothing, so its edges come out jagged. */
+const wholePixels = (size: number) => Math.max(1, Math.round(size));
+
 /** Sheets that have finished loading once, so a remount (idle to walk and back, a new screen) does not flash the
  * still artwork again. */
 const loadedSheets = new Set<ImageSourcePropType>();
 
+/** Sheets already downloaded ahead of time (Asset.loadAsync): they show at once, so a quick move (a fraction of a
+ * second) plays its own strip from the first time instead of the still artwork. */
+export const markSheetsLoaded = (sources: ImageSourcePropType[]) => sources.forEach((s) => loadedSheets.add(s));
+
 /** Plays a sprite sheet by sliding it behind a one-frame window, holding each frame (native driver, no re-renders).
  * `paused` holds the first frame. The sheets are large, so `placeholder` (the still artwork) shows until the sheet
  * has loaded, instead of an empty window. */
-export function SpriteCycle({ source, size, layout: { cols, rows, cycleMs }, paused, placeholder, once = false, onDone }: {
+export function SpriteCycle({ source, size: rawSize, layout: { cols, rows, cycleMs }, paused, placeholder, once = false, onDone }: {
   source: ImageSourcePropType; size: number; layout: SpriteLayout; paused: boolean; placeholder: ImageSourcePropType;
   /** Play through a single time, starting once the sheet has loaded, then hold the last frame and call `onDone`. */
   once?: boolean; onDone?: () => void;
 }) {
+  const size = wholePixels(rawSize);
   const frames = cols * rows;
   const progress = useRef(new Animated.Value(0)).current;
   const [loaded, setLoaded] = useState(() => loadedSheets.has(source));
@@ -125,16 +137,21 @@ export function SpriteCycle({ source, size, layout: { cols, rows, cycleMs }, pau
 
 /** The illustrated pet at its evolution stage. It plays its drawn idle / walk / study sheet when it has one; otherwise
  * it gently floats and sways, or bobs while walking. Static (first frame) when "reduce motion" is on. */
-export function PetArt({ pet: petId, size, stage = 1, still: stillProp, walking = false, studying = false, silhouette = false }: Props) {
+export function PetArt({ pet: petId, size: rawSize, stage = 1, still: stillProp, walking: walkingProp = false, studying = false, moving,
+  strolling = false, silhouette = false }: Props) {
+  const size = wholePixels(rawSize);
   const reduceMotion = useReduceMotion();
   const still = stillProp || silhouette;
-  const activity: PetActivity | null = walking ? 'walk' : studying ? 'study' : still ? null : 'idle';
+  const move = moving ? moveActivity(moving) : null;
+  const drawnMove = !!move && !!petSprite(petId, stage, move);
+  const walking = walkingProp || (!!moving && !drawnMove);
+  const activity: PetActivity | null = drawnMove ? move : walking ? 'walk' : studying ? 'study' : still ? null : 'idle';
   const sprite = activity ? petSprite(petId, stage, activity) : undefined;
   const animate = !still && !reduceMotion && !sprite;
   const walk = walking && !reduceMotion && !sprite;
   // An egg's sheets change little from frame to frame, so the egg also breathes, swelling up from where it sits.
-  // (Walking already has the scene's gait bounce.)
-  const eggBreath = !!sprite && activity !== 'walk' && stageIndex(stage) === 0 && !still && !reduceMotion;
+  // (Walking and moving already have their own bounce.)
+  const eggBreath = !!sprite && (activity === 'idle' || activity === 'study') && stageIndex(stage) === 0 && !still && !reduceMotion;
   const swing = useRef(new Animated.Value(0.5)).current;
   const breathe = useRef(new Animated.Value(0)).current;
   const gait = useRef(new Animated.Value(0)).current;
@@ -170,7 +187,9 @@ export function PetArt({ pet: petId, size, stage = 1, still: stillProp, walking 
   const floatY = breathe.interpolate({ inputRange: [0, 1], outputRange: [0, -size * 0.035] });
   const tilt = swing.interpolate({ inputRange: [0, 1], outputRange: ['-3deg', '3deg'] });
   if (sprite && activity) {
-    const strip = <SpriteCycle source={sprite} size={size} layout={SPRITE_LAYOUT[activity]} paused={reduceMotion} placeholder={petStageArt(petId, stage)} />;
+    const layout = SPRITE_LAYOUT[activity];
+    const strip = <SpriteCycle source={sprite} size={size} layout={drawnMove && strolling ? { ...layout, cycleMs: layout.cycleMs * 2 } : layout}
+      paused={reduceMotion} placeholder={petStageArt(petId, stage)} />;
     if (!eggBreath) return strip;
     return <Animated.View style={{ transformOrigin: '50% 100%', transform: [
       { scaleX: breathe.interpolate({ inputRange: [0, 1], outputRange: [1, 0.985] }) },

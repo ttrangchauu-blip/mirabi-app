@@ -12,6 +12,7 @@ import { Avatar, Button, Card, IconCircle, IconName, ScreenHeader, SectionHeader
 const FEATURES: { icon: IconName; title: string; subtitle: string; color: string; bg: string }[] = [
   { icon: 'newspaper-outline', title: 'Bảng tin', subtitle: 'Lan tỏa điều tích cực', color: '#A3326B', bg: '#FCE4F0' },
   { icon: 'bed-outline', title: 'Phòng của tôi', subtitle: 'Trang trí góc nhỏ', color: '#5141A8', bg: '#EEEAFF' },
+  { icon: 'leaf-outline', title: 'Vườn nhà', subtitle: 'Trồng và chăm cây', color: '#22703A', bg: '#E3F5E6' },
   { icon: 'storefront-outline', title: 'Cửa hàng', subtitle: 'Đổi xu lấy vật phẩm', color: '#B23A0A', bg: '#FFEBDD' },
   { icon: 'ribbon-outline', title: 'Thành tựu', subtitle: 'Huy hiệu đã đạt', color: '#7A4D00', bg: '#FFF4CC' },
   { icon: 'podium-outline', title: 'Bảng xếp hạng', subtitle: 'Cùng bạn bè tiến bộ', color: '#136FA8', bg: '#DDF0FA' },
@@ -24,8 +25,8 @@ const SETTINGS: { icon: IconName; label: string }[] = [
   { icon: 'moon-outline', label: 'Chế độ tối' }, { icon: 'help-circle-outline', label: 'Trợ giúp & cộng đồng' },
 ];
 
-export function MoreTab({ user, onOpenProfile, onOpenRoom, onOpenFeed }: {
-  user: User; onOpenProfile: () => void; onOpenRoom?: () => void; onOpenFeed?: () => void;
+export function MoreTab({ user, onOpenProfile, onOpenRoom, onOpenFeed, onOpenGarden }: {
+  user: User; onOpenProfile: () => void; onOpenRoom?: () => void; onOpenFeed?: () => void; onOpenGarden?: () => void;
 }) {
   const confirmLogout = useConfirmLogout();
   const pet = petById(user.pet);
@@ -51,6 +52,7 @@ export function MoreTab({ user, onOpenProfile, onOpenRoom, onOpenFeed }: {
         {FEATURES.map((f) => (
           <Pressable key={f.title} onPress={() => f.title === 'Phòng của tôi' && onOpenRoom ? onOpenRoom()
             : f.title === 'Bảng tin' && onOpenFeed ? onOpenFeed()
+            : f.title === 'Vườn nhà' && onOpenGarden ? onOpenGarden()
             : showAlert(f.title, 'Tính năng đang được phát triển, sắp ra mắt nhé!')}
             accessibilityRole="button" accessibilityLabel={`${f.title}: ${f.subtitle}`}
             style={({ pressed }) => [styles.tile, pressed && styles.pressed]}>

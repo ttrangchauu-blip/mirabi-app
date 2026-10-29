@@ -142,10 +142,10 @@ test('completion offers next focus or rest and stays hidden during active focus'
 
 test('the pet studies at the desk (walks do not take it away) and break pets use their relaxed state', async () => {
   const view = setup(); await ready();
-  expect(screen.getByRole('button', { name: 'Aqua đang đọc sách cùng bạn' })).toBeTruthy();
+  expect(screen.getByLabelText('Phòng tập trung, Aqua đang học cùng bạn')).toBeTruthy();
   expect(screen.queryByText('Đang đi dạo')).toBeNull();
   view.rerender(<PomodoroPanel timer={{ ...timer(), phase: 'short_break' }} userId={1} petId="fox" petName="Aqua" petLevel={1} />);
-  expect(screen.getByRole('button', { name: 'Aqua đang thư giãn' })).toBeTruthy();
+  expect(screen.getByLabelText('Phòng tập trung, Aqua đang nghỉ ngơi')).toBeTruthy();
 });
 
 test('a running or paused session can be ended early after confirming', async () => {

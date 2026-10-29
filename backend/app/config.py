@@ -57,6 +57,9 @@ class Settings(BaseSettings):
     # account days. Its own cap: the 60 EXP/day of tasks and learning is unchanged.
     friend_pet_exp_per_friend: int = 2
     friend_pet_exp_daily_cap: int = 10
+    # Caring for a friend's garden (garden.py): every plant is watered and tended at most once per owner day (by
+    # anyone), and a visitor cares for at most this many plants a day across all friends' gardens. Never EXP or items.
+    garden_care_daily_limit: int = 20
     # IANA zone whose calendar days define the login streak (one check-in per local day).
     login_streak_timezone: str = "Asia/Ho_Chi_Minh"
     database_url: str = "sqlite:///./refmi.db"
@@ -84,6 +87,7 @@ class Settings(BaseSettings):
     rate_limit_realtime_ticket: str = "30/60"
     rate_limit_visit_interaction: str = "20/600"  # burst limit on top of the per-friend cooldown and daily cap
     rate_limit_pet_play: str = "30/60"  # taps on a friend's pet that reach the backend (the app sends one per visit)
+    rate_limit_garden_care: str = "30/60"  # burst limit on watering and tending friends' plants
     rate_limit_friend_lookup: str = "20/300"  # exact friend-code lookups (typed or scanned)
     # Password reset email delivery: "disabled" | "console" (development only) | "smtp".
     email_backend: str = "disabled"

@@ -17,7 +17,8 @@ import { useToast } from '../../ui/Toast';
 import { showError } from '../main/shared';
 import { SUBJECTS } from '../together/labels';
 import { OptionRow, OptionSheet, PetAvatar } from '../together/ui';
-import { RoomScene } from './RoomScene';
+import { PLAY_MS } from '../../room/prefs';
+import { RoomScene, type PetMenuAction } from './RoomScene';
 
 type Props = {
   userId: number;
@@ -27,8 +28,10 @@ type Props = {
   onOpenStudyRoom?: (roomId: number) => void;
 };
 
-const HELLO_REPLIES = ['Chào bạn! Cảm ơn đã ghé chơi nha!', 'Ồ, có khách! Vui quá đi!', 'Hi hi, chào cậu nhé!'];
-const PLAY_REPLIES = ['Hi hi, nhột quá!', 'Chơi với mình thêm nha!', 'Thích bạn ghê!', 'Yeah, vui quá đi!'];
+// What their pet says to "Chào pet", in turn.
+const REPLIES = ['Chào bạn! Cảm ơn đã ghé chơi nha!', 'Hi hi, nhột quá!', 'Ồ, có khách! Vui quá đi!', 'Chơi với mình thêm nha!',
+  'Thích bạn ghê!', 'Hi hi, chào cậu nhé!', 'Yeah, vui quá đi!'];
+const WAIT_NOTE = 'đã gửi, chờ một lát';
 /** Said once a visit, the first time a tap gives no EXP. */
 const NO_GIFT: Record<PetGiftReason, (pet: string) => string> = {
   already_given: (pet) => `Hôm nay bạn đã tặng EXP cho ${pet} rồi. Vẫn chơi cùng được nhé!`,
@@ -38,10 +41,12 @@ const NO_GIFT: Record<PetGiftReason, (pet: string) => string> = {
 
 /**
  * A friend's saved room, read only: no decorating, no control over their pet. Your pet waits on the guest spot.
- * "Chào pet", "Động viên" and "Rủ học" are sent to the backend, which limits how often (the buttons show it too) and
- * never gives EXP for them. A failed send keeps its request id, so tapping again cannot deliver it twice.
- * Tapping their pet plays with it (a hop, a line and hearts, every time); the first tap of a visit also asks the
- * backend whether it gives the pet EXP today, and says what happened once.
+ * A tap on their pet opens its menu: "Chào pet" plays with it (a hop, a line and hearts), sends a greeting unless one
+ * was sent a moment ago, and the first time in a visit asks the backend whether it gives the pet EXP today (saying what
+ * happened once); "Động viên" sends a preset cheer. While the pet is out, its marker opens the same menu with "Để lại
+ * lời chào". "Rủ học" (inviting the owner, not playing with the pet) sits in the header. Greetings, cheers and
+ * invitations are limited by the backend (the menu and button show it too) and never give EXP; a failed send keeps its
+ * request id, so tapping again cannot deliver it twice.
  */
 export function VisitRoom({ userId, me, onBack, onOpenStudyRoom }: Props) {
   const insets = useSafeAreaInsets();
@@ -57,6 +62,9 @@ export function VisitRoom({ userId, me, onBack, onOpenStudyRoom }: Props) {
   // The request id of a send that failed, reused when exactly the same thing is sent again.
   const failed = useRef<{ key: string; id: string } | null>(null);
   const [hearts, setHearts] = useState(0);
+  const [petMenu, setPetMenu] = useState(false);
+  // Until when the last "Chào pet" plays: taps meanwhile neither open the menu nor start it again.
+  const playing = useRef(0);
   // Playing with the pet: asked the backend at most once a visit (the same id again after a lost connection).
   const play = useRef<{ settled: boolean; busy: boolean; id: string | null }>({ settled: false, busy: false, id: null });
 
@@ -128,12 +136,23 @@ export function VisitRoom({ userId, me, onBack, onOpenStudyRoom }: Props) {
 
   async function hello() {
     const result = await send('hello', 'hello', (id) => roomApi.greet(userId, 'hello', null, id));
-    if (!result) return;
-    if (result.host_away) toast(`Đã để lại lời chào. ${host} sẽ thấy khi ${petName} về.`, 'success');
-    else {
-      setReaction((r) => ({ key: (r?.key ?? 0) + 1, text: HELLO_REPLIES[(r?.key ?? 0) % HELLO_REPLIES.length] }));
-      toast(`Đã chào ${petName}!`, 'success');
-    }
+    // At home, the pet's answer says it was greeted (and leaves the toast to the EXP it may get).
+    if (result?.host_away) toast(`Đã để lại lời chào. ${host} sẽ thấy khi ${petName} về.`, 'success');
+  }
+  /** "Chào pet": it plays every time (once its last play is over), greets when it may, and EXP is asked for once. */
+  function greetPet() {
+    if (Date.now() < playing.current) return;
+    playing.current = Date.now() + PLAY_MS;
+    setReaction((r) => ({ key: (r?.key ?? 0) + 1, text: REPLIES[(r?.key ?? 0) % REPLIES.length] }));
+    setHearts((h) => h + 1);
+    void giftExp();
+    if (!waiting('hello') && busy === null) void hello();
+  }
+  function onMenu(id: string) {
+    setPetMenu(false);
+    if (id === 'cheer') setSheet('cheer');
+    else if (away) void hello();
+    else greetPet();
   }
   async function cheer(key: string, text: string) {
     setSheet(null);
@@ -153,9 +172,7 @@ export function VisitRoom({ userId, me, onBack, onOpenStudyRoom }: Props) {
       roomId && onOpenStudyRoom ? { label: 'Vào phòng', onPress: () => onOpenStudyRoom(roomId) } : undefined);
   }
 
-  async function playWithPet() {
-    setReaction((r) => ({ key: (r?.key ?? 0) + 1, text: PLAY_REPLIES[(r?.key ?? 0) % PLAY_REPLIES.length] }));
-    setHearts((h) => h + 1);
+  async function giftExp() {
     const p = play.current;
     if (p.settled || p.busy || !room.pet_gift) return; // (a backend without friend EXP sends no pet_gift: just play)
     if (!room.pet_gift.available) { // nothing to give today: say so once, then just play
@@ -179,11 +196,19 @@ export function VisitRoom({ userId, me, onBack, onOpenStudyRoom }: Props) {
     } finally { p.busy = false; }
   }
 
-  const actions: { action: VisitAction; label: string; icon: React.ComponentProps<typeof Ionicons>['name']; onPress: () => void; disabled?: boolean }[] = [
-    { action: 'hello', label: away ? 'Để lại lời chào' : 'Chào pet', icon: 'hand-left-outline', onPress: () => { void hello(); } },
-    { action: 'cheer', label: 'Động viên', icon: 'heart-outline', onPress: () => setSheet('cheer') },
-    { action: 'study_invite', label: 'Rủ học', icon: 'book-outline', onPress: () => setSheet('study'), disabled: !room.can_invite_study },
+  // The pet's menu, in this order; one sent a moment ago (or while another sends) waits, and says so.
+  const menuItem = (action: VisitAction, id: string, label: string, icon: PetMenuAction['icon'], always = false): PetMenuAction => {
+    const sent = waiting(action);
+    return { id, label, icon, disabled: !always && (sent || busy !== null), note: !always && sent ? WAIT_NOTE : undefined };
+  };
+  const menuActions = [
+    away ? menuItem('hello', 'hello', 'Để lại lời chào', 'hand-left') : menuItem('hello', 'hello', 'Chào pet', 'hand-left', true),
+    menuItem('cheer', 'cheer', 'Động viên', 'heart'),
   ];
+  const openMenu = () => { if (Date.now() >= playing.current) setPetMenu((open) => !open); };
+  // "Rủ học" stays reachable when the pet is out; when the owner takes no invitations it says so instead.
+  const inviteSent = waiting('study_invite');
+  const inviteOff = !room.can_invite_study;
 
   return (
     <View style={[s.fill, { paddingTop: insets.top + 10 }]} testID="visit-room">
@@ -192,38 +217,40 @@ export function VisitRoom({ userId, me, onBack, onOpenStudyRoom }: Props) {
           <Ionicons name="chevron-back" size={22} color={t.ink} />
         </Pressable>
         <View style={s.flex}>
-          <Text style={s.title} accessibilityRole="header" numberOfLines={2}>{room.room.name}</Text>
+          <Text style={s.title} accessibilityRole="header" numberOfLines={1}>{room.room.name}</Text>
           <Text style={s.subtitle} numberOfLines={1}>{`Bạn đang ghé thăm ${host} · chỉ xem`}</Text>
         </View>
+        <Pressable onPress={inviteOff ? () => toast(`${host} đang tắt nhận lời mời học.`, 'info') : () => { setPetMenu(false); setSheet('study'); }}
+          disabled={busy !== null || inviteSent} hitSlop={4}
+          style={({ pressed }) => [s.invite, pressed && s.pressed, (inviteOff || inviteSent) && s.dimmed]} accessibilityRole="button"
+          accessibilityLabel={inviteSent ? `Rủ học, ${WAIT_NOTE}` : 'Rủ học'} accessibilityHint={inviteOff ? `${host} đang tắt nhận lời mời học` : `Mời ${host} cùng học`}
+          accessibilityState={{ disabled: inviteSent || busy !== null, busy: busy === 'study_invite' }}>
+          <View style={s.inviteIcon}>
+            {busy === 'study_invite' ? <ActivityIndicator color="#FFFFFF" size="small" />
+              : <Ionicons name={inviteSent ? 'checkmark' : 'book'} size={16} color="#FFFFFF" />}
+          </View>
+          <Text style={s.inviteText}>Rủ học</Text>
+        </Pressable>
       </View>
       <View style={s.petRow}>
         <PetAvatar user={{ pet: room.pet.id, pet_level: room.pet.level }} size={34} />
-        <Text style={s.petName} numberOfLines={2}>{petName}<Text style={s.petLevel}>{`  ·  Cấp ${stage} ${PET_STAGE_NAMES[stage]}`}</Text></Text>
+        <View style={s.flex}>
+          <Text style={s.petName} numberOfLines={1}>{petName}<Text style={s.petLevel}>{`  ·  Cấp ${stage} ${PET_STAGE_NAMES[stage]}`}</Text></Text>
+          {notice ? (
+            <View style={s.status} accessibilityLiveRegion="polite">
+              <Ionicons name={notice.icon} size={13} color={t.accent} />
+              <Text style={s.statusText} numberOfLines={1}>{notice.text}</Text>
+            </View>
+          ) : null}
+        </View>
       </View>
       <View style={s.sceneWrap}>
         <RoomScene layout={room.room.layout} pet={{ ...room.pet, name: petName }} pose={pose} away={away}
-          guest={{ ...room.guest_pet, name: room.guest_pet.name ?? me.pet_name }} reaction={reaction} notice={notice}
-          onPetPress={away ? undefined : () => { void playWithPet(); }} hearts={hearts}
+          guest={{ ...room.guest_pet, name: room.guest_pet.name ?? me.pet_name }} reaction={reaction}
+          onPetPress={away ? undefined : openMenu} petLabel={`${petName}, chạm để chào hoặc động viên`} hearts={hearts}
+          petMenu={petMenu ? { actions: menuActions, onAction: onMenu, onClose: () => setPetMenu(false) } : null}
+          awayMarker={away ? { text: `${petName} đang đi dạo · chạm để để lại lời chào`, onPress: openMenu } : null}
           description={`${room.room.name}${away ? `, ${petName} đang đi dạo` : ''}, pet của bạn đang ghé chơi`} />
-      </View>
-      {away ? <Text style={s.hint}>{`${petName} đang đi dạo. Lời chào sẽ chờ ${host} và ${petName} về.`}</Text>
-        : !room.can_invite_study ? <Text style={s.hint}>{`${host} đang tắt nhận lời mời học.`}</Text> : null}
-      <View style={s.actions}>
-        {actions.map((a) => {
-          const sentRecently = waiting(a.action);
-          const off = busy !== null || sentRecently || !!a.disabled;
-          return (
-            <Pressable key={a.action} onPress={a.onPress} disabled={off} accessibilityRole="button"
-              accessibilityState={{ busy: busy === a.action, disabled: off }}
-              accessibilityLabel={sentRecently ? `${a.label}, đã gửi, chờ một lát` : a.label}
-              style={({ pressed }) => [s.action, pressed && s.pressed, off && busy !== a.action && s.dimmed]}>
-              {busy === a.action ? <ActivityIndicator color={t.accent} />
-                : <Ionicons name={sentRecently ? 'checkmark-circle-outline' : a.icon} size={22} color={t.accent} />}
-              <Text style={s.actionText}>{a.label}</Text>
-              {sentRecently ? <Text style={s.actionSent}>Đã gửi</Text> : null}
-            </Pressable>
-          );
-        })}
       </View>
 
       <OptionSheet visible={sheet === 'cheer'} title={`Động viên ${host}`} onClose={() => setSheet(null)}>
@@ -252,18 +279,19 @@ const s = StyleSheet.create({
   back: { width: 44, height: 44, borderRadius: 16, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
   title: { color: t.ink, fontSize: 20, lineHeight: 26, fontWeight: '900' },
   subtitle: { color: t.muted, fontSize: 12, marginTop: 1 },
-  petRow: { flexDirection: 'row', alignItems: 'center', gap: 10, marginHorizontal: 16, marginBottom: 10, paddingHorizontal: 12, paddingVertical: 8,
+  // The same look as "Cài đặt" in your own room.
+  invite: { height: 44, flexShrink: 0, borderRadius: 16, backgroundColor: '#FFFFFF', flexDirection: 'row', alignItems: 'center', gap: 6,
+    paddingLeft: 7, paddingRight: 12, borderWidth: 1.5, borderColor: '#B9D6EA' },
+  inviteIcon: { width: 30, height: 30, borderRadius: 15, backgroundColor: t.accent, alignItems: 'center', justifyContent: 'center' },
+  inviteText: { color: t.ink, fontSize: 13, fontWeight: '900' },
+  petRow: { flexDirection: 'row', alignItems: 'center', gap: 10, marginHorizontal: 16, marginBottom: 14, paddingHorizontal: 12, paddingVertical: 8,
     borderRadius: 18, backgroundColor: '#FFFFFFCC' },
-  petName: { flex: 1, color: t.ink, fontSize: 15, fontWeight: '900' },
+  petName: { color: t.ink, fontSize: 15, fontWeight: '900' },
   petLevel: { color: t.muted, fontSize: 12, fontWeight: '700' },
-  sceneWrap: { flex: 1, minHeight: 0, paddingHorizontal: 16, paddingBottom: 8 },
-  hint: { color: t.muted, fontSize: 12, textAlign: 'center', marginHorizontal: 20, marginBottom: 8 },
-  actions: { flexDirection: 'row', gap: 10, paddingHorizontal: 16, paddingBottom: 12 },
-  action: { flex: 1, minHeight: 64, borderRadius: 18, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', gap: 2, paddingHorizontal: 4,
-    shadowColor: t.shadow, shadowOpacity: 0.06, shadowRadius: 10, shadowOffset: { width: 0, height: 3 }, elevation: 2 },
-  actionText: { color: t.ink, fontSize: 13, fontWeight: '800', textAlign: 'center' },
-  actionSent: { color: t.muted, fontSize: 10, fontWeight: '700' },
-  pressed: { opacity: 0.85, transform: [{ scale: 0.98 }] },
+  status: { flexDirection: 'row', alignItems: 'center', gap: 5, marginTop: 3 },
+  statusText: { flexShrink: 1, color: t.ink, fontSize: 12, fontWeight: '800' },
+  sceneWrap: { flex: 1, minHeight: 0, paddingHorizontal: 16, paddingBottom: 12 },
+  pressed: { opacity: 0.85, transform: [{ scale: 0.97 }] },
   dimmed: { opacity: 0.5 },
   sheetLabel: { fontSize: 14, fontWeight: '800', color: t.ink, marginTop: 4, marginBottom: 8 },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 10 },

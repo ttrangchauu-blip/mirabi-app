@@ -1,5 +1,6 @@
 """In-app notifications for Study Together (friend requests, room invitations, session and team quest results) and
-friend room visits (greetings and cheers, merged per kind while unread: see room_visits.py).
+friend room visits (greetings and cheers, merged per kind while unread: see room_visits.py) and friends caring for
+the garden (merged while unread: see garden.py).
 
 `notify` stores the notification and, after commit, pushes it to the user's open sockets. Push notifications to the
 device (APNs/FCM via Expo) are not wired up: the backend has no device-token registry yet.
@@ -21,7 +22,7 @@ from .security import current_user
 router = APIRouter(prefix="/api/notifications", tags=["notifications"])
 
 KINDS = {"friend_request", "friend_accepted", "room_invitation", "session_started", "session_completed",
-         "team_quest_completed", "room_visit"}
+         "team_quest_completed", "room_visit", "garden_care"}
 RETENTION_DAYS = 90
 
 

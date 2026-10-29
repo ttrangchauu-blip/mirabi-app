@@ -25,9 +25,31 @@ the app only shows them and lets the user confirm the popup.
   its one gift. EXP goes through `award_exp` (source `pet_adventure`, reference `walk:<id>`); an item
   goes into `user_inventory_items`. Then `pet_walks.rewarded_at`, `reward_exp` and `rewards` are set.
   All of this is one database transaction, so a walk is either fully rewarded or not at all.
-- **returned → rested**: the user taps "Nhận quà". This only sets `pet_walks.collected_at` (the popup was
+- **returned → rested**: the user closes the popup ("Đóng" or "Xem kho đồ"). This only sets `pet_walks.collected_at` (the popup was
   confirmed). It never grants anything.
 - While a walk is `returned`, the next walk doesn't start. Confirm the popup first.
+
+## Hatching and the walk
+
+The egg (Lv.0) hatches at 300 EXP, and hatching and walking never overlap:
+
+- **Hatching waits for the app**: reaching 300 EXP records the EXP but keeps the pet at Lv.0, waiting to hatch
+  (`pet_evolutions.hatched_at IS NULL`). The app plays the hatch and the congratulations. Closing them calls
+  `POST /api/pet/hatch`, which sets `hatched_at`, brings the level up to the EXP and records the "pet_hatched" memory.
+- **Hatch first**: while the egg waits at home, the walk doesn't start even with every goal done. The status is
+  `waiting_hatch`, the app shows "Pet sẽ đi khám phá sau khi nở xong", and `POST /api/pet/walk` answers
+  `409 hatch_first`. The hatch checks today's goals again and starts the walk if they are all done. A task added
+  before that counts. The 8 hours are timed from the hatch, not from the last goal.
+- **Back first**: an egg that reaches 300 EXP during a walk keeps its shape. The walk is neither stopped nor
+  shortened. `hatch.status` is `waiting_return` until the pet is back *and* its gift popup is confirmed (the walk's
+  own EXP gift counts toward hatching). Then it is `ready`. Before that, `POST /api/pet/hatch` answers `409 pet_away`.
+- **Once**: the hatch takes the same lock as starting a walk and claims `hatched_at IS NULL`, so retries, reloads and
+  other devices hatch once (`hatched: false` after that). It never starts a second walk or gives back the day's walk.
+- `GET /api/pet/space` → `hatch: {status: "none" | "ready" | "waiting_return", level}`, where `level` is the level
+  once hatched. Pets already past Lv.0 before this existed are marked hatched at startup.
+- The app (`usePetHatch`, `PetHatchedPopup`) keeps the step reached on the device. An app closed after the
+  animation reopens on the congratulations; one closed during it plays the animation again. Nothing hatches until
+  the congratulations are closed.
 
 ## When rewards are granted
 
@@ -43,27 +65,17 @@ walk id (`roll_rewards`), so the same walk always gives the same gifts.
 
 ## Gifts
 
-Each walk brings back exactly **one** gift: either `ADVENTURE_EXP` (30 EXP) or one item (quantity 1),
-never both. `pick_gift` chooses it when the walk starts and stores it in `pet_walks.item_id`
-(`EXP_GIFT` = `"exp"` for EXP), so it stays a surprise until the pet returns:
+Each walk goes to a place and brings back **one main item** and, half the time, a bonus of 1–3 seeds or materials,
+rolled from the item catalog when it ends and kept in `walk_rewards`; see [inventory.md](inventory.md) for the catalog,
+odds, places and the inventory they go into. Walks started before the catalog (`pet_walks.item_id` of `exp` or an old
+find id) still bring exactly the one gift they picked: 30 EXP (`ADVENTURE_EXP`) or that item.
 
-- 40% EXP (`EXP_GIFT_CHANCE`).
-- 60% an item: a rarity tier is drawn by `GIFT_ODDS` (common 55%, rare 35%, epic 10%), then an item of
-  that tier.
-
-Items have `name`, `emoji`, `rarity` (`common`, `rare`, `epic`), `kind` (`find`, `seedling`,
-`decoration`) and `quantity`. The catalog is `REWARD_ITEMS`. Its ids are stored in the database, so
-only ever add to it. In `pending_reward`, an EXP gift is `exp: 30, items: []`, and an item gift is
-`exp: 0, items: [one item]`.
-
-The app draws each item from `mobile/src/rewardArt.ts`: SVG markup keyed by item id, shown by
-`RewardItemArt`. An item without a drawing shows its `emoji` instead, so the backend can add items
-before their art exists. When you add an item, add its drawing there too.
-Preview: [pet-adventure-previews/reward-art.png](pet-adventure-previews/reward-art.png).
+The app draws decorations from the room artwork and every other item from `mobile/src/itemArt.ts` (`ItemIcon`); an
+item without a drawing shows its `emoji`.
 
 ## API
 
-- `GET /api/pet/space` → `pending_reward`: `{walk_id, returned_at, exp, items[]}` for the oldest
+- `GET /api/pet/space` → `pending_reward`: `{walk_id, returned_at, exp, location, items[]}` for the oldest
   rewarded walk not yet confirmed, or `null`. It also includes `inventory`.
 - `POST /api/pet/walks/{walk_id}/acknowledge` → confirms the popup. It's idempotent: repeated taps,
   retries and other devices all get `200` and nothing is granted again. Returns `404` for a walk that

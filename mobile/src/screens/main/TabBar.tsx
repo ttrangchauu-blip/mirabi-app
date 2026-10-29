@@ -6,6 +6,9 @@ import { Text } from '../../components/Typography';
 import { TabKey, TABS } from '../../tabs';
 import { appTheme as t } from '../../theme';
 
+/** The bar's rounded top corners: a screen drawn edge to edge (the personal room) goes on this far under the bar. */
+export const TAB_BAR_RADIUS = 26;
+
 /** `badges`: a count shown on a tab's icon, hidden at 0 (friend requests waiting on "Bạn bè"). */
 export function TabBar({ active, onChange, bottomInset, badges }: {
   active: TabKey; onChange: (key: TabKey) => void; bottomInset: number; badges?: Partial<Record<TabKey, number>>;
@@ -35,7 +38,8 @@ export function TabBar({ active, onChange, bottomInset, badges }: {
 }
 
 const styles = StyleSheet.create({
-  bar: { flexDirection: 'row', backgroundColor: '#FFFFFF', paddingTop: 8, paddingHorizontal: 8, borderTopLeftRadius: 26, borderTopRightRadius: 26,
+  bar: { flexDirection: 'row', backgroundColor: '#FFFFFF', paddingTop: 8, paddingHorizontal: 8, borderTopLeftRadius: TAB_BAR_RADIUS,
+    borderTopRightRadius: TAB_BAR_RADIUS,
     shadowColor: t.shadow, shadowOpacity: 0.1, shadowRadius: 18, shadowOffset: { width: 0, height: -4 }, elevation: 12 },
   item: { flex: 1, minWidth: 0, alignItems: 'center', justifyContent: 'flex-start', minHeight: 54 },
   iconWrap: { width: 52, height: 32, borderRadius: 16, alignItems: 'center', justifyContent: 'center' },

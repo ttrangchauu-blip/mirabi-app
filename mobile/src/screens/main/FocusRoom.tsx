@@ -1,114 +1,253 @@
-import React, { memo, useEffect, useRef } from 'react';
-import { Animated, Easing, Pressable, StyleSheet, View } from 'react-native';
-import Svg, { Circle, ClipPath, Defs, Ellipse, G, LinearGradient, Path, RadialGradient, Rect, Stop } from 'react-native-svg';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
+import { ActivityIndicator, Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ApiError } from '../../api/client';
+import { useViewportSize } from '../../components/MobileViewport';
 import { Text } from '../../components/Typography';
-import { PetArt } from '../../components/PetArt';
-import { hasSprite } from '../../petSprites';
-import { useReduceMotion } from '../../components/useReduceMotion';
+import { type PlaceRequest, usePlaceRequest } from '../../inventory/api';
+import type { InventoryItem } from '../../inventory/types';
+import { focusRoomApi, focusRoomCache } from '../../room/api';
+import { defaultLayout, geometry, keyOf, poseFor } from '../../room/art';
+import { freeCopies } from '../../room/found';
+import { PROBLEM_TEXT, type Problem } from '../../room/rules';
+import type { FocusRoomData, FoundStack, RoomPet } from '../../room/types';
+import { appTheme as t } from '../../theme';
+import { AppModal } from '../../ui/AppModal';
+import { Button } from '../../ui/kit';
+import { InventoryScreen } from '../inventory/InventoryScreen';
+import { DecorateHeader, DecoratePanel, decoratePanelHeight } from '../room/DecoratePanel';
+import { RoomScene } from '../room/RoomScene';
+import { useRoomEditor } from '../room/useRoomEditor';
 
-type Props = { petId: string; petName: string | null; petLevel: number; resting: boolean; compact: boolean };
+type Props = { petId: string; petName: string | null; petLevel: number; resting: boolean; compact: boolean;
+  /** Whose saved focus room to show; without one, the default room. */ userId?: number };
 
-/** Resolution-independent room; original PetArt remains intact, including evolution stages. The pet always sits at the
- * desk here, even while it is out on a walk: walking and studying are separate. */
-export const FocusRoom = memo(function FocusRoom({ petId, petName, petLevel, resting, compact }: Props) {
-  const reduce = useReduceMotion();
-  const writing = useRef(new Animated.Value(0)).current;
-  const greeting = useRef(new Animated.Value(0)).current;
-  // A drawn study strip brings its own book, so the room's book and pencil step aside while it plays.
-  const drawnStudy = !resting && hasSprite(petId, petLevel, 'study');
-  useEffect(() => { if (reduce) { greeting.stopAnimation(); greeting.setValue(0); } return () => greeting.stopAnimation(); }, [reduce, greeting]);
+const CANVAS = geometry('focus').canvas;
+const LINES = ['Cùng tập trung nhé!', 'Mình ngồi học cạnh bạn nè.', 'Thêm một chút nữa thôi, cố lên!'];
+
+/**
+ * The Focus Space room: the owner's decorated Phòng tập trung (same catalog as the personal room, its own wider canvas
+ * and saved layout), with the pet at its desk — studying, or resting on a break. Shows the default room until the saved
+ * one loads, and the last saved one offline. "Trang trí" opens the decorating screen.
+ */
+export const FocusRoom = memo(function FocusRoom({ petId, petName, petLevel, resting, userId }: Props) {
+  const [data, setData] = useState<FocusRoomData | null>(null);
+  const [offline, setOffline] = useState(false);
+  const [editing, setEditing] = useState(false);
+  // A decoration chosen with "Đặt vào phòng" in Kho đồ: decorating opens with one more copy of it.
+  const [queued, setQueued] = useState<PlaceRequest | null>(null);
+  const [reaction, setReaction] = useState<{ key: number; text: string } | null>(null);
+  const lineIndex = useRef(0);
+
+  // The newest room version this screen has seen (loaded or saved).
+  const newest = useRef(0);
+  const load = useCallback(async (): Promise<FocusRoomData | null> => {
+    if (userId == null) return null;
+    try {
+      const fresh = await focusRoomApi.get();
+      if (!Array.isArray(fresh?.room?.layout?.items) || !Array.isArray(fresh?.catalog?.items)) throw new Error('Unexpected focus room');
+      // A read that started before a save must not bring the older room back (on screen or in the cache).
+      if (fresh.room.version < newest.current) return fresh;
+      newest.current = fresh.room.version;
+      setData(fresh); setOffline(false);
+      void focusRoomCache.store(userId, fresh);
+      return fresh;
+    } catch {
+      const cached = await focusRoomCache.load(userId);
+      if (cached) setData((current) => current ?? cached);
+      setOffline(true);
+      return null;
+    }
+  }, [userId]);
+  useEffect(() => { setData(null); void load(); }, [load]);
+  const onPlaceRequest = useCallback((request: PlaceRequest) => { setQueued(request); setEditing(true); }, []);
+  usePlaceRequest('focus', !!data && !offline && userId != null, onPlaceRequest);
   useEffect(() => {
-    writing.setValue(0);
-    if (reduce || resting || drawnStudy) return;
-    const loop = Animated.loop(Animated.sequence([
-      Animated.timing(writing, { toValue: 1, duration: 950, easing: Easing.inOut(Easing.sin), useNativeDriver: true }),
-      Animated.timing(writing, { toValue: 0, duration: 950, easing: Easing.inOut(Easing.sin), useNativeDriver: true }),
-      Animated.delay(1200),
-    ]));
-    loop.start(); return () => loop.stop();
-  }, [reduce, resting, drawnStudy, writing]);
-  const size = compact ? 96 : 145;
-  return <View testID="focus-room" style={s.room}>
-    <View pointerEvents="none" style={StyleSheet.absoluteFill} accessible accessibilityRole="image" accessibilityLabel="Căn phòng học ấm áp với cửa sổ vòm, bàn gỗ, đèn đọc sách và cây xanh">
-      <Svg width="100%" height="100%" viewBox="0 0 800 520" preserveAspectRatio="xMidYMid meet">
-        <Defs>
-          <LinearGradient id="room-wall" x1="0" y1="0" x2="1" y2="1"><Stop offset="0" stopColor="#F8F0E5" /><Stop offset="1" stopColor="#E8E5F1" /></LinearGradient>
-          <LinearGradient id="room-sky" x1="0" y1="0" x2="0" y2="1"><Stop offset="0" stopColor="#A7B3D8" /><Stop offset="1" stopColor="#E1CFE1" /></LinearGradient>
-          <LinearGradient id="room-floor" x1="0" y1="0" x2="0" y2="1"><Stop offset="0" stopColor="#E7D9CB" /><Stop offset="1" stopColor="#F0E6DD" /></LinearGradient>
-          <RadialGradient id="room-lamp"><Stop offset="0" stopColor="#FFEAC0" stopOpacity=".75" /><Stop offset="1" stopColor="#FFEAC0" stopOpacity="0" /></RadialGradient>
-          <ClipPath id="room-window"><Path d="M248 283V135a92 92 0 0 1 184 0v148Z" /></ClipPath>
-        </Defs>
-        <Rect width="800" height="520" rx="26" fill="url(#room-wall)" />
-        <Path d="M0 392H800V520H0Z" fill="url(#room-floor)" />
-        <Path d="M0 392H800M0 398H800" stroke="#D7C8BA" strokeWidth="2" />
-        <G stroke="#DCCEC1" strokeWidth="1.5" opacity=".55"><Path d="M0 440H800M0 487H800M125 398L55 520M323 398L299 520M519 398L548 520M714 398L792 520" /></G>
-        <Ellipse cx="421" cy="455" rx="242" ry="43" fill="#C9BCBD" opacity=".2" />
-        <Ellipse cx="421" cy="449" rx="218" ry="40" fill="#D4DDDC" />
-        <Ellipse cx="421" cy="449" rx="192" ry="29" fill="none" stroke="#EAF0E9" strokeWidth="2" />
-        {/* Arched window and a quiet fantasy landscape. */}
-        <Path d="M232 292V135a108 108 0 0 1 216 0v157Z" fill="#D1BDAE" />
-        <Path d="M240 288V135a100 100 0 0 1 200 0v153Z" fill="#FFF7EB" />
-        <G clipPath="url(#room-window)">
-          <Rect x="245" y="38" width="192" height="250" fill="url(#room-sky)" />
-          <Circle cx="383" cy="100" r="24" fill="#FFF4D7" /><Circle cx="394" cy="91" r="22" fill="#AFB6D6" />
-          <G fill="#FFF9ED"><Circle cx="284" cy="104" r="2" /><Circle cx="321" cy="76" r="1.5" /><Circle cx="411" cy="145" r="2" /><Path d="M301 136v10m-5-5h10M356 165v8m-4-4h8" stroke="#FFF9ED" strokeWidth="1.5" /></G>
-          <Path d="M244 232q48-68 95-12t105-20v94H244Z" fill="#9EAFC1" /><Path d="M240 262q54-47 106-18t96-5v65H240Z" fill="#90A9B2" />
-          <Path d="M268 263l13-47 13 47m-7-28 13-45 13 45m83 45 15-51 15 51" fill="#789AA2" />
-        </G>
-        <Path d="M340 54V286M248 184H432" stroke="#FFF5E7" strokeWidth="9" />
-        <Rect x="222" y="286" width="236" height="14" rx="6" fill="#C5AA94" /><Rect x="223" y="285" width="235" height="5" rx="2" fill="#ECD6BE" />
-        <Path d="M197 57q-26 117 8 224l35 8q-31-153 1-231Z" fill="#DFD3CF" opacity=".8" />
-        <Path d="M461 60q31 112 3 217l-23 11q26-163-7-231Z" fill="#DFD3CF" opacity=".65" />
-        {/* A shelf, little books and trailing leaves. */}
-        <Rect x="540" y="123" width="164" height="10" rx="4" fill="#B9947B" /><Path d="M554 133v17m136-17v17" stroke="#B9947B" strokeWidth="6" />
-        <Rect x="555" y="73" width="17" height="50" rx="3" fill="#B6BBCB" /><Rect x="575" y="80" width="15" height="43" rx="3" fill="#D6A89B" />
-        <Rect x="593" y="68" width="18" height="55" rx="3" fill="#9EB9AF" /><Path d="M558 83h11m-11 5h11m28-8h10" stroke="#FFF2DF" strokeWidth="2" />
-        <Path d="M651 123l-5-27h34l-5 27Z" fill="#D9B89F" /><Path d="M663 98q-28-30-38-9 18 20 38 9Zm0 0q-1-44 23-39 5 28-23 39Zm4 1q37 8 18 35-19 21-4 37" stroke="#8DA58A" strokeWidth="4" fill="none" />
-        <G fill="#92AB91"><Ellipse cx="684" cy="132" rx="12" ry="5" transform="rotate(-35 684 132)" /><Ellipse cx="677" cy="151" rx="11" ry="5" transform="rotate(25 677 151)" /><Ellipse cx="680" cy="170" rx="10" ry="5" transform="rotate(-30 680 170)" /></G>
-        {/* Warm hanging fairy lights. */}
-        <Path d="M65 39Q345 114 742 36" fill="none" stroke="#BAAE9C" strokeWidth="2" />
-        {[110, 188, 269, 350, 431, 512, 593, 674].map((x, i) => <G key={x}><Circle cx={x} cy={60 + Math.sin(i / 7 * Math.PI) * 17} r="14" fill="#FFF4D1" opacity=".5" /><Circle cx={x} cy={60 + Math.sin(i / 7 * Math.PI) * 17} r="4" fill="#FFF6DC" /></G>)}
-        {/* Floor plant. */}
-        <Path d="M115 426l-16-63h68l-14 63q-18 8-38 0Z" fill="#CBA58E" /><Ellipse cx="133" cy="363" rx="34" ry="8" fill="#B18E78" />
-        <Path d="M134 366q-4-69-35-100m34 77q30-66 51-85m-50 91q-37-39-57-35m58 13q-1-83 12-105" fill="none" stroke="#82977C" strokeWidth="5" />
-        <G fill="#97AF8E"><Ellipse cx="102" cy="274" rx="14" ry="32" transform="rotate(-37 102 274)" /><Ellipse cx="172" cy="277" rx="13" ry="34" transform="rotate(38 172 277)" /><Ellipse cx="147" cy="241" rx="13" ry="33" transform="rotate(10 147 241)" /><Ellipse cx="90" cy="320" rx="14" ry="29" transform="rotate(-63 90 320)" /></G>
-        {/* Desk, chair, reading lamp and mug. */}
-        <Rect x="361" y="283" width="120" height="119" rx="42" fill="#B8ADB6" /><Rect x="371" y="291" width="100" height="103" rx="36" fill="#C8BDC4" />
-        <Path d="M249 367l-18 86h15l23-86m294 0 18 86h-15l-23-86" fill="#B38E75" />
-        <Rect x="210" y="349" width="397" height="20" rx="9" fill="#B48C6D" /><Rect x="209" y="341" width="400" height="13" rx="6" fill="#D8B999" />
-        <Ellipse cx="546" cy="314" rx="95" ry="57" fill="url(#room-lamp)" />
-        <Path d="M555 339V252l-37-31" fill="none" stroke="#889D9B" strokeWidth="7" strokeLinecap="round" /><Ellipse cx="554" cy="339" rx="29" ry="5" fill="#889D9B" />
-        <Path d="M488 237q1-31 32-28l26 33Z" fill="#91A9A2" /><Path d="M488 237l58 5" stroke="#D7E2CD" strokeWidth="5" strokeLinecap="round" />
-        <Rect x="266" y="321" width="37" height="20" rx="3" fill="#C5B8D3" /><Path d="M272 326h28m-28 5h28" stroke="#EAE1EB" strokeWidth="2" />
-        <Path d="M310 314h23v21q-10 9-23 0Z" fill="#F5E7DA" /><Path d="M333 320q19-1 14 11-4 6-14 2" fill="none" stroke="#E5CEB8" strokeWidth="4" />
-        <Path d="M318 305q-5-6 0-11m8 12q-5-6 0-11" stroke="#EDE4DC" strokeWidth="2" fill="none" />
-        <Rect x="627" y="305" width="63" height="78" rx="6" fill="#DDD0BD" /><Rect x="636" y="312" width="45" height="63" rx="3" fill="#EDE5D8" />
-        <Path d="M648 359l8-28 9 28m-14-10h11" stroke="#9BB0AC" strokeWidth="3" fill="none" />
-        <G fill="#FFF9E9" opacity=".9"><Path d="M502 176v14m-7-7h14M201 325v10m-5-5h10M606 264v12m-6-6h12" /></G>
-      </Svg>
+    if (!reaction) return;
+    const id = setTimeout(() => setReaction(null), 2400);
+    return () => clearTimeout(id);
+  }, [reaction]);
+
+  const layout = data?.room.layout ?? defaultLayout('focus');
+  const pet: RoomPet = { id: petId, name: petName, level: petLevel };
+  const name = petName || 'Pet';
+  // The status and the "Trang trí" icon sit under the room, so nothing is ever drawn over the room or its furniture.
+  return <View testID="focus-room" style={s.wrap}>
+    <View style={s.room}>
+      <RoomScene kind="focus" layout={layout} pet={pet} pose={poseFor('study', layout)} resting={resting} away={false}
+        description={`Phòng tập trung, ${name} ${resting ? 'đang nghỉ ngơi' : 'đang học cùng bạn'}`}
+        onPetPress={() => setReaction((r) => ({ key: (r?.key ?? 0) + 1, text: LINES[lineIndex.current++ % LINES.length] }))} reaction={reaction} />
     </View>
-    <Pressable style={[s.pet, { width: size, height: size, marginLeft: -size / 2 }]} accessibilityRole="button" accessibilityLabel={`${petName || 'Pet'} đang ${resting ? 'thư giãn' : 'đọc sách cùng bạn'}`}
-      onPress={() => { if (reduce) return; greeting.stopAnimation(); greeting.setValue(0); Animated.sequence([
-        Animated.timing(greeting, { toValue: -7, duration: 180, useNativeDriver: true }),
-        Animated.timing(greeting, { toValue: 0, duration: 240, useNativeDriver: true }),
-      ]).start(); }}>
-      <Animated.View style={{ transform: [{ translateY: greeting }, { rotate: resting ? '-7deg' : '0deg' }] }}><PetArt pet={petId} size={size} stage={petLevel} studying={drawnStudy} /></Animated.View>
-      {drawnStudy ? null : <View pointerEvents="none" style={s.book}>
-        <Svg width={92} height={37} viewBox="0 0 120 48"><Path d={resting ? 'M13 24h92v19H13Z' : 'M7 13q24-11 53 3 28-14 53-3l-5 30q-23-8-48 0-27-8-48 0Z'} fill={resting ? '#A7B7B0' : '#FFF8E6'} stroke="#CBB699" strokeWidth="2" /><Path d={resting ? 'M20 30h78m-78 5h78' : 'M60 16v26M21 22l26 4m-26 4 26 4m27-8 25-4m-25 12 25-4'} stroke="#C6B8A5" strokeWidth="1.5" /></Svg>
-        {!resting ? <Animated.View testID="study-pencil" style={[s.pencil, { transform: [{ translateX: writing.interpolate({ inputRange: [0, 1], outputRange: [0, 8] }) }, { rotate: '-30deg' }] }]} /> : null}
-      </View>}
-      {resting ? <View style={s.restIcon}><Ionicons name="moon-outline" color="#8B8EA6" size={17} /></View> : null}
-    </Pressable>
-    <View style={s.caption}><View style={s.dot} /><Text style={s.captionText}>{`${petName || 'Pet'} ${resting ? 'đang nghỉ ngơi bên bạn' : 'đang học cùng bạn'}`}</Text></View>
+    <View style={s.footer}>
+      <View style={s.caption}><View style={[s.dot, resting && s.dotRest]} />
+        <Text style={s.captionText} numberOfLines={1}>{`${name} ${resting ? 'đang nghỉ ngơi bên bạn' : 'đang học cùng bạn'}`}</Text></View>
+      <Pressable onPress={() => setEditing(true)} disabled={!data || offline} hitSlop={6}
+        style={({ pressed }) => [s.decorate, (!data || offline) && s.decorateOff, pressed && s.pressed]}
+        accessibilityRole="button" accessibilityLabel="Trang trí" accessibilityHint={offline ? 'Cần kết nối mạng để trang trí' : 'Mở kho đồ trang trí phòng tập trung'}
+        accessibilityState={{ disabled: !data || offline }}>
+        <Ionicons name="color-palette" size={20} color="#FFFFFF" />
+      </Pressable>
+    </View>
+    {data && editing ? <FocusRoomEditor data={data} pet={pet} resting={resting} userId={userId} initialCopy={queued}
+      onClose={() => { setEditing(false); setQueued(null); }} reload={load}
+      onSaved={(next) => { newest.current = Math.max(newest.current, next.room.version); setData(next); if (userId != null) void focusRoomCache.store(userId, next); setEditing(false); setQueued(null); }} /> : null}
   </View>;
 });
 
+/**
+ * Decorating the focus room, over the whole screen. Its own messages and "Bỏ thay đổi?" question are drawn inside it
+ * (the app's toasts and dialogs would be under a native modal).
+ */
+function FocusRoomEditor({ data, pet, resting, userId, initialCopy, onClose, onSaved, reload }: {
+  data: FocusRoomData; pet: RoomPet; resting: boolean; userId?: number; initialCopy: PlaceRequest | null; onClose: () => void;
+  onSaved: (data: FocusRoomData) => void; reload: () => Promise<FocusRoomData | null>;
+}) {
+  const insets = useSafeAreaInsets();
+  const { height: screenHeight } = useViewportSize();
+  const editor = useRoomEditor('focus', data.catalog.max_items);
+  const [current, setCurrent] = useState(data);
+  const [saving, setSaving] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
+  const [asking, setAsking] = useState(false);
+  const [inventory, setInventory] = useState(false);
+  const { start } = editor;
+  useEffect(() => { start(data.room.layout); }, [start]); // eslint-disable-line react-hooks/exhaustive-deps
+  const copied = useRef(false);
+  useEffect(() => {
+    if (!editor.draft || !initialCopy || copied.current) return;
+    copied.current = true;
+    pickCopy(initialCopy);
+  }, [editor.draft, initialCopy]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (!message) return;
+    const id = setTimeout(() => setMessage(null), 3200);
+    return () => clearTimeout(id);
+  }, [message]);
+  const draft = editor.draft;
+  const changed = !!draft && JSON.stringify(draft) !== JSON.stringify(current.room.layout);
+  const refused = (problem: Problem | null | undefined) => { if (problem) setMessage(PROBLEM_TEXT[problem]); };
+  const nameOf = (item: string) => current.catalog.items.find((entry) => entry.id === item)?.name ?? 'Đồ vật';
+  const requestClose = () => { if (changed) setAsking(true); else onClose(); };
+
+  async function save() {
+    if (!draft) return;
+    setSaving(true);
+    try {
+      const { room, catalog } = await focusRoomApi.save(draft, current.room.version);
+      onSaved({ ...current, room, catalog: catalog ?? current.catalog });
+    } catch (e) {
+      if (e instanceof ApiError && e.code === 'room_version_conflict') {
+        const fresh = await reload();
+        if (fresh) { setCurrent(fresh); start(fresh.room.layout); }
+        setMessage('Phòng vừa được thay đổi ở nơi khác. Mirabi đã mở bản mới nhất, bạn trang trí lại nhé.');
+      } else if (e instanceof ApiError && e.code === 'not_enough_items') {
+        try { const fresh = await focusRoomApi.get(); setCurrent((c) => ({ ...c, catalog: fresh.catalog })); } catch { /* keep the counts shown */ }
+        setMessage('Kho đồ không còn đủ món này. Cất bớt một món rồi lưu lại nhé.');
+      } else setMessage('Chưa lưu được phòng. Kiểm tra kết nối rồi thử lại nhé.'); // the draft stays, so "Lưu" tries again
+    } finally { setSaving(false); }
+  }
+  function pick(item: string) {
+    const result = editor.add(item);
+    if (result === 'full') setMessage('Phòng đã đủ đồ rồi. Cất bớt vào kho để thêm món mới nhé.');
+    else if (result === 'unsupported') setMessage('Chưa có chỗ trống trên bàn hoặc kệ. Thêm bàn, kệ hoặc dọn bớt đồ trên đó nhé.');
+    else if (result === 'blocks_pet' || result === 'trapped') setMessage('Phòng chưa còn chỗ trống cho món này. Cất bớt đồ rồi thử lại nhé.');
+  }
+  /** One more copy of a found decoration, if one is free (counting this draft); else the first copy already placed. */
+  function pickCopy(want: Pick<FoundStack, 'item' | 'variant' | 'name'>) {
+    const stack = current.catalog.found?.find((f) => f.item === want.item && f.variant === want.variant);
+    const layout = editor.draft ?? current.room.layout;
+    if (!stack || freeCopies(stack, current.room.layout, layout) < 1) {
+      const placed = layout.items.find((p) => p.uid && p.item === want.item && p.variant === want.variant);
+      if (placed) editor.select(keyOf(placed));
+      setMessage(`Đã đặt hết ${want.name}. Cất bớt một món để đặt thêm nhé.`);
+      return;
+    }
+    const result = editor.addCopy(stack.item, stack.variant);
+    if (result === 'added') setMessage(`Đã thêm ${stack.name}. Kéo để đổi chỗ rồi bấm Lưu nhé.`);
+    else if (result === 'full') setMessage('Phòng đã đủ đồ rồi. Cất bớt vào kho để thêm món mới nhé.');
+    else if (result === 'unsupported') setMessage('Chưa có chỗ trống trên bàn hoặc kệ. Thêm bàn, kệ hoặc dọn bớt đồ trên đó nhé.');
+    else if (result === 'blocks_pet' || result === 'trapped') setMessage('Phòng chưa còn chỗ trống cho món này. Cất bớt đồ rồi thử lại nhé.');
+  }
+  const placeFromInventory = (item: InventoryItem) => {
+    setInventory(false);
+    if (item.art) pickCopy({ item: item.art, variant: item.variant, name: item.name });
+  };
+  function store() {
+    const result = editor.store();
+    if (!result) return;
+    if ('problem' in result) refused(result.problem);
+    else setMessage(`Đã cất ${result.stored.map(nameOf).join(', ')} vào kho.`);
+  }
+  const tools = draft ? {
+    catalog: current.catalog, draft, selected: editor.selected, onVariant: editor.variant,
+    onFlip: () => refused(editor.flip()), onRotate: () => refused(editor.rotate()), onStore: store,
+    onNudge: (dx: number, dy: number) => { const p = draft.items.find((entry) => keyOf(entry) === editor.selected); if (p) refused(editor.move(keyOf(p), p.x + dx, p.y + dy)); },
+    onDeselect: () => editor.select(null),
+  } : null;
+
+  return (
+    <AppModal visible animationType="slide" onRequestClose={requestClose}>
+      <View style={[s.editor, { paddingTop: insets.top + 10 }]} testID="focus-room-editor">
+        <DecorateHeader title="Trang trí phòng tập trung" canUndo={editor.canUndo} saving={saving} canSave={!!draft} onCancel={requestClose}
+          onUndo={editor.undo} onSave={() => { void save(); }} onInventory={userId != null ? () => setInventory(true) : undefined} style={s.header} />
+        {/* The panel keeps one height with the selected item's tools docked in it: selecting, dragging or storing never
+            moves the room or the tools. The room keeps the space of the folded panel; unfolded, the panel goes over it. */}
+        <View style={[s.sceneWrap, { marginBottom: decoratePanelHeight(screenHeight) }]}>
+          {draft ? <RoomScene kind="focus" layout={draft} pet={pet} pose={poseFor('study', draft)} resting={resting} away={false}
+            description="Phòng tập trung đang trang trí"
+            editor={{ selected: editor.selected, onSelect: editor.select, place: editor.place, preview: editor.preview,
+              onMove: (item, x, y) => { const problem = editor.move(item, x, y); if (problem) setMessage(`${PROBLEM_TEXT[problem]}. Đã đưa về chỗ cũ.`); } }} />
+            : <ActivityIndicator color={t.accent} />}
+        </View>
+        {tools ? <View style={s.panelDock}>
+          <DecoratePanel {...tools} saved={current.room.layout} bottomInset={insets.bottom} onSurface={editor.surface} onItem={pick} onCopy={pickCopy} />
+        </View> : null}
+        {message ? <View style={[s.message, { top: insets.top + 64 }]} accessibilityLiveRegion="polite" pointerEvents="none">
+          <Ionicons name="information-circle" size={16} color="#FFFFFF" /><Text style={s.messageText}>{message}</Text>
+        </View> : null}
+        {inventory && userId != null ? <View style={s.inventory}>
+          <InventoryScreen userId={userId} onBack={() => setInventory(false)} placeInto={{ room: 'focus', onPlace: placeFromInventory }} />
+        </View> : null}
+        {asking ? <View style={s.askBackdrop} accessibilityViewIsModal>
+          <View style={s.ask}>
+            <Text style={s.askTitle} accessibilityRole="header">Bỏ các thay đổi?</Text>
+            <Text style={s.askText}>Phòng sẽ trở lại như lần lưu gần nhất.</Text>
+            <View style={s.askActions}>
+              <Button title="Trang trí tiếp" variant="secondary" onPress={() => setAsking(false)} style={s.flex} />
+              <Button title="Bỏ thay đổi" onPress={() => { setAsking(false); onClose(); }} style={s.flex} />
+            </View>
+          </View>
+        </View> : null}
+      </View>
+    </AppModal>
+  );
+}
+
 const s = StyleSheet.create({
-  room: { width: '100%', aspectRatio: 800 / 520, position: 'relative', minWidth: 0 },
-  pet: { position: 'absolute', left: '52.5%', bottom: '34%', marginLeft: -62, justifyContent: 'flex-end' },
-  book: { position: 'absolute', bottom: -7, left: 17 }, pencil: { width: 4, height: 24, backgroundColor: '#B9967B', borderRadius: 2, position: 'absolute', bottom: 13, right: 27 },
-  restIcon: { position: 'absolute', right: 0, top: 5 },
-  caption: { position: 'absolute', bottom: '2%', alignSelf: 'center', flexDirection: 'row', gap: 6, alignItems: 'center' },
-  dot: { height: 5, width: 5, borderRadius: 3, backgroundColor: '#879F91' }, captionText: { color: '#63736E', fontSize: 11, fontWeight: '600' },
+  wrap: { width: '100%', minWidth: 0, gap: 8 },
+  room: { width: '100%', aspectRatio: CANVAS.width / CANVAS.height, position: 'relative', minWidth: 0 },
+  footer: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 4 },
+  decorate: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', backgroundColor: t.accent,
+    shadowColor: '#0A2438', shadowOpacity: 0.18, shadowRadius: 6, shadowOffset: { width: 0, height: 2 }, elevation: 3 },
+  decorateOff: { opacity: 0.55 },
+  pressed: { transform: [{ scale: 0.97 }] },
+  caption: { flex: 1, minWidth: 0, flexDirection: 'row', gap: 6, alignItems: 'center' },
+  dot: { height: 6, width: 6, borderRadius: 3, backgroundColor: '#2E8C6A' }, dotRest: { backgroundColor: '#7C83B5' },
+  captionText: { color: '#2E4A55', fontSize: 11, fontWeight: '800' },
+  editor: { flex: 1, backgroundColor: '#EAF3F8' },
+  flex: { flex: 1, minWidth: 0 },
+  header: { paddingHorizontal: 16, marginBottom: 10 },
+  sceneWrap: { flex: 1, minHeight: 0, paddingHorizontal: 12, paddingBottom: 10, alignItems: 'center', justifyContent: 'center' },
+  panelDock: { position: 'absolute', left: 0, right: 0, bottom: 0 },
+  message: { position: 'absolute', left: 16, right: 16, flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: '#173B52',
+    borderRadius: 16, paddingHorizontal: 14, paddingVertical: 10 },
+  messageText: { flex: 1, color: '#FFFFFF', fontSize: 13, lineHeight: 18, fontWeight: '700' },
+  askBackdrop: { ...StyleSheet.absoluteFillObject, alignItems: 'center', justifyContent: 'center', padding: 28, backgroundColor: 'rgba(10,36,56,0.45)' },
+  ask: { width: '100%', maxWidth: 360, backgroundColor: '#FFFFFF', borderRadius: 26, padding: 22, gap: 10 },
+  askTitle: { color: t.ink, fontSize: 19, fontWeight: '900' },
+  askText: { color: t.muted, fontSize: 14, lineHeight: 20 },
+  askActions: { flexDirection: 'row', gap: 10, marginTop: 6 },
+  // Kho đồ drawn inside the editor's modal (the app's other screens would be under it).
+  inventory: { ...StyleSheet.absoluteFillObject, backgroundColor: '#EEF6FB' },
 });

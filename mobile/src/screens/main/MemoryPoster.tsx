@@ -17,7 +17,8 @@ const defaults: Record<MemoryTemplate, string> = {
   study: 'Thêm một ngày tiến bộ', together: 'Cùng nhau tiến bộ', walk: 'Một chuyến đi đáng nhớ',
 };
 export const templateFor = (event: string): MemoryTemplate => event === 'pet_hatched' ? 'hatch' : event === 'pet_evolved' ? 'evolve'
-  : event === 'first_group_session' ? 'together' : event === 'first_learning_session' || event === 'first_daily_quests' ? 'study' : 'auto';
+  : event === 'first_group_session' ? 'together' : event === 'first_learning_session' || event === 'first_daily_quests' ? 'study'
+  : event === 'walk_keepsake' ? 'walk' : 'auto';
 
 /** A memory's picture. Room photos show the image taken in the room (stored, never redrawn); other memories draw
  * their poster from the snapshot. */

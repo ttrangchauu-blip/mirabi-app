@@ -174,6 +174,8 @@ def test_friend_exp_evolves_the_pet_with_the_existing_rules(client, db):
     progress.total_xp = 299  # one tap from hatching (Lv.1 at 300)
     db.commit()
     result = play(client, may, aqua).json()
-    assert result["granted"] == 2 and result["pet_level"] == 1
+    # The EXP counts at once; the egg hatches when its owner's app shows it.
+    assert result["granted"] == 2 and result["pet_level"] == 0
+    assert client.post("/api/pet/hatch", headers=aqua.headers).json()["pet_level"] == 1
     profile = client.get("/api/profile", headers=aqua.headers).json()
     assert profile["xp"] == 301 and profile["level"] == 1

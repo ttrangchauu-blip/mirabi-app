@@ -6,9 +6,10 @@ from fastapi.testclient import TestClient
 from sqlalchemy import create_engine, func, select, text
 
 from app import companion
+from app import items_catalog as cat
 from app.main import app
 from app.migrations import upgrade_schema
-from app.models import ExpEvent, InventoryItem, PetWalk
+from app.models import ExpEvent, InventoryStack, PetWalk
 from conftest import bearer, login, signup
 from test_companion import bring_pet_home, finish_quests
 
@@ -32,7 +33,12 @@ def xp(client, auth):
 
 def owned(db):
     db.expire_all()
-    return {row.item_id: row.quantity for row in db.scalars(select(InventoryItem))}
+    return {row.item_id: row.quantity for row in db.scalars(select(InventoryStack))}
+
+
+def shown(item):
+    """The part of a gift the popup used to show (the rest: catalog details, see test_inventory.py)."""
+    return {k: item[k] for k in ("id", "name", "emoji", "rarity", "kind", "quantity")}
 
 
 def exp_events(db):
@@ -47,6 +53,8 @@ def pending(client, auth):
     return client.get("/api/pet/space", headers=auth).json()["pending_reward"]
 
 
+# Walks started before the item catalog keep the one gift they picked when they started (EXP or an old find); the
+# catalog's rewards are in test_inventory.py.
 def test_an_item_gift_comes_alone_and_is_granted_while_the_app_is_open(client, auth, db):
     start_walk(client, auth)
     before = xp(client, auth)
@@ -56,12 +64,12 @@ def test_an_item_gift_comes_alone_and_is_granted_while_the_app_is_open(client, a
     assert space["status"] == "returned"
     reward = space["pending_reward"]
     assert reward["walk_id"] == db.scalars(select(PetWalk)).one().id
-    assert reward["exp"] == 0 and reward["items"] == [{**companion.REWARD_ITEMS["small_pot"], "quantity": 1}]
+    assert reward["exp"] == 0 and [shown(i) for i in reward["items"]] == [{**companion.REWARD_ITEMS["small_pot"], "quantity": 1}]
     # Granted before the user tapped anything; no EXP with an item, and reading again grants nothing more.
     assert xp(client, auth) == before and exp_events(db) == 0
     assert pending(client, auth) == reward
     assert owned(db) == {"small_pot": 1}
-    assert space["inventory"] == [{**companion.REWARD_ITEMS["small_pot"], "quantity": 1}]
+    assert [(i["id"], i["owned"], i["available"]) for i in space["inventory"]] == [("small_pot", 1, 1)]
 
 
 def test_an_exp_gift_comes_alone(client, auth, db):
@@ -147,16 +155,16 @@ def test_racing_grants_settle_a_walk_once(client, auth, db, gift):
 def test_a_failed_grant_leaves_nothing_behind_and_is_retried(client, auth, db, monkeypatch):
     start_walk(client, auth)
     bring_pet_home(db, "star")
-    real = companion.add_to_inventory
+    real = companion.inv.grant
 
     def broken(*args, **kwargs):
         raise RuntimeError("inventory unavailable")
-    monkeypatch.setattr(companion, "add_to_inventory", broken)
+    monkeypatch.setattr(companion.inv, "grant", broken)
     assert pending(client, auth) is None
     db.expire_all()
     assert db.scalars(select(PetWalk)).one().rewarded_at is None and owned(db) == {}
 
-    monkeypatch.setattr(companion, "add_to_inventory", real)
+    monkeypatch.setattr(companion.inv, "grant", real)
     assert pending(client, auth)["items"][0]["id"] == "star"
     assert owned(db) == {"star": 1}
 
@@ -208,19 +216,28 @@ def test_legacy_collect_confirms_without_granting_again(client, auth, db):
     assert client.get("/api/pet/inventory", headers=auth).json() == collected["inventory"]
 
 
-def test_a_walk_gives_exactly_one_gift():
-    assert companion.roll_rewards(PetWalk(id=42, item_id="star")) == [{"item_id": "star", "quantity": 1}]
+def test_a_walk_from_before_the_catalog_gives_exactly_its_one_gift():
+    assert companion.roll_rewards(PetWalk(id=42, item_id="star")) == [{"slot": "main", "item_id": "star", "variant": "default", "quantity": 1}]
     assert companion.roll_rewards(PetWalk(id=43, item_id=EXP)) == []
 
 
-def test_gift_odds_cover_exp_and_every_item_by_rarity():
-    rng = random.Random(7)
-    picks = [companion.pick_gift(rng) for _ in range(40_000)]
-    assert set(picks) == set(companion.REWARD_ITEMS) | {EXP}
-    assert abs(picks.count(EXP) / len(picks) - companion.EXP_GIFT_CHANCE) < 0.015
-    items = [p for p in picks if p != EXP]
-    share = {tier: sum(companion.REWARD_ITEMS[p]["rarity"] == tier for p in items) / len(items) for tier in companion.GIFT_ODDS}
-    assert abs(share["common"] - 0.55) < 0.02 and abs(share["rare"] - 0.35) < 0.02 and abs(share["epic"] - 0.10) < 0.02
+def test_main_gift_odds_follow_the_rarity_table_and_the_bonus_comes_half_the_time():
+    walks = [PetWalk(id=i, item_id=companion.CATALOG_GIFT, location_id=sorted(cat.LOCATIONS)[i % 5]) for i in range(1, 20_001)]
+    rolls = [companion.roll_rewards(w) for w in walks]
+    mains = [r[0] for r in rolls]
+    assert all(r[0]["slot"] == "main" and r[0]["quantity"] == 1 for r in rolls)
+    share = {tier: sum(cat.ITEMS[m["item_id"]]["rarity"] == tier for m in mains) / len(mains) for tier in cat.RARITIES}
+    assert abs(share["common"] - 0.65) < 0.015 and abs(share["rare"] - 0.25) < 0.015
+    assert abs(share["special"] - 0.09) < 0.01 and abs(share["legendary"] - 0.01) < 0.004
+    bonuses = [r[1] for r in rolls if len(r) == 2]
+    assert abs(len(bonuses) / len(rolls) - cat.BONUS_CHANCE) < 0.015
+    assert all(cat.ITEMS[b["item_id"]]["group"] in ("seed", "material") and 1 <= b["quantity"] <= 3 for b in bonuses)
+    assert {b["quantity"] for b in bonuses} == {1, 2, 3}
+    # Where the pet went decides what it can find; every pet finds the same things.
+    for w, r in zip(walks, rolls):
+        assert cat.ITEMS[r[0]["item_id"]]["group"] in cat.LOCATIONS[w.location_id]["groups"]
+    assert {m["item_id"] for m in mains} == {i for i, item in cat.ITEMS.items() if item["drop"]}
+    assert companion.roll_rewards(walks[0]) == rolls[0]  # rolled again: the same
 
 
 def test_migration_moves_legacy_collected_finds_into_the_inventory_once(tmp_path):

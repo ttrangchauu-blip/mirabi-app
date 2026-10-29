@@ -11,7 +11,7 @@ import { BackHeader, EmptyState, ErrorState, LoadingState, SmallButton } from '.
 const ICONS: Record<NotificationKind, IconName> = {
   friend_request: 'person-add-outline', friend_accepted: 'people-outline', room_invitation: 'mail-outline',
   session_started: 'play-circle-outline', session_completed: 'trophy-outline', team_quest_completed: 'flag-outline',
-  room_visit: 'home-outline',
+  room_visit: 'home-outline', garden_care: 'leaf-outline',
 };
 const iconFor = (n: SocialNotification): IconName => (n.kind === 'room_visit' && n.data.action === 'cheer' ? 'heart-outline'
   : n.kind === 'room_visit' && n.data.action === 'hello' ? 'hand-left-outline' : ICONS[n.kind] ?? 'notifications-outline');
@@ -56,6 +56,8 @@ export function NotificationsScreen() {
     setItems((list) => list?.map((x) => (x.id === n.id ? { ...x, read: true } : x)) ?? null);
     // "Chào pet" or "Động viên": visit back the friend who sent it.
     if (n.kind === 'room_visit' && n.data.user_id && nav.visitRoom) { nav.visitRoom(n.data.user_id); return; }
+    // A friend cared for the garden: see it (who watered and tended what today).
+    if (n.kind === 'garden_care' && nav.openGarden) { nav.openGarden(); return; }
     if ((n.kind === 'friend_request' || n.kind === 'friend_accepted') && nav.openFriends) {
       nav.openFriends(n.kind === 'friend_request' ? 'requests' : 'friends'); return;
     }

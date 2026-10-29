@@ -20,10 +20,11 @@ import type { StudyMode } from './StudyModeSwitch';
 type Props = { user: User; onExit: (mode?: Exclude<StudyMode, 'together'>) => void; onRewards: () => void; createClient?: () => RealtimeClient;
   onVisitRoom?: (userId: number) => void;
   onOpenFriends?: (tab?: FriendsTab) => void;
+  onOpenGarden?: () => void;
   /** Open on this screen (above the home), e.g. the inbox from the Home bell or a room after "Rủ học". */
   initialRoute?: Route | null };
 
-export function StudyTogetherScreen({ user, onExit, onRewards, createClient, onVisitRoom, onOpenFriends, initialRoute }: Props) {
+export function StudyTogetherScreen({ user, onExit, onRewards, createClient, onVisitRoom, onOpenFriends, onOpenGarden, initialRoute }: Props) {
   const [stack, setStack] = useState<Route[]>(() => (initialRoute && initialRoute.name !== 'home' ? [{ name: 'home' }, initialRoute] : [{ name: 'home' }]));
   const [refreshing, setRefreshing] = useState(false);
   const loader = useRef<(() => Promise<void>) | null>(null);
@@ -43,8 +44,8 @@ export function StudyTogetherScreen({ user, onExit, onRewards, createClient, onV
     back: () => setStack((st) => (st.length > 1 ? st.slice(0, -1) : st)),
     home: () => setStack([{ name: 'home' }]),
     exit: onExit,
-    user, realtime, onRewards, visitRoom: onVisitRoom, openFriends: onOpenFriends,
-  }), [onExit, onRewards, realtime, user, onVisitRoom, onOpenFriends]);
+    user, realtime, onRewards, visitRoom: onVisitRoom, openFriends: onOpenFriends, openGarden: onOpenGarden,
+  }), [onExit, onRewards, realtime, user, onVisitRoom, onOpenFriends, onOpenGarden]);
 
   useEffect(() => {
     const sub = BackHandler.addEventListener('hardwareBackPress', () => {

@@ -8,7 +8,11 @@ export type DayPeriod = 'morning' | 'noon' | 'afternoon' | 'night';
 const STARTS: [number, DayPeriod][] = [[5, 'morning'], [11, 'noon'], [15, 'afternoon'], [18, 'night']];
 
 export function periodAt(date: Date): DayPeriod {
-  const hour = date.getHours();
+  return periodAtHour(date.getHours());
+}
+
+/** The period a local hour (0–23) belongs to. */
+export function periodAtHour(hour: number): DayPeriod {
   let period: DayPeriod = 'night'; // 00:00–04:59 belongs to the evening before
   for (const [start, p] of STARTS) if (hour >= start) period = p;
   return period;

@@ -27,6 +27,8 @@ type Props = {
   onBack?: () => void;
   /** Opens a friend's pet room (read only). */
   onVisit: (userId: number) => void;
+  /** Opens a friend's garden ("Thăm vườn" in their menu). */
+  onVisitGarden?: (userId: number) => void;
   /** Opens a study room in Study Together (a friend's open room, after joining it). */
   onOpenStudyRoom?: (roomId: number) => void;
   /** A friend request was accepted, declined or withdrawn (the Home badge counts the pending ones). */
@@ -40,7 +42,7 @@ const REQUESTS_SHOWN = 3;
  * The "Bạn bè" screen, one scroll without tabs: header with Cài đặt, add a friend by code (search, QR, "Mã của tôi"),
  * incoming requests (hidden when there are none), sent requests folded into one row, then the friend list.
  */
-export function FriendsScreen({ initialTab = 'friends', onBack, onVisit, onOpenStudyRoom, onRequestsChanged }: Props) {
+export function FriendsScreen({ initialTab = 'friends', onBack, onVisit, onVisitGarden, onOpenStudyRoom, onRequestsChanged }: Props) {
   const confirm = useConfirm();
   const toast = useToast();
   const [settings, setSettings] = useState<SocialSettings | null>(null);
@@ -145,7 +147,7 @@ export function FriendsScreen({ initialTab = 'friends', onBack, onVisit, onOpenS
 
       <OptionSheet visible={sheet === 'settings'} title="Cài đặt" onClose={() => setSheet(null)}>
         {settings ? <ScrollView>
-          <ToggleRow label="Cho bạn bè ghé thăm phòng" description="Chỉ bạn bè đã kết bạn mới ghé được. Tắt để không ai ghé phòng của bạn."
+          <ToggleRow label="Cho bạn bè ghé thăm phòng" description="Chỉ bạn bè đã kết bạn mới ghé phòng và vườn được. Tắt để không ai ghé phòng và vườn của bạn."
             value={settings.allow_room_visits} onChange={(v) => { void updateSettings({ allow_room_visits: v }); }} />
           <ToggleRow label="Nhận lời mời học" description="Bạn bè có thể rủ bạn vào phòng học nhóm."
             value={settings.allow_study_invites} onChange={(v) => { void updateSettings({ allow_study_invites: v }); }} />
@@ -176,6 +178,9 @@ export function FriendsScreen({ initialTab = 'friends', onBack, onVisit, onOpenS
           const roomId = menuFor.room!.id; setMenuFor(null);
           void togetherApi.joinRoom(roomId).then(() => onOpenStudyRoom(roomId)).catch((e) => showError('Không thể tham gia phòng', e));
         }} /> : null}
+        {menuFor && onVisitGarden ? <OptionRow icon="leaf-outline" label="Thăm vườn"
+          description={menuFor.can_visit ? 'Xem vườn, tưới nước và chăm cây giúp bạn ấy' : 'Bạn ấy đang tắt ghé thăm'}
+          onPress={() => { const friend = menuFor; setMenuFor(null); if (friend.can_visit) onVisitGarden(friend.id); else toast(`${friend.display_name} đang tắt ghé thăm.`); }} /> : null}
         <OptionRow icon="person-remove-outline" label="Hủy kết bạn" onPress={() => { if (menuFor) void remove(menuFor); }} />
         <OptionRow icon="ban-outline" label="Chặn" onPress={() => { if (menuFor) void block(menuFor); }} />
         <OptionRow icon="flag-outline" label="Báo cáo" onPress={() => { setReportFor(menuFor); setMenuFor(null); }} />

@@ -77,7 +77,9 @@ export type TeamQuest = {
 
 export type NotificationKind = 'friend_request' | 'friend_accepted' | 'room_invitation' | 'session_started' | 'session_completed' | 'team_quest_completed'
   /** A friend visited the personal room: "Chào pet", "Động viên" or "Rủ học". */
-  | 'room_visit';
+  | 'room_visit'
+  /** Friends watered or tended plants in Vườn nhà (merged while unread). */
+  | 'garden_care';
 export type NotificationData = {
   user_id?: number; room_id?: number; session_id?: number; quest_id?: number; invitation_id?: number; request_id?: number;
   /** room_visit: what was sent; unread greetings or cheers of one kind are merged (`actor_ids`, newest first, `count`). */

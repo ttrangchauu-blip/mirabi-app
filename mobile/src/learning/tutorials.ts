@@ -8,7 +8,7 @@ import type { GameId } from './types';
 export type TutorialScene =
   /** A target falling in the sky: an English word (Anh → Việt) or a meteor carrying a Vietnamese meaning. */
   | { kind: 'fall'; variant: 'word' | 'meteor'; label: string }
-  /** The answer typed letter by letter into the boxes, "Bắn", then what the hit shows. */
+  /** The answer typed letter by letter into the boxes, then (right: the pet shoots by itself) what the hit shows. */
   | { kind: 'type'; variant: 'word' | 'meteor'; label: string; answer: string; result: string }
   /** A monster carrying a sum walks toward the base. */
   | { kind: 'monster'; expression: string }
@@ -49,15 +49,15 @@ export const TUTORIALS: Record<GameId, TutorialPage[]> = {
   word_shooter: [
     { tag: 'Mục tiêu', title: 'Bắn vỡ từ đang rơi', body: 'Từ tiếng Anh rơi xuống bầu trời. Bắn vỡ từ để xem nghĩa tiếng Việt và nghe phát âm.',
       scene: { kind: 'fall', variant: 'word', label: 'cat' } },
-    { tag: 'Cách thao tác', title: 'Gõ lại đúng từ', body: 'Gõ lại từ đang rơi vào các ô chữ, rồi nhấn Bắn hoặc Enter. Gõ sai thì sửa lại và bắn tiếp. Bí thì nhấn Gợi ý.',
+    { tag: 'Cách thao tác', title: 'Gõ lại đúng từ', body: 'Gõ lại từ đang rơi vào các ô chữ. Gõ đúng là pet tự bắn, không cần nhấn gì. Gõ sai thì sửa lại. Bí thì nhấn Gợi ý.',
       scene: { kind: 'type', variant: 'word', label: 'cat', answer: 'cat', result: 'con mèo' } },
     VOCAB_END({ icon: 'bulb-outline', tone: 'info', text: 'Gợi ý cho biết số chữ cái, rồi cách gõ từng chữ.' }),
   ],
   meteor: [
     { tag: 'Mục tiêu', title: 'Bắn thiên thạch', body: 'Mỗi thiên thạch mang một nghĩa tiếng Việt. Nhớ ra từ tiếng Anh để pet bắn vỡ nó.',
       scene: { kind: 'fall', variant: 'meteor', label: 'con mèo' } },
-    { tag: 'Cách thao tác', title: 'Gõ từ tiếng Anh', body: 'Số ô cho biết từ có mấy chữ cái. Gõ từ rồi nhấn Bắn hoặc Enter. Bí thì nhấn Gợi ý (chữ đầu, chữ cuối) hoặc Xem đáp án.',
-      scene: { kind: 'type', variant: 'meteor', label: 'con mèo', answer: 'cat', result: 'cat /kæt/' } },
+    { tag: 'Cách thao tác', title: 'Gõ từ tiếng Anh', body: 'Số ô cho biết từ có mấy chữ cái. Gõ đúng từ là pet tự bắn. Bí thì nhấn Gợi ý (chữ đầu, chữ cuối) hoặc Xem đáp án.',
+      scene: { kind: 'type', variant: 'meteor', label: 'con mèo', answer: 'cat', result: 'cat — con mèo' } },
     VOCAB_END({ icon: 'eye-outline', tone: 'info', text: 'Đã xem đáp án thì từ đó quay lại để bạn gõ lại.' }),
   ],
   gate: [

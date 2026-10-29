@@ -33,6 +33,8 @@ export type Nav = {
   visitRoom?: (userId: number) => void;
   /** Opens Community → Bạn bè (friends, requests, adding friends), where friends now live. */
   openFriends?: (tab?: FriendsTab) => void;
+  /** Opens your own Vườn nhà (a friend watered or tended it). */
+  openGarden?: () => void;
 };
 
 export const NavContext = createContext<Nav | null>(null);

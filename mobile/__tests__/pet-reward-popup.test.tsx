@@ -34,7 +34,8 @@ describe('pet gift popup', () => {
     mockServer({ 'GET /api/auth/me': { status: 200, body: USER }, 'GET /api/pet/space': { status: 200, body: returned() } });
     render(<App />);
     expect(await screen.findByText(TITLE, {}, { timeout: 5000 })).toBeTruthy();
-    expect(screen.getByText(`${USER.pet_name} đã mang về một món quà dành cho bạn!`)).toBeTruthy();
+    expect(screen.getByText(`${USER.pet_name} đã mang về 1 món quà cho bạn!`)).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Xem kho đồ' })).toBeTruthy();
     expect(screen.getByLabelText('Chậu cây nhỏ ×1, Hiếm')).toBeTruthy();
     expect(screen.queryByText(/EXP/)).toBeNull();
     // Drawn pictures for known items; an item without a drawing falls back to its emoji.
@@ -51,7 +52,7 @@ describe('pet gift popup', () => {
     expect(screen.queryByTestId(/^reward-art-/, { includeHiddenElements: true })).toBeNull();
   });
 
-  it('"Nhận quà" only confirms once, closes the popup, refreshes the numbers and never shows it again', async () => {
+  it('"Đóng" only confirms once, closes the popup, refreshes the numbers and never shows it again', async () => {
     let confirmed = false;
     const server = mockServer({
       'GET /api/auth/me': { status: 200, body: USER },
@@ -59,7 +60,7 @@ describe('pet gift popup', () => {
       [ACK]: () => { confirmed = true; return { status: 200, body: { acknowledged: REWARD, ...space() } }; },
     });
     render(<App />);
-    const button = await screen.findByRole('button', { name: 'Nhận quà' }, { timeout: 5000 });
+    const button = await screen.findByRole('button', { name: 'Đóng' }, { timeout: 5000 });
     const dashboardLoads = server.callsTo('GET /api/dashboard').length;
     fireEvent.press(button);
     fireEvent.press(button);
@@ -84,13 +85,13 @@ describe('pet gift popup', () => {
       [ACK]: () => (online ? { status: 200, body: { acknowledged: REWARD, ...space() } } : networkDown()),
     });
     render(<App />);
-    fireEvent.press(await screen.findByRole('button', { name: 'Nhận quà' }, { timeout: 5000 }));
+    fireEvent.press(await screen.findByRole('button', { name: 'Đóng' }, { timeout: 5000 }));
     expect(await screen.findByText('Chưa kết nối được. Quà vẫn được giữ an toàn, bạn hãy thử lại nhé.', {}, { timeout: 5000 })).toBeTruthy();
     expect(screen.getByText(TITLE)).toBeTruthy();
     expect(screen.getByLabelText('Chậu cây nhỏ ×1, Hiếm')).toBeTruthy(); // same backend gift, nothing re-created locally
 
     online = true;
-    fireEvent.press(screen.getByRole('button', { name: 'Nhận quà' }));
+    fireEvent.press(screen.getByRole('button', { name: 'Đóng' }));
     await popupIsClosed();
     expect(server.callsTo(ACK)).toHaveLength(2);
   });
@@ -104,7 +105,7 @@ describe('pet gift popup', () => {
       [ACK]: () => { pending = false; return networkDown(); },
     });
     render(<App />);
-    fireEvent.press(await screen.findByRole('button', { name: 'Nhận quà' }, { timeout: 5000 }));
+    fireEvent.press(await screen.findByRole('button', { name: 'Đóng' }, { timeout: 5000 }));
     await popupIsClosed();
     expect(screen.queryByText(/Chưa kết nối được/)).toBeNull();
   });
@@ -167,7 +168,7 @@ describe('pet gift popup', () => {
     render(<App />);
     await screen.findByText(HOME_GREETING, {}, { timeout: 5000 });
     await waitFor(() => expect(server.callsTo('GET /api/pet/space').length).toBeGreaterThan(0));
-    expect(screen.queryByRole('button', { name: 'Nhận quà' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Đóng' })).toBeNull();
   });
 });
 

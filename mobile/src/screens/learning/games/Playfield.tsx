@@ -1,18 +1,28 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Animated, Easing, LayoutChangeEvent, Pressable, StyleSheet, View } from 'react-native';
+import React, { memo, useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
+import { Animated, LayoutChangeEvent, Platform, Pressable, StyleSheet, TextInput as RNTextInput, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Text } from '../../../components/Typography';
+import { useAudioPlayer } from 'expo-audio';
+import { Text, TextInput } from '../../../components/Typography';
 import { PetArt } from '../../../components/PetArt';
-import type { Turn } from '../../../learning/types';
+import type { Turn, WordPair } from '../../../learning/types';
+import { hasSprite, moveActivity } from '../../../petSprites';
 import { appTheme as t } from '../../../theme';
+import { Box, laneLefts, resolveOverlaps } from './fieldLayout';
+import {
+  BURST_MS, bulletAt, burstLook, leanAt, muzzle, Move, PET_SIZE, petBounds, petDrift, petMoving, petX, planShot, shardsAt, ShotPlan,
+  wiggleAt, WIGGLE_MS,
+} from './shooterFx';
+import { AnswerSlots, SLOT_PITCH } from './LetterInput';
 
 export type Flash = { turnId: string; kind: 'hit' | 'miss' } | null;
 
 /** What a destroyed (or missed) word leaves behind for a moment: its meaning or its English word, where it was. */
 export type Burst = { id: string; position: number; progress: number; title: string; sub: string | null; tone: 'hit' | 'miss' };
-/** How long a burst stays on screen: shown plainly, then fading out. */
-export const BURST_MS = 2300;
-const BURST_HOLD_MS = 500;
+/** A word answered right: it stays where it was (no longer falling, never a miss) until the pet's shot breaks it. */
+export type Shot = { id: string; turn: Turn; progress: number; word: WordPair | null; /** It was the aimed one (drawn larger). */ aimed: boolean };
+/** The typed answer of the falling-word games: one text field for the whole field, shown in the aimed target's boxes.
+ * There is no "Bắn" and no Enter: the game shoots by itself as soon as what is typed is right. */
+export type Answer = { value: string; onChange: (value: string) => void; editable: boolean };
 
 type Props = {
   /** meteor: Vietnamese meanings on falling rocks; words: English words falling (Anh → Việt); defense: monsters. */
@@ -28,43 +38,126 @@ type Props = {
   flash: Flash;
   /** Labels fading out where words were hit or missed. Drawn under the falling targets and never touchable. */
   bursts?: Burst[];
-  /** Rendered inside the aimed meteor, under its Vietnamese word (the answer boxes); gets the width available. */
-  input?: (width: number) => React.ReactNode;
+  /** The falling-word games: the game is running (paused, everything here stops: the pet, the bullets, the effects). */
+  running?: boolean;
+  shots?: Shot[];
+  /** The first bullet reached a shot word: it breaks now (the caller shows its meaning). */
+  onImpact?: (shot: Shot) => void;
+  /** A shot is over (the pieces are gone), and a burst has faded out. */
+  onShotDone?: (id: string) => void;
+  onBurstDone?: (id: string) => void;
+  /** Bumped after a wrong answer: the pet shakes a little, no shot. */
+  wrongKey?: number;
+  /** Shot and break sounds ("Âm thanh"). */
+  sound?: boolean;
+  /** The falling-word games: every target carries answer boxes under its word; the aimed one shows what is typed. */
+  answer?: Answer;
 };
 
-const PET_ZONE = 84; // the pet stands here; targets keep out of it when the field is wide enough for two lanes beside it
+const PET_ZONE = 84; // defense: the pet stands by the base, monsters keep out of it
 const TARGET_W = 132;
 const TARGET_H = 64;
-const METEOR_W = 120;
-const METEOR_H = 112;
-const AIMED_H = 176;
-const BURST_W = 170;
-const BURST_H = 58;
+const METEOR_W = 112;
+const METEOR_H = 100;
+const SLOTS_H = 118; // a target with its small answer boxes
+const AIMED_MAX_W = 260;
+const AIMED_H = 150; // the aimed target: its word and the answer boxes
+const BURST_W = 150;
+const BURST_H = 50;
 const GROUND = 22;
+/** The shooter stands on the ground, at the bottom of the field. */
+const PET_BOTTOM = 10;
+/** Where a held word is hit: about the middle of its rock or tile. */
+const HIT_Y = 40;
 
 type Rect = { left: number; top: number; width: number; height: number };
 const overlaps = (a: Rect, b: Rect) =>
   a.left < b.left + b.width && b.left < a.left + a.width && a.top < b.top + b.height && b.top < a.top + a.height;
 
+/** Wide enough for the word's answer boxes, never wider than needed (so it rarely crowds another word). */
+const aimedWidth = (turn: Turn, fieldWidth: number) => {
+  const letters = turn.prompt.letters ?? [];
+  const total = letters.reduce((a, b) => a + b, 0);
+  const need = total * SLOT_PITCH + Math.max(0, letters.length - 1) * 8 + 16;
+  return Math.max(METEOR_W, Math.min(AIMED_MAX_W, need, fieldWidth - 16));
+};
+
 /** Meteors (or English words) fall toward the ground, monsters walk toward the base. Positions come from the
- * pause-aware game clock. */
-export function Playfield({ variant, turns, progress, selectedId, onSelect, petId, petLevel, reduceMotion, flash, bursts = [], input }: Props) {
+ * pause-aware game clock. In the falling-word games the pet at the bottom shoots the words that were answered. */
+export function Playfield({ variant, turns, progress, selectedId, onSelect, petId, petLevel, reduceMotion, flash, bursts = [],
+  running = true, shots = [], onImpact, onShotDone, onBurstDone, wrongKey = 0, sound = false, answer }: Props) {
   const [size, setSize] = useState({ width: 0, height: 0 });
   const onLayout = (e: LayoutChangeEvent) => setSize({ width: e.nativeEvent.layout.width, height: e.nativeEvent.layout.height });
   const meteor = variant !== 'defense';
-  // Two targets fall at once in Thử thách, so there are always two lanes where they fit: on a narrow phone (360 px)
-  // the lanes also use the pet's side (the pet is drawn under the targets, so it never hides one).
-  const laneStart = size.width - PET_ZONE >= 2 * (METEOR_W + 8) ? PET_ZONE : 8;
-  const lanes = Math.max(1, Math.floor((size.width - laneStart - 8) / (METEOR_W + 8)));
+  // The shooter walks along the whole bottom (drawn under the targets), so the falling words use the full width.
+  const lanes = laneLefts(size.width, METEOR_W);
   const laneLeft = (position: number, w: number) =>
-    Math.max(8, Math.min(laneStart + (position % lanes) * (METEOR_W + 8) + (METEOR_W - w) / 2, size.width - w - 8));
-  const rectOf = (turn: Turn): Rect => {
-    const aimed = turn.turn_id === selectedId && !!input;
-    const width = aimed ? Math.min(300, size.width - 16) : METEOR_W;
-    const height = aimed ? AIMED_H : METEOR_H;
-    const p = Math.max(0, Math.min(1, progress(turn)));
-    return { left: laneLeft(turn.position, width), top: p * Math.max(0, size.height - height - 24), width, height };
+    Math.max(8, Math.min(lanes[position % lanes.length] + (METEOR_W - w) / 2, size.width - w - 8));
+  /** Where a target would be from its lane and its fall alone. The height of its fall is the same for every target, so
+   * becoming the aimed one (a taller frame, growing downward) never moves a word up. */
+  const travel = Math.max(0, size.height - (answer ? AIMED_H : METEOR_H) - GROUND - 2);
+  const naturalRect = (turn: Turn, p: number, aimed: boolean): Rect => {
+    const big = aimed && !!answer;
+    const width = big ? aimedWidth(turn, size.width) : METEOR_W;
+    const height = big ? AIMED_H : answer ? SLOTS_H : METEOR_H;
+    return { left: laneLeft(turn.position, width), top: Math.max(0, Math.min(1, p)) * travel, width, height };
   };
+
+  // Where each target is drawn: its natural spot, moved aside when it would cover another word (or a word held for a
+  // shot). Sideways it slides (eased); up and down it only ever waits and falls on: a word never shows higher than it
+  // was a moment ago, so nothing jumps back up after a shot.
+  const shown = useRef(new Map<string, { left: number; top: number }>());
+  const lastRects = useRef(new Map<string, Rect>());
+  const ghosts = useRef(new Map<string, Rect>());
+  const rects = new Map<string, Rect>();
+  if (meteor && size.width > 0) {
+    const fixed: Box[] = shots.map((s) => ({ id: s.id, ...(ghosts.current.get(s.id) ?? lastRects.current.get(s.turn.turn_id)
+      ?? naturalRect(s.turn, s.progress, s.aimed)) }));
+    // Never above where it was last shown: a word that waited, or went ahead of its fall, goes on from there.
+    const natural = turns.map((turn) => {
+      const rect = naturalRect(turn, progress(turn), turn.turn_id === selectedId);
+      return { id: turn.turn_id, ...rect, top: Math.max(rect.top, shown.current.get(turn.turn_id)?.top ?? 0) };
+    });
+    // From the ground up: a word higher up waits above the ones below it.
+    const order = [...natural].sort((a, b) => b.top - a.top);
+    const spots = resolveOverlaps(fixed, order, lanes.map((l) => l + METEOR_W / 2), { width: size.width, height: size.height - GROUND });
+    const ease = (from: number, to: number, snap: number) => (reduceMotion || Math.abs(to - from) < snap ? to : from + (to - from) * 0.35);
+    for (const box of natural) {
+      const spot = spots.get(box.id)!;
+      const was = shown.current.get(box.id);
+      // Sideways it slides; down it falls (a bigger step, going ahead of a word, eases); up it never goes.
+      const left = was ? ease(was.left, spot.left, 0.5) : spot.left;
+      const top = was ? Math.max(was.top, ease(was.top, spot.top, 4)) : spot.top;
+      shown.current.set(box.id, { left, top });
+      rects.set(box.id, { left, top, width: box.width, height: box.height });
+    }
+    for (const id of shown.current.keys()) if (!rects.has(id)) shown.current.delete(id);
+    for (const [id, rect] of rects) lastRects.current.set(id, rect);
+  }
+  const rectOf = (turn: Turn) => rects.get(turn.turn_id) ?? naturalRect(turn, progress(turn), turn.turn_id === selectedId);
+  // A shot word stays exactly where it was last drawn: its spot is fixed the first time it is held.
+  const ghostOf = (shot: Shot) => {
+    let rect = ghosts.current.get(shot.id);
+    if (!rect) {
+      rect = lastRects.current.get(shot.turn.turn_id) ?? naturalRect(shot.turn, shot.progress, shot.aimed);
+      if (size.width > 0) ghosts.current.set(shot.id, rect); // fixed only once the field has its size
+    }
+    return rect;
+  };
+
+  // One text field for every target: it stays mounted (and focused) while targets fall, when another one is chosen and
+  // when a word breaks, so the keyboard never closes and reopens and what is typed is kept.
+  const input = useRef<RNTextInput>(null);
+  // On the web, focusing must not scroll the page or the field to the (invisible) field: the words would shift.
+  const focusField = () => (input.current as unknown as { focus: (options?: object) => void } | null)
+    ?.focus(Platform.OS === 'web' ? { preventScroll: true } : undefined);
+  const answerFor = (turnId: string) => { onSelect(turnId); focusField(); };
+  // After a shot the next word in falling order is aimed: typing goes on there without tapping it.
+  const editable = !!answer?.editable;
+  useEffect(() => {
+    if (editable && selectedId) focusField();
+  }, [selectedId, editable]); // eslint-disable-line react-hooks/exhaustive-deps
+
   // Where each burst sits, chosen once when it appears: at the broken word, moved clear of every word on screen then
   // (the next word usually appears right there), so the meaning can be read. Drawn under the targets, a word that
   // falls past it later is never hidden by it.
@@ -74,7 +167,7 @@ export function Playfield({ variant, turns, progress, selectedId, onSelect, petI
     if (known) return known;
     const maxTop = Math.max(0, size.height - BURST_H - GROUND - 4);
     const box: Rect = { left: laneLeft(b.position, BURST_W), width: BURST_W, height: BURST_H,
-      top: Math.min(maxTop, Math.max(0, Math.min(1, b.progress)) * Math.max(0, size.height - METEOR_H - 24) + 30) };
+      top: Math.min(maxTop, Math.max(0, Math.min(1, b.progress)) * Math.max(0, size.height - METEOR_H - GROUND - 2) + 24) };
     // Clear of every word on screen, and of the meanings still fading out.
     const targets = [...turns.map(rectOf), ...[...placed.current.values()].map((s) => ({ ...s, width: BURST_W, height: BURST_H }))];
     for (let i = 0; i < targets.length && targets.some((r) => overlaps(box, r)); i++) {
@@ -90,17 +183,32 @@ export function Playfield({ variant, turns, progress, selectedId, onSelect, petI
     const live = new Set(bursts.map((b) => b.id));
     for (const id of placed.current.keys()) if (!live.has(id)) placed.current.delete(id);
   }, [bursts]);
+  useEffect(() => {
+    const live = new Set(shots.map((s) => s.id));
+    for (const id of ghosts.current.keys()) if (!live.has(id)) ghosts.current.delete(id);
+  }, [shots]);
+  // The shooter only re-renders when a shot or a meaning comes or goes (its motion runs frame by frame on its own).
+  const heldShots = useMemo(() => shots.map((s) => ({ shot: s, rect: ghostOf(s) })), [shots, size.width, size.height]); // eslint-disable-line react-hooks/exhaustive-deps
+  const shownBursts = useMemo(() => bursts.map((b) => ({ burst: b, spot: placeBurst(b) })), [bursts, size.width, size.height]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const aimedTurn = turns.find((x) => x.turn_id === selectedId);
+  const aimedAt = aimedTurn ? rectOf(aimedTurn) : null;
   return (
     <View style={[styles.field, meteor ? styles.sky : styles.meadow]} onLayout={onLayout}
       accessibilityLabel={variant === 'words' ? 'Bầu trời từ vựng' : meteor ? 'Bầu trời thiên thạch' : 'Đường tới căn cứ'}>
       {meteor ? <Stars /> : null}
       {meteor ? <View style={styles.ground} /> : <View style={styles.base}><Text style={styles.baseIcon}>🏰</Text></View>}
-      <View style={[styles.pet, meteor ? styles.petMeteor : styles.petDefense]} pointerEvents="none">
-        <PetArt pet={petId} size={64} stage={petLevel} still={reduceMotion} />
-      </View>
-      {/* Under the targets, so a fading meaning never hides a word that is still falling. */}
-      {size.width > 0 && meteor && bursts.map((b) => <BurstLabel key={b.id} burst={b} reduceMotion={reduceMotion} style={placeBurst(b)} />)}
-      {/* The aimed target last, so it (and its answer boxes) is drawn over any other one. */}
+      {meteor ? (size.width > 0 ? (
+        // Under the targets: a fading meaning or the pieces of a broken word never hide a word that is still falling.
+        <ShooterLayer width={size.width} height={size.height} words={variant === 'words'} petId={petId} petLevel={petLevel}
+          running={running} reduceMotion={reduceMotion} sound={sound} wrongKey={wrongKey} shots={heldShots} bursts={shownBursts}
+          onImpact={onImpact} onShotDone={onShotDone} onBurstDone={onBurstDone} />
+      ) : null) : (
+        <View style={[styles.pet, styles.petDefense]} pointerEvents="none">
+          <PetArt pet={petId} size={64} stage={petLevel} still={reduceMotion} />
+        </View>
+      )}
+      {/* The aimed target last, so it is drawn over any other one. */}
       {size.width > 0 && [...turns].sort((a, b) => Number(a.turn_id === selectedId) - Number(b.turn_id === selectedId)).map((turn) => {
         const p = Math.max(0, Math.min(1, progress(turn)));
         const selected = turn.turn_id === selectedId;
@@ -116,46 +224,264 @@ export function Playfield({ variant, turns, progress, selectedId, onSelect, petI
             </Pressable>
           );
         }
-        const aimed = selected && !!input;
         const rect = rectOf(turn);
-        const w = rect.width;
-        const pos = { left: rect.left, top: rect.top, width: w };
-        // Anh → Việt: the English word itself falls; Việt → Anh: a rock carrying the Vietnamese meaning.
-        const spelled = turn.kind === 'word_spelling';
-        const label = (spelled ? turn.prompt.word : turn.prompt.meaning_vi) ?? '';
-        const noun = spelled ? 'Từ' : 'Thiên thạch';
-        const body = spelled ? (
-          <WordTile word={label} hit={hit} danger={p > 0.75} big={aimed} />
-        ) : (
-          <>
-            <Rock hit={hit} danger={p > 0.75} big={aimed} />
-            <Text style={[styles.word, aimed && styles.wordAimed]} numberOfLines={2}>{label}</Text>
-            {aimed && turn.prompt.context_vi ? <Text style={styles.context} numberOfLines={1}>{turn.prompt.context_vi}</Text> : null}
-          </>
-        );
-        if (aimed) {
+        const pos = { left: rect.left, top: rect.top, width: rect.width };
+        const { label, noun } = targetLabel(turn);
+        const body = <TargetBody turn={turn} danger={p > 0.75} big={selected} />;
+        if (selected) {
           return (
             <View key={turn.turn_id} accessibilityLabel={`${noun} đang nhắm: ${label}`} style={[styles.meteor, pos]}>
               {body}
-              {input!(w)}
+              {answer ? (
+                // The answer rides in the target's frame, right under its word, and moves with it.
+                <View style={styles.answerRow}>
+                  <AnswerSlots letters={turn.prompt.letters} value={answer.value} width={rect.width - 8} onPress={focusField} />
+                </View>
+              ) : null}
             </View>
           );
         }
         return (
-          <Pressable key={turn.turn_id} onPress={() => onSelect(turn.turn_id)} accessibilityRole="button" accessibilityState={{ selected }}
-            accessibilityLabel={`${noun}: ${label}${selected ? ', đang nhắm' : ''}`} style={[styles.meteor, pos]}>
+          // Tapping another target (its boxes or its word) answers that one.
+          <Pressable key={turn.turn_id} onPress={() => answerFor(turn.turn_id)} accessibilityRole="button" accessibilityState={{ selected }}
+            accessibilityLabel={`${noun}: ${label}`} accessibilityHint={answer ? 'Chạm để nhập đáp án cho mục tiêu này' : undefined} style={[styles.meteor, pos]}>
             {body}
+            {answer ? <View style={styles.answerRowCompact}><AnswerSlots letters={turn.prompt.letters} value="" width={rect.width - 8} compact /></View> : null}
           </Pressable>
         );
       })}
+      {answer && size.width > 0 ? (
+        <TextInput ref={input} value={answer.value} onChangeText={answer.onChange} autoCapitalize="none" autoCorrect={false} spellCheck={false}
+          // Enter sends nothing (a right answer is shot as it is typed) and keeps the keyboard open.
+          autoFocus={Platform.OS !== 'web'} returnKeyType="done" submitBehavior="submit" onSubmitEditing={() => {}} editable={answer.editable} maxLength={40}
+          accessibilityLabel="Đáp án tiếng Anh" caretHidden contextMenuHidden
+          style={[styles.hiddenInput, aimedAt ? { left: aimedAt.left + 8, top: aimedAt.top + aimedAt.height - 30 } : { left: 8, bottom: 8 }]} />
+      ) : null}
     </View>
   );
 }
 
+/** Anh → Việt: the English word itself falls; Việt → Anh: a rock carrying the Vietnamese meaning. */
+const targetLabel = (turn: Turn) => (turn.kind === 'word_spelling'
+  ? { label: turn.prompt.word ?? '', noun: 'Từ' } : { label: turn.prompt.meaning_vi ?? '', noun: 'Thiên thạch' });
+
+const TargetBody = memo(function TargetBody({ turn, danger, big }: { turn: Turn; danger: boolean; big: boolean }) {
+  const { label } = targetLabel(turn);
+  if (turn.kind === 'word_spelling') return <WordTile word={label} danger={danger} big={big} />;
+  return (
+    <>
+      <Rock danger={danger} big={big} />
+      <Text style={[styles.word, big && styles.wordAimed]} numberOfLines={2}>{label}</Text>
+      {big && turn.prompt.context_vi ? <Text style={styles.context} numberOfLines={1}>{turn.prompt.context_vi}</Text> : null}
+    </>
+  );
+});
+
+// ------------------------------------------------------------------------------------------------ the shooter
+const SOUNDS = { shot: require('../../../../assets/audio/game-shot.wav'), break: require('../../../../assets/audio/game-break.wav') };
+
+/** One player per sound, so a shot and a break can overlap; silent while "Âm thanh" is off. */
+function useGameSounds(enabled: boolean) {
+  const shot = useAudioPlayer(SOUNDS.shot);
+  const crack = useAudioPlayer(SOUNDS.break);
+  return useCallback((which: 'shot' | 'break') => {
+    if (!enabled) return;
+    const player = which === 'shot' ? shot : crack;
+    try {
+      player.replace(SOUNDS[which]);
+      player.volume = which === 'shot' ? 0.35 : 0.5;
+      player.play();
+    } catch { /* a missing audio device never breaks the game */ }
+  }, [enabled, shot, crack]);
+}
+
+const SHARDS = 8;
+type XY = { x: Animated.Value; y: Animated.Value; o: Animated.Value };
+type Live = {
+  plan: ShotPlan; fired: boolean; impacted: boolean; done: boolean;
+  /** Where each bullet left the pet (known once it fires) and the way it flies. */ origins: ({ x: number; y: number } | null)[]; angles: number[];
+  bullets: (XY & { r: Animated.Value })[]; shards: (XY & { r: Animated.Value })[]; ring: { s: Animated.Value; o: Animated.Value };
+};
+const value = (v = 0) => new Animated.Value(v);
+const deg = (v: Animated.Value) => v.interpolate({ inputRange: [-720, 720], outputRange: ['-720deg', '720deg'] });
+
+/**
+ * The pet, its bullets, the pieces of broken words and the meanings fading out. Its motion runs one step per frame on
+ * its own effect clock (it only advances while the game runs, so a pause freezes everything here together) and goes
+ * straight into Animated values: nothing re-renders frame by frame, so the shots stay smooth while the game updates.
+ */
+const ShooterLayer = memo(function ShooterLayer({ width, height, words, petId, petLevel, running, reduceMotion, sound, wrongKey, shots, bursts,
+  onImpact, onShotDone, onBurstDone }: {
+  width: number; height: number; words: boolean; petId: string; petLevel: number; running: boolean; reduceMotion: boolean; sound: boolean;
+  wrongKey: number; shots: { shot: Shot; rect: Rect }[]; bursts: { burst: Burst; spot: { left: number; top: number } }[];
+  onImpact?: (shot: Shot) => void; onShotDone?: (id: string) => void; onBurstDone?: (id: string) => void;
+}) {
+  const play = useGameSounds(sound);
+  const clock = useRef({ base: 0, since: null as number | null });
+  const now = () => clock.current.base + (clock.current.since === null ? 0 : Date.now() - clock.current.since);
+  const bounds = petBounds(width);
+  const home = useRef<number | null>(null);
+  home.current ??= (bounds.min + bounds.max) / 2;
+  const wander = !reduceMotion;
+  const moves = useRef<Move[]>([]);
+  const live = useRef(new Map<string, Live>());
+  const burstVals = useRef(new Map<string, { born: number; o: Animated.Value; rise: Animated.Value }>());
+  const pet = useRef({ x: value(home.current), lean: value(0), recoil: value(0) }).current;
+  const wiggleSince = useRef<number | null>(null);
+  const [walk, setWalk] = useState<{ moving: boolean; facing: 1 | -1; stroll: boolean }>({ moving: false, facing: 1, stroll: false });
+  const walkRef = useRef(walk);
+  const [, rerender] = useReducer((n: number) => n + 1, 0);
+
+  // A new shot: the pet walks under the word and fires. Planned once, the first time it is drawn.
+  for (const { shot, rect } of shots) {
+    if (live.current.has(shot.id)) continue;
+    const plan = planShot(moves.current, now(), { x: rect.left + rect.width / 2, y: rect.top + HIT_Y }, home.current, bounds, wander, height, PET_BOTTOM);
+    const xy = () => ({ x: value(), y: value(), o: value(0), r: value() });
+    live.current.set(shot.id, { plan, fired: false, impacted: false, done: false, origins: Array(plan.bullets).fill(null), angles: Array(plan.bullets).fill(0),
+      bullets: Array.from({ length: plan.bullets }, xy), shards: Array.from({ length: SHARDS }, xy), ring: { s: value(0.4), o: value(0) } });
+  }
+  for (const { burst } of bursts) if (!burstVals.current.has(burst.id)) burstVals.current.set(burst.id, { born: now(), o: value(1), rise: value(0) });
+
+  useEffect(() => {
+    if (wrongKey > 0 && !reduceMotion) wiggleSince.current = now();
+  }, [wrongKey]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // One frame: move everything to where it is at this moment, and pass the moments that matter (sounds, the break,
+  // the end of an effect).
+  const latest = useRef({ shots, bursts, onImpact, onShotDone, onBurstDone, play });
+  latest.current = { shots, bursts, onImpact, onShotDone, onBurstDone, play };
+  const frame = useRef<() => void>(() => {});
+  frame.current = () => {
+    const tNow = now();
+    const { shots: held, bursts: shown } = latest.current;
+    const wiggle = wiggleSince.current !== null && tNow - wiggleSince.current < WIGGLE_MS ? wiggleAt(wiggleSince.current, tNow) : 0;
+    const x = petX(moves.current, tNow, home.current!, bounds, wander);
+    pet.x.setValue(x + wiggle);
+    let lean = 0;
+    let recoil = 0;
+    for (const { shot } of held) {
+      const s = live.current.get(shot.id);
+      if (!s || s.done) continue;
+      const { plan } = s;
+      lean = lean || leanAt(plan, tNow, x + PET_SIZE / 2);
+      if (tNow >= plan.fireAt && tNow < plan.fireAt + 120) recoil = -3 * (1 - (tNow - plan.fireAt) / 120);
+      for (let i = 0; i < plan.bullets; i++) {
+        const leave = plan.fireAt + i * plan.gap;
+        if (!s.origins[i] && tNow >= leave) {
+          const o = muzzle(petX(moves.current, leave, home.current!, bounds, wander), height, PET_BOTTOM);
+          s.origins[i] = o;
+          s.angles[i] = (Math.atan2(plan.target.y - o.y, plan.target.x - o.x) * 180) / Math.PI;
+          s.bullets[i].r.setValue(s.angles[i]);
+        }
+        const b = s.origins[i] ? bulletAt(plan, i, tNow, s.origins[i]!) : null;
+        if (b) { s.bullets[i].x.setValue(b.x); s.bullets[i].y.setValue(b.y); }
+        s.bullets[i].o.setValue(b ? 1 : 0);
+      }
+      const since = tNow - plan.impactAt;
+      const pieces = shardsAt(plan, tNow, SHARDS);
+      s.shards.forEach((v, i) => {
+        const p = pieces[i];
+        if (p) { v.x.setValue(p.x); v.y.setValue(p.y); v.r.setValue(p.rotate); }
+        v.o.setValue(p ? p.opacity : 0);
+      });
+      const ring = since >= 0 && since < 220 ? since / 220 : null;
+      s.ring.o.setValue(ring === null ? 0 : 0.5 * (1 - ring));
+      if (ring !== null) s.ring.s.setValue(0.4 + ring);
+      if (!s.fired && tNow >= plan.fireAt) { s.fired = true; latest.current.play('shot'); }
+      if (!s.impacted && tNow >= plan.impactAt) { s.impacted = true; latest.current.play('break'); rerender(); latest.current.onImpact?.(shot); }
+      if (tNow >= plan.doneAt) { s.done = true; latest.current.onShotDone?.(shot.id); }
+    }
+    pet.lean.setValue(lean);
+    pet.recoil.setValue(recoil);
+    const dart = petMoving(moves.current, tNow);
+    // Between shots the pet strolls across the field, stepping the way it goes (its move strip, or its walk strip).
+    const drift = petDrift(moves.current, tNow, home.current!, bounds, wander);
+    const motion = drift ? { moving: true, facing: drift, stroll: true } : { ...dart, stroll: false };
+    const was = walkRef.current;
+    if (motion.moving !== was.moving || motion.facing !== was.facing || motion.stroll !== was.stroll) { walkRef.current = motion; setWalk(motion); }
+    for (const { burst } of shown) {
+      const v = burstVals.current.get(burst.id);
+      if (!v) continue;
+      const look = burstLook(tNow - v.born, reduceMotion);
+      v.o.setValue(look.opacity);
+      v.rise.setValue(look.rise);
+      if (tNow - v.born >= BURST_MS) { burstVals.current.delete(burst.id); latest.current.onBurstDone?.(burst.id); }
+    }
+  };
+  // The effect clock: runs (frame by frame) only while the game runs.
+  useEffect(() => {
+    if (!running) return;
+    clock.current.since = Date.now();
+    let id = requestAnimationFrame(function tick() { frame.current(); id = requestAnimationFrame(tick); });
+    return () => {
+      cancelAnimationFrame(id);
+      const c = clock.current;
+      if (c.since !== null) c.base += Date.now() - c.since;
+      c.since = null;
+    };
+  }, [running]);
+  // Shots and meanings dropped by the caller (done, or a new stage) take their values with them.
+  useEffect(() => {
+    const ids = new Set(shots.map((s) => s.shot.id));
+    for (const id of live.current.keys()) if (!ids.has(id)) live.current.delete(id);
+  }, [shots]);
+
+  const colors = words ? ['#7FD3FF', '#4C6FFF'] : ['#FFE29A', '#F58A3A'];
+  return (
+    <View style={StyleSheet.absoluteFill} pointerEvents="none">
+      {bursts.map(({ burst, spot }) => {
+        const v = burstVals.current.get(burst.id);
+        return (
+          <Animated.View key={burst.id} accessibilityLiveRegion="polite" accessibilityLabel={`${burst.title}${burst.sub ? `, ${burst.sub}` : ''}`}
+            style={[styles.burst, spot, v ? { opacity: v.o, transform: [{ translateY: v.rise }] } : null]}>
+            <Text style={[styles.burstTitle, burst.tone === 'miss' && styles.burstMiss]} numberOfLines={2}>{burst.title}</Text>
+            {burst.sub ? <Text style={styles.burstSub} numberOfLines={1}>{burst.sub}</Text> : null}
+          </Animated.View>
+        );
+      })}
+      {shots.map(({ shot, rect }) => {
+        const s = live.current.get(shot.id);
+        if (!s) return null;
+        return (
+          <React.Fragment key={shot.id}>
+            {s.impacted ? null : (
+              // The answered word, held where it was until the bullet arrives.
+              <View testID={`shot-${shot.id}`} style={[styles.meteor, { left: rect.left, top: rect.top, width: rect.width }]}
+                accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+                <TargetBody turn={shot.turn} danger={false} big={shot.aimed} />
+              </View>
+            )}
+            <Animated.View style={[styles.ring, { left: s.plan.target.x - 22, top: s.plan.target.y - 22, borderColor: colors[0], opacity: s.ring.o,
+              transform: [{ scale: s.ring.s }] }]} />
+            {s.shards.map((v, i) => {
+              const size = i % 3 === 0 ? 8 : 5;
+              return <Animated.View key={i} style={[styles.shard, { left: -size / 2, top: -size / 2, width: size, height: size, backgroundColor: colors[i % 2],
+                opacity: v.o, transform: [{ translateX: v.x }, { translateY: v.y }, { rotate: deg(v.r) }] }]} />;
+            })}
+            {s.bullets.map((v, i) => (
+              <Animated.View key={i} testID="bullet" style={[styles.bullet, { opacity: v.o, transform: [{ translateX: v.x }, { translateY: v.y }, { rotate: deg(v.r) }] }]}>
+                <LinearGradient colors={['rgba(255,236,140,0)', 'rgba(255,236,140,0.85)']} start={{ x: 0, y: 0.5 }} end={{ x: 1, y: 0.5 }} style={styles.bulletTrail} />
+                <View style={styles.bulletHead} />
+              </Animated.View>
+            ))}
+          </React.Fragment>
+        );
+      })}
+      <Animated.View testID="shooter-pet" style={[styles.shooter, { bottom: PET_BOTTOM, transform: [{ translateX: pet.x }, { translateY: pet.recoil }, { rotate: deg(pet.lean) }] }]}>
+        {/* A pet with drawn move strips has one for each way. Otherwise it walks, and the walk strips face right:
+            walking left mirrors it. Standing, it faces the player again. */}
+        <View style={{ transform: [{ scaleX: walk.moving && !hasSprite(petId, petLevel, moveActivity(walk.facing)) ? walk.facing : 1 }] }}>
+          <PetArt pet={petId} size={PET_SIZE} stage={petLevel} moving={walk.moving ? walk.facing : undefined} strolling={walk.stroll}
+            still={reduceMotion || !running} />
+        </View>
+      </Animated.View>
+    </View>
+  );
+});
+
 /** A glowing rock with a fiery tail streaming up behind it. */
-function Rock({ hit, danger, big }: { hit: boolean; danger: boolean; big: boolean }) {
-  const d = big ? 48 : 40;
-  if (hit) return <Text style={[styles.boom, { height: d + 34 }]}>💥</Text>;
+function Rock({ danger, big }: { danger: boolean; big: boolean }) {
+  const d = big ? 42 : 36;
   return (
     <View style={styles.rockWrap} pointerEvents="none">
       <LinearGradient colors={['rgba(255,200,90,0)', 'rgba(255,150,60,0.55)', 'rgba(255,110,40,0.95)']}
@@ -170,8 +496,7 @@ function Rock({ hit, danger, big }: { hit: boolean; danger: boolean; big: boolea
 }
 
 /** An English word falling in Anh → Việt: a glowing tile with a short trail. */
-function WordTile({ word, hit, danger, big }: { word: string; hit: boolean; danger: boolean; big: boolean }) {
-  if (hit) return <Text style={[styles.boom, { height: 74 }]}>💥</Text>;
+function WordTile({ word, danger, big }: { word: string; danger: boolean; big: boolean }) {
   return (
     <View style={styles.rockWrap} pointerEvents="none">
       <LinearGradient colors={['rgba(140,200,255,0)', 'rgba(120,180,255,0.5)']} style={styles.trail} />
@@ -180,25 +505,6 @@ function WordTile({ word, hit, danger, big }: { word: string; hit: boolean; dang
         <Text style={[styles.tileText, big && styles.tileTextBig, word.length > 12 && styles.tileTextLong]} numberOfLines={2}>{word}</Text>
       </LinearGradient>
     </View>
-  );
-}
-
-/** The meaning (or the English word) shown where a word broke; it drifts up and fades, and takes no touches. */
-function BurstLabel({ burst, reduceMotion, style }: { burst: Burst; reduceMotion: boolean; style: object }) {
-  const fade = useRef(new Animated.Value(1)).current;
-  useEffect(() => {
-    if (reduceMotion) return;
-    const animation = Animated.timing(fade, { toValue: 0, duration: BURST_MS - BURST_HOLD_MS, delay: BURST_HOLD_MS, easing: Easing.in(Easing.quad), useNativeDriver: true });
-    animation.start();
-    return () => animation.stop();
-  }, [fade, reduceMotion]);
-  const rise = fade.interpolate({ inputRange: [0, 1], outputRange: [-24, 0] });
-  return (
-    <Animated.View pointerEvents="none" accessibilityLiveRegion="polite" accessibilityLabel={`${burst.title}${burst.sub ? `, ${burst.sub}` : ''}`}
-      style={[styles.burst, style, { opacity: fade, transform: [{ translateY: rise }] }]}>
-      <Text style={[styles.burstTitle, burst.tone === 'miss' && styles.burstMiss]} numberOfLines={2}>{burst.title}</Text>
-      {burst.sub ? <Text style={styles.burstSub} numberOfLines={1}>{burst.sub}</Text> : null}
-    </Animated.View>
   );
 }
 
@@ -216,34 +522,43 @@ const styles = StyleSheet.create({
   sky: { backgroundColor: '#142349' },
   meadow: { backgroundColor: '#DDF3E4' },
   star: { position: 'absolute', width: 3, height: 3, borderRadius: 2, backgroundColor: '#FFFFFF' },
-  ground: { position: 'absolute', left: 0, right: 0, bottom: 0, height: 22, backgroundColor: '#3E5F45' },
+  ground: { position: 'absolute', left: 0, right: 0, bottom: 0, height: GROUND, backgroundColor: '#3E5F45' },
   base: { position: 'absolute', left: 0, top: 0, bottom: 0, width: PET_ZONE - 6, backgroundColor: '#C7E5CF', alignItems: 'center', paddingTop: 8 },
   baseIcon: { fontSize: 28 },
   pet: { position: 'absolute' },
-  petMeteor: { left: 8, bottom: 12 },
   petDefense: { left: 8, bottom: 8 },
+  shooter: { position: 'absolute', left: 0, width: PET_SIZE, height: PET_SIZE, transformOrigin: '50% 100%' },
   meteor: { position: 'absolute', alignItems: 'center' },
   rockWrap: { alignItems: 'center' },
-  tail: { height: 40, marginBottom: -14 },
-  rock: { shadowColor: '#FF8A3D', shadowOpacity: 0.9, shadowRadius: 14, shadowOffset: { width: 0, height: 0 }, elevation: 8 },
+  tail: { height: 34, marginBottom: -12 },
+  rock: { shadowColor: '#FF8A3D', shadowOpacity: 0.9, shadowRadius: 12, shadowOffset: { width: 0, height: 0 }, elevation: 8 },
   crater: { position: 'absolute', backgroundColor: 'rgba(110,40,20,0.35)' },
-  boom: { fontSize: 38, textAlignVertical: 'bottom' },
-  word: { marginTop: 6, fontSize: 16, fontWeight: '900', color: '#FFFFFF', textAlign: 'center',
+  word: { marginTop: 4, fontSize: 13, lineHeight: 17, fontWeight: '800', color: '#FFFFFF', textAlign: 'center',
     textShadowColor: 'rgba(0,0,0,0.6)', textShadowRadius: 6, textShadowOffset: { width: 0, height: 1 } },
-  wordAimed: { fontSize: 19, color: '#FFE9B8' },
-  context: { fontSize: 12, color: '#C9D6F2', textAlign: 'center' },
-  trail: { width: 18, height: 30, borderRadius: 9, marginBottom: -6 },
-  tile: { minWidth: 84, maxWidth: METEOR_W, paddingHorizontal: 12, paddingVertical: 8, borderRadius: 14, alignItems: 'center',
-    shadowColor: '#7FB8FF', shadowOpacity: 0.9, shadowRadius: 12, shadowOffset: { width: 0, height: 0 }, elevation: 8 },
-  tileBig: { maxWidth: 260, paddingVertical: 10 },
-  tileText: { fontSize: 18, fontWeight: '900', color: '#FFFFFF', letterSpacing: 0.5 },
-  tileTextBig: { fontSize: 22 },
-  tileTextLong: { fontSize: 15, textAlign: 'center' }, // phrases wrap on two lines instead of being cut
-  burst: { position: 'absolute', width: BURST_W, minHeight: BURST_H, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 8, paddingVertical: 6, borderRadius: 14,
+  wordAimed: { fontSize: 15, lineHeight: 19, color: '#FFE9B8' },
+  context: { fontSize: 11, color: '#C9D6F2', textAlign: 'center' },
+  trail: { width: 16, height: 26, borderRadius: 8, marginBottom: -6 },
+  tile: { minWidth: 72, maxWidth: METEOR_W, paddingHorizontal: 10, paddingVertical: 6, borderRadius: 12, alignItems: 'center',
+    shadowColor: '#7FB8FF', shadowOpacity: 0.9, shadowRadius: 10, shadowOffset: { width: 0, height: 0 }, elevation: 8 },
+  tileBig: { maxWidth: AIMED_MAX_W, paddingVertical: 7, borderWidth: 1.5, borderColor: '#FFE9B8' },
+  tileText: { fontSize: 15, fontWeight: '800', color: '#FFFFFF', letterSpacing: 0.3 },
+  tileTextBig: { fontSize: 17 },
+  tileTextLong: { fontSize: 13, textAlign: 'center' }, // phrases wrap on two lines instead of being cut
+  answerRow: { marginTop: 6, alignItems: 'center' },
+  answerRowCompact: { marginTop: 3 },
+  // The one text field: invisible, kept where the aimed target's boxes are; the boxes show what it holds.
+  hiddenInput: { position: 'absolute', width: 2, height: 2, opacity: 0.01, color: 'transparent', padding: 0 },
+  bullet: { position: 'absolute', left: -3, top: -3, width: 6, height: 6 },
+  bulletTrail: { position: 'absolute', right: 3, top: 1.5, width: 16, height: 3, borderRadius: 2 },
+  bulletHead: { width: 6, height: 6, borderRadius: 3, backgroundColor: '#FFF4B0',
+    shadowColor: '#FFD84D', shadowOpacity: 1, shadowRadius: 4, shadowOffset: { width: 0, height: 0 }, elevation: 4 },
+  ring: { position: 'absolute', width: 44, height: 44, borderRadius: 22, borderWidth: 2 },
+  shard: { position: 'absolute', borderRadius: 2 },
+  burst: { position: 'absolute', width: BURST_W, minHeight: BURST_H, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 8, paddingVertical: 5, borderRadius: 12,
     backgroundColor: 'rgba(12,22,52,0.55)' },
-  burstTitle: { fontSize: 18, fontWeight: '900', color: '#FFE9B8', textAlign: 'center' },
+  burstTitle: { fontSize: 15, fontWeight: '800', color: '#FFE9B8', textAlign: 'center' },
   burstMiss: { color: '#FFB3BD' },
-  burstSub: { fontSize: 13, fontWeight: '700', color: '#C9D6F2', textAlign: 'center' },
+  burstSub: { fontSize: 12, fontWeight: '600', color: '#C9D6F2', textAlign: 'center' },
   monster: { position: 'absolute', width: TARGET_W, minHeight: TARGET_H, borderRadius: 18, paddingHorizontal: 8, paddingVertical: 6,
     backgroundColor: 'rgba(255,255,255,0.94)', borderWidth: 2, borderColor: 'transparent', flexDirection: 'row', alignItems: 'center', gap: 6 },
   selected: { borderColor: '#F2A93B' },

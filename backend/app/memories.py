@@ -29,6 +29,7 @@ EVENT_META = {
     "first_daily_quests": ("Một ngày thật trọn vẹn", "Bạn đã lần đầu hoàn thành toàn bộ nhiệm vụ trong ngày."),
     "manual": ("Kỷ niệm cùng pet", "Một khoảnh khắc được bạn lưu lại."),
     "room_photo": ("Ảnh trong phòng", "Một khoảnh khắc trong phòng của pet."),
+    "walk_keepsake": ("Kỷ vật từ chuyến đi", "Pet đã mang kỷ vật này về từ một chuyến khám phá."),
 }
 # Saved by the user, so they never trigger the "new memory" notice. Room photos keep the image taken in the room
 # (see pet_room.save_photo): editing the caption never re-renders them.
@@ -188,7 +189,7 @@ def list_memories(category: Literal["all", "pet", "study", "friends", "favorite"
     if cursor: where.append(Memory.id < cursor)
     if pet_id: where.append(Memory.pet_id == pet_id)
     if category == "favorite": where.append(Memory.favorite.is_(True))
-    elif category == "pet": where.append(Memory.event_type.in_(("pet_hatched", "pet_evolved", "manual", "room_photo")))
+    elif category == "pet": where.append(Memory.event_type.in_(("pet_hatched", "pet_evolved", "manual", "room_photo", "walk_keepsake")))
     elif category == "study": where.append(Memory.event_type.in_(("first_learning_session", "first_daily_quests")))
     elif category == "friends": where.append(Memory.event_type == "first_group_session")
     rows = list(db.scalars(select(Memory).where(*where).order_by(Memory.id.desc()).limit(limit + 1)))

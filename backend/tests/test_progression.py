@@ -57,7 +57,10 @@ def test_pet_progress_is_saved_per_pet_and_study_xp_evolves(client, monkeypatch)
     study = client.post("/api/study/sessions", headers=headers, json={"duration_seconds": 750 * 60})
     assert study.json()["xp_awarded"] == 300  # 150 five-minute blocks x 2 EXP
     profile = client.get("/api/profile", headers=headers).json()
-    assert profile["xp"] == 300 + LOGIN_EXP and profile["level"] == 1
+    # Enough to hatch, but the egg waits for the app to show the hatch.
+    assert profile["xp"] == 300 + LOGIN_EXP and profile["level"] == 0
+    assert client.get("/api/pet/space", headers=headers).json()["hatch"] == {"status": "ready", "level": 1}
+    assert client.post("/api/pet/hatch", headers=headers).json()["pet_level"] == 1
 
     switched = client.patch("/api/profile", headers=headers, json={"pet": "cat"}).json()
     assert switched["xp"] == 0 and switched["level"] == 0

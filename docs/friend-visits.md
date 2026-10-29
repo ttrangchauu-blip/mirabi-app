@@ -24,8 +24,13 @@ room and pet from `pet_rooms` / `users` / `pet_walks`, never a copy.
   used to say *Cộng đồng* says *Bạn bè*.
 - A visit opens over the current tab; back returns to where it was opened.
 - **Visit screen** (`mobile/src/screens/room/VisitRoom.tsx`): the saved room, the host's pet where its state puts it, your
-  pet on the fixed guest spot (never covering the host's pet), and three buttons: *Chào pet* (the pet hops and answers;
-  *Để lại lời chào* while it is out walking), *Động viên* (pick a preset message), *Rủ học* (pick subject and rhythm).
+  pet on the fixed guest spot (never covering the host's pet). No row of buttons under the room: the header has the room
+  name and *Rủ học* (book icon; pick subject and rhythm), which stays there while the pet is out, since it invites the
+  owner. A tap on the host's pet opens a small menu next to it (above its head, below its feet when there is no room
+  above, always inside the room): *Chào pet* (hand) plays with it and greets the owner, *Động viên* (heart) picks a preset
+  message. While the pet is out walking, a marker where it would be opens the same menu with *Để lại lời chào*. An item
+  sent a moment ago is dimmed in the menu ("đã gửi, chờ một lát"); a tap outside the menu closes it. Visitors never move
+  the host's pet or anything in the room. When the host takes no study invitations, *Rủ học* is dimmed and says so.
 - **Notifications**: the Home bell (with unread count) opens the inbox. Greetings and cheers open the sender's room; study
   invitations open the invitation screen (room, subject, rhythm, members, time left, or why it can no longer be joined).
 
@@ -53,8 +58,10 @@ Privacy settings (`GET/PATCH /api/social/me`): `allow_room_visits`, `allow_study
 
 ## Playing with a friend's pet
 
-Tapping the host's pet on a visit always plays with it in the app (a hop, a short line, little hearts). The first tap of
-a visit also calls `POST /api/personal-room/visit/{user_id}/pet-play`, which decides whether it gives the pet EXP:
+*Chào pet* always plays with the host's pet in the app (a hop, a short line, little hearts), and sends a `hello`
+greeting unless one was sent within the cooldown. Taps during its animation (`PLAY_MS`, 1.2 s) are ignored, so it is not
+replayed or sent again by fast taps. The first *Chào pet* of a visit also calls
+`POST /api/personal-room/visit/{user_id}/pet-play`, which decides whether it gives the pet EXP:
 
 | | |
 |---|---|
@@ -98,6 +105,12 @@ taps from many friends, walking pet, permissions, the host's day, evolution). Mo
 `__tests__/room-walk.test.ts` (paths around furniture, blocked targets, shut in, stepping out), `__tests__/personal-room.test.tsx` (visit, greet, cheer with retry on the same request id,
 Rủ học, visits/invites turned off), `__tests__/study-together.test.tsx` (QR code, typed and scanned code, friend list
 search/states/visit, invitation screen, merged notification), `__tests__/room-visit.test.ts`.
+
+## Friends' gardens
+
+"Thăm vườn" (Vườn nhà → Vườn bạn bè, or a friend's menu in Bạn bè) opens a friend's garden with the same access rules
+as a room visit (friends only, no block, `allow_room_visits`). A visitor may water and tend plants within the daily
+limits and nothing else. See [inventory.md](inventory.md#vườn-bạn-bè).
 
 ## Not included
 

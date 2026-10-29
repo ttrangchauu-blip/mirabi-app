@@ -10,7 +10,7 @@ from sqlalchemy import select
 
 from . import auth, campus, career, community, companion, dashboard, profile, study, tasks, streaks
 from . import friends, notifications, realtime, room_chat, study_rooms, study_together, team_quests
-from . import learning, learning_history, memories, pet_room, room_visits
+from . import garden, inventory, learning, learning_history, memories, pet_room, room_visits
 from .learning_content import seed_learning_content
 from .config import settings
 from .db import SessionLocal, engine
@@ -34,6 +34,8 @@ def startup():
                 existing_admin.role = "user"
         # Built-in English/Math lessons; publishes a new version only when a lesson's content changed.
         seed_learning_content(db)
+        # The walk finds' catalog, next to the inventories that refer to it.
+        inventory.seed_catalog(db)
         if not db.scalar(select(CommunityPost.id).limit(1)):
             # The demo post author has a random password and cannot sign in.
             demo = User(
@@ -146,7 +148,10 @@ for feature_router in (
     notifications.router,
     realtime.router,
     pet_room.router,
+    pet_room.focus_router,
     room_visits.router,
+    inventory.router,
+    garden.router,
     learning.router,
     learning_history.router,
 ):

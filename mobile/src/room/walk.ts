@@ -2,7 +2,7 @@ import { CANVAS, itemArt, itemBox } from './art';
 import type { Layout } from './types';
 
 /**
- * Walking the pet around its room (tap the floor). Everything is in canvas units (400 x 440, room/art.ts) and about
+ * Walking the pet around its room (tap the floor). Everything is in canvas units (360 x 760, room/art.ts) and about
  * the pet's feet: the point under it, where its shadow is. The pet stays on the floor inside the room, and floor items
  * block it by their footprint (the strip of floor they stand on), widened by the pet's own width; rugs are walked on.
  */

@@ -177,21 +177,52 @@ Reused, not duplicated: `users` (identity, pet, level), `exp_events` + `award_ex
   |---|---|---|
   | Falls | the English word (`prompt.word`) | a meteor with the Vietnamese meaning |
   | User types | the same English word; only that spelling is accepted | the English word; declared equivalents accepted |
-  | After a hit | the Vietnamese meaning, shown where the word broke, plus pronunciation | the English word with its phonetic, plus pronunciation |
+  | After a hit | the Vietnamese meaning, shown where the word broke, plus pronunciation | the pair to remember (*apple — quả táo*) with its phonetic, plus pronunciation |
   | Progress skill | `en.spell.<word>` (`skill_type` `spelling`): typing the shape of the word | `en.word.<word>` (`skill_type` `word`): recalling the word, the vocabulary mastery |
 
   The meaning of an Anh → Việt word is never sent before it is resolved (`result.word = {en, vi, phonetic}` on a hit,
   miss or reveal), and seeing it never counts as knowing the word: the two games keep separate progress, review items
   (`<lesson>.spell.<word>`, labelled *Mặt chữ: …*) and mastery. A review session of Anh → Việt items only is played as
-  *Bắn từ vựng*. The meaning shown after a hit fades out on its own, under the other falling words, and never pauses the
-  game or blocks typing. A miss shows the English–Vietnamese pair. *Xem đáp án* is not offered in Anh → Việt (the word
+  *Bắn từ vựng*. The meaning shown after a hit stays about 1.2 s, then fades (0.5 s), under the other falling words, and
+  never blocks typing. A miss shows the English–Vietnamese pair. *Xem đáp án* is not offered in Anh → Việt (the word
   is on screen).
 - **A typed shot** (both vocabulary games) hits whichever open word it matches, not only the aimed one; when several
   match, the one closest to the ground (issued first) is destroyed, one per shot. `result.turn_id` is the turn hit. A
   wrong shot counts against the aimed word.
-- **Meteor answer**: the Vietnamese word is written on the falling meteor and the answer boxes ride under it, one box
-  per letter (`prompt.letters`, e.g. `[6]` → *6 chữ cái*): the length is shown, never the word. Hints: first letter, then
-  last letter.
+- **Answer boxes**: in each word's (or meteor's) own frame, right under its text, moving with it: one box per letter
+  (`prompt.letters`, e.g. `[6]` → *6 chữ cái*), the length shown, never the word. The aimed target shows what is typed;
+  the others show small empty boxes, and tapping one answers that target. There is no *Bắn* and no Enter: as soon as
+  the typed text is right for any falling word the answer is sent and the pet shoots. Each falling word carries
+  `prompt.answer_keys` (SHA-256 of `turn_id|normalized answer`, 16 hex digits, one per accepted answer, never the
+  answers; `learning_engine.answer_key` and `mobile/src/learning/answerKey.ts`); the backend still checks what is
+  sent. Every box filled but not right is sent after a 0.7 s pause (time to finish a longer equivalent) and counts as
+  wrong, as before; the same text is never sent twice. Behind the boxes there is one text
+  field for the whole play field (`Playfield`, never remounted), so a falling target, choosing another one or a word
+  breaking never closes and reopens the keyboard, and the typed text is kept. Hints: first letter, then last letter.
+- **No overlapping words** (`games/fieldLayout.ts`): lanes spread over the whole width; each target (from the
+  ground up) keeps its natural spot unless it would cover another word or a word held for a shot, then moves sideways to
+  a free spot, or, when the field is too narrow, waits just above the word below it (just below only when there is no
+  room above). A word is never shown higher than a moment before, so nothing jumps back up after a shot; sideways moves
+  slide over a few frames. The aimed frame is only as wide as its answer boxes need, and grows downward. After a shot
+  the next word in falling order is aimed and the answer field keeps the focus (on the web without scrolling).
+- **The field never moves on screen**: the question card above it and the "Gợi ý" row under it stay in place, at a
+  height that never shrinks (`Steady` in `GameScreen.tsx`), while no word is falling for a moment (a blank card, the
+  buttons dimmed), and a notice or the hints take the card's one line under the word (at most two) instead of adding
+  rows. Otherwise the field would grow and shrink between words, and every falling word would shift with it.
+- **The pet shoots** (both vocabulary games, `mobile/src/screens/learning/games/shooterFx.ts` and `Playfield.tsx`): the
+  user's pet (its idle strip, its walk strip while moving, mirrored to face its way; never redrawn) drifts gently along
+  the bottom while waiting. A right answer is the backend's: "Chính xác!" shows at once and the word it resolved is held
+  where it was (it no longer falls and can never be missed or scored again), the pet glides under it (≤ 0.28 s), stops
+  to aim, and fires 3 small bullets with short trails from its head, 150 ms apart, each flying 500–800 ms depending on
+  the distance (`SHOT_TUNING` in `shooterFx.ts`: bullets, gap, speed, flight bounds); the first one to arrive breaks the
+  word into a few pieces (shot and break sounds,
+  following *Âm thanh*), then the meaning or pair shows there and the English word is pronounced. A wrong answer shoots
+  nothing: the word keeps falling and the pet shakes a little. Typing the next word works throughout. Position and
+  sprite are separate (the pet's coordinates change, it never teleports or leaves the field), and everything runs on one
+  pause-aware effect clock that moves Animated values frame by frame (the shooter layer is memoised and does not
+  re-render with the game's 50 ms ticks, so shots stay smooth): pausing (or a lost connection, an explanation, the countdown) freezes the falling words, the
+  pet, the bullets and the effects together. A new stage starts clean (the game screen is rebuilt). With reduced
+  motion the pet does not drift and meanings do not rise as they fade.
 - **Multiple targets** (Thử thách meteor/defense): up to 2 at once. The default target is the one closest to the
   ground/base; tapping another selects it.
 - **English content** (`learning_grammar.py`, vocabulary banks in `learning_content.py`): grammar items record the
@@ -383,8 +414,7 @@ re-reads and retries (then replays). Session creation is idempotent by `Idempote
 - **LessonIntro**: the 7 words drawn for this session with phonetic, 🔊 pronunciation (device text-to-speech),
   examples; or the grammar rule in Vietnamese with examples; or the Math method with worked examples. The session is
   created paused; *Bắt đầu chơi* starts the countdown and the clock; closing drops the unplayed session.
-- **GameScreen**: HUD (back, pause, time left, turns, hearts, score for an older Thử thách stage, sound), question card (never
-  covered: the pet stands in its own zone), the game (*Bắn thiên thạch*, *Bảo vệ căn cứ*, *Chọn cổng đúng*,
+- **GameScreen**: HUD (back, pause, time left, turns, hearts, score for an older Thử thách stage, sound), question card, the game (*Bắn thiên thạch*, *Bảo vệ căn cứ*, *Chọn cổng đúng*,
   *Xây cầu bằng từ*, *Xây cầu toán học*), text input for English (KeyboardAvoidingView) or an on-screen number pad
   for Math (± for negative numbers), hint and *Xem đáp án*, collapsible scratchpad (*Nháp*, never sent), feedback
   card with answer and explanation, time-up choice, pause menu (*Tiếp tục học*, sound, reduced motion, *Cách chơi*,

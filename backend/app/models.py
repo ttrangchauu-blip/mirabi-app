@@ -143,6 +143,8 @@ class PetWalk(Base):
     reward_exp: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
     # JSON list of {"item_id", "quantity"} granted into the inventory with this walk.
     rewards: Mapped[str | None] = mapped_column(Text, nullable=True)
+    # Where the pet went (items_catalog.LOCATIONS); older walks have none and are read as one by their id.
+    location_id: Mapped[str | None] = mapped_column(String(20), nullable=True)
     __table_args__ = (Index("uq_pet_walk_user_cycle", "user_id", "task_cycle_id", unique=True),)
 
 class InventoryItem(Base):
@@ -190,7 +192,11 @@ class UserTaskCompletion(Base):
 
 
 class PetEvolution(Base):
-    """Saved cumulative evolution XP for one pet type owned by a user."""
+    """Saved cumulative evolution XP for one pet type owned by a user.
+
+    An egg that reaches the hatching EXP stays at Lv.0 ("chờ nở") until the hatch is confirmed (`hatched_at`, see
+    companion.complete_hatch); only then does `level` follow `total_xp`.
+    """
     __tablename__ = "pet_evolutions"
     __table_args__ = (UniqueConstraint("user_id", "pet_id", name="uq_pet_evolution_user_pet"),)
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -198,6 +204,7 @@ class PetEvolution(Base):
     pet_id: Mapped[str] = mapped_column(String(20))
     total_xp: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
     level: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
+    hatched_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
 
 
@@ -221,6 +228,20 @@ class PetRoom(Base):
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
 
 
+class FocusRoomLayout(Base):
+    """The decorated Phòng tập trung (Focus Space): same catalog and placement rules as PetRoom, on its own wider
+    canvas (pet_room.py, room kind "focus"). Created with the default layout on first open; `version` as in PetRoom."""
+    __tablename__ = "focus_room_layouts"
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
+    wall_id: Mapped[str] = mapped_column(String(40))
+    floor_id: Mapped[str] = mapped_column(String(40))
+    # JSON {"items": [{item, variant, x, y, flip, rotate}]}.
+    items_json: Mapped[str] = mapped_column(Text, default="{}", server_default="{}")
+    version: Mapped[int] = mapped_column(Integer, default=1, server_default="1")
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
+
+
 class PetRoomItem(Base):
     """A room decoration a user owns. `source` says how: "starter" (granted with the room). Decorations brought back
     from walks are owned through user_inventory_items instead and have no row here."""
@@ -231,6 +252,127 @@ class PetRoomItem(Base):
     item_id: Mapped[str] = mapped_column(String(40))
     source: Mapped[str] = mapped_column(String(20), default="starter", server_default="starter")
     granted_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class CatalogEntry(Base):
+    """The item catalog (items_catalog.ITEMS), written at startup so the data can be read next to inventories."""
+    __tablename__ = "item_catalog"
+    id: Mapped[str] = mapped_column(String(40), primary_key=True)
+    group_id: Mapped[str] = mapped_column(String(20))
+    name: Mapped[str] = mapped_column(String(80))
+    description: Mapped[str] = mapped_column(Text, default="")
+    rarity: Mapped[str] = mapped_column(String(12))
+    use: Mapped[str] = mapped_column(String(12))
+    art: Mapped[str | None] = mapped_column(String(40), nullable=True)
+    # JSON list of variant ids.
+    variants_json: Mapped[str] = mapped_column(Text, default="[]")
+    drop: Mapped[bool] = mapped_column(Boolean, default=True)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
+
+
+class InventoryStack(Base):
+    """How many of one item in one variant a user owns (inventory.py). `quantity` is everything owned, placed copies
+    included: what is still free is `quantity` minus the user's PlacedItem rows of it. Seeds leave when planted."""
+    __tablename__ = "inventory_stacks"
+    __table_args__ = (UniqueConstraint("user_id", "item_id", "variant", name="uq_inventory_stack"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    item_id: Mapped[str] = mapped_column(String(40))
+    variant: Mapped[str] = mapped_column(String(24), default="default")
+    quantity: Mapped[int] = mapped_column(Integer, default=0)
+    first_obtained_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    last_obtained_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    # When its detail was last opened; it is "Mới" while it has never been opened.
+    seen_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+
+class InventoryEvent(Base):
+    """Every change of an inventory stack: `delta` changes what is owned, `placed_delta` what is placed in a room.
+    `event_key` makes a grant or a use happen once (a walk's reward slot, a planting request)."""
+    __tablename__ = "inventory_events"
+    __table_args__ = (UniqueConstraint("user_id", "event_key", name="uq_inventory_event_key"),
+                      Index("ix_inventory_event_stack", "user_id", "item_id", "variant"))
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    item_id: Mapped[str] = mapped_column(String(40))
+    variant: Mapped[str] = mapped_column(String(24), default="default")
+    delta: Mapped[int] = mapped_column(Integer, default=0)
+    placed_delta: Mapped[int] = mapped_column(Integer, default=0)
+    # walk_reward | legacy | plant | place | store
+    kind: Mapped[str] = mapped_column(String(16))
+    # What it came from or went to: "walk:12", "garden:3", "room:personal".
+    ref: Mapped[str | None] = mapped_column(String(40), nullable=True)
+    event_key: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class WalkReward(Base):
+    """What a walk brought back, rolled once when it ended and kept: the main gift and maybe a bonus."""
+    __tablename__ = "walk_rewards"
+    __table_args__ = (UniqueConstraint("walk_id", "slot", name="uq_walk_reward_slot"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    walk_id: Mapped[int] = mapped_column(ForeignKey("pet_walks.id", ondelete="CASCADE"), index=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    slot: Mapped[str] = mapped_column(String(8))  # main | bonus
+    item_id: Mapped[str] = mapped_column(String(40))
+    variant: Mapped[str] = mapped_column(String(24), default="default")
+    quantity: Mapped[int] = mapped_column(Integer, default=1)
+    location_id: Mapped[str] = mapped_column(String(20))
+    # The user had never owned this item in this variant before.
+    first_time: Mapped[bool] = mapped_column(Boolean, default=False)
+    # The album memory of a keepsake.
+    memory_id: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class PlacedItem(Base):
+    """One copy of a found decoration placed in a room. Its `uid` ("p<id>") is stored with its placement in the room's
+    layout; while the row exists the copy is in use and cannot be placed anywhere else."""
+    __tablename__ = "placed_items"
+    __table_args__ = (Index("ix_placed_item_stack", "user_id", "item_id", "variant"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    item_id: Mapped[str] = mapped_column(String(40))
+    variant: Mapped[str] = mapped_column(String(24), default="default")
+    room: Mapped[str] = mapped_column(String(12))  # personal | focus
+    x: Mapped[int] = mapped_column(Integer, default=0)
+    y: Mapped[int] = mapped_column(Integer, default=0)
+    placed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
+
+
+class GardenPlot(Base):
+    """A planted plot of the garden (Vườn nhà); an empty plot has no row."""
+    __tablename__ = "garden_plots"
+    __table_args__ = (UniqueConstraint("user_id", "plot", name="uq_garden_plot"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    plot: Mapped[int] = mapped_column(Integer)
+    item_id: Mapped[str] = mapped_column(String(40))
+    variant: Mapped[str] = mapped_column(String(24), default="default")
+    planted_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    request_id: Mapped[str] = mapped_column(String(80))
+
+
+class GardenCare(Base):
+    """One watering or tending of a planting, by its owner or a visiting friend (garden.py). `local_date` is the owner's
+    account day. The unique keys are the limits: each planting takes each kind once a day, from anyone, and a request id
+    is handled once. It gives nothing (no EXP, no items, no faster growth); its rows go with the planting's plot."""
+    __tablename__ = "garden_care"
+    __table_args__ = (UniqueConstraint("planting_id", "kind", "local_date", name="uq_garden_care_day"),
+                      UniqueConstraint("carer_id", "client_request_id", name="uq_garden_care_request"),
+                      Index("ix_garden_care_owner_day", "owner_id", "local_date"),
+                      Index("ix_garden_care_carer", "carer_id", "created_at"))
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    owner_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    carer_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    # garden_plots.id of the planting (a plot cleared and planted again is a new planting).
+    planting_id: Mapped[int] = mapped_column(Integer)
+    plot: Mapped[int] = mapped_column(Integer)
+    kind: Mapped[str] = mapped_column(String(8))  # water | tend
+    local_date: Mapped[date] = mapped_column(Date)
+    client_request_id: Mapped[str] = mapped_column(String(80))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 
 
 class Memory(Base):

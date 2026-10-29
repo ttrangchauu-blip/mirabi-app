@@ -21,13 +21,21 @@ function walksOnFreeFloor(layout: Layout, path: Point[]) {
 }
 
 test('an empty floor is walked in a straight line, to exactly the tapped point', () => {
-  const path = findPath(room(), SIZE, { x: 200, feet: 372 }, { x: 300, feet: 400 })!;
-  expect(path).toEqual([{ x: 200, feet: 372 }, { x: 300, feet: 400 }]);
+  const path = findPath(room(), SIZE, { x: 180, feet: 516 }, { x: 280, feet: 544 })!;
+  expect(path).toEqual([{ x: 180, feet: 516 }, { x: 280, feet: 544 }]);
+});
+
+test('the pet walks down to the front edge of the room, and no further', () => {
+  expect(walkBounds(SIZE)[3]).toBe(CANVAS.height - 2);
+  const path = findPath(room(), SIZE, { x: 180, feet: 624 }, { x: 180, feet: 750 })!;
+  expect(path[path.length - 1]).toEqual({ x: 180, feet: 750 });
+  // A tap far below the room (there is none on screen): the pet stays.
+  expect(findPath(room(), SIZE, { x: 180, feet: 624 }, { x: 180, feet: 900 })).toBeNull();
 });
 
 test('the pet walks around a bookcase, never through it', () => {
-  const layout = room(item('bookcase', 200, 390));
-  const from = { x: 200, feet: 432 }, to = { x: 200, feet: 330 }; // right in front of it, to right behind it
+  const layout = room(item('bookcase', 180, 534));
+  const from = { x: 180, feet: 576 }, to = { x: 180, feet: 474 }; // right in front of it, to right behind it
   const path = findPath(layout, SIZE, from, to)!;
   expect(path.length).toBeGreaterThan(2); // it has to turn
   expect(walksOnFreeFloor(layout, path)).toBe(true);
@@ -36,38 +44,40 @@ test('the pet walks around a bookcase, never through it', () => {
 });
 
 test('a tap on furniture or outside the floor leads to the nearest spot the pet can reach', () => {
-  const layout = room(item('desk', 200, 400));
+  const layout = room(item('desk', 180, 544));
   const [, by0, , by1] = walkBounds(SIZE);
-  const onDesk = findPath(layout, SIZE, { x: 80, feet: 430 }, { x: 200, feet: 395 })!;
+  const onDesk = findPath(layout, SIZE, { x: 60, feet: 574 }, { x: 180, feet: 539 })!;
   const end = onDesk[onDesk.length - 1];
   expect(isFree(layout, SIZE, end)).toBe(true);
-  expect(Math.hypot(end.x - 200, end.feet - 395)).toBeLessThan(50);
+  expect(Math.hypot(end.x - 180, end.feet - 539)).toBeLessThan(50);
   // Just behind the floor's back edge: the pet stops at the back of the floor; far up the wall: it stays.
-  const back = findPath(room(), SIZE, { x: 200, feet: 372 }, { x: 200, feet: 300 })!;
+  const back = findPath(room(), SIZE, { x: 180, feet: 516 }, { x: 180, feet: 444 })!;
   expect(back[back.length - 1].feet).toBe(by0);
-  expect(findPath(room(), SIZE, { x: 200, feet: 372 }, { x: 200, feet: 120 })).toBeNull();
+  expect(findPath(room(), SIZE, { x: 180, feet: 516 }, { x: 180, feet: 264 })).toBeNull();
   // The very edge of the room: it stays whole inside.
-  const edge = findPath(room(), SIZE, { x: 200, feet: 372 }, { x: 395, feet: 439 })!;
+  const edge = findPath(room(), SIZE, { x: 180, feet: 516 }, { x: 355, feet: 758 })!;
   expect(edge[edge.length - 1].x).toBeLessThanOrEqual(CANVAS.width - SIZE / 2);
   expect(edge[edge.length - 1].feet).toBeLessThanOrEqual(by1);
 });
 
 test('no way to the tap: a pet shut in by furniture stays where it is', () => {
-  // A row of shelves behind the pet across the whole room, and shelves at both of its sides down to the front edge.
-  const behind = [60, 130, 200, 270, 340].map((x) => item('bookcase', x, 375));
-  const sides = [90, 310].flatMap((x) => [item('bookcase', x, 410), item('bookcase', x, 436)]);
-  const layout = room(...behind, ...sides);
-  const pet = { x: 200, feet: 415 };
+  // Rows of shelves behind and in front of the pet across the whole room, and shelves at both of its sides.
+  const behind = [40, 110, 180, 250, 320].map((x) => item('bookcase', x, 519));
+  const sides = [70, 290].flatMap((x) => [item('bookcase', x, 554), item('bookcase', x, 580)]);
+  const front = [40, 110, 180, 250, 320].map((x) => item('bookcase', x, 640));
+  const layout = room(...behind, ...sides, ...front);
+  const pet = { x: 180, feet: 559 };
   expect(isFree(layout, SIZE, pet)).toBe(true);
-  expect(findPath(layout, SIZE, pet, { x: 330, feet: 325 })).toBeNull(); // the free floor behind the shelves
-  expect(findPath(layout, SIZE, pet, { x: 205, feet: 430 })).not.toBeNull(); // its own corner is fine
+  expect(findPath(layout, SIZE, pet, { x: 300, feet: 469 })).toBeNull(); // the free floor behind the shelves
+  expect(findPath(layout, SIZE, pet, { x: 300, feet: 720 })).toBeNull(); // nor the floor in front of them
+  expect(findPath(layout, SIZE, pet, { x: 185, feet: 574 })).not.toBeNull(); // its own corner is fine
 });
 
 test('a pet standing where an item was just put steps out first, then walks around it', () => {
-  const layout = room(item('pouf', 200, 375));
-  const from = { x: 200, feet: 372 };
+  const layout = room(item('pouf', 180, 519));
+  const from = { x: 180, feet: 516 };
   expect(isFree(layout, SIZE, from)).toBe(false);
-  const path = findPath(layout, SIZE, from, { x: 320, feet: 420 })!;
+  const path = findPath(layout, SIZE, from, { x: 300, feet: 564 })!;
   expect(path[0]).toEqual(from);
   expect(walksOnFreeFloor(layout, path.slice(1))).toBe(true);
 });
@@ -80,10 +90,10 @@ test('along: the position after a distance, facing the way of the walk, and the 
 });
 
 test('items standing in front of the feet are drawn over the pet; rugs and wall items never are', () => {
-  const layout = room(item('rug_oval', 200, 372), item('window', 200, 150), item('plant_flowers', 120, 420), item('chair', 300, 330));
-  expect(itemsInFront(layout, 360).map((p) => p.item)).toEqual(['plant_flowers']);
-  expect(itemsInFront(layout, 300).map((p) => p.item)).toEqual(['chair', 'plant_flowers']);
+  const layout = room(item('rug_oval', 180, 516), item('window', 180, 294), item('plant_flowers', 100, 564), item('chair', 280, 474));
+  expect(itemsInFront(layout, 504).map((p) => p.item)).toEqual(['plant_flowers']);
+  expect(itemsInFront(layout, 444).map((p) => p.item)).toEqual(['chair', 'plant_flowers']);
   expect(frontSvg([])).toBeNull();
-  expect(frontSvg(itemsInFront(layout, 360))).toContain('<svg');
+  expect(frontSvg(itemsInFront(layout, 504))).toContain('<svg');
   expect(obstacles(layout, SIZE)).toHaveLength(2); // the rug is walked on
 });

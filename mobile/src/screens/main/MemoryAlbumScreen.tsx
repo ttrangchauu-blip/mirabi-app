@@ -33,7 +33,8 @@ const month = (iso: string) => new Intl.DateTimeFormat('vi-VN', { month: 'long',
 const date = (iso: string) => new Intl.DateTimeFormat('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(iso));
 const dateTime = (iso: string) => new Intl.DateTimeFormat('vi-VN', { dateStyle: 'long', timeStyle: 'short' }).format(new Date(iso));
 
-export function MemoryAlbumScreen({ user, onBack }: { user: User; onBack: () => void }) {
+/** `initialMemoryId`: opened on that memory (a walk keepsake's, from Kho đồ). */
+export function MemoryAlbumScreen({ user, onBack, initialMemoryId = null }: { user: User; onBack: () => void; initialMemoryId?: number | null }) {
   const [category, setCategory] = useState<MemoryCategory>('all'); const [items, setItems] = useState<Memory[]>([]);
   const [cursor, setCursor] = useState<number | null>(null); const [days, setDays] = useState<number | null>(null);
   const [loading, setLoading] = useState(true); const [more, setMore] = useState(false); const [error, setError] = useState(false);
@@ -44,6 +45,10 @@ export function MemoryAlbumScreen({ user, onBack }: { user: User; onBack: () => 
     setDays(page.companion_days ?? null); setError(false);
   } catch (e) { setError(true); if (next) showError('Không tải thêm được kỷ niệm', e); } finally { setLoading(false); setMore(false); } }, [category]);
   useEffect(() => { void load(); }, [load]);
+  useEffect(() => {
+    if (initialMemoryId == null) return;
+    request(`/api/memories/${initialMemoryId}`).then((m) => setDetail(m as Memory)).catch((e) => showError('Không mở được kỷ niệm', e));
+  }, [initialMemoryId]);
   const rows = useMemo(() => { const list = items; const out: ({ kind: 'month'; key: string } | { kind: 'pair'; key: string; values: Memory[] })[] = []; let m = '';
     for (let i = 0; i < list.length;) { const current = month(list[i].event_at); if (current !== m) { m = current; out.push({ kind: 'month', key: `m-${m}` }); } const pair = [list[i]]; if (list[i + 1] && month(list[i + 1].event_at) === m) pair.push(list[i + 1]); out.push({ kind: 'pair', key: `p-${pair[0].id}`, values: pair }); i += pair.length; } return out; }, [items]);
   const open = async (memory: Memory) => { try { setDetail(await request(`/api/memories/${memory.id}`) as Memory); } catch (e) { showError('Không mở được kỷ niệm', e); } };

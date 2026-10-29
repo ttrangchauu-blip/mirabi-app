@@ -166,6 +166,23 @@ def test_open_turns_never_carry_the_answer(client, me, code):
     assert turn["hints_shown"] == []
 
 
+def test_falling_words_carry_keys_of_every_accepted_answer_not_the_answers(client, me):
+    from app.learning_engine import answer_key
+    # The same value the app computes (mobile/__tests__/answer-key.test.ts checks these vectors too).
+    assert answer_key("turn-0001-abcdef", "cat") == answer_key("turn-0001-abcdef", "  Cat. ") == "4f65fd689c5f51be"
+    assert answer_key("t-x", "Don’t   worry!") == "16d4547551c484cc"
+    for variant in ("meteor", "word_shooter"):
+        session = start(client, me, variant=variant)
+        turn = session["open_turns"][0]
+        accepted = stored_answer(turn)["accepted"]
+        assert turn["prompt"]["answer_keys"] == [answer_key(turn["turn_id"], a) for a in accepted]
+        if turn["kind"] == "vocab_typing":
+            assert all(a.lower() not in json.dumps(turn, ensure_ascii=False).lower() for a in accepted)
+        post(client, me, session, "abandon")
+    grammar = start(client, me, "en.to_be.basic")
+    assert "answer_keys" not in grammar["open_turns"][0]["prompt"]  # only the typed falling words
+
+
 # --- a full stage --------------------------------------------------------------------------------------------------
 
 def test_full_english_stage_updates_progress_and_grants_exp_once(client, me):

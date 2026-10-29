@@ -8,7 +8,7 @@ import { useConfirm } from '../../ui/ConfirmDialog';
 import { PetCompanion } from '../../components/PetCompanion';
 import { useReduceMotion } from '../../components/useReduceMotion';
 import { PetEvolutionProgress } from '../../components/PetEvolutionProgress';
-import { usePetHatch } from './usePetHatch';
+import type { HatchPhase } from './usePetHatch';
 import { Text } from '../../components/Typography';
 import { petById } from '../../pets';
 import { TabKey } from '../../tabs';
@@ -35,7 +35,10 @@ type Props = { user: User; dashboard: Dashboard | null; onNavigate: (tab: TabKey
   /** Opens Study Together (the Study tab in its group mode). */ onOpenStudyTogether?: () => void;
   /** Opens the in-app inbox (friend requests, study invitations, greetings and cheers). */ onOpenNotifications?: () => void;
   /** Opens "Học tự chọn" (the focus timer) directly. */ onOpenFreeStudy?: () => void;
-  /** Opens the private pet memory album. */ onOpenMemories?: () => void };
+  /** Opens the private pet memory album. */ onOpenMemories?: () => void;
+  /** The egg's hatching (usePetHatch): it plays in the pet frame, ahead of anything else there. */
+  hatch?: { phase: HatchPhase; level: number | null; waitingReturn: boolean; onPlayed: () => void };
+  /** Every answer of /api/pet/space, for the hatching to follow. */ onPetSpace?: (space: unknown) => void };
 type PetSpace = { status: WalkStatus; seconds_left: number; walk_minutes: number; started_at?: string | null; return_at?: string | null; server_now?: string; task_cycle_id?: string | null; last_find?: FoundItem | null; collection: { id: string; name: string; emoji: string; count: number }[] };
 type FoundItem = { id?: string; name: string; emoji: string };
 /** Server times are UTC. Older backends sent them without an offset, which JS would read as local time. */
@@ -48,7 +51,7 @@ function serverTime(value: unknown): string | null {
 function normalizePetSpace(value: any): PetSpace | null {
   if (!value || typeof value !== 'object' || !Array.isArray(value.collection)) return null;
   const aliases: Record<string, WalkStatus> = {
-    locked: 'locked', idle: 'locked', ready: 'ready', walking: 'walking', exploring: 'walking',
+    locked: 'locked', idle: 'locked', ready: 'ready', waiting_hatch: 'waiting_hatch', walking: 'walking', exploring: 'walking',
     returned: 'returned', return_ready: 'returned', returning: 'returned', rested: 'rested', completed: 'rested',
   };
   const returnAt = serverTime(value.return_at ?? value.returns_at);
@@ -66,7 +69,7 @@ function normalizePetSpace(value: any): PetSpace | null {
 function formatRemaining(seconds: number) { const h = Math.floor(seconds / 3600); const m = Math.floor((seconds % 3600) / 60); const s = seconds % 60; return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`; }
 function localTodayIso() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; }
 
-export function HomeTab({ user, dashboard, onNavigate, onOpenProfile, onOpenStreak, onOpenDailyQuests, onOpenTaskCreate, onQuestChanged, petSpaceVersion = 0, onPetReturned, onOpenPetGifts, onOpenStudyTogether, onOpenFreeStudy, onOpenMemories, onOpenNotifications }: Props) {
+export function HomeTab({ user, dashboard, onNavigate, onOpenProfile, onOpenStreak, onOpenDailyQuests, onOpenTaskCreate, onQuestChanged, petSpaceVersion = 0, onPetReturned, onOpenPetGifts, onOpenStudyTogether, onOpenFreeStudy, onOpenMemories, onOpenNotifications, hatch, onPetSpace }: Props) {
   const pet = petById(user.pet);
   const petName = user.pet_name ?? pet.name;
   const today = dashboard?.study?.today_sessions ?? 0;
@@ -75,8 +78,10 @@ export function HomeTab({ user, dashboard, onNavigate, onOpenProfile, onOpenStre
   const ownTasks = (dashboard?.scheduled_tasks ?? []).filter((task) => task.kind !== 'daily_quest');
   const tasksTotal = quests.length + ownTasks.length;
   const tasksDone = quests.filter((q) => q.progress >= q.target).length + ownTasks.filter((task) => task.completed).length;
-  // The egg hatches in the evolution frame once the pet reaches Lv.1 (see usePetHatch).
-  const petHatch = usePetHatch(user);
+  // While the egg hatches (and its congratulations are open) the frame shows the pet as it hatches.
+  const hatchShown = !!hatch && hatch.phase !== 'idle' && hatch.level != null;
+  const onPetSpaceRef = useRef(onPetSpace);
+  onPetSpaceRef.current = onPetSpace;
   const [tasksOpen, setTasksOpen] = useState(false);
   const toast = useToast();
   const confirm = useConfirm();
@@ -94,6 +99,7 @@ export function HomeTab({ user, dashboard, onNavigate, onOpenProfile, onOpenStre
       setPetSpaceError(false);
       if (result?.server_now) serverTimeOffset.current = new Date(result.server_now).getTime() - Date.now();
       setPetSpace(result);
+      if (result) onPetSpaceRef.current?.(result);
     }
     catch (e) { if (load === petSpaceLoad.current) { setPetSpaceError(true); showError('Không tải được trạng thái đi dạo', e); } }
   }, []);
@@ -101,7 +107,7 @@ export function HomeTab({ user, dashboard, onNavigate, onOpenProfile, onOpenStre
   // Keep the frame in sync when the last quest is completed from another tab or
   // when an initial request fails. The backend remains the source of truth.
   useEffect(() => {
-    if (petSpace && petSpace.status !== 'locked' && petSpace.status !== 'ready') return;
+    if (petSpace && petSpace.status !== 'locked' && petSpace.status !== 'ready' && petSpace.status !== 'waiting_hatch') return;
     const timer = setInterval(() => { void loadPetSpace(); }, 10000);
     return () => clearInterval(timer);
   }, [petSpace?.status, loadPetSpace]);
@@ -198,11 +204,18 @@ export function HomeTab({ user, dashboard, onNavigate, onOpenProfile, onOpenStre
         {!petSpace ? <View style={styles.petSpaceLoading}>{petSpaceError
           ? <Pressable onPress={() => { void loadPetSpace(); }} accessibilityRole="button" style={styles.petRetry}><Ionicons name="refresh" size={16} color={t.accent} /><Text style={styles.petRetryText}>Tải lại khung Pet</Text></Pressable>
           : <><ActivityIndicator color={pet.element.color} /><Text style={styles.petLoadingText}>Đang tìm Pet của bạn…</Text></>}</View> :
+        hatchShown ? <>
+          <PetEvolutionProgress pet={pet.id} currentPetLevel={hatch!.level!} totalExp={user.xp} hatching={hatch!.phase === 'hatching'} onHatched={hatch!.onPlayed} />
+          {petSpace.status === 'waiting_hatch' ? <HatchNote text="Pet sẽ đi khám phá sau khi nở xong" /> : null}
+        </> :
         petSpace.status === 'walking' ? <WalkScene pet={pet.id} level={user.level} color={pet.element.color}
-          seconds={petSpace.seconds_left} walkMinutes={petSpace.walk_minutes} returnAt={petSpace.return_at} /> :
+          seconds={petSpace.seconds_left} walkMinutes={petSpace.walk_minutes} returnAt={petSpace.return_at} hatchNext={!!hatch?.waitingReturn} /> :
           petSpace.status === 'returned'
             ? <WalkReturnedScene pet={pet.id} name={petName} level={user.level} onOpenGifts={onOpenPetGifts ?? (async () => onPetReturned?.())} />
-            : <PetEvolutionProgress pet={pet.id} currentPetLevel={user.level} totalExp={user.xp} hatching={petHatch.hatching} onHatched={petHatch.done} />}
+            : <>
+              <PetEvolutionProgress pet={pet.id} currentPetLevel={user.level} totalExp={user.xp} />
+              {petSpace.status === 'waiting_hatch' ? <HatchNote text="Pet sẽ đi khám phá sau khi nở xong" /> : null}
+            </>}
       </LinearGradient>
 
       <View style={styles.stats}>
@@ -277,7 +290,14 @@ function useWalkEntrance() {
   return opacity;
 }
 
-function WalkScene({ pet, level, color, seconds, walkMinutes, returnAt }: { pet: string; level: number; color: string; seconds: number; walkMinutes: number; returnAt?: string | null }) {
+function HatchNote({ text }: { text: string }) {
+  return <View style={styles.hatchNote} accessibilityLiveRegion="polite">
+    <Ionicons name="egg-outline" size={15} color={t.accent} /><Text style={styles.hatchNoteText}>{text}</Text>
+  </View>;
+}
+
+/** `hatchNext`: the egg got its EXP during the walk; it keeps its shape and hatches once the pet is back. */
+function WalkScene({ pet, level, color, seconds, walkMinutes, returnAt, hatchNext }: { pet: string; level: number; color: string; seconds: number; walkMinutes: number; returnAt?: string | null; hatchNext: boolean }) {
   const opacity = useWalkEntrance();
   const total = Math.max(1, walkMinutes * 60);
   const fraction = Math.max(0, Math.min(1, 1 - seconds / total));
@@ -289,6 +309,7 @@ function WalkScene({ pet, level, color, seconds, walkMinutes, returnAt }: { pet:
     <View style={styles.walkTimerRow}><Ionicons name="time-outline" size={16} color={color} /><Text style={[styles.walkTimer, { color }]}>{formatRemaining(seconds)}</Text><Text style={styles.walkArrival}>{arrival ? `Về lúc ${arrival}` : 'Thời gian trở về'}</Text></View>
     <ProgressBar value={fraction} color={color} />
     <View style={styles.walkGiftLine}><Ionicons name="gift-outline" size={15} color="#966718" /><Text style={styles.mysteryRewardText}>Pet sẽ mang quà về cho bạn khi trở về</Text></View>
+    {hatchNext ? <HatchNote text="Trứng đã đủ EXP · sẽ nở khi Pet trở về" /> : null}
   </Animated.View>;
 }
 
@@ -373,6 +394,9 @@ const styles = StyleSheet.create({
   walkTimerRow: { minHeight: 26, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 5 },
   walkTimer: { fontSize: 17, fontWeight: '900', fontVariant: ['tabular-nums'] }, walkArrival: { color: t.muted, fontSize: 10, fontWeight: '700', marginLeft: 3 },
   walkGiftLine: { flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 6 },
+  hatchNote: { alignSelf: 'center', flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 8, backgroundColor: '#FFFFFFCC',
+    borderRadius: 999, paddingHorizontal: 12, paddingVertical: 6 },
+  hatchNoteText: { color: t.accent, fontSize: 11, fontWeight: '800' },
   returnedContent: { alignItems: 'center', paddingHorizontal: 8, paddingBottom: 6 },
   returnedPet: { height: 110, justifyContent: 'center' },
   petHeader: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 12, paddingTop: 2, marginBottom: 10 },

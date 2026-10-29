@@ -74,7 +74,7 @@ def test_walk_returns_with_a_find_once_a_day(client, auth, db):
     collected = client.post("/api/pet/walk/collect", headers=auth).json()
     assert collected["found"]["id"] in REWARD_ITEMS
     assert collected["status"] == "rested" and collected["last_find"] == collected["found"]
-    assert collected["inventory"] == [{**collected["found"], "quantity": 1}]
+    assert [(i["id"], i["owned"]) for i in collected["inventory"]] == [(collected["found"]["id"], 1)]
 
     assert client.post("/api/pet/walk/collect", headers=auth).json()["code"] == "nothing_to_collect"
     assert client.post("/api/pet/walk", headers=auth).json()["code"] == "already_walked"

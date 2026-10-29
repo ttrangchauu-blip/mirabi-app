@@ -1,18 +1,20 @@
 import React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
 import { AppState, StyleSheet } from 'react-native';
 import { setSession } from '../src/api/client';
 import type { LearningSession, Turn } from '../src/learning/types';
 import { LearningScreen } from '../src/screens/learning/LearningScreen';
 import { pressKey } from '../src/screens/learning/games/NumberPad';
+import { answerKey } from '../src/learning/answerKey';
 import { ConfirmProvider } from '../src/ui/ConfirmDialog';
 import { ToastProvider } from '../src/ui/Toast';
 import { deferred, mockServer, networkDown, USER } from '../test/mockServer';
 
 const ref = (id: number, code: string, name: string) => ({ id, code, name });
 const turn = (over: Partial<Turn> = {}): Turn => ({
-  turn_id: 'turn-0001-abcdef', position: 0, kind: 'vocab_typing', skill_label: 'Từ vựng', prompt: { meaning_vi: 'con mèo', context_vi: null, letters: [3] },
+  turn_id: 'turn-0001-abcdef', position: 0, kind: 'vocab_typing', skill_label: 'Từ vựng',
+  prompt: { meaning_vi: 'con mèo', context_vi: null, letters: [3], answer_keys: [answerKey('turn-0001-abcdef', 'cat')] },
   hints_shown: [], hints_total: 2, attempts: 0, wrong_attempts: 0, practice: false, travel_seconds: 0, ...over,
 });
 const session = (over: Partial<LearningSession> = {}): LearningSession => ({
@@ -141,9 +143,11 @@ test('choose a game, play right away, and see the reward the server confirmed', 
   expect(top()).toBe(waiting);
   expect(server.callsTo('POST /api/learning/sessions/5/miss')).toHaveLength(0);
 
-  expect(screen.getByRole('button', { name: 'Bắn' })).toBeDisabled(); // empty input is never sent
+  expect(screen.queryByRole('button', { name: 'Bắn' })).toBeNull(); // no "Bắn": a right answer is shot as it is typed
+  fireEvent.changeText(screen.getByLabelText('Đáp án tiếng Anh'), 'Ca');
+  await seconds(2);
+  expect(server.callsTo('POST /api/learning/sessions/5/answer')).toHaveLength(0); // not finished: nothing is sent
   fireEvent.changeText(screen.getByLabelText('Đáp án tiếng Anh'), '  Cat ');
-  fireEvent.press(screen.getByRole('button', { name: 'Bắn' }));
 
   expect(await screen.findByText('Hoàn thành chặng!')).toBeTruthy();
   expect(screen.getByText('+10 EXP cho pet của bạn')).toBeTruthy();
@@ -163,8 +167,7 @@ test('a lost connection pauses the game, keeps the typed answer and retries with
       body: { result: { ...correct, correct: false, outcome: null, resolved: false, retry_allowed: true }, session: session({ version: 2 }), replayed: false } }),
   });
   await startGame();
-  fireEvent.changeText(screen.getByLabelText('Đáp án tiếng Anh'), 'dgo');
-  fireEvent.press(screen.getByRole('button', { name: 'Bắn' }));
+  fireEvent.changeText(screen.getByLabelText('Đáp án tiếng Anh'), 'dgo'); // every box filled, not right: sent after a short pause
   expect(await screen.findByText(/Mất kết nối/)).toBeTruthy();
   expect(screen.getByLabelText('Đáp án tiếng Anh').props.value).toBe('dgo');
 
@@ -371,7 +374,8 @@ test('Math: closing the lesson before playing drops the unplayed session', async
 // --- Anh → Việt: Bắn từ tiếng Anh ---------------------------------------------------------------------------------------
 
 const word = (id: string, en: string, position: number, travel = 24): Turn =>
-  turn({ turn_id: id, position, kind: 'word_spelling', skill_label: 'Gõ từ', prompt: { word: en, letters: [en.length] }, travel_seconds: travel });
+  turn({ turn_id: id, position, kind: 'word_spelling', skill_label: 'Gõ từ', prompt: { word: en, letters: [en.length], answer_keys: [answerKey(id, en)] },
+    travel_seconds: travel });
 const shooter = (over: Partial<LearningSession> = {}) => session({ game: 'word_shooter', variant: 'word_shooter',
   lesson: ref(7, 'en.vocab.mix', 'Từ vựng tổng hợp'), ...over });
 const hit = (id: string, en: string, vi: string, phonetic: string) => ({ ...correct, turn_id: id, correct_answer: en, word: { en, vi, phonetic } });
@@ -398,17 +402,68 @@ test('Anh → Việt: the English word falls, retyping it breaks it and shows it
   expect(screen.getByLabelText('Từ đang nhắm: cat')).toBeTruthy();
   expect(screen.queryByText('con mèo')).toBeNull(); // the meaning only comes with the hit
   expect(screen.queryByRole('button', { name: 'Xem đáp án' })).toBeNull(); // the word to type is already on screen
-  fireEvent.changeText(screen.getByLabelText('Đáp án tiếng Anh'), 'CAT ');
-  fireEvent(screen.getByLabelText('Đáp án tiếng Anh'), 'submitEditing'); // Enter shoots too
+  const speak = require('expo-speech').speak as jest.Mock;
+  speak.mockClear();
+  fireEvent.changeText(screen.getByLabelText('Đáp án tiếng Anh'), 'CAT '); // right: shot at once, no Enter
+  // Shoot → hit → break → meaning: right after the answer the word is still there, held for the pet's bullet.
+  expect(await screen.findByText('Chính xác!')).toBeTruthy();
+  expect(screen.getByTestId('shot-turn-0001-abcdef', { includeHiddenElements: true })).toBeTruthy();
+  expect(screen.queryByText('con mèo')).toBeNull();
+  expect(speak).not.toHaveBeenCalled();
   expect(await screen.findByText('con mèo')).toBeTruthy(); // where the word broke
+  expect(screen.queryByTestId('shot-turn-0001-abcdef', { includeHiddenElements: true })).toBeNull();
   expect(screen.getByText('cat /kæt/')).toBeTruthy();
-  expect(require('expo-speech').speak).toHaveBeenCalledWith('cat', expect.anything());
+  expect(speak).toHaveBeenCalledWith('cat', expect.anything());
   expect(server.callsTo('POST /api/learning/sessions/5/answer')[0].body).toMatchObject({ turn_id: 'turn-0001-abcdef', answer: 'CAT ' });
   // The next word can be typed and shot while the meaning is still fading out.
   expect(screen.getByLabelText('Từ đang nhắm: dog')).toBeTruthy();
   expect(screen.getByLabelText('Đáp án tiếng Anh').props.editable).not.toBe(false);
   await seconds(3);
   expect(screen.queryByText('con mèo')).toBeNull();
+  // The next word is aimed in falling order: typing it answers it, without tapping it first.
+  fireEvent.changeText(screen.getByLabelText('Đáp án tiếng Anh'), 'dog');
+  await waitFor(() => expect(server.callsTo('POST /api/learning/sessions/5/answer')).toHaveLength(2));
+  expect(server.callsTo('POST /api/learning/sessions/5/answer')[1].body).toMatchObject({ turn_id: 'turn-0002-abcdef', answer: 'dog' });
+});
+
+test('falling words: the card above the field and the help row under it keep their place while no word is falling', async () => {
+  const cat = { ...word('turn-0001-abcdef', 'cat', 0), hints_shown: ['Từ có 3 chữ cái'] };
+  await startShooter([cat], {}, {
+    'POST /api/learning/sessions/5/answer': { status: 200, body: { result: hit('turn-0001-abcdef', 'cat', 'con mèo', '/kæt/'),
+      session: shooter({ open_turns: [], resolved_count: 1, version: 3 }), replayed: false } },
+  });
+  // A hint takes the instruction's line in the card (no extra row that would push the field down).
+  expect(screen.getByText('💡 Từ có 3 chữ cái')).toBeTruthy();
+  expect(screen.queryByText('Gõ lại đúng từ này: đúng là pet tự bắn')).toBeNull();
+  const area = (id: string) => StyleSheet.flatten(screen.getByTestId(id).props.style).minHeight;
+  fireEvent(screen.getByTestId('game-prompt-area'), 'layout', { nativeEvent: { layout: { x: 0, y: 0, width: 390, height: 72 } } });
+  fireEvent(screen.getByTestId('game-help-area'), 'layout', { nativeEvent: { layout: { x: 0, y: 0, width: 390, height: 54 } } });
+  fireEvent.changeText(screen.getByLabelText('Đáp án tiếng Anh'), 'cat');
+  expect(await screen.findByText('con mèo')).toBeTruthy();
+  // No word for a moment (the next one is on its way): the card's place and "Gợi ý" stay, nothing moves the field.
+  expect(screen.queryByText('Chuẩn bị lượt tiếp theo…')).toBeNull();
+  expect(screen.getByRole('button', { name: 'Gợi ý' })).toBeDisabled();
+  fireEvent(screen.getByTestId('game-prompt-area'), 'layout', { nativeEvent: { layout: { x: 0, y: 0, width: 390, height: 60 } } });
+  expect(area('game-prompt-area')).toBe(72); // never shorter than it has been
+  expect(area('game-help-area')).toBe(54);
+});
+
+test('the answer boxes ride in the aimed word frame; tapping another word answers it, keeping the text and the keyboard', async () => {
+  const [cat, dog] = [word('turn-0001-abcdef', 'cat', 0), word('turn-0002-abcdef', 'dog', 1)];
+  await startShooter([cat, dog]);
+  expect(screen.queryByRole('button', { name: 'Bắn' })).toBeNull(); // nothing fixed at the bottom, no button to press
+  const field = screen.getByLabelText('Đáp án tiếng Anh');
+  const top = () => StyleSheet.flatten(screen.getByLabelText('Đáp án tiếng Anh').props.style).top as number;
+  const startTop = top();
+  fireEvent.changeText(field, 'do');
+  expect(within(screen.getByLabelText('Từ đang nhắm: cat')).getByText('d')).toBeTruthy(); // in the word's own frame
+  await seconds(3);
+  expect(top()).toBeGreaterThan(startTop); // the answer moves down with its word
+  expect(screen.getByLabelText('Đáp án tiếng Anh')).toBe(field); // the same field: never remounted, so never refocused
+  fireEvent.press(screen.getByLabelText('Từ: dog')); // tap the other word (its boxes are in its frame)
+  expect(within(screen.getByLabelText('Từ đang nhắm: dog')).getByText('d')).toBeTruthy();
+  expect(screen.getByLabelText('Đáp án tiếng Anh')).toBe(field);
+  expect(field.props.value).toBe('do'); // what was typed is kept
 });
 
 test('Anh → Việt, a stage started in Thử thách before: a shot hits the word the server matched, and a word reaching the ground shows its pair', async () => {
@@ -429,13 +484,37 @@ test('Anh → Việt, a stage started in Thử thách before: a shot hits the wo
   expect(screen.getByLabelText('Từ đang nhắm: cat')).toBeTruthy();
   const top = (label: string) => StyleSheet.flatten(screen.getByLabelText(label).props.style).top as number;
   expect(top('Từ đang nhắm: cat')).toBeGreaterThan(top('Từ: dog'));
-  fireEvent.changeText(screen.getByLabelText('Đáp án tiếng Anh'), 'dog');
-  fireEvent.press(screen.getByRole('button', { name: 'Bắn' }));
+  fireEvent.changeText(screen.getByLabelText('Đáp án tiếng Anh'), 'dog'); // right for the other word: shot at once
   expect(await screen.findByText('con chó')).toBeTruthy();
   expect(server.callsTo('POST /api/learning/sessions/5/answer')[0].body).toMatchObject({ turn_id: 'turn-0001-abcdef', answer: 'dog' });
   await seconds(13); // "cat" keeps falling from half way and reaches the ground
   await waitFor(() => expect(missed).toBe(true));
   expect(await screen.findByText('Từ chạm đất! cat — con mèo · −1 tim')).toBeTruthy();
+});
+
+test('Việt → Anh: a right answer breaks the meteor with the pet\'s shot and shows the pair to remember; a wrong one shoots nothing', async () => {
+  const next = turn({ turn_id: 'turn-0002-abcdef', position: 1, prompt: { meaning_vi: 'con chó', context_vi: null, letters: [3] } });
+  let answers = 0;
+  const server = mockServer({ ...startRoutes,
+    'POST /api/learning/sessions/5/answer': () => (++answers === 1
+      ? { status: 200, body: { result: { ...correct, correct: false, outcome: null, resolved: false, retry_allowed: true }, session: session({ version: 2 }), replayed: false } }
+      : { status: 200, body: { result: { ...correct, correct_answer: 'cat', word: { en: 'cat', vi: 'con mèo', phonetic: '/kæt/' } },
+        session: session({ open_turns: [next], resolved_count: 1, version: 3 }), replayed: false } }),
+  });
+  await startGame();
+  fireEvent.changeText(screen.getByLabelText('Đáp án tiếng Anh'), 'cap');
+  expect(server.callsTo('POST /api/learning/sessions/5/answer')).toHaveLength(0); // not right: no shot at once
+  expect(await screen.findByText('Chưa đúng, sửa lại nhé!')).toBeTruthy(); // every box filled: counted wrong after a pause
+  await seconds(2);
+  expect(server.callsTo('POST /api/learning/sessions/5/answer')).toHaveLength(1); // the same text is never sent twice
+  expect(screen.queryAllByTestId('bullet', { includeHiddenElements: true })).toHaveLength(0); // no shot, the meteor stays
+  expect(screen.getByLabelText('Thiên thạch đang nhắm: con mèo')).toBeTruthy();
+  expect(screen.getByLabelText('Đáp án tiếng Anh').props.value).toBe('cap');
+
+  fireEvent.changeText(screen.getByLabelText('Đáp án tiếng Anh'), 'cat');
+  expect(await screen.findByText('cat — con mèo')).toBeTruthy();
+  expect(server.callsTo('POST /api/learning/sessions/5/answer')).toHaveLength(2);
+  expect(screen.getByLabelText('Thiên thạch đang nhắm: con chó')).toBeTruthy(); // the next one is aimed meanwhile
 });
 
 test('number keys build integers only and toggle the sign', () => {
@@ -497,7 +576,7 @@ test('first time: the game\'s own guide comes first, nothing starts behind it, a
   expect(server.callsTo('POST /api/learning/play')).toHaveLength(0);
   fireEvent.press(screen.getByRole('button', { name: 'Tiếp' }));
   expect(screen.getByText('Gõ từ tiếng Anh')).toBeTruthy(); // page 2: the controls
-  expect(screen.getByLabelText('Minh họa: Gõ “cat” rồi nhấn Bắn: hiện “cat /kæt/”')).toBeTruthy();
+  expect(screen.getByLabelText('Minh họa: Gõ “cat” rồi nhấn Bắn: hiện “cat — con mèo”')).toBeTruthy();
   fireEvent.press(screen.getByRole('button', { name: 'Trước' }));
   readGuide();
   expect(screen.getByText('Khi nào xong chặng?')).toBeTruthy(); // page 3: how it ends
@@ -623,7 +702,6 @@ test('"Chơi lại" counts down again', async () => {
   });
   await startGame();
   fireEvent.changeText(screen.getByLabelText('Đáp án tiếng Anh'), 'cat');
-  fireEvent.press(screen.getByRole('button', { name: 'Bắn' }));
   fireEvent.press(await screen.findByRole('button', { name: 'Chơi lại' }));
   await waitFor(() => expect(server.callsTo('POST /api/learning/play')).toHaveLength(2));
   expect(await screen.findByText('3')).toBeTruthy();

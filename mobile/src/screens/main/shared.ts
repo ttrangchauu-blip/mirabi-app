@@ -26,7 +26,7 @@ export function resolveQuestId(quest: Quest, quests: Quest[]) {
   return quest.id && quest.id !== 'undefined' ? quest.id : DAILY_QUEST_IDS[quests.indexOf(quest)];
 }
 /** Companion walk, see backend/app/companion.py: locked -> ready -> walking -> returned -> rested (until tomorrow). */
-export type WalkStatus = 'locked' | 'ready' | 'walking' | 'returned' | 'rested';
+export type WalkStatus = 'locked' | 'ready' | 'waiting_hatch' | 'walking' | 'returned' | 'rested';
 export type Dashboard = { study?: { total_minutes: number; today_minutes: number; today_sessions: number; current_streak: number; longest_streak: number; daily_goal_minutes: number; goal_progress: number }; daily_quests?: Quest[]; scheduled_tasks?: ScheduledTask[]; pet_walk?: WalkStatus; unread_notifications?: number; pending_friend_requests?: number };
 
 export const FOCUS_SECONDS = 25 * 60;

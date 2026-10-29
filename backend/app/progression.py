@@ -8,6 +8,7 @@ from .config import settings
 from .models import ExpEvent, PetEvolution, StudySession, User, as_utc, utcnow
 
 EVOLUTION_THRESHOLDS = (0, 300, 800, 1500, 2400, 3500, 5000)
+HATCH_EXP = EVOLUTION_THRESHOLDS[1]
 CUSTOM_TASK_EXP = 5
 SYSTEM_TASK_EXP = 10
 STUDY_BLOCK_SECONDS = 5 * 60
@@ -18,6 +19,45 @@ def level_for_exp(total_xp: int) -> int:
     return max(level for level, threshold in enumerate(EVOLUTION_THRESHOLDS) if total_xp >= threshold)
 
 
+def stage_for(progress: PetEvolution) -> int:
+    """The pet's level: an egg stays Lv.0 until its hatch is confirmed, however much EXP it has."""
+    return level_for_exp(progress.total_xp) if progress.hatched_at is not None else 0
+
+
+def awaiting_hatch(progress: PetEvolution | None) -> bool:
+    """The egg has the EXP to hatch, but hasn't hatched yet (companion.complete_hatch)."""
+    return progress is not None and progress.hatched_at is None and progress.total_xp >= HATCH_EXP
+
+
+def new_progress(user: User, pet_id: str, initial_xp: int) -> PetEvolution:
+    """A pet's first progress row. EXP carried over from before per-pet progress existed was already shown as a
+    hatched pet, so a pet that starts past Lv.0 counts as hatched."""
+    level = level_for_exp(initial_xp)
+    return PetEvolution(user_id=user.id, pet_id=pet_id, total_xp=initial_xp, level=level,
+                        hatched_at=utcnow() if level >= 1 else None)
+
+
+def record_level_ups(db: Session, user: User, previous_level: int, level: int, at: datetime) -> None:
+    from .memories import record_event
+    for reached in range(previous_level + 1, level + 1):
+        event = "pet_hatched" if reached == 1 else "pet_evolved"
+        title = None if reached == 1 else f"{user.pet_name or 'Pet'} đạt cấp {reached}"
+        record_event(db, user, event, f"{'hatch' if reached == 1 else 'evolution'}:{user.pet}:{reached}",
+                     at=at, level=reached, title=title)
+
+
+def hatch(user: User, db: Session, progress: PetEvolution, at: datetime) -> None:
+    """The egg is out: its level catches up with its EXP (gifts earned while it waited included). The caller has
+    claimed `hatched_at` and commits."""
+    previous_level = progress.level
+    progress.hatched_at = at
+    progress.level = stage_for(progress)
+    progress.updated_at = at
+    user.xp = progress.total_xp
+    user.level = progress.level
+    record_level_ups(db, user, previous_level, progress.level, at)
+
+
 def active_pet_progress(user: User, db: Session) -> PetEvolution:
     progress = db.scalar(select(PetEvolution).where(
         PetEvolution.user_id == user.id, PetEvolution.pet_id == user.pet,
@@ -25,10 +65,7 @@ def active_pet_progress(user: User, db: Session) -> PetEvolution:
     if progress is None:
         # Preserve earned XP for accounts from before pet-specific progress existed.
         initial_xp = max(0, user.xp) if user.pet_name is not None else 0
-        progress = PetEvolution(
-            user_id=user.id, pet_id=user.pet, total_xp=initial_xp,
-            level=level_for_exp(initial_xp),
-        )
+        progress = new_progress(user, user.pet, initial_xp)
         db.add(progress)
         db.flush()
     user.xp = progress.total_xp
@@ -49,10 +86,7 @@ def activate_pet(user: User, pet_id: str, db: Session) -> PetEvolution:
     if progress is None:
         # If this is an already-adopted legacy pet, migrate its existing XP once.
         initial_xp = max(0, user.xp) if current_name is None or current_pet == pet_id else 0
-        progress = PetEvolution(
-            user_id=user.id, pet_id=pet_id, total_xp=initial_xp,
-            level=level_for_exp(initial_xp),
-        )
+        progress = new_progress(user, pet_id, initial_xp)
         db.add(progress)
         db.flush()
     user.xp = progress.total_xp
@@ -108,16 +142,12 @@ def award_exp(
         db.flush()
         db.refresh(progress)
         previous_level = progress.level
-        progress.level = level_for_exp(progress.total_xp)
+        # Reaching the hatching EXP doesn't hatch the egg: it waits ("chờ nở") for complete_hatch, so it never
+        # hatches while the pet is out on its walk, nor without the app showing it.
+        progress.level = stage_for(progress)
         user.xp = progress.total_xp
         user.level = progress.level
-        if progress.level > previous_level:
-            from .memories import record_event
-            for reached in range(previous_level + 1, progress.level + 1):
-                event = "pet_hatched" if reached == 1 else "pet_evolved"
-                title = None if reached == 1 else f"{user.pet_name or 'Pet'} đạt cấp {reached}"
-                record_event(db, user, event, f"{'hatch' if reached == 1 else 'evolution'}:{user.pet}:{reached}",
-                             at=now, level=reached, title=title)
+        record_level_ups(db, user, previous_level, progress.level, now)
     db.add(ExpEvent(
         user_id=user.id,
         pet_id=user.pet,

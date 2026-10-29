@@ -28,13 +28,28 @@ lifecycle, shared database, Study Streak and EXP rules remain unchanged.
 - Statistics display only today's minutes, completed sessions and Study Streak
   on the main surface. Charts, goals and habit analysis remain in the detail panel.
 
+## Decorated room (2026-10-29)
+
+The room is now the user's own Phòng tập trung, decorated like the personal room with the same catalog and rules, on a
+640 × 440 canvas (see [personal-room.md](personal-room.md#decorating-both-rooms)). `FocusRoom` draws the saved layout
+with `RoomScene` (the default room until it loads, the cached one offline); the pet sits at its desk, studying, or
+resting with its still artwork on a break. The status line and "Trang trí" (a round palette icon, labelled "Trang trí"
+for screen readers) sit under the drawing; it opens a
+full-screen decorating view (the storage by group, walls and floors, undo, cancel and save), which shows its own messages since
+the app's toasts would be under a native modal. The paragraphs below describe the earlier fixed drawing.
+
 ## Artwork and accessibility
 
 `FocusRoom` draws a native SVG room with an arched window, twilight landscape,
 wooden desk, lamp, books, greenery and soft lighting. It reuses `PetArt` and its
-existing evolution assets without changing species or colors. A small writing
-motion and pet interaction accompany study; breaks use a relaxed pose and a
-closed book. Walking pets leave an empty place at the desk.
+existing evolution assets without changing species or colors. The pet sits on
+the chair behind the desk: the desk's front edge, legs and the books, mug and
+lamp on it are a second SVG drawn over the pet, so its study strip's book lies
+on the desk top. Its size follows the room's width (180 of the 800 canvas
+units), so phone and desktop show the same picture. A small writing motion and
+pet interaction accompany study; breaks use a relaxed pose and a closed book,
+with the standing artwork set lower so the desk hides its legs. Walking pets
+leave an empty place at the desk.
 
 The room is memoized independently of countdown ticks. Animations use transforms
 with native drivers and stop with reduced motion. All controls use Ionicons and

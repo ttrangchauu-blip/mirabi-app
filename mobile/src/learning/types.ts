@@ -39,6 +39,7 @@ export type Prompt = {
   meaning_vi?: string; context_vi?: string | null; part_of_speech?: string | null; // vocab_typing
   letters?: number[]; // vocab_typing, word_spelling: letters per word of the answer
   word?: string; // word_spelling: the English word to type (its meaning only comes with the hit)
+  answer_keys?: string[]; // vocab_typing, word_spelling: keys of the accepted answers (learning/answerKey.ts), to shoot when right
   level?: string; // vocabulary bank: CEFR level of the word
   sentence?: string; options?: Option[]; // gate_choice, compare
   tokens?: Option[]; // bridge_order: pieces with their own ids (the same word twice has two ids)

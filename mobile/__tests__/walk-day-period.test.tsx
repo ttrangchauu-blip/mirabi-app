@@ -1,7 +1,6 @@
 import React from 'react';
 import { AccessibilityInfo, AppState } from 'react-native';
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import { msUntilNextPeriod, periodAt } from '../src/components/useDayPeriod';
 import { WalkLandscape } from '../src/screens/main/WalkLandscape';
 
@@ -96,22 +95,6 @@ describe('WalkLandscape', () => {
     deviceZone('Asia/Tokyo'); // 17:30 → chiều, changed in Settings while the app was in the background
     await act(async () => { appStateListener?.('active'); });
     expect(screen.getByTestId('walk-scene-afternoon')).toBeTruthy();
-    expect(mockPetMounts).toHaveBeenCalledTimes(1);
-  });
-
-  test('the new sky fades in over the old one, then the old layer is dropped', async () => {
-    jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(false);
-    clock = at(17, 59, 59);
-    renderScene();
-    await act(async () => {});
-    expect(screen.UNSAFE_getAllByType(LinearGradient)).toHaveLength(1);
-
-    clock = at(18, 0, 1);
-    await act(async () => { jest.advanceTimersByTime(1800); }); // the change at 18:00 (+0.5 s), 300 ms into the fade
-    expect(screen.getByTestId('walk-scene-night')).toBeTruthy();
-    expect(screen.UNSAFE_getAllByType(LinearGradient)).toHaveLength(2); // chiều underneath, tối fading in on top
-    await act(async () => { jest.advanceTimersByTime(1500); });
-    expect(screen.UNSAFE_getAllByType(LinearGradient)).toHaveLength(1);
     expect(mockPetMounts).toHaveBeenCalledTimes(1);
   });
 });

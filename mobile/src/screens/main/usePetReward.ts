@@ -2,9 +2,11 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { AppState } from 'react-native';
 import { request } from './shared';
 
-export type PetRewardItem = { id: string; name: string; emoji: string; rarity: string; kind: string; quantity: number };
+export type PetRewardItem = { id: string; name: string; emoji: string; rarity: string; kind: string; quantity: number;
+  /** From the item catalog (walks since it exists). */
+  variant?: string; art?: string | null; rarity_label?: string; slot?: 'main' | 'bonus'; is_new?: boolean };
 /** A finished walk whose rewards the backend has already granted; only the popup is still waiting. */
-export type PendingPetReward = { walk_id: number; exp: number; items: PetRewardItem[] };
+export type PendingPetReward = { walk_id: number; exp: number; items: PetRewardItem[]; location?: { id: string; name: string } | null };
 
 const isCount = (n: unknown): n is number => typeof n === 'number' && Number.isInteger(n) && n >= 0;
 
@@ -14,12 +16,14 @@ export function pendingRewardFrom(space: any): PendingPetReward | null {
   if (!reward || !Number.isInteger(reward.walk_id) || !isCount(reward.exp) || !Array.isArray(reward.items)) return null;
   const items = reward.items.filter((item: any): item is PetRewardItem => !!item && typeof item.id === 'string'
     && typeof item.name === 'string' && item.name.length > 0 && isCount(item.quantity) && item.quantity > 0);
-  return { walk_id: reward.walk_id, exp: reward.exp, items };
+  const location = reward.location && typeof reward.location.name === 'string' ? reward.location : null;
+  return { walk_id: reward.walk_id, exp: reward.exp, items, location };
 }
 
 /**
  * The pet's gift popup. The backend is the only source: it is asked when the app opens, when it comes back to the
- * foreground and when a walk is due to end. "Nhận quà" only confirms the popup; the rewards were granted already.
+ * foreground and when a walk is due to end. Closing it ("Đóng", "Xem kho đồ") only confirms the popup; the rewards
+ * were granted already.
  */
 export function usePetReward(onConfirmed: () => void) {
   const [pending, setPending] = useState<PendingPetReward | null>(null);
@@ -62,24 +66,25 @@ export function usePetReward(onConfirmed: () => void) {
     return () => clearTimeout(timer);
   }, [returnAt, check]);
 
-  const confirmed = useCallback(() => {
+  const confirmed = useCallback((then?: () => void) => {
     checkId.current += 1;
-    setPending(null); setError(null); setVersion((v) => v + 1); onConfirmed();
+    setPending(null); setError(null); setVersion((v) => v + 1); onConfirmed(); then?.();
   }, [onConfirmed]);
 
-  const confirm = useCallback(async () => {
+  /** Confirms the popup; `then` runs once it is closed (e.g. opening the inventory). */
+  const confirm = useCallback(async (then?: () => void) => {
     const current = pending;
     if (!current || busy.current) return;
     busy.current = true;
     setConfirming(true); setError(null);
     try {
       await request(`/api/pet/walks/${current.walk_id}/acknowledge`, { method: 'POST' });
-      if (mounted.current) confirmed();
+      if (mounted.current) confirmed(then);
     } catch {
       // The request may have gone through anyway, or another device confirmed it: ask the backend.
       const latest = await check();
       if (!mounted.current) return;
-      if (latest !== undefined && latest?.walk_id !== current.walk_id) confirmed();
+      if (latest !== undefined && latest?.walk_id !== current.walk_id) confirmed(then);
       else setError('Chưa kết nối được. Quà vẫn được giữ an toàn, bạn hãy thử lại nhé.');
     } finally {
       busy.current = false;

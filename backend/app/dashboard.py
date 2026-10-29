@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from . import tasks
-from .companion import daily_quests, latest_walk, settle_returned_walks, today_goals, walk_status
+from .companion import current_walk_status, daily_quests, latest_walk, settle_returned_walks
 from .db import get_db
 from .friends import incoming_request_count, online_friends
 from .models import User, utcnow
@@ -39,7 +39,7 @@ def dashboard(user: User = Depends(current_user), db: Session = Depends(get_db))
         },
         "daily_quests": quests,
         "scheduled_tasks": tasks.list_occurrences(user, today, today, db),
-        "pet_walk": walk_status(latest_walk(user, db), today_goals(user, db)),
+        "pet_walk": current_walk_status(user, db, latest_walk(user, db)),
         # Real friends who are online or studying and share their status (was placeholder data before Study Together).
         "online_friends": friends_online,
         # In-app inbox (friend requests, room invitations, visits, greetings), shown on the Home bell.
