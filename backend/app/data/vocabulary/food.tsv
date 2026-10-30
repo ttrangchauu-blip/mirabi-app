@@ -57,7 +57,7 @@ cake	cake	noun	1	food	bánh ngọt, bánh kem	bánh nướng từ bột, đườ
 soup	soup	noun	1	food	súp, canh	món ăn lỏng nấu từ rau, thịt hoặc cá	This chicken soup is very hot.	Món súp gà này rất nóng.		/suːp/	mirabi-ai-2026-10	active
 sugar	sugar	noun	1	food	đường (ăn)	chất ngọt cho vào đồ uống, món ăn	Do you take sugar in your coffee?	Bạn có cho đường vào cà phê không?		/ˈʃʊɡə/	mirabi-ai-2026-10	active
 salt	salt	noun	1	food	muối	gia vị màu trắng có vị mặn	Add a little salt to the soup.	Cho thêm một chút muối vào súp.		/sɔːlt/	mirabi-ai-2026-10	active
-noodles	noodles	noun	1	food	món sợi (mì, bún, phở)	món ăn dạng sợi làm từ bột mì hoặc bột gạo	Many Vietnamese people eat noodles for breakfast.	Nhiều người Việt Nam ăn các món sợi vào bữa sáng.	noodle	/ˈnuːdlz/	mirabi-ai-2026-10	active
+noodles	noodles	noun	1	food	món sợi (mì, bún, phở)	món ăn dạng sợi làm từ bột mì hoặc bột gạo	Many Vietnamese people eat noodles for breakfast.	Nhiều người Việt Nam ăn các món sợi vào bữa sáng.		/ˈnuːdlz/	mirabi-ai-2026-10	active
 sandwich	sandwich	noun	1	food	bánh mì kẹp	hai lát bánh mì kẹp thịt, trứng hoặc rau ở giữa	I made a cheese sandwich for lunch.	Tôi làm một chiếc bánh mì kẹp phô mai cho bữa trưa.		/ˈsænwɪtʃ/	mirabi-ai-2026-10	active
 candy	candy	noun	1	food	kẹo	đồ ngọt nhỏ làm từ đường, trẻ em rất thích	Don't eat too much candy before dinner.	Đừng ăn quá nhiều kẹo trước bữa tối.	sweets	/ˈkændi/	mirabi-ai-2026-10	active
 chocolate	chocolate	noun	1	food	sô-cô-la	đồ ngọt màu nâu làm từ hạt ca cao	She gave me a box of chocolates.	Cô ấy tặng tôi một hộp sô-cô-la.		/ˈtʃɒklət/	mirabi-ai-2026-10	active
@@ -73,7 +73,7 @@ cup	cup	noun	1	food	cái tách, cái cốc có quai	đồ nhỏ có quai dùng �
 plate	plate	noun	1	food	cái đĩa	đồ dẹt, tròn để đựng thức ăn khi ăn	Put the fish on a big plate.	Đặt con cá lên một cái đĩa lớn.		/pleɪt/	mirabi-ai-2026-10	active
 fork	fork	noun	1	food	cái nĩa, cái dĩa	dụng cụ có răng nhọn để xiên thức ăn	Children often eat with a spoon and a fork.	Trẻ em thường ăn bằng thìa và nĩa.		/fɔːk/	mirabi-ai-2026-10	active
 glass.drinking	glass	noun	1	food	cái ly, cốc thủy tinh	đồ trong suốt để uống nước, không có quai	She broke a glass in the kitchen.	Cô ấy làm vỡ một cái ly trong bếp.		/ɡlɑːs/	mirabi-ai-2026-10	active
-chopsticks	chopsticks	noun	1	food	đôi đũa	hai que dài dùng để gắp thức ăn	In Vietnam, we eat with chopsticks.	Ở Việt Nam, chúng tôi ăn bằng đũa.	chopstick	/ˈtʃɒpstɪks/	mirabi-ai-2026-10	active
+chopsticks	chopsticks	noun	1	food	đôi đũa	hai que dài dùng để gắp thức ăn	In Vietnam, we eat with chopsticks.	Ở Việt Nam, chúng tôi ăn bằng đũa.		/ˈtʃɒpstɪks/	mirabi-ai-2026-10	active
 sweet.taste	sweet	adjective	1	food	ngọt (vị)	vị của đường, mật ong	This mango is very sweet.	Quả xoài này rất ngọt.		/swiːt/	mirabi-ai-2026-10	active
 salty	salty	adjective	1	food	mặn	có nhiều muối, vị như nước biển	The soup is too salty.	Món canh mặn quá.		/ˈsɔːlti/	mirabi-ai-2026-10	active
 sour	sour	adjective	1	food	chua	vị như chanh, giấm	Green apples are a bit sour.	Táo xanh hơi chua.		/ˈsaʊə/	mirabi-ai-2026-10	active

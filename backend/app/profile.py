@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from .db import get_db
 from .errors import APIError
 from .models import User, utcnow
-from .schemas import AdoptPetInput, DailyTaskSelection, ProfilePatch, UserOut
+from .schemas import AdoptPetInput, DailyTaskSelection, ProfilePatch, StudyProfileInput, UserOut
 from .security import current_user
 from .progression import activate_pet
 
@@ -57,6 +57,16 @@ def update_profile(data: ProfilePatch, user: User = Depends(current_user), db: S
         activate_pet(user, data.pet, db)
     if data.pet_name is not None:
         user.pet_name = data.pet_name
+    db.commit()
+    db.refresh(user)
+    return user
+
+
+@router.put("/profile/study", response_model=UserOut)
+def update_study_profile(data: StudyProfileInput, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    """Age and confirmed school grade (Cài đặt, or Học tập for accounts created before registration asked for them)."""
+    user.age = data.age
+    user.school_grade = data.school_grade
     db.commit()
     db.refresh(user)
     return user

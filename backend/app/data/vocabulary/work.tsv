@@ -4,14 +4,14 @@ office	office	noun	1	work	văn phòng		My office is on the fifth floor.	Văn ph�
 doctor	doctor	noun	1	work	bác sĩ		The doctor checked my throat.	Bác sĩ đã khám họng cho tôi.		/ˈdɒktə/	mirabi-original	active
 farmer	farmer	noun	1	work	nông dân		The farmer grows rice and corn.	Người nông dân trồng lúa và ngô.		/ˈfɑːmə/	mirabi-original	active
 driver	driver	noun	1	work	tài xế, người lái xe		The bus driver is very friendly.	Bác tài xế xe buýt rất thân thiện.		/ˈdraɪvə/	mirabi-original	active
-police_officer	police officer	noun	1	work	cảnh sát		Ask the police officer for help.	Hãy nhờ chú cảnh sát giúp đỡ.	policeman|policewoman	/pəˈliːs ˈɒfɪsə/	mirabi-original	active
+police_officer	police officer	noun	1	work	cảnh sát	một người làm nghề cảnh sát	Ask the police officer for help.	Hãy nhờ chú cảnh sát giúp đỡ.	policeman|policewoman	/pəˈliːs ˈɒfɪsə/	mirabi-original	active
 boss	boss	noun	1	work	sếp		My boss is on holiday this week.	Tuần này sếp tôi đi nghỉ.		/bɒs/	mirabi-original	active
 bank.money	bank	noun	1	work	ngân hàng	nơi gửi và rút tiền	I need to go to the bank.	Tôi cần đến ngân hàng.		/bæŋk/	mirabi-original	active
 salary	salary	noun	2	work	tiền lương		He earns a good salary.	Anh ấy nhận mức lương khá.	wage|pay	/ˈsæləri/	mirabi-original	active
 meeting	meeting	noun	2	work	cuộc họp		The meeting starts at nine.	Cuộc họp bắt đầu lúc chín giờ.		/ˈmiːtɪŋ/	mirabi-original	active
 manager	manager	noun	2	work	người quản lý		The manager wants to see you.	Quản lý muốn gặp bạn.		/ˈmænɪdʒə/	mirabi-original	active
 colleague	colleague	noun	2	work	đồng nghiệp		My colleagues are very helpful.	Đồng nghiệp của tôi rất nhiệt tình.	co-worker|coworker	/ˈkɒliːɡ/	mirabi-original	active
-busy	busy	adjective	2	work	bận rộn		I'm too busy to go out today.	Hôm nay tôi bận quá không đi chơi được.		/ˈbɪzi/	mirabi-original	active
+busy	busy	adjective	2	work	bận rộn	nói về người có nhiều việc, không có thời gian rảnh	I'm too busy to go out today.	Hôm nay tôi bận quá không đi chơi được.		/ˈbɪzi/	mirabi-original	active
 customer	customer	noun	2	work	khách hàng		The shop has many customers.	Cửa hàng có nhiều khách.	client	/ˈkʌstəmə/	mirabi-original	active
 interview	interview	noun	3	work	buổi phỏng vấn		I have a job interview tomorrow.	Ngày mai tôi có buổi phỏng vấn xin việc.		/ˈɪntəvjuː/	mirabi-original	active
 deadline	deadline	noun	3	work	hạn chót		The deadline is next Monday.	Hạn chót là thứ Hai tuần sau.		/ˈdedlaɪn/	mirabi-original	active
@@ -87,8 +87,8 @@ complete	complete	verb	2	work	hoàn thành	làm xong hết một nhiệm vụ	I 
 sign.document	sign	verb	2	work	ký (tên)	viết chữ ký lên giấy tờ để xác nhận	Please sign the form here.	Vui lòng ký vào mẫu đơn ở đây.		/saɪn/	mirabi-ai-2026-10	active
 organise	organise	verb	2	work	tổ chức (sự kiện, cuộc họp)	lên kế hoạch và chuẩn bị cho một sự kiện, cuộc họp	Who is organising the office party?	Ai đang tổ chức bữa tiệc văn phòng vậy?	organize	/ˈɔːɡənaɪz/	mirabi-ai-2026-10	active
 photocopy	photocopy	verb	2	work	photo, sao chụp (tài liệu)	sao chụp giấy tờ bằng máy photocopy	Could you photocopy this page?	Bạn photo trang này giúp nhé?		/ˈfəʊtəʊkɒpi/	mirabi-ai-2026-10	active
-full-time.work	full-time	adjective	2	work	toàn thời gian	làm việc đủ giờ mỗi tuần, khoảng 40 giờ	She has a full-time job at a hospital.	Cô ấy có một công việc toàn thời gian ở bệnh viện.	fulltime	/ˌfʊlˈtaɪm/	mirabi-ai-2026-10	active
-part-time	part-time	adjective	2	work	bán thời gian	làm việc ít giờ hơn mức thông thường	He has a part-time job at a café.	Anh ấy làm bán thời gian ở một quán cà phê.	parttime	/ˌpɑːtˈtaɪm/	mirabi-ai-2026-10	active
+full-time.work	full-time	adjective	2	work	toàn thời gian	làm việc đủ giờ mỗi tuần, khoảng 40 giờ	She has a full-time job at a hospital.	Cô ấy có một công việc toàn thời gian ở bệnh viện.		/ˌfʊlˈtaɪm/	mirabi-ai-2026-10	active
+part-time	part-time	adjective	2	work	bán thời gian	làm việc ít giờ hơn mức thông thường	He has a part-time job at a café.	Anh ấy làm bán thời gian ở một quán cà phê.		/ˌpɑːtˈtaɪm/	mirabi-ai-2026-10	active
 urgent.work	urgent	adjective	2	work	gấp, khẩn cấp	nói về việc cần được xử lý ngay	This is urgent. Please reply today.	Việc này gấp. Vui lòng trả lời trong hôm nay.		/ˈɜːdʒənt/	mirabi-ai-2026-10	active
 available.free_work	available	adjective	2	work	rảnh, có thể gặp	khi ai đó có thời gian để gặp hoặc nhận việc	Are you available for a quick call?	Bạn có rảnh cho một cuộc gọi ngắn không?		/əˈveɪləbl/	mirabi-ai-2026-10	active
 tiring.work	tiring	adjective	2	work	gây mệt mỏi	nói về công việc, một ngày làm người ta thấy mệt	It was a long and tiring day.	Đó là một ngày dài và mệt mỏi.		/ˈtaɪərɪŋ/	mirabi-ai-2026-10	active

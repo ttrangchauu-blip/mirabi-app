@@ -25,6 +25,9 @@ ADDED_COLUMNS: dict[str, list[tuple[str, str]]] = {
         ("onboarded_at", "TIMESTAMP"),
         ("daily_task_ids", "TEXT"),
         ("daily_tasks_selected_at", "TIMESTAMP"),
+        ("age", "INTEGER"),
+        ("school_grade", "VARCHAR(20)"),
+        ("study_subjects", "TEXT"),
     ],
     "user_tasks": [
         ("difficulty", "VARCHAR(12) NOT NULL DEFAULT 'medium'"),
@@ -52,7 +55,9 @@ ADDED_COLUMNS: dict[str, list[tuple[str, str]]] = {
     "study_sessions": [("pomodoro_cycle", "VARCHAR(64)"), ("started_at", "TIMESTAMP"),
                        ("ended_at", "TIMESTAMP"), ("timezone", "VARCHAR(80)"), ("status", "VARCHAR(20)"),
                        ("study_type", "VARCHAR(20) NOT NULL DEFAULT 'self_study'")],
-    "learning_sessions": [("game", "VARCHAR(20)")],
+    "learning_sessions": [("game", "VARCHAR(20)"), ("catalog_lesson", "VARCHAR(40)"), ("catalog_grade", "INTEGER"),
+                          ("content_version", "VARCHAR(20)")],
+    "learning_tutorial_views": [("version", "INTEGER NOT NULL DEFAULT 1")],
     "learning_vocab_entries": [("difficulty", "INTEGER"), ("cefr", "VARCHAR(2)"), ("audio_ref", "VARCHAR(200)"),
                                ("content_version", "INTEGER NOT NULL DEFAULT 1"), ("review_notes", "TEXT")],
     "login_streak_days": [("popup_claim_key", "VARCHAR(64)")],
@@ -87,6 +92,7 @@ def upgrade_schema(engine: Engine) -> None:
                               "WHERE pomodoro_cycle LIKE 'room%' AND study_type <> 'together'"))
         if inspector.has_table("learning_sessions"):
             backfill_learning_games(conn)
+            conn.execute(text("CREATE INDEX IF NOT EXISTS ix_learning_sessions_catalog_lesson ON learning_sessions (catalog_lesson)"))
         if inspector.has_table("learning_vocab_entries"):
             backfill_vocab_difficulty(conn)
         if inspector.has_table("study_sessions"):

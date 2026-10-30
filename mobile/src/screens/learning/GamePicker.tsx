@@ -37,11 +37,15 @@ type Props = {
 /** The games of one subject. English games start right away (the backend picks the content); Math games open their
  * setup (grade, topic). Each game offers its "Cách chơi". */
 export function GamePicker({ subject, group, catalog, onBack, onPick, onOpenGroup, quick, onHowTo, onOpenHistory }: Props) {
-  const card = SUBJECT_CARDS.find((s) => s.id === subject)!;
+  // The grade being studied decides the games (only those with content for it), and names the subject as at school.
+  const offered = catalog?.programme?.subjects.find((s) => s.code === subject);
+  const grades = (game: GameId) => offered?.games.find((g) => g.id === game)?.grades;
+  const card = { ...SUBJECT_CARDS.find((s) => s.id === subject)!, ...(offered ? { name: offered.name } : {}) };
   const lessons = catalog?.subjects.find((s) => s.code === subject)?.lessons;
   // Unknown until the catalog loads; a game with no lessons yet is shown but cannot be opened.
   const empty = (game: GameId) => !QUICK_GAMES.has(game) && !!lessons && lessonsForGame(lessons, game).length === 0;
-  const entries = group ? GAME_GROUPS[group].games : SUBJECT_GAMES[subject];
+  const entries: (GameId | GameGroupId)[] = group ? GAME_GROUPS[group].games
+    : catalog?.programme ? (offered?.games.map((g) => g.id) ?? []) : SUBJECT_GAMES[subject];
   const quickHere = !!quick && entries.some((id) => !isGroup(id) && QUICK_GAMES.has(id));
   const blocked = !!quick?.current || !!quick?.starting;
   return (
@@ -80,7 +84,8 @@ export function GamePicker({ subject, group, catalog, onBack, onPick, onOpenGrou
           return (
             <View key={id}>
               <Entry icon={game.icon} bg={card.bg} color={card.color} title={game.name} tag={game.direction} detail={game.detail}
-                disabled={blocked} busy={quick.starting === id} label={label} onPress={() => quick.onPlay(id)} onHowTo={() => onHowTo(id)} howToLabel={game.name} />
+                disabled={blocked} busy={quick.starting === id} label={label} onPress={() => quick.onPlay(id)} onHowTo={() => onHowTo(id)} howToLabel={game.name}
+                grades={grades(id)} />
               {failed ? (
                 <View style={styles.error} accessibilityRole="alert">
                   <Text style={styles.errorText}>{failed}</Text>
@@ -95,7 +100,7 @@ export function GamePicker({ subject, group, catalog, onBack, onPick, onOpenGrou
         return (
           <Entry key={id} icon={game.icon} bg={card.bg} color={card.color} title={game.direction ?? game.name} tag={game.direction ? game.name : undefined}
             detail={empty(id) ? 'Sắp có' : game.detail} disabled={empty(id)} label={label} onPress={() => onPick(id)}
-            onHowTo={empty(id) ? undefined : () => onHowTo(id)} howToLabel={game.name} />
+            onHowTo={empty(id) ? undefined : () => onHowTo(id)} howToLabel={game.name} grades={grades(id)} />
         );
       })}
     </>
@@ -105,9 +110,11 @@ export function GamePicker({ subject, group, catalog, onBack, onPick, onOpenGrou
 type EntryProps = { icon: React.ComponentProps<typeof Ionicons>['name']; bg: string; color: string; title: string; tag?: string; detail: string;
   disabled: boolean; busy?: boolean; label: string; onPress: () => void;
   /** "Cách chơi" of this game: a button of its own beside the card (it never starts the game). */
-  onHowTo?: () => void; howToLabel?: string };
+  onHowTo?: () => void; howToLabel?: string;
+  /** The grades the game supports ("Lớp 1–2"). */
+  grades?: string };
 
-function Entry({ icon, bg, color, title, tag, detail, disabled, busy, label, onPress, onHowTo, howToLabel }: EntryProps) {
+function Entry({ icon, bg, color, title, tag, detail, disabled, busy, label, onPress, onHowTo, howToLabel, grades }: EntryProps) {
   const main = (
     <Pressable onPress={onPress} disabled={disabled} accessibilityRole="button" accessibilityState={{ disabled, busy }}
       accessibilityLabel={label} style={({ pressed }) => [styles.entryMain, !onHowTo && styles.card, pressed && styles.pressed, disabled && !busy && styles.dimmed]}>
@@ -116,6 +123,7 @@ function Entry({ icon, bg, color, title, tag, detail, disabled, busy, label, onP
         <Text style={styles.name}>{title}</Text>
         {tag ? <Text style={styles.tag}>{tag}</Text> : null}
         <Text style={styles.detail}>{detail}</Text>
+        {grades ? <Text style={styles.grades}>{grades}</Text> : null}
       </View>
       {busy ? <ActivityIndicator color={t.accent} accessibilityLabel="Đang tải" />
         : onHowTo ? null : <Ionicons name="chevron-forward" size={22} color={t.muted} />}
@@ -160,6 +168,7 @@ const styles = StyleSheet.create({
   dimmed: { opacity: 0.5 },
   iconWrap: { width: 56, height: 56, borderRadius: 18, alignItems: 'center', justifyContent: 'center' },
   name: { fontSize: 18, fontWeight: '900', color: t.ink },
+  grades: { fontSize: 12, fontWeight: '800', color: t.muted, marginTop: 4 },
   tag: { fontSize: 13, fontWeight: '800', color: t.accent, marginTop: 1 },
   detail: { fontSize: 14, color: t.muted, lineHeight: 20, marginTop: 2 },
   header: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 16 },

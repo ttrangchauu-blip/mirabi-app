@@ -2,6 +2,7 @@ import re
 from datetime import date
 from pydantic import AfterValidator, BaseModel, BeforeValidator, ConfigDict, EmailStr, Field, model_validator
 from typing import Annotated, Literal, Optional, get_args
+from .study_profile import AGE_MAX, AGE_MIN, GradeId, check_study_profile
 
 PASSWORD_MIN, PASSWORD_MAX = 8, 128
 
@@ -33,6 +34,8 @@ def check_pet_name(value: str) -> str:
 NormalizedEmail = Annotated[EmailStr, BeforeValidator(_strip), AfterValidator(normalize_email)]
 NewPassword = Annotated[str, Field(min_length=PASSWORD_MIN, max_length=PASSWORD_MAX), AfterValidator(check_password_policy)]
 PetName = Annotated[str, BeforeValidator(_strip), Field(min_length=1, max_length=30), AfterValidator(check_pet_name)]
+# A whole number of years: strict, so "12", 12.5 and true are rejected rather than coerced.
+Age = Annotated[int, Field(strict=True, ge=AGE_MIN, le=AGE_MAX)]
 
 class LoginInput(BaseModel):
     email: NormalizedEmail
@@ -43,6 +46,26 @@ class RegisterInput(BaseModel):
     email: NormalizedEmail
     password: NewPassword
     display_name: Optional[Annotated[str, BeforeValidator(_strip), Field(min_length=1, max_length=80)]] = None
+    # The app always sends both; optional together so older app versions can still register (Học tập asks later).
+    age: Optional[Age] = None
+    school_grade: Optional[GradeId] = None
+
+    @model_validator(mode="after")
+    def validate_study_profile(self):
+        if (self.age is None) != (self.school_grade is None):
+            raise ValueError("Age and school grade must be given together")
+        if self.age is not None:
+            check_study_profile(self.age, self.school_grade)
+        return self
+
+class StudyProfileInput(BaseModel):
+    age: Age
+    school_grade: GradeId
+
+    @model_validator(mode="after")
+    def validate_study_profile(self):
+        check_study_profile(self.age, self.school_grade)
+        return self
 
 class RefreshInput(BaseModel):
     refresh_token: str = Field(min_length=20, max_length=256)
@@ -74,6 +97,8 @@ class UserOut(BaseModel):
     pet_name: Optional[str]  # None until the user adopts (names) a pet after signing in
     onboarded: bool
     daily_tasks_selected: bool
+    age: Optional[int] = None  # None (with school_grade) until the user gives them
+    school_grade: Optional[str] = None
     model_config = ConfigDict(from_attributes=True)
 
 class LoginStreakOut(BaseModel):

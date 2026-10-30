@@ -1,0 +1,4091 @@
+{
+ "subject": "pe",
+ "version": 1,
+ "organization": "topic",
+ "source_note": "Theo yêu cầu cần đạt môn Giáo dục thể chất (CT GDPT 2018): kiến thức chung về chăm sóc sức khoẻ và an toàn, vận động cơ bản, tư thế và kĩ năng vận động, thể thao tự chọn; tổ chức theo chủ đề, không theo mục lục bộ sách nào. Trò chơi chỉ ôn kiến thức, an toàn và thứ tự động tác; không thay thế giờ tập thực hành.",
+ "chapters": [
+  {
+   "key": "tc1.kien_thuc",
+   "grade": 1,
+   "order": 1,
+   "title": "Vệ sinh và an toàn khi tập luyện",
+   "lessons": [
+    {
+     "key": "tc1.nen_khong_nen",
+     "order": 1,
+     "title": "Nên và không nên khi tập luyện",
+     "description": "Biết những việc nên làm và không nên làm để tập thể dục an toàn, vệ sinh.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết mặc quần áo, đi giày phù hợp khi tập",
+      "Biết khởi động, uống nước, nghỉ khi mệt",
+      "Tránh những việc gây nguy hiểm khi tập"
+     ],
+     "summary": [
+      "Khi tập: quần áo gọn gàng, đi giày buộc chắc dây, đội mũ khi tập ngoài nắng.",
+      "Khởi động trước khi tập; uống nước từng ngụm nhỏ; mệt thì xin thầy cô nghỉ.",
+      "Không đi dép lê khi chạy nhảy, không xô đẩy bạn, không tập ngay khi vừa ăn no.",
+      "Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Trước giờ thể dục",
+       "lines": [
+        "Thay giày, buộc dây chắc, ra sân xếp hàng."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Nên hay không nên?",
+       "set": {
+        "title": "Việc này nên hay không nên làm khi tập luyện?",
+        "groups": [
+         {
+          "id": "nen",
+          "label": "Nên",
+          "icon": "👍"
+         },
+         {
+          "id": "khong",
+          "label": "Không nên",
+          "icon": "🚫"
+         }
+        ],
+        "cards": [
+         {
+          "key": "quan_ao",
+          "text": "Mặc quần áo gọn gàng",
+          "picture": "👕",
+          "group": "nen",
+          "explanation": "Quần áo gọn giúp dễ vận động, không vướng víu."
+         },
+         {
+          "key": "giay",
+          "text": "Đi giày, buộc dây chắc",
+          "picture": "👟",
+          "group": "nen",
+          "explanation": "Giày chắc chân giúp không bị trượt ngã."
+         },
+         {
+          "key": "khoi_dong",
+          "text": "Khởi động trước khi tập",
+          "picture": "🤸",
+          "group": "nen",
+          "explanation": "Khởi động giúp cơ thể sẵn sàng, tránh bị đau."
+         },
+         {
+          "key": "uong_nuoc",
+          "text": "Uống nước từng ngụm nhỏ",
+          "picture": "💧",
+          "group": "nen",
+          "explanation": "Uống từng ngụm nhỏ giúp cơ thể đủ nước mà không bị đầy bụng."
+         },
+         {
+          "key": "nghi_met",
+          "text": "Mệt thì xin thầy cô nghỉ",
+          "picture": "✋",
+          "group": "nen",
+          "explanation": "Nghỉ khi mệt giúp em không bị kiệt sức."
+         },
+         {
+          "key": "mu_nang",
+          "text": "Đội mũ khi tập ngoài nắng",
+          "picture": "🧢",
+          "group": "nen",
+          "explanation": "Mũ che nắng giúp tránh say nắng."
+         },
+         {
+          "key": "dep_le",
+          "text": "Đi dép lê khi chạy nhảy",
+          "picture": "🩴",
+          "group": "khong",
+          "explanation": "Dép lê dễ tuột, làm em vấp ngã."
+         },
+         {
+          "key": "xo_day",
+          "text": "Xô đẩy bạn khi chơi",
+          "picture": "🙅",
+          "group": "khong",
+          "explanation": "Xô đẩy làm bạn ngã, bị thương."
+         },
+         {
+          "key": "an_qua",
+          "text": "Ăn quà khi đang tập",
+          "picture": "🍬",
+          "group": "khong",
+          "explanation": "Vừa ăn vừa vận động dễ bị sặc, nghẹn."
+         },
+         {
+          "key": "an_no",
+          "text": "Tập ngay khi vừa ăn no",
+          "picture": "🍚",
+          "group": "khong",
+          "explanation": "Vừa ăn no mà tập dễ bị đau bụng, buồn nôn."
+         },
+         {
+          "key": "ra_duong",
+          "text": "Chạy ra đường nhặt bóng",
+          "picture": "🚗",
+          "group": "khong",
+          "explanation": "Đường có xe cộ, rất nguy hiểm; hãy nhờ người lớn."
+         }
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tc1.doi_hinh",
+   "grade": 1,
+   "order": 2,
+   "title": "Đội hình đội ngũ",
+   "lessons": [
+    {
+     "key": "tc1.tap_hop_hang",
+     "order": 1,
+     "title": "Tập hợp hàng và thứ tự một giờ thể dục",
+     "description": "Nhớ thứ tự tập hợp hàng, khởi động và các phần của giờ học thể dục.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết thứ tự tập hợp hàng dọc, dóng hàng, điểm số",
+      "Biết giờ thể dục có khởi động, tập chính và thả lỏng",
+      "Biết xoay khớp khởi động từ trên xuống dưới"
+     ],
+     "summary": [
+      "Tập hợp hàng dọc → dóng hàng cho thẳng → điểm số.",
+      "Giờ thể dục: khởi động → tập động tác chính → thả lỏng.",
+      "Khởi động xoay khớp từ trên xuống: cổ → vai → hông → cổ chân.",
+      "Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Khẩu lệnh",
+       "lines": [
+        "\"Thành một hàng dọc… tập hợp!\"",
+        "\"Nhìn trước… thẳng!\""
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Việc nào trước?",
+       "tasks": [
+        {
+         "key": "tap_hop",
+         "prompt": "Xếp thứ tự khi lớp tập hợp đầu giờ.",
+         "items": [
+          "Tập hợp hàng dọc",
+          "Dóng hàng",
+          "Điểm số"
+         ],
+         "explanation": "Có hàng rồi mới dóng cho thẳng, cuối cùng điểm số.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "gio_hoc",
+         "prompt": "Xếp thứ tự các phần của giờ thể dục.",
+         "items": [
+          "Khởi động",
+          "Tập động tác chính",
+          "Thả lỏng"
+         ],
+         "explanation": "Khởi động trước để không bị đau; tập xong thả lỏng cho cơ thể nghỉ.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "xoay_khop",
+         "prompt": "Xếp các động tác xoay khớp từ trên xuống dưới.",
+         "items": [
+          "Xoay cổ",
+          "Xoay vai",
+          "Xoay hông",
+          "Xoay cổ chân"
+         ],
+         "explanation": "Xoay khớp từ trên xuống dưới cơ thể để không bỏ sót khớp nào.",
+         "first_label": "Trên",
+         "last_label": "Dưới"
+        },
+        {
+         "key": "chuan_bi",
+         "prompt": "Xếp các việc chuẩn bị cho giờ thể dục.",
+         "items": [
+          "Thay quần áo, đi giày gọn gàng",
+          "Ra sân xếp hàng",
+          "Khởi động cùng thầy cô"
+         ],
+         "explanation": "Chuẩn bị trang phục, xếp hàng, rồi khởi động.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "tc1.dong_tac_nghiem_nghi",
+     "order": 2,
+     "title": "Đứng nghiêm, đứng nghỉ, quay phải, quay trái",
+     "description": "Thực hành theo khẩu lệnh cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "tc1.bai_the_duc",
+   "grade": 1,
+   "order": 3,
+   "title": "Bài tập thể dục",
+   "lessons": [
+    {
+     "key": "tc1.dong_tac_vuon_tho",
+     "order": 1,
+     "title": "Động tác vươn thở, tay, chân",
+     "description": "Tập các động tác của bài thể dục cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "tc1.dong_tac_bung_nhay",
+     "order": 2,
+     "title": "Động tác bụng, nhảy và điều hoà",
+     "description": "Tập các động tác cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "tc1.ky_nang",
+   "grade": 1,
+   "order": 4,
+   "title": "Tư thế và kĩ năng vận động cơ bản",
+   "lessons": [
+    {
+     "key": "tc1.tu_the_dung_ngoi",
+     "order": 1,
+     "title": "Tư thế đứng, ngồi, đi đúng",
+     "description": "Thực hành giữ tư thế đúng cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "tc1.bat_nhay",
+     "order": 2,
+     "title": "Bật nhảy tại chỗ và trò chơi vận động",
+     "description": "Thực hành bật nhảy, chơi trò chơi vận động trên sân.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "tc2.kien_thuc",
+   "grade": 2,
+   "order": 1,
+   "title": "Vệ sinh và an toàn khi tập luyện",
+   "lessons": [
+    {
+     "key": "tc2.an_toan_khi_choi",
+     "order": 1,
+     "title": "An toàn khi tập luyện và chơi trò chơi vận động",
+     "description": "Xử lí đúng các tình huống thường gặp khi tập thể dục, chơi trò chơi.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết dừng lại ở chỗ an toàn khi có sự cố",
+      "Biết báo thầy cô khi bị ngã, bị thương",
+      "Biết uống nước, che nắng đúng cách"
+     ],
+     "summary": [
+      "Có sự cố (tuột dây giày, mệt): dừng lại ở chỗ an toàn rồi xử lí.",
+      "Bị ngã, trầy xước: báo thầy cô để được rửa sạch, sát trùng.",
+      "Trời nắng: đội mũ, uống nước từng ngụm, nghỉ chỗ râm khi mệt. Bóng ra đường: nhờ người lớn.",
+      "Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Dây giày tuột",
+       "lines": [
+        "Dừng lại bên lề sân, buộc chặt, rồi chạy tiếp."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Em xử lí thế nào?",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "day_giay",
+         "question": "Dây giày bị tuột khi em đang chạy. Em làm gì?",
+         "options": [
+          {
+           "text": "Dừng lại ở chỗ an toàn, buộc chặt rồi chạy tiếp",
+           "ok": true,
+           "why": "Đúng: dây giày tuột dễ làm em vấp ngã."
+          },
+          {
+           "text": "Kệ, cứ chạy tiếp",
+           "ok": false,
+           "why": "Dẫm phải dây giày sẽ bị ngã."
+          },
+          {
+           "text": "Vừa chạy vừa cúi xuống buộc",
+           "ok": false,
+           "why": "Cúi xuống khi đang chạy rất dễ ngã, va vào bạn."
+          }
+         ],
+         "explanation": "Có sự cố thì dừng lại ở chỗ an toàn để xử lí."
+        },
+        {
+         "key": "nang_to",
+         "question": "Trời nắng to, lớp tập ngoài sân. Em cần làm gì?",
+         "options": [
+          {
+           "text": "Đội mũ, uống nước, nghỉ chỗ râm khi mệt",
+           "ok": true,
+           "why": "Đúng: như vậy tránh được say nắng."
+          },
+          {
+           "text": "Cởi mũ ra cho mát",
+           "ok": false,
+           "why": "Không đội mũ dễ bị say nắng."
+          },
+          {
+           "text": "Chạy liên tục không nghỉ",
+           "ok": false,
+           "why": "Tập dưới nắng không nghỉ dễ bị mệt lả."
+          }
+         ],
+         "explanation": "Tập dưới nắng: che đầu, uống nước, nghỉ khi mệt."
+        },
+        {
+         "key": "trao_goi",
+         "question": "Em bị ngã trầy đầu gối khi chơi. Em làm gì?",
+         "options": [
+          {
+           "text": "Báo thầy cô để được rửa sạch, sát trùng",
+           "ok": true,
+           "why": "Đúng: rửa sạch vết xước giúp không bị nhiễm trùng."
+          },
+          {
+           "text": "Lấy đất xoa lên vết xước",
+           "ok": false,
+           "why": "Đất bẩn làm vết thương nhiễm trùng."
+          },
+          {
+           "text": "Giấu đi, không nói với ai",
+           "ok": false,
+           "why": "Không báo thì không ai giúp em xử lí vết thương."
+          }
+         ],
+         "explanation": "Bị thương thì báo ngay thầy cô."
+        },
+        {
+         "key": "bong_ra_duong",
+         "question": "Quả bóng lăn ra ngoài đường có xe chạy. Em làm gì?",
+         "options": [
+          {
+           "text": "Báo người lớn nhặt giúp",
+           "ok": true,
+           "why": "Đúng: đường có xe rất nguy hiểm với em."
+          },
+          {
+           "text": "Lao ra đường nhặt ngay",
+           "ok": false,
+           "why": "Lao ra đường có thể bị xe đâm."
+          },
+          {
+           "text": "Rủ bạn cùng chạy ra nhặt",
+           "ok": false,
+           "why": "Cả hai bạn đều gặp nguy hiểm."
+          }
+         ],
+         "explanation": "Không bao giờ chạy ra đường nhặt bóng."
+        },
+        {
+         "key": "khat_nuoc",
+         "question": "Em khát nước sau khi chạy. Em uống thế nào?",
+         "options": [
+          {
+           "text": "Uống từng ngụm nhỏ, chậm rãi",
+           "ok": true,
+           "why": "Đúng: uống từ từ giúp cơ thể hấp thu nước tốt, không bị đầy bụng."
+          },
+          {
+           "text": "Uống ừng ực một hơi thật nhiều",
+           "ok": false,
+           "why": "Uống quá nhiều một lúc dễ bị đầy bụng, khó chịu."
+          },
+          {
+           "text": "Nhịn khát đến hết giờ",
+           "ok": false,
+           "why": "Nhịn khát làm cơ thể mệt, thiếu nước."
+          }
+         ],
+         "explanation": "Uống nước từng ngụm nhỏ, nhiều lần."
+        },
+        {
+         "key": "xep_hang",
+         "question": "Em đứng sau bạn khi xếp hàng. Em làm gì?",
+         "options": [
+          {
+           "text": "Đứng ngay ngắn, giữ khoảng cách với bạn",
+           "ok": true,
+           "why": "Đúng: hàng thẳng, an toàn, không va vào nhau."
+          },
+          {
+           "text": "Xô đẩy bạn cho vui",
+           "ok": false,
+           "why": "Xô đẩy có thể làm bạn ngã."
+          },
+          {
+           "text": "Kéo áo bạn",
+           "ok": false,
+           "why": "Kéo áo làm bạn mất thăng bằng, khó chịu."
+          }
+         ],
+         "explanation": "Xếp hàng trật tự, giữ khoảng cách."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tc2.doi_hinh",
+   "grade": 2,
+   "order": 2,
+   "title": "Đội hình đội ngũ",
+   "lessons": [
+    {
+     "key": "tc2.di_deu_quay",
+     "order": 1,
+     "title": "Đi đều, quay phải và tập hợp hàng ngang",
+     "description": "Nhớ thứ tự các động tác theo khẩu lệnh đi đều, quay phải, tập hợp hàng ngang.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết đi đều bước chân trái trước",
+      "Biết các bước quay phải",
+      "Biết thứ tự tập hợp hàng ngang, dóng hàng, điểm số"
+     ],
+     "summary": [
+      "Đi đều: nghe \"Đi đều… bước!\" thì bước chân trái lên trước; nghe \"Đứng lại… đứng!\" thì dừng, đứng nghiêm.",
+      "Quay phải: lấy gót chân phải và mũi chân trái làm trụ, xoay người sang phải, kéo chân trái về.",
+      "Điểm số: lần lượt hô số, bạn cuối hàng hô số của mình và \"Hết!\".",
+      "Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Khẩu lệnh",
+       "lines": [
+        "\"Bên phải… quay!\"",
+        "\"Từ một đến hết… điểm số!\""
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Theo khẩu lệnh",
+       "tasks": [
+        {
+         "key": "di_deu",
+         "prompt": "Xếp thứ tự động tác đi đều và đứng lại.",
+         "items": [
+          "Nghe lệnh \"Đi đều… bước!\"",
+          "Bước chân trái lên trước",
+          "Nghe lệnh \"Đứng lại… đứng!\"",
+          "Dừng lại, đứng nghiêm"
+         ],
+         "explanation": "Đi đều bắt đầu bằng chân trái; nghe lệnh đứng lại thì dừng, đứng nghiêm.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "quay_phai",
+         "prompt": "Xếp thứ tự động tác quay phải.",
+         "items": [
+          "Nghe lệnh \"Bên phải… quay!\"",
+          "Xoay người sang phải trên gót chân phải",
+          "Kéo chân trái về sát chân phải",
+          "Đứng nghiêm"
+         ],
+         "explanation": "Xoay trên gót chân phải, rồi kéo chân trái về.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "diem_so",
+         "prompt": "Xếp thứ tự khi điểm số hàng dọc.",
+         "items": [
+          "Bạn đầu hàng hô \"Một!\"",
+          "Bạn thứ hai hô \"Hai!\"",
+          "Bạn thứ ba hô \"Ba!\"",
+          "Bạn cuối hàng hô số và \"Hết!\""
+         ],
+         "explanation": "Điểm số lần lượt từ đầu đến cuối hàng.",
+         "first_label": "Đầu hàng",
+         "last_label": "Cuối hàng"
+        },
+        {
+         "key": "hang_ngang",
+         "prompt": "Xếp thứ tự khi tập hợp hàng ngang.",
+         "items": [
+          "Nghe lệnh tập hợp hàng ngang",
+          "Nhanh chóng đứng vào hàng",
+          "Dóng hàng ngang cho thẳng",
+          "Điểm số"
+         ],
+         "explanation": "Vào hàng, dóng hàng, rồi điểm số.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tc2.bai_the_duc",
+   "grade": 2,
+   "order": 3,
+   "title": "Bài tập thể dục",
+   "lessons": [
+    {
+     "key": "tc2.bai_the_duc_8_dong_tac",
+     "order": 1,
+     "title": "Bài thể dục phát triển chung",
+     "description": "Tập các động tác của bài thể dục cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "tc2.ky_nang",
+   "grade": 2,
+   "order": 4,
+   "title": "Tư thế và kĩ năng vận động cơ bản",
+   "lessons": [
+    {
+     "key": "tc2.di_chay",
+     "order": 1,
+     "title": "Đi, chạy theo các hướng",
+     "description": "Thực hành đi, chạy đổi hướng an toàn cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "tc2.tung_bat_bong",
+     "order": 2,
+     "title": "Tung và bắt bóng",
+     "description": "Thực hành tung, bắt bóng bằng hai tay.",
+     "status": "planned"
+    },
+    {
+     "key": "tc2.tro_choi",
+     "order": 3,
+     "title": "Trò chơi vận động",
+     "description": "Chơi trò chơi rèn sự khéo léo, nhanh nhẹn.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "tc3.kien_thuc",
+   "grade": 3,
+   "order": 1,
+   "title": "Kiến thức chung về tập luyện",
+   "lessons": [
+    {
+     "key": "tc3.khoi_dong",
+     "order": 1,
+     "title": "Khởi động và thả lỏng đúng cách",
+     "description": "Biết vì sao phải khởi động, khởi động thế nào và thả lỏng sau khi tập.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu lợi ích của khởi động",
+      "Sắp xếp đúng thứ tự khởi động từ nhẹ đến mạnh",
+      "Biết thả lỏng sau khi tập"
+     ],
+     "summary": [
+      "Khởi động làm nóng cơ, khớp, giúp cơ thể sẵn sàng và tránh chấn thương.",
+      "Khởi động từ nhẹ đến mạnh: đi bộ, chạy nhẹ → xoay các khớp → căng giãn cơ → động tác bổ trợ cho bài học.",
+      "Tập xong: thả lỏng, đi bộ nhẹ, hít thở sâu; không nằm vật ra ngay.",
+      "Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Xoay khớp",
+       "lines": [
+        "Cổ → vai → hông → đầu gối → cổ chân"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Khởi động từ nhẹ đến mạnh",
+       "tasks": [
+        {
+         "key": "chung",
+         "prompt": "Xếp thứ tự khởi động từ nhẹ đến mạnh.",
+         "items": [
+          "Đi bộ, chạy nhẹ nhàng",
+          "Xoay các khớp",
+          "Căng giãn cơ nhẹ",
+          "Tập động tác bổ trợ cho bài học"
+         ],
+         "explanation": "Làm nóng cơ thể trước, rồi xoay khớp, giãn cơ, cuối cùng là động tác chuyên môn.",
+         "first_label": "Nhẹ",
+         "last_label": "Mạnh"
+        },
+        {
+         "key": "xoay_khop",
+         "prompt": "Xếp các động tác xoay khớp từ trên xuống dưới cơ thể.",
+         "items": [
+          "Cổ",
+          "Vai",
+          "Hông",
+          "Đầu gối",
+          "Cổ chân"
+         ],
+         "explanation": "Từ trên xuống dưới để không bỏ sót khớp.",
+         "first_label": "Trên",
+         "last_label": "Dưới"
+        },
+        {
+         "key": "khop_tay",
+         "prompt": "Xếp các khớp tay để xoay, từ vai ra đến bàn tay.",
+         "items": [
+          "Khớp vai",
+          "Khớp khuỷu tay",
+          "Khớp cổ tay"
+         ],
+         "explanation": "Từ khớp lớn gần thân ra khớp nhỏ ở bàn tay.",
+         "first_label": "Vai",
+         "last_label": "Bàn tay"
+        },
+        {
+         "key": "buoi_tap",
+         "prompt": "Xếp các phần của một buổi tập.",
+         "items": [
+          "Khởi động",
+          "Phần cơ bản: học và tập động tác",
+          "Thả lỏng, hồi tĩnh"
+         ],
+         "explanation": "Mở đầu bằng khởi động, kết thúc bằng thả lỏng.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        }
+       ]
+      },
+      {
+       "game": "choice",
+       "title": "Khởi động đúng cách",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "vi_sao",
+         "question": "Vì sao cần khởi động trước khi tập?",
+         "options": [
+          {
+           "text": "Làm nóng cơ, khớp, giúp cơ thể sẵn sàng, tránh chấn thương",
+           "ok": true,
+           "why": "Đúng: cơ khớp đã nóng thì ít bị căng cơ, bong gân."
+          },
+          {
+           "text": "Để mệt trước cho quen",
+           "ok": false,
+           "why": "Khởi động nhẹ nhàng, không nhằm làm mệt."
+          },
+          {
+           "text": "Để ra mồ hôi cho sạch người",
+           "ok": false,
+           "why": "Mục đích là chuẩn bị cho cơ thể, không phải làm sạch."
+          }
+         ],
+         "explanation": "Khởi động phòng tránh chấn thương."
+        },
+        {
+         "key": "troi_lanh",
+         "question": "Trời lạnh, em nên khởi động thế nào?",
+         "options": [
+          {
+           "text": "Khởi động kĩ hơn, lâu hơn một chút",
+           "ok": true,
+           "why": "Đúng: trời lạnh cơ khớp cứng hơn, cần làm nóng kĩ."
+          },
+          {
+           "text": "Bỏ khởi động cho đỡ lạnh",
+           "ok": false,
+           "why": "Bỏ khởi động khi trời lạnh rất dễ bị căng cơ."
+          },
+          {
+           "text": "Tập ngay động tác mạnh nhất cho ấm",
+           "ok": false,
+           "why": "Tập mạnh ngay khi cơ còn cứng dễ bị chấn thương."
+          }
+         ],
+         "explanation": "Trời lạnh: khởi động kĩ hơn."
+        },
+        {
+         "key": "den_muon",
+         "question": "Bạn đến muộn, lớp đã khởi động xong. Bạn nên làm gì?",
+         "options": [
+          {
+           "text": "Xin thầy cô cho khởi động nhanh rồi mới vào tập",
+           "ok": true,
+           "why": "Đúng: chưa khởi động mà tập ngay dễ bị đau."
+          },
+          {
+           "text": "Vào tập ngay động tác mạnh cùng lớp",
+           "ok": false,
+           "why": "Cơ thể chưa sẵn sàng, dễ bị chấn thương."
+          },
+          {
+           "text": "Đứng xem cả buổi",
+           "ok": false,
+           "why": "Bạn vẫn có thể tập sau khi khởi động."
+          }
+         ],
+         "explanation": "Ai cũng cần khởi động trước khi tập."
+        },
+        {
+         "key": "nhe_manh",
+         "question": "Khi khởi động, nên tập thế nào?",
+         "options": [
+          {
+           "text": "Từ nhẹ đến mạnh, từ chậm đến nhanh",
+           "ok": true,
+           "why": "Đúng: tăng dần để cơ thể thích nghi."
+          },
+          {
+           "text": "Mạnh nhất ngay từ đầu",
+           "ok": false,
+           "why": "Tập mạnh ngay dễ bị căng cơ."
+          },
+          {
+           "text": "Chỉ xoay cổ là đủ",
+           "ok": false,
+           "why": "Cần khởi động các khớp và nhóm cơ sẽ dùng."
+          }
+         ],
+         "explanation": "Tăng dần mức độ."
+        },
+        {
+         "key": "tap_xong",
+         "question": "Tập xong, em nên làm gì?",
+         "options": [
+          {
+           "text": "Thả lỏng, đi bộ nhẹ, hít thở sâu",
+           "ok": true,
+           "why": "Đúng: giúp nhịp tim, nhịp thở trở lại bình thường từ từ."
+          },
+          {
+           "text": "Nằm vật ra sàn ngay",
+           "ok": false,
+           "why": "Dừng đột ngột có thể gây chóng mặt."
+          },
+          {
+           "text": "Tắm nước lạnh ngay khi còn nhiều mồ hôi",
+           "ok": false,
+           "why": "Nên nghỉ cho ráo mồ hôi rồi mới tắm."
+          }
+         ],
+         "explanation": "Thả lỏng sau khi tập."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tc3.doi_hinh",
+   "grade": 3,
+   "order": 2,
+   "title": "Đội hình đội ngũ",
+   "lessons": [
+    {
+     "key": "tc3.doi_hinh_hang",
+     "order": 1,
+     "title": "Biến đổi đội hình hàng dọc, hàng ngang",
+     "description": "Thực hành chuyển đội hình theo khẩu lệnh cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "tc3.bai_the_duc",
+   "grade": 3,
+   "order": 3,
+   "title": "Bài tập thể dục",
+   "lessons": [
+    {
+     "key": "tc3.the_duc_co_gay",
+     "order": 1,
+     "title": "Bài thể dục với cờ hoặc với gậy",
+     "description": "Tập bài thể dục cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "tc3.ky_nang",
+   "grade": 3,
+   "order": 4,
+   "title": "Kĩ năng vận động cơ bản",
+   "lessons": [
+    {
+     "key": "tc3.chay_vuot",
+     "order": 1,
+     "title": "Chạy vượt chướng ngại vật thấp",
+     "description": "Thực hành trên sân cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "tc3.nhay_day",
+     "order": 2,
+     "title": "Nhảy dây",
+     "description": "Thực hành nhảy dây cá nhân.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "tc3.the_thao",
+   "grade": 3,
+   "order": 5,
+   "title": "Thể thao tự chọn",
+   "lessons": [
+    {
+     "key": "tc3.lam_quen_mon",
+     "order": 1,
+     "title": "Làm quen với một môn thể thao tự chọn",
+     "description": "Bóng đá, bóng rổ, cầu lông, đá cầu, bơi… theo điều kiện của trường.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "tc4.kien_thuc",
+   "grade": 4,
+   "order": 1,
+   "title": "Kiến thức chung về sức khoẻ và an toàn",
+   "lessons": [
+    {
+     "key": "tc4.so_cuu_nhe",
+     "order": 1,
+     "title": "Xử lí chấn thương nhẹ khi tập luyện",
+     "description": "Biết cách xử lí ban đầu khi trầy xước, chảy máu cam, chuột rút, trẹo chân, mệt do nắng.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Xử lí đúng một số chấn thương nhẹ",
+      "Biết luôn báo thầy cô, người lớn khi có người bị thương"
+     ],
+     "summary": [
+      "Trầy xước: rửa sạch bằng nước sạch, sát trùng. Chảy máu cam: ngồi, hơi cúi đầu về trước, bóp chặt cánh mũi, thở bằng miệng.",
+      "Chuột rút bắp chân: dừng tập, duỗi thẳng chân, kéo mũi bàn chân về phía người, xoa nhẹ.",
+      "Trẹo cổ chân: ngừng tập, chườm lạnh, băng ép nhẹ, kê cao chân; không xoa dầu nóng, không bóp mạnh.",
+      "Luôn báo thầy cô, người lớn. Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Chảy máu cam",
+       "lines": [
+        "Không ngửa đầu ra sau: máu có thể chảy xuống họng."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Sơ cứu đúng cách",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "trau_xuoc",
+         "question": "Bạn bị trầy xước nhẹ ở khuỷu tay khi tập. Cách xử lí nào đúng?",
+         "options": [
+          {
+           "text": "Rửa sạch bằng nước sạch, sát trùng, báo thầy cô",
+           "ok": true,
+           "why": "Đúng: rửa sạch giúp tránh nhiễm trùng."
+          },
+          {
+           "text": "Xoa đất cát cho cầm máu",
+           "ok": false,
+           "why": "Đất cát bẩn làm vết thương nhiễm trùng."
+          },
+          {
+           "text": "Để nguyên, tập tiếp",
+           "ok": false,
+           "why": "Vết xước bẩn dễ bị nhiễm trùng."
+          }
+         ],
+         "explanation": "Vết xước: làm sạch, sát trùng."
+        },
+        {
+         "key": "mau_cam",
+         "question": "Bạn bị chảy máu cam khi đang tập. Cách xử lí nào đúng?",
+         "options": [
+          {
+           "text": "Ngồi, hơi cúi đầu về trước, bóp chặt cánh mũi, thở bằng miệng",
+           "ok": true,
+           "why": "Đúng: bóp cánh mũi giúp máu ngừng chảy."
+          },
+          {
+           "text": "Ngửa đầu ra sau",
+           "ok": false,
+           "why": "Ngửa đầu làm máu chảy xuống họng, gây sặc, buồn nôn."
+          },
+          {
+           "text": "Nằm ngửa ra sân",
+           "ok": false,
+           "why": "Nằm ngửa cũng làm máu chảy xuống họng."
+          }
+         ],
+         "explanation": "Chảy máu cam: cúi đầu về trước."
+        },
+        {
+         "key": "chuot_rut",
+         "question": "Bạn bị chuột rút ở bắp chân. Cách xử lí nào đúng?",
+         "options": [
+          {
+           "text": "Dừng tập, duỗi thẳng chân, kéo mũi bàn chân về phía người, xoa nhẹ",
+           "ok": true,
+           "why": "Đúng: kéo giãn cơ giúp hết co rút."
+          },
+          {
+           "text": "Cố chạy tiếp cho hết",
+           "ok": false,
+           "why": "Cố chạy làm cơ đau hơn."
+          },
+          {
+           "text": "Đấm mạnh vào bắp chân",
+           "ok": false,
+           "why": "Đấm mạnh có thể làm tổn thương cơ."
+          }
+         ],
+         "explanation": "Chuột rút: kéo giãn nhẹ cơ bị co rút."
+        },
+        {
+         "key": "treo_chan",
+         "question": "Bạn bị trẹo cổ chân, sưng đau. Cách xử lí nào đúng?",
+         "options": [
+          {
+           "text": "Ngừng tập, chườm lạnh, băng ép nhẹ, kê cao chân, báo người lớn",
+           "ok": true,
+           "why": "Đúng: chườm lạnh, kê cao giúp giảm sưng, đau."
+          },
+          {
+           "text": "Chườm nóng, xoa dầu nóng ngay",
+           "ok": false,
+           "why": "Nhiệt làm chỗ trẹo sưng to hơn trong những ngày đầu."
+          },
+          {
+           "text": "Cố đi lại cho đỡ",
+           "ok": false,
+           "why": "Đi lại làm chấn thương nặng thêm."
+          }
+         ],
+         "explanation": "Trẹo chân: lạnh, ép, kê cao, nghỉ."
+        },
+        {
+         "key": "met_nang",
+         "question": "Bạn chóng mặt, mệt lả khi tập dưới trời nắng. Em làm gì?",
+         "options": [
+          {
+           "text": "Đưa bạn vào chỗ râm mát, nới lỏng quần áo, cho uống nước từng ngụm, báo thầy cô",
+           "ok": true,
+           "why": "Đúng: làm mát cơ thể và báo người lớn."
+          },
+          {
+           "text": "Bảo bạn chạy tiếp cho quen",
+           "ok": false,
+           "why": "Cố tập khi mệt do nắng rất nguy hiểm."
+          },
+          {
+           "text": "Để bạn nằm giữa sân nắng",
+           "ok": false,
+           "why": "Nắng làm bạn mệt hơn."
+          }
+         ],
+         "explanation": "Mệt do nắng: làm mát, uống nước, báo thầy cô."
+        },
+        {
+         "key": "bao_ai",
+         "question": "Khi thấy bạn bị thương lúc tập, việc em cần làm ngay là gì?",
+         "options": [
+          {
+           "text": "Báo ngay thầy cô hoặc người lớn",
+           "ok": true,
+           "why": "Đúng: người lớn sẽ xử lí đúng cách."
+          },
+          {
+           "text": "Bỏ đi chỗ khác",
+           "ok": false,
+           "why": "Bạn cần được giúp đỡ."
+          },
+          {
+           "text": "Tự lấy thuốc cho bạn uống",
+           "ok": false,
+           "why": "Không tự ý cho người khác uống thuốc."
+          }
+         ],
+         "explanation": "Luôn báo người lớn."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tc4.doi_hinh",
+   "grade": 4,
+   "order": 2,
+   "title": "Đội hình đội ngũ",
+   "lessons": [
+    {
+     "key": "tc4.di_deu_vong",
+     "order": 1,
+     "title": "Đi đều vòng phải, vòng trái",
+     "description": "Thực hành theo khẩu lệnh cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "tc4.ky_nang",
+   "grade": 4,
+   "order": 3,
+   "title": "Kĩ năng vận động cơ bản",
+   "lessons": [
+    {
+     "key": "tc4.bat_xa_nhay_day",
+     "order": 1,
+     "title": "Bật xa tại chỗ, nhảy dây, tung bắt bóng",
+     "description": "Nhớ thứ tự các bước của bật xa tại chỗ, nhảy dây, xuất phát cao và tung bắt bóng.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Sắp xếp đúng các bước của từng kĩ thuật",
+      "Biết tiếp đất nhẹ, khuỵu gối để an toàn"
+     ],
+     "summary": [
+      "Bật xa tại chỗ: đứng sau vạch → khuỵu gối, đưa tay ra sau → đánh tay ra trước, bật mạnh → tiếp đất bằng hai chân, khuỵu gối.",
+      "Tiếp đất khuỵu gối giúp giảm lực, bảo vệ khớp gối và cổ chân.",
+      "Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Nhảy dây chụm chân",
+       "lines": [
+        "Quay dây qua đầu, bật nhảy khi dây sắp chạm chân."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Các bước kĩ thuật",
+       "tasks": [
+        {
+         "key": "bat_xa",
+         "prompt": "Xếp các bước bật xa tại chỗ.",
+         "items": [
+          "Đứng hai chân rộng bằng vai, sau vạch",
+          "Khuỵu gối, đưa hai tay ra sau",
+          "Đánh tay ra trước, bật mạnh hai chân",
+          "Tiếp đất bằng hai chân, khuỵu gối"
+         ],
+         "explanation": "Chuẩn bị → lấy đà bằng tay và gối → bật → tiếp đất mềm.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "nhay_day",
+         "prompt": "Xếp các bước nhảy dây chụm chân.",
+         "items": [
+          "Cầm hai đầu dây, dây để sau gót chân",
+          "Quay dây từ sau ra trước qua đầu",
+          "Bật nhảy bằng hai chân khi dây sắp chạm chân",
+          "Tiếp đất nhẹ bằng nửa trước bàn chân"
+         ],
+         "explanation": "Quay dây rồi mới bật nhảy đúng lúc; tiếp đất nhẹ.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "xuat_phat_cao",
+         "prompt": "Xếp các bước xuất phát cao.",
+         "items": [
+          "Đứng chân trước sát vạch, chân sau cách một bước",
+          "Khuỵu gối, đổ người ra trước, mắt nhìn trước",
+          "Nghe lệnh xuất phát thì đạp mạnh chân sau",
+          "Chạy nhanh về đích"
+         ],
+         "explanation": "Tư thế chuẩn bị đúng giúp xuất phát nhanh.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "tung_bat",
+         "prompt": "Xếp các bước tung và bắt bóng.",
+         "items": [
+          "Cầm bóng bằng hai tay trước ngực",
+          "Tung bóng lên cao vừa phải",
+          "Mắt nhìn theo bóng",
+          "Đón bóng bằng hai tay, kéo về ngực"
+         ],
+         "explanation": "Mắt luôn theo bóng; kéo bóng về ngực để giảm lực.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tc4.the_thao",
+   "grade": 4,
+   "order": 4,
+   "title": "Thể thao tự chọn",
+   "lessons": [
+    {
+     "key": "tc4.dan_bong",
+     "order": 1,
+     "title": "Kĩ thuật cơ bản môn thể thao tự chọn",
+     "description": "Dẫn bóng, chuyền bóng, tâng cầu… theo môn trường chọn (thực hành).",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "tc5.kien_thuc",
+   "grade": 5,
+   "order": 1,
+   "title": "Kiến thức chung về sức khoẻ và an toàn",
+   "lessons": [
+    {
+     "key": "tc5.phong_duoi_nuoc",
+     "order": 1,
+     "title": "Phòng tránh đuối nước và an toàn khi bơi",
+     "description": "Biết những điều cần làm để bơi an toàn và cách giúp người gặp nạn dưới nước.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Chỉ bơi ở nơi an toàn, có người lớn, cứu hộ",
+      "Biết những lúc không nên xuống nước",
+      "Biết cách giúp người đuối nước mà không tự đặt mình vào nguy hiểm"
+     ],
+     "summary": [
+      "Chỉ bơi ở bể bơi, khu vực cho phép, có người lớn hoặc cứu hộ trông; khởi động kĩ trước khi xuống nước.",
+      "Không xuống nước khi vừa ăn no, đang mệt, ốm, trời có sấm sét; không bơi ở nơi có biển cấm.",
+      "Thấy người đuối nước: hô to gọi người lớn, ném phao, sào, vật nổi; không nhảy xuống cứu nếu không được huấn luyện.",
+      "Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Bị chuột rút khi bơi",
+       "lines": [
+        "Bình tĩnh, gọi người giúp, thả nổi, duỗi thẳng chân, kéo mũi bàn chân về phía người."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Bơi an toàn",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "tam_ao",
+         "question": "Các bạn rủ đi tắm ao, sông khi không có người lớn. Em làm gì?",
+         "options": [
+          {
+           "text": "Từ chối và báo cho người lớn",
+           "ok": true,
+           "why": "Đúng: ao sông có thể sâu, có hố, dòng chảy nguy hiểm."
+          },
+          {
+           "text": "Đi cùng cho vui",
+           "ok": false,
+           "why": "Không có người lớn, gặp nạn sẽ không ai cứu."
+          },
+          {
+           "text": "Chỉ lội chỗ nông một mình",
+           "ok": false,
+           "why": "Đáy ao sông có thể sụt sâu bất ngờ."
+          }
+         ],
+         "explanation": "Không bơi, tắm ở ao hồ, sông suối khi không có người lớn."
+        },
+        {
+         "key": "truoc_khi_boi",
+         "question": "Trước khi xuống bể bơi, em cần làm gì?",
+         "options": [
+          {
+           "text": "Khởi động kĩ, tắm tráng, bơi ở khu vực hợp với mình",
+           "ok": true,
+           "why": "Đúng: khởi động giúp tránh chuột rút; chọn khu nước hợp sức bơi."
+          },
+          {
+           "text": "Nhảy ngay xuống chỗ sâu",
+           "ok": false,
+           "why": "Nhảy xuống chỗ sâu khi chưa chuẩn bị rất nguy hiểm."
+          },
+          {
+           "text": "Ăn thật no rồi xuống bơi",
+           "ok": false,
+           "why": "Vừa ăn no mà bơi dễ bị đau bụng, chuột rút."
+          }
+         ],
+         "explanation": "Chuẩn bị trước khi bơi."
+        },
+        {
+         "key": "cuu_ban",
+         "question": "Em thấy bạn chới với dưới nước. Em chưa học cách cứu người. Em làm gì?",
+         "options": [
+          {
+           "text": "Hô to gọi người lớn, ném phao, sào hoặc vật nổi cho bạn",
+           "ok": true,
+           "why": "Đúng: giúp bạn từ trên bờ, không tự đặt mình vào nguy hiểm."
+          },
+          {
+           "text": "Nhảy xuống kéo bạn lên",
+           "ok": false,
+           "why": "Người đuối nước có thể níu em chìm theo."
+          },
+          {
+           "text": "Bỏ chạy về nhà",
+           "ok": false,
+           "why": "Bạn cần được giúp ngay, hãy gọi người lớn."
+          }
+         ],
+         "explanation": "Cứu người từ trên bờ: hô, ném, đưa vật nổi."
+        },
+        {
+         "key": "chuot_rut_boi",
+         "question": "Đang bơi, em bị chuột rút ở chân. Em làm gì?",
+         "options": [
+          {
+           "text": "Bình tĩnh, gọi người giúp, thả nổi, duỗi thẳng chân, kéo mũi bàn chân về phía người",
+           "ok": true,
+           "why": "Đúng: bình tĩnh và kéo giãn cơ giúp em an toàn."
+          },
+          {
+           "text": "Hoảng sợ, vùng vẫy thật mạnh",
+           "ok": false,
+           "why": "Vùng vẫy làm mất sức, dễ bị chìm."
+          },
+          {
+           "text": "Cố bơi thật nhanh vào bờ một mình",
+           "ok": false,
+           "why": "Cơ đang co rút, bơi gắng sức rất nguy hiểm."
+          }
+         ],
+         "explanation": "Bình tĩnh là điều quan trọng nhất."
+        },
+        {
+         "key": "bien_cam",
+         "question": "Ở bãi biển có biển báo \"Khu vực nguy hiểm, cấm bơi\". Em làm gì?",
+         "options": [
+          {
+           "text": "Không bơi ở đó, tìm khu vực bơi có cứu hộ",
+           "ok": true,
+           "why": "Đúng: biển cấm cảnh báo dòng chảy, nước sâu nguy hiểm."
+          },
+          {
+           "text": "Bơi thử một chút gần bờ",
+           "ok": false,
+           "why": "Dòng chảy xa bờ có thể kéo người ra rất nhanh."
+          },
+          {
+           "text": "Đợi không ai thấy rồi bơi",
+           "ok": false,
+           "why": "Biển báo để bảo vệ em, không phải để tránh người nhìn."
+          }
+         ],
+         "explanation": "Luôn tuân theo biển báo."
+        },
+        {
+         "key": "khi_nao_khong",
+         "question": "Khi nào em không nên xuống nước bơi?",
+         "options": [
+          {
+           "text": "Khi vừa ăn no, đang mệt, ốm hoặc trời có sấm sét",
+           "ok": true,
+           "why": "Đúng: những lúc này dễ gặp nguy hiểm dưới nước."
+          },
+          {
+           "text": "Khi có người lớn và cứu hộ trông",
+           "ok": false,
+           "why": "Đây là lúc bơi an toàn."
+          },
+          {
+           "text": "Khi đã khởi động kĩ",
+           "ok": false,
+           "why": "Khởi động kĩ là việc nên làm trước khi bơi."
+          }
+         ],
+         "explanation": "Biết lúc nào không nên bơi."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tc5.ky_nang",
+   "grade": 5,
+   "order": 2,
+   "title": "Kĩ năng vận động cơ bản",
+   "lessons": [
+    {
+     "key": "tc5.nem_bong",
+     "order": 1,
+     "title": "Ném bóng trúng đích",
+     "description": "Thực hành ném bóng cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "tc5.chay_tiep_suc",
+     "order": 2,
+     "title": "Chạy tiếp sức",
+     "description": "Thực hành trao, nhận tín gậy trên sân.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "tc5.the_thao",
+   "grade": 5,
+   "order": 3,
+   "title": "Thể thao tự chọn",
+   "lessons": [
+    {
+     "key": "tc5.mon_the_thao",
+     "order": 1,
+     "title": "Một số môn thể thao: người chơi, dụng cụ, cách ghi điểm",
+     "description": "Biết số người, dụng cụ và cách ghi điểm của một số môn thể thao quen thuộc.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu số người mỗi đội trên sân của bóng đá, bóng rổ, bóng chuyền",
+      "Ghép môn thể thao với dụng cụ và cách ghi điểm"
+     ],
+     "summary": [
+      "Mỗi đội trên sân: bóng đá 11 người (kể cả thủ môn), bóng rổ 5 người, bóng chuyền 6 người.",
+      "Bóng đá ghi bàn khi đưa bóng vào khung thành; bóng rổ ghi điểm khi ném bóng vào rổ; bóng chuyền, cầu lông ghi điểm khi bóng, cầu chạm sân đối phương.",
+      "Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Đá cầu",
+       "lines": [
+        "Dùng chân, đầu, ngực tâng và đá quả cầu qua lưới."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Môn thể thao",
+       "tasks": [
+        {
+         "key": "so_nguoi",
+         "prompt": "Ghép môn thể thao với số người mỗi đội trên sân.",
+         "pairs": [
+          [
+           "Bóng đá",
+           "11 người"
+          ],
+          [
+           "Bóng rổ",
+           "5 người"
+          ],
+          [
+           "Bóng chuyền",
+           "6 người"
+          ],
+          [
+           "Đá cầu đôi",
+           "2 người"
+          ]
+         ],
+         "explanation": "Số người trên sân là quy định của luật mỗi môn."
+        },
+        {
+         "key": "dung_cu",
+         "prompt": "Ghép môn thể thao với dụng cụ.",
+         "pairs": [
+          [
+           "Cầu lông",
+           "Vợt và quả cầu lông"
+          ],
+          [
+           "Đá cầu",
+           "Quả cầu đá bằng chân"
+          ],
+          [
+           "Bóng bàn",
+           "Vợt nhỏ và bàn có lưới"
+          ],
+          [
+           "Bơi",
+           "Kính bơi, mũ bơi"
+          ]
+         ],
+         "explanation": "Mỗi môn có dụng cụ riêng."
+        },
+        {
+         "key": "ghi_diem",
+         "prompt": "Ghép môn thể thao với cách ghi điểm.",
+         "pairs": [
+          [
+           "Bóng đá",
+           "Đưa bóng vào khung thành đối phương"
+          ],
+          [
+           "Bóng rổ",
+           "Ném bóng vào rổ"
+          ],
+          [
+           "Bóng chuyền",
+           "Đánh bóng chạm sân đối phương"
+          ],
+          [
+           "Cầu lông",
+           "Đánh cầu rơi trong sân đối phương"
+          ]
+         ],
+         "explanation": "Hiểu cách ghi điểm giúp em chơi đúng luật."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tc6.kien_thuc",
+   "grade": 6,
+   "order": 1,
+   "title": "Kiến thức chung về chăm sóc sức khoẻ",
+   "lessons": [
+    {
+     "key": "tc6.dinh_duong_nghi_ngoi",
+     "order": 1,
+     "title": "Dinh dưỡng và nghỉ ngơi khi tập luyện",
+     "description": "Biết ăn uống, ngủ nghỉ hợp lí để tập luyện hiệu quả và khoẻ mạnh.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết ăn đủ bữa, đủ nhóm chất",
+      "Biết uống nước trước, trong và sau khi tập",
+      "Biết ngủ đủ giấc và tránh thói quen có hại"
+     ],
+     "summary": [
+      "Ăn đủ bữa, đủ nhóm chất: tinh bột, chất đạm, chất béo, vitamin và khoáng chất; ăn nhiều rau, quả.",
+      "Uống nước trước, trong và sau khi tập; ưu tiên nước lọc.",
+      "Ngủ đủ giấc, đi ngủ đúng giờ; không tập nặng ngay sau khi ăn no hay khi bỏ bữa.",
+      "Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Bữa sáng trước giờ thể dục",
+       "lines": [
+        "Ăn nhẹ, đủ chất, cách giờ tập một khoảng thời gian."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Thói quen tốt hay chưa tốt?",
+       "set": {
+        "title": "Thói quen này nên làm hay không nên làm?",
+        "groups": [
+         {
+          "id": "nen",
+          "label": "Nên làm",
+          "icon": "✅"
+         },
+         {
+          "id": "khong",
+          "label": "Không nên",
+          "icon": "⛔"
+         }
+        ],
+        "cards": [
+         {
+          "key": "du_chat",
+          "text": "Ăn đủ bữa, đủ các nhóm chất",
+          "picture": "🍱",
+          "group": "nen",
+          "explanation": "Cơ thể cần đủ năng lượng và chất để vận động, lớn lên."
+         },
+         {
+          "key": "uong_nuoc",
+          "text": "Uống nước trước, trong và sau khi tập",
+          "picture": "💧",
+          "group": "nen",
+          "explanation": "Khi vận động cơ thể mất nước qua mồ hôi."
+         },
+         {
+          "key": "ngu_du",
+          "text": "Ngủ đủ giấc, đi ngủ đúng giờ",
+          "picture": "😴",
+          "group": "nen",
+          "explanation": "Giấc ngủ giúp cơ thể hồi phục sau tập luyện."
+         },
+         {
+          "key": "rau_qua",
+          "text": "Ăn rau, quả mỗi ngày",
+          "picture": "🥦",
+          "group": "nen",
+          "explanation": "Rau quả cung cấp vitamin, chất xơ."
+         },
+         {
+          "key": "tha_long",
+          "text": "Thả lỏng, giãn cơ sau khi tập",
+          "picture": "🧘",
+          "group": "nen",
+          "explanation": "Thả lỏng giúp cơ bớt mỏi, hồi phục nhanh."
+         },
+         {
+          "key": "bo_bua_sang",
+          "text": "Bỏ bữa sáng rồi tập nặng",
+          "picture": "🚫",
+          "group": "khong",
+          "explanation": "Thiếu năng lượng dễ chóng mặt, mệt lả."
+         },
+         {
+          "key": "an_no_tap",
+          "text": "Tập nặng ngay sau khi ăn no",
+          "picture": "🍜",
+          "group": "khong",
+          "explanation": "Dễ đau bụng, buồn nôn vì dạ dày đang làm việc."
+         },
+         {
+          "key": "nuoc_ngot",
+          "text": "Uống nước ngọt có ga thay nước lọc khi tập",
+          "picture": "🥤",
+          "group": "khong",
+          "explanation": "Nước ngọt có ga nhiều đường, dễ đầy bụng."
+         },
+         {
+          "key": "thuc_khuya",
+          "text": "Thức khuya chơi điện tử trước hôm thi đấu",
+          "picture": "🎮",
+          "group": "khong",
+          "explanation": "Thiếu ngủ làm cơ thể mệt, phản xạ chậm."
+         },
+         {
+          "key": "nhin_an",
+          "text": "Nhịn ăn để giảm cân thật nhanh",
+          "picture": "⚠️",
+          "group": "khong",
+          "explanation": "Nhịn ăn làm cơ thể yếu, ảnh hưởng sự phát triển."
+         }
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tc6.chay_ngan",
+   "grade": 6,
+   "order": 2,
+   "title": "Chạy cự li ngắn",
+   "lessons": [
+    {
+     "key": "tc6.chay_cu_li_ngan",
+     "order": 1,
+     "title": "Chạy cự li ngắn: các giai đoạn và kĩ thuật",
+     "description": "Nhớ các giai đoạn, khẩu lệnh xuất phát thấp và những điểm chính của kĩ thuật chạy ngắn.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu bốn giai đoạn chạy cự li ngắn",
+      "Biết khẩu lệnh xuất phát thấp",
+      "Biết cách về đích và thả lỏng an toàn"
+     ],
+     "summary": [
+      "Bốn giai đoạn: xuất phát → chạy lao sau xuất phát → chạy giữa quãng → về đích.",
+      "Xuất phát thấp: \"Vào chỗ!\" → \"Sẵn sàng!\" (nâng hông cao hơn vai, giữ yên) → \"Chạy!\" (hoặc tiếng súng).",
+      "Về đích: chạy hết tốc độ, đánh ngực hoặc vai vào dây đích, chạy chậm dần, không dừng đột ngột.",
+      "Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Cự li ngắn",
+       "lines": [
+        "Như 60 m, 100 m, 200 m"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Từ xuất phát đến về đích",
+       "tasks": [
+        {
+         "key": "giai_doan",
+         "prompt": "Xếp các giai đoạn chạy cự li ngắn.",
+         "items": [
+          "Xuất phát",
+          "Chạy lao sau xuất phát",
+          "Chạy giữa quãng",
+          "Về đích"
+         ],
+         "explanation": "Bốn giai đoạn nối tiếp nhau của chạy ngắn.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "khau_lenh",
+         "prompt": "Xếp các khẩu lệnh xuất phát thấp.",
+         "items": [
+          "\"Vào chỗ!\"",
+          "\"Sẵn sàng!\"",
+          "\"Chạy!\" (hoặc tiếng súng)"
+         ],
+         "explanation": "Vào chỗ → sẵn sàng → chạy.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "buoi_tap",
+         "prompt": "Xếp các phần của một buổi tập chạy ngắn.",
+         "items": [
+          "Khởi động chung",
+          "Bài tập bổ trợ: chạy bước nhỏ, nâng cao đùi",
+          "Tập xuất phát và chạy tăng tốc",
+          "Thả lỏng"
+         ],
+         "explanation": "Khởi động → bổ trợ → kĩ thuật chính → thả lỏng.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "ve_dich",
+         "prompt": "Xếp các việc khi về đích.",
+         "items": [
+          "Chạy hết tốc độ những mét cuối",
+          "Đánh ngực hoặc vai vào dây đích",
+          "Chạy chậm dần, không dừng đột ngột",
+          "Đi bộ thả lỏng, hít thở sâu"
+         ],
+         "explanation": "Không dừng đột ngột để tránh chóng mặt và chấn thương.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        }
+       ]
+      },
+      {
+       "game": "choice",
+       "title": "Kĩ thuật chạy ngắn",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "cu_li",
+         "question": "Cự li nào là chạy cự li ngắn?",
+         "options": [
+          {
+           "text": "60 m, 100 m, 200 m",
+           "ok": true,
+           "why": "Đúng: chạy ngắn là chạy hết tốc độ trên quãng ngắn."
+          },
+          {
+           "text": "1500 m, 3000 m",
+           "ok": false,
+           "why": "Đây là cự li trung bình, dài."
+          },
+          {
+           "text": "Chạy marathon 42,195 km",
+           "ok": false,
+           "why": "Marathon là cự li rất dài."
+          }
+         ],
+         "explanation": "Cự li ngắn: chạy hết tốc độ."
+        },
+        {
+         "key": "san_sang",
+         "question": "Nghe lệnh \"Sẵn sàng!\" ở xuất phát thấp, em làm gì?",
+         "options": [
+          {
+           "text": "Nâng hông cao hơn vai, dồn trọng tâm ra trước, giữ yên chờ lệnh",
+           "ok": true,
+           "why": "Đúng: tư thế sẵn sàng giúp lao ra nhanh khi có lệnh."
+          },
+          {
+           "text": "Lao ra chạy ngay",
+           "ok": false,
+           "why": "Chạy trước lệnh \"Chạy!\" là phạm quy."
+          },
+          {
+           "text": "Đứng thẳng dậy",
+           "ok": false,
+           "why": "Đứng thẳng là sai tư thế xuất phát thấp."
+          }
+         ],
+         "explanation": "Sẵn sàng: nâng hông, giữ yên."
+        },
+        {
+         "key": "giua_quang",
+         "question": "Ở giai đoạn chạy giữa quãng, cần chú ý gì?",
+         "options": [
+          {
+           "text": "Giữ tốc độ cao, thân hơi ngả trước, đánh tay so le với chân",
+           "ok": true,
+           "why": "Đúng: đánh tay nhịp nhàng giúp giữ tốc độ."
+          },
+          {
+           "text": "Ngoái lại nhìn đối thủ",
+           "ok": false,
+           "why": "Ngoái lại làm giảm tốc độ, dễ mất thăng bằng."
+          },
+          {
+           "text": "Chạy chậm lại để giữ sức",
+           "ok": false,
+           "why": "Chạy ngắn cần giữ tốc độ cao suốt quãng."
+          }
+         ],
+         "explanation": "Giữ tốc độ, đánh tay so le."
+        },
+        {
+         "key": "khong_dung",
+         "question": "Vì sao không dừng lại đột ngột ngay sau khi về đích?",
+         "options": [
+          {
+           "text": "Để tim, mạch trở lại bình thường từ từ, tránh choáng và chấn thương",
+           "ok": true,
+           "why": "Đúng: dừng đột ngột dễ gây choáng, căng cơ."
+          },
+          {
+           "text": "Để được cộng thêm điểm",
+           "ok": false,
+           "why": "Thành tích tính khi qua vạch đích."
+          },
+          {
+           "text": "Vì luật bắt chạy thêm một vòng",
+           "ok": false,
+           "why": "Không có luật đó."
+          }
+         ],
+         "explanation": "Chạy chậm dần sau khi về đích."
+        },
+        {
+         "key": "pham_quy",
+         "question": "Xuất phát trước khi có lệnh \"Chạy!\" được gọi là gì?",
+         "options": [
+          {
+           "text": "Phạm quy xuất phát (xuất phát sớm)",
+           "ok": true,
+           "why": "Đúng: lần chạy đó phải xuất phát lại hoặc bị loại tuỳ luật."
+          },
+          {
+           "text": "Xuất phát tốt",
+           "ok": false,
+           "why": "Chạy trước lệnh là phạm quy."
+          },
+          {
+           "text": "Chạy lao sau xuất phát",
+           "ok": false,
+           "why": "Đó là giai đoạn sau khi xuất phát đúng lệnh."
+          }
+         ],
+         "explanation": "Chờ lệnh rồi mới chạy."
+        },
+        {
+         "key": "mat_nhin",
+         "question": "Khi chạy cự li ngắn, mắt nên nhìn thế nào?",
+         "options": [
+          {
+           "text": "Nhìn thẳng về phía trước, hướng về đích",
+           "ok": true,
+           "why": "Đúng: giúp chạy thẳng và giữ thăng bằng."
+          },
+          {
+           "text": "Nhìn xuống chân",
+           "ok": false,
+           "why": "Nhìn xuống làm cúi người, chạy chậm."
+          },
+          {
+           "text": "Nhìn sang bạn bên cạnh",
+           "ok": false,
+           "why": "Dễ chạy lệch sang ô bạn."
+          }
+         ],
+         "explanation": "Mắt nhìn thẳng."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tc6.ky_nang",
+   "grade": 6,
+   "order": 3,
+   "title": "Vận động cơ bản",
+   "lessons": [
+    {
+     "key": "tc6.nem_bong",
+     "order": 1,
+     "title": "Ném bóng",
+     "description": "Thực hành kĩ thuật ném bóng cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "tc6.bai_the_duc_lien_hoan",
+     "order": 2,
+     "title": "Bài thể dục liên hoàn",
+     "description": "Tập bài thể dục cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "tc6.the_thao",
+   "grade": 6,
+   "order": 4,
+   "title": "Thể thao tự chọn",
+   "lessons": [
+    {
+     "key": "tc6.ky_thuat_tu_chon",
+     "order": 1,
+     "title": "Kĩ thuật cơ bản môn thể thao tự chọn",
+     "description": "Bóng đá, bóng rổ, cầu lông, đá cầu, võ… theo môn trường chọn (thực hành).",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "tc7.kien_thuc",
+   "grade": 7,
+   "order": 1,
+   "title": "Kiến thức chung về chăm sóc sức khoẻ",
+   "lessons": [
+    {
+     "key": "tc7.ve_sinh_tap_luyen",
+     "order": 1,
+     "title": "Vệ sinh cá nhân và môi trường tập luyện",
+     "description": "Tìm hiểu cách giữ vệ sinh thân thể, trang phục và sân tập.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "tc7.chay_trung_binh",
+   "grade": 7,
+   "order": 2,
+   "title": "Chạy cự li trung bình",
+   "lessons": [
+    {
+     "key": "tc7.chay_cu_li_tb",
+     "order": 1,
+     "title": "Chạy cự li trung bình: phân phối sức và cách thở",
+     "description": "Biết phân phối sức, thở đúng và xử lí khi mệt trong chạy cự li trung bình.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết cự li trung bình và cách phân phối sức",
+      "Biết thở đều theo nhịp chạy",
+      "Biết xử lí khi mệt và chạy ở đường vòng"
+     ],
+     "summary": [
+      "Cự li trung bình như 800 m, 1500 m: cần phân phối sức đều, tăng tốc ở đoạn cuối.",
+      "Thở đều, sâu theo nhịp bước chạy; có thể thở bằng cả mũi và miệng.",
+      "Khi mệt, khó thở giữa chừng: giảm tốc một chút, điều chỉnh nhịp thở rồi chạy tiếp; đau ngực, chóng mặt thì dừng lại báo thầy cô.",
+      "Chạy đường vòng: hơi nghiêng người vào phía trong. Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Phân phối sức",
+       "lines": [
+        "Đoạn đầu vừa sức → đoạn giữa đều → đoạn cuối tăng tốc"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Chạy bền đúng cách",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "cu_li",
+         "question": "Cự li nào là chạy cự li trung bình?",
+         "options": [
+          {
+           "text": "800 m, 1500 m",
+           "ok": true,
+           "why": "Đúng: cần cả tốc độ và sức bền."
+          },
+          {
+           "text": "60 m, 100 m",
+           "ok": false,
+           "why": "Đây là cự li ngắn."
+          },
+          {
+           "text": "42,195 km",
+           "ok": false,
+           "why": "Đây là cự li marathon."
+          }
+         ],
+         "explanation": "Cự li trung bình: như 800 m, 1500 m."
+        },
+        {
+         "key": "tho",
+         "question": "Khi chạy cự li trung bình, nên thở thế nào?",
+         "options": [
+          {
+           "text": "Thở đều, sâu theo nhịp bước chạy",
+           "ok": true,
+           "why": "Đúng: thở nhịp nhàng giúp cơ thể đủ ô xi."
+          },
+          {
+           "text": "Nín thở càng lâu càng tốt",
+           "ok": false,
+           "why": "Nín thở làm cơ thể thiếu ô xi, nhanh mệt."
+          },
+          {
+           "text": "Thở thật nhanh và nông",
+           "ok": false,
+           "why": "Thở nông không cung cấp đủ ô xi."
+          }
+         ],
+         "explanation": "Thở đều, sâu."
+        },
+        {
+         "key": "phan_phoi",
+         "question": "Nên phân phối sức thế nào khi chạy 800 m?",
+         "options": [
+          {
+           "text": "Chạy đều sức, tốc độ vừa phải, tăng tốc ở đoạn cuối",
+           "ok": true,
+           "why": "Đúng: giữ sức để về đích tốt."
+          },
+          {
+           "text": "Chạy hết sức ngay từ đầu",
+           "ok": false,
+           "why": "Sẽ kiệt sức giữa chừng."
+          },
+          {
+           "text": "Chạy thật chậm rồi đi bộ",
+           "ok": false,
+           "why": "Không đạt mục đích rèn sức bền."
+          }
+         ],
+         "explanation": "Phân phối sức hợp lí."
+        },
+        {
+         "key": "cuc_diem",
+         "question": "Giữa chừng, em thấy rất mệt và khó thở. Cách nào phù hợp?",
+         "options": [
+          {
+           "text": "Giảm tốc một chút, điều chỉnh thở sâu rồi chạy tiếp; đau ngực, chóng mặt thì dừng, báo thầy cô",
+           "ok": true,
+           "why": "Đúng: cơn mệt này thường qua đi khi điều chỉnh nhịp thở; dấu hiệu bất thường thì phải dừng."
+          },
+          {
+           "text": "Tăng tốc thật nhanh để vượt qua cơn mệt",
+           "ok": false,
+           "why": "Tăng tốc làm thiếu ô xi hơn."
+          },
+          {
+           "text": "Ngồi bệt xuống ngay giữa đường chạy",
+           "ok": false,
+           "why": "Dừng đột ngột giữa đường chạy dễ choáng và gây va chạm."
+          }
+         ],
+         "explanation": "Lắng nghe cơ thể, điều chỉnh nhịp thở."
+        },
+        {
+         "key": "duong_vong",
+         "question": "Khi chạy ở đường vòng (khúc cua), người nên thế nào?",
+         "options": [
+          {
+           "text": "Hơi nghiêng người vào phía trong vòng chạy",
+           "ok": true,
+           "why": "Đúng: giúp chống lại lực văng ra ngoài."
+          },
+          {
+           "text": "Nghiêng người ra phía ngoài",
+           "ok": false,
+           "why": "Dễ bị văng ra ngoài, mất thăng bằng."
+          },
+          {
+           "text": "Đứng thẳng, chạy chậm hẳn lại",
+           "ok": false,
+           "why": "Không cần chạy chậm hẳn khi nghiêng người đúng."
+          }
+         ],
+         "explanation": "Đường vòng: nghiêng vào trong."
+        },
+        {
+         "key": "ve_dich",
+         "question": "Chạy xong 800 m, em nên làm gì?",
+         "options": [
+          {
+           "text": "Đi bộ thả lỏng, hít thở sâu, uống nước từng ngụm",
+           "ok": true,
+           "why": "Đúng: giúp cơ thể hồi phục từ từ."
+          },
+          {
+           "text": "Nằm vật ra sân ngay",
+           "ok": false,
+           "why": "Dừng đột ngột có thể gây choáng."
+          },
+          {
+           "text": "Uống thật nhiều nước đá một lúc",
+           "ok": false,
+           "why": "Uống nhiều, lạnh một lúc dễ đau bụng."
+          }
+         ],
+         "explanation": "Hồi phục từ từ sau khi chạy."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tc7.nhay_xa",
+   "grade": 7,
+   "order": 3,
+   "title": "Nhảy xa",
+   "lessons": [
+    {
+     "key": "tc7.nhay_xa_kieu_ngoi",
+     "order": 1,
+     "title": "Nhảy xa kiểu ngồi",
+     "description": "Nhớ các giai đoạn, động tác trên không và cách đo thành tích nhảy xa.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu bốn giai đoạn nhảy xa",
+      "Biết động tác kiểu ngồi trên không",
+      "Biết luật giậm nhảy và cách đo thành tích"
+     ],
+     "summary": [
+      "Bốn giai đoạn: chạy đà → giậm nhảy → bay trên không → tiếp đất.",
+      "Kiểu ngồi: sau giậm nhảy, co chân giậm lên gần chân lăng như ngồi, rồi duỗi hai chân ra trước khi tiếp đất.",
+      "Giậm qua vạch giậm là phạm quy. Thành tích đo từ vết chạm cát gần vạch giậm nhất đến mép vạch giậm.",
+      "Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Chạy đà",
+       "lines": [
+        "Tốc độ tăng dần, cao nhất ở những bước cuối trước khi giậm."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Từng giai đoạn nhảy xa",
+       "tasks": [
+        {
+         "key": "giai_doan",
+         "prompt": "Xếp các giai đoạn nhảy xa.",
+         "items": [
+          "Chạy đà",
+          "Giậm nhảy",
+          "Bay trên không",
+          "Tiếp đất"
+         ],
+         "explanation": "Bốn giai đoạn nối tiếp nhau.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "kieu_ngoi",
+         "prompt": "Xếp các động tác của kiểu ngồi.",
+         "items": [
+          "Giậm nhảy, chân lăng đưa ra trước",
+          "Co chân giậm lên gần chân lăng như ngồi",
+          "Duỗi hai chân ra trước khi sắp chạm cát",
+          "Tiếp đất bằng hai chân, khuỵu gối, đổ người về trước"
+         ],
+         "explanation": "Kiểu ngồi: co hai chân lại như ngồi trên không, rồi duỗi ra trước.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "chuan_bi",
+         "prompt": "Xếp các việc chuẩn bị một buổi tập nhảy xa.",
+         "items": [
+          "Kiểm tra, xới tơi hố cát",
+          "Khởi động kĩ, nhất là cổ chân, gối",
+          "Tập chạy đà, giậm nhảy",
+          "Nhảy hoàn chỉnh"
+         ],
+         "explanation": "Kiểm tra an toàn → khởi động → bổ trợ → hoàn chỉnh.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "do_thanh_tich",
+         "prompt": "Xếp các việc từ lúc tiếp đất đến khi có thành tích.",
+         "items": [
+          "Tiếp đất trong hố cát",
+          "Bước ra khỏi hố cát về phía trước",
+          "Đo từ vết chạm cát gần nhất đến vạch giậm"
+         ],
+         "explanation": "Ra khỏi hố về phía trước để không làm hỏng vết chạm cát; sau đó đo thành tích.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        }
+       ]
+      },
+      {
+       "game": "choice",
+       "title": "Luật và an toàn",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "qua_vach",
+         "question": "Khi giậm nhảy, chân giậm vượt qua vạch giậm thì sao?",
+         "options": [
+          {
+           "text": "Lần nhảy đó không được tính (phạm quy)",
+           "ok": true,
+           "why": "Đúng: phải giậm trước vạch."
+          },
+          {
+           "text": "Được cộng thêm thành tích",
+           "ok": false,
+           "why": "Giậm qua vạch là phạm quy."
+          },
+          {
+           "text": "Không ảnh hưởng gì",
+           "ok": false,
+           "why": "Lần nhảy bị huỷ."
+          }
+         ],
+         "explanation": "Giậm trước vạch giậm."
+        },
+        {
+         "key": "cach_do",
+         "question": "Thành tích nhảy xa được đo thế nào?",
+         "options": [
+          {
+           "text": "Từ vết chạm cát gần vạch giậm nhất đến mép vạch giậm",
+           "ok": true,
+           "why": "Đúng: lấy vết gần nhất, kể cả vết tay chạm sau."
+          },
+          {
+           "text": "Từ chỗ bắt đầu chạy đà đến chỗ tiếp đất",
+           "ok": false,
+           "why": "Quãng chạy đà không tính."
+          },
+          {
+           "text": "Từ vết chân xa nhất đến vạch giậm",
+           "ok": false,
+           "why": "Phải lấy vết chạm cát gần vạch giậm nhất."
+          }
+         ],
+         "explanation": "Đo từ vết gần nhất."
+        },
+        {
+         "key": "toc_do_da",
+         "question": "Khi chạy đà nhảy xa, tốc độ nên thế nào?",
+         "options": [
+          {
+           "text": "Tăng dần, cao nhất ở những bước cuối trước khi giậm",
+           "ok": true,
+           "why": "Đúng: tốc độ cuối đà giúp bay xa."
+          },
+          {
+           "text": "Thật nhanh lúc đầu rồi chậm dần",
+           "ok": false,
+           "why": "Tốc độ giảm trước khi giậm làm nhảy gần."
+          },
+          {
+           "text": "Dừng lại trước vạch rồi bật",
+           "ok": false,
+           "why": "Đó là bật xa tại chỗ, không phải nhảy xa có đà."
+          }
+         ],
+         "explanation": "Chạy đà tăng tốc dần."
+        },
+        {
+         "key": "tiep_dat",
+         "question": "Tiếp đất thế nào cho an toàn và không mất thành tích?",
+         "options": [
+          {
+           "text": "Hai chân, khuỵu gối, đổ người về trước",
+           "ok": true,
+           "why": "Đúng: giảm lực và không ngã ngửa ra sau."
+          },
+          {
+           "text": "Thẳng chân, ngả người ra sau",
+           "ok": false,
+           "why": "Dễ chấn thương và chạm cát phía sau làm giảm thành tích."
+          },
+          {
+           "text": "Chống hai tay xuống trước",
+           "ok": false,
+           "why": "Chống tay dễ bị chấn thương cổ tay."
+          }
+         ],
+         "explanation": "Tiếp đất mềm, đổ người về trước."
+        },
+        {
+         "key": "kiem_tra",
+         "question": "Trước khi tập nhảy xa, cần kiểm tra điều gì?",
+         "options": [
+          {
+           "text": "Hố cát đã xới tơi, không có vật sắc nhọn, ván giậm chắc chắn",
+           "ok": true,
+           "why": "Đúng: bảo đảm an toàn khi tiếp đất và giậm nhảy."
+          },
+          {
+           "text": "Chỉ cần mang giày đẹp",
+           "ok": false,
+           "why": "An toàn của hố cát quan trọng hơn."
+          },
+          {
+           "text": "Không cần kiểm tra gì",
+           "ok": false,
+           "why": "Hố cát cứng, có vật nhọn có thể gây chấn thương."
+          }
+         ],
+         "explanation": "Kiểm tra sân bãi trước khi tập."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tc7.the_thao",
+   "grade": 7,
+   "order": 4,
+   "title": "Thể thao tự chọn",
+   "lessons": [
+    {
+     "key": "tc7.bong_ro",
+     "order": 1,
+     "title": "Bóng rổ: luật và kĩ thuật cơ bản",
+     "description": "Biết cách tính điểm, một số lỗi và kĩ thuật cơ bản của bóng rổ.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết cách tính điểm trong bóng rổ",
+      "Nhận biết lỗi chạy bước, hai lần dẫn bóng",
+      "Nêu điểm chính của chuyền, bắt, ném rổ"
+     ],
+     "summary": [
+      "Ném phạt trúng: 1 điểm; ném trúng rổ trong vạch 3 điểm: 2 điểm; ngoài vạch 3 điểm: 3 điểm.",
+      "Lỗi chạy bước: cầm bóng di chuyển mà không dẫn bóng. Lỗi hai lần dẫn: dẫn bóng, cầm lại rồi dẫn tiếp.",
+      "Chuyền bóng hai tay trước ngực: đẩy bóng ra, miết cổ tay, ngón tay. Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Ném rổ",
+       "lines": [
+        "Đưa bóng lên trên vai, duỗi tay, miết bóng ra đầu ngón tay."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Bóng rổ",
+       "tasks": [
+        {
+         "key": "diem",
+         "prompt": "Ghép cú ném trúng rổ với số điểm.",
+         "pairs": [
+          [
+           "Ném phạt",
+           "1 điểm"
+          ],
+          [
+           "Ném trong vạch 3 điểm",
+           "2 điểm"
+          ],
+          [
+           "Ném ngoài vạch 3 điểm",
+           "3 điểm"
+          ]
+         ],
+         "explanation": "Ném càng xa rổ, điểm càng cao."
+        },
+        {
+         "key": "thuat_ngu",
+         "prompt": "Ghép thuật ngữ với ý nghĩa.",
+         "pairs": [
+          [
+           "Dẫn bóng",
+           "Đập bóng xuống sàn liên tục bằng một tay khi di chuyển"
+          ],
+          [
+           "Chạy bước (lỗi)",
+           "Cầm bóng di chuyển mà không dẫn bóng"
+          ],
+          [
+           "Hai lần dẫn (lỗi)",
+           "Dẫn bóng, cầm lại rồi lại dẫn tiếp"
+          ],
+          [
+           "Chuyền bóng",
+           "Đưa bóng cho đồng đội"
+          ]
+         ],
+         "explanation": "Biết lỗi để chơi đúng luật."
+        },
+        {
+         "key": "ky_thuat",
+         "prompt": "Ghép kĩ thuật với điểm chính.",
+         "pairs": [
+          [
+           "Chuyền bóng hai tay trước ngực",
+           "Đẩy bóng từ ngực ra, miết cổ tay, ngón tay"
+          ],
+          [
+           "Ném rổ một tay trên vai",
+           "Đưa bóng lên trên vai, duỗi tay, miết bóng ra đầu ngón tay"
+          ],
+          [
+           "Bắt bóng",
+           "Hai tay đón bóng, co tay kéo bóng về ngực"
+          ]
+         ],
+         "explanation": "Mỗi kĩ thuật có điểm chính cần nhớ khi tập."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tc8.kien_thuc",
+   "grade": 8,
+   "order": 1,
+   "title": "Phòng tránh và xử lí chấn thương",
+   "lessons": [
+    {
+     "key": "tc8.xu_li_chan_thuong",
+     "order": 1,
+     "title": "Xử lí đúng, sai khi bị chấn thương",
+     "description": "Phân biệt cách xử lí đúng và sai với các chấn thương thường gặp trong thể thao.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết cách xử lí ban đầu bong gân, chảy máu cam, chuột rút, vết thương chảy máu",
+      "Nhận ra những cách xử lí sai, có hại"
+     ],
+     "summary": [
+      "Bong gân: nghỉ, chườm lạnh, băng ép, kê cao; không xoa dầu nóng, không bóp mạnh.",
+      "Nghi gãy xương: giữ bất động, không tự nắn, gọi người lớn, đưa đi cấp cứu.",
+      "Vết thương chảy máu: ép gạc sạch lên vết thương. Người bị ngất: đặt nằm nơi thoáng, không đổ nước vào miệng.",
+      "Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Bong gân",
+       "lines": [
+        "Chườm lạnh qua khăn, không đặt đá trực tiếp lên da."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Đúng hay sai?",
+       "set": {
+        "title": "Cách xử lí này đúng hay sai?",
+        "groups": [
+         {
+          "id": "dung",
+          "label": "Xử lí đúng",
+          "icon": "✅"
+         },
+         {
+          "id": "sai",
+          "label": "Xử lí sai",
+          "icon": "❌"
+         }
+        ],
+        "cards": [
+         {
+          "key": "bong_gan_d",
+          "text": "Bong gân: chườm lạnh, băng ép, kê cao chỗ bị thương",
+          "picture": "🧊",
+          "group": "dung",
+          "explanation": "Lạnh và kê cao giúp giảm sưng, đau."
+         },
+         {
+          "key": "mau_cam_d",
+          "text": "Chảy máu cam: ngồi cúi đầu về trước, bóp cánh mũi",
+          "picture": "👃",
+          "group": "dung",
+          "explanation": "Bóp cánh mũi giúp cầm máu; cúi đầu tránh máu chảy xuống họng."
+         },
+         {
+          "key": "chuot_rut_d",
+          "text": "Chuột rút: kéo giãn nhẹ cơ bị co rút",
+          "picture": "🦵",
+          "group": "dung",
+          "explanation": "Kéo giãn giúp cơ hết co rút."
+         },
+         {
+          "key": "gay_xuong_d",
+          "text": "Nghi gãy xương: giữ bất động, gọi người lớn, đưa đi cấp cứu",
+          "picture": "🩼",
+          "group": "dung",
+          "explanation": "Bất động tránh làm tổn thương nặng thêm."
+         },
+         {
+          "key": "chay_mau_d",
+          "text": "Vết thương chảy máu: ép gạc sạch lên vết thương",
+          "picture": "🩹",
+          "group": "dung",
+          "explanation": "Ép trực tiếp giúp cầm máu."
+         },
+         {
+          "key": "bong_gan_s",
+          "text": "Bong gân: xoa dầu nóng, bóp mạnh ngay",
+          "picture": "🔥",
+          "group": "sai",
+          "explanation": "Nhiệt và bóp mạnh làm sưng nhiều hơn trong những ngày đầu."
+         },
+         {
+          "key": "mau_cam_s",
+          "text": "Chảy máu cam: ngửa đầu ra sau",
+          "picture": "🙃",
+          "group": "sai",
+          "explanation": "Máu chảy xuống họng, gây sặc, nôn."
+         },
+         {
+          "key": "gay_xuong_s",
+          "text": "Nghi gãy xương: cố nắn lại chỗ gãy",
+          "picture": "⚠️",
+          "group": "sai",
+          "explanation": "Tự nắn có thể làm tổn thương mạch máu, thần kinh."
+         },
+         {
+          "key": "chuot_rut_s",
+          "text": "Chuột rút: đấm mạnh vào chỗ bị co rút",
+          "picture": "👊",
+          "group": "sai",
+          "explanation": "Đấm mạnh có thể làm tổn thương cơ."
+         },
+         {
+          "key": "ngat_s",
+          "text": "Người bị ngất: đổ nước vào miệng cho tỉnh",
+          "picture": "💦",
+          "group": "sai",
+          "explanation": "Người chưa tỉnh có thể bị sặc nước vào đường thở."
+         }
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tc8.nhay_cao",
+   "grade": 8,
+   "order": 2,
+   "title": "Nhảy cao",
+   "lessons": [
+    {
+     "key": "tc8.nhay_cao_buoc_qua",
+     "order": 1,
+     "title": "Nhảy cao kiểu bước qua",
+     "description": "Nhớ các giai đoạn, động tác qua xà kiểu bước qua và cách tập an toàn.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu bốn giai đoạn nhảy cao",
+      "Biết động tác qua xà kiểu bước qua",
+      "Biết tập từ dễ đến khó, an toàn"
+     ],
+     "summary": [
+      "Bốn giai đoạn: chạy đà → giậm nhảy → qua xà → tiếp đất.",
+      "Kiểu bước qua: chân lăng đá lên cao qua xà, chân giậm đưa theo; hai chân lần lượt bước qua xà; tiếp đất bằng chân lăng trước.",
+      "Tập an toàn: có đệm tiếp đất, xà đặt thấp rồi nâng dần, khởi động kĩ cổ chân, gối.",
+      "Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Bài tập bổ trợ",
+       "lines": [
+        "Đá lăng tại chỗ → chạy đà 3 bước giậm nhảy → nhảy qua dây chun thấp"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Nhảy cao kiểu bước qua",
+       "tasks": [
+        {
+         "key": "giai_doan",
+         "prompt": "Xếp các giai đoạn nhảy cao.",
+         "items": [
+          "Chạy đà",
+          "Giậm nhảy",
+          "Qua xà",
+          "Tiếp đất"
+         ],
+         "explanation": "Bốn giai đoạn của nhảy cao.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "qua_xa",
+         "prompt": "Xếp các động tác qua xà kiểu bước qua.",
+         "items": [
+          "Chân lăng đá lên cao qua xà",
+          "Chân giậm nhanh chóng đưa theo",
+          "Hai chân lần lượt bước qua xà",
+          "Tiếp đất bằng chân lăng trước"
+         ],
+         "explanation": "Như bước qua một chướng ngại: chân lăng trước, chân giậm sau.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "an_toan",
+         "prompt": "Xếp các việc chuẩn bị tập nhảy cao an toàn.",
+         "items": [
+          "Kiểm tra đệm tiếp đất",
+          "Khởi động kĩ cổ chân, gối",
+          "Đặt xà ở độ cao thấp",
+          "Tập nhảy rồi nâng xà dần"
+         ],
+         "explanation": "An toàn trước, tăng độ khó dần.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "bo_tro",
+         "prompt": "Xếp các bài tập bổ trợ từ dễ đến khó.",
+         "items": [
+          "Đá lăng chân tại chỗ",
+          "Chạy đà 3 bước giậm nhảy",
+          "Chạy đà giậm nhảy qua dây chun thấp",
+          "Nhảy hoàn chỉnh qua xà"
+         ],
+         "explanation": "Từ động tác đơn lẻ đến phối hợp hoàn chỉnh.",
+         "first_label": "Dễ",
+         "last_label": "Khó"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tc8.the_thao",
+   "grade": 8,
+   "order": 3,
+   "title": "Thể thao tự chọn",
+   "lessons": [
+    {
+     "key": "tc8.cau_long",
+     "order": 1,
+     "title": "Cầu lông: luật và kĩ thuật cơ bản",
+     "description": "Biết cách tính điểm, quyền phát cầu và một số kĩ thuật cơ bản của cầu lông.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết cách tính điểm một ván, một trận",
+      "Biết quyền phát cầu và ô phát cầu trong đánh đơn",
+      "Ghép kĩ thuật với mục đích"
+     ],
+     "summary": [
+      "Một ván 21 điểm; thắng 2 trong 3 ván là thắng trận. Hoà 20–20 phải hơn 2 điểm; hoà 29–29 thì ai đạt 30 trước thắng ván.",
+      "Bên nào ghi điểm thì được (hoặc tiếp tục) phát cầu. Đánh đơn: điểm của người phát chẵn thì phát từ ô bên phải, lẻ thì từ ô bên trái.",
+      "Cầm vợt thuận tay kiểu bắt tay. Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Phát cầu",
+       "lines": [
+        "Phát chéo sang ô đối diện của đối phương."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Cầu lông",
+       "tasks": [
+        {
+         "key": "ky_thuat",
+         "prompt": "Ghép kĩ thuật với mục đích, cách làm.",
+         "pairs": [
+          [
+           "Cầm vợt thuận tay",
+           "Kiểu bắt tay"
+          ],
+          [
+           "Phát cầu",
+           "Đánh cầu chéo sang ô phát đối diện"
+          ],
+          [
+           "Đánh cầu cao sâu",
+           "Đưa cầu lên cao về cuối sân đối phương"
+          ],
+          [
+           "Đập cầu",
+           "Đánh mạnh, cầu cắm xuống sân đối phương"
+          ]
+         ],
+         "explanation": "Mỗi kĩ thuật có mục đích riêng."
+        },
+        {
+         "key": "tinh_diem",
+         "prompt": "Ghép tình huống với quy định tính điểm.",
+         "pairs": [
+          [
+           "Số điểm thắng một ván",
+           "21 điểm"
+          ],
+          [
+           "Thắng một trận",
+           "Thắng 2 trong 3 ván"
+          ],
+          [
+           "Hoà 20–20",
+           "Phải hơn 2 điểm mới thắng ván"
+          ],
+          [
+           "Hoà 29–29",
+           "Ai đạt 30 điểm trước thắng ván"
+          ]
+         ],
+         "explanation": "Luật tính điểm của cầu lông hiện nay."
+        },
+        {
+         "key": "phat_cau",
+         "prompt": "Ghép tình huống với quyền phát cầu (đánh đơn).",
+         "pairs": [
+          [
+           "Người phát cầu ghi điểm",
+           "Tiếp tục phát cầu"
+          ],
+          [
+           "Bên nhận cầu ghi điểm",
+           "Giành quyền phát cầu"
+          ],
+          [
+           "Điểm của người phát là số chẵn",
+           "Phát từ ô bên phải"
+          ],
+          [
+           "Điểm của người phát là số lẻ",
+           "Phát từ ô bên trái"
+          ]
+         ],
+         "explanation": "Quyền phát cầu thuộc về bên vừa ghi điểm."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tc9.kien_thuc",
+   "grade": 9,
+   "order": 1,
+   "title": "Theo dõi sức khoẻ khi tập luyện",
+   "lessons": [
+    {
+     "key": "tc9.do_mach",
+     "order": 1,
+     "title": "Đo mạch và điều chỉnh lượng vận động",
+     "description": "Biết đo mạch, nhận ra dấu hiệu quá sức và tăng lượng vận động hợp lí.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Đo mạch ở cổ tay, ở cổ đúng cách",
+      "Tính mạch mỗi phút từ số lần đếm",
+      "Nhận ra dấu hiệu tập quá sức"
+     ],
+     "summary": [
+      "Đo mạch cổ tay: đặt ngón trỏ và ngón giữa phía trong cổ tay, gốc ngón cái; đếm 15 giây rồi nhân 4.",
+      "Mạch lúc nghỉ ở tuổi thiếu niên khoẻ mạnh thường khoảng 60–100 lần/phút; vận động càng mạnh mạch càng nhanh.",
+      "Dấu hiệu quá sức: chóng mặt, đau ngực, khó thở kéo dài, mạch rất nhanh không giảm khi nghỉ: dừng tập, báo thầy cô.",
+      "Tăng lượng vận động từ từ, vừa sức. Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Tính mạch",
+       "lines": [
+        "Đếm 15 giây được 20 lần → 20 × 4 = 80 lần/phút"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Đo mạch và tự tập",
+       "tasks": [
+        {
+         "key": "mach_co_tay",
+         "prompt": "Xếp các bước đo mạch ở cổ tay.",
+         "items": [
+          "Đặt ngón trỏ, ngón giữa phía trong cổ tay, gốc ngón cái",
+          "Ấn nhẹ đến khi thấy mạch đập",
+          "Đếm số lần đập trong 15 giây",
+          "Nhân với 4 để có số lần mỗi phút"
+         ],
+         "explanation": "Không dùng ngón cái để bắt mạch vì ngón cái có mạch riêng.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "mach_co",
+         "prompt": "Xếp các bước đo mạch ở cổ.",
+         "items": [
+          "Đặt hai ngón tay vào một bên cổ, cạnh khí quản",
+          "Ấn nhẹ đến khi thấy mạch đập",
+          "Đếm số lần đập trong 30 giây",
+          "Nhân với 2 để có số lần mỗi phút"
+         ],
+         "explanation": "Chỉ ấn nhẹ một bên cổ.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "so_sanh",
+         "prompt": "Xếp theo mạch từ chậm đến nhanh.",
+         "items": [
+          "Khi ngủ",
+          "Khi ngồi nghỉ",
+          "Khi đi bộ",
+          "Khi chạy nhanh"
+         ],
+         "explanation": "Vận động càng mạnh, tim đập càng nhanh.",
+         "first_label": "Chậm",
+         "last_label": "Nhanh"
+        },
+        {
+         "key": "tu_tap",
+         "prompt": "Xếp các việc khi tự tập ở nhà.",
+         "items": [
+          "Khởi động",
+          "Tập bài chính vừa sức",
+          "Thả lỏng",
+          "Ghi nhật kí tập luyện"
+         ],
+         "explanation": "Ghi nhật kí giúp theo dõi tiến bộ và điều chỉnh.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        }
+       ]
+      },
+      {
+       "game": "choice",
+       "title": "Lắng nghe cơ thể",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "mach_nghi",
+         "question": "Mạch lúc nghỉ của thiếu niên khoẻ mạnh thường khoảng bao nhiêu?",
+         "options": [
+          {
+           "text": "60–100 lần/phút",
+           "ok": true,
+           "why": "Đúng: đây là khoảng thường gặp lúc nghỉ."
+          },
+          {
+           "text": "20–30 lần/phút",
+           "ok": false,
+           "why": "Quá chậm so với bình thường."
+          },
+          {
+           "text": "180–200 lần/phút",
+           "ok": false,
+           "why": "Đây là mức khi gắng sức rất mạnh, không phải lúc nghỉ."
+          }
+         ],
+         "explanation": "Mạch nghỉ khoảng 60–100 lần/phút."
+        },
+        {
+         "key": "tinh_mach",
+         "question": "Đếm mạch trong 15 giây được 20 lần. Mạch mỗi phút là bao nhiêu?",
+         "options": [
+          {
+           "text": "80 lần/phút",
+           "ok": true,
+           "why": "Đúng: 20 × 4 = 80."
+          },
+          {
+           "text": "60 lần/phút",
+           "ok": false,
+           "why": "Phải nhân 4 vì 1 phút = 4 × 15 giây."
+          },
+          {
+           "text": "35 lần/phút",
+           "ok": false,
+           "why": "Không cộng thêm 15, mà nhân với 4."
+          }
+         ],
+         "explanation": "Số lần trong 15 giây × 4."
+        },
+        {
+         "key": "qua_suc",
+         "question": "Dấu hiệu nào cho thấy em đang tập quá sức?",
+         "options": [
+          {
+           "text": "Chóng mặt, đau ngực, khó thở kéo dài",
+           "ok": true,
+           "why": "Đúng: cần dừng tập và báo thầy cô."
+          },
+          {
+           "text": "Ra mồ hôi nhẹ, người ấm lên",
+           "ok": false,
+           "why": "Đây là phản ứng bình thường khi vận động."
+          },
+          {
+           "text": "Thở nhanh hơn một chút",
+           "ok": false,
+           "why": "Thở nhanh hơn khi tập là bình thường."
+          }
+         ],
+         "explanation": "Biết dấu hiệu bất thường để dừng kịp thời."
+        },
+        {
+         "key": "tang_dan",
+         "question": "Muốn chạy bền tốt hơn, em nên tăng lượng tập thế nào?",
+         "options": [
+          {
+           "text": "Tăng dần từng ít một, vừa sức",
+           "ok": true,
+           "why": "Đúng: cơ thể cần thời gian thích nghi."
+          },
+          {
+           "text": "Tăng gấp đôi mỗi ngày",
+           "ok": false,
+           "why": "Tăng quá nhanh dễ chấn thương, quá sức."
+          },
+          {
+           "text": "Tập thật nặng một buổi rồi nghỉ cả tuần",
+           "ok": false,
+           "why": "Tập không đều không giúp tiến bộ."
+          }
+         ],
+         "explanation": "Nguyên tắc tăng dần."
+        },
+        {
+         "key": "mach_toi_da",
+         "question": "Công thức thường dùng để ước tính mạch tối đa là:",
+         "options": [
+          {
+           "text": "220 trừ số tuổi",
+           "ok": true,
+           "why": "Đúng: đây là cách ước tính đơn giản, mỗi người có thể khác."
+          },
+          {
+           "text": "100 cộng số tuổi",
+           "ok": false,
+           "why": "Đây không phải công thức ước tính mạch tối đa."
+          },
+          {
+           "text": "Bằng mạch lúc nghỉ",
+           "ok": false,
+           "why": "Mạch tối đa cao hơn nhiều mạch lúc nghỉ."
+          }
+         ],
+         "explanation": "Mạch tối đa ước tính ≈ 220 − tuổi."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tc9.van_dong",
+   "grade": 9,
+   "order": 2,
+   "title": "Vận động cơ bản",
+   "lessons": [
+    {
+     "key": "tc9.chay_ngan_100",
+     "order": 1,
+     "title": "Chạy cự li ngắn 100 m",
+     "description": "Thực hành kĩ thuật chạy ngắn cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "tc9.nhay_xa_uon_than",
+     "order": 2,
+     "title": "Nhảy xa kiểu ưỡn thân",
+     "description": "Thực hành trên sân cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "tc9.the_thao",
+   "grade": 9,
+   "order": 3,
+   "title": "Thể thao tự chọn",
+   "lessons": [
+    {
+     "key": "tc9.bong_chuyen",
+     "order": 1,
+     "title": "Bóng chuyền: luật và kĩ thuật cơ bản",
+     "description": "Biết cách tính điểm, một số lỗi và kĩ thuật cơ bản của bóng chuyền.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết số người, số điểm một hiệp, cách thắng trận",
+      "Ghép kĩ thuật với cách thực hiện",
+      "Nhận biết một số lỗi thường gặp"
+     ],
+     "summary": [
+      "Mỗi đội 6 người trên sân. Hiệp 1–4: 25 điểm; hiệp 5 (quyết thắng): 15 điểm; phải hơn 2 điểm. Thắng 3 trong 5 hiệp.",
+      "Mỗi đội chạm bóng tối đa 3 lần trước khi đưa bóng sang sân đối phương (không tính chắn bóng); một người không chạm bóng hai lần liên tiếp.",
+      "Đệm bóng bằng hai cẳng tay; chuyền bóng cao tay bằng các ngón tay. Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Một pha bóng",
+       "lines": [
+        "Đệm → chuyền → đập: ba lần chạm của một đội."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Bóng chuyền",
+       "tasks": [
+        {
+         "key": "luat",
+         "prompt": "Ghép nội dung với quy định.",
+         "pairs": [
+          [
+           "Số người mỗi đội trên sân",
+           "6 người"
+          ],
+          [
+           "Điểm thắng hiệp 1–4",
+           "25 điểm"
+          ],
+          [
+           "Điểm thắng hiệp 5",
+           "15 điểm"
+          ],
+          [
+           "Thắng một trận",
+           "Thắng 3 trong 5 hiệp"
+          ]
+         ],
+         "explanation": "Luật bóng chuyền trong nhà."
+        },
+        {
+         "key": "ky_thuat",
+         "prompt": "Ghép kĩ thuật với cách thực hiện.",
+         "pairs": [
+          [
+           "Đệm bóng",
+           "Hai cẳng tay áp sát, đỡ bóng thấp"
+          ],
+          [
+           "Chuyền bóng cao tay",
+           "Dùng các ngón tay chuyền bóng trên đầu"
+          ],
+          [
+           "Phát bóng thấp tay",
+           "Đánh bóng từ dưới thấp, đứng sau vạch cuối sân"
+          ],
+          [
+           "Đập bóng",
+           "Bật nhảy, đánh bóng mạnh từ trên cao xuống"
+          ]
+         ],
+         "explanation": "Mỗi kĩ thuật dùng cho một tình huống khác nhau."
+        },
+        {
+         "key": "loi",
+         "prompt": "Ghép tình huống với lỗi.",
+         "pairs": [
+          [
+           "Một đội chạm bóng 4 lần",
+           "Lỗi quá ba lần chạm"
+          ],
+          [
+           "Một người chạm bóng hai lần liền",
+           "Lỗi chạm bóng hai lần"
+          ],
+          [
+           "Chạm lưới khi đang chơi bóng",
+           "Lỗi chạm lưới"
+          ],
+          [
+           "Giẫm vào sân khi phát bóng",
+           "Lỗi phát bóng"
+          ]
+         ],
+         "explanation": "Biết lỗi để chơi đúng luật, công bằng."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tc10.kien_thuc",
+   "grade": 10,
+   "order": 1,
+   "title": "Kiến thức chung về tập luyện",
+   "lessons": [
+    {
+     "key": "tc10.nguyen_tac_tap",
+     "order": 1,
+     "title": "Nguyên tắc tập luyện và tố chất thể lực",
+     "description": "Hiểu các nguyên tắc tập luyện, lượng vận động và bài kiểm tra tố chất thể lực.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu các nguyên tắc tập luyện",
+      "Phân biệt khối lượng và cường độ vận động",
+      "Ghép tố chất thể lực với bài kiểm tra"
+     ],
+     "summary": [
+      "Nguyên tắc: vừa sức, tăng dần, thường xuyên và có hệ thống, phù hợp từng người.",
+      "Lượng vận động gồm khối lượng (quãng đường, số lần, thời gian) và cường độ (mức gắng sức: tốc độ, mạch); thời gian nghỉ cũng quyết định hiệu quả.",
+      "Tố chất thể lực: sức nhanh, sức mạnh, sức bền, khéo léo, mềm dẻo. Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Bài kiểm tra thể lực học sinh",
+       "lines": [
+        "Chạy 30 m xuất phát cao, bật xa tại chỗ, chạy con thoi 4 × 10 m, chạy tuỳ sức 5 phút…"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Tập luyện khoa học",
+       "tasks": [
+        {
+         "key": "nguyen_tac",
+         "prompt": "Ghép nguyên tắc với ý nghĩa.",
+         "pairs": [
+          [
+           "Vừa sức",
+           "Lượng tập hợp với sức khoẻ, lứa tuổi"
+          ],
+          [
+           "Tăng dần",
+           "Nâng lượng vận động từ từ"
+          ],
+          [
+           "Thường xuyên, hệ thống",
+           "Tập đều đặn, có kế hoạch"
+          ],
+          [
+           "Phù hợp từng người",
+           "Chọn bài tập theo đặc điểm mỗi người"
+          ]
+         ],
+         "explanation": "Tập đúng nguyên tắc giúp tiến bộ, tránh chấn thương."
+        },
+        {
+         "key": "to_chat",
+         "prompt": "Ghép tố chất thể lực với bài kiểm tra.",
+         "pairs": [
+          [
+           "Sức nhanh",
+           "Chạy 30 m xuất phát cao"
+          ],
+          [
+           "Sức bền",
+           "Chạy tuỳ sức 5 phút"
+          ],
+          [
+           "Sức mạnh chân",
+           "Bật xa tại chỗ"
+          ],
+          [
+           "Khéo léo, linh hoạt",
+           "Chạy con thoi 4 × 10 m"
+          ]
+         ],
+         "explanation": "Mỗi bài kiểm tra đánh giá một tố chất chính."
+        },
+        {
+         "key": "luong_vd",
+         "prompt": "Ghép thành phần với ý nghĩa.",
+         "pairs": [
+          [
+           "Khối lượng vận động",
+           "Tổng quãng đường, số lần, thời gian tập"
+          ],
+          [
+           "Cường độ vận động",
+           "Mức gắng sức: tốc độ, mạch"
+          ],
+          [
+           "Thời gian nghỉ",
+           "Khoảng nghỉ giữa các lần tập"
+          ]
+         ],
+         "explanation": "Điều chỉnh khối lượng, cường độ, nghỉ để tập vừa sức."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tc10.the_thao",
+   "grade": 10,
+   "order": 2,
+   "title": "Thể thao tự chọn",
+   "lessons": [
+    {
+     "key": "tc10.bong_da_luat",
+     "order": 1,
+     "title": "Bóng đá: luật thi đấu cơ bản",
+     "description": "Biết một số luật cơ bản của bóng đá 11 người.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu số người, thời gian một trận",
+      "Biết ném biên, phạt góc, phạt đền, thẻ phạt"
+     ],
+     "summary": [
+      "Mỗi đội 11 người kể cả thủ môn; trận đấu chính thức hai hiệp, mỗi hiệp 45 phút.",
+      "Bóng ra biên dọc: đội không chạm bóng cuối cùng được ném biên. Bóng qua biên ngang do bên phòng ngự chạm cuối: phạt góc.",
+      "Phạm lỗi bị phạt trực tiếp trong khu phạt đền của đội mình: phạt đền. Thẻ đỏ (hoặc hai thẻ vàng): bị truất quyền thi đấu.",
+      "Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Thủ môn",
+       "lines": [
+        "Được bắt bóng bằng tay trong khu phạt đền của đội mình."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Luật bóng đá",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "so_nguoi",
+         "question": "Trong bóng đá 11 người, mỗi đội có bao nhiêu cầu thủ trên sân?",
+         "options": [
+          {
+           "text": "11 người, kể cả thủ môn",
+           "ok": true,
+           "why": "Đúng: 10 cầu thủ và 1 thủ môn."
+          },
+          {
+           "text": "11 người, không kể thủ môn",
+           "ok": false,
+           "why": "Thủ môn được tính trong 11 người."
+          },
+          {
+           "text": "9 người",
+           "ok": false,
+           "why": "Bóng đá 11 người có 11 cầu thủ mỗi đội."
+          }
+         ],
+         "explanation": "11 người kể cả thủ môn."
+        },
+        {
+         "key": "thoi_gian",
+         "question": "Một trận bóng đá chính thức kéo dài bao lâu (không kể bù giờ)?",
+         "options": [
+          {
+           "text": "Hai hiệp, mỗi hiệp 45 phút",
+           "ok": true,
+           "why": "Đúng: tổng 90 phút, nghỉ giữa hai hiệp."
+          },
+          {
+           "text": "Bốn hiệp, mỗi hiệp 15 phút",
+           "ok": false,
+           "why": "Không đúng với bóng đá 11 người."
+          },
+          {
+           "text": "Một hiệp 60 phút",
+           "ok": false,
+           "why": "Trận đấu có hai hiệp."
+          }
+         ],
+         "explanation": "Hai hiệp 45 phút."
+        },
+        {
+         "key": "nem_bien",
+         "question": "Bóng lăn hết qua đường biên dọc. Trận đấu tiếp tục thế nào?",
+         "options": [
+          {
+           "text": "Đội không chạm bóng cuối cùng được ném biên",
+           "ok": true,
+           "why": "Đúng: ném biên bằng hai tay từ sau đầu."
+          },
+          {
+           "text": "Phạt góc",
+           "ok": false,
+           "why": "Phạt góc khi bóng qua biên ngang."
+          },
+          {
+           "text": "Thủ môn phát bóng",
+           "ok": false,
+           "why": "Phát bóng từ khung thành khi bên tấn công chạm cuối qua biên ngang."
+          }
+         ],
+         "explanation": "Biên dọc → ném biên."
+        },
+        {
+         "key": "phat_goc",
+         "question": "Bóng đi hết đường biên ngang, cầu thủ phòng ngự chạm bóng cuối cùng. Trận đấu tiếp tục thế nào?",
+         "options": [
+          {
+           "text": "Phạt góc cho đội tấn công",
+           "ok": true,
+           "why": "Đúng."
+          },
+          {
+           "text": "Phát bóng từ khung thành",
+           "ok": false,
+           "why": "Phát bóng khi cầu thủ tấn công chạm cuối."
+          },
+          {
+           "text": "Ném biên",
+           "ok": false,
+           "why": "Ném biên khi qua biên dọc."
+          }
+         ],
+         "explanation": "Biên ngang, phòng ngự chạm cuối → phạt góc."
+        },
+        {
+         "key": "the_do",
+         "question": "Cầu thủ nhận thẻ đỏ thì sao?",
+         "options": [
+          {
+           "text": "Bị truất quyền thi đấu, phải rời sân, đội không được thay người khác",
+           "ok": true,
+           "why": "Đúng: đội chơi thiếu người."
+          },
+          {
+           "text": "Chỉ bị nhắc nhở",
+           "ok": false,
+           "why": "Nhắc nhở là thẻ vàng."
+          },
+          {
+           "text": "Được thay bằng cầu thủ dự bị",
+           "ok": false,
+           "why": "Cầu thủ bị thẻ đỏ không được thay thế."
+          }
+         ],
+         "explanation": "Thẻ đỏ: truất quyền thi đấu."
+        },
+        {
+         "key": "thu_mon",
+         "question": "Thủ môn được dùng tay bắt bóng ở đâu?",
+         "options": [
+          {
+           "text": "Trong khu phạt đền của đội mình",
+           "ok": true,
+           "why": "Đúng: ra ngoài khu này thủ môn như cầu thủ khác."
+          },
+          {
+           "text": "Ở bất kì đâu trên sân",
+           "ok": false,
+           "why": "Chỉ trong khu phạt đền của đội mình."
+          },
+          {
+           "text": "Chỉ trên vạch cầu môn",
+           "ok": false,
+           "why": "Thủ môn được bắt bóng trong cả khu phạt đền."
+          }
+         ],
+         "explanation": "Khu phạt đền."
+        },
+        {
+         "key": "phat_den",
+         "question": "Khi nào đội tấn công được hưởng quả phạt đền?",
+         "options": [
+          {
+           "text": "Khi đội phòng ngự phạm lỗi bị phạt trực tiếp trong khu phạt đền của mình",
+           "ok": true,
+           "why": "Đúng: sút từ chấm phạt đền, chỉ có thủ môn cản."
+          },
+          {
+           "text": "Khi bóng chạm cột dọc",
+           "ok": false,
+           "why": "Bóng chạm cột không bị phạt."
+          },
+          {
+           "text": "Khi thủ môn bắt bóng",
+           "ok": false,
+           "why": "Thủ môn bắt bóng trong khu phạt đền là hợp lệ."
+          }
+         ],
+         "explanation": "Phạm lỗi trong khu phạt đền → phạt đền."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "tc10.ky_thuat_tu_chon",
+     "order": 2,
+     "title": "Kĩ thuật cơ bản môn thể thao tự chọn",
+     "description": "Học sinh chọn môn (bóng đá, bóng rổ, cầu lông, bóng chuyền, võ, bơi…) và tập cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "tc10.the_luc",
+   "grade": 10,
+   "order": 3,
+   "title": "Rèn luyện thể lực",
+   "lessons": [
+    {
+     "key": "tc10.bai_tap_the_luc",
+     "order": 1,
+     "title": "Bài tập phát triển sức nhanh, sức bền",
+     "description": "Thực hành bài tập thể lực theo kế hoạch cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "tc11.kien_thuc",
+   "grade": 11,
+   "order": 1,
+   "title": "Sơ cứu khi tập luyện và thi đấu",
+   "lessons": [
+    {
+     "key": "tc11.so_cuu",
+     "order": 1,
+     "title": "Sơ cứu ban đầu khi tập luyện, thi đấu",
+     "description": "Biết thứ tự sơ cứu một số tình huống và khi nào phải gọi cấp cứu 115.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Sắp xếp đúng các bước sơ cứu bong gân, chảy máu, chuột rút",
+      "Biết các bước ban đầu khi gặp người bất tỉnh",
+      "Nhận ra tình huống phải gọi cấp cứu"
+     ],
+     "summary": [
+      "Bong gân: nghỉ – chườm lạnh – băng ép – kê cao; sưng đau nhiều thì đi khám.",
+      "Người bất tỉnh: bảo đảm an toàn → kiểm tra phản ứng → gọi người hỗ trợ và gọi 115 → kiểm tra hơi thở → không thở thì ép tim theo hướng dẫn.",
+      "Chấn thương đầu kèm buồn nôn, lơ mơ; khó thở sau khi bị côn trùng đốt; nghi gãy xương: gọi cấp cứu, đưa đến cơ sở y tế.",
+      "Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Số cấp cứu",
+       "lines": [
+        "115 – cấp cứu y tế"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Thứ tự sơ cứu",
+       "tasks": [
+        {
+         "key": "bong_gan",
+         "prompt": "Xếp các bước xử lí ban đầu khi bị bong gân.",
+         "items": [
+          "Ngừng vận động, để chỗ bị thương nghỉ",
+          "Chườm lạnh qua khăn",
+          "Băng ép vừa phải",
+          "Kê cao chỗ bị thương",
+          "Đi khám nếu sưng đau nhiều"
+         ],
+         "explanation": "Nghỉ – lạnh – ép – kê cao; không đặt đá trực tiếp lên da.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "bat_tinh",
+         "prompt": "Xếp các bước khi gặp người bất tỉnh.",
+         "items": [
+          "Bảo đảm hiện trường an toàn",
+          "Gọi to, vỗ vai kiểm tra phản ứng",
+          "Gọi người hỗ trợ và gọi 115",
+          "Kiểm tra hơi thở",
+          "Nếu không thở: ép tim theo hướng dẫn"
+         ],
+         "explanation": "An toàn cho người cứu trước, rồi kiểm tra, gọi trợ giúp sớm.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "chay_mau",
+         "prompt": "Xếp các bước xử lí vết thương chảy máu.",
+         "items": [
+          "Rửa tay hoặc đeo găng",
+          "Ép trực tiếp lên vết thương bằng gạc sạch",
+          "Băng lại khi máu đã cầm hoặc giảm",
+          "Đưa đến cơ sở y tế nếu vết thương sâu"
+         ],
+         "explanation": "Bảo vệ mình, cầm máu, băng, rồi đưa đi khám khi cần.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "chuot_rut",
+         "prompt": "Xếp các bước xử lí chuột rút bắp chân.",
+         "items": [
+          "Dừng vận động",
+          "Duỗi thẳng chân bị chuột rút",
+          "Kéo mũi bàn chân về phía người, giữ vài chục giây",
+          "Xoa bóp nhẹ cơ bắp chân"
+         ],
+         "explanation": "Kéo giãn cơ bị co rút rồi xoa nhẹ.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        }
+       ]
+      },
+      {
+       "game": "choice",
+       "title": "Khi nào cần cấp cứu?",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "say_nang",
+         "question": "Sau buổi chạy dưới trời nắng, một bạn mệt lả, da nóng, chóng mặt nhưng còn tỉnh. Cách xử lí nào đúng?",
+         "options": [
+          {
+           "text": "Đưa vào chỗ râm mát, nới lỏng quần áo, chườm mát, cho uống nước từng ngụm, theo dõi; lơ mơ thì gọi 115",
+           "ok": true,
+           "why": "Đúng: làm mát nhanh và theo dõi dấu hiệu nặng."
+          },
+          {
+           "text": "Cho bạn chạy tiếp cho quen nắng",
+           "ok": false,
+           "why": "Có thể dẫn tới sốc nhiệt rất nguy hiểm."
+          },
+          {
+           "text": "Đắp chăn cho bạn ra mồ hôi",
+           "ok": false,
+           "why": "Làm thân nhiệt tăng thêm."
+          }
+         ],
+         "explanation": "Say nắng: làm mát, bù nước, theo dõi."
+        },
+        {
+         "key": "chan_thuong_dau",
+         "question": "Một bạn ngã đập đầu khi chơi bóng, sau đó buồn nôn, lơ mơ. Em làm gì?",
+         "options": [
+          {
+           "text": "Cho nằm nghỉ, không cho chơi tiếp, gọi 115 hoặc đưa đi viện ngay",
+           "ok": true,
+           "why": "Đúng: đây là dấu hiệu chấn thương đầu cần cấp cứu."
+          },
+          {
+           "text": "Cho uống nước rồi chơi tiếp",
+           "ok": false,
+           "why": "Chấn thương đầu có thể nặng lên nhanh."
+          },
+          {
+           "text": "Để bạn tự đi về nhà một mình",
+           "ok": false,
+           "why": "Bạn cần được theo dõi và đưa đi khám."
+          }
+         ],
+         "explanation": "Chấn thương đầu kèm dấu hiệu bất thường: cấp cứu."
+        },
+        {
+         "key": "gay_xuong",
+         "question": "Nghi gãy xương cẳng tay sau cú ngã. Cách xử lí nào đúng?",
+         "options": [
+          {
+           "text": "Giữ bất động bằng nẹp tạm, không nắn, đưa đi cơ sở y tế",
+           "ok": true,
+           "why": "Đúng: bất động giảm đau và tránh tổn thương thêm."
+          },
+          {
+           "text": "Nắn cho thẳng rồi băng lại",
+           "ok": false,
+           "why": "Tự nắn có thể làm tổn thương mạch máu, thần kinh."
+          },
+          {
+           "text": "Xoa bóp mạnh cho đỡ đau",
+           "ok": false,
+           "why": "Xoa bóp làm tổn thương nặng thêm."
+          }
+         ],
+         "explanation": "Nghi gãy xương: bất động."
+        },
+        {
+         "key": "ong_dot",
+         "question": "Một bạn bị ong đốt khi chạy ngoài trời, mặt sưng nhanh và khó thở. Em làm gì?",
+         "options": [
+          {
+           "text": "Gọi 115 ngay và báo thầy cô, giữ bạn ở tư thế dễ thở",
+           "ok": true,
+           "why": "Đúng: khó thở sau khi bị đốt có thể là dị ứng nặng."
+          },
+          {
+           "text": "Bôi dầu gió rồi để bạn nghỉ một mình",
+           "ok": false,
+           "why": "Dị ứng nặng có thể đe doạ tính mạng."
+          },
+          {
+           "text": "Đợi hết giờ học rồi tính",
+           "ok": false,
+           "why": "Cần cấp cứu ngay."
+          }
+         ],
+         "explanation": "Khó thở, sưng mặt: gọi cấp cứu."
+        },
+        {
+         "key": "hop_so_cuu",
+         "question": "Hộp sơ cứu của lớp thể dục nên có những gì?",
+         "options": [
+          {
+           "text": "Gạc, băng, băng dính y tế, nước muối sinh lí, túi chườm lạnh",
+           "ok": true,
+           "why": "Đúng: đủ để xử lí ban đầu các chấn thương nhẹ."
+          },
+          {
+           "text": "Thuốc kháng sinh để ai đau cũng uống",
+           "ok": false,
+           "why": "Không tự ý cho người khác dùng thuốc."
+          },
+          {
+           "text": "Chỉ cần một chai dầu nóng",
+           "ok": false,
+           "why": "Dầu nóng không dùng cho bong gân mới."
+          }
+         ],
+         "explanation": "Chuẩn bị hộp sơ cứu đúng."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tc11.the_thao",
+   "grade": 11,
+   "order": 2,
+   "title": "Thể thao tự chọn",
+   "lessons": [
+    {
+     "key": "tc11.ky_thuat_nang_cao",
+     "order": 1,
+     "title": "Kĩ thuật và chiến thuật môn thể thao tự chọn",
+     "description": "Tập kĩ thuật phối hợp, chiến thuật cơ bản theo môn đã chọn (thực hành).",
+     "status": "planned"
+    },
+    {
+     "key": "tc11.thi_dau_tap",
+     "order": 2,
+     "title": "Thi đấu tập và làm trọng tài",
+     "description": "Thực hành thi đấu và làm trọng tài cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "tc11.the_luc",
+   "grade": 11,
+   "order": 3,
+   "title": "Rèn luyện thể lực",
+   "lessons": [
+    {
+     "key": "tc11.bai_tap_suc_manh",
+     "order": 1,
+     "title": "Bài tập sức mạnh với trọng lượng cơ thể",
+     "description": "Thực hành chống đẩy, gập bụng, bật nhảy đúng kĩ thuật.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "tc12.kien_thuc",
+   "grade": 12,
+   "order": 1,
+   "title": "Tự tập luyện suốt đời",
+   "lessons": [
+    {
+     "key": "tc12.ke_hoach_tap",
+     "order": 1,
+     "title": "Tự lập kế hoạch tập luyện cá nhân",
+     "description": "Biết các bước lập, thực hiện và điều chỉnh kế hoạch tập luyện cho bản thân.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Sắp xếp các bước lập kế hoạch tập luyện",
+      "Biết cấu trúc một buổi tự tập",
+      "Biết chuẩn bị khi tham gia một giải chạy"
+     ],
+     "summary": [
+      "Lập kế hoạch: tự đánh giá thể lực → đặt mục tiêu cụ thể, vừa sức → chọn bài tập, lịch tập → tập và ghi nhật kí → đánh giá, điều chỉnh.",
+      "Một buổi tự tập: khởi động → phần cơ bản → thả lỏng, giãn cơ → ghi kết quả.",
+      "Tăng cường độ từ từ; vài ngày trước giải đấu giảm lượng tập để cơ thể hồi phục.",
+      "Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Mục tiêu cụ thể",
+       "lines": [
+        "\"Chạy liên tục 20 phút sau 6 tuần, 3 buổi mỗi tuần\""
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Kế hoạch tập luyện",
+       "tasks": [
+        {
+         "key": "lap_ke_hoach",
+         "prompt": "Xếp các bước lập kế hoạch tập luyện cá nhân.",
+         "items": [
+          "Tự đánh giá thể lực hiện tại",
+          "Đặt mục tiêu cụ thể, vừa sức",
+          "Chọn bài tập và lịch tập",
+          "Tập và ghi nhật kí",
+          "Đánh giá, điều chỉnh kế hoạch"
+         ],
+         "explanation": "Biết mình đang ở đâu, muốn đến đâu, rồi mới chọn cách tập.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "buoi_tap",
+         "prompt": "Xếp các phần của một buổi tự tập.",
+         "items": [
+          "Khởi động",
+          "Phần cơ bản theo mục tiêu",
+          "Thả lỏng, giãn cơ",
+          "Ghi lại kết quả"
+         ],
+         "explanation": "Cấu trúc quen thuộc của mọi buổi tập.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "cuong_do",
+         "prompt": "Xếp các bài tập sức bền theo cường độ tăng dần.",
+         "items": [
+          "Đi bộ nhanh",
+          "Chạy chậm",
+          "Chạy tốc độ vừa",
+          "Chạy biến tốc"
+         ],
+         "explanation": "Từ nhẹ đến nặng.",
+         "first_label": "Nhẹ",
+         "last_label": "Nặng"
+        },
+        {
+         "key": "giai_chay",
+         "prompt": "Xếp các việc khi tham gia một giải chạy.",
+         "items": [
+          "Tìm hiểu cự li và đăng kí",
+          "Tập tăng dần trong nhiều tuần",
+          "Giảm lượng tập vài ngày trước giải",
+          "Khởi động kĩ trước khi xuất phát",
+          "Thả lỏng, bù nước sau khi về đích"
+         ],
+         "explanation": "Chuẩn bị dài hạn, hồi phục trước giải, khởi động và hồi phục sau giải.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "tc12.tinh_than_the_thao",
+     "order": 2,
+     "title": "Tinh thần thể thao và trung thực trong thi đấu",
+     "description": "Ứng xử đúng tinh thần thể thao (fair play) trong tập luyện và thi đấu.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Tôn trọng đối thủ, trọng tài, đồng đội",
+      "Nói không với doping và gian lận",
+      "Thắng không kiêu, thua không nản"
+     ],
+     "summary": [
+      "Fair play: chơi đúng luật, trung thực, tôn trọng đối thủ, trọng tài và đồng đội.",
+      "Doping (dùng chất cấm để tăng thành tích) là gian lận và gây hại sức khoẻ.",
+      "Thắng thì khiêm tốn, thua thì chúc mừng đối thủ và rút kinh nghiệm.",
+      "Trò chơi giúp ôn kiến thức; không thay thế giờ tập thực hành cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Đá bóng ra ngoài",
+       "lines": [
+        "Đối thủ bị chấn thương: chủ động đá bóng ra biên để đối thủ được chăm sóc."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Fair play",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "doi_thu_nga",
+         "question": "Cầu thủ đội bạn ngã chấn thương, nằm trên sân khi đội em đang tấn công. Em làm gì?",
+         "options": [
+          {
+           "text": "Chủ động đá bóng ra ngoài để đối thủ được chăm sóc",
+           "ok": true,
+           "why": "Đúng: sức khoẻ con người quan trọng hơn bàn thắng."
+          },
+          {
+           "text": "Tiếp tục tấn công để ghi bàn",
+           "ok": false,
+           "why": "Lợi dụng đối thủ bị thương là trái tinh thần thể thao."
+          },
+          {
+           "text": "Giả vờ ngã theo để câu giờ",
+           "ok": false,
+           "why": "Giả vờ là gian lận."
+          }
+         ],
+         "explanation": "Tôn trọng đối thủ."
+        },
+        {
+         "key": "trong_tai",
+         "question": "Trọng tài bắt lỗi mà em cho là sai. Em làm gì?",
+         "options": [
+          {
+           "text": "Bình tĩnh chấp hành; đội trưởng có thể hỏi lại lịch sự",
+           "ok": true,
+           "why": "Đúng: tôn trọng trọng tài và luật."
+          },
+          {
+           "text": "Xô đẩy, cãi trọng tài",
+           "ok": false,
+           "why": "Hành vi bạo lực sẽ bị phạt nặng."
+          },
+          {
+           "text": "Bỏ trận đấu ra về",
+           "ok": false,
+           "why": "Bỏ cuộc là thiếu tôn trọng mọi người."
+          }
+         ],
+         "explanation": "Tôn trọng quyết định của trọng tài."
+        },
+        {
+         "key": "thua_tran",
+         "question": "Đội em thua trận chung kết. Em làm gì?",
+         "options": [
+          {
+           "text": "Bắt tay, chúc mừng đội thắng, cùng đội rút kinh nghiệm",
+           "ok": true,
+           "why": "Đúng: thua không nản, tôn trọng đối thủ."
+          },
+          {
+           "text": "Bỏ về không bắt tay",
+           "ok": false,
+           "why": "Thiếu tinh thần thể thao."
+          },
+          {
+           "text": "Đổ lỗi cho đồng đội",
+           "ok": false,
+           "why": "Đổ lỗi làm mất đoàn kết."
+          }
+         ],
+         "explanation": "Thua cũng giữ tinh thần thể thao."
+        },
+        {
+         "key": "doping",
+         "question": "Một người rủ em dùng một loại thuốc \"tăng lực\" lạ để thắng giải. Em làm gì?",
+         "options": [
+          {
+           "text": "Từ chối; dùng chất cấm là doping, gian lận và hại sức khoẻ",
+           "ok": true,
+           "why": "Đúng: thành tích phải từ tập luyện trung thực."
+          },
+          {
+           "text": "Dùng thử một lần vì không ai biết",
+           "ok": false,
+           "why": "Doping bị cấm và có thể gây hại nghiêm trọng."
+          },
+          {
+           "text": "Chỉ dùng trong ngày thi đấu",
+           "ok": false,
+           "why": "Dùng lúc nào cũng là doping."
+          }
+         ],
+         "explanation": "Nói không với doping."
+        },
+        {
+         "key": "dong_doi",
+         "question": "Đồng đội chơi chưa tốt, đội đang bị dẫn điểm. Em làm gì?",
+         "options": [
+          {
+           "text": "Động viên bạn, cùng bàn cách chơi tốt hơn",
+           "ok": true,
+           "why": "Đúng: tinh thần đồng đội giúp cả đội mạnh hơn."
+          },
+          {
+           "text": "Chê bai, quát mắng bạn",
+           "ok": false,
+           "why": "Làm bạn mất tự tin, đội rối hơn."
+          },
+          {
+           "text": "Không chuyền bóng cho bạn nữa",
+           "ok": false,
+           "why": "Loại bạn khỏi lối chơi làm đội yếu đi."
+          }
+         ],
+         "explanation": "Đoàn kết, động viên đồng đội."
+        },
+        {
+         "key": "tu_bat_loi",
+         "question": "Đánh cầu lông giao hữu không có trọng tài, cầu rơi rõ ràng trong sân em. Em làm gì?",
+         "options": [
+          {
+           "text": "Trung thực công nhận cầu trong, điểm cho đối phương",
+           "ok": true,
+           "why": "Đúng: trung thực là cốt lõi của fair play."
+          },
+          {
+           "text": "Nói cầu ra ngoài để được điểm",
+           "ok": false,
+           "why": "Đó là gian lận."
+          },
+          {
+           "text": "Đòi đánh lại vì không có trọng tài",
+           "ok": false,
+           "why": "Cầu đã rõ trong sân thì không cần đánh lại."
+          }
+         ],
+         "explanation": "Trung thực khi tự bắt lỗi."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tc12.the_thao",
+   "grade": 12,
+   "order": 2,
+   "title": "Thể thao tự chọn",
+   "lessons": [
+    {
+     "key": "tc12.thi_dau",
+     "order": 1,
+     "title": "Thi đấu môn thể thao tự chọn",
+     "description": "Thực hành thi đấu, vận dụng kĩ thuật, chiến thuật (cùng thầy cô).",
+     "status": "planned"
+    },
+    {
+     "key": "tc12.to_chuc_giai",
+     "order": 2,
+     "title": "Tổ chức một giải đấu nhỏ trong lớp",
+     "description": "Lập kế hoạch, phân công, làm trọng tài một giải đấu.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "tc12.the_luc",
+   "grade": 12,
+   "order": 3,
+   "title": "Rèn luyện và đánh giá thể lực",
+   "lessons": [
+    {
+     "key": "tc12.kiem_tra_the_luc",
+     "order": 1,
+     "title": "Tự kiểm tra thể lực theo tiêu chuẩn rèn luyện thân thể",
+     "description": "Thực hành các bài kiểm tra thể lực cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  }
+ ]
+}

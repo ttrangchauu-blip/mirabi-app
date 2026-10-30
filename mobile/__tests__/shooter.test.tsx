@@ -93,7 +93,7 @@ const word = (id: string, en: string, position: number): Turn => ({
   attempts: 0, wrong_attempts: 0, practice: false, travel_seconds: 0,
 });
 const APPLE = word('turn-apple', 'apple', 0); // the left lane, away from where the pet starts (the middle)
-const shotAt = (p = 0.3): Shot => ({ id: APPLE.turn_id, turn: APPLE, progress: p, aimed: false, word: { en: 'apple', vi: 'quả táo', phonetic: null } });
+const shotAt = (): Shot => ({ id: APPLE.turn_id, turn: APPLE, aimed: false, word: { en: 'apple', vi: 'quả táo', phonetic: null } });
 
 function Field({ shots, bursts = [], running = true, onImpact = jest.fn(), onShotDone = jest.fn(), onBurstDone = jest.fn(), wrongKey = 0, reduceMotion = false }: {
   shots: Shot[]; bursts?: Burst[]; running?: boolean; onImpact?: jest.Mock; onShotDone?: jest.Mock; onBurstDone?: jest.Mock; wrongKey?: number; reduceMotion?: boolean;
@@ -111,7 +111,7 @@ beforeEach(() => { jest.useFakeTimers(); });
 afterEach(() => { jest.useRealTimers(); });
 
 describe('the shooting pet on the play field', () => {
-  it('holds the answered word, walks and fires, then breaks it once (with sounds) and lets the next effects run', () => {
+  it('keeps the answered word on screen, walks and fires, then breaks it once (with sounds) and lets the next effects run', () => {
     const onImpact = jest.fn(), onShotDone = jest.fn();
     const player = require('expo-audio').useAudioPlayer();
     player.play.mockClear();
@@ -228,27 +228,114 @@ describe('falling words never overlap', () => {
 });
 
 describe('after a shot', () => {
-  it('a falling word never jumps back up: it waits above a held word, then falls on', () => {
+  const answer = { value: '', onChange: () => {}, editable: true };
+  const top = (el: { props: { style?: any } }) => StyleSheet.flatten(el.props.style).top as number;
+
+  it('the bullets chase a word that keeps falling and reach it at the end of their flight', () => {
+    const moves: Move[] = [];
+    const plan = planShot(moves, 0, { x: 120, y: 60 }, home, bounds, false, H, BOTTOM);
+    const origin = muzzle(petX(moves, plan.fireAt, home, bounds, false), H, BOTTOM);
+    const word = (t: number) => ({ x: 120, y: 60 + 0.08 * t }); // falling 80 px a second
+    const near = bulletAt(plan, 0, plan.impactAt - 1, origin, word(plan.impactAt - 1))!;
+    expect(Math.hypot(near.x - word(plan.impactAt).x, near.y - word(plan.impactAt).y)).toBeLessThan(6); // where it is now
+    expect(word(plan.impactAt).y - 60).toBeGreaterThan(40); // not where it was when the pet fired
+  });
+
+  it('a shot word falls on under the bullets and breaks where the first one reaches it, counted once', () => {
+    let p = 0.2;
+    const onImpact = jest.fn();
+    const others = [word('other', 'orange', 1)];
+    const field = (shots: Shot[]) => (
+      <Playfield variant="words" turns={others} progress={(t) => (t.turn_id === 'other' ? p / 2 : p)} selectedId="other" onSelect={() => {}}
+        petId="fox" petLevel={2} reduceMotion={false} flash={null} running shots={shots} onImpact={onImpact} answer={answer} />
+    );
+    render(field([]));
+    layout();
+    screen.rerender(field([shotAt()]));
+    const shotTops = [top(screen.getByTestId('shot-turn-apple', { includeHiddenElements: true }))];
+    const otherTops = [top(screen.getByLabelText('Từ đang nhắm: orange'))];
+    for (let i = 0; i < 30 && !onImpact.mock.calls.length; i++) {
+      p += 0.02;
+      screen.rerender(field([shotAt()]));
+      const shot = screen.queryByTestId('shot-turn-apple', { includeHiddenElements: true });
+      if (shot) shotTops.push(top(shot));
+      otherTops.push(top(screen.getByLabelText('Từ đang nhắm: orange')));
+      ms(60);
+    }
+    expect(onImpact).toHaveBeenCalledTimes(1);
+    // It never stopped while the bullets flew, and the other word kept falling too.
+    for (let i = 1; i < shotTops.length; i++) expect(shotTops[i]).toBeGreaterThan(shotTops[i - 1]);
+    for (let i = 1; i < otherTops.length; i++) expect(otherTops[i]).toBeGreaterThanOrEqual(otherTops[i - 1]);
+    expect(otherTops[otherTops.length - 1]).toBeGreaterThan(otherTops[0]);
+    // Broken where it was when the bullet arrived (about its middle), not where it was when the pet fired.
+    const at = onImpact.mock.calls[0][1] as { x: number; y: number };
+    expect(at.y).toBeGreaterThan(shotTops[0] + 60);
+    expect(Math.abs(at.y - (shotTops[shotTops.length - 1] + 40))).toBeLessThan(20);
+    expect(screen.queryByTestId('shot-turn-apple', { includeHiddenElements: true })).toBeNull();
+    ms(1500);
+    expect(onImpact).toHaveBeenCalledTimes(1);
+  });
+
+  it('a word answered right that reaches the ground before the bullet still breaks there', () => {
+    const onImpact = jest.fn(), onShotDone = jest.fn();
+    let p = 0.95;
+    const field = (shots: Shot[]) => (
+      <Playfield variant="words" turns={[]} progress={() => p} selectedId={null} onSelect={() => {}} petId="fox" petLevel={2}
+        reduceMotion={false} flash={null} running shots={shots} onImpact={onImpact} onShotDone={onShotDone} answer={answer} />
+    );
+    render(field([]));
+    layout();
+    screen.rerender(field([shotAt()]));
+    p = 1.4; // on the ground (it rests there)
+    screen.rerender(field([shotAt()]));
+    const ground = top(screen.getByTestId('shot-turn-apple', { includeHiddenElements: true }));
+    ms(1300);
+    expect(onImpact).toHaveBeenCalledTimes(1);
+    expect(Math.abs((onImpact.mock.calls[0][1] as { y: number }).y - (ground + 40))).toBeLessThan(2);
+    ms(1500);
+    expect(onShotDone).toHaveBeenCalledWith('turn-apple');
+  });
+
+  it('a new word comes in at the top, in a free lane: never on a word being shot, nor where it was', () => {
+    let turns: Turn[] = [];
+    const field = () => (
+      <Playfield variant="words" turns={turns} progress={(t) => (t.turn_id === APPLE.turn_id ? 0.05 : 0)} selectedId={null} onSelect={() => {}}
+        petId="fox" petLevel={2} reduceMotion flash={null} running={false} shots={[shotAt()]} answer={answer} />
+    );
+    render(field());
+    layout();
+    const shot = StyleSheet.flatten(screen.getByTestId('shot-turn-apple', { includeHiddenElements: true }).props.style);
+    turns = [word('next', 'pear', 0)]; // its own lane would be the shot word's
+    screen.rerender(field());
+    const next = StyleSheet.flatten(screen.getByLabelText('Từ: pear').props.style);
+    expect(next.top).toBe(0);
+    expect(overlap({ ...next, height: 118 } as any, { ...shot, height: 100 } as any)).toBe(false);
+    expect(next.left).not.toBe(shot.left);
+  });
+
+  it('a falling word never jumps back up: it waits above a word being shot, then falls on', () => {
     const narrow = 200; // one lane: no room beside, so it has to wait
     const held = word('held', 'apple', 0);
     const fall = word('fall', 'orange', 0);
-    const answer = { value: '', onChange: () => {}, editable: true };
     const field = (p: number, shots: Shot[]) => (
-      <Playfield variant="words" turns={[fall]} progress={() => p} selectedId="fall" onSelect={() => {}} petId="fox" petLevel={2}
-        reduceMotion flash={null} running={false} shots={shots} answer={answer} />
+      <Playfield variant="words" turns={[fall]} progress={(t) => (t.turn_id === 'held' ? 0.7 + p / 4 : p)} selectedId="fall" onSelect={() => {}}
+        petId="fox" petLevel={2} reduceMotion flash={null} running={false} shots={shots} answer={answer} />
     );
-    const shot: Shot = { id: 'held', turn: held, progress: 0.7, aimed: false, word: null };
+    const shot: Shot = { id: 'held', turn: held, aimed: false, word: null };
     render(field(0.1, [shot]));
     fireEvent(screen.getByLabelText('Bầu trời từ vựng'), 'layout', { nativeEvent: { layout: { x: 0, y: 0, width: narrow, height: H } } });
-    const heldBox = StyleSheet.flatten(screen.getByTestId('shot-held', { includeHiddenElements: true }).props.style);
     const tops: number[] = [];
-    const topNow = () => StyleSheet.flatten(screen.getByLabelText('Từ đang nhắm: orange').props.style).top as number;
+    const heldTops: number[] = [];
+    const topNow = () => top(screen.getByLabelText('Từ đang nhắm: orange'));
     for (let p = 0.1; p <= 0.9; p += 0.05) {
       screen.rerender(field(p, [shot]));
+      const heldTop = top(screen.getByTestId('shot-held', { includeHiddenElements: true }));
+      heldTops.push(heldTop);
       tops.push(topNow());
-      expect(topNow() + 150).toBeLessThanOrEqual(heldBox.top + 1); // never over the held word: it waits above it
+      expect(topNow() + 150).toBeLessThanOrEqual(heldTop + 1); // never over the word being shot: it waits above it
     }
-    // The held word breaks: the falling one goes on down from where it waited, never up.
+    for (let i = 1; i < heldTops.length; i++) expect(heldTops[i]).toBeGreaterThanOrEqual(heldTops[i - 1]); // never held up
+    // The shot word breaks: the falling one goes on down from where it waited, never up.
     for (let p = 0.9; p <= 1; p += 0.02) { screen.rerender(field(p, [])); tops.push(topNow()); }
     for (let i = 1; i < tops.length; i++) expect(tops[i]).toBeGreaterThanOrEqual(tops[i - 1]);
     expect(tops[tops.length - 1]).toBeGreaterThan(tops[0]);

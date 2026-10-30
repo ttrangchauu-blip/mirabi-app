@@ -9,17 +9,20 @@ import { hasSprite, moveActivity } from '../../../petSprites';
 import { appTheme as t } from '../../../theme';
 import { Box, laneLefts, resolveOverlaps } from './fieldLayout';
 import {
-  BURST_MS, bulletAt, burstLook, leanAt, muzzle, Move, PET_SIZE, petBounds, petDrift, petMoving, petX, planShot, shardsAt, ShotPlan,
+  BURST_MS, bulletAt, burstLook, leanAt, muzzle, Move, PET_SIZE, petBounds, petDrift, petMoving, petX, planShot, Point, shardsAt, ShotPlan,
   wiggleAt, WIGGLE_MS,
 } from './shooterFx';
 import { AnswerSlots, SLOT_PITCH } from './LetterInput';
 
 export type Flash = { turnId: string; kind: 'hit' | 'miss' } | null;
 
-/** What a destroyed (or missed) word leaves behind for a moment: its meaning or its English word, where it was. */
-export type Burst = { id: string; position: number; progress: number; title: string; sub: string | null; tone: 'hit' | 'miss' };
-/** A word answered right: it stays where it was (no longer falling, never a miss) until the pet's shot breaks it. */
-export type Shot = { id: string; turn: Turn; progress: number; word: WordPair | null; /** It was the aimed one (drawn larger). */ aimed: boolean };
+/** What a destroyed (or missed) word leaves behind for a moment: its meaning or its English word, where it was: `at`
+ * (the point where the bullet hit it), or else its lane and how far it had fallen. */
+export type Burst = { id: string; position: number; progress: number; title: string; sub: string | null; tone: 'hit' | 'miss';
+  at?: Point };
+/** A word answered right. It keeps falling as before (its `progress`; it can no longer be missed) while the pet's
+ * bullets fly after it, and breaks where the first one reaches it. */
+export type Shot = { id: string; turn: Turn; word: WordPair | null; /** It was the aimed one (drawn larger). */ aimed: boolean };
 /** The typed answer of the falling-word games: one text field for the whole field, shown in the aimed target's boxes.
  * There is no "Bắn" and no Enter: the game shoots by itself as soon as what is typed is right. */
 export type Answer = { value: string; onChange: (value: string) => void; editable: boolean };
@@ -41,8 +44,8 @@ type Props = {
   /** The falling-word games: the game is running (paused, everything here stops: the pet, the bullets, the effects). */
   running?: boolean;
   shots?: Shot[];
-  /** The first bullet reached a shot word: it breaks now (the caller shows its meaning). */
-  onImpact?: (shot: Shot) => void;
+  /** The first bullet reached a shot word at `at`: it breaks now (the caller shows its meaning and counts it). */
+  onImpact?: (shot: Shot, at: Point) => void;
   /** A shot is over (the pieces are gone), and a burst has faded out. */
   onShotDone?: (id: string) => void;
   onBurstDone?: (id: string) => void;
@@ -91,28 +94,56 @@ export function Playfield({ variant, turns, progress, selectedId, onSelect, petI
   const meteor = variant !== 'defense';
   // The shooter walks along the whole bottom (drawn under the targets), so the falling words use the full width.
   const lanes = laneLefts(size.width, METEOR_W);
-  const laneLeft = (position: number, w: number) =>
-    Math.max(8, Math.min(lanes[position % lanes.length] + (METEOR_W - w) / 2, size.width - w - 8));
+  const laneLeft = (lane: number, w: number) =>
+    Math.max(8, Math.min(lanes[lane % lanes.length] + (METEOR_W - w) / 2, size.width - w - 8));
   /** Where a target would be from its lane and its fall alone. The height of its fall is the same for every target, so
    * becoming the aimed one (a taller frame, growing downward) never moves a word up. */
   const travel = Math.max(0, size.height - (answer ? AIMED_H : METEOR_H) - GROUND - 2);
+  // Each word gets its lane when it first appears: the one whose top is clearest (the words in it are furthest down),
+  // so a new word comes in at the top beside the others, never on a word still falling or being shot.
+  const laneOf = useRef(new Map<string, number>());
+  const lastRects = useRef(new Map<string, Rect>());
+  const fresh: Rect[] = []; // lanes taken in this same render (two words appearing together)
+  const lane = (turn: Turn) => {
+    let chosen = laneOf.current.get(turn.turn_id);
+    if (chosen === undefined && size.width > 0) {
+      const others = [...lastRects.current.values(), ...fresh];
+      const clearance = (i: number) => {
+        const left = laneLeft(i, METEOR_W);
+        const below = others.filter((r) => r.left < left + METEOR_W && left < r.left + r.width).map((r) => r.top);
+        return below.length ? Math.min(...below) : Infinity;
+      };
+      const order = lanes.map((_, i) => (turn.position + i) % lanes.length); // a tie: the word's own lane first
+      chosen = order.reduce((best, i) => (clearance(i) > clearance(best) ? i : best), order[0]);
+      laneOf.current.set(turn.turn_id, chosen);
+      fresh.push({ left: laneLeft(chosen, METEOR_W), top: 0, width: METEOR_W, height: SLOTS_H });
+    }
+    return chosen ?? turn.position;
+  };
   const naturalRect = (turn: Turn, p: number, aimed: boolean): Rect => {
     const big = aimed && !!answer;
     const width = big ? aimedWidth(turn, size.width) : METEOR_W;
     const height = big ? AIMED_H : answer ? SLOTS_H : METEOR_H;
-    return { left: laneLeft(turn.position, width), top: Math.max(0, Math.min(1, p)) * travel, width, height };
+    return { left: laneLeft(lane(turn), width), top: Math.max(0, Math.min(1, p)) * travel, width, height };
   };
 
-  // Where each target is drawn: its natural spot, moved aside when it would cover another word (or a word held for a
-  // shot). Sideways it slides (eased); up and down it only ever waits and falls on: a word never shows higher than it
-  // was a moment ago, so nothing jumps back up after a shot.
+  // A shot word is drawn until the first bullet reaches it (then it breaks into pieces).
+  const [broken, setBroken] = useState<ReadonlySet<string>>(new Set());
+  const flying = shots.filter((s) => !broken.has(s.id));
+  // Where each target is drawn: its natural spot, moved aside when it would cover another word (or a word being shot).
+  // Sideways it slides (eased); up and down it only ever waits and falls on: a word never shows higher than it was a
+  // moment ago. A word being shot is never held up: it falls on at its own speed, the others make room for it.
   const shown = useRef(new Map<string, { left: number; top: number }>());
-  const lastRects = useRef(new Map<string, Rect>());
-  const ghosts = useRef(new Map<string, Rect>());
+  const shotRects = useRef(new Map<string, Rect>());
   const rects = new Map<string, Rect>();
   if (meteor && size.width > 0) {
-    const fixed: Box[] = shots.map((s) => ({ id: s.id, ...(ghosts.current.get(s.id) ?? lastRects.current.get(s.turn.turn_id)
-      ?? naturalRect(s.turn, s.progress, s.aimed)) }));
+    const fixed: Box[] = flying.map((s) => {
+      const was = lastRects.current.get(s.turn.turn_id);
+      const fall = naturalRect(s.turn, progress(s.turn), false).top;
+      const rect = was ? { ...was, top: Math.max(was.top, fall) } : naturalRect(s.turn, progress(s.turn), s.aimed);
+      shotRects.current.set(s.id, rect);
+      return { id: s.id, ...rect };
+    });
     // Never above where it was last shown: a word that waited, or went ahead of its fall, goes on from there.
     const natural = turns.map((turn) => {
       const rect = naturalRect(turn, progress(turn), turn.turn_id === selectedId);
@@ -133,17 +164,20 @@ export function Playfield({ variant, turns, progress, selectedId, onSelect, petI
     }
     for (const id of shown.current.keys()) if (!rects.has(id)) shown.current.delete(id);
     for (const [id, rect] of rects) lastRects.current.set(id, rect);
+    for (const { id, left, top, width, height } of fixed) lastRects.current.set(id, { left, top, width, height });
+    const present = new Set([...rects.keys(), ...fixed.map((b) => b.id)]);
+    for (const id of lastRects.current.keys()) if (!present.has(id)) lastRects.current.delete(id);
   }
   const rectOf = (turn: Turn) => rects.get(turn.turn_id) ?? naturalRect(turn, progress(turn), turn.turn_id === selectedId);
-  // A shot word stays exactly where it was last drawn: its spot is fixed the first time it is held.
-  const ghostOf = (shot: Shot) => {
-    let rect = ghosts.current.get(shot.id);
-    if (!rect) {
-      rect = lastRects.current.get(shot.turn.turn_id) ?? naturalRect(shot.turn, shot.progress, shot.aimed);
-      if (size.width > 0) ghosts.current.set(shot.id, rect); // fixed only once the field has its size
-    }
-    return rect;
-  };
+  // The bullets read where each shot word is now, every frame (the word keeps falling while they fly).
+  const aimPoint = useCallback((id: string): Point | null => {
+    const rect = shotRects.current.get(id);
+    return rect ? { x: rect.left + rect.width / 2, y: rect.top + HIT_Y } : null;
+  }, []);
+  const impact = useCallback((shot: Shot, at: Point) => {
+    setBroken((set) => new Set(set).add(shot.id));
+    onImpact?.(shot, at);
+  }, [onImpact]);
 
   // One text field for every target: it stays mounted (and focused) while targets fall, when another one is chosen and
   // when a word breaks, so the keyboard never closes and reopens and what is typed is kept.
@@ -166,8 +200,11 @@ export function Playfield({ variant, turns, progress, selectedId, onSelect, petI
     const known = placed.current.get(b.id);
     if (known) return known;
     const maxTop = Math.max(0, size.height - BURST_H - GROUND - 4);
-    const box: Rect = { left: laneLeft(b.position, BURST_W), width: BURST_W, height: BURST_H,
-      top: Math.min(maxTop, Math.max(0, Math.min(1, b.progress)) * Math.max(0, size.height - METEOR_H - GROUND - 2) + 24) };
+    const box: Rect = b.at
+      ? { left: Math.max(8, Math.min(b.at.x - BURST_W / 2, size.width - BURST_W - 8)), width: BURST_W, height: BURST_H,
+        top: Math.max(0, Math.min(maxTop, b.at.y - BURST_H / 2)) }
+      : { left: laneLeft(b.position, BURST_W), width: BURST_W, height: BURST_H,
+        top: Math.min(maxTop, Math.max(0, Math.min(1, b.progress)) * Math.max(0, size.height - METEOR_H - GROUND - 2) + 24) };
     // Clear of every word on screen, and of the meanings still fading out.
     const targets = [...turns.map(rectOf), ...[...placed.current.values()].map((s) => ({ ...s, width: BURST_W, height: BURST_H }))];
     for (let i = 0; i < targets.length && targets.some((r) => overlaps(box, r)); i++) {
@@ -185,10 +222,14 @@ export function Playfield({ variant, turns, progress, selectedId, onSelect, petI
   }, [bursts]);
   useEffect(() => {
     const live = new Set(shots.map((s) => s.id));
-    for (const id of ghosts.current.keys()) if (!live.has(id)) ghosts.current.delete(id);
+    for (const id of shotRects.current.keys()) if (!live.has(id)) shotRects.current.delete(id);
+    setBroken((set) => ([...set].every((id) => live.has(id)) ? set : new Set([...set].filter((id) => live.has(id)))));
   }, [shots]);
+  useEffect(() => {
+    const live = new Set([...turns.map((x) => x.turn_id), ...shots.map((s) => s.id)]);
+    for (const id of laneOf.current.keys()) if (!live.has(id)) laneOf.current.delete(id);
+  }, [turns, shots]);
   // The shooter only re-renders when a shot or a meaning comes or goes (its motion runs frame by frame on its own).
-  const heldShots = useMemo(() => shots.map((s) => ({ shot: s, rect: ghostOf(s) })), [shots, size.width, size.height]); // eslint-disable-line react-hooks/exhaustive-deps
   const shownBursts = useMemo(() => bursts.map((b) => ({ burst: b, spot: placeBurst(b) })), [bursts, size.width, size.height]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const aimedTurn = turns.find((x) => x.turn_id === selectedId);
@@ -200,9 +241,21 @@ export function Playfield({ variant, turns, progress, selectedId, onSelect, petI
       {meteor ? <View style={styles.ground} /> : <View style={styles.base}><Text style={styles.baseIcon}>🏰</Text></View>}
       {meteor ? (size.width > 0 ? (
         // Under the targets: a fading meaning or the pieces of a broken word never hide a word that is still falling.
-        <ShooterLayer width={size.width} height={size.height} words={variant === 'words'} petId={petId} petLevel={petLevel}
-          running={running} reduceMotion={reduceMotion} sound={sound} wrongKey={wrongKey} shots={heldShots} bursts={shownBursts}
-          onImpact={onImpact} onShotDone={onShotDone} onBurstDone={onBurstDone} />
+        <>
+          {/* The words being shot fall on under the bullets, untouchable: they can no longer be answered or missed. */}
+          {flying.map((shot) => {
+            const rect = shotRects.current.get(shot.id);
+            return rect ? (
+              <View key={shot.id} testID={`shot-${shot.id}`} pointerEvents="none" style={[styles.meteor, { left: rect.left, top: rect.top, width: rect.width }]}
+                accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+                <TargetBody turn={shot.turn} danger={false} big={shot.aimed} />
+              </View>
+            ) : null;
+          })}
+          <ShooterLayer width={size.width} height={size.height} words={variant === 'words'} petId={petId} petLevel={petLevel}
+            running={running} reduceMotion={reduceMotion} sound={sound} wrongKey={wrongKey} shots={shots} aimPoint={aimPoint} bursts={shownBursts}
+            onImpact={impact} onShotDone={onShotDone} onBurstDone={onBurstDone} />
+        </>
       ) : null) : (
         <View style={[styles.pet, styles.petDefense]} pointerEvents="none">
           <PetArt pet={petId} size={64} stage={petLevel} still={reduceMotion} />
@@ -299,7 +352,7 @@ const SHARDS = 8;
 type XY = { x: Animated.Value; y: Animated.Value; o: Animated.Value };
 type Live = {
   plan: ShotPlan; fired: boolean; impacted: boolean; done: boolean;
-  /** Where each bullet left the pet (known once it fires) and the way it flies. */ origins: ({ x: number; y: number } | null)[]; angles: number[];
+  /** Where each bullet left the pet (known once it fires). */ origins: ({ x: number; y: number } | null)[];
   bullets: (XY & { r: Animated.Value })[]; shards: (XY & { r: Animated.Value })[]; ring: { s: Animated.Value; o: Animated.Value };
 };
 const value = (v = 0) => new Animated.Value(v);
@@ -310,11 +363,12 @@ const deg = (v: Animated.Value) => v.interpolate({ inputRange: [-720, 720], outp
  * its own effect clock (it only advances while the game runs, so a pause freezes everything here together) and goes
  * straight into Animated values: nothing re-renders frame by frame, so the shots stay smooth while the game updates.
  */
-const ShooterLayer = memo(function ShooterLayer({ width, height, words, petId, petLevel, running, reduceMotion, sound, wrongKey, shots, bursts,
-  onImpact, onShotDone, onBurstDone }: {
+const ShooterLayer = memo(function ShooterLayer({ width, height, words, petId, petLevel, running, reduceMotion, sound, wrongKey, shots, aimPoint,
+  bursts, onImpact, onShotDone, onBurstDone }: {
   width: number; height: number; words: boolean; petId: string; petLevel: number; running: boolean; reduceMotion: boolean; sound: boolean;
-  wrongKey: number; shots: { shot: Shot; rect: Rect }[]; bursts: { burst: Burst; spot: { left: number; top: number } }[];
-  onImpact?: (shot: Shot) => void; onShotDone?: (id: string) => void; onBurstDone?: (id: string) => void;
+  wrongKey: number; shots: Shot[]; /** Where a shot word is now (it keeps falling). */ aimPoint: (id: string) => Point | null;
+  bursts: { burst: Burst; spot: { left: number; top: number } }[];
+  onImpact?: (shot: Shot, at: Point) => void; onShotDone?: (id: string) => void; onBurstDone?: (id: string) => void;
 }) {
   const play = useGameSounds(sound);
   const clock = useRef({ base: 0, since: null as number | null });
@@ -332,12 +386,14 @@ const ShooterLayer = memo(function ShooterLayer({ width, height, words, petId, p
   const walkRef = useRef(walk);
   const [, rerender] = useReducer((n: number) => n + 1, 0);
 
-  // A new shot: the pet walks under the word and fires. Planned once, the first time it is drawn.
-  for (const { shot, rect } of shots) {
+  // A new shot: the pet walks under the word (where it is now) and fires. Planned once, the first time it is drawn.
+  for (const shot of shots) {
     if (live.current.has(shot.id)) continue;
-    const plan = planShot(moves.current, now(), { x: rect.left + rect.width / 2, y: rect.top + HIT_Y }, home.current, bounds, wander, height, PET_BOTTOM);
+    const at = aimPoint(shot.id);
+    if (!at) continue;
+    const plan = planShot(moves.current, now(), at, home.current, bounds, wander, height, PET_BOTTOM);
     const xy = () => ({ x: value(), y: value(), o: value(0), r: value() });
-    live.current.set(shot.id, { plan, fired: false, impacted: false, done: false, origins: Array(plan.bullets).fill(null), angles: Array(plan.bullets).fill(0),
+    live.current.set(shot.id, { plan, fired: false, impacted: false, done: false, origins: Array(plan.bullets).fill(null),
       bullets: Array.from({ length: plan.bullets }, xy), shards: Array.from({ length: SHARDS }, xy), ring: { s: value(0.4), o: value(0) } });
   }
   for (const { burst } of bursts) if (!burstVals.current.has(burst.id)) burstVals.current.set(burst.id, { born: now(), o: value(1), rise: value(0) });
@@ -348,8 +404,8 @@ const ShooterLayer = memo(function ShooterLayer({ width, height, words, petId, p
 
   // One frame: move everything to where it is at this moment, and pass the moments that matter (sounds, the break,
   // the end of an effect).
-  const latest = useRef({ shots, bursts, onImpact, onShotDone, onBurstDone, play });
-  latest.current = { shots, bursts, onImpact, onShotDone, onBurstDone, play };
+  const latest = useRef({ shots, bursts, aimPoint, onImpact, onShotDone, onBurstDone, play });
+  latest.current = { shots, bursts, aimPoint, onImpact, onShotDone, onBurstDone, play };
   const frame = useRef<() => void>(() => {});
   frame.current = () => {
     const tNow = now();
@@ -359,22 +415,26 @@ const ShooterLayer = memo(function ShooterLayer({ width, height, words, petId, p
     pet.x.setValue(x + wiggle);
     let lean = 0;
     let recoil = 0;
-    for (const { shot } of held) {
+    for (const shot of held) {
       const s = live.current.get(shot.id);
       if (!s || s.done) continue;
       const { plan } = s;
+      // The bullets chase the word where it is now; once it is hit, they finish at the spot where it broke.
+      const target = s.impacted ? plan.target : latest.current.aimPoint(shot.id) ?? plan.target;
+      if (!s.impacted && tNow >= plan.impactAt) {
+        plan.target = { ...target };
+        s.impacted = true;
+        latest.current.play('break');
+        rerender();
+        latest.current.onImpact?.(shot, plan.target);
+      }
       lean = lean || leanAt(plan, tNow, x + PET_SIZE / 2);
       if (tNow >= plan.fireAt && tNow < plan.fireAt + 120) recoil = -3 * (1 - (tNow - plan.fireAt) / 120);
       for (let i = 0; i < plan.bullets; i++) {
         const leave = plan.fireAt + i * plan.gap;
-        if (!s.origins[i] && tNow >= leave) {
-          const o = muzzle(petX(moves.current, leave, home.current!, bounds, wander), height, PET_BOTTOM);
-          s.origins[i] = o;
-          s.angles[i] = (Math.atan2(plan.target.y - o.y, plan.target.x - o.x) * 180) / Math.PI;
-          s.bullets[i].r.setValue(s.angles[i]);
-        }
-        const b = s.origins[i] ? bulletAt(plan, i, tNow, s.origins[i]!) : null;
-        if (b) { s.bullets[i].x.setValue(b.x); s.bullets[i].y.setValue(b.y); }
+        if (!s.origins[i] && tNow >= leave) s.origins[i] = muzzle(petX(moves.current, leave, home.current!, bounds, wander), height, PET_BOTTOM);
+        const b = s.origins[i] ? bulletAt(plan, i, tNow, s.origins[i]!, s.impacted ? plan.target : target) : null;
+        if (b) { s.bullets[i].x.setValue(b.x); s.bullets[i].y.setValue(b.y); s.bullets[i].r.setValue((b.angle * 180) / Math.PI); }
         s.bullets[i].o.setValue(b ? 1 : 0);
       }
       const since = tNow - plan.impactAt;
@@ -388,7 +448,6 @@ const ShooterLayer = memo(function ShooterLayer({ width, height, words, petId, p
       s.ring.o.setValue(ring === null ? 0 : 0.5 * (1 - ring));
       if (ring !== null) s.ring.s.setValue(0.4 + ring);
       if (!s.fired && tNow >= plan.fireAt) { s.fired = true; latest.current.play('shot'); }
-      if (!s.impacted && tNow >= plan.impactAt) { s.impacted = true; latest.current.play('break'); rerender(); latest.current.onImpact?.(shot); }
       if (tNow >= plan.doneAt) { s.done = true; latest.current.onShotDone?.(shot.id); }
     }
     pet.lean.setValue(lean);
@@ -422,7 +481,7 @@ const ShooterLayer = memo(function ShooterLayer({ width, height, words, petId, p
   }, [running]);
   // Shots and meanings dropped by the caller (done, or a new stage) take their values with them.
   useEffect(() => {
-    const ids = new Set(shots.map((s) => s.shot.id));
+    const ids = new Set(shots.map((s) => s.id));
     for (const id of live.current.keys()) if (!ids.has(id)) live.current.delete(id);
   }, [shots]);
 
@@ -439,18 +498,11 @@ const ShooterLayer = memo(function ShooterLayer({ width, height, words, petId, p
           </Animated.View>
         );
       })}
-      {shots.map(({ shot, rect }) => {
+      {shots.map((shot) => {
         const s = live.current.get(shot.id);
         if (!s) return null;
         return (
           <React.Fragment key={shot.id}>
-            {s.impacted ? null : (
-              // The answered word, held where it was until the bullet arrives.
-              <View testID={`shot-${shot.id}`} style={[styles.meteor, { left: rect.left, top: rect.top, width: rect.width }]}
-                accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
-                <TargetBody turn={shot.turn} danger={false} big={shot.aimed} />
-              </View>
-            )}
             <Animated.View style={[styles.ring, { left: s.plan.target.x - 22, top: s.plan.target.y - 22, borderColor: colors[0], opacity: s.ring.o,
               transform: [{ scale: s.ring.s }] }]} />
             {s.shards.map((v, i) => {
@@ -470,7 +522,7 @@ const ShooterLayer = memo(function ShooterLayer({ width, height, words, petId, p
       <Animated.View testID="shooter-pet" style={[styles.shooter, { bottom: PET_BOTTOM, transform: [{ translateX: pet.x }, { translateY: pet.recoil }, { rotate: deg(pet.lean) }] }]}>
         {/* A pet with drawn move strips has one for each way. Otherwise it walks, and the walk strips face right:
             walking left mirrors it. Standing, it faces the player again. */}
-        <View style={{ transform: [{ scaleX: walk.moving && !hasSprite(petId, petLevel, moveActivity(walk.facing)) ? walk.facing : 1 }] }}>
+        <View style={{ transform: [{ scaleX: running && walk.moving && !hasSprite(petId, petLevel, moveActivity(walk.facing)) ? walk.facing : 1 }] }}>
           <PetArt pet={petId} size={PET_SIZE} stage={petLevel} moving={walk.moving ? walk.facing : undefined} strolling={walk.stroll}
             still={reduceMotion || !running} />
         </View>
@@ -479,8 +531,8 @@ const ShooterLayer = memo(function ShooterLayer({ width, height, words, petId, p
   );
 });
 
-/** A glowing rock with a fiery tail streaming up behind it. */
-function Rock({ danger, big }: { danger: boolean; big: boolean }) {
+/** A glowing rock with a fiery tail streaming up behind it (also drawn by the game's guide, TutorialArt). */
+export function Rock({ danger, big }: { danger: boolean; big: boolean }) {
   const d = big ? 42 : 36;
   return (
     <View style={styles.rockWrap} pointerEvents="none">
@@ -495,8 +547,8 @@ function Rock({ danger, big }: { danger: boolean; big: boolean }) {
   );
 }
 
-/** An English word falling in Anh → Việt: a glowing tile with a short trail. */
-function WordTile({ word, danger, big }: { word: string; danger: boolean; big: boolean }) {
+/** An English word falling in Anh → Việt: a glowing tile with a short trail (also drawn by the game's guide). */
+export function WordTile({ word, danger, big }: { word: string; danger: boolean; big: boolean }) {
   return (
     <View style={styles.rockWrap} pointerEvents="none">
       <LinearGradient colors={['rgba(140,200,255,0)', 'rgba(120,180,255,0.5)']} style={styles.trail} />

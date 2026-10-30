@@ -29,8 +29,9 @@ from . import clock, team_quests
 from .config import settings
 from .db import SessionLocal, get_db
 from .errors import APIError
-from .friends import (are_friends, blocked_ids, ensure_profile, friend_ids, no_control_chars, normalize_code,
-                      profiles_for, public_user, random_code, shares_stats, touch_active)
+from .friends import (_visible_user, are_friends, blocked_ids, ensure_profile, friend_ids, is_blocked_between,
+                      no_control_chars, normalize_code, profiles_for, public_user, random_code, shares_stats,
+                      touch_active)
 from .models import (StudyRoom, StudyRoomInvitation, StudyRoomMember, StudyRoomParticipant, StudyRoomSession,
                      StudySession, User, as_utc)
 from .notifications import notify
@@ -264,9 +265,16 @@ def finalize_session(db: Session, session: StudyRoomSession) -> list[int]:
                                     daily_cap=settings.group_daily_exp_cap)
         p.rewarded_at = t
         if p.cycles_completed > 0:
-            from .memories import record_event
+            from .memories import record_event, study_friend
+            # The friends who finished a cycle too, as every room member saw them, never across a block.
+            friends = [f for f in (_visible_user(db, q.user_id) for q in participants
+                                   if q.user_id != user.id and q.cycles_completed > 0)
+                       if f is not None and not is_blocked_between(db, user.id, f.id)]
             record_event(db, user, "first_group_session", "first:group", at=ended,
-                         result="Hoàn thành buổi học nhóm đầu tiên")
+                         result=f"Tập trung {seconds // 60} phút cùng {len(friends)} bạn" if friends
+                         else f"Tập trung {seconds // 60} phút cùng nhóm",
+                         session={"id": session.id, "minutes": seconds // 60, "cycles": p.cycles_completed},
+                         friends=[study_friend(f) for f in friends])
         rewarded.append(user.id)
         minutes = seconds // 60
         notify(db, user.id, "session_completed", "Phiên học nhóm đã kết thúc",

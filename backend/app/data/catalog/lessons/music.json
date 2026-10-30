@@ -1,0 +1,5731 @@
+{
+ "subject": "music",
+ "version": 1,
+ "organization": "topic",
+ "source_note": "Theo yêu cầu cần đạt môn Âm nhạc (CT GDPT 2018): hát, nghe nhạc, đọc nhạc, nhạc cụ, lí thuyết và thường thức âm nhạc; tổ chức theo chủ đề, không theo mục lục bộ sách nào. Trò chơi không có âm thanh: chỉ ôn kiến thức, không thay thế giờ hát, nghe nhạc và chơi nhạc cụ.",
+ "chapters": [
+  {
+   "key": "an1.hat",
+   "grade": 1,
+   "order": 1,
+   "title": "Hát",
+   "lessons": [
+    {
+     "key": "an1.hat_dung_loi",
+     "order": 1,
+     "title": "Hát đúng lời, đúng giai điệu bài hát thiếu nhi",
+     "description": "Tập hát rõ lời, đúng giai điệu cùng thầy cô; ứng dụng không thay thế giờ tập hát.",
+     "status": "planned"
+    },
+    {
+     "key": "an1.hat_vo_tay",
+     "order": 2,
+     "title": "Hát kết hợp vỗ tay và vận động theo nhịp",
+     "description": "Vừa hát vừa vỗ tay, lắc lư theo nhịp bài hát (thực hành trên lớp).",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an1.nghe_nhac",
+   "grade": 1,
+   "order": 2,
+   "title": "Nghe nhạc và âm thanh quanh em",
+   "lessons": [
+    {
+     "key": "an1.am_thanh_to_nho",
+     "order": 1,
+     "title": "Âm thanh to và âm thanh nhỏ",
+     "description": "Nhận biết âm thanh to, nhỏ quanh em và hát to nhỏ cho phù hợp.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Phân biệt âm thanh to và âm thanh nhỏ trong cuộc sống",
+      "Biết hát, nói to nhỏ phù hợp với nơi chốn và lúc"
+     ],
+     "summary": [
+      "Âm thanh có cái to, có cái nhỏ: tiếng sấm rất to, tiếng lá rơi rất nhỏ.",
+      "Khi hát, em chọn hát to hay nhỏ cho hợp: hát ru thì nhỏ nhẹ, hát vui ngoài sân thì rõ ràng, vừa đủ nghe.",
+      "Ứng dụng chưa phát âm thanh: phần nghe, hát và chơi nhạc cụ học cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Âm thanh to",
+       "lines": [
+        "Tiếng trống hội, tiếng còi xe cứu hoả"
+       ]
+      },
+      {
+       "title": "Âm thanh nhỏ",
+       "lines": [
+        "Tiếng thì thầm, tiếng kim đồng hồ tích tắc"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "To hay nhỏ?",
+       "set": {
+        "title": "Âm thanh này to hay nhỏ?",
+        "groups": [
+         {
+          "id": "to",
+          "label": "Âm thanh to",
+          "icon": "📢"
+         },
+         {
+          "id": "nho",
+          "label": "Âm thanh nhỏ",
+          "icon": "🤫"
+         }
+        ],
+        "cards": [
+         {
+          "key": "sam",
+          "text": "Tiếng sấm rền",
+          "picture": "⛈️",
+          "group": "to",
+          "explanation": "Tiếng sấm vang rất to, nghe được từ rất xa."
+         },
+         {
+          "key": "trong_hoi",
+          "text": "Tiếng trống hội",
+          "picture": "🥁",
+          "group": "to",
+          "explanation": "Trống hội đánh mạnh nên tiếng trống vang to."
+         },
+         {
+          "key": "coi_cuu_hoa",
+          "text": "Tiếng còi xe cứu hoả",
+          "picture": "🚒",
+          "group": "to",
+          "explanation": "Còi xe cứu hoả kêu to để mọi người tránh đường."
+         },
+         {
+          "key": "phao_hoa",
+          "text": "Tiếng pháo hoa nổ",
+          "picture": "🎆",
+          "group": "to",
+          "explanation": "Pháo hoa nổ đì đùng, rất to."
+         },
+         {
+          "key": "ho_khau_hieu",
+          "text": "Tiếng cả lớp hô khẩu hiệu",
+          "picture": "📣",
+          "group": "to",
+          "explanation": "Nhiều bạn cùng hô to một lúc nên âm thanh to."
+         },
+         {
+          "key": "thi_tham",
+          "text": "Tiếng thì thầm bên tai",
+          "picture": "🤫",
+          "group": "nho",
+          "explanation": "Thì thầm là nói rất nhỏ, chỉ người bên cạnh nghe thấy."
+         },
+         {
+          "key": "la_roi",
+          "text": "Tiếng lá rơi",
+          "picture": "🍂",
+          "group": "nho",
+          "explanation": "Chiếc lá rơi xuống đất kêu rất khẽ."
+         },
+         {
+          "key": "kim_dong_ho",
+          "text": "Tiếng kim đồng hồ tích tắc",
+          "picture": "⏰",
+          "group": "nho",
+          "explanation": "Tiếng tích tắc nhỏ, phải yên lặng mới nghe rõ."
+         },
+         {
+          "key": "meo_con",
+          "text": "Tiếng mèo con bước nhẹ",
+          "picture": "🐈",
+          "group": "nho",
+          "explanation": "Mèo bước rất nhẹ nên gần như không có tiếng động."
+         },
+         {
+          "key": "mua_phun",
+          "text": "Tiếng mưa phùn",
+          "picture": "🌧️",
+          "group": "nho",
+          "explanation": "Mưa phùn hạt rất nhỏ, rơi gần như không thành tiếng."
+         }
+        ]
+       }
+      },
+      {
+       "game": "choice",
+       "title": "Hát to hay hát nhỏ?",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "em_be_ngu",
+         "question": "Em bé đang ngủ. Em muốn hát bài vừa học. Em nên làm gì?",
+         "options": [
+          {
+           "text": "Hát thật nhỏ, nhẹ nhàng hoặc sang phòng khác hát",
+           "ok": true,
+           "why": "Đúng: hát nhỏ hoặc ra chỗ khác để em bé ngủ ngon."
+          },
+          {
+           "text": "Hát thật to cho em bé cùng nghe",
+           "ok": false,
+           "why": "Hát to sẽ làm em bé giật mình thức giấc."
+          },
+          {
+           "text": "Vừa hát vừa gõ trống",
+           "ok": false,
+           "why": "Tiếng trống rất to, không hợp khi có người đang ngủ."
+          }
+         ],
+         "explanation": "Hát to hay nhỏ phải hợp với nơi chốn: khi có người ngủ, em hát nhỏ hoặc đợi lúc khác."
+        },
+        {
+         "key": "hat_ru",
+         "question": "Bài hát ru em bé ngủ thường được hát thế nào?",
+         "options": [
+          {
+           "text": "Chậm và nhỏ nhẹ",
+           "ok": true,
+           "why": "Đúng: hát ru chậm, êm để em bé dễ ngủ."
+          },
+          {
+           "text": "Nhanh và thật to",
+           "ok": false,
+           "why": "Hát nhanh, to làm em bé tỉnh, không ngủ được."
+          },
+          {
+           "text": "Vừa hát vừa giậm chân mạnh",
+           "ok": false,
+           "why": "Tiếng giậm chân gây ồn, không hợp với hát ru."
+          }
+         ],
+         "explanation": "Hát ru là hát chậm, nhỏ nhẹ, êm ái."
+        },
+        {
+         "key": "thu_vien",
+         "question": "Trong thư viện, em nhớ bài hát hay quá. Em làm gì?",
+         "options": [
+          {
+           "text": "Hát nhẩm trong đầu, ra ngoài mới hát thành tiếng",
+           "ok": true,
+           "why": "Đúng: thư viện cần yên tĩnh để mọi người đọc sách."
+          },
+          {
+           "text": "Hát to vì bài hát rất hay",
+           "ok": false,
+           "why": "Hát to trong thư viện làm ồn, các bạn không đọc được."
+          },
+          {
+           "text": "Rủ cả nhóm cùng hát",
+           "ok": false,
+           "why": "Cả nhóm cùng hát còn ồn hơn nữa."
+          }
+         ],
+         "explanation": "Ở nơi cần yên tĩnh như thư viện, bệnh viện, em giữ im lặng."
+        },
+        {
+         "key": "mung_sinh_nhat",
+         "question": "Cả lớp hát mừng sinh nhật một bạn. Em hát thế nào?",
+         "options": [
+          {
+           "text": "Hát vui, rõ lời, hoà cùng các bạn",
+           "ok": true,
+           "why": "Đúng: hát cùng nhau thì nghe các bạn để hát đều, vui."
+          },
+          {
+           "text": "Hét thật to át tiếng các bạn",
+           "ok": false,
+           "why": "Hét to làm bài hát không còn hay và át tiếng cả lớp."
+          },
+          {
+           "text": "Hát nhanh hơn các bạn cho xong trước",
+           "ok": false,
+           "why": "Hát lệch nhịp làm bài hát bị rời rạc."
+          }
+         ],
+         "explanation": "Hát tập thể: nghe nhau, hát đều, vừa đủ to."
+        },
+        {
+         "key": "bai_vui",
+         "question": "Hát một bài vui về mùa xuân, em có thể làm gì cho bài thêm vui?",
+         "options": [
+          {
+           "text": "Vỗ tay nhẹ nhàng theo nhịp",
+           "ok": true,
+           "why": "Đúng: vỗ tay theo nhịp giúp bài hát thêm vui, rộn ràng."
+          },
+          {
+           "text": "Lắc lư, vận động nhẹ theo bài hát",
+           "ok": true,
+           "why": "Đúng: vận động nhẹ nhàng theo nhịp cũng làm bài hát thêm vui."
+          },
+          {
+           "text": "Hét to và đập bàn thật mạnh",
+           "ok": false,
+           "why": "Đập bàn, hét to gây ồn và lấn mất tiếng hát."
+          }
+         ],
+         "explanation": "Vỗ tay, vận động nhẹ theo nhịp làm bài hát vui hơn; đừng gây ồn."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "an1.nghe_bai_hat",
+     "order": 2,
+     "title": "Nghe bài hát thiếu nhi và nói cảm nhận",
+     "description": "Nghe nhạc cùng thầy cô, nói bài hát vui hay êm dịu. Ứng dụng chưa phát âm thanh: phần nghe, hát và chơi nhạc cụ học cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an1.doc_nhac",
+   "grade": 1,
+   "order": 3,
+   "title": "Đọc nhạc",
+   "lessons": [
+    {
+     "key": "an1.not_do_re_mi",
+     "order": 1,
+     "title": "Các nốt Đô, Rê, Mi, Son, La",
+     "description": "Nhớ tên và thứ tự cao thấp của các nốt Đô, Rê, Mi, Son, La.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Gọi đúng tên các nốt Đô, Rê, Mi, Son, La",
+      "Xếp các nốt theo thứ tự từ thấp lên cao và từ cao xuống thấp"
+     ],
+     "summary": [
+      "Từ thấp lên cao: Đô – Rê – Mi – Son – La.",
+      "Đi ngược lại từ cao xuống thấp: La – Son – Mi – Rê – Đô.",
+      "Đọc nhạc đúng cao độ cần tập cùng thầy cô; trò chơi giúp em nhớ thứ tự các nốt."
+     ],
+     "examples": [
+      {
+       "title": "Như bậc cầu thang",
+       "lines": [
+        "Đô ở bậc thấp nhất, rồi Rê, Mi, Son, La cao dần."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Bậc thang nốt nhạc",
+       "tasks": [
+        {
+         "key": "len_3",
+         "prompt": "Xếp các nốt từ thấp lên cao.",
+         "items": [
+          "Đô",
+          "Rê",
+          "Mi"
+         ],
+         "explanation": "Đô thấp nhất, rồi đến Rê, rồi Mi.",
+         "first_label": "Thấp",
+         "last_label": "Cao"
+        },
+        {
+         "key": "xuong_3",
+         "prompt": "Xếp các nốt từ cao xuống thấp.",
+         "items": [
+          "Mi",
+          "Rê",
+          "Đô"
+         ],
+         "explanation": "Đi xuống thì ngược lại: Mi, Rê, Đô.",
+         "first_label": "Cao",
+         "last_label": "Thấp"
+        },
+        {
+         "key": "len_son_la",
+         "prompt": "Xếp các nốt từ thấp lên cao.",
+         "items": [
+          "Đô",
+          "Mi",
+          "Son",
+          "La"
+         ],
+         "explanation": "Thứ tự đi lên: Đô – (Rê) – Mi – Son – La.",
+         "first_label": "Thấp",
+         "last_label": "Cao"
+        },
+        {
+         "key": "len_re_la",
+         "prompt": "Xếp các nốt từ thấp lên cao.",
+         "items": [
+          "Rê",
+          "Mi",
+          "Son",
+          "La"
+         ],
+         "explanation": "Rê thấp hơn Mi; sau Mi là Son, cao nhất là La.",
+         "first_label": "Thấp",
+         "last_label": "Cao"
+        },
+        {
+         "key": "xuong_la",
+         "prompt": "Xếp các nốt từ cao xuống thấp.",
+         "items": [
+          "La",
+          "Son",
+          "Mi",
+          "Đô"
+         ],
+         "explanation": "Đi xuống: La – Son – Mi – (Rê) – Đô.",
+         "first_label": "Cao",
+         "last_label": "Thấp"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "an1.kihieu_ban_tay",
+     "order": 2,
+     "title": "Đọc nhạc theo kí hiệu bàn tay",
+     "description": "Tập đọc cao độ theo kí hiệu bàn tay của thầy cô (thực hành trên lớp).",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an1.nhac_cu",
+   "grade": 1,
+   "order": 4,
+   "title": "Nhạc cụ",
+   "lessons": [
+    {
+     "key": "an1.nhac_cu_go",
+     "order": 1,
+     "title": "Làm quen với một số nhạc cụ gõ",
+     "description": "Biết tên, chất liệu và cách chơi một số nhạc cụ gõ quen thuộc.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Gọi tên trống nhỏ, thanh phách, song loan, mõ, lắc, triangle",
+      "Biết mỗi nhạc cụ được chơi thế nào và làm bằng gì"
+     ],
+     "summary": [
+      "Nhạc cụ gõ phát ra tiếng khi được gõ, vỗ, lắc.",
+      "Thanh phách: hai thanh tre gõ vào nhau. Trống nhỏ: gõ dùi lên mặt trống. Lắc: lắc cho hạt bên trong kêu.",
+      "Gõ đệm theo phách cần tập trên lớp cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Gõ đệm",
+       "lines": [
+        "Hát bài vui, gõ thanh phách đều theo nhịp vỗ tay."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Nhạc cụ và cách chơi",
+       "tasks": [
+        {
+         "key": "cach_choi_1",
+         "prompt": "Ghép nhạc cụ với cách chơi.",
+         "pairs": [
+          [
+           "Trống nhỏ",
+           "Gõ dùi lên mặt trống"
+          ],
+          [
+           "Thanh phách",
+           "Gõ hai thanh vào nhau"
+          ],
+          [
+           "Lắc (maracas)",
+           "Lắc cho hạt bên trong kêu"
+          ]
+         ],
+         "explanation": "Mỗi nhạc cụ gõ có một cách tạo tiếng riêng: gõ, vỗ hoặc lắc."
+        },
+        {
+         "key": "chat_lieu",
+         "prompt": "Ghép nhạc cụ với chất liệu làm nên nó.",
+         "pairs": [
+          [
+           "Thanh phách",
+           "Hai thanh tre"
+          ],
+          [
+           "Mõ",
+           "Khối gỗ khoét rỗng"
+          ],
+          [
+           "Triangle",
+           "Thanh kim loại uốn tam giác"
+          ]
+         ],
+         "explanation": "Thanh phách làm bằng tre, mõ bằng gỗ khoét rỗng, triangle bằng kim loại."
+        },
+        {
+         "key": "cach_choi_2",
+         "prompt": "Ghép nhạc cụ với cách chơi.",
+         "pairs": [
+          [
+           "Trống cơm",
+           "Vỗ bàn tay lên mặt trống"
+          ],
+          [
+           "Mõ",
+           "Gõ dùi vào thân mõ"
+          ],
+          [
+           "Triangle",
+           "Gõ que kim loại vào khung"
+          ],
+          [
+           "Song loan",
+           "Bấm cho hòn gỗ gõ vào mặt"
+          ]
+         ],
+         "explanation": "Trống cơm vỗ bằng tay; mõ và triangle gõ bằng dùi, que; song loan bấm cho hòn gỗ gõ xuống."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "an1.go_dem_phach",
+     "order": 2,
+     "title": "Gõ đệm theo phách cho bài hát",
+     "description": "Dùng thanh phách, trống nhỏ gõ đệm đều theo phách (thực hành trên lớp).",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an1.thuong_thuc",
+   "grade": 1,
+   "order": 5,
+   "title": "Thường thức âm nhạc",
+   "lessons": [
+    {
+     "key": "an1.cau_chuyen",
+     "order": 1,
+     "title": "Câu chuyện âm nhạc: những bạn nhỏ yêu ca hát",
+     "description": "Nghe kể chuyện về âm nhạc và những bạn nhỏ yêu ca hát.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an2.hat",
+   "grade": 2,
+   "order": 1,
+   "title": "Hát",
+   "lessons": [
+    {
+     "key": "an2.hat_sac_thai",
+     "order": 1,
+     "title": "Hát đúng giai điệu, thể hiện sắc thái vui tươi",
+     "description": "Tập hát rõ lời, thể hiện tình cảm của bài hát (thực hành cùng thầy cô).",
+     "status": "planned"
+    },
+    {
+     "key": "an2.hat_go_dem",
+     "order": 2,
+     "title": "Hát kết hợp gõ đệm theo phách, theo nhịp",
+     "description": "Vừa hát vừa gõ đệm bằng nhạc cụ gõ (thực hành trên lớp).",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an2.nghe_nhac",
+   "grade": 2,
+   "order": 2,
+   "title": "Nghe nhạc",
+   "lessons": [
+    {
+     "key": "an2.am_thanh_dai_ngan",
+     "order": 1,
+     "title": "Âm thanh dài và âm thanh ngắn",
+     "description": "Phân biệt âm thanh kéo dài và âm thanh ngắn, gọn trong cuộc sống.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nhận biết âm thanh dài và âm thanh ngắn",
+      "Liên hệ với nốt nhạc ngân dài và nốt nhạc ngắn khi hát"
+     ],
+     "summary": [
+      "Có âm thanh kéo dài như tiếng còi tàu, có âm thanh ngắn, gọn như tiếng gõ cửa.",
+      "Khi hát cũng có chỗ ngân dài, có chỗ hát ngắn, gọn.",
+      "Ứng dụng chưa phát âm thanh: phần nghe, hát và chơi nhạc cụ học cùng thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Dài và ngắn",
+       "lines": [
+        "Tiếng còi tàu: tuuuu… (dài)",
+        "Tiếng gõ cửa: cốc, cốc (ngắn)"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Dài hay ngắn?",
+       "set": {
+        "title": "Âm thanh này dài hay ngắn?",
+        "groups": [
+         {
+          "id": "dai",
+          "label": "Âm thanh kéo dài",
+          "icon": "〰️"
+         },
+         {
+          "id": "ngan",
+          "label": "Âm thanh ngắn, gọn",
+          "icon": "🔹"
+         }
+        ],
+        "cards": [
+         {
+          "key": "coi_tau",
+          "text": "Tiếng còi tàu hoả kéo dài",
+          "picture": "🚂",
+          "group": "dai",
+          "explanation": "Còi tàu kêu một hơi dài."
+         },
+         {
+          "key": "chuong_chua",
+          "text": "Tiếng chuông chùa ngân vang",
+          "picture": "🔔",
+          "group": "dai",
+          "explanation": "Chuông lớn đánh một tiếng mà ngân rất lâu."
+         },
+         {
+          "key": "sao_ngan",
+          "text": "Tiếng sáo ngân một hơi dài",
+          "picture": "🎶",
+          "group": "dai",
+          "explanation": "Người thổi giữ hơi nên tiếng sáo kéo dài."
+         },
+         {
+          "key": "ga_gay",
+          "text": "Tiếng gà gáy ò ó o",
+          "picture": "🐓",
+          "group": "dai",
+          "explanation": "Tiếng gà gáy kéo dài thành một tràng."
+         },
+         {
+          "key": "vo_tay",
+          "text": "Tiếng vỗ tay một cái",
+          "picture": "👏",
+          "group": "ngan",
+          "explanation": "Vỗ tay một cái chỉ kêu \"bốp\" rồi tắt ngay."
+         },
+         {
+          "key": "go_cua",
+          "text": "Tiếng gõ cửa cốc cốc",
+          "picture": "🚪",
+          "group": "ngan",
+          "explanation": "Mỗi tiếng gõ cửa ngắn, gọn."
+         },
+         {
+          "key": "bong_nay",
+          "text": "Tiếng bóng nảy bộp",
+          "picture": "🏀",
+          "group": "ngan",
+          "explanation": "Bóng chạm đất kêu một tiếng ngắn."
+         },
+         {
+          "key": "thanh_phach",
+          "text": "Tiếng thanh phách gõ",
+          "picture": "🥢",
+          "group": "ngan",
+          "explanation": "Thanh phách gõ vào nhau kêu \"cắc\" ngắn, gọn."
+         },
+         {
+          "key": "be_cui",
+          "text": "Tiếng bẻ cành củi khô",
+          "picture": "🪵",
+          "group": "ngan",
+          "explanation": "Cành khô gãy \"rắc\" một tiếng rất ngắn."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "an2.nghe_van_dong",
+     "order": 2,
+     "title": "Nghe nhạc và vận động theo nhịp",
+     "description": "Nghe bài hát thiếu nhi, vận động nhẹ nhàng theo nhịp cùng thầy cô. Ứng dụng chưa phát âm thanh: phần nghe, hát và chơi nhạc cụ học cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an2.doc_nhac",
+   "grade": 2,
+   "order": 3,
+   "title": "Đọc nhạc",
+   "lessons": [
+    {
+     "key": "an2.doc_nhac_go_dem",
+     "order": 1,
+     "title": "Đọc nhạc với các nốt Đô, Rê, Mi, Son, La kết hợp gõ đệm",
+     "description": "Đọc đúng tên nốt và gõ đệm theo phách (thực hành trên lớp).",
+     "status": "planned"
+    },
+    {
+     "key": "an2.tiet_tau_don_gian",
+     "order": 2,
+     "title": "Đọc tiết tấu đơn giản bằng vỗ tay",
+     "description": "Vỗ tay theo tiết tấu ngắn cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an2.nhac_cu",
+   "grade": 2,
+   "order": 4,
+   "title": "Nhạc cụ",
+   "lessons": [
+    {
+     "key": "an2.nhac_cu_dan_toc",
+     "order": 1,
+     "title": "Một số nhạc cụ dân tộc Việt Nam",
+     "description": "Biết tên, chất liệu và cách tạo âm thanh của một số nhạc cụ dân tộc.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Gọi tên sáo trúc, đàn bầu, đàn tranh, đàn nhị, trống cơm, đàn đá, đàn T'rưng, cồng chiêng",
+      "Biết mỗi nhạc cụ tạo ra âm thanh bằng cách nào"
+     ],
+     "summary": [
+      "Sáo trúc: thổi hơi. Đàn bầu: gảy một dây. Đàn nhị: kéo vĩ qua hai dây. Trống cơm: vỗ tay lên mặt trống.",
+      "Có nhạc cụ làm bằng tre nứa (sáo, đàn T'rưng), bằng đá (đàn đá), bằng đồng (cồng, chiêng).",
+      "Chơi nhạc cụ cần thực hành cùng thầy cô; trò chơi giúp em nhớ tên và đặc điểm."
+     ],
+     "examples": [
+      {
+       "title": "Đàn bầu",
+       "lines": [
+        "Chỉ có một dây; tay phải gảy, tay trái uốn cần đàn để tiếng đàn luyến láy."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Nhạc cụ dân tộc",
+       "tasks": [
+        {
+         "key": "tao_am",
+         "prompt": "Ghép nhạc cụ với cách tạo ra âm thanh.",
+         "pairs": [
+          [
+           "Sáo trúc",
+           "Thổi hơi vào ống sáo"
+          ],
+          [
+           "Đàn bầu",
+           "Gảy vào một sợi dây"
+          ],
+          [
+           "Trống cơm",
+           "Vỗ tay lên mặt trống"
+          ]
+         ],
+         "explanation": "Sáo là nhạc cụ hơi, đàn bầu là nhạc cụ dây, trống cơm là nhạc cụ gõ."
+        },
+        {
+         "key": "chat_lieu",
+         "prompt": "Ghép nhạc cụ với chất liệu chính.",
+         "pairs": [
+          [
+           "Đàn đá",
+           "Những thanh đá"
+          ],
+          [
+           "Cồng, chiêng",
+           "Đồng"
+          ],
+          [
+           "Đàn T'rưng",
+           "Ống tre, nứa"
+          ]
+         ],
+         "explanation": "Đàn đá làm từ các thanh đá; cồng chiêng đúc bằng đồng; đàn T'rưng ghép từ ống tre, nứa."
+        },
+        {
+         "key": "dac_diem",
+         "prompt": "Ghép nhạc cụ với đặc điểm.",
+         "pairs": [
+          [
+           "Đàn bầu",
+           "Chỉ có một dây"
+          ],
+          [
+           "Đàn nhị",
+           "Hai dây, kéo bằng vĩ"
+          ],
+          [
+           "Đàn tranh",
+           "Nhiều dây, gảy bằng móng"
+          ]
+         ],
+         "explanation": "Đàn bầu một dây, đàn nhị hai dây kéo vĩ, đàn tranh có nhiều dây và gảy bằng móng gảy."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "an2.go_tiet_tau",
+     "order": 2,
+     "title": "Gõ đệm theo tiết tấu bằng thanh phách, trống nhỏ",
+     "description": "Thực hành gõ đệm cho bài hát cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an2.thuong_thuc",
+   "grade": 2,
+   "order": 5,
+   "title": "Thường thức âm nhạc",
+   "lessons": [
+    {
+     "key": "an2.xem_bieu_dien",
+     "order": 1,
+     "title": "Lắng nghe và cổ vũ khi xem biểu diễn",
+     "description": "Biết cách cư xử lịch sự khi xem bạn bè và nghệ sĩ biểu diễn.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Giữ trật tự, lắng nghe khi xem biểu diễn",
+      "Biết vỗ tay, động viên đúng lúc"
+     ],
+     "summary": [
+      "Khi xem biểu diễn: ngồi ngay ngắn, giữ trật tự, không ăn uống ồn ào.",
+      "Vỗ tay khi tiết mục kết thúc, hoặc khi người biểu diễn mời cả lớp vỗ tay theo.",
+      "Bạn hát chưa hay: khen điều bạn làm tốt và động viên bạn."
+     ],
+     "examples": [
+      {
+       "title": "Một buổi văn nghệ",
+       "lines": [
+        "Bạn hát xong, cả lớp vỗ tay. Em khen: \"Bạn hát rõ lời lắm!\""
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Khán giả lịch sự",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "quen_loi",
+         "question": "Bạn đang hát trên sân khấu thì quên lời. Em ở dưới làm gì?",
+         "options": [
+          {
+           "text": "Im lặng, mỉm cười động viên, vỗ tay khi bạn hát xong",
+           "ok": true,
+           "why": "Đúng: sự động viên giúp bạn bình tĩnh hát tiếp."
+          },
+          {
+           "text": "Cười to và chỉ trỏ bạn",
+           "ok": false,
+           "why": "Cười chê làm bạn xấu hổ, mất tự tin."
+          },
+          {
+           "text": "Bỏ ra ngoài vì chán",
+           "ok": false,
+           "why": "Bỏ đi giữa chừng là không tôn trọng người biểu diễn."
+          }
+         ],
+         "explanation": "Khán giả tốt luôn động viên người biểu diễn, nhất là khi họ gặp lỗi."
+        },
+        {
+         "key": "khi_vo_tay",
+         "question": "Khi nào nên vỗ tay trong buổi biểu diễn?",
+         "options": [
+          {
+           "text": "Khi tiết mục kết thúc hoặc khi được mời vỗ tay theo",
+           "ok": true,
+           "why": "Đúng: vỗ tay đúng lúc là lời cảm ơn người biểu diễn."
+          },
+          {
+           "text": "Vỗ liên tục suốt lúc bạn đang hát",
+           "ok": false,
+           "why": "Vỗ tay lộn xộn làm át tiếng hát."
+          },
+          {
+           "text": "Không bao giờ vỗ tay",
+           "ok": false,
+           "why": "Vỗ tay khi kết thúc là cách cảm ơn, khích lệ người biểu diễn."
+          }
+         ],
+         "explanation": "Vỗ tay khi tiết mục kết thúc, hoặc vỗ theo nhịp khi người biểu diễn mời."
+        },
+        {
+         "key": "noi_chuyen",
+         "question": "Đang xem biểu diễn, em muốn nói với bạn bên cạnh. Em làm gì?",
+         "options": [
+          {
+           "text": "Đợi hết tiết mục rồi mới nói nhỏ",
+           "ok": true,
+           "why": "Đúng: như vậy không làm phiền người biểu diễn và người xem."
+          },
+          {
+           "text": "Nói to ngay lúc đó",
+           "ok": false,
+           "why": "Nói to làm mọi người không nghe được tiết mục."
+          },
+          {
+           "text": "Gọi bạn ở xa bằng cách hét lên",
+           "ok": false,
+           "why": "Hét lên làm gián đoạn buổi biểu diễn."
+          }
+         ],
+         "explanation": "Giữ trật tự khi tiết mục đang diễn ra."
+        },
+        {
+         "key": "an_banh",
+         "question": "Ngồi xem văn nghệ, em có gói bánh. Em xử lí thế nào?",
+         "options": [
+          {
+           "text": "Để dành, ăn sau buổi biểu diễn",
+           "ok": true,
+           "why": "Đúng: ăn uống trong lúc xem gây tiếng ồn và bừa bộn."
+          },
+          {
+           "text": "Bóc ăn sột soạt ngay",
+           "ok": false,
+           "why": "Tiếng bóc gói bánh làm ồn, ảnh hưởng mọi người."
+          },
+          {
+           "text": "Ăn xong vứt vỏ xuống ghế",
+           "ok": false,
+           "why": "Vứt rác bừa bãi là không giữ vệ sinh chung."
+          }
+         ],
+         "explanation": "Không ăn uống ồn ào khi xem biểu diễn; giữ chỗ ngồi sạch sẽ."
+        },
+        {
+         "key": "ban_hat_chua_hay",
+         "question": "Bạn em hát chưa hay bằng các bạn khác. Em nói gì?",
+         "options": [
+          {
+           "text": "Khen điều bạn làm tốt, động viên bạn tập thêm",
+           "ok": true,
+           "why": "Đúng: lời khen chân thành giúp bạn tự tin hơn."
+          },
+          {
+           "text": "Chê bạn hát dở trước cả lớp",
+           "ok": false,
+           "why": "Lời chê trước đông người làm bạn buồn và ngại hát."
+          },
+          {
+           "text": "Bảo bạn đừng bao giờ hát nữa",
+           "ok": false,
+           "why": "Ai cũng có thể hát hay hơn nếu được động viên và tập luyện."
+          }
+         ],
+         "explanation": "Góp ý nhẹ nhàng, khen điều bạn làm tốt."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "an2.cau_chuyen_nhac_si",
+     "order": 2,
+     "title": "Câu chuyện về nhạc sĩ viết bài hát thiếu nhi",
+     "description": "Nghe kể về người viết những bài hát em yêu thích.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an3.hat",
+   "grade": 3,
+   "order": 1,
+   "title": "Hát",
+   "lessons": [
+    {
+     "key": "an3.hat_dien_cam",
+     "order": 1,
+     "title": "Hát rõ lời, thể hiện tình cảm của bài hát",
+     "description": "Tập hát và thể hiện sắc thái bài hát cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "an3.hat_noi_tiep",
+     "order": 2,
+     "title": "Hát nối tiếp, hát hoà giọng theo nhóm",
+     "description": "Thực hành hát theo nhóm, theo tổ trên lớp.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an3.nghe_nhac",
+   "grade": 3,
+   "order": 2,
+   "title": "Nghe nhạc",
+   "lessons": [
+    {
+     "key": "an3.nghe_khong_loi",
+     "order": 1,
+     "title": "Nghe bản nhạc không lời và cảm nhận tính chất",
+     "description": "Nghe nhạc cùng thầy cô, nói bản nhạc vui, êm dịu hay hùng mạnh. Ứng dụng chưa phát âm thanh: phần nghe, hát và chơi nhạc cụ học cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "an3.nghe_dan_ca",
+     "order": 2,
+     "title": "Nghe một bài dân ca và vận động theo nhạc",
+     "description": "Nghe dân ca, vỗ tay hoặc vận động theo nhịp (thực hành trên lớp).",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an3.doc_nhac",
+   "grade": 3,
+   "order": 3,
+   "title": "Đọc nhạc và lí thuyết âm nhạc",
+   "lessons": [
+    {
+     "key": "an3.bay_not_nhac",
+     "order": 1,
+     "title": "Bảy nốt nhạc",
+     "description": "Nhớ tên và thứ tự cao thấp của bảy nốt nhạc Đô, Rê, Mi, Fa, Son, La, Si.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Kể đúng tên bảy nốt nhạc",
+      "Xếp các nốt theo thứ tự đi lên và đi xuống"
+     ],
+     "summary": [
+      "Bảy nốt nhạc từ thấp lên cao: Đô – Rê – Mi – Fa – Son – La – Si.",
+      "Sau Si lại đến Đô nhưng cao hơn: gọi là Đô cao.",
+      "Đi xuống thì đọc ngược lại: Si – La – Son – Fa – Mi – Rê – Đô."
+     ],
+     "examples": [
+      {
+       "title": "Thang âm",
+       "lines": [
+        "Đô Rê Mi Fa Son La Si Đô (cao)"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Thang bảy nốt",
+       "tasks": [
+        {
+         "key": "len_do_son",
+         "prompt": "Xếp các nốt từ thấp lên cao.",
+         "items": [
+          "Đô",
+          "Rê",
+          "Mi",
+          "Fa",
+          "Son"
+         ],
+         "explanation": "Năm nốt đầu đi lên: Đô – Rê – Mi – Fa – Son.",
+         "first_label": "Thấp",
+         "last_label": "Cao"
+        },
+        {
+         "key": "len_son_do",
+         "prompt": "Xếp các nốt từ thấp lên cao.",
+         "items": [
+          "Son",
+          "La",
+          "Si",
+          "Đô cao"
+         ],
+         "explanation": "Sau Son là La, Si, rồi đến Đô cao.",
+         "first_label": "Thấp",
+         "last_label": "Cao"
+        },
+        {
+         "key": "xuong_si_mi",
+         "prompt": "Xếp các nốt từ cao xuống thấp.",
+         "items": [
+          "Si",
+          "La",
+          "Son",
+          "Fa",
+          "Mi"
+         ],
+         "explanation": "Đi xuống từ Si: Si – La – Son – Fa – Mi.",
+         "first_label": "Cao",
+         "last_label": "Thấp"
+        },
+        {
+         "key": "len_cach",
+         "prompt": "Xếp các nốt từ thấp lên cao.",
+         "items": [
+          "Rê",
+          "Fa",
+          "La",
+          "Si"
+         ],
+         "explanation": "Rê – (Mi) – Fa – (Son) – La – Si: các nốt vẫn theo thứ tự thang âm.",
+         "first_label": "Thấp",
+         "last_label": "Cao"
+        },
+        {
+         "key": "xuong_fa_do",
+         "prompt": "Xếp các nốt từ cao xuống thấp.",
+         "items": [
+          "Fa",
+          "Mi",
+          "Rê",
+          "Đô"
+         ],
+         "explanation": "Đi xuống từ Fa: Fa – Mi – Rê – Đô.",
+         "first_label": "Cao",
+         "last_label": "Thấp"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "an3.khuong_nhac",
+     "order": 2,
+     "title": "Khuông nhạc, khoá Son và vị trí các nốt",
+     "description": "Biết khuông nhạc, khoá Son và tìm vị trí các nốt trên khuông.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết khuông nhạc có 5 dòng kẻ và 4 khe, tính từ dưới lên",
+      "Biết khoá Son cho biết nốt Son ở dòng kẻ 2",
+      "Đọc tên nốt theo vị trí trên khuông"
+     ],
+     "summary": [
+      "Khuông nhạc gồm 5 dòng kẻ song song, giữa các dòng là 4 khe; dòng và khe tính từ dưới lên.",
+      "Khoá Son đặt ở đầu khuông, vòng xoắn bắt đầu từ dòng kẻ 2: nốt trên dòng 2 là Son.",
+      "Với khoá Son: dòng 1 Mi, khe 1 Fa, dòng 2 Son, khe 2 La, dòng 3 Si, khe 3 Đô cao.",
+      "Nốt Đô nằm trên một dòng kẻ phụ ngắn dưới khuông; Rê nằm sát dưới dòng kẻ 1."
+     ],
+     "examples": [
+      {
+       "title": "Nhớ nhanh",
+       "lines": [
+        "Dòng 1 – 2 – 3: Mi, Son, Si",
+        "Khe 1 – 2 – 3: Fa, La, Đô cao"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Tìm nốt trên khuông",
+       "tasks": [
+        {
+         "key": "dong",
+         "prompt": "Ghép dòng kẻ (khoá Son, tính từ dưới lên) với tên nốt.",
+         "pairs": [
+          [
+           "Dòng kẻ 1",
+           "Mi"
+          ],
+          [
+           "Dòng kẻ 2",
+           "Son"
+          ],
+          [
+           "Dòng kẻ 3",
+           "Si"
+          ]
+         ],
+         "explanation": "Khoá Son: dòng 1 là Mi, dòng 2 là Son, dòng 3 là Si.",
+         "left_label": "Vị trí",
+         "right_label": "Tên nốt"
+        },
+        {
+         "key": "khe",
+         "prompt": "Ghép khe (khoá Son, tính từ dưới lên) với tên nốt.",
+         "pairs": [
+          [
+           "Khe 1",
+           "Fa"
+          ],
+          [
+           "Khe 2",
+           "La"
+          ],
+          [
+           "Khe 3",
+           "Đô cao"
+          ]
+         ],
+         "explanation": "Mỗi khe nằm giữa hai dòng: khe 1 là Fa, khe 2 là La, khe 3 là Đô cao.",
+         "left_label": "Vị trí",
+         "right_label": "Tên nốt"
+        },
+        {
+         "key": "duoi_khuong",
+         "prompt": "Ghép vị trí với tên nốt (khoá Son).",
+         "pairs": [
+          [
+           "Dòng kẻ phụ dưới khuông",
+           "Đô"
+          ],
+          [
+           "Sát dưới dòng kẻ 1",
+           "Rê"
+          ],
+          [
+           "Dòng kẻ 1",
+           "Mi"
+          ],
+          [
+           "Khe 1",
+           "Fa"
+          ]
+         ],
+         "explanation": "Đi lên từ dưới khuông: Đô (dòng phụ), Rê (sát dưới dòng 1), Mi (dòng 1), Fa (khe 1).",
+         "left_label": "Vị trí",
+         "right_label": "Tên nốt"
+        },
+        {
+         "key": "ki_hieu",
+         "prompt": "Ghép kí hiệu với ý nghĩa.",
+         "pairs": [
+          [
+           "Khuông nhạc",
+           "Gồm 5 dòng kẻ và 4 khe"
+          ],
+          [
+           "Khoá Son",
+           "Cho biết nốt Son ở dòng kẻ 2"
+          ],
+          [
+           "Vạch nhịp",
+           "Chia bản nhạc thành các ô nhịp"
+          ]
+         ],
+         "explanation": "Khuông nhạc để ghi nốt; khoá Son giúp đọc tên nốt; vạch nhịp chia các ô nhịp.",
+         "left_label": "Vị trí",
+         "right_label": "Tên nốt"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "an3.nhac_cu",
+   "grade": 3,
+   "order": 4,
+   "title": "Nhạc cụ",
+   "lessons": [
+    {
+     "key": "an3.ho_nhac_cu",
+     "order": 1,
+     "title": "Nhạc cụ gõ, nhạc cụ dây và nhạc cụ hơi",
+     "description": "Xếp các nhạc cụ quen thuộc vào ba nhóm theo cách tạo ra âm thanh.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết ba nhóm nhạc cụ: gõ, dây, hơi",
+      "Xếp được nhạc cụ quen thuộc vào đúng nhóm"
+     ],
+     "summary": [
+      "Nhạc cụ gõ: kêu khi được gõ, vỗ, lắc (trống, thanh phách, song loan, cồng chiêng).",
+      "Nhạc cụ dây: kêu khi dây đàn rung, do gảy hoặc kéo vĩ (đàn bầu, đàn tranh, guitar, violin).",
+      "Nhạc cụ hơi: kêu khi thổi hơi (sáo trúc, sáo recorder, kèn harmonica)."
+     ],
+     "examples": [
+      {
+       "title": "Đố vui",
+       "lines": [
+        "Violin kéo vĩ cho dây rung: nhạc cụ dây.",
+        "Kèn harmonica thổi hơi: nhạc cụ hơi."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Ba họ nhạc cụ",
+       "set": {
+        "title": "Nhạc cụ này thuộc nhóm nào?",
+        "groups": [
+         {
+          "id": "go",
+          "label": "Nhạc cụ gõ",
+          "icon": "🥁"
+         },
+         {
+          "id": "day",
+          "label": "Nhạc cụ dây",
+          "icon": "🎻"
+         },
+         {
+          "id": "hoi",
+          "label": "Nhạc cụ hơi",
+          "icon": "🎷"
+         }
+        ],
+        "cards": [
+         {
+          "key": "trong",
+          "text": "Trống",
+          "picture": "🥁",
+          "group": "go",
+          "explanation": "Trống kêu khi gõ dùi lên mặt trống."
+         },
+         {
+          "key": "song_loan",
+          "text": "Song loan",
+          "picture": "🪘",
+          "group": "go",
+          "explanation": "Song loan kêu khi hòn gỗ gõ vào mặt đàn."
+         },
+         {
+          "key": "cong_chieng",
+          "text": "Cồng chiêng",
+          "picture": "🔔",
+          "group": "go",
+          "explanation": "Cồng chiêng kêu khi được đánh bằng dùi."
+         },
+         {
+          "key": "triangle",
+          "text": "Triangle (kẻng tam giác)",
+          "picture": "🔺",
+          "group": "go",
+          "explanation": "Triangle kêu khi gõ que kim loại vào khung."
+         },
+         {
+          "key": "dan_bau",
+          "text": "Đàn bầu",
+          "picture": "🪕",
+          "group": "day",
+          "explanation": "Đàn bầu kêu khi gảy vào sợi dây đàn."
+         },
+         {
+          "key": "dan_tranh",
+          "text": "Đàn tranh",
+          "picture": "🪕",
+          "group": "day",
+          "explanation": "Đàn tranh có nhiều dây, gảy bằng móng gảy."
+         },
+         {
+          "key": "guitar",
+          "text": "Đàn guitar",
+          "picture": "🎸",
+          "group": "day",
+          "explanation": "Guitar kêu khi gảy các dây đàn."
+         },
+         {
+          "key": "violin",
+          "text": "Đàn violin",
+          "picture": "🎻",
+          "group": "day",
+          "explanation": "Violin kêu khi kéo vĩ qua dây đàn."
+         },
+         {
+          "key": "sao_truc",
+          "text": "Sáo trúc",
+          "picture": "🎶",
+          "group": "hoi",
+          "explanation": "Sáo trúc kêu khi thổi hơi vào ống sáo."
+         },
+         {
+          "key": "recorder",
+          "text": "Sáo recorder",
+          "picture": "🎵",
+          "group": "hoi",
+          "explanation": "Sáo recorder kêu khi thổi hơi và bấm các lỗ."
+         },
+         {
+          "key": "harmonica",
+          "text": "Kèn harmonica",
+          "picture": "🎼",
+          "group": "hoi",
+          "explanation": "Harmonica kêu khi thổi hoặc hút hơi qua các lỗ."
+         },
+         {
+          "key": "ken_bau",
+          "text": "Kèn bầu",
+          "picture": "🎺",
+          "group": "hoi",
+          "explanation": "Kèn bầu là nhạc cụ thổi hơi của dân tộc Việt Nam."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "an3.thoi_recorder",
+     "order": 2,
+     "title": "Làm quen sáo recorder hoặc kèn phím",
+     "description": "Tập tư thế, cách thổi và bấm nốt cùng thầy cô (thực hành trên lớp).",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an3.thuong_thuc",
+   "grade": 3,
+   "order": 5,
+   "title": "Thường thức âm nhạc",
+   "lessons": [
+    {
+     "key": "an3.cau_chuyen_nhac_cu",
+     "order": 1,
+     "title": "Câu chuyện về một nhạc cụ dân tộc",
+     "description": "Tìm hiểu nguồn gốc và cách chơi một nhạc cụ dân tộc.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an4.hat",
+   "grade": 4,
+   "order": 1,
+   "title": "Hát",
+   "lessons": [
+    {
+     "key": "an4.hat_hoa_giong",
+     "order": 1,
+     "title": "Hát hoà giọng, thể hiện sắc thái to – nhỏ",
+     "description": "Thực hành hát đúng sắc thái theo hướng dẫn của thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "an4.hat_ket_hop_go",
+     "order": 2,
+     "title": "Hát kết hợp gõ đệm theo tiết tấu",
+     "description": "Vừa hát vừa gõ đệm theo tiết tấu (thực hành trên lớp).",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an4.nghe_nhac",
+   "grade": 4,
+   "order": 2,
+   "title": "Nghe nhạc",
+   "lessons": [
+    {
+     "key": "an4.nghe_hanh_khuc",
+     "order": 1,
+     "title": "Nghe một bản hành khúc và cảm nhận tính chất",
+     "description": "Nghe nhạc cùng thầy cô, nhận ra tính chất khoẻ khoắn, rộn ràng. Ứng dụng chưa phát âm thanh: phần nghe, hát và chơi nhạc cụ học cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "an4.nghe_nhac_cu_doc_tau",
+     "order": 2,
+     "title": "Nghe độc tấu nhạc cụ dân tộc",
+     "description": "Nghe tiếng đàn bầu, sáo trúc… cùng thầy cô. Ứng dụng chưa phát âm thanh: phần nghe, hát và chơi nhạc cụ học cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an4.ly_thuyet",
+   "grade": 4,
+   "order": 3,
+   "title": "Đọc nhạc và lí thuyết âm nhạc",
+   "lessons": [
+    {
+     "key": "an4.hinh_not",
+     "order": 1,
+     "title": "Nốt trắng, nốt đen, nốt móc đơn",
+     "description": "Nhận biết hình nốt và trường độ của nốt trắng, nốt đen, nốt móc đơn.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nhận biết nốt trắng, nốt đen, nốt móc đơn và dấu lặng đen",
+      "Biết trường độ của mỗi hình nốt khi nốt đen là 1 phách",
+      "Tính tổng số phách của một nhóm nốt"
+     ],
+     "summary": [
+      "Hình nốt cho biết âm thanh dài hay ngắn (trường độ).",
+      "Khi nốt đen là 1 phách: nốt trắng 2 phách, nốt đen 1 phách, nốt móc đơn nửa phách.",
+      "Hai nốt móc đơn bằng một nốt đen; hai nốt đen bằng một nốt trắng.",
+      "Dấu lặng đen: nghỉ 1 phách, không hát."
+     ],
+     "examples": [
+      {
+       "title": "Cộng phách",
+       "lines": [
+        "Nốt trắng + nốt đen = 2 + 1 = 3 phách",
+        "Ba nốt móc đơn = 1 phách rưỡi"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Hình nốt và trường độ",
+       "tasks": [
+        {
+         "key": "truong_do",
+         "prompt": "Ghép hình nốt với trường độ (nốt đen là 1 phách).",
+         "pairs": [
+          [
+           "Nốt trắng",
+           "2 phách"
+          ],
+          [
+           "Nốt đen",
+           "1 phách"
+          ],
+          [
+           "Nốt móc đơn",
+           "Nửa phách"
+          ]
+         ],
+         "explanation": "Nốt trắng dài gấp đôi nốt đen; nốt móc đơn bằng một nửa nốt đen."
+        },
+        {
+         "key": "hinh_dang",
+         "prompt": "Ghép cách nhận biết với tên hình nốt.",
+         "pairs": [
+          [
+           "Thân nốt rỗng, có đuôi",
+           "Nốt trắng"
+          ],
+          [
+           "Thân nốt tô đen, có đuôi",
+           "Nốt đen"
+          ],
+          [
+           "Thân đen, đuôi có một móc",
+           "Nốt móc đơn"
+          ]
+         ],
+         "explanation": "Thân rỗng là nốt trắng; thân đen là nốt đen; thêm một móc ở đuôi là nốt móc đơn."
+        },
+        {
+         "key": "ki_hieu",
+         "prompt": "Ghép kí hiệu với ý nghĩa.",
+         "pairs": [
+          [
+           "Dấu lặng đen",
+           "Nghỉ 1 phách"
+          ],
+          [
+           "Vạch nhịp",
+           "Ngăn cách các ô nhịp"
+          ],
+          [
+           "Vạch kết thúc",
+           "Báo bản nhạc kết thúc"
+          ],
+          [
+           "Số chỉ nhịp 2/4",
+           "Mỗi ô nhịp có 2 phách"
+          ]
+         ],
+         "explanation": "Dấu lặng là chỗ nghỉ; vạch nhịp chia ô nhịp; vạch kết thúc (vạch đôi) ở cuối bài."
+        }
+       ]
+      },
+      {
+       "game": "order",
+       "title": "Dài hay ngắn hơn?",
+       "tasks": [
+        {
+         "key": "dai_ngan",
+         "prompt": "Xếp các nốt từ dài đến ngắn.",
+         "items": [
+          "Nốt trắng",
+          "Nốt đen",
+          "Nốt móc đơn"
+         ],
+         "explanation": "2 phách → 1 phách → nửa phách.",
+         "first_label": "Dài nhất",
+         "last_label": "Ngắn nhất"
+        },
+        {
+         "key": "tong_1",
+         "prompt": "Xếp các nhóm nốt từ ít phách đến nhiều phách.",
+         "items": [
+          "Một nốt móc đơn",
+          "Một nốt đen",
+          "Một nốt đen và một nốt móc đơn",
+          "Một nốt trắng"
+         ],
+         "explanation": "Nửa phách → 1 phách → 1 phách rưỡi → 2 phách.",
+         "first_label": "Ít phách",
+         "last_label": "Nhiều phách"
+        },
+        {
+         "key": "tong_2",
+         "prompt": "Xếp các nhóm nốt từ ít phách đến nhiều phách.",
+         "items": [
+          "Hai nốt móc đơn",
+          "Ba nốt đen",
+          "Một nốt trắng và hai nốt đen",
+          "Ba nốt trắng"
+         ],
+         "explanation": "Hai móc đơn = 1 phách; ba nốt đen = 3; trắng + hai đen = 4; ba nốt trắng = 6.",
+         "first_label": "Ít phách",
+         "last_label": "Nhiều phách"
+        },
+        {
+         "key": "tong_3",
+         "prompt": "Xếp các nhóm nốt từ nhiều phách đến ít phách.",
+         "items": [
+          "Một nốt trắng và một nốt đen",
+          "Một nốt trắng",
+          "Ba nốt móc đơn",
+          "Một dấu lặng đen"
+         ],
+         "explanation": "3 phách → 2 phách → 1 phách rưỡi → 1 phách (dấu lặng đen cũng có trường độ 1 phách).",
+         "first_label": "Nhiều phách",
+         "last_label": "Ít phách"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "an4.nhip_2_4",
+     "order": 2,
+     "title": "Nhịp 2/4 và tiết tấu",
+     "description": "Hiểu nhịp 2/4 và tính đủ phách cho một ô nhịp.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết nhịp 2/4: mỗi ô nhịp có 2 phách, phách 1 mạnh, phách 2 nhẹ",
+      "Kiểm tra một ô nhịp có đủ 2 phách không"
+     ],
+     "summary": [
+      "Số chỉ nhịp 2/4 ở đầu bài: mỗi ô nhịp có 2 phách, mỗi phách bằng một nốt đen.",
+      "Trong nhịp 2/4: phách 1 mạnh, phách 2 nhẹ.",
+      "Đọc tiết tấu: \"ta\" là nốt đen (1 phách), \"ti\" là nốt móc đơn (nửa phách); \"ti ti\" = 1 phách."
+     ],
+     "examples": [
+      {
+       "title": "Ô nhịp 2/4",
+       "lines": [
+        "ta – ta = 2 phách ✔",
+        "ta – ti ti = 2 phách ✔",
+        "nốt trắng = 2 phách ✔"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Đủ phách chưa?",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "y_nghia",
+         "question": "Số chỉ nhịp 2/4 cho biết điều gì?",
+         "options": [
+          {
+           "text": "Mỗi ô nhịp có 2 phách, mỗi phách bằng một nốt đen",
+           "ok": true,
+           "why": "Đúng: số trên là số phách, số dưới 4 chỉ nốt đen là 1 phách."
+          },
+          {
+           "text": "Mỗi ô nhịp có 4 phách",
+           "ok": false,
+           "why": "Số 4 ở dưới chỉ nốt đen làm 1 phách, không phải 4 phách."
+          },
+          {
+           "text": "Bài hát có 2 câu",
+           "ok": false,
+           "why": "Số chỉ nhịp không nói số câu của bài."
+          },
+          {
+           "text": "Hát nhanh gấp đôi",
+           "ok": false,
+           "why": "Số chỉ nhịp không chỉ tốc độ."
+          }
+         ],
+         "explanation": "2/4: 2 phách mỗi ô nhịp, nốt đen là 1 phách."
+        },
+        {
+         "key": "du_phach_1",
+         "question": "Trong nhịp 2/4, ô nhịp nào đủ 2 phách?",
+         "options": [
+          {
+           "text": "Nốt đen – nốt đen",
+           "ok": true,
+           "why": "Đúng: 1 + 1 = 2 phách."
+          },
+          {
+           "text": "Nốt trắng – nốt đen",
+           "ok": false,
+           "why": "2 + 1 = 3 phách: thừa 1 phách."
+          },
+          {
+           "text": "Nốt đen – nốt móc đơn",
+           "ok": false,
+           "why": "1 + nửa = 1 phách rưỡi: còn thiếu."
+          }
+         ],
+         "explanation": "Cộng trường độ các nốt trong ô nhịp, phải bằng 2."
+        },
+        {
+         "key": "du_phach_2",
+         "question": "Ô nhịp nào đúng với nhịp 2/4?",
+         "options": [
+          {
+           "text": "Nốt đen – hai nốt móc đơn",
+           "ok": true,
+           "why": "Đúng: 1 + nửa + nửa = 2 phách."
+          },
+          {
+           "text": "Nốt trắng – nốt trắng",
+           "ok": false,
+           "why": "2 + 2 = 4 phách: thừa."
+          },
+          {
+           "text": "Ba nốt đen",
+           "ok": false,
+           "why": "1 + 1 + 1 = 3 phách: thừa."
+          },
+          {
+           "text": "Một nốt móc đơn",
+           "ok": false,
+           "why": "Chỉ có nửa phách: thiếu."
+          }
+         ],
+         "explanation": "Hai nốt móc đơn bằng một nốt đen."
+        },
+        {
+         "key": "phach_manh",
+         "question": "Trong nhịp 2/4, phách nào là phách mạnh?",
+         "options": [
+          {
+           "text": "Phách thứ nhất",
+           "ok": true,
+           "why": "Đúng: nhịp 2/4 là mạnh – nhẹ, phách 1 mạnh."
+          },
+          {
+           "text": "Phách thứ hai",
+           "ok": false,
+           "why": "Phách thứ hai là phách nhẹ."
+          },
+          {
+           "text": "Cả hai phách đều nhẹ",
+           "ok": false,
+           "why": "Mỗi ô nhịp 2/4 luôn mở đầu bằng phách mạnh."
+          }
+         ],
+         "explanation": "Nhịp 2/4: mạnh – nhẹ, mạnh – nhẹ…"
+        },
+        {
+         "key": "ta_ti_ti",
+         "question": "Tiết tấu \"ta – ti ti\" (ta là nốt đen, ti là nốt móc đơn) dài mấy phách?",
+         "options": [
+          {
+           "text": "2 phách",
+           "ok": true,
+           "why": "Đúng: ta = 1 phách, ti ti = nửa + nửa = 1 phách."
+          },
+          {
+           "text": "3 phách",
+           "ok": false,
+           "why": "Mỗi \"ti\" chỉ nửa phách, không phải 1 phách."
+          },
+          {
+           "text": "1 phách rưỡi",
+           "ok": false,
+           "why": "Có hai \"ti\" nên được 1 phách, cộng \"ta\" là 2."
+          }
+         ],
+         "explanation": "ta = 1 phách; ti ti = 1 phách."
+        },
+        {
+         "key": "them_gi",
+         "question": "Ô nhịp 2/4 mới có một nốt đen. Thêm gì để đủ 2 phách?",
+         "options": [
+          {
+           "text": "Một dấu lặng đen",
+           "ok": true,
+           "why": "Đúng: dấu lặng đen cũng dài 1 phách (nghỉ)."
+          },
+          {
+           "text": "Hai nốt móc đơn",
+           "ok": true,
+           "why": "Đúng: hai móc đơn = 1 phách."
+          },
+          {
+           "text": "Một nốt trắng",
+           "ok": false,
+           "why": "Nốt trắng 2 phách: ô nhịp thành 3 phách, thừa."
+          }
+         ],
+         "explanation": "Còn thiếu đúng 1 phách: có thể là nốt đen, dấu lặng đen hoặc hai nốt móc đơn."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "an4.nhac_cu",
+   "grade": 4,
+   "order": 4,
+   "title": "Nhạc cụ",
+   "lessons": [
+    {
+     "key": "an4.recorder_giai_dieu",
+     "order": 1,
+     "title": "Thể hiện giai điệu ngắn bằng sáo recorder hoặc kèn phím",
+     "description": "Thực hành thổi, bấm các nốt đã học cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "an4.go_tiet_tau",
+     "order": 2,
+     "title": "Thể hiện tiết tấu bằng nhạc cụ gõ",
+     "description": "Gõ tiết tấu có nốt đen, nốt móc đơn (thực hành trên lớp).",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an4.thuong_thuc",
+   "grade": 4,
+   "order": 5,
+   "title": "Thường thức âm nhạc",
+   "lessons": [
+    {
+     "key": "an4.nhac_si_thieu_nhi",
+     "order": 1,
+     "title": "Một số nhạc sĩ viết cho thiếu nhi",
+     "description": "Tìm hiểu về các nhạc sĩ và những bài hát thiếu nhi quen thuộc.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an5.hat",
+   "grade": 5,
+   "order": 1,
+   "title": "Hát",
+   "lessons": [
+    {
+     "key": "an5.hat_hai_be",
+     "order": 1,
+     "title": "Hát hoà giọng và làm quen hát bè đơn giản",
+     "description": "Thực hành hát theo nhóm, nghe nhau để hát hoà giọng.",
+     "status": "planned"
+    },
+    {
+     "key": "an5.hat_bieu_dien",
+     "order": 2,
+     "title": "Hát kết hợp biểu diễn, vận động phụ hoạ",
+     "description": "Tập biểu diễn bài hát cùng các bạn (thực hành trên lớp).",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an5.nghe_nhac",
+   "grade": 5,
+   "order": 2,
+   "title": "Nghe nhạc",
+   "lessons": [
+    {
+     "key": "an5.nghe_dan_ca",
+     "order": 1,
+     "title": "Nghe dân ca các vùng miền",
+     "description": "Nghe một số bài dân ca và nói cảm nhận cùng thầy cô. Ứng dụng chưa phát âm thanh: phần nghe, hát và chơi nhạc cụ học cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "an5.nghe_giao_huong",
+     "order": 2,
+     "title": "Nghe trích đoạn nhạc giao hưởng",
+     "description": "Nghe một trích đoạn và nói về tính chất âm nhạc. Ứng dụng chưa phát âm thanh: phần nghe, hát và chơi nhạc cụ học cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an5.ly_thuyet",
+   "grade": 5,
+   "order": 3,
+   "title": "Đọc nhạc và lí thuyết âm nhạc",
+   "lessons": [
+    {
+     "key": "an5.nhip_3_4",
+     "order": 1,
+     "title": "Nhịp 3/4",
+     "description": "Hiểu nhịp 3/4 và kiểm tra một ô nhịp có đủ 3 phách.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết nhịp 3/4: mỗi ô nhịp có 3 phách, mạnh – nhẹ – nhẹ",
+      "Tính đủ phách cho ô nhịp 3/4"
+     ],
+     "summary": [
+      "Nhịp 3/4: mỗi ô nhịp có 3 phách, mỗi phách bằng một nốt đen.",
+      "Thứ tự phách: mạnh – nhẹ – nhẹ. Điệu valse (van-xơ) thường viết ở nhịp 3/4.",
+      "Nốt trắng chấm dôi dài 3 phách: đủ một ô nhịp 3/4."
+     ],
+     "examples": [
+      {
+       "title": "Ô nhịp 3/4",
+       "lines": [
+        "nốt trắng – nốt đen = 3 phách ✔",
+        "ta – ti ti – ta = 3 phách ✔"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Đếm phách nhịp 3/4",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "so_phach",
+         "question": "Trong nhịp 3/4, mỗi ô nhịp có mấy phách?",
+         "options": [
+          {
+           "text": "3 phách, mỗi phách bằng một nốt đen",
+           "ok": true,
+           "why": "Đúng: số 3 là số phách, số 4 chỉ nốt đen là 1 phách."
+          },
+          {
+           "text": "4 phách",
+           "ok": false,
+           "why": "Số 4 ở dưới chỉ nốt đen làm 1 phách."
+          },
+          {
+           "text": "2 phách",
+           "ok": false,
+           "why": "2 phách là nhịp 2/4."
+          }
+         ],
+         "explanation": "3/4: ba phách mỗi ô nhịp."
+        },
+        {
+         "key": "o_nhip_du",
+         "question": "Ô nhịp nào đủ phách của nhịp 3/4?",
+         "options": [
+          {
+           "text": "Nốt trắng – nốt đen",
+           "ok": true,
+           "why": "Đúng: 2 + 1 = 3 phách."
+          },
+          {
+           "text": "Một nốt trắng chấm dôi",
+           "ok": true,
+           "why": "Đúng: nốt trắng chấm dôi dài 3 phách."
+          },
+          {
+           "text": "Hai nốt trắng",
+           "ok": false,
+           "why": "2 + 2 = 4 phách: thừa."
+          },
+          {
+           "text": "Nốt đen – hai nốt móc đơn",
+           "ok": false,
+           "why": "1 + 1 = 2 phách: thiếu."
+          }
+         ],
+         "explanation": "Cộng trường độ các nốt phải bằng 3."
+        },
+        {
+         "key": "manh_nhe",
+         "question": "Nhịp 3/4 có thứ tự phách mạnh, nhẹ thế nào?",
+         "options": [
+          {
+           "text": "Mạnh – nhẹ – nhẹ",
+           "ok": true,
+           "why": "Đúng: phách đầu ô nhịp mạnh, hai phách sau nhẹ."
+          },
+          {
+           "text": "Nhẹ – nhẹ – mạnh",
+           "ok": false,
+           "why": "Phách mạnh luôn ở đầu ô nhịp."
+          },
+          {
+           "text": "Mạnh – mạnh – nhẹ",
+           "ok": false,
+           "why": "Nhịp 3/4 chỉ có một phách mạnh."
+          }
+         ],
+         "explanation": "Mạnh – nhẹ – nhẹ, như bước nhảy valse."
+        },
+        {
+         "key": "valse",
+         "question": "Điệu nhảy nào thường viết ở nhịp 3/4?",
+         "options": [
+          {
+           "text": "Valse (van-xơ)",
+           "ok": true,
+           "why": "Đúng: valse có nhịp 3/4 với phách mạnh – nhẹ – nhẹ."
+          },
+          {
+           "text": "Hành khúc",
+           "ok": false,
+           "why": "Hành khúc thường ở nhịp 2/4 hoặc 4/4 cho hợp bước đi đều."
+          },
+          {
+           "text": "Không điệu nào",
+           "ok": false,
+           "why": "Valse là ví dụ quen thuộc của nhịp 3/4."
+          }
+         ],
+         "explanation": "Valse là điệu nhảy nhịp 3/4."
+        },
+        {
+         "key": "them_gi",
+         "question": "Ô nhịp 3/4 đã có một nốt trắng. Thêm gì để đủ phách?",
+         "options": [
+          {
+           "text": "Một nốt đen",
+           "ok": true,
+           "why": "Đúng: 2 + 1 = 3 phách."
+          },
+          {
+           "text": "Hai nốt móc đơn",
+           "ok": true,
+           "why": "Đúng: hai móc đơn = 1 phách, cộng nốt trắng là 3."
+          },
+          {
+           "text": "Một dấu lặng đen",
+           "ok": true,
+           "why": "Đúng: dấu lặng đen nghỉ 1 phách, đủ 3 phách."
+          },
+          {
+           "text": "Một nốt trắng nữa",
+           "ok": false,
+           "why": "Thành 4 phách: thừa 1 phách."
+          }
+         ],
+         "explanation": "Còn thiếu 1 phách: nốt đen, dấu lặng đen hay hai nốt móc đơn đều đúng."
+        },
+        {
+         "key": "tiet_tau_3",
+         "question": "Tiết tấu nào dài đúng 3 phách? (ta là nốt đen, ti là nốt móc đơn)",
+         "options": [
+          {
+           "text": "ta – ti ti – ta",
+           "ok": true,
+           "why": "Đúng: 1 + 1 + 1 = 3 phách."
+          },
+          {
+           "text": "ta – ta",
+           "ok": false,
+           "why": "Chỉ 2 phách."
+          },
+          {
+           "text": "ti ti – ti ti",
+           "ok": false,
+           "why": "Mỗi \"ti ti\" là 1 phách: tất cả 2 phách."
+          },
+          {
+           "text": "ta – ta – ta – ta",
+           "ok": false,
+           "why": "4 phách: thừa."
+          }
+         ],
+         "explanation": "Đếm mỗi \"ta\" là 1 phách, mỗi cặp \"ti ti\" là 1 phách."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "an5.dau_cham_doi",
+     "order": 2,
+     "title": "Dấu chấm dôi, dấu nối, dấu nhắc lại",
+     "description": "Hiểu ý nghĩa của dấu chấm dôi, dấu nối, dấu nhắc lại trong bản nhạc.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết dấu chấm dôi làm nốt dài thêm một nửa",
+      "Phân biệt dấu nối và dấu nhắc lại",
+      "Tính trường độ của nốt có chấm dôi"
+     ],
+     "summary": [
+      "Dấu chấm dôi đặt sau nốt, làm nốt dài thêm một nửa trường độ: nốt trắng chấm dôi = 2 + 1 = 3 phách.",
+      "Nốt đen chấm dôi = 1 + nửa = 1 phách rưỡi.",
+      "Dấu nối nối hai nốt cùng cao độ thành một âm dài; dấu nhắc lại báo hát (chơi) lại một đoạn."
+     ],
+     "examples": [
+      {
+       "title": "Chấm dôi",
+       "lines": [
+        "Nốt trắng (2) + chấm dôi (1) = 3 phách"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Kí hiệu trong bản nhạc",
+       "tasks": [
+        {
+         "key": "ki_hieu",
+         "prompt": "Ghép kí hiệu với ý nghĩa.",
+         "pairs": [
+          [
+           "Dấu chấm dôi",
+           "Tăng thêm một nửa trường độ của nốt"
+          ],
+          [
+           "Dấu nối",
+           "Nối hai nốt cùng cao độ thành âm dài"
+          ],
+          [
+           "Dấu nhắc lại",
+           "Hát hoặc chơi lại một đoạn nhạc"
+          ]
+         ],
+         "explanation": "Chấm dôi làm nốt dài thêm; dấu nối gộp hai nốt cùng cao độ; dấu nhắc lại báo lặp lại đoạn nhạc."
+        },
+        {
+         "key": "cham_doi",
+         "prompt": "Ghép nốt với trường độ (nốt đen là 1 phách).",
+         "pairs": [
+          [
+           "Nốt trắng chấm dôi",
+           "3 phách"
+          ],
+          [
+           "Nốt đen chấm dôi",
+           "1 phách rưỡi"
+          ],
+          [
+           "Nốt trắng",
+           "2 phách"
+          ],
+          [
+           "Nốt đen",
+           "1 phách"
+          ]
+         ],
+         "explanation": "Chấm dôi thêm một nửa: trắng 2 → 3 phách; đen 1 → 1 phách rưỡi."
+        },
+        {
+         "key": "nhip",
+         "prompt": "Ghép số chỉ nhịp với số phách trong mỗi ô nhịp.",
+         "pairs": [
+          [
+           "Nhịp 2/4",
+           "2 phách"
+          ],
+          [
+           "Nhịp 3/4",
+           "3 phách"
+          ],
+          [
+           "Nhịp 4/4",
+           "4 phách"
+          ]
+         ],
+         "explanation": "Số trên của số chỉ nhịp là số phách trong một ô nhịp."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "an5.nhac_cu",
+   "grade": 5,
+   "order": 4,
+   "title": "Nhạc cụ",
+   "lessons": [
+    {
+     "key": "an5.nhac_cu_dong_tay",
+     "order": 1,
+     "title": "Nhạc cụ dân tộc và nhạc cụ phương Tây",
+     "description": "Phân biệt nhạc cụ dân tộc Việt Nam và nhạc cụ có nguồn gốc phương Tây.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Kể tên một số nhạc cụ dân tộc Việt Nam",
+      "Kể tên một số nhạc cụ có nguồn gốc phương Tây"
+     ],
+     "summary": [
+      "Nhạc cụ dân tộc Việt Nam: đàn bầu, đàn tranh, đàn nguyệt, đàn nhị, sáo trúc, trống cơm, đàn T'rưng…",
+      "Nhạc cụ có nguồn gốc phương Tây: piano, violin, guitar, kèn trumpet, sáo flute, saxophone…",
+      "Ngày nay nhiều nhạc cụ phương Tây cũng được dùng rộng rãi ở Việt Nam."
+     ],
+     "examples": [
+      {
+       "title": "Hai nhóm",
+       "lines": [
+        "Dân tộc: đàn nguyệt",
+        "Phương Tây: piano"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Dân tộc hay phương Tây?",
+       "set": {
+        "title": "Nhạc cụ này thuộc nhóm nào?",
+        "groups": [
+         {
+          "id": "dan_toc",
+          "label": "Nhạc cụ dân tộc Việt Nam",
+          "icon": "🇻🇳"
+         },
+         {
+          "id": "phuong_tay",
+          "label": "Nguồn gốc phương Tây",
+          "icon": "🎹"
+         }
+        ],
+        "cards": [
+         {
+          "key": "dan_bau",
+          "text": "Đàn bầu",
+          "picture": "🪕",
+          "group": "dan_toc",
+          "explanation": "Đàn bầu một dây là nhạc cụ độc đáo của người Việt."
+         },
+         {
+          "key": "dan_tranh",
+          "text": "Đàn tranh",
+          "picture": "🪕",
+          "group": "dan_toc",
+          "explanation": "Đàn tranh là nhạc cụ dây truyền thống của Việt Nam."
+         },
+         {
+          "key": "dan_nguyet",
+          "text": "Đàn nguyệt",
+          "picture": "🌕",
+          "group": "dan_toc",
+          "explanation": "Đàn nguyệt có hộp đàn tròn như mặt trăng, là nhạc cụ dân tộc."
+         },
+         {
+          "key": "sao_truc",
+          "text": "Sáo trúc",
+          "picture": "🎶",
+          "group": "dan_toc",
+          "explanation": "Sáo trúc làm từ ống trúc, rất quen thuộc ở làng quê Việt Nam."
+         },
+         {
+          "key": "trong_com",
+          "text": "Trống cơm",
+          "picture": "🪘",
+          "group": "dan_toc",
+          "explanation": "Trống cơm là nhạc cụ gõ dân tộc, vỗ bằng tay."
+         },
+         {
+          "key": "dan_trung",
+          "text": "Đàn T'rưng",
+          "picture": "🎋",
+          "group": "dan_toc",
+          "explanation": "Đàn T'rưng bằng ống tre, nứa của đồng bào Tây Nguyên."
+         },
+         {
+          "key": "piano",
+          "text": "Đàn piano",
+          "picture": "🎹",
+          "group": "phuong_tay",
+          "explanation": "Piano ra đời ở châu Âu."
+         },
+         {
+          "key": "violin",
+          "text": "Đàn violin",
+          "picture": "🎻",
+          "group": "phuong_tay",
+          "explanation": "Violin là nhạc cụ dây kéo vĩ của châu Âu."
+         },
+         {
+          "key": "trumpet",
+          "text": "Kèn trumpet",
+          "picture": "🎺",
+          "group": "phuong_tay",
+          "explanation": "Trumpet là kèn đồng của dàn nhạc phương Tây."
+         },
+         {
+          "key": "saxophone",
+          "text": "Kèn saxophone",
+          "picture": "🎷",
+          "group": "phuong_tay",
+          "explanation": "Saxophone do một người Bỉ sáng chế, có nguồn gốc phương Tây."
+         },
+         {
+          "key": "guitar",
+          "text": "Đàn guitar",
+          "picture": "🎸",
+          "group": "phuong_tay",
+          "explanation": "Guitar phát triển ở châu Âu rồi lan khắp thế giới."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "an5.recorder_bai_ngan",
+     "order": 2,
+     "title": "Chơi bài ngắn bằng sáo recorder hoặc kèn phím",
+     "description": "Thực hành chơi giai điệu ngắn cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an5.thuong_thuc",
+   "grade": 5,
+   "order": 5,
+   "title": "Thường thức âm nhạc",
+   "lessons": [
+    {
+     "key": "an5.nhac_cu_tay_nguyen",
+     "order": 1,
+     "title": "Cồng chiêng và nhạc cụ Tây Nguyên",
+     "description": "Tìm hiểu về cồng chiêng, đàn T'rưng và đời sống âm nhạc Tây Nguyên.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an6.hat",
+   "grade": 6,
+   "order": 1,
+   "title": "Hát",
+   "lessons": [
+    {
+     "key": "an6.hat_dung_ky_thuat",
+     "order": 1,
+     "title": "Hát đúng tư thế, lấy hơi và phát âm rõ lời",
+     "description": "Thực hành kĩ thuật hát cơ bản cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "an6.hat_tap_the",
+     "order": 2,
+     "title": "Hát tập thể, hát đối đáp",
+     "description": "Tập hát theo nhóm, hát đối đáp (thực hành trên lớp).",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an6.nghe_nhac",
+   "grade": 6,
+   "order": 2,
+   "title": "Nghe nhạc",
+   "lessons": [
+    {
+     "key": "an6.nghe_ca_khuc",
+     "order": 1,
+     "title": "Nghe ca khúc về quê hương, đất nước",
+     "description": "Nghe và nêu cảm nhận về nội dung, tính chất bài hát. Ứng dụng chưa phát âm thanh: phần nghe, hát và chơi nhạc cụ học cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "an6.nghe_khi_nhac",
+     "order": 2,
+     "title": "Nghe tác phẩm khí nhạc",
+     "description": "Nghe một tác phẩm không lời, nhận ra nhạc cụ chính cùng thầy cô. Ứng dụng chưa phát âm thanh: phần nghe, hát và chơi nhạc cụ học cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an6.ly_thuyet",
+   "grade": 6,
+   "order": 3,
+   "title": "Đọc nhạc và lí thuyết âm nhạc",
+   "lessons": [
+    {
+     "key": "an6.thuoc_tinh_am",
+     "order": 1,
+     "title": "Bốn thuộc tính của âm thanh có tính nhạc",
+     "description": "Hiểu cao độ, trường độ, cường độ và âm sắc của âm thanh.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được bốn thuộc tính: cao độ, trường độ, cường độ, âm sắc",
+      "Liên hệ mỗi thuộc tính với cách ghi nhạc và ví dụ đời sống"
+     ],
+     "summary": [
+      "Cao độ: âm cao hay thấp (ghi bằng vị trí nốt trên khuông, tên nốt Đô, Rê, Mi…).",
+      "Trường độ: âm dài hay ngắn (ghi bằng hình nốt: nốt trắng, nốt đen…).",
+      "Cường độ: âm to hay nhỏ (ghi bằng kí hiệu như p, f).",
+      "Âm sắc: màu âm riêng của mỗi giọng hát, nhạc cụ; nhờ đó cùng một nốt mà ta vẫn phân biệt sáo với đàn."
+     ],
+     "examples": [
+      {
+       "title": "Một nốt Son",
+       "lines": [
+        "Cao độ: Son; trường độ: nốt trắng; cường độ: f (to); âm sắc: tiếng sáo"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Thuộc tính của âm thanh",
+       "tasks": [
+        {
+         "key": "dinh_nghia",
+         "prompt": "Ghép thuộc tính với ý nghĩa.",
+         "pairs": [
+          [
+           "Cao độ",
+           "Âm cao hay thấp"
+          ],
+          [
+           "Trường độ",
+           "Âm dài hay ngắn"
+          ],
+          [
+           "Cường độ",
+           "Âm to hay nhỏ"
+          ],
+          [
+           "Âm sắc",
+           "Màu âm riêng của giọng, nhạc cụ"
+          ]
+         ],
+         "explanation": "Bốn thuộc tính: cao độ, trường độ, cường độ, âm sắc."
+        },
+        {
+         "key": "cach_ghi",
+         "prompt": "Ghép cách ghi trong bản nhạc với thuộc tính nó thể hiện.",
+         "pairs": [
+          [
+           "Tên nốt Đô, Rê, Mi…",
+           "Cao độ"
+          ],
+          [
+           "Hình nốt trắng, nốt đen",
+           "Trường độ"
+          ],
+          [
+           "Kí hiệu p, f",
+           "Cường độ"
+          ]
+         ],
+         "explanation": "Tên và vị trí nốt ghi cao độ; hình nốt ghi trường độ; p, f ghi cường độ."
+        },
+        {
+         "key": "vi_du",
+         "prompt": "Ghép ví dụ với thuộc tính của âm thanh.",
+         "pairs": [
+          [
+           "Tiếng sáo và tiếng đàn chơi cùng nốt vẫn khác nhau",
+           "Âm sắc"
+          ],
+          [
+           "Tiếng chim hót cao, tiếng trống trầm",
+           "Cao độ"
+          ],
+          [
+           "Còi tàu kéo dài, tiếng gõ cửa ngắn",
+           "Trường độ"
+          ],
+          [
+           "Hát thầm và hô to",
+           "Cường độ"
+          ]
+         ],
+         "explanation": "Mỗi ví dụ nhấn vào một thuộc tính khác nhau của âm thanh."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "an6.gam_do_truong",
+     "order": 2,
+     "title": "Gam Đô trưởng và tên nốt theo chữ cái",
+     "description": "Đọc gam Đô trưởng và gọi tên nốt theo chữ cái C, D, E, F, G, A, B.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Đọc đúng các nốt của gam Đô trưởng đi lên, đi xuống",
+      "Ghép tên nốt Đô, Rê, Mi… với tên chữ cái C, D, E…"
+     ],
+     "summary": [
+      "Gam Đô trưởng: Đô – Rê – Mi – Fa – Son – La – Si – Đô, không có dấu thăng, dấu giáng.",
+      "Tên nốt theo chữ cái: C (Đô), D (Rê), E (Mi), F (Fa), G (Son), A (La), B (Si).",
+      "Tên chữ cái thường dùng để ghi hợp âm, ví dụ hợp âm C, G."
+     ],
+     "examples": [
+      {
+       "title": "Hai cách gọi",
+       "lines": [
+        "Đô Rê Mi Fa Son La Si",
+        "C  D  E  F  G  A  B"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Chữ cái và tên nốt",
+       "tasks": [
+        {
+         "key": "c_f",
+         "prompt": "Ghép tên chữ cái với tên nốt.",
+         "pairs": [
+          [
+           "C",
+           "Đô"
+          ],
+          [
+           "D",
+           "Rê"
+          ],
+          [
+           "E",
+           "Mi"
+          ],
+          [
+           "F",
+           "Fa"
+          ]
+         ],
+         "explanation": "C – Đô, D – Rê, E – Mi, F – Fa."
+        },
+        {
+         "key": "g_b",
+         "prompt": "Ghép tên chữ cái với tên nốt.",
+         "pairs": [
+          [
+           "G",
+           "Son"
+          ],
+          [
+           "A",
+           "La"
+          ],
+          [
+           "B",
+           "Si"
+          ]
+         ],
+         "explanation": "G – Son, A – La, B – Si (chữ cái bắt đầu lại từ A ở nốt La)."
+        },
+        {
+         "key": "gam",
+         "prompt": "Ghép câu hỏi về gam Đô trưởng với câu trả lời.",
+         "pairs": [
+          [
+           "Nốt đầu và cuối của gam",
+           "Đô"
+          ],
+          [
+           "Số dấu thăng, giáng ở đầu khuông",
+           "Không có"
+          ],
+          [
+           "Số nốt khác tên trong gam",
+           "7 nốt"
+          ]
+         ],
+         "explanation": "Gam Đô trưởng bắt đầu và kết thúc ở Đô, gồm 7 nốt khác tên, không có dấu hoá."
+        }
+       ]
+      },
+      {
+       "game": "order",
+       "title": "Đi lên, đi xuống",
+       "tasks": [
+        {
+         "key": "len_do",
+         "prompt": "Xếp các nốt của gam Đô trưởng theo chiều đi lên.",
+         "items": [
+          "Đô",
+          "Rê",
+          "Mi",
+          "Fa",
+          "Son",
+          "La"
+         ],
+         "explanation": "Gam Đô trưởng đi lên: Đô – Rê – Mi – Fa – Son – La – Si – Đô.",
+         "first_label": "Thấp",
+         "last_label": "Cao"
+        },
+        {
+         "key": "xuong_do",
+         "prompt": "Xếp theo chiều đi xuống, bắt đầu từ Đô cao.",
+         "items": [
+          "Đô cao",
+          "Si",
+          "La",
+          "Son",
+          "Fa",
+          "Mi"
+         ],
+         "explanation": "Đi xuống: Đô cao – Si – La – Son – Fa – Mi – Rê – Đô.",
+         "first_label": "Cao",
+         "last_label": "Thấp"
+        },
+        {
+         "key": "len_chu",
+         "prompt": "Xếp các nốt (tên chữ cái) theo cao độ đi lên, bắt đầu từ C.",
+         "items": [
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "A"
+         ],
+         "explanation": "C – D – E – F – G – A – B ứng với Đô – Rê – Mi – Fa – Son – La – Si.",
+         "first_label": "Thấp",
+         "last_label": "Cao"
+        },
+        {
+         "key": "len_g",
+         "prompt": "Xếp các nốt từ thấp lên cao, bắt đầu từ G.",
+         "items": [
+          "G",
+          "A",
+          "B",
+          "C cao"
+         ],
+         "explanation": "Sau G (Son) là A (La), B (Si), rồi C cao (Đô cao).",
+         "first_label": "Thấp",
+         "last_label": "Cao"
+        },
+        {
+         "key": "xuong_chu",
+         "prompt": "Xếp các nốt (tên chữ cái) từ cao xuống thấp.",
+         "items": [
+          "B",
+          "A",
+          "G",
+          "F",
+          "E"
+         ],
+         "explanation": "Si – La – Son – Fa – Mi tức B – A – G – F – E.",
+         "first_label": "Cao",
+         "last_label": "Thấp"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "an6.nhac_cu",
+   "grade": 6,
+   "order": 4,
+   "title": "Nhạc cụ",
+   "lessons": [
+    {
+     "key": "an6.recorder_ky_thuat",
+     "order": 1,
+     "title": "Sáo recorder hoặc kèn phím: tư thế, hơi thổi, bấm nốt",
+     "description": "Thực hành kĩ thuật cơ bản cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "an6.hoa_tau",
+     "order": 2,
+     "title": "Hoà tấu nhạc cụ gõ đệm cho bài hát",
+     "description": "Thực hành hoà tấu theo nhóm trên lớp.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an6.thuong_thuc",
+   "grade": 6,
+   "order": 5,
+   "title": "Thường thức âm nhạc",
+   "lessons": [
+    {
+     "key": "an6.so_luoc_nhac_cu",
+     "order": 1,
+     "title": "Sơ lược về một số nhạc cụ dân tộc",
+     "description": "Tìm hiểu cấu tạo, âm sắc và cách chơi đàn bầu, đàn tranh, sáo trúc.",
+     "status": "planned"
+    },
+    {
+     "key": "an6.nhac_si_viet_nam",
+     "order": 2,
+     "title": "Một số nhạc sĩ Việt Nam",
+     "description": "Tìm hiểu cuộc đời và tác phẩm của một số nhạc sĩ.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an7.hat",
+   "grade": 7,
+   "order": 1,
+   "title": "Hát",
+   "lessons": [
+    {
+     "key": "an7.hat_sac_thai",
+     "order": 1,
+     "title": "Hát thể hiện sắc thái và tính chất bài hát",
+     "description": "Thực hành hát to dần, nhỏ dần theo kí hiệu cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "an7.hat_dan_ca",
+     "order": 2,
+     "title": "Hát một bài dân ca",
+     "description": "Tập hát dân ca, chú ý luyến láy (thực hành trên lớp).",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an7.nghe_nhac",
+   "grade": 7,
+   "order": 2,
+   "title": "Nghe nhạc",
+   "lessons": [
+    {
+     "key": "an7.nghe_dan_ca",
+     "order": 1,
+     "title": "Nghe dân ca các vùng miền Việt Nam",
+     "description": "Nghe và nêu cảm nhận về giai điệu, lời ca dân ca cùng thầy cô. Ứng dụng chưa phát âm thanh: phần nghe, hát và chơi nhạc cụ học cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "an7.nghe_khi_nhac",
+     "order": 2,
+     "title": "Nghe tác phẩm khí nhạc nước ngoài",
+     "description": "Nghe một trích đoạn và nói về tính chất, nhạc cụ. Ứng dụng chưa phát âm thanh: phần nghe, hát và chơi nhạc cụ học cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an7.ly_thuyet",
+   "grade": 7,
+   "order": 3,
+   "title": "Đọc nhạc và lí thuyết âm nhạc",
+   "lessons": [
+    {
+     "key": "an7.cung_nua_cung",
+     "order": 1,
+     "title": "Cung, nửa cung và dấu hoá",
+     "description": "Biết khoảng cách cung, nửa cung giữa các nốt và tác dụng của dấu thăng, giáng, bình.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết các cặp nốt cách nhau nửa cung: Mi – Fa, Si – Đô",
+      "Tính khoảng cách giữa hai nốt bằng cung",
+      "Hiểu tác dụng của dấu thăng, dấu giáng, dấu bình"
+     ],
+     "summary": [
+      "Trong 7 nốt tự nhiên, Mi – Fa và Si – Đô cách nhau nửa cung; các cặp liền bậc còn lại cách nhau một cung.",
+      "Dấu thăng (#) nâng cao nốt nửa cung; dấu giáng (♭) hạ thấp nốt nửa cung.",
+      "Dấu bình (♮) huỷ dấu thăng, giáng trước đó, trả nốt về cao độ tự nhiên."
+     ],
+     "examples": [
+      {
+       "title": "Đếm cung",
+       "lines": [
+        "Đô → Mi: Đô–Rê (1) + Rê–Mi (1) = 2 cung",
+        "Mi → Son: Mi–Fa (½) + Fa–Son (1) = 1 cung rưỡi"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Cung và nửa cung",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "nua_cung_1",
+         "question": "Trong 7 nốt tự nhiên, cặp nốt liền bậc nào cách nhau nửa cung?",
+         "options": [
+          {
+           "text": "Mi – Fa",
+           "ok": true,
+           "why": "Đúng: Mi – Fa là một trong hai cặp nửa cung."
+          },
+          {
+           "text": "Đô – Rê",
+           "ok": false,
+           "why": "Đô – Rê cách nhau một cung."
+          },
+          {
+           "text": "Son – La",
+           "ok": false,
+           "why": "Son – La cách nhau một cung."
+          },
+          {
+           "text": "Fa – Son",
+           "ok": false,
+           "why": "Fa – Son cách nhau một cung."
+          }
+         ],
+         "explanation": "Hai cặp nửa cung: Mi – Fa và Si – Đô."
+        },
+        {
+         "key": "nua_cung_2",
+         "question": "Cặp nốt nào dưới đây cách nhau nửa cung?",
+         "options": [
+          {
+           "text": "Si – Đô cao",
+           "ok": true,
+           "why": "Đúng: Si – Đô là cặp nửa cung thứ hai."
+          },
+          {
+           "text": "La – Si",
+           "ok": false,
+           "why": "La – Si cách nhau một cung."
+          },
+          {
+           "text": "Rê – Mi",
+           "ok": false,
+           "why": "Rê – Mi cách nhau một cung."
+          }
+         ],
+         "explanation": "Nhớ: Mi – Fa, Si – Đô là nửa cung."
+        },
+        {
+         "key": "do_mi",
+         "question": "Từ Đô lên Mi cách nhau bao nhiêu?",
+         "options": [
+          {
+           "text": "2 cung",
+           "ok": true,
+           "why": "Đúng: Đô – Rê (1 cung) + Rê – Mi (1 cung)."
+          },
+          {
+           "text": "1 cung rưỡi",
+           "ok": false,
+           "why": "Không có cặp nửa cung nào giữa Đô và Mi."
+          },
+          {
+           "text": "3 cung",
+           "ok": false,
+           "why": "Chỉ có hai bước từ Đô lên Mi."
+          }
+         ],
+         "explanation": "Cộng từng bước liền bậc."
+        },
+        {
+         "key": "mi_son",
+         "question": "Từ Mi lên Son cách nhau bao nhiêu?",
+         "options": [
+          {
+           "text": "1 cung rưỡi",
+           "ok": true,
+           "why": "Đúng: Mi – Fa (nửa cung) + Fa – Son (1 cung)."
+          },
+          {
+           "text": "2 cung",
+           "ok": false,
+           "why": "Mi – Fa chỉ là nửa cung."
+          },
+          {
+           "text": "1 cung",
+           "ok": false,
+           "why": "Có hai bước, Mi – Fa và Fa – Son."
+          }
+         ],
+         "explanation": "Mi – Fa là nửa cung."
+        },
+        {
+         "key": "dau_thang",
+         "question": "Dấu thăng đặt trước nốt Fa có tác dụng gì?",
+         "options": [
+          {
+           "text": "Nâng cao Fa lên nửa cung",
+           "ok": true,
+           "why": "Đúng: Fa thăng (Fa#) cao hơn Fa nửa cung."
+          },
+          {
+           "text": "Hạ thấp Fa xuống nửa cung",
+           "ok": false,
+           "why": "Hạ thấp là tác dụng của dấu giáng."
+          },
+          {
+           "text": "Làm nốt Fa dài gấp đôi",
+           "ok": false,
+           "why": "Dấu hoá đổi cao độ, không đổi trường độ."
+          }
+         ],
+         "explanation": "Dấu thăng: cao lên nửa cung."
+        },
+        {
+         "key": "dau_giang",
+         "question": "Dấu giáng đặt trước nốt Si có tác dụng gì?",
+         "options": [
+          {
+           "text": "Hạ thấp Si xuống nửa cung",
+           "ok": true,
+           "why": "Đúng: Si giáng (Si♭) thấp hơn Si nửa cung."
+          },
+          {
+           "text": "Nâng cao Si lên nửa cung",
+           "ok": false,
+           "why": "Nâng cao là dấu thăng."
+          },
+          {
+           "text": "Nghỉ không hát nốt Si",
+           "ok": false,
+           "why": "Nghỉ là dấu lặng, không phải dấu giáng."
+          }
+         ],
+         "explanation": "Dấu giáng: thấp xuống nửa cung."
+        },
+        {
+         "key": "dau_binh",
+         "question": "Dấu bình có tác dụng gì?",
+         "options": [
+          {
+           "text": "Huỷ dấu thăng, giáng trước đó, trả nốt về cao độ tự nhiên",
+           "ok": true,
+           "why": "Đúng: dấu bình đưa nốt về cao độ ban đầu."
+          },
+          {
+           "text": "Nâng nốt lên một cung",
+           "ok": false,
+           "why": "Dấu bình không nâng nốt lên."
+          },
+          {
+           "text": "Làm nốt nhỏ tiếng hơn",
+           "ok": false,
+           "why": "Dấu bình thay đổi cao độ, không phải cường độ."
+          }
+         ],
+         "explanation": "Dấu bình trả nốt về cao độ tự nhiên."
+        },
+        {
+         "key": "fa_si",
+         "question": "Từ Fa lên Si cách nhau bao nhiêu?",
+         "options": [
+          {
+           "text": "3 cung",
+           "ok": true,
+           "why": "Đúng: Fa – Son, Son – La, La – Si, mỗi bước 1 cung."
+          },
+          {
+           "text": "2 cung rưỡi",
+           "ok": false,
+           "why": "Giữa Fa và Si không có cặp nửa cung nào."
+          },
+          {
+           "text": "2 cung",
+           "ok": false,
+           "why": "Có ba bước một cung."
+          }
+         ],
+         "explanation": "Fa – Son – La – Si: ba bước, mỗi bước một cung."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "an7.cuong_do",
+     "order": 2,
+     "title": "Kí hiệu cường độ: p, mf, f…",
+     "description": "Đọc các kí hiệu cường độ và sắc thái to dần, nhỏ dần trong bản nhạc.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Hiểu các kí hiệu pp, p, mp, mf, f, ff",
+      "Hiểu kí hiệu to dần, nhỏ dần",
+      "Xếp các kí hiệu theo mức to nhỏ"
+     ],
+     "summary": [
+      "p (piano): nhỏ; f (forte): to; m (mezzo) nghĩa là vừa: mp nhỏ vừa, mf to vừa.",
+      "pp: rất nhỏ; ff: rất to. Từ nhỏ đến to: pp – p – mp – mf – f – ff.",
+      "cresc. hoặc dấu < : to dần; dim. hoặc dấu > : nhỏ dần."
+     ],
+     "examples": [
+      {
+       "title": "Đọc sắc thái",
+       "lines": [
+        "Câu nhạc ghi p rồi cresc. đến f: bắt đầu nhỏ, to dần đến to."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Kí hiệu cường độ",
+       "tasks": [
+        {
+         "key": "co_ban",
+         "prompt": "Ghép kí hiệu với ý nghĩa.",
+         "pairs": [
+          [
+           "p (piano)",
+           "Nhỏ"
+          ],
+          [
+           "f (forte)",
+           "To"
+          ],
+          [
+           "mf (mezzo forte)",
+           "To vừa"
+          ],
+          [
+           "pp (pianissimo)",
+           "Rất nhỏ"
+          ]
+         ],
+         "explanation": "p nhỏ, f to; m là vừa; pp rất nhỏ."
+        },
+        {
+         "key": "doi_dan",
+         "prompt": "Ghép kí hiệu với ý nghĩa.",
+         "pairs": [
+          [
+           "cresc.",
+           "To dần"
+          ],
+          [
+           "dim.",
+           "Nhỏ dần"
+          ],
+          [
+           "ff (fortissimo)",
+           "Rất to"
+          ],
+          [
+           "mp (mezzo piano)",
+           "Nhỏ vừa"
+          ]
+         ],
+         "explanation": "cresc. to dần, dim. nhỏ dần; ff rất to; mp nhỏ vừa."
+        },
+        {
+         "key": "dau_hinh",
+         "prompt": "Ghép kí hiệu với ý nghĩa.",
+         "pairs": [
+          [
+           "Dấu <",
+           "Mạnh dần, như cresc."
+          ],
+          [
+           "Dấu >",
+           "Nhẹ dần, như dim."
+          ],
+          [
+           "Dấu ngân (fermata)",
+           "Ngân dài tuỳ ý người biểu diễn"
+          ]
+         ],
+         "explanation": "Hình mở rộng < là to dần, hình khép lại > là nhỏ dần; dấu ngân cho phép kéo dài nốt."
+        }
+       ]
+      },
+      {
+       "game": "order",
+       "title": "Từ nhỏ đến to",
+       "tasks": [
+        {
+         "key": "nho_to_1",
+         "prompt": "Xếp các kí hiệu từ nhỏ đến to.",
+         "items": [
+          "pp",
+          "p",
+          "mf",
+          "f"
+         ],
+         "explanation": "pp rất nhỏ → p nhỏ → mf to vừa → f to.",
+         "first_label": "Nhỏ nhất",
+         "last_label": "To nhất"
+        },
+        {
+         "key": "nho_to_2",
+         "prompt": "Xếp các kí hiệu từ nhỏ đến to.",
+         "items": [
+          "p",
+          "mp",
+          "mf",
+          "ff"
+         ],
+         "explanation": "p → mp (nhỏ vừa) → mf (to vừa) → ff (rất to).",
+         "first_label": "Nhỏ nhất",
+         "last_label": "To nhất"
+        },
+        {
+         "key": "to_nho_1",
+         "prompt": "Xếp các kí hiệu từ to đến nhỏ.",
+         "items": [
+          "ff",
+          "f",
+          "mp",
+          "pp"
+         ],
+         "explanation": "ff rất to → f to → mp nhỏ vừa → pp rất nhỏ.",
+         "first_label": "To nhất",
+         "last_label": "Nhỏ nhất"
+        },
+        {
+         "key": "nho_to_3",
+         "prompt": "Xếp các kí hiệu từ nhỏ đến to.",
+         "items": [
+          "pp",
+          "mp",
+          "f",
+          "ff"
+         ],
+         "explanation": "pp → mp → f → ff.",
+         "first_label": "Nhỏ nhất",
+         "last_label": "To nhất"
+        },
+        {
+         "key": "to_nho_2",
+         "prompt": "Xếp các kí hiệu từ to đến nhỏ.",
+         "items": [
+          "f",
+          "mf",
+          "mp",
+          "p"
+         ],
+         "explanation": "f → mf → mp → p: m (vừa) nằm giữa f và p.",
+         "first_label": "To nhất",
+         "last_label": "Nhỏ nhất"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "an7.nhac_cu",
+   "grade": 7,
+   "order": 4,
+   "title": "Nhạc cụ",
+   "lessons": [
+    {
+     "key": "an7.recorder_hoa_tau",
+     "order": 1,
+     "title": "Hoà tấu sáo recorder hoặc kèn phím",
+     "description": "Thực hành chơi giai điệu theo nhóm cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "an7.nhac_cu_go_dem",
+     "order": 2,
+     "title": "Gõ đệm với các mẫu tiết tấu có nốt chấm dôi",
+     "description": "Thực hành gõ đệm trên lớp.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an7.thuong_thuc",
+   "grade": 7,
+   "order": 5,
+   "title": "Thường thức âm nhạc",
+   "lessons": [
+    {
+     "key": "an7.dan_ca_viet_nam",
+     "order": 1,
+     "title": "Dân ca và di sản âm nhạc Việt Nam",
+     "description": "Biết một số loại hình dân ca, âm nhạc truyền thống và di sản được UNESCO ghi danh.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được vùng, cộng đồng gắn với một số loại hình dân ca",
+      "Biết một số di sản âm nhạc Việt Nam được UNESCO ghi danh"
+     ],
+     "summary": [
+      "Quan họ gắn với vùng Kinh Bắc; ví, giặm gắn với xứ Nghệ; bài chòi ở Trung Bộ; đờn ca tài tử ở Nam Bộ.",
+      "Hát Then của người Tày, Nùng, Thái; cồng chiêng của các dân tộc Tây Nguyên; nhã nhạc là âm nhạc cung đình triều Nguyễn ở Huế.",
+      "UNESCO ghi danh: Nhã nhạc cung đình Huế (2003), Không gian văn hoá Cồng chiêng Tây Nguyên (2005), Dân ca Quan họ và Ca trù (2009), Đờn ca tài tử Nam Bộ (2013), Ví, giặm (2014), Bài chòi (2017), Then (2019)."
+     ],
+     "examples": [
+      {
+       "title": "Ca trù",
+       "lines": [
+        "Đào nương vừa hát vừa gõ phách, kép đàn đáy, quan viên đánh trống chầu."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Dân ca và di sản",
+       "tasks": [
+        {
+         "key": "vung_mien",
+         "prompt": "Ghép loại hình âm nhạc với vùng miền.",
+         "pairs": [
+          [
+           "Quan họ",
+           "Vùng Kinh Bắc"
+          ],
+          [
+           "Ví, giặm",
+           "Xứ Nghệ"
+          ],
+          [
+           "Bài chòi",
+           "Trung Bộ"
+          ],
+          [
+           "Đờn ca tài tử",
+           "Nam Bộ"
+          ]
+         ],
+         "explanation": "Mỗi vùng có loại hình dân ca riêng."
+        },
+        {
+         "key": "cong_dong",
+         "prompt": "Ghép loại hình âm nhạc với đặc điểm.",
+         "pairs": [
+          [
+           "Hát Then",
+           "Của người Tày, Nùng, Thái"
+          ],
+          [
+           "Nhã nhạc",
+           "Âm nhạc cung đình triều Nguyễn ở Huế"
+          ],
+          [
+           "Cồng chiêng",
+           "Của các dân tộc Tây Nguyên"
+          ],
+          [
+           "Ca trù",
+           "Có đàn đáy, phách và trống chầu"
+          ]
+         ],
+         "explanation": "Mỗi loại hình gắn với một cộng đồng và cách trình diễn riêng."
+        },
+        {
+         "key": "unesco",
+         "prompt": "Ghép di sản với năm được UNESCO ghi danh.",
+         "pairs": [
+          [
+           "Nhã nhạc cung đình Huế",
+           "2003"
+          ],
+          [
+           "Không gian văn hoá Cồng chiêng Tây Nguyên",
+           "2005"
+          ],
+          [
+           "Dân ca Quan họ",
+           "2009"
+          ],
+          [
+           "Đờn ca tài tử Nam Bộ",
+           "2013"
+          ],
+          [
+           "Nghệ thuật Bài chòi Trung Bộ",
+           "2017"
+          ]
+         ],
+         "explanation": "Nhã nhạc là di sản âm nhạc đầu tiên của Việt Nam được UNESCO ghi danh (2003)."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "an8.hat",
+   "grade": 8,
+   "order": 1,
+   "title": "Hát",
+   "lessons": [
+    {
+     "key": "an8.hat_be",
+     "order": 1,
+     "title": "Hát hai bè đơn giản",
+     "description": "Thực hành hát bè theo nhóm cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "an8.hat_bieu_dien",
+     "order": 2,
+     "title": "Hát và biểu diễn theo nhóm",
+     "description": "Dàn dựng, biểu diễn một bài hát (thực hành trên lớp).",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an8.nghe_nhac",
+   "grade": 8,
+   "order": 2,
+   "title": "Nghe nhạc",
+   "lessons": [
+    {
+     "key": "an8.nghe_ca_khuc_cach_mang",
+     "order": 1,
+     "title": "Nghe ca khúc gắn với lịch sử dân tộc",
+     "description": "Nghe và tìm hiểu hoàn cảnh ra đời của bài hát cùng thầy cô. Ứng dụng chưa phát âm thanh: phần nghe, hát và chơi nhạc cụ học cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "an8.nghe_giao_huong",
+     "order": 2,
+     "title": "Nghe trích đoạn giao hưởng",
+     "description": "Nghe và nêu cảm nhận về tính chất âm nhạc. Ứng dụng chưa phát âm thanh: phần nghe, hát và chơi nhạc cụ học cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an8.ly_thuyet",
+   "grade": 8,
+   "order": 3,
+   "title": "Đọc nhạc và lí thuyết âm nhạc",
+   "lessons": [
+    {
+     "key": "an8.giong_truong_thu",
+     "order": 1,
+     "title": "Giọng Đô trưởng và giọng La thứ",
+     "description": "Biết âm chủ, gam và mối liên hệ giữa giọng Đô trưởng và giọng La thứ.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được gam Đô trưởng và gam La thứ tự nhiên",
+      "Biết hai giọng song song cùng không có dấu hoá",
+      "Nhận ra giọng của bài qua dấu hoá và nốt kết"
+     ],
+     "summary": [
+      "Gam Đô trưởng: Đô Rê Mi Fa Son La Si Đô; âm chủ là Đô.",
+      "Gam La thứ tự nhiên: La Si Đô Rê Mi Fa Son La; âm chủ là La.",
+      "Hai giọng này là giọng song song: cùng không có dấu thăng, giáng ở đầu khuông.",
+      "Bài hát thường kết thúc ở âm chủ: không có dấu hoá, kết ở La thường là giọng La thứ."
+     ],
+     "examples": [
+      {
+       "title": "Bậc của giọng Đô trưởng",
+       "lines": [
+        "I: Đô, IV: Fa, V: Son"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Trưởng hay thứ?",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "chung",
+         "question": "Giọng Đô trưởng và giọng La thứ có điểm gì chung?",
+         "options": [
+          {
+           "text": "Cùng không có dấu hoá ở đầu khuông (giọng song song)",
+           "ok": true,
+           "why": "Đúng: hai giọng song song dùng chung các nốt tự nhiên."
+          },
+          {
+           "text": "Cùng có âm chủ là Đô",
+           "ok": false,
+           "why": "Âm chủ của La thứ là La."
+          },
+          {
+           "text": "Cùng có một dấu thăng",
+           "ok": false,
+           "why": "Một dấu thăng là giọng Son trưởng hoặc Mi thứ."
+          }
+         ],
+         "explanation": "Giọng song song: cùng hoá biểu."
+        },
+        {
+         "key": "am_chu",
+         "question": "Âm chủ của giọng La thứ là nốt nào?",
+         "options": [
+          {
+           "text": "La",
+           "ok": true,
+           "why": "Đúng: giọng mang tên âm chủ của nó."
+          },
+          {
+           "text": "Đô",
+           "ok": false,
+           "why": "Đô là âm chủ của Đô trưởng."
+          },
+          {
+           "text": "Mi",
+           "ok": false,
+           "why": "Mi là bậc V của La thứ."
+          }
+         ],
+         "explanation": "Tên giọng là tên âm chủ."
+        },
+        {
+         "key": "gam_la",
+         "question": "Gam La thứ tự nhiên gồm những nốt nào?",
+         "options": [
+          {
+           "text": "La – Si – Đô – Rê – Mi – Fa – Son – La",
+           "ok": true,
+           "why": "Đúng: các nốt tự nhiên bắt đầu từ La."
+          },
+          {
+           "text": "La – Si – Đô# – Rê – Mi – Fa# – Son# – La",
+           "ok": false,
+           "why": "Có ba dấu thăng là gam La trưởng."
+          },
+          {
+           "text": "Đô – Rê – Mi – Fa – Son – La – Si – Đô",
+           "ok": false,
+           "why": "Đây là gam Đô trưởng."
+          }
+         ],
+         "explanation": "La thứ tự nhiên không có dấu hoá."
+        },
+        {
+         "key": "ket_la",
+         "question": "Bài hát không có dấu hoá ở đầu khuông và kết thúc ở nốt La. Bài có thể ở giọng nào?",
+         "options": [
+          {
+           "text": "La thứ",
+           "ok": true,
+           "why": "Đúng: không dấu hoá và kết ở La (âm chủ) cho thấy giọng La thứ."
+          },
+          {
+           "text": "Đô trưởng",
+           "ok": false,
+           "why": "Giọng Đô trưởng thường kết ở Đô."
+          },
+          {
+           "text": "Son trưởng",
+           "ok": false,
+           "why": "Son trưởng có một dấu thăng (Fa#)."
+          }
+         ],
+         "explanation": "Xem dấu hoá và nốt kết để đoán giọng."
+        },
+        {
+         "key": "bac_chinh",
+         "question": "Bậc I, IV, V của giọng Đô trưởng là những nốt nào?",
+         "options": [
+          {
+           "text": "Đô, Fa, Son",
+           "ok": true,
+           "why": "Đúng: đếm từ Đô: I Đô, IV Fa, V Son."
+          },
+          {
+           "text": "Đô, Mi, Son",
+           "ok": false,
+           "why": "Mi là bậc III."
+          },
+          {
+           "text": "Rê, Fa, La",
+           "ok": false,
+           "why": "Rê là bậc II, La là bậc VI."
+          }
+         ],
+         "explanation": "Đếm bậc từ âm chủ: Đô (I), Rê (II), Mi (III), Fa (IV), Son (V)."
+        },
+        {
+         "key": "tinh_chat",
+         "question": "Nhận xét nào thường đúng về tính chất của giọng trưởng và giọng thứ?",
+         "options": [
+          {
+           "text": "Giọng trưởng thường sáng, khoẻ; giọng thứ thường mềm mại, buồn hơn",
+           "ok": true,
+           "why": "Đúng: đây là nhận xét thường gặp, tuy mỗi bài có thể khác."
+          },
+          {
+           "text": "Giọng thứ luôn nhanh hơn giọng trưởng",
+           "ok": false,
+           "why": "Giọng không quy định tốc độ."
+          },
+          {
+           "text": "Giọng trưởng không bao giờ dùng cho bài buồn",
+           "ok": false,
+           "why": "Không có quy định tuyệt đối như vậy."
+          }
+         ],
+         "explanation": "Tính chất trưởng – thứ là xu hướng, không phải luật tuyệt đối."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "an8.nhip_do",
+     "order": 2,
+     "title": "Nhịp độ và kí hiệu nhịp độ",
+     "description": "Đọc các thuật ngữ nhịp độ Largo, Andante, Allegro… và kí hiệu nhanh dần, chậm dần.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Hiểu các thuật ngữ nhịp độ thường gặp",
+      "Xếp nhịp độ từ chậm đến nhanh",
+      "Hiểu rit., accel., a tempo"
+     ],
+     "summary": [
+      "Nhịp độ là độ nhanh chậm của bản nhạc, thường ghi bằng tiếng Ý ở đầu bài.",
+      "Từ chậm đến nhanh: Largo (rất chậm) – Adagio (chậm) – Andante (hơi chậm) – Moderato (vừa) – Allegro (nhanh) – Presto (rất nhanh).",
+      "rit.: chậm dần; accel.: nhanh dần; a tempo: trở lại nhịp độ ban đầu."
+     ],
+     "examples": [
+      {
+       "title": "Ở đầu bản nhạc",
+       "lines": [
+        "Moderato: hát với tốc độ vừa phải."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Chậm hay nhanh?",
+       "tasks": [
+        {
+         "key": "cham_nhanh_1",
+         "prompt": "Xếp các nhịp độ từ chậm đến nhanh.",
+         "items": [
+          "Largo",
+          "Andante",
+          "Allegro",
+          "Presto"
+         ],
+         "explanation": "Largo rất chậm, Andante hơi chậm, Allegro nhanh, Presto rất nhanh.",
+         "first_label": "Chậm nhất",
+         "last_label": "Nhanh nhất"
+        },
+        {
+         "key": "cham_nhanh_2",
+         "prompt": "Xếp các nhịp độ từ chậm đến nhanh.",
+         "items": [
+          "Adagio",
+          "Moderato",
+          "Allegro",
+          "Presto"
+         ],
+         "explanation": "Adagio chậm → Moderato vừa → Allegro nhanh → Presto rất nhanh.",
+         "first_label": "Chậm nhất",
+         "last_label": "Nhanh nhất"
+        },
+        {
+         "key": "nhanh_cham",
+         "prompt": "Xếp các nhịp độ từ nhanh đến chậm.",
+         "items": [
+          "Presto",
+          "Allegro",
+          "Moderato",
+          "Andante",
+          "Adagio"
+         ],
+         "explanation": "Đi ngược từ rất nhanh về chậm.",
+         "first_label": "Nhanh nhất",
+         "last_label": "Chậm nhất"
+        },
+        {
+         "key": "cham_nhanh_3",
+         "prompt": "Xếp các nhịp độ từ chậm đến nhanh.",
+         "items": [
+          "Largo",
+          "Adagio",
+          "Moderato",
+          "Allegro"
+         ],
+         "explanation": "Largo chậm hơn Adagio; Moderato vừa; Allegro nhanh.",
+         "first_label": "Chậm nhất",
+         "last_label": "Nhanh nhất"
+        }
+       ]
+      },
+      {
+       "game": "match",
+       "title": "Thuật ngữ nhịp độ",
+       "tasks": [
+        {
+         "key": "y_nghia_1",
+         "prompt": "Ghép thuật ngữ với ý nghĩa.",
+         "pairs": [
+          [
+           "Largo",
+           "Rất chậm, rộng rãi"
+          ],
+          [
+           "Andante",
+           "Hơi chậm, như bước đi"
+          ],
+          [
+           "Allegro",
+           "Nhanh"
+          ],
+          [
+           "Presto",
+           "Rất nhanh"
+          ]
+         ],
+         "explanation": "Các thuật ngữ nhịp độ tiếng Ý được dùng trên khắp thế giới."
+        },
+        {
+         "key": "y_nghia_2",
+         "prompt": "Ghép thuật ngữ với ý nghĩa.",
+         "pairs": [
+          [
+           "Adagio",
+           "Chậm"
+          ],
+          [
+           "Moderato",
+           "Vừa phải"
+          ],
+          [
+           "Allegretto",
+           "Hơi nhanh, chậm hơn Allegro"
+          ]
+         ],
+         "explanation": "Allegretto là \"Allegro nhỏ\": hơi nhanh."
+        },
+        {
+         "key": "thay_doi",
+         "prompt": "Ghép kí hiệu với ý nghĩa.",
+         "pairs": [
+          [
+           "rit. (ritardando)",
+           "Chậm dần"
+          ],
+          [
+           "accel. (accelerando)",
+           "Nhanh dần"
+          ],
+          [
+           "a tempo",
+           "Trở lại nhịp độ ban đầu"
+          ]
+         ],
+         "explanation": "Các kí hiệu này thay đổi nhịp độ ngay trong bản nhạc."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "an8.nhac_cu",
+   "grade": 8,
+   "order": 4,
+   "title": "Nhạc cụ",
+   "lessons": [
+    {
+     "key": "an8.recorder_bai_hoan_chinh",
+     "order": 1,
+     "title": "Chơi một bài hoàn chỉnh bằng sáo recorder hoặc kèn phím",
+     "description": "Thực hành cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an8.thuong_thuc",
+   "grade": 8,
+   "order": 5,
+   "title": "Thường thức âm nhạc",
+   "lessons": [
+    {
+     "key": "an8.nhac_si_tac_pham",
+     "order": 1,
+     "title": "Nhạc sĩ Việt Nam và thế giới",
+     "description": "Biết một số nhạc sĩ tiêu biểu và tác phẩm của họ.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được tác phẩm tiêu biểu của một số nhạc sĩ Việt Nam",
+      "Nêu được tác phẩm, quê hương của một số nhạc sĩ thế giới"
+     ],
+     "summary": [
+      "Văn Cao viết Tiến quân ca, được chọn làm Quốc ca Việt Nam.",
+      "Phạm Tuyên viết Như có Bác trong ngày đại thắng; Lưu Hữu Phước viết Lên đàng; Hoàng Vân viết Hò kéo pháo.",
+      "Beethoven (Đức) viết Giao hưởng số 5; Mozart (Áo) là thần đồng âm nhạc; Tchaikovsky (Nga) viết vũ kịch Hồ thiên nga; Vivaldi (Ý) viết Bốn mùa."
+     ],
+     "examples": [
+      {
+       "title": "Beethoven",
+       "lines": [
+        "Bị điếc dần từ tuổi trẻ nhưng vẫn sáng tác những bản giao hưởng lớn."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Nhạc sĩ và tác phẩm",
+       "tasks": [
+        {
+         "key": "viet_nam",
+         "prompt": "Ghép nhạc sĩ Việt Nam với tác phẩm.",
+         "pairs": [
+          [
+           "Văn Cao",
+           "Tiến quân ca"
+          ],
+          [
+           "Phạm Tuyên",
+           "Như có Bác trong ngày đại thắng"
+          ],
+          [
+           "Lưu Hữu Phước",
+           "Lên đàng"
+          ],
+          [
+           "Hoàng Vân",
+           "Hò kéo pháo"
+          ]
+         ],
+         "explanation": "Đây là những ca khúc quen thuộc gắn với lịch sử dân tộc."
+        },
+        {
+         "key": "the_gioi",
+         "prompt": "Ghép nhạc sĩ thế giới với tác phẩm.",
+         "pairs": [
+          [
+           "Beethoven",
+           "Giao hưởng số 5"
+          ],
+          [
+           "Tchaikovsky",
+           "Vũ kịch Hồ thiên nga"
+          ],
+          [
+           "Vivaldi",
+           "Bốn mùa"
+          ],
+          [
+           "Mozart",
+           "Hành khúc Thổ Nhĩ Kì"
+          ]
+         ],
+         "explanation": "Hành khúc Thổ Nhĩ Kì là chương cuối bản sonata cho piano số 11 của Mozart."
+        },
+        {
+         "key": "que_huong",
+         "prompt": "Ghép nhạc sĩ với quê hương.",
+         "pairs": [
+          [
+           "Chopin",
+           "Ba Lan"
+          ],
+          [
+           "Mozart",
+           "Áo"
+          ],
+          [
+           "Tchaikovsky",
+           "Nga"
+          ],
+          [
+           "Vivaldi",
+           "Ý"
+          ]
+         ],
+         "explanation": "Chopin – nhà soạn nhạc piano người Ba Lan; Mozart người Áo; Tchaikovsky người Nga; Vivaldi người Ý."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "an9.hat",
+   "grade": 9,
+   "order": 1,
+   "title": "Hát",
+   "lessons": [
+    {
+     "key": "an9.hat_hop_xuong",
+     "order": 1,
+     "title": "Hát hợp xướng đơn giản",
+     "description": "Thực hành hát nhiều bè theo nhóm cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "an9.hat_tu_chon",
+     "order": 2,
+     "title": "Hát và trình diễn bài hát tự chọn",
+     "description": "Chọn, tập và trình diễn một bài hát (thực hành trên lớp).",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an9.nghe_nhac",
+   "grade": 9,
+   "order": 2,
+   "title": "Nghe nhạc",
+   "lessons": [
+    {
+     "key": "an9.nghe_san_khau",
+     "order": 1,
+     "title": "Nghe trích đoạn chèo, cải lương",
+     "description": "Nghe và nhận xét làn điệu, cách hát cùng thầy cô. Ứng dụng chưa phát âm thanh: phần nghe, hát và chơi nhạc cụ học cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "an9.nghe_hop_xuong",
+     "order": 2,
+     "title": "Nghe tác phẩm hợp xướng",
+     "description": "Nghe và nhận ra các bè, sắc thái. Ứng dụng chưa phát âm thanh: phần nghe, hát và chơi nhạc cụ học cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an9.ly_thuyet",
+   "grade": 9,
+   "order": 3,
+   "title": "Đọc nhạc và lí thuyết âm nhạc",
+   "lessons": [
+    {
+     "key": "an9.quang",
+     "order": 1,
+     "title": "Quãng",
+     "description": "Gọi tên quãng giữa hai nốt và phân biệt quãng 3 trưởng, 3 thứ, quãng 4, 5 đúng.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Đếm số bậc để gọi tên quãng",
+      "Dùng số cung để phân biệt quãng trưởng, thứ, đúng"
+     ],
+     "summary": [
+      "Quãng là khoảng cách cao độ giữa hai nốt; đếm cả nốt đầu và nốt cuối: Đô – Mi là quãng 3.",
+      "Quãng 3 trưởng: 2 cung (Đô – Mi). Quãng 3 thứ: 1 cung rưỡi (Mi – Son, La – Đô).",
+      "Quãng 4 đúng: 2 cung rưỡi (Đô – Fa). Quãng 5 đúng: 3 cung rưỡi (Đô – Son). Quãng 8 đúng: Đô – Đô cao."
+     ],
+     "examples": [
+      {
+       "title": "Đếm bậc",
+       "lines": [
+        "Đô (1) Rê (2) Mi (3) Fa (4) Son (5): Đô – Son là quãng 5"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Gọi tên quãng",
+       "tasks": [
+        {
+         "key": "so_bac_1",
+         "prompt": "Ghép hai nốt (tính từ nốt dưới lên) với tên quãng.",
+         "pairs": [
+          [
+           "Đô – Rê",
+           "Quãng 2"
+          ],
+          [
+           "Đô – Mi",
+           "Quãng 3"
+          ],
+          [
+           "Đô – Fa",
+           "Quãng 4"
+          ],
+          [
+           "Đô – Son",
+           "Quãng 5"
+          ]
+         ],
+         "explanation": "Đếm số bậc, tính cả nốt đầu và nốt cuối."
+        },
+        {
+         "key": "so_bac_2",
+         "prompt": "Ghép hai nốt (tính từ nốt dưới lên) với tên quãng.",
+         "pairs": [
+          [
+           "Đô – La",
+           "Quãng 6"
+          ],
+          [
+           "Đô – Si",
+           "Quãng 7"
+          ],
+          [
+           "Đô – Đô cao",
+           "Quãng 8"
+          ],
+          [
+           "Mi – Son",
+           "Quãng 3"
+          ]
+         ],
+         "explanation": "Mi – Fa – Son: ba bậc, quãng 3."
+        },
+        {
+         "key": "tinh_chat",
+         "prompt": "Ghép quãng với tên đầy đủ.",
+         "pairs": [
+          [
+           "Đô – Mi (2 cung)",
+           "Quãng 3 trưởng"
+          ],
+          [
+           "Mi – Son (1 cung rưỡi)",
+           "Quãng 3 thứ"
+          ],
+          [
+           "Đô – Son (3 cung rưỡi)",
+           "Quãng 5 đúng"
+          ],
+          [
+           "Đô – Fa (2 cung rưỡi)",
+           "Quãng 4 đúng"
+          ]
+         ],
+         "explanation": "Cùng là quãng 3 nhưng 2 cung là trưởng, 1 cung rưỡi là thứ."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "an9.hop_am",
+     "order": 2,
+     "title": "Hợp âm ba và các giọng thường gặp",
+     "description": "Biết cấu tạo hợp âm ba, hợp âm chính của giọng Đô trưởng và hoá biểu của Son trưởng, Fa trưởng.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu cấu tạo hợp âm ba",
+      "Kể đúng nốt của hợp âm C, F, G, Am",
+      "Biết hoá biểu của giọng Son trưởng, Fa trưởng"
+     ],
+     "summary": [
+      "Hợp âm ba gồm 3 nốt xếp chồng theo quãng 3: Đô – Mi – Son là hợp âm Đô trưởng (C).",
+      "Hợp âm F: Fa – La – Đô; G: Son – Si – Rê; Am (La thứ): La – Đô – Mi.",
+      "Ba hợp âm chính của giọng Đô trưởng ở bậc I, IV, V: C, F, G.",
+      "Giọng Son trưởng có một dấu thăng (Fa#); giọng Fa trưởng có một dấu giáng (Si♭)."
+     ],
+     "examples": [
+      {
+       "title": "Đệm cho bài giọng Đô trưởng",
+       "lines": [
+        "Thường dùng C – F – G – C."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Hợp âm và giọng",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "cau_tao",
+         "question": "Hợp âm ba được tạo thành thế nào?",
+         "options": [
+          {
+           "text": "3 nốt xếp chồng lên nhau theo quãng 3",
+           "ok": true,
+           "why": "Đúng: ví dụ Đô – Mi – Son."
+          },
+          {
+           "text": "3 nốt liền bậc nhau",
+           "ok": false,
+           "why": "Đô – Rê – Mi không phải hợp âm ba."
+          },
+          {
+           "text": "Một nốt chơi ba lần",
+           "ok": false,
+           "why": "Hợp âm là nhiều nốt khác nhau vang cùng lúc."
+          }
+         ],
+         "explanation": "Hợp âm ba: nốt gốc, quãng 3, quãng 5."
+        },
+        {
+         "key": "hop_am_g",
+         "question": "Hợp âm Son trưởng (G) gồm những nốt nào?",
+         "options": [
+          {
+           "text": "Son – Si – Rê",
+           "ok": true,
+           "why": "Đúng: từ Son chồng hai quãng 3."
+          },
+          {
+           "text": "Son – La – Si",
+           "ok": false,
+           "why": "Ba nốt liền bậc, không phải hợp âm ba."
+          },
+          {
+           "text": "Son – Si♭ – Rê",
+           "ok": false,
+           "why": "Có Si♭ là hợp âm Son thứ (Gm)."
+          },
+          {
+           "text": "Son – Đô – Mi",
+           "ok": false,
+           "why": "Đây không phải chồng quãng 3 từ Son."
+          }
+         ],
+         "explanation": "G: Son – Si – Rê."
+        },
+        {
+         "key": "hop_am_f",
+         "question": "Hợp âm Fa trưởng (F) gồm những nốt nào?",
+         "options": [
+          {
+           "text": "Fa – La – Đô",
+           "ok": true,
+           "why": "Đúng: Fa, quãng 3 trưởng La, quãng 5 đúng Đô."
+          },
+          {
+           "text": "Fa – Son – La",
+           "ok": false,
+           "why": "Ba nốt liền bậc."
+          },
+          {
+           "text": "Fa – La♭ – Đô",
+           "ok": false,
+           "why": "Có La♭ là hợp âm Fa thứ."
+          }
+         ],
+         "explanation": "F: Fa – La – Đô."
+        },
+        {
+         "key": "hop_am_am",
+         "question": "Hợp âm La thứ (Am) gồm những nốt nào?",
+         "options": [
+          {
+           "text": "La – Đô – Mi",
+           "ok": true,
+           "why": "Đúng: La – Đô là quãng 3 thứ, La – Mi là quãng 5 đúng."
+          },
+          {
+           "text": "La – Đô# – Mi",
+           "ok": false,
+           "why": "Có Đô# là hợp âm La trưởng (A)."
+          },
+          {
+           "text": "La – Si – Đô",
+           "ok": false,
+           "why": "Ba nốt liền bậc."
+          }
+         ],
+         "explanation": "Am: La – Đô – Mi."
+        },
+        {
+         "key": "chinh_c",
+         "question": "Ba hợp âm chính (bậc I, IV, V) của giọng Đô trưởng là:",
+         "options": [
+          {
+           "text": "C, F, G",
+           "ok": true,
+           "why": "Đúng: bậc I Đô, IV Fa, V Son."
+          },
+          {
+           "text": "C, Dm, Em",
+           "ok": false,
+           "why": "Dm, Em là hợp âm bậc II, III."
+          },
+          {
+           "text": "Am, Dm, E",
+           "ok": false,
+           "why": "Đây là các hợp âm chính của giọng La thứ (hoà thanh)."
+          }
+         ],
+         "explanation": "I – IV – V của Đô trưởng: C – F – G."
+        },
+        {
+         "key": "c_va_am",
+         "question": "Hợp âm Đô trưởng (C) và La thứ (Am) có chung những nốt nào?",
+         "options": [
+          {
+           "text": "Đô và Mi",
+           "ok": true,
+           "why": "Đúng: C = Đô Mi Son, Am = La Đô Mi."
+          },
+          {
+           "text": "Son và La",
+           "ok": false,
+           "why": "Son chỉ có trong C, La chỉ có trong Am."
+          },
+          {
+           "text": "Không có nốt chung",
+           "ok": false,
+           "why": "Hai hợp âm chung hai nốt Đô và Mi."
+          }
+         ],
+         "explanation": "So từng nốt của hai hợp âm."
+        },
+        {
+         "key": "son_truong",
+         "question": "Hoá biểu (dấu hoá đầu khuông) của giọng Son trưởng là:",
+         "options": [
+          {
+           "text": "Một dấu thăng: Fa#",
+           "ok": true,
+           "why": "Đúng: gam Son trưởng cần Fa# để có nửa cung giữa bậc VII và VIII."
+          },
+          {
+           "text": "Một dấu giáng: Si♭",
+           "ok": false,
+           "why": "Si♭ là hoá biểu của Fa trưởng."
+          },
+          {
+           "text": "Không có dấu hoá",
+           "ok": false,
+           "why": "Không dấu hoá là Đô trưởng hoặc La thứ."
+          }
+         ],
+         "explanation": "Son trưởng: Fa#."
+        },
+        {
+         "key": "fa_truong",
+         "question": "Hoá biểu của giọng Fa trưởng là:",
+         "options": [
+          {
+           "text": "Một dấu giáng: Si♭",
+           "ok": true,
+           "why": "Đúng: Fa – Son – La – Si♭ để có nửa cung giữa bậc III và IV."
+          },
+          {
+           "text": "Một dấu thăng: Fa#",
+           "ok": false,
+           "why": "Fa# là hoá biểu của Son trưởng."
+          },
+          {
+           "text": "Hai dấu thăng",
+           "ok": false,
+           "why": "Hai dấu thăng là giọng Rê trưởng."
+          }
+         ],
+         "explanation": "Fa trưởng: Si♭."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "an9.nhac_cu",
+   "grade": 9,
+   "order": 4,
+   "title": "Nhạc cụ",
+   "lessons": [
+    {
+     "key": "an9.hoa_tau_lop",
+     "order": 1,
+     "title": "Hoà tấu nhạc cụ theo nhóm",
+     "description": "Thực hành hoà tấu giai điệu và tiết tấu cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an9.thuong_thuc",
+   "grade": 9,
+   "order": 5,
+   "title": "Thường thức âm nhạc",
+   "lessons": [
+    {
+     "key": "an9.the_loai",
+     "order": 1,
+     "title": "Thể loại âm nhạc và sân khấu truyền thống",
+     "description": "Phân biệt một số thể loại âm nhạc và loại hình sân khấu truyền thống Việt Nam.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu đặc điểm của hành khúc, hát ru, giao hưởng, opera, concerto…",
+      "Nêu đặc điểm của chèo, tuồng, cải lương, múa rối nước"
+     ],
+     "summary": [
+      "Hành khúc nhịp đều, khoẻ, hợp bước đi; hát ru chậm, êm; giao hưởng là tác phẩm lớn cho dàn nhạc.",
+      "Opera là kịch hát có ca sĩ, dàn nhạc và sân khấu; concerto có nhạc cụ độc tấu cùng dàn nhạc.",
+      "Chèo: sân khấu dân gian đồng bằng Bắc Bộ; tuồng (hát bội): diễn viên vẽ mặt, động tác ước lệ; cải lương ra đời ở Nam Bộ đầu thế kỉ XX; múa rối nước điều khiển con rối trên mặt nước."
+     ],
+     "examples": [
+      {
+       "title": "Concerto",
+       "lines": [
+        "Một nghệ sĩ violin độc tấu, dàn nhạc giao hưởng hoà tấu cùng."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Thể loại nào?",
+       "tasks": [
+        {
+         "key": "the_loai_1",
+         "prompt": "Ghép thể loại với đặc điểm.",
+         "pairs": [
+          [
+           "Hành khúc",
+           "Nhịp đều, khoẻ, hợp bước đi"
+          ],
+          [
+           "Hát ru",
+           "Chậm, êm, dỗ trẻ ngủ"
+          ],
+          [
+           "Giao hưởng",
+           "Tác phẩm lớn cho dàn nhạc"
+          ],
+          [
+           "Opera",
+           "Kịch hát có ca sĩ, dàn nhạc, sân khấu"
+          ]
+         ],
+         "explanation": "Mỗi thể loại có tính chất và mục đích riêng."
+        },
+        {
+         "key": "the_loai_2",
+         "prompt": "Ghép thể loại với đặc điểm.",
+         "pairs": [
+          [
+           "Concerto",
+           "Nhạc cụ độc tấu cùng dàn nhạc"
+          ],
+          [
+           "Hợp xướng",
+           "Nhiều người hát chia nhiều bè"
+          ],
+          [
+           "Nhạc thính phòng",
+           "Nhóm nhạc nhỏ, không gian nhỏ"
+          ]
+         ],
+         "explanation": "Concerto nổi bật nhạc cụ độc tấu; hợp xướng là nhiều bè; nhạc thính phòng dành cho nhóm nhỏ."
+        },
+        {
+         "key": "san_khau",
+         "prompt": "Ghép loại hình sân khấu với đặc điểm.",
+         "pairs": [
+          [
+           "Chèo",
+           "Sân khấu dân gian đồng bằng Bắc Bộ"
+          ],
+          [
+           "Tuồng (hát bội)",
+           "Diễn viên vẽ mặt, động tác ước lệ"
+          ],
+          [
+           "Cải lương",
+           "Ra đời ở Nam Bộ đầu thế kỉ XX"
+          ],
+          [
+           "Múa rối nước",
+           "Con rối điều khiển trên mặt nước"
+          ]
+         ],
+         "explanation": "Các loại hình sân khấu truyền thống đều kết hợp âm nhạc, hát và diễn xuất."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "an9.am_nhac_nghe_nghiep",
+     "order": 2,
+     "title": "Âm nhạc và nghề nghiệp",
+     "description": "Tìm hiểu một số nghề liên quan đến âm nhạc.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an10.hat",
+   "grade": 10,
+   "order": 1,
+   "title": "Hát",
+   "lessons": [
+    {
+     "key": "an10.ky_thuat_hat",
+     "order": 1,
+     "title": "Kĩ thuật hát: hơi thở, khẩu hình, vang",
+     "description": "Luyện thanh và kĩ thuật hát cùng thầy cô (thực hành).",
+     "status": "planned"
+    },
+    {
+     "key": "an10.hat_tu_chon",
+     "order": 2,
+     "title": "Hát một ca khúc Việt Nam tự chọn",
+     "description": "Tập và trình diễn ca khúc (thực hành trên lớp).",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an10.ly_thuyet",
+   "grade": 10,
+   "order": 2,
+   "title": "Lí thuyết âm nhạc",
+   "lessons": [
+    {
+     "key": "an10.giong_hat",
+     "order": 1,
+     "title": "Các loại giọng hát",
+     "description": "Biết tên và xếp các loại giọng hát nữ, nam theo âm vực.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Kể tên sáu loại giọng hát chính",
+      "Xếp các giọng từ cao đến trầm"
+     ],
+     "summary": [
+      "Giọng nữ: nữ cao (soprano), nữ trung (mezzo-soprano), nữ trầm (alto).",
+      "Giọng nam: nam cao (tenor), nam trung (baritone), nam trầm (bass).",
+      "Trong hợp xướng bốn bè thường gặp: soprano, alto, tenor, bass."
+     ],
+     "examples": [
+      {
+       "title": "Hợp xướng 4 bè",
+       "lines": [
+        "Soprano – Alto – Tenor – Bass (SATB)"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Từ cao đến trầm",
+       "tasks": [
+        {
+         "key": "nu",
+         "prompt": "Xếp các giọng nữ từ cao đến trầm.",
+         "items": [
+          "Nữ cao (soprano)",
+          "Nữ trung (mezzo-soprano)",
+          "Nữ trầm (alto)"
+         ],
+         "explanation": "Soprano cao nhất, rồi mezzo-soprano, alto trầm nhất trong giọng nữ.",
+         "first_label": "Cao",
+         "last_label": "Trầm"
+        },
+        {
+         "key": "nam",
+         "prompt": "Xếp các giọng nam từ cao đến trầm.",
+         "items": [
+          "Nam cao (tenor)",
+          "Nam trung (baritone)",
+          "Nam trầm (bass)"
+         ],
+         "explanation": "Tenor cao nhất, baritone ở giữa, bass trầm nhất.",
+         "first_label": "Cao",
+         "last_label": "Trầm"
+        },
+        {
+         "key": "satb",
+         "prompt": "Xếp bốn bè hợp xướng từ cao đến trầm.",
+         "items": [
+          "Soprano",
+          "Alto",
+          "Tenor",
+          "Bass"
+         ],
+         "explanation": "SATB: hai bè nữ (soprano, alto) cao hơn hai bè nam (tenor, bass).",
+         "first_label": "Cao",
+         "last_label": "Trầm"
+        },
+        {
+         "key": "sau_giong",
+         "prompt": "Xếp các giọng từ trầm đến cao.",
+         "items": [
+          "Nam trầm (bass)",
+          "Nam trung (baritone)",
+          "Nam cao (tenor)",
+          "Nữ trầm (alto)",
+          "Nữ cao (soprano)"
+         ],
+         "explanation": "Thường thì giọng nữ cao hơn giọng nam cùng loại khoảng một quãng tám.",
+         "first_label": "Trầm",
+         "last_label": "Cao"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "an10.dan_nhac_giao_huong",
+     "order": 2,
+     "title": "Dàn nhạc giao hưởng",
+     "description": "Biết bốn bộ nhạc cụ của dàn nhạc giao hưởng và các nhạc cụ tiêu biểu.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Kể tên bốn bộ của dàn nhạc giao hưởng",
+      "Xếp nhạc cụ vào đúng bộ",
+      "Biết vai trò của nhạc trưởng"
+     ],
+     "summary": [
+      "Bộ dây: violin, viola, cello, contrabass (và đàn hạc).",
+      "Bộ gỗ: flute, oboe, clarinet, bassoon. Flute ngày nay làm bằng kim loại nhưng vẫn thuộc bộ gỗ.",
+      "Bộ đồng: trumpet, horn (kèn co), trombone, tuba. Bộ gõ: timpani, trống, cymbal, triangle…",
+      "Nhạc trưởng chỉ huy để cả dàn nhạc chơi thống nhất về nhịp độ, sắc thái."
+     ],
+     "examples": [
+      {
+       "title": "Bộ dây từ cao xuống trầm",
+       "lines": [
+        "violin → viola → cello → contrabass"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Bốn bộ của dàn nhạc",
+       "set": {
+        "title": "Nhạc cụ này thuộc bộ nào của dàn nhạc giao hưởng?",
+        "groups": [
+         {
+          "id": "day",
+          "label": "Bộ dây",
+          "icon": "🎻"
+         },
+         {
+          "id": "go_wood",
+          "label": "Bộ gỗ",
+          "icon": "🪈"
+         },
+         {
+          "id": "dong",
+          "label": "Bộ đồng",
+          "icon": "🎺"
+         },
+         {
+          "id": "go",
+          "label": "Bộ gõ",
+          "icon": "🥁"
+         }
+        ],
+        "cards": [
+         {
+          "key": "violin",
+          "text": "Violin",
+          "picture": "🎻",
+          "group": "day",
+          "explanation": "Violin là nhạc cụ cao nhất của bộ dây."
+         },
+         {
+          "key": "cello",
+          "text": "Cello",
+          "picture": "🎻",
+          "group": "day",
+          "explanation": "Cello là nhạc cụ dây kéo vĩ, đặt giữa hai chân khi chơi."
+         },
+         {
+          "key": "contrabass",
+          "text": "Contrabass",
+          "picture": "🎻",
+          "group": "day",
+          "explanation": "Contrabass to và trầm nhất bộ dây."
+         },
+         {
+          "key": "flute",
+          "text": "Flute (sáo ngang)",
+          "picture": "🪈",
+          "group": "go_wood",
+          "explanation": "Flute làm bằng kim loại nhưng vẫn xếp vào bộ gỗ theo truyền thống."
+         },
+         {
+          "key": "oboe",
+          "text": "Oboe",
+          "picture": "🪈",
+          "group": "go_wood",
+          "explanation": "Oboe là kèn dăm kép của bộ gỗ."
+         },
+         {
+          "key": "clarinet",
+          "text": "Clarinet",
+          "picture": "🪈",
+          "group": "go_wood",
+          "explanation": "Clarinet là kèn dăm đơn của bộ gỗ."
+         },
+         {
+          "key": "trumpet",
+          "text": "Trumpet",
+          "picture": "🎺",
+          "group": "dong",
+          "explanation": "Trumpet là kèn đồng cao nhất của dàn nhạc."
+         },
+         {
+          "key": "trombone",
+          "text": "Trombone",
+          "picture": "🎺",
+          "group": "dong",
+          "explanation": "Trombone có ống trượt để đổi cao độ, thuộc bộ đồng."
+         },
+         {
+          "key": "tuba",
+          "text": "Tuba",
+          "picture": "🎺",
+          "group": "dong",
+          "explanation": "Tuba to và trầm nhất bộ đồng."
+         },
+         {
+          "key": "timpani",
+          "text": "Timpani (trống định âm)",
+          "picture": "🥁",
+          "group": "go",
+          "explanation": "Timpani là trống lớn có thể chỉnh cao độ, thuộc bộ gõ."
+         },
+         {
+          "key": "cymbal",
+          "text": "Cymbal (chũm choẹ)",
+          "picture": "🥁",
+          "group": "go",
+          "explanation": "Cymbal là hai đĩa kim loại đập vào nhau, thuộc bộ gõ."
+         }
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "an10.nhac_cu",
+   "grade": 10,
+   "order": 3,
+   "title": "Nhạc cụ",
+   "lessons": [
+    {
+     "key": "an10.nhac_cu_tu_chon",
+     "order": 1,
+     "title": "Nhạc cụ tự chọn: kĩ thuật cơ bản",
+     "description": "Thực hành guitar, organ, sáo hoặc nhạc cụ dân tộc cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "an10.dem_hop_am",
+     "order": 2,
+     "title": "Đệm hát với hợp âm đơn giản",
+     "description": "Thực hành đệm hát (trên lớp).",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an10.thuong_thuc",
+   "grade": 10,
+   "order": 4,
+   "title": "Nghe nhạc và thường thức âm nhạc",
+   "lessons": [
+    {
+     "key": "an10.nghe_tac_pham",
+     "order": 1,
+     "title": "Nghe và phân tích một tác phẩm âm nhạc",
+     "description": "Nghe tác phẩm cùng thầy cô, nêu cảm nhận về giai điệu, nhịp điệu, hoà âm. Ứng dụng chưa phát âm thanh: phần nghe, hát và chơi nhạc cụ học cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "an10.thoi_ki_phuong_tay",
+     "order": 2,
+     "title": "Các thời kì âm nhạc phương Tây",
+     "description": "Biết thứ tự các thời kì âm nhạc phương Tây và nhạc sĩ tiêu biểu của mỗi thời kì.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Xếp các thời kì Baroque, Cổ điển, Lãng mạn, Hiện đại theo thời gian",
+      "Ghép nhạc sĩ tiêu biểu với thời kì"
+     ],
+     "summary": [
+      "Baroque (khoảng 1600–1750): Bach, Vivaldi, Handel.",
+      "Cổ điển (khoảng 1750–1820): Haydn, Mozart, Beethoven (Beethoven là cầu nối sang Lãng mạn).",
+      "Lãng mạn (thế kỉ XIX): Schubert, Chopin, Tchaikovsky. Thế kỉ XX: nhiều trường phái mới như ấn tượng (Debussy)."
+     ],
+     "examples": [
+      {
+       "title": "Mốc thời gian",
+       "lines": [
+        "Bach mất năm 1750 – thường coi là mốc kết thúc thời Baroque."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Dòng thời gian âm nhạc",
+       "tasks": [
+        {
+         "key": "thoi_ki",
+         "prompt": "Xếp các thời kì âm nhạc phương Tây theo thời gian.",
+         "items": [
+          "Baroque",
+          "Cổ điển",
+          "Lãng mạn",
+          "Thế kỉ XX"
+         ],
+         "explanation": "Baroque → Cổ điển → Lãng mạn → thế kỉ XX.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "nhac_si_1",
+         "prompt": "Xếp các nhạc sĩ theo thời kì, từ sớm đến muộn.",
+         "items": [
+          "Bach",
+          "Mozart",
+          "Chopin",
+          "Debussy"
+         ],
+         "explanation": "Bach (Baroque) → Mozart (Cổ điển) → Chopin (Lãng mạn) → Debussy (cuối XIX – đầu XX).",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "nhac_si_2",
+         "prompt": "Xếp các nhạc sĩ theo thời kì, từ sớm đến muộn.",
+         "items": [
+          "Vivaldi",
+          "Haydn",
+          "Tchaikovsky"
+         ],
+         "explanation": "Vivaldi (Baroque) → Haydn (Cổ điển) → Tchaikovsky (Lãng mạn).",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "tac_pham",
+         "prompt": "Xếp tác phẩm theo thời kì của nhạc sĩ, từ sớm đến muộn.",
+         "items": [
+          "Bốn mùa (Vivaldi)",
+          "Giao hưởng số 40 (Mozart)",
+          "Hồ thiên nga (Tchaikovsky)"
+         ],
+         "explanation": "Baroque → Cổ điển → Lãng mạn.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        }
+       ]
+      },
+      {
+       "game": "match",
+       "title": "Nhạc sĩ và thời kì",
+       "tasks": [
+        {
+         "key": "baroque_codien",
+         "prompt": "Ghép nhạc sĩ với thời kì.",
+         "pairs": [
+          [
+           "Bach",
+           "Baroque"
+          ],
+          [
+           "Haydn",
+           "Cổ điển"
+          ],
+          [
+           "Chopin",
+           "Lãng mạn"
+          ]
+         ],
+         "explanation": "Bach – Baroque; Haydn – Cổ điển; Chopin – Lãng mạn."
+        },
+        {
+         "key": "dac_diem",
+         "prompt": "Ghép thời kì với đặc điểm tiêu biểu.",
+         "pairs": [
+          [
+           "Baroque",
+           "Nhiều bè đan xen (phức điệu), dùng đàn harpsichord"
+          ],
+          [
+           "Cổ điển",
+           "Cân đối, rõ ràng; hình thức sonata, giao hưởng"
+          ],
+          [
+           "Lãng mạn",
+           "Đề cao cảm xúc cá nhân, tình yêu quê hương"
+          ]
+         ],
+         "explanation": "Mỗi thời kì có phong cách riêng."
+        },
+        {
+         "key": "nhac_si_tp",
+         "prompt": "Ghép nhạc sĩ với tác phẩm.",
+         "pairs": [
+          [
+           "Vivaldi",
+           "Bốn mùa"
+          ],
+          [
+           "Beethoven",
+           "Giao hưởng số 9"
+          ],
+          [
+           "Schubert",
+           "Giao hưởng Bỏ dở"
+          ],
+          [
+           "Debussy",
+           "Ánh trăng (Clair de lune)"
+          ]
+         ],
+         "explanation": "Giao hưởng số 9 của Beethoven có chương cuối Khúc hoan ca."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "an11.hat",
+   "grade": 11,
+   "order": 1,
+   "title": "Hát",
+   "lessons": [
+    {
+     "key": "an11.hat_be",
+     "order": 1,
+     "title": "Hát bè và hát hợp xướng",
+     "description": "Thực hành hát nhiều bè cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "an11.hat_dan_ca",
+     "order": 2,
+     "title": "Hát dân ca với luyến láy đặc trưng",
+     "description": "Tập hát dân ca các vùng miền (thực hành).",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an11.ly_thuyet",
+   "grade": 11,
+   "order": 2,
+   "title": "Lí thuyết âm nhạc",
+   "lessons": [
+    {
+     "key": "an11.hinh_thuc",
+     "order": 1,
+     "title": "Hình thức âm nhạc",
+     "description": "Nhận biết hình thức một đoạn, hai đoạn, ba đoạn và rondo qua sơ đồ.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Hiểu câu, đoạn nhạc",
+      "Nhận biết sơ đồ A, A–B, A–B–A, rondo",
+      "Đọc được sơ đồ hình thức của một bài hát"
+     ],
+     "summary": [
+      "Câu nhạc là một ý nhạc tương đối trọn vẹn; nhiều câu tạo thành đoạn nhạc.",
+      "Một đoạn đơn: A. Hai đoạn đơn: A – B. Ba đoạn đơn: A – B – A (đoạn A trở lại).",
+      "Rondo: đoạn chính A trở lại nhiều lần xen các đoạn khác: A – B – A – C – A."
+     ],
+     "examples": [
+      {
+       "title": "Sơ đồ",
+       "lines": [
+        "A (a + a') – B (b + a'): hai đoạn đơn, mỗi đoạn hai câu"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Sơ đồ hình thức",
+       "tasks": [
+        {
+         "key": "so_do",
+         "prompt": "Ghép sơ đồ với tên hình thức.",
+         "pairs": [
+          [
+           "A",
+           "Hình thức một đoạn đơn"
+          ],
+          [
+           "A – B",
+           "Hình thức hai đoạn đơn"
+          ],
+          [
+           "A – B – A",
+           "Hình thức ba đoạn đơn"
+          ],
+          [
+           "A – B – A – C – A",
+           "Hình thức rondo"
+          ]
+         ],
+         "explanation": "Chữ cái giống nhau là đoạn nhạc giống (hoặc gần giống) nhau."
+        },
+        {
+         "key": "thuat_ngu",
+         "prompt": "Ghép thuật ngữ với ý nghĩa.",
+         "pairs": [
+          [
+           "Câu nhạc",
+           "Một ý nhạc tương đối trọn vẹn"
+          ],
+          [
+           "Đoạn nhạc",
+           "Gồm nhiều câu nhạc"
+          ],
+          [
+           "Điệp khúc",
+           "Phần nhắc lại, thường là cao trào của bài"
+          ]
+         ],
+         "explanation": "Câu nhạc ghép thành đoạn; điệp khúc là phần được nhắc lại."
+        },
+        {
+         "key": "dac_diem",
+         "prompt": "Ghép hình thức với đặc điểm.",
+         "pairs": [
+          [
+           "Ba đoạn đơn",
+           "Đoạn đầu được nhắc lại ở cuối"
+          ],
+          [
+           "Rondo",
+           "Đoạn chính trở lại nhiều lần"
+          ],
+          [
+           "Hai đoạn đơn",
+           "Hai đoạn tương phản, không nhắc đoạn đầu"
+          ]
+         ],
+         "explanation": "Sự nhắc lại và tương phản tạo nên hình thức."
+        }
+       ]
+      },
+      {
+       "game": "choice",
+       "title": "Đọc sơ đồ",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "aba",
+         "question": "Sơ đồ bài hát: a – a' | b – a'. Bài có mấy đoạn?",
+         "options": [
+          {
+           "text": "Hai đoạn: A (a – a') và B (b – a')",
+           "ok": true,
+           "why": "Đúng: hai đoạn, mỗi đoạn hai câu."
+          },
+          {
+           "text": "Bốn đoạn",
+           "ok": false,
+           "why": "a, a', b là các câu nhạc, không phải đoạn."
+          },
+          {
+           "text": "Một đoạn",
+           "ok": false,
+           "why": "Dấu | chia bài thành hai đoạn."
+          }
+         ],
+         "explanation": "Chữ thường là câu, chữ hoa là đoạn."
+        },
+        {
+         "key": "rondo_nhan",
+         "question": "Sơ đồ A – B – A – C – A – D – A là hình thức gì?",
+         "options": [
+          {
+           "text": "Rondo",
+           "ok": true,
+           "why": "Đúng: đoạn chính A trở lại xen giữa các đoạn khác."
+          },
+          {
+           "text": "Ba đoạn đơn",
+           "ok": false,
+           "why": "Ba đoạn đơn chỉ có A – B – A."
+          },
+          {
+           "text": "Biến tấu",
+           "ok": false,
+           "why": "Biến tấu là A – A1 – A2… thay đổi dần một chủ đề."
+          }
+         ],
+         "explanation": "Rondo: A trở lại nhiều lần."
+        },
+        {
+         "key": "bien_tau",
+         "question": "Sơ đồ A – A1 – A2 – A3 cho thấy hình thức nào?",
+         "options": [
+          {
+           "text": "Biến tấu: một chủ đề được biến đổi nhiều lần",
+           "ok": true,
+           "why": "Đúng: A1, A2, A3 là các biến tấu của A."
+          },
+          {
+           "text": "Rondo",
+           "ok": false,
+           "why": "Rondo có các đoạn khác hẳn (B, C) xen giữa."
+          },
+          {
+           "text": "Hai đoạn đơn",
+           "ok": false,
+           "why": "Không có đoạn B tương phản."
+          }
+         ],
+         "explanation": "Biến tấu: cùng một chủ đề, đổi dần giai điệu, tiết tấu, hoà âm."
+        },
+        {
+         "key": "cau_a_phay",
+         "question": "Trong sơ đồ a – a', câu a' có quan hệ gì với câu a?",
+         "options": [
+          {
+           "text": "Gần giống câu a, có thay đổi một phần",
+           "ok": true,
+           "why": "Đúng: dấu phẩy trên (a') chỉ sự nhắc lại có thay đổi."
+          },
+          {
+           "text": "Hoàn toàn khác câu a",
+           "ok": false,
+           "why": "Câu khác hẳn sẽ ghi bằng chữ khác, ví dụ b."
+          },
+          {
+           "text": "Là câu hát không có lời",
+           "ok": false,
+           "why": "Kí hiệu a' không nói về lời ca."
+          }
+         ],
+         "explanation": "a' = a có thay đổi."
+        },
+        {
+         "key": "ba_doan",
+         "question": "Bài hát có đoạn đầu vui, đoạn giữa êm dịu, rồi đoạn đầu trở lại. Sơ đồ là gì?",
+         "options": [
+          {
+           "text": "A – B – A",
+           "ok": true,
+           "why": "Đúng: đoạn đầu (A) nhắc lại ở cuối, đoạn giữa (B) tương phản."
+          },
+          {
+           "text": "A – B",
+           "ok": false,
+           "why": "Còn đoạn A trở lại ở cuối."
+          },
+          {
+           "text": "A – B – C",
+           "ok": false,
+           "why": "Đoạn cuối giống đoạn đầu nên ghi là A."
+          }
+         ],
+         "explanation": "Đoạn giống nhau ghi cùng chữ."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "an11.nhac_cu",
+   "grade": 11,
+   "order": 3,
+   "title": "Nhạc cụ",
+   "lessons": [
+    {
+     "key": "an11.hoa_tau",
+     "order": 1,
+     "title": "Hoà tấu nhóm nhạc cụ",
+     "description": "Thực hành hoà tấu, đệm hát cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "an11.nhac_cu_dan_toc",
+     "order": 2,
+     "title": "Chơi một nhạc cụ dân tộc tự chọn",
+     "description": "Thực hành kĩ thuật cơ bản (trên lớp).",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an11.thuong_thuc",
+   "grade": 11,
+   "order": 4,
+   "title": "Nghe nhạc và thường thức âm nhạc",
+   "lessons": [
+    {
+     "key": "an11.nghe_tac_pham",
+     "order": 1,
+     "title": "Nghe và phân tích một tác phẩm âm nhạc",
+     "description": "Nghe tác phẩm cùng thầy cô, nêu cảm nhận về giai điệu, nhịp điệu, hoà âm. Ứng dụng chưa phát âm thanh: phần nghe, hát và chơi nhạc cụ học cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "an11.nhac_cu_san_khau",
+     "order": 2,
+     "title": "Nhạc cụ trong âm nhạc truyền thống Việt Nam",
+     "description": "Biết nhạc cụ chính và cách trình diễn của một số loại hình âm nhạc truyền thống.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được nhạc cụ đặc trưng của ca trù, chèo, đờn ca tài tử, nhã nhạc",
+      "Hiểu vai trò của nhạc cụ trong từng loại hình"
+     ],
+     "summary": [
+      "Ca trù: đàn đáy, phách (người hát gõ) và trống chầu (người thưởng thức đánh để khen chê).",
+      "Chèo: trống, đàn nhị, sáo, đàn nguyệt…; tiếng trống chèo dẫn dắt nhịp diễn.",
+      "Đờn ca tài tử: đàn kìm (đàn nguyệt), đàn tranh, đàn cò, guitar phím lõm…; nhã nhạc có biên chế dàn nhạc cung đình lớn."
+     ],
+     "examples": [
+      {
+       "title": "Trống chầu",
+       "lines": [
+        "Trong ca trù, quan viên đánh trống chầu để khen người hát, người đàn."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Nhạc cụ trong loại hình",
+       "tasks": [
+        {
+         "key": "ca_tru",
+         "prompt": "Ghép nhạc cụ ca trù với người chơi.",
+         "pairs": [
+          [
+           "Phách",
+           "Đào nương (người hát) tự gõ"
+          ],
+          [
+           "Đàn đáy",
+           "Kép đàn chơi đệm"
+          ],
+          [
+           "Trống chầu",
+           "Quan viên đánh để khen chê"
+          ]
+         ],
+         "explanation": "Ca trù có ba thành phần: đào nương, kép đàn, quan viên."
+        },
+        {
+         "key": "loai_hinh",
+         "prompt": "Ghép loại hình với nhạc cụ đặc trưng.",
+         "pairs": [
+          [
+           "Ca trù",
+           "Đàn đáy"
+          ],
+          [
+           "Đờn ca tài tử",
+           "Guitar phím lõm"
+          ],
+          [
+           "Hát Then",
+           "Đàn tính"
+          ],
+          [
+           "Cồng chiêng Tây Nguyên",
+           "Bộ cồng, chiêng đồng"
+          ]
+         ],
+         "explanation": "Đàn tính đi cùng hát Then; guitar phím lõm được người Nam Bộ cải biến để chơi đờn ca tài tử."
+        },
+        {
+         "key": "dac_diem",
+         "prompt": "Ghép nhạc cụ với đặc điểm.",
+         "pairs": [
+          [
+           "Đàn đáy",
+           "Cần đàn rất dài, ba dây"
+          ],
+          [
+           "Đàn tính",
+           "Bầu đàn làm từ quả bầu khô"
+          ],
+          [
+           "Đàn nguyệt",
+           "Hộp đàn tròn, hai dây"
+          ],
+          [
+           "Đàn bầu",
+           "Một dây, có cần để uốn"
+          ]
+         ],
+         "explanation": "Mỗi nhạc cụ dân tộc có cấu tạo đặc biệt tạo nên âm sắc riêng."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "an11.am_nhac_cong_nghe",
+     "order": 3,
+     "title": "Âm nhạc và công nghệ: phần mềm ghi âm, kí âm",
+     "description": "Tìm hiểu và thực hành phần mềm âm nhạc cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an12.hat",
+   "grade": 12,
+   "order": 1,
+   "title": "Hát",
+   "lessons": [
+    {
+     "key": "an12.hat_trinh_dien",
+     "order": 1,
+     "title": "Trình diễn ca khúc tự chọn",
+     "description": "Tập luyện và trình diễn trước lớp (thực hành).",
+     "status": "planned"
+    },
+    {
+     "key": "an12.hat_hop_xuong",
+     "order": 2,
+     "title": "Hợp xướng bốn bè",
+     "description": "Thực hành hát bè cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an12.ly_thuyet",
+   "grade": 12,
+   "order": 2,
+   "title": "Lí thuyết âm nhạc",
+   "lessons": [
+    {
+     "key": "an12.cau_ket",
+     "order": 1,
+     "title": "Hoà âm: tiến trình hợp âm và câu kết",
+     "description": "Hiểu tiến trình hợp âm I – IV – V – I và các kiểu kết thường gặp.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Xác định hợp âm bậc I, IV, V của một số giọng trưởng",
+      "Phân biệt kết hoàn toàn và kết nửa"
+     ],
+     "summary": [
+      "Ba hợp âm chính của giọng trưởng: bậc I (chủ), IV (hạ át), V (át).",
+      "Kết hoàn toàn: V → I, nghe trọn vẹn, thường ở cuối bài. Kết nửa: dừng ở V, nghe còn chờ đợi.",
+      "Giọng Son trưởng: I = G, IV = C, V = D. Giọng Fa trưởng: I = F, IV = B♭, V = C."
+     ],
+     "examples": [
+      {
+       "title": "Đô trưởng",
+       "lines": [
+        "C – F – G – C: I – IV – V – I"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Tiến trình hợp âm",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "ket_hoan_toan",
+         "question": "Kết hoàn toàn trong giọng trưởng thường là tiến trình nào?",
+         "options": [
+          {
+           "text": "V → I",
+           "ok": true,
+           "why": "Đúng: từ hợp âm át về hợp âm chủ, nghe trọn vẹn."
+          },
+          {
+           "text": "I → V",
+           "ok": false,
+           "why": "Dừng ở V là kết nửa, còn chờ đợi."
+          },
+          {
+           "text": "I → IV",
+           "ok": false,
+           "why": "Đây không phải kiểu kết thường dùng để khép bài."
+          }
+         ],
+         "explanation": "Kết hoàn toàn: át → chủ."
+        },
+        {
+         "key": "ket_nua",
+         "question": "Câu nhạc dừng ở hợp âm bậc V gọi là gì?",
+         "options": [
+          {
+           "text": "Kết nửa",
+           "ok": true,
+           "why": "Đúng: dừng ở V tạo cảm giác chưa xong."
+          },
+          {
+           "text": "Kết hoàn toàn",
+           "ok": false,
+           "why": "Kết hoàn toàn dừng ở I."
+          },
+          {
+           "text": "Chuyển giọng",
+           "ok": false,
+           "why": "Chuyển giọng là đổi sang giọng khác."
+          }
+         ],
+         "explanation": "Kết nửa thường ở giữa bài."
+        },
+        {
+         "key": "son_truong",
+         "question": "Ba hợp âm I, IV, V của giọng Son trưởng là:",
+         "options": [
+          {
+           "text": "G, C, D",
+           "ok": true,
+           "why": "Đúng: Son (I), Đô (IV), Rê (V)."
+          },
+          {
+           "text": "G, A, B",
+           "ok": false,
+           "why": "Đếm sai bậc: A là II, B là III."
+          },
+          {
+           "text": "C, F, G",
+           "ok": false,
+           "why": "Đây là I, IV, V của Đô trưởng."
+          }
+         ],
+         "explanation": "Đếm bậc từ Son."
+        },
+        {
+         "key": "fa_truong",
+         "question": "Hợp âm bậc IV của giọng Fa trưởng là:",
+         "options": [
+          {
+           "text": "B♭ (Si giáng trưởng)",
+           "ok": true,
+           "why": "Đúng: bậc IV từ Fa là Si♭ (Fa trưởng có Si♭)."
+          },
+          {
+           "text": "B (Si trưởng)",
+           "ok": false,
+           "why": "Giọng Fa trưởng dùng Si♭, không dùng Si."
+          },
+          {
+           "text": "C",
+           "ok": false,
+           "why": "C là bậc V của Fa trưởng."
+          }
+         ],
+         "explanation": "Fa – Son – La – Si♭: bậc IV là Si♭."
+        },
+        {
+         "key": "at_cua_c",
+         "question": "Hợp âm át (bậc V) của giọng Đô trưởng gồm những nốt nào?",
+         "options": [
+          {
+           "text": "Son – Si – Rê",
+           "ok": true,
+           "why": "Đúng: hợp âm G là bậc V của Đô trưởng."
+          },
+          {
+           "text": "Fa – La – Đô",
+           "ok": false,
+           "why": "Đây là hợp âm F, bậc IV."
+          },
+          {
+           "text": "Mi – Son – Si",
+           "ok": false,
+           "why": "Đây là hợp âm Em, bậc III."
+          }
+         ],
+         "explanation": "Bậc V của Đô trưởng là Son: G = Son – Si – Rê."
+        },
+        {
+         "key": "chuyen_giong",
+         "question": "Bài hát đang ở giọng Đô trưởng, đến điệp khúc xuất hiện Fa# thường xuyên. Có thể đã xảy ra điều gì?",
+         "options": [
+          {
+           "text": "Chuyển sang giọng Son trưởng",
+           "ok": true,
+           "why": "Đúng: Fa# là dấu hoá của Son trưởng, giọng gần với Đô trưởng."
+          },
+          {
+           "text": "Đổi sang nhịp 3/4",
+           "ok": false,
+           "why": "Dấu hoá liên quan cao độ, không liên quan nhịp."
+          },
+          {
+           "text": "Bài hát chuyển sang giọng Fa trưởng",
+           "ok": false,
+           "why": "Fa trưởng có Si♭, không có Fa#."
+          }
+         ],
+         "explanation": "Dấu hoá mới xuất hiện đều đặn là dấu hiệu chuyển giọng."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "an12.nhac_cu",
+   "grade": 12,
+   "order": 3,
+   "title": "Nhạc cụ",
+   "lessons": [
+    {
+     "key": "an12.nhac_cu_trinh_dien",
+     "order": 1,
+     "title": "Trình diễn nhạc cụ tự chọn",
+     "description": "Thực hành và trình diễn một tác phẩm ngắn (trên lớp).",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "an12.thuong_thuc",
+   "grade": 12,
+   "order": 4,
+   "title": "Nghe nhạc và thường thức âm nhạc",
+   "lessons": [
+    {
+     "key": "an12.nghe_tac_pham",
+     "order": 1,
+     "title": "Nghe và phân tích một tác phẩm âm nhạc",
+     "description": "Nghe tác phẩm cùng thầy cô, nêu cảm nhận về giai điệu, nhịp điệu, hoà âm. Ứng dụng chưa phát âm thanh: phần nghe, hát và chơi nhạc cụ học cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "an12.nghe_nghiep",
+     "order": 2,
+     "title": "Nghề nghiệp trong lĩnh vực âm nhạc",
+     "description": "Biết công việc của một số nghề âm nhạc để định hướng nghề nghiệp.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được công việc chính của các nghề âm nhạc",
+      "Biết một số con đường học tập nghề âm nhạc"
+     ],
+     "summary": [
+      "Nhạc sĩ sáng tác; ca sĩ, nhạc công biểu diễn; nhạc trưởng chỉ huy dàn nhạc, hợp xướng.",
+      "Kĩ sư âm thanh thu âm, phối trộn, xử lí âm thanh; nhà sản xuất âm nhạc lo toàn bộ một sản phẩm âm nhạc.",
+      "Giáo viên âm nhạc, nhà nghiên cứu âm nhạc (lí luận, dân tộc học âm nhạc) cũng là những nghề quan trọng."
+     ],
+     "examples": [
+      {
+       "title": "Một bản thu âm",
+       "lines": [
+        "Nhạc sĩ viết bài → ca sĩ, nhạc công thu → kĩ sư âm thanh hoà âm, chỉnh sửa → phát hành"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Nghề và công việc",
+       "tasks": [
+        {
+         "key": "nghe_1",
+         "prompt": "Ghép nghề với công việc chính.",
+         "pairs": [
+          [
+           "Nhạc sĩ",
+           "Sáng tác tác phẩm âm nhạc"
+          ],
+          [
+           "Nhạc trưởng",
+           "Chỉ huy dàn nhạc, hợp xướng"
+          ],
+          [
+           "Kĩ sư âm thanh",
+           "Thu âm, xử lí, phối trộn âm thanh"
+          ],
+          [
+           "Nhạc công",
+           "Biểu diễn nhạc cụ"
+          ]
+         ],
+         "explanation": "Mỗi nghề đảm nhận một phần trong đời sống âm nhạc."
+        },
+        {
+         "key": "nghe_2",
+         "prompt": "Ghép nghề với công việc chính.",
+         "pairs": [
+          [
+           "Nhà phối khí",
+           "Viết phần đệm cho từng nhạc cụ"
+          ],
+          [
+           "Nhà nghiên cứu âm nhạc",
+           "Tìm hiểu, sưu tầm, viết về âm nhạc"
+          ],
+          [
+           "Giáo viên âm nhạc",
+           "Dạy hát, nhạc cụ, kiến thức âm nhạc"
+          ]
+         ],
+         "explanation": "Phối khí, nghiên cứu, giảng dạy là những nghề cần kiến thức âm nhạc vững."
+        },
+        {
+         "key": "tinh_huong",
+         "prompt": "Ghép việc cần làm với người phù hợp.",
+         "pairs": [
+          [
+           "Viết giai điệu mới cho bài hát",
+           "Nhạc sĩ"
+          ],
+          [
+           "Làm cho tiếng hát và tiếng đàn trong bản thu cân bằng",
+           "Kĩ sư âm thanh"
+          ],
+          [
+           "Giữ nhịp độ chung cho cả dàn nhạc",
+           "Nhạc trưởng"
+          ]
+         ],
+         "explanation": "Đọc kĩ công việc để chọn đúng nghề."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "an12.ban_quyen",
+     "order": 3,
+     "title": "Bản quyền âm nhạc",
+     "description": "Biết tôn trọng quyền tác giả khi sử dụng, chia sẻ âm nhạc.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Hiểu tác phẩm âm nhạc được bảo hộ quyền tác giả",
+      "Biết cách dùng âm nhạc đúng luật trong các tình huống thường gặp"
+     ],
+     "summary": [
+      "Tác phẩm âm nhạc được bảo hộ quyền tác giả: người khác muốn dùng công khai (biểu diễn, phát sóng, đăng tải kiếm tiền) cần được phép và có thể phải trả tiền bản quyền.",
+      "Một số trường hợp sử dụng hợp lí được pháp luật cho phép, như trích dẫn để học tập, giảng dạy, nghiên cứu, có ghi rõ nguồn.",
+      "Khi chia sẻ, hãy dùng nguồn hợp pháp, ghi tên tác giả, ưu tiên nhạc có giấy phép cho phép dùng."
+     ],
+     "examples": [
+      {
+       "title": "Dùng nhạc cho video",
+       "lines": [
+        "Chọn nhạc có giấy phép miễn phí bản quyền, hoặc xin phép chủ sở hữu."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Dùng nhạc đúng luật",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "video_kiem_tien",
+         "question": "Bạn làm video bán hàng online và muốn dùng một ca khúc nổi tiếng làm nhạc nền. Nên làm gì?",
+         "options": [
+          {
+           "text": "Xin phép, mua quyền sử dụng hoặc chọn nhạc có giấy phép phù hợp",
+           "ok": true,
+           "why": "Đúng: dùng nhạc vào mục đích thương mại cần được phép."
+          },
+          {
+           "text": "Dùng luôn vì bài hát ai cũng biết",
+           "ok": false,
+           "why": "Nổi tiếng không có nghĩa là được tự do sử dụng."
+          },
+          {
+           "text": "Cắt ngắn bài hát rồi dùng, không cần xin phép",
+           "ok": false,
+           "why": "Cắt ngắn vẫn là sử dụng tác phẩm của người khác."
+          }
+         ],
+         "explanation": "Mục đích thương mại cần sự cho phép của chủ sở hữu quyền."
+        },
+        {
+         "key": "thuyet_trinh",
+         "question": "Bạn trích 20 giây một bản nhạc để minh hoạ bài thuyết trình môn Âm nhạc trên lớp. Cách nào phù hợp?",
+         "options": [
+          {
+           "text": "Trích ngắn, nêu rõ tên tác phẩm và tác giả",
+           "ok": true,
+           "why": "Đúng: trích dẫn hợp lí cho học tập, có ghi nguồn."
+          },
+          {
+           "text": "Trích và nói đó là bài mình sáng tác",
+           "ok": false,
+           "why": "Nhận vơ tác phẩm là vi phạm quyền nhân thân của tác giả."
+          },
+          {
+           "text": "Không ghi gì, ai hỏi thì thôi",
+           "ok": false,
+           "why": "Cần ghi rõ nguồn khi trích dẫn."
+          }
+         ],
+         "explanation": "Trích dẫn để học tập vẫn phải ghi nguồn và không làm sai lệch tác phẩm."
+        },
+        {
+         "key": "chep_loi",
+         "question": "Bạn thích một bài hát của nhạc sĩ khác và muốn đăng bản thu mình hát lên mạng. Cách nào phù hợp?",
+         "options": [
+          {
+           "text": "Ghi tên tác giả và tìm hiểu, làm đúng quy định về quyền biểu diễn của nền tảng",
+           "ok": true,
+           "why": "Đúng: tôn trọng tác giả và tuân thủ quy định bản quyền."
+          },
+          {
+           "text": "Đổi vài chữ trong lời rồi ghi là sáng tác của mình",
+           "ok": false,
+           "why": "Sửa lời rồi nhận là của mình là vi phạm quyền tác giả."
+          },
+          {
+           "text": "Đăng mà không nhắc đến tác giả",
+           "ok": false,
+           "why": "Tác giả có quyền được nêu tên."
+          }
+         ],
+         "explanation": "Quyền được đứng tên là quyền của tác giả."
+        },
+        {
+         "key": "tai_lau",
+         "question": "Bạn thấy một trang web cho tải miễn phí album vừa phát hành có bán bản quyền. Nên làm gì?",
+         "options": [
+          {
+           "text": "Nghe, mua qua nền tảng hợp pháp",
+           "ok": true,
+           "why": "Đúng: ủng hộ nghệ sĩ và đúng luật."
+          },
+          {
+           "text": "Tải về rồi chia sẻ cho cả lớp",
+           "ok": false,
+           "why": "Chia sẻ bản lậu làm thiệt hại cho tác giả, nghệ sĩ."
+          },
+          {
+           "text": "Tải về bán lại cho bạn bè",
+           "ok": false,
+           "why": "Bán bản lậu là vi phạm nghiêm trọng."
+          }
+         ],
+         "explanation": "Dùng nguồn hợp pháp là tôn trọng công sức người làm âm nhạc."
+        },
+        {
+         "key": "nhac_tu_viet",
+         "question": "Bạn tự sáng tác một bài hát. Điều nào đúng về quyền tác giả của bạn?",
+         "options": [
+          {
+           "text": "Quyền tác giả phát sinh khi tác phẩm được tạo ra và thể hiện dưới một hình thức nhất định",
+           "ok": true,
+           "why": "Đúng: đăng kí giúp làm bằng chứng nhưng không bắt buộc để có quyền."
+          },
+          {
+           "text": "Chỉ có quyền khi bài hát nổi tiếng",
+           "ok": false,
+           "why": "Quyền tác giả không phụ thuộc mức độ nổi tiếng."
+          },
+          {
+           "text": "Phải đủ 18 tuổi mới có quyền tác giả",
+           "ok": false,
+           "why": "Quyền tác giả không phụ thuộc tuổi."
+          }
+         ],
+         "explanation": "Theo Luật Sở hữu trí tuệ, quyền tác giả phát sinh khi tác phẩm được sáng tạo và định hình."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

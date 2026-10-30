@@ -47,7 +47,8 @@ def register(data: RegisterInput, request: Request, db: Session = Depends(get_db
         raise APIError(409, "email_taken", "Email already registered")
     display_name = data.display_name or data.email.split("@")[0][:80] or "Lunaria"
     user = User(email=data.email, password_hash=hash_password(data.password), display_name=display_name,
-                role="admin" if data.email.lower() in settings.admin_email_list else "user")
+                role="admin" if data.email.lower() in settings.admin_email_list else "user",
+                age=data.age, school_grade=data.school_grade)
     db.add(user)
     try:
         db.flush()

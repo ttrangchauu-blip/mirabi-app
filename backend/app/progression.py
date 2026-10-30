@@ -43,7 +43,7 @@ def record_level_ups(db: Session, user: User, previous_level: int, level: int, a
         event = "pet_hatched" if reached == 1 else "pet_evolved"
         title = None if reached == 1 else f"{user.pet_name or 'Pet'} đạt cấp {reached}"
         record_event(db, user, event, f"{'hatch' if reached == 1 else 'evolution'}:{user.pet}:{reached}",
-                     at=at, level=reached, title=title)
+                     at=at, level=reached, title=title, before_level=None if reached == 1 else reached - 1)
 
 
 def hatch(user: User, db: Session, progress: PetEvolution, at: datetime) -> None:

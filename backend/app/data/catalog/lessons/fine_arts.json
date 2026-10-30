@@ -1,0 +1,4852 @@
+{
+ "subject": "fine_arts",
+ "version": 1,
+ "organization": "topic",
+ "source_note": "Theo yêu cầu cần đạt môn Mĩ thuật (CT GDPT 2018): mĩ thuật tạo hình, mĩ thuật ứng dụng, yếu tố và nguyên lí tạo hình, lí luận và lịch sử mĩ thuật; tổ chức theo chủ đề, không theo mục lục bộ sách nào. Trò chơi ôn kiến thức và quy trình, không thay thế thực hành và không chấm sản phẩm sáng tạo.",
+ "chapters": [
+  {
+   "key": "mt1.lam_quen",
+   "grade": 1,
+   "order": 1,
+   "title": "Làm quen với mĩ thuật",
+   "lessons": [
+    {
+     "key": "mt1.do_dung_an_toan",
+     "order": 1,
+     "title": "Đồ dùng học mĩ thuật và cách dùng an toàn",
+     "description": "Biết chuẩn bị, dùng và cất giữ đồ dùng học mĩ thuật an toàn, sạch sẽ.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Kể tên đồ dùng học mĩ thuật: giấy, bút chì, màu, tẩy, kéo, hồ dán",
+      "Dùng kéo, màu, hồ dán an toàn",
+      "Giữ đồ dùng và chỗ ngồi sạch sẽ"
+     ],
+     "summary": [
+      "Đồ dùng học mĩ thuật: giấy, bút chì, tẩy, màu (sáp, chì, nước), bút lông, kéo đầu tròn, hồ dán.",
+      "Dùng kéo đầu tròn, không chĩa mũi kéo vào người khác; dính màu thì rửa tay, không đưa lên miệng.",
+      "Học xong: rửa bút, đậy nắp màu, cất đồ dùng gọn gàng.",
+      "Vẽ, nặn, cắt dán là thực hành cùng thầy cô; trò chơi chỉ ôn kiến thức và các bước, không chấm sản phẩm sáng tạo."
+     ],
+     "examples": [
+      {
+       "title": "Đưa kéo cho bạn",
+       "lines": [
+        "Khép lưỡi kéo, cầm phía lưỡi, đưa phần tay cầm về phía bạn."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Dùng đồ an toàn",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "cat_giay",
+         "question": "Em dùng kéo cắt giấy. Cách nào an toàn?",
+         "options": [
+          {
+           "text": "Dùng kéo đầu tròn, ngồi yên khi cắt",
+           "ok": true,
+           "why": "Đúng: kéo đầu tròn và ngồi yên giúp không bị thương."
+          },
+          {
+           "text": "Vừa cầm kéo vừa chạy quanh lớp",
+           "ok": false,
+           "why": "Chạy khi cầm kéo rất dễ ngã và đâm vào người."
+          },
+          {
+           "text": "Chĩa mũi kéo về phía bạn",
+           "ok": false,
+           "why": "Mũi kéo có thể làm bạn bị thương."
+          }
+         ],
+         "explanation": "Kéo dùng ngồi yên, mũi kéo hướng ra xa người."
+        },
+        {
+         "key": "dua_keo",
+         "question": "Bạn mượn kéo. Em đưa kéo thế nào?",
+         "options": [
+          {
+           "text": "Khép lưỡi kéo, đưa phần tay cầm cho bạn",
+           "ok": true,
+           "why": "Đúng: bạn cầm được tay cầm, không chạm vào lưỡi kéo."
+          },
+          {
+           "text": "Ném kéo sang cho bạn",
+           "ok": false,
+           "why": "Ném kéo rất nguy hiểm."
+          },
+          {
+           "text": "Chĩa mũi kéo vào bạn",
+           "ok": false,
+           "why": "Mũi kéo hướng vào bạn dễ gây thương tích."
+          }
+         ],
+         "explanation": "Đưa kéo: khép lưỡi, đưa tay cầm."
+        },
+        {
+         "key": "dinh_mau",
+         "question": "Màu vẽ dính đầy tay em. Em làm gì?",
+         "options": [
+          {
+           "text": "Rửa tay sạch bằng xà phòng",
+           "ok": true,
+           "why": "Đúng: rửa tay để không dính màu ra đồ vật và vào miệng."
+          },
+          {
+           "text": "Đưa tay lên miệng mút",
+           "ok": false,
+           "why": "Màu vẽ không ăn được, có thể gây hại."
+          },
+          {
+           "text": "Lau tay vào áo bạn",
+           "ok": false,
+           "why": "Làm bẩn áo bạn là không tôn trọng bạn."
+          }
+         ],
+         "explanation": "Dính màu: rửa tay với xà phòng."
+        },
+        {
+         "key": "rua_but",
+         "question": "Vẽ màu nước xong, em làm gì với bút lông?",
+         "options": [
+          {
+           "text": "Rửa sạch, để khô rồi cất",
+           "ok": true,
+           "why": "Đúng: bút sạch, khô sẽ dùng được lâu."
+          },
+          {
+           "text": "Ngâm bút trong cốc nước cả tuần",
+           "ok": false,
+           "why": "Ngâm lâu làm hỏng đầu bút."
+          },
+          {
+           "text": "Cất bút vào hộp khi còn đầy màu",
+           "ok": false,
+           "why": "Màu khô lại làm đầu bút cứng, hỏng."
+          }
+         ],
+         "explanation": "Giữ gìn đồ dùng: rửa sạch, để khô, cất gọn."
+        },
+        {
+         "key": "ho_dan",
+         "question": "Em lỡ làm hồ dán dính ra bàn. Em làm gì?",
+         "options": [
+          {
+           "text": "Lau sạch bằng khăn ẩm",
+           "ok": true,
+           "why": "Đúng: lau ngay thì bàn sạch, không dính."
+          },
+          {
+           "text": "Để nguyên cho khô",
+           "ok": false,
+           "why": "Hồ khô dính lại làm bẩn bàn và đồ vật."
+          },
+          {
+           "text": "Quệt sang vở của bạn",
+           "ok": false,
+           "why": "Làm bẩn vở bạn là không đúng."
+          }
+         ],
+         "explanation": "Giữ chỗ ngồi sạch sẽ khi học mĩ thuật."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "mt1.mi_thuat_quanh_em",
+     "order": 2,
+     "title": "Mĩ thuật trong cuộc sống quanh em",
+     "description": "Quan sát đồ vật, tranh ảnh, trang phục có màu sắc, hình dáng đẹp.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt1.cham_net",
+   "grade": 1,
+   "order": 2,
+   "title": "Chấm và nét",
+   "lessons": [
+    {
+     "key": "mt1.cham_va_net",
+     "order": 1,
+     "title": "Chấm và nét quanh em",
+     "description": "Nhận ra chấm và nét trong thiên nhiên và đồ vật.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nhận biết chấm và nét",
+      "Tìm chấm, nét trong cảnh vật quanh em"
+     ],
+     "summary": [
+      "Chấm là những điểm nhỏ: đốm trên lưng hươu cao cổ, những ngôi sao đêm.",
+      "Nét là đường kéo dài: sợi chỉ, đường viền chiếc lá, vằn trên mình ngựa vằn.",
+      "Chấm và nét được dùng để vẽ và trang trí sản phẩm.",
+      "Vẽ, nặn, cắt dán là thực hành cùng thầy cô; trò chơi chỉ ôn kiến thức và các bước, không chấm sản phẩm sáng tạo."
+     ],
+     "examples": [
+      {
+       "title": "Chấm hay nét?",
+       "lines": [
+        "Đốm bọ rùa: chấm",
+        "Sợi dây diều: nét"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Chấm hay nét?",
+       "set": {
+        "title": "Đây là chấm hay nét?",
+        "groups": [
+         {
+          "id": "cham",
+          "label": "Chấm",
+          "icon": "⚫"
+         },
+         {
+          "id": "net",
+          "label": "Nét",
+          "icon": "〰️"
+         }
+        ],
+        "cards": [
+         {
+          "key": "huou",
+          "text": "Đốm trên lưng hươu cao cổ",
+          "picture": "🦒",
+          "group": "cham",
+          "explanation": "Các đốm là những mảng nhỏ như chấm."
+         },
+         {
+          "key": "sao",
+          "text": "Những ngôi sao trên trời đêm",
+          "picture": "✨",
+          "group": "cham",
+          "explanation": "Nhìn từ xa, mỗi ngôi sao như một chấm sáng."
+         },
+         {
+          "key": "bo_rua",
+          "text": "Đốm trên cánh bọ rùa",
+          "picture": "🐞",
+          "group": "cham",
+          "explanation": "Cánh bọ rùa có các chấm đen tròn."
+         },
+         {
+          "key": "mua",
+          "text": "Hạt mưa li ti trên kính",
+          "picture": "💧",
+          "group": "cham",
+          "explanation": "Hạt mưa nhỏ đọng lại thành chấm."
+         },
+         {
+          "key": "vung",
+          "text": "Hạt vừng trên bánh",
+          "picture": "🍪",
+          "group": "cham",
+          "explanation": "Hạt vừng nhỏ như những chấm."
+         },
+         {
+          "key": "chi",
+          "text": "Sợi chỉ",
+          "picture": "🧵",
+          "group": "net",
+          "explanation": "Sợi chỉ dài và mảnh: một nét."
+         },
+         {
+          "key": "la",
+          "text": "Đường viền chiếc lá",
+          "picture": "🍃",
+          "group": "net",
+          "explanation": "Đường viền bao quanh chiếc lá là nét."
+         },
+         {
+          "key": "dieu",
+          "text": "Sợi dây diều",
+          "picture": "🪁",
+          "group": "net",
+          "explanation": "Dây diều kéo dài trên trời: một nét."
+         },
+         {
+          "key": "ngua_van",
+          "text": "Vằn trên mình ngựa vằn",
+          "picture": "🦓",
+          "group": "net",
+          "explanation": "Các sọc vằn là những nét đen dài."
+         },
+         {
+          "key": "duong",
+          "text": "Con đường nhìn từ trên cao",
+          "picture": "🛣️",
+          "group": "net",
+          "explanation": "Từ trên cao, con đường trông như một nét dài."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "mt1.ve_cham_net",
+     "order": 2,
+     "title": "Vẽ tranh bằng chấm và nét",
+     "description": "Thực hành tạo bức tranh từ chấm, nét cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt1.mau_sac",
+   "grade": 1,
+   "order": 3,
+   "title": "Màu sắc",
+   "lessons": [
+    {
+     "key": "mt1.mau_thien_nhien",
+     "order": 1,
+     "title": "Màu sắc trong thiên nhiên",
+     "description": "Quan sát và gọi tên màu của hoa, lá, bầu trời…",
+     "status": "planned"
+    },
+    {
+     "key": "mt1.ve_mau",
+     "order": 2,
+     "title": "Vẽ màu vào hình có sẵn",
+     "description": "Thực hành tô màu đều, không lem ra ngoài.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt1.hinh_khoi",
+   "grade": 1,
+   "order": 4,
+   "title": "Hình và khối",
+   "lessons": [
+    {
+     "key": "mt1.hinh_va_khoi",
+     "order": 1,
+     "title": "Hình và khối",
+     "description": "Phân biệt hình (phẳng, trên mặt giấy) và khối (có độ dày, cầm nắm được).",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nhận biết hình phẳng: tròn, vuông, tam giác…",
+      "Nhận biết khối: quả bóng, hộp sữa, viên gạch…"
+     ],
+     "summary": [
+      "Hình là mảng phẳng trên mặt giấy, mặt bảng: hình tròn, hình vuông, hình tam giác.",
+      "Khối có độ dày, nhìn được nhiều phía, cầm nắm được: quả bóng (khối cầu), hộp sữa (khối hộp).",
+      "Vẽ, nặn, cắt dán là thực hành cùng thầy cô; trò chơi chỉ ôn kiến thức và các bước, không chấm sản phẩm sáng tạo."
+     ],
+     "examples": [
+      {
+       "title": "Hình và khối",
+       "lines": [
+        "Hình tròn vẽ trên giấy – quả bóng là khối cầu"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Hình hay khối?",
+       "set": {
+        "title": "Đây là hình hay khối?",
+        "groups": [
+         {
+          "id": "hinh",
+          "label": "Hình (phẳng)",
+          "icon": "🟦"
+         },
+         {
+          "id": "khoi",
+          "label": "Khối",
+          "icon": "🧊"
+         }
+        ],
+        "cards": [
+         {
+          "key": "tron_bang",
+          "text": "Hình tròn vẽ trên bảng",
+          "picture": "⭕",
+          "group": "hinh",
+          "explanation": "Hình tròn vẽ trên mặt bảng là hình phẳng."
+         },
+         {
+          "key": "giay_vuong",
+          "text": "Tờ giấy hình vuông",
+          "picture": "🟨",
+          "group": "hinh",
+          "explanation": "Tờ giấy rất mỏng, ta thấy nó là hình vuông phẳng."
+         },
+         {
+          "key": "tam_giac",
+          "text": "Hình tam giác cắt từ giấy màu",
+          "picture": "🔺",
+          "group": "hinh",
+          "explanation": "Mảnh giấy cắt hình tam giác là hình phẳng."
+         },
+         {
+          "key": "mat_troi",
+          "text": "Ông mặt trời vẽ trên giấy",
+          "picture": "🌞",
+          "group": "hinh",
+          "explanation": "Hình vẽ trên giấy là hình phẳng."
+         },
+         {
+          "key": "ngoi_sao",
+          "text": "Ngôi sao giấy dán trên tường",
+          "picture": "⭐",
+          "group": "hinh",
+          "explanation": "Ngôi sao cắt giấy dán phẳng trên tường là hình."
+         },
+         {
+          "key": "bong",
+          "text": "Quả bóng",
+          "picture": "⚽",
+          "group": "khoi",
+          "explanation": "Quả bóng tròn đầy, có độ dày: khối cầu."
+         },
+         {
+          "key": "hop_sua",
+          "text": "Hộp sữa",
+          "picture": "🧃",
+          "group": "khoi",
+          "explanation": "Hộp sữa có nhiều mặt, cầm được: khối hộp."
+         },
+         {
+          "key": "cam",
+          "text": "Quả cam",
+          "picture": "🍊",
+          "group": "khoi",
+          "explanation": "Quả cam tròn đầy: khối."
+         },
+         {
+          "key": "gach",
+          "text": "Viên gạch",
+          "picture": "🧱",
+          "group": "khoi",
+          "explanation": "Viên gạch có độ dày, nhìn được nhiều phía: khối hộp."
+         },
+         {
+          "key": "coc",
+          "text": "Cái cốc",
+          "picture": "🥤",
+          "group": "khoi",
+          "explanation": "Cái cốc có độ cao, độ dày: khối trụ."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "mt1.nan_khoi",
+     "order": 2,
+     "title": "Nặn đồ vật dạng khối",
+     "description": "Thực hành nặn quả, đồ vật bằng đất nặn cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt2.mau_sac",
+   "grade": 2,
+   "order": 1,
+   "title": "Màu sắc",
+   "lessons": [
+    {
+     "key": "mt2.mau_co_ban",
+     "order": 1,
+     "title": "Màu cơ bản và màu thứ cấp",
+     "description": "Biết ba màu cơ bản và cách pha để có màu cam, màu lục, màu tím.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu ba màu cơ bản: đỏ, vàng, lam",
+      "Biết pha hai màu cơ bản để được màu thứ cấp",
+      "Biết pha thêm trắng để màu nhạt đi"
+     ],
+     "summary": [
+      "Ba màu cơ bản: đỏ, vàng, lam (xanh dương). Không pha từ màu khác ra được.",
+      "Màu thứ cấp do pha hai màu cơ bản: đỏ + vàng → cam; vàng + lam → lục (xanh lá); đỏ + lam → tím.",
+      "Pha thêm trắng, màu nhạt đi: đỏ + trắng → hồng.",
+      "Vẽ, nặn, cắt dán là thực hành cùng thầy cô; trò chơi chỉ ôn kiến thức và các bước, không chấm sản phẩm sáng tạo."
+     ],
+     "examples": [
+      {
+       "title": "Pha màu",
+       "lines": [
+        "Đỏ + vàng = cam",
+        "Vàng + lam = lục",
+        "Đỏ + lam = tím"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Cơ bản hay thứ cấp?",
+       "set": {
+        "title": "Màu này là màu cơ bản hay màu thứ cấp?",
+        "groups": [
+         {
+          "id": "co_ban",
+          "label": "Màu cơ bản",
+          "icon": "🔴"
+         },
+         {
+          "id": "thu_cap",
+          "label": "Màu thứ cấp",
+          "icon": "🟠"
+         }
+        ],
+        "cards": [
+         {
+          "key": "do",
+          "text": "Màu đỏ",
+          "picture": "🔴",
+          "group": "co_ban",
+          "explanation": "Đỏ là một trong ba màu cơ bản."
+         },
+         {
+          "key": "vang",
+          "text": "Màu vàng",
+          "picture": "🟡",
+          "group": "co_ban",
+          "explanation": "Vàng là màu cơ bản."
+         },
+         {
+          "key": "lam",
+          "text": "Màu lam (xanh dương)",
+          "picture": "🔵",
+          "group": "co_ban",
+          "explanation": "Lam là màu cơ bản."
+         },
+         {
+          "key": "hoa_cuc",
+          "text": "Màu vàng của hoa cúc",
+          "picture": "🌼",
+          "group": "co_ban",
+          "explanation": "Hoa cúc màu vàng: vàng là màu cơ bản."
+         },
+         {
+          "key": "cam",
+          "text": "Màu cam",
+          "picture": "🟠",
+          "group": "thu_cap",
+          "explanation": "Cam pha từ đỏ và vàng."
+         },
+         {
+          "key": "luc",
+          "text": "Màu lục (xanh lá)",
+          "picture": "🟢",
+          "group": "thu_cap",
+          "explanation": "Lục pha từ vàng và lam."
+         },
+         {
+          "key": "tim",
+          "text": "Màu tím",
+          "picture": "🟣",
+          "group": "thu_cap",
+          "explanation": "Tím pha từ đỏ và lam."
+         },
+         {
+          "key": "qua_cam",
+          "text": "Màu của quả cam chín",
+          "picture": "🍊",
+          "group": "thu_cap",
+          "explanation": "Quả cam màu cam: màu thứ cấp."
+         },
+         {
+          "key": "ca_tim",
+          "text": "Màu của quả cà tím",
+          "picture": "🍆",
+          "group": "thu_cap",
+          "explanation": "Màu tím là màu thứ cấp."
+         },
+         {
+          "key": "la_cay",
+          "text": "Màu lá chuối non",
+          "picture": "🌿",
+          "group": "thu_cap",
+          "explanation": "Màu lục là màu thứ cấp."
+         }
+        ]
+       }
+      },
+      {
+       "game": "match",
+       "title": "Pha màu",
+       "tasks": [
+        {
+         "key": "thu_cap",
+         "prompt": "Ghép hai màu pha với màu tạo thành.",
+         "pairs": [
+          [
+           "Đỏ + vàng",
+           "Cam"
+          ],
+          [
+           "Vàng + lam",
+           "Lục (xanh lá)"
+          ],
+          [
+           "Đỏ + lam",
+           "Tím"
+          ]
+         ],
+         "explanation": "Hai màu cơ bản pha với nhau cho một màu thứ cấp."
+        },
+        {
+         "key": "them_trang",
+         "prompt": "Ghép cách pha với màu tạo thành.",
+         "pairs": [
+          [
+           "Đỏ + trắng",
+           "Hồng"
+          ],
+          [
+           "Đen + trắng",
+           "Xám"
+          ],
+          [
+           "Lam + trắng",
+           "Lam nhạt"
+          ]
+         ],
+         "explanation": "Thêm trắng làm màu nhạt hơn; đen pha trắng ra màu xám."
+        },
+        {
+         "key": "thien_nhien",
+         "prompt": "Ghép màu với vật có màu đó.",
+         "pairs": [
+          [
+           "Đỏ",
+           "Quả ớt chín"
+          ],
+          [
+           "Vàng",
+           "Hoa hướng dương"
+          ],
+          [
+           "Lam",
+           "Bầu trời trong xanh"
+          ],
+          [
+           "Tím",
+           "Hoa bằng lăng"
+          ]
+         ],
+         "explanation": "Màu sắc có ở khắp nơi trong thiên nhiên."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "mt2.ve_tranh_mau",
+     "order": 2,
+     "title": "Vẽ tranh với màu em thích",
+     "description": "Thực hành vẽ tranh bằng màu sáp, màu nước cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt2.net_hinh",
+   "grade": 2,
+   "order": 2,
+   "title": "Nét và hình",
+   "lessons": [
+    {
+     "key": "mt2.cac_loai_net",
+     "order": 1,
+     "title": "Các loại nét",
+     "description": "Nhận biết nét thẳng, nét cong, nét gấp khúc, nét lượn sóng, nét xoắn ốc.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Gọi tên các loại nét",
+      "Tìm các loại nét trong cảnh vật",
+      "Phân biệt nét đậm, nét mảnh, nét đứt"
+     ],
+     "summary": [
+      "Nét thẳng (cột cờ), nét cong (cầu vồng), nét gấp khúc (tia chớp), nét lượn sóng (sóng nước), nét xoắn ốc (vỏ ốc sên).",
+      "Vẽ mạnh tay được nét đậm, nhẹ tay được nét mảnh; nét đứt có những khoảng hở.",
+      "Vẽ, nặn, cắt dán là thực hành cùng thầy cô; trò chơi chỉ ôn kiến thức và các bước, không chấm sản phẩm sáng tạo."
+     ],
+     "examples": [
+      {
+       "title": "Tìm nét",
+       "lines": [
+        "Răng cưa: nét gấp khúc",
+        "Vành trăng khuyết: nét cong"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Nét nào đây?",
+       "tasks": [
+        {
+         "key": "net_1",
+         "prompt": "Ghép loại nét với hình ảnh có nét đó.",
+         "pairs": [
+          [
+           "Nét thẳng",
+           "Thân cột cờ"
+          ],
+          [
+           "Nét cong",
+           "Cầu vồng"
+          ],
+          [
+           "Nét gấp khúc",
+           "Tia chớp"
+          ],
+          [
+           "Nét xoắn ốc",
+           "Vỏ ốc sên"
+          ]
+         ],
+         "explanation": "Mỗi hình ảnh gợi một loại nét."
+        },
+        {
+         "key": "net_2",
+         "prompt": "Ghép loại nét với hình ảnh có nét đó.",
+         "pairs": [
+          [
+           "Nét lượn sóng",
+           "Mặt nước gợn sóng"
+          ],
+          [
+           "Nét gấp khúc",
+           "Lưỡi cưa"
+          ],
+          [
+           "Nét thẳng",
+           "Mép bàn học"
+          ],
+          [
+           "Nét cong",
+           "Vành trăng khuyết"
+          ]
+         ],
+         "explanation": "Nét lượn sóng lên xuống mềm mại; nét gấp khúc có góc nhọn."
+        },
+        {
+         "key": "dam_manh",
+         "prompt": "Ghép loại nét với cách vẽ.",
+         "pairs": [
+          [
+           "Nét đậm",
+           "Vẽ mạnh tay, nét to"
+          ],
+          [
+           "Nét mảnh",
+           "Vẽ nhẹ tay, nét nhỏ"
+          ],
+          [
+           "Nét đứt",
+           "Đoạn ngắn có khoảng hở"
+          ]
+         ],
+         "explanation": "Thay đổi lực tay và cách vẽ cho các nét khác nhau."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "mt2.tao_hinh_tu_net",
+     "order": 2,
+     "title": "Tạo hình từ các loại nét",
+     "description": "Thực hành vẽ con vật, đồ vật bằng nhiều loại nét.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt2.thu_cong",
+   "grade": 2,
+   "order": 3,
+   "title": "Mĩ thuật ứng dụng: thủ công",
+   "lessons": [
+    {
+     "key": "mt2.cac_buoc_lam",
+     "order": 1,
+     "title": "Các bước làm sản phẩm thủ công",
+     "description": "Nhớ thứ tự các bước xé dán, nặn, in hình, vẽ tranh.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu đúng thứ tự các bước làm một sản phẩm",
+      "Biết bắt đầu bằng ý tưởng, kết thúc bằng hoàn thiện"
+     ],
+     "summary": [
+      "Làm sản phẩm theo các bước: nghĩ ý tưởng → làm phần chính → thêm chi tiết → hoàn thiện.",
+      "Xé dán: vẽ phác lên giấy màu → xé theo nét → sắp xếp → dán.",
+      "Vẽ, nặn, cắt dán là thực hành cùng thầy cô; trò chơi chỉ ôn kiến thức và các bước, không chấm sản phẩm sáng tạo."
+     ],
+     "examples": [
+      {
+       "title": "Nặn con vật",
+       "lines": [
+        "Nhào đất → nặn thân → nặn đầu, chân → ghép lại"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Bước nào trước?",
+       "tasks": [
+        {
+         "key": "xe_dan",
+         "prompt": "Xếp các bước xé dán hình con cá.",
+         "items": [
+          "Vẽ phác hình cá lên giấy màu",
+          "Xé theo nét vẽ",
+          "Sắp xếp hình trên nền",
+          "Bôi hồ và dán"
+         ],
+         "explanation": "Vẽ phác trước để xé đúng hình; sắp xếp xong mới dán.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "nan",
+         "prompt": "Xếp các bước nặn con vật.",
+         "items": [
+          "Nhào đất cho mềm",
+          "Nặn phần thân",
+          "Nặn đầu, chân, đuôi",
+          "Ghép các phần lại"
+         ],
+         "explanation": "Đất mềm mới nặn được; nặn phần lớn trước, chi tiết sau rồi ghép.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "in_tay",
+         "prompt": "Xếp các bước in hình bàn tay.",
+         "items": [
+          "Bôi màu lên lòng bàn tay",
+          "Áp tay lên giấy, ấn đều",
+          "Nhấc tay ra nhẹ nhàng",
+          "Rửa sạch tay"
+         ],
+         "explanation": "Bôi màu, in, nhấc tay, rồi rửa tay sạch.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "ve_tranh",
+         "prompt": "Xếp các bước vẽ một bức tranh.",
+         "items": [
+          "Chọn nội dung muốn vẽ",
+          "Vẽ hình chính",
+          "Vẽ thêm hình phụ",
+          "Vẽ màu"
+         ],
+         "explanation": "Vẽ hình chính trước cho to, rõ; thêm hình phụ; cuối cùng vẽ màu.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "mt2.gap_giay",
+     "order": 2,
+     "title": "Gấp giấy tạo đồ chơi",
+     "description": "Thực hành gấp giấy cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt2.thuong_thuc",
+   "grade": 2,
+   "order": 4,
+   "title": "Thưởng thức mĩ thuật",
+   "lessons": [
+    {
+     "key": "mt2.xem_tranh_ban",
+     "order": 1,
+     "title": "Xem tranh của bạn và nói điều em thích",
+     "description": "Tập nhận xét sản phẩm của bạn nhẹ nhàng, chân thành.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt3.mau_sac",
+   "grade": 3,
+   "order": 1,
+   "title": "Màu sắc và đậm nhạt",
+   "lessons": [
+    {
+     "key": "mt3.mau_nong_lanh",
+     "order": 1,
+     "title": "Màu nóng và màu lạnh",
+     "description": "Phân biệt màu nóng, màu lạnh và cảm giác chúng gợi ra.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nhận biết màu nóng: đỏ, cam, vàng",
+      "Nhận biết màu lạnh: lam, lục",
+      "Biết màu nóng gợi ấm áp, màu lạnh gợi mát mẻ"
+     ],
+     "summary": [
+      "Màu nóng (đỏ, cam, vàng…) gợi cảm giác ấm áp, rực rỡ như lửa, như nắng.",
+      "Màu lạnh (lam, lục, lam lục…) gợi cảm giác mát mẻ, yên tĩnh như nước, như rừng cây.",
+      "Vẽ, nặn, cắt dán là thực hành cùng thầy cô; trò chơi chỉ ôn kiến thức và các bước, không chấm sản phẩm sáng tạo."
+     ],
+     "examples": [
+      {
+       "title": "Tranh mùa hè",
+       "lines": [
+        "Dùng nhiều đỏ, cam, vàng: tranh có cảm giác nóng, rực rỡ."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Nóng hay lạnh?",
+       "set": {
+        "title": "Màu này là màu nóng hay màu lạnh?",
+        "groups": [
+         {
+          "id": "nong",
+          "label": "Màu nóng",
+          "icon": "🔥"
+         },
+         {
+          "id": "lanh",
+          "label": "Màu lạnh",
+          "icon": "❄️"
+         }
+        ],
+        "cards": [
+         {
+          "key": "do",
+          "text": "Đỏ",
+          "picture": "🟥",
+          "group": "nong",
+          "explanation": "Đỏ là màu nóng, gợi lửa."
+         },
+         {
+          "key": "cam",
+          "text": "Cam",
+          "picture": "🟧",
+          "group": "nong",
+          "explanation": "Cam là màu nóng."
+         },
+         {
+          "key": "vang_cam",
+          "text": "Vàng cam",
+          "picture": "🌅",
+          "group": "nong",
+          "explanation": "Vàng cam gợi ánh nắng: màu nóng."
+         },
+         {
+          "key": "lua",
+          "text": "Màu ngọn lửa trại",
+          "picture": "🔥",
+          "group": "nong",
+          "explanation": "Lửa đỏ, cam: màu nóng."
+         },
+         {
+          "key": "do_cam",
+          "text": "Đỏ cam của hoa phượng",
+          "picture": "🌺",
+          "group": "nong",
+          "explanation": "Đỏ cam là màu nóng."
+         },
+         {
+          "key": "lam",
+          "text": "Lam",
+          "picture": "🟦",
+          "group": "lanh",
+          "explanation": "Lam là màu lạnh, gợi nước, bầu trời."
+         },
+         {
+          "key": "luc",
+          "text": "Lục",
+          "picture": "🟩",
+          "group": "lanh",
+          "explanation": "Lục là màu lạnh, gợi cây cỏ."
+         },
+         {
+          "key": "lam_luc",
+          "text": "Lam lục (xanh ngọc)",
+          "picture": "💎",
+          "group": "lanh",
+          "explanation": "Lam lục là màu lạnh."
+         },
+         {
+          "key": "bien",
+          "text": "Màu nước biển sâu",
+          "picture": "🌊",
+          "group": "lanh",
+          "explanation": "Biển sâu màu lam đậm: màu lạnh."
+         },
+         {
+          "key": "rung",
+          "text": "Màu lá cây trong rừng sâu",
+          "picture": "🌲",
+          "group": "lanh",
+          "explanation": "Lục đậm của rừng là màu lạnh."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "mt3.dam_nhat",
+     "order": 2,
+     "title": "Màu đậm, màu nhạt",
+     "description": "Thực hành pha màu đậm, màu nhạt cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt3.chat_cam",
+   "grade": 3,
+   "order": 2,
+   "title": "Hình, khối và chất cảm",
+   "lessons": [
+    {
+     "key": "mt3.chat_cam_be_mat",
+     "order": 1,
+     "title": "Chất cảm của bề mặt",
+     "description": "Nhận biết bề mặt sần sùi, trơn nhẵn của vật liệu và đồ vật.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Hiểu chất cảm là cảm giác về bề mặt khi nhìn, chạm",
+      "Phân biệt bề mặt sần sùi và trơn nhẵn"
+     ],
+     "summary": [
+      "Chất cảm là cảm giác về bề mặt vật: sần sùi, thô ráp, trơn nhẵn, mềm mịn…",
+      "Có thể tạo chất cảm khi vẽ, in, cắt dán: in vỏ cây lên giấy sẽ được bề mặt sần.",
+      "Vẽ, nặn, cắt dán là thực hành cùng thầy cô; trò chơi chỉ ôn kiến thức và các bước, không chấm sản phẩm sáng tạo."
+     ],
+     "examples": [
+      {
+       "title": "Chạm và cảm nhận",
+       "lines": [
+        "Vỏ quả dứa: sần sùi",
+        "Mặt gương: trơn nhẵn"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Sần hay nhẵn?",
+       "set": {
+        "title": "Bề mặt này sần sùi hay trơn nhẵn?",
+        "groups": [
+         {
+          "id": "san",
+          "label": "Sần sùi, thô ráp",
+          "icon": "🍍"
+         },
+         {
+          "id": "nhan",
+          "label": "Trơn nhẵn",
+          "icon": "🪞"
+         }
+        ],
+        "cards": [
+         {
+          "key": "vo_cay",
+          "text": "Vỏ cây xà cừ già",
+          "picture": "🌳",
+          "group": "san",
+          "explanation": "Vỏ cây già nứt nẻ, sần sùi."
+         },
+         {
+          "key": "dua",
+          "text": "Vỏ quả dứa",
+          "picture": "🍍",
+          "group": "san",
+          "explanation": "Vỏ dứa có nhiều mắt, sần sùi."
+         },
+         {
+          "key": "giay_nham",
+          "text": "Tờ giấy nhám",
+          "picture": "📄",
+          "group": "san",
+          "explanation": "Giấy nhám có hạt cát, rất ráp."
+         },
+         {
+          "key": "mit",
+          "text": "Vỏ quả mít",
+          "picture": "🟢",
+          "group": "san",
+          "explanation": "Vỏ mít có gai nhỏ, sần sùi."
+         },
+         {
+          "key": "da_ong",
+          "text": "Viên đá ong",
+          "picture": "🪨",
+          "group": "san",
+          "explanation": "Đá ong có nhiều lỗ, thô ráp."
+         },
+         {
+          "key": "guong",
+          "text": "Mặt gương",
+          "picture": "🪞",
+          "group": "nhan",
+          "explanation": "Mặt gương phẳng, trơn nhẵn."
+         },
+         {
+          "key": "bi",
+          "text": "Viên bi ve",
+          "picture": "🔮",
+          "group": "nhan",
+          "explanation": "Viên bi tròn nhẵn, bóng."
+         },
+         {
+          "key": "bat_su",
+          "text": "Cái bát sứ",
+          "picture": "🥣",
+          "group": "nhan",
+          "explanation": "Bát sứ tráng men trơn nhẵn."
+         },
+         {
+          "key": "da_cuoi",
+          "text": "Hòn đá cuội ở suối",
+          "picture": "🪨",
+          "group": "nhan",
+          "explanation": "Đá cuội bị nước bào mòn nên trơn nhẵn."
+         },
+         {
+          "key": "kinh",
+          "text": "Mặt kính cửa sổ",
+          "picture": "🪟",
+          "group": "nhan",
+          "explanation": "Kính cửa sổ phẳng, nhẵn."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "mt3.tao_san_pham_vat_lieu",
+     "order": 2,
+     "title": "Tạo sản phẩm từ vật liệu có chất cảm khác nhau",
+     "description": "Thực hành cắt dán, ghép vật liệu cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt3.lap_lai",
+   "grade": 3,
+   "order": 3,
+   "title": "Nguyên lí lặp lại và trang trí",
+   "lessons": [
+    {
+     "key": "mt3.lap_lai_trang_tri",
+     "order": 1,
+     "title": "Lặp lại hình và màu để trang trí",
+     "description": "Hiểu nguyên lí lặp lại và dùng nó để trang trí đường diềm.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nhận biết sự lặp lại của hình, màu, hoạ tiết",
+      "Tìm quy luật lặp lại trong một dãy hình",
+      "Biết dùng lặp lại để trang trí đều, đẹp"
+     ],
+     "summary": [
+      "Lặp lại là dùng một hình, màu, hoạ tiết nhiều lần theo một quy luật.",
+      "Đường diềm là dải trang trí có hoạ tiết lặp lại, thường ở viền khăn, viền đĩa, viền áo.",
+      "Vẽ, nặn, cắt dán là thực hành cùng thầy cô; trò chơi chỉ ôn kiến thức và các bước, không chấm sản phẩm sáng tạo."
+     ],
+     "examples": [
+      {
+       "title": "Quy luật",
+       "lines": [
+        "🌸 🍃 🌸 🍃 🌸 … : hoa và lá xen kẽ"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Tìm quy luật lặp lại",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "sao_trang",
+         "question": "Dãy hình: ⭐ 🌙 ⭐ 🌙 ⭐ … Hình tiếp theo là gì?",
+         "options": [
+          {
+           "text": "🌙",
+           "ok": true,
+           "why": "Đúng: sao và trăng xen kẽ nhau."
+          },
+          {
+           "text": "⭐",
+           "ok": false,
+           "why": "Sau ⭐ là 🌙 theo quy luật xen kẽ."
+          },
+          {
+           "text": "☀️",
+           "ok": false,
+           "why": "Mặt trời không có trong quy luật của dãy."
+          }
+         ],
+         "explanation": "Quy luật: ⭐ 🌙 lặp lại."
+        },
+        {
+         "key": "do_vang_vang",
+         "question": "Dãy màu: đỏ, vàng, vàng, đỏ, vàng, vàng, đỏ, … Màu tiếp theo là gì?",
+         "options": [
+          {
+           "text": "Vàng",
+           "ok": true,
+           "why": "Đúng: nhóm \"đỏ, vàng, vàng\" lặp lại."
+          },
+          {
+           "text": "Đỏ",
+           "ok": false,
+           "why": "Sau đỏ là hai màu vàng."
+          },
+          {
+           "text": "Lam",
+           "ok": false,
+           "why": "Lam không có trong quy luật."
+          }
+         ],
+         "explanation": "Tìm nhóm lặp lại: đỏ – vàng – vàng."
+        },
+        {
+         "key": "to_nho",
+         "question": "Dãy: tròn to, tròn nhỏ, tròn to, tròn nhỏ, … Hình tiếp theo là gì?",
+         "options": [
+          {
+           "text": "Tròn to",
+           "ok": true,
+           "why": "Đúng: to và nhỏ xen kẽ."
+          },
+          {
+           "text": "Tròn nhỏ",
+           "ok": false,
+           "why": "Sau tròn nhỏ là tròn to."
+          },
+          {
+           "text": "Vuông to",
+           "ok": false,
+           "why": "Dãy chỉ có hình tròn."
+          }
+         ],
+         "explanation": "Lặp lại có thể là đổi kích thước theo quy luật."
+        },
+        {
+         "key": "nhan_biet",
+         "question": "Một bông hoa được vẽ lặp lại đều đặn quanh viền khăn. Đó là cách trang trí theo nguyên lí nào?",
+         "options": [
+          {
+           "text": "Lặp lại",
+           "ok": true,
+           "why": "Đúng: một hoạ tiết dùng nhiều lần theo quy luật."
+          },
+          {
+           "text": "Vẽ tự do, không theo quy luật",
+           "ok": false,
+           "why": "Hoa xếp đều đặn nên có quy luật."
+          },
+          {
+           "text": "Chỉ dùng chấm",
+           "ok": false,
+           "why": "Hoạ tiết ở đây là bông hoa, không chỉ là chấm."
+          }
+         ],
+         "explanation": "Đường diềm thường dùng nguyên lí lặp lại."
+        },
+        {
+         "key": "trang_tri_dia",
+         "question": "Em muốn trang trí viền chiếc đĩa theo nguyên lí lặp lại. Cách nào đúng tiêu chí?",
+         "options": [
+          {
+           "text": "Vẽ cùng một hoạ tiết cách đều nhau quanh viền",
+           "ok": true,
+           "why": "Đạt tiêu chí: một hoạ tiết lặp lại đều."
+          },
+          {
+           "text": "Xen kẽ hai hoạ tiết theo một thứ tự lặp lại",
+           "ok": true,
+           "why": "Đạt tiêu chí: hai hoạ tiết xen kẽ cũng là lặp lại có quy luật."
+          },
+          {
+           "text": "Mỗi chỗ vẽ một hình khác nhau, không theo thứ tự",
+           "ok": false,
+           "why": "Chưa đạt tiêu chí: không có hình nào lặp lại theo quy luật."
+          }
+         ],
+         "explanation": "Có nhiều cách đẹp; tiêu chí ở đây là có quy luật lặp lại."
+        },
+        {
+         "key": "vat_lap_lai",
+         "question": "Đồ vật nào có hoạ tiết lặp lại?",
+         "options": [
+          {
+           "text": "Nền nhà lát gạch hoa giống nhau",
+           "ok": true,
+           "why": "Đúng: các viên gạch cùng hoa văn lặp lại khắp nền."
+          },
+          {
+           "text": "Một đám mây trên trời",
+           "ok": false,
+           "why": "Đám mây không có hoạ tiết lặp lại theo quy luật."
+          },
+          {
+           "text": "Một hòn đá cuội",
+           "ok": false,
+           "why": "Hòn đá cuội không có hoạ tiết lặp lại."
+          }
+         ],
+         "explanation": "Lặp lại có nhiều trong đồ vật: gạch hoa, vải hoa, đường diềm."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "mt3.ung_dung",
+   "grade": 3,
+   "order": 4,
+   "title": "Mĩ thuật ứng dụng",
+   "lessons": [
+    {
+     "key": "mt3.do_dung_tai_che",
+     "order": 1,
+     "title": "Làm đồ dùng học tập từ vật liệu tái chế",
+     "description": "Thực hành làm hộp bút, ống cắm bút từ vỏ hộp cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "mt3.trang_tri_thiep",
+     "order": 2,
+     "title": "Trang trí thiệp chúc mừng",
+     "description": "Thực hành vẽ, cắt dán trang trí thiệp.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt4.dam_nhat",
+   "grade": 4,
+   "order": 1,
+   "title": "Đậm nhạt",
+   "lessons": [
+    {
+     "key": "mt4.sac_do_dam_nhat",
+     "order": 1,
+     "title": "Sắc độ đậm nhạt của màu",
+     "description": "Xếp các sắc độ của một màu từ nhạt đến đậm.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết thêm trắng làm màu nhạt đi, thêm đen làm màu đậm lên",
+      "Xếp các sắc độ của một màu theo thứ tự"
+     ],
+     "summary": [
+      "Pha thêm trắng: màu nhạt dần (sáng hơn). Pha thêm đen: màu đậm dần (tối hơn).",
+      "Càng thêm nhiều trắng càng nhạt; càng thêm nhiều đen càng đậm.",
+      "Đậm nhạt giúp hình có khối và làm hình chính nổi bật.",
+      "Vẽ, nặn, cắt dán là thực hành cùng thầy cô; trò chơi chỉ ôn kiến thức và các bước, không chấm sản phẩm sáng tạo."
+     ],
+     "examples": [
+      {
+       "title": "Một dải màu đỏ",
+       "lines": [
+        "đỏ + nhiều trắng → đỏ + ít trắng → đỏ → đỏ + ít đen"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Từ nhạt đến đậm",
+       "tasks": [
+        {
+         "key": "do",
+         "prompt": "Xếp từ nhạt đến đậm.",
+         "items": [
+          "Đỏ pha nhiều trắng",
+          "Đỏ pha ít trắng",
+          "Đỏ",
+          "Đỏ pha ít đen"
+         ],
+         "explanation": "Thêm trắng làm nhạt, thêm đen làm đậm; càng nhiều trắng càng nhạt.",
+         "first_label": "Nhạt nhất",
+         "last_label": "Đậm nhất"
+        },
+        {
+         "key": "xam",
+         "prompt": "Xếp từ nhạt đến đậm.",
+         "items": [
+          "Trắng",
+          "Xám nhạt",
+          "Xám đậm",
+          "Đen"
+         ],
+         "explanation": "Trắng nhạt nhất, đen đậm nhất; xám nằm giữa.",
+         "first_label": "Nhạt nhất",
+         "last_label": "Đậm nhất"
+        },
+        {
+         "key": "lam",
+         "prompt": "Xếp từ nhạt đến đậm.",
+         "items": [
+          "Lam pha nhiều trắng",
+          "Lam",
+          "Lam pha ít đen",
+          "Lam pha nhiều đen"
+         ],
+         "explanation": "Lam nguyên chất ở giữa; thêm đen càng nhiều càng đậm.",
+         "first_label": "Nhạt nhất",
+         "last_label": "Đậm nhất"
+        },
+        {
+         "key": "luc",
+         "prompt": "Xếp từ đậm đến nhạt.",
+         "items": [
+          "Lục pha nhiều đen",
+          "Lục",
+          "Lục pha ít trắng",
+          "Lục pha nhiều trắng"
+         ],
+         "explanation": "Đi ngược lại: từ đậm nhất (nhiều đen) đến nhạt nhất (nhiều trắng).",
+         "first_label": "Đậm nhất",
+         "last_label": "Nhạt nhất"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "mt4.ve_dam_nhat",
+     "order": 2,
+     "title": "Vẽ đậm nhạt bằng bút chì",
+     "description": "Thực hành vẽ đậm nhạt cho đồ vật cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt4.bo_cuc",
+   "grade": 4,
+   "order": 2,
+   "title": "Bố cục và nguyên lí tạo hình",
+   "lessons": [
+    {
+     "key": "mt4.bo_cuc_tranh",
+     "order": 1,
+     "title": "Sắp xếp bố cục bức tranh",
+     "description": "Chọn cách sắp xếp hình chính, hình phụ, xa gần, cân bằng theo tiêu chí.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết làm hình chính nổi bật",
+      "Biết tạo xa – gần, cân bằng, tương phản, nhịp điệu trong tranh",
+      "Chọn cách vẽ theo tiêu chí, không chỉ một đáp án"
+     ],
+     "summary": [
+      "Hình chính vẽ to, rõ, đặt ở vị trí dễ thấy; hình phụ nhỏ hơn, hỗ trợ hình chính.",
+      "Xa – gần: vật gần to, ở thấp; vật xa nhỏ, cao hơn và nhạt hơn.",
+      "Cân bằng: hai bên tranh không bị nặng lệch. Tương phản: sáng cạnh tối, nóng cạnh lạnh.",
+      "Sáng tạo có nhiều cách: mỗi câu hỏi nêu tiêu chí, có thể có nhiều cách đúng."
+     ],
+     "examples": [
+      {
+       "title": "Tranh Giờ ra chơi",
+       "lines": [
+        "Nhóm bạn nhảy dây vẽ to ở giữa; hàng cây phía sau nhỏ, nhạt hơn."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Bố cục theo tiêu chí",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "hinh_chinh",
+         "question": "Em vẽ tranh \"Giờ ra chơi\". Tiêu chí: hình chính phải nổi bật. Cách nào đạt?",
+         "options": [
+          {
+           "text": "Vẽ nhóm bạn đang chơi to, đặt gần giữa tranh",
+           "ok": true,
+           "why": "Đạt: hình to, ở vị trí dễ thấy sẽ nổi bật."
+          },
+          {
+           "text": "Vẽ nhóm chính màu tươi, đậm hơn cảnh phía sau",
+           "ok": true,
+           "why": "Đạt: tương phản màu làm hình chính nổi bật."
+          },
+          {
+           "text": "Vẽ mọi hình bằng nhau, rải đều khắp tờ giấy",
+           "ok": false,
+           "why": "Chưa đạt: không có hình nào nổi bật hơn."
+          },
+          {
+           "text": "Vẽ nhóm bạn rất nhỏ ở sát mép giấy",
+           "ok": false,
+           "why": "Chưa đạt: hình nhỏ ở mép giấy khó thấy."
+          }
+         ],
+         "explanation": "Làm hình chính nổi bật bằng kích thước, vị trí hoặc màu sắc."
+        },
+        {
+         "key": "xa_gan",
+         "question": "Tiêu chí: tranh phong cảnh có xa – gần. Cách nào đạt?",
+         "options": [
+          {
+           "text": "Cây ở gần vẽ to, phía dưới; cây ở xa vẽ nhỏ, cao hơn",
+           "ok": true,
+           "why": "Đạt: to – nhỏ, thấp – cao tạo cảm giác xa gần."
+          },
+          {
+           "text": "Cảnh xa vẽ màu nhạt, mờ hơn cảnh gần",
+           "ok": true,
+           "why": "Đạt: vật ở xa trông nhạt, mờ hơn."
+          },
+          {
+           "text": "Vẽ tất cả cây cùng cỡ trên một hàng ngang",
+           "ok": false,
+           "why": "Chưa đạt: tranh trông phẳng, không có xa gần."
+          }
+         ],
+         "explanation": "Xa gần: to – nhỏ, rõ – mờ, thấp – cao."
+        },
+        {
+         "key": "can_bang",
+         "question": "Tiêu chí: tranh cân bằng. Bên trái có ngôi nhà to. Em làm gì ở bên phải?",
+         "options": [
+          {
+           "text": "Vẽ một cái cây cao hoặc nhóm người để cân với ngôi nhà",
+           "ok": true,
+           "why": "Đạt: hình ở bên phải làm hai bên nặng nhẹ tương đương."
+          },
+          {
+           "text": "Đặt vài hình nhỏ có màu đậm, nổi bật",
+           "ok": true,
+           "why": "Đạt: màu đậm có \"sức nặng\" thị giác, giúp cân bằng."
+          },
+          {
+           "text": "Để trống hoàn toàn bên phải",
+           "ok": false,
+           "why": "Chưa đạt: tranh bị lệch nặng sang trái."
+          }
+         ],
+         "explanation": "Cân bằng không nhất thiết phải giống hệt hai bên."
+        },
+        {
+         "key": "tuong_phan",
+         "question": "Tiêu chí: tranh có tương phản. Cách nào đạt?",
+         "options": [
+          {
+           "text": "Vẽ hình sáng trên nền tối",
+           "ok": true,
+           "why": "Đạt: sáng – tối là tương phản đậm nhạt."
+          },
+          {
+           "text": "Đặt màu nóng cạnh màu lạnh",
+           "ok": true,
+           "why": "Đạt: nóng – lạnh là tương phản màu sắc."
+          },
+          {
+           "text": "Chỉ dùng các màu nhạt gần giống nhau",
+           "ok": false,
+           "why": "Chưa đạt: các màu giống nhau không tạo tương phản."
+          }
+         ],
+         "explanation": "Tương phản: khác biệt rõ về đậm nhạt, màu sắc, kích thước."
+        },
+        {
+         "key": "nhip_dieu",
+         "question": "Tiêu chí: tranh \"Thả diều\" có nhịp điệu. Cách nào đạt?",
+         "options": [
+          {
+           "text": "Vẽ nhiều cánh diều to nhỏ, cao thấp xen nhau",
+           "ok": true,
+           "why": "Đạt: lặp lại có thay đổi tạo nhịp điệu."
+          },
+          {
+           "text": "Lặp lại hình cánh diều ở các độ cao khác nhau",
+           "ok": true,
+           "why": "Đạt: sự lặp lại thay đổi vị trí gợi chuyển động."
+          },
+          {
+           "text": "Vẽ một cánh diều duy nhất ở giữa trời",
+           "ok": false,
+           "why": "Chưa đạt: một hình không tạo được nhịp điệu."
+          }
+         ],
+         "explanation": "Nhịp điệu: lặp lại có thay đổi to nhỏ, thưa dày, cao thấp."
+        },
+        {
+         "key": "hoan_thien",
+         "question": "Em đã vẽ xong hình. Bước tiếp theo để hoàn thiện bức tranh là gì?",
+         "options": [
+          {
+           "text": "Vẽ màu, chú ý màu hình chính và màu nền",
+           "ok": true,
+           "why": "Đúng: vẽ màu sau khi đã có hình, làm hình chính nổi bật."
+          },
+          {
+           "text": "Xoá hết để vẽ lại từ đầu",
+           "ok": false,
+           "why": "Không cần xoá hết khi hình đã ổn."
+          },
+          {
+           "text": "Bỏ dở, không vẽ màu",
+           "ok": false,
+           "why": "Bức tranh chưa hoàn thiện khi chưa vẽ màu."
+          }
+         ],
+         "explanation": "Thứ tự: hình chính → hình phụ → màu → chỉnh sửa."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "mt4.ve_tranh_de_tai",
+     "order": 2,
+     "title": "Vẽ tranh đề tài trường em",
+     "description": "Thực hành vẽ tranh theo đề tài cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt4.dieu_khac",
+   "grade": 4,
+   "order": 3,
+   "title": "Điêu khắc",
+   "lessons": [
+    {
+     "key": "mt4.nan_dang_nguoi",
+     "order": 1,
+     "title": "Nặn dáng người đang hoạt động",
+     "description": "Thực hành nặn dáng người cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "mt4.phu_dieu_giay",
+     "order": 2,
+     "title": "Tạo phù điêu bằng giấy, đất nặn",
+     "description": "Thực hành tạo hình nổi trên mặt phẳng.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt4.thuong_thuc",
+   "grade": 4,
+   "order": 4,
+   "title": "Thưởng thức mĩ thuật",
+   "lessons": [
+    {
+     "key": "mt4.xem_tranh_thieu_nhi",
+     "order": 1,
+     "title": "Xem tranh thiếu nhi và nêu cảm nhận",
+     "description": "Tập nói về màu sắc, hình ảnh em thích trong tranh.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt5.mau_sac",
+   "grade": 5,
+   "order": 1,
+   "title": "Màu sắc",
+   "lessons": [
+    {
+     "key": "mt5.mau_bo_tuc",
+     "order": 1,
+     "title": "Màu bổ túc và màu bậc ba",
+     "description": "Biết các cặp màu bổ túc và cách pha màu bậc ba.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu các cặp màu bổ túc: đỏ – lục, vàng – tím, lam – cam",
+      "Biết pha màu bậc ba từ màu cơ bản và màu thứ cấp bên cạnh"
+     ],
+     "summary": [
+      "Cặp màu bổ túc nằm đối diện nhau trên vòng màu: đỏ – lục, vàng – tím, lam – cam.",
+      "Đặt hai màu bổ túc cạnh nhau, cả hai trông rực rỡ hơn: tương phản mạnh.",
+      "Màu bậc ba: pha màu cơ bản với màu thứ cấp bên cạnh: vàng + lục → vàng lục; đỏ + cam → đỏ cam.",
+      "Vẽ, nặn, cắt dán là thực hành cùng thầy cô; trò chơi chỉ ôn kiến thức và các bước, không chấm sản phẩm sáng tạo."
+     ],
+     "examples": [
+      {
+       "title": "Vòng màu",
+       "lines": [
+        "đỏ – đỏ cam – cam – vàng cam – vàng – vàng lục – lục – lam lục – lam – lam tím – tím – đỏ tím"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Cặp màu",
+       "tasks": [
+        {
+         "key": "bo_tuc",
+         "prompt": "Ghép mỗi màu với màu bổ túc của nó.",
+         "pairs": [
+          [
+           "Đỏ",
+           "Lục"
+          ],
+          [
+           "Vàng",
+           "Tím"
+          ],
+          [
+           "Lam",
+           "Cam"
+          ]
+         ],
+         "explanation": "Màu bổ túc của một màu cơ bản là màu thứ cấp pha từ hai màu cơ bản còn lại."
+        },
+        {
+         "key": "bac_ba",
+         "prompt": "Ghép hai màu pha với màu tạo thành.",
+         "pairs": [
+          [
+           "Vàng + lục",
+           "Vàng lục"
+          ],
+          [
+           "Đỏ + cam",
+           "Đỏ cam"
+          ],
+          [
+           "Lam + tím",
+           "Lam tím"
+          ],
+          [
+           "Lam + lục",
+           "Lam lục"
+          ]
+         ],
+         "explanation": "Màu bậc ba mang tên hai màu pha ra nó."
+        },
+        {
+         "key": "ten_cap",
+         "prompt": "Ghép cặp màu với tên gọi.",
+         "pairs": [
+          [
+           "Đỏ và lục",
+           "Cặp màu bổ túc"
+          ],
+          [
+           "Đỏ và cam",
+           "Hai màu nóng gần nhau"
+          ],
+          [
+           "Lam và lục",
+           "Hai màu lạnh gần nhau"
+          ],
+          [
+           "Đen và trắng",
+           "Tương phản đậm nhạt mạnh nhất"
+          ]
+         ],
+         "explanation": "Màu bổ túc nằm đối diện, màu gần nhau nằm cạnh nhau trên vòng màu."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "mt5.ve_tranh_mau_bo_tuc",
+     "order": 2,
+     "title": "Vẽ tranh dùng màu bổ túc",
+     "description": "Thực hành phối màu cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt5.thuong_thuc",
+   "grade": 5,
+   "order": 2,
+   "title": "Thưởng thức mĩ thuật",
+   "lessons": [
+    {
+     "key": "mt5.tranh_dan_gian",
+     "order": 1,
+     "title": "Tranh dân gian Việt Nam",
+     "description": "Biết chất liệu, cách làm và nội dung của tranh dân gian Đông Hồ, Hàng Trống.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu chất liệu, cách làm tranh Đông Hồ",
+      "So sánh tranh Đông Hồ và tranh Hàng Trống",
+      "Kể tên một số tranh dân gian nổi tiếng"
+     ],
+     "summary": [
+      "Tranh Đông Hồ in trên giấy dó quét điệp, bằng ván gỗ khắc; mỗi màu in một ván, nét đen in sau cùng.",
+      "Màu tranh Đông Hồ lấy từ thiên nhiên: đen từ than lá tre, đỏ từ sỏi son, vàng từ hoa hoè, trắng từ vỏ điệp.",
+      "Tranh Hàng Trống in nét đen rồi tô màu bằng tay. Tranh dân gian thể hiện sinh hoạt và ước mong no đủ, may mắn."
+     ],
+     "examples": [
+      {
+       "title": "Tranh Đông Hồ quen thuộc",
+       "lines": [
+        "Đám cưới chuột, Lợn nái, Gà mái, Vinh hoa, Phú quý"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Tranh dân gian",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "giay_do",
+         "question": "Tranh Đông Hồ được in trên loại giấy nào?",
+         "options": [
+          {
+           "text": "Giấy dó quét điệp",
+           "ok": true,
+           "why": "Đúng: giấy dó phủ bột vỏ điệp óng ánh."
+          },
+          {
+           "text": "Giấy báo",
+           "ok": false,
+           "why": "Tranh Đông Hồ dùng giấy dó truyền thống."
+          },
+          {
+           "text": "Vải lụa",
+           "ok": false,
+           "why": "Tranh lụa là loại tranh khác."
+          }
+         ],
+         "explanation": "Giấy dó quét điệp là nét riêng của tranh Đông Hồ."
+        },
+        {
+         "key": "cach_in",
+         "question": "Tranh Đông Hồ được làm ra bằng cách nào?",
+         "options": [
+          {
+           "text": "In bằng các ván gỗ khắc, mỗi màu một ván",
+           "ok": true,
+           "why": "Đúng: in lần lượt từng màu, nét đen in cuối."
+          },
+          {
+           "text": "Vẽ tay từng bức bằng sơn dầu",
+           "ok": false,
+           "why": "Đông Hồ là tranh in, không vẽ sơn dầu."
+          },
+          {
+           "text": "Chụp ảnh rồi in bằng máy",
+           "ok": false,
+           "why": "Đây là kĩ thuật in thủ công truyền thống."
+          }
+         ],
+         "explanation": "Kĩ thuật in mộc bản: mỗi màu một ván khắc."
+        },
+        {
+         "key": "mau_tu_nhien",
+         "question": "Màu của tranh Đông Hồ được làm từ đâu?",
+         "options": [
+          {
+           "text": "Chất liệu tự nhiên: than lá tre, sỏi son, hoa hoè, vỏ điệp",
+           "ok": true,
+           "why": "Đúng: màu lấy từ cây cỏ, khoáng chất quanh làng."
+          },
+          {
+           "text": "Màu hoá học đóng hộp",
+           "ok": false,
+           "why": "Màu truyền thống lấy từ thiên nhiên."
+          },
+          {
+           "text": "Mực bút bi",
+           "ok": false,
+           "why": "Không dùng mực bút bi."
+          }
+         ],
+         "explanation": "Màu tự nhiên tạo vẻ mộc mạc, bền."
+        },
+        {
+         "key": "hang_trong",
+         "question": "Tranh Hàng Trống khác tranh Đông Hồ ở điểm nào?",
+         "options": [
+          {
+           "text": "In nét đen rồi tô màu bằng tay",
+           "ok": true,
+           "why": "Đúng: tranh Hàng Trống tô màu bằng bút lông sau khi in nét."
+          },
+          {
+           "text": "Không có màu",
+           "ok": false,
+           "why": "Tranh Hàng Trống có màu tươi, tô tay."
+          },
+          {
+           "text": "Chỉ vẽ trên lá chuối",
+           "ok": false,
+           "why": "Không đúng."
+          }
+         ],
+         "explanation": "Đông Hồ in cả màu; Hàng Trống in nét, tô màu tay."
+        },
+        {
+         "key": "ten_tranh",
+         "question": "Bức tranh nào là tranh dân gian Đông Hồ nổi tiếng?",
+         "options": [
+          {
+           "text": "Đám cưới chuột",
+           "ok": true,
+           "why": "Đúng: tranh kể chuyện vui, có ý châm biếm."
+          },
+          {
+           "text": "Mona Lisa",
+           "ok": false,
+           "why": "Mona Lisa là tranh sơn dầu của Leonardo da Vinci (Ý)."
+          },
+          {
+           "text": "Thiếu nữ bên hoa huệ",
+           "ok": false,
+           "why": "Đây là tranh sơn dầu của hoạ sĩ Tô Ngọc Vân."
+          }
+         ],
+         "explanation": "Đám cưới chuột, Lợn nái, Gà mái là tranh Đông Hồ quen thuộc."
+        },
+        {
+         "key": "noi_dung",
+         "question": "Tranh dân gian thường thể hiện nội dung gì?",
+         "options": [
+          {
+           "text": "Sinh hoạt hằng ngày và ước mong no đủ, may mắn",
+           "ok": true,
+           "why": "Đúng: cảnh làng quê, con vật, lễ hội, lời chúc."
+          },
+          {
+           "text": "Cảnh tàu vũ trụ, robot",
+           "ok": false,
+           "why": "Tranh dân gian ra đời từ xa xưa, gắn với làng quê."
+          },
+          {
+           "text": "Bản đồ thành phố",
+           "ok": false,
+           "why": "Không phải nội dung của tranh dân gian."
+          }
+         ],
+         "explanation": "Tranh dân gian gắn với đời sống và Tết của người Việt."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "mt5.ung_dung",
+   "grade": 5,
+   "order": 3,
+   "title": "Mĩ thuật ứng dụng",
+   "lessons": [
+    {
+     "key": "mt5.quy_trinh_san_pham",
+     "order": 1,
+     "title": "Quy trình làm sản phẩm mĩ thuật",
+     "description": "Nhớ thứ tự các bước làm bìa sách, nặn tượng, in lá, làm đồ vật từ vỏ hộp.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Sắp xếp đúng các bước của một quy trình",
+      "Hiểu vì sao bước này phải làm trước bước kia"
+     ],
+     "summary": [
+      "Mọi sản phẩm đều bắt đầu từ ý tưởng hoặc tìm hiểu, rồi phác thảo, làm, hoàn thiện, trưng bày.",
+      "Làm đúng thứ tự giúp sản phẩm đẹp và tiết kiệm vật liệu.",
+      "Vẽ, nặn, cắt dán là thực hành cùng thầy cô; trò chơi chỉ ôn kiến thức và các bước, không chấm sản phẩm sáng tạo."
+     ],
+     "examples": [
+      {
+       "title": "In lá",
+       "lines": [
+        "Chọn lá gân rõ → quét màu mặt có gân → úp lên giấy, ấn đều → nhấc lá"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Quy trình sản phẩm",
+       "tasks": [
+        {
+         "key": "bia_sach",
+         "prompt": "Xếp các bước thiết kế bìa sách.",
+         "items": [
+          "Tìm hiểu nội dung cuốn sách",
+          "Phác thảo bố cục hình và chữ",
+          "Vẽ màu, hoàn thiện chữ",
+          "Trưng bày, giới thiệu sản phẩm"
+         ],
+         "explanation": "Hiểu nội dung trước để bìa hợp với sách; phác thảo rồi mới vẽ màu.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "vo_hop",
+         "prompt": "Xếp các bước làm con vật từ vỏ hộp.",
+         "items": [
+          "Chọn và làm sạch vỏ hộp",
+          "Ghép thử các hộp thành dáng con vật",
+          "Dán cố định các bộ phận",
+          "Vẽ màu, trang trí chi tiết"
+         ],
+         "explanation": "Ghép thử để chọn dáng đẹp, dán chắc rồi mới trang trí.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "nan_tuong",
+         "prompt": "Xếp các bước nặn tượng.",
+         "items": [
+          "Nhào đất cho dẻo",
+          "Tạo khối chính",
+          "Thêm chi tiết",
+          "Chỉnh sửa, hoàn thiện"
+         ],
+         "explanation": "Khối chính trước, chi tiết sau, cuối cùng chỉnh sửa.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "in_la",
+         "prompt": "Xếp các bước in tranh từ lá cây.",
+         "items": [
+          "Chọn lá có gân rõ",
+          "Quét màu lên mặt có gân",
+          "Úp mặt có màu lên giấy, ấn đều",
+          "Nhấc lá ra nhẹ nhàng"
+         ],
+         "explanation": "Mặt có gân nổi sẽ in rõ hình lá.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "buc_tranh",
+         "prompt": "Xếp các bước tạo một bức tranh.",
+         "items": [
+          "Tìm ý tưởng",
+          "Phác thảo",
+          "Vẽ màu",
+          "Trưng bày và chia sẻ"
+         ],
+         "explanation": "Ý tưởng → phác thảo → màu → chia sẻ.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "mt5.thiet_ke_do_choi",
+     "order": 2,
+     "title": "Thiết kế đồ chơi từ vật liệu tái chế",
+     "description": "Thực hành theo nhóm cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt5.dieu_khac",
+   "grade": 5,
+   "order": 4,
+   "title": "Điêu khắc",
+   "lessons": [
+    {
+     "key": "mt5.tuong_dat",
+     "order": 1,
+     "title": "Nặn tượng người và con vật",
+     "description": "Thực hành nặn tạo dáng cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt6.ly_luan",
+   "grade": 6,
+   "order": 1,
+   "title": "Lí luận và lịch sử mĩ thuật",
+   "lessons": [
+    {
+     "key": "mt6.tien_su_co_dai",
+     "order": 1,
+     "title": "Mĩ thuật thời tiền sử và Ai Cập cổ đại",
+     "description": "Biết đặc điểm tranh hang động tiền sử và mĩ thuật Ai Cập cổ đại.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu nội dung, chất liệu tranh hang động tiền sử",
+      "Nêu đặc điểm tranh tường, công trình Ai Cập cổ đại"
+     ],
+     "summary": [
+      "Người tiền sử vẽ bò rừng, ngựa, hươu… lên vách hang bằng đất son, than; nổi tiếng là hang Lascaux (Pháp), Altamira (Tây Ban Nha).",
+      "Tranh tường Ai Cập cổ đại vẽ người theo lối chính diện: đầu và chân nhìn nghiêng, mắt và vai nhìn thẳng.",
+      "Kim tự tháp và tượng Nhân sư ở Giza là biểu tượng của kiến trúc, điêu khắc Ai Cập cổ đại."
+     ],
+     "examples": [
+      {
+       "title": "Màu tiền sử",
+       "lines": [
+        "Đỏ, vàng từ đất son; đen từ than củi"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Mĩ thuật cổ xưa",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "noi_dung",
+         "question": "Tranh hang động thời tiền sử thường vẽ gì?",
+         "options": [
+          {
+           "text": "Con vật như bò rừng, ngựa, hươu và cảnh săn bắt",
+           "ok": true,
+           "why": "Đúng: săn bắt là đời sống chính của người tiền sử."
+          },
+          {
+           "text": "Phong cảnh thành phố",
+           "ok": false,
+           "why": "Thời tiền sử chưa có thành phố."
+          },
+          {
+           "text": "Chân dung vua chúa",
+           "ok": false,
+           "why": "Thời tiền sử chưa có nhà nước, vua chúa."
+          }
+         ],
+         "explanation": "Con vật là đề tài chính của tranh hang động."
+        },
+        {
+         "key": "mau",
+         "question": "Người tiền sử làm màu vẽ từ đâu?",
+         "options": [
+          {
+           "text": "Đất son, than, khoáng chất trộn với nước hoặc mỡ",
+           "ok": true,
+           "why": "Đúng: màu lấy từ tự nhiên."
+          },
+          {
+           "text": "Sơn dầu đóng tuýp",
+           "ok": false,
+           "why": "Sơn dầu ra đời rất lâu sau này."
+          },
+          {
+           "text": "Bút chì màu",
+           "ok": false,
+           "why": "Thời tiền sử chưa có bút chì màu."
+          }
+         ],
+         "explanation": "Màu tiền sử chủ yếu là đỏ, vàng, nâu, đen."
+        },
+        {
+         "key": "hang",
+         "question": "Hang Lascaux và hang Altamira nổi tiếng vì điều gì?",
+         "options": [
+          {
+           "text": "Có tranh vẽ thời tiền sử trên vách hang",
+           "ok": true,
+           "why": "Đúng: đây là những bức tranh hang động nổi tiếng thế giới."
+          },
+          {
+           "text": "Là nơi xây kim tự tháp",
+           "ok": false,
+           "why": "Kim tự tháp ở Ai Cập."
+          },
+          {
+           "text": "Là nơi có tượng Nhân sư",
+           "ok": false,
+           "why": "Tượng Nhân sư ở Giza, Ai Cập."
+          }
+         ],
+         "explanation": "Lascaux (Pháp), Altamira (Tây Ban Nha)."
+        },
+        {
+         "key": "chinh_dien",
+         "question": "Trong tranh tường Ai Cập cổ đại, người thường được vẽ thế nào?",
+         "options": [
+          {
+           "text": "Đầu và chân nhìn nghiêng, mắt và vai nhìn thẳng",
+           "ok": true,
+           "why": "Đúng: lối vẽ chính diện cho thấy rõ từng bộ phận."
+          },
+          {
+           "text": "Theo luật xa gần như ảnh chụp",
+           "ok": false,
+           "why": "Luật xa gần phát triển mạnh ở thời Phục hưng."
+          },
+          {
+           "text": "Chỉ là bóng đen, không có màu",
+           "ok": false,
+           "why": "Tranh Ai Cập có nhiều màu."
+          }
+         ],
+         "explanation": "Lối vẽ chính diện là nét riêng của tranh Ai Cập."
+        },
+        {
+         "key": "cong_trinh",
+         "question": "Công trình nào là biểu tượng của Ai Cập cổ đại?",
+         "options": [
+          {
+           "text": "Kim tự tháp và tượng Nhân sư ở Giza",
+           "ok": true,
+           "why": "Đúng: công trình đá khổng lồ hàng nghìn năm tuổi."
+          },
+          {
+           "text": "Đền Parthenon",
+           "ok": false,
+           "why": "Parthenon ở Hi Lạp."
+          },
+          {
+           "text": "Vạn Lí Trường Thành",
+           "ok": false,
+           "why": "Vạn Lí Trường Thành ở Trung Quốc."
+          }
+         ],
+         "explanation": "Kim tự tháp là lăng mộ của các pharaoh."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "mt6.tien_su_viet_nam",
+     "order": 2,
+     "title": "Mĩ thuật Việt Nam thời tiền sử",
+     "description": "Tìm hiểu hình khắc, đồ gốm, công cụ thời tiền sử ở Việt Nam.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt6.yeu_to",
+   "grade": 6,
+   "order": 2,
+   "title": "Yếu tố và nguyên lí tạo hình",
+   "lessons": [
+    {
+     "key": "mt6.yeu_to_nguyen_li",
+     "order": 1,
+     "title": "Yếu tố và nguyên lí tạo hình",
+     "description": "Nhận biết các yếu tố tạo hình và nguyên lí tạo hình qua ví dụ.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu các yếu tố tạo hình: chấm, nét, hình, khối, màu sắc, đậm nhạt, chất cảm, không gian",
+      "Nêu các nguyên lí: cân bằng, tương phản, lặp lại, nhịp điệu, nhấn mạnh…",
+      "Nhận ra yếu tố, nguyên lí trong một sản phẩm"
+     ],
+     "summary": [
+      "Yếu tố tạo hình là \"vật liệu\" của hình ảnh: chấm, nét, hình, khối, màu sắc, đậm nhạt, chất cảm, không gian.",
+      "Nguyên lí tạo hình là cách sắp xếp các yếu tố: cân bằng, tương phản, lặp lại, nhịp điệu, nhấn mạnh, chuyển động, tỉ lệ, hài hoà.",
+      "Vẽ, nặn, cắt dán là thực hành cùng thầy cô; trò chơi chỉ ôn kiến thức và các bước, không chấm sản phẩm sáng tạo."
+     ],
+     "examples": [
+      {
+       "title": "Đọc một bức tranh",
+       "lines": [
+        "Ngôi nhà đỏ giữa cánh đồng xanh: màu sắc (yếu tố) tạo tương phản (nguyên lí)."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Yếu tố và nguyên lí",
+       "tasks": [
+        {
+         "key": "yeu_to_1",
+         "prompt": "Ghép yếu tố tạo hình với ví dụ.",
+         "pairs": [
+          [
+           "Chấm",
+           "Những đốm nhỏ tạo bề mặt lấm tấm"
+          ],
+          [
+           "Nét",
+           "Đường viền uốn lượn của dòng sông"
+          ],
+          [
+           "Hình",
+           "Mảng phẳng như chiếc lá cắt bằng giấy"
+          ],
+          [
+           "Khối",
+           "Vật có ba chiều, nhìn được nhiều phía"
+          ]
+         ],
+         "explanation": "Chấm, nét, hình, khối là các yếu tố cơ bản."
+        },
+        {
+         "key": "yeu_to_2",
+         "prompt": "Ghép yếu tố tạo hình với ví dụ.",
+         "pairs": [
+          [
+           "Chất cảm",
+           "Vân gỗ, vỏ cây sần sùi"
+          ],
+          [
+           "Đậm nhạt",
+           "Mức sáng tối khác nhau trên vật"
+          ],
+          [
+           "Không gian",
+           "Cảm giác xa gần, trước sau"
+          ],
+          [
+           "Màu sắc",
+           "Đỏ của hoa phượng, xanh của lá"
+          ]
+         ],
+         "explanation": "Chất cảm, đậm nhạt, không gian, màu sắc làm hình ảnh phong phú."
+        },
+        {
+         "key": "nguyen_li",
+         "prompt": "Ghép nguyên lí với ý nghĩa.",
+         "pairs": [
+          [
+           "Cân bằng",
+           "Hai bên bố cục có độ nặng thị giác tương đương"
+          ],
+          [
+           "Tương phản",
+           "Sáng cạnh tối, to cạnh nhỏ, nóng cạnh lạnh"
+          ],
+          [
+           "Lặp lại",
+           "Một hoạ tiết xuất hiện nhiều lần"
+          ],
+          [
+           "Nhịp điệu",
+           "Lặp lại có thay đổi, gợi chuyển động"
+          ],
+          [
+           "Nhấn mạnh",
+           "Làm nổi bật trọng tâm"
+          ]
+         ],
+         "explanation": "Nguyên lí là cách sắp xếp yếu tố tạo hình."
+        },
+        {
+         "key": "vi_du",
+         "prompt": "Ghép ví dụ với nguyên lí tạo hình.",
+         "pairs": [
+          [
+           "Hoa văn đều nhau quanh miệng bình",
+           "Lặp lại"
+          ],
+          [
+           "Ngôi nhà đỏ nổi giữa cánh đồng xanh",
+           "Tương phản"
+          ],
+          [
+           "Hàng cột to nhỏ, thưa dày như sóng lượn",
+           "Nhịp điệu"
+          ],
+          [
+           "Cây to bên trái, nhóm cây nhỏ bên phải",
+           "Cân bằng"
+          ]
+         ],
+         "explanation": "Đọc kĩ cách sắp xếp để nhận ra nguyên lí."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "mt6.do_hoa",
+   "grade": 6,
+   "order": 3,
+   "title": "Đồ hoạ: tranh in",
+   "lessons": [
+    {
+     "key": "mt6.tranh_in",
+     "order": 1,
+     "title": "Các bước làm tranh in",
+     "description": "Nhớ thứ tự các bước làm tranh in từ bản khắc, bản cắt dán, khuôn tô.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Sắp xếp đúng các bước của từng kiểu in",
+      "Biết hình in ra ngược chiều với hình trên bản in"
+     ],
+     "summary": [
+      "Tranh in làm từ một bản in (khuôn in) có thể in ra nhiều bản giống nhau.",
+      "Hình in ra ngược chiều với hình trên bản in (như soi gương): chữ trên bản in phải viết ngược.",
+      "In bản cắt dán: dán các mảnh bìa lên nền → lăn màu → đặt giấy, xoa đều → bóc giấy.",
+      "Vẽ, nặn, cắt dán là thực hành cùng thầy cô; trò chơi chỉ ôn kiến thức và các bước, không chấm sản phẩm sáng tạo."
+     ],
+     "examples": [
+      {
+       "title": "In xốp",
+       "lines": [
+        "Ấn bút chì vẽ lõm lên xốp → lăn màu → úp giấy → nhấc giấy: nét lõm thành nét trắng."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Các bước in",
+       "tasks": [
+        {
+         "key": "ban_khac",
+         "prompt": "Xếp các bước làm tranh in từ bản khắc.",
+         "items": [
+          "Vẽ hình lên bản in",
+          "Khắc bỏ phần không in",
+          "Lăn mực lên bản in",
+          "Đặt giấy lên và ép đều",
+          "Nhấc giấy ra, phơi khô"
+         ],
+         "explanation": "Phần khắc bỏ không nhận mực, phần còn lại in thành hình.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "cat_dan",
+         "prompt": "Xếp các bước in từ bản cắt dán bìa.",
+         "items": [
+          "Cắt bìa thành các hình",
+          "Dán các hình lên tấm bìa nền",
+          "Lăn màu lên bản in",
+          "Đặt giấy, xoa đều",
+          "Bóc giấy ra"
+         ],
+         "explanation": "Các mảnh bìa dán nổi lên sẽ nhận màu và in thành hình.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "khuon_to",
+         "prompt": "Xếp các bước in bằng khuôn tô.",
+         "items": [
+          "Vẽ hình lên tấm bìa cứng",
+          "Khoét bỏ phần hình",
+          "Đặt khuôn lên giấy",
+          "Chấm màu qua phần khoét",
+          "Nhấc khuôn ra"
+         ],
+         "explanation": "Màu đi qua phần khoét để tạo hình trên giấy.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "xop",
+         "prompt": "Xếp các bước in tranh từ tấm xốp.",
+         "items": [
+          "Ấn bút vẽ nét lõm lên tấm xốp",
+          "Lăn màu lên mặt xốp",
+          "Úp giấy lên, xoa đều",
+          "Nhấc giấy ra"
+         ],
+         "explanation": "Nét lõm không dính màu nên thành nét trắng trên bản in.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "mt6.thiet_ke_thoi_trang",
+     "order": 2,
+     "title": "Thiết kế trang phục từ vật liệu tái chế",
+     "description": "Thực hành theo nhóm cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt6.hoi_hoa",
+   "grade": 6,
+   "order": 4,
+   "title": "Hội hoạ",
+   "lessons": [
+    {
+     "key": "mt6.tranh_tinh_vat",
+     "order": 1,
+     "title": "Vẽ tranh tĩnh vật",
+     "description": "Thực hành quan sát và vẽ đồ vật cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "mt6.tranh_de_tai",
+     "order": 2,
+     "title": "Vẽ tranh đề tài lễ hội quê hương",
+     "description": "Thực hành vẽ tranh theo đề tài.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt7.ly_luan",
+   "grade": 7,
+   "order": 1,
+   "title": "Lí luận và lịch sử mĩ thuật",
+   "lessons": [
+    {
+     "key": "mt7.trong_dong",
+     "order": 1,
+     "title": "Trống đồng Đông Sơn và hoa văn",
+     "description": "Biết chất liệu, hình ảnh, hoa văn trên trống đồng Đông Sơn.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu chất liệu, cách làm trống đồng",
+      "Mô tả bố cục và hoa văn trên mặt trống",
+      "Hiểu trống đồng phản ánh đời sống người Việt cổ"
+     ],
+     "summary": [
+      "Trống đồng Đông Sơn đúc bằng hợp kim đồng, tiêu biểu là trống đồng Ngọc Lũ.",
+      "Giữa mặt trống là ngôi sao (mặt trời) nhiều cánh; quanh đó là các vòng tròn đồng tâm với hoa văn, chim Lạc bay, người hoá trang lông chim, nhà sàn, cảnh giã gạo.",
+      "Hoa văn trống đồng dùng lặp lại, nhịp điệu và đối xứng."
+     ],
+     "examples": [
+      {
+       "title": "Bố cục mặt trống",
+       "lines": [
+        "Ngôi sao ở tâm → các vòng hoa văn đồng tâm → vòng chim Lạc ngoài cùng"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Trống đồng Đông Sơn",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "chat_lieu",
+         "question": "Trống đồng Đông Sơn được làm bằng cách nào?",
+         "options": [
+          {
+           "text": "Đúc bằng hợp kim đồng",
+           "ok": true,
+           "why": "Đúng: người Việt cổ có kĩ thuật đúc đồng rất cao."
+          },
+          {
+           "text": "Đẽo từ gỗ",
+           "ok": false,
+           "why": "Trống đồng làm bằng kim loại."
+          },
+          {
+           "text": "Nặn bằng đất sét rồi nung",
+           "ok": false,
+           "why": "Đó là cách làm đồ gốm."
+          }
+         ],
+         "explanation": "Trống đồng là đỉnh cao của nghề đúc đồng Đông Sơn."
+        },
+        {
+         "key": "tam",
+         "question": "Chính giữa mặt trống đồng thường có hình gì?",
+         "options": [
+          {
+           "text": "Ngôi sao (mặt trời) nhiều cánh",
+           "ok": true,
+           "why": "Đúng: hình mặt trời ở tâm, các vòng hoa văn toả ra."
+          },
+          {
+           "text": "Con rồng",
+           "ok": false,
+           "why": "Rồng không phải hình trung tâm của mặt trống Đông Sơn."
+          },
+          {
+           "text": "Chữ viết",
+           "ok": false,
+           "why": "Mặt trống không có chữ ở tâm."
+          }
+         ],
+         "explanation": "Ngôi sao giữa mặt trống."
+        },
+        {
+         "key": "chim",
+         "question": "Loài chim nào thường được khắc bay quanh mặt trống?",
+         "options": [
+          {
+           "text": "Chim Lạc (chim mỏ dài, cổ dài)",
+           "ok": true,
+           "why": "Đúng: chim Lạc bay theo vòng tròn quanh mặt trống."
+          },
+          {
+           "text": "Chim cánh cụt",
+           "ok": false,
+           "why": "Chim cánh cụt không sống ở nơi người Việt cổ ở."
+          },
+          {
+           "text": "Chim công xoè đuôi",
+           "ok": false,
+           "why": "Hình chim tiêu biểu là chim Lạc."
+          }
+         ],
+         "explanation": "Chim Lạc là hình ảnh tiêu biểu của trống đồng."
+        },
+        {
+         "key": "vong",
+         "question": "Hoa văn trên mặt trống đồng được sắp xếp thế nào?",
+         "options": [
+          {
+           "text": "Thành các vòng tròn đồng tâm quanh ngôi sao giữa",
+           "ok": true,
+           "why": "Đúng: cách sắp xếp đều đặn tạo nhịp điệu, lặp lại."
+          },
+          {
+           "text": "Rải lung tung, không theo thứ tự",
+           "ok": false,
+           "why": "Hoa văn trống đồng sắp xếp rất chặt chẽ."
+          },
+          {
+           "text": "Chỉ có một hình ở giữa, còn lại để trống",
+           "ok": false,
+           "why": "Mặt trống có nhiều vòng hoa văn."
+          }
+         ],
+         "explanation": "Bố cục đồng tâm, lặp lại, nhịp điệu."
+        },
+        {
+         "key": "doi_song",
+         "question": "Hình ảnh trên trống đồng cho ta biết gì về người Việt cổ?",
+         "options": [
+          {
+           "text": "Đời sống: giã gạo, chèo thuyền, nhảy múa, ở nhà sàn",
+           "ok": true,
+           "why": "Đúng: trống đồng là \"bức tranh\" về đời sống thời Văn Lang – Âu Lạc."
+          },
+          {
+           "text": "Họ sống trong nhà cao tầng",
+           "ok": false,
+           "why": "Người Việt cổ ở nhà sàn."
+          },
+          {
+           "text": "Họ đi lại bằng ô tô",
+           "ok": false,
+           "why": "Thời đó chưa có ô tô."
+          }
+         ],
+         "explanation": "Trống đồng phản ánh đời sống nông nghiệp lúa nước."
+        },
+        {
+         "key": "ngoc_lu",
+         "question": "Chiếc trống đồng nổi tiếng với hoa văn đẹp và đầy đủ bậc nhất là:",
+         "options": [
+          {
+           "text": "Trống đồng Ngọc Lũ",
+           "ok": true,
+           "why": "Đúng: trống Ngọc Lũ là bảo vật quốc gia."
+          },
+          {
+           "text": "Trống cơm",
+           "ok": false,
+           "why": "Trống cơm là nhạc cụ gõ bằng gỗ, da."
+          },
+          {
+           "text": "Trống chầu",
+           "ok": false,
+           "why": "Trống chầu dùng trong ca trù, hát tuồng."
+          }
+         ],
+         "explanation": "Trống đồng Ngọc Lũ tiêu biểu cho văn hoá Đông Sơn."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "mt7.my_thuat_hi_la",
+     "order": 2,
+     "title": "Mĩ thuật Hi Lạp – La Mã cổ đại",
+     "description": "Tìm hiểu tượng, đền đài Hi Lạp – La Mã.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt7.thiet_ke",
+   "grade": 7,
+   "order": 2,
+   "title": "Thiết kế đồ hoạ và mĩ thuật ứng dụng",
+   "lessons": [
+    {
+     "key": "mt7.quy_trinh_thiet_ke",
+     "order": 1,
+     "title": "Quy trình thiết kế logo, poster, bao bì",
+     "description": "Nhớ các bước thiết kế và chọn phương án theo tiêu chí.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Sắp xếp đúng quy trình thiết kế",
+      "Chọn phương án thiết kế theo tiêu chí đã nêu"
+     ],
+     "summary": [
+      "Thiết kế bắt đầu từ tìm hiểu (ai dùng, để làm gì), rồi phác thảo nhiều phương án, chọn và hoàn thiện, cuối cùng giới thiệu, lấy góp ý.",
+      "Logo cần đơn giản, dễ nhớ, nhận ra được khi in nhỏ; poster cần thông điệp ngắn, chữ to, có trọng tâm.",
+      "Sáng tạo có nhiều đáp án: mỗi câu hỏi nêu tiêu chí, có thể có nhiều phương án đạt."
+     ],
+     "examples": [
+      {
+       "title": "Logo câu lạc bộ cờ vua",
+       "lines": [
+        "Quân mã cách điệu + chữ viết tắt tên câu lạc bộ, hai màu."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Quy trình thiết kế",
+       "tasks": [
+        {
+         "key": "logo",
+         "prompt": "Xếp các bước thiết kế logo cho câu lạc bộ.",
+         "items": [
+          "Tìm hiểu tên, ý nghĩa câu lạc bộ",
+          "Phác thảo nhiều phương án",
+          "Chọn phương án phù hợp nhất",
+          "Hoàn thiện hình, chữ và màu",
+          "Giới thiệu, lấy góp ý"
+         ],
+         "explanation": "Tìm hiểu → phác thảo → chọn → hoàn thiện → giới thiệu.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "poster",
+         "prompt": "Xếp các bước làm poster cổ động.",
+         "items": [
+          "Xác định thông điệp và người xem",
+          "Chọn hình ảnh và khẩu hiệu ngắn",
+          "Sắp xếp bố cục hình và chữ",
+          "Vẽ màu, hoàn thiện",
+          "Treo ở nơi dễ nhìn"
+         ],
+         "explanation": "Thông điệp quyết định hình ảnh, chữ và bố cục.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "trang_phuc",
+         "prompt": "Xếp các bước thiết kế mẫu trang phục.",
+         "items": [
+          "Tìm hiểu người mặc và dịp sử dụng",
+          "Phác thảo dáng trang phục",
+          "Chọn chất liệu, màu và hoạ tiết",
+          "Hoàn thiện bản vẽ thiết kế"
+         ],
+         "explanation": "Hiểu người mặc trước, rồi mới phác dáng và chọn chất liệu.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "bao_bi",
+         "prompt": "Xếp các bước làm hộp bao bì.",
+         "items": [
+          "Tìm hiểu sản phẩm cần đóng gói",
+          "Phác thảo hình dáng và trang trí",
+          "Vẽ hình khai triển của hộp",
+          "Trang trí, cắt, gấp và dán thành hộp"
+         ],
+         "explanation": "Hình khai triển là hộp \"trải phẳng\"; vẽ đúng thì gấp mới thành hộp.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        }
+       ]
+      },
+      {
+       "game": "choice",
+       "title": "Chọn theo tiêu chí",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "logo_nho",
+         "question": "Tiêu chí: logo vẫn nhận ra được khi in rất nhỏ trên huy hiệu. Phương án nào đạt?",
+         "options": [
+          {
+           "text": "Hình đơn giản, ít chi tiết, màu rõ",
+           "ok": true,
+           "why": "Đạt: hình đơn giản vẫn rõ khi thu nhỏ."
+          },
+          {
+           "text": "Chữ viết tắt cách điệu, nét đậm",
+           "ok": true,
+           "why": "Đạt: nét đậm, ít chi tiết dễ nhận ra."
+          },
+          {
+           "text": "Bức tranh nhiều chi tiết nhỏ và mười màu",
+           "ok": false,
+           "why": "Chưa đạt: chi tiết nhỏ sẽ nhoè khi in nhỏ."
+          }
+         ],
+         "explanation": "Logo tốt đơn giản, dễ nhớ."
+        },
+        {
+         "key": "poster_xa",
+         "question": "Tiêu chí: khẩu hiệu poster đọc được từ xa. Phương án nào đạt?",
+         "options": [
+          {
+           "text": "Khẩu hiệu ngắn, chữ to, màu tương phản với nền",
+           "ok": true,
+           "why": "Đạt: chữ to, tương phản dễ đọc từ xa."
+          },
+          {
+           "text": "Chữ nhỏ, màu chữ gần giống màu nền",
+           "ok": false,
+           "why": "Chưa đạt: chữ chìm vào nền."
+          },
+          {
+           "text": "Viết một đoạn văn dài",
+           "ok": false,
+           "why": "Chưa đạt: người đi qua không kịp đọc."
+          }
+         ],
+         "explanation": "Poster: ngắn, to, tương phản."
+        },
+        {
+         "key": "logo_bong_da",
+         "question": "Tiêu chí: logo thể hiện được câu lạc bộ bóng đá của lớp. Phương án nào đạt?",
+         "options": [
+          {
+           "text": "Quả bóng cách điệu kết hợp tên lớp",
+           "ok": true,
+           "why": "Đạt: hình quả bóng gợi đúng bóng đá, có tên lớp."
+          },
+          {
+           "text": "Hình cầu thủ cách điệu đơn giản kèm chữ viết tắt",
+           "ok": true,
+           "why": "Đạt: gợi bóng đá và nhận ra được lớp."
+          },
+          {
+           "text": "Hình bông hoa, không có chữ",
+           "ok": false,
+           "why": "Chưa đạt: không gợi bóng đá, không nhận ra lớp nào."
+          }
+         ],
+         "explanation": "Hình ảnh phải gợi đúng nội dung."
+        },
+        {
+         "key": "bao_bi_be",
+         "question": "Tiêu chí: hộp bánh cho trẻ em phải vui mắt và rõ tên sản phẩm. Phương án nào đạt?",
+         "options": [
+          {
+           "text": "Màu tươi, hình con vật ngộ nghĩnh, tên bánh to rõ",
+           "ok": true,
+           "why": "Đạt: vui mắt và dễ đọc tên."
+          },
+          {
+           "text": "Toàn màu xám, không ghi tên sản phẩm",
+           "ok": false,
+           "why": "Chưa đạt: không vui mắt, không có thông tin."
+          },
+          {
+           "text": "Tên bánh rất nhỏ ở mặt đáy hộp",
+           "ok": false,
+           "why": "Chưa đạt: người mua khó thấy tên."
+          }
+         ],
+         "explanation": "Bao bì vừa đẹp vừa cung cấp thông tin."
+        },
+        {
+         "key": "trong_tam",
+         "question": "Tiêu chí: poster bảo vệ môi trường có trọng tâm rõ. Phương án nào đạt?",
+         "options": [
+          {
+           "text": "Một hình ảnh lớn ở trung tâm, chi tiết phụ nhỏ hơn",
+           "ok": true,
+           "why": "Đạt: hình lớn thu hút ánh nhìn trước tiên."
+          },
+          {
+           "text": "Mười hình to bằng nhau rải khắp poster",
+           "ok": false,
+           "why": "Chưa đạt: mắt không biết nhìn vào đâu."
+          },
+          {
+           "text": "Chỉ có nền trắng, không hình, không chữ",
+           "ok": false,
+           "why": "Chưa đạt: không có nội dung để nhấn mạnh."
+          }
+         ],
+         "explanation": "Nhấn mạnh: làm nổi bật một trọng tâm."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "mt7.thiet_ke_thiep",
+     "order": 2,
+     "title": "Thiết kế thiệp, bìa lịch",
+     "description": "Thực hành thiết kế đồ hoạ cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt7.hoi_hoa",
+   "grade": 7,
+   "order": 3,
+   "title": "Hội hoạ",
+   "lessons": [
+    {
+     "key": "mt7.tranh_phong_canh",
+     "order": 1,
+     "title": "Vẽ tranh phong cảnh",
+     "description": "Thực hành vẽ phong cảnh có xa gần.",
+     "status": "planned"
+    },
+    {
+     "key": "mt7.tranh_chan_dung",
+     "order": 2,
+     "title": "Vẽ tranh chân dung",
+     "description": "Thực hành quan sát tỉ lệ khuôn mặt cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt7.dieu_khac",
+   "grade": 7,
+   "order": 4,
+   "title": "Điêu khắc",
+   "lessons": [
+    {
+     "key": "mt7.tao_dang_tuong",
+     "order": 1,
+     "title": "Tạo dáng tượng từ dây thép, giấy báo",
+     "description": "Thực hành tạo hình khối cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt8.ly_luan",
+   "grade": 8,
+   "order": 1,
+   "title": "Lí luận và lịch sử mĩ thuật",
+   "lessons": [
+    {
+     "key": "mt8.phuc_hung",
+     "order": 1,
+     "title": "Mĩ thuật thời Phục hưng",
+     "description": "Biết các danh hoạ và tác phẩm tiêu biểu của thời Phục hưng.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được đặc điểm của mĩ thuật Phục hưng",
+      "Ghép danh hoạ với tác phẩm tiêu biểu"
+     ],
+     "summary": [
+      "Phục hưng (thế kỉ XIV–XVI, khởi đầu ở Ý, nổi bật ở Florence) là thời kì \"làm sống lại\" văn hoá Hi Lạp – La Mã cổ đại.",
+      "Mĩ thuật Phục hưng hướng về con người, tỉ lệ cân đối, dùng luật xa gần (phối cảnh) và đậm nhạt tạo khối.",
+      "Danh hoạ: Leonardo da Vinci (Mona Lisa, Bữa tiệc cuối cùng), Michelangelo (tượng David, trần nhà nguyện Sistine), Raphael (Trường học Athens), Botticelli (Sự ra đời của thần Vệ nữ)."
+     ],
+     "examples": [
+      {
+       "title": "Michelangelo",
+       "lines": [
+        "Vừa là nhà điêu khắc, vừa là hoạ sĩ và kiến trúc sư."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Danh hoạ Phục hưng",
+       "tasks": [
+        {
+         "key": "tac_pham_1",
+         "prompt": "Ghép danh hoạ với tác phẩm.",
+         "pairs": [
+          [
+           "Leonardo da Vinci",
+           "Mona Lisa"
+          ],
+          [
+           "Michelangelo",
+           "Tượng David"
+          ],
+          [
+           "Raphael",
+           "Trường học Athens"
+          ],
+          [
+           "Botticelli",
+           "Sự ra đời của thần Vệ nữ"
+          ]
+         ],
+         "explanation": "Bốn danh hoạ tiêu biểu của Phục hưng Ý."
+        },
+        {
+         "key": "tac_pham_2",
+         "prompt": "Ghép tác phẩm với tác giả.",
+         "pairs": [
+          [
+           "Bữa tiệc cuối cùng",
+           "Leonardo da Vinci"
+          ],
+          [
+           "Trần nhà nguyện Sistine",
+           "Michelangelo"
+          ],
+          [
+           "Mùa xuân (Primavera)",
+           "Botticelli"
+          ]
+         ],
+         "explanation": "Bữa tiệc cuối cùng và trần nhà nguyện Sistine là những bích hoạ nổi tiếng."
+        },
+        {
+         "key": "khai_niem",
+         "prompt": "Ghép thuật ngữ với ý nghĩa.",
+         "pairs": [
+          [
+           "Phục hưng",
+           "Làm sống lại văn hoá Hi Lạp – La Mã"
+          ],
+          [
+           "Phối cảnh",
+           "Cách vẽ tạo chiều sâu không gian"
+          ],
+          [
+           "Bích hoạ",
+           "Tranh vẽ trên tường, trần nhà"
+          ],
+          [
+           "Florence",
+           "Thành phố được coi là cái nôi của Phục hưng"
+          ]
+         ],
+         "explanation": "Phục hưng để lại nhiều thành tựu về phối cảnh và bích hoạ."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "mt8.my_thuat_ly_tran",
+     "order": 2,
+     "title": "Mĩ thuật Việt Nam thời Lý – Trần",
+     "description": "Tìm hiểu kiến trúc, điêu khắc, gốm thời Lý – Trần.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt8.hoi_hoa",
+   "grade": 8,
+   "order": 2,
+   "title": "Hội hoạ: không gian và phối cảnh",
+   "lessons": [
+    {
+     "key": "mt8.phoi_canh",
+     "order": 1,
+     "title": "Luật xa gần: đường tầm mắt và điểm tụ",
+     "description": "Hiểu đường tầm mắt, điểm tụ và cách vẽ vật ở xa, ở gần.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Xác định đường tầm mắt và điểm tụ",
+      "Biết vật cùng kích thước ở xa trông nhỏ, mờ hơn"
+     ],
+     "summary": [
+      "Đường tầm mắt (đường chân trời) nằm ngang tầm mắt người vẽ.",
+      "Các đường song song chạy ra xa trông như gặp nhau ở điểm tụ trên đường tầm mắt.",
+      "Vật cùng cỡ ở xa vẽ nhỏ hơn, gần nhau hơn, nhạt và ít chi tiết hơn.",
+      "Vẽ, nặn, cắt dán là thực hành cùng thầy cô; trò chơi chỉ ôn kiến thức và các bước, không chấm sản phẩm sáng tạo."
+     ],
+     "examples": [
+      {
+       "title": "Con đường thẳng",
+       "lines": [
+        "Hai mép đường xiên lại gặp nhau ở điểm tụ."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Xa gần",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "tam_mat",
+         "question": "Trong tranh phối cảnh, đường tầm mắt nằm ở đâu?",
+         "options": [
+          {
+           "text": "Ngang tầm mắt người vẽ",
+           "ok": true,
+           "why": "Đúng: đường tầm mắt thay đổi theo độ cao chỗ đứng nhìn."
+          },
+          {
+           "text": "Luôn ở mép dưới tờ giấy",
+           "ok": false,
+           "why": "Vị trí đường tầm mắt tuỳ chỗ người vẽ đứng."
+          },
+          {
+           "text": "Luôn ở chính giữa tờ giấy",
+           "ok": false,
+           "why": "Có thể đặt cao, thấp hoặc giữa."
+          }
+         ],
+         "explanation": "Đường tầm mắt = đường chân trời, ngang tầm mắt."
+        },
+        {
+         "key": "diem_tu",
+         "question": "Điểm tụ là gì?",
+         "options": [
+          {
+           "text": "Điểm trên đường tầm mắt mà các đường song song chạy xa hội tụ về",
+           "ok": true,
+           "why": "Đúng: ví dụ hai thanh ray đường tàu."
+          },
+          {
+           "text": "Điểm sáng nhất của bức tranh",
+           "ok": false,
+           "why": "Đó là chỗ sáng nhất, không phải điểm tụ."
+          },
+          {
+           "text": "Điểm chính giữa tờ giấy",
+           "ok": false,
+           "why": "Điểm tụ có thể ở nhiều chỗ trên đường tầm mắt."
+          }
+         ],
+         "explanation": "Điểm tụ nằm trên đường tầm mắt."
+        },
+        {
+         "key": "cot_dien",
+         "question": "Hàng cột điện cao bằng nhau chạy ra xa. Trong tranh, các cột vẽ thế nào?",
+         "options": [
+          {
+           "text": "Nhỏ dần và gần nhau hơn khi càng xa",
+           "ok": true,
+           "why": "Đúng: vật ở xa trông nhỏ hơn."
+          },
+          {
+           "text": "To dần khi càng xa",
+           "ok": false,
+           "why": "Ngược với luật xa gần."
+          },
+          {
+           "text": "Bằng nhau và cách đều như nhau",
+           "ok": false,
+           "why": "Như vậy tranh không có chiều sâu."
+          }
+         ],
+         "explanation": "Xa nhỏ, gần to."
+        },
+        {
+         "key": "mau_xa",
+         "question": "Theo luật xa gần, vật ở xa có màu sắc thế nào so với vật ở gần?",
+         "options": [
+          {
+           "text": "Nhạt hơn, mờ hơn, ít chi tiết hơn",
+           "ok": true,
+           "why": "Đúng: không khí làm vật ở xa mờ nhạt."
+          },
+          {
+           "text": "Đậm hơn, rõ hơn",
+           "ok": false,
+           "why": "Vật gần mới rõ, đậm."
+          },
+          {
+           "text": "Giống hệt nhau",
+           "ok": false,
+           "why": "Màu xa và gần khác nhau."
+          }
+         ],
+         "explanation": "Xa mờ, gần rõ."
+        },
+        {
+         "key": "tam_mat_thap",
+         "question": "Khi đặt đường tầm mắt thấp, người xem có cảm giác gì?",
+         "options": [
+          {
+           "text": "Như nhìn từ dưới lên, toà nhà trông cao lớn hơn",
+           "ok": true,
+           "why": "Đúng: tầm mắt thấp làm vật cao trông sừng sững."
+          },
+          {
+           "text": "Như nhìn từ trên máy bay xuống",
+           "ok": false,
+           "why": "Đó là khi đặt tầm mắt rất cao."
+          },
+          {
+           "text": "Không thay đổi gì",
+           "ok": false,
+           "why": "Vị trí tầm mắt thay đổi cảm giác không gian."
+          }
+         ],
+         "explanation": "Tầm mắt cao: nhìn xuống; tầm mắt thấp: nhìn lên."
+        },
+        {
+         "key": "con_duong",
+         "question": "Vẽ con đường thẳng chạy ra xa. Hai mép đường vẽ thế nào?",
+         "options": [
+          {
+           "text": "Hai đường xiên gặp nhau tại điểm tụ trên đường tầm mắt",
+           "ok": true,
+           "why": "Đúng: đường song song chạy xa gặp nhau ở điểm tụ."
+          },
+          {
+           "text": "Hai đường song song đến hết tờ giấy",
+           "ok": false,
+           "why": "Con đường sẽ trông như dựng đứng, không có chiều sâu."
+          },
+          {
+           "text": "Hai đường xoè rộng ra khi xa",
+           "ok": false,
+           "why": "Ngược với luật xa gần."
+          }
+         ],
+         "explanation": "Phối cảnh một điểm tụ."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "mt8.ve_phong_canh_phoi_canh",
+     "order": 2,
+     "title": "Vẽ phong cảnh đường phố có phối cảnh",
+     "description": "Thực hành vẽ cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt8.dieu_khac",
+   "grade": 8,
+   "order": 3,
+   "title": "Điêu khắc",
+   "lessons": [
+    {
+     "key": "mt8.tuong_tron_phu_dieu",
+     "order": 1,
+     "title": "Tượng tròn và phù điêu",
+     "description": "Phân biệt tượng tròn và phù điêu qua ví dụ.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Hiểu tượng tròn xem được nhiều phía",
+      "Hiểu phù điêu là hình nổi trên một mặt phẳng"
+     ],
+     "summary": [
+      "Tượng tròn là khối đứng độc lập, đi vòng quanh xem được từ mọi phía.",
+      "Phù điêu là hình chạm nổi (hoặc chìm) trên một mặt phẳng, thường chỉ xem từ phía trước.",
+      "Vẽ, nặn, cắt dán là thực hành cùng thầy cô; trò chơi chỉ ôn kiến thức và các bước, không chấm sản phẩm sáng tạo."
+     ],
+     "examples": [
+      {
+       "title": "Ví dụ",
+       "lines": [
+        "Tượng David: tượng tròn",
+        "Hình chạm trên cánh cửa đình: phù điêu"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Tượng tròn hay phù điêu?",
+       "set": {
+        "title": "Đây là tượng tròn hay phù điêu?",
+        "groups": [
+         {
+          "id": "tron",
+          "label": "Tượng tròn",
+          "icon": "🗿"
+         },
+         {
+          "id": "phu_dieu",
+          "label": "Phù điêu",
+          "icon": "🧱"
+         }
+        ],
+        "cards": [
+         {
+          "key": "cong_vien",
+          "text": "Tượng đứng giữa công viên, xem được bốn phía",
+          "picture": "🗽",
+          "group": "tron",
+          "explanation": "Đi vòng quanh xem được: tượng tròn."
+         },
+         {
+          "key": "david",
+          "text": "Tượng David của Michelangelo",
+          "picture": "🗿",
+          "group": "tron",
+          "explanation": "Tượng David đứng độc lập, là tượng tròn."
+         },
+         {
+          "key": "nhan_su",
+          "text": "Tượng Nhân sư ở Giza",
+          "picture": "🦁",
+          "group": "tron",
+          "explanation": "Tượng Nhân sư là khối tượng lớn, xem được nhiều phía."
+         },
+         {
+          "key": "con_trau",
+          "text": "Tượng con trâu nặn bằng đất",
+          "picture": "🐃",
+          "group": "tron",
+          "explanation": "Tượng nặn đứng riêng là tượng tròn."
+         },
+         {
+          "key": "tuong_phat",
+          "text": "Tượng Phật ngồi trong chùa",
+          "picture": "🛕",
+          "group": "tron",
+          "explanation": "Tượng đặt trên bệ, là khối tượng tròn."
+         },
+         {
+          "key": "bia_da",
+          "text": "Hình chạm nổi trên mặt bia đá",
+          "picture": "🪨",
+          "group": "phu_dieu",
+          "explanation": "Hình nổi trên mặt phẳng bia đá: phù điêu."
+         },
+         {
+          "key": "canh_cua",
+          "text": "Chạm khắc gỗ trên cánh cửa đình",
+          "picture": "🚪",
+          "group": "phu_dieu",
+          "explanation": "Hình chạm trên cánh cửa: phù điêu."
+         },
+         {
+          "key": "vach_dinh",
+          "text": "Hoa văn đắp nổi trên vách tường",
+          "picture": "🧱",
+          "group": "phu_dieu",
+          "explanation": "Đắp nổi trên tường: phù điêu."
+         },
+         {
+          "key": "dong_xu",
+          "text": "Hình in nổi trên mặt đồng xu",
+          "picture": "🪙",
+          "group": "phu_dieu",
+          "explanation": "Hình nổi trên mặt đồng xu là phù điêu nhỏ."
+         },
+         {
+          "key": "tuong_dai",
+          "text": "Dải hình người nổi trên chân tượng đài",
+          "picture": "🏛️",
+          "group": "phu_dieu",
+          "explanation": "Hình người nổi trên mặt bệ: phù điêu."
+         }
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "mt8.ung_dung",
+   "grade": 8,
+   "order": 4,
+   "title": "Mĩ thuật ứng dụng",
+   "lessons": [
+    {
+     "key": "mt8.thiet_ke_noi_that",
+     "order": 1,
+     "title": "Trang trí góc học tập",
+     "description": "Thực hành sắp xếp, trang trí không gian cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "mt8.thiet_ke_thoi_trang",
+     "order": 2,
+     "title": "Thiết kế hoạ tiết cho trang phục",
+     "description": "Thực hành thiết kế hoạ tiết.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt9.ly_luan",
+   "grade": 9,
+   "order": 1,
+   "title": "Lí luận và lịch sử mĩ thuật",
+   "lessons": [
+    {
+     "key": "mt9.hoa_si_hien_dai",
+     "order": 1,
+     "title": "Hội hoạ Việt Nam hiện đại: hoạ sĩ, tác phẩm, chất liệu",
+     "description": "Biết một số hoạ sĩ Việt Nam tiêu biểu, tác phẩm và chất liệu sơn mài, lụa, sơn dầu.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Ghép hoạ sĩ với tác phẩm tiêu biểu",
+      "Nêu đặc điểm chất liệu sơn mài, lụa, sơn dầu, khắc gỗ"
+     ],
+     "summary": [
+      "Tô Ngọc Vân: Thiếu nữ bên hoa huệ (sơn dầu). Nguyễn Phan Chánh: Chơi ô ăn quan (lụa).",
+      "Nguyễn Gia Trí: Vườn xuân Trung Nam Bắc (sơn mài). Nguyễn Sáng: Kết nạp Đảng ở Điện Biên Phủ (sơn mài). Bùi Xuân Phái nổi tiếng với tranh phố cổ Hà Nội.",
+      "Sơn mài: phủ nhiều lớp sơn ta rồi mài, có thể gắn vỏ trứng, dát vàng bạc. Lụa: màu thấm vào vải mỏng, mềm mại."
+     ],
+     "examples": [
+      {
+       "title": "Sơn mài",
+       "lines": [
+        "Vẽ, gắn vỏ trứng → phủ nhiều lớp sơn → mài cho hình hiện lên → đánh bóng."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Hoạ sĩ Việt Nam",
+       "tasks": [
+        {
+         "key": "tac_pham",
+         "prompt": "Ghép hoạ sĩ với tác phẩm.",
+         "pairs": [
+          [
+           "Tô Ngọc Vân",
+           "Thiếu nữ bên hoa huệ"
+          ],
+          [
+           "Nguyễn Phan Chánh",
+           "Chơi ô ăn quan"
+          ],
+          [
+           "Nguyễn Gia Trí",
+           "Vườn xuân Trung Nam Bắc"
+          ],
+          [
+           "Nguyễn Sáng",
+           "Kết nạp Đảng ở Điện Biên Phủ"
+          ]
+         ],
+         "explanation": "Đây là những tác phẩm tiêu biểu của hội hoạ Việt Nam hiện đại."
+        },
+        {
+         "key": "chat_lieu_tp",
+         "prompt": "Ghép tác phẩm với chất liệu.",
+         "pairs": [
+          [
+           "Thiếu nữ bên hoa huệ",
+           "Sơn dầu"
+          ],
+          [
+           "Chơi ô ăn quan",
+           "Lụa"
+          ],
+          [
+           "Kết nạp Đảng ở Điện Biên Phủ",
+           "Sơn mài"
+          ]
+         ],
+         "explanation": "Mỗi hoạ sĩ chọn chất liệu hợp với ý tưởng của mình."
+        },
+        {
+         "key": "chat_lieu",
+         "prompt": "Ghép chất liệu với đặc điểm.",
+         "pairs": [
+          [
+           "Sơn mài",
+           "Phủ nhiều lớp sơn rồi mài, có thể gắn vỏ trứng"
+          ],
+          [
+           "Lụa",
+           "Màu thấm vào vải mỏng, mềm mại, trong trẻo"
+          ],
+          [
+           "Sơn dầu",
+           "Màu pha dầu, vẽ trên toan, có thể đắp dày"
+          ],
+          [
+           "Khắc gỗ",
+           "Khắc trên ván gỗ rồi in ra giấy"
+          ]
+         ],
+         "explanation": "Chất liệu tạo nên vẻ đẹp riêng của tác phẩm."
+        },
+        {
+         "key": "de_tai",
+         "prompt": "Ghép hoạ sĩ với đề tài tiêu biểu.",
+         "pairs": [
+          [
+           "Bùi Xuân Phái",
+           "Phố cổ Hà Nội"
+          ],
+          [
+           "Nguyễn Tư Nghiêm",
+           "Điệu múa cổ, mười hai con giáp"
+          ],
+          [
+           "Nguyễn Phan Chánh",
+           "Sinh hoạt nông thôn trên tranh lụa"
+          ]
+         ],
+         "explanation": "Mỗi hoạ sĩ có đề tài gắn bó suốt đời."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "mt9.my_thuat_the_gioi_hien_dai",
+     "order": 2,
+     "title": "Mĩ thuật thế giới cuối thế kỉ XIX – thế kỉ XX",
+     "description": "Tìm hiểu các trào lưu ấn tượng, lập thể…",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt9.trung_bay",
+   "grade": 9,
+   "order": 2,
+   "title": "Trưng bày và giới thiệu sản phẩm",
+   "lessons": [
+    {
+     "key": "mt9.trung_bay_nhan_xet",
+     "order": 1,
+     "title": "Trưng bày, giới thiệu và nhận xét sản phẩm",
+     "description": "Chọn cách trưng bày, giới thiệu, nhận xét sản phẩm mĩ thuật theo tiêu chí.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Trưng bày sản phẩm dễ xem, có thông tin",
+      "Bảo quản sản phẩm khi trưng bày",
+      "Nhận xét sản phẩm của bạn tôn trọng và có ích"
+     ],
+     "summary": [
+      "Treo tranh ngang tầm mắt, có khoảng cách; nhóm theo chủ đề; gắn nhãn tên tác phẩm, tác giả, chất liệu.",
+      "Bảo quản: tránh mưa nắng trực tiếp, dùng bìa nhựa hoặc khung kính cho tranh giấy.",
+      "Nhận xét: nêu điểm thích trước, góp ý cụ thể sau. Mỗi câu hỏi nêu tiêu chí; có thể có nhiều cách đúng."
+     ],
+     "examples": [
+      {
+       "title": "Nhãn tác phẩm",
+       "lines": [
+        "\"Chợ quê ngày Tết\" – Nguyễn An – màu nước, 2025"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Trưng bày theo tiêu chí",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "de_xem",
+         "question": "Tiêu chí: người xem dễ quan sát. Cách treo tranh nào đạt?",
+         "options": [
+          {
+           "text": "Treo ngang tầm mắt, có khoảng cách giữa các bức",
+           "ok": true,
+           "why": "Đạt: người xem nhìn rõ từng bức."
+          },
+          {
+           "text": "Xếp chồng tranh lên nhau trên bàn",
+           "ok": false,
+           "why": "Chưa đạt: chỉ thấy được bức trên cùng."
+          },
+          {
+           "text": "Treo sát trần nhà",
+           "ok": false,
+           "why": "Chưa đạt: phải ngửa cổ, khó xem."
+          }
+         ],
+         "explanation": "Trưng bày để người xem thấy rõ."
+        },
+        {
+         "key": "thong_tin",
+         "question": "Tiêu chí: người xem biết thông tin về tác phẩm. Cách nào đạt?",
+         "options": [
+          {
+           "text": "Gắn nhãn tên tranh, tác giả, chất liệu bên cạnh",
+           "ok": true,
+           "why": "Đạt: nhãn cho biết thông tin cơ bản."
+          },
+          {
+           "text": "Làm tờ giới thiệu ngắn ở lối vào",
+           "ok": true,
+           "why": "Đạt: giới thiệu chung giúp người xem hiểu triển lãm."
+          },
+          {
+           "text": "Không ghi gì để người xem tự đoán",
+           "ok": false,
+           "why": "Chưa đạt: không có thông tin."
+          }
+         ],
+         "explanation": "Thông tin giúp người xem hiểu và nhớ tác phẩm."
+        },
+        {
+         "key": "chu_de",
+         "question": "Tiêu chí: triển lãm sắp xếp theo chủ đề. Cách nào đạt?",
+         "options": [
+          {
+           "text": "Nhóm các tranh cùng chủ đề treo cạnh nhau, có tên chủ đề",
+           "ok": true,
+           "why": "Đạt: người xem đi theo từng chủ đề."
+          },
+          {
+           "text": "Treo ngẫu nhiên, lẫn lộn",
+           "ok": false,
+           "why": "Chưa đạt: không thấy các chủ đề."
+          },
+          {
+           "text": "Chỉ treo tranh của một bạn",
+           "ok": false,
+           "why": "Chưa đạt: không phải sắp xếp theo chủ đề."
+          }
+         ],
+         "explanation": "Sắp xếp theo chủ đề tạo mạch xem."
+        },
+        {
+         "key": "bao_quan",
+         "question": "Tiêu chí: tranh màu nước trưng bày ngoài sân không bị hỏng. Cách nào đạt?",
+         "options": [
+          {
+           "text": "Đặt nơi có mái che, tránh mưa nắng trực tiếp",
+           "ok": true,
+           "why": "Đạt: mưa nắng làm phai, nhoè màu nước."
+          },
+          {
+           "text": "Cho tranh vào bìa nhựa trong hoặc khung kính",
+           "ok": true,
+           "why": "Đạt: lớp che bảo vệ tranh khỏi nước, bụi."
+          },
+          {
+           "text": "Dán thẳng lên tường ngoài trời",
+           "ok": false,
+           "why": "Chưa đạt: tranh dễ ướt, phai màu."
+          }
+         ],
+         "explanation": "Bảo quản để tác phẩm bền lâu."
+        },
+        {
+         "key": "nhan_xet",
+         "question": "Tiêu chí: nhận xét tranh của bạn tôn trọng và có ích. Cách nào đạt?",
+         "options": [
+          {
+           "text": "Nêu điểm em thích, rồi góp ý một điểm cụ thể",
+           "ok": true,
+           "why": "Đạt: lời nhận xét chân thành, giúp bạn tiến bộ."
+          },
+          {
+           "text": "Chê \"tranh xấu quá\"",
+           "ok": false,
+           "why": "Chưa đạt: không tôn trọng và không giúp bạn sửa."
+          },
+          {
+           "text": "Chỉ nói \"đẹp\" cho xong",
+           "ok": false,
+           "why": "Chưa đạt: lời khen chung chung không giúp bạn tiến bộ."
+          }
+         ],
+         "explanation": "Nhận xét: khen cụ thể, góp ý cụ thể."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "mt9.hoi_hoa_do_hoa",
+   "grade": 9,
+   "order": 3,
+   "title": "Hội hoạ và đồ hoạ",
+   "lessons": [
+    {
+     "key": "mt9.ve_tranh_de_tai",
+     "order": 1,
+     "title": "Vẽ tranh đề tài cộng đồng",
+     "description": "Thực hành vẽ tranh theo đề tài cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "mt9.tranh_in_nhieu_mau",
+     "order": 2,
+     "title": "Tranh in nhiều màu",
+     "description": "Thực hành in tranh nhiều bản màu.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt9.thiet_ke",
+   "grade": 9,
+   "order": 4,
+   "title": "Thiết kế",
+   "lessons": [
+    {
+     "key": "mt9.thiet_ke_san_khau",
+     "order": 1,
+     "title": "Thiết kế mô hình sân khấu cho tiết mục văn nghệ",
+     "description": "Thực hành theo nhóm cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "mt9.huong_nghiep",
+     "order": 2,
+     "title": "Mĩ thuật và nghề nghiệp",
+     "description": "Tìm hiểu một số nghề trong lĩnh vực mĩ thuật.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt10.ly_luan",
+   "grade": 10,
+   "order": 1,
+   "title": "Lí luận và lịch sử mĩ thuật",
+   "lessons": [
+    {
+     "key": "mt10.trao_luu_the_gioi",
+     "order": 1,
+     "title": "Một số trào lưu mĩ thuật thế giới",
+     "description": "Biết thứ tự, đặc điểm và hoạ sĩ tiêu biểu của một số trào lưu mĩ thuật thế giới.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Xếp các trào lưu theo thời gian xuất hiện",
+      "Nêu đặc điểm của Phục hưng, Ấn tượng, Lập thể, Siêu thực",
+      "Ghép hoạ sĩ với trào lưu, tác phẩm"
+     ],
+     "summary": [
+      "Phục hưng (XIV–XVI) → Ba-rốc (XVII) → Lãng mạn (cuối XVIII – XIX) → Hiện thực (giữa XIX) → Ấn tượng (cuối XIX) → Lập thể (đầu XX) → Siêu thực (thập niên 1920).",
+      "Ấn tượng (Monet) ghi lại ánh sáng, màu sắc thoáng chốc; Lập thể (Picasso) phân hình thành nhiều mặt, nhìn từ nhiều góc; Siêu thực (Dalí) tạo hình ảnh như giấc mơ.",
+      "Tên trào lưu Ấn tượng lấy từ bức \"Ấn tượng, mặt trời mọc\" của Monet (1872)."
+     ],
+     "examples": [
+      {
+       "title": "Hậu ấn tượng",
+       "lines": [
+        "Van Gogh với Đêm đầy sao: nét cọ xoáy, màu mạnh."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Dòng thời gian mĩ thuật",
+       "tasks": [
+        {
+         "key": "trao_luu_1",
+         "prompt": "Xếp các trào lưu theo thời gian xuất hiện.",
+         "items": [
+          "Phục hưng",
+          "Ba-rốc",
+          "Ấn tượng",
+          "Lập thể"
+         ],
+         "explanation": "Phục hưng (XIV–XVI), Ba-rốc (XVII), Ấn tượng (cuối XIX), Lập thể (đầu XX).",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "hoa_si",
+         "prompt": "Xếp các hoạ sĩ theo thời gian, từ sớm đến muộn.",
+         "items": [
+          "Leonardo da Vinci",
+          "Rembrandt",
+          "Claude Monet",
+          "Pablo Picasso"
+         ],
+         "explanation": "Phục hưng → Ba-rốc (Hà Lan) → Ấn tượng → Lập thể.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "trao_luu_2",
+         "prompt": "Xếp các trào lưu theo thời gian xuất hiện.",
+         "items": [
+          "Lãng mạn",
+          "Hiện thực",
+          "Ấn tượng",
+          "Siêu thực"
+         ],
+         "explanation": "Lãng mạn (cuối XVIII – đầu XIX) → Hiện thực (giữa XIX) → Ấn tượng (thập niên 1870) → Siêu thực (thập niên 1920).",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "tac_pham",
+         "prompt": "Xếp các tác phẩm theo năm sáng tác, từ sớm đến muộn.",
+         "items": [
+          "Mona Lisa (Leonardo da Vinci)",
+          "Ấn tượng, mặt trời mọc (Monet)",
+          "Những cô gái Avignon (Picasso)",
+          "Sự dai dẳng của kí ức (Dalí)"
+         ],
+         "explanation": "Đầu thế kỉ XVI → 1872 → 1907 → 1931.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        }
+       ]
+      },
+      {
+       "game": "match",
+       "title": "Trào lưu và hoạ sĩ",
+       "tasks": [
+        {
+         "key": "hoa_si",
+         "prompt": "Ghép hoạ sĩ với trào lưu.",
+         "pairs": [
+          [
+           "Claude Monet",
+           "Ấn tượng"
+          ],
+          [
+           "Pablo Picasso",
+           "Lập thể"
+          ],
+          [
+           "Salvador Dalí",
+           "Siêu thực"
+          ],
+          [
+           "Vincent van Gogh",
+           "Hậu ấn tượng"
+          ]
+         ],
+         "explanation": "Mỗi hoạ sĩ tiêu biểu cho một trào lưu."
+        },
+        {
+         "key": "dac_diem",
+         "prompt": "Ghép trào lưu với đặc điểm.",
+         "pairs": [
+          [
+           "Ấn tượng",
+           "Ghi lại ánh sáng, màu sắc thoáng chốc ngoài trời"
+          ],
+          [
+           "Lập thể",
+           "Phân hình thành nhiều mặt, nhìn từ nhiều góc cùng lúc"
+          ],
+          [
+           "Siêu thực",
+           "Hình ảnh như giấc mơ, phi lí"
+          ],
+          [
+           "Phục hưng",
+           "Tỉ lệ cân đối, phối cảnh, hướng về con người"
+          ]
+         ],
+         "explanation": "Mỗi trào lưu có cách nhìn và cách thể hiện riêng."
+        },
+        {
+         "key": "tac_pham",
+         "prompt": "Ghép tác phẩm với tác giả.",
+         "pairs": [
+          [
+           "Đêm đầy sao",
+           "Vincent van Gogh"
+          ],
+          [
+           "Hoa súng (loạt tranh)",
+           "Claude Monet"
+          ],
+          [
+           "Guernica",
+           "Pablo Picasso"
+          ],
+          [
+           "Tiếng thét",
+           "Edvard Munch"
+          ]
+         ],
+         "explanation": "Guernica phản đối chiến tranh; Tiếng thét tiêu biểu cho chủ nghĩa biểu hiện."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "mt10.my_thuat_viet_nam_co",
+     "order": 2,
+     "title": "Mĩ thuật Việt Nam thời phong kiến",
+     "description": "Tìm hiểu kiến trúc, điêu khắc, gốm các triều đại.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt10.hoi_hoa",
+   "grade": 10,
+   "order": 2,
+   "title": "Hội hoạ",
+   "lessons": [
+    {
+     "key": "mt10.hoa_sac",
+     "order": 1,
+     "title": "Hoà sắc và cảm xúc trong tranh",
+     "description": "Thực hành phối màu theo hoà sắc nóng, lạnh cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "mt10.tranh_tinh_vat",
+     "order": 2,
+     "title": "Vẽ tĩnh vật bằng màu",
+     "description": "Thực hành quan sát, vẽ tĩnh vật.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt10.thiet_ke_do_hoa",
+   "grade": 10,
+   "order": 3,
+   "title": "Thiết kế đồ hoạ",
+   "lessons": [
+    {
+     "key": "mt10.chu_hinh_khoang_trong",
+     "order": 1,
+     "title": "Chữ, hình và khoảng trống trong thiết kế",
+     "description": "Chọn kiểu chữ, cách sắp xếp chữ, hình và khoảng trống theo tiêu chí thiết kế.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết phân cấp thông tin bằng cỡ chữ, độ đậm",
+      "Hiểu vai trò của khoảng trống và căn lề",
+      "Chọn phương án thiết kế theo tiêu chí"
+     ],
+     "summary": [
+      "Phân cấp thông tin: tiêu đề nổi nhất, thông tin chính vừa, chi tiết nhỏ nhất.",
+      "Khoảng trống (không gian âm) giúp nội dung chính nổi bật, bố cục thoáng; căn lề nhất quán tạo trật tự.",
+      "Chữ cho biển báo, poster cần dễ đọc từ xa; hình ảnh phải gợi đúng nội dung.",
+      "Thiết kế có nhiều phương án đúng: mỗi câu hỏi nêu tiêu chí cần đạt."
+     ],
+     "examples": [
+      {
+       "title": "Poster ngày hội đọc sách",
+       "lines": [
+        "Tiêu đề lớn → thời gian, địa điểm vừa → chi tiết nhỏ; nhiều khoảng trống quanh tiêu đề"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Thiết kế theo tiêu chí",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "ba_giay",
+         "question": "Poster ngày hội đọc sách. Tiêu chí: thông điệp chính đọc được trong 3 giây. Phương án nào đạt?",
+         "options": [
+          {
+           "text": "Tiêu đề lớn, ngắn, tương phản rõ với nền",
+           "ok": true,
+           "why": "Đạt: tiêu đề nổi bật được đọc đầu tiên."
+          },
+          {
+           "text": "Một hình ảnh chính lớn, ít chữ phụ",
+           "ok": true,
+           "why": "Đạt: ít yếu tố giúp người xem nắm thông điệp nhanh."
+          },
+          {
+           "text": "Mỗi dòng một kiểu chữ trang trí khác nhau",
+           "ok": false,
+           "why": "Chưa đạt: nhiều kiểu chữ gây rối mắt, chậm đọc."
+          },
+          {
+           "text": "Tiêu đề cùng cỡ với chữ thông tin phụ",
+           "ok": false,
+           "why": "Chưa đạt: không có gì nổi bật để đọc trước."
+          }
+         ],
+         "explanation": "Thông điệp nhanh: ít, to, tương phản."
+        },
+        {
+         "key": "phan_cap",
+         "question": "Tiêu chí: người xem biết đọc gì trước, gì sau. Phương án nào đạt?",
+         "options": [
+          {
+           "text": "Tiêu đề to nhất, thời gian địa điểm vừa, chi tiết nhỏ nhất",
+           "ok": true,
+           "why": "Đạt: cỡ chữ tạo thứ bậc thông tin."
+          },
+          {
+           "text": "Mọi dòng chữ cùng cỡ, cùng độ đậm",
+           "ok": false,
+           "why": "Chưa đạt: không có thứ bậc."
+          },
+          {
+           "text": "Chi tiết nhỏ in to nhất",
+           "ok": false,
+           "why": "Chưa đạt: thông tin phụ lấn át thông tin chính."
+          }
+         ],
+         "explanation": "Phân cấp bằng cỡ, độ đậm, màu, vị trí."
+        },
+        {
+         "key": "khoang_trong",
+         "question": "Khoảng trống (không gian âm) trong thiết kế có tác dụng gì?",
+         "options": [
+          {
+           "text": "Làm nội dung chính nổi bật, bố cục thoáng, dễ đọc",
+           "ok": true,
+           "why": "Đúng: khoảng trống là một phần của thiết kế."
+          },
+          {
+           "text": "Là phần thừa, nên lấp đầy hết",
+           "ok": false,
+           "why": "Lấp đầy làm thiết kế ngột ngạt, khó đọc."
+          },
+          {
+           "text": "Chỉ để tiết kiệm mực in",
+           "ok": false,
+           "why": "Tác dụng chính là thẩm mĩ và dễ đọc."
+          }
+         ],
+         "explanation": "Khoảng trống giúp mắt nghỉ và dẫn hướng nhìn."
+        },
+        {
+         "key": "bien_chi_dan",
+         "question": "Biển chỉ dẫn trong bệnh viện. Tiêu chí: dễ đọc từ xa. Kiểu chữ nào đạt?",
+         "options": [
+          {
+           "text": "Chữ không chân, nét rõ, khoảng cách chữ thoáng",
+           "ok": true,
+           "why": "Đạt: chữ không chân nét đều, rõ khi nhìn xa."
+          },
+          {
+           "text": "Chữ viết tay bay bướm, nét mảnh",
+           "ok": false,
+           "why": "Chưa đạt: nét mảnh, uốn lượn khó đọc từ xa."
+          },
+          {
+           "text": "Chữ in hoa nghiêng, đặt sát nhau",
+           "ok": false,
+           "why": "Chưa đạt: chữ dính nhau khó đọc."
+          }
+         ],
+         "explanation": "Chữ chức năng ưu tiên dễ đọc."
+        },
+        {
+         "key": "logo_nuoc_ep",
+         "question": "Logo cho thương hiệu nước ép trái cây. Tiêu chí: gợi đúng ngành hàng. Phương án nào đạt?",
+         "options": [
+          {
+           "text": "Quả cam cách điệu, màu tươi",
+           "ok": true,
+           "why": "Đạt: gợi trái cây tươi."
+          },
+          {
+           "text": "Giọt nước kết hợp chiếc lá",
+           "ok": true,
+           "why": "Đạt: gợi nước ép từ thiên nhiên."
+          },
+          {
+           "text": "Bánh răng màu xám",
+           "ok": false,
+           "why": "Chưa đạt: gợi máy móc, không phải nước ép."
+          }
+         ],
+         "explanation": "Hình ảnh logo gợi đúng sản phẩm."
+        },
+        {
+         "key": "can_le",
+         "question": "Tiêu chí: bố cục trang tờ rơi gọn gàng, có trật tự. Phương án nào đạt?",
+         "options": [
+          {
+           "text": "Các khối chữ cùng căn theo một đường lề",
+           "ok": true,
+           "why": "Đạt: căn lề nhất quán tạo trật tự."
+          },
+          {
+           "text": "Mỗi dòng đặt một chỗ tuỳ ý",
+           "ok": false,
+           "why": "Chưa đạt: bố cục lộn xộn."
+          },
+          {
+           "text": "Xoay mỗi đoạn chữ một góc khác nhau",
+           "ok": false,
+           "why": "Chưa đạt: khó đọc, rối mắt."
+          }
+         ],
+         "explanation": "Căn lề, lưới bố cục giúp thiết kế gọn gàng."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "mt10.dieu_khac",
+   "grade": 10,
+   "order": 4,
+   "title": "Điêu khắc",
+   "lessons": [
+    {
+     "key": "mt10.tuong_chan_dung",
+     "order": 1,
+     "title": "Nặn tượng chân dung",
+     "description": "Thực hành tạo khối chân dung cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt11.ly_luan",
+   "grade": 11,
+   "order": 1,
+   "title": "Lí luận và lịch sử mĩ thuật",
+   "lessons": [
+    {
+     "key": "mt11.kien_truc_viet_nam",
+     "order": 1,
+     "title": "Kiến trúc truyền thống Việt Nam",
+     "description": "Biết một số công trình, kiểu nhà và bộ phận kiến trúc truyền thống tiêu biểu.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Ghép công trình với thời kì xây dựng",
+      "Nêu đặc điểm kiến trúc đình làng, nhà sàn, nhà rông, tháp Chăm"
+     ],
+     "summary": [
+      "Chùa Một Cột dựng năm 1049 thời Lý; Văn Miếu dựng năm 1070 thời Lý; Kinh thành Huế xây dưới triều Nguyễn; Thánh địa Mỹ Sơn là quần thể đền tháp Chăm Pa.",
+      "Đình làng: mái lớn, dốc, đầu đao cong; cột gỗ to kê trên chân tảng đá; chạm khắc gỗ cảnh sinh hoạt, rồng, hoa lá.",
+      "Nhà sàn tránh ẩm, thú dữ; nhà rông là nhà cộng đồng mái cao vút ở Tây Nguyên; tháp Chăm xây gạch nung xếp rất khít."
+     ],
+     "examples": [
+      {
+       "title": "Đình làng",
+       "lines": [
+        "Nơi thờ Thành hoàng và sinh hoạt cộng đồng của làng."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Kiến trúc truyền thống",
+       "tasks": [
+        {
+         "key": "cong_trinh",
+         "prompt": "Ghép công trình với thời kì xây dựng.",
+         "pairs": [
+          [
+           "Chùa Một Cột",
+           "Thời Lý, năm 1049"
+          ],
+          [
+           "Văn Miếu",
+           "Thời Lý, năm 1070"
+          ],
+          [
+           "Kinh thành Huế",
+           "Triều Nguyễn"
+          ],
+          [
+           "Thánh địa Mỹ Sơn",
+           "Vương quốc Chăm Pa"
+          ]
+         ],
+         "explanation": "Các công trình gắn với lịch sử của nhiều triều đại, vương quốc."
+        },
+        {
+         "key": "dinh_lang",
+         "prompt": "Ghép bộ phận đình làng với đặc điểm.",
+         "pairs": [
+          [
+           "Mái đình",
+           "Mái lớn, dốc, đầu đao cong vút"
+          ],
+          [
+           "Cột đình",
+           "Cột gỗ to, kê trên chân tảng đá"
+          ],
+          [
+           "Chạm khắc",
+           "Cảnh sinh hoạt, rồng, hoa lá trên vì kèo"
+          ]
+         ],
+         "explanation": "Đình làng là đỉnh cao của kiến trúc gỗ dân gian."
+        },
+        {
+         "key": "kieu_nha",
+         "prompt": "Ghép kiểu kiến trúc với đặc điểm.",
+         "pairs": [
+          [
+           "Nhà rông",
+           "Nhà cộng đồng mái cao vút ở Tây Nguyên"
+          ],
+          [
+           "Nhà sàn",
+           "Sàn cao trên cột, tránh ẩm và thú dữ"
+          ],
+          [
+           "Tháp Chăm",
+           "Tháp gạch nung, xếp rất khít"
+          ],
+          [
+           "Nhà rường",
+           "Nhà gỗ khung chạm trổ ở Huế"
+          ]
+         ],
+         "explanation": "Kiến trúc truyền thống thích nghi với khí hậu và đời sống của từng cộng đồng."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "mt11.bao_ton_di_san",
+     "order": 2,
+     "title": "Bảo tồn di sản kiến trúc",
+     "description": "Tìm hiểu cách giữ gìn di tích kiến trúc.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt11.thiet_ke_cong_nghiep",
+   "grade": 11,
+   "order": 2,
+   "title": "Thiết kế công nghiệp",
+   "lessons": [
+    {
+     "key": "mt11.quy_trinh_san_pham",
+     "order": 1,
+     "title": "Quy trình thiết kế sản phẩm",
+     "description": "Nhớ các bước thiết kế một sản phẩm từ nhu cầu đến mẫu hoàn thiện.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Sắp xếp đúng các bước của quy trình thiết kế",
+      "Hiểu vai trò của mẫu thử và góp ý người dùng"
+     ],
+     "summary": [
+      "Thiết kế bắt đầu từ nhu cầu người dùng; phác thảo nhiều ý tưởng; chọn và phát triển một ý tưởng.",
+      "Làm mô hình, mẫu thử để kiểm tra; thử nghiệm, sửa đổi; hoàn thiện để sản xuất.",
+      "Vẽ, nặn, cắt dán là thực hành cùng thầy cô; trò chơi chỉ ôn kiến thức và các bước, không chấm sản phẩm sáng tạo."
+     ],
+     "examples": [
+      {
+       "title": "Ghế thư viện",
+       "lines": [
+        "Khảo sát cách ngồi đọc → phác thảo → bản vẽ kĩ thuật → mẫu thử → chỉnh sửa"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Từ ý tưởng đến sản phẩm",
+       "tasks": [
+        {
+         "key": "quy_trinh",
+         "prompt": "Xếp các bước của quy trình thiết kế sản phẩm.",
+         "items": [
+          "Tìm hiểu nhu cầu người dùng",
+          "Phác thảo nhiều ý tưởng",
+          "Chọn và phát triển một ý tưởng",
+          "Làm mô hình, mẫu thử",
+          "Thử nghiệm và chỉnh sửa",
+          "Hoàn thiện để sản xuất"
+         ],
+         "explanation": "Nhu cầu → ý tưởng → lựa chọn → mẫu thử → thử nghiệm → hoàn thiện.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "ghe",
+         "prompt": "Xếp các bước thiết kế ghế cho thư viện trường.",
+         "items": [
+          "Khảo sát cách học sinh ngồi đọc",
+          "Vẽ phác các phương án",
+          "Vẽ kĩ thuật có kích thước",
+          "Làm mẫu, cho học sinh ngồi thử",
+          "Điều chỉnh theo góp ý"
+         ],
+         "explanation": "Kích thước phải có trước khi làm mẫu; góp ý sau khi ngồi thử.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "mo_hinh",
+         "prompt": "Xếp các bước làm mô hình bằng bìa.",
+         "items": [
+          "Vẽ hình khai triển lên bìa",
+          "Cắt theo nét vẽ",
+          "Gấp theo nếp",
+          "Dán ghép thành khối"
+         ],
+         "explanation": "Hình khai triển là mô hình trải phẳng.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        },
+        {
+         "key": "danh_gia",
+         "prompt": "Xếp các bước đánh giá một mẫu thử.",
+         "items": [
+          "Đưa mẫu cho người dùng thử",
+          "Ghi lại nhận xét, khó khăn",
+          "Tìm nguyên nhân, đề xuất cải tiến",
+          "Sửa mẫu và thử lại"
+         ],
+         "explanation": "Đánh giá là vòng lặp: thử → ghi nhận → cải tiến → thử lại.",
+         "first_label": "Bắt đầu",
+         "last_label": "Kết thúc"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "mt11.do_hoa",
+   "grade": 11,
+   "order": 3,
+   "title": "Đồ hoạ tranh in",
+   "lessons": [
+    {
+     "key": "mt11.khac_go",
+     "order": 1,
+     "title": "Tranh khắc gỗ",
+     "description": "Thực hành khắc và in tranh cùng thầy cô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt11.thoi_trang",
+   "grade": 11,
+   "order": 4,
+   "title": "Thiết kế thời trang",
+   "lessons": [
+    {
+     "key": "mt11.bo_suu_tap",
+     "order": 1,
+     "title": "Thiết kế bộ sưu tập trang phục nhỏ",
+     "description": "Thực hành phác thảo theo chủ đề.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt12.ly_luan",
+   "grade": 12,
+   "order": 1,
+   "title": "Lí luận mĩ thuật và nghề nghiệp",
+   "lessons": [
+    {
+     "key": "mt12.nghe_my_thuat",
+     "order": 1,
+     "title": "Nghề nghiệp trong lĩnh vực mĩ thuật",
+     "description": "Biết công việc của một số nghề mĩ thuật để định hướng nghề nghiệp.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu công việc chính của các nghề mĩ thuật",
+      "Chọn nghề phù hợp với một công việc cụ thể"
+     ],
+     "summary": [
+      "Hoạ sĩ sáng tác; nhà thiết kế đồ hoạ làm logo, poster, bao bì, giao diện; kiến trúc sư thiết kế công trình.",
+      "Nhà thiết kế thời trang, nội thất; hoạ sĩ minh hoạ, hoạt hình; hoạ sĩ thiết kế sân khấu, điện ảnh.",
+      "Chuyên viên bảo tồn phục hồi tác phẩm; giám tuyển chọn tác phẩm, tổ chức triển lãm."
+     ],
+     "examples": [
+      {
+       "title": "Một cuốn truyện tranh",
+       "lines": [
+        "Hoạ sĩ minh hoạ vẽ tranh, nhà thiết kế đồ hoạ làm bìa và dàn trang."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Nghề mĩ thuật",
+       "tasks": [
+        {
+         "key": "nghe_1",
+         "prompt": "Ghép nghề với công việc chính.",
+         "pairs": [
+          [
+           "Hoạ sĩ",
+           "Sáng tác tranh, tác phẩm hội hoạ"
+          ],
+          [
+           "Nhà thiết kế đồ hoạ",
+           "Thiết kế logo, poster, bao bì, giao diện"
+          ],
+          [
+           "Kiến trúc sư",
+           "Thiết kế công trình, không gian sống"
+          ],
+          [
+           "Nhà thiết kế thời trang",
+           "Thiết kế trang phục, phụ kiện"
+          ]
+         ],
+         "explanation": "Mĩ thuật có nhiều nghề khác nhau."
+        },
+        {
+         "key": "nghe_2",
+         "prompt": "Ghép nghề với công việc chính.",
+         "pairs": [
+          [
+           "Hoạ sĩ minh hoạ",
+           "Vẽ tranh cho sách, truyện, quảng cáo"
+          ],
+          [
+           "Nhà thiết kế nội thất",
+           "Bố trí, trang trí không gian bên trong"
+          ],
+          [
+           "Chuyên viên bảo tồn",
+           "Phục hồi, giữ gìn tác phẩm, di vật"
+          ],
+          [
+           "Giám tuyển",
+           "Chọn tác phẩm, tổ chức triển lãm"
+          ]
+         ],
+         "explanation": "Có nghề sáng tác, có nghề giữ gìn và giới thiệu tác phẩm."
+        },
+        {
+         "key": "tinh_huong",
+         "prompt": "Ghép công việc với người phù hợp.",
+         "pairs": [
+          [
+           "Dựng bối cảnh cho một vở kịch",
+           "Hoạ sĩ thiết kế sân khấu"
+          ],
+          [
+           "Làm phim vẽ cho trẻ em",
+           "Hoạ sĩ hoạt hình"
+          ],
+          [
+           "Chụp ảnh cho triển lãm nghệ thuật",
+           "Nhiếp ảnh gia"
+          ]
+         ],
+         "explanation": "Đọc kĩ công việc để chọn đúng nghề."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "mt12.dao_duc_sang_tao",
+     "order": 2,
+     "title": "Đạo đức sáng tạo và bản quyền hình ảnh",
+     "description": "Biết tôn trọng quyền tác giả, quyền hình ảnh khi sáng tạo và sử dụng hình ảnh.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình; tác giả đã soát nội dung và đáp án."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Hiểu tác phẩm mĩ thuật, nhiếp ảnh được bảo hộ quyền tác giả",
+      "Biết xin phép, ghi nguồn, ghi rõ công cụ đã dùng",
+      "Tôn trọng quyền của người được chụp, được vẽ"
+     ],
+     "summary": [
+      "Tranh, ảnh, thiết kế được bảo hộ quyền tác giả: dùng cho mục đích thương mại cần được phép.",
+      "Chép lại tranh để luyện tập thì ghi rõ \"chép theo tranh của…\", không nhận là sáng tác của mình.",
+      "Dùng hình ảnh của một người cần người đó đồng ý (trừ một số trường hợp luật cho phép, như hoạt động công cộng).",
+      "Dùng công cụ trí tuệ nhân tạo: tuân theo thể lệ, ghi rõ công cụ đã dùng."
+     ],
+     "examples": [
+      {
+       "title": "Ghi nguồn",
+       "lines": [
+        "Ảnh: Nguyễn Văn A, dùng theo giấy phép cho phép chia sẻ."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Sáng tạo trung thực",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "anh_mang",
+         "question": "Bạn muốn dùng một bức ảnh đẹp trên mạng làm bìa kỉ yếu lớp, in bán để gây quỹ. Nên làm gì?",
+         "options": [
+          {
+           "text": "Xin phép tác giả hoặc dùng ảnh có giấy phép cho phép dùng thương mại",
+           "ok": true,
+           "why": "Đúng: bán sản phẩm là mục đích thương mại."
+          },
+          {
+           "text": "Dùng luôn vì ảnh có sẵn trên mạng",
+           "ok": false,
+           "why": "Có trên mạng không có nghĩa là ai cũng được dùng."
+          },
+          {
+           "text": "Xoá tên tác giả trên ảnh rồi dùng",
+           "ok": false,
+           "why": "Xoá tên tác giả là vi phạm quyền tác giả."
+          }
+         ],
+         "explanation": "Dùng hình ảnh của người khác cần được phép."
+        },
+        {
+         "key": "chep_tranh",
+         "question": "Bạn chép lại một bức tranh nổi tiếng để luyện tập và muốn trưng bày. Cách nào đúng?",
+         "options": [
+          {
+           "text": "Ghi rõ \"chép theo tranh của…\" khi trưng bày",
+           "ok": true,
+           "why": "Đúng: trung thực về nguồn gốc."
+          },
+          {
+           "text": "Gửi dự thi như tác phẩm sáng tác của mình",
+           "ok": false,
+           "why": "Nhận tác phẩm của người khác là gian lận."
+          },
+          {
+           "text": "Ghi tên mình là tác giả",
+           "ok": false,
+           "why": "Đó không phải sáng tác của bạn."
+          }
+         ],
+         "explanation": "Chép để học là bình thường, nhưng phải ghi rõ."
+        },
+        {
+         "key": "ai",
+         "question": "Cuộc thi vẽ của trường. Bạn muốn dùng công cụ AI tạo hình. Cách nào đúng?",
+         "options": [
+          {
+           "text": "Đọc kĩ thể lệ; nếu được dùng thì ghi rõ công cụ đã dùng",
+           "ok": true,
+           "why": "Đúng: trung thực và đúng thể lệ."
+          },
+          {
+           "text": "Nộp và nói là tự vẽ tay",
+           "ok": false,
+           "why": "Che giấu công cụ là gian lận."
+          },
+          {
+           "text": "Lấy hình AI rồi xoá dấu nhận biết",
+           "ok": false,
+           "why": "Che giấu nguồn gốc là không trung thực."
+          }
+         ],
+         "explanation": "Theo thể lệ và ghi rõ công cụ."
+        },
+        {
+         "key": "nhom",
+         "question": "Nhóm bạn làm poster, một bạn đóng góp ý tưởng chính dù vẽ ít. Ghi tên thế nào?",
+         "options": [
+          {
+           "text": "Ghi tên đầy đủ các thành viên đã đóng góp",
+           "ok": true,
+           "why": "Đúng: ý tưởng cũng là đóng góp quan trọng."
+          },
+          {
+           "text": "Chỉ ghi tên người vẽ đẹp nhất",
+           "ok": false,
+           "why": "Bỏ tên người góp ý tưởng là không công bằng."
+          },
+          {
+           "text": "Không ghi tên ai",
+           "ok": false,
+           "why": "Ghi tên giúp ghi nhận công sức mọi người."
+          }
+         ],
+         "explanation": "Ghi nhận đúng đóng góp của mỗi người."
+        },
+        {
+         "key": "chup_nguoi",
+         "question": "Bạn chụp chân dung rõ mặt một cụ bà bán hàng để trưng bày triển lãm ảnh. Nên làm gì?",
+         "options": [
+          {
+           "text": "Xin phép cụ trước khi trưng bày",
+           "ok": true,
+           "why": "Đúng: dùng hình ảnh cá nhân cần người đó đồng ý."
+          },
+          {
+           "text": "Đăng công khai, không cần hỏi",
+           "ok": false,
+           "why": "Không tôn trọng quyền đối với hình ảnh của người được chụp."
+          },
+          {
+           "text": "Chụp lén cho tự nhiên rồi trưng bày",
+           "ok": false,
+           "why": "Chụp lén rồi công bố là không tôn trọng người khác."
+          }
+         ],
+         "explanation": "Tôn trọng quyền của cá nhân đối với hình ảnh."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "mt12.san_khau_dien_anh",
+   "grade": 12,
+   "order": 2,
+   "title": "Thiết kế mĩ thuật sân khấu, điện ảnh",
+   "lessons": [
+    {
+     "key": "mt12.boi_canh",
+     "order": 1,
+     "title": "Thiết kế bối cảnh cho một cảnh phim ngắn",
+     "description": "Thực hành phác thảo, làm mô hình bối cảnh.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt12.da_phuong_tien",
+   "grade": 12,
+   "order": 3,
+   "title": "Mĩ thuật đa phương tiện",
+   "lessons": [
+    {
+     "key": "mt12.anh_video",
+     "order": 1,
+     "title": "Sáng tạo với ảnh và video",
+     "description": "Thực hành dựng sản phẩm đa phương tiện cùng thầy cô.",
+     "status": "planned"
+    },
+    {
+     "key": "mt12.sap_dat",
+     "order": 2,
+     "title": "Nghệ thuật sắp đặt",
+     "description": "Thực hành sắp đặt theo chủ đề.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "mt12.du_an",
+   "grade": 12,
+   "order": 4,
+   "title": "Dự án mĩ thuật cuối cấp",
+   "lessons": [
+    {
+     "key": "mt12.trien_lam",
+     "order": 1,
+     "title": "Tổ chức triển lãm cuối cấp",
+     "description": "Lên kế hoạch, trưng bày và giới thiệu sản phẩm của lớp.",
+     "status": "planned"
+    }
+   ]
+  }
+ ]
+}

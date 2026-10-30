@@ -1,0 +1,1674 @@
+{
+ "game": "word_builder",
+ "version": 1,
+ "topics": {
+  "con_vat": "Con vật",
+  "do_an": "Đồ ăn, thức uống",
+  "thien_nhien": "Thiên nhiên",
+  "do_vat": "Đồ vật",
+  "co_the": "Cơ thể",
+  "phuong_tien": "Phương tiện"
+ },
+ "items": [
+  {
+   "key": "l1.ga",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "con_vat",
+   "difficulty": 1,
+   "unit": "letter",
+   "picture": "🐔",
+   "pieces": [
+    "g",
+    "à"
+   ],
+   "answer": "gà",
+   "hints": [
+    "Chữ đầu tiên là “g”."
+   ],
+   "explanation": "“gà” gồm các chữ g – à.",
+   "version": 1
+  },
+  {
+   "key": "l1.bo",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "con_vat",
+   "difficulty": 1,
+   "unit": "letter",
+   "picture": "🐄",
+   "pieces": [
+    "b",
+    "ò"
+   ],
+   "answer": "bò",
+   "hints": [
+    "Chữ đầu tiên là “b”."
+   ],
+   "explanation": "“bò” gồm các chữ b – ò.",
+   "version": 1
+  },
+  {
+   "key": "l1.meo",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "con_vat",
+   "difficulty": 2,
+   "unit": "letter",
+   "picture": "🐱",
+   "pieces": [
+    "m",
+    "è",
+    "o"
+   ],
+   "answer": "mèo",
+   "hints": [
+    "Chữ đầu tiên là “m”."
+   ],
+   "explanation": "“mèo” gồm các chữ m – è – o.",
+   "version": 1
+  },
+  {
+   "key": "l1.ho",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "con_vat",
+   "difficulty": 1,
+   "unit": "letter",
+   "picture": "🐯",
+   "pieces": [
+    "h",
+    "ổ"
+   ],
+   "answer": "hổ",
+   "hints": [
+    "Chữ đầu tiên là “h”."
+   ],
+   "explanation": "“hổ” gồm các chữ h – ổ.",
+   "version": 1
+  },
+  {
+   "key": "l1.de",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "con_vat",
+   "difficulty": 1,
+   "unit": "letter",
+   "picture": "🐐",
+   "pieces": [
+    "d",
+    "ê"
+   ],
+   "answer": "dê",
+   "hints": [
+    "Chữ đầu tiên là “d”."
+   ],
+   "explanation": "“dê” gồm các chữ d – ê.",
+   "version": 1
+  },
+  {
+   "key": "l1.vit",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "con_vat",
+   "difficulty": 2,
+   "unit": "letter",
+   "picture": "🦆",
+   "pieces": [
+    "v",
+    "ị",
+    "t"
+   ],
+   "answer": "vịt",
+   "hints": [
+    "Chữ đầu tiên là “v”."
+   ],
+   "explanation": "“vịt” gồm các chữ v – ị – t.",
+   "version": 1
+  },
+  {
+   "key": "l1.gau",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "con_vat",
+   "difficulty": 2,
+   "unit": "letter",
+   "picture": "🐻",
+   "pieces": [
+    "g",
+    "ấ",
+    "u"
+   ],
+   "answer": "gấu",
+   "hints": [
+    "Chữ đầu tiên là “g”."
+   ],
+   "explanation": "“gấu” gồm các chữ g – ấ – u.",
+   "version": 1
+  },
+  {
+   "key": "l1.khi",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "con_vat",
+   "difficulty": 1,
+   "unit": "letter",
+   "picture": "🐒",
+   "pieces": [
+    "kh",
+    "ỉ"
+   ],
+   "answer": "khỉ",
+   "hints": [
+    "Chữ đầu tiên là “kh”."
+   ],
+   "explanation": "“khỉ” gồm các chữ kh – ỉ.",
+   "version": 1
+  },
+  {
+   "key": "l1.tho",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "con_vat",
+   "difficulty": 1,
+   "unit": "letter",
+   "picture": "🐰",
+   "pieces": [
+    "th",
+    "ỏ"
+   ],
+   "answer": "thỏ",
+   "hints": [
+    "Chữ đầu tiên là “th”."
+   ],
+   "explanation": "“thỏ” gồm các chữ th – ỏ.",
+   "version": 1
+  },
+  {
+   "key": "l1.rua",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "con_vat",
+   "difficulty": 2,
+   "unit": "letter",
+   "picture": "🐢",
+   "pieces": [
+    "r",
+    "ù",
+    "a"
+   ],
+   "answer": "rùa",
+   "hints": [
+    "Chữ đầu tiên là “r”."
+   ],
+   "explanation": "“rùa” gồm các chữ r – ù – a.",
+   "version": 1
+  },
+  {
+   "key": "l1.voi",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "con_vat",
+   "difficulty": 2,
+   "unit": "letter",
+   "picture": "🐘",
+   "pieces": [
+    "v",
+    "o",
+    "i"
+   ],
+   "answer": "voi",
+   "hints": [
+    "Chữ đầu tiên là “v”."
+   ],
+   "explanation": "“voi” gồm các chữ v – o – i.",
+   "version": 1
+  },
+  {
+   "key": "l1.ong",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "con_vat",
+   "difficulty": 1,
+   "unit": "letter",
+   "picture": "🐝",
+   "pieces": [
+    "o",
+    "ng"
+   ],
+   "answer": "ong",
+   "hints": [
+    "Chữ đầu tiên là “o”."
+   ],
+   "explanation": "“ong” gồm các chữ o – ng.",
+   "version": 1
+  },
+  {
+   "key": "l1.cho",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "con_vat",
+   "difficulty": 1,
+   "unit": "letter",
+   "picture": "🐶",
+   "pieces": [
+    "ch",
+    "ó"
+   ],
+   "answer": "chó",
+   "hints": [
+    "Chữ đầu tiên là “ch”."
+   ],
+   "explanation": "“chó” gồm các chữ ch – ó.",
+   "version": 1
+  },
+  {
+   "key": "l1.ngua",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "con_vat",
+   "difficulty": 2,
+   "unit": "letter",
+   "picture": "🐴",
+   "pieces": [
+    "ng",
+    "ự",
+    "a"
+   ],
+   "answer": "ngựa",
+   "hints": [
+    "Chữ đầu tiên là “ng”."
+   ],
+   "explanation": "“ngựa” gồm các chữ ng – ự – a.",
+   "version": 1
+  },
+  {
+   "key": "l1.nho",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "do_an",
+   "difficulty": 1,
+   "unit": "letter",
+   "picture": "🍇",
+   "pieces": [
+    "nh",
+    "o"
+   ],
+   "answer": "nho",
+   "hints": [
+    "Chữ đầu tiên là “nh”."
+   ],
+   "explanation": "“nho” gồm các chữ nh – o.",
+   "version": 1
+  },
+  {
+   "key": "l1.cam",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "do_an",
+   "difficulty": 2,
+   "unit": "letter",
+   "picture": "🍊",
+   "pieces": [
+    "c",
+    "a",
+    "m"
+   ],
+   "answer": "cam",
+   "hints": [
+    "Chữ đầu tiên là “c”."
+   ],
+   "explanation": "“cam” gồm các chữ c – a – m.",
+   "version": 1
+  },
+  {
+   "key": "l1.kem",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "do_an",
+   "difficulty": 2,
+   "unit": "letter",
+   "picture": "🍦",
+   "pieces": [
+    "k",
+    "e",
+    "m"
+   ],
+   "answer": "kem",
+   "hints": [
+    "Chữ đầu tiên là “k”."
+   ],
+   "explanation": "“kem” gồm các chữ k – e – m.",
+   "version": 1
+  },
+  {
+   "key": "l1.sua",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "do_an",
+   "difficulty": 2,
+   "unit": "letter",
+   "picture": "🥛",
+   "pieces": [
+    "s",
+    "ữ",
+    "a"
+   ],
+   "answer": "sữa",
+   "hints": [
+    "Chữ đầu tiên là “s”."
+   ],
+   "explanation": "“sữa” gồm các chữ s – ữ – a.",
+   "version": 1
+  },
+  {
+   "key": "l1.trung",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "do_an",
+   "difficulty": 2,
+   "unit": "letter",
+   "picture": "🥚",
+   "pieces": [
+    "tr",
+    "ứ",
+    "ng"
+   ],
+   "answer": "trứng",
+   "hints": [
+    "Chữ đầu tiên là “tr”."
+   ],
+   "explanation": "“trứng” gồm các chữ tr – ứ – ng.",
+   "version": 1
+  },
+  {
+   "key": "l1.sao",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "thien_nhien",
+   "difficulty": 2,
+   "unit": "letter",
+   "picture": "⭐",
+   "pieces": [
+    "s",
+    "a",
+    "o"
+   ],
+   "answer": "sao",
+   "hints": [
+    "Chữ đầu tiên là “s”."
+   ],
+   "explanation": "“sao” gồm các chữ s – a – o.",
+   "version": 1
+  },
+  {
+   "key": "l1.la",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "thien_nhien",
+   "difficulty": 1,
+   "unit": "letter",
+   "picture": "🍃",
+   "pieces": [
+    "l",
+    "á"
+   ],
+   "answer": "lá",
+   "hints": [
+    "Chữ đầu tiên là “l”."
+   ],
+   "explanation": "“lá” gồm các chữ l – á.",
+   "version": 1
+  },
+  {
+   "key": "l1.mua",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "thien_nhien",
+   "difficulty": 2,
+   "unit": "letter",
+   "picture": "🌧️",
+   "pieces": [
+    "m",
+    "ư",
+    "a"
+   ],
+   "answer": "mưa",
+   "hints": [
+    "Chữ đầu tiên là “m”."
+   ],
+   "explanation": "“mưa” gồm các chữ m – ư – a.",
+   "version": 1
+  },
+  {
+   "key": "l1.cay",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "thien_nhien",
+   "difficulty": 2,
+   "unit": "letter",
+   "picture": "🌳",
+   "pieces": [
+    "c",
+    "â",
+    "y"
+   ],
+   "answer": "cây",
+   "hints": [
+    "Chữ đầu tiên là “c”."
+   ],
+   "explanation": "“cây” gồm các chữ c – â – y.",
+   "version": 1
+  },
+  {
+   "key": "l1.nui",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "thien_nhien",
+   "difficulty": 2,
+   "unit": "letter",
+   "picture": "⛰️",
+   "pieces": [
+    "n",
+    "ú",
+    "i"
+   ],
+   "answer": "núi",
+   "hints": [
+    "Chữ đầu tiên là “n”."
+   ],
+   "explanation": "“núi” gồm các chữ n – ú – i.",
+   "version": 1
+  },
+  {
+   "key": "l1.lua",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "thien_nhien",
+   "difficulty": 2,
+   "unit": "letter",
+   "picture": "🔥",
+   "pieces": [
+    "l",
+    "ử",
+    "a"
+   ],
+   "answer": "lửa",
+   "hints": [
+    "Chữ đầu tiên là “l”."
+   ],
+   "explanation": "“lửa” gồm các chữ l – ử – a.",
+   "version": 1
+  },
+  {
+   "key": "l1.trang",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "thien_nhien",
+   "difficulty": 2,
+   "unit": "letter",
+   "picture": "🌙",
+   "pieces": [
+    "tr",
+    "ă",
+    "ng"
+   ],
+   "answer": "trăng",
+   "hints": [
+    "Chữ đầu tiên là “tr”."
+   ],
+   "explanation": "“trăng” gồm các chữ tr – ă – ng.",
+   "version": 1
+  },
+  {
+   "key": "l1.nha",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "do_vat",
+   "difficulty": 1,
+   "unit": "letter",
+   "picture": "🏠",
+   "pieces": [
+    "nh",
+    "à"
+   ],
+   "answer": "nhà",
+   "hints": [
+    "Chữ đầu tiên là “nh”."
+   ],
+   "explanation": "“nhà” gồm các chữ nh – à.",
+   "version": 1
+  },
+  {
+   "key": "l1.mu",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "do_vat",
+   "difficulty": 1,
+   "unit": "letter",
+   "picture": "🧢",
+   "pieces": [
+    "m",
+    "ũ"
+   ],
+   "answer": "mũ",
+   "hints": [
+    "Chữ đầu tiên là “m”."
+   ],
+   "explanation": "“mũ” gồm các chữ m – ũ.",
+   "version": 1
+  },
+  {
+   "key": "l1.but",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "do_vat",
+   "difficulty": 2,
+   "unit": "letter",
+   "picture": "🖊️",
+   "pieces": [
+    "b",
+    "ú",
+    "t"
+   ],
+   "answer": "bút",
+   "hints": [
+    "Chữ đầu tiên là “b”."
+   ],
+   "explanation": "“bút” gồm các chữ b – ú – t.",
+   "version": 1
+  },
+  {
+   "key": "l1.ghe",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "do_vat",
+   "difficulty": 1,
+   "unit": "letter",
+   "picture": "🪑",
+   "pieces": [
+    "gh",
+    "ế"
+   ],
+   "answer": "ghế",
+   "hints": [
+    "Chữ đầu tiên là “gh”."
+   ],
+   "explanation": "“ghế” gồm các chữ gh – ế.",
+   "version": 1
+  },
+  {
+   "key": "l1.den",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "do_vat",
+   "difficulty": 2,
+   "unit": "letter",
+   "picture": "💡",
+   "pieces": [
+    "đ",
+    "è",
+    "n"
+   ],
+   "answer": "đèn",
+   "hints": [
+    "Chữ đầu tiên là “đ”."
+   ],
+   "explanation": "“đèn” gồm các chữ đ – è – n.",
+   "version": 1
+  },
+  {
+   "key": "l1.qua",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "do_vat",
+   "difficulty": 1,
+   "unit": "letter",
+   "picture": "🎁",
+   "pieces": [
+    "qu",
+    "à"
+   ],
+   "answer": "quà",
+   "hints": [
+    "Chữ đầu tiên là “qu”."
+   ],
+   "explanation": "“quà” gồm các chữ qu – à.",
+   "version": 1
+  },
+  {
+   "key": "l1.keo",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "do_vat",
+   "difficulty": 2,
+   "unit": "letter",
+   "picture": "✂️",
+   "pieces": [
+    "k",
+    "é",
+    "o"
+   ],
+   "answer": "kéo",
+   "hints": [
+    "Chữ đầu tiên là “k”."
+   ],
+   "explanation": "“kéo” gồm các chữ k – é – o.",
+   "version": 1
+  },
+  {
+   "key": "l1.co",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "do_vat",
+   "difficulty": 1,
+   "unit": "letter",
+   "picture": "🚩",
+   "pieces": [
+    "c",
+    "ờ"
+   ],
+   "answer": "cờ",
+   "hints": [
+    "Chữ đầu tiên là “c”."
+   ],
+   "explanation": "“cờ” gồm các chữ c – ờ.",
+   "version": 1
+  },
+  {
+   "key": "l1.sach",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "do_vat",
+   "difficulty": 2,
+   "unit": "letter",
+   "picture": "📖",
+   "pieces": [
+    "s",
+    "á",
+    "ch"
+   ],
+   "answer": "sách",
+   "hints": [
+    "Chữ đầu tiên là “s”."
+   ],
+   "explanation": "“sách” gồm các chữ s – á – ch.",
+   "version": 1
+  },
+  {
+   "key": "l1.mui",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "co_the",
+   "difficulty": 2,
+   "unit": "letter",
+   "picture": "👃",
+   "pieces": [
+    "m",
+    "ũ",
+    "i"
+   ],
+   "answer": "mũi",
+   "hints": [
+    "Chữ đầu tiên là “m”."
+   ],
+   "explanation": "“mũi” gồm các chữ m – ũ – i.",
+   "version": 1
+  },
+  {
+   "key": "l1.chan",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "co_the",
+   "difficulty": 2,
+   "unit": "letter",
+   "picture": "🦶",
+   "pieces": [
+    "ch",
+    "â",
+    "n"
+   ],
+   "answer": "chân",
+   "hints": [
+    "Chữ đầu tiên là “ch”."
+   ],
+   "explanation": "“chân” gồm các chữ ch – â – n.",
+   "version": 1
+  },
+  {
+   "key": "l2.may_bay",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "phuong_tien",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "✈️",
+   "pieces": [
+    "máy",
+    "bay"
+   ],
+   "answer": "máy bay",
+   "hints": [
+    "Tiếng đầu tiên là “máy”."
+   ],
+   "explanation": "“máy bay” gồm 2 tiếng: máy – bay.",
+   "version": 1
+  },
+  {
+   "key": "l2.o_to",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "phuong_tien",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "🚗",
+   "pieces": [
+    "ô",
+    "tô"
+   ],
+   "answer": "ô tô",
+   "hints": [
+    "Tiếng đầu tiên là “ô”."
+   ],
+   "explanation": "“ô tô” gồm 2 tiếng: ô – tô.",
+   "version": 1
+  },
+  {
+   "key": "l2.tau_hoa",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "phuong_tien",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "🚂",
+   "pieces": [
+    "tàu",
+    "hỏa"
+   ],
+   "answer": "tàu hỏa",
+   "hints": [
+    "Tiếng đầu tiên là “tàu”."
+   ],
+   "explanation": "“tàu hỏa” gồm 2 tiếng: tàu – hỏa.",
+   "version": 1
+  },
+  {
+   "key": "l2.xe_buyt",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "phuong_tien",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "🚌",
+   "pieces": [
+    "xe",
+    "buýt"
+   ],
+   "answer": "xe buýt",
+   "hints": [
+    "Tiếng đầu tiên là “xe”."
+   ],
+   "explanation": "“xe buýt” gồm 2 tiếng: xe – buýt.",
+   "version": 1
+  },
+  {
+   "key": "l2.xe_cuu_hoa",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "phuong_tien",
+   "difficulty": 3,
+   "unit": "syllable",
+   "picture": "🚒",
+   "pieces": [
+    "xe",
+    "cứu",
+    "hỏa"
+   ],
+   "answer": "xe cứu hỏa",
+   "hints": [
+    "Tiếng đầu tiên là “xe”."
+   ],
+   "explanation": "“xe cứu hỏa” gồm 3 tiếng: xe – cứu – hỏa.",
+   "version": 1
+  },
+  {
+   "key": "l2.dong_ho",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "do_vat",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "⏰",
+   "pieces": [
+    "đồng",
+    "hồ"
+   ],
+   "answer": "đồng hồ",
+   "hints": [
+    "Tiếng đầu tiên là “đồng”."
+   ],
+   "explanation": "“đồng hồ” gồm 2 tiếng: đồng – hồ.",
+   "version": 1
+  },
+  {
+   "key": "l2.but_chi",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "do_vat",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "✏️",
+   "pieces": [
+    "bút",
+    "chì"
+   ],
+   "answer": "bút chì",
+   "hints": [
+    "Tiếng đầu tiên là “bút”."
+   ],
+   "explanation": "“bút chì” gồm 2 tiếng: bút – chì.",
+   "version": 1
+  },
+  {
+   "key": "l2.kinh_ram",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "do_vat",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "🕶️",
+   "pieces": [
+    "kính",
+    "râm"
+   ],
+   "answer": "kính râm",
+   "hints": [
+    "Tiếng đầu tiên là “kính”."
+   ],
+   "explanation": "“kính râm” gồm 2 tiếng: kính – râm.",
+   "version": 1
+  },
+  {
+   "key": "l2.dien_thoai",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "do_vat",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "📱",
+   "pieces": [
+    "điện",
+    "thoại"
+   ],
+   "answer": "điện thoại",
+   "hints": [
+    "Tiếng đầu tiên là “điện”."
+   ],
+   "explanation": "“điện thoại” gồm 2 tiếng: điện – thoại.",
+   "version": 1
+  },
+  {
+   "key": "l2.may_tinh",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "do_vat",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "💻",
+   "pieces": [
+    "máy",
+    "tính"
+   ],
+   "answer": "máy tính",
+   "hints": [
+    "Tiếng đầu tiên là “máy”."
+   ],
+   "explanation": "“máy tính” gồm 2 tiếng: máy – tính.",
+   "version": 1
+  },
+  {
+   "key": "l2.bong_bay",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "do_vat",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "🎈",
+   "pieces": [
+    "bóng",
+    "bay"
+   ],
+   "answer": "bóng bay",
+   "hints": [
+    "Tiếng đầu tiên là “bóng”."
+   ],
+   "explanation": "“bóng bay” gồm 2 tiếng: bóng – bay.",
+   "version": 1
+  },
+  {
+   "key": "l2.ba_lo",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "do_vat",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "🎒",
+   "pieces": [
+    "ba",
+    "lô"
+   ],
+   "answer": "ba lô",
+   "hints": [
+    "Tiếng đầu tiên là “ba”."
+   ],
+   "explanation": "“ba lô” gồm 2 tiếng: ba – lô.",
+   "version": 1
+  },
+  {
+   "key": "l2.qua_bong",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "do_vat",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "⚽",
+   "pieces": [
+    "quả",
+    "bóng"
+   ],
+   "answer": "quả bóng",
+   "hints": [
+    "Tiếng đầu tiên là “quả”."
+   ],
+   "explanation": "“quả bóng” gồm 2 tiếng: quả – bóng.",
+   "version": 1
+  },
+  {
+   "key": "l2.den_giao_thong",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "do_vat",
+   "difficulty": 3,
+   "unit": "syllable",
+   "picture": "🚦",
+   "pieces": [
+    "đèn",
+    "giao",
+    "thông"
+   ],
+   "answer": "đèn giao thông",
+   "hints": [
+    "Tiếng đầu tiên là “đèn”."
+   ],
+   "explanation": "“đèn giao thông” gồm 3 tiếng: đèn – giao – thông.",
+   "version": 1
+  },
+  {
+   "key": "l2.banh_mi",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "do_an",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "🍞",
+   "pieces": [
+    "bánh",
+    "mì"
+   ],
+   "answer": "bánh mì",
+   "hints": [
+    "Tiếng đầu tiên là “bánh”."
+   ],
+   "explanation": "“bánh mì” gồm 2 tiếng: bánh – mì.",
+   "version": 1
+  },
+  {
+   "key": "l2.dua_hau",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "do_an",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "🍉",
+   "pieces": [
+    "dưa",
+    "hấu"
+   ],
+   "answer": "dưa hấu",
+   "hints": [
+    "Tiếng đầu tiên là “dưa”."
+   ],
+   "explanation": "“dưa hấu” gồm 2 tiếng: dưa – hấu.",
+   "version": 1
+  },
+  {
+   "key": "l2.ca_rot",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "do_an",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "🥕",
+   "pieces": [
+    "cà",
+    "rốt"
+   ],
+   "answer": "cà rốt",
+   "hints": [
+    "Tiếng đầu tiên là “cà”."
+   ],
+   "explanation": "“cà rốt” gồm 2 tiếng: cà – rốt.",
+   "version": 1
+  },
+  {
+   "key": "l2.bap_ngo",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "do_an",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "🌽",
+   "pieces": [
+    "bắp",
+    "ngô"
+   ],
+   "answer": "bắp ngô",
+   "hints": [
+    "Tiếng đầu tiên là “bắp”."
+   ],
+   "explanation": "“bắp ngô” gồm 2 tiếng: bắp – ngô.",
+   "version": 1
+  },
+  {
+   "key": "l2.keo_mut",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "do_an",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "🍭",
+   "pieces": [
+    "kẹo",
+    "mút"
+   ],
+   "answer": "kẹo mút",
+   "hints": [
+    "Tiếng đầu tiên là “kẹo”."
+   ],
+   "explanation": "“kẹo mút” gồm 2 tiếng: kẹo – mút.",
+   "version": 1
+  },
+  {
+   "key": "l2.qua_dua",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "do_an",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "🍍",
+   "pieces": [
+    "quả",
+    "dứa"
+   ],
+   "answer": "quả dứa",
+   "hints": [
+    "Tiếng đầu tiên là “quả”."
+   ],
+   "explanation": "“quả dứa” gồm 2 tiếng: quả – dứa.",
+   "version": 1
+  },
+  {
+   "key": "l2.banh_sinh_nhat",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "do_an",
+   "difficulty": 3,
+   "unit": "syllable",
+   "picture": "🎂",
+   "pieces": [
+    "bánh",
+    "sinh",
+    "nhật"
+   ],
+   "answer": "bánh sinh nhật",
+   "hints": [
+    "Tiếng đầu tiên là “bánh”."
+   ],
+   "explanation": "“bánh sinh nhật” gồm 3 tiếng: bánh – sinh – nhật.",
+   "version": 1
+  },
+  {
+   "key": "l2.cau_vong",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "thien_nhien",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "🌈",
+   "pieces": [
+    "cầu",
+    "vồng"
+   ],
+   "answer": "cầu vồng",
+   "hints": [
+    "Tiếng đầu tiên là “cầu”."
+   ],
+   "explanation": "“cầu vồng” gồm 2 tiếng: cầu – vồng.",
+   "version": 1
+  },
+  {
+   "key": "l2.mat_troi",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "thien_nhien",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "☀️",
+   "pieces": [
+    "mặt",
+    "trời"
+   ],
+   "answer": "mặt trời",
+   "hints": [
+    "Tiếng đầu tiên là “mặt”."
+   ],
+   "explanation": "“mặt trời” gồm 2 tiếng: mặt – trời.",
+   "version": 1
+  },
+  {
+   "key": "l2.ngoi_sao",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "thien_nhien",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "⭐",
+   "pieces": [
+    "ngôi",
+    "sao"
+   ],
+   "answer": "ngôi sao",
+   "hints": [
+    "Tiếng đầu tiên là “ngôi”."
+   ],
+   "explanation": "“ngôi sao” gồm 2 tiếng: ngôi – sao.",
+   "version": 1
+  },
+  {
+   "key": "l2.mat_trang",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "thien_nhien",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "🌙",
+   "pieces": [
+    "mặt",
+    "trăng"
+   ],
+   "answer": "mặt trăng",
+   "hints": [
+    "Tiếng đầu tiên là “mặt”."
+   ],
+   "explanation": "“mặt trăng” gồm 2 tiếng: mặt – trăng.",
+   "version": 1
+  },
+  {
+   "key": "l2.nui_lua",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "thien_nhien",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "🌋",
+   "pieces": [
+    "núi",
+    "lửa"
+   ],
+   "answer": "núi lửa",
+   "hints": [
+    "Tiếng đầu tiên là “núi”."
+   ],
+   "explanation": "“núi lửa” gồm 2 tiếng: núi – lửa.",
+   "version": 1
+  },
+  {
+   "key": "l2.cay_thong",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "thien_nhien",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "🌲",
+   "pieces": [
+    "cây",
+    "thông"
+   ],
+   "answer": "cây thông",
+   "hints": [
+    "Tiếng đầu tiên là “cây”."
+   ],
+   "explanation": "“cây thông” gồm 2 tiếng: cây – thông.",
+   "version": 1
+  },
+  {
+   "key": "l2.trai_dat",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "thien_nhien",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "🌍",
+   "pieces": [
+    "trái",
+    "đất"
+   ],
+   "answer": "trái đất",
+   "hints": [
+    "Tiếng đầu tiên là “trái”."
+   ],
+   "explanation": "“trái đất” gồm 2 tiếng: trái – đất.",
+   "version": 1
+  },
+  {
+   "key": "l2.bong_tuyet",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "thien_nhien",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "❄️",
+   "pieces": [
+    "bông",
+    "tuyết"
+   ],
+   "answer": "bông tuyết",
+   "hints": [
+    "Tiếng đầu tiên là “bông”."
+   ],
+   "explanation": "“bông tuyết” gồm 2 tiếng: bông – tuyết.",
+   "version": 1
+  },
+  {
+   "key": "l2.hoa_huong_duong",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "thien_nhien",
+   "difficulty": 3,
+   "unit": "syllable",
+   "picture": "🌻",
+   "pieces": [
+    "hoa",
+    "hướng",
+    "dương"
+   ],
+   "answer": "hoa hướng dương",
+   "hints": [
+    "Tiếng đầu tiên là “hoa”."
+   ],
+   "explanation": "“hoa hướng dương” gồm 3 tiếng: hoa – hướng – dương.",
+   "version": 1
+  },
+  {
+   "key": "l2.ca_heo",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "con_vat",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "🐬",
+   "pieces": [
+    "cá",
+    "heo"
+   ],
+   "answer": "cá heo",
+   "hints": [
+    "Tiếng đầu tiên là “cá”."
+   ],
+   "explanation": "“cá heo” gồm 2 tiếng: cá – heo.",
+   "version": 1
+  },
+  {
+   "key": "l2.bach_tuoc",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "con_vat",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "🐙",
+   "pieces": [
+    "bạch",
+    "tuộc"
+   ],
+   "answer": "bạch tuộc",
+   "hints": [
+    "Tiếng đầu tiên là “bạch”."
+   ],
+   "explanation": "“bạch tuộc” gồm 2 tiếng: bạch – tuộc.",
+   "version": 1
+  },
+  {
+   "key": "l2.su_tu",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "con_vat",
+   "difficulty": 2,
+   "unit": "syllable",
+   "picture": "🦁",
+   "pieces": [
+    "sư",
+    "tử"
+   ],
+   "answer": "sư tử",
+   "hints": [
+    "Tiếng đầu tiên là “sư”."
+   ],
+   "explanation": "“sư tử” gồm 2 tiếng: sư – tử.",
+   "version": 1
+  },
+  {
+   "key": "l2.huou_cao_co",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    2
+   ],
+   "topic": "con_vat",
+   "difficulty": 3,
+   "unit": "syllable",
+   "picture": "🦒",
+   "pieces": [
+    "hươu",
+    "cao",
+    "cổ"
+   ],
+   "answer": "hươu cao cổ",
+   "hints": [
+    "Tiếng đầu tiên là “hươu”."
+   ],
+   "explanation": "“hươu cao cổ” gồm 3 tiếng: hươu – cao – cổ.",
+   "version": 1
+  }
+ ]
+}

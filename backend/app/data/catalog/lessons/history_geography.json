@@ -1,0 +1,5183 @@
+{
+ "subject": "history_geography",
+ "version": 1,
+ "organization": "topic",
+ "source_note": "Theo yêu cầu cần đạt môn Lịch sử và Địa lí lớp 4–5 và lớp 6–9 (phân môn Lịch sử, phân môn Địa lí) của CT GDPT 2018, sửa đổi theo Thông tư 17/2025; tổ chức theo chủ đề, không theo mục lục bộ sách nào. Địa lí Việt Nam được mô tả theo vùng và yếu tố tự nhiên, không dùng danh sách tỉnh, thành.",
+ "chapters": [
+  {
+   "key": "lsdl4.dia_phuong",
+   "grade": 4,
+   "order": 1,
+   "title": "Làm quen với môn học và địa phương em",
+   "lessons": [
+    {
+     "key": "lsdl4.ban_do_tu_lieu",
+     "order": 1,
+     "title": "Làm quen với bản đồ, lược đồ và tư liệu lịch sử",
+     "description": "Đọc bản đồ, lược đồ, tranh ảnh và hiện vật để tìm hiểu lịch sử, địa lí.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl4.thien_nhien_dia_phuong",
+     "order": 2,
+     "title": "Thiên nhiên và con người ở địa phương em",
+     "description": "Vị trí, thiên nhiên và hoạt động sản xuất của nơi em sống.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl4.van_hoa_dia_phuong",
+     "order": 3,
+     "title": "Di tích, danh nhân và truyền thống văn hoá ở địa phương em",
+     "description": "Tìm hiểu một di tích, một nhân vật lịch sử và nét văn hoá của quê hương.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl4.trung_du_mien_nui",
+   "grade": 4,
+   "order": 2,
+   "title": "Trung du và miền núi Bắc Bộ",
+   "lessons": [
+    {
+     "key": "lsdl4.tdmn_thien_nhien",
+     "order": 1,
+     "title": "Thiên nhiên vùng Trung du và miền núi Bắc Bộ",
+     "description": "Dãy Hoàng Liên Sơn, đồi trung du, sông ngòi và khí hậu của vùng.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl4.tdmn_dan_cu",
+     "order": 2,
+     "title": "Dân cư và hoạt động sản xuất ở Trung du và miền núi Bắc Bộ",
+     "description": "Các dân tộc, ruộng bậc thang, đồi chè và nghề truyền thống.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl4.den_hung",
+     "order": 3,
+     "title": "Đền Hùng và lễ giỗ Tổ Hùng Vương",
+     "description": "Đọc tư liệu về Đền Hùng, truyền thuyết các vua Hùng và ý nghĩa của ngày giỗ Tổ.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Kể được một số nét về khu di tích Đền Hùng",
+      "Biết ngày giỗ Tổ Hùng Vương và ý nghĩa của ngày lễ",
+      "Hiểu đạo lí “uống nước nhớ nguồn” của dân tộc"
+     ],
+     "summary": [
+      "Theo truyền thuyết, các vua Hùng là người dựng nên nước Văn Lang, nhà nước đầu tiên của người Việt.",
+      "Đền Hùng nằm trên núi Nghĩa Lĩnh, thuộc vùng trung du Bắc Bộ, gồm Đền Hạ, Đền Trung, Đền Thượng và lăng Hùng Vương.",
+      "Giỗ Tổ Hùng Vương vào ngày 10 tháng 3 âm lịch hằng năm.",
+      "Năm 2012, tín ngưỡng thờ cúng Hùng Vương được UNESCO ghi danh là di sản văn hoá phi vật thể đại diện của nhân loại."
+     ],
+     "examples": [
+      {
+       "title": "Câu ca dao về ngày giỗ Tổ",
+       "lines": [
+        "“Dù ai đi ngược về xuôi",
+        "Nhớ ngày giỗ Tổ mồng mười tháng ba.”"
+       ]
+      },
+      {
+       "title": "Lời Bác Hồ ở Đền Hùng (năm 1954)",
+       "lines": [
+        "“Các vua Hùng đã có công dựng nước,",
+        "Bác cháu ta phải cùng nhau giữ lấy nước.”"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Đọc tư liệu: Đền Hùng",
+       "style": "reading",
+       "tasks": [
+        {
+         "key": "ngay_gio_to",
+         "passage": "Hằng năm, cứ đến ngày 10 tháng 3 âm lịch, người dân khắp nơi lại hướng về Đền Hùng. Nhiều người hành hương lên núi dâng hương tưởng nhớ các vua Hùng.",
+         "question": "Ngày giỗ Tổ Hùng Vương là ngày nào?",
+         "options": [
+          {
+           "text": "Ngày 10 tháng 3 âm lịch",
+           "ok": true,
+           "why": "Đúng. Đoạn tư liệu nói rõ: ngày 10 tháng 3 âm lịch là ngày giỗ Tổ."
+          },
+          {
+           "text": "Ngày 1 tháng 1 âm lịch",
+           "ok": false,
+           "why": "Đó là ngày Tết Nguyên đán, không phải ngày giỗ Tổ."
+          },
+          {
+           "text": "Ngày 15 tháng 8 âm lịch",
+           "ok": false,
+           "why": "Đó là Tết Trung thu."
+          },
+          {
+           "text": "Ngày 2 tháng 9",
+           "ok": false,
+           "why": "Đó là ngày Quốc khánh nước ta."
+          }
+         ],
+         "explanation": "Giỗ Tổ Hùng Vương là ngày 10 tháng 3 âm lịch, ngày cả nước tưởng nhớ các vua Hùng."
+        },
+        {
+         "key": "dung_nuoc",
+         "passage": "Truyền thuyết kể rằng Lạc Long Quân và Âu Cơ sinh ra một bọc trăm trứng, nở thành trăm người con. Người con trưởng được tôn làm vua, gọi là Hùng Vương, đặt tên nước là Văn Lang.",
+         "question": "Theo truyền thuyết, ai đã lập ra nước Văn Lang?",
+         "options": [
+          {
+           "text": "Các vua Hùng",
+           "ok": true,
+           "why": "Đúng. Người con trưởng làm vua, xưng là Hùng Vương, đặt tên nước là Văn Lang."
+          },
+          {
+           "text": "An Dương Vương",
+           "ok": false,
+           "why": "An Dương Vương lập nước Âu Lạc, ra đời sau nước Văn Lang."
+          },
+          {
+           "text": "Ngô Quyền",
+           "ok": false,
+           "why": "Ngô Quyền sống muộn hơn rất nhiều, là người chiến thắng trên sông Bạch Đằng năm 938."
+          },
+          {
+           "text": "Lý Công Uẩn",
+           "ok": false,
+           "why": "Lý Công Uẩn là vua nhà Lý, người dời đô ra Thăng Long năm 1010."
+          }
+         ],
+         "explanation": "Truyền thuyết “Con Rồng cháu Tiên” giải thích nguồn gốc chung của người Việt và kể về các vua Hùng dựng nước Văn Lang."
+        },
+        {
+         "key": "vi_tri_den",
+         "passage": "Khu di tích Đền Hùng nằm trên núi Nghĩa Lĩnh ở vùng trung du Bắc Bộ. Từ chân núi, du khách leo hàng trăm bậc đá để lần lượt đến Đền Hạ, Đền Trung rồi Đền Thượng trên đỉnh núi.",
+         "question": "Đền Hùng được xây dựng ở đâu?",
+         "options": [
+          {
+           "text": "Trên núi Nghĩa Lĩnh",
+           "ok": true,
+           "why": "Đúng. Các đền được xây từ chân lên đỉnh núi Nghĩa Lĩnh."
+          },
+          {
+           "text": "Trên một hòn đảo giữa biển",
+           "ok": false,
+           "why": "Đoạn tư liệu cho biết Đền Hùng ở vùng trung du, trên núi, không phải ngoài biển."
+          },
+          {
+           "text": "Giữa cánh đồng lúa bằng phẳng",
+           "ok": false,
+           "why": "Muốn đến các đền phải leo bậc đá lên núi, vậy đền không ở giữa cánh đồng."
+          }
+         ],
+         "explanation": "Đền Hùng nằm trên núi Nghĩa Lĩnh ở vùng trung du Bắc Bộ, gồm Đền Hạ, Đền Trung, Đền Thượng."
+        },
+        {
+         "key": "loi_bac",
+         "passage": "Năm 1954, Bác Hồ về thăm Đền Hùng và nói chuyện với cán bộ, chiến sĩ: “Các vua Hùng đã có công dựng nước, Bác cháu ta phải cùng nhau giữ lấy nước.”",
+         "question": "Lời Bác Hồ nhắc chúng ta điều gì?",
+         "options": [
+          {
+           "text": "Phải giữ gìn, bảo vệ đất nước mà cha ông đã dựng nên",
+           "ok": true,
+           "why": "Đúng. Các vua Hùng dựng nước, thế hệ sau có trách nhiệm giữ nước."
+          },
+          {
+           "text": "Chỉ cần nhớ tên các vua Hùng",
+           "ok": false,
+           "why": "Nhớ là cần, nhưng Bác nhấn mạnh việc làm: cùng nhau giữ lấy nước."
+          },
+          {
+           "text": "Mỗi năm phải đến Đền Hùng một lần",
+           "ok": false,
+           "why": "Lời Bác không nói đến việc bắt buộc đi lễ, mà nói về trách nhiệm giữ nước."
+          }
+         ],
+         "explanation": "Câu nói của Bác là lời nhắc về trách nhiệm bảo vệ Tổ quốc, tiếp nối công lao dựng nước của các vua Hùng."
+        },
+        {
+         "key": "unesco",
+         "passage": "Năm 2012, UNESCO ghi danh tín ngưỡng thờ cúng Hùng Vương là di sản văn hoá phi vật thể đại diện của nhân loại. Tín ngưỡng này thể hiện lòng biết ơn tổ tiên và tinh thần đoàn kết của người Việt.",
+         "question": "Vì sao tín ngưỡng thờ cúng Hùng Vương được thế giới ghi nhận?",
+         "options": [
+          {
+           "text": "Vì thể hiện lòng biết ơn tổ tiên và tinh thần đoàn kết dân tộc",
+           "ok": true,
+           "why": "Đúng. Đó là giá trị mà đoạn tư liệu nêu ra."
+          },
+          {
+           "text": "Vì Đền Hùng là công trình cao nhất thế giới",
+           "ok": false,
+           "why": "Đoạn tư liệu không nói như vậy; di sản được ghi danh là tín ngưỡng, không phải độ cao công trình."
+          },
+          {
+           "text": "Vì đó là lễ hội mới được tổ chức gần đây",
+           "ok": false,
+           "why": "Tín ngưỡng thờ cúng Hùng Vương đã có từ rất lâu đời."
+          }
+         ],
+         "explanation": "Di sản được ghi danh là tín ngưỡng thờ cúng Hùng Vương — biểu hiện của đạo lí “uống nước nhớ nguồn”."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "lsdl4.dong_bang_bac_bo",
+   "grade": 4,
+   "order": 3,
+   "title": "Đồng bằng Bắc Bộ",
+   "lessons": [
+    {
+     "key": "lsdl4.dbbb_thien_nhien",
+     "order": 1,
+     "title": "Thiên nhiên vùng Đồng bằng Bắc Bộ",
+     "description": "Địa hình, sông ngòi, khí hậu của Đồng bằng Bắc Bộ và hệ thống đê ven sông.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được đặc điểm địa hình và khí hậu của Đồng bằng Bắc Bộ",
+      "Kể được sông Hồng, sông Thái Bình",
+      "Giải thích vì sao người dân đắp đê ven sông"
+     ],
+     "summary": [
+      "Đồng bằng Bắc Bộ do phù sa sông Hồng và sông Thái Bình bồi đắp, là đồng bằng lớn thứ hai nước ta.",
+      "Địa hình khá bằng phẳng, có dạng gần giống hình tam giác.",
+      "Khí hậu có mùa đông lạnh; mùa hạ nóng, mưa nhiều.",
+      "Để ngăn lũ, người dân đắp hệ thống đê dài dọc các con sông."
+     ],
+     "examples": [
+      {
+       "title": "Vì sao sông Hồng có màu đỏ nâu?",
+       "lines": [
+        "Nước sông mang theo rất nhiều phù sa màu đỏ nâu.",
+        "Phù sa bồi đắp nên đồng bằng màu mỡ."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Khám phá Đồng bằng Bắc Bộ",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "song_boi_dap",
+         "question": "Đồng bằng Bắc Bộ do phù sa của những con sông nào bồi đắp?",
+         "options": [
+          {
+           "text": "Sông Hồng và sông Thái Bình",
+           "ok": true,
+           "why": "Đúng. Hai con sông này bồi đắp nên Đồng bằng Bắc Bộ."
+          },
+          {
+           "text": "Sông Mê Công và sông Đồng Nai",
+           "ok": false,
+           "why": "Hai con sông này bồi đắp Đồng bằng Nam Bộ."
+          },
+          {
+           "text": "Sông Đà và sông Mã",
+           "ok": false,
+           "why": "Sông Đà chảy qua vùng núi Tây Bắc; đây không phải hai sông bồi đắp Đồng bằng Bắc Bộ."
+          }
+         ],
+         "explanation": "Phù sa sông Hồng và sông Thái Bình bồi đắp nên Đồng bằng Bắc Bộ."
+        },
+        {
+         "key": "de_ngan_lu",
+         "question": "Vì sao người dân Đồng bằng Bắc Bộ đắp đê dọc các con sông?",
+         "options": [
+          {
+           "text": "Để ngăn lũ, bảo vệ nhà cửa và ruộng đồng",
+           "ok": true,
+           "why": "Đúng. Mùa mưa nước sông dâng cao, đê giúp ngăn nước lũ tràn vào."
+          },
+          {
+           "text": "Để làm đường cho tàu thuyền đi",
+           "ok": false,
+           "why": "Tàu thuyền đi trên sông; đê được đắp chủ yếu để ngăn lũ."
+          },
+          {
+           "text": "Để giữ nước biển vào đồng ruộng",
+           "ok": false,
+           "why": "Nước biển mặn làm hại cây lúa; đê ven sông không có mục đích này."
+          }
+         ],
+         "explanation": "Hệ thống đê ven sông giúp ngăn lũ; người dân cần bảo vệ đê."
+        },
+        {
+         "key": "khi_hau",
+         "question": "Khí hậu Đồng bằng Bắc Bộ có điểm gì nổi bật?",
+         "options": [
+          {
+           "text": "Có mùa đông lạnh",
+           "ok": true,
+           "why": "Đúng. Mùa đông ở đây lạnh, người dân trồng được cả rau vụ đông."
+          },
+          {
+           "text": "Nóng quanh năm, không có mùa đông",
+           "ok": false,
+           "why": "Đó là đặc điểm của vùng Nam Bộ."
+          },
+          {
+           "text": "Lạnh quanh năm, có băng tuyết",
+           "ok": false,
+           "why": "Nước ta không có vùng đồng bằng nào lạnh quanh năm, có băng tuyết."
+          }
+         ],
+         "explanation": "Đồng bằng Bắc Bộ có mùa đông lạnh và mùa hạ nóng, mưa nhiều."
+        },
+        {
+         "key": "dia_hinh",
+         "question": "Địa hình Đồng bằng Bắc Bộ như thế nào?",
+         "options": [
+          {
+           "text": "Khá bằng phẳng, có dạng gần giống hình tam giác",
+           "ok": true,
+           "why": "Đúng. Đồng bằng rộng, bằng phẳng, mở rộng dần ra phía biển."
+          },
+          {
+           "text": "Gồm các cao nguyên xếp tầng",
+           "ok": false,
+           "why": "Cao nguyên xếp tầng là đặc điểm của Tây Nguyên."
+          },
+          {
+           "text": "Nhiều đồi thấp hình bát úp",
+           "ok": false,
+           "why": "Đồi bát úp là cảnh quan của vùng trung du."
+          }
+         ],
+         "explanation": "Đồng bằng Bắc Bộ khá bằng phẳng, có dạng gần giống hình tam giác."
+        },
+        {
+         "key": "lon_thu_hai",
+         "question": "So với các đồng bằng khác ở nước ta, Đồng bằng Bắc Bộ lớn thứ mấy?",
+         "options": [
+          {
+           "text": "Lớn thứ hai",
+           "ok": true,
+           "why": "Đúng. Đồng bằng lớn nhất là Đồng bằng Nam Bộ."
+          },
+          {
+           "text": "Lớn nhất",
+           "ok": false,
+           "why": "Đồng bằng Nam Bộ mới là đồng bằng lớn nhất nước ta."
+          },
+          {
+           "text": "Nhỏ nhất",
+           "ok": false,
+           "why": "Các đồng bằng nhỏ hẹp nằm ở duyên hải miền Trung."
+          }
+         ],
+         "explanation": "Đồng bằng Bắc Bộ là đồng bằng lớn thứ hai, sau Đồng bằng Nam Bộ."
+        },
+        {
+         "key": "phu_sa",
+         "question": "Vì sao nước sông Hồng có màu đỏ nâu?",
+         "options": [
+          {
+           "text": "Vì nước sông chứa nhiều phù sa",
+           "ok": true,
+           "why": "Đúng. Phù sa làm nước có màu đỏ nâu và bồi đắp ruộng đồng màu mỡ."
+          },
+          {
+           "text": "Vì nước sông bị ô nhiễm",
+           "ok": false,
+           "why": "Màu đỏ nâu tự nhiên của sông Hồng là do phù sa, không phải do ô nhiễm."
+          },
+          {
+           "text": "Vì đáy sông được lát đá đỏ",
+           "ok": false,
+           "why": "Đáy sông không được lát đá; màu nước là do phù sa trôi theo dòng."
+          }
+         ],
+         "explanation": "Tên sông Hồng gắn với màu nước đỏ nâu do nhiều phù sa."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "lsdl4.dbbb_dan_cu",
+     "order": 2,
+     "title": "Dân cư và hoạt động sản xuất ở Đồng bằng Bắc Bộ",
+     "description": "Trồng lúa nước, làng nghề và đời sống người dân.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl4.song_hong",
+     "order": 3,
+     "title": "Sông Hồng và văn minh sông Hồng",
+     "description": "Vai trò của sông Hồng với đời sống và văn hoá của người Việt.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl4.thang_long_ha_noi",
+     "order": 4,
+     "title": "Thăng Long – Hà Nội",
+     "description": "Dòng thời gian của kinh thành Thăng Long, nay là Thủ đô Hà Nội.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Kể được sự kiện Lý Công Uẩn dời đô ra Thăng Long năm 1010",
+      "Biết một số tên gọi của Thăng Long – Hà Nội qua các thời kì",
+      "Sắp xếp một số sự kiện gắn với Thăng Long – Hà Nội theo thời gian"
+     ],
+     "summary": [
+      "Năm 1010, vua Lý Công Uẩn dời đô từ Hoa Lư ra thành Đại La và đổi tên là Thăng Long.",
+      "Thời Lê sơ, kinh thành được gọi là Đông Kinh. Năm 1831, vua Minh Mạng đặt tên là Hà Nội.",
+      "Năm 1070 xây Văn Miếu, năm 1076 lập Quốc Tử Giám; năm 1484 dựng những bia tiến sĩ đầu tiên.",
+      "Ngày 2/9/1945, Bác Hồ đọc Tuyên ngôn Độc lập ở quảng trường Ba Đình; ngày 10/10/1954 Thủ đô được giải phóng.",
+      "Năm 2010, cả nước kỉ niệm 1000 năm Thăng Long – Hà Nội."
+     ],
+     "examples": [
+      {
+       "title": "Vì sao Lý Công Uẩn chọn Đại La?",
+       "lines": [
+        "Vùng đất rộng, bằng phẳng, cao ráo, không bị ngập lụt.",
+        "Ở trung tâm đất nước, thuận tiện đi lại bằng đường thuỷ và đường bộ."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Dòng thời gian Thăng Long",
+       "tasks": [
+        {
+         "key": "ten_goi",
+         "prompt": "Xếp các tên gọi của kinh thành theo thời gian, từ sớm đến muộn.",
+         "items": [
+          "Đại La",
+          "Thăng Long",
+          "Đông Kinh",
+          "Hà Nội"
+         ],
+         "explanation": "Thành Đại La có trước năm 1010. Lý Công Uẩn dời đô về đây và đặt tên Thăng Long (1010). Thời Lê sơ kinh thành gọi là Đông Kinh. Năm 1831, vua Minh Mạng đặt tên Hà Nội.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "kinh_do",
+         "prompt": "Xếp các kinh đô của nước ta theo thời gian, từ sớm đến muộn.",
+         "items": [
+          "Phong Châu – kinh đô nước Văn Lang",
+          "Cổ Loa – kinh đô nước Âu Lạc",
+          "Hoa Lư – kinh đô thời Đinh, Tiền Lê",
+          "Thăng Long – kinh đô từ thời Lý"
+         ],
+         "explanation": "Văn Lang của các vua Hùng có trước, rồi đến Âu Lạc của An Dương Vương. Thời Đinh, Tiền Lê đóng đô ở Hoa Lư. Năm 1010 nhà Lý dời đô ra Thăng Long.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "van_hoa",
+         "prompt": "Xếp các sự kiện thời Lý và Lê sơ ở kinh thành theo thời gian.",
+         "items": [
+          "Lý Công Uẩn dời đô ra Thăng Long",
+          "Vua Lý Thánh Tông cho xây Văn Miếu",
+          "Lập Quốc Tử Giám bên cạnh Văn Miếu",
+          "Dựng những tấm bia tiến sĩ đầu tiên"
+         ],
+         "explanation": "Dời đô năm 1010, xây Văn Miếu năm 1070, lập Quốc Tử Giám năm 1076, dựng những bia tiến sĩ đầu tiên năm 1484 (thời Lê sơ).",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "ha_noi",
+         "prompt": "Xếp các sự kiện gắn với Hà Nội theo thời gian.",
+         "items": [
+          "Vua Minh Mạng đặt tên Hà Nội",
+          "Bác Hồ đọc Tuyên ngôn Độc lập ở Ba Đình",
+          "Giải phóng Thủ đô sau kháng chiến chống Pháp",
+          "Kỉ niệm 1000 năm Thăng Long – Hà Nội"
+         ],
+         "explanation": "Đặt tên Hà Nội năm 1831; đọc Tuyên ngôn Độc lập ngày 2/9/1945; giải phóng Thủ đô ngày 10/10/1954; kỉ niệm 1000 năm Thăng Long – Hà Nội năm 2010.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "lsdl4.van_mieu",
+     "order": 5,
+     "title": "Văn Miếu – Quốc Tử Giám",
+     "description": "Đọc tư liệu về Văn Miếu, Quốc Tử Giám, bia tiến sĩ và truyền thống hiếu học.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết Văn Miếu được xây năm 1070 và Quốc Tử Giám được lập năm 1076",
+      "Nêu được ý nghĩa của bia tiến sĩ",
+      "Có ý thức giữ gìn di tích và truyền thống hiếu học"
+     ],
+     "summary": [
+      "Năm 1070, vua Lý Thánh Tông cho xây Văn Miếu ở Thăng Long.",
+      "Năm 1076, Quốc Tử Giám được lập bên cạnh Văn Miếu, được coi là trường đại học đầu tiên của nước ta.",
+      "Trong Văn Miếu có 82 tấm bia khắc tên các tiến sĩ, mỗi tấm đặt trên lưng một con rùa đá.",
+      "Khuê Văn Các trong Văn Miếu được chọn làm biểu tượng của Thủ đô Hà Nội."
+     ],
+     "examples": [
+      {
+       "title": "Truyền thống hiếu học",
+       "lines": [
+        "Bia tiến sĩ ghi tên người học giỏi, đỗ đạt để đời sau noi gương.",
+        "Thầy Chu Văn An thời Trần từng dạy ở Quốc Tử Giám."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Đọc tư liệu: Văn Miếu",
+       "style": "reading",
+       "tasks": [
+        {
+         "key": "xay_van_mieu",
+         "passage": "Năm 1070, vua Lý Thánh Tông cho xây Văn Miếu ở kinh thành Thăng Long để thờ Khổng Tử và các bậc hiền triết.",
+         "question": "Văn Miếu được xây dựng dưới triều đại nào?",
+         "options": [
+          {
+           "text": "Nhà Lý",
+           "ok": true,
+           "why": "Đúng. Vua Lý Thánh Tông cho xây Văn Miếu năm 1070."
+          },
+          {
+           "text": "Nhà Trần",
+           "ok": false,
+           "why": "Nhà Trần ra đời năm 1226, sau khi Văn Miếu đã được xây."
+          },
+          {
+           "text": "Nhà Lê sơ",
+           "ok": false,
+           "why": "Thời Lê sơ dựng bia tiến sĩ trong Văn Miếu, nhưng Văn Miếu có từ thời Lý."
+          },
+          {
+           "text": "Nhà Nguyễn",
+           "ok": false,
+           "why": "Nhà Nguyễn ra đời năm 1802, muộn hơn rất nhiều."
+          }
+         ],
+         "explanation": "Văn Miếu được xây năm 1070, thời vua Lý Thánh Tông."
+        },
+        {
+         "key": "quoc_tu_giam",
+         "passage": "Năm 1076, nhà Lý lập Quốc Tử Giám bên cạnh Văn Miếu. Lúc đầu đây là nơi học của con vua và con quan, về sau nhận cả con em nhà thường dân học giỏi.",
+         "question": "Quốc Tử Giám là nơi dùng để làm gì?",
+         "options": [
+          {
+           "text": "Là trường học, được coi là trường đại học đầu tiên của nước ta",
+           "ok": true,
+           "why": "Đúng. Quốc Tử Giám là nơi dạy học cho người học giỏi."
+          },
+          {
+           "text": "Là cung điện nơi vua ở",
+           "ok": false,
+           "why": "Vua ở trong hoàng thành; Quốc Tử Giám là trường học."
+          },
+          {
+           "text": "Là nơi buôn bán của kinh thành",
+           "ok": false,
+           "why": "Đoạn tư liệu nói Quốc Tử Giám là nơi học, không phải chợ."
+          }
+         ],
+         "explanation": "Quốc Tử Giám (1076) được coi là trường đại học đầu tiên của nước ta."
+        },
+        {
+         "key": "bia_tien_si",
+         "passage": "Trong Văn Miếu có 82 tấm bia đá khắc tên những người đỗ tiến sĩ. Mỗi tấm bia đặt trên lưng một con rùa đá. Những tấm bia đầu tiên được dựng năm 1484.",
+         "question": "Các tấm bia tiến sĩ ghi lại điều gì?",
+         "options": [
+          {
+           "text": "Tên những người đỗ tiến sĩ",
+           "ok": true,
+           "why": "Đúng. Bia ghi tên người đỗ đạt để tôn vinh và khuyến khích việc học."
+          },
+          {
+           "text": "Tên các vị vua",
+           "ok": false,
+           "why": "Bia tiến sĩ ghi tên người đỗ tiến sĩ, không phải danh sách các vua."
+          },
+          {
+           "text": "Những trận đánh lớn",
+           "ok": false,
+           "why": "Đoạn tư liệu không nói bia ghi về trận đánh."
+          }
+         ],
+         "explanation": "82 bia tiến sĩ là chứng tích quý về truyền thống hiếu học, trọng nhân tài."
+        },
+        {
+         "key": "chu_van_an",
+         "passage": "Thời Trần, thầy Chu Văn An dạy học ở Quốc Tử Giám. Ông giỏi, sống thanh bạch, ngay thẳng; từng dâng sớ xin vua chém những kẻ nịnh thần.",
+         "question": "Vì sao Chu Văn An được nhân dân kính trọng?",
+         "options": [
+          {
+           "text": "Ông là người thầy giỏi, ngay thẳng, mẫu mực",
+           "ok": true,
+           "why": "Đúng. Đoạn tư liệu nói ông giỏi, thanh bạch và ngay thẳng."
+          },
+          {
+           "text": "Ông là vị vua xây Văn Miếu",
+           "ok": false,
+           "why": "Người cho xây Văn Miếu là vua Lý Thánh Tông."
+          },
+          {
+           "text": "Ông là vị tướng đánh giặc trên sông Bạch Đằng",
+           "ok": false,
+           "why": "Chu Văn An là thầy giáo, không phải tướng chỉ huy trận Bạch Đằng."
+          }
+         ],
+         "explanation": "Chu Văn An là tấm gương người thầy mẫu mực của dân tộc."
+        },
+        {
+         "key": "khue_van_cac",
+         "passage": "Khuê Văn Các là một gác nhỏ, đẹp ở trong Văn Miếu. Ngày nay, hình ảnh Khuê Văn Các được chọn làm biểu tượng của Thủ đô Hà Nội.",
+         "question": "Theo đoạn tư liệu, Khuê Văn Các ngày nay là gì?",
+         "options": [
+          {
+           "text": "Biểu tượng của Thủ đô Hà Nội",
+           "ok": true,
+           "why": "Đúng. Đoạn tư liệu nói rõ điều này."
+          },
+          {
+           "text": "Cổng chính của hoàng thành",
+           "ok": false,
+           "why": "Khuê Văn Các nằm trong Văn Miếu, không phải cổng hoàng thành."
+          },
+          {
+           "text": "Ngôi đền thờ các vua Hùng",
+           "ok": false,
+           "why": "Đền thờ các vua Hùng là Đền Hùng ở vùng trung du."
+          }
+         ],
+         "explanation": "Khuê Văn Các là biểu tượng của Thủ đô Hà Nội."
+        },
+        {
+         "key": "tham_quan",
+         "passage": "Văn Miếu – Quốc Tử Giám là di tích quý. Các con rùa đá và bia tiến sĩ đã có hàng trăm năm tuổi, dễ bị hư hại nếu bị trèo lên hay xoa đầu.",
+         "question": "Khi đến thăm Văn Miếu, em nên làm gì?",
+         "options": [
+          {
+           "text": "Ngắm và tìm hiểu, không trèo lên hay sờ vào bia, rùa đá",
+           "ok": true,
+           "why": "Đúng. Giữ gìn di tích để nhiều thế hệ sau còn được thấy."
+          },
+          {
+           "text": "Xoa đầu rùa đá để cầu học giỏi",
+           "ok": false,
+           "why": "Việc này làm mòn, hỏng hiện vật quý; học giỏi là nhờ chăm chỉ."
+          },
+          {
+           "text": "Viết tên mình lên bia để làm kỉ niệm",
+           "ok": false,
+           "why": "Viết, vẽ lên di tích là làm hư hại di sản của cả dân tộc."
+          }
+         ],
+         "explanation": "Giữ gìn di tích là cách tôn trọng truyền thống hiếu học của cha ông."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "lsdl4.duyen_hai_mien_trung",
+   "grade": 4,
+   "order": 4,
+   "title": "Duyên hải miền Trung",
+   "lessons": [
+    {
+     "key": "lsdl4.dhmt_thien_nhien",
+     "order": 1,
+     "title": "Thiên nhiên vùng Duyên hải miền Trung",
+     "description": "Dải đồng bằng hẹp ven biển, núi lan ra sát biển và thiên tai.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl4.dhmt_dan_cu",
+     "order": 2,
+     "title": "Dân cư và hoạt động sản xuất ở Duyên hải miền Trung",
+     "description": "Nghề biển, làm muối, du lịch và cách người dân thích ứng với thiên tai.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl4.co_do_hue",
+     "order": 3,
+     "title": "Cố đô Huế",
+     "description": "Kinh đô thời Nguyễn và quần thể di tích Huế.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl4.pho_co_hoi_an",
+     "order": 4,
+     "title": "Phố cổ Hội An",
+     "description": "Thương cảng xưa và những ngôi nhà, cây cầu cổ.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl4.tay_nguyen",
+   "grade": 4,
+   "order": 5,
+   "title": "Tây Nguyên",
+   "lessons": [
+    {
+     "key": "lsdl4.tn_thien_nhien",
+     "order": 1,
+     "title": "Thiên nhiên vùng Tây Nguyên",
+     "description": "Các cao nguyên xếp tầng, đất đỏ ba dan và hai mùa mưa, khô.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl4.tn_dan_cu",
+     "order": 2,
+     "title": "Dân cư và hoạt động sản xuất ở Tây Nguyên",
+     "description": "Các dân tộc, cây cà phê, cao su và thuỷ điện.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl4.cong_chieng",
+     "order": 3,
+     "title": "Văn hoá cồng chiêng Tây Nguyên",
+     "description": "Không gian văn hoá cồng chiêng và lễ hội của đồng bào Tây Nguyên.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl4.nam_bo",
+   "grade": 4,
+   "order": 6,
+   "title": "Nam Bộ",
+   "lessons": [
+    {
+     "key": "lsdl4.nam_bo_thien_nhien",
+     "order": 1,
+     "title": "Thiên nhiên vùng Nam Bộ",
+     "description": "So sánh Đồng bằng Nam Bộ với Đồng bằng Bắc Bộ về sông ngòi, khí hậu, đất đai.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được đặc điểm thiên nhiên của Đồng bằng Nam Bộ",
+      "So sánh được hai đồng bằng lớn của nước ta"
+     ],
+     "summary": [
+      "Đồng bằng Nam Bộ do phù sa sông Mê Công và sông Đồng Nai bồi đắp, là đồng bằng lớn nhất nước ta.",
+      "Mạng lưới sông ngòi, kênh rạch chằng chịt; có vùng đất nhiễm phèn, nhiễm mặn cần cải tạo.",
+      "Khí hậu nóng quanh năm, có hai mùa: mùa mưa và mùa khô.",
+      "Đồng bằng Bắc Bộ nhỏ hơn, có mùa đông lạnh và hệ thống đê dài ven sông."
+     ],
+     "examples": [
+      {
+       "title": "Sông Mê Công ở nước ta",
+       "lines": [
+        "Ở nước ta, sông Mê Công còn gọi là sông Cửu Long.",
+        "Sông chia thành sông Tiền và sông Hậu rồi đổ ra biển."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Bắc Bộ hay Nam Bộ?",
+       "set": {
+        "title": "Đặc điểm này thuộc đồng bằng nào?",
+        "groups": [
+         {
+          "id": "bac",
+          "label": "Đồng bằng Bắc Bộ",
+          "icon": "🌾"
+         },
+         {
+          "id": "nam",
+          "label": "Đồng bằng Nam Bộ",
+          "icon": "🛶"
+         }
+        ],
+        "cards": [
+         {
+          "key": "song_hong",
+          "text": "Do phù sa sông Hồng và sông Thái Bình bồi đắp",
+          "picture": "🏞️",
+          "group": "bac",
+          "explanation": "Sông Hồng và sông Thái Bình bồi đắp Đồng bằng Bắc Bộ."
+         },
+         {
+          "key": "song_me_cong",
+          "text": "Do phù sa sông Mê Công và sông Đồng Nai bồi đắp",
+          "picture": "🏞️",
+          "group": "nam",
+          "explanation": "Đồng bằng Nam Bộ do sông Mê Công và sông Đồng Nai bồi đắp."
+         },
+         {
+          "key": "lon_nhat",
+          "text": "Đồng bằng lớn nhất nước ta",
+          "picture": "📏",
+          "group": "nam",
+          "explanation": "Đồng bằng Nam Bộ là đồng bằng lớn nhất nước ta."
+         },
+         {
+          "key": "dong_lanh",
+          "text": "Có mùa đông lạnh",
+          "picture": "🧣",
+          "group": "bac",
+          "explanation": "Đồng bằng Bắc Bộ có mùa đông lạnh; Nam Bộ nóng quanh năm."
+         },
+         {
+          "key": "nong_quanh_nam",
+          "text": "Nóng quanh năm, có mùa mưa và mùa khô",
+          "picture": "☀️",
+          "group": "nam",
+          "explanation": "Nam Bộ nóng quanh năm, một năm có mùa mưa và mùa khô."
+         },
+         {
+          "key": "de_dai",
+          "text": "Có hệ thống đê dài ven các con sông",
+          "picture": "🧱",
+          "group": "bac",
+          "explanation": "Người dân Đồng bằng Bắc Bộ đắp đê dài dọc sông Hồng, sông Thái Bình để ngăn lũ."
+         },
+         {
+          "key": "kenh_rach",
+          "text": "Kênh rạch chằng chịt, đi lại nhiều bằng xuồng, ghe",
+          "picture": "🛶",
+          "group": "nam",
+          "explanation": "Đồng bằng Nam Bộ có mạng lưới kênh rạch chằng chịt."
+         },
+         {
+          "key": "dat_phen",
+          "text": "Có vùng đất nhiễm phèn, nhiễm mặn cần cải tạo",
+          "picture": "🧪",
+          "group": "nam",
+          "explanation": "Ở Nam Bộ có những vùng đất phèn, đất mặn rộng lớn."
+         },
+         {
+          "key": "rau_vu_dong",
+          "text": "Trồng được rau vụ đông như su hào, bắp cải",
+          "picture": "🥬",
+          "group": "bac",
+          "explanation": "Nhờ có mùa đông lạnh, Đồng bằng Bắc Bộ trồng được nhiều loại rau vụ đông."
+         },
+         {
+          "key": "cho_noi",
+          "text": "Chợ nổi trên sông là nét văn hoá đặc sắc",
+          "picture": "🍍",
+          "group": "nam",
+          "explanation": "Chợ nổi trên sông gắn với vùng sông nước Nam Bộ."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "lsdl4.nb_dan_cu",
+     "order": 2,
+     "title": "Dân cư và hoạt động sản xuất ở Nam Bộ",
+     "description": "Trồng lúa, cây ăn quả, nuôi trồng thuỷ sản và chợ nổi.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl4.tp_hcm",
+     "order": 3,
+     "title": "Thành phố Hồ Chí Minh",
+     "description": "Lịch sử và vai trò của thành phố mang tên Bác.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl4.dia_dao_cu_chi",
+     "order": 4,
+     "title": "Địa đạo Củ Chi",
+     "description": "Hệ thống đường hầm trong kháng chiến và giá trị của di tích.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl5.dat_nuoc_con_nguoi",
+   "grade": 5,
+   "order": 1,
+   "title": "Đất nước và con người Việt Nam",
+   "lessons": [
+    {
+     "key": "lsdl5.vi_tri_lanh_tho",
+     "order": 1,
+     "title": "Vị trí địa lí và lãnh thổ Việt Nam",
+     "description": "Việt Nam ở đâu trên bản đồ, giáp những nước nào, lãnh thổ gồm những gì.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Xác định được vị trí của Việt Nam ở khu vực Đông Nam Á",
+      "Nêu được các nước láng giềng và biển bao quanh",
+      "Biết lãnh thổ gồm vùng đất, vùng biển, vùng trời và tổ chức hành chính hiện nay"
+     ],
+     "summary": [
+      "Việt Nam nằm ở bán đảo Đông Dương, thuộc khu vực Đông Nam Á.",
+      "Phía bắc giáp Trung Quốc, phía tây giáp Lào và Campuchia, phía đông và phía nam giáp Biển Đông.",
+      "Lãnh thổ gồm vùng đất, vùng biển và vùng trời; phần đất liền hẹp ngang, kéo dài, có hình chữ S.",
+      "Trên Biển Đông có hai quần đảo Hoàng Sa và Trường Sa của Việt Nam.",
+      "Từ năm 2025, cả nước có 34 tỉnh, thành phố; chính quyền địa phương có hai cấp: cấp tỉnh và cấp xã."
+     ],
+     "examples": [
+      {
+       "title": "Hình chữ S",
+       "lines": [
+        "Phần đất liền kéo dài theo chiều bắc – nam.",
+        "Có nơi hẹp ngang, có nơi rộng hơn, trông giống chữ S."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Việt Nam trên bản đồ",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "khu_vuc",
+         "question": "Việt Nam nằm ở khu vực nào của châu Á?",
+         "options": [
+          {
+           "text": "Đông Nam Á",
+           "ok": true,
+           "why": "Đúng. Việt Nam nằm trên bán đảo Đông Dương, thuộc Đông Nam Á."
+          },
+          {
+           "text": "Tây Á",
+           "ok": false,
+           "why": "Tây Á ở rất xa về phía tây, gồm các nước như Ả-rập Xê-út."
+          },
+          {
+           "text": "Bắc Á",
+           "ok": false,
+           "why": "Bắc Á là vùng lạnh ở phía bắc châu Á."
+          },
+          {
+           "text": "Trung Á",
+           "ok": false,
+           "why": "Trung Á nằm sâu trong lục địa, không giáp biển như Việt Nam."
+          }
+         ],
+         "explanation": "Việt Nam thuộc khu vực Đông Nam Á."
+        },
+        {
+         "key": "phia_bac",
+         "question": "Phía bắc nước ta giáp với nước nào?",
+         "options": [
+          {
+           "text": "Trung Quốc",
+           "ok": true,
+           "why": "Đúng. Phía bắc Việt Nam giáp Trung Quốc."
+          },
+          {
+           "text": "Lào",
+           "ok": false,
+           "why": "Lào ở phía tây nước ta."
+          },
+          {
+           "text": "Campuchia",
+           "ok": false,
+           "why": "Campuchia ở phía tây nam nước ta."
+          },
+          {
+           "text": "Thái Lan",
+           "ok": false,
+           "why": "Việt Nam không có đường biên giới trên đất liền với Thái Lan."
+          }
+         ],
+         "explanation": "Ba nước láng giềng trên đất liền: Trung Quốc (phía bắc), Lào và Campuchia (phía tây)."
+        },
+        {
+         "key": "lanh_tho",
+         "question": "Lãnh thổ Việt Nam gồm những bộ phận nào?",
+         "options": [
+          {
+           "text": "Vùng đất, vùng biển và vùng trời",
+           "ok": true,
+           "why": "Đúng. Lãnh thổ quốc gia gồm cả ba bộ phận này."
+          },
+          {
+           "text": "Chỉ có phần đất liền",
+           "ok": false,
+           "why": "Vùng biển, các đảo và vùng trời cũng là lãnh thổ của Việt Nam."
+          },
+          {
+           "text": "Phần đất liền và các nước láng giềng",
+           "ok": false,
+           "why": "Các nước láng giềng có lãnh thổ riêng của họ."
+          }
+         ],
+         "explanation": "Lãnh thổ Việt Nam gồm vùng đất, vùng biển và vùng trời."
+        },
+        {
+         "key": "hinh_dang",
+         "question": "Phần đất liền nước ta có hình dạng như thế nào?",
+         "options": [
+          {
+           "text": "Hẹp ngang, kéo dài theo chiều bắc – nam, giống chữ S",
+           "ok": true,
+           "why": "Đúng. Phần đất liền kéo dài và hẹp ngang."
+          },
+          {
+           "text": "Gần tròn, rộng đều mọi phía",
+           "ok": false,
+           "why": "Bản đồ cho thấy nước ta kéo dài, không tròn."
+          },
+          {
+           "text": "Kéo dài theo chiều đông – tây",
+           "ok": false,
+           "why": "Nước ta kéo dài theo chiều bắc – nam."
+          }
+         ],
+         "explanation": "Đất liền Việt Nam hẹp ngang, kéo dài, có hình chữ S."
+        },
+        {
+         "key": "quan_dao",
+         "question": "Hai quần đảo xa bờ của Việt Nam trên Biển Đông có tên là gì?",
+         "options": [
+          {
+           "text": "Hoàng Sa và Trường Sa",
+           "ok": true,
+           "why": "Đúng. Đó là hai quần đảo của Việt Nam trên Biển Đông."
+          },
+          {
+           "text": "Phú Quốc và Côn Đảo",
+           "ok": false,
+           "why": "Phú Quốc là đảo, Côn Đảo là cụm đảo gần bờ; hai quần đảo xa bờ là Hoàng Sa và Trường Sa."
+          },
+          {
+           "text": "Cát Bà và Bạch Long Vĩ",
+           "ok": false,
+           "why": "Đây là các đảo ở vịnh Bắc Bộ, không phải hai quần đảo xa bờ."
+          }
+         ],
+         "explanation": "Hoàng Sa và Trường Sa là hai quần đảo của Việt Nam."
+        },
+        {
+         "key": "hanh_chinh",
+         "question": "Từ năm 2025, nước ta có bao nhiêu tỉnh, thành phố?",
+         "options": [
+          {
+           "text": "34 tỉnh, thành phố",
+           "ok": true,
+           "why": "Đúng. Năm 2025 nước ta sắp xếp lại còn 34 tỉnh, thành phố; chính quyền địa phương có hai cấp: tỉnh và xã."
+          },
+          {
+           "text": "63 tỉnh, thành phố",
+           "ok": false,
+           "why": "Đó là số tỉnh, thành phố trước khi sắp xếp lại năm 2025."
+          },
+          {
+           "text": "54 tỉnh, thành phố",
+           "ok": false,
+           "why": "54 là số dân tộc ở nước ta, không phải số tỉnh, thành phố."
+          }
+         ],
+         "explanation": "Từ năm 2025, cả nước có 34 tỉnh, thành phố và chính quyền địa phương hai cấp (cấp tỉnh, cấp xã)."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "lsdl5.quoc_ki_quoc_ca",
+     "order": 2,
+     "title": "Quốc kì, Quốc huy, Quốc ca",
+     "description": "Ý nghĩa của Quốc kì, Quốc huy và Quốc ca Việt Nam.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl5.thien_nhien_vn",
+     "order": 3,
+     "title": "Thiên nhiên Việt Nam",
+     "description": "Địa hình, khí hậu, sông ngòi, đất và rừng của nước ta.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl5.bien_dao",
+     "order": 4,
+     "title": "Biển, đảo Việt Nam",
+     "description": "Vùng biển, các đảo, quần đảo và việc bảo vệ chủ quyền biển đảo.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl5.dan_cu_dan_toc",
+     "order": 5,
+     "title": "Dân cư và dân tộc ở Việt Nam",
+     "description": "Số dân, sự phân bố dân cư và 54 dân tộc anh em.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl5.quoc_gia_dau_tien",
+   "grade": 5,
+   "order": 2,
+   "title": "Những quốc gia đầu tiên trên lãnh thổ Việt Nam",
+   "lessons": [
+    {
+     "key": "lsdl5.van_lang_au_lac",
+     "order": 1,
+     "title": "Nước Văn Lang, Âu Lạc",
+     "description": "Sự ra đời, đời sống và những thành tựu của cư dân Văn Lang, Âu Lạc.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl5.phu_nam",
+     "order": 2,
+     "title": "Vương quốc Phù Nam",
+     "description": "Vương quốc cổ ở vùng đất phía Nam và thương cảng Óc Eo.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl5.champa",
+     "order": 3,
+     "title": "Vương quốc Champa",
+     "description": "Vương quốc cổ ở miền Trung và các đền tháp Chăm.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl5.xay_dung_bao_ve",
+   "grade": 5,
+   "order": 3,
+   "title": "Xây dựng và bảo vệ đất nước",
+   "lessons": [
+    {
+     "key": "lsdl5.bac_thuoc",
+     "order": 1,
+     "title": "Đấu tranh giành độc lập thời kì Bắc thuộc",
+     "description": "Khởi nghĩa Hai Bà Trưng và chiến thắng Bạch Đằng năm 938.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl5.ly_tran",
+     "order": 2,
+     "title": "Triều Lý, triều Trần",
+     "description": "Định đô ở Thăng Long và ba lần kháng chiến chống quân Mông – Nguyên.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl5.lam_son_le_so",
+     "order": 3,
+     "title": "Khởi nghĩa Lam Sơn và triều Hậu Lê",
+     "description": "Lê Lợi, Nguyễn Trãi và việc xây dựng đất nước thời Lê sơ.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl5.trieu_nguyen",
+     "order": 4,
+     "title": "Triều Nguyễn",
+     "description": "Sự thành lập triều Nguyễn và kinh đô Huế.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl5.cm_thang_tam",
+     "order": 5,
+     "title": "Cách mạng tháng Tám năm 1945",
+     "description": "Nhân dân giành chính quyền, Bác Hồ đọc Tuyên ngôn Độc lập.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl5.dien_bien_phu",
+     "order": 6,
+     "title": "Chiến dịch Điện Biên Phủ năm 1954",
+     "description": "Chiến thắng “lừng lẫy năm châu, chấn động địa cầu”.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl5.chien_dich_hcm",
+     "order": 7,
+     "title": "Chiến dịch Hồ Chí Minh năm 1975",
+     "description": "Giải phóng miền Nam, thống nhất đất nước.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl5.doi_moi",
+     "order": 8,
+     "title": "Công cuộc Đổi mới từ năm 1986",
+     "description": "Những đổi thay của đất nước từ khi Đổi mới.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl5.moc_dung_giu_nuoc",
+     "order": 9,
+     "title": "Những mốc lớn trong dựng nước và giữ nước",
+     "description": "Ôn lại các chiến thắng, triều đại và sự kiện tiêu biểu theo dòng thời gian.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Sắp xếp được các sự kiện lịch sử tiêu biểu theo thời gian",
+      "Ghép được sự kiện với nhân vật và năm diễn ra"
+     ],
+     "summary": [
+      "Năm 40, Hai Bà Trưng khởi nghĩa. Năm 938, Ngô Quyền đánh tan quân Nam Hán trên sông Bạch Đằng.",
+      "Năm 1010, Lý Công Uẩn dời đô ra Thăng Long. Năm 1288, Trần Hưng Đạo chiến thắng trên sông Bạch Đằng.",
+      "Năm 1428, Lê Lợi lên ngôi sau khởi nghĩa Lam Sơn. Năm 1789, Quang Trung đại phá quân Thanh.",
+      "Năm 1945 Cách mạng tháng Tám thành công; ngày 7/5/1954 chiến thắng Điện Biên Phủ; ngày 30/4/1975 giải phóng miền Nam.",
+      "Năm 1986, nước ta bắt đầu công cuộc Đổi mới."
+     ],
+     "examples": [
+      {
+       "title": "Mẹo nhớ hai trận Bạch Đằng",
+       "lines": [
+        "Năm 938: Ngô Quyền đánh quân Nam Hán.",
+        "Năm 1288: Trần Hưng Đạo đánh quân Nguyên.",
+        "Cả hai trận đều đóng cọc ở lòng sông và lợi dụng nước triều."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Dòng thời gian",
+       "tasks": [
+        {
+         "key": "chien_thang",
+         "prompt": "Xếp các chiến thắng theo thời gian, từ sớm đến muộn.",
+         "items": [
+          "Ngô Quyền chiến thắng trên sông Bạch Đằng",
+          "Lý Thường Kiệt chặn giặc ở sông Như Nguyệt",
+          "Trần Hưng Đạo chiến thắng trên sông Bạch Đằng",
+          "Khởi nghĩa Lam Sơn thắng lợi, Lê Lợi lên ngôi",
+          "Quang Trung đại phá quân Thanh"
+         ],
+         "explanation": "Năm 938 Ngô Quyền; năm 1077 phòng tuyến Như Nguyệt; năm 1288 Trần Hưng Đạo; năm 1428 Lê Lợi lên ngôi; năm 1789 Quang Trung đại phá quân Thanh.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "trieu_dai",
+         "prompt": "Xếp các triều đại theo thời gian, từ sớm đến muộn.",
+         "items": [
+          "Nhà Lý",
+          "Nhà Trần",
+          "Nhà Hậu Lê",
+          "Nhà Nguyễn"
+         ],
+         "explanation": "Nhà Lý (từ 1009), nhà Trần (từ 1226), nhà Hậu Lê (từ 1428), nhà Nguyễn (từ 1802).",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "the_ki_20",
+         "prompt": "Xếp các sự kiện của thế kỉ XX theo thời gian.",
+         "items": [
+          "Cách mạng tháng Tám thành công",
+          "Chiến thắng Điện Biên Phủ",
+          "Giải phóng miền Nam, thống nhất đất nước",
+          "Bắt đầu công cuộc Đổi mới"
+         ],
+         "explanation": "Năm 1945 Cách mạng tháng Tám; năm 1954 Điện Biên Phủ; năm 1975 giải phóng miền Nam; năm 1986 bắt đầu Đổi mới.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "doc_lap",
+         "prompt": "Xếp các sự kiện mở đầu thời kì độc lập theo thời gian.",
+         "items": [
+          "Khởi nghĩa Hai Bà Trưng",
+          "Ngô Quyền chiến thắng quân Nam Hán",
+          "Ngô Quyền xưng vương, đóng đô ở Cổ Loa"
+         ],
+         "explanation": "Khởi nghĩa Hai Bà Trưng năm 40. Gần chín thế kỉ sau, năm 938 Ngô Quyền chiến thắng trên sông Bạch Đằng, năm 939 xưng vương, đóng đô ở Cổ Loa.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        }
+       ]
+      },
+      {
+       "game": "match",
+       "title": "Ghép sự kiện",
+       "tasks": [
+        {
+         "key": "nhan_vat",
+         "prompt": "Ghép mỗi sự kiện với nhân vật lịch sử.",
+         "pairs": [
+          [
+           "Khởi nghĩa năm 40",
+           "Hai Bà Trưng"
+          ],
+          [
+           "Chiến thắng Bạch Đằng năm 938",
+           "Ngô Quyền"
+          ],
+          [
+           "Dời đô ra Thăng Long năm 1010",
+           "Lý Công Uẩn"
+          ],
+          [
+           "Chiến thắng Bạch Đằng năm 1288",
+           "Trần Hưng Đạo"
+          ],
+          [
+           "Đại phá quân Thanh năm 1789",
+           "Quang Trung"
+          ]
+         ],
+         "explanation": "Mỗi sự kiện gắn với một người lãnh đạo tiêu biểu.",
+         "left_label": "Sự kiện",
+         "right_label": "Nhân vật"
+        },
+        {
+         "key": "nam",
+         "prompt": "Ghép mỗi sự kiện với năm diễn ra.",
+         "pairs": [
+          [
+           "Cách mạng tháng Tám thành công",
+           "Năm 1945"
+          ],
+          [
+           "Chiến thắng Điện Biên Phủ",
+           "Năm 1954"
+          ],
+          [
+           "Giải phóng miền Nam, thống nhất đất nước",
+           "Năm 1975"
+          ],
+          [
+           "Bắt đầu công cuộc Đổi mới",
+           "Năm 1986"
+          ]
+         ],
+         "explanation": "1945 – 1954 – 1975 – 1986: bốn mốc lớn của lịch sử hiện đại nước ta.",
+         "left_label": "Sự kiện",
+         "right_label": "Năm"
+        },
+        {
+         "key": "ngay",
+         "prompt": "Ghép mỗi sự kiện với thời gian diễn ra.",
+         "pairs": [
+          [
+           "Bác Hồ đọc Tuyên ngôn Độc lập",
+           "Ngày 2/9/1945"
+          ],
+          [
+           "Chiến dịch Điện Biên Phủ toàn thắng",
+           "Ngày 7/5/1954"
+          ],
+          [
+           "Xe tăng quân giải phóng tiến vào Dinh Độc Lập",
+           "Ngày 30/4/1975"
+          ],
+          [
+           "Lê Lợi lên ngôi, lập nhà Hậu Lê",
+           "Năm 1428"
+          ]
+         ],
+         "explanation": "Ngày 2/9 là ngày Quốc khánh; 7/5/1954 là ngày chiến thắng Điện Biên Phủ; 30/4/1975 là ngày giải phóng miền Nam.",
+         "left_label": "Sự kiện",
+         "right_label": "Thời gian"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "lsdl5.lang_gieng",
+   "grade": 5,
+   "order": 4,
+   "title": "Các nước láng giềng",
+   "lessons": [
+    {
+     "key": "lsdl5.trung_quoc_lao_cpc",
+     "order": 1,
+     "title": "Trung Quốc, Lào và Campuchia",
+     "description": "Thủ đô, công trình nổi tiếng và đặc điểm của ba nước láng giềng.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Kể được tên và thủ đô của ba nước láng giềng",
+      "Nêu được một công trình tiêu biểu của mỗi nước",
+      "Biết quan hệ hữu nghị giữa Việt Nam với các nước láng giềng"
+     ],
+     "summary": [
+      "Trung Quốc ở phía bắc nước ta, thủ đô là Bắc Kinh; Vạn Lý Trường Thành là công trình nổi tiếng.",
+      "Lào ở phía tây, thủ đô là Viêng Chăn; Lào không giáp biển; Thạt Luổng là biểu tượng của Lào.",
+      "Campuchia ở phía tây nam, thủ đô là Phnôm Pênh; quần thể Ăng-co nổi tiếng, có Biển Hồ rộng lớn.",
+      "Việt Nam xây dựng quan hệ hữu nghị, hợp tác với các nước láng giềng."
+     ],
+     "examples": [
+      {
+       "title": "Ba nước láng giềng",
+       "lines": [
+        "Phía bắc: Trung Quốc.",
+        "Phía tây: Lào.",
+        "Phía tây nam: Campuchia."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Ghép cặp nước láng giềng",
+       "tasks": [
+        {
+         "key": "thu_do",
+         "prompt": "Ghép mỗi nước với thủ đô.",
+         "pairs": [
+          [
+           "Trung Quốc",
+           "Bắc Kinh"
+          ],
+          [
+           "Lào",
+           "Viêng Chăn"
+          ],
+          [
+           "Campuchia",
+           "Phnôm Pênh"
+          ]
+         ],
+         "explanation": "Bắc Kinh là thủ đô Trung Quốc, Viêng Chăn là thủ đô Lào, Phnôm Pênh là thủ đô Campuchia.",
+         "left_label": "Nước",
+         "right_label": "Thủ đô"
+        },
+        {
+         "key": "cong_trinh",
+         "prompt": "Ghép mỗi công trình nổi tiếng với nước có công trình đó.",
+         "pairs": [
+          [
+           "Vạn Lý Trường Thành",
+           "Trung Quốc"
+          ],
+          [
+           "Thạt Luổng",
+           "Lào"
+          ],
+          [
+           "Ăng-co Vát",
+           "Campuchia"
+          ]
+         ],
+         "explanation": "Vạn Lý Trường Thành dài hàng nghìn ki-lô-mét ở Trung Quốc; Thạt Luổng là ngôi tháp vàng ở Lào; Ăng-co Vát là đền đá nổi tiếng ở Campuchia.",
+         "left_label": "Công trình",
+         "right_label": "Nước"
+        },
+        {
+         "key": "dac_diem",
+         "prompt": "Ghép mỗi đặc điểm với nước phù hợp.",
+         "pairs": [
+          [
+           "Không giáp biển",
+           "Lào"
+          ],
+          [
+           "Có Biển Hồ là hồ nước ngọt rất rộng",
+           "Campuchia"
+          ],
+          [
+           "Có sông Trường Giang và sông Hoàng Hà",
+           "Trung Quốc"
+          ]
+         ],
+         "explanation": "Lào là nước duy nhất ở Đông Nam Á không giáp biển. Biển Hồ ở Campuchia là hồ nước ngọt lớn. Trường Giang và Hoàng Hà là hai sông lớn của Trung Quốc.",
+         "left_label": "Đặc điểm",
+         "right_label": "Nước"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "lsdl5.dong_nam_a",
+     "order": 2,
+     "title": "Việt Nam và các nước Đông Nam Á",
+     "description": "Hiệp hội các quốc gia Đông Nam Á (ASEAN) và sự hợp tác trong khu vực.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl5.the_gioi",
+   "grade": 5,
+   "order": 5,
+   "title": "Tìm hiểu thế giới",
+   "lessons": [
+    {
+     "key": "lsdl5.chau_luc_dai_duong",
+     "order": 1,
+     "title": "Các châu lục và đại dương trên thế giới",
+     "description": "Phân biệt châu lục và đại dương, nhớ tên các châu lục và đại dương.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Kể được tên các châu lục và đại dương",
+      "Phân biệt được châu lục (đất liền) với đại dương (biển rộng)"
+     ],
+     "summary": [
+      "Theo cách chia thường dùng ở nước ta, thế giới có 6 châu lục: châu Á, châu Âu, châu Phi, châu Mỹ, châu Đại Dương và châu Nam Cực.",
+      "Có 4 đại dương: Thái Bình Dương, Đại Tây Dương, Ấn Độ Dương và Bắc Băng Dương.",
+      "Châu Á có diện tích lớn nhất; Thái Bình Dương là đại dương lớn nhất.",
+      "Việt Nam thuộc châu Á, nằm bên bờ Thái Bình Dương (Biển Đông là một phần của Thái Bình Dương)."
+     ],
+     "examples": [
+      {
+       "title": "Đừng nhầm!",
+       "lines": [
+        "“Châu Đại Dương” là một châu lục (gồm lục địa Ô-xtrây-li-a và các đảo).",
+        "Còn “đại dương” là vùng biển rất rộng lớn."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Châu lục hay đại dương?",
+       "set": {
+        "title": "Đây là châu lục hay đại dương?",
+        "groups": [
+         {
+          "id": "chau_luc",
+          "label": "Châu lục",
+          "icon": "🌍"
+         },
+         {
+          "id": "dai_duong",
+          "label": "Đại dương",
+          "icon": "🌊"
+         }
+        ],
+        "cards": [
+         {
+          "key": "chau_a",
+          "text": "Châu Á",
+          "picture": "🏯",
+          "group": "chau_luc",
+          "explanation": "Châu Á là châu lục lớn nhất; Việt Nam thuộc châu Á."
+         },
+         {
+          "key": "chau_au",
+          "text": "Châu Âu",
+          "picture": "🏰",
+          "group": "chau_luc",
+          "explanation": "Châu Âu là châu lục nằm ở phía tây châu Á."
+         },
+         {
+          "key": "chau_phi",
+          "text": "Châu Phi",
+          "picture": "🦒",
+          "group": "chau_luc",
+          "explanation": "Châu Phi là châu lục có hoang mạc Xa-ha-ra rộng lớn."
+         },
+         {
+          "key": "chau_my",
+          "text": "Châu Mỹ",
+          "picture": "🗽",
+          "group": "chau_luc",
+          "explanation": "Châu Mỹ là châu lục nằm ở bán cầu Tây."
+         },
+         {
+          "key": "chau_dd",
+          "text": "Châu Đại Dương",
+          "picture": "🦘",
+          "group": "chau_luc",
+          "explanation": "Tuy có chữ “Đại Dương” trong tên, đây là một châu lục gồm lục địa Ô-xtrây-li-a và các đảo."
+         },
+         {
+          "key": "nam_cuc",
+          "text": "Châu Nam Cực",
+          "picture": "🐧",
+          "group": "chau_luc",
+          "explanation": "Châu Nam Cực là châu lục lạnh nhất, phủ băng quanh năm."
+         },
+         {
+          "key": "thai_binh",
+          "text": "Thái Bình Dương",
+          "picture": "🐋",
+          "group": "dai_duong",
+          "explanation": "Thái Bình Dương là đại dương lớn nhất thế giới."
+         },
+         {
+          "key": "dai_tay",
+          "text": "Đại Tây Dương",
+          "picture": "⛵",
+          "group": "dai_duong",
+          "explanation": "Đại Tây Dương nằm giữa châu Âu, châu Phi và châu Mỹ."
+         },
+         {
+          "key": "an_do",
+          "text": "Ấn Độ Dương",
+          "picture": "🐠",
+          "group": "dai_duong",
+          "explanation": "Ấn Độ Dương nằm ở phía nam châu Á."
+         },
+         {
+          "key": "bac_bang",
+          "text": "Bắc Băng Dương",
+          "picture": "🧊",
+          "group": "dai_duong",
+          "explanation": "Bắc Băng Dương là đại dương nhỏ và lạnh nhất, ở quanh cực Bắc."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "lsdl5.dan_so_the_gioi",
+     "order": 2,
+     "title": "Dân số và các chủng tộc trên thế giới",
+     "description": "Số dân, sự phân bố dân cư và các chủng tộc.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl5.van_minh_noi_tieng",
+     "order": 3,
+     "title": "Một số nền văn minh nổi tiếng thế giới",
+     "description": "Ai Cập, Hy Lạp và những công trình còn lại đến ngày nay.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl5.hoa_binh",
+   "grade": 5,
+   "order": 6,
+   "title": "Xây dựng thế giới xanh – sạch – đẹp và hoà bình",
+   "lessons": [
+    {
+     "key": "lsdl5.bao_ve_moi_truong",
+     "order": 1,
+     "title": "Bảo vệ môi trường Trái Đất",
+     "description": "Những vấn đề môi trường và việc làm của em để bảo vệ Trái Đất.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl5.the_gioi_hoa_binh",
+     "order": 2,
+     "title": "Xây dựng thế giới hoà bình",
+     "description": "Vì sao cần hoà bình và trẻ em góp phần thế nào.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl6.ls_nguyen_thuy",
+   "grade": 6,
+   "order": 1,
+   "title": "Lịch sử: Vì sao học lịch sử và xã hội nguyên thuỷ",
+   "lessons": [
+    {
+     "key": "lsdl6.lich_su_la_gi",
+     "order": 1,
+     "title": "Lịch sử là gì và vì sao cần học lịch sử",
+     "description": "Lịch sử, môn Lịch sử và các nguồn tư liệu giúp ta biết về quá khứ.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl6.thoi_gian_lich_su",
+     "order": 2,
+     "title": "Thời gian trong lịch sử",
+     "description": "Âm lịch, dương lịch, Công nguyên; cách tính thập kỉ, thế kỉ, thiên niên kỉ.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Phân biệt được âm lịch và dương lịch",
+      "Hiểu cách ghi năm trước Công nguyên và Công nguyên",
+      "Xác định được một năm thuộc thế kỉ nào và tính khoảng cách giữa hai năm"
+     ],
+     "summary": [
+      "Âm lịch dựa vào chu kì Mặt Trăng quay quanh Trái Đất; dương lịch dựa vào chu kì Trái Đất quay quanh Mặt Trời.",
+      "Công lịch lấy năm 1 làm năm đầu Công nguyên; những năm trước đó gọi là trước Công nguyên (TCN).",
+      "1 thập kỉ = 10 năm; 1 thế kỉ = 100 năm; 1 thiên niên kỉ = 1000 năm.",
+      "Thế kỉ I gồm các năm 1–100; thế kỉ XX gồm các năm 1901–2000; thiên niên kỉ III bắt đầu từ năm 2001."
+     ],
+     "examples": [
+      {
+       "title": "Năm này thuộc thế kỉ nào?",
+       "lines": [
+        "Năm 938: 901–1000 là thế kỉ X.",
+        "Năm 1010: 1001–1100 là thế kỉ XI."
+       ]
+      },
+      {
+       "title": "Tính khoảng cách (cùng sau Công nguyên)",
+       "lines": [
+        "Từ năm 1010 đến năm 2010: 2010 − 1010 = 1000 năm."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Tính thời gian trong lịch sử",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "the_ki_1010",
+         "question": "Năm 1010, Lý Công Uẩn dời đô ra Thăng Long. Năm đó thuộc thế kỉ nào?",
+         "options": [
+          {
+           "text": "Thế kỉ XI",
+           "ok": true,
+           "why": "Đúng. Thế kỉ XI gồm các năm từ 1001 đến 1100."
+          },
+          {
+           "text": "Thế kỉ X",
+           "ok": false,
+           "why": "Thế kỉ X gồm các năm 901–1000, năm 1010 đã sang thế kỉ sau."
+          },
+          {
+           "text": "Thế kỉ XII",
+           "ok": false,
+           "why": "Thế kỉ XII bắt đầu từ năm 1101."
+          }
+         ],
+         "explanation": "Muốn biết năm thuộc thế kỉ nào, xem năm nằm trong khoảng 100 năm nào: 1001–1100 là thế kỉ XI."
+        },
+        {
+         "key": "nam_2000",
+         "question": "Năm 2000 thuộc thế kỉ nào?",
+         "options": [
+          {
+           "text": "Thế kỉ XX",
+           "ok": true,
+           "why": "Đúng. Thế kỉ XX gồm các năm 1901–2000, năm 2000 là năm cuối cùng."
+          },
+          {
+           "text": "Thế kỉ XXI",
+           "ok": false,
+           "why": "Thế kỉ XXI bắt đầu từ năm 2001, không phải năm 2000."
+          }
+         ],
+         "explanation": "Mỗi thế kỉ kết thúc ở năm tròn trăm: thế kỉ XX kết thúc năm 2000."
+        },
+        {
+         "key": "am_lich",
+         "question": "Âm lịch được tính dựa vào đâu?",
+         "options": [
+          {
+           "text": "Chu kì Mặt Trăng quay quanh Trái Đất",
+           "ok": true,
+           "why": "Đúng. Mỗi tháng âm lịch ứng với một vòng Mặt Trăng quay quanh Trái Đất."
+          },
+          {
+           "text": "Chu kì Trái Đất quay quanh Mặt Trời",
+           "ok": false,
+           "why": "Đó là cơ sở của dương lịch."
+          },
+          {
+           "text": "Thời gian một ngày đêm",
+           "ok": false,
+           "why": "Một ngày đêm là thời gian Trái Đất tự quay một vòng, dùng chung cho mọi loại lịch."
+          }
+         ],
+         "explanation": "Âm lịch theo Mặt Trăng, dương lịch theo vòng quay của Trái Đất quanh Mặt Trời."
+        },
+        {
+         "key": "truoc_sau",
+         "question": "Năm 179 TCN và năm 40, năm nào đến trước?",
+         "options": [
+          {
+           "text": "Năm 179 TCN",
+           "ok": true,
+           "why": "Đúng. Mọi năm trước Công nguyên đều xảy ra trước các năm Công nguyên."
+          },
+          {
+           "text": "Năm 40",
+           "ok": false,
+           "why": "Năm 40 là năm thuộc Công nguyên, đến sau mọi năm TCN."
+          },
+          {
+           "text": "Hai năm cùng thời gian",
+           "ok": false,
+           "why": "Hai năm cách nhau hơn hai thế kỉ."
+          }
+         ],
+         "explanation": "Năm TCN càng lớn thì càng xa về trước; mọi năm TCN đều trước năm 1 Công nguyên."
+        },
+        {
+         "key": "khoang_cach",
+         "question": "Trận Bạch Đằng năm 938 cách năm 2025 bao nhiêu năm?",
+         "options": [
+          {
+           "text": "1087 năm",
+           "ok": true,
+           "why": "Đúng. 2025 − 938 = 1087."
+          },
+          {
+           "text": "1187 năm",
+           "ok": false,
+           "why": "Kiểm tra lại phép trừ: 2025 − 938 = 1087."
+          },
+          {
+           "text": "987 năm",
+           "ok": false,
+           "why": "Kiểm tra lại phép trừ: 2025 − 938 = 1087."
+          }
+         ],
+         "explanation": "Hai năm cùng sau Công nguyên: lấy năm sau trừ năm trước."
+        },
+        {
+         "key": "thien_nien_ki",
+         "question": "Thiên niên kỉ thứ ba bắt đầu từ năm nào?",
+         "options": [
+          {
+           "text": "Năm 2001",
+           "ok": true,
+           "why": "Đúng. Thiên niên kỉ thứ hai gồm các năm 1001–2000."
+          },
+          {
+           "text": "Năm 2000",
+           "ok": false,
+           "why": "Năm 2000 là năm cuối cùng của thiên niên kỉ thứ hai."
+          },
+          {
+           "text": "Năm 3000",
+           "ok": false,
+           "why": "Năm 3000 là năm cuối của thiên niên kỉ thứ ba."
+          }
+         ],
+         "explanation": "Giống thế kỉ, thiên niên kỉ bắt đầu từ năm có số 1: 1, 1001, 2001."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "lsdl6.nguon_goc_loai_nguoi",
+     "order": 3,
+     "title": "Nguồn gốc loài người",
+     "description": "Quá trình tiến hoá từ vượn người đến người tinh khôn.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl6.xa_hoi_nguyen_thuy",
+     "order": 4,
+     "title": "Xã hội nguyên thuỷ",
+     "description": "Các giai đoạn phát triển và đời sống của người nguyên thuỷ.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl6.kim_loai",
+     "order": 5,
+     "title": "Sự chuyển biến khi kim loại xuất hiện",
+     "description": "Công cụ kim loại và sự tan rã của xã hội nguyên thuỷ.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl6.ls_co_dai",
+   "grade": 6,
+   "order": 2,
+   "title": "Lịch sử: Xã hội cổ đại",
+   "lessons": [
+    {
+     "key": "lsdl6.ai_cap_luong_ha",
+     "order": 1,
+     "title": "Ai Cập và Lưỡng Hà cổ đại",
+     "description": "Điều kiện tự nhiên và sự hình thành nhà nước bên các dòng sông lớn.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl6.an_do_co_dai",
+     "order": 2,
+     "title": "Ấn Độ cổ đại",
+     "description": "Chế độ đẳng cấp và những tôn giáo lớn.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl6.trung_quoc_co_dai",
+     "order": 3,
+     "title": "Trung Quốc từ thời cổ đại đến thế kỉ VII",
+     "description": "Từ các vương triều cổ đến nhà Tần thống nhất.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl6.hy_lap_la_ma",
+     "order": 4,
+     "title": "Hy Lạp và La Mã cổ đại",
+     "description": "Thành bang, nền dân chủ chủ nô và đế chế La Mã.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl6.thanh_tuu_co_dai",
+     "order": 5,
+     "title": "Thành tựu văn hoá của các quốc gia cổ đại",
+     "description": "Ghép công trình, chữ viết và phát minh với Ai Cập, Lưỡng Hà, Ấn Độ, Trung Quốc, Hy Lạp, La Mã.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được thành tựu văn hoá tiêu biểu của các quốc gia cổ đại",
+      "Nhận biết những thành tựu còn được dùng đến ngày nay"
+     ],
+     "summary": [
+      "Ai Cập: kim tự tháp, chữ tượng hình, kĩ thuật ướp xác.",
+      "Lưỡng Hà: chữ hình nêm trên đất sét, hệ đếm lấy 60 làm cơ sở.",
+      "Ấn Độ: hệ chữ số trong đó có số 0; Trung Quốc: chữ giáp cốt, Vạn Lý Trường Thành, giấy.",
+      "Hy Lạp: đền Pác-tê-nông, định lí Py-ta-go; La Mã: đấu trường Cô-li-dê, chữ cái La-tinh."
+     ],
+     "examples": [
+      {
+       "title": "Thành tựu còn dùng hôm nay",
+       "lines": [
+        "Chữ số 0 và hệ đếm thập phân: từ Ấn Độ.",
+        "Chia giờ thành 60 phút: theo hệ đếm 60 của Lưỡng Hà.",
+        "Chữ cái La-tinh: chữ quốc ngữ của ta cũng dùng bảng chữ cái này."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Ghép thành tựu cổ đại",
+       "tasks": [
+        {
+         "key": "cong_trinh",
+         "prompt": "Ghép mỗi công trình với quốc gia cổ đại đã xây dựng.",
+         "pairs": [
+          [
+           "Kim tự tháp",
+           "Ai Cập"
+          ],
+          [
+           "Vạn Lý Trường Thành",
+           "Trung Quốc"
+          ],
+          [
+           "Đền Pác-tê-nông",
+           "Hy Lạp"
+          ],
+          [
+           "Đấu trường Cô-li-dê",
+           "La Mã"
+          ],
+          [
+           "Đại bảo tháp San-chi",
+           "Ấn Độ"
+          ]
+         ],
+         "explanation": "Kim tự tháp là lăng mộ các pha-ra-ông Ai Cập; Vạn Lý Trường Thành ở Trung Quốc; đền Pác-tê-nông ở A-ten (Hy Lạp); đấu trường Cô-li-dê ở Rô-ma; tháp San-chi là công trình Phật giáo của Ấn Độ.",
+         "left_label": "Công trình",
+         "right_label": "Quốc gia"
+        },
+        {
+         "key": "chu_viet",
+         "prompt": "Ghép mỗi loại chữ viết với quốc gia cổ đại.",
+         "pairs": [
+          [
+           "Chữ tượng hình viết trên giấy pa-pi-rút",
+           "Ai Cập"
+          ],
+          [
+           "Chữ hình nêm khắc trên đất sét",
+           "Lưỡng Hà"
+          ],
+          [
+           "Chữ giáp cốt khắc trên mai rùa, xương thú",
+           "Trung Quốc"
+          ],
+          [
+           "Hệ chữ cái La-tinh",
+           "La Mã"
+          ]
+         ],
+         "explanation": "Mỗi nền văn minh có cách ghi chép riêng, trên những vật liệu có sẵn quanh họ.",
+         "left_label": "Chữ viết",
+         "right_label": "Quốc gia"
+        },
+        {
+         "key": "khoa_hoc",
+         "prompt": "Ghép mỗi phát minh, hiểu biết khoa học với quốc gia cổ đại.",
+         "pairs": [
+          [
+           "Hệ chữ số, trong đó có số 0",
+           "Ấn Độ"
+          ],
+          [
+           "Hệ đếm lấy 60 làm cơ sở",
+           "Lưỡng Hà"
+          ],
+          [
+           "Kĩ thuật ướp xác",
+           "Ai Cập"
+          ],
+          [
+           "Kĩ thuật làm giấy",
+           "Trung Quốc"
+          ],
+          [
+           "Định lí Py-ta-go",
+           "Hy Lạp"
+          ]
+         ],
+         "explanation": "Người Ấn Độ sáng tạo chữ số có số 0; Lưỡng Hà dùng hệ đếm 60; Ai Cập giỏi ướp xác; Trung Quốc làm ra giấy; Py-ta-go là nhà toán học Hy Lạp.",
+         "left_label": "Thành tựu",
+         "right_label": "Quốc gia"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "lsdl6.ls_dong_nam_a",
+   "grade": 6,
+   "order": 3,
+   "title": "Lịch sử: Đông Nam Á đến thế kỉ X",
+   "lessons": [
+    {
+     "key": "lsdl6.dna_quoc_gia_so_ki",
+     "order": 1,
+     "title": "Các quốc gia sơ kì ở Đông Nam Á",
+     "description": "Sự hình thành các quốc gia sơ kì và phong kiến đầu tiên.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl6.dna_giao_luu",
+     "order": 2,
+     "title": "Giao lưu văn hoá ở Đông Nam Á",
+     "description": "Ảnh hưởng văn hoá Ấn Độ, Trung Quốc và sự sáng tạo của cư dân Đông Nam Á.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl6.ls_viet_nam_co",
+   "grade": 6,
+   "order": 4,
+   "title": "Lịch sử: Việt Nam từ khoảng thế kỉ VII TCN đến đầu thế kỉ X",
+   "lessons": [
+    {
+     "key": "lsdl6.van_lang",
+     "order": 1,
+     "title": "Nước Văn Lang",
+     "description": "Sự ra đời, tổ chức nhà nước và đời sống cư dân Văn Lang.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl6.au_lac",
+     "order": 2,
+     "title": "Nước Âu Lạc",
+     "description": "An Dương Vương, thành Cổ Loa và nỏ thần.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl6.chinh_sach_cai_tri",
+     "order": 3,
+     "title": "Chính sách cai trị của phong kiến phương Bắc",
+     "description": "Ách đô hộ và cuộc đấu tranh giữ gìn văn hoá dân tộc.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl6.khoi_nghia_bac_thuoc",
+     "order": 4,
+     "title": "Các cuộc đấu tranh giành độc lập thời Bắc thuộc",
+     "description": "Từ khởi nghĩa Hai Bà Trưng đến chiến thắng Bạch Đằng năm 938.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Sắp xếp được các cuộc khởi nghĩa tiêu biểu theo thời gian",
+      "Nêu được người lãnh đạo của mỗi cuộc khởi nghĩa",
+      "Trình bày được diễn biến chính và ý nghĩa của chiến thắng Bạch Đằng năm 938"
+     ],
+     "summary": [
+      "Năm 179 TCN, Triệu Đà thôn tính Âu Lạc; nước ta bước vào thời kì Bắc thuộc kéo dài hơn một nghìn năm.",
+      "Khởi nghĩa tiêu biểu: Hai Bà Trưng (năm 40), Bà Triệu (năm 248), Lý Bí (năm 542, lập nước Vạn Xuân năm 544).",
+      "Năm 905, Khúc Thừa Dụ giành quyền tự chủ; năm 931, Dương Đình Nghệ đánh đuổi quân Nam Hán.",
+      "Năm 938, Ngô Quyền đánh tan quân Nam Hán trên sông Bạch Đằng, chấm dứt thời kì Bắc thuộc; năm 939 Ngô Quyền xưng vương, đóng đô ở Cổ Loa."
+     ],
+     "examples": [
+      {
+       "title": "Kế sách cắm cọc",
+       "lines": [
+        "Cọc gỗ đầu bịt sắt cắm ở lòng sông Bạch Đằng.",
+        "Khi triều lên, cọc bị nước che khuất; khi triều rút, cọc nhô lên đâm thủng thuyền giặc."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Dòng thời gian Bắc thuộc",
+       "tasks": [
+        {
+         "key": "khoi_nghia",
+         "prompt": "Xếp các cuộc đấu tranh theo thời gian, từ sớm đến muộn.",
+         "items": [
+          "Khởi nghĩa Hai Bà Trưng",
+          "Khởi nghĩa Bà Triệu",
+          "Khởi nghĩa Lý Bí, lập nước Vạn Xuân",
+          "Khúc Thừa Dụ giành quyền tự chủ",
+          "Chiến thắng Bạch Đằng của Ngô Quyền"
+         ],
+         "explanation": "Năm 40 – năm 248 – năm 542 – năm 905 – năm 938.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "mat_nuoc",
+         "prompt": "Xếp các sự kiện từ thời dựng nước đến khởi nghĩa đầu tiên theo thời gian.",
+         "items": [
+          "Nước Văn Lang ra đời",
+          "An Dương Vương lập nước Âu Lạc",
+          "Triệu Đà thôn tính Âu Lạc",
+          "Khởi nghĩa Hai Bà Trưng"
+         ],
+         "explanation": "Văn Lang ra đời khoảng thế kỉ VII TCN; sau đó An Dương Vương lập Âu Lạc; năm 179 TCN Triệu Đà thôn tính Âu Lạc; năm 40 Hai Bà Trưng khởi nghĩa.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "bach_dang",
+         "prompt": "Xếp diễn biến chiến thắng Bạch Đằng năm 938 theo thứ tự.",
+         "items": [
+          "Ngô Quyền tiến quân ra Bắc, diệt kẻ phản bội Kiều Công Tiễn",
+          "Cho quân cắm cọc gỗ đầu bịt sắt ở cửa sông Bạch Đằng",
+          "Khi triều lên, dùng thuyền nhẹ nhử quân Nam Hán vào bãi cọc",
+          "Triều rút, quân ta đánh quật lại, thuyền giặc va cọc vỡ tan",
+          "Ngô Quyền xưng vương, đóng đô ở Cổ Loa"
+         ],
+         "explanation": "Ngô Quyền diệt Kiều Công Tiễn, rồi bày trận cọc, nhử địch lúc triều lên, phản công lúc triều rút. Năm 939 ông xưng vương, đóng đô ở Cổ Loa.",
+         "first_label": "Đầu tiên",
+         "last_label": "Cuối cùng"
+        },
+        {
+         "key": "tu_chu",
+         "prompt": "Xếp các sự kiện thế kỉ X theo thời gian.",
+         "items": [
+          "Khúc Thừa Dụ được nhân dân ủng hộ, giành quyền tự chủ",
+          "Khúc Hạo tiến hành cải cách",
+          "Dương Đình Nghệ đánh đuổi quân Nam Hán",
+          "Kiều Công Tiễn giết Dương Đình Nghệ",
+          "Ngô Quyền đánh tan quân Nam Hán trên sông Bạch Đằng"
+         ],
+         "explanation": "Năm 905 Khúc Thừa Dụ giành quyền tự chủ; năm 907 Khúc Hạo cải cách; năm 931 Dương Đình Nghệ đánh đuổi quân Nam Hán; năm 937 Kiều Công Tiễn giết Dương Đình Nghệ; năm 938 Ngô Quyền chiến thắng.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        }
+       ]
+      },
+      {
+       "game": "match",
+       "title": "Ai lãnh đạo?",
+       "tasks": [
+        {
+         "key": "lanh_dao",
+         "prompt": "Ghép mỗi cuộc đấu tranh với người lãnh đạo.",
+         "pairs": [
+          [
+           "Khởi nghĩa năm 40",
+           "Hai Bà Trưng"
+          ],
+          [
+           "Khởi nghĩa năm 248",
+           "Bà Triệu"
+          ],
+          [
+           "Khởi nghĩa năm 542",
+           "Lý Bí"
+          ],
+          [
+           "Giành quyền tự chủ năm 905",
+           "Khúc Thừa Dụ"
+          ],
+          [
+           "Chiến thắng Bạch Đằng năm 938",
+           "Ngô Quyền"
+          ]
+         ],
+         "explanation": "Năm 40 Hai Bà Trưng; năm 248 Bà Triệu; năm 542 Lý Bí; năm 905 Khúc Thừa Dụ; năm 938 Ngô Quyền.",
+         "left_label": "Sự kiện",
+         "right_label": "Người lãnh đạo"
+        },
+        {
+         "key": "viec_lam",
+         "prompt": "Ghép mỗi việc làm với nhân vật lịch sử.",
+         "pairs": [
+          [
+           "Lập nước Vạn Xuân",
+           "Lý Bí"
+          ],
+          [
+           "Xưng vương, đóng đô ở Mê Linh",
+           "Trưng Trắc"
+          ],
+          [
+           "Xưng vương, đóng đô ở Cổ Loa",
+           "Ngô Quyền"
+          ],
+          [
+           "Cải cách để xây dựng chính quyền tự chủ",
+           "Khúc Hạo"
+          ]
+         ],
+         "explanation": "Lý Bí lập nước Vạn Xuân (544); Trưng Trắc xưng vương ở Mê Linh sau thắng lợi năm 40; Ngô Quyền đóng đô ở Cổ Loa (939); Khúc Hạo cải cách (907).",
+         "left_label": "Việc làm",
+         "right_label": "Nhân vật"
+        },
+        {
+         "key": "y_nghia",
+         "prompt": "Ghép mỗi sự kiện với ý nghĩa của nó.",
+         "pairs": [
+          [
+           "Triệu Đà thôn tính Âu Lạc",
+           "Mở đầu thời kì Bắc thuộc"
+          ],
+          [
+           "Khúc Thừa Dụ giành quyền tự chủ",
+           "Mở đầu thời kì tự chủ"
+          ],
+          [
+           "Chiến thắng Bạch Đằng năm 938",
+           "Chấm dứt hơn một nghìn năm Bắc thuộc"
+          ]
+         ],
+         "explanation": "Năm 179 TCN mất nước; năm 905 giành quyền tự chủ; năm 938 chiến thắng Bạch Đằng mở ra thời kì độc lập lâu dài.",
+         "left_label": "Sự kiện",
+         "right_label": "Ý nghĩa"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "lsdl6.champa_phu_nam",
+     "order": 5,
+     "title": "Vương quốc Champa và vương quốc Phù Nam",
+     "description": "Sự hình thành, phát triển và văn hoá của hai vương quốc cổ.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl6.dl_ban_do",
+   "grade": 6,
+   "order": 5,
+   "title": "Địa lí: Bản đồ – phương tiện thể hiện bề mặt Trái Đất",
+   "lessons": [
+    {
+     "key": "lsdl6.ban_do_toa_do",
+     "order": 1,
+     "title": "Kinh tuyến, vĩ tuyến, tỉ lệ bản đồ và phương hướng",
+     "description": "Đọc lưới kinh, vĩ tuyến; tính khoảng cách thực tế bằng tỉ lệ bản đồ; xác định phương hướng.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Phân biệt kinh tuyến, vĩ tuyến; biết kinh tuyến gốc và Xích đạo",
+      "Tính được khoảng cách thực tế dựa vào tỉ lệ bản đồ",
+      "Xác định được phương hướng trên bản đồ"
+     ],
+     "summary": [
+      "Kinh tuyến nối hai cực; kinh tuyến gốc (0°) đi qua đài thiên văn Grin-uých ở Luân Đôn (Anh).",
+      "Vĩ tuyến là vòng tròn vuông góc với kinh tuyến; Xích đạo (0°) là vĩ tuyến dài nhất, chia Trái Đất thành hai bán cầu Bắc và Nam.",
+      "Tỉ lệ 1 : 100 000 nghĩa là 1 cm trên bản đồ ứng với 100 000 cm = 1 km ngoài thực tế.",
+      "Trên bản đồ có lưới kinh, vĩ tuyến: đầu trên của kinh tuyến chỉ hướng bắc, đầu dưới chỉ hướng nam."
+     ],
+     "examples": [
+      {
+       "title": "Tính khoảng cách thực tế",
+       "lines": [
+        "Bản đồ tỉ lệ 1 : 200 000, đo được 3 cm.",
+        "3 × 200 000 = 600 000 cm = 6 km."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Đọc bản đồ",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "kinh_tuyen_goc",
+         "question": "Kinh tuyến gốc (0°) đi qua đâu?",
+         "options": [
+          {
+           "text": "Đài thiên văn Grin-uých ở Luân Đôn (Anh)",
+           "ok": true,
+           "why": "Đúng. Quốc tế chọn kinh tuyến đi qua Grin-uých làm kinh tuyến 0°."
+          },
+          {
+           "text": "Thủ đô Hà Nội",
+           "ok": false,
+           "why": "Hà Nội nằm ở khoảng kinh độ 105° Đông, không phải kinh tuyến gốc."
+          },
+          {
+           "text": "Cực Bắc",
+           "ok": false,
+           "why": "Mọi kinh tuyến đều đi qua hai cực; kinh tuyến gốc được xác định bởi Grin-uých."
+          }
+         ],
+         "explanation": "Kinh tuyến gốc 0° đi qua đài thiên văn Grin-uých (Luân Đôn, Anh)."
+        },
+        {
+         "key": "xich_dao",
+         "question": "Vĩ tuyến nào dài nhất?",
+         "options": [
+          {
+           "text": "Xích đạo",
+           "ok": true,
+           "why": "Đúng. Càng về hai cực, vòng vĩ tuyến càng nhỏ; Xích đạo là vòng lớn nhất."
+          },
+          {
+           "text": "Chí tuyến Bắc",
+           "ok": false,
+           "why": "Chí tuyến Bắc ngắn hơn Xích đạo vì nằm gần cực hơn."
+          },
+          {
+           "text": "Vòng cực Bắc",
+           "ok": false,
+           "why": "Vòng cực rất gần cực nên ngắn hơn nhiều."
+          }
+         ],
+         "explanation": "Xích đạo là vĩ tuyến 0°, dài nhất, chia Trái Đất thành nửa cầu Bắc và nửa cầu Nam."
+        },
+        {
+         "key": "ti_le_1",
+         "question": "Trên bản đồ tỉ lệ 1 : 100 000, 1 cm ứng với bao nhiêu ngoài thực tế?",
+         "options": [
+          {
+           "text": "1 km",
+           "ok": true,
+           "why": "Đúng. 100 000 cm = 1000 m = 1 km."
+          },
+          {
+           "text": "100 m",
+           "ok": false,
+           "why": "100 000 cm = 1000 m, không phải 100 m."
+          },
+          {
+           "text": "10 km",
+           "ok": false,
+           "why": "10 km là 1 000 000 cm, gấp mười lần."
+          }
+         ],
+         "explanation": "Đổi đơn vị: 100 000 cm = 1 000 m = 1 km."
+        },
+        {
+         "key": "ti_le_2",
+         "question": "Bản đồ tỉ lệ 1 : 200 000. Khoảng cách giữa hai điểm đo được 5 cm. Khoảng cách thực tế là bao nhiêu?",
+         "options": [
+          {
+           "text": "10 km",
+           "ok": true,
+           "why": "Đúng. 5 × 200 000 = 1 000 000 cm = 10 km."
+          },
+          {
+           "text": "1 km",
+           "ok": false,
+           "why": "1 000 000 cm là 10 km, không phải 1 km."
+          },
+          {
+           "text": "100 km",
+           "ok": false,
+           "why": "Kiểm tra lại: 1 000 000 cm = 10 000 m = 10 km."
+          }
+         ],
+         "explanation": "Khoảng cách thực tế = khoảng cách trên bản đồ × mẫu số tỉ lệ, rồi đổi ra km."
+        },
+        {
+         "key": "ti_le_lon",
+         "question": "Bản đồ nào thể hiện các đối tượng chi tiết hơn?",
+         "options": [
+          {
+           "text": "Bản đồ tỉ lệ 1 : 10 000",
+           "ok": true,
+           "why": "Đúng. Mẫu số càng nhỏ, tỉ lệ càng lớn, bản đồ càng chi tiết."
+          },
+          {
+           "text": "Bản đồ tỉ lệ 1 : 1 000 000",
+           "ok": false,
+           "why": "Mẫu số lớn: một cm ứng với 10 km, nên ít chi tiết hơn."
+          }
+         ],
+         "explanation": "Tỉ lệ lớn (mẫu số nhỏ) cho bản đồ chi tiết nhưng thể hiện vùng nhỏ."
+        },
+        {
+         "key": "phuong_huong",
+         "question": "Trên bản đồ có lưới kinh, vĩ tuyến, đầu trên của kinh tuyến chỉ hướng nào?",
+         "options": [
+          {
+           "text": "Hướng bắc",
+           "ok": true,
+           "why": "Đúng. Đầu trên kinh tuyến chỉ hướng bắc, đầu dưới chỉ hướng nam."
+          },
+          {
+           "text": "Hướng đông",
+           "ok": false,
+           "why": "Hướng đông nằm ở bên phải vĩ tuyến."
+          },
+          {
+           "text": "Hướng nam",
+           "ok": false,
+           "why": "Hướng nam là đầu dưới của kinh tuyến."
+          }
+         ],
+         "explanation": "Kinh tuyến chỉ hướng bắc – nam; vĩ tuyến chỉ hướng đông – tây."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "lsdl6.ki_hieu_ban_do",
+     "order": 2,
+     "title": "Kí hiệu và chú giải trên bản đồ",
+     "description": "Đọc kí hiệu, chú giải và tìm đường đi trên bản đồ.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl6.luoc_do_tri_nho",
+     "order": 3,
+     "title": "Lược đồ trí nhớ",
+     "description": "Vẽ lược đồ trí nhớ đường đi từ nhà đến trường.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl6.dl_trai_dat",
+   "grade": 6,
+   "order": 6,
+   "title": "Địa lí: Trái Đất và cấu tạo của Trái Đất",
+   "lessons": [
+    {
+     "key": "lsdl6.he_mat_troi",
+     "order": 1,
+     "title": "Trái Đất trong hệ Mặt Trời",
+     "description": "Vị trí, hình dạng và kích thước của Trái Đất.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl6.tu_quay",
+     "order": 2,
+     "title": "Chuyển động tự quay của Trái Đất và hệ quả",
+     "description": "Ngày đêm luân phiên, giờ trên Trái Đất.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl6.quanh_mat_troi",
+     "order": 3,
+     "title": "Chuyển động quanh Mặt Trời và hệ quả",
+     "description": "Các mùa, ngày đêm dài ngắn theo mùa.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl6.cau_tao_trai_dat",
+     "order": 4,
+     "title": "Cấu tạo của Trái Đất, núi lửa và động đất",
+     "description": "Vỏ, man-ti, nhân; các mảng kiến tạo; núi lửa và động đất.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl6.dia_hinh_khoang_san",
+     "order": 5,
+     "title": "Các dạng địa hình chính và khoáng sản",
+     "description": "Núi, đồi, cao nguyên, đồng bằng và một số khoáng sản.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl6.dl_khi_hau_thuy",
+   "grade": 6,
+   "order": 7,
+   "title": "Địa lí: Khí hậu và nước trên Trái Đất",
+   "lessons": [
+    {
+     "key": "lsdl6.khi_quyen",
+     "order": 1,
+     "title": "Khí quyển, khí áp và gió",
+     "description": "Các tầng khí quyển, khối khí, đai khí áp và các loại gió chính.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl6.doi_khi_hau",
+     "order": 2,
+     "title": "Các đới khí hậu trên Trái Đất",
+     "description": "Phân loại đặc điểm của đới nóng, đới ôn hoà và đới lạnh.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Xác định được giới hạn của các đới khí hậu",
+      "Nêu được đặc điểm nhiệt độ, lượng mưa, gió của mỗi đới"
+     ],
+     "summary": [
+      "Đới nóng (nhiệt đới): giữa hai chí tuyến; nóng quanh năm, gió Tín phong, mưa khoảng 1000–2000 mm/năm.",
+      "Hai đới ôn hoà (ôn đới): giữa chí tuyến và vòng cực; bốn mùa rõ rệt, gió Tây ôn đới.",
+      "Hai đới lạnh (hàn đới): từ vòng cực đến cực; lạnh quanh năm, gió Đông cực, mưa rất ít.",
+      "Việt Nam nằm trong đới nóng."
+     ],
+     "examples": [
+      {
+       "title": "Năm đới, ba kiểu",
+       "lines": [
+        "1 đới nóng ở giữa.",
+        "2 đới ôn hoà ở hai bên.",
+        "2 đới lạnh ở hai đầu cực."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Đới nào đây?",
+       "set": {
+        "title": "Đặc điểm này thuộc đới khí hậu nào?",
+        "groups": [
+         {
+          "id": "nong",
+          "label": "Đới nóng (nhiệt đới)",
+          "icon": "☀️"
+         },
+         {
+          "id": "on_hoa",
+          "label": "Đới ôn hoà (ôn đới)",
+          "icon": "🍂"
+         },
+         {
+          "id": "lanh",
+          "label": "Đới lạnh (hàn đới)",
+          "icon": "❄️"
+         }
+        ],
+        "cards": [
+         {
+          "key": "giua_chi_tuyen",
+          "text": "Nằm giữa chí tuyến Bắc và chí tuyến Nam",
+          "picture": "🌐",
+          "group": "nong",
+          "explanation": "Đới nóng nằm giữa hai chí tuyến."
+         },
+         {
+          "key": "nong_quanh_nam",
+          "text": "Nóng quanh năm",
+          "picture": "🔥",
+          "group": "nong",
+          "explanation": "Ở đới nóng, góc chiếu ánh sáng Mặt Trời lớn nên nóng quanh năm."
+         },
+         {
+          "key": "tin_phong",
+          "text": "Gió Tín phong thổi thường xuyên",
+          "picture": "🌬️",
+          "group": "nong",
+          "explanation": "Gió Tín phong (Mậu dịch) là gió thổi thường xuyên ở đới nóng."
+         },
+         {
+          "key": "mua_nhieu",
+          "text": "Lượng mưa trung bình năm khoảng 1000–2000 mm",
+          "picture": "🌧️",
+          "group": "nong",
+          "explanation": "Đới nóng mưa nhiều, khoảng 1000–2000 mm mỗi năm."
+         },
+         {
+          "key": "chi_tuyen_cuc",
+          "text": "Nằm giữa chí tuyến và vòng cực",
+          "picture": "🌐",
+          "group": "on_hoa",
+          "explanation": "Mỗi bán cầu có một đới ôn hoà, từ chí tuyến đến vòng cực."
+         },
+         {
+          "key": "bon_mua",
+          "text": "Có bốn mùa xuân, hạ, thu, đông rõ rệt",
+          "picture": "🍁",
+          "group": "on_hoa",
+          "explanation": "Bốn mùa rõ rệt là nét đặc trưng của đới ôn hoà."
+         },
+         {
+          "key": "gio_tay",
+          "text": "Gió Tây ôn đới thổi thường xuyên",
+          "picture": "💨",
+          "group": "on_hoa",
+          "explanation": "Gió Tây ôn đới thổi thường xuyên ở đới ôn hoà."
+         },
+         {
+          "key": "vong_cuc_cuc",
+          "text": "Từ vòng cực đến cực",
+          "picture": "🧭",
+          "group": "lanh",
+          "explanation": "Đới lạnh nằm từ vòng cực đến cực ở mỗi bán cầu."
+         },
+         {
+          "key": "bang_tuyet",
+          "text": "Lạnh quanh năm, băng tuyết phủ gần như quanh năm",
+          "picture": "🧊",
+          "group": "lanh",
+          "explanation": "Ở đới lạnh, ánh sáng Mặt Trời chiếu xiên nên rất lạnh."
+         },
+         {
+          "key": "dong_cuc",
+          "text": "Gió Đông cực thổi thường xuyên",
+          "picture": "🌨️",
+          "group": "lanh",
+          "explanation": "Gió Đông cực thổi từ vùng cực về phía vòng cực."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "lsdl6.bien_doi_khi_hau",
+     "order": 3,
+     "title": "Biến đổi khí hậu và ứng phó",
+     "description": "Biểu hiện của biến đổi khí hậu và việc làm để ứng phó.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl6.song_ho_nuoc_ngam",
+     "order": 4,
+     "title": "Sông, hồ và nước ngầm",
+     "description": "Các bộ phận của dòng sông, hồ và nước ngầm.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl6.bien_dai_duong",
+     "order": 5,
+     "title": "Biển và đại dương",
+     "description": "Độ muối, sóng, thuỷ triều và dòng biển.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl6.dl_dat_sinh_vat",
+   "grade": 6,
+   "order": 8,
+   "title": "Địa lí: Đất, sinh vật và con người",
+   "lessons": [
+    {
+     "key": "lsdl6.lop_dat",
+     "order": 1,
+     "title": "Lớp đất trên Trái Đất",
+     "description": "Thành phần của đất và các nhân tố hình thành đất.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl6.sinh_vat_rung",
+     "order": 2,
+     "title": "Sự sống trên Trái Đất và rừng nhiệt đới",
+     "description": "Sự đa dạng của sinh vật và rừng nhiệt đới.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl6.dan_so_the_gioi",
+     "order": 3,
+     "title": "Dân số và sự phân bố dân cư thế giới",
+     "description": "Số dân, các thành phố đông dân và sự phân bố dân cư.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl6.con_nguoi_thien_nhien",
+     "order": 4,
+     "title": "Con người và thiên nhiên",
+     "description": "Con người khai thác, sử dụng và bảo vệ thiên nhiên.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl7.ls_tay_au",
+   "grade": 7,
+   "order": 1,
+   "title": "Lịch sử: Tây Âu từ thế kỉ V đến nửa đầu thế kỉ XVI",
+   "lessons": [
+    {
+     "key": "lsdl7.phong_kien_tay_au",
+     "order": 1,
+     "title": "Sự hình thành và phát triển của xã hội phong kiến ở Tây Âu",
+     "description": "Lãnh địa phong kiến, thành thị trung đại.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl7.phat_kien_dia_li",
+     "order": 2,
+     "title": "Các cuộc phát kiến địa lí",
+     "description": "Những chuyến đi biển lớn cuối thế kỉ XV – đầu thế kỉ XVI và hệ quả của chúng.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Kể được các cuộc phát kiến địa lí tiêu biểu",
+      "Nêu được điều kiện kĩ thuật và hệ quả của phát kiến địa lí"
+     ],
+     "summary": [
+      "B. Đi-a-xơ đến cực nam châu Phi (mũi Hảo Vọng) cuối thế kỉ XV.",
+      "Năm 1492, C. Cô-lôm-bô đến châu Mỹ; năm 1498, Va-xcô đơ Ga-ma đến Ấn Độ bằng đường biển.",
+      "Năm 1519–1522, đoàn thuyền của Ph. Ma-gien-lan đi vòng quanh thế giới, chứng minh Trái Đất hình cầu.",
+      "Phát kiến địa lí mở ra những con đường mới, thúc đẩy thương mại, nhưng cũng mở đầu quá trình xâm chiếm thuộc địa."
+     ],
+     "examples": [
+      {
+       "title": "Nhờ đâu đi được xa?",
+       "lines": [
+        "La bàn giúp định hướng.",
+        "Tàu Ca-ra-ven có thể đi biển dài ngày.",
+        "Hiểu biết về địa lí, hải đồ tiến bộ."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Ghép cặp phát kiến địa lí",
+       "tasks": [
+        {
+         "key": "nha_hang_hai",
+         "prompt": "Ghép mỗi nhà hàng hải với hành trình của ông.",
+         "pairs": [
+          [
+           "B. Đi-a-xơ",
+           "Đến cực nam châu Phi (mũi Hảo Vọng)"
+          ],
+          [
+           "C. Cô-lôm-bô",
+           "Đến châu Mỹ"
+          ],
+          [
+           "Va-xcô đơ Ga-ma",
+           "Đến Ấn Độ bằng đường biển vòng qua châu Phi"
+          ],
+          [
+           "Ph. Ma-gien-lan",
+           "Chỉ huy chuyến đi vòng quanh thế giới"
+          ]
+         ],
+         "explanation": "Đi-a-xơ mở đường vòng qua châu Phi; Cô-lôm-bô tới châu Mỹ; Va-xcô đơ Ga-ma tới Ấn Độ; đoàn của Ma-gien-lan vòng quanh thế giới.",
+         "left_label": "Nhà hàng hải",
+         "right_label": "Hành trình"
+        },
+        {
+         "key": "nam",
+         "prompt": "Ghép mỗi năm với sự kiện phát kiến địa lí.",
+         "pairs": [
+          [
+           "Năm 1492",
+           "Cô-lôm-bô đến châu Mỹ"
+          ],
+          [
+           "Năm 1498",
+           "Va-xcô đơ Ga-ma đến Ấn Độ"
+          ],
+          [
+           "Năm 1519–1522",
+           "Chuyến đi vòng quanh thế giới"
+          ]
+         ],
+         "explanation": "1492 – 1498 – 1519–1522: ba mốc lớn của phát kiến địa lí.",
+         "left_label": "Năm",
+         "right_label": "Sự kiện"
+        },
+        {
+         "key": "phuong_tien",
+         "prompt": "Ghép mỗi phương tiện với công dụng trong các chuyến đi biển.",
+         "pairs": [
+          [
+           "La bàn",
+           "Xác định phương hướng trên biển"
+          ],
+          [
+           "Tàu Ca-ra-ven",
+           "Tàu buồm lớn, đi được đường dài"
+          ],
+          [
+           "Hải đồ",
+           "Bản đồ vẽ đường đi trên biển"
+          ]
+         ],
+         "explanation": "Tiến bộ về kĩ thuật hàng hải là điều kiện để thực hiện các cuộc phát kiến địa lí.",
+         "left_label": "Phương tiện",
+         "right_label": "Công dụng"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "lsdl7.phuc_hung",
+     "order": 3,
+     "title": "Văn hoá Phục hưng",
+     "description": "Những thành tựu và nhân vật tiêu biểu của phong trào Văn hoá Phục hưng.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl7.cai_cach_ton_giao",
+     "order": 4,
+     "title": "Cải cách tôn giáo",
+     "description": "Nguyên nhân và tác động của phong trào Cải cách tôn giáo.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl7.ls_chau_a_trung_dai",
+   "grade": 7,
+   "order": 2,
+   "title": "Lịch sử: Trung Quốc, Ấn Độ và Đông Nam Á thời trung đại",
+   "lessons": [
+    {
+     "key": "lsdl7.trung_quoc",
+     "order": 1,
+     "title": "Trung Quốc từ thế kỉ VII đến giữa thế kỉ XIX",
+     "description": "Các triều đại và thành tựu văn hoá.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl7.an_do",
+     "order": 2,
+     "title": "Ấn Độ từ thế kỉ IV đến giữa thế kỉ XIX",
+     "description": "Các vương triều và văn hoá Ấn Độ.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl7.dong_nam_a",
+     "order": 3,
+     "title": "Đông Nam Á từ nửa sau thế kỉ X đến nửa đầu thế kỉ XVI",
+     "description": "Các quốc gia phong kiến, vương quốc Lào và vương quốc Campuchia.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl7.ls_dai_viet",
+   "grade": 7,
+   "order": 3,
+   "title": "Lịch sử: Việt Nam từ đầu thế kỉ X đến đầu thế kỉ XVI",
+   "lessons": [
+    {
+     "key": "lsdl7.ngo_dinh_tien_le",
+     "order": 1,
+     "title": "Việt Nam từ năm 938 đến năm 1009: Ngô, Đinh, Tiền Lê",
+     "description": "Xây dựng nhà nước độc lập và kháng chiến chống Tống năm 981.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl7.thoi_ly",
+     "order": 2,
+     "title": "Thời Lý (1009–1225)",
+     "description": "Dời đô, xây dựng đất nước và kháng chiến chống Tống.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl7.thoi_tran",
+     "order": 3,
+     "title": "Thời Trần và ba lần kháng chiến chống Mông – Nguyên",
+     "description": "Tình hình đất nước và nguyên nhân thắng lợi.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl7.nha_ho",
+     "order": 4,
+     "title": "Nhà Hồ và cải cách của Hồ Quý Ly",
+     "description": "Nội dung, ý nghĩa của cải cách và cuộc kháng chiến chống Minh.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl7.lam_son_le_so",
+     "order": 5,
+     "title": "Khởi nghĩa Lam Sơn và thời Lê sơ",
+     "description": "Diễn biến khởi nghĩa và những thành tựu thời Lê sơ.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl7.vung_dat_phia_nam",
+     "order": 6,
+     "title": "Vùng đất phía Nam từ đầu thế kỉ X đến đầu thế kỉ XVI",
+     "description": "Champa và vùng đất Nam Bộ thời kì này.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl7.dai_viet_x_xv",
+     "order": 7,
+     "title": "Dòng thời gian Đại Việt từ thế kỉ X đến thế kỉ XV",
+     "description": "Các triều đại Ngô, Đinh, Tiền Lê, Lý, Trần, Hồ, Lê sơ và những sự kiện tiêu biểu.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Sắp xếp được các triều đại và sự kiện tiêu biểu theo thời gian",
+      "Ghép được sự kiện với nhân vật lịch sử"
+     ],
+     "summary": [
+      "Ngô (939), Đinh (968, Đinh Bộ Lĩnh dẹp loạn 12 sứ quân), Tiền Lê (980, Lê Hoàn).",
+      "Lý (1009): dời đô ra Thăng Long năm 1010, đổi tên nước Đại Việt năm 1054, xây Văn Miếu năm 1070, chiến thắng Như Nguyệt năm 1077.",
+      "Trần (1226): ba lần kháng chiến chống Mông – Nguyên (1258, 1285, 1288). Nhà Hồ thành lập năm 1400.",
+      "Khởi nghĩa Lam Sơn (1418–1427); năm 1428 Lê Lợi lên ngôi; năm 1460 Lê Thánh Tông lên ngôi."
+     ],
+     "examples": [
+      {
+       "title": "Các hội nghị nổi tiếng",
+       "lines": [
+        "Hội nghị Bình Than: vua Trần họp các vương hầu bàn kế đánh giặc.",
+        "Hội nghị Diên Hồng: vua Trần hỏi ý các bô lão, cả hội nghị hô “Đánh!”."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Dòng thời gian Đại Việt",
+       "tasks": [
+        {
+         "key": "trieu_dai",
+         "prompt": "Xếp các triều đại theo thời gian, từ sớm đến muộn.",
+         "items": [
+          "Nhà Ngô",
+          "Nhà Đinh",
+          "Nhà Tiền Lê",
+          "Nhà Lý",
+          "Nhà Trần",
+          "Nhà Hồ"
+         ],
+         "explanation": "Ngô (939) → Đinh (968) → Tiền Lê (980) → Lý (1009) → Trần (1226) → Hồ (1400).",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "thoi_ly",
+         "prompt": "Xếp các sự kiện thời Lý theo thời gian.",
+         "items": [
+          "Lý Công Uẩn lên ngôi vua",
+          "Dời đô từ Hoa Lư ra Thăng Long",
+          "Đổi tên nước là Đại Việt",
+          "Xây dựng Văn Miếu",
+          "Chiến thắng trên phòng tuyến sông Như Nguyệt"
+         ],
+         "explanation": "1009 lên ngôi – 1010 dời đô – 1054 đổi tên nước Đại Việt – 1070 xây Văn Miếu – 1077 chiến thắng Như Nguyệt.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "thoi_tran",
+         "prompt": "Xếp các sự kiện từ thời Trần đến nhà Hồ theo thời gian.",
+         "items": [
+          "Nhà Trần được thành lập",
+          "Kháng chiến chống quân Mông Cổ lần thứ nhất",
+          "Kháng chiến chống quân Nguyên lần thứ hai",
+          "Chiến thắng Bạch Đằng, kết thúc kháng chiến lần thứ ba",
+          "Hồ Quý Ly lập nhà Hồ"
+         ],
+         "explanation": "1226 nhà Trần thành lập; 1258, 1285, 1288 ba lần kháng chiến; 1400 Hồ Quý Ly lập nhà Hồ.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "lam_son",
+         "prompt": "Xếp các sự kiện của khởi nghĩa Lam Sơn và thời Lê sơ theo thời gian.",
+         "items": [
+          "Lê Lợi dựng cờ khởi nghĩa ở Lam Sơn",
+          "Chiến thắng Tốt Động – Chúc Động",
+          "Chiến thắng Chi Lăng – Xương Giang",
+          "Lê Lợi lên ngôi, khôi phục quốc hiệu Đại Việt",
+          "Lê Thánh Tông lên ngôi"
+         ],
+         "explanation": "1418 dựng cờ khởi nghĩa – 1426 Tốt Động – Chúc Động – 1427 Chi Lăng – Xương Giang – 1428 Lê Lợi lên ngôi – 1460 Lê Thánh Tông lên ngôi.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        }
+       ]
+      },
+      {
+       "game": "match",
+       "title": "Sự kiện và nhân vật",
+       "tasks": [
+        {
+         "key": "nhan_vat",
+         "prompt": "Ghép mỗi sự kiện với nhân vật lịch sử.",
+         "pairs": [
+          [
+           "Dẹp loạn 12 sứ quân",
+           "Đinh Bộ Lĩnh"
+          ],
+          [
+           "Ban Chiếu dời đô",
+           "Lý Công Uẩn"
+          ],
+          [
+           "Phòng tuyến sông Như Nguyệt",
+           "Lý Thường Kiệt"
+          ],
+          [
+           "Viết Hịch tướng sĩ",
+           "Trần Hưng Đạo"
+          ],
+          [
+           "Viết Bình Ngô đại cáo",
+           "Nguyễn Trãi"
+          ]
+         ],
+         "explanation": "Mỗi nhân vật gắn với một việc làm tiêu biểu trong lịch sử Đại Việt.",
+         "left_label": "Sự kiện",
+         "right_label": "Nhân vật"
+        },
+        {
+         "key": "nam",
+         "prompt": "Ghép mỗi năm với sự kiện.",
+         "pairs": [
+          [
+           "Năm 968",
+           "Đinh Bộ Lĩnh lên ngôi, đặt tên nước Đại Cồ Việt"
+          ],
+          [
+           "Năm 981",
+           "Lê Hoàn đánh bại quân Tống"
+          ],
+          [
+           "Năm 1054",
+           "Nhà Lý đổi tên nước là Đại Việt"
+          ],
+          [
+           "Năm 1400",
+           "Hồ Quý Ly lập nhà Hồ, đổi tên nước là Đại Ngu"
+          ]
+         ],
+         "explanation": "Quốc hiệu Đại Cồ Việt (968), Đại Việt (1054), Đại Ngu (1400).",
+         "left_label": "Năm",
+         "right_label": "Sự kiện"
+        },
+        {
+         "key": "hoi_nghi",
+         "prompt": "Ghép mỗi hội nghị, hội thề với nội dung.",
+         "pairs": [
+          [
+           "Hội nghị Bình Than",
+           "Vua Trần họp các vương hầu, bàn kế đánh giặc"
+          ],
+          [
+           "Hội nghị Diên Hồng",
+           "Vua Trần hỏi ý kiến các bô lão nên hoà hay nên đánh"
+          ],
+          [
+           "Hội thề Lũng Nhai",
+           "Lê Lợi cùng các nghĩa sĩ thề đánh giặc Minh"
+          ]
+         ],
+         "explanation": "Bình Than và Diên Hồng (thời Trần) cho thấy sự đoàn kết từ triều đình đến nhân dân; hội thề Lũng Nhai (1416) chuẩn bị cho khởi nghĩa Lam Sơn.",
+         "left_label": "Hội nghị",
+         "right_label": "Nội dung"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "lsdl7.dl_chau_au",
+   "grade": 7,
+   "order": 4,
+   "title": "Địa lí: Châu Âu",
+   "lessons": [
+    {
+     "key": "lsdl7.tu_nhien_chau_au",
+     "order": 1,
+     "title": "Thiên nhiên châu Âu",
+     "description": "Vị trí, địa hình, khí hậu và sông ngòi châu Âu.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl7.dan_cu_chau_au",
+     "order": 2,
+     "title": "Dân cư và đô thị hoá ở châu Âu",
+     "description": "Cơ cấu dân số già, đô thị hoá và di cư.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl7.lien_minh_chau_au",
+     "order": 3,
+     "title": "Liên minh châu Âu",
+     "description": "Một trong những trung tâm kinh tế lớn của thế giới.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl7.dl_chau_a",
+   "grade": 7,
+   "order": 5,
+   "title": "Địa lí: Châu Á",
+   "lessons": [
+    {
+     "key": "lsdl7.tu_nhien_chau_a",
+     "order": 1,
+     "title": "Đặc điểm tự nhiên châu Á",
+     "description": "Kích thước, địa hình, khí hậu và sông ngòi của châu lục lớn nhất thế giới.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được vị trí, kích thước của châu Á",
+      "Trình bày được đặc điểm địa hình, khí hậu, sông ngòi châu Á"
+     ],
+     "summary": [
+      "Châu Á là châu lục lớn nhất thế giới; phía bắc giáp Bắc Băng Dương, phía đông giáp Thái Bình Dương, phía nam giáp Ấn Độ Dương.",
+      "Địa hình có nhiều núi và sơn nguyên cao đồ sộ ở trung tâm; dãy Hi-ma-lay-a có đỉnh Ê-vơ-rét cao nhất thế giới.",
+      "Khí hậu phân hoá đa dạng; kiểu gió mùa phổ biến ở Đông Á, Đông Nam Á, Nam Á; kiểu lục địa khô hạn ở vùng nội địa.",
+      "Nhiều sông lớn như Trường Giang, Hoàng Hà, Mê Công; sông Mê Công bắt nguồn từ sơn nguyên Tây Tạng."
+     ],
+     "examples": [
+      {
+       "title": "Hai kiểu khí hậu tiêu biểu",
+       "lines": [
+        "Gió mùa: mùa hạ nóng ẩm, mưa nhiều (như Việt Nam).",
+        "Lục địa: khô hạn, mùa đông lạnh, mùa hạ nóng (vùng nội địa)."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Khám phá châu Á",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "dien_tich",
+         "question": "So với các châu lục khác, châu Á có diện tích như thế nào?",
+         "options": [
+          {
+           "text": "Lớn nhất thế giới",
+           "ok": true,
+           "why": "Đúng. Châu Á là châu lục rộng nhất."
+          },
+          {
+           "text": "Nhỏ nhất thế giới",
+           "ok": false,
+           "why": "Châu lục nhỏ nhất là châu Đại Dương."
+          },
+          {
+           "text": "Đứng thứ hai sau châu Mỹ",
+           "ok": false,
+           "why": "Châu Mỹ nhỏ hơn châu Á."
+          }
+         ],
+         "explanation": "Châu Á là châu lục có diện tích lớn nhất."
+        },
+        {
+         "key": "everest",
+         "question": "Đỉnh Ê-vơ-rét, đỉnh núi cao nhất thế giới, thuộc dãy núi nào?",
+         "options": [
+          {
+           "text": "Hi-ma-lay-a",
+           "ok": true,
+           "why": "Đúng. Dãy Hi-ma-lay-a ở châu Á có đỉnh Ê-vơ-rét cao nhất thế giới."
+          },
+          {
+           "text": "An-pơ",
+           "ok": false,
+           "why": "An-pơ là dãy núi ở châu Âu."
+          },
+          {
+           "text": "An-đét",
+           "ok": false,
+           "why": "An-đét là dãy núi ở châu Mỹ."
+          }
+         ],
+         "explanation": "Dãy Hi-ma-lay-a nằm ở trung tâm châu Á, nơi có đỉnh Ê-vơ-rét."
+        },
+        {
+         "key": "phia_nam",
+         "question": "Phía nam châu Á giáp đại dương nào?",
+         "options": [
+          {
+           "text": "Ấn Độ Dương",
+           "ok": true,
+           "why": "Đúng. Phía nam châu Á giáp Ấn Độ Dương."
+          },
+          {
+           "text": "Bắc Băng Dương",
+           "ok": false,
+           "why": "Bắc Băng Dương ở phía bắc châu Á."
+          },
+          {
+           "text": "Đại Tây Dương",
+           "ok": false,
+           "why": "Đại Tây Dương nằm giữa châu Âu, châu Phi và châu Mỹ."
+          }
+         ],
+         "explanation": "Ba mặt châu Á giáp đại dương: Bắc Băng Dương (bắc), Thái Bình Dương (đông), Ấn Độ Dương (nam)."
+        },
+        {
+         "key": "gio_mua",
+         "question": "Kiểu khí hậu nào phổ biến ở Đông Nam Á và Nam Á?",
+         "options": [
+          {
+           "text": "Khí hậu gió mùa",
+           "ok": true,
+           "why": "Đúng. Mùa hạ gió từ biển thổi vào gây mưa nhiều."
+          },
+          {
+           "text": "Khí hậu lục địa khô hạn",
+           "ok": false,
+           "why": "Kiểu lục địa phổ biến ở vùng nội địa và Tây Nam Á."
+          },
+          {
+           "text": "Khí hậu hàn đới",
+           "ok": false,
+           "why": "Hàn đới chỉ có ở vùng cực Bắc của châu Á."
+          }
+         ],
+         "explanation": "Gió mùa là nét nổi bật của khí hậu Đông Á, Đông Nam Á và Nam Á."
+        },
+        {
+         "key": "me_cong",
+         "question": "Sông Mê Công, con sông chảy qua nước ta, bắt nguồn từ đâu?",
+         "options": [
+          {
+           "text": "Sơn nguyên Tây Tạng",
+           "ok": true,
+           "why": "Đúng. Nhiều sông lớn của châu Á bắt nguồn từ sơn nguyên Tây Tạng."
+          },
+          {
+           "text": "Dãy Trường Sơn",
+           "ok": false,
+           "why": "Dãy Trường Sơn không phải nơi bắt nguồn của sông Mê Công."
+          },
+          {
+           "text": "Hồ Biển Hồ ở Campuchia",
+           "ok": false,
+           "why": "Biển Hồ nối với sông Mê Công ở hạ lưu, không phải nguồn của sông."
+          }
+         ],
+         "explanation": "Sông Mê Công bắt nguồn từ sơn nguyên Tây Tạng, chảy qua nhiều nước rồi đổ ra Biển Đông."
+        },
+        {
+         "key": "dia_hinh",
+         "question": "Đặc điểm nổi bật của địa hình châu Á là gì?",
+         "options": [
+          {
+           "text": "Nhiều hệ thống núi và sơn nguyên cao, đồ sộ ở trung tâm",
+           "ok": true,
+           "why": "Đúng. Các dãy núi cao tập trung ở trung tâm, đồng bằng lớn ở rìa."
+          },
+          {
+           "text": "Chủ yếu là đồng bằng thấp, bằng phẳng",
+           "ok": false,
+           "why": "Châu Á có nhiều đồng bằng lớn nhưng nổi bật là núi và sơn nguyên đồ sộ."
+          },
+          {
+           "text": "Hầu như không có núi cao",
+           "ok": false,
+           "why": "Châu Á có dãy núi cao nhất thế giới là Hi-ma-lay-a."
+          }
+         ],
+         "explanation": "Châu Á có địa hình đa dạng, nổi bật với núi và sơn nguyên cao ở trung tâm."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "lsdl7.dan_cu_chau_a",
+     "order": 2,
+     "title": "Dân cư và tôn giáo ở châu Á",
+     "description": "Châu lục đông dân và nơi ra đời nhiều tôn giáo lớn.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl7.khu_vuc_chau_a",
+     "order": 3,
+     "title": "Các khu vực của châu Á",
+     "description": "Đặc điểm tự nhiên của Bắc Á, Trung Á, Tây Á, Nam Á, Đông Á, Đông Nam Á.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl7.dl_chau_phi",
+   "grade": 7,
+   "order": 6,
+   "title": "Địa lí: Châu Phi",
+   "lessons": [
+    {
+     "key": "lsdl7.tu_nhien_chau_phi",
+     "order": 1,
+     "title": "Thiên nhiên châu Phi",
+     "description": "Hoang mạc rộng lớn, xa van và rừng nhiệt đới.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl7.dan_cu_chau_phi",
+     "order": 2,
+     "title": "Dân cư, xã hội và bảo vệ thiên nhiên ở châu Phi",
+     "description": "Những vấn đề dân cư, xã hội và cách sử dụng thiên nhiên.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl7.dl_chau_my_nam_cuc",
+   "grade": 7,
+   "order": 7,
+   "title": "Địa lí: Châu Mỹ, châu Đại Dương và châu Nam Cực",
+   "lessons": [
+    {
+     "key": "lsdl7.chau_my",
+     "order": 1,
+     "title": "Thiên nhiên và dân cư châu Mỹ",
+     "description": "Bắc Mỹ, Trung và Nam Mỹ; rừng A-ma-dôn.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl7.chau_dai_duong",
+     "order": 2,
+     "title": "Châu Đại Dương",
+     "description": "Lục địa Ô-xtrây-li-a và các đảo, quần đảo.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl7.chau_nam_cuc",
+     "order": 3,
+     "title": "Châu Nam Cực",
+     "description": "Châu lục lạnh nhất và việc nghiên cứu, bảo vệ châu Nam Cực.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl7.song_nui_chau_luc",
+     "order": 4,
+     "title": "Ôn tập: núi, sông và hoang mạc của các châu lục",
+     "description": "Phân loại những dãy núi, con sông, hoang mạc nổi tiếng theo châu lục.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nhận biết được các dạng địa hình, sông lớn tiêu biểu của từng châu lục"
+     ],
+     "summary": [
+      "Châu Á: dãy Hi-ma-lay-a, sông Trường Giang, hoang mạc Gô-bi.",
+      "Châu Âu: dãy An-pơ, sông Đa-nuýp.",
+      "Châu Phi: hoang mạc Xa-ha-ra, sông Nin, núi Ki-li-man-gia-rô.",
+      "Châu Mỹ: dãy An-đét, sông A-ma-dôn."
+     ],
+     "examples": [
+      {
+       "title": "Kỉ lục",
+       "lines": [
+        "Xa-ha-ra là hoang mạc nóng lớn nhất thế giới.",
+        "A-ma-dôn là sông có lượng nước lớn nhất thế giới."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Thuộc châu lục nào?",
+       "set": {
+        "title": "Dãy núi, con sông hay hoang mạc này ở châu lục nào?",
+        "groups": [
+         {
+          "id": "a",
+          "label": "Châu Á",
+          "icon": "🏯"
+         },
+         {
+          "id": "au",
+          "label": "Châu Âu",
+          "icon": "🏰"
+         },
+         {
+          "id": "phi",
+          "label": "Châu Phi",
+          "icon": "🦒"
+         },
+         {
+          "id": "my",
+          "label": "Châu Mỹ",
+          "icon": "🦙"
+         }
+        ],
+        "cards": [
+         {
+          "key": "himalaya",
+          "text": "Dãy Hi-ma-lay-a",
+          "picture": "🏔️",
+          "group": "a",
+          "explanation": "Hi-ma-lay-a ở châu Á, có đỉnh Ê-vơ-rét cao nhất thế giới."
+         },
+         {
+          "key": "truong_giang",
+          "text": "Sông Trường Giang",
+          "picture": "🏞️",
+          "group": "a",
+          "explanation": "Trường Giang là sông dài nhất châu Á, chảy qua Trung Quốc."
+         },
+         {
+          "key": "gobi",
+          "text": "Hoang mạc Gô-bi",
+          "picture": "🐫",
+          "group": "a",
+          "explanation": "Gô-bi là hoang mạc lớn ở vùng nội địa châu Á."
+         },
+         {
+          "key": "an_po",
+          "text": "Dãy An-pơ",
+          "picture": "⛷️",
+          "group": "au",
+          "explanation": "An-pơ là dãy núi cao nhất châu Âu."
+         },
+         {
+          "key": "da_nuyp",
+          "text": "Sông Đa-nuýp",
+          "picture": "🚢",
+          "group": "au",
+          "explanation": "Sông Đa-nuýp chảy qua nhiều nước châu Âu."
+         },
+         {
+          "key": "sahara",
+          "text": "Hoang mạc Xa-ha-ra",
+          "picture": "🏜️",
+          "group": "phi",
+          "explanation": "Xa-ha-ra ở bắc châu Phi là hoang mạc nóng lớn nhất thế giới."
+         },
+         {
+          "key": "nin",
+          "text": "Sông Nin",
+          "picture": "🐊",
+          "group": "phi",
+          "explanation": "Sông Nin ở châu Phi, gắn với nền văn minh Ai Cập cổ đại."
+         },
+         {
+          "key": "kilimanjaro",
+          "text": "Núi Ki-li-man-gia-rô",
+          "picture": "🗻",
+          "group": "phi",
+          "explanation": "Ki-li-man-gia-rô là núi cao nhất châu Phi."
+         },
+         {
+          "key": "an_det",
+          "text": "Dãy An-đét",
+          "picture": "🦙",
+          "group": "my",
+          "explanation": "An-đét chạy dọc phía tây Nam Mỹ."
+         },
+         {
+          "key": "amazon",
+          "text": "Sông A-ma-dôn",
+          "picture": "🌳",
+          "group": "my",
+          "explanation": "A-ma-dôn ở Nam Mỹ, chảy qua rừng nhiệt đới lớn nhất thế giới."
+         }
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "lsdl8.ls_cm_tu_san",
+   "grade": 8,
+   "order": 1,
+   "title": "Lịch sử: Châu Âu và Bắc Mỹ từ nửa sau thế kỉ XVI đến thế kỉ XVIII",
+   "lessons": [
+    {
+     "key": "lsdl8.cm_tu_san",
+     "order": 1,
+     "title": "Các cuộc cách mạng tư sản Anh, Mỹ, Pháp",
+     "description": "Sự kiện, nhân vật và văn kiện tiêu biểu của ba cuộc cách mạng tư sản.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được sự kiện, nhân vật tiêu biểu của cách mạng tư sản Anh, chiến tranh giành độc lập ở Bắc Mỹ và cách mạng tư sản Pháp",
+      "Hiểu nội dung chính của các văn kiện lớn"
+     ],
+     "summary": [
+      "Cách mạng tư sản Anh (thế kỉ XVII): năm 1649 vua Sác-lơ I bị xử tử; Ô. Crôm-oen là người lãnh đạo tiêu biểu.",
+      "Chiến tranh giành độc lập của 13 thuộc địa Anh ở Bắc Mỹ: Tuyên ngôn Độc lập (1776), Hiến pháp (1787); G. Oa-sinh-tơn chỉ huy quân đội.",
+      "Cách mạng tư sản Pháp: ngày 14/7/1789 nhân dân phá ngục Ba-xti; Tuyên ngôn Nhân quyền và Dân quyền (1789); phái Gia-cô-banh do Rô-be-xpi-e đứng đầu.",
+      "Các cuộc cách mạng này mở đường cho chủ nghĩa tư bản phát triển."
+     ],
+     "examples": [
+      {
+       "title": "Hai bản tuyên ngôn được trích dẫn năm 1945",
+       "lines": [
+        "Trong Tuyên ngôn Độc lập ngày 2/9/1945, Chủ tịch Hồ Chí Minh trích Tuyên ngôn Độc lập của Mỹ (1776)",
+        "và Tuyên ngôn Nhân quyền và Dân quyền của Pháp (1789)."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Ba cuộc cách mạng tư sản",
+       "tasks": [
+        {
+         "key": "su_kien",
+         "prompt": "Ghép mỗi sự kiện với cuộc cách mạng.",
+         "pairs": [
+          [
+           "Vua Sác-lơ I bị xử tử (1649)",
+           "Cách mạng tư sản Anh"
+          ],
+          [
+           "Thông qua Tuyên ngôn Độc lập (1776)",
+           "Chiến tranh giành độc lập ở Bắc Mỹ"
+          ],
+          [
+           "Nhân dân phá ngục Ba-xti (14/7/1789)",
+           "Cách mạng tư sản Pháp"
+          ]
+         ],
+         "explanation": "Mỗi cuộc cách mạng có một sự kiện tiêu biểu: Anh (1649), Bắc Mỹ (1776), Pháp (1789).",
+         "left_label": "Sự kiện",
+         "right_label": "Cuộc cách mạng"
+        },
+        {
+         "key": "nhan_vat",
+         "prompt": "Ghép mỗi nhân vật với cuộc cách mạng.",
+         "pairs": [
+          [
+           "Ô. Crôm-oen",
+           "Cách mạng tư sản Anh"
+          ],
+          [
+           "G. Oa-sinh-tơn",
+           "Chiến tranh giành độc lập ở Bắc Mỹ"
+          ],
+          [
+           "M. Rô-be-xpi-e",
+           "Cách mạng tư sản Pháp"
+          ]
+         ],
+         "explanation": "Crôm-oen lãnh đạo quân đội Quốc hội Anh; Oa-sinh-tơn chỉ huy quân đội Bắc Mỹ, sau là tổng thống đầu tiên của Mỹ; Rô-be-xpi-e đứng đầu phái Gia-cô-banh ở Pháp.",
+         "left_label": "Nhân vật",
+         "right_label": "Cuộc cách mạng"
+        },
+        {
+         "key": "van_kien",
+         "prompt": "Ghép mỗi văn kiện với nội dung chính.",
+         "pairs": [
+          [
+           "Tuyên ngôn Độc lập của Mỹ (1776)",
+           "Mọi người sinh ra đều bình đẳng, có quyền sống, tự do và mưu cầu hạnh phúc"
+          ],
+          [
+           "Tuyên ngôn Nhân quyền và Dân quyền (1789)",
+           "Người ta sinh ra tự do và bình đẳng về quyền lợi"
+          ],
+          [
+           "Hiến pháp Mỹ (1787)",
+           "Lập nhà nước cộng hoà liên bang do tổng thống đứng đầu"
+          ]
+         ],
+         "explanation": "Các văn kiện này nêu tư tưởng về quyền con người và nhà nước cộng hoà, ảnh hưởng tới nhiều dân tộc.",
+         "left_label": "Văn kiện",
+         "right_label": "Nội dung"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "lsdl8.cm_cong_nghiep",
+     "order": 2,
+     "title": "Cách mạng công nghiệp",
+     "description": "Những thành tựu và tác động của cách mạng công nghiệp.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl8.dong_nam_a",
+     "order": 3,
+     "title": "Đông Nam Á từ nửa sau thế kỉ XVI đến thế kỉ XIX",
+     "description": "Quá trình xâm nhập của chủ nghĩa thực dân và cuộc đấu tranh của nhân dân.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl8.ls_vn_16_18",
+   "grade": 8,
+   "order": 2,
+   "title": "Lịch sử: Việt Nam từ đầu thế kỉ XVI đến thế kỉ XVIII",
+   "lessons": [
+    {
+     "key": "lsdl8.mac_trinh_nguyen",
+     "order": 1,
+     "title": "Xung đột Nam – Bắc triều và Trịnh – Nguyễn",
+     "description": "Nguyên nhân và hệ quả của các cuộc xung đột.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl8.khai_pha_phia_nam",
+     "order": 2,
+     "title": "Công cuộc khai phá vùng đất phía Nam",
+     "description": "Quá trình khai phá và xác lập chủ quyền ở vùng đất phía Nam.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl8.kinh_te_van_hoa",
+     "order": 3,
+     "title": "Kinh tế, văn hoá thế kỉ XVI – XVIII",
+     "description": "Đô thị, thương cảng và đời sống văn hoá.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl8.phong_trao_tay_son",
+     "order": 4,
+     "title": "Phong trào Tây Sơn",
+     "description": "Từ khởi nghĩa Tây Sơn đến chiến thắng Rạch Gầm – Xoài Mút và Ngọc Hồi – Đống Đa.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Sắp xếp được các sự kiện chính của phong trào Tây Sơn theo thời gian",
+      "Trình bày được diễn biến chính của các trận Rạch Gầm – Xoài Mút và Ngọc Hồi – Đống Đa",
+      "Nêu được vai trò của Nguyễn Huệ – Quang Trung"
+     ],
+     "summary": [
+      "Năm 1771, ba anh em Nguyễn Nhạc, Nguyễn Huệ, Nguyễn Lữ dựng cờ khởi nghĩa ở Tây Sơn; năm 1777 lật đổ chính quyền chúa Nguyễn.",
+      "Năm 1785, Nguyễn Huệ đánh tan quân Xiêm ở Rạch Gầm – Xoài Mút; năm 1786 tiến ra Bắc lật đổ chúa Trịnh.",
+      "Cuối năm 1788, Nguyễn Huệ lên ngôi Hoàng đế (Quang Trung), tiến quân ra Bắc; Tết Kỷ Dậu 1789 đại phá quân Thanh ở Ngọc Hồi – Đống Đa.",
+      "Năm 1792 Quang Trung qua đời; năm 1802 Nguyễn Ánh lập ra nhà Nguyễn."
+     ],
+     "examples": [
+      {
+       "title": "Hành quân thần tốc",
+       "lines": [
+        "Quân Tây Sơn khao quân ăn Tết trước, rồi bất ngờ tấn công đúng dịp Tết.",
+        "Chỉ trong mấy ngày, quân Thanh bị đánh tan."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Dòng thời gian Tây Sơn",
+       "tasks": [
+        {
+         "key": "chang_duong",
+         "prompt": "Xếp các sự kiện của phong trào Tây Sơn theo thời gian.",
+         "items": [
+          "Anh em Tây Sơn dựng cờ khởi nghĩa",
+          "Đánh tan quân Xiêm ở Rạch Gầm – Xoài Mút",
+          "Tiến ra Bắc, lật đổ chính quyền họ Trịnh",
+          "Nguyễn Huệ lên ngôi Hoàng đế, lấy niên hiệu Quang Trung",
+          "Đại phá quân Thanh ở Ngọc Hồi – Đống Đa"
+         ],
+         "explanation": "1771 khởi nghĩa – 1785 Rạch Gầm – Xoài Mút – 1786 lật đổ họ Trịnh – 1788 Nguyễn Huệ lên ngôi – 1789 đại phá quân Thanh.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "dai_pha_thanh",
+         "prompt": "Xếp diễn biến cuộc đại phá quân Thanh theo thứ tự.",
+         "items": [
+          "Quân Thanh kéo vào Thăng Long",
+          "Nguyễn Huệ lên ngôi Hoàng đế ở Phú Xuân",
+          "Quân Tây Sơn ra Bắc, khao quân ăn Tết trước",
+          "Đánh đồn Hà Hồi, rồi Ngọc Hồi – Đống Đa",
+          "Quang Trung tiến vào Thăng Long, quân Thanh tháo chạy"
+         ],
+         "explanation": "Quân Thanh chiếm Thăng Long cuối năm 1788; Nguyễn Huệ lên ngôi rồi tiến quân thần tốc ra Bắc; đêm mồng 3 Tết đánh Hà Hồi, mồng 5 Tết thắng Ngọc Hồi – Đống Đa và vào Thăng Long.",
+         "first_label": "Đầu tiên",
+         "last_label": "Cuối cùng"
+        },
+        {
+         "key": "truoc_sau",
+         "prompt": "Xếp các sự kiện theo thời gian.",
+         "items": [
+          "Lật đổ chính quyền chúa Nguyễn ở Đàng Trong",
+          "Đánh tan quân Xiêm ở Rạch Gầm – Xoài Mút",
+          "Quang Trung qua đời",
+          "Nguyễn Ánh lập ra nhà Nguyễn"
+         ],
+         "explanation": "1777 lật đổ chúa Nguyễn – 1785 Rạch Gầm – Xoài Mút – 1792 Quang Trung qua đời – 1802 Nguyễn Ánh lập nhà Nguyễn.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "rach_gam",
+         "prompt": "Xếp diễn biến trận Rạch Gầm – Xoài Mút theo thứ tự.",
+         "items": [
+          "Nguyễn Ánh cầu cứu, quân Xiêm kéo sang xâm lược",
+          "Nguyễn Huệ chọn khúc sông Tiền từ Rạch Gầm đến Xoài Mút để mai phục",
+          "Nhử quân Xiêm vào trận địa mai phục",
+          "Quân Xiêm bị đánh tan, chỉ còn ít tàn quân chạy về nước"
+         ],
+         "explanation": "Năm 1785, Nguyễn Huệ chọn khúc sông Tiền làm trận địa, nhử địch vào rồi đánh úp, gần như tiêu diệt toàn bộ đạo quân Xiêm.",
+         "first_label": "Đầu tiên",
+         "last_label": "Cuối cùng"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "lsdl8.ls_the_gioi_18_20",
+   "grade": 8,
+   "order": 3,
+   "title": "Lịch sử: Thế giới từ thế kỉ XVIII đến đầu thế kỉ XX",
+   "lessons": [
+    {
+     "key": "lsdl8.chu_nghia_de_quoc",
+     "order": 1,
+     "title": "Các nước Âu – Mỹ và sự hình thành chủ nghĩa đế quốc",
+     "description": "Sự phát triển của chủ nghĩa tư bản và phong trào công nhân.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl8.trung_quoc_nhat_ban",
+     "order": 2,
+     "title": "Trung Quốc và Nhật Bản từ nửa sau thế kỉ XIX",
+     "description": "Cách mạng Tân Hợi và cuộc Duy tân Minh Trị.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl8.chien_tranh_tg_1",
+     "order": 3,
+     "title": "Chiến tranh thế giới thứ nhất và Cách mạng tháng Mười Nga",
+     "description": "Nguyên nhân, kết cục và tác động.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl8.ls_vn_19_20",
+   "grade": 8,
+   "order": 4,
+   "title": "Lịch sử: Việt Nam từ thế kỉ XIX đến đầu thế kỉ XX",
+   "lessons": [
+    {
+     "key": "lsdl8.nha_nguyen",
+     "order": 1,
+     "title": "Việt Nam thời nhà Nguyễn (nửa đầu thế kỉ XIX)",
+     "description": "Chính trị, kinh tế, văn hoá thời Nguyễn.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl8.khang_chien_phap",
+     "order": 2,
+     "title": "Kháng chiến chống thực dân Pháp xâm lược (1858–1884)",
+     "description": "Quá trình Pháp xâm lược và cuộc kháng chiến của nhân dân.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl8.can_vuong",
+     "order": 3,
+     "title": "Phong trào Cần vương và khởi nghĩa Yên Thế",
+     "description": "Các cuộc khởi nghĩa cuối thế kỉ XIX.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl8.yeu_nuoc_dau_20",
+     "order": 4,
+     "title": "Phong trào yêu nước đầu thế kỉ XX",
+     "description": "Phan Bội Châu, Phan Châu Trinh và những con đường cứu nước mới.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl8.dl_dia_hinh",
+   "grade": 8,
+   "order": 5,
+   "title": "Địa lí: Vị trí, địa hình và khoáng sản Việt Nam",
+   "lessons": [
+    {
+     "key": "lsdl8.vi_tri_pham_vi",
+     "order": 1,
+     "title": "Vị trí địa lí và phạm vi lãnh thổ Việt Nam",
+     "description": "Ảnh hưởng của vị trí địa lí tới tự nhiên nước ta.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl8.dia_hinh_vn",
+     "order": 2,
+     "title": "Đặc điểm địa hình Việt Nam",
+     "description": "Đồi núi, đồng bằng, hướng địa hình và địa hình các-xtơ của nước ta.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Trình bày được đặc điểm chung của địa hình Việt Nam",
+      "Kể được các khu vực địa hình chính"
+     ],
+     "summary": [
+      "Đồi núi chiếm khoảng 3/4 diện tích phần đất liền, chủ yếu là đồi núi thấp.",
+      "Địa hình có hai hướng chính: tây bắc – đông nam và vòng cung.",
+      "Dãy Hoàng Liên Sơn có đỉnh Phan-xi-păng, cao nhất nước ta.",
+      "Hai đồng bằng châu thổ lớn: đồng bằng sông Hồng và đồng bằng sông Cửu Long; đồng bằng ven biển miền Trung hẹp ngang.",
+      "Vùng núi đá vôi có nhiều hang động (địa hình các-xtơ) do nước hoà tan đá vôi."
+     ],
+     "examples": [
+      {
+       "title": "Hai hướng núi",
+       "lines": [
+        "Tây bắc – đông nam: dãy Hoàng Liên Sơn, dãy Trường Sơn Bắc.",
+        "Vòng cung: các cánh cung vùng núi Đông Bắc."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Địa hình Việt Nam",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "ty_le_doi_nui",
+         "question": "Đồi núi chiếm khoảng bao nhiêu diện tích phần đất liền nước ta?",
+         "options": [
+          {
+           "text": "Khoảng 3/4",
+           "ok": true,
+           "why": "Đúng. Đồi núi chiếm khoảng ba phần tư diện tích đất liền."
+          },
+          {
+           "text": "Khoảng 1/4",
+           "ok": false,
+           "why": "1/4 là phần diện tích đồng bằng."
+          },
+          {
+           "text": "Khoảng 1/2",
+           "ok": false,
+           "why": "Đồi núi chiếm nhiều hơn một nửa, khoảng 3/4."
+          }
+         ],
+         "explanation": "Đồi núi là bộ phận quan trọng nhất của địa hình Việt Nam (khoảng 3/4 diện tích)."
+        },
+        {
+         "key": "doi_nui_thap",
+         "question": "Đồi núi nước ta chủ yếu là loại nào?",
+         "options": [
+          {
+           "text": "Đồi núi thấp",
+           "ok": true,
+           "why": "Đúng. Phần lớn đồi núi có độ cao dưới 1000 m."
+          },
+          {
+           "text": "Núi cao trên 2000 m",
+           "ok": false,
+           "why": "Núi cao trên 2000 m chỉ chiếm một phần nhỏ diện tích."
+          },
+          {
+           "text": "Cao nguyên băng tuyết",
+           "ok": false,
+           "why": "Nước ta không có cao nguyên phủ băng tuyết."
+          }
+         ],
+         "explanation": "Tuy nhiều đồi núi, nhưng đồi núi thấp chiếm ưu thế."
+        },
+        {
+         "key": "huong",
+         "question": "Địa hình nước ta có hai hướng chính nào?",
+         "options": [
+          {
+           "text": "Tây bắc – đông nam và vòng cung",
+           "ok": true,
+           "why": "Đúng. Hai hướng này thể hiện rõ ở các dãy núi và dòng sông."
+          },
+          {
+           "text": "Bắc – nam và đông – tây",
+           "ok": false,
+           "why": "Đây không phải hai hướng chính của địa hình Việt Nam."
+          },
+          {
+           "text": "Đông bắc – tây nam và tây – đông",
+           "ok": false,
+           "why": "Đây không phải hai hướng chính của địa hình Việt Nam."
+          }
+         ],
+         "explanation": "Hướng tây bắc – đông nam (Hoàng Liên Sơn, Trường Sơn Bắc) và hướng vòng cung (vùng núi Đông Bắc)."
+        },
+        {
+         "key": "phan_xi_pang",
+         "question": "Đỉnh Phan-xi-păng, đỉnh núi cao nhất nước ta, thuộc dãy núi nào?",
+         "options": [
+          {
+           "text": "Dãy Hoàng Liên Sơn",
+           "ok": true,
+           "why": "Đúng. Phan-xi-păng thuộc dãy Hoàng Liên Sơn, được gọi là “nóc nhà Đông Dương”."
+          },
+          {
+           "text": "Dãy Trường Sơn",
+           "ok": false,
+           "why": "Trường Sơn chạy dọc miền Trung, không có đỉnh Phan-xi-păng."
+          },
+          {
+           "text": "Dãy Bạch Mã",
+           "ok": false,
+           "why": "Bạch Mã là dãy núi đâm ngang ra biển ở miền Trung."
+          }
+         ],
+         "explanation": "Dãy Hoàng Liên Sơn ở vùng Tây Bắc là dãy núi cao nhất nước ta."
+        },
+        {
+         "key": "dong_bang",
+         "question": "Hai đồng bằng châu thổ lớn nhất nước ta là gì?",
+         "options": [
+          {
+           "text": "Đồng bằng sông Hồng và đồng bằng sông Cửu Long",
+           "ok": true,
+           "why": "Đúng. Cả hai do phù sa các sông lớn bồi đắp."
+          },
+          {
+           "text": "Các đồng bằng ven biển miền Trung",
+           "ok": false,
+           "why": "Đồng bằng ven biển miền Trung nhỏ, hẹp, bị núi chia cắt."
+          },
+          {
+           "text": "Đồng bằng sông Đà và sông Mã",
+           "ok": false,
+           "why": "Sông Đà chảy trong vùng núi, không tạo đồng bằng châu thổ lớn."
+          }
+         ],
+         "explanation": "Đồng bằng sông Cửu Long rộng nhất, sau đó là đồng bằng sông Hồng."
+        },
+        {
+         "key": "cac_xto",
+         "question": "Hang động trong vùng núi đá vôi được hình thành chủ yếu do đâu?",
+         "options": [
+          {
+           "text": "Nước hoà tan đá vôi qua thời gian rất dài",
+           "ok": true,
+           "why": "Đúng. Đó là quá trình hình thành địa hình các-xtơ."
+          },
+          {
+           "text": "Núi lửa phun trào",
+           "ok": false,
+           "why": "Hang động đá vôi không do núi lửa tạo ra."
+          },
+          {
+           "text": "Con người đào để khai thác đá",
+           "ok": false,
+           "why": "Hang động các-xtơ là địa hình tự nhiên."
+          }
+         ],
+         "explanation": "Nước mưa và nước ngầm hoà tan đá vôi, tạo hang động, măng đá, nhũ đá."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "lsdl8.khoang_san",
+     "order": 3,
+     "title": "Khoáng sản Việt Nam",
+     "description": "Các loại khoáng sản chính và vấn đề khai thác hợp lí.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl8.dl_khi_hau_thuy_van",
+   "grade": 8,
+   "order": 6,
+   "title": "Địa lí: Khí hậu và thuỷ văn Việt Nam",
+   "lessons": [
+    {
+     "key": "lsdl8.khi_hau",
+     "order": 1,
+     "title": "Khí hậu nhiệt đới ẩm gió mùa",
+     "description": "Nhiệt độ, lượng mưa, gió mùa và sự phân hoá khí hậu.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl8.bien_doi_khi_hau",
+     "order": 2,
+     "title": "Biến đổi khí hậu ở Việt Nam",
+     "description": "Tác động của biến đổi khí hậu và giải pháp ứng phó.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl8.song_ngoi_vn",
+     "order": 3,
+     "title": "Sông ngòi Việt Nam",
+     "description": "Đặc điểm chung, các hệ thống sông lớn và giá trị của sông ngòi nước ta.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Trình bày được đặc điểm chung của sông ngòi Việt Nam",
+      "Nêu được đặc điểm của một số hệ thống sông lớn",
+      "Nêu được giá trị của sông ngòi với sản xuất và đời sống"
+     ],
+     "summary": [
+      "Mạng lưới sông dày đặc, phần lớn là sông nhỏ, ngắn, dốc.",
+      "Sông chảy theo hai hướng chính: tây bắc – đông nam và vòng cung.",
+      "Chế độ nước có hai mùa: mùa lũ và mùa cạn, theo mùa mưa và mùa khô.",
+      "Sông nhiều nước, nhiều phù sa. Các hệ thống sông lớn: sông Hồng, sông Thái Bình, sông Mê Công (Cửu Long), sông Đồng Nai."
+     ],
+     "examples": [
+      {
+       "title": "Vì sao sông nhiều phù sa?",
+       "lines": [
+        "Đồi núi dốc, mưa lớn tập trung theo mùa.",
+        "Đất đá bị xói mòn mạnh và theo dòng nước chảy ra sông."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Hiểu về sông ngòi",
+       "tasks": [
+        {
+         "key": "he_thong",
+         "prompt": "Ghép mỗi sông với đặc điểm.",
+         "pairs": [
+          [
+           "Sông Hồng",
+           "Nhiều phù sa, bồi đắp đồng bằng lớn ở Bắc Bộ"
+          ],
+          [
+           "Sông Mê Công",
+           "Chảy qua nhiều quốc gia, đổ ra biển bằng nhiều cửa"
+          ],
+          [
+           "Sông Đà",
+           "Lắm thác ghềnh, có nguồn thuỷ năng rất lớn"
+          ],
+          [
+           "Sông Đồng Nai",
+           "Sông lớn ở vùng Đông Nam Bộ"
+          ]
+         ],
+         "explanation": "Mỗi hệ thống sông có đặc điểm riêng, gắn với vùng nó chảy qua.",
+         "left_label": "Sông",
+         "right_label": "Đặc điểm"
+        },
+        {
+         "key": "nguyen_nhan",
+         "prompt": "Ghép mỗi đặc điểm chung của sông ngòi với nguyên nhân.",
+         "pairs": [
+          [
+           "Mạng lưới sông dày đặc",
+           "Mưa nhiều, địa hình nhiều đồi núi bị chia cắt"
+          ],
+          [
+           "Sông có mùa lũ và mùa cạn",
+           "Khí hậu có mùa mưa và mùa khô"
+          ],
+          [
+           "Sông nhiều phù sa",
+           "Đồi núi dốc, mưa lớn gây xói mòn mạnh"
+          ],
+          [
+           "Phần lớn sông chảy hướng tây bắc – đông nam",
+           "Địa hình thấp dần từ tây bắc xuống đông nam"
+          ]
+         ],
+         "explanation": "Đặc điểm của sông ngòi phản ánh khí hậu và địa hình của nước ta.",
+         "left_label": "Đặc điểm",
+         "right_label": "Nguyên nhân"
+        },
+        {
+         "key": "gia_tri",
+         "prompt": "Ghép mỗi giá trị của sông với ví dụ.",
+         "pairs": [
+          [
+           "Thuỷ điện",
+           "Xây nhà máy điện trên những sông nhiều thác ghềnh"
+          ],
+          [
+           "Giao thông",
+           "Vận chuyển hàng bằng ghe, thuyền trên sông, kênh rạch"
+          ],
+          [
+           "Nông nghiệp",
+           "Cung cấp nước tưới và phù sa cho đồng ruộng"
+          ],
+          [
+           "Thuỷ sản",
+           "Nuôi cá, tôm trên sông, hồ"
+          ]
+         ],
+         "explanation": "Sông ngòi có nhiều giá trị; cần sử dụng hợp lí và chống ô nhiễm nguồn nước.",
+         "left_label": "Giá trị",
+         "right_label": "Ví dụ"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "lsdl8.ho_nuoc_ngam",
+     "order": 4,
+     "title": "Hồ, đầm và nước ngầm",
+     "description": "Vai trò của hồ, đầm và nước ngầm.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl8.dl_tho_nhuong",
+   "grade": 8,
+   "order": 7,
+   "title": "Địa lí: Thổ nhưỡng và sinh vật Việt Nam",
+   "lessons": [
+    {
+     "key": "lsdl8.nhom_dat",
+     "order": 1,
+     "title": "Các nhóm đất chính",
+     "description": "Đất feralit, đất phù sa, đất mùn núi cao.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl8.sinh_vat",
+     "order": 2,
+     "title": "Sinh vật và vườn quốc gia",
+     "description": "Sự đa dạng sinh học và việc bảo tồn.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl8.dl_bien_dao",
+   "grade": 8,
+   "order": 8,
+   "title": "Địa lí: Biển đảo Việt Nam",
+   "lessons": [
+    {
+     "key": "lsdl8.vung_bien",
+     "order": 1,
+     "title": "Vùng biển và các đảo, quần đảo của Việt Nam",
+     "description": "Các vùng biển theo Luật Biển và hệ thống đảo.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl8.tai_nguyen_bien",
+     "order": 2,
+     "title": "Tài nguyên và môi trường biển đảo",
+     "description": "Khai thác tài nguyên và bảo vệ môi trường biển.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl9.ls_the_gioi_1918_1945",
+   "grade": 9,
+   "order": 1,
+   "title": "Lịch sử: Thế giới từ năm 1918 đến năm 1945",
+   "lessons": [
+    {
+     "key": "lsdl9.lien_xo",
+     "order": 1,
+     "title": "Nước Nga và Liên Xô từ năm 1918 đến năm 1945",
+     "description": "Công cuộc xây dựng chủ nghĩa xã hội ở Liên Xô.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl9.au_my",
+     "order": 2,
+     "title": "Châu Âu và nước Mỹ từ năm 1918 đến năm 1945",
+     "description": "Khủng hoảng kinh tế và sự hình thành chủ nghĩa phát xít.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl9.chau_a",
+     "order": 3,
+     "title": "Châu Á từ năm 1918 đến năm 1945",
+     "description": "Phong trào độc lập dân tộc ở châu Á.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl9.chien_tranh_tg_2",
+     "order": 4,
+     "title": "Chiến tranh thế giới thứ hai (1939–1945)",
+     "description": "Nguyên nhân, diễn biến chính và hậu quả.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl9.ls_vn_1918_1945",
+   "grade": 9,
+   "order": 2,
+   "title": "Lịch sử: Việt Nam từ năm 1918 đến năm 1945",
+   "lessons": [
+    {
+     "key": "lsdl9.phong_trao_1918_1930",
+     "order": 1,
+     "title": "Phong trào cách mạng Việt Nam từ năm 1918 đến năm 1930",
+     "description": "Hoạt động của Nguyễn Ái Quốc và sự ra đời của Đảng.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl9.phong_trao_1930_1939",
+     "order": 2,
+     "title": "Phong trào cách mạng từ năm 1930 đến năm 1939",
+     "description": "Phong trào 1930–1931 và phong trào dân chủ 1936–1939.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl9.cm_thang_tam",
+     "order": 3,
+     "title": "Cách mạng tháng Tám năm 1945",
+     "description": "Nguyên nhân thắng lợi và ý nghĩa lịch sử.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl9.duong_cuu_nuoc_cm8",
+     "order": 4,
+     "title": "Từ hành trình tìm đường cứu nước đến Cách mạng tháng Tám",
+     "description": "Những mốc lớn của cách mạng Việt Nam từ năm 1911 đến năm 1945.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Sắp xếp được các mốc hoạt động của Nguyễn Ái Quốc và của cách mạng Việt Nam (1911–1945)",
+      "Trình bày được diễn biến chính của Cách mạng tháng Tám năm 1945"
+     ],
+     "summary": [
+      "Ngày 5/6/1911, Nguyễn Tất Thành ra đi tìm đường cứu nước. Năm 1920, Nguyễn Ái Quốc đọc Luận cương của Lê-nin về vấn đề dân tộc và thuộc địa.",
+      "Năm 1925 thành lập Hội Việt Nam Cách mạng Thanh niên; ngày 3/2/1930 thành lập Đảng Cộng sản Việt Nam.",
+      "Năm 1941, Nguyễn Ái Quốc về nước, thành lập Mặt trận Việt Minh (19/5/1941).",
+      "Năm 1945: Nhật đảo chính Pháp (9/3); Nhật đầu hàng Đồng minh (15/8); giành chính quyền ở Hà Nội (19/8), Huế (23/8), Sài Gòn (25/8).",
+      "Ngày 2/9/1945, Chủ tịch Hồ Chí Minh đọc Tuyên ngôn Độc lập, khai sinh nước Việt Nam Dân chủ Cộng hoà."
+     ],
+     "examples": [
+      {
+       "title": "Thời cơ “ngàn năm có một”",
+       "lines": [
+        "Nhật đầu hàng Đồng minh, quân Nhật ở Đông Dương hoang mang.",
+        "Chính quyền thân Nhật tê liệt; nhân dân đã sẵn sàng."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Dòng thời gian cách mạng",
+       "tasks": [
+        {
+         "key": "tim_duong",
+         "prompt": "Xếp các sự kiện theo thời gian, từ sớm đến muộn.",
+         "items": [
+          "Nguyễn Tất Thành ra đi tìm đường cứu nước",
+          "Nguyễn Ái Quốc đọc Luận cương của Lê-nin",
+          "Thành lập Đảng Cộng sản Việt Nam",
+          "Nguyễn Ái Quốc về nước, thành lập Mặt trận Việt Minh",
+          "Cách mạng tháng Tám thành công"
+         ],
+         "explanation": "1911 – 1920 – 1930 – 1941 – 1945.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "nam_1945",
+         "prompt": "Xếp các sự kiện năm 1945 theo thời gian.",
+         "items": [
+          "Nhật đảo chính Pháp",
+          "Nhật đầu hàng Đồng minh",
+          "Giành chính quyền ở Hà Nội",
+          "Giành chính quyền ở Huế",
+          "Giành chính quyền ở Sài Gòn",
+          "Chủ tịch Hồ Chí Minh đọc Tuyên ngôn Độc lập"
+         ],
+         "explanation": "9/3 Nhật đảo chính Pháp; 15/8 Nhật đầu hàng; 19/8 Hà Nội; 23/8 Huế; 25/8 Sài Gòn; 2/9 Tuyên ngôn Độc lập.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "chuan_bi",
+         "prompt": "Xếp các sự kiện trong quá trình chuẩn bị thành lập Đảng theo thời gian.",
+         "items": [
+          "Gửi Bản yêu sách của nhân dân An Nam đến Hội nghị Véc-xai",
+          "Tham gia sáng lập Đảng Cộng sản Pháp",
+          "Thành lập Hội Việt Nam Cách mạng Thanh niên",
+          "Hợp nhất các tổ chức cộng sản thành Đảng Cộng sản Việt Nam"
+         ],
+         "explanation": "1919 Bản yêu sách – 1920 Đảng Cộng sản Pháp – 1925 Hội Việt Nam Cách mạng Thanh niên – 1930 thành lập Đảng.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "phong_trao",
+         "prompt": "Xếp các phong trào, quyết định cách mạng theo thời gian.",
+         "items": [
+          "Phong trào cách mạng 1930–1931, đỉnh cao Xô viết Nghệ – Tĩnh",
+          "Phong trào dân chủ 1936–1939",
+          "Hội nghị Trung ương 8 đặt nhiệm vụ giải phóng dân tộc lên hàng đầu",
+          "Chỉ thị “Nhật – Pháp bắn nhau và hành động của chúng ta”"
+         ],
+         "explanation": "1930–1931 → 1936–1939 → Hội nghị Trung ương 8 (5/1941) → Chỉ thị ngày 12/3/1945.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "lsdl9.ls_the_gioi_1945_nay",
+   "grade": 9,
+   "order": 3,
+   "title": "Lịch sử: Thế giới từ năm 1945 đến nay",
+   "lessons": [
+    {
+     "key": "lsdl9.chien_tranh_lanh",
+     "order": 1,
+     "title": "Chiến tranh lạnh",
+     "description": "Trật tự hai cực và sự đối đầu Đông – Tây.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl9.cac_khu_vuc",
+     "order": 2,
+     "title": "Liên Xô, Đông Âu, Mỹ, Tây Âu, châu Á và Mỹ La-tinh sau 1945",
+     "description": "Những nét chính về các khu vực.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl9.the_gioi_sau_1991",
+     "order": 3,
+     "title": "Thế giới từ năm 1991 đến nay",
+     "description": "Trật tự đa cực và xu thế hội nhập.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl9.cm_khkt",
+     "order": 4,
+     "title": "Cách mạng khoa học – kĩ thuật và toàn cầu hoá",
+     "description": "Thành tựu và tác động.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl9.ls_vn_1945_nay",
+   "grade": 9,
+   "order": 4,
+   "title": "Lịch sử: Việt Nam từ năm 1945 đến nay",
+   "lessons": [
+    {
+     "key": "lsdl9.nam_dau_doc_lap",
+     "order": 1,
+     "title": "Việt Nam trong những năm đầu sau Cách mạng tháng Tám",
+     "description": "Xây dựng chính quyền và bảo vệ thành quả cách mạng.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl9.khang_chien_1945_1975",
+     "order": 2,
+     "title": "Kháng chiến chống Pháp và chống Mỹ (1945–1975)",
+     "description": "Các mốc, chiến dịch và hiệp định tiêu biểu của ba mươi năm chiến tranh giải phóng.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Ghép được sự kiện với thời gian diễn ra",
+      "Nêu được ý nghĩa của các chiến thắng và hiệp định tiêu biểu"
+     ],
+     "summary": [
+      "Ngày 19/12/1946, toàn quốc kháng chiến chống Pháp bùng nổ.",
+      "Chiến dịch Việt Bắc (1947), Biên giới (1950); chiến dịch Điện Biên Phủ toàn thắng ngày 7/5/1954; Hiệp định Giơ-ne-vơ kí ngày 21/7/1954.",
+      "Tháng 12/1972, quân dân miền Bắc đánh thắng cuộc tập kích bằng máy bay B52 (“Điện Biên Phủ trên không”); Hiệp định Pa-ri kí ngày 27/1/1973.",
+      "Chiến dịch Hồ Chí Minh toàn thắng ngày 30/4/1975, giải phóng hoàn toàn miền Nam, thống nhất đất nước."
+     ],
+     "examples": [
+      {
+       "title": "Hai hiệp định",
+       "lines": [
+        "Giơ-ne-vơ (1954): chấm dứt chiến tranh ở Đông Dương, Pháp rút quân.",
+        "Pa-ri (1973): Mỹ cam kết rút quân khỏi miền Nam Việt Nam."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Ba mươi năm kháng chiến",
+       "tasks": [
+        {
+         "key": "ngay",
+         "prompt": "Ghép mỗi sự kiện với thời gian diễn ra.",
+         "pairs": [
+          [
+           "Toàn quốc kháng chiến chống Pháp bùng nổ",
+           "19/12/1946"
+          ],
+          [
+           "Chiến dịch Điện Biên Phủ toàn thắng",
+           "7/5/1954"
+          ],
+          [
+           "Kí Hiệp định Giơ-ne-vơ về Đông Dương",
+           "21/7/1954"
+          ],
+          [
+           "Kí Hiệp định Pa-ri về Việt Nam",
+           "27/1/1973"
+          ],
+          [
+           "Giải phóng hoàn toàn miền Nam",
+           "30/4/1975"
+          ]
+         ],
+         "explanation": "Năm mốc lớn của kháng chiến chống Pháp và chống Mỹ.",
+         "left_label": "Sự kiện",
+         "right_label": "Thời gian"
+        },
+        {
+         "key": "chien_dich",
+         "prompt": "Ghép mỗi chiến dịch, trận đánh với năm diễn ra.",
+         "pairs": [
+          [
+           "Chiến dịch Việt Bắc thu – đông",
+           "1947"
+          ],
+          [
+           "Chiến dịch Biên giới thu – đông",
+           "1950"
+          ],
+          [
+           "Chiến dịch Điện Biên Phủ",
+           "1954"
+          ],
+          [
+           "Trận “Điện Biên Phủ trên không”",
+           "1972"
+          ],
+          [
+           "Chiến dịch Hồ Chí Minh",
+           "1975"
+          ]
+         ],
+         "explanation": "1947 Việt Bắc – 1950 Biên giới – 1954 Điện Biên Phủ – 1972 “Điện Biên Phủ trên không” – 1975 Chiến dịch Hồ Chí Minh.",
+         "left_label": "Chiến dịch",
+         "right_label": "Năm"
+        },
+        {
+         "key": "y_nghia",
+         "prompt": "Ghép mỗi sự kiện với ý nghĩa.",
+         "pairs": [
+          [
+           "Chiến dịch Biên giới 1950",
+           "Ta giành thế chủ động trên chiến trường chính Bắc Bộ"
+          ],
+          [
+           "Chiến thắng Điện Biên Phủ",
+           "Buộc Pháp kí Hiệp định Giơ-ne-vơ, chấm dứt chiến tranh ở Đông Dương"
+          ],
+          [
+           "Hiệp định Pa-ri",
+           "Mỹ cam kết rút hết quân khỏi miền Nam Việt Nam"
+          ],
+          [
+           "Chiến dịch Hồ Chí Minh",
+           "Kết thúc kháng chiến chống Mỹ, thống nhất đất nước"
+          ]
+         ],
+         "explanation": "Mỗi thắng lợi tạo điều kiện cho bước phát triển tiếp theo của cuộc kháng chiến.",
+         "left_label": "Sự kiện",
+         "right_label": "Ý nghĩa"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "lsdl9.thong_nhat_doi_moi",
+     "order": 3,
+     "title": "Việt Nam từ năm 1976 đến năm 1991",
+     "description": "Thống nhất đất nước, bảo vệ biên giới và bước đầu Đổi mới.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl9.vn_tu_1991",
+     "order": 4,
+     "title": "Việt Nam từ năm 1991 đến nay",
+     "description": "Thành tựu của công cuộc Đổi mới và hội nhập quốc tế.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl9.dl_dan_cu",
+   "grade": 9,
+   "order": 5,
+   "title": "Địa lí: Dân cư Việt Nam",
+   "lessons": [
+    {
+     "key": "lsdl9.dan_toc_dan_so",
+     "order": 1,
+     "title": "Dân tộc, dân số và phân bố dân cư",
+     "description": "54 dân tộc, quy mô dân số, mật độ và sự phân bố dân cư nước ta.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được thành phần dân tộc và quy mô dân số nước ta",
+      "Tính được mật độ dân số",
+      "Trình bày được sự phân bố dân cư"
+     ],
+     "summary": [
+      "Nước ta có 54 dân tộc; dân tộc Kinh (Việt) chiếm khoảng 85% dân số.",
+      "Năm 2023, dân số nước ta đạt khoảng 100 triệu người.",
+      "Mật độ dân số = số dân : diện tích (người/km²).",
+      "Dân cư đông đúc ở đồng bằng, ven biển và đô thị; thưa thớt ở miền núi. Cơ cấu dân số đang già đi."
+     ],
+     "examples": [
+      {
+       "title": "Tính mật độ dân số",
+       "lines": [
+        "Vùng có 3 triệu người, diện tích 15 000 km².",
+        "3 000 000 : 15 000 = 200 người/km²."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Dân cư Việt Nam",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "so_dan_toc",
+         "question": "Nước ta có bao nhiêu dân tộc?",
+         "options": [
+          {
+           "text": "54 dân tộc",
+           "ok": true,
+           "why": "Đúng. Việt Nam có 54 dân tộc anh em."
+          },
+          {
+           "text": "34 dân tộc",
+           "ok": false,
+           "why": "34 là số tỉnh, thành phố từ năm 2025, không phải số dân tộc."
+          },
+          {
+           "text": "64 dân tộc",
+           "ok": false,
+           "why": "Nước ta có 54 dân tộc."
+          }
+         ],
+         "explanation": "54 dân tộc cùng chung sống, đoàn kết xây dựng đất nước."
+        },
+        {
+         "key": "kinh",
+         "question": "Dân tộc nào có số dân đông nhất ở nước ta?",
+         "options": [
+          {
+           "text": "Dân tộc Kinh (Việt)",
+           "ok": true,
+           "why": "Đúng. Người Kinh chiếm khoảng 85% dân số."
+          },
+          {
+           "text": "Dân tộc Tày",
+           "ok": false,
+           "why": "Tày là một trong những dân tộc thiểu số đông dân, nhưng ít hơn nhiều so với người Kinh."
+          },
+          {
+           "text": "Dân tộc Khơ-me",
+           "ok": false,
+           "why": "Người Khơ-me sống nhiều ở Nam Bộ, số dân ít hơn người Kinh rất nhiều."
+          }
+         ],
+         "explanation": "Dân tộc Kinh chiếm khoảng 85% dân số; các dân tộc thiểu số chiếm khoảng 15%."
+        },
+        {
+         "key": "quy_mo",
+         "question": "Năm 2023, dân số nước ta vào khoảng bao nhiêu?",
+         "options": [
+          {
+           "text": "Khoảng 100 triệu người",
+           "ok": true,
+           "why": "Đúng. Năm 2023, dân số Việt Nam đạt mốc khoảng 100 triệu người."
+          },
+          {
+           "text": "Khoảng 50 triệu người",
+           "ok": false,
+           "why": "Con số này thấp hơn dân số năm 1979 (khoảng 52,7 triệu)."
+          },
+          {
+           "text": "Khoảng 200 triệu người",
+           "ok": false,
+           "why": "Con số này gấp đôi dân số thực tế."
+          }
+         ],
+         "explanation": "Việt Nam là nước đông dân, đứng thứ ba ở Đông Nam Á."
+        },
+        {
+         "key": "mat_do",
+         "passage": "Một vùng có số dân 2 000 000 người, diện tích 10 000 km².",
+         "question": "Mật độ dân số của vùng là bao nhiêu?",
+         "options": [
+          {
+           "text": "200 người/km²",
+           "ok": true,
+           "why": "Đúng. 2 000 000 : 10 000 = 200 người/km²."
+          },
+          {
+           "text": "20 người/km²",
+           "ok": false,
+           "why": "Kiểm tra lại phép chia: 2 000 000 : 10 000 = 200."
+          },
+          {
+           "text": "2000 người/km²",
+           "ok": false,
+           "why": "Kiểm tra lại phép chia: 2 000 000 : 10 000 = 200."
+          }
+         ],
+         "explanation": "Mật độ dân số = số dân : diện tích."
+        },
+        {
+         "key": "phan_bo",
+         "question": "Dân cư nước ta phân bố như thế nào?",
+         "options": [
+          {
+           "text": "Đông ở đồng bằng, ven biển, đô thị; thưa ở miền núi",
+           "ok": true,
+           "why": "Đúng. Đồng bằng có điều kiện sống và sản xuất thuận lợi hơn."
+          },
+          {
+           "text": "Đều khắp mọi nơi",
+           "ok": false,
+           "why": "Dân cư phân bố không đều giữa đồng bằng và miền núi."
+          },
+          {
+           "text": "Đông ở miền núi, thưa ở đồng bằng",
+           "ok": false,
+           "why": "Ngược lại: miền núi dân cư thưa thớt hơn."
+          }
+         ],
+         "explanation": "Dân cư phân bố không đều: đông ở đồng bằng, thưa ở miền núi; còn nhiều người sống ở nông thôn."
+        },
+        {
+         "key": "gia_hoa",
+         "question": "Cơ cấu dân số theo tuổi của nước ta đang thay đổi theo xu hướng nào?",
+         "options": [
+          {
+           "text": "Già đi: tỉ lệ người cao tuổi tăng",
+           "ok": true,
+           "why": "Đúng. Tỉ lệ trẻ em giảm, tỉ lệ người cao tuổi tăng."
+          },
+          {
+           "text": "Trẻ lại: tỉ lệ trẻ em tăng nhanh",
+           "ok": false,
+           "why": "Tỉ lệ sinh giảm nên tỉ lệ trẻ em đang giảm."
+          },
+          {
+           "text": "Không thay đổi",
+           "ok": false,
+           "why": "Cơ cấu dân số đang thay đổi rõ rệt."
+          }
+         ],
+         "explanation": "Nước ta đang trong thời kì cơ cấu dân số vàng nhưng dân số đang già đi."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "lsdl9.lao_dong",
+     "order": 2,
+     "title": "Lao động, việc làm và chất lượng cuộc sống",
+     "description": "Nguồn lao động và vấn đề việc làm.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl9.do_thi_hoa",
+     "order": 3,
+     "title": "Đô thị hoá",
+     "description": "Quá trình đô thị hoá và các đô thị lớn.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl9.dl_nganh_kinh_te",
+   "grade": 9,
+   "order": 6,
+   "title": "Địa lí: Các ngành kinh tế",
+   "lessons": [
+    {
+     "key": "lsdl9.nong_nghiep",
+     "order": 1,
+     "title": "Nông nghiệp, lâm nghiệp và thuỷ sản",
+     "description": "Các nhân tố ảnh hưởng và sự phân bố.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl9.cong_nghiep",
+     "order": 2,
+     "title": "Công nghiệp",
+     "description": "Các ngành công nghiệp chính và sự phân bố.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl9.dich_vu",
+     "order": 3,
+     "title": "Dịch vụ",
+     "description": "Giao thông vận tải, bưu chính viễn thông, thương mại và du lịch.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "lsdl9.dl_vung",
+   "grade": 9,
+   "order": 7,
+   "title": "Địa lí: Sự phân hoá lãnh thổ",
+   "lessons": [
+    {
+     "key": "lsdl9.vung_tdmnbb",
+     "order": 1,
+     "title": "Vùng Trung du và miền núi Bắc Bộ",
+     "description": "Thế mạnh về thuỷ điện, khoáng sản và cây công nghiệp.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl9.vung_dbsh",
+     "order": 2,
+     "title": "Vùng Đồng bằng sông Hồng",
+     "description": "Vùng đông dân, nông nghiệp thâm canh và công nghiệp phát triển.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl9.vung_btb",
+     "order": 3,
+     "title": "Vùng Bắc Trung Bộ",
+     "description": "Thiên nhiên khắc nghiệt và thế mạnh kinh tế biển.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl9.vung_dhntb",
+     "order": 4,
+     "title": "Vùng Duyên hải Nam Trung Bộ",
+     "description": "Kinh tế biển, du lịch và cảng biển.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl9.vung_tay_nguyen",
+     "order": 5,
+     "title": "Vùng Tây Nguyên",
+     "description": "Cây công nghiệp, thuỷ điện và bảo vệ rừng.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl9.vung_dnb",
+     "order": 6,
+     "title": "Vùng Đông Nam Bộ",
+     "description": "Vùng kinh tế phát triển năng động nhất.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl9.vung_dbscl",
+     "order": 7,
+     "title": "Vùng Đồng bằng sông Cửu Long",
+     "description": "Vựa lúa, thuỷ sản và thích ứng với biến đổi khí hậu.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "lsdl9.the_manh_vung",
+     "order": 8,
+     "title": "Thế mạnh và hạn chế của các vùng",
+     "description": "Ghép mỗi vùng với thế mạnh, khó khăn và đặc điểm tự nhiên nổi bật.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được thế mạnh nổi bật của các vùng",
+      "Nhận biết khó khăn về tự nhiên của từng vùng"
+     ],
+     "summary": [
+      "Trung du và miền núi Bắc Bộ: thuỷ điện, khoáng sản, cây chè; địa hình hiểm trở.",
+      "Đồng bằng sông Hồng: mật độ dân số cao nhất, thâm canh lúa, hệ thống đê ven sông.",
+      "Tây Nguyên: cao nguyên xếp tầng, đất đỏ ba dan, trồng cà phê; mùa khô kéo dài.",
+      "Đông Nam Bộ: công nghiệp và dịch vụ phát triển hàng đầu cả nước.",
+      "Đồng bằng sông Cửu Long: vùng trọng điểm lúa và thuỷ sản lớn nhất; đất phèn, đất mặn, xâm nhập mặn."
+     ],
+     "examples": [
+      {
+       "title": "Cách học vùng",
+       "lines": [
+        "Mỗi vùng: vị trí → tự nhiên → dân cư → kinh tế.",
+        "Thế mạnh và khó khăn đều đến từ đặc điểm tự nhiên, dân cư."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Các vùng kinh tế",
+       "tasks": [
+        {
+         "key": "the_manh",
+         "prompt": "Ghép mỗi vùng với thế mạnh nổi bật.",
+         "pairs": [
+          [
+           "Trung du và miền núi Bắc Bộ",
+           "Thuỷ điện, khoáng sản, cây chè"
+          ],
+          [
+           "Đồng bằng sông Hồng",
+           "Mật độ dân số cao nhất, thâm canh lúa"
+          ],
+          [
+           "Tây Nguyên",
+           "Cà phê trên đất đỏ ba dan"
+          ],
+          [
+           "Đông Nam Bộ",
+           "Công nghiệp, dịch vụ phát triển hàng đầu"
+          ],
+          [
+           "Đồng bằng sông Cửu Long",
+           "Vùng trọng điểm lúa và thuỷ sản lớn nhất"
+          ]
+         ],
+         "explanation": "Mỗi vùng có thế mạnh riêng từ điều kiện tự nhiên và dân cư.",
+         "left_label": "Vùng",
+         "right_label": "Thế mạnh"
+        },
+        {
+         "key": "kho_khan",
+         "prompt": "Ghép mỗi vùng với khó khăn về tự nhiên.",
+         "pairs": [
+          [
+           "Trung du và miền núi Bắc Bộ",
+           "Địa hình hiểm trở, giao thông khó khăn"
+          ],
+          [
+           "Bắc Trung Bộ",
+           "Gió phơn tây nam khô nóng, bão lũ"
+          ],
+          [
+           "Tây Nguyên",
+           "Mùa khô kéo dài, thiếu nước"
+          ],
+          [
+           "Đồng bằng sông Cửu Long",
+           "Đất phèn, đất mặn, xâm nhập mặn"
+          ]
+         ],
+         "explanation": "Biết khó khăn để có giải pháp: thuỷ lợi, trồng rừng, chuyển đổi cây trồng thích ứng.",
+         "left_label": "Vùng",
+         "right_label": "Khó khăn"
+        },
+        {
+         "key": "tu_nhien",
+         "prompt": "Ghép mỗi vùng với đặc điểm tự nhiên.",
+         "pairs": [
+          [
+           "Tây Nguyên",
+           "Các cao nguyên xếp tầng"
+          ],
+          [
+           "Đồng bằng sông Hồng",
+           "Hệ thống đê dọc sông Hồng, sông Thái Bình"
+          ],
+          [
+           "Duyên hải Nam Trung Bộ",
+           "Bờ biển khúc khuỷu, nhiều vũng vịnh nước sâu"
+          ],
+          [
+           "Đồng bằng sông Cửu Long",
+           "Sông Tiền, sông Hậu và kênh rạch chằng chịt"
+          ]
+         ],
+         "explanation": "Đặc điểm tự nhiên giúp nhận ra mỗi vùng trên bản đồ.",
+         "left_label": "Vùng",
+         "right_label": "Đặc điểm"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "lsdl9.dl_kinh_te_bien",
+   "grade": 9,
+   "order": 8,
+   "title": "Địa lí: Phát triển tổng hợp kinh tế biển",
+   "lessons": [
+    {
+     "key": "lsdl9.kinh_te_bien",
+     "order": 1,
+     "title": "Kinh tế biển và bảo vệ chủ quyền biển đảo",
+     "description": "Các ngành kinh tế biển và bảo vệ tài nguyên, môi trường biển đảo.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  }
+ ]
+}

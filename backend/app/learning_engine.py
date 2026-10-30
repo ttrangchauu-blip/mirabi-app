@@ -27,6 +27,15 @@ WRONG_POLICY = {
     "gate_choice": "reveal",
     "bridge_order": "reveal",
     "compare": "reveal",
+    # Curriculum games (curriculum_games.py): a wrong answer is explained and fixed, never revealed or lost.
+    "word_build": "retry",
+    "spell_fix": "retry",
+    "sort_card": "retry",
+    "code_path": "retry",
+    # Lesson games (lesson_catalog.py): the same, with the reason for a wrong answer.
+    "order_steps": "retry",
+    "match_pairs": "retry",
+    "choice_explain": "retry",
 }
 # Kinds whose wrong answers cost a heart in Challenge. For moving targets (meteor, monster) only a miss does.
 # In Học tập targets never land, so every wrong answer costs a heart.
@@ -67,9 +76,17 @@ def default_variant(game_type: str, variant: str | None) -> str | None:
     return None
 
 
+# The vocabulary games (falling words, Anh → Việt and Việt → Anh), in both modes. Every stage has VOCAB_STAGE_WORDS
+# different words. They fall to the ground; a word that lands unbroken costs one of VOCAB_HEARTS hearts (a wrong answer
+# costs none: it is fixed while the word falls). Out of hearts, the stage ends. The app's guide says the same numbers
+# (mobile learning/tutorials.ts VOCAB_HEARTS, VOCAB_STAGE_WORDS): keep them in step.
+VOCAB_STAGE_WORDS = 15
+VOCAB_HEARTS = 5
+
+
 def hearts_for(game_type: str, mode: str) -> int:
-    """Vocabulary in Học tập: each word waits for the user and nothing costs a heart. Everything else has 3."""
-    return 0 if game_type == "meteor" and mode == "practice" else DEFAULT_SCORING["hearts"]
+    """Vocabulary: VOCAB_HEARTS, lost only by words that land. Everything else has 3."""
+    return VOCAB_HEARTS if game_type == "meteor" else DEFAULT_SCORING["hearts"]
 
 DEFAULT_SCORING = {
     "first_try": 100,
@@ -328,6 +345,24 @@ def _arith(rng: random.Random, op: str, g: dict) -> tuple[Op, int]:
     neg = g.get("allow_negative", False)
     top = g["add_max"]
     lo_mul, hi_mul = g.get("mul_min", 2), g.get("mul_max", 9)
+    # A lesson on one times table ("Bảng nhân 2", "Bảng chia 5"): table × 1…10, and (table × k) : table.
+    table = g.get("table")
+    if table and op == "mul":
+        k = rng.randint(*g.get("table_range", (1, 10)))
+        return Op("mul", Num(table), Num(k)), table * k
+    if table and op == "div":
+        k = rng.randint(*g.get("table_range", (1, 10)))
+        return Op("div", Num(table * k), Num(table)), k
+    if g.get("no_carry") and op in ("add", "sub"):  # cộng, trừ không nhớ: digit by digit, nothing carried or borrowed
+        for _ in range(200):
+            a, b = rng.randint(1, top - 1), rng.randint(1, top - 1)
+            if op == "sub" and a < b:
+                a, b = b, a
+            da, db = f"{a:0{len(str(top))}d}", f"{b:0{len(str(top))}d}"
+            if op == "add" and a + b <= top and all(int(x) + int(y) <= 9 for x, y in zip(da, db)):
+                return Op("add", Num(a), Num(b)), a + b
+            if op == "sub" and a > b and all(int(x) >= int(y) for x, y in zip(da, db)):
+                return Op("sub", Num(a), Num(b)), a - b
     if op == "add":
         a = _rand(rng, 1, top - 1, neg)
         b = _rand(rng, 1, top - abs(a) if not neg else top, neg)
@@ -498,9 +533,13 @@ def gen_missing_number(rng: random.Random, g: dict, op: str) -> dict:
         c = a - b
     elif op == "mul":
         a, b = rng.randint(lo_mul, hi_mul), rng.randint(lo_mul, hi_mul)  # never 0, so the factor is unique
+        if g.get("table"):  # one times table: table × k, the unknown being k (the table stays shown)
+            a, b, slot = g["table"], rng.randint(*g.get("table_range", (1, 10))), 1
         c = a * b
     else:
         b, c = rng.randint(lo_mul, hi_mul), rng.randint(lo_mul, hi_mul)
+        if g.get("table"):  # (table × k) : table = k, the unknown being the dividend
+            b, c, slot = g["table"], rng.randint(*g.get("table_range", (1, 10))), 0
         a = b * c
     unknown = a if slot == 0 else b
     shown, solve = MISSING_TEMPLATES[op][slot]

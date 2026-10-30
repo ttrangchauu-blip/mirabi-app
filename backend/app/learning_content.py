@@ -14,14 +14,17 @@ import logging
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from . import curriculum_games as cg
 from . import learning_grammar_bank as grammar_bank
+from . import lesson_catalog as lc
 from .learning_vocab import import_bundled
 from .models import (LearningLesson, LearningLessonVersion, LearningLevel, LearningQuestion, LearningSubject,
                      LearningTopic, LearningVocabItem)
 
 log = logging.getLogger("refmi.learning")
 
-SUBJECTS = [("english", "Tiếng Anh", 0), ("math", "Toán", 1)]
+SUBJECTS = [("english", "Tiếng Anh", 0), ("math", "Toán", 1), ("vietnamese", "Tiếng Việt", 2),
+            ("science", "Tự nhiên và Khoa học", 3), ("informatics", "Tin học", 4)]
 
 LEVELS = {
     # Vocabulary has no level to pick: it starts at A1 and follows the user's results (learning_vocab.working_level).
@@ -218,6 +221,48 @@ def grammar_bank_lesson() -> dict:
             "vocab": [], "questions": []}
 
 
+# ---------------------------------------------------------------------------------------------------------------
+# Curriculum games (Tiếng Việt, Tự nhiên và Xã hội / Khoa học, Tin học): reviewed content in app/data/curriculum,
+# one lesson per game and grade (Lập trình đường đi: per level). A content change publishes a new lesson version.
+# ---------------------------------------------------------------------------------------------------------------
+
+CURRICULUM_SUBJECT = {"word_builder": "vietnamese", "spelling_detective": "vietnamese", "sorting": "science",
+                      "code_path": "informatics"}
+CURRICULUM_TOPICS = {
+    "vietnamese": [("ghep_chu", "Ghép chữ", "word_building", "Ghép chữ cái, tiếng thành từ theo hình"),
+                   ("chinh_ta", "Chính tả", "spelling", "Tìm và sửa tiếng viết sai chính tả")],
+    "science": [("phan_loai", "Phân loại", "classification", "Xếp sự vật vào đúng nhóm")],
+    "informatics": [("lap_trinh", "Lập trình đường đi", "programming", "Xếp lệnh để đưa pet tới đích")],
+}
+CURRICULUM_TOPIC = {"word_builder": "ghep_chu", "spelling_detective": "chinh_ta", "sorting": "phan_loai", "code_path": "lap_trinh"}
+CURRICULUM_TITLE = {"word_builder": "Ghép chữ", "spelling_detective": "Thám tử chính tả", "sorting": "Phân loại cùng pet",
+                    "code_path": "Lập trình đường đi"}
+LEVELS.update({
+    "vietnamese": [(f"g{g}", f"Lớp {g}", None) for g in range(1, 6)],
+    "science": [(f"g{g}", f"Lớp {g}", None) for g in range(1, 6)],
+    "informatics": [("basic", "Cơ bản", "Lớp 3–5: tiến và rẽ"), ("intermediate", "Trung cấp", "Lớp 6–9: thêm khối Lặp lại"),
+                    ("advanced", "Nâng cao", "Lớp 10–12: chương trình ngắn gọn")],
+})
+TOPICS.update(CURRICULUM_TOPICS)
+
+
+def curriculum_lessons(subject: str) -> list[dict]:
+    lessons = []
+    for game, owner in CURRICULUM_SUBJECT.items():
+        if owner != subject:
+            continue
+        for band in cg.lesson_bands(game):
+            level = band if isinstance(band, str) else f"g{band}"
+            lessons.append({"code": cg.lesson_code(game, band), "topic": CURRICULUM_TOPIC[game], "level": level,
+                            "title": CURRICULUM_TITLE[game],
+                            "intro": {"kind": "guide", "title": CURRICULUM_TITLE[game]},
+                            "game": {"game_type": game, "turns": cg.STAGE_TURNS[game], "travel_seconds": 0,
+                                     "max_targets": {"practice": 1, "challenge": 1},
+                                     "generator": {"curriculum": game, "band": band, "content": cg.bank_hash(game)}},
+                            "vocab": [], "questions": []})
+    return lessons
+
+
 def lesson_definitions() -> dict[str, list[dict]]:
     english = [
         bank_lesson("en.vocab.mix", "vocab_mix", "Từ vựng tổng hợp", None),
@@ -230,22 +275,57 @@ def lesson_definitions() -> dict[str, list[dict]]:
     math = [{"code": f"math.{topic}.{level}", "topic": topic, "level": level, "title": title, "intro": intro,
              "game": _game(game_type, travel, generator=generator), "vocab": [], "questions": []}
             for topic, level, title, intro, game_type, travel, generator in MATH_LESSONS]
-    return {"english": english, "math": math}
+    return {"english": english, "math": math, **{code: curriculum_lessons(code) for code in ("vietnamese", "science", "informatics")}}
+
+
+# ---------------------------------------------------------------------------------------------------------------
+# Học tập by lesson (lesson_catalog.py): every game of a ready lesson is a lesson here ("cat.<lesson>.<game>"), in the
+# subject's chapter (topic) and grade (level g1–g12). A lesson that is no longer ready, or a game it no longer publishes,
+# is retired: its sessions and results stay, no new stage starts.
+# ---------------------------------------------------------------------------------------------------------------
+
+def catalog_subject_name(code: str) -> str:
+    names: list[str] = []
+    for offer in lc.subject_meta(code)["offers"]:
+        if offer["name"] not in names:
+            names.append(offer["name"])
+    return " / ".join(names)[:60]
+
+
+def catalog_definitions() -> dict[str, dict]:
+    """subject -> {"levels", "topics", "lessons"} of the lesson catalog."""
+    out: dict[str, dict] = {}
+    for code, data in lc.catalog()["subjects"].items():
+        grades = sorted({c["grade"] for c in data["chapters"]})
+        topics = [(c["key"], c["title"][:80], "lesson", None) for g in grades for c in lc.chapters(code, g)]
+        lessons = []
+        for chapter_key, *_ in topics:
+            for entry in (lc.lesson(lsn["key"]) for c in data["chapters"] if c["key"] == chapter_key for lsn in c["lessons"]):
+                if entry["lesson"]["status"] != "ready":
+                    continue
+                for spec in entry["lesson"]["games"]:
+                    lessons.append({"code": lc.lesson_code(entry["lesson"]["key"], spec["game"]), "topic": chapter_key,
+                                    "level": f"g{entry['grade']}", "title": f"{entry['lesson']['title']} · {spec['title']}"[:120],
+                                    "intro": lc.intro(entry, spec), "game": lc.game_config(entry, spec), "vocab": [], "questions": []})
+        out[code] = {"levels": [(f"g{g}", f"Lớp {g}", None) for g in grades], "topics": topics, "lessons": lessons}
+    return out
 
 
 def content_hash(lesson: dict) -> str:
     return hashlib.sha256(json.dumps(lesson, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
 
 
-def _upsert(db: Session, model, where: dict, values: dict):
-    row = db.scalar(select(model).filter_by(**where))
+def _sync(db: Session, rows: dict, key, model, where: dict, values: dict):
+    """Create or update a row against rows already read (`rows`, by their natural key); a new row is added, not flushed."""
+    row = rows.get(key)
     if row is None:
         row = model(**where, **values)
         db.add(row)
-        db.flush()
+        rows[key] = row
     else:
-        for key, value in values.items():
-            setattr(row, key, value)
+        for name, value in values.items():
+            if getattr(row, name) != value:
+                setattr(row, name, value)
     return row
 
 
@@ -285,27 +365,69 @@ def seed_learning_content(db: Session) -> int:
         grammar_bank.record_release(db, bank)
     published = 0
     definitions = lesson_definitions()
-    for code, name, order in SUBJECTS:
-        subject = _upsert(db, LearningSubject, {"code": code}, {"name": name, "sort_order": order})
-        levels = {lcode: _upsert(db, LearningLevel, {"subject_id": subject.id, "code": lcode},
-                                 {"name": lname, "description": ldesc, "sort_order": i})
-                  for i, (lcode, lname, ldesc) in enumerate(LEVELS[code])}
-        topics = {tcode: _upsert(db, LearningTopic, {"subject_id": subject.id, "code": tcode},
-                                 {"name": tname, "skill_type": skill, "description": tdesc, "sort_order": i})
-                  for i, (tcode, tname, skill, tdesc) in enumerate(TOPICS[code])}
-        for i, definition in enumerate(definitions[code]):
-            lesson = _upsert(db, LearningLesson, {"code": definition["code"]},
-                             {"topic_id": topics[definition["topic"]].id, "level_id": levels[definition["level"]].id,
-                              "title": definition["title"], "sort_order": i})
-            current = db.scalar(select(LearningLessonVersion).where(
-                LearningLessonVersion.lesson_id == lesson.id, LearningLessonVersion.version == lesson.current_version))
-            if current is not None and current.content_hash == content_hash(definition):
+    subjects = list(SUBJECTS)
+    levels_of, topics_of = dict(LEVELS), dict(TOPICS)
+    catalog = catalog_definitions()
+    known = {code for code, _, _ in SUBJECTS}
+    for i, meta in enumerate(lc.programme()["subjects"]):
+        code = meta["code"]
+        if code not in catalog:
+            continue
+        if code not in known:
+            subjects.append((code, catalog_subject_name(code), 10 + i))
+        have = {lcode for lcode, *_ in levels_of.get(code, [])}
+        levels_of[code] = [*levels_of.get(code, []), *[lv for lv in catalog[code]["levels"] if lv[0] not in have]]
+        topics_of[code] = [*topics_of.get(code, []), *catalog[code]["topics"]]
+        definitions[code] = [*definitions.get(code, []), *catalog[code]["lessons"]]
+    published_codes = {d["code"] for lessons in definitions.values() for d in lessons}
+    # Hundreds of lessons: every existing row is read once and new rows are flushed together, never one query per row.
+    have_subjects = {r.code: r for r in db.scalars(select(LearningSubject))}
+    for code, name, order in subjects:
+        _sync(db, have_subjects, code, LearningSubject, {"code": code}, {"name": name, "sort_order": order})
+    db.flush()
+    have_levels = {(r.subject_id, r.code): r for r in db.scalars(select(LearningLevel))}
+    have_topics = {(r.subject_id, r.code): r for r in db.scalars(select(LearningTopic))}
+    for code, _, _ in subjects:
+        sid = have_subjects[code].id
+        for i, (lcode, lname, ldesc) in enumerate(levels_of[code]):
+            _sync(db, have_levels, (sid, lcode), LearningLevel, {"subject_id": sid, "code": lcode},
+                  {"name": lname, "description": ldesc, "sort_order": i})
+        for i, (tcode, tname, skill, tdesc) in enumerate(topics_of[code]):
+            _sync(db, have_topics, (sid, tcode), LearningTopic, {"subject_id": sid, "code": tcode},
+                  {"name": tname, "skill_type": skill, "description": tdesc, "sort_order": i})
+    db.flush()
+    have_lessons = {r.code: r for r in db.scalars(select(LearningLesson))}
+    for code, _, _ in subjects:
+        sid = have_subjects[code].id
+        for i, definition in enumerate(definitions.get(code, [])):
+            _sync(db, have_lessons, definition["code"], LearningLesson, {"code": definition["code"]},
+                  {"topic_id": have_topics[(sid, definition["topic"])].id, "level_id": have_levels[(sid, definition["level"])].id,
+                   "title": definition["title"], "sort_order": i, "status": "published"})
+    db.flush()
+    hashes = {(lid, v): h for lid, v, h in db.execute(select(LearningLessonVersion.lesson_id, LearningLessonVersion.version,
+                                                             LearningLessonVersion.content_hash))}
+    latest: dict[int, int] = {}
+    for lid, v in hashes:
+        latest[lid] = max(latest.get(lid, 0), v)
+    for code, _, _ in subjects:
+        for definition in definitions.get(code, []):
+            lesson = have_lessons[definition["code"]]
+            digest = content_hash(definition)
+            if hashes.get((lesson.id, lesson.current_version)) == digest:
                 continue
-            latest = db.scalar(select(LearningLessonVersion.version).where(LearningLessonVersion.lesson_id == lesson.id)
-                               .order_by(LearningLessonVersion.version.desc()).limit(1)) or 0
-            publish_version(db, lesson, definition, latest + 1)
-            lesson.current_version = latest + 1
+            version = latest.get(lesson.id, 0) + 1
+            if definition["vocab"] or definition["questions"]:
+                publish_version(db, lesson, definition, version)
+            else:  # most lessons hold only their settings: no item rows, so no flush is needed per lesson
+                db.add(LearningLessonVersion(lesson_id=lesson.id, version=version, content_hash=digest,
+                                             intro_json=json.dumps(definition["intro"], ensure_ascii=False),
+                                             game_config_json=json.dumps(definition["game"], ensure_ascii=False)))
+            lesson.current_version = version
             published += 1
+    for retired in db.scalars(select(LearningLesson).where(LearningLesson.code.startswith("cat."),
+                                                         LearningLesson.status == "published")):
+        if retired.code not in published_codes:
+            retired.status = "retired"
     db.flush()
     if published:
         log.info("Published %d learning lesson version(s)", published)

@@ -88,8 +88,9 @@ def test_each_sense_is_its_own_entry_and_only_answers_without_help_count_as_righ
 
     cold = detail(client, mai, "cold.weather")
     assert cold["status"] == "review" and cold["directions"]["vi_en"]["wrong"] == 1 and cold["correct"] == 0
-    assert [a["outcome"] for a in cold["attempts"]] == ["first_try", "revealed"]  # newest first
-    assert [a["practice"] for a in cold["attempts"]] == [True, False]  # the re-practice is shown, never counted
+    # A vocabulary stage plays each word once: a revealed word is not asked again there (it is on the review list).
+    assert [a["outcome"] for a in cold["attempts"]] == ["revealed"]
+    assert [a["practice"] for a in cold["attempts"]] == [False]
     assert cold["phonetic"] and cold["example_en"] and cold["can_practice"]  # from the bank
 
 

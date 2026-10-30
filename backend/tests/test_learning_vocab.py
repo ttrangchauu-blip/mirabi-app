@@ -32,7 +32,9 @@ def test_bundled_bank_is_valid_and_large_enough():
     # Nothing with a quality issue is ever active.
     assert not [r.key for r in active if report.issues.get(r.key)]
     words = {normalize_text(r.word) for r in active}
-    assert len(words) >= 10000, f"{len(words)} unique active words"
+    # Reviewed words only: the dictionary import with placeholder contexts (and wrong meanings) is never served.
+    assert len(words) >= 8000, f"{len(words)} unique active words"
+    assert not [r.key for r in active if r.context_vi and r.context_vi.startswith("Dùng trong ngữ cảnh")]
     topics = Counter(r.topic for r in active)
     assert len(topics) >= 30 and set(topics) <= TOPIC_CODES
     assert set(r.difficulty for r in active) == set(DIFFICULTIES)
@@ -101,6 +103,39 @@ def test_duplicates_are_dropped_and_doubtful_rows_stay_drafts(tmp_path):
     rows, report = check([tsv(tmp_path, row(key="big", word="big", pos="adjective", meaning="to, lớn", example="A big house.", accepted="large"),
                               row(key="large", word="large", pos="adjective", meaning="to, lớn", example="A large house.", accepted="big"))])
     assert len(rows) == 2 and not report.issues
+
+
+def test_a_meaning_another_word_also_has_needs_a_context_and_imported_contexts_do_not_count(tmp_path):
+    # "lớn" is also a meaning of "big" (to, lớn): Việt → Anh on "lớn" alone would mark "big" wrong.
+    rows, report = check([tsv(tmp_path, row(key="big", word="big", pos="adjective", meaning="to, lớn", example="A big house."),
+                              row(key="large", word="large", pos="adjective", meaning="lớn", example="A large house."))])
+    assert "big" not in report.issues and "covered_meaning" in report.issues["large"][0]
+    assert effective_status(next(r for r in rows if r.key == "large"), report) == "draft"
+    # A context that says which word is meant, or accepting the other word, makes it playable.
+    for fix in ({"context": "kích thước, số lượng lớn hơn mức thường (hay dùng trong văn viết)"}, {"accepted": "big"}):
+        rows, report = check([tsv(tmp_path, row(key="big", word="big", pos="adjective", meaning="to, lớn", example="A big house."),
+                                  row(key="large", word="large", pos="adjective", meaning="lớn", example="A large house.", **fix))])
+        assert not report.issues, fix
+    # Another part of speech is another question ("lớn lên" is a verb): no conflict.
+    rows, report = check([tsv(tmp_path, row(key="big", word="big", pos="adjective", meaning="to, lớn", example="A big house."),
+                              row(key="grow", word="grow", pos="verb", meaning="lớn", example="Children grow fast."))])
+    assert not report.issues
+    # An imported "context" that only repeats the meaning is no context: the entry is never served.
+    rows, report = check([tsv(tmp_path, row(key="scud", word="scud", meaning="Máy bay.", example="A scud flew over.",
+                                            context="Dùng trong ngữ cảnh travel; nghĩa cụ thể: Máy bay."))])
+    assert "placeholder_context" in report.issues["scud"][0] and effective_status(rows[0], report) == "draft"
+
+
+def test_a_meaning_that_shows_the_word_is_never_asked_viet_to_anh():
+    from app.learning_vocab import gives_answer
+    assert gives_answer("chuột hamster", "thú cưng nhỏ", ["hamster"])
+    assert gives_answer("cảm thấy", "nói về cảm xúc: feel happy, feel sad", ["feel"])
+    assert gives_answer("có lẽ", "cách nói lịch sự hơn maybe", ["perhaps", "maybe"])  # an accepted answer too
+    assert not gives_answer("con mèo", "thú cưng kêu meo meo", ["cat"])
+    assert not gives_answer("vui vẻ", "categorically happy", ["cat"])  # only the whole word counts
+    rows, report = check()
+    shown = {r.key for r in rows if effective_status(r, report) == "active" and gives_answer(r.meaning_vi, r.context_vi, r.accepted)}
+    assert "hamster" in shown and "cat" not in shown
 
 
 def test_inflected_forms_spelling_variants_and_unused_examples_are_not_new_words(tmp_path):

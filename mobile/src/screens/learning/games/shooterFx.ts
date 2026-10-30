@@ -41,7 +41,9 @@ export const WIGGLE_MS = 320;
 export type Bounds = { min: number; max: number };
 export type Move = { t: number; from: number; to: number; dur: number };
 export type Point = { x: number; y: number };
-/** One shot at a word that was answered: when the pet fires, when the first bullet breaks it, when the pieces are gone. */
+/** One shot at a word that was answered: when the pet fires, when the first bullet breaks it, when the pieces are gone.
+ * `target` is where the word was when the shot was decided; the play field sets it to where the word was hit once the
+ * first bullet reaches it (the word keeps falling meanwhile, and the bullets follow it). */
 export type ShotPlan = { createdAt: number; fireAt: number; impactAt: number; doneAt: number; target: Point; flight: number;
   bullets: number; gap: number };
 
@@ -137,14 +139,15 @@ export function planShot(moves: Move[], now: number, target: Point, home: number
 }
 
 /** Bullet `i` of a shot at time `t` (null before it leaves or once it has arrived), flying from `origin` (the pet's
- * muzzle when it fired) to the target, slightly spread so two or three small bullets read as a burst. */
-export function bulletAt(plan: ShotPlan, i: number, t: number, origin: Point): (Point & { angle: number }) | null {
+ * muzzle when it fired) to `target`: where the word is at `t`, so the bullet chases a word that keeps falling and
+ * reaches it exactly at the end of its flight. Slightly spread, so two or three small bullets read as a burst. */
+export function bulletAt(plan: ShotPlan, i: number, t: number, origin: Point, target: Point = plan.target): (Point & { angle: number }) | null {
   if (i >= plan.bullets) return null;
   const leave = plan.fireAt + i * plan.gap;
   if (t < leave || t >= leave + plan.flight) return null;
   const k = (t - leave) / plan.flight;
-  const dx = plan.target.x - origin.x;
-  const dy = plan.target.y - origin.y;
+  const dx = target.x - origin.x;
+  const dy = target.y - origin.y;
   const len = Math.hypot(dx, dy) || 1;
   const side = (i - (plan.bullets - 1) / 2) * SPREAD * (1 - k); // spread at the muzzle, together at the target
   return { x: origin.x + dx * k - (dy / len) * side, y: origin.y + dy * k + (dx / len) * side, angle: Math.atan2(dy, dx) };

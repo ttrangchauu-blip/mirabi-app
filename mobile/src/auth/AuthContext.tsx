@@ -5,9 +5,12 @@ import { clearSession, loadSession, saveSession } from './tokenStorage';
 import { isSessionExpired, SESSION_EXPIRED_MESSAGE } from './messages';
 import { normalizeEmail } from './validation';
 import type { PetId } from '../pets';
+import type { GradeId } from '../studyProfile';
 
 export type User = { id:number; email:string; role?: 'user' | 'admin'; display_name:string; level:number; xp:number; coins:number; gems:number; avatar_theme:string;
-  /** Species id from src/pets.ts. The pet is adopted once it has a name. */ pet:string; pet_name:string|null; onboarded:boolean; daily_tasks_selected:boolean };
+  /** Species id from src/pets.ts. The pet is adopted once it has a name. */ pet:string; pet_name:string|null; onboarded:boolean; daily_tasks_selected:boolean;
+  /** Learning profile (src/studyProfile.ts): null for accounts created before registration asked for it. */
+  age?: number | null; school_grade?: GradeId | null };
 type TokenResponse = { access_token:string; refresh_token:string; token_type:string; expires_in:number; user:User };
 export type LoginStreakClaim = { current_streak: number; longest_streak: number; last_login_date: string; should_show_popup: boolean;
   daily_exp_awarded: number; milestone_exp_awarded: number; already_claimed: boolean };
@@ -40,7 +43,7 @@ type AuthContextValue = {
   streakPopup: LoginStreakClaim | null;
   dismissStreakPopup: () => void;
   /** Creates the account only; the user signs in afterwards from the pre-filled login screen. */
-  register: (input: { email: string; password: string; displayName?: string }) => Promise<void>;
+  register: (input: RegisterInput) => Promise<void>;
   adoptPet: (pet: PetId, name: string) => Promise<void>;
   selectDailyTasks: (taskIds: string[]) => Promise<void>;
   completeOnboarding: () => Promise<void>;
@@ -49,6 +52,8 @@ type AuthContextValue = {
   resetPassword: (token: string, newPassword: string) => Promise<void>;
   retryRestore: () => void;
 };
+
+type RegisterInput = { email: string; password: string; displayName?: string; age: number; schoolGrade: GradeId };
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
@@ -158,9 +163,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return startSession(res);
   }, [startSession]);
 
-  const register = useCallback(async ({ email, password, displayName }: { email: string; password: string; displayName?: string }) => {
-    const body: Record<string, string> = { email: normalizeEmail(email), password };
+  const register = useCallback(async ({ email, password, displayName, age, schoolGrade }: RegisterInput) => {
+    const body: Record<string, string | number> = { email: normalizeEmail(email), password };
     if (displayName?.trim()) body.display_name = displayName.trim();
+    body.age = age;
+    body.school_grade = schoolGrade;
     await apiRequest<User>('/api/auth/register', { method: 'POST', body });
   }, []);
 

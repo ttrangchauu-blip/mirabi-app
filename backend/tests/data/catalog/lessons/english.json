@@ -1,0 +1,10 @@
+{"subject": "english", "version": 1, "organization": "topic",
+ "source_note": "Bộ bài mẫu cho kiểm thử.",
+ "chapters": [
+  {"key": "ta3.family", "grade": 3, "order": 1, "title": "Me and my family",
+   "lessons": [
+    {"key": "ta3.tu_vung_gia_dinh", "order": 1, "title": "Từ vựng: Gia đình", "description": "Các thành viên trong gia đình.", "status": "ready",
+     "review": {"status": "checked"}, "objectives": ["Gọi tên người thân bằng tiếng Anh"], "summary": ["mother: mẹ, father: bố."],
+     "games": [{"game": "meteor", "title": "Việt → Anh", "words": ["family", "mother", "father", "sister", "brother", "grandmother", "grandfather", "parents"]},
+               {"game": "word_shooter", "title": "Anh → Việt", "words": ["family", "mother", "father", "sister", "brother", "grandmother", "grandfather", "parents"]}]}
+   ]}]}

@@ -1,0 +1,2848 @@
+{
+ "subject": "technology",
+ "version": 1,
+ "organization": "topic",
+ "source_note": "Theo yêu cầu cần đạt môn Công nghệ lớp 6–12 (CT GDPT 2018); ở lớp 9 theo các mô đun, ở THPT ghi rõ định hướng Công nghiệp hoặc Nông nghiệp trong tên chủ đề. Tổ chức theo chủ đề, không theo mục lục bộ sách giáo khoa nào. Trò chơi chỉ ôn kiến thức, an toàn và thứ tự quy trình, không thay cho thực hành.",
+ "chapters": [
+  {
+   "key": "cn6.nha_o",
+   "grade": 6,
+   "order": 1,
+   "title": "Nhà ở",
+   "lessons": [
+    {
+     "key": "cn6.vai_tro_nha_o",
+     "order": 1,
+     "title": "Vai trò và đặc điểm chung của nhà ở",
+     "description": "Nêu vai trò của nhà ở, các khu vực chính trong nhà và kiến trúc nhà ở đặc trưng ở Việt Nam.",
+     "status": "planned"
+    },
+    {
+     "key": "cn6.xay_dung_nha",
+     "order": 2,
+     "title": "Vật liệu và các bước xây dựng nhà ở",
+     "description": "Kể tên vật liệu xây dựng thông dụng và các bước chính xây dựng một ngôi nhà.",
+     "status": "planned"
+    },
+    {
+     "key": "cn6.nha_thong_minh",
+     "order": 3,
+     "title": "Ngôi nhà thông minh",
+     "description": "Biết đặc điểm của ngôi nhà thông minh và các hệ thống điều khiển tự động.",
+     "status": "planned"
+    },
+    {
+     "key": "cn6.tiet_kiem_nang_luong",
+     "order": 4,
+     "title": "Sử dụng năng lượng trong gia đình tiết kiệm, hiệu quả",
+     "description": "Thực hiện các việc làm tiết kiệm điện, chất đốt trong gia đình.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn6.thuc_pham",
+   "grade": 6,
+   "order": 2,
+   "title": "Bảo quản và chế biến thực phẩm",
+   "lessons": [
+    {
+     "key": "cn6.nhom_thuc_pham",
+     "order": 1,
+     "title": "Các nhóm thực phẩm chính",
+     "description": "Xếp thực phẩm quen thuộc vào nhóm giàu chất đạm, tinh bột, chất béo hay vitamin và chất khoáng.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Kể tên các nhóm thực phẩm chính và vai trò của từng nhóm",
+      "Xếp đúng thực phẩm quen thuộc vào nhóm",
+      "Hiểu bữa ăn cần có đủ các nhóm thực phẩm"
+     ],
+     "summary": [
+      "Nhóm giàu chất đạm (thịt, cá, trứng, đậu phụ) giúp cơ thể lớn lên và tạo cơ bắp.",
+      "Nhóm giàu tinh bột, đường (gạo, khoai, bánh mì) cung cấp năng lượng chính.",
+      "Nhóm giàu chất béo (dầu ăn, mỡ, bơ) cung cấp năng lượng và giúp hấp thụ một số vitamin.",
+      "Nhóm giàu vitamin và chất khoáng (rau xanh, quả chín) giúp cơ thể khoẻ, tăng sức đề kháng.",
+      "Một bữa ăn hợp lí có đủ các nhóm, ăn vừa phải."
+     ],
+     "examples": [
+      {
+       "title": "Bữa trưa đủ nhóm",
+       "lines": [
+        "Cơm (tinh bột), cá kho (đạm), rau luộc (vitamin, khoáng), một ít dầu ăn khi nấu (béo)."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Xếp vào nhóm thực phẩm",
+       "set": {
+        "title": "Thực phẩm này thuộc nhóm nào?",
+        "groups": [
+         {
+          "id": "dam",
+          "label": "Giàu chất đạm",
+          "icon": "🥚"
+         },
+         {
+          "id": "tinh_bot",
+          "label": "Giàu tinh bột, đường",
+          "icon": "🍚"
+         },
+         {
+          "id": "beo",
+          "label": "Giàu chất béo",
+          "icon": "🧈"
+         },
+         {
+          "id": "vitamin",
+          "label": "Giàu vitamin, chất khoáng",
+          "icon": "🥦"
+         }
+        ],
+        "cards": [
+         {
+          "key": "thit_nac",
+          "text": "Thịt lợn nạc",
+          "picture": "🥩",
+          "group": "dam",
+          "explanation": "Thịt nạc giàu chất đạm, giúp cơ thể xây dựng cơ bắp."
+         },
+         {
+          "key": "ca",
+          "text": "Cá",
+          "picture": "🐟",
+          "group": "dam",
+          "explanation": "Cá giàu chất đạm và dễ tiêu hoá."
+         },
+         {
+          "key": "trung",
+          "text": "Trứng gà",
+          "picture": "🥚",
+          "group": "dam",
+          "explanation": "Trứng là nguồn chất đạm tốt."
+         },
+         {
+          "key": "dau_phu",
+          "text": "Đậu phụ",
+          "picture": "⬜",
+          "group": "dam",
+          "explanation": "Đậu phụ làm từ đậu tương, giàu chất đạm thực vật."
+         },
+         {
+          "key": "gao",
+          "text": "Gạo",
+          "picture": "🍚",
+          "group": "tinh_bot",
+          "explanation": "Gạo chủ yếu là tinh bột, nguồn năng lượng chính của bữa ăn."
+         },
+         {
+          "key": "khoai_lang",
+          "text": "Khoai lang",
+          "picture": "🍠",
+          "group": "tinh_bot",
+          "explanation": "Khoai lang giàu tinh bột."
+         },
+         {
+          "key": "banh_mi",
+          "text": "Bánh mì",
+          "picture": "🥖",
+          "group": "tinh_bot",
+          "explanation": "Bánh mì làm từ bột mì, giàu tinh bột."
+         },
+         {
+          "key": "dau_an",
+          "text": "Dầu ăn",
+          "picture": "🫗",
+          "group": "beo",
+          "explanation": "Dầu ăn gần như hoàn toàn là chất béo."
+         },
+         {
+          "key": "mo_lon",
+          "text": "Mỡ lợn",
+          "picture": "🥓",
+          "group": "beo",
+          "explanation": "Mỡ lợn là chất béo động vật; nên ăn ít."
+         },
+         {
+          "key": "bo_sua",
+          "text": "Bơ làm từ sữa",
+          "picture": "🧈",
+          "group": "beo",
+          "explanation": "Bơ làm từ váng sữa, rất giàu chất béo."
+         },
+         {
+          "key": "rau_cai",
+          "text": "Rau cải xanh",
+          "picture": "🥬",
+          "group": "vitamin",
+          "explanation": "Rau xanh giàu vitamin, chất khoáng và chất xơ."
+         },
+         {
+          "key": "cam",
+          "text": "Quả cam",
+          "picture": "🍊",
+          "group": "vitamin",
+          "explanation": "Cam giàu vitamin C, giúp tăng sức đề kháng."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "cn6.bao_quan",
+     "order": 2,
+     "title": "Bảo quản thực phẩm",
+     "description": "Biết vai trò và các phương pháp bảo quản thực phẩm: làm lạnh, làm khô, ướp.",
+     "status": "planned"
+    },
+    {
+     "key": "cn6.che_bien_an_toan",
+     "order": 3,
+     "title": "Chế biến món ăn an toàn, hợp vệ sinh",
+     "description": "Làm đúng thứ tự các bước sơ chế và chế biến món ăn đơn giản, an toàn khi dùng bếp.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết các bước sơ chế thực phẩm hợp vệ sinh",
+      "Biết thứ tự các bước chế biến món ăn đơn giản có và không dùng nhiệt",
+      "Biết giữ an toàn khi dùng dao, bếp, dầu nóng"
+     ],
+     "summary": [
+      "Rửa tay sạch trước khi chế biến; rửa thực phẩm trước khi cắt.",
+      "Dùng thớt, dao riêng cho thực phẩm sống và thực phẩm chín, hoặc rửa sạch trước khi dùng lại.",
+      "Khi rán, cho thực phẩm vào chảo nhẹ nhàng, đứng lệch sang bên để tránh dầu bắn.",
+      "Tắt bếp ngay khi nấu xong, không để bếp cháy khi không có người."
+     ],
+     "examples": [
+      {
+       "title": "Món trộn",
+       "lines": [
+        "Rửa tay → rửa rau → để ráo, cắt → trộn với nước sốt ngay trước khi ăn."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Thứ tự đúng, an toàn",
+       "tasks": [
+        {
+         "key": "salad",
+         "prompt": "Sắp xếp các bước làm món rau trộn (không dùng nhiệt).",
+         "items": [
+          "Rửa tay sạch bằng xà phòng",
+          "Nhặt và rửa sạch rau dưới vòi nước",
+          "Để ráo rồi cắt rau trên thớt sạch",
+          "Trộn rau với nước sốt ngay trước khi ăn"
+         ],
+         "explanation": "Tay sạch rồi mới chạm vào thực phẩm; rửa trước khi cắt để rau không mất chất; trộn sát giờ ăn để rau không bị úng."
+        },
+        {
+         "key": "luoc_trung",
+         "prompt": "Sắp xếp các bước luộc trứng.",
+         "items": [
+          "Rửa sạch vỏ trứng",
+          "Cho trứng vào nồi, đổ nước ngập trứng",
+          "Đun sôi rồi để lửa nhỏ thêm khoảng 8–10 phút",
+          "Vớt trứng ra ngâm nước nguội cho dễ bóc"
+         ],
+         "explanation": "Rửa vỏ để loại bỏ bụi bẩn; đun từ nước lạnh giúp trứng ít bị nứt; ngâm nước nguội giúp dễ bóc vỏ."
+        },
+        {
+         "key": "so_che_thit",
+         "prompt": "Sắp xếp các bước sơ chế thịt hợp vệ sinh.",
+         "items": [
+          "Rửa tay sạch",
+          "Rửa thịt dưới vòi nước",
+          "Thái thịt trên thớt dành cho thực phẩm sống",
+          "Rửa sạch dao, thớt bằng nước rửa bát trước khi dùng cho đồ chín"
+         ],
+         "explanation": "Bước cuối rất quan trọng: vi khuẩn từ thịt sống có thể bám vào dao, thớt rồi sang thực phẩm chín."
+        },
+        {
+         "key": "ran_trung",
+         "prompt": "Sắp xếp các bước rán trứng an toàn.",
+         "items": [
+          "Đặt chảo lên bếp, cho một ít dầu ăn",
+          "Đun nóng dầu vừa phải",
+          "Đứng lệch sang bên, nhẹ nhàng đổ trứng vào chảo",
+          "Rán chín, tắt bếp rồi mới rời khỏi bếp"
+         ],
+         "explanation": "Dầu nóng có thể bắn: đổ trứng nhẹ nhàng, đứng lệch sang bên. Luôn tắt bếp trước khi rời đi."
+        },
+        {
+         "key": "rua_rau",
+         "prompt": "Sắp xếp các bước rửa rau sống đúng cách.",
+         "items": [
+          "Nhặt bỏ lá úa, gốc rễ",
+          "Ngâm rau trong nước sạch vài phút",
+          "Rửa lại nhiều lần dưới vòi nước chảy",
+          "Để rau ráo nước"
+         ],
+         "explanation": "Nhặt trước để không rửa phần bỏ đi; ngâm làm bong đất cát; rửa dưới vòi nước chảy cuốn trôi bụi bẩn."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "cn6.an_uong_khoa_hoc",
+     "order": 4,
+     "title": "Ăn uống khoa học",
+     "description": "Xây dựng bữa ăn hợp lí, đủ chất và thói quen ăn uống lành mạnh.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn6.trang_phuc",
+   "grade": 6,
+   "order": 3,
+   "title": "Trang phục và thời trang",
+   "lessons": [
+    {
+     "key": "cn6.loai_vai",
+     "order": 1,
+     "title": "Các loại vải thường dùng may trang phục",
+     "description": "Phân biệt vải sợi thiên nhiên, sợi hoá học, sợi pha và đặc điểm của chúng.",
+     "status": "planned"
+    },
+    {
+     "key": "cn6.lua_chon_trang_phuc",
+     "order": 2,
+     "title": "Lựa chọn và sử dụng trang phục",
+     "description": "Chọn trang phục phù hợp vóc dáng, lứa tuổi, hoàn cảnh sử dụng.",
+     "status": "planned"
+    },
+    {
+     "key": "cn6.bao_quan_trang_phuc",
+     "order": 3,
+     "title": "Bảo quản trang phục",
+     "description": "Làm sạch, làm phẳng, cất giữ trang phục đúng cách.",
+     "status": "planned"
+    },
+    {
+     "key": "cn6.thoi_trang",
+     "order": 4,
+     "title": "Thời trang",
+     "description": "Biết thời trang là gì và một số phong cách thời trang.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn6.do_dung_dien",
+   "grade": 6,
+   "order": 4,
+   "title": "Đồ dùng điện trong gia đình",
+   "lessons": [
+    {
+     "key": "cn6.den_dien",
+     "order": 1,
+     "title": "Đèn điện",
+     "description": "Biết cấu tạo, nguyên lí làm việc của bóng đèn sợi đốt, huỳnh quang, LED.",
+     "status": "planned"
+    },
+    {
+     "key": "cn6.noi_com_dien",
+     "order": 2,
+     "title": "Nồi cơm điện và bếp hồng ngoại",
+     "description": "Biết cấu tạo, nguyên lí làm việc và cách dùng nồi cơm điện, bếp hồng ngoại.",
+     "status": "planned"
+    },
+    {
+     "key": "cn6.an_toan_dien_gia_dinh",
+     "order": 3,
+     "title": "Sử dụng đồ dùng điện an toàn",
+     "description": "Xử lí đúng các tình huống thường gặp khi dùng đồ dùng điện trong gia đình.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết nguyên tắc an toàn khi dùng đồ dùng điện",
+      "Biết xử lí khi dây điện hỏng, ổ cắm quá tải",
+      "Biết cách cứu người bị điện giật mà không nguy hiểm cho mình"
+     ],
+     "summary": [
+      "Không chạm vào đồ dùng điện khi tay ướt; không dùng dây điện hở lõi.",
+      "Không cắm nhiều đồ dùng công suất lớn cùng một ổ cắm: dây và ổ cắm sẽ nóng, có thể gây cháy.",
+      "Tắt công tắc, rút phích điện trước khi lau chùi, thay bóng đèn.",
+      "Khi có người bị điện giật: ngắt nguồn điện trước, hoặc dùng vật khô không dẫn điện tách người khỏi dây; không chạm tay trực tiếp vào người đó."
+     ],
+     "examples": [
+      {
+       "title": "Rút phích cắm",
+       "lines": [
+        "Một tay giữ ổ cắm, một tay cầm thân phích rút ra; không kéo dây."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Xử lí tình huống",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "tay_uot",
+         "question": "Em vừa rửa rau xong, tay còn ướt, cần cắm phích nồi cơm điện. Em làm gì?",
+         "options": [
+          {
+           "text": "Lau thật khô tay rồi mới cắm phích",
+           "ok": true,
+           "why": "Đúng. Nước dẫn điện; tay khô giảm nguy cơ bị điện giật."
+          },
+          {
+           "text": "Cắm thật nhanh để không bị giật",
+           "ok": false,
+           "why": "Điện giật xảy ra ngay khi chạm, làm nhanh không giúp được gì."
+          },
+          {
+           "text": "Lấy khăn ướt bọc phích rồi cắm",
+           "ok": false,
+           "why": "Khăn ướt cũng dẫn điện, còn nguy hiểm hơn."
+          }
+         ],
+         "explanation": "Luôn để tay khô và đứng ở chỗ khô ráo khi cắm, rút phích điện."
+        },
+        {
+         "key": "day_ho",
+         "question": "Dây điện của quạt bị nứt vỏ, lộ lõi đồng. Em nên làm gì?",
+         "options": [
+          {
+           "text": "Rút phích (cầm vào thân phích), ngừng dùng và báo người lớn thay dây",
+           "ok": true,
+           "why": "Đúng. Dây hở lõi có thể gây điện giật, chập cháy; cần được thay hoặc sửa đúng cách."
+          },
+          {
+           "text": "Quấn băng dính thường rồi dùng tiếp",
+           "ok": false,
+           "why": "Băng dính thường không cách điện tốt và dễ bong, chỗ hở vẫn nguy hiểm."
+          },
+          {
+           "text": "Vẫn dùng, chỉ cần không chạm vào chỗ hở",
+           "ok": false,
+           "why": "Chỗ hở có thể chạm vào vật khác gây chập điện, cháy hoặc làm người khác bị giật."
+          }
+         ],
+         "explanation": "Đồ dùng điện hỏng phải ngừng dùng ngay và nhờ người có chuyên môn sửa chữa."
+        },
+        {
+         "key": "cuu_nguoi",
+         "question": "Em thấy một bạn bị điện giật, tay vẫn đang dính vào dây điện. Em làm gì trước tiên?",
+         "options": [
+          {
+           "text": "Ngắt cầu dao, aptomat hoặc rút phích điện",
+           "ok": true,
+           "why": "Đúng. Ngắt nguồn điện là cách an toàn nhất trước khi chạm vào nạn nhân."
+          },
+          {
+           "text": "Dùng gậy gỗ khô hay vật nhựa khô gạt dây điện ra",
+           "ok": true,
+           "why": "Đúng khi không ngắt được nguồn ngay: vật khô không dẫn điện giúp tách nạn nhân mà em không bị giật."
+          },
+          {
+           "text": "Kéo tay bạn ra ngay",
+           "ok": false,
+           "why": "Rất nguy hiểm: dòng điện sẽ truyền sang người em."
+          },
+          {
+           "text": "Dùng thanh sắt gạt dây điện ra",
+           "ok": false,
+           "why": "Sắt dẫn điện, em sẽ bị giật theo."
+          }
+         ],
+         "explanation": "Ưu tiên ngắt nguồn điện; nếu không được thì dùng vật khô cách điện. Sau đó gọi người lớn và gọi cấp cứu 115."
+        },
+        {
+         "key": "qua_tai",
+         "question": "Nhà em định cắm nồi cơm điện, ấm siêu tốc và bàn là cùng vào một ổ cắm kéo dài. Ý kiến nào đúng?",
+         "options": [
+          {
+           "text": "Không nên: các đồ dùng công suất lớn cắm chung một ổ dễ làm quá tải, nóng chảy và gây cháy",
+           "ok": true,
+           "why": "Đúng. Mỗi ổ cắm, dây dẫn chỉ chịu được một dòng điện tối đa."
+          },
+          {
+           "text": "Được, vì ổ cắm có đủ lỗ cắm",
+           "ok": false,
+           "why": "Đủ lỗ cắm không có nghĩa là ổ và dây chịu được tổng công suất."
+          },
+          {
+           "text": "Được, chỉ cần dùng trong thời gian ngắn",
+           "ok": false,
+           "why": "Quá tải chỉ trong thời gian ngắn cũng đủ làm dây, ổ cắm nóng chảy."
+          }
+         ],
+         "explanation": "Dùng lần lượt các đồ dùng công suất lớn hoặc cắm vào các ổ khác nhau phù hợp với công suất."
+        },
+        {
+         "key": "thay_bong",
+         "question": "Bóng đèn bàn vừa cháy khi đang sáng. Em thay bóng thế nào cho an toàn?",
+         "options": [
+          {
+           "text": "Tắt công tắc, rút phích, chờ bóng nguội rồi mới thay",
+           "ok": true,
+           "why": "Đúng. Ngắt điện để không bị giật, chờ nguội để không bị bỏng."
+          },
+          {
+           "text": "Thay ngay khi đèn còn cắm điện",
+           "ok": false,
+           "why": "Đui đèn vẫn có điện, chạm vào có thể bị giật."
+          },
+          {
+           "text": "Dùng khăn ướt cầm bóng cho đỡ nóng",
+           "ok": false,
+           "why": "Khăn ướt dẫn điện, bóng nóng gặp nước lạnh còn có thể vỡ."
+          }
+         ],
+         "explanation": "Mọi việc lau chùi, thay thế bộ phận đều làm khi đã ngắt điện và thiết bị đã nguội."
+        },
+        {
+         "key": "bep_nong",
+         "question": "Bếp hồng ngoại vừa tắt sau khi nấu canh. Em muốn lau mặt bếp. Em làm gì?",
+         "options": [
+          {
+           "text": "Chờ mặt bếp nguội hẳn, rút điện rồi lau bằng khăn mềm hơi ẩm",
+           "ok": true,
+           "why": "Đúng. Mặt bếp còn rất nóng một lúc sau khi tắt."
+          },
+          {
+           "text": "Lau ngay bằng khăn ướt cho nhanh sạch",
+           "ok": false,
+           "why": "Mặt bếp còn nóng gây bỏng; nước lạnh trên mặt kính nóng còn có thể làm nứt kính."
+          },
+          {
+           "text": "Dùng miếng cọ sắt chà mạnh",
+           "ok": false,
+           "why": "Cọ sắt làm xước mặt kính của bếp."
+          }
+         ],
+         "explanation": "Đèn báo nhiệt dư trên bếp cho biết mặt bếp còn nóng dù đã tắt."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "cn7.trong_trot",
+   "grade": 7,
+   "order": 1,
+   "title": "Trồng trọt",
+   "lessons": [
+    {
+     "key": "cn7.vai_tro_trong_trot",
+     "order": 1,
+     "title": "Vai trò và triển vọng của trồng trọt",
+     "description": "Nêu vai trò của trồng trọt, các nhóm cây trồng và phương thức trồng trọt.",
+     "status": "planned"
+    },
+    {
+     "key": "cn7.lam_dat_bon_phan",
+     "order": 2,
+     "title": "Làm đất, bón phân lót và gieo trồng",
+     "description": "Biết mục đích của làm đất, bón lót và các cách gieo trồng.",
+     "status": "planned"
+    },
+    {
+     "key": "cn7.cham_soc_thu_hoach",
+     "order": 3,
+     "title": "Chăm sóc, phòng trừ sâu bệnh và thu hoạch",
+     "description": "Ghép công việc chăm sóc với mục đích, biện pháp phòng trừ sâu bệnh với ví dụ, cây trồng với cách thu hoạch.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu mục đích của tỉa dặm, làm cỏ vun xới, tưới tiêu, bón thúc",
+      "Phân biệt các biện pháp phòng trừ sâu bệnh",
+      "Biết các phương pháp thu hoạch phù hợp từng loại cây",
+      "Biết công dụng của dụng cụ trồng trọt thường dùng"
+     ],
+     "summary": [
+      "Chăm sóc cây gồm tỉa, dặm cây; làm cỏ, vun xới; tưới, tiêu nước; bón phân thúc.",
+      "Phòng trừ sâu bệnh: biện pháp canh tác, thủ công, sinh học, hoá học; ưu tiên phòng là chính.",
+      "Dùng thuốc hoá học đúng thuốc, đúng liều lượng, đúng lúc, đúng cách và bảo đảm thời gian cách li.",
+      "Thu hoạch đúng lúc, đúng cách giúp giữ chất lượng sản phẩm."
+     ],
+     "examples": [
+      {
+       "title": "Ong mắt đỏ",
+       "lines": [
+        "Ong mắt đỏ đẻ trứng vào trứng sâu hại, diệt sâu từ khi còn là trứng: biện pháp sinh học."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Ghép cho đúng",
+       "tasks": [
+        {
+         "key": "cham_soc",
+         "prompt": "Ghép mỗi công việc chăm sóc với mục đích của nó.",
+         "pairs": [
+          [
+           "Tỉa, dặm cây",
+           "Bảo đảm mật độ cây hợp lí"
+          ],
+          [
+           "Làm cỏ, vun xới",
+           "Diệt cỏ dại, làm đất tơi xốp, chống đổ cây"
+          ],
+          [
+           "Tưới, tiêu nước",
+           "Giữ cho cây có đủ nước, không bị úng"
+          ],
+          [
+           "Bón phân thúc",
+           "Bổ sung chất dinh dưỡng khi cây đang lớn"
+          ]
+         ],
+         "explanation": "Mỗi việc chăm sóc nhắm tới một nhu cầu của cây: chỗ đứng, đất tơi, nước và chất dinh dưỡng."
+        },
+        {
+         "key": "sau_benh",
+         "prompt": "Ghép mỗi biện pháp phòng trừ sâu bệnh với ví dụ của nó.",
+         "pairs": [
+          [
+           "Biện pháp thủ công",
+           "Bắt sâu, ngắt bỏ lá bị bệnh"
+          ],
+          [
+           "Biện pháp sinh học",
+           "Thả ong mắt đỏ diệt trứng sâu"
+          ],
+          [
+           "Biện pháp hoá học",
+           "Phun thuốc trừ sâu đúng liều lượng"
+          ],
+          [
+           "Biện pháp canh tác",
+           "Luân canh cây trồng, vệ sinh đồng ruộng"
+          ]
+         ],
+         "explanation": "Biện pháp hoá học diệt sâu nhanh nhưng có thể gây độc cho người và môi trường, nên chỉ dùng khi cần thiết."
+        },
+        {
+         "key": "thu_hoach",
+         "prompt": "Ghép mỗi phương pháp thu hoạch với cây trồng phù hợp.",
+         "pairs": [
+          [
+           "Hái",
+           "Chè, đậu đỗ"
+          ],
+          [
+           "Nhổ",
+           "Lạc, cà rốt"
+          ],
+          [
+           "Đào",
+           "Khoai lang, sắn"
+          ],
+          [
+           "Cắt",
+           "Lúa, rau cải"
+          ]
+         ],
+         "explanation": "Chọn cách thu hoạch theo bộ phận cần lấy: lá, quả hái; củ nằm nông nhổ; củ nằm sâu đào; thân, bông cắt."
+        },
+        {
+         "key": "dung_cu",
+         "prompt": "Ghép mỗi dụng cụ với công dụng của nó.",
+         "pairs": [
+          [
+           "Cuốc",
+           "Làm đất, xới đất, vun gốc"
+          ],
+          [
+           "Bình tưới",
+           "Tưới nước cho cây"
+          ],
+          [
+           "Kéo cắt cành",
+           "Cắt cành, tỉa cành lá"
+          ],
+          [
+           "Bình phun",
+           "Phun thuốc bảo vệ thực vật"
+          ]
+         ],
+         "explanation": "Dùng xong phải rửa sạch dụng cụ; khi phun thuốc phải đeo khẩu trang, găng tay."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "cn7.giam_canh",
+     "order": 4,
+     "title": "Nhân giống cây trồng bằng phương pháp giâm cành",
+     "description": "Làm đúng thứ tự các bước giâm cành, từ chọn cành đến khi có cây con đem trồng.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được các bước giâm cành",
+      "Biết yêu cầu của cành giâm và giá thể",
+      "Biết chăm sóc cành giâm và trồng cây con"
+     ],
+     "summary": [
+      "Giâm cành: dùng đoạn cành cắt từ cây mẹ, cắm vào giá thể ẩm cho ra rễ thành cây mới.",
+      "Các bước: chọn cành → cắt cành → xử lí cành (chất kích thích ra rễ, nếu có) → cắm cành → chăm sóc.",
+      "Cành giâm là cành bánh tẻ (không quá non, không quá già), khoẻ, không sâu bệnh.",
+      "Cắt bớt phiến lá để giảm thoát hơi nước; giữ giá thể ẩm, che bớt nắng."
+     ],
+     "examples": [
+      {
+       "title": "Giâm cành hoa giấy",
+       "lines": [
+        "Chọn cành bánh tẻ → cắt đoạn 10–15 cm → cắm nghiêng vào giá thể ẩm → tưới phun sương, che nắng."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Các bước giâm cành",
+       "tasks": [
+        {
+         "key": "cac_buoc",
+         "prompt": "Sắp xếp các bước giâm cành.",
+         "items": [
+          "Chọn cành giâm bánh tẻ, khoẻ, không sâu bệnh",
+          "Cắt cành thành đoạn có vài mắt, cắt bớt phiến lá",
+          "Nhúng gốc cành vào chất kích thích ra rễ (nếu có)",
+          "Cắm cành vào giá thể ẩm",
+          "Chăm sóc: tưới giữ ẩm, che bớt nắng"
+         ],
+         "explanation": "Đây là năm bước của giâm cành: chọn, cắt, xử lí, cắm, chăm sóc."
+        },
+        {
+         "key": "gia_the",
+         "prompt": "Sắp xếp các bước chuẩn bị giá thể và cắm cành giâm.",
+         "items": [
+          "Cho giá thể (cát, đất trộn xơ dừa) vào khay, chậu",
+          "Tưới cho giá thể đủ ẩm",
+          "Cắm cành nghiêng, sâu khoảng 3–5 cm",
+          "Ấn chặt giá thể quanh gốc cành"
+         ],
+         "explanation": "Giá thể được làm ẩm trước để cắm cành dễ, không làm tổn thương gốc; ấn chặt để cành đứng vững."
+        },
+        {
+         "key": "ra_re",
+         "prompt": "Sắp xếp quá trình cành giâm phát triển thành cây con.",
+         "items": [
+          "Cành giâm được cắm vào giá thể ẩm",
+          "Rễ non mọc ra từ gốc cành",
+          "Cành ra lá mới",
+          "Cây con đủ lớn để đem trồng"
+         ],
+         "explanation": "Cành phải ra rễ trước để hút nước; có rễ cây mới nuôi được lá mới; cây khoẻ mới đem trồng."
+        },
+        {
+         "key": "trong_cay_con",
+         "prompt": "Sắp xếp các bước trồng cây con từ cành giâm sang chậu.",
+         "items": [
+          "Kiểm tra thấy cành đã có rễ và lá mới",
+          "Chuẩn bị chậu có đất trồng",
+          "Nhẹ nhàng lấy cây con ra cùng giá thể bám rễ",
+          "Đặt cây vào chậu, lấp đất, tưới nước"
+         ],
+         "explanation": "Chỉ chuyển khi cây đã có rễ; giữ giá thể bám quanh rễ để rễ không bị đứt."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "cn7.lam_nghiep",
+   "grade": 7,
+   "order": 2,
+   "title": "Lâm nghiệp",
+   "lessons": [
+    {
+     "key": "cn7.vai_tro_rung",
+     "order": 1,
+     "title": "Vai trò của rừng",
+     "description": "Nêu vai trò của rừng đối với môi trường và đời sống; các loại rừng ở Việt Nam.",
+     "status": "planned"
+    },
+    {
+     "key": "cn7.trong_cham_soc_rung",
+     "order": 2,
+     "title": "Trồng, chăm sóc và bảo vệ rừng",
+     "description": "Biết các bước trồng cây rừng và trách nhiệm bảo vệ rừng.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn7.chan_nuoi",
+   "grade": 7,
+   "order": 3,
+   "title": "Chăn nuôi",
+   "lessons": [
+    {
+     "key": "cn7.vai_tro_chan_nuoi",
+     "order": 1,
+     "title": "Vai trò và triển vọng của chăn nuôi",
+     "description": "Nêu vai trò của chăn nuôi và một số vật nuôi đặc trưng ở Việt Nam.",
+     "status": "planned"
+    },
+    {
+     "key": "cn7.nuoi_duong",
+     "order": 2,
+     "title": "Nuôi dưỡng và chăm sóc vật nuôi",
+     "description": "Biết cách nuôi dưỡng, chăm sóc vật nuôi non, vật nuôi đực giống, cái sinh sản.",
+     "status": "planned"
+    },
+    {
+     "key": "cn7.phong_benh",
+     "order": 3,
+     "title": "Phòng và trị bệnh cho vật nuôi",
+     "description": "Biết nguyên nhân gây bệnh và biện pháp phòng, trị bệnh cho vật nuôi.",
+     "status": "planned"
+    },
+    {
+     "key": "cn7.moi_truong_chan_nuoi",
+     "order": 4,
+     "title": "Bảo vệ môi trường trong chăn nuôi",
+     "description": "Biết xử lí chất thải chăn nuôi để bảo vệ môi trường.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn7.thuy_san",
+   "grade": 7,
+   "order": 4,
+   "title": "Thuỷ sản",
+   "lessons": [
+    {
+     "key": "cn7.vai_tro_thuy_san",
+     "order": 1,
+     "title": "Vai trò của thuỷ sản",
+     "description": "Nêu vai trò của nuôi trồng thuỷ sản và một số loài thuỷ sản có giá trị.",
+     "status": "planned"
+    },
+    {
+     "key": "cn7.nuoi_ca_ao",
+     "order": 2,
+     "title": "Quy trình nuôi cá ao",
+     "description": "Biết các bước chuẩn bị ao, thả cá, chăm sóc, quản lí ao và thu hoạch.",
+     "status": "planned"
+    },
+    {
+     "key": "cn7.bao_ve_nguon_loi",
+     "order": 3,
+     "title": "Bảo vệ môi trường và nguồn lợi thuỷ sản",
+     "description": "Biết các việc làm bảo vệ môi trường nước và nguồn lợi thuỷ sản.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn8.ve_ky_thuat",
+   "grade": 8,
+   "order": 1,
+   "title": "Vẽ kĩ thuật",
+   "lessons": [
+    {
+     "key": "cn8.tieu_chuan_hinh_chieu",
+     "order": 1,
+     "title": "Tiêu chuẩn bản vẽ và hình chiếu vuông góc",
+     "description": "Nhận biết khổ giấy, nét vẽ và các hình chiếu vuông góc trên bản vẽ kĩ thuật.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết kích thước các khổ giấy A0–A4",
+      "Biết công dụng của các loại nét vẽ",
+      "Biết hướng chiếu và vị trí của hình chiếu đứng, hình chiếu bằng, hình chiếu cạnh"
+     ],
+     "summary": [
+      "Bản vẽ kĩ thuật được trình bày theo tiêu chuẩn: khổ giấy, tỉ lệ, nét vẽ, chữ viết, ghi kích thước.",
+      "Khổ A0 có diện tích 1 m²; mỗi khổ nhỏ hơn bằng nửa khổ trước: A0 → A1 → A2 → A3 → A4.",
+      "Hình chiếu đứng: nhìn từ trước tới; hình chiếu bằng: nhìn từ trên xuống; hình chiếu cạnh: nhìn từ trái sang.",
+      "Trên bản vẽ (phương pháp góc chiếu thứ nhất): hình chiếu bằng đặt dưới hình chiếu đứng, hình chiếu cạnh đặt bên phải hình chiếu đứng."
+     ],
+     "examples": [
+      {
+       "title": "Đọc khổ giấy",
+       "lines": [
+        "A4 là 297 × 210 mm; gập đôi khổ A3 (420 × 297 mm) được khổ A4."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Ghép cho đúng",
+       "tasks": [
+        {
+         "key": "kho_giay",
+         "prompt": "Ghép mỗi khổ giấy với kích thước của nó (mm).",
+         "pairs": [
+          [
+           "A0",
+           "1189 × 841"
+          ],
+          [
+           "A1",
+           "841 × 594"
+          ],
+          [
+           "A2",
+           "594 × 420"
+          ],
+          [
+           "A3",
+           "420 × 297"
+          ],
+          [
+           "A4",
+           "297 × 210"
+          ]
+         ],
+         "explanation": "Cạnh dài của khổ sau bằng cạnh ngắn của khổ trước: mỗi khổ bằng nửa khổ trước.",
+         "hint": "A0 lớn nhất, A4 nhỏ nhất."
+        },
+        {
+         "key": "net_ve",
+         "prompt": "Ghép mỗi loại nét vẽ với công dụng của nó.",
+         "pairs": [
+          [
+           "Nét liền đậm",
+           "Đường bao thấy, cạnh thấy"
+          ],
+          [
+           "Nét đứt mảnh",
+           "Đường bao khuất, cạnh khuất"
+          ],
+          [
+           "Nét gạch dài – chấm – mảnh",
+           "Đường tâm, đường trục đối xứng"
+          ],
+          [
+           "Nét liền mảnh",
+           "Đường kích thước, đường gióng"
+          ]
+         ],
+         "explanation": "Mỗi nét vẽ mang một ý nghĩa riêng, giúp mọi người đọc bản vẽ hiểu giống nhau."
+        },
+        {
+         "key": "hinh_chieu",
+         "prompt": "Ghép mỗi hình chiếu với hướng chiếu của nó.",
+         "pairs": [
+          [
+           "Hình chiếu đứng",
+           "Nhìn từ trước tới"
+          ],
+          [
+           "Hình chiếu bằng",
+           "Nhìn từ trên xuống"
+          ],
+          [
+           "Hình chiếu cạnh",
+           "Nhìn từ trái sang"
+          ]
+         ],
+         "explanation": "Ba hình chiếu cho biết hình dạng vật thể theo ba hướng vuông góc với nhau. Trên bản vẽ, hình chiếu bằng đặt dưới, hình chiếu cạnh đặt bên phải hình chiếu đứng."
+        },
+        {
+         "key": "ti_le",
+         "prompt": "Ghép mỗi tỉ lệ bản vẽ với ý nghĩa của nó.",
+         "pairs": [
+          [
+           "1 : 1",
+           "Tỉ lệ nguyên hình: vẽ bằng kích thước thật"
+          ],
+          [
+           "1 : 2",
+           "Tỉ lệ thu nhỏ: hình vẽ bằng một nửa vật thật"
+          ],
+          [
+           "2 : 1",
+           "Tỉ lệ phóng to: hình vẽ gấp đôi vật thật"
+          ]
+         ],
+         "explanation": "Tỉ lệ là tỉ số giữa kích thước đo trên hình vẽ và kích thước thật. Dù vẽ theo tỉ lệ nào, con số kích thước ghi trên bản vẽ luôn là kích thước thật.",
+         "hint": "Số đứng trước là kích thước trên hình vẽ."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "cn8.ban_ve_chi_tiet",
+     "order": 2,
+     "title": "Bản vẽ chi tiết",
+     "description": "Đọc nội dung bản vẽ chi tiết: hình biểu diễn, kích thước, yêu cầu kĩ thuật.",
+     "status": "planned"
+    },
+    {
+     "key": "cn8.ban_ve_lap",
+     "order": 3,
+     "title": "Bản vẽ lắp",
+     "description": "Đọc bản vẽ lắp đơn giản và bảng kê chi tiết.",
+     "status": "planned"
+    },
+    {
+     "key": "cn8.ban_ve_nha",
+     "order": 4,
+     "title": "Bản vẽ nhà",
+     "description": "Đọc bản vẽ nhà đơn giản: mặt bằng, mặt đứng, mặt cắt.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn8.co_khi",
+   "grade": 8,
+   "order": 2,
+   "title": "Cơ khí",
+   "lessons": [
+    {
+     "key": "cn8.vat_lieu_co_khi",
+     "order": 1,
+     "title": "Vật liệu cơ khí",
+     "description": "Phân biệt kim loại đen, kim loại màu và vật liệu phi kim loại thông dụng.",
+     "status": "planned"
+    },
+    {
+     "key": "cn8.dung_cu_co_khi",
+     "order": 2,
+     "title": "Dụng cụ gia công cơ khí bằng tay",
+     "description": "Xếp dụng cụ cơ khí cầm tay vào nhóm: đo và vạch dấu, tháo lắp và kẹp chặt, gia công.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Kể tên, nêu công dụng các dụng cụ cơ khí cầm tay",
+      "Xếp đúng dụng cụ vào nhóm",
+      "Biết quy tắc an toàn khi gia công cơ khí bằng tay"
+     ],
+     "summary": [
+      "Dụng cụ đo và vạch dấu: thước lá, thước cặp, mũi vạch, chấm dấu.",
+      "Dụng cụ tháo lắp và kẹp chặt: cờ lê, tua vít, mỏ lết, kìm, ê tô.",
+      "Dụng cụ gia công: cưa, đục, dũa (cùng búa khi đục).",
+      "An toàn: kẹp chặt vật trong ê tô, không dùng dụng cụ cán lỏng, mẻ; không dùng tay gạt phoi; đeo kính khi đục."
+     ],
+     "examples": [
+      {
+       "title": "Cưa một thanh thép",
+       "lines": [
+        "Đo, vạch dấu bằng thước lá và mũi vạch → kẹp vào ê tô → cưa theo vạch → dũa phẳng mép cắt."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Xếp dụng cụ vào nhóm",
+       "set": {
+        "title": "Dụng cụ này thuộc nhóm nào?",
+        "groups": [
+         {
+          "id": "do",
+          "label": "Đo và vạch dấu",
+          "icon": "📏"
+         },
+         {
+          "id": "kep",
+          "label": "Tháo lắp và kẹp chặt",
+          "icon": "🔧"
+         },
+         {
+          "id": "gia_cong",
+          "label": "Gia công: cưa, đục, dũa",
+          "icon": "🪚"
+         }
+        ],
+        "cards": [
+         {
+          "key": "thuoc_la",
+          "text": "Thước lá",
+          "picture": "📏",
+          "group": "do",
+          "explanation": "Thước lá bằng thép mỏng, dùng đo chiều dài và vạch đường thẳng."
+         },
+         {
+          "key": "thuoc_cap",
+          "text": "Thước cặp",
+          "picture": "📐",
+          "group": "do",
+          "explanation": "Thước cặp đo đường kính trong, đường kính ngoài và chiều sâu lỗ khá chính xác."
+         },
+         {
+          "key": "mui_vach",
+          "text": "Mũi vạch",
+          "picture": "✏️",
+          "group": "do",
+          "explanation": "Mũi vạch có đầu nhọn cứng, kẻ đường dấu lên bề mặt kim loại."
+         },
+         {
+          "key": "cham_dau",
+          "text": "Chấm dấu",
+          "picture": "📍",
+          "group": "do",
+          "explanation": "Chấm dấu tạo điểm dấu, ví dụ đánh dấu tâm lỗ trước khi khoan."
+         },
+         {
+          "key": "co_le",
+          "text": "Cờ lê",
+          "picture": "🔧",
+          "group": "kep",
+          "explanation": "Cờ lê dùng vặn đai ốc, bu lông có kích thước cố định."
+         },
+         {
+          "key": "tua_vit",
+          "text": "Tua vít",
+          "picture": "🪛",
+          "group": "kep",
+          "explanation": "Tua vít vặn vít có đầu xẻ rãnh."
+         },
+         {
+          "key": "mo_let",
+          "text": "Mỏ lết",
+          "picture": "🔩",
+          "group": "kep",
+          "explanation": "Mỏ lết chỉnh được độ mở để vặn đai ốc nhiều cỡ."
+         },
+         {
+          "key": "e_to",
+          "text": "Ê tô",
+          "picture": "🗜️",
+          "group": "kep",
+          "explanation": "Ê tô kẹp chặt vật khi cưa, dũa, đục."
+         },
+         {
+          "key": "cua_sat",
+          "text": "Cưa sắt (cưa tay)",
+          "picture": "🪚",
+          "group": "gia_cong",
+          "explanation": "Cưa dùng cắt vật liệu kim loại thành từng phần."
+         },
+         {
+          "key": "duc",
+          "text": "Đục",
+          "picture": "🔨",
+          "group": "gia_cong",
+          "explanation": "Đục dùng với búa để chặt, cắt bỏ phần kim loại thừa."
+         },
+         {
+          "key": "dua",
+          "text": "Dũa",
+          "picture": "〰️",
+          "group": "gia_cong",
+          "explanation": "Dũa làm nhẵn, phẳng bề mặt và mép cắt."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "cn8.truyen_chuyen_dong",
+     "order": 3,
+     "title": "Truyền và biến đổi chuyển động",
+     "description": "Biết các cơ cấu truyền chuyển động: đai, xích, bánh răng; biến đổi chuyển động.",
+     "status": "planned"
+    },
+    {
+     "key": "cn8.nghe_co_khi",
+     "order": 4,
+     "title": "Ngành nghề trong lĩnh vực cơ khí",
+     "description": "Biết một số nghề cơ khí và yêu cầu của chúng.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn8.ky_thuat_dien",
+   "grade": 8,
+   "order": 3,
+   "title": "Kĩ thuật điện",
+   "lessons": [
+    {
+     "key": "cn8.an_toan_dien",
+     "order": 1,
+     "title": "An toàn điện",
+     "description": "Biết nguyên nhân tai nạn điện, biện pháp an toàn và dụng cụ bảo vệ an toàn điện.",
+     "status": "planned"
+    },
+    {
+     "key": "cn8.mach_dien",
+     "order": 2,
+     "title": "Mạch điện và các bộ phận của mạch điện",
+     "description": "Biết cấu trúc mạch điện: nguồn, tải, dây dẫn, thiết bị đóng cắt và bảo vệ.",
+     "status": "planned"
+    },
+    {
+     "key": "cn8.lap_mach_dien",
+     "order": 3,
+     "title": "Lắp mạch điện điều khiển đơn giản",
+     "description": "Làm đúng thứ tự, an toàn các bước lắp, kiểm tra mạch điện đơn giản và mạch có cảm biến.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết các bước lắp mạch điện theo sơ đồ",
+      "Luôn ngắt nguồn trước khi lắp, sửa mạch và chỉ đóng điện khi đã kiểm tra",
+      "Hiểu hoạt động của mạch điều khiển dùng mô đun cảm biến"
+     ],
+     "summary": [
+      "Lắp, sửa mạch luôn làm khi chưa có điện; chỉ cấp điện sau khi đã kiểm tra mạch.",
+      "Với điện lưới 220 V: công tắc lắp trên dây pha; chỉ thực hành khi có giáo viên hướng dẫn.",
+      "Mạch có cảm biến: cảm biến nhận biết thay đổi (ánh sáng, nhiệt độ…), mô đun điều khiển đóng cắt rơ-le để bật tắt tải."
+     ],
+     "examples": [
+      {
+       "title": "Mạch đèn pin",
+       "lines": [
+        "Nguồn (pin) → công tắc → bóng đèn → trở về nguồn: một mạch kín."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Các bước lắp mạch an toàn",
+       "tasks": [
+        {
+         "key": "mach_pin",
+         "prompt": "Sắp xếp các bước lắp mạch đèn dùng pin, công tắc và bóng đèn.",
+         "items": [
+          "Đọc sơ đồ, chuẩn bị linh kiện và dụng cụ",
+          "Nối các linh kiện theo sơ đồ khi chưa lắp pin",
+          "Kiểm tra lại các mối nối, để công tắc ở vị trí ngắt",
+          "Lắp pin rồi đóng công tắc để thử"
+         ],
+         "explanation": "Lắp mạch khi chưa có nguồn, kiểm tra xong mới lắp pin và thử: thói quen này giữ an toàn với mọi mạch điện."
+        },
+        {
+         "key": "mach_220v",
+         "prompt": "Sắp xếp các bước lắp mạch công tắc điều khiển đèn dùng điện 220 V (có giáo viên hướng dẫn).",
+         "items": [
+          "Ngắt aptomat nguồn điện",
+          "Lắp công tắc và đui đèn lên bảng điện",
+          "Nối dây theo sơ đồ: dây pha qua công tắc rồi tới đèn",
+          "Kiểm tra mạch bằng mắt và đồng hồ vạn năng",
+          "Đóng điện thử khi giáo viên cho phép"
+         ],
+         "explanation": "Ngắt điện trước tiên; công tắc lắp trên dây pha để khi tắt, đèn không còn điện; kiểm tra kĩ rồi mới đóng điện."
+        },
+        {
+         "key": "thiet_ke",
+         "prompt": "Sắp xếp các bước thiết kế một mạch điện đơn giản.",
+         "items": [
+          "Xác định yêu cầu của mạch (ví dụ đèn tự sáng khi trời tối)",
+          "Vẽ sơ đồ mạch và chọn linh kiện",
+          "Lắp mạch theo sơ đồ",
+          "Kiểm tra, chạy thử và điều chỉnh"
+         ],
+         "explanation": "Biết yêu cầu mới chọn được linh kiện; có sơ đồ mới lắp được; lắp xong phải thử và sửa."
+        },
+        {
+         "key": "cam_bien",
+         "prompt": "Sắp xếp hoạt động của mạch đèn tự bật khi trời tối (mô đun cảm biến ánh sáng).",
+         "items": [
+          "Trời tối dần",
+          "Cảm biến ánh sáng nhận biết độ sáng giảm",
+          "Mô đun điều khiển đóng rơ-le",
+          "Đèn sáng"
+         ],
+         "explanation": "Cảm biến nhận tín hiệu → mô đun xử lí và điều khiển rơ-le → rơ-le đóng mạch cấp điện cho đèn."
+        },
+        {
+         "key": "thay_bong",
+         "prompt": "Sắp xếp các bước thay bóng đèn trần bị cháy.",
+         "items": [
+          "Tắt công tắc và ngắt aptomat",
+          "Chờ bóng đèn nguội",
+          "Đứng trên ghế, thang chắc chắn, tháo bóng cũ",
+          "Lắp bóng mới cùng loại, phù hợp điện áp",
+          "Đóng aptomat, bật công tắc để thử"
+         ],
+         "explanation": "Ngắt điện và chờ nguội trước để không bị giật, bị bỏng; đứng chỗ chắc chắn để không ngã; thử sau cùng."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "cn8.cam_bien",
+     "order": 4,
+     "title": "Cảm biến và mô đun cảm biến",
+     "description": "Biết một số cảm biến thông dụng: ánh sáng, nhiệt độ, độ ẩm và ứng dụng.",
+     "status": "planned"
+    },
+    {
+     "key": "cn8.nghe_dien",
+     "order": 5,
+     "title": "Ngành nghề trong lĩnh vực kĩ thuật điện",
+     "description": "Biết một số nghề điện và yêu cầu của chúng.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn8.thiet_ke",
+   "grade": 8,
+   "order": 4,
+   "title": "Thiết kế kĩ thuật",
+   "lessons": [
+    {
+     "key": "cn8.quy_trinh_thiet_ke",
+     "order": 1,
+     "title": "Thiết kế kĩ thuật và quy trình thiết kế",
+     "description": "Biết vai trò của thiết kế kĩ thuật và các bước thiết kế một sản phẩm đơn giản.",
+     "status": "planned"
+    },
+    {
+     "key": "cn8.nghe_thiet_ke",
+     "order": 2,
+     "title": "Ngành nghề trong lĩnh vực thiết kế",
+     "description": "Biết một số nghề thiết kế và yêu cầu của chúng.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn9.dinh_huong",
+   "grade": 9,
+   "order": 1,
+   "title": "Định hướng nghề nghiệp",
+   "lessons": [
+    {
+     "key": "cn9.nghe_ky_thuat",
+     "order": 1,
+     "title": "Nghề nghiệp trong lĩnh vực kĩ thuật, công nghệ",
+     "description": "Biết ý nghĩa của nghề nghiệp và đặc điểm các nghề kĩ thuật, công nghệ.",
+     "status": "planned"
+    },
+    {
+     "key": "cn9.he_thong_giao_duc",
+     "order": 2,
+     "title": "Hệ thống giáo dục và hướng đi sau trung học cơ sở",
+     "description": "Biết các con đường học tiếp sau THCS: THPT, giáo dục nghề nghiệp.",
+     "status": "planned"
+    },
+    {
+     "key": "cn9.thi_truong_lao_dong",
+     "order": 3,
+     "title": "Thị trường lao động kĩ thuật, công nghệ",
+     "description": "Biết nhu cầu của thị trường lao động trong lĩnh vực kĩ thuật, công nghệ.",
+     "status": "planned"
+    },
+    {
+     "key": "cn9.chon_nghe",
+     "order": 4,
+     "title": "Lựa chọn nghề nghiệp phù hợp",
+     "description": "Đánh giá sở thích, năng lực của bản thân và nhu cầu xã hội khi chọn nghề.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn9.mang_dien",
+   "grade": 9,
+   "order": 2,
+   "title": "Mô đun Lắp đặt mạng điện trong nhà",
+   "lessons": [
+    {
+     "key": "cn9.cau_truc_mang_dien",
+     "order": 1,
+     "title": "Cấu trúc mạng điện trong nhà",
+     "description": "Biết cấu trúc và yêu cầu của mạng điện trong nhà.",
+     "status": "planned"
+    },
+    {
+     "key": "cn9.thiet_bi_dung_cu",
+     "order": 2,
+     "title": "Thiết bị, vật liệu và dụng cụ lắp đặt mạng điện",
+     "description": "Biết công dụng của thiết bị đóng cắt, bảo vệ, vật liệu và dụng cụ lắp đặt mạng điện trong nhà.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu công dụng của aptomat, cầu chì, thiết bị chống giật, công tắc, ổ cắm",
+      "Nêu công dụng của dụng cụ: bút thử điện, kìm tuốt dây, kìm cắt dây, tua vít, đồng hồ vạn năng",
+      "Biết vật liệu dùng trong lắp đặt mạng điện"
+     ],
+     "summary": [
+      "Thiết bị đóng cắt (công tắc, aptomat) và bảo vệ (aptomat, cầu chì, thiết bị chống giật) giữ an toàn cho người và mạng điện.",
+      "Dụng cụ phải có cán cách điện tốt; bút thử điện kiểm tra dây, ổ cắm có điện hay không.",
+      "Mọi mối nối phải chắc và được bọc cách điện.",
+      "Chỉ lắp đặt, sửa chữa khi đã ngắt nguồn điện và có người hướng dẫn."
+     ],
+     "examples": [
+      {
+       "title": "Thử ổ cắm",
+       "lines": [
+        "Cầm bút thử điện, chạm đầu bút vào lỗ ổ cắm, ngón tay chạm nắp kim loại ở đuôi bút: đèn sáng là lỗ đó có điện (dây pha)."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Ghép cho đúng",
+       "tasks": [
+        {
+         "key": "dung_cu",
+         "prompt": "Ghép mỗi dụng cụ với công dụng của nó.",
+         "pairs": [
+          [
+           "Bút thử điện",
+           "Kiểm tra dây, ổ cắm có điện hay không"
+          ],
+          [
+           "Kìm tuốt dây",
+           "Bóc lớp vỏ cách điện của dây dẫn"
+          ],
+          [
+           "Kìm cắt dây",
+           "Cắt dây dẫn điện"
+          ],
+          [
+           "Tua vít",
+           "Vặn, tháo vít khi lắp thiết bị"
+          ],
+          [
+           "Đồng hồ vạn năng",
+           "Đo điện áp, điện trở, kiểm tra thông mạch"
+          ]
+         ],
+         "explanation": "Mọi dụng cụ điện cầm tay phải có cán cách điện còn tốt, không nứt vỡ."
+        },
+        {
+         "key": "thiet_bi",
+         "prompt": "Ghép mỗi thiết bị với công dụng của nó.",
+         "pairs": [
+          [
+           "Aptomat",
+           "Tự ngắt mạch khi quá tải hoặc ngắn mạch"
+          ],
+          [
+           "Cầu chì",
+           "Dây chảy đứt để bảo vệ khi dòng điện quá lớn"
+          ],
+          [
+           "Thiết bị chống giật (RCD)",
+           "Ngắt điện khi có dòng điện rò"
+          ],
+          [
+           "Công tắc",
+           "Đóng, cắt mạch điện của đèn"
+          ],
+          [
+           "Ổ cắm",
+           "Lấy điện cho đồ dùng điện"
+          ]
+         ],
+         "explanation": "Aptomat và cầu chì bảo vệ mạng điện khỏi quá tải, ngắn mạch; thiết bị chống giật bảo vệ con người khi có rò điện."
+        },
+        {
+         "key": "vat_lieu",
+         "prompt": "Ghép mỗi vật liệu với công dụng của nó.",
+         "pairs": [
+          [
+           "Dây dẫn lõi đồng bọc nhựa",
+           "Dẫn điện từ nguồn đến thiết bị"
+          ],
+          [
+           "Ống luồn dây",
+           "Bảo vệ và che dây đi trên tường"
+          ],
+          [
+           "Băng dính cách điện",
+           "Bọc cách điện cho mối nối dây"
+          ],
+          [
+           "Bảng điện",
+           "Nơi gắn aptomat, công tắc, ổ cắm"
+          ]
+         ],
+         "explanation": "Chọn dây có tiết diện phù hợp với công suất; mối nối luôn được bọc kín bằng băng dính cách điện."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "cn9.thiet_ke_mang_dien",
+     "order": 3,
+     "title": "Thiết kế mạng điện trong nhà",
+     "description": "Vẽ sơ đồ nguyên lí, sơ đồ lắp đặt và dự trù vật liệu cho mạng điện đơn giản.",
+     "status": "planned"
+    },
+    {
+     "key": "cn9.lap_mach_chieu_sang",
+     "order": 4,
+     "title": "Lắp đặt mạch điện chiếu sáng",
+     "description": "Lắp mạch hai công tắc điều khiển hai đèn, có giáo viên hướng dẫn.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn9.cay_an_qua",
+   "grade": 9,
+   "order": 3,
+   "title": "Mô đun Trồng cây ăn quả",
+   "lessons": [
+    {
+     "key": "cn9.gia_tri_cay_an_qua",
+     "order": 1,
+     "title": "Giá trị của cây ăn quả",
+     "description": "Nêu giá trị của cây ăn quả và yêu cầu ngoại cảnh của một số loại cây.",
+     "status": "planned"
+    },
+    {
+     "key": "cn9.nhan_giong_cham_soc",
+     "order": 2,
+     "title": "Nhân giống, trồng và chăm sóc cây ăn quả",
+     "description": "Làm đúng thứ tự các bước chiết cành, trồng cây con và bón phân thúc cho cây ăn quả.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu các bước chiết cành",
+      "Nêu các bước trồng cây ăn quả con ra vườn",
+      "Biết bón phân thúc đúng vị trí"
+     ],
+     "summary": [
+      "Chiết cành: tạo rễ cho cành ngay trên cây mẹ rồi mới cắt ra trồng; cây con giữ đặc tính của cây mẹ, sớm ra quả.",
+      "Các bước chiết: chọn cành → khoanh vỏ → bó bầu → cắt cành chiết đem giâm hoặc trồng.",
+      "Trồng cây: chuẩn bị hố, bón lót trước khi trồng; bóc bỏ vỏ bầu, đặt cây thẳng, lấp đất, tưới đẫm, cắm cọc.",
+      "Rễ hút chất dinh dưỡng mọc nhiều ở vùng mép tán cây, nên bón phân thúc theo hình chiếu của mép tán."
+     ],
+     "examples": [
+      {
+       "title": "Chiết cành bưởi",
+       "lines": [
+        "Chọn cành bánh tẻ → khoanh, bóc vỏ → bó bầu đất ẩm → khoảng 1–2 tháng ra rễ thì cắt cành."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Thứ tự các bước",
+       "tasks": [
+        {
+         "key": "chiet_canh",
+         "prompt": "Sắp xếp các bước chiết cành.",
+         "items": [
+          "Chọn cành bánh tẻ, khoẻ, ở giữa tán, hướng ra ánh sáng",
+          "Khoanh và bóc một khoanh vỏ, cạo sạch lớp tượng tầng",
+          "Bó bầu đất ẩm quanh vết khoanh, bọc ni lông, buộc chặt hai đầu",
+          "Khi rễ mọc nhiều, cắt cành chiết đem giâm hoặc trồng"
+         ],
+         "explanation": "Phải khoanh vỏ trước để chất dinh dưỡng dồn lại, rễ mọc ở mép trên vết khoanh; bầu đất giữ ẩm cho rễ mọc; có rễ mới cắt."
+        },
+        {
+         "key": "bau_dat",
+         "prompt": "Sắp xếp các bước chuẩn bị và bó bầu cho cành chiết.",
+         "items": [
+          "Trộn đất với phân hữu cơ hoai mục và rơm, mùn",
+          "Làm ẩm hỗn hợp vừa phải",
+          "Đắp hỗn hợp bao quanh vết khoanh",
+          "Bọc ni lông và buộc chặt hai đầu bầu"
+         ],
+         "explanation": "Bầu đất cần tơi, giàu dinh dưỡng và đủ ẩm; bọc ni lông giữ ẩm cho bầu trong suốt thời gian ra rễ."
+        },
+        {
+         "key": "trong_cay",
+         "prompt": "Sắp xếp các bước trồng cây ăn quả con ra vườn.",
+         "items": [
+          "Đào hố, trộn phân bón lót với đất, lấp hố trước khi trồng",
+          "Bóc bỏ vỏ bầu, giữ nguyên bầu đất",
+          "Đặt cây thẳng giữa hố, lấp đất và nén chặt quanh gốc",
+          "Tưới đẫm nước và cắm cọc giữ cây"
+         ],
+         "explanation": "Hố được chuẩn bị trước để phân hoai, đất ổn định; giữ bầu đất để rễ không đứt; cọc giữ cây khỏi đổ khi có gió."
+        },
+        {
+         "key": "bon_thuc",
+         "prompt": "Sắp xếp các bước bón phân thúc cho cây ăn quả.",
+         "items": [
+          "Xác định vị trí bón theo hình chiếu mép tán cây",
+          "Đào rãnh nông quanh mép tán",
+          "Rải phân vào rãnh",
+          "Lấp đất và tưới nước"
+         ],
+         "explanation": "Bón ở mép tán, nơi có nhiều rễ hút; lấp đất để phân không bay hơi, rửa trôi; tưới để phân tan cho rễ hút."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "cn9.cay_co_mui",
+     "order": 3,
+     "title": "Trồng và chăm sóc cây ăn quả có múi",
+     "description": "Biết kĩ thuật trồng, chăm sóc, thu hoạch cây có múi như cam, bưởi.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn9.che_bien",
+   "grade": 9,
+   "order": 4,
+   "title": "Mô đun Chế biến thực phẩm",
+   "lessons": [
+    {
+     "key": "cn9.an_toan_ve_sinh",
+     "order": 1,
+     "title": "An toàn vệ sinh thực phẩm trong chế biến",
+     "description": "Biết nguyên nhân ngộ độc thực phẩm và biện pháp phòng tránh.",
+     "status": "planned"
+    },
+    {
+     "key": "cn9.mon_khong_nhiet",
+     "order": 2,
+     "title": "Chế biến món ăn không sử dụng nhiệt",
+     "description": "Thực hiện món trộn, món muối chua đúng quy trình, hợp vệ sinh.",
+     "status": "planned"
+    },
+    {
+     "key": "cn9.mon_dung_nhiet",
+     "order": 3,
+     "title": "Chế biến món ăn có sử dụng nhiệt",
+     "description": "Thực hiện món luộc, xào, rán đúng quy trình, an toàn.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn10.thiet_ke",
+   "grade": 10,
+   "order": 1,
+   "title": "Thiết kế và công nghệ (Công nghiệp): Công nghệ và thiết kế kĩ thuật",
+   "lessons": [
+    {
+     "key": "cn10.cong_nghe_doi_song",
+     "order": 1,
+     "title": "Công nghệ và đời sống",
+     "description": "Biết khái niệm công nghệ, hệ thống kĩ thuật và một số công nghệ phổ biến.",
+     "status": "planned"
+    },
+    {
+     "key": "cn10.cach_mang_cong_nghiep",
+     "order": 2,
+     "title": "Các cuộc cách mạng công nghiệp",
+     "description": "Biết đặc trưng của bốn cuộc cách mạng công nghiệp.",
+     "status": "planned"
+    },
+    {
+     "key": "cn10.quy_trinh_thiet_ke",
+     "order": 3,
+     "title": "Quy trình thiết kế kĩ thuật",
+     "description": "Làm đúng thứ tự quy trình thiết kế kĩ thuật và chọn giải pháp theo tiêu chí.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu các bước của quy trình thiết kế kĩ thuật",
+      "Đặt tiêu chí đo được cho sản phẩm",
+      "Chọn giải pháp, vật liệu theo tiêu chí và sửa nguyên mẫu sau thử nghiệm"
+     ],
+     "summary": [
+      "Quy trình: xác định vấn đề, tiêu chí → tìm hiểu tổng quan, đề xuất giải pháp → xây dựng nguyên mẫu → thử nghiệm, đánh giá → lập hồ sơ kĩ thuật.",
+      "Tiêu chí tốt là tiêu chí kiểm tra được: kích thước, khối lượng, thời gian, giá thành…",
+      "Có thể có nhiều giải pháp đạt tiêu chí; chọn giải pháp tốt nhất theo các tiêu chí quan trọng nhất.",
+      "Thử nghiệm chưa đạt thì quay lại sửa thiết kế: quy trình có thể lặp nhiều lần."
+     ],
+     "examples": [
+      {
+       "title": "Giá đỡ điện thoại",
+       "lines": [
+        "Tiêu chí: đỡ điện thoại đến 7 inch, nghiêng 60°, không đổ khi chạm màn hình, giá dưới 50 000 đồng."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Thứ tự trong thiết kế",
+       "tasks": [
+        {
+         "key": "quy_trinh",
+         "prompt": "Sắp xếp các bước của quy trình thiết kế kĩ thuật.",
+         "items": [
+          "Xác định vấn đề và các tiêu chí của sản phẩm",
+          "Tìm hiểu tổng quan và đề xuất các giải pháp",
+          "Chọn giải pháp, xây dựng nguyên mẫu",
+          "Thử nghiệm, đánh giá và điều chỉnh",
+          "Lập hồ sơ kĩ thuật"
+         ],
+         "explanation": "Mỗi bước dùng kết quả của bước trước; hồ sơ kĩ thuật được lập sau cùng, khi thiết kế đã được thử nghiệm và hoàn thiện."
+        },
+        {
+         "key": "tong_quan",
+         "prompt": "Sắp xếp các bước tìm hiểu tổng quan và đề xuất giải pháp cho bình tưới cây tự động.",
+         "items": [
+          "Tìm hiểu các sản phẩm tương tự đã có",
+          "Phân tích ưu, nhược điểm của các sản phẩm đó",
+          "Đề xuất nhiều phương án khác nhau",
+          "Chọn phương án tốt nhất theo các tiêu chí"
+         ],
+         "explanation": "Biết cái đã có để không làm lại và tránh nhược điểm của chúng; nhiều phương án thì mới có cái để so sánh, chọn lựa."
+        },
+        {
+         "key": "nguyen_mau",
+         "prompt": "Sắp xếp các bước làm nguyên mẫu giá đỡ điện thoại bằng gỗ.",
+         "items": [
+          "Vẽ phác thảo và ghi kích thước",
+          "Vạch dấu lên tấm gỗ",
+          "Cưa theo đường vạch dấu",
+          "Dũa, chà nhám các mép cắt",
+          "Lắp ghép và thử đặt điện thoại"
+         ],
+         "explanation": "Có kích thước mới vạch dấu; vạch dấu rồi mới cưa; làm nhẵn mép trước khi lắp để an toàn và đẹp."
+        },
+        {
+         "key": "thu_nghiem",
+         "prompt": "Sắp xếp các bước thử nghiệm và đánh giá một nguyên mẫu.",
+         "items": [
+          "Chạy thử nguyên mẫu theo từng tiêu chí",
+          "Ghi lại kết quả đo được",
+          "So sánh kết quả với tiêu chí đã đặt",
+          "Sửa thiết kế ở điểm chưa đạt rồi thử lại"
+         ],
+         "explanation": "Đánh giá dựa trên số liệu đo được, không dựa trên cảm nhận; điểm nào chưa đạt thì sửa đúng điểm đó."
+        }
+       ]
+      },
+      {
+       "game": "choice",
+       "title": "Chọn giải pháp theo tiêu chí",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "gia_phoi_khan",
+         "question": "Thiết kế giá phơi khăn cho phòng tắm nhỏ. Tiêu chí: chịu ẩm, gọn, giá rẻ. Phương án nào đạt?",
+         "options": [
+          {
+           "text": "Thanh nhựa gắn tường, có móc treo",
+           "ok": true,
+           "why": "Đạt: nhựa chịu ẩm, gắn tường gọn, giá rẻ."
+          },
+          {
+           "text": "Giá inox gắn tường dạng gập",
+           "ok": true,
+           "why": "Đạt: inox không gỉ trong môi trường ẩm, gập lại gọn; giá vừa phải."
+          },
+          {
+           "text": "Giá gỗ tự nhiên không sơn phủ",
+           "ok": false,
+           "why": "Không đạt tiêu chí chịu ẩm: gỗ không phủ sơn dễ mốc, mục trong phòng tắm."
+          },
+          {
+           "text": "Tủ gỗ lớn đặt sàn",
+           "ok": false,
+           "why": "Không đạt tiêu chí gọn: chiếm nhiều diện tích phòng tắm nhỏ."
+          }
+         ],
+         "explanation": "So từng phương án với từng tiêu chí; phương án đạt cả ba tiêu chí đều chấp nhận được."
+        },
+        {
+         "key": "tieu_chi_do",
+         "question": "Tiêu chí nào dùng được để kiểm tra nguyên mẫu đèn ngủ dùng pin sạc?",
+         "options": [
+          {
+           "text": "Đèn sáng liên tục ít nhất 8 giờ sau một lần sạc đầy",
+           "ok": true,
+           "why": "Đúng. Tiêu chí có con số, đo và kiểm tra được."
+          },
+          {
+           "text": "Đèn phải thật đẹp",
+           "ok": false,
+           "why": "\"Đẹp\" tuỳ cảm nhận mỗi người, không kiểm tra được bằng phép đo."
+          },
+          {
+           "text": "Đèn phải hiện đại",
+           "ok": false,
+           "why": "\"Hiện đại\" là cảm nhận, cần đổi thành điều cụ thể đo được."
+          }
+         ],
+         "explanation": "Tiêu chí thiết kế cần cụ thể, đo được, để thử nghiệm cho kết luận rõ ràng là đạt hay chưa đạt."
+        },
+        {
+         "key": "bi_do",
+         "question": "Nguyên mẫu giá đỡ điện thoại bị đổ khi đặt điện thoại màn hình lớn. Bước tiếp theo đúng là gì?",
+         "options": [
+          {
+           "text": "Mở rộng đế hoặc hạ thấp trọng tâm rồi thử lại",
+           "ok": true,
+           "why": "Đúng. Tìm nguyên nhân (trọng tâm cao, đế hẹp), sửa đúng chỗ rồi thử nghiệm lại."
+          },
+          {
+           "text": "Vẫn lập hồ sơ kĩ thuật vì đã có nguyên mẫu",
+           "ok": false,
+           "why": "Nguyên mẫu chưa đạt tiêu chí thì chưa hoàn thiện, chưa lập hồ sơ."
+          },
+          {
+           "text": "Tự đổi tiêu chí thành chỉ dùng cho điện thoại nhỏ",
+           "ok": false,
+           "why": "Tiêu chí xuất phát từ nhu cầu người dùng; không tự hạ tiêu chí để che lỗi thiết kế."
+          }
+         ],
+         "explanation": "Thử nghiệm – đánh giá – điều chỉnh có thể lặp nhiều lần cho đến khi sản phẩm đạt tiêu chí."
+        },
+        {
+         "key": "hop_ngoai_troi",
+         "question": "Chọn vật liệu cho hộp đựng dụng cụ để ngoài trời, chịu mưa nắng. Vật liệu nào đạt?",
+         "options": [
+          {
+           "text": "Nhựa PP hoặc HDPE có phụ gia chống tia UV",
+           "ok": true,
+           "why": "Đạt: không thấm nước, không gỉ, chống lão hoá dưới nắng."
+          },
+          {
+           "text": "Tôn mạ kẽm, mép cắt được gấp mép an toàn",
+           "ok": true,
+           "why": "Đạt: lớp kẽm chống gỉ; gấp mép để không sắc cạnh."
+          },
+          {
+           "text": "Bìa các-tông",
+           "ok": false,
+           "why": "Không đạt: ngấm nước, mềm và rách khi gặp mưa."
+          },
+          {
+           "text": "Gỗ dán không sơn phủ",
+           "ok": false,
+           "why": "Không đạt: gỗ dán ngấm nước sẽ bong lớp, phồng và mục."
+          }
+         ],
+         "explanation": "Vật liệu được chọn theo điều kiện làm việc của sản phẩm: ngoài trời cần chịu nước, chịu nắng."
+        },
+        {
+         "key": "tuoi_cay",
+         "question": "Thiết kế cách tưới cho chậu cây khi cả nhà đi vắng một tuần. Tiêu chí: không dùng điện, rẻ, cây đủ nước. Giải pháp nào đạt?",
+         "options": [
+          {
+           "text": "Chai nhựa đầy nước, nắp đục lỗ nhỏ, cắm ngược vào chậu",
+           "ok": true,
+           "why": "Đạt: nước rỉ từ từ, không dùng điện, gần như không tốn tiền."
+          },
+          {
+           "text": "Dây bấc vải nối từ xô nước sang chậu",
+           "ok": true,
+           "why": "Đạt: nước thấm dần theo bấc, không dùng điện, rẻ."
+          },
+          {
+           "text": "Máy bơm nhỏ có hẹn giờ",
+           "ok": false,
+           "why": "Không đạt: dùng điện và tốn tiền hơn."
+          },
+          {
+           "text": "Tưới thật đẫm một lần trước khi đi",
+           "ok": false,
+           "why": "Không đạt: không đủ nước cho một tuần, tưới quá nhiều còn dễ úng rễ."
+          }
+         ],
+         "explanation": "Hai giải pháp cùng đạt: đây là chỗ cho sáng tạo, miễn là đáp ứng đủ tiêu chí."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "cn10.ve_ky_thuat",
+   "grade": 10,
+   "order": 2,
+   "title": "Thiết kế và công nghệ (Công nghiệp): Vẽ kĩ thuật",
+   "lessons": [
+    {
+     "key": "cn10.hinh_chieu_vuong_goc",
+     "order": 1,
+     "title": "Hình chiếu vuông góc",
+     "description": "Vẽ hình chiếu vuông góc của vật thể đơn giản theo phương pháp góc chiếu thứ nhất.",
+     "status": "planned"
+    },
+    {
+     "key": "cn10.mat_cat_hinh_cat",
+     "order": 2,
+     "title": "Mặt cắt và hình cắt",
+     "description": "Biết mặt cắt, hình cắt và cách biểu diễn chúng.",
+     "status": "planned"
+    },
+    {
+     "key": "cn10.hinh_chieu_truc_do",
+     "order": 3,
+     "title": "Hình chiếu trục đo và hình chiếu phối cảnh",
+     "description": "Vẽ hình chiếu trục đo vuông góc đều của vật thể đơn giản.",
+     "status": "planned"
+    },
+    {
+     "key": "cn10.ban_ve_co_khi",
+     "order": 4,
+     "title": "Bản vẽ cơ khí và bản vẽ xây dựng",
+     "description": "Đọc bản vẽ chi tiết, bản vẽ lắp và bản vẽ nhà đơn giản.",
+     "status": "planned"
+    },
+    {
+     "key": "cn10.ve_bang_may_tinh",
+     "order": 5,
+     "title": "Vẽ kĩ thuật với sự trợ giúp của máy tính",
+     "description": "Biết phần mềm vẽ kĩ thuật và lập bản vẽ đơn giản bằng máy tính.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn10.dat_phan_bon",
+   "grade": 10,
+   "order": 3,
+   "title": "Công nghệ trồng trọt (Nông nghiệp): Đất trồng và phân bón",
+   "lessons": [
+    {
+     "key": "cn10.dat_trong",
+     "order": 1,
+     "title": "Thành phần và tính chất của đất trồng",
+     "description": "Biết thành phần, tính chất của đất trồng và biện pháp cải tạo, bảo vệ đất.",
+     "status": "planned"
+    },
+    {
+     "key": "cn10.phan_bon",
+     "order": 2,
+     "title": "Các loại phân bón và cách sử dụng",
+     "description": "Phân loại phân bón thành phân hữu cơ, phân hoá học và phân vi sinh; biết cách dùng từng loại.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Phân biệt phân hữu cơ, phân hoá học (vô cơ) và phân vi sinh",
+      "Biết đặc điểm và cách bón từng loại",
+      "Biết sử dụng phân bón an toàn cho người và môi trường"
+     ],
+     "summary": [
+      "Phân hữu cơ (phân chuồng, phân xanh, phân trùn quế): nhiều chất dinh dưỡng, tác dụng chậm, cải tạo đất; thường bón lót, phải ủ hoai trước khi bón.",
+      "Phân hoá học (urê, supe lân, kali clorua, NPK): tỉ lệ chất dinh dưỡng cao, dễ tan, tác dụng nhanh; thường bón thúc, bón đúng liều.",
+      "Phân vi sinh chứa vi sinh vật có ích (cố định đạm, phân giải lân); bảo quản nơi mát, không để lâu.",
+      "Bón quá nhiều phân hoá học làm chua đất, ô nhiễm nguồn nước."
+     ],
+     "examples": [
+      {
+       "title": "Bón cho rau",
+       "lines": [
+        "Bón lót phân chuồng hoai trước khi trồng; bón thúc urê pha loãng khi cây đang lớn."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Phân loại phân bón",
+       "set": {
+        "title": "Loại phân này thuộc nhóm nào?",
+        "groups": [
+         {
+          "id": "huu_co",
+          "label": "Phân hữu cơ",
+          "icon": "🐄"
+         },
+         {
+          "id": "hoa_hoc",
+          "label": "Phân hoá học (vô cơ)",
+          "icon": "⚗️"
+         },
+         {
+          "id": "vi_sinh",
+          "label": "Phân vi sinh",
+          "icon": "🦠"
+         }
+        ],
+        "cards": [
+         {
+          "key": "phan_chuong",
+          "text": "Phân chuồng đã ủ hoai",
+          "picture": "🐄",
+          "group": "huu_co",
+          "explanation": "Phân chuồng là phân hữu cơ; phải ủ hoai để diệt mầm bệnh, hạt cỏ."
+         },
+         {
+          "key": "phan_xanh",
+          "text": "Phân xanh từ cây điền thanh, muồng",
+          "picture": "🌿",
+          "group": "huu_co",
+          "explanation": "Phân xanh là cây xanh vùi vào đất: phân hữu cơ, giúp đất tơi xốp."
+         },
+         {
+          "key": "trun_que",
+          "text": "Phân trùn quế",
+          "picture": "🪱",
+          "group": "huu_co",
+          "explanation": "Phân trùn quế là chất thải của giun quế: phân hữu cơ giàu dinh dưỡng."
+         },
+         {
+          "key": "ure",
+          "text": "Phân urê",
+          "picture": "⚪",
+          "group": "hoa_hoc",
+          "explanation": "Urê là phân đạm hoá học, tan nhanh; thường dùng bón thúc."
+         },
+         {
+          "key": "supe_lan",
+          "text": "Phân supe lân",
+          "picture": "🟤",
+          "group": "hoa_hoc",
+          "explanation": "Supe lân là phân lân hoá học; thường dùng bón lót."
+         },
+         {
+          "key": "kali",
+          "text": "Phân kali clorua",
+          "picture": "🔴",
+          "group": "hoa_hoc",
+          "explanation": "Kali clorua là phân kali hoá học, giúp cây cứng cây, tăng chất lượng củ, quả."
+         },
+         {
+          "key": "npk",
+          "text": "Phân hỗn hợp NPK",
+          "picture": "🧪",
+          "group": "hoa_hoc",
+          "explanation": "NPK chứa cả đạm, lân, kali do nhà máy sản xuất: phân hoá học."
+         },
+         {
+          "key": "co_dinh_dam",
+          "text": "Phân chứa vi khuẩn cố định đạm",
+          "picture": "🫘",
+          "group": "vi_sinh",
+          "explanation": "Vi khuẩn cố định đạm biến nitơ của không khí thành chất cây dùng được."
+         },
+         {
+          "key": "phan_giai_lan",
+          "text": "Phân chứa vi sinh vật phân giải lân",
+          "picture": "🔬",
+          "group": "vi_sinh",
+          "explanation": "Vi sinh vật phân giải lân giúp chuyển lân khó tan trong đất thành dạng cây hút được."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "cn10.cai_tao_dat",
+     "order": 3,
+     "title": "Cải tạo và bảo vệ đất trồng",
+     "description": "Biết biện pháp cải tạo đất chua, đất mặn, đất xám bạc màu.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn10.giong_cong_nghe_cao",
+   "grade": 10,
+   "order": 4,
+   "title": "Công nghệ trồng trọt (Nông nghiệp): Giống, sâu bệnh và trồng trọt công nghệ cao",
+   "lessons": [
+    {
+     "key": "cn10.nhan_giong",
+     "order": 1,
+     "title": "Công nghệ nhân giống cây trồng",
+     "description": "Biết giống cây trồng, nhân giống bằng nuôi cấy mô tế bào.",
+     "status": "planned"
+    },
+    {
+     "key": "cn10.sau_benh",
+     "order": 2,
+     "title": "Phòng trừ sâu, bệnh hại cây trồng",
+     "description": "Nhận biết một số sâu, bệnh hại và biện pháp phòng trừ tổng hợp.",
+     "status": "planned"
+    },
+    {
+     "key": "cn10.thuy_canh",
+     "order": 3,
+     "title": "Trồng cây không dùng đất",
+     "description": "Biết kĩ thuật thuỷ canh, khí canh và trồng cây trên giá thể.",
+     "status": "planned"
+    },
+    {
+     "key": "cn10.du_an",
+     "order": 4,
+     "title": "Dự án trồng trọt",
+     "description": "Lập kế hoạch và thực hiện một dự án trồng trọt nhỏ.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn11.co_khi",
+   "grade": 11,
+   "order": 1,
+   "title": "Công nghệ cơ khí (Công nghiệp): Vật liệu và gia công cơ khí",
+   "lessons": [
+    {
+     "key": "cn11.vat_lieu",
+     "order": 1,
+     "title": "Vật liệu cơ khí",
+     "description": "Biết tính chất và ứng dụng của vật liệu kim loại, phi kim loại, vật liệu mới.",
+     "status": "planned"
+    },
+    {
+     "key": "cn11.gia_cong",
+     "order": 2,
+     "title": "Các phương pháp gia công cơ khí",
+     "description": "Biết gia công không phoi (đúc, rèn, hàn) và gia công cắt gọt (tiện, phay, khoan).",
+     "status": "planned"
+    },
+    {
+     "key": "cn11.tu_dong_hoa",
+     "order": 3,
+     "title": "Sản xuất cơ khí tự động",
+     "description": "Biết máy CNC, rô bốt công nghiệp và dây chuyền sản xuất tự động.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn11.dong_co",
+   "grade": 11,
+   "order": 2,
+   "title": "Công nghệ cơ khí (Công nghiệp): Động cơ đốt trong và ô tô",
+   "lessons": [
+    {
+     "key": "cn11.dong_co_bon_ky",
+     "order": 1,
+     "title": "Động cơ đốt trong bốn kì",
+     "description": "Nắm cấu tạo, nguyên lí làm việc và các hệ thống của động cơ đốt trong bốn kì.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu chức năng của các chi tiết chính: pít-tông, thanh truyền, trục khuỷu, xu páp, bugi",
+      "Mô tả bốn kì của động cơ xăng bốn kì",
+      "Nêu nhiệm vụ của các hệ thống trong động cơ"
+     ],
+     "summary": [
+      "Động cơ bốn kì: mỗi chu trình gồm nạp, nén, cháy – dãn nở (sinh công), thải; trục khuỷu quay hai vòng.",
+      "Pít-tông chuyển động tịnh tiến trong xi lanh; thanh truyền và trục khuỷu biến nó thành chuyển động quay.",
+      "Chỉ kì cháy – dãn nở sinh công; các kì khác nhờ quán tính của bánh đà.",
+      "Động cơ xăng đốt hoà khí bằng tia lửa điện của bugi; động cơ diesel phun nhiên liệu vào không khí bị nén nóng để tự bốc cháy."
+     ],
+     "examples": [
+      {
+       "title": "Một chu trình",
+       "lines": [
+        "Nạp (pít-tông đi xuống) → nén (đi lên) → cháy – dãn nở (đi xuống) → thải (đi lên)."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Ghép cho đúng",
+       "tasks": [
+        {
+         "key": "chi_tiet",
+         "prompt": "Ghép mỗi chi tiết với chức năng của nó.",
+         "pairs": [
+          [
+           "Pít-tông",
+           "Cùng xi lanh tạo buồng cháy, nhận lực đẩy của khí cháy"
+          ],
+          [
+           "Thanh truyền",
+           "Nối pít-tông với trục khuỷu, truyền lực"
+          ],
+          [
+           "Trục khuỷu",
+           "Biến chuyển động tịnh tiến thành chuyển động quay"
+          ],
+          [
+           "Xu páp",
+           "Đóng, mở cửa nạp và cửa thải"
+          ],
+          [
+           "Bugi",
+           "Tạo tia lửa điện đốt cháy hoà khí ở động cơ xăng"
+          ]
+         ],
+         "explanation": "Cơ cấu trục khuỷu – thanh truyền là trái tim của động cơ; xu páp thuộc cơ cấu phân phối khí."
+        },
+        {
+         "key": "bon_ky",
+         "prompt": "Ghép mỗi kì của động cơ xăng bốn kì với diễn biến của nó.",
+         "pairs": [
+          [
+           "Kì nạp",
+           "Pít-tông đi xuống, xu páp nạp mở, hoà khí vào xi lanh"
+          ],
+          [
+           "Kì nén",
+           "Hai xu páp đóng, pít-tông đi lên nén hoà khí"
+          ],
+          [
+           "Kì cháy – dãn nở",
+           "Hoà khí cháy, khí giãn nở đẩy pít-tông đi xuống"
+          ],
+          [
+           "Kì thải",
+           "Pít-tông đi lên, xu páp thải mở, đẩy khí thải ra"
+          ]
+         ],
+         "explanation": "Pít-tông đi xuống ở kì nạp và kì cháy – dãn nở, đi lên ở kì nén và kì thải."
+        },
+        {
+         "key": "he_thong",
+         "prompt": "Ghép mỗi hệ thống với nhiệm vụ của nó.",
+         "pairs": [
+          [
+           "Hệ thống bôi trơn",
+           "Đưa dầu đến các bề mặt ma sát, giảm mài mòn"
+          ],
+          [
+           "Hệ thống làm mát",
+           "Giữ nhiệt độ động cơ không quá nóng"
+          ],
+          [
+           "Hệ thống nhiên liệu",
+           "Cung cấp nhiên liệu vào xi lanh đúng lượng, đúng lúc"
+          ],
+          [
+           "Hệ thống khởi động",
+           "Làm trục khuỷu quay để động cơ tự nổ máy"
+          ]
+         ],
+         "explanation": "Các hệ thống phối hợp để động cơ làm việc ổn định, bền và an toàn."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "cn11.dong_co_hai_ky",
+     "order": 2,
+     "title": "Động cơ đốt trong hai kì",
+     "description": "So sánh nguyên lí làm việc của động cơ hai kì với động cơ bốn kì.",
+     "status": "planned"
+    },
+    {
+     "key": "cn11.o_to",
+     "order": 3,
+     "title": "Cấu tạo chung và hệ thống truyền lực của ô tô",
+     "description": "Biết các bộ phận chính và hệ thống truyền lực trên ô tô.",
+     "status": "planned"
+    },
+    {
+     "key": "cn11.an_toan_o_to",
+     "order": 4,
+     "title": "Sử dụng và bảo dưỡng ô tô an toàn",
+     "description": "Biết quy tắc an toàn và bảo dưỡng định kì ô tô.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn11.giong_thuc_an",
+   "grade": 11,
+   "order": 3,
+   "title": "Công nghệ chăn nuôi (Nông nghiệp): Giống và thức ăn chăn nuôi",
+   "lessons": [
+    {
+     "key": "cn11.giong_vat_nuoi",
+     "order": 1,
+     "title": "Giống vật nuôi và chọn giống",
+     "description": "Biết vai trò của giống, phương pháp chọn giống và nhân giống vật nuôi.",
+     "status": "planned"
+    },
+    {
+     "key": "cn11.thuc_an_chan_nuoi",
+     "order": 2,
+     "title": "Các nhóm thức ăn chăn nuôi",
+     "description": "Xếp thức ăn chăn nuôi vào nhóm giàu năng lượng, giàu protein, thô xanh hay bổ sung khoáng, vitamin.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Phân loại thức ăn chăn nuôi theo thành phần dinh dưỡng chính",
+      "Biết vai trò của từng nhóm thức ăn",
+      "Biết phối hợp các nhóm thức ăn trong khẩu phần"
+     ],
+     "summary": [
+      "Thức ăn giàu năng lượng: chủ yếu là tinh bột như ngô, thóc, cám gạo, sắn.",
+      "Thức ăn giàu protein: bột cá, khô dầu đậu tương, đậu đỗ.",
+      "Thức ăn thô, xanh: cỏ, rơm, cây thức ăn; nhiều chất xơ, quan trọng với trâu, bò, dê.",
+      "Thức ăn bổ sung: khoáng (vỏ sò, muối), vitamin, men tiêu hoá; dùng lượng nhỏ theo hướng dẫn.",
+      "Khẩu phần ăn phối hợp các nhóm cho cân đối theo loài, lứa tuổi, mục đích nuôi."
+     ],
+     "examples": [
+      {
+       "title": "Khẩu phần cho lợn thịt",
+       "lines": [
+        "Ngô, cám gạo (năng lượng) + khô dầu đậu tương, bột cá (protein) + khoáng, vitamin bổ sung."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Xếp thức ăn vào nhóm",
+       "set": {
+        "title": "Thức ăn chăn nuôi này thuộc nhóm nào?",
+        "groups": [
+         {
+          "id": "nang_luong",
+          "label": "Giàu năng lượng",
+          "icon": "🌽"
+         },
+         {
+          "id": "protein",
+          "label": "Giàu protein",
+          "icon": "🐟"
+         },
+         {
+          "id": "tho_xanh",
+          "label": "Thô, xanh",
+          "icon": "🌾"
+         },
+         {
+          "id": "bo_sung",
+          "label": "Bổ sung khoáng, vitamin",
+          "icon": "💊"
+         }
+        ],
+        "cards": [
+         {
+          "key": "ngo",
+          "text": "Ngô hạt",
+          "picture": "🌽",
+          "group": "nang_luong",
+          "explanation": "Ngô giàu tinh bột, là thức ăn năng lượng chính cho lợn, gà."
+         },
+         {
+          "key": "cam_gao",
+          "text": "Cám gạo",
+          "picture": "🍚",
+          "group": "nang_luong",
+          "explanation": "Cám gạo nhiều tinh bột và chất béo, cung cấp năng lượng."
+         },
+         {
+          "key": "san_lat",
+          "text": "Sắn lát khô",
+          "picture": "🥔",
+          "group": "nang_luong",
+          "explanation": "Sắn (khoai mì) rất giàu tinh bột; phải phơi khô hoặc nấu chín để giảm độc tố."
+         },
+         {
+          "key": "bot_ca",
+          "text": "Bột cá",
+          "picture": "🐟",
+          "group": "protein",
+          "explanation": "Bột cá có hàm lượng protein cao và nhiều axit amin thiết yếu."
+         },
+         {
+          "key": "kho_dau",
+          "text": "Khô dầu đậu tương",
+          "picture": "🫘",
+          "group": "protein",
+          "explanation": "Khô dầu đậu tương là phần còn lại sau khi ép dầu, giàu protein thực vật."
+         },
+         {
+          "key": "co_voi",
+          "text": "Cỏ voi",
+          "picture": "🌿",
+          "group": "tho_xanh",
+          "explanation": "Cỏ voi là thức ăn xanh nhiều chất xơ cho trâu, bò, dê."
+         },
+         {
+          "key": "rom_kho",
+          "text": "Rơm khô",
+          "picture": "🌾",
+          "group": "tho_xanh",
+          "explanation": "Rơm là thức ăn thô, nhiều xơ, ít dinh dưỡng; thường được ủ hoặc kiềm hoá trước khi cho ăn."
+         },
+         {
+          "key": "vo_so",
+          "text": "Bột vỏ sò",
+          "picture": "🐚",
+          "group": "bo_sung",
+          "explanation": "Bột vỏ sò bổ sung canxi, ví dụ cho gà đẻ để vỏ trứng chắc."
+         },
+         {
+          "key": "premix",
+          "text": "Premix vitamin",
+          "picture": "💊",
+          "group": "bo_sung",
+          "explanation": "Premix là hỗn hợp vitamin trộn với lượng nhỏ vào thức ăn."
+         },
+         {
+          "key": "muoi",
+          "text": "Muối ăn (trộn lượng nhỏ)",
+          "picture": "🧂",
+          "group": "bo_sung",
+          "explanation": "Muối bổ sung natri, clo; chỉ dùng lượng nhỏ, quá nhiều gây ngộ độc."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "cn11.che_bien_thuc_an",
+     "order": 3,
+     "title": "Chế biến và bảo quản thức ăn chăn nuôi",
+     "description": "Biết các phương pháp ủ chua, ủ men, phối trộn và bảo quản thức ăn.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn11.phong_benh_chuong_trai",
+   "grade": 11,
+   "order": 4,
+   "title": "Công nghệ chăn nuôi (Nông nghiệp): Phòng bệnh, chuồng nuôi và môi trường",
+   "lessons": [
+    {
+     "key": "cn11.phong_tri_benh",
+     "order": 1,
+     "title": "Phòng, trị bệnh cho vật nuôi",
+     "description": "Biết nguyên nhân gây bệnh, vắc xin và biện pháp phòng, trị một số bệnh phổ biến.",
+     "status": "planned"
+    },
+    {
+     "key": "cn11.chuong_nuoi",
+     "order": 2,
+     "title": "Chuồng nuôi và vệ sinh chuồng nuôi",
+     "description": "Biết yêu cầu kĩ thuật của chuồng nuôi và cách vệ sinh, khử trùng.",
+     "status": "planned"
+    },
+    {
+     "key": "cn11.chat_thai",
+     "order": 3,
+     "title": "Xử lí chất thải chăn nuôi",
+     "description": "Biết các cách xử lí chất thải: hầm biogas, ủ phân, đệm lót sinh học.",
+     "status": "planned"
+    },
+    {
+     "key": "cn11.cong_nghe_cao",
+     "order": 4,
+     "title": "Chăn nuôi công nghệ cao",
+     "description": "Biết ứng dụng công nghệ cao, chăn nuôi thông minh trong chăn nuôi.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn12.ky_thuat_dien",
+   "grade": 12,
+   "order": 1,
+   "title": "Công nghệ điện – điện tử (Công nghiệp): Kĩ thuật điện",
+   "lessons": [
+    {
+     "key": "cn12.he_thong_dien",
+     "order": 1,
+     "title": "Hệ thống điện quốc gia",
+     "description": "Biết cấu trúc hệ thống điện quốc gia: nguồn điện, lưới điện, tải tiêu thụ.",
+     "status": "planned"
+    },
+    {
+     "key": "cn12.mang_dien_san_xuat",
+     "order": 2,
+     "title": "Mạng điện sản xuất quy mô nhỏ",
+     "description": "Biết cấu trúc và thiết bị của mạng điện sản xuất quy mô nhỏ.",
+     "status": "planned"
+    },
+    {
+     "key": "cn12.dien_dan_dung",
+     "order": 3,
+     "title": "Mạng điện hạ áp dân dụng",
+     "description": "Biết cấu trúc mạng điện trong nhà và các thiết bị đóng cắt, bảo vệ.",
+     "status": "planned"
+    },
+    {
+     "key": "cn12.an_toan_tiet_kiem",
+     "order": 4,
+     "title": "An toàn điện và sử dụng điện tiết kiệm",
+     "description": "Biết biện pháp an toàn điện, sơ cứu người bị điện giật và tiết kiệm điện.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn12.dien_tu",
+   "grade": 12,
+   "order": 2,
+   "title": "Công nghệ điện – điện tử (Công nghiệp): Kĩ thuật điện tử",
+   "lessons": [
+    {
+     "key": "cn12.linh_kien_dien_tu",
+     "order": 1,
+     "title": "Linh kiện điện tử và cổng logic cơ bản",
+     "description": "Nhận biết công dụng của linh kiện điện tử cơ bản, đơn vị đo và các cổng logic.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu công dụng của điện trở, tụ điện, cuộn cảm, điốt, tranzito, LED",
+      "Biết đơn vị đo của các đại lượng điện",
+      "Biết bảng chân lí của các cổng logic cơ bản"
+     ],
+     "summary": [
+      "Điện trở hạn chế, điều chỉnh dòng điện; tụ điện tích, phóng điện, ngăn dòng một chiều; cuộn cảm cản trở dòng xoay chiều tần số cao.",
+      "Điốt cho dòng điện đi theo một chiều; LED là điốt phát quang; tranzito khuếch đại hoặc làm khoá điện tử.",
+      "Đơn vị: điện trở – ôm (Ω), điện dung – fara (F), độ tự cảm – henry (H), điện áp – vôn (V).",
+      "Cổng logic: AND ra 1 khi mọi đầu vào là 1; OR ra 1 khi có ít nhất một đầu vào là 1; NOT đảo đầu vào; NAND ra 0 chỉ khi mọi đầu vào là 1."
+     ],
+     "examples": [
+      {
+       "title": "Mạch LED",
+       "lines": [
+        "Pin 5 V → điện trở hạn dòng → LED: không có điện trở, dòng quá lớn làm hỏng LED."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Ghép cho đúng",
+       "tasks": [
+        {
+         "key": "linh_kien",
+         "prompt": "Ghép mỗi linh kiện với công dụng của nó.",
+         "pairs": [
+          [
+           "Điện trở",
+           "Hạn chế, điều chỉnh dòng điện trong mạch"
+          ],
+          [
+           "Tụ điện",
+           "Tích, phóng điện; ngăn dòng một chiều"
+          ],
+          [
+           "Cuộn cảm",
+           "Cản trở dòng điện xoay chiều tần số cao"
+          ],
+          [
+           "Điốt",
+           "Chỉ cho dòng điện đi qua theo một chiều"
+          ]
+         ],
+         "explanation": "Đây là bốn linh kiện thụ động và bán dẫn cơ bản có mặt trong hầu hết mạch điện tử."
+        },
+        {
+         "key": "ban_dan",
+         "prompt": "Ghép mỗi linh kiện với công dụng của nó.",
+         "pairs": [
+          [
+           "LED",
+           "Phát sáng khi có dòng điện thuận đi qua"
+          ],
+          [
+           "Tranzito",
+           "Khuếch đại tín hiệu hoặc làm khoá đóng cắt"
+          ],
+          [
+           "Quang điện trở (LDR)",
+           "Điện trở giảm khi ánh sáng chiếu vào mạnh hơn"
+          ],
+          [
+           "Điốt Zener",
+           "Ổn định điện áp khi được phân cực ngược"
+          ]
+         ],
+         "explanation": "LDR thường dùng trong mạch đèn tự bật khi trời tối; tranzito điều khiển rơ-le hoặc tải."
+        },
+        {
+         "key": "don_vi",
+         "prompt": "Ghép mỗi đại lượng với đơn vị đo của nó.",
+         "pairs": [
+          [
+           "Điện trở R",
+           "Ôm (Ω)"
+          ],
+          [
+           "Điện dung C",
+           "Fara (F)"
+          ],
+          [
+           "Độ tự cảm L",
+           "Henry (H)"
+          ],
+          [
+           "Điện áp U",
+           "Vôn (V)"
+          ]
+         ],
+         "explanation": "Trong thực tế hay gặp các ước số: kΩ, µF, mH."
+        },
+        {
+         "key": "cong_logic",
+         "prompt": "Ghép mỗi cổng logic với quy tắc của nó.",
+         "pairs": [
+          [
+           "Cổng AND",
+           "Ra 1 khi mọi đầu vào đều là 1"
+          ],
+          [
+           "Cổng OR",
+           "Ra 1 khi có ít nhất một đầu vào là 1"
+          ],
+          [
+           "Cổng NOT",
+           "Đầu ra ngược với đầu vào"
+          ],
+          [
+           "Cổng NAND",
+           "Ra 0 chỉ khi mọi đầu vào đều là 1"
+          ]
+         ],
+         "explanation": "NAND là AND rồi đảo; chỉ dùng cổng NAND cũng ghép được mọi cổng logic khác."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "cn12.dien_tu_tuong_tu",
+     "order": 2,
+     "title": "Mạch điện tử tương tự",
+     "description": "Biết mạch khuếch đại, mạch tạo xung và ứng dụng.",
+     "status": "planned"
+    },
+    {
+     "key": "cn12.vi_dieu_khien",
+     "order": 3,
+     "title": "Vi điều khiển và ứng dụng",
+     "description": "Biết vi điều khiển, lập trình điều khiển LED, cảm biến đơn giản.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn12.lam_nghiep",
+   "grade": 12,
+   "order": 3,
+   "title": "Lâm nghiệp – Thuỷ sản (Nông nghiệp): Lâm nghiệp",
+   "lessons": [
+    {
+     "key": "cn12.vai_tro_lam_nghiep",
+     "order": 1,
+     "title": "Vai trò của rừng và nhiệm vụ của lâm nghiệp",
+     "description": "Biết vai trò của rừng, hiện trạng rừng và nhiệm vụ phát triển lâm nghiệp.",
+     "status": "planned"
+    },
+    {
+     "key": "cn12.trong_cham_soc_rung",
+     "order": 2,
+     "title": "Trồng và chăm sóc rừng",
+     "description": "Làm đúng thứ tự các bước gieo ươm cây giống, trồng rừng bằng cây con có bầu và gieo hạt thẳng.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết các giai đoạn sinh trưởng, phát triển của cây rừng",
+      "Nêu các bước trồng rừng bằng cây con có bầu",
+      "Nêu các bước gieo ươm cây giống và gieo hạt thẳng"
+     ],
+     "summary": [
+      "Cây rừng trải qua các giai đoạn: non, gần thành thục, thành thục, già cỗi.",
+      "Trồng cây con có bầu: tạo lỗ trong hố → rạch bỏ vỏ bầu → đặt cây → lấp, nén đất → vun gốc.",
+      "Rạch bỏ vỏ bầu nhưng giữ nguyên bầu đất để rễ không bị tổn thương.",
+      "Sau khi trồng cần chăm sóc: làm cỏ, xới, vun gốc, bón phân, phát dây leo, bảo vệ khỏi gia súc, cháy rừng."
+     ],
+     "examples": [
+      {
+       "title": "Trồng keo",
+       "lines": [
+        "Đào hố trước → khi mưa đủ ẩm, đặt cây con có bầu → lấp, nén đất → vun gốc."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Thứ tự trồng rừng",
+       "tasks": [
+        {
+         "key": "cay_bau",
+         "prompt": "Sắp xếp các bước trồng rừng bằng cây con có bầu.",
+         "items": [
+          "Tạo lỗ trong hố đất đã chuẩn bị",
+          "Rạch bỏ vỏ bầu, không làm vỡ bầu đất",
+          "Đặt bầu cây thẳng đứng vào lỗ",
+          "Lấp đất và nén chặt quanh bầu",
+          "Vun thêm đất kín gốc cây"
+         ],
+         "explanation": "Vỏ bầu được bỏ ngay trước khi đặt cây; lấp, nén chặt đất để cây đứng vững; vun gốc để giữ ẩm và chống đọng nước."
+        },
+        {
+         "key": "gieo_uom",
+         "prompt": "Sắp xếp các bước gieo ươm cây giống trong bầu ở vườn ươm.",
+         "items": [
+          "Xử lí hạt giống cho nhanh nảy mầm",
+          "Gieo hạt vào bầu đất",
+          "Che phủ, tưới giữ ẩm",
+          "Chăm sóc cây con đến khi đủ tiêu chuẩn đem trồng"
+         ],
+         "explanation": "Xử lí hạt (ví dụ ngâm nước ấm) trước khi gieo; sau khi gieo phải giữ ẩm; cây đủ tiêu chuẩn mới đem trồng."
+        },
+        {
+         "key": "giai_doan",
+         "prompt": "Sắp xếp các giai đoạn sinh trưởng, phát triển của cây rừng.",
+         "items": [
+          "Giai đoạn non",
+          "Giai đoạn gần thành thục",
+          "Giai đoạn thành thục",
+          "Giai đoạn già cỗi"
+         ],
+         "explanation": "Cây lớn nhanh ở giai đoạn non và gần thành thục, ra hoa quả nhiều ở giai đoạn thành thục, rồi chậm lại khi già cỗi."
+        },
+        {
+         "key": "gieo_thang",
+         "prompt": "Sắp xếp các bước trồng rừng bằng cách gieo hạt thẳng.",
+         "items": [
+          "Phát dọn thực bì",
+          "Làm đất theo hố",
+          "Gieo hạt vào hố, lấp một lớp đất mỏng",
+          "Chăm sóc, tỉa bớt cây yếu khi cây mọc"
+         ],
+         "explanation": "Phát dọn và làm đất trước khi gieo; lớp đất mỏng giúp hạt nảy mầm; tỉa cây yếu để cây khoẻ có chỗ lớn."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "cn12.bao_ve_khai_thac",
+     "order": 3,
+     "title": "Bảo vệ và khai thác tài nguyên rừng bền vững",
+     "description": "Biết biện pháp bảo vệ rừng, phòng cháy rừng và khai thác rừng bền vững.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "cn12.thuy_san",
+   "grade": 12,
+   "order": 4,
+   "title": "Lâm nghiệp – Thuỷ sản (Nông nghiệp): Thuỷ sản",
+   "lessons": [
+    {
+     "key": "cn12.moi_truong_nuoi",
+     "order": 1,
+     "title": "Môi trường nuôi thuỷ sản",
+     "description": "Biết các yếu tố môi trường nước và cách quản lí môi trường ao nuôi.",
+     "status": "planned"
+    },
+    {
+     "key": "cn12.giong_thuc_an_ts",
+     "order": 2,
+     "title": "Giống và thức ăn thuỷ sản",
+     "description": "Biết vai trò của giống, thức ăn và cách cho ăn trong nuôi thuỷ sản.",
+     "status": "planned"
+    },
+    {
+     "key": "cn12.phong_tri_benh_ts",
+     "order": 3,
+     "title": "Phòng, trị bệnh thuỷ sản",
+     "description": "Biết một số bệnh thuỷ sản phổ biến và biện pháp phòng, trị.",
+     "status": "planned"
+    },
+    {
+     "key": "cn12.bao_ve_nguon_loi",
+     "order": 4,
+     "title": "Khai thác và bảo vệ nguồn lợi thuỷ sản",
+     "description": "Biết khai thác thuỷ sản có trách nhiệm và bảo vệ nguồn lợi thuỷ sản.",
+     "status": "planned"
+    }
+   ]
+  }
+ ]
+}

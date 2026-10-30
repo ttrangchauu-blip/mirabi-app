@@ -1,0 +1,32 @@
+{"subject": "experience", "version": 1, "organization": "topic",
+ "source_note": "Bộ bài mẫu cho kiểm thử.",
+ "chapters": [
+  {"key": "tn6.ban_than", "grade": 6, "order": 1, "title": "Khám phá bản thân",
+   "lessons": [
+    {"key": "tn6.tu_danh_gia", "order": 1, "title": "Em tự đánh giá thói quen học tập", "description": "Nhìn lại cách em học.", "status": "ready",
+     "review": {"status": "checked"}, "objectives": ["Nhận ra thói quen học tập của mình"], "summary": ["Không có câu trả lời sai."],
+     "games": [{"game": "choice", "style": "reflect", "title": "Tự đánh giá", "tasks": [
+        {"key": "r1", "graded": false, "question": "Em thường ôn bài khi nào?", "explanation": "Mỗi bạn một cách.", "options": [
+           {"text": "Ngay trong ngày học", "why": "Ôn sớm giúp nhớ lâu."}, {"text": "Trước khi kiểm tra", "why": "Thử ôn đều hơn nhé."}]},
+        {"key": "r2", "graded": false, "question": "Em học ở đâu?", "explanation": "Chọn nơi yên tĩnh.", "options": [
+           {"text": "Bàn học riêng", "why": "Giúp tập trung."}, {"text": "Phòng khách", "why": "Thử tắt tivi khi học."}]},
+        {"key": "r3", "graded": false, "question": "Em có lập kế hoạch học không?", "explanation": "Kế hoạch giúp chủ động.", "options": [
+           {"text": "Có, mỗi tuần", "why": "Rất tốt."}, {"text": "Chưa", "why": "Thử bắt đầu từ một tuần."}]},
+        {"key": "r4", "graded": false, "question": "Khi gặp bài khó em làm gì?", "explanation": "Hỏi là cách học.", "options": [
+           {"text": "Hỏi thầy cô, bạn bè", "why": "Hỏi giúp hiểu nhanh."}, {"text": "Bỏ qua", "why": "Đánh dấu để hỏi sau nhé."}]},
+        {"key": "r5", "graded": false, "question": "Em nghỉ giữa giờ học thế nào?", "explanation": "Nghỉ ngắn giúp tỉnh táo.", "options": [
+           {"text": "Nghỉ 5 phút sau mỗi 25 phút", "why": "Cách nghỉ hợp lí."}, {"text": "Không nghỉ", "why": "Nên nghỉ ngắn."}]}]}]},
+    {"key": "tn6.tinh_huong", "order": 2, "title": "Ứng xử khi bạn cần giúp đỡ", "description": "Chọn cách ứng xử phù hợp.", "status": "ready",
+     "review": {"status": "checked"}, "objectives": ["Chọn cách giúp bạn phù hợp"], "summary": ["Giúp bạn bằng việc làm cụ thể."],
+     "games": [{"game": "choice", "style": "situation", "title": "Tình huống", "tasks": [
+        {"key": "s1", "question": "Bạn cùng lớp quên bút. Em làm gì?", "explanation": "Chia sẻ đồ dùng.", "options": [
+           {"text": "Cho bạn mượn bút", "ok": true, "why": "Em giúp bạn kịp học."}, {"text": "Cười bạn", "ok": false, "why": "Làm bạn buồn."}]},
+        {"key": "s2", "question": "Bạn bị ngã ở sân. Em làm gì?", "explanation": "Báo người lớn.", "options": [
+           {"text": "Đỡ bạn và báo thầy cô", "ok": true, "why": "Bạn được giúp kịp thời."}, {"text": "Đi chỗ khác", "ok": false, "why": "Bạn cần giúp."}]},
+        {"key": "s3", "question": "Bạn chưa hiểu bài. Em làm gì?", "explanation": "Giảng lại cho bạn.", "options": [
+           {"text": "Giảng lại cho bạn", "ok": true, "why": "Cả hai cùng hiểu bài."}, {"text": "Cho bạn chép bài", "ok": false, "why": "Bạn vẫn chưa hiểu."}]},
+        {"key": "s4", "question": "Bạn mới chuyển đến lớp. Em làm gì?", "explanation": "Làm quen với bạn.", "options": [
+           {"text": "Rủ bạn chơi cùng", "ok": true, "why": "Bạn thấy được chào đón."}, {"text": "Không nói chuyện", "ok": false, "why": "Bạn sẽ thấy lạc lõng."}]},
+        {"key": "s5", "question": "Bạn làm rơi sách. Em làm gì?", "explanation": "Nhặt giúp bạn.", "options": [
+           {"text": "Nhặt giúp bạn", "ok": true, "why": "Một việc nhỏ có ích."}, {"text": "Giẫm lên sách", "ok": false, "why": "Làm hỏng sách của bạn."}]}]}]}
+   ]}]}

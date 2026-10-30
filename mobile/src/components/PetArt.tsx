@@ -103,9 +103,11 @@ export function SpriteCycle({ source, size: rawSize, layout: { cols, rows, cycle
   const size = wholePixels(rawSize);
   const frames = cols * rows;
   const progress = useRef(new Animated.Value(0)).current;
-  const [loaded, setLoaded] = useState(() => loadedSheets.has(source));
-  useEffect(() => setLoaded(loadedSheets.has(source)), [source]);
-  const onLoad = () => { loadedSheets.add(source); setLoaded(true); };
+  // Worked out while rendering, not synced in an effect: on a switch to a sheet still loading (idle to walk, a new
+  // stage) the first frame drawn would otherwise show that empty sheet instead of the still artwork.
+  const [loadedSource, setLoadedSource] = useState<ImageSourcePropType | null>(null);
+  const loaded = loadedSheets.has(source) || loadedSource === source;
+  const onLoad = () => { loadedSheets.add(source); setLoadedSource(source); };
   const done = useRef(onDone);
   done.current = onDone;
   const ready = once ? loaded : true;
@@ -142,9 +144,10 @@ export function PetArt({ pet: petId, size: rawSize, stage = 1, still: stillProp,
   const size = wholePixels(rawSize);
   const reduceMotion = useReduceMotion();
   const still = stillProp || silhouette;
-  const move = moving ? moveActivity(moving) : null;
+  // `still` wins over `moving`: a paused or finished game keeps the pet standing, not running on the spot.
+  const move = moving && !still ? moveActivity(moving) : null;
   const drawnMove = !!move && !!petSprite(petId, stage, move);
-  const walking = walkingProp || (!!moving && !drawnMove);
+  const walking = walkingProp || (!!move && !drawnMove);
   const activity: PetActivity | null = drawnMove ? move : walking ? 'walk' : studying ? 'study' : still ? null : 'idle';
   const sprite = activity ? petSprite(petId, stage, activity) : undefined;
   const animate = !still && !reduceMotion && !sprite;

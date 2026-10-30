@@ -35,6 +35,11 @@ class User(Base):
     onboarded_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     daily_task_ids: Mapped[str | None] = mapped_column(Text, nullable=True)
     daily_tasks_selected_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    # Learning profile (study_profile.py), asked at registration. None for accounts created before it: Học tập asks.
+    age: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    school_grade: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    # Học tập, THPT: the elective subjects the learner says they study (JSON list of subject codes), shown first.
+    study_subjects: Mapped[str | None] = mapped_column(Text, nullable=True)
     equipped_item: Mapped[str] = mapped_column(String(80), default="Vương miện pha lê")
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     updated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow, nullable=True)
@@ -1009,6 +1014,11 @@ class LearningSession(Base):
     game_type: Mapped[str] = mapped_column(String(20))  # meteor | grammar | defense | math_bridge
     # The game the user picked: meteor | gate | bridge | grammar (gate and bridge mixed) | defense | math_bridge
     game: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    # Học tập by lesson (lesson_catalog.py): the lesson played, the grade it belongs to and its content version, so
+    # progress is kept per grade → subject → lesson → game and an old result never changes with the content.
+    catalog_lesson: Mapped[str | None] = mapped_column(String(40), nullable=True, index=True)
+    catalog_grade: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    content_version: Mapped[str | None] = mapped_column(String(20), nullable=True)
     status: Mapped[str] = mapped_column(String(10), default="active")
     seed: Mapped[int] = mapped_column(Integer)
     scoring_json: Mapped[str] = mapped_column(Text)  # snapshot of scoring and game rules used by this session
@@ -1162,10 +1172,12 @@ class LearningReward(Base):
 
 class LearningTutorialView(Base):
     """A game's first-time guide ("Cách chơi"), finished with "Bắt đầu": per account and game, so it is shown once on
-    every device. Viewing it again later changes nothing."""
+    every device; `version` is the guide's version then (learning.TUTORIAL_VERSION): a newer guide shows once again.
+    Viewing it again later changes nothing."""
     __tablename__ = "learning_tutorial_views"
     __table_args__ = (UniqueConstraint("user_id", "game", name="uq_learning_tutorial_view"),)
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
     game: Mapped[str] = mapped_column(String(20))  # word_shooter | meteor | gate | bridge | grammar | defense | math_bridge
+    version: Mapped[int] = mapped_column(Integer, default=1, server_default="1")
     completed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)

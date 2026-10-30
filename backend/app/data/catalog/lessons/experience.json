@@ -1,0 +1,3844 @@
+{
+ "subject": "experience",
+ "version": 1,
+ "organization": "topic",
+ "source_note": "Theo yêu cầu cần đạt Hoạt động trải nghiệm (lớp 1–5) và Hoạt động trải nghiệm, hướng nghiệp (lớp 6–12), CT GDPT 2018; tổ chức theo bốn mạch hoạt động (hướng vào bản thân, hướng đến xã hội, hướng đến tự nhiên, hướng nghiệp), không theo mục lục bộ sách nào. Trò chơi là tình huống và tự đánh giá; không thay thế hoạt động thực tế cùng lớp.",
+ "chapters": [
+  {
+   "key": "tn1.ban_than",
+   "grade": 1,
+   "order": 1,
+   "title": "Em là học sinh lớp 1",
+   "lessons": [
+    {
+     "key": "tn1.lam_quen_truong",
+     "order": 1,
+     "title": "Làm quen với trường lớp mới",
+     "description": "Biết các khu vực của trường và làm quen thầy cô, bạn bè.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn1.ve_sinh_ca_nhan",
+     "order": 2,
+     "title": "Em tự giữ vệ sinh cá nhân",
+     "description": "Tự đánh răng, rửa tay, giữ cơ thể sạch sẽ mỗi ngày.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả và trình kiểm tra đã soát."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Kể được những việc giữ vệ sinh cá nhân hằng ngày",
+      "Tự làm được các việc vệ sinh vừa sức",
+      "Tự nhận xét thói quen của mình"
+     ],
+     "summary": [
+      "Đánh răng sau khi ngủ dậy và trước khi đi ngủ.",
+      "Rửa tay bằng xà phòng trước khi ăn và sau khi đi vệ sinh.",
+      "Dùng khăn mặt, bàn chải của riêng mình.",
+      "Che miệng khi ho, hắt hơi."
+     ],
+     "examples": [
+      {
+       "title": "Một ngày sạch sẽ",
+       "lines": [
+        "Sáng: đánh răng, rửa mặt.",
+        "Trước bữa ăn: rửa tay.",
+        "Tối: tắm, đánh răng rồi đi ngủ."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Em tự chăm sóc mình",
+       "style": "reflect",
+       "tasks": [
+        {
+         "key": "danh_rang",
+         "question": "Sáng nay, em đánh răng thế nào?",
+         "options": [
+          {
+           "text": "Em tự đánh răng",
+           "ok": true,
+           "why": "Giỏi lắm! Tự đánh răng sáng và tối là em đã biết tự chăm sóc mình."
+          },
+          {
+           "text": "Bố mẹ nhắc em mới đánh",
+           "ok": true,
+           "why": "Không sao. Em thử tự nhớ đánh răng ngay khi ngủ dậy nhé."
+          },
+          {
+           "text": "Hôm nay em quên",
+           "ok": true,
+           "why": "Lần sau em để bàn chải ở chỗ dễ thấy để nhớ nhé. Răng sạch thì không bị sâu."
+          }
+         ],
+         "explanation": "Không có câu trả lời sai: em tự nhìn lại thói quen của mình để làm tốt hơn.",
+         "graded": false
+        },
+        {
+         "key": "tay_ban",
+         "question": "Đi chơi về, tay em dính đất. Trước khi ăn, em làm gì?",
+         "options": [
+          {
+           "text": "Rửa tay bằng xà phòng và nước sạch",
+           "ok": true,
+           "why": "Đúng rồi! Xà phòng giúp rửa trôi vi khuẩn, em sẽ không bị đau bụng."
+          },
+          {
+           "text": "Lau tay vào áo rồi ăn",
+           "ok": false,
+           "why": "Chưa đúng. Lau vào áo không làm tay sạch, áo còn bị bẩn."
+          },
+          {
+           "text": "Ăn luôn cho nhanh",
+           "ok": false,
+           "why": "Chưa đúng. Đất bẩn trên tay sẽ theo thức ăn vào bụng."
+          }
+         ],
+         "explanation": "Luôn rửa tay bằng xà phòng trước khi ăn."
+        },
+        {
+         "key": "mo_hoi",
+         "question": "Chơi xong, em ra nhiều mồ hôi. Em có thể làm gì?",
+         "options": [
+          {
+           "text": "Lau mồ hôi bằng khăn sạch của mình",
+           "ok": true,
+           "why": "Tốt! Dùng khăn sạch của riêng mình giúp cơ thể khô thoáng."
+          },
+          {
+           "text": "Rửa mặt, rửa tay chân bằng nước sạch",
+           "ok": true,
+           "why": "Tốt! Nước sạch giúp em mát và sạch sẽ."
+          },
+          {
+           "text": "Mượn khăn của bạn để lau",
+           "ok": false,
+           "why": "Chưa nên. Mỗi người nên dùng khăn riêng để không lây bệnh."
+          }
+         ],
+         "explanation": "Có nhiều cách đúng: miễn là sạch sẽ và dùng đồ của riêng mình."
+        },
+        {
+         "key": "tu_lam",
+         "question": "Việc nào em đã tự làm được?",
+         "options": [
+          {
+           "text": "Tự đánh răng, rửa mặt",
+           "ok": true,
+           "why": "Tuyệt! Em đã tự chăm sóc mình mỗi sáng."
+          },
+          {
+           "text": "Tự mặc quần áo",
+           "ok": true,
+           "why": "Giỏi quá! Em ngày càng tự lập."
+          },
+          {
+           "text": "Em đang tập làm",
+           "ok": true,
+           "why": "Cứ tập dần nhé, ai cũng cần thời gian để học."
+          }
+         ],
+         "explanation": "Mỗi việc tự làm được là một bước em lớn lên.",
+         "graded": false
+        },
+        {
+         "key": "hat_hoi",
+         "question": "Em sắp hắt hơi khi đang ngồi cạnh bạn. Em làm gì?",
+         "options": [
+          {
+           "text": "Che miệng bằng khăn giấy hoặc khuỷu tay",
+           "ok": true,
+           "why": "Đúng! Như vậy em không làm bắn nước bọt sang bạn."
+          },
+          {
+           "text": "Hắt hơi thẳng về phía bạn",
+           "ok": false,
+           "why": "Chưa đúng. Nước bọt có thể làm bạn bị lây ốm."
+          },
+          {
+           "text": "Che bằng tay rồi cầm đồ chơi chung",
+           "ok": false,
+           "why": "Chưa đúng. Tay vừa che sẽ làm bẩn đồ chơi chung, phải rửa tay trước."
+          }
+         ],
+         "explanation": "Che miệng khi ho, hắt hơi để bảo vệ mọi người."
+        }
+       ]
+      },
+      {
+       "game": "sorting",
+       "title": "Sạch hay chưa sạch?",
+       "set": {
+        "title": "Việc nào giúp em sạch sẽ?",
+        "groups": [
+         {
+          "id": "sach",
+          "label": "Giữ vệ sinh",
+          "icon": "🧼"
+         },
+         {
+          "id": "chua",
+          "label": "Chưa giữ vệ sinh",
+          "icon": "🙈"
+         }
+        ],
+        "cards": [
+         {
+          "key": "danh_rang",
+          "text": "Đánh răng sau khi ngủ dậy",
+          "picture": "🪥",
+          "group": "sach",
+          "explanation": "Đánh răng giúp răng sạch, không sâu."
+         },
+         {
+          "key": "rua_tay",
+          "text": "Rửa tay trước khi ăn",
+          "picture": "🧴",
+          "group": "sach",
+          "explanation": "Rửa tay giúp em không bị đau bụng."
+         },
+         {
+          "key": "cat_mong",
+          "text": "Cắt móng tay gọn gàng",
+          "picture": "✂️",
+          "group": "sach",
+          "explanation": "Móng tay ngắn không giữ đất bẩn."
+         },
+         {
+          "key": "thay_ao",
+          "text": "Thay quần áo khi bị bẩn",
+          "picture": "👕",
+          "group": "sach",
+          "explanation": "Quần áo sạch giúp em thơm tho, dễ chịu."
+         },
+         {
+          "key": "can_mong",
+          "text": "Cắn móng tay",
+          "picture": "💅",
+          "group": "chua",
+          "explanation": "Cắn móng tay đưa vi khuẩn vào miệng."
+         },
+         {
+          "key": "chung_khan",
+          "text": "Dùng chung khăn mặt với bạn",
+          "picture": "🧣",
+          "group": "chua",
+          "explanation": "Dùng chung khăn dễ lây bệnh mắt, bệnh da."
+         },
+         {
+          "key": "lau_ao",
+          "text": "Lau tay bẩn vào áo",
+          "picture": "👚",
+          "group": "chua",
+          "explanation": "Tay vẫn bẩn mà áo cũng bẩn theo."
+         },
+         {
+          "key": "ngoay_mui",
+          "text": "Ngoáy mũi bằng tay",
+          "picture": "👃",
+          "group": "chua",
+          "explanation": "Ngoáy mũi làm đau mũi và làm bẩn tay."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "tn1.tu_mac_quan_ao",
+     "order": 3,
+     "title": "Em tự mặc quần áo gọn gàng",
+     "description": "Tự mặc, cài cúc và chọn trang phục hợp thời tiết.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn1.gia_dinh",
+   "grade": 1,
+   "order": 2,
+   "title": "Em và gia đình",
+   "lessons": [
+    {
+     "key": "tn1.yeu_thuong_nguoi_than",
+     "order": 1,
+     "title": "Thể hiện tình yêu thương với người thân",
+     "description": "Lời nói và việc làm thể hiện tình cảm với ông bà, cha mẹ.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn1.goc_hoc_tap",
+     "order": 2,
+     "title": "Sắp xếp góc học tập của em",
+     "description": "Giữ bàn học gọn gàng, sách vở đúng chỗ.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn1.thien_nhien",
+   "grade": 1,
+   "order": 3,
+   "title": "Em với thiên nhiên",
+   "lessons": [
+    {
+     "key": "tn1.cham_soc_cay",
+     "order": 1,
+     "title": "Em chăm sóc cây xanh",
+     "description": "Tưới nước, nhổ cỏ cho cây trong lớp và ở nhà.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn1.an_toan_troi_mua",
+     "order": 2,
+     "title": "Giữ an toàn khi trời mưa, nắng",
+     "description": "Mang áo mưa, đội mũ và tránh nơi nguy hiểm khi thời tiết xấu.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn1.nghe_nghiep",
+   "grade": 1,
+   "order": 4,
+   "title": "Nghề nghiệp quanh em",
+   "lessons": [
+    {
+     "key": "tn1.nghe_cua_bo_me",
+     "order": 1,
+     "title": "Nghề của bố mẹ em",
+     "description": "Kể về công việc của người thân và biết ơn người lao động.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn2.ban_than",
+   "grade": 2,
+   "order": 1,
+   "title": "Khám phá bản thân",
+   "lessons": [
+    {
+     "key": "tn2.net_rieng",
+     "order": 1,
+     "title": "Nét riêng đáng yêu của em",
+     "description": "Nhận ra điểm riêng về hình dáng, sở thích của mình.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn2.tu_phuc_vu",
+     "order": 2,
+     "title": "Em tự phục vụ bản thân",
+     "description": "Tự chuẩn bị đồ dùng học tập và đồ cá nhân.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn2.gia_dinh",
+   "grade": 2,
+   "order": 2,
+   "title": "Em và gia đình",
+   "lessons": [
+    {
+     "key": "tn2.viec_nha_vua_suc",
+     "order": 1,
+     "title": "Em làm việc nhà vừa sức",
+     "description": "Chọn việc nhà an toàn, vừa sức và làm đến nơi đến chốn.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả và trình kiểm tra đã soát."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Kể được những việc nhà em làm được",
+      "Phân biệt việc vừa sức với việc cần người lớn làm",
+      "Tự nhận xét việc em giúp gia đình"
+     ],
+     "summary": [
+      "Làm việc nhà là cùng chăm lo cho gia đình.",
+      "Chọn việc vừa sức và an toàn: không dùng bếp, dao sắc, ổ điện khi không có người lớn.",
+      "Việc đã nhận thì làm xong rồi mới chơi."
+     ],
+     "examples": [
+      {
+       "title": "Việc em làm được",
+       "lines": [
+        "Gấp quần áo, cất đồ chơi.",
+        "Lau bàn, xếp bát đũa, tưới cây."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Em giúp gia đình",
+       "style": "reflect",
+       "tasks": [
+        {
+         "key": "da_giup",
+         "question": "Tuần này, em đã giúp gia đình việc gì?",
+         "options": [
+          {
+           "text": "Quét nhà, lau bàn",
+           "ok": true,
+           "why": "Cảm ơn em! Nhà sạch thì cả nhà vui."
+          },
+          {
+           "text": "Gấp quần áo, cất đồ chơi",
+           "ok": true,
+           "why": "Giỏi lắm! Tự cất đồ của mình là việc rất có ích."
+          },
+          {
+           "text": "Em chưa giúp việc nào",
+           "ok": true,
+           "why": "Không sao. Tuần tới em chọn một việc nhỏ thử làm nhé."
+          }
+         ],
+         "explanation": "Em tự nhìn lại để chọn việc nhà mình có thể làm.",
+         "graded": false
+        },
+        {
+         "key": "giup_nau",
+         "question": "Mẹ đang nấu cơm, em muốn giúp. Việc nào vừa sức em?",
+         "options": [
+          {
+           "text": "Nhặt rau, lau bàn ăn",
+           "ok": true,
+           "why": "Đúng! Việc này an toàn và vừa sức em."
+          },
+          {
+           "text": "Xếp bát đũa lên bàn",
+           "ok": true,
+           "why": "Đúng! Em giúp bữa ăn sẵn sàng nhanh hơn."
+          },
+          {
+           "text": "Bật bếp ga nấu canh",
+           "ok": false,
+           "why": "Chưa nên. Bếp ga có lửa, dễ bỏng; việc này để người lớn làm."
+          }
+         ],
+         "explanation": "Việc vừa sức là việc an toàn và em làm được."
+        },
+        {
+         "key": "vo_coc",
+         "question": "Em lỡ làm vỡ cốc thuỷ tinh khi rửa. Em nên làm gì?",
+         "options": [
+          {
+           "text": "Không nhặt, báo ngay cho người lớn",
+           "ok": true,
+           "why": "Đúng! Mảnh vỡ sắc dễ đứt tay; người lớn sẽ dọn an toàn."
+          },
+          {
+           "text": "Nhặt mảnh vỡ bằng tay",
+           "ok": false,
+           "why": "Chưa đúng. Mảnh thuỷ tinh rất sắc, em có thể bị đứt tay."
+          },
+          {
+           "text": "Giấu mảnh vỡ đi",
+           "ok": false,
+           "why": "Chưa đúng. Người khác có thể dẫm phải; nói thật cũng là trung thực."
+          }
+         ],
+         "explanation": "Khi có đồ vỡ, tránh xa và báo người lớn."
+        },
+        {
+         "key": "tuoi_cay",
+         "question": "Em được giao tưới cây mỗi chiều nhưng hôm nay mải chơi. Em làm gì?",
+         "options": [
+          {
+           "text": "Tưới cây xong rồi chơi tiếp",
+           "ok": true,
+           "why": "Đúng! Việc đã nhận thì làm đến nơi đến chốn."
+          },
+          {
+           "text": "Để mai tưới một thể",
+           "ok": false,
+           "why": "Chưa nên. Cây cần nước mỗi ngày, để mai cây có thể héo."
+          },
+          {
+           "text": "Bảo em bé tưới hộ rồi đi chơi",
+           "ok": false,
+           "why": "Chưa nên. Đây là việc em đã nhận, em nên tự làm."
+          }
+         ],
+         "explanation": "Có trách nhiệm là làm xong việc mình đã nhận."
+        },
+        {
+         "key": "cam_xuc",
+         "question": "Làm xong việc nhà, em thấy thế nào?",
+         "options": [
+          {
+           "text": "Vui vì giúp được gia đình",
+           "ok": true,
+           "why": "Thật tốt! Niềm vui đó giúp em muốn làm tiếp."
+          },
+          {
+           "text": "Hơi mệt nhưng thấy mình lớn",
+           "ok": true,
+           "why": "Đúng rồi, làm việc giúp em khoẻ và tự lập hơn."
+          },
+          {
+           "text": "Em chưa thích lắm",
+           "ok": true,
+           "why": "Không sao. Em thử làm cùng bố mẹ, vừa làm vừa trò chuyện nhé."
+          }
+         ],
+         "explanation": "Cảm xúc nào cũng được; em có thể tìm cách làm việc nhà vui hơn.",
+         "graded": false
+        }
+       ]
+      },
+      {
+       "game": "sorting",
+       "title": "Ai làm việc này?",
+       "set": {
+        "title": "Việc nào em làm được, việc nào cần người lớn?",
+        "groups": [
+         {
+          "id": "em",
+          "label": "Em làm được",
+          "icon": "🧹"
+         },
+         {
+          "id": "nguoi_lon",
+          "label": "Cần người lớn làm",
+          "icon": "🧑"
+         }
+        ],
+        "cards": [
+         {
+          "key": "gap_ao",
+          "text": "Gấp quần áo của mình",
+          "picture": "👕",
+          "group": "em",
+          "explanation": "Gấp quần áo an toàn, em tự làm được."
+         },
+         {
+          "key": "cat_do_choi",
+          "text": "Cất đồ chơi sau khi chơi",
+          "picture": "🧸",
+          "group": "em",
+          "explanation": "Cất đồ chơi là việc của em."
+         },
+         {
+          "key": "lau_ban",
+          "text": "Lau bàn học",
+          "picture": "🧽",
+          "group": "em",
+          "explanation": "Lau bàn nhẹ nhàng, vừa sức em."
+         },
+         {
+          "key": "tuoi_cay",
+          "text": "Tưới cây trong chậu",
+          "picture": "🪴",
+          "group": "em",
+          "explanation": "Tưới cây an toàn, em làm được."
+         },
+         {
+          "key": "cam_noi",
+          "text": "Cắm điện nồi cơm",
+          "picture": "🔌",
+          "group": "nguoi_lon",
+          "explanation": "Ổ điện nguy hiểm, cần người lớn làm."
+         },
+         {
+          "key": "dao_sac",
+          "text": "Thái thịt bằng dao sắc",
+          "picture": "🔪",
+          "group": "nguoi_lon",
+          "explanation": "Dao sắc dễ đứt tay, để người lớn làm."
+         },
+         {
+          "key": "leo_thang",
+          "text": "Leo thang lau quạt trần",
+          "picture": "🪜",
+          "group": "nguoi_lon",
+          "explanation": "Leo cao dễ ngã, cần người lớn."
+         },
+         {
+          "key": "bat_bep",
+          "text": "Bật bếp ga",
+          "picture": "🔥",
+          "group": "nguoi_lon",
+          "explanation": "Lửa và ga dễ gây bỏng, cháy."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "tn2.niem_vui_gia_dinh",
+     "order": 2,
+     "title": "Những khoảnh khắc vui của gia đình",
+     "description": "Kể về hoạt động cả nhà cùng làm và cách tạo niềm vui.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn2.truong_lop",
+   "grade": 2,
+   "order": 3,
+   "title": "Trường em, lớp em",
+   "lessons": [
+    {
+     "key": "tn2.tinh_ban",
+     "order": 1,
+     "title": "Em và các bạn cùng lớp",
+     "description": "Cư xử thân thiện, giúp đỡ bạn trong học tập và vui chơi.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn2.noi_quy_lop",
+     "order": 2,
+     "title": "Em thực hiện nội quy lớp học",
+     "description": "Đi học đúng giờ, giữ trật tự và giữ gìn lớp học sạch đẹp.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn2.thien_nhien_nghe",
+   "grade": 2,
+   "order": 4,
+   "title": "Thiên nhiên và nghề nghiệp",
+   "lessons": [
+    {
+     "key": "tn2.canh_dep_que_huong",
+     "order": 1,
+     "title": "Cảnh đẹp quê hương em",
+     "description": "Quan sát và giữ gìn cảnh quan nơi em sống.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn2.nghe_quanh_em",
+     "order": 2,
+     "title": "Những nghề quanh em",
+     "description": "Tìm hiểu công việc của bác sĩ, nông dân, công nhân…",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn3.ban_than",
+   "grade": 3,
+   "order": 1,
+   "title": "Hình ảnh của em",
+   "lessons": [
+    {
+     "key": "tn3.so_thich",
+     "order": 1,
+     "title": "Sở thích và khả năng của em",
+     "description": "Giới thiệu điều em thích và việc em làm tốt.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn3.tu_tin",
+     "order": 2,
+     "title": "Rèn luyện sự tự tin",
+     "description": "Mạnh dạn phát biểu và tham gia hoạt động của lớp.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn3.nha_truong",
+   "grade": 3,
+   "order": 2,
+   "title": "Em với nhà trường",
+   "lessons": [
+    {
+     "key": "tn3.ket_ban",
+     "order": 1,
+     "title": "Kết bạn và giữ gìn tình bạn",
+     "description": "Làm quen bạn mới, cư xử tốt và giải quyết bất đồng với bạn.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả và trình kiểm tra đã soát."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết cách làm quen và giúp bạn mới hoà nhập",
+      "Biết giữ tình bạn khi có bất đồng",
+      "Tự nhận xét mình là người bạn như thế nào"
+     ],
+     "summary": [
+      "Làm quen: chào, giới thiệu tên, rủ bạn cùng chơi.",
+      "Giữ tình bạn: lắng nghe, giúp đỡ, giữ lời hứa, xin lỗi khi có lỗi.",
+      "Bạn tốt không giúp nhau làm điều sai, như cho chép bài khi kiểm tra.",
+      "Khi bất đồng: bình tĩnh nói chuyện, cùng tìm cách công bằng."
+     ],
+     "examples": [
+      {
+       "title": "Câu làm quen",
+       "lines": [
+        "\"Chào bạn, mình là Lan. Bạn có muốn chơi cùng nhóm mình không?\""
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Tình bạn của em",
+       "style": "reflect",
+       "tasks": [
+        {
+         "key": "ban_moi",
+         "question": "Khi có bạn mới chuyển đến lớp, em thường làm gì?",
+         "options": [
+          {
+           "text": "Chủ động chào và giới thiệu tên mình",
+           "ok": true,
+           "why": "Rất tốt! Lời chào đầu tiên giúp bạn mới bớt lạ lẫm."
+          },
+          {
+           "text": "Chờ bạn ấy bắt chuyện trước",
+           "ok": true,
+           "why": "Không sao. Lần tới em thử mỉm cười và chào trước nhé, bạn mới thường rất ngại."
+          },
+          {
+           "text": "Rủ bạn cùng chơi giờ ra chơi",
+           "ok": true,
+           "why": "Tuyệt! Rủ chơi cùng là cách nhanh nhất để thành bạn."
+          },
+          {
+           "text": "Em còn ngại, chưa biết làm gì",
+           "ok": true,
+           "why": "Ngại là bình thường. Em có thể bắt đầu bằng một nụ cười hoặc cho bạn mượn bút."
+          }
+         ],
+         "explanation": "Không có câu sai: em nhìn lại cách mình làm quen để tự tin hơn.",
+         "graded": false
+        },
+        {
+         "key": "hoa_nhap",
+         "question": "Bạn Na mới chuyển đến, giờ ra chơi Na ngồi một mình. Em có thể làm gì để giúp Na?",
+         "options": [
+          {
+           "text": "Rủ Na tham gia trò chơi cùng nhóm",
+           "ok": true,
+           "why": "Tốt! Cùng chơi giúp Na có bạn mới và thấy vui."
+          },
+          {
+           "text": "Giới thiệu Na với các bạn và chỉ Na chỗ thư viện",
+           "ok": true,
+           "why": "Tốt! Em giúp Na quen trường lớp nhanh hơn."
+          },
+          {
+           "text": "Cùng các bạn bàn tán về giọng nói lạ của Na",
+           "ok": false,
+           "why": "Chưa nên. Bàn tán làm Na buồn và khó hoà nhập."
+          }
+         ],
+         "explanation": "Cách giúp đúng là cách làm bạn mới thấy được chào đón."
+        },
+        {
+         "key": "doi_truong",
+         "question": "Em và bạn thân cùng muốn làm đội trưởng trò chơi. Cách nào giữ được tình bạn?",
+         "options": [
+          {
+           "text": "Mỗi người làm đội trưởng một lượt",
+           "ok": true,
+           "why": "Tốt! Thay phiên là cách công bằng cho cả hai."
+          },
+          {
+           "text": "Để cả nhóm cùng bình chọn",
+           "ok": true,
+           "why": "Tốt! Cả nhóm cùng quyết định thì ai cũng thấy công bằng."
+          },
+          {
+           "text": "Giận và không chơi với bạn nữa",
+           "ok": false,
+           "why": "Chưa nên. Giận dỗi làm mất tình bạn vì một chuyện nhỏ."
+          }
+         ],
+         "explanation": "Khi bất đồng, hãy tìm cách công bằng cho cả hai."
+        },
+        {
+         "key": "cho_chep",
+         "question": "Trong giờ kiểm tra, bạn thân nhờ em cho chép bài. Em nên làm gì?",
+         "options": [
+          {
+           "text": "Từ chối nhẹ nhàng, hẹn giúp bạn ôn bài sau",
+           "ok": true,
+           "why": "Đúng! Em trung thực và vẫn giúp bạn tiến bộ thật sự."
+          },
+          {
+           "text": "Cho chép vì là bạn thân",
+           "ok": false,
+           "why": "Chưa đúng. Chép bài không giúp bạn hiểu bài, cả hai cùng thiếu trung thực."
+          },
+          {
+           "text": "Mách to cho cả lớp nghe",
+           "ok": false,
+           "why": "Chưa nên. Làm bạn xấu hổ trước lớp có thể làm tổn thương bạn."
+          }
+         ],
+         "explanation": "Bạn tốt giúp nhau học tốt, không giúp nhau làm điều sai."
+        },
+        {
+         "key": "hong_but",
+         "question": "Em lỡ làm hỏng bút của bạn. Em nên làm gì?",
+         "options": [
+          {
+           "text": "Xin lỗi bạn và đề nghị sửa hoặc đền",
+           "ok": true,
+           "why": "Đúng! Nhận lỗi và sửa lỗi giúp bạn tin em hơn."
+          },
+          {
+           "text": "Lặng lẽ đặt lại chỗ cũ",
+           "ok": false,
+           "why": "Chưa đúng. Bạn sẽ buồn khi phát hiện ra mà không ai nói."
+          },
+          {
+           "text": "Nói là bạn khác làm hỏng",
+           "ok": false,
+           "why": "Chưa đúng. Đổ lỗi là không trung thực và làm mất lòng tin."
+          }
+         ],
+         "explanation": "Nhận lỗi là cách giữ gìn tình bạn."
+        },
+        {
+         "key": "la_ban",
+         "question": "Em thấy mình là người bạn như thế nào?",
+         "options": [
+          {
+           "text": "Biết lắng nghe bạn",
+           "ok": true,
+           "why": "Lắng nghe là món quà quý với bạn bè."
+          },
+          {
+           "text": "Hay giúp đỡ bạn",
+           "ok": true,
+           "why": "Bạn bè sẽ rất quý sự giúp đỡ của em."
+          },
+          {
+           "text": "Vui vẻ, hài hước",
+           "ok": true,
+           "why": "Niềm vui của em làm cả nhóm vui theo."
+          },
+          {
+           "text": "Em đang cố gắng hơn",
+           "ok": true,
+           "why": "Thật đáng khen. Em chọn một điều muốn làm tốt hơn với bạn nhé."
+          }
+         ],
+         "explanation": "Mỗi người bạn có một điểm mạnh riêng.",
+         "graded": false
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "tn3.truyen_thong_truong",
+     "order": 2,
+     "title": "Truyền thống trường em",
+     "description": "Tìm hiểu lịch sử, thành tích và nét đẹp của nhà trường.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn3.gia_dinh_cong_dong",
+   "grade": 3,
+   "order": 3,
+   "title": "Gia đình và cộng đồng",
+   "lessons": [
+    {
+     "key": "tn3.chia_se_gia_dinh",
+     "order": 1,
+     "title": "Chia sẻ khó khăn với người thân",
+     "description": "Quan tâm, động viên người thân khi họ mệt mỏi, ốm đau.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn3.hang_xom",
+     "order": 2,
+     "title": "Em và hàng xóm láng giềng",
+     "description": "Chào hỏi, giúp đỡ hàng xóm và giữ gìn đường làng, ngõ phố.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn3.thien_nhien",
+   "grade": 3,
+   "order": 4,
+   "title": "Em với thiên nhiên",
+   "lessons": [
+    {
+     "key": "tn3.canh_quan",
+     "order": 1,
+     "title": "Giữ gìn cảnh quan thiên nhiên",
+     "description": "Không bẻ cây, hái hoa nơi công cộng; giữ sạch nơi tham quan.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn3.nghe_nghiep",
+   "grade": 3,
+   "order": 5,
+   "title": "Nghề nghiệp",
+   "lessons": [
+    {
+     "key": "tn3.nghe_truyen_thong",
+     "order": 1,
+     "title": "Nghề truyền thống ở địa phương",
+     "description": "Tìm hiểu sản phẩm và người làm nghề truyền thống.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn4.ban_than",
+   "grade": 4,
+   "order": 1,
+   "title": "Em đang lớn lên",
+   "lessons": [
+    {
+     "key": "tn4.sap_xep_thoi_gian",
+     "order": 1,
+     "title": "Sắp xếp thời gian học tập và vui chơi",
+     "description": "Biết lập thời gian biểu, làm việc cần làm trước và giữ giờ ngủ.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả và trình kiểm tra đã soát."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Tự nhận xét cách mình dùng thời gian",
+      "Biết ưu tiên việc cần làm trước khi vui chơi",
+      "Lập được thời gian biểu đơn giản cho một ngày"
+     ],
+     "summary": [
+      "Thời gian biểu giúp em biết mỗi lúc cần làm gì.",
+      "Việc cần làm (bài tập, việc nhà được giao) làm trước, vui chơi sau.",
+      "Đi ngủ đúng giờ giúp em khoẻ và học tốt.",
+      "Đặt hẹn giờ khi xem ti vi, chơi trò chơi để không quá giờ."
+     ],
+     "examples": [
+      {
+       "title": "Một buổi tối hợp lí",
+       "lines": [
+        "18 giờ 30: ăn tối, giúp dọn bát.",
+        "19 giờ 15: làm bài tập.",
+        "20 giờ 30: đọc sách hoặc xem ti vi.",
+        "21 giờ 30: đi ngủ."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Em và thời gian",
+       "style": "reflect",
+       "tasks": [
+        {
+         "key": "buoi_toi",
+         "question": "Buổi tối, em thường dành nhiều thời gian nhất cho việc gì?",
+         "options": [
+          {
+           "text": "Học bài, đọc sách",
+           "ok": true,
+           "why": "Tốt lắm! Nhớ dành thêm chút thời gian vận động, nghỉ ngơi nhé."
+          },
+          {
+           "text": "Xem ti vi, chơi điện tử",
+           "ok": true,
+           "why": "Giải trí là cần, nhưng em thử đặt hẹn giờ để còn thời gian học và ngủ."
+          },
+          {
+           "text": "Giúp việc nhà",
+           "ok": true,
+           "why": "Cảm ơn em! Nhớ sắp xếp để còn thời gian học bài."
+          },
+          {
+           "text": "Chơi với em hoặc bạn",
+           "ok": true,
+           "why": "Vui chơi giúp em thoải mái; hãy làm xong bài trước nhé."
+          }
+         ],
+         "explanation": "Em nhìn lại để cân bằng giữa học, chơi và nghỉ.",
+         "graded": false
+        },
+        {
+         "key": "toi_nay",
+         "question": "Tối nay em có bài tập Toán, muốn xem phim hoạt hình 30 phút và cần đi ngủ lúc 21 giờ 30. Cách sắp xếp nào hợp lí?",
+         "options": [
+          {
+           "text": "Làm bài tập trước, xem phim sau, đi ngủ đúng giờ",
+           "ok": true,
+           "why": "Hợp lí! Làm việc cần làm trước, em sẽ xem phim thoải mái hơn."
+          },
+          {
+           "text": "Xem phim ngay sau bữa tối, rồi làm bài và vẫn ngủ đúng giờ",
+           "ok": true,
+           "why": "Cũng hợp lí, miễn là em xem đúng 30 phút và làm xong bài trước giờ ngủ."
+          },
+          {
+           "text": "Xem phim đến khuya, sáng dậy sớm làm bài",
+           "ok": false,
+           "why": "Chưa hợp lí. Thức khuya làm em mệt, sáng vội vàng dễ làm sai."
+          },
+          {
+           "text": "Bỏ bài tập để xem phim",
+           "ok": false,
+           "why": "Chưa hợp lí. Bài tập là việc em phải hoàn thành."
+          }
+         ],
+         "explanation": "Tiêu chí: làm xong việc cần làm và giữ giờ ngủ."
+        },
+        {
+         "key": "quen_do",
+         "question": "Em hay quên mang đồ dùng học tập. Cách nào giúp em?",
+         "options": [
+          {
+           "text": "Soạn cặp từ tối hôm trước theo thời khoá biểu",
+           "ok": true,
+           "why": "Tốt! Soạn từ tối giúp em không vội vàng buổi sáng."
+          },
+          {
+           "text": "Dán danh sách đồ cần mang lên bàn học",
+           "ok": true,
+           "why": "Tốt! Danh sách nhắc em mỗi ngày."
+          },
+          {
+           "text": "Nhờ mẹ soạn cặp hộ mỗi ngày",
+           "ok": false,
+           "why": "Chưa nên. Em đã lớn, tự soạn cặp giúp em tự lập và nhớ lâu hơn."
+          }
+         ],
+         "explanation": "Cách tốt là cách giúp em tự nhớ và tự làm."
+        },
+        {
+         "key": "ru_choi",
+         "question": "Đang làm bài, bạn nhắn rủ em chơi trò chơi trực tuyến \"một ván thôi\". Em nên làm gì?",
+         "options": [
+          {
+           "text": "Hẹn bạn chơi sau khi làm xong bài",
+           "ok": true,
+           "why": "Đúng! Em giữ được việc học mà vẫn vui với bạn."
+          },
+          {
+           "text": "Chơi luôn rồi làm bài sau",
+           "ok": false,
+           "why": "Chưa nên. \"Một ván\" thường kéo dài, bài tập dễ bị bỏ dở."
+          },
+          {
+           "text": "Vừa chơi vừa làm bài",
+           "ok": false,
+           "why": "Chưa nên. Làm hai việc một lúc thì việc nào cũng không tốt."
+          }
+         ],
+         "explanation": "Biết nói \"để sau\" là bí quyết dùng thời gian hiệu quả."
+        },
+        {
+         "key": "cuoi_ngay",
+         "question": "Cuối ngày hôm nay, em thấy mình đã dùng thời gian thế nào?",
+         "options": [
+          {
+           "text": "Hợp lí, làm xong việc cần làm",
+           "ok": true,
+           "why": "Tuyệt vời! Em giữ thói quen này nhé."
+          },
+          {
+           "text": "Còn quên một vài việc",
+           "ok": true,
+           "why": "Không sao. Em ghi lại việc đã quên để mai làm trước."
+          },
+          {
+           "text": "Chơi nhiều hơn dự định",
+           "ok": true,
+           "why": "Em thử đặt hẹn giờ khi chơi vào ngày mai nhé."
+          },
+          {
+           "text": "Em chưa để ý",
+           "ok": true,
+           "why": "Từ mai, em thử ghi lại các việc đã làm trong ngày."
+          }
+         ],
+         "explanation": "Tự nhìn lại mỗi ngày giúp em sắp xếp tốt hơn.",
+         "graded": false
+        },
+        {
+         "key": "thu_cach",
+         "question": "Em muốn thử cách nào để dùng thời gian tốt hơn?",
+         "options": [
+          {
+           "text": "Lập thời gian biểu",
+           "ok": true,
+           "why": "Thời gian biểu giúp em thấy rõ cả ngày."
+          },
+          {
+           "text": "Đặt hẹn giờ khi chơi",
+           "ok": true,
+           "why": "Hẹn giờ giúp em dừng đúng lúc."
+          },
+          {
+           "text": "Làm việc khó trước",
+           "ok": true,
+           "why": "Làm việc khó lúc còn tỉnh táo thường nhanh hơn."
+          },
+          {
+           "text": "Nhờ bố mẹ nhắc lúc đầu",
+           "ok": true,
+           "why": "Được nhắc lúc đầu rồi dần dần em sẽ tự nhớ."
+          }
+         ],
+         "explanation": "Cách nào phù hợp với em là cách tốt.",
+         "graded": false
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "tn4.thay_doi_co_the",
+     "order": 2,
+     "title": "Những thay đổi của bản thân",
+     "description": "Nhận ra thay đổi về cơ thể, cảm xúc và chăm sóc bản thân phù hợp.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn4.nha_truong",
+   "grade": 4,
+   "order": 2,
+   "title": "Nhà trường và bạn bè",
+   "lessons": [
+    {
+     "key": "tn4.hop_tac_nhom",
+     "order": 1,
+     "title": "Hợp tác khi làm việc nhóm",
+     "description": "Lắng nghe, chia việc và cùng hoàn thành nhiệm vụ chung.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn4.ung_xu_than_thien",
+     "order": 2,
+     "title": "Ứng xử thân thiện với thầy cô, bạn bè",
+     "description": "Lời nói, cử chỉ lịch sự trong trường học.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn4.gia_dinh",
+   "grade": 4,
+   "order": 3,
+   "title": "Gia đình yêu thương",
+   "lessons": [
+    {
+     "key": "tn4.chi_tieu_gia_dinh",
+     "order": 1,
+     "title": "Em cùng gia đình chi tiêu tiết kiệm",
+     "description": "Phân biệt cần và muốn, giữ gìn đồ dùng.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn4.sinh_hoat_gia_dinh",
+     "order": 2,
+     "title": "Em tham gia sinh hoạt gia đình",
+     "description": "Góp ý kiến, nhận việc trong các dịp của gia đình.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn4.cong_dong_thien_nhien",
+   "grade": 4,
+   "order": 4,
+   "title": "Cộng đồng và thiên nhiên",
+   "lessons": [
+    {
+     "key": "tn4.hoat_dong_nhan_dao",
+     "order": 1,
+     "title": "Tham gia hoạt động nhân đạo",
+     "description": "Quyên góp sách vở, quần áo giúp bạn khó khăn.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn4.phong_tranh_thien_tai",
+     "order": 2,
+     "title": "Phòng tránh rủi ro thiên tai",
+     "description": "Biết dấu hiệu và cách giữ an toàn khi có mưa bão, sấm sét.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn4.nghe_nghiep",
+   "grade": 4,
+   "order": 5,
+   "title": "Nghề nghiệp",
+   "lessons": [
+    {
+     "key": "tn4.cong_viec_nghe",
+     "order": 1,
+     "title": "Công việc và đức tính của người làm nghề",
+     "description": "Tìm hiểu một nghề em yêu thích và đức tính cần có.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn5.ban_than",
+   "grade": 5,
+   "order": 1,
+   "title": "Em là học sinh lớp 5",
+   "lessons": [
+    {
+     "key": "tn5.hinh_anh_ban_than",
+     "order": 1,
+     "title": "Hình ảnh của em trong mắt mọi người",
+     "description": "Tự nhận xét và lắng nghe nhận xét của người khác về mình.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn5.tu_bao_ve",
+     "order": 2,
+     "title": "Kĩ năng tự bảo vệ bản thân",
+     "description": "Nhận biết nguy cơ bị xâm hại, bắt nạt và tìm người tin cậy giúp đỡ.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn5.nha_truong",
+   "grade": 5,
+   "order": 2,
+   "title": "Nhà trường và tình bạn",
+   "lessons": [
+    {
+     "key": "tn5.xay_dung_tap_the",
+     "order": 1,
+     "title": "Xây dựng tập thể lớp đoàn kết",
+     "description": "Góp sức vào phong trào chung và giải quyết bất đồng.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn5.chia_tay_tieu_hoc",
+     "order": 2,
+     "title": "Chuẩn bị chia tay mái trường tiểu học",
+     "description": "Lưu giữ kỉ niệm và sẵn sàng lên trung học cơ sở.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn5.gia_dinh_cong_dong",
+   "grade": 5,
+   "order": 3,
+   "title": "Gia đình và cộng đồng",
+   "lessons": [
+    {
+     "key": "tn5.truyen_thong_gia_dinh",
+     "order": 1,
+     "title": "Truyền thống tốt đẹp của gia đình",
+     "description": "Tìm hiểu và gìn giữ nếp nhà.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn5.van_hoa_cong_dong",
+     "order": 2,
+     "title": "Em tham gia hoạt động văn hoá cộng đồng",
+     "description": "Tham gia lễ hội, phong trào ở nơi em sống đúng mực.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn5.thien_nhien",
+   "grade": 5,
+   "order": 4,
+   "title": "Em với thiên nhiên",
+   "lessons": [
+    {
+     "key": "tn5.bao_ve_moi_truong",
+     "order": 1,
+     "title": "Em bảo vệ môi trường nơi mình sống",
+     "description": "Giảm rác nhựa, phân loại rác, tiết kiệm nước và giữ gìn cảnh quan.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả và trình kiểm tra đã soát."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Tự nhận xét việc em làm để bảo vệ môi trường",
+      "Phân loại được rác sinh hoạt thành ba nhóm",
+      "Đề xuất được việc làm phù hợp ở trường và nơi ở"
+     ],
+     "summary": [
+      "Rác sinh hoạt được phân thành ba nhóm: rác có thể tái chế, tái sử dụng; thức ăn thừa (rác thực phẩm); rác còn lại.",
+      "Giảm rác nhựa: dùng bình nước, túi vải, hạn chế đồ nhựa dùng một lần.",
+      "Tiết kiệm nước, điện; không đốt rác, không xả rác nơi công cộng."
+     ],
+     "examples": [
+      {
+       "title": "Ví dụ phân loại",
+       "lines": [
+        "Tái chế: chai nhựa sạch, giấy báo, lon nhôm.",
+        "Thức ăn thừa: vỏ chuối, cơm thừa.",
+        "Rác còn lại: khăn giấy đã dùng."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Em và môi trường",
+       "style": "reflect",
+       "tasks": [
+        {
+         "key": "rac_nhua",
+         "question": "Tuần này, em đã làm gì để giảm rác nhựa?",
+         "options": [
+          {
+           "text": "Dùng bình nước cá nhân",
+           "ok": true,
+           "why": "Tốt lắm! Một chiếc bình giúp bớt rất nhiều chai nhựa."
+          },
+          {
+           "text": "Không dùng ống hút nhựa",
+           "ok": true,
+           "why": "Tuyệt! Ống hút nhựa rất khó phân huỷ."
+          },
+          {
+           "text": "Mang túi vải khi đi chợ cùng mẹ",
+           "ok": true,
+           "why": "Rất hay! Túi vải dùng được nhiều lần."
+          },
+          {
+           "text": "Em chưa làm được việc nào",
+           "ok": true,
+           "why": "Không sao. Tuần tới em thử bắt đầu bằng bình nước cá nhân nhé."
+          }
+         ],
+         "explanation": "Mỗi việc nhỏ đều góp phần bảo vệ môi trường.",
+         "graded": false
+        },
+        {
+         "key": "san_truong",
+         "question": "Lớp em muốn làm sân trường xanh, sạch hơn. Việc nào phù hợp?",
+         "options": [
+          {
+           "text": "Trồng và chăm sóc cây theo nhóm",
+           "ok": true,
+           "why": "Phù hợp! Cây xanh cho bóng mát và không khí trong lành."
+          },
+          {
+           "text": "Đặt thùng phân loại rác và hướng dẫn các bạn",
+           "ok": true,
+           "why": "Phù hợp! Phân loại rác giúp tái chế và giảm rác chôn lấp."
+          },
+          {
+           "text": "Đốt lá khô ngay ở sân trường",
+           "ok": false,
+           "why": "Chưa phù hợp. Đốt lá gây khói bụi và nguy cơ cháy; lá khô có thể ủ làm phân."
+          }
+         ],
+         "explanation": "Tiêu chí: việc làm sạch, xanh và an toàn cho mọi người."
+        },
+        {
+         "key": "vo_hop",
+         "question": "Em thấy một bạn vứt vỏ hộp sữa xuống gốc cây. Em nên làm gì?",
+         "options": [
+          {
+           "text": "Nhắc bạn nhẹ nhàng và cùng nhặt bỏ vào thùng rác",
+           "ok": true,
+           "why": "Đúng! Nhắc nhẹ nhàng giúp bạn sửa mà không xấu hổ."
+          },
+          {
+           "text": "Mặc kệ vì không phải việc của mình",
+           "ok": false,
+           "why": "Chưa nên. Môi trường chung là việc của tất cả mọi người."
+          },
+          {
+           "text": "Chụp ảnh đăng lên mạng chê bạn",
+           "ok": false,
+           "why": "Chưa nên. Làm bạn bị chê cười không giúp bạn thay đổi."
+          }
+         ],
+         "explanation": "Góp ý nhẹ nhàng và làm gương là cách tốt nhất."
+        },
+        {
+         "key": "chai_nhua",
+         "question": "Nhà em có nhiều chai nhựa đã dùng. Cách nào tốt cho môi trường?",
+         "options": [
+          {
+           "text": "Rửa sạch, gom lại để tái chế",
+           "ok": true,
+           "why": "Tốt! Chai sạch được tái chế thành đồ dùng mới."
+          },
+          {
+           "text": "Làm chậu trồng cây nhỏ",
+           "ok": true,
+           "why": "Tốt! Tái sử dụng giúp giảm rác thải."
+          },
+          {
+           "text": "Đốt cùng rác trong vườn",
+           "ok": false,
+           "why": "Chưa đúng. Đốt nhựa sinh ra khói độc, hại sức khoẻ."
+          }
+         ],
+         "explanation": "Tái chế và tái sử dụng đều giúp giảm rác."
+        },
+        {
+         "key": "danh_rang",
+         "question": "Khi đánh răng, cách nào giúp tiết kiệm nước?",
+         "options": [
+          {
+           "text": "Hứng nước vào cốc, khoá vòi khi đánh răng",
+           "ok": true,
+           "why": "Đúng! Khoá vòi giúp tiết kiệm rất nhiều nước mỗi ngày."
+          },
+          {
+           "text": "Để vòi nước chảy cho tiện",
+           "ok": false,
+           "why": "Chưa đúng. Nước chảy suốt lúc đánh răng bị bỏ phí."
+          },
+          {
+           "text": "Mở vòi thật nhỏ nhưng chảy suốt",
+           "ok": false,
+           "why": "Chưa đúng. Vòi nhỏ nhưng chảy liên tục vẫn tốn nước."
+          }
+         ],
+         "explanation": "Tiết kiệm nước sạch là bảo vệ tài nguyên."
+        },
+        {
+         "key": "noi_cong_cong",
+         "question": "Khi thấy rác ở nơi công cộng, em thường làm gì?",
+         "options": [
+          {
+           "text": "Em nhặt bỏ vào thùng rác",
+           "ok": true,
+           "why": "Tuyệt vời! Em là tấm gương cho mọi người."
+          },
+          {
+           "text": "Em khó chịu nhưng chưa làm gì",
+           "ok": true,
+           "why": "Cảm giác đó cho thấy em quan tâm. Lần tới em thử nhặt một mẩu rác nhé."
+          },
+          {
+           "text": "Em nhắc người xả rác",
+           "ok": true,
+           "why": "Rất dũng cảm! Hãy nhắc thật lịch sự nhé."
+          },
+          {
+           "text": "Em chưa để ý",
+           "ok": true,
+           "why": "Từ nay em thử để ý xung quanh xem nhé."
+          }
+         ],
+         "explanation": "Em tự nhìn lại thói quen của mình với môi trường chung.",
+         "graded": false
+        }
+       ]
+      },
+      {
+       "game": "sorting",
+       "title": "Phân loại rác",
+       "set": {
+        "title": "Rác này bỏ vào nhóm nào?",
+        "groups": [
+         {
+          "id": "tai_che",
+          "label": "Tái chế, tái sử dụng",
+          "icon": "♻️"
+         },
+         {
+          "id": "thuc_pham",
+          "label": "Thức ăn thừa",
+          "icon": "🍌"
+         },
+         {
+          "id": "con_lai",
+          "label": "Rác còn lại",
+          "icon": "🗑️"
+         }
+        ],
+        "cards": [
+         {
+          "key": "chai",
+          "text": "Chai nhựa đã rửa sạch",
+          "picture": "🧴",
+          "group": "tai_che",
+          "explanation": "Chai nhựa sạch có thể tái chế."
+         },
+         {
+          "key": "bao_cu",
+          "text": "Giấy báo cũ",
+          "picture": "📰",
+          "group": "tai_che",
+          "explanation": "Giấy khô, sạch được tái chế thành giấy mới."
+         },
+         {
+          "key": "lon",
+          "text": "Lon nước ngọt bằng nhôm",
+          "picture": "🥫",
+          "group": "tai_che",
+          "explanation": "Nhôm tái chế được nhiều lần."
+         },
+         {
+          "key": "vo_chuoi",
+          "text": "Vỏ chuối",
+          "picture": "🍌",
+          "group": "thuc_pham",
+          "explanation": "Vỏ trái cây là rác thực phẩm, có thể ủ làm phân."
+         },
+         {
+          "key": "com_thua",
+          "text": "Cơm thừa",
+          "picture": "🍚",
+          "group": "thuc_pham",
+          "explanation": "Thức ăn thừa là rác thực phẩm."
+         },
+         {
+          "key": "la_rau",
+          "text": "Lá rau úa",
+          "picture": "🥬",
+          "group": "thuc_pham",
+          "explanation": "Lá rau là rác thực phẩm, dễ phân huỷ."
+         },
+         {
+          "key": "khan_giay",
+          "text": "Khăn giấy đã dùng",
+          "picture": "🧻",
+          "group": "con_lai",
+          "explanation": "Khăn giấy bẩn không tái chế được."
+         },
+         {
+          "key": "ta_giay",
+          "text": "Tã giấy đã dùng",
+          "picture": "🚼",
+          "group": "con_lai",
+          "explanation": "Tã đã dùng là rác còn lại."
+         },
+         {
+          "key": "hop_xop",
+          "text": "Hộp xốp dính thức ăn",
+          "picture": "🥡",
+          "group": "con_lai",
+          "explanation": "Hộp xốp bẩn khó tái chế, bỏ vào rác còn lại."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "tn5.danh_lam",
+     "order": 2,
+     "title": "Giới thiệu danh lam thắng cảnh quê hương",
+     "description": "Tìm hiểu và quảng bá vẻ đẹp nơi em sống.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn5.nghe_nghiep",
+   "grade": 5,
+   "order": 5,
+   "title": "Nghề nghiệp",
+   "lessons": [
+    {
+     "key": "tn5.nghe_em_thich",
+     "order": 1,
+     "title": "Nghề em mơ ước",
+     "description": "Tìm hiểu yêu cầu và việc em có thể làm từ bây giờ cho nghề mơ ước.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn6.ban_than",
+   "grade": 6,
+   "order": 1,
+   "title": "Khám phá và rèn luyện bản thân",
+   "lessons": [
+    {
+     "key": "tn6.thich_nghi_thcs",
+     "order": 1,
+     "title": "Thích nghi với môi trường trung học cơ sở",
+     "description": "Làm quen với cách học mới, bạn mới và biết tìm sự hỗ trợ khi cần.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả và trình kiểm tra đã soát."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nhận ra những thay đổi khi lên trung học cơ sở",
+      "Có cách học và sinh hoạt phù hợp với môi trường mới",
+      "Biết tìm người hỗ trợ khi gặp khó khăn"
+     ],
+     "summary": [
+      "Lên lớp 6, em học nhiều môn với nhiều thầy cô và cần tự quản lí việc học nhiều hơn.",
+      "Sổ tay, thời gian biểu giúp em nhớ việc của từng môn.",
+      "Tham gia câu lạc bộ, hoạt động tập thể giúp em có thêm bạn và khám phá sở thích.",
+      "Khi bị bắt nạt hay gặp chuyện khó, hãy chia sẻ với cha mẹ, thầy cô chủ nhiệm hoặc giáo viên tư vấn."
+     ],
+     "examples": [
+      {
+       "title": "Sổ tay học tập",
+       "lines": [
+        "Ghi bài tập và hạn nộp của từng môn ngay trong giờ học.",
+        "Tối xem lại sổ để soạn sách vở cho ngày mai."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Em ở trường mới",
+       "style": "reflect",
+       "tasks": [
+        {
+         "key": "khac_nhat",
+         "question": "Sau những tuần đầu ở lớp 6, điều gì làm em thấy khác nhất so với tiểu học?",
+         "options": [
+          {
+           "text": "Nhiều môn học và nhiều thầy cô",
+           "ok": true,
+           "why": "Đúng là thay đổi lớn. Sổ tay ghi việc từng môn sẽ giúp em rất nhiều."
+          },
+          {
+           "text": "Có nhiều bạn mới",
+           "ok": true,
+           "why": "Cơ hội tốt để mở rộng tình bạn; em thử bắt chuyện với một bạn mỗi ngày nhé."
+          },
+          {
+           "text": "Phải tự quản lí việc học nhiều hơn",
+           "ok": true,
+           "why": "Em đã nhận ra điều quan trọng: tự giác là chìa khoá ở bậc học này."
+          },
+          {
+           "text": "Giờ học dài và nhiều bài hơn",
+           "ok": true,
+           "why": "Hãy ngủ đủ và nghỉ ngơi hợp lí để giữ sức nhé."
+          }
+         ],
+         "explanation": "Mỗi người có một điều thấy mới lạ nhất; nhận ra nó là bước đầu để thích nghi.",
+         "graded": false
+        },
+        {
+         "key": "nhieu_mon",
+         "question": "Em chưa quen học với nhiều thầy cô, hay quên môn nào cần chuẩn bị gì. Cách nào giúp em?",
+         "options": [
+          {
+           "text": "Ghi sổ tay hoặc lịch học từng môn",
+           "ok": true,
+           "why": "Phù hợp: sổ tay giúp em tự nhớ việc mà không cần ai nhắc."
+          },
+          {
+           "text": "Hỏi lại thầy cô hoặc bạn cán bộ lớp khi chưa rõ yêu cầu",
+           "ok": true,
+           "why": "Phù hợp: hỏi khi chưa rõ là chủ động, không có gì phải ngại."
+          },
+          {
+           "text": "Chờ đến lớp rồi tính",
+           "ok": false,
+           "why": "Chưa phù hợp: đến lớp mới biết thì thường đã muộn để chuẩn bị."
+          }
+         ],
+         "explanation": "Tiêu chí: cách giúp em chủ động nắm được việc cần làm."
+        },
+        {
+         "key": "cau_lac_bo",
+         "question": "Em muốn tham gia một câu lạc bộ nhưng còn ngại vì chưa quen ai. Em có thể làm gì?",
+         "options": [
+          {
+           "text": "Rủ một bạn cùng lớp đi tìm hiểu",
+           "ok": true,
+           "why": "Phù hợp: có bạn đi cùng giúp em tự tin hơn."
+          },
+          {
+           "text": "Đến buổi giới thiệu để xem câu lạc bộ có hợp với mình không",
+           "ok": true,
+           "why": "Phù hợp: tìm hiểu trước giúp em chọn đúng sở thích."
+          },
+          {
+           "text": "Nhờ bạn đăng kí đại một câu lạc bộ, không cần tìm hiểu",
+           "ok": false,
+           "why": "Chưa phù hợp: chọn không theo sở thích thì em dễ chán và bỏ dở."
+          }
+         ],
+         "explanation": "Tiêu chí: chọn theo sở thích của mình và từng bước làm quen."
+        },
+        {
+         "key": "doi_tien",
+         "question": "Trên đường về, một nhóm học sinh lớp trên chặn em đòi tiền ăn sáng. Em nên làm gì?",
+         "options": [
+          {
+           "text": "Giữ bình tĩnh, đi về phía đông người và báo ngay thầy cô, cha mẹ",
+           "ok": true,
+           "why": "Đúng: an toàn của em là trước hết, và người lớn có trách nhiệm sẽ giúp chấm dứt việc bắt nạt."
+          },
+          {
+           "text": "Đưa tiền rồi giấu chuyện cho xong",
+           "ok": false,
+           "why": "Chưa đúng: giấu chuyện khiến việc bắt nạt tiếp diễn với em và các bạn khác."
+          },
+          {
+           "text": "Rủ bạn đến đánh lại cho nhóm đó sợ",
+           "ok": false,
+           "why": "Chưa đúng: đánh nhau làm sự việc nguy hiểm hơn và em cũng vi phạm nội quy."
+          }
+         ],
+         "explanation": "Bị bắt nạt không phải lỗi của em. Hãy tìm nơi an toàn và báo người lớn."
+        },
+        {
+         "key": "tu_hoc",
+         "question": "Em đánh giá việc tự học ở nhà của mình thế nào?",
+         "options": [
+          {
+           "text": "Tự giác, có kế hoạch",
+           "ok": true,
+           "why": "Tuyệt vời! Hãy giữ thói quen và xem lại kế hoạch mỗi tuần."
+          },
+          {
+           "text": "Khi có bài kiểm tra mới học",
+           "ok": true,
+           "why": "Em thử chia nhỏ việc ôn tập ra mỗi ngày, sẽ đỡ áp lực hơn."
+          },
+          {
+           "text": "Cần người nhắc mới học",
+           "ok": true,
+           "why": "Bắt đầu bằng một giờ học cố định mỗi tối sẽ giúp em tự giác dần."
+          },
+          {
+           "text": "Đang thử nhiều cách khác nhau",
+           "ok": true,
+           "why": "Rất tốt! Thử nghiệm giúp em tìm ra cách học hợp với mình."
+          }
+         ],
+         "explanation": "Tự học là kĩ năng rèn được; em biết mình đang ở đâu để tiến lên.",
+         "graded": false
+        },
+        {
+         "key": "chia_se",
+         "question": "Khi có chuyện buồn ở trường, em thường chia sẻ với ai?",
+         "options": [
+          {
+           "text": "Cha mẹ, người thân",
+           "ok": true,
+           "why": "Gia đình luôn là chỗ dựa vững chắc."
+          },
+          {
+           "text": "Bạn thân",
+           "ok": true,
+           "why": "Bạn thân giúp em nhẹ lòng; chuyện nghiêm trọng thì nên kể cả người lớn nhé."
+          },
+          {
+           "text": "Thầy cô chủ nhiệm hoặc giáo viên tư vấn",
+           "ok": true,
+           "why": "Thầy cô có thể giúp em giải quyết vấn đề ở trường."
+          },
+          {
+           "text": "Em thường giữ trong lòng",
+           "ok": true,
+           "why": "Giữ mãi trong lòng sẽ nặng nề; em thử chọn một người tin cậy để kể nhé."
+          }
+         ],
+         "explanation": "Biết tìm sự hỗ trợ là một kĩ năng quan trọng.",
+         "graded": false
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "tn6.diem_manh_yeu",
+     "order": 2,
+     "title": "Điểm mạnh, điểm hạn chế của em",
+     "description": "Tự đánh giá và lập kế hoạch phát huy điểm mạnh.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn6.chi_tieu_hop_ly",
+     "order": 3,
+     "title": "Chi tiêu hợp lí",
+     "description": "Lập kế hoạch dùng tiền tiêu vặt và tiết kiệm.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn6.gia_dinh",
+   "grade": 6,
+   "order": 2,
+   "title": "Em với gia đình",
+   "lessons": [
+    {
+     "key": "tn6.chia_se_viec_nha",
+     "order": 1,
+     "title": "Chia sẻ trách nhiệm trong gia đình",
+     "description": "Nhận và hoàn thành việc nhà phù hợp.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn6.giai_quyet_van_de_gd",
+     "order": 2,
+     "title": "Cùng gia đình giải quyết vấn đề nảy sinh",
+     "description": "Lắng nghe và trao đổi khi có ý kiến khác nhau.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn6.cong_dong",
+   "grade": 6,
+   "order": 3,
+   "title": "Xây dựng cộng đồng",
+   "lessons": [
+    {
+     "key": "tn6.hoat_dong_thien_nguyen",
+     "order": 1,
+     "title": "Tham gia hoạt động thiện nguyện",
+     "description": "Lập kế hoạch và tham gia giúp đỡ người có hoàn cảnh khó khăn.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn6.van_hoa_ung_xu",
+     "order": 2,
+     "title": "Văn hoá ứng xử nơi công cộng",
+     "description": "Ứng xử lịch sự, giữ gìn trật tự nơi công cộng.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn6.thien_nhien",
+   "grade": 6,
+   "order": 4,
+   "title": "Thiên nhiên và môi trường",
+   "lessons": [
+    {
+     "key": "tn6.canh_quan_que_huong",
+     "order": 1,
+     "title": "Khám phá cảnh quan thiên nhiên quê hương",
+     "description": "Tìm hiểu và giới thiệu vẻ đẹp tự nhiên nơi em sống.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn6.phong_tranh_thien_tai",
+     "order": 2,
+     "title": "Phòng tránh thiên tai và giảm nhẹ rủi ro",
+     "description": "Nhận biết dấu hiệu thiên tai và cách giữ an toàn.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn6.huong_nghiep",
+   "grade": 6,
+   "order": 5,
+   "title": "Thế giới nghề nghiệp quanh ta",
+   "lessons": [
+    {
+     "key": "tn6.nghe_truyen_thong",
+     "order": 1,
+     "title": "Nghề truyền thống ở Việt Nam",
+     "description": "Tìm hiểu sản phẩm, công cụ và giá trị của các nghề truyền thống.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn7.ban_than",
+   "grade": 7,
+   "order": 1,
+   "title": "Hiểu và chăm sóc bản thân",
+   "lessons": [
+    {
+     "key": "tn7.dieu_chinh_cam_xuc",
+     "order": 1,
+     "title": "Nhận biết và điều chỉnh cảm xúc",
+     "description": "Gọi tên cảm xúc của mình và chọn cách phản ứng không làm tổn thương ai.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả và trình kiểm tra đã soát."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nhận biết cảm xúc của bản thân trong các tình huống",
+      "Biết một số cách điều chỉnh cảm xúc tiêu cực",
+      "Phản ứng phù hợp, không làm tổn thương mình và người khác"
+     ],
+     "summary": [
+      "Cảm xúc nào cũng bình thường; điều quan trọng là cách em thể hiện nó.",
+      "Khi cảm xúc dâng cao: tạm dừng, hít thở chậm, gọi tên cảm xúc rồi mới quyết định làm gì.",
+      "Cách điều chỉnh: vận động nhẹ, viết nhật kí, nghe nhạc, chia sẻ với người tin cậy.",
+      "Không trút giận lên người khác hay tự trách mình quá mức."
+     ],
+     "examples": [
+      {
+       "title": "Hít thở 4–4",
+       "lines": [
+        "Hít vào chậm trong 4 nhịp.",
+        "Thở ra chậm trong 4 nhịp, lặp lại vài lần."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Cảm xúc của em",
+       "style": "reflect",
+       "tasks": [
+        {
+         "key": "hay_gap",
+         "question": "Gần đây, cảm xúc nào em hay gặp nhất?",
+         "options": [
+          {
+           "text": "Vui vẻ, hào hứng",
+           "ok": true,
+           "why": "Thật tốt! Em thử ghi lại điều gì làm em vui để giữ nó lâu hơn."
+          },
+          {
+           "text": "Lo lắng, căng thẳng",
+           "ok": true,
+           "why": "Em không đơn độc; hãy thử hít thở chậm và chia sẻ với người tin cậy."
+          },
+          {
+           "text": "Bực bội, dễ cáu",
+           "ok": true,
+           "why": "Nhận ra mình dễ cáu là bước đầu để điều chỉnh. Em thử tạm dừng trước khi nói."
+          },
+          {
+           "text": "Buồn, muốn ở một mình",
+           "ok": true,
+           "why": "Ở một mình đôi khi giúp em bình tâm; nếu buồn kéo dài, hãy nói với người lớn."
+          }
+         ],
+         "explanation": "Gọi tên được cảm xúc là bước đầu tiên để điều chỉnh nó.",
+         "graded": false
+        },
+        {
+         "key": "diem_thap",
+         "question": "Bị điểm thấp bài kiểm tra Toán, em rất buồn và giận chính mình. Cách nào giúp em điều chỉnh cảm xúc?",
+         "options": [
+          {
+           "text": "Hít thở sâu, đi dạo một chút rồi xem lại bài để biết sai ở đâu",
+           "ok": true,
+           "why": "Phù hợp: em bình tĩnh lại và biến điểm thấp thành bài học."
+          },
+          {
+           "text": "Chia sẻ với bạn thân hoặc người thân",
+           "ok": true,
+           "why": "Phù hợp: chia sẻ giúp cảm xúc nhẹ đi và có thể nhận được lời khuyên."
+          },
+          {
+           "text": "Xé bài kiểm tra và tự nhủ mình kém cỏi",
+           "ok": false,
+           "why": "Chưa phù hợp: tự trách quá mức làm em mất tự tin, không giúp em tiến bộ."
+          }
+         ],
+         "explanation": "Tiêu chí: giúp em bình tĩnh và không làm tổn thương bản thân."
+        },
+        {
+         "key": "binh_luan",
+         "question": "Một bạn bình luận chê bai ảnh em đăng trên mạng xã hội, em đang rất bực. Em nên làm gì?",
+         "options": [
+          {
+           "text": "Chưa trả lời ngay, chờ bình tĩnh rồi quyết định nhắn riêng hoặc bỏ qua",
+           "ok": true,
+           "why": "Phù hợp: chờ bình tĩnh giúp em không nói điều sẽ hối hận."
+          },
+          {
+           "text": "Ẩn hoặc báo cáo bình luận nếu đó là lời xúc phạm",
+           "ok": true,
+           "why": "Phù hợp: em tự bảo vệ mình bằng công cụ của nền tảng."
+          },
+          {
+           "text": "Viết bình luận chửi lại thật gay gắt",
+           "ok": false,
+           "why": "Chưa phù hợp: cãi nhau công khai làm mâu thuẫn lớn hơn và em có thể làm tổn thương người khác."
+          }
+         ],
+         "explanation": "Tiêu chí: tự bảo vệ mình mà không gây thêm tổn thương."
+        },
+        {
+         "key": "lo_thi",
+         "question": "Ngày mai thi học kì, em lo đến mức khó ngủ. Việc nào giúp em?",
+         "options": [
+          {
+           "text": "Ôn lại phần chính, chuẩn bị đồ dùng rồi tắt điện thoại đi ngủ",
+           "ok": true,
+           "why": "Phù hợp: chuẩn bị xong giúp em yên tâm, ngủ đủ giúp đầu óc minh mẫn."
+          },
+          {
+           "text": "Thở chậm, nghe một bản nhạc nhẹ trước khi ngủ",
+           "ok": true,
+           "why": "Phù hợp: thư giãn giúp cơ thể bớt căng thẳng."
+          },
+          {
+           "text": "Thức trắng đêm học thêm cho chắc",
+           "ok": false,
+           "why": "Chưa phù hợp: thiếu ngủ làm em mệt và dễ quên khi làm bài."
+          }
+         ],
+         "explanation": "Tiêu chí: giảm lo lắng và giữ sức khoẻ cho ngày thi."
+        },
+        {
+         "key": "em_trai",
+         "question": "Em trai làm hỏng mô hình lắp ghép em mất cả tuần mới xong. Cách phản ứng nào phù hợp?",
+         "options": [
+          {
+           "text": "Nói cho em biết mình buồn và hướng dẫn em cẩn thận hơn",
+           "ok": true,
+           "why": "Phù hợp: em nói thật cảm xúc mà không làm tổn thương em trai."
+          },
+          {
+           "text": "Đánh em cho chừa",
+           "ok": false,
+           "why": "Chưa phù hợp: đánh em là bạo lực và làm cả hai cùng buồn hơn."
+          },
+          {
+           "text": "Phá lại đồ chơi của em cho công bằng",
+           "ok": false,
+           "why": "Chưa phù hợp: trả đũa làm mâu thuẫn lớn hơn."
+          }
+         ],
+         "explanation": "Nói ra cảm xúc bằng lời bình tĩnh là cách phản ứng tốt."
+        },
+        {
+         "key": "khi_gian",
+         "question": "Khi tức giận, em thường làm gì?",
+         "options": [
+          {
+           "text": "Im lặng, tránh đi một lúc",
+           "ok": true,
+           "why": "Tạm tránh giúp em bình tĩnh; sau đó nhớ nói chuyện lại nhé."
+          },
+          {
+           "text": "Nói ra ngay điều mình nghĩ",
+           "ok": true,
+           "why": "Thẳng thắn là tốt; em thử chờ vài nhịp thở để lời nói nhẹ nhàng hơn."
+          },
+          {
+           "text": "Làm việc khác cho nguôi",
+           "ok": true,
+           "why": "Đó là một cách điều chỉnh cảm xúc hiệu quả."
+          },
+          {
+           "text": "Nhiều khi em lỡ lời",
+           "ok": true,
+           "why": "Em đã nhận ra điều đó, thật đáng quý. Thử tạm dừng trước khi nói nhé."
+          }
+         ],
+         "explanation": "Biết mình thường phản ứng thế nào giúp em chọn cách tốt hơn.",
+         "graded": false
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "tn7.tu_hao_ban_than",
+     "order": 2,
+     "title": "Tự hào về bản thân",
+     "description": "Nhận ra những điều em đã làm được và giá trị của mình.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn7.kien_tri",
+     "order": 3,
+     "title": "Rèn luyện tính kiên trì",
+     "description": "Đặt mục tiêu nhỏ và vượt qua khó khăn để đạt được.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn7.nha_truong",
+   "grade": 7,
+   "order": 2,
+   "title": "Em với nhà trường",
+   "lessons": [
+    {
+     "key": "tn7.xay_dung_tinh_ban",
+     "order": 1,
+     "title": "Xây dựng và giữ gìn tình bạn",
+     "description": "Giải quyết mâu thuẫn và hỗ trợ bạn bè.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn7.phong_chong_bat_nat",
+     "order": 2,
+     "title": "Phòng chống bắt nạt học đường",
+     "description": "Nhận diện bắt nạt và cách tự bảo vệ, giúp đỡ bạn.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn7.gia_dinh_cong_dong",
+   "grade": 7,
+   "order": 3,
+   "title": "Gia đình và cộng đồng",
+   "lessons": [
+    {
+     "key": "tn7.gia_dinh_hanh_phuc",
+     "order": 1,
+     "title": "Góp phần xây dựng gia đình hạnh phúc",
+     "description": "Quan tâm, chia sẻ và tạo bầu không khí vui vẻ trong nhà.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn7.truyen_thong_que",
+     "order": 2,
+     "title": "Giữ gìn truyền thống quê hương",
+     "description": "Tìm hiểu và tham gia các hoạt động văn hoá ở địa phương.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn7.thien_nhien",
+   "grade": 7,
+   "order": 4,
+   "title": "Bảo vệ môi trường",
+   "lessons": [
+    {
+     "key": "tn7.giam_rac_thai",
+     "order": 1,
+     "title": "Giảm thiểu rác thải sinh hoạt",
+     "description": "Thực hiện và tuyên truyền phân loại, giảm rác.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn7.huong_nghiep",
+   "grade": 7,
+   "order": 5,
+   "title": "Hướng nghiệp",
+   "lessons": [
+    {
+     "key": "tn7.an_toan_lao_dong",
+     "order": 1,
+     "title": "An toàn khi làm nghề",
+     "description": "Nhận biết nguy cơ mất an toàn và cách phòng tránh trong một số nghề.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn8.ban_than",
+   "grade": 8,
+   "order": 1,
+   "title": "Phát triển bản thân",
+   "lessons": [
+    {
+     "key": "tn8.hinh_anh_ban_than",
+     "order": 1,
+     "title": "Xây dựng hình ảnh bản thân tích cực",
+     "description": "Chăm sóc ngoại hình, lời nói và hành vi phù hợp.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn8.tu_chu",
+     "order": 2,
+     "title": "Rèn luyện tính tự chủ",
+     "description": "Tự đưa ra quyết định và chịu trách nhiệm với lựa chọn.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn8.gia_dinh_nha_truong",
+   "grade": 8,
+   "order": 2,
+   "title": "Gia đình và nhà trường",
+   "lessons": [
+    {
+     "key": "tn8.giao_tiep_gia_dinh",
+     "order": 1,
+     "title": "Giao tiếp hiệu quả trong gia đình",
+     "description": "Lắng nghe và bày tỏ ý kiến với cha mẹ một cách tôn trọng.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn8.ap_luc_hoc_tap",
+     "order": 2,
+     "title": "Ứng phó với áp lực học tập",
+     "description": "Cân bằng việc học, nghỉ ngơi và tìm sự hỗ trợ.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn8.cong_dong",
+   "grade": 8,
+   "order": 3,
+   "title": "Trách nhiệm với cộng đồng",
+   "lessons": [
+    {
+     "key": "tn8.van_dong_cong_dong",
+     "order": 1,
+     "title": "Vận động người khác tham gia hoạt động chung",
+     "description": "Thuyết phục bạn bè, người thân cùng làm việc có ích.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn8.an_toan_mang",
+     "order": 2,
+     "title": "Ứng xử an toàn trên mạng",
+     "description": "Bảo vệ thông tin cá nhân và ứng xử văn minh khi trực tuyến.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn8.thien_nhien",
+   "grade": 8,
+   "order": 4,
+   "title": "Thiên nhiên và môi trường",
+   "lessons": [
+    {
+     "key": "tn8.bao_ve_canh_quan",
+     "order": 1,
+     "title": "Bảo vệ cảnh quan và tài nguyên",
+     "description": "Tham gia và tuyên truyền tiết kiệm điện, nước, bảo vệ cây xanh.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn8.huong_nghiep",
+   "grade": 8,
+   "order": 5,
+   "title": "Hướng nghiệp",
+   "lessons": [
+    {
+     "key": "tn8.nghe_trong_xa_hoi",
+     "order": 1,
+     "title": "Tìm hiểu nghề nghiệp trong xã hội",
+     "description": "Biết công việc, công cụ của một số nghề và cách tìm hiểu nghề đáng tin cậy.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả và trình kiểm tra đã soát."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Kể được công việc đặc trưng của một số nghề",
+      "Biết tìm hiểu nghề từ nguồn đáng tin cậy",
+      "Tôn trọng mọi nghề lương thiện"
+     ],
+     "summary": [
+      "Mỗi nghề có công việc, công cụ và yêu cầu riêng về phẩm chất, năng lực.",
+      "Tìm hiểu nghề qua người đang làm nghề, cơ sở đào tạo, tham quan thực tế và thông tin chính thức.",
+      "Mọi nghề lương thiện đều đáng tôn trọng và đóng góp cho xã hội.",
+      "Công nghệ làm thế giới nghề nghiệp thay đổi: người lao động cần học tập suốt đời."
+     ],
+     "examples": [
+      {
+       "title": "Phỏng vấn một người làm nghề",
+       "lines": [
+        "Công việc hằng ngày của cô chú là gì?",
+        "Nghề này cần những phẩm chất, kĩ năng nào?"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Em khám phá nghề",
+       "style": "reflect",
+       "tasks": [
+        {
+         "key": "cach_tim_hieu",
+         "question": "Em đã tìm hiểu nghề nghiệp bằng cách nào?",
+         "options": [
+          {
+           "text": "Hỏi người thân về nghề của họ",
+           "ok": true,
+           "why": "Rất tốt! Người đang làm nghề cho em thông tin thực tế nhất."
+          },
+          {
+           "text": "Xem video, đọc thông tin",
+           "ok": true,
+           "why": "Tốt! Nhớ chọn nguồn chính thống và đối chiếu nhiều nguồn."
+          },
+          {
+           "text": "Tham quan nơi làm việc",
+           "ok": true,
+           "why": "Tuyệt! Trải nghiệm tận nơi giúp em hình dung rõ công việc."
+          },
+          {
+           "text": "Em chưa tìm hiểu",
+           "ok": true,
+           "why": "Em có thể bắt đầu bằng việc hỏi bố mẹ về nghề của họ."
+          }
+         ],
+         "explanation": "Có nhiều cách tìm hiểu nghề; kết hợp nhiều cách sẽ đầy đủ hơn.",
+         "graded": false
+        },
+        {
+         "key": "nguon_tin",
+         "question": "Em muốn biết nghề điều dưỡng có phù hợp với mình không. Nguồn nào đáng tin cậy?",
+         "options": [
+          {
+           "text": "Trò chuyện với một điều dưỡng đang làm việc",
+           "ok": true,
+           "why": "Đáng tin cậy: người trong nghề kể đúng công việc thực tế."
+          },
+          {
+           "text": "Trang thông tin chính thức của trường đào tạo ngành điều dưỡng",
+           "ok": true,
+           "why": "Đáng tin cậy: có chương trình học và yêu cầu đầu vào rõ ràng."
+          },
+          {
+           "text": "Một bình luận trên mạng nói nghề này \"nhàn mà lương cao\"",
+           "ok": false,
+           "why": "Chưa đáng tin: ý kiến không rõ người viết, thường phiến diện."
+          }
+         ],
+         "explanation": "Tiêu chí: nguồn có người hoặc tổ chức rõ ràng, có hiểu biết về nghề."
+        },
+        {
+         "key": "ton_trong",
+         "question": "Nhận định nào về nghề nghiệp là đúng?",
+         "options": [
+          {
+           "text": "Mọi nghề lương thiện đều đáng được tôn trọng",
+           "ok": true,
+           "why": "Đúng: xã hội cần tất cả các nghề, từ công nhân vệ sinh đến kĩ sư."
+          },
+          {
+           "text": "Chỉ nghề cần bằng đại học mới đáng tôn trọng",
+           "ok": false,
+           "why": "Chưa đúng: giá trị của nghề nằm ở đóng góp cho xã hội, không ở bằng cấp."
+          },
+          {
+           "text": "Nghề lao động chân tay không cần học hỏi",
+           "ok": false,
+           "why": "Chưa đúng: nghề nào cũng cần kiến thức, kĩ năng và rèn luyện."
+          }
+         ],
+         "explanation": "Tôn trọng người lao động ở mọi nghề."
+        },
+        {
+         "key": "thay_doi",
+         "question": "Công nghệ đang làm nhiều nghề thay đổi. Người lao động cần chuẩn bị gì?",
+         "options": [
+          {
+           "text": "Học tập suốt đời, sẵn sàng học kĩ năng mới",
+           "ok": true,
+           "why": "Phù hợp: người biết học thêm sẽ thích ứng được khi nghề thay đổi."
+          },
+          {
+           "text": "Rèn kĩ năng hợp tác và giải quyết vấn đề",
+           "ok": true,
+           "why": "Phù hợp: đây là kĩ năng cần ở hầu hết mọi nghề."
+          },
+          {
+           "text": "Học một lần là đủ dùng cả đời",
+           "ok": false,
+           "why": "Chưa phù hợp: kiến thức nghề thay đổi nhanh, cần cập nhật liên tục."
+          }
+         ],
+         "explanation": "Tiêu chí: giúp người lao động thích ứng với thay đổi."
+        },
+        {
+         "key": "nghe_hot",
+         "question": "Bạn em muốn chọn một nghề chỉ vì \"đang hot, ai cũng chọn\". Lời khuyên nào hợp lí?",
+         "options": [
+          {
+           "text": "Cân nhắc cả sở thích, năng lực của mình và nhu cầu xã hội",
+           "ok": true,
+           "why": "Hợp lí: chọn nghề cần dựa trên cả bản thân và xã hội."
+          },
+          {
+           "text": "Cứ chọn theo số đông cho chắc",
+           "ok": false,
+           "why": "Chưa hợp lí: số đông chọn chưa chắc đã phù hợp với bạn, lại có thể thừa người làm."
+          },
+          {
+           "text": "Để bố mẹ quyết hết, không cần suy nghĩ",
+           "ok": false,
+           "why": "Chưa hợp lí: lắng nghe gia đình là cần, nhưng bạn cũng cần hiểu mình muốn gì."
+          }
+         ],
+         "explanation": "Ba câu hỏi khi chọn nghề: Mình thích gì? Mình làm được gì? Xã hội cần gì?"
+        },
+        {
+         "key": "hung_thu",
+         "question": "Loại hoạt động nào em thấy hứng thú nhất?",
+         "options": [
+          {
+           "text": "Làm việc với máy móc, đồ vật",
+           "ok": true,
+           "why": "Em có thể tìm hiểu các nghề kĩ thuật, cơ khí, điện."
+          },
+          {
+           "text": "Tìm tòi, nghiên cứu",
+           "ok": true,
+           "why": "Các nghề nghiên cứu, khoa học, y dược có thể hợp với em."
+          },
+          {
+           "text": "Vẽ, viết, biểu diễn",
+           "ok": true,
+           "why": "Hãy tìm hiểu nhóm nghề nghệ thuật, thiết kế, truyền thông."
+          },
+          {
+           "text": "Giúp đỡ, hướng dẫn người khác",
+           "ok": true,
+           "why": "Giáo dục, y tế, công tác xã hội là những hướng đáng tìm hiểu."
+          }
+         ],
+         "explanation": "Hứng thú là một gợi ý để em bắt đầu tìm hiểu nghề, chưa phải quyết định cuối cùng.",
+         "graded": false
+        }
+       ]
+      },
+      {
+       "game": "match",
+       "title": "Ghép nghề",
+       "tasks": [
+        {
+         "key": "cong_viec",
+         "prompt": "Ghép mỗi nghề với công việc chính của nghề đó.",
+         "pairs": [
+          [
+           "Kĩ sư xây dựng",
+           "Thiết kế, giám sát thi công công trình"
+          ],
+          [
+           "Điều dưỡng",
+           "Chăm sóc, theo dõi người bệnh"
+          ],
+          [
+           "Kế toán",
+           "Ghi chép, quản lí thu chi của đơn vị"
+          ],
+          [
+           "Lập trình viên",
+           "Viết phần mềm, ứng dụng"
+          ]
+         ],
+         "explanation": "Biết công việc chính giúp em hình dung một ngày làm nghề."
+        },
+        {
+         "key": "cong_cu",
+         "prompt": "Ghép mỗi nghề với công cụ quen thuộc của nghề đó.",
+         "pairs": [
+          [
+           "Thợ điện",
+           "Bút thử điện, kìm cách điện"
+          ],
+          [
+           "Đầu bếp",
+           "Dao, thớt, chảo"
+          ],
+          [
+           "Thợ may",
+           "Máy khâu, thước dây"
+          ],
+          [
+           "Nhiếp ảnh gia",
+           "Máy ảnh, đèn chiếu sáng"
+          ]
+         ],
+         "explanation": "Mỗi nghề có công cụ riêng, người làm nghề phải biết dùng an toàn."
+        },
+        {
+         "key": "linh_vuc",
+         "prompt": "Ghép mỗi nghề với lĩnh vực của nó.",
+         "pairs": [
+          [
+           "Bác sĩ",
+           "Y tế"
+          ],
+          [
+           "Giáo viên",
+           "Giáo dục"
+          ],
+          [
+           "Kiểm lâm",
+           "Bảo vệ rừng"
+          ],
+          [
+           "Hướng dẫn viên du lịch",
+           "Du lịch, dịch vụ"
+          ]
+         ],
+         "explanation": "Các nghề được xếp vào những lĩnh vực khác nhau của đời sống."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "tn8.pham_chat_nghe",
+     "order": 2,
+     "title": "Phẩm chất, năng lực của người lao động",
+     "description": "Tìm hiểu yêu cầu của một số nghề và tự đối chiếu.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn9.ban_than",
+   "grade": 9,
+   "order": 1,
+   "title": "Hoàn thiện bản thân",
+   "lessons": [
+    {
+     "key": "tn9.muc_tieu_ca_nhan",
+     "order": 1,
+     "title": "Đặt mục tiêu và lập kế hoạch cá nhân",
+     "description": "Xây dựng mục tiêu học tập, rèn luyện cho năm cuối cấp.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn9.quan_ly_tai_chinh",
+     "order": 2,
+     "title": "Quản lí tài chính cá nhân",
+     "description": "Lập kế hoạch thu chi, tiết kiệm phù hợp lứa tuổi.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn9.gia_dinh_nha_truong",
+   "grade": 9,
+   "order": 2,
+   "title": "Gia đình và nhà trường",
+   "lessons": [
+    {
+     "key": "tn9.xay_dung_truong",
+     "order": 1,
+     "title": "Góp phần xây dựng nhà trường",
+     "description": "Tham gia và đề xuất hoạt động vì tập thể.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn9.gia_dinh_tre",
+     "order": 2,
+     "title": "Tổ chức cuộc sống gia đình",
+     "description": "Chia sẻ trách nhiệm và chăm sóc người thân.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn9.cong_dong_thien_nhien",
+   "grade": 9,
+   "order": 3,
+   "title": "Cộng đồng và thiên nhiên",
+   "lessons": [
+    {
+     "key": "tn9.du_an_cong_dong",
+     "order": 1,
+     "title": "Thực hiện dự án vì cộng đồng",
+     "description": "Lập và thực hiện một dự án nhỏ giúp nơi em sống.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn9.ung_pho_bien_doi_khi_hau",
+     "order": 2,
+     "title": "Ứng phó với biến đổi khí hậu",
+     "description": "Việc làm thiết thực giảm phát thải và thích ứng.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn9.huong_nghiep",
+   "grade": 9,
+   "order": 4,
+   "title": "Định hướng nghề nghiệp",
+   "lessons": [
+    {
+     "key": "tn9.huong_di_sau_thcs",
+     "order": 1,
+     "title": "Lựa chọn hướng đi sau trung học cơ sở",
+     "description": "Biết các hướng đi sau lớp 9 và chọn dựa trên năng lực, sở thích, điều kiện.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả và trình kiểm tra đã soát."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được các hướng đi sau khi tốt nghiệp trung học cơ sở",
+      "Biết căn cứ để lựa chọn hướng đi phù hợp",
+      "Biết tìm thông tin tuyển sinh tin cậy và trao đổi với gia đình"
+     ],
+     "summary": [
+      "Sau lớp 9, em có thể học trung học phổ thông, học ở cơ sở giáo dục thường xuyên, hoặc học nghề (có thể kết hợp học văn hoá).",
+      "Học nghề vẫn có thể học tiếp lên các trình độ cao hơn theo quy định hiện hành.",
+      "Căn cứ lựa chọn: năng lực, sở thích, kết quả học tập, điều kiện gia đình và nhu cầu nhân lực của xã hội.",
+      "Thông tin tuyển sinh lấy từ cơ quan quản lí giáo dục, nhà trường và thầy cô tư vấn."
+     ],
+     "examples": [
+      {
+       "title": "Bảng cân nhắc",
+       "lines": [
+        "Hướng đi: …  Hợp sở thích? Hợp năng lực? Gia đình đáp ứng được không?",
+        "Ghi ưu, nhược điểm của từng hướng rồi trao đổi với gia đình."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Hướng đi của em",
+       "style": "reflect",
+       "tasks": [
+        {
+         "key": "dang_nghi",
+         "question": "Hiện tại, em đang nghĩ đến hướng đi nào sau lớp 9?",
+         "options": [
+          {
+           "text": "Học trung học phổ thông",
+           "ok": true,
+           "why": "Hãy tìm hiểu các trường và tổ hợp môn để chuẩn bị tốt."
+          },
+          {
+           "text": "Học nghề kết hợp học văn hoá",
+           "ok": true,
+           "why": "Hướng đi giúp em sớm có nghề; hãy tìm hiểu kĩ cơ sở đào tạo."
+          },
+          {
+           "text": "Học ở cơ sở giáo dục thường xuyên",
+           "ok": true,
+           "why": "Đây cũng là một con đường học tập chính thức, phù hợp với nhiều bạn."
+          },
+          {
+           "text": "Em chưa quyết định",
+           "ok": true,
+           "why": "Không sao. Em còn thời gian để tìm hiểu và trao đổi với gia đình, thầy cô."
+          }
+         ],
+         "explanation": "Mọi hướng đi đều có thể dẫn đến thành công nếu phù hợp với em.",
+         "graded": false
+        },
+        {
+         "key": "can_cu",
+         "question": "Khi chọn hướng đi sau lớp 9, em nên dựa vào điều gì?",
+         "options": [
+          {
+           "text": "Năng lực, sở thích và kết quả học tập của bản thân",
+           "ok": true,
+           "why": "Phù hợp: đây là căn cứ quan trọng nhất."
+          },
+          {
+           "text": "Điều kiện gia đình và nhu cầu nhân lực ở địa phương",
+           "ok": true,
+           "why": "Phù hợp: giúp lựa chọn khả thi và có cơ hội việc làm."
+          },
+          {
+           "text": "Chọn giống bạn thân để được học cùng",
+           "ok": false,
+           "why": "Chưa phù hợp: bạn thân có năng lực, mong muốn khác em."
+          }
+         ],
+         "explanation": "Tiêu chí: lựa chọn dựa trên bản thân và điều kiện thực tế."
+        },
+        {
+         "key": "thich_nau_an",
+         "question": "Thu học khá, rất thích nấu ăn và muốn sớm có nghề; gia đình khuyên học trung học phổ thông. Cách xử lí nào hợp lí?",
+         "options": [
+          {
+           "text": "Tìm hiểu kĩ chương trình học nghề kết hợp văn hoá rồi trao đổi thẳng thắn với gia đình",
+           "ok": true,
+           "why": "Hợp lí: có thông tin cụ thể giúp gia đình hiểu và cùng quyết định."
+          },
+          {
+           "text": "Học trung học phổ thông và tham gia khoá nấu ăn ngắn hạn, câu lạc bộ để thử sức",
+           "ok": true,
+           "why": "Hợp lí: Thu vẫn theo đuổi sở thích và giữ được nhiều lựa chọn cho sau này."
+          },
+          {
+           "text": "Bỏ học ở nhà vì gia đình không đồng ý",
+           "ok": false,
+           "why": "Chưa hợp lí: bỏ học làm Thu mất cả cơ hội học văn hoá lẫn học nghề."
+          }
+         ],
+         "explanation": "Tiêu chí: lựa chọn có thông tin và được bàn bạc với gia đình."
+        },
+        {
+         "key": "hoc_nghe",
+         "question": "Nhận định nào đúng về học nghề sau trung học cơ sở?",
+         "options": [
+          {
+           "text": "Học nghề vẫn có thể học tiếp lên trình độ cao hơn theo quy định hiện hành",
+           "ok": true,
+           "why": "Đúng: hệ thống giáo dục có con đường học liên thông."
+          },
+          {
+           "text": "Học nghề chỉ dành cho người học kém",
+           "ok": false,
+           "why": "Chưa đúng: nhiều bạn giỏi chọn học nghề vì phù hợp với năng lực, sở thích."
+          },
+          {
+           "text": "Đã học nghề thì không thể học tiếp",
+           "ok": false,
+           "why": "Chưa đúng: người học nghề vẫn có cơ hội học tiếp."
+          }
+         ],
+         "explanation": "Học nghề là một lựa chọn chính đáng, không phải ngõ cụt."
+        },
+        {
+         "key": "thong_tin",
+         "question": "Mai muốn thi vào lớp 10 của một trường nhưng chưa rõ chỉ tiêu, cách tuyển. Nguồn thông tin nào tin cậy?",
+         "options": [
+          {
+           "text": "Thông báo tuyển sinh của Sở Giáo dục và Đào tạo và của nhà trường",
+           "ok": true,
+           "why": "Tin cậy: đây là nguồn chính thức."
+          },
+          {
+           "text": "Thầy cô chủ nhiệm, giáo viên tư vấn hướng nghiệp",
+           "ok": true,
+           "why": "Tin cậy: thầy cô nắm thông tin và hiểu năng lực của em."
+          },
+          {
+           "text": "Bài đăng không rõ nguồn trên mạng xã hội",
+           "ok": false,
+           "why": "Chưa tin cậy: thông tin có thể sai hoặc đã cũ."
+          }
+         ],
+         "explanation": "Tiêu chí: nguồn chính thức, có trách nhiệm về thông tin."
+        },
+        {
+         "key": "trao_doi",
+         "question": "Em đã trao đổi với gia đình về dự định của mình chưa?",
+         "options": [
+          {
+           "text": "Đã trao đổi và gia đình ủng hộ",
+           "ok": true,
+           "why": "Thật tốt! Hãy cùng gia đình lập kế hoạch cụ thể."
+          },
+          {
+           "text": "Đã trao đổi nhưng còn khác ý",
+           "ok": true,
+           "why": "Em thử chuẩn bị thêm thông tin và lắng nghe lí do của gia đình nhé."
+          },
+          {
+           "text": "Em chưa trao đổi",
+           "ok": true,
+           "why": "Hãy chọn lúc cả nhà thoải mái để chia sẻ suy nghĩ của em."
+          },
+          {
+           "text": "Em chưa biết nói thế nào",
+           "ok": true,
+           "why": "Thầy cô chủ nhiệm có thể giúp em chuẩn bị cuộc trò chuyện."
+          }
+         ],
+         "explanation": "Gia đình là người đồng hành quan trọng trong lựa chọn của em.",
+         "graded": false
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "tn9.thi_truong_lao_dong",
+     "order": 2,
+     "title": "Tìm hiểu nhu cầu lao động ở địa phương",
+     "description": "Ngành nghề địa phương đang cần và yêu cầu của chúng.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn10.ban_than",
+   "grade": 10,
+   "order": 1,
+   "title": "Thể hiện và rèn luyện bản thân",
+   "lessons": [
+    {
+     "key": "tn10.thich_ung_thpt",
+     "order": 1,
+     "title": "Thích ứng với môi trường trung học phổ thông",
+     "description": "Phương pháp học tập và sinh hoạt ở bậc học mới.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn10.tu_chu_tai_chinh",
+     "order": 2,
+     "title": "Tự chủ trong chi tiêu",
+     "description": "Kiểm soát chi tiêu và tiết kiệm cho mục tiêu.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn10.nha_truong_gia_dinh",
+   "grade": 10,
+   "order": 2,
+   "title": "Nhà trường và gia đình",
+   "lessons": [
+    {
+     "key": "tn10.xay_dung_tinh_ban",
+     "order": 1,
+     "title": "Xây dựng mối quan hệ bạn bè tích cực",
+     "description": "Giao tiếp tôn trọng và hợp tác với bạn bè.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn10.trach_nhiem_gia_dinh",
+     "order": 2,
+     "title": "Trách nhiệm với gia đình",
+     "description": "Chăm sóc người thân và cùng giải quyết vấn đề gia đình.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn10.cong_dong_thien_nhien",
+   "grade": 10,
+   "order": 3,
+   "title": "Cộng đồng và thiên nhiên",
+   "lessons": [
+    {
+     "key": "tn10.hoat_dong_xa_hoi",
+     "order": 1,
+     "title": "Tham gia hoạt động xã hội",
+     "description": "Tham gia và đánh giá hiệu quả các hoạt động tình nguyện.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn10.bao_ton_canh_quan",
+     "order": 2,
+     "title": "Bảo tồn cảnh quan thiên nhiên",
+     "description": "Tìm hiểu và tuyên truyền bảo vệ danh lam, cảnh quan.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn10.huong_nghiep",
+   "grade": 10,
+   "order": 4,
+   "title": "Định hướng nghề nghiệp",
+   "lessons": [
+    {
+     "key": "tn10.so_thich_nang_luc",
+     "order": 1,
+     "title": "Khám phá sở thích và điểm mạnh nghề nghiệp",
+     "description": "Nhận ra nhóm sở thích nghề nghiệp của mình và kiểm chứng bằng trải nghiệm.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả và trình kiểm tra đã soát."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nhận biết sở thích, điểm mạnh của bản thân liên quan đến nghề nghiệp",
+      "Biết sáu nhóm sở thích nghề nghiệp thường dùng trong tư vấn hướng nghiệp",
+      "Biết cách kiểm chứng sự phù hợp bằng trải nghiệm thực tế"
+     ],
+     "summary": [
+      "Một cách phân loại hay dùng trong hướng nghiệp chia sở thích nghề nghiệp thành sáu nhóm: Kĩ thuật, Nghiên cứu, Nghệ thuật, Xã hội, Quản lí, Nghiệp vụ.",
+      "Mỗi người thường có hai, ba nhóm nổi bật; kết quả trắc nghiệm chỉ là gợi ý để tìm hiểu tiếp.",
+      "Điểm mạnh được thể hiện qua kết quả học tập, hoạt động em làm tốt và nhận xét của người khác.",
+      "Kiểm chứng bằng trải nghiệm: dự án, câu lạc bộ, tham quan, trò chuyện với người làm nghề."
+     ],
+     "examples": [
+      {
+       "title": "Sáu nhóm sở thích",
+       "lines": [
+        "Kĩ thuật: máy móc, công cụ. Nghiên cứu: tìm hiểu, phân tích.",
+        "Nghệ thuật: sáng tạo. Xã hội: giúp đỡ con người.",
+        "Quản lí: thuyết phục, lãnh đạo. Nghiệp vụ: số liệu, quy trình."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Em hợp với nghề nào?",
+       "style": "reflect",
+       "tasks": [
+        {
+         "key": "gio_ranh",
+         "question": "Trong thời gian rảnh, em thích làm gì nhất?",
+         "options": [
+          {
+           "text": "Sửa đồ, lắp ráp, trồng cây",
+           "ok": true,
+           "why": "Gợi ý nhóm Kĩ thuật: em thích làm việc với đồ vật, công cụ."
+          },
+          {
+           "text": "Đọc, tìm hiểu vì sao sự việc xảy ra",
+           "ok": true,
+           "why": "Gợi ý nhóm Nghiên cứu: em thích quan sát, phân tích."
+          },
+          {
+           "text": "Vẽ, viết, chơi nhạc, quay video",
+           "ok": true,
+           "why": "Gợi ý nhóm Nghệ thuật: em thích sáng tạo, thể hiện ý tưởng."
+          },
+          {
+           "text": "Tình nguyện, giúp bạn học bài",
+           "ok": true,
+           "why": "Gợi ý nhóm Xã hội: em thích làm việc cùng và vì con người."
+          }
+         ],
+         "explanation": "Đây chỉ là gợi ý ban đầu; sở thích của em có thể thuộc nhiều nhóm.",
+         "graded": false
+        },
+        {
+         "key": "diem_manh",
+         "question": "Theo em, điểm mạnh nổi bật của mình là gì?",
+         "options": [
+          {
+           "text": "Tư duy logic, tính toán",
+           "ok": true,
+           "why": "Điểm mạnh này hữu ích cho các nghề kĩ thuật, công nghệ, tài chính."
+          },
+          {
+           "text": "Giao tiếp, thuyết phục",
+           "ok": true,
+           "why": "Điểm mạnh này hữu ích cho các nghề giáo dục, kinh doanh, truyền thông."
+          },
+          {
+           "text": "Sáng tạo, nhiều ý tưởng",
+           "ok": true,
+           "why": "Điểm mạnh này hữu ích cho các nghề thiết kế, nghệ thuật, khởi nghiệp."
+          },
+          {
+           "text": "Cẩn thận, tỉ mỉ",
+           "ok": true,
+           "why": "Điểm mạnh này hữu ích cho các nghề kế toán, y dược, kiểm định chất lượng."
+          }
+         ],
+         "explanation": "Hãy hỏi thêm thầy cô, bạn bè để thấy rõ điểm mạnh của mình.",
+         "graded": false
+        },
+        {
+         "key": "kiem_chung",
+         "question": "Cách nào giúp em biết chính xác hơn về năng lực, sở thích của mình?",
+         "options": [
+          {
+           "text": "Nhìn lại kết quả học tập và những hoạt động em đã làm tốt",
+           "ok": true,
+           "why": "Phù hợp: kết quả thực tế là bằng chứng đáng tin."
+          },
+          {
+           "text": "Làm trắc nghiệm hướng nghiệp rồi trao đổi kết quả với giáo viên tư vấn",
+           "ok": true,
+           "why": "Phù hợp: trắc nghiệm kèm tư vấn giúp hiểu đúng kết quả."
+          },
+          {
+           "text": "Chỉ dựa vào một bài trắc nghiệm vui trên mạng để chọn nghề",
+           "ok": false,
+           "why": "Chưa phù hợp: một bài trắc nghiệm không rõ nguồn không đủ để quyết định."
+          }
+         ],
+         "explanation": "Tiêu chí: dựa trên nhiều bằng chứng và có người hiểu biết hỗ trợ."
+        },
+        {
+         "key": "gioi_toan",
+         "question": "An giỏi Toán nhưng không thích ngồi một chỗ lâu, lại thích làm việc ngoài trời. Nhận định nào hợp lí?",
+         "options": [
+          {
+           "text": "An nên tìm hiểu các nghề vừa dùng Toán vừa làm việc thực địa, như trắc địa, kĩ thuật xây dựng",
+           "ok": true,
+           "why": "Hợp lí: kết hợp cả năng lực và sở thích giúp An tìm ra nghề phù hợp."
+          },
+          {
+           "text": "An nên trải nghiệm thử qua dự án, hoạt động thực tế để kiểm chứng",
+           "ok": true,
+           "why": "Hợp lí: trải nghiệm giúp An biết mình có thực sự thích không."
+          },
+          {
+           "text": "Giỏi Toán thì chỉ nên làm kế toán",
+           "ok": false,
+           "why": "Chưa hợp lí: rất nhiều nghề cần Toán, và kế toán chủ yếu làm việc văn phòng."
+          }
+         ],
+         "explanation": "Tiêu chí: lựa chọn kết hợp năng lực với sở thích, có kiểm chứng."
+        },
+        {
+         "key": "thich_ve",
+         "question": "Bình thích vẽ nhưng nghe nói nghề liên quan đến vẽ khó kiếm sống. Lời khuyên nào phù hợp?",
+         "options": [
+          {
+           "text": "Tìm hiểu các nghề dùng kĩ năng vẽ như thiết kế đồ hoạ, kiến trúc, minh hoạ và yêu cầu của từng nghề",
+           "ok": true,
+           "why": "Phù hợp: có thông tin cụ thể Bình sẽ tự đánh giá được cơ hội thay vì nghe đồn."
+          },
+          {
+           "text": "Bỏ ngay sở thích vẽ cho đỡ mất thời gian",
+           "ok": false,
+           "why": "Chưa phù hợp: bỏ sở thích chỉ vì lời đồn có thể làm Bình bỏ lỡ hướng đi hợp với mình."
+          },
+          {
+           "text": "Chỉ cần thích là đủ, không cần tìm hiểu gì thêm",
+           "ok": false,
+           "why": "Chưa phù hợp: nghề nào cũng cần hiểu yêu cầu và rèn luyện kĩ năng."
+          }
+         ],
+         "explanation": "Tìm hiểu thông tin cụ thể trước khi quyết định theo hay bỏ một sở thích."
+        },
+        {
+         "key": "quan_trong",
+         "question": "Khi nghĩ về nghề tương lai, điều gì quan trọng nhất với em?",
+         "options": [
+          {
+           "text": "Thu nhập tốt",
+           "ok": true,
+           "why": "Thu nhập là nhu cầu chính đáng; hãy tìm hiểu mức thu nhập thực tế của nghề."
+          },
+          {
+           "text": "Được làm điều mình yêu thích",
+           "ok": true,
+           "why": "Đam mê giúp em bền bỉ; hãy kết hợp với tìm hiểu cơ hội việc làm."
+          },
+          {
+           "text": "Công việc ổn định",
+           "ok": true,
+           "why": "Ổn định giúp em yên tâm; hãy xem ngành nào có nhu cầu lâu dài."
+          },
+          {
+           "text": "Giúp ích cho cộng đồng",
+           "ok": true,
+           "why": "Giá trị này rất đáng quý; nhiều nghề cho em cơ hội cống hiến."
+          }
+         ],
+         "explanation": "Biết điều mình coi trọng giúp em chọn nghề phù hợp với giá trị của bản thân.",
+         "graded": false
+        }
+       ]
+      },
+      {
+       "game": "match",
+       "title": "Sáu nhóm sở thích",
+       "tasks": [
+        {
+         "key": "hoat_dong",
+         "prompt": "Ghép mỗi nhóm sở thích nghề nghiệp với hoạt động tiêu biểu.",
+         "pairs": [
+          [
+           "Kĩ thuật",
+           "Sửa chữa, vận hành máy móc"
+          ],
+          [
+           "Nghiên cứu",
+           "Quan sát, phân tích, làm thí nghiệm"
+          ],
+          [
+           "Nghệ thuật",
+           "Sáng tác, biểu diễn, thiết kế"
+          ],
+          [
+           "Xã hội",
+           "Dạy học, chăm sóc, tư vấn cho người khác"
+          ],
+          [
+           "Quản lí",
+           "Thuyết phục, lãnh đạo, kinh doanh"
+          ]
+         ],
+         "explanation": "Mỗi nhóm sở thích gắn với một kiểu hoạt động em thấy hứng thú."
+        },
+        {
+         "key": "nghe_vi_du",
+         "prompt": "Ghép mỗi nhóm sở thích với một nghề ví dụ.",
+         "pairs": [
+          [
+           "Kĩ thuật",
+           "Thợ cơ khí"
+          ],
+          [
+           "Nghiên cứu",
+           "Nhà sinh học"
+          ],
+          [
+           "Nghệ thuật",
+           "Nhà thiết kế thời trang"
+          ],
+          [
+           "Xã hội",
+           "Nhân viên công tác xã hội"
+          ],
+          [
+           "Nghiệp vụ",
+           "Nhân viên văn thư, lưu trữ"
+          ]
+         ],
+         "explanation": "Một nghề thường đòi hỏi nhiều nhóm, nhưng có một nhóm nổi bật."
+        },
+        {
+         "key": "moi_truong",
+         "prompt": "Ghép mỗi nhóm sở thích với môi trường làm việc thường gặp.",
+         "pairs": [
+          [
+           "Quản lí",
+           "Doanh nghiệp, nơi cần ra quyết định và thuyết phục"
+          ],
+          [
+           "Nghiệp vụ",
+           "Văn phòng có quy trình, số liệu rõ ràng"
+          ],
+          [
+           "Kĩ thuật",
+           "Xưởng sản xuất, công trường, ngoài trời"
+          ],
+          [
+           "Nghiên cứu",
+           "Phòng thí nghiệm, viện nghiên cứu"
+          ]
+         ],
+         "explanation": "Môi trường làm việc cũng là điều cần cân nhắc khi chọn nghề."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "tn10.tim_hieu_nhom_nghe",
+     "order": 2,
+     "title": "Tìm hiểu nhóm nghề em quan tâm",
+     "description": "Công việc, yêu cầu và cơ hội việc làm của nhóm nghề.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn11.ban_than",
+   "grade": 11,
+   "order": 1,
+   "title": "Phát triển bản thân",
+   "lessons": [
+    {
+     "key": "tn11.tu_danh_gia",
+     "order": 1,
+     "title": "Tự đánh giá sự trưởng thành của bản thân",
+     "description": "Nhìn lại thay đổi về suy nghĩ, kĩ năng và trách nhiệm.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn11.ky_nang_song_doc_lap",
+     "order": 2,
+     "title": "Kĩ năng sống tự lập",
+     "description": "Tự lo việc cá nhân, quản lí thời gian và chi tiêu.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn11.nha_truong_gia_dinh",
+   "grade": 11,
+   "order": 2,
+   "title": "Nhà trường và gia đình",
+   "lessons": [
+    {
+     "key": "tn11.van_hoa_hoc_duong",
+     "order": 1,
+     "title": "Xây dựng văn hoá học đường",
+     "description": "Ứng xử văn minh và góp phần tạo môi trường học tập an toàn.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn11.ket_noi_the_he",
+     "order": 2,
+     "title": "Kết nối các thế hệ trong gia đình",
+     "description": "Lắng nghe, chia sẻ và tôn trọng ông bà, cha mẹ.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn11.cong_dong_thien_nhien",
+   "grade": 11,
+   "order": 3,
+   "title": "Cộng đồng và thiên nhiên",
+   "lessons": [
+    {
+     "key": "tn11.hoat_dong_cong_dong",
+     "order": 1,
+     "title": "Tổ chức hoạt động cộng đồng",
+     "description": "Lập kế hoạch và vận động mọi người cùng tham gia.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn11.bao_ve_moi_truong",
+     "order": 2,
+     "title": "Bảo vệ môi trường tự nhiên",
+     "description": "Đề xuất và thực hiện giải pháp giảm ô nhiễm ở địa phương.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn11.huong_nghiep",
+   "grade": 11,
+   "order": 4,
+   "title": "Hướng nghiệp",
+   "lessons": [
+    {
+     "key": "tn11.ren_luyen_cho_nghe",
+     "order": 1,
+     "title": "Rèn luyện phẩm chất, năng lực cho nghề định chọn",
+     "description": "Xác định phẩm chất, kĩ năng nghề cần và lập kế hoạch rèn luyện từ bây giờ.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả và trình kiểm tra đã soát."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được phẩm chất, năng lực cần cho nhóm nghề em quan tâm",
+      "Lập được kế hoạch rèn luyện phù hợp",
+      "Thể hiện trung thực, trách nhiệm trong công việc"
+     ],
+     "summary": [
+      "Mọi nghề đều cần trung thực, trách nhiệm, kỉ luật và tôn trọng khách hàng, đồng nghiệp.",
+      "Kĩ năng chung được nhiều nơi tuyển dụng coi trọng: giao tiếp, hợp tác, giải quyết vấn đề, tự học, sử dụng công nghệ.",
+      "Rèn luyện từ bây giờ qua môn học liên quan, câu lạc bộ, hoạt động tình nguyện, làm thêm phù hợp lứa tuổi.",
+      "Kế hoạch tốt có mục tiêu cụ thể, việc làm hằng tuần và mốc tự kiểm tra."
+     ],
+     "examples": [
+      {
+       "title": "Một kế hoạch mẫu",
+       "lines": [
+        "Mục tiêu: tự tin giao tiếp trước lớp trong học kì này.",
+        "Việc làm: mỗi tháng nhận trình bày một bài nhóm.",
+        "Tự kiểm tra: cuối tháng xin góp ý của bạn và thầy cô."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Rèn mình cho nghề",
+       "style": "reflect",
+       "tasks": [
+        {
+         "key": "nhom_nghe",
+         "question": "Em đã xác định được nhóm nghề mình quan tâm chưa?",
+         "options": [
+          {
+           "text": "Đã rõ một nhóm nghề",
+           "ok": true,
+           "why": "Tuyệt! Giờ là lúc tìm hiểu kĩ yêu cầu và bắt đầu rèn luyện."
+          },
+          {
+           "text": "Đang phân vân giữa hai, ba nhóm",
+           "ok": true,
+           "why": "Bình thường thôi. Hãy trải nghiệm thử từng nhóm để so sánh."
+          },
+          {
+           "text": "Chưa xác định được",
+           "ok": true,
+           "why": "Em có thể bắt đầu từ môn học và hoạt động em thấy hứng thú nhất."
+          },
+          {
+           "text": "Đã có nhưng gia đình mong khác",
+           "ok": true,
+           "why": "Hãy tìm hiểu kĩ và trao đổi với gia đình bằng thông tin cụ thể."
+          }
+         ],
+         "explanation": "Mỗi người ở một chặng khác nhau trên con đường chọn nghề.",
+         "graded": false
+        },
+        {
+         "key": "dieu_duong",
+         "question": "Hà định theo nghề điều dưỡng. Việc nào giúp Hà rèn luyện phù hợp từ bây giờ?",
+         "options": [
+          {
+           "text": "Học khoá sơ cấp cứu, tham gia hoạt động thăm hỏi người cao tuổi ở địa phương",
+           "ok": true,
+           "why": "Phù hợp: Hà rèn kĩ năng chăm sóc và sự kiên nhẫn, tận tâm mà nghề cần."
+          },
+          {
+           "text": "Học tốt các môn Sinh học, Hoá học",
+           "ok": true,
+           "why": "Phù hợp: đây là nền tảng kiến thức của ngành."
+          },
+          {
+           "text": "Chờ vào trường rồi mới bắt đầu tìm hiểu",
+           "ok": false,
+           "why": "Chưa phù hợp: Hà sẽ bỏ lỡ thời gian rèn luyện quý báu ở phổ thông."
+          }
+         ],
+         "explanation": "Tiêu chí: việc làm rèn đúng kiến thức, kĩ năng, phẩm chất của nghề."
+        },
+        {
+         "key": "tien_thua",
+         "question": "Khang làm thêm dịp hè ở một cửa hàng, khách vội đi và trả thừa tiền. Khang nên làm gì?",
+         "options": [
+          {
+           "text": "Gọi khách lại hoặc báo chủ cửa hàng để trả lại tiền thừa",
+           "ok": true,
+           "why": "Đúng: trung thực là phẩm chất cần ở mọi nghề, giúp giữ uy tín."
+          },
+          {
+           "text": "Giữ lại vì khách không biết",
+           "ok": false,
+           "why": "Chưa đúng: giữ tiền của người khác là không trung thực, làm mất uy tín của Khang và cửa hàng."
+          },
+          {
+           "text": "Cất riêng, nếu khách quay lại hỏi thì trả",
+           "ok": false,
+           "why": "Chưa đúng: chủ động trả lại mới là trung thực, không chờ bị phát hiện."
+          }
+         ],
+         "explanation": "Trung thực trong những việc nhỏ là nền tảng của đạo đức nghề nghiệp."
+        },
+        {
+         "key": "ky_nang_chung",
+         "question": "Kĩ năng nào được nhiều nhà tuyển dụng coi trọng ở mọi nghề?",
+         "options": [
+          {
+           "text": "Giao tiếp, hợp tác, giải quyết vấn đề",
+           "ok": true,
+           "why": "Đúng: công việc nào cũng cần làm việc với người khác và xử lí tình huống."
+          },
+          {
+           "text": "Tự học và thích ứng với công nghệ mới",
+           "ok": true,
+           "why": "Đúng: công nghệ thay đổi nhanh, người biết tự học sẽ không bị tụt lại."
+          },
+          {
+           "text": "Chỉ cần bằng cấp, không cần kĩ năng",
+           "ok": false,
+           "why": "Chưa đúng: bằng cấp là điều kiện cần, kĩ năng mới giúp làm tốt công việc."
+          }
+         ],
+         "explanation": "Kĩ năng chung giúp em thích ứng với nhiều nghề."
+        },
+        {
+         "key": "tieng_anh",
+         "question": "Long muốn trở thành lập trình viên nhưng tiếng Anh còn yếu. Kế hoạch nào hợp lí?",
+         "options": [
+          {
+           "text": "Đặt mục tiêu học tiếng Anh mỗi ngày, tập đọc tài liệu kĩ thuật đơn giản",
+           "ok": true,
+           "why": "Hợp lí: mục tiêu nhỏ, đều đặn giúp Long khắc phục điểm yếu."
+          },
+          {
+           "text": "Tham gia câu lạc bộ lập trình để vừa học kĩ năng vừa luyện từ vựng chuyên ngành",
+           "ok": true,
+           "why": "Hợp lí: học trong thực tế giúp nhớ lâu."
+          },
+          {
+           "text": "Bỏ ý định vì tiếng Anh yếu",
+           "ok": false,
+           "why": "Chưa hợp lí: điểm yếu có thể khắc phục bằng kế hoạch rèn luyện."
+          }
+         ],
+         "explanation": "Tiêu chí: kế hoạch cụ thể, khắc phục được điểm yếu."
+        },
+        {
+         "key": "muon_ren",
+         "question": "Phẩm chất nào em muốn rèn thêm nhất?",
+         "options": [
+          {
+           "text": "Kiên trì",
+           "ok": true,
+           "why": "Em thử chọn một việc khó và làm đều đặn trong một tháng nhé."
+          },
+          {
+           "text": "Cẩn thận",
+           "ok": true,
+           "why": "Thói quen tự kiểm tra lại bài sẽ giúp em cẩn thận hơn."
+          },
+          {
+           "text": "Tự tin giao tiếp",
+           "ok": true,
+           "why": "Hãy nhận trình bày bài nhóm để luyện tập dần."
+          },
+          {
+           "text": "Chủ động",
+           "ok": true,
+           "why": "Em thử tự đề xuất một việc cho lớp hoặc nhóm mỗi tuần."
+          }
+         ],
+         "explanation": "Biết mình cần rèn gì là bước đầu tiên của kế hoạch.",
+         "graded": false
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "tn11.an_toan_nghe",
+     "order": 2,
+     "title": "An toàn và sức khoẻ trong nghề nghiệp",
+     "description": "Rủi ro nghề nghiệp và cách bảo vệ bản thân.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn12.ban_than",
+   "grade": 12,
+   "order": 1,
+   "title": "Trưởng thành và tự lập",
+   "lessons": [
+    {
+     "key": "tn12.tu_tin_truong_thanh",
+     "order": 1,
+     "title": "Sẵn sàng cho tuổi trưởng thành",
+     "description": "Trách nhiệm của bản thân khi bước vào tuổi mười tám.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn12.quan_ly_cam_xuc_ap_luc",
+     "order": 2,
+     "title": "Quản lí áp lực năm cuối cấp",
+     "description": "Giữ cân bằng giữa ôn thi, nghỉ ngơi và các mối quan hệ.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn12.nha_truong_gia_dinh",
+   "grade": 12,
+   "order": 2,
+   "title": "Nhà trường và gia đình",
+   "lessons": [
+    {
+     "key": "tn12.tri_an",
+     "order": 1,
+     "title": "Tri ân thầy cô và mái trường",
+     "description": "Thể hiện lòng biết ơn và lưu giữ kỉ niệm tuổi học trò.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn12.gia_dinh_dong_hanh",
+     "order": 2,
+     "title": "Gia đình đồng hành với lựa chọn của em",
+     "description": "Trao đổi kế hoạch học tập, nghề nghiệp với gia đình.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn12.cong_dong_thien_nhien",
+   "grade": 12,
+   "order": 3,
+   "title": "Cộng đồng và thiên nhiên",
+   "lessons": [
+    {
+     "key": "tn12.trach_nhiem_xa_hoi",
+     "order": 1,
+     "title": "Trách nhiệm với cộng đồng",
+     "description": "Tham gia xây dựng nơi em sống văn minh, an toàn.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "tn12.phat_trien_ben_vung",
+     "order": 2,
+     "title": "Hành động vì phát triển bền vững",
+     "description": "Lối sống xanh và tiêu dùng có trách nhiệm.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "tn12.huong_nghiep",
+   "grade": 12,
+   "order": 4,
+   "title": "Lựa chọn nghề nghiệp",
+   "lessons": [
+    {
+     "key": "tn12.chon_nganh_noi_hoc",
+     "order": 1,
+     "title": "Lựa chọn ngành học và nơi học phù hợp",
+     "description": "Chọn ngành, nơi học dựa trên thông tin chính thức và có phương án dự phòng.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả và trình kiểm tra đã soát."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết căn cứ để chọn ngành học và nơi học sau trung học phổ thông",
+      "Tìm và kiểm chứng thông tin tuyển sinh từ nguồn chính thức",
+      "Có phương án dự phòng và cảnh giác với lừa đảo tuyển sinh"
+     ],
+     "summary": [
+      "Sau trung học phổ thông có nhiều con đường: đại học, cao đẳng, trung cấp, vừa học vừa làm, đi làm rồi học tiếp.",
+      "Khi chọn nơi học, xem chương trình đào tạo, chất lượng, cơ hội việc làm, chi phí và khả năng của gia đình.",
+      "Thông tin tuyển sinh lấy từ cơ quan quản lí giáo dục và đề án tuyển sinh do trường công bố; theo quy chế tuyển sinh hiện hành, nguyện vọng xếp trên được ưu tiên xét trước.",
+      "Không ai \"bảo đảm đỗ\" bằng tiền: đó là lừa đảo."
+     ],
+     "examples": [
+      {
+       "title": "Đặt nguyện vọng có dự phòng",
+       "lines": [
+        "Nguyện vọng trên: ngành em thích nhất.",
+        "Nguyện vọng sau: ngành gần sở thích, vừa sức hơn."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Chọn ngành, chọn trường",
+       "style": "reflect",
+       "tasks": [
+        {
+         "key": "da_chon",
+         "question": "Em đã chọn được ngành học sau tốt nghiệp chưa?",
+         "options": [
+          {
+           "text": "Đã chọn và khá chắc chắn",
+           "ok": true,
+           "why": "Tốt! Hãy tìm hiểu kĩ phương thức tuyển sinh của các trường đào tạo ngành đó."
+          },
+          {
+           "text": "Đang phân vân giữa vài ngành",
+           "ok": true,
+           "why": "Hãy so sánh chương trình học và cơ hội việc làm của từng ngành."
+          },
+          {
+           "text": "Chưa chọn được",
+           "ok": true,
+           "why": "Em có thể bắt đầu từ nhóm sở thích và môn học thế mạnh của mình."
+          },
+          {
+           "text": "Em định đi làm trước",
+           "ok": true,
+           "why": "Đó cũng là lựa chọn chính đáng; hãy tìm hiểu cơ hội học tiếp sau này."
+          }
+         ],
+         "explanation": "Mỗi bạn có thời điểm sẵn sàng khác nhau.",
+         "graded": false
+        },
+        {
+         "key": "xem_xet",
+         "question": "Khi chọn trường để học sau trung học phổ thông, em nên xem xét điều gì?",
+         "options": [
+          {
+           "text": "Chương trình đào tạo, chất lượng và cơ hội việc làm của ngành",
+           "ok": true,
+           "why": "Phù hợp: đây là những gì quyết định em học được gì và làm gì sau này."
+          },
+          {
+           "text": "Học phí, chi phí sinh hoạt và khả năng của gia đình",
+           "ok": true,
+           "why": "Phù hợp: lựa chọn cần khả thi để em học được đến cuối khoá."
+          },
+          {
+           "text": "Chỉ chọn trường có tên nghe hay",
+           "ok": false,
+           "why": "Chưa phù hợp: tên trường không nói lên chất lượng hay sự phù hợp với em."
+          }
+         ],
+         "explanation": "Tiêu chí: lựa chọn vừa phù hợp, vừa khả thi."
+        },
+        {
+         "key": "di_lam_som",
+         "question": "Ngọc muốn đi làm sớm để phụ giúp gia đình nhưng vẫn mong được học tiếp. Hướng nào hợp lí?",
+         "options": [
+          {
+           "text": "Học cao đẳng, trung cấp một nghề có nhu cầu cao rồi học liên thông sau",
+           "ok": true,
+           "why": "Hợp lí: Ngọc sớm có nghề mà vẫn mở đường học tiếp."
+          },
+          {
+           "text": "Đi làm và học tiếp theo hình thức vừa làm vừa học",
+           "ok": true,
+           "why": "Hợp lí: Ngọc vừa có thu nhập vừa nâng cao trình độ."
+          },
+          {
+           "text": "Ở nhà chờ năm sau rồi tính, không làm gì",
+           "ok": false,
+           "why": "Chưa hợp lí: Ngọc bỏ phí thời gian mà không tiến gần hơn đến mục tiêu."
+          }
+         ],
+         "explanation": "Tiêu chí: cân bằng điều kiện gia đình với mong muốn học tập."
+        },
+        {
+         "key": "bao_dam_do",
+         "question": "Có người gọi điện mời \"bảo đảm đỗ đại học\" nếu nộp một khoản tiền. Em nên làm gì?",
+         "options": [
+          {
+           "text": "Không nộp tiền, chỉ đăng kí theo hướng dẫn chính thức và báo thầy cô, gia đình",
+           "ok": true,
+           "why": "Đúng: kết quả xét tuyển theo quy chế, không ai mua được; báo tin giúp các bạn khác không bị lừa."
+          },
+          {
+           "text": "Nộp tiền cho chắc ăn",
+           "ok": false,
+           "why": "Chưa đúng: đây là lừa đảo, em sẽ mất tiền mà không có kết quả gì."
+          },
+          {
+           "text": "Gửi ảnh căn cước để họ đăng kí hộ",
+           "ok": false,
+           "why": "Chưa đúng: thông tin cá nhân có thể bị dùng để làm việc phạm pháp."
+          }
+         ],
+         "explanation": "Cảnh giác với mọi lời hứa \"chắc chắn đỗ\" đổi lấy tiền."
+        },
+        {
+         "key": "nguyen_vong",
+         "question": "Ngành em rất thích có điểm chuẩn năm trước cao hơn sức em; một ngành khác gần sở thích và vừa sức. Cách đặt nguyện vọng nào hợp lí?",
+         "options": [
+          {
+           "text": "Đặt ngành yêu thích ở nguyện vọng trên, ngành vừa sức ở nguyện vọng sau",
+           "ok": true,
+           "why": "Hợp lí: nguyện vọng trên được xét trước, nguyện vọng sau là phương án an toàn."
+          },
+          {
+           "text": "Tìm hiểu thêm các phương thức xét tuyển khác của ngành yêu thích",
+           "ok": true,
+           "why": "Hợp lí: một số trường có nhiều phương thức, em có thêm cơ hội."
+          },
+          {
+           "text": "Chỉ đặt một nguyện vọng cao nhất",
+           "ok": false,
+           "why": "Chưa hợp lí: không có phương án dự phòng, em dễ không trúng tuyển ngành nào."
+          }
+         ],
+         "explanation": "Tiêu chí: theo đuổi mong muốn nhưng có phương án dự phòng."
+        },
+        {
+         "key": "cam_thay",
+         "question": "Khi nghĩ về kì thi và việc chọn ngành, em cảm thấy thế nào?",
+         "options": [
+          {
+           "text": "Tự tin, đã có kế hoạch",
+           "ok": true,
+           "why": "Tuyệt vời! Hãy giữ nhịp học và nghỉ ngơi hợp lí."
+          },
+          {
+           "text": "Hơi lo nhưng vẫn ổn",
+           "ok": true,
+           "why": "Lo một chút giúp em tập trung; nhớ chia nhỏ việc để đỡ áp lực."
+          },
+          {
+           "text": "Rất áp lực",
+           "ok": true,
+           "why": "Hãy chia sẻ với gia đình, thầy cô hoặc giáo viên tư vấn; em không phải tự gánh một mình."
+          },
+          {
+           "text": "Chưa nghĩ nhiều",
+           "ok": true,
+           "why": "Đã đến lúc dành thời gian tìm hiểu; bắt đầu từ một ngành em tò mò nhé."
+          }
+         ],
+         "explanation": "Cảm xúc nào cũng cần được lắng nghe.",
+         "graded": false
+        }
+       ]
+      },
+      {
+       "game": "sorting",
+       "title": "Nguồn tin tuyển sinh",
+       "set": {
+        "title": "Nguồn thông tin nào là chính thức?",
+        "groups": [
+         {
+          "id": "chinh_thuc",
+          "label": "Nguồn chính thức",
+          "icon": "✅"
+         },
+         {
+          "id": "kiem_chung",
+          "label": "Cần kiểm chứng",
+          "icon": "🔍"
+         }
+        ],
+        "cards": [
+         {
+          "key": "cong_bo",
+          "text": "Cổng thông tin của Bộ Giáo dục và Đào tạo",
+          "picture": "🏛️",
+          "group": "chinh_thuc",
+          "explanation": "Cơ quan quản lí công bố quy chế, lịch tuyển sinh."
+         },
+         {
+          "key": "trang_truong",
+          "text": "Trang tuyển sinh chính thức của trường",
+          "picture": "🏫",
+          "group": "chinh_thuc",
+          "explanation": "Trường công bố ngành, chỉ tiêu, phương thức xét tuyển."
+         },
+         {
+          "key": "de_an",
+          "text": "Đề án tuyển sinh do trường công bố",
+          "picture": "📄",
+          "group": "chinh_thuc",
+          "explanation": "Đề án là văn bản chính thức về tuyển sinh của trường."
+         },
+         {
+          "key": "thong_bao_thpt",
+          "text": "Thông báo của trường THPT em đang học",
+          "picture": "📢",
+          "group": "chinh_thuc",
+          "explanation": "Nhà trường hướng dẫn học sinh theo văn bản chính thức."
+         },
+         {
+          "key": "lo_diem",
+          "text": "Bài đăng \"lộ điểm chuẩn\" không rõ nguồn",
+          "picture": "📱",
+          "group": "kiem_chung",
+          "explanation": "Không rõ người đăng, dễ là tin đồn."
+         },
+         {
+          "key": "bao_dam_do",
+          "text": "Tin nhắn mời \"bảo đảm đỗ\" khi nộp tiền",
+          "picture": "💸",
+          "group": "kiem_chung",
+          "explanation": "Đây là dấu hiệu lừa đảo, không tin và không nộp tiền."
+         },
+         {
+          "key": "nhom_ban_tan",
+          "text": "Nhóm mạng xã hội bàn tán tin đồn",
+          "picture": "💬",
+          "group": "kiem_chung",
+          "explanation": "Ý kiến bàn tán cần đối chiếu với nguồn chính thức."
+         },
+         {
+          "key": "video_meo",
+          "text": "Video \"mẹo chọn ngành chắc chắn giàu\"",
+          "picture": "🎬",
+          "group": "kiem_chung",
+          "explanation": "Lời hứa chắc chắn thường phóng đại, cần kiểm chứng."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "tn12.ky_nang_xin_viec",
+     "order": 2,
+     "title": "Kĩ năng tìm việc và phỏng vấn",
+     "description": "Viết hồ sơ xin việc đơn giản và chuẩn bị phỏng vấn.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,23 @@
+{"subject": "science", "version": 1, "organization": "topic",
+ "source_note": "Bộ bài mẫu cho kiểm thử: theo chủ đề của CT GDPT 2018.",
+ "chapters": [
+  {"key": "kh3.thuc_dong_vat", "grade": 3, "order": 1, "title": "Thực vật và động vật",
+   "lessons": [
+    {"key": "kh3.vong_doi_cay", "order": 1, "title": "Vòng đời của cây", "description": "Các giai đoạn lớn lên của cây.", "status": "ready",
+     "review": {"status": "checked"}, "objectives": ["Kể các giai đoạn của cây"], "summary": ["Hạt nảy mầm thành cây con."],
+     "games": [{"game": "order", "title": "Vòng đời kỳ diệu", "tasks": [
+        {"key": "dau", "prompt": "Sắp xếp vòng đời cây đậu", "items": ["Hạt đậu", "Hạt nảy mầm", "Cây con", "Cây ra hoa"], "explanation": "Hạt nảy mầm, lớn thành cây rồi ra hoa."},
+        {"key": "cam", "prompt": "Sắp xếp vòng đời cây cam", "items": ["Hạt cam", "Cây cam con", "Cây ra hoa", "Cây có quả"], "explanation": "Hoa kết thành quả."},
+        {"key": "ngo", "prompt": "Sắp xếp vòng đời cây ngô", "items": ["Hạt ngô", "Mầm ngô", "Cây ngô trổ cờ", "Bắp ngô chín"], "explanation": "Ngô trổ cờ rồi có bắp."},
+        {"key": "lua", "prompt": "Sắp xếp vòng đời cây lúa", "items": ["Hạt thóc", "Cây mạ", "Lúa trổ bông", "Lúa chín"], "explanation": "Mạ lớn thành lúa."}]},
+      {"game": "sorting", "title": "Cây hay con vật?", "set": {"title": "Thực vật hay động vật?",
+        "groups": [{"id": "tv", "label": "Thực vật", "icon": "🌱"}, {"id": "dv", "label": "Động vật", "icon": "🐾"}],
+        "cards": [{"key": "meo", "text": "Con mèo", "picture": "🐱", "group": "dv", "explanation": "Mèo là động vật."},
+                  {"key": "cho", "text": "Con chó", "picture": "🐶", "group": "dv", "explanation": "Chó là động vật."},
+                  {"key": "ca", "text": "Con cá", "picture": "🐟", "group": "dv", "explanation": "Cá là động vật."},
+                  {"key": "ga", "text": "Con gà", "picture": "🐔", "group": "dv", "explanation": "Gà là động vật."},
+                  {"key": "hoa", "text": "Hoa hồng", "picture": "🌹", "group": "tv", "explanation": "Hoa hồng là thực vật."},
+                  {"key": "lua", "text": "Cây lúa", "picture": "🌾", "group": "tv", "explanation": "Lúa là thực vật."},
+                  {"key": "xr", "text": "Cây xương rồng", "picture": "🌵", "group": "tv", "explanation": "Xương rồng là thực vật."},
+                  {"key": "dua", "text": "Cây dừa", "picture": "🌴", "group": "tv", "explanation": "Dừa là thực vật."}]}}]}
+   ]}]}

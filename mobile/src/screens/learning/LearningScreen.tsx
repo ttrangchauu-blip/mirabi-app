@@ -5,12 +5,14 @@ import type { User } from '../../auth/AuthContext';
 import { errorMessage } from '../../auth/messages';
 import { learningApi } from '../../learning/api';
 import { useLearningPrefs } from '../../learning/prefs';
-import { groupOf, PLAY_MODE, QUICK_GAMES, QUICK_LESSONS } from '../../learning/labels';
+import { groupOf, isCurriculumGame, PLAY_MODE, QUICK_GAMES, QUICK_LESSONS, subjectOfGame } from '../../learning/labels';
 import { useTutorials } from '../../learning/tutorials';
-import type { Catalog, GameGroupId, GameId, LearningSession, StartOptions, SubjectCode } from '../../learning/types';
+import type { Band, Catalog, CatalogLesson, FreeLevel, GameGroupId, GameId, LearningSession, LessonGame, LessonProgramme, StartOptions,
+  SubjectCode } from '../../learning/types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useConfirm } from '../../ui/ConfirmDialog';
 import { useToast } from '../../ui/Toast';
-import { GamePicker } from './GamePicker';
+import { BackHeader, GamePicker } from './GamePicker';
 import { GameScreen } from './GameScreen';
 import { GameSetup, SetupPreset } from './GameSetup';
 import { GameTutorial } from './GameTutorial';
@@ -19,9 +21,14 @@ import { ResultScreen } from './ResultScreen';
 import { ReviewScreen } from './ReviewScreen';
 import { FIRST_VIEW, PractiseGame, VocabHistoryScreen, VocabView, VocabWordScreen } from './VocabHistoryScreen';
 import { FocusInProgress, SubjectPicker } from './SubjectPicker';
+import { LessonScreen, ProgrammeSubjects, SubjectLessonsScreen } from './LessonScreens';
+import { StudyProfileForm } from '../main/StudyProfileScreen';
 
 type Route =
   | { name: 'subjects' }
+  /** Học tập theo bài: a subject's lessons at the grade on screen, then one lesson (`back`: where it was opened from). */
+  | { name: 'lessons'; subject: string }
+  | { name: 'lesson'; key: string; back: Route }
   | { name: 'games'; subject: SubjectCode; group?: GameGroupId }
   | { name: 'setup'; subject: SubjectCode; game: GameId; preset?: SetupPreset }
   | { name: 'intro'; session: LearningSession }
@@ -31,7 +38,9 @@ type Route =
   | { name: 'result'; sessionId: number }
   | { name: 'review' }
   | { name: 'vocab' }
-  | { name: 'vocabWord'; entryKey: string };
+  | { name: 'vocabWord'; entryKey: string }
+  /** Age and grade, edited from the suggestion line of the subject screen. */
+  | { name: 'studyProfile' };
 
 type Props = {
   user: User;
@@ -47,6 +56,8 @@ type Props = {
   onImmersiveChange?: (immersive: boolean) => void;
   /** Personal study / Study Together switch, shown on the subject screen. */
   modeSwitch?: React.ReactNode;
+  /** Age and grade were saved (asked here when the account has none, or changed from the suggestion line). */
+  onUserUpdated?: (user: User) => void;
 };
 
 const subjectOf = (s: LearningSession) => s.subject.code as SubjectCode;
@@ -60,7 +71,7 @@ const gamesOf = (subject: SubjectCode, game: GameId): Route => ({ name: 'games',
  * ("Cách chơi"; before the session exists when the game is known in advance, or with the session still paused).
  * Only a tap on an English game or "Bắt đầu" creates a session, one at a time; the backend keeps it, so leaving and
  * coming back (or another device) offers to continue it. */
-export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRewards, onImmersiveChange, modeSwitch }: Props) {
+export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRewards, onImmersiveChange, modeSwitch, onUserUpdated }: Props) {
   const [route, setRoute] = useState<Route>({ name: 'subjects' });
   const [busy, setBusy] = useState<'start' | number | null>(null);
   const [catalog, setCatalog] = useState<Catalog | null>(null);
@@ -77,14 +88,52 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
   // A session is being created: further taps (a game, "Bắt đầu", "Luyện lại") wait, so one tap makes one session.
   const launching = useRef(false);
   const home = useCallback(() => setRoute({ name: 'subjects' }), []);
+  // Accounts from before registration asked for age and grade are asked here, once per visit ("Để sau" waits for the next).
+  const [askLater, setAskLater] = useState(false);
+  const needsProfile = user.age == null || !user.school_grade;
+  const recommended = catalog?.study_profile ?? null;
+  // The grade being studied: the confirmed one, or another one to review or learn ahead for this visit (the profile is
+  // unchanged). Outside school, the level chosen (kept on the device).
+  const [band, setBand] = useState<Band>({});
+  const levelKey = `mirabi.learning.level:${user.id}`;
+  useEffect(() => {
+    void AsyncStorage.getItem(levelKey).then((level) => {
+      if (level === 'basic' || level === 'intermediate' || level === 'advanced') setBand((b) => (b.level ? b : { ...b, level }));
+    }).catch(() => {});
+  }, [levelKey]);
+  const pickLevel = useCallback((level: FreeLevel) => {
+    setBand((b) => ({ ...b, level }));
+    void AsyncStorage.setItem(levelKey, level).catch(() => {});
+  }, [levelKey]);
+  /** What a game is started for: the grade on screen, or the level outside school. */
+  const playBand = useCallback((): Band => {
+    const programme = catalog?.programme;
+    if (!programme) return {};
+    return programme.outside_school ? { level: programme.level } : { grade: programme.grade };
+  }, [catalog]);
 
+  // Học tập theo bài: every subject of the grade on screen (the confirmed one unless another was picked).
+  const [lessons, setLessons] = useState<LessonProgramme | null>(null);
+  const [lessonsError, setLessonsError] = useState<string | null>(null);
+  const loadLessons = useCallback(async () => {
+    setLessonsError(null);
+    try {
+      const body = await learningApi.programme(band.grade);
+      // An older backend has no lessons yet: the subject screen then shows the games as before.
+      setLessons(body && Array.isArray(body.subjects) ? body : null);
+    } catch (e) {
+      setLessons(null);
+      if ((e as { status?: number })?.status !== 404) setLessonsError(errorMessage(e));
+    }
+  }, [band.grade]);
   const load = useCallback(async () => {
     setLoadError(null);
+    void loadLessons();
     try {
-      const [c, open] = await Promise.all([learningApi.catalog(), learningApi.current()]);
+      const [c, open] = await Promise.all([learningApi.catalog(band), learningApi.current()]);
       setCatalog(c); setCurrent(open);
     } catch (e) { setLoadError(errorMessage(e)); }
-  }, []);
+  }, [band, loadLessons]);
   // Fresh review counts and open session whenever the subject screen is shown.
   useEffect(() => { if (route.name === 'subjects') void load(); }, [route.name, load]);
 
@@ -99,6 +148,7 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
     if (route.name === 'game' || route.name === 'intro' || route.name === 'subjects') return;
     const sub = BackHandler.addEventListener('hardwareBackPress', () => {
       if (route.name === 'tutorial') route.onClose();
+      else if (route.name === 'lesson') setRoute(route.back);
       else if (route.name === 'setup') setRoute(gamesOf(route.subject, route.game));
       else if (route.name === 'vocabWord') setRoute({ name: 'vocab' });
       else if (route.name === 'vocab') setRoute({ name: 'games', subject: 'english' });
@@ -142,18 +192,18 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
     const key = playKey.current.key;
     setStarting(game); setPlayError(null);
     try {
-      const s = await launch(() => learningApi.play(game, PLAY_MODE, key));
+      const s = await launch(() => learningApi.play(game, PLAY_MODE, key, playBand()));
       if (!s) return false;
       playKey.current = null;
       setRoute({ name: 'game', session: s, autoStart: true });
       return true;
     } catch (e) { setPlayError({ game, message: errorMessage(e) }); return false; }
     finally { setStarting(null); }
-  }, [launch]);
+  }, [launch, playBand]);
 
   /** An English game from its list: the guide first time, then "Chơi ngay". A failed start shows why on the list. */
   const quickPlay = useCallback((game: GameId) => {
-    const list = gamesOf('english', game);
+    const list = gamesOf(subjectOfGame(game), game);
     withGuide(game, () => { void play(game).then((ok) => { if (!ok) setRoute(list); }); }, () => setRoute(list));
   }, [withGuide, play]);
 
@@ -193,10 +243,41 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
     withGuide(game, () => { void practiseWordsNow(game, entryKeys).then((ok) => { if (!ok) setRoute(here); }); }, () => setRoute(here));
   };
 
+  /** A game of a lesson: the guide the first time, then the stage (created paused; the countdown resumes it). */
+  const lessonKey = useRef<{ id: string; key: string } | null>(null);
+  const playLesson = useCallback((lessonId: string, game: GameId, back: Route) => {
+    withGuide(game, () => {
+      const id = `${lessonId}|${game}`;
+      if (lessonKey.current?.id !== id) lessonKey.current = { id, key: newIdempotencyKey() };
+      setStarting(game);
+      void launch(() => learningApi.playLesson(lessonId, game, lessonKey.current!.key)).then((s) => {
+        if (!s) return;
+        lessonKey.current = null;
+        setRoute({ name: 'game', session: s, autoStart: true });
+      }).catch((e) => { toast(errorMessage(e), 'error'); setRoute(back); })
+        .finally(() => setStarting(null));
+    }, () => setRoute(back));
+  }, [withGuide, launch, toast]);
+  const openLesson = useCallback((key: string, back: Route = { name: 'subjects' }) => setRoute({ name: 'lesson', key, back }), []);
+  const resumeById = useCallback(async (id: number) => {
+    try { setRoute({ name: 'game', session: await learningApi.session(id), autoStart: false }); } catch (e) { toast(errorMessage(e), 'error'); }
+  }, [toast]);
+  const saveSelection = useCallback(async (chosen: string[]) => {
+    try { await learningApi.saveSelection(chosen); void loadLessons(); } catch (e) { toast(errorMessage(e), 'error'); }
+  }, [loadLessons, toast]);
+  /** The subjects that also have free-practice games (the game lists of before lessons). */
+  const practiceOf = (code: string): SubjectCode | null =>
+    (catalog?.programme?.subjects.some((x) => x.code === code) ? code as SubjectCode : null);
+
   const replay = (s: LearningSession) => {
+    if (s.catalog?.title && s.kind === 'lesson') { // a lesson's game: the same game of the same lesson, its own content
+      playLesson(s.catalog.lesson, s.game, { name: 'lesson', key: s.catalog.lesson, back: { name: 'subjects' } }); return;
+    }
     if (wordStages.current.has(s.id)) { setRoute({ name: 'vocab' }); return; } // pick the words again, with fresh results
     if (s.kind === 'review') { void practise(s.topic.id); return; }
-    if (QUICK_GAMES.has(s.game) && QUICK_LESSONS.has(s.lesson.code)) { setRoute(gamesOf('english', s.game)); quickPlay(s.game); return; }
+    if (QUICK_GAMES.has(s.game) && (QUICK_LESSONS.has(s.lesson.code) || isCurriculumGame(s.game))) {
+      setRoute(gamesOf(subjectOfGame(s.game), s.game)); quickPlay(s.game); return;
+    }
     // A stage first played as "Thử thách" is played again in Học tập (start() always sends it).
     void start({ lessonId: s.lesson.id, mode: PLAY_MODE, durationMinutes: Math.min(60, Math.round(s.duration_seconds / 60)), variant: s.variant });
   };
@@ -234,7 +315,31 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
       {route.name === 'subjects' ? (
         <SubjectPicker catalog={catalog} error={loadError} onRetry={() => void load()} current={current} focus={focus}
           onResume={resume} onDiscard={() => void discard()} onOpenReview={() => setRoute({ name: 'review' })} modeSwitch={modeSwitch}
-          onChoose={(choice) => (choice === 'free' ? onFreeStudy() : setRoute({ name: 'games', subject: choice }))} />
+          mainGrade={user.school_grade ?? null} onPickGrade={(grade) => setBand((b) => ({ ...b, grade }))} onPickLevel={pickLevel}
+          onEditProfile={() => setRoute({ name: 'studyProfile' })}
+          profilePrompt={needsProfile && !askLater ? (
+            <StudyProfileForm user={user} title="Cho Mirabi biết thêm về bạn" onSkip={() => setAskLater(true)}
+              onSaved={(saved) => { onUserUpdated?.(saved); setAskLater(true); void load(); }}
+              description="Chọn độ tuổi và lớp học để Học tập gợi ý môn, trò chơi và chủ đề phù hợp. Tiến độ học của bạn vẫn giữ nguyên." />
+          ) : null}
+          onChoose={(choice) => (choice === 'free' ? onFreeStudy() : setRoute({ name: 'games', subject: choice }))}
+          lessons={lessons || lessonsError ? (
+            <ProgrammeSubjects programme={lessons} error={lessonsError} onRetry={() => void loadLessons()}
+              onOpenSubject={(code) => setRoute({ name: 'lessons', subject: code })}
+              onPickGrade={(grade) => setBand((b) => ({ ...b, grade }))} onOpenLesson={(key) => openLesson(key)} hideResume={!!current}
+              onSelectionChange={(chosen) => void saveSelection(chosen)} />
+          ) : null} />
+      ) : null}
+      {route.name === 'lessons' ? (
+        <SubjectLessonsScreen key={`${route.subject}.${band.grade ?? ''}`} code={route.subject} grade={band.grade ?? null} onBack={home}
+          onOpen={(key) => openLesson(key, route)}
+          onPractice={practiceOf(route.subject) ? () => setRoute({ name: 'games', subject: practiceOf(route.subject)! }) : undefined} />
+      ) : null}
+      {route.name === 'lesson' ? (
+        <LessonScreen key={route.key} lessonKey={route.key} onBack={() => setRoute(route.back)} starting={starting}
+          onPlay={(lesson: CatalogLesson, game: LessonGame) => playLesson(lesson.key, game.game, route)}
+          onResume={(id) => void resumeById(id)} onOpenLesson={(key) => openLesson(key, route)}
+          onHowTo={(game) => { const here = route; setRoute({ name: 'tutorial', game, onStart: () => { tutorials.finish(game); setRoute(here); }, onClose: () => setRoute(here) }); }} />
       ) : null}
       {route.name === 'games' ? (
         <GamePicker key={route.group ?? route.subject} subject={route.subject} group={route.group} catalog={catalog}
@@ -247,6 +352,7 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
       {route.name === 'setup' ? (
         <GameSetup key={`${route.subject}.${route.game}`} subject={route.subject} game={route.game} catalog={catalog} error={loadError}
           onRetry={() => void load()} defaultDuration={defaultDuration} preset={route.preset} current={current} starting={busy === 'start'}
+          recommended={recommended} onlyLevel={catalog?.programme && !catalog.programme.outside_school ? catalog.programme.grade : null}
           onBack={() => setRoute(gamesOf(route.subject, route.game))} onStart={(o) => void start(o)} onResume={resume} />
       ) : null}
       {route.name === 'intro' ? (
@@ -264,7 +370,7 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
       ) : null}
       {route.name === 'result' ? (
         <ResultScreen sessionId={route.sessionId} petId={user.pet} petLevel={user.level} onReplay={replay}
-          onReview={(topicId) => void practise(topicId)} onHome={home} onRewards={onRewards} />
+          onReview={(topicId) => void practise(topicId)} onHome={home} onRewards={onRewards} onLesson={(key) => openLesson(key)} />
       ) : null}
       {route.name === 'vocab' ? (
         <VocabHistoryScreen view={vocabView} onViewChange={setVocabView} onPageChange={() => scroll.current?.scrollTo({ y: 0, animated: false })}
@@ -274,6 +380,13 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
       {route.name === 'vocabWord' ? (
         <VocabWordScreen key={route.entryKey} entryKey={route.entryKey} onBack={() => setRoute({ name: 'vocab' })}
           onPractise={(game, keys) => void practiseWords(game, keys)} practising={practisingWords} />
+      ) : null}
+      {route.name === 'studyProfile' ? (
+        <>
+          <BackHeader title="Độ tuổi & lớp học" subtitle="Học tập · Gợi ý theo lớp" onBack={home} />
+          <StudyProfileForm user={user} title="Thông tin học tập" onSaved={(saved) => { onUserUpdated?.(saved); home(); }}
+            description="Gợi ý môn, trò chơi và chủ đề sẽ theo lớp bạn chọn. Mọi nội dung vẫn mở cho bạn chọn." />
+        </>
       ) : null}
       {route.name === 'review' ? <ReviewScreen onBack={home} onPractice={(id) => void practise(id)} busyTopicId={typeof busy === 'number' ? busy : null} /> : null}
     </ScrollView>

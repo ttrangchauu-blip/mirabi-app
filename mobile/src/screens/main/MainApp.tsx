@@ -16,6 +16,7 @@ import { MoreTab } from './MoreTab';
 import { PetHatchedPopup } from './PetHatchedPopup';
 import { PetRewardPopup } from './PetRewardPopup';
 import { ProfileScreen } from './ProfileScreen';
+import { StudyProfileScreen } from './StudyProfileScreen';
 import { StudyTab } from './StudyTab';
 import { usePomodoroTimer } from './usePomodoroTimer';
 import { TabBar } from './TabBar';
@@ -41,7 +42,7 @@ import type { RoomKind } from '../../room/types';
 
 export type FocusTimer = ReturnType<typeof usePomodoroTimer>;
 
-type Overlay = 'profile' | 'quests' | 'streak' | 'album' | 'visit' | 'feed' | 'inventory' | 'garden' | 'gardenVisit';
+type Overlay = 'profile' | 'studyProfile' | 'quests' | 'streak' | 'album' | 'visit' | 'feed' | 'inventory' | 'garden' | 'gardenVisit';
 
 export function MainApp() {
   const { user, setUser, streakPopup, dismissStreakPopup } = useAuth();
@@ -223,12 +224,13 @@ export function MainApp() {
       ) : games ? (
         <View style={[styles.fill, { paddingTop: insets.top + 10, paddingBottom: immersive ? insets.bottom : 0 }]}>
           <LearningScreen key={studyVisit} user={user} defaultDuration={timer.focusMinutes} focus={focus} onFreeStudy={() => setFreeStudy(true)}
-            onRewards={loadDashboard} onImmersiveChange={setImmersive} modeSwitch={<StudyModeSwitch value="personal" onChange={setStudyMode} />} />
+            onRewards={loadDashboard} onImmersiveChange={setImmersive} onUserUpdated={setUser} modeSwitch={<StudyModeSwitch value="personal" onChange={setStudyMode} />} />
         </View>
       ) : (
       <ScrollView key={overlay ?? tab} contentContainerStyle={[styles.content, { paddingTop: insets.top + 10 }]}
         showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} keyboardShouldPersistTaps="handled">
         {overlay === 'profile' ? <ProfileScreen user={user} onBack={back} />
+          : overlay === 'studyProfile' ? <StudyProfileScreen user={user} onBack={back} onUserUpdated={setUser} />
           : overlay === 'quests' ? <DailyQuestsScreen onBack={back} onChanged={loadDashboard} onOpenTaskCreate={openTaskCreate} />
             : overlay === 'streak' ? <LoginStreakScreen onBack={back} user={user} onUserUpdated={setUser} />
             : overlay === 'feed' ? <FeedScreen user={user} posts={posts} onPosts={setPosts} onPosted={loadDashboard} onBack={back} /> : <>
@@ -240,7 +242,7 @@ export function MainApp() {
             {tab === 'Community' && <FriendsScreen key={friendsTab} initialTab={friendsTab} onVisit={visitRoom} onVisitGarden={visitGarden} onOpenStudyRoom={openStudyRoom}
               onRequestsChanged={() => { void loadDashboard(); }} />}
             {tab === 'More' && <MoreTab user={user} onOpenProfile={() => open('profile')} onOpenRoom={() => navigate('Room')} onOpenFeed={() => open('feed')}
-              onOpenGarden={() => openGarden()} />}
+              onOpenGarden={() => openGarden()} onOpenStudyProfile={() => open('studyProfile')} />}
           </>}
       </ScrollView>
       )}

@@ -6,6 +6,7 @@ import { useConfirmLogout } from '../../auth/useConfirmLogout';
 import { showAlert } from '../../components/dialogs';
 import { Text } from '../../components/Typography';
 import { petById } from '../../pets';
+import { gradeLabel } from '../../studyProfile';
 import { appTheme as t } from '../../theme';
 import { Avatar, Button, Card, IconCircle, IconName, ScreenHeader, SectionHeader } from '../../ui/kit';
 
@@ -25,11 +26,13 @@ const SETTINGS: { icon: IconName; label: string }[] = [
   { icon: 'moon-outline', label: 'Chế độ tối' }, { icon: 'help-circle-outline', label: 'Trợ giúp & cộng đồng' },
 ];
 
-export function MoreTab({ user, onOpenProfile, onOpenRoom, onOpenFeed, onOpenGarden }: {
+export function MoreTab({ user, onOpenProfile, onOpenRoom, onOpenFeed, onOpenGarden, onOpenStudyProfile }: {
   user: User; onOpenProfile: () => void; onOpenRoom?: () => void; onOpenFeed?: () => void; onOpenGarden?: () => void;
+  onOpenStudyProfile?: () => void;
 }) {
   const confirmLogout = useConfirmLogout();
   const pet = petById(user.pet);
+  const studyProfile = user.age != null && user.school_grade ? `${user.age} tuổi · ${gradeLabel(user.school_grade)}` : 'Chưa cập nhật';
 
 
   return (
@@ -65,9 +68,20 @@ export function MoreTab({ user, onOpenProfile, onOpenRoom, onOpenFeed, onOpenGar
 
       <SectionHeader title="Cài đặt" />
       <Card style={styles.settings}>
+        {onOpenStudyProfile ? (
+          <Pressable onPress={onOpenStudyProfile} accessibilityRole="button" accessibilityLabel={`Độ tuổi & lớp học: ${studyProfile}`}
+            style={styles.setting}>
+            <IconCircle name="school-outline" size={36} />
+            <View style={styles.flex}>
+              <Text style={styles.settingLabel}>Độ tuổi & lớp học</Text>
+              <Text style={styles.settingValue} numberOfLines={1}>{studyProfile}</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color={t.muted} />
+          </Pressable>
+        ) : null}
         {SETTINGS.map((s, i) => (
           <Pressable key={s.label} onPress={() => showAlert(s.label, 'Cấu hình chi tiết sẽ được bổ sung theo yêu cầu sản phẩm.')}
-            accessibilityRole="button" style={[styles.setting, i > 0 && styles.divider]}>
+            accessibilityRole="button" style={[styles.setting, (i > 0 || !!onOpenStudyProfile) && styles.divider]}>
             <IconCircle name={s.icon} size={36} />
             <Text style={styles.settingLabel}>{s.label}</Text>
             <Ionicons name="chevron-forward" size={18} color={t.muted} />
@@ -94,4 +108,5 @@ const styles = StyleSheet.create({
   setting: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 10, minHeight: 52 },
   divider: { borderTopWidth: 1, borderTopColor: t.tint },
   settingLabel: { flex: 1, fontSize: 16, fontWeight: '700', color: t.ink },
+  settingValue: { fontSize: 13, color: t.muted, marginTop: 1 },
 });

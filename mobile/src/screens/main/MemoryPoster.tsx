@@ -1,65 +1,97 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { ActivityIndicator, Image, Platform, Pressable, StyleSheet, TextStyle, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
 import { SvgXml } from 'react-native-svg';
 import { Text } from '../../components/Typography';
-import { PetArt } from '../../components/PetArt';
-import type { Memory, MemoryPalette, MemoryTemplate } from './memoryTypes';
+import { nunito } from '../../fonts';
+import { memoryPicture } from './memoryPicture';
+import type { Memory } from './memoryTypes';
 
-const PALETTES: Record<MemoryPalette, readonly [string, string, string]> = {
-  sky: ['#DDF1F6', '#F5F1DD', '#FDF8ED'],
-  lilac: ['#E9E4F8', '#F5EEFA', '#FFF9ED'],
-  peach: ['#F9E2D9', '#FFF0DB', '#F8F4E9'],
-};
-const defaults: Record<MemoryTemplate, string> = {
-  auto: 'Kỷ niệm của chúng mình', hatch: 'Ngày chúng mình gặp nhau', evolve: 'Một bước trưởng thành',
-  study: 'Thêm một ngày tiến bộ', together: 'Cùng nhau tiến bộ', walk: 'Một chuyến đi đáng nhớ',
-};
-export const templateFor = (event: string): MemoryTemplate => event === 'pet_hatched' ? 'hatch' : event === 'pet_evolved' ? 'evolve'
-  : event === 'first_group_session' ? 'together' : event === 'first_learning_session' || event === 'first_daily_quests' ? 'study'
-  : event === 'walk_keepsake' ? 'walk' : 'auto';
-
-/** A memory's picture. Room photos show the image taken in the room (stored, never redrawn); other memories draw
- * their poster from the snapshot. */
-export function MemoryImage({ memory, compact = false }: { memory: Parameters<typeof MemoryPoster>[0]['memory'] & Pick<Memory, 'thumbnail_svg' | 'image_svg'>; compact?: boolean }) {
-  const stored = memory.event_type === 'room_photo' ? (compact ? memory.thumbnail_svg : memory.image_svg) : null;
-  if (!stored) return <MemoryPoster memory={memory} compact={compact} />;
-  return <View style={compact ? styles.compact : styles.large} testID="room-photo-image" accessible accessibilityRole="image"
-    accessibilityLabel={memory.title}><SvgXml xml={stored} width="100%" height="100%" /></View>;
+/** Stored pictures name the font "Nunito" (older ones a list ending in "sans-serif") and a weight. A phone finds a
+ * font loaded by expo-font only by its exact name (Nunito_800ExtraBold), and iOS then picks the file nearest the
+ * asked weight, so the weight must be that file's. The web declares those names at the normal weight: asking for 800
+ * there would thicken the letters a second time, so it asks for normal. */
+export function deviceFonts(svg: string): string {
+  return svg.replace(/<text\b([^>]*)>/g, (_, attrs: string) => {
+    const asked = /\sfont-weight="([^"]*)"/.exec(attrs)?.[1] ?? '400';
+    const family = nunito(asked as TextStyle['fontWeight']);
+    const weight = Platform.OS === 'web' ? 'normal' : family.slice(7, 10);
+    return `<text${attrs.replace(/\s(?:font-family|font-weight)="[^"]*"/g, '')} font-family="${family}" font-weight="${weight}">`;
+  });
 }
 
-export function MemoryPoster({ memory, compact = false }: { memory: Pick<Memory, 'snapshot' | 'title' | 'message' | 'event_at' | 'event_type' | 'template_key' | 'palette_key' | 'include_message'>; compact?: boolean }) {
-  const template = memory.template_key && memory.template_key !== 'auto' ? memory.template_key : templateFor(memory.event_type);
-  const palette = PALETTES[memory.palette_key ?? 'sky'];
-  const date = new Intl.DateTimeFormat('vi-VN', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date(memory.event_at));
-  const title = memory.title || defaults[template];
-  return <LinearGradient colors={palette} style={[styles.poster, compact ? styles.compact : styles.large]}>
-    <View style={[styles.sun, compact && styles.sunSmall]} />
-    <View style={[styles.cloud, styles.cloudOne]} /><View style={[styles.cloud, styles.cloudTwo]} />
-    {!compact && <View style={styles.heading}><Text numberOfLines={2} adjustsFontSizeToFit style={styles.title}>{title}</Text></View>}
-    {compact && <View style={styles.miniLabel}><Ionicons name={template === 'study' ? 'book' : template === 'together' ? 'people' : 'sparkles'} size={12} color="#496775" /></View>}
-    <View style={[styles.petStage, compact && styles.petStageSmall]}>
-      {template === 'evolve' && memory.snapshot.level > 1 && !compact ? <View style={styles.before}><PetArt pet={memory.snapshot.pet_id} stage={memory.snapshot.level - 1} size={82} still /></View> : null}
-      <PetArt pet={memory.snapshot.pet_id} stage={memory.snapshot.level} size={compact ? 104 : 200} still />
-    </View>
-    {!compact && <View style={styles.footer}>
-      {memory.snapshot.result ? <Text numberOfLines={2} style={styles.result}>{memory.snapshot.result}</Text> : <Text style={styles.petName}>{memory.snapshot.pet_name}</Text>}
-      {memory.include_message && memory.message ? <Text numberOfLines={2} style={styles.message}>{memory.message}</Text> : null}
-      <Text style={styles.date}>{date}</Text>
-    </View>}
-    <Text style={[styles.brand, compact && styles.brandSmall]}>Mirabi</Text>
-  </LinearGradient>;
+/** A memory's album card: the thumbnail the backend drew from the event when it happened (memories.py), never
+ * redrawn from the pet, room or garden as they are now. Older thumbnails (360 x 260) fill the same 400 x 280 frame,
+ * centred. A picture still being drawn shows that, with no stand-in pet. */
+export function MemoryImage({ memory }: { memory: Pick<Memory, 'title' | 'thumbnail_svg'> }) {
+  const xml = useMemo(() => memory.thumbnail_svg ? deviceFonts(memory.thumbnail_svg) : '', [memory.thumbnail_svg]);
+  if (!xml) return <PictureState compact />;
+  return <View style={styles.compact} testID="memory-image" accessible accessibilityRole="image" accessibilityLabel={memory.title}>
+    <SvgXml xml={xml} width="100%" height="100%" preserveAspectRatio="xMidYMid slice" /></View>;
+}
+
+/** The memory's full picture: the PNG that "Tải ảnh" and "Chia sẻ" hand over (memoryPicture). Nothing stands in
+ * while it loads (no enlarged thumbnail); `onReady` gets its URI once it is on screen, and null until then. */
+export function MemoryPicture({ memory, onReady }: {
+  memory: Pick<Memory, 'id' | 'title' | 'image_key'>; onReady: (uri: string | null) => void;
+}) {
+  const [uri, setUri] = useState<string | null>(null);
+  const [state, setState] = useState<'loading' | 'shown' | 'failed'>('loading');
+  const [attempt, setAttempt] = useState(0);
+  const ready = useRef(onReady);
+  ready.current = onReady;
+  useEffect(() => {
+    let live = true;
+    setUri(null); setState('loading'); ready.current(null);
+    memoryPicture(memory.id, memory.image_key, attempt > 0)
+      .then((next) => { if (live) setUri(next); })
+      .catch(() => { if (live) setState('failed'); });
+    return () => { live = false; };
+  }, [memory.id, memory.image_key, attempt]);
+  const failed = () => { setUri(null); setState('failed'); ready.current(null); };
+  if (state === 'failed') {
+    return <PictureState failed text="Chưa tải được ảnh kỷ niệm" onRetry={() => setAttempt((n) => n + 1)} />;
+  }
+  return <View style={styles.large}>
+    {uri ? <Image source={{ uri }} style={StyleSheet.absoluteFill} resizeMode="contain" testID="memory-picture"
+      accessible accessibilityRole="image" accessibilityLabel={memory.title}
+      onLoad={() => { setState('shown'); ready.current(uri); }} onError={failed} /> : null}
+    {state === 'loading' ? <PictureState text="Đang tải ảnh kỷ niệm…" loading overlay /> : null}
+  </View>;
+}
+
+/** The create sheet's preview: the PNG of the picture "Lưu kỷ niệm" will store, rendered by the server like the
+ * album's (POST /api/memories/preview). `updating`: a newer preview is on its way. */
+export function MemoryPreview({ png, label, updating }: { png: string; label: string; updating: boolean }) {
+  return <View style={styles.large}>
+    <Image source={{ uri: `data:image/png;base64,${png}` }} style={StyleSheet.absoluteFill} resizeMode="contain"
+      testID="memory-preview" accessible accessibilityRole="image" accessibilityLabel={label} />
+    {updating ? <View style={styles.updating}><ActivityIndicator color="#35728E" /></View> : null}
+  </View>;
+}
+
+export function PictureState({ compact = false, onRetry, retrying = false, loading = false, failed = false, overlay = false,
+  text = 'Đang tạo ảnh kỷ niệm…' }: {
+  compact?: boolean; onRetry?: () => void; retrying?: boolean; loading?: boolean; failed?: boolean; overlay?: boolean;
+  text?: string;
+}) {
+  return <View style={[styles.waiting, overlay ? StyleSheet.absoluteFill : compact ? styles.compact : styles.large]}
+    testID={failed ? 'memory-image-failed' : 'memory-image-pending'}>
+    {retrying || loading ? <ActivityIndicator color="#35728E" />
+      : <Ionicons name={failed ? 'alert-circle-outline' : 'hourglass-outline'} size={compact ? 22 : 34} color="#5F8796" />}
+    <Text style={[styles.waitingText, compact && styles.waitingSmall]}>{text}</Text>
+    {onRetry && !compact ? <Pressable accessibilityRole="button" onPress={onRetry} disabled={retrying} style={styles.retry}>
+      <Text style={styles.retryText}>Thử lại</Text></Pressable> : null}
+  </View>;
 }
 
 const styles = StyleSheet.create({
-  poster: { overflow: 'hidden', alignItems: 'center', position: 'relative' }, compact: { height: 132 }, large: { width: '100%', aspectRatio: 1080 / 1350 },
-  sun: { position: 'absolute', width: 168, height: 168, borderRadius: 84, backgroundColor: '#FFF8DDBB', top: 112 }, sunSmall: { width: 76, height: 76, top: 29 },
-  cloud: { position: 'absolute', height: 26, width: 92, borderRadius: 30, backgroundColor: '#FFFFFF70' }, cloudOne: { left: -18, top: 90 }, cloudTwo: { right: -25, top: 180 },
-  heading: { position: 'absolute', top: 24, left: 24, right: 24, minHeight: 62, alignItems: 'center', justifyContent: 'center' }, title: { fontSize: 23, lineHeight: 28, fontWeight: '900', color: '#173B52', textAlign: 'center' },
-  miniLabel: { position: 'absolute', left: 11, top: 11, width: 27, height: 27, borderRadius: 14, backgroundColor: '#FFFFFFC9', alignItems: 'center', justifyContent: 'center' },
-  petStage: { position: 'absolute', top: 92, left: 20, right: 20, height: 218, alignItems: 'center', justifyContent: 'center' }, petStageSmall: { top: 17, height: 108 },
-  before: { position: 'absolute', left: 0, bottom: 8, width: 92, height: 92, borderRadius: 18, backgroundColor: '#FFFFFFA6', borderWidth: 2, borderColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
-  footer: { position: 'absolute', left: 24, right: 24, bottom: 31, alignItems: 'center' }, result: { color: '#173B52', fontWeight: '900', fontSize: 17, lineHeight: 22, textAlign: 'center' }, petName: { color: '#173B52', fontWeight: '900', fontSize: 18 }, message: { color: '#4F6C79', textAlign: 'center', marginTop: 5, fontSize: 12, lineHeight: 16 }, date: { color: '#58717E', marginTop: 6, fontSize: 12, fontWeight: '700' },
-  brand: { position: 'absolute', right: 20, bottom: 14, color: '#35728E', fontSize: 11, fontWeight: '900', letterSpacing: 1 }, brandSmall: { right: 9, bottom: 7, fontSize: 8 },
+  compact: { width: '100%', aspectRatio: 400 / 280 }, large: { width: '100%', aspectRatio: 1080 / 1350 },
+  waiting: { alignItems: 'center', justifyContent: 'center', gap: 8, backgroundColor: '#EAF3F4', padding: 12 },
+  waitingText: { color: '#4F6C79', fontWeight: '800', fontSize: 15, lineHeight: 21, textAlign: 'center' },
+  waitingSmall: { fontSize: 11, lineHeight: 16 },
+  retry: { marginTop: 4, paddingHorizontal: 18, paddingVertical: 9, borderRadius: 16, backgroundColor: '#FFFFFF' },
+  retryText: { color: '#136FA8', fontWeight: '900' },
+  updating: { position: 'absolute', top: 14, right: 14, width: 38, height: 38, borderRadius: 19, alignItems: 'center',
+    justifyContent: 'center', backgroundColor: '#FFFFFFD9' },
 });

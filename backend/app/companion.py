@@ -243,12 +243,14 @@ def roll_rewards(walk: PetWalk) -> list[dict]:
     return out
 
 
-def keepsake_memory(db: Session, user: User, walk: PetWalk, item_id: str, location: str):
+def keepsake_memory(db: Session, user: User, walk: PetWalk, item_id: str, variant: str, location: str):
     """A keepsake goes into the album with the walk it came from. Shown in the gift popup, so no "new memory" notice."""
     from .memories import record_event
     name, place = cat.ITEMS[item_id]["name"], cat.LOCATIONS[location]["name"]
     row = record_event(db, user, "walk_keepsake", f"keepsake:walk:{walk.id}", at=as_utc(walk.returns_at),
-                       title=f"{name} từ {place}", result=f"{user.pet_name or 'Pet'} mang về {name} từ {place}")
+                       title=f"{name} từ {place}", result=f"{user.pet_name or 'Pet'} mang về {name} từ {place}",
+                       item={"id": item_id, "variant": variant, "name": name, "place": place, "location": location},
+                       walk_id=walk.id)
     if row is not None:
         row.notified_at = utcnow()
     return row
@@ -268,7 +270,7 @@ def grant_rewards(db: Session, walk: PetWalk, user: User, now: datetime) -> list
                                 variant=entry["variant"], quantity=entry["quantity"], location_id=location,
                                 first_time=bool(first), created_at=now)
             if cat.ITEMS[entry["item_id"]]["group"] == "keepsake":
-                memory = keepsake_memory(db, user, walk, entry["item_id"], location)
+                memory = keepsake_memory(db, user, walk, entry["item_id"], entry["variant"], location)
                 reward.memory_id = memory.id if memory is not None else None
             db.add(reward)
             db.flush()

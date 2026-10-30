@@ -1,11 +1,14 @@
 """The grammar bank: validation and quality gate, answer checking, shuffling, stage picking, import and both games."""
 import json
 import random
+import re
 from collections import Counter
 from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
+
+from app.learning_engine import VOCAB_STAGE_WORDS
 from sqlalchemy import func, select, update
 
 from app.learning_engine import InvalidAnswer, check_bridge, check_choice
@@ -108,17 +111,26 @@ def test_doubtful_questions_stay_drafts(tmp_path):
 
 
 def test_the_bundled_bank_is_valid_and_large_enough():
+    """What is served is reviewed, and every grammar point that has questions can fill stages of both games, in the
+    three forms. The curriculum (POINTS) is larger than the bank: a point without questions is simply never drawn."""
     items, report = check()
     assert report.ok, report.errors[:10]
     active = [i for i in items if effective_status(i, report) == "active"]
+    assert not [i.key for i in active if report.issues.get(i.key)]  # nothing with a quality issue is ever served
     games = Counter(i.game for i in active)
-    assert games["choice"] + games["order"] >= 10000, games
-    assert games["choice"] >= 4000 and games["order"] >= 3500, games
-    points = {(i.point, i.game) for i in active}
-    assert len({p for p, _ in points}) >= 80
-    forms = Counter((i.game, i.form) for i in active)
-    assert all(forms[(g, f)] >= 500 for g in ("choice", "order") for f in ("aff", "neg", "q")), forms
-    assert {i.difficulty for i in active} == {1, 2, 3, 4, 5, 6}
+    # The pattern-made "Sắp xếp câu" questions are retired: their pieces were cut by length and their time and place
+    # phrases can move to the front, orders no one declared as right answers.
+    assert games["choice"] >= 4000 and games["order"] >= 200, games
+    assert not [i.key for i in active if i.game == "order" and ".auto." in i.key]
+    points = {i.point for i in active}
+    assert len(points) >= 4 and points <= set(POINT)
+    per_game = Counter((i.point, i.game) for i in active)
+    # Enough for several stages of each game without a question twice in one (a stage is 12 choices or 10 orders).
+    assert all(per_game[(p, "choice")] >= 5 * 12 and per_game[(p, "order")] >= 5 * 10 for p in points), per_game
+    # Written questions (not pattern-made) in every form, for every point and game: negatives and questions too.
+    forms = Counter((i.point, i.game, i.form) for i in active if ".auto." not in i.key)
+    assert all(forms[(p, g, f)] >= 10 for p in points for g in ("choice", "order") for f in ("aff", "neg", "q")), forms
+    assert all(abs(i.difficulty - POINT[i.point]["difficulty"]) <= 1 for i in active)
     assert len({i.topic for i in active}) >= 20
 
 
@@ -300,7 +312,7 @@ def test_each_game_starts_right_away_from_the_banks(client, me, db, game, kind, 
     use_fixture_bank(db)
     session = play(client, me, game)
     assert session["lesson"]["code"] == lesson and session["game"] == game
-    assert session["required_count"] == (10 if game == "bridge" else 12)
+    assert session["required_count"] == {"bridge": 10, "gate": 12}.get(game, VOCAB_STAGE_WORDS)
     turn = session["open_turns"][0]
     assert turn["kind"] == kind
     stored = stored_answer(turn)
@@ -309,7 +321,8 @@ def test_each_game_starts_right_away_from_the_banks(client, me, db, game, kind, 
     for secret in ("accepted", "\"option\"", "item_key", "entry_key", "sentence_vi" if kind == "gate_choice" else "explanation"):
         assert secret not in text
     if kind == "vocab_typing":
-        assert stored["display"] not in text  # Việt → Anh: the English word is the answer
+        # Việt → Anh: the English word is the answer (a whole word: "kill" is in the field name "skill_label").
+        assert not re.search(rf"{re.escape(stored['display'])}", text)
     if kind == "gate_choice":
         assert stored["display"] not in text and turn["prompt"]["context_vi"]
 

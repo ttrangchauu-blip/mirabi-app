@@ -1,5 +1,8 @@
 # Learning games: English & Math (Anh & Toán)
 
+> **Học tập now goes by lesson** for every subject of every grade: see [Học theo bài](#học-theo-bài). The games below are
+> still offered as free practice (*Trò chơi luyện tập tự do*) and keep their rules.
+
 Mini games for **Tiếng Anh** (vocabulary, grammar) and **Toán** (+ − × :, missing number, comparison, order of
 operations). **Học tập** in the menu always opens the **subject screen**: 🇬🇧 *Tiếng Anh*, 🧮 *Toán* or 📚 *Học tự
 chọn* (the focus timer with its duration settings, sounds and study tools, unchanged). English and Math then list
@@ -24,6 +27,139 @@ or Math game, or a focus timer running or paused) is offered as *Tiếp tục ph
 vocabulary bank for this user (see [Vocabulary bank](#vocabulary-bank)) and the lesson shown before playing teaches
 exactly those words; grammar sentences are generated from word pools by rules (am/is/are, -s/-es/-ies, has/does), so
 no two stages are the same.
+
+## Học theo bài
+
+Học tập is organised **Chương trình → Khối lớp → Môn học → Chương/Chủ đề → Bài học → Trò chơi** (backend
+`lesson_catalog.py` and `lesson_api.py`, content in `backend/app/data/catalog/`; writing lessons:
+[LESSON_CONTENT.md](LESSON_CONTENT.md); what exists per grade: [LESSON_INVENTORY.md](LESSON_INVENTORY.md)).
+
+```
+Học tập → Chọn môn → Chọn bài → (màn bài học) → Chọn trò → Cách chơi lần đầu → 3-2-1 → Chơi → Kết quả
+                                                                                            ├ Chơi lại
+                                                                                            ├ Trò khác trong bài
+                                                                                            └ Bài tiếp theo
+```
+
+- **The programme of a grade** lists *every* subject and educational activity of Chương trình GDPT 2018 at that grade
+  (Thông tư 32/2018 as amended by 20/2021, 13/2022 and 17/2025), named as at that grade (Tiếng Việt / Ngữ văn; Tự nhiên
+  và Xã hội, Khoa học, Khoa học tự nhiên; Đạo đức, Giáo dục công dân, Giáo dục kinh tế và pháp luật; Tin học và Công
+  nghệ in grades 3–5…), grouped as *bắt buộc và hoạt động giáo dục*, *lựa chọn* and *tự chọn*. Each says what Mirabi
+  has: *n/m bài sẵn sàng*, *Đang biên soạn*, or why there is nothing (Nội dung giáo dục của địa phương, Tiếng dân tộc
+  thiểu số, Ngoại ngữ 2, Chuyên đề học tập: they depend on the province or the school). A subject with no lesson
+  cannot be opened, so no button leads to an empty screen.
+- **Grade**: the confirmed grade by default; *Lớp khác* shows another one to review or learn ahead without changing
+  the profile. Learners without a school grade (Sinh viên, Người đi làm) pick a grade to see its lessons.
+- **THPT**: the learner ticks the elective subjects they study (at most 4, `PUT /api/learning/programme/selection`,
+  stored in `users.study_subjects`); those come first, the others stay under *Môn lựa chọn khác*.
+- **Tiếp tục học**: the lesson last practised (any grade), one tap away; an open stage is still offered as *Tiếp tục
+  phiên học*. Grade and subject are never asked again after a stage: the result leads back to the lesson.
+- **Lessons by chapter**, in the order of the curriculum, with a search (accent-insensitive, title and description).
+  Each lesson shows its title, a one-line description, its games, its progress and its status: *Chưa học*, *Đang
+  luyện*, *Đã hoàn thành*, or *Đang biên soạn* (listed, never playable). A lesson is only locked by a declared
+  prerequisite (`requires`), and says why.
+- **The lesson screen**: grade, subject, chapter; *Bạn sẽ học gì?*; *Kiến thức tóm tắt* and *Ví dụ* (folded); every
+  game with its number of questions (*Bài ngắn · n từ* for a vocabulary lesson with fewer than 15 words), its progress
+  (stages done, best share right at the first try, last stage's first-try / attempts / hints, questions in Cần ôn) and
+  *Bắt đầu*, *Chơi lại* or *Tiếp tục*, plus *Cách chơi*.
+- **The organisation is declared**: every file is `topic` (by the curriculum's topics, "không theo mục lục bộ sách
+  nào"); a file following a textbook would name its series and edition and map each lesson (`textbook_ref`).
+
+### Games of a lesson
+
+One gameplay per game, the content passed by the lesson; a stage only ever holds the lesson's own questions (never
+another lesson's or grade's, never one asked twice to fill it). The backend checks that the game belongs to the
+lesson, the lesson to its subject and grade, and that it is ready and unlocked (`409 lesson_locked`,
+`lesson_not_ready`, `lesson_not_published`, `422 game_not_in_lesson`).
+
+| Game | Kind | Used for | Wrong answer |
+|---|---|---|---|
+| Sắp xếp thứ tự (`order`) | `order_steps` | vòng đời, dòng thời gian, quy trình, các bước giải, thứ tự động tác, ghép câu | `retry`; the cards in their right place stay locked (`result.kept`), the rest is placed again |
+| Ghép cặp (`match`) | `match_pairs` | sự kiện–nhân vật, phép tính–kết quả, địa danh–đặc điểm, từ–nghĩa, kí hiệu–tên | `retry`; the right pairs stay (`kept`) |
+| Chọn đáp án có giải thích (`choice`) | `choice_explain` | tình huống, đọc hiểu / đọc tư liệu, dự đoán hiện tượng, kiến thức, tự đánh giá | `retry`; the option chosen explains itself and is crossed out |
+| Phân loại, Thám tử chính tả, Ghép chữ, Lập trình đường đi | as before | with the lesson's own set, sentences, words or levels | as before |
+| Bảo vệ căn cứ, Xây cầu toán học | as before | generated problems of the lesson's settings only (`table: 2` = 2 × 1…10, `no_carry`…) | as before (3 hearts) |
+| Bắn thiên thạch, Bắn từ tiếng Anh | as before | exactly the lesson's word list | as before (15 words, 5 hearts; fewer words = a short stage) |
+
+The new games have no hearts and no clock (they are not quizzes against time); every option of a *choice* explains
+why it fits or not, several options can be acceptable by stated criteria, and a *tự đánh giá* question (`graded:
+false`) has no wrong answer and never counts as right, wrong or *cần ôn*. After a right answer the explanation shows
+before the next question. Each game has its own 3-page guide drawn with its real play area.
+
+**By learner group** (`lesson_catalog.limits`, enforced on the content): grades 1–2 at most 4 cards, 4 pairs, 3
+options, 40-character cards; grades 3–5 at most 5 / 5 / 4; secondary school can read a passage (up to 1 400
+characters). Code passages (Tin học) show in a fixed-width font so their indentation reads as written.
+
+### Progress and completion
+
+Every stage records its lesson, grade and content version (`learning_sessions.catalog_lesson`, `catalog_grade`,
+`content_version`), so progress is read per grade → subject → lesson → game from the user's own sessions and turns
+(never stored twice, never from the app's numbers), and an old result never changes when a lesson is edited (the
+lesson publishes a new version; old sessions keep their frozen questions). Sessions played before lessons existed are
+not attributed to any lesson.
+
+- **Completed** (*Đã hoàn thành*): every game of the lesson (`completion.games: "all"`, or `"any"`) has a completed
+  stage with at least `completion.min_first_try` (default 80%) of its graded questions right at the first try. Opening
+  a lesson or playing a stage is not enough; review stages never count.
+- Right at the first try, attempts, hints and the questions to review are the turns' own (`first_try`, `attempts`,
+  `hints_used`, outcomes); wrong ones go to **Cần ôn** under the lesson's chapter as for every game, and *Ôn lại*
+  plays them again from the same lesson.
+- **EXP is unchanged**: a completed lesson stage is a whole stage (`stage_turns` = the lesson's number of questions)
+  and earns the stage reward once per subject per local day through the same claim row and EXP ledger.
+
+| Method & path | |
+|---|---|
+| `GET /api/learning/programme?grade=` | Every subject of the grade with type, support, lessons ready / listed and progress; `selection` (THPT); `resume` (Tiếp tục học); `grade: null` and the grades to pick from without a school grade |
+| `PUT /api/learning/programme/selection` | `{subjects}`: THPT electives (at most 4); `422 not_an_elective`, `too_many_electives` |
+| `GET /api/learning/programme/subjects/{code}?grade=&q=` | Chapters and lessons with status, progress and locks; `404 subject_not_in_grade` |
+| `GET /api/learning/lesson-catalog/{key}` | The lesson screen: objectives, summary, examples, games with progress, completion rule, prerequisites, next lesson, review status and content version |
+| `POST /api/learning/lesson-catalog/{key}/play` | `{game}` (+ `Idempotency-Key`) → a paused session of that game of that lesson; the session's `catalog` names the lesson, its other games and the next lesson |
+
+
+## By grade: the programme and the curriculum games
+
+**The confirmed grade decides the content** (`backend/app/curriculum.py`). The curriculum is Vietnam's *Chương trình giáo
+dục phổ thông 2018*; subjects are named as at that grade (Tiếng Việt / Ngữ văn; Tự nhiên và Xã hội 1–3, Khoa học 4–5,
+Khoa học tự nhiên 6–9; Tiếng Anh and Tin học from grade 3). `GET /api/learning/catalog` returns `programme`: only the
+subjects and games **with content for that grade**, each game with the grades it supports. A subject or game without
+enough reviewed content is not offered (no short or padded stage), and an empty grade says so (`note`).
+
+- **Another grade** (`?grade=grade4`, *Lớp khác* on the subject screen): to review or learn ahead for the visit; the
+  profile's grade is unchanged (*Về lớp chính*).
+- **Sinh viên, Người đi làm/Học tự do**: no school grade is assumed. They pick a level (`?level=basic|intermediate|advanced`,
+  *Cơ bản / Trung cấp / Nâng cao*, kept on the device) and see Tiếng Anh, Toán and Tin học.
+- Math: the grade being studied is the only grade offered in the setup (content exists for grades 2, 3, 4 and 6).
+- Flow unchanged: subject → game → first-time guide → 3-2-1 → play. `POST /api/learning/play {game, grade | level}`
+  answers `409 game_not_available` for a grade without content.
+
+| Game | Subject | Grades | Stage | Rules (Học tập) |
+|---|---|---|---|---|
+| Ghép chữ (`word_builder`) | Tiếng Việt | 1 (letters), 2 (syllables) | 10 words | Picture + shuffled pieces; tap in order, *Kiểm tra*. Wrong: the pieces stay, fix and check again. Each word gives the pet a book piece. |
+| Thám tử chính tả (`spelling_detective`) | Tiếng Việt | 2–5 | 10 sentences | Tap the misspelled syllable; only then are the spellings sent; choose the right one. Wrong word or spelling: a reason, try again. The explanation shows before the next sentence. |
+| Phân loại cùng pet (`sorting`) | TNXH / Khoa học | 1–5 | 10 cards of one set | Drag the card onto its group (or tap the group). Wrong: the card returns with the reason. |
+| Lập trình đường đi (`code_path`) | Tin học | 3–12, outside school | 5 levels | Blocks Tiến / Rẽ trái / Rẽ phải (+ *Lặp lại* from Trung cấp, loops not nested), at most `max_blocks`; *Chạy* walks the pet, then the backend checks the program. Unlimited retries, *Dừng*, *Đặt lại*. |
+
+All four: no hearts, no clock (`timed: false`), no *Xem đáp án*; a wrong answer is `retry` with `feedback`, and a right
+answer after a mistake is recorded as `corrected` (never `first_try`), in progress and the review list (*Cần ôn*, *Ôn
+lại*). A whole stage earns the usual stage reward (Lập trình đường đi's 5 levels count as a whole stage).
+
+**Content** (`backend/app/data/curriculum/*.json`, written for Mirabi and reviewed by hand): every question carries
+curriculum, subject, grades, topic, difficulty, answer, explanation and version, and is validated when loaded (an
+invalid file stops the server). A content change publishes a new lesson version; sessions keep their frozen copy.
+Ghép chữ leaves out words whose pieces make another word in another order (cá/ác, tai/tia…); every spelling sentence
+has exactly one wrong syllable and no wrong choice that makes a correct sentence; each level has a solution the tests
+run, and the Trung cấp / Nâng cao levels cannot be solved without a loop within their limit (checked by search).
+
+| Game | Content |
+|---|---|
+| Ghép chữ | 37 words (grade 1), 34 words (grade 2) |
+| Thám tử chính tả | 36 sentences (grades 2–5, a grade gets its own and up to two grades below), 11 spelling rules |
+| Phân loại cùng pet | 5 sets, 69 cards: Động vật / Thực vật (1–2), Trên cạn / Dưới nước (1–3), Các giác quan (1), Thể rắn / lỏng / khí (4–5), Nhóm thức ăn (4–5) |
+| Lập trình đường đi | 19 levels: Cơ bản 7 (grades 3–5), Trung cấp 6 (6–9), Nâng cao 6 (10–12) |
+
+Not built yet (not shown in the app): Đọc hiểu cùng pet, Đếm cùng pet, Đường đua phép tính, Giải bài từng bước,
+Vòng đời kỳ diệu, Dòng thời gian, Khám phá bản đồ, Lắp mạch điện, Cân bằng phản ứng; conditions and functions in
+Lập trình đường đi.
 
 ## Học tập only (Thử thách merged)
 

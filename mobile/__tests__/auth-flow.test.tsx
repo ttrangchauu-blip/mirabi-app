@@ -25,6 +25,12 @@ async function renderSignedOut() {
   await screen.findByText('Chào mừng bạn trở lại!', {}, { timeout: 5000 });
 }
 
+/** "Độ tuổi" is a number picker: open it and tap an age. */
+function chooseAge(age: number) {
+  fireEvent.press(screen.getByRole('button', { name: 'Độ tuổi' }));
+  fireEvent.press(screen.getByRole('radio', { name: `${age} tuổi` }));
+}
+
 function fillLogin(email: string, password: string) {
   fireEvent.changeText(screen.getByLabelText('Email'), email);
   fireEvent.changeText(screen.getByLabelText('Mật khẩu'), password);
@@ -162,13 +168,28 @@ describe('registration', () => {
     fireEvent.press(screen.getByRole('button', { name: 'Tạo tài khoản ✨' }));
     expect(await screen.findByText('Mật khẩu cần có cả chữ cái và chữ số.')).toBeTruthy();
     expect(screen.getByText('Mật khẩu nhập lại không khớp.')).toBeTruthy();
+    // Age is required and nothing is chosen in advance; the suggested grade only appears once an age is picked.
+    expect(screen.getByText('Vui lòng chọn độ tuổi.')).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Độ tuổi' }).props.accessibilityValue).toEqual({ text: 'Chưa chọn' });
+    expect(screen.queryByText('Lớp học gợi ý')).toBeNull();
     expect(server.callsTo('POST /api/auth/register')).toHaveLength(0);
+
+    chooseAge(11);
+    expect(screen.queryByText('Vui lòng chọn độ tuổi.')).toBeNull();
+    expect(screen.getByText('Lớp học gợi ý')).toBeTruthy();
+    expect(screen.getByRole('radio', { name: 'Lớp 6, gợi ý theo tuổi' }).props.accessibilityState.checked).toBe(true);
+    // Only grades plausible at 11 are offered, never grade 12 or "Sinh viên".
+    expect(screen.queryByRole('radio', { name: 'Lớp 12' })).toBeNull();
+    expect(screen.queryByRole('radio', { name: 'Sinh viên' })).toBeNull();
+    fireEvent.press(screen.getByRole('radio', { name: 'Lớp 5' })); // the user is actually in grade 5
+    expect(screen.getByRole('radio', { name: 'Lớp 5' }).props.accessibilityState.checked).toBe(true);
 
     fireEvent.changeText(screen.getByLabelText('Tên của bạn (không bắt buộc)'), 'Aqua');
     fireEvent.changeText(screen.getByLabelText('Mật khẩu'), 'Sparkle123');
     fireEvent.changeText(screen.getByLabelText('Nhập lại mật khẩu'), 'Sparkle123');
     fireEvent.press(screen.getByRole('button', { name: 'Tạo tài khoản ✨' }));
-    expect(server.callsTo('POST /api/auth/register')[0].body).toEqual({ email: 'aqua@example.com', password: 'Sparkle123', display_name: 'Aqua' });
+    expect(server.callsTo('POST /api/auth/register')[0].body).toEqual({ email: 'aqua@example.com', password: 'Sparkle123', display_name: 'Aqua',
+      age: 11, school_grade: 'grade5' });
 
     // Registration doesn't sign in: back to login with everything filled in.
     expect(await screen.findByRole('alert', { name: REGISTERED_MESSAGE })).toBeTruthy();
@@ -190,6 +211,8 @@ describe('registration', () => {
     fireEvent.changeText(screen.getByLabelText('Email'), 'aqua@example.com');
     fireEvent.changeText(screen.getByLabelText('Mật khẩu'), 'Sparkle123');
     fireEvent.changeText(screen.getByLabelText('Nhập lại mật khẩu'), 'Sparkle123');
+    chooseAge(30);
+    expect(screen.getByRole('radio', { name: 'Người đi làm/Học tự do, gợi ý theo tuổi' }).props.accessibilityState.checked).toBe(true);
     fireEvent.press(screen.getByRole('button', { name: 'Tạo tài khoản ✨' }));
     expect(await screen.findByText(/Email này đã được đăng ký/)).toBeTruthy();
   });

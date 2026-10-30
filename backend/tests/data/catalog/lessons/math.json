@@ -1,0 +1,19 @@
+{"subject": "math", "version": 1, "organization": "topic",
+ "source_note": "Bộ bài mẫu cho kiểm thử: theo chủ đề của CT GDPT 2018, không theo mục lục bộ sách nào.",
+ "chapters": [
+  {"key": "toan2.nhan_chia", "grade": 2, "order": 1, "title": "Phép nhân và phép chia",
+   "lessons": [
+    {"key": "toan2.bang_nhan_2", "order": 1, "title": "Bảng nhân 2", "description": "Thuộc bảng nhân 2.", "status": "ready",
+     "review": {"status": "checked"}, "objectives": ["Thuộc bảng nhân 2"], "summary": ["2 × 3 nghĩa là 2 được lấy 3 lần."],
+     "examples": [{"title": "Đếm thêm 2", "lines": ["2, 4, 6, 8, 10"]}],
+     "games": [{"game": "defense", "title": "Đường đua phép tính", "math": {"topic": "arithmetic", "ops": ["mul"], "table": 2, "add_max": 100}},
+               {"game": "match", "title": "Ghép phép tính với kết quả", "tasks": [
+                 {"key": "m1", "prompt": "Ghép phép nhân với kết quả", "pairs": [["2 × 2", "4"], ["2 × 5", "10"], ["2 × 7", "14"]], "explanation": "Đếm thêm 2."},
+                 {"key": "m2", "prompt": "Ghép phép nhân với kết quả", "pairs": [["2 × 3", "6"], ["2 × 6", "12"], ["2 × 9", "18"]], "explanation": "Đếm thêm 2."},
+                 {"key": "m3", "prompt": "Ghép phép nhân với kết quả", "pairs": [["2 × 4", "8"], ["2 × 8", "16"], ["2 × 10", "20"]], "explanation": "Đếm thêm 2."}]}]},
+    {"key": "toan2.bang_chia_2", "order": 2, "title": "Bảng chia 2", "description": "Chia cho 2 dựa vào bảng nhân 2.", "status": "ready",
+     "requires": ["toan2.bang_nhan_2"], "requires_note": "Bảng chia 2 dựa vào bảng nhân 2: học bảng nhân 2 trước.",
+     "review": {"status": "checked"}, "objectives": ["Thuộc bảng chia 2"], "summary": ["6 : 2 = 3 vì 2 × 3 = 6."],
+     "games": [{"game": "math_bridge", "title": "Tìm số còn thiếu", "math": {"topic": "missing_number", "ops": ["div"], "table": 2, "add_max": 100}}]},
+    {"key": "toan2.bang_nhan_5", "order": 3, "title": "Bảng nhân 5", "description": "Thuộc bảng nhân 5.", "status": "planned"}
+   ]}]}

@@ -1,0 +1,1697 @@
+{
+ "game": "code_path",
+ "version": 1,
+ "tiers": {
+  "basic": "Cơ bản: tiến và rẽ",
+  "intermediate": "Trung cấp: thêm khối Lặp lại",
+  "advanced": "Nâng cao: chương trình ngắn gọn"
+ },
+ "levels": [
+  {
+   "key": "b1",
+   "curriculum": "GDPT2018",
+   "subject": "informatics",
+   "tier": "basic",
+   "topic": "lap_trinh_duong_di",
+   "difficulty": 1,
+   "map": [
+    "....",
+    "....",
+    "....",
+    "S..G"
+   ],
+   "cols": 4,
+   "rows": 4,
+   "start": {
+    "x": 0,
+    "y": 3,
+    "dir": "E"
+   },
+   "goal": {
+    "x": 3,
+    "y": 3
+   },
+   "walls": [],
+   "blocks": [
+    "forward",
+    "left",
+    "right"
+   ],
+   "max_blocks": 5,
+   "solution": [
+    "forward",
+    "forward",
+    "forward"
+   ],
+   "explanation": "Một chương trình đúng: forward forward forward",
+   "version": 1
+  },
+  {
+   "key": "b2",
+   "curriculum": "GDPT2018",
+   "subject": "informatics",
+   "tier": "basic",
+   "topic": "lap_trinh_duong_di",
+   "difficulty": 1,
+   "map": [
+    "G...",
+    "....",
+    "....",
+    "S..."
+   ],
+   "cols": 4,
+   "rows": 4,
+   "start": {
+    "x": 0,
+    "y": 3,
+    "dir": "N"
+   },
+   "goal": {
+    "x": 0,
+    "y": 0
+   },
+   "walls": [],
+   "blocks": [
+    "forward",
+    "left",
+    "right"
+   ],
+   "max_blocks": 5,
+   "solution": [
+    "forward",
+    "forward",
+    "forward"
+   ],
+   "explanation": "Một chương trình đúng: forward forward forward",
+   "version": 1
+  },
+  {
+   "key": "b3",
+   "curriculum": "GDPT2018",
+   "subject": "informatics",
+   "tier": "basic",
+   "topic": "lap_trinh_duong_di",
+   "difficulty": 2,
+   "map": [
+    "..G.",
+    "....",
+    "....",
+    "S..."
+   ],
+   "cols": 4,
+   "rows": 4,
+   "start": {
+    "x": 0,
+    "y": 3,
+    "dir": "N"
+   },
+   "goal": {
+    "x": 2,
+    "y": 0
+   },
+   "walls": [],
+   "blocks": [
+    "forward",
+    "left",
+    "right"
+   ],
+   "max_blocks": 8,
+   "solution": [
+    "forward",
+    "forward",
+    "forward",
+    "right",
+    "forward",
+    "forward"
+   ],
+   "explanation": "Một chương trình đúng: forward forward forward right forward forward",
+   "version": 1
+  },
+  {
+   "key": "b4",
+   "curriculum": "GDPT2018",
+   "subject": "informatics",
+   "tier": "basic",
+   "topic": "lap_trinh_duong_di",
+   "difficulty": 2,
+   "map": [
+    ".....",
+    "..#..",
+    "S.#.G",
+    "....."
+   ],
+   "cols": 5,
+   "rows": 4,
+   "start": {
+    "x": 0,
+    "y": 2,
+    "dir": "E"
+   },
+   "goal": {
+    "x": 4,
+    "y": 2
+   },
+   "walls": [
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "blocks": [
+    "forward",
+    "left",
+    "right"
+   ],
+   "max_blocks": 12,
+   "solution": [
+    "forward",
+    "right",
+    "forward",
+    "left",
+    "forward",
+    "forward",
+    "left",
+    "forward",
+    "right",
+    "forward"
+   ],
+   "explanation": "Một chương trình đúng: forward right forward left forward forward left forward right forward",
+   "version": 1
+  },
+  {
+   "key": "b5",
+   "curriculum": "GDPT2018",
+   "subject": "informatics",
+   "tier": "basic",
+   "topic": "lap_trinh_duong_di",
+   "difficulty": 3,
+   "map": [
+    "S..#.",
+    ".#...",
+    ".#.#.",
+    "...#G"
+   ],
+   "cols": 5,
+   "rows": 4,
+   "start": {
+    "x": 0,
+    "y": 0,
+    "dir": "E"
+   },
+   "goal": {
+    "x": 4,
+    "y": 3
+   },
+   "walls": [
+    [
+     3,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "blocks": [
+    "forward",
+    "left",
+    "right"
+   ],
+   "max_blocks": 12,
+   "solution": [
+    "forward",
+    "forward",
+    "right",
+    "forward",
+    "left",
+    "forward",
+    "forward",
+    "right",
+    "forward",
+    "forward"
+   ],
+   "explanation": "Một chương trình đúng: forward forward right forward left forward forward right forward forward",
+   "version": 1
+  },
+  {
+   "key": "b6",
+   "curriculum": "GDPT2018",
+   "subject": "informatics",
+   "tier": "basic",
+   "topic": "lap_trinh_duong_di",
+   "difficulty": 3,
+   "map": [
+    "G.#..",
+    "..#..",
+    ".....",
+    "#...S"
+   ],
+   "cols": 5,
+   "rows": 4,
+   "start": {
+    "x": 4,
+    "y": 3,
+    "dir": "W"
+   },
+   "goal": {
+    "x": 0,
+    "y": 0
+   },
+   "walls": [
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "blocks": [
+    "forward",
+    "left",
+    "right"
+   ],
+   "max_blocks": 11,
+   "solution": [
+    "forward",
+    "forward",
+    "forward",
+    "right",
+    "forward",
+    "forward",
+    "forward",
+    "left",
+    "forward"
+   ],
+   "explanation": "Một chương trình đúng: forward forward forward right forward forward forward left forward",
+   "version": 1
+  },
+  {
+   "key": "b7",
+   "curriculum": "GDPT2018",
+   "subject": "informatics",
+   "tier": "basic",
+   "topic": "lap_trinh_duong_di",
+   "difficulty": 3,
+   "map": [
+    ".....",
+    ".###.",
+    ".#G..",
+    ".#...",
+    "S...."
+   ],
+   "cols": 5,
+   "rows": 5,
+   "start": {
+    "x": 0,
+    "y": 4,
+    "dir": "E"
+   },
+   "goal": {
+    "x": 2,
+    "y": 2
+   },
+   "walls": [
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ]
+   ],
+   "blocks": [
+    "forward",
+    "left",
+    "right"
+   ],
+   "max_blocks": 10,
+   "solution": [
+    "forward",
+    "forward",
+    "forward",
+    "left",
+    "forward",
+    "forward",
+    "left",
+    "forward"
+   ],
+   "explanation": "Một chương trình đúng: forward forward forward left forward forward left forward",
+   "version": 1
+  },
+  {
+   "key": "i1",
+   "curriculum": "GDPT2018",
+   "subject": "informatics",
+   "tier": "intermediate",
+   "topic": "lap_trinh_duong_di",
+   "difficulty": 1,
+   "map": [
+    ".......",
+    "S.....G",
+    "......."
+   ],
+   "cols": 7,
+   "rows": 3,
+   "start": {
+    "x": 0,
+    "y": 1,
+    "dir": "E"
+   },
+   "goal": {
+    "x": 6,
+    "y": 1
+   },
+   "walls": [],
+   "blocks": [
+    "forward",
+    "left",
+    "right",
+    "repeat"
+   ],
+   "max_blocks": 3,
+   "solution": [
+    "repeat:6",
+    "forward",
+    "end"
+   ],
+   "explanation": "Một chương trình đúng: repeat:6 forward end",
+   "version": 1
+  },
+  {
+   "key": "i2",
+   "curriculum": "GDPT2018",
+   "subject": "informatics",
+   "tier": "intermediate",
+   "topic": "lap_trinh_duong_di",
+   "difficulty": 2,
+   "map": [
+    "####G",
+    "###..",
+    "##..#",
+    "#..##",
+    "S.###"
+   ],
+   "cols": 5,
+   "rows": 5,
+   "start": {
+    "x": 0,
+    "y": 4,
+    "dir": "E"
+   },
+   "goal": {
+    "x": 4,
+    "y": 0
+   },
+   "walls": [
+    [
+     0,
+     0
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     4
+    ]
+   ],
+   "blocks": [
+    "forward",
+    "left",
+    "right",
+    "repeat"
+   ],
+   "max_blocks": 5,
+   "solution": [
+    "repeat:4",
+    "forward",
+    "left",
+    "forward",
+    "right",
+    "end"
+   ],
+   "explanation": "Một chương trình đúng: repeat:4 forward left forward right end",
+   "version": 1
+  },
+  {
+   "key": "i3",
+   "curriculum": "GDPT2018",
+   "subject": "informatics",
+   "tier": "intermediate",
+   "topic": "lap_trinh_duong_di",
+   "difficulty": 2,
+   "map": [
+    "S.....",
+    "#####.",
+    "G....."
+   ],
+   "cols": 6,
+   "rows": 3,
+   "start": {
+    "x": 0,
+    "y": 0,
+    "dir": "E"
+   },
+   "goal": {
+    "x": 0,
+    "y": 2
+   },
+   "walls": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     4,
+     1
+    ]
+   ],
+   "blocks": [
+    "forward",
+    "left",
+    "right",
+    "repeat"
+   ],
+   "max_blocks": 8,
+   "solution": [
+    "repeat:5",
+    "forward",
+    "end",
+    "right",
+    "forward",
+    "forward",
+    "right",
+    "repeat:5",
+    "forward",
+    "end"
+   ],
+   "explanation": "Một chương trình đúng: repeat:5 forward end right forward forward right repeat:5 forward end",
+   "version": 1
+  },
+  {
+   "key": "i4",
+   "curriculum": "GDPT2018",
+   "subject": "informatics",
+   "tier": "intermediate",
+   "topic": "lap_trinh_duong_di",
+   "difficulty": 2,
+   "map": [
+    "S..",
+    "##.",
+    "G.."
+   ],
+   "cols": 3,
+   "rows": 3,
+   "start": {
+    "x": 0,
+    "y": 0,
+    "dir": "E"
+   },
+   "goal": {
+    "x": 0,
+    "y": 2
+   },
+   "walls": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   "blocks": [
+    "forward",
+    "left",
+    "right",
+    "repeat"
+   ],
+   "max_blocks": 4,
+   "solution": [
+    "repeat:3",
+    "forward",
+    "forward",
+    "right",
+    "end"
+   ],
+   "explanation": "Một chương trình đúng: repeat:3 forward forward right end",
+   "version": 1
+  },
+  {
+   "key": "i5",
+   "curriculum": "GDPT2018",
+   "subject": "informatics",
+   "tier": "intermediate",
+   "topic": "lap_trinh_duong_di",
+   "difficulty": 3,
+   "map": [
+    "######G",
+    "######.",
+    "####...",
+    "####.##",
+    "##...##",
+    "##.####",
+    "S..####"
+   ],
+   "cols": 7,
+   "rows": 7,
+   "start": {
+    "x": 0,
+    "y": 6,
+    "dir": "E"
+   },
+   "goal": {
+    "x": 6,
+    "y": 0
+   },
+   "walls": [
+    [
+     0,
+     0
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     6
+    ]
+   ],
+   "blocks": [
+    "forward",
+    "left",
+    "right",
+    "repeat"
+   ],
+   "max_blocks": 7,
+   "solution": [
+    "repeat:3",
+    "forward",
+    "forward",
+    "left",
+    "forward",
+    "forward",
+    "right",
+    "end"
+   ],
+   "explanation": "Một chương trình đúng: repeat:3 forward forward left forward forward right end",
+   "version": 1
+  },
+  {
+   "key": "i6",
+   "curriculum": "GDPT2018",
+   "subject": "informatics",
+   "tier": "intermediate",
+   "topic": "lap_trinh_duong_di",
+   "difficulty": 3,
+   "map": [
+    "S#####",
+    ".#####",
+    ".#####",
+    ".#####",
+    ".#####",
+    ".....G"
+   ],
+   "cols": 6,
+   "rows": 6,
+   "start": {
+    "x": 0,
+    "y": 0,
+    "dir": "S"
+   },
+   "goal": {
+    "x": 5,
+    "y": 5
+   },
+   "walls": [
+    [
+     1,
+     0
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     5,
+     4
+    ]
+   ],
+   "blocks": [
+    "forward",
+    "left",
+    "right",
+    "repeat"
+   ],
+   "max_blocks": 5,
+   "solution": [
+    "repeat:5",
+    "forward",
+    "end",
+    "left",
+    "repeat:5",
+    "forward",
+    "end"
+   ],
+   "explanation": "Một chương trình đúng: repeat:5 forward end left repeat:5 forward end",
+   "version": 1
+  },
+  {
+   "key": "a1",
+   "curriculum": "GDPT2018",
+   "subject": "informatics",
+   "tier": "advanced",
+   "topic": "lap_trinh_duong_di",
+   "difficulty": 1,
+   "map": [
+    "S.......",
+    "#######.",
+    "G......."
+   ],
+   "cols": 8,
+   "rows": 3,
+   "start": {
+    "x": 0,
+    "y": 0,
+    "dir": "E"
+   },
+   "goal": {
+    "x": 0,
+    "y": 2
+   },
+   "walls": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     6,
+     1
+    ]
+   ],
+   "blocks": [
+    "forward",
+    "left",
+    "right",
+    "repeat"
+   ],
+   "max_blocks": 8,
+   "solution": [
+    "repeat:7",
+    "forward",
+    "end",
+    "right",
+    "forward",
+    "forward",
+    "right",
+    "repeat:7",
+    "forward",
+    "end"
+   ],
+   "explanation": "Một chương trình đúng: repeat:7 forward end right forward forward right repeat:7 forward end",
+   "version": 1
+  },
+  {
+   "key": "a2",
+   "curriculum": "GDPT2018",
+   "subject": "informatics",
+   "tier": "advanced",
+   "topic": "lap_trinh_duong_di",
+   "difficulty": 2,
+   "map": [
+    "S...",
+    "###.",
+    "G##.",
+    "...."
+   ],
+   "cols": 4,
+   "rows": 4,
+   "start": {
+    "x": 0,
+    "y": 0,
+    "dir": "E"
+   },
+   "goal": {
+    "x": 0,
+    "y": 2
+   },
+   "walls": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "blocks": [
+    "forward",
+    "left",
+    "right",
+    "repeat"
+   ],
+   "max_blocks": 6,
+   "solution": [
+    "repeat:3",
+    "forward",
+    "forward",
+    "forward",
+    "right",
+    "end",
+    "forward"
+   ],
+   "explanation": "Một chương trình đúng: repeat:3 forward forward forward right end forward",
+   "version": 1
+  },
+  {
+   "key": "a3",
+   "curriculum": "GDPT2018",
+   "subject": "informatics",
+   "tier": "advanced",
+   "topic": "lap_trinh_duong_di",
+   "difficulty": 2,
+   "map": [
+    "######G",
+    "######.",
+    "######.",
+    "###....",
+    "###.###",
+    "###.###",
+    "S...###"
+   ],
+   "cols": 7,
+   "rows": 7,
+   "start": {
+    "x": 0,
+    "y": 6,
+    "dir": "E"
+   },
+   "goal": {
+    "x": 6,
+    "y": 0
+   },
+   "walls": [
+    [
+     0,
+     0
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     6
+    ]
+   ],
+   "blocks": [
+    "forward",
+    "left",
+    "right",
+    "repeat"
+   ],
+   "max_blocks": 9,
+   "solution": [
+    "repeat:2",
+    "forward",
+    "forward",
+    "forward",
+    "left",
+    "forward",
+    "forward",
+    "forward",
+    "right",
+    "end"
+   ],
+   "explanation": "Một chương trình đúng: repeat:2 forward forward forward left forward forward forward right end",
+   "version": 1
+  },
+  {
+   "key": "a4",
+   "curriculum": "GDPT2018",
+   "subject": "informatics",
+   "tier": "advanced",
+   "topic": "lap_trinh_duong_di",
+   "difficulty": 3,
+   "map": [
+    "S.#####",
+    "#..####",
+    "##..###",
+    "###...G"
+   ],
+   "cols": 7,
+   "rows": 4,
+   "start": {
+    "x": 0,
+    "y": 0,
+    "dir": "E"
+   },
+   "goal": {
+    "x": 6,
+    "y": 3
+   },
+   "walls": [
+    [
+     2,
+     0
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     3
+    ]
+   ],
+   "blocks": [
+    "forward",
+    "left",
+    "right",
+    "repeat"
+   ],
+   "max_blocks": 7,
+   "solution": [
+    "repeat:3",
+    "forward",
+    "right",
+    "forward",
+    "left",
+    "end",
+    "repeat:3",
+    "forward",
+    "end"
+   ],
+   "explanation": "Một chương trình đúng: repeat:3 forward right forward left end repeat:3 forward end",
+   "version": 1
+  },
+  {
+   "key": "a5",
+   "curriculum": "GDPT2018",
+   "subject": "informatics",
+   "tier": "advanced",
+   "topic": "lap_trinh_duong_di",
+   "difficulty": 3,
+   "map": [
+    "S#G",
+    ".#.",
+    ".#.",
+    ".#.",
+    ".#.",
+    "..."
+   ],
+   "cols": 3,
+   "rows": 6,
+   "start": {
+    "x": 0,
+    "y": 0,
+    "dir": "S"
+   },
+   "goal": {
+    "x": 2,
+    "y": 0
+   },
+   "walls": [
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     4
+    ]
+   ],
+   "blocks": [
+    "forward",
+    "left",
+    "right",
+    "repeat"
+   ],
+   "max_blocks": 8,
+   "solution": [
+    "repeat:5",
+    "forward",
+    "end",
+    "left",
+    "forward",
+    "forward",
+    "left",
+    "repeat:5",
+    "forward",
+    "end"
+   ],
+   "explanation": "Một chương trình đúng: repeat:5 forward end left forward forward left repeat:5 forward end",
+   "version": 1
+  },
+  {
+   "key": "a6",
+   "curriculum": "GDPT2018",
+   "subject": "informatics",
+   "tier": "advanced",
+   "topic": "lap_trinh_duong_di",
+   "difficulty": 3,
+   "map": [
+    "######G",
+    "#####..",
+    "####..#",
+    "###..##",
+    "##..###",
+    "#..####",
+    "S.#####"
+   ],
+   "cols": 7,
+   "rows": 7,
+   "start": {
+    "x": 0,
+    "y": 6,
+    "dir": "E"
+   },
+   "goal": {
+    "x": 6,
+    "y": 0
+   },
+   "walls": [
+    [
+     0,
+     0
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     6
+    ]
+   ],
+   "blocks": [
+    "forward",
+    "left",
+    "right",
+    "repeat"
+   ],
+   "max_blocks": 5,
+   "solution": [
+    "repeat:6",
+    "forward",
+    "left",
+    "forward",
+    "right",
+    "end"
+   ],
+   "explanation": "Một chương trình đúng: repeat:6 forward left forward right end",
+   "version": 1
+  }
+ ]
+}

@@ -6,14 +6,18 @@ import { errorMessage } from '../auth/messages';
 import { validateDisplayName, validateEmail, validateNewPassword, validatePasswordConfirmation } from '../auth/validation';
 import { AuthLayout } from '../components/AuthLayout';
 import { AuthTextField, FormBanner, GradientButton, TextLink } from '../components/AuthForm';
+import { StudyProfileFields } from '../components/StudyProfileFields';
+import { validateAge, validateGrade, type GradeId } from '../studyProfile';
 import { authTheme } from '../theme';
 
 type Props = { email: string; onEmailChange: (email: string) => void; onLogin: () => void; onRegistered: (email: string, password: string) => void };
-type Errors = { displayName?: string; email?: string; password?: string; confirm?: string };
+type Errors = { displayName?: string; age?: string; grade?: string; email?: string; password?: string; confirm?: string };
 
 export function RegisterScreen({ email, onEmailChange, onLogin, onRegistered }: Props) {
   const { register } = useAuth();
   const [displayName, setDisplayName] = useState('');
+  const [age, setAge] = useState<number | null>(null); // never chosen in advance
+  const [grade, setGrade] = useState<GradeId | null>(null);
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
   const [errors, setErrors] = useState<Errors>({});
@@ -28,19 +32,25 @@ export function RegisterScreen({ email, onEmailChange, onLogin, onRegistered }: 
     if (inFlight.current) return;
     const next: Errors = {
       displayName: validateDisplayName(displayName),
+      age: validateAge(age),
+      grade: validateGrade(age, grade),
       email: validateEmail(email),
       password: validateNewPassword(password),
       confirm: validatePasswordConfirmation(password, confirm),
     };
     setErrors(next);
     const firstInvalid = (Object.keys(next) as (keyof Errors)[]).find((k) => next[k]);
-    if (firstInvalid) { refs[firstInvalid].current?.focus(); return; }
+    if (firstInvalid) {
+      // Age and grade are pickers, not text fields: their message shows under them, right below the name.
+      if (firstInvalid === 'age' || firstInvalid === 'grade') Keyboard.dismiss(); else refs[firstInvalid].current?.focus();
+      return;
+    }
     inFlight.current = true;
     setSubmitting(true);
     setApiError(null);
     Keyboard.dismiss();
     try {
-      await register({ email, password, displayName });
+      await register({ email, password, displayName, age: age!, schoolGrade: grade! });
       onRegistered(email, password);
     } catch (e) {
       setApiError(errorMessage(e));
@@ -67,6 +77,8 @@ export function RegisterScreen({ email, onEmailChange, onLogin, onRegistered }: 
         onChangeText={(v) => { setDisplayName(v); clearError('displayName'); }} error={errors.displayName} maxLength={80}
         autoComplete="nickname" textContentType="nickname" returnKeyType="next" submitBehavior="submit"
         onSubmitEditing={() => refs.email.current?.focus()} editable={!locked} testID="register-name" />
+      <StudyProfileFields age={age} grade={grade} disabled={locked} errors={{ age: errors.age, grade: errors.grade }}
+        onChange={(a, g) => { setAge(a); setGrade(g); if (errors.age || errors.grade) setErrors((x) => ({ ...x, age: undefined, grade: undefined })); }} />
       <AuthTextField ref={refs.email} label="Email" icon="mail-outline" placeholder="ban@example.com" value={email}
         onChangeText={(v) => { onEmailChange(v); clearError('email'); }} error={errors.email}
         keyboardType="email-address" autoCapitalize="none" autoCorrect={false} autoComplete="email" textContentType="username"

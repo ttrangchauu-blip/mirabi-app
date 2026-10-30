@@ -1,6 +1,6 @@
 key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic	source	status
 hello	hello	interjection	1	communication	xin chào		Hello, my name is Nam.	Xin chào, mình tên là Nam.	hi	/həˈləʊ/	mirabi-original	active
-thank_you	thank you	phrase	1	communication	cảm ơn		Thank you for the gift.	Cảm ơn bạn vì món quà.	thanks	/ˈθæŋk juː/	mirabi-original	active
+thank_you	thank you	phrase	1	communication	cảm ơn	lời cảm ơn khi được ai đó giúp đỡ hoặc tặng quà	Thank you for the gift.	Cảm ơn bạn vì món quà.	thanks	/ˈθæŋk juː/	mirabi-original	active
 goodbye	goodbye	interjection	1	communication	tạm biệt		Goodbye, see you tomorrow.	Tạm biệt, mai gặp lại nhé.	bye	/ˌɡʊdˈbaɪ/	mirabi-original	active
 sorry	sorry	adjective	1	communication	xin lỗi	khi mình làm sai	Sorry, I'm late.	Xin lỗi, tôi đến muộn.		/ˈsɒri/	mirabi-original	active
 please	please	adverb	1	communication	làm ơn, vui lòng		Please sit down.	Mời bạn ngồi.		/pliːz/	mirabi-original	active

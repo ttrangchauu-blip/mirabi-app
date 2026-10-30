@@ -1,8 +1,9 @@
 /**
  * Keeps the falling words (and words held for a shot) from overlapping. Each target has a natural spot (its lane, and
  * the height its fall has reached); when it would cover another one it moves aside: first sideways to a free spot
- * (another lane or an edge), and only when the field is too narrow for that it waits just above the word below it.
- * A falling word is never pushed down ahead of its fall nor jumps back up: it only ever waits, then falls on.
+ * (another lane or an edge), and only when the field is too narrow for that it waits just above the word below it,
+ * above the top of the field if need be (out of sight until there is room). A falling word is never pushed down ahead
+ * of its fall nor jumps back up: it only ever waits, then falls on. So a new word always comes in from the top.
  * Plain functions: the play field eases the displayed offsets, so a target slides aside instead of jumping.
  */
 
@@ -37,7 +38,8 @@ export function resolveOverlaps(fixed: Box[], items: Box[], laneCentres: number[
   for (const item of items) {
     const maxLeft = Math.max(MARGIN, field.width - item.width - MARGIN);
     const maxTop = Math.max(0, field.height - item.height);
-    const at = (left: number, top: number): Box => ({ ...item, left: clamp(left, MARGIN, maxLeft), top: clamp(top, 0, maxTop) });
+    const at = (left: number, top: number, minTop = 0): Box => ({ ...item, left: clamp(left, MARGIN, maxLeft), top: clamp(top, minTop, maxTop) });
+    const hidden = -item.height - GAP; // just above the field, out of sight
     let box = at(item.left, item.top);
     if (placed.some((p) => hits(box, p))) {
       // Sideways first: every lane, both edges and right beside each blocking box, the nearest free one.
@@ -47,18 +49,12 @@ export function resolveOverlaps(fixed: Box[], items: Box[], laneCentres: number[
         .sort((a, b) => Math.abs(a.left - item.left) - Math.abs(b.left - item.left))[0];
       if (free) box = free;
       else {
-        // No room beside: it waits just above whatever it would cover. Only when there is no room above (it is at the
-        // top already) does it go just below instead: ahead of its fall, never back up.
-        let wait = box;
-        for (let i = 0; i <= placed.length && placed.some((p) => hits(wait, p)); i++) {
-          const blocking = placed.filter((p) => hits(wait, p));
-          wait = at(wait.left, Math.min(wait.top, Math.min(...blocking.map((p) => p.top)) - item.height - GAP));
-          if (wait.top <= 0) break; // at the very top: nowhere higher to wait
-        }
-        box = wait;
+        // No room beside: it waits just above whatever it would cover, above the field's top if need be. Never below:
+        // a word is not pushed ahead of its fall.
         for (let i = 0; i <= placed.length && placed.some((p) => hits(box, p)); i++) {
           const blocking = placed.filter((p) => hits(box, p));
-          box = at(box.left, Math.max(box.top, Math.max(...blocking.map((p) => p.top + p.height)) + GAP));
+          box = at(box.left, Math.min(box.top, Math.min(...blocking.map((p) => p.top)) - item.height - GAP), hidden);
+          if (box.top <= hidden) break; // out of sight: it comes in once there is room
         }
       }
     }

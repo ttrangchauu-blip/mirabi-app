@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { AccessibilityInfo } from 'react-native';
 
-/** True until the OS confirms motion is allowed, and whenever the "reduce motion" setting is on. */
+/** True whenever the "reduce motion" setting is on. False until the OS answers, so an entrance that starts on mount
+ * still plays once for someone with the setting on (it runs to its end; nothing is left hidden). */
 export function useReduceMotion() {
   // Keep animations available while the platform preference is being queried. If the
   // native accessibility API is unavailable, don't leave the whole app frozen.

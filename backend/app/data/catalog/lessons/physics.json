@@ -1,0 +1,826 @@
+{
+  "subject": "physics",
+  "version": 1,
+  "organization": "topic",
+  "source_note": "Theo yêu cầu cần đạt môn Vật lí lớp 10–12 (CT GDPT 2018); tổ chức theo chủ đề, không theo mục lục bộ sách nào. Câu hỏi, số liệu và lời giải do Mirabi biên soạn và tự tính lại.",
+  "chapters": [
+    {"key": "vl10.mo_dau", "grade": 10, "order": 1, "title": "Mở đầu",
+     "lessons": [
+       {"key": "vl10.lam_quen_vat_li", "order": 1, "title": "Đối tượng và phương pháp nghiên cứu của vật lí",
+        "description": "Vật lí nghiên cứu gì, nghiên cứu bằng cách nào và ảnh hưởng của vật lí tới đời sống, kĩ thuật.", "status": "planned"},
+       {"key": "vl10.an_toan_thi_nghiem", "order": 2, "title": "An toàn khi làm thí nghiệm vật lí",
+        "description": "Nhận biết biển báo, quy tắc an toàn với điện, nhiệt, ánh sáng mạnh trong phòng thí nghiệm.", "status": "planned"},
+       {"key": "vl10.don_vi_sai_so", "order": 3, "title": "Đơn vị đo và sai số của phép đo",
+        "description": "Hệ đơn vị SI, sai số hệ thống, sai số ngẫu nhiên và cách ghi kết quả đo.", "status": "planned"}
+     ]},
+    {"key": "vl10.dong_hoc", "grade": 10, "order": 2, "title": "Động học",
+     "lessons": [
+       {"key": "vl10.do_dich_chuyen", "order": 1, "title": "Độ dịch chuyển và quãng đường đi được",
+        "description": "Phân biệt độ dịch chuyển (có hướng) với quãng đường đi được.", "status": "planned"},
+       {"key": "vl10.toc_do_van_toc", "order": 2, "title": "Tốc độ và vận tốc",
+        "description": "Tốc độ trung bình, vận tốc trung bình, vận tốc tức thời và tổng hợp vận tốc.", "status": "planned"},
+       {"key": "vl10.do_thi_dich_chuyen", "order": 3, "title": "Đồ thị độ dịch chuyển – thời gian",
+        "description": "Đọc đồ thị độ dịch chuyển – thời gian để mô tả chuyển động và tính vận tốc.", "status": "planned"},
+       {"key": "vl10.cd_bien_doi_deu", "order": 4, "title": "Chuyển động thẳng biến đổi đều",
+        "description": "Gia tốc, các công thức của chuyển động thẳng biến đổi đều và cách giải bài toán.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Vật lí 10; mọi đáp số đã được tính lại."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Hiểu gia tốc là độ biến thiên vận tốc trong một đơn vị thời gian",
+          "Dùng đúng các công thức v = v₀ + at, d = v₀t + ½at² và v² − v₀² = 2ad",
+          "Chọn chiều dương và xét dấu của vận tốc, gia tốc khi giải bài toán"
+        ],
+        "summary": [
+          "Gia tốc a = Δv/Δt, đơn vị m/s². Chuyển động thẳng biến đổi đều có a không đổi.",
+          "Vận tốc: v = v₀ + at. Độ dịch chuyển: d = v₀t + ½at². Hệ thức độc lập thời gian: v² − v₀² = 2ad.",
+          "Nhanh dần đều khi a cùng dấu với v; chậm dần đều khi a ngược dấu với v.",
+          "Trên đồ thị vận tốc – thời gian, diện tích giữa đồ thị và trục thời gian bằng độ dịch chuyển."
+        ],
+        "examples": [
+          {"title": "Xe hãm phanh", "lines": [
+            "Ô tô đang chạy 20 m/s thì hãm phanh, dừng sau 4 s. Chọn chiều dương là chiều chuyển động.",
+            "a = (0 − 20) / 4 = −5 m/s² (a âm: chậm dần đều).",
+            "Quãng đường hãm: d = 20 · 4 + ½ · (−5) · 4² = 80 − 40 = 40 m."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "choice", "style": "quiz", "title": "Tính nhanh, tính đúng",
+           "tasks": [
+             {"key": "v_sau_5s", "question": "Một xe bắt đầu chuyển động từ trạng thái nghỉ, nhanh dần đều với gia tốc 2 m/s². Vận tốc của xe sau 5 s là bao nhiêu?",
+              "options": [
+                {"text": "10 m/s", "ok": true, "why": "v = v₀ + at = 0 + 2 · 5 = 10 m/s."},
+                {"text": "2,5 m/s", "ok": false, "why": "Đây là 5 : 2. Vận tốc tăng thêm a mỗi giây nên phải nhân a với t."},
+                {"text": "25 m/s", "ok": false, "why": "25 là độ dịch chuyển (tính bằng mét) trong 5 s, không phải vận tốc."},
+                {"text": "7 m/s", "ok": false, "why": "Cộng 2 + 5 không có ý nghĩa vật lí: gia tốc và thời gian phải nhân với nhau."}
+              ],
+              "explanation": "Xe xuất phát từ nghỉ nên v₀ = 0; mỗi giây vận tốc tăng 2 m/s, sau 5 s là 10 m/s."},
+             {"key": "d_5s_dau", "question": "Một xe bắt đầu chuyển động từ trạng thái nghỉ, nhanh dần đều với gia tốc 2 m/s². Trong 5 s đầu, xe đi được quãng đường bao nhiêu?",
+              "options": [
+                {"text": "25 m", "ok": true, "why": "d = ½at² = ½ · 2 · 5² = 25 m."},
+                {"text": "50 m", "ok": false, "why": "Quên hệ số ½: at² = 50 m là gấp đôi quãng đường thật."},
+                {"text": "10 m", "ok": false, "why": "10 là vận tốc (m/s) sau 5 s, không phải quãng đường."},
+                {"text": "12,5 m", "ok": false, "why": "Đã chia đôi thêm một lần (25 : 2). Với a = 2 m/s² thì ½a = 1, nên d = 1 · 5² = 25 m."}
+              ],
+              "explanation": "Với v₀ = 0, d = ½at². Thời gian xuất hiện ở bậc hai nên quãng đường tăng rất nhanh theo thời gian."},
+             {"key": "a_ham_phanh", "question": "Ô tô đang chạy với vận tốc 20 m/s thì hãm phanh, chuyển động chậm dần đều và dừng lại sau 4 s. Chọn chiều dương là chiều chuyển động. Gia tốc của ô tô là bao nhiêu?",
+              "options": [
+                {"text": "−5 m/s²", "ok": true, "why": "a = (v − v₀)/t = (0 − 20)/4 = −5 m/s². Dấu âm cho biết a ngược chiều chuyển động."},
+                {"text": "5 m/s²", "ok": false, "why": "Độ lớn đúng nhưng sai dấu: xe chậm dần nên a ngược dấu với v (v dương)."},
+                {"text": "−80 m/s²", "ok": false, "why": "Lấy Δv nhân với t là sai; gia tốc là Δv chia cho Δt."},
+                {"text": "−0,2 m/s²", "ok": false, "why": "Đây là t : Δv (4 : 20) với dấu âm; phải lấy Δv chia cho t."}
+              ],
+              "explanation": "Gia tốc a = Δv/Δt. Khi đã chọn chiều dương là chiều chuyển động, xe chậm dần thì a mang dấu âm."},
+             {"key": "d_dung_lai", "question": "Ô tô đang chạy 15 m/s thì hãm phanh với gia tốc −3 m/s² (chiều dương là chiều chuyển động). Quãng đường từ lúc hãm phanh đến khi dừng hẳn là bao nhiêu?",
+              "options": [
+                {"text": "37,5 m", "ok": true, "why": "0² − 15² = 2 · (−3) · d nên d = 225 : 6 = 37,5 m."},
+                {"text": "75 m", "ok": false, "why": "Quên hệ số 2 trong v² − v₀² = 2ad: 225 : 3 = 75 m là gấp đôi kết quả."},
+                {"text": "5 m", "ok": false, "why": "5 là thời gian hãm (15 : 3 = 5 s), không phải quãng đường."},
+                {"text": "45 m", "ok": false, "why": "Đây là 15 · 3: không có công thức nào nhân v₀ với a để ra quãng đường."}
+              ],
+              "explanation": "Khi không biết thời gian, dùng hệ thức v² − v₀² = 2ad với v = 0 lúc dừng."},
+             {"key": "a_tang_toc", "question": "Một vật đang chuyển động thẳng với vận tốc 4 m/s thì tăng tốc đều, sau 4 s đạt 12 m/s. Gia tốc của vật là bao nhiêu?",
+              "options": [
+                {"text": "2 m/s²", "ok": true, "why": "a = (12 − 4) : 4 = 2 m/s²."},
+                {"text": "3 m/s²", "ok": false, "why": "Đây là 12 : 4: bỏ quên vận tốc ban đầu. Gia tốc tính theo độ biến thiên vận tốc Δv = 8 m/s."},
+                {"text": "4 m/s²", "ok": false, "why": "Đây là (12 + 4) : 4: độ biến thiên vận tốc là hiệu, không phải tổng."},
+                {"text": "8 m/s²", "ok": false, "why": "8 m/s là Δv; còn phải chia cho thời gian 4 s."}
+              ],
+              "explanation": "Gia tốc là độ biến thiên vận tốc trong một đơn vị thời gian: a = (v − v₀)/Δt."},
+             {"key": "v_sau_100m", "question": "Đoàn tàu rời ga từ trạng thái nghỉ, nhanh dần đều với gia tốc 0,5 m/s². Khi đi được 100 m, vận tốc của tàu là bao nhiêu?",
+              "options": [
+                {"text": "10 m/s", "ok": true, "why": "v² = 2ad = 2 · 0,5 · 100 = 100, nên v = 10 m/s."},
+                {"text": "100 m/s", "ok": false, "why": "100 là v² (m²/s²); còn phải lấy căn bậc hai."},
+                {"text": "50 m/s", "ok": false, "why": "Đây là a · d = 50: thiếu hệ số 2 và chưa lấy căn bậc hai."},
+                {"text": "√50 m/s", "ok": false, "why": "Thiếu hệ số 2: v² = 2ad = 100 chứ không phải 50."}
+              ],
+              "explanation": "Biết a và d mà không biết t: dùng v² − v₀² = 2ad rồi lấy căn bậc hai."},
+             {"key": "dien_tich_vt", "question": "Đồ thị vận tốc – thời gian của một vật là đoạn thẳng đi từ 0 m/s lúc t = 0 đến 6 m/s lúc t = 3 s. Độ dịch chuyển của vật trong 3 s đó là bao nhiêu?",
+              "options": [
+                {"text": "9 m", "ok": true, "why": "Diện tích tam giác dưới đồ thị: ½ · 3 · 6 = 9 m."},
+                {"text": "18 m", "ok": false, "why": "3 · 6 là diện tích hình chữ nhật; vùng dưới đồ thị là tam giác nên phải nhân ½."},
+                {"text": "2 m", "ok": false, "why": "6 : 3 = 2 là gia tốc (m/s²), không phải độ dịch chuyển."},
+                {"text": "6 m", "ok": false, "why": "6 là vận tốc cuối (m/s), không phải độ dịch chuyển."}
+              ],
+              "explanation": "Diện tích giới hạn bởi đồ thị v – t và trục thời gian bằng độ dịch chuyển. Cùng kết quả: d = ½at² với a = 2 m/s²."}
+           ]},
+          {"game": "order", "title": "Sắp xếp theo số liệu",
+           "tasks": [
+             {"key": "buoc_giai", "prompt": "Sắp xếp các bước giải một bài toán chuyển động thẳng biến đổi đều.",
+              "items": [
+                "Chọn chiều dương và gốc thời gian",
+                "Ghi các đại lượng đã biết kèm dấu theo chiều dương đã chọn",
+                "Chọn công thức chứa đại lượng cần tìm và các đại lượng đã biết",
+                "Thay số và tính kết quả",
+                "Kiểm tra dấu, đơn vị và ý nghĩa của kết quả"
+              ],
+              "explanation": "Dấu của v₀, v, a phụ thuộc chiều dương, nên phải chọn chiều dương trước khi ghi số liệu; chỉ khi có số liệu mới chọn được công thức, rồi mới thay số và kiểm tra.",
+              "first_label": "Làm trước", "last_label": "Làm sau cùng"},
+             {"key": "gia_toc_tang", "prompt": "Sắp xếp các xe theo gia tốc từ nhỏ đến lớn (các xe đều tăng tốc đều).",
+              "items": [
+                "Xe C: từ 5 m/s lên 8 m/s trong 3 s",
+                "Xe A: từ 0 lên 10 m/s trong 5 s",
+                "Xe D: từ 10 m/s lên 25 m/s trong 5 s",
+                "Xe B: từ 0 lên 12 m/s trong 3 s"
+              ],
+              "explanation": "a = Δv/Δt: xe C 3 : 3 = 1 m/s²; xe A 10 : 5 = 2 m/s²; xe D 15 : 5 = 3 m/s²; xe B 12 : 3 = 4 m/s².",
+              "first_label": "Nhỏ nhất", "last_label": "Lớn nhất"},
+             {"key": "quang_duong_ham", "prompt": "Sắp xếp các xe theo quãng đường hãm phanh đến khi dừng, từ ngắn đến dài (độ lớn gia tốc hãm cho trong ngoặc).",
+              "items": [
+                "Xe P: 10 m/s (5 m/s²)",
+                "Xe S: 6 m/s (1 m/s²)",
+                "Xe R: 20 m/s (8 m/s²)",
+                "Xe Q: 12 m/s (2 m/s²)"
+              ],
+              "explanation": "d = v₀² : (2|a|): xe P 100 : 10 = 10 m; xe S 36 : 2 = 18 m; xe R 400 : 16 = 25 m; xe Q 144 : 4 = 36 m. Xe nhanh nhất chưa chắc hãm xa nhất.",
+              "first_label": "Ngắn nhất", "last_label": "Dài nhất"},
+             {"key": "thoi_gian_dat", "prompt": "Các xe xuất phát từ trạng thái nghỉ, nhanh dần đều. Sắp xếp theo thời gian đạt vận tốc cho trước, từ ngắn đến dài.",
+              "items": [
+                "Đạt 12 m/s với a = 4 m/s²",
+                "Đạt 20 m/s với a = 5 m/s²",
+                "Đạt 15 m/s với a = 3 m/s²",
+                "Đạt 30 m/s với a = 5 m/s²"
+              ],
+              "explanation": "t = v : a: 12 : 4 = 3 s; 20 : 5 = 4 s; 15 : 3 = 5 s; 30 : 5 = 6 s.",
+              "first_label": "Nhanh nhất", "last_label": "Lâu nhất"}
+           ]}
+        ]},
+       {"key": "vl10.roi_tu_do", "order": 5, "title": "Sự rơi tự do",
+        "description": "Rơi tự do là chuyển động nhanh dần đều với gia tốc g; đo gia tốc rơi tự do.", "status": "planned"},
+       {"key": "vl10.chuyen_dong_nem", "order": 6, "title": "Chuyển động ném ngang và ném xiên",
+        "description": "Phân tích chuyển động ném thành hai chuyển động thành phần theo phương ngang và phương thẳng đứng.", "status": "planned"}
+     ]},
+    {"key": "vl10.dong_luc_hoc", "grade": 10, "order": 3, "title": "Động lực học",
+     "lessons": [
+       {"key": "vl10.tong_hop_luc", "order": 1, "title": "Tổng hợp và phân tích lực",
+        "description": "Quy tắc hình bình hành, tổng hợp hai lực đồng quy và phân tích một lực thành hai thành phần.", "status": "planned"},
+       {"key": "vl10.ba_dinh_luat_newton", "order": 2, "title": "Ba định luật Newton",
+        "description": "Quán tính, mối liên hệ giữa lực, khối lượng, gia tốc và cặp lực – phản lực.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Vật lí 10; các phép tính đã được kiểm tra."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Phát biểu và vận dụng định luật I Newton để giải thích hiện tượng quán tính",
+          "Dùng a = F/m để tính gia tốc, lực hoặc khối lượng",
+          "Nhận ra cặp lực và phản lực theo định luật III Newton"
+        ],
+        "summary": [
+          "Định luật I: nếu vật không chịu lực nào hoặc hợp lực bằng 0, vật giữ nguyên trạng thái đứng yên hoặc chuyển động thẳng đều. Tính chất giữ nguyên vận tốc gọi là quán tính.",
+          "Định luật II: a = F/m, gia tốc cùng hướng với hợp lực, tỉ lệ thuận với hợp lực và tỉ lệ nghịch với khối lượng. Khối lượng là số đo mức quán tính.",
+          "Định luật III: khi vật A tác dụng lên vật B một lực, B tác dụng lại A một lực cùng giá, cùng độ lớn, ngược chiều. Lực và phản lực đặt vào hai vật khác nhau nên không cân bằng nhau.",
+          "Đơn vị lực là newton: 1 N = 1 kg · m/s²."
+        ],
+        "examples": [
+          {"title": "Đẩy xe hàng", "lines": [
+            "Hợp lực 30 N tác dụng lên xe 15 kg (bỏ qua ma sát).",
+            "a = F/m = 30 : 15 = 2 m/s².",
+            "Chất thêm hàng để xe nặng 30 kg, cùng lực đó chỉ cho a = 1 m/s²."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "choice", "style": "predict", "title": "Đoán xem điều gì xảy ra",
+           "tasks": [
+             {"key": "xe_phanh", "question": "Xe buýt đang chạy thẳng thì phanh gấp. Hành khách đang đứng, không bám tay vịn, sẽ thế nào?",
+              "options": [
+                {"text": "Bị ngả người về phía trước", "ok": true, "why": "Chân dừng theo xe, nhưng phần thân trên do quán tính vẫn giữ vận tốc cũ nên lao về phía trước."},
+                {"text": "Bị ngả người về phía sau", "ok": false, "why": "Ngả về phía sau xảy ra khi xe đột ngột tăng tốc, không phải khi phanh."},
+                {"text": "Vẫn đứng yên như cũ", "ok": false, "why": "Lực ma sát làm chân dừng theo xe, còn thân người chưa kịp dừng nên người không giữ nguyên tư thế."}
+              ],
+              "explanation": "Định luật I Newton: vật có xu hướng giữ nguyên vận tốc. Vì thế cần thắt dây an toàn và bám tay vịn trên xe."},
+             {"key": "xe_tang_toc", "question": "Xe buýt đang đứng yên thì đột ngột tăng tốc. Hành khách đứng không bám tay vịn sẽ thế nào?",
+              "options": [
+                {"text": "Bị ngả người về phía sau", "ok": true, "why": "Chân được sàn xe kéo đi, phần thân trên do quán tính còn muốn đứng yên nên bị bỏ lại phía sau."},
+                {"text": "Bị ngả người về phía trước", "ok": false, "why": "Ngả về phía trước xảy ra khi xe phanh gấp."},
+                {"text": "Bị đẩy sang một bên", "ok": false, "why": "Xe tăng tốc theo phương thẳng nên không có tác dụng nào đẩy người sang ngang."}
+              ],
+              "explanation": "Quán tính làm thân người giữ trạng thái đứng yên trong khi chân đã chuyển động theo xe."},
+             {"key": "giat_giay", "question": "Một cốc nước đặt trên tờ giấy mỏng nằm trên bàn. Giật thật nhanh tờ giấy theo phương ngang. Cốc nước sẽ thế nào?",
+              "options": [
+                {"text": "Gần như đứng yên tại chỗ", "ok": true, "why": "Lực ma sát chỉ tác dụng trong thời gian rất ngắn nên vận tốc cốc thu được gần như bằng 0: cốc giữ trạng thái đứng yên do quán tính."},
+                {"text": "Bị kéo theo tờ giấy và rơi khỏi bàn", "ok": false, "why": "Điều này xảy ra khi kéo giấy chậm: lực ma sát tác dụng đủ lâu để làm cốc chuyển động theo."},
+                {"text": "Bị bật ngược về phía sau", "ok": false, "why": "Ma sát kéo cốc theo chiều giật giấy chứ không đẩy ngược lại; cốc không bị bật ra sau."}
+              ],
+              "explanation": "Thời gian tác dụng lực càng ngắn thì vận tốc vật thu được càng nhỏ; cốc gần như giữ nguyên trạng thái nhờ quán tính."},
+             {"key": "hai_xe_cung_luc", "question": "Đẩy hai xe lăn bằng cùng một hợp lực 20 N. Xe thứ nhất 2 kg, xe thứ hai 4 kg (bỏ qua ma sát). Gia tốc của hai xe so với nhau thế nào?",
+              "options": [
+                {"text": "Xe 2 kg có gia tốc gấp đôi xe 4 kg", "ok": true, "why": "a = F/m: xe 2 kg có a = 10 m/s², xe 4 kg có a = 5 m/s²."},
+                {"text": "Hai xe có cùng gia tốc", "ok": false, "why": "Cùng lực nhưng khối lượng khác nhau thì gia tốc khác nhau: a tỉ lệ nghịch với m."},
+                {"text": "Xe 4 kg có gia tốc gấp đôi xe 2 kg", "ok": false, "why": "Ngược lại: vật nặng hơn có quán tính lớn hơn nên tăng tốc chậm hơn."}
+              ],
+              "explanation": "Định luật II Newton: với cùng hợp lực, gia tốc tỉ lệ nghịch với khối lượng."},
+             {"key": "tang_luc_gap_doi", "question": "Một vật đang được kéo bởi hợp lực F và có gia tốc a. Nếu tăng hợp lực lên 2F, khối lượng vật không đổi, gia tốc mới bằng bao nhiêu?",
+              "options": [
+                {"text": "2a", "ok": true, "why": "a = F/m: với cùng m, gia tốc tỉ lệ thuận với hợp lực nên tăng gấp đôi."},
+                {"text": "a/2", "ok": false, "why": "Gia tốc chỉ giảm một nửa khi khối lượng tăng gấp đôi, không phải khi lực tăng."},
+                {"text": "Vẫn là a", "ok": false, "why": "Gia tốc phụ thuộc hợp lực: lực lớn hơn thì vận tốc thay đổi nhanh hơn."}
+              ],
+              "explanation": "Định luật II Newton: a tỉ lệ thuận với hợp lực F khi khối lượng không đổi."},
+             {"key": "patin_day_nhau", "question": "Hai bạn đứng yên trên giày patin, đối diện nhau. Bạn An đẩy bạn Bình. Điều gì xảy ra?",
+              "options": [
+                {"text": "Cả hai cùng chuyển động ra xa nhau", "ok": true, "why": "An đẩy Bình thì Bình cũng đẩy lại An một lực cùng độ lớn, ngược chiều: cả hai đều bị đẩy ra."},
+                {"text": "Chỉ Bình chuyển động, An đứng yên", "ok": false, "why": "Lực luôn xuất hiện thành cặp: An cũng chịu phản lực từ Bình nên cũng chuyển động."},
+                {"text": "Cả hai cùng chuyển động về một phía", "ok": false, "why": "Lực và phản lực ngược chiều nhau nên hai bạn bị đẩy theo hai chiều ngược nhau."}
+              ],
+              "explanation": "Định luật III Newton: lực và phản lực cùng độ lớn, ngược chiều, đặt vào hai vật khác nhau."},
+             {"key": "tau_vu_tru", "question": "Một tàu thăm dò ở rất xa mọi thiên thể (coi như không chịu lực nào) đang bay với tốc độ 5 km/s thì tắt động cơ. Sau đó tàu sẽ thế nào?",
+              "options": [
+                {"text": "Tiếp tục chuyển động thẳng đều với tốc độ 5 km/s", "ok": true, "why": "Hợp lực bằng 0 nên vận tốc không đổi cả về hướng lẫn độ lớn (định luật I)."},
+                {"text": "Chậm dần rồi dừng lại", "ok": false, "why": "Muốn chậm lại phải có lực cản; ở đây không có lực nào tác dụng nên tàu không chậm lại."},
+                {"text": "Dừng lại ngay khi tắt động cơ", "ok": false, "why": "Không cần lực để duy trì chuyển động; lực chỉ cần để thay đổi vận tốc."}
+              ],
+              "explanation": "Định luật I Newton: không có lực thì vật không cần động cơ vẫn chuyển động thẳng đều mãi."}
+           ]},
+          {"game": "match", "title": "Ghép đại lượng và định luật",
+           "tasks": [
+             {"key": "don_vi_si", "prompt": "Ghép mỗi đại lượng với đơn vị của nó trong hệ SI.",
+              "pairs": [["Lực", "N"], ["Khối lượng", "kg"], ["Gia tốc", "m/s²"], ["Vận tốc", "m/s"]],
+              "explanation": "1 N là lực làm vật 1 kg có gia tốc 1 m/s², tức 1 N = 1 kg · m/s².",
+              "left_label": "Đại lượng", "right_label": "Đơn vị"},
+             {"key": "noi_dung_dl", "prompt": "Ghép mỗi định luật Newton với nội dung của nó.",
+              "pairs": [
+                ["Định luật I", "Hợp lực bằng 0 thì vật giữ nguyên vận tốc"],
+                ["Định luật II", "Gia tốc tỉ lệ thuận với hợp lực, tỉ lệ nghịch với khối lượng"],
+                ["Định luật III", "Lực và phản lực cùng độ lớn, ngược chiều, đặt vào hai vật"]
+              ],
+              "explanation": "Định luật I nói về quán tính, định luật II liên hệ F, m, a, định luật III nói về tương tác giữa hai vật."},
+             {"key": "tinh_huong_dl", "prompt": "Ghép mỗi tình huống với định luật Newton giải thích nó rõ nhất.",
+              "pairs": [
+                ["Hành khách ngả người khi xe phanh gấp", "Định luật I (quán tính)"],
+                ["Xe chở ít hàng tăng tốc nhanh hơn xe chở nhiều hàng", "Định luật II (a = F/m)"],
+                ["Súng bị giật lùi khi bắn", "Định luật III (lực – phản lực)"]
+              ],
+              "explanation": "Ngả người do quán tính; xe nhẹ có gia tốc lớn hơn với cùng lực kéo; viên đạn bị đẩy ra trước thì đẩy súng lùi lại."},
+             {"key": "tinh_gia_toc", "prompt": "Ghép hợp lực và khối lượng với gia tốc vật thu được.",
+              "pairs": [["F = 10 N, m = 2 kg", "5 m/s²"], ["F = 12 N, m = 4 kg", "3 m/s²"], ["F = 6 N, m = 3 kg", "2 m/s²"], ["F = 8 N, m = 8 kg", "1 m/s²"]],
+              "explanation": "a = F/m: 10 : 2 = 5; 12 : 4 = 3; 6 : 3 = 2; 8 : 8 = 1 (đơn vị m/s²)."}
+           ]}
+        ]},
+       {"key": "vl10.trong_luc_ma_sat", "order": 3, "title": "Trọng lực, lực ma sát và lực căng",
+        "description": "Trọng lực, trọng tâm, lực ma sát trượt và lực căng dây trong các tình huống thường gặp.", "status": "planned"},
+       {"key": "vl10.luc_can_ap_suat", "order": 4, "title": "Lực cản, lực nâng, khối lượng riêng và áp suất chất lỏng",
+        "description": "Lực cản của chất lưu, lực đẩy Archimedes, khối lượng riêng và công thức áp suất chất lỏng.", "status": "planned"},
+       {"key": "vl10.moment_can_bang", "order": 5, "title": "Moment lực và điều kiện cân bằng của vật",
+        "description": "Moment lực, ngẫu lực và điều kiện cân bằng của vật rắn.", "status": "planned"}
+     ]},
+    {"key": "vl10.nang_luong", "grade": 10, "order": 4, "title": "Công, năng lượng, công suất",
+     "lessons": [
+       {"key": "vl10.cong_nang_luong", "order": 1, "title": "Năng lượng và công",
+        "description": "Các dạng năng lượng, sự chuyển hoá năng lượng và công của một lực.", "status": "planned"},
+       {"key": "vl10.dong_nang_the_nang", "order": 2, "title": "Động năng và thế năng",
+        "description": "Công thức động năng, thế năng trọng trường và sự chuyển hoá giữa chúng.", "status": "planned"},
+       {"key": "vl10.bao_toan_co_nang", "order": 3, "title": "Cơ năng và định luật bảo toàn cơ năng",
+        "description": "Cơ năng được bảo toàn khi vật chỉ chịu tác dụng của trọng lực.", "status": "planned"},
+       {"key": "vl10.cong_suat_hieu_suat", "order": 4, "title": "Công suất và hiệu suất",
+        "description": "Công suất là tốc độ thực hiện công; hiệu suất của máy và của quá trình chuyển hoá năng lượng.", "status": "planned"}
+     ]},
+    {"key": "vl10.dong_luong", "grade": 10, "order": 5, "title": "Động lượng",
+     "lessons": [
+       {"key": "vl10.dong_luong_bao_toan", "order": 1, "title": "Động lượng và định luật bảo toàn động lượng",
+        "description": "Động lượng p = mv, liên hệ giữa lực và tốc độ thay đổi động lượng, hệ kín.", "status": "planned"},
+       {"key": "vl10.va_cham", "order": 2, "title": "Va chạm đàn hồi và va chạm mềm",
+        "description": "Vận dụng bảo toàn động lượng cho các loại va chạm trong một chiều.", "status": "planned"}
+     ]},
+    {"key": "vl10.tron_bien_dang", "grade": 10, "order": 6, "title": "Chuyển động tròn và biến dạng của vật rắn",
+     "lessons": [
+       {"key": "vl10.chuyen_dong_tron", "order": 1, "title": "Chuyển động tròn đều, gia tốc và lực hướng tâm",
+        "description": "Radian, tốc độ góc, gia tốc hướng tâm và lực hướng tâm trong chuyển động tròn đều.", "status": "planned"},
+       {"key": "vl10.bien_dang_dinh_luat_hooke", "order": 2, "title": "Biến dạng của vật rắn và định luật Hooke",
+        "description": "Biến dạng kéo, nén; đặc tính của lò xo và định luật Hooke.", "status": "planned"}
+     ]},
+
+    {"key": "vl11.dao_dong", "grade": 11, "order": 1, "title": "Dao động",
+     "lessons": [
+       {"key": "vl11.mo_ta_dao_dong", "order": 1, "title": "Mô tả dao động điều hoà",
+        "description": "Li độ, biên độ, chu kì, tần số, tần số góc và độ lệch pha của dao động điều hoà.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Vật lí 11; mọi đáp số đã được tính lại."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Nêu được định nghĩa li độ, biên độ, chu kì, tần số, tần số góc, độ lệch pha",
+          "Đọc các đại lượng từ phương trình x = A cos(ωt + φ)",
+          "Đổi qua lại giữa chu kì, tần số và tần số góc"
+        ],
+        "summary": [
+          "Dao động điều hoà có li độ biến thiên theo thời gian dạng sin: x = A cos(ωt + φ).",
+          "Biên độ A là độ lớn cực đại của li độ; quỹ đạo dài 2A.",
+          "Chu kì T là thời gian thực hiện một dao động toàn phần (s); tần số f = 1/T là số dao động trong một giây (Hz).",
+          "Tần số góc ω = 2πf = 2π/T (rad/s). Hai dao động cùng tần số lệch pha Δφ = φ₂ − φ₁."
+        ],
+        "examples": [
+          {"title": "Đọc phương trình", "lines": [
+            "x = 5 cos(10πt + π/2) (cm).",
+            "A = 5 cm; ω = 10π rad/s; f = ω/2π = 5 Hz; T = 1/f = 0,2 s; pha ban đầu φ = π/2."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "match", "title": "Ghép đại lượng dao động",
+           "tasks": [
+             {"key": "don_vi", "prompt": "Ghép mỗi đại lượng của dao động điều hoà với đơn vị của nó trong hệ SI.",
+              "pairs": [["Biên độ A", "m"], ["Chu kì T", "s"], ["Tần số f", "Hz"], ["Tần số góc ω", "rad/s"]],
+              "explanation": "Biên độ là một độ dài; chu kì là thời gian; tần số là số dao động trong một giây (1 Hz = 1 s⁻¹); tần số góc đo bằng rad/s.",
+              "left_label": "Đại lượng", "right_label": "Đơn vị"},
+             {"key": "dinh_nghia", "prompt": "Ghép mỗi khái niệm với định nghĩa của nó.",
+              "pairs": [
+                ["Li độ", "Độ dịch chuyển của vật so với vị trí cân bằng"],
+                ["Biên độ", "Độ lớn cực đại của li độ"],
+                ["Chu kì", "Thời gian thực hiện một dao động toàn phần"],
+                ["Tần số", "Số dao động toàn phần thực hiện trong một giây"]
+              ],
+              "explanation": "Li độ có thể âm hoặc dương, còn biên độ luôn dương; chu kì và tần số là nghịch đảo của nhau."},
+             {"key": "chu_ki_tan_so", "prompt": "Ghép mỗi chu kì với tần số tương ứng.",
+              "pairs": [["T = 0,5 s", "f = 2 Hz"], ["T = 0,2 s", "f = 5 Hz"], ["T = 4 s", "f = 0,25 Hz"], ["T = 0,1 s", "f = 10 Hz"]],
+              "explanation": "f = 1/T: 1 : 0,5 = 2; 1 : 0,2 = 5; 1 : 4 = 0,25; 1 : 0,1 = 10."}
+           ]},
+          {"game": "choice", "style": "quiz", "title": "Đọc và tính dao động",
+           "tasks": [
+             {"key": "chu_ki_20dd", "question": "Một vật thực hiện 20 dao động toàn phần trong 10 s. Chu kì dao động của vật là bao nhiêu?",
+              "options": [
+                {"text": "0,5 s", "ok": true, "why": "T = thời gian : số dao động = 10 : 20 = 0,5 s."},
+                {"text": "2 s", "ok": false, "why": "20 : 10 = 2 là tần số (2 Hz), không phải chu kì."},
+                {"text": "200 s", "ok": false, "why": "Nhân 20 với 10 không có ý nghĩa: chu kì là thời gian của một dao động."}
+              ],
+              "explanation": "Chu kì là thời gian của một dao động toàn phần: chia tổng thời gian cho số dao động."},
+             {"key": "f_sang_t", "question": "Một dao động điều hoà có tần số 5 Hz. Chu kì của nó là bao nhiêu?",
+              "options": [
+                {"text": "0,2 s", "ok": true, "why": "T = 1/f = 1 : 5 = 0,2 s."},
+                {"text": "5 s", "ok": false, "why": "Chu kì không bằng tần số; T là nghịch đảo của f."},
+                {"text": "10π s", "ok": false, "why": "10π là tần số góc ω = 2πf (rad/s), không phải chu kì."}
+              ],
+              "explanation": "Chu kì và tần số là nghịch đảo của nhau: T = 1/f."},
+             {"key": "bien_do_pt", "question": "Một vật dao động điều hoà theo phương trình x = 4 cos(2πt + π/3) (cm). Biên độ dao động là bao nhiêu?",
+              "options": [
+                {"text": "4 cm", "ok": true, "why": "Biên độ là hệ số đứng trước hàm cos: A = 4 cm."},
+                {"text": "8 cm", "ok": false, "why": "8 cm là chiều dài quỹ đạo (2A), không phải biên độ."},
+                {"text": "2π cm", "ok": false, "why": "2π là tần số góc (rad/s), không phải biên độ."},
+                {"text": "π/3 cm", "ok": false, "why": "π/3 là pha ban đầu (rad), không phải biên độ."}
+              ],
+              "explanation": "Trong x = A cos(ωt + φ): A là biên độ, ω là tần số góc, φ là pha ban đầu."},
+             {"key": "tan_so_pt", "question": "Một vật dao động điều hoà theo phương trình x = 6 cos(4πt) (cm). Tần số dao động là bao nhiêu?",
+              "options": [
+                {"text": "2 Hz", "ok": true, "why": "ω = 4π rad/s nên f = ω/2π = 2 Hz."},
+                {"text": "4 Hz", "ok": false, "why": "Đã bỏ π nhưng quên chia cho 2: f = 4π : 2π = 2 Hz."},
+                {"text": "0,5 Hz", "ok": false, "why": "0,5 s là chu kì T = 1/f, không phải tần số."},
+                {"text": "4π Hz", "ok": false, "why": "4π là tần số góc tính bằng rad/s, không phải tần số tính bằng Hz."}
+              ],
+              "explanation": "Tần số góc ω = 2πf, nên tần số f = ω/(2π)."},
+             {"key": "tan_so_goc", "question": "Một con lắc dao động điều hoà với chu kì 0,5 s. Tần số góc của nó là bao nhiêu?",
+              "options": [
+                {"text": "4π rad/s", "ok": true, "why": "ω = 2π/T = 2π : 0,5 = 4π rad/s."},
+                {"text": "π rad/s", "ok": false, "why": "Đây là 2π · 0,5: phải chia 2π cho T, không phải nhân."},
+                {"text": "2 rad/s", "ok": false, "why": "1/T = 2 là tần số (Hz); tần số góc còn phải nhân với 2π."}
+              ],
+              "explanation": "Tần số góc ω = 2π/T = 2πf."},
+             {"key": "do_lech_pha", "question": "Hai dao động x₁ = 3 cos(πt + π/2) (cm) và x₂ = 3 cos(πt) (cm). Độ lệch pha giữa chúng là bao nhiêu?",
+              "options": [
+                {"text": "π/2 (vuông pha)", "ok": true, "why": "Δφ = π/2 − 0 = π/2: hai dao động vuông pha."},
+                {"text": "π (ngược pha)", "ok": false, "why": "Ngược pha cần pha ban đầu lệch nhau π; ở đây chỉ lệch π/2."},
+                {"text": "0 (cùng pha)", "ok": false, "why": "Cùng tần số chưa đủ: hai pha ban đầu khác nhau (π/2 và 0) nên không cùng pha."}
+              ],
+              "explanation": "Hai dao động cùng tần số có độ lệch pha bằng hiệu hai pha ban đầu."},
+             {"key": "quy_dao_10cm", "question": "Một vật dao động điều hoà trên một đoạn thẳng dài 10 cm. Biên độ dao động là bao nhiêu?",
+              "options": [
+                {"text": "5 cm", "ok": true, "why": "Vật đi từ −A đến +A nên quỹ đạo dài 2A = 10 cm, A = 5 cm."},
+                {"text": "10 cm", "ok": false, "why": "10 cm là chiều dài quỹ đạo, bằng hai lần biên độ."},
+                {"text": "20 cm", "ok": false, "why": "Biên độ nhỏ hơn quỹ đạo chứ không lớn hơn: A là nửa quỹ đạo."}
+              ],
+              "explanation": "Vị trí cân bằng ở giữa quỹ đạo; biên độ là khoảng cách từ vị trí cân bằng đến một biên."}
+           ]}
+        ]},
+       {"key": "vl11.van_toc_gia_toc_dd", "order": 2, "title": "Vận tốc và gia tốc trong dao động điều hoà",
+        "description": "Đồ thị và công thức vận tốc, gia tốc; liên hệ a = −ω²x.", "status": "planned"},
+       {"key": "vl11.nang_luong_dd", "order": 3, "title": "Động năng, thế năng và cơ năng trong dao động điều hoà",
+        "description": "Sự chuyển hoá giữa động năng và thế năng, cơ năng của dao động điều hoà.", "status": "planned"},
+       {"key": "vl11.tat_dan_cong_huong", "order": 4, "title": "Dao động tắt dần, dao động cưỡng bức và cộng hưởng",
+        "description": "Vì sao dao động tắt dần; dao động cưỡng bức và hiện tượng cộng hưởng trong đời sống.", "status": "planned"}
+     ]},
+    {"key": "vl11.song", "grade": 11, "order": 2, "title": "Sóng",
+     "lessons": [
+       {"key": "vl11.mo_ta_song", "order": 1, "title": "Mô tả sóng",
+        "description": "Bước sóng, tần số, chu kì, biên độ, tốc độ truyền sóng và hệ thức v = λf.", "status": "planned"},
+       {"key": "vl11.song_doc_ngang", "order": 2, "title": "Sóng dọc và sóng ngang",
+        "description": "Phân biệt sóng dọc và sóng ngang theo phương dao động của các phần tử môi trường.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Vật lí 11; các ví dụ đã được đối chiếu."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Phân biệt sóng dọc và sóng ngang theo phương dao động so với phương truyền sóng",
+          "Nhận ra sóng dọc, sóng ngang trong các ví dụ thực tế"
+        ],
+        "summary": [
+          "Sóng ngang: các phần tử môi trường dao động theo phương vuông góc với phương truyền sóng.",
+          "Sóng dọc: các phần tử môi trường dao động theo phương trùng với phương truyền sóng, tạo nên các vùng nén và dãn.",
+          "Sóng âm trong chất khí và chất lỏng là sóng dọc. Sóng truyền trên sợi dây khi rung một đầu theo phương vuông góc với dây là sóng ngang.",
+          "Sóng truyền năng lượng và trạng thái dao động; các phần tử môi trường chỉ dao động quanh vị trí cân bằng, không đi theo sóng."
+        ],
+        "examples": [
+          {"title": "Một lò xo, hai loại sóng", "lines": [
+            "Đẩy kéo một đầu lò xo dài dọc theo trục: các vòng lò xo dồn lại rồi giãn ra theo phương truyền, đó là sóng dọc.",
+            "Giật đầu lò xo lên xuống: các vòng dao động vuông góc với trục lò xo, đó là sóng ngang."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "sorting", "title": "Sóng dọc hay sóng ngang?",
+           "set": {"title": "Sóng trong mỗi ví dụ là sóng dọc hay sóng ngang?",
+            "groups": [
+              {"id": "doc", "label": "Sóng dọc", "icon": "↔️"},
+              {"id": "ngang", "label": "Sóng ngang", "icon": "↕️"}
+            ],
+            "cards": [
+              {"key": "am_khong_khi", "text": "Âm thanh truyền trong không khí", "picture": "🔊", "group": "doc",
+               "explanation": "Các lớp không khí bị nén, dãn và dao động dọc theo phương truyền âm: sóng dọc."},
+              {"key": "am_trong_nuoc", "text": "Tiếng động truyền trong nước đến tai người lặn", "picture": "🤿", "group": "doc",
+               "explanation": "Chất lỏng chỉ truyền được sóng nén – dãn; sóng âm trong nước là sóng dọc."},
+              {"key": "lo_xo_nen", "text": "Đẩy kéo một đầu lò xo dài dọc theo trục của nó", "picture": "🌀", "group": "doc",
+               "explanation": "Các vòng lò xo dao động theo đúng phương truyền sóng, tạo vùng nén và vùng dãn: sóng dọc."},
+              {"key": "song_p", "text": "Sóng P (sóng sơ cấp) của động đất", "picture": "🌋", "group": "doc",
+               "explanation": "Sóng P làm đất đá bị nén và dãn theo phương truyền nên là sóng dọc; nó truyền nhanh nhất và đến trạm đo trước."},
+              {"key": "sieu_am_mo", "text": "Siêu âm truyền qua mô mềm khi khám thai", "picture": "🩺", "group": "doc",
+               "explanation": "Siêu âm là sóng âm tần số cao; trong mô mềm (gần như chất lỏng) nó là sóng dọc."},
+              {"key": "rung_soi_day", "text": "Rung một đầu sợi dây dài căng ngang lên xuống", "picture": "🪢", "group": "ngang",
+               "explanation": "Mỗi đoạn dây dao động lên xuống, vuông góc với phương truyền dọc theo dây: sóng ngang."},
+              {"key": "lo_xo_giat", "text": "Giật một đầu lò xo dài theo phương vuông góc với trục lò xo", "picture": "〰️", "group": "ngang",
+               "explanation": "Các vòng lò xo dao động vuông góc với trục, trong khi sóng truyền dọc theo trục: sóng ngang."},
+              {"key": "song_s", "text": "Sóng S (sóng thứ cấp) của động đất", "picture": "🏔️", "group": "ngang",
+               "explanation": "Sóng S làm đất đá dao động vuông góc với phương truyền nên là sóng ngang; nó không truyền qua chất lỏng."},
+              {"key": "song_khan_dai", "text": "Khán giả lần lượt đứng lên ngồi xuống tạo làn sóng quanh sân vận động", "picture": "🏟️", "group": "ngang",
+               "explanation": "Mỗi người chỉ dao động lên xuống tại chỗ, còn làn sóng chạy vòng quanh sân: mô hình của sóng ngang."}
+            ]}}
+        ]},
+       {"key": "vl11.song_dien_tu", "order": 3, "title": "Sóng điện từ",
+        "description": "Sóng điện từ truyền trong chân không với tốc độ c; các vùng của thang sóng điện từ.", "status": "planned"},
+       {"key": "vl11.giao_thoa", "order": 4, "title": "Giao thoa sóng kết hợp",
+        "description": "Điều kiện giao thoa, vân cực đại và cực tiểu; giao thoa ánh sáng qua hai khe.", "status": "planned"},
+       {"key": "vl11.song_dung", "order": 5, "title": "Sóng dừng",
+        "description": "Sự hình thành sóng dừng, nút và bụng sóng; điều kiện có sóng dừng trên dây.", "status": "planned"},
+       {"key": "vl11.toc_do_am", "order": 6, "title": "Đo tốc độ truyền âm",
+        "description": "Thí nghiệm đo tốc độ truyền âm trong không khí và xử lí số liệu.", "status": "planned"}
+     ]},
+    {"key": "vl11.dien_truong", "grade": 11, "order": 3, "title": "Điện trường",
+     "lessons": [
+       {"key": "vl11.dinh_luat_coulomb", "order": 1, "title": "Lực tương tác giữa các điện tích (định luật Coulomb)",
+        "description": "Độ lớn và hướng của lực tương tác giữa hai điện tích điểm.", "status": "planned"},
+       {"key": "vl11.cuong_do_dien_truong", "order": 2, "title": "Điện trường và cường độ điện trường",
+        "description": "Khái niệm điện trường, cường độ điện trường và đường sức điện.", "status": "planned"},
+       {"key": "vl11.dien_truong_deu", "order": 3, "title": "Điện trường đều",
+        "description": "Điện trường giữa hai bản phẳng song song và chuyển động của điện tích trong đó.", "status": "planned"},
+       {"key": "vl11.dien_the", "order": 4, "title": "Điện thế và thế năng điện",
+        "description": "Thế năng của điện tích trong điện trường, điện thế và hiệu điện thế.", "status": "planned"},
+       {"key": "vl11.tu_dien", "order": 5, "title": "Tụ điện và điện dung",
+        "description": "Cấu tạo tụ điện, điện dung, ghép tụ và năng lượng của tụ điện.", "status": "planned"}
+     ]},
+    {"key": "vl11.dong_dien", "grade": 11, "order": 4, "title": "Dòng điện, mạch điện",
+     "lessons": [
+       {"key": "vl11.cuong_do_dong_dien", "order": 1, "title": "Cường độ dòng điện",
+        "description": "Định nghĩa cường độ dòng điện, đơn vị ampe và biểu thức I = Snve.", "status": "planned"},
+       {"key": "vl11.dinh_luat_ohm", "order": 2, "title": "Điện trở và định luật Ohm",
+        "description": "Điện trở, đặc trưng I – U, định luật Ohm và sự phụ thuộc của điện trở vào nhiệt độ.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Vật lí 11; mọi đáp số đã được tính lại."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Vận dụng định luật Ohm I = U/R để tính I, U hoặc R",
+          "Đọc đặc trưng I – U của một điện trở",
+          "Nêu được điện trở của dây tóc đèn tăng khi nhiệt độ tăng"
+        ],
+        "summary": [
+          "Điện trở R = U/I đặc trưng cho mức cản trở dòng điện của vật dẫn; đơn vị ohm (Ω).",
+          "Định luật Ohm: cường độ dòng điện qua vật dẫn tỉ lệ thuận với hiệu điện thế đặt vào hai đầu vật dẫn: I = U/R.",
+          "Với điện trở không đổi, đặc trưng I – U là đoạn thẳng đi qua gốc toạ độ; đường càng dốc thì R càng nhỏ.",
+          "Điện trở của kim loại tăng khi nhiệt độ tăng, nên đặc trưng I – U của đèn sợi đốt là đường cong."
+        ],
+        "examples": [
+          {"title": "Tính dòng điện", "lines": [
+            "Đặt hiệu điện thế 12 V vào điện trở 4 Ω.",
+            "I = U/R = 12 : 4 = 3 A."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "choice", "style": "quiz", "title": "Tính theo định luật Ohm",
+           "tasks": [
+             {"key": "tinh_i", "question": "Đặt hiệu điện thế 12 V vào hai đầu một điện trở 4 Ω. Cường độ dòng điện qua điện trở là bao nhiêu?",
+              "options": [
+                {"text": "3 A", "ok": true, "why": "I = U/R = 12 : 4 = 3 A."},
+                {"text": "48 A", "ok": false, "why": "Nhân U với R là sai; định luật Ohm chia U cho R."},
+                {"text": "0,33 A", "ok": false, "why": "Đây là R : U = 4 : 12; phải lấy U chia cho R."}
+              ],
+              "explanation": "Định luật Ohm: I = U/R."},
+             {"key": "tinh_u", "question": "Dòng điện 0,5 A chạy qua một điện trở 20 Ω. Hiệu điện thế giữa hai đầu điện trở là bao nhiêu?",
+              "options": [
+                {"text": "10 V", "ok": true, "why": "U = I · R = 0,5 · 20 = 10 V."},
+                {"text": "40 V", "ok": false, "why": "Đây là R : I = 20 : 0,5; từ I = U/R suy ra U = IR."},
+                {"text": "0,025 V", "ok": false, "why": "Đây là I : R; hiệu điện thế bằng tích của I và R."}
+              ],
+              "explanation": "Từ I = U/R suy ra U = IR."},
+             {"key": "tinh_r", "question": "Khi đặt hiệu điện thế 6 V vào hai đầu một dây dẫn thì dòng điện qua dây là 0,2 A. Điện trở của dây là bao nhiêu?",
+              "options": [
+                {"text": "30 Ω", "ok": true, "why": "R = U/I = 6 : 0,2 = 30 Ω."},
+                {"text": "1,2 Ω", "ok": false, "why": "Đây là U · I = 6 · 0,2; điện trở là thương U/I."},
+                {"text": "3 Ω", "ok": false, "why": "Lỗi chia số thập phân: 6 : 0,2 = 30, không phải 3."}
+              ],
+              "explanation": "Điện trở R = U/I."},
+             {"key": "tang_u_gap_ba", "question": "Một điện trở không đổi có dòng 0,1 A khi hiệu điện thế là 3 V. Nếu tăng hiệu điện thế lên 9 V thì dòng điện là bao nhiêu?",
+              "options": [
+                {"text": "0,3 A", "ok": true, "why": "R = 3 : 0,1 = 30 Ω; I = 9 : 30 = 0,3 A. U tăng 3 lần thì I tăng 3 lần."},
+                {"text": "0,1 A", "ok": false, "why": "Dòng điện không giữ nguyên: với R không đổi, I tỉ lệ thuận với U."},
+                {"text": "0,9 A", "ok": false, "why": "U chỉ tăng 3 lần nên I cũng chỉ tăng 3 lần, từ 0,1 A lên 0,3 A."}
+              ],
+              "explanation": "Với cùng một điện trở, I tỉ lệ thuận với U."},
+             {"key": "doc_dac_trung", "question": "Đặc trưng I – U của một điện trở là đường thẳng qua gốc toạ độ và điểm (U = 6 V; I = 0,3 A). Điện trở đó bằng bao nhiêu?",
+              "options": [
+                {"text": "20 Ω", "ok": true, "why": "R = U/I = 6 : 0,3 = 20 Ω, với bất kì điểm nào trên đường thẳng."},
+                {"text": "1,8 Ω", "ok": false, "why": "Đây là U · I; điện trở là U chia cho I."},
+                {"text": "0,05 Ω", "ok": false, "why": "Đây là I : U, tức độ dốc của đường I – U, bằng 1/R chứ không phải R."}
+              ],
+              "explanation": "Trên đặc trưng I – U, mọi điểm đều cho cùng tỉ số U/I bằng điện trở."},
+             {"key": "den_soi_dot", "question": "Hiệu điện thế đặt vào một bóng đèn sợi đốt tăng gấp đôi (vẫn dưới mức định mức). Cường độ dòng điện qua đèn thay đổi thế nào?",
+              "options": [
+                {"text": "Tăng, nhưng ít hơn hai lần", "ok": true, "why": "Dây tóc nóng hơn nên điện trở tăng; dòng điện vì thế tăng chậm hơn hiệu điện thế."},
+                {"text": "Tăng đúng hai lần", "ok": false, "why": "Chỉ đúng khi R không đổi; điện trở dây tóc kim loại tăng theo nhiệt độ."},
+                {"text": "Giảm đi", "ok": false, "why": "Điện trở có tăng nhưng không đủ để làm dòng giảm; hiệu điện thế lớn hơn vẫn cho dòng lớn hơn."}
+              ],
+              "explanation": "Điện trở kim loại tăng khi nhiệt độ tăng, nên đặc trưng I – U của đèn sợi đốt là đường cong."},
+             {"key": "u_toi_da", "question": "Một điện trở 10 Ω chỉ chịu được dòng điện tối đa 2 A. Hiệu điện thế lớn nhất có thể đặt vào hai đầu điện trở là bao nhiêu?",
+              "options": [
+                {"text": "20 V", "ok": true, "why": "U = IR = 2 · 10 = 20 V; lớn hơn thì dòng vượt quá 2 A."},
+                {"text": "5 V", "ok": false, "why": "Đây là R : I; hiệu điện thế bằng I nhân R."},
+                {"text": "12 V", "ok": false, "why": "Cộng I với R không có ý nghĩa vật lí."}
+              ],
+              "explanation": "Hiệu điện thế ứng với dòng tối đa: U = I_max · R."}
+           ]},
+          {"game": "order", "title": "Sắp xếp mạch điện",
+           "tasks": [
+             {"key": "r_tang_dan", "prompt": "Mỗi cặp số là hiệu điện thế và cường độ dòng điện đo được ở một điện trở. Sắp xếp theo điện trở từ nhỏ đến lớn.",
+              "items": ["12 V – 2 A", "5 V – 0,5 A", "9 V – 0,5 A", "3 V – 0,1 A"],
+              "explanation": "R = U/I: 12 : 2 = 6 Ω; 5 : 0,5 = 10 Ω; 9 : 0,5 = 18 Ω; 3 : 0,1 = 30 Ω.",
+              "first_label": "Nhỏ nhất", "last_label": "Lớn nhất"},
+             {"key": "i_cung_u", "prompt": "Đặt cùng hiệu điện thế 12 V vào từng điện trở. Sắp xếp theo cường độ dòng điện từ nhỏ đến lớn.",
+              "items": ["R = 24 Ω", "R = 6 Ω", "R = 4 Ω", "R = 3 Ω"],
+              "explanation": "I = 12/R: 24 Ω cho 0,5 A; 6 Ω cho 2 A; 4 Ω cho 3 A; 3 Ω cho 4 A. Cùng U, điện trở càng nhỏ thì dòng càng lớn.",
+              "first_label": "Dòng nhỏ nhất", "last_label": "Dòng lớn nhất"},
+             {"key": "u_can_dat", "prompt": "Sắp xếp theo hiệu điện thế cần đặt vào điện trở để có dòng điện cho trước, từ nhỏ đến lớn.",
+              "items": ["2 Ω, cần 1 A", "40 Ω, cần 0,1 A", "12 Ω, cần 0,5 A", "5 Ω, cần 2 A"],
+              "explanation": "U = IR: 2 · 1 = 2 V; 40 · 0,1 = 4 V; 12 · 0,5 = 6 V; 5 · 2 = 10 V.",
+              "first_label": "Nhỏ nhất", "last_label": "Lớn nhất"},
+             {"key": "do_dien_tro", "prompt": "Sắp xếp các bước đo điện trở bằng vôn kế và ampe kế.",
+              "items": [
+                "Mắc mạch khi khoá K đang mở: ampe kế nối tiếp, vôn kế song song với điện trở",
+                "Đóng khoá K, đọc số chỉ của vôn kế và ampe kế",
+                "Đổi hiệu điện thế của nguồn, đọc thêm vài cặp U và I",
+                "Tính R = U/I cho mỗi lần đo rồi lấy giá trị trung bình"
+              ],
+              "explanation": "Luôn mắc mạch khi khoá mở để an toàn; cần số liệu của nhiều lần đo trước khi tính giá trị trung bình.",
+              "first_label": "Làm trước", "last_label": "Làm sau cùng"}
+           ]}
+        ]},
+       {"key": "vl11.nguon_dien", "order": 3, "title": "Nguồn điện, suất điện động và điện trở trong",
+        "description": "Suất điện động, điện trở trong và ảnh hưởng của điện trở trong lên hiệu điện thế hai cực nguồn.", "status": "planned"},
+       {"key": "vl11.nang_luong_dien", "order": 4, "title": "Năng lượng điện và công suất điện",
+        "description": "Năng lượng điện tiêu thụ, công suất điện và vận dụng tiết kiệm điện.", "status": "planned"}
+     ]},
+
+    {"key": "vl12.vat_li_nhiet", "grade": 12, "order": 1, "title": "Vật lí nhiệt",
+     "lessons": [
+       {"key": "vl12.chuyen_the", "order": 1, "title": "Sự chuyển thể và mô hình động học phân tử",
+        "description": "Cấu trúc chất rắn, lỏng, khí theo mô hình động học phân tử và sự chuyển thể.", "status": "planned"},
+       {"key": "vl12.noi_nang", "order": 2, "title": "Nội năng và định luật I của nhiệt động lực học",
+        "description": "Nội năng, hai cách làm thay đổi nội năng và biểu thức ΔU = A + Q.", "status": "planned"},
+       {"key": "vl12.thang_nhiet_do", "order": 3, "title": "Thang nhiệt độ và nhiệt kế",
+        "description": "Thang Celsius, thang Kelvin, độ không tuyệt đối và đổi đơn vị nhiệt độ.", "status": "planned"},
+       {"key": "vl12.nhiet_luong_rieng", "order": 4, "title": "Nhiệt dung riêng, nhiệt nóng chảy riêng, nhiệt hoá hơi riêng",
+        "description": "Tính nhiệt lượng làm nóng, làm nóng chảy và làm hoá hơi một vật.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Vật lí 12; số liệu cho trong đề, đáp số đã được tính lại."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Dùng Q = mcΔT để tính nhiệt lượng làm thay đổi nhiệt độ",
+          "Dùng Q = λm và Q = Lm cho sự nóng chảy và sự hoá hơi",
+          "Nhận ra đơn vị của nhiệt dung riêng, nhiệt nóng chảy riêng, nhiệt hoá hơi riêng"
+        ],
+        "summary": [
+          "Nhiệt lượng làm vật thay đổi nhiệt độ: Q = mcΔT; c là nhiệt dung riêng, đơn vị J/(kg·K). Độ tăng 1 K bằng độ tăng 1 °C.",
+          "Nhiệt lượng làm nóng chảy hoàn toàn vật ở nhiệt độ nóng chảy: Q = λm; λ là nhiệt nóng chảy riêng (J/kg).",
+          "Nhiệt lượng làm hoá hơi hoàn toàn chất lỏng ở nhiệt độ sôi: Q = Lm; L là nhiệt hoá hơi riêng (J/kg).",
+          "Trong lúc nóng chảy hay sôi, nhiệt độ không đổi dù vật vẫn nhận nhiệt."
+        ],
+        "examples": [
+          {"title": "Đun nước", "lines": [
+            "Đun 1,5 kg nước (c = 4200 J/(kg·K)) từ 25 °C lên 100 °C.",
+            "Q = 1,5 · 4200 · 75 = 472 500 J ≈ 473 kJ."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "choice", "style": "quiz", "title": "Tính nhiệt lượng",
+           "tasks": [
+             {"key": "dun_2kg", "question": "Đun 2 kg nước từ 20 °C lên 70 °C. Biết nhiệt dung riêng của nước là 4200 J/(kg·K). Nhiệt lượng nước nhận được là bao nhiêu?",
+              "options": [
+                {"text": "420 kJ", "ok": true, "why": "Q = mcΔT = 2 · 4200 · 50 = 420 000 J = 420 kJ."},
+                {"text": "588 kJ", "ok": false, "why": "Đã nhân với 70 °C; phải dùng độ tăng nhiệt độ ΔT = 70 − 20 = 50 K."},
+                {"text": "8,4 kJ", "ok": false, "why": "Quên nhân với độ tăng nhiệt độ: 2 · 4200 = 8400 J chỉ đủ tăng 1 K."},
+                {"text": "210 kJ", "ok": false, "why": "Quên nhân với khối lượng 2 kg."}
+              ],
+              "explanation": "Q = mcΔT, trong đó ΔT là độ tăng nhiệt độ chứ không phải nhiệt độ cuối."},
+             {"key": "tim_c_nhom", "question": "Một khối kim loại 0,5 kg nhận nhiệt lượng 9000 J thì nóng thêm 20 K. Nhiệt dung riêng của kim loại đó là bao nhiêu?",
+              "options": [
+                {"text": "900 J/(kg·K)", "ok": true, "why": "c = Q/(mΔT) = 9000 : (0,5 · 20) = 900 J/(kg·K)."},
+                {"text": "450 J/(kg·K)", "ok": false, "why": "9000 : 20 = 450 là đã bỏ quên khối lượng 0,5 kg."},
+                {"text": "225 J/(kg·K)", "ok": false, "why": "Đã nhân với khối lượng thay vì chia: 9000 · 0,5 : 20 = 225."},
+                {"text": "90 000 J/(kg·K)", "ok": false, "why": "Nhân cả m và ΔT với Q là sai; c bằng Q chia cho tích mΔT."}
+              ],
+              "explanation": "Từ Q = mcΔT suy ra c = Q/(mΔT). Giá trị 900 J/(kg·K) gần với nhiệt dung riêng của nhôm."},
+             {"key": "nong_chay_da", "question": "Nhiệt nóng chảy riêng của nước đá là 3,34·10⁵ J/kg. Cần bao nhiêu nhiệt lượng để làm nóng chảy hoàn toàn 0,2 kg nước đá ở 0 °C?",
+              "options": [
+                {"text": "66,8 kJ", "ok": true, "why": "Q = λm = 3,34·10⁵ · 0,2 = 66 800 J = 66,8 kJ."},
+                {"text": "334 kJ", "ok": false, "why": "Đó là nhiệt lượng cho 1 kg nước đá; chưa nhân với 0,2 kg."},
+                {"text": "1670 kJ", "ok": false, "why": "Đã chia λ cho m (3,34·10⁵ : 0,2) thay vì nhân."},
+                {"text": "6,68 kJ", "ok": false, "why": "Sai lũy thừa: 3,34·10⁵ · 0,2 = 6,68·10⁴ J chứ không phải 6,68·10³ J."}
+              ],
+              "explanation": "Nước đá đang ở nhiệt độ nóng chảy nên chỉ cần Q = λm, nhiệt độ giữ ở 0 °C trong suốt quá trình."},
+             {"key": "hoa_hoi_nuoc", "question": "Nhiệt hoá hơi riêng của nước là 2,26·10⁶ J/kg. Cần bao nhiêu nhiệt lượng để 0,5 kg nước ở 100 °C hoá hơi hoàn toàn?",
+              "options": [
+                {"text": "1,13·10⁶ J", "ok": true, "why": "Q = Lm = 2,26·10⁶ · 0,5 = 1,13·10⁶ J."},
+                {"text": "4,52·10⁶ J", "ok": false, "why": "Đã chia L cho m thay vì nhân."},
+                {"text": "2,26·10⁶ J", "ok": false, "why": "Đó là nhiệt lượng cho 1 kg nước; chưa nhân với 0,5 kg."},
+                {"text": "1,13·10⁵ J", "ok": false, "why": "Sai lũy thừa: 2,26 · 0,5 = 1,13 và giữ nguyên 10⁶."}
+              ],
+              "explanation": "Nước đã ở nhiệt độ sôi nên toàn bộ nhiệt lượng dùng để hoá hơi: Q = Lm."},
+             {"key": "dong_va_nuoc", "question": "Cung cấp cùng một nhiệt lượng cho 1 kg đồng (c = 380 J/(kg·K)) và 1 kg nước (c = 4200 J/(kg·K)). Vật nào nóng lên nhiều hơn?",
+              "options": [
+                {"text": "Đồng nóng lên nhiều hơn", "ok": true, "why": "ΔT = Q/(mc): cùng Q và m, c của đồng nhỏ hơn khoảng 11 lần nên ΔT lớn hơn khoảng 11 lần."},
+                {"text": "Nước nóng lên nhiều hơn", "ok": false, "why": "Nhiệt dung riêng lớn nghĩa là cần nhiều nhiệt để tăng 1 K, nên nước nóng chậm hơn."},
+                {"text": "Hai vật nóng lên như nhau", "ok": false, "why": "Cùng khối lượng và nhiệt lượng nhưng khác chất thì độ tăng nhiệt độ khác nhau."}
+              ],
+              "explanation": "Chất có nhiệt dung riêng lớn (như nước) nóng lên và nguội đi chậm."},
+             {"key": "delta_t_kelvin", "question": "Nước nóng lên từ 20 °C đến 50 °C. Độ tăng nhiệt độ tính theo kelvin là bao nhiêu?",
+              "options": [
+                {"text": "30 K", "ok": true, "why": "Một độ chia của thang Kelvin bằng một độ chia của thang Celsius, nên độ tăng 30 °C bằng 30 K."},
+                {"text": "303 K", "ok": false, "why": "303 K là nhiệt độ tuyệt đối ứng với 30 °C; độ tăng nhiệt độ thì không cộng 273."},
+                {"text": "323 K", "ok": false, "why": "323 K là nhiệt độ tuyệt đối của nước ở 50 °C, không phải độ tăng."}
+              ],
+              "explanation": "T (K) = t (°C) + 273, nên hiệu hai nhiệt độ có cùng giá trị trên hai thang."},
+             {"key": "can_bang_nhiet", "question": "Đổ 0,1 kg nước 80 °C vào 0,3 kg nước 20 °C. Bỏ qua trao đổi nhiệt với bình và môi trường. Nhiệt độ khi cân bằng là bao nhiêu?",
+              "options": [
+                {"text": "35 °C", "ok": true, "why": "0,1 · c · (80 − t) = 0,3 · c · (t − 20) nên 8 − 0,1t = 0,3t − 6, t = 35 °C."},
+                {"text": "50 °C", "ok": false, "why": "50 °C là trung bình cộng, chỉ đúng khi hai lượng nước bằng nhau; ở đây nước lạnh nhiều gấp ba."},
+                {"text": "65 °C", "ok": false, "why": "Nhiệt độ cân bằng phải gần nhiệt độ của lượng nước lớn hơn (20 °C), không phải gần 80 °C."}
+              ],
+              "explanation": "Nhiệt lượng nước nóng toả ra bằng nhiệt lượng nước lạnh thu vào."}
+           ]},
+          {"game": "match", "title": "Ghép công thức và đơn vị",
+           "tasks": [
+             {"key": "don_vi_nhiet", "prompt": "Ghép mỗi đại lượng với đơn vị của nó trong hệ SI.",
+              "pairs": [["Nhiệt dung riêng", "J/(kg·K)"], ["Nhiệt nóng chảy riêng", "J/kg"], ["Nhiệt lượng", "J"], ["Độ tăng nhiệt độ", "K"]],
+              "explanation": "Nhiệt dung riêng tính cho 1 kg và 1 K; nhiệt nóng chảy riêng tính cho 1 kg (nhiệt độ không đổi khi nóng chảy).",
+              "left_label": "Đại lượng", "right_label": "Đơn vị"},
+             {"key": "qua_trinh_ct", "prompt": "Ghép mỗi quá trình với công thức tính nhiệt lượng phù hợp.",
+              "pairs": [
+                ["Làm nóng nước từ 20 °C đến 60 °C", "Q = mcΔT"],
+                ["Nước đá ở 0 °C tan hết thành nước", "Q = λm"],
+                ["Nước ở 100 °C sôi và hoá hơi hết", "Q = Lm"]
+              ],
+              "explanation": "Khi nhiệt độ thay đổi dùng mcΔT; khi chuyển thể ở nhiệt độ không đổi dùng λm (nóng chảy) hoặc Lm (hoá hơi)."},
+             {"key": "q_nuoc", "prompt": "Nước có c = 4200 J/(kg·K). Ghép khối lượng nước và độ tăng nhiệt độ với nhiệt lượng cần cung cấp.",
+              "pairs": [["1 kg, tăng 10 K", "42 kJ"], ["2 kg, tăng 15 K", "126 kJ"], ["0,5 kg, tăng 40 K", "84 kJ"], ["3 kg, tăng 5 K", "63 kJ"]],
+              "explanation": "Q = mcΔT: 1 · 4200 · 10 = 42 000 J; 2 · 4200 · 15 = 126 000 J; 0,5 · 4200 · 40 = 84 000 J; 3 · 4200 · 5 = 63 000 J."}
+           ]}
+        ]}
+     ]},
+    {"key": "vl12.khi_li_tuong", "grade": 12, "order": 2, "title": "Khí lí tưởng",
+     "lessons": [
+       {"key": "vl12.mo_hinh_khi", "order": 1, "title": "Mô hình động học phân tử chất khí",
+        "description": "Các giả thuyết của mô hình động học phân tử chất khí; chuyển động Brown.", "status": "planned"},
+       {"key": "vl12.dinh_luat_boyle", "order": 2, "title": "Định luật Boyle",
+        "description": "Quá trình đẳng nhiệt: pV không đổi; đồ thị p – V.", "status": "planned"},
+       {"key": "vl12.dinh_luat_charles", "order": 3, "title": "Định luật Charles",
+        "description": "Quá trình đẳng áp: V/T không đổi; đồ thị V – T.", "status": "planned"},
+       {"key": "vl12.phuong_trinh_trang_thai", "order": 4, "title": "Phương trình trạng thái khí lí tưởng",
+        "description": "pV/T không đổi với một lượng khí; phương trình pV = nRT.", "status": "planned"},
+       {"key": "vl12.ap_suat_dong_hoc", "order": 5, "title": "Áp suất và động năng phân tử khí",
+        "description": "Giải thích áp suất chất khí và liên hệ động năng trung bình của phân tử với nhiệt độ.", "status": "planned"}
+     ]},
+    {"key": "vl12.tu_truong", "grade": 12, "order": 3, "title": "Từ trường",
+     "lessons": [
+       {"key": "vl12.tu_truong_duong_suc", "order": 1, "title": "Từ trường và đường sức từ",
+        "description": "Khái niệm từ trường, đường sức từ của nam châm và của dòng điện.", "status": "planned"},
+       {"key": "vl12.luc_tu_cam_ung_tu", "order": 2, "title": "Lực từ tác dụng lên dây dẫn mang dòng điện và cảm ứng từ",
+        "description": "Độ lớn, hướng của lực từ F = BIL sin θ và định nghĩa cảm ứng từ.", "status": "planned"},
+       {"key": "vl12.tu_thong_cam_ung", "order": 3, "title": "Từ thông và hiện tượng cảm ứng điện từ",
+        "description": "Từ thông, định luật Faraday, định luật Lenz và ứng dụng.", "status": "planned"},
+       {"key": "vl12.dong_dien_xoay_chieu", "order": 4, "title": "Dòng điện xoay chiều và máy phát điện",
+        "description": "Nguyên tắc tạo dòng điện xoay chiều, giá trị hiệu dụng và an toàn điện.", "status": "planned"},
+       {"key": "vl12.dien_tu_truong", "order": 5, "title": "Điện từ trường",
+        "description": "Điện trường xoáy, mối liên hệ giữa điện trường và từ trường biến thiên.", "status": "planned"}
+     ]},
+    {"key": "vl12.hat_nhan", "grade": 12, "order": 4, "title": "Vật lí hạt nhân và phóng xạ",
+     "lessons": [
+       {"key": "vl12.cau_truc_hat_nhan", "order": 1, "title": "Cấu trúc hạt nhân",
+        "description": "Thành phần hạt nhân, kí hiệu hạt nhân, đồng vị và kích thước hạt nhân.", "status": "planned"},
+       {"key": "vl12.nang_luong_lien_ket", "order": 2, "title": "Độ hụt khối và năng lượng liên kết",
+        "description": "Hệ thức E = mc², độ hụt khối, năng lượng liên kết riêng và độ bền vững của hạt nhân.", "status": "planned"},
+       {"key": "vl12.phan_hach_nhiet_hach", "order": 3, "title": "Phản ứng phân hạch và phản ứng nhiệt hạch",
+        "description": "Phân hạch, phản ứng dây chuyền, nhiệt hạch và năng lượng hạt nhân.", "status": "planned"},
+       {"key": "vl12.dinh_luat_phong_xa", "order": 4, "title": "Hiện tượng phóng xạ và định luật phóng xạ",
+        "description": "Các tia phóng xạ, chu kì bán rã, hằng số phóng xạ và độ phóng xạ.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Vật lí 12; mọi đáp số đã được tính lại."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Nêu được bản chất của các tia phóng xạ α, β⁻, β⁺, γ",
+          "Tính lượng chất còn lại sau một số chu kì bán rã",
+          "Vận dụng λ = ln2/T và H = λN"
+        ],
+        "summary": [
+          "Phóng xạ là quá trình phân rã tự phát của hạt nhân không bền, phát ra tia phóng xạ: α (hạt nhân ⁴₂He), β⁻ (electron), β⁺ (positron), γ (photon năng lượng cao).",
+          "Chu kì bán rã T: sau mỗi T, số hạt nhân chưa phân rã giảm một nửa: N = N₀ · 2^(−t/T).",
+          "Hằng số phóng xạ λ = ln2/T. Độ phóng xạ H = λN, đơn vị becquerel (1 Bq = 1 phân rã/s); H cũng giảm một nửa sau mỗi T.",
+          "Phóng xạ không phụ thuộc nhiệt độ, áp suất hay trạng thái hoá học của chất."
+        ],
+        "examples": [
+          {"title": "Sau ba chu kì", "lines": [
+            "Mẫu có 64 mg chất phóng xạ, T = 2 giờ.",
+            "Sau 6 giờ = 3T: còn 64 : 2³ = 8 mg; đã phân rã 56 mg."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "choice", "style": "quiz", "title": "Tính theo chu kì bán rã",
+           "tasks": [
+             {"key": "con_lai_24ngay", "question": "Một chất phóng xạ có chu kì bán rã 8 ngày. Sau 24 ngày, số hạt nhân còn lại bằng bao nhiêu phần số hạt nhân ban đầu?",
+              "options": [
+                {"text": "1/8", "ok": true, "why": "24 ngày = 3T, nên còn (1/2)³ = 1/8."},
+                {"text": "1/3", "ok": false, "why": "Số hạt nhân giảm theo lũy thừa của 1/2, không chia đều cho số chu kì."},
+                {"text": "1/6", "ok": false, "why": "Mỗi chu kì giảm một nửa: phải nhân 1/2 ba lần, không phải lấy 1/(2 · 3)."},
+                {"text": "1/4", "ok": false, "why": "1/4 là sau 2 chu kì (16 ngày)."}
+              ],
+              "explanation": "N = N₀ · 2^(−t/T) với t/T = 3."},
+             {"key": "khoi_luong_80g", "question": "Một mẫu ban đầu có 80 g chất phóng xạ với chu kì bán rã 5 năm. Sau 10 năm, khối lượng chất đó còn lại là bao nhiêu?",
+              "options": [
+                {"text": "20 g", "ok": true, "why": "10 năm = 2T: 80 → 40 → 20 g."},
+                {"text": "40 g", "ok": false, "why": "40 g là sau một chu kì (5 năm)."},
+                {"text": "60 g", "ok": false, "why": "60 g là khối lượng đã phân rã, không phải còn lại."},
+                {"text": "10 g", "ok": false, "why": "10 g là sau 3 chu kì (15 năm)."}
+              ],
+              "explanation": "Khối lượng chất phóng xạ còn lại cũng giảm một nửa sau mỗi chu kì bán rã."},
+             {"key": "da_phan_ra_3t", "question": "Sau thời gian bằng 3 chu kì bán rã, số hạt nhân đã bị phân rã chiếm bao nhiêu phần trăm số hạt nhân ban đầu?",
+              "options": [
+                {"text": "87,5 %", "ok": true, "why": "Còn lại 1/8 = 12,5 %, nên đã phân rã 1 − 1/8 = 7/8 = 87,5 %."},
+                {"text": "12,5 %", "ok": false, "why": "12,5 % là phần còn lại, câu hỏi hỏi phần đã phân rã."},
+                {"text": "75 %", "ok": false, "why": "75 % là phần đã phân rã sau 2 chu kì."},
+                {"text": "100 %", "ok": false, "why": "Chất phóng xạ không bao giờ phân rã hết sau một số chu kì hữu hạn."}
+              ],
+              "explanation": "Đã phân rã = N₀ − N = N₀(1 − 2^(−t/T))."},
+             {"key": "tim_chu_ki", "question": "Sau 12 giờ, số hạt nhân của một chất phóng xạ chỉ còn 1/16 số ban đầu. Chu kì bán rã của chất đó là bao nhiêu?",
+              "options": [
+                {"text": "3 giờ", "ok": true, "why": "1/16 = (1/2)⁴ nên 12 giờ = 4T, T = 3 giờ."},
+                {"text": "0,75 giờ", "ok": false, "why": "Đây là 12 : 16; số chu kì là số mũ 4 của 2⁴ = 16, không phải 16."},
+                {"text": "6 giờ", "ok": false, "why": "Với T = 6 giờ, sau 12 giờ chỉ còn 1/4."},
+                {"text": "4 giờ", "ok": false, "why": "4 là số chu kì; chu kì bán rã là 12 : 4 = 3 giờ."}
+              ],
+              "explanation": "Viết tỉ lệ còn lại dưới dạng (1/2)ⁿ để tìm số chu kì n, rồi T = t/n."},
+             {"key": "hang_so_px", "question": "Một chất phóng xạ có chu kì bán rã 10 s. Hằng số phóng xạ của nó xấp xỉ bằng bao nhiêu? (ln2 ≈ 0,693)",
+              "options": [
+                {"text": "0,0693 s⁻¹", "ok": true, "why": "λ = ln2/T = 0,693 : 10 ≈ 0,0693 s⁻¹."},
+                {"text": "0,1 s⁻¹", "ok": false, "why": "1/T thiếu thừa số ln2."},
+                {"text": "6,93 s⁻¹", "ok": false, "why": "Đã nhân ln2 với T thay vì chia."},
+                {"text": "14,4 s⁻¹", "ok": false, "why": "Đây là T/ln2, bị đảo ngược."}
+              ],
+              "explanation": "λ = ln2/T; chu kì bán rã càng ngắn thì hằng số phóng xạ càng lớn."},
+             {"key": "do_phong_xa", "question": "Một mẫu chứa 5·10⁹ hạt nhân phóng xạ, hằng số phóng xạ 2·10⁻⁴ s⁻¹. Độ phóng xạ của mẫu là bao nhiêu?",
+              "options": [
+                {"text": "10⁶ Bq", "ok": true, "why": "H = λN = 2·10⁻⁴ · 5·10⁹ = 10·10⁵ = 10⁶ Bq."},
+                {"text": "2,5·10¹³ Bq", "ok": false, "why": "Đây là N/λ; độ phóng xạ là tích λN."},
+                {"text": "10⁵ Bq", "ok": false, "why": "Sai lũy thừa: 2 · 5 = 10 nên kết quả là 10 · 10⁵ = 10⁶."}
+              ],
+              "explanation": "Độ phóng xạ H = λN là số phân rã mỗi giây."},
+             {"key": "h_sau_6h", "question": "Một mẫu phóng xạ có độ phóng xạ ban đầu 1600 Bq, chu kì bán rã 2 giờ. Sau 6 giờ, độ phóng xạ của mẫu là bao nhiêu?",
+              "options": [
+                {"text": "200 Bq", "ok": true, "why": "6 giờ = 3T: 1600 → 800 → 400 → 200 Bq."},
+                {"text": "533 Bq", "ok": false, "why": "Chia cho 3 là sai: mỗi chu kì độ phóng xạ giảm một nửa."},
+                {"text": "400 Bq", "ok": false, "why": "400 Bq là sau 2 chu kì (4 giờ)."}
+              ],
+              "explanation": "H = λN nên độ phóng xạ giảm cùng quy luật với số hạt nhân: H = H₀ · 2^(−t/T)."}
+           ]},
+          {"game": "match", "title": "Ghép tia và đại lượng",
+           "tasks": [
+             {"key": "ban_chat_tia", "prompt": "Ghép mỗi tia phóng xạ với bản chất của nó.",
+              "pairs": [["Tia α", "Hạt nhân helium ⁴₂He"], ["Tia β⁻", "Electron"], ["Tia β⁺", "Positron"], ["Tia γ", "Photon năng lượng cao"]],
+              "explanation": "α là hạt nhân helium mang điện +2e; β⁻ là electron, β⁺ là positron (cùng khối lượng electron, điện tích +e); γ là sóng điện từ, không mang điện."},
+             {"key": "don_vi_px", "prompt": "Ghép mỗi đại lượng với đơn vị của nó trong hệ SI.",
+              "pairs": [["Độ phóng xạ", "Bq"], ["Chu kì bán rã", "s"], ["Hằng số phóng xạ", "s⁻¹"]],
+              "explanation": "1 Bq là một phân rã mỗi giây; λ = ln2/T nên có đơn vị nghịch đảo của thời gian.",
+              "left_label": "Đại lượng", "right_label": "Đơn vị"},
+             {"key": "phan_con_lai", "prompt": "Ghép thời gian đã trôi qua với phần số hạt nhân còn lại.",
+              "pairs": [["t = T", "1/2"], ["t = 2T", "1/4"], ["t = 3T", "1/8"], ["t = 4T", "1/16"]],
+              "explanation": "Sau n chu kì bán rã, phần còn lại là (1/2)ⁿ."}
+           ]}
+        ]},
+       {"key": "vl12.an_toan_phong_xa", "order": 5, "title": "Ứng dụng và an toàn phóng xạ",
+        "description": "Ứng dụng của phóng xạ trong y học, công nghiệp và các nguyên tắc an toàn phóng xạ.", "status": "planned"}
+     ]}
+  ]
+}

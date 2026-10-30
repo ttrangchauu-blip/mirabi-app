@@ -1,0 +1,1753 @@
+{
+ "subject": "history",
+ "version": 1,
+ "organization": "topic",
+ "source_note": "Theo yêu cầu cần đạt môn Lịch sử cấp THPT (CT GDPT 2018, sửa đổi theo Thông tư 13/2022 và 17/2025); tổ chức theo chủ đề, không theo mục lục bộ sách nào. Mốc thời gian, nhân vật là những dữ kiện đã được thừa nhận rộng rãi.",
+ "chapters": [
+  {
+   "key": "ls10.lich_su_su_hoc",
+   "grade": 10,
+   "order": 1,
+   "title": "Lịch sử và Sử học",
+   "lessons": [
+    {
+     "key": "ls10.lich_su_la_gi",
+     "order": 1,
+     "title": "Lịch sử và Sử học",
+     "description": "Đối tượng, chức năng, nhiệm vụ của Sử học.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls10.su_lieu",
+     "order": 2,
+     "title": "Hiện thực lịch sử và các nguồn sử liệu",
+     "description": "Đọc tư liệu để phân biệt hiện thực lịch sử với nhận thức lịch sử, sử liệu gốc với sử liệu phái sinh.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Phân biệt được hiện thực lịch sử và nhận thức lịch sử",
+      "Nhận biết các loại sử liệu: hiện vật, chữ viết, truyền miệng, hình ảnh",
+      "Phân biệt sử liệu gốc và sử liệu phái sinh; biết đối chiếu, thẩm định nguồn"
+     ],
+     "summary": [
+      "Hiện thực lịch sử là những gì đã diễn ra trong quá khứ, tồn tại khách quan; nhận thức lịch sử là hiểu biết của con người về quá khứ.",
+      "Sử liệu gồm: hiện vật, chữ viết, truyền miệng, hình ảnh (và tư liệu ghi âm, ghi hình).",
+      "Sử liệu gốc ra đời cùng thời, gắn trực tiếp với sự kiện; sử liệu phái sinh được biên soạn lại dựa trên nguồn khác.",
+      "Nhà sử học phải thu thập, phân loại, đối chiếu và thẩm định sử liệu để tìm ra sự thật lịch sử."
+     ],
+     "examples": [
+      {
+       "title": "Một sự kiện, nhiều nguồn",
+       "lines": [
+        "Bản gốc Tuyên ngôn Độc lập (1945): sử liệu gốc.",
+        "Một cuốn sách viết về năm 1945 do tác giả đời sau biên soạn: sử liệu phái sinh."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Đọc tư liệu",
+       "style": "reading",
+       "tasks": [
+        {
+         "key": "hien_vat",
+         "passage": "Năm 1893, ở một làng ven sông, người dân đào được một chiếc trống đồng lớn, mặt trống khắc hình ngôi sao nhiều cánh, chim bay, người giã gạo, thuyền đua. Chiếc trống được đưa về bảo tàng để nghiên cứu.",
+         "question": "Chiếc trống đồng trong đoạn tư liệu thuộc loại sử liệu nào?",
+         "options": [
+          {
+           "text": "Sử liệu hiện vật",
+           "ok": true,
+           "why": "Đúng. Trống đồng là vật thật do người xưa làm ra, còn lại đến nay."
+          },
+          {
+           "text": "Sử liệu chữ viết",
+           "ok": false,
+           "why": "Trên trống có hoa văn, hình khắc, nhưng không phải văn bản chữ viết."
+          },
+          {
+           "text": "Sử liệu truyền miệng",
+           "ok": false,
+           "why": "Truyền miệng là truyện kể, ca dao, được lưu truyền bằng lời."
+          }
+         ],
+         "explanation": "Hiện vật là dấu tích vật chất của quá khứ: công cụ, đồ dùng, công trình…"
+        },
+        {
+         "key": "phai_sinh",
+         "passage": "Bộ “Đại Việt sử kí toàn thư” được Ngô Sĩ Liên và các sử quan biên soạn vào thời Lê sơ (thế kỉ XV), dựa trên các bộ sử có trước. Trong đó có chép về chiến thắng Bạch Đằng năm 938.",
+         "question": "Đối với việc nghiên cứu chiến thắng Bạch Đằng năm 938, phần ghi chép này là loại sử liệu nào?",
+         "options": [
+          {
+           "text": "Sử liệu phái sinh",
+           "ok": true,
+           "why": "Đúng. Bộ sử được biên soạn hơn năm thế kỉ sau sự kiện, dựa vào các nguồn có trước."
+          },
+          {
+           "text": "Sử liệu gốc",
+           "ok": false,
+           "why": "Sử liệu gốc phải ra đời cùng thời với sự kiện năm 938."
+          },
+          {
+           "text": "Không phải sử liệu",
+           "ok": false,
+           "why": "Bộ sử là nguồn sử liệu chữ viết rất quý."
+          }
+         ],
+         "explanation": "Một tư liệu là gốc hay phái sinh phụ thuộc vào sự kiện được nghiên cứu."
+        },
+        {
+         "key": "su_lieu_goc",
+         "passage": "Ngày 2/9/1945, tại quảng trường Ba Đình, Chủ tịch Hồ Chí Minh đọc bản Tuyên ngôn Độc lập do chính Người soạn thảo. Bản viết tay và những bức ảnh chụp buổi lễ hôm đó vẫn được lưu giữ.",
+         "question": "Với việc nghiên cứu ngày 2/9/1945, bản Tuyên ngôn và những bức ảnh hôm đó là loại sử liệu nào?",
+         "options": [
+          {
+           "text": "Sử liệu gốc",
+           "ok": true,
+           "why": "Đúng. Chúng ra đời ngay trong sự kiện, do người trong cuộc tạo ra."
+          },
+          {
+           "text": "Sử liệu phái sinh",
+           "ok": false,
+           "why": "Sử liệu phái sinh được biên soạn lại về sau, dựa vào nguồn khác."
+          },
+          {
+           "text": "Sử liệu truyền miệng",
+           "ok": false,
+           "why": "Đây là văn bản và ảnh chụp, không phải lời kể truyền miệng."
+          }
+         ],
+         "explanation": "Sử liệu gốc có độ tin cậy cao vì gắn trực tiếp với sự kiện, nhưng vẫn cần thẩm định."
+        },
+        {
+         "key": "truyen_mieng",
+         "passage": "Truyền thuyết Thánh Gióng kể chuyện cậu bé lên ba bỗng lớn nhanh như thổi, cưỡi ngựa sắt đánh giặc Ân rồi bay về trời. Câu chuyện được ông bà kể lại cho con cháu qua nhiều đời.",
+         "question": "Khi dùng truyền thuyết này làm sử liệu, nhà sử học cần lưu ý điều gì?",
+         "options": [
+          {
+           "text": "Truyện có yếu tố hư cấu, cần đối chiếu với nguồn khác như khảo cổ học",
+           "ok": true,
+           "why": "Đúng. Truyền thuyết phản ánh ước mơ, tinh thần của người xưa nhưng không phải bản ghi chép chính xác."
+          },
+          {
+           "text": "Mọi chi tiết đều là sự thật đã xảy ra",
+           "ok": false,
+           "why": "Ngựa sắt bay về trời là chi tiết hư cấu, không thể coi là sự thật."
+          },
+          {
+           "text": "Truyền thuyết hoàn toàn không có giá trị lịch sử",
+           "ok": false,
+           "why": "Truyền thuyết vẫn phản ánh truyền thống đánh giặc giữ nước, có giá trị khi được phân tích đúng."
+          }
+         ],
+         "explanation": "Sử liệu truyền miệng có giá trị nhưng cần được phê phán, đối chiếu."
+        },
+        {
+         "key": "doi_chieu",
+         "passage": "Hai nguồn tư liệu ghi khác nhau về quân số của một đạo quân trong một trận đánh: nguồn thứ nhất ghi 10 vạn, nguồn thứ hai ghi 30 vạn. Cả hai đều được viết nhiều năm sau trận đánh.",
+         "question": "Nhà sử học nên làm gì trong trường hợp này?",
+         "options": [
+          {
+           "text": "Tìm thêm nguồn khác, xem xét tác giả và hoàn cảnh ra đời của mỗi nguồn để thẩm định",
+           "ok": true,
+           "why": "Đúng. Đối chiếu, phê phán sử liệu là nguyên tắc của Sử học."
+          },
+          {
+           "text": "Chọn con số lớn hơn vì nghe ấn tượng hơn",
+           "ok": false,
+           "why": "Sử học dựa trên bằng chứng, không chọn theo cảm tính."
+          },
+          {
+           "text": "Lấy trung bình cộng là 20 vạn",
+           "ok": false,
+           "why": "Trung bình cộng không làm cho con số đúng hơn; cần bằng chứng."
+          }
+         ],
+         "explanation": "Sử học tôn trọng sự thật khách quan: thu thập, đối chiếu và thẩm định nhiều nguồn."
+        },
+        {
+         "key": "hien_thuc",
+         "passage": "Chiến thắng Điện Biên Phủ đã diễn ra năm 1954. Từ đó đến nay có rất nhiều cuốn sách, bộ phim, bài nghiên cứu về chiến dịch này, mỗi tác phẩm có cách nhìn và đánh giá riêng.",
+         "question": "Nhận định nào đúng về hiện thực lịch sử và nhận thức lịch sử?",
+         "options": [
+          {
+           "text": "Chiến thắng năm 1954 là hiện thực lịch sử; các sách, phim, nghiên cứu là nhận thức lịch sử",
+           "ok": true,
+           "why": "Đúng. Hiện thực chỉ có một, còn nhận thức có thể khác nhau và được bổ sung dần."
+          },
+          {
+           "text": "Các cuốn sách là hiện thực lịch sử, còn trận đánh là nhận thức lịch sử",
+           "ok": false,
+           "why": "Ngược lại: trận đánh là cái đã xảy ra, sách là sự hiểu biết về nó."
+          },
+          {
+           "text": "Hiện thực lịch sử thay đổi mỗi khi có một cuốn sách mới",
+           "ok": false,
+           "why": "Hiện thực đã xảy ra thì không thay đổi; chỉ nhận thức của con người thay đổi."
+          }
+         ],
+         "explanation": "Hiện thực lịch sử là khách quan; nhận thức lịch sử có thể khác nhau và ngày càng gần sự thật hơn."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "ls10.vai_tro_su_hoc",
+     "order": 3,
+     "title": "Vai trò của Sử học",
+     "description": "Sử học với bảo tồn di sản, phát triển du lịch và các ngành nghề.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "ls10.van_minh_the_gioi",
+   "grade": 10,
+   "order": 2,
+   "title": "Một số nền văn minh thế giới thời kì cổ – trung đại",
+   "lessons": [
+    {
+     "key": "ls10.van_minh_ai_cap",
+     "order": 1,
+     "title": "Văn minh Ai Cập cổ đại",
+     "description": "Cơ sở hình thành và thành tựu tiêu biểu.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls10.van_minh_trung_hoa",
+     "order": 2,
+     "title": "Văn minh Trung Hoa cổ – trung đại",
+     "description": "Chữ viết, tư tưởng, khoa học, kĩ thuật.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls10.van_minh_an_do",
+     "order": 3,
+     "title": "Văn minh Ấn Độ cổ – trung đại",
+     "description": "Tôn giáo, chữ viết, toán học, kiến trúc.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls10.van_minh_hy_la",
+     "order": 4,
+     "title": "Văn minh Hy Lạp – La Mã cổ đại",
+     "description": "Dân chủ, triết học, khoa học, nghệ thuật.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls10.phuc_hung",
+     "order": 5,
+     "title": "Văn minh Tây Âu thời Phục hưng",
+     "description": "Tư tưởng nhân văn và những thành tựu tiêu biểu.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "ls10.cach_mang_cong_nghiep",
+   "grade": 10,
+   "order": 3,
+   "title": "Các cuộc cách mạng công nghiệp trong lịch sử thế giới",
+   "lessons": [
+    {
+     "key": "ls10.bon_cuoc_cmcn",
+     "order": 1,
+     "title": "Các cuộc cách mạng công nghiệp",
+     "description": "Thành tựu, thời gian và tác động của bốn cuộc cách mạng công nghiệp.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được thời gian và thành tựu tiêu biểu của bốn cuộc cách mạng công nghiệp",
+      "Sắp xếp được các phát minh theo thời gian",
+      "Nêu được tác động của cách mạng công nghiệp với đời sống"
+     ],
+     "summary": [
+      "Lần thứ nhất (nửa sau thế kỉ XVIII – nửa đầu thế kỉ XIX), bắt đầu ở Anh: máy móc, máy hơi nước, cơ giới hoá.",
+      "Lần thứ hai (nửa sau thế kỉ XIX – đầu thế kỉ XX): điện năng, động cơ đốt trong, dây chuyền sản xuất hàng loạt.",
+      "Lần thứ ba (nửa sau thế kỉ XX): máy tính, tự động hoá, Internet.",
+      "Lần thứ tư (đầu thế kỉ XXI): trí tuệ nhân tạo, Internet kết nối vạn vật, dữ liệu lớn, công nghệ sinh học."
+     ],
+     "examples": [
+      {
+       "title": "Từ hơi nước đến dữ liệu",
+       "lines": [
+        "Máy hơi nước → điện → máy tính → trí tuệ nhân tạo.",
+        "Mỗi cuộc cách mạng làm thay đổi cách sản xuất và cách sống."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Dòng thời gian phát minh",
+       "tasks": [
+        {
+         "key": "lan_1",
+         "prompt": "Xếp các phát minh của cách mạng công nghiệp lần thứ nhất theo thời gian.",
+         "items": [
+          "Thoi bay của Giôn Cay",
+          "Máy kéo sợi Gien-ni",
+          "Máy hơi nước của Giêm Oát",
+          "Tàu thuỷ chạy bằng hơi nước của Phơn-tơn",
+          "Đầu máy xe lửa của Xti-phen-xơn"
+         ],
+         "explanation": "Thoi bay (1733) → máy kéo sợi Gien-ni (1764) → máy hơi nước của Oát (thập niên 1760–1780) → tàu thuỷ của Phơn-tơn (1807) → đầu máy xe lửa của Xti-phen-xơn (1814).",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "lan_2",
+         "prompt": "Xếp các phát minh của cách mạng công nghiệp lần thứ hai theo thời gian.",
+         "items": [
+          "Điện thoại của Gra-ham Beo",
+          "Bóng đèn điện của Ê-đi-xơn",
+          "Chuyến bay đầu tiên của anh em Rai",
+          "Dây chuyền lắp ráp ô tô của Pho"
+         ],
+         "explanation": "Điện thoại (1876) → bóng đèn điện (1879) → máy bay của anh em Rai (1903) → dây chuyền lắp ráp ô tô (1913).",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "lan_3_4",
+         "prompt": "Xếp các thành tựu khoa học – công nghệ của thế kỉ XX – XXI theo thời gian.",
+         "items": [
+          "Máy tính điện tử ENIAC ra đời",
+          "Con người đặt chân lên Mặt Trăng",
+          "Mạng toàn cầu World Wide Web ra đời",
+          "Hoàn thành giải mã bộ gen người"
+         ],
+         "explanation": "ENIAC (1946) → lên Mặt Trăng (1969) → World Wide Web (1989–1991) → giải mã bộ gen người (2003).",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "cac_cuoc",
+         "prompt": "Xếp đặc trưng của các cuộc cách mạng công nghiệp theo thời gian.",
+         "items": [
+          "Máy hơi nước thay thế sức người, sức nước",
+          "Điện năng và dây chuyền sản xuất hàng loạt",
+          "Máy tính, tự động hoá và Internet",
+          "Trí tuệ nhân tạo, kết nối vạn vật, dữ liệu lớn"
+         ],
+         "explanation": "Cơ giới hoá (lần 1) → điện khí hoá (lần 2) → tự động hoá, số hoá (lần 3) → kết nối thông minh (lần 4).",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        }
+       ]
+      },
+      {
+       "game": "match",
+       "title": "Ghép thành tựu",
+       "tasks": [
+        {
+         "key": "nha_phat_minh",
+         "prompt": "Ghép mỗi nhà phát minh với phát minh.",
+         "pairs": [
+          [
+           "Giêm Oát",
+           "Cải tiến máy hơi nước"
+          ],
+          [
+           "Gioóc-giơ Xti-phen-xơn",
+           "Đầu máy xe lửa chạy bằng hơi nước"
+          ],
+          [
+           "Tô-mát Ê-đi-xơn",
+           "Bóng đèn điện dây tóc dùng rộng rãi"
+          ],
+          [
+           "Hen-ri Pho",
+           "Dây chuyền lắp ráp ô tô"
+          ]
+         ],
+         "explanation": "Oát và Xti-phen-xơn thuộc lần thứ nhất; Ê-đi-xơn và Pho thuộc lần thứ hai.",
+         "left_label": "Nhà phát minh",
+         "right_label": "Phát minh"
+        },
+        {
+         "key": "thoi_gian",
+         "prompt": "Ghép mỗi khoảng thời gian với cuộc cách mạng công nghiệp.",
+         "pairs": [
+          [
+           "Nửa sau thế kỉ XVIII – nửa đầu thế kỉ XIX",
+           "Lần thứ nhất"
+          ],
+          [
+           "Nửa sau thế kỉ XIX – đầu thế kỉ XX",
+           "Lần thứ hai"
+          ],
+          [
+           "Nửa sau thế kỉ XX",
+           "Lần thứ ba"
+          ],
+          [
+           "Đầu thế kỉ XXI",
+           "Lần thứ tư"
+          ]
+         ],
+         "explanation": "Các cuộc cách mạng công nghiệp diễn ra ngày càng nhanh, cách nhau ngày càng ngắn.",
+         "left_label": "Thời gian",
+         "right_label": "Cuộc cách mạng"
+        },
+        {
+         "key": "tac_dong",
+         "prompt": "Ghép mỗi cuộc cách mạng công nghiệp với một tác động tiêu biểu.",
+         "pairs": [
+          [
+           "Lần thứ nhất",
+           "Nhà máy, đô thị công nghiệp ra đời; giai cấp công nhân hình thành"
+          ],
+          [
+           "Lần thứ hai",
+           "Sản xuất hàng loạt, các công ty độc quyền lớn xuất hiện"
+          ],
+          [
+           "Lần thứ ba",
+           "Toàn cầu hoá, kinh tế tri thức phát triển"
+          ],
+          [
+           "Lần thứ tư",
+           "Nhiều công việc được tự động hoá thông minh, đòi hỏi kĩ năng số"
+          ]
+         ],
+         "explanation": "Cách mạng công nghiệp thay đổi sâu sắc kinh tế, xã hội và văn hoá.",
+         "left_label": "Cuộc cách mạng",
+         "right_label": "Tác động"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "ls10.van_minh_dna",
+   "grade": 10,
+   "order": 4,
+   "title": "Văn minh Đông Nam Á",
+   "lessons": [
+    {
+     "key": "ls10.co_so_dna",
+     "order": 1,
+     "title": "Cơ sở hình thành văn minh Đông Nam Á",
+     "description": "Điều kiện tự nhiên, dân cư và giao lưu văn hoá.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls10.thanh_tuu_dna",
+     "order": 2,
+     "title": "Hành trình phát triển và thành tựu của văn minh Đông Nam Á",
+     "description": "Tôn giáo, chữ viết, kiến trúc, điêu khắc.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "ls10.van_minh_viet_nam",
+   "grade": 10,
+   "order": 5,
+   "title": "Một số nền văn minh trên đất nước Việt Nam",
+   "lessons": [
+    {
+     "key": "ls10.van_lang_au_lac",
+     "order": 1,
+     "title": "Văn minh Văn Lang – Âu Lạc",
+     "description": "Cơ sở hình thành và thành tựu của văn minh sông Hồng.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls10.champa_phu_nam",
+     "order": 2,
+     "title": "Văn minh Champa và văn minh Phù Nam",
+     "description": "Những nền văn minh cổ ở miền Trung và vùng đất phía Nam.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls10.van_minh_dai_viet",
+     "order": 3,
+     "title": "Văn minh Đại Việt",
+     "description": "Đọc tư liệu về giáo dục, luật pháp, chữ viết, sử học và di sản của văn minh Đại Việt.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được thành tựu tiêu biểu của văn minh Đại Việt",
+      "Phân tích được ý nghĩa của các thành tựu",
+      "Khai thác thông tin từ đoạn tư liệu"
+     ],
+     "summary": [
+      "Văn minh Đại Việt phát triển từ thế kỉ X đến thế kỉ XIX, qua các triều Ngô, Đinh, Tiền Lê, Lý, Trần, Hồ, Lê sơ, Mạc, Lê trung hưng, Tây Sơn, Nguyễn.",
+      "Giáo dục: năm 1070 xây Văn Miếu, năm 1075 mở khoa thi đầu tiên, năm 1076 lập Quốc Tử Giám.",
+      "Luật pháp: Quốc triều hình luật thời Lê sơ có nhiều điều bảo vệ quyền lợi của phụ nữ.",
+      "Chữ Nôm được sáng tạo trên cơ sở chữ Hán để ghi tiếng Việt; Đại Việt sử kí toàn thư do Ngô Sĩ Liên biên soạn thời Lê sơ.",
+      "Di sản: Khu trung tâm Hoàng thành Thăng Long (2010) và Thành nhà Hồ (2011) được UNESCO ghi danh là di sản văn hoá thế giới."
+     ],
+     "examples": [
+      {
+       "title": "Văn minh Đại Việt trong đời sống hôm nay",
+       "lines": [
+        "Truyện Kiều của Nguyễn Du được viết bằng chữ Nôm.",
+        "Bia tiến sĩ ở Văn Miếu nhắc truyền thống hiếu học."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Đọc tư liệu: văn minh Đại Việt",
+       "style": "reading",
+       "tasks": [
+        {
+         "key": "khoa_cu",
+         "passage": "Năm 1075, nhà Lý mở khoa thi đầu tiên để chọn người tài ra làm quan. Từ đó, thi cử ngày càng quy củ. Thời Lê sơ, nhà nước dựng bia ghi tên người đỗ tiến sĩ ở Văn Miếu.",
+         "question": "Việc mở khoa thi và dựng bia tiến sĩ cho thấy điều gì?",
+         "options": [
+          {
+           "text": "Nhà nước coi trọng giáo dục, tuyển chọn và tôn vinh người tài",
+           "ok": true,
+           "why": "Đúng. Thi cử chọn người tài, bia đá tôn vinh và khuyến khích việc học."
+          },
+          {
+           "text": "Chỉ con em quý tộc mới được làm quan",
+           "ok": false,
+           "why": "Khoa cử mở đường cho người học giỏi, kể cả con nhà thường dân, làm quan."
+          },
+          {
+           "text": "Giáo dục chỉ để học nghề thủ công",
+           "ok": false,
+           "why": "Đoạn tư liệu nói về thi cử để chọn quan lại, không phải học nghề."
+          }
+         ],
+         "explanation": "Giáo dục, khoa cử là một thành tựu nổi bật của văn minh Đại Việt."
+        },
+        {
+         "key": "hong_duc",
+         "passage": "Quốc triều hình luật thời Lê sơ quy định: con gái cũng được chia tài sản thừa kế; người chồng bỏ lửng vợ một thời gian mà không đi lại thì người vợ được quyền li hôn.",
+         "question": "Những quy định trên thể hiện điểm tiến bộ nào?",
+         "options": [
+          {
+           "text": "Bảo vệ một số quyền lợi của người phụ nữ",
+           "ok": true,
+           "why": "Đúng. Đây là nét tiến bộ nổi bật của bộ luật."
+          },
+          {
+           "text": "Chỉ bảo vệ quyền lợi của nhà vua",
+           "ok": false,
+           "why": "Bộ luật bảo vệ vua và triều đình, nhưng các điều được trích lại nói về quyền của phụ nữ."
+          },
+          {
+           "text": "Cấm phụ nữ được hưởng tài sản",
+           "ok": false,
+           "why": "Ngược lại, con gái được chia tài sản thừa kế."
+          }
+         ],
+         "explanation": "Quốc triều hình luật là bộ luật tiêu biểu của thời Lê sơ, có nhiều điểm tiến bộ."
+        },
+        {
+         "key": "chu_nom",
+         "passage": "Từ khoảng thế kỉ XIII, chữ Nôm được dùng nhiều hơn trong sáng tác văn học. Đây là chữ do người Việt sáng tạo trên cơ sở chữ Hán để ghi lại tiếng Việt. Nhiều tác phẩm lớn như “Quốc âm thi tập” của Nguyễn Trãi, “Truyện Kiều” của Nguyễn Du được viết bằng chữ Nôm.",
+         "question": "Sự ra đời và phát triển của chữ Nôm có ý nghĩa gì?",
+         "options": [
+          {
+           "text": "Thể hiện ý thức tự chủ, giúp ghi lại và phát triển tiếng Việt",
+           "ok": true,
+           "why": "Đúng. Chữ Nôm cho phép viết bằng tiếng nói của dân tộc."
+          },
+          {
+           "text": "Thay thế hoàn toàn chữ Hán trong mọi văn bản nhà nước",
+           "ok": false,
+           "why": "Chữ Hán vẫn là chữ chính trong văn bản hành chính, thi cử phần lớn thời kì này."
+          },
+          {
+           "text": "Là chữ viết dùng bảng chữ cái La-tinh",
+           "ok": false,
+           "why": "Chữ dùng bảng chữ cái La-tinh là chữ quốc ngữ, ra đời muộn hơn."
+          }
+         ],
+         "explanation": "Chữ Nôm là sáng tạo văn hoá quan trọng, góp phần phát triển văn học dân tộc."
+        },
+        {
+         "key": "su_hoc",
+         "passage": "Thời Lê sơ, sử quan Ngô Sĩ Liên dựa vào các bộ sử có trước như Đại Việt sử kí của Lê Văn Hưu (thời Trần) để biên soạn bộ Đại Việt sử kí toàn thư, chép lịch sử từ thời dựng nước.",
+         "question": "Bộ Đại Việt sử kí toàn thư được biên soạn dựa trên cơ sở nào?",
+         "options": [
+          {
+           "text": "Kế thừa các bộ sử có trước, như Đại Việt sử kí của Lê Văn Hưu",
+           "ok": true,
+           "why": "Đúng. Đó là điều đoạn tư liệu cho biết."
+          },
+          {
+           "text": "Chỉ dựa vào truyện kể dân gian",
+           "ok": false,
+           "why": "Đoạn tư liệu nói Ngô Sĩ Liên dựa vào các bộ sử có trước."
+          },
+          {
+           "text": "Dịch từ một cuốn sử của nước ngoài",
+           "ok": false,
+           "why": "Đây là bộ quốc sử do sử quan Đại Việt biên soạn."
+          }
+         ],
+         "explanation": "Sử học thời Đại Việt phát triển, có nhiều bộ sử lớn kế thừa nhau."
+        },
+        {
+         "key": "di_san",
+         "passage": "Năm 2010, Khu trung tâm Hoàng thành Thăng Long được UNESCO ghi danh là di sản văn hoá thế giới. Năm 2011, Thành nhà Hồ – toà thành đá được xây dựng cuối thế kỉ XIV – cũng được ghi danh.",
+         "question": "Hai di sản này phản ánh thành tựu nào của văn minh Đại Việt?",
+         "options": [
+          {
+           "text": "Kiến trúc, xây dựng kinh thành và thành luỹ",
+           "ok": true,
+           "why": "Đúng. Đó là những công trình kiến trúc quy mô lớn."
+          },
+          {
+           "text": "Chữ viết và văn học",
+           "ok": false,
+           "why": "Hai di sản trong đoạn tư liệu là công trình kiến trúc, không phải tác phẩm văn học."
+          },
+          {
+           "text": "Luật pháp và tổ chức thi cử",
+           "ok": false,
+           "why": "Đoạn tư liệu nói về kinh thành và toà thành đá."
+          }
+         ],
+         "explanation": "Kiến trúc kinh thành, thành luỹ là thành tựu nổi bật được thế giới ghi nhận."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "ls10.cong_dong_dan_toc",
+   "grade": 10,
+   "order": 6,
+   "title": "Cộng đồng các dân tộc Việt Nam",
+   "lessons": [
+    {
+     "key": "ls10.cac_dan_toc",
+     "order": 1,
+     "title": "Các dân tộc trên đất nước Việt Nam",
+     "description": "Thành phần dân tộc, đời sống vật chất và tinh thần.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls10.dai_doan_ket",
+     "order": 2,
+     "title": "Khối đại đoàn kết dân tộc",
+     "description": "Truyền thống đoàn kết trong lịch sử dựng nước và giữ nước.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "ls11.cm_tu_san",
+   "grade": 11,
+   "order": 1,
+   "title": "Cách mạng tư sản và sự phát triển của chủ nghĩa tư bản",
+   "lessons": [
+    {
+     "key": "ls11.van_de_chung_cmts",
+     "order": 1,
+     "title": "Một số vấn đề chung về cách mạng tư sản",
+     "description": "Tiền đề, mục tiêu, nhiệm vụ, lực lượng và kết quả.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls11.phat_trien_cntb",
+     "order": 2,
+     "title": "Sự xác lập và phát triển của chủ nghĩa tư bản",
+     "description": "Từ chủ nghĩa tư bản tự do cạnh tranh đến chủ nghĩa tư bản hiện đại.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "ls11.cnxh",
+   "grade": 11,
+   "order": 2,
+   "title": "Chủ nghĩa xã hội từ năm 1917 đến nay",
+   "lessons": [
+    {
+     "key": "ls11.cm_thang_muoi",
+     "order": 1,
+     "title": "Cách mạng tháng Mười Nga và công cuộc xây dựng chủ nghĩa xã hội ở Liên Xô",
+     "description": "Thắng lợi năm 1917 và sự thành lập Liên Xô.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls11.cnxh_sau_1945",
+     "order": 2,
+     "title": "Chủ nghĩa xã hội từ sau năm 1945 đến nay",
+     "description": "Sự mở rộng, khủng hoảng và cải cách của chủ nghĩa xã hội.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "ls11.dna_doc_lap",
+   "grade": 11,
+   "order": 3,
+   "title": "Quá trình giành độc lập dân tộc của các quốc gia Đông Nam Á",
+   "lessons": [
+    {
+     "key": "ls11.thuc_dan_dna",
+     "order": 1,
+     "title": "Chủ nghĩa thực dân ở Đông Nam Á",
+     "description": "Quá trình xâm lược và cai trị của các nước thực dân.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls11.doc_lap_dna",
+     "order": 2,
+     "title": "Hành trình đi đến độc lập dân tộc ở Đông Nam Á",
+     "description": "Các phong trào đấu tranh và thắng lợi giành độc lập.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "ls11.chien_tranh_bao_ve",
+   "grade": 11,
+   "order": 4,
+   "title": "Chiến tranh bảo vệ Tổ quốc và giải phóng dân tộc (trước năm 1945)",
+   "lessons": [
+    {
+     "key": "ls11.vi_tri_dia_chien_luoc",
+     "order": 1,
+     "title": "Vị trí địa chiến lược và các cuộc kháng chiến của Việt Nam",
+     "description": "Vì sao nước ta thường xuyên phải chống ngoại xâm.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls11.khang_chien_tieu_bieu",
+     "order": 2,
+     "title": "Các cuộc kháng chiến và khởi nghĩa tiêu biểu trước năm 1858",
+     "description": "Dòng thời gian, người lãnh đạo và nghệ thuật quân sự của các cuộc kháng chiến bảo vệ Tổ quốc.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Sắp xếp được các cuộc kháng chiến, khởi nghĩa tiêu biểu theo thời gian",
+      "Nêu được người lãnh đạo và trận quyết chiến của mỗi cuộc",
+      "Rút ra nét độc đáo của nghệ thuật quân sự Việt Nam"
+     ],
+     "summary": [
+      "Kháng chiến tiêu biểu: chống Nam Hán (938), chống Tống thời Tiền Lê (981) và thời Lý (1075–1077), ba lần chống Mông – Nguyên (1258, 1285, 1288), chống quân Xiêm (1785), chống quân Thanh (1789).",
+      "Khởi nghĩa, chiến tranh giải phóng tiêu biểu: Hai Bà Trưng (40), Lý Bí (542), Lam Sơn (1418–1427), phong trào Tây Sơn (từ 1771).",
+      "Nghệ thuật quân sự: lấy ít địch nhiều, lấy yếu chống mạnh; tiên phát chế nhân; vườn không nhà trống; lợi dụng địa hình, thuỷ triều; đánh nhanh thắng nhanh.",
+      "Nguyên nhân thắng lợi: tinh thần yêu nước, khối đoàn kết toàn dân và tài thao lược của người lãnh đạo."
+     ],
+     "examples": [
+      {
+       "title": "Hai lần Bạch Đằng",
+       "lines": [
+        "Năm 938, Ngô Quyền dùng trận địa cọc đánh quân Nam Hán.",
+        "Năm 1288, Trần Quốc Tuấn dùng lại cách đánh ấy, tiêu diệt đạo thuỷ quân Nguyên."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Dòng thời gian bảo vệ Tổ quốc",
+       "tasks": [
+        {
+         "key": "khang_chien",
+         "prompt": "Xếp các cuộc kháng chiến theo thời gian, từ sớm đến muộn.",
+         "items": [
+          "Kháng chiến chống Nam Hán của Ngô Quyền",
+          "Kháng chiến chống Tống thời Tiền Lê",
+          "Kháng chiến chống Tống thời Lý",
+          "Ba lần kháng chiến chống Mông – Nguyên",
+          "Kháng chiến chống quân Xiêm",
+          "Kháng chiến chống quân Thanh"
+         ],
+         "explanation": "938 → 981 → 1075–1077 → 1258–1288 → 1785 → 1789.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "khoi_nghia",
+         "prompt": "Xếp các cuộc khởi nghĩa, chiến tranh giải phóng theo thời gian.",
+         "items": [
+          "Khởi nghĩa Hai Bà Trưng",
+          "Khởi nghĩa Lý Bí",
+          "Khởi nghĩa Lam Sơn",
+          "Phong trào Tây Sơn"
+         ],
+         "explanation": "Năm 40 → năm 542 → 1418–1427 → từ năm 1771.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "chong_tong",
+         "prompt": "Xếp diễn biến cuộc kháng chiến chống Tống thời Lý theo thứ tự.",
+         "items": [
+          "Lý Thường Kiệt chủ động tấn công sang đất Tống",
+          "Rút về nước, xây dựng phòng tuyến sông Như Nguyệt",
+          "Quân Tống tấn công phòng tuyến nhưng thất bại",
+          "Ta chủ động đề nghị giảng hoà, quân Tống rút về nước"
+         ],
+         "explanation": "1075 tiến công phòng vệ (“tiên phát chế nhân”); 1076 xây phòng tuyến; 1077 đánh bại quân Tống ở Như Nguyệt rồi chủ động giảng hoà.",
+         "first_label": "Đầu tiên",
+         "last_label": "Cuối cùng"
+        },
+        {
+         "key": "mong_nguyen",
+         "prompt": "Xếp các sự kiện trong ba lần kháng chiến chống Mông – Nguyên theo thời gian.",
+         "items": [
+          "Chiến thắng Đông Bộ Đầu",
+          "Hội nghị Diên Hồng",
+          "Chiến thắng Chương Dương, Hàm Tử",
+          "Chiến thắng trên sông Bạch Đằng"
+         ],
+         "explanation": "1258 Đông Bộ Đầu (lần thứ nhất); cuối 1284 Hội nghị Diên Hồng; 1285 Chương Dương, Hàm Tử (lần thứ hai); 1288 Bạch Đằng (lần thứ ba).",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        }
+       ]
+      },
+      {
+       "game": "match",
+       "title": "Người lãnh đạo và trận quyết chiến",
+       "tasks": [
+        {
+         "key": "lanh_dao",
+         "prompt": "Ghép mỗi cuộc kháng chiến, khởi nghĩa với người lãnh đạo.",
+         "pairs": [
+          [
+           "Kháng chiến chống Tống năm 981",
+           "Lê Hoàn"
+          ],
+          [
+           "Kháng chiến chống Tống 1075–1077",
+           "Lý Thường Kiệt"
+          ],
+          [
+           "Kháng chiến chống Mông – Nguyên",
+           "Trần Quốc Tuấn"
+          ],
+          [
+           "Khởi nghĩa Lam Sơn",
+           "Lê Lợi"
+          ],
+          [
+           "Kháng chiến chống quân Xiêm 1785",
+           "Nguyễn Huệ"
+          ]
+         ],
+         "explanation": "Mỗi cuộc kháng chiến gắn với một nhà lãnh đạo kiệt xuất.",
+         "left_label": "Cuộc kháng chiến",
+         "right_label": "Người lãnh đạo"
+        },
+        {
+         "key": "tran_danh",
+         "prompt": "Ghép mỗi trận quyết chiến với kẻ thù bị đánh bại.",
+         "pairs": [
+          [
+           "Rạch Gầm – Xoài Mút",
+           "Quân Xiêm"
+          ],
+          [
+           "Ngọc Hồi – Đống Đa",
+           "Quân Thanh"
+          ],
+          [
+           "Chi Lăng – Xương Giang",
+           "Quân Minh"
+          ],
+          [
+           "Phòng tuyến Như Nguyệt",
+           "Quân Tống"
+          ],
+          [
+           "Bạch Đằng năm 1288",
+           "Quân Nguyên"
+          ]
+         ],
+         "explanation": "1785 Xiêm; 1789 Thanh; 1427 Minh; 1077 Tống; 1288 Nguyên.",
+         "left_label": "Trận đánh",
+         "right_label": "Kẻ thù"
+        },
+        {
+         "key": "nghe_thuat",
+         "prompt": "Ghép mỗi cách đánh với cuộc kháng chiến tiêu biểu.",
+         "pairs": [
+          [
+           "Đóng cọc ở lòng sông, lợi dụng thuỷ triều",
+           "Ngô Quyền đánh quân Nam Hán (938)"
+          ],
+          [
+           "Tiên phát chế nhân: đánh trước để chặn thế giặc",
+           "Lý Thường Kiệt đánh Tống (1075)"
+          ],
+          [
+           "Vườn không nhà trống, rút khỏi kinh thành để bảo toàn lực lượng",
+           "Nhà Trần chống Mông – Nguyên"
+          ],
+          [
+           "Hành quân thần tốc, bất ngờ tấn công dịp Tết",
+           "Quang Trung đại phá quân Thanh (1789)"
+          ]
+         ],
+         "explanation": "Nghệ thuật quân sự Việt Nam linh hoạt, sáng tạo, biết dựa vào sức mạnh toàn dân.",
+         "left_label": "Cách đánh",
+         "right_label": "Cuộc kháng chiến"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "ls11.khang_chien_that_bai",
+     "order": 3,
+     "title": "Một số cuộc kháng chiến không thành công",
+     "description": "Kháng chiến chống Minh thời Hồ và chống Pháp cuối thế kỉ XIX.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls11.bai_hoc_lich_su",
+     "order": 4,
+     "title": "Bài học lịch sử từ các cuộc kháng chiến",
+     "description": "Đoàn kết, kết hợp sức mạnh dân tộc và nghệ thuật quân sự.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "ls11.cai_cach",
+   "grade": 11,
+   "order": 5,
+   "title": "Một số cuộc cải cách lớn trong lịch sử Việt Nam (trước năm 1858)",
+   "lessons": [
+    {
+     "key": "ls11.cai_cach_ho",
+     "order": 1,
+     "title": "Cuộc cải cách của Hồ Quý Ly và triều Hồ",
+     "description": "Bối cảnh, nội dung và kết quả.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls11.cai_cach_le_thanh_tong",
+     "order": 2,
+     "title": "Cuộc cải cách của Lê Thánh Tông",
+     "description": "Bối cảnh, nội dung và kết quả.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls11.cai_cach_minh_mang",
+     "order": 3,
+     "title": "Cuộc cải cách của Minh Mạng",
+     "description": "Bối cảnh, nội dung và kết quả.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls11.cai_cach_lon",
+     "order": 4,
+     "title": "Cải cách của Hồ Quý Ly, Lê Thánh Tông và Minh Mạng",
+     "description": "Ghép nội dung, thời gian và kết quả của ba cuộc cải cách lớn trước năm 1858.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được bối cảnh và nội dung chính của ba cuộc cải cách",
+      "Đánh giá được kết quả, ý nghĩa của mỗi cuộc cải cách"
+     ],
+     "summary": [
+      "Hồ Quý Ly (cuối thế kỉ XIV – đầu thế kỉ XV): phát hành tiền giấy, ban hành phép hạn điền, hạn nô, coi trọng chữ Nôm.",
+      "Lê Thánh Tông (nửa sau thế kỉ XV): cải cách hành chính, vua trực tiếp nắm quyền, đặt sáu bộ; ban hành Quốc triều hình luật.",
+      "Minh Mạng (những năm 1831–1832): cải cách hành chính, chia cả nước thành 30 tỉnh và phủ Thừa Thiên; lập Cơ mật viện.",
+      "Cải cách Lê Thánh Tông đưa Đại Việt phát triển cực thịnh; cải cách Minh Mạng thống nhất hành chính cả nước; cải cách Hồ Quý Ly có nhiều điểm tiến bộ nhưng chưa thành công trọn vẹn."
+     ],
+     "examples": [
+      {
+       "title": "Ba câu hỏi cho mỗi cuộc cải cách",
+       "lines": [
+        "Vì sao phải cải cách? (bối cảnh)",
+        "Cải cách những gì? (nội dung)",
+        "Kết quả và ý nghĩa?"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Ba cuộc cải cách",
+       "tasks": [
+        {
+         "key": "noi_dung_1",
+         "prompt": "Ghép mỗi chính sách với người cải cách.",
+         "pairs": [
+          [
+           "Phát hành tiền giấy",
+           "Hồ Quý Ly"
+          ],
+          [
+           "Ban hành Quốc triều hình luật",
+           "Lê Thánh Tông"
+          ],
+          [
+           "Chia cả nước thành 30 tỉnh và phủ Thừa Thiên",
+           "Minh Mạng"
+          ]
+         ],
+         "explanation": "Tiền giấy “Thông bảo hội sao” của Hồ Quý Ly; Quốc triều hình luật thời Lê Thánh Tông; cải cách hành chính 1831–1832 của Minh Mạng.",
+         "left_label": "Chính sách",
+         "right_label": "Người cải cách"
+        },
+        {
+         "key": "noi_dung_2",
+         "prompt": "Ghép thêm những chính sách khác với người cải cách.",
+         "pairs": [
+          [
+           "Ban hành phép hạn điền, hạn nô",
+           "Hồ Quý Ly"
+          ],
+          [
+           "Bãi bỏ chức tướng quốc, đặt sáu bộ do vua trực tiếp điều hành",
+           "Lê Thánh Tông"
+          ],
+          [
+           "Lập Cơ mật viện để bàn việc quân quốc trọng yếu",
+           "Minh Mạng"
+          ]
+         ],
+         "explanation": "Hạn điền, hạn nô nhằm hạn chế thế lực quý tộc; Lê Thánh Tông tập trung quyền vào tay vua; Cơ mật viện giúp vua Minh Mạng bàn việc lớn.",
+         "left_label": "Chính sách",
+         "right_label": "Người cải cách"
+        },
+        {
+         "key": "thoi_gian",
+         "prompt": "Ghép mỗi khoảng thời gian với cuộc cải cách.",
+         "pairs": [
+          [
+           "Cuối thế kỉ XIV – đầu thế kỉ XV",
+           "Cải cách của Hồ Quý Ly"
+          ],
+          [
+           "Nửa sau thế kỉ XV",
+           "Cải cách của Lê Thánh Tông"
+          ],
+          [
+           "Những năm 1831–1832",
+           "Cải cách của Minh Mạng"
+          ]
+         ],
+         "explanation": "Ba cuộc cải cách diễn ra trong ba bối cảnh khác nhau của lịch sử dân tộc.",
+         "left_label": "Thời gian",
+         "right_label": "Cuộc cải cách"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "ls11.bien_dong",
+   "grade": 11,
+   "order": 6,
+   "title": "Bảo vệ chủ quyền, các quyền và lợi ích hợp pháp của Việt Nam ở Biển Đông",
+   "lessons": [
+    {
+     "key": "ls11.vi_tri_bien_dong",
+     "order": 1,
+     "title": "Vị trí và tầm quan trọng của Biển Đông",
+     "description": "Vị trí chiến lược, tài nguyên và tuyến hàng hải quốc tế.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls11.chu_quyen_hs_ts",
+     "order": 2,
+     "title": "Việt Nam xác lập và thực thi chủ quyền với Hoàng Sa và Trường Sa",
+     "description": "Quá trình xác lập chủ quyền qua các thời kì.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls11.bao_ve_chu_quyen",
+     "order": 3,
+     "title": "Việt Nam bảo vệ chủ quyền và lợi ích hợp pháp ở Biển Đông",
+     "description": "Chủ trương giải quyết tranh chấp bằng biện pháp hoà bình theo luật pháp quốc tế.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "ls12.the_gioi_chien_tranh_lanh",
+   "grade": 12,
+   "order": 1,
+   "title": "Thế giới trong và sau Chiến tranh lạnh",
+   "lessons": [
+    {
+     "key": "ls12.lien_hop_quoc",
+     "order": 1,
+     "title": "Liên hợp quốc",
+     "description": "Sự ra đời, mục đích, nguyên tắc, cơ cấu của Liên hợp quốc và vai trò của Việt Nam.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Trình bày được sự ra đời và mục đích của Liên hợp quốc",
+      "Nêu được nguyên tắc hoạt động và vai trò của Hội đồng Bảo an",
+      "Nêu được những đóng góp của Việt Nam tại Liên hợp quốc"
+     ],
+     "summary": [
+      "Hội nghị I-an-ta (2/1945) thống nhất thành lập Liên hợp quốc; Hiến chương kí tại Xan Phran-xi-xcô (6/1945), có hiệu lực ngày 24/10/1945.",
+      "Mục đích: duy trì hoà bình, an ninh quốc tế; phát triển quan hệ hữu nghị và hợp tác giữa các nước.",
+      "Hội đồng Bảo an có 5 uỷ viên thường trực: Mỹ, Anh, Pháp, Nga (trước đây là Liên Xô), Trung Quốc; quyết định quan trọng cần sự nhất trí của 5 nước này.",
+      "Việt Nam gia nhập Liên hợp quốc ngày 20/9/1977; là uỷ viên không thường trực Hội đồng Bảo an các nhiệm kì 2008–2009 và 2020–2021."
+     ],
+     "examples": [
+      {
+       "title": "Ngày Liên hợp quốc",
+       "lines": [
+        "Ngày 24/10 hằng năm là Ngày Liên hợp quốc — ngày Hiến chương có hiệu lực năm 1945."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Hiểu về Liên hợp quốc",
+       "style": "quiz",
+       "tasks": [
+        {
+         "key": "thanh_lap",
+         "question": "Liên hợp quốc chính thức ra đời vào ngày nào?",
+         "options": [
+          {
+           "text": "24/10/1945",
+           "ok": true,
+           "why": "Đúng. Đó là ngày Hiến chương Liên hợp quốc có hiệu lực."
+          },
+          {
+           "text": "26/6/1945",
+           "ok": false,
+           "why": "Đây là ngày các nước kí Hiến chương ở Xan Phran-xi-xcô; Liên hợp quốc chính thức ra đời khi Hiến chương có hiệu lực."
+          },
+          {
+           "text": "2/9/1945",
+           "ok": false,
+           "why": "Đây là ngày Quốc khánh Việt Nam."
+          },
+          {
+           "text": "8/8/1967",
+           "ok": false,
+           "why": "Đây là ngày thành lập ASEAN."
+          }
+         ],
+         "explanation": "Hiến chương kí ngày 26/6/1945, có hiệu lực ngày 24/10/1945 – ngày Liên hợp quốc ra đời."
+        },
+        {
+         "key": "mua_dich",
+         "question": "Mục đích quan trọng nhất của Liên hợp quốc là gì?",
+         "options": [
+          {
+           "text": "Duy trì hoà bình và an ninh quốc tế",
+           "ok": true,
+           "why": "Đúng. Đây là mục đích hàng đầu được nêu trong Hiến chương."
+          },
+          {
+           "text": "Thành lập một nhà nước chung cho cả thế giới",
+           "ok": false,
+           "why": "Liên hợp quốc tôn trọng chủ quyền của các nước, không lập nhà nước chung."
+          },
+          {
+           "text": "Liên minh quân sự chống một nhóm nước",
+           "ok": false,
+           "why": "Liên hợp quốc là tổ chức quốc tế toàn cầu, không phải liên minh quân sự."
+          }
+         ],
+         "explanation": "Liên hợp quốc ra đời sau Chiến tranh thế giới thứ hai để ngăn chặn chiến tranh, giữ gìn hoà bình."
+        },
+        {
+         "key": "thuong_truc",
+         "question": "Năm uỷ viên thường trực Hội đồng Bảo an là những nước nào?",
+         "options": [
+          {
+           "text": "Mỹ, Anh, Pháp, Nga, Trung Quốc",
+           "ok": true,
+           "why": "Đúng. Đây là năm nước lớn có ghế thường trực."
+          },
+          {
+           "text": "Mỹ, Anh, Pháp, Đức, Nhật Bản",
+           "ok": false,
+           "why": "Đức và Nhật Bản không phải uỷ viên thường trực."
+          },
+          {
+           "text": "Mỹ, Nga, Trung Quốc, Ấn Độ, Bra-xin",
+           "ok": false,
+           "why": "Ấn Độ và Bra-xin không phải uỷ viên thường trực."
+          }
+         ],
+         "explanation": "Ghế của Liên Xô được Liên bang Nga kế tục từ năm 1991."
+        },
+        {
+         "key": "nguyen_tac",
+         "question": "Nguyên tắc nào bảo đảm các quyết định quan trọng của Hội đồng Bảo an có sự đồng thuận của các nước lớn?",
+         "options": [
+          {
+           "text": "Sự nhất trí giữa năm nước uỷ viên thường trực",
+           "ok": true,
+           "why": "Đúng. Một quyết định quan trọng bị bác nếu một trong năm nước phản đối."
+          },
+          {
+           "text": "Đa số đơn giản của Đại hội đồng",
+           "ok": false,
+           "why": "Đại hội đồng biểu quyết theo đa số, nhưng nguyên tắc riêng của Hội đồng Bảo an là sự nhất trí của năm nước lớn."
+          },
+          {
+           "text": "Nước nào đóng góp tài chính nhiều nhất thì quyết định",
+           "ok": false,
+           "why": "Hiến chương không quy định như vậy."
+          }
+         ],
+         "explanation": "Nguyên tắc nhất trí giữa năm nước lớn (Mỹ, Anh, Pháp, Nga, Trung Quốc)."
+        },
+        {
+         "key": "viet_nam",
+         "question": "Việt Nam trở thành thành viên Liên hợp quốc vào năm nào?",
+         "options": [
+          {
+           "text": "Năm 1977",
+           "ok": true,
+           "why": "Đúng. Ngày 20/9/1977, Việt Nam trở thành thành viên Liên hợp quốc."
+          },
+          {
+           "text": "Năm 1945",
+           "ok": false,
+           "why": "Năm 1945 Liên hợp quốc ra đời; Việt Nam gia nhập năm 1977."
+          },
+          {
+           "text": "Năm 1995",
+           "ok": false,
+           "why": "Năm 1995 Việt Nam gia nhập ASEAN."
+          },
+          {
+           "text": "Năm 2007",
+           "ok": false,
+           "why": "Năm 2007 Việt Nam gia nhập Tổ chức Thương mại Thế giới."
+          }
+         ],
+         "explanation": "Từ năm 1977, Việt Nam tham gia tích cực các hoạt động của Liên hợp quốc."
+        },
+        {
+         "key": "hdba_vn",
+         "question": "Việt Nam đã làm uỷ viên không thường trực Hội đồng Bảo an trong những nhiệm kì nào?",
+         "options": [
+          {
+           "text": "2008–2009 và 2020–2021",
+           "ok": true,
+           "why": "Đúng. Việt Nam hai lần được bầu làm uỷ viên không thường trực."
+          },
+          {
+           "text": "1977–1978 và 1995–1996",
+           "ok": false,
+           "why": "Các năm này gắn với việc gia nhập Liên hợp quốc (1977) và ASEAN (1995)."
+          },
+          {
+           "text": "Việt Nam là uỷ viên thường trực",
+           "ok": false,
+           "why": "Chỉ năm nước lớn là uỷ viên thường trực."
+          }
+         ],
+         "explanation": "Uỷ viên không thường trực có nhiệm kì hai năm, do Đại hội đồng bầu ra."
+        },
+        {
+         "key": "i_an_ta",
+         "question": "Hội nghị nào đã thống nhất việc thành lập Liên hợp quốc?",
+         "options": [
+          {
+           "text": "Hội nghị I-an-ta (2/1945)",
+           "ok": true,
+           "why": "Đúng. Hội nghị của Liên Xô, Mỹ, Anh thống nhất thành lập Liên hợp quốc."
+          },
+          {
+           "text": "Hội nghị Véc-xai (1919)",
+           "ok": false,
+           "why": "Hội nghị Véc-xai lập ra Hội Quốc liên sau Chiến tranh thế giới thứ nhất."
+          },
+          {
+           "text": "Hội nghị Giơ-ne-vơ (1954)",
+           "ok": false,
+           "why": "Hội nghị Giơ-ne-vơ bàn về chấm dứt chiến tranh ở Đông Dương."
+          }
+         ],
+         "explanation": "I-an-ta (2/1945) đặt nền móng cho trật tự thế giới mới, trong đó có Liên hợp quốc."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "ls12.trat_tu_hai_cuc",
+     "order": 2,
+     "title": "Trật tự thế giới trong Chiến tranh lạnh",
+     "description": "Trật tự hai cực I-an-ta và sự đối đầu Đông – Tây.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls12.trat_tu_sau_ctl",
+     "order": 3,
+     "title": "Trật tự thế giới sau Chiến tranh lạnh",
+     "description": "Xu thế đa cực và những thách thức an ninh mới.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "ls12.asean",
+   "grade": 12,
+   "order": 2,
+   "title": "ASEAN: những chặng đường lịch sử",
+   "lessons": [
+    {
+     "key": "ls12.asean_ra_doi",
+     "order": 1,
+     "title": "Sự ra đời và mục tiêu của ASEAN",
+     "description": "Bối cảnh khu vực và mục tiêu ban đầu của Hiệp hội.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls12.asean_chang_duong",
+     "order": 2,
+     "title": "ASEAN: những chặng đường phát triển",
+     "description": "Từ Tuyên bố Băng Cốc năm 1967 đến Cộng đồng ASEAN và vai trò của Việt Nam.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Sắp xếp được các mốc phát triển chính của ASEAN",
+      "Nêu được quá trình hội nhập của Việt Nam vào ASEAN"
+     ],
+     "summary": [
+      "Ngày 8/8/1967, ASEAN thành lập ở Băng Cốc với 5 nước: In-đô-nê-xi-a, Ma-lai-xi-a, Phi-líp-pin, Xin-ga-po, Thái Lan.",
+      "Năm 1976, Hiệp ước Ba-li (Hiệp ước thân thiện và hợp tác ở Đông Nam Á) được kí.",
+      "Bru-nây gia nhập năm 1984, Việt Nam ngày 28/7/1995, Lào và Mi-an-ma năm 1997, Campuchia năm 1999.",
+      "Hiến chương ASEAN kí năm 2007, có hiệu lực năm 2008; Cộng đồng ASEAN thành lập cuối năm 2015.",
+      "Việt Nam đăng cai Hội nghị cấp cao ASEAN lần thứ 6 (1998) và giữ vai trò Chủ tịch ASEAN năm 2010, năm 2020."
+     ],
+     "examples": [
+      {
+       "title": "Ba trụ cột của Cộng đồng ASEAN",
+       "lines": [
+        "Cộng đồng Chính trị – An ninh.",
+        "Cộng đồng Kinh tế.",
+        "Cộng đồng Văn hoá – Xã hội."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Dòng thời gian ASEAN",
+       "tasks": [
+        {
+         "key": "mo_rong",
+         "prompt": "Xếp các mốc mở rộng thành viên của ASEAN theo thời gian.",
+         "items": [
+          "Năm nước sáng lập ASEAN ở Băng Cốc",
+          "Bru-nây gia nhập",
+          "Việt Nam gia nhập",
+          "Lào và Mi-an-ma gia nhập",
+          "Campuchia gia nhập"
+         ],
+         "explanation": "1967 → 1984 → 1995 → 1997 → 1999.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "van_kien",
+         "prompt": "Xếp các văn kiện, mốc phát triển của ASEAN theo thời gian.",
+         "items": [
+          "Tuyên bố Băng Cốc",
+          "Hiệp ước Ba-li (Hiệp ước thân thiện và hợp tác)",
+          "Kí Hiến chương ASEAN",
+          "Thành lập Cộng đồng ASEAN"
+         ],
+         "explanation": "1967 Tuyên bố Băng Cốc → 1976 Hiệp ước Ba-li → 2007 Hiến chương → 2015 Cộng đồng ASEAN.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "viet_nam",
+         "prompt": "Xếp các mốc của Việt Nam trong ASEAN theo thời gian.",
+         "items": [
+          "Việt Nam gia nhập ASEAN",
+          "Việt Nam đăng cai Hội nghị cấp cao ASEAN lần thứ 6",
+          "Hiến chương ASEAN có hiệu lực",
+          "Việt Nam làm Chủ tịch ASEAN trong năm đại dịch COVID-19"
+         ],
+         "explanation": "1995 gia nhập → 1998 Hội nghị cấp cao lần thứ 6 ở Hà Nội → 2008 Hiến chương có hiệu lực → 2020 Chủ tịch ASEAN.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        },
+        {
+         "key": "boi_canh",
+         "prompt": "Xếp các sự kiện theo thời gian để thấy bối cảnh Việt Nam gia nhập ASEAN.",
+         "items": [
+          "ASEAN được thành lập",
+          "Việt Nam thống nhất đất nước",
+          "Kí Hiệp định hoà bình về Campuchia ở Pa-ri",
+          "Việt Nam gia nhập ASEAN"
+         ],
+         "explanation": "1967 ASEAN ra đời → 1975 Việt Nam thống nhất → 1991 Hiệp định Pa-ri về Campuchia, quan hệ khu vực cải thiện → 1995 Việt Nam gia nhập ASEAN.",
+         "first_label": "Sớm nhất",
+         "last_label": "Muộn nhất"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "ls12.cong_dong_asean",
+     "order": 3,
+     "title": "Cộng đồng ASEAN: từ ý tưởng đến hiện thực",
+     "description": "Ba trụ cột và những thách thức của Cộng đồng ASEAN.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "ls12.cm_thang_tam_khang_chien",
+   "grade": 12,
+   "order": 3,
+   "title": "Cách mạng tháng Tám và các cuộc kháng chiến bảo vệ Tổ quốc (từ năm 1945)",
+   "lessons": [
+    {
+     "key": "ls12.cm_thang_tam",
+     "order": 1,
+     "title": "Cách mạng tháng Tám năm 1945",
+     "description": "Nguyên nhân thắng lợi, ý nghĩa và bài học.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls12.khang_chien_phap",
+     "order": 2,
+     "title": "Kháng chiến chống thực dân Pháp (1945–1954)",
+     "description": "Đường lối kháng chiến và chiến thắng Điện Biên Phủ.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls12.khang_chien_my",
+     "order": 3,
+     "title": "Kháng chiến chống Mỹ, cứu nước (1954–1975)",
+     "description": "Hai miền Nam – Bắc và thắng lợi mùa Xuân 1975.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls12.bao_ve_to_quoc_sau_1975",
+     "order": 4,
+     "title": "Đấu tranh bảo vệ Tổ quốc từ sau tháng 4/1975",
+     "description": "Bảo vệ biên giới, chủ quyền lãnh thổ và biển đảo.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "ls12.doi_moi",
+   "grade": 12,
+   "order": 4,
+   "title": "Công cuộc Đổi mới ở Việt Nam từ năm 1986 đến nay",
+   "lessons": [
+    {
+     "key": "ls12.doi_moi_khai_quat",
+     "order": 1,
+     "title": "Khái quát về công cuộc Đổi mới",
+     "description": "Các giai đoạn của công cuộc Đổi mới.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls12.thanh_tuu_doi_moi",
+     "order": 2,
+     "title": "Công cuộc Đổi mới: đường lối và thành tựu",
+     "description": "Đọc tư liệu về bối cảnh, nội dung đường lối Đổi mới và những thành tựu hội nhập.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Giải thích được vì sao Việt Nam phải đổi mới",
+      "Nêu được nội dung chính của đường lối Đổi mới",
+      "Nêu được thành tựu tiêu biểu của Đổi mới"
+     ],
+     "summary": [
+      "Đầu những năm 1980, đất nước lâm vào khủng hoảng kinh tế – xã hội; lạm phát cao, đời sống nhân dân khó khăn.",
+      "Tháng 12/1986, Đại hội VI của Đảng đề ra đường lối đổi mới toàn diện, trọng tâm là đổi mới kinh tế.",
+      "Chuyển từ kinh tế kế hoạch hoá tập trung, bao cấp sang kinh tế hàng hoá nhiều thành phần, vận hành theo cơ chế thị trường có sự quản lí của Nhà nước.",
+      "Thành tựu: từ năm 1989 xuất khẩu gạo; năm 1995 gia nhập ASEAN và bình thường hoá quan hệ với Mỹ; năm 2007 gia nhập WTO."
+     ],
+     "examples": [
+      {
+       "title": "Đổi mới trong một câu",
+       "lines": [
+        "Đổi mới tư duy, trước hết là tư duy kinh tế, để phát triển đất nước và nâng cao đời sống nhân dân."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Đọc tư liệu: Đổi mới",
+       "style": "reading",
+       "tasks": [
+        {
+         "key": "vi_sao",
+         "passage": "Sau năm 1975, nền kinh tế vận hành theo cơ chế kế hoạch hoá tập trung, bao cấp. Đầu những năm 1980, sản xuất trì trệ, hàng hoá khan hiếm, lạm phát tăng rất cao, đời sống nhân dân gặp nhiều khó khăn.",
+         "question": "Theo đoạn tư liệu, vì sao Việt Nam phải tiến hành đổi mới?",
+         "options": [
+          {
+           "text": "Vì đất nước lâm vào khủng hoảng kinh tế – xã hội kéo dài",
+           "ok": true,
+           "why": "Đúng. Khủng hoảng đòi hỏi phải thay đổi cơ chế quản lí."
+          },
+          {
+           "text": "Vì kinh tế đang phát triển quá nhanh",
+           "ok": false,
+           "why": "Đoạn tư liệu cho thấy sản xuất trì trệ, không phải phát triển quá nhanh."
+          },
+          {
+           "text": "Vì đất nước vừa gia nhập WTO",
+           "ok": false,
+           "why": "Việt Nam gia nhập WTO năm 2007, hơn 20 năm sau khi bắt đầu Đổi mới."
+          }
+         ],
+         "explanation": "Khủng hoảng kinh tế – xã hội là nguyên nhân trực tiếp dẫn đến đường lối Đổi mới."
+        },
+        {
+         "key": "dai_hoi_vi",
+         "passage": "Tháng 12/1986, Đại hội đại biểu toàn quốc lần thứ VI của Đảng đề ra đường lối đổi mới toàn diện đất nước. Đại hội nhấn mạnh: đổi mới tư duy, trước hết là tư duy kinh tế.",
+         "question": "Trọng tâm của đường lối Đổi mới là lĩnh vực nào?",
+         "options": [
+          {
+           "text": "Kinh tế",
+           "ok": true,
+           "why": "Đúng. Đổi mới kinh tế là trọng tâm, đồng thời đổi mới từng bước về chính trị."
+          },
+          {
+           "text": "Quân sự",
+           "ok": false,
+           "why": "Đoạn tư liệu nhấn mạnh tư duy kinh tế, không phải quân sự."
+          },
+          {
+           "text": "Chỉ riêng văn hoá",
+           "ok": false,
+           "why": "Đổi mới là toàn diện, trọng tâm là kinh tế."
+          }
+         ],
+         "explanation": "Đổi mới toàn diện, đồng bộ, trọng tâm là đổi mới kinh tế."
+        },
+        {
+         "key": "co_che",
+         "passage": "Đường lối Đổi mới chủ trương xoá bỏ cơ chế quản lí tập trung, quan liêu, bao cấp; phát triển nền kinh tế hàng hoá nhiều thành phần, vận hành theo cơ chế thị trường, có sự quản lí của Nhà nước.",
+         "question": "Nội dung nào đúng với đổi mới kinh tế theo đoạn tư liệu?",
+         "options": [
+          {
+           "text": "Phát triển kinh tế nhiều thành phần theo cơ chế thị trường có sự quản lí của Nhà nước",
+           "ok": true,
+           "why": "Đúng. Đây là nội dung chính của đổi mới kinh tế."
+          },
+          {
+           "text": "Giữ nguyên cơ chế bao cấp",
+           "ok": false,
+           "why": "Đoạn tư liệu nói xoá bỏ cơ chế bao cấp."
+          },
+          {
+           "text": "Thị trường hoạt động không cần Nhà nước quản lí",
+           "ok": false,
+           "why": "Đoạn tư liệu nói rõ: có sự quản lí của Nhà nước."
+          }
+         ],
+         "explanation": "Nền kinh tế thị trường định hướng xã hội chủ nghĩa là thành quả của quá trình đổi mới tư duy."
+        },
+        {
+         "key": "luong_thuc",
+         "passage": "Trước Đổi mới, nước ta nhiều năm phải nhập khẩu lương thực. Nhờ đổi mới cơ chế quản lí trong nông nghiệp, người nông dân yên tâm sản xuất; từ năm 1989, Việt Nam bắt đầu xuất khẩu gạo.",
+         "question": "Đoạn tư liệu nói về thành tựu nào của Đổi mới?",
+         "options": [
+          {
+           "text": "Từ thiếu lương thực, Việt Nam trở thành nước xuất khẩu gạo",
+           "ok": true,
+           "why": "Đúng. Đây là thành tựu nổi bật đầu tiên của Đổi mới."
+          },
+          {
+           "text": "Việt Nam gia nhập Liên hợp quốc",
+           "ok": false,
+           "why": "Việt Nam gia nhập Liên hợp quốc năm 1977, trước Đổi mới."
+          },
+          {
+           "text": "Việt Nam trở thành nước công nghiệp phát triển",
+           "ok": false,
+           "why": "Đoạn tư liệu nói về lương thực, không nói điều này."
+          }
+         ],
+         "explanation": "Thay đổi cơ chế trong nông nghiệp đã giải phóng sức sản xuất."
+        },
+        {
+         "key": "hoi_nhap",
+         "passage": "Năm 1995, Việt Nam gia nhập ASEAN và bình thường hoá quan hệ ngoại giao với Mỹ. Năm 1998, Việt Nam gia nhập APEC. Năm 2007, Việt Nam trở thành thành viên Tổ chức Thương mại Thế giới (WTO).",
+         "question": "Theo đoạn tư liệu, năm 2007 Việt Nam gia nhập tổ chức nào?",
+         "options": [
+          {
+           "text": "Tổ chức Thương mại Thế giới (WTO)",
+           "ok": true,
+           "why": "Đúng. Việt Nam trở thành thành viên WTO năm 2007."
+          },
+          {
+           "text": "Hiệp hội các quốc gia Đông Nam Á (ASEAN)",
+           "ok": false,
+           "why": "Việt Nam gia nhập ASEAN năm 1995."
+          },
+          {
+           "text": "Diễn đàn Hợp tác Kinh tế châu Á – Thái Bình Dương (APEC)",
+           "ok": false,
+           "why": "Việt Nam gia nhập APEC năm 1998."
+          }
+         ],
+         "explanation": "Hội nhập quốc tế ngày càng sâu rộng là một thành tựu lớn của Đổi mới."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "ls12.doi_ngoai",
+   "grade": 12,
+   "order": 5,
+   "title": "Lịch sử đối ngoại của Việt Nam",
+   "lessons": [
+    {
+     "key": "ls12.doi_ngoai_truoc_1945",
+     "order": 1,
+     "title": "Đối ngoại Việt Nam thời cổ – trung đại và cận đại",
+     "description": "Chính sách “mềm dẻo, hoà hiếu” và giữ vững độc lập.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls12.doi_ngoai_1945_1975",
+     "order": 2,
+     "title": "Đối ngoại Việt Nam trong đấu tranh giành độc lập (1945–1975)",
+     "description": "Mặt trận ngoại giao trong kháng chiến.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls12.doi_ngoai_tu_1975",
+     "order": 3,
+     "title": "Đối ngoại Việt Nam từ năm 1975 đến nay",
+     "description": "Đa phương hoá, đa dạng hoá quan hệ quốc tế.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "ls12.ho_chi_minh",
+   "grade": 12,
+   "order": 6,
+   "title": "Hồ Chí Minh trong lịch sử Việt Nam",
+   "lessons": [
+    {
+     "key": "ls12.tieu_su_hcm",
+     "order": 1,
+     "title": "Khái quát về cuộc đời và sự nghiệp của Hồ Chí Minh",
+     "description": "Hành trình từ người thanh niên yêu nước đến lãnh tụ dân tộc.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "ls12.dau_an_hcm",
+     "order": 2,
+     "title": "Dấu ấn Hồ Chí Minh trong lòng nhân dân thế giới và Việt Nam",
+     "description": "Sự tôn vinh và tình cảm của nhân dân.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  }
+ ]
+}

@@ -5,6 +5,8 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 
 import pytest
+
+from app.learning_engine import VOCAB_HEARTS, VOCAB_STAGE_WORDS
 from sqlalchemy import func, select
 
 from together import person
@@ -121,8 +123,8 @@ def test_catalog_lists_both_subjects_without_answers(client, me):
     catalog = client.get("/api/learning/catalog", headers=me)
     assert catalog.status_code == 200
     body = catalog.json()
-    assert [s["code"] for s in body["subjects"]] == ["english", "math"]
-    english, math = body["subjects"]
+    assert [s["code"] for s in body["subjects"]] == ["english", "math", "vietnamese", "science", "informatics"]
+    english, math = body["subjects"][:2]
     assert sum(1 for t in english["topics"] if t["skill_type"] == "vocabulary") >= 2
     assert sum(1 for t in english["topics"] if t["skill_type"] == "grammar") >= 2
     assert {t["skill_type"] for t in math["topics"]} == {"arithmetic", "missing_number", "compare", "order_of_operations"}
@@ -135,16 +137,30 @@ def test_catalog_lists_both_subjects_without_answers(client, me):
 
 
 def test_game_guides_are_finished_once_per_account_and_game(client, me):
-    assert client.get("/api/learning/tutorials", headers=me).json() == {"seen": []}
-    assert client.post("/api/learning/tutorials/meteor", headers=me).json() == {"seen": ["meteor"]}
-    assert client.post("/api/learning/tutorials/meteor", headers=me).json() == {"seen": ["meteor"]}  # seen again: no change
-    assert client.post("/api/learning/tutorials/defense", headers=me).json() == {"seen": ["meteor", "defense"]}
-    assert client.post("/api/learning/tutorials/chess", headers=me).status_code == 422
+    from app.learning import TUTORIAL_VERSION
+    done = {"version": TUTORIAL_VERSION}
+    seen = lambda *games: {"seen": list(games), "version": TUTORIAL_VERSION}
+    assert client.get("/api/learning/tutorials", headers=me).json() == seen()
+    assert client.post("/api/learning/tutorials/meteor", headers=me, json=done).json() == seen("meteor")
+    assert client.post("/api/learning/tutorials/meteor", headers=me, json=done).json() == seen("meteor")  # seen again: no change
+    assert client.post("/api/learning/tutorials/defense", headers=me, json=done).json() == seen("meteor", "defense")
+    assert client.post("/api/learning/tutorials/chess", headers=me, json=done).status_code == 422
     # Per account: another user still gets every guide.
     other = person(client, "Lan").headers
-    assert client.get("/api/learning/tutorials", headers=other).json() == {"seen": []}
-    assert client.get("/api/learning/tutorials", headers=me).json() == {"seen": ["meteor", "defense"]}
+    assert client.get("/api/learning/tutorials", headers=other).json() == seen()
+    assert client.get("/api/learning/tutorials", headers=me).json() == seen("meteor", "defense")
     assert client.get("/api/learning/tutorials").status_code == 401
+
+
+def test_a_guide_finished_at_an_older_version_shows_once_more(client, me):
+    """The guides were rewritten: whoever finished the old one sees the new one once; an older app finishes version 1."""
+    from app.learning import TUTORIAL_VERSION
+    seen = lambda *games: {"seen": list(games), "version": TUTORIAL_VERSION}
+    assert client.post("/api/learning/tutorials/word_shooter", headers=me).json() == seen()  # an older app: version 1
+    assert client.post("/api/learning/tutorials/gate", headers=me, json={"version": 1}).json() == seen()
+    assert client.post("/api/learning/tutorials/gate", headers=me, json={"version": TUTORIAL_VERSION}).json() == seen("gate")
+    assert client.post("/api/learning/tutorials/gate", headers=me, json={"version": 1}).json() == seen("gate")  # never lowered
+    assert client.post("/api/learning/tutorials/word_shooter", headers=me, json={"version": TUTORIAL_VERSION}).json()         == seen("word_shooter", "gate")
 
 
 def test_requires_authentication(client):
@@ -188,13 +204,13 @@ def test_falling_words_carry_keys_of_every_accepted_answer_not_the_answers(clien
 def test_full_english_stage_updates_progress_and_grants_exp_once(client, me):
     before = client.get("/api/profile", headers=me).json()["xp"]
     session = start(client, me)
-    assert session["status"] == "active" and session["required_count"] == 12
-    assert session["hearts_max"] == 0 and session["variant"] == "meteor"  # vocabulary in Học tập: no hearts to lose
+    assert session["status"] == "active" and session["required_count"] == VOCAB_STAGE_WORDS
+    assert session["hearts_max"] == VOCAB_HEARTS and session["variant"] == "meteor"  # lost only by words that land
     first = session["open_turns"][0]
     spaced = answer(client, me, session, first, value="  " + right(first).upper() + "  ")
     assert spaced.json()["result"]["correct"] is True  # case and spacing do not matter
     session = play_all(client, me, spaced.json()["session"])
-    assert session["can_complete"] and session["resolved_count"] == 12
+    assert session["can_complete"] and session["resolved_count"] == VOCAB_STAGE_WORDS
     done = complete(client, me, session)
     assert done["status"] == "completed" and done["reward"] == {"status": "granted", "exp": 10}
     assert client.get("/api/profile", headers=me).json()["xp"] == before + 10
@@ -202,9 +218,9 @@ def test_full_english_stage_updates_progress_and_grants_exp_once(client, me):
     assert again.status_code == 200 and again.json()["replayed"] and again.json()["session"]["reward"]["exp"] == 10
     assert client.get("/api/profile", headers=me).json()["xp"] == before + 10
     skills = client.get("/api/learning/progress?subject=english", headers=me).json()["skills"]
-    assert len(skills) == 12 and all(s["first_try"] == 1 and s["skill_type"] == "word" for s in skills)  # 12 different words
+    assert len(skills) == VOCAB_STAGE_WORDS and all(s["first_try"] == 1 and s["skill_type"] == "word" for s in skills)  # all different
     result = client.get(f"/api/learning/sessions/{session['id']}/result", headers=me).json()
-    assert result["counts"]["first_try"] == 12 and all(i["correct_answer"] for i in result["items"])
+    assert result["counts"]["first_try"] == VOCAB_STAGE_WORDS and all(i["correct_answer"] for i in result["items"])
 
 
 def test_each_session_records_its_subject_game_topic_and_level(client, me):
@@ -265,7 +281,7 @@ def test_practice_mode_ends_when_the_hearts_run_out(client, me):
 
 
 def test_revealed_answer_needs_a_correct_repractice_and_keeps_the_original_result(client, me):
-    session = start(client, me)
+    session = start(client, me, "en.to_be.basic", variant="gate")
     turn = session["open_turns"][0]
     revealed = post(client, me, session, "reveal", turn_id=turn["turn_id"], client_event_id=eid()).json()
     assert revealed["result"]["outcome"] == "revealed" and revealed["result"]["correct_answer"] and revealed["result"]["practice_added"]
@@ -286,7 +302,7 @@ def test_revealed_answer_needs_a_correct_repractice_and_keeps_the_original_resul
     repractice = [i for i in result["items"] if i["practice"]]
     assert len(repractice) == 1 and repractice[0]["outcome"] == "first_try"
     skill = next(s for s in client.get("/api/learning/progress", headers=me).json()["skills"] if s["revealed"])
-    assert skill["revealed"] == 1 and not skill["mastered"]
+    assert skill["revealed"] == 1
 
 
 # --- challenge -----------------------------------------------------------------------------------------------------
@@ -338,9 +354,9 @@ def test_meteor_miss_needs_travel_time_and_costs_one_heart_once(client, me, cloc
     assert reopened["on_screen_ms"] == 13000  # a reopened game puts the meteor back where it was
     event_id = eid()
     missed = post(client, me, session, "miss", turn_id=turn["turn_id"], client_event_id=event_id).json()
-    assert missed["result"]["outcome"] == "missed" and missed["session"]["hearts"] == 2 and missed["result"]["correct_answer"]
+    assert missed["result"]["outcome"] == "missed" and missed["session"]["hearts"] == VOCAB_HEARTS - 1 and missed["result"]["correct_answer"]
     replay = post(client, me, session, "miss", turn_id=turn["turn_id"], client_event_id=event_id).json()
-    assert replay["replayed"] and replay["session"]["hearts"] == 2
+    assert replay["replayed"] and replay["session"]["hearts"] == VOCAB_HEARTS - 1
 
 
 def test_targets_wait_in_practice_mode(client, me, clock):
@@ -352,26 +368,35 @@ def test_targets_wait_in_practice_mode(client, me, clock):
     assert response.status_code == 409 and response.json()["code"] == "miss_not_allowed"
 
 
-def test_challenge_allows_two_meteors_at_once(client, me):
-    session = start(client, me, "en.animals.starter", mode="challenge")
-    more = post(client, me, session, "next", count=3).json()["session"]
-    assert len(more["open_turns"]) == 2
-    turn = more["open_turns"][1]  # tap the other target
-    assert answer(client, me, more, turn).json()["result"]["correct"]
+def test_falling_words_allow_three_at_once_in_both_modes(client, me):
+    """The app opens a new falling word on its own timer: up to three fall at once, in Học tập and Thử thách, in both
+    shooting games; asking for "this many in all" (refill) never opens more."""
+    for mode, variant in (("challenge", None), ("practice", None), ("challenge", "word_shooter"), ("practice", "word_shooter")):
+        session = start(client, me, "en.animals.starter", mode=mode, **({"variant": variant} if variant else {}))
+        assert len(post(client, me, session, "next", count=2, refill=True).json()["session"]["open_turns"]) == 2
+        assert len(post(client, me, session, "next", count=2, refill=True).json()["session"]["open_turns"]) == 2  # a retry
+        more = post(client, me, session, "next", count=3).json()["session"]
+        assert len(more["open_turns"]) == 3
+        assert len(post(client, me, session, "next", count=1).json()["session"]["open_turns"]) == 3  # never a fourth
+        turn = more["open_turns"][1]  # tap another target
+        assert answer(client, me, more, turn).json()["result"]["correct"]
+        post(client, me, session, "abandon")
+    defense = start(client, me, "math.arithmetic.grade2", mode="challenge")
+    assert len(post(client, me, defense, "next", count=3).json()["session"]["open_turns"]) == 2  # other games: as before
 
 
 # --- vocabulary: Anh → Việt (word_shooter) and Việt → Anh (meteor) ------------------------------------------------
 
 def test_word_shooter_shows_the_english_word_and_its_meaning_only_after_the_hit(client, me):
     session = start(client, me, variant="word_shooter")
-    assert session["game"] == "word_shooter" and session["variant"] == "word_shooter" and session["hearts_max"] == 0
+    assert session["game"] == "word_shooter" and session["variant"] == "word_shooter" and session["hearts_max"] == VOCAB_HEARTS
     turn = session["open_turns"][0]
     word = stored_answer(turn)
     assert turn["kind"] == "word_spelling" and turn["prompt"]["word"] == word["display"] and turn["skill_label"] == "Gõ từ"
     assert word["meaning_vi"] not in json.dumps(turn, ensure_ascii=False)  # the meaning comes with the hit
     typo = answer(client, me, session, turn, value=word["display"][::-1] + "x").json()
     assert typo["result"]["correct"] is False and typo["result"]["retry_allowed"] and typo["result"]["word"] is None
-    assert typo["result"]["hearts_delta"] == 0 and typo["session"]["status"] == "active"  # Học tập: no heart lost
+    assert typo["result"]["hearts_delta"] == 0 and typo["session"]["hearts"] == VOCAB_HEARTS  # a wrong answer: no heart lost
     hit = answer(client, me, session, turn, value=f"  {word['display'].upper()} ").json()["result"]
     assert hit["correct"] and hit["outcome"] == "corrected"
     assert hit["word"] == {"en": word["display"], "vi": word["meaning_vi"], "phonetic": word["phonetic"]}
@@ -395,9 +420,9 @@ def test_the_two_vocabulary_games_keep_separate_progress(client, me):
     shooter = play_all(client, me, start(client, me, variant="word_shooter"))
     complete(client, me, shooter)
     intro = client.get(f"/api/learning/sessions/{shooter['id']}/intro", headers=me).json()["intro"]
-    assert len(intro["words"]) == 12  # the lesson before playing teaches the words drawn for it
+    assert len(intro["words"]) == VOCAB_STAGE_WORDS  # the lesson before playing teaches the words drawn for it
     skills = client.get("/api/learning/progress?subject=english", headers=me).json()["skills"]
-    assert len(skills) == 12 and all(s["skill_type"] == "spelling" and s["skill_key"].startswith("en.spell.") for s in skills)
+    assert len(skills) == VOCAB_STAGE_WORDS and all(s["skill_type"] == "spelling" and s["skill_key"].startswith("en.spell.") for s in skills)
     assert not any(s["skill_type"] == "word" for s in skills)  # retyping a word shown never counts as knowing it
     # Việt → Anh starts from scratch: the words typed in Anh → Việt are still new words there.
     meteor = start(client, me)
@@ -405,15 +430,16 @@ def test_the_two_vocabulary_games_keep_separate_progress(client, me):
     assert all(w["pick"] == "Từ mới" for w in words)
     complete(client, me, play_all(client, me, meteor))
     skills = client.get("/api/learning/progress?subject=english", headers=me).json()["skills"]
-    assert sum(1 for s in skills if s["skill_type"] == "word") == 12 and sum(1 for s in skills if s["skill_type"] == "spelling") == 12
+    assert sum(1 for s in skills if s["skill_type"] == "word") == VOCAB_STAGE_WORDS
+    assert sum(1 for s in skills if s["skill_type"] == "spelling") == VOCAB_STAGE_WORDS
 
 
 def test_mixed_vocabulary_starts_at_the_easiest_level_and_moves_up_after_good_stages(client, me):
     first = start(client, me, "en.vocab.mix")
     taught = drawn(first)
-    assert len({w["word"] for w in taught}) == 12 and {w["difficulty"] for w in taught} == {1}
+    assert len({w["word"] for w in taught}) == VOCAB_STAGE_WORDS and {w["difficulty"] for w in taught} == {1}
     assert {w["level"] for w in taught} == {"Mức 1"}  # no CEFR label is claimed without a source for it
-    complete(client, me, play_all(client, me, first))  # 12 words right at the first try
+    complete(client, me, play_all(client, me, first))  # every word right at the first try
     second = start(client, me, "en.vocab.mix")
     assert {w["difficulty"] for w in drawn(second)} == {1}  # 12 words are not enough to move on
     assert not {w["word"] for w in drawn(second)} & {w["word"] for w in taught}  # the last stage's words are not repeated
@@ -427,11 +453,26 @@ def test_mixed_vocabulary_starts_at_the_easiest_level_and_moves_up_after_good_st
 
 def test_a_topic_draws_only_its_own_words(client, me, db):
     from app.models import LearningVocabEntry
-    travel = set(db.scalars(select(LearningVocabEntry.word).where(LearningVocabEntry.topic == "travel")))
-    session = start(client, me, "en.vocab.travel")
+    animals = set(db.scalars(select(LearningVocabEntry.word).where(LearningVocabEntry.topic == "animals")))
+    session = start(client, me, "en.animals.starter")
     taught = drawn(session)
-    assert len(taught) == 12 and {w["word"] for w in taught} <= travel
-    assert session["topic"]["code"] == "travel" and session["level"]["code"] == "auto"
+    assert len(taught) == VOCAB_STAGE_WORDS and {w["word"] for w in taught} <= animals
+    assert session["topic"]["code"] == "animals" and session["level"]["code"] == "auto"
+
+
+def test_a_vocabulary_stage_never_starts_short_nor_repeats_a_word_to_fill_up(client, me, db):
+    """Too few words of the topic at the user's level: the stage does not start (a clear code), it is never shorter
+    nor padded with a word asked twice."""
+    from app.models import LearningSession, LearningVocabEntry
+    keep = list(db.scalars(select(LearningVocabEntry).where(LearningVocabEntry.topic == "animals", LearningVocabEntry.status == "active")
+                           .order_by(LearningVocabEntry.entry_key)))
+    for entry in keep[VOCAB_STAGE_WORDS - 1:]:
+        entry.status = "retired"
+    db.commit()
+    lesson = lesson_id(client, me, "en.animals.starter")
+    response = client.post("/api/learning/sessions", headers=me, json={"lesson_id": lesson, "mode": "practice", "timezone": "Asia/Ho_Chi_Minh"})
+    assert response.status_code == 409 and response.json()["code"] == "not_enough_words"
+    assert db.scalar(select(func.count()).select_from(LearningSession)) == 0
 
 
 def test_a_shot_hits_the_matching_word_closest_to_the_ground_and_only_that_one(client, me):
@@ -460,19 +501,66 @@ def test_a_shot_hits_the_matching_word_closest_to_the_ground_and_only_that_one(c
 def test_challenge_words_fall_and_a_miss_shows_the_word_pair(client, me, clock):
     session = start(client, me, mode="challenge", variant="word_shooter")
     turn = session["open_turns"][0]
-    assert session["hearts_max"] == 3 and 24 <= turn["travel_seconds"] < 28
+    assert session["hearts_max"] == VOCAB_HEARTS and 24 <= turn["travel_seconds"] < 28
     wrong_shot = answer(client, me, session, turn, value="zzzz").json()
     assert wrong_shot["result"]["hearts_delta"] == 0 and wrong_shot["result"]["retry_allowed"]  # fix it while it falls
     clock.advance(seconds=13)
     missed = post(client, me, session, "miss", turn_id=turn["turn_id"], client_event_id=eid()).json()
     word = stored_answer(turn)
-    assert missed["session"]["hearts"] == 2 and missed["result"]["word"]["en"] == word["display"]
+    assert missed["session"]["hearts"] == VOCAB_HEARTS - 1 and missed["result"]["word"]["en"] == word["display"]
     assert missed["result"]["word"]["vi"] == word["meaning_vi"]
     post(client, me, session, "abandon")
     groups = client.get("/api/learning/review?subject=english", headers=me).json()["groups"]
     assert groups[0]["items"][0]["label"].startswith("Mặt chữ: ")
     review = client.post("/api/learning/review/sessions", headers=me, json={"topic_id": groups[0]["topic"]["id"]}).json()
     assert review["game"] == "word_shooter" and review["open_turns"][0]["kind"] == "word_spelling"
+
+
+def test_a_shot_word_opens_no_word_the_app_opens_them_on_its_timer(client, me, clock):
+    """Falling words: the app sends hold_next and opens new words on its own timer (/next, refill). A new word starts at
+    the top with its own time, never with the time the last word or its shot took."""
+    for mode in ("practice", "challenge"):
+        session = start(client, me, mode=mode)
+        turn = session["open_turns"][0]
+        missed = post(client, me, session, "answer", turn_id=turn["turn_id"], client_event_id=eid(), answer="zzzz", hold_next=True).json()
+        assert missed["result"]["retry_allowed"] and [t["turn_id"] for t in missed["session"]["open_turns"]] == [turn["turn_id"]]
+        clock.advance(seconds=9)  # it fell a while before it was answered
+        shot = post(client, me, session, "answer", turn_id=turn["turn_id"], client_event_id=eid(), answer=right(turn), hold_next=True).json()
+        assert shot["result"]["correct"] and shot["session"]["open_turns"] == [] and not shot["session"]["can_complete"]
+        clock.advance(seconds=3)  # the bullet flies, the word breaks, its meaning shows
+        after = post(client, me, session, "next", count=1, refill=True).json()["session"]["open_turns"]
+        assert len(after) == 1 and after[0]["turn_id"] != turn["turn_id"] and after[0]["on_screen_ms"] == 0
+        again = post(client, me, session, "next", count=1, refill=True).json()["session"]["open_turns"]
+        assert [t["turn_id"] for t in again] == [after[0]["turn_id"]]  # asked twice: still one new word
+        post(client, me, session, "abandon")
+
+    session = start(client, me, mode="challenge")
+    turn = session["open_turns"][0]
+    clock.advance(seconds=turn["travel_seconds"])
+    missed = post(client, me, session, "miss", turn_id=turn["turn_id"], client_event_id=eid(), hold_next=True).json()
+    assert missed["result"]["outcome"] == "missed" and missed["session"]["open_turns"] == []
+    post(client, me, session, "abandon")
+    # Without hold_next (other games, older apps) the next turn opens with the answer, as before.
+    session = start(client, me, "en.to_be.basic", variant="gate")
+    assert answer(client, me, session, session["open_turns"][0]).json()["session"]["open_turns"]
+
+
+def test_the_answer_kept_is_what_the_user_typed_chose_or_built(client, me):
+    from app.db import SessionLocal
+    from app.models import LearningEvent
+    gate = start(client, me, "en.to_be.basic", variant="gate")
+    turn = gate["open_turns"][0]
+    option = next(o for o in turn["prompt"]["options"] if o["id"] == right(turn))
+    answer(client, me, gate, turn)
+    post(client, me, gate, "abandon")
+    bridge = start(client, me, "en.to_be.basic", variant="bridge")
+    turn = bridge["open_turns"][0]
+    built = " ".join(t["text"] for t in sorted(turn["prompt"]["tokens"], key=lambda t: right(turn).index(t["id"])))
+    answer(client, me, bridge, turn)
+    with SessionLocal() as db:
+        texts = [e.answer_text for e in db.scalars(select(LearningEvent).where(LearningEvent.event_type == "answer")
+                                                   .order_by(LearningEvent.id.desc()).limit(2))]
+    assert texts == [built, option["text"]]  # the sentence and the option, not piece or option ids
 
 
 # --- state machine ------------------------------------------------------------------------------------------------
@@ -615,7 +703,7 @@ def test_stage_reward_once_per_subject_per_day_but_progress_keeps_counting(clien
     assert first["reward"]["status"] == "granted"
     assert replay["reward"] == {"status": "already_claimed", "exp": 0}
     assert other_subject["reward"] == {"status": "granted", "exp": 10}
-    assert len(client.get("/api/learning/progress?subject=english", headers=me).json()["skills"]) == 24  # 12 words each
+    assert len(client.get("/api/learning/progress?subject=english", headers=me).json()["skills"]) == 2 * VOCAB_STAGE_WORDS
 
 
 def test_failed_abandoned_and_review_sessions_get_no_completion_reward(client, me):
@@ -740,7 +828,7 @@ def test_english_content_is_random_per_session(client, me):
         return words
 
     draws = [words_of(start(client, me)) for _ in range(4)]
-    assert all(len(d) == 12 for d in draws) and len({frozenset(d) for d in draws}) > 1
+    assert all(len(d) == VOCAB_STAGE_WORDS for d in draws) and len({frozenset(d) for d in draws}) > 1
 
     def sentences(session):
         turns = []
@@ -761,7 +849,7 @@ def test_session_can_start_paused_while_its_lesson_is_shown(client, me, clock):
     # The intro never gives away a word still to come (the Việt → Anh answer, the Anh → Việt meaning).
     intro = client.get(f"/api/learning/sessions/{session['id']}/intro", headers=me).json()["intro"]
     assert intro["words"] == []
-    assert len(drawn(session)) == 12 and all(w["difficulty"] == 1 and w["pick"] == "new" for w in drawn(session))
+    assert len(drawn(session)) == VOCAB_STAGE_WORDS and all(w["difficulty"] == 1 and w["pick"] == "new" for w in drawn(session))
     clock.advance(minutes=5)  # a paused session does not use its time
     resumed = post(client, me, session, "resume").json()["session"]
     assert resumed["status"] == "active" and resumed["active_ms"] == 0 and len(resumed["open_turns"]) == 1
@@ -770,3 +858,75 @@ def test_session_can_start_paused_while_its_lesson_is_shown(client, me, clock):
     played = answer(client, me, session, turn).json()
     intro = client.get(f"/api/learning/sessions/{session['id']}/intro", headers=me).json()["intro"]
     assert [w["word"] for w in intro["words"]] == [played["result"]["word"]["en"]]  # words met so far
+
+
+# --- vocabulary stages: 15 words, hearts lost only by words that land --------------------------------------------------
+
+@pytest.mark.parametrize("variant", ["meteor", "word_shooter"])
+def test_a_vocabulary_stage_has_fifteen_different_words_that_fall_in_hoc_tap(client, me, clock, variant):
+    session = start(client, me, variant=variant)
+    words = drawn(session)
+    assert len(words) == session["required_count"] == VOCAB_STAGE_WORDS and len({w["word"] for w in words}) == VOCAB_STAGE_WORDS
+    assert session["hearts"] == session["hearts_max"] == VOCAB_HEARTS
+    turn = session["open_turns"][0]
+    assert turn["travel_seconds"] >= 24  # Học tập: the words fall to the ground too, each on its own time
+    # A wrong answer costs nothing: it is fixed while the word falls.
+    assert answer(client, me, session, turn, value="zzzz").json()["session"]["hearts"] == VOCAB_HEARTS
+    early = post(client, me, session, "miss", turn_id=turn["turn_id"], client_event_id=eid())
+    assert early.status_code == 409 and early.json()["code"] == "miss_too_early"
+    clock.advance(seconds=turn["travel_seconds"])
+    event = eid()
+    missed = post(client, me, session, "miss", turn_id=turn["turn_id"], client_event_id=event).json()
+    assert missed["result"]["outcome"] == "missed" and missed["session"]["hearts"] == VOCAB_HEARTS - 1
+    assert missed["session"]["resolved_count"] == 1  # "Đã xử lý 1/15": a missed word counts
+    # The same landing sent again (a retry, or a second report) never costs a second heart.
+    assert post(client, me, session, "miss", turn_id=turn["turn_id"], client_event_id=event).json()["session"]["hearts"] == VOCAB_HEARTS - 1
+    again = post(client, me, session, "miss", turn_id=turn["turn_id"], client_event_id=eid())
+    assert again.status_code == 409 and again.json()["code"] == "turn_not_open"
+    assert client.get(f"/api/learning/sessions/{session['id']}", headers=me).json()["hearts"] == VOCAB_HEARTS - 1
+
+
+def test_a_word_shot_just_above_the_ground_counts_once_and_never_also_as_a_miss(client, me, clock):
+    session = start(client, me, mode="challenge")
+    turn = session["open_turns"][0]
+    clock.advance(seconds=turn["travel_seconds"])  # it is on the ground now, the bullet was already flying
+    shot = answer(client, me, session, turn).json()
+    assert shot["result"]["correct"] and shot["result"]["score_delta"] > 0
+    late = post(client, me, session, "miss", turn_id=turn["turn_id"], client_event_id=eid())
+    assert late.status_code == 409 and late.json()["code"] == "turn_not_open"
+    again = answer(client, me, session, turn)
+    assert again.status_code == 409 and again.json()["code"] == "turn_not_open"  # never scored twice
+    now = client.get(f"/api/learning/sessions/{session['id']}", headers=me).json()
+    assert now["hearts"] == VOCAB_HEARTS and now["score"] == shot["session"]["score"] and now["resolved_count"] == 1
+
+
+def test_out_of_hearts_ends_the_stage_and_opens_no_more_words_and_a_replay_has_every_heart(client, me, clock):
+    session = start(client, me)
+    for lost in range(1, VOCAB_HEARTS + 1):
+        turn = session["open_turns"][0]
+        clock.advance(seconds=turn["travel_seconds"])
+        session = post(client, me, session, "miss", turn_id=turn["turn_id"], client_event_id=eid()).json()["session"]
+        assert session["hearts"] == VOCAB_HEARTS - lost
+        if session["status"] == "active" and not session["open_turns"]:
+            session = post(client, me, session, "next", count=1, refill=True).json()["session"]
+    assert session["status"] == "failed" and session["end_reason"] == "out_of_hearts" and session["open_turns"] == []
+    assert session["reward"] == {"status": "not_eligible", "exp": 0} and session["resolved_count"] == VOCAB_HEARTS
+    refused = post(client, me, session, "next", count=1, refill=True)
+    assert refused.status_code == 409  # no word after the end
+    replay = start(client, me)
+    assert replay["hearts"] == replay["hearts_max"] == VOCAB_HEARTS
+
+
+def test_a_revealed_word_is_not_asked_again_so_a_stage_stays_fifteen_words(client, me):
+    session = start(client, me)
+    turn = session["open_turns"][0]
+    revealed = post(client, me, session, "reveal", turn_id=turn["turn_id"], client_event_id=eid()).json()
+    assert revealed["result"]["outcome"] == "revealed" and revealed["result"]["practice_added"] is False
+    session = play_all(client, me, revealed["session"])
+    assert session["can_complete"] and session["resolved_count"] == session["required_count"] == VOCAB_STAGE_WORDS
+    done = complete(client, me, session)
+    assert done["status"] == "completed"
+    result = client.get(f"/api/learning/sessions/{session['id']}/result", headers=me).json()
+    assert result["counts"]["revealed"] == 1 and not any(i["practice"] for i in result["items"])
+    skill = next(s for s in client.get("/api/learning/progress", headers=me).json()["skills"] if s["revealed"])
+    assert skill["revealed"] == 1 and not skill["mastered"]  # a revealed word is never counted as known

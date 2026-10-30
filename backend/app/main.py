@@ -10,7 +10,7 @@ from sqlalchemy import select
 
 from . import auth, campus, career, community, companion, dashboard, profile, study, tasks, streaks
 from . import friends, notifications, realtime, room_chat, study_rooms, study_together, team_quests
-from . import garden, inventory, learning, learning_history, memories, pet_room, room_visits
+from . import garden, inventory, learning, learning_history, lesson_api, memories, pet_room, room_visits
 from .learning_content import seed_learning_content
 from .config import settings
 from .db import SessionLocal, engine
@@ -154,15 +154,17 @@ for feature_router in (
     garden.router,
     learning.router,
     learning_history.router,
+    lesson_api.router,
 ):
     app.include_router(feature_router)
 
 # FastAPI 0.162 keeps included routers as lazy route groups. In the current
 # Uvicorn/Starlette combination the final lazy group is not reached, although
-# TestClient expands it. Register the album's and the word history's already-built
+# TestClient expands it. Register the album's and the word history's and the lessons' already-built
 # APIRoutes eagerly so production requests and OpenAPI expose the same endpoints as tests.
 app.router.routes.extend(memories.router.routes)
 app.router.routes.extend(learning_history.router.routes)
+app.router.routes.extend(lesson_api.router.routes)
 
 
 @app.get("/", tags=["health"])

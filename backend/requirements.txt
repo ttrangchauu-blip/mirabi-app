@@ -11,3 +11,6 @@ email-validator>=2.2
 # PostgreSQL driver for hosted deployments: DATABASE_URL=postgresql+psycopg://user:pass@host/db
 psycopg[binary]>=3.2
 tzdata>=2025.2
+# Memory pictures: rendered to PNG with the app's Nunito files (memory_render.py), lines measured with the same font.
+resvg_py>=0.5,<0.6
+fonttools>=4.50

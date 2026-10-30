@@ -13,6 +13,8 @@ import { showNumber } from './games/NumberPad';
 type Props = {
   sessionId: number; petId: string; petLevel: number;
   onReplay: (session: LearningSession) => void; onReview: (topicId: number) => void; onHome: () => void;
+  /** A stage of a lesson: open a lesson ("Trò khác trong bài": this one; "Bài tiếp theo": the next). */
+  onLesson?: (key: string) => void;
   /** EXP may have changed: the main app reloads the pet's numbers. */
   onRewards: () => void;
 };
@@ -20,7 +22,7 @@ type Props = {
 const SHOWN: (Outcome | 'unanswered')[] = ['first_try', 'hinted', 'corrected', 'wrong', 'revealed', 'missed', 'unanswered'];
 const CORRECT = new Set<string>(['first_try', 'hinted', 'corrected']);
 
-export function ResultScreen({ sessionId, petId, petLevel, onReplay, onReview, onHome, onRewards }: Props) {
+export function ResultScreen({ sessionId, petId, petLevel, onReplay, onReview, onHome, onRewards, onLesson }: Props) {
   const [result, setResult] = useState<SessionResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const load = useCallback(async () => {
@@ -34,12 +36,15 @@ export function ResultScreen({ sessionId, petId, petLevel, onReplay, onReview, o
   const s = result.session;
   const reward = rewardMessage(s.reward, s.kind);
   const total = s.required_count || 1;
+  const lesson = s.catalog ?? null;
   return (
     <>
       <Card style={styles.hero}>
         <PetArt pet={petId} size={96} stage={petLevel} still />
         <Text style={styles.title} accessibilityRole="header">{STATUS_TITLE[s.status]}</Text>
-        <Text style={[styles.muted, styles.center]}>{s.lesson.name} · {gameTitle(s.game)} · {MODE_INFO[s.mode].name}</Text>
+        {lesson?.title ? (
+          <Text style={[styles.muted, styles.center]}>Lớp {lesson.grade} · {lesson.subject_name} · {lesson.title} · {lesson.game_title ?? gameTitle(s.game)}</Text>
+        ) : <Text style={[styles.muted, styles.center]}>{s.lesson.name} · {gameTitle(s.game)} · {MODE_INFO[s.mode].name}</Text>}
         {s.end_reason === 'time_up' ? <Text style={styles.muted}>Bạn đã kết thúc khi hết thời lượng. Hết giờ không phải là thua!</Text> : null}
         {s.mode === 'challenge' ? <Text style={styles.score}>⭐ {s.score} điểm · Combo cao nhất x{s.max_combo}</Text> : null}
         <Text style={styles.accuracy}>Đúng ngay {result.counts.first_try}/{total} câu</Text>
@@ -53,7 +58,15 @@ export function ResultScreen({ sessionId, petId, petLevel, onReplay, onReview, o
       <View style={styles.actions}>
         {result.open_review_count ? <Button title={`Ôn lại (${result.open_review_count})`} icon="refresh-circle-outline" onPress={() => onReview(s.topic.id)} /> : null}
         <Button title="Chơi lại" icon="play" variant={result.open_review_count ? 'secondary' : 'primary'} onPress={() => onReplay(s)} />
-        <Button title="Về màn chọn môn" variant="ghost" onPress={onHome} />
+        {lesson?.title && onLesson && lesson.other_games.length ? (
+          <Button title="Trò khác trong bài" icon="game-controller-outline" variant="secondary" onPress={() => onLesson(lesson.lesson)} />
+        ) : null}
+        {lesson?.next && onLesson ? (
+          <Button title={`Bài tiếp theo: ${lesson.next.title}`} icon="arrow-forward" variant="secondary" onPress={() => onLesson(lesson.next!.key)} />
+        ) : null}
+        {lesson?.title && onLesson ? (
+          <Button title="Về bài học" variant="ghost" onPress={() => onLesson(lesson.lesson)} />
+        ) : <Button title="Về màn chọn môn" variant="ghost" onPress={onHome} />}
       </View>
       <SectionHeader title="Xem lại từng câu" />
       {result.items.map((item) => item.word ? (
@@ -82,6 +95,13 @@ export function ResultScreen({ sessionId, petId, petLevel, onReplay, onReview, o
 }
 
 function promptText(p: SessionResult['items'][number]['prompt']) {
+  if (p.tiles) return `${p.picture ?? ''}  ${p.tiles.map((x) => x.text).join(' · ')}`; // Ghép chữ
+  if (p.step && p.tokens) return p.tokens.map((x) => x.text).join(' '); // Thám tử chính tả: the sentence as shown
+  if (p.card) return `${p.card.picture} ${p.card.text}`.trim(); // Phân loại cùng pet
+  if (p.cards) return p.prompt ?? ''; // Sắp xếp thứ tự
+  if (p.lefts) return p.prompt ?? ''; // Ghép cặp
+  if (p.question) return p.question; // Chọn đáp án có giải thích
+  if (p.max_blocks) return `Màn ${p.number ?? ''}: đưa pet tới đích, tối đa ${p.max_blocks} lệnh`; // Lập trình đường đi
   if (p.word) return p.word;
   if (p.meaning_vi && !p.tokens) return p.meaning_vi + (p.context_vi ? ` (${p.context_vi})` : '');
   if (p.sentence) return p.sentence;

@@ -1,0 +1,3644 @@
+{
+ "subject": "informatics",
+ "version": 1,
+ "organization": "topic",
+ "source_note": "Theo yêu cầu cần đạt môn Tin học lớp 6–12 (CT GDPT 2018), theo các mạch chủ đề A–G của chương trình; ở THPT ghi rõ phần định hướng Khoa học máy tính hay Tin học ứng dụng. Tổ chức theo chủ đề, không theo mục lục bộ sách giáo khoa nào.",
+ "chapters": [
+  {
+   "key": "th6.may_tinh_cong_dong",
+   "grade": 6,
+   "order": 1,
+   "title": "Máy tính và cộng đồng",
+   "lessons": [
+    {
+     "key": "th6.thong_tin_du_lieu",
+     "order": 1,
+     "title": "Thông tin và dữ liệu",
+     "description": "Phân biệt thông tin với dữ liệu và nêu ví dụ về vật mang tin.",
+     "status": "planned"
+    },
+    {
+     "key": "th6.xu_li_thong_tin",
+     "order": 2,
+     "title": "Xử lí thông tin",
+     "description": "Biết các bước thu nhận, xử lí, lưu trữ và truyền thông tin; máy tính là công cụ xử lí thông tin.",
+     "status": "planned"
+    },
+    {
+     "key": "th6.bit_va_don_vi",
+     "order": 3,
+     "title": "Biểu diễn thông tin bằng bit và đơn vị dung lượng",
+     "description": "Biết thông tin trong máy tính được biểu diễn bằng dãy bit và đổi được các đơn vị byte, KB, MB, GB.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết bit là đơn vị nhỏ nhất, chỉ có hai trạng thái 0 và 1",
+      "Biết n bit tạo được 2ⁿ dãy khác nhau",
+      "Đổi được giữa byte, KB, MB, GB",
+      "Nhận ra các dạng thông tin: văn bản, hình ảnh, âm thanh, video"
+     ],
+     "summary": [
+      "Máy tính lưu mọi thông tin (chữ, số, ảnh, âm thanh) dưới dạng dãy bit, mỗi bit là 0 hoặc 1.",
+      "1 byte = 8 bit; 1 KB = 1 024 byte; 1 MB = 1 024 KB; 1 GB = 1 024 MB.",
+      "Thêm 1 bit thì số dãy khác nhau tăng gấp đôi: 1 bit có 2 dãy, 2 bit có 4 dãy, 3 bit có 8 dãy."
+     ],
+     "examples": [
+      {
+       "title": "Đổi đơn vị",
+       "lines": [
+        "2 MB = 2 × 1 024 KB = 2 048 KB."
+       ]
+      },
+      {
+       "title": "Dãy 2 bit",
+       "lines": [
+        "00, 01, 10, 11: đúng 4 dãy khác nhau."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Ghép cho đúng",
+       "tasks": [
+        {
+         "key": "don_vi",
+         "prompt": "Ghép mỗi đơn vị với giá trị bằng nó.",
+         "pairs": [
+          [
+           "1 byte",
+           "8 bit"
+          ],
+          [
+           "1 KB",
+           "1 024 byte"
+          ],
+          [
+           "1 MB",
+           "1 024 KB"
+          ],
+          [
+           "1 GB",
+           "1 024 MB"
+          ]
+         ],
+         "explanation": "Mỗi đơn vị (trừ byte) bằng 1 024 lần đơn vị ngay trước nó; riêng 1 byte = 8 bit."
+        },
+        {
+         "key": "so_day",
+         "prompt": "Ghép số bit với số dãy bit khác nhau tạo được.",
+         "pairs": [
+          [
+           "1 bit",
+           "2 dãy"
+          ],
+          [
+           "2 bit",
+           "4 dãy"
+          ],
+          [
+           "3 bit",
+           "8 dãy"
+          ],
+          [
+           "8 bit",
+           "256 dãy"
+          ]
+         ],
+         "explanation": "n bit tạo được 2ⁿ dãy khác nhau: 2¹ = 2, 2² = 4, 2³ = 8, 2⁸ = 256. Vì thế 1 byte biểu diễn được 256 giá trị.",
+         "hint": "Mỗi lần thêm một bit, số dãy tăng gấp đôi."
+        },
+        {
+         "key": "dang_tt",
+         "prompt": "Ghép mỗi ví dụ với dạng thông tin của nó.",
+         "pairs": [
+          [
+           "Bản nhạc",
+           "Âm thanh"
+          ],
+          [
+           "Bức ảnh chụp lớp",
+           "Hình ảnh"
+          ],
+          [
+           "Bài báo không có hình",
+           "Văn bản"
+          ],
+          [
+           "Đoạn phim có tiếng",
+           "Video"
+          ]
+         ],
+         "explanation": "Ba dạng thông tin cơ bản là văn bản, hình ảnh, âm thanh; video kết hợp hình ảnh chuyển động và âm thanh."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "th6.mang_internet",
+   "grade": 6,
+   "order": 2,
+   "title": "Mạng máy tính và Internet",
+   "lessons": [
+    {
+     "key": "th6.mang_may_tinh",
+     "order": 1,
+     "title": "Mạng máy tính",
+     "description": "Biết mạng máy tính gồm thiết bị đầu cuối, thiết bị kết nối và phần mềm; lợi ích của mạng.",
+     "status": "planned"
+    },
+    {
+     "key": "th6.internet",
+     "order": 2,
+     "title": "Internet và lợi ích của Internet",
+     "description": "Nêu đặc điểm và lợi ích chính của Internet.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th6.tim_kiem_trao_doi",
+   "grade": 6,
+   "order": 3,
+   "title": "Tổ chức lưu trữ, tìm kiếm và trao đổi thông tin",
+   "lessons": [
+    {
+     "key": "th6.www",
+     "order": 1,
+     "title": "Mạng thông tin toàn cầu (WWW)",
+     "description": "Biết trang web, website, địa chỉ trang web và trình duyệt.",
+     "status": "planned"
+    },
+    {
+     "key": "th6.may_tim_kiem",
+     "order": 2,
+     "title": "Tìm kiếm thông tin bằng máy tìm kiếm",
+     "description": "Dùng máy tìm kiếm với từ khoá phù hợp và chọn kết quả tin cậy.",
+     "status": "planned"
+    },
+    {
+     "key": "th6.thu_dien_tu",
+     "order": 3,
+     "title": "Thư điện tử",
+     "description": "Biết tài khoản thư điện tử, soạn, gửi, nhận và trả lời thư.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th6.dao_duc",
+   "grade": 6,
+   "order": 4,
+   "title": "Đạo đức, pháp luật và văn hoá trong môi trường số",
+   "lessons": [
+    {
+     "key": "th6.an_toan_internet",
+     "order": 1,
+     "title": "Mặt trái của Internet: bảo vệ thông tin cá nhân",
+     "description": "Nhận ra thông tin không nên chia sẻ công khai trên mạng và vì sao.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được tác hại khi lộ thông tin cá nhân, tài khoản trên Internet",
+      "Phân biệt nội dung có thể chia sẻ công khai và thông tin cần bảo vệ",
+      "Biết nhờ người lớn giúp khi gặp tình huống không an toàn trên mạng"
+     ],
+     "summary": [
+      "Thông tin cá nhân (nơi ở, số giấy tờ, vị trí, mật khẩu, mã OTP) bị lộ có thể dẫn đến lừa đảo, mất tài khoản, bị theo dõi.",
+      "Thứ đã đăng lên mạng rất khó xoá hẳn: người khác có thể chụp lại, chia sẻ tiếp.",
+      "Có thể chia sẻ cảm nhận, sản phẩm học tập, ảnh phong cảnh không chứa thông tin cá nhân.",
+      "Khi bị đe doạ, dụ dỗ hay bị bắt nạt trên mạng: không trả lời, lưu bằng chứng và báo bố mẹ, thầy cô."
+     ],
+     "examples": [
+      {
+       "title": "Ảnh vé máy bay",
+       "lines": [
+        "Ảnh vé có mã đặt chỗ và họ tên: người khác có thể dùng để đổi, huỷ chuyến bay."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Chia sẻ hay bảo vệ?",
+       "set": {
+        "title": "Nội dung nào có thể chia sẻ công khai, thông tin nào không nên chia sẻ?",
+        "groups": [
+         {
+          "id": "cong_khai",
+          "label": "Có thể chia sẻ công khai",
+          "icon": "🌐"
+         },
+         {
+          "id": "bao_ve",
+          "label": "Không nên chia sẻ",
+          "icon": "🛡️"
+         }
+        ],
+        "cards": [
+         {
+          "key": "cam_nhan",
+          "text": "Cảm nhận về cuốn sách vừa đọc",
+          "picture": "📖",
+          "group": "cong_khai",
+          "explanation": "Cảm nhận về sách không chứa thông tin cá nhân, có thể chia sẻ."
+         },
+         {
+          "key": "phong_canh",
+          "text": "Ảnh phong cảnh không có người, biển số hay địa chỉ",
+          "picture": "🏞️",
+          "group": "cong_khai",
+          "explanation": "Ảnh không có người, biển số, địa chỉ không làm lộ thông tin cá nhân."
+         },
+         {
+          "key": "meo_hoc",
+          "text": "Mẹo học từ vựng tiếng Anh em hay dùng",
+          "picture": "💡",
+          "group": "cong_khai",
+          "explanation": "Kinh nghiệm học tập là nội dung hữu ích, an toàn để chia sẻ."
+         },
+         {
+          "key": "san_pham",
+          "text": "Ảnh mô hình thủ công em tự làm",
+          "picture": "🛠️",
+          "group": "cong_khai",
+          "explanation": "Sản phẩm học tập có thể chia sẻ, miễn ảnh không có mặt, tên trường hay địa chỉ."
+         },
+         {
+          "key": "ma_otp",
+          "text": "Mã OTP vừa gửi về điện thoại",
+          "picture": "🔢",
+          "group": "bao_ve",
+          "explanation": "OTP là mã xác thực một lần: ai có mã là có thể đăng nhập hoặc chuyển tiền thay em. Không đưa cho bất kì ai."
+         },
+         {
+          "key": "ve_may_bay",
+          "text": "Ảnh vé máy bay có mã đặt chỗ",
+          "picture": "✈️",
+          "group": "bao_ve",
+          "explanation": "Mã đặt chỗ và họ tên cho phép người lạ xem, đổi hoặc huỷ chuyến bay của gia đình em."
+         },
+         {
+          "key": "vi_tri",
+          "text": "Vị trí hiện tại của em theo thời gian thực",
+          "picture": "📍",
+          "group": "bao_ve",
+          "explanation": "Vị trí trực tiếp cho người lạ biết em đang ở đâu, rất nguy hiểm."
+         },
+         {
+          "key": "can_cuoc",
+          "text": "Ảnh căn cước của bố mẹ",
+          "picture": "🪪",
+          "group": "bao_ve",
+          "explanation": "Giấy tờ tuỳ thân bị lộ có thể bị dùng để mở tài khoản, vay tiền giả mạo."
+         },
+         {
+          "key": "mat_khau",
+          "text": "Mật khẩu tài khoản mạng xã hội",
+          "picture": "🔑",
+          "group": "bao_ve",
+          "explanation": "Lộ mật khẩu là mất tài khoản; kẻ xấu có thể mạo danh em để lừa bạn bè."
+         },
+         {
+          "key": "lich_vang_nha",
+          "text": "Lịch cả nhà đi vắng dịp nghỉ lễ",
+          "picture": "🧳",
+          "group": "bao_ve",
+          "explanation": "Thông tin nhà không có người có thể bị kẻ trộm lợi dụng."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "th6.bat_nat_tren_mang",
+     "order": 2,
+     "title": "Ứng xử khi bị bắt nạt hoặc dụ dỗ trên mạng",
+     "description": "Biết không trả lời, lưu bằng chứng và nhờ người lớn giúp đỡ.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th6.ung_dung",
+   "grade": 6,
+   "order": 5,
+   "title": "Ứng dụng tin học",
+   "lessons": [
+    {
+     "key": "th6.so_do_tu_duy",
+     "order": 1,
+     "title": "Sơ đồ tư duy và phần mềm sơ đồ tư duy",
+     "description": "Tạo sơ đồ tư duy để tổ chức ý tưởng, bằng tay và bằng phần mềm.",
+     "status": "planned"
+    },
+    {
+     "key": "th6.dinh_dang_van_ban",
+     "order": 2,
+     "title": "Định dạng văn bản và trình bày trang",
+     "description": "Định dạng kí tự, đoạn văn, trang và chèn hình ảnh vào văn bản.",
+     "status": "planned"
+    },
+    {
+     "key": "th6.bang_trong_van_ban",
+     "order": 3,
+     "title": "Trình bày thông tin dạng bảng",
+     "description": "Tạo bảng, thêm bớt hàng cột để trình bày thông tin rõ ràng.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th6.thuat_toan",
+   "grade": 6,
+   "order": 6,
+   "title": "Giải quyết vấn đề với sự trợ giúp của máy tính: thuật toán",
+   "lessons": [
+    {
+     "key": "th6.thuat_toan_tuan_tu",
+     "order": 1,
+     "title": "Thuật toán và cấu trúc tuần tự",
+     "description": "Mô tả thuật toán bằng các bước, sắp xếp đúng thứ tự để có đúng kết quả.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Hiểu thuật toán là dãy hữu hạn các bước rõ ràng để giải một bài toán",
+      "Xác định đầu vào, đầu ra của một thuật toán",
+      "Sắp xếp đúng thứ tự các bước; nhận ra bước có rẽ nhánh"
+     ],
+     "summary": [
+      "Thuật toán có đầu vào (dữ liệu cho trước), đầu ra (kết quả) và các bước ở giữa.",
+      "Cấu trúc tuần tự: các bước được làm lần lượt, bước sau dùng kết quả của bước trước.",
+      "Cấu trúc rẽ nhánh: tuỳ điều kiện đúng hay sai mà làm việc này hay việc khác.",
+      "Có thể mô tả thuật toán bằng ngôn ngữ tự nhiên hoặc sơ đồ khối."
+     ],
+     "examples": [
+      {
+       "title": "Diện tích hình chữ nhật",
+       "lines": [
+        "Đầu vào: chiều dài a, chiều rộng b.",
+        "Đầu ra: diện tích S = a × b."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Sắp xếp các bước của thuật toán",
+       "tasks": [
+        {
+         "key": "dien_tich",
+         "prompt": "Sắp xếp các bước của thuật toán tính diện tích hình chữ nhật.",
+         "items": [
+          "Nhập chiều dài a và chiều rộng b",
+          "Nếu a hoặc b không lớn hơn 0 thì báo dữ liệu sai và kết thúc",
+          "Tính S = a × b",
+          "Đưa ra S"
+         ],
+         "explanation": "Phải có dữ liệu mới kiểm tra được; kiểm tra xong mới tính; có kết quả mới đưa ra. Bước 2 là một bước rẽ nhánh."
+        },
+        {
+         "key": "doi_coc",
+         "prompt": "Đổi chỗ nước trong cốc A và cốc B, dùng thêm cốc C rỗng. Sắp xếp các bước.",
+         "items": [
+          "Đổ nước ở cốc A sang cốc C",
+          "Đổ nước ở cốc B sang cốc A",
+          "Đổ nước ở cốc C sang cốc B"
+         ],
+         "explanation": "Phải làm rỗng cốc A trước (đổ sang C) thì mới đổ B sang A được; cuối cùng đổ phần ở C (nước của A) sang B. Đây cũng là cách máy tính đổi giá trị hai biến.",
+         "hint": "Cốc nào được làm rỗng đầu tiên?"
+        },
+        {
+         "key": "so_lon",
+         "prompt": "Sắp xếp các bước của thuật toán tìm số lớn hơn trong hai số a và b.",
+         "items": [
+          "Nhập hai số a và b",
+          "Nếu a > b thì gán kết quả là a, nếu không thì gán kết quả là b",
+          "Đưa ra kết quả"
+         ],
+         "explanation": "Đầu vào là a, b; bước rẽ nhánh chọn số lớn hơn; đầu ra là kết quả."
+        },
+        {
+         "key": "pha_tra",
+         "prompt": "Sắp xếp các bước pha một ấm trà.",
+         "items": [
+          "Đun sôi nước",
+          "Tráng ấm bằng nước sôi",
+          "Cho trà vào ấm",
+          "Rót nước sôi vào ấm, đợi vài phút",
+          "Rót trà ra chén"
+         ],
+         "explanation": "Cần nước sôi để tráng ấm; tráng xong mới cho trà; rót nước, đợi trà ngấm rồi mới rót ra chén."
+        },
+        {
+         "key": "gui_thu",
+         "prompt": "Sắp xếp các bước gửi một thư điện tử.",
+         "items": [
+          "Đăng nhập vào hộp thư",
+          "Chọn Soạn thư",
+          "Nhập địa chỉ người nhận, tiêu đề và nội dung",
+          "Nháy Gửi"
+         ],
+         "explanation": "Phải đăng nhập mới soạn được thư; viết đủ địa chỉ, tiêu đề, nội dung rồi mới gửi."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "th6.re_nhanh",
+     "order": 2,
+     "title": "Cấu trúc rẽ nhánh",
+     "description": "Mô tả thuật toán có rẽ nhánh bằng ngôn ngữ tự nhiên và sơ đồ khối.",
+     "status": "planned"
+    },
+    {
+     "key": "th6.lenh_lap",
+     "order": 3,
+     "title": "Cấu trúc lặp: lệnh lặp",
+     "description": "Dùng khối lặp để làm một việc nhiều lần, viết chương trình ngắn hơn mà vẫn đúng.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Hiểu cấu trúc lặp: một nhóm bước được làm lại nhiều lần",
+      "Nhận ra phần lặp lại trong một đường đi và gói nó vào khối lặp",
+      "Đếm đúng số lần lặp cần thiết"
+     ],
+     "summary": [
+      "Lặp với số lần biết trước: lặp lại n lần một nhóm lệnh.",
+      "Khi đường đi có một đoạn lặp lại giống hệt nhau, khối lặp giúp chương trình ngắn và dễ đọc.",
+      "Lệnh nằm trong khối lặp được làm n lần; lệnh nằm ngoài khối chỉ làm một lần."
+     ],
+     "examples": [
+      {
+       "title": "Đi thẳng 6 ô",
+       "lines": [
+        "Thay vì 6 lệnh tiến: lặp lại 6 lần [tiến]."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "code_path",
+       "title": "Lệnh lặp",
+       "levels": [
+        "i1",
+        "i2",
+        "i3"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "th7.may_tinh_cong_dong",
+   "grade": 7,
+   "order": 1,
+   "title": "Máy tính và cộng đồng",
+   "lessons": [
+    {
+     "key": "th7.thiet_bi_vao_ra",
+     "order": 1,
+     "title": "Thiết bị vào và thiết bị ra",
+     "description": "Phân biệt thiết bị đưa thông tin vào máy tính với thiết bị đưa kết quả ra.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được ví dụ về thiết bị vào, thiết bị ra",
+      "Nhận ra thiết bị vừa vào vừa ra",
+      "Biết dùng thiết bị đúng cách, an toàn"
+     ],
+     "summary": [
+      "Thiết bị vào nhận thông tin từ bên ngoài đưa vào máy tính: bàn phím, chuột, micrô, máy quét, webcam.",
+      "Thiết bị ra đưa kết quả xử lí ra ngoài: màn hình, loa, máy in, máy chiếu, tai nghe.",
+      "Có thiết bị làm cả hai việc, như màn hình cảm ứng: vừa hiện hình vừa nhận thao tác chạm."
+     ],
+     "examples": [
+      {
+       "title": "Gọi video",
+       "lines": [
+        "Webcam và micrô đưa hình, tiếng của em vào; màn hình và loa đưa hình, tiếng của bạn ra."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Vào hay ra?",
+       "set": {
+        "title": "Thiết bị nào đưa thông tin vào, thiết bị nào đưa thông tin ra?",
+        "groups": [
+         {
+          "id": "vao",
+          "label": "Thiết bị vào",
+          "icon": "⬅️"
+         },
+         {
+          "id": "ra",
+          "label": "Thiết bị ra",
+          "icon": "➡️"
+         },
+         {
+          "id": "ca_hai",
+          "label": "Vừa vào vừa ra",
+          "icon": "🔁"
+         }
+        ],
+        "cards": [
+         {
+          "key": "ban_phim",
+          "text": "Bàn phím",
+          "picture": "⌨️",
+          "group": "vao",
+          "explanation": "Bàn phím đưa chữ, số và lệnh vào máy tính."
+         },
+         {
+          "key": "chuot",
+          "text": "Chuột",
+          "picture": "🖱️",
+          "group": "vao",
+          "explanation": "Chuột đưa vị trí con trỏ và lệnh nháy chuột vào máy tính."
+         },
+         {
+          "key": "may_quet",
+          "text": "Máy quét",
+          "picture": "📠",
+          "group": "vao",
+          "explanation": "Máy quét biến trang giấy thành ảnh số đưa vào máy tính."
+         },
+         {
+          "key": "micro",
+          "text": "Micrô",
+          "picture": "🎙️",
+          "group": "vao",
+          "explanation": "Micrô thu âm thanh đưa vào máy tính."
+         },
+         {
+          "key": "webcam",
+          "text": "Webcam",
+          "picture": "📷",
+          "group": "vao",
+          "explanation": "Webcam thu hình ảnh đưa vào máy tính."
+         },
+         {
+          "key": "man_hinh",
+          "text": "Màn hình thường (không cảm ứng)",
+          "picture": "🖥️",
+          "group": "ra",
+          "explanation": "Màn hình hiện kết quả xử lí cho người dùng xem."
+         },
+         {
+          "key": "loa",
+          "text": "Loa",
+          "picture": "🔊",
+          "group": "ra",
+          "explanation": "Loa phát âm thanh từ máy tính ra."
+         },
+         {
+          "key": "may_in",
+          "text": "Máy in",
+          "picture": "🖨️",
+          "group": "ra",
+          "explanation": "Máy in đưa văn bản, hình ảnh ra giấy."
+         },
+         {
+          "key": "may_chieu",
+          "text": "Máy chiếu",
+          "picture": "📽️",
+          "group": "ra",
+          "explanation": "Máy chiếu đưa hình ảnh từ máy tính lên màn chiếu."
+         },
+         {
+          "key": "cam_ung",
+          "text": "Màn hình cảm ứng",
+          "picture": "📱",
+          "group": "ca_hai",
+          "explanation": "Màn hình cảm ứng vừa hiện hình (ra) vừa nhận thao tác chạm (vào)."
+         },
+         {
+          "key": "tai_nghe_mic",
+          "text": "Tai nghe có gắn micrô",
+          "picture": "🎧",
+          "group": "ca_hai",
+          "explanation": "Phần tai nghe phát âm thanh ra, phần micrô thu tiếng nói vào."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "th7.he_dieu_hanh_tep",
+     "order": 2,
+     "title": "Hệ điều hành, phần mềm ứng dụng và tệp",
+     "description": "Phân biệt hệ điều hành với phần mềm ứng dụng; nhận ra loại tệp qua phần mở rộng.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Phân biệt hệ điều hành và phần mềm ứng dụng",
+      "Biết tên tệp gồm phần tên và phần mở rộng",
+      "Nhận ra loại tệp thường gặp qua phần mở rộng"
+     ],
+     "summary": [
+      "Hệ điều hành (Windows, macOS, Linux, Android, iOS) quản lí máy và là nền để phần mềm ứng dụng chạy.",
+      "Phần mềm ứng dụng làm một việc cụ thể cho người dùng: soạn thảo, bảng tính, trình duyệt…",
+      "Tên tệp có dạng ten.phan_mo_rong, ví dụ baitap.docx: phần mở rộng cho biết loại tệp và phần mềm mở nó.",
+      "Không tuỳ tiện đổi phần mở rộng: tệp có thể không mở được nữa."
+     ],
+     "examples": [
+      {
+       "title": "Một tên tệp",
+       "lines": [
+        "anh_lop7A.jpg: tên là anh_lop7A, phần mở rộng .jpg cho biết đây là tệp ảnh."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Ghép cho đúng",
+       "tasks": [
+        {
+         "key": "van_phong",
+         "prompt": "Ghép phần mở rộng với loại tệp.",
+         "pairs": [
+          [
+           ".docx",
+           "Văn bản Word"
+          ],
+          [
+           ".xlsx",
+           "Bảng tính Excel"
+          ],
+          [
+           ".pptx",
+           "Bài trình chiếu PowerPoint"
+          ],
+          [
+           ".pdf",
+           "Tài liệu PDF"
+          ]
+         ],
+         "explanation": "Mỗi phần mềm văn phòng lưu tệp với phần mở rộng riêng; PDF giữ nguyên trình bày khi mở ở máy khác."
+        },
+        {
+         "key": "da_phuong_tien",
+         "prompt": "Ghép phần mở rộng với loại tệp.",
+         "pairs": [
+          [
+           ".jpg",
+           "Ảnh"
+          ],
+          [
+           ".mp3",
+           "Âm thanh"
+          ],
+          [
+           ".mp4",
+           "Video"
+          ],
+          [
+           ".zip",
+           "Tệp nén"
+          ]
+         ],
+         "explanation": ".jpg là ảnh, .mp3 là âm thanh, .mp4 là video; .zip gói và nén nhiều tệp lại cho gọn."
+        },
+        {
+         "key": "khac",
+         "prompt": "Ghép phần mở rộng với loại tệp.",
+         "pairs": [
+          [
+           ".txt",
+           "Văn bản thuần, không định dạng"
+          ],
+          [
+           ".html",
+           "Trang web"
+          ],
+          [
+           ".exe",
+           "Chương trình chạy trên Windows"
+          ],
+          [
+           ".png",
+           "Ảnh, có thể có nền trong suốt"
+          ]
+         ],
+         "explanation": "Tệp .exe là chương trình: chỉ mở khi biết rõ nguồn gốc, vì phần mềm độc hại thường ở dạng này."
+        },
+        {
+         "key": "phan_mem",
+         "prompt": "Ghép mỗi phần mềm với loại của nó.",
+         "pairs": [
+          [
+           "Windows",
+           "Hệ điều hành máy tính"
+          ],
+          [
+           "Android",
+           "Hệ điều hành điện thoại"
+          ],
+          [
+           "Microsoft Word",
+           "Phần mềm soạn thảo văn bản"
+          ],
+          [
+           "Google Chrome",
+           "Trình duyệt web"
+          ]
+         ],
+         "explanation": "Windows và Android là hệ điều hành; Word và Chrome là phần mềm ứng dụng chạy trên hệ điều hành."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "th7.quan_li_tep",
+     "order": 3,
+     "title": "Quản lí tệp và thư mục",
+     "description": "Tạo, đổi tên, sao chép, di chuyển, xoá tệp và thư mục; sao lưu dữ liệu.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th7.trao_doi_thong_tin",
+   "grade": 7,
+   "order": 2,
+   "title": "Tổ chức lưu trữ, tìm kiếm và trao đổi thông tin",
+   "lessons": [
+    {
+     "key": "th7.mang_xa_hoi",
+     "order": 1,
+     "title": "Mạng xã hội và một số kênh trao đổi thông tin",
+     "description": "Biết lợi ích, tác hại của mạng xã hội và dùng nó đúng cách, đúng tuổi.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th7.van_hoa",
+   "grade": 7,
+   "order": 3,
+   "title": "Đạo đức, pháp luật và văn hoá trong môi trường số",
+   "lessons": [
+    {
+     "key": "th7.giao_tiep_qua_mang",
+     "order": 1,
+     "title": "Văn hoá giao tiếp qua mạng",
+     "description": "Giao tiếp lịch sự, tôn trọng người khác khi nhắn tin, bình luận.",
+     "status": "planned"
+    },
+    {
+     "key": "th7.thong_tin_xau",
+     "order": 2,
+     "title": "Ứng xử khi gặp thông tin xấu trên mạng",
+     "description": "Không chia sẻ tin giả, nội dung xấu và biết báo cáo, nhờ người lớn giúp.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th7.ung_dung",
+   "grade": 7,
+   "order": 4,
+   "title": "Ứng dụng tin học",
+   "lessons": [
+    {
+     "key": "th7.bang_tinh",
+     "order": 1,
+     "title": "Làm quen với bảng tính",
+     "description": "Biết ô, hàng, cột, địa chỉ ô và nhập dữ liệu vào bảng tính.",
+     "status": "planned"
+    },
+    {
+     "key": "th7.cong_thuc_ham",
+     "order": 2,
+     "title": "Tính toán bằng công thức và hàm SUM, AVERAGE, MAX, MIN",
+     "description": "Viết công thức dùng địa chỉ ô và một số hàm cơ bản.",
+     "status": "planned"
+    },
+    {
+     "key": "th7.trinh_chieu",
+     "order": 3,
+     "title": "Tạo bài trình chiếu có ảnh và hiệu ứng",
+     "description": "Tạo bài trình chiếu có cấu trúc, chèn ảnh và hiệu ứng vừa phải.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th7.thuat_toan",
+   "grade": 7,
+   "order": 5,
+   "title": "Giải quyết vấn đề với sự trợ giúp của máy tính: tìm kiếm và sắp xếp",
+   "lessons": [
+    {
+     "key": "th7.tim_kiem",
+     "order": 1,
+     "title": "Tìm kiếm tuần tự và tìm kiếm nhị phân",
+     "description": "Thực hiện từng bước hai thuật toán tìm kiếm và biết khi nào dùng thuật toán nào.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Thực hiện được tìm kiếm tuần tự trên một dãy",
+      "Thực hiện được tìm kiếm nhị phân trên dãy đã sắp xếp",
+      "Tìm lỗi trong mô tả thuật toán tìm kiếm"
+     ],
+     "summary": [
+      "Tìm kiếm tuần tự: xét lần lượt từng phần tử từ đầu dãy; gặp giá trị cần tìm thì dừng, hết dãy mà chưa gặp thì không tìm thấy.",
+      "Tìm kiếm nhị phân chỉ dùng cho dãy đã sắp xếp: so với phần tử ở giữa, rồi bỏ đi một nửa dãy không thể chứa giá trị cần tìm.",
+      "Dãy càng dài, tìm kiếm nhị phân càng nhanh hơn nhiều so với tìm kiếm tuần tự."
+     ],
+     "examples": [
+      {
+       "title": "Tuần tự",
+       "lines": [
+        "Tìm 5 trong 2, 7, 5, 1: so với 2, rồi 7, rồi 5 → tìm thấy ở vị trí 3."
+       ]
+      },
+      {
+       "title": "Nhị phân",
+       "lines": [
+        "Tìm 9 trong 1, 3, 5, 7, 9: phần tử giữa là 5 < 9 → chỉ còn xét 7, 9."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Tìm lỗi logic",
+       "style": "predict",
+       "tasks": [
+        {
+         "key": "tuan_tu",
+         "passage": "Dãy số: 4, 9, 2, 7, 5.\nTìm số 7 bằng tìm kiếm tuần tự, xét từ trái sang phải.",
+         "question": "Thuật toán phải so sánh bao nhiêu lần thì tìm thấy số 7?",
+         "options": [
+          {
+           "text": "3 lần",
+           "ok": false,
+           "why": "Ba lần đầu chỉ mới so với 4, 9, 2; chưa gặp 7."
+          },
+          {
+           "text": "4 lần",
+           "ok": true,
+           "why": "Đúng. So với 4, 9, 2 rồi đến 7 ở lần thứ 4 thì dừng."
+          },
+          {
+           "text": "5 lần",
+           "ok": false,
+           "why": "Thuật toán dừng ngay khi tìm thấy, không cần xét số 5 ở cuối."
+          }
+         ],
+         "explanation": "Tìm kiếm tuần tự so sánh lần lượt từ đầu dãy và dừng ngay khi gặp giá trị cần tìm."
+        },
+        {
+         "key": "dieu_kien",
+         "question": "Tìm kiếm nhị phân chỉ dùng được khi nào?",
+         "options": [
+          {
+           "text": "Khi dãy đã được sắp xếp",
+           "ok": true,
+           "why": "Đúng. Nhờ dãy có thứ tự, so với phần tử giữa mới biết được nửa nào chắc chắn không chứa giá trị cần tìm."
+          },
+          {
+           "text": "Khi dãy có số phần tử chẵn",
+           "ok": false,
+           "why": "Số phần tử chẵn hay lẻ không quan trọng; phần tử giữa luôn chọn được."
+          },
+          {
+           "text": "Khi dãy có ít hơn 10 phần tử",
+           "ok": false,
+           "why": "Ngược lại, dãy càng dài thì tìm kiếm nhị phân càng có lợi."
+          }
+         ],
+         "explanation": "Điều kiện bắt buộc của tìm kiếm nhị phân là dãy đã sắp xếp (tăng dần hoặc giảm dần)."
+        },
+        {
+         "key": "giua",
+         "passage": "Dãy tăng dần có 7 phần tử: 2, 5, 8, 11, 14, 17, 20.\nTìm số 17 bằng tìm kiếm nhị phân.",
+         "question": "Số đầu tiên được đem so sánh với 17 là số nào?",
+         "options": [
+          {
+           "text": "2",
+           "ok": false,
+           "why": "Tìm kiếm nhị phân không bắt đầu từ đầu dãy; đó là cách của tìm kiếm tuần tự."
+          },
+          {
+           "text": "11",
+           "ok": true,
+           "why": "Đúng. 11 ở vị trí giữa (thứ 4 trong 7). Vì 11 < 17 nên chỉ còn xét 14, 17, 20."
+          },
+          {
+           "text": "14",
+           "ok": false,
+           "why": "14 chỉ được xét sau, khi đã bỏ nửa đầu của dãy."
+          },
+          {
+           "text": "20",
+           "ok": false,
+           "why": "Thuật toán không bắt đầu từ cuối dãy."
+          }
+         ],
+         "explanation": "Mỗi bước, tìm kiếm nhị phân so với phần tử ở giữa vùng đang xét rồi bỏ đi một nửa."
+        },
+        {
+         "key": "loi_dung",
+         "passage": "Thuật toán của Minh để tìm x trong một dãy:\n1. Xét phần tử đầu tiên.\n2. Nếu phần tử đang xét bằng x thì thông báo \"Tìm thấy\" và kết thúc.\n3. Nếu không thì thông báo \"Không tìm thấy\" và kết thúc.",
+         "question": "Thuật toán của Minh sai ở đâu?",
+         "options": [
+          {
+           "text": "Chỉ xét một phần tử; phải chuyển sang phần tử tiếp theo và lặp lại đến hết dãy",
+           "ok": true,
+           "why": "Đúng. Bước 3 kết luận quá sớm; x có thể nằm ở phía sau."
+          },
+          {
+           "text": "Phải xét từ cuối dãy về đầu",
+           "ok": false,
+           "why": "Xét từ đầu hay từ cuối đều được; lỗi là chỉ xét một phần tử."
+          },
+          {
+           "text": "Phải sắp xếp dãy trước khi tìm",
+           "ok": false,
+           "why": "Tìm kiếm tuần tự không cần dãy đã sắp xếp."
+          }
+         ],
+         "explanation": "Chỉ được kết luận \"Không tìm thấy\" sau khi đã xét hết mọi phần tử của dãy."
+        },
+        {
+         "key": "vi_tri",
+         "passage": "Dãy số: 3, 8, 8, 1, 8.\nTìm kiếm tuần tự số 8 từ trái sang phải, dừng ngay khi tìm thấy.",
+         "question": "Thuật toán thông báo tìm thấy số 8 ở vị trí thứ mấy?",
+         "options": [
+          {
+           "text": "Vị trí 2",
+           "ok": true,
+           "why": "Đúng. Số 8 đầu tiên gặp được ở vị trí 2 và thuật toán dừng ngay."
+          },
+          {
+           "text": "Vị trí 3",
+           "ok": false,
+           "why": "Thuật toán đã dừng ở vị trí 2, không xét tới vị trí 3."
+          },
+          {
+           "text": "Vị trí 5",
+           "ok": false,
+           "why": "Vị trí 5 là số 8 cuối cùng; thuật toán dừng từ trước đó."
+          }
+         ],
+         "explanation": "Khi có nhiều phần tử bằng giá trị cần tìm, tìm kiếm tuần tự từ đầu dãy cho vị trí xuất hiện đầu tiên."
+        },
+        {
+         "key": "khong_co",
+         "passage": "Dãy tăng dần: 1, 4, 6, 9, 12, 15, 18.\nTìm số 10 bằng tìm kiếm nhị phân.",
+         "question": "Thuật toán kết thúc thế nào?",
+         "options": [
+          {
+           "text": "Báo không tìm thấy khi vùng tìm kiếm không còn phần tử nào",
+           "ok": true,
+           "why": "Đúng. 9 < 10 < 12 nên vùng xét thu hẹp dần đến rỗng; trong dãy không có 10."
+          },
+          {
+           "text": "Báo tìm thấy ở vị trí 4",
+           "ok": false,
+           "why": "Vị trí 4 là số 9, không phải 10."
+          },
+          {
+           "text": "Chuyển sang tìm kiếm tuần tự",
+           "ok": false,
+           "why": "Thuật toán không đổi cách tìm; nó kết luận không có khi vùng xét rỗng."
+          }
+         ],
+         "explanation": "Lượt 1 so với 9 (giữa): 9 < 10, còn 12, 15, 18. Lượt 2 so với 15: 15 > 10, còn 12. Lượt 3: 12 ≠ 10, vùng xét rỗng → không tìm thấy."
+        },
+        {
+         "key": "chon_cach",
+         "question": "Dãy 20 số chưa sắp xếp, em chỉ cần tìm một số một lần duy nhất. Nên dùng cách nào?",
+         "options": [
+          {
+           "text": "Tìm kiếm tuần tự",
+           "ok": true,
+           "why": "Đúng. Dãy chưa sắp xếp, tìm một lần thì xét lần lượt là đơn giản và đủ nhanh."
+          },
+          {
+           "text": "Tìm kiếm nhị phân ngay trên dãy đó",
+           "ok": false,
+           "why": "Không được: tìm kiếm nhị phân trên dãy chưa sắp xếp có thể cho kết quả sai."
+          },
+          {
+           "text": "Sắp xếp dãy rồi tìm kiếm nhị phân",
+           "ok": false,
+           "why": "Làm được, nhưng sắp xếp tốn công hơn cả việc tìm tuần tự một lần."
+          }
+         ],
+         "explanation": "Chọn thuật toán theo dữ liệu: dãy chưa sắp xếp và chỉ tìm một lần → tìm kiếm tuần tự."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "th7.noi_bot",
+     "order": 2,
+     "title": "Thuật toán sắp xếp nổi bọt",
+     "description": "Thực hiện từng lượt so sánh, đổi chỗ hai phần tử cạnh nhau để sắp xếp dãy.",
+     "status": "planned"
+    },
+    {
+     "key": "th7.sap_xep_chon",
+     "order": 3,
+     "title": "Thuật toán sắp xếp chọn",
+     "description": "Mỗi lượt chọn phần tử nhỏ nhất còn lại và đưa về đúng vị trí.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th8.may_tinh_cong_dong",
+   "grade": 8,
+   "order": 1,
+   "title": "Máy tính và cộng đồng",
+   "lessons": [
+    {
+     "key": "th8.luoc_su",
+     "order": 1,
+     "title": "Lược sử công cụ tính toán",
+     "description": "Biết các công cụ tính toán từ bàn tính đến máy tính điện tử.",
+     "status": "planned"
+    },
+    {
+     "key": "th8.the_he_may_tinh",
+     "order": 2,
+     "title": "Máy tính điện tử qua các thế hệ",
+     "description": "Biết các thế hệ máy tính và ảnh hưởng của máy tính đến đời sống.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th8.thong_tin_so",
+   "grade": 8,
+   "order": 2,
+   "title": "Tổ chức lưu trữ, tìm kiếm và trao đổi thông tin",
+   "lessons": [
+    {
+     "key": "th8.dac_diem_thong_tin_so",
+     "order": 1,
+     "title": "Đặc điểm của thông tin trong môi trường số",
+     "description": "Biết thông tin số dễ sao chép, lan truyền, khó xoá và có độ tin cậy khác nhau.",
+     "status": "planned"
+    },
+    {
+     "key": "th8.thong_tin_tin_cay",
+     "order": 2,
+     "title": "Khai thác thông tin số có độ tin cậy",
+     "description": "Chọn nguồn tin cậy và kiểm tra chéo thông tin trước khi dùng.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th8.dao_duc",
+   "grade": 8,
+   "order": 3,
+   "title": "Đạo đức, pháp luật và văn hoá trong môi trường số",
+   "lessons": [
+    {
+     "key": "th8.san_pham_so",
+     "order": 1,
+     "title": "Đạo đức và văn hoá khi sử dụng sản phẩm số",
+     "description": "Tôn trọng bản quyền, ghi nguồn và không dùng sản phẩm số trái phép.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th8.ung_dung",
+   "grade": 8,
+   "order": 4,
+   "title": "Ứng dụng tin học",
+   "lessons": [
+    {
+     "key": "th8.sap_xep_loc",
+     "order": 1,
+     "title": "Sắp xếp và lọc dữ liệu trong bảng tính",
+     "description": "Sắp xếp, lọc dữ liệu để tìm thông tin cần thiết.",
+     "status": "planned"
+    },
+    {
+     "key": "th8.bieu_do",
+     "order": 2,
+     "title": "Biểu đồ trong bảng tính",
+     "description": "Chọn loại biểu đồ phù hợp và tạo biểu đồ từ dữ liệu.",
+     "status": "planned"
+    },
+    {
+     "key": "th8.do_hoa_van_ban",
+     "order": 3,
+     "title": "Xử lí đồ hoạ trong văn bản",
+     "description": "Chèn, chỉnh hình ảnh, hình vẽ và sắp xếp chúng trong văn bản.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th8.lap_trinh",
+   "grade": 8,
+   "order": 5,
+   "title": "Giải quyết vấn đề với sự trợ giúp của máy tính: lập trình trực quan",
+   "lessons": [
+    {
+     "key": "th8.bien_bieu_thuc",
+     "order": 1,
+     "title": "Biến và biểu thức trong chương trình",
+     "description": "Tạo biến, gán giá trị và dùng phép toán số học, so sánh, logic.",
+     "status": "planned"
+    },
+    {
+     "key": "th8.lenh_lap",
+     "order": 2,
+     "title": "Lệnh lặp trong lập trình trực quan",
+     "description": "Dùng khối lặp cho các đoạn đường đi lặp lại, kể cả đoạn gồm nhiều lệnh.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nhận ra nhóm lệnh lặp lại trong một chương trình dài",
+      "Đặt nhiều lệnh vào trong một khối lặp và chọn đúng số lần lặp",
+      "Kết hợp khối lặp với các lệnh đứng trước, đứng sau nó"
+     ],
+     "summary": [
+      "Khối lặp có thể chứa nhiều lệnh: cả nhóm lệnh được làm lại mỗi lần lặp.",
+      "Tìm mẫu lặp: đoạn nào của đường đi giống hệt nhau, lặp mấy lần?",
+      "Chương trình có thể gồm lệnh tuần tự, rồi một khối lặp, rồi lại lệnh tuần tự."
+     ],
+     "examples": [
+      {
+       "title": "Đường bậc thang",
+       "lines": [
+        "Lặp lại 3 lần [tiến, tiến, rẽ trái, tiến, tiến, rẽ phải]."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "code_path",
+       "title": "Lệnh lặp",
+       "levels": [
+        "i4",
+        "i5",
+        "i6"
+       ]
+      }
+     ]
+    },
+    {
+     "key": "th8.tim_loi_logic",
+     "order": 3,
+     "title": "Tìm lỗi logic: biến, rẽ nhánh và lặp",
+     "description": "Đọc chương trình trực quan có biến, rẽ nhánh, lặp; dự đoán kết quả và tìm lỗi logic.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Theo dõi giá trị của biến sau từng lần lặp",
+      "Dự đoán nhánh được thực hiện của câu lệnh rẽ nhánh",
+      "Phát hiện lỗi logic: điều kiện sai, vòng lặp không dừng, lệnh đặt sai thứ tự"
+     ],
+     "summary": [
+      "Lỗi logic: chương trình vẫn chạy nhưng cho kết quả sai ý người viết.",
+      "Muốn tìm lỗi, hãy lập bảng giá trị của biến sau mỗi lần lặp.",
+      "Vòng lặp \"lặp lại cho đến khi\" chỉ dừng khi điều kiện đúng; nếu điều kiện không bao giờ đúng, vòng lặp chạy mãi.",
+      "Kiểm tra điều kiện ở giá trị biên (ví dụ điểm đúng bằng 5)."
+     ],
+     "examples": [
+      {
+       "title": "Bảng giá trị",
+       "lines": [
+        "đặt n = 0; lặp lại 3 lần: thay đổi n một lượng 2",
+        "Sau lần 1: n = 2; lần 2: n = 4; lần 3: n = 6."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Tìm lỗi logic",
+       "style": "predict",
+       "tasks": [
+        {
+         "key": "tong_bien",
+         "passage": "đặt tổng = 0\nđặt i = 1\nlặp lại cho đến khi i > 4:\n    thay đổi tổng một lượng i\n    thay đổi i một lượng 1\nnói tổng",
+         "question": "Nhân vật nói số nào?",
+         "options": [
+          {
+           "text": "6",
+           "ok": false,
+           "why": "6 = 1 + 2 + 3: còn thiếu lần lặp với i = 4 (vòng lặp chỉ dừng khi i > 4)."
+          },
+          {
+           "text": "10",
+           "ok": true,
+           "why": "Đúng. tổng = 1 + 2 + 3 + 4 = 10; khi i = 5 thì i > 4 nên vòng lặp dừng."
+          },
+          {
+           "text": "15",
+           "ok": false,
+           "why": "15 = 1 + 2 + 3 + 4 + 5: i = 5 không được cộng vì vòng lặp đã dừng."
+          }
+         ],
+         "explanation": "Lập bảng: i = 1 → tổng 1; i = 2 → 3; i = 3 → 6; i = 4 → 10; i = 5 thì dừng."
+        },
+        {
+         "key": "bien_bang",
+         "passage": "Nam muốn báo \"Đạt\" khi điểm từ 5 trở lên:\nnếu điểm > 5 thì\n    nói \"Đạt\"\nnếu không thì\n    nói \"Chưa đạt\"",
+         "question": "Chương trình của Nam sai ở đâu?",
+         "options": [
+          {
+           "text": "Điểm 5 bị báo \"Chưa đạt\"; điều kiện phải là điểm ≥ 5",
+           "ok": true,
+           "why": "Đúng. 5 > 5 là sai nên điểm 5 rơi vào nhánh \"Chưa đạt\". Có thể viết điều kiện: không (điểm < 5)."
+          },
+          {
+           "text": "Điểm 6 bị báo \"Chưa đạt\"",
+           "ok": false,
+           "why": "6 > 5 đúng nên điểm 6 được báo \"Đạt\"."
+          },
+          {
+           "text": "Chương trình luôn nói \"Đạt\"",
+           "ok": false,
+           "why": "Điểm từ 5 trở xuống làm điều kiện sai nên nhánh \"Chưa đạt\" vẫn chạy."
+          }
+         ],
+         "explanation": "Lỗi ở giá trị biên rất hay gặp: luôn thử chương trình với đúng giá trị ở ranh giới."
+        },
+        {
+         "key": "khong_dung",
+         "passage": "đặt đếm = 10\nlặp lại cho đến khi đếm = 0:\n    thay đổi đếm một lượng -3\nnói \"Xong!\"",
+         "question": "Điều gì xảy ra khi chạy chương trình?",
+         "options": [
+          {
+           "text": "Vòng lặp chạy mãi, không bao giờ nói \"Xong!\"",
+           "ok": true,
+           "why": "Đúng. đếm lần lượt là 10, 7, 4, 1, -2, …: không bao giờ bằng 0."
+          },
+          {
+           "text": "Nói \"Xong!\" sau 3 lần lặp",
+           "ok": false,
+           "why": "Sau 3 lần, đếm = 1, chưa bằng 0."
+          },
+          {
+           "text": "Nói \"Xong!\" khi đếm bằng 1",
+           "ok": false,
+           "why": "Điều kiện dừng là đếm = 0, không phải đếm = 1."
+          }
+         ],
+         "explanation": "Sửa bằng điều kiện dừng đếm < 1: khi đếm thành -2 thì vòng lặp dừng."
+        },
+        {
+         "key": "chan_le",
+         "passage": "đặt x = 7\nnếu (x chia lấy dư cho 2) = 0 thì\n    nói \"Chẵn\"\nnếu không thì\n    nói \"Lẻ\"",
+         "question": "Nhân vật nói gì?",
+         "options": [
+          {
+           "text": "\"Chẵn\"",
+           "ok": false,
+           "why": "7 chia 2 dư 1, nên điều kiện (dư = 0) sai."
+          },
+          {
+           "text": "\"Lẻ\"",
+           "ok": true,
+           "why": "Đúng. 7 chia 2 dư 1 ≠ 0 nên chạy nhánh \"nếu không thì\"."
+          },
+          {
+           "text": "Không nói gì",
+           "ok": false,
+           "why": "Khối nếu… thì… nếu không thì… luôn chạy đúng một nhánh."
+          }
+         ],
+         "explanation": "Số chia hết cho 2 (dư 0) là số chẵn; dư 1 là số lẻ."
+        },
+        {
+         "key": "long_nhau",
+         "passage": "đặt n = 0\nlặp lại 3 lần:\n    lặp lại 2 lần:\n        thay đổi n một lượng 1\nnói n",
+         "question": "Nhân vật nói số nào?",
+         "options": [
+          {
+           "text": "5",
+           "ok": false,
+           "why": "Hai vòng lặp lồng nhau thì nhân số lần, không cộng: 3 × 2."
+          },
+          {
+           "text": "6",
+           "ok": true,
+           "why": "Đúng. Vòng ngoài 3 lần, mỗi lần vòng trong chạy 2 lần: n tăng 3 × 2 = 6 lần."
+          },
+          {
+           "text": "2",
+           "ok": false,
+           "why": "Vòng trong không chỉ chạy một lượt; nó chạy lại trong mỗi lần của vòng ngoài."
+          }
+         ],
+         "explanation": "Với vòng lặp lồng nhau, số lần chạy lệnh bên trong bằng tích số lần lặp của các vòng."
+        },
+        {
+         "key": "dem_nguoc",
+         "passage": "Chương trình đếm ngược 3, 2, 1 rồi nói \"Bắt đầu!\":\nđặt đếm = 3\nlặp lại 3 lần:\n    thay đổi đếm một lượng -1\n    nói đếm trong 1 giây\nnói \"Bắt đầu!\"",
+         "question": "Nhân vật nói những số nào trước khi nói \"Bắt đầu!\"?",
+         "options": [
+          {
+           "text": "3, 2, 1",
+           "ok": false,
+           "why": "Đó là ý muốn của người viết, nhưng biến bị giảm trước khi nói."
+          },
+          {
+           "text": "2, 1, 0",
+           "ok": true,
+           "why": "Đúng. Mỗi lần lặp giảm đếm trước rồi mới nói: 2, 1, 0. Sửa: đổi chỗ hai lệnh trong vòng lặp."
+          },
+          {
+           "text": "3, 2, 1, 0",
+           "ok": false,
+           "why": "Vòng lặp chỉ chạy 3 lần nên chỉ nói 3 số."
+          }
+         ],
+         "explanation": "Thứ tự lệnh trong vòng lặp quan trọng: nói rồi mới giảm thì được 3, 2, 1."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "th8.huong_nghiep",
+   "grade": 8,
+   "order": 6,
+   "title": "Hướng nghiệp với tin học",
+   "lessons": [
+    {
+     "key": "th8.nghe_tin_hoc",
+     "order": 1,
+     "title": "Tin học và ngành nghề",
+     "description": "Biết một số nghề dùng tin học và nghề trong lĩnh vực tin học.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th9.may_tinh_cong_dong",
+   "grade": 9,
+   "order": 1,
+   "title": "Máy tính và cộng đồng",
+   "lessons": [
+    {
+     "key": "th9.vai_tro_may_tinh",
+     "order": 1,
+     "title": "Vai trò của máy tính trong đời sống",
+     "description": "Nêu ví dụ máy tính và thiết bị thông minh giúp con người trong các lĩnh vực.",
+     "status": "planned"
+    },
+    {
+     "key": "th9.thiet_bi_thong_minh",
+     "order": 2,
+     "title": "Thiết bị có gắn bộ xử lí thông tin",
+     "description": "Nhận ra bộ xử lí thông tin trong đồ dùng hằng ngày như máy giặt, điều hoà.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th9.thong_tin",
+   "grade": 9,
+   "order": 2,
+   "title": "Tổ chức lưu trữ, tìm kiếm và trao đổi thông tin",
+   "lessons": [
+    {
+     "key": "th9.chat_luong_thong_tin",
+     "order": 1,
+     "title": "Đánh giá chất lượng thông tin",
+     "description": "Đánh giá thông tin theo tính mới, chính xác, đầy đủ và sử dụng được.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th9.dao_duc",
+   "grade": 9,
+   "order": 3,
+   "title": "Đạo đức, pháp luật và văn hoá trong môi trường số",
+   "lessons": [
+    {
+     "key": "th9.phap_li_moi_truong_so",
+     "order": 1,
+     "title": "Một số vấn đề pháp lí và đạo đức trong môi trường số",
+     "description": "Phân biệt hành vi đúng pháp luật, có đạo đức với hành vi vi phạm khi dùng Internet.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nhận ra hành vi vi phạm bản quyền, quyền riêng tư, quyền hình ảnh",
+      "Biết lan truyền tin giả, xúc phạm người khác trên mạng là vi phạm pháp luật",
+      "Biết cách dùng sản phẩm số của người khác đúng pháp luật: xin phép, ghi nguồn, dùng giấy phép"
+     ],
+     "summary": [
+      "Sản phẩm số (phần mềm, ảnh, nhạc, bài viết) được bảo hộ quyền tác giả: dùng phải đúng giấy phép, ghi nguồn.",
+      "Hình ảnh và thông tin cá nhân của mỗi người được pháp luật bảo vệ: đăng ảnh người khác cần họ đồng ý.",
+      "Đăng, chia sẻ tin giả, xúc phạm danh dự người khác trên mạng có thể bị xử phạt.",
+      "Truy cập trái phép tài khoản, thiết bị của người khác là vi phạm pháp luật."
+     ],
+     "examples": [
+      {
+       "title": "Dùng ảnh trên mạng",
+       "lines": [
+        "Ảnh có giấy phép Creative Commons: dùng được nếu làm đúng điều kiện, ví dụ ghi tên tác giả."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Đúng hay vi phạm?",
+       "set": {
+        "title": "Hành vi nào đúng pháp luật và đạo đức, hành vi nào vi phạm?",
+        "groups": [
+         {
+          "id": "dung",
+          "label": "Đúng pháp luật, đạo đức",
+          "icon": "✅"
+         },
+         {
+          "id": "vi_pham",
+          "label": "Vi phạm",
+          "icon": "⚠️"
+         }
+        ],
+        "cards": [
+         {
+          "key": "ghi_nguon",
+          "text": "Chia sẻ bài báo kèm đường dẫn đến trang gốc",
+          "picture": "🔗",
+          "group": "dung",
+          "explanation": "Chia sẻ đường dẫn và ghi rõ nguồn là tôn trọng tác giả."
+         },
+         {
+          "key": "cc_by",
+          "text": "Dùng ảnh có giấy phép Creative Commons và ghi tên tác giả",
+          "picture": "🖼️",
+          "group": "dung",
+          "explanation": "Giấy phép cho phép dùng khi làm đúng điều kiện, như ghi tên tác giả."
+         },
+         {
+          "key": "ban_quyen",
+          "text": "Mua phần mềm có bản quyền để dùng",
+          "picture": "💳",
+          "group": "dung",
+          "explanation": "Dùng phần mềm có bản quyền là đúng luật và an toàn hơn."
+         },
+         {
+          "key": "bao_cao",
+          "text": "Báo cáo bài đăng lừa đảo cho nền tảng mạng xã hội",
+          "picture": "🚩",
+          "group": "dung",
+          "explanation": "Báo cáo giúp ngăn kẻ lừa đảo tiếp cận người khác."
+         },
+         {
+          "key": "trich_dan",
+          "text": "Trích một đoạn ngắn trong sách, có ghi nguồn, để làm bài",
+          "picture": "📑",
+          "group": "dung",
+          "explanation": "Trích dẫn hợp lí, có ghi nguồn để học tập là cách dùng được pháp luật cho phép."
+         },
+         {
+          "key": "crack",
+          "text": "Tải và phát tán phần mềm đã bị bẻ khoá",
+          "picture": "🏴‍☠️",
+          "group": "vi_pham",
+          "explanation": "Bẻ khoá, phát tán phần mềm trái phép vi phạm quyền tác giả; tệp bẻ khoá còn hay chứa mã độc."
+         },
+         {
+          "key": "anh_ban",
+          "text": "Đăng ảnh của bạn khi bạn chưa đồng ý",
+          "picture": "📸",
+          "group": "vi_pham",
+          "explanation": "Mỗi người có quyền đối với hình ảnh của mình; đăng ảnh người khác cần được họ đồng ý."
+         },
+         {
+          "key": "tin_gia",
+          "text": "Chia sẻ tin giả về dịch bệnh cho \"vui\"",
+          "picture": "📰",
+          "group": "vi_pham",
+          "explanation": "Lan truyền tin giả gây hoang mang và có thể bị xử phạt."
+         },
+         {
+          "key": "dang_nhap",
+          "text": "Đăng nhập tài khoản của người khác khi chưa được phép",
+          "picture": "🔓",
+          "group": "vi_pham",
+          "explanation": "Truy cập trái phép tài khoản người khác là vi phạm pháp luật, dù chỉ để \"xem thử\"."
+         },
+         {
+          "key": "xuc_pham",
+          "text": "Viết bình luận xúc phạm một bạn trong lớp",
+          "picture": "💢",
+          "group": "vi_pham",
+          "explanation": "Xúc phạm danh dự người khác trên mạng là bắt nạt và vi phạm pháp luật."
+         }
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "th9.ung_dung",
+   "grade": 9,
+   "order": 4,
+   "title": "Ứng dụng tin học",
+   "lessons": [
+    {
+     "key": "th9.mo_phong",
+     "order": 1,
+     "title": "Phần mềm mô phỏng",
+     "description": "Dùng phần mềm mô phỏng để tìm hiểu hiện tượng tự nhiên và quá trình.",
+     "status": "planned"
+    },
+    {
+     "key": "th9.trinh_bay_hop_tac",
+     "order": 2,
+     "title": "Trình bày thông tin trong trao đổi và hợp tác",
+     "description": "Trình bày thông tin rõ ràng bằng bảng, sơ đồ, biểu đồ khi làm việc nhóm.",
+     "status": "planned"
+    },
+    {
+     "key": "th9.ham_dieu_kien",
+     "order": 3,
+     "title": "Hàm có điều kiện trong bảng tính: IF, COUNTIF, SUMIF",
+     "description": "Đọc công thức có điều kiện, dự đoán kết quả và tìm lỗi trong công thức.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Hiểu cú pháp và cách tính của hàm IF, COUNTIF, SUMIF",
+      "Dự đoán kết quả công thức với dữ liệu cho trước",
+      "Phát hiện lỗi logic khi lồng nhiều hàm IF"
+     ],
+     "summary": [
+      "=IF(điều kiện, giá trị nếu đúng, giá trị nếu sai).",
+      "=COUNTIF(vùng, điều kiện): đếm số ô trong vùng thoả mãn điều kiện.",
+      "=SUMIF(vùng điều kiện, điều kiện, vùng tính tổng): cộng các ô tương ứng với ô thoả mãn điều kiện.",
+      "Lồng IF nhiều mức: kiểm tra điều kiện chặt nhất (ngưỡng cao nhất) trước."
+     ],
+     "examples": [
+      {
+       "title": "Xếp loại",
+       "lines": [
+        "=IF(B2>=8,\"Giỏi\",IF(B2>=6,\"Khá\",\"Chưa khá\"))"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Dự đoán kết quả công thức",
+       "style": "predict",
+       "tasks": [
+        {
+         "key": "if_dat",
+         "passage": "Ô A2 chứa số 7.\nÔ B2 có công thức: =IF(A2>=5,\"Đạt\",\"Chưa đạt\")",
+         "question": "Ô B2 hiển thị gì?",
+         "options": [
+          {
+           "text": "Đạt",
+           "ok": true,
+           "why": "Đúng. 7 >= 5 là đúng nên IF trả về giá trị thứ hai."
+          },
+          {
+           "text": "Chưa đạt",
+           "ok": false,
+           "why": "Giá trị này chỉ trả về khi điều kiện sai, mà 7 >= 5 là đúng."
+          },
+          {
+           "text": "7",
+           "ok": false,
+           "why": "IF trả về một trong hai giá trị đã viết, không trả về A2."
+          }
+         ],
+         "explanation": "IF kiểm tra điều kiện: đúng thì lấy giá trị thứ nhất sau điều kiện, sai thì lấy giá trị còn lại."
+        },
+        {
+         "key": "countif",
+         "passage": "Các ô B2:B6 chứa: 8, 4, 9, 5, 3.\nCông thức: =COUNTIF(B2:B6,\">=5\")",
+         "question": "Công thức cho kết quả bao nhiêu?",
+         "options": [
+          {
+           "text": "2",
+           "ok": false,
+           "why": "Đừng quên số 5: điều kiện là >= 5 nên 5 cũng được đếm."
+          },
+          {
+           "text": "3",
+           "ok": true,
+           "why": "Đúng. Có 8, 9 và 5 thoả mãn >= 5."
+          },
+          {
+           "text": "22",
+           "ok": false,
+           "why": "COUNTIF đếm số ô, không cộng giá trị (8 + 9 + 5 = 22 là việc của SUMIF)."
+          }
+         ],
+         "explanation": "COUNTIF trả về số ô thoả mãn điều kiện, không phải tổng của chúng."
+        },
+        {
+         "key": "sumif",
+         "passage": "A2:A5 chứa: Táo, Cam, Táo, Lê.\nB2:B5 chứa: 10, 5, 7, 3.\nCông thức: =SUMIF(A2:A5,\"Táo\",B2:B5)",
+         "question": "Công thức cho kết quả bao nhiêu?",
+         "options": [
+          {
+           "text": "2",
+           "ok": false,
+           "why": "2 là số ô ghi Táo (kết quả của COUNTIF), không phải tổng."
+          },
+          {
+           "text": "17",
+           "ok": true,
+           "why": "Đúng. Hai dòng Táo ứng với 10 và 7: 10 + 7 = 17."
+          },
+          {
+           "text": "25",
+           "ok": false,
+           "why": "25 là tổng cả cột B; SUMIF chỉ cộng các dòng ghi Táo."
+          }
+         ],
+         "explanation": "SUMIF xét vùng điều kiện A2:A5, dòng nào là Táo thì cộng ô tương ứng trong B2:B5."
+        },
+        {
+         "key": "if_long",
+         "passage": "Yêu cầu: điểm từ 8 là \"Giỏi\", từ 6 đến dưới 8 là \"Khá\", còn lại là \"Chưa khá\".\nAn viết: =IF(C2>=6,\"Khá\",IF(C2>=8,\"Giỏi\",\"Chưa khá\"))",
+         "question": "Công thức của An sai thế nào?",
+         "options": [
+          {
+           "text": "Điểm 9 cũng bị xếp \"Khá\"; phải kiểm tra C2>=8 trước",
+           "ok": true,
+           "why": "Đúng. Với 9, điều kiện C2>=6 đã đúng nên IF trả về \"Khá\" ngay, không bao giờ tới \"Giỏi\"."
+          },
+          {
+           "text": "Điểm 7 bị xếp \"Chưa khá\"",
+           "ok": false,
+           "why": "7 >= 6 đúng nên điểm 7 được xếp \"Khá\", đúng yêu cầu."
+          },
+          {
+           "text": "Công thức báo lỗi vì lồng hai hàm IF",
+           "ok": false,
+           "why": "Lồng IF là hợp lệ; lỗi ở đây là lỗi logic chứ không phải lỗi cú pháp."
+          }
+         ],
+         "explanation": "Sửa: =IF(C2>=8,\"Giỏi\",IF(C2>=6,\"Khá\",\"Chưa khá\")). Với các ngưỡng \">=\", kiểm tra ngưỡng cao trước."
+        },
+        {
+         "key": "if_and",
+         "passage": "B2 = 6 (điểm Toán), C2 = 4 (điểm Văn).\nCông thức: =IF(AND(B2>=5,C2>=5),\"Lên lớp\",\"Xem lại\")",
+         "question": "Công thức cho kết quả gì?",
+         "options": [
+          {
+           "text": "Lên lớp",
+           "ok": false,
+           "why": "AND chỉ đúng khi cả hai điều kiện đúng, mà C2 = 4 < 5."
+          },
+          {
+           "text": "Xem lại",
+           "ok": true,
+           "why": "Đúng. B2>=5 đúng nhưng C2>=5 sai nên AND sai, IF trả về \"Xem lại\"."
+          },
+          {
+           "text": "Báo lỗi",
+           "ok": false,
+           "why": "Công thức viết đúng cú pháp, không báo lỗi."
+          }
+         ],
+         "explanation": "AND đúng khi mọi điều kiện đều đúng; OR đúng khi có ít nhất một điều kiện đúng."
+        },
+        {
+         "key": "countif_chu",
+         "passage": "Cột D (D2:D31) ghi giới tính của 30 học sinh: Nam hoặc Nữ.\nCông thức: =COUNTIF(D2:D31,\"Nữ\")",
+         "question": "Công thức này cho biết điều gì?",
+         "options": [
+          {
+           "text": "Số học sinh nữ trong 30 bạn",
+           "ok": true,
+           "why": "Đúng. COUNTIF đếm các ô có nội dung là Nữ."
+          },
+          {
+           "text": "Vị trí của bạn nữ đầu tiên",
+           "ok": false,
+           "why": "COUNTIF đếm số ô, không tìm vị trí."
+          },
+          {
+           "text": "Tỉ lệ phần trăm học sinh nữ",
+           "ok": false,
+           "why": "Muốn có tỉ lệ phải chia kết quả đếm cho 30."
+          }
+         ],
+         "explanation": "Điều kiện của COUNTIF có thể là một số, một so sánh như \">=5\" hay một chữ như \"Nữ\"."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "th9.giai_quyet",
+   "grade": 9,
+   "order": 5,
+   "title": "Giải quyết vấn đề với sự trợ giúp của máy tính",
+   "lessons": [
+    {
+     "key": "th9.quy_trinh_giai_quyet",
+     "order": 1,
+     "title": "Quy trình giải quyết vấn đề và thuật toán",
+     "description": "Sắp xếp đúng các bước giải quyết vấn đề, kiểm thử chương trình và các thuật toán quen thuộc.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được các bước giải quyết vấn đề với sự trợ giúp của máy tính",
+      "Chia bài toán lớn thành các bài toán nhỏ theo đúng thứ tự phụ thuộc",
+      "Sắp xếp đúng các bước của thuật toán tìm số lớn nhất, ƯCLN"
+     ],
+     "summary": [
+      "Giải quyết vấn đề: xác định vấn đề → tìm và chọn giải pháp → thực hiện giải pháp → kiểm tra, đánh giá và điều chỉnh.",
+      "Chia bài toán lớn thành bài toán nhỏ; bài nhỏ nào cần kết quả của bài khác thì làm sau.",
+      "Kiểm thử: chuẩn bị bộ dữ liệu và kết quả mong đợi, chạy, so sánh rồi sửa lỗi."
+     ],
+     "examples": [
+      {
+       "title": "Tìm số lớn nhất",
+       "lines": [
+        "Dãy 3, 8, 5: max = 3 → gặp 8 > 3 nên max = 8 → 5 < 8 → max = 8."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Sắp xếp các bước",
+       "tasks": [
+        {
+         "key": "quy_trinh",
+         "prompt": "Sắp xếp các bước giải quyết vấn đề với sự trợ giúp của máy tính.",
+         "items": [
+          "Xác định vấn đề: đầu vào, đầu ra và yêu cầu",
+          "Tìm và chọn giải pháp, mô tả thuật toán",
+          "Thực hiện giải pháp: viết chương trình",
+          "Kiểm tra, đánh giá kết quả và điều chỉnh"
+         ],
+         "explanation": "Phải hiểu vấn đề mới tìm được giải pháp; có thuật toán mới viết được chương trình; có chương trình mới kiểm tra được."
+        },
+        {
+         "key": "kiem_thu",
+         "prompt": "Sắp xếp các bước kiểm thử một chương trình.",
+         "items": [
+          "Chọn bộ dữ liệu kiểm thử và kết quả mong đợi",
+          "Chạy chương trình với bộ dữ liệu đó",
+          "So sánh kết quả nhận được với kết quả mong đợi",
+          "Nếu khác nhau: tìm, sửa lỗi rồi chạy lại"
+         ],
+         "explanation": "Phải biết trước kết quả đúng thì mới so sánh được; sửa xong phải chạy lại để chắc lỗi đã hết."
+        },
+        {
+         "key": "chia_nho",
+         "prompt": "Bài toán: tính điểm trung bình môn của từng học sinh rồi in bảng xếp loại. Sắp xếp các bài toán nhỏ.",
+         "items": [
+          "Nhập điểm các bài kiểm tra của từng học sinh",
+          "Tính điểm trung bình của mỗi học sinh",
+          "Xếp loại mỗi học sinh theo điểm trung bình",
+          "In bảng kết quả xếp loại"
+         ],
+         "explanation": "Mỗi bài toán nhỏ dùng kết quả của bài trước: có điểm mới tính trung bình, có trung bình mới xếp loại."
+        },
+        {
+         "key": "so_lon_nhat",
+         "prompt": "Sắp xếp các bước của thuật toán tìm số lớn nhất trong dãy n số.",
+         "items": [
+          "Nhập dãy n số",
+          "Gán max bằng số đầu tiên của dãy",
+          "Lần lượt so max với từng số còn lại, gặp số lớn hơn thì gán số đó cho max",
+          "Đưa ra max"
+         ],
+         "explanation": "max cần một giá trị ban đầu trước khi so sánh; vòng lặp duyệt hết dãy; cuối cùng mới đưa ra kết quả."
+        },
+        {
+         "key": "uoc_chung",
+         "prompt": "Sắp xếp các bước của thuật toán Euclid tìm ƯCLN của hai số nguyên dương a và b.",
+         "items": [
+          "Nhập a và b",
+          "Nếu b = 0 thì ƯCLN là a, kết thúc",
+          "Gán r = số dư của a chia b, rồi a = b, b = r",
+          "Quay lại bước kiểm tra b = 0"
+         ],
+         "explanation": "Ví dụ a = 12, b = 8: r = 4 → a = 8, b = 4; r = 0 → a = 4, b = 0 → ƯCLN là 4. Bước kiểm tra phải đứng trước phép chia để không chia cho 0."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "th9.cau_truc_dieu_khien",
+     "order": 2,
+     "title": "Cấu trúc điều khiển trong mô tả thuật toán",
+     "description": "Mô tả thuật toán có tuần tự, rẽ nhánh, lặp bằng sơ đồ khối.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th9.huong_nghiep",
+   "grade": 9,
+   "order": 6,
+   "title": "Hướng nghiệp với tin học",
+   "lessons": [
+    {
+     "key": "th9.nghe_tin_hoc",
+     "order": 1,
+     "title": "Nghề nghiệp trong lĩnh vực tin học",
+     "description": "Biết một số nghề trong lĩnh vực tin học và yêu cầu của chúng.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th10.xa_hoi_tri_thuc",
+   "grade": 10,
+   "order": 1,
+   "title": "Máy tính và xã hội tri thức",
+   "lessons": [
+    {
+     "key": "th10.thong_tin_xu_li",
+     "order": 1,
+     "title": "Thông tin và xử lí thông tin",
+     "description": "Phân biệt thông tin và dữ liệu; vai trò của máy tính trong xử lí thông tin.",
+     "status": "planned"
+    },
+    {
+     "key": "th10.nhi_phan_logic",
+     "order": 2,
+     "title": "Hệ nhị phân, phép toán logic và mã hoá dữ liệu",
+     "description": "Đổi số sang hệ nhị phân, cộng số nhị phân, hiểu các phép toán logic và cách số hoá dữ liệu.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Đổi số tự nhiên nhỏ giữa hệ thập phân và hệ nhị phân",
+      "Cộng hai số nhị phân",
+      "Hiểu các phép toán logic AND, OR, NOT, XOR",
+      "Biết văn bản, hình ảnh, âm thanh được số hoá như thế nào"
+     ],
+     "summary": [
+      "Hệ nhị phân chỉ dùng hai chữ số 0 và 1; mỗi vị trí từ phải sang có giá trị 1, 2, 4, 8, 16…",
+      "Cộng nhị phân: 0 + 0 = 0; 0 + 1 = 1; 1 + 1 = 10 (viết 0, nhớ 1).",
+      "AND đúng khi cả hai đúng; OR đúng khi ít nhất một đúng; NOT đảo giá trị; XOR đúng khi đúng một trong hai đúng.",
+      "Văn bản được mã hoá bằng bảng mã (ASCII, Unicode); ảnh là lưới điểm ảnh có mã màu; âm thanh được lấy mẫu rồi số hoá."
+     ],
+     "examples": [
+      {
+       "title": "Đổi 13 sang nhị phân",
+       "lines": [
+        "13 = 8 + 4 + 1 → 1101."
+       ]
+      },
+      {
+       "title": "Cộng nhị phân",
+       "lines": [
+        "101 + 11 = 1000 (5 + 3 = 8)."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Ghép cho đúng",
+       "tasks": [
+        {
+         "key": "doi_so",
+         "prompt": "Ghép số thập phân với cách viết nhị phân của nó.",
+         "pairs": [
+          [
+           "5",
+           "101"
+          ],
+          [
+           "6",
+           "110"
+          ],
+          [
+           "9",
+           "1001"
+          ],
+          [
+           "12",
+           "1100"
+          ]
+         ],
+         "explanation": "5 = 4 + 1; 6 = 4 + 2; 9 = 8 + 1; 12 = 8 + 4. Viết 1 ở vị trí có mặt, 0 ở vị trí vắng mặt.",
+         "hint": "Các giá trị vị trí từ phải sang: 1, 2, 4, 8."
+        },
+        {
+         "key": "cong_nhi_phan",
+         "prompt": "Ghép mỗi phép cộng nhị phân với kết quả của nó.",
+         "pairs": [
+          [
+           "101 + 1",
+           "110"
+          ],
+          [
+           "11 + 1",
+           "100"
+          ],
+          [
+           "1010 + 101",
+           "1111"
+          ],
+          [
+           "111 + 1",
+           "1000"
+          ]
+         ],
+         "explanation": "Kiểm tra bằng hệ thập phân: 5 + 1 = 6; 3 + 1 = 4; 10 + 5 = 15; 7 + 1 = 8."
+        },
+        {
+         "key": "logic",
+         "prompt": "Ghép mỗi phép toán logic với khi nào nó cho kết quả đúng.",
+         "pairs": [
+          [
+           "AND (và)",
+           "Khi cả hai mệnh đề đều đúng"
+          ],
+          [
+           "OR (hoặc)",
+           "Khi ít nhất một mệnh đề đúng"
+          ],
+          [
+           "NOT (phủ định)",
+           "Khi mệnh đề ban đầu sai"
+          ],
+          [
+           "XOR (hoặc loại trừ)",
+           "Khi đúng một trong hai mệnh đề đúng"
+          ]
+         ],
+         "explanation": "Ví dụ với p đúng, q sai: p AND q sai; p OR q đúng; NOT q đúng; p XOR q đúng."
+        },
+        {
+         "key": "so_hoa",
+         "prompt": "Ghép mỗi loại dữ liệu với cách nó được số hoá.",
+         "pairs": [
+          [
+           "Văn bản",
+           "Mỗi kí tự ứng với một mã trong bảng mã như Unicode"
+          ],
+          [
+           "Ảnh bitmap",
+           "Lưới điểm ảnh, mỗi điểm mang mã màu"
+          ],
+          [
+           "Âm thanh số",
+           "Đo sóng âm tại các thời điểm cách đều rồi ghi lại bằng số"
+          ]
+         ],
+         "explanation": "Mọi dữ liệu đều được chuyển thành dãy bit; cách chuyển khác nhau theo loại dữ liệu."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "th10.mang",
+   "grade": 10,
+   "order": 2,
+   "title": "Mạng máy tính và Internet",
+   "lessons": [
+    {
+     "key": "th10.iot",
+     "order": 1,
+     "title": "Internet vạn vật (IoT)",
+     "description": "Biết IoT là gì và ví dụ về thiết bị thông minh kết nối Internet.",
+     "status": "planned"
+    },
+    {
+     "key": "th10.mang_va_an_toan",
+     "order": 2,
+     "title": "Mạng máy tính và an toàn thông tin",
+     "description": "Nhận biết phần mềm độc hại, lừa đảo trực tuyến và cách phòng tránh.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th10.dao_duc",
+   "grade": 10,
+   "order": 3,
+   "title": "Đạo đức, pháp luật và văn hoá trong môi trường số",
+   "lessons": [
+    {
+     "key": "th10.quyen_tac_gia",
+     "order": 1,
+     "title": "Quyền tác giả đối với sản phẩm số",
+     "description": "Biết quy định về quyền tác giả và giấy phép sử dụng sản phẩm số.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th10.do_hoa",
+   "grade": 10,
+   "order": 4,
+   "title": "Ứng dụng tin học",
+   "lessons": [
+    {
+     "key": "th10.do_hoa_vecto",
+     "order": 1,
+     "title": "Thiết kế đồ hoạ với phần mềm đồ hoạ vectơ",
+     "description": "Vẽ và chỉnh hình, đường, chữ bằng phần mềm đồ hoạ vectơ.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th10.python",
+   "grade": 10,
+   "order": 5,
+   "title": "Giải quyết vấn đề với sự trợ giúp của máy tính: lập trình Python",
+   "lessons": [
+    {
+     "key": "th10.bien_vao_ra",
+     "order": 1,
+     "title": "Biến, phép toán và lệnh vào ra trong Python",
+     "description": "Dùng biến, phép toán số học và các lệnh input(), print().",
+     "status": "planned"
+    },
+    {
+     "key": "th10.re_nhanh_if",
+     "order": 2,
+     "title": "Câu lệnh rẽ nhánh if trong Python",
+     "description": "Đọc chương trình Python có if, elif, else; dự đoán kết quả và tìm lỗi.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Viết đúng cú pháp if, if-else, if-elif-else",
+      "Dùng phép so sánh và phép toán logic and, or, not trong điều kiện",
+      "Phát hiện lỗi cú pháp và lỗi logic trong câu lệnh rẽ nhánh"
+     ],
+     "summary": [
+      "if điều_kiện: … (khối lệnh thụt lề); else: … khi điều kiện sai.",
+      "elif kiểm tra điều kiện tiếp theo chỉ khi các điều kiện trước đều sai; chỉ một nhánh được chạy.",
+      "So sánh bằng dùng ==; dấu = là phép gán.",
+      "Hai lệnh if đứng riêng là hai lần kiểm tra độc lập: cả hai có thể cùng chạy."
+     ],
+     "examples": [
+      {
+       "title": "Chẵn lẻ",
+       "lines": [
+        "if n % 2 == 0:",
+        "    print(\"chẵn\")",
+        "else:",
+        "    print(\"lẻ\")"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Tìm lỗi logic",
+       "style": "predict",
+       "tasks": [
+        {
+         "key": "chan_le",
+         "passage": "x = 7\nif x % 2 == 0:\n    print(\"chẵn\")\nelse:\n    print(\"lẻ\")",
+         "question": "Chương trình in ra gì?",
+         "options": [
+          {
+           "text": "chẵn",
+           "ok": false,
+           "why": "7 % 2 bằng 1 chứ không bằng 0, nên điều kiện sai."
+          },
+          {
+           "text": "lẻ",
+           "ok": true,
+           "why": "Đúng. 7 % 2 == 1, điều kiện sai nên chạy khối else."
+          },
+          {
+           "text": "Cả chẵn và lẻ",
+           "ok": false,
+           "why": "if-else chỉ chạy đúng một trong hai khối."
+          }
+         ],
+         "explanation": "Phép % lấy số dư: n % 2 == 0 nghĩa là n chia hết cho 2."
+        },
+        {
+         "key": "thu_tu_elif",
+         "passage": "diem = 9\nif diem >= 5:\n    print(\"Đạt\")\nelif diem >= 8:\n    print(\"Giỏi\")\nelse:\n    print(\"Chưa đạt\")",
+         "question": "Chương trình in gì, và có đúng ý xếp loại \"Giỏi\" cho điểm từ 8 không?",
+         "options": [
+          {
+           "text": "In Đạt; sai ý vì phải kiểm tra diem >= 8 trước",
+           "ok": true,
+           "why": "Đúng. 9 >= 5 đúng nên nhánh đầu chạy và các nhánh sau bị bỏ qua."
+          },
+          {
+           "text": "In Giỏi; chương trình đúng ý",
+           "ok": false,
+           "why": "elif chỉ được xét khi các điều kiện trước đều sai, mà diem >= 5 đã đúng."
+          },
+          {
+           "text": "In cả Đạt và Giỏi",
+           "ok": false,
+           "why": "Trong if-elif-else chỉ một nhánh được chạy."
+          }
+         ],
+         "explanation": "Sửa: if diem >= 8: Giỏi; elif diem >= 5: Đạt; else: Chưa đạt. Điều kiện chặt hơn đứng trước."
+        },
+        {
+         "key": "and_or",
+         "passage": "a = 5\nb = 3\nif a > b and b > 4:\n    print(\"A\")\nelse:\n    print(\"B\")",
+         "question": "Chương trình in ra gì?",
+         "options": [
+          {
+           "text": "A",
+           "ok": false,
+           "why": "b > 4 sai (3 > 4 sai), nên cả biểu thức and sai."
+          },
+          {
+           "text": "B",
+           "ok": true,
+           "why": "Đúng. a > b đúng nhưng b > 4 sai; and cần cả hai đúng nên chạy else."
+          },
+          {
+           "text": "Báo lỗi",
+           "ok": false,
+           "why": "Chương trình viết đúng cú pháp."
+          }
+         ],
+         "explanation": "x and y đúng khi cả hai đúng; x or y đúng khi ít nhất một đúng."
+        },
+        {
+         "key": "loi_gan",
+         "passage": "n = int(input())\nif n = 0:\n    print(\"không\")",
+         "question": "Vì sao chương trình này không chạy được?",
+         "options": [
+          {
+           "text": "Lỗi cú pháp: so sánh bằng phải viết n == 0",
+           "ok": true,
+           "why": "Đúng. Trong điều kiện, = là phép gán nên Python báo SyntaxError."
+          },
+          {
+           "text": "Thiếu else nên báo lỗi",
+           "ok": false,
+           "why": "else không bắt buộc; if có thể đứng một mình."
+          },
+          {
+           "text": "print phải viết hoa là Print",
+           "ok": false,
+           "why": "Python phân biệt chữ hoa thường; hàm đúng là print viết thường."
+          }
+         ],
+         "explanation": "= gán giá trị cho biến; == so sánh hai giá trị. Python dừng ngay với lỗi cú pháp và chỉ ra dòng lỗi."
+        },
+        {
+         "key": "hai_if",
+         "passage": "t = 35\nif t > 30:\n    print(\"Nóng\")\nif t > 20:\n    print(\"Ấm\")",
+         "question": "Chương trình in ra gì?",
+         "options": [
+          {
+           "text": "Nóng rồi Ấm (hai dòng)",
+           "ok": true,
+           "why": "Đúng. Đây là hai lệnh if độc lập; 35 > 30 và 35 > 20 đều đúng."
+          },
+          {
+           "text": "Chỉ Nóng",
+           "ok": false,
+           "why": "Nếu dòng thứ hai là elif thì mới chỉ in Nóng. Ở đây là if riêng."
+          },
+          {
+           "text": "Chỉ Ấm",
+           "ok": false,
+           "why": "Lệnh if đầu cũng đúng nên Nóng cũng được in."
+          }
+         ],
+         "explanation": "Muốn chỉ in một kết quả, dùng if … elif …; hai if riêng thì được kiểm tra cả hai."
+        },
+        {
+         "key": "nam_nhuan",
+         "passage": "y = 1900\nif (y % 4 == 0 and y % 100 != 0) or y % 400 == 0:\n    print(\"nhuận\")\nelse:\n    print(\"không nhuận\")",
+         "question": "Chương trình in ra gì?",
+         "options": [
+          {
+           "text": "nhuận",
+           "ok": false,
+           "why": "1900 chia hết cho 4 nhưng cũng chia hết cho 100, và không chia hết cho 400."
+          },
+          {
+           "text": "không nhuận",
+           "ok": true,
+           "why": "Đúng. Vế trái sai (y % 100 != 0 sai), vế phải sai (1900 % 400 = 300) nên chạy else."
+          },
+          {
+           "text": "Báo lỗi vì dùng cả and và or",
+           "ok": false,
+           "why": "Kết hợp and, or và ngoặc là hợp lệ."
+          }
+         ],
+         "explanation": "Năm nhuận: chia hết cho 4 nhưng không chia hết cho 100, hoặc chia hết cho 400. Ví dụ 2000 nhuận, 1900 không."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "th10.lenh_lap",
+     "order": 3,
+     "title": "Lệnh lặp for và while trong Python",
+     "description": "Dùng for với range() và while; dự đoán kết quả, tìm lỗi vòng lặp; lập trình đường đi ngắn gọn.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Hiểu range(n), range(a, b), range(a, b, k) tạo ra dãy số nào",
+      "Dùng while với điều kiện dừng đúng",
+      "Phát hiện lỗi vòng lặp: thiếu lần cuối, không bao giờ dừng",
+      "Viết chương trình ngắn gọn bằng cách gói phần lặp lại vào vòng lặp"
+     ],
+     "summary": [
+      "for i in range(a, b): i chạy từ a đến b − 1 (không gồm b); range(n) là 0, 1, …, n − 1.",
+      "range(a, b, k): từ a, mỗi lần tăng k, dừng trước b.",
+      "while điều_kiện: lặp khi điều kiện còn đúng; trong thân phải có lệnh làm điều kiện dần trở thành sai.",
+      "Dùng for khi biết trước số lần lặp, while khi chỉ biết điều kiện dừng."
+     ],
+     "examples": [
+      {
+       "title": "Tổng 1 đến n",
+       "lines": [
+        "s = 0",
+        "for i in range(1, n + 1):",
+        "    s += i"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "code_path",
+       "title": "Chương trình ngắn gọn",
+       "levels": [
+        "a1",
+        "a2",
+        "a3"
+       ]
+      },
+      {
+       "game": "choice",
+       "title": "Dự đoán vòng lặp",
+       "style": "predict",
+       "tasks": [
+        {
+         "key": "tong_range",
+         "passage": "s = 0\nfor i in range(1, 5):\n    s = s + i\nprint(s)",
+         "question": "Chương trình in ra số nào?",
+         "options": [
+          {
+           "text": "10",
+           "ok": true,
+           "why": "Đúng. range(1, 5) là 1, 2, 3, 4; tổng là 10."
+          },
+          {
+           "text": "15",
+           "ok": false,
+           "why": "15 = 1 + … + 5, nhưng range(1, 5) dừng trước 5."
+          },
+          {
+           "text": "4",
+           "ok": false,
+           "why": "4 là số lần lặp, không phải tổng."
+          }
+         ],
+         "explanation": "range(a, b) không gồm b: muốn có cả 5 thì viết range(1, 6)."
+        },
+        {
+         "key": "range_0",
+         "passage": "for i in range(3):\n    print(i)",
+         "question": "Chương trình in ra những gì?",
+         "options": [
+          {
+           "text": "0, 1, 2 (mỗi số một dòng)",
+           "ok": true,
+           "why": "Đúng. range(3) bắt đầu từ 0 và dừng trước 3."
+          },
+          {
+           "text": "1, 2, 3 (mỗi số một dòng)",
+           "ok": false,
+           "why": "range(3) bắt đầu từ 0, không phải 1."
+          },
+          {
+           "text": "0, 1, 2, 3 (mỗi số một dòng)",
+           "ok": false,
+           "why": "range(3) chỉ có 3 giá trị, không gồm 3."
+          }
+         ],
+         "explanation": "range(n) có đúng n giá trị: 0, 1, …, n − 1."
+        },
+        {
+         "key": "khong_dung",
+         "passage": "n = 5\nwhile n > 0:\n    print(n)",
+         "question": "Điều gì xảy ra khi chạy chương trình?",
+         "options": [
+          {
+           "text": "In số 5 mãi không dừng",
+           "ok": true,
+           "why": "Đúng. n luôn bằng 5 nên n > 0 luôn đúng: vòng lặp vô hạn."
+          },
+          {
+           "text": "In 5, 4, 3, 2, 1",
+           "ok": false,
+           "why": "Muốn vậy phải thêm n = n - 1 trong thân vòng lặp."
+          },
+          {
+           "text": "Không in gì",
+           "ok": false,
+           "why": "Điều kiện 5 > 0 đúng ngay từ đầu nên thân vòng lặp có chạy."
+          }
+         ],
+         "explanation": "Thân while phải làm thay đổi biến trong điều kiện; ở đây cần thêm dòng n = n - 1."
+        },
+        {
+         "key": "while_3",
+         "passage": "k = 0\nwhile k < 10:\n    k = k + 3\nprint(k)",
+         "question": "Chương trình in ra số nào?",
+         "options": [
+          {
+           "text": "9",
+           "ok": false,
+           "why": "Khi k = 9, điều kiện 9 < 10 vẫn đúng nên còn lặp thêm một lần."
+          },
+          {
+           "text": "10",
+           "ok": false,
+           "why": "k tăng 3 mỗi lần: 3, 6, 9, 12; không bao giờ bằng 10."
+          },
+          {
+           "text": "12",
+           "ok": true,
+           "why": "Đúng. k = 9 < 10 nên lặp tiếp, k = 12; 12 < 10 sai thì dừng và in 12."
+          }
+         ],
+         "explanation": "Lập bảng giá trị k sau mỗi lần lặp rồi kiểm tra điều kiện trước mỗi lần lặp."
+        },
+        {
+         "key": "buoc_nhay",
+         "passage": "dem = 0\nfor i in range(2, 11, 2):\n    dem += 1\nprint(dem)",
+         "question": "Chương trình in ra số nào?",
+         "options": [
+          {
+           "text": "5",
+           "ok": true,
+           "why": "Đúng. range(2, 11, 2) là 2, 4, 6, 8, 10: có 5 giá trị."
+          },
+          {
+           "text": "4",
+           "ok": false,
+           "why": "10 vẫn nằm trong dãy vì dừng trước 11, không phải trước 10."
+          },
+          {
+           "text": "30",
+           "ok": false,
+           "why": "30 là tổng các số, nhưng chương trình chỉ đếm số lần lặp."
+          }
+         ],
+         "explanation": "range(a, b, k) bắt đầu từ a, tăng k mỗi lần và dừng trước b."
+        },
+        {
+         "key": "thieu_cuoi",
+         "passage": "Chương trình tính 1 + 2 + … + n:\nn = 4\ns = 0\nfor i in range(1, n):\n    s += i\nprint(s)",
+         "question": "Với n = 4, chương trình in 6 thay vì 10. Sửa thế nào?",
+         "options": [
+          {
+           "text": "Viết range(1, n + 1)",
+           "ok": true,
+           "why": "Đúng. range(1, n) dừng ở n − 1 = 3; thêm 1 để có cả n."
+          },
+          {
+           "text": "Viết range(0, n)",
+           "ok": false,
+           "why": "range(0, n) là 0, 1, 2, 3: tổng vẫn là 6."
+          },
+          {
+           "text": "Đặt s = 1 lúc đầu",
+           "ok": false,
+           "why": "Như vậy được 7, vẫn sai; lỗi là thiếu lần lặp với i = n."
+          }
+         ],
+         "explanation": "Lỗi lệch một (thiếu hoặc thừa một lần lặp) rất hay gặp; hãy thử với n nhỏ để kiểm tra."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "th10.ham",
+     "order": 4,
+     "title": "Hàm trong Python",
+     "description": "Dùng hàm có sẵn và tự viết hàm có tham số, giá trị trả về.",
+     "status": "planned"
+    },
+    {
+     "key": "th10.danh_sach",
+     "order": 5,
+     "title": "Kiểu danh sách (list)",
+     "description": "Tạo, duyệt, thêm, xoá phần tử của danh sách.",
+     "status": "planned"
+    },
+    {
+     "key": "th10.xau_ki_tu",
+     "order": 6,
+     "title": "Xâu kí tự",
+     "description": "Duyệt xâu, tách, nối, tìm kiếm trong xâu.",
+     "status": "planned"
+    },
+    {
+     "key": "th10.kiem_thu",
+     "order": 7,
+     "title": "Kiểm thử và gỡ lỗi chương trình",
+     "description": "Nhận biết lỗi cú pháp, lỗi khi chạy, lỗi logic và cách tìm, sửa.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th10.huong_nghiep",
+   "grade": 10,
+   "order": 6,
+   "title": "Hướng nghiệp với tin học",
+   "lessons": [
+    {
+     "key": "th10.nghe_thiet_ke_lap_trinh",
+     "order": 1,
+     "title": "Nhóm nghề thiết kế và lập trình",
+     "description": "Biết công việc, yêu cầu của nghề thiết kế đồ hoạ và lập trình.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th11.may_tinh_xa_hoi",
+   "grade": 11,
+   "order": 1,
+   "title": "Máy tính và xã hội tri thức",
+   "lessons": [
+    {
+     "key": "th11.he_dieu_hanh",
+     "order": 1,
+     "title": "Hệ điều hành và phần mềm ứng dụng",
+     "description": "Biết chức năng của hệ điều hành, phần mềm nguồn mở và phần mềm thương mại.",
+     "status": "planned"
+    },
+    {
+     "key": "th11.ben_trong_may_tinh",
+     "order": 2,
+     "title": "Bên trong máy tính",
+     "description": "Biết các bộ phận chính: bộ xử lí, bộ nhớ trong, bộ nhớ ngoài và cổng kết nối.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th11.luu_tru",
+   "grade": 11,
+   "order": 2,
+   "title": "Tổ chức lưu trữ, tìm kiếm và trao đổi thông tin",
+   "lessons": [
+    {
+     "key": "th11.luu_tru_truc_tuyen",
+     "order": 1,
+     "title": "Lưu trữ và chia sẻ tệp trực tuyến",
+     "description": "Lưu trữ, chia sẻ tệp qua dịch vụ đám mây và đặt quyền truy cập.",
+     "status": "planned"
+    },
+    {
+     "key": "th11.tim_kiem_nang_cao",
+     "order": 2,
+     "title": "Tìm kiếm thông tin nâng cao",
+     "description": "Dùng toán tử, bộ lọc của máy tìm kiếm để tìm chính xác hơn.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th11.dao_duc",
+   "grade": 11,
+   "order": 3,
+   "title": "Đạo đức, pháp luật và văn hoá trong môi trường số",
+   "lessons": [
+    {
+     "key": "th11.lua_dao",
+     "order": 1,
+     "title": "Phòng tránh lừa đảo và ứng xử văn hoá trên mạng",
+     "description": "Nhận diện các kiểu lừa đảo trực tuyến và ứng xử đúng mực trên mạng.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th11.csdl",
+   "grade": 11,
+   "order": 4,
+   "title": "Giải quyết vấn đề với sự trợ giúp của máy tính: cơ sở dữ liệu",
+   "lessons": [
+    {
+     "key": "th11.khai_niem_csdl",
+     "order": 1,
+     "title": "Bảng, bản ghi, trường, khoá và câu lệnh SQL cơ bản",
+     "description": "Nắm các khái niệm cơ bản của cơ sở dữ liệu quan hệ và các câu lệnh SQL thường dùng.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Hiểu bảng, bản ghi, trường, khoá chính, khoá ngoài",
+      "Chọn được khoá chính phù hợp cho một bảng",
+      "Biết công dụng của SELECT, INSERT, UPDATE, DELETE"
+     ],
+     "summary": [
+      "Cơ sở dữ liệu quan hệ lưu dữ liệu trong các bảng; mỗi hàng là một bản ghi, mỗi cột là một trường.",
+      "Khoá chính xác định duy nhất mỗi bản ghi, không được trùng, không được để trống.",
+      "Khoá ngoài của một bảng tham chiếu tới khoá chính của bảng khác, tạo liên kết giữa hai bảng.",
+      "Hệ quản trị CSDL là phần mềm để tạo lập, cập nhật, truy vấn và bảo vệ CSDL."
+     ],
+     "examples": [
+      {
+       "title": "Bảng HOC_SINH",
+       "lines": [
+        "Trường: MaHS (khoá chính), HoTen, NgaySinh, MaLop (khoá ngoài tới bảng LOP)."
+       ]
+      },
+      {
+       "title": "Truy vấn",
+       "lines": [
+        "SELECT HoTen FROM HOC_SINH WHERE MaLop = '11A1';"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Ghép khái niệm",
+       "tasks": [
+        {
+         "key": "khai_niem",
+         "prompt": "Ghép mỗi khái niệm với ý nghĩa của nó.",
+         "pairs": [
+          [
+           "Bảng",
+           "Tập dữ liệu về một loại đối tượng, gồm hàng và cột"
+          ],
+          [
+           "Bản ghi",
+           "Một hàng của bảng, ứng với một đối tượng"
+          ],
+          [
+           "Trường",
+           "Một cột của bảng, ứng với một thuộc tính"
+          ],
+          [
+           "Khoá chính",
+           "Trường hay nhóm trường xác định duy nhất mỗi bản ghi"
+          ]
+         ],
+         "explanation": "Bảng HOC_SINH: mỗi bạn là một bản ghi; HoTen, NgaySinh là các trường; MaHS là khoá chính."
+        },
+        {
+         "key": "he_quan_tri",
+         "prompt": "Ghép mỗi khái niệm với ý nghĩa của nó.",
+         "pairs": [
+          [
+           "Khoá ngoài",
+           "Trường tham chiếu tới khoá chính của bảng khác"
+          ],
+          [
+           "Hệ quản trị CSDL",
+           "Phần mềm tạo lập, cập nhật và khai thác CSDL"
+          ],
+          [
+           "Truy vấn",
+           "Yêu cầu lấy ra dữ liệu thoả mãn điều kiện"
+          ],
+          [
+           "Sao lưu",
+           "Tạo bản sao CSDL để khôi phục khi có sự cố"
+          ]
+         ],
+         "explanation": "Khoá ngoài nối các bảng với nhau; truy vấn khai thác dữ liệu; sao lưu bảo vệ dữ liệu khỏi mất mát."
+        },
+        {
+         "key": "sql",
+         "prompt": "Ghép mỗi câu lệnh SQL với việc nó làm.",
+         "pairs": [
+          [
+           "SELECT",
+           "Lấy dữ liệu từ bảng"
+          ],
+          [
+           "INSERT INTO",
+           "Thêm bản ghi mới"
+          ],
+          [
+           "UPDATE",
+           "Sửa dữ liệu của bản ghi đã có"
+          ],
+          [
+           "DELETE",
+           "Xoá bản ghi"
+          ]
+         ],
+         "explanation": "UPDATE và DELETE thường đi kèm WHERE; thiếu WHERE, lệnh sẽ áp dụng cho mọi bản ghi của bảng."
+        },
+        {
+         "key": "chon_khoa",
+         "prompt": "Ghép mỗi bảng với trường phù hợp nhất làm khoá chính.",
+         "pairs": [
+          [
+           "Bảng HOC_SINH",
+           "Mã học sinh"
+          ],
+          [
+           "Bảng SACH của thư viện",
+           "Mã sách do thư viện cấp"
+          ],
+          [
+           "Bảng CONG_DAN",
+           "Số định danh cá nhân"
+          ],
+          [
+           "Bảng LOP",
+           "Mã lớp"
+          ]
+         ],
+         "explanation": "Khoá chính phải duy nhất và không đổi: họ tên có thể trùng, nên không dùng làm khoá chính."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "th11.he_quan_tri",
+     "order": 2,
+     "title": "Hệ quản trị cơ sở dữ liệu và bảo mật dữ liệu",
+     "description": "Biết chức năng của hệ quản trị CSDL và cách bảo vệ dữ liệu.",
+     "status": "planned"
+    },
+    {
+     "key": "th11.truy_van_sql",
+     "order": 3,
+     "title": "Truy vấn dữ liệu bằng SQL",
+     "description": "Viết truy vấn SELECT có điều kiện, sắp xếp và kết nối hai bảng.",
+     "status": "planned"
+    },
+    {
+     "key": "th11.nghe_quan_tri_csdl",
+     "order": 4,
+     "title": "Nghề quản trị cơ sở dữ liệu",
+     "description": "Biết công việc và yêu cầu của nghề quản trị cơ sở dữ liệu.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th11.ky_thuat_lap_trinh",
+   "grade": 11,
+   "order": 5,
+   "title": "Kĩ thuật lập trình (định hướng Khoa học máy tính)",
+   "lessons": [
+    {
+     "key": "th11.sap_xep_tim_kiem",
+     "order": 1,
+     "title": "Sắp xếp và tìm kiếm trên danh sách bằng Python",
+     "description": "Đọc mã Python sắp xếp, tìm kiếm trên danh sách; dự đoán kết quả và tìm lỗi.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Thực hiện từng bước một lượt sắp xếp nổi bọt",
+      "Tìm phần tử nhỏ nhất như trong sắp xếp chọn",
+      "Phát hiện lỗi trong cài đặt tìm kiếm nhị phân",
+      "Phân biệt list.sort() và sorted()"
+     ],
+     "summary": [
+      "Sắp xếp nổi bọt: so sánh hai phần tử cạnh nhau, sai thứ tự thì đổi chỗ; sau mỗi lượt, phần tử lớn nhất còn lại về cuối.",
+      "Sắp xếp chọn: mỗi lượt tìm phần tử nhỏ nhất trong phần chưa sắp xếp rồi đưa về đầu phần đó.",
+      "Tìm kiếm nhị phân dùng điều kiện lặp lo <= hi; dùng lo < hi sẽ bỏ sót trường hợp vùng còn một phần tử.",
+      "a.sort() sắp xếp chính danh sách a; sorted(a) tạo danh sách mới, a giữ nguyên."
+     ],
+     "examples": [
+      {
+       "title": "Một lượt nổi bọt",
+       "lines": [
+        "[4, 3, 1, 2] → [3, 4, 1, 2] → [3, 1, 4, 2] → [3, 1, 2, 4]"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Tìm lỗi logic",
+       "style": "predict",
+       "tasks": [
+        {
+         "key": "sort_dau_cuoi",
+         "passage": "a = [5, 2, 8, 1]\na.sort()\nprint(a[0], a[-1])",
+         "question": "Chương trình in ra gì?",
+         "options": [
+          {
+           "text": "1 8",
+           "ok": true,
+           "why": "Đúng. Sau a.sort(), a = [1, 2, 5, 8]; a[0] = 1, a[-1] = 8."
+          },
+          {
+           "text": "5 1",
+           "ok": false,
+           "why": "Đó là phần tử đầu, cuối của danh sách trước khi sắp xếp."
+          },
+          {
+           "text": "8 1",
+           "ok": false,
+           "why": "sort() mặc định sắp tăng dần, nên phần tử đầu là nhỏ nhất."
+          }
+         ],
+         "explanation": "a[-1] là phần tử cuối danh sách; sort() mặc định sắp tăng dần."
+        },
+        {
+         "key": "mot_luot",
+         "passage": "a = [4, 3, 1, 2]\nfor j in range(len(a) - 1):\n    if a[j] > a[j + 1]:\n        a[j], a[j + 1] = a[j + 1], a[j]\nprint(a)",
+         "question": "Chương trình in ra gì?",
+         "options": [
+          {
+           "text": "[3, 1, 2, 4]",
+           "ok": true,
+           "why": "Đúng. Một lượt nổi bọt đưa 4 (lớn nhất) về cuối, phần còn lại chưa sắp xong."
+          },
+          {
+           "text": "[1, 2, 3, 4]",
+           "ok": false,
+           "why": "Một lượt chưa đủ để sắp xong; cần thêm các lượt nữa."
+          },
+          {
+           "text": "[3, 4, 1, 2]",
+           "ok": false,
+           "why": "Đó mới là kết quả sau lần so sánh đầu tiên của lượt."
+          }
+         ],
+         "explanation": "j = 0: đổi 4, 3; j = 1: đổi 4, 1; j = 2: đổi 4, 2. Muốn sắp xong cần lặp lại cả lượt."
+        },
+        {
+         "key": "nhi_phan_loi",
+         "passage": "def tim(a, x):\n    lo, hi = 0, len(a) - 1\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if a[mid] == x:\n            return mid\n        elif a[mid] < x:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1\n\nprint(tim([3, 6, 9], 9))",
+         "question": "Chương trình in -1 dù 9 có trong danh sách. Lỗi ở đâu?",
+         "options": [
+          {
+           "text": "Điều kiện lặp phải là lo <= hi",
+           "ok": true,
+           "why": "Đúng. Khi lo = hi = 2, vùng còn đúng phần tử 9 nhưng lo < hi sai nên vòng lặp dừng sớm."
+          },
+          {
+           "text": "Phải viết mid = (lo + hi) / 2",
+           "ok": false,
+           "why": "Phép / cho số thực, không dùng làm chỉ số được; // là đúng."
+          },
+          {
+           "text": "Phải đặt hi = len(a)",
+           "ok": false,
+           "why": "hi là chỉ số phần tử cuối, đúng là len(a) - 1."
+          }
+         ],
+         "explanation": "Lần 1: lo = 0, hi = 2, mid = 1, a[1] = 6 < 9 nên lo = 2. Lúc này lo = hi nên vòng lặp không chạy tiếp."
+        },
+        {
+         "key": "dem",
+         "passage": "a = [7, 3, 7, 5]\ndem = 0\nfor v in a:\n    if v == 7:\n        dem += 1\nprint(dem)",
+         "question": "Chương trình in ra số nào?",
+         "options": [
+          {
+           "text": "1",
+           "ok": false,
+           "why": "Vòng lặp duyệt hết danh sách, không dừng ở số 7 đầu tiên."
+          },
+          {
+           "text": "2",
+           "ok": true,
+           "why": "Đúng. Có hai phần tử bằng 7."
+          },
+          {
+           "text": "14",
+           "ok": false,
+           "why": "Chương trình cộng 1 mỗi lần gặp 7, không cộng giá trị 7."
+          }
+         ],
+         "explanation": "Đây là tìm kiếm tuần tự có đếm: duyệt mọi phần tử, gặp giá trị cần tìm thì tăng biến đếm."
+        },
+        {
+         "key": "nho_nhat",
+         "passage": "a = [9, 4, 6, 2]\nk = 0\nfor i in range(1, len(a)):\n    if a[i] < a[k]:\n        k = i\nprint(k, a[k])",
+         "question": "Chương trình in ra gì?",
+         "options": [
+          {
+           "text": "3 2",
+           "ok": true,
+           "why": "Đúng. Phần tử nhỏ nhất là 2, ở chỉ số 3."
+          },
+          {
+           "text": "0 9",
+           "ok": false,
+           "why": "k được cập nhật mỗi khi gặp phần tử nhỏ hơn a[k], nên không giữ 0."
+          },
+          {
+           "text": "4 2",
+           "ok": false,
+           "why": "Chỉ số bắt đầu từ 0, nên phần tử thứ tư có chỉ số 3."
+          }
+         ],
+         "explanation": "Đây là bước chính của sắp xếp chọn: tìm chỉ số phần tử nhỏ nhất rồi đổi nó về đầu."
+        },
+        {
+         "key": "sorted_moi",
+         "passage": "a = [3, 1, 2]\nb = sorted(a)\nprint(a, b)",
+         "question": "Chương trình in ra gì?",
+         "options": [
+          {
+           "text": "[3, 1, 2] [1, 2, 3]",
+           "ok": true,
+           "why": "Đúng. sorted() trả về danh sách mới đã sắp xếp; a không đổi."
+          },
+          {
+           "text": "[1, 2, 3] [1, 2, 3]",
+           "ok": false,
+           "why": "Chỉ a.sort() mới thay đổi chính a."
+          },
+          {
+           "text": "[3, 1, 2] None",
+           "ok": false,
+           "why": "None là giá trị trả về của a.sort(), còn sorted(a) trả về danh sách."
+          }
+         ],
+         "explanation": "Dùng sorted() khi cần giữ danh sách gốc, a.sort() khi muốn sắp xếp tại chỗ."
+        },
+        {
+         "key": "do_phuc_tap",
+         "passage": "n = 10\ndem = 0\nfor i in range(n):\n    for j in range(n):\n        dem += 1\nprint(dem)",
+         "question": "Chương trình in ra số nào, và độ phức tạp thời gian của hai vòng lặp này là gì?",
+         "options": [
+          {
+           "text": "100; O(n²)",
+           "ok": true,
+           "why": "Đúng. Vòng ngoài n = 10 lần, mỗi lần vòng trong 10 lần: 10 × 10 = 100."
+          },
+          {
+           "text": "20; O(n)",
+           "ok": false,
+           "why": "Hai vòng lồng nhau nhân số lần, không cộng."
+          },
+          {
+           "text": "10; O(n)",
+           "ok": false,
+           "why": "Vòng trong chạy lại đủ n lần trong mỗi lần của vòng ngoài."
+          }
+         ],
+         "explanation": "n tăng gấp đôi thì n² tăng gấp bốn: thuật toán O(n²) chậm đi rất nhanh khi dữ liệu lớn."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "th11.chuong_trinh_gon",
+     "order": 2,
+     "title": "Viết chương trình ngắn gọn với vòng lặp",
+     "description": "Tìm mẫu lặp lại trong đường đi và viết chương trình ít khối lệnh nhất có thể.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Phân tích đường đi thành các đoạn lặp lại",
+      "Dùng vòng lặp để viết chương trình ngắn, đúng với số khối lệnh giới hạn",
+      "Kết hợp vòng lặp với các lệnh trước và sau nó"
+     ],
+     "summary": [
+      "Chương trình tốt vừa đúng vừa ngắn gọn, dễ đọc, dễ sửa.",
+      "Tìm đoạn lệnh xuất hiện nhiều lần liên tiếp và gói vào một vòng lặp.",
+      "Một chương trình có thể có nhiều vòng lặp nối tiếp nhau, xen giữa là các lệnh tuần tự."
+     ],
+     "examples": [
+      {
+       "title": "Hai đoạn thẳng",
+       "lines": [
+        "lặp 5 [tiến], rẽ trái, lặp 5 [tiến]: 3 khối thay vì 11 lệnh."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "code_path",
+       "title": "Chương trình ngắn gọn",
+       "levels": [
+        "a4",
+        "a5",
+        "a6"
+       ]
+      }
+     ]
+    },
+    {
+     "key": "th11.mo_dun",
+     "order": 3,
+     "title": "Thiết kế chương trình theo mô-đun",
+     "description": "Chia chương trình thành các hàm, mỗi hàm làm một việc.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th11.ict",
+   "grade": 11,
+   "order": 6,
+   "title": "Ứng dụng tin học (định hướng Tin học ứng dụng)",
+   "lessons": [
+    {
+     "key": "th11.chinh_sua_anh",
+     "order": 1,
+     "title": "Chỉnh sửa ảnh",
+     "description": "Cắt, chỉnh màu, ghép ảnh bằng phần mềm chỉnh sửa ảnh.",
+     "status": "planned"
+    },
+    {
+     "key": "th11.lam_video",
+     "order": 2,
+     "title": "Làm video ngắn",
+     "description": "Ghép đoạn phim, ảnh, chữ và âm thanh thành video ngắn.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th12.tri_tue_nhan_tao",
+   "grade": 12,
+   "order": 1,
+   "title": "Máy tính và xã hội tri thức",
+   "lessons": [
+    {
+     "key": "th12.ai",
+     "order": 1,
+     "title": "Trí tuệ nhân tạo và ứng dụng",
+     "description": "Biết trí tuệ nhân tạo là gì và ví dụ ứng dụng trong đời sống.",
+     "status": "planned"
+    },
+    {
+     "key": "th12.canh_bao_ai",
+     "order": 2,
+     "title": "Dùng trí tuệ nhân tạo có trách nhiệm",
+     "description": "Nhận ra rủi ro của trí tuệ nhân tạo: thông tin sai, thiên lệch, lạm dụng.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th12.mang",
+   "grade": 12,
+   "order": 2,
+   "title": "Mạng máy tính và Internet",
+   "lessons": [
+    {
+     "key": "th12.thiet_bi_mang",
+     "order": 1,
+     "title": "Thiết bị mạng, đường truyền và giao thức",
+     "description": "Biết chức năng của thiết bị mạng, các loại đường truyền và một số giao thức Internet.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu chức năng của switch, router, modem, điểm truy cập không dây",
+      "Phân biệt các loại đường truyền: cáp xoắn đôi, cáp quang, Wi-Fi, mạng di động",
+      "Hiểu vai trò của TCP, IP, HTTP/HTTPS, DNS"
+     ],
+     "summary": [
+      "Switch nối các thiết bị trong một mạng cục bộ; router chuyển gói tin giữa các mạng.",
+      "Modem chuyển đổi tín hiệu để kết nối với nhà cung cấp dịch vụ Internet.",
+      "Giao thức là bộ quy tắc truyền thông: IP đánh địa chỉ và định tuyến, TCP truyền tin cậy, DNS đổi tên miền thành địa chỉ IP.",
+      "Ở gia đình, một thiết bị thường gộp modem, router, switch và điểm phát Wi-Fi."
+     ],
+     "examples": [
+      {
+       "title": "Mở một trang web",
+       "lines": [
+        "Gõ tên miền → DNS trả về địa chỉ IP → trình duyệt dùng HTTPS lấy trang web."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Ghép cho đúng",
+       "tasks": [
+        {
+         "key": "thiet_bi",
+         "prompt": "Ghép mỗi thiết bị mạng với chức năng của nó.",
+         "pairs": [
+          [
+           "Switch (bộ chuyển mạch)",
+           "Nối các thiết bị trong một mạng cục bộ"
+          ],
+          [
+           "Router (bộ định tuyến)",
+           "Chuyển gói tin giữa các mạng khác nhau"
+          ],
+          [
+           "Điểm truy cập không dây",
+           "Cho thiết bị kết nối vào mạng qua Wi-Fi"
+          ],
+          [
+           "Modem",
+           "Chuyển đổi tín hiệu để kết nối với nhà cung cấp Internet"
+          ]
+         ],
+         "explanation": "Mỗi thiết bị một việc; bộ phát Wi-Fi gia đình thường gộp cả bốn chức năng."
+        },
+        {
+         "key": "giao_thuc",
+         "prompt": "Ghép mỗi giao thức với vai trò của nó.",
+         "pairs": [
+          [
+           "TCP",
+           "Truyền dữ liệu tin cậy, đủ và đúng thứ tự"
+          ],
+          [
+           "IP",
+           "Đánh địa chỉ và định tuyến gói tin"
+          ],
+          [
+           "HTTPS",
+           "Truyền trang web có mã hoá"
+          ],
+          [
+           "DNS",
+           "Đổi tên miền thành địa chỉ IP"
+          ]
+         ],
+         "explanation": "Khi mở trang web, các giao thức cùng làm việc: DNS tìm địa chỉ, IP định tuyến, TCP bảo đảm tin cậy, HTTPS truyền trang web an toàn."
+        },
+        {
+         "key": "duong_truyen",
+         "prompt": "Ghép mỗi đường truyền với đặc điểm của nó.",
+         "pairs": [
+          [
+           "Cáp xoắn đôi",
+           "Dây mạng phổ biến trong mạng LAN, đầu nối RJ45"
+          ],
+          [
+           "Cáp quang",
+           "Truyền tín hiệu ánh sáng, tốc độ cao, đi xa"
+          ],
+          [
+           "Wi-Fi",
+           "Kết nối không dây trong phạm vi gần"
+          ],
+          [
+           "Mạng di động 4G/5G",
+           "Kết nối không dây qua trạm phát sóng của nhà mạng"
+          ]
+         ],
+         "explanation": "Có dây thì ổn định hơn; không dây thì tiện di chuyển. Cáp quang là đường truyền chính của Internet."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "th12.thuc_hanh_mang",
+     "order": 2,
+     "title": "Thực hành kết nối và chia sẻ trong mạng",
+     "description": "Kết nối thiết bị vào mạng, chia sẻ tệp và máy in trong mạng cục bộ.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th12.giao_tiep",
+   "grade": 12,
+   "order": 3,
+   "title": "Đạo đức, pháp luật và văn hoá trong môi trường số",
+   "lessons": [
+    {
+     "key": "th12.ung_xu_khong_gian_mang",
+     "order": 1,
+     "title": "Giao tiếp và ứng xử trong không gian mạng",
+     "description": "Ứng xử văn minh, bảo vệ mình và người khác trong không gian mạng.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th12.web",
+   "grade": 12,
+   "order": 4,
+   "title": "Giải quyết vấn đề với sự trợ giúp của máy tính: tạo trang web",
+   "lessons": [
+    {
+     "key": "th12.the_html",
+     "order": 1,
+     "title": "Các thẻ HTML và thuộc tính CSS cơ bản",
+     "description": "Nhận biết công dụng của các thẻ HTML và thuộc tính CSS hay dùng.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết cấu trúc trang HTML và công dụng các thẻ tiêu đề, đoạn văn, liên kết, ảnh",
+      "Tạo danh sách và bảng bằng HTML",
+      "Dùng một số thuộc tính CSS để định dạng"
+     ],
+     "summary": [
+      "Trang web viết bằng HTML gồm các phần tử; phần lớn có thẻ mở và thẻ đóng, ví dụ <p>…</p>.",
+      "<a href=\"…\"> tạo siêu liên kết; <img src=\"…\" alt=\"…\"> chèn ảnh.",
+      "Danh sách: <ul> (không thứ tự), <ol> (có thứ tự), mỗi mục là <li>. Bảng: <table>, <tr>, <td>, <th>.",
+      "CSS định dạng trình bày: bộ chọn { thuộc tính: giá trị; }."
+     ],
+     "examples": [
+      {
+       "title": "Một đoạn HTML",
+       "lines": [
+        "<h1>Lớp 12A</h1>",
+        "<p>Chào mừng các bạn!</p>"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Ghép thẻ với công dụng",
+       "tasks": [
+        {
+         "key": "the_co_ban",
+         "prompt": "Ghép mỗi thẻ HTML với công dụng của nó.",
+         "pairs": [
+          [
+           "<h1>",
+           "Tiêu đề cấp 1, lớn nhất"
+          ],
+          [
+           "<p>",
+           "Đoạn văn"
+          ],
+          [
+           "<a href=\"…\">",
+           "Siêu liên kết"
+          ],
+          [
+           "<img src=\"…\">",
+           "Chèn ảnh"
+          ]
+         ],
+         "explanation": "Mỗi thẻ có một vai trò; trình duyệt dựa vào thẻ để hiển thị nội dung."
+        },
+        {
+         "key": "danh_sach",
+         "prompt": "Ghép mỗi thẻ HTML với công dụng của nó.",
+         "pairs": [
+          [
+           "<ul>",
+           "Danh sách không thứ tự"
+          ],
+          [
+           "<ol>",
+           "Danh sách có thứ tự, được đánh số"
+          ],
+          [
+           "<li>",
+           "Một mục trong danh sách"
+          ],
+          [
+           "<table>",
+           "Bảng"
+          ]
+         ],
+         "explanation": "<li> đặt bên trong <ul> hoặc <ol>; <table> chứa các hàng <tr>."
+        },
+        {
+         "key": "bang",
+         "prompt": "Ghép mỗi thẻ của bảng với công dụng của nó.",
+         "pairs": [
+          [
+           "<tr>",
+           "Một hàng của bảng"
+          ],
+          [
+           "<td>",
+           "Một ô dữ liệu"
+          ],
+          [
+           "<th>",
+           "Một ô tiêu đề của bảng"
+          ]
+         ],
+         "explanation": "Bảng gồm các hàng <tr>; mỗi hàng gồm các ô <td> hoặc ô tiêu đề <th>, thường in đậm và căn giữa."
+        },
+        {
+         "key": "css",
+         "prompt": "Ghép mỗi thuộc tính CSS với việc nó định dạng.",
+         "pairs": [
+          [
+           "color",
+           "Màu chữ"
+          ],
+          [
+           "background-color",
+           "Màu nền"
+          ],
+          [
+           "font-size",
+           "Cỡ chữ"
+          ],
+          [
+           "text-align",
+           "Căn lề chữ"
+          ],
+          [
+           "margin",
+           "Khoảng cách bên ngoài viền phần tử"
+          ]
+         ],
+         "explanation": "Ví dụ: p { color: navy; font-size: 18px; text-align: center; }."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "th12.tim_loi_html",
+     "order": 2,
+     "title": "Tìm lỗi trong trang web HTML và CSS",
+     "description": "Đọc đoạn HTML, CSS; dự đoán trình duyệt hiển thị gì và tìm lỗi.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Dự đoán kết quả hiển thị của đoạn HTML ngắn",
+      "Phát hiện lỗi lồng thẻ, lỗi cú pháp CSS",
+      "Hiểu thứ tự ưu tiên giữa bộ chọn thẻ và bộ chọn lớp"
+     ],
+     "summary": [
+      "Thẻ lồng nhau phải đóng theo thứ tự ngược với thứ tự mở: <p><b>…</b></p>.",
+      "Cú pháp CSS: thuộc tính và giá trị ngăn bằng dấu hai chấm, kết thúc bằng dấu chấm phẩy.",
+      "Bộ chọn lớp (.ten) cụ thể hơn bộ chọn thẻ (p) nên được ưu tiên khi cùng định dạng một thuộc tính.",
+      "Thuộc tính alt của ảnh là văn bản thay thế, giúp trình đọc màn hình và hiện ra khi ảnh lỗi."
+     ],
+     "examples": [
+      {
+       "title": "Lồng thẻ đúng",
+       "lines": [
+        "<p>Chào <b>các bạn</b></p>"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Tìm lỗi logic",
+       "style": "predict",
+       "tasks": [
+        {
+         "key": "lien_ket",
+         "passage": "<a href=\"lop12.html\">Lớp 12</a>",
+         "question": "Khi người xem nháy vào chữ \"Lớp 12\" thì điều gì xảy ra?",
+         "options": [
+          {
+           "text": "Trình duyệt mở trang lop12.html",
+           "ok": true,
+           "why": "Đúng. href là địa chỉ đích của siêu liên kết."
+          },
+          {
+           "text": "Chữ \"Lớp 12\" được in đậm",
+           "ok": false,
+           "why": "Thẻ <a> tạo liên kết, không in đậm chữ; in đậm dùng <b> hoặc <strong>."
+          },
+          {
+           "text": "Trình duyệt tải ảnh lop12.html",
+           "ok": false,
+           "why": "Thẻ <a> không chèn ảnh; ảnh dùng thẻ <img>."
+          }
+         ],
+         "explanation": "Phần nằm giữa <a> và </a> là chữ người xem nháy vào; href cho biết trang sẽ mở."
+        },
+        {
+         "key": "long_the",
+         "passage": "<p>Chào <b>các bạn</p></b>",
+         "question": "Đoạn HTML này sai ở đâu?",
+         "options": [
+          {
+           "text": "Thẻ đóng sai thứ tự; phải là </b></p>",
+           "ok": true,
+           "why": "Đúng. <b> mở sau nên phải đóng trước."
+          },
+          {
+           "text": "Không được đặt <b> trong <p>",
+           "ok": false,
+           "why": "<b> trong <p> là hợp lệ, chỉ cần đóng đúng thứ tự."
+          },
+          {
+           "text": "Thiếu thuộc tính href",
+           "ok": false,
+           "why": "href chỉ dùng cho thẻ liên kết <a>."
+          }
+         ],
+         "explanation": "Thẻ lồng nhau như hộp trong hộp: hộp nào mở sau thì đóng trước."
+        },
+        {
+         "key": "alt",
+         "passage": "<img src=\"sen.jpg\" alt=\"Hoa sen hồng nở trong đầm\">",
+         "question": "Thuộc tính alt dùng để làm gì?",
+         "options": [
+          {
+           "text": "Văn bản thay thế, hiện khi ảnh lỗi và được trình đọc màn hình đọc",
+           "ok": true,
+           "why": "Đúng. alt giúp người khiếm thị và giúp hiểu nội dung khi ảnh không tải được."
+          },
+          {
+           "text": "Đặt kích thước cho ảnh",
+           "ok": false,
+           "why": "Kích thước dùng width, height hoặc CSS."
+          },
+          {
+           "text": "Tạo liên kết khi nháy vào ảnh",
+           "ok": false,
+           "why": "Muốn ảnh là liên kết, đặt <img> bên trong thẻ <a>."
+          }
+         ],
+         "explanation": "Viết alt mô tả đúng nội dung ảnh là một yêu cầu của trang web dễ tiếp cận."
+        },
+        {
+         "key": "uu_tien",
+         "passage": "<style>\n  p { color: red; }\n  .chu-y { color: blue; }\n</style>\n<p class=\"chu-y\">Lưu ý</p>",
+         "question": "Chữ \"Lưu ý\" hiển thị màu gì?",
+         "options": [
+          {
+           "text": "Màu xanh lam (blue)",
+           "ok": true,
+           "why": "Đúng. Bộ chọn lớp .chu-y cụ thể hơn bộ chọn thẻ p nên được ưu tiên."
+          },
+          {
+           "text": "Màu đỏ (red)",
+           "ok": false,
+           "why": "Quy tắc p áp dụng cho mọi đoạn văn, nhưng .chu-y cụ thể hơn nên thắng."
+          },
+          {
+           "text": "Màu đen mặc định",
+           "ok": false,
+           "why": "Cả hai quy tắc đều áp dụng cho đoạn này, nên có màu."
+          }
+         ],
+         "explanation": "Khi nhiều quy tắc cùng định dạng một thuộc tính, quy tắc có bộ chọn cụ thể hơn được dùng."
+        },
+        {
+         "key": "danh_sach",
+         "passage": "<ol>\n  <li>Mở trình soạn thảo</li>\n  <li>Lưu tệp .html</li>\n</ol>",
+         "question": "Trình duyệt hiển thị thế nào?",
+         "options": [
+          {
+           "text": "Hai mục được đánh số 1 và 2",
+           "ok": true,
+           "why": "Đúng. <ol> là danh sách có thứ tự nên các mục được đánh số."
+          },
+          {
+           "text": "Hai mục có dấu chấm tròn ở đầu",
+           "ok": false,
+           "why": "Dấu chấm tròn là của <ul> (danh sách không thứ tự)."
+          },
+          {
+           "text": "Một dòng chữ liền",
+           "ok": false,
+           "why": "Mỗi <li> là một mục riêng, hiển thị trên dòng riêng."
+          }
+         ],
+         "explanation": "<ol> đánh số, <ul> dùng dấu đầu dòng; cả hai chứa các mục <li>."
+        },
+        {
+         "key": "cu_phap_css",
+         "passage": "<style>\n  h1 { color = green; }\n</style>\n<h1>Tin học 12</h1>",
+         "question": "Vì sao tiêu đề không có màu xanh lá?",
+         "options": [
+          {
+           "text": "Sai cú pháp CSS: phải viết color: green;",
+           "ok": true,
+           "why": "Đúng. CSS dùng dấu hai chấm giữa thuộc tính và giá trị; khai báo sai bị trình duyệt bỏ qua."
+          },
+          {
+           "text": "Thẻ h1 không đổi màu được",
+           "ok": false,
+           "why": "Mọi phần tử chứa chữ đều đổi màu được bằng color."
+          },
+          {
+           "text": "Phải viết Green viết hoa",
+           "ok": false,
+           "why": "Tên màu trong CSS không phân biệt hoa thường."
+          }
+         ],
+         "explanation": "Trình duyệt không báo lỗi CSS mà lặng lẽ bỏ qua khai báo sai, nên cần soát kĩ cú pháp."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "th12.css",
+     "order": 3,
+     "title": "Định dạng trang web bằng CSS",
+     "description": "Dùng bộ chọn, màu, phông, khung và bố cục để trình bày trang web.",
+     "status": "planned"
+    },
+    {
+     "key": "th12.bieu_mau",
+     "order": 4,
+     "title": "Tạo biểu mẫu trên trang web",
+     "description": "Tạo biểu mẫu có ô nhập, nút chọn và nút gửi.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th12.dinh_huong",
+   "grade": 12,
+   "order": 5,
+   "title": "Định hướng Khoa học máy tính và Tin học ứng dụng",
+   "lessons": [
+    {
+     "key": "th12.hoc_may",
+     "order": 1,
+     "title": "Học máy và khoa học dữ liệu (định hướng Khoa học máy tính)",
+     "description": "Biết học máy là gì và các bước cơ bản của khoa học dữ liệu.",
+     "status": "planned"
+    },
+    {
+     "key": "th12.mo_phong",
+     "order": 2,
+     "title": "Mô phỏng trong giải quyết vấn đề (định hướng Khoa học máy tính)",
+     "description": "Biết mô phỏng giúp giải quyết vấn đề và một số ứng dụng.",
+     "status": "planned"
+    },
+    {
+     "key": "th12.phan_mem_web",
+     "order": 3,
+     "title": "Dùng phần mềm tạo trang web (định hướng Tin học ứng dụng)",
+     "description": "Tạo website đơn giản bằng phần mềm thiết kế web.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "th12.huong_nghiep",
+   "grade": 12,
+   "order": 6,
+   "title": "Hướng nghiệp với tin học",
+   "lessons": [
+    {
+     "key": "th12.nghe_an_toan_tt",
+     "order": 1,
+     "title": "Nghề trong lĩnh vực an toàn thông tin",
+     "description": "Biết công việc và yêu cầu của nghề an toàn thông tin.",
+     "status": "planned"
+    },
+    {
+     "key": "th12.nghe_quan_tri_mang",
+     "order": 2,
+     "title": "Nghề quản trị và bảo trì hệ thống",
+     "description": "Biết công việc và yêu cầu của nghề quản trị mạng, bảo trì hệ thống.",
+     "status": "planned"
+    }
+   ]
+  }
+ ]
+}

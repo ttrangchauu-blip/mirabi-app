@@ -14,11 +14,11 @@ function sheetOf(ui: React.ReactElement) {
 }
 
 test('a pet with drawn move strips darts each way with its own strip, at every stage', () => {
-  for (let stage = 0; stage <= 6; stage++) {
-    expect(hasSprite('cat', stage, moveActivity(1))).toBe(true);
-    expect(hasSprite('cat', stage, moveActivity(-1))).toBe(true);
-    expect(sheetOf(<PetArt pet="cat" size={56} stage={stage} moving={1} />)).toMatch(/Move_Right/);
-    expect(sheetOf(<PetArt pet="cat" size={56} stage={stage} moving={-1} />)).toMatch(/Move_Left/);
+  for (const pet of ['cat', 'fox', 'penguin', 'bunny', 'dolphin']) for (let stage = 0; stage <= 6; stage++) {
+    expect(hasSprite(pet, stage, moveActivity(1))).toBe(true);
+    expect(hasSprite(pet, stage, moveActivity(-1))).toBe(true);
+    expect(sheetOf(<PetArt pet={pet} size={56} stage={stage} moving={1} />)).toMatch(/Move_Right/);
+    expect(sheetOf(<PetArt pet={pet} size={56} stage={stage} moving={-1} />)).toMatch(/Move_Left/);
   }
 });
 
@@ -28,7 +28,7 @@ describe('in the word shooter', () => {
   const field = (petId: string, shots: boolean) => (
     <Playfield variant="words" turns={[]} progress={() => 0.3} selectedId={null} onSelect={() => {}} petId={petId} petLevel={3} reduceMotion={false}
       flash={null} running onImpact={jest.fn()} onShotDone={jest.fn()} onBurstDone={jest.fn()} wrongKey={0}
-      shots={shots ? [{ id: APPLE.turn_id, turn: APPLE, progress: 0.3, aimed: false, word: { en: 'apple', vi: 'quả táo', phonetic: null } }] : []} />
+      shots={shots ? [{ id: APPLE.turn_id, turn: APPLE, aimed: false, word: { en: 'apple', vi: 'quả táo', phonetic: null } }] : []} />
   );
   const start = (petId: string) => {
     render(field(petId, false));
@@ -72,12 +72,6 @@ describe('in the word shooter', () => {
     expect(seen.every((s) => s.flip === 1)).toBe(true);
   });
 
-  it('walks a pet without move strips across the field too, mirroring its walk strip going left', () => {
-    const seen = drift('fox');
-    expect(seen.some((s) => /_Walk/.test(s.sheet) && s.flip === -1)).toBe(true);
-    expect(seen.some((s) => /_Walk/.test(s.sheet) && s.flip === 1)).toBe(true);
-  });
-
   it('strolls from one side of the field to the other', () => {
     start('cat');
     const xs: number[] = [];
@@ -87,16 +81,8 @@ describe('in the word shooter', () => {
     expect(Math.min(...xs)).toBeLessThanOrEqual(9);
     expect(Math.max(...xs)).toBeGreaterThanOrEqual(390 - 56 - 9);
   });
-
-  it('still mirrors the walk strip for a pet without move strips', () => {
-    const { sheet, flip } = dartLeft('fox');
-    expect(sheet).toMatch(/_Walk/);
-    expect(flip).toBe(-1);
-  });
 });
 
-test('a pet without them walks instead, and stands idle when it stops', () => {
-  expect(hasSprite('dolphin', 3, moveActivity(-1))).toBe(false);
-  expect(sheetOf(<PetArt pet="dolphin" size={56} stage={3} moving={-1} />)).toMatch(/_Walk/);
+test('a pet stands idle when it stops', () => {
   expect(sheetOf(<PetArt pet="cat" size={56} stage={3} />)).toMatch(/_Idle/);
 });

@@ -14,7 +14,7 @@ type Props = {
   petId: string;
   petLevel: number;
   reduceMotion: boolean;
-  /** The last page's button: "Bắt đầu" (only it finishes the guide), or "Đã hiểu" when read again during a game. */
+  /** The last page's button: "Bắt đầu" (only it finishes the guide), or "Tiếp tục chơi" when read again during a game. */
   finishLabel?: string;
   onFinish: () => void;
   /** Close without finishing: the guide shows again next time. */
