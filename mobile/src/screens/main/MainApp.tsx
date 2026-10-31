@@ -17,6 +17,7 @@ import { PetHatchedPopup } from './PetHatchedPopup';
 import { PetRewardPopup } from './PetRewardPopup';
 import { ProfileScreen } from './ProfileScreen';
 import { StudyProfileScreen } from './StudyProfileScreen';
+import { EducationAdminScreen } from '../admin/EducationAdminScreen';
 import { StudyTab } from './StudyTab';
 import { usePomodoroTimer } from './usePomodoroTimer';
 import { TabBar } from './TabBar';
@@ -39,10 +40,16 @@ import { GardenScreen, type GardenTab } from '../garden/GardenScreen';
 import { requestPlace } from '../../inventory/api';
 import type { InventoryItem } from '../../inventory/types';
 import type { RoomKind } from '../../room/types';
+import { WorkQuestScreen } from '../work/WorkQuestScreen';
+import { AdventureMapScreen } from '../adventure/AdventureMapScreen';
+import { MoneyGardenScreen } from '../money/MoneyGardenScreen';
+import { TownScreen } from '../town/TownScreen';
+import { CareerJourneyScreen } from '../career/CareerJourneyScreen';
+import { lifeEligible } from '../../life/access';
 
 export type FocusTimer = ReturnType<typeof usePomodoroTimer>;
 
-type Overlay = 'profile' | 'studyProfile' | 'quests' | 'streak' | 'album' | 'visit' | 'feed' | 'inventory' | 'garden' | 'gardenVisit';
+type Overlay = 'profile' | 'studyProfile' | 'educationAdmin' | 'quests' | 'streak' | 'album' | 'visit' | 'feed' | 'inventory' | 'garden' | 'gardenVisit' | 'work' | 'adventure' | 'money' | 'town' | 'career';
 
 export function MainApp() {
   const { user, setUser, streakPopup, dismissStreakPopup } = useAuth();
@@ -74,6 +81,8 @@ export function MainApp() {
   // Vườn nhà's tab (kept while a friend's garden is open over it) and the friend whose garden is visited.
   const [gardenTab, setGardenTab] = useState<GardenTab>('mine');
   const [gardenOwnerId, setGardenOwnerId] = useState<number | null>(null);
+  // Tiện ích → Góc thư giãn opens the personal room in its Healing mode.
+  const [healingRequest, setHealingRequest] = useState(0);
   const [dashboard, setDashboard] = useState<Dashboard | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
   const [taskModal, setTaskModal] = useState<{ visible: boolean; initialDate: string; onCreated: (date: string) => void }>({
@@ -191,12 +200,23 @@ export function MainApp() {
   const gardenVisit = overlay === 'gardenVisit' && gardenOwnerId !== null;
   const visiting = overlay === 'visit' && visitUserId !== null;
   const room = !overlay && tab === 'Room';
+  // Cuộc sống Mirabi's screens: only for users aged 16 and over (the backend refuses anyone else too).
+  const lifeScreen = lifeEligible(user) && (overlay === 'work' || overlay === 'adventure' || overlay === 'money' || overlay === 'town'
+    || overlay === 'career') ? overlay : null;
 
   return (
     <LinearGradient colors={appTheme.backdrop} style={styles.fill}>
       <StatusBar barStyle="dark-content" />
       {album ? (
         <View style={[styles.fill, { paddingTop: insets.top + 10 }]}><MemoryAlbumScreen user={user} onBack={back} initialMemoryId={albumMemory} /></View>
+      ) : lifeScreen ? (
+        <View style={[styles.fill, { paddingTop: insets.top + 10 }]}>
+          {lifeScreen === 'work' ? <WorkQuestScreen user={user} timer={timer} onBack={back} onRewards={loadDashboard} onOpenInventory={openInventory} />
+            : lifeScreen === 'adventure' ? <AdventureMapScreen user={user} onBack={back} onRewards={loadDashboard} onOpenInventory={openInventory} />
+            : lifeScreen === 'money' ? <MoneyGardenScreen onBack={back} />
+            : lifeScreen === 'town' ? <TownScreen user={user} onBack={back} onVisitRoom={visitRoom} onVisitGarden={visitGarden} onOpenFriends={() => openFriends()} />
+            : <CareerJourneyScreen user={user} onBack={back} onRewards={loadDashboard} />}
+        </View>
       ) : inventory ? (
         <View style={[styles.fill, { paddingTop: insets.top + 10 }]}>
           <InventoryScreen userId={user.id} onBack={back} onPlace={placeInRoom} onPlant={(item) => openGarden({ id: item.id, variant: item.variant })}
@@ -219,7 +239,7 @@ export function MainApp() {
             onRewards={loadDashboard} onVisitRoom={visitRoom} onOpenFriends={openFriends} onOpenGarden={() => openGarden()} initialRoute={togetherRoute?.route} />
         </View>
       ) : room ? (
-        <RoomTab user={user} timer={timer} leaveGuard={roomLeave} onOpenAlbum={() => openAlbum()} onOpenFriends={() => openFriends()}
+        <RoomTab user={user} timer={timer} leaveGuard={roomLeave} healingRequest={healingRequest} healingAllowed={lifeEligible(user)} onOpenAlbum={() => openAlbum()} onOpenFriends={() => openFriends()}
           hatching={petHatch.phase !== 'idle'} onOpenInventory={openInventory} onOpenGarden={() => openGarden()} />
       ) : games ? (
         <View style={[styles.fill, { paddingTop: insets.top + 10, paddingBottom: immersive ? insets.bottom : 0 }]}>
@@ -231,6 +251,7 @@ export function MainApp() {
         showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} keyboardShouldPersistTaps="handled">
         {overlay === 'profile' ? <ProfileScreen user={user} onBack={back} />
           : overlay === 'studyProfile' ? <StudyProfileScreen user={user} onBack={back} onUserUpdated={setUser} />
+          : overlay === 'educationAdmin' && user.role === 'admin' ? <EducationAdminScreen onBack={back} />
           : overlay === 'quests' ? <DailyQuestsScreen onBack={back} onChanged={loadDashboard} onOpenTaskCreate={openTaskCreate} />
             : overlay === 'streak' ? <LoginStreakScreen onBack={back} user={user} onUserUpdated={setUser} />
             : overlay === 'feed' ? <FeedScreen user={user} posts={posts} onPosts={setPosts} onPosted={loadDashboard} onBack={back} /> : <>
@@ -242,7 +263,10 @@ export function MainApp() {
             {tab === 'Community' && <FriendsScreen key={friendsTab} initialTab={friendsTab} onVisit={visitRoom} onVisitGarden={visitGarden} onOpenStudyRoom={openStudyRoom}
               onRequestsChanged={() => { void loadDashboard(); }} />}
             {tab === 'More' && <MoreTab user={user} onOpenProfile={() => open('profile')} onOpenRoom={() => navigate('Room')} onOpenFeed={() => open('feed')}
-              onOpenGarden={() => openGarden()} onOpenStudyProfile={() => open('studyProfile')} />}
+              onOpenGarden={() => openGarden()} onOpenStudyProfile={() => open('studyProfile')}
+              onOpenEducationAdmin={() => open('educationAdmin')}
+              life={{ work: () => open('work'), healing: () => { navigate('Room'); setHealingRequest((n) => n + 1); }, adventure: () => open('adventure'),
+                money: () => open('money'), town: () => open('town'), career: () => open('career') }} />}
           </>}
       </ScrollView>
       )}

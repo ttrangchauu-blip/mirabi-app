@@ -14,6 +14,13 @@ A runnable MVP scaffold inspired by the provided reference image. It includes:
 - Private pet memory album with automatic milestones, manual captures, filters, favorites, download and privacy-safe sharing
 - English & Math learning games (vocabulary, grammar, arithmetic, missing numbers, comparison, order of operations)
   with server-side scoring, progress, review list and EXP — see [docs/LEARNING_GAMES.md](docs/LEARNING_GAMES.md)
+- Cuộc sống Mirabi, for users aged 16 and over: Nhiệm vụ công việc (projects as islands, a mission board, steps, deadlines,
+  reward chests; on top of the existing tasks and EXP cap), Góc thư giãn (a Healing mode of the personal room), Phiêu lưu
+  cuộc sống (real-life activities on an adventure map), Vườn tài chính (savings goals as trees, budgets; whole VND),
+  Thị trấn Mirabi (friends' houses, gifts, community buildings) and Hành trình sự nghiệp (career skill trees from
+  `backend/app/data/careers.json`) — see [docs/MIRABI_LIFE.md](docs/MIRABI_LIFE.md)
+- Lớp học & Kho lưu trữ học tập: the grade is locked at registration and moves up on the configured first day of
+  each school year; finished years (the last three) can be reread and reviewed — see [docs/LEARNING_ARCHIVE.md](docs/LEARNING_ARCHIVE.md)
 
 > This is a functional starter, not a production-ready clone of every visual detail in the reference. Icons, illustrations and art assets (the pets are built-in vector art) can be replaced separately — see [Pet artwork and animation](#pet-artwork-and-animation).
 

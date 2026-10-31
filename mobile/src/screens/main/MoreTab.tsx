@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import type { User } from '../../auth/AuthContext';
 import { useConfirmLogout } from '../../auth/useConfirmLogout';
@@ -9,6 +10,8 @@ import { petById } from '../../pets';
 import { gradeLabel } from '../../studyProfile';
 import { appTheme as t } from '../../theme';
 import { Avatar, Button, Card, IconCircle, IconName, ScreenHeader, SectionHeader } from '../../ui/kit';
+import { ChestArt, ProjectIslandArt } from '../work/workArt';
+import { LIFE_MIN_AGE, lifeEligible } from '../../life/access';
 
 const FEATURES: { icon: IconName; title: string; subtitle: string; color: string; bg: string }[] = [
   { icon: 'newspaper-outline', title: 'Bảng tin', subtitle: 'Lan tỏa điều tích cực', color: '#A3326B', bg: '#FCE4F0' },
@@ -20,15 +23,30 @@ const FEATURES: { icon: IconName; title: string; subtitle: string; color: string
   { icon: 'journal-outline', title: 'Nhật ký phản tư', subtitle: 'Nhìn lại hành trình', color: '#22703A', bg: '#E3F5E6' },
   { icon: 'gift-outline', title: 'Mời bạn bè', subtitle: 'Nhận thêm pha lê', color: '#0B6577', bg: '#DFF6FA' },
 ];
+/** Cuộc sống Mirabi (docs/MIRABI_LIFE.md): shown only to users aged 16 and over (life/access.ts). */
+export type LifeWorld = 'work' | 'healing' | 'adventure' | 'money' | 'town' | 'career';
+const LIFE_WORLDS: { key: LifeWorld; emoji: string; title: string; subtitle: string; colors: readonly [string, string] }[] = [
+  { key: 'work', emoji: '📌', title: 'Nhiệm vụ công việc', subtitle: 'Bảng nhiệm vụ, dự án, rương thưởng', colors: ['#BFE6FA', '#FFE9C2'] },
+  { key: 'healing', emoji: '🌙', title: 'Góc thư giãn', subtitle: 'Tâm trạng, hít thở, nhật ký', colors: ['#2B2F66', '#7A5FA8'] },
+  { key: 'adventure', emoji: '🗺️', title: 'Phiêu lưu cuộc sống', subtitle: 'Hoạt động thật, bản đồ phiêu lưu', colors: ['#FFE6B8', '#FFD08A'] },
+  { key: 'money', emoji: '🌳', title: 'Vườn tài chính', subtitle: 'Mục tiêu tiết kiệm thành cây xanh', colors: ['#D9F2D0', '#A8DE98'] },
+  { key: 'town', emoji: '🏘️', title: 'Thị trấn Mirabi', subtitle: 'Ghé nhà bạn bè, xây công trình chung', colors: ['#E4E0FF', '#C3B9F5'] },
+  { key: 'career', emoji: '🧗', title: 'Hành trình sự nghiệp', subtitle: 'Cây kỹ năng cho nghề của bạn', colors: ['#FFDDE8', '#F7B5CB'] },
+];
+
 const SETTINGS: { icon: IconName; label: string }[] = [
   { icon: 'person-outline', label: 'Tài khoản' }, { icon: 'notifications-outline', label: 'Thông báo' },
   { icon: 'shield-checkmark-outline', label: 'Quyền riêng tư' }, { icon: 'language-outline', label: 'Ngôn ngữ' },
   { icon: 'moon-outline', label: 'Chế độ tối' }, { icon: 'help-circle-outline', label: 'Trợ giúp & cộng đồng' },
 ];
 
-export function MoreTab({ user, onOpenProfile, onOpenRoom, onOpenFeed, onOpenGarden, onOpenStudyProfile }: {
+export function MoreTab({ user, onOpenProfile, onOpenRoom, onOpenFeed, onOpenGarden, onOpenStudyProfile, onOpenEducationAdmin, life }: {
   user: User; onOpenProfile: () => void; onOpenRoom?: () => void; onOpenFeed?: () => void; onOpenGarden?: () => void;
   onOpenStudyProfile?: () => void;
+  /** Cuộc sống Mirabi's worlds (each opens its screen; Góc thư giãn opens the personal room in its Healing mode). */
+  life?: Record<LifeWorld, () => void>;
+  /** Administrators only (the backend checks the role again): grades, học lại / lên lớp, the school calendar. */
+  onOpenEducationAdmin?: () => void;
 }) {
   const confirmLogout = useConfirmLogout();
   const pet = petById(user.pet);
@@ -50,6 +68,29 @@ export function MoreTab({ user, onOpenProfile, onOpenRoom, onOpenFeed, onOpenGar
         </Card>
       </Pressable>
 
+      {life && lifeEligible(user) ? <>
+        <SectionHeader title="Cuộc sống Mirabi" />
+        <View style={styles.lifeGrid}>
+          {LIFE_WORLDS.map((w) => (
+            <Pressable key={w.key} onPress={life[w.key]} accessibilityRole="button" accessibilityLabel={`${w.title}: ${w.subtitle}`}
+              style={({ pressed }) => [styles.lifeCard, pressed && styles.pressed]} testID={`open-${w.key}`}>
+              <LinearGradient colors={w.colors} style={styles.lifeArt}>
+                {w.key === 'work' ? <><ProjectIslandArt theme="beach" stage={4} lit={false} size={64} />
+                  <View style={styles.lifeChest}><ChestArt status="ready" size={28} /></View></> : <Text style={styles.lifeEmoji}>{w.emoji}</Text>}
+              </LinearGradient>
+              <Text style={styles.lifeTitle} numberOfLines={1}>{w.title}</Text>
+              <Text style={styles.lifeSub} numberOfLines={2}>{w.subtitle}</Text>
+            </Pressable>
+          ))}
+        </View>
+      </> : life && user.age == null && onOpenStudyProfile ? (
+        <Pressable onPress={onOpenStudyProfile} accessibilityRole="button" style={styles.lifeHint}
+          accessibilityLabel={`Cập nhật độ tuổi để mở Cuộc sống Mirabi, dành cho người từ ${LIFE_MIN_AGE} tuổi`}>
+          <Ionicons name="sparkles-outline" size={16} color={t.accent} />
+          <Text style={styles.lifeHintText}>Cập nhật "Độ tuổi & lớp học" để mở Cuộc sống Mirabi (từ {LIFE_MIN_AGE} tuổi).</Text>
+        </Pressable>
+      ) : null}
+
       <SectionHeader title="Tính năng khác" />
       <View style={styles.grid}>
         {FEATURES.map((f) => (
@@ -68,6 +109,16 @@ export function MoreTab({ user, onOpenProfile, onOpenRoom, onOpenFeed, onOpenGar
 
       <SectionHeader title="Cài đặt" />
       <Card style={styles.settings}>
+        {user.role === 'admin' && onOpenEducationAdmin ? (
+          <Pressable onPress={onOpenEducationAdmin} accessibilityRole="button" accessibilityLabel="Quản trị lớp học" style={styles.setting}>
+            <IconCircle name="shield-checkmark-outline" size={36} />
+            <View style={styles.flex}>
+              <Text style={styles.settingLabel}>Quản trị lớp học</Text>
+              <Text style={styles.settingValue} numberOfLines={1}>Lớp học, lên lớp, lịch năm học</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color={t.muted} />
+          </Pressable>
+        ) : null}
         {onOpenStudyProfile ? (
           <Pressable onPress={onOpenStudyProfile} accessibilityRole="button" accessibilityLabel={`Độ tuổi & lớp học: ${studyProfile}`}
             style={styles.setting}>
@@ -105,6 +156,16 @@ const styles = StyleSheet.create({
   tileTitle: { fontSize: 16, fontWeight: '800', color: t.ink, marginTop: 12 },
   tileSub: { fontSize: 13, color: t.muted, marginTop: 2 },
   settings: { paddingVertical: 6 },
+  lifeGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12, marginBottom: 14 },
+  lifeHint: { flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: t.tint, borderRadius: 16, padding: 12, marginBottom: 14 },
+  lifeHintText: { flex: 1, fontSize: 13, fontWeight: '700', color: t.accent },
+  lifeCard: { width: '47.8%', backgroundColor: '#FFFFFF', borderRadius: 22, padding: 10,
+    shadowColor: t.shadow, shadowOpacity: 0.08, shadowRadius: 10, shadowOffset: { width: 0, height: 4 }, elevation: 2 },
+  lifeArt: { height: 84, borderRadius: 16, alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
+  lifeChest: { position: 'absolute', right: 8, bottom: 6 },
+  lifeEmoji: { fontSize: 38 },
+  lifeTitle: { fontSize: 15, fontWeight: '900', color: t.ink, marginTop: 8 },
+  lifeSub: { fontSize: 12, color: t.muted, marginTop: 1 },
   setting: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 10, minHeight: 52 },
   divider: { borderTopWidth: 1, borderTopColor: t.tint },
   settingLabel: { flex: 1, fontSize: 16, fontWeight: '700', color: t.ink },

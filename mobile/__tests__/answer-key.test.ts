@@ -9,4 +9,11 @@ test('the answer keys match the backend', () => {
   expect(answerKey('t-x', 'Don’t   worry!')).toBe('16d4547551c484cc');
   expect(answerKey('turn-0002-abcdef', 'get something off your chest')).toBe('8616050c28c2a7d8');
   expect(normalizeAnswer('  Hello,  World! ')).toBe('hello, world');
+  // Anh → Việt: a meaning is compared without tone marks.
+  expect(answerKey('turn-0001-abcdef', 'con mèo', 'vi')).toBe('0518efee6a4e02fe');
+  expect(answerKey('turn-0001-abcdef', '  Con Meo. ', 'vi')).toBe('0518efee6a4e02fe');
+  expect(answerKey('turn-0001-abcdef', 'đường đi', 'vi')).toBe('0ff3ec03746fef4b');
+  expect(answerKey('turn-0001-abcdef', 'duong di', 'vi')).toBe('0ff3ec03746fef4b');
+  expect(normalizeAnswer('Đường  ĐI!', 'vi')).toBe('duong di');
+  expect(answerKey('turn-0001-abcdef', 'con mèo')).not.toBe('0518efee6a4e02fe'); // English answers keep their letters
 });

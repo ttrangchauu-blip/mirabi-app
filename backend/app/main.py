@@ -10,7 +10,8 @@ from sqlalchemy import select
 
 from . import auth, campus, career, community, companion, dashboard, profile, study, tasks, streaks
 from . import friends, notifications, realtime, room_chat, study_rooms, study_together, team_quests
-from . import garden, inventory, learning, learning_history, lesson_api, memories, pet_room, room_visits
+from . import education, garden, inventory, learning, learning_history, lesson_api, memories, pet_room, room_visits
+from . import adventure, careers, finance, game_tutorials, life, town, work
 from .learning_content import seed_learning_content
 from .config import settings
 from .db import SessionLocal, engine
@@ -22,6 +23,8 @@ from .security import hash_password
 
 def startup():
     upgrade_schema(engine)
+    # Every game's interactive tutorial: an invalid definition stops the server here, never mid-lesson.
+    game_tutorials.definitions()
     with SessionLocal() as db:
         allowed_admins = settings.admin_email_list
         if allowed_admins:
@@ -36,6 +39,13 @@ def startup():
         seed_learning_content(db)
         # The walk finds' catalog, next to the inventories that refer to it.
         inventory.seed_catalog(db)
+        # School years per region (rows an administrator edited are kept).
+        education.seed_calendar(db)
+        # Mirabi Life: built-in money categories, the town's projects and events, the career trees (all by code, so
+        # running again adds only what is new).
+        finance.seed_categories(db)
+        town.seed_town(db)
+        careers.seed_careers(db)
         if not db.scalar(select(CommunityPost.id).limit(1)):
             # The demo post author has a random password and cannot sign in.
             demo = User(
@@ -76,6 +86,17 @@ async def tick_study_rooms(interval: int):
             log.exception("Study room sweep failed")
 
 
+async def sweep_grade_promotions(interval: int):
+    """Move learners into the new school year on its promotion date, even if they don't open the app; also applies the
+    archive retention policy. Login and every Học tập read check too, so a missed run only delays it."""
+    while True:
+        await asyncio.sleep(interval)
+        try:
+            await asyncio.to_thread(education.sweep)
+        except Exception:
+            log.exception("Grade promotion sweep failed")
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     startup()
@@ -84,6 +105,8 @@ async def lifespan(app: FastAPI):
     tasks_running = []
     if interval > 0:
         tasks_running.append(asyncio.create_task(sweep_pet_rewards(interval)))
+    if settings.grade_promotion_sweep_seconds > 0:
+        tasks_running.append(asyncio.create_task(sweep_grade_promotions(settings.grade_promotion_sweep_seconds)))
     if settings.study_room_tick_seconds > 0:
         tasks_running.append(asyncio.create_task(tick_study_rooms(settings.study_room_tick_seconds)))
     yield
@@ -153,18 +176,29 @@ for feature_router in (
     inventory.router,
     garden.router,
     learning.router,
-    learning_history.router,
-    lesson_api.router,
 ):
     app.include_router(feature_router)
 
-# FastAPI 0.162 keeps included routers as lazy route groups. In the current
+# These routers are registered only here, never also through include_router (a route listed twice gives duplicate
+# OpenAPI operation ids). FastAPI 0.162 keeps included routers as lazy route groups. In the current
 # Uvicorn/Starlette combination the final lazy group is not reached, although
 # TestClient expands it. Register the album's and the word history's and the lessons' already-built
 # APIRoutes eagerly so production requests and OpenAPI expose the same endpoints as tests.
 app.router.routes.extend(memories.router.routes)
 app.router.routes.extend(learning_history.router.routes)
 app.router.routes.extend(lesson_api.router.routes)
+app.router.routes.extend(education.router.routes)
+app.router.routes.extend(education.admin_router.routes)
+# Mirabi Life: Work Quest (work tasks themselves use /api/tasks) and the Healing Room.
+app.router.routes.extend(work.router.routes)
+app.router.routes.extend(life.router.routes)
+app.router.routes.extend(adventure.router.routes)
+app.router.routes.extend(finance.router.routes)
+app.router.routes.extend(town.router.routes)
+app.router.routes.extend(careers.router.routes)
+app.router.routes.extend(careers.admin_router.routes)
+# Interactive game tutorials (/api/games/{game}/tutorial...).
+app.router.routes.extend(game_tutorials.router.routes)
 
 
 @app.get("/", tags=["health"])

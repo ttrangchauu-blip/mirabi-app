@@ -2,6 +2,7 @@ import json
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
+from . import education
 from .db import get_db
 from .errors import APIError
 from .models import User, utcnow
@@ -64,9 +65,15 @@ def update_profile(data: ProfilePatch, user: User = Depends(current_user), db: S
 
 @router.put("/profile/study", response_model=UserOut)
 def update_study_profile(data: StudyProfileInput, user: User = Depends(current_user), db: Session = Depends(get_db)):
-    """Age and confirmed school grade (Cài đặt, or Học tập for accounts created before registration asked for them)."""
+    """Age, and the school grade only the first time it is given (accounts created before registration asked for it).
+    After that the grade is locked: it changes only with a new school year or through verified support
+    (education.py), so another grade is refused here."""
+    profile = education.sync(db, user)
+    if profile is None:
+        education.enroll(db, user, data.school_grade)
+    elif data.school_grade != profile.current_grade:
+        raise APIError(409, "grade_locked", education.GRADE_LOCKED)
     user.age = data.age
-    user.school_grade = data.school_grade
     db.commit()
     db.refresh(user)
     return user

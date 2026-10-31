@@ -77,3 +77,33 @@ def test_upgrade_adds_columns_without_losing_data(tmp_path):
         assert conn.execute(text("SELECT mode, duration_seconds, pomodoro_cycle FROM study_sessions")).one() == ("focus", 300, None)
     with engine.connect() as conn:
         assert conn.execute(text("SELECT study_type FROM study_sessions")).scalar_one() == "self_study"
+
+
+def test_mirabi_life_upgrade_keeps_old_tasks_and_rolls_back_alone(tmp_path):
+    from app.migrations import MIRABI_LIFE_TABLES, downgrade_mirabi_life_schema
+    engine = create_engine(f"sqlite:///{tmp_path / 'life.db'}")
+    with engine.begin() as conn:  # user_tasks as it was before Work Quest, with a task and its completion
+        conn.execute(text("""CREATE TABLE user_tasks (id INTEGER PRIMARY KEY, user_id INTEGER, title VARCHAR(120),
+            category VARCHAR(20), scheduled_date DATE, repeat VARCHAR(10), created_at DATETIME)"""))
+        conn.execute(text("INSERT INTO user_tasks (id, user_id, title, category, scheduled_date, repeat, created_at) "
+                          "VALUES (1, 1, 'Đọc sách', 'study', '2030-01-01', 'none', CURRENT_TIMESTAMP)"))
+    upgrade_schema(engine)
+    upgrade_schema(engine)  # idempotent
+    inspector = inspect(engine)
+    assert all(inspector.has_table(t) for t in (*MIRABI_LIFE_TABLES, "work_projects"))
+    columns = {c["name"] for c in inspector.get_columns("user_tasks")}
+    assert {"project_id", "priority", "due_at", "estimated_minutes", "archived_at", "updated_at"} <= columns
+    with engine.connect() as conn:
+        assert conn.execute(text("SELECT title, priority, project_id, archived_at FROM user_tasks")).one() == (
+            "Đọc sách", "medium", None, None)
+    with engine.begin() as conn:
+        conn.execute(text("INSERT INTO work_projects (id, user_id, name, theme, status, created_at, updated_at) "
+                          "VALUES (1, 1, 'P', 'meadow', 'active', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)"))
+        conn.execute(text("UPDATE user_tasks SET project_id = 1"))
+    downgrade_mirabi_life_schema(engine)
+    inspector = inspect(engine)
+    assert not any(inspector.has_table(t) for t in (*MIRABI_LIFE_TABLES, "work_projects"))
+    with engine.connect() as conn:  # the task itself survives the rollback
+        assert conn.execute(text("SELECT title, project_id FROM user_tasks")).one() == ("Đọc sách", None)
+    upgrade_schema(engine)
+    assert inspect(engine).has_table("work_projects")

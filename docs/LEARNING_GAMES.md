@@ -1,7 +1,8 @@
 # Learning games: English & Math (Anh & Toán)
 
 > **Học tập now goes by lesson** for every subject of every grade: see [Học theo bài](#học-theo-bài). The games below are
-> still offered as free practice (*Trò chơi luyện tập tự do*) and keep their rules.
+> still offered as free practice (*Luyện tập* on a subject's screen, or the subject itself when it has no lessons yet)
+> and keep their rules.
 
 Mini games for **Tiếng Anh** (vocabulary, grammar) and **Toán** (+ − × :, missing number, comparison, order of
 operations). **Học tập** in the menu always opens the **subject screen**: 🇬🇧 *Tiếng Anh*, 🧮 *Toán* or 📚 *Học tự
@@ -21,11 +22,11 @@ Học tập → Chọn môn ─┬─ Học tự chọn → focus timer (back re
 
 Only *Bắt đầu* (or a tap on an English game) creates a session on the backend, one at a time; browsing subjects,
 games and guides never does. An open session (an English
-or Math game, or a focus timer running or paused) is offered as *Tiếp tục phiên học* on the subject screen.
+or Math game, or a focus timer running or paused) is offered as the one *Tiếp tục học* card of the subject screen.
 
-**Content is random every session**, for English as for Math: a vocabulary stage picks 12 different words from the
-vocabulary bank for this user (see [Vocabulary bank](#vocabulary-bank)) and the lesson shown before playing teaches
-exactly those words; grammar sentences are generated from word pools by rules (am/is/are, -s/-es/-ies, has/does), so
+**Content is new every session**, for English as for Math: a vocabulary stage holds up to 15 words this user has never
+been shown in that game (see [Khám phá từ mới and Ôn tập](#khám-phá-từ-mới-and-ôn-tập)) and the lesson shown before
+playing teaches exactly those words; grammar sentences are generated from word pools by rules (am/is/are, -s/-es/-ies, has/does), so
 no two stages are the same.
 
 ## Học theo bài
@@ -35,40 +36,61 @@ Học tập is organised **Chương trình → Khối lớp → Môn học → C
 [LESSON_CONTENT.md](LESSON_CONTENT.md); what exists per grade: [LESSON_INVENTORY.md](LESSON_INVENTORY.md)).
 
 ```
-Học tập → Chọn môn → Chọn bài → (màn bài học) → Chọn trò → Cách chơi lần đầu → 3-2-1 → Chơi → Kết quả
+Học tập → môn (chương → bài) → màn bài học (chọn trò, Bắt đầu) → Cách chơi lần đầu → 3-2-1 → Chơi → Kết quả
                                                                                             ├ Chơi lại
                                                                                             ├ Trò khác trong bài
                                                                                             └ Bài tiếp theo
 ```
 
-- **The programme of a grade** lists *every* subject and educational activity of Chương trình GDPT 2018 at that grade
-  (Thông tư 32/2018 as amended by 20/2021, 13/2022 and 17/2025), named as at that grade (Tiếng Việt / Ngữ văn; Tự nhiên
-  và Xã hội, Khoa học, Khoa học tự nhiên; Đạo đức, Giáo dục công dân, Giáo dục kinh tế và pháp luật; Tin học và Công
-  nghệ in grades 3–5…), grouped as *bắt buộc và hoạt động giáo dục*, *lựa chọn* and *tự chọn*. Each says what Mirabi
-  has: *n/m bài sẵn sàng*, *Đang biên soạn*, or why there is nothing (Nội dung giáo dục của địa phương, Tiếng dân tộc
-  thiểu số, Ngoại ngữ 2, Chuyên đề học tập: they depend on the province or the school). A subject with no lesson
-  cannot be opened, so no button leads to an empty screen.
-- **Grade**: the confirmed grade by default; *Lớp khác* shows another one to review or learn ahead without changing
-  the profile. Learners without a school grade (Sinh viên, Người đi làm) pick a grade to see its lessons.
+- **The subject screen** (*Học tập*) is kept short: a small header (*Học tập*, *Lớp 2 — Năm học 2027–2028* with a lock,
+  icons for *Sổ tay kiến thức* and *Kho lưu trữ học tập*, and *Cần ôn (n)* only when something is due), at most one
+  *Tiếp tục học* card, then the subjects as a grid of 3 columns (2 on phones narrower than 370 pt): an icon and a short
+  name, no statistics. Each subject appears once: the grade's subjects of Chương trình GDPT 2018 (Thông tư 32/2018 as
+  amended by 20/2021, 13/2022 and 17/2025), named as at that grade (Tiếng Việt / Ngữ văn; Tự nhiên và Xã hội, Khoa học,
+  Khoa học tự nhiên; Đạo đức, Giáo dục công dân, Giáo dục kinh tế và pháp luật; Tin học và Công nghệ in grades 3–5…),
+  then *Học tự chọn*. A subject with lessons opens its chapters; one without lessons but with free-practice games opens
+  its games; one with neither (Nội dung giáo dục của địa phương, Tiếng dân tộc thiểu số, Ngoại ngữ 2, Chuyên đề học tập:
+  they depend on the province or the school) is left out, so no tile leads to an empty screen. The year's progress and
+  the next promotion are shown in *Kho lưu trữ*.
+- **Grade**: the learner's grade, locked at registration and moved on by the school calendar (`education.py`,
+  [LEARNING_ARCHIVE.md](LEARNING_ARCHIVE.md)). There is no grade picker: a request naming another grade gets
+  `403 grade_locked`. Finished years are read and reviewed from *Kho lưu trữ học tập*. Learners without a school grade
+  (Sinh viên, Người đi làm) practise with the games by level (chips under the header).
 - **THPT**: the learner ticks the elective subjects they study (at most 4, `PUT /api/learning/programme/selection`,
-  stored in `users.study_subjects`); those come first, the others stay under *Môn lựa chọn khác*.
-- **Tiếp tục học**: the lesson last practised (any grade), one tap away; an open stage is still offered as *Tiếp tục
-  phiên học*. Grade and subject are never asked again after a stage: the result leads back to the lesson.
-- **Lessons by chapter**, in the order of the curriculum, with a search (accent-insensitive, title and description).
-  Each lesson shows its title, a one-line description, its games, its progress and its status: *Chưa học*, *Đang
-  luyện*, *Đã hoàn thành*, or *Đang biên soạn* (listed, never playable). A lesson is only locked by a declared
-  prerequisite (`requires`), and says why.
-- **The lesson screen**: grade, subject, chapter; *Bạn sẽ học gì?*; *Kiến thức tóm tắt* and *Ví dụ* (folded); every
-  game with its number of questions (*Bài ngắn · n từ* for a vocabulary lesson with fewer than 15 words), its progress
-  (stages done, best share right at the first try, last stage's first-try / attempts / hints, questions in Cần ôn) and
-  *Bắt đầu*, *Chơi lại* or *Tiếp tục*, plus *Cách chơi*.
+  stored in `users.study_subjects`) on *Môn lựa chọn*, a tile of the grid; the grid then shows the chosen ones.
+- **Tiếp tục học**: one card, for the stage left open (with a small × to drop it), else the focus timer running, else
+  the lesson of the current grade and school year last practised; hidden when there is none. Grade and subject are
+  never asked again after a stage: the result leads back to the lesson.
+- **The subject screen** is the same for every subject (its own icon and colour): a small header (back, the subject's
+  icon and name, *Lớp 3 · Năm học 2026–2027*; no grade picker), the subject's progress (lessons completed / ready this
+  school year), a filter *Tất cả / Đã mở / Chưa mở*, then every lesson once. The subject's free-practice games are
+  behind the game-controller icon of the header.
+- **Lesson order** (`lesson_api.sort_lessons`, mirrored by `mobile/src/learning/lessonOrder.ts`): *Đang học*
+  (`in_progress`) → *Đã mở* (`unlocked`, not started) → *Đã hoàn thành* (`completed`) → *Chưa mở* (`locked`); within a
+  group, the curriculum's chapter then lesson order (`chapter_order`, `lesson_order`), never ids or dates. Being open
+  and being done are separate states: a lesson is locked while it is still being written (*Sắp có*) or while a
+  prerequisite (`requires`) is not completed **this school year**; a locked lesson is *Chưa mở* whatever it has done.
+  The backend decides both and refuses to play a locked lesson (`409 lesson_locked`) whatever the request says.
+- **A lesson card**: its state as an icon, the title, the chapter in small type and the state in words, with a thin bar
+  while it is being studied. *Đã hoàn thành* opens again for review; *Chưa mở* is neutral and a tap says how it opens
+  (*Hoàn thành “…” để mở bài này*, with a link to that lesson) without opening anything.
+- **When states change** (a stage finished, a lesson completed, its follow-up opened): back on the subject, the last list
+  is shown at once (kept per subject for the current grade and school year, scrolled where it was left), the backend's
+  new states are read, and only the cards that changed group slide to their new place (≈0.25 s); a lesson that has just
+  opened glows once. Cards rise in only on a first visit. Nothing moves with reduced motion. The list is a `FlatList`.
+- **The lesson screen**: the title, the short content (*Kiến thức tóm tắt*; *Xem ví dụ* folded), then *Chọn trò chơi*:
+  the games as small cards (picture and name, a tick once passed); the game left open, else the first not passed yet,
+  is picked and its one line on how it plays is shown; one button plays it (*Bắt đầu*, *Chơi lại* or *Tiếp tục*), with
+  *Cách chơi* beside it. Back from a lesson opened from a subject (also after playing) returns to that subject's list.
+- Moving between these screens fades in and rises a few points (0.2 s); nothing moves with reduced motion.
 - **The organisation is declared**: every file is `topic` (by the curriculum's topics, "không theo mục lục bộ sách
   nào"); a file following a textbook would name its series and edition and map each lesson (`textbook_ref`).
 
 ### Games of a lesson
 
 One gameplay per game, the content passed by the lesson; a stage only ever holds the lesson's own questions (never
-another lesson's or grade's, never one asked twice to fill it). The backend checks that the game belongs to the
+another lesson's or grade's, never one asked twice to fill it). The vocabulary games are the exception by design: they
+start with the lesson's own words and then go on with new words beyond them (see *Khám phá từ mới theo bài* below). The backend checks that the game belongs to the
 lesson, the lesson to its subject and grade, and that it is ready and unlocked (`409 lesson_locked`,
 `lesson_not_ready`, `lesson_not_published`, `422 game_not_in_lesson`).
 
@@ -79,7 +101,71 @@ lesson, the lesson to its subject and grade, and that it is ready and unlocked (
 | Chọn đáp án có giải thích (`choice`) | `choice_explain` | tình huống, đọc hiểu / đọc tư liệu, dự đoán hiện tượng, kiến thức, tự đánh giá | `retry`; the option chosen explains itself and is crossed out |
 | Phân loại, Thám tử chính tả, Ghép chữ, Lập trình đường đi | as before | with the lesson's own set, sentences, words or levels | as before |
 | Bảo vệ căn cứ, Xây cầu toán học | as before | generated problems of the lesson's settings only (`table: 2` = 2 × 1…10, `no_carry`…) | as before (3 hearts) |
-| Bắn thiên thạch, Bắn từ tiếng Anh | as before | exactly the lesson's word list | as before (15 words, 5 hearts; fewer words = a short stage) |
+| Bắn thiên thạch, Bắn từ tiếng Anh | as before | the lesson's own words first, then new words of its themes (*Khám phá từ mới theo bài*) | as before (15 words, 5 hearts; fewer only when fewer new words are left) |
+| Hành trình dòng thời gian (`timeline`) | `timeline_place` | Lịch sử: sự kiện theo thời gian | `retry`; events on their right marker stay (`kept`: `"m2:e1"`), the others go back to the pile |
+| Xây câu (`sentence`) | `sentence_build` | Tiếng Anh: cấu trúc câu, ngữ pháp | `retry`; the right start of the sentence locks (`kept`: tile ids), the first wrong wagon is named |
+| Xưởng hình học (`geometry`) | `geometry_build` | Toán: đo góc, tổng ba góc, chu vi, diện tích | `retry`; the feedback says what was built measures and what is missing |
+| Cân bằng phương trình (`balance`) | `equation_balance` | Hoá học / KHTN: lập phương trình | `retry`; the elements still unbalanced are named, or the factor to divide by |
+| Cầu trục số (`number_line`) | `number_line_place` | Toán: thứ tự, so sánh, làm tròn số, phân số, số thập phân | `retry`; points on their right tick lock (`kept`: `"p1:47"`), the first one off says which way |
+| Giải toán từng bước (`step_solver`) | `step_solve` | Toán: bài toán có lời văn, phương trình giải bằng phép ngược | steps confirmed one by one (`advance`); `retry`; a right calculation with a wrong result is kept |
+| Thám tử đọc hiểu (`story_detective`) | `story_evidence` | Tiếng Việt / Tiếng Anh: đọc hiểu, thể loại, biện pháp tu từ | the clue first (`advance`), then the options; `retry`, each wrong pick explained |
+| Soi câu (`sentence_xray`) | `sentence_paint` | Tiếng Việt: từ loại, kiểu câu, so sánh, từ láy/ghép, điệp ngữ | `retry`; pieces painted right lock (`kept`: `"w1:c1"`), the first wrong one is named |
+
+### Subject gameplays
+
+Eight gameplays made for one kind of knowledge each (`backend/app/lesson_games.py`, `lesson_games_math.py`,
+`lesson_games_reading.py`; `mobile/src/games/subject/`). Each
+draws its own world and shows the result of a right answer in it before the explanation (a critical reaction of the
+feedback loop). Which lessons use which gameplay, and which still wait for one: [GAME_AUDIT.md](GAME_AUDIT.md).
+
+- **Hành trình dòng thời gian**: a parchment road, its milestones in time order from the top. Events are dragged onto
+  a milestone (or tapped, then the milestone tapped). Content: `events` with `year` (negative = TCN), optional `label`
+  (*Thời Lê sơ*, *9/3/1945*) and `seq` (events of one year in a known order get a marker each; events of the same year
+  and `seq` share one marker with several places, either order right). `years: hidden` shows the dates only once the
+  timeline is complete. Right: the road fills with gold, each milestone lights up as it is reached, the pet travels it.
+- **Xây câu**: a train whose wagons are the sentence's places; the tiles are crates, `distractors` stay in the yard.
+  Compared by text, so the same word twice is two tiles that can be swapped; `accepted` lists other right orders. Right:
+  the wagons light up one by one, the train moves off a little and the sentence is read aloud (sound on).
+- **Xưởng hình học**: a blueprint. `kind: angle`: a protractor, the arm turned by its handle or − / + on the `step`;
+  the target is `degrees` or a `class` (nhọn, vuông, tù, bẹt); without `readout` the measure is read on the scale and a
+  wrong answer never says it. `kind: rect`: a centimetre `grid`, the corner dragged; the target is any of `area`,
+  `perimeter`, `square`, `sides`, and every rectangle meeting it is right. Right: the angle's arc fills, or the unit
+  squares fill one by one, and the measures are written in. Answers: `angle:<degrees>`, `rect:<w>x<h>`.
+- **Cân bằng phương trình**: a two-pan balance, each pan holding its side's molecules as atom models; the beam levels
+  only when every element matches; a table counts the atoms live. Content: `reactants`, `products`, `coefficients`
+  (checked when loaded: balanced, smallest, the only answer up to a factor). The backend counts the atoms of what is
+  sent (`["2","1","2"]`), so a balanced but not reduced answer is told to divide. A simulation only.
+- **Cầu trục số**: the number line is a bridge, its ticks the planks. A number (flag) is taken from the bank and planted
+  by touching or sliding along the bridge; ◀ ▶ (and ◀◀ ▶▶ by a long step) move it, and alone place it — no dragging
+  needed. Content: `line` {`from`, `to`, `step` (long, labelled ticks), `snap` (where a point can stand), `labels`:
+  majors | all | ends}, `points` [{`label`, `value`}] (ints or "3/4", "2,5", "-5"; a line written in fractions keeps
+  fraction labels), `marks` (numbers already shown, e.g. the one to round). The app gets ticks and labels only, never
+  values; the answer is a tick per point (`"p1:47"`). Right: the flags turn green and the pet crosses, stopping at each.
+- **Giải toán từng bước**: a staircase, one stair per step. Each step asks one question; the learner taps two number
+  chips (the problem's `numbers`, then earlier results `r1`…) and an operator (+ − × :) and types the result on a keypad
+  (comma and fraction bar allowed). Answer: `[chip, op, chip, result]`. A right step before the last is confirmed by the
+  backend (`lesson_games.advance`: the turn stays open, `correct: true, resolved: false`, the prompt moves on and the
+  result becomes a chip), so the plan is never sent ahead. Content: `problem`, `numbers` (each written in the problem),
+  `steps` [{`ask`, `expr` ("48 - 12", "r1 : 4"), `result`, `unit`, `accepted`}] — checked exactly (fractions) on load;
+  a + b / b + a and a × b / b × a are the same step.
+- **Thám tử đọc hiểu**: a case file. The passage comes as sentences (`sentences`); first the sentence that proves the
+  answer is tapped (`phase: find`); only once the backend confirms it (`advance`) are the `options` sent (`phase:
+  answer`). A wrong clue is crossed out with the task's `clue`; a wrong answer with its `why`. Content: `passage` (text
+  or list), `evidence` (sentence numbers, at most half), `question`, `options`, `clue`, `lang`. Right: "Đã phá án".
+- **Soi câu**: a light box and 1–3 highlighters, one per role (`roles`). Pieces are painted with the pen in hand (the
+  same colour again clears); punctuation cannot be. Content: `sentence` with `[piece|n]` markup (`|0`: a phrase with no
+  role, so the chunking gives nothing away). Answer: painted pieces (`"w3:c2"`, `["none"]` when nothing is painted).
+  Right: a scan line sweeps the box and the painted pieces light up.
+- **Lessons moved to them** keep their learners: a game with `credit_from: "order"` (or `"choice"`) is passed by a pass
+  of that game (`lesson_api.game_passed`), so a lesson completed before stays completed, and stages of a retired game
+  count as having started it. The retired game's sessions and results stay (its database lesson is retired, never
+  deleted).
+- **Choosing the game** (`backend/app/game_registry.py`): `GAMEPLAYS` is the game definition table (family,
+  interaction, grades, status `ready` / `planned`; `GET /api/learning/gameplays`); `ACTIVITIES` maps a learning activity
+  to the gameplays made for it. A lesson declares its `activity` or it is inferred from its title, chapter and
+  objectives, never from the subject alone. `python -m app.game_audit --strict` fails when a ready lesson publishes the
+  wrong kind of game, the same gameplay twice, a question also used by another lesson, or a game outside its grades
+  (a test runs it); `--markdown` writes GAME_AUDIT.md.
 
 The new games have no hearts and no clock (they are not quizzes against time); every option of a *choice* explains
 why it fits or not, several options can be acceptable by stated criteria, and a *tự đánh giá* question (`graded:
@@ -90,10 +176,69 @@ before the next question. Each game has its own 3-page guide drawn with its real
 options, 40-character cards; grades 3–5 at most 5 / 5 / 4; secondary school can read a passage (up to 1 400
 characters). Code passages (Tin học) show in a fixed-width font so their indentation reads as written.
 
+### Khám phá từ mới theo bài
+
+A lesson's `words` (lesson_catalog, 15 per lesson) are its **core words**, not the limit of its games
+(`vocab_bank.discover`, app/vocab_lesson.py). Each stage of Bắn thiên thạch (Việt → Anh) or Từ rơi / Bắn từ
+(Anh → Việt) holds up to 15 words **never shown before in that game**, taken in this order:
+
+1. **core**: the lesson's own words not discovered yet (whatever the open levels: they are the lesson);
+2. **topic**: new words of the lesson's themes (the bank topics holding ≥ 25% of its words; e.g. ta5.nghe_nghiep:
+   careers + work);
+3. **related**: new words of related themes (`vocab_lesson.RELATED`) that the grade has opened: the topics suggested
+   for the grade (study_profile) and the themes of its unlocked lessons and of earlier grades' lessons;
+4. **next level**: words one level above the highest open level, never above the grade's ceiling: 2–3 per stage
+   once the learner does well (`challenge` ≥ 60 / ≥ 80), all of the rest once 1–3 are used up.
+
+Never served: a word of a level above the grade's ceiling or of a topic blocked for the grade
+(`vocab_discovery.policy_for`), a word more than one level below the lesson's own (a grade-10 lesson of level-3 words
+goes on from level 2), and the **core words of lessons of a higher grade or of a locked lesson** of this grade.
+
+- **One history per game**, shared with free practice (`vocab_discoveries`, one row per canonical word, written when
+  the word is put on screen): changing lessons, signing out or playing on another device never brings a word back,
+  and two senses or two topics of one word ("bat" the animal, "bat" in sport) are one word. Words never put on
+  screen (the stage ended first) stay new.
+- **Easy to hard**: within a tier the easiest words come first (by level, random within a level) with a share of
+  harder ones that grows with `challenge` (10% → 70%; none while it is below its starting value, i.e. after mostly
+  wrong answers); each stage is ordered from easy to hard. Each tier starts again from its easiest words.
+- **Nothing new left**: the stage does not start (`409 vocabulary_exhausted`); the app offers *Ôn tập từ đã học*
+  (`POST /api/learning/play {vocab: "review"}`), which serves words already met (wrong and due ones first) and never
+  writes a discovery. Old words are never used to fill a Khám phá stage; the last stage is simply shorter.
+- Lesson detail (`GET /api/learning/lesson-catalog/{key}`) gives each vocabulary game an `explore` block:
+  `core_total`, `core_discovered`, `core_completed`, `core_completed_session` (the stage that discovered the lesson's
+  last own word: its result says *"Bạn đã hoàn thành từ vựng của bài này! Hãy tiếp tục khám phá những từ mới cùng chủ
+  đề nhé!"*), `new_words_left`, `exhausted`, `next_stage_words` (also `turns`), `level`, `topics`, `related_topics`.
+- Levels, their completion celebration (pet animation) and unlocking are the shared ones of the vocabulary games
+  (`vocab_discovery.settle_levels`); a level completed from a lesson stage is celebrated after its result. Words added
+  to the bank later are simply new words: nothing is reset.
+- Archive replays (Kho lưu trữ) keep the lesson's own words and discover nothing. A lesson's progress and completion
+  rules are unchanged (a completed stage of ≥ 80% right at the first try passes the game).
+
+`python -m app.vocab_lesson report` prints, per ready lesson and game, how many words each tier can serve to a new
+learner of its grade. With the bundled data (9 403 active senses, 37 topics) every lesson has 83–948 words per game
+instead of 15:
+
+| Lesson | Grade | Ceiling | Core | Topic | Related | Next level | Total (meteor) |
+|---|---|---|---|---|---|---|---|
+| ta1.con_vat | 1 | 1 | 15 | 46 | 45 | 0 | 106 |
+| ta2.do_an | 2 | 1 | 15 | 46 | 29 | 0 | 90 |
+| ta3.tu_vung_gia_dinh | 3 | 2 | 15 | 20 | 0 | 48 | 83 |
+| ta4.ngoi_nha | 4 | 2 | 14 | 29 | 35 | 105 | 183 |
+| ta5.nghe_nghiep | 5 | 2 | 15 | 47 | 54 | 153 | 269 |
+| ta6.truong_moi | 6 | 3 | 15 | 56 | 73 | 151 | 295 |
+| ta7.suc_khoe | 7 | 3 | 15 | 42 | 134 | 223 | 414 |
+| ta8.moi_truong | 8 | 4 | 15 | 97 | 221 | 200 | 533 |
+| ta9.cong_nghe | 9 | 4 | 14 | 90 | 272 | 263 | 639 |
+| ta10.tu_vung_moi_truong | 10 | 5 | 15 | 119 | 376 | 274 | 784 |
+| ta11.loi_song_khoe | 11 | 5 | 15 | 112 | 173 | 151 | 451 |
+| ta12.nghe_nghiep | 12 | 5 | 15 | 104 | 346 | 251 | 716 |
+
+(Core 14: one word whose meaning shows the answer is only asked Anh → Việt.)
+
 ### Progress and completion
 
-Every stage records its lesson, grade and content version (`learning_sessions.catalog_lesson`, `catalog_grade`,
-`content_version`), so progress is read per grade → subject → lesson → game from the user's own sessions and turns
+Every stage records its lesson, grade, content version and school year (`learning_sessions.catalog_lesson`,
+`catalog_grade`, `content_version`, `academic_year`), so progress is read per school year → grade → subject → lesson → game from the user's own sessions and turns
 (never stored twice, never from the app's numbers), and an old result never changes when a lesson is edited (the
 lesson publishes a new version; old sessions keep their frozen questions). Sessions played before lessons existed are
 not attributed to any lesson.
@@ -109,35 +254,36 @@ not attributed to any lesson.
 
 | Method & path | |
 |---|---|
-| `GET /api/learning/programme?grade=` | Every subject of the grade with type, support, lessons ready / listed and progress; `selection` (THPT); `resume` (Tiếp tục học); `grade: null` and the grades to pick from without a school grade |
+| `GET /api/learning/programme` | Every subject of the learner's grade with type, support, lessons ready / listed and this school year's progress; `academic_year_label`; `selection` (THPT); `resume` (Tiếp tục học); `grade: null` without a school grade. `?grade=` other than the learner's: `403 grade_locked` |
 | `PUT /api/learning/programme/selection` | `{subjects}`: THPT electives (at most 4); `422 not_an_elective`, `too_many_electives` |
-| `GET /api/learning/programme/subjects/{code}?grade=&q=` | Chapters and lessons with status, progress and locks; `404 subject_not_in_grade` |
-| `GET /api/learning/lesson-catalog/{key}` | The lesson screen: objectives, summary, examples, games with progress, completion rule, prerequisites, next lesson, review status and content version |
+| `GET /api/learning/programme/subjects/{code}?q=` | This school year: `chapters` (by curriculum order) and `lessons` (sorted by state, see [lesson order](#học-theo-bài)), each with `lesson_id`, `subject_id`, `grade_id`, `academic_year`, `chapter_order`, `lesson_order`, `unlock_status`, `progress_status`, `progress_percent`, `unlock_requirements` (`lesson` / `content`), `group`; `progress` (completed / ready); `404 subject_not_in_grade` |
+| `GET /api/learning/lesson-catalog/{key}` | A lesson of the learner's grade (`403 grade_locked` otherwise). The lesson screen: objectives, summary, examples, games with progress, completion rule, prerequisites, next lesson, review status and content version |
 | `POST /api/learning/lesson-catalog/{key}/play` | `{game}` (+ `Idempotency-Key`) → a paused session of that game of that lesson; the session's `catalog` names the lesson, its other games and the next lesson |
 
 
 ## By grade: the programme and the curriculum games
 
-**The confirmed grade decides the content** (`backend/app/curriculum.py`). The curriculum is Vietnam's *Chương trình giáo
+**The learner's grade decides the content** (`backend/app/curriculum.py`; the grade is locked, see
+[LEARNING_ARCHIVE.md](LEARNING_ARCHIVE.md)). The curriculum is Vietnam's *Chương trình giáo
 dục phổ thông 2018*; subjects are named as at that grade (Tiếng Việt / Ngữ văn; Tự nhiên và Xã hội 1–3, Khoa học 4–5,
 Khoa học tự nhiên 6–9; Tiếng Anh and Tin học from grade 3). `GET /api/learning/catalog` returns `programme`: only the
 subjects and games **with content for that grade**, each game with the grades it supports. A subject or game without
 enough reviewed content is not offered (no short or padded stage), and an empty grade says so (`note`).
 
-- **Another grade** (`?grade=grade4`, *Lớp khác* on the subject screen): to review or learn ahead for the visit; the
-  profile's grade is unchanged (*Về lớp chính*).
+- **No other grade**: `?grade=` / `{grade}` naming another grade than the learner's is refused (`403 grade_locked`);
+  older years are reviewed from Kho lưu trữ học tập.
 - **Sinh viên, Người đi làm/Học tự do**: no school grade is assumed. They pick a level (`?level=basic|intermediate|advanced`,
   *Cơ bản / Trung cấp / Nâng cao*, kept on the device) and see Tiếng Anh, Toán and Tin học.
-- Math: the grade being studied is the only grade offered in the setup (content exists for grades 2, 3, 4 and 6).
-- Flow unchanged: subject → game → first-time guide → 3-2-1 → play. `POST /api/learning/play {game, grade | level}`
+- Math: the learner's grade is the only grade offered in the setup (content exists for grades 2, 3, 4 and 6).
+- Flow unchanged: subject → game → first-time guide → 3-2-1 → play. `POST /api/learning/play {game, level?}` (the grade is the learner's)
   answers `409 game_not_available` for a grade without content.
 
 | Game | Subject | Grades | Stage | Rules (Học tập) |
 |---|---|---|---|---|
-| Ghép chữ (`word_builder`) | Tiếng Việt | 1 (letters), 2 (syllables) | 10 words | Picture + shuffled pieces; tap in order, *Kiểm tra*. Wrong: the pieces stay, fix and check again. Each word gives the pet a book piece. |
+| Ghép chữ (`word_builder`, *Word Forest*) | Tiếng Việt | 1 (letters), 2 (syllables) | 10 words | A gate per word, its picture on the sign; the pieces glow on the forest floor: drag one onto a stone of the lock (or tap: first free stone), *Mở cổng*. Wrong: the gate shakes, the pieces stay, fix and open again. Right: the gate opens, the pet gets a book piece and walks on to the next gate. |
 | Thám tử chính tả (`spelling_detective`) | Tiếng Việt | 2–5 | 10 sentences | Tap the misspelled syllable; only then are the spellings sent; choose the right one. Wrong word or spelling: a reason, try again. The explanation shows before the next sentence. |
 | Phân loại cùng pet (`sorting`) | TNXH / Khoa học | 1–5 | 10 cards of one set | Drag the card onto its group (or tap the group). Wrong: the card returns with the reason. |
-| Lập trình đường đi (`code_path`) | Tin học | 3–12, outside school | 5 levels | Blocks Tiến / Rẽ trái / Rẽ phải (+ *Lặp lại* from Trung cấp, loops not nested), at most `max_blocks`; *Chạy* walks the pet, then the backend checks the program. Unlimited retries, *Dừng*, *Đặt lại*. |
+| Lập trình đường đi (`code_path`, *Robot Adventure*) | Tin học | 3–12, outside school | 5 levels | Blocks Tiến / Rẽ trái / Rẽ phải (+ *Lặp lại* from Trung cấp, loops not nested), at most `max_blocks`; *Chạy* rolls the pet's robot step by step (the block being done lights up), then the backend checks the program. Off course: the step that went wrong is named (*Bước 2 (Tiến): robot đụng tảng đá*), its block turns red and the robot bumps the rock. Unlimited retries, *Dừng*, *Đặt lại*. |
 
 All four: no hearts, no clock (`timed: false`), no *Xem đáp án*; a wrong answer is `retry` with `feedback`, and a right
 answer after a mistake is recorded as `corrected` (never `first_try`), in progress and the review list (*Cần ôn*, *Ôn
@@ -157,9 +303,120 @@ run, and the Trung cấp / Nâng cao levels cannot be solved without a loop with
 | Phân loại cùng pet | 5 sets, 69 cards: Động vật / Thực vật (1–2), Trên cạn / Dưới nước (1–3), Các giác quan (1), Thể rắn / lỏng / khí (4–5), Nhóm thức ăn (4–5) |
 | Lập trình đường đi | 19 levels: Cơ bản 7 (grades 3–5), Trung cấp 6 (6–9), Nâng cao 6 (10–12) |
 
-Not built yet (not shown in the app): Đọc hiểu cùng pet, Đếm cùng pet, Đường đua phép tính, Giải bài từng bước,
-Vòng đời kỳ diệu, Dòng thời gian, Khám phá bản đồ, Lắp mạch điện, Cân bằng phản ứng; conditions and functions in
+Not built yet (not shown in the app): Đếm cùng pet, Đường đua phép tính, Vòng đời kỳ diệu, Khám phá bản đồ, Lắp
+mạch điện (Dòng thời gian, Cân bằng phương trình, Trục số, Giải toán từng bước and Thám tử đọc hiểu are lesson games
+now: [Subject gameplays](#subject-gameplays)); conditions and functions in
 Lập trình đường đi.
+
+## Visual games: Math Battle, Magic Lab, Word Forest, Robot Adventure, and the lesson worlds
+
+Four games are played in a drawn 2D world (vector art in `mobile/src/games/art/`, see
+[GAME_ASSETS.md](GAME_ASSETS.md)); the backend still decides every answer, heart and EXP. Shared modules in
+`mobile/src/games/engine/`: `Parallax` (scene layers at several depths, scrolled by transform and wrapped with no seam),
+`rig.ts` (`useRig`: a character's actions — enter, attack, cast, hit, defeat, jump, celebrate — as short transform
+sequences, plus an idle breath; nothing re-renders while they play), `drag.tsx` (`DropArea`, `DropZone`, `Draggable`:
+drop zones measured on screen, drag or tap, a drop elsewhere springs back). Tests: `mobile/__tests__/game-redesign.test.tsx`,
+`art-math-battle.test.tsx`, `art-lab-forest.test.tsx`, `game-worlds.test.tsx`; backend `tests/test_magic_lab.py`,
+`test_lesson_catalog.py` (worlds). Screenshots of a real run (backend → Expo web → headless Chrome) are in
+[game-screenshots/](game-screenshots/) (`world-*.png`, `pause-volume.png`). The falling-word shooters' particles and
+collisions, the pet's walk phase and the result screen's animation: [GAME_ANIMATION.md](GAME_ANIMATION.md).
+
+**Visual feedback loop** (`games/engine/feedback.tsx`, tests `__tests__/feedback-loop.test.ts`,
+`feedback-gameplay.test.tsx`): every learning action is seen in the world before anything moves on. The game screen owns
+one `FeedbackLoop` per stage; an action goes `IDLE → INTERACTING → VALIDATING → SUCCESS_ANIMATION | FAILURE_ANIMATION →
+WORLD_UPDATED → NEXT_CHALLENGE → IDLE` (a wrong answer goes back to `INTERACTING`, the same challenge). The screen drives
+the first half (`submit`, the backend's verdict `judge`); the scenes drive the second: each reaction they play (the
+spell, the crossing, the door, the experiment) is `begin`…`end` (`useReactions`, `useQuestEvents`).
+- While a **critical** reaction plays, nothing can be sent (`disabled`), the challenge answered stays on screen and the
+  next one waits (Ghép chữ, Magic Lab and the falling words hand over themselves), the explanation card waits, and the
+  stage does not finish. Independent effects (falling words, a bubbling beaker) are not critical and never wait.
+- A wrong answer never holds the learner by itself: the pieces kept can be fixed at once. Only a reaction that matters
+  holds them (Math Battle's counter-attack, which costs the heart, ~1 s).
+- One answer at a time (`busy` while one is validated); the exact answer already judged wrong for a challenge is not sent
+  again (*Đáp án này vừa chưa đúng…*: it would only cost another heart); a verdict is shown once per request (its event
+  id), so a retried request or a re-render never replays it. Points and EXP stay the backend's (idempotent).
+- Every reaction has a watchdog (`maxMs`, default 6 s): an animation that never reports back (stopped, unmounted, broken)
+  is put in its end state and released, so the game can never jam. *Bỏ qua* (shown after 0.7 s of a reaction) jumps the
+  skippable reactions to their end state at once. Scenes ignore the late callbacks of a run skipped or replaced.
+- Leaving mid-reaction loses nothing: the answer was already counted by the backend; the loop is disposed with its timers.
+
+- **Math Battle** (`defense`, `games/MathBattle.tsx`): a turn-based duel. HUD on top (the pet's hearts as its HP bar,
+  the monster's HP bar, *Màn n/N*, combo), the arena in the middle (pet left, monster right), the problem and the
+  number pad under it. Monsters of 2 hit points come one after another through three zones — *Rừng phép thuật*
+  (Slime, Nấm phép thuật), *Hang pha lê* (Golem đá, Tinh linh bóng tối), *Lâu đài quái vật* (Rồng nhỏ) — then the
+  last questions are **Vua Pha Lê** in the boss arena (`battleFoe`): phase 1, phase 2 behind a crystal shield (the next
+  right answer breaks it), phase 3 enraged on its last point. Right: a magic circle gathers round the pet, it casts
+  (a skill: it lunges), a magic bolt flies, the impact bursts with sparks and the damage, the monster flashes and loses
+  a point; at zero it is defeated, the pet cheers and the next one walks in (the scene scrolls). The problem solved stays
+  on its card (green) until then. Wrong: the monster lunges and its claws fly at the pet, the pet staggers, its lost
+  heart empties on the HP bar (the backend's heart), and the pet says a short hint from the kind of mistake (`MATH_TIP`:
+  *Nhớ sang hàng bên trái nhé!*…); the fight goes on. Three right in a row power the pet's element skill (*Cầu lửa*,
+  *Sóng thần*…; counted on the device, a display only).
+- **Magic Lab** (the lesson game `lab`, `games/MagicLab.tsx`): a lab bench with the pet as assistant (it gives the
+  task). The parts lie on the bench; the learner drags them onto the apparatus (or taps: first free place) and runs
+  the experiment. A part put in place snaps in (and in a circuit, sparks where it connects). Five scenes
+  (`curriculum_games.LAB_SCENES`): **circuit** (battery, bulb, gaps closed with a conductor; the switch: current flows
+  round the loop and the bulb's light grows), **shadow** (an object between the torch and the screen: a dark, faint or
+  no shadow), **water** (the beaker on the hot plate or in the freezer: ice melts, water boils off, steam condenses into
+  drops, water freezes), **plant** (the growth stages in order; the can waters the pot, the drops fall, the soil darkens,
+  then the seed grows stage by stage and flowers), **magnet** (the objects put in the magnet's reach: it comes down, the
+  magnetic ones fly up and stick under its poles, what was left on the bench stays put). The answer is
+  `["slot:part", …]`; a wrong part: the experiment fizzles (a grey puff, a dead spark), the part's own reason shows
+  (`why`), the wrong parts go back to the bench and the right ones stay (`kept`). Right: the experiment plays out (a
+  reaction: *Thí nghiệm tiếp theo* or *Bỏ qua* jumps to its end) with its explanation until *Thí nghiệm tiếp theo* (the
+  stage waits for it before completing). Lessons: `kh4.anh_sang`, `kh4.chuyen_the_nuoc`, `kh5.mach_dien`,
+  `kh5.dan_dien_cach_dien`, `kh5.cay_con`, `kh7.nam_cham` (magnetic and non-magnetic materials, the two poles; 4–5
+  experiments each; `completion.games: any`, so a lesson completed with its first game stays completed). Simulations
+  only: nothing is a procedure to try for real.
+- **Word Forest** (Tiếng Việt): the pet explores a forest drawn in four depths.
+  - *Ghép chữ* (`word_builder`, `games/WordForest.tsx`): each word is a brook whose bridge lacks its planks, one per
+    letter or syllable. The pieces glow on the forest floor (`scatter`: never touching); drag one onto a plank
+    (`placeTile`) or tap it (it drops onto its plank), then *Xây cầu*. Right: the planks light up one after another,
+    the pet runs across and the forest scrolls to the next brook (*Bỏ qua* jumps to the far bank). Wrong: the bridge
+    wobbles, the pieces stay.
+  - The Tiếng Việt lessons' own games get a forest quest above them (`games/ForestQuest.tsx`): *Sắp xếp* (sentences,
+    story order) opens a **secret door** (the runes light one after another, the door rumbles, the leaves slide open,
+    the pet walks in); *Ghép cặp* and *Chọn đáp án* (synonyms, antonyms, the right word) **free a creature** from three
+    layers of thorny vines, one layer per third of the stage (`vinesLeft`: the layer cut bursts into pieces), and the last
+    right answer frees it: it runs to the pet to thank it (hearts) and the treasure chest opens on a gem.
+- **Robot Adventure** (`code_path`, in `games/CurriculumGames.tsx`): the pet drives a robot that rolls between cells and
+  turns the short way between drawn boulders; `codePath.trace` lights the block being done and `codePath.fault` names
+  the step that went wrong, its block (red) and the cell it could not enter (the robot stops there and bumps it; the
+  program is kept, to be fixed). At the goal it picks up the gem and the flag goes up. Switches, doors and moving
+  obstacles are not in the levels' rules yet (they would need new level data and backend checks).
+- **The worlds of the lesson games** (`mobile/src/games/quests/`): a lesson's Sắp xếp, Ghép cặp, Chọn đáp án and Phân loại
+  are played under a drawn scene of its subject's world, which moves on with each right answer (progress is the
+  session's `resolved_count / required_count`) and reacts to each wrong one (`wrongKey`). The backend names the world:
+  `catalog.world` on the session (`lesson_catalog.world_of`: Toán `kingdom`, Tiếng Anh `space`, Tiếng Việt `forest`,
+  Khoa học / Vật lí / Hoá học / Sinh học `lab`, Lịch sử `time`, Địa lí `map`; Lịch sử và Địa lí plays its *Địa lí:*
+  chapters on the map and the rest in time, and a lesson may set `"world"` itself — the grade 4–5 lessons about places
+  and nature do; the world is not part of the lesson's version). `null`: no world (Tin học's lesson games, Âm nhạc, Mĩ
+  thuật, GDTC, GDCD, Công nghệ, HĐTN, Quốc phòng); an older backend's session falls back to the subject.
+  - *Math Kingdom* (`KingdomQuest`): Math Battle's arena without hearts or problem card; the answers are the pet's spells.
+  - *Space Adventure* (`SpaceQuest`): the pet's rocket fires at the asteroid in its way (it bursts into rubble, the
+    stars stream past, the next drifts in); each third of the stage (two from 4 questions, one below) wakes a grey planet.
+  - *Time Traveler* (`TimeQuest`): each answer digs up an artifact of the era (it rises and flies to the shelf, the owl
+    cheers); each era's share lights the time gate and the pet steps through into the next (one era per three
+    questions, up to four).
+  - *Treasure Explorer* (`MapQuest`): the pet walks the map's trail a step per answer; fog lifts and a flag goes up at
+    each place reached; the last answer opens the chest on the island.
+  - *Magic Laboratory* (`LabQuest`): each answer is an ingredient the pet casts into the potion; the last sets it
+    bubbling and lights the bulb (the hands-on experiments stay Magic Lab's).
+  - *Word Forest* (`ForestQuest`): as before, now for Phân loại too.
+
+  The scene stays for the whole stage (during the countdown, between questions, after the last one). After a right
+  answer the world's reaction plays first, as a reaction of the feedback loop: the explanation card waits until the
+  scene reports it done (`QUEST_RIGHT_MAX_MS`, 4.5 s, at most), the next question cannot be answered meanwhile, and the
+  stage does not finish before it. A wrong answer is felt in the world without holding the game. Reduced motion: no wait.
+- **Sound effects** (`games/engine/sfx.tsx`): Math Battle, Magic Lab, Word Forest and every world play short cues (spell,
+  hit, pick-up, unlock, level done, a gentle "not yet", portal). One set of players per game screen, shared through
+  context. A cue never restarts within 90 ms and at most two start within 160 ms (the rest are dropped). Silent while
+  *Âm thanh* is off; the pause menu sets the volume (*Nhỏ / Vừa / Lớn*, saved per account on the device with the other
+  learning preferences). On the web, sound starts after the learner's first tap (browser rule).
+- **Stars** on the result (`stageStars`, shown only): a completed stage gets 3 from 90% right at the first try, 2
+  from 70%, else 1; the highest combo shows from x3.
+
+Reduced motion: no lunges, bolts, bobbing or scrolling; results show at once.
 
 ## Học tập only (Thử thách merged)
 
@@ -170,20 +427,17 @@ Lập trình đường đi.
   session started in *Thử thách* before stays playable as it was (moving targets, score, combo) and its result still
   shows its score; *Chơi lại* plays it again in Học tập. The backend keeps accepting both modes.
 
-## Cách chơi (first-time guide) and countdown
+## Cách chơi (first-time interactive tutorial) and countdown
 
-- **Per game**: each game (`word_shooter`, `meteor`, `gate`, `bridge`, `grammar`, `defense`, `math_bridge`) has its
-  own 3 pages in `mobile/src/learning/tutorials.ts`: *Mục tiêu*, *Cách thao tác* (an animated copy of the game drawn
-  like the real one: a falling word, letter boxes filling then *Bắn*, the gates, the planks, the number pad…), *Kết
-  thúc* (how the stage ends in Học tập: vocabulary costs no heart and words wait; grammar and Math have 3 hearts; time
-  up is never a loss). Page indicator, *Trước* / *Tiếp*, *Bắt đầu* on the last page, *Đóng* (×).
-- **When**: before the session exists when the game is known (English "Chơi ngay", *Luyện lại* from *Từ đã học*);
-  after the lesson with the session still paused for Math; right after creating a paused review stage (*Ôn lại*),
-  whose game the backend decides. Nothing runs behind it: no clock, no question issued, no countdown.
-- **Saved** per account and game on the backend (`learning_tutorial_views`, unique `(user_id, game)`), only when *Bắt
-  đầu* is pressed (closing it shows it again next time), with a device copy per account for offline use (sent on the
-  next load). Afterwards it is skipped; *Cách chơi* on each game of the list, and in the pause menu (*Đã hiểu*),
-  shows it again.
+- **Per game, in the game itself**: each game has its own interactive tutorial, played in the real game screen
+  (Tutorial Mode) with demo content: watch, do the real move (type, tap, drag, the number pad…), get feedback, step by
+  step, then *Bạn đã sẵn sàng!* and *Bắt đầu chơi*. It never scores, takes a real heart, grants EXP or moves a lesson
+  on: no stage exists while it plays. Architecture, steps, API and rules: [GAME_TUTORIALS.md](GAME_TUTORIALS.md).
+- **When**: before the session exists when the game is known (English "Chơi ngay", *Luyện lại*, a lesson's game);
+  after the lesson with the session still paused for Math; right after creating a paused review stage. It is asked for
+  until completed or skipped at the current tutorial and gameplay version (*Bỏ qua* is recorded as skipped, apart
+  from completed). *Cách chơi* on each game of the list plays it again; in a stage, the pause menu's *Xem lại hướng
+  dẫn* plays it over the paused stage, and *Tiếp tục chơi* resumes that stage after 3-2-1.
 - **Countdown** (`useLearningSession`): on the game screen, big in the middle, `3 → 2 → 1 → Bắt đầu!`, for every
   start, replay and continue. Review and word-practice stages are now created paused too (`start_paused`), so the
   backend clock, the targets, answers and score only start with `/resume` at *Bắt đầu!*; the answer field only appears
@@ -196,8 +450,8 @@ Lập trình đường đi.
 
 | Method & path | |
 |---|---|
-| `GET /api/learning/tutorials` | `{seen: [game, …]}`: the guides this account has finished |
-| `POST /api/learning/tutorials/{game}` | Mark one finished (idempotent); `422` for an unknown game |
+| `GET /api/games/tutorials/progress`, `GET/POST /api/games/{game}/tutorial…` | the interactive tutorials ([GAME_TUTORIALS.md](GAME_TUTORIALS.md#api)) |
+| `GET /api/learning/tutorials`, `POST /api/learning/tutorials/{game}` | older apps' guide pages (kept; a tutorial left unfinished is not "seen") |
 
 ## Vocabulary bank
 
@@ -214,8 +468,14 @@ several meanings has one row per meaning, each with its own key (`bank.money` / 
 | `level`, `topic` | CEFR A1–C2; one of the 12 topics (daily_life, family, food, school, work, technology, health, travel, emotions, environment, animals, communication) |
 | `meaning_vi`, `context_vi` | The Vietnamese meaning in context; the context is required when the word has other senses |
 | `example_en`, `example_vi` | An example sentence and its translation |
-| `accepted` | Other correct answers for Việt → Anh, separated by `\|` (`trash\|garbage`). Anh → Việt only accepts the word shown |
+| `accepted` | Other correct answers for Việt → Anh, separated by `\|` (`trash\|garbage`). Anh → Việt takes its answers from `meaning_vi` (see below) |
 | `phonetic`, `source` | IPA (optional for phrases); where the row comes from (default `mirabi-original`) |
+
+**Review (2026-10-31)**: every active entry (9 403 senses) was read by an AI review (Claude, 10 batches), not by a
+person. 90 corrections were applied (meanings, contexts, examples, accepted answers, 8 difficulties, 2 parts of
+speech); no entry had to be held back. Meanings that name a loanword the way Vietnamese does ("tin tặc, hacker") were
+kept: Việt → Anh already leaves them out (`gives_answer`) and Anh → Việt accepts the loanword. 14 words were kept for
+lớp 6 and above (`vocab_grade_limits.tsv`) and 6 examples rewritten for young learners. A human review is still to do.
 
 **Import** (run from `backend/`): `python -m app.learning_vocab check [files]` validates (default: the bundled files)
 and prints the counts per topic and level; `import [files] [--retire-missing]` upserts by key (new keys inserted,
@@ -247,18 +507,53 @@ be licensed for this use and say so in `source`.
 | Giao tiếp (communication) | 9 | 6 | 8 | 7 | 4 | 2 | 36 |
 | **Total** | **120** | **93** | **91** | **72** | **45** | **23** | **444** |
 
-**How a stage picks its words** (`learning_vocab.pick_entries`, per game: Anh → Việt and Việt → Anh have their own
-progress and level):
-- **Level**: starts at A1. A level is passed once 12 of its words (or all of them) were seen and at least 80% of those
-  answers were right at the first try; the working level is the first level not passed. Words above it are never drawn,
-  except one level up to fill a stage that a small topic can't fill at the user's level. The level is computed on the
-  whole bank; a topic only narrows which words are drawn.
-- **Mix** (12 turns, each word at most once; only a re-practice after "Xem đáp án" repeats a word): up to 3 words to
-  review (open "cần ôn" items: missed, wrong, hinted or revealed, until answered right at the first try in a later
-  stage), 2 learned words not seen in the last 3 stages (least recently seen first), then new words of the working
-  level, then words left from easier levels. When new words run out, the stage is filled with review and learned words
-  instead of coming back empty.
-- **Recent**: words of the last 3 stages of the same game are not drawn again as new or learned words while others are left.
+### Khám phá từ mới and Ôn tập
+
+How a stage of the bank picks its words (`app/vocab_discovery.py`; a lesson's own words: [Khám phá từ mới theo
+bài](#khám-phá-từ-mới-theo-bài)). The two games keep their own history and levels: *Bắn thiên thạch* (`meteor`,
+Việt → Anh) and *Từ rơi / Bắn từ tiếng Anh* (`word_shooter`, Anh → Việt).
+
+- **Khám phá từ mới** (one tap on the game, `POST /api/learning/play {game, vocab: "discover", topic?}`): at most 15
+  words **never shown before in that game**, each word once (two senses of "bank" are one word: the canonical id is
+  the normalized word), ordered **easy to hard**. A word counts as shown when its turn goes on screen
+  (`learning.issue_turns` → `vocab_discoveries`), so a stage left after 3 words gives back the 12 it never showed;
+  "Chơi lại" and "Bắt đầu" always draw new words; the history is the account's (another device, signing in again).
+  With 7 new words left a stage has 7 (never 8 old ones to fill it). With none: `409 vocabulary_exhausted`, the app
+  offers *Chọn chủ đề khác* and *Ôn tập*; the history is never reset.
+- **Ôn tập** (`vocab: "review"`): words already met in that game, at most 12: the "Cần ôn" ones first (most mistakes
+  first), then those due by a spaced schedule (mastery < 40: after 1 day, < 70: 3 days, < 90: 7 days, else 21 days),
+  weakest first. It writes no discovery and never changes a level.
+- **Levels 1–5** from the bank's internal difficulty (1 → 1 … 5 and 6 → 5): *Rất dễ, Dễ, Trung bình, Khó, Nâng cao*.
+  The **grade** (education profile, never sent by the app) sets where they start and the highest one reachable:
+
+  | Grade | Open from the start | Highest | Topics left out |
+  |---|---|---|---|
+  | Lớp 1–2 | 1 | 1 | law, business, society, media, thinking; idioms |
+  | Lớp 3–5 | 1 | 2 | same |
+  | Lớp 6–7 | 1 | 3 | law |
+  | Lớp 8–9 | 1–2 | 4 | – |
+  | Lớp 10–12 | 1–3 | 5 | – |
+  | Outside school | 1 | 5 | – |
+
+  Single words a younger grade could reach but should not meet yet (romance words, insults) are kept for an older
+  grade in `backend/app/data/vocab_grade_limits.tsv` (`vocabulary`, key, min_grade, reason); outside school there is
+  no such limit. A reviewer adds a line there; the word stays in the bank.
+
+- **Completing a level**: once every word of it (for this grade and game) was discovered, the backend marks it
+  completed (`vocab_level_progress`), opens the next level if the grade allows it, and the app shows the celebration
+  once (pet hops, stars, light confetti; still with reduced motion): *"Chúc mừng! Bạn đã khám phá hết từ vựng cấp 1 –
+  Rất dễ!"* / *"Bạn đã khám phá 420 từ. Cấp độ mới đang chờ bạn!"* with *Khám phá cấp độ mới* and *Ôn tập từ đã học*.
+  It is marked seen as soon as it is shown (`POST /vocabulary/levels/{game}/{level}/celebrated`). A level is never
+  taken back: words added to the bank later are new words of an open level, nothing is celebrated again.
+- **Adapting**: a *challenge* (0–100, starting at 30) moves one step (10) per stage from the last 8 stages of the game:
+  up after ≥ 85% right at the first try answered within 12 s on average, down below 60%. It sets the share of harder
+  new words (10% at 0, 70% at 100), taken just above the middle of the remaining words, never the hardest at once.
+  Many mistakes bring easier new words and *Ôn tập* is offered; Khám phá never repeats a word. The falling speed never
+  depends on it.
+- **School years**: each discovery keeps its school year. A promotion moves the ceiling up; nothing is lost or moved.
+  *Sổ tay từ vựng* filters by year (`?year=`), and practising a finished year's words
+  (`POST /vocabulary/practice {year}`) is an `archive` stage that never fills this year's "Cần ôn".
+
 - **Fall time**: 24 s, +1.5 s per letter over 7 and +2 s per extra word, at most 40 s (`travel_seconds` of each turn).
 - **Lessons**: *Tổng hợp* (`en.vocab.mix`, all topics, chosen by default) and one lesson per topic, all at level
   *Tự điều chỉnh*: the setup has nothing to choose but the mode, so "Bắt đầu" is one tap away. The lessons
@@ -312,16 +607,22 @@ Reused, not duplicated: `users` (identity, pet, level), `exp_events` + `award_ex
   | | Anh → Việt — *Bắn từ vựng* (`word_shooter`, kind `word_spelling`) | Việt → Anh — *Bắn thiên thạch* (`meteor`, kind `vocab_typing`, default) |
   |---|---|---|
   | Falls | the English word (`prompt.word`) | a meteor with the Vietnamese meaning |
-  | User types | the same English word; only that spelling is accepted | the English word; declared equivalents accepted |
+  | User types | the Vietnamese meaning, tone marks optional (`answer.lang = "vi"`, `prompt.answer_lang`) | the English word; declared equivalents accepted |
   | After a hit | the Vietnamese meaning, shown where the word broke, plus pronunciation | the pair to remember (*apple — quả táo*) with its phonetic, plus pronunciation |
-  | Progress skill | `en.spell.<word>` (`skill_type` `spelling`): typing the shape of the word | `en.word.<word>` (`skill_type` `word`): recalling the word, the vocabulary mastery |
+  | Progress skill | `en.spell.<word>` (`skill_type` `spelling`): recognising the word | `en.word.<word>` (`skill_type` `word`): recalling the word, the vocabulary mastery |
 
-  The meaning of an Anh → Việt word is never sent before it is resolved (`result.word = {en, vi, phonetic}` on a hit,
-  miss or reveal), and seeing it never counts as knowing the word: the two games keep separate progress, review items
-  (`<lesson>.spell.<word>`, labelled *Mặt chữ: …*) and mastery. A review session of Anh → Việt items only is played as
-  *Bắn từ vựng*. The meaning shown after a hit stays about 1.2 s, then fades (0.5 s), under the other falling words, and
-  never blocks typing. A miss shows the English–Vietnamese pair. *Xem đáp án* is not offered in Anh → Việt (the word
-  is on screen).
+  **Anh → Việt answers** (`learning_engine.meaning_answers`): every sense of the bank's `meaning_vi` (split at `,` `;`
+  `/` outside brackets: *thiểu số, nhóm thiểu số* takes either), each with or without what is in brackets (*(dùng) dè
+  sẻn* → *dè sẻn* or *dùng dè sẻn*) and without a leading classifier (*cái còi* → *còi*, *sự hồi phục* → *hồi phục*).
+  They are compared without case, spacing, end punctuation or tone marks (`normalize_vi`: *con meo* = *con mèo*, *đ* =
+  *d*), so a phone without a Vietnamese keyboard can answer. Hints: what the word is about (`context_vi`), then the
+  number of syllables and the first one (the first letter for a one-syllable meaning). The meaning is never sent before
+  the word is resolved (`result.word = {en, vi, phonetic}` on a hit, miss or reveal; `correct_answer` is the meaning).
+  The two games keep separate progress, review items (`<lesson>.spell.<word>`, labelled *Nghĩa: …*) and mastery. A
+  review session of Anh → Việt items only is played as *Bắn từ vựng*. The meaning shown after a hit pops in, stays about
+  1.3 s, then floats up and fades (0.5 s), under the other falling words, and never blocks typing. A miss shows the
+  English–Vietnamese pair. *Xem đáp án* is offered. Stages created before keep their frozen answers (no `lang`): the
+  word shown is typed again, with letter boxes and no *Xem đáp án*, as it was.
 - **A typed shot** (both vocabulary games) hits whichever open word it matches, not only the aimed one; when several
   match, the one closest to the ground (issued first) is destroyed, one per shot. `result.turn_id` is the turn hit. A
   wrong shot counts against the aimed word.
@@ -332,27 +633,55 @@ Reused, not duplicated: `users` (identity, pet, level), `exp_events` + `award_ex
   `prompt.answer_keys` (SHA-256 of `turn_id|normalized answer`, 16 hex digits, one per accepted answer, never the
   answers; `learning_engine.answer_key` and `mobile/src/learning/answerKey.ts`); the backend still checks what is
   sent. Every box filled but not right is sent after a 0.7 s pause (time to finish a longer equivalent) and counts as
-  wrong, as before; the same text is never sent twice. Behind the boxes there is one text
+  wrong, as before; Enter sends what is typed too. Anh → Việt has no boxes (a meaning can be typed several ways): the
+  aimed word carries one bright answer field with a caret (*Gõ nghĩa tiếng Việt…*), the others a small *Nghĩa?* field,
+  and a wrong meaning is checked with Enter. The same text is never sent twice. Behind the boxes there is one text
   field for the whole play field (`Playfield`, never remounted), so a falling target, choosing another one or a word
   breaking never closes and reopens the keyboard, and the typed text is kept. Hints: first letter, then last letter.
-- **No overlapping words** (`games/fieldLayout.ts`): lanes spread over the whole width; each target (from the
-  ground up) keeps its natural spot unless it would cover another word or a word held for a shot, then moves sideways to
-  a free spot, or, when the field is too narrow, waits just above the word below it (just below only when there is no
-  room above). A word is never shown higher than a moment before, so nothing jumps back up after a shot; sideways moves
-  slide over a few frames. The aimed frame is only as wide as its answer boxes need, and grows downward. After a shot
-  the next word in falling order is aimed and the answer field keeps the focus (on the web without scrolling).
+- **The falling-word engine** (`games/wordField.ts`, plain TypeScript, tested in `__tests__/word-field.test.ts`): every
+  word is an object with its own id, x, y, width, height, speed (px/ms), spawn time and state: `SPAWNING` (queued, not
+  on screen) → `FALLING` → `LOCKED` (typed right: stopped where it was) → `HIT` (a bullet reached it) → `DESTROYING` (it
+  broke: counted, once) → `REMOVED`; or `FALLING` → `MISSED` (landed) → `REMOVED`; a withdrawn shot goes back from
+  `LOCKED`/`HIT` to `FALLING` where it stopped. Coordinates are pixels in the field's own frame, never a share of its
+  height, so the keyboard opening or closing moves no word: only the ground moves, and each word's speed is adjusted so
+  it still lands at the same moment (a word below the new ground is lifted onto it, the only case where a word moves
+  by more than a frame's fall; counted in `stats.teleports`).
+- **Movement**: one `requestAnimationFrame` loop in `Playfield` (only while the game runs) steps the engine by the
+  frame time, capped at 64 ms (the first frame after the app was frozen never makes words jump), moves each word by
+  speed × time, lowest first, and writes its y into that word's own `Animated.Value` (a `translateY`, never `top`):
+  nothing re-renders while words fall. The shooter's frame runs in the same loop. Each word is a memoised component
+  keyed by its id; its box (tile and answer boxes) has one size for its whole life, from its answer's length
+  (`wordBox`), whether it is aimed or not, so aiming another word or typing resizes and moves nothing. Typing
+  re-renders the aimed word only. The game clock (HUD, spawn timer) ticks every 250 ms in these games.
+- **No overlapping words, ever** (the spawn manager, `WordField.place`): a new word always comes in at the top, at an x
+  where its real box (with an 8 px gap) touches no word, and when it shares a column with a word below, far enough
+  above it that it can't catch that word up before it lands (longer words fall slower, so speeds differ) or, for a word
+  being shot, before it breaks. With no such place it waits in a queue (first come, first served) and is tried again
+  every frame: it is never forced in, and `GameScreen` asks the server for no new word while one is waiting. A falling
+  word never enters the box of a word below it in its column: it waits just above it (a word being shot) and falls on
+  once it has broken. A word waiting in the queue does not fall, so it never appears low on the field nor lands unseen;
+  only the words open when the game is reopened go on from where they were (`on_screen_ms`). A miss is reported only
+  once at least half the fall time has passed (the backend's `miss_min_share`); later is always accepted. A new word
+  fades in. After a shot the next word in falling order is aimed and the answer field (fixed, invisible, at the top of
+  the field) keeps the focus. `WordField.stats` counts spawns, words that had to wait, frames where a word waited,
+  overlapping boxes (always 0) and the smoothed frame time.
 - **The field never moves on screen**: the question card above it and the "Gợi ý" row under it stay in place, at a
   height that never shrinks (`Steady` in `GameScreen.tsx`), while no word is falling for a moment (a blank card, the
   buttons dimmed), and a notice or the hints take the card's one line under the word (at most two) instead of adding
   rows. Otherwise the field would grow and shrink between words, and every falling word would shift with it.
 - **The pet shoots** (both vocabulary games, `mobile/src/screens/learning/games/shooterFx.ts` and `Playfield.tsx`): the
   user's pet (its idle strip, its walk strip while moving, mirrored to face its way; never redrawn) drifts gently along
-  the bottom while waiting. A right answer is the backend's: "Chính xác!" shows at once and the word it resolved is held
-  where it was (it no longer falls and can never be missed or scored again), the pet glides under it (≤ 0.28 s), stops
-  to aim, and fires 3 small bullets with short trails from its head, 150 ms apart, each flying 500–800 ms depending on
-  the distance (`SHOT_TUNING` in `shooterFx.ts`: bullets, gap, speed, flight bounds); the first one to arrive breaks the
-  word into a few pieces (shot and break sounds,
-  following *Âm thanh*), then the meaning or pair shows there and the English word is pronounced. A wrong answer shoots
+  the bottom while waiting. **As soon as the typed text is right** (its key matches) the word stops where it is, for
+  good (it no longer falls and can never be missed or scored again), and the pet shoots at once, without waiting for
+  the server: it glides under the word (≤ 0.28 s), stops to aim, and fires 3 small bullets with short trails from its
+  head, 150 ms apart, each flying 500–800 ms depending on the distance (`SHOT_TUNING` in `shooterFx.ts`: bullets, gap,
+  speed, flight bounds), straight to the stopped word, so every bullet hits it. The word glows softly while locked on,
+  flashes at each hit, glows and cracks for 160 ms after the last one, then breaks into spinning fragments and specks of
+  light with a flash ring (shot and break sounds, following *Âm thanh*); only then does it count ("Chính xác!", the
+  points), its meaning or pair pop in there, and the English word is pronounced. It breaks only once the backend has
+  confirmed the answer (`Shot.confirmed`): a slow reply keeps it cracked and glowing where it is; an answer not counted
+  after all withdraws the shot and the word is back. When two falling words share the typed meaning, the one closest to
+  the ground is shot, as the backend picks. A wrong answer shoots
   nothing: the word keeps falling and the pet shakes a little. Typing the next word works throughout. Position and
   sprite are separate (the pet's coordinates change, it never teleports or leaves the field), and everything runs on one
   pause-aware effect clock that moves Animated values frame by frame (the shooter layer is memoised and does not
@@ -407,11 +736,12 @@ with an open turn that already had wrong attempts, it is recorded as `wrong`.
 from the topic's open items (Math generates fresh problems of the weak types). New lesson sessions weight their
 turns toward weaker skills and open review items.
 
-## Từ đã học (vocabulary history)
+## Sổ tay từ vựng (vocabulary history)
 
-**Từ đã học** on the English game list (top right, next to the title) lists every word met in the two vocabulary
-games, most recently studied first, with a search (English word or Vietnamese meaning, accent-insensitive) and the
-filters *Tất cả*, *Trả lời đúng*, *Cần ôn*, 15 words a page (*Trước* / *Sau*; the page, filter and search are kept while a word is open, and a new filter or search starts on page 1). A word opens its detail: word, meaning and context, phonetic, part of
+**Sổ tay từ vựng** on the English game list (top right, next to the title) lists every word met in the two vocabulary
+games, most recently studied first, with a search (English word or Vietnamese meaning, accent-insensitive), the tabs
+*Tất cả*, *Đã học*, *Chưa nhớ* (answered wrong or not answered the last time), *Thành thạo* (mastery ≥ 80), a topic
+and a level filter, 15 words a page (*Trước* / *Sau*; the page, filter and search are kept while a word is open, and a new filter or search starts on page 1). A word opens its detail: word, meaning and context, phonetic, part of
 speech and example **only when the word bank (or the turn's frozen copy) has them**, a pronunciation button (the
 device's text-to-speech, as in the games), right/wrong counts per game, every answer newest first, and *Luyện lại*.
 
@@ -439,9 +769,12 @@ device's text-to-speech, as in the games), right/wrong counts per game, every an
 
 | Method & path | |
 |---|---|
-| `GET /api/learning/vocabulary/history?q=&filter=all\|correct\|review&limit=15&offset=0` | One page (`limit` 1–100, default 15) of entries (word, meaning, context, part of speech, first/last seen, status, counts, per game `{correct, wrong, unanswered, last_result, last_at}`); `total` = words matching the filter and search; `counts` (the filter tabs) and `due` (Cần ôn words per game) are for the whole history |
+| `GET /api/learning/vocabulary/history?q=&filter=all\|learned\|review\|mastered\|correct&topic=&level=&year=&limit=15&offset=0` | One page (`limit` 1–100, default 15) of entries (word, meaning, context, part of speech, first/last seen, status, counts, per game `{correct, wrong, unanswered, last_result, last_at}`); `total` = words matching the filter and search; `counts` (the filter tabs) and `due` (Cần ôn words per game) are for the whole history |
 | `GET /api/learning/vocabulary/history/{entry_key}` | One entry with `phonetic`, `example_en/vi`, `can_practice`, `attempts` (newest first); `404 word_not_found` when it is not in the user's own history |
-| `POST /api/learning/vocabulary/practice` | `{game, entry_keys?}` (+ `Idempotency-Key`) → a review session; `409 no_words_to_practice` when none of the words is the user's (or none is due) |
+| `POST /api/learning/vocabulary/practice` | `{game, entry_keys?, year?}` (+ `Idempotency-Key`) → a review session (an `archive` one for a finished `year`); `409 no_words_to_practice` when none of the words is the user's (or none is due) |
+| `GET /api/learning/vocabulary/progress?game=meteor\|word_shooter` | Levels (`completed`/`unlocked`/`locked`/`above_grade`, words discovered/total), `current_level`, `new_words_left`, `review_due`, `challenge`, topics with new words left, `celebration` (a completed level not shown yet) |
+| `POST /api/learning/vocabulary/levels/{game}/{level}/celebrated` | The celebration was shown (idempotent); `404 level_not_completed` |
+| `POST /api/learning/play` | `+ vocab: "discover"\|"review"`, `topic?` for the vocabulary games; `409 vocabulary_exhausted`, `409 topic_not_available` (a topic left out for the grade), `409 nothing_to_review` |
 
 ## EXP and daily tasks
 
@@ -481,6 +814,8 @@ device's text-to-speech, as in the games), right/wrong counts per game, every an
 | `learning_skill_progress` | Per-user skill counters and mastery; unique `(user_id, skill_key)` |
 | `learning_review_items` | "Cần ôn"; unique `(user_id, lesson_id, question_key)` |
 | `learning_rewards` | Stage reward claim; unique `(user_id, subject_id, local_date)`, unique `session_id` |
+| `vocab_discoveries` | Khám phá từ mới: a word shown for the first time in a game; unique `(user_id, game, canonical)`, its sense, level, topic, school year, session |
+| `vocab_level_progress` | A vocabulary level of a game: unlocked (why, grade), completed (words, school year), celebrated; unique `(user_id, game, level)` |
 
 All timestamps are UTC. Old sessions keep `lesson_version_id`, their item snapshots and `scoring_json`, so editing
 content or rules never changes old results. Tables are created at startup by the existing additive upgrader.
@@ -614,7 +949,8 @@ Screenshots of a real end-to-end run (backend → Expo web → headless Chrome) 
 ## Known limitations
 
 - Online only; no offline queue.
-- Sound is device text-to-speech for English words; there are no game sound-effect assets yet.
+- English words are spoken by the device's text-to-speech; the scene games have short sound effects but no background
+  music per world yet.
 - Built-in lessons are defined in code (versioned on change); vocabulary is edited in its data files and imported with
   `python -m app.learning_vocab`; there is no admin editor. CEFR levels of the bank are editorial estimates.
 - Time spent in a learning game is not added to the focus-timer statistics or study-minute EXP (the stage reward is

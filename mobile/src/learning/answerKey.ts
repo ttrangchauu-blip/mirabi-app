@@ -7,15 +7,21 @@
 
 const APOSTROPHES = /[’‘ʼ`´]/g;
 
-/** Case-insensitive, whitespace-normalized form, as the backend compares English answers. */
-export function normalizeAnswer(value: string): string {
+/** Case-insensitive, whitespace-normalized form, as the backend compares English answers (normalize_text). A Vietnamese
+ * answer ('vi', normalize_vi) is also compared without tone marks: "con meo" = "con mèo". */
+export function normalizeAnswer(value: string, lang?: string | null): string {
   let text = value ?? '';
   try { text = text.normalize('NFKC'); } catch { /* an engine without normalize: compare as typed */ }
   text = text.replace(APOSTROPHES, "'").toLowerCase().replace(/\s+/g, ' ').trim();
-  return text.replace(/^[ .!?,;:]+|[ .!?,;:]+$/g, '').trim();
+  text = text.replace(/^[ .!?,;:]+|[ .!?,;:]+$/g, '').trim();
+  if (lang !== 'vi') return text;
+  text = text.replace(/đ/g, 'd');
+  try { text = text.normalize('NFD'); } catch { return text; }
+  return text.replace(/[̀-ͯ]/g, '');
 }
 
-export const answerKey = (turnId: string, text: string) => sha256Hex(`${turnId}|${normalizeAnswer(text)}`).slice(0, 16);
+export const answerKey = (turnId: string, text: string, lang?: string | null) =>
+  sha256Hex(`${turnId}|${normalizeAnswer(text, lang)}`).slice(0, 16);
 
 // ------------------------------------------------------------------------------------------------ SHA-256
 const K = [

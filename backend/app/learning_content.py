@@ -27,8 +27,8 @@ SUBJECTS = [("english", "Tiếng Anh", 0), ("math", "Toán", 1), ("vietnamese", 
             ("science", "Tự nhiên và Khoa học", 3), ("informatics", "Tin học", 4)]
 
 LEVELS = {
-    # Vocabulary has no level to pick: it starts at A1 and follows the user's results (learning_vocab.working_level).
-    "english": [("auto", "Tự điều chỉnh", "Bắt đầu từ A1 và nâng dần theo kết quả của bạn"),
+    # Vocabulary has no level to pick: it follows the grade, the open levels and the results (vocab_discovery.py).
+    "english": [("auto", "Tự điều chỉnh", "Theo lớp của bạn, nâng dần theo kết quả"),
                 ("starter", "Khởi đầu", "Lớp 3–4"), ("basic", "Cơ bản", "Lớp 5–6")],
     "math": [("grade2", "Lớp 2", "Cộng trừ trong phạm vi 100, bảng nhân 2–5"),
              ("grade3", "Lớp 3", "Phạm vi 1000, bảng nhân chia 2–9"),
@@ -187,8 +187,8 @@ def _game(game_type: str, travel: int, **extra) -> dict:
 # (learning_vocab.bank_items): new, to review and learned words, at the user's level, never twice in a stage.
 # ---------------------------------------------------------------------------------------------------------------
 
-VOCAB_TIP = ("Mỗi chặng có các từ khác nhau, chọn theo trình độ của bạn: bắt đầu từ A1 và nâng dần khi bạn trả lời "
-             "đúng ngay. Từ cần ôn được lặp lại có chủ đích. Đọc to, nghe phát âm rồi nhớ nghĩa.")
+VOCAB_TIP = ("Mỗi chặng có tối đa 15 từ bạn chưa gặp, từ dễ đến khó, theo lớp và cấp độ của bạn. Muốn gặp lại từ cũ, "
+             "chọn Ôn tập. Đọc to, nghe phát âm rồi nhớ nghĩa.")
 
 
 def bank_lesson(code: str, topic: str, title: str, bank_topic: str | None) -> dict:

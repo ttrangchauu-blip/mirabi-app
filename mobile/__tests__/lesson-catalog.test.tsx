@@ -4,13 +4,13 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react-nativ
 import { setSession } from '../src/api/client';
 import type { Turn } from '../src/learning/types';
 import { LearningScreen } from '../src/screens/learning/LearningScreen';
-import { fold } from '../src/screens/learning/LessonScreens';
 import { ChoiceExplain, MatchPairs, OrderSteps } from '../src/screens/learning/games/LessonGames';
 import { ConfirmProvider } from '../src/ui/ConfirmDialog';
 import { ToastProvider } from '../src/ui/Toast';
 import { mockServer, USER } from '../test/mockServer';
+import fixtures from '../test/tutorialFixtures.json';
 
-// Học tập theo bài: Học tập → Chọn môn → Chọn bài → màn bài học → Cách chơi → chơi, and the lesson games' boards.
+// Học tập theo bài: Học tập → môn (chương → bài) → bài học (chọn trò) → Cách chơi → chơi, and the lesson games' boards.
 
 beforeEach(async () => {
   await AsyncStorage.clear();
@@ -47,6 +47,9 @@ const LESSON = { key: 'toan2.bang_nhan_2', title: 'Bảng nhân 2', description:
   games: [{ game: 'match', title: 'Ghép phép tính với kết quả', gameplay: 'Ghép cặp', style: null, turns: 3, short_stage: false, playable: true,
     review_count: 0, progress }] };
 
+/** The lesson cards in the order shown, by what they say aloud. */
+const cardOrder = () => screen.getAllByRole('button', { name: /\. (Phép|Chương)/ }).map((b) => b.props.accessibilityLabel as string);
+
 function renderLearning() {
   render(
     <ToastProvider><ConfirmProvider>
@@ -64,48 +67,51 @@ describe('Học tập theo bài', () => {
       'GET /api/learning/lesson-catalog/toan2.bang_nhan_2': { status: 200, body: LESSON },
       'POST /api/learning/lesson-catalog/toan2.bang_nhan_2/play': { status: 409, body: { detail: 'Not published', code: 'lesson_not_published' } },
       'GET /api/learning/sessions/current': { status: 200, body: { session: null } },
+      'GET /api/games/match/tutorial': { status: 200, body: fixtures.definitions.match },
+      'POST /api/games/match/tutorial/progress': { status: 200, body: {} },
     });
     renderLearning();
-    // A subject that depends on the region says why, and cannot be opened.
-    expect(await screen.findByText('Nội dung do từng tỉnh biên soạn.')).toBeTruthy();
-    expect(screen.getByRole('button', { name: /^Nội dung giáo dục của địa phương\./ }).props.accessibilityState.disabled).toBe(true);
-    expect(screen.getAllByText('Môn tự chọn').length).toBe(2); // the section and the subject's type
-    fireEvent.press(screen.getByRole('button', { name: /^Toán\. Bắt buộc/ }));
+    // One tile per subject; a subject that depends on the region has nothing on Mirabi and is left out.
+    expect(await screen.findByRole('button', { name: /^Toán\./ })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /^Tiếng Anh\./ })).toBeTruthy();
+    expect(screen.queryByRole('button', { name: /^Nội dung giáo dục của địa phương/ })).toBeNull();
+    expect(screen.queryByText(/bài sẵn sàng/)).toBeNull(); // no statistics on the subject grid
+    fireEvent.press(screen.getByRole('button', { name: /^Toán\./ }));
 
-    expect(await screen.findByText('1. Phép nhân và phép chia')).toBeTruthy();
-    expect(screen.getByText('🔒 Học bảng nhân 2 trước.')).toBeTruthy();
-    // A planned lesson is listed, never playable.
-    expect(screen.getByRole('button', { name: /^Bảng nhân 5\..*Đang biên soạn/ }).props.accessibilityState.disabled).toBe(true);
-    fireEvent.changeText(screen.getByLabelText('Tìm bài học'), 'chia');
-    expect(screen.getByText('1 bài phù hợp')).toBeTruthy();
-    expect(screen.queryByText('Bảng nhân 2')).toBeNull();
-    fireEvent.changeText(screen.getByLabelText('Tìm bài học'), '');
+    // One list sorted by state (this server sends the fields of before: the app sorts them itself): the lesson being
+    // studied first, then those not open yet, in the curriculum's order. Each card: title, chapter, state.
+    expect(await screen.findByText('Lớp 2')).toBeTruthy();
+    expect(cardOrder()).toEqual(['Bảng nhân 2. Phép nhân và phép chia. Đang học, 50%',
+      'Bảng chia 2. Phép nhân và phép chia. Chưa mở', 'Bảng nhân 5. Phép nhân và phép chia. Sắp có']);
+    // A locked lesson says how it opens instead of opening.
+    fireEvent.press(screen.getByRole('button', { name: /^Bảng chia 2\./ }));
+    expect(screen.getByText('Học bảng nhân 2 trước.')).toBeTruthy();
+    expect(server.callsTo('GET /api/learning/lesson-catalog/toan2.bang_chia_2')).toHaveLength(0);
+    // Tất cả / Đã mở / Chưa mở.
+    fireEvent.press(screen.getByRole('tab', { name: 'Đã mở' }));
+    expect(cardOrder()).toEqual(['Bảng nhân 2. Phép nhân và phép chia. Đang học, 50%']);
+    fireEvent.press(screen.getByRole('tab', { name: 'Chưa mở' }));
+    expect(cardOrder()).toHaveLength(2);
+    fireEvent.press(screen.getByRole('tab', { name: 'Tất cả' }));
     fireEvent.press(screen.getByRole('button', { name: /^Bảng nhân 2\./ }));
 
-    expect(await screen.findByText('Bạn sẽ học gì?')).toBeTruthy();
-    expect(screen.getByText('• Thuộc bảng nhân 2')).toBeTruthy();
-    expect(screen.getByText('2 × 3 nghĩa là 2 được lấy 3 lần.')).toBeTruthy();
+    expect(await screen.findByText('2 × 3 nghĩa là 2 được lấy 3 lần.')).toBeTruthy();
     expect(screen.queryByText('2, 4, 6, 8')).toBeNull(); // examples are folded
-    fireEvent.press(screen.getByRole('button', { name: /Ví dụ/ }));
+    fireEvent.press(screen.getByRole('button', { name: /ví dụ/ }));
     expect(screen.getByText('2, 4, 6, 8')).toBeTruthy();
-    expect(screen.getByText('Ghép cặp · 3 câu mỗi chặng')).toBeTruthy();
+    // The lesson's games: the first is picked, one button plays it.
+    expect(screen.getByRole('radio', { name: /^Ghép phép tính với kết quả\./ }).props.accessibilityState.checked).toBe(true);
     fireEvent.press(screen.getByRole('button', { name: 'Bắt đầu' }));
-    // The first time, the game's guide comes first; nothing is created before "Bắt đầu".
-    expect(await screen.findByText('Ghép các thẻ thành từng cặp.')).toBeTruthy();
+    // The first time, the game's own tutorial comes first, played in the game; nothing is created before it ends.
+    expect(await screen.findByText('Chạm thẻ trái rồi thẻ phải để ghép, xong nhấn Kiểm tra')).toBeTruthy();
     expect(server.callsTo('POST /api/learning/lesson-catalog/toan2.bang_nhan_2/play')).toHaveLength(0);
-    fireEvent.press(screen.getByRole('button', { name: 'Tiếp' }));
-    fireEvent.press(screen.getByRole('button', { name: 'Tiếp' }));
-    fireEvent.press(screen.getByRole('button', { name: 'Bắt đầu' }));
+    fireEvent.press(screen.getByRole('button', { name: 'Bỏ qua hướng dẫn' }));
+    await waitFor(() => expect(server.callsTo('POST /api/games/match/tutorial/progress').map((c) => c.body.status)).toContain('skipped'));
     await waitFor(() => expect(server.callsTo('POST /api/learning/lesson-catalog/toan2.bang_nhan_2/play')).toHaveLength(1));
     expect(server.callsTo('POST /api/learning/lesson-catalog/toan2.bang_nhan_2/play')[0].body.game).toBe('match');
     // It could not start: back on the lesson, which says why.
     expect(await screen.findByText('Trò chơi này của bài đang được cập nhật. Bạn thử lại sau nhé.')).toBeTruthy();
-    expect(await screen.findByText('Bạn sẽ học gì?')).toBeTruthy();
-  });
-
-  it('searches without accents', () => {
-    expect(fold('Phân biệt s/x')).toBe('phan biet s/x');
-    expect(fold('Đồng bằng')).toContain('dong');
+    expect(await screen.findByText('Chọn trò chơi')).toBeTruthy();
   });
 });
 

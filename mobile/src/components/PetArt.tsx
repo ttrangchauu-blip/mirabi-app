@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Animated, Easing, Image, ImageSourcePropType } from 'react-native';
 import { petById, PetId } from '../pets';
 import { moveActivity, PetActivity, petSprite, SPRITE_LAYOUT, SpriteLayout, stageIndex, WALK_CYCLE_MS } from '../petSprites';
@@ -9,7 +9,10 @@ type Props = { pet?: string | null; size: number; stage?: number; /** No idle mo
   /** In a game, the pet darting right (1) or left (-1): plays its move strip for that way when it has one, otherwise
    * it walks (and the caller mirrors the walk strip for left, see hasSprite). */ moving?: 1 | -1;
   /** With `moving`: an unhurried stroll rather than a dart, the same strip at half speed. */ strolling?: boolean;
-  /** A still, blurred one-colour shape of the pet: a stage that is not unlocked yet. */ silhouette?: boolean };
+  /** A still, blurred one-colour shape of the pet: a stage that is not unlocked yet. */ silhouette?: boolean;
+  /** With `moving` or `walking`: how far through its strip the pet's steps are (1 = one full loop), set by the caller
+   * from the distance it actually walked, so its feet stay planted at any speed. Without it the strip plays on its own
+   * clock. */ phase?: Animated.Value };
 
 const SILHOUETTE_COLOR = '#93A9BA';
 
@@ -95,8 +98,9 @@ export const markSheetsLoaded = (sources: ImageSourcePropType[]) => sources.forE
 /** Plays a sprite sheet by sliding it behind a one-frame window, holding each frame (native driver, no re-renders).
  * `paused` holds the first frame. The sheets are large, so `placeholder` (the still artwork) shows until the sheet
  * has loaded, instead of an empty window. */
-export function SpriteCycle({ source, size: rawSize, layout: { cols, rows, cycleMs }, paused, placeholder, once = false, onDone }: {
+export function SpriteCycle({ source, size: rawSize, layout: { cols, rows, cycleMs }, paused, placeholder, once = false, onDone, phase }: {
   source: ImageSourcePropType; size: number; layout: SpriteLayout; paused: boolean; placeholder: ImageSourcePropType;
+  /** Drives the frame from outside (1 = one loop) instead of the strip's own clock. */ phase?: Animated.Value;
   /** Play through a single time, starting once the sheet has loaded, then hold the last frame and call `onDone`. */
   once?: boolean; onDone?: () => void;
 }) {
@@ -113,13 +117,13 @@ export function SpriteCycle({ source, size: rawSize, layout: { cols, rows, cycle
   const ready = once ? loaded : true;
   useEffect(() => {
     progress.setValue(0);
-    if (paused || !ready) return;
+    if (paused || !ready || phase) return;
     const run = once
       ? Animated.timing(progress, { toValue: frames, duration: cycleMs, easing: Easing.linear, useNativeDriver: true })
       : Animated.loop(restartFromZero(progress, frames, cycleMs));
     run.start(({ finished }) => { if (once && finished) done.current?.(); });
     return () => run.stop();
-  }, [progress, frames, cycleMs, paused, once, ready]);
+  }, [progress, frames, cycleMs, paused, once, ready, phase]);
   const inputRange: number[] = [];
   const xs: number[] = [];
   const ys: number[] = [];
@@ -128,8 +132,10 @@ export function SpriteCycle({ source, size: rawSize, layout: { cols, rows, cycle
     const x = -(i % cols) * size, y = -Math.floor(i / cols) * size;
     xs.push(x, x); ys.push(y, y);
   }
-  const translateX = progress.interpolate({ inputRange, outputRange: xs, extrapolate: 'clamp' });
-  const translateY = progress.interpolate({ inputRange, outputRange: ys, extrapolate: 'clamp' });
+  const driver = useMemo(() => (phase && !paused ? Animated.modulo(Animated.multiply(phase, frames), frames) : progress),
+    [phase, paused, frames, progress]);
+  const translateX = driver.interpolate({ inputRange, outputRange: xs, extrapolate: 'clamp' });
+  const translateY = driver.interpolate({ inputRange, outputRange: ys, extrapolate: 'clamp' });
   // Pinned to the window's top-left corner: left to flex layout, a sheet taller than its window gets shifted.
   return <Animated.View style={{ width: size, height: size, overflow: 'hidden' }}>
     {!loaded && <Image source={placeholder} style={{ position: 'absolute', left: 0, top: 0, width: size, height: size }} resizeMode="contain" />}
@@ -140,7 +146,7 @@ export function SpriteCycle({ source, size: rawSize, layout: { cols, rows, cycle
 /** The illustrated pet at its evolution stage. It plays its drawn idle / walk / study sheet when it has one; otherwise
  * it gently floats and sways, or bobs while walking. Static (first frame) when "reduce motion" is on. */
 export function PetArt({ pet: petId, size: rawSize, stage = 1, still: stillProp, walking: walkingProp = false, studying = false, moving,
-  strolling = false, silhouette = false }: Props) {
+  strolling = false, silhouette = false, phase }: Props) {
   const size = wholePixels(rawSize);
   const reduceMotion = useReduceMotion();
   const still = stillProp || silhouette;
@@ -191,8 +197,12 @@ export function PetArt({ pet: petId, size: rawSize, stage = 1, still: stillProp,
   const tilt = swing.interpolate({ inputRange: [0, 1], outputRange: ['-3deg', '3deg'] });
   if (sprite && activity) {
     const layout = SPRITE_LAYOUT[activity];
-    const strip = <SpriteCycle source={sprite} size={size} layout={drawnMove && strolling ? { ...layout, cycleMs: layout.cycleMs * 2 } : layout}
-      paused={reduceMotion} placeholder={petStageArt(petId, stage)} />;
+    // Walking in step (`phase`) only for the strips that move it; a new key when the driver changes, so a strip never
+    // swaps a natively driven frame for one set from JS.
+    const paced = activity === 'walk' || activity === 'moveRight' || activity === 'moveLeft' ? phase : undefined;
+    const strip = <SpriteCycle key={paced ? 'paced' : 'clock'} source={sprite} size={size}
+      layout={drawnMove && strolling ? { ...layout, cycleMs: layout.cycleMs * 2 } : layout}
+      paused={reduceMotion} placeholder={petStageArt(petId, stage)} phase={paced} />;
     if (!eggBreath) return strip;
     return <Animated.View style={{ transformOrigin: '50% 100%', transform: [
       { scaleX: breathe.interpolate({ inputRange: [0, 1], outputRange: [1, 0.985] }) },

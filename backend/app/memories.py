@@ -52,9 +52,11 @@ EVENT_META = {
     "manual": ("Kỷ niệm cùng pet", "Một khoảnh khắc được bạn lưu lại."),
     "room_photo": ("Ảnh trong phòng", "Một khoảnh khắc trong phòng của pet."),
     "walk_keepsake": ("Kỷ vật từ chuyến đi", "Pet đã mang kỷ vật này về từ một chuyến khám phá."),
+    # Saved from the Healing Room journal (life.py): the page's title only, its text stays in the journal.
+    "journal_moment": ("Khoảnh khắc đáng nhớ", "Một khoảnh khắc bạn đã lưu từ Góc thư giãn."),
 }
 # Saved by the user, so they never trigger the "new memory" notice.
-USER_EVENTS = ("manual", "room_photo")
+USER_EVENTS = ("manual", "room_photo", "journal_moment")
 # Drawn by their own feature: room photos keep the image taken in the room (pet_room.save_photo).
 SELF_DRAWN = ("room_photo",)
 
@@ -453,7 +455,7 @@ def list_memories(category: Literal["all", "pet", "study", "friends", "favorite"
     if cursor: where.append(Memory.id < cursor)
     if pet_id: where.append(Memory.pet_id == pet_id)
     if category == "favorite": where.append(Memory.favorite.is_(True))
-    elif category == "pet": where.append(Memory.event_type.in_(("pet_hatched", "pet_evolved", "manual", "room_photo", "walk_keepsake")))
+    elif category == "pet": where.append(Memory.event_type.in_(("pet_hatched", "pet_evolved", "manual", "room_photo", "walk_keepsake", "journal_moment")))
     elif category == "study": where.append(Memory.event_type.in_(("first_learning_session", "first_daily_quests")))
     elif category == "friends": where.append(Memory.event_type == "first_group_session")
     rows = list(db.scalars(select(Memory).where(*where).order_by(Memory.id.desc()).limit(limit + 1)))

@@ -16,8 +16,8 @@ const VOCAB_MODES: Record<Mode, string> = {
 
 export const GAME_INFO: Record<GameId, GameInfo> = {
   word_shooter: { name: 'Bắn từ tiếng Anh', direction: 'Anh → Việt', icon: 'text-outline', gameType: 'meteor', variant: 'word_shooter',
-    detail: 'Gõ lại từ tiếng Anh đang rơi, xem nghĩa tiếng Việt.',
-    howTo: 'Từ tiếng Anh rơi xuống. Gõ lại đúng từ đó là pet tự bắn: từ vỡ ra và hiện nghĩa tiếng Việt.', modes: VOCAB_MODES },
+    detail: 'Gõ nghĩa tiếng Việt của từ tiếng Anh đang rơi.',
+    howTo: 'Từ tiếng Anh rơi xuống. Gõ đúng nghĩa tiếng Việt là từ dừng lại, pet tự bắn: từ phát sáng, vỡ ra và hiện nghĩa.', modes: VOCAB_MODES },
   meteor: { name: 'Bắn thiên thạch', direction: 'Việt → Anh', icon: 'planet-outline', gameType: 'meteor', variant: 'meteor',
     detail: 'Nhìn nghĩa tiếng Việt, gõ từ tiếng Anh.',
     howTo: 'Thiên thạch mang nghĩa tiếng Việt. Gõ đúng từ tiếng Anh là pet tự bắn vỡ nó.', modes: VOCAB_MODES },
@@ -58,10 +58,39 @@ export const GAME_INFO: Record<GameId, GameInfo> = {
   choice: { name: 'Chọn đáp án có giải thích', icon: 'chatbox-ellipses-outline', gameType: 'choice', variant: null,
     detail: 'Đọc tình huống hoặc câu hỏi, chọn đáp án và xem giải thích.',
     howTo: 'Chọn một đáp án. Mỗi lựa chọn đều có lời giải thích.' },
+  lab: { name: 'Phòng thí nghiệm', icon: 'flask-outline', gameType: 'lab', variant: null,
+    detail: 'Tự tay lắp dụng cụ, chạy thí nghiệm mô phỏng và quan sát kết quả.',
+    howTo: 'Kéo dụng cụ trên bàn vào đúng chỗ, rồi bật thí nghiệm để xem điều gì xảy ra.' },
+  // The subject gameplays: each plays its own way (a timeline, a sentence line, a protractor and a grid, a balance).
+  timeline: { name: 'Hành trình dòng thời gian', icon: 'hourglass-outline', gameType: 'timeline', variant: null,
+    detail: 'Đặt các sự kiện lên đúng mốc của dòng thời gian lịch sử.',
+    howTo: 'Kéo từng sự kiện lên mốc thời gian của nó, rồi nhấn Kiểm tra.' },
+  sentence: { name: 'Xây câu', icon: 'train-outline', gameType: 'sentence', variant: null,
+    detail: 'Xếp các thẻ từ lên đoàn tàu câu chữ; bỏ thẻ không thuộc câu.',
+    howTo: 'Chạm hoặc kéo thẻ lên toa theo thứ tự, rồi nhấn Kiểm tra.' },
+  geometry: { name: 'Xưởng hình học', icon: 'shapes-outline', gameType: 'geometry', variant: null,
+    detail: 'Xoay cạnh trên thước đo góc, kéo góc hình chữ nhật trên lưới ô vuông.',
+    howTo: 'Kéo tay cầm (hoặc dùng nút − / +) để tạo hình theo yêu cầu, rồi nhấn Kiểm tra.' },
+  balance: { name: 'Cân bằng phương trình', icon: 'scale-outline', gameType: 'balance', variant: null,
+    detail: 'Đặt hệ số để số nguyên tử hai vế bằng nhau: cân thăng bằng.',
+    howTo: 'Dùng nút − / + đặt hệ số trước mỗi chất, theo dõi số nguyên tử, rồi nhấn Kiểm tra.' },
+  number_line: { name: 'Cầu trục số', icon: 'git-commit-outline', gameType: 'number_line', variant: null,
+    detail: 'Đặt các số (phân số, số thập phân, số làm tròn) vào đúng vạch trên cây cầu trục số.',
+    howTo: 'Kéo từng số lên vạch của nó (hoặc chạm số rồi chạm vạch), rồi nhấn Kiểm tra.' },
+  step_solver: { name: 'Giải toán từng bước', icon: 'footsteps-outline', gameType: 'step_solver', variant: null,
+    detail: 'Giải bài toán có lời văn từng bước: mỗi bước chọn phép tính từ các số của đề.',
+    howTo: 'Chạm hai thẻ số và một dấu phép tính, điền kết quả rồi nhấn Kiểm tra; bước đúng mới mở bước sau.' },
+  story_detective: { name: 'Thám tử đọc hiểu', icon: 'search-outline', gameType: 'story_detective', variant: null,
+    detail: 'Tìm câu làm bằng chứng trong bài đọc, rồi dựa vào nó để trả lời.',
+    howTo: 'Chạm vào câu chứng minh câu trả lời; tìm đúng manh mối thì các đáp án mới hiện ra.' },
+  sentence_xray: { name: 'Soi câu', icon: 'color-wand-outline', gameType: 'sentence_xray', variant: null,
+    detail: 'Tô màu từng từ trong câu theo vai trò: sự vật, hoạt động, đặc điểm, từ so sánh…',
+    howTo: 'Chọn một bút màu rồi chạm vào từ để tô; chạm lại để xoá. Tô xong nhấn Kiểm tra.' },
 };
 
 /** The curriculum games: started at once for the grade being studied (or the level chosen outside school). */
-export const CURRICULUM_GAMES = new Set<GameId>(['word_builder', 'spelling_detective', 'sorting', 'code_path', 'order', 'match', 'choice']);
+export const CURRICULUM_GAMES = new Set<GameId>(['word_builder', 'spelling_detective', 'sorting', 'code_path', 'order', 'match', 'choice', 'lab',
+  'timeline', 'sentence', 'geometry', 'balance', 'number_line', 'step_solver', 'story_detective', 'sentence_xray']);
 export const isCurriculumGame = (game: GameId): game is CurriculumGameId => CURRICULUM_GAMES.has(game);
 
 /** A game with its direction when it has one: "Bắn từ vựng (Anh → Việt)". */
@@ -126,7 +155,7 @@ export const STATUS_TITLE: Record<SessionStatus, string> = {
 };
 
 /** What the backend decided about EXP. Nothing is announced before the server confirms it. */
-export function rewardMessage(reward: Reward | null, kind: 'lesson' | 'review'): string {
+export function rewardMessage(reward: Reward | null, kind: 'lesson' | 'review' | 'archive'): string {
   if (!reward) return '';
   switch (reward.status) {
     case 'granted': return `+${reward.exp} EXP cho pet của bạn`;
@@ -134,7 +163,9 @@ export function rewardMessage(reward: Reward | null, kind: 'lesson' | 'review'):
     case 'daily_cap_reached': return 'Hôm nay bạn đã nhận đủ 60 EXP. Tiến độ học vẫn được lưu!';
     case 'daily_task': return `+${reward.exp} EXP · Hoàn thành nhiệm vụ “Học một điều mới”`;
     case 'already_claimed': return 'Môn này đã nhận thưởng chặng hôm nay. Tiến độ học vẫn được lưu!';
-    case 'not_eligible': return kind === 'review' ? 'Luyện lại giúp nhớ lâu hơn (không tính thưởng chặng).' : 'Hoàn thành chặng để nhận EXP nhé.';
+    case 'not_eligible':
+      if (kind === 'archive') return 'Ôn tập lớp cũ giúp nhớ lâu hơn. Kết quả được lưu riêng, không đổi năm học đã lưu.';
+      return kind === 'review' ? 'Luyện lại giúp nhớ lâu hơn (không tính thưởng chặng).' : 'Hoàn thành chặng để nhận EXP nhé.';
     default: return '';
   }
 }

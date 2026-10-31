@@ -30,6 +30,11 @@ import { PhotoSheet } from './PhotoSheet';
 import { RoomScene } from './RoomScene';
 import { TAB_BAR_RADIUS } from '../main/TabBar';
 import { useRoomEditor } from './useRoomEditor';
+import { HealingDock } from '../healing/HealingDock';
+import { HealingLayer } from '../healing/HealingLayer';
+import { RoomAmbience, skyOf, withLiveSky } from '../healing/RoomAmbience';
+import { useDayPeriod } from '../../components/useDayPeriod';
+import type { Ambience } from '../../life/types';
 
 type Props = {
   user: User;
@@ -45,6 +50,10 @@ type Props = {
   /** "Kho đồ" and "Vườn nhà" in the room's settings. */
   onOpenInventory?: () => void;
   onOpenGarden?: () => void;
+  /** Bumped to open the room straight in Góc thư giãn (from Tiện ích → Cuộc sống Mirabi). */
+  healingRequest?: number;
+  /** Góc thư giãn is for users aged 16 and over (life/access.ts): without it the room has no Healing button. */
+  healingAllowed?: boolean;
 };
 
 const LINES: Record<Pose, string[]> = {
@@ -81,7 +90,7 @@ const EDIT_HEADER = 56;
  * under them (every item, up to the top of the wall, can be reached and dragged); both have fixed heights, so nothing
  * selected, moved or stored ever moves the room.
  */
-export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenFriends, hatching = false, onOpenInventory, onOpenGarden }: Props) {
+export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenFriends, hatching = false, onOpenInventory, onOpenGarden, healingRequest = 0, healingAllowed = false }: Props) {
   const insets = useSafeAreaInsets();
   const { height: screenHeight } = useViewportSize();
   const toast = useToast();
@@ -111,6 +120,12 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenFriends, h
     const bottom = Math.round(e.nativeEvent.layout.y + e.nativeEvent.layout.height);
     setHeaderBottom((b) => (b === bottom ? b : bottom));
   };
+  // Góc thư giãn: a mode of this same room (its ambience drawn over it and the Healing panel), never a second room.
+  const [healing, setHealing] = useState(false);
+  const [ambience, setAmbience] = useState<Ambience>('cozy_night');
+  const [healingRest, setHealingRest] = useState(false);
+  useEffect(() => { if (healingRequest && healingAllowed) setHealing(true); }, [healingRequest, healingAllowed]);
+  useEffect(() => { if (!healingAllowed) setHealing(false); }, [healingAllowed]);
   const prefs = useRoomPrefs(user.id);
   const playSound = useRoomSounds(prefs.sound);
 
@@ -167,7 +182,15 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenFriends, h
   }, [reaction]);
   // The pet's menu never stays open over decorating, a walk that just began or a hatch.
   useEffect(() => { if (decorating || data?.walk.away || hatching) setPetMenu(false); }, [decorating, data?.walk.away, hatching]);
+  // Decorating leaves Góc thư giãn (its panel would cover the decorating tools).
+  useEffect(() => { if (decorating) { setHealing(false); setHealingRest(false); } }, [decorating]);
   const shown = useMemo(() => (data ? { ...data, room: { ...data.room, layout: draft ?? data.room.layout } } : null), [data, draft]);
+  // The windows show the sky of the hour (drawing only: the saved room is unchanged). While decorating they show the
+  // saved variant, the one being chosen.
+  const sky = skyOf(useDayPeriod());
+  const sceneLayout = useMemo(() => (shown && !draft ? withLiveSky(shown.room.layout, sky) : shown?.room.layout), [shown, draft, sky]);
+  const underlay = useCallback((k: number) => (sceneLayout ? <RoomAmbience layout={sceneLayout} ambience={ambience} sky={sky} k={k} /> : null),
+    [sceneLayout, ambience, sky]);
   // "Đặt vào phòng" from Kho đồ: decorating opens on "Đồ khám phá" with one more copy of it.
   useEffect(() => {
     if (!queued || !data) return;
@@ -193,11 +216,14 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenFriends, h
   const stage = Math.max(0, Math.min(6, level));
   const next = stage < 6 ? PET_THRESHOLDS[stage + 1] : null;
   const away = data.walk.away;
-  const pose = ownerPose(timer, shown);
+  // Lying down while a rest or breathing session of Góc thư giãn runs (on its bed if the room has one).
+  const pose = healing && healingRest && !away ? poseFor('rest', shown.room.layout) : ownerPose(timer, shown);
   // The panel's last line, always there (the panel keeps one height): short, without the pet's name it sits under.
   const notice = away && data.walk.return_at ? { icon: 'walk-outline' as const, text: `Đang khám phá · Về lúc ${clockLabel(data.walk.return_at)}` }
     : pose === 'study' ? { icon: 'book-outline' as const, text: 'Đang học cùng bạn' }
+    : healing && pose === 'rest' ? { icon: 'moon-outline' as const, text: 'Đang nghỉ ngơi cùng bạn' }
     : pose === 'rest' ? { icon: 'cafe-outline' as const, text: 'Đang nghỉ giải lao' }
+    : healing ? { icon: 'leaf-outline' as const, text: 'Đang thư giãn cùng bạn' }
     : stage === 0 ? { icon: 'egg-outline' as const, text: 'Trứng đang được ủ ấm' }
     : { icon: 'home-outline' as const, text: 'Đang thư giãn trong phòng' };
 
@@ -297,7 +323,7 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenFriends, h
   };
 
   const scene = (
-    <RoomScene layout={shown.room.layout} pet={{ id: data.pet.id, name: petName, level }} pose={pose} away={away} fullScreen
+    <RoomScene layout={sceneLayout ?? shown.room.layout} underlay={healing && !decorating ? underlay : undefined} pet={{ id: data.pet.id, name: petName, level }} pose={pose} away={away} fullScreen
       safeTop={insets.top + HEADER_RESERVE} safeBottom={TAB_BAR_RADIUS}
       chrome={decorating ? { top: insets.top + EDIT_HEADER, bottom: decoratePanelHeight(screenHeight) + TAB_BAR_RADIUS } : undefined}
       menuTop={decorating ? undefined : headerBottom + 6}
@@ -324,6 +350,7 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenFriends, h
       {/* The room stays at the same place in the tree, the same size and with the same camera whether decorating or not:
           the decorating header and panel are drawn over it, so an item is on the same spot of the screen in both. */}
       <View style={s.fill}>{scene}</View>
+      {healing && !tools ? <HealingLayer ambience={ambience} /> : null}
       {/* Decorating: close on the left, the title and its hint, then undo and save; a fixed height, over the room. */}
       {tools ? (
         <DecorateHeader title="Trang trí" canUndo={editor.canUndo} saving={saving} onCancel={() => { void requestCancel(); }}
@@ -337,6 +364,11 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenFriends, h
           <View style={s.panel} testID="room-header">
             <View style={s.topRow}>
               <Text style={s.title} accessibilityRole="header" numberOfLines={1}>{data.room.name}</Text>
+              {healingAllowed ? <Pressable onPress={() => { setPetMenu(false); setHealing((h) => !h); setHealingRest(false); }} hitSlop={6}
+                style={({ pressed }) => [s.icon, healing && s.iconOn, pressed && s.pressed]} accessibilityRole="switch"
+                accessibilityState={{ checked: healing }} accessibilityLabel="Góc thư giãn" testID="healing-toggle">
+                <Ionicons name={healing ? 'leaf' : 'leaf-outline'} size={20} color={healing ? '#FFFFFF' : '#2F7A55'} />
+              </Pressable> : null}
               <Pressable onPress={openFriends} hitSlop={6} style={({ pressed }) => [s.icon, pressed && s.pressed]} accessibilityRole="button"
                 accessibilityLabel="Ghé phòng bạn bè">
                 <Ionicons name="people" size={20} color={t.ink} />
@@ -371,6 +403,11 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenFriends, h
         </View>
       )}
 
+      {healing && !tools ? (
+        <HealingDock userId={user.id} ambience={ambience} onAmbience={setAmbience} bottom={TAB_BAR_RADIUS + 8}
+          onPetResponse={(response) => say(response.line)} onResting={setHealingRest}
+          onPet={() => { if (away) toast(`${petName} đang đi dạo, về lúc ${clockLabel(data.walk.return_at!)} nhé.`, 'info'); else if (stage === 0) tapPet(); else act('pet'); }} />
+      ) : null}
       {tools ? (
         <View style={s.panelDock}>
           <DecoratePanel {...tools} saved={data.room.layout} bottomInset={0} onSurface={editor.surface}
@@ -438,6 +475,7 @@ const s = StyleSheet.create({
   title: { flex: 1, minWidth: 0, color: t.ink, fontSize: 16, lineHeight: 20, fontWeight: '900', marginRight: 4 },
   // 44 wide and, with its hit slop, 44 tall to touch; no circle of its own.
   icon: { width: 44, height: 32, alignItems: 'center', justifyContent: 'center', borderRadius: 10 },
+  iconOn: { backgroundColor: '#2F7A55' },
   petRow: { height: 24, flexDirection: 'row', alignItems: 'center', gap: 6 },
   editHeader: { position: 'absolute', top: 0, left: 0, right: 0, paddingBottom: 8, backgroundColor: '#FFFFFF', borderBottomWidth: 1,
     borderBottomColor: '#E3EDF4' },

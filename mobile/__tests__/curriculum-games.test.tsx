@@ -12,6 +12,7 @@ import { LearningScreen } from '../src/screens/learning/LearningScreen';
 import { ConfirmProvider } from '../src/ui/ConfirmDialog';
 import { ToastProvider } from '../src/ui/Toast';
 import { mockServer, USER } from '../test/mockServer';
+import fixtures from '../test/tutorialFixtures.json';
 
 const ref = (id: number, code: string, name: string) => ({ id, code, name });
 const subjects = [
@@ -34,7 +35,7 @@ const GRADE4 = programme('grade4', 'Lớp 4', [
   { code: 'informatics', name: 'Tin học', games: [['code_path', 'Lớp 3–12 · người học tự do']] }]);
 const catalog = (p: unknown) => ({ default_duration_minutes: 25, study_profile: null, subjects, programme: p });
 
-const prefs = { sound: false, reduceMotion: true, setSound: jest.fn(), setReduceMotion: jest.fn() };
+const prefs = { sound: false, volume: 'mid' as const, reduceMotion: true, setSound: jest.fn(), setVolume: jest.fn(), setReduceMotion: jest.fn() };
 
 beforeEach(async () => {
   await AsyncStorage.clear();
@@ -62,46 +63,49 @@ describe('Học tập follows the grade', () => {
     expect(screen.getByRole('button', { name: /^Học tự chọn\./ })).toBeTruthy();
     fireEvent.press(screen.getByRole('button', { name: /^Tiếng Việt\./ }));
     expect(await screen.findByRole('button', { name: /^Ghép chữ\./ })).toBeTruthy();
-    expect(screen.getByText('Lớp 1–2')).toBeTruthy(); // the grades the game supports
     expect(screen.queryByRole('button', { name: /^Thám tử chính tả\./ })).toBeNull();
   });
 
-  it('first time: the guide (the spec\'s three steps), then the game starts for the grade on screen', async () => {
+  it('first time: the game\'s own tutorial in the forest itself, then the game starts (for the learner\'s own grade)', async () => {
     const server = mockServer({
       'GET /api/learning/catalog': { status: 200, body: catalog(GRADE1) },
       'GET /api/learning/sessions/current': { status: 200, body: { session: null } },
       'GET /api/learning/tutorials': { status: 200, body: { seen: [] } },
+      'GET /api/games/word_builder/tutorial': { status: 200, body: fixtures.definitions.word_builder },
+      'POST /api/games/word_builder/tutorial/progress': { status: 200, body: {} },
       'POST /api/learning/play': { status: 409, body: { detail: 'No content', code: 'game_not_available' } },
     });
     renderLearning({});
     fireEvent.press(await screen.findByRole('button', { name: /^Tiếng Việt\./ }));
     fireEvent.press(await screen.findByRole('button', { name: /^Ghép chữ\./ }));
-    expect(await screen.findByText('Nhìn hình và đoán từ.')).toBeTruthy();
-    expect(server.callsTo('POST /api/learning/play')).toHaveLength(0); // nothing starts behind the guide
-    fireEvent.press(screen.getByRole('button', { name: /^Tiếp/ }));
-    expect(screen.getByText('Chọn các chữ theo đúng thứ tự.')).toBeTruthy();
-    fireEvent.press(screen.getByRole('button', { name: /^Tiếp/ }));
-    expect(screen.getByText('Ghép đủ 10 từ để hoàn thành.')).toBeTruthy();
-    fireEvent.press(screen.getByRole('button', { name: 'Bắt đầu' }));
+    expect(await screen.findByText('Nhìn hình: đây là con gì?')).toBeTruthy();
+    expect(screen.getByText('Hướng dẫn · Bước 1/3')).toBeTruthy();
+    expect(server.callsTo('POST /api/learning/play')).toHaveLength(0); // nothing starts behind the tutorial
+    fireEvent.press(screen.getByRole('button', { name: 'Bỏ qua hướng dẫn' }));
     await waitFor(() => expect(server.callsTo('POST /api/learning/play')).toHaveLength(1));
-    expect(server.callsTo('POST /api/learning/play')[0].body).toMatchObject({ game: 'word_builder', grade: 'grade1' });
-    expect(server.callsTo('POST /api/learning/tutorials/word_builder')).toHaveLength(1);
+    expect(server.callsTo('POST /api/learning/play')[0].body).toMatchObject({ game: 'word_builder' });
+    expect(server.callsTo('POST /api/learning/play')[0].body.grade).toBeUndefined(); // the backend uses the locked grade
+    // Skipped, never recorded as completed.
+    expect(server.callsTo('POST /api/games/word_builder/tutorial/progress').map((c) => c.body.status)).toContain('skipped');
+    expect(server.callsTo('POST /api/games/word_builder/tutorial/complete')).toHaveLength(0);
   });
 
-  it('another grade can be studied for a while; the confirmed grade is not changed', async () => {
+  it('the grade is locked: no grade picker, and no request ever names another grade', async () => {
     const server = mockServer({
-      'GET /api/learning/catalog': { status: 200, body: catalog(GRADE1) },
-      'GET /api/learning/catalog?grade=grade4': { status: 200, body: catalog(GRADE4) },
+      'GET /api/learning/catalog': { status: 200, body: catalog(GRADE4) },
       'GET /api/learning/sessions/current': { status: 200, body: { session: null } },
+      'GET /api/education': { status: 200, body: { enrolled: true, locked: true, grade: 'grade4', grade_label: 'Lớp 4', academic_year: 2026,
+        academic_year_label: '2026–2027', status: 'studying', progress: null, promotion_pending: false, celebration: null, archives: 0,
+        next_promotion: { academic_year: 2027, academic_year_label: '2027–2028', date: '2027-08-30', to_grade: 'grade5', to_grade_label: 'Lớp 5', completes: false } } },
     });
-    renderLearning({});
-    fireEvent.press(await screen.findByRole('button', { name: 'Chọn lớp khác để ôn hoặc học trước' }));
-    fireEvent.press(screen.getByRole('radio', { name: 'Lớp 4' }));
-    expect(await screen.findByText('Đang ôn / học trước: Lớp 4')).toBeTruthy();
+    renderLearning({ age: 9, school_grade: 'grade4' });
+    expect(await screen.findByText('Lớp 4 — Năm học 2026–2027')).toBeTruthy();
     expect(screen.getByRole('button', { name: /^Khoa học\./ })).toBeTruthy();
-    expect(server.calls.some((c) => c.method === 'PUT')).toBe(false);
-    fireEvent.press(screen.getByRole('button', { name: 'Về lớp chính' }));
-    expect(await screen.findByRole('button', { name: /^Tự nhiên và Xã hội\./ })).toBeTruthy();
+    expect(screen.queryByRole('button', { name: 'Chọn lớp khác để ôn hoặc học trước' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Về lớp chính' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Sửa độ tuổi và lớp chính' })).toBeNull();
+    expect(screen.queryByRole('radio', { name: /^Lớp \d/ })).toBeNull();
+    expect(server.calls.some((c) => /[?&]grade=/.test(c.path) || c.body?.grade)).toBe(false);
   });
 
   it('outside school the learner picks a level; it is kept on the device', async () => {
@@ -117,7 +121,6 @@ describe('Học tập follows the grade', () => {
     });
     renderLearning({ age: 30, school_grade: 'adult' });
     expect(await screen.findByText('Chọn trình độ để xem các môn và trò chơi phù hợp.')).toBeTruthy();
-    expect(screen.queryByRole('button', { name: 'Chọn lớp khác để ôn hoặc học trước' })).toBeNull();
     fireEvent.press(screen.getByRole('radio', { name: 'Trình độ Trung cấp' }));
     expect(await screen.findByRole('button', { name: /^Tin học\./ })).toBeTruthy();
     expect(await AsyncStorage.getItem(`mirabi.learning.level:${USER.id}`)).toBe('intermediate');
@@ -167,12 +170,19 @@ describe('the games', () => {
     expect(screen.queryByLabelText(/Còn \d+ tim/)).toBeNull(); // no hearts
     expect(screen.queryByRole('button', { name: 'Xem đáp án' })).toBeNull();
     for (const x of ['o', 'm', 'è']) fireEvent.press(screen.getByRole('button', { name: `Chữ ${x}` }));
-    fireEvent.press(screen.getByRole('button', { name: 'Kiểm tra' }));
+    fireEvent.press(screen.getByRole('button', { name: 'Xây cầu' }));
     expect(await screen.findByText('Chưa đúng: “omè”. Thử đổi thứ tự các chữ nhé.')).toBeTruthy();
-    // The pieces stay: take "o" out and put it at the end.
+    // The pieces stay on the bridge's planks. A piece taken out leaves its stone free (the next tap fills it again)…
+    expect(screen.getByLabelText('Cây cầu: omè')).toBeTruthy();
     fireEvent.press(screen.getByRole('button', { name: 'Gỡ o' }));
+    expect(screen.getByLabelText('Cây cầu: _mè')).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Xây cầu' }).props.accessibilityState?.disabled).toBe(true);
     fireEvent.press(screen.getByRole('button', { name: 'Chữ o' }));
-    fireEvent.press(screen.getByRole('button', { name: 'Kiểm tra' }));
+    expect(screen.getByLabelText('Cây cầu: omè')).toBeTruthy();
+    // …"Xếp lại" puts every piece back on the floor.
+    fireEvent.press(screen.getByRole('button', { name: 'Xếp lại' }));
+    for (const x of ['m', 'è', 'o']) fireEvent.press(screen.getByRole('button', { name: `Chữ ${x}` }));
+    fireEvent.press(screen.getByRole('button', { name: 'Xây cầu' }));
     await waitFor(() => expect(server.callsTo('POST /api/learning/sessions/7/answer')).toHaveLength(2));
     expect(server.callsTo('POST /api/learning/sessions/7/answer')[1].body.answer).toEqual(['t2', 't3', 't1']);
   });

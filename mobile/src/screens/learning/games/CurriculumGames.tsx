@@ -1,13 +1,14 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Animated, LayoutRectangle, PanResponder, Pressable, StyleSheet, View } from 'react-native';
+import { Animated, Easing, LayoutRectangle, PanResponder, Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { PetArt } from '../../../components/PetArt';
 import { Text } from '../../../components/Typography';
-import { Block, BLOCK_LABEL, blockCount, isLoop, LOOP_MAX, LOOP_MIN, loopTimes, openLoop, Step, walk } from '../../../learning/codePath';
-import type { Turn } from '../../../learning/types';
+import { Block, BLOCK_LABEL, blockCount, fault, Fault, isLoop, LOOP_MAX, LOOP_MIN, loopTimes, openLoop, Step, trace, walk, Walk } from '../../../learning/codePath';
+import type { Facing, Turn } from '../../../learning/types';
 import { appTheme as t } from '../../../theme';
+import { Boulder, Gem, GoalFlag } from '../../../games/art/effects';
 
-// The curriculum games' play areas. Each also draws a guide page: `demo` sets what it shows (the real layout, with the
+// The curriculum games' play areas (Ghép chữ is WordForest.tsx). Each also draws a guide page: `demo` sets what it shows (the real layout, with the
 // move the page explains) and nothing can be tapped. The backend checks every answer; a wrong one is fixed and tried
 // again, with the reason it sends (`feedback`).
 
@@ -35,56 +36,6 @@ function Actions({ onReset, resetLabel = 'Xếp lại', resetDisabled, onCheck, 
         accessibilityState={{ disabled: checkDisabled }} style={[styles.primary, checkDisabled && styles.dimmed]}>
         <Text style={styles.primaryText}>{checkLabel}</Text>
       </Pressable>
-    </View>
-  );
-}
-
-// --- Ghép chữ -------------------------------------------------------------------------------------------------------
-
-/** Look at the picture, tap the letters (lớp 1) or syllables (lớp 2) in order, then "Kiểm tra". A wrong word keeps its
- * pieces in place to be fixed. Every word done gives the pet a piece of the book. */
-export function WordBuild({ turn, disabled, feedback, onSubmit, collected, total, petId, petLevel, demo }: Common & {
-  onSubmit: (ids: string[]) => void; collected: number; total: number; petId: string; petLevel: number;
-  demo?: { placed: string[]; result?: 'ok' };
-}) {
-  const tiles = turn.prompt.tiles ?? [];
-  const [own, setOwn] = useState<string[]>([]);
-  const placed = demo?.placed ?? own;
-  const locked = disabled || !!demo;
-  const text = (id: string) => tiles.find((x) => x.id === id)?.text ?? '';
-  const letters = turn.prompt.unit === 'letter';
-  const complete = placed.length === tiles.length;
-  return (
-    <View style={styles.scene}>
-      <View style={styles.bookRow}>
-        <View pointerEvents="none"><PetArt pet={petId} size={40} stage={petLevel} still /></View>
-        <Text style={styles.bookText} accessibilityLabel={`Pet đã nhận ${collected} trên ${total} mảnh sách`}>📖 Mảnh sách: {collected}/{total}</Text>
-      </View>
-      <View style={styles.picture} accessible accessibilityRole="image" accessibilityLabel="Hình gợi ý">
-        <Text style={styles.pictureEmoji}>{turn.prompt.picture}</Text>
-      </View>
-      <View style={styles.slots} accessibilityLabel={`Đang ghép: ${placed.map(text).join(letters ? '' : ' ') || 'chưa có'}`}>
-        {tiles.map((_, i) => {
-          const id = placed[i];
-          return id ? (
-            <Pressable key={i} onPress={() => setOwn((p) => p.filter((x) => x !== id))} disabled={locked} accessibilityRole="button"
-              accessibilityLabel={`Gỡ ${text(id)}`} style={[styles.slot, styles.slotFilled, demo?.result === 'ok' && styles.slotRight]}>
-              <Text style={styles.slotText}>{text(id)}</Text>
-            </Pressable>
-          ) : <View key={i} style={styles.slot} />;
-        })}
-      </View>
-      <View style={styles.tiles}>
-        {tiles.filter((tile) => !placed.includes(tile.id)).map((tile) => (
-          <Pressable key={tile.id} onPress={() => setOwn((p) => [...p, tile.id])} disabled={locked} accessibilityRole="button"
-            accessibilityLabel={`${letters ? 'Chữ' : 'Tiếng'} ${tile.text}`} style={({ pressed }) => [styles.tile, pressed && styles.pressed]}>
-            <Text style={styles.tileText}>{tile.text}</Text>
-          </Pressable>
-        ))}
-      </View>
-      <Feedback note={demo?.result === 'ok' ? { text: 'Chính xác! Pet nhận thêm một mảnh sách.', tone: 'good' } : feedback} />
-      <Actions onReset={() => setOwn([])} resetDisabled={locked || !placed.length} onCheck={() => onSubmit(placed)}
-        checkDisabled={locked || !complete} />
     </View>
   );
 }
@@ -205,13 +156,19 @@ export function SortCards({ turn, disabled, feedback, onPlace, demo }: Common & 
   );
 }
 
-// --- Lập trình đường đi ----------------------------------------------------------------------------------------------
+// --- Lập trình đường đi: Robot Adventure -----------------------------------------------------------------------------
 
 const RUN_STEP_MS = 420;
-const ARROW: Record<string, React.ComponentProps<typeof Ionicons>['name']> = { N: 'arrow-up', E: 'arrow-forward', S: 'arrow-down', W: 'arrow-back' };
+const ANGLE: Record<Facing, number> = { N: 0, E: 90, S: 180, W: 270 };
+/** The angle to turn to for `dir` from `from`, the short way (never a spin of 270°). */
+const turnTo = (from: number, dir: Facing) => from + ((((ANGLE[dir] - from) % 360) + 540) % 360) - 180;
+const WHY: Record<Fault['reason'], string> = { wall: 'robot đụng tảng đá', edge: 'robot đi ra ngoài bản đồ', short: '', goal: '' };
+const blockName = (b: Block | undefined) => (!b ? '' : isLoop(b) ? `Lặp ${loopTimes(b)} lần` : b === 'end' ? 'Đóng lặp' : BLOCK_LABEL[b as 'forward']);
 
-/** Put blocks in the program bar, "Chạy": the pet walks it (here), then the backend checks it. "Dừng" stops the walk,
- * "Đặt lại" puts the pet back; a program can be fixed and run as often as needed. */
+/** The pet drives a little robot through the maze. Put blocks in the program bar, "Chạy": the robot rolls the program
+ * step by step (the block it is doing lights up), then the backend checks it. Off course, it stops at the step that
+ * went wrong: that block turns red, the robot bumps into the rock (or the edge) and the step is named, to fix it.
+ * "Dừng" stops the run, "Đặt lại" puts the robot back; a program can be fixed and run as often as needed. */
 export function CodePath({ turn, disabled, feedback, onRun, petId, petLevel, reduceMotion, demo }: Common & {
   onRun: (program: Block[]) => void; petId: string; petLevel: number; reduceMotion: boolean;
   demo?: { program: Block[]; step?: number };
@@ -222,11 +179,26 @@ export function CodePath({ turn, disabled, feedback, onRun, petId, petLevel, red
   const [path, setPath] = useState<Step[] | null>(null);
   const [at, setAt] = useState(0);
   const [running, setRunning] = useState(false);
+  const [wrong, setWrong] = useState<Fault | null>(null);
+  const [won, setWon] = useState(false);
   const [width, setWidth] = useState(0);
-  const timer = useRef<ReturnType<typeof setInterval> | null>(null);
-  const stop = () => { if (timer.current) clearInterval(timer.current); timer.current = null; setRunning(false); };
-  useEffect(() => () => { if (timer.current) clearInterval(timer.current); }, []);
-  useEffect(() => { stop(); setPath(null); setAt(0); setOwn([]); }, [turn.turn_id]); // eslint-disable-line react-hooks/exhaustive-deps
+  const start = (p.start ?? { x: 0, y: 0, dir: 'E' }) as Step;
+  // The robot: where it is (in cells), which way it looks, a bump against a rock, a hop at the goal.
+  const rx = useRef(new Animated.Value(start.x)).current;
+  const ry = useRef(new Animated.Value(start.y)).current;
+  const angle = useRef(ANGLE[start.dir]);
+  const rot = useRef(new Animated.Value(ANGLE[start.dir])).current;
+  const bump = useRef(new Animated.Value(0)).current;
+  const hop = useRef(new Animated.Value(0)).current;
+  const anim = useRef<Animated.CompositeAnimation | null>(null);
+  const place = (s: Step) => {
+    rx.setValue(s.x); ry.setValue(s.y);
+    angle.current = ANGLE[s.dir]; rot.setValue(angle.current);
+    bump.setValue(0); hop.setValue(0);
+  };
+  const stop = () => { anim.current?.stop(); anim.current = null; setRunning(false); };
+  useEffect(() => () => anim.current?.stop(), []);
+  useEffect(() => { stop(); setPath(null); setAt(0); setOwn([]); setWrong(null); setWon(false); place(start); }, [turn.turn_id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const locked = disabled || !!demo;
   const max = p.max_blocks ?? 0;
@@ -239,26 +211,53 @@ export function CodePath({ turn, disabled, feedback, onRun, petId, petLevel, red
   const demoWalk = demo ? walk(p, demo.program) : null;
   const shownPath = demo ? demoWalk?.path ?? null : path;
   const shownAt = demo ? Math.min(demo.step ?? 0, (demoWalk?.path.length ?? 1) - 1) : at;
-  const pet = shownPath?.[shownAt] ?? (p.start as Step);
+  const robot = shownPath?.[shownAt] ?? start;
+  useEffect(() => { if (demo) place(robot); }, [demo?.step, demo?.program.length]); // eslint-disable-line react-hooks/exhaustive-deps
+  const steps = useMemo(() => trace(program) ?? [], [program]);
+  // The block being done: the move that brought the robot here.
+  const doing = (running || demo) && shownAt > 0 ? steps[shownAt - 1] ?? null : null;
 
+  const finish = (result: Walk) => {
+    const f = fault(program, result);
+    setWrong(f);
+    setWon(result.ok);
+    const done = () => { anim.current = null; setRunning(false); onRun(program); }; // the backend says if it was right
+    if (reduceMotion || (!f?.blocked && !result.ok)) { done(); return; }
+    const move = f?.blocked ? bump : hop;
+    anim.current = Animated.sequence([
+      Animated.timing(move, { toValue: 1, duration: f?.blocked ? 140 : 180, easing: Easing.out(Easing.quad), useNativeDriver: false }),
+      Animated.timing(move, { toValue: 0, duration: f?.blocked ? 220 : 260, easing: Easing.bounce, useNativeDriver: false }),
+    ]);
+    anim.current.start(({ finished }) => { if (finished) done(); });
+  };
   const run = () => {
     const result = walk(p, program);
     if (!result) return;
     stop();
+    setWrong(null); setWon(false);
+    place(start);
     setPath(result.path);
-    if (reduceMotion) { setAt(result.path.length - 1); onRun(program); return; }
+    if (reduceMotion) { setAt(result.path.length - 1); place(result.path[result.path.length - 1]); finish(result); return; }
     setAt(0);
     setRunning(true);
-    let i = 0;
-    timer.current = setInterval(() => {
-      i += 1;
-      if (i >= result.path.length) { stop(); onRun(program); return; } // the walk is over: the backend says if it was right
+    const go = (i: number) => {
+      if (i >= result.path.length) { finish(result); return; }
+      const s = result.path[i];
+      angle.current = turnTo(angle.current, s.dir);
+      anim.current = Animated.parallel([
+        Animated.timing(rx, { toValue: s.x, duration: RUN_STEP_MS, easing: Easing.inOut(Easing.quad), useNativeDriver: false }),
+        Animated.timing(ry, { toValue: s.y, duration: RUN_STEP_MS, easing: Easing.inOut(Easing.quad), useNativeDriver: false }),
+        Animated.timing(rot, { toValue: angle.current, duration: RUN_STEP_MS * 0.7, easing: Easing.inOut(Easing.quad), useNativeDriver: false }),
+      ]);
       setAt(i);
-    }, RUN_STEP_MS);
+      anim.current.start(({ finished }) => { if (finished) go(i + 1); });
+    };
+    go(1);
   };
-  const add = (b: Block) => { setPath(null); setAt(0); setOwn((list) => [...list, b]); };
+  const edited = () => { setPath(null); setAt(0); setWrong(null); setWon(false); place(start); };
+  const add = (b: Block) => { edited(); setOwn((list) => [...list, b]); };
   const remove = (i: number) => {
-    setPath(null); setAt(0);
+    edited();
     setOwn((list) => {
       const b = list[i];
       if (!isLoop(b)) return list.filter((_, j) => j !== i); // a move, or a closing bracket (the loop opens again)
@@ -271,27 +270,60 @@ export function CodePath({ turn, disabled, feedback, onRun, petId, petLevel, red
 
   const cols = p.cols ?? 1;
   const rows = p.rows ?? 1;
-  const cell = Math.max(22, Math.min(44, Math.floor((width || 300) / cols)));
+  const cell = Math.max(22, Math.min(46, Math.floor((width || 300) / cols)));
   const walls = new Set((p.walls ?? []).map(([x, y]) => `${x},${y}`));
+  const trail = new Set((shownPath ?? []).slice(1, shownAt + 1).map((s) => `${s.x},${s.y}`));
+  const blocked = wrong?.blocked ? `${wrong.blocked.x},${wrong.blocked.y}` : null;
+  const toward = wrong?.blocked ? [wrong.blocked.x - robot.x, wrong.blocked.y - robot.y] : [0, 0];
+  const nudge = bump.interpolate({ inputRange: [0, 1], outputRange: [0, cell * 0.32] });
+  const wrongText = wrong ? (wrong.reason === 'short'
+    ? `Robot đã chạy hết ${wrong.move} bước nhưng chưa tới đích.`
+    : `Bước ${wrong.move}${wrong.block !== null ? ` (${blockName(program[wrong.block])})` : ''}: ${WHY[wrong.reason]}.`) : null;
   let inLoop = false;
   return (
     <View style={styles.scene}>
       <View style={styles.boardWrap} onLayout={(e) => setWidth(e.nativeEvent.layout.width)}>
         <View style={[styles.board, { width: cell * cols, height: cell * rows }]} accessible accessibilityRole="image"
-          accessibilityLabel={`Bản đồ ${cols} × ${rows} ô. Pet ở cột ${pet.x + 1}, hàng ${pet.y + 1}; đích ở cột ${(p.goal?.x ?? 0) + 1}, hàng ${(p.goal?.y ?? 0) + 1}.`}>
-          {Array.from({ length: rows }).map((_, y) => Array.from({ length: cols }).map((__, x) => (
-            <View key={`${x},${y}`} style={[styles.cell, { left: x * cell, top: y * cell, width: cell, height: cell },
-              walls.has(`${x},${y}`) && styles.wall, (shownPath ?? []).slice(1, shownAt + 1).some((s) => s.x === x && s.y === y) && styles.trail]}>
-              {walls.has(`${x},${y}`) ? <Text style={{ fontSize: cell * 0.55 }}>🪨</Text> : null}
-              {p.goal?.x === x && p.goal?.y === y ? <Text style={{ fontSize: cell * 0.6 }}>🏁</Text> : null}
+          accessibilityLabel={`Mê cung ${cols} × ${rows} ô. Robot ở cột ${robot.x + 1}, hàng ${robot.y + 1}; đích ở cột ${(p.goal?.x ?? 0) + 1}, hàng ${(p.goal?.y ?? 0) + 1}.`}>
+          {Array.from({ length: rows }).map((_, y) => Array.from({ length: cols }).map((__, x) => {
+            const key = `${x},${y}`;
+            const goal = p.goal?.x === x && p.goal?.y === y;
+            return (
+              <View key={key} style={[styles.cell, { left: x * cell, top: y * cell, width: cell, height: cell }, (x + y) % 2 === 1 && styles.cellAlt,
+                walls.has(key) && styles.wall, trail.has(key) && styles.trail, blocked === key && styles.cellBlocked, goal && won && styles.cellWon]}>
+                {walls.has(key) ? <View accessibilityLabel={blocked === key ? 'Tảng đá chặn đường' : undefined}><Boulder size={cell * 0.86} /></View> : null}
+                {goal ? ( // the goal: a flag, and the gem to collect (gone once the robot has it; the flag goes up)
+                  <View style={styles.goal} accessibilityLabel={won ? 'Đích: robot đã tới, nhặt được viên ngọc' : 'Đích'}>
+                    <GoalFlag size={cell * 0.8} reached={won} />
+                    {!won ? <View style={styles.goalGem}><Gem size={cell * 0.42} /></View> : null}
+                  </View>
+                ) : null}
+              </View>
+            );
+          }))}
+          <Animated.View pointerEvents="none" style={[styles.robot, { width: cell, height: cell, transform: [
+            { translateX: Animated.add(Animated.multiply(rx, cell), Animated.multiply(nudge, toward[0])) },
+            { translateY: Animated.add(Animated.multiply(ry, cell), Animated.add(Animated.multiply(nudge, toward[1]),
+              hop.interpolate({ inputRange: [0, 1], outputRange: [0, -cell * 0.45] }))) },
+          ] }]}>
+            <View style={[styles.dome, { width: cell * 0.78, height: cell * 0.6, borderTopLeftRadius: cell * 0.4, borderTopRightRadius: cell * 0.4 }]}>
+              <PetArt pet={petId} size={cell * 0.55} stage={petLevel} still />
             </View>
-          )))}
-          <View pointerEvents="none" style={[styles.pet, { left: pet.x * cell, top: pet.y * cell, width: cell, height: cell }]}>
-            <PetArt pet={petId} size={cell * 0.8} stage={petLevel} still />
-            <View style={styles.facing}><Ionicons name={ARROW[pet.dir]} size={Math.max(12, cell * 0.34)} color="#FFFFFF" /></View>
-          </View>
+            <View style={[styles.chassis, { width: cell * 0.86, height: cell * 0.26 }, wrong?.blocked && styles.chassisHurt]}>
+              <View style={styles.wheel} /><View style={styles.wheel} />
+            </View>
+            <Animated.View style={[styles.facing, { transform: [{ rotate: rot.interpolate({ inputRange: [-3600, 3600], outputRange: ['-3600deg', '3600deg'] }) }] }]}>
+              <Ionicons name="arrow-up" size={Math.max(11, cell * 0.3)} color="#FFFFFF" />
+            </Animated.View>
+          </Animated.View>
         </View>
       </View>
+      {wrongText ? (
+        <View style={styles.fault} accessibilityRole="alert" accessibilityLiveRegion="polite">
+          <Ionicons name="hardware-chip-outline" size={18} color="#9A3B12" />
+          <Text style={styles.faultText}>{wrongText}</Text>
+        </View>
+      ) : null}
       <View style={styles.programHead}>
         <Text style={styles.programTitle}>Chương trình</Text>
         <Text style={[styles.counter, full && styles.counterFull]} accessibilityLabel={`Đã dùng ${used} trên ${max} lệnh`}>Lệnh: {used}/{max}</Text>
@@ -302,13 +334,14 @@ export function CodePath({ turn, disabled, feedback, onRun, petId, petLevel, red
           if (loop) inLoop = true;
           const inside = inLoop && !loop && b !== 'end';
           if (b === 'end') inLoop = false;
+          const lit = doing === i || wrong?.block === i;
           return (
             <View key={i} style={styles.blockWrap}>
               <Pressable onPress={() => remove(i)} disabled={locked || running} accessibilityRole="button"
-                accessibilityLabel={loop ? `Gỡ khối Lặp ${loopTimes(b)} lần` : b === 'end' ? 'Gỡ dấu đóng lặp' : `Gỡ lệnh ${BLOCK_LABEL[b as 'forward']}`}
+                accessibilityLabel={`${loop ? `Gỡ khối Lặp ${loopTimes(b)} lần` : b === 'end' ? 'Gỡ dấu đóng lặp' : `Gỡ lệnh ${BLOCK_LABEL[b as 'forward']}`}${wrong?.block === i ? ', bước sai' : ''}`}
                 style={[styles.block, loop && styles.blockLoop, b === 'end' && styles.blockEnd, inside && styles.blockInside,
-                  running && path && shownAt > 0 && styles.blockRunning]}>
-                <Text style={[styles.blockText, (loop || b === 'end') && styles.blockLoopText]}>
+                  doing === i && styles.blockDoing, wrong?.block === i && styles.blockWrong]}>
+                <Text style={[styles.blockText, (loop || b === 'end' || lit) && styles.blockLoopText]}>
                   {loop ? `🔁 Lặp ${loopTimes(b)} lần [` : b === 'end' ? ']' : BLOCK_LABEL[b as 'forward']}
                 </Text>
               </Pressable>
@@ -343,17 +376,17 @@ export function CodePath({ turn, disabled, feedback, onRun, petId, petLevel, red
           </Pressable>
         )) : null}
       </View>
-      <Feedback note={demo ? (demoWalk?.ok && shownAt === (demoWalk.path.length - 1) ? { text: 'Pet đã tới đích!', tone: 'good' } : null) : feedback} />
+      <Feedback note={demo ? (demoWalk?.ok && shownAt === (demoWalk.path.length - 1) ? { text: 'Robot đã tới đích!', tone: 'good' } : null) : feedback} />
       <View style={styles.actions}>
         {running ? (
           <Pressable onPress={stop} accessibilityRole="button" accessibilityLabel="Dừng" style={styles.secondary}>
             <Text style={styles.secondaryText}>Dừng</Text>
           </Pressable>
         ) : (
-          <Pressable onPress={() => { setPath(null); setAt(0); }} disabled={locked || !path} accessibilityRole="button" accessibilityLabel="Đặt lại"
+          <Pressable onPress={edited} disabled={locked || !path} accessibilityRole="button" accessibilityLabel="Đặt lại"
             style={[styles.secondary, (locked || !path) && styles.dimmed]}><Text style={styles.secondaryText}>Đặt lại</Text></Pressable>
         )}
-        <Pressable onPress={() => { stop(); setPath(null); setOwn([]); }} disabled={locked || running || !program.length}
+        <Pressable onPress={() => { stop(); edited(); setOwn([]); }} disabled={locked || running || !program.length}
           accessibilityRole="button" accessibilityLabel="Xóa hết lệnh" style={[styles.secondary, (locked || running || !program.length) && styles.dimmed]}>
           <Text style={styles.secondaryText}>Xóa hết</Text>
         </Pressable>
@@ -380,22 +413,6 @@ const styles = StyleSheet.create({
   primaryText: { color: '#FFFFFF', fontWeight: '900', fontSize: 16 },
   secondary: { flex: 1, minHeight: 46, borderRadius: 14, backgroundColor: t.tint, alignItems: 'center', justifyContent: 'center' },
   secondaryText: { color: t.accent, fontWeight: '900', fontSize: 15 },
-  // Ghép chữ
-  bookRow: { flexDirection: 'row', alignItems: 'center', gap: 8, alignSelf: 'center' },
-  bookText: { fontSize: 14, fontWeight: '900', color: '#8A5A00' },
-  picture: { alignSelf: 'center', width: 140, height: 140, borderRadius: 28, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center',
-    shadowColor: t.shadow, shadowOpacity: 0.08, shadowRadius: 10, shadowOffset: { width: 0, height: 4 }, elevation: 2 },
-  pictureEmoji: { fontSize: 80, lineHeight: 96 },
-  slots: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 8 },
-  slot: { minWidth: 52, minHeight: 56, paddingHorizontal: 10, borderRadius: 14, borderWidth: 2, borderStyle: 'dashed', borderColor: t.border,
-    backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
-  slotFilled: { borderStyle: 'solid', borderColor: t.accent, backgroundColor: t.tint },
-  slotRight: { borderColor: t.success, backgroundColor: t.successBg },
-  slotText: { fontSize: 26, fontWeight: '900', color: t.ink },
-  tiles: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 10 },
-  tile: { minWidth: 56, minHeight: 56, paddingHorizontal: 12, borderRadius: 16, backgroundColor: '#FFF6E5', borderWidth: 2, borderColor: '#F2C46D',
-    alignItems: 'center', justifyContent: 'center' },
-  tileText: { fontSize: 26, fontWeight: '900', color: '#8A5A00' },
   // Thám tử chính tả
   sentence: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, justifyContent: 'center', backgroundColor: '#FFFFFF', borderRadius: 18, padding: 14 },
   word: { minHeight: 44, paddingHorizontal: 10, borderRadius: 12, backgroundColor: t.tint, justifyContent: 'center' },
@@ -426,12 +443,25 @@ const styles = StyleSheet.create({
   zoneLabel: { fontSize: 14, fontWeight: '900', color: t.ink, textAlign: 'center' },
   // Lập trình đường đi
   boardWrap: { alignItems: 'center' },
-  board: { backgroundColor: '#E6F5E8', borderRadius: 12, overflow: 'hidden' },
+  board: { backgroundColor: '#E6F5E8', borderRadius: 14, overflow: 'hidden', borderWidth: 3, borderColor: '#5E8C5A' },
   cell: { position: 'absolute', borderWidth: StyleSheet.hairlineWidth, borderColor: '#BFE3C6', alignItems: 'center', justifyContent: 'center' },
+  cellAlt: { backgroundColor: '#DCF0DF' },
   wall: { backgroundColor: '#C9D3DA' },
   trail: { backgroundColor: '#FFF1C9' },
-  pet: { position: 'absolute', alignItems: 'center', justifyContent: 'center' },
-  facing: { position: 'absolute', right: 0, bottom: 0, borderRadius: 999, backgroundColor: t.accent, padding: 1 },
+  cellBlocked: { backgroundColor: '#FFC9CF' },
+  cellWon: { backgroundColor: '#FFE9A8' },
+  goal: { alignItems: 'center', justifyContent: 'center' },
+  goalGem: { position: 'absolute', right: -4, bottom: -2 },
+  robot: { position: 'absolute', left: 0, top: 0, alignItems: 'center', justifyContent: 'flex-end' },
+  dome: { backgroundColor: 'rgba(200,232,255,0.85)', borderWidth: 1.5, borderColor: '#5B8DB8', alignItems: 'center', justifyContent: 'flex-end',
+    overflow: 'hidden' },
+  chassis: { borderRadius: 5, backgroundColor: '#5B6F86', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end', paddingHorizontal: 2,
+    marginBottom: 1 },
+  chassisHurt: { backgroundColor: '#C2414F' },
+  wheel: { width: 6, height: 6, borderRadius: 3, backgroundColor: '#1D2B36', marginBottom: -3 },
+  facing: { position: 'absolute', right: -1, top: -1, borderRadius: 999, backgroundColor: t.accent, padding: 1 },
+  fault: { flexDirection: 'row', alignItems: 'flex-start', gap: 6, borderRadius: 12, padding: 10, backgroundColor: '#FFF1E8', borderWidth: 1.5, borderColor: '#F0A37A' },
+  faultText: { flex: 1, fontSize: 14, fontWeight: '800', color: '#9A3B12' },
   programHead: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   programTitle: { fontSize: 14, fontWeight: '900', color: t.ink },
   counter: { fontSize: 13, fontWeight: '900', color: t.accent },
@@ -444,7 +474,8 @@ const styles = StyleSheet.create({
   blockInside: { backgroundColor: '#EFE7FF' },
   blockLoop: { backgroundColor: '#5141A8' },
   blockEnd: { backgroundColor: '#5141A8', paddingHorizontal: 8 },
-  blockRunning: { opacity: 0.85 },
+  blockDoing: { backgroundColor: '#F2A93B', transform: [{ scale: 1.08 }] },
+  blockWrong: { backgroundColor: t.danger },
   blockText: { fontSize: 13, fontWeight: '900', color: t.accent },
   blockLoopText: { color: '#FFFFFF' },
   times: { marginLeft: 2, minHeight: 36, paddingHorizontal: 8, borderRadius: 10, backgroundColor: '#EEEAFF', justifyContent: 'center' },

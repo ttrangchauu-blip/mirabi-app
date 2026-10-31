@@ -255,13 +255,15 @@ def finish(client, me, db, session):
     return client.post(f"/api/learning/sessions/{session['id']}/complete", headers=me, json={}).json()["session"]
 
 
-def test_catalog_shows_the_programme_of_the_grade_and_another_grade_without_changing_it(client):
+def test_catalog_shows_the_programme_of_the_grade_and_never_another_grade(client):
     me = account(client, age=7, school_grade="grade2")
     programme = client.get("/api/learning/catalog", headers=me).json()["programme"]
     assert programme["grade"] == "grade2" and programme["label"] == "Lớp 2"
     assert {s["code"] for s in programme["subjects"]} == {"vietnamese", "math", "science"}
-    other = client.get("/api/learning/catalog?grade=grade4", headers=me).json()["programme"]
-    assert other["grade"] == "grade4" and "english" in {s["code"] for s in other["subjects"]}
+    other = client.get("/api/learning/catalog?grade=grade4", headers=me)  # locked (education.py)
+    assert other.status_code == 403 and other.json()["code"] == "grade_locked"
+    four = account(client, email="four@example.com", age=9, school_grade="grade4")
+    assert "english" in {s["code"] for s in client.get("/api/learning/catalog", headers=four).json()["programme"]["subjects"]}
     assert client.get("/api/auth/me", headers=me).json()["school_grade"] == "grade2"
     assert client.get("/api/learning/catalog?grade=grade13", headers=me).status_code == 422
 
@@ -321,12 +323,15 @@ def test_phan_loai_and_lap_trinh_whole_stages_earn_the_stage_reward(client, db):
 
 
 def test_a_game_is_only_started_for_a_grade_it_has_content_for(client):
-    me = account(client, age=6, school_grade="grade1")
+    ages = {"grade1": 6, "grade2": 7, "grade5": 10, "grade6": 11}
     for game, grade in (("word_builder", "grade5"), ("spelling_detective", "grade1"), ("word_shooter", "grade1"),
                         ("code_path", "grade2"), ("sorting", "grade6")):
-        body = {"game": game, "timezone": "UTC", "grade": grade}
-        res = client.post("/api/learning/play", headers=me, json=body)
+        me = account(client, email=f"{game}@example.com", age=ages[grade], school_grade=grade)
+        res = client.post("/api/learning/play", headers=me, json={"game": game, "timezone": "UTC", "grade": grade})
         assert res.status_code == 409 and res.json()["code"] == "game_not_available", (game, grade)
+    me = account(client, age=6, school_grade="grade1")
+    res = client.post("/api/learning/play", headers=me, json={"game": "word_builder", "timezone": "UTC", "grade": "grade2"})
+    assert res.status_code == 403 and res.json()["code"] == "grade_locked"  # never another grade than the learner's
     adult = account(client, email="adult@example.com", age=30, school_grade="adult")
     assert client.post("/api/learning/play", headers=adult, json={"game": "code_path"}).status_code == 409  # no level yet
     assert client.post("/api/learning/play", headers=adult, json={"game": "code_path", "level": "advanced"}).status_code == 201

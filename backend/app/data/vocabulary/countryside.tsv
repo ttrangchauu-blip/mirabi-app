@@ -1,0 +1,44 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic	source	status
+farm	farm	noun	1	countryside	trang trại, nông trại		My grandparents have a small farm.	Ông bà tôi có một trang trại nhỏ.		/fɑːm/	mirabi-ai-2026-10	active
+village	village	noun	1	countryside	ngôi làng		My grandmother lives in a village.	Bà tôi sống ở một ngôi làng.		/ˈvɪlɪdʒ/	mirabi-ai-2026-10	active
+rice_field	rice field	noun	1	countryside	cánh đồng lúa, ruộng lúa		The rice fields are green in summer.	Những cánh đồng lúa xanh mướt vào mùa hè.	paddy field|rice paddy|paddy		mirabi-ai-2026-10	active
+buffalo	buffalo	noun	1	countryside	con trâu		The boy is riding a buffalo.	Cậu bé đang cưỡi trâu.	water buffalo	/ˈbʌfələʊ/	mirabi-ai-2026-10	active
+goat	goat	noun	1	countryside	con dê		The goat is eating grass on the hill.	Con dê đang gặm cỏ trên đồi.		/ɡəʊt/	mirabi-ai-2026-10	active
+crop	crop	noun	2	countryside	cây trồng, vụ mùa		Rice is the main crop here.	Lúa là cây trồng chính ở đây.		/krɒp/	mirabi-ai-2026-10	active
+harvest	harvest	verb	2	countryside	thu hoạch, gặt		Farmers harvest rice in June.	Nông dân gặt lúa vào tháng Sáu.		/ˈhɑːvɪst/	mirabi-ai-2026-10	active
+barn	barn	noun	2	countryside	nhà kho, chuồng trại	ở nông trại, để cỏ khô, nông cụ hoặc vật nuôi	The cows sleep in the barn.	Những con bò ngủ trong chuồng.		/bɑːn/	mirabi-ai-2026-10	active
+rural	rural	adjective	2	countryside	thuộc nông thôn		She grew up in a rural area.	Cô ấy lớn lên ở một vùng nông thôn.		/ˈrʊərəl/	mirabi-ai-2026-10	active
+orchard	orchard	noun	2	countryside	vườn cây ăn quả		There are many mango trees in the orchard.	Có nhiều cây xoài trong vườn cây ăn quả.		/ˈɔːtʃəd/	mirabi-ai-2026-10	active
+herd	herd	noun	2	countryside	đàn (gia súc)	trâu, bò, dê đi thành bầy	A herd of cows is crossing the road.	Một đàn bò đang băng qua đường.		/hɜːd/	mirabi-ai-2026-10	active
+graze	graze	verb	2	countryside	gặm cỏ, ăn cỏ		The buffaloes graze in the field.	Đàn trâu gặm cỏ trên cánh đồng.		/ɡreɪz/	mirabi-ai-2026-10	active
+countryside	countryside	noun	2	countryside	vùng nông thôn, miền quê		We spend our summer holiday in the countryside.	Chúng tôi nghỉ hè ở miền quê.	country	/ˈkʌntrisaɪd/	mirabi-ai-2026-10	active
+farmhouse	farmhouse	noun	2	countryside	nhà ở trong trang trại		They live in an old farmhouse.	Họ sống trong một ngôi nhà cũ ở trang trại.		/ˈfɑːmhaʊs/	mirabi-ai-2026-10	active
+dirt_road	dirt road	noun	2	countryside	đường đất		We walked along a dirt road to the river.	Chúng tôi đi bộ dọc con đường đất ra sông.			mirabi-ai-2026-10	active
+banyan_tree	banyan tree	noun	2	countryside	cây đa		Children play under the old banyan tree.	Trẻ con chơi dưới gốc cây đa già.	banyan		mirabi-ai-2026-10	active
+catch_fish	catch fish	phrase	2	countryside	bắt cá		The boys catch fish in the stream.	Các cậu bé bắt cá dưới suối.			mirabi-ai-2026-10	active
+pick_fruit	pick fruit	phrase	2	countryside	hái quả, hái trái cây		We picked fruit in my uncle's garden.	Chúng tôi hái quả trong vườn của chú.			mirabi-ai-2026-10	active
+grow_rice	grow rice	phrase	2	countryside	trồng lúa		People in this village grow rice.	Người dân ở làng này trồng lúa.	plant rice		mirabi-ai-2026-10	active
+feed_the_chickens	feed the chickens	phrase	2	countryside	cho gà ăn		Every morning I feed the chickens.	Sáng nào tôi cũng cho gà ăn.			mirabi-ai-2026-10	active
+hay	hay	noun	2	countryside	cỏ khô	thức ăn cho trâu bò	The farmer gives hay to the cows.	Người nông dân cho bò ăn cỏ khô.		/heɪ/	mirabi-ai-2026-10	active
+weed	weed	noun	2	countryside	cỏ dại		We pulled the weeds out of the garden.	Chúng tôi nhổ cỏ dại trong vườn.		/wiːd/	mirabi-ai-2026-10	active
+scarecrow	scarecrow	noun	2	countryside	bù nhìn (đuổi chim)		The scarecrow keeps the birds away.	Con bù nhìn đuổi lũ chim đi.		/ˈskeəkrəʊ/	mirabi-ai-2026-10	active
+coconut_tree	coconut tree	noun	2	countryside	cây dừa		There are coconut trees along the river.	Có những hàng dừa dọc bờ sông.	coconut palm		mirabi-ai-2026-10	active
+riverbank	riverbank	noun	2	countryside	bờ sông		We had a picnic on the riverbank.	Chúng tôi đi dã ngoại trên bờ sông.	river bank|bank	/ˈrɪvəbæŋk/	mirabi-ai-2026-10	active
+bamboo_hedge	bamboo hedge	noun	2	countryside	lũy tre		A bamboo hedge surrounds the village.	Lũy tre bao quanh ngôi làng.			mirabi-ai-2026-10	active
+village_gate	village gate	noun	2	countryside	cổng làng		The old village gate is made of stone.	Cổng làng cổ được làm bằng đá.			mirabi-ai-2026-10	active
+agriculture	agriculture	noun	3	countryside	nông nghiệp		Agriculture is important to Vietnam's economy.	Nông nghiệp quan trọng đối với nền kinh tế Việt Nam.	farming	/ˈæɡrɪkʌltʃə/	mirabi-ai-2026-10	active
+irrigation	irrigation	noun	3	countryside	sự tưới tiêu, thủy lợi		Irrigation brings water to the fields.	Hệ thống tưới tiêu đưa nước vào ruộng.		/ˌɪrɪˈɡeɪʃn/	mirabi-ai-2026-10	active
+scenery	scenery	noun	3	countryside	cảnh vật, cảnh sắc		The scenery in Sa Pa is wonderful.	Cảnh vật ở Sa Pa thật tuyệt đẹp.		/ˈsiːnəri/	mirabi-ai-2026-10	active
+cottage	cottage	noun	3	countryside	ngôi nhà nhỏ ở quê		They stayed in a small cottage near the lake.	Họ ở trong một ngôi nhà nhỏ gần hồ.		/ˈkɒtɪdʒ/	mirabi-ai-2026-10	active
+livestock	livestock	noun	3	countryside	gia súc, vật nuôi trong trang trại		The family keeps livestock such as pigs and cows.	Gia đình nuôi gia súc như lợn và bò.		/ˈlaɪvstɒk/	mirabi-ai-2026-10	active
+tractor	tractor	noun	3	countryside	máy kéo		The farmer drives a tractor across the field.	Người nông dân lái máy kéo qua cánh đồng.		/ˈtræktə/	mirabi-ai-2026-10	active
+plough	plough	verb	3	countryside	cày (ruộng)		In the past, farmers used buffaloes to plough the fields.	Ngày xưa, nông dân dùng trâu để cày ruộng.	plow	/plaʊ/	mirabi-ai-2026-10	active
+cultivate	cultivate	verb	3	countryside	canh tác, trồng trọt		They cultivate vegetables on the hillside.	Họ trồng rau trên sườn đồi.		/ˈkʌltɪveɪt/	mirabi-ai-2026-10	active
+picturesque	picturesque	adjective	3	countryside	đẹp như tranh		It is a picturesque village by the river.	Đó là một ngôi làng đẹp như tranh bên dòng sông.		/ˌpɪktʃəˈresk/	mirabi-ai-2026-10	active
+village_life	village life	noun	3	countryside	cuộc sống làng quê		Village life is quiet and simple.	Cuộc sống làng quê yên bình và giản dị.	country life|rural life		mirabi-ai-2026-10	active
+terraced_fields	terraced fields	noun	3	countryside	ruộng bậc thang		The terraced fields in Mu Cang Chai are famous.	Ruộng bậc thang ở Mù Cang Chải rất nổi tiếng.	rice terraces|terraced rice fields		mirabi-ai-2026-10	active
+haystack	haystack	noun	3	countryside	đống rơm, đụn cỏ khô		The children hid behind the haystack.	Bọn trẻ trốn sau đống rơm.		/ˈheɪstæk/	mirabi-ai-2026-10	active
+wildflower	wildflower	noun	3	countryside	hoa dại		The hill is covered with wildflowers.	Ngọn đồi phủ đầy hoa dại.	wild flower	/ˈwaɪldflaʊə/	mirabi-ai-2026-10	active
+meadow	meadow	noun	3	countryside	đồng cỏ		The horses are running in the meadow.	Những con ngựa đang chạy trên đồng cỏ.	grassland	/ˈmedəʊ/	mirabi-ai-2026-10	active
+milk_a_cow	milk a cow	phrase	3	countryside	vắt sữa bò		Have you ever tried to milk a cow?	Bạn đã bao giờ thử vắt sữa bò chưa?			mirabi-ai-2026-10	active
+communal_house	communal house	noun	3	countryside	đình làng		Villagers meet at the communal house during festivals.	Dân làng tụ họp ở đình làng trong các dịp lễ hội.	village communal house		mirabi-ai-2026-10	active

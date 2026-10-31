@@ -48,6 +48,189 @@
      ],
      "games": [
       {
+       "game": "number_line",
+       "title": "Cầu số đến 10",
+       "tasks": [
+        {
+         "prompt": "Đặt các số 3, 6 và 8 lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 10,
+          "step": 5,
+          "snap": 1
+         },
+         "points": [
+          {
+           "label": "3",
+           "value": 3
+          },
+          {
+           "label": "6",
+           "value": 6
+          },
+          {
+           "label": "8",
+           "value": 8
+          }
+         ],
+         "explanation": "Đếm từng vạch từ 0: 1, 2, 3 … Số đứng bên trái bé hơn số bên phải: 3 < 6 < 8.",
+         "hint": "Bắt đầu đếm từ vạch 0.",
+         "key": "num1"
+        },
+        {
+         "prompt": "Đặt các số 1, 4 và 9 lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 10,
+          "step": 5,
+          "snap": 1
+         },
+         "points": [
+          {
+           "label": "1",
+           "value": 1
+          },
+          {
+           "label": "4",
+           "value": 4
+          },
+          {
+           "label": "9",
+           "value": 9
+          }
+         ],
+         "explanation": "1 ở ngay sau 0, 4 ở ngay trước 5, 9 ở ngay trước 10. Đọc từ trái sang phải: 1, 4, 9.",
+         "hint": "Số 4 ở ngay trước vạch 5.",
+         "key": "num2"
+        },
+        {
+         "prompt": "Trục số đã có số 6. Đặt số liền trước và số liền sau của 6.",
+         "line": {
+          "from": 0,
+          "to": 10,
+          "step": 5,
+          "snap": 1
+         },
+         "marks": [
+          {
+           "label": "6",
+           "value": 6
+          }
+         ],
+         "points": [
+          {
+           "label": "Liền trước 6",
+           "value": 5
+          },
+          {
+           "label": "Liền sau 6",
+           "value": 7
+          }
+         ],
+         "explanation": "Đếm 5, 6, 7: số liền trước 6 là 5 (bên trái), số liền sau 6 là 7 (bên phải).",
+         "hint": "Liền trước ở ngay bên trái, liền sau ở ngay bên phải.",
+         "key": "num3"
+        },
+        {
+         "prompt": "Đặt các số 6, 3 và 4 lên trục số rồi đọc chúng từ bé đến lớn.",
+         "line": {
+          "from": 0,
+          "to": 10,
+          "step": 5,
+          "snap": 1
+         },
+         "points": [
+          {
+           "label": "6",
+           "value": 6
+          },
+          {
+           "label": "3",
+           "value": 3
+          },
+          {
+           "label": "4",
+           "value": 4
+          }
+         ],
+         "explanation": "Trên trục số, số bên trái bé hơn. Từ trái sang phải ta đọc: 3, 4, 6.",
+         "hint": "Đếm vạch từ 0.",
+         "key": "num4"
+        },
+        {
+         "prompt": "Trục số chỉ ghi 0 và 10. Đặt các số 2, 7 và 9.",
+         "line": {
+          "from": 0,
+          "to": 10,
+          "step": 10,
+          "snap": 1
+         },
+         "points": [
+          {
+           "label": "2",
+           "value": 2
+          },
+          {
+           "label": "7",
+           "value": 7
+          },
+          {
+           "label": "9",
+           "value": 9
+          }
+         ],
+         "explanation": "Đếm vạch từ 0 sang phải: 2 ở vạch thứ hai, 7 ở vạch thứ bảy, 9 ở ngay trước 10.",
+         "hint": "9 ở ngay trước 10.",
+         "key": "num5"
+        },
+        {
+         "prompt": "Đặt số liền trước của 10 và số liền sau của 0.",
+         "line": {
+          "from": 0,
+          "to": 10,
+          "step": 10,
+          "snap": 1
+         },
+         "points": [
+          {
+           "label": "Liền trước 10",
+           "value": 9
+          },
+          {
+           "label": "Liền sau 0",
+           "value": 1
+          }
+         ],
+         "explanation": "Đếm lùi từ 10 một bước được 9; đếm tiếp từ 0 một bước được 1.",
+         "hint": "Mỗi vạch là một bước đếm.",
+         "key": "num6"
+        },
+        {
+         "prompt": "Đặt số đứng giữa 4 và 6, và số đứng giữa 7 và 9.",
+         "line": {
+          "from": 0,
+          "to": 10,
+          "step": 10,
+          "snap": 1
+         },
+         "points": [
+          {
+           "label": "Giữa 4 và 6",
+           "value": 5
+          },
+          {
+           "label": "Giữa 7 và 9",
+           "value": 8
+          }
+         ],
+         "explanation": "Đếm 4, 5, 6: số ở giữa là 5. Đếm 7, 8, 9: số ở giữa là 8.",
+         "hint": "Đếm từ 0 tới số đầu tiên rồi đếm tiếp.",
+         "key": "num7"
+        }
+       ],
+       "credit_from": "order"
+      },
+      {
        "game": "order",
        "title": "Xếp số theo thứ tự",
        "tasks": [
@@ -634,6 +817,116 @@
      ],
      "games": [
       {
+       "game": "step_solver",
+       "title": "Chọn phép tính cho tình huống",
+       "tasks": [
+        {
+         "problem": "Trong chuồng có 6 con gà. Mẹ mua thêm 3 con gà nữa. Trong chuồng có tất cả mấy con gà?",
+         "numbers": [
+          6,
+          3
+         ],
+         "steps": [
+          {
+           "ask": "Trong chuồng có tất cả mấy con gà?",
+           "expr": "6 + 3",
+           "result": 9,
+           "unit": "con gà"
+          }
+         ],
+         "explanation": "Mua thêm là gộp vào nên làm phép cộng: 6 + 3 = 9 con gà.",
+         "hint": "“Thêm” thì số gà nhiều lên hay ít đi?",
+         "key": "ste1"
+        },
+        {
+         "problem": "Bé có 9 quả bóng bay. Có 4 quả bị vỡ. Bé còn lại mấy quả bóng bay?",
+         "numbers": [
+          9,
+          4
+         ],
+         "steps": [
+          {
+           "ask": "Bé còn lại mấy quả bóng bay?",
+           "expr": "9 - 4",
+           "result": 5,
+           "unit": "quả bóng"
+          }
+         ],
+         "explanation": "Bóng bị vỡ là bớt đi nên làm phép trừ: 9 − 4 = 5 quả bóng.",
+         "key": "ste2"
+        },
+        {
+         "problem": "Trên ao có 4 con vịt đang bơi. Có thêm 5 con vịt nữa bơi tới. Trên ao có tất cả mấy con vịt?",
+         "numbers": [
+          4,
+          5
+         ],
+         "steps": [
+          {
+           "ask": "Trên ao có tất cả mấy con vịt?",
+           "expr": "4 + 5",
+           "result": 9,
+           "unit": "con vịt"
+          }
+         ],
+         "explanation": "Bơi tới thêm là gộp lại nên làm phép cộng: 4 + 5 = 9 con vịt.",
+         "key": "ste3"
+        },
+        {
+         "problem": "Hộp bút có 10 cây bút chì. An cho bạn mượn 2 cây. Trong hộp còn lại mấy cây bút chì?",
+         "numbers": [
+          10,
+          2
+         ],
+         "steps": [
+          {
+           "ask": "Trong hộp còn lại mấy cây bút chì?",
+           "expr": "10 - 2",
+           "result": 8,
+           "unit": "cây bút"
+          }
+         ],
+         "explanation": "Cho mượn là lấy bớt ra khỏi hộp nên làm phép trừ: 10 − 2 = 8 cây bút chì.",
+         "key": "ste4"
+        },
+        {
+         "problem": "Mẹ hấp 8 cái bánh bao. Cả nhà đã ăn 6 cái. Còn lại mấy cái bánh bao?",
+         "numbers": [
+          8,
+          6
+         ],
+         "steps": [
+          {
+           "ask": "Còn lại mấy cái bánh bao?",
+           "expr": "8 - 6",
+           "result": 2,
+           "unit": "cái bánh"
+          }
+         ],
+         "explanation": "Đã ăn là bớt đi, hỏi “còn lại” nên làm phép trừ: 8 − 6 = 2 cái bánh bao.",
+         "key": "ste5"
+        },
+        {
+         "problem": "Vườn nhà Na có 2 cây cam và 7 cây bưởi. Vườn nhà Na có tất cả mấy cây?",
+         "numbers": [
+          2,
+          7
+         ],
+         "steps": [
+          {
+           "ask": "Vườn nhà Na có tất cả mấy cây?",
+           "expr": "2 + 7",
+           "result": 9,
+           "unit": "cây"
+          }
+         ],
+         "explanation": "Hỏi “tất cả” là gộp cây cam với cây bưởi nên làm phép cộng: 2 + 7 = 9 cây.",
+         "key": "ste6"
+        }
+       ],
+       "credit_from": "choice"
+      },
+      {
        "game": "choice",
        "title": "Chọn phép tính đúng",
        "style": "quiz",
@@ -990,6 +1283,195 @@
       }
      ],
      "games": [
+      {
+       "game": "number_line",
+       "title": "Cầu số đến 100",
+       "tasks": [
+        {
+         "prompt": "Đặt các số 19, 42 và 57 lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 100,
+          "step": 10,
+          "snap": 1
+         },
+         "points": [
+          {
+           "label": "19",
+           "value": 19
+          },
+          {
+           "label": "42",
+           "value": 42
+          },
+          {
+           "label": "57",
+           "value": 57
+          }
+         ],
+         "explanation": "Số chục cho biết số nằm sau vạch chục nào: 19 sau 10, 42 sau 40, 57 sau 50. Từ bé đến lớn: 19, 42, 57.",
+         "hint": "Tìm vạch chục trước, rồi đếm thêm đơn vị.",
+         "key": "num1"
+        },
+        {
+         "prompt": "Đặt các số 36, 63 và 68 lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 100,
+          "step": 10,
+          "snap": 1
+         },
+         "points": [
+          {
+           "label": "36",
+           "value": 36
+          },
+          {
+           "label": "63",
+           "value": 63
+          },
+          {
+           "label": "68",
+           "value": 68
+          }
+         ],
+         "explanation": "36 có 3 chục nên ở giữa 30 và 40. 63 và 68 cùng 6 chục; 3 < 8 nên 63 đứng trước 68.",
+         "hint": "36 và 63 có số chục khác nhau.",
+         "key": "num2"
+        },
+        {
+         "prompt": "Đặt các số 38, 36 và 43 lên trục số.",
+         "line": {
+          "from": 30,
+          "to": 50,
+          "step": 10,
+          "snap": 1
+         },
+         "points": [
+          {
+           "label": "38",
+           "value": 38
+          },
+          {
+           "label": "36",
+           "value": 36
+          },
+          {
+           "label": "43",
+           "value": 43
+          }
+         ],
+         "explanation": "36 và 38 cùng 3 chục, 6 < 8 nên 36 bên trái 38. 43 có 4 chục nên ở sau 40. Thứ tự: 36, 38, 43.",
+         "hint": "Đếm vạch từ 30.",
+         "key": "num3"
+        },
+        {
+         "prompt": "Đặt các số 5, 50 và 55 lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 100,
+          "step": 10,
+          "snap": 1
+         },
+         "points": [
+          {
+           "label": "5",
+           "value": 5
+          },
+          {
+           "label": "50",
+           "value": 50
+          },
+          {
+           "label": "55",
+           "value": 55
+          }
+         ],
+         "explanation": "5 chỉ có 5 đơn vị nên ở gần 0. 50 là 5 chục. 55 là 5 chục và 5 đơn vị, ở giữa 50 và 60.",
+         "hint": "Số có một chữ số nằm trước vạch 10.",
+         "key": "num4"
+        },
+        {
+         "prompt": "Đặt các số 91, 74 và 47 lên trục số rồi đọc từ lớn đến bé.",
+         "line": {
+          "from": 0,
+          "to": 100,
+          "step": 10,
+          "snap": 1
+         },
+         "points": [
+          {
+           "label": "91",
+           "value": 91
+          },
+          {
+           "label": "74",
+           "value": 74
+          },
+          {
+           "label": "47",
+           "value": 47
+          }
+         ],
+         "explanation": "Số chục: 9 > 7 > 4. Đọc từ phải sang trái là từ lớn đến bé: 91, 74, 47.",
+         "hint": "Nhìn số chục trước.",
+         "key": "num5"
+        },
+        {
+         "prompt": "Đặt các số 88, 80 và 28 lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 100,
+          "step": 10,
+          "snap": 1
+         },
+         "points": [
+          {
+           "label": "88",
+           "value": 88
+          },
+          {
+           "label": "80",
+           "value": 80
+          },
+          {
+           "label": "28",
+           "value": 28
+          }
+         ],
+         "explanation": "80 nằm ngay trên vạch 80; 88 cùng 8 chục nhưng thêm 8 đơn vị nên ở bên phải 80. 28 chỉ có 2 chục nên ở xa bên trái.",
+         "hint": "80 là số tròn chục.",
+         "key": "num6"
+        },
+        {
+         "prompt": "Đặt các số 31, 29 và 30 lên trục số.",
+         "line": {
+          "from": 20,
+          "to": 40,
+          "step": 10,
+          "snap": 1
+         },
+         "points": [
+          {
+           "label": "31",
+           "value": 31
+          },
+          {
+           "label": "29",
+           "value": 29
+          },
+          {
+           "label": "30",
+           "value": 30
+          }
+         ],
+         "explanation": "Đếm 29, 30, 31: 29 ở ngay trước 30, 31 ở ngay sau 30. Thứ tự từ bé đến lớn: 29, 30, 31.",
+         "hint": "29 là số liền trước của 30.",
+         "key": "num7"
+        }
+       ],
+       "credit_from": "order"
+      },
       {
        "game": "order",
        "title": "Xếp số theo thứ tự",
@@ -1621,6 +2103,116 @@
       }
      ],
      "games": [
+      {
+       "game": "step_solver",
+       "title": "Nhiều hơn hay ít hơn?",
+       "tasks": [
+        {
+         "problem": "Sợi dây xanh dài 46 cm. Sợi dây đỏ dài hơn sợi dây xanh 25 cm. Sợi dây đỏ dài bao nhiêu xăng-ti-mét?",
+         "numbers": [
+          46,
+          25
+         ],
+         "steps": [
+          {
+           "ask": "Sợi dây đỏ dài bao nhiêu xăng-ti-mét?",
+           "expr": "46 + 25",
+           "result": 71,
+           "unit": "cm"
+          }
+         ],
+         "explanation": "Dài hơn một số đơn vị thì làm phép cộng: 46 + 25 = 71 (cm).",
+         "hint": "Dây đỏ dài hơn nên số đo lớn hơn 46 cm.",
+         "key": "ste1"
+        },
+        {
+         "problem": "Bao gạo nặng 50 kg. Bao ngô nhẹ hơn bao gạo 15 kg. Bao ngô nặng bao nhiêu ki-lô-gam?",
+         "numbers": [
+          50,
+          15
+         ],
+         "steps": [
+          {
+           "ask": "Bao ngô nặng bao nhiêu ki-lô-gam?",
+           "expr": "50 - 15",
+           "result": 35,
+           "unit": "kg"
+          }
+         ],
+         "explanation": "Nhẹ hơn một số đơn vị thì làm phép trừ: 50 − 15 = 35 (kg).",
+         "key": "ste2"
+        },
+        {
+         "problem": "Đội văn nghệ có 27 bạn. Đội bóng đá có ít hơn đội văn nghệ 9 bạn. Đội bóng đá có bao nhiêu bạn?",
+         "numbers": [
+          27,
+          9
+         ],
+         "steps": [
+          {
+           "ask": "Đội bóng đá có bao nhiêu bạn?",
+           "expr": "27 - 9",
+           "result": 18,
+           "unit": "bạn"
+          }
+         ],
+         "explanation": "Ít hơn một số đơn vị thì làm phép trừ: 27 − 9 = 18 (bạn).",
+         "key": "ste3"
+        },
+        {
+         "problem": "Bà hái được 63 quả na. Mẹ hái được nhiều hơn bà 19 quả. Mẹ hái được bao nhiêu quả na?",
+         "numbers": [
+          63,
+          19
+         ],
+         "steps": [
+          {
+           "ask": "Mẹ hái được bao nhiêu quả na?",
+           "expr": "63 + 19",
+           "result": 82,
+           "unit": "quả na"
+          }
+         ],
+         "explanation": "Nhiều hơn một số đơn vị thì làm phép cộng: 63 + 19 = 82 (quả na).",
+         "key": "ste4"
+        },
+        {
+         "problem": "Thùng thứ nhất có 72 lít dầu. Thùng thứ hai có ít hơn thùng thứ nhất 28 lít. Thùng thứ hai có bao nhiêu lít dầu?",
+         "numbers": [
+          72,
+          28
+         ],
+         "steps": [
+          {
+           "ask": "Thùng thứ hai có bao nhiêu lít dầu?",
+           "expr": "72 - 28",
+           "result": 44,
+           "unit": "lít"
+          }
+         ],
+         "explanation": "Ít hơn thì làm phép trừ: 72 − 28 = 44 (lít).",
+         "key": "ste5"
+        },
+        {
+         "problem": "Năm nay Hà 8 tuổi. Mẹ hơn Hà 26 tuổi. Năm nay mẹ bao nhiêu tuổi?",
+         "numbers": [
+          8,
+          26
+         ],
+         "steps": [
+          {
+           "ask": "Năm nay mẹ bao nhiêu tuổi?",
+           "expr": "8 + 26",
+           "result": 34,
+           "unit": "tuổi"
+          }
+         ],
+         "explanation": "Mẹ hơn Hà 26 tuổi nghĩa là tuổi mẹ nhiều hơn, làm phép cộng: 8 + 26 = 34 (tuổi).",
+         "key": "ste6"
+        }
+       ],
+       "credit_from": "choice"
+      },
       {
        "game": "choice",
        "title": "Nhiều hơn hay ít hơn?",
@@ -3259,6 +3851,156 @@
      ],
      "games": [
       {
+       "game": "step_solver",
+       "title": "Giải bài toán hai bước",
+       "tasks": [
+        {
+         "problem": "Bến xe có 36 xe khách. Buổi sáng có 14 xe rời bến, buổi trưa có thêm 9 xe về bến. Lúc này bến xe có bao nhiêu xe khách?",
+         "numbers": [
+          36,
+          14,
+          9
+         ],
+         "steps": [
+          {
+           "ask": "Sau khi 14 xe rời bến, bến còn bao nhiêu xe khách?",
+           "expr": "36 - 14",
+           "result": 22,
+           "unit": "xe"
+          },
+          {
+           "ask": "Có thêm 9 xe về bến, lúc này bến có bao nhiêu xe khách?",
+           "expr": "r1 + 9",
+           "result": 31,
+           "unit": "xe"
+          }
+         ],
+         "explanation": "Xe rời bến thì bớt đi (36 − 14 = 22), xe về bến thì thêm vào (22 + 9 = 31).",
+         "key": "ste1"
+        },
+        {
+         "problem": "Lan gấp được 24 ngôi sao giấy. Số ngôi sao Mai gấp được gấp 3 lần số ngôi sao của Lan. Cả hai bạn gấp được bao nhiêu ngôi sao?",
+         "numbers": [
+          24,
+          3
+         ],
+         "steps": [
+          {
+           "ask": "Mai gấp được bao nhiêu ngôi sao?",
+           "expr": "24 × 3",
+           "result": 72,
+           "unit": "ngôi sao"
+          },
+          {
+           "ask": "Cả hai bạn gấp được bao nhiêu ngôi sao?",
+           "expr": "24 + r1",
+           "result": 96,
+           "unit": "ngôi sao"
+          }
+         ],
+         "explanation": "Gấp 3 lần là nhân với 3 (24 × 3 = 72), rồi gộp số sao của hai bạn (24 + 72 = 96).",
+         "hint": "Gấp lên một số lần thì nhân, không cộng.",
+         "key": "ste2"
+        },
+        {
+         "problem": "Đàn gà nhà bác Năm có 72 con. Số vịt bằng số gà giảm đi 4 lần. Số gà nhiều hơn số vịt bao nhiêu con?",
+         "numbers": [
+          72,
+          4
+         ],
+         "steps": [
+          {
+           "ask": "Đàn vịt có bao nhiêu con?",
+           "expr": "72 : 4",
+           "result": 18,
+           "unit": "con"
+          },
+          {
+           "ask": "Số gà nhiều hơn số vịt bao nhiêu con?",
+           "expr": "72 - r1",
+           "result": 54,
+           "unit": "con"
+          }
+         ],
+         "explanation": "Giảm đi 4 lần là chia cho 4 (72 : 4 = 18); muốn biết nhiều hơn bao nhiêu thì lấy số lớn trừ số bé (72 − 18 = 54).",
+         "key": "ste3"
+        },
+        {
+         "problem": "Cô giáo có 5 hộp bút, mỗi hộp có 8 cây. Cô chia đều số bút đó cho 4 tổ. Mỗi tổ được mấy cây bút?",
+         "numbers": [
+          5,
+          8,
+          4
+         ],
+         "steps": [
+          {
+           "ask": "Cô giáo có tất cả bao nhiêu cây bút?",
+           "expr": "5 × 8",
+           "result": 40,
+           "unit": "cây bút"
+          },
+          {
+           "ask": "Mỗi tổ được mấy cây bút?",
+           "expr": "r1 : 4",
+           "result": 10,
+           "unit": "cây bút"
+          }
+         ],
+         "explanation": "5 hộp, mỗi hộp 8 cây: nhân (5 × 8 = 40); chia đều cho 4 tổ: chia (40 : 4 = 10).",
+         "key": "ste4"
+        },
+        {
+         "problem": "Mẹ mua 3 kg táo, mỗi ki-lô-gam giá 25 000 đồng. Mẹ đưa cô bán hàng tờ 100 000 đồng. Cô bán hàng trả lại mẹ bao nhiêu tiền?",
+         "numbers": [
+          3,
+          25000,
+          100000
+         ],
+         "steps": [
+          {
+           "ask": "Mua 3 kg táo hết bao nhiêu tiền?",
+           "expr": "25000 × 3",
+           "result": 75000,
+           "unit": "đồng"
+          },
+          {
+           "ask": "Cô bán hàng trả lại mẹ bao nhiêu tiền?",
+           "expr": "100000 - r1",
+           "result": 25000,
+           "unit": "đồng"
+          }
+         ],
+         "explanation": "Tiền táo là 25 000 × 3 = 75 000 đồng; tiền trả lại là số tiền đưa trừ tiền táo: 100 000 − 75 000 = 25 000 đồng.",
+         "key": "ste5"
+        },
+        {
+         "problem": "Ngày thứ nhất cửa hàng bán được 165 quyển vở. Ngày thứ hai bán được ít hơn ngày thứ nhất 38 quyển. Cả hai ngày cửa hàng bán được bao nhiêu quyển vở?",
+         "numbers": [
+          165,
+          38
+         ],
+         "steps": [
+          {
+           "ask": "Ngày thứ hai cửa hàng bán được bao nhiêu quyển vở?",
+           "expr": "165 - 38",
+           "result": 127,
+           "unit": "quyển"
+          },
+          {
+           "ask": "Cả hai ngày bán được bao nhiêu quyển vở?",
+           "expr": "165 + r1",
+           "result": 292,
+           "unit": "quyển"
+          }
+         ],
+         "explanation": "Ít hơn thì trừ để tìm ngày thứ hai (165 − 38 = 127), rồi cộng hai ngày (165 + 127 = 292).",
+         "hint": "Phải tìm số vở ngày thứ hai trước.",
+         "key": "ste6"
+        }
+       ],
+       "credit_from": "choice"
+      },
+      {
        "game": "choice",
        "title": "Hai bước tính",
        "style": "quiz",
@@ -3446,6 +4188,173 @@
      ],
      "games": [
       {
+       "game": "number_line",
+       "title": "Số La Mã trên trục số",
+       "tasks": [
+        {
+         "prompt": "Đọc các số La Mã rồi đặt chúng lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 20,
+          "step": 5,
+          "snap": 1
+         },
+         "points": [
+          {
+           "label": "III",
+           "value": 3
+          },
+          {
+           "label": "VII",
+           "value": 7
+          },
+          {
+           "label": "XII",
+           "value": 12
+          }
+         ],
+         "explanation": "III = 1 + 1 + 1 = 3; VII = 5 + 2 = 7; XII = 10 + 2 = 12.",
+         "hint": "I là 1, V là 5, X là 10.",
+         "key": "num1"
+        },
+        {
+         "prompt": "Đọc các số La Mã rồi đặt chúng lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 20,
+          "step": 5,
+          "snap": 1
+         },
+         "points": [
+          {
+           "label": "IV",
+           "value": 4
+          },
+          {
+           "label": "VI",
+           "value": 6
+          },
+          {
+           "label": "XV",
+           "value": 15
+          }
+         ],
+         "explanation": "I đứng trước V thì bớt 1: IV = 4. I đứng sau V thì thêm 1: VI = 6. XV = 10 + 5 = 15.",
+         "hint": "IV và VI nằm hai bên vạch 5.",
+         "key": "num2"
+        },
+        {
+         "prompt": "Đọc các số La Mã rồi đặt chúng lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 20,
+          "step": 5,
+          "snap": 1
+         },
+         "points": [
+          {
+           "label": "IX",
+           "value": 9
+          },
+          {
+           "label": "XI",
+           "value": 11
+          },
+          {
+           "label": "XIX",
+           "value": 19
+          }
+         ],
+         "explanation": "I đứng trước X thì bớt 1: IX = 9; đứng sau X thì thêm 1: XI = 11. XIX = 10 + 9 = 19.",
+         "hint": "IX và XI nằm hai bên vạch 10.",
+         "key": "num3"
+        },
+        {
+         "prompt": "Đọc các số La Mã rồi đặt chúng lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 20,
+          "step": 5,
+          "snap": 1
+         },
+         "points": [
+          {
+           "label": "XIV",
+           "value": 14
+          },
+          {
+           "label": "XVI",
+           "value": 16
+          },
+          {
+           "label": "XVII",
+           "value": 17
+          }
+         ],
+         "explanation": "XIV = 10 + 4 = 14; XVI = 10 + 6 = 16; XVII = 10 + 7 = 17.",
+         "hint": "Tách X ra trước, rồi đọc phần còn lại.",
+         "key": "num4"
+        },
+        {
+         "prompt": "Đọc các số La Mã rồi đặt chúng lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 20,
+          "step": 5,
+          "snap": 1
+         },
+         "points": [
+          {
+           "label": "II",
+           "value": 2
+          },
+          {
+           "label": "VIII",
+           "value": 8
+          },
+          {
+           "label": "XIII",
+           "value": 13
+          },
+          {
+           "label": "XVIII",
+           "value": 18
+          }
+         ],
+         "explanation": "II = 2; VIII = 5 + 3 = 8; XIII = 10 + 3 = 13; XVIII = 10 + 8 = 18.",
+         "hint": "Đếm số chữ I đứng sau.",
+         "key": "num5"
+        },
+        {
+         "prompt": "Trục số chỉ ghi 0 và 20. Đặt các số La Mã V, X và XV.",
+         "line": {
+          "from": 0,
+          "to": 20,
+          "step": 20,
+          "snap": 1
+         },
+         "points": [
+          {
+           "label": "V",
+           "value": 5
+          },
+          {
+           "label": "X",
+           "value": 10
+          },
+          {
+           "label": "XV",
+           "value": 15
+          }
+         ],
+         "explanation": "V = 5, X = 10 (ở chính giữa 0 và 20), XV = 10 + 5 = 15.",
+         "hint": "X là 10, ở chính giữa đoạn từ 0 đến 20.",
+         "key": "num6"
+        }
+       ],
+       "credit_from": "match"
+      },
+      {
        "game": "match",
        "title": "Ghép số La Mã",
        "tasks": [
@@ -3608,6 +4517,205 @@
       }
      ],
      "games": [
+      {
+       "game": "number_line",
+       "title": "Cầu làm tròn",
+       "tasks": [
+        {
+         "prompt": "Làm tròn số 47 đến hàng chục. Đặt kết quả lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 100,
+          "step": 10
+         },
+         "marks": [
+          {
+           "label": "47",
+           "value": 47
+          }
+         ],
+         "points": [
+          {
+           "label": "Kết quả làm tròn",
+           "value": 50
+          }
+         ],
+         "explanation": "47 nằm giữa 40 và 50. Chữ số hàng đơn vị là 7 (từ 5 trở lên) nên làm tròn lên 50: 47 gần 50 hơn 40.",
+         "hint": "47 nằm giữa hai số tròn chục nào?",
+         "key": "num1"
+        },
+        {
+         "prompt": "Làm tròn số 96 đến hàng chục. Đặt kết quả lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 100,
+          "step": 10
+         },
+         "marks": [
+          {
+           "label": "96",
+           "value": 96
+          }
+         ],
+         "points": [
+          {
+           "label": "Kết quả làm tròn",
+           "value": 100
+          }
+         ],
+         "explanation": "96 nằm giữa 90 và 100. Chữ số hàng đơn vị là 6 nên làm tròn lên: được 100.",
+         "hint": "Số tròn chục liền sau 90 là số nào?",
+         "key": "num2"
+        },
+        {
+         "prompt": "Làm tròn số 365 đến hàng chục. Đặt kết quả lên trục số.",
+         "line": {
+          "from": 300,
+          "to": 400,
+          "step": 10
+         },
+         "marks": [
+          {
+           "label": "365",
+           "value": 365
+          }
+         ],
+         "points": [
+          {
+           "label": "Kết quả làm tròn",
+           "value": 370
+          }
+         ],
+         "explanation": "365 nằm đúng giữa 360 và 370. Chữ số hàng đơn vị là 5 thì quy ước làm tròn lên: 370.",
+         "hint": "Chữ số 5 thì làm tròn lên hay xuống?",
+         "key": "num3"
+        },
+        {
+         "prompt": "Làm tròn số 832 đến hàng trăm. Đặt kết quả lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 1000,
+          "step": 100
+         },
+         "marks": [
+          {
+           "label": "832",
+           "value": 832
+          }
+         ],
+         "points": [
+          {
+           "label": "Kết quả làm tròn",
+           "value": 800
+          }
+         ],
+         "explanation": "832 nằm giữa 800 và 900. Chữ số hàng chục là 3 (bé hơn 5) nên làm tròn xuống 800.",
+         "hint": "Làm tròn đến hàng trăm thì nhìn chữ số hàng chục.",
+         "key": "num4"
+        },
+        {
+         "prompt": "Làm tròn số 2 349 đến hàng trăm. Đặt kết quả lên trục số.",
+         "line": {
+          "from": 2000,
+          "to": 3000,
+          "step": 100
+         },
+         "marks": [
+          {
+           "label": "2 349",
+           "value": 2349
+          }
+         ],
+         "points": [
+          {
+           "label": "Kết quả làm tròn",
+           "value": 2300
+          }
+         ],
+         "explanation": "Chỉ nhìn chữ số hàng chục: 4 bé hơn 5 nên làm tròn xuống 2 300. Chữ số 9 ở hàng đơn vị không cần xét.",
+         "hint": "Đừng nhìn chữ số hàng đơn vị.",
+         "key": "num5"
+        },
+        {
+         "prompt": "Làm tròn số 4 650 đến hàng nghìn. Đặt kết quả lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 10000,
+          "step": 1000
+         },
+         "marks": [
+          {
+           "label": "4 650",
+           "value": 4650
+          }
+         ],
+         "points": [
+          {
+           "label": "Kết quả làm tròn",
+           "value": 5000
+          }
+         ],
+         "explanation": "4 650 nằm giữa 4 000 và 5 000. Chữ số hàng trăm là 6 (từ 5 trở lên) nên làm tròn lên 5 000.",
+         "hint": "Nhìn chữ số hàng trăm.",
+         "key": "num6"
+        },
+        {
+         "prompt": "Làm tròn hai số 6 381 và 6 815 đến hàng nghìn. Đặt hai kết quả lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 10000,
+          "step": 1000
+         },
+         "marks": [
+          {
+           "label": "6 381",
+           "value": 6381
+          },
+          {
+           "label": "6 815",
+           "value": 6815
+          }
+         ],
+         "points": [
+          {
+           "label": "6 381 làm tròn",
+           "value": 6000
+          },
+          {
+           "label": "6 815 làm tròn",
+           "value": 7000
+          }
+         ],
+         "explanation": "Cả hai số đều nằm giữa 6 000 và 7 000. 6 381 có chữ số hàng trăm 3 nên làm tròn xuống 6 000; 6 815 có chữ số hàng trăm 8 nên làm tròn lên 7 000.",
+         "hint": "So sánh chữ số hàng trăm của hai số.",
+         "key": "num7"
+        },
+        {
+         "prompt": "Làm tròn số 72 400 đến hàng chục nghìn. Đặt kết quả lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 100000,
+          "step": 10000
+         },
+         "marks": [
+          {
+           "label": "72 400",
+           "value": 72400
+          }
+         ],
+         "points": [
+          {
+           "label": "Kết quả làm tròn",
+           "value": 70000
+          }
+         ],
+         "explanation": "72 400 nằm giữa 70 000 và 80 000. Chữ số hàng nghìn là 2 (bé hơn 5) nên làm tròn xuống 70 000.",
+         "hint": "Nhìn chữ số hàng nghìn.",
+         "key": "num8"
+        }
+       ],
+       "credit_from": "choice"
+      },
       {
        "game": "choice",
        "title": "Làm tròn số",
@@ -4186,8 +5294,92 @@
          "explanation": "Lấy nửa chu vi trừ chiều dài."
         }
        ]
+      },
+      {
+       "game": "geometry",
+       "title": "Vẽ hình theo chu vi",
+       "credit_from": "choice",
+       "tasks": [
+        {
+         "key": "cv_14",
+         "kind": "rect",
+         "prompt": "Kéo góc để vẽ một hình chữ nhật có chu vi 14 cm.",
+         "grid": [
+          10,
+          8
+         ],
+         "target": {
+          "perimeter": 14
+         },
+         "explanation": "Chu vi hình chữ nhật = (dài + rộng) × 2. Dài + rộng phải bằng 7 cm: 6 và 1, 5 và 2, 4 và 3 đều đúng.",
+         "hint": "Chu vi 14 cm thì dài + rộng = 7 cm."
+        },
+        {
+         "key": "hv_20",
+         "kind": "rect",
+         "prompt": "Vẽ một hình vuông có chu vi 20 cm.",
+         "grid": [
+          10,
+          8
+         ],
+         "target": {
+          "perimeter": 20,
+          "square": true
+         },
+         "explanation": "Chu vi hình vuông = cạnh × 4, nên cạnh = 20 : 4 = 5 cm."
+        },
+        {
+         "key": "dai_6",
+         "kind": "rect",
+         "prompt": "Vẽ hình chữ nhật có chu vi 18 cm và chiều dài 6 cm.",
+         "grid": [
+          10,
+          8
+         ],
+         "target": {
+          "perimeter": 18,
+          "sides": [
+           6,
+           3
+          ]
+         },
+         "explanation": "Dài + rộng = 18 : 2 = 9 cm, nên chiều rộng = 9 − 6 = 3 cm."
+        },
+        {
+         "key": "rong_4",
+         "kind": "rect",
+         "prompt": "Vẽ hình chữ nhật có chu vi 24 cm và chiều rộng 4 cm.",
+         "grid": [
+          10,
+          8
+         ],
+         "target": {
+          "perimeter": 24,
+          "sides": [
+           8,
+           4
+          ]
+         },
+         "explanation": "Dài + rộng = 24 : 2 = 12 cm, nên chiều dài = 12 − 4 = 8 cm."
+        },
+        {
+         "key": "hv_16",
+         "kind": "rect",
+         "prompt": "Vẽ một hình vuông có chu vi 16 cm.",
+         "grid": [
+          10,
+          8
+         ],
+         "target": {
+          "perimeter": 16,
+          "square": true
+         },
+         "explanation": "Cạnh = 16 : 4 = 4 cm."
+        }
+       ]
       }
-     ]
+     ],
+     "activity": "geometry"
     },
     {
      "key": "toan3.dien_tich",
@@ -4356,8 +5548,103 @@
          "explanation": "Tìm cạnh từ chu vi, rồi tính diện tích."
         }
        ]
+      },
+      {
+       "game": "geometry",
+       "title": "Vẽ hình theo diện tích",
+       "credit_from": "choice",
+       "tasks": [
+        {
+         "key": "dt_12",
+         "kind": "rect",
+         "prompt": "Kéo góc để vẽ một hình chữ nhật có diện tích 12 cm².",
+         "grid": [
+          10,
+          8
+         ],
+         "target": {
+          "area": 12
+         },
+         "explanation": "Diện tích = dài × rộng. 6 × 2, 4 × 3 (hay 3 × 4, 2 × 6) đều bằng 12 cm².",
+         "hint": "Đếm số ô vuông 1 cm² bên trong hình."
+        },
+        {
+         "key": "hv_16",
+         "kind": "rect",
+         "prompt": "Vẽ một hình vuông có diện tích 16 cm².",
+         "grid": [
+          10,
+          8
+         ],
+         "target": {
+          "area": 16,
+          "square": true
+         },
+         "explanation": "Hình vuông cạnh 4 cm có diện tích 4 × 4 = 16 cm²."
+        },
+        {
+         "key": "dt_24",
+         "kind": "rect",
+         "prompt": "Vẽ hình chữ nhật có diện tích 24 cm² và chiều rộng 4 cm.",
+         "grid": [
+          10,
+          8
+         ],
+         "target": {
+          "area": 24,
+          "sides": [
+           6,
+           4
+          ]
+         },
+         "explanation": "Chiều dài = 24 : 4 = 6 cm."
+        },
+        {
+         "key": "dt_18",
+         "kind": "rect",
+         "prompt": "Vẽ một hình chữ nhật có diện tích 18 cm².",
+         "grid": [
+          10,
+          8
+         ],
+         "target": {
+          "area": 18
+         },
+         "explanation": "9 × 2 hoặc 6 × 3 đều có diện tích 18 cm²."
+        },
+        {
+         "key": "hv_25",
+         "kind": "rect",
+         "prompt": "Vẽ một hình vuông có diện tích 25 cm².",
+         "grid": [
+          10,
+          8
+         ],
+         "target": {
+          "area": 25,
+          "square": true
+         },
+         "explanation": "5 × 5 = 25 cm²."
+        },
+        {
+         "key": "dt_cv",
+         "kind": "rect",
+         "prompt": "Vẽ hình chữ nhật có diện tích 20 cm² và chu vi 18 cm.",
+         "grid": [
+          10,
+          8
+         ],
+         "target": {
+          "area": 20,
+          "perimeter": 18
+         },
+         "explanation": "Dài × rộng = 20 và dài + rộng = 9: đó là 5 cm và 4 cm.",
+         "hint": "Thử các cặp số nhân với nhau bằng 20."
+        }
+       ]
       }
-     ]
+     ],
+     "activity": "geometry"
     },
     {
      "key": "toan3.don_vi_do",
@@ -4586,6 +5873,183 @@
       }
      ],
      "games": [
+      {
+       "game": "number_line",
+       "title": "Cầu số đến lớp triệu",
+       "tasks": [
+        {
+         "prompt": "Đọc các số viết bằng chữ rồi đặt chúng lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 10000000,
+          "step": 1000000,
+          "snap": 500000
+         },
+         "points": [
+          {
+           "label": "Ba triệu năm trăm nghìn",
+           "value": 3500000
+          },
+          {
+           "label": "Bảy triệu",
+           "value": 7000000
+          },
+          {
+           "label": "Năm trăm nghìn",
+           "value": 500000
+          }
+         ],
+         "explanation": "Năm trăm nghìn (500 000) chưa tới 1 triệu nên ở gần 0. Ba triệu năm trăm nghìn là 3 500 000, ở giữa 3 triệu và 4 triệu. Bảy triệu là 7 000 000.",
+         "hint": "Nghìn và triệu là hai lớp khác nhau.",
+         "key": "num1"
+        },
+        {
+         "prompt": "Trục số chỉ ghi hai đầu. Đặt các số 2 500 000, 2 300 000 và 2 800 000.",
+         "line": {
+          "from": 2000000,
+          "to": 3000000,
+          "step": 100000,
+          "labels": "ends"
+         },
+         "points": [
+          {
+           "label": "2 500 000",
+           "value": 2500000
+          },
+          {
+           "label": "2 300 000",
+           "value": 2300000
+          },
+          {
+           "label": "2 800 000",
+           "value": 2800000
+          }
+         ],
+         "explanation": "Mỗi vạch là 100 000 (một trăm nghìn). Chữ số hàng trăm nghìn cho biết số ở vạch thứ mấy sau 2 000 000: 3, 5 và 8.",
+         "hint": "Nhìn chữ số hàng trăm nghìn.",
+         "key": "num2"
+        },
+        {
+         "prompt": "Đặt các số 250 000, 520 000 và 50 000 lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 1000000,
+          "step": 100000,
+          "snap": 10000
+         },
+         "points": [
+          {
+           "label": "250 000",
+           "value": 250000
+          },
+          {
+           "label": "520 000",
+           "value": 520000
+          },
+          {
+           "label": "50 000",
+           "value": 50000
+          }
+         ],
+         "explanation": "50 000 chỉ có 5 chục nghìn nên chưa tới 100 000. 250 000 có 2 trăm nghìn 5 chục nghìn; 520 000 có 5 trăm nghìn 2 chục nghìn. Thứ tự: 50 000 < 250 000 < 520 000.",
+         "hint": "So sánh chữ số hàng trăm nghìn trước.",
+         "key": "num3"
+        },
+        {
+         "prompt": "Đặt hai số dưới đây lên trục số.",
+         "line": {
+          "from": 3000000,
+          "to": 4000000,
+          "step": 100000,
+          "snap": 10000
+         },
+         "points": [
+          {
+           "label": "3 triệu và 6 trăm nghìn",
+           "value": 3600000
+          },
+          {
+           "label": "3 triệu và 6 chục nghìn",
+           "value": 3060000
+          }
+         ],
+         "explanation": "3 triệu và 6 trăm nghìn viết là 3 600 000; 3 triệu và 6 chục nghìn viết là 3 060 000 (hàng trăm nghìn là 0). 6 chục nghìn bé hơn 6 trăm nghìn rất nhiều.",
+         "hint": "Viết từng số ra chữ số trước, hàng nào không có thì viết 0.",
+         "key": "num4"
+        },
+        {
+         "prompt": "Đọc các số viết bằng chữ rồi đặt chúng lên trục số.",
+         "line": {
+          "from": 4000000,
+          "to": 6000000,
+          "step": 1000000,
+          "snap": 100000
+         },
+         "points": [
+          {
+           "label": "Năm triệu hai trăm nghìn",
+           "value": 5200000
+          },
+          {
+           "label": "Bốn triệu tám trăm nghìn",
+           "value": 4800000
+          },
+          {
+           "label": "Năm triệu",
+           "value": 5000000
+          }
+         ],
+         "explanation": "Năm triệu hai trăm nghìn = 5 200 000, ngay sau 5 triệu hai vạch. Bốn triệu tám trăm nghìn = 4 800 000, trước 5 triệu hai vạch.",
+         "hint": "Mỗi vạch nhỏ là 100 000.",
+         "key": "num5"
+        },
+        {
+         "prompt": "Trong số 2 534 678, đặt giá trị của chữ số 5 và giá trị của chữ số 3 lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 1000000,
+          "step": 100000,
+          "snap": 10000
+         },
+         "points": [
+          {
+           "label": "Giá trị chữ số 5",
+           "value": 500000
+          },
+          {
+           "label": "Giá trị chữ số 3",
+           "value": 30000
+          }
+         ],
+         "explanation": "Trong 2 534 678, chữ số 5 ở hàng trăm nghìn nên có giá trị 500 000; chữ số 3 ở hàng chục nghìn nên có giá trị 30 000.",
+         "hint": "Đếm hàng từ phải sang trái: đơn vị, chục, trăm, nghìn…",
+         "key": "num6"
+        },
+        {
+         "prompt": "Đặt hai số dưới đây lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 1000000,
+          "step": 100000,
+          "snap": 10000
+         },
+         "points": [
+          {
+           "label": "7 trăm nghìn và 4 chục nghìn",
+           "value": 740000
+          },
+          {
+           "label": "4 trăm nghìn và 7 chục nghìn",
+           "value": 470000
+          }
+         ],
+         "explanation": "7 trăm nghìn và 4 chục nghìn là 740 000; 4 trăm nghìn và 7 chục nghìn là 470 000. Hàng trăm nghìn 7 > 4 nên 740 000 ở bên phải.",
+         "hint": "Viết từng số ra chữ số trước.",
+         "key": "num7"
+        }
+       ],
+       "credit_from": "choice"
+      },
       {
        "game": "choice",
        "title": "Hàng và lớp",
@@ -4865,6 +6329,165 @@
       }
      ],
      "games": [
+      {
+       "game": "step_solver",
+       "title": "Nhóm số để tính nhanh",
+       "tasks": [
+        {
+         "problem": "Ba thùng hàng nặng 25 kg, 47 kg và 75 kg. Hãy tính nhanh cả ba thùng nặng bao nhiêu ki-lô-gam.",
+         "numbers": [
+          25,
+          47,
+          75
+         ],
+         "steps": [
+          {
+           "ask": "Nhóm hai thùng có tổng tròn trăm trước: hai thùng đó nặng bao nhiêu ki-lô-gam?",
+           "expr": "25 + 75",
+           "result": 100,
+           "unit": "kg"
+          },
+          {
+           "ask": "Cộng thêm thùng còn lại: cả ba thùng nặng bao nhiêu ki-lô-gam?",
+           "expr": "r1 + 47",
+           "result": 147,
+           "unit": "kg"
+          }
+         ],
+         "explanation": "Đổi chỗ và nhóm (tính chất giao hoán, kết hợp): 25 + 47 + 75 = (25 + 75) + 47 = 100 + 47 = 147.",
+         "hint": "Số nào cộng với 25 được 100?",
+         "key": "ste1"
+        },
+        {
+         "problem": "Mỗi hộp có 25 cái bút, mỗi thùng có 4 hộp. Cửa hàng có 37 thùng như thế. Cửa hàng có bao nhiêu cái bút?",
+         "numbers": [
+          25,
+          4,
+          37
+         ],
+         "steps": [
+          {
+           "ask": "Mỗi thùng có bao nhiêu cái bút?",
+           "expr": "25 × 4",
+           "result": 100,
+           "unit": "cái bút"
+          },
+          {
+           "ask": "37 thùng có bao nhiêu cái bút?",
+           "expr": "r1 × 37",
+           "result": 3700,
+           "unit": "cái bút"
+          }
+         ],
+         "explanation": "Nhóm 25 × 4 = 100 trước rồi nhân với 37: 100 × 37 = 3 700. Nhân với 100 rất nhanh: viết thêm hai chữ số 0.",
+         "key": "ste2"
+        },
+        {
+         "problem": "Thư viện nhận được 250 quyển sách vào tháng Ba, 168 quyển vào tháng Tư và 750 quyển vào tháng Năm. Hãy tính nhanh số sách thư viện nhận được trong ba tháng.",
+         "numbers": [
+          250,
+          168,
+          750
+         ],
+         "steps": [
+          {
+           "ask": "Nhóm hai tháng có tổng số sách tròn nghìn: hai tháng đó nhận bao nhiêu quyển?",
+           "expr": "250 + 750",
+           "result": 1000,
+           "unit": "quyển"
+          },
+          {
+           "ask": "Cả ba tháng thư viện nhận được bao nhiêu quyển sách?",
+           "expr": "r1 + 168",
+           "result": 1168,
+           "unit": "quyển"
+          }
+         ],
+         "explanation": "250 + 750 = 1 000, rồi 1 000 + 168 = 1 168. Nhóm các số tròn nghìn giúp cộng nhẩm nhanh.",
+         "key": "ste3"
+        },
+        {
+         "problem": "Mỗi chuyến xe chở 36 thùng nước, mỗi ngày xe chạy 2 chuyến. Hỏi trong 5 ngày xe chở được bao nhiêu thùng nước? Hãy tính nhanh.",
+         "numbers": [
+          36,
+          2,
+          5
+         ],
+         "steps": [
+          {
+           "ask": "Trong 5 ngày xe chạy bao nhiêu chuyến?",
+           "expr": "2 × 5",
+           "result": 10,
+           "unit": "chuyến"
+          },
+          {
+           "ask": "Trong 5 ngày xe chở được bao nhiêu thùng nước?",
+           "expr": "36 × r1",
+           "result": 360,
+           "unit": "thùng"
+          }
+         ],
+         "explanation": "36 × 2 × 5 = 36 × (2 × 5) = 36 × 10 = 360. Nhóm 2 × 5 = 10 trước thì nhân nhẩm rất nhanh.",
+         "key": "ste4"
+        },
+        {
+         "problem": "Bốn bạn quyên góp vở cho các em vùng cao: Hưng góp 125 quyển, Lam góp 38 quyển, Quân góp 75 quyển, Nhi góp 62 quyển. Hãy tính nhanh bốn bạn góp được bao nhiêu quyển vở.",
+         "numbers": [
+          125,
+          38,
+          75,
+          62
+         ],
+         "steps": [
+          {
+           "ask": "Nhóm hai bạn có tổng tròn trăm lớn hơn: Hưng và Quân góp bao nhiêu quyển?",
+           "expr": "125 + 75",
+           "result": 200,
+           "unit": "quyển"
+          },
+          {
+           "ask": "Lam và Nhi góp bao nhiêu quyển?",
+           "expr": "38 + 62",
+           "result": 100,
+           "unit": "quyển"
+          },
+          {
+           "ask": "Cả bốn bạn góp được bao nhiêu quyển vở?",
+           "expr": "r1 + r2",
+           "result": 300,
+           "unit": "quyển"
+          }
+         ],
+         "explanation": "(125 + 75) + (38 + 62) = 200 + 100 = 300. Đổi chỗ, nhóm thành các tổng tròn trăm rồi mới cộng.",
+         "key": "ste5"
+        },
+        {
+         "problem": "Mỗi lớp nhận 2 hộp phấn, mỗi hộp có 50 viên. Trường có 18 lớp. Trường nhận được bao nhiêu viên phấn? Hãy tính nhanh.",
+         "numbers": [
+          2,
+          50,
+          18
+         ],
+         "steps": [
+          {
+           "ask": "Mỗi lớp nhận bao nhiêu viên phấn?",
+           "expr": "2 × 50",
+           "result": 100,
+           "unit": "viên"
+          },
+          {
+           "ask": "Cả trường nhận được bao nhiêu viên phấn?",
+           "expr": "r1 × 18",
+           "result": 1800,
+           "unit": "viên"
+          }
+         ],
+         "explanation": "2 × 50 × 18 = (2 × 50) × 18 = 100 × 18 = 1 800.",
+         "key": "ste6"
+        }
+       ],
+       "credit_from": "match"
+      },
       {
        "game": "match",
        "title": "Ghép để tính nhanh",
@@ -5188,6 +6811,194 @@
      ],
      "games": [
       {
+       "game": "step_solver",
+       "title": "Tìm hai số từ tổng và hiệu",
+       "tasks": [
+        {
+         "problem": "2 thùng có tất cả 120 lít dầu. Thùng to có nhiều hơn thùng nhỏ 24 lít. Mỗi thùng có bao nhiêu lít dầu?",
+         "numbers": [
+          2,
+          120,
+          24
+         ],
+         "steps": [
+          {
+           "ask": "Hai lần số dầu của thùng to là bao nhiêu lít?",
+           "expr": "120 + 24",
+           "result": 144,
+           "unit": "lít"
+          },
+          {
+           "ask": "Thùng to có bao nhiêu lít dầu?",
+           "expr": "r1 : 2",
+           "result": 72,
+           "unit": "lít"
+          },
+          {
+           "ask": "Thùng nhỏ có bao nhiêu lít dầu?",
+           "expr": "120 - r2",
+           "result": 48,
+           "unit": "lít",
+           "accepted": [
+            "r2 - 24"
+           ]
+          }
+         ],
+         "explanation": "Thêm 24 lít vào thùng nhỏ thì hai thùng bằng thùng to: 120 + 24 = 144 là 2 lần thùng to; thùng to 144 : 2 = 72, thùng nhỏ 120 − 72 = 48.",
+         "hint": "Số lớn = (tổng + hiệu) : 2.",
+         "key": "ste1"
+        },
+        {
+         "problem": "Tổng số tuổi của 2 bố con là 46 tuổi. Bố hơn con 28 tuổi. Tính tuổi của mỗi người.",
+         "numbers": [
+          2,
+          46,
+          28
+         ],
+         "steps": [
+          {
+           "ask": "Hai lần tuổi con là bao nhiêu?",
+           "expr": "46 - 28",
+           "result": 18,
+           "unit": "tuổi"
+          },
+          {
+           "ask": "Con bao nhiêu tuổi?",
+           "expr": "r1 : 2",
+           "result": 9,
+           "unit": "tuổi"
+          },
+          {
+           "ask": "Bố bao nhiêu tuổi?",
+           "expr": "r2 + 28",
+           "result": 37,
+           "unit": "tuổi",
+           "accepted": [
+            "46 - r2"
+           ]
+          }
+         ],
+         "explanation": "Bớt 28 tuổi của bố thì hai người bằng tuổi con: 46 − 28 = 18 là 2 lần tuổi con; con 9 tuổi, bố 9 + 28 = 37 tuổi.",
+         "key": "ste2"
+        },
+        {
+         "problem": "Tổng số trang của 2 quyển sách là 368 trang. Quyển dày có nhiều hơn quyển mỏng 56 trang. Quyển mỏng có bao nhiêu trang?",
+         "numbers": [
+          2,
+          368,
+          56
+         ],
+         "steps": [
+          {
+           "ask": "Hai lần số trang quyển mỏng là bao nhiêu?",
+           "expr": "368 - 56",
+           "result": 312,
+           "unit": "trang"
+          },
+          {
+           "ask": "Quyển mỏng có bao nhiêu trang?",
+           "expr": "r1 : 2",
+           "result": 156,
+           "unit": "trang"
+          }
+         ],
+         "explanation": "Bớt 56 trang ở quyển dày thì hai quyển bằng quyển mỏng: (368 − 56) : 2 = 156 trang. Thử lại: quyển dày 212 trang, 212 + 156 = 368.",
+         "key": "ste3"
+        },
+        {
+         "problem": "Cả 2 khối Bốn và Năm thu được 860 kg giấy vụn. Khối Năm thu được nhiều hơn khối Bốn 140 kg. Mỗi khối thu được bao nhiêu ki-lô-gam giấy vụn?",
+         "numbers": [
+          860,
+          140,
+          2
+         ],
+         "steps": [
+          {
+           "ask": "Hai lần số giấy của khối Năm là bao nhiêu ki-lô-gam?",
+           "expr": "860 + 140",
+           "result": 1000,
+           "unit": "kg"
+          },
+          {
+           "ask": "Khối Năm thu được bao nhiêu ki-lô-gam?",
+           "expr": "r1 : 2",
+           "result": 500,
+           "unit": "kg"
+          },
+          {
+           "ask": "Khối Bốn thu được bao nhiêu ki-lô-gam?",
+           "expr": "860 - r2",
+           "result": 360,
+           "unit": "kg",
+           "accepted": [
+            "r2 - 140"
+           ]
+          }
+         ],
+         "explanation": "Khối Năm: (860 + 140) : 2 = 500 kg; khối Bốn: 860 − 500 = 360 kg. Thử lại: 500 − 360 = 140.",
+         "key": "ste4"
+        },
+        {
+         "problem": "Trong 2 ngày cửa hàng bán được 1 000 m vải. Ngày thứ hai bán được ít hơn ngày thứ nhất 248 m. Mỗi ngày cửa hàng bán được bao nhiêu mét vải?",
+         "numbers": [
+          2,
+          1000,
+          248
+         ],
+         "steps": [
+          {
+           "ask": "Hai lần số vải bán ngày thứ nhất là bao nhiêu mét?",
+           "expr": "1000 + 248",
+           "result": 1248,
+           "unit": "m"
+          },
+          {
+           "ask": "Ngày thứ nhất bán được bao nhiêu mét vải?",
+           "expr": "r1 : 2",
+           "result": 624,
+           "unit": "m"
+          },
+          {
+           "ask": "Ngày thứ hai bán được bao nhiêu mét vải?",
+           "expr": "1000 - r2",
+           "result": 376,
+           "unit": "m",
+           "accepted": [
+            "r2 - 248"
+           ]
+          }
+         ],
+         "explanation": "Ngày thứ nhất bán nhiều hơn nên là số lớn: (1 000 + 248) : 2 = 624 m; ngày thứ hai 1 000 − 624 = 376 m.",
+         "key": "ste5"
+        },
+        {
+         "problem": "2 anh em hái được tất cả 95 quả vải. Anh hái nhiều hơn em 17 quả. Em hái được bao nhiêu quả vải?",
+         "numbers": [
+          2,
+          95,
+          17
+         ],
+         "steps": [
+          {
+           "ask": "Hai lần số vải em hái là bao nhiêu quả?",
+           "expr": "95 - 17",
+           "result": 78,
+           "unit": "quả"
+          },
+          {
+           "ask": "Em hái được bao nhiêu quả vải?",
+           "expr": "r1 : 2",
+           "result": 39,
+           "unit": "quả"
+          }
+         ],
+         "explanation": "Em hái ít hơn nên là số bé: (95 − 17) : 2 = 39 quả. Anh hái 39 + 17 = 56 quả, 56 + 39 = 95.",
+         "key": "ste6"
+        }
+       ],
+       "credit_from": "choice"
+      },
+      {
        "game": "choice",
        "title": "Tổng và hiệu",
        "style": "quiz",
@@ -5374,6 +7185,158 @@
      ],
      "games": [
       {
+       "game": "step_solver",
+       "title": "Rút gọn và tìm phân số bằng nhau",
+       "tasks": [
+        {
+         "problem": "Hộp có 24 viên kẹo, trong đó 18 viên vị dâu. Phân số chỉ số kẹo vị dâu là 18/24. Cả 18 và 24 đều chia hết cho 6. Hãy rút gọn phân số 18/24.",
+         "numbers": [
+          18,
+          24,
+          6
+         ],
+         "steps": [
+          {
+           "ask": "Chia tử số cho 6: tử số mới là bao nhiêu?",
+           "expr": "18 : 6",
+           "result": 3
+          },
+          {
+           "ask": "Chia mẫu số cho 6: mẫu số mới là bao nhiêu?",
+           "expr": "24 : 6",
+           "result": 4
+          }
+         ],
+         "explanation": "Chia cả tử số và mẫu số cho cùng số 6 thì được phân số bằng nó: 18/24 = 3/4. 3 và 4 không cùng chia hết cho số nào lớn hơn 1 nên 3/4 là phân số tối giản.",
+         "key": "ste1"
+        },
+        {
+         "problem": "Lớp có 35 học sinh, trong đó 15 bạn đi xe đạp đến trường. Phân số chỉ số bạn đi xe đạp là 15/35. Cả 15 và 35 đều chia hết cho 5. Hãy rút gọn phân số đó.",
+         "numbers": [
+          15,
+          35,
+          5
+         ],
+         "steps": [
+          {
+           "ask": "Tử số mới là bao nhiêu?",
+           "expr": "15 : 5",
+           "result": 3
+          },
+          {
+           "ask": "Mẫu số mới là bao nhiêu?",
+           "expr": "35 : 5",
+           "result": 7
+          }
+         ],
+         "explanation": "Chia cả tử và mẫu cho 5: 15/35 = 3/7. Số bạn đi xe đạp bằng 3/7 số học sinh cả lớp.",
+         "key": "ste2"
+        },
+        {
+         "problem": "45 phút bằng 45/60 giờ. Cả 45 và 60 đều chia hết cho 15. Hãy rút gọn phân số 45/60 để biết 45 phút bằng mấy phần của một giờ.",
+         "numbers": [
+          45,
+          60,
+          15
+         ],
+         "steps": [
+          {
+           "ask": "Tử số mới là bao nhiêu?",
+           "expr": "45 : 15",
+           "result": 3
+          },
+          {
+           "ask": "Mẫu số mới là bao nhiêu?",
+           "expr": "60 : 15",
+           "result": 4
+          }
+         ],
+         "explanation": "Chia cả tử và mẫu cho 15: 45/60 = 3/4. Vậy 45 phút bằng 3/4 giờ.",
+         "key": "ste3"
+        },
+        {
+         "problem": "Bãi đỗ có 48 xe, trong đó 36 xe là ô tô con. Phân số chỉ số ô tô con là 36/48. Minh rút gọn phân số này hai lần: lần đầu chia cả tử số và mẫu số cho 4, lần sau chia tiếp cho 3.",
+         "numbers": [
+          36,
+          48,
+          4,
+          3
+         ],
+         "steps": [
+          {
+           "ask": "Lần đầu: tử số mới là bao nhiêu?",
+           "expr": "36 : 4",
+           "result": 9
+          },
+          {
+           "ask": "Lần đầu: mẫu số mới là bao nhiêu?",
+           "expr": "48 : 4",
+           "result": 12
+          },
+          {
+           "ask": "Lần sau: tử số là bao nhiêu?",
+           "expr": "r1 : 3",
+           "result": 3
+          },
+          {
+           "ask": "Lần sau: mẫu số là bao nhiêu?",
+           "expr": "r2 : 3",
+           "result": 4
+          }
+         ],
+         "explanation": "36/48 = 9/12 (chia cho 4), rồi 9/12 = 3/4 (chia cho 3). Có thể rút gọn nhiều lần cho đến khi được phân số tối giản; chia một lần cho 12 cũng ra 3/4.",
+         "key": "ste4"
+        },
+        {
+         "problem": "Một cái bánh chưng được cắt thành 12 miếng bằng nhau. Cả nhà đã ăn 2/3 cái bánh. Cả nhà đã ăn bao nhiêu miếng? (Viết 2/3 thành phân số bằng nó có mẫu số là 12.)",
+         "numbers": [
+          2,
+          3,
+          12
+         ],
+         "steps": [
+          {
+           "ask": "Mẫu số 3 phải nhân với mấy để được 12?",
+           "expr": "12 : 3",
+           "result": 4
+          },
+          {
+           "ask": "Nhân tử số 2 với số đó: cả nhà đã ăn bao nhiêu miếng?",
+           "expr": "2 × r1",
+           "result": 8,
+           "unit": "miếng"
+          }
+         ],
+         "explanation": "Nhân cả tử và mẫu với cùng số 4 thì được phân số bằng nó: 2/3 = 8/12, tức là 8 miếng trong 12 miếng.",
+         "key": "ste5"
+        },
+        {
+         "problem": "Cuốn truyện dày 40 trang. Hà đã đọc 3/5 cuốn truyện. Hà đã đọc bao nhiêu trang? (Viết 3/5 thành phân số bằng nó có mẫu số là 40.)",
+         "numbers": [
+          40,
+          3,
+          5
+         ],
+         "steps": [
+          {
+           "ask": "Mẫu số 5 phải nhân với mấy để được 40?",
+           "expr": "40 : 5",
+           "result": 8
+          },
+          {
+           "ask": "Nhân tử số 3 với số đó: Hà đã đọc bao nhiêu trang?",
+           "expr": "3 × r1",
+           "result": 24,
+           "unit": "trang"
+          }
+         ],
+         "explanation": "Nhân cả tử và mẫu với 8: 3/5 = 24/40, tức là Hà đã đọc 24 trang trong 40 trang.",
+         "key": "ste6"
+        }
+       ],
+       "credit_from": "match"
+      },
+      {
        "game": "match",
        "title": "Ghép phân số bằng nhau",
        "tasks": [
@@ -5519,6 +7482,211 @@
       }
      ],
      "games": [
+      {
+       "game": "number_line",
+       "title": "Cầu so sánh phân số",
+       "tasks": [
+        {
+         "prompt": "Đặt các phân số 3/7 và 5/7 lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 1,
+          "step": 1,
+          "snap": "1/7"
+         },
+         "points": [
+          {
+           "label": "3/7",
+           "value": "3/7"
+          },
+          {
+           "label": "5/7",
+           "value": "5/7"
+          }
+         ],
+         "explanation": "Đoạn từ 0 đến 1 chia thành 7 phần bằng nhau: 3/7 ở vạch thứ 3, 5/7 ở vạch thứ 5. Cùng mẫu số, tử lớn hơn thì phân số lớn hơn: 3/7 < 5/7.",
+         "hint": "Đếm số phần từ 0.",
+         "key": "num1"
+        },
+        {
+         "prompt": "Đặt các phân số 3/4 và 3/8 lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 1,
+          "step": 1,
+          "snap": "1/8"
+         },
+         "points": [
+          {
+           "label": "3/4",
+           "value": "3/4"
+          },
+          {
+           "label": "3/8",
+           "value": "3/8"
+          }
+         ],
+         "explanation": "Mỗi vạch là 1/8. 3/8 ở vạch thứ 3; 3/4 = 6/8 ở vạch thứ 6. Cùng tử số, mẫu bé hơn thì phân số lớn hơn: 3/4 > 3/8.",
+         "hint": "Đổi 3/4 thành phân số có mẫu 8.",
+         "key": "num2"
+        },
+        {
+         "prompt": "Đặt các phân số 3/4 và 5/8 lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 1,
+          "step": "1/2",
+          "snap": "1/8"
+         },
+         "points": [
+          {
+           "label": "3/4",
+           "value": "3/4"
+          },
+          {
+           "label": "5/8",
+           "value": "5/8"
+          }
+         ],
+         "explanation": "Quy đồng: 3/4 = 6/8. 5/8 ở vạch thứ 5, 6/8 ở vạch thứ 6, nên 3/4 > 5/8.",
+         "hint": "Mỗi vạch nhỏ là 1/8.",
+         "key": "num3"
+        },
+        {
+         "prompt": "Đặt các phân số 7/5, 4/5 và 5/5 lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 2,
+          "step": 1,
+          "snap": "1/5"
+         },
+         "points": [
+          {
+           "label": "7/5",
+           "value": "7/5"
+          },
+          {
+           "label": "4/5",
+           "value": "4/5"
+          },
+          {
+           "label": "5/5",
+           "value": "5/5"
+          }
+         ],
+         "explanation": "5/5 = 1. Tử bé hơn mẫu thì phân số bé hơn 1 (4/5 bên trái 1); tử lớn hơn mẫu thì lớn hơn 1 (7/5 bên phải 1).",
+         "hint": "So sánh tử số với mẫu số.",
+         "key": "num4"
+        },
+        {
+         "prompt": "Trục số đã có 2/3. Đặt các phân số 4/6 và 1/2.",
+         "line": {
+          "from": 0,
+          "to": 1,
+          "step": 1,
+          "snap": "1/6"
+         },
+         "marks": [
+          {
+           "label": "2/3",
+           "value": "2/3"
+          }
+         ],
+         "points": [
+          {
+           "label": "4/6",
+           "value": "4/6"
+          },
+          {
+           "label": "1/2",
+           "value": "1/2"
+          }
+         ],
+         "explanation": "Mỗi vạch là 1/6. 4/6 ở vạch thứ 4, trùng với 2/3 vì 2/3 = 4/6. 1/2 = 3/6 ở vạch thứ 3, nên 1/2 < 2/3.",
+         "hint": "Đổi 1/2 thành phân số có mẫu 6.",
+         "key": "num5"
+        },
+        {
+         "prompt": "Đặt các phân số 1/2, 1/3 và 1/6 lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 1,
+          "step": 1,
+          "snap": "1/6"
+         },
+         "points": [
+          {
+           "label": "1/2",
+           "value": "1/2"
+          },
+          {
+           "label": "1/3",
+           "value": "1/3"
+          },
+          {
+           "label": "1/6",
+           "value": "1/6"
+          }
+         ],
+         "explanation": "Cùng tử số 1: mẫu càng lớn, phân số càng bé. 1/6 ở vạch thứ 1, 1/3 = 2/6 ở vạch thứ 2, 1/2 = 3/6 ở vạch thứ 3.",
+         "hint": "Đổi các phân số về mẫu 6.",
+         "key": "num6"
+        },
+        {
+         "prompt": "Đặt các phân số 2/3 và 3/4 lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 1,
+          "step": "1/2",
+          "snap": "1/12"
+         },
+         "points": [
+          {
+           "label": "2/3",
+           "value": "2/3"
+          },
+          {
+           "label": "3/4",
+           "value": "3/4"
+          }
+         ],
+         "explanation": "Quy đồng mẫu 12: 2/3 = 8/12, 3/4 = 9/12. 8/12 < 9/12 nên 2/3 < 3/4.",
+         "hint": "Mỗi vạch nhỏ là 1/12.",
+         "key": "num7"
+        },
+        {
+         "prompt": "Đặt các phân số 5/4, 3/4, 3/2 và 7/4 lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 2,
+          "step": 1,
+          "snap": "1/4"
+         },
+         "points": [
+          {
+           "label": "5/4",
+           "value": "5/4"
+          },
+          {
+           "label": "3/4",
+           "value": "3/4"
+          },
+          {
+           "label": "3/2",
+           "value": "3/2"
+          },
+          {
+           "label": "7/4",
+           "value": "7/4"
+          }
+         ],
+         "explanation": "Mỗi vạch là 1/4. 3/4 bé hơn 1; 5/4, 3/2 = 6/4 và 7/4 lớn hơn 1. Thứ tự: 3/4 < 5/4 < 3/2 < 7/4.",
+         "hint": "Đổi 3/2 thành phân số có mẫu 4.",
+         "key": "num8"
+        }
+       ],
+       "credit_from": "choice"
+      },
       {
        "game": "choice",
        "title": "So sánh phân số",
@@ -5873,8 +8041,90 @@
          "explanation": "So sánh với góc vuông để gọi tên góc."
         }
        ]
+      },
+      {
+       "game": "geometry",
+       "title": "Xưởng đo góc",
+       "credit_from": "choice",
+       "tasks": [
+        {
+         "key": "nhon",
+         "kind": "angle",
+         "prompt": "Xoay cạnh để tạo một góc nhọn.",
+         "target": {
+          "class": "acute"
+         },
+         "readout": true,
+         "explanation": "Góc nhọn bé hơn góc vuông (bé hơn 90°).",
+         "hint": "Góc nhọn hẹp hơn góc của ê ke."
+        },
+        {
+         "key": "vuong",
+         "kind": "angle",
+         "prompt": "Xoay cạnh để tạo một góc vuông.",
+         "target": {
+          "class": "right"
+         },
+         "readout": true,
+         "explanation": "Góc vuông bằng 90°, như góc của ê ke hay góc quyển vở."
+        },
+        {
+         "key": "tu",
+         "kind": "angle",
+         "prompt": "Xoay cạnh để tạo một góc tù.",
+         "target": {
+          "class": "obtuse"
+         },
+         "readout": true,
+         "explanation": "Góc tù lớn hơn góc vuông và bé hơn góc bẹt (từ trên 90° đến dưới 180°)."
+        },
+        {
+         "key": "bet",
+         "kind": "angle",
+         "prompt": "Xoay cạnh để tạo một góc bẹt.",
+         "target": {
+          "class": "straight"
+         },
+         "readout": true,
+         "explanation": "Góc bẹt bằng 180°: hai cạnh nằm trên một đường thẳng."
+        },
+        {
+         "key": "do_120",
+         "kind": "angle",
+         "prompt": "Dùng thước đo góc, tạo góc 120°.",
+         "target": {
+          "degrees": 120
+         },
+         "readout": false,
+         "explanation": "Đặt tâm thước vào đỉnh, cạnh thứ nhất trùng vạch 0°, đọc vạch 120° ở cạnh thứ hai. 120° là một góc tù.",
+         "hint": "Đọc số trên vạch chia, bắt đầu từ vạch 0°."
+        },
+        {
+         "key": "do_45",
+         "kind": "angle",
+         "prompt": "Dùng thước đo góc, tạo góc 45°.",
+         "target": {
+          "degrees": 45
+         },
+         "readout": false,
+         "explanation": "45° bằng một nửa góc vuông; đó là một góc nhọn.",
+         "hint": "45° nằm giữa 0° và 90°."
+        },
+        {
+         "key": "ba_gio",
+         "kind": "angle",
+         "prompt": "Lúc 3 giờ đúng, kim giờ và kim phút tạo thành góc bao nhiêu độ? Xoay cạnh để tạo góc đó.",
+         "target": {
+          "degrees": 90
+         },
+         "readout": true,
+         "explanation": "Lúc 3 giờ, kim phút chỉ số 12, kim giờ chỉ số 3: hai kim tạo thành góc vuông, 90°.",
+         "context": "Kim phút chỉ số 12, kim giờ chỉ số 3."
+        }
+       ]
       }
-     ]
+     ],
+     "activity": "geometry"
     },
     {
      "key": "toan4.song_song",
@@ -6105,6 +8355,195 @@
      ],
      "games": [
       {
+       "game": "number_line",
+       "title": "Cầu số thập phân",
+       "tasks": [
+        {
+         "prompt": "Đặt các số dưới đây lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 1,
+          "step": "0,5",
+          "snap": "0,1"
+         },
+         "points": [
+          {
+           "label": "3/10",
+           "value": "0,3"
+          },
+          {
+           "label": "0,7",
+           "value": "0,7"
+          },
+          {
+           "label": "Không phẩy chín",
+           "value": "0,9"
+          }
+         ],
+         "explanation": "Mỗi vạch là 0,1 (một phần mười). 3/10 = 0,3 ở vạch thứ 3; 0,7 ở vạch thứ 7; không phẩy chín là 0,9, ở ngay trước 1.",
+         "hint": "Mỗi vạch là một phần mười.",
+         "key": "num1"
+        },
+        {
+         "prompt": "Đặt các số dưới đây lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 1,
+          "step": "0,1",
+          "snap": "0,01"
+         },
+         "points": [
+          {
+           "label": "7/100",
+           "value": "0,07"
+          },
+          {
+           "label": "25/100",
+           "value": "0,25"
+          },
+          {
+           "label": "0,5",
+           "value": "0,5"
+          }
+         ],
+         "explanation": "7/100 = 0,07, chưa tới 0,1. 25/100 = 0,25, ở giữa 0,2 và 0,3. 0,5 = 50/100, ở chính giữa 0 và 1.",
+         "hint": "Mẫu số 100 thì có hai chữ số sau dấu phẩy.",
+         "key": "num2"
+        },
+        {
+         "prompt": "Đặt các số dưới đây lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 5,
+          "step": 1,
+          "snap": "0,1"
+         },
+         "points": [
+          {
+           "label": "45/10",
+           "value": "4,5"
+          },
+          {
+           "label": "1,2",
+           "value": "1,2"
+          },
+          {
+           "label": "Hai phẩy tám",
+           "value": "2,8"
+          },
+          {
+           "label": "0,6",
+           "value": "0,6"
+          }
+         ],
+         "explanation": "Phần nguyên cho biết số nằm sau vạch nào: 0,6 sau 0; 1,2 sau 1; 2,8 sau 2; 45/10 = 4,5 sau 4. Phần thập phân là số vạch nhỏ đếm thêm.",
+         "hint": "Nhìn phần nguyên trước dấu phẩy.",
+         "key": "num3"
+        },
+        {
+         "prompt": "Đặt các số 1,08; 1,8 và 1,5 lên trục số.",
+         "line": {
+          "from": 1,
+          "to": 2,
+          "step": "0,1",
+          "snap": "0,01"
+         },
+         "points": [
+          {
+           "label": "1,08",
+           "value": "1,08"
+          },
+          {
+           "label": "1,8",
+           "value": "1,8"
+          },
+          {
+           "label": "1,5",
+           "value": "1,5"
+          }
+         ],
+         "explanation": "Trong 1,08, chữ số 0 ở hàng phần mười, 8 ở hàng phần trăm nên 1,08 chưa tới 1,1. Trong 1,8, chữ số 8 ở hàng phần mười nên 1,8 gần 2.",
+         "hint": "Chữ số đầu tiên sau dấu phẩy là hàng phần mười.",
+         "key": "num4"
+        },
+        {
+         "prompt": "Đặt hai số dưới đây lên trục số.",
+         "line": {
+          "from": 2,
+          "to": 3,
+          "step": "0,1",
+          "snap": "0,01"
+         },
+         "points": [
+          {
+           "label": "2 đơn vị và 5 phần trăm",
+           "value": "2,05"
+          },
+          {
+           "label": "2 đơn vị và 5 phần mười",
+           "value": "2,5"
+          }
+         ],
+         "explanation": "2 đơn vị và 5 phần trăm viết là 2,05 (hàng phần mười là 0); 2 đơn vị và 5 phần mười viết là 2,5.",
+         "hint": "Viết từng số ra trước, hàng nào không có thì viết 0.",
+         "key": "num5"
+        },
+        {
+         "prompt": "Đặt các số dưới đây lên trục số.",
+         "line": {
+          "from": 0,
+          "to": "0,01",
+          "step": "0,005",
+          "snap": "0,001"
+         },
+         "points": [
+          {
+           "label": "9/1000",
+           "value": "0,009"
+          },
+          {
+           "label": "6/1000",
+           "value": "0,006"
+          },
+          {
+           "label": "0,002",
+           "value": "0,002"
+          }
+         ],
+         "explanation": "Mỗi vạch là 0,001 (một phần nghìn). 9/1000 = 0,009; 6/1000 = 0,006: mẫu 1000 có ba chữ số 0 nên phần thập phân có ba chữ số.",
+         "hint": "Mỗi vạch là một phần nghìn.",
+         "key": "num6"
+        },
+        {
+         "prompt": "Đọc các số viết bằng chữ rồi đặt chúng lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 1,
+          "step": "0,1",
+          "snap": "0,01"
+         },
+         "points": [
+          {
+           "label": "Không phẩy mười lăm",
+           "value": "0,15"
+          },
+          {
+           "label": "Không phẩy năm",
+           "value": "0,5"
+          },
+          {
+           "label": "Không phẩy không năm",
+           "value": "0,05"
+          }
+         ],
+         "explanation": "Không phẩy mười lăm là 0,15; không phẩy năm là 0,5; không phẩy không năm là 0,05. Thứ tự: 0,05 < 0,15 < 0,5.",
+         "hint": "Viết từng số ra chữ số trước.",
+         "key": "num7"
+        }
+       ],
+       "credit_from": "match"
+      },
+      {
        "game": "match",
        "title": "Ghép số thập phân",
        "tasks": [
@@ -6238,6 +8677,191 @@
       }
      ],
      "games": [
+      {
+       "game": "number_line",
+       "title": "Cầu so sánh số thập phân",
+       "tasks": [
+        {
+         "prompt": "Đặt các số 4,7 và 4,65 lên trục số.",
+         "line": {
+          "from": "4,5",
+          "to": "4,8",
+          "step": "0,1",
+          "snap": "0,01"
+         },
+         "points": [
+          {
+           "label": "4,7",
+           "value": "4,7"
+          },
+          {
+           "label": "4,65",
+           "value": "4,65"
+          }
+         ],
+         "explanation": "Phần nguyên bằng nhau; hàng phần mười 7 > 6 nên 4,7 > 4,65. Số có nhiều chữ số sau dấu phẩy hơn chưa chắc đã lớn hơn.",
+         "hint": "4,7 = 4,70.",
+         "key": "num1"
+        },
+        {
+         "prompt": "Đặt các số 12,09; 12,1 và 12,15 lên trục số.",
+         "line": {
+          "from": 12,
+          "to": "12,2",
+          "step": "0,1",
+          "snap": "0,01"
+         },
+         "points": [
+          {
+           "label": "12,09",
+           "value": "12,09"
+          },
+          {
+           "label": "12,1",
+           "value": "12,1"
+          },
+          {
+           "label": "12,15",
+           "value": "12,15"
+          }
+         ],
+         "explanation": "Hàng phần mười của 12,09 là 0, bé hơn 1 nên 12,09 < 12,1. 12,15 = 12,1 thêm 5 phần trăm nên lớn nhất.",
+         "hint": "Đừng so sánh 09 với 1 như số tự nhiên.",
+         "key": "num2"
+        },
+        {
+         "prompt": "Đặt các số 3,08; 3,8 và 3,18 lên trục số.",
+         "line": {
+          "from": 3,
+          "to": 4,
+          "step": "0,1",
+          "snap": "0,01"
+         },
+         "points": [
+          {
+           "label": "3,08",
+           "value": "3,08"
+          },
+          {
+           "label": "3,8",
+           "value": "3,8"
+          },
+          {
+           "label": "3,18",
+           "value": "3,18"
+          }
+         ],
+         "explanation": "Cùng phần nguyên 3, so sánh hàng phần mười: 0 < 1 < 8. Vậy 3,08 < 3,18 < 3,8.",
+         "hint": "Nhìn chữ số hàng phần mười.",
+         "key": "num3"
+        },
+        {
+         "prompt": "Đặt các số 0,1; 0,09 và 0,25 lên trục số.",
+         "line": {
+          "from": 0,
+          "to": "0,3",
+          "step": "0,1",
+          "snap": "0,01"
+         },
+         "points": [
+          {
+           "label": "0,1",
+           "value": "0,1"
+          },
+          {
+           "label": "0,09",
+           "value": "0,09"
+          },
+          {
+           "label": "0,25",
+           "value": "0,25"
+          }
+         ],
+         "explanation": "0,1 = 0,10. So sánh hàng phần mười: 0 < 1 < 2, nên 0,09 < 0,1 < 0,25.",
+         "hint": "Viết 0,1 thành 0,10.",
+         "key": "num4"
+        },
+        {
+         "prompt": "Đặt các số 0,5; 0,45 và 0,54 lên trục số.",
+         "line": {
+          "from": "0,4",
+          "to": "0,6",
+          "step": "0,1",
+          "snap": "0,01"
+         },
+         "points": [
+          {
+           "label": "0,5",
+           "value": "0,5"
+          },
+          {
+           "label": "0,45",
+           "value": "0,45"
+          },
+          {
+           "label": "0,54",
+           "value": "0,54"
+          }
+         ],
+         "explanation": "0,5 = 0,50. 0,45 có hàng phần mười 4 nên bé nhất; 0,54 = 0,50 thêm 4 phần trăm nên lớn nhất.",
+         "hint": "Thêm chữ số 0 vào cuối 0,5.",
+         "key": "num5"
+        },
+        {
+         "prompt": "Đặt các số 5,87; 5,9 và 5,97 lên trục số.",
+         "line": {
+          "from": "5,8",
+          "to": 6,
+          "step": "0,1",
+          "snap": "0,01"
+         },
+         "points": [
+          {
+           "label": "5,87",
+           "value": "5,87"
+          },
+          {
+           "label": "5,9",
+           "value": "5,9"
+          },
+          {
+           "label": "5,97",
+           "value": "5,97"
+          }
+         ],
+         "explanation": "So sánh hàng phần mười: 8 < 9 nên 5,87 bé nhất. 5,9 = 5,90 < 5,97. Thứ tự: 5,87 < 5,9 < 5,97.",
+         "hint": "5,9 = 5,90.",
+         "key": "num6"
+        },
+        {
+         "prompt": "Đặt các số 2,99; 3,1 và 3,01 lên trục số.",
+         "line": {
+          "from": "2,9",
+          "to": "3,2",
+          "step": "0,1",
+          "snap": "0,01"
+         },
+         "points": [
+          {
+           "label": "2,99",
+           "value": "2,99"
+          },
+          {
+           "label": "3,1",
+           "value": "3,1"
+          },
+          {
+           "label": "3,01",
+           "value": "3,01"
+          }
+         ],
+         "explanation": "So sánh phần nguyên trước: 2 < 3 nên 2,99 bé nhất. 3,01 và 3,1 cùng phần nguyên; hàng phần mười 0 < 1 nên 3,01 < 3,1.",
+         "hint": "So sánh phần nguyên trước.",
+         "key": "num7"
+        }
+       ],
+       "credit_from": "choice"
+      },
       {
        "game": "choice",
        "title": "So sánh số thập phân",
@@ -6408,6 +9032,205 @@
       }
      ],
      "games": [
+      {
+       "game": "number_line",
+       "title": "Cầu làm tròn số thập phân",
+       "tasks": [
+        {
+         "prompt": "Làm tròn 7,6 đến số tự nhiên gần nhất. Đặt kết quả lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 10,
+          "step": 1
+         },
+         "marks": [
+          {
+           "label": "7,6",
+           "value": "7,6"
+          }
+         ],
+         "points": [
+          {
+           "label": "Kết quả làm tròn",
+           "value": 8
+          }
+         ],
+         "explanation": "7,6 nằm giữa 7 và 8. Chữ số hàng phần mười là 6 (từ 5 trở lên) nên làm tròn lên 8.",
+         "hint": "7,6 nằm giữa hai số tự nhiên nào?",
+         "key": "num1"
+        },
+        {
+         "prompt": "Làm tròn hai số 4,38 và 4,62 đến số tự nhiên gần nhất. Đặt hai kết quả lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 10,
+          "step": 1
+         },
+         "marks": [
+          {
+           "label": "4,38",
+           "value": "4,38"
+          },
+          {
+           "label": "4,62",
+           "value": "4,62"
+          }
+         ],
+         "points": [
+          {
+           "label": "4,38 làm tròn",
+           "value": 4
+          },
+          {
+           "label": "4,62 làm tròn",
+           "value": 5
+          }
+         ],
+         "explanation": "Cả hai số nằm giữa 4 và 5. 4,38 có chữ số hàng phần mười 3 nên làm tròn xuống 4; 4,62 có chữ số hàng phần mười 6 nên làm tròn lên 5.",
+         "hint": "Nhìn chữ số hàng phần mười của mỗi số.",
+         "key": "num2"
+        },
+        {
+         "prompt": "Làm tròn 19,5 đến số tự nhiên gần nhất. Đặt kết quả lên trục số.",
+         "line": {
+          "from": 15,
+          "to": 25,
+          "step": 1
+         },
+         "marks": [
+          {
+           "label": "19,5",
+           "value": "19,5"
+          }
+         ],
+         "points": [
+          {
+           "label": "Kết quả làm tròn",
+           "value": 20
+          }
+         ],
+         "explanation": "19,5 nằm đúng giữa 19 và 20. Chữ số hàng phần mười là 5 thì quy ước làm tròn lên: 20.",
+         "hint": "Chữ số 5 thì làm tròn lên hay xuống?",
+         "key": "num3"
+        },
+        {
+         "prompt": "Làm tròn 12,34 đến hàng phần mười. Đặt kết quả lên trục số.",
+         "line": {
+          "from": 12,
+          "to": 13,
+          "step": "0,1"
+         },
+         "marks": [
+          {
+           "label": "12,34",
+           "value": "12,34"
+          }
+         ],
+         "points": [
+          {
+           "label": "Kết quả làm tròn",
+           "value": "12,3"
+          }
+         ],
+         "explanation": "12,34 nằm giữa 12,3 và 12,4. Chữ số hàng phần trăm là 4 (bé hơn 5) nên làm tròn xuống 12,3.",
+         "hint": "Nhìn chữ số hàng phần trăm.",
+         "key": "num4"
+        },
+        {
+         "prompt": "Làm tròn 0,85 đến hàng phần mười. Đặt kết quả lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 1,
+          "step": "0,1"
+         },
+         "marks": [
+          {
+           "label": "0,85",
+           "value": "0,85"
+          }
+         ],
+         "points": [
+          {
+           "label": "Kết quả làm tròn",
+           "value": "0,9"
+          }
+         ],
+         "explanation": "0,85 nằm đúng giữa 0,8 và 0,9. Chữ số hàng phần trăm là 5 thì làm tròn lên: 0,9.",
+         "hint": "0,85 nằm giữa hai vạch nào?",
+         "key": "num5"
+        },
+        {
+         "prompt": "Làm tròn 2,97 đến hàng phần mười. Đặt kết quả lên trục số.",
+         "line": {
+          "from": "2,5",
+          "to": "3,5",
+          "step": "0,1"
+         },
+         "marks": [
+          {
+           "label": "2,97",
+           "value": "2,97"
+          }
+         ],
+         "points": [
+          {
+           "label": "Kết quả làm tròn",
+           "value": 3
+          }
+         ],
+         "explanation": "2,97 nằm giữa 2,9 và 3,0. Chữ số hàng phần trăm là 7 nên làm tròn lên: 2,9 thêm 0,1 được 3,0, tức là 3.",
+         "hint": "Phần mười liền sau 2,9 là bao nhiêu?",
+         "key": "num6"
+        },
+        {
+         "prompt": "Làm tròn 5,456 đến hàng phần trăm. Đặt kết quả lên trục số.",
+         "line": {
+          "from": "5,4",
+          "to": "5,5",
+          "step": "0,01"
+         },
+         "marks": [
+          {
+           "label": "5,456",
+           "value": "5,456"
+          }
+         ],
+         "points": [
+          {
+           "label": "Kết quả làm tròn",
+           "value": "5,46"
+          }
+         ],
+         "explanation": "5,456 nằm giữa 5,45 và 5,46. Chữ số hàng phần nghìn là 6 (từ 5 trở lên) nên làm tròn lên 5,46.",
+         "hint": "Nhìn chữ số hàng phần nghìn.",
+         "key": "num7"
+        },
+        {
+         "prompt": "Làm tròn 3,1415 đến hàng phần trăm. Đặt kết quả lên trục số.",
+         "line": {
+          "from": "3,1",
+          "to": "3,2",
+          "step": "0,01"
+         },
+         "marks": [
+          {
+           "label": "3,1415",
+           "value": "3,1415"
+          }
+         ],
+         "points": [
+          {
+           "label": "Kết quả làm tròn",
+           "value": "3,14"
+          }
+         ],
+         "explanation": "Chỉ nhìn chữ số hàng phần nghìn: 1 bé hơn 5 nên giữ nguyên hàng phần trăm và bỏ các chữ số sau nó, được 3,14.",
+         "hint": "Chỉ nhìn chữ số ngay sau hàng phần trăm.",
+         "key": "num8"
+        }
+       ],
+       "credit_from": "choice"
+      },
       {
        "game": "choice",
        "title": "Làm tròn số thập phân",
@@ -6726,7 +9549,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "arithmetic"
     },
     {
      "key": "toan5.nhan_chia_10",
@@ -7035,7 +9859,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "arithmetic"
     }
    ]
   },
@@ -7082,6 +9907,233 @@
       }
      ],
      "games": [
+      {
+       "game": "step_solver",
+       "title": "Tổng, hiệu và tỉ số",
+       "tasks": [
+        {
+         "problem": "Hai thùng có tất cả 96 lít nước mắm. Số nước mắm ở thùng nhỏ bằng 3/5 số nước mắm ở thùng to. Mỗi thùng có bao nhiêu lít?",
+         "numbers": [
+          96,
+          3,
+          5
+         ],
+         "steps": [
+          {
+           "ask": "Tổng số phần bằng nhau là bao nhiêu?",
+           "expr": "3 + 5",
+           "result": 8,
+           "unit": "phần"
+          },
+          {
+           "ask": "Giá trị một phần là bao nhiêu lít?",
+           "expr": "96 : r1",
+           "result": 12,
+           "unit": "lít"
+          },
+          {
+           "ask": "Thùng nhỏ có bao nhiêu lít?",
+           "expr": "r2 × 3",
+           "result": 36,
+           "unit": "lít"
+          },
+          {
+           "ask": "Thùng to có bao nhiêu lít?",
+           "expr": "r2 × 5",
+           "result": 60,
+           "unit": "lít",
+           "accepted": [
+            "96 - r3"
+           ]
+          }
+         ],
+         "explanation": "Thùng nhỏ 3 phần, thùng to 5 phần, tổng 8 phần; một phần 96 : 8 = 12 lít. Thùng nhỏ 36 lít, thùng to 60 lít.",
+         "hint": "Vẽ sơ đồ: thùng nhỏ 3 phần, thùng to 5 phần.",
+         "key": "ste1"
+        },
+        {
+         "problem": "Mẹ hơn con 27 tuổi. Tuổi con bằng 1/4 tuổi mẹ. Tính tuổi của mỗi người.",
+         "numbers": [
+          27,
+          1,
+          4
+         ],
+         "steps": [
+          {
+           "ask": "Hiệu số phần bằng nhau là bao nhiêu?",
+           "expr": "4 - 1",
+           "result": 3,
+           "unit": "phần"
+          },
+          {
+           "ask": "Con bao nhiêu tuổi (giá trị một phần)?",
+           "expr": "27 : r1",
+           "result": 9,
+           "unit": "tuổi"
+          },
+          {
+           "ask": "Mẹ bao nhiêu tuổi?",
+           "expr": "r2 × 4",
+           "result": 36,
+           "unit": "tuổi",
+           "accepted": [
+            "r2 + 27"
+           ]
+          }
+         ],
+         "explanation": "Con 1 phần, mẹ 4 phần, mẹ hơn con 3 phần ứng với 27 tuổi: một phần 27 : 3 = 9. Con 9 tuổi, mẹ 36 tuổi.",
+         "key": "ste2"
+        },
+        {
+         "problem": "Một mảnh đất hình chữ nhật có chiều dài hơn chiều rộng 18 m. Chiều rộng bằng 2/5 chiều dài. Tính chiều dài và chiều rộng.",
+         "numbers": [
+          18,
+          2,
+          5
+         ],
+         "steps": [
+          {
+           "ask": "Hiệu số phần bằng nhau là bao nhiêu?",
+           "expr": "5 - 2",
+           "result": 3,
+           "unit": "phần"
+          },
+          {
+           "ask": "Giá trị một phần là bao nhiêu mét?",
+           "expr": "18 : r1",
+           "result": 6,
+           "unit": "m"
+          },
+          {
+           "ask": "Chiều dài là bao nhiêu mét?",
+           "expr": "r2 × 5",
+           "result": 30,
+           "unit": "m"
+          },
+          {
+           "ask": "Chiều rộng là bao nhiêu mét?",
+           "expr": "r2 × 2",
+           "result": 12,
+           "unit": "m",
+           "accepted": [
+            "r3 - 18"
+           ]
+          }
+         ],
+         "explanation": "Chiều dài 5 phần, chiều rộng 2 phần, hơn nhau 3 phần ứng với 18 m: một phần 6 m. Dài 30 m, rộng 12 m.",
+         "key": "ste3"
+        },
+        {
+         "problem": "Hai chị em có 150 000 đồng. Số tiền của em bằng 2/3 số tiền của chị. Mỗi người có bao nhiêu tiền?",
+         "numbers": [
+          150000,
+          2,
+          3
+         ],
+         "steps": [
+          {
+           "ask": "Tổng số phần bằng nhau là bao nhiêu?",
+           "expr": "2 + 3",
+           "result": 5,
+           "unit": "phần"
+          },
+          {
+           "ask": "Giá trị một phần là bao nhiêu đồng?",
+           "expr": "150000 : r1",
+           "result": 30000,
+           "unit": "đồng"
+          },
+          {
+           "ask": "Chị có bao nhiêu tiền?",
+           "expr": "r2 × 3",
+           "result": 90000,
+           "unit": "đồng"
+          },
+          {
+           "ask": "Em có bao nhiêu tiền?",
+           "expr": "r2 × 2",
+           "result": 60000,
+           "unit": "đồng",
+           "accepted": [
+            "150000 - r3"
+           ]
+          }
+         ],
+         "explanation": "Em 2 phần, chị 3 phần, tổng 5 phần; một phần 150 000 : 5 = 30 000 đồng. Chị 90 000 đồng, em 60 000 đồng.",
+         "key": "ste4"
+        },
+        {
+         "problem": "Ngăn trên có ít hơn ngăn dưới 24 quyển sách. Số sách ngăn trên bằng 5/8 số sách ngăn dưới. Mỗi ngăn có bao nhiêu quyển sách?",
+         "numbers": [
+          24,
+          5,
+          8
+         ],
+         "steps": [
+          {
+           "ask": "Hiệu số phần bằng nhau là bao nhiêu?",
+           "expr": "8 - 5",
+           "result": 3,
+           "unit": "phần"
+          },
+          {
+           "ask": "Giá trị một phần là bao nhiêu quyển?",
+           "expr": "24 : r1",
+           "result": 8,
+           "unit": "quyển"
+          },
+          {
+           "ask": "Ngăn trên có bao nhiêu quyển sách?",
+           "expr": "r2 × 5",
+           "result": 40,
+           "unit": "quyển"
+          },
+          {
+           "ask": "Ngăn dưới có bao nhiêu quyển sách?",
+           "expr": "r3 + 24",
+           "result": 64,
+           "unit": "quyển",
+           "accepted": [
+            "r2 × 8"
+           ]
+          }
+         ],
+         "explanation": "Ngăn trên 5 phần, ngăn dưới 8 phần, kém nhau 3 phần ứng với 24 quyển; một phần 8 quyển. Ngăn trên 40, ngăn dưới 64 quyển.",
+         "key": "ste5"
+        },
+        {
+         "problem": "Thư viện có 630 quyển sách tiếng Việt và tiếng Anh. Số sách tiếng Anh bằng 2/7 số sách tiếng Việt. Thư viện có bao nhiêu quyển sách tiếng Anh?",
+         "numbers": [
+          630,
+          2,
+          7
+         ],
+         "steps": [
+          {
+           "ask": "Tổng số phần bằng nhau là bao nhiêu?",
+           "expr": "2 + 7",
+           "result": 9,
+           "unit": "phần"
+          },
+          {
+           "ask": "Giá trị một phần là bao nhiêu quyển?",
+           "expr": "630 : r1",
+           "result": 70,
+           "unit": "quyển"
+          },
+          {
+           "ask": "Thư viện có bao nhiêu quyển sách tiếng Anh?",
+           "expr": "r2 × 2",
+           "result": 140,
+           "unit": "quyển"
+          }
+         ],
+         "explanation": "Sách tiếng Anh 2 phần, tiếng Việt 7 phần, tổng 9 phần; một phần 630 : 9 = 70. Sách tiếng Anh 70 × 2 = 140 quyển.",
+         "key": "ste6"
+        }
+       ],
+       "credit_from": "choice"
+      },
       {
        "game": "choice",
        "title": "Tổng, hiệu và tỉ số",
@@ -7253,6 +10305,208 @@
       }
      ],
      "games": [
+      {
+       "game": "step_solver",
+       "title": "Tính phần trăm từng bước",
+       "tasks": [
+        {
+         "problem": "Câu lạc bộ cờ vua có 25 thành viên, trong đó có 17 bạn nữ. Coi số thành viên của câu lạc bộ là 100%. Số bạn nữ chiếm bao nhiêu phần trăm?",
+         "numbers": [
+          25,
+          17,
+          100
+         ],
+         "steps": [
+          {
+           "ask": "Số bạn nữ bằng bao nhiêu phần số thành viên (viết dạng số thập phân)?",
+           "expr": "17 : 25",
+           "result": "0,68"
+          },
+          {
+           "ask": "Số bạn nữ chiếm bao nhiêu phần trăm?",
+           "expr": "r1 × 100",
+           "result": 68,
+           "unit": "%"
+          }
+         ],
+         "explanation": "Tỉ số phần trăm: lấy 17 : 25 = 0,68, nhân với 100 rồi viết thêm %: 68%.",
+         "key": "ste1"
+        },
+        {
+         "problem": "Cửa hàng nhập về 250 kg gạo và đã bán được 40% số gạo đó. Coi số gạo nhập về là 100%. Cửa hàng còn lại bao nhiêu ki-lô-gam gạo?",
+         "numbers": [
+          250,
+          40,
+          100
+         ],
+         "steps": [
+          {
+           "ask": "1% số gạo là bao nhiêu ki-lô-gam?",
+           "expr": "250 : 100",
+           "result": "2,5",
+           "unit": "kg"
+          },
+          {
+           "ask": "Cửa hàng đã bán bao nhiêu ki-lô-gam gạo?",
+           "expr": "r1 × 40",
+           "result": 100,
+           "unit": "kg"
+          },
+          {
+           "ask": "Cửa hàng còn lại bao nhiêu ki-lô-gam gạo?",
+           "expr": "250 - r2",
+           "result": 150,
+           "unit": "kg"
+          }
+         ],
+         "explanation": "40% của 250 kg là 250 : 100 × 40 = 100 kg; còn lại 250 − 100 = 150 kg.",
+         "key": "ste2"
+        },
+        {
+         "problem": "Chiếc ba lô giá 320 000 đồng, nay được giảm giá 15%. Coi giá ban đầu là 100%. Giá chiếc ba lô sau khi giảm là bao nhiêu?",
+         "numbers": [
+          320000,
+          15,
+          100
+         ],
+         "steps": [
+          {
+           "ask": "1% giá ban đầu là bao nhiêu đồng?",
+           "expr": "320000 : 100",
+           "result": 3200,
+           "unit": "đồng"
+          },
+          {
+           "ask": "Chiếc ba lô được giảm bao nhiêu đồng?",
+           "expr": "r1 × 15",
+           "result": 48000,
+           "unit": "đồng"
+          },
+          {
+           "ask": "Giá chiếc ba lô sau khi giảm là bao nhiêu?",
+           "expr": "320000 - r2",
+           "result": 272000,
+           "unit": "đồng"
+          }
+         ],
+         "explanation": "Số tiền giảm là 15% của 320 000: 3 200 × 15 = 48 000 đồng; giá mới 320 000 − 48 000 = 272 000 đồng.",
+         "key": "ste3"
+        },
+        {
+         "problem": "Bác Hùng gửi tiết kiệm 5 000 000 đồng với lãi suất 6% một năm. Coi số tiền gửi là 100%. Sau một năm bác nhận về cả tiền gửi lẫn tiền lãi là bao nhiêu?",
+         "numbers": [
+          5000000,
+          6,
+          100
+         ],
+         "steps": [
+          {
+           "ask": "1% số tiền gửi là bao nhiêu đồng?",
+           "expr": "5000000 : 100",
+           "result": 50000,
+           "unit": "đồng"
+          },
+          {
+           "ask": "Tiền lãi sau một năm là bao nhiêu?",
+           "expr": "r1 × 6",
+           "result": 300000,
+           "unit": "đồng"
+          },
+          {
+           "ask": "Bác nhận về tất cả bao nhiêu tiền?",
+           "expr": "5000000 + r2",
+           "result": 5300000,
+           "unit": "đồng"
+          }
+         ],
+         "explanation": "Tiền lãi = 6% của 5 000 000 = 300 000 đồng; cả gốc lẫn lãi 5 000 000 + 300 000 = 5 300 000 đồng.",
+         "key": "ste4"
+        },
+        {
+         "problem": "Vườn có 80 cây ăn quả, trong đó có 28 cây xoài. Coi số cây cả vườn là 100%. Số cây xoài chiếm bao nhiêu phần trăm? Các cây còn lại chiếm bao nhiêu phần trăm?",
+         "numbers": [
+          80,
+          28,
+          100
+         ],
+         "steps": [
+          {
+           "ask": "Số cây xoài bằng bao nhiêu phần số cây cả vườn (số thập phân)?",
+           "expr": "28 : 80",
+           "result": "0,35"
+          },
+          {
+           "ask": "Số cây xoài chiếm bao nhiêu phần trăm?",
+           "expr": "r1 × 100",
+           "result": 35,
+           "unit": "%"
+          },
+          {
+           "ask": "Các cây còn lại chiếm bao nhiêu phần trăm?",
+           "expr": "100 - r2",
+           "result": 65,
+           "unit": "%"
+          }
+         ],
+         "explanation": "28 : 80 = 0,35 = 35%. Cả vườn là 100% nên các cây khác chiếm 100% − 35% = 65%.",
+         "key": "ste5"
+        },
+        {
+         "problem": "Một trường có 600 học sinh, trong đó 45% là học sinh nữ. Coi số học sinh cả trường là 100%. Trường có bao nhiêu học sinh nam?",
+         "numbers": [
+          600,
+          45,
+          100
+         ],
+         "steps": [
+          {
+           "ask": "1% số học sinh là bao nhiêu em?",
+           "expr": "600 : 100",
+           "result": 6,
+           "unit": "học sinh"
+          },
+          {
+           "ask": "Trường có bao nhiêu học sinh nữ?",
+           "expr": "r1 × 45",
+           "result": 270,
+           "unit": "học sinh"
+          },
+          {
+           "ask": "Trường có bao nhiêu học sinh nam?",
+           "expr": "600 - r2",
+           "result": 330,
+           "unit": "học sinh"
+          }
+         ],
+         "explanation": "45% của 600 là 6 × 45 = 270 học sinh nữ; số học sinh nam 600 − 270 = 330.",
+         "key": "ste6"
+        },
+        {
+         "problem": "Theo kế hoạch, đội thanh niên phải trồng 400 cây. Đến nay đội đã trồng được 340 cây. Coi kế hoạch là 100%. Đội đã thực hiện được bao nhiêu phần trăm kế hoạch?",
+         "numbers": [
+          400,
+          340,
+          100
+         ],
+         "steps": [
+          {
+           "ask": "Số cây đã trồng bằng bao nhiêu phần kế hoạch (số thập phân)?",
+           "expr": "340 : 400",
+           "result": "0,85"
+          },
+          {
+           "ask": "Đội đã thực hiện được bao nhiêu phần trăm kế hoạch?",
+           "expr": "r1 × 100",
+           "result": 85,
+           "unit": "%"
+          }
+         ],
+         "explanation": "340 : 400 = 0,85; nhân với 100 được 85%. Đội còn phải trồng thêm 15% kế hoạch.",
+         "key": "ste7"
+        }
+       ],
+       "credit_from": "choice"
+      },
       {
        "game": "choice",
        "title": "Tỉ số phần trăm",
@@ -8108,7 +11362,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "symbolic"
     },
     {
      "key": "toan6.thu_tu_phep_tinh",
@@ -8218,7 +11473,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "arithmetic"
     },
     {
      "key": "toan6.dau_hieu_chia_het",
@@ -8411,7 +11667,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "divisibility"
     },
     {
      "key": "toan6.so_nguyen_to",
@@ -8589,7 +11846,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "divisibility"
     }
    ]
   },
@@ -8906,7 +12164,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "arithmetic"
     },
     {
      "key": "toan6.gia_tri_phan_so",
@@ -8943,6 +12202,200 @@
       }
      ],
      "games": [
+      {
+       "game": "number_line",
+       "title": "Cầu phân số của một số",
+       "tasks": [
+        {
+         "prompt": "Đoạn từ 0 đến 45 được chia thành 3 phần bằng nhau. Đặt 1/3 của 45 và 2/3 của 45 lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 45,
+          "step": 15,
+          "snap": 5,
+          "labels": "ends"
+         },
+         "points": [
+          {
+           "label": "1/3 của 45",
+           "value": 15
+          },
+          {
+           "label": "2/3 của 45",
+           "value": 30
+          }
+         ],
+         "explanation": "Mỗi phần là 45 : 3 = 15. 1/3 của 45 là 15; 2/3 của 45 là hai phần: 45 · 2/3 = 30.",
+         "hint": "Các vạch dài chia đoạn thành 3 phần bằng nhau.",
+         "key": "num1"
+        },
+        {
+         "prompt": "Lớp 6A có 40 học sinh, 3/8 số học sinh thích bóng đá. Đặt số bạn thích bóng đá và số bạn không thích bóng đá lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 40,
+          "step": 5,
+          "labels": "ends"
+         },
+         "points": [
+          {
+           "label": "Thích bóng đá",
+           "value": 15
+          },
+          {
+           "label": "Không thích bóng đá",
+           "value": 25
+          }
+         ],
+         "explanation": "Số bạn thích bóng đá: 40 · 3/8 = 15. Số bạn không thích: 40 − 15 = 25 (cũng bằng 5/8 của 40).",
+         "hint": "Đoạn 0–40 chia thành 8 phần, mỗi phần là 5.",
+         "key": "num2"
+        },
+        {
+         "prompt": "Đặt 25% của 80 và 75% của 80 lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 80,
+          "step": 20,
+          "snap": 10,
+          "labels": "ends"
+         },
+         "points": [
+          {
+           "label": "25% của 80",
+           "value": 20
+          },
+          {
+           "label": "75% của 80",
+           "value": 60
+          }
+         ],
+         "explanation": "25% = 25/100 = 1/4, nên 25% của 80 là 80 · 1/4 = 20. 75% = 3/4, nên 75% của 80 là 80 · 3/4 = 60.",
+         "hint": "25% bằng phân số nào?",
+         "key": "num3"
+        },
+        {
+         "prompt": "Đặt 40% của 50 và 70% của 50 lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 50,
+          "step": 5,
+          "labels": "ends"
+         },
+         "points": [
+          {
+           "label": "40% của 50",
+           "value": 20
+          },
+          {
+           "label": "70% của 50",
+           "value": 35
+          }
+         ],
+         "explanation": "Mỗi vạch là 10% của 50, tức là 5. 40% của 50 = 50 · 40/100 = 20; 70% của 50 = 50 · 70/100 = 35.",
+         "hint": "Đoạn 0–50 được chia thành 10 phần bằng nhau.",
+         "key": "num4"
+        },
+        {
+         "prompt": "Quyển sách dày 120 trang. Ngày đầu Mai đọc 1/4 số trang. Đặt số trang đã đọc và số trang còn phải đọc lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 120,
+          "step": 30,
+          "snap": 10,
+          "labels": "ends"
+         },
+         "points": [
+          {
+           "label": "Số trang đã đọc",
+           "value": 30
+          },
+          {
+           "label": "Số trang còn phải đọc",
+           "value": 90
+          }
+         ],
+         "explanation": "Đã đọc 120 · 1/4 = 30 trang. Còn phải đọc 120 − 30 = 90 trang, tức là 3/4 quyển sách.",
+         "hint": "Các vạch dài chia quyển sách thành 4 phần bằng nhau.",
+         "key": "num5"
+        },
+        {
+         "prompt": "3/5 của một số bằng 24 (đã đánh dấu trên trục số). Đặt số đó lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 48,
+          "step": 8,
+          "snap": 4,
+          "labels": "ends"
+         },
+         "marks": [
+          {
+           "label": "3/5 số đó = 24",
+           "value": 24
+          }
+         ],
+         "points": [
+          {
+           "label": "Số cần tìm",
+           "value": 40
+          }
+         ],
+         "explanation": "24 ứng với 3 phần nên mỗi phần là 24 : 3 = 8; số đó gồm 5 phần: 24 : 3/5 = 24 · 5/3 = 40.",
+         "hint": "24 ứng với mấy phần? Mỗi phần bằng bao nhiêu?",
+         "key": "num6"
+        },
+        {
+         "prompt": "2/7 của một số bằng 10 (đã đánh dấu trên trục số). Đặt số đó lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 40,
+          "step": 5,
+          "labels": "ends"
+         },
+         "marks": [
+          {
+           "label": "2/7 số đó = 10",
+           "value": 10
+          }
+         ],
+         "points": [
+          {
+           "label": "Số cần tìm",
+           "value": 35
+          }
+         ],
+         "explanation": "10 ứng với 2 phần nên mỗi phần là 10 : 2 = 5; số đó gồm 7 phần: 10 : 2/7 = 10 · 7/2 = 35.",
+         "hint": "Số cần tìm gồm 7 phần như thế.",
+         "key": "num7"
+        },
+        {
+         "prompt": "Một số giảm đi 1/3 của nó thì còn 18 (đã đánh dấu). Đặt số ban đầu lên trục số.",
+         "line": {
+          "from": 0,
+          "to": 36,
+          "step": 9,
+          "snap": 3,
+          "labels": "ends"
+         },
+         "marks": [
+          {
+           "label": "Còn lại 18",
+           "value": 18
+          }
+         ],
+         "points": [
+          {
+           "label": "Số ban đầu",
+           "value": 27
+          }
+         ],
+         "explanation": "Giảm đi 1/3 thì còn 2/3 số đó. 2 phần ứng với 18 nên mỗi phần là 9; số ban đầu gồm 3 phần: 18 : 2/3 = 27.",
+         "hint": "Giảm đi 1/3 thì còn lại mấy phần ba?",
+         "key": "num8"
+        }
+       ],
+       "credit_from": "choice"
+      },
       {
        "game": "choice",
        "title": "Phân số của một số",
@@ -9613,7 +13066,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "symbolic"
     },
     {
      "key": "toan7.so_thuc",
@@ -9667,6 +13121,205 @@
       }
      ],
      "games": [
+      {
+       "game": "step_solver",
+       "title": "Bài toán tỉ lệ thuận, tỉ lệ nghịch",
+       "tasks": [
+        {
+         "problem": "Mua 4 kg táo hết 120 000 đồng. Hỏi mua 7 kg táo cùng loại hết bao nhiêu tiền?",
+         "numbers": [
+          4,
+          120000,
+          7
+         ],
+         "steps": [
+          {
+           "ask": "Giá 1 kg táo (hệ số tỉ lệ) là bao nhiêu đồng?",
+           "expr": "120000 : 4",
+           "result": 30000,
+           "unit": "đồng"
+          },
+          {
+           "ask": "Mua 7 kg táo hết bao nhiêu tiền?",
+           "expr": "r1 × 7",
+           "result": 210000,
+           "unit": "đồng"
+          }
+         ],
+         "explanation": "Số tiền tỉ lệ thuận với số ki-lô-gam: k = 120 000 : 4 = 30 000, nên 7 kg hết 30 000 × 7 = 210 000 đồng.",
+         "key": "ste1"
+        },
+        {
+         "problem": "Một đội 12 công nhân làm xong một đoạn đường trong 10 ngày. Nếu có 15 công nhân (năng suất như nhau) thì làm xong đoạn đường đó trong bao nhiêu ngày?",
+         "numbers": [
+          12,
+          10,
+          15
+         ],
+         "steps": [
+          {
+           "ask": "Hệ số tỉ lệ (số công nhân × số ngày) là bao nhiêu?",
+           "expr": "12 × 10",
+           "result": 120
+          },
+          {
+           "ask": "15 công nhân làm xong trong bao nhiêu ngày?",
+           "expr": "r1 : 15",
+           "result": 8,
+           "unit": "ngày"
+          }
+         ],
+         "explanation": "Số công nhân và số ngày tỉ lệ nghịch: tích luôn bằng 12 × 10 = 120, nên số ngày là 120 : 15 = 8.",
+         "key": "ste2"
+        },
+        {
+         "problem": "Chia 150 kg gạo cho hai gia đình theo tỉ lệ thuận với số người là 2 và 3. Gia đình có 3 người nhận được bao nhiêu ki-lô-gam gạo?",
+         "numbers": [
+          150,
+          2,
+          3
+         ],
+         "steps": [
+          {
+           "ask": "Tổng số phần là bao nhiêu?",
+           "expr": "2 + 3",
+           "result": 5,
+           "unit": "phần"
+          },
+          {
+           "ask": "Mỗi phần (mỗi người) được bao nhiêu ki-lô-gam?",
+           "expr": "150 : r1",
+           "result": 30,
+           "unit": "kg"
+          },
+          {
+           "ask": "Gia đình có 3 người nhận bao nhiêu ki-lô-gam?",
+           "expr": "r2 × 3",
+           "result": 90,
+           "unit": "kg"
+          }
+         ],
+         "explanation": "Theo dãy tỉ số bằng nhau: x/2 = y/3 = 150/5 = 30, nên y = 30 × 3 = 90 kg (gia đình kia 60 kg).",
+         "key": "ste3"
+        },
+        {
+         "problem": "Ba lớp 7A, 7B, 7C trồng được 120 cây. Số cây của ba lớp tỉ lệ thuận với 3; 4; 5. Lớp 7C trồng được bao nhiêu cây?",
+         "numbers": [
+          120,
+          3,
+          4,
+          5
+         ],
+         "steps": [
+          {
+           "ask": "Lớp 7A và lớp 7B ứng với tổng bao nhiêu phần?",
+           "expr": "3 + 4",
+           "result": 7,
+           "unit": "phần"
+          },
+          {
+           "ask": "Cả ba lớp ứng với bao nhiêu phần?",
+           "expr": "r1 + 5",
+           "result": 12,
+           "unit": "phần"
+          },
+          {
+           "ask": "Mỗi phần ứng với bao nhiêu cây?",
+           "expr": "120 : r2",
+           "result": 10,
+           "unit": "cây"
+          },
+          {
+           "ask": "Lớp 7C trồng được bao nhiêu cây?",
+           "expr": "r3 × 5",
+           "result": 50,
+           "unit": "cây"
+          }
+         ],
+         "explanation": "a/3 = b/4 = c/5 = 120/12 = 10, nên lớp 7C trồng 10 × 5 = 50 cây (7A: 30, 7B: 40).",
+         "key": "ste4"
+        },
+        {
+         "problem": "Một ô tô đi từ A đến B với vận tốc 60 km/h thì hết 3 giờ. Nếu đi với vận tốc 45 km/h thì hết bao nhiêu giờ?",
+         "numbers": [
+          60,
+          3,
+          45
+         ],
+         "steps": [
+          {
+           "ask": "Quãng đường AB (tích vận tốc × thời gian) dài bao nhiêu ki-lô-mét?",
+           "expr": "60 × 3",
+           "result": 180,
+           "unit": "km"
+          },
+          {
+           "ask": "Đi với vận tốc 45 km/h thì hết bao nhiêu giờ?",
+           "expr": "r1 : 45",
+           "result": 4,
+           "unit": "giờ"
+          }
+         ],
+         "explanation": "Trên cùng quãng đường, vận tốc và thời gian tỉ lệ nghịch: tích không đổi bằng 180, nên thời gian là 180 : 45 = 4 giờ.",
+         "key": "ste5"
+        },
+        {
+         "problem": "Khối lượng thanh sắt tỉ lệ thuận với chiều dài của nó. Thanh sắt dài 6 m nặng 45 kg. Thanh sắt cùng loại dài 10 m nặng bao nhiêu ki-lô-gam?",
+         "numbers": [
+          6,
+          45,
+          10
+         ],
+         "steps": [
+          {
+           "ask": "Mỗi mét thanh sắt nặng bao nhiêu ki-lô-gam (hệ số tỉ lệ)?",
+           "expr": "45 : 6",
+           "result": "7,5",
+           "unit": "kg"
+          },
+          {
+           "ask": "Thanh sắt dài 10 m nặng bao nhiêu ki-lô-gam?",
+           "expr": "r1 × 10",
+           "result": 75,
+           "unit": "kg"
+          }
+         ],
+         "explanation": "k = 45 : 6 = 7,5 nên y = 7,5x; với x = 10 thì y = 75 kg.",
+         "key": "ste6"
+        },
+        {
+         "problem": "Tiền thưởng 1 800 000 đồng được chia cho hai tổ theo tỉ lệ thuận với số người của tổ. Tổ Một có 4 người, tổ Hai có 5 người. Tổ Hai nhận được bao nhiêu tiền?",
+         "numbers": [
+          1800000,
+          4,
+          5
+         ],
+         "steps": [
+          {
+           "ask": "Hai tổ có tất cả bao nhiêu người (tổng số phần)?",
+           "expr": "4 + 5",
+           "result": 9,
+           "unit": "người"
+          },
+          {
+           "ask": "Mỗi người được bao nhiêu tiền?",
+           "expr": "1800000 : r1",
+           "result": 200000,
+           "unit": "đồng"
+          },
+          {
+           "ask": "Tổ Hai nhận được bao nhiêu tiền?",
+           "expr": "r2 × 5",
+           "result": 1000000,
+           "unit": "đồng"
+          }
+         ],
+         "explanation": "x/4 = y/5 = 1 800 000/9 = 200 000, nên tổ Hai nhận 200 000 × 5 = 1 000 000 đồng, tổ Một 800 000 đồng.",
+         "key": "ste7"
+        }
+       ],
+       "credit_from": "choice"
+      },
       {
        "game": "choice",
        "title": "Tỉ lệ thuận, tỉ lệ nghịch",
@@ -10014,7 +13667,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "symbolic"
     },
     {
      "key": "toan7.phep_tinh_da_thuc",
@@ -10256,8 +13910,77 @@
          "explanation": "Tính góc thứ ba rồi nhận dạng."
         }
        ]
+      },
+      {
+       "game": "geometry",
+       "title": "Dựng góc còn lại",
+       "credit_from": "choice",
+       "tasks": [
+        {
+         "key": "goc_c",
+         "kind": "angle",
+         "prompt": "Tam giác ABC có góc A = 60°, góc B = 70°. Xoay cạnh để tạo góc C.",
+         "target": {
+          "degrees": 50
+         },
+         "readout": true,
+         "explanation": "C = 180° − 60° − 70° = 50°.",
+         "hint": "Tổng ba góc của một tam giác bằng 180°."
+        },
+        {
+         "key": "vuong_35",
+         "kind": "angle",
+         "prompt": "Tam giác vuông có một góc nhọn bằng 35°. Tạo góc nhọn còn lại.",
+         "target": {
+          "degrees": 55
+         },
+         "readout": true,
+         "explanation": "Hai góc nhọn của tam giác vuông phụ nhau: 90° − 35° = 55°."
+        },
+        {
+         "key": "deu",
+         "kind": "angle",
+         "prompt": "Tạo một góc của tam giác đều.",
+         "target": {
+          "degrees": 60
+         },
+         "readout": true,
+         "explanation": "Ba góc của tam giác đều bằng nhau: 180° : 3 = 60°."
+        },
+        {
+         "key": "can_vuong",
+         "kind": "angle",
+         "prompt": "Tam giác ABC vuông tại A có góc B bằng góc C. Tạo góc B.",
+         "target": {
+          "degrees": 45
+         },
+         "readout": true,
+         "explanation": "B + C = 180° − 90° = 90°, mà B = C nên B = 45°."
+        },
+        {
+         "key": "ti_le",
+         "kind": "angle",
+         "prompt": "Ba góc của một tam giác tỉ lệ với 1; 2; 3. Tạo góc lớn nhất.",
+         "target": {
+          "degrees": 90
+         },
+         "readout": true,
+         "explanation": "Góc nhỏ nhất bằng 180° : (1 + 2 + 3) = 30°; góc lớn nhất bằng 3 × 30° = 90°."
+        },
+        {
+         "key": "tu_100",
+         "kind": "angle",
+         "prompt": "Tam giác MNP có góc M = 100°, góc N = 35°. Tạo góc P.",
+         "target": {
+          "degrees": 45
+         },
+         "readout": true,
+         "explanation": "P = 180° − 100° − 35° = 45°. Tam giác MNP là tam giác tù."
+        }
+       ]
       }
-     ]
+     ],
+     "activity": "geometry"
     },
     {
      "key": "toan7.tam_giac_bang_nhau",
@@ -10481,7 +14204,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "symbolic"
     },
     {
      "key": "toan8.phan_tich_nhan_tu",
@@ -10653,7 +14377,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "symbolic"
     }
    ]
   },
@@ -10716,6 +14441,174 @@
       }
      ],
      "games": [
+      {
+       "game": "step_solver",
+       "title": "Giải phương trình từng bước",
+       "tasks": [
+        {
+         "problem": "Giải phương trình 3x + 7 = 31.",
+         "numbers": [
+          3,
+          7,
+          31
+         ],
+         "steps": [
+          {
+           "ask": "Chuyển 7 sang vế phải: 3x bằng bao nhiêu?",
+           "expr": "31 - 7",
+           "result": 24
+          },
+          {
+           "ask": "Chia hai vế cho 3: x bằng bao nhiêu?",
+           "expr": "r1 : 3",
+           "result": 8
+          }
+         ],
+         "explanation": "3x = 31 − 7 = 24, rồi x = 24 : 3 = 8. Thử lại: 3 · 8 + 7 = 31.",
+         "key": "ste1"
+        },
+        {
+         "problem": "Giải phương trình 5x − 12 = 18.",
+         "numbers": [
+          5,
+          12,
+          18
+         ],
+         "steps": [
+          {
+           "ask": "Chuyển −12 sang vế phải (đổi dấu): 5x bằng bao nhiêu?",
+           "expr": "18 + 12",
+           "result": 30
+          },
+          {
+           "ask": "x bằng bao nhiêu?",
+           "expr": "r1 : 5",
+           "result": 6
+          }
+         ],
+         "explanation": "Chuyển vế −12 thành +12: 5x = 30, chia cho 5: x = 6.",
+         "hint": "Chuyển vế thì đổi dấu hạng tử.",
+         "key": "ste2"
+        },
+        {
+         "problem": "Giải phương trình 4x + 26 = 6.",
+         "numbers": [
+          4,
+          26,
+          6
+         ],
+         "steps": [
+          {
+           "ask": "Chuyển 26 sang vế phải: 4x bằng bao nhiêu?",
+           "expr": "6 - 26",
+           "result": -20
+          },
+          {
+           "ask": "x bằng bao nhiêu?",
+           "expr": "r1 : 4",
+           "result": -5
+          }
+         ],
+         "explanation": "4x = 6 − 26 = −20, nên x = −20 : 4 = −5. Thử lại: 4 · (−5) + 26 = 6.",
+         "key": "ste3"
+        },
+        {
+         "problem": "Giải phương trình (2/3)x − 5 = 9.",
+         "numbers": [
+          "2/3",
+          5,
+          9
+         ],
+         "steps": [
+          {
+           "ask": "Chuyển −5 sang vế phải: (2/3)x bằng bao nhiêu?",
+           "expr": "9 + 5",
+           "result": 14
+          },
+          {
+           "ask": "Chia hai vế cho 2/3: x bằng bao nhiêu?",
+           "expr": "r1 : 2/3",
+           "result": 21
+          }
+         ],
+         "explanation": "(2/3)x = 14, chia cho 2/3 tức là nhân với 3/2: x = 14 · 3/2 = 21.",
+         "key": "ste4"
+        },
+        {
+         "problem": "Mua 3 quyển vở cùng loại và một cây bút giá 8 000 đồng thì hết 35 000 đồng. Gọi giá một quyển vở là x đồng, ta có phương trình 3x + 8 000 = 35 000. Tìm giá một quyển vở.",
+         "numbers": [
+          3,
+          8000,
+          35000
+         ],
+         "steps": [
+          {
+           "ask": "Tiền mua 3 quyển vở (3x) là bao nhiêu đồng?",
+           "expr": "35000 - 8000",
+           "result": 27000,
+           "unit": "đồng"
+          },
+          {
+           "ask": "Giá một quyển vở là bao nhiêu đồng?",
+           "expr": "r1 : 3",
+           "result": 9000,
+           "unit": "đồng"
+          }
+         ],
+         "explanation": "3x = 35 000 − 8 000 = 27 000 nên x = 9 000. Mỗi quyển vở giá 9 000 đồng.",
+         "key": "ste5"
+        },
+        {
+         "problem": "Mảnh vườn hình chữ nhật có chiều dài 24 m và chu vi 80 m. Gọi chiều rộng là x (m), ta có phương trình 2(24 + x) = 80. Tìm chiều rộng.",
+         "numbers": [
+          24,
+          2,
+          80
+         ],
+         "steps": [
+          {
+           "ask": "Chia hai vế cho 2: 24 + x bằng bao nhiêu?",
+           "expr": "80 : 2",
+           "result": 40,
+           "unit": "m"
+          },
+          {
+           "ask": "Chiều rộng x là bao nhiêu mét?",
+           "expr": "r1 - 24",
+           "result": 16,
+           "unit": "m"
+          }
+         ],
+         "explanation": "24 + x = 80 : 2 = 40 (nửa chu vi), nên x = 40 − 24 = 16 m. Thử lại: 2 · (24 + 16) = 80.",
+         "key": "ste6"
+        },
+        {
+         "problem": "Bể đã có sẵn 150 lít nước. Mỗi phút vòi chảy vào bể 25 lít. Sau x phút bể có 900 lít, ta có phương trình 150 + 25x = 900. Tìm x.",
+         "numbers": [
+          150,
+          25,
+          900
+         ],
+         "steps": [
+          {
+           "ask": "Lượng nước vòi đã chảy vào (25x) là bao nhiêu lít?",
+           "expr": "900 - 150",
+           "result": 750,
+           "unit": "lít"
+          },
+          {
+           "ask": "x bằng bao nhiêu phút?",
+           "expr": "r1 : 25",
+           "result": 30,
+           "unit": "phút"
+          }
+         ],
+         "explanation": "25x = 900 − 150 = 750 nên x = 750 : 25 = 30. Sau 30 phút bể có 900 lít.",
+         "key": "ste7"
+        }
+       ],
+       "credit_from": "choice"
+      },
       {
        "game": "choice",
        "title": "Giải phương trình",
@@ -11239,6 +15132,178 @@
      ],
      "games": [
       {
+       "game": "step_solver",
+       "title": "Giải hệ bằng cộng đại số",
+       "tasks": [
+        {
+         "problem": "Vừa gà vừa chó có 36 con và 100 chân. Gọi số gà là x, số chó là y, ta có hệ x + y = 36 và 2x + 4y = 100. Giải hệ bằng phương pháp cộng đại số.",
+         "numbers": [
+          36,
+          100,
+          2,
+          4
+         ],
+         "steps": [
+          {
+           "ask": "Nhân hai vế phương trình thứ nhất với 2: 2x + 2y bằng bao nhiêu?",
+           "expr": "36 × 2",
+           "result": 72
+          },
+          {
+           "ask": "Trừ từng vế: (2x + 4y) − (2x + 2y) = 2y bằng bao nhiêu?",
+           "expr": "100 - r1",
+           "result": 28
+          },
+          {
+           "ask": "Số chó y là bao nhiêu?",
+           "expr": "r2 : 2",
+           "result": 14,
+           "unit": "con"
+          },
+          {
+           "ask": "Số gà x là bao nhiêu?",
+           "expr": "36 - r3",
+           "result": 22,
+           "unit": "con"
+          }
+         ],
+         "explanation": "Nhân để hệ số của x bằng nhau rồi trừ từng vế: 2y = 100 − 72 = 28, y = 14, x = 36 − 14 = 22. Thử lại: 2 · 22 + 4 · 14 = 100.",
+         "key": "ste1"
+        },
+        {
+         "problem": "Mua 2 kg táo và 1 kg cam hết 110 nghìn đồng; mua 1 kg táo và 1 kg cam hết 75 nghìn đồng. Gọi giá 1 kg táo là x, giá 1 kg cam là y (nghìn đồng). Tìm x và y.",
+         "numbers": [
+          110,
+          75
+         ],
+         "steps": [
+          {
+           "ask": "Trừ từng vế hai phương trình: x (giá 1 kg táo) là bao nhiêu?",
+           "expr": "110 - 75",
+           "result": 35,
+           "unit": "nghìn đồng"
+          },
+          {
+           "ask": "Giá 1 kg cam y là bao nhiêu?",
+           "expr": "75 - r1",
+           "result": 40,
+           "unit": "nghìn đồng"
+          }
+         ],
+         "explanation": "(2x + y) − (x + y) = x nên x = 110 − 75 = 35; thế vào x + y = 75 được y = 40.",
+         "key": "ste2"
+        },
+        {
+         "problem": "Giải hệ phương trình x + 2y = 11 và x − 2y = 3 bằng phương pháp cộng đại số.",
+         "numbers": [
+          11,
+          2,
+          3
+         ],
+         "steps": [
+          {
+           "ask": "Cộng từng vế: 2x bằng bao nhiêu?",
+           "expr": "11 + 3",
+           "result": 14
+          },
+          {
+           "ask": "x bằng bao nhiêu?",
+           "expr": "r1 : 2",
+           "result": 7
+          },
+          {
+           "ask": "Thế vào phương trình thứ nhất: 2y bằng bao nhiêu?",
+           "expr": "11 - r2",
+           "result": 4,
+           "accepted": [
+            "r2 - 3"
+           ]
+          },
+          {
+           "ask": "y bằng bao nhiêu?",
+           "expr": "r3 : 2",
+           "result": 2
+          }
+         ],
+         "explanation": "Cộng từng vế làm mất y: 2x = 14, x = 7; thế lại: 2y = 11 − 7 = 4, y = 2. Nghiệm (7; 2).",
+         "key": "ste3"
+        },
+        {
+         "problem": "Xe lớn chở 3 chuyến và xe nhỏ chở 2 chuyến được 41 tấn hàng; xe lớn chở 1 chuyến và xe nhỏ chở 2 chuyến được 19 tấn. Gọi x, y là số tấn mỗi chuyến của xe lớn, xe nhỏ: 3x + 2y = 41 và x + 2y = 19.",
+         "numbers": [
+          41,
+          19,
+          2
+         ],
+         "steps": [
+          {
+           "ask": "Trừ từng vế: 2x bằng bao nhiêu?",
+           "expr": "41 - 19",
+           "result": 22
+          },
+          {
+           "ask": "Mỗi chuyến xe lớn chở bao nhiêu tấn?",
+           "expr": "r1 : 2",
+           "result": 11,
+           "unit": "tấn"
+          },
+          {
+           "ask": "Thế vào x + 2y = 19: 2y bằng bao nhiêu?",
+           "expr": "19 - r2",
+           "result": 8
+          },
+          {
+           "ask": "Mỗi chuyến xe nhỏ chở bao nhiêu tấn?",
+           "expr": "r3 : 2",
+           "result": 4,
+           "unit": "tấn"
+          }
+         ],
+         "explanation": "Trừ từng vế làm mất y: 2x = 22, x = 11; rồi 2y = 19 − 11 = 8, y = 4. Thử lại: 3 · 11 + 2 · 4 = 41.",
+         "key": "ste4"
+        },
+        {
+         "problem": "Hai lớp 9A và 9B có tất cả 80 học sinh. Nếu chuyển 5 bạn từ lớp 9A sang lớp 9B thì số học sinh 2 lớp bằng nhau. Gọi số học sinh lớp 9A là x, lớp 9B là y.",
+         "numbers": [
+          80,
+          5,
+          2
+         ],
+         "steps": [
+          {
+           "ask": "Lớp 9A hơn lớp 9B bao nhiêu bạn (x − y)?",
+           "expr": "5 + 5",
+           "result": 10,
+           "unit": "bạn"
+          },
+          {
+           "ask": "Cộng từng vế x + y = 80 và x − y: 2x bằng bao nhiêu?",
+           "expr": "80 + r1",
+           "result": 90
+          },
+          {
+           "ask": "Lớp 9A có bao nhiêu học sinh?",
+           "expr": "r2 : 2",
+           "result": 45,
+           "unit": "học sinh"
+          },
+          {
+           "ask": "Lớp 9B có bao nhiêu học sinh?",
+           "expr": "80 - r3",
+           "result": 35,
+           "unit": "học sinh",
+           "accepted": [
+            "r3 - r1"
+           ]
+          }
+         ],
+         "explanation": "x − 5 = y + 5 nên x − y = 10; cộng với x + y = 80 được 2x = 90, x = 45, y = 35. Thử lại: 45 − 5 = 35 + 5.",
+         "key": "ste5"
+        }
+       ],
+       "credit_from": "choice"
+      },
+      {
        "game": "choice",
        "title": "Giải hệ phương trình",
        "style": "quiz",
@@ -11647,7 +15712,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "symbolic"
     },
     {
      "key": "toan9.can_ba",
@@ -11840,7 +15906,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "symbolic"
     },
     {
      "key": "toan9.vi_et",
@@ -12445,7 +16512,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "logic_sets"
     },
     {
      "key": "toan10.tap_hop_10",
@@ -12639,7 +16707,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "logic_sets"
     }
    ]
   },
@@ -13018,7 +17087,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "symbolic"
     },
     {
      "key": "toan10.pt_quy_ve_bac_hai",
@@ -13692,6 +17762,199 @@
      ],
      "games": [
       {
+       "game": "step_solver",
+       "title": "Cấp số cộng quanh ta",
+       "tasks": [
+        {
+         "problem": "Hội trường có hàng ghế số 1 gồm 18 ghế, mỗi hàng sau nhiều hơn hàng ngay trước 3 ghế. Hàng ghế số 20 có bao nhiêu ghế?",
+         "numbers": [
+          1,
+          18,
+          3,
+          20
+         ],
+         "steps": [
+          {
+           "ask": "Từ hàng số 1 đến hàng số 20, số ghế tăng thêm bao nhiêu lần (n − 1)?",
+           "expr": "20 - 1",
+           "result": 19,
+           "unit": "lần"
+          },
+          {
+           "ask": "Hàng số 20 nhiều hơn hàng số 1 bao nhiêu ghế?",
+           "expr": "r1 × 3",
+           "result": 57,
+           "unit": "ghế"
+          },
+          {
+           "ask": "Hàng số 20 có bao nhiêu ghế?",
+           "expr": "18 + r2",
+           "result": 75,
+           "unit": "ghế"
+          }
+         ],
+         "explanation": "Cấp số cộng u₁ = 18, d = 3: u₂₀ = u₁ + (20 − 1)d = 18 + 19 · 3 = 75.",
+         "key": "ste1"
+        },
+        {
+         "problem": "Hội trường có 20 hàng ghế, số ghế các hàng lập thành cấp số cộng: hàng số 1 có 18 ghế, hàng số 20 có 75 ghế. Ghép hàng số 1 với hàng số 20, hàng số 2 với hàng số 19, … thì mọi cặp có số ghế bằng nhau. Hội trường có bao nhiêu ghế?",
+         "numbers": [
+          20,
+          18,
+          75,
+          2
+         ],
+         "steps": [
+          {
+           "ask": "Mỗi cặp hàng có bao nhiêu ghế?",
+           "expr": "18 + 75",
+           "result": 93,
+           "unit": "ghế"
+          },
+          {
+           "ask": "Có bao nhiêu cặp hàng?",
+           "expr": "20 : 2",
+           "result": 10,
+           "unit": "cặp"
+          },
+          {
+           "ask": "Hội trường có bao nhiêu ghế?",
+           "expr": "r1 × r2",
+           "result": 930,
+           "unit": "ghế"
+          }
+         ],
+         "explanation": "Đó chính là công thức Sₙ = n(u₁ + uₙ)/2: S₂₀ = 20 · (18 + 75)/2 = 10 · 93 = 930.",
+         "key": "ste2"
+        },
+        {
+         "problem": "Tháng 1 An để dành được 50 nghìn đồng, mỗi tháng sau An để dành nhiều hơn tháng trước 10 nghìn đồng. Tháng 12 An để dành được bao nhiêu?",
+         "numbers": [
+          1,
+          50,
+          10,
+          12
+         ],
+         "steps": [
+          {
+           "ask": "Từ tháng 1 đến tháng 12 có bao nhiêu lần tăng (n − 1)?",
+           "expr": "12 - 1",
+           "result": 11,
+           "unit": "lần"
+          },
+          {
+           "ask": "Tháng 12 để dành nhiều hơn tháng 1 bao nhiêu?",
+           "expr": "r1 × 10",
+           "result": 110,
+           "unit": "nghìn đồng"
+          },
+          {
+           "ask": "Tháng 12 An để dành được bao nhiêu?",
+           "expr": "50 + r2",
+           "result": 160,
+           "unit": "nghìn đồng"
+          }
+         ],
+         "explanation": "u₁₂ = u₁ + 11d = 50 + 11 · 10 = 160 (nghìn đồng).",
+         "key": "ste3"
+        },
+        {
+         "problem": "Một cây non cao thêm đều đặn mỗi tuần (chiều cao lập thành cấp số cộng). Tuần số 1 cây cao 7 cm, tuần số 9 cây cao 47 cm. Mỗi tuần cây cao thêm bao nhiêu xăng-ti-mét?",
+         "numbers": [
+          1,
+          7,
+          9,
+          47
+         ],
+         "steps": [
+          {
+           "ask": "Từ tuần số 1 đến tuần số 9 cây cao thêm bao nhiêu?",
+           "expr": "47 - 7",
+           "result": 40,
+           "unit": "cm"
+          },
+          {
+           "ask": "Từ tuần số 1 đến tuần số 9 có bao nhiêu lần tăng (n − 1)?",
+           "expr": "9 - 1",
+           "result": 8,
+           "unit": "lần"
+          },
+          {
+           "ask": "Công sai d (mỗi tuần cây cao thêm) là bao nhiêu?",
+           "expr": "r1 : r2",
+           "result": 5,
+           "unit": "cm"
+          }
+         ],
+         "explanation": "u₉ = u₁ + 8d nên d = (47 − 7) : 8 = 5 cm.",
+         "key": "ste4"
+        },
+        {
+         "problem": "Một bức tường gạch có hàng số 1 (dưới cùng) gồm 30 viên, mỗi hàng phía trên ít hơn hàng ngay dưới 2 viên; hàng trên cùng có 6 viên. Bức tường có bao nhiêu hàng?",
+         "numbers": [
+          1,
+          30,
+          2,
+          6
+         ],
+         "steps": [
+          {
+           "ask": "Hàng trên cùng ít hơn hàng số 1 bao nhiêu viên?",
+           "expr": "30 - 6",
+           "result": 24,
+           "unit": "viên"
+          },
+          {
+           "ask": "Có bao nhiêu lần giảm (n − 1)?",
+           "expr": "r1 : 2",
+           "result": 12,
+           "unit": "lần"
+          },
+          {
+           "ask": "Bức tường có bao nhiêu hàng?",
+           "expr": "r2 + 1",
+           "result": 13,
+           "unit": "hàng"
+          }
+         ],
+         "explanation": "Cấp số cộng u₁ = 30, d = −2, uₙ = 6: n − 1 = (6 − 30) : (−2) = 12, nên n = 13 hàng.",
+         "key": "ste5"
+        },
+        {
+         "problem": "Năm làm việc thứ 1, lương của chị Mai là 8 triệu đồng mỗi tháng; mỗi năm sau lương tăng thêm 0,5 triệu đồng mỗi tháng. Năm làm việc thứ 10, lương mỗi tháng của chị là bao nhiêu?",
+         "numbers": [
+          1,
+          8,
+          "0,5",
+          10
+         ],
+         "steps": [
+          {
+           "ask": "Từ năm thứ 1 đến năm thứ 10 có bao nhiêu lần tăng lương?",
+           "expr": "10 - 1",
+           "result": 9,
+           "unit": "lần"
+          },
+          {
+           "ask": "Lương năm thứ 10 nhiều hơn năm thứ 1 bao nhiêu?",
+           "expr": "r1 × 0,5",
+           "result": "4,5",
+           "unit": "triệu đồng"
+          },
+          {
+           "ask": "Lương mỗi tháng năm thứ 10 là bao nhiêu?",
+           "expr": "8 + r2",
+           "result": "12,5",
+           "unit": "triệu đồng"
+          }
+         ],
+         "explanation": "u₁₀ = u₁ + 9d = 8 + 9 · 0,5 = 12,5 (triệu đồng).",
+         "key": "ste6"
+        }
+       ],
+       "credit_from": "choice"
+      },
+      {
        "game": "choice",
        "title": "Cấp số cộng",
        "style": "quiz",
@@ -13862,6 +18125,174 @@
       }
      ],
      "games": [
+      {
+       "game": "step_solver",
+       "title": "Cấp số nhân quanh ta",
+       "tasks": [
+        {
+         "problem": "Một quả bóng được thả từ độ cao 243 cm. Mỗi lần chạm đất, bóng nảy lên cao bằng 2/3 độ cao lần rơi ngay trước. Lần nảy thứ ba bóng lên cao bao nhiêu xăng-ti-mét?",
+         "numbers": [
+          243,
+          "2/3"
+         ],
+         "steps": [
+          {
+           "ask": "Lần nảy thứ nhất bóng lên cao bao nhiêu?",
+           "expr": "243 × 2/3",
+           "result": 162,
+           "unit": "cm"
+          },
+          {
+           "ask": "Lần nảy thứ hai bóng lên cao bao nhiêu?",
+           "expr": "r1 × 2/3",
+           "result": 108,
+           "unit": "cm"
+          },
+          {
+           "ask": "Lần nảy thứ ba bóng lên cao bao nhiêu?",
+           "expr": "r2 × 2/3",
+           "result": 72,
+           "unit": "cm"
+          }
+         ],
+         "explanation": "Các độ cao lập thành cấp số nhân với công bội q = 2/3: 243 · (2/3)³ = 72 cm.",
+         "key": "ste1"
+        },
+        {
+         "problem": "Lúc đầu có 500 vi khuẩn, cứ sau mỗi giờ số vi khuẩn tăng gấp 3 lần. Sau 4 giờ có bao nhiêu vi khuẩn?",
+         "numbers": [
+          500,
+          3,
+          4
+         ],
+         "steps": [
+          {
+           "ask": "Sau 2 giờ, số vi khuẩn gấp lúc đầu bao nhiêu lần?",
+           "expr": "3 × 3",
+           "result": 9,
+           "unit": "lần"
+          },
+          {
+           "ask": "Sau 4 giờ, số vi khuẩn gấp lúc đầu bao nhiêu lần?",
+           "expr": "r1 × r1",
+           "result": 81,
+           "unit": "lần"
+          },
+          {
+           "ask": "Sau 4 giờ có bao nhiêu vi khuẩn?",
+           "expr": "500 × r2",
+           "result": 40500,
+           "unit": "vi khuẩn"
+          }
+         ],
+         "explanation": "Sau 4 giờ số vi khuẩn là 500 · 3⁴ = 500 · 81 = 40 500. Tính 3⁴ = 3² · 3² cho nhanh.",
+         "key": "ste2"
+        },
+        {
+         "problem": "Dân số một thị trấn năm 2024 là 20 000 người, năm 2025 là 20 400 người. Giả sử dân số các năm lập thành cấp số nhân. Dự đoán dân số năm 2026.",
+         "numbers": [
+          20000,
+          20400
+         ],
+         "steps": [
+          {
+           "ask": "Công bội q (dân số năm sau gấp năm trước bao nhiêu lần) là bao nhiêu?",
+           "expr": "20400 : 20000",
+           "result": "1,02"
+          },
+          {
+           "ask": "Dân số năm 2026 là bao nhiêu người?",
+           "expr": "20400 × r1",
+           "result": 20808,
+           "unit": "người"
+          }
+         ],
+         "explanation": "q = 20 400 : 20 000 = 1,02 (tăng 2% mỗi năm), nên năm 2026 có 20 400 · 1,02 = 20 808 người.",
+         "key": "ste3"
+        },
+        {
+         "problem": "Bác Lan gửi ngân hàng 100 triệu đồng, lãi suất 6% một năm, tiền lãi được nhập vào gốc: mỗi năm số tiền gấp 1,06 lần năm trước. Sau 2 năm bác có bao nhiêu tiền?",
+         "numbers": [
+          100,
+          "1,06"
+         ],
+         "steps": [
+          {
+           "ask": "Sau 1 năm bác có bao nhiêu tiền?",
+           "expr": "100 × 1,06",
+           "result": 106,
+           "unit": "triệu đồng"
+          },
+          {
+           "ask": "Sau 2 năm bác có bao nhiêu tiền?",
+           "expr": "r1 × 1,06",
+           "result": "112,36",
+           "unit": "triệu đồng"
+          }
+         ],
+         "explanation": "Số tiền lập thành cấp số nhân với q = 1,06: 100 · 1,06² = 112,36 triệu đồng.",
+         "key": "ste4"
+        },
+        {
+         "problem": "Một chiếc máy cày mua với giá 125 triệu đồng. Mỗi năm giá trị của máy chỉ còn bằng 4/5 giá trị năm trước. Sau 3 năm máy còn giá trị bao nhiêu?",
+         "numbers": [
+          125,
+          "4/5"
+         ],
+         "steps": [
+          {
+           "ask": "Sau 1 năm máy còn giá trị bao nhiêu?",
+           "expr": "125 × 4/5",
+           "result": 100,
+           "unit": "triệu đồng"
+          },
+          {
+           "ask": "Sau 2 năm máy còn giá trị bao nhiêu?",
+           "expr": "r1 × 4/5",
+           "result": 80,
+           "unit": "triệu đồng"
+          },
+          {
+           "ask": "Sau 3 năm máy còn giá trị bao nhiêu?",
+           "expr": "r2 × 4/5",
+           "result": 64,
+           "unit": "triệu đồng"
+          }
+         ],
+         "explanation": "Giá trị máy là cấp số nhân với q = 4/5: 125 · (4/5)³ = 64 triệu đồng.",
+         "key": "ste5"
+        },
+        {
+         "problem": "Trong một trò chơi lan truyền, số người tham gia mỗi ngày lập thành cấp số nhân. Ngày thứ hai có 6 người, ngày thứ ba có 18 người. Ngày thứ năm có bao nhiêu người tham gia?",
+         "numbers": [
+          6,
+          18
+         ],
+         "steps": [
+          {
+           "ask": "Công bội q là bao nhiêu?",
+           "expr": "18 : 6",
+           "result": 3
+          },
+          {
+           "ask": "Ngày thứ tư có bao nhiêu người?",
+           "expr": "18 × r1",
+           "result": 54,
+           "unit": "người"
+          },
+          {
+           "ask": "Ngày thứ năm có bao nhiêu người?",
+           "expr": "r2 × r1",
+           "result": 162,
+           "unit": "người"
+          }
+         ],
+         "explanation": "q = u₃ : u₂ = 3; u₄ = 18 · 3 = 54; u₅ = 54 · 3 = 162 người.",
+         "key": "ste6"
+        }
+       ],
+       "credit_from": "choice"
+      },
       {
        "game": "choice",
        "title": "Cấp số nhân",
@@ -14173,7 +18604,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "symbolic"
     },
     {
      "key": "toan11.ham_mu_log",
@@ -14483,7 +18915,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "symbolic"
     },
     {
      "key": "toan11.dao_ham_cap_hai",
@@ -15292,7 +19725,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "symbolic"
     },
     {
      "key": "toan12.ung_dung_tich_phan",

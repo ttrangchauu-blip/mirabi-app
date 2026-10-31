@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { IconName } from '../ui/kit';
 import { learningApi } from './api';
 import type { Block } from './codePath';
-import type { CurriculumGameId, GameId, LessonGameId } from './types';
+import type { CurriculumGameId, GameId, LessonGameId, SubjectGameId } from './types';
 
 /**
  * The version of the guides. Raise it when a guide changes enough to be shown again once to everyone who finished the
@@ -21,7 +21,7 @@ export const VOCAB_STAGE_WORDS = 15;
 export const CURRICULUM_STAGE: Record<Exclude<CurriculumGameId, LessonGameId>, number> = { word_builder: 10, spelling_detective: 10, sorting: 10, code_path: 5 };
 
 /** A target in a guide's sky: the word (or the meaning on a meteor) and how many letters its answer has, per word. */
-export type TutorialTarget = { label: string; letters: number[] };
+export type TutorialTarget = { label: string; letters?: number[] };
 
 /** What a guide page shows above its text: a small, animated copy of the real game. */
 export type TutorialScene =
@@ -60,7 +60,11 @@ export type TutorialScene =
   | { kind: 'choice'; style: 'situation' | 'quiz'; question: string; options: string[]; right: number; wrong: number; demo?: boolean }
   /** Lập trình đường đi: a small map; `build` adds the blocks one by one, `run` walks the pet along them. */
   | { kind: 'code'; cols: number; rows: number; start: { x: number; y: number; dir: 'N' | 'E' | 'S' | 'W' }; goal: { x: number; y: number };
-      walls: [number, number][]; program: Block[]; mode: 'build' | 'run' };
+      walls: [number, number][]; program: Block[]; mode: 'build' | 'run' }
+  /** Phòng thí nghiệm: the circuit on the bench; `build` with its parts placed, `run` with the switch on (the bulb lit). */
+  | { kind: 'lab'; mode: 'empty' | 'build' | 'run' }
+  /** The subject gameplays (games/subject): the real scene; `demo` plays the move (empty → half done → solved). */
+  | { kind: 'subject'; game: SubjectGameId; mode: 'empty' | 'demo' };
 
 export type TutorialPage = { tag: string; title: string; body: string; scene: TutorialScene };
 type Rule = { icon: IconName; text: string; tone: 'good' | 'bad' | 'info' };
@@ -83,15 +87,15 @@ const end = (body: string, items: Rule[]): TutorialPage => ({ tag: 'Kết thúc'
 export const TUTORIALS = {
   word_shooter: [
     { tag: 'Mục tiêu', title: 'Bắn vỡ từ tiếng Anh',
-      body: `Mỗi chặng có ${VOCAB_STAGE_WORDS} từ tiếng Anh lần lượt rơi xuống, có lúc vài từ cùng lúc. Gõ lại đúng từ để pet bắn vỡ trước khi từ chạm đất, và xem nghĩa tiếng Việt.`,
-      scene: { kind: 'fall', variant: 'word', targets: [{ label: 'cat', letters: [3] }, { label: 'apple', letters: [5] }, { label: 'dog', letters: [3] }] } },
-    { tag: 'Cách thao tác', title: 'Gõ lại từ, pet tự bắn',
-      body: 'Ô chữ nằm ngay dưới từ gần mặt đất nhất. Gõ đúng từ là pet tự bắn, không cần nhấn gì, và ô chữ trống lại để gõ tiếp. Đạn trúng thì từ vỡ, hiện nghĩa (và đọc phát âm khi bật Âm thanh). Muốn gõ từ khác thì chạm vào từ đó.',
-      scene: { kind: 'type', variant: 'word', target: { label: 'cat', letters: [3] }, answer: 'cat', result: 'con mèo', sub: 'cat /kæt/' } },
+      body: `Mỗi chặng có ${VOCAB_STAGE_WORDS} từ tiếng Anh lần lượt rơi xuống, có lúc vài từ cùng lúc. Gõ nghĩa tiếng Việt của từ để pet bắn vỡ trước khi từ chạm đất.`,
+      scene: { kind: 'fall', variant: 'word', targets: [{ label: 'cat' }, { label: 'apple' }, { label: 'dog' }] } },
+    { tag: 'Cách thao tác', title: 'Gõ nghĩa, pet tự bắn',
+      body: 'Ô trả lời nằm ngay dưới từ gần mặt đất nhất. Gõ đúng nghĩa (có dấu hay không đều được) là từ dừng lại, pet tự bắn, không cần nhấn gì, và ô trống lại để gõ tiếp. Đạn trúng thì từ phát sáng, nứt rồi vỡ, hiện nghĩa (và đọc phát âm khi bật Âm thanh). Muốn trả lời từ khác thì chạm vào từ đó.',
+      scene: { kind: 'type', variant: 'word', target: { label: 'cat' }, answer: 'con mèo', result: 'con mèo', sub: 'cat /kæt/' } },
     end(`Bạn có ${VOCAB_HEARTS} tim. Thanh trên cùng cho biết số tim và “Đã xử lý” bao nhiêu từ.`, [
       { icon: 'checkmark-circle-outline', tone: 'good', text: `Xử lý đủ ${VOCAB_STAGE_WORDS} từ (bắn vỡ hoặc để rơi) là xong chặng.` },
       { icon: 'heart-outline', tone: 'bad', text: `Mỗi từ chạm đất mất 1 tim. Hết ${VOCAB_HEARTS} tim thì chặng dừng lại, bạn có thể chơi lại.` },
-      { icon: 'create-outline', tone: 'info', text: 'Gõ sai không mất tim: sửa lại khi từ còn rơi. Gợi ý cho biết số chữ cái, rồi từng chữ.' },
+      { icon: 'create-outline', tone: 'info', text: 'Gõ sai không mất tim: sửa lại khi từ còn rơi. Gợi ý cho biết từ nói về gì, rồi số tiếng và tiếng đầu. Xem đáp án không mất tim.' },
       TIME_UP]),
   ],
   meteor: [
@@ -140,13 +144,13 @@ export const TUTORIALS = {
       OUT_OF_HEARTS, TIME_UP]),
   ],
   defense: [
-    { tag: 'Mục tiêu', title: 'Bảo vệ căn cứ', body: 'Quái vật mang phép tính tiến về căn cứ rồi dừng lại chờ bạn. Giải đúng để pet tấn công quái vật.',
+    { tag: 'Mục tiêu', title: 'Bảo vệ căn cứ', body: 'Quái vật mang phép tính kéo đến theo từng đợt, cuối chặng có trùm. Giải đúng để pet lao lên tấn công; đúng 3 câu liền, pet tung kỹ năng nguyên tố của mình.',
       scene: { kind: 'monster', expression: '12 + 7' } },
     { tag: 'Cách thao tác', title: 'Bấm số rồi Tấn công',
       body: 'Bấm đáp án trên bàn phím số rồi nhấn Tấn công. Nút ± hiện khi đáp án có thể âm; mở Nháp để tính. Bí thì nhấn Gợi ý, hoặc Xem đáp án (không mất tim, phép tính quay lại sau).',
       scene: { kind: 'numpad', expression: '12 + 7', answer: '19', submit: 'Tấn công' } },
     end('Quái vật không bao giờ vào căn cứ, cứ tính cẩn thận.', [
-      { icon: 'checkmark-circle-outline', tone: 'good', text: 'Giải đúng hết các phép tính là hoàn thành chặng.' },
+      { icon: 'checkmark-circle-outline', tone: 'good', text: 'Hạ hết các đợt quái vật và trùm (mỗi câu đúng trừ 1 máu của trùm) là hoàn thành chặng.' },
       { icon: 'heart-outline', tone: 'bad', text: 'Sai mất 1 tim: sửa đáp án rồi tấn công tiếp.' },
       OUT_OF_HEARTS, TIME_UP]),
   ],
@@ -175,11 +179,11 @@ Object.assign(TUTORIALS, {
     { tag: 'Mục tiêu', title: 'Nhìn hình và đoán từ.', body: 'Mỗi câu có một hình. Hãy đoán xem hình đó là gì.',
       scene: { kind: 'word_build', picture: '🐱', unit: 'letter', pieces: ['m', 'è', 'o'], shuffled: [2, 0, 1] } },
     { tag: 'Cách thao tác', title: 'Chọn các chữ theo đúng thứ tự.',
-      body: 'Chạm các chữ (lớp 2: các tiếng) theo đúng thứ tự để ghép thành từ, rồi nhấn Kiểm tra. Chạm vào chữ đã đặt để gỡ ra.',
+      body: 'Kéo các chữ (lớp 2: các tiếng) đang phát sáng trên mặt đất vào từng ô của ổ khóa, hoặc chạm để đặt vào ô trống đầu tiên, rồi nhấn Mở cổng. Chạm vào chữ đã đặt để gỡ ra.',
       scene: { kind: 'word_build', picture: '🐱', unit: 'letter', pieces: ['m', 'è', 'o'], shuffled: [2, 0, 1], demo: true } },
     end(`Ghép đủ ${CURRICULUM_STAGE.word_builder} từ để hoàn thành.`, [
-      { icon: 'book-outline', tone: 'good', text: `Mỗi từ đúng, pet nhận một mảnh sách. Ghép đủ các từ của chặng là xong (thường ${CURRICULUM_STAGE.word_builder} từ, bài học có thể ít hơn).` },
-      { icon: 'refresh-outline', tone: 'info', text: 'Ghép sai thì đổi thứ tự rồi kiểm tra lại. Gợi ý cho biết chữ đầu tiên.' },
+      { icon: 'book-outline', tone: 'good', text: `Mỗi từ đúng, cổng mở, pet nhận một mảnh sách rồi đi tiếp tới cổng sau. Ghép đủ các từ của chặng là xong (thường ${CURRICULUM_STAGE.word_builder} từ, bài học có thể ít hơn).` },
+      { icon: 'refresh-outline', tone: 'info', text: 'Ghép sai thì cổng rung lên, các chữ vẫn ở đó: đổi chỗ rồi mở cổng lại. Gợi ý cho biết chữ đầu tiên.' },
       NO_CLOCK]),
   ],
   spelling_detective: [
@@ -207,9 +211,9 @@ Object.assign(TUTORIALS, {
     { tag: 'Mục tiêu', title: 'Xếp các lệnh vào thanh chương trình.',
       body: 'Chạm Tiến, Rẽ trái, Rẽ phải để thêm lệnh. Từ trình độ Trung cấp có khối Lặp lại: các lệnh đặt trong đó được làm nhiều lần.',
       scene: { kind: 'code', ...CODE_LEVEL, program: CODE_PROGRAM, mode: 'build' } },
-    { tag: 'Cách thao tác', title: 'Nhấn Chạy để pet thực hiện.', body: 'Pet làm lần lượt từng lệnh. Tới cờ đích là qua màn.',
+    { tag: 'Cách thao tác', title: 'Nhấn Chạy để robot thực hiện.', body: 'Pet lái robot làm lần lượt từng lệnh, lệnh đang chạy sáng lên. Tới cờ đích là qua màn.',
       scene: { kind: 'code', ...CODE_LEVEL, program: CODE_PROGRAM, mode: 'run' } },
-    end('Nếu chưa tới đích, sửa lệnh và thử lại.', [
+    end('Nếu chưa tới đích, xem bước bị sai (khối đỏ), sửa lệnh và thử lại.', [
       { icon: 'flag-outline', tone: 'good', text: `Đưa pet tới đích ở mọi màn của chặng là xong (thường ${CURRICULUM_STAGE.code_path} màn, bài học có thể ít hơn).` },
       { icon: 'build-outline', tone: 'info', text: 'Thử lại bao nhiêu lần cũng được. Dừng để ngừng chạy, Đặt lại để đưa pet về chỗ cũ.' },
       { icon: 'git-commit-outline', tone: 'info', text: 'Mỗi màn có số lệnh tối đa: dùng khối Lặp lại để chương trình ngắn hơn.' },
@@ -220,6 +224,77 @@ Object.assign(TUTORIALS, {
 // The lesson games: the number of questions comes from the lesson (shown on the lesson screen and in the game).
 const LIFE = ['Hạt đậu', 'Hạt nảy mầm', 'Cây con', 'Cây ra hoa'];
 const MATCH: [string, string][] = [['2 × 3', '6'], ['2 × 5', '10'], ['2 × 7', '14']];
+const KEEP_RIGHT = (text: string): Rule => ({ icon: 'lock-closed-outline', tone: 'info', text });
+const READ_WHY: Rule = { icon: 'reader-outline', tone: 'good', text: 'Làm đúng: xem kết quả hiện ra, đọc giải thích ngay dưới câu, rồi nhấn Câu tiếp theo.' };
+// The subject gameplays: each its own world and its own move.
+const SUBJECT_TUTORIALS: Record<SubjectGameId, TutorialPage[]> = {
+  timeline: [
+    { tag: 'Mục tiêu', title: 'Đưa từng sự kiện về đúng mốc thời gian.', body: 'Con đường lịch sử đi từ trên (sớm hơn) xuống dưới (muộn hơn). Mỗi mốc ghi năm; sự kiện cùng năm đứng chung một mốc.',
+      scene: { kind: 'subject', game: 'timeline', mode: 'empty' } },
+    { tag: 'Cách thao tác', title: 'Kéo sự kiện lên mốc của nó.', body: 'Kéo thẻ sự kiện vào chỗ trống ở mốc (hoặc chạm thẻ rồi chạm mốc). Chạm thẻ đã đặt để gỡ ra. Đủ thẻ thì nhấn Kiểm tra.',
+      scene: { kind: 'subject', game: 'timeline', mode: 'demo' } },
+    end('Đúng hết là hoàn thành dòng thời gian.', [READ_WHY,
+      KEEP_RIGHT('Đặt sai: sự kiện đúng mốc được giữ lại (khoá xanh), sự kiện sai rung lên rồi quay về để đặt lại.'), NO_CLOCK]),
+  ],
+  sentence: [
+    { tag: 'Mục tiêu', title: 'Xếp thẻ thành một câu đúng.', body: 'Mỗi toa tàu chở một thẻ của câu. Có thẻ không thuộc câu: để nó lại bãi.',
+      scene: { kind: 'subject', game: 'sentence', mode: 'empty' } },
+    { tag: 'Cách thao tác', title: 'Chất thẻ lên toa theo thứ tự.', body: 'Kéo thẻ lên toa (hoặc chạm: thẻ lên toa trống đầu tiên). Chạm toa để dỡ thẻ xuống. Đủ toa thì nhấn Kiểm tra.',
+      scene: { kind: 'subject', game: 'sentence', mode: 'demo' } },
+    end('Câu đúng: tàu sáng đèn và câu được đọc lên.', [READ_WHY,
+      KEEP_RIGHT('Sai: các toa đúng từ đầu câu được khoá, toa sai đầu tiên viền đỏ để em sửa đúng chỗ đó.'), NO_CLOCK]),
+  ],
+  geometry: [
+    { tag: 'Mục tiêu', title: 'Tự tay tạo hình theo yêu cầu.', body: 'Trên bản vẽ có thước đo góc hoặc lưới ô vuông 1 cm. Đọc yêu cầu: góc bao nhiêu độ, hình có diện tích, chu vi bao nhiêu.',
+      scene: { kind: 'subject', game: 'geometry', mode: 'empty' } },
+    { tag: 'Cách thao tác', title: 'Kéo tay cầm màu vàng.', body: 'Kéo đầu cạnh góc (hoặc góc hình chữ nhật), hay dùng nút − / +. Xong thì nhấn Kiểm tra: máy đo hình em tạo.',
+      scene: { kind: 'subject', game: 'geometry', mode: 'demo' } },
+    end('Đúng: hình được tô và ghi số đo.', [READ_WHY,
+      { icon: 'calculator-outline', tone: 'info', text: 'Sai: lời nhắc cho biết hình em tạo đo được bao nhiêu và còn thiếu gì; sửa rồi kiểm tra lại.' }, NO_CLOCK]),
+  ],
+  balance: [
+    { tag: 'Mục tiêu', title: 'Làm cho cân thăng bằng.', body: 'Mỗi đĩa cân chứa các phân tử của một vế. Cân chỉ thăng bằng khi mỗi nguyên tố có số nguyên tử bằng nhau ở hai vế.',
+      scene: { kind: 'subject', game: 'balance', mode: 'empty' } },
+    { tag: 'Cách thao tác', title: 'Đặt hệ số bằng nút − / +.', body: 'Hệ số đứng trước mỗi chất. Bảng bên dưới đếm số nguyên tử từng nguyên tố. Chỉ đổi hệ số, không đổi công thức. Cân bằng rồi nhấn Kiểm tra.',
+      scene: { kind: 'subject', game: 'balance', mode: 'demo' } },
+    end('Hệ số phải là các số nhỏ nhất.', [READ_WHY,
+      { icon: 'git-compare-outline', tone: 'info', text: 'Chưa cân bằng hoặc chưa tối giản: lời nhắc chỉ ra nguyên tố còn lệch hoặc số cần chia.' },
+      { icon: 'shield-checkmark-outline', tone: 'info', text: 'Đây là mô phỏng để học lập phương trình, không phải thí nghiệm để tự làm.' }, NO_CLOCK]),
+  ],
+  number_line: [
+    { tag: 'Mục tiêu', title: 'Đưa mỗi số về đúng vạch trên cầu.', body: 'Cây cầu là một trục số: số bé ở bên trái, số lớn ở bên phải. Chỉ một vài vạch có ghi số, các vạch còn lại em tự đếm.',
+      scene: { kind: 'subject', game: 'number_line', mode: 'empty' } },
+    { tag: 'Cách thao tác', title: 'Cầm một số rồi đặt lên cầu.', body: 'Chạm một lá cờ số để cầm nó, rồi chạm hoặc kéo trên cầu để cắm cờ. Dùng ◀ ▶ để dịch đúng một vạch. Đặt đủ các số thì nhấn Kiểm tra.',
+      scene: { kind: 'subject', game: 'number_line', mode: 'demo' } },
+    end('Đúng hết: pet đi qua cầu, dừng ở từng số.', [READ_WHY,
+      KEEP_RIGHT('Sai: số đúng vạch được khoá xanh; lời nhắc cho biết số nào đang lệch sang trái hay phải.'), NO_CLOCK]),
+  ],
+  step_solver: [
+    { tag: 'Mục tiêu', title: 'Giải bài toán từng bước một.', body: 'Mỗi bậc thang là một bước, có một câu hỏi nhỏ. Trả lời đúng bước này thì câu hỏi của bước sau mới hiện ra.',
+      scene: { kind: 'subject', game: 'step_solver', mode: 'empty' } },
+    { tag: 'Cách thao tác', title: 'Chọn hai số, một dấu, điền kết quả.', body: 'Chạm hai thẻ số lấy từ đề (hoặc kết quả bước trước), chạm dấu + − × :, rồi bấm bàn phím để điền kết quả. Nhấn Kiểm tra.',
+      scene: { kind: 'subject', game: 'step_solver', mode: 'demo' } },
+    end('Bước cuối đúng là giải xong bài toán.', [READ_WHY,
+      { icon: 'construct-outline', tone: 'info', text: 'Chọn sai phép tính: lời nhắc gợi ý đọc lại đề. Phép tính đúng mà kết quả sai: phép tính được giữ lại, chỉ cần tính lại.' },
+      NO_CLOCK]),
+  ],
+  story_detective: [
+    { tag: 'Mục tiêu', title: 'Tìm bằng chứng trước, trả lời sau.', body: 'Câu hỏi là vụ án, mỗi câu trong bài đọc là một manh mối. Em phải chỉ ra câu chứng minh được câu trả lời.',
+      scene: { kind: 'subject', game: 'story_detective', mode: 'empty' } },
+    { tag: 'Cách thao tác', title: 'Chạm câu bằng chứng, rồi chọn đáp án.', body: 'Chạm vào câu em cho là bằng chứng rồi nhấn Kiểm tra. Đúng manh mối thì các đáp án mới hiện ra: chọn một đáp án và nhấn Kiểm tra.',
+      scene: { kind: 'subject', game: 'story_detective', mode: 'demo' } },
+    end('Đúng đáp án: hồ sơ được đóng dấu “Đã phá án”.', [READ_WHY,
+      { icon: 'close-circle-outline', tone: 'info', text: 'Chọn sai câu hay sai đáp án: lựa chọn đó bị gạch đi, kèm gợi ý nên tìm ở đâu.' }, NO_CLOCK]),
+  ],
+  sentence_xray: [
+    { tag: 'Mục tiêu', title: 'Tô màu mỗi từ theo vai trò của nó.', body: 'Mỗi bút màu là một vai trò (ví dụ: sự vật, hoạt động). Từ không thuộc vai trò nào thì để trống.',
+      scene: { kind: 'subject', game: 'sentence_xray', mode: 'empty' } },
+    { tag: 'Cách thao tác', title: 'Chọn bút, chạm vào từ.', body: 'Chạm một bút màu, rồi chạm các từ để tô. Chạm lại từ đã tô (cùng màu) để xoá. Tô xong nhấn Kiểm tra.',
+      scene: { kind: 'subject', game: 'sentence_xray', mode: 'demo' } },
+    end('Đúng hết: tia soi quét qua và các từ sáng lên.', [READ_WHY,
+      KEEP_RIGHT('Sai: từ tô đúng được khoá; lời nhắc chỉ ra một từ tô chưa đúng hoặc còn thiếu.'), NO_CLOCK]),
+  ],
+};
 const LESSON_END: Rule = { icon: 'checkmark-circle-outline', tone: 'good',
   text: 'Làm đúng mọi câu của chặng là xong: số câu hiện ở màn bài học và trên thanh tiến độ.' };
 Object.assign(TUTORIALS, {
@@ -254,6 +329,18 @@ Object.assign(TUTORIALS, {
       { icon: 'chatbubble-ellipses-outline', tone: 'info', text: 'Câu “Tự đánh giá” không chấm đúng sai: em chọn điều đúng với mình và đọc lời nhắn.' },
       NO_CLOCK]),
   ],
+  lab: [
+    { tag: 'Mục tiêu', title: 'Tự tay làm thí nghiệm.', body: 'Pet là trợ lý của em. Mỗi thí nghiệm có một nhiệm vụ: lắp mạch cho đèn sáng, tạo bóng trên màn, làm nước chuyển thể, gieo hạt.',
+      scene: { kind: 'lab', mode: 'empty' } },
+    { tag: 'Cách thao tác', title: 'Kéo dụng cụ vào đúng chỗ.', body: 'Kéo từng dụng cụ trên bàn vào chỗ trống trên thiết bị (hoặc chạm để đặt vào chỗ trống đầu tiên). Chạm dụng cụ đã đặt để lấy ra.',
+      scene: { kind: 'lab', mode: 'build' } },
+    end('Bật thí nghiệm và quan sát.', [
+      { icon: 'flash-outline', tone: 'good', text: 'Đặt đủ dụng cụ thì bật thí nghiệm: đèn sáng, bóng hiện ra, đá tan, cây lớn lên… rồi đọc giải thích.' },
+      { icon: 'refresh-outline', tone: 'info', text: 'Lắp chưa đúng thì thí nghiệm không chạy và có lời giải thích; dụng cụ đúng được giữ lại, thử vật khác.' },
+      { icon: 'shield-checkmark-outline', tone: 'info', text: 'Đây là thí nghiệm mô phỏng: không tự làm với điện, lửa hay nước nóng khi không có người lớn.' },
+      NO_CLOCK]),
+  ],
+  ...SUBJECT_TUTORIALS,
 } satisfies Record<LessonGameId, TutorialPage[]>);
 
 type Stored = { seen?: GameId[]; /** Finished while the server could not be reached: sent again on the next load. */ unsent?: GameId[] };

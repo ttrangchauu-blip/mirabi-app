@@ -1,5 +1,5 @@
-import React from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { Animated, Easing, Pressable, StyleSheet, View } from 'react-native';
 import { Text } from '../../../components/Typography';
 
 /**
@@ -7,7 +7,7 @@ import { Text } from '../../../components/Typography';
  * filled as the user types. They only show the answer: the text field itself is one field for the whole play field
  * (see Playfield), so moving targets, switching target or a word breaking never closes and reopens the keyboard.
  */
-export function AnswerSlots({ letters, value, width, compact = false, onPress }: {
+export function AnswerSlots({ letters, value, width, compact = false, onPress, placeholder, caret = false }: {
   /** Letters per word of the answer, e.g. [3] for "cat", [6, 3] for two words. */
   letters?: number[];
   value: string;
@@ -16,6 +16,10 @@ export function AnswerSlots({ letters, value, width, compact = false, onPress }:
   compact?: boolean;
   /** Tapping the boxes answers this target (opens the keyboard). */
   onPress?: () => void;
+  /** Without letters (a meaning typed freely, Anh → Việt): what the empty field says. */
+  placeholder?: string;
+  /** A blinking caret after what is typed (the aimed target, while the game runs). */
+  caret?: boolean;
 }) {
   const total = letters?.reduce((a, b) => a + b, 0) ?? 0;
   const gap = compact ? 5 : 8;
@@ -25,10 +29,15 @@ export function AnswerSlots({ letters, value, width, compact = false, onPress }:
   const typed = value.replace(/\s+/g, '');
   let body: React.ReactNode;
   if (!boxes || !letters) {
-    const hint = letters?.length ? `${letters.length > 1 ? `${letters.length} từ, ` : ''}${total} chữ cái` : 'Gõ từ tiếng Anh…';
+    const hint = letters?.length ? `${letters.length > 1 ? `${letters.length} từ, ` : ''}${total} chữ cái` : placeholder ?? 'Gõ từ tiếng Anh…';
     body = (
-      <View style={[styles.plain, compact && styles.plainCompact, { width: Math.max(compact ? 60 : 110, width - 8) }]}>
-        <Text style={[styles.plainText, !value && styles.placeholder, compact && styles.plainTextCompact]} numberOfLines={1}>{value || hint}</Text>
+      <View style={[styles.plain, compact && styles.plainCompact, !compact && !letters?.length && styles.plainOpen,
+        { width: Math.max(compact ? 60 : 110, width - 8) }]}>
+        <View style={styles.plainLine}>
+          {value ? <Text style={[styles.plainText, compact && styles.plainTextCompact]} numberOfLines={1}>{value}</Text> : null}
+          {caret ? <Caret /> : null}
+          {value ? null : <Text style={[styles.plainText, styles.placeholder, compact && styles.plainTextCompact]} numberOfLines={1}>{hint}</Text>}
+        </View>
       </View>
     );
   } else {
@@ -57,6 +66,19 @@ export function AnswerSlots({ letters, value, width, compact = false, onPress }:
   return <Pressable onPress={onPress} accessible={false}>{body}</Pressable>;
 }
 
+function Caret() {
+  const blink = useRef(new Animated.Value(1)).current;
+  useEffect(() => {
+    const loop = Animated.loop(Animated.sequence([
+      Animated.timing(blink, { toValue: 0, duration: 420, delay: 380, easing: Easing.inOut(Easing.quad), useNativeDriver: true }),
+      Animated.timing(blink, { toValue: 1, duration: 200, useNativeDriver: true }),
+    ]));
+    loop.start();
+    return () => loop.stop();
+  }, [blink]);
+  return <Animated.View style={[styles.caret, { opacity: blink }]} />;
+}
+
 /** The largest letter box, and the room one letter takes (box and gap): the aimed target is sized from it. */
 const SLOT_MAX = 19;
 export const SLOT_PITCH = SLOT_MAX + 3;
@@ -74,7 +96,11 @@ const styles = StyleSheet.create({
   plain: { minHeight: 32, maxWidth: 240, borderRadius: 10, borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.45)',
     backgroundColor: 'rgba(255,255,255,0.12)', paddingHorizontal: 10, justifyContent: 'center' },
   plainCompact: { minHeight: 22, borderRadius: 8, borderWidth: 1, paddingHorizontal: 6 },
-  plainText: { fontSize: 14, color: '#FFFFFF' },
+  // The aimed word's meaning field: brighter, so it reads as the place to type.
+  plainOpen: { minHeight: 36, borderColor: '#FFE9B8', backgroundColor: 'rgba(255,255,255,0.18)' },
+  plainLine: { flexDirection: 'row', alignItems: 'center' },
+  plainText: { fontSize: 14, color: '#FFFFFF', flexShrink: 1 },
+  caret: { width: 2, height: 17, borderRadius: 1, backgroundColor: '#FFE9B8', marginHorizontal: 1 },
   plainTextCompact: { fontSize: 11 },
   placeholder: { color: '#9FB0D6' },
 });

@@ -1,6 +1,5 @@
 """Age and school grade: registration, Cài đặt, validation, upgrade of older databases and the Học tập suggestions."""
 import json
-import random
 from typing import get_args
 
 import pytest
@@ -8,7 +7,6 @@ from sqlalchemy import create_engine, select, text
 
 from app import learning_content, learning_vocab
 from app.learning import GameId
-from app.learning_vocab import Entry, pick_entries
 from app.migrations import upgrade_schema
 from app.models import LearningSessionItem, LearningVocabEntry
 from app.study_profile import (AGE_MAX, AGE_MIN, GRADE_IDS, grade_fits_age, preferred_vocab_topics, recommendations,
@@ -95,9 +93,15 @@ def test_existing_account_fills_in_and_edits_its_profile(client):
     assert res.status_code == 200 and (res.json()["age"], res.json()["school_grade"]) == (8, "grade3")
     rec = client.get("/api/learning/catalog", headers=me).json()["study_profile"]
     assert rec["grade"] == "grade3" and rec["grade_label"] == "Lớp 3" and rec["math_level"] == "grade3"
+    # Given once, the grade is locked (education.py): another one is refused, the age can still be corrected.
     res = client.put("/api/profile/study", headers=me, json={"age": 30, "school_grade": "adult"})
-    assert res.json()["school_grade"] == "adult"
-    assert client.get("/api/learning/catalog", headers=me).json()["study_profile"]["subjects"] == ["english", "informatics"]
+    assert res.status_code == 409 and res.json()["code"] == "grade_locked"
+    res = client.put("/api/profile/study", headers=me, json={"age": 9, "school_grade": "grade3"})
+    assert (res.json()["age"], res.json()["school_grade"]) == (9, "grade3")
+    assert register(client, email="adult@example.com").status_code == 201
+    adult = bearer(login(client, email="adult@example.com").json()["access_token"])
+    client.put("/api/profile/study", headers=adult, json={"age": 30, "school_grade": "adult"})
+    assert client.get("/api/learning/catalog", headers=adult).json()["study_profile"]["subjects"] == ["english", "informatics"]
 
 
 @pytest.mark.parametrize("body", [{}, {"age": 8}, {"school_grade": "grade3"}, {"age": 8, "school_grade": "grade12"},
@@ -120,17 +124,6 @@ def test_quick_vocabulary_stage_prefers_the_grade_topics(client, db):
         LearningSessionItem.session_id == res.json()["id"]))]
     topics = list(db.scalars(select(LearningVocabEntry.topic).where(LearningVocabEntry.entry_key.in_(keys))))
     assert topics and set(topics) <= preferred_vocab_topics("grade2")
-
-
-def test_preferred_topics_only_reorder_new_words_of_the_same_difficulty():
-    pool = [Entry(f"a{i}", f"apple{i}", 1, "food") for i in range(10)] + [Entry(f"b{i}", f"bank{i}", 1, "money") for i in range(10)]
-    picked = pick_entries(pool, level=1, seen={}, review=set(), recent=set(), count=6, rng=random.Random(3),
-                          preferred=frozenset({"money"}))
-    assert {e.topic for e, _ in picked} == {"money"}
-    # Without a preference the draw is unchanged (same seed, same words as before topics existed).
-    plain = [Entry(e.key, e.word, e.difficulty) for e in pool]
-    assert ([e.key for e, _ in pick_entries(pool, level=1, seen={}, review=set(), recent=set(), count=6, rng=random.Random(3))]
-            == [e.key for e, _ in pick_entries(plain, level=1, seen={}, review=set(), recent=set(), count=6, rng=random.Random(3))])
 
 
 # ---------- older databases ----------

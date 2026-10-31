@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { ActivityIndicator, Animated, Easing, StyleSheet, View } from 'react-native';
 import { errorMessage } from '../../auth/messages';
 import { Text } from '../../components/Typography';
 import { PetArt } from '../../components/PetArt';
 import { learningApi } from '../../learning/api';
 import { ERROR_TYPE_LABEL, gameTitle, MODE_INFO, OUTCOME_LABEL, rewardMessage, STATUS_TITLE } from '../../learning/labels';
-import type { LearningSession, Outcome, SessionResult } from '../../learning/types';
+import type { LearningSession, LessonExplore, Outcome, SessionResult } from '../../learning/types';
 import { appTheme as t } from '../../theme';
 import { Button, Card, SectionHeader } from '../../ui/kit';
 import { showNumber } from './games/NumberPad';
@@ -17,12 +17,71 @@ type Props = {
   onLesson?: (key: string) => void;
   /** EXP may have changed: the main app reloads the pet's numbers. */
   onRewards: () => void;
+  /** No victory hop or popping stars. */
+  reduceMotion?: boolean;
 };
+
+/** The victory: a completed stage makes the pet hop twice for joy (squash, up, land), once, as the result comes in. */
+export const VICTORY_MS = 1100;
+function Victory({ won, reduceMotion, children }: { won: boolean; reduceMotion: boolean; children: React.ReactNode }) {
+  const k = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    if (!won || reduceMotion) return;
+    const hop = (ms: number) => Animated.sequence([
+      Animated.timing(k, { toValue: 0.15, duration: ms * 0.18, easing: Easing.out(Easing.quad), useNativeDriver: true }),
+      Animated.timing(k, { toValue: 0.6, duration: ms * 0.4, easing: Easing.out(Easing.quad), useNativeDriver: true }),
+      Animated.timing(k, { toValue: 1, duration: ms * 0.42, easing: Easing.in(Easing.quad), useNativeDriver: true }),
+      Animated.timing(k, { toValue: 0, duration: 0, useNativeDriver: true }),
+    ]);
+    const run = Animated.sequence([Animated.delay(150), hop(VICTORY_MS * 0.52), hop(VICTORY_MS * 0.34)]);
+    run.start();
+    return () => run.stop();
+  }, [won, reduceMotion, k]);
+  // 0 → 0.15: squat; → 0.6: up; → 1: down and a little squash on landing.
+  return (
+    <Animated.View style={{ transformOrigin: '50% 100%', transform: [
+      { translateY: k.interpolate({ inputRange: [0, 0.15, 0.6, 0.95, 1], outputRange: [0, 0, -22, -2, 0] }) },
+      { scaleX: k.interpolate({ inputRange: [0, 0.15, 0.3, 0.95, 1], outputRange: [1, 1.08, 0.95, 1.06, 1] }) },
+      { scaleY: k.interpolate({ inputRange: [0, 0.15, 0.3, 0.95, 1], outputRange: [1, 0.88, 1.08, 0.92, 1] }) }] }}>
+      {children}
+    </Animated.View>
+  );
+}
+
+/** The stars of a stage pop in one after the other, each overshooting a little before it settles; the ones not won
+ * stay grey. */
+export const STAR_STAGGER_MS = 160;
+function Stars({ stars, reduceMotion }: { stars: number; reduceMotion: boolean }) {
+  const pops = useRef([0, 1, 2].map(() => new Animated.Value(reduceMotion ? 1 : 0))).current;
+  useEffect(() => {
+    if (reduceMotion) return;
+    const run = Animated.stagger(STAR_STAGGER_MS, pops.map((v) => Animated.spring(v, { toValue: 1, friction: 4, tension: 140, useNativeDriver: true })));
+    const all = Animated.sequence([Animated.delay(350), run]);
+    all.start();
+    return () => all.stop();
+  }, [pops, reduceMotion]);
+  return (
+    <View style={styles.starRow} accessible accessibilityLabel={`${stars} trên 3 sao`}>
+      {pops.map((v, i) => (
+        <Animated.Text key={i} style={[styles.stars, i >= stars && styles.starsOff, { opacity: v.interpolate({ inputRange: [0, 0.3, 1], outputRange: [0, 1, 1] }),
+          transform: [{ scale: v.interpolate({ inputRange: [0, 1], outputRange: [0.3, 1] }) }] }]}>★</Animated.Text>
+      ))}
+    </View>
+  );
+}
 
 const SHOWN: (Outcome | 'unanswered')[] = ['first_try', 'hinted', 'corrected', 'wrong', 'revealed', 'missed', 'unanswered'];
 const CORRECT = new Set<string>(['first_try', 'hinted', 'corrected']);
 
-export function ResultScreen({ sessionId, petId, petLevel, onReplay, onReview, onHome, onRewards, onLesson }: Props) {
+/** Stars for a finished stage, from the share right at the first try: 3 from 90%, 2 from 70%, else 1. A stage not
+ * completed has none (it is never a loss: the lesson can be played again). Shown only: EXP is the backend's. */
+export function stageStars(status: LearningSession['status'], firstTry: number, total: number): 0 | 1 | 2 | 3 {
+  if (status !== 'completed') return 0;
+  const share = total > 0 ? firstTry / total : 0;
+  return share >= 0.9 ? 3 : share >= 0.7 ? 2 : 1;
+}
+
+export function ResultScreen({ sessionId, petId, petLevel, onReplay, onReview, onHome, onRewards, onLesson, reduceMotion = false }: Props) {
   const [result, setResult] = useState<SessionResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const load = useCallback(async () => {
@@ -30,6 +89,18 @@ export function ResultScreen({ sessionId, petId, petLevel, onReplay, onReview, o
     try { setResult(await learningApi.result(sessionId)); onRewards(); } catch (e) { setError(errorMessage(e)); }
   }, [sessionId, onRewards]);
   useEffect(() => { void load(); }, [load]);
+  // A lesson's vocabulary stage: whether it discovered the lesson's last own word (Khám phá từ mới, vocab_lesson.py).
+  const [explore, setExplore] = useState<LessonExplore | null>(null);
+  const stage = result?.session;
+  const lessonKey = stage?.kind === 'lesson' && (stage.game === 'meteor' || stage.game === 'word_shooter') ? stage.catalog?.lesson : undefined;
+  useEffect(() => {
+    if (!lessonKey || !stage) return;
+    let live = true;
+    void learningApi.lessonDetail(lessonKey).then((l) => {
+      if (live) setExplore(l.games.find((g) => g.game === stage.game)?.explore ?? null);
+    }).catch(() => {});
+    return () => { live = false; };
+  }, [lessonKey, stage]);
 
   if (error) return <Card><Text style={styles.error}>{error}</Text><Button title="Thử lại" icon="refresh" onPress={() => void load()} /></Card>;
   if (!result) return <ActivityIndicator color={t.accent} />;
@@ -37,18 +108,32 @@ export function ResultScreen({ sessionId, petId, petLevel, onReplay, onReview, o
   const reward = rewardMessage(s.reward, s.kind);
   const total = s.required_count || 1;
   const lesson = s.catalog ?? null;
+  const stars = stageStars(s.status, result.counts.first_try, total);
   return (
     <>
       <Card style={styles.hero}>
-        <PetArt pet={petId} size={96} stage={petLevel} still />
+        <Victory won={s.status === 'completed'} reduceMotion={reduceMotion}>
+          <PetArt pet={petId} size={96} stage={petLevel} still />
+        </Victory>
         <Text style={styles.title} accessibilityRole="header">{STATUS_TITLE[s.status]}</Text>
+        {stars ? <Stars stars={stars} reduceMotion={reduceMotion} /> : null}
         {lesson?.title ? (
           <Text style={[styles.muted, styles.center]}>Lớp {lesson.grade} · {lesson.subject_name} · {lesson.title} · {lesson.game_title ?? gameTitle(s.game)}</Text>
         ) : <Text style={[styles.muted, styles.center]}>{s.lesson.name} · {gameTitle(s.game)} · {MODE_INFO[s.mode].name}</Text>}
         {s.end_reason === 'time_up' ? <Text style={styles.muted}>Bạn đã kết thúc khi hết thời lượng. Hết giờ không phải là thua!</Text> : null}
-        {s.mode === 'challenge' ? <Text style={styles.score}>⭐ {s.score} điểm · Combo cao nhất x{s.max_combo}</Text> : null}
+        {s.mode === 'challenge' ? <Text style={styles.score}>⭐ {s.score} điểm · Combo cao nhất x{s.max_combo}</Text>
+          : s.max_combo >= 3 ? <Text style={styles.score}>🔥 Combo cao nhất x{s.max_combo}</Text> : null}
         <Text style={styles.accuracy}>Đúng ngay {result.counts.first_try}/{total} câu</Text>
         {reward ? <Text style={[styles.reward, s.reward?.exp ? styles.rewardOn : null]} accessibilityRole="text">{reward}</Text> : null}
+        {explore && s.status === 'completed' && explore.core_completed_session === s.id ? (
+          <Text style={styles.explore} accessibilityRole="text">
+            {explore.exhausted ? 'Bạn đã hoàn thành từ vựng của bài này!'
+              : 'Bạn đã hoàn thành từ vựng của bài này! Hãy tiếp tục khám phá những từ mới cùng chủ đề nhé!'}
+          </Text>
+        ) : null}
+        {explore?.exhausted && s.status === 'completed' ? (
+          <Text style={styles.explore} accessibilityRole="text">Bạn đã khám phá hết từ mới phù hợp trong trò này. Hãy Ôn tập để nhớ thật lâu nhé!</Text>
+        ) : null}
       </Card>
       <Card>
         {SHOWN.filter((k) => result.counts[k]).map((k) => (
@@ -114,9 +199,13 @@ function promptText(p: SessionResult['items'][number]['prompt']) {
 const styles = StyleSheet.create({
   hero: { alignItems: 'center', gap: 4 },
   title: { fontSize: 26, fontWeight: '900', color: t.ink, marginTop: 6 },
+  stars: { fontSize: 34, color: '#F2A93B', marginHorizontal: 2 },
+  starRow: { flexDirection: 'row', justifyContent: 'center' },
+  starsOff: { color: '#E3E8ED' },
   muted: { fontSize: 14, color: t.muted, lineHeight: 20, textAlign: 'left' },
   score: { fontSize: 16, fontWeight: '900', color: t.ink, marginTop: 6 },
   accuracy: { fontSize: 15, fontWeight: '800', color: t.accent },
+  explore: { marginTop: 8, fontSize: 15, fontWeight: '800', color: t.success, textAlign: 'center' },
   reward: { marginTop: 8, fontSize: 15, fontWeight: '800', color: t.muted, textAlign: 'center' },
   rewardOn: { color: t.success },
   error: { color: t.danger, fontWeight: '700' },

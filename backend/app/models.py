@@ -1,6 +1,6 @@
 import json
 from datetime import date, datetime, timezone
-from sqlalchemy import String, Integer, Date, DateTime, ForeignKey, Text, Boolean, UniqueConstraint, Index, text
+from sqlalchemy import BigInteger, String, Integer, Date, DateTime, ForeignKey, Text, Boolean, UniqueConstraint, Index, text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from .db import Base
 
@@ -184,6 +184,17 @@ class UserTask(Base):
     repeat_month_weekday: Mapped[int | None] = mapped_column(Integer, nullable=True)
     repeat_until: Mapped[date | None] = mapped_column(Date, nullable=True)
     repeat_count: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    # Work Quest (work.py). Every task may use them; older tasks read as medium priority, no project, no deadline.
+    project_id: Mapped[int | None] = mapped_column(ForeignKey("work_projects.id", ondelete="SET NULL"), nullable=True, index=True)
+    priority: Mapped[str] = mapped_column(String(10), default="medium", server_default="medium")  # low | medium | high | urgent
+    # A precise deadline for a one-time task (the occurrence date already says the day of a recurring one).
+    due_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    estimated_minutes: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    # A Life Adventure activity this task was started from (adventure.ACTIVITIES); its completions move that region on.
+    adventure_activity: Mapped[str | None] = mapped_column(String(32), nullable=True, index=True)
+    # Removed by its owner: hidden from every list and from the walk's goals; its completions and EXP stay as history.
+    archived_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    updated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 
 class UserTaskCompletion(Base):
@@ -194,6 +205,103 @@ class UserTaskCompletion(Base):
     task_id: Mapped[int] = mapped_column(ForeignKey("user_tasks.id", ondelete="CASCADE"), index=True)
     occurrence_date: Mapped[date] = mapped_column(Date)
     completed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class WorkProject(Base):
+    """A Work Quest project: an island on the project map that is built up as its tasks are done (work.py)."""
+    __tablename__ = "work_projects"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    name: Mapped[str] = mapped_column(String(60))
+    description: Mapped[str | None] = mapped_column(Text, nullable=True)
+    theme: Mapped[str] = mapped_column(String(16), default="meadow", server_default="meadow")  # the island's look
+    status: Mapped[str] = mapped_column(String(12), default="active", server_default="active")  # active | completed | archived
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
+
+
+class UserTaskStep(Base):
+    """A small step of a task (a checklist). Steps are not tasks: no EXP and no walk goal of their own, so splitting a
+    task never multiplies its reward or the goals the walk waits for."""
+    __tablename__ = "user_task_steps"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    task_id: Mapped[int] = mapped_column(ForeignKey("user_tasks.id", ondelete="CASCADE"), index=True)
+    title: Mapped[str] = mapped_column(String(120))
+    position: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class UserTaskStepCompletion(Base):
+    """A step ticked on one occurrence of its task (a recurring task starts each occurrence with every step open)."""
+    __tablename__ = "user_task_step_completions"
+    __table_args__ = (UniqueConstraint("step_id", "occurrence_date", name="uq_task_step_occurrence"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    step_id: Mapped[int] = mapped_column(ForeignKey("user_task_steps.id", ondelete="CASCADE"), index=True)
+    occurrence_date: Mapped[date] = mapped_column(Date)
+    completed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class WorkRewardClaim(Base):
+    """A Work Quest reward chest opened (work.CHESTS). One row per user and chest, so a chest opens once."""
+    __tablename__ = "work_reward_claims"
+    __table_args__ = (UniqueConstraint("user_id", "chest", name="uq_work_reward_claim"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    chest: Mapped[str] = mapped_column(String(20))
+    rewards: Mapped[str] = mapped_column(Text, default="[]")  # JSON [{item_id, variant, quantity}]
+    claimed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class MoodEntry(Base):
+    """A Healing Room mood check-in (life.py). `local_date` is the day on the user's clock when it was made."""
+    __tablename__ = "mood_entries"
+    __table_args__ = (Index("ix_mood_entries_user_day", "user_id", "local_date"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    mood: Mapped[str] = mapped_column(String(12))
+    note: Mapped[str | None] = mapped_column(String(280), nullable=True)
+    local_date: Mapped[date] = mapped_column(Date)
+    timezone: Mapped[str] = mapped_column(String(80), default="UTC")
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class JournalEntry(Base):
+    """A private journal page (life.py). Only its owner can read it; nothing else in the app shows its text."""
+    __tablename__ = "journal_entries"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    kind: Mapped[str] = mapped_column(String(12), default="free", server_default="free")  # free | gratitude
+    title: Mapped[str] = mapped_column(String(120))
+    content: Mapped[str] = mapped_column(Text)
+    visibility: Mapped[str] = mapped_column(String(10), default="private", server_default="private")
+    mood: Mapped[str | None] = mapped_column(String(12), nullable=True)
+    # The album memory saved from this page (its title only, never the text).
+    memory_id: Mapped[int | None] = mapped_column(ForeignKey("memories.id", ondelete="SET NULL"), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, index=True)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
+
+
+class RelaxationSession(Base):
+    """A finished relaxation activity. `client_ref` makes a retried or replayed (offline) report count once."""
+    __tablename__ = "relaxation_sessions"
+    __table_args__ = (UniqueConstraint("user_id", "client_ref", name="uq_relaxation_client_ref"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    activity_type: Mapped[str] = mapped_column(String(16))
+    duration_seconds: Mapped[int] = mapped_column(Integer)
+    client_ref: Mapped[str] = mapped_column(String(64))
+    local_date: Mapped[date] = mapped_column(Date)
+    completed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class RoomAmbiencePreference(Base):
+    """The Healing Room's scene and sound choice, one row per user."""
+    __tablename__ = "room_ambience_preferences"
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
+    ambience_type: Mapped[str] = mapped_column(String(16), default="cozy_night")
+    sound_settings: Mapped[str] = mapped_column(Text, default="{}")  # JSON {"enabled": bool, "volume": 0..1}
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
 
 
 class PetEvolution(Base):
@@ -1001,6 +1109,8 @@ class LearningSession(Base):
               sqlite_where=text("status IN ('active', 'paused')"),
               postgresql_where=text("status IN ('active', 'paused')")),
         Index("ix_learning_session_user_status", "user_id", "status"),
+        # Progress of a school year by lesson (lesson_api.game_progress).
+        Index("ix_learning_sessions_user_year_lesson", "user_id", "academic_year", "catalog_lesson"),
     )
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
@@ -1019,6 +1129,12 @@ class LearningSession(Base):
     catalog_lesson: Mapped[str | None] = mapped_column(String(40), nullable=True, index=True)
     catalog_grade: Mapped[int | None] = mapped_column(Integer, nullable=True)
     content_version: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    # The school year (its first calendar year, education.py) the session was played in: progress is kept per year and
+    # a promotion closes a year without ever moving its results into the next one. None outside school.
+    academic_year: Mapped[int | None] = mapped_column(Integer, nullable=True, index=True)
+    # kind "archive": a review of a finished year from Kho lưu trữ (that year). It never changes that year's frozen
+    # snapshot, nor the progress, review list or reward of the current year.
+    archive_year: Mapped[int | None] = mapped_column(Integer, nullable=True)
     status: Mapped[str] = mapped_column(String(10), default="active")
     seed: Mapped[int] = mapped_column(Integer)
     scoring_json: Mapped[str] = mapped_column(Text)  # snapshot of scoring and game rules used by this session
@@ -1171,13 +1287,433 @@ class LearningReward(Base):
 
 
 class LearningTutorialView(Base):
-    """A game's first-time guide ("Cách chơi"), finished with "Bắt đầu": per account and game, so it is shown once on
-    every device; `version` is the guide's version then (learning.TUTORIAL_VERSION): a newer guide shows once again.
-    Viewing it again later changes nothing."""
+    """A game's tutorial, per account and game (user_game_tutorial_progress): the interactive tutorial played in the
+    game itself (game_tutorials.py) and, before it, the guide pages of older apps. `version` is the tutorial version it
+    was played at and `gameplay_version` the game's engine version then: a newer tutorial or a changed gameplay asks for
+    it once again. `status`: completed (every hands-on step done), skipped ("Bỏ qua", kept apart from completed) or
+    in_progress (left before the end; `current_step` is where). Watching it again later changes nothing."""
     __tablename__ = "learning_tutorial_views"
     __table_args__ = (UniqueConstraint("user_id", "game", name="uq_learning_tutorial_view"),)
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
-    game: Mapped[str] = mapped_column(String(20))  # word_shooter | meteor | gate | bridge | grammar | defense | math_bridge
+    game: Mapped[str] = mapped_column(String(20))  # learning.GameId
     version: Mapped[int] = mapped_column(Integer, default=1, server_default="1")
     completed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    status: Mapped[str] = mapped_column(String(12), default="completed", server_default="completed")
+    game_mode: Mapped[str] = mapped_column(String(12), default="practice", server_default="practice")
+    gameplay_version: Mapped[int] = mapped_column(Integer, default=1, server_default="1")
+    current_step: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
+    updated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+
+# ---------------------------------------------------------------------------------------------------------------
+# School grade and school years (education.py, docs/LEARNING_ARCHIVE.md)
+# ---------------------------------------------------------------------------------------------------------------
+
+class UserEducationProfile(Base):
+    """The learner's place at school: confirmed at registration, then moved on only by the backend (a new school year,
+    or the verified support workflow). users.school_grade mirrors current_grade for the readers that predate this table;
+    both are only ever written by education.py. status: studying | completed (past the last grade of the programme) |
+    outside_school (Sinh viên, Người đi làm: no grade, no promotion)."""
+    __tablename__ = "user_education_profiles"
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
+    initial_grade: Mapped[str] = mapped_column(String(20))
+    current_grade: Mapped[str] = mapped_column(String(20))
+    academic_year: Mapped[int] = mapped_column(Integer)  # first calendar year of the school year: 2026 is 2026–2027
+    enrollment_date: Mapped[date] = mapped_column(Date)
+    education_region: Mapped[str] = mapped_column(String(8), default="VN", server_default="VN")
+    status: Mapped[str] = mapped_column(String(16), default="studying", server_default="studying")
+    # Support workflow "học lại": the next school year keeps the grade (consumed by that promotion).
+    hold_next_promotion: Mapped[bool] = mapped_column(Boolean, default=False, server_default=text("0"))
+    locked_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    version: Mapped[int] = mapped_column(Integer, default=1, server_default="1")
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
+
+
+class AcademicYearConfig(Base):
+    """One school year of one education region, entered by an administrator from the decision that sets it (source,
+    decision_number). promotion_date is the official day the grade changes (by default the first day back at school,
+    tựu trường, which can differ from the opening ceremony, khai giảng). Grades move up only once the row is verified
+    (verified_at / verified_by); every change is in academic_calendar_changes."""
+    __tablename__ = "academic_year_configs"
+    __table_args__ = (UniqueConstraint("region", "academic_year", name="uq_academic_year_region_year"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    region: Mapped[str] = mapped_column(String(8))
+    academic_year: Mapped[int] = mapped_column(Integer)
+    timezone: Mapped[str] = mapped_column(String(80))
+    school_start_date: Mapped[date] = mapped_column(Date)  # tựu trường
+    opening_date: Mapped[date | None] = mapped_column(Date, nullable=True)  # khai giảng
+    promotion_date: Mapped[date] = mapped_column(Date)
+    end_date: Mapped[date | None] = mapped_column(Date, nullable=True)
+    source: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    decision_number: Mapped[str | None] = mapped_column(String(80), nullable=True)  # số văn bản, e.g. 2368/QĐ-BGDĐT
+    verified: Mapped[bool] = mapped_column(Boolean, default=False, server_default=text("0"))
+    verified_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    verified_by: Mapped[int | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
+    updated_by: Mapped[int | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
+
+
+class GradePromotion(Base):
+    """grade_promotion_history: every change of a learner's grade or school year. The yearly kinds (promotion, repeat,
+    completed) are unique per user and school year (the year moved into), so a retry, a second worker or a second
+    device can never promote twice. correction / region_change / migration rows are the support workflow's audit."""
+    __tablename__ = "grade_promotion_history"
+    __table_args__ = (Index("uq_grade_promotion_user_year", "user_id", "academic_year", unique=True,
+                            sqlite_where=text("kind IN ('promotion', 'repeat', 'completed')"),
+                            postgresql_where=text("kind IN ('promotion', 'repeat', 'completed')")),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    kind: Mapped[str] = mapped_column(String(16))  # promotion | repeat | completed | correction | region_change | migration
+    academic_year: Mapped[int] = mapped_column(Integer)
+    from_grade: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    to_grade: Mapped[str] = mapped_column(String(20))
+    # The year was closed without any learning in it (the app was not opened): nothing is made up for it.
+    skipped: Mapped[bool] = mapped_column(Boolean, default=False, server_default=text("0"))
+    archive_id: Mapped[int | None] = mapped_column(ForeignKey("learning_year_archives.id", ondelete="SET NULL"), nullable=True)
+    reason: Mapped[str | None] = mapped_column(String(300), nullable=True)
+    actor_id: Mapped[int | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
+    # The "lên lớp" celebration was shown (once per event, on any device).
+    celebrated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class CurriculumVersion(Base):
+    """A published state of the lesson catalog (its lessons' content versions, hashed). Archives point at the one
+    they were taken with, and keep their own copy of what they need, so a later catalog change loses nothing."""
+    __tablename__ = "curriculum_versions"
+    __table_args__ = (UniqueConstraint("curriculum", "version_hash", name="uq_curriculum_version"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    curriculum: Mapped[str] = mapped_column(String(20))
+    version_hash: Mapped[str] = mapped_column(String(16))
+    lessons: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class LearningYearArchive(Base):
+    """learning_year_archives: a finished school year, frozen when the year closed. Kho lưu trữ lists the three most
+    recent; older ones stay stored (hidden) until the configured retention deletes them. snapshot_version is the
+    format of summary_json/stats_json."""
+    __tablename__ = "learning_year_archives"
+    __table_args__ = (UniqueConstraint("user_id", "academic_year", name="uq_learning_year_archive"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    academic_year: Mapped[int] = mapped_column(Integer)
+    grade: Mapped[str] = mapped_column(String(20))
+    region: Mapped[str] = mapped_column(String(8))
+    curriculum_version_id: Mapped[int | None] = mapped_column(ForeignKey("curriculum_versions.id", ondelete="SET NULL"), nullable=True)
+    snapshot_version: Mapped[int] = mapped_column(Integer, default=1, server_default="1")
+    had_activity: Mapped[bool] = mapped_column(Boolean, default=False, server_default=text("0"))
+    summary_json: Mapped[str] = mapped_column(Text)  # subjects → chapters → lessons (titles, content versions, status)
+    stats_json: Mapped[str] = mapped_column(Text)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class ArchivedLearningResult(Base):
+    """archived_learning_results: one lesson's game (or one free-practice game) as it stood when the year closed."""
+    __tablename__ = "archived_learning_results"
+    __table_args__ = (UniqueConstraint("archive_id", "lesson_key", "game", name="uq_archived_learning_result"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    archive_id: Mapped[int] = mapped_column(ForeignKey("learning_year_archives.id", ondelete="CASCADE"), index=True)
+    subject: Mapped[str] = mapped_column(String(30))
+    lesson_key: Mapped[str] = mapped_column(String(60))  # "" for a free-practice game (not by lesson)
+    game: Mapped[str] = mapped_column(String(20))
+    content_version: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    stages: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
+    completed: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
+    best: Mapped[int | None] = mapped_column(Integer, nullable=True)  # best share right at the first try, %
+    best_score: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
+    passed: Mapped[bool] = mapped_column(Boolean, default=False, server_default=text("0"))
+    detail_json: Mapped[str | None] = mapped_column(Text, nullable=True)
+
+
+class ArchivedLearningNote(Base):
+    """archived_learning_notes: what was learned that year, frozen: kind knowledge (a lesson's objectives, summary and
+    examples at the content version studied), vocab (a word met) or mistake (a question answered wrong)."""
+    __tablename__ = "archived_learning_notes"
+    __table_args__ = (UniqueConstraint("archive_id", "kind", "note_key", name="uq_archived_learning_note"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    archive_id: Mapped[int] = mapped_column(ForeignKey("learning_year_archives.id", ondelete="CASCADE"), index=True)
+    kind: Mapped[str] = mapped_column(String(12))  # knowledge | vocab | mistake
+    note_key: Mapped[str] = mapped_column(String(120))
+    subject: Mapped[str | None] = mapped_column(String(30), nullable=True)
+    payload_json: Mapped[str] = mapped_column(Text)
+
+
+class AcademicCalendarChange(Base):
+    """Audit of academic_year_configs: who changed a school year's dates or verification, when, why, before/after."""
+    __tablename__ = "academic_calendar_changes"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    region: Mapped[str] = mapped_column(String(8))
+    academic_year: Mapped[int] = mapped_column(Integer)
+    actor_id: Mapped[int | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
+    reason: Mapped[str] = mapped_column(String(300))
+    before_json: Mapped[str | None] = mapped_column(Text, nullable=True)
+    after_json: Mapped[str] = mapped_column(Text)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class LearningNote(Base):
+    """Sổ tay kiến thức, ghi chú cá nhân: written by the learner, linked to a subject and optionally a lesson, kept per
+    school year (and grade). A promotion never touches them; Kho lưu trữ shows a year's notes with that year."""
+    __tablename__ = "learning_notes"
+    __table_args__ = (Index("ix_learning_notes_user_year", "user_id", "academic_year"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    academic_year: Mapped[int | None] = mapped_column(Integer, nullable=True)  # None outside school
+    grade: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    subject: Mapped[str] = mapped_column(String(30))
+    lesson_key: Mapped[str | None] = mapped_column(String(60), nullable=True)
+    title: Mapped[str] = mapped_column(String(120), default="")
+    body: Mapped[str] = mapped_column(Text)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
+
+
+class VocabDiscovery(Base):
+    """“Khám phá từ mới”: an English word shown to a user for the first time in one vocabulary game (meteor: Việt → Anh,
+    word_shooter: Anh → Việt). One row per (user, game, canonical word), written when the word's turn is put on screen,
+    so a word never comes back as new in that game, whatever the device, session or school year. A word that was drawn
+    but never shown (the stage ended first) is not a discovery. Ôn tập never writes here. Rules: learning_vocab.py."""
+    __tablename__ = "vocab_discoveries"
+    __table_args__ = (UniqueConstraint("user_id", "game", "canonical", name="uq_vocab_discovery"),
+                      Index("ix_vocab_discovery_user_game_level", "user_id", "game", "level"),
+                      Index("ix_vocab_discovery_user_year", "user_id", "academic_year"))
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    game: Mapped[str] = mapped_column(String(20))  # meteor | word_shooter
+    canonical: Mapped[str] = mapped_column(String(60))  # the normalized word: two senses of "bank" are one word here
+    entry_key: Mapped[str] = mapped_column(String(60))  # the sense that was shown
+    level: Mapped[int] = mapped_column(Integer)  # 1..5 (learning_vocab.level_of)
+    topic: Mapped[str] = mapped_column(String(40))
+    academic_year: Mapped[int | None] = mapped_column(Integer, nullable=True)  # the school year it was met in
+    session_id: Mapped[int | None] = mapped_column(ForeignKey("learning_sessions.id", ondelete="SET NULL"), nullable=True)
+    discovered_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class VocabLevelProgress(Base):
+    """A vocabulary level (1..5) of one game for one user: when it was unlocked and when every word of it (for the
+    user's grade) was discovered. Never revoked: words added to the bank later are simply new words of an open level,
+    and a completion is celebrated once (`celebrated_at`)."""
+    __tablename__ = "vocab_level_progress"
+    __table_args__ = (UniqueConstraint("user_id", "game", "level", name="uq_vocab_level_progress"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    game: Mapped[str] = mapped_column(String(20))
+    level: Mapped[int] = mapped_column(Integer)
+    unlocked_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    unlock_reason: Mapped[str] = mapped_column(String(12))  # start (the grade starts there) | completed (the level below)
+    unlocked_grade: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    completed_words: Mapped[int] = mapped_column(Integer, default=0, server_default="0")  # unique words discovered then
+    completed_year: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    celebrated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+
+# ------------------------------------------------------------------------------------------------ Mirabi Life, phase 2-3
+class AdventureRewardClaim(Base):
+    """A Life Adventure milestone reward taken (adventure.REGIONS). One row per user and milestone."""
+    __tablename__ = "adventure_reward_claims"
+    __table_args__ = (UniqueConstraint("user_id", "milestone", name="uq_adventure_reward_claim"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    milestone: Mapped[str] = mapped_column(String(40))
+    rewards: Mapped[str] = mapped_column(Text, default="[]")
+    claimed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class FinanceCategory(Base):
+    """An income or expense category. Built-in ones have no owner (`user_id` null) and a `code`."""
+    __tablename__ = "finance_categories"
+    __table_args__ = (UniqueConstraint("code", name="uq_finance_category_code"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int | None] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), nullable=True, index=True)
+    code: Mapped[str | None] = mapped_column(String(24), nullable=True)
+    name: Mapped[str] = mapped_column(String(40))
+    type: Mapped[str] = mapped_column(String(10))  # income | expense
+    icon: Mapped[str] = mapped_column(String(8), default="💰")
+    archived_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+
+class FinanceGoal(Base):
+    """A savings goal: a tree in the Money Garden. Money is whole VND (no float, no fractions)."""
+    __tablename__ = "finance_goals"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    name: Mapped[str] = mapped_column(String(60))
+    target_amount: Mapped[int] = mapped_column(BigInteger)
+    currency: Mapped[str] = mapped_column(String(3), default="VND", server_default="VND")
+    target_date: Mapped[date | None] = mapped_column(Date, nullable=True)
+    plant: Mapped[str] = mapped_column(String(16), default="sakura", server_default="sakura")
+    status: Mapped[str] = mapped_column(String(12), default="active", server_default="active")  # active | archived
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
+
+
+class FinanceTransaction(Base):
+    """Money the user recorded: a deposit to / withdrawal from a goal, or an income / expense. Whole VND, positive;
+    `transaction_type` says which way it goes. `client_ref` makes a retried save count once."""
+    __tablename__ = "finance_transactions"
+    __table_args__ = (UniqueConstraint("user_id", "client_ref", name="uq_finance_client_ref"),
+                      Index("ix_finance_tx_user_time", "user_id", "occurred_at"))
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    goal_id: Mapped[int | None] = mapped_column(ForeignKey("finance_goals.id", ondelete="SET NULL"), nullable=True, index=True)
+    transaction_type: Mapped[str] = mapped_column(String(10))  # deposit | withdraw | income | expense
+    amount: Mapped[int] = mapped_column(BigInteger)
+    category_id: Mapped[int | None] = mapped_column(ForeignKey("finance_categories.id", ondelete="SET NULL"), nullable=True)
+    occurred_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    note: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    client_ref: Mapped[str] = mapped_column(String(64))
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class FinanceBudget(Base):
+    """A monthly spending limit for one expense category (`period` "YYYY-MM")."""
+    __tablename__ = "finance_budgets"
+    __table_args__ = (UniqueConstraint("user_id", "category_id", "period", name="uq_finance_budget"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    category_id: Mapped[int] = mapped_column(ForeignKey("finance_categories.id", ondelete="CASCADE"))
+    period: Mapped[str] = mapped_column(String(7))
+    limit_amount: Mapped[int] = mapped_column(BigInteger)
+
+
+class TownEvent(Base):
+    """A Mirabi Town event (seeded by town.seed_town)."""
+    __tablename__ = "town_events"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    code: Mapped[str] = mapped_column(String(40), unique=True)
+    title: Mapped[str] = mapped_column(String(80))
+    description: Mapped[str] = mapped_column(Text)
+    start_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    end_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    project_code: Mapped[str | None] = mapped_column(String(40), nullable=True)
+    status: Mapped[str] = mapped_column(String(12), default="published", server_default="published")
+
+
+class CommunityProject(Base):
+    """A building everyone in the town builds together with in-game coins."""
+    __tablename__ = "community_projects"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    code: Mapped[str] = mapped_column(String(40), unique=True)
+    name: Mapped[str] = mapped_column(String(80))
+    description: Mapped[str] = mapped_column(Text, default="")
+    target_contribution: Mapped[int] = mapped_column(BigInteger)
+    current_contribution: Mapped[int] = mapped_column(BigInteger, default=0, server_default="0")
+    status: Mapped[str] = mapped_column(String(12), default="active", server_default="active")  # active | completed
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+
+class CommunityContribution(Base):
+    __tablename__ = "community_contributions"
+    __table_args__ = (UniqueConstraint("user_id", "client_ref", name="uq_community_contribution_ref"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    project_id: Mapped[int] = mapped_column(ForeignKey("community_projects.id", ondelete="CASCADE"), index=True)
+    amount: Mapped[int] = mapped_column(Integer)
+    client_ref: Mapped[str] = mapped_column(String(64))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, index=True)
+
+
+class GiftTransfer(Base):
+    """An inventory item one friend gave another. `client_ref` makes a resent gift count once."""
+    __tablename__ = "gift_transfers"
+    __table_args__ = (UniqueConstraint("sender_id", "client_ref", name="uq_gift_client_ref"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    sender_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    receiver_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    item_id: Mapped[str] = mapped_column(String(40))
+    variant: Mapped[str] = mapped_column(String(24), default="default")
+    status: Mapped[str] = mapped_column(String(12), default="delivered")
+    client_ref: Mapped[str] = mapped_column(String(64))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, index=True)
+
+
+class VisitLog(Base):
+    """A visit to a friend's room (at most one row per visitor, host and 10 minutes)."""
+    __tablename__ = "visit_logs"
+    __table_args__ = (Index("ix_visit_logs_owner_time", "owner_id", "visited_at"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    visitor_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    owner_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    visited_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class CareerPath(Base):
+    """A career journey (data/careers.json, seeded by careers.seed_careers; `content_version` grows on every change)."""
+    __tablename__ = "career_paths"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    code: Mapped[str] = mapped_column(String(32), unique=True)
+    name: Mapped[str] = mapped_column(String(80))
+    description: Mapped[str] = mapped_column(Text)
+    icon: Mapped[str] = mapped_column(String(8), default="🧭")
+    position: Mapped[int] = mapped_column(Integer, default=0)
+    content_version: Mapped[int] = mapped_column(Integer, default=1)
+    status: Mapped[str] = mapped_column(String(12), default="published", server_default="published")  # published | retired
+
+
+class CareerSkill(Base):
+    """A skill node of a career's tree. Removed from the content, it is retired, never deleted (progress is kept)."""
+    __tablename__ = "career_skills"
+    __table_args__ = (UniqueConstraint("career_path_id", "code", name="uq_career_skill_code"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    career_path_id: Mapped[int] = mapped_column(ForeignKey("career_paths.id", ondelete="CASCADE"), index=True)
+    code: Mapped[str] = mapped_column(String(48))
+    group_name: Mapped[str] = mapped_column(String(60))
+    name: Mapped[str] = mapped_column(String(80))
+    description: Mapped[str] = mapped_column(Text)
+    goal: Mapped[str] = mapped_column(Text, default="")
+    level: Mapped[int] = mapped_column(Integer, default=1)
+    prerequisites: Mapped[str] = mapped_column(Text, default="[]")  # JSON skill codes of the same path
+    activities: Mapped[str] = mapped_column(Text, default="[]")  # JSON practice ideas
+    assessment: Mapped[str] = mapped_column(Text, default="[]")  # JSON [{q, options, answer}]
+    position: Mapped[int] = mapped_column(Integer, default=0)
+    status: Mapped[str] = mapped_column(String(12), default="published", server_default="published")
+
+
+class UserCareerProfile(Base):
+    """A career the user follows. Changing career keeps the other ones (and their progress); one is `active`."""
+    __tablename__ = "user_career_profiles"
+    __table_args__ = (UniqueConstraint("user_id", "career_path_id", name="uq_user_career_profile"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    career_path_id: Mapped[int] = mapped_column(ForeignKey("career_paths.id", ondelete="CASCADE"))
+    current_goal: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    active: Mapped[bool] = mapped_column(Boolean, default=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class UserSkillProgress(Base):
+    """How far the user says they are with a skill. Statuses grow: in_progress (self-reported %) -> practiced (practice
+    done) -> assessed (passed the skill's check). "verified" needs a real verification, which doesn't exist yet."""
+    __tablename__ = "user_skill_progress"
+    __table_args__ = (UniqueConstraint("user_id", "skill_id", name="uq_user_skill_progress"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    skill_id: Mapped[int] = mapped_column(ForeignKey("career_skills.id", ondelete="CASCADE"), index=True)
+    status: Mapped[str] = mapped_column(String(12), default="in_progress")
+    progress_percent: Mapped[int] = mapped_column(Integer, default=0)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
+
+
+class CareerMilestone(Base):
+    """A badge of a career: every skill of a group practiced, or the whole tree."""
+    __tablename__ = "career_milestones"
+    __table_args__ = (UniqueConstraint("career_path_id", "code", name="uq_career_milestone_code"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    career_path_id: Mapped[int] = mapped_column(ForeignKey("career_paths.id", ondelete="CASCADE"), index=True)
+    code: Mapped[str] = mapped_column(String(64))
+    title: Mapped[str] = mapped_column(String(80))
+    requirements: Mapped[str] = mapped_column(Text)  # JSON {"skills": [codes], "status": "practiced"}
+
+
+class UserCareerAchievement(Base):
+    __tablename__ = "user_career_achievements"
+    __table_args__ = (UniqueConstraint("user_id", "milestone_id", name="uq_user_career_achievement"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    milestone_id: Mapped[int] = mapped_column(ForeignKey("career_milestones.id", ondelete="CASCADE"))
+    earned_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)

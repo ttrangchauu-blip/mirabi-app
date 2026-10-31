@@ -68,8 +68,8 @@ def play(client, who, session: dict, plan: dict[str, str]) -> dict:
 
 
 def test_empty_history_and_authentication(client, mai):
-    assert history(client, mai) == {"items": [], "total": 0, "limit": 15, "offset": 0, "counts": {"all": 0, "correct": 0, "review": 0},
-                                     "due": {"en_vi": 0, "vi_en": 0}}
+    assert history(client, mai) == {"items": [], "total": 0, "limit": 15, "offset": 0, "counts": {"all": 0, "correct": 0, "review": 0, "learned": 0, "mastered": 0},
+                                     "due": {"en_vi": 0, "vi_en": 0}, "topics": []}
     assert client.get(HISTORY).status_code == 401
 
 
@@ -84,7 +84,7 @@ def test_each_sense_is_its_own_entry_and_only_answers_without_help_count_as_righ
     assert money["status"] == "correct" and money["directions"]["vi_en"] == {
         "correct": 1, "wrong": 0, "unanswered": 0, "last_result": "correct", "last_at": money["last_seen_at"]}
     assert river["status"] == "review" and river["wrong"] == 1  # wrong first, then fixed: still to review
-    assert body["counts"] == {"all": 3, "correct": 1, "review": 2} and body["due"] == {"en_vi": 0, "vi_en": 2}
+    assert body["counts"] == {"all": 3, "correct": 1, "review": 2, "learned": 1, "mastered": 0} and body["due"] == {"en_vi": 0, "vi_en": 2}
 
     cold = detail(client, mai, "cold.weather")
     assert cold["status"] == "review" and cold["directions"]["vi_en"]["wrong"] == 1 and cold["correct"] == 0

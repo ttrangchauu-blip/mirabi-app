@@ -298,61 +298,111 @@
      "requires_note": null,
      "games": [
       {
-       "game": "order",
+       "game": "timeline",
        "title": "Dòng thời gian phát minh",
+       "credit_from": "order",
        "tasks": [
         {
          "key": "lan_1",
-         "prompt": "Xếp các phát minh của cách mạng công nghiệp lần thứ nhất theo thời gian.",
-         "items": [
-          "Thoi bay của Giôn Cay",
-          "Máy kéo sợi Gien-ni",
-          "Máy hơi nước của Giêm Oát",
-          "Tàu thuỷ chạy bằng hơi nước của Phơn-tơn",
-          "Đầu máy xe lửa của Xti-phen-xơn"
+         "prompt": "Đặt các phát minh của cách mạng công nghiệp lần thứ nhất lên dòng thời gian.",
+         "events": [
+          {
+           "text": "Thoi bay của Giôn Cay",
+           "year": 1733
+          },
+          {
+           "text": "Máy kéo sợi Gien-ni",
+           "year": 1764
+          },
+          {
+           "text": "Máy hơi nước của Giêm Oát",
+           "year": 1784
+          },
+          {
+           "text": "Tàu thuỷ chạy bằng hơi nước của Phơn-tơn",
+           "year": 1807
+          },
+          {
+           "text": "Đầu máy xe lửa của Xti-phen-xơn",
+           "year": 1814
+          }
          ],
-         "explanation": "Thoi bay (1733) → máy kéo sợi Gien-ni (1764) → máy hơi nước của Oát (thập niên 1760–1780) → tàu thuỷ của Phơn-tơn (1807) → đầu máy xe lửa của Xti-phen-xơn (1814).",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "Thoi bay (1733) → máy kéo sợi Gien-ni (1764) → máy hơi nước của Oát (1784) → tàu thuỷ của Phơn-tơn (1807) → đầu máy xe lửa của Xti-phen-xơn (1814)."
         },
         {
          "key": "lan_2",
-         "prompt": "Xếp các phát minh của cách mạng công nghiệp lần thứ hai theo thời gian.",
-         "items": [
-          "Điện thoại của Gra-ham Beo",
-          "Bóng đèn điện của Ê-đi-xơn",
-          "Chuyến bay đầu tiên của anh em Rai",
-          "Dây chuyền lắp ráp ô tô của Pho"
+         "prompt": "Đặt các phát minh của cách mạng công nghiệp lần thứ hai lên dòng thời gian.",
+         "events": [
+          {
+           "text": "Điện thoại của Gra-ham Beo",
+           "year": 1876
+          },
+          {
+           "text": "Bóng đèn điện của Ê-đi-xơn",
+           "year": 1879
+          },
+          {
+           "text": "Chuyến bay đầu tiên của anh em Rai",
+           "year": 1903
+          },
+          {
+           "text": "Dây chuyền lắp ráp ô tô của Pho",
+           "year": 1913
+          }
          ],
-         "explanation": "Điện thoại (1876) → bóng đèn điện (1879) → máy bay của anh em Rai (1903) → dây chuyền lắp ráp ô tô (1913).",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "Điện thoại (1876) → bóng đèn điện (1879) → máy bay của anh em Rai (1903) → dây chuyền lắp ráp ô tô (1913)."
         },
         {
          "key": "lan_3_4",
-         "prompt": "Xếp các thành tựu khoa học – công nghệ của thế kỉ XX – XXI theo thời gian.",
-         "items": [
-          "Máy tính điện tử ENIAC ra đời",
-          "Con người đặt chân lên Mặt Trăng",
-          "Mạng toàn cầu World Wide Web ra đời",
-          "Hoàn thành giải mã bộ gen người"
+         "prompt": "Đặt các thành tựu khoa học – công nghệ của thế kỉ XX – XXI lên dòng thời gian.",
+         "events": [
+          {
+           "text": "Máy tính điện tử ENIAC ra đời",
+           "year": 1946
+          },
+          {
+           "text": "Con người đặt chân lên Mặt Trăng",
+           "year": 1969
+          },
+          {
+           "text": "Mạng toàn cầu World Wide Web ra đời",
+           "year": 1989,
+           "label": "1989–1991"
+          },
+          {
+           "text": "Hoàn thành giải mã bộ gen người",
+           "year": 2003
+          }
          ],
-         "explanation": "ENIAC (1946) → lên Mặt Trăng (1969) → World Wide Web (1989–1991) → giải mã bộ gen người (2003).",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "ENIAC (1946) → lên Mặt Trăng (1969) → World Wide Web (1989–1991) → giải mã bộ gen người (2003)."
         },
         {
          "key": "cac_cuoc",
-         "prompt": "Xếp đặc trưng của các cuộc cách mạng công nghiệp theo thời gian.",
-         "items": [
-          "Máy hơi nước thay thế sức người, sức nước",
-          "Điện năng và dây chuyền sản xuất hàng loạt",
-          "Máy tính, tự động hoá và Internet",
-          "Trí tuệ nhân tạo, kết nối vạn vật, dữ liệu lớn"
+         "prompt": "Đặt đặc trưng của các cuộc cách mạng công nghiệp lên dòng thời gian.",
+         "events": [
+          {
+           "text": "Máy hơi nước thay thế sức người, sức nước",
+           "year": 1760,
+           "label": "Lần thứ nhất"
+          },
+          {
+           "text": "Điện năng và dây chuyền sản xuất hàng loạt",
+           "year": 1870,
+           "label": "Lần thứ hai"
+          },
+          {
+           "text": "Máy tính, tự động hoá và Internet",
+           "year": 1950,
+           "label": "Lần thứ ba"
+          },
+          {
+           "text": "Trí tuệ nhân tạo, kết nối vạn vật, dữ liệu lớn",
+           "year": 2010,
+           "label": "Lần thứ tư"
+          }
          ],
          "explanation": "Cơ giới hoá (lần 1) → điện khí hoá (lần 2) → tự động hoá, số hoá (lần 3) → kết nối thông minh (lần 4).",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "years": "hidden"
         }
        ]
       },
@@ -437,7 +487,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "chronology"
     }
    ]
   },
@@ -793,62 +844,117 @@
      "requires_note": null,
      "games": [
       {
-       "game": "order",
+       "game": "timeline",
        "title": "Dòng thời gian bảo vệ Tổ quốc",
+       "credit_from": "order",
        "tasks": [
         {
          "key": "khang_chien",
-         "prompt": "Xếp các cuộc kháng chiến theo thời gian, từ sớm đến muộn.",
-         "items": [
-          "Kháng chiến chống Nam Hán của Ngô Quyền",
-          "Kháng chiến chống Tống thời Tiền Lê",
-          "Kháng chiến chống Tống thời Lý",
-          "Ba lần kháng chiến chống Mông – Nguyên",
-          "Kháng chiến chống quân Xiêm",
-          "Kháng chiến chống quân Thanh"
+         "prompt": "Đặt các cuộc kháng chiến lên dòng thời gian, từ sớm đến muộn.",
+         "events": [
+          {
+           "text": "Kháng chiến chống Nam Hán của Ngô Quyền",
+           "year": 938
+          },
+          {
+           "text": "Kháng chiến chống Tống thời Tiền Lê",
+           "year": 981
+          },
+          {
+           "text": "Kháng chiến chống Tống thời Lý",
+           "year": 1075,
+           "label": "1075–1077"
+          },
+          {
+           "text": "Ba lần kháng chiến chống Mông – Nguyên",
+           "year": 1258,
+           "label": "1258–1288"
+          },
+          {
+           "text": "Kháng chiến chống quân Xiêm",
+           "year": 1785
+          },
+          {
+           "text": "Kháng chiến chống quân Thanh",
+           "year": 1789
+          }
          ],
-         "explanation": "938 → 981 → 1075–1077 → 1258–1288 → 1785 → 1789.",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "938 → 981 → 1075–1077 → 1258–1288 → 1785 → 1789."
         },
         {
          "key": "khoi_nghia",
-         "prompt": "Xếp các cuộc khởi nghĩa, chiến tranh giải phóng theo thời gian.",
-         "items": [
-          "Khởi nghĩa Hai Bà Trưng",
-          "Khởi nghĩa Lý Bí",
-          "Khởi nghĩa Lam Sơn",
-          "Phong trào Tây Sơn"
+         "prompt": "Đặt các cuộc khởi nghĩa, chiến tranh giải phóng lên dòng thời gian.",
+         "events": [
+          {
+           "text": "Khởi nghĩa Hai Bà Trưng",
+           "year": 40,
+           "label": "Năm 40"
+          },
+          {
+           "text": "Khởi nghĩa Lý Bí",
+           "year": 542
+          },
+          {
+           "text": "Khởi nghĩa Lam Sơn",
+           "year": 1418,
+           "label": "1418–1427"
+          },
+          {
+           "text": "Phong trào Tây Sơn",
+           "year": 1771,
+           "label": "Từ 1771"
+          }
          ],
-         "explanation": "Năm 40 → năm 542 → 1418–1427 → từ năm 1771.",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "Năm 40 → năm 542 → 1418–1427 → từ năm 1771."
         },
         {
          "key": "chong_tong",
-         "prompt": "Xếp diễn biến cuộc kháng chiến chống Tống thời Lý theo thứ tự.",
-         "items": [
-          "Lý Thường Kiệt chủ động tấn công sang đất Tống",
-          "Rút về nước, xây dựng phòng tuyến sông Như Nguyệt",
-          "Quân Tống tấn công phòng tuyến nhưng thất bại",
-          "Ta chủ động đề nghị giảng hoà, quân Tống rút về nước"
+         "prompt": "Đặt diễn biến cuộc kháng chiến chống Tống thời Lý lên dòng thời gian.",
+         "events": [
+          {
+           "text": "Lý Thường Kiệt chủ động tấn công sang đất Tống",
+           "year": 1075
+          },
+          {
+           "text": "Rút về nước, xây dựng phòng tuyến sông Như Nguyệt",
+           "year": 1076
+          },
+          {
+           "text": "Quân Tống tấn công phòng tuyến nhưng thất bại",
+           "year": 1077,
+           "seq": 1
+          },
+          {
+           "text": "Ta chủ động đề nghị giảng hoà, quân Tống rút về nước",
+           "year": 1077,
+           "seq": 2
+          }
          ],
-         "explanation": "1075 tiến công phòng vệ (“tiên phát chế nhân”); 1076 xây phòng tuyến; 1077 đánh bại quân Tống ở Như Nguyệt rồi chủ động giảng hoà.",
-         "first_label": "Đầu tiên",
-         "last_label": "Cuối cùng"
+         "explanation": "1075 tiến công phòng vệ (“tiên phát chế nhân”); 1076 xây phòng tuyến; 1077 đánh bại quân Tống ở Như Nguyệt rồi chủ động giảng hoà."
         },
         {
          "key": "mong_nguyen",
-         "prompt": "Xếp các sự kiện trong ba lần kháng chiến chống Mông – Nguyên theo thời gian.",
-         "items": [
-          "Chiến thắng Đông Bộ Đầu",
-          "Hội nghị Diên Hồng",
-          "Chiến thắng Chương Dương, Hàm Tử",
-          "Chiến thắng trên sông Bạch Đằng"
+         "prompt": "Đặt các sự kiện trong ba lần kháng chiến chống Mông – Nguyên lên dòng thời gian.",
+         "events": [
+          {
+           "text": "Chiến thắng Đông Bộ Đầu",
+           "year": 1258
+          },
+          {
+           "text": "Hội nghị Diên Hồng",
+           "year": 1284,
+           "label": "Cuối 1284"
+          },
+          {
+           "text": "Chiến thắng Chương Dương, Hàm Tử",
+           "year": 1285
+          },
+          {
+           "text": "Chiến thắng trên sông Bạch Đằng",
+           "year": 1288
+          }
          ],
-         "explanation": "1258 Đông Bộ Đầu (lần thứ nhất); cuối 1284 Hội nghị Diên Hồng; 1285 Chương Dương, Hàm Tử (lần thứ hai); 1288 Bạch Đằng (lần thứ ba).",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "1258 Đông Bộ Đầu (lần thứ nhất); cuối 1284 Hội nghị Diên Hồng; 1285 Chương Dương, Hàm Tử (lần thứ hai); 1288 Bạch Đằng (lần thứ ba)."
         }
        ]
       },
@@ -941,7 +1047,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "chronology"
     },
     {
      "key": "ls11.khang_chien_that_bai",
@@ -1410,65 +1517,110 @@
      "requires_note": null,
      "games": [
       {
-       "game": "order",
+       "game": "timeline",
        "title": "Dòng thời gian ASEAN",
+       "credit_from": "order",
        "tasks": [
         {
          "key": "mo_rong",
-         "prompt": "Xếp các mốc mở rộng thành viên của ASEAN theo thời gian.",
-         "items": [
-          "Năm nước sáng lập ASEAN ở Băng Cốc",
-          "Bru-nây gia nhập",
-          "Việt Nam gia nhập",
-          "Lào và Mi-an-ma gia nhập",
-          "Campuchia gia nhập"
+         "prompt": "Đặt các mốc mở rộng thành viên của ASEAN lên dòng thời gian.",
+         "events": [
+          {
+           "text": "Năm nước sáng lập ASEAN ở Băng Cốc",
+           "year": 1967
+          },
+          {
+           "text": "Bru-nây gia nhập",
+           "year": 1984
+          },
+          {
+           "text": "Việt Nam gia nhập",
+           "year": 1995
+          },
+          {
+           "text": "Lào và Mi-an-ma gia nhập",
+           "year": 1997
+          },
+          {
+           "text": "Campuchia gia nhập",
+           "year": 1999
+          }
          ],
-         "explanation": "1967 → 1984 → 1995 → 1997 → 1999.",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "1967 → 1984 → 1995 → 1997 → 1999."
         },
         {
          "key": "van_kien",
-         "prompt": "Xếp các văn kiện, mốc phát triển của ASEAN theo thời gian.",
-         "items": [
-          "Tuyên bố Băng Cốc",
-          "Hiệp ước Ba-li (Hiệp ước thân thiện và hợp tác)",
-          "Kí Hiến chương ASEAN",
-          "Thành lập Cộng đồng ASEAN"
+         "prompt": "Đặt các văn kiện, mốc phát triển của ASEAN lên dòng thời gian.",
+         "events": [
+          {
+           "text": "Tuyên bố Băng Cốc",
+           "year": 1967
+          },
+          {
+           "text": "Hiệp ước Ba-li (Hiệp ước thân thiện và hợp tác)",
+           "year": 1976
+          },
+          {
+           "text": "Kí Hiến chương ASEAN",
+           "year": 2007
+          },
+          {
+           "text": "Thành lập Cộng đồng ASEAN",
+           "year": 2015
+          }
          ],
-         "explanation": "1967 Tuyên bố Băng Cốc → 1976 Hiệp ước Ba-li → 2007 Hiến chương → 2015 Cộng đồng ASEAN.",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "1967 Tuyên bố Băng Cốc → 1976 Hiệp ước Ba-li → 2007 Hiến chương → 2015 Cộng đồng ASEAN."
         },
         {
          "key": "viet_nam",
-         "prompt": "Xếp các mốc của Việt Nam trong ASEAN theo thời gian.",
-         "items": [
-          "Việt Nam gia nhập ASEAN",
-          "Việt Nam đăng cai Hội nghị cấp cao ASEAN lần thứ 6",
-          "Hiến chương ASEAN có hiệu lực",
-          "Việt Nam làm Chủ tịch ASEAN trong năm đại dịch COVID-19"
+         "prompt": "Đặt các mốc của Việt Nam trong ASEAN lên dòng thời gian.",
+         "events": [
+          {
+           "text": "Việt Nam gia nhập ASEAN",
+           "year": 1995
+          },
+          {
+           "text": "Việt Nam đăng cai Hội nghị cấp cao ASEAN lần thứ 6",
+           "year": 1998
+          },
+          {
+           "text": "Hiến chương ASEAN có hiệu lực",
+           "year": 2008
+          },
+          {
+           "text": "Việt Nam làm Chủ tịch ASEAN trong năm đại dịch COVID-19",
+           "year": 2020
+          }
          ],
-         "explanation": "1995 gia nhập → 1998 Hội nghị cấp cao lần thứ 6 ở Hà Nội → 2008 Hiến chương có hiệu lực → 2020 Chủ tịch ASEAN.",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "1995 gia nhập → 1998 Hội nghị cấp cao lần thứ 6 ở Hà Nội → 2008 Hiến chương có hiệu lực → 2020 Chủ tịch ASEAN."
         },
         {
          "key": "boi_canh",
-         "prompt": "Xếp các sự kiện theo thời gian để thấy bối cảnh Việt Nam gia nhập ASEAN.",
-         "items": [
-          "ASEAN được thành lập",
-          "Việt Nam thống nhất đất nước",
-          "Kí Hiệp định hoà bình về Campuchia ở Pa-ri",
-          "Việt Nam gia nhập ASEAN"
+         "prompt": "Đặt các sự kiện lên dòng thời gian để thấy bối cảnh Việt Nam gia nhập ASEAN.",
+         "events": [
+          {
+           "text": "ASEAN được thành lập",
+           "year": 1967
+          },
+          {
+           "text": "Việt Nam thống nhất đất nước",
+           "year": 1975
+          },
+          {
+           "text": "Kí Hiệp định hoà bình về Campuchia ở Pa-ri",
+           "year": 1991
+          },
+          {
+           "text": "Việt Nam gia nhập ASEAN",
+           "year": 1995
+          }
          ],
-         "explanation": "1967 ASEAN ra đời → 1975 Việt Nam thống nhất → 1991 Hiệp định Pa-ri về Campuchia, quan hệ khu vực cải thiện → 1995 Việt Nam gia nhập ASEAN.",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "1967 ASEAN ra đời → 1975 Việt Nam thống nhất → 1991 Hiệp định Pa-ri về Campuchia, quan hệ khu vực cải thiện → 1995 Việt Nam gia nhập ASEAN."
         }
        ]
       }
-     ]
+     ],
+     "activity": "chronology"
     },
     {
      "key": "ls12.cong_dong_asean",

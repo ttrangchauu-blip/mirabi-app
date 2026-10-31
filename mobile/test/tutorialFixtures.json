@@ -1,0 +1,632 @@
+{
+ "definitions": {
+  "word_shooter": {
+   "game_id": "word_shooter",
+   "game_mode": "practice",
+   "gameplay_version": 1,
+   "tutorial_version": 4,
+   "subject": "english",
+   "hearts": 5,
+   "skippable": true,
+   "done_title": "Giỏi lắm! Bạn đã biết cách bắn từ rồi!",
+   "ready": [
+    "Mỗi chặng có 15 từ, có lúc vài từ rơi cùng lúc.",
+    "Từ nào chạm đất thì mất 1 tim."
+   ],
+   "steps": [
+    {
+     "expected_result": "correct",
+     "demo_animation": "arrow",
+     "release": [
+      "t1"
+     ],
+     "id": "watch",
+     "action": "observe",
+     "instruction": "Nhìn kìa! Một từ đang rơi xuống!",
+     "target": "aimed",
+     "expected_action": "next",
+     "advance_ms": 3500
+    },
+    {
+     "expected_result": "correct",
+     "demo_animation": "hand_type",
+     "release": [],
+     "id": "type",
+     "action": "type",
+     "instruction": "Gõ nghĩa của “apple”: quả táo",
+     "target": "aimed",
+     "expected_action": "answer",
+     "success_feedback": "Chính xác! Pet bắn ngay!",
+     "retry_feedback": "Chưa đúng. Gõ “quả táo” nhé (có dấu hay không đều được)."
+    },
+    {
+     "expected_result": "correct",
+     "demo_animation": "watch",
+     "release": [],
+     "id": "break",
+     "action": "observe",
+     "instruction": "Đạn trúng: từ vỡ ra và hiện nghĩa tiếng Việt.",
+     "target": "play",
+     "expected_action": "next",
+     "advance_ms": 2600
+    }
+   ],
+   "demo": [
+    {
+     "turn_id": "t1",
+     "position": 1,
+     "kind": "word_spelling",
+     "skill_label": "Hướng dẫn",
+     "prompt": {
+      "word": "apple",
+      "phonetic": "/ˈæp.əl/",
+      "part_of_speech": "noun",
+      "level": "",
+      "answer_lang": "vi",
+      "answer_keys": [
+       "70c549e33737e619",
+       "997d9814288302fb"
+      ]
+     },
+     "hints_shown": [],
+     "hints_total": 0,
+     "attempts": 0,
+     "wrong_attempts": 0,
+     "practice": false,
+     "travel_seconds": 0,
+     "on_screen_ms": 0
+    }
+   ],
+   "status": "published"
+  },
+  "meteor": {
+   "game_id": "meteor",
+   "game_mode": "practice",
+   "gameplay_version": 1,
+   "tutorial_version": 4,
+   "subject": "english",
+   "hearts": 5,
+   "skippable": true,
+   "done_title": "Tuyệt! Bạn đã biết cách bắn thiên thạch!",
+   "ready": [
+    "Mỗi chặng có 15 thiên thạch.",
+    "Gõ sai không mất tim, chỉ thiên thạch chạm đất mới mất tim."
+   ],
+   "steps": [
+    {
+     "expected_result": "correct",
+     "demo_animation": "arrow",
+     "release": [
+      "t1"
+     ],
+     "id": "watch",
+     "action": "observe",
+     "instruction": "Một thiên thạch mang nghĩa “con mèo” đang rơi!",
+     "target": "aimed",
+     "expected_action": "next",
+     "advance_ms": 3500
+    },
+    {
+     "expected_result": "correct",
+     "demo_animation": "hand_type",
+     "release": [],
+     "id": "type",
+     "action": "type",
+     "instruction": "Gõ từ tiếng Anh: cat",
+     "target": "aimed",
+     "expected_action": "answer",
+     "success_feedback": "Trúng rồi! Thiên thạch nứt vỡ!",
+     "retry_feedback": "Chưa đúng. “Con mèo” là “cat”, gõ lại nhé."
+    },
+    {
+     "expected_result": "correct",
+     "demo_animation": "watch",
+     "release": [],
+     "id": "break",
+     "action": "observe",
+     "instruction": "Thiên thạch vỡ tung và hiện cặp từ Anh – Việt.",
+     "target": "play",
+     "expected_action": "next",
+     "advance_ms": 2600
+    },
+    {
+     "expected_result": "correct",
+     "demo_animation": "arrow",
+     "release": [
+      "t2"
+     ],
+     "id": "land",
+     "action": "observe",
+     "instruction": "Thiên thạch chạm đất thì mất 1 tim. Xem nhé!",
+     "target": "aimed",
+     "expected_action": "miss",
+     "fall_seconds": 6,
+     "success_feedback": "Thấy chưa? Đây chỉ là tim minh hoạ, khi chơi nhớ bắn trước nhé!"
+    }
+   ],
+   "demo": [
+    {
+     "turn_id": "t1",
+     "position": 1,
+     "kind": "vocab_typing",
+     "skill_label": "Hướng dẫn",
+     "prompt": {
+      "meaning_vi": "con mèo",
+      "context_vi": null,
+      "part_of_speech": "noun",
+      "letters": [
+       3
+      ],
+      "level": "",
+      "answer_keys": [
+       "89950b580b113dc3"
+      ]
+     },
+     "hints_shown": [],
+     "hints_total": 0,
+     "attempts": 0,
+     "wrong_attempts": 0,
+     "practice": false,
+     "travel_seconds": 0,
+     "on_screen_ms": 0
+    },
+    {
+     "turn_id": "t2",
+     "position": 2,
+     "kind": "vocab_typing",
+     "skill_label": "Hướng dẫn",
+     "prompt": {
+      "meaning_vi": "con chó",
+      "context_vi": null,
+      "part_of_speech": "noun",
+      "letters": [
+       3
+      ],
+      "level": "",
+      "answer_keys": [
+       "36b9d2ec54cc0662"
+      ]
+     },
+     "hints_shown": [],
+     "hints_total": 0,
+     "attempts": 0,
+     "wrong_attempts": 0,
+     "practice": false,
+     "travel_seconds": 0,
+     "on_screen_ms": 0
+    }
+   ],
+   "status": "published"
+  },
+  "defense": {
+   "game_id": "defense",
+   "game_mode": "practice",
+   "gameplay_version": 1,
+   "tutorial_version": 4,
+   "subject": "math",
+   "hearts": 3,
+   "skippable": true,
+   "done_title": "Đòn đánh tuyệt vời! Bạn đã sẵn sàng bảo vệ căn cứ!",
+   "ready": [
+    "Đúng 3 câu liền, pet tung kỹ năng đặc biệt.",
+    "Sai mất 1 tim: sửa đáp án rồi tấn công tiếp."
+   ],
+   "steps": [
+    {
+     "expected_result": "correct",
+     "demo_animation": "arrow",
+     "release": [
+      "t1"
+     ],
+     "id": "watch",
+     "action": "observe",
+     "instruction": "Quái vật mang phép tính đang tiến tới!",
+     "target": "play",
+     "expected_action": "next",
+     "advance_ms": 3200
+    },
+    {
+     "expected_result": "correct",
+     "demo_animation": "hand_tap",
+     "release": [],
+     "id": "attack",
+     "action": "type",
+     "instruction": "Bấm 7 trên bàn phím số rồi nhấn Tấn công",
+     "target": "input",
+     "expected_action": "answer",
+     "success_feedback": "Trúng đòn! Quái vật mất máu!",
+     "retry_feedback": "3 + 4 = 7. Bấm 7 rồi nhấn Tấn công nhé."
+    },
+    {
+     "expected_result": "correct",
+     "demo_animation": "watch",
+     "release": [],
+     "id": "hit",
+     "action": "observe",
+     "instruction": "Thanh máu của quái vật giảm dần. Pet thắng!",
+     "target": "play",
+     "expected_action": "next",
+     "advance_ms": 2600
+    }
+   ],
+   "demo": [
+    {
+     "turn_id": "t1",
+     "position": 1,
+     "kind": "math_input",
+     "skill_label": "Hướng dẫn",
+     "prompt": {
+      "expression": "3 + 4",
+      "allow_negative": false
+     },
+     "hints_shown": [],
+     "hints_total": 0,
+     "attempts": 0,
+     "wrong_attempts": 0,
+     "practice": false,
+     "travel_seconds": 0,
+     "on_screen_ms": 0
+    }
+   ],
+   "status": "published"
+  },
+  "sentence": {
+   "game_id": "sentence",
+   "game_mode": "practice",
+   "gameplay_version": 1,
+   "tutorial_version": 4,
+   "subject": "english",
+   "hearts": 0,
+   "skippable": true,
+   "done_title": "Đoàn tàu câu đã chạy! Bạn đã sẵn sàng!",
+   "ready": [
+    "Có thẻ không thuộc câu: để nó lại bãi.",
+    "Sai: phần đầu câu đúng được khoá lại."
+   ],
+   "steps": [
+    {
+     "expected_result": "correct",
+     "demo_animation": "hand_drag",
+     "release": [
+      "t1"
+     ],
+     "id": "build",
+     "action": "drag",
+     "instruction": "Kéo I → like → cats. lên toa; để thẻ “is” lại",
+     "target": "play",
+     "expected_action": "answer",
+     "success_feedback": "Câu đúng! Tàu sáng đèn!",
+     "retry_feedback": "Toa sai viền đỏ: sửa đúng chỗ đó rồi kiểm tra lại."
+    },
+    {
+     "expected_result": "correct",
+     "demo_animation": "pulse",
+     "release": [],
+     "id": "read",
+     "action": "tap",
+     "instruction": "Đọc giải thích rồi nhấn Tiếp tục",
+     "target": "play",
+     "expected_action": "continue"
+    }
+   ],
+   "demo": [
+    {
+     "turn_id": "t1",
+     "position": 1,
+     "kind": "sentence_build",
+     "skill_label": "Hướng dẫn",
+     "prompt": {
+      "title": "Xây câu",
+      "prompt": "Kéo các thẻ vào dòng để tạo câu đúng.",
+      "vi": "Tôi thích mèo.",
+      "tiles": [
+       {
+        "id": "t1",
+        "text": "cats."
+       },
+       {
+        "id": "t2",
+        "text": "is"
+       },
+       {
+        "id": "t3",
+        "text": "like"
+       },
+       {
+        "id": "t4",
+        "text": "I"
+       }
+      ],
+      "length": 3,
+      "lang": "en"
+     },
+     "hints_shown": [],
+     "hints_total": 0,
+     "attempts": 0,
+     "wrong_attempts": 0,
+     "practice": false,
+     "travel_seconds": 0,
+     "on_screen_ms": 0
+    }
+   ],
+   "status": "published"
+  },
+  "gate": {
+   "game_id": "gate",
+   "game_mode": "practice",
+   "gameplay_version": 1,
+   "tutorial_version": 4,
+   "subject": "english",
+   "hearts": 3,
+   "skippable": true,
+   "done_title": "Bạn đã biết cách chọn cổng!",
+   "ready": [
+    "Chọn sai mất 1 tim, câu đó quay lại sau.",
+    "Hết 3 tim thì chặng dừng lại."
+   ],
+   "steps": [
+    {
+     "expected_result": "correct",
+     "demo_animation": "hand_tap",
+     "release": [
+      "t1"
+     ],
+     "id": "pick",
+     "action": "tap",
+     "instruction": "Chạm vào cổng có từ đúng để điền chỗ trống",
+     "target": "play",
+     "expected_action": "answer",
+     "success_feedback": "Đúng rồi! Cổng mở!",
+     "retry_feedback": "Chưa đúng. “She” đi với “is”. Câu này sẽ quay lại."
+    },
+    {
+     "expected_result": "correct",
+     "demo_animation": "pulse",
+     "release": [],
+     "id": "read",
+     "action": "tap",
+     "instruction": "Đọc giải thích rồi nhấn Tiếp tục",
+     "target": "play",
+     "expected_action": "continue"
+    }
+   ],
+   "demo": [
+    {
+     "turn_id": "t1",
+     "position": 1,
+     "kind": "gate_choice",
+     "skill_label": "Hướng dẫn",
+     "prompt": {
+      "sentence": "She ___ a student.",
+      "meaning_vi": "Cô ấy là học sinh.",
+      "options": [
+       {
+        "id": "o1",
+        "text": "are"
+       },
+       {
+        "id": "o2",
+        "text": "is"
+       },
+       {
+        "id": "o3",
+        "text": "am"
+       }
+      ]
+     },
+     "hints_shown": [],
+     "hints_total": 0,
+     "attempts": 0,
+     "wrong_attempts": 0,
+     "practice": false,
+     "travel_seconds": 0,
+     "on_screen_ms": 0
+    }
+   ],
+   "status": "published"
+  },
+  "word_builder": {
+   "game_id": "word_builder",
+   "game_mode": "practice",
+   "gameplay_version": 1,
+   "tutorial_version": 4,
+   "subject": "vietnamese",
+   "hearts": 0,
+   "skippable": true,
+   "done_title": "Cổng rừng đã mở! Bạn đã biết cách ghép chữ!",
+   "ready": [
+    "Mỗi từ đúng, pet nhận một mảnh sách.",
+    "Không tính giờ, không mất tim."
+   ],
+   "steps": [
+    {
+     "expected_result": "correct",
+     "demo_animation": "arrow",
+     "release": [
+      "t1"
+     ],
+     "id": "look",
+     "action": "observe",
+     "instruction": "Nhìn hình: đây là con gì?",
+     "target": "play",
+     "expected_action": "next",
+     "advance_ms": 2800
+    },
+    {
+     "expected_result": "correct",
+     "demo_animation": "hand_drag",
+     "release": [],
+     "id": "build",
+     "action": "drag",
+     "instruction": "Kéo m → è → o vào ổ khoá rồi nhấn Mở cổng",
+     "target": "play",
+     "expected_action": "answer",
+     "success_feedback": "Hạt giống tri thức nảy mầm!",
+     "retry_feedback": "Chưa đúng. Thứ tự là m → è → o, đổi chỗ rồi mở cổng lại."
+    },
+    {
+     "expected_result": "correct",
+     "demo_animation": "watch",
+     "release": [],
+     "id": "grow",
+     "action": "observe",
+     "instruction": "Cổng mở, pet nhận một mảnh sách!",
+     "target": "play",
+     "expected_action": "next",
+     "advance_ms": 2400
+    }
+   ],
+   "demo": [
+    {
+     "turn_id": "t1",
+     "position": 1,
+     "kind": "word_build",
+     "skill_label": "Hướng dẫn",
+     "prompt": {
+      "picture": "🐱",
+      "unit": "letter",
+      "tiles": [
+       {
+        "id": "t1",
+        "text": "è"
+       },
+       {
+        "id": "t2",
+        "text": "m"
+       },
+       {
+        "id": "t3",
+        "text": "o"
+       }
+      ]
+     },
+     "hints_shown": [],
+     "hints_total": 0,
+     "attempts": 0,
+     "wrong_attempts": 0,
+     "practice": false,
+     "travel_seconds": 0,
+     "on_screen_ms": 0
+    }
+   ],
+   "status": "published"
+  },
+  "match": {
+   "game_id": "match",
+   "game_mode": "practice",
+   "gameplay_version": 1,
+   "tutorial_version": 4,
+   "subject": "math",
+   "hearts": 0,
+   "skippable": true,
+   "done_title": "Bạn đã biết cách ghép cặp!",
+   "ready": [
+    "Ghép sai: các cặp đúng được giữ lại.",
+    "Không tính giờ, không mất tim."
+   ],
+   "steps": [
+    {
+     "expected_result": "correct",
+     "demo_animation": "hand_tap",
+     "release": [
+      "t1"
+     ],
+     "id": "match",
+     "action": "tap",
+     "instruction": "Chạm thẻ trái rồi thẻ phải để ghép, xong nhấn Kiểm tra",
+     "target": "play",
+     "expected_action": "answer",
+     "success_feedback": "Ghép đúng hết!",
+     "retry_feedback": "Cặp đúng được giữ lại. Ghép lại cặp còn sai nhé."
+    },
+    {
+     "expected_result": "correct",
+     "demo_animation": "pulse",
+     "release": [],
+     "id": "read",
+     "action": "tap",
+     "instruction": "Đọc giải thích rồi nhấn Tiếp tục",
+     "target": "play",
+     "expected_action": "continue"
+    }
+   ],
+   "demo": [
+    {
+     "turn_id": "t1",
+     "position": 1,
+     "kind": "match_pairs",
+     "skill_label": "Hướng dẫn",
+     "prompt": {
+      "title": "Ghép phép tính",
+      "prompt": "Ghép phép tính với kết quả",
+      "lefts": [
+       {
+        "id": "a1",
+        "text": "2 × 5"
+       },
+       {
+        "id": "a2",
+        "text": "2 × 3"
+       }
+      ],
+      "rights": [
+       {
+        "id": "b1",
+        "text": "10"
+       },
+       {
+        "id": "b2",
+        "text": "6"
+       }
+      ],
+      "left_label": null,
+      "right_label": null
+     },
+     "hints_shown": [],
+     "hints_total": 0,
+     "attempts": 0,
+     "wrong_attempts": 0,
+     "practice": false,
+     "travel_seconds": 0,
+     "on_screen_ms": 0
+    }
+   ],
+   "status": "published"
+  }
+ },
+ "answers": {
+  "word_shooter": {
+   "t1": "quả táo"
+  },
+  "meteor": {
+   "t1": "cat",
+   "t2": "dog"
+  },
+  "defense": {
+   "t1": "7"
+  },
+  "sentence": {
+   "t1": [
+    "t4",
+    "t3",
+    "t1"
+   ]
+  },
+  "gate": {
+   "t1": "o2"
+  },
+  "word_builder": {
+   "t1": [
+    "t2",
+    "t1",
+    "t3"
+   ]
+  },
+  "match": {
+   "t1": [
+    "a2b2",
+    "a1b1"
+   ]
+  }
+ }
+}

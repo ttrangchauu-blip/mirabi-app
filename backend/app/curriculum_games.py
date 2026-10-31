@@ -13,6 +13,7 @@ import random
 from functools import lru_cache
 from pathlib import Path
 
+from . import lesson_games as lg
 from .learning_engine import InvalidAnswer, normalize_text
 
 DATA = Path(__file__).parent / "data" / "curriculum"
@@ -20,16 +21,19 @@ DATA = Path(__file__).parent / "data" / "curriculum"
 GAMES = ("word_builder", "spelling_detective", "sorting", "code_path")
 KIND = {"word_builder": "word_build", "spelling_detective": "spell_fix", "sorting": "sort_card", "code_path": "code_path",
         # The lesson games (lesson_catalog.py): one gameplay each, the content comes from the lesson played.
-        "order": "order_steps", "match": "match_pairs", "choice": "choice_explain"}
+        "order": "order_steps", "match": "match_pairs", "choice": "choice_explain", "lab": "lab_experiment",
+        # The subject gameplays (lesson_games.py): Dòng thời gian, Xây câu, Xưởng hình học, Cân bằng phương trình.
+        **lg.KIND}
 KINDS = frozenset(KIND.values())
-LESSON_GAMES = ("order", "match", "choice")
+LESSON_GAMES = ("order", "match", "choice", "lab", *lg.GAMES)
 # Questions in a stage. The app's guides say the same (mobile learning/tutorials.ts CURRICULUM_STAGE): keep in step.
 STAGE_TURNS = {"word_builder": 10, "spelling_detective": 10, "sorting": 10, "code_path": 5}
 # Wrong attempts allowed on one question: Lập trình đường đi lets the user run and fix a program as often as needed.
 MAX_ATTEMPTS = {"code_path": 99}
 # Labels of a question that is still open: they never give its answer away.
 OPEN_LABEL = {"word_build": "Ghép chữ", "spell_fix": "Thám tử chính tả", "sort_card": "Phân loại", "code_path": "Lập trình",
-              "order_steps": "Sắp xếp", "match_pairs": "Ghép cặp", "choice_explain": "Chọn đáp án"}
+              "order_steps": "Sắp xếp", "match_pairs": "Ghép cặp", "choice_explain": "Chọn đáp án", "lab_experiment": "Thí nghiệm",
+              **lg.OPEN_LABEL}
 TIER_OF_GRADE = {**{g: "basic" for g in (3, 4, 5)}, **{g: "intermediate" for g in (6, 7, 8, 9)},
                  **{g: "advanced" for g in (10, 11, 12)}}
 TIERS = ("basic", "intermediate", "advanced")
@@ -371,6 +375,58 @@ def choice_explain(task: dict, rng: random.Random, title: str, style: str) -> di
             "hints": [h for h in [task.get("hint")] if h], "explanation": task["explanation"]}
 
 
+# Magic Lab (Phòng thí nghiệm, lesson game "lab"): a safe simulated experiment. The scene says what is on the bench and
+# which places (slots) the learner fills by dragging parts onto them; the experiment is "run" (the switch, the torch,
+# the heater) with the parts placed, and it works only with a right part in every slot. What happens is then shown.
+# Nothing here is a real procedure: no chemicals, no flames, nothing to try at home without an adult.
+LAB_SCENES = {
+    # Mạch điện: power (the battery), lamp (the bulb), link / link2 (gaps closed by a conductor). Slots left out of a
+    # task are drawn in place already (a battery and a bulb that are there).
+    "circuit": {"slots": ("power", "lamp", "link", "link2"),
+                "art": ("battery", "bulb", "nail", "spoon", "clip", "foil", "coin", "copper", "ruler", "rubber", "wood", "wool",
+                        "eraser", "glass", "book", "paper", "cardboard", "cup")},
+    # Ánh sáng và bóng: one object placed between the torch and the screen; `target` is the shadow asked for.
+    "shadow": {"slots": ("between",), "art": ("glass", "book", "paper", "cardboard", "wood", "cup", "ruler", "coin", "spoon")},
+    # Sự chuyển thể của nước: the beaker (`start` state) goes on a tool; `target` is the state asked for.
+    "water": {"slots": ("tool",), "art": ("hot", "cold")},
+    # Cây con mọc lên từ hạt: the stage cards in the order the plant grows, s1 first.
+    "plant": {"slots": ("s1", "s2", "s3", "s4", "s5"), "art": ("stage:1", "stage:2", "stage:3", "stage:4", "stage:5")},
+    # Nam châm: the objects put in the magnet's reach (pull, pull2); when it comes near, the magnetic ones fly to it and
+    # stick, the others stay where they are.
+    "magnet": {"slots": ("pull", "pull2"),
+               "art": ("nail", "clip", "copper", "foil", "coin", "spoon", "ruler", "rubber", "wood", "wool", "eraser", "glass", "paper", "cup")},
+}
+LAB_TARGETS = {"shadow": ("dark", "faint", "clear"), "water": ("ice", "water", "steam")}
+
+
+def lab_solvable(slots: list[dict]) -> bool:
+    """Every slot can get its own accepted part (no part is used twice)."""
+    def fill(i: int, used: set[str]) -> bool:
+        if i == len(slots):
+            return True
+        return any(fill(i + 1, used | {p}) for p in slots[i]["accept"] if p not in used)
+    return fill(0, set())
+
+
+def lab_experiment(task: dict, rng: random.Random, title: str, scene: str) -> dict:
+    """The parts in a shuffled order with ids that say nothing; which part fits where is only in the answer."""
+    parts = [dict(p) for p in task["parts"]]
+    rng.shuffle(parts)
+    ids = {p["key"]: f"p{i + 1}" for i, p in enumerate(parts)}
+    accept = {s["id"]: [ids[k] for k in s["accept"]] for s in task["slots"]}
+    solution = {s["id"]: next(p["name"] for p in task["parts"] if p["key"] == s["accept"][0]) for s in task["slots"]}
+    return {"kind": "lab_experiment", "question_id": None, "prompt": {
+                "title": title, "scene": scene, "aim": task["goal"],
+                "slots": [{"id": s["id"], "label": s["label"]} for s in task["slots"]],
+                "parts": [{"id": ids[p["key"]], "name": p["name"], "art": p["art"]} for p in parts],
+                # water: the state the beaker starts in and the one asked for; shadow: the shadow asked for.
+                **({"from": task["start"]} if "start" in task else {}), **({"to": task["target"]} if "target" in task else {})},
+            "answer": {"accept": accept, "why": {ids[p["key"]]: p["why"] for p in parts}, "result": task["result"],
+                       "display": "; ".join(f"{next(s['label'] for s in task['slots'] if s['id'] == sid)}: {name}"
+                                            for sid, name in solution.items())},
+            "hints": [h for h in [task.get("hint")] if h], "explanation": f"{task['result']} {task['explanation']}".strip()}
+
+
 # ---------------------------------------------------------------------------------------------------------------
 # Lập trình đường đi: the program and the pet's walk
 # ---------------------------------------------------------------------------------------------------------------
@@ -526,7 +582,32 @@ def check(kind: str, prompt: dict, expected: dict, answer) -> tuple[bool, str | 
             raise InvalidAnswer("unknown option")
         ok = answer in expected["ok"]
         return ok, None if ok else "wrong_choice", options[answer], expected["why"].get(answer)
+    if kind == "lab_experiment":
+        placed = _placed(prompt, answer)
+        names = {p["id"]: p["name"] for p in prompt["parts"]}
+        given = "; ".join(f"{s['label']}: {names[placed[s['id']]]}" for s in prompt["slots"])
+        wrong = [s for s in prompt["slots"] if placed[s["id"]] not in expected["accept"][s["id"]]]
+        if not wrong:
+            return True, None, given, None
+        part = placed[wrong[0]["id"]]
+        return False, "wrong_setup", given, expected["why"].get(part) or f"“{names[part]}” chưa hợp ở chỗ “{wrong[0]['label']}”. Thử vật khác nhé."
+    if kind in lg.KINDS:
+        return lg.check(kind, prompt, expected, answer)
     raise InvalidAnswer(f"unknown kind {kind}")
+
+
+def _placed(prompt: dict, answer) -> dict[str, str]:
+    """Magic Lab: a part on every slot, sent as ["slot:part", ...], no part twice. Raises InvalidAnswer for anything else."""
+    slots, parts = {s["id"] for s in prompt["slots"]}, {p["id"] for p in prompt["parts"]}
+    if not isinstance(answer, list) or any(not isinstance(a, str) or a.count(":") != 1 for a in answer):
+        raise InvalidAnswer("expected slot:part pairs")
+    pairs = [a.split(":") for a in answer]
+    answer = dict(pairs)
+    if len(answer) != len(pairs) or set(answer) != slots or any(v not in parts for v in answer.values()):
+        raise InvalidAnswer("expected a part on every slot")
+    if len(set(answer.values())) != len(answer):
+        raise InvalidAnswer("a part used twice")
+    return answer
 
 
 def _pairs(prompt: dict, answer) -> dict[str, str]:
@@ -552,6 +633,10 @@ def kept(kind: str, prompt: dict, expected: dict, answer) -> list[str] | None:
             return [a for a, b in zip(answer, expected["order"]) if a == b]
         if kind == "match_pairs":
             return [a + b for a, b in _pairs(prompt, answer).items() if expected["pairs"].get(a) == b]
+        if kind == "lab_experiment":  # the slots holding a right part
+            return [slot for slot, part in _placed(prompt, answer).items() if part in expected["accept"][slot]]
+        if kind in lg.KINDS:
+            return lg.kept(kind, prompt, expected, answer)
     except (InvalidAnswer, TypeError):
         return None
     return None

@@ -1,7 +1,7 @@
 import { newIdempotencyKey } from '../api/client';
 import { request } from '../screens/main/shared';
 import type { Band, Catalog, CatalogLesson, EventResponse, GameId, LearningSession, LessonDetail, LessonProgramme, Intro, Mode, ReviewGroup, SessionResult,
-  StartOptions, SubjectLessons, VocabFilter, VocabHistory, VocabWordDetail } from './types';
+  StartOptions, SubjectLessons, VocabFilter, VocabGame, VocabHistory, VocabPlay, VocabProgress, VocabQuery, VocabWordDetail } from './types';
 
 export const deviceTimezone = () => Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
 
@@ -17,11 +17,8 @@ export type TurnAction =
 
 // Thin typed wrappers; `request` adds the access token and refreshes it when needed.
 export const learningApi = {
-  /** `band`: another grade to review or learn ahead (the profile is unchanged), or a level outside school. */
-  catalog: (band: Band = {}): Promise<Catalog> => {
-    const query = [band.grade ? `grade=${band.grade}` : '', band.level ? `level=${band.level}` : ''].filter(Boolean).join('&');
-    return request(`/api/learning/catalog${query ? `?${query}` : ''}`);
-  },
+  /** The learner's own grade (the backend's, never one picked here); outside school, `band` is the level chosen. */
+  catalog: (band: Band = {}): Promise<Catalog> => request(`/api/learning/catalog${band.level ? `?level=${band.level}` : ''}`),
   lesson: (id: number): Promise<LessonDetail> => request(`/api/learning/lessons/${id}`),
   current: async (): Promise<LearningSession | null> => (await request('/api/learning/sessions/current'))?.session ?? null,
   session: (id: number): Promise<LearningSession> => request(s(id)),
@@ -33,9 +30,15 @@ export const learningApi = {
       body: { lesson_id: o.lessonId, mode: o.mode, duration_minutes: o.durationMinutes, variant: o.variant ?? undefined, timezone: deviceTimezone(), start_paused: true } }),
   /** "Chơi ngay": an English game whose words or questions the backend picks from the user's progress. Created paused;
    * the game's 3-2-1 countdown resumes it. The same key on a retry returns the same session. */
-  play: (game: GameId, mode: Mode, idempotencyKey = newIdempotencyKey(), band: Band = {}): Promise<LearningSession> =>
+  play: (game: GameId, mode: Mode, idempotencyKey = newIdempotencyKey(), band: Band = {}, vocab?: VocabPlay): Promise<LearningSession> =>
     request('/api/learning/play', { method: 'POST', headers: { 'Idempotency-Key': idempotencyKey },
-      body: { game, mode, timezone: deviceTimezone(), ...(band.grade ? { grade: band.grade } : {}), ...(band.level ? { level: band.level } : {}) } }),
+      body: { game, mode, timezone: deviceTimezone(), ...(band.level ? { level: band.level } : {}),
+        ...(vocab ? { vocab: vocab.vocab, ...(vocab.topic ? { topic: vocab.topic } : {}) } : {}) } }),
+  /** Khám phá từ mới of one vocabulary game: levels, new words left, words due and a level to celebrate. */
+  vocabProgress: (game: VocabGame): Promise<VocabProgress> => request(`/api/learning/vocabulary/progress?game=${game}`),
+  /** The celebration of a completed level was shown: it never comes back. */
+  vocabCelebrated: (game: VocabGame, level: number): Promise<unknown> =>
+    request(`/api/learning/vocabulary/levels/${game}/${level}/celebrated`, { method: 'POST', body: {} }),
   /** Created paused, like "Chơi ngay": the game's 3-2-1 countdown resumes it. */
   startReview: (topicId: number, mode: Mode, idempotencyKey = newIdempotencyKey()): Promise<LearningSession> =>
     request('/api/learning/review/sessions', { method: 'POST', headers: { 'Idempotency-Key': idempotencyKey },
@@ -56,19 +59,20 @@ export const learningApi = {
   result: (id: number): Promise<SessionResult> => request(`${s(id)}/result`),
   review: async (): Promise<{ groups: ReviewGroup[]; total: number }> => request('/api/learning/review'),
   /** "Từ đã học", most recently studied first, one page (`limit` words from `offset`) at a time. */
-  vocabHistory: (q: string, filter: VocabFilter, offset = 0, limit = 15): Promise<VocabHistory> =>
-    request(`/api/learning/vocabulary/history?filter=${filter}&limit=${limit}&offset=${offset}${q.trim() ? `&q=${encodeURIComponent(q.trim())}` : ''}`),
+  vocabHistory: (q: string, filter: VocabFilter, offset = 0, limit = 15, more: VocabQuery = {}): Promise<VocabHistory> =>
+    request(`/api/learning/vocabulary/history?filter=${filter}&limit=${limit}&offset=${offset}${q.trim() ? `&q=${encodeURIComponent(q.trim())}` : ''}`
+      + `${more.topic ? `&topic=${encodeURIComponent(more.topic)}` : ''}${more.level ? `&level=${more.level}` : ''}${more.year ? `&year=${more.year}` : ''}`),
   vocabWord: (entryKey: string): Promise<VocabWordDetail> => request(`/api/learning/vocabulary/history/${encodeURIComponent(entryKey)}`),
   /** "Luyện lại": a review stage of the chosen game with these words, or the "Cần ôn" words when none are given.
    * Created paused: the countdown resumes it. */
   practiseWords: (game: 'word_shooter' | 'meteor', entryKeys: string[] | null, idempotencyKey = newIdempotencyKey()): Promise<LearningSession> =>
     request('/api/learning/vocabulary/practice', { method: 'POST', headers: { 'Idempotency-Key': idempotencyKey },
       body: { game, ...(entryKeys ? { entry_keys: entryKeys } : {}), mode: 'practice', timezone: deviceTimezone(), start_paused: true } }),
-  /** Học tập theo bài: every subject of a grade (the confirmed one by default; another one leaves the profile unchanged). */
-  programme: (grade?: string | null): Promise<LessonProgramme> => request(`/api/learning/programme${grade ? `?grade=${grade}` : ''}`),
-  /** The chapters and lessons of a subject at a grade, with each lesson's status and progress. */
-  subjectLessons: (code: string, grade?: string | null): Promise<SubjectLessons> =>
-    request(`/api/learning/programme/subjects/${encodeURIComponent(code)}${grade ? `?grade=${grade}` : ''}`),
+  /** Học tập theo bài: every subject of the learner's current grade, with this school year's progress. */
+  programme: (): Promise<LessonProgramme> => request('/api/learning/programme'),
+  /** The chapters and lessons of a subject at the learner's grade, with each lesson's status and progress. */
+  subjectLessons: (code: string): Promise<SubjectLessons> =>
+    request(`/api/learning/programme/subjects/${encodeURIComponent(code)}`),
   lessonDetail: (key: string): Promise<CatalogLesson> => request(`/api/learning/lesson-catalog/${encodeURIComponent(key)}`),
   /** A game of a lesson, created paused (the countdown resumes it). The same key on a retry returns the same session. */
   playLesson: (key: string, game: GameId, idempotencyKey = newIdempotencyKey()): Promise<LearningSession> =>
@@ -84,4 +88,11 @@ export const learningApi = {
   },
   /** Finished at guide `version` (tutorials.TUTORIAL_VERSION); `tutorials` lists the games finished at the current one. */
   finishTutorial: (game: GameId, version: number): Promise<unknown> => request(`/api/learning/tutorials/${game}`, { method: 'POST', body: { version } }),
+};
+
+/** What a game screen needs from whoever owns its session: `learningApi` for a stage (Play Mode), a tutorial's demo
+ * session for Tutorial Mode (learning/tutorial/demoSession.ts). The screen, its gameplay and its checks are the same. */
+export type GameBackend = Pick<typeof learningApi, 'session' | 'intro' | 'turn' | 'next' | 'pause' | 'resume' | 'extend' | 'complete' | 'abandon'> & {
+  /** Session changes the screen did not ask for (a tutorial bringing in the next demo turn). */
+  subscribe?: (listener: (session: LearningSession) => void) => () => void;
 };

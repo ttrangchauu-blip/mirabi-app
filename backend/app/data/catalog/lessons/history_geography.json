@@ -243,6 +243,7 @@
    "lessons": [
     {
      "key": "lsdl4.dbbb_thien_nhien",
+     "world": "map",
      "order": 1,
      "title": "Thiên nhiên vùng Đồng bằng Bắc Bộ",
      "description": "Địa hình, sông ngòi, khí hậu của Đồng bằng Bắc Bộ và hệ thống đê ven sông.",
@@ -468,64 +469,115 @@
      "requires_note": null,
      "games": [
       {
-       "game": "order",
+       "game": "timeline",
        "title": "Dòng thời gian Thăng Long",
+       "credit_from": "order",
        "tasks": [
         {
          "key": "ten_goi",
-         "prompt": "Xếp các tên gọi của kinh thành theo thời gian, từ sớm đến muộn.",
-         "items": [
-          "Đại La",
-          "Thăng Long",
-          "Đông Kinh",
-          "Hà Nội"
+         "prompt": "Đặt các tên gọi của kinh thành lên dòng thời gian, từ sớm đến muộn.",
+         "events": [
+          {
+           "text": "Đại La",
+           "year": 1000,
+           "label": "Trước 1010"
+          },
+          {
+           "text": "Thăng Long",
+           "year": 1010
+          },
+          {
+           "text": "Đông Kinh",
+           "year": 1430,
+           "label": "Thời Lê sơ"
+          },
+          {
+           "text": "Hà Nội",
+           "year": 1831
+          }
          ],
-         "explanation": "Thành Đại La có trước năm 1010. Lý Công Uẩn dời đô về đây và đặt tên Thăng Long (1010). Thời Lê sơ kinh thành gọi là Đông Kinh. Năm 1831, vua Minh Mạng đặt tên Hà Nội.",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "Thành Đại La có trước năm 1010. Lý Công Uẩn dời đô về đây và đặt tên Thăng Long (1010). Thời Lê sơ kinh thành gọi là Đông Kinh. Năm 1831, vua Minh Mạng đặt tên Hà Nội."
         },
         {
          "key": "kinh_do",
-         "prompt": "Xếp các kinh đô của nước ta theo thời gian, từ sớm đến muộn.",
-         "items": [
-          "Phong Châu – kinh đô nước Văn Lang",
-          "Cổ Loa – kinh đô nước Âu Lạc",
-          "Hoa Lư – kinh đô thời Đinh, Tiền Lê",
-          "Thăng Long – kinh đô từ thời Lý"
+         "prompt": "Đặt các kinh đô của nước ta lên dòng thời gian, từ sớm đến muộn.",
+         "events": [
+          {
+           "text": "Phong Châu – kinh đô nước Văn Lang",
+           "year": -700,
+           "label": "Thời Văn Lang"
+          },
+          {
+           "text": "Cổ Loa – kinh đô nước Âu Lạc",
+           "year": -208,
+           "label": "Thời Âu Lạc"
+          },
+          {
+           "text": "Hoa Lư – kinh đô thời Đinh, Tiền Lê",
+           "year": 968,
+           "label": "Thời Đinh, Tiền Lê"
+          },
+          {
+           "text": "Thăng Long – kinh đô từ thời Lý",
+           "year": 1010,
+           "label": "Từ năm 1010"
+          }
          ],
          "explanation": "Văn Lang của các vua Hùng có trước, rồi đến Âu Lạc của An Dương Vương. Thời Đinh, Tiền Lê đóng đô ở Hoa Lư. Năm 1010 nhà Lý dời đô ra Thăng Long.",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "years": "hidden"
         },
         {
          "key": "van_hoa",
-         "prompt": "Xếp các sự kiện thời Lý và Lê sơ ở kinh thành theo thời gian.",
-         "items": [
-          "Lý Công Uẩn dời đô ra Thăng Long",
-          "Vua Lý Thánh Tông cho xây Văn Miếu",
-          "Lập Quốc Tử Giám bên cạnh Văn Miếu",
-          "Dựng những tấm bia tiến sĩ đầu tiên"
+         "prompt": "Đặt các sự kiện thời Lý và Lê sơ ở kinh thành lên dòng thời gian.",
+         "events": [
+          {
+           "text": "Lý Công Uẩn dời đô ra Thăng Long",
+           "year": 1010
+          },
+          {
+           "text": "Vua Lý Thánh Tông cho xây Văn Miếu",
+           "year": 1070
+          },
+          {
+           "text": "Lập Quốc Tử Giám bên cạnh Văn Miếu",
+           "year": 1076
+          },
+          {
+           "text": "Dựng những tấm bia tiến sĩ đầu tiên",
+           "year": 1484
+          }
          ],
-         "explanation": "Dời đô năm 1010, xây Văn Miếu năm 1070, lập Quốc Tử Giám năm 1076, dựng những bia tiến sĩ đầu tiên năm 1484 (thời Lê sơ).",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "Dời đô năm 1010, xây Văn Miếu năm 1070, lập Quốc Tử Giám năm 1076, dựng những bia tiến sĩ đầu tiên năm 1484 (thời Lê sơ)."
         },
         {
          "key": "ha_noi",
-         "prompt": "Xếp các sự kiện gắn với Hà Nội theo thời gian.",
-         "items": [
-          "Vua Minh Mạng đặt tên Hà Nội",
-          "Bác Hồ đọc Tuyên ngôn Độc lập ở Ba Đình",
-          "Giải phóng Thủ đô sau kháng chiến chống Pháp",
-          "Kỉ niệm 1000 năm Thăng Long – Hà Nội"
+         "prompt": "Đặt các sự kiện gắn với Hà Nội lên dòng thời gian.",
+         "events": [
+          {
+           "text": "Vua Minh Mạng đặt tên Hà Nội",
+           "year": 1831
+          },
+          {
+           "text": "Bác Hồ đọc Tuyên ngôn Độc lập ở Ba Đình",
+           "year": 1945,
+           "label": "2/9/1945"
+          },
+          {
+           "text": "Giải phóng Thủ đô sau kháng chiến chống Pháp",
+           "year": 1954,
+           "label": "10/10/1954"
+          },
+          {
+           "text": "Kỉ niệm 1000 năm Thăng Long – Hà Nội",
+           "year": 2010
+          }
          ],
-         "explanation": "Đặt tên Hà Nội năm 1831; đọc Tuyên ngôn Độc lập ngày 2/9/1945; giải phóng Thủ đô ngày 10/10/1954; kỉ niệm 1000 năm Thăng Long – Hà Nội năm 2010.",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "Đặt tên Hà Nội năm 1831; đọc Tuyên ngôn Độc lập ngày 2/9/1945; giải phóng Thủ đô ngày 10/10/1954; kỉ niệm 1000 năm Thăng Long – Hà Nội năm 2010."
         }
        ]
       }
-     ]
+     ],
+     "activity": "chronology"
     },
     {
      "key": "lsdl4.van_mieu",
@@ -795,6 +847,7 @@
    "lessons": [
     {
      "key": "lsdl4.nam_bo_thien_nhien",
+     "world": "map",
      "order": 1,
      "title": "Thiên nhiên vùng Nam Bộ",
      "description": "So sánh Đồng bằng Nam Bộ với Đồng bằng Bắc Bộ về sông ngòi, khí hậu, đất đai.",
@@ -953,6 +1006,7 @@
    "lessons": [
     {
      "key": "lsdl5.vi_tri_lanh_tho",
+     "world": "map",
      "order": 1,
      "title": "Vị trí địa lí và lãnh thổ Việt Nam",
      "description": "Việt Nam ở đâu trên bản đồ, giáp những nước nào, lãnh thổ gồm những gì.",
@@ -1309,60 +1363,106 @@
      "requires_note": null,
      "games": [
       {
-       "game": "order",
+       "game": "timeline",
        "title": "Dòng thời gian",
+       "credit_from": "order",
        "tasks": [
         {
          "key": "chien_thang",
-         "prompt": "Xếp các chiến thắng theo thời gian, từ sớm đến muộn.",
-         "items": [
-          "Ngô Quyền chiến thắng trên sông Bạch Đằng",
-          "Lý Thường Kiệt chặn giặc ở sông Như Nguyệt",
-          "Trần Hưng Đạo chiến thắng trên sông Bạch Đằng",
-          "Khởi nghĩa Lam Sơn thắng lợi, Lê Lợi lên ngôi",
-          "Quang Trung đại phá quân Thanh"
+         "prompt": "Đặt các chiến thắng lên dòng thời gian, từ sớm đến muộn.",
+         "events": [
+          {
+           "text": "Ngô Quyền chiến thắng trên sông Bạch Đằng",
+           "year": 938
+          },
+          {
+           "text": "Lý Thường Kiệt chặn giặc ở sông Như Nguyệt",
+           "year": 1077
+          },
+          {
+           "text": "Trần Hưng Đạo chiến thắng trên sông Bạch Đằng",
+           "year": 1288
+          },
+          {
+           "text": "Khởi nghĩa Lam Sơn thắng lợi, Lê Lợi lên ngôi",
+           "year": 1428
+          },
+          {
+           "text": "Quang Trung đại phá quân Thanh",
+           "year": 1789
+          }
          ],
-         "explanation": "Năm 938 Ngô Quyền; năm 1077 phòng tuyến Như Nguyệt; năm 1288 Trần Hưng Đạo; năm 1428 Lê Lợi lên ngôi; năm 1789 Quang Trung đại phá quân Thanh.",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "Năm 938 Ngô Quyền; năm 1077 phòng tuyến Như Nguyệt; năm 1288 Trần Hưng Đạo; năm 1428 Lê Lợi lên ngôi; năm 1789 Quang Trung đại phá quân Thanh."
         },
         {
          "key": "trieu_dai",
-         "prompt": "Xếp các triều đại theo thời gian, từ sớm đến muộn.",
-         "items": [
-          "Nhà Lý",
-          "Nhà Trần",
-          "Nhà Hậu Lê",
-          "Nhà Nguyễn"
+         "prompt": "Đặt các triều đại lên dòng thời gian, từ sớm đến muộn.",
+         "events": [
+          {
+           "text": "Nhà Lý",
+           "year": 1009,
+           "label": "Từ 1009"
+          },
+          {
+           "text": "Nhà Trần",
+           "year": 1226,
+           "label": "Từ 1226"
+          },
+          {
+           "text": "Nhà Hậu Lê",
+           "year": 1428,
+           "label": "Từ 1428"
+          },
+          {
+           "text": "Nhà Nguyễn",
+           "year": 1802,
+           "label": "Từ 1802"
+          }
          ],
-         "explanation": "Nhà Lý (từ 1009), nhà Trần (từ 1226), nhà Hậu Lê (từ 1428), nhà Nguyễn (từ 1802).",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "Nhà Lý (từ 1009), nhà Trần (từ 1226), nhà Hậu Lê (từ 1428), nhà Nguyễn (từ 1802)."
         },
         {
          "key": "the_ki_20",
-         "prompt": "Xếp các sự kiện của thế kỉ XX theo thời gian.",
-         "items": [
-          "Cách mạng tháng Tám thành công",
-          "Chiến thắng Điện Biên Phủ",
-          "Giải phóng miền Nam, thống nhất đất nước",
-          "Bắt đầu công cuộc Đổi mới"
+         "prompt": "Đặt các sự kiện của thế kỉ XX lên dòng thời gian.",
+         "events": [
+          {
+           "text": "Cách mạng tháng Tám thành công",
+           "year": 1945
+          },
+          {
+           "text": "Chiến thắng Điện Biên Phủ",
+           "year": 1954
+          },
+          {
+           "text": "Giải phóng miền Nam, thống nhất đất nước",
+           "year": 1975
+          },
+          {
+           "text": "Bắt đầu công cuộc Đổi mới",
+           "year": 1986
+          }
          ],
-         "explanation": "Năm 1945 Cách mạng tháng Tám; năm 1954 Điện Biên Phủ; năm 1975 giải phóng miền Nam; năm 1986 bắt đầu Đổi mới.",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "Năm 1945 Cách mạng tháng Tám; năm 1954 Điện Biên Phủ; năm 1975 giải phóng miền Nam; năm 1986 bắt đầu Đổi mới."
         },
         {
          "key": "doc_lap",
-         "prompt": "Xếp các sự kiện mở đầu thời kì độc lập theo thời gian.",
-         "items": [
-          "Khởi nghĩa Hai Bà Trưng",
-          "Ngô Quyền chiến thắng quân Nam Hán",
-          "Ngô Quyền xưng vương, đóng đô ở Cổ Loa"
+         "prompt": "Đặt các sự kiện mở đầu thời kì độc lập lên dòng thời gian.",
+         "events": [
+          {
+           "text": "Khởi nghĩa Hai Bà Trưng",
+           "year": 40,
+           "label": "Năm 40"
+          },
+          {
+           "text": "Ngô Quyền chiến thắng quân Nam Hán",
+           "year": 938
+          },
+          {
+           "text": "Ngô Quyền xưng vương, đóng đô ở Cổ Loa",
+           "year": 939
+          }
          ],
-         "explanation": "Khởi nghĩa Hai Bà Trưng năm 40. Gần chín thế kỉ sau, năm 938 Ngô Quyền chiến thắng trên sông Bạch Đằng, năm 939 xưng vương, đóng đô ở Cổ Loa.",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "Khởi nghĩa Hai Bà Trưng năm 40. Gần chín thế kỉ sau, năm 938 Ngô Quyền chiến thắng trên sông Bạch Đằng, năm 939 xưng vương, đóng đô ở Cổ Loa."
         }
        ]
       },
@@ -1451,7 +1551,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "chronology"
     }
    ]
   },
@@ -1463,6 +1564,7 @@
    "lessons": [
     {
      "key": "lsdl5.trung_quoc_lao_cpc",
+     "world": "map",
      "order": 1,
      "title": "Trung Quốc, Lào và Campuchia",
      "description": "Thủ đô, công trình nổi tiếng và đặc điểm của ba nước láng giềng.",
@@ -1585,6 +1687,7 @@
    "lessons": [
     {
      "key": "lsdl5.chau_luc_dai_duong",
+     "world": "map",
      "order": 1,
      "title": "Các châu lục và đại dương trên thế giới",
      "description": "Phân biệt châu lục và đại dương, nhớ tên các châu lục và đại dương.",
@@ -3089,65 +3192,121 @@
      "requires_note": null,
      "games": [
       {
-       "game": "order",
+       "game": "timeline",
        "title": "Dòng thời gian Đại Việt",
+       "credit_from": "order",
        "tasks": [
         {
          "key": "trieu_dai",
-         "prompt": "Xếp các triều đại theo thời gian, từ sớm đến muộn.",
-         "items": [
-          "Nhà Ngô",
-          "Nhà Đinh",
-          "Nhà Tiền Lê",
-          "Nhà Lý",
-          "Nhà Trần",
-          "Nhà Hồ"
+         "prompt": "Đặt các triều đại lên dòng thời gian, từ sớm đến muộn.",
+         "events": [
+          {
+           "text": "Nhà Ngô",
+           "year": 939
+          },
+          {
+           "text": "Nhà Đinh",
+           "year": 968
+          },
+          {
+           "text": "Nhà Tiền Lê",
+           "year": 980
+          },
+          {
+           "text": "Nhà Lý",
+           "year": 1009
+          },
+          {
+           "text": "Nhà Trần",
+           "year": 1226
+          },
+          {
+           "text": "Nhà Hồ",
+           "year": 1400
+          }
          ],
-         "explanation": "Ngô (939) → Đinh (968) → Tiền Lê (980) → Lý (1009) → Trần (1226) → Hồ (1400).",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "Ngô (939) → Đinh (968) → Tiền Lê (980) → Lý (1009) → Trần (1226) → Hồ (1400)."
         },
         {
          "key": "thoi_ly",
-         "prompt": "Xếp các sự kiện thời Lý theo thời gian.",
-         "items": [
-          "Lý Công Uẩn lên ngôi vua",
-          "Dời đô từ Hoa Lư ra Thăng Long",
-          "Đổi tên nước là Đại Việt",
-          "Xây dựng Văn Miếu",
-          "Chiến thắng trên phòng tuyến sông Như Nguyệt"
+         "prompt": "Đặt các sự kiện thời Lý lên dòng thời gian.",
+         "events": [
+          {
+           "text": "Lý Công Uẩn lên ngôi vua",
+           "year": 1009
+          },
+          {
+           "text": "Dời đô từ Hoa Lư ra Thăng Long",
+           "year": 1010
+          },
+          {
+           "text": "Đổi tên nước là Đại Việt",
+           "year": 1054
+          },
+          {
+           "text": "Xây dựng Văn Miếu",
+           "year": 1070
+          },
+          {
+           "text": "Chiến thắng trên phòng tuyến sông Như Nguyệt",
+           "year": 1077
+          }
          ],
-         "explanation": "1009 lên ngôi – 1010 dời đô – 1054 đổi tên nước Đại Việt – 1070 xây Văn Miếu – 1077 chiến thắng Như Nguyệt.",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "1009 lên ngôi – 1010 dời đô – 1054 đổi tên nước Đại Việt – 1070 xây Văn Miếu – 1077 chiến thắng Như Nguyệt."
         },
         {
          "key": "thoi_tran",
-         "prompt": "Xếp các sự kiện từ thời Trần đến nhà Hồ theo thời gian.",
-         "items": [
-          "Nhà Trần được thành lập",
-          "Kháng chiến chống quân Mông Cổ lần thứ nhất",
-          "Kháng chiến chống quân Nguyên lần thứ hai",
-          "Chiến thắng Bạch Đằng, kết thúc kháng chiến lần thứ ba",
-          "Hồ Quý Ly lập nhà Hồ"
+         "prompt": "Đặt các sự kiện từ thời Trần đến nhà Hồ lên dòng thời gian.",
+         "events": [
+          {
+           "text": "Nhà Trần được thành lập",
+           "year": 1226
+          },
+          {
+           "text": "Kháng chiến chống quân Mông Cổ lần thứ nhất",
+           "year": 1258
+          },
+          {
+           "text": "Kháng chiến chống quân Nguyên lần thứ hai",
+           "year": 1285
+          },
+          {
+           "text": "Chiến thắng Bạch Đằng, kết thúc kháng chiến lần thứ ba",
+           "year": 1288
+          },
+          {
+           "text": "Hồ Quý Ly lập nhà Hồ",
+           "year": 1400
+          }
          ],
-         "explanation": "1226 nhà Trần thành lập; 1258, 1285, 1288 ba lần kháng chiến; 1400 Hồ Quý Ly lập nhà Hồ.",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "1226 nhà Trần thành lập; 1258, 1285, 1288 ba lần kháng chiến; 1400 Hồ Quý Ly lập nhà Hồ."
         },
         {
          "key": "lam_son",
-         "prompt": "Xếp các sự kiện của khởi nghĩa Lam Sơn và thời Lê sơ theo thời gian.",
-         "items": [
-          "Lê Lợi dựng cờ khởi nghĩa ở Lam Sơn",
-          "Chiến thắng Tốt Động – Chúc Động",
-          "Chiến thắng Chi Lăng – Xương Giang",
-          "Lê Lợi lên ngôi, khôi phục quốc hiệu Đại Việt",
-          "Lê Thánh Tông lên ngôi"
+         "prompt": "Đặt các sự kiện của khởi nghĩa Lam Sơn và thời Lê sơ lên dòng thời gian.",
+         "events": [
+          {
+           "text": "Lê Lợi dựng cờ khởi nghĩa ở Lam Sơn",
+           "year": 1418
+          },
+          {
+           "text": "Chiến thắng Tốt Động – Chúc Động",
+           "year": 1426
+          },
+          {
+           "text": "Chiến thắng Chi Lăng – Xương Giang",
+           "year": 1427
+          },
+          {
+           "text": "Lê Lợi lên ngôi, khôi phục quốc hiệu Đại Việt",
+           "year": 1428
+          },
+          {
+           "text": "Lê Thánh Tông lên ngôi",
+           "year": 1460
+          }
          ],
-         "explanation": "1418 dựng cờ khởi nghĩa – 1426 Tốt Động – Chúc Động – 1427 Chi Lăng – Xương Giang – 1428 Lê Lợi lên ngôi – 1460 Lê Thánh Tông lên ngôi.",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "1418 dựng cờ khởi nghĩa – 1426 Tốt Động – Chúc Động – 1427 Chi Lăng – Xương Giang – 1428 Lê Lợi lên ngôi – 1460 Lê Thánh Tông lên ngôi."
         }
        ]
       },
@@ -3232,7 +3391,8 @@
         }
        ]
       }
-     ]
+     ],
+     "activity": "chronology"
     }
    ]
   },
@@ -4486,67 +4646,134 @@
      "requires_note": null,
      "games": [
       {
-       "game": "order",
+       "game": "timeline",
        "title": "Dòng thời gian cách mạng",
+       "credit_from": "order",
        "tasks": [
         {
          "key": "tim_duong",
-         "prompt": "Xếp các sự kiện theo thời gian, từ sớm đến muộn.",
-         "items": [
-          "Nguyễn Tất Thành ra đi tìm đường cứu nước",
-          "Nguyễn Ái Quốc đọc Luận cương của Lê-nin",
-          "Thành lập Đảng Cộng sản Việt Nam",
-          "Nguyễn Ái Quốc về nước, thành lập Mặt trận Việt Minh",
-          "Cách mạng tháng Tám thành công"
+         "prompt": "Đặt các sự kiện lên dòng thời gian, từ sớm đến muộn.",
+         "events": [
+          {
+           "text": "Nguyễn Tất Thành ra đi tìm đường cứu nước",
+           "year": 1911
+          },
+          {
+           "text": "Nguyễn Ái Quốc đọc Luận cương của Lê-nin",
+           "year": 1920
+          },
+          {
+           "text": "Thành lập Đảng Cộng sản Việt Nam",
+           "year": 1930
+          },
+          {
+           "text": "Nguyễn Ái Quốc về nước, thành lập Mặt trận Việt Minh",
+           "year": 1941
+          },
+          {
+           "text": "Cách mạng tháng Tám thành công",
+           "year": 1945
+          }
          ],
-         "explanation": "1911 – 1920 – 1930 – 1941 – 1945.",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "1911 – 1920 – 1930 – 1941 – 1945."
         },
         {
          "key": "nam_1945",
-         "prompt": "Xếp các sự kiện năm 1945 theo thời gian.",
-         "items": [
-          "Nhật đảo chính Pháp",
-          "Nhật đầu hàng Đồng minh",
-          "Giành chính quyền ở Hà Nội",
-          "Giành chính quyền ở Huế",
-          "Giành chính quyền ở Sài Gòn",
-          "Chủ tịch Hồ Chí Minh đọc Tuyên ngôn Độc lập"
+         "prompt": "Đặt các sự kiện năm 1945 lên dòng thời gian.",
+         "events": [
+          {
+           "text": "Nhật đảo chính Pháp",
+           "year": 1945,
+           "seq": 1,
+           "label": "9/3/1945"
+          },
+          {
+           "text": "Nhật đầu hàng Đồng minh",
+           "year": 1945,
+           "seq": 2,
+           "label": "15/8/1945"
+          },
+          {
+           "text": "Giành chính quyền ở Hà Nội",
+           "year": 1945,
+           "seq": 3,
+           "label": "19/8/1945"
+          },
+          {
+           "text": "Giành chính quyền ở Huế",
+           "year": 1945,
+           "seq": 4,
+           "label": "23/8/1945"
+          },
+          {
+           "text": "Giành chính quyền ở Sài Gòn",
+           "year": 1945,
+           "seq": 5,
+           "label": "25/8/1945"
+          },
+          {
+           "text": "Chủ tịch Hồ Chí Minh đọc Tuyên ngôn Độc lập",
+           "year": 1945,
+           "seq": 6,
+           "label": "2/9/1945"
+          }
          ],
-         "explanation": "9/3 Nhật đảo chính Pháp; 15/8 Nhật đầu hàng; 19/8 Hà Nội; 23/8 Huế; 25/8 Sài Gòn; 2/9 Tuyên ngôn Độc lập.",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "9/3 Nhật đảo chính Pháp; 15/8 Nhật đầu hàng; 19/8 Hà Nội; 23/8 Huế; 25/8 Sài Gòn; 2/9 Tuyên ngôn Độc lập."
         },
         {
          "key": "chuan_bi",
-         "prompt": "Xếp các sự kiện trong quá trình chuẩn bị thành lập Đảng theo thời gian.",
-         "items": [
-          "Gửi Bản yêu sách của nhân dân An Nam đến Hội nghị Véc-xai",
-          "Tham gia sáng lập Đảng Cộng sản Pháp",
-          "Thành lập Hội Việt Nam Cách mạng Thanh niên",
-          "Hợp nhất các tổ chức cộng sản thành Đảng Cộng sản Việt Nam"
+         "prompt": "Đặt các sự kiện trong quá trình chuẩn bị thành lập Đảng lên dòng thời gian.",
+         "events": [
+          {
+           "text": "Gửi Bản yêu sách của nhân dân An Nam đến Hội nghị Véc-xai",
+           "year": 1919
+          },
+          {
+           "text": "Tham gia sáng lập Đảng Cộng sản Pháp",
+           "year": 1920
+          },
+          {
+           "text": "Thành lập Hội Việt Nam Cách mạng Thanh niên",
+           "year": 1925
+          },
+          {
+           "text": "Hợp nhất các tổ chức cộng sản thành Đảng Cộng sản Việt Nam",
+           "year": 1930
+          }
          ],
-         "explanation": "1919 Bản yêu sách – 1920 Đảng Cộng sản Pháp – 1925 Hội Việt Nam Cách mạng Thanh niên – 1930 thành lập Đảng.",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "1919 Bản yêu sách – 1920 Đảng Cộng sản Pháp – 1925 Hội Việt Nam Cách mạng Thanh niên – 1930 thành lập Đảng."
         },
         {
          "key": "phong_trao",
-         "prompt": "Xếp các phong trào, quyết định cách mạng theo thời gian.",
-         "items": [
-          "Phong trào cách mạng 1930–1931, đỉnh cao Xô viết Nghệ – Tĩnh",
-          "Phong trào dân chủ 1936–1939",
-          "Hội nghị Trung ương 8 đặt nhiệm vụ giải phóng dân tộc lên hàng đầu",
-          "Chỉ thị “Nhật – Pháp bắn nhau và hành động của chúng ta”"
+         "prompt": "Đặt các phong trào, quyết định cách mạng lên dòng thời gian.",
+         "events": [
+          {
+           "text": "Phong trào cách mạng 1930–1931, đỉnh cao Xô viết Nghệ – Tĩnh",
+           "year": 1930,
+           "label": "1930–1931"
+          },
+          {
+           "text": "Phong trào dân chủ 1936–1939",
+           "year": 1936,
+           "label": "1936–1939"
+          },
+          {
+           "text": "Hội nghị Trung ương 8 đặt nhiệm vụ giải phóng dân tộc lên hàng đầu",
+           "year": 1941,
+           "label": "5/1941"
+          },
+          {
+           "text": "Chỉ thị “Nhật – Pháp bắn nhau và hành động của chúng ta”",
+           "year": 1945,
+           "label": "12/3/1945"
+          }
          ],
-         "explanation": "1930–1931 → 1936–1939 → Hội nghị Trung ương 8 (5/1941) → Chỉ thị ngày 12/3/1945.",
-         "first_label": "Sớm nhất",
-         "last_label": "Muộn nhất"
+         "explanation": "1930–1931 → 1936–1939 → Hội nghị Trung ương 8 (5/1941) → Chỉ thị ngày 12/3/1945."
         }
        ]
       }
-     ]
+     ],
+     "activity": "chronology"
     }
    ]
   },

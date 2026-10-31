@@ -14,6 +14,8 @@ type Props = {
   onChange: (age: number, grade: GradeId) => void;
   errors?: { age?: string; grade?: string };
   disabled?: boolean;
+  /** The grade is locked (given at registration, moved on only by the school calendar): shown, not chosen. */
+  gradeLocked?: boolean;
 };
 
 const COLUMNS = 6;
@@ -21,7 +23,7 @@ const ROW = 52; // cell height + gap
 
 /** "Độ tuổi" (a number picker, nothing typed and nothing chosen in advance) and, once an age is chosen, "Lớp học gợi ý":
  * the grade the age suggests, with the other grades plausible at that age, since age alone does not tell the grade. */
-export function StudyProfileFields({ age, grade, onChange, errors, disabled }: Props) {
+export function StudyProfileFields({ age, grade, onChange, errors, disabled, gradeLocked }: Props) {
   const [picking, setPicking] = useState(false);
   const suggested = age === null ? null : suggestGrade(age);
   return (
@@ -40,7 +42,18 @@ export function StudyProfileFields({ age, grade, onChange, errors, disabled }: P
           : age === null ? <Text style={styles.hint}>Dùng để gợi ý lớp học, môn và trò chơi phù hợp.</Text> : null}
       </View>
 
-      {age !== null && suggested ? (
+      {gradeLocked && grade ? (
+        <View style={styles.field}>
+          <Text style={styles.label}>Lớp học</Text>
+          <View style={[styles.inputRow, styles.locked]} accessible accessibilityLabel={`Lớp học: ${gradeLabel(grade)}, đã khoá`}>
+            <Ionicons name="school-outline" size={20} color="#6F8BA3" style={styles.icon} />
+            <Text style={styles.value}>{gradeLabel(grade)}</Text>
+            <Ionicons name="lock-closed-outline" size={18} color="#6F8BA3" style={styles.chevron} />
+          </View>
+          <Text style={styles.hint}>Lớp học được xác định khi đăng ký và tự lên lớp vào đầu mỗi năm học. Nếu lớp chưa đúng, hãy liên hệ hỗ trợ để được xác minh và điều chỉnh.</Text>
+          {errors?.grade ? <Text style={styles.error} accessibilityLiveRegion="polite">{errors.grade}</Text> : null}
+        </View>
+      ) : age !== null && suggested ? (
         <View style={styles.field}>
           <Text style={styles.label}>Lớp học gợi ý</Text>
           <Text style={styles.hint}>Theo tuổi, gợi ý là {gradeLabel(suggested)}. Chọn lại nếu chưa đúng lớp bạn đang học.</Text>
@@ -62,7 +75,7 @@ export function StudyProfileFields({ age, grade, onChange, errors, disabled }: P
       ) : null}
 
       <AgePicker visible={picking} value={age} onClose={() => setPicking(false)}
-        onPick={(picked) => { setPicking(false); if (picked !== age) onChange(picked, suggestGrade(picked)); }} />
+        onPick={(picked) => { setPicking(false); if (picked !== age) onChange(picked, gradeLocked && grade ? grade : suggestGrade(picked)); }} />
     </View>
   );
 }
@@ -106,6 +119,7 @@ const styles = StyleSheet.create({
   label: { fontSize: 13, fontWeight: '800', color: authTheme.ink, marginBottom: 6, marginLeft: 2 },
   inputRow: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#F4FAFE', borderRadius: 16, borderWidth: 1.5, borderColor: '#D7EAF5', minHeight: 54 },
   inputError: { borderColor: authTheme.error },
+  locked: { backgroundColor: '#EEF3F7' },
   icon: { marginLeft: 14 },
   value: { flex: 1, paddingHorizontal: 10, fontSize: 16, color: authTheme.ink },
   placeholder: { color: '#7F95A8' },

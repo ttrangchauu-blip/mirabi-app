@@ -12,6 +12,8 @@ os.environ.update({
     "PET_REWARD_SWEEP_SECONDS": "0",
     # Study Together tests drive the room clock and sweeps explicitly.
     "STUDY_ROOM_TICK_SECONDS": "0",
+    # School-year promotions are driven by the tests (education.sweep / the per-request check).
+    "GRADE_PROMOTION_SWEEP_SECONDS": "0",
     "EMAIL_BACKEND": "disabled",
 })
 
@@ -109,3 +111,9 @@ def login(client, email="aqua@example.com", password=PASSWORD):
 
 def bearer(token: str) -> dict:
     return {"Authorization": f"Bearer {token}"}
+
+def adult_signup(client, email="aqua@example.com", password=PASSWORD, age=25):
+    """Register an adult (Mirabi Life is for ages 16 and over, app/life_access.py), then sign in."""
+    grade = "adult" if age >= 23 else "university" if age >= 18 else "grade11"
+    assert register(client, email=email, password=password, age=age, school_grade=grade).status_code == 201
+    return login(client, email=email, password=password)

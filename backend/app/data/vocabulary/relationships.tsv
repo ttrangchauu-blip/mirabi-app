@@ -4,7 +4,7 @@ best_friend	best friend	collocation	1	relationships	bạn thân nhất	người 
 boyfriend	boyfriend	noun	1	relationships	bạn trai, người yêu (nam)	người con trai mình đang yêu, đang hẹn hò	Her boyfriend gave her flowers.	Bạn trai tặng hoa cho cô ấy.		/ˈbɔɪfrend/	mirabi-ai-2026-10	active
 girlfriend	girlfriend	noun	1	relationships	bạn gái, người yêu (nữ)	người con gái mình đang yêu, đang hẹn hò	He met his girlfriend at university.	Anh ấy gặp bạn gái ở trường đại học.		/ˈɡɜːlfrend/	mirabi-ai-2026-10	active
 make_friends	make friends	collocation	1	relationships	kết bạn	bắt đầu làm bạn với người mới quen	It's easy to make friends at summer camp.	Ở trại hè rất dễ kết bạn.			mirabi-ai-2026-10	active
-meet.person	meet	verb	1	relationships	gặp, làm quen (lần đầu)	lần đầu gặp ai đó và biết họ	I met my wife at a party.	Tôi quen vợ tôi ở một bữa tiệc.		/miːt/	mirabi-ai-2026-10	active
+meet.person	meet	verb	1	relationships	gặp, làm quen (lần đầu)	lần đầu gặp ai đó và biết họ	I met my new classmate on the first day of school.	Tôi gặp bạn cùng lớp mới vào ngày đầu tiên đi học.		/miːt/	mirabi-ai-2026-10	active
 kiss	kiss	verb	1	relationships	hôn	chạm môi vào ai để thể hiện tình cảm	He kissed her on the cheek.	Anh ấy hôn lên má cô ấy.		/kɪs/	mirabi-ai-2026-10	active
 miss.person_relationships	miss	verb	1	relationships	nhớ (ai)	buồn vì người mình thương đang ở xa	I miss you so much.	Anh nhớ em nhiều lắm.		/mɪs/	mirabi-ai-2026-10	active
 each_other	each other	pronoun	1	relationships	nhau, lẫn nhau	hai hay nhiều người làm việc gì cho người kia	The two friends help each other with homework.	Hai người bạn giúp nhau làm bài tập.	one another		mirabi-ai-2026-10	active
@@ -35,7 +35,7 @@ argue.relationships	argue	verb	2	relationships	cãi nhau	nói to tiếng với n
 apologise.relationships	apologise	verb	2	relationships	xin lỗi (ai)	nhận lỗi khi làm người khác buồn hoặc giận	You should apologise to your sister.	Con nên xin lỗi em gái đi.	apologize	/əˈpɒlədʒaɪz/	mirabi-ai-2026-10	draft
 trust	trust	verb	2	relationships	tin tưởng	tin rằng ai đó trung thực, không làm hại mình	I trust my best friend completely.	Tôi hoàn toàn tin tưởng bạn thân của mình.		/trʌst/	mirabi-ai-2026-10	active
 care_about.relationships	care about	phrasal_verb	2	relationships	quan tâm đến, thương (ai)	thấy người đó quan trọng với mình	I really care about you.	Mình thật sự quan tâm đến bạn.			mirabi-ai-2026-10	active
-lie_to	lie to	phrasal_verb	2	relationships	nói dối (ai)	nói điều không thật với ai đó	He lied to his girlfriend about where he was.	Anh ta nói dối bạn gái về chỗ mình đã đi.			mirabi-ai-2026-10	active
+lie_to	lie to	phrasal_verb	2	relationships	nói dối (ai)	nói điều không thật với ai đó	Never lie to your parents.	Đừng bao giờ nói dối bố mẹ.			mirabi-ai-2026-10	active
 politely.relationships	politely	adverb	2	relationships	lịch sự, lễ độ	cách nói, cách cư xử đúng phép với người khác	She politely said no to the invitation.	Cô ấy lịch sự từ chối lời mời.		/pəˈlaɪtli/	mirabi-ai-2026-10	active
 forever	forever	adverb	2	relationships	mãi mãi	lời hứa về tình bạn, tình yêu không bao giờ hết	We will be friends forever.	Chúng mình sẽ là bạn mãi mãi.		/fərˈevə/	mirabi-ai-2026-10	active
 close.intimate	close	adjective	3	relationships	thân thiết, gần gũi	có quan hệ tình cảm gắn bó với ai	My sister and I are very close.	Tôi và chị gái rất thân thiết.		/kləʊs/	mirabi-ai-2026-10	active
@@ -102,7 +102,7 @@ hand_in_hand	hand in hand	adverb	3	relationships	tay trong tay	hai người nắ
 let_it_go	let it go	phrase	3	relationships	bỏ qua đi, đừng để bụng	khuyên ai thôi giận về chuyện đã qua	It was a small mistake, so just let it go.	Chỉ là lỗi nhỏ thôi, bỏ qua đi.			mirabi-ai-2026-10	active
 acquaintance	acquaintance	noun	4	relationships	người quen (không thân)	người mình biết nhưng không phải bạn thân	He's not a friend, just an acquaintance.	Anh ấy không phải bạn, chỉ là người quen thôi.		/əˈkweɪntəns/	mirabi-ai-2026-10	active
 lover	lover	noun	4	relationships	người tình	người có quan hệ yêu đương, hay dùng trong văn chương hoặc chuyện ngoại tình	The story is about two young lovers.	Câu chuyện kể về đôi tình nhân trẻ.		/ˈlʌvə/	mirabi-ai-2026-10	active
-sweetheart	sweetheart	noun	4	relationships	người yêu (cách nói trìu mến)	người mình yêu, thường từ lâu: childhood sweetheart	They were childhood sweethearts.	Họ là đôi bạn yêu nhau từ thuở nhỏ.		/ˈswiːthɑːt/	mirabi-ai-2026-10	active
+sweetheart	sweetheart	noun	4	relationships	người yêu (cách nói trìu mến)	người mình yêu, thường là từ thuở còn nhỏ, còn đi học	They were childhood sweethearts.	Họ là đôi bạn yêu nhau từ thuở nhỏ.		/ˈswiːthɑːt/	mirabi-ai-2026-10	active
 soulmate	soulmate	noun	4	relationships	tri kỷ, bạn đời định mệnh	người hiểu mình hoàn toàn, như sinh ra để dành cho nhau	She believes she has found her soulmate.	Cô ấy tin rằng mình đã tìm được người tri kỷ.		/ˈsəʊlmeɪt/	mirabi-ai-2026-10	active
 romance	romance	noun	4	relationships	chuyện tình, mối tình lãng mạn	một mối tình, thường ngắn và đầy cảm xúc	Their holiday romance didn't last.	Mối tình trong kỳ nghỉ của họ không kéo dài.		/rəʊˈmæns/	mirabi-ai-2026-10	active
 proposal.marriage	proposal	noun	4	relationships	lời cầu hôn	lời ngỏ ý xin cưới	She said yes to his proposal.	Cô ấy đã nhận lời cầu hôn của anh.		/prəˈpəʊzl/	mirabi-ai-2026-10	active

@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../../../components/Typography';
 import type { Turn } from '../../../learning/types';
 import { appTheme as t } from '../../../theme';
+import { ChoiceOption, ChoiceResult, markOf } from './AnswerFeedback';
 
 // The lesson games (backend lesson_catalog.py): one gameplay each, whatever the lesson. Sắp xếp thứ tự (vòng đời, dòng
 // thời gian, quy trình…), Ghép cặp (sự kiện–nhân vật, phép tính–kết quả…) and Chọn đáp án có giải thích (tình huống,
@@ -201,16 +202,18 @@ const STYLE_HINT: Record<string, string> = {
   predict: 'Dự đoán điều gì sẽ xảy ra', reflect: 'Chọn câu đúng với em nhất: không có đáp án sai', quiz: 'Chọn đáp án đúng',
 };
 
-/** Read (the passage, when there is one), then tap an option. A wrong one says why and is crossed out; try another.
- * The right one's explanation shows before the next question. A self-assessment (tự đánh giá) has no wrong answer. */
-export function ChoiceExplain({ turn, disabled, feedback, onChoose, demo }: Common & {
+/** Read (the passage, when there is one), then tap one option: it is the answer. Once answered (`result`) the options
+ * lock, the one chosen turns green or red and the right one green; the explanation shows under them (AnswerFeedback)
+ * until "Câu tiếp theo". A self-assessment (tự đánh giá) has no wrong answer. */
+export function ChoiceExplain({ turn, disabled, feedback, onChoose, demo, result, reduceMotion }: Common & {
   onChoose: (id: string) => void; demo?: { chosen?: string; result?: 'ok' | 'bad' };
+  result?: ChoiceResult | null; reduceMotion?: boolean;
 }) {
   const p = turn.prompt;
   const [tried, setTried] = useState<string[]>([]);
   const [last, setLast] = useState<string | null>(null);
   useEffect(() => { if (feedback?.tone === 'bad' && last) setTried((x) => (x.includes(last) ? x : [...x, last])); }, [feedback, last]);
-  const off = disabled || !!demo;
+  const off = disabled || !!demo || !!result;
   const [open, setOpen] = useState(true);
   return (
     <View style={styles.scene}>
@@ -229,15 +232,15 @@ export function ChoiceExplain({ turn, disabled, feedback, onChoose, demo }: Comm
       <Text style={styles.question}>{p.question}</Text>
       <View style={styles.choices}>
         {(p.options ?? []).map((o) => {
-          const crossed = tried.includes(o.id);
-          const right = demo?.chosen === o.id && demo.result === 'ok';
-          const wrong = demo?.chosen === o.id && demo.result === 'bad';
+          // An older server lets a wrong option be retried: it stays crossed out.
+          const crossed = !result && tried.includes(o.id);
+          const shown = demo?.chosen === o.id ? (demo.result === 'ok' ? 'right' : demo.result === 'bad' ? 'wrong' : null) : null;
+          const mark = markOf(result, o.id) ?? shown ?? (crossed ? 'wrong' : null);
           return (
-            <Pressable key={o.id} onPress={() => { setLast(o.id); onChoose(o.id); }} disabled={off || crossed} accessibilityRole="button"
-              accessibilityState={{ disabled: off || crossed }} accessibilityLabel={crossed ? `${o.text}, chưa đúng` : o.text}
-              style={({ pressed }) => [styles.choice, (crossed || wrong) && styles.choiceWrong, right && styles.choiceRight, pressed && styles.pressed]}>
-              <Text style={[styles.choiceText, (crossed || wrong) && styles.choiceWrongText]}>{o.text}</Text>
-            </Pressable>
+            <ChoiceOption key={o.id} label={o.text} onPress={() => { setLast(o.id); onChoose(o.id); }} disabled={off || crossed}
+              mark={mark} idle={CHOICE_IDLE} style={styles.choice} reduceMotion={reduceMotion}>
+              <Text style={[styles.choiceText, crossed && styles.choiceWrongText]}>{o.text}</Text>
+            </ChoiceOption>
           );
         })}
       </View>
@@ -246,6 +249,8 @@ export function ChoiceExplain({ turn, disabled, feedback, onChoose, demo }: Comm
     </View>
   );
 }
+
+const CHOICE_IDLE = { bg: '#FFFFFF', border: t.border };
 
 const styles = StyleSheet.create({
   scene: { gap: 12, paddingVertical: 4 },
@@ -296,10 +301,8 @@ const styles = StyleSheet.create({
   code: { fontFamily: MONO, fontSize: 14, lineHeight: 20, backgroundColor: '#F4F6F8', borderRadius: 8, padding: 8 },
   question: { fontSize: 17, fontWeight: '900', color: t.ink, lineHeight: 24 },
   choices: { gap: 8 },
-  choice: { minHeight: 50, borderRadius: 14, borderWidth: 2, borderColor: t.border, backgroundColor: '#FFFFFF', justifyContent: 'center',
-    paddingHorizontal: 14, paddingVertical: 10 },
-  choiceWrong: { borderColor: t.danger, backgroundColor: t.dangerBg },
+  // Room on the right for the ✓ / ✕ shown once answered.
+  choice: { minHeight: 50, borderRadius: 14, borderWidth: 2, justifyContent: 'center', paddingLeft: 14, paddingRight: 36, paddingVertical: 10 },
   choiceWrongText: { color: t.danger, textDecorationLine: 'line-through' },
-  choiceRight: { borderColor: t.success, backgroundColor: t.successBg },
   choiceText: { fontSize: 15, fontWeight: '800', color: t.ink },
 });

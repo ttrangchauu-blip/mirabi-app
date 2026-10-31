@@ -22,7 +22,7 @@ from .security import current_user
 router = APIRouter(prefix="/api/notifications", tags=["notifications"])
 
 KINDS = {"friend_request", "friend_accepted", "room_invitation", "session_started", "session_completed",
-         "team_quest_completed", "room_visit", "garden_care"}
+         "team_quest_completed", "room_visit", "garden_care", "town_gift"}
 RETENTION_DAYS = 90
 
 

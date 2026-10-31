@@ -1,0 +1,13 @@
+{
+  "about": "Education regions (timezone, grades) for education.py. School-year dates are not bundled: an administrator enters each year's dates with PUT /api/admin/education/calendar, with the decision that sets them (source, decision number), and verifies them. Grades move up only on a verified date. A 'years' list here would be seeded unverified.",
+  "regions": {
+    "VN": {
+      "name": "Việt Nam",
+      "curriculum": "GDPT2018",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "first_grade": "preschool",
+      "last_grade": "grade12",
+      "years": []
+    }
+  }
+}

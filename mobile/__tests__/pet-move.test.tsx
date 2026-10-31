@@ -5,6 +5,7 @@ import { PetArt } from '../src/components/PetArt';
 import { hasSprite, moveActivity } from '../src/petSprites';
 import type { Turn } from '../src/learning/types';
 import { Playfield } from '../src/screens/learning/games/Playfield';
+import { WordField } from '../src/screens/learning/games/wordField';
 
 /** The sheet a PetArt draws (the moving strip, not the still placeholder under it). */
 function sheetOf(ui: React.ReactElement) {
@@ -25,8 +26,12 @@ test('a pet with drawn move strips darts each way with its own strip, at every s
 describe('in the word shooter', () => {
   const APPLE: Turn = { turn_id: 'turn-apple', position: 0, kind: 'word_spelling', skill_label: 'Gõ từ', prompt: { word: 'apple', letters: [5] },
     hints_shown: [], hints_total: 1, attempts: 0, wrong_attempts: 0, practice: false, travel_seconds: 0 };
+  // The words on the field: "apple" comes in on the left (the pet starts in the middle) and is answered right (LOCKED)
+  // just before its shot is given, as the game does.
+  let words = new WordField<Turn>();
+  beforeEach(() => { words = new WordField<Turn>(); });
   const field = (petId: string, shots: boolean) => (
-    <Playfield variant="words" turns={[]} progress={() => 0.3} selectedId={null} onSelect={() => {}} petId={petId} petLevel={3} reduceMotion={false}
+    <Playfield variant="words" turns={shots ? [] : [APPLE]} field={words} progress={() => 0.3} selectedId={null} onSelect={() => {}} petId={petId} petLevel={3} reduceMotion={false}
       flash={null} running onImpact={jest.fn()} onShotDone={jest.fn()} onBurstDone={jest.fn()} wrongKey={0}
       shots={shots ? [{ id: APPLE.turn_id, turn: APPLE, aimed: false, word: { en: 'apple', vi: 'quả táo', phonetic: null } }] : []} />
   );
@@ -44,6 +49,7 @@ describe('in the word shooter', () => {
   /** The pet heads for a word in the left lane (it starts in the middle); what it draws a moment later. */
   function dartLeft(petId: string) {
     start(petId);
+    act(() => { words.lock(APPLE.turn_id); });
     screen.rerender(field(petId, true));
     act(() => { jest.advanceTimersByTime(60); });
     return drawn();

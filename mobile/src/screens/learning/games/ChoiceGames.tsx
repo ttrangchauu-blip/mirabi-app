@@ -5,23 +5,28 @@ import { PetArt } from '../../../components/PetArt';
 import type { Turn } from '../../../learning/types';
 import { appTheme as t } from '../../../theme';
 import { NumberPad } from './NumberPad';
+import { DoorFrame } from '../../../games/art/wordForest';
+import { ChoiceOption, ChoiceResult, markOf } from './AnswerFeedback';
 
 type PetProps = { petId: string; petLevel: number; reduceMotion: boolean };
 
 /** "Chọn đáp án ngữ pháp": the pet stands before the gates; the right answer opens the way. Four or long answers
- * ("has been waiting") are laid out two by two so every answer stays readable on a phone. */
-export function GateChoice({ turn, onChoose, disabled, petId, petLevel, reduceMotion }: { turn: Turn; onChoose: (id: string) => void; disabled: boolean } & PetProps) {
+ * ("has been waiting") are laid out two by two so every answer stays readable on a phone. Once answered (`result`) the
+ * gates lock and are marked (the one chosen green or red, the right one green) above the explanation. */
+export function GateChoice({ turn, onChoose, disabled, result, petId, petLevel, reduceMotion }: {
+  turn: Turn; onChoose: (id: string) => void; disabled: boolean; result?: ChoiceResult | null } & PetProps) {
   const options = turn.prompt.options ?? [];
   const grid = options.length > 3 || options.some((o) => o.text.length > 10);
   return (
     <View style={styles.scene}>
       <View style={[styles.gates, grid && styles.gatesGrid]}>
         {options.map((option) => (
-          <Pressable key={option.id} onPress={() => onChoose(option.id)} disabled={disabled} accessibilityRole="button"
-            accessibilityLabel={`Đáp án ${option.text}`} style={({ pressed }) => [styles.gate, grid && styles.gateGrid, pressed && styles.pressed, disabled && styles.dimmed]}>
-            {grid ? null : <Text style={styles.gateArch}>⛩️</Text>}
+          <ChoiceOption key={option.id} label={`Đáp án ${option.text}`} onPress={() => onChoose(option.id)} disabled={disabled || !!result}
+            mark={markOf(result, option.id)} idle={GATE_IDLE} reduceMotion={reduceMotion}
+            style={[styles.gate, grid && styles.gateGrid, disabled && !result && styles.dimmed]}>
+            {grid ? null : <View style={styles.gateArch} pointerEvents="none"><DoorFrame size={40} /></View>}
             <Text style={[styles.gateText, grid && styles.gateTextGrid]}>{option.text}</Text>
-          </Pressable>
+          </ChoiceOption>
         ))}
       </View>
       <View style={styles.petRow} pointerEvents="none"><PetArt pet={petId} size={56} stage={petLevel} still={reduceMotion} /></View>
@@ -71,9 +76,11 @@ export function WordBridge({ turn, onSubmit, disabled, petId, petLevel, reduceMo
   );
 }
 
-/** "Xây cầu toán học": each correct answer finishes one span of the bridge. */
-export function MathBridge({ turn, built, total, draft, setDraft, onSubmit, disabled }: {
+/** "Xây cầu toán học": each correct answer finishes one span of the bridge. So sánh: the signs are options, marked once
+ * answered (`result`). */
+export function MathBridge({ turn, built, total, draft, setDraft, onSubmit, disabled, result, reduceMotion }: {
   turn: Turn; built: number; total: number; draft: string; setDraft: (v: string) => void; onSubmit: (answer: string) => void; disabled: boolean;
+  result?: ChoiceResult | null; reduceMotion?: boolean;
 }) {
   return (
     <View style={styles.scene}>
@@ -83,10 +90,10 @@ export function MathBridge({ turn, built, total, draft, setDraft, onSubmit, disa
       {turn.kind === 'compare' ? (
         <View style={styles.compareRow}>
           {(turn.prompt.options ?? []).map((o) => (
-            <Pressable key={o.id} onPress={() => onSubmit(o.id)} disabled={disabled} accessibilityRole="button" accessibilityLabel={`Dấu ${o.text}`}
-              style={({ pressed }) => [styles.sign, pressed && styles.pressed, disabled && styles.dimmed]}>
+            <ChoiceOption key={o.id} label={`Dấu ${o.text}`} onPress={() => onSubmit(o.id)} disabled={disabled || !!result}
+              mark={markOf(result, o.id)} idle={SIGN_IDLE} reduceMotion={reduceMotion} style={[styles.sign, disabled && !result && styles.dimmed]}>
               <Text style={styles.signText}>{o.text}</Text>
-            </Pressable>
+            </ChoiceOption>
           ))}
         </View>
       ) : (
@@ -97,6 +104,9 @@ export function MathBridge({ turn, built, total, draft, setDraft, onSubmit, disa
   );
 }
 
+const GATE_IDLE = { bg: '#FFF4E0', border: '#F2C46D' };
+const SIGN_IDLE = { bg: '#FFFFFF', border: t.border };
+
 const styles = StyleSheet.create({
   scene: { marginBottom: 10 },
   gates: { flexDirection: 'row', gap: 8 },
@@ -104,8 +114,8 @@ const styles = StyleSheet.create({
   gateGrid: { flexBasis: '47%', flexGrow: 1, minHeight: 56, paddingVertical: 10 },
   gateTextGrid: { fontSize: 16 },
   endMark: { fontSize: 20, fontWeight: '900', color: t.ink, marginLeft: -2 },
-  gate: { flex: 1, minHeight: 92, borderRadius: 18, backgroundColor: '#FFF4E0', borderWidth: 2, borderColor: '#F2C46D', alignItems: 'center', justifyContent: 'center', padding: 8 },
-  gateArch: { fontSize: 26 },
+  gate: { flex: 1, minHeight: 92, borderRadius: 18, borderWidth: 2, alignItems: 'center', justifyContent: 'center', padding: 8 },
+  gateArch: { alignItems: 'center', marginBottom: 2 },
   gateText: { fontSize: 17, fontWeight: '900', color: t.ink, textAlign: 'center' },
   petRow: { alignItems: 'center', marginTop: 8 },
   pressed: { opacity: 0.75, transform: [{ scale: 0.98 }] },
@@ -128,6 +138,6 @@ const styles = StyleSheet.create({
   span: { flex: 1, height: 12, borderRadius: 4, backgroundColor: '#D4E3EC' },
   spanBuilt: { backgroundColor: '#C98B4E' },
   compareRow: { flexDirection: 'row', gap: 10 },
-  sign: { flex: 1, minHeight: 64, borderRadius: 16, backgroundColor: '#FFFFFF', borderWidth: 2, borderColor: t.border, alignItems: 'center', justifyContent: 'center' },
+  sign: { flex: 1, minHeight: 64, borderRadius: 16, borderWidth: 2, alignItems: 'center', justifyContent: 'center' },
   signText: { fontSize: 30, fontWeight: '900', color: t.accent },
 });

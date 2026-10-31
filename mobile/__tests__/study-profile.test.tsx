@@ -118,43 +118,43 @@ describe('Học tập', () => {
 
     fireEvent.press(screen.getByRole('button', { name: /^Toán\./ }));
     fireEvent.press(await screen.findByRole('button', { name: /^Bảo vệ căn cứ\./ }));
-    // Only grade 3 (the grade being studied), not grade 2; another grade is chosen on the subject screen.
+    // Only grade 3 (the learner's locked grade), not grade 2.
     expect(screen.getByRole('checkbox', { name: 'Lớp 3' }).props.accessibilityState.checked).toBe(true);
     expect(screen.queryByRole('checkbox', { name: 'Lớp 2' })).toBeNull();
     expect(screen.getByRole('radio', { name: 'Cộng, trừ, nhân, chia (gợi ý)' })).toBeTruthy();
     expect(screen.getByRole('radio', { name: 'So sánh số' })).toBeTruthy();
   });
 
-  it('the confirmed grade is changed from the subject screen', async () => {
+  it('the grade cannot be changed from Học tập', async () => {
     const server = mockServer({
       'GET /api/learning/catalog': { status: 200, body: catalog(GRADE3) },
-      'PUT /api/profile/study': (req) => ({ status: 200, body: { ...USER, ...req.body } }),
+      'GET /api/learning/sessions/current': { status: 200, body: { session: null } },
     });
-    const onUserUpdated = renderLearning({ age: 8, school_grade: 'grade3' });
-    fireEvent.press(await screen.findByRole('button', { name: 'Sửa độ tuổi và lớp chính' }));
-    expect(screen.getByRole('button', { name: 'Độ tuổi' }).props.accessibilityValue).toEqual({ text: '8 tuổi' });
-    fireEvent.press(screen.getByRole('radio', { name: 'Lớp 2' }));
-    fireEvent.press(screen.getByRole('button', { name: 'Lưu' }));
-    await waitFor(() => expect(onUserUpdated).toHaveBeenCalled());
-    expect(server.callsTo('PUT /api/profile/study')[0].body).toEqual({ age: 8, school_grade: 'grade2' });
+    renderLearning({ age: 8, school_grade: 'grade3' });
     expect(await screen.findByText('Chọn môn học')).toBeTruthy();
+    expect(screen.queryByRole('button', { name: 'Sửa độ tuổi và lớp chính' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Chọn lớp khác để ôn hoặc học trước' })).toBeNull();
+    expect(server.callsTo('PUT /api/profile/study')).toHaveLength(0);
   });
 });
 
 describe('Cài đặt', () => {
-  it('edits the saved age and grade; a changed age suggests its grade again', async () => {
+  it('edits the age only: the registered grade is shown locked and is never sent changed', async () => {
     const server = mockServer({ 'PUT /api/profile/study': (req) => ({ status: 200, body: { ...USER, ...req.body } }) });
     const onBack = jest.fn();
     const onUserUpdated = jest.fn();
     render(<ToastProvider><StudyProfileScreen user={{ ...USER, age: 16, school_grade: 'grade10' } as any} onBack={onBack} onUserUpdated={onUserUpdated} /></ToastProvider>);
-    expect(screen.getByRole('radio', { name: 'Lớp 10' }).props.accessibilityState.checked).toBe(true);
-    chooseAge(19);
-    expect(screen.getByRole('radio', { name: 'Sinh viên, gợi ý theo tuổi' }).props.accessibilityState.checked).toBe(true);
-    fireEvent.press(screen.getByRole('radio', { name: 'Người đi làm/Học tự do' }));
+    expect(screen.getByLabelText('Lớp học: Lớp 10, đã khoá')).toBeTruthy();
+    expect(screen.queryByRole('radio', { name: /^Lớp 1\d/ })).toBeNull(); // no grade to pick
+    chooseAge(30); // does not fit grade 10: refused here, nothing sent
+    fireEvent.press(screen.getByRole('button', { name: 'Lưu' }));
+    expect(await screen.findByText('Độ tuổi này không khớp với lớp đã đăng ký.')).toBeTruthy();
+    expect(server.callsTo('PUT /api/profile/study')).toHaveLength(0);
+    chooseAge(17);
     fireEvent.press(screen.getByRole('button', { name: 'Lưu' }));
     await waitFor(() => expect(onBack).toHaveBeenCalled());
-    expect(server.callsTo('PUT /api/profile/study')[0].body).toEqual({ age: 19, school_grade: 'adult' });
-    expect(onUserUpdated).toHaveBeenCalledWith(expect.objectContaining({ age: 19, school_grade: 'adult' }));
+    expect(server.callsTo('PUT /api/profile/study')[0].body).toEqual({ age: 17, school_grade: 'grade10' });
+    expect(onUserUpdated).toHaveBeenCalledWith(expect.objectContaining({ age: 17, school_grade: 'grade10' }));
   });
 
   it('keeps the form and says why when the server refuses', async () => {

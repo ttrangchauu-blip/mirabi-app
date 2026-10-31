@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { AppState } from 'react-native';
 import { ApiError, NetworkError } from '../api/client';
 import { errorMessage } from '../auth/messages';
-import { learningApi } from './api';
+import { GameBackend, learningApi } from './api';
 import type { EventResponse, LearningSession } from './types';
 
 const RELOAD_CODES = new Set(['session_ended', 'session_paused', 'session_not_found', 'turn_not_open', 'turn_not_found',
@@ -19,6 +19,10 @@ type StartOptions = {
   /** Studying together: when the room starts the game (ms, this device's clock). The countdown follows it, so every
    * member starts at the same time, never because one of them finished the guide. */
   startsAt?: number | null;
+  /** Who owns the session: the server (`learningApi`, a stage) or a tutorial's demo session on the device. */
+  api?: GameBackend;
+  /** Play at once, without the 3-2-1 countdown (a tutorial: nothing counts, nothing needs a fair start). */
+  instant?: boolean;
 };
 type Handler = (response: EventResponse) => void;
 
@@ -35,13 +39,13 @@ type Handler = (response: EventResponse) => void;
 export function useLearningSession(initial: LearningSession, notify: (message: string, tone?: 'info' | 'error') => void,
   /** Start right away (with the countdown) even though the session is still paused, e.g. after the lesson. */ autoStart = false,
   options: StartOptions = {}) {
-  const { ready = true, startsAt = null } = options;
+  const { ready = true, startsAt = null, api = learningApi, instant = false } = options;
   const [session, setSession] = useState(initial);
   const [busy, setBusy] = useState(false);
   const [offline, setOffline] = useState(false);
   const [localPause, setLocalPause] = useState(initial.status === 'paused' && !autoStart);
   // 3, 2, 1, then 0 ("Bắt đầu!") until the backend has resumed the session; null when not counting.
-  const [countdown, setCountdown] = useState<number | null>(initial.status === 'active' || autoStart ? COUNTDOWN_FROM : null);
+  const [countdown, setCountdown] = useState<number | null>(!instant && (initial.status === 'active' || autoStart) ? COUNTDOWN_FROM : null);
   const countdownRef = useRef(countdown);
   countdownRef.current = countdown;
   const [foreground, setForeground] = useState(true);
@@ -62,9 +66,9 @@ export function useLearningSession(initial: LearningSession, notify: (message: s
   }, []);
 
   const reload = useCallback(async () => {
-    try { apply(await learningApi.session(sessionRef.current.id)); setOffline(false); }
+    try { apply(await api.session(sessionRef.current.id)); setOffline(false); }
     catch (e) { if (e instanceof NetworkError) setOffline(true); }
-  }, [apply]);
+  }, [apply, api]);
 
   const run = useCallback((call: Call, onDone?: Handler): Promise<EventResponse | null> => {
     if (busyRef.current) return Promise.resolve(null); // a second tap while the first answer is on its way
@@ -113,11 +117,11 @@ export function useLearningSession(initial: LearningSession, notify: (message: s
     const job = pending.current;
     if (job) {
       const done = await run(job.call, job.onDone);
-      if (done) setCountdown(COUNTDOWN_FROM);
+      if (done && !instant) setCountdown(COUNTDOWN_FROM);
     } else {
       await reload();
     }
-  }, [reload, run]);
+  }, [reload, run, instant]);
 
   useEffect(() => {
     if (!offline) return;
@@ -128,14 +132,18 @@ export function useLearningSession(initial: LearningSession, notify: (message: s
   const pause = useCallback(() => {
     setLocalPause(true);  // the game stops at once, whatever the network does
     setCountdown(null);
-    if (sessionRef.current.status === 'active') void control(() => learningApi.pause(sessionRef.current.id));
-  }, [control]);
+    if (sessionRef.current.status === 'active') void control(() => api.pause(sessionRef.current.id));
+  }, [control, api]);
 
   const resume = useCallback(() => {
     foregroundRef.current = true; // a tap: the app is on screen
     setForeground(true);
+    if (instant) { // no countdown: play on at once
+      void control(() => api.resume(sessionRef.current.id), () => setLocalPause(false));
+      return;
+    }
     if (countdownRef.current === null) setCountdown(COUNTDOWN_FROM); // a second tap never restarts it
-  }, []);
+  }, [instant, control, api]);
 
   // 3 → 2 → 1 → 0, one a second, once the game is ready and on screen. With a start time set by the room (studying
   // together), it follows that time instead, so everyone starts at the same moment.
@@ -160,24 +168,24 @@ export function useLearningSession(initial: LearningSession, notify: (message: s
       const timer = setTimeout(go, START_SHOWN_MS);
       return () => { clearTimeout(timer); going.current = false; };
     }
-    void control(() => learningApi.resume(sessionRef.current.id), () => {
+    void control(() => api.resume(sessionRef.current.id), () => {
       if (countdownRef.current === null) { // paused (back button) while the resume was on its way: stay paused
         going.current = false;
-        void control(() => learningApi.pause(sessionRef.current.id));
+        void control(() => api.pause(sessionRef.current.id));
         return;
       }
       if (foregroundRef.current) { go(); return; }
       // The app went to the background while the resume was on its way: stop again and count from 3 on return.
       going.current = false;
       setCountdown(COUNTDOWN_FROM);
-      void control(() => learningApi.pause(sessionRef.current.id));
+      void control(() => api.pause(sessionRef.current.id));
     }).then((done) => {
       if (done) return;
       going.current = false;
       // No network: the retry counts down again once it gets through. Any other refusal: back to the pause menu.
       if (!pending.current) setCountdown(null);
     });
-  }, [countdown, ready, foreground, control]);
+  }, [countdown, ready, foreground, control, api]);
 
   // Leaving the app (home button, call, lock screen) pauses the game. During the countdown nothing has started yet:
   // it stops and counts again from 3 when the app is back (a room's start time is kept as it is).
@@ -191,13 +199,13 @@ export function useLearningSession(initial: LearningSession, notify: (message: s
         // A resume on its way handles this itself when it comes back (see "Bắt đầu!" above).
         const resuming = going.current && sessionRef.current.status === 'paused';
         if (!resuming && startsAtRef.current === null) setCountdown(COUNTDOWN_FROM);
-        if (!resuming && sessionRef.current.status === 'active') void control(() => learningApi.pause(sessionRef.current.id));
+        if (!resuming && sessionRef.current.status === 'active') void control(() => api.pause(sessionRef.current.id));
       } else if (sessionRef.current.status === 'active') {
         pause();
       }
     });
     return () => sub.remove();
-  }, [pause, control]);
+  }, [pause, control, api]);
 
   const running = session.status === 'active' && !localPause && !offline && countdown === null;
   return { session, busy, offline, paused: localPause || (session.status === 'paused' && countdown === null), countdown,

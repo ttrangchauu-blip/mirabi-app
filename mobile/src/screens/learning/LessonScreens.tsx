@@ -1,396 +1,409 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { ActivityIndicator, Animated, Easing, FlatList, LayoutAnimation, Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { errorMessage } from '../../auth/messages';
 import { Text } from '../../components/Typography';
 import { learningApi } from '../../learning/api';
 import { GAME_INFO } from '../../learning/labels';
-import type { CatalogLesson, GameId, LessonGame, LessonListItem, LessonProgramme, ProgrammeSubject, SubjectLessons } from '../../learning/types';
+import { filterLessons, GROUP_LABEL, LessonCard, lessonCards, LessonFilter, newlyUnlocked, orderChanged, subjectProgress,
+  unlockHint } from '../../learning/lessonOrder';
+import type { CatalogLesson, GameId, LessonExplore, LessonGame, LessonProgramme, SubjectLessons, UnlockRequirement } from '../../learning/types';
 import { appTheme as t } from '../../theme';
-import { Button, Card, IconName, ProgressBar, SectionHeader, SoftInput } from '../../ui/kit';
+import { Button, Card, IconName, ProgressBar, Segmented } from '../../ui/kit';
 import { BackHeader } from './GamePicker';
+import { gameLook, HeaderIcon, IconBadge, Look } from './LearningUI';
 
-// Học tập theo bài (backend lesson_api.py): Học tập → Chọn môn → Chọn bài → Chọn trò → Cách chơi → 3-2-1 → Chơi → Kết
-// quả. The programme lists every subject of the grade, the lessons of a subject come by chapter, and a lesson shows what
-// is learned before its games. Nothing is created on the backend until a game starts.
+// Học tập theo bài (backend lesson_api.py): Học tập → môn → bài → trò chơi → Cách chơi (lần đầu) → 3-2-1 → Chơi → Kết quả.
+// A subject lists its lessons sorted by the learner's state (learning/lessonOrder.ts); a lesson shows its short content
+// and its games. Every state comes from the backend; nothing is created there until a game starts.
 
-/** Accent- and case-insensitive, so "phan biet" finds "Phân biệt" and "dong" finds "đồng". */
-export const fold = (text: string) => text.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase().trim();
-
-const STATUS_STYLE = {
-  not_started: { color: t.muted, bg: '#EEF2F5', icon: 'ellipse-outline' as IconName },
-  in_progress: { color: '#9A5B00', bg: '#FFF1D6', icon: 'time-outline' as IconName },
-  completed: { color: t.success, bg: t.successBg, icon: 'checkmark-circle' as IconName },
-};
-
-function supportLine(s: ProgrammeSubject): string {
-  if (s.status === 'unsupported') return s.unsupported ?? 'Mirabi chưa có bài học cho môn này.';
-  if (s.status === 'empty') return 'Đang biên soạn: chưa có bài học.';
-  if (!s.ready) return `${s.lessons} bài trong danh mục · đang biên soạn`;
-  const done = s.completed ? ` · ${s.completed} đã hoàn thành` : '';
-  return `${s.ready}/${s.lessons} bài sẵn sàng · ${s.chapters} chương${done}`;
+function Failed({ error, onRetry }: { error: string; onRetry: () => void }) {
+  return <Card><Text style={styles.error}>{error}</Text><Button title="Thử lại" icon="refresh" variant="secondary" onPress={onRetry} /></Card>;
 }
 
-// --- Chọn môn ----------------------------------------------------------------------------------------------------------
+// --- Môn học: một danh sách bài, sắp theo trạng thái ---------------------------------------------------------------------
 
-type ProgrammeProps = {
-  programme: LessonProgramme | null;
-  error: string | null;
-  onRetry: () => void;
-  onOpenSubject: (code: string) => void;
-  /** No school grade (Sinh viên, Người đi làm), or another one to look at. */
-  onPickGrade: (grade: string) => void;
-  /** "Tiếp tục học": the lesson last practised. */
-  onOpenLesson: (key: string) => void;
-  /** An open session is offered elsewhere (Tiếp tục phiên học): the lesson card is not shown twice. */
-  hideResume?: boolean;
-  onSelectionChange: (chosen: string[]) => void;
-};
+/** What a subject screen leaves behind for the next visit: its last list and where it was scrolled, so coming back
+ * from a lesson shows the list at once and moves only the cards whose state changed. */
+export type SubjectSnapshot = { data: SubjectLessons; offset: number };
 
-/** Every subject and educational activity of the grade, in the order of the curriculum, each saying what Mirabi has
- * for it. THPT learners choose the elective subjects they study (shown first); every subject stays open. */
-export function ProgrammeSubjects({ programme, error, onRetry, onOpenSubject, onPickGrade, onOpenLesson, hideResume, onSelectionChange }: ProgrammeProps) {
-  if (error) return <Card><Text style={styles.error}>{error}</Text><Button title="Thử lại" icon="refresh" variant="secondary" onPress={onRetry} /></Card>;
-  if (!programme) return <ActivityIndicator color={t.accent} style={styles.loading} />;
-  const resume = programme.resume;
-  const selection = programme.selection;
-  const chosen = new Set(selection?.chosen ?? []);
-  const groups: { title: string; items: ProgrammeSubject[] }[] = [];
-  const core = programme.subjects.filter((s) => s.type === 'compulsory' || s.type === 'activity');
-  const electives = programme.subjects.filter((s) => s.type === 'elective');
-  const optional = programme.subjects.filter((s) => s.type === 'optional');
-  if (core.length) groups.push({ title: 'Môn bắt buộc và hoạt động giáo dục', items: core });
-  if (selection && chosen.size) {
-    groups.push({ title: 'Môn lựa chọn bạn học', items: electives.filter((s) => chosen.has(s.code)) });
-    groups.push({ title: 'Môn lựa chọn khác', items: electives.filter((s) => !chosen.has(s.code)) });
-  } else if (electives.length) groups.push({ title: 'Môn lựa chọn', items: electives });
-  if (optional.length) groups.push({ title: 'Môn tự chọn', items: optional });
-  const toggle = (code: string) => {
-    if (!selection) return;
-    const next = chosen.has(code) ? [...chosen].filter((c) => c !== code) : chosen.size < selection.count ? [...chosen, code] : null;
-    if (next) onSelectionChange(next);
-  };
-  return (
-    <>
-      {resume && !hideResume ? (
-        <Card style={styles.resume}>
-          <View style={styles.row}>
-            <Ionicons name="bookmark-outline" size={22} color={t.accent} />
-            <Text style={styles.resumeTitle}>Tiếp tục học</Text>
-          </View>
-          <Text style={styles.muted}>Lớp {resume.grade} · {resume.subject_name} · {resume.title}{resume.game_title ? ` · ${resume.game_title}` : ''}</Text>
-          <Button title="Mở bài học" icon="arrow-forward" onPress={() => onOpenLesson(resume.lesson)} />
-        </Card>
-      ) : null}
-      {programme.grade === null ? (
-        <Card>
-          <Text style={styles.muted}>{programme.note}</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chipRow}>
-            {programme.grades.map((g) => (
-              <Pressable key={g.id} onPress={() => onPickGrade(g.id)} accessibilityRole="button" accessibilityLabel={`Xem bài học ${g.label}`} style={styles.chip}>
-                <Text style={styles.chipText}>{g.label}</Text>
-              </Pressable>
-            ))}
-          </ScrollView>
-        </Card>
-      ) : null}
-      {selection ? (
-        <Card style={styles.selection}>
-          <Text style={styles.selectionTitle}>Môn lựa chọn của bạn ({chosen.size}/{selection.count})</Text>
-          <Text style={styles.muted}>{selection.note}</Text>
-          <View style={styles.chips}>
-            {electives.filter((s) => selection.available.includes(s.code)).map((s) => {
-              const on = chosen.has(s.code);
-              const full = !on && chosen.size >= selection.count;
-              return (
-                <Pressable key={s.code} onPress={() => toggle(s.code)} disabled={full} accessibilityRole="checkbox"
-                  accessibilityState={{ checked: on, disabled: full }} accessibilityLabel={`${s.name}${on ? ', đang học' : ''}`}
-                  style={[styles.chip, on && styles.chipOn, full && styles.dimmed]}>
-                  <Text style={[styles.chipText, on && styles.chipTextOn]}>{s.name}</Text>
-                </Pressable>
-              );
-            })}
-          </View>
-        </Card>
-      ) : null}
-      {groups.filter((g) => g.items.length).map((g) => (
-        <View key={g.title}>
-          <SectionHeader title={g.title} />
-          {g.items.map((s) => {
-            const open = s.status !== 'unsupported' && s.status !== 'empty';
-            return (
-              <Pressable key={s.code} onPress={() => onOpenSubject(s.code)} disabled={!open} accessibilityRole="button"
-                accessibilityState={{ disabled: !open }} accessibilityLabel={`${s.name}. ${s.type_label}. ${supportLine(s)}`}
-                style={({ pressed }) => [styles.subject, pressed && styles.pressed, !open && styles.subjectOff]}>
-                <View style={[styles.iconWrap, { backgroundColor: s.bg }]}><Ionicons name={s.icon as IconName} size={26} color={s.color} /></View>
-                <View style={styles.flex}>
-                  <Text style={styles.subjectName}>{s.name}</Text>
-                  <Text style={styles.typeTag}>{s.type_label}{s.note ? ` · ${s.note}` : ''}</Text>
-                  <Text style={[styles.support, !open && styles.supportOff]}>{supportLine(s)}</Text>
-                  {s.ready ? <View style={styles.bar}><ProgressBar value={s.completed / Math.max(1, s.ready)} color={t.success} /></View> : null}
-                </View>
-                {open ? <Ionicons name="chevron-forward" size={22} color={t.muted} /> : null}
-              </Pressable>
-            );
-          })}
-        </View>
-      ))}
-      <Text style={styles.source}>{programme.curriculum}. Danh mục môn theo {programme.legal_basis.map((b) => b.split(' (')[0]).join('; ')}.</Text>
-    </>
-  );
+type LessonsProps = { code: string; onBack: () => void; onOpen: (key: string) => void;
+  /** The subject's free-practice games (not by lesson), when it has some. */ onPractice?: () => void;
+  /** The list of the last visit (this grade and school year). */ snapshot?: SubjectSnapshot | null;
+  onLeave?: (snapshot: SubjectSnapshot) => void; reduceMotion?: boolean };
+
+const FILTERS: { value: LessonFilter; label: string }[] = [
+  { value: 'all', label: 'Tất cả' }, { value: 'open', label: 'Đã mở' }, { value: 'locked', label: 'Chưa mở' }];
+
+/** Cards that changed group slide to their new place (about 0.25 s) instead of the list being drawn again. */
+function moveCards(reduceMotion?: boolean) {
+  if (reduceMotion) return;
+  try {
+    LayoutAnimation.configureNext({ duration: 260, update: { type: 'easeInEaseOut' },
+      create: { type: 'easeInEaseOut', property: 'opacity' }, delete: { type: 'easeInEaseOut', property: 'opacity' } });
+  } catch { /* no layout animation here: the cards just take their place */ }
 }
 
-// --- Chọn bài ----------------------------------------------------------------------------------------------------------
-
-type LessonsProps = { code: string; grade: string | null; onBack: () => void; onOpen: (key: string) => void;
-  /** The subject's free-practice games (not by lesson), when it has some. */ onPractice?: () => void };
-
-/** The lessons of a subject by chapter, in the order of the curriculum, each with its status and progress. A planned
- * lesson is listed without a play button; a lesson locked by a prerequisite says why. */
-export function SubjectLessonsScreen({ code, grade, onBack, onOpen, onPractice }: LessonsProps) {
-  const [data, setData] = useState<SubjectLessons | null>(null);
+/** A subject: a small header (its icon, name and the learner's grade), its progress, a filter, and every lesson once,
+ * sorted by the learner's state (Đang học → Đã mở → Đã hoàn thành → Chưa mở, each in the curriculum's order). */
+export function SubjectLessonsScreen({ code, onBack, onOpen, onPractice, snapshot, onLeave, reduceMotion }: LessonsProps) {
+  const [data, setData] = useState<SubjectLessons | null>(snapshot?.data ?? null);
   const [error, setError] = useState<string | null>(null);
-  const [query, setQuery] = useState('');
+  const [filter, setFilter] = useState<LessonFilter>('all');
+  const [hint, setHint] = useState<string | null>(null);
+  const [glowing, setGlowing] = useState<Set<string>>(new Set());
+  // The cards rise in only on a first visit, never when coming back or as the list scrolls.
+  const [entering, setEntering] = useState(!snapshot);
+  const latest = useRef<{ data: SubjectLessons | null; offset: number }>({ data: snapshot?.data ?? null, offset: snapshot?.offset ?? 0 });
+  const restore = useRef(snapshot?.offset ?? 0);
+  const list = useRef<FlatList<LessonCard>>(null);
+
   const load = useCallback(async () => {
     setError(null);
-    try { setData(await learningApi.subjectLessons(code, grade)); } catch (e) { setError(errorMessage(e)); }
-  }, [code, grade]);
+    try {
+      const fresh = await learningApi.subjectLessons(code);
+      const before = latest.current.data ? lessonCards(latest.current.data) : null;
+      const after = lessonCards(fresh);
+      if (before && orderChanged(before, after)) moveCards(reduceMotion);
+      const opened = before ? newlyUnlocked(before, after) : [];
+      if (opened.length) setGlowing(new Set(opened));
+      latest.current.data = fresh;
+      setData(fresh);
+    } catch (e) { setError(errorMessage(e)); }
+  }, [code, reduceMotion]);
   useEffect(() => { void load(); }, [load]);
-  const needle = fold(query);
-  const chapters = useMemo(() => (data?.chapters ?? []).map((c) => ({
-    ...c, lessons: needle ? c.lessons.filter((l) => fold(`${l.title} ${l.description}`).includes(needle)) : c.lessons,
-  })).filter((c) => !needle || c.lessons.length), [data, needle]);
-  const count = chapters.reduce((n, c) => n + c.lessons.length, 0);
-  return (
+  useEffect(() => {
+    if (!entering || !data) return;
+    const done = setTimeout(() => setEntering(false), 700);
+    return () => clearTimeout(done);
+  }, [entering, data]);
+  useEffect(() => () => { if (latest.current.data) onLeave?.({ data: latest.current.data, offset: latest.current.offset }); }, [onLeave]);
+
+  const cards = useMemo(() => (data ? lessonCards(data) : []), [data]);
+  const shown = useMemo(() => filterLessons(cards, filter), [cards, filter]);
+  const progress = data ? subjectProgress(data, cards) : null;
+  const look: Look | null = data ? { icon: data.subject.icon as IconName, bg: data.subject.bg, color: data.subject.color } : null;
+
+  const header = (
     <>
-      <BackHeader title={data?.subject.name ?? 'Bài học'} subtitle={data ? `${data.label} · Chọn bài` : 'Chọn bài'} onBack={onBack}
-        right={onPractice ? (
-          <Pressable onPress={onPractice} accessibilityRole="button" accessibilityLabel="Luyện trò chơi tổng hợp" hitSlop={6} style={styles.practice}>
-            <Ionicons name="game-controller-outline" size={18} color={t.accent} />
-            <Text style={styles.practiceText}>Luyện tự do</Text>
-          </Pressable>
-        ) : null} />
-      {error ? <Card><Text style={styles.error}>{error}</Text><Button title="Thử lại" icon="refresh" variant="secondary" onPress={() => void load()} /></Card> : null}
-      {!data && !error ? <ActivityIndicator color={t.accent} style={styles.loading} /> : null}
-      {data ? (
-        <>
-          {data.subject.practice_note ? <Text style={styles.note}>{data.subject.practice_note}</Text> : null}
-          <SoftInput value={query} onChangeText={setQuery} placeholder="Tìm bài học" accessibilityLabel="Tìm bài học" returnKeyType="search" />
-          {needle ? <Text style={styles.muted} accessibilityLiveRegion="polite">{count ? `${count} bài phù hợp` : 'Không tìm thấy bài nào.'}</Text> : null}
-          {chapters.map((c, i) => (
-            <View key={c.key}>
-              <SectionHeader title={`${i + 1}. ${c.title}`} />
-              {c.lessons.map((l) => <LessonRow key={l.key} lesson={l} onOpen={() => onOpen(l.key)} />)}
-            </View>
-          ))}
-          <Text style={styles.source}>{data.organization === 'textbook' && data.textbook
-            ? `Theo bộ sách ${data.textbook.series}${data.textbook.edition ? ` (${data.textbook.edition})` : ''}.` : data.source_note}</Text>
-        </>
+      <View style={styles.header}>
+        <Pressable onPress={onBack} accessibilityRole="button" accessibilityLabel="Quay lại" hitSlop={8} style={styles.back}>
+          <Ionicons name="chevron-back" size={24} color={t.ink} />
+        </Pressable>
+        {look ? <IconBadge look={look} size={42} /> : null}
+        <View style={styles.flex}>
+          <Text accessibilityRole="header" style={styles.title} numberOfLines={1}>{data?.subject.name ?? 'Môn học'}</Text>
+          {data ? <Text style={styles.small} numberOfLines={1}>{data.label}{data.academic_year_label ? ` · Năm học ${data.academic_year_label}` : ''}</Text> : null}
+        </View>
+        {onPractice ? <HeaderIcon icon="game-controller-outline" label="Trò chơi luyện tập" onPress={onPractice} /> : null}
+      </View>
+      {progress && progress.ready ? (
+        <View style={styles.progress} accessible accessibilityLabel={`Tiến độ môn: ${progress.completed} trên ${progress.ready} bài hoàn thành`}>
+          <View style={styles.progressRow}>
+            <Text style={styles.progressText}>{progress.completed}/{progress.ready} bài hoàn thành</Text>
+            <Text style={styles.progressPercent}>{progress.percent}%</Text>
+          </View>
+          <ProgressBar value={progress.percent / 100} color={look?.color ?? t.success} />
+        </View>
       ) : null}
+      {data ? <Segmented<LessonFilter> options={FILTERS} value={filter} onChange={setFilter} compact /> : null}
+      {data?.subject.practice_note ? <Text style={styles.note}>{data.subject.practice_note}</Text> : null}
+      {error ? <Failed error={error} onRetry={() => void load()} /> : null}
+      {!data && !error ? <ActivityIndicator color={t.accent} style={styles.loading} /> : null}
     </>
   );
-}
 
-function LessonRow({ lesson, onOpen }: { lesson: LessonListItem; onOpen: () => void }) {
-  const planned = lesson.status === 'planned';
-  const progress = lesson.progress;
-  const look = progress ? STATUS_STYLE[progress.status] : null;
-  const label = planned ? 'Đang biên soạn' : lesson.locked ? 'Cần học bài trước' : progress?.label ?? '';
   return (
-    <Pressable onPress={onOpen} disabled={planned} accessibilityRole="button" accessibilityState={{ disabled: planned }}
-      accessibilityLabel={`${lesson.title}. ${lesson.description}. ${label}`}
-      style={({ pressed }) => [styles.lesson, pressed && styles.pressed, planned && styles.lessonPlanned]}>
-      <View style={styles.flex}>
-        <Text style={styles.lessonTitle}>{lesson.title}</Text>
-        <Text style={styles.lessonDetail}>{lesson.description}</Text>
-        {lesson.games.length ? <Text style={styles.lessonGames}>{lesson.games.map((g) => g.title).join(' · ')}</Text> : null}
-        {lesson.locked && lesson.requires_note ? <Text style={styles.locked}>🔒 {lesson.requires_note}</Text> : null}
-        {progress && progress.status !== 'not_started' ? (
-          <View style={styles.bar}><ProgressBar value={progress.percent / 100} color={progress.status === 'completed' ? t.success : '#F2A93B'} /></View>
-        ) : null}
-      </View>
-      <View style={[styles.status, { backgroundColor: planned ? '#EEF2F5' : look?.bg ?? '#EEF2F5' }]}>
-        <Ionicons name={planned ? 'construct-outline' : lesson.locked ? 'lock-closed-outline' : look?.icon ?? 'ellipse-outline'} size={14}
-          color={planned ? t.muted : look?.color ?? t.muted} />
-        <Text style={[styles.statusText, { color: planned ? t.muted : look?.color ?? t.muted }]}>{label}</Text>
-      </View>
-    </Pressable>
+    <FlatList ref={list} data={shown} keyExtractor={(c) => c.id} ListHeaderComponent={header}
+      contentContainerStyle={styles.listContent} showsVerticalScrollIndicator={false} initialNumToRender={12} windowSize={9}
+      ListEmptyComponent={data ? <Text style={styles.empty}>{filter === 'locked' ? 'Bạn đã mở mọi bài của môn này.'
+        : filter === 'open' ? 'Chưa có bài nào được mở.' : 'Môn này đang được biên soạn bài học.'}</Text> : null}
+      onScroll={(e) => { latest.current.offset = e.nativeEvent.contentOffset.y; }} scrollEventThrottle={64}
+      onContentSizeChange={() => {
+        // Back from a lesson: the list is where it was left, not at the top.
+        if (!restore.current) return;
+        list.current?.scrollToOffset({ offset: restore.current, animated: false });
+        restore.current = 0;
+      }}
+      renderItem={({ item, index }) => (
+        <LessonCardView card={item} index={index} entering={entering} reduceMotion={reduceMotion} glow={glowing.has(item.id)}
+          hint={hint === item.id} onPress={() => (item.unlocked ? onOpen(item.id) : setHint(hint === item.id ? null : item.id))}
+          onOpenRequirement={onOpen} />
+      )} />
   );
 }
 
-// --- Màn bài học ---------------------------------------------------------------------------------------------------------
+const CARD_LOOK: Record<LessonCard['group'], { icon: IconName; color: string; bg: string }> = {
+  in_progress: { icon: 'play', color: '#B86A00', bg: '#FFF1D6' },
+  unlocked: { icon: 'book-outline', color: '#136FA8', bg: '#DDF0FA' },
+  completed: { icon: 'checkmark', color: '#17704F', bg: '#E1F6EC' },
+  locked: { icon: 'lock-closed', color: '#7A8D9E', bg: '#EEF2F5' },
+};
+
+type CardProps = { card: LessonCard; index: number; entering: boolean; reduceMotion?: boolean; glow: boolean; hint: boolean;
+  onPress: () => void; onOpenRequirement: (key: string) => void };
+
+/** One lesson: its state as an icon, its title, its chapter and its state in words (a bar while being studied). A
+ * locked one is neutral and, when tapped, says how it opens. Rises in on a first visit; glows once when it opens. */
+function LessonCardView({ card, index, entering, reduceMotion, glow, hint, onPress, onOpenRequirement }: CardProps) {
+  const style = card.planned ? { ...CARD_LOOK.locked, icon: 'time-outline' as IconName } : CARD_LOOK[card.group];
+  const label = card.planned ? 'Sắp có' : GROUP_LABEL[card.group];
+  const animate = entering && !reduceMotion;
+  const shown = useRef(new Animated.Value(animate ? 0 : 1)).current;
+  const light = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    if (!animate) return;
+    const a = Animated.timing(shown, { toValue: 1, duration: 240, delay: Math.min(index, 8) * 40, easing: Easing.out(Easing.cubic), useNativeDriver: true });
+    a.start();
+    return () => a.stop();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps -- once, when the card first appears
+  useEffect(() => {
+    if (!glow || reduceMotion) return;
+    const a = Animated.sequence([Animated.timing(light, { toValue: 1, duration: 220, useNativeDriver: true }),
+      Animated.timing(light, { toValue: 0, duration: 900, delay: 150, useNativeDriver: true })]);
+    a.start();
+    return () => a.stop();
+  }, [glow, reduceMotion, light]);
+  const pending = card.requirements.filter((r): r is Extract<UnlockRequirement, { type: 'lesson' }> => r.type === 'lesson' && !r.done);
+  return (
+    <Animated.View style={[styles.card, { opacity: shown, transform: [{ translateY: shown.interpolate({ inputRange: [0, 1], outputRange: [10, 0] }) }] }]}>
+      <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFill, styles.glow, { opacity: light }]} />
+      <Pressable onPress={onPress} accessibilityRole="button" accessibilityState={{ expanded: card.unlocked ? undefined : hint }}
+        accessibilityLabel={`${card.title}. ${card.chapterTitle}. ${label}${card.progress === 'in_progress' ? `, ${card.percent}%` : ''}`}
+        accessibilityHint={card.unlocked ? (card.group === 'completed' ? 'Mở lại để ôn tập' : 'Mở bài học') : 'Xem điều kiện mở bài'}
+        style={({ pressed }) => [styles.cardMain, pressed && styles.rowPressed]}>
+        <View style={[styles.state, { backgroundColor: style.bg }]}><Ionicons name={style.icon} size={18} color={style.color} /></View>
+        <View style={styles.flex}>
+          <Text style={[styles.cardTitle, !card.unlocked && styles.lockedText]} numberOfLines={2}>{card.title}</Text>
+          <Text style={styles.chapter} numberOfLines={1}>{card.chapterTitle}</Text>
+          {card.group === 'in_progress' ? (
+            <View style={styles.cardBar}><ProgressBar value={card.percent / 100} color="#E39A2D" /></View>
+          ) : null}
+        </View>
+        <Text style={[styles.cardState, { color: style.color }]}>{label}</Text>
+      </Pressable>
+      {hint && !card.unlocked ? (
+        <View style={styles.hint} accessibilityLiveRegion="polite">
+          <Text style={styles.hintText}>{unlockHint(card)}</Text>
+          {pending.map((r) => (
+            <Pressable key={r.lesson_id} onPress={() => onOpenRequirement(r.lesson_id)} accessibilityRole="button"
+              accessibilityLabel={`Mở bài ${r.title}`} hitSlop={6} style={styles.hintLink}>
+              <Text style={styles.hintLinkText}>Mở bài “{r.title}”</Text>
+              <Ionicons name="arrow-forward" size={14} color={t.accent} />
+            </Pressable>
+          ))}
+        </View>
+      ) : null}
+    </Animated.View>
+  );
+}
+
+// --- Bài học: nội dung ngắn → chọn trò chơi → Bắt đầu --------------------------------------------------------------------
 
 type LessonProps = { lessonKey: string; onBack: () => void; onPlay: (lesson: CatalogLesson, game: LessonGame) => void;
   onResume: (sessionId: number) => void; onHowTo: (game: GameId) => void; onOpenLesson: (key: string) => void;
-  /** A game is being started (its id): the buttons wait. */ starting: GameId | null };
+  /** A game is being started (its id): the buttons wait. */ starting: GameId | null;
+  /** Personal notes on this lesson ("Ghi chú"), when offered: a small icon beside the title. */ onNote?: () => void;
+  /** A vocabulary game with no new word left: "Ôn tập từ đã học" instead of "Chơi lại". */ onReview?: (game: LessonGame) => void };
 
-/** One lesson: its grade and subject, "Bạn sẽ học gì?", the summary and examples (collapsible), and the games that
- * practise it, each with its progress and Bắt đầu / Tiếp tục. */
-export function LessonScreen({ lessonKey, onBack, onPlay, onResume, onHowTo, onOpenLesson, starting }: LessonProps) {
+/** The game picked first: one left open, else the first not passed yet, else the first that can be played. */
+function firstGame(games: LessonGame[]): LessonGame | undefined {
+  const playable = games.filter((g) => g.playable);
+  return games.find((g) => g.progress.open_session) ?? playable.find((g) => !g.progress.passed) ?? playable[0] ?? games[0];
+}
+
+/** One lesson: its short content (examples folded), the games that practise it, and one button to play the game picked. */
+export function LessonScreen({ lessonKey, onBack, onPlay, onResume, onHowTo, onOpenLesson, starting, onNote, onReview }: LessonProps) {
   const [lesson, setLesson] = useState<CatalogLesson | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [summaryOpen, setSummaryOpen] = useState(true);
   const [examplesOpen, setExamplesOpen] = useState(false);
+  const [picked, setPicked] = useState<GameId | null>(null);
   const load = useCallback(async () => {
     setError(null);
     try { setLesson(await learningApi.lessonDetail(lessonKey)); } catch (e) { setError(errorMessage(e)); }
   }, [lessonKey]);
   useEffect(() => { void load(); }, [load]);
-  if (error) return <><BackHeader title="Bài học" onBack={onBack} /><Card><Text style={styles.error}>{error}</Text>
-    <Button title="Thử lại" icon="refresh" variant="secondary" onPress={() => void load()} /></Card></>;
+  if (error) return <><BackHeader title="Bài học" onBack={onBack} /><Failed error={error} onRetry={() => void load()} /></>;
   if (!lesson) return <><BackHeader title="Bài học" onBack={onBack} /><ActivityIndicator color={t.accent} style={styles.loading} /></>;
-  const progress = lesson.progress;
-  const need = Math.round(lesson.completion.min_first_try * 100);
+  const game = lesson.games.find((g) => g.game === picked) ?? firstGame(lesson.games);
+  const open = game?.progress.open_session ?? null;
   return (
     <>
-      <BackHeader title={lesson.title} subtitle={`${lesson.grade_label} · ${lesson.subject.name} · ${lesson.chapter.title}`} onBack={onBack} />
-      {progress ? (
-        <Card style={styles.progressCard}>
-          <View style={styles.row}>
-            <Ionicons name={STATUS_STYLE[progress.status].icon} size={20} color={STATUS_STYLE[progress.status].color} />
-            <Text style={[styles.progressLabel, { color: STATUS_STYLE[progress.status].color }]}>{progress.label}</Text>
-            <Text style={styles.muted}>{progress.games_passed}/{progress.games_total} trò đạt</Text>
-          </View>
-          <ProgressBar value={progress.percent / 100} color={progress.status === 'completed' ? t.success : '#F2A93B'} />
-          <Text style={styles.small}>Hoàn thành bài: {lesson.completion.games === 'all' ? 'mỗi trò' : 'một trò'} có một chặng xong với ít nhất {need}% câu đúng ngay lần đầu.</Text>
+      <BackHeader title={lesson.title} subtitle={lesson.subject.name} onBack={onBack}
+        right={onNote ? <HeaderIcon icon="create-outline" label="Ghi chú" onPress={onNote} /> : null} />
+      {lesson.summary.length || lesson.examples.length ? (
+        <Card style={styles.content}>
+          {lesson.summary.map((line) => <Text key={line} style={styles.body}>{line}</Text>)}
+          {lesson.examples.length ? (
+            <Pressable onPress={() => setExamplesOpen((x) => !x)} accessibilityRole="button" accessibilityState={{ expanded: examplesOpen }}
+              hitSlop={6} style={styles.examplesToggle}>
+              <Text style={styles.examplesToggleText}>{examplesOpen ? 'Ẩn ví dụ' : `Xem ví dụ (${lesson.examples.length})`}</Text>
+              <Ionicons name={examplesOpen ? 'chevron-up' : 'chevron-down'} size={16} color={t.accent} />
+            </Pressable>
+          ) : null}
+          {examplesOpen ? lesson.examples.map((ex) => (
+            <View key={ex.title} style={styles.example}>
+              <Text style={styles.exampleTitle}>{ex.title}</Text>
+              {ex.lines.map((line, i) => <Text key={i} style={styles.body}>{line}</Text>)}
+            </View>
+          )) : null}
         </Card>
       ) : null}
-      <Card>
-        <Text style={styles.cardTitle}>Bạn sẽ học gì?</Text>
-        {lesson.objectives.map((o) => <Text key={o} style={styles.bullet}>• {o}</Text>)}
-      </Card>
-      <Card>
-        <Pressable onPress={() => setSummaryOpen((x) => !x)} accessibilityRole="button" accessibilityState={{ expanded: summaryOpen }} style={styles.toggleRow}>
-          <Text style={[styles.cardTitle, styles.flex]}>Kiến thức tóm tắt</Text>
-          <Ionicons name={summaryOpen ? 'chevron-up' : 'chevron-down'} size={18} color={t.muted} />
-        </Pressable>
-        {summaryOpen ? lesson.summary.map((line) => <Text key={line} style={styles.body}>{line}</Text>) : null}
-        {lesson.examples.length ? (
-          <>
-            <Pressable onPress={() => setExamplesOpen((x) => !x)} accessibilityRole="button" accessibilityState={{ expanded: examplesOpen }} style={styles.toggleRow}>
-              <Text style={[styles.subTitle, styles.flex]}>Ví dụ ({lesson.examples.length})</Text>
-              <Ionicons name={examplesOpen ? 'chevron-up' : 'chevron-down'} size={18} color={t.muted} />
-            </Pressable>
-            {examplesOpen ? lesson.examples.map((ex) => (
-              <View key={ex.title} style={styles.example}>
-                <Text style={styles.exampleTitle}>{ex.title}</Text>
-                {ex.lines.map((line, i) => <Text key={i} style={styles.body}>{line}</Text>)}
-              </View>
-            )) : null}
-          </>
-        ) : null}
-      </Card>
       {lesson.practice_note ? <Text style={styles.note}>{lesson.practice_note}</Text> : null}
       {lesson.locked ? (
-        <Card style={styles.lockedCard}>
-          <Text style={styles.cardTitle}>🔒 Cần học bài trước</Text>
-          {lesson.requires_note ? <Text style={styles.body}>{lesson.requires_note}</Text> : null}
+        <View style={styles.locked}>
+          <Text style={styles.lockedTitle}>🔒 {lesson.requires_note ?? 'Cần học bài trước'}</Text>
           {lesson.requires.filter((r) => !r.done).map((r) => (
             <Button key={r.key} title={`Mở bài: ${r.title}`} variant="secondary" icon="arrow-forward" onPress={() => onOpenLesson(r.key)} />
           ))}
-        </Card>
+        </View>
       ) : null}
-      <SectionHeader title="Trò chơi của bài" />
-      {lesson.games.map((g) => <GameRow key={g.game} game={g} locked={lesson.locked} need={need} busy={starting === g.game} blocked={!!starting}
-        onPlay={() => onPlay(lesson, g)} onResume={onResume} onHowTo={() => onHowTo(g.game)} />)}
-      {lesson.next ? (
-        <Button title={`Bài tiếp theo: ${lesson.next.title}`} icon="arrow-forward" variant="ghost" disabled={!lesson.next.ready}
-          onPress={() => onOpenLesson(lesson.next!.key)} />
+      {lesson.games.length ? <Text style={styles.section} accessibilityRole="header">Chọn trò chơi</Text>
+        : <Text style={styles.muted}>Bài này chưa có trò chơi.</Text>}
+      <View accessibilityRole="radiogroup" style={styles.games}>
+        {lesson.games.map((g) => (
+          <View key={g.game} style={styles.gameCell}>
+            <GameOption game={g} selected={g.game === game?.game} onPress={() => setPicked(g.game)} />
+          </View>
+        ))}
+      </View>
+      {game ? <Text style={styles.gameDetail} numberOfLines={2}>{gameDetail(game)}</Text> : null}
+      {game?.explore ? <Text style={styles.explore}>{exploreLine(game.explore)}</Text> : null}
+      {game ? (
+        <View style={styles.actions}>
+          {open ? (
+            <Button title="Tiếp tục" icon="play" style={styles.flex} disabled={!!starting} onPress={() => onResume(open)} />
+          ) : game.explore?.exhausted && onReview ? (
+            <Button title="Ôn tập từ đã học" icon="refresh-circle-outline" style={styles.flex} loading={starting === game.game}
+              disabled={lesson.locked || !!starting} onPress={() => onReview(game)} />
+          ) : (
+            <Button title={game.progress.stages ? 'Chơi lại' : 'Bắt đầu'} icon="play" style={styles.flex} loading={starting === game.game}
+              disabled={lesson.locked || !game.playable || !!starting} onPress={() => onPlay(lesson, game)} />
+          )}
+          <Pressable onPress={() => onHowTo(game.game)} accessibilityRole="button" accessibilityLabel={`Cách chơi ${game.title}`} hitSlop={6}
+            style={({ pressed }) => [styles.howTo, pressed && styles.pressed]}>
+            <Ionicons name="help-circle-outline" size={24} color={t.accent} />
+          </Pressable>
+        </View>
       ) : null}
-      <Text style={styles.source}>{lesson.review.label}. {lesson.source_note} · Phiên bản nội dung {lesson.content_version}</Text>
     </>
   );
 }
 
-function GameRow({ game, locked, need, busy, blocked, onPlay, onResume, onHowTo }: { game: LessonGame; locked: boolean; need: number; busy: boolean;
-  blocked: boolean; onPlay: () => void; onResume: (id: number) => void; onHowTo: () => void }) {
-  const info = GAME_INFO[game.game];
-  const p = game.progress;
-  const count = game.short_stage ? `Bài ngắn · ${game.turns} từ` : `${game.turns} ${game.game === 'code_path' ? 'màn' : 'câu'} mỗi chặng`;
+const gameDetail = (game: LessonGame) => (game.playable ? GAME_INFO[game.game]?.detail ?? game.gameplay : 'Đang cập nhật, chưa chơi được.');
+
+/** One line on Khám phá từ mới: the lesson's own words, then how many new words its game can still bring. */
+export function exploreLine(e: LessonExplore): string {
+  if (e.exhausted) return 'Bạn đã khám phá hết từ mới phù hợp trong trò này. Ôn tập để nhớ thật lâu nhé!';
+  const beyond = Math.max(0, e.new_words_left - (e.core_total - e.core_discovered));
+  if (!e.core_completed) return `Từ của bài: ${e.core_discovered}/${e.core_total} · sau đó còn ${beyond} từ mới cùng chủ đề`;
+  return `Đã khám phá hết ${e.core_total} từ của bài · còn ${beyond} từ mới cùng chủ đề để khám phá`;
+}
+
+/** A game of the lesson as a small card: its picture and name (a tick once passed). Its one line on how it plays is
+ * shown under the cards for the game picked. */
+function GameOption({ game, selected, onPress }: { game: LessonGame; selected: boolean; onPress: () => void }) {
   return (
-    <Card style={styles.game}>
-      <View style={styles.row}>
-        <View style={styles.gameIcon}><Ionicons name={info?.icon ?? 'game-controller-outline'} size={24} color={t.accent} /></View>
-        <View style={styles.flex}>
-          <Text style={styles.gameTitle}>{game.title}</Text>
-          <Text style={styles.small}>{game.gameplay} · {count}</Text>
-        </View>
-        {p.passed ? <Ionicons name="checkmark-circle" size={22} color={t.success} accessibilityLabel="Đã đạt" /> : null}
+    <Pressable onPress={onPress} accessibilityRole="radio" accessibilityState={{ checked: selected }}
+      accessibilityLabel={`${game.title}. ${gameDetail(game)}${game.progress.passed ? ' Đã đạt.' : ''}`}
+      style={({ pressed }) => [styles.option, selected && styles.optionOn, !game.playable && styles.faded, pressed && styles.pressed]}>
+      <IconBadge look={gameLook(game.game)} size={48} />
+      <Text style={styles.optionTitle} numberOfLines={2}>{game.title}</Text>
+      {game.progress.passed ? <Ionicons name="checkmark-circle" size={18} color={t.success} style={styles.passed} /> : null}
+    </Pressable>
+  );
+}
+
+// --- Môn lựa chọn (THPT) ---------------------------------------------------------------------------------------------------
+
+/** THPT: the elective subjects the learner studies, chosen here (they then appear among the subjects of Học tập). */
+export function ElectivesScreen({ programme, onBack, onChange }: { programme: LessonProgramme | null; onBack: () => void;
+  onChange: (chosen: string[]) => void }) {
+  const selection = programme?.selection ?? null;
+  const chosen = new Set(selection?.chosen ?? []);
+  const toggle = (code: string) => {
+    if (!selection) return;
+    const next = chosen.has(code) ? [...chosen].filter((c) => c !== code) : chosen.size < selection.count ? [...chosen, code] : null;
+    if (next) onChange(next);
+  };
+  return (
+    <>
+      <BackHeader title="Môn lựa chọn" subtitle={selection ? `Đã chọn ${chosen.size}/${selection.count}` : undefined} onBack={onBack} />
+      {selection ? <Text style={styles.note}>{selection.note}</Text> : <ActivityIndicator color={t.accent} style={styles.loading} />}
+      <View style={styles.chips}>
+        {programme?.subjects.filter((s) => selection?.available.includes(s.code)).map((s) => {
+          const on = chosen.has(s.code);
+          const full = !on && chosen.size >= (selection?.count ?? 0);
+          return (
+            <Pressable key={s.code} onPress={() => toggle(s.code)} disabled={full} accessibilityRole="checkbox"
+              accessibilityState={{ checked: on, disabled: full }} accessibilityLabel={s.name}
+              style={[styles.chip, on && styles.chipOn, full && styles.faded]}>
+              {on ? <Ionicons name="checkmark" size={16} color="#FFFFFF" /> : null}
+              <Text style={[styles.chipText, on && styles.chipTextOn]}>{s.name}</Text>
+            </Pressable>
+          );
+        })}
       </View>
-      {p.stages ? (
-        <Text style={styles.small}>
-          {p.completed} chặng xong{p.best !== null ? ` · tốt nhất ${p.best}% đúng ngay (cần ${need}%)` : ''}
-          {p.last ? ` · lần gần nhất: đúng ngay ${p.last.first_try}/${p.last.total}, ${p.last.attempts} lượt thử, ${p.last.hints} gợi ý` : ''}
-        </Text>
-      ) : <Text style={styles.small}>Chưa chơi</Text>}
-      {game.review_count ? <Text style={styles.review}>{game.review_count} câu cần ôn (xem ở Cần ôn)</Text> : null}
-      {!game.playable ? <Text style={styles.small}>Trò này đang được cập nhật, chưa chơi được.</Text> : null}
-      <View style={styles.row}>
-        {p.open_session ? (
-          <Button title="Tiếp tục" icon="play" style={styles.flex} disabled={blocked} onPress={() => onResume(p.open_session!)} />
-        ) : (
-          <Button title={p.stages ? 'Chơi lại' : 'Bắt đầu'} icon="play" style={styles.flex} loading={busy} disabled={locked || !game.playable || blocked}
-            onPress={onPlay} />
-        )}
-        <Button title="Cách chơi" icon="help-circle-outline" variant="secondary" style={styles.flex} onPress={onHowTo} />
-      </View>
-    </Card>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },
-  row: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   loading: { marginVertical: 12 },
   error: { color: t.danger, fontWeight: '700', marginBottom: 8 },
-  muted: { color: t.muted, fontSize: 14, lineHeight: 20 },
-  small: { color: t.muted, fontSize: 13, lineHeight: 18, marginTop: 4 },
-  note: { color: '#8A5A00', backgroundColor: '#FFF6E5', borderRadius: 12, padding: 10, fontSize: 13, lineHeight: 18, marginBottom: 10, fontWeight: '700' },
-  source: { color: t.muted, fontSize: 12, lineHeight: 17, marginTop: 10, marginBottom: 6 },
+  muted: { color: t.muted, fontSize: 14, lineHeight: 20, marginBottom: 10 },
+  small: { color: t.muted, fontSize: 13, lineHeight: 18, marginTop: 2 },
+  note: { color: t.muted, fontSize: 13, lineHeight: 19, marginBottom: 12 },
   pressed: { opacity: 0.85, transform: [{ scale: 0.99 }] },
-  dimmed: { opacity: 0.45 },
-  resume: { borderWidth: 2, borderColor: '#F2C46D', gap: 8 },
-  resumeTitle: { fontSize: 17, fontWeight: '900', color: t.ink },
-  selection: { gap: 6 },
-  selectionTitle: { fontSize: 15, fontWeight: '900', color: t.ink },
-  chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 6 },
-  chipRow: { flexDirection: 'row', gap: 8, marginTop: 8 },
-  chip: { minHeight: 38, paddingHorizontal: 12, borderRadius: 12, backgroundColor: t.tint, justifyContent: 'center' },
+  rowPressed: { backgroundColor: t.bg },
+  faded: { opacity: 0.5 },
+  header: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 14 },
+  back: { width: 40, height: 40, borderRadius: 20, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
+  title: { fontSize: 21, fontWeight: '900', color: t.ink },
+  progress: { gap: 6, marginBottom: 14 },
+  progressRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline' },
+  progressText: { fontSize: 13, fontWeight: '700', color: t.muted },
+  progressPercent: { fontSize: 13, fontWeight: '900', color: t.ink },
+  listContent: { paddingHorizontal: 20, paddingBottom: 28, width: '100%', maxWidth: 760, alignSelf: 'center' },
+  empty: { color: t.muted, fontSize: 14, textAlign: 'center', marginTop: 24 },
+  card: { backgroundColor: '#FFFFFF', borderRadius: 16, marginBottom: 8, overflow: 'hidden',
+    shadowColor: t.shadow, shadowOpacity: 0.05, shadowRadius: 6, shadowOffset: { width: 0, height: 2 }, elevation: 1 },
+  glow: { backgroundColor: '#FFF2B8', borderRadius: 16 },
+  cardMain: { flexDirection: 'row', alignItems: 'center', gap: 12, minHeight: 64, paddingHorizontal: 12, paddingVertical: 10 },
+  state: { width: 34, height: 34, borderRadius: 17, alignItems: 'center', justifyContent: 'center' },
+  cardTitle: { fontSize: 15, fontWeight: '800', color: t.ink, lineHeight: 20 },
+  lockedText: { color: '#6F8394' },
+  chapter: { fontSize: 12, color: t.muted, marginTop: 1 },
+  cardBar: { marginTop: 6, maxWidth: 160 },
+  cardState: { fontSize: 12, fontWeight: '800', maxWidth: 92, textAlign: 'right' },
+  hint: { paddingHorizontal: 14, paddingBottom: 12, paddingTop: 2, marginLeft: 46, gap: 6 },
+  hintText: { fontSize: 13, color: t.muted, lineHeight: 18 },
+  hintLink: { flexDirection: 'row', alignItems: 'center', gap: 4, alignSelf: 'flex-start', minHeight: 28 },
+  hintLinkText: { fontSize: 13, fontWeight: '800', color: t.accent },
+  content: { gap: 4, padding: 16 },
+  body: { fontSize: 15, color: t.ink, lineHeight: 22 },
+  examplesToggle: { flexDirection: 'row', alignItems: 'center', gap: 4, alignSelf: 'flex-start', minHeight: 32, marginTop: 4 },
+  examplesToggleText: { fontSize: 14, fontWeight: '800', color: t.accent },
+  example: { borderLeftWidth: 3, borderLeftColor: t.tint, paddingLeft: 10, marginTop: 6 },
+  exampleTitle: { fontSize: 13, fontWeight: '900', color: t.accent, marginBottom: 2 },
+  locked: { backgroundColor: '#FFF6E5', borderRadius: 16, padding: 14, marginBottom: 14 },
+  lockedTitle: { fontSize: 14, fontWeight: '800', color: '#8A5A00', lineHeight: 20 },
+  section: { fontSize: 17, fontWeight: '900', color: t.ink, marginTop: 4, marginBottom: 10 },
+  games: { flexDirection: 'row', flexWrap: 'wrap', marginHorizontal: -5 },
+  gameCell: { width: '50%', padding: 5 },
+  option: { alignItems: 'center', gap: 8, backgroundColor: '#FFFFFF', borderRadius: 18, paddingVertical: 14, paddingHorizontal: 10, minHeight: 112,
+    borderWidth: 2, borderColor: 'transparent' },
+  optionOn: { borderColor: '#8CC8EA', backgroundColor: '#F7FCFF' },
+  optionTitle: { fontSize: 14, fontWeight: '900', color: t.ink, textAlign: 'center', lineHeight: 18 },
+  passed: { position: 'absolute', top: 8, right: 8 },
+  gameDetail: { fontSize: 13, color: t.muted, lineHeight: 18, marginTop: 6 },
+  explore: { fontSize: 13, fontWeight: '700', color: t.accent, lineHeight: 18, marginTop: 4 },
+  actions: { flexDirection: 'row', alignItems: 'flex-end', gap: 10, marginTop: 4 },
+  howTo: { width: 50, height: 50, borderRadius: 16, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
+  chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  chip: { flexDirection: 'row', alignItems: 'center', gap: 6, minHeight: 40, paddingHorizontal: 14, borderRadius: 20, backgroundColor: '#FFFFFF' },
   chipOn: { backgroundColor: t.accent },
   chipText: { fontSize: 14, fontWeight: '800', color: t.ink },
   chipTextOn: { color: '#FFFFFF' },
-  subject: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: '#FFFFFF', borderRadius: 20, padding: 14, marginBottom: 10,
-    shadowColor: '#0B4F75', shadowOpacity: 0.07, shadowRadius: 10, shadowOffset: { width: 0, height: 3 }, elevation: 2 },
-  subjectOff: { backgroundColor: '#F6F8FA', shadowOpacity: 0, elevation: 0 },
-  iconWrap: { width: 50, height: 50, borderRadius: 16, alignItems: 'center', justifyContent: 'center' },
-  subjectName: { fontSize: 17, fontWeight: '900', color: t.ink },
-  typeTag: { fontSize: 12, fontWeight: '800', color: t.accent, marginTop: 1 },
-  support: { fontSize: 13, color: t.muted, marginTop: 3, lineHeight: 18 },
-  supportOff: { fontStyle: 'italic' },
-  bar: { marginTop: 6 },
-  practice: { flexDirection: 'row', alignItems: 'center', gap: 6, minHeight: 40, paddingHorizontal: 10, borderRadius: 14, backgroundColor: '#FFFFFF' },
-  practiceText: { fontSize: 13, fontWeight: '800', color: t.accent },
-  lesson: { flexDirection: 'row', alignItems: 'flex-start', gap: 10, backgroundColor: '#FFFFFF', borderRadius: 18, padding: 14, marginBottom: 10,
-    shadowColor: '#0B4F75', shadowOpacity: 0.06, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, elevation: 1 },
-  lessonPlanned: { backgroundColor: '#F6F8FA', shadowOpacity: 0, elevation: 0 },
-  lessonTitle: { fontSize: 16, fontWeight: '900', color: t.ink },
-  lessonDetail: { fontSize: 13, color: t.muted, lineHeight: 18, marginTop: 2 },
-  lessonGames: { fontSize: 12, fontWeight: '800', color: t.accent, marginTop: 4 },
-  locked: { fontSize: 12, color: '#8A5A00', marginTop: 4, lineHeight: 17 },
-  status: { flexDirection: 'row', alignItems: 'center', gap: 4, borderRadius: 10, paddingHorizontal: 8, paddingVertical: 4, maxWidth: 130 },
-  statusText: { fontSize: 11, fontWeight: '900' },
-  progressCard: { gap: 6 },
-  progressLabel: { flex: 1, fontSize: 15, fontWeight: '900' },
-  cardTitle: { fontSize: 16, fontWeight: '900', color: t.ink, marginBottom: 6 },
-  subTitle: { fontSize: 14, fontWeight: '900', color: t.accent },
-  toggleRow: { flexDirection: 'row', alignItems: 'center', minHeight: 36 },
-  bullet: { fontSize: 15, color: t.ink, lineHeight: 22 },
-  body: { fontSize: 15, color: t.ink, lineHeight: 22, marginBottom: 4 },
-  example: { backgroundColor: t.tint, borderRadius: 12, padding: 10, marginTop: 6 },
-  exampleTitle: { fontSize: 13, fontWeight: '900', color: t.accent, marginBottom: 2 },
-  lockedCard: { borderWidth: 2, borderColor: '#F2C46D', gap: 6 },
-  game: { gap: 6 },
-  gameIcon: { width: 44, height: 44, borderRadius: 14, backgroundColor: t.tint, alignItems: 'center', justifyContent: 'center' },
-  gameTitle: { fontSize: 16, fontWeight: '900', color: t.ink },
-  review: { fontSize: 13, fontWeight: '800', color: t.danger },
 });

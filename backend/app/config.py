@@ -1,3 +1,4 @@
+from datetime import date
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 from pydantic import model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -34,6 +35,20 @@ class Settings(BaseSettings):
     # Open sessions untouched for this long are abandoned.
     learning_expire_hours: int = 24
     learning_max_duration_minutes: int = 90
+    # School grades (education.py). The region whose school calendar a learner follows when registration names none.
+    education_default_region: str = "VN"
+    # When a school year is expected to start ("MM-DD", 5 September: khai giảng) while its dates are not configured.
+    # Only names the school year a day belongs to (registration, the header): grades move up only on a date an
+    # administrator has verified (academic_year_configs.verified).
+    academic_year_expected_start: str = "09-05"
+    # How often the API brings learners whose school year ended to the next one. 0 disables the sweep (the check on
+    # login and on every Học tập read still promotes).
+    grade_promotion_sweep_seconds: int = 3600
+    # Kho lưu trữ học tập shows this many finished school years; older ones are kept but not shown...
+    learning_archive_visible_years: int = 3
+    # ...until they are older than this many school years, when the sweep deletes the archive rows (only those).
+    # 0 keeps them forever.
+    learning_archive_retention_years: int = 0
     # How often the API advances group timers, expires presence and transfers hosts. 0 disables (tests);
     # timers are then still advanced whenever a room is read.
     study_room_tick_seconds: int = 2
@@ -124,6 +139,15 @@ class Settings(BaseSettings):
             ZoneInfo(self.login_streak_timezone)
         except (ZoneInfoNotFoundError, ValueError) as exc:
             raise ValueError("LOGIN_STREAK_TIMEZONE must be an IANA timezone such as Asia/Ho_Chi_Minh") from exc
+        try:
+            month, day = (int(x) for x in self.academic_year_expected_start.split("-"))
+            date(2001, month, day)
+        except ValueError as exc:
+            raise ValueError("ACADEMIC_YEAR_EXPECTED_START must be a day of the year as MM-DD, e.g. 09-05") from exc
+        if self.learning_archive_visible_years < 1:
+            raise ValueError("LEARNING_ARCHIVE_VISIBLE_YEARS must be at least 1")
+        if 0 < self.learning_archive_retention_years < self.learning_archive_visible_years:
+            raise ValueError("LEARNING_ARCHIVE_RETENTION_YEARS must be 0 (keep) or at least LEARNING_ARCHIVE_VISIBLE_YEARS")
         if self.email_backend not in {"disabled", "console", "smtp"}:
             raise ValueError("EMAIL_BACKEND must be one of: disabled, console, smtp")
         if self.is_production:

@@ -784,77 +784,79 @@
        ]
       },
       {
-       "game": "order",
-       "title": "Xếp câu với am / is / are",
+       "game": "sentence",
+       "title": "Xây câu với am / is / are",
+       "credit_from": "order",
        "tasks": [
         {
          "key": "o1",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "I",
           "am",
           "eight",
           "years old."
          ],
-         "explanation": "Chủ ngữ I + am + tuổi: I am eight years old.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "is"
+         ],
+         "explanation": "Chủ ngữ I + am + tuổi: I am eight years old."
         },
         {
          "key": "o2",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "She",
           "is",
           "my",
           "friend."
          ],
-         "explanation": "She + is + my friend: Bạn ấy là bạn của mình.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "are"
+         ],
+         "explanation": "She + is + my friend: Bạn ấy là bạn của mình."
         },
         {
          "key": "o3",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "We",
           "are",
           "in",
           "class 3B."
          ],
-         "explanation": "We + are + in class 3B: Chúng mình học lớp 3B.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "is"
+         ],
+         "explanation": "We + are + in class 3B: Chúng mình học lớp 3B."
         },
         {
          "key": "o4",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "My cat",
           "is",
           "very",
           "small."
          ],
-         "explanation": "My cat + is + very small. very (rất) đứng ngay trước small.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "are"
+         ],
+         "explanation": "My cat + is + very small. very (rất) đứng ngay trước small."
         },
         {
          "key": "o5",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "They",
           "are",
           "my",
           "classmates."
          ],
-         "explanation": "They + are + my classmates: Họ là bạn cùng lớp của mình.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "is"
+         ],
+         "explanation": "They + are + my classmates: Họ là bạn cùng lớp của mình."
         }
        ]
       }
-     ]
+     ],
+     "activity": "grammar"
     },
     {
      "key": "ta3.hoi_dap_ban",
@@ -1088,6 +1090,209 @@
      "requires": [],
      "requires_note": null,
      "games": [
+      {
+       "game": "story_detective",
+       "title": "Thám tử: My family",
+       "tasks": [
+        {
+         "passage": "Hello! My name is An. I am nine years old. This is my family. There are five people in my family: my father, my mother, my grandmother, my little sister and me. My father is a teacher. My mother is a nurse. My grandmother is old, but she is very happy. My sister's name is Mi. She is four. She likes cats. I love my family!",
+         "lang": "en",
+         "question": "How old is An?",
+         "evidence": [
+          3
+         ],
+         "clue": "Tìm câu có “years old” mà An nói về chính mình (I am…).",
+         "options": [
+          {
+           "text": "Nine.",
+           "ok": true,
+           "why": "Đúng: An viết “I am nine years old” – mình chín tuổi."
+          },
+          {
+           "text": "Four.",
+           "ok": false,
+           "why": "Bốn tuổi là em gái Mi (She is four), không phải An."
+          },
+          {
+           "text": "Five.",
+           "ok": false,
+           "why": "Năm là số người trong gia đình (five people), không phải tuổi của An."
+          }
+         ],
+         "explanation": "How old hỏi tuổi. Câu “I am nine years old” cho biết An chín tuổi.",
+         "key": "sto1"
+        },
+        {
+         "passage": "Hello! My name is An. I am nine years old. This is my family. There are five people in my family: my father, my mother, my grandmother, my little sister and me. My father is a teacher. My mother is a nurse. My grandmother is old, but she is very happy. My sister's name is Mi. She is four. She likes cats. I love my family!",
+         "lang": "en",
+         "question": "How many people are there in An's family?",
+         "evidence": [
+          5
+         ],
+         "clue": "How many people: tìm câu có từ “people” và một con số.",
+         "options": [
+          {
+           "text": "Five.",
+           "ok": true,
+           "why": "Đúng: There are five people in my family."
+          },
+          {
+           "text": "Four.",
+           "ok": false,
+           "why": "Đếm cả An nữa: bố, mẹ, bà, em gái và An là năm người."
+          },
+          {
+           "text": "Three.",
+           "ok": false,
+           "why": "Câu bằng chứng ghi rõ five people (năm người)."
+          }
+         ],
+         "explanation": "There are five people in my family = Gia đình mình có năm người; sau dấu hai chấm là đủ năm người: bố, mẹ, bà, em gái và An.",
+         "key": "sto2"
+        },
+        {
+         "passage": "Hello! My name is An. I am nine years old. This is my family. There are five people in my family: my father, my mother, my grandmother, my little sister and me. My father is a teacher. My mother is a nurse. My grandmother is old, but she is very happy. My sister's name is Mi. She is four. She likes cats. I love my family!",
+         "lang": "en",
+         "question": "What is An's father's job?",
+         "evidence": [
+          6
+         ],
+         "clue": "Tìm câu bắt đầu bằng “My father…”.",
+         "options": [
+          {
+           "text": "He is a teacher.",
+           "ok": true,
+           "why": "Đúng: My father is a teacher – bố An là giáo viên."
+          },
+          {
+           "text": "He is a nurse.",
+           "ok": false,
+           "why": "Y tá (nurse) là mẹ An: My mother is a nurse."
+          },
+          {
+           "text": "He is a farmer.",
+           "ok": false,
+           "why": "Bài không nhắc đến nông dân (farmer)."
+          }
+         ],
+         "explanation": "Câu My father is a teacher cho biết nghề của bố: teacher là giáo viên.",
+         "key": "sto3"
+        },
+        {
+         "passage": "Hello! My name is An. I am nine years old. This is my family. There are five people in my family: my father, my mother, my grandmother, my little sister and me. My father is a teacher. My mother is a nurse. My grandmother is old, but she is very happy. My sister's name is Mi. She is four. She likes cats. I love my family!",
+         "lang": "en",
+         "question": "Who is a nurse?",
+         "evidence": [
+          7
+         ],
+         "clue": "nurse là y tá: tìm câu có từ nurse.",
+         "options": [
+          {
+           "text": "An's mother.",
+           "ok": true,
+           "why": "Đúng: My mother is a nurse – mẹ An là y tá."
+          },
+          {
+           "text": "An's father.",
+           "ok": false,
+           "why": "Bố An là giáo viên (My father is a teacher)."
+          },
+          {
+           "text": "An's grandmother.",
+           "ok": false,
+           "why": "Bài chỉ nói bà đã già và rất vui, không nói nghề của bà."
+          }
+         ],
+         "explanation": "My mother là mẹ của người viết, tức mẹ An; câu My mother is a nurse cho biết mẹ là y tá.",
+         "key": "sto4"
+        },
+        {
+         "passage": "Hello! My name is An. I am nine years old. This is my family. There are five people in my family: my father, my mother, my grandmother, my little sister and me. My father is a teacher. My mother is a nurse. My grandmother is old, but she is very happy. My sister's name is Mi. She is four. She likes cats. I love my family!",
+         "lang": "en",
+         "question": "Is An's grandmother sad?",
+         "evidence": [
+          8
+         ],
+         "clue": "Tìm câu nói về “my grandmother”.",
+         "options": [
+          {
+           "text": "No, she is very happy.",
+           "ok": true,
+           "why": "Đúng: My grandmother is old, but she is very happy – bà già rồi nhưng rất vui."
+          },
+          {
+           "text": "Yes, she is very sad.",
+           "ok": false,
+           "why": "Bài không nói bà buồn; bài nói bà very happy (rất vui)."
+          },
+          {
+           "text": "Yes, because she is old.",
+           "ok": false,
+           "why": "Bà đã già (old), nhưng từ but cho biết ý ngược lại: bà vẫn rất vui."
+          }
+         ],
+         "explanation": "but (nhưng) nối hai ý trái ngược: old nhưng very happy. Vậy bà không buồn.",
+         "key": "sto5"
+        },
+        {
+         "passage": "Hello! My name is An. I am nine years old. This is my family. There are five people in my family: my father, my mother, my grandmother, my little sister and me. My father is a teacher. My mother is a nurse. My grandmother is old, but she is very happy. My sister's name is Mi. She is four. She likes cats. I love my family!",
+         "lang": "en",
+         "question": "How old is An's sister?",
+         "evidence": [
+          10
+         ],
+         "clue": "Tìm câu giới thiệu tên em gái, rồi đọc câu ngay sau nó.",
+         "options": [
+          {
+           "text": "Four.",
+           "ok": true,
+           "why": "Đúng: She is four – she ở đây là em Mi."
+          },
+          {
+           "text": "Nine.",
+           "ok": false,
+           "why": "Chín tuổi là An (I am nine years old)."
+          },
+          {
+           "text": "Five.",
+           "ok": false,
+           "why": "Năm là số người trong gia đình, không phải tuổi của Mi."
+          }
+         ],
+         "explanation": "Câu My sister's name is Mi giới thiệu em gái; câu tiếp theo She is four cho biết Mi bốn tuổi (She = Mi).",
+         "key": "sto6"
+        },
+        {
+         "passage": "Hello! My name is An. I am nine years old. This is my family. There are five people in my family: my father, my mother, my grandmother, my little sister and me. My father is a teacher. My mother is a nurse. My grandmother is old, but she is very happy. My sister's name is Mi. She is four. She likes cats. I love my family!",
+         "lang": "en",
+         "question": "What does Mi like?",
+         "evidence": [
+          11
+         ],
+         "clue": "Tìm câu có từ “likes” (thích).",
+         "options": [
+          {
+           "text": "Cats.",
+           "ok": true,
+           "why": "Đúng: She likes cats – Mi thích mèo."
+          },
+          {
+           "text": "Dogs.",
+           "ok": false,
+           "why": "Bài không nhắc đến chó (dogs)."
+          },
+          {
+           "text": "Her teacher.",
+           "ok": false,
+           "why": "Bài không nói Mi thích cô giáo; teacher là nghề của bố An."
+          }
+         ],
+         "explanation": "likes = thích; câu She likes cats cho biết Mi thích mèo.",
+         "key": "sto7"
+        }
+       ],
+       "credit_from": "choice"
+      },
       {
        "game": "choice",
        "title": "Đọc và trả lời",
@@ -1593,77 +1798,79 @@
        ]
       },
       {
-       "game": "order",
-       "title": "Xếp câu với There is / are",
+       "game": "sentence",
+       "title": "Xây câu với There is / are",
+       "credit_from": "order",
        "tasks": [
         {
          "key": "o1",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "There",
           "is",
           "a lamp",
           "on the desk."
          ],
-         "explanation": "There is + a lamp + nơi chốn (on the desk).",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "are"
+         ],
+         "explanation": "There is + a lamp + nơi chốn (on the desk)."
         },
         {
          "key": "o2",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "There",
           "are",
           "two beds",
           "in my room."
          ],
-         "explanation": "There are + two beds + in my room.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "is"
+         ],
+         "explanation": "There are + two beds + in my room."
         },
         {
          "key": "o3",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "Is",
           "there",
           "a garden",
           "near your house?"
          ],
-         "explanation": "Câu hỏi: Is đứng đầu, rồi there, rồi a garden.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "Are"
+         ],
+         "explanation": "Câu hỏi: Is đứng đầu, rồi there, rồi a garden."
         },
         {
          "key": "o4",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "There",
           "are",
           "four chairs",
           "in the kitchen."
          ],
-         "explanation": "There are + four chairs + in the kitchen.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "is"
+         ],
+         "explanation": "There are + four chairs + in the kitchen."
         },
         {
          "key": "o5",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "There",
           "isn't",
           "a TV",
           "in my bedroom."
          ],
-         "explanation": "Câu phủ định: There isn't (is not) + a TV + nơi chốn.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "aren't"
+         ],
+         "explanation": "Câu phủ định: There isn't (is not) + a TV + nơi chốn."
         }
        ]
       }
-     ]
+     ],
+     "activity": "grammar"
     },
     {
      "key": "ta4.doc_ngoi_nha",
@@ -1688,6 +1895,209 @@
      "requires": [],
      "requires_note": null,
      "games": [
+      {
+       "game": "story_detective",
+       "title": "Thám tử: Mai's house",
+       "tasks": [
+        {
+         "passage": "My name is Mai. I live in a small house with my family. There are four rooms in my house: a living room, a kitchen, a bathroom and a bedroom. The living room is big. There is a sofa and a TV in it. My bedroom is small, but I like it. There are two beds in my bedroom: one for me and one for my sister. There is a lamp on my desk. Behind the house, there is a garden. There are many flowers in the garden. I water the plants every afternoon.",
+         "lang": "en",
+         "question": "How many rooms are there in Mai's house?",
+         "evidence": [
+          3
+         ],
+         "clue": "How many rooms: tìm câu có từ “rooms” và một số đếm.",
+         "options": [
+          {
+           "text": "Four.",
+           "ok": true,
+           "why": "Đúng: There are four rooms in my house."
+          },
+          {
+           "text": "Two.",
+           "ok": false,
+           "why": "Two là số giường trong phòng ngủ (two beds), không phải số phòng."
+          },
+          {
+           "text": "Three.",
+           "ok": false,
+           "why": "Đếm lại: living room, kitchen, bathroom, bedroom là bốn phòng."
+          }
+         ],
+         "explanation": "Câu There are four rooms… liệt kê đủ bốn phòng: phòng khách, nhà bếp, phòng tắm và phòng ngủ.",
+         "key": "sto1"
+        },
+        {
+         "passage": "My name is Mai. I live in a small house with my family. There are four rooms in my house: a living room, a kitchen, a bathroom and a bedroom. The living room is big. There is a sofa and a TV in it. My bedroom is small, but I like it. There are two beds in my bedroom: one for me and one for my sister. There is a lamp on my desk. Behind the house, there is a garden. There are many flowers in the garden. I water the plants every afternoon.",
+         "lang": "en",
+         "question": "Is the living room big or small?",
+         "evidence": [
+          4
+         ],
+         "clue": "Tìm câu bắt đầu bằng “The living room…”.",
+         "options": [
+          {
+           "text": "It is big.",
+           "ok": true,
+           "why": "Đúng: The living room is big – phòng khách rộng."
+          },
+          {
+           "text": "It is small.",
+           "ok": false,
+           "why": "Small là phòng ngủ của Mai (My bedroom is small)."
+          },
+          {
+           "text": "It is very old.",
+           "ok": false,
+           "why": "Bài không nói phòng khách cũ."
+          }
+         ],
+         "explanation": "big = to, rộng; small = nhỏ. Câu The living room is big tả phòng khách, còn câu có small là tả phòng ngủ.",
+         "key": "sto2"
+        },
+        {
+         "passage": "My name is Mai. I live in a small house with my family. There are four rooms in my house: a living room, a kitchen, a bathroom and a bedroom. The living room is big. There is a sofa and a TV in it. My bedroom is small, but I like it. There are two beds in my bedroom: one for me and one for my sister. There is a lamp on my desk. Behind the house, there is a garden. There are many flowers in the garden. I water the plants every afternoon.",
+         "lang": "en",
+         "question": "What is on Mai's desk?",
+         "evidence": [
+          8
+         ],
+         "clue": "Tìm câu có từ “desk” (bàn học).",
+         "options": [
+          {
+           "text": "A lamp.",
+           "ok": true,
+           "why": "Đúng: There is a lamp on my desk."
+          },
+          {
+           "text": "A TV.",
+           "ok": false,
+           "why": "TV ở phòng khách (There is a sofa and a TV in it)."
+          },
+          {
+           "text": "Some flowers.",
+           "ok": false,
+           "why": "Hoa (flowers) ở trong vườn, không ở trên bàn."
+          }
+         ],
+         "explanation": "on my desk = trên bàn học của mình. Câu There is a lamp on my desk cho biết trên bàn có một cái đèn.",
+         "key": "sto3"
+        },
+        {
+         "passage": "My name is Mai. I live in a small house with my family. There are four rooms in my house: a living room, a kitchen, a bathroom and a bedroom. The living room is big. There is a sofa and a TV in it. My bedroom is small, but I like it. There are two beds in my bedroom: one for me and one for my sister. There is a lamp on my desk. Behind the house, there is a garden. There are many flowers in the garden. I water the plants every afternoon.",
+         "lang": "en",
+         "question": "Who sleeps in the bedroom with Mai?",
+         "evidence": [
+          7
+         ],
+         "clue": "Tìm câu nói về hai cái giường (beds) trong phòng ngủ.",
+         "options": [
+          {
+           "text": "Her sister.",
+           "ok": true,
+           "why": "Đúng: one for me and one for my sister – một giường của Mai, một giường của chị/em gái."
+          },
+          {
+           "text": "Her mother.",
+           "ok": false,
+           "why": "Bài không nói mẹ ngủ trong phòng của Mai."
+          },
+          {
+           "text": "Nobody.",
+           "ok": false,
+           "why": "Phòng có hai giường, một giường dành cho chị/em gái của Mai."
+          }
+         ],
+         "explanation": "one for me and one for my sister: hai giường cho Mai và chị/em gái, nên hai người ngủ chung phòng.",
+         "key": "sto4"
+        },
+        {
+         "passage": "My name is Mai. I live in a small house with my family. There are four rooms in my house: a living room, a kitchen, a bathroom and a bedroom. The living room is big. There is a sofa and a TV in it. My bedroom is small, but I like it. There are two beds in my bedroom: one for me and one for my sister. There is a lamp on my desk. Behind the house, there is a garden. There are many flowers in the garden. I water the plants every afternoon.",
+         "lang": "en",
+         "question": "Where is the garden?",
+         "evidence": [
+          9
+         ],
+         "clue": "Where hỏi vị trí: tìm câu có “garden” và một từ chỉ vị trí.",
+         "options": [
+          {
+           "text": "Behind the house.",
+           "ok": true,
+           "why": "Đúng: Behind the house, there is a garden – khu vườn ở phía sau nhà."
+          },
+          {
+           "text": "In front of the house.",
+           "ok": false,
+           "why": "In front of là phía trước; bài viết behind (phía sau)."
+          },
+          {
+           "text": "Next to the kitchen.",
+           "ok": false,
+           "why": "Bài không nói khu vườn ở cạnh nhà bếp."
+          }
+         ],
+         "explanation": "behind = phía sau. Câu Behind the house, there is a garden cho biết khu vườn ở sau nhà.",
+         "key": "sto5"
+        },
+        {
+         "passage": "My name is Mai. I live in a small house with my family. There are four rooms in my house: a living room, a kitchen, a bathroom and a bedroom. The living room is big. There is a sofa and a TV in it. My bedroom is small, but I like it. There are two beds in my bedroom: one for me and one for my sister. There is a lamp on my desk. Behind the house, there is a garden. There are many flowers in the garden. I water the plants every afternoon.",
+         "lang": "en",
+         "question": "When does Mai water the plants?",
+         "evidence": [
+          11
+         ],
+         "clue": "Tìm câu có từ “water” (tưới nước).",
+         "options": [
+          {
+           "text": "Every afternoon.",
+           "ok": true,
+           "why": "Đúng: I water the plants every afternoon."
+          },
+          {
+           "text": "Every morning.",
+           "ok": false,
+           "why": "Bài viết every afternoon (mỗi buổi chiều), không phải buổi sáng."
+          },
+          {
+           "text": "Every evening.",
+           "ok": false,
+           "why": "Evening là buổi tối; bài viết afternoon (buổi chiều)."
+          }
+         ],
+         "explanation": "every afternoon = mỗi buổi chiều: đây là việc Mai làm hằng ngày.",
+         "key": "sto6"
+        },
+        {
+         "passage": "My name is Mai. I live in a small house with my family. There are four rooms in my house: a living room, a kitchen, a bathroom and a bedroom. The living room is big. There is a sofa and a TV in it. My bedroom is small, but I like it. There are two beds in my bedroom: one for me and one for my sister. There is a lamp on my desk. Behind the house, there is a garden. There are many flowers in the garden. I water the plants every afternoon.",
+         "lang": "en",
+         "question": "Does Mai like her bedroom?",
+         "evidence": [
+          6
+         ],
+         "clue": "Tìm câu tả phòng ngủ của Mai (My bedroom…).",
+         "options": [
+          {
+           "text": "Yes, she likes it.",
+           "ok": true,
+           "why": "Đúng: My bedroom is small, but I like it."
+          },
+          {
+           "text": "No, because it is small.",
+           "ok": false,
+           "why": "Phòng nhỏ thật, nhưng từ but cho biết Mai vẫn thích nó."
+          },
+          {
+           "text": "No, she likes the kitchen.",
+           "ok": false,
+           "why": "Bài không nói Mai thích nhà bếp."
+          }
+         ],
+         "explanation": "but nối hai ý trái ngược: phòng nhỏ (small) nhưng Mai vẫn thích (I like it).",
+         "key": "sto7"
+        }
+       ],
+       "credit_from": "choice"
+      },
       {
        "game": "choice",
        "title": "Đọc và trả lời",
@@ -2231,77 +2641,79 @@
        ]
       },
       {
-       "game": "order",
-       "title": "Xếp câu hiện tại tiếp diễn",
+       "game": "sentence",
+       "title": "Xây câu hiện tại tiếp diễn",
+       "credit_from": "order",
        "tasks": [
         {
          "key": "o1",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "My father",
           "is",
           "reading",
           "a newspaper."
          ],
-         "explanation": "My father + is + reading + a newspaper: Bố mình đang đọc báo.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "are"
+         ],
+         "explanation": "My father + is + reading + a newspaper: Bố mình đang đọc báo."
         },
         {
          "key": "o2",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "The students",
           "are",
           "singing",
           "a song."
          ],
-         "explanation": "The students (số nhiều) + are + singing + a song.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "is"
+         ],
+         "explanation": "The students (số nhiều) + are + singing + a song."
         },
         {
          "key": "o3",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "What",
           "are",
           "you",
           "doing?"
          ],
-         "explanation": "Câu hỏi: What + are + you + doing?",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "do"
+         ],
+         "explanation": "Câu hỏi: What + are + you + doing?"
         },
         {
          "key": "o4",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "I",
           "am",
           "not",
           "sleeping."
          ],
-         "explanation": "Phủ định: I + am + not + sleeping.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "sleep"
+         ],
+         "explanation": "Phủ định: I + am + not + sleeping."
         },
         {
          "key": "o5",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "Is",
           "she",
           "drawing",
           "a picture?"
          ],
-         "explanation": "Câu hỏi Yes/No: Is + she + drawing + a picture?",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "draws"
+         ],
+         "explanation": "Câu hỏi Yes/No: Is + she + drawing + a picture?"
         }
        ]
       }
-     ]
+     ],
+     "activity": "grammar"
     },
     {
      "key": "ta5.loi_moi",
@@ -2539,6 +2951,209 @@
      "requires": [],
      "requires_note": null,
      "games": [
+      {
+       "game": "story_detective",
+       "title": "Thám tử: My uncle is a farmer",
+       "tasks": [
+        {
+         "passage": "My name is Lan. My uncle Tuan is a farmer. He lives in a village near a big river. He gets up at five o'clock every morning. First, he feeds his cows and chickens. Then he works in the rice field until eleven. In the afternoon, he grows vegetables in his garden. My uncle works very hard, but he loves his job. He says, \"Farmers grow food for everyone.\" Today is Sunday. I am visiting his farm with my parents. My uncle is showing us his ducks, and I am feeding the chickens!",
+         "lang": "en",
+         "question": "Where does uncle Tuan live?",
+         "evidence": [
+          3
+         ],
+         "clue": "Where… live: tìm câu có “lives in”.",
+         "options": [
+          {
+           "text": "In a village near a big river.",
+           "ok": true,
+           "why": "Đúng: He lives in a village near a big river."
+          },
+          {
+           "text": "In a big city.",
+           "ok": false,
+           "why": "Bài nói chú sống ở làng (village), không phải thành phố."
+          },
+          {
+           "text": "Near the sea.",
+           "ok": false,
+           "why": "Làng của chú ở gần sông lớn (river), không phải biển."
+          }
+         ],
+         "explanation": "Câu He lives in a village near a big river: chú sống ở một ngôi làng gần con sông lớn.",
+         "key": "sto1"
+        },
+        {
+         "passage": "My name is Lan. My uncle Tuan is a farmer. He lives in a village near a big river. He gets up at five o'clock every morning. First, he feeds his cows and chickens. Then he works in the rice field until eleven. In the afternoon, he grows vegetables in his garden. My uncle works very hard, but he loves his job. He says, \"Farmers grow food for everyone.\" Today is Sunday. I am visiting his farm with my parents. My uncle is showing us his ducks, and I am feeding the chickens!",
+         "lang": "en",
+         "question": "What time does uncle Tuan get up?",
+         "evidence": [
+          4
+         ],
+         "clue": "Tìm câu có “gets up” và giờ (o'clock).",
+         "options": [
+          {
+           "text": "At five o'clock.",
+           "ok": true,
+           "why": "Đúng: He gets up at five o'clock every morning."
+          },
+          {
+           "text": "At eleven o'clock.",
+           "ok": false,
+           "why": "Mười một giờ là lúc chú làm xong việc ở ruộng lúa (until eleven)."
+          },
+          {
+           "text": "At seven o'clock.",
+           "ok": false,
+           "why": "Bài không nhắc đến bảy giờ."
+          }
+         ],
+         "explanation": "get up = thức dậy. Câu He gets up at five o'clock every morning: chú dậy lúc năm giờ mỗi sáng.",
+         "key": "sto2"
+        },
+        {
+         "passage": "My name is Lan. My uncle Tuan is a farmer. He lives in a village near a big river. He gets up at five o'clock every morning. First, he feeds his cows and chickens. Then he works in the rice field until eleven. In the afternoon, he grows vegetables in his garden. My uncle works very hard, but he loves his job. He says, \"Farmers grow food for everyone.\" Today is Sunday. I am visiting his farm with my parents. My uncle is showing us his ducks, and I am feeding the chickens!",
+         "lang": "en",
+         "question": "What does uncle Tuan do after he feeds his animals?",
+         "evidence": [
+          6
+         ],
+         "clue": "Tìm câu bắt đầu bằng “Then” – từ chỉ việc làm tiếp theo.",
+         "options": [
+          {
+           "text": "He works in the rice field.",
+           "ok": true,
+           "why": "Đúng: Then he works in the rice field until eleven."
+          },
+          {
+           "text": "He grows vegetables.",
+           "ok": false,
+           "why": "Trồng rau là việc buổi chiều (In the afternoon), chưa phải việc ngay sau đó."
+          },
+          {
+           "text": "He gets up.",
+           "ok": false,
+           "why": "Chú thức dậy trước khi cho bò, gà ăn, không phải sau."
+          }
+         ],
+         "explanation": "First… Then… chỉ thứ tự: trước tiên chú cho bò, gà ăn, sau đó (Then) ra ruộng lúa làm đến mười một giờ.",
+         "key": "sto3"
+        },
+        {
+         "passage": "My name is Lan. My uncle Tuan is a farmer. He lives in a village near a big river. He gets up at five o'clock every morning. First, he feeds his cows and chickens. Then he works in the rice field until eleven. In the afternoon, he grows vegetables in his garden. My uncle works very hard, but he loves his job. He says, \"Farmers grow food for everyone.\" Today is Sunday. I am visiting his farm with my parents. My uncle is showing us his ducks, and I am feeding the chickens!",
+         "lang": "en",
+         "question": "What does uncle Tuan do in the afternoon?",
+         "evidence": [
+          7
+         ],
+         "clue": "Tìm câu bắt đầu bằng “In the afternoon”.",
+         "options": [
+          {
+           "text": "He grows vegetables in his garden.",
+           "ok": true,
+           "why": "Đúng: In the afternoon, he grows vegetables in his garden."
+          },
+          {
+           "text": "He feeds his cows.",
+           "ok": false,
+           "why": "Chú cho bò ăn vào buổi sáng (First, he feeds…)."
+          },
+          {
+           "text": "He swims in the river.",
+           "ok": false,
+           "why": "Bài không nói chú bơi; con sông chỉ ở gần làng."
+          }
+         ],
+         "explanation": "In the afternoon = vào buổi chiều; lúc đó chú trồng rau trong vườn (grows vegetables).",
+         "key": "sto4"
+        },
+        {
+         "passage": "My name is Lan. My uncle Tuan is a farmer. He lives in a village near a big river. He gets up at five o'clock every morning. First, he feeds his cows and chickens. Then he works in the rice field until eleven. In the afternoon, he grows vegetables in his garden. My uncle works very hard, but he loves his job. He says, \"Farmers grow food for everyone.\" Today is Sunday. I am visiting his farm with my parents. My uncle is showing us his ducks, and I am feeding the chickens!",
+         "lang": "en",
+         "question": "Does uncle Tuan like his job?",
+         "evidence": [
+          8
+         ],
+         "clue": "Tìm câu có từ “job” (công việc).",
+         "options": [
+          {
+           "text": "Yes, he loves it.",
+           "ok": true,
+           "why": "Đúng: My uncle works very hard, but he loves his job."
+          },
+          {
+           "text": "No, because it is hard work.",
+           "ok": false,
+           "why": "Chú làm việc vất vả, nhưng từ but cho biết chú vẫn yêu công việc."
+          },
+          {
+           "text": "The text does not say.",
+           "ok": false,
+           "why": "Bài nói rõ he loves his job."
+          }
+         ],
+         "explanation": "but nối hai ý trái ngược: làm việc rất vất vả (works very hard) nhưng yêu công việc (loves his job).",
+         "key": "sto5"
+        },
+        {
+         "passage": "My name is Lan. My uncle Tuan is a farmer. He lives in a village near a big river. He gets up at five o'clock every morning. First, he feeds his cows and chickens. Then he works in the rice field until eleven. In the afternoon, he grows vegetables in his garden. My uncle works very hard, but he loves his job. He says, \"Farmers grow food for everyone.\" Today is Sunday. I am visiting his farm with my parents. My uncle is showing us his ducks, and I am feeding the chickens!",
+         "lang": "en",
+         "question": "Who is Lan visiting the farm with today?",
+         "evidence": [
+          11
+         ],
+         "clue": "Tìm câu có “visiting his farm”.",
+         "options": [
+          {
+           "text": "With her parents.",
+           "ok": true,
+           "why": "Đúng: I am visiting his farm with my parents."
+          },
+          {
+           "text": "With her friends.",
+           "ok": false,
+           "why": "Bài không nhắc đến bạn bè; Lan đi cùng bố mẹ (parents)."
+          },
+          {
+           "text": "Alone.",
+           "ok": false,
+           "why": "Lan không đi một mình: with my parents là cùng bố mẹ."
+          }
+         ],
+         "explanation": "with my parents = cùng bố mẹ mình. Câu này dùng hiện tại tiếp diễn (am visiting) vì đó là việc đang diễn ra hôm nay.",
+         "key": "sto6"
+        },
+        {
+         "passage": "My name is Lan. My uncle Tuan is a farmer. He lives in a village near a big river. He gets up at five o'clock every morning. First, he feeds his cows and chickens. Then he works in the rice field until eleven. In the afternoon, he grows vegetables in his garden. My uncle works very hard, but he loves his job. He says, \"Farmers grow food for everyone.\" Today is Sunday. I am visiting his farm with my parents. My uncle is showing us his ducks, and I am feeding the chickens!",
+         "lang": "en",
+         "question": "What is uncle Tuan doing today, while Lan is there?",
+         "evidence": [
+          12
+         ],
+         "clue": "Tìm câu dùng “is …ing” nói về chú hôm nay.",
+         "options": [
+          {
+           "text": "He is showing them his ducks.",
+           "ok": true,
+           "why": "Đúng: My uncle is showing us his ducks."
+          },
+          {
+           "text": "He is feeding the chickens.",
+           "ok": false,
+           "why": "Người đang cho gà ăn là Lan (I am feeding the chickens)."
+          },
+          {
+           "text": "He is working in the rice field.",
+           "ok": false,
+           "why": "Làm ruộng là việc chú thường làm buổi sáng (hiện tại đơn), không phải việc chú đang làm lúc này."
+          }
+         ],
+         "explanation": "is showing là thì hiện tại tiếp diễn: việc chú đang làm hôm nay; còn works, feeds, grows là việc chú làm hằng ngày.",
+         "key": "sto7"
+        }
+       ],
+       "credit_from": "choice"
+      },
       {
        "game": "choice",
        "title": "Đọc và trả lời",
@@ -3208,82 +3823,84 @@
        ]
       },
       {
-       "game": "order",
-       "title": "Xếp câu so sánh",
+       "game": "sentence",
+       "title": "Xây câu so sánh",
+       "credit_from": "order",
        "tasks": [
         {
          "key": "o1",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "My brother",
           "is",
           "taller",
           "than",
           "me."
          ],
-         "explanation": "Chủ ngữ + is + adj-er + than + người/vật được so sánh.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "more tall"
+         ],
+         "explanation": "Chủ ngữ + is + adj-er + than + người/vật được so sánh."
         },
         {
          "key": "o2",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "This street",
           "is",
           "busier",
           "than",
           "that one."
          ],
-         "explanation": "This street is busier than that one (that one = that street).",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "more busy"
+         ],
+         "explanation": "This street is busier than that one (that one = that street)."
         },
         {
          "key": "o3",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "Is",
           "your school",
           "bigger",
           "than",
           "mine?"
          ],
-         "explanation": "Câu hỏi: Is + chủ ngữ + adj-er + than…?",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "more big"
+         ],
+         "explanation": "Câu hỏi: Is + chủ ngữ + adj-er + than…?"
         },
         {
          "key": "o4",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "The city",
           "is",
           "more exciting",
           "than",
           "the countryside."
          ],
-         "explanation": "Tính từ dài: more exciting + than.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "excitinger"
+         ],
+         "explanation": "Tính từ dài: more exciting + than."
         },
         {
          "key": "o5",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "Her bag",
           "is",
           "heavier",
           "than",
           "my bag."
          ],
-         "explanation": "heavy → heavier (đổi y thành i).",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "heavyer"
+         ],
+         "explanation": "heavy → heavier (đổi y thành i)."
         }
        ]
       }
-     ]
+     ],
+     "activity": "grammar"
     },
     {
      "key": "ta6.doc_hai_noi",
@@ -3308,6 +3925,310 @@
      "requires": [],
      "requires_note": null,
      "games": [
+      {
+       "game": "story_detective",
+       "title": "Thám tử: A town and a city",
+       "tasks": [
+        {
+         "passage": [
+          "Lam lives in a small town in the mountains.",
+          "His cousin Vy lives in a big city by the sea.",
+          "Every summer, Lam visits Vy for a week.",
+          "Vy's city is much bigger and busier than Lam's town.",
+          "There are tall buildings, big shopping centres and a lot of cars and motorbikes.",
+          "The streets are noisier, especially in the evening.",
+          "But the city is also more exciting: there are cinemas, museums and a long beach.",
+          "Lam's town is quieter and greener.",
+          "The air is fresher and the people know each other well.",
+          "It is colder than the city in winter because it is in the mountains.",
+          "Lam says, \"The city is fun, but my town is more peaceful. I am happier at home.\"",
+          "Vy thinks the town is more beautiful, but she likes the city better because her school and her friends are there."
+         ],
+         "lang": "en",
+         "question": "How long does Lam stay with Vy every summer?",
+         "evidence": [
+          3
+         ],
+         "clue": "Tìm câu có “Every summer”.",
+         "options": [
+          {
+           "text": "For a week.",
+           "ok": true,
+           "why": "Đúng: Every summer, Lam visits Vy for a week."
+          },
+          {
+           "text": "For a month.",
+           "ok": false,
+           "why": "Bài không nói một tháng; bài viết for a week."
+          },
+          {
+           "text": "For the whole summer.",
+           "ok": false,
+           "why": "Lam đến chơi mỗi mùa hè (every summer) nhưng chỉ ở một tuần."
+          }
+         ],
+         "explanation": "for a week = trong một tuần (trả lời How long); every summer = mỗi mùa hè (trả lời How often).",
+         "key": "sto1"
+        },
+        {
+         "passage": [
+          "Lam lives in a small town in the mountains.",
+          "His cousin Vy lives in a big city by the sea.",
+          "Every summer, Lam visits Vy for a week.",
+          "Vy's city is much bigger and busier than Lam's town.",
+          "There are tall buildings, big shopping centres and a lot of cars and motorbikes.",
+          "The streets are noisier, especially in the evening.",
+          "But the city is also more exciting: there are cinemas, museums and a long beach.",
+          "Lam's town is quieter and greener.",
+          "The air is fresher and the people know each other well.",
+          "It is colder than the city in winter because it is in the mountains.",
+          "Lam says, \"The city is fun, but my town is more peaceful. I am happier at home.\"",
+          "Vy thinks the town is more beautiful, but she likes the city better because her school and her friends are there."
+         ],
+         "lang": "en",
+         "question": "Which sentence about Vy's city is TRUE?",
+         "evidence": [
+          4
+         ],
+         "clue": "Tìm câu so sánh thành phố của Vy với thị trấn của Lam bằng bigger, busier.",
+         "options": [
+          {
+           "text": "It is bigger and busier than Lam's town.",
+           "ok": true,
+           "why": "Đúng: Vy's city is much bigger and busier than Lam's town."
+          },
+          {
+           "text": "It is quieter than Lam's town.",
+           "ok": false,
+           "why": "Ngược lại: thị trấn của Lam mới yên tĩnh hơn (Lam's town is quieter)."
+          },
+          {
+           "text": "It is in the mountains.",
+           "ok": false,
+           "why": "Thị trấn của Lam ở trên núi; thành phố của Vy ở bên biển."
+          },
+          {
+           "text": "It is colder in winter.",
+           "ok": false,
+           "why": "Thị trấn của Lam lạnh hơn vào mùa đông, không phải thành phố."
+          }
+         ],
+         "explanation": "much bigger and busier than = lớn hơn và nhộn nhịp hơn nhiều so với. Đây là câu so sánh hơn giữa hai nơi.",
+         "key": "sto2"
+        },
+        {
+         "passage": [
+          "Lam lives in a small town in the mountains.",
+          "His cousin Vy lives in a big city by the sea.",
+          "Every summer, Lam visits Vy for a week.",
+          "Vy's city is much bigger and busier than Lam's town.",
+          "There are tall buildings, big shopping centres and a lot of cars and motorbikes.",
+          "The streets are noisier, especially in the evening.",
+          "But the city is also more exciting: there are cinemas, museums and a long beach.",
+          "Lam's town is quieter and greener.",
+          "The air is fresher and the people know each other well.",
+          "It is colder than the city in winter because it is in the mountains.",
+          "Lam says, \"The city is fun, but my town is more peaceful. I am happier at home.\"",
+          "Vy thinks the town is more beautiful, but she likes the city better because her school and her friends are there."
+         ],
+         "lang": "en",
+         "question": "When are the streets in Vy's city especially noisy?",
+         "evidence": [
+          6
+         ],
+         "clue": "Tìm câu có từ “noisier”.",
+         "options": [
+          {
+           "text": "In the evening.",
+           "ok": true,
+           "why": "Đúng: The streets are noisier, especially in the evening."
+          },
+          {
+           "text": "In the morning.",
+           "ok": false,
+           "why": "Bài không nói buổi sáng; bài viết especially in the evening."
+          },
+          {
+           "text": "In winter.",
+           "ok": false,
+           "why": "Mùa đông được nhắc khi nói thị trấn của Lam lạnh hơn, không liên quan đến tiếng ồn."
+          }
+         ],
+         "explanation": "especially = đặc biệt là. Đường phố ồn hơn, đặc biệt là vào buổi tối.",
+         "key": "sto3"
+        },
+        {
+         "passage": [
+          "Lam lives in a small town in the mountains.",
+          "His cousin Vy lives in a big city by the sea.",
+          "Every summer, Lam visits Vy for a week.",
+          "Vy's city is much bigger and busier than Lam's town.",
+          "There are tall buildings, big shopping centres and a lot of cars and motorbikes.",
+          "The streets are noisier, especially in the evening.",
+          "But the city is also more exciting: there are cinemas, museums and a long beach.",
+          "Lam's town is quieter and greener.",
+          "The air is fresher and the people know each other well.",
+          "It is colder than the city in winter because it is in the mountains.",
+          "Lam says, \"The city is fun, but my town is more peaceful. I am happier at home.\"",
+          "Vy thinks the town is more beautiful, but she likes the city better because her school and her friends are there."
+         ],
+         "lang": "en",
+         "question": "Which words best describe Lam's town?",
+         "evidence": [
+          8
+         ],
+         "clue": "Tìm câu bắt đầu bằng “Lam's town is…”.",
+         "options": [
+          {
+           "text": "Quiet and green.",
+           "ok": true,
+           "why": "Đúng: Lam's town is quieter and greener."
+          },
+          {
+           "text": "Busy and noisy.",
+           "ok": false,
+           "why": "Busy, noisy là đặc điểm của thành phố của Vy."
+          },
+          {
+           "text": "Big and exciting.",
+           "ok": false,
+           "why": "Bigger, more exciting là để tả thành phố, không phải thị trấn."
+          }
+         ],
+         "explanation": "quieter and greener là so sánh hơn của quiet (yên tĩnh) và green (xanh, nhiều cây).",
+         "key": "sto4"
+        },
+        {
+         "passage": [
+          "Lam lives in a small town in the mountains.",
+          "His cousin Vy lives in a big city by the sea.",
+          "Every summer, Lam visits Vy for a week.",
+          "Vy's city is much bigger and busier than Lam's town.",
+          "There are tall buildings, big shopping centres and a lot of cars and motorbikes.",
+          "The streets are noisier, especially in the evening.",
+          "But the city is also more exciting: there are cinemas, museums and a long beach.",
+          "Lam's town is quieter and greener.",
+          "The air is fresher and the people know each other well.",
+          "It is colder than the city in winter because it is in the mountains.",
+          "Lam says, \"The city is fun, but my town is more peaceful. I am happier at home.\"",
+          "Vy thinks the town is more beautiful, but she likes the city better because her school and her friends are there."
+         ],
+         "lang": "en",
+         "question": "Why is Lam's town colder than the city in winter?",
+         "evidence": [
+          10
+         ],
+         "clue": "Tìm câu có “colder” và “because”.",
+         "options": [
+          {
+           "text": "Because it is in the mountains.",
+           "ok": true,
+           "why": "Đúng: It is colder… because it is in the mountains."
+          },
+          {
+           "text": "Because it is greener.",
+           "ok": false,
+           "why": "Bài nói thị trấn xanh hơn, nhưng không nói đó là lí do lạnh hơn."
+          },
+          {
+           "text": "Because the air is fresher.",
+           "ok": false,
+           "why": "Không khí trong lành hơn là một đặc điểm khác, không phải lí do lạnh hơn."
+          }
+         ],
+         "explanation": "because (vì) giới thiệu lí do: thị trấn lạnh hơn vì nằm trên núi.",
+         "key": "sto5"
+        },
+        {
+         "passage": [
+          "Lam lives in a small town in the mountains.",
+          "His cousin Vy lives in a big city by the sea.",
+          "Every summer, Lam visits Vy for a week.",
+          "Vy's city is much bigger and busier than Lam's town.",
+          "There are tall buildings, big shopping centres and a lot of cars and motorbikes.",
+          "The streets are noisier, especially in the evening.",
+          "But the city is also more exciting: there are cinemas, museums and a long beach.",
+          "Lam's town is quieter and greener.",
+          "The air is fresher and the people know each other well.",
+          "It is colder than the city in winter because it is in the mountains.",
+          "Lam says, \"The city is fun, but my town is more peaceful. I am happier at home.\"",
+          "Vy thinks the town is more beautiful, but she likes the city better because her school and her friends are there."
+         ],
+         "lang": "en",
+         "question": "In Lam's words, the word \"peaceful\" is closest in meaning to …",
+         "evidence": [
+          11
+         ],
+         "clue": "Tìm lời Lam nói (Lam says…) có từ peaceful.",
+         "options": [
+          {
+           "text": "calm and quiet",
+           "ok": true,
+           "why": "Đúng: Lam đối lập city fun với town peaceful; trước đó bài đã tả thị trấn quieter."
+          },
+          {
+           "text": "fun and exciting",
+           "ok": false,
+           "why": "Từ but cho thấy peaceful trái với fun – fun là thành phố."
+          },
+          {
+           "text": "big and modern",
+           "ok": false,
+           "why": "Thị trấn của Lam nhỏ (small town), nên peaceful không thể là to và hiện đại."
+          },
+          {
+           "text": "cold and wet",
+           "ok": false,
+           "why": "Thị trấn lạnh hơn vào mùa đông, nhưng peaceful không nói về thời tiết."
+          }
+         ],
+         "explanation": "peaceful = yên bình. Lam dùng but để đối lập: thành phố vui (fun) nhưng thị trấn yên bình hơn, và mình vui hơn ở nhà.",
+         "key": "sto6"
+        },
+        {
+         "passage": [
+          "Lam lives in a small town in the mountains.",
+          "His cousin Vy lives in a big city by the sea.",
+          "Every summer, Lam visits Vy for a week.",
+          "Vy's city is much bigger and busier than Lam's town.",
+          "There are tall buildings, big shopping centres and a lot of cars and motorbikes.",
+          "The streets are noisier, especially in the evening.",
+          "But the city is also more exciting: there are cinemas, museums and a long beach.",
+          "Lam's town is quieter and greener.",
+          "The air is fresher and the people know each other well.",
+          "It is colder than the city in winter because it is in the mountains.",
+          "Lam says, \"The city is fun, but my town is more peaceful. I am happier at home.\"",
+          "Vy thinks the town is more beautiful, but she likes the city better because her school and her friends are there."
+         ],
+         "lang": "en",
+         "question": "Why does Vy like the city better?",
+         "evidence": [
+          12
+         ],
+         "clue": "Tìm câu nói về suy nghĩ của Vy (Vy thinks…).",
+         "options": [
+          {
+           "text": "Her school and her friends are there.",
+           "ok": true,
+           "why": "Đúng: she likes the city better because her school and her friends are there."
+          },
+          {
+           "text": "The city is more beautiful.",
+           "ok": false,
+           "why": "Vy nghĩ thị trấn (the town) mới đẹp hơn, nên đây không phải lí do."
+          },
+          {
+           "text": "There is a long beach.",
+           "ok": false,
+           "why": "Thành phố có bãi biển dài, nhưng Vy không nói đó là lí do cô thích thành phố hơn."
+          }
+         ],
+         "explanation": "Câu của Vy có hai ý: thị trấn đẹp hơn, nhưng (but) cô thích thành phố hơn vì (because) trường và bạn bè ở đó.",
+         "key": "sto7"
+        }
+       ],
+       "credit_from": "choice"
+      },
       {
        "game": "choice",
        "title": "Đọc và trả lời",
@@ -3933,78 +4854,80 @@
        ]
       },
       {
-       "game": "order",
-       "title": "Xếp câu quá khứ đơn",
+       "game": "sentence",
+       "title": "Xây câu quá khứ đơn",
+       "credit_from": "order",
        "tasks": [
         {
          "key": "o1",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "My grandfather",
           "told",
           "me",
           "an old story."
          ],
-         "explanation": "told (quá khứ của tell) + me + an old story: Ông kể cho tôi một câu chuyện xưa.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "telled"
+         ],
+         "explanation": "told (quá khứ của tell) + me + an old story: Ông kể cho tôi một câu chuyện xưa."
         },
         {
          "key": "o2",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "Did",
           "you",
           "enjoy",
           "the festival?"
          ],
-         "explanation": "Câu hỏi: Did + you + enjoy (nguyên mẫu) + the festival?",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "enjoyed"
+         ],
+         "explanation": "Câu hỏi: Did + you + enjoy (nguyên mẫu) + the festival?"
         },
         {
          "key": "o3",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "They",
           "didn't",
           "go",
           "to the museum."
          ],
-         "explanation": "Phủ định: didn't + go (nguyên mẫu).",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "went"
+         ],
+         "explanation": "Phủ định: didn't + go (nguyên mẫu)."
         },
         {
          "key": "o4",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "Where",
           "did",
           "you",
           "buy",
           "this lantern?"
          ],
-         "explanation": "Wh- + did + you + buy + this lantern?",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "bought"
+         ],
+         "explanation": "Wh- + did + you + buy + this lantern?"
         },
         {
          "key": "o5",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "The old town",
           "was",
           "very",
           "beautiful."
          ],
-         "explanation": "The old town + was + very beautiful.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "were"
+         ],
+         "explanation": "The old town + was + very beautiful."
         }
        ]
       }
-     ]
+     ],
+     "activity": "grammar"
     },
     {
      "key": "ta7.doc_pho_co",
@@ -4029,6 +4952,209 @@
      "requires": [],
      "requires_note": null,
      "games": [
+      {
+       "game": "story_detective",
+       "title": "Thám tử: A trip to an old town",
+       "tasks": [
+        {
+         "passage": "Last summer, my class went on a trip to Hoi An Ancient Town. We left school early in the morning and arrived after lunch.\n\nFirst, our teacher took us to the Japanese Covered Bridge. It is small, but it is one of the town's most famous symbols. Then we walked along narrow streets with old yellow houses. Many of them were more than a hundred years old.\n\nIn the evening, the town looked magical. Hundreds of colourful lanterns lit up the streets. My friends and I ate cao lau, a local noodle dish, and we bought small lanterns for our families.\n\nI didn't want to leave! The trip taught me that old towns are not only beautiful but also tell us about the past. We should protect them for the future.",
+         "lang": "en",
+         "question": "When did the class arrive in Hoi An?",
+         "evidence": [
+          2
+         ],
+         "clue": "Tìm câu có động từ “arrived”.",
+         "options": [
+          {
+           "text": "After lunch.",
+           "ok": true,
+           "why": "Đúng: We left school early in the morning and arrived after lunch."
+          },
+          {
+           "text": "Early in the morning.",
+           "ok": false,
+           "why": "Early in the morning là lúc cả lớp rời trường (left school), chưa đến nơi."
+          },
+          {
+           "text": "In the evening.",
+           "ok": false,
+           "why": "Buổi tối là lúc phố cổ lên đèn; cả lớp đã đến từ sau bữa trưa."
+          }
+         ],
+         "explanation": "left = rời đi (quá khứ của leave), arrived = đã đến. Cả lớp rời trường từ sáng sớm và đến nơi sau bữa trưa.",
+         "key": "sto1"
+        },
+        {
+         "passage": "Last summer, my class went on a trip to Hoi An Ancient Town. We left school early in the morning and arrived after lunch.\n\nFirst, our teacher took us to the Japanese Covered Bridge. It is small, but it is one of the town's most famous symbols. Then we walked along narrow streets with old yellow houses. Many of them were more than a hundred years old.\n\nIn the evening, the town looked magical. Hundreds of colourful lanterns lit up the streets. My friends and I ate cao lau, a local noodle dish, and we bought small lanterns for our families.\n\nI didn't want to leave! The trip taught me that old towns are not only beautiful but also tell us about the past. We should protect them for the future.",
+         "lang": "en",
+         "question": "Which sentence about the Japanese Covered Bridge is TRUE?",
+         "evidence": [
+          4
+         ],
+         "clue": "Tìm câu ngay sau câu nhắc đến tên cây cầu, có “It is…”.",
+         "options": [
+          {
+           "text": "It is small, but it is very famous.",
+           "ok": true,
+           "why": "Đúng: It is small, but it is one of the town's most famous symbols."
+          },
+          {
+           "text": "It is the biggest bridge in the town.",
+           "ok": false,
+           "why": "Bài nói cầu nhỏ (It is small)."
+          },
+          {
+           "text": "It is new and modern.",
+           "ok": false,
+           "why": "Bài không nói cầu mới; bài nói cầu là một trong những biểu tượng nổi tiếng nhất của phố."
+          }
+         ],
+         "explanation": "symbol = biểu tượng. Cầu nhỏ nhưng (but) là một trong những biểu tượng nổi tiếng nhất của phố cổ.",
+         "key": "sto2"
+        },
+        {
+         "passage": "Last summer, my class went on a trip to Hoi An Ancient Town. We left school early in the morning and arrived after lunch.\n\nFirst, our teacher took us to the Japanese Covered Bridge. It is small, but it is one of the town's most famous symbols. Then we walked along narrow streets with old yellow houses. Many of them were more than a hundred years old.\n\nIn the evening, the town looked magical. Hundreds of colourful lanterns lit up the streets. My friends and I ate cao lau, a local noodle dish, and we bought small lanterns for our families.\n\nI didn't want to leave! The trip taught me that old towns are not only beautiful but also tell us about the past. We should protect them for the future.",
+         "lang": "en",
+         "question": "In paragraph 2, \"them\" in \"Many of them\" refers to …",
+         "evidence": [
+          5
+         ],
+         "clue": "them thay cho một danh từ số nhiều ở câu ngay trước.",
+         "options": [
+          {
+           "text": "the old yellow houses",
+           "ok": true,
+           "why": "Đúng: câu trước nhắc old yellow houses; nhà mới có thể hơn trăm tuổi."
+          },
+          {
+           "text": "the students",
+           "ok": false,
+           "why": "Học sinh không thể hơn một trăm tuổi."
+          },
+          {
+           "text": "the lanterns",
+           "ok": false,
+           "why": "Đèn lồng chỉ được nhắc ở đoạn sau (buổi tối), không phải ở câu trước."
+          }
+         ],
+         "explanation": "Đại từ them thường thay cho danh từ số nhiều gần nhất phía trước và hợp nghĩa: những ngôi nhà vàng cổ hơn trăm tuổi.",
+         "key": "sto3"
+        },
+        {
+         "passage": "Last summer, my class went on a trip to Hoi An Ancient Town. We left school early in the morning and arrived after lunch.\n\nFirst, our teacher took us to the Japanese Covered Bridge. It is small, but it is one of the town's most famous symbols. Then we walked along narrow streets with old yellow houses. Many of them were more than a hundred years old.\n\nIn the evening, the town looked magical. Hundreds of colourful lanterns lit up the streets. My friends and I ate cao lau, a local noodle dish, and we bought small lanterns for our families.\n\nI didn't want to leave! The trip taught me that old towns are not only beautiful but also tell us about the past. We should protect them for the future.",
+         "lang": "en",
+         "question": "Why did the town look magical in the evening?",
+         "evidence": [
+          8
+         ],
+         "clue": "Câu “looked magical” chỉ nêu cảm nhận; lí do nằm ở câu ngay sau.",
+         "options": [
+          {
+           "text": "Hundreds of colourful lanterns lit up the streets.",
+           "ok": true,
+           "why": "Đúng: Hundreds of colourful lanterns lit up the streets."
+          },
+          {
+           "text": "The houses were painted yellow.",
+           "ok": false,
+           "why": "Nhà vàng được tả vào ban ngày, không phải lí do phố lung linh buổi tối."
+          },
+          {
+           "text": "The students ate cao lau.",
+           "ok": false,
+           "why": "Ăn cao lầu là việc các bạn làm, không làm phố trông huyền ảo."
+          }
+         ],
+         "explanation": "magical = huyền ảo, lung linh. Câu sau giải thích: hàng trăm chiếc đèn lồng nhiều màu thắp sáng các con phố.",
+         "key": "sto4"
+        },
+        {
+         "passage": "Last summer, my class went on a trip to Hoi An Ancient Town. We left school early in the morning and arrived after lunch.\n\nFirst, our teacher took us to the Japanese Covered Bridge. It is small, but it is one of the town's most famous symbols. Then we walked along narrow streets with old yellow houses. Many of them were more than a hundred years old.\n\nIn the evening, the town looked magical. Hundreds of colourful lanterns lit up the streets. My friends and I ate cao lau, a local noodle dish, and we bought small lanterns for our families.\n\nI didn't want to leave! The trip taught me that old towns are not only beautiful but also tell us about the past. We should protect them for the future.",
+         "lang": "en",
+         "question": "What did the writer and their friends eat?",
+         "evidence": [
+          9
+         ],
+         "clue": "Tìm câu có động từ “ate”.",
+         "options": [
+          {
+           "text": "Cao lau, a local noodle dish.",
+           "ok": true,
+           "why": "Đúng: My friends and I ate cao lau, a local noodle dish."
+          },
+          {
+           "text": "Rice and fish.",
+           "ok": false,
+           "why": "Bài không nhắc đến cơm và cá."
+          },
+          {
+           "text": "Small cakes from the market.",
+           "ok": false,
+           "why": "Thứ các bạn mua là đèn lồng nhỏ (small lanterns), không phải bánh."
+          }
+         ],
+         "explanation": "ate là quá khứ của eat. Cụm sau dấu phẩy (a local noodle dish) giải thích cao lầu là món mì địa phương.",
+         "key": "sto5"
+        },
+        {
+         "passage": "Last summer, my class went on a trip to Hoi An Ancient Town. We left school early in the morning and arrived after lunch.\n\nFirst, our teacher took us to the Japanese Covered Bridge. It is small, but it is one of the town's most famous symbols. Then we walked along narrow streets with old yellow houses. Many of them were more than a hundred years old.\n\nIn the evening, the town looked magical. Hundreds of colourful lanterns lit up the streets. My friends and I ate cao lau, a local noodle dish, and we bought small lanterns for our families.\n\nI didn't want to leave! The trip taught me that old towns are not only beautiful but also tell us about the past. We should protect them for the future.",
+         "lang": "en",
+         "question": "How did the writer feel at the end of the trip?",
+         "evidence": [
+          10
+         ],
+         "clue": "Tìm câu cảm thán (có dấu !) ở đoạn cuối.",
+         "options": [
+          {
+           "text": "They wanted to stay longer.",
+           "ok": true,
+           "why": "Đúng: I didn't want to leave! – không muốn rời đi tức là muốn ở lại."
+          },
+          {
+           "text": "They were tired and wanted to go home.",
+           "ok": false,
+           "why": "Ngược lại: người viết không muốn về."
+          },
+          {
+           "text": "They were bored.",
+           "ok": false,
+           "why": "Bài tả phố cổ huyền ảo và người viết không muốn rời đi, nên không chán."
+          }
+         ],
+         "explanation": "didn't want to leave = không muốn rời đi: người viết rất thích chuyến đi.",
+         "key": "sto6"
+        },
+        {
+         "passage": "Last summer, my class went on a trip to Hoi An Ancient Town. We left school early in the morning and arrived after lunch.\n\nFirst, our teacher took us to the Japanese Covered Bridge. It is small, but it is one of the town's most famous symbols. Then we walked along narrow streets with old yellow houses. Many of them were more than a hundred years old.\n\nIn the evening, the town looked magical. Hundreds of colourful lanterns lit up the streets. My friends and I ate cao lau, a local noodle dish, and we bought small lanterns for our families.\n\nI didn't want to leave! The trip taught me that old towns are not only beautiful but also tell us about the past. We should protect them for the future.",
+         "lang": "en",
+         "question": "According to the writer, what should we do with old towns?",
+         "evidence": [
+          12
+         ],
+         "clue": "Tìm câu có từ “should” (nên).",
+         "options": [
+          {
+           "text": "Protect them for the future.",
+           "ok": true,
+           "why": "Đúng: We should protect them for the future."
+          },
+          {
+           "text": "Build new houses in them.",
+           "ok": false,
+           "why": "Bài không nói nên xây nhà mới; người viết muốn giữ gìn phố cổ."
+          },
+          {
+           "text": "Visit them only in summer.",
+           "ok": false,
+           "why": "Chuyến đi vào mùa hè, nhưng người viết không khuyên chỉ đi mùa hè."
+          }
+         ],
+         "explanation": "should = nên. Câu cuối nêu bài học: phải bảo vệ phố cổ cho tương lai vì chúng kể cho ta về quá khứ.",
+         "key": "sto7"
+        }
+       ],
+       "credit_from": "choice"
+      },
       {
        "game": "choice",
        "title": "Đọc và trả lời",
@@ -4593,13 +5719,13 @@
        ]
       },
       {
-       "game": "order",
-       "title": "Xếp câu điều kiện",
+       "game": "sentence",
+       "title": "Xây câu điều kiện",
+       "credit_from": "order",
        "tasks": [
         {
          "key": "o1",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "If",
           "it",
           "rains,",
@@ -4607,27 +5733,27 @@
           "will stay",
           "at home."
          ],
-         "explanation": "If + it rains (hiện tại đơn), + we will stay at home. Dấu phẩy sau mệnh đề If.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "will rain,"
+         ],
+         "explanation": "If + it rains (hiện tại đơn), + we will stay at home. Dấu phẩy sau mệnh đề If."
         },
         {
          "key": "o2",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "If",
           "we recycle paper,",
           "we will save",
           "many trees."
          ],
-         "explanation": "If + hiện tại đơn, + will + V.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "we would save"
+         ],
+         "explanation": "If + hiện tại đơn, + will + V."
         },
         {
          "key": "o3",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "If",
           "you",
           "drop litter,",
@@ -4635,14 +5761,14 @@
           "will be",
           "dirty."
          ],
-         "explanation": "If you drop litter, the park will be dirty.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "would be"
+         ],
+         "explanation": "If you drop litter, the park will be dirty."
         },
         {
          "key": "o4",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "Our city",
           "will have",
           "cleaner air",
@@ -4650,14 +5776,14 @@
           "people",
           "cycle more."
          ],
-         "explanation": "Mệnh đề chính đứng trước thì không có dấu phẩy: Our city will have cleaner air if people cycle more.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "will cycle more."
+         ],
+         "explanation": "Mệnh đề chính đứng trước thì không có dấu phẩy: Our city will have cleaner air if people cycle more."
         },
         {
          "key": "o5",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "Will",
           "the animals",
           "survive",
@@ -4665,13 +5791,15 @@
           "we destroy",
           "the forest?"
          ],
-         "explanation": "Câu hỏi: Will + S + V + if + hiện tại đơn?",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "will destroy"
+         ],
+         "explanation": "Câu hỏi: Will + S + V + if + hiện tại đơn?"
         }
        ]
       }
-     ]
+     ],
+     "activity": "grammar"
     },
     {
      "key": "ta8.nguyen_nhan",
@@ -4806,6 +5934,214 @@
      "requires": [],
      "requires_note": null,
      "games": [
+      {
+       "game": "story_detective",
+       "title": "Thám tử: A greener school",
+       "tasks": [
+        {
+         "passage": "Last month, students at our school started a project called \"Green Steps\". The idea was simple: if every class makes small changes, the whole school will become greener.\n\nFirst, each class put two bins in the classroom: one for paper and one for plastic. Every Friday, the class monitors take the paper to a recycling centre near the school. Second, students now bring their own water bottles, so the canteen sells far fewer plastic bottles than before. Third, the last person to leave a room must switch off the lights and the fans.\n\nThe results are already clear. Our school collected more than 200 kilograms of paper in four weeks, and the electricity bill is lower. Some students also planted vegetables in an empty corner of the schoolyard.\n\nNot everything is easy. Some students still forget to sort their rubbish, and a few classes do not care about the project. The project team hopes that if more students join, the school will win a green school prize next year.",
+         "lang": "en",
+         "question": "What is the idea behind \"Green Steps\"?",
+         "evidence": [
+          2
+         ],
+         "clue": "Tìm câu có “The idea was…” ở đoạn 1.",
+         "options": [
+          {
+           "text": "Small changes by every class can make the school greener.",
+           "ok": true,
+           "why": "Đúng: if every class makes small changes, the whole school will become greener."
+          },
+          {
+           "text": "Every class must plant a vegetable garden.",
+           "ok": false,
+           "why": "Trồng rau chỉ là việc một số bạn làm thêm, không phải ý tưởng chính."
+          },
+          {
+           "text": "The canteen should sell more water bottles.",
+           "ok": false,
+           "why": "Ngược lại: căng tin bán ít chai nhựa hơn trước."
+          }
+         ],
+         "explanation": "Câu ý chính nằm ở đoạn 1 và bao quát cả dự án: mỗi lớp thay đổi nhỏ thì cả trường sẽ xanh hơn.",
+         "key": "sto1"
+        },
+        {
+         "passage": "Last month, students at our school started a project called \"Green Steps\". The idea was simple: if every class makes small changes, the whole school will become greener.\n\nFirst, each class put two bins in the classroom: one for paper and one for plastic. Every Friday, the class monitors take the paper to a recycling centre near the school. Second, students now bring their own water bottles, so the canteen sells far fewer plastic bottles than before. Third, the last person to leave a room must switch off the lights and the fans.\n\nThe results are already clear. Our school collected more than 200 kilograms of paper in four weeks, and the electricity bill is lower. Some students also planted vegetables in an empty corner of the schoolyard.\n\nNot everything is easy. Some students still forget to sort their rubbish, and a few classes do not care about the project. The project team hopes that if more students join, the school will win a green school prize next year.",
+         "lang": "en",
+         "question": "Why does the canteen sell far fewer plastic bottles than before?",
+         "evidence": [
+          5
+         ],
+         "clue": "Tìm câu có “so” nối nguyên nhân với kết quả về chai nhựa.",
+         "options": [
+          {
+           "text": "Students bring their own water bottles.",
+           "ok": true,
+           "why": "Đúng: students now bring their own water bottles, so the canteen sells far fewer…"
+          },
+          {
+           "text": "Plastic bottles are more expensive now.",
+           "ok": false,
+           "why": "Bài không nói về giá chai nhựa."
+          },
+          {
+           "text": "The canteen has stopped selling drinks.",
+           "ok": false,
+           "why": "Căng tin vẫn bán, chỉ bán ít hơn nhiều (far fewer)."
+          }
+         ],
+         "explanation": "so (vì vậy) đứng trước kết quả: học sinh tự mang bình nước → căng tin bán ít chai nhựa hơn.",
+         "key": "sto2"
+        },
+        {
+         "passage": "Last month, students at our school started a project called \"Green Steps\". The idea was simple: if every class makes small changes, the whole school will become greener.\n\nFirst, each class put two bins in the classroom: one for paper and one for plastic. Every Friday, the class monitors take the paper to a recycling centre near the school. Second, students now bring their own water bottles, so the canteen sells far fewer plastic bottles than before. Third, the last person to leave a room must switch off the lights and the fans.\n\nThe results are already clear. Our school collected more than 200 kilograms of paper in four weeks, and the electricity bill is lower. Some students also planted vegetables in an empty corner of the schoolyard.\n\nNot everything is easy. Some students still forget to sort their rubbish, and a few classes do not care about the project. The project team hopes that if more students join, the school will win a green school prize next year.",
+         "lang": "en",
+         "question": "Who must switch off the lights and the fans?",
+         "evidence": [
+          6
+         ],
+         "clue": "Tìm câu bắt đầu bằng “Third” có “switch off”.",
+         "options": [
+          {
+           "text": "The last person to leave a room.",
+           "ok": true,
+           "why": "Đúng: the last person to leave a room must switch off the lights and the fans."
+          },
+          {
+           "text": "The class monitors.",
+           "ok": false,
+           "why": "Lớp trưởng mang giấy đến trung tâm tái chế mỗi thứ Sáu, không phải tắt đèn."
+          },
+          {
+           "text": "The project team.",
+           "ok": false,
+           "why": "Nhóm dự án chỉ được nhắc ở cuối bài với một mong muốn."
+          }
+         ],
+         "explanation": "the last person to leave = người cuối cùng rời phòng; must = phải. Đây là bước thứ ba của dự án.",
+         "key": "sto3"
+        },
+        {
+         "passage": "Last month, students at our school started a project called \"Green Steps\". The idea was simple: if every class makes small changes, the whole school will become greener.\n\nFirst, each class put two bins in the classroom: one for paper and one for plastic. Every Friday, the class monitors take the paper to a recycling centre near the school. Second, students now bring their own water bottles, so the canteen sells far fewer plastic bottles than before. Third, the last person to leave a room must switch off the lights and the fans.\n\nThe results are already clear. Our school collected more than 200 kilograms of paper in four weeks, and the electricity bill is lower. Some students also planted vegetables in an empty corner of the schoolyard.\n\nNot everything is easy. Some students still forget to sort their rubbish, and a few classes do not care about the project. The project team hopes that if more students join, the school will win a green school prize next year.",
+         "lang": "en",
+         "question": "In paragraph 3, the word \"clear\" in \"The results are already clear\" is closest in meaning to …",
+         "evidence": [
+          7
+         ],
+         "clue": "Tìm câu có từ clear rồi xem các câu sau nó đưa ra kết quả cụ thể.",
+         "options": [
+          {
+           "text": "easy to see",
+           "ok": true,
+           "why": "Đúng: ngay sau đó bài nêu kết quả rõ ràng bằng số liệu (hơn 200 kg giấy, tiền điện thấp hơn)."
+          },
+          {
+           "text": "clean",
+           "ok": false,
+           "why": "clear có thể nói về nước trong, nhưng ở đây nói về kết quả, không phải sự sạch sẽ."
+          },
+          {
+           "text": "finished",
+           "ok": false,
+           "why": "Dự án vẫn đang tiếp tục (còn khó khăn, còn mong muốn năm sau), nên không phải đã kết thúc."
+          },
+          {
+           "text": "difficult",
+           "ok": false,
+           "why": "Ngược nghĩa: kết quả dễ thấy chứ không khó."
+          }
+         ],
+         "explanation": "Đoán nghĩa từ theo ngữ cảnh: “kết quả đã clear” rồi liệt kê kết quả cụ thể → clear = rõ ràng, dễ thấy.",
+         "key": "sto4"
+        },
+        {
+         "passage": "Last month, students at our school started a project called \"Green Steps\". The idea was simple: if every class makes small changes, the whole school will become greener.\n\nFirst, each class put two bins in the classroom: one for paper and one for plastic. Every Friday, the class monitors take the paper to a recycling centre near the school. Second, students now bring their own water bottles, so the canteen sells far fewer plastic bottles than before. Third, the last person to leave a room must switch off the lights and the fans.\n\nThe results are already clear. Our school collected more than 200 kilograms of paper in four weeks, and the electricity bill is lower. Some students also planted vegetables in an empty corner of the schoolyard.\n\nNot everything is easy. Some students still forget to sort their rubbish, and a few classes do not care about the project. The project team hopes that if more students join, the school will win a green school prize next year.",
+         "lang": "en",
+         "question": "How much paper did the school collect in four weeks?",
+         "evidence": [
+          8
+         ],
+         "clue": "Tìm câu có “kilograms of paper”.",
+         "options": [
+          {
+           "text": "More than 200 kilograms.",
+           "ok": true,
+           "why": "Đúng: Our school collected more than 200 kilograms of paper in four weeks."
+          },
+          {
+           "text": "Exactly 200 kilograms.",
+           "ok": false,
+           "why": "more than = hơn: bài nói hơn 200 kg, không phải đúng 200 kg."
+          },
+          {
+           "text": "Four kilograms.",
+           "ok": false,
+           "why": "Bốn là số tuần (four weeks), không phải số ki-lô-gam."
+          }
+         ],
+         "explanation": "more than 200 kilograms = hơn 200 ki-lô-gam, thu được trong bốn tuần.",
+         "key": "sto5"
+        },
+        {
+         "passage": "Last month, students at our school started a project called \"Green Steps\". The idea was simple: if every class makes small changes, the whole school will become greener.\n\nFirst, each class put two bins in the classroom: one for paper and one for plastic. Every Friday, the class monitors take the paper to a recycling centre near the school. Second, students now bring their own water bottles, so the canteen sells far fewer plastic bottles than before. Third, the last person to leave a room must switch off the lights and the fans.\n\nThe results are already clear. Our school collected more than 200 kilograms of paper in four weeks, and the electricity bill is lower. Some students also planted vegetables in an empty corner of the schoolyard.\n\nNot everything is easy. Some students still forget to sort their rubbish, and a few classes do not care about the project. The project team hopes that if more students join, the school will win a green school prize next year.",
+         "lang": "en",
+         "question": "Which problem does the project still have?",
+         "evidence": [
+          11
+         ],
+         "clue": "Đoạn cuối nói về khó khăn (Not everything is easy): tìm câu nêu khó khăn cụ thể.",
+         "options": [
+          {
+           "text": "Some students forget to sort their rubbish.",
+           "ok": true,
+           "why": "Đúng: Some students still forget to sort their rubbish."
+          },
+          {
+           "text": "The electricity bill is higher.",
+           "ok": false,
+           "why": "Bài nói hóa đơn tiền điện thấp hơn (lower)."
+          },
+          {
+           "text": "The recycling centre is far from the school.",
+           "ok": false,
+           "why": "Trung tâm tái chế ở gần trường (near the school)."
+          }
+         ],
+         "explanation": "still forget = vẫn quên; sort rubbish = phân loại rác. Đây là khó khăn còn lại, cùng với việc vài lớp không quan tâm.",
+         "key": "sto6"
+        },
+        {
+         "passage": "Last month, students at our school started a project called \"Green Steps\". The idea was simple: if every class makes small changes, the whole school will become greener.\n\nFirst, each class put two bins in the classroom: one for paper and one for plastic. Every Friday, the class monitors take the paper to a recycling centre near the school. Second, students now bring their own water bottles, so the canteen sells far fewer plastic bottles than before. Third, the last person to leave a room must switch off the lights and the fans.\n\nThe results are already clear. Our school collected more than 200 kilograms of paper in four weeks, and the electricity bill is lower. Some students also planted vegetables in an empty corner of the schoolyard.\n\nNot everything is easy. Some students still forget to sort their rubbish, and a few classes do not care about the project. The project team hopes that if more students join, the school will win a green school prize next year.",
+         "lang": "en",
+         "question": "What does the project team hope?",
+         "evidence": [
+          12
+         ],
+         "clue": "Tìm câu có từ “hopes”.",
+         "options": [
+          {
+           "text": "To win a green school prize if more students join.",
+           "ok": true,
+           "why": "Đúng: if more students join, the school will win a green school prize next year."
+          },
+          {
+           "text": "To build a recycling centre in the school.",
+           "ok": false,
+           "why": "Bài không nói xây trung tâm tái chế; trung tâm đã có sẵn gần trường."
+          },
+          {
+           "text": "To stop using electricity.",
+           "ok": false,
+           "why": "Bài chỉ nói tiết kiệm điện (tắt đèn, quạt), không phải ngừng dùng điện."
+          }
+         ],
+         "explanation": "Câu điều kiện if more students join → the school will win…: muốn đạt giải trường xanh thì cần thêm nhiều bạn tham gia.",
+         "key": "sto7"
+        }
+       ],
+       "credit_from": "choice"
+      },
       {
        "game": "choice",
        "title": "Đọc và trả lời",
@@ -5280,79 +6616,81 @@
        ]
       },
       {
-       "game": "order",
-       "title": "Xếp câu hiện tại hoàn thành",
+       "game": "sentence",
+       "title": "Xây câu hiện tại hoàn thành",
+       "credit_from": "order",
        "tasks": [
         {
          "key": "o1",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "She",
           "has",
           "lived",
           "here",
           "since 2019."
          ],
-         "explanation": "S + has + V3 + nơi chốn + since + mốc thời gian.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "for 2019."
+         ],
+         "explanation": "S + has + V3 + nơi chốn + since + mốc thời gian."
         },
         {
          "key": "o2",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "Have",
           "you",
           "finished",
           "your project?"
          ],
-         "explanation": "Câu hỏi: Have + you + V3 + …?",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "Has"
+         ],
+         "explanation": "Câu hỏi: Have + you + V3 + …?"
         },
         {
          "key": "o3",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "They",
           "haven't",
           "met",
           "our new teacher."
          ],
-         "explanation": "Phủ định: haven't + V3 (meet – met – met).",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "meet"
+         ],
+         "explanation": "Phủ định: haven't + V3 (meet – met – met)."
         },
         {
          "key": "o4",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "How long",
           "have",
           "you",
           "known",
           "Minh?"
          ],
-         "explanation": "How long + have + S + V3…? hỏi việc đã kéo dài bao lâu.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "knew"
+         ],
+         "explanation": "How long + have + S + V3…? hỏi việc đã kéo dài bao lâu."
         },
         {
          "key": "o5",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "My parents",
           "have",
           "bought",
           "a new laptop."
          ],
-         "explanation": "My parents + have + bought (buy – bought – bought) + a new laptop.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "has"
+         ],
+         "explanation": "My parents + have + bought (buy – bought – bought) + a new laptop."
         }
        ]
       }
-     ]
+     ],
+     "activity": "grammar"
     },
     {
      "key": "ta9.doc_tieng_anh",
@@ -5377,6 +6715,225 @@
      "requires": [],
      "requires_note": null,
      "games": [
+      {
+       "game": "story_detective",
+       "title": "Thám tử: English around the world",
+       "tasks": [
+        {
+         "passage": "Have you ever wondered why so many people learn English? Today, English is used in many countries around the world. In some countries, such as the United Kingdom, the United States and Australia, it is the first language of most people. In others, such as Singapore and India, it is an official language used in schools, offices and courts. And in many more countries, including Viet Nam, students learn it as a foreign language.\n\nHundreds of millions of people have learnt English as a second or foreign language. Many of them use it to study, travel or work with people from other countries. A doctor in Japan and a doctor in Brazil, for example, may read the same research in English.\n\nLearning English has also become easier. Young people have grown up with films, songs and websites in English, and many have taken online courses. However, good learners know that apps are not enough. They practise speaking every day, they are not afraid of making mistakes, and they read things they enjoy.\n\nMy cousin has studied English for six years. She has never lived abroad, but she speaks it well because she watches English videos and chats with an online pen friend every week.",
+         "lang": "en",
+         "question": "In which country is English an official language?",
+         "evidence": [
+          4
+         ],
+         "clue": "Tìm câu có cụm “official language”.",
+         "options": [
+          {
+           "text": "Singapore.",
+           "ok": true,
+           "why": "Đúng: In others, such as Singapore and India, it is an official language…"
+          },
+          {
+           "text": "Australia.",
+           "ok": false,
+           "why": "Ở Úc, tiếng Anh là ngôn ngữ thứ nhất (first language) của đa số người dân."
+          },
+          {
+           "text": "Viet Nam.",
+           "ok": false,
+           "why": "Ở Việt Nam, học sinh học tiếng Anh như một ngoại ngữ (foreign language)."
+          },
+          {
+           "text": "Brazil.",
+           "ok": false,
+           "why": "Brazil chỉ xuất hiện trong ví dụ về hai bác sĩ."
+          }
+         ],
+         "explanation": "official language = ngôn ngữ chính thức, dùng ở trường học, công sở và tòa án; such as giới thiệu ví dụ: Singapore, India.",
+         "key": "sto1"
+        },
+        {
+         "passage": "Have you ever wondered why so many people learn English? Today, English is used in many countries around the world. In some countries, such as the United Kingdom, the United States and Australia, it is the first language of most people. In others, such as Singapore and India, it is an official language used in schools, offices and courts. And in many more countries, including Viet Nam, students learn it as a foreign language.\n\nHundreds of millions of people have learnt English as a second or foreign language. Many of them use it to study, travel or work with people from other countries. A doctor in Japan and a doctor in Brazil, for example, may read the same research in English.\n\nLearning English has also become easier. Young people have grown up with films, songs and websites in English, and many have taken online courses. However, good learners know that apps are not enough. They practise speaking every day, they are not afraid of making mistakes, and they read things they enjoy.\n\nMy cousin has studied English for six years. She has never lived abroad, but she speaks it well because she watches English videos and chats with an online pen friend every week.",
+         "lang": "en",
+         "question": "What do many people use English for?",
+         "evidence": [
+          7
+         ],
+         "clue": "Tìm câu có “use it to…”.",
+         "options": [
+          {
+           "text": "To study, travel or work with people from other countries.",
+           "ok": true,
+           "why": "Đúng: Many of them use it to study, travel or work with people from other countries."
+          },
+          {
+           "text": "Only to watch films and listen to songs.",
+           "ok": false,
+           "why": "Phim và bài hát giúp việc học dễ hơn, nhưng bài không nói người ta chỉ dùng tiếng Anh để giải trí."
+          },
+          {
+           "text": "To talk with their parents at home.",
+           "ok": false,
+           "why": "Bài không nói dùng tiếng Anh nói chuyện với bố mẹ."
+          }
+         ],
+         "explanation": "use it to + động từ: dùng nó để làm gì. Người học dùng tiếng Anh để học, du lịch hoặc làm việc với người nước khác.",
+         "key": "sto2"
+        },
+        {
+         "passage": "Have you ever wondered why so many people learn English? Today, English is used in many countries around the world. In some countries, such as the United Kingdom, the United States and Australia, it is the first language of most people. In others, such as Singapore and India, it is an official language used in schools, offices and courts. And in many more countries, including Viet Nam, students learn it as a foreign language.\n\nHundreds of millions of people have learnt English as a second or foreign language. Many of them use it to study, travel or work with people from other countries. A doctor in Japan and a doctor in Brazil, for example, may read the same research in English.\n\nLearning English has also become easier. Young people have grown up with films, songs and websites in English, and many have taken online courses. However, good learners know that apps are not enough. They practise speaking every day, they are not afraid of making mistakes, and they read things they enjoy.\n\nMy cousin has studied English for six years. She has never lived abroad, but she speaks it well because she watches English videos and chats with an online pen friend every week.",
+         "lang": "en",
+         "question": "What does the example of the two doctors show?",
+         "evidence": [
+          8
+         ],
+         "clue": "Tìm câu có “for example” ở đoạn 2.",
+         "options": [
+          {
+           "text": "People in different countries can share research in English.",
+           "ok": true,
+           "why": "Đúng: hai bác sĩ ở Nhật và Brazil có thể đọc cùng một nghiên cứu bằng tiếng Anh."
+          },
+          {
+           "text": "The two doctors work in the same hospital.",
+           "ok": false,
+           "why": "Một người ở Nhật, một người ở Brazil, nên không cùng bệnh viện."
+          },
+          {
+           "text": "Doctors must live abroad to learn English.",
+           "ok": false,
+           "why": "Bài không nói vậy; người em họ còn giỏi tiếng Anh dù chưa từng ra nước ngoài."
+          }
+         ],
+         "explanation": "for example minh họa cho câu trước: người ta dùng tiếng Anh để làm việc với người nước khác, như đọc chung một nghiên cứu.",
+         "key": "sto3"
+        },
+        {
+         "passage": "Have you ever wondered why so many people learn English? Today, English is used in many countries around the world. In some countries, such as the United Kingdom, the United States and Australia, it is the first language of most people. In others, such as Singapore and India, it is an official language used in schools, offices and courts. And in many more countries, including Viet Nam, students learn it as a foreign language.\n\nHundreds of millions of people have learnt English as a second or foreign language. Many of them use it to study, travel or work with people from other countries. A doctor in Japan and a doctor in Brazil, for example, may read the same research in English.\n\nLearning English has also become easier. Young people have grown up with films, songs and websites in English, and many have taken online courses. However, good learners know that apps are not enough. They practise speaking every day, they are not afraid of making mistakes, and they read things they enjoy.\n\nMy cousin has studied English for six years. She has never lived abroad, but she speaks it well because she watches English videos and chats with an online pen friend every week.",
+         "lang": "en",
+         "question": "Why has learning English become easier for young people?",
+         "evidence": [
+          10
+         ],
+         "clue": "Câu “has also become easier” chỉ nêu ý; lí do ở câu ngay sau.",
+         "options": [
+          {
+           "text": "They have grown up with films, songs and websites in English.",
+           "ok": true,
+           "why": "Đúng: Young people have grown up with films, songs and websites in English…"
+          },
+          {
+           "text": "English is now the first language in Viet Nam.",
+           "ok": false,
+           "why": "Ở Việt Nam, tiếng Anh là ngoại ngữ (foreign language)."
+          },
+          {
+           "text": "Apps are enough to learn it well.",
+           "ok": false,
+           "why": "Bài nói ngược lại: apps are not enough."
+          }
+         ],
+         "explanation": "have grown up with = lớn lên cùng (hiện tại hoàn thành). Lớn lên cùng phim, nhạc, trang web tiếng Anh và học trực tuyến nên việc học dễ hơn.",
+         "key": "sto4"
+        },
+        {
+         "passage": "Have you ever wondered why so many people learn English? Today, English is used in many countries around the world. In some countries, such as the United Kingdom, the United States and Australia, it is the first language of most people. In others, such as Singapore and India, it is an official language used in schools, offices and courts. And in many more countries, including Viet Nam, students learn it as a foreign language.\n\nHundreds of millions of people have learnt English as a second or foreign language. Many of them use it to study, travel or work with people from other countries. A doctor in Japan and a doctor in Brazil, for example, may read the same research in English.\n\nLearning English has also become easier. Young people have grown up with films, songs and websites in English, and many have taken online courses. However, good learners know that apps are not enough. They practise speaking every day, they are not afraid of making mistakes, and they read things they enjoy.\n\nMy cousin has studied English for six years. She has never lived abroad, but she speaks it well because she watches English videos and chats with an online pen friend every week.",
+         "lang": "en",
+         "question": "In paragraph 3, the word \"However\" shows that the next idea …",
+         "evidence": [
+          11
+         ],
+         "clue": "Tìm câu bắt đầu bằng However.",
+         "options": [
+          {
+           "text": "is different from the idea before it",
+           "ok": true,
+           "why": "Đúng: trước đó nói học dễ hơn nhờ phim, khóa học trực tuyến; sau However: ứng dụng thôi là chưa đủ."
+          },
+          {
+           "text": "gives an example",
+           "ok": false,
+           "why": "Ví dụ thường đi với for example, such as."
+          },
+          {
+           "text": "gives a reason",
+           "ok": false,
+           "why": "Lí do thường đi với because."
+          },
+          {
+           "text": "repeats the idea before it",
+           "ok": false,
+           "why": "However báo hiệu ý trái ngược, không lặp lại."
+          }
+         ],
+         "explanation": "However (tuy nhiên) báo hiệu ý trái ngược: học dễ hơn nhờ công nghệ, nhưng người học giỏi biết rằng ứng dụng là chưa đủ.",
+         "key": "sto5"
+        },
+        {
+         "passage": "Have you ever wondered why so many people learn English? Today, English is used in many countries around the world. In some countries, such as the United Kingdom, the United States and Australia, it is the first language of most people. In others, such as Singapore and India, it is an official language used in schools, offices and courts. And in many more countries, including Viet Nam, students learn it as a foreign language.\n\nHundreds of millions of people have learnt English as a second or foreign language. Many of them use it to study, travel or work with people from other countries. A doctor in Japan and a doctor in Brazil, for example, may read the same research in English.\n\nLearning English has also become easier. Young people have grown up with films, songs and websites in English, and many have taken online courses. However, good learners know that apps are not enough. They practise speaking every day, they are not afraid of making mistakes, and they read things they enjoy.\n\nMy cousin has studied English for six years. She has never lived abroad, but she speaks it well because she watches English videos and chats with an online pen friend every week.",
+         "lang": "en",
+         "question": "Which is NOT something good learners do, according to the passage?",
+         "evidence": [
+          11,
+          12
+         ],
+         "clue": "Đọc câu có “good learners” và câu ngay sau nó liệt kê việc họ làm.",
+         "options": [
+          {
+           "text": "They only use learning apps.",
+           "ok": true,
+           "why": "Đúng: bài nói apps are not enough – người học giỏi không chỉ dùng ứng dụng."
+          },
+          {
+           "text": "They practise speaking every day.",
+           "ok": false,
+           "why": "Có trong bài: They practise speaking every day."
+          },
+          {
+           "text": "They are not afraid of making mistakes.",
+           "ok": false,
+           "why": "Có trong bài: they are not afraid of making mistakes."
+          },
+          {
+           "text": "They read things they enjoy.",
+           "ok": false,
+           "why": "Có trong bài: they read things they enjoy."
+          }
+         ],
+         "explanation": "Câu hỏi NOT: tìm phương án không có trong bài. Ba việc kia được liệt kê ở câu 12; còn “chỉ dùng app” trái với câu 11.",
+         "key": "sto6"
+        },
+        {
+         "passage": "Have you ever wondered why so many people learn English? Today, English is used in many countries around the world. In some countries, such as the United Kingdom, the United States and Australia, it is the first language of most people. In others, such as Singapore and India, it is an official language used in schools, offices and courts. And in many more countries, including Viet Nam, students learn it as a foreign language.\n\nHundreds of millions of people have learnt English as a second or foreign language. Many of them use it to study, travel or work with people from other countries. A doctor in Japan and a doctor in Brazil, for example, may read the same research in English.\n\nLearning English has also become easier. Young people have grown up with films, songs and websites in English, and many have taken online courses. However, good learners know that apps are not enough. They practise speaking every day, they are not afraid of making mistakes, and they read things they enjoy.\n\nMy cousin has studied English for six years. She has never lived abroad, but she speaks it well because she watches English videos and chats with an online pen friend every week.",
+         "lang": "en",
+         "question": "Has the writer's cousin ever lived abroad?",
+         "evidence": [
+          14
+         ],
+         "clue": "Tìm câu có “lived abroad”.",
+         "options": [
+          {
+           "text": "No, she has never lived abroad.",
+           "ok": true,
+           "why": "Đúng: She has never lived abroad, but she speaks it well…"
+          },
+          {
+           "text": "Yes, for six years.",
+           "ok": false,
+           "why": "Sáu năm là thời gian cô học tiếng Anh (has studied English for six years)."
+          },
+          {
+           "text": "Yes, with her pen friend.",
+           "ok": false,
+           "why": "Cô chỉ trò chuyện trực tuyến với bạn qua thư (online pen friend)."
+          }
+         ],
+         "explanation": "has never lived abroad = chưa bao giờ sống ở nước ngoài; cô giỏi tiếng Anh nhờ xem video và trò chuyện với bạn trên mạng.",
+         "key": "sto7"
+        }
+       ],
+       "credit_from": "choice"
+      },
       {
        "game": "choice",
        "title": "Đọc và trả lời",
@@ -6002,91 +7559,93 @@
        ]
       },
       {
-       "game": "order",
-       "title": "Xếp câu bị động",
+       "game": "sentence",
+       "title": "Xây câu bị động",
+       "credit_from": "order",
        "tasks": [
         {
          "key": "o1",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "The house",
           "was",
           "built",
           "in 1990."
          ],
-         "explanation": "S + was + V3 + thời gian.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "build"
+         ],
+         "explanation": "S + was + V3 + thời gian."
         },
         {
          "key": "o2",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "Rice",
           "is",
           "grown",
           "in many parts",
           "of Viet Nam."
          ],
-         "explanation": "Rice + is grown + nơi chốn: Lúa được trồng ở nhiều vùng của Việt Nam.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "grew"
+         ],
+         "explanation": "Rice + is grown + nơi chốn: Lúa được trồng ở nhiều vùng của Việt Nam."
         },
         {
          "key": "o3",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "The new library",
           "will be",
           "opened",
           "next month."
          ],
-         "explanation": "Bị động tương lai: will be + V3.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "will open"
+         ],
+         "explanation": "Bị động tương lai: will be + V3."
         },
         {
          "key": "o4",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "Was",
           "this song",
           "written",
           "by a student?"
          ],
-         "explanation": "Câu hỏi bị động quá khứ: Was + S + V3 + by…?",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "wrote"
+         ],
+         "explanation": "Câu hỏi bị động quá khứ: Was + S + V3 + by…?"
         },
         {
          "key": "o5",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "Our homework",
           "must be",
           "handed in",
           "on Friday."
          ],
-         "explanation": "Modal bị động: must be + V3 (hand in – nộp bài).",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "hand in"
+         ],
+         "explanation": "Modal bị động: must be + V3 (hand in – nộp bài)."
         },
         {
          "key": "o6",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "These photos",
           "were",
           "taken",
           "by my sister."
          ],
-         "explanation": "Số nhiều: were + V3 (take – took – taken).",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "was"
+         ],
+         "explanation": "Số nhiều: were + V3 (take – took – taken)."
         }
        ]
       }
-     ]
+     ],
+     "activity": "grammar"
     },
     {
      "key": "ta10.tinh_nguyen",
@@ -6324,6 +7883,224 @@
      "requires": [],
      "requires_note": null,
      "games": [
+      {
+       "game": "story_detective",
+       "title": "Thám tử: Ecotourism",
+       "tasks": [
+        {
+         "passage": "Ecotourism is a kind of travel that protects nature and supports local people. Instead of staying in big hotels and visiting crowded places, eco-tourists often stay in small homestays, eat local food and join activities led by local guides.\n\nA good ecotourism trip follows three main ideas. First, it causes as little harm as possible to the environment. Visitors keep to the paths, do not leave rubbish and never feed or touch wild animals. Second, it helps local communities: the money tourists spend goes to local families, not only to large companies. Third, it teaches visitors about nature and culture, so they return home with a better understanding of the places they have seen.\n\nHowever, ecotourism is not always as green as it sounds. Some companies call their tours \"eco\" just to attract customers, while their boats pollute the water and their groups are far too large. Even real ecotourism can damage a place if too many people go there at the same time.\n\nSo how can you be a responsible traveller? Choose tour operators that limit group sizes, ask where your money goes, and respect the rules of protected areas. Small choices made by millions of travellers can make a big difference.",
+         "lang": "en",
+         "question": "Where do eco-tourists often stay?",
+         "evidence": [
+          2
+         ],
+         "clue": "Tìm câu có từ “stay”.",
+         "options": [
+          {
+           "text": "In small homestays.",
+           "ok": true,
+           "why": "Đúng: eco-tourists often stay in small homestays."
+          },
+          {
+           "text": "In big hotels.",
+           "ok": false,
+           "why": "Instead of staying in big hotels = thay vì ở khách sạn lớn."
+          },
+          {
+           "text": "In crowded places.",
+           "ok": false,
+           "why": "Du khách sinh thái tránh những nơi đông đúc (instead of visiting crowded places)."
+          },
+          {
+           "text": "In tents in the forest.",
+           "ok": false,
+           "why": "Bài không nhắc đến lều trong rừng."
+          }
+         ],
+         "explanation": "Instead of… (thay vì) nêu điều họ không làm; phần sau mới là điều họ làm: ở homestay nhỏ, ăn món địa phương.",
+         "key": "sto1"
+        },
+        {
+         "passage": "Ecotourism is a kind of travel that protects nature and supports local people. Instead of staying in big hotels and visiting crowded places, eco-tourists often stay in small homestays, eat local food and join activities led by local guides.\n\nA good ecotourism trip follows three main ideas. First, it causes as little harm as possible to the environment. Visitors keep to the paths, do not leave rubbish and never feed or touch wild animals. Second, it helps local communities: the money tourists spend goes to local families, not only to large companies. Third, it teaches visitors about nature and culture, so they return home with a better understanding of the places they have seen.\n\nHowever, ecotourism is not always as green as it sounds. Some companies call their tours \"eco\" just to attract customers, while their boats pollute the water and their groups are far too large. Even real ecotourism can damage a place if too many people go there at the same time.\n\nSo how can you be a responsible traveller? Choose tour operators that limit group sizes, ask where your money goes, and respect the rules of protected areas. Small choices made by millions of travellers can make a big difference.",
+         "lang": "en",
+         "question": "Which behaviour helps a trip cause \"as little harm as possible\"?",
+         "evidence": [
+          5
+         ],
+         "clue": "Câu First… nêu ý; câu ngay sau liệt kê việc du khách làm.",
+         "options": [
+          {
+           "text": "Keeping to the paths.",
+           "ok": true,
+           "why": "Đúng: Visitors keep to the paths, do not leave rubbish…"
+          },
+          {
+           "text": "Feeding wild animals.",
+           "ok": false,
+           "why": "Bài nói never feed or touch wild animals."
+          },
+          {
+           "text": "Staying in big hotels.",
+           "ok": false,
+           "why": "Du khách sinh thái ở homestay nhỏ thay vì khách sạn lớn."
+          }
+         ],
+         "explanation": "keep to the paths = đi đúng lối mòn; đây là một trong các việc giúp gây ít hại nhất cho môi trường.",
+         "key": "sto2"
+        },
+        {
+         "passage": "Ecotourism is a kind of travel that protects nature and supports local people. Instead of staying in big hotels and visiting crowded places, eco-tourists often stay in small homestays, eat local food and join activities led by local guides.\n\nA good ecotourism trip follows three main ideas. First, it causes as little harm as possible to the environment. Visitors keep to the paths, do not leave rubbish and never feed or touch wild animals. Second, it helps local communities: the money tourists spend goes to local families, not only to large companies. Third, it teaches visitors about nature and culture, so they return home with a better understanding of the places they have seen.\n\nHowever, ecotourism is not always as green as it sounds. Some companies call their tours \"eco\" just to attract customers, while their boats pollute the water and their groups are far too large. Even real ecotourism can damage a place if too many people go there at the same time.\n\nSo how can you be a responsible traveller? Choose tour operators that limit group sizes, ask where your money goes, and respect the rules of protected areas. Small choices made by millions of travellers can make a big difference.",
+         "lang": "en",
+         "question": "According to the passage, where should tourists' money go?",
+         "evidence": [
+          6
+         ],
+         "clue": "Tìm câu nói về ý thứ hai (Second) có từ “money”.",
+         "options": [
+          {
+           "text": "To local families.",
+           "ok": true,
+           "why": "Đúng: the money tourists spend goes to local families."
+          },
+          {
+           "text": "Only to large companies.",
+           "ok": false,
+           "why": "Bài nói not only to large companies – không chỉ cho các công ty lớn."
+          },
+          {
+           "text": "To the tour guides' schools.",
+           "ok": false,
+           "why": "Bài không nhắc đến trường học của hướng dẫn viên."
+          }
+         ],
+         "explanation": "Ý thứ hai: du lịch sinh thái giúp cộng đồng địa phương vì tiền du khách chi tiêu đến tay các gia đình ở đó.",
+         "key": "sto3"
+        },
+        {
+         "passage": "Ecotourism is a kind of travel that protects nature and supports local people. Instead of staying in big hotels and visiting crowded places, eco-tourists often stay in small homestays, eat local food and join activities led by local guides.\n\nA good ecotourism trip follows three main ideas. First, it causes as little harm as possible to the environment. Visitors keep to the paths, do not leave rubbish and never feed or touch wild animals. Second, it helps local communities: the money tourists spend goes to local families, not only to large companies. Third, it teaches visitors about nature and culture, so they return home with a better understanding of the places they have seen.\n\nHowever, ecotourism is not always as green as it sounds. Some companies call their tours \"eco\" just to attract customers, while their boats pollute the water and their groups are far too large. Even real ecotourism can damage a place if too many people go there at the same time.\n\nSo how can you be a responsible traveller? Choose tour operators that limit group sizes, ask where your money goes, and respect the rules of protected areas. Small choices made by millions of travellers can make a big difference.",
+         "lang": "en",
+         "question": "What is the third main idea of a good ecotourism trip?",
+         "evidence": [
+          7
+         ],
+         "clue": "Tìm câu bắt đầu bằng “Third”.",
+         "options": [
+          {
+           "text": "It teaches visitors about nature and culture.",
+           "ok": true,
+           "why": "Đúng: Third, it teaches visitors about nature and culture."
+          },
+          {
+           "text": "It helps local communities.",
+           "ok": false,
+           "why": "Đó là ý thứ hai (Second)."
+          },
+          {
+           "text": "It causes as little harm as possible.",
+           "ok": false,
+           "why": "Đó là ý thứ nhất (First)."
+          }
+         ],
+         "explanation": "First, Second, Third đánh dấu ba ý chính; ý thứ ba là giáo dục du khách về thiên nhiên và văn hóa.",
+         "key": "sto4"
+        },
+        {
+         "passage": "Ecotourism is a kind of travel that protects nature and supports local people. Instead of staying in big hotels and visiting crowded places, eco-tourists often stay in small homestays, eat local food and join activities led by local guides.\n\nA good ecotourism trip follows three main ideas. First, it causes as little harm as possible to the environment. Visitors keep to the paths, do not leave rubbish and never feed or touch wild animals. Second, it helps local communities: the money tourists spend goes to local families, not only to large companies. Third, it teaches visitors about nature and culture, so they return home with a better understanding of the places they have seen.\n\nHowever, ecotourism is not always as green as it sounds. Some companies call their tours \"eco\" just to attract customers, while their boats pollute the water and their groups are far too large. Even real ecotourism can damage a place if too many people go there at the same time.\n\nSo how can you be a responsible traveller? Choose tour operators that limit group sizes, ask where your money goes, and respect the rules of protected areas. Small choices made by millions of travellers can make a big difference.",
+         "lang": "en",
+         "question": "Why do some companies call their tours \"eco\"?",
+         "evidence": [
+          9
+         ],
+         "clue": "Tìm câu có chữ “eco” trong ngoặc kép.",
+         "options": [
+          {
+           "text": "Just to attract customers.",
+           "ok": true,
+           "why": "Đúng: Some companies call their tours \"eco\" just to attract customers."
+          },
+          {
+           "text": "Because their groups are small.",
+           "ok": false,
+           "why": "Bài nói đoàn của họ quá đông (far too large)."
+          },
+          {
+           "text": "Because their boats keep the water clean.",
+           "ok": false,
+           "why": "pollute = làm ô nhiễm: thuyền của họ làm bẩn nước."
+          }
+         ],
+         "explanation": "just to = chỉ để. Họ gắn mác “eco” chỉ để hút khách, trong khi thực tế lại gây ô nhiễm.",
+         "key": "sto5"
+        },
+        {
+         "passage": "Ecotourism is a kind of travel that protects nature and supports local people. Instead of staying in big hotels and visiting crowded places, eco-tourists often stay in small homestays, eat local food and join activities led by local guides.\n\nA good ecotourism trip follows three main ideas. First, it causes as little harm as possible to the environment. Visitors keep to the paths, do not leave rubbish and never feed or touch wild animals. Second, it helps local communities: the money tourists spend goes to local families, not only to large companies. Third, it teaches visitors about nature and culture, so they return home with a better understanding of the places they have seen.\n\nHowever, ecotourism is not always as green as it sounds. Some companies call their tours \"eco\" just to attract customers, while their boats pollute the water and their groups are far too large. Even real ecotourism can damage a place if too many people go there at the same time.\n\nSo how can you be a responsible traveller? Choose tour operators that limit group sizes, ask where your money goes, and respect the rules of protected areas. Small choices made by millions of travellers can make a big difference.",
+         "lang": "en",
+         "question": "The word \"damage\" in paragraph 3 is closest in meaning to …",
+         "evidence": [
+          10
+         ],
+         "clue": "Tìm câu có từ damage và xem điều gì gây ra nó.",
+         "options": [
+          {
+           "text": "harm",
+           "ok": true,
+           "why": "Đúng: quá nhiều người đến cùng lúc sẽ làm hại nơi đó; damage = harm."
+          },
+          {
+           "text": "protect",
+           "ok": false,
+           "why": "Ngược nghĩa: đông người quá không bảo vệ mà làm hại nơi đó."
+          },
+          {
+           "text": "visit",
+           "ok": false,
+           "why": "visit là ghé thăm; câu nói việc quá nhiều người đến thăm gây ra điều xấu."
+          },
+          {
+           "text": "clean",
+           "ok": false,
+           "why": "Đông người không làm sạch mà làm hỏng một nơi."
+          }
+         ],
+         "explanation": "Đoán nghĩa theo ngữ cảnh: đoạn 3 nói mặt trái (However), nên damage mang nghĩa xấu: gây hại, làm hỏng.",
+         "key": "sto6"
+        },
+        {
+         "passage": "Ecotourism is a kind of travel that protects nature and supports local people. Instead of staying in big hotels and visiting crowded places, eco-tourists often stay in small homestays, eat local food and join activities led by local guides.\n\nA good ecotourism trip follows three main ideas. First, it causes as little harm as possible to the environment. Visitors keep to the paths, do not leave rubbish and never feed or touch wild animals. Second, it helps local communities: the money tourists spend goes to local families, not only to large companies. Third, it teaches visitors about nature and culture, so they return home with a better understanding of the places they have seen.\n\nHowever, ecotourism is not always as green as it sounds. Some companies call their tours \"eco\" just to attract customers, while their boats pollute the water and their groups are far too large. Even real ecotourism can damage a place if too many people go there at the same time.\n\nSo how can you be a responsible traveller? Choose tour operators that limit group sizes, ask where your money goes, and respect the rules of protected areas. Small choices made by millions of travellers can make a big difference.",
+         "lang": "en",
+         "question": "Which is NOT advice in the last paragraph?",
+         "evidence": [
+          12
+         ],
+         "clue": "Tìm câu đưa ra lời khuyên bằng các động từ Choose, ask, respect.",
+         "options": [
+          {
+           "text": "Join the largest group you can find.",
+           "ok": true,
+           "why": "Đúng: bài khuyên chọn công ty giới hạn số người trong đoàn, tức đi đoàn nhỏ."
+          },
+          {
+           "text": "Choose tour operators that limit group sizes.",
+           "ok": false,
+           "why": "Có trong bài: Choose tour operators that limit group sizes."
+          },
+          {
+           "text": "Ask where your money goes.",
+           "ok": false,
+           "why": "Có trong bài: ask where your money goes."
+          },
+          {
+           "text": "Respect the rules of protected areas.",
+           "ok": false,
+           "why": "Có trong bài: respect the rules of protected areas."
+          }
+         ],
+         "explanation": "Câu hỏi NOT: tìm phương án không có (hoặc trái với) bài. limit group sizes = giới hạn số người, trái với đi đoàn đông nhất.",
+         "key": "sto7"
+        }
+       ],
+       "credit_from": "choice"
+      },
       {
        "game": "choice",
        "title": "Đọc và trả lời",
@@ -6824,82 +8601,81 @@
        ]
       },
       {
-       "game": "order",
-       "title": "Xếp câu có mệnh đề quan hệ",
+       "game": "sentence",
+       "title": "Xây câu có mệnh đề quan hệ",
+       "credit_from": "order",
        "tasks": [
         {
          "key": "o1",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "The girl",
           "who",
           "won the prize",
           "is",
           "my classmate."
          ],
-         "explanation": "Mệnh đề quan hệ who won the prize đứng ngay sau The girl.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "which"
+         ],
+         "explanation": "Mệnh đề quan hệ who won the prize đứng ngay sau The girl."
         },
         {
          "key": "o2",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "This is",
           "the house",
           "where",
           "my mother",
           "was born."
          ],
-         "explanation": "where thay cho the house (nơi chốn).",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "which"
+         ],
+         "explanation": "where thay cho the house (nơi chốn)."
         },
         {
          "key": "o3",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "I",
           "like",
           "books",
           "which",
           "have happy endings."
          ],
-         "explanation": "which have happy endings bổ nghĩa cho books.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "who"
+         ],
+         "explanation": "which have happy endings bổ nghĩa cho books."
         },
         {
          "key": "o4",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "Mr Nam,",
           "whose son",
           "is a doctor,",
           "lives",
           "next door."
          ],
-         "explanation": "Mệnh đề không xác định đặt giữa hai dấu phẩy: Mr Nam, whose son is a doctor, lives next door.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "explanation": "Mệnh đề không xác định đặt giữa hai dấu phẩy: Mr Nam, whose son is a doctor, lives next door."
         },
         {
          "key": "o5",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "The students",
           "who",
           "arrived late",
           "missed",
           "the bus."
          ],
-         "explanation": "who arrived late bổ nghĩa cho The students; động từ chính là missed.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "which"
+         ],
+         "explanation": "who arrived late bổ nghĩa cho The students; động từ chính là missed."
         }
        ]
       }
-     ]
+     ],
+     "activity": "grammar"
     },
     {
      "key": "ta11.thanh_pho",
@@ -6946,6 +8722,221 @@
      "requires": [],
      "requires_note": null,
      "games": [
+      {
+       "game": "story_detective",
+       "title": "Thám tử: Keeping heritage alive",
+       "tasks": [
+        {
+         "passage": "Every year, thousands of young volunteers across Viet Nam take part in activities to protect their local heritage. Some clean ancient temples and pagodas, some guide visitors around historic sites, and others record the stories that elderly people tell about their villages.\n\nHeritage is not only about famous places such as the Complex of Hue Monuments or Hoi An Ancient Town. It also includes traditions that cannot be touched: folk songs, festivals, crafts and even recipes. These \"intangible\" kinds of heritage are often the most fragile, because they live only in people's memories and skills. When the last craftsman of a village stops working, a skill which took centuries to develop can disappear in one generation.\n\nTechnology is helping in new ways. Students film master craftsmen at work, museums create 3D models of old buildings, and social media posts help young people discover traditions they had never heard of. However, experts warn that a video is not the same as a living tradition. A folk song survives only if people continue to sing it.\n\nThat is why many heritage projects now focus on teaching. Children who learn a craft from their grandparents, or who perform a traditional dance at a school festival, are doing more than having fun. They are making sure that their culture has a future.",
+         "lang": "en",
+         "question": "What do some volunteers record?",
+         "evidence": [
+          2
+         ],
+         "clue": "Tìm câu có động từ “record”.",
+         "options": [
+          {
+           "text": "The stories elderly people tell about their villages.",
+           "ok": true,
+           "why": "Đúng: others record the stories that elderly people tell about their villages."
+          },
+          {
+           "text": "Videos of famous temples.",
+           "ok": false,
+           "why": "Tình nguyện viên dọn dẹp đền chùa, không phải quay video đền chùa."
+          },
+          {
+           "text": "Old recipes from cookbooks.",
+           "ok": false,
+           "why": "Công thức nấu ăn chỉ được nêu là một loại di sản phi vật thể."
+          }
+         ],
+         "explanation": "record = ghi lại. Một số bạn ghi lại những câu chuyện người cao tuổi kể về làng mình.",
+         "key": "sto1"
+        },
+        {
+         "passage": "Every year, thousands of young volunteers across Viet Nam take part in activities to protect their local heritage. Some clean ancient temples and pagodas, some guide visitors around historic sites, and others record the stories that elderly people tell about their villages.\n\nHeritage is not only about famous places such as the Complex of Hue Monuments or Hoi An Ancient Town. It also includes traditions that cannot be touched: folk songs, festivals, crafts and even recipes. These \"intangible\" kinds of heritage are often the most fragile, because they live only in people's memories and skills. When the last craftsman of a village stops working, a skill which took centuries to develop can disappear in one generation.\n\nTechnology is helping in new ways. Students film master craftsmen at work, museums create 3D models of old buildings, and social media posts help young people discover traditions they had never heard of. However, experts warn that a video is not the same as a living tradition. A folk song survives only if people continue to sing it.\n\nThat is why many heritage projects now focus on teaching. Children who learn a craft from their grandparents, or who perform a traditional dance at a school festival, are doing more than having fun. They are making sure that their culture has a future.",
+         "lang": "en",
+         "question": "Which is an example of tangible heritage in the passage?",
+         "evidence": [
+          3
+         ],
+         "clue": "Di sản vật thể là nơi chốn, công trình: tìm câu nhắc đến famous places.",
+         "options": [
+          {
+           "text": "The Complex of Hue Monuments.",
+           "ok": true,
+           "why": "Đúng: Quần thể di tích Cố đô Huế là một famous place – di sản chạm vào được."
+          },
+          {
+           "text": "Folk songs.",
+           "ok": false,
+           "why": "Dân ca là truyền thống không chạm vào được (intangible)."
+          },
+          {
+           "text": "Festivals.",
+           "ok": false,
+           "why": "Lễ hội thuộc di sản phi vật thể (traditions that cannot be touched)."
+          },
+          {
+           "text": "Recipes.",
+           "ok": false,
+           "why": "Công thức nấu ăn cũng thuộc di sản phi vật thể."
+          }
+         ],
+         "explanation": "tangible = có thể chạm vào: đền chùa, quần thể di tích. Câu 4 liệt kê di sản phi vật thể: dân ca, lễ hội, nghề, công thức nấu ăn.",
+         "key": "sto2"
+        },
+        {
+         "passage": "Every year, thousands of young volunteers across Viet Nam take part in activities to protect their local heritage. Some clean ancient temples and pagodas, some guide visitors around historic sites, and others record the stories that elderly people tell about their villages.\n\nHeritage is not only about famous places such as the Complex of Hue Monuments or Hoi An Ancient Town. It also includes traditions that cannot be touched: folk songs, festivals, crafts and even recipes. These \"intangible\" kinds of heritage are often the most fragile, because they live only in people's memories and skills. When the last craftsman of a village stops working, a skill which took centuries to develop can disappear in one generation.\n\nTechnology is helping in new ways. Students film master craftsmen at work, museums create 3D models of old buildings, and social media posts help young people discover traditions they had never heard of. However, experts warn that a video is not the same as a living tradition. A folk song survives only if people continue to sing it.\n\nThat is why many heritage projects now focus on teaching. Children who learn a craft from their grandparents, or who perform a traditional dance at a school festival, are doing more than having fun. They are making sure that their culture has a future.",
+         "lang": "en",
+         "question": "The word \"fragile\" in paragraph 2 is closest in meaning to …",
+         "evidence": [
+          5,
+          6
+         ],
+         "clue": "Tìm câu có từ fragile và câu ngay sau nó cho ví dụ.",
+         "options": [
+          {
+           "text": "easily lost or damaged",
+           "ok": true,
+           "why": "Đúng: chúng chỉ sống trong trí nhớ con người và có thể biến mất trong một thế hệ."
+          },
+          {
+           "text": "very old and famous",
+           "ok": false,
+           "why": "Bài không dùng fragile để nói về sự nổi tiếng."
+          },
+          {
+           "text": "strong and lasting",
+           "ok": false,
+           "why": "Ngược nghĩa: di sản này dễ mất, không bền vững."
+          },
+          {
+           "text": "beautiful and colourful",
+           "ok": false,
+           "why": "fragile không nói về vẻ đẹp; lí do đi sau because nói về việc dễ mất."
+          }
+         ],
+         "explanation": "fragile = mong manh, dễ mất. Câu sau minh họa: nghệ nhân cuối cùng nghỉ thì một nghề có thể mất trong một thế hệ.",
+         "key": "sto3"
+        },
+        {
+         "passage": "Every year, thousands of young volunteers across Viet Nam take part in activities to protect their local heritage. Some clean ancient temples and pagodas, some guide visitors around historic sites, and others record the stories that elderly people tell about their villages.\n\nHeritage is not only about famous places such as the Complex of Hue Monuments or Hoi An Ancient Town. It also includes traditions that cannot be touched: folk songs, festivals, crafts and even recipes. These \"intangible\" kinds of heritage are often the most fragile, because they live only in people's memories and skills. When the last craftsman of a village stops working, a skill which took centuries to develop can disappear in one generation.\n\nTechnology is helping in new ways. Students film master craftsmen at work, museums create 3D models of old buildings, and social media posts help young people discover traditions they had never heard of. However, experts warn that a video is not the same as a living tradition. A folk song survives only if people continue to sing it.\n\nThat is why many heritage projects now focus on teaching. Children who learn a craft from their grandparents, or who perform a traditional dance at a school festival, are doing more than having fun. They are making sure that their culture has a future.",
+         "lang": "en",
+         "question": "What can happen when the last craftsman of a village stops working?",
+         "evidence": [
+          6
+         ],
+         "clue": "Tìm câu có “the last craftsman”.",
+         "options": [
+          {
+           "text": "A skill can disappear in one generation.",
+           "ok": true,
+           "why": "Đúng: a skill which took centuries to develop can disappear in one generation."
+          },
+          {
+           "text": "The village becomes a famous site.",
+           "ok": false,
+           "why": "Bài không nói vậy."
+          },
+          {
+           "text": "Students film him at work.",
+           "ok": false,
+           "why": "Quay phim nghệ nhân là cách công nghệ giúp đỡ, không phải điều xảy ra khi nghệ nhân nghỉ."
+          }
+         ],
+         "explanation": "generation = thế hệ. Một nghề mất hàng thế kỉ để hình thành có thể biến mất chỉ trong một thế hệ.",
+         "key": "sto4"
+        },
+        {
+         "passage": "Every year, thousands of young volunteers across Viet Nam take part in activities to protect their local heritage. Some clean ancient temples and pagodas, some guide visitors around historic sites, and others record the stories that elderly people tell about their villages.\n\nHeritage is not only about famous places such as the Complex of Hue Monuments or Hoi An Ancient Town. It also includes traditions that cannot be touched: folk songs, festivals, crafts and even recipes. These \"intangible\" kinds of heritage are often the most fragile, because they live only in people's memories and skills. When the last craftsman of a village stops working, a skill which took centuries to develop can disappear in one generation.\n\nTechnology is helping in new ways. Students film master craftsmen at work, museums create 3D models of old buildings, and social media posts help young people discover traditions they had never heard of. However, experts warn that a video is not the same as a living tradition. A folk song survives only if people continue to sing it.\n\nThat is why many heritage projects now focus on teaching. Children who learn a craft from their grandparents, or who perform a traditional dance at a school festival, are doing more than having fun. They are making sure that their culture has a future.",
+         "lang": "en",
+         "question": "How are museums using technology?",
+         "evidence": [
+          8
+         ],
+         "clue": "Tìm câu có từ “museums”.",
+         "options": [
+          {
+           "text": "They create 3D models of old buildings.",
+           "ok": true,
+           "why": "Đúng: museums create 3D models of old buildings."
+          },
+          {
+           "text": "They film master craftsmen at work.",
+           "ok": false,
+           "why": "Người quay phim nghệ nhân là học sinh (Students film…)."
+          },
+          {
+           "text": "They teach traditional dances.",
+           "ok": false,
+           "why": "Múa truyền thống được nhắc với trẻ em ở lễ hội trường, không phải bảo tàng."
+          }
+         ],
+         "explanation": "Câu này nêu ba cách dùng công nghệ: học sinh quay phim, bảo tàng làm mô hình 3D, mạng xã hội giới thiệu truyền thống.",
+         "key": "sto5"
+        },
+        {
+         "passage": "Every year, thousands of young volunteers across Viet Nam take part in activities to protect their local heritage. Some clean ancient temples and pagodas, some guide visitors around historic sites, and others record the stories that elderly people tell about their villages.\n\nHeritage is not only about famous places such as the Complex of Hue Monuments or Hoi An Ancient Town. It also includes traditions that cannot be touched: folk songs, festivals, crafts and even recipes. These \"intangible\" kinds of heritage are often the most fragile, because they live only in people's memories and skills. When the last craftsman of a village stops working, a skill which took centuries to develop can disappear in one generation.\n\nTechnology is helping in new ways. Students film master craftsmen at work, museums create 3D models of old buildings, and social media posts help young people discover traditions they had never heard of. However, experts warn that a video is not the same as a living tradition. A folk song survives only if people continue to sing it.\n\nThat is why many heritage projects now focus on teaching. Children who learn a craft from their grandparents, or who perform a traditional dance at a school festival, are doing more than having fun. They are making sure that their culture has a future.",
+         "lang": "en",
+         "question": "Why do many heritage projects now focus on teaching?",
+         "evidence": [
+          9,
+          10
+         ],
+         "clue": "“That is why” chỉ lí do đã nêu ở những câu ngay trước nó.",
+         "options": [
+          {
+           "text": "Traditions survive only if people keep practising them.",
+           "ok": true,
+           "why": "Đúng: A folk song survives only if people continue to sing it."
+          },
+          {
+           "text": "Videos are better than living traditions.",
+           "ok": false,
+           "why": "Chuyên gia nói ngược lại: video không giống truyền thống sống."
+          },
+          {
+           "text": "Young people do not like technology.",
+           "ok": false,
+           "why": "Bài nói mạng xã hội giúp người trẻ khám phá truyền thống, không nói họ ghét công nghệ."
+          }
+         ],
+         "explanation": "That is why (đó là lí do) nối với ý trước: video không thay được truyền thống sống, nên phải dạy để người ta tiếp tục thực hành.",
+         "key": "sto6"
+        },
+        {
+         "passage": "Every year, thousands of young volunteers across Viet Nam take part in activities to protect their local heritage. Some clean ancient temples and pagodas, some guide visitors around historic sites, and others record the stories that elderly people tell about their villages.\n\nHeritage is not only about famous places such as the Complex of Hue Monuments or Hoi An Ancient Town. It also includes traditions that cannot be touched: folk songs, festivals, crafts and even recipes. These \"intangible\" kinds of heritage are often the most fragile, because they live only in people's memories and skills. When the last craftsman of a village stops working, a skill which took centuries to develop can disappear in one generation.\n\nTechnology is helping in new ways. Students film master craftsmen at work, museums create 3D models of old buildings, and social media posts help young people discover traditions they had never heard of. However, experts warn that a video is not the same as a living tradition. A folk song survives only if people continue to sing it.\n\nThat is why many heritage projects now focus on teaching. Children who learn a craft from their grandparents, or who perform a traditional dance at a school festival, are doing more than having fun. They are making sure that their culture has a future.",
+         "lang": "en",
+         "question": "Why does the writer say these children are \"doing more than having fun\"?",
+         "evidence": [
+          13
+         ],
+         "clue": "Câu có “doing more than having fun” chỉ nêu ý; lí do ở câu ngay sau.",
+         "options": [
+          {
+           "text": "They are making sure their culture has a future.",
+           "ok": true,
+           "why": "Đúng: They are making sure that their culture has a future."
+          },
+          {
+           "text": "They are winning prizes at school festivals.",
+           "ok": false,
+           "why": "Bài không nhắc đến giải thưởng."
+          },
+          {
+           "text": "They are learning to use social media.",
+           "ok": false,
+           "why": "Bài nói các bạn học nghề và múa truyền thống, không phải học dùng mạng xã hội."
+          }
+         ],
+         "explanation": "make sure = đảm bảo. Khi học nghề của ông bà hay múa truyền thống, các bạn giúp văn hóa của mình được tiếp nối.",
+         "key": "sto7"
+        }
+       ],
+       "credit_from": "choice"
+      },
       {
        "game": "choice",
        "title": "Đọc và trả lời",
@@ -7501,55 +9492,52 @@
        ]
       },
       {
-       "game": "order",
-       "title": "Xếp câu tường thuật",
+       "game": "sentence",
+       "title": "Xây câu tường thuật",
+       "credit_from": "order",
        "tasks": [
         {
          "key": "o1",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "My friend",
           "said",
           "that she",
           "was",
           "busy."
          ],
-         "explanation": "Câu kể tường thuật: S + said + (that) + S + V lùi thì.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "explanation": "Câu kể tường thuật: S + said + (that) + S + V lùi thì."
         },
         {
          "key": "o2",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "He",
           "asked",
           "me",
           "where",
           "I lived."
          ],
-         "explanation": "Câu hỏi tường thuật: asked + O + where + S + V (không đảo).",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "did I live"
+         ],
+         "explanation": "Câu hỏi tường thuật: asked + O + where + S + V (không đảo)."
         },
         {
          "key": "o3",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "The teacher",
           "told",
           "us",
           "not to",
           "talk in class."
          ],
-         "explanation": "Mệnh lệnh phủ định: told + O + not to + V.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "don't"
+         ],
+         "explanation": "Mệnh lệnh phủ định: told + O + not to + V."
         },
         {
          "key": "o4",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "She",
           "asked",
           "me",
@@ -7557,14 +9545,14 @@
           "I liked",
           "coffee."
          ],
-         "explanation": "Câu hỏi Yes/No: asked + O + if + S + V.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "did I like"
+         ],
+         "explanation": "Câu hỏi Yes/No: asked + O + if + S + V."
         },
         {
          "key": "o5",
-         "prompt": "Sắp xếp các thẻ thành câu đúng (thẻ có chữ hoa đứng đầu, thẻ có dấu câu đứng cuối).",
-         "items": [
+         "tiles": [
           "Nam",
           "said",
           "he",
@@ -7572,13 +9560,15 @@
           "come",
           "the next day."
          ],
-         "explanation": "will → would; tomorrow → the next day.",
-         "first_label": "Đầu câu",
-         "last_label": "Cuối câu"
+         "distractors": [
+          "will"
+         ],
+         "explanation": "will → would; tomorrow → the next day."
         }
        ]
       }
-     ]
+     ],
+     "activity": "grammar"
     },
     {
      "key": "ta12.truyen_thong",
@@ -7841,6 +9831,317 @@
      "requires": [],
      "requires_note": null,
      "games": [
+      {
+       "game": "story_detective",
+       "title": "Thám tử: Choosing a career path",
+       "tasks": [
+        {
+         "passage": [
+          "Choosing a career is one of the biggest decisions a young person makes, and it is rarely easy.",
+          "In the past, many people chose a job for life, often the same one as their parents.",
+          "Today, school leavers face a much wider range of options, from traditional professions such as medicine and law to jobs that did not exist twenty years ago, like app developer or social media manager.",
+          "Career advisers usually suggest starting with three questions.",
+          "What are you good at? What do you enjoy? And what does the job market need?",
+          "A career that matches all three is more likely to bring both satisfaction and a steady income.",
+          "Students who only follow money, or only follow their friends, often find themselves unhappy later.",
+          "Experience is the best way to test an idea.",
+          "Part-time jobs, volunteer work and internships allow students to see what a job is really like before they commit years to training for it.",
+          "Many students have changed their plans after just a few weeks in a workplace.",
+          "Finally, a first choice is not a final one.",
+          "Experts predict that today's students will change jobs several times during their working lives.",
+          "Skills such as communication, problem-solving and the ability to keep learning will therefore be just as valuable as any single qualification."
+         ],
+         "lang": "en",
+         "question": "How did many people choose a job in the past?",
+         "evidence": [
+          2
+         ],
+         "clue": "Tìm câu bắt đầu bằng “In the past”.",
+         "options": [
+          {
+           "text": "They chose a job for life, often like their parents'.",
+           "ok": true,
+           "why": "Đúng: many people chose a job for life, often the same one as their parents."
+          },
+          {
+           "text": "They changed jobs several times.",
+           "ok": false,
+           "why": "Đó là dự đoán về học sinh ngày nay, không phải chuyện ngày xưa."
+          },
+          {
+           "text": "They did internships first.",
+           "ok": false,
+           "why": "Thực tập được nói là cách học sinh ngày nay thử nghề."
+          }
+         ],
+         "explanation": "a job for life = một nghề làm cả đời; the same one as their parents = giống nghề của bố mẹ.",
+         "key": "sto1"
+        },
+        {
+         "passage": [
+          "Choosing a career is one of the biggest decisions a young person makes, and it is rarely easy.",
+          "In the past, many people chose a job for life, often the same one as their parents.",
+          "Today, school leavers face a much wider range of options, from traditional professions such as medicine and law to jobs that did not exist twenty years ago, like app developer or social media manager.",
+          "Career advisers usually suggest starting with three questions.",
+          "What are you good at? What do you enjoy? And what does the job market need?",
+          "A career that matches all three is more likely to bring both satisfaction and a steady income.",
+          "Students who only follow money, or only follow their friends, often find themselves unhappy later.",
+          "Experience is the best way to test an idea.",
+          "Part-time jobs, volunteer work and internships allow students to see what a job is really like before they commit years to training for it.",
+          "Many students have changed their plans after just a few weeks in a workplace.",
+          "Finally, a first choice is not a final one.",
+          "Experts predict that today's students will change jobs several times during their working lives.",
+          "Skills such as communication, problem-solving and the ability to keep learning will therefore be just as valuable as any single qualification."
+         ],
+         "lang": "en",
+         "question": "Which job is given as an example of a job that did not exist twenty years ago?",
+         "evidence": [
+          3
+         ],
+         "clue": "Tìm câu có “did not exist twenty years ago”.",
+         "options": [
+          {
+           "text": "Social media manager.",
+           "ok": true,
+           "why": "Đúng: …jobs that did not exist twenty years ago, like app developer or social media manager."
+          },
+          {
+           "text": "Doctor.",
+           "ok": false,
+           "why": "Y khoa (medicine) là nghề truyền thống (traditional professions)."
+          },
+          {
+           "text": "Lawyer.",
+           "ok": false,
+           "why": "Luật (law) cũng là nghề truyền thống."
+          },
+          {
+           "text": "Teacher.",
+           "ok": false,
+           "why": "Bài không nhắc đến nghề giáo viên."
+          }
+         ],
+         "explanation": "like giới thiệu ví dụ: app developer, social media manager là nghề mới; medicine, law là nghề truyền thống.",
+         "key": "sto2"
+        },
+        {
+         "passage": [
+          "Choosing a career is one of the biggest decisions a young person makes, and it is rarely easy.",
+          "In the past, many people chose a job for life, often the same one as their parents.",
+          "Today, school leavers face a much wider range of options, from traditional professions such as medicine and law to jobs that did not exist twenty years ago, like app developer or social media manager.",
+          "Career advisers usually suggest starting with three questions.",
+          "What are you good at? What do you enjoy? And what does the job market need?",
+          "A career that matches all three is more likely to bring both satisfaction and a steady income.",
+          "Students who only follow money, or only follow their friends, often find themselves unhappy later.",
+          "Experience is the best way to test an idea.",
+          "Part-time jobs, volunteer work and internships allow students to see what a job is really like before they commit years to training for it.",
+          "Many students have changed their plans after just a few weeks in a workplace.",
+          "Finally, a first choice is not a final one.",
+          "Experts predict that today's students will change jobs several times during their working lives.",
+          "Skills such as communication, problem-solving and the ability to keep learning will therefore be just as valuable as any single qualification."
+         ],
+         "lang": "en",
+         "question": "The word \"steady\" in \"a steady income\" is closest in meaning to …",
+         "evidence": [
+          6
+         ],
+         "clue": "Tìm câu có cụm a steady income.",
+         "options": [
+          {
+           "text": "regular and reliable",
+           "ok": true,
+           "why": "Đúng: một nghề phù hợp cả ba câu hỏi mang lại thu nhập ổn định, đều đặn."
+          },
+          {
+           "text": "very large",
+           "ok": false,
+           "why": "steady không nói về độ lớn của thu nhập."
+          },
+          {
+           "text": "quick to change",
+           "ok": false,
+           "why": "Ngược nghĩa: steady là ổn định, không thay đổi thất thường."
+          },
+          {
+           "text": "low",
+           "ok": false,
+           "why": "Bài nói đây là điều tốt (more likely to bring), nên không phải thu nhập thấp."
+          }
+         ],
+         "explanation": "steady income = thu nhập ổn định, được nhắc cùng satisfaction (sự hài lòng) như hai lợi ích của một nghề phù hợp.",
+         "key": "sto3"
+        },
+        {
+         "passage": [
+          "Choosing a career is one of the biggest decisions a young person makes, and it is rarely easy.",
+          "In the past, many people chose a job for life, often the same one as their parents.",
+          "Today, school leavers face a much wider range of options, from traditional professions such as medicine and law to jobs that did not exist twenty years ago, like app developer or social media manager.",
+          "Career advisers usually suggest starting with three questions.",
+          "What are you good at? What do you enjoy? And what does the job market need?",
+          "A career that matches all three is more likely to bring both satisfaction and a steady income.",
+          "Students who only follow money, or only follow their friends, often find themselves unhappy later.",
+          "Experience is the best way to test an idea.",
+          "Part-time jobs, volunteer work and internships allow students to see what a job is really like before they commit years to training for it.",
+          "Many students have changed their plans after just a few weeks in a workplace.",
+          "Finally, a first choice is not a final one.",
+          "Experts predict that today's students will change jobs several times during their working lives.",
+          "Skills such as communication, problem-solving and the ability to keep learning will therefore be just as valuable as any single qualification."
+         ],
+         "lang": "en",
+         "question": "Who often find themselves unhappy later?",
+         "evidence": [
+          7
+         ],
+         "clue": "Tìm câu có từ “unhappy”.",
+         "options": [
+          {
+           "text": "Students who only follow money or their friends.",
+           "ok": true,
+           "why": "Đúng: Students who only follow money, or only follow their friends, often find themselves unhappy later."
+          },
+          {
+           "text": "Students who do internships.",
+           "ok": false,
+           "why": "Bài nói thực tập giúp học sinh hiểu nghề, không nói họ không vui."
+          },
+          {
+           "text": "Students who change their plans.",
+           "ok": false,
+           "why": "Nhiều bạn đổi kế hoạch sau vài tuần thực tế; bài không nói họ không hạnh phúc."
+          }
+         ],
+         "explanation": "only follow money = chỉ chạy theo tiền. Người chọn nghề chỉ vì tiền hoặc theo bạn bè thường không hạnh phúc về sau.",
+         "key": "sto4"
+        },
+        {
+         "passage": [
+          "Choosing a career is one of the biggest decisions a young person makes, and it is rarely easy.",
+          "In the past, many people chose a job for life, often the same one as their parents.",
+          "Today, school leavers face a much wider range of options, from traditional professions such as medicine and law to jobs that did not exist twenty years ago, like app developer or social media manager.",
+          "Career advisers usually suggest starting with three questions.",
+          "What are you good at? What do you enjoy? And what does the job market need?",
+          "A career that matches all three is more likely to bring both satisfaction and a steady income.",
+          "Students who only follow money, or only follow their friends, often find themselves unhappy later.",
+          "Experience is the best way to test an idea.",
+          "Part-time jobs, volunteer work and internships allow students to see what a job is really like before they commit years to training for it.",
+          "Many students have changed their plans after just a few weeks in a workplace.",
+          "Finally, a first choice is not a final one.",
+          "Experts predict that today's students will change jobs several times during their working lives.",
+          "Skills such as communication, problem-solving and the ability to keep learning will therefore be just as valuable as any single qualification."
+         ],
+         "lang": "en",
+         "question": "According to the writer, what is the best way to test a career idea?",
+         "evidence": [
+          8
+         ],
+         "clue": "Tìm câu có “the best way”.",
+         "options": [
+          {
+           "text": "Getting real experience.",
+           "ok": true,
+           "why": "Đúng: Experience is the best way to test an idea."
+          },
+          {
+           "text": "Asking your friends.",
+           "ok": false,
+           "why": "Bài cảnh báo việc chỉ đi theo bạn bè."
+          },
+          {
+           "text": "Getting a qualification first.",
+           "ok": false,
+           "why": "Bài nói nên trải nghiệm trước khi dành nhiều năm học nghề (before they commit years to training)."
+          }
+         ],
+         "explanation": "Đoạn 3 mở đầu bằng câu chủ đề: trải nghiệm là cách tốt nhất để thử một ý tưởng nghề nghiệp.",
+         "key": "sto5"
+        },
+        {
+         "passage": [
+          "Choosing a career is one of the biggest decisions a young person makes, and it is rarely easy.",
+          "In the past, many people chose a job for life, often the same one as their parents.",
+          "Today, school leavers face a much wider range of options, from traditional professions such as medicine and law to jobs that did not exist twenty years ago, like app developer or social media manager.",
+          "Career advisers usually suggest starting with three questions.",
+          "What are you good at? What do you enjoy? And what does the job market need?",
+          "A career that matches all three is more likely to bring both satisfaction and a steady income.",
+          "Students who only follow money, or only follow their friends, often find themselves unhappy later.",
+          "Experience is the best way to test an idea.",
+          "Part-time jobs, volunteer work and internships allow students to see what a job is really like before they commit years to training for it.",
+          "Many students have changed their plans after just a few weeks in a workplace.",
+          "Finally, a first choice is not a final one.",
+          "Experts predict that today's students will change jobs several times during their working lives.",
+          "Skills such as communication, problem-solving and the ability to keep learning will therefore be just as valuable as any single qualification."
+         ],
+         "lang": "en",
+         "question": "How long did many students need in a workplace before they changed their plans?",
+         "evidence": [
+          10
+         ],
+         "clue": "Tìm câu có “changed their plans”.",
+         "options": [
+          {
+           "text": "Just a few weeks.",
+           "ok": true,
+           "why": "Đúng: Many students have changed their plans after just a few weeks in a workplace."
+          },
+          {
+           "text": "Several years.",
+           "ok": false,
+           "why": "commit years là dành nhiều năm học nghề; bài nói chỉ vài tuần đã đủ để đổi ý."
+          },
+          {
+           "text": "Twenty years.",
+           "ok": false,
+           "why": "Hai mươi năm được nhắc khi nói về những nghề mới."
+          }
+         ],
+         "explanation": "after just a few weeks = chỉ sau vài tuần: trải nghiệm ngắn đã giúp nhiều bạn nhận ra nghề có hợp mình không.",
+         "key": "sto6"
+        },
+        {
+         "passage": [
+          "Choosing a career is one of the biggest decisions a young person makes, and it is rarely easy.",
+          "In the past, many people chose a job for life, often the same one as their parents.",
+          "Today, school leavers face a much wider range of options, from traditional professions such as medicine and law to jobs that did not exist twenty years ago, like app developer or social media manager.",
+          "Career advisers usually suggest starting with three questions.",
+          "What are you good at? What do you enjoy? And what does the job market need?",
+          "A career that matches all three is more likely to bring both satisfaction and a steady income.",
+          "Students who only follow money, or only follow their friends, often find themselves unhappy later.",
+          "Experience is the best way to test an idea.",
+          "Part-time jobs, volunteer work and internships allow students to see what a job is really like before they commit years to training for it.",
+          "Many students have changed their plans after just a few weeks in a workplace.",
+          "Finally, a first choice is not a final one.",
+          "Experts predict that today's students will change jobs several times during their working lives.",
+          "Skills such as communication, problem-solving and the ability to keep learning will therefore be just as valuable as any single qualification."
+         ],
+         "lang": "en",
+         "question": "Why will communication and problem-solving be \"just as valuable as any single qualification\"?",
+         "evidence": [
+          12
+         ],
+         "clue": "therefore (vì vậy) cho biết lí do nằm ở câu ngay trước.",
+         "options": [
+          {
+           "text": "People will probably change jobs several times.",
+           "ok": true,
+           "why": "Đúng: Experts predict that today's students will change jobs several times…"
+          },
+          {
+           "text": "Qualifications are no longer needed.",
+           "ok": false,
+           "why": "just as valuable as = giá trị ngang bằng; bài không nói bằng cấp vô dụng."
+          },
+          {
+           "text": "Advisers ask students three questions.",
+           "ok": false,
+           "why": "Ba câu hỏi là để chọn nghề, không phải lí do của câu cuối."
+          }
+         ],
+         "explanation": "Câu cuối có therefore: vì người lao động sẽ đổi nghề nhiều lần, các kĩ năng dùng được ở mọi nghề trở nên quý như bằng cấp.",
+         "key": "sto7"
+        }
+       ],
+       "credit_from": "choice"
+      },
       {
        "game": "choice",
        "title": "Đọc và trả lời",

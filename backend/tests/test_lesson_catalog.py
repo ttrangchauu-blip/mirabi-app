@@ -16,6 +16,7 @@ from app.learning import weakness
 from app.learning_engine import InvalidAnswer
 from app.models import LearningSessionItem
 from conftest import bearer, login, register
+from test_subject_games import KINDS as SUBJECT_GAME_KINDS, right as subject_game_answer
 
 FIXTURES = Path(__file__).parent / "data" / "catalog" / "lessons"
 _ids = itertools.count()
@@ -209,8 +210,10 @@ def start(client, me, key, game, expect=201):
 def right_answer(turn: dict):
     with SessionLocal() as db:
         item = db.scalar(select(LearningSessionItem).where(LearningSessionItem.turn_id == turn["turn_id"]))
-        expected = json.loads(item.answer_json)
+        expected, prompt = json.loads(item.answer_json), json.loads(item.prompt_json)
     kind = turn["kind"]
+    if kind in SUBJECT_GAME_KINDS:
+        return subject_game_answer(kind, prompt, expected)
     if kind == "order_steps":
         return expected["order"]
     if kind == "match_pairs":
@@ -220,7 +223,7 @@ def right_answer(turn: dict):
     if kind == "sort_card":
         return expected["group"]
     if kind in ("vocab_typing", "word_spelling"):
-        return expected["display"]
+        return expected["accepted"][0] if expected.get("lang") == "vi" else expected["display"]  # Anh → Việt: the meaning
     return expected["value"]
 
 
@@ -246,20 +249,20 @@ def finish(client, me, session, wrong_first=0):
     return client.post(f"/api/learning/sessions/{session['id']}/complete", headers=me, json={}).json()["session"]
 
 
-def test_the_programme_of_the_grade_and_another_grade_without_changing_the_profile(fixture_catalog, client):
+def test_the_programme_of_the_grade_and_never_another_grade(fixture_catalog, client):
     me = account(client, age=8, school_grade="grade2")
     body = client.get("/api/learning/programme", headers=me).json()
     assert body["grade"] == "grade2" and body["is_main"] and body["selection"] is None
     by_code = {s["code"]: s for s in body["subjects"]}
     assert by_code["math"]["ready"] == 2 and by_code["math"]["lessons"] == 3 and by_code["math"]["status"] == "partial"
     assert by_code["vietnamese"]["status"] == "empty" and by_code["vietnamese"]["name"] == "Tiếng Việt"
-    other = client.get("/api/learning/programme?grade=grade3", headers=me).json()
-    assert other["grade"] == "grade3" and not other["is_main"]
-    assert {s["code"]: s for s in other["subjects"]}["science"]["name"] == "Tự nhiên và Xã hội"
+    assert body["academic_year_label"]  # the school year of the grade (education.py)
+    other = client.get("/api/learning/programme?grade=grade3", headers=me)  # the grade is locked: no other one
+    assert other.status_code == 403 and other.json()["code"] == "grade_locked"
     assert client.get("/api/auth/me", headers=me).json()["school_grade"] == "grade2"
     adult = account(client, email="adult@example.com", age=30, school_grade="adult")
     asked = client.get("/api/learning/programme", headers=adult).json()
-    assert asked["grade"] is None and asked["note"] and len(asked["grades"]) == 12
+    assert asked["grade"] is None and asked["note"] and "grades" not in asked
 
 
 def test_thpt_learners_pick_their_electives_and_still_see_every_subject(fixture_catalog, client):
@@ -304,6 +307,7 @@ def test_a_lesson_screen_then_its_games_progress_and_completion(fixture_catalog,
     # Bảng nhân 2: every generated problem is a × of the table 2, nothing else.
     session = start(client, me, "toan2.bang_nhan_2", "defense")
     assert session["catalog"]["lesson"] == "toan2.bang_nhan_2" and session["catalog"]["other_games"][0]["game"] == "match"
+    assert session["catalog"]["world"] == "kingdom"  # Toán is played in Math Kingdom
     with SessionLocal() as db:
         items = db.scalars(select(LearningSessionItem).where(LearningSessionItem.session_id == session["id"])).all()
         assert len(items) == 10 and all(json.loads(i.prompt_json)["expression"].startswith("2 × ") for i in items)
@@ -352,16 +356,19 @@ def test_changing_the_lesson_changes_the_knowledge(fixture_catalog, client):
     assert b["open_turns"][0]["kind"] == "order_steps" and b["catalog"]["game_title"] == "Vòng đời kỳ diệu"
 
 
-def test_a_short_vocabulary_lesson_says_so_and_still_counts_as_a_stage(fixture_catalog, client):
+def test_a_vocabulary_lesson_of_8_words_plays_them_first_then_new_words_of_its_theme(fixture_catalog, client):
+    """Khám phá từ mới (vocab_lesson.py, tests/test_vocab_lesson.py): no short stage of only the lesson's own words."""
     me = account(client, age=9, school_grade="grade3")
     detail = client.get("/api/learning/lesson-catalog/ta3.tu_vung_gia_dinh", headers=me).json()
-    assert [g["short_stage"] for g in detail["games"]] == [True, True] and detail["games"][0]["turns"] == 8
+    assert [g["short_stage"] for g in detail["games"]] == [False, False] and detail["games"][0]["turns"] == 15
     session = start(client, me, "ta3.tu_vung_gia_dinh", "word_shooter")
-    assert session["required_count"] == 8 and session["catalog"]["short_stage"] and session["game"] == "word_shooter"
+    assert session["required_count"] == 15 and not session["catalog"]["short_stage"] and session["game"] == "word_shooter"
     with SessionLocal() as db:
-        words = {json.loads(i.answer_json)["entry_key"] for i in db.scalars(
-            select(LearningSessionItem).where(LearningSessionItem.session_id == session["id"]))}
-    assert words == {"family", "mother", "father", "sister", "brother", "grandmother", "grandfather", "parents"}
+        answers = [json.loads(i.answer_json) for i in db.scalars(
+            select(LearningSessionItem).where(LearningSessionItem.session_id == session["id"]))]
+    own = {"family", "mother", "father", "sister", "brother", "grandmother", "grandfather", "parents"}
+    assert own <= {a["entry_key"] for a in answers}
+    assert all(a["topic"] == "family" for a in answers)  # the 7 others are of the lesson's theme
     session = finish(client, me, session)
     assert session["status"] == "completed" and session["reward"]["status"] in ("granted", "daily_task")
 
@@ -373,10 +380,39 @@ def test_self_assessment_has_no_wrong_answer_and_is_never_to_review(fixture_cata
         turn = session["open_turns"][0]
         res = answer(client, me, session["id"], turn["turn_id"], turn["prompt"]["options"][-1]["id"]).json()
         assert res["result"]["correct"] and res["result"]["feedback"]
+        assert res["result"]["correct_options"] == []  # no option is "the" answer: none is marked
         session = res["session"]
     client.post(f"/api/learning/sessions/{session['id']}/complete", headers=me, json={})
     detail = client.get("/api/learning/lesson-catalog/tn6.tu_danh_gia", headers=me).json()
     assert detail["progress"]["status"] == "completed" and detail["games"][0]["review_count"] == 0
+
+
+def test_a_quiz_answer_is_final_and_brings_the_right_option_and_the_explanation(fixture_catalog, client):
+    """Chọn đáp án: one answer per question. Right or wrong, the turn ends with the right option(s) and the explanation
+    (the app shows them under the options until "Câu tiếp theo"); nothing says which option is right before."""
+    me = account(client, age=12, school_grade="grade6")
+    session = start(client, me, "tn6.tinh_huong", "choice")
+    turn = session["open_turns"][0]
+    assert all(set(o) == {"id", "text"} for o in turn["prompt"]["options"])  # no right/wrong flag in the question
+    right = right_answer(turn)
+    wrong = next(o["id"] for o in turn["prompt"]["options"] if o["id"] != right)
+    sent = {"turn_id": turn["turn_id"], "client_event_id": eid(), "answer": wrong}
+    res = client.post(f"/api/learning/sessions/{session['id']}/answer", headers=me, json=sent).json()
+    result = res["result"]
+    assert result["correct"] is False and result["resolved"] and not result["retry_allowed"] and result["outcome"] == "wrong"
+    assert right in result["correct_options"] and wrong not in result["correct_options"]
+    assert result["explanation"] and result["feedback"] and result["correct_answer"] and result["hearts_delta"] == 0
+    assert res["session"]["resolved_count"] == 1
+    # Tapped twice (the same request sent again): the same result, counted once.
+    again = client.post(f"/api/learning/sessions/{session['id']}/answer", headers=me, json=sent).json()
+    assert again["replayed"] and again["result"] == result and again["session"]["resolved_count"] == 1
+    # Another answer to the question answered: refused, never counted.
+    late = answer(client, me, session["id"], turn["turn_id"], right)
+    assert late.status_code == 409 and late.json()["code"] == "turn_not_open"
+    # A right answer brings the same: the option chosen is among the right ones.
+    nxt = next(t for t in res["session"]["open_turns"] if t["turn_id"] != turn["turn_id"])
+    ok = answer(client, me, session["id"], nxt["turn_id"], right_answer(nxt)).json()["result"]
+    assert ok["correct"] and ok["resolved"] and right_answer(nxt) in ok["correct_options"] and ok["explanation"]
 
 
 def test_a_wrong_match_keeps_the_right_pairs(fixture_catalog, client):
@@ -416,11 +452,29 @@ def _bundled_answer(turn: dict, session_id: int):
         return [expected["wrong_id"]] if prompt["step"] == "find" else [prompt["found"], expected["right_option"]]
     if kind == "code_path":
         return expected["solution"]
+    if kind == "lab_experiment":
+        return lab_answer(expected["accept"])
     if kind in ("math_input", "missing_number"):
         return expected["value"]
     if kind == "compare":
         return expected["value"]
     return right_answer(turn)
+
+
+def lab_answer(accept: dict[str, list[str]]) -> list[str]:
+    """A right setup of a Magic Lab experiment, as sent: an accepted part on every slot ("slot:part"), none used twice."""
+    slots = list(accept)
+
+    def fill(i: int, placed: dict[str, str]) -> dict[str, str] | None:
+        if i == len(slots):
+            return placed
+        for part in accept[slots[i]]:
+            if part not in placed.values():
+                found = fill(i + 1, {**placed, slots[i]: part})
+                if found:
+                    return found
+        return None
+    return [f"{slot}:{part}" for slot, part in fill(0, {}).items()]
 
 
 def test_every_kind_of_game_plays_through_from_the_grade_to_the_result(client):
@@ -453,3 +507,94 @@ def test_every_kind_of_game_plays_through_from_the_grade_to_the_result(client):
         assert done["status"] == "completed", (game, key)
         detail = client.get(f"/api/learning/lesson-catalog/{key}", headers=me).json()
         assert next(g for g in detail["games"] if g["game"] == game)["progress"]["completed"] == 1
+
+
+# ---------- a subject's lesson list, sorted by the learner's state ----------
+
+def _order(client, me) -> list[tuple[str, str]]:
+    body = client.get("/api/learning/programme/subjects/math", headers=me).json()
+    return [(c["lesson_id"], c["group"]) for c in body["lessons"]]
+
+
+def test_the_lesson_list_follows_the_learner_state_in_the_curriculum_order(fixture_catalog, client):
+    me = account(client, age=8, school_grade="grade2")
+    body = client.get("/api/learning/programme/subjects/math", headers=me).json()
+    first = {c["lesson_id"]: c for c in body["lessons"]}
+    # Every lesson says whose it is and where it sits; being open and being done are told apart.
+    assert {(c["subject_id"], c["grade_id"], c["academic_year"]) for c in body["lessons"]} == {("math", "grade2", body["academic_year"])}
+    assert [(c["chapter_order"], c["lesson_order"]) for c in body["chapters"][0]["lessons"]] == [(1, 1), (1, 2), (1, 3)]
+    assert first["toan2.bang_nhan_2"]["unlock_status"] == "unlocked" and first["toan2.bang_nhan_2"]["progress_status"] == "not_started"
+    assert first["toan2.bang_chia_2"]["unlock_status"] == "locked" and first["toan2.bang_chia_2"]["unlock_requirements"] == [
+        {"type": "lesson", "lesson_id": "toan2.bang_nhan_2", "title": "Bảng nhân 2", "done": False}]
+    assert first["toan2.bang_chia_2"]["unlock_note"] == first["toan2.bang_chia_2"]["requires_note"]
+    assert first["toan2.bang_nhan_5"]["unlock_requirements"][0]["type"] == "content"  # still being written
+    assert body["progress"] == {"completed": 0, "ready": 2, "total": 3, "percent": 0}
+    assert _order(client, me) == [("toan2.bang_nhan_2", "unlocked"), ("toan2.bang_chia_2", "locked"), ("toan2.bang_nhan_5", "locked")]
+
+    # A lesson started moves to Đang học; completed, it moves down to Đã hoàn thành and its follow-up opens.
+    finish(client, me, start(client, me, "toan2.bang_nhan_2", "defense"))
+    assert _order(client, me)[0] == ("toan2.bang_nhan_2", "in_progress")
+    finish(client, me, start(client, me, "toan2.bang_nhan_2", "match"))
+    assert _order(client, me) == [("toan2.bang_chia_2", "unlocked"), ("toan2.bang_nhan_2", "completed"), ("toan2.bang_nhan_5", "locked")]
+    body = client.get("/api/learning/programme/subjects/math", headers=me).json()
+    done = next(c for c in body["lessons"] if c["lesson_id"] == "toan2.bang_nhan_2")
+    assert done["progress_percent"] == 100 and done["unlock_status"] == "unlocked"  # still open: it can be reviewed
+    assert next(c for c in body["lessons"] if c["lesson_id"] == "toan2.bang_chia_2")["unlock_requirements"][0]["done"] is True
+    assert body["progress"]["completed"] == 1 and body["progress"]["percent"] == 50
+    finish(client, me, start(client, me, "toan2.bang_nhan_2", "defense"))  # a completed lesson is played again for review
+    assert _order(client, me)[1] == ("toan2.bang_nhan_2", "completed")
+    start(client, me, "toan2.bang_chia_2", "math_bridge")
+    assert _order(client, me) == [("toan2.bang_chia_2", "in_progress"), ("toan2.bang_nhan_2", "completed"), ("toan2.bang_nhan_5", "locked")]
+
+
+def test_locks_are_the_backend_own_and_each_school_year_has_its_own_progress(fixture_catalog, client):
+    from app.models import LearningSession
+    me = account(client, age=8, school_grade="grade2")
+    # Nothing the app sends opens a lock.
+    res = client.post("/api/learning/lesson-catalog/toan2.bang_chia_2/play", headers=me,
+                      json={"game": "math_bridge", "unlock_status": "unlocked", "progress_status": "completed"})
+    assert res.status_code == 409 and res.json()["code"] == "lesson_locked"
+    assert client.get("/api/learning/programme/subjects/math?unlock_status=unlocked", headers=me).json()["lessons"][1]["unlock_status"] == "locked"
+    finish(client, me, start(client, me, "toan2.bang_nhan_2", "defense"))
+    finish(client, me, start(client, me, "toan2.bang_nhan_2", "match"))
+    year = client.get("/api/learning/programme/subjects/math", headers=me).json()["academic_year"]
+    assert _order(client, me)[0] == ("toan2.bang_chia_2", "unlocked")
+    # The same stages counted in the school year before: this year starts again, the lock is back.
+    with SessionLocal() as db:
+        for s in db.scalars(select(LearningSession).where(LearningSession.catalog_lesson == "toan2.bang_nhan_2")):
+            s.academic_year = year - 1
+        db.commit()
+    assert _order(client, me) == [("toan2.bang_nhan_2", "unlocked"), ("toan2.bang_chia_2", "locked"), ("toan2.bang_nhan_5", "locked")]
+    start(client, me, "toan2.bang_chia_2", "math_bridge", expect=409)
+    assert client.get("/api/learning/programme/subjects/history", headers=me).status_code == 404  # another grade's subject
+
+
+def test_the_sort_keeps_the_curriculum_order_within_each_group():
+    from app.lesson_api import sort_lessons
+    card = lambda key, group, chapter, lesson: {"lesson_id": key, "group": group, "chapter_order": chapter, "lesson_order": lesson}
+    cards = [card("z.first", "unlocked", 1, 1), card("a.later", "unlocked", 2, 1), card("m.done", "completed", 1, 2),
+             card("b.locked", "locked", 1, 3), card("y.now", "in_progress", 3, 4), card("c.second", "unlocked", 1, 2)]
+    assert [c["lesson_id"] for c in sort_lessons(cards)] == ["y.now", "z.first", "c.second", "a.later", "m.done", "b.locked"]
+
+
+def test_the_world_each_lesson_is_drawn_in():
+    """Every subject with a world gets it; Lịch sử và Địa lí plays its Địa lí chapters (and the lessons that say so) on
+    the map, the rest in time; the world is presentation only (the lesson's version ignores it); a bad one is refused."""
+    _reset_caches()
+    lessons = lc.catalog()["lessons"]
+    ready = {k: e for k, e in lessons.items() if e["lesson"]["status"] == "ready"}
+    worlds = {e["subject"]: set() for e in ready.values()}
+    for e in ready.values():
+        worlds[e["subject"]].add(lc.world_of(e))
+    assert worlds["math"] == {"kingdom"} and worlds["english"] == {"space"} and worlds["vietnamese"] == {"forest"}
+    assert worlds["science"] == worlds["physics"] == worlds["chemistry"] == worlds["biology"] == {"lab"}
+    assert worlds["history"] == {"time"} and worlds["geography"] == {"map"} and worlds["history_geography"] == {"time", "map"}
+    assert worlds["music"] == {None}  # no world drawn yet
+    assert lc.world_of(lessons["lsdl6.ban_do_toa_do"]) == "map"  # "Địa lí: Bản đồ …"
+    assert lc.world_of(lessons["lsdl6.thoi_gian_lich_su"]) == "time"
+    assert lc.world_of(lessons["lsdl4.dbbb_thien_nhien"]) == "map" and lc.world_of(lessons["lsdl4.van_mieu"]) == "time"
+    lesson = lessons["lsdl4.dbbb_thien_nhien"]["lesson"]
+    assert lc.content_version(lesson) == lc.content_version({k: v for k, v in lesson.items() if k != "world"})
+    data = json.loads((lc.LESSONS_DIR / "history_geography.json").read_text(encoding="utf-8"))
+    next(l for c in data["chapters"] for l in c["lessons"] if l["key"] == "lsdl4.den_hung")["world"] = "moon"
+    assert any("world must be one of" in p for p in lc.validate_file(data, "history_geography"))

@@ -273,6 +273,9 @@ def visit_room(user_id: int, user: User = Depends(current_user), db: Session = D
     host = visitable_host(db, user, user_id)
     profile = ensure_profile(db, host.id)
     room = ensure_room(db, host)
+    from .town import log_visit  # Thị trấn Mirabi's visit history
+    log_visit(db, user.id, host.id)
+    db.commit()
     return {"owner": owner_view(host), "room": {"name": room.name, "layout": layout(room)},
             "pet": {"id": host.pet, "name": host.pet_name, "level": host.level},
             "activity": activity(db, host, viewer_id=user.id), "walk": {"away": walk_view(db, host)["away"]},

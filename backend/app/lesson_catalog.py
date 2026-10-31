@@ -6,7 +6,9 @@ that grade, with their type (bắt buộc, lựa chọn, tự chọn) and what M
 (app/data/catalog/lessons/*.json, one file per subject) are grouped by chapter or topic, in the order of the curriculum.
 A lesson is either `ready` (it publishes games, each with enough reviewed content of its own) or `planned` (listed, never
 playable). A game only ever draws the content of the lesson played: never another lesson's, never another grade's, never
-a repeated question to fill a stage.
+a repeated question to fill a stage. The vocabulary games are the one exception, by design: a lesson's `words` are its
+core words, served first, and its games then go on with new words of the same and related themes (vocab_lesson.py),
+never the words of a higher grade's or a locked lesson.
 
 Everything here is pure (no database), validated when loaded (an invalid file stops the server rather than serving a
 wrong lesson) and checked with `python -m app.lesson_catalog check [files]`. Sessions freeze a copy of each question and
@@ -22,7 +24,7 @@ import sys
 from functools import lru_cache
 from pathlib import Path
 
-from . import curriculum_games as cg
+from . import curriculum_games as cg, game_registry as gr, lesson_games as lg
 
 DATA = Path(__file__).parent / "data" / "catalog"
 LESSONS_DIR = DATA / "lessons"
@@ -42,11 +44,20 @@ REVIEW_STATUSES = ("draft", "checked", "teacher_reviewed")  # a ready lesson is 
 REVIEW_LABEL = {"draft": "Bản nháp", "checked": "Mirabi biên soạn và đã soát", "teacher_reviewed": "Giáo viên đã thẩm định"}
 ORGANIZATIONS = ("topic", "textbook")
 
+# The drawn world a lesson's games are played in (the app draws it above the lesson's own game): Math Kingdom, Space
+# Adventure, Word Forest, Magic Laboratory, Time Traveler, Treasure Explorer. A subject not listed has none yet. Lịch sử
+# và Địa lí plays its Địa lí chapters ("Địa lí: …") on the map and the rest in time; a lesson may name its own (`world`),
+# for the grade 4–5 chapters that mix both.
+WORLDS = ("kingdom", "space", "forest", "lab", "time", "map")
+SUBJECT_WORLD = {"math": "kingdom", "english": "space", "vietnamese": "forest", "science": "lab", "physics": "lab",
+                 "chemistry": "lab", "biology": "lab", "history": "time", "geography": "map", "history_geography": "time"}
+
 # The games a lesson can publish. `kind`: what plays it (a gameplay shared by every lesson that uses it).
 GAMES = {
     "order": {"name": "Sắp xếp thứ tự", "content": "tasks"},
     "match": {"name": "Ghép cặp", "content": "tasks"},
     "choice": {"name": "Chọn đáp án có giải thích", "content": "tasks"},
+    "lab": {"name": "Phòng thí nghiệm", "content": "tasks"},
     "sorting": {"name": "Phân loại cùng pet", "content": "set"},
     "spelling_detective": {"name": "Thám tử chính tả", "content": "items"},
     "word_builder": {"name": "Ghép chữ", "content": "items"},
@@ -55,18 +66,20 @@ GAMES = {
     "math_bridge": {"name": "Xây cầu toán học", "content": "math"},
     "meteor": {"name": "Bắn thiên thạch (Việt → Anh)", "content": "words"},
     "word_shooter": {"name": "Bắn từ tiếng Anh (Anh → Việt)", "content": "words"},
+    # The subject gameplays (lesson_games.py): a timeline, a sentence line, a geometry workshop, an equation to balance.
+    **{game: {"name": lg.NAMES[game], "content": "tasks"} for game in lg.GAMES},
 }
-CONTENT_GAMES = ("order", "match", "choice", "sorting", "spelling_detective", "word_builder", "code_path")
+CONTENT_GAMES = ("order", "match", "choice", "lab", "sorting", "spelling_detective", "word_builder", "code_path", *lg.GAMES)
 MATH_GAMES = ("defense", "math_bridge")
 VOCAB_GAMES = ("meteor", "word_shooter")
 CHOICE_STYLES = ("quiz", "situation", "reading", "predict", "reflect")
 MATH_TOPICS = {"defense": ("arithmetic", "order_of_operations"), "math_bridge": ("missing_number", "compare")}
 
 # The fewest questions a published game may have (fewer: the lesson cannot publish it) and the most a stage asks.
-MIN_TASKS = {"order": 4, "match": 3, "choice": 5, "sorting": 8, "spelling_detective": 6, "word_builder": 6, "code_path": 3,
-             "meteor": 6, "word_shooter": 6}
-MAX_TURNS = {"order": 8, "match": 6, "choice": 10, "sorting": 10, "spelling_detective": 10, "word_builder": 10, "code_path": 5,
-             "defense": 12, "math_bridge": 12, "meteor": 15, "word_shooter": 15}
+MIN_TASKS = {"order": 4, "match": 3, "choice": 5, "lab": 3, "sorting": 8, "spelling_detective": 6, "word_builder": 6, "code_path": 3,
+             "meteor": 6, "word_shooter": 6, **lg.MIN_TASKS}
+MAX_TURNS = {"order": 8, "match": 6, "choice": 10, "lab": 6, "sorting": 10, "spelling_detective": 10, "word_builder": 10, "code_path": 5,
+             "defense": 12, "math_bridge": 12, "meteor": 15, "word_shooter": 15, **lg.MAX_TURNS}
 MATH_TURNS = 10
 VOCAB_FULL_STAGE = 15  # learning_engine.VOCAB_STAGE_WORDS: fewer words is a short stage, said as such
 
@@ -193,7 +206,11 @@ def _validate_tasks(game: str, spec: dict, grade: int, where: str, problems: lis
         _text(t.get("explanation"), w, problems, 600, "explanation")
         if t.get("hint") is not None:
             _text(t.get("hint"), w, problems, 200, "hint")
-        if game == "order":
+        if game in lg.GAMES:
+            signature = lg.validate_task(game, t, lim, w, problems)
+            if signature is None:
+                continue
+        elif game == "order":
             _text(t.get("prompt"), w, problems, lim["question"], "prompt")
             items = t.get("items") or []
             if not 3 <= len(items) <= lim["items"]:
@@ -215,6 +232,10 @@ def _validate_tasks(game: str, spec: dict, grade: int, where: str, problems: lis
             for text in lefts + rights:
                 _text(text, w, problems, lim["text"], "card")
             signature = ("match", tuple(sorted(zip(lefts, rights))))  # the same pairs: the same question
+        elif game == "lab":
+            if not _validate_lab(spec, t, lim, w, problems):
+                continue
+            signature = ("lab", t.get("goal"), tuple(sorted(p["key"] for p in t["parts"])))
         else:  # choice
             if t.get("passage") is not None:
                 _text(t.get("passage"), w, problems, lim["passage"], "passage")
@@ -242,6 +263,47 @@ def _validate_tasks(game: str, spec: dict, grade: int, where: str, problems: lis
     if game == "choice" and spec.get("style", "quiz") not in CHOICE_STYLES:
         problems.append(f"{where}: style must be one of {', '.join(CHOICE_STYLES)}")
     return len(signatures)
+
+
+def _validate_lab(spec: dict, t: dict, lim: dict, w: str, problems: list[str]) -> bool:
+    """Phòng thí nghiệm: a known scene, parts with their art and why they fit or not, slots that can all be filled
+    with an accepted part, and at least one part that does not fit (something to find out)."""
+    scene = cg.LAB_SCENES.get(spec.get("scene"))
+    if scene is None:
+        problems.append(f"{w}: scene must be one of {', '.join(cg.LAB_SCENES)}")
+        return False
+    _text(t.get("goal"), w, problems, lim["question"], "goal")
+    _text(t.get("result"), w, problems, 300, "result (what the experiment shows)")
+    parts, slots = t.get("parts") or [], t.get("slots") or []
+    keys = [p.get("key") for p in parts]
+    if not 2 <= len(parts) <= 6 or len(set(keys)) != len(keys):
+        problems.append(f"{w}: 2–6 parts with different keys")
+        return False
+    for p in parts:
+        _text(p.get("name"), w, problems, lim["text"], "part name")
+        _text(p.get("why"), w, problems, 400, "why (every part explains itself)")
+        if p.get("art") not in scene["art"]:
+            problems.append(f"{w}: part {p.get('key')} has no drawing for this scene ({p.get('art')})")
+    ids = [s.get("id") for s in slots]
+    if not slots or len(set(ids)) != len(ids) or any(i not in scene["slots"] for i in ids):
+        problems.append(f"{w}: slots must be different ones of {', '.join(scene['slots'])}")
+        return False
+    if spec["scene"] == "plant" and ids != [f"s{i + 1}" for i in range(len(ids))]:
+        problems.append(f"{w}: the stages are slots s1, s2… in order")
+    for s in slots:
+        _text(s.get("label"), w, problems, 40, "slot label")
+        if not s.get("accept") or any(k not in keys for k in s["accept"]):
+            problems.append(f"{w}: slot {s.get('id')} accepts known parts")
+            return False
+    if not cg.lab_solvable(slots):
+        problems.append(f"{w}: no way to fill every slot with a part it accepts")
+    if all(set(s["accept"]) == set(keys) for s in slots):
+        problems.append(f"{w}: every part fits everywhere: nothing to find out")
+    if spec["scene"] in cg.LAB_TARGETS and t.get("target") not in cg.LAB_TARGETS[spec["scene"]]:
+        problems.append(f"{w}: target must be one of {', '.join(cg.LAB_TARGETS[spec['scene']])}")
+    if spec["scene"] == "water" and (t.get("start") not in cg.LAB_TARGETS["water"] or t.get("start") == t.get("target")):
+        problems.append(f"{w}: water needs a start state other than the target")
+    return True
 
 
 def _validate_set(spec: dict, grade: int, where: str, problems: list[str]) -> int:
@@ -445,6 +507,15 @@ def validate_file(data: dict, name: str = "lessons") -> list[str]:
                 turns = spec.get("turns")
                 if turns is not None and (not isinstance(turns, int) or turns < 1 or turns > min(count, MAX_TURNS[game])):
                     problems.append(f"{gwhere}: turns must be 1–{min(count, MAX_TURNS[game])} (never more than the questions it has)")
+                # A lesson that gets a new gameplay keeps the learners who completed it: a pass of the game it
+                # replaces (or of an earlier one it adds to) counts as a pass of this one (lesson_api.lesson_state).
+                credit = spec.get("credit_from")
+                if credit is not None and (credit not in GAMES or credit == game):
+                    problems.append(f"{gwhere}: credit_from names another game (the one this replaces or adds to)")
+            if lesson.get("activity") is not None and lesson["activity"] not in gr.ACTIVITIES:
+                problems.append(f"{where}: activity must be one of game_registry.ACTIVITIES")
+            if lesson.get("world") is not None and lesson["world"] not in WORLDS:
+                problems.append(f"{where}: world must be one of {', '.join(WORLDS)}")
             done = lesson.get("completion") or {}
             if done and not (0 < done.get("min_first_try", 0.8) <= 1 and done.get("games", "all") in ("all", "any")):
                 problems.append(f"{where}: completion is {{min_first_try: 0–1, games: all | any}}")
@@ -452,8 +523,10 @@ def validate_file(data: dict, name: str = "lessons") -> list[str]:
 
 
 def content_version(lesson: dict) -> str:
-    """Changes whenever the lesson does: its games publish a new version, old sessions keep their copy."""
-    return hashlib.sha256(json.dumps(lesson, sort_keys=True, ensure_ascii=False).encode()).hexdigest()[:12]
+    """Changes whenever the lesson does: its games publish a new version, old sessions keep their copy. The world it
+    is drawn in and its declared activity (game_registry) say nothing about its content (not part of the version)."""
+    content = {k: v for k, v in lesson.items() if k not in ("world", "activity")}
+    return hashlib.sha256(json.dumps(content, sort_keys=True, ensure_ascii=False).encode()).hexdigest()[:12]
 
 
 def _load(path: Path) -> dict:
@@ -510,6 +583,15 @@ def lesson(key: str) -> dict | None:
     return catalog()["lessons"].get(key)
 
 
+def world_of(entry: dict) -> str | None:
+    """The world a lesson's games are drawn in (WORLDS), or None."""
+    if entry["lesson"].get("world"):
+        return entry["lesson"]["world"]
+    if entry["subject"] == "history_geography" and entry["chapter"]["title"].startswith("Địa lí"):
+        return "map"
+    return SUBJECT_WORLD.get(entry["subject"])
+
+
 def game_spec(entry: dict, game: str) -> dict | None:
     return next((g for g in entry["lesson"].get("games", []) if g["game"] == game), None) if entry["lesson"]["status"] == "ready" else None
 
@@ -547,7 +629,8 @@ def game_config(entry: dict, spec: dict) -> dict:
     if game in VOCAB_GAMES:
         return {"game_type": "meteor", "turns": turns_of(spec), "travel_seconds": 24, "variants": [game],
                 "max_targets": {"practice": 1, "challenge": 2},
-                "generator": {"vocab_bank": {"words": list(spec["words"])}, **common}}
+                # discover: Khám phá từ mới (vocab_lesson.py): the core words first, then new words beyond them.
+                "generator": {"vocab_bank": {"words": list(spec["words"]), "discover": True}, **common}}
     return {"game_type": game, "turns": turns_of(spec), "travel_seconds": 0, "max_targets": {"practice": 1, "challenge": 1},
             "generator": {"catalog": True, **common}}
 
@@ -607,10 +690,14 @@ def stage_items(lesson_key: str, game: str, seed: int, mastery: dict[str, int], 
         chosen = pick(spec["tasks"], lambda t: f"cat.{lesson_key}.{t['key']}")
         out = []
         for t in chosen:
-            if game == "order":
+            if game in lg.GAMES:
+                snap, label = lg.snapshot(game, t, rng, title), lg.label(game, t)
+            elif game == "order":
                 snap, label = cg.order_steps(t, rng, title), t["prompt"]
             elif game == "match":
                 snap, label = cg.match_pairs(t, rng, title), t["prompt"]
+            elif game == "lab":
+                snap, label = cg.lab_experiment(t, rng, title, spec["scene"]), t["goal"]
             else:
                 snap, label = cg.choice_explain(t, rng, title, style), t["question"]
             out.append(_keyed(snap, lesson_key, game, t["key"], f"{title} · {_label(label)}"))
@@ -662,9 +749,10 @@ def inventory() -> list[dict]:
     return rows
 
 
-GAME_SHORT = {"order": "Sắp xếp", "match": "Ghép cặp", "choice": "Chọn đáp án", "sorting": "Phân loại", "spelling_detective": "Chính tả",
+GAME_SHORT = {"order": "Sắp xếp", "match": "Ghép cặp", "choice": "Chọn đáp án", "lab": "Thí nghiệm", "sorting": "Phân loại", "spelling_detective": "Chính tả",
               "word_builder": "Ghép chữ", "code_path": "Lập trình", "defense": "Bảo vệ căn cứ", "math_bridge": "Xây cầu toán",
-              "meteor": "Việt → Anh", "word_shooter": "Anh → Việt"}
+              "meteor": "Việt → Anh", "word_shooter": "Anh → Việt", "timeline": "Dòng thời gian", "sentence": "Xây câu",
+              "geometry": "Hình học", "balance": "Cân bằng PT"}
 
 
 def markdown_inventory() -> str:

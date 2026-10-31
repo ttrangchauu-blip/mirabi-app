@@ -7,9 +7,19 @@ import type { TutorialScene, TutorialTarget } from '../../learning/tutorials';
 import { appTheme as t } from '../../theme';
 import { AnswerSlots } from './games/LetterInput';
 import { Rock, WordTile } from './games/Playfield';
-import { CodePath, SortCards, SpellDetective, WordBuild } from './games/CurriculumGames';
+import { CodePath, SortCards, SpellDetective } from './games/CurriculumGames';
+import { WordForest } from './games/WordForest';
+import { MagicLab } from '../../games/MagicLab';
+import { EquationBalance } from '../../games/subject/EquationBalance';
+import { NumberLineBridge } from '../../games/subject/NumberLineBridge';
+import { SentenceXray } from '../../games/subject/SentenceXray';
+import { StepSolver } from '../../games/subject/StepSolver';
+import { StoryDetective } from '../../games/subject/StoryDetective';
+import { GeometryWorkshop } from '../../games/subject/GeometryWorkshop';
+import { SentenceTrain } from '../../games/subject/SentenceTrain';
+import { TimelineQuest } from '../../games/subject/TimelineQuest';
 import { ChoiceExplain, MatchPairs, OrderSteps } from './games/LessonGames';
-import type { Turn } from '../../learning/types';
+import type { SubjectGameId, Turn } from '../../learning/types';
 
 const HEIGHT = 210;
 const STEP_MS = 750;
@@ -27,7 +37,7 @@ export function describeScene(scene: TutorialScene): string {
   switch (scene.kind) {
     case 'fall': return `${scene.targets.length} ${scene.variant === 'word' ? 'từ' : 'thiên thạch'} đang rơi, pet đứng dưới đất. `
       + `Ô chữ nằm dưới “${scene.targets[0].label}”, gần mặt đất nhất`;
-    case 'type': return `Gõ “${scene.answer}” vào ô chữ dưới “${scene.target.label}”: pet tự bắn, đạn đuổi theo, trúng thì vỡ và hiện “${scene.result}”`;
+    case 'type': return `Gõ “${scene.answer}” vào ô dưới “${scene.target.label}”: từ dừng lại, pet tự bắn, trúng thì vỡ và hiện “${scene.result}”`;
     case 'monster': return `Quái vật mang phép tính ${scene.expression} tiến về căn cứ`;
     case 'numpad': return `Bấm ${scene.answer} cho ${scene.expression} rồi nhấn ${scene.submit}`;
     case 'gates': return `Câu “${scene.sentence}”, các cổng ${scene.options.join(', ')}${scene.demo ? `: chạm cổng ${scene.options[scene.right]}` : ''}`;
@@ -44,6 +54,9 @@ export function describeScene(scene: TutorialScene): string {
     case 'match': return `${scene.prompt}: ` + scene.pairs.map(([a, b]) => `${a} với ${b}`).join(', ');
     case 'choice': return `${scene.question} ` + (scene.demo ? `Chọn “${scene.options[scene.wrong]}”: chưa phù hợp, có lý do. Chọn “${scene.options[scene.right]}”: đúng.` : scene.options.join(', '));
     case 'code': return scene.mode === 'build' ? `Xếp các lệnh ${scene.program.length} lệnh vào thanh chương trình` : 'Nhấn Chạy: pet đi theo từng lệnh tới cờ đích';
+    case 'lab': return scene.mode === 'empty' ? 'Bàn thí nghiệm: mạch điện còn trống, pin, bóng đèn và dây dẫn trên bàn'
+      : scene.mode === 'build' ? 'Kéo pin, bóng đèn và dây đồng vào mạch' : 'Bật công tắc: đèn sáng, dòng điện chạy trong mạch';
+    case 'subject': return SUBJECT_DESCRIPTION[scene.game] + (scene.mode === 'demo' ? '. Thao tác mẫu đang chạy.' : '');
   }
 }
 
@@ -87,6 +100,8 @@ export function TutorialArt({ scene, petId, petLevel, reduceMotion }: Props) {
       case 'compare': return <CompareScene scene={scene} reduceMotion={reduceMotion} />;
       case 'rules': return <RulesScene scene={scene} />;
       case 'order': case 'match': case 'choice': return <LessonScene scene={scene} reduceMotion={reduceMotion} />;
+      case 'lab': return <LabScene scene={scene} petId={petId} petLevel={petLevel} reduceMotion={reduceMotion} />;
+      case 'subject': return <SubjectScene scene={scene} petId={petId} petLevel={petLevel} reduceMotion={reduceMotion} />;
       case 'word_build': case 'spell_fix': case 'sort': case 'code':
         return <CurriculumScene scene={scene} petId={petId} petLevel={petLevel} reduceMotion={reduceMotion} />;
     }
@@ -125,7 +140,8 @@ function Target({ variant, target, aimed, typed = '' }: { variant: 'word' | 'met
         </>
       )}
       <View style={aimed ? styles.slotsAimed : styles.slotsCompact}>
-        <AnswerSlots letters={target.letters} value={typed} width={TARGET_W - 8} compact={!aimed} />
+        <AnswerSlots letters={target.letters} value={typed} width={TARGET_W - 8} compact={!aimed}
+          placeholder={target.letters ? undefined : aimed ? 'Gõ nghĩa tiếng Việt…' : 'Nghĩa?'} />
       </View>
     </View>
   );
@@ -152,17 +168,17 @@ function FallScene({ scene, width, petId, petLevel, reduceMotion }: { scene: Ext
 }
 
 /**
- * Typing the answer in the boxes under the aimed word, as in the game: nothing to press. 0: empty boxes · 1…n: one more
- * letter · n+1: right, the boxes are empty again (ready for the next word) and the pet's bullet flies after the word,
- * which keeps falling · n+2, n+3: the bullet reaches it, it breaks, and its meaning shows where it was hit.
+ * Typing the answer under the aimed word, as in the game: nothing to press. 0: empty field · 1…n: one more letter ·
+ * n+1: right, the field is empty again (ready for the next word), the word stops where it is and the pet's bullet flies
+ * to it · n+2, n+3: the bullet reaches it, it breaks, and its meaning shows where it was hit.
  */
 function TypeScene({ scene, width, petId, petLevel, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'type' }>; width: number } & Omit<Props, 'scene'>) {
-  const letters = scene.answer.replace(/\s+/g, '').length;
+  const letters = scene.answer.length;
   const step = useStep(letters + 4, reduceMotion);
   const typed = step <= letters ? scene.answer.slice(0, step) : '';
   const firing = step === letters + 1;
   const hit = step >= letters + 2;
-  const top = 8 + Math.min(step, letters + 2) * 5; // it keeps falling while the answer is typed and the bullet flies
+  const top = 8 + Math.min(step, letters) * 4; // it falls while the answer is typed, then stops for the shot
   const bullet = useRef(new Animated.Value(0)).current;
   useEffect(() => {
     if (!firing) return;
@@ -356,8 +372,8 @@ function CurriculumScene({ scene, petId, petLevel, reduceMotion }: { scene: Extr
     const tiles = scene.shuffled.map((i, n) => ({ id: `t${n + 1}`, text: scene.pieces[i] }));
     const order = scene.pieces.map((_, i) => `t${scene.shuffled.indexOf(i) + 1}`);
     const placed = scene.demo ? order.slice(0, Math.min(step, order.length)) : [];
-    body = <WordBuild turn={demoTurn('word_build', { picture: scene.picture, unit: scene.unit, tiles })} disabled onSubmit={() => {}}
-      collected={scene.demo && step === frames - 1 ? 1 : 0} total={CURRICULUM_TOTAL} petId={petId} petLevel={petLevel}
+    body = <WordForest turn={demoTurn('word_build', { picture: scene.picture, unit: scene.unit, tiles })} disabled onSubmit={() => {}}
+      collected={scene.demo && step === frames - 1 ? 1 : 0} total={CURRICULUM_TOTAL} petId={petId} petLevel={petLevel} reduceMotion={reduceMotion}
       demo={{ placed, result: scene.demo && step === frames - 1 ? 'ok' : undefined }} />;
   } else if (scene.kind === 'spell_fix') {
     const tokens = scene.words.map((w, i) => ({ id: `w${i + 1}`, text: w }));
@@ -383,6 +399,92 @@ function CurriculumScene({ scene, petId, petLevel, reduceMotion }: { scene: Extr
 }
 
 const CURRICULUM_TOTAL = 10;
+
+const LAB_TURN = demoTurn('lab_experiment', { scene: 'circuit', aim: 'Lắp pin, bóng đèn và dây nối để đèn sáng.',
+  slots: [{ id: 'power', label: 'Nguồn điện' }, { id: 'lamp', label: 'Bóng đèn' }, { id: 'link', label: 'Chỗ nối' }],
+  parts: [{ id: 'p1', name: 'Dây đồng', art: 'copper' }, { id: 'p2', name: 'Viên pin', art: 'battery' }, { id: 'p3', name: 'Bóng đèn', art: 'bulb' },
+    { id: 'p4', name: 'Sợi len', art: 'wool' }] });
+
+/** Phòng thí nghiệm: the real bench, empty, set up, then running. */
+function LabScene({ scene, petId, petLevel, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'lab' }> } & Omit<Props, 'scene'>) {
+  const placed: Record<string, string> = scene.mode === 'empty' ? {} : { power: 'p2', lamp: 'p3', link: 'p1' };
+  return (
+    <View style={[styles.scene, styles.light, styles.curriculum]} pointerEvents="none">
+      <MagicLab turn={LAB_TURN} disabled onSubmit={() => {}} solved={null} onContinue={() => {}} petId={petId} petLevel={petLevel}
+        reduceMotion={reduceMotion} demo={{ placed, run: scene.mode === 'run' }} />
+    </View>
+  );
+}
+
+// --- The subject gameplays: the real scene, the move played step by step (empty → half done → solved) ---------------
+
+const SUBJECT_DESCRIPTION: Record<SubjectGameId, string> = {
+  number_line: 'Cầu trục số từ 0 đến 100 và hai lá cờ số 47, 74',
+  step_solver: 'Bài toán 48 viên bi chia vào 4 hộp, bước 1: 48 − 12',
+  story_detective: 'Hồ sơ vụ án: bài đọc về gia đình An và câu hỏi An bao nhiêu tuổi',
+  sentence_xray: 'Hộp soi câu “Mẹ đang nấu cơm trong bếp.” với bút Sự vật và bút Hoạt động',
+  timeline: 'Dòng thời gian với các mốc 938, 1010, 1070 và ba sự kiện cần đặt',
+  sentence: 'Đoàn tàu bốn toa và các thẻ They, didn’t, go, went, to the park.',
+  geometry: 'Thước đo góc trên bản vẽ: tạo một góc tù',
+  balance: 'Cân đĩa với phương trình H₂ + O₂ → H₂O',
+};
+const TIMELINE_TURN = demoTurn('timeline_place', { prompt: 'Đặt các sự kiện lên dòng thời gian.', years: 'shown',
+  markers: [{ id: 'm1', label: '938', slots: 1 }, { id: 'm2', label: '1010', slots: 1 }, { id: 'm3', label: '1070', slots: 1 }],
+  events: [{ id: 'e1', text: 'Nhà Lý dời đô ra Thăng Long' }, { id: 'e2', text: 'Xây dựng Văn Miếu' }, { id: 'e3', text: 'Ngô Quyền thắng quân Nam Hán' }] });
+const SENTENCE_TURN = demoTurn('sentence_build', { prompt: 'Kéo các thẻ vào dòng để tạo câu đúng.', vi: 'Họ đã không đi công viên.', length: 4,
+  lang: 'en', tiles: [{ id: 't1', text: 'go' }, { id: 't2', text: 'They' }, { id: 't3', text: 'went' }, { id: 't4', text: 'to the park.' },
+    { id: 't5', text: 'didn’t' }] });
+const GEOMETRY_TURN = demoTurn('geometry_build', { prompt: 'Xoay cạnh để tạo một góc tù.', shape: 'angle', angle_step: 5, readout: true, initial: 30 });
+const BALANCE_TURN = demoTurn('equation_balance', { prompt: 'Chọn hệ số để hai vế cân bằng.', max: 12, condition: 't°', elements: ['H', 'O'],
+  species: [{ id: 's1', formula: 'H2', side: 'left', atoms: { H: 2 } }, { id: 's2', formula: 'O2', side: 'left', atoms: { O: 2 } },
+    { id: 's3', formula: 'H2O', side: 'right', atoms: { H: 2, O: 1 } }] });
+
+const NUMBER_LINE_TURN = demoTurn('number_line_place', { prompt: 'Đặt các số 47 và 74 lên trục số.', ticks: 100, major: 10,
+  labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((n) => ({ at: n, text: String(n) })), marks: [],
+  points: [{ id: 'p1', label: '47' }, { id: 'p2', label: '74' }] });
+const STEP_TURN = demoTurn('step_solve', { problem: 'Lan có 48 viên bi. Lan cho em 12 viên rồi chia đều số bi còn lại vào 4 hộp. Mỗi hộp có bao nhiêu viên bi?',
+  chips: [{ id: 'n1', text: '48' }, { id: 'n2', text: '12' }, { id: 'n3', text: '4' }], at_step: 1, steps: 2,
+  ask: 'Lan còn lại bao nhiêu viên bi?', ask_unit: 'viên bi', done: [] });
+const STORY_TURN = demoTurn('story_evidence', { question: 'How old is An?', lang: 'en', phase: 'find',
+  sentences: [{ id: 's1', text: 'Hello!' }, { id: 's2', text: 'My name is An.' }, { id: 's3', text: 'I am nine years old.' },
+    { id: 's4', text: 'My sister Mi is four.' }],
+  options: [{ id: 'o1', text: 'Four.' }, { id: 'o2', text: 'Nine.' }, { id: 'o3', text: 'Eight.' }] });
+const XRAY_TURN = demoTurn('sentence_paint', { prompt: 'Tô từ chỉ sự vật và từ chỉ hoạt động.', lang: 'vi',
+  roles: [{ id: 'c1', name: 'Sự vật' }, { id: 'c2', name: 'Hoạt động' }],
+  words: [{ id: 'w1', text: 'Mẹ' }, { id: 'w2', text: 'đang' }, { id: 'w3', text: 'nấu' }, { id: 'w4', text: 'cơm' }, { id: 'w5', text: 'trong' },
+    { id: 'w6', text: 'bếp' }, { id: 'w7', text: '.', fixed: true }] });
+
+function SubjectScene({ scene, petId, petLevel, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'subject' }> } & Omit<Props, 'scene'>) {
+  const step = useStep(3, reduceMotion || scene.mode !== 'demo');
+  const frame = scene.mode === 'demo' ? step : 0; // 0 empty · 1 half done · 2 solved
+  const solved = frame === 2;
+  const common = { disabled: true, onSubmit: () => {}, reduceMotion, petId, petLevel };
+  let body: React.ReactNode;
+  if (scene.game === 'timeline') {
+    const placed: Record<string, string> = [{}, { e3: 'm1' }, { e3: 'm1', e1: 'm2', e2: 'm3' }][frame] as Record<string, string>;
+    body = <TimelineQuest turn={TIMELINE_TURN} {...common} demo={{ placed, solved }} />;
+  } else if (scene.game === 'sentence') {
+    const line = [[null, null, null, null], ['t2', 't5', null, null], ['t2', 't5', 't1', 't4']][frame];
+    body = <SentenceTrain turn={SENTENCE_TURN} {...common} demo={{ line, solved }} />;
+  } else if (scene.game === 'geometry') {
+    body = <GeometryWorkshop turn={GEOMETRY_TURN} {...common} demo={{ value: [30, 80, 120][frame], solved }} />;
+  } else if (scene.game === 'balance') {
+    body = <EquationBalance turn={BALANCE_TURN} {...common} demo={{ coefficients: [[1, 1, 1], [1, 1, 2], [2, 1, 2]][frame], solved }} />;
+  } else if (scene.game === 'number_line') {
+    const placed: Record<string, number> = [{}, { p1: 47 }, { p1: 47, p2: 74 }][frame];
+    body = <NumberLineBridge turn={NUMBER_LINE_TURN} {...common} demo={{ placed, active: ['p1', 'p2', null][frame], solved }} />;
+  } else if (scene.game === 'step_solver') {
+    const calc = [{ left: null, op: null, right: null }, { left: 'n1', op: '−', right: null }, { left: 'n1', op: '−', right: 'n2' }][frame];
+    body = <StepSolver turn={STEP_TURN} {...common} demo={{ calc, result: ['', '', '36'][frame] }} />;
+  } else if (scene.game === 'story_detective') {
+    body = <StoryDetective turn={STORY_TURN} {...common}
+      demo={[{ picked: null }, { picked: 's3' }, { found: 's3', option: 'o2', solved: true }][frame]} />;
+  } else {
+    const paint: Record<string, string> = [{}, { w1: 'c1' }, { w1: 'c1', w3: 'c2', w4: 'c1', w6: 'c1' }][frame];
+    body = <SentenceXray turn={XRAY_TURN} {...common} demo={{ paint, pen: frame === 1 ? 'c2' : 'c1', solved }} />;
+  }
+  return <View style={[styles.scene, styles.light, styles.curriculum]} pointerEvents="none">{body}</View>;
+}
 
 /** The lesson games: their real play area, the move played step by step. */
 function LessonScene({ scene, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'order' | 'match' | 'choice' }>; reduceMotion: boolean }) {

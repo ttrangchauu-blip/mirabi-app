@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Text, TextInput } from '../../components/Typography';
 import { learningApi } from '../../learning/api';
 import { GAME_INFO, OUTCOME_LABEL } from '../../learning/labels';
 import { speakEnglish } from '../../learning/prefs';
-import type { VocabAttempt, VocabDirection, VocabFilter, VocabHistory, VocabHistoryItem, VocabResult, VocabWordDetail } from '../../learning/types';
+import type { VocabAttempt, VocabDirection, VocabFilter, VocabHistory, VocabHistoryItem, VocabMemory, VocabResult, VocabWordDetail } from '../../learning/types';
 import { appTheme as t } from '../../theme';
 import { Button, Card, Segmented } from '../../ui/kit';
 import { EmptyState, ErrorState, LoadingState, OptionRow, OptionSheet } from '../together/ui';
@@ -22,7 +22,16 @@ const gameName = (d: VocabDirection) => `${GAME_INFO[GAME_FOR[d]].name} (${GAME_
 const STAGE_WORDS = 12;
 const RESULT_LABEL: Record<VocabResult, string> = { correct: 'Đúng', wrong: 'Sai', unanswered: 'Chưa trả lời' };
 const FILTERS: { value: VocabFilter; label: string }[] = [
-  { value: 'all', label: 'Tất cả' }, { value: 'correct', label: 'Trả lời đúng' }, { value: 'review', label: 'Cần ôn' }];
+  { value: 'all', label: 'Tất cả' }, { value: 'learned', label: 'Đã học' }, { value: 'review', label: 'Chưa nhớ' }, { value: 'mastered', label: 'Thành thạo' }];
+const LEVELS = [1, 2, 3, 4, 5];
+const LEVEL_NAMES: Record<number, string> = { 1: 'Rất dễ', 2: 'Dễ', 3: 'Trung bình', 4: 'Khó', 5: 'Nâng cao' };
+const MEMORY: Record<VocabMemory, { label: string; color: string; bg: string }> = {
+  review: { label: 'Chưa nhớ', color: '#9A4B00', bg: '#FFF0DC' },
+  learned: { label: 'Đã học', color: '#136FA8', bg: '#DDF0FA' },
+  mastered: { label: 'Thành thạo', color: '#1E7A4E', bg: '#E2F6EC' },
+};
+/** How well a word is remembered; an older server only says right or "cần ôn". */
+const memoryOf = (item: Pick<VocabHistoryItem, 'status' | 'memory'>): VocabMemory => item.memory ?? (item.status === 'review' ? 'review' : 'learned');
 
 const pad = (n: number) => String(n).padStart(2, '0');
 /** "Hôm nay, 10:30", "Hôm qua, 21:05", then the date, in the device's local time. */
@@ -35,11 +44,11 @@ export function studiedAt(iso: string | null, now = new Date()) {
   return days === 0 ? `Hôm nay, ${time}` : days === 1 ? `Hôm qua, ${time}` : `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`;
 }
 
-function StatusPill({ status }: { status: VocabHistoryItem['status'] }) {
-  const review = status === 'review';
+function StatusPill({ item }: { item: Pick<VocabHistoryItem, 'status' | 'memory'> }) {
+  const look = MEMORY[memoryOf(item)];
   return (
-    <View style={[s.pill, review ? s.pillReview : s.pillOk]}>
-      <Text style={[s.pillText, { color: review ? '#9A4B00' : '#1E7A4E' }]}>{review ? 'Cần ôn' : 'Đúng'}</Text>
+    <View style={[s.pill, { backgroundColor: look.bg }]}>
+      <Text style={[s.pillText, { color: look.color }]}>{look.label}</Text>
     </View>
   );
 }
@@ -59,11 +68,12 @@ function GameSheet({ visible, due, onClose, onPick }: { visible: boolean; due: V
 // ------------------------------------------------------------------------------------------------ the list
 export const PAGE_SIZE = 15;
 /** What the list shows; kept by the parent so coming back from a word returns to the same page, filter and search. */
-export type VocabView = { filter: VocabFilter; query: string; page: number };
-export const FIRST_VIEW: VocabView = { filter: 'all', query: '', page: 0 };
+export type VocabView = { filter: VocabFilter; query: string; page: number; topic?: string | null; level?: number | null };
+export const FIRST_VIEW: VocabView = { filter: 'all', query: '', page: 0, topic: null, level: null };
 const SEARCH_DELAY_MS = 300;
 
-/** "Từ đã học": every word met in the two vocabulary games, most recently studied first, 15 a page, with search and filters. */
+/** "Sổ tay từ vựng": every word met in the two vocabulary games, most recently studied first, 15 a page; search, how well
+ * it is remembered (Đã học / Chưa nhớ / Thành thạo), topic and level. Tapping a word shows its pronunciation and example. */
 export function VocabHistoryScreen({ view, onViewChange, onOpen, onBack, onPractise, practising, onPageChange }: {
   view: VocabView; onViewChange: (view: VocabView) => void; onOpen: (entryKey: string) => void; onBack: () => void;
   onPractise: Practise; practising: boolean; /** A new page is shown (the screen scrolls back to the top). */ onPageChange?: () => void;
@@ -73,8 +83,11 @@ export function VocabHistoryScreen({ view, onViewChange, onOpen, onBack, onPract
   const [loading, setLoading] = useState(false);
   const [typed, setTyped] = useState(view.query);
   const [choose, setChoose] = useState(false);
+  const [sheet, setSheet] = useState<'topic' | 'level' | null>(null);
   const latest = useRef(0);
   const { filter, query, page } = view;
+  const topic = view.topic ?? null;
+  const level = view.level ?? null;
 
   // Searching waits for a pause in typing, and starts again from the first page.
   useEffect(() => {
@@ -87,7 +100,7 @@ export function VocabHistoryScreen({ view, onViewChange, onOpen, onBack, onPract
     const id = ++latest.current; // only the answer to the latest request is shown
     setLoading(true); setError(null);
     try {
-      const next = await learningApi.vocabHistory(query, filter, page * PAGE_SIZE, PAGE_SIZE);
+      const next = await learningApi.vocabHistory(query, filter, page * PAGE_SIZE, PAGE_SIZE, { topic, level });
       if (id !== latest.current) return;
       // A page that emptied meanwhile (words moved to another filter): show the last page that has words.
       if (next.items.length === 0 && page > 0 && next.total > 0) { onViewChange({ ...view, page: Math.ceil(next.total / PAGE_SIZE) - 1 }); return; }
@@ -96,7 +109,7 @@ export function VocabHistoryScreen({ view, onViewChange, onOpen, onBack, onPract
     finally { if (id === latest.current) setLoading(false); }
     // Reloads when the page, filter or search changes; `view` and `onViewChange` only matter for that correction.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, filter, page]);
+  }, [query, filter, page, topic, level]);
   useEffect(() => { void load(); }, [load]);
 
   const counts = data?.counts;
@@ -104,10 +117,11 @@ export function VocabHistoryScreen({ view, onViewChange, onOpen, onBack, onPract
   const due = data ? DIRECTIONS.filter((d) => data.due[d] > 0) : [];
   // Taps while a page is loading are fine: only the answer to the latest request is shown.
   const goTo = (next: number) => { onViewChange({ ...view, page: next }); onPageChange?.(); };
-  const searching = !!typed.trim() || !!query.trim();
+  const searching = !!typed.trim() || !!query.trim() || !!topic || !!level;
+  const topicName = topic ? data?.topics?.find((x) => x.code === topic)?.name ?? topic : null;
   return (
     <>
-      <BackHeader title="Từ đã học" subtitle={counts ? `${counts.all} từ · ${counts.review} cần ôn · mới học gần nhất trước` : 'Lịch sử từ vựng'} onBack={onBack} />
+      <BackHeader title="Sổ tay từ vựng" subtitle={counts ? `${counts.all} từ · ${counts.review} chưa nhớ · mới học gần nhất trước` : 'Từ bạn đã gặp trong trò chơi'} onBack={onBack} />
       {!data ? (error ? <Card><ErrorState error={error} onRetry={() => { void load(); }} /></Card> : <LoadingState label="Đang tải từ đã học…" />)
         : data.counts.all === 0 ? (
           <Card><EmptyState icon="book-outline" title="Chưa có từ nào"
@@ -124,27 +138,42 @@ export function VocabHistoryScreen({ view, onViewChange, onOpen, onBack, onPract
             </Pressable> : null}
           </View>
           <Segmented<VocabFilter> value={filter} onChange={(next) => onViewChange({ ...view, filter: next, page: 0 })} options={FILTERS} compact />
+          {data.topics ? (
+            <View style={s.filters}>
+              <Pressable onPress={() => setSheet('topic')} accessibilityRole="button" accessibilityLabel={`Chủ đề: ${topicName ?? 'Tất cả'}`}
+                style={({ pressed }) => [s.filter, topic && s.filterOn, pressed && s.pressed]}>
+                <Ionicons name="pricetags-outline" size={14} color={t.accent} />
+                <Text style={s.filterText} numberOfLines={1}>{topicName ?? 'Mọi chủ đề'}</Text>
+              </Pressable>
+              <Pressable onPress={() => setSheet('level')} accessibilityRole="button" accessibilityLabel={`Cấp độ: ${level ? `Cấp ${level}` : 'Tất cả'}`}
+                style={({ pressed }) => [s.filter, level != null && s.filterOn, pressed && s.pressed]}>
+                <Ionicons name="stats-chart-outline" size={14} color={t.accent} />
+                <Text style={s.filterText} numberOfLines={1}>{level ? `Cấp ${level} · ${LEVEL_NAMES[level]}` : 'Mọi cấp độ'}</Text>
+              </Pressable>
+            </View>
+          ) : null}
           {filter === 'review' && counts && counts.review > 0 ? (
-            <Button title={counts.review > STAGE_WORDS ? `Luyện ${STAGE_WORDS} từ cần ôn gần nhất` : `Luyện tất cả từ cần ôn (${counts.review})`} icon="refresh-circle-outline" loading={practising}
+            <Button title={counts.review > STAGE_WORDS ? `Ôn ${STAGE_WORDS} từ chưa nhớ gần nhất` : `Ôn tất cả từ chưa nhớ (${counts.review})`} icon="refresh-circle-outline" loading={practising}
               onPress={() => setChoose(true)} style={s.practiseAll} />
           ) : null}
           {error ? <Card><ErrorState error={error} onRetry={() => { void load(); }} /></Card>
             : data.items.length === 0 ? (
               <Card><EmptyState icon={searching ? 'search-outline' : 'checkmark-circle-outline'}
-                title={searching ? 'Không tìm thấy từ nào' : filter === 'review' ? 'Không có từ cần ôn' : 'Chưa có từ trả lời đúng'}
-                body={searching ? `Không có từ nào khớp “${(query || typed).trim()}”.` : filter === 'review' ? 'Tuyệt vời! Mọi từ đều đúng ở lần gần nhất.' : undefined} /></Card>
+                title={searching ? 'Không tìm thấy từ nào' : filter === 'review' ? 'Không có từ chưa nhớ' : filter === 'mastered' ? 'Chưa có từ thành thạo' : 'Chưa có từ nào ở đây'}
+                body={searching ? ((query || typed).trim() ? `Không có từ nào khớp “${(query || typed).trim()}”.` : 'Thử chủ đề hoặc cấp độ khác.')
+                  : filter === 'review' ? 'Tuyệt vời! Mọi từ đều đúng ở lần gần nhất.' : filter === 'mastered' ? 'Trả lời đúng ngay nhiều lần để thành thạo từ.' : undefined} /></Card>
             ) : (
               <Card style={[s.list, loading && s.stale]}>
                 {data.items.map((item, i) => (
                   <Pressable key={item.entry_key} onPress={() => onOpen(item.entry_key)} accessibilityRole="button"
-                    accessibilityLabel={`${item.word}, ${item.meaning_vi}, ${item.status === 'review' ? 'cần ôn' : 'đúng'}`}
+                    accessibilityLabel={`${item.word}, ${item.meaning_vi}, ${MEMORY[memoryOf(item)].label.toLowerCase()}`}
                     style={({ pressed }) => [s.row, i > 0 && s.divider, pressed && s.pressed]}>
                     <View style={s.flex}>
                       <Text style={s.word} numberOfLines={1}>{item.word}{item.part_of_speech ? <Text style={s.pos}>  {item.part_of_speech}</Text> : null}</Text>
                       <Text style={s.meaning} numberOfLines={2}>{item.meaning_vi}{item.context_vi ? <Text style={s.context}> · {item.context_vi}</Text> : null}</Text>
                       <Text style={s.when}>Học gần nhất: {studiedAt(item.last_seen_at)}</Text>
                     </View>
-                    <StatusPill status={item.status} />
+                    <StatusPill item={item} />
                     <Ionicons name="chevron-forward" size={18} color={t.muted} />
                   </Pressable>
                 ))}
@@ -170,6 +199,22 @@ export function VocabHistoryScreen({ view, onViewChange, onOpen, onBack, onPract
           ) : null}
         </>}
       <GameSheet visible={choose} due={due} onClose={() => setChoose(false)} onPick={(g) => { setChoose(false); onPractise(g, null); }} />
+      <OptionSheet visible={sheet === 'topic'} title="Lọc theo chủ đề" onClose={() => setSheet(null)}>
+        <ScrollView style={s.sheetList}>
+          <OptionRow label="Mọi chủ đề" selected={!topic} onPress={() => { setSheet(null); onViewChange({ ...view, topic: null, page: 0 }); }} />
+          {(data?.topics ?? []).map((x) => (
+            <OptionRow key={x.code} label={x.name} description={`${x.count} từ`} selected={topic === x.code}
+              onPress={() => { setSheet(null); onViewChange({ ...view, topic: x.code, page: 0 }); }} />
+          ))}
+        </ScrollView>
+      </OptionSheet>
+      <OptionSheet visible={sheet === 'level'} title="Lọc theo cấp độ" onClose={() => setSheet(null)}>
+        <OptionRow label="Mọi cấp độ" selected={!level} onPress={() => { setSheet(null); onViewChange({ ...view, level: null, page: 0 }); }} />
+        {LEVELS.map((n) => (
+          <OptionRow key={n} label={`Cấp ${n} · ${LEVEL_NAMES[n]}`} selected={level === n}
+            onPress={() => { setSheet(null); onViewChange({ ...view, level: n, page: 0 }); }} />
+        ))}
+      </OptionSheet>
     </>
   );
 }
@@ -224,7 +269,11 @@ export function VocabWordScreen({ entryKey, onBack, onPractise, practising }: {
             {word.example_vi ? <Text style={s.exampleVi}>{word.example_vi}</Text> : null}
           </View>
         ) : null}
-        <View style={s.statusRow}><StatusPill status={word.status} /><Text style={s.when}>Học gần nhất: {studiedAt(word.last_seen_at)}</Text></View>
+        <View style={s.statusRow}>
+          <StatusPill item={word} />
+          {word.level ? <Text style={s.levelTag}>Cấp {word.level} · {LEVEL_NAMES[word.level]}</Text> : null}
+          <Text style={s.when}>Học gần nhất: {studiedAt(word.last_seen_at)}</Text>
+        </View>
       </Card>
 
       <Text style={s.section} accessibilityRole="header">Theo chiều luyện tập</Text>
@@ -288,8 +337,12 @@ const s = StyleSheet.create({
   context: { fontSize: 13, color: t.muted },
   when: { fontSize: 12, color: t.muted, marginTop: 3 },
   pill: { borderRadius: 99, paddingHorizontal: 10, paddingVertical: 4 },
-  pillOk: { backgroundColor: '#E2F6EC' },
-  pillReview: { backgroundColor: '#FFF0DC' },
+  filters: { flexDirection: 'row', gap: 8, marginTop: 10, marginBottom: 12 },
+  filter: { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 6, minHeight: 40, paddingHorizontal: 12, borderRadius: 14, backgroundColor: '#FFFFFF' },
+  filterOn: { backgroundColor: t.tint },
+  filterText: { flex: 1, fontSize: 13, fontWeight: '800', color: t.accent },
+  sheetList: { maxHeight: 420 },
+  levelTag: { fontSize: 12, fontWeight: '800', color: '#4B3FB5' },
   pillText: { fontSize: 12, fontWeight: '900' },
   headRow: { flexDirection: 'row', alignItems: 'flex-start', gap: 12 },
   bigWord: { fontSize: 28, fontWeight: '900', color: t.ink },

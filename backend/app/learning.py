@@ -15,7 +15,7 @@ from fastapi import APIRouter, Depends, Header, Query
 from pydantic import BaseModel, Field, field_validator
 from sqlalchemy import func, select
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, object_session
 from sqlalchemy.orm.exc import StaleDataError
 
 from . import clock
@@ -25,7 +25,8 @@ from .db import get_db
 from .errors import APIError
 from . import learning_grammar_bank as grammar_bank
 from .learning_grammar import generate_grammar_items
-from .learning_vocab import POS_VI, bank_items, travel_for
+from .learning_content import BANK_LESSON_CODES
+from .learning_vocab import POS_VI, TOPIC_CODES, bank_items, travel_for
 from .learning_engine import (DEFAULT_SCORING, answer_key, HEART_ON_WRONG, MASTERED_AT, MOVING_KINDS, TYPED_TARGET_KINDS, VOCAB_KINDS,
                               VOCAB_STAGE_WORDS,
                               WRONG_POLICY, InvalidAnswer, bridge_sentence, check_bridge, check_choice, check_number, check_text,
@@ -39,7 +40,7 @@ from .profile import DAILY_TASK_BY_ID
 from .progression import award_exp, pool_exp_between
 from .security import current_user
 from .study_profile import GradeId, recommendations
-from . import curriculum, curriculum_games as cg, lesson_catalog as lc
+from . import curriculum, curriculum_games as cg, education, lesson_catalog as lc, lesson_games as lg, vocab_discovery
 
 router = APIRouter(prefix="/api/learning", tags=["learning"])
 
@@ -86,9 +87,14 @@ class QuickStart(BaseModel):
     mode: Mode = "practice"
     duration_minutes: int = Field(default=25, ge=5, le=60)
     timezone: str = Field(default="UTC", max_length=80)
-    grade: GradeId | None = Field(default=None, description="The grade being studied (the confirmed one, or another one "
-                                                            "to review or learn ahead). Required for the curriculum games.")
+    grade: GradeId | None = Field(default=None, description="Deprecated: the learner's current grade is always used; "
+                                                            "another one is refused (403 grade_locked).")
     level: curriculum.FreeLevel | None = Field(default=None, description="Sinh viên / Người đi làm: the chosen level.")
+    vocab: Literal["discover", "review"] = Field(default="discover", description="word_shooter / meteor: discover (Khám phá "
+                                                 "từ mới: only words never shown in this game) or review (Ôn tập: words met before, "
+                                                 "wrong and due ones first).")
+    topic: str | None = Field(default=None, max_length=40, description="word_shooter / meteor, discover: a topic of the "
+                                                                       "vocabulary bank (GET /vocabulary/progress); none: every topic.")
 
 
 class ReviewSessionCreate(BaseModel):
@@ -117,7 +123,12 @@ class HeldTurnEvent(TurnEvent):
 
 
 class AnswerInput(HeldTurnEvent):
-    answer: str | list[str] = Field(description="Typed text or number, an option id, or the ordered token ids of a bridge.")
+    answer: str | list[str] = Field(description="Typed text or number, an option id, the ordered token ids of a bridge, or (Phòng thí nghiệm) a part on every place as \"slot:part\". "
+                                    "Dòng thời gian: every event on a marker as \"marker:event\"; Xây câu: the tile ids of the sentence in order; "
+                                    "Xưởng hình học: [\"angle:<degrees>\"] or [\"rect:<w>x<h>\"]; Cân bằng phương trình: one coefficient per substance, in order. "
+                                    "Cầu trục số: every point on a tick as \"point:tick\"; Giải toán từng bước: the current step as "
+                                    "[chip, operator (+ - × :), chip, typed result]; Thám tử đọc hiểu: [sentence id] to find the clue, then "
+                                    "[option id]; Soi câu: the painted pieces as \"piece:highlighter\" ([\"none\"] when nothing is painted).")
 
     @field_validator("answer")
     @classmethod
@@ -174,7 +185,7 @@ class RewardOut(BaseModel):
 class SessionOut(BaseModel):
     id: int
     status: Literal["active", "paused", "completed", "failed", "abandoned"]
-    kind: Literal["lesson", "review"]
+    kind: Literal["lesson", "review", "archive"]
     mode: Mode
     game_type: str
     variant: str | None
@@ -204,6 +215,8 @@ class SessionOut(BaseModel):
     server_time: str
     catalog: dict[str, Any] | None = Field(default=None, description="Học tập by lesson: the lesson, its grade and game, "
                                                                      "the other games of the lesson and the next lesson.")
+    archive_year: int | None = Field(default=None, description="kind archive: the finished school year reviewed from "
+                                                               "Kho lưu trữ (its results stay as they were).")
 
 
 class WordOut(BaseModel):
@@ -226,6 +239,9 @@ class TurnResultOut(BaseModel):
     combo: int = 0
     hint: str | None = None
     correct_answer: str | None = Field(default=None, description="Only once the turn is resolved or revealed.")
+    correct_options: list[str] | None = Field(default=None, description="Multiple-choice games (Chọn đáp án, Chọn cổng, "
+                                              "So sánh), once the turn is resolved or revealed: the ids of the right "
+                                              "options, which the app marks in green. Never sent before an answer.")
     explanation: str | None = None
     practice_added: bool = False
     feedback: str | None = Field(default=None, description="Curriculum games: why a wrong answer is wrong (it can be "
@@ -233,7 +249,9 @@ class TurnResultOut(BaseModel):
     word: WordOut | None = Field(default=None, description="Vocabulary: the English word and its Vietnamese meaning, "
                                                            "once the turn is resolved or revealed.")
     kept: list[str] | None = Field(default=None, description="Sắp xếp / Ghép cặp, after a wrong answer: the cards in the "
-                                                             "right place or the right pairs, which the app keeps.")
+                                                             "right place or the right pairs, which the app keeps (the "
+                                                             "subject gameplays likewise: events, tiles, points, painted pieces, "
+                                                             "or the right calculation of a step).")
 
 
 class EventOut(BaseModel):
@@ -357,7 +375,22 @@ def correct_answer_text(item: LearningSessionItem) -> str:
     if item.kind == "compare":
         prompt = _loads(item.prompt_json, {})
         return f"{prompt['left']} {answer['value']} {prompt['right']}"
+    if answer.get("lang") == "vi":  # Anh → Việt: the answer is the meaning
+        return answer.get("meaning_vi") or (answer.get("accepted") or [""])[0]
     return answer.get("display", "")
+
+
+def correct_option_ids(item: LearningSessionItem) -> list[str] | None:
+    """The right options of a multiple-choice turn (None for the other games). Only ever put in a result once the turn
+    is resolved or revealed: the prompt itself never says which option is right."""
+    answer = _loads(item.answer_json, {})
+    if item.kind == "choice_explain":
+        return list(answer.get("ok", [])) if answer.get("graded", True) else []  # tự đánh giá: no option is "the" answer
+    if item.kind == "gate_choice":
+        return [answer["option"]] if answer.get("option") else []
+    if item.kind == "compare":
+        return [answer["value"]] if answer.get("value") else []  # the options' ids are the signs themselves
+    return None
 
 
 def word_pair(item: LearningSessionItem) -> dict | None:
@@ -376,7 +409,11 @@ def item_travel(item: LearningSessionItem, rules: dict) -> int:
     """Seconds for a falling target to reach the ground: longer words and phrases fall slower."""
     base = int(rules.get("travel_seconds", 0))
     if item.kind in VOCAB_KINDS:
-        return travel_for(_loads(item.answer_json, {}).get("display", ""), base)
+        answer = _loads(item.answer_json, {})
+        shown = answer.get("display", "")
+        if answer.get("lang") == "vi":  # Anh → Việt: a long meaning to type falls slower too
+            shown = max(shown, min(answer.get("accepted") or [""], key=len), key=len)
+        return travel_for(shown, base)
     return base
 
 
@@ -411,7 +448,8 @@ def _turn_out(item: LearningSessionItem, rules: dict, mode: str, active_ms: int)
     prompt = _loads(item.prompt_json, {})
     if item.kind in TYPED_TARGET_KINDS and item.state != "resolved":
         # Falling words shoot as soon as the typed text is right: the app gets keys of the accepted answers, not them.
-        prompt["answer_keys"] = [answer_key(item.turn_id, a) for a in _loads(item.answer_json, {}).get("accepted", [])]
+        answer = _loads(item.answer_json, {})
+        prompt["answer_keys"] = [answer_key(item.turn_id, a, answer.get("lang")) for a in answer.get("accepted", [])]
     return {"turn_id": item.turn_id, "position": item.position, "kind": item.kind, "skill_label": label,
             "prompt": prompt, "hints_shown": hints[:item.hints_used], "hints_total": len(hints),
             "attempts": item.attempts, "wrong_attempts": item.wrong_attempts, "practice": item.practice_of_id is not None,
@@ -441,12 +479,12 @@ def catalog_ref(rules: dict) -> dict | None:
     entry = lc.lesson(ref["key"])
     if entry is None:  # a lesson no longer in the catalog: the stage still shows as it was
         return {"lesson": ref["key"], "title": None, "grade": ref["grade"], "game": ref["game"], "game_title": None,
-                "short_stage": ref.get("short_stage", False), "subject_name": None, "other_games": [], "next": None}
+                "short_stage": ref.get("short_stage", False), "subject_name": None, "other_games": [], "next": None, "world": None}
     lesson, spec = entry["lesson"], lc.game_spec(entry, ref["game"])
     following = lc.lesson(entry["next"]) if entry.get("next") else None
     return {"lesson": lesson["key"], "title": lesson["title"], "grade": entry["grade"], "game": ref["game"],
             "game_title": spec["title"] if spec else None, "short_stage": ref.get("short_stage", False),
-            "subject_name": lc.subject_name(entry["subject"], entry["grade"]),
+            "subject_name": lc.subject_name(entry["subject"], entry["grade"]), "world": lc.world_of(entry),
             "other_games": [{"game": g["game"], "title": g["title"]} for g in lesson.get("games", []) if g["game"] != ref["game"]]
             if lesson["status"] == "ready" else [],
             "next": {"key": following["lesson"]["key"], "title": following["lesson"]["title"],
@@ -484,6 +522,7 @@ def session_out(db: Session, s: LearningSession, now: datetime | None = None, it
         "reward": {"status": s.reward_status, "exp": s.reward_exp} if s.status in TERMINAL else None,
         "version": s.version, "server_time": now.isoformat(),
         "catalog": catalog_ref(rules),
+        "archive_year": s.archive_year,
     }
 
 
@@ -502,12 +541,16 @@ def issue_turns(s: LearningSession, items: list[LearningSessionItem], now: datet
     limit = FALLING_MAX_TARGETS if s.game_type == "meteor" else int(rules.get("max_targets", 1))
     target = min(want, limit)
     open_count = sum(1 for i in items if i.state == "issued")
+    shown = []
     for item in items:
         if open_count >= target:
             break
         if item.state == "queued":
             item.state, item.issued_at, item.issued_active_ms = "issued", now, s.active_ms
             open_count += 1
+            shown.append(item)
+    if shown and rules.get("discovery") and (db := object_session(s)) is not None:
+        vocab_discovery.record(db, s, shown)  # on screen now: never a new word again in this game
 
 
 # ---------------------------------------------------------------------------------------------------------------
@@ -529,7 +572,8 @@ def current_version(db: Session, lesson: LearningLesson) -> LearningLessonVersio
 # "Cách chơi": each game's first-time guide. It is finished with "Bắt đầu" (closing it early does not count), once per
 # account and game, so it is skipped on every device afterwards.
 GameId = Literal["word_shooter", "meteor", "gate", "bridge", "grammar", "defense", "math_bridge", "word_builder",
-                 "spelling_detective", "sorting", "code_path", "order", "match", "choice"]
+                 "spelling_detective", "sorting", "code_path", "order", "match", "choice", "lab", "timeline", "sentence",
+                 "geometry", "balance", "number_line", "step_solver", "story_detective", "sentence_xray"]
 
 
 # The version of the games' guides (mobile learning/tutorials.ts TUTORIAL_VERSION, keep both in step). A guide finished
@@ -542,8 +586,10 @@ class TutorialDone(BaseModel):
 
 
 def _tutorials_seen(db: Session, user: User) -> dict:
+    # A tutorial left before its end (game_tutorials.py, `in_progress`) is not finished.
     games = db.scalars(select(LearningTutorialView.game).where(LearningTutorialView.user_id == user.id,
-                                                               LearningTutorialView.version >= TUTORIAL_VERSION)
+                                                               LearningTutorialView.version >= TUTORIAL_VERSION,
+                                                               LearningTutorialView.status != "in_progress")
                        .order_by(LearningTutorialView.id))
     return {"seen": list(games), "version": TUTORIAL_VERSION}
 
@@ -561,8 +607,8 @@ def finish_tutorial(game: GameId, data: TutorialDone | None = None, user: User =
                                                         LearningTutorialView.game == game))
     if row is None:
         db.add(LearningTutorialView(user_id=user.id, game=game, version=version))
-    elif version > row.version:
-        row.version, row.completed_at = version, clock.now()
+    elif version > row.version or (version == row.version and row.status == "in_progress"):
+        row.version, row.completed_at, row.status = version, clock.now(), "completed"
     try:
         db.commit()
     except IntegrityError:  # the same game finished at the same moment on another device
@@ -584,11 +630,13 @@ def math_levels(db: Session) -> dict[str, set[str]]:
     return found
 
 
-@router.get("/catalog", summary="Subjects with their levels, topics and lessons (no answers)")
-def catalog(grade: GradeId | None = Query(default=None, description="Another grade to review or learn ahead; the "
-                                                                    "confirmed grade by default (the profile is unchanged)."),
+@router.get("/catalog", responses=education.errors(*education.AUTH, (403, "grade_locked")), summary="Subjects with their levels, topics and lessons (no answers)")
+def catalog(grade: GradeId | None = Query(default=None, description="Deprecated: only the learner's current grade is "
+                                                                    "accepted (403 grade_locked otherwise)."),
             level: curriculum.FreeLevel | None = Query(default=None, description="Sinh viên / Người đi làm: the level chosen."),
             user: User = Depends(current_user), db: Session = Depends(get_db)):
+    education.sync(db, user)
+    education.check_requested_grade(user, grade)
     review_counts = dict(db.execute(select(LearningReviewItem.topic_id, func.count()).where(
         LearningReviewItem.user_id == user.id, LearningReviewItem.status == "open").group_by(LearningReviewItem.topic_id)).all())
     subjects = []
@@ -617,9 +665,8 @@ def catalog(grade: GradeId | None = Query(default=None, description="Another gra
         })
     # Suggestions from the user's confirmed grade (None until it is given: the app asks for it first), and what the
     # grade being studied offers (`programme`): only subjects and games with content for it.
-    viewed = grade or user.school_grade
     return {"subjects": subjects, "default_duration_minutes": 25, "study_profile": recommendations(user.school_grade),
-            "programme": curriculum.programme(viewed, level, math_levels(db))}
+            "programme": curriculum.programme(user.school_grade, level, math_levels(db))}
 
 
 def vocab_key(skill_key: str) -> str:
@@ -818,7 +865,8 @@ def math_items(db: Session, user: User, topic: LearningTopic, game: dict, seed: 
 
 def create_session(db: Session, user: User, *, lesson: LearningLesson, mode: str, duration_minutes: int,
                    variant: str | None, device_zone: str, kind: str, idempotency_key: str | None,
-                   review_keys: list[str] | None = None, start_paused: bool = False) -> LearningSession:
+                   review_keys: list[str] | None = None, start_paused: bool = False,
+                   archive_year: int | None = None) -> LearningSession:
     _tz(device_zone)
     if idempotency_key and (existing := db.scalar(select(LearningSession).where(
             LearningSession.user_id == user.id, LearningSession.client_request_id == idempotency_key))):
@@ -838,6 +886,12 @@ def create_session(db: Session, user: User, *, lesson: LearningLesson, mode: str
     # A lesson of the catalog with its own word list asks those words: 15 when it has them, otherwise a short stage
     # of all of them (said as such in the app). Any other vocabulary stage always has VOCAB_STAGE_WORDS words.
     stage_words = min(VOCAB_STAGE_WORDS, len((generator.get("vocab_bank") or {}).get("words") or []))         if (generator.get("vocab_bank") or {}).get("words") else VOCAB_STAGE_WORDS
+    if (generator.get("vocab_bank") or {}).get("discover"):
+        if kind == "lesson":
+            stage_words = VOCAB_STAGE_WORDS  # its own words first, then related new ones (vocab_lesson.py)
+        else:  # an archive replay keeps the lesson's own words and discovers nothing
+            generator = {**generator, "vocab_bank": {k: v for k, v in generator["vocab_bank"].items() if k != "discover"}}
+            game = {**game, "generator": generator}
     if words_stage:
         game = {**game, "turns": stage_words}
     if generator.get("catalog"):  # a lesson's own content, never another lesson's
@@ -849,8 +903,15 @@ def create_session(db: Session, user: User, *, lesson: LearningLesson, mode: str
         snapshots = math_items(db, user, topic, game, seed, review_keys)
     else:
         snapshots = english_items(db, user, lesson, version, game, variant, seed, review_keys)
-    if words_stage and (len(snapshots) < stage_words or len({snap["skill_key"] for snap in snapshots}) < len(snapshots)):
-        # Never a short stage, nor one word asked twice to fill it: the bank has too few words for this game now.
+    # Khám phá từ mới: a stage of the bank (not a catalog lesson's own words) holds only words never shown in this game.
+    # A catalog lesson whose stages discover new words too says so with vocab_bank.discover.
+    vocab_bank = generator.get("vocab_bank")
+    discovery = words_stage and vocab_bank is not None and (not vocab_bank.get("words") or bool(vocab_bank.get("discover")))
+    if discovery and not snapshots:
+        raise APIError(409, "vocabulary_exhausted", "Bạn đã khám phá hết từ mới ở đây. Hãy chọn chủ đề khác hoặc Ôn tập.")
+    if words_stage and (len({snap["skill_key"] for snap in snapshots}) < len(snapshots)
+                        or (not discovery and len(snapshots) < stage_words)):
+        # Never one word asked twice, nor a catalog lesson's stage cut short: the bank has too few words for it now.
         raise APIError(409, "not_enough_words", f"This game needs {stage_words} different words; there are not enough yet")
     if not snapshots:
         raise APIError(409, "nothing_to_review", "There is nothing to review in this topic")
@@ -870,6 +931,12 @@ def create_session(db: Session, user: User, *, lesson: LearningLesson, mode: str
                            "content": generator["content"], "short_stage": words_stage and stage_words < VOCAB_STAGE_WORDS}
         if words_stage:  # a short vocabulary stage is still the whole lesson (the reward rule counts it as a stage)
             rules["stage_turns"] = stage_words
+    if discovery:
+        # Fewer new words than a stage left (7 → 7): the stage is all of them, and it counts as a whole stage.
+        rules.update(discovery={"game": game_of(game["game_type"], rules["variant"]),
+                                "scope": generator.get("lesson") or vocab_bank.get("topic") or "mix"}, stage_turns=len(snapshots))
+        if "lesson" in rules:  # a lesson's stage is short only when fewer new words are left (vocab_lesson.py)
+            rules["lesson"]["short_stage"] = len(snapshots) < VOCAB_STAGE_WORDS
     if subject.code == "english":  # the published state of the banks this stage was drawn from
         rules["content_release"] = {bank: grammar_bank.current_release(db, bank) for bank in ("vocabulary", "grammar")}
     now = clock.now()
@@ -883,7 +950,9 @@ def create_session(db: Session, user: User, *, lesson: LearningLesson, mode: str
                         started_at=now, last_tick_at=None if start_paused else now,
                         paused_at=now if start_paused else None, updated_at=now,
                         catalog_lesson=generator.get("lesson"), catalog_grade=generator.get("grade"),
-                        content_version=generator.get("content"))
+                        content_version=generator.get("content"),
+                        # The school year it belongs to (a promotion closes that year, never moves it into the next one).
+                        academic_year=education.learning_year(db, user.id), archive_year=archive_year)
     db.add(s)
     try:
         db.flush()
@@ -968,6 +1037,8 @@ def record_progress(db: Session, s: LearningSession, item: LearningSessionItem, 
 
 
 def record_review(db: Session, s: LearningSession, item: LearningSessionItem) -> None:
+    if s.kind == "archive":  # a finished year's review never fills the current year's "Cần ôn"
+        return
     root_key = item.question_key
     row = db.scalar(select(LearningReviewItem).where(LearningReviewItem.user_id == s.user_id,
                                                      LearningReviewItem.lesson_id == s.lesson_id,
@@ -1089,7 +1160,7 @@ def check_answer(item: LearningSessionItem, answer) -> tuple[bool, str | None, s
     if not isinstance(answer, str):
         raise InvalidAnswer("expected text")
     if item.kind in VOCAB_KINDS:
-        return check_text(answer, expected["accepted"]), None, answer.strip()
+        return check_text(answer, expected["accepted"], expected.get("lang")), None, answer.strip()
     if item.kind == "gate_choice":
         chosen = next((o.get("text", answer) for o in prompt["options"] if o["id"] == answer), answer)
         return check_choice(answer, prompt["options"], expected["option"]), None, chosen
@@ -1116,6 +1187,19 @@ def found_word(item: LearningSessionItem, answer: list[str], s: LearningSession)
     return result, LearningEvent(item_id=item.id, answer_text=text[:300], is_correct=True, score_delta=0, hearts_delta=0)
 
 
+def staged_step(item: LearningSessionItem, update: dict, feedback: str, s: LearningSession) -> tuple[dict, LearningEvent]:
+    """A gameplay solved in steps (lesson_games.advance): a right step before the last. The turn stays open and its
+    prompt moves on to the next step (only now is what that step needs sent: the next question, the options)."""
+    prompt = _loads(item.prompt_json, {})
+    item.attempts += 1
+    prompt.update(update)
+    item.prompt_json = json.dumps(prompt, ensure_ascii=False)
+    result = {"turn_id": item.turn_id, "event": "answer", "correct": True, "outcome": None, "resolved": False,
+              "retry_allowed": False, "error_type": None, "score_delta": 0, "hearts_delta": 0, "combo": s.combo, "hint": None,
+              "correct_answer": None, "explanation": None, "practice_added": False, "word": None, "feedback": feedback}
+    return result, LearningEvent(item_id=item.id, answer_text=feedback[:300], is_correct=True, score_delta=0, hearts_delta=0)
+
+
 def answer_event(db: Session, user: User, session_id: int, data: AnswerInput) -> dict:
     def apply(s: LearningSession, items, now):
         require_active(s)
@@ -1128,6 +1212,10 @@ def answer_event(db: Session, user: User, session_id: int, data: AnswerInput) ->
         try:
             if item.kind == "spell_fix" and cg.spell_found(_loads(item.prompt_json, {}), _loads(item.answer_json, {}), data.answer):
                 return found_word(item, data.answer, s)
+            if item.kind in lg.STAGED:
+                step = lg.advance(item.kind, _loads(item.prompt_json, {}), _loads(item.answer_json, {}), data.answer)
+                if step:
+                    return staged_step(item, *step, s)
             if item.kind in cg.KINDS:
                 correct, error_type, given, feedback = cg.check(item.kind, _loads(item.prompt_json, {}),
                                                                 _loads(item.answer_json, {}), data.answer)
@@ -1157,7 +1245,8 @@ def answer_event(db: Session, user: User, session_id: int, data: AnswerInput) ->
                 s.max_combo = max(s.max_combo, s.combo)
                 result["score_delta"] = points
             result.update(outcome=outcome, resolved=True, correct_answer=correct_answer_text(item),
-                          explanation=item.explanation, combo=s.combo, word=word_pair(item))
+                          correct_options=correct_option_ids(item), explanation=item.explanation, combo=s.combo,
+                          word=word_pair(item))
         else:
             item.wrong_attempts += 1
             item.error_type = error_type or item.error_type
@@ -1166,7 +1255,7 @@ def answer_event(db: Session, user: User, session_id: int, data: AnswerInput) ->
             if WRONG_POLICY[item.kind] == "reveal":
                 resolve(db, s, item, "wrong", now)
                 result.update(outcome="wrong", resolved=True, correct_answer=correct_answer_text(item),
-                              explanation=item.explanation, word=word_pair(item))
+                              correct_options=correct_option_ids(item), explanation=item.explanation, word=word_pair(item))
                 # Học tập: try the question again later in the stage ("thử lại"). A wrong re-practice is retried too.
                 if s.mode == "practice" or practice:
                     result["practice_added"] = add_practice_turn(db, s, items, item)
@@ -1214,8 +1303,8 @@ def reveal_event(db: Session, user: User, session_id: int, data: TurnEvent) -> d
         added = False if stage_of_words(_rules(s)) else add_practice_turn(db, s, items, item)
         issue_turns(s, items, now, want=1)
         result = {"turn_id": item.turn_id, "event": "reveal", "outcome": "revealed", "resolved": True, "combo": s.combo,
-                  "correct_answer": correct_answer_text(item), "explanation": item.explanation, "practice_added": added,
-                  "word": word_pair(item)}
+                  "correct_answer": correct_answer_text(item), "correct_options": correct_option_ids(item),
+                  "explanation": item.explanation, "practice_added": added, "word": word_pair(item)}
         return result, LearningEvent(item_id=item.id)
     return run_event(db, user, session_id, "reveal", data.client_event_id, apply)
 
@@ -1348,13 +1437,16 @@ QUICK_GAMES = {"word_shooter": ("en.vocab.mix", "word_shooter"), "meteor": ("en.
                "gate": ("en.grammar.bank", "gate"), "bridge": ("en.grammar.bank", "bridge")}
 
 
-@router.post("/play", status_code=201, response_model=SessionOut, summary="Start an English game right away (no setup)")
+@router.post("/play", status_code=201, response_model=SessionOut, responses=education.errors(*education.AUTH, (403, "grade_locked"), (404, "lesson_not_found"), (409, "game_not_available"), (409, "open_session_exists")), summary="Start an English game right away (no setup)")
 def quick_start(data: QuickStart, idempotency_key: IdempotencyKey = None,
                 user: User = Depends(current_user), db: Session = Depends(get_db)):
     """Creates a paused stage of the game's lesson (the app shows a 3-2-1 countdown, then resumes it). The words or
     questions are chosen from the user's level, history and review list: there is nothing to configure.
-    With a grade (or, outside school, a level) the game must have content for it: the curriculum games always need one."""
-    grade = data.grade or user.school_grade
+    With a grade (or, outside school, a level) the game must have content for it: the curriculum games always need one.
+    The grade is always the learner's current one (education.py); the app cannot pick another."""
+    education.sync(db, user)
+    education.check_requested_grade(user, data.grade)
+    grade = user.school_grade
     if data.game in cg.GAMES or data.grade or data.level:
         if not curriculum.offered(data.game, grade, data.level, math_levels(db)):
             raise APIError(409, "game_not_available", "This game has no content for this grade or level yet")
@@ -1362,11 +1454,23 @@ def quick_start(data: QuickStart, idempotency_key: IdempotencyKey = None,
         code, variant = cg.lesson_code(data.game, curriculum.band_for(grade, data.level)), None
     else:
         code, variant = QUICK_GAMES[data.game]
+    review_keys = None
+    if data.game in vocab_discovery.GAMES:
+        if data.vocab == "review":
+            keys = vocab_discovery.review_words(db, user, data.game, clock.now())
+            if not keys:
+                raise APIError(409, "nothing_to_review", "There is nothing to review in this game yet")
+            review_keys = [f"{code}.{'spell.' if data.game == 'word_shooter' else ''}{k}" for k in keys]
+        elif data.topic is not None:
+            if data.topic not in TOPIC_CODES or data.topic in vocab_discovery.policy_for(grade).blocked_topics:
+                raise APIError(409, "topic_not_available", "This topic is not offered for your grade")
+            code = BANK_LESSON_CODES.get(data.topic, f"en.vocab.{data.topic}")
     lesson = db.scalar(select(LearningLesson).where(LearningLesson.code == code))
     if lesson is None or lesson.status != "published":
         raise APIError(404, "lesson_not_found", "Lesson not found")
     s = create_session(db, user, lesson=lesson, mode=data.mode, duration_minutes=data.duration_minutes, variant=variant,
-                       device_zone=data.timezone, kind="lesson", idempotency_key=idempotency_key, start_paused=True)
+                       device_zone=data.timezone, kind="review" if review_keys else "lesson", idempotency_key=idempotency_key,
+                       review_keys=review_keys, start_paused=True)
     return session_out(db, s)
 
 

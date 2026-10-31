@@ -2818,8 +2818,143 @@
          "explanation": "Nhiệt độ cao, có gió làm nước bay hơi nhanh hơn."
         }
        ]
+      },
+      {
+       "game": "lab",
+       "title": "Phòng thí nghiệm: nước chuyển thể",
+       "scene": "water",
+       "tasks": [
+        {
+         "key": "tan_da",
+         "goal": "Đưa cốc lên dụng cụ phù hợp để nước đá tan thành nước.",
+         "start": "ice",
+         "target": "water",
+         "slots": [
+          {
+           "id": "tool",
+           "label": "Dụng cụ",
+           "accept": [
+            "nong"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "nong",
+           "art": "hot",
+           "name": "Làm nóng",
+           "why": "Đúng: nhiệt làm nước đá tan."
+          },
+          {
+           "key": "lanh",
+           "art": "cold",
+           "name": "Làm lạnh",
+           "why": "Làm lạnh thì nước đá vẫn là đá, không tan."
+          }
+         ],
+         "result": "Nước đá được làm nóng nên nóng chảy thành nước lỏng.",
+         "explanation": "Nước từ thể rắn chuyển sang thể lỏng gọi là nóng chảy."
+        },
+        {
+         "key": "bay_hoi",
+         "goal": "Đưa cốc lên dụng cụ phù hợp để nước bay hơi nhanh hơn.",
+         "start": "water",
+         "target": "steam",
+         "slots": [
+          {
+           "id": "tool",
+           "label": "Dụng cụ",
+           "accept": [
+            "nong"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "nong",
+           "art": "hot",
+           "name": "Làm nóng",
+           "why": "Đúng: nhiệt làm nước bay hơi nhanh hơn."
+          },
+          {
+           "key": "lanh",
+           "art": "cold",
+           "name": "Làm lạnh",
+           "why": "Làm lạnh thì nước bay hơi chậm lại, có thể đông thành đá."
+          }
+         ],
+         "result": "Nước được làm nóng bay hơi nhanh: hơi nước bốc lên.",
+         "explanation": "Nước từ thể lỏng chuyển sang thể khí gọi là bay hơi; nước nóng bay hơi nhanh hơn."
+        },
+        {
+         "key": "dong_dac",
+         "goal": "Đưa cốc lên dụng cụ phù hợp để nước đông lại thành đá.",
+         "start": "water",
+         "target": "ice",
+         "slots": [
+          {
+           "id": "tool",
+           "label": "Dụng cụ",
+           "accept": [
+            "lanh"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "nong",
+           "art": "hot",
+           "name": "Làm nóng",
+           "why": "Làm nóng thì nước không thể đông thành đá."
+          },
+          {
+           "key": "lanh",
+           "art": "cold",
+           "name": "Làm lạnh",
+           "why": "Đúng: lạnh làm nước đông đặc."
+          }
+         ],
+         "result": "Nước được làm lạnh tới 0 °C thì đông đặc thành đá.",
+         "explanation": "Nước từ thể lỏng chuyển sang thể rắn gọi là đông đặc."
+        },
+        {
+         "key": "ngung_tu",
+         "goal": "Đưa cốc lên dụng cụ phù hợp để hơi nước đọng lại thành giọt nước.",
+         "start": "steam",
+         "target": "water",
+         "slots": [
+          {
+           "id": "tool",
+           "label": "Dụng cụ",
+           "accept": [
+            "lanh"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "nong",
+           "art": "hot",
+           "name": "Làm nóng",
+           "why": "Làm nóng thì hơi nước càng bay đi, không đọng lại."
+          },
+          {
+           "key": "lanh",
+           "art": "cold",
+           "name": "Làm lạnh",
+           "why": "Đúng: gặp lạnh, hơi nước ngưng tụ."
+          }
+         ],
+         "result": "Hơi nước gặp lạnh ngưng tụ thành những giọt nước.",
+         "explanation": "Nước từ thể khí chuyển sang thể lỏng gọi là ngưng tụ, như giọt nước đọng trên nắp vung."
+        }
+       ]
       }
-     ]
+     ],
+     "completion": {
+      "min_first_try": 0.8,
+      "games": "any"
+     }
     },
     {
      "key": "kh4.vong_tuan_hoan_nuoc",
@@ -3022,8 +3157,164 @@
          "explanation": "Mắt nhìn thấy vật khi có ánh sáng từ vật truyền tới mắt."
         }
        ]
+      },
+      {
+       "game": "lab",
+       "title": "Phòng thí nghiệm: ánh sáng và bóng",
+       "scene": "shadow",
+       "tasks": [
+        {
+         "key": "bong_toi",
+         "goal": "Đặt một vật giữa đèn pin và màn chắn để trên màn có bóng tối rõ.",
+         "target": "dark",
+         "slots": [
+          {
+           "id": "between",
+           "label": "Giữa đèn và màn",
+           "accept": [
+            "sach"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "kinh",
+           "art": "glass",
+           "name": "Tấm kính trong",
+           "why": "Kính trong cho gần như toàn bộ ánh sáng truyền qua nên không tạo bóng tối."
+          },
+          {
+           "key": "sach",
+           "art": "book",
+           "name": "Quyển sách",
+           "why": "Quyển sách không cho ánh sáng truyền qua (vật cản sáng) nên phía sau có bóng tối."
+          },
+          {
+           "key": "giay_mo",
+           "art": "paper",
+           "name": "Tờ giấy bóng mờ",
+           "why": "Giấy bóng mờ cho một phần ánh sáng truyền qua nên chỉ có bóng mờ."
+          }
+         ],
+         "result": "Quyển sách cản ánh sáng: phía sau nó, trên màn chắn có bóng tối.",
+         "explanation": "Bóng tối xuất hiện phía sau vật cản sáng khi vật được chiếu sáng."
+        },
+        {
+         "key": "truyen_qua",
+         "goal": "Đặt vật cho ánh sáng truyền qua gần như hoàn toàn, màn vẫn sáng.",
+         "target": "clear",
+         "slots": [
+          {
+           "id": "between",
+           "label": "Giữa đèn và màn",
+           "accept": [
+            "kinh"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "kinh",
+           "art": "glass",
+           "name": "Tấm kính trong",
+           "why": "Kính trong cho gần như toàn bộ ánh sáng truyền qua nên không tạo bóng tối."
+          },
+          {
+           "key": "bia",
+           "art": "cardboard",
+           "name": "Tấm bìa",
+           "why": "Tấm bìa cản ánh sáng nên phía sau có bóng tối."
+          },
+          {
+           "key": "go",
+           "art": "wood",
+           "name": "Khúc gỗ",
+           "why": "Gỗ không cho ánh sáng truyền qua nên tạo bóng tối."
+          }
+         ],
+         "result": "Ánh sáng truyền qua tấm kính trong: màn chắn vẫn sáng, gần như không có bóng.",
+         "explanation": "Kính trong, nước trong, không khí cho ánh sáng truyền qua."
+        },
+        {
+         "key": "bong_mo",
+         "goal": "Đặt vật chỉ cho một phần ánh sáng đi qua để có bóng mờ.",
+         "target": "faint",
+         "slots": [
+          {
+           "id": "between",
+           "label": "Giữa đèn và màn",
+           "accept": [
+            "giay_mo"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "giay_mo",
+           "art": "paper",
+           "name": "Tờ giấy bóng mờ",
+           "why": "Giấy bóng mờ cho một phần ánh sáng truyền qua nên chỉ có bóng mờ."
+          },
+          {
+           "key": "kinh",
+           "art": "glass",
+           "name": "Tấm kính trong",
+           "why": "Kính trong cho gần như toàn bộ ánh sáng truyền qua nên không tạo bóng tối."
+          },
+          {
+           "key": "sach",
+           "art": "book",
+           "name": "Quyển sách",
+           "why": "Quyển sách không cho ánh sáng truyền qua (vật cản sáng) nên phía sau có bóng tối."
+          }
+         ],
+         "result": "Giấy bóng mờ cho một phần ánh sáng truyền qua: trên màn có bóng mờ.",
+         "explanation": "Có vật cho ánh sáng truyền qua, vật cho một phần ánh sáng truyền qua và vật cản sáng."
+        },
+        {
+         "key": "vat_can",
+         "goal": "Chọn vật cản sáng để tạo bóng cho rạp chiếu bóng của pet.",
+         "target": "dark",
+         "slots": [
+          {
+           "id": "between",
+           "label": "Giữa đèn và màn",
+           "accept": [
+            "bia",
+            "go"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "bia",
+           "art": "cardboard",
+           "name": "Tấm bìa",
+           "why": "Tấm bìa cản ánh sáng nên phía sau có bóng tối."
+          },
+          {
+           "key": "go",
+           "art": "wood",
+           "name": "Khúc gỗ",
+           "why": "Gỗ không cho ánh sáng truyền qua nên tạo bóng tối."
+          },
+          {
+           "key": "coc_trong",
+           "art": "cup",
+           "name": "Cốc nhựa trong",
+           "why": "Cốc nhựa trong cho ánh sáng truyền qua gần hết nên bóng rất nhạt."
+          }
+         ],
+         "result": "Vật cản sáng chặn ánh sáng: trên màn hiện bóng tối của nó.",
+         "explanation": "Múa rối bóng dùng vật cản sáng để tạo bóng trên màn."
+        }
+       ]
       }
-     ]
+     ],
+     "completion": {
+      "min_first_try": 0.8,
+      "games": "any"
+     }
     },
     {
      "key": "kh4.vai_tro_anh_sang",
@@ -3873,8 +4164,225 @@
          "explanation": "Công tắc đóng: mạch kín, đèn sáng. Công tắc ngắt: mạch hở, đèn tắt."
         }
        ]
+      },
+      {
+       "game": "lab",
+       "title": "Phòng thí nghiệm: lắp mạch",
+       "scene": "circuit",
+       "tasks": [
+        {
+         "key": "mach_don",
+         "goal": "Kéo pin, bóng đèn và một dây nối vào mạch rồi bật công tắc để đèn sáng.",
+         "slots": [
+          {
+           "id": "power",
+           "label": "Nguồn điện",
+           "accept": [
+            "pin"
+           ]
+          },
+          {
+           "id": "lamp",
+           "label": "Bóng đèn",
+           "accept": [
+            "den"
+           ]
+          },
+          {
+           "id": "link",
+           "label": "Chỗ nối",
+           "accept": [
+            "day_dong"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "pin",
+           "art": "battery",
+           "name": "Viên pin",
+           "why": "Pin là nguồn điện: nó đẩy dòng điện chạy trong mạch."
+          },
+          {
+           "key": "den",
+           "art": "bulb",
+           "name": "Bóng đèn",
+           "why": "Bóng đèn sáng lên khi có dòng điện chạy qua dây tóc."
+          },
+          {
+           "key": "day_dong",
+           "art": "copper",
+           "name": "Dây đồng",
+           "why": "Đồng là kim loại dẫn điện tốt, dòng điện đi qua được."
+          },
+          {
+           "key": "soi_len",
+           "art": "wool",
+           "name": "Sợi len",
+           "why": "Len là vật cách điện: mạch bị hở, đèn không sáng."
+          }
+         ],
+         "result": "Mạch kín: dòng điện chạy từ pin qua dây đồng, qua bóng đèn rồi trở về pin, nên đèn sáng.",
+         "explanation": "Một mạch điện đơn giản gồm nguồn điện (pin), bóng đèn và dây dẫn nối thành vòng kín.",
+         "hint": "Nguồn điện là vật cung cấp điện cho mạch."
+        },
+        {
+         "key": "hai_cho_noi",
+         "goal": "Mạch có hai chỗ hở. Chọn vật nối cả hai chỗ để đèn sáng.",
+         "slots": [
+          {
+           "id": "link",
+           "label": "Chỗ nối",
+           "accept": [
+            "day_dong",
+            "kep_giay"
+           ]
+          },
+          {
+           "id": "link2",
+           "label": "Chỗ nối thứ hai",
+           "accept": [
+            "day_dong",
+            "kep_giay"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "day_dong",
+           "art": "copper",
+           "name": "Dây đồng",
+           "why": "Đồng là kim loại dẫn điện tốt, dòng điện đi qua được."
+          },
+          {
+           "key": "kep_giay",
+           "art": "clip",
+           "name": "Kẹp giấy kim loại",
+           "why": "Kẹp giấy làm bằng kim loại nên cho dòng điện đi qua."
+          },
+          {
+           "key": "day_chun",
+           "art": "rubber",
+           "name": "Dây chun",
+           "why": "Cao su là vật cách điện: mạch bị hở, đèn không sáng."
+          },
+          {
+           "key": "thuoc_nhua",
+           "art": "ruler",
+           "name": "Thước nhựa",
+           "why": "Nhựa là vật cách điện: dòng điện không đi qua, mạch bị hở nên đèn không sáng."
+          }
+         ],
+         "result": "Cả hai chỗ hở được nối bằng kim loại, mạch kín và đèn sáng.",
+         "explanation": "Chỉ cần một chỗ hở trong mạch là dòng điện không chạy được và đèn tắt.",
+         "hint": "Kim loại cho dòng điện đi qua."
+        },
+        {
+         "key": "chon_nguon",
+         "goal": "Bóng đèn và dây nối đã có. Chọn nguồn điện cho mạch rồi bật công tắc.",
+         "slots": [
+          {
+           "id": "power",
+           "label": "Nguồn điện",
+           "accept": [
+            "pin"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "pin",
+           "art": "battery",
+           "name": "Viên pin",
+           "why": "Pin là nguồn điện: nó đẩy dòng điện chạy trong mạch."
+          },
+          {
+           "key": "cuc_tay",
+           "art": "eraser",
+           "name": "Cục tẩy",
+           "why": "Cục tẩy làm bằng cao su, là vật cách điện."
+          },
+          {
+           "key": "dong_xu",
+           "art": "coin",
+           "name": "Đồng xu",
+           "why": "Đồng xu làm bằng kim loại nên dẫn điện."
+          }
+         ],
+         "result": "Có pin làm nguồn điện, dòng điện chạy trong mạch kín và đèn sáng.",
+         "explanation": "Đồng xu dẫn điện nhưng không tạo ra điện: mạch cần một nguồn điện như pin.",
+         "hint": "Vật nào cung cấp năng lượng điện?"
+        },
+        {
+         "key": "lap_du",
+         "goal": "Lắp đủ nguồn điện, bóng đèn và chỗ nối để thắp sáng căn phòng của pet.",
+         "slots": [
+          {
+           "id": "power",
+           "label": "Nguồn điện",
+           "accept": [
+            "pin"
+           ]
+          },
+          {
+           "id": "lamp",
+           "label": "Bóng đèn",
+           "accept": [
+            "den"
+           ]
+          },
+          {
+           "id": "link",
+           "label": "Chỗ nối",
+           "accept": [
+            "kep_giay",
+            "dinh_sat"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "pin",
+           "art": "battery",
+           "name": "Viên pin",
+           "why": "Pin là nguồn điện: nó đẩy dòng điện chạy trong mạch."
+          },
+          {
+           "key": "den",
+           "art": "bulb",
+           "name": "Bóng đèn",
+           "why": "Bóng đèn sáng lên khi có dòng điện chạy qua dây tóc."
+          },
+          {
+           "key": "kep_giay",
+           "art": "clip",
+           "name": "Kẹp giấy kim loại",
+           "why": "Kẹp giấy làm bằng kim loại nên cho dòng điện đi qua."
+          },
+          {
+           "key": "dinh_sat",
+           "art": "nail",
+           "name": "Đinh sắt",
+           "why": "Sắt là kim loại, vật dẫn điện: nối vào chỗ hở thì mạch kín, đèn sáng."
+          },
+          {
+           "key": "que_go",
+           "art": "wood",
+           "name": "Que gỗ khô",
+           "why": "Gỗ khô là vật cách điện: dòng điện không đi qua được."
+          }
+         ],
+         "result": "Pin, bóng đèn và kẹp kim loại tạo thành mạch kín: đèn sáng.",
+         "explanation": "Muốn đèn sáng, mạch phải kín và có nguồn điện.",
+         "hint": "Chỗ nối cần một vật bằng kim loại."
+        }
+       ]
       }
-     ]
+     ],
+     "completion": {
+      "min_first_try": 0.8,
+      "games": "any"
+     }
     },
     {
      "key": "kh5.dan_dien_cach_dien",
@@ -4005,8 +4513,195 @@
          }
         ]
        }
+      },
+      {
+       "game": "lab",
+       "title": "Phòng thí nghiệm: thử vật dẫn điện",
+       "scene": "circuit",
+       "tasks": [
+        {
+         "key": "dinh",
+         "goal": "Pin và bóng đèn đã lắp sẵn. Chọn vật nối chỗ hở để đèn sáng.",
+         "slots": [
+          {
+           "id": "link",
+           "label": "Chỗ nối",
+           "accept": [
+            "dinh_sat"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "dinh_sat",
+           "art": "nail",
+           "name": "Đinh sắt",
+           "why": "Sắt là kim loại, vật dẫn điện: nối vào chỗ hở thì mạch kín, đèn sáng."
+          },
+          {
+           "key": "thuoc_nhua",
+           "art": "ruler",
+           "name": "Thước nhựa",
+           "why": "Nhựa là vật cách điện: dòng điện không đi qua, mạch bị hở nên đèn không sáng."
+          },
+          {
+           "key": "cuc_tay",
+           "art": "eraser",
+           "name": "Cục tẩy",
+           "why": "Cục tẩy làm bằng cao su, là vật cách điện."
+          }
+         ],
+         "result": "Đinh sắt dẫn điện, mạch kín nên đèn sáng.",
+         "explanation": "Kim loại như sắt, đồng, nhôm là vật dẫn điện; nhựa, cao su là vật cách điện."
+        },
+        {
+         "key": "thia",
+         "goal": "Vật nào nối chỗ hở làm đèn sáng?",
+         "slots": [
+          {
+           "id": "link",
+           "label": "Chỗ nối",
+           "accept": [
+            "thia_inox"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "thia_inox",
+           "art": "spoon",
+           "name": "Thìa inox",
+           "why": "Inox là kim loại, vật dẫn điện: mạch kín, đèn sáng."
+          },
+          {
+           "key": "que_go",
+           "art": "wood",
+           "name": "Que gỗ khô",
+           "why": "Gỗ khô là vật cách điện: dòng điện không đi qua được."
+          },
+          {
+           "key": "soi_len",
+           "art": "wool",
+           "name": "Sợi len",
+           "why": "Len là vật cách điện: mạch bị hở, đèn không sáng."
+          }
+         ],
+         "result": "Thìa inox dẫn điện: đèn sáng.",
+         "explanation": "Gỗ khô và len không cho dòng điện đi qua: chúng là vật cách điện."
+        },
+        {
+         "key": "giay_bac",
+         "goal": "Chọn vật dẫn điện để nối mạch.",
+         "slots": [
+          {
+           "id": "link",
+           "label": "Chỗ nối",
+           "accept": [
+            "giay_bac"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "giay_bac",
+           "art": "foil",
+           "name": "Giấy bạc (nhôm)",
+           "why": "Giấy bạc làm bằng nhôm, một kim loại dẫn điện."
+          },
+          {
+           "key": "day_chun",
+           "art": "rubber",
+           "name": "Dây chun",
+           "why": "Cao su là vật cách điện: mạch bị hở, đèn không sáng."
+          },
+          {
+           "key": "tam_bia",
+           "art": "cardboard",
+           "name": "Tấm bìa",
+           "why": "Bìa giấy là vật cách điện: mạch bị hở."
+          }
+         ],
+         "result": "Giấy bạc là nhôm, dẫn điện: đèn sáng.",
+         "explanation": "Giấy bạc dùng trong bếp làm bằng nhôm nên dẫn điện; tấm bìa và dây chun thì cách điện."
+        },
+        {
+         "key": "dong_xu",
+         "goal": "Thử từng vật: vật nào làm đèn sáng?",
+         "slots": [
+          {
+           "id": "link",
+           "label": "Chỗ nối",
+           "accept": [
+            "dong_xu"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "dong_xu",
+           "art": "coin",
+           "name": "Đồng xu",
+           "why": "Đồng xu làm bằng kim loại nên dẫn điện."
+          },
+          {
+           "key": "coc_nhua",
+           "art": "cup",
+           "name": "Cốc nhựa",
+           "why": "Nhựa là vật cách điện: dòng điện không đi qua."
+          },
+          {
+           "key": "tam_kinh",
+           "art": "glass",
+           "name": "Tấm kính",
+           "why": "Thủy tinh là vật cách điện: dòng điện không đi qua."
+          }
+         ],
+         "result": "Đồng xu bằng kim loại dẫn điện: đèn sáng.",
+         "explanation": "Thủy tinh và nhựa là vật cách điện, nên người ta dùng chúng để bọc, ngăn dòng điện."
+        },
+        {
+         "key": "hai_vat",
+         "goal": "Có hai vật dẫn điện trên bàn. Chọn một vật để nối mạch.",
+         "slots": [
+          {
+           "id": "link",
+           "label": "Chỗ nối",
+           "accept": [
+            "day_dong",
+            "kep_giay"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "day_dong",
+           "art": "copper",
+           "name": "Dây đồng",
+           "why": "Đồng là kim loại dẫn điện tốt, dòng điện đi qua được."
+          },
+          {
+           "key": "kep_giay",
+           "art": "clip",
+           "name": "Kẹp giấy kim loại",
+           "why": "Kẹp giấy làm bằng kim loại nên cho dòng điện đi qua."
+          },
+          {
+           "key": "thuoc_nhua",
+           "art": "ruler",
+           "name": "Thước nhựa",
+           "why": "Nhựa là vật cách điện: dòng điện không đi qua, mạch bị hở nên đèn không sáng."
+          }
+         ],
+         "result": "Dây đồng và kẹp giấy kim loại đều dẫn điện: đèn sáng.",
+         "explanation": "Dây điện trong nhà có lõi đồng dẫn điện và vỏ nhựa cách điện bên ngoài."
+        }
+       ]
       }
-     ]
+     ],
+     "completion": {
+      "min_first_try": 0.8,
+      "games": "any"
+     }
     },
     {
      "key": "kh5.dien_an_toan",
@@ -4271,8 +4966,254 @@
          "last_label": "Sau"
         }
        ]
+      },
+      {
+       "game": "lab",
+       "title": "Phòng thí nghiệm: gieo hạt",
+       "scene": "plant",
+       "tasks": [
+        {
+         "key": "nay_mam",
+         "goal": "Gieo hạt đậu, tưới nước rồi xếp các giai đoạn hạt nảy mầm theo thứ tự.",
+         "slots": [
+          {
+           "id": "s1",
+           "label": "Bước 1",
+           "accept": [
+            "g1"
+           ]
+          },
+          {
+           "id": "s2",
+           "label": "Bước 2",
+           "accept": [
+            "g2"
+           ]
+          },
+          {
+           "id": "s3",
+           "label": "Bước 3",
+           "accept": [
+            "g3"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "g1",
+           "art": "stage:1",
+           "name": "Hạt",
+           "why": "“Hạt”: Hạt có vỏ, phôi và chất dinh dưỡng dự trữ. Thử đặt lại theo thứ tự cây lớn lên."
+          },
+          {
+           "key": "g2",
+           "art": "stage:2",
+           "name": "Hạt nảy mầm",
+           "why": "“Hạt nảy mầm”: Gặp độ ẩm và nhiệt độ thích hợp, hạt nứt vỏ, rễ mầm mọc ra trước. Thử đặt lại theo thứ tự cây lớn lên."
+          },
+          {
+           "key": "g3",
+           "art": "stage:3",
+           "name": "Cây mầm",
+           "why": "“Cây mầm”: Thân mầm vươn lên, hai lá mầm xòe ra. Thử đặt lại theo thứ tự cây lớn lên."
+          }
+         ],
+         "result": "Hạt đậu hút nước, nứt vỏ, rễ mầm mọc ra rồi thân và hai lá mầm vươn lên.",
+         "explanation": "Hạt nảy mầm cần độ ẩm và nhiệt độ thích hợp."
+        },
+        {
+         "key": "cay_con",
+         "goal": "Xếp các giai đoạn từ hạt đến cây con.",
+         "slots": [
+          {
+           "id": "s1",
+           "label": "Bước 1",
+           "accept": [
+            "g1"
+           ]
+          },
+          {
+           "id": "s2",
+           "label": "Bước 2",
+           "accept": [
+            "g2"
+           ]
+          },
+          {
+           "id": "s3",
+           "label": "Bước 3",
+           "accept": [
+            "g3"
+           ]
+          },
+          {
+           "id": "s4",
+           "label": "Bước 4",
+           "accept": [
+            "g4"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "g1",
+           "art": "stage:1",
+           "name": "Hạt",
+           "why": "“Hạt”: Hạt có vỏ, phôi và chất dinh dưỡng dự trữ. Thử đặt lại theo thứ tự cây lớn lên."
+          },
+          {
+           "key": "g2",
+           "art": "stage:2",
+           "name": "Hạt nảy mầm",
+           "why": "“Hạt nảy mầm”: Gặp độ ẩm và nhiệt độ thích hợp, hạt nứt vỏ, rễ mầm mọc ra trước. Thử đặt lại theo thứ tự cây lớn lên."
+          },
+          {
+           "key": "g3",
+           "art": "stage:3",
+           "name": "Cây mầm",
+           "why": "“Cây mầm”: Thân mầm vươn lên, hai lá mầm xòe ra. Thử đặt lại theo thứ tự cây lớn lên."
+          },
+          {
+           "key": "g4",
+           "art": "stage:4",
+           "name": "Cây con",
+           "why": "“Cây con”: Cây con mọc các lá thật và tự nuôi mình. Thử đặt lại theo thứ tự cây lớn lên."
+          }
+         ],
+         "result": "Từ hạt, cây mầm mọc lên rồi thành cây con có lá thật.",
+         "explanation": "Lá mầm nuôi cây mầm lúc đầu; khi có lá thật, cây con tự nuôi mình."
+        },
+        {
+         "key": "ra_hoa",
+         "goal": "Xếp đủ các giai đoạn cây đậu lớn lên cho tới khi ra hoa.",
+         "slots": [
+          {
+           "id": "s1",
+           "label": "Bước 1",
+           "accept": [
+            "g1"
+           ]
+          },
+          {
+           "id": "s2",
+           "label": "Bước 2",
+           "accept": [
+            "g2"
+           ]
+          },
+          {
+           "id": "s3",
+           "label": "Bước 3",
+           "accept": [
+            "g3"
+           ]
+          },
+          {
+           "id": "s4",
+           "label": "Bước 4",
+           "accept": [
+            "g4"
+           ]
+          },
+          {
+           "id": "s5",
+           "label": "Bước 5",
+           "accept": [
+            "g5"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "g1",
+           "art": "stage:1",
+           "name": "Hạt",
+           "why": "“Hạt”: Hạt có vỏ, phôi và chất dinh dưỡng dự trữ. Thử đặt lại theo thứ tự cây lớn lên."
+          },
+          {
+           "key": "g2",
+           "art": "stage:2",
+           "name": "Hạt nảy mầm",
+           "why": "“Hạt nảy mầm”: Gặp độ ẩm và nhiệt độ thích hợp, hạt nứt vỏ, rễ mầm mọc ra trước. Thử đặt lại theo thứ tự cây lớn lên."
+          },
+          {
+           "key": "g3",
+           "art": "stage:3",
+           "name": "Cây mầm",
+           "why": "“Cây mầm”: Thân mầm vươn lên, hai lá mầm xòe ra. Thử đặt lại theo thứ tự cây lớn lên."
+          },
+          {
+           "key": "g4",
+           "art": "stage:4",
+           "name": "Cây con",
+           "why": "“Cây con”: Cây con mọc các lá thật và tự nuôi mình. Thử đặt lại theo thứ tự cây lớn lên."
+          },
+          {
+           "key": "g5",
+           "art": "stage:5",
+           "name": "Cây ra hoa",
+           "why": "“Cây ra hoa”: Cây lớn lên rồi ra hoa, hoa tạo quả và hạt mới. Thử đặt lại theo thứ tự cây lớn lên."
+          }
+         ],
+         "result": "Cây đậu lớn lên từ hạt, ra hoa; hoa tạo quả chứa hạt mới.",
+         "explanation": "Hạt mới lại có thể mọc thành cây: đó là cách cây có hoa sinh sản bằng hạt."
+        },
+        {
+         "key": "tu_mam",
+         "goal": "Cây mầm đã mọc. Xếp tiếp các giai đoạn cây lớn lên.",
+         "slots": [
+          {
+           "id": "s1",
+           "label": "Bước 1",
+           "accept": [
+            "g3"
+           ]
+          },
+          {
+           "id": "s2",
+           "label": "Bước 2",
+           "accept": [
+            "g4"
+           ]
+          },
+          {
+           "id": "s3",
+           "label": "Bước 3",
+           "accept": [
+            "g5"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "g3",
+           "art": "stage:3",
+           "name": "Cây mầm",
+           "why": "“Cây mầm”: Thân mầm vươn lên, hai lá mầm xòe ra. Thử đặt lại theo thứ tự cây lớn lên."
+          },
+          {
+           "key": "g4",
+           "art": "stage:4",
+           "name": "Cây con",
+           "why": "“Cây con”: Cây con mọc các lá thật và tự nuôi mình. Thử đặt lại theo thứ tự cây lớn lên."
+          },
+          {
+           "key": "g5",
+           "art": "stage:5",
+           "name": "Cây ra hoa",
+           "why": "“Cây ra hoa”: Cây lớn lên rồi ra hoa, hoa tạo quả và hạt mới. Thử đặt lại theo thứ tự cây lớn lên."
+          }
+         ],
+         "result": "Cây mầm thành cây con, rồi cây trưởng thành ra hoa.",
+         "explanation": "Cây cần nước, ánh sáng, không khí và chất khoáng để lớn lên."
+        }
+       ]
       }
-     ]
+     ],
+     "completion": {
+      "min_first_try": 0.8,
+      "games": "any"
+     }
     },
     {
      "key": "kh5.sinh_san_dong_vat",
@@ -5987,9 +6928,208 @@
      "key": "kh7.nam_cham",
      "order": 1,
      "title": "Nam châm",
-     "description": "Hai cực của nam châm; tương tác giữa các cực.",
-     "status": "planned",
-     "source": "mirabi-original"
+     "description": "Vật liệu có từ tính; hai cực của nam châm và tương tác giữa các cực.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình GDPT 2018 cho đúng lớp; tác giả đã soát kiến thức và chạy trình kiểm tra nội dung."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nhận biết được vật liệu có từ tính (sắt, thép, niken, coban) và vật liệu không có từ tính",
+      "Xác định được cực Bắc, cực Nam của nam châm và nêu được tương tác giữa hai cực"
+     ],
+     "summary": [
+      "Nam châm hút được các vật làm bằng vật liệu có từ tính như sắt, thép, niken, coban.",
+      "Nhiều kim loại như đồng, nhôm không bị nam châm hút; nhựa, gỗ, cao su, thuỷ tinh cũng không bị hút.",
+      "Mỗi nam châm có hai cực: cực Bắc (N) và cực Nam (S). Hai cực cùng tên đẩy nhau, hai cực khác tên hút nhau."
+     ],
+     "examples": [
+      {
+       "title": "Tách đinh sắt lẫn trong mùn cưa",
+       "lines": [
+        "Đưa nam châm lại gần: đinh sắt bị hút, mùn cưa (gỗ) ở lại.",
+        "Đó là cách dùng nam châm để tách vật có từ tính."
+       ]
+      },
+      {
+       "title": "Hai thanh nam châm",
+       "lines": [
+        "Đưa cực N lại gần cực N: hai thanh đẩy nhau.",
+        "Đưa cực N lại gần cực S: hai thanh hút nhau."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "lab",
+       "title": "Phòng thí nghiệm: nam châm hút gì?",
+       "scene": "magnet",
+       "tasks": [
+        {
+         "key": "dinh",
+         "goal": "Đặt vào vùng hút của nam châm vật sẽ bị nam châm hút.",
+         "slots": [
+          {
+           "id": "pull",
+           "label": "Vùng hút",
+           "accept": [
+            "dinh_sat"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "dinh_sat",
+           "art": "nail",
+           "name": "Đinh sắt",
+           "why": "Sắt là vật liệu có từ tính: nam châm hút đinh sắt."
+          },
+          {
+           "key": "thuoc_nhua",
+           "art": "ruler",
+           "name": "Thước nhựa",
+           "why": "Nhựa không có từ tính: thước nhựa đứng yên khi nam châm lại gần."
+          },
+          {
+           "key": "que_go",
+           "art": "wood",
+           "name": "Que gỗ",
+           "why": "Gỗ không có từ tính: nam châm không hút gỗ."
+          }
+         ],
+         "result": "Đinh sắt bay lại dính vào nam châm.",
+         "explanation": "Sắt có từ tính nên bị nam châm hút; nhựa và gỗ thì không."
+        },
+        {
+         "key": "kep",
+         "goal": "Vật nào bị nam châm hút?",
+         "slots": [
+          {
+           "id": "pull",
+           "label": "Vùng hút",
+           "accept": [
+            "kep_thep"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "kep_thep",
+           "art": "clip",
+           "name": "Kẹp giấy bằng thép",
+           "why": "Thép có từ tính: nam châm hút kẹp giấy thép."
+          },
+          {
+           "key": "cuc_tay",
+           "art": "eraser",
+           "name": "Cục tẩy cao su",
+           "why": "Cao su không có từ tính: cục tẩy đứng yên."
+          },
+          {
+           "key": "tam_kinh",
+           "art": "glass",
+           "name": "Tấm kính",
+           "why": "Thuỷ tinh không có từ tính: nam châm không hút kính."
+          }
+         ],
+         "result": "Kẹp giấy thép bị hút, dính vào nam châm.",
+         "explanation": "Thép có từ tính; cao su và thuỷ tinh không có từ tính."
+        },
+        {
+         "key": "kim_loai",
+         "goal": "Kim loại nào bị nam châm hút?",
+         "slots": [
+          {
+           "id": "pull",
+           "label": "Vùng hút",
+           "accept": [
+            "dinh_sat"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "dinh_sat",
+           "art": "nail",
+           "name": "Đinh sắt",
+           "why": "Sắt là vật liệu có từ tính: nam châm hút đinh sắt."
+          },
+          {
+           "key": "day_dong",
+           "art": "copper",
+           "name": "Dây đồng",
+           "why": "Đồng là kim loại nhưng không có từ tính: nam châm không hút đồng."
+          },
+          {
+           "key": "giay_nhom",
+           "art": "foil",
+           "name": "Giấy bạc (nhôm)",
+           "why": "Nhôm là kim loại nhưng không có từ tính: nam châm không hút nhôm."
+          }
+         ],
+         "result": "Chỉ đinh sắt bị hút; dây đồng và giấy nhôm đứng yên.",
+         "explanation": "Không phải kim loại nào cũng bị nam châm hút: sắt, thép, niken, coban bị hút; đồng, nhôm thì không."
+        },
+        {
+         "key": "hai_vat",
+         "goal": "Có hai vật bị nam châm hút. Đặt cả hai vào vùng hút.",
+         "slots": [
+          {
+           "id": "pull",
+           "label": "Vùng hút 1",
+           "accept": [
+            "dinh_sat",
+            "kep_thep"
+           ]
+          },
+          {
+           "id": "pull2",
+           "label": "Vùng hút 2",
+           "accept": [
+            "dinh_sat",
+            "kep_thep"
+           ]
+          }
+         ],
+         "parts": [
+          {
+           "key": "dinh_sat",
+           "art": "nail",
+           "name": "Đinh sắt",
+           "why": "Sắt là vật liệu có từ tính: nam châm hút đinh sắt."
+          },
+          {
+           "key": "kep_thep",
+           "art": "clip",
+           "name": "Kẹp giấy bằng thép",
+           "why": "Thép có từ tính: nam châm hút kẹp giấy thép."
+          },
+          {
+           "key": "day_dong",
+           "art": "copper",
+           "name": "Dây đồng",
+           "why": "Đồng là kim loại nhưng không có từ tính: nam châm không hút đồng."
+          },
+          {
+           "key": "thuoc_nhua",
+           "art": "ruler",
+           "name": "Thước nhựa",
+           "why": "Nhựa không có từ tính: thước nhựa đứng yên khi nam châm lại gần."
+          }
+         ],
+         "result": "Đinh sắt và kẹp giấy thép cùng bị hút về nam châm.",
+         "explanation": "Sắt và thép có từ tính. Dây đồng và thước nhựa không bị hút."
+        }
+       ]
+      }
+     ],
+     "completion": {
+      "min_first_try": 0.8,
+      "games": "any"
+     }
     },
     {
      "key": "kh7.tu_truong",
@@ -6582,8 +7722,261 @@
      "order": 6,
      "title": "Phương trình hoá học",
      "description": "Lập phương trình hoá học và ý nghĩa của nó.",
-     "status": "planned",
-     "source": "mirabi-original"
+     "status": "ready",
+     "source": "mirabi-original",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của chương trình GDPT 2018 cho đúng lớp; tác giả đã soát kiến thức và chạy trình kiểm tra nội dung (mỗi phương trình được kiểm tra cân bằng và chỉ có một bộ hệ số tối giản)."
+     },
+     "activity": "equations",
+     "objectives": [
+      "Lập được phương trình hoá học từ sơ đồ phản ứng",
+      "Cân bằng số nguyên tử mỗi nguyên tố ở hai vế bằng hệ số tối giản",
+      "Nêu được ý nghĩa của phương trình hoá học (tỉ lệ số phân tử, nguyên tử)"
+     ],
+     "summary": [
+      "Theo định luật bảo toàn khối lượng, số nguyên tử của mỗi nguyên tố ở hai vế phương trình phải bằng nhau.",
+      "Lập phương trình: viết sơ đồ phản ứng, đặt hệ số trước công thức để cân bằng, viết phương trình hoàn chỉnh.",
+      "Chỉ thay đổi hệ số, không thay đổi chỉ số trong công thức hoá học. Hệ số là các số nguyên nhỏ nhất (tối giản).",
+      "Các phản ứng ở đây chỉ để học cách lập phương trình; không tự làm thí nghiệm với các chất này."
+     ],
+     "examples": [
+      {
+       "title": "Lập phương trình hiđro cháy trong oxi",
+       "lines": [
+        "Sơ đồ: H₂ + O₂ → H₂O. Vế trái có 2 nguyên tử O, vế phải có 1.",
+        "Đặt 2 trước H₂O: H₂ + O₂ → 2H₂O. Bây giờ vế phải có 4 nguyên tử H.",
+        "Đặt 2 trước H₂: 2H₂ + O₂ → 2H₂O. Hai vế đều có 4 H và 2 O: đã cân bằng."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "balance",
+       "title": "Cân bằng phương trình",
+       "tasks": [
+        {
+         "key": "h2_o2",
+         "reactants": [
+          "H2",
+          "O2"
+         ],
+         "products": [
+          "H2O"
+         ],
+         "coefficients": [
+          2,
+          1,
+          2
+         ],
+         "explanation": "2H₂ + O₂ → 2H₂O: hai vế đều có 4 nguyên tử H và 2 nguyên tử O.",
+         "hint": "Bắt đầu với O: vế phải chỉ có 1 nguyên tử O.",
+         "condition": "t°"
+        },
+        {
+         "key": "mg_o2",
+         "reactants": [
+          "Mg",
+          "O2"
+         ],
+         "products": [
+          "MgO"
+         ],
+         "coefficients": [
+          2,
+          1,
+          2
+         ],
+         "explanation": "2Mg + O₂ → 2MgO: 2 Mg và 2 O ở mỗi vế.",
+         "condition": "t°"
+        },
+        {
+         "key": "al_o2",
+         "reactants": [
+          "Al",
+          "O2"
+         ],
+         "products": [
+          "Al2O3"
+         ],
+         "coefficients": [
+          4,
+          3,
+          2
+         ],
+         "explanation": "4Al + 3O₂ → 2Al₂O₃: bội chung nhỏ nhất của 2 và 3 là 6 nguyên tử O, nên 3O₂ và 2Al₂O₃, rồi 4Al.",
+         "hint": "Số nguyên tử O: 2 ở O₂ và 3 ở Al₂O₃. Tìm bội chung nhỏ nhất.",
+         "condition": "t°"
+        },
+        {
+         "key": "fe_cl2",
+         "reactants": [
+          "Fe",
+          "Cl2"
+         ],
+         "products": [
+          "FeCl3"
+         ],
+         "coefficients": [
+          2,
+          3,
+          2
+         ],
+         "explanation": "2Fe + 3Cl₂ → 2FeCl₃: 6 nguyên tử Cl ở mỗi vế, rồi 2 Fe.",
+         "condition": "t°"
+        },
+        {
+         "key": "zn_hcl",
+         "reactants": [
+          "Zn",
+          "HCl"
+         ],
+         "products": [
+          "ZnCl2",
+          "H2"
+         ],
+         "coefficients": [
+          1,
+          2,
+          1,
+          1
+         ],
+         "explanation": "Zn + 2HCl → ZnCl₂ + H₂: vế phải có 2 Cl và 2 H nên cần 2HCl."
+        },
+        {
+         "key": "ch4_o2",
+         "reactants": [
+          "CH4",
+          "O2"
+         ],
+         "products": [
+          "CO2",
+          "H2O"
+         ],
+         "coefficients": [
+          1,
+          2,
+          1,
+          2
+         ],
+         "explanation": "CH₄ + 2O₂ → CO₂ + 2H₂O: 4 H cần 2H₂O; vế phải có 4 O nên 2O₂.",
+         "hint": "Cân bằng C rồi H, để O sau cùng.",
+         "condition": "t°"
+        },
+        {
+         "key": "p_o2",
+         "reactants": [
+          "P",
+          "O2"
+         ],
+         "products": [
+          "P2O5"
+         ],
+         "coefficients": [
+          4,
+          5,
+          2
+         ],
+         "explanation": "4P + 5O₂ → 2P₂O₅: 10 nguyên tử O ở mỗi vế, 4 nguyên tử P.",
+         "condition": "t°"
+        },
+        {
+         "key": "na_h2o",
+         "reactants": [
+          "Na",
+          "H2O"
+         ],
+         "products": [
+          "NaOH",
+          "H2"
+         ],
+         "coefficients": [
+          2,
+          2,
+          2,
+          1
+         ],
+         "explanation": "2Na + 2H₂O → 2NaOH + H₂: 4 H ở mỗi vế; 2 Na, 2 O."
+        },
+        {
+         "key": "fe2o3_h2",
+         "reactants": [
+          "Fe2O3",
+          "H2"
+         ],
+         "products": [
+          "Fe",
+          "H2O"
+         ],
+         "coefficients": [
+          1,
+          3,
+          2,
+          3
+         ],
+         "explanation": "Fe₂O₃ + 3H₂ → 2Fe + 3H₂O: 3 O cần 3H₂O, 6 H cần 3H₂, 2 Fe.",
+         "condition": "t°"
+        },
+        {
+         "key": "kclo3",
+         "reactants": [
+          "KClO3"
+         ],
+         "products": [
+          "KCl",
+          "O2"
+         ],
+         "coefficients": [
+          2,
+          2,
+          3
+         ],
+         "explanation": "2KClO₃ → 2KCl + 3O₂: 6 nguyên tử O ở mỗi vế.",
+         "condition": "t°"
+        },
+        {
+         "key": "caoh2_hcl",
+         "reactants": [
+          "Ca(OH)2",
+          "HCl"
+         ],
+         "products": [
+          "CaCl2",
+          "H2O"
+         ],
+         "coefficients": [
+          1,
+          2,
+          1,
+          2
+         ],
+         "explanation": "Ca(OH)₂ + 2HCl → CaCl₂ + 2H₂O: (OH)₂ có 2 O và 2 H; vế trái có 4 H, vế phải 2H₂O cũng có 4 H.",
+         "hint": "Nhóm (OH)₂ có 2 nguyên tử O và 2 nguyên tử H."
+        },
+        {
+         "key": "al_hcl",
+         "reactants": [
+          "Al",
+          "HCl"
+         ],
+         "products": [
+          "AlCl3",
+          "H2"
+         ],
+         "coefficients": [
+          2,
+          6,
+          2,
+          3
+         ],
+         "explanation": "2Al + 6HCl → 2AlCl₃ + 3H₂: 6 Cl và 6 H ở mỗi vế."
+        }
+       ],
+       "turns": 8
+      }
+     ]
     },
     {
      "key": "kh8.toc_do_phan_ung",

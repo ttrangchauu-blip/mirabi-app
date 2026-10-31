@@ -592,46 +592,8 @@ def import_bundled(db, *, force: bool = False) -> dict[str, int]:
 
 
 # ---------------------------------------------------------------------------------------------------------------
-# Picking the words of a stage (pure: unit-tested in tests/test_learning_vocab.py)
+# Falling time of a word
 # ---------------------------------------------------------------------------------------------------------------
-
-PASS_SEEN = 20  # words of a difficulty seen (at most all of them) before moving on
-PASS_RATE = 0.8  # share of first-try correct answers at that difficulty to move on
-RECENT_SESSIONS = 3  # words of the last stages are not drawn again as "learned" or "new"
-
-
-@dataclass(frozen=True)
-class Entry:
-    key: str
-    word: str
-    difficulty: int
-    topic: str = ""
-
-
-@dataclass(frozen=True)
-class Seen:
-    attempts: int
-    first_try: int
-    mastery: int
-    last_seen: float = 0.0  # timestamp; older first when reinforcing learned words
-
-
-def working_level(bank: list[Entry], seen: dict[str, Seen]) -> int:
-    """The user's difficulty for one game: the first one not yet mastered, starting at 1. A difficulty is passed once
-    enough of its words were seen (PASS_SEEN, or all of them) and at least 80% of those answers were right at the first
-    try."""
-    by_level: dict[int, list[Entry]] = defaultdict(list)
-    for e in bank:
-        by_level[e.difficulty].append(e)
-    levels = [lv for lv in DIFFICULTIES if by_level[lv]]
-    for lv in levels:
-        stats = [seen[e.key] for e in by_level[lv] if e.key in seen]
-        attempts = sum(s.attempts for s in stats)
-        first = sum(s.first_try for s in stats)
-        if len(stats) < min(PASS_SEEN, len(by_level[lv])) or not attempts or first / attempts < PASS_RATE:
-            return lv
-    return levels[-1] if levels else DIFFICULTIES[0]
-
 
 def travel_for(word: str, base: int) -> int:
     """Long words and phrases fall slower: +1.5 s per letter over 7 and +2 s per extra word, at most 40 s."""
@@ -639,57 +601,6 @@ def travel_for(word: str, base: int) -> int:
         return 0
     letters = len(re.sub(r"[ '-]", "", word))
     return int(min(40, round(base + max(0, letters - 7) * 1.5 + 2 * word.count(" "))))
-
-
-def pick_entries(pool: list[Entry], *, level: int, seen: dict[str, Seen], review: set[str], recent: set[str],
-                 count: int, rng: random.Random, preferred: frozenset[str] = frozenset()) -> list[tuple[Entry, str]]:
-    """The words of a stage, each at most once (and never two senses of the same word: the same answer twice would be
-    a guess): words to review (on the "cần ôn" list: missed, wrong, hinted or revealed, until answered right at the
-    first try in a later stage), some learned words (not seen in the last stages) and new words at the user's level.
-    When there are not enough new words left, the stage becomes a purposeful review instead of coming back empty.
-    Words of the next difficulty only fill a stage the user's level can't fill, never two levels up.
-    Among new words of the same difficulty, those of the `preferred` topics (suggested for the user's grade) come first."""
-    top = level
-    eligible = [e for e in pool if e.difficulty <= top]
-    if not eligible and pool:  # a topic whose words are all above the user's level: start with its easiest ones
-        top = min(e.difficulty for e in pool)
-        eligible = [e for e in pool if e.difficulty == top]
-    stretch = [e for e in pool if e.difficulty == top + 1 and e.key not in seen] if len(eligible) < count * 2 else []
-    stretch.sort(key=lambda e: (e.key in recent, rng.random()))
-    weak = [e for e in eligible if e.key in review]
-    weak.sort(key=lambda e: (seen[e.key].mastery if e.key in seen else 0, rng.random()))
-    weak_keys = {e.key for e in weak}
-    learned = [e for e in eligible if e.key in seen and e.key not in weak_keys]
-    learned.sort(key=lambda e: (e.key in recent, seen[e.key].last_seen, rng.random()))
-    fresh = [e for e in eligible if e.key not in seen]
-    # New words of the user's own level first, then words left over from easier levels; recently shown ones last.
-    fresh.sort(key=lambda e: (e.key in recent, e.difficulty != top, bool(preferred) and e.topic not in preferred, rng.random()))
-
-    picked: list[tuple[Entry, str]] = []
-    used: set[str] = set()
-    words: set[str] = set()
-
-    def take(items: list[Entry], reason: str, limit: int) -> None:
-        for e in items:
-            if len(picked) >= count or limit <= 0:
-                return
-            word = normalize_text(e.word)
-            if e.key not in used and word not in words:
-                used.add(e.key)
-                words.add(word)
-                picked.append((e, reason))
-                limit -= 1
-
-    take(weak, "review", max(1, count // 4))
-    take([e for e in learned if e.key not in recent], "learned", max(1, count // 6))
-    take([e for e in fresh if e.key not in recent], "new", count)
-    # Not enough new words: review on purpose (weakest first, then learned words, the least recent first).
-    take(weak, "review", count)
-    take(learned, "learned", count)
-    take(fresh, "new", count)
-    take(stretch, "new", count)
-    rng.shuffle(picked)
-    return picked
 
 
 # ---------------------------------------------------------------------------------------------------------------
@@ -702,9 +613,10 @@ def level_label(difficulty: int | None, cefr: str | None) -> str:
 
 
 def snapshot(lesson_code: str, e, kind: str, reason: str) -> dict:
-    """One turn: Việt → Anh (vocab_typing) recalls the word from its meaning; Anh → Việt (word_spelling) types the
-    word shown and only then sees its meaning. Everything is frozen, so editing the bank never changes a session."""
-    from .learning_engine import spelling_hints, vocab_hints
+    """One turn: Việt → Anh (vocab_typing) recalls the word from its meaning; Anh → Việt (word_spelling) shows the
+    English word and its answer is the Vietnamese meaning (`lang: "vi"`, any of meaning_answers, tone marks optional).
+    Everything is frozen, so editing the bank never changes a session."""
+    from .learning_engine import meaning_answers, meaning_hints, vocab_hints
     spelled = kind == "word_spelling"
     letters = [len(p) for p in e.word.split()]
     context = f" ({e.context_vi})" if e.context_vi else ""
@@ -712,13 +624,14 @@ def snapshot(lesson_code: str, e, kind: str, reason: str) -> dict:
     difficulty = getattr(e, "difficulty", None)
     cefr = getattr(e, "cefr", None)
     label = level_label(difficulty, cefr) or e.level
-    answer = {"accepted": [e.word] if spelled else json.loads(e.accepted_json), "display": e.word,
+    answer = {"accepted": meaning_answers(e.meaning_vi) if spelled else json.loads(e.accepted_json), "display": e.word,
               "meaning_vi": e.meaning_vi, "context_vi": e.context_vi, "phonetic": e.phonetic,
               "part_of_speech": e.part_of_speech, "level": label, "difficulty": difficulty, "cefr": cefr, "topic": e.topic,
               "example_en": e.example_en, "example_vi": e.example_vi, "entry_key": e.entry_key, "pick": reason,
-              "content_version": getattr(e, "content_version", None) or 1}
+              "content_version": getattr(e, "content_version", None) or 1, **({"lang": "vi"} if spelled else {})}
     if spelled:
-        prompt = {"word": e.word, "part_of_speech": e.part_of_speech, "letters": letters, "level": label}
+        # No letter boxes: a meaning can be typed several ways. The phonetic helps to read the word, never the meaning.
+        prompt = {"word": e.word, "phonetic": e.phonetic, "part_of_speech": e.part_of_speech, "level": label, "answer_lang": "vi"}
         explanation = f"“{e.word}”{phonetic} nghĩa là “{e.meaning_vi}”{context}. Ví dụ: {e.example_en} — {e.example_vi}"
     else:
         prompt = {"meaning_vi": e.meaning_vi, "context_vi": e.context_vi, "part_of_speech": e.part_of_speech,
@@ -727,21 +640,9 @@ def snapshot(lesson_code: str, e, kind: str, reason: str) -> dict:
     return {"kind": kind, "question_id": None,
             "question_key": f"{lesson_code}.{'spell.' if spelled else ''}{e.entry_key}",
             "skill_key": f"en.{'spell' if spelled else 'word'}.{e.entry_key}",
-            "skill_label": f"{'Mặt chữ: ' if spelled else ''}{e.word} – {e.meaning_vi}"[:120],
+            "skill_label": f"{'Nghĩa: ' if spelled else ''}{e.word} – {e.meaning_vi}"[:120],
             "prompt": prompt, "answer": answer,
-            "hints": spelling_hints(e.word) if spelled else vocab_hints(e.word), "explanation": explanation}
-
-
-def recent_keys(db, user_id: int, game: str, prefix: str) -> set[str]:
-    """The words of the user's last stages of this game (they are not drawn again as "new" or "learned")."""
-    from sqlalchemy import select
-    from .models import LearningSession, LearningSessionItem
-    ids = list(db.scalars(select(LearningSession.id).where(LearningSession.user_id == user_id, LearningSession.game == game)
-                          .order_by(LearningSession.id.desc()).limit(RECENT_SESSIONS)))
-    if not ids:
-        return set()
-    keys = db.scalars(select(LearningSessionItem.skill_key).where(LearningSessionItem.session_id.in_(ids)))
-    return {k[len(prefix):] for k in keys if k.startswith(prefix)}
+            "hints": meaning_hints(e.meaning_vi, e.context_vi) if spelled else vocab_hints(e.word), "explanation": explanation}
 
 
 def _shows_answer(e) -> bool:
@@ -749,10 +650,9 @@ def _shows_answer(e) -> bool:
 
 
 def bank_items(db, user, lesson, game: dict, variant: str | None, seed: int, review_keys: list[str] | None) -> list[dict]:
-    """The turns of a vocabulary stage, picked for this user from the active entries of the bank (see pick_entries)."""
+    """The turns of a vocabulary stage: a review (review_keys), a catalog lesson's own words, or Khám phá từ mới."""
     from sqlalchemy import select
-    from .models import LearningReviewItem, LearningSkillProgress, LearningVocabEntry, as_utc
-    from .study_profile import preferred_vocab_topics
+    from .models import LearningVocabEntry
     rng = random.Random(seed)
     if review_keys is not None:
         # "Luyện lại": the open review items of this lesson, each as the game it was missed in (retired words included:
@@ -771,9 +671,16 @@ def bank_items(db, user, lesson, game: dict, variant: str | None, seed: int, rev
         return out
 
     spelled = variant == "word_shooter"
-    kind, prefix = ("word_spelling", "en.spell.") if spelled else ("vocab_typing", "en.word.")
+    kind = "word_spelling" if spelled else "vocab_typing"
     topic = (game.get("generator") or {}).get("vocab_bank", {}).get("topic")
     words = (game.get("generator") or {}).get("vocab_bank", {}).get("words")
+    if words and (game.get("generator") or {}).get("vocab_bank", {}).get("discover"):
+        # A lesson of the catalog that discovers new words: its own words first, then related ones (vocab_lesson.py),
+        # never one already shown in this game.
+        from .vocab_lesson import lesson_words
+        keys = lesson_words(db, user, "word_shooter" if spelled else "meteor", game["generator"], seed, game["turns"])
+        rows = {e.entry_key: e for e in db.scalars(select(LearningVocabEntry).where(LearningVocabEntry.entry_key.in_(keys)))}
+        return [snapshot(lesson.code, rows[k], kind, "new") for k in keys if k in rows]
     if words:
         # A lesson of the catalog (lesson_catalog.py): exactly its own words, each once, in a random order; never a
         # word of another lesson to fill the stage. Retired words are left out.
@@ -782,35 +689,12 @@ def bank_items(db, user, lesson, game: dict, variant: str | None, seed: int, rev
         chosen = [rows[k] for k in words if k in rows and (spelled or not _shows_answer(rows[k]))]
         rng.shuffle(chosen)
         return [snapshot(lesson.code, e, kind, "new") for e in chosen[:game["turns"]]]
-    active = db.execute(select(LearningVocabEntry.entry_key, LearningVocabEntry.word, LearningVocabEntry.difficulty,
-                               LearningVocabEntry.level, LearningVocabEntry.topic, LearningVocabEntry.meaning_vi,
-                               LearningVocabEntry.context_vi, LearningVocabEntry.accepted_json)
-                        .where(LearningVocabEntry.status == "active").order_by(LearningVocabEntry.entry_key)).all()
-    if not spelled:  # Việt → Anh never shows a meaning or context that holds the answer
-        active = [e for e in active if not _shows_answer(e)]
-    if not active:
-        return []
-    seen = {row.skill_key[len(prefix):]: Seen(row.attempts, row.first_try, row.mastery,
-                                              as_utc(row.last_seen_at).timestamp() if row.last_seen_at else 0.0)
-            for row in db.scalars(select(LearningSkillProgress).where(LearningSkillProgress.user_id == user.id,
-                                                                     LearningSkillProgress.skill_key.startswith(prefix)))}
-    review = {row.skill_key[len(prefix):] for row in db.scalars(select(LearningReviewItem).where(
-        LearningReviewItem.user_id == user.id, LearningReviewItem.status == "open",
-        LearningReviewItem.skill_key.startswith(prefix)))}
-    recent = recent_keys(db, user.id, "word_shooter" if spelled else "meteor", prefix)
-
-    def entry(row) -> Entry:
-        return Entry(row.entry_key, row.word, row.difficulty or _difficulty(row.level) or 1, row.topic or "")
-    # The level comes from the whole bank (all topics): a topic only narrows which words are drawn.
-    level = working_level([entry(e) for e in active], seen)
-    pool = [entry(e) for e in active if topic is None or e.topic == topic]
-    # "Tổng hợp" draws from every topic, the ones suggested for the user's grade first; a chosen topic is kept as is.
-    preferred = preferred_vocab_topics(user.school_grade) if topic is None else frozenset()
-    picked = pick_entries(pool, level=level, seen=seen, review=review, recent=recent, count=game["turns"], rng=rng,
-                          preferred=preferred)
-    rows = {e.entry_key: e for e in db.scalars(select(LearningVocabEntry).where(
-        LearningVocabEntry.entry_key.in_([e.key for e, _ in picked])))}
-    return [snapshot(lesson.code, rows[e.key], kind, reason) for e, reason in picked]
+    # Khám phá từ mới (vocab_discovery.py): only words never shown in this game, at the user's grade and open levels,
+    # easy to hard; fewer than a full stage when fewer are left, none when the scope is exhausted.
+    from .vocab_discovery import discovery_words
+    keys = discovery_words(db, user, "word_shooter" if spelled else "meteor", topic, seed, game["turns"])
+    rows = {e.entry_key: e for e in db.scalars(select(LearningVocabEntry).where(LearningVocabEntry.entry_key.in_(keys)))}
+    return [snapshot(lesson.code, rows[k], kind, "new") for k in keys]
 
 
 # ---------------------------------------------------------------------------------------------------------------

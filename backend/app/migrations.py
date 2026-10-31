@@ -7,6 +7,7 @@ drops or rewrites data. Switch to Alembic before moving to PostgreSQL in product
 """
 import json
 import logging
+from datetime import date
 from sqlalchemy import inspect, text
 from sqlalchemy.engine import Engine
 from .db import Base
@@ -43,6 +44,14 @@ ADDED_COLUMNS: dict[str, list[tuple[str, str]]] = {
         ("repeat_month_weekday", "INTEGER"),
         ("repeat_until", "DATE"),
         ("repeat_count", "INTEGER"),
+        # Work Quest (work.py); work_projects is created by create_all before these run.
+        ("project_id", "INTEGER REFERENCES work_projects(id) ON DELETE SET NULL"),
+        ("priority", "VARCHAR(10) NOT NULL DEFAULT 'medium'"),
+        ("due_at", "TIMESTAMP"),
+        ("estimated_minutes", "INTEGER"),
+        ("archived_at", "TIMESTAMP"),
+        ("updated_at", "TIMESTAMP"),
+        ("adventure_activity", "VARCHAR(32)"),
     ],
     "pet_evolutions": [("hatched_at", "TIMESTAMP")],
     "pet_walks": [
@@ -56,8 +65,15 @@ ADDED_COLUMNS: dict[str, list[tuple[str, str]]] = {
                        ("ended_at", "TIMESTAMP"), ("timezone", "VARCHAR(80)"), ("status", "VARCHAR(20)"),
                        ("study_type", "VARCHAR(20) NOT NULL DEFAULT 'self_study'")],
     "learning_sessions": [("game", "VARCHAR(20)"), ("catalog_lesson", "VARCHAR(40)"), ("catalog_grade", "INTEGER"),
-                          ("content_version", "VARCHAR(20)")],
-    "learning_tutorial_views": [("version", "INTEGER NOT NULL DEFAULT 1")],
+                          ("content_version", "VARCHAR(20)"), ("academic_year", "INTEGER"), ("archive_year", "INTEGER")],
+    "learning_tutorial_views": [("version", "INTEGER NOT NULL DEFAULT 1"),
+                                # Interactive tutorials (game_tutorials.py): rows from before were completed guides.
+                                ("status", "VARCHAR(12) NOT NULL DEFAULT 'completed'"),
+                                ("game_mode", "VARCHAR(12) NOT NULL DEFAULT 'practice'"),
+                                ("gameplay_version", "INTEGER NOT NULL DEFAULT 1"),
+                                ("current_step", "INTEGER NOT NULL DEFAULT 0"),
+                                ("updated_at", "TIMESTAMP")],
+    "academic_year_configs": [("decision_number", "VARCHAR(80)"), ("verified_at", "TIMESTAMP"), ("verified_by", "INTEGER")],
     "learning_vocab_entries": [("difficulty", "INTEGER"), ("cefr", "VARCHAR(2)"), ("audio_ref", "VARCHAR(200)"),
                                ("content_version", "INTEGER NOT NULL DEFAULT 1"), ("review_notes", "TEXT")],
     "login_streak_days": [("popup_claim_key", "VARCHAR(64)")],
@@ -72,6 +88,7 @@ ADDED_COLUMNS: dict[str, list[tuple[str, str]]] = {
 }
 
 def upgrade_schema(engine: Engine) -> None:
+    from . import models  # noqa: F401  every table must be registered, even when the app itself is not imported
     Base.metadata.create_all(bind=engine)
     inspector = inspect(engine)
     with engine.begin() as conn:
@@ -83,6 +100,10 @@ def upgrade_schema(engine: Engine) -> None:
                 if name not in existing:
                     log.info("Adding column %s.%s", table, name)
                     conn.execute(text(f"ALTER TABLE {table} ADD COLUMN {name} {ddl}"))
+        if inspector.has_table("user_tasks"):
+            conn.execute(text("CREATE INDEX IF NOT EXISTS ix_user_tasks_project_id ON user_tasks (project_id)"))
+            conn.execute(text("CREATE INDEX IF NOT EXISTS ix_user_tasks_user_archived ON user_tasks (user_id, archived_at)"))
+            conn.execute(text("CREATE INDEX IF NOT EXISTS ix_user_tasks_adventure_activity ON user_tasks (adventure_activity)"))
         if inspector.has_table("pet_walks"):
             conn.execute(text("CREATE UNIQUE INDEX IF NOT EXISTS uq_pet_walk_user_cycle ON pet_walks (user_id, task_cycle_id)"))
         if inspector.has_table("pet_walks"):
@@ -97,6 +118,8 @@ def upgrade_schema(engine: Engine) -> None:
             backfill_vocab_difficulty(conn)
         if inspector.has_table("study_sessions"):
             conn.execute(text("CREATE UNIQUE INDEX IF NOT EXISTS uq_study_user_pomodoro_cycle ON study_sessions (user_id, pomodoro_cycle)"))
+        if inspector.has_table("users") and inspector.has_table("user_education_profiles"):
+            backfill_education_profiles(conn)
         # Levels now represent pet evolution stages derived from cumulative XP.
         conn.execute(text("""
             UPDATE users SET level = CASE
@@ -150,6 +173,44 @@ def backfill_learning_games(conn) -> None:
                      {"game": game_of(game_type, variant), "id": session_id})
 
 
+def backfill_education_profiles(conn) -> None:
+    """Accounts that gave a grade before grades were locked: the grade they gave is their grade of the current school
+    year (it cannot be known when they gave it, so no year is closed or skipped retroactively), now locked. Their
+    learning so far belongs to that year. Runs at every start and only touches rows not migrated yet."""
+    from .education import OUTSIDE_SCHOOL, local_today, school_year_of
+    from .config import settings
+    region = settings.education_default_region
+    today = local_today(region)
+    year = school_year_of(None, region, today)
+    rows = conn.execute(text("SELECT id, school_grade, created_at FROM users WHERE school_grade IS NOT NULL AND id NOT IN "
+                             "(SELECT user_id FROM user_education_profiles)")).all()
+    for user_id, grade, created in rows:
+        enrolled = created.date() if hasattr(created, "date") else date.fromisoformat(str(created)[:10]) if created else today
+        params = {"user_id": user_id, "grade": grade, "year": year, "enrolled": enrolled, "region": region,
+                  "status": "outside_school" if grade in OUTSIDE_SCHOOL else "studying"}
+        conn.execute(text("INSERT INTO user_education_profiles (user_id, initial_grade, current_grade, academic_year, enrollment_date, "
+                          "education_region, status, hold_next_promotion, locked_at, version, created_at, updated_at) VALUES "
+                          "(:user_id, :grade, :grade, :year, :enrolled, :region, :status, :no, CURRENT_TIMESTAMP, 1, "
+                          "CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)"), {**params, "no": False})
+        conn.execute(text("INSERT INTO grade_promotion_history (user_id, kind, academic_year, from_grade, to_grade, skipped, reason, "
+                          "celebrated_at, created_at) VALUES (:user_id, 'migration', :year, NULL, :grade, :no, "
+                          "'Grade given before grades were locked', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)"), {**params, "no": False})
+    if rows:
+        log.info("Locked the school grade of %d existing accounts at %s", len(rows), year)
+    conn.execute(text("CREATE INDEX IF NOT EXISTS ix_learning_sessions_academic_year ON learning_sessions (academic_year)"))
+    conn.execute(text("CREATE INDEX IF NOT EXISTS ix_learning_sessions_user_year_lesson "
+                      "ON learning_sessions (user_id, academic_year, catalog_lesson)"))
+    # The first release seeded guessed dates (the last Monday of August), unverified and never edited: they are not
+    # an official calendar, so they are removed; an administrator enters and verifies the real ones.
+    conn.execute(text("DELETE FROM academic_year_configs WHERE verified = :no AND updated_by IS NULL "
+                      "AND source LIKE 'Mặc định của Mirabi%'"), {"no": False})
+    conn.execute(text("""UPDATE learning_sessions SET academic_year = (
+                             SELECT p.academic_year FROM user_education_profiles p WHERE p.user_id = learning_sessions.user_id)
+                         WHERE academic_year IS NULL AND archive_year IS NULL AND EXISTS (
+                             SELECT 1 FROM user_education_profiles p WHERE p.user_id = learning_sessions.user_id
+                             AND p.status <> 'outside_school')"""))
+
+
 def backfill_vocab_difficulty(conn) -> None:
     """Vocabulary rows imported before the internal difficulty: their editorial A1..C2 level becomes difficulty 1..6
     (no CEFR label is claimed). The next import of the data files rewrites them the same way."""
@@ -168,6 +229,29 @@ STUDY_TOGETHER_TABLES = (
     "study_room_sessions", "study_room_invitations", "study_room_members", "user_reports", "study_rooms",
     "user_blocks", "friendships", "social_profiles",
 )
+
+
+MIRABI_LIFE_TABLES = (
+    "user_career_achievements", "career_milestones", "user_skill_progress", "user_career_profiles", "career_skills",
+    "career_paths", "visit_logs", "gift_transfers", "community_contributions", "community_projects", "town_events",
+    "finance_budgets", "finance_transactions", "finance_goals", "finance_categories", "adventure_reward_claims",
+    "room_ambience_preferences", "relaxation_sessions", "journal_entries", "mood_entries",
+    "work_reward_claims", "user_task_step_completions", "user_task_steps",
+)
+
+
+def downgrade_mirabi_life_schema(engine: Engine) -> None:
+    """Roll back Work Quest / Healing Room tables (irreversible data loss for journals, moods and steps). Tasks keep
+    their added columns (SQLite can't drop them safely; older code ignores them) and their project ids are cleared, so
+    work_projects can go too."""
+    with engine.begin() as conn:
+        for table in MIRABI_LIFE_TABLES:
+            conn.execute(text(f'DROP TABLE IF EXISTS "{table}"'))
+        if inspect(conn).has_table("user_tasks"):
+            columns = {c["name"] for c in inspect(conn).get_columns("user_tasks")}
+            if "project_id" in columns:
+                conn.execute(text("UPDATE user_tasks SET project_id = NULL"))
+        conn.execute(text('DROP TABLE IF EXISTS "work_projects"'))
 
 
 def downgrade_study_together_schema(engine: Engine) -> None:

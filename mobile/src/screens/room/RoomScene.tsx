@@ -65,6 +65,8 @@ type Props = {
   walkable?: boolean;
   /** A burst of little hearts over the pet; a new number plays it again. */
   hearts?: number;
+  /** Drawn on the room's canvas under the pets, given the points per canvas unit (Góc thư giãn's windows and lamps). */
+  underlay?: (k: number) => React.ReactNode;
 };
 
 export type PetMenuAction = { id: string; label: string; icon: React.ComponentProps<typeof Ionicons>['name']; disabled?: boolean; note?: string };
@@ -142,7 +144,7 @@ function useWalker(layout: Layout, home: Spot, enabled: boolean) {
  * the finger on its own layer; it is put back in its place among the others when it is dropped.
  */
 export const RoomScene = memo(function RoomScene({ layout, kind = 'personal', resting = false, pet, pose, away, guest, onPetPress, petLabel, reaction, petMenu,
-  awayMarker, effects = true, fullScreen = false, safeTop = 0, safeBottom = 0, menuTop = safeTop, description, editor, chrome, walkable = false, hearts }: Props) {
+  awayMarker, effects = true, fullScreen = false, safeTop = 0, safeBottom = 0, menuTop = safeTop, description, editor, chrome, walkable = false, hearts, underlay }: Props) {
   const [box, setBox] = useState<{ width: number; height: number } | null>(null);
   // The items a drag picked up (the dragged one and what stands on it), and how far they are moved, in points.
   const [lifted, setLifted] = useState<string[] | null>(null);
@@ -277,6 +279,7 @@ export const RoomScene = memo(function RoomScene({ layout, kind = 'personal', re
           <Picture xml={svg} />
         </View>
         <View style={[s.canvas, canvasStyle]} pointerEvents="box-none" testID="room-canvas">
+          {underlay && !editor ? underlay(kz) : null}
           {canWalk ? <FloorTaps k={k} onTap={onFloorTap} /> : null}
           {canWalk && effects && walker.target ? <TargetMark key={walker.target.key} at={walker.target.at} k={k} /> : null}
           {away ? null : <ScenePet pet={pet} spot={spot} k={kz} pose={pose} resting={resting} onPress={editor ? undefined : onPetPress} label={petLabel}

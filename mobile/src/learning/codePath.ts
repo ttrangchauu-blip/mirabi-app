@@ -63,3 +63,32 @@ export function walk(level: Prompt, program: Block[]): Walk | null {
 export const BLOCK_LABEL: Record<'forward' | 'left' | 'right' | 'repeat', string> = {
   forward: 'Tiến', left: 'Rẽ trái', right: 'Rẽ phải', repeat: 'Lặp lại',
 };
+
+/** For each move of the program (as `expand` makes them), the index of its block in the program bar: the block to
+ * light while the pet makes that move. null when the program is not complete. */
+export function trace(program: Block[]): number[] | null {
+  if (!expand(program)) return null;
+  const out: number[] = [];
+  let body: number[] | null = null;
+  let times = 0;
+  for (let i = 0; i < program.length; i++) {
+    const b = program[i];
+    if (isLoop(b)) { body = []; times = loopTimes(b); }
+    else if (b === 'end') { for (let k = 0; k < times; k++) out.push(...(body ?? [])); body = null; }
+    else (body ?? out).push(i);
+  }
+  return out;
+}
+
+/** Where a walk went wrong, to show it: the move (1-based) and its block, and the cell it could not enter. null when the
+ * walk reached the goal. */
+export type Fault = { reason: Walk['reason']; move: number; block: number | null; blocked: { x: number; y: number } | null };
+export function fault(program: Block[], result: Walk): Fault | null {
+  if (result.ok) return null;
+  const blocks = trace(program) ?? [];
+  if (result.reason === 'short') return { reason: 'short', move: blocks.length, block: null, blocked: null };
+  const at = result.path[result.path.length - 1];
+  const move = result.path.length; // the moves before it went through; this one could not
+  return { reason: result.reason, move, block: blocks[move - 1] ?? null,
+    blocked: { x: at.x + STEP[at.dir][0], y: at.y + STEP[at.dir][1] } };
+}

@@ -21,7 +21,7 @@ look_after	look after	phrasal_verb	2	family	chăm sóc, trông nom		Can you look
 relative	relative	noun	3	family	họ hàng, người thân		We visit our relatives at Tet.	Chúng tôi đi thăm họ hàng vào dịp Tết.		/ˈrelətɪv/	mirabi-original	active
 chore	chore	noun	3	family	việc nhà		Everyone in my family shares the chores.	Mọi người trong nhà tôi cùng chia nhau làm việc nhà.	housework	/tʃɔː/	mirabi-original	active
 raise	raise	verb	3	family	nuôi dạy	nuôi con cái khôn lớn	She raised three children on her own.	Bà ấy một mình nuôi dạy ba người con.	bring up	/reɪz/	mirabi-original	active
-get_along_with	get along with	phrase	3	family	hòa thuận với		I get along with my sister very well.	Tôi rất hòa thuận với chị gái.	get on with		mirabi-original	active
+get_along_with	get along with	phrasal_verb	3	family	hòa thuận với		I get along with my sister very well.	Tôi rất hòa thuận với chị gái.	get on with		mirabi-original	active
 generation	generation	noun	3	family	thế hệ		Three generations live in this house.	Ba thế hệ cùng sống trong ngôi nhà này.		/ˌdʒenəˈreɪʃn/	mirabi-original	active
 divorce	divorce	verb	3	family	ly hôn		His parents divorced when he was young.	Bố mẹ anh ấy ly hôn khi anh còn nhỏ.		/dɪˈvɔːs/	mirabi-original	active
 take_after	take after	phrasal_verb	3	family	giống	giống bố mẹ hoặc người lớn tuổi trong nhà	She takes after her mother.	Cô ấy giống mẹ.		/teɪk ˈɑːftə/	mirabi-original	active
@@ -36,7 +36,7 @@ descendant	descendant	noun	5	family	con cháu, hậu duệ		He is a descendant o
 estranged	estranged	adjective	5	family	xa cách, không còn liên lạc	với người thân trong gia đình	She is estranged from her father.	Cô ấy không còn liên lạc với bố.		/ɪˈstreɪndʒd/	mirabi-original	active
 nurture	nurture	verb	5	family	nuôi dưỡng, vun đắp		Parents should nurture their children's talents.	Cha mẹ nên vun đắp tài năng của con.		/ˈnɜːtʃə/	mirabi-original	active
 matriarch	matriarch	noun	6	family	người phụ nữ đứng đầu gia tộc		Grandma is the matriarch of our family.	Bà là người đứng đầu gia đình chúng tôi.		/ˈmeɪtriɑːk/	mirabi-original	active
-filial_piety	filial piety	phrase	6	family	lòng hiếu thảo		Filial piety is a key value in Vietnamese culture.	Lòng hiếu thảo là một giá trị quan trọng trong văn hóa Việt.		/ˈfɪliəl ˈpaɪəti/	mirabi-original	active
+filial_piety	filial piety	collocation	6	family	lòng hiếu thảo		Filial piety is a key value in Vietnamese culture.	Lòng hiếu thảo là một giá trị quan trọng trong văn hóa Việt.		/ˈfɪliəl ˈpaɪəti/	mirabi-original	active
 mum	mum	noun	1	family	mẹ (cách gọi thân mật)	cách con cái gọi hoặc nhắc đến mẹ trong đời thường	My mum makes the best soup.	Mẹ tớ nấu súp ngon nhất.	mom	/mʌm/	mirabi-ai-2026-10	active
 dad	dad	noun	1	family	bố (cách gọi thân mật)	cách con cái gọi hoặc nhắc đến bố trong đời thường	My dad drives me to school every day.	Bố tớ chở tớ đi học mỗi ngày.		/dæd/	mirabi-ai-2026-10	active
 child	child	noun	1	family	con (con cái)	người con của cha mẹ, dù còn nhỏ hay đã lớn	They have one child, a little girl.	Họ có một người con, là một bé gái.		/tʃaɪld/	mirabi-ai-2026-10	active

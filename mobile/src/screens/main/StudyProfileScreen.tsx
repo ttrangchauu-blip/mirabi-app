@@ -21,16 +21,19 @@ type FormProps = {
   onSkip?: () => void;
 };
 
-/** Age and confirmed grade, saved to the profile. Starts from the saved values; an account without them starts empty. */
+/** Age and grade, saved to the profile. The grade can be chosen only the first time (an account created before
+ * registration asked for it); after that it is locked and only the age can be corrected. */
 export function StudyProfileForm({ user, title, description, onSaved, onSkip }: FormProps) {
   const toast = useToast();
+  const gradeLocked = !!user.school_grade;
   const [age, setAge] = useState<number | null>(user.age ?? null);
   const [grade, setGrade] = useState<GradeId | null>(user.school_grade ?? null);
   const [errors, setErrors] = useState<{ age?: string; grade?: string }>({});
   const [saving, setSaving] = useState(false);
 
   async function save() {
-    const next = { age: validateAge(age), grade: validateGrade(age, grade) };
+    const next = { age: validateAge(age),
+      grade: gradeLocked && validateGrade(age, grade) ? 'Độ tuổi này không khớp với lớp đã đăng ký.' : validateGrade(age, grade) };
     setErrors(next);
     if (next.age || next.grade || saving) return;
     setSaving(true);
@@ -46,7 +49,7 @@ export function StudyProfileForm({ user, title, description, onSaved, onSkip }: 
     <Card style={styles.card}>
       <Text style={styles.title} accessibilityRole="header">{title}</Text>
       <Text style={styles.description}>{description}</Text>
-      <StudyProfileFields age={age} grade={grade} errors={errors} disabled={saving}
+      <StudyProfileFields age={age} grade={grade} errors={errors} disabled={saving} gradeLocked={gradeLocked}
         onChange={(a, g) => { setAge(a); setGrade(g); setErrors({}); }} />
       <Button title="Lưu" icon="checkmark" loading={saving} onPress={() => void save()} />
       {onSkip ? <Button title="Để sau" variant="ghost" disabled={saving} onPress={onSkip} /> : null}
@@ -66,7 +69,8 @@ export function StudyProfileScreen({ user, onBack, onUserUpdated }: { user: User
         <Text style={styles.screenTitle} accessibilityRole="header">Độ tuổi & lớp học</Text>
       </View>
       <StudyProfileForm user={user} title="Thông tin học tập" onSaved={(saved) => { onUserUpdated(saved); onBack(); }}
-        description="Học tập dùng độ tuổi và lớp của bạn để gợi ý môn, trò chơi và chủ đề phù hợp. Mọi nội dung vẫn mở cho bạn chọn." />
+        description={user.school_grade ? 'Học tập theo lớp bạn đã đăng ký và tự lên lớp vào đầu mỗi năm học. Bạn có thể cập nhật độ tuổi.'
+          : 'Chọn độ tuổi và lớp bạn đang học trong năm học này. Lớp học sẽ được giữ cố định và tự lên lớp vào đầu mỗi năm học mới.'} />
     </>
   );
 }

@@ -5,13 +5,13 @@ goodbye	goodbye	interjection	1	communication	tạm biệt		Goodbye, see you tomo
 sorry	sorry	adjective	1	communication	xin lỗi	khi mình làm sai	Sorry, I'm late.	Xin lỗi, tôi đến muộn.		/ˈsɒri/	mirabi-original	active
 please	please	adverb	1	communication	làm ơn, vui lòng		Please sit down.	Mời bạn ngồi.		/pliːz/	mirabi-original	active
 excuse_me	excuse me	phrase	1	communication	xin lỗi, cho hỏi	để gây chú ý hoặc hỏi đường	Excuse me, where is the station?	Xin lỗi, cho hỏi nhà ga ở đâu?			mirabi-original	active
-good_morning	good morning	phrase	1	communication	chào buổi sáng		Good morning, class!	Chào cả lớp buổi sáng!			mirabi-original	active
+good_morning	good morning	phrase	1	communication	chào buổi sáng		Good morning, class!	Chào buổi sáng cả lớp!			mirabi-original	active
 see_you_later	see you later	phrase	1	communication	hẹn gặp lại		I have to go now. See you later!	Mình phải đi rồi. Hẹn gặp lại nhé!	see you		mirabi-original	active
 fine.ok	fine	adjective	1	communication	ổn, khỏe	trả lời khi được hỏi thăm	I'm fine, thank you.	Mình khỏe, cảm ơn bạn.	okay|ok|good	/faɪn/	mirabi-original	active
 how_much	how much	phrase	2	communication	bao nhiêu tiền	hỏi giá	How much is this shirt?	Cái áo này bao nhiêu tiền?			mirabi-original	active
 of_course	of course	phrase	2	communication	tất nhiên		Of course you can come with us.	Tất nhiên là bạn đi cùng chúng tôi được.	sure|certainly		mirabi-original	active
 no_problem	no problem	phrase	2	communication	không sao, không có gì		No problem, I can help you.	Không sao, mình giúp bạn được.			mirabi-original	active
-you_are_welcome	you are welcome	phrase	2	communication	không có chi	đáp lại lời cảm ơn	You are welcome. Come again!	Không có chi. Lần sau lại đến nhé!			mirabi-original	active
+you_are_welcome	you are welcome	phrase	2	communication	không có chi	đáp lại lời cảm ơn	You are welcome. Come again!	Không có chi. Lần sau lại đến nhé!	you are welcome|you're welcome		mirabi-original	active
 nice_to_meet_you	nice to meet you	phrase	2	communication	rất vui được gặp bạn		Hi, I'm Lan. Nice to meet you.	Chào, mình là Lan. Rất vui được gặp bạn.	pleased to meet you		mirabi-original	active
 call_back	call back	phrasal_verb	2	communication	gọi lại	gọi điện lại cho ai đó	I'm busy now. Can I call you back?	Giờ mình đang bận. Mình gọi lại sau nhé?	ring back	/ˌkɔːl ˈbæk/	mirabi-original	active
 by_the_way	by the way	phrase	3	communication	nhân tiện		By the way, did you finish the report?	Nhân tiện, bạn làm xong báo cáo chưa?			mirabi-original	active
@@ -33,7 +33,7 @@ beat_around_the_bush	beat around the bush	phrase	5	communication	nói vòng vo		
 get_the_hang_of	get the hang of	phrase	5	communication	nắm được cách làm		You'll soon get the hang of it.	Bạn sẽ sớm quen tay thôi.			mirabi-original	active
 in_a_nutshell	in a nutshell	phrase	5	communication	tóm lại	nói ngắn gọn	In a nutshell, we need more time.	Tóm lại, chúng ta cần thêm thời gian.			mirabi-original	active
 by_and_large	by and large	phrase	5	communication	nhìn chung		By and large, the trip was a success.	Nhìn chung, chuyến đi rất thành công.	on the whole		mirabi-original	active
-a_blessing_in_disguise	a blessing in disguise	phrase	6	communication	trong cái rủi có cái may		Losing that job was a blessing in disguise.	Mất công việc đó hóa ra lại là trong cái rủi có cái may.	blessing in disguise		mirabi-original	active
+a_blessing_in_disguise	a blessing in disguise	phrase	6	communication	trong cái rủi có cái may		Losing that job was a blessing in disguise.	Mất công việc đó, hóa ra trong cái rủi lại có cái may.	blessing in disguise		mirabi-original	active
 bite_the_bullet	bite the bullet	phrase	6	communication	cắn răng chịu đựng	chấp nhận làm việc khó khăn	I hate the dentist, but I'll bite the bullet.	Tôi ghét đi nha sĩ, nhưng đành cắn răng chịu vậy.			mirabi-original	active
 yes	yes	interjection	1	communication	vâng, có, đúng vậy	trả lời đồng ý hoặc xác nhận	Yes, I can come to your party.	Vâng, mình có thể đến bữa tiệc của bạn.		/jes/	mirabi-ai-2026-10	active
 no	no	interjection	1	communication	không	trả lời phủ định hoặc từ chối	No, I don't like coffee.	Không, tôi không thích cà phê.		/nəʊ/	mirabi-ai-2026-10	active
@@ -282,7 +282,7 @@ no_kidding	no kidding	phrase	4	communication	không đùa chứ, thật á	tỏ 
 i_beg_your_pardon	I beg your pardon	phrase	4	communication	xin lỗi, xin nhắc lại ạ	cách rất trang trọng để xin lỗi hoặc nhờ nhắc lại	I beg your pardon, could you repeat that?	Xin lỗi, ông có thể nhắc lại được không ạ?			mirabi-ai-2026-10	active
 i_suppose_so	I suppose so	phrase	4	communication	chắc là vậy	đồng ý miễn cưỡng hoặc không chắc lắm	Can we go home now? I suppose so.	Giờ mình về được chưa? Chắc là được.			mirabi-ai-2026-10	active
 id_rather_not	I'd rather not	phrase	4	communication	tôi không muốn thì hơn	từ chối nhẹ nhàng, lịch sự	I'd rather not talk about it.	Tôi không muốn nói về chuyện đó thì hơn.	I would rather not		mirabi-ai-2026-10	active
-the_line_is_busy	the line is busy	phrase	4	communication	máy đang bận	khi gọi điện mà người kia đang có cuộc gọi khác	I tried to call, but the line is busy.	Tôi đã gọi nhưng máy đang bận.			mirabi-ai-2026-10	active
+the_line_is_busy	the line is busy	phrase	4	communication	máy đang bận	khi gọi điện mà người kia đang có cuộc gọi khác	I can't reach her. The line is busy.	Tôi không gọi được cho cô ấy. Máy đang bận.			mirabi-ai-2026-10	active
 whos_calling	who's calling	phrase	4	communication	ai đang gọi đấy ạ	hỏi lịch sự tên người gọi điện đến	May I ask who's calling?	Cho tôi hỏi ai đang gọi đấy ạ?	who is calling		mirabi-ai-2026-10	active
 can_i_take_a_message	can I take a message	phrase	4	communication	anh chị có muốn nhắn lại gì không	nghe máy hộ người vắng mặt và đề nghị ghi lời nhắn	She's not here right now. Can I take a message?	Cô ấy không có ở đây. Anh có muốn nhắn lại gì không?			mirabi-ai-2026-10	active
 hold_the_line	hold the line	phrase	4	communication	xin vui lòng giữ máy	cách nói trang trọng nhờ người gọi chờ trên điện thoại	Please hold the line. I'll put you through.	Xin vui lòng giữ máy. Tôi sẽ nối máy cho anh.			mirabi-ai-2026-10	active

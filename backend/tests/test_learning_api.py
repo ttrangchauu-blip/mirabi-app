@@ -1,6 +1,7 @@
 """Learning games API: sessions, answers, state machine, idempotency, concurrency, ownership, progress and EXP."""
 import itertools
 import json
+import unicodedata
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 
@@ -28,6 +29,30 @@ def start(client, headers, code="en.animals.starter", mode="practice", **extra) 
     response = client.post("/api/learning/sessions", headers=headers, json=body)
     assert response.status_code == 201, response.json()
     return response.json()
+
+
+def shown(turn: dict) -> list[str]:
+    """Every text a learner can read in a turn (not its JSON keys: "art" is not leaked by "part_of_speech")."""
+    out = []
+    def walk(v):
+        if isinstance(v, str):
+            out.append(v.lower())
+        elif isinstance(v, dict):  # random ids and hashes are not text a learner reads
+            for k, x in v.items():
+                if k not in ("turn_id", "answer_keys"):
+                    walk(x)
+        elif isinstance(v, list):
+            for x in v:
+                walk(x)
+    walk(turn)
+    return out
+
+
+def leaks(answer: str, turn: dict) -> bool:
+    """The answer, as a whole word or phrase, in a value the app is sent."""
+    import re
+    pattern = re.compile(rf"(?<![\w]){re.escape(answer.lower())}(?![\w])")
+    return any(pattern.search(v) for v in shown(turn))
 
 
 def stored_answer(turn: dict) -> dict:
@@ -174,11 +199,10 @@ def test_open_turns_never_carry_the_answer(client, me, code):
     turn = session["open_turns"][0]
     assert set(turn) == {"turn_id", "position", "kind", "skill_label", "prompt", "hints_shown", "hints_total", "attempts",
                          "wrong_attempts", "practice", "travel_seconds", "on_screen_ms"}
-    text = json.dumps(turn, ensure_ascii=False).lower()
     if turn["kind"] == "vocab_typing":
-        assert all(a.lower() not in text for a in stored_answer(turn)["accepted"])
+        assert not any(leaks(a, turn) for a in stored_answer(turn)["accepted"])
     if turn["kind"] == "bridge_order":
-        assert stored_answer(turn)["accepted"][0].lower() not in text
+        assert not leaks(stored_answer(turn)["accepted"][0], turn)
     assert turn["hints_shown"] == []
 
 
@@ -187,13 +211,16 @@ def test_falling_words_carry_keys_of_every_accepted_answer_not_the_answers(clien
     # The same value the app computes (mobile/__tests__/answer-key.test.ts checks these vectors too).
     assert answer_key("turn-0001-abcdef", "cat") == answer_key("turn-0001-abcdef", "  Cat. ") == "4f65fd689c5f51be"
     assert answer_key("t-x", "Don’t   worry!") == "16d4547551c484cc"
+    # Anh → Việt: a meaning is compared without tone marks.
+    assert answer_key("turn-0001-abcdef", "con mèo", "vi") == answer_key("turn-0001-abcdef", "  Con Meo. ", "vi") == "0518efee6a4e02fe"
+    assert answer_key("turn-0001-abcdef", "đường đi", "vi") == answer_key("turn-0001-abcdef", "duong di", "vi") == "0ff3ec03746fef4b"
     for variant in ("meteor", "word_shooter"):
         session = start(client, me, variant=variant)
         turn = session["open_turns"][0]
-        accepted = stored_answer(turn)["accepted"]
-        assert turn["prompt"]["answer_keys"] == [answer_key(turn["turn_id"], a) for a in accepted]
-        if turn["kind"] == "vocab_typing":
-            assert all(a.lower() not in json.dumps(turn, ensure_ascii=False).lower() for a in accepted)
+        stored = stored_answer(turn)
+        accepted = stored["accepted"]
+        assert turn["prompt"]["answer_keys"] == [answer_key(turn["turn_id"], a, stored.get("lang")) for a in accepted]
+        assert not any(leaks(a, turn) for a in accepted)  # keys, never answers
         post(client, me, session, "abandon")
     grammar = start(client, me, "en.to_be.basic")
     assert "answer_keys" not in grammar["open_turns"][0]["prompt"]  # only the typed falling words
@@ -314,6 +341,7 @@ def test_challenge_grammar_mistakes_cost_hearts_and_end_the_stage(client, me):
         turn = session["open_turns"][0]
         response = answer(client, me, session, turn, value=wrong(turn)).json()
         assert response["result"]["hearts_delta"] == -1 and response["result"]["correct_answer"] and response["result"]["explanation"]
+        assert response["result"]["correct_options"] == [right(turn)]  # the gate to mark in green, once answered
         session = response["session"]
         assert session["hearts"] == expected_hearts
     assert session["status"] == "failed" and session["end_reason"] == "out_of_hearts"
@@ -387,33 +415,60 @@ def test_falling_words_allow_three_at_once_in_both_modes(client, me):
 
 # --- vocabulary: Anh → Việt (word_shooter) and Việt → Anh (meteor) ------------------------------------------------
 
-def test_word_shooter_shows_the_english_word_and_its_meaning_only_after_the_hit(client, me):
+def test_word_shooter_shows_the_english_word_and_asks_its_vietnamese_meaning(client, me):
     session = start(client, me, variant="word_shooter")
     assert session["game"] == "word_shooter" and session["variant"] == "word_shooter" and session["hearts_max"] == VOCAB_HEARTS
     turn = session["open_turns"][0]
     word = stored_answer(turn)
     assert turn["kind"] == "word_spelling" and turn["prompt"]["word"] == word["display"] and turn["skill_label"] == "Gõ từ"
-    assert word["meaning_vi"] not in json.dumps(turn, ensure_ascii=False)  # the meaning comes with the hit
-    typo = answer(client, me, session, turn, value=word["display"][::-1] + "x").json()
-    assert typo["result"]["correct"] is False and typo["result"]["retry_allowed"] and typo["result"]["word"] is None
-    assert typo["result"]["hearts_delta"] == 0 and typo["session"]["hearts"] == VOCAB_HEARTS  # a wrong answer: no heart lost
-    hit = answer(client, me, session, turn, value=f"  {word['display'].upper()} ").json()["result"]
+    assert turn["prompt"]["answer_lang"] == "vi" and "letters" not in turn["prompt"]  # typed freely: no letter boxes
+    assert word["meaning_vi"] not in json.dumps(turn, ensure_ascii=False)  # never sent before it is answered
+    retyped = answer(client, me, session, turn, value=word["display"]).json()  # the English word itself is not the answer
+    assert retyped["result"]["correct"] is False and retyped["result"]["retry_allowed"] and retyped["result"]["word"] is None
+    assert retyped["result"]["hearts_delta"] == 0 and retyped["session"]["hearts"] == VOCAB_HEARTS  # a wrong answer: no heart lost
+    meaning = word["accepted"][0]
+    unaccented = "".join(c for c in unicodedata.normalize("NFD", meaning.replace("đ", "d").replace("Đ", "D")) if not unicodedata.combining(c))
+    hit = answer(client, me, session, turn, value=f"  {unaccented.upper()} ").json()["result"]  # tone marks optional
     assert hit["correct"] and hit["outcome"] == "corrected"
     assert hit["word"] == {"en": word["display"], "vi": word["meaning_vi"], "phonetic": word["phonetic"]}
 
 
-def test_word_shooter_accepts_only_the_word_shown(client, db):
-    from app.learning_engine import check_text
+def test_word_shooter_accepts_each_sense_of_the_meaning(client, db):
+    from app.learning_engine import check_text, meaning_answers, meaning_hints, normalize_vi
     from app.learning_vocab import snapshot
     from app.models import LearningVocabEntry
     entries = list(db.scalars(select(LearningVocabEntry)))
     spelled = [snapshot("en.vocab.mix", e, "word_spelling", "new") for e in entries]
-    recalled = {e.entry_key: snapshot("en.vocab.mix", e, "vocab_typing", "new") for e in entries}
-    assert len(spelled) >= 400 and all(q["answer"]["accepted"] == [q["answer"]["display"]] for q in spelled)
-    rabbit = next(q for q in spelled if q["answer"]["display"] == "rabbit")
-    assert not check_text("bunny", rabbit["answer"]["accepted"]) and not check_text("rabit", rabbit["answer"]["accepted"])
-    assert check_text("bunny", recalled["rabbit"]["answer"]["accepted"])  # Việt → Anh accepts declared equivalents
-    assert all(q["answer"]["meaning_vi"] not in json.dumps(q["prompt"], ensure_ascii=False) for q in spelled)
+    assert len(spelled) >= 400 and all(q["answer"]["lang"] == "vi" and q["answer"]["accepted"] for q in spelled)
+    # The English word is not the answer, unless Vietnamese borrowed it ("dong" → "đồng", "zero" → "zêrô").
+    assert all(not check_text(q["answer"]["display"], q["answer"]["accepted"], "vi") for q in spelled
+               if normalize_vi(q["answer"]["display"]) not in normalize_vi(q["answer"]["meaning_vi"]))
+    assert meaning_answers("Phôn (đơn vị âm lượng).") == ["Phôn", "Phôn đơn vị âm lượng"]
+    # Never in what the prompt shows (its values: "ho" is in the key "phonetic", not a leak).
+    assert all(q["answer"]["meaning_vi"] not in json.dumps(list(q["prompt"].values()), ensure_ascii=False) for q in spelled)
+    # The senses, with or without what is in brackets and a leading classifier; tone marks optional.
+    assert meaning_answers("thiểu số, nhóm thiểu số") == ["thiểu số", "nhóm thiểu số"]
+    assert meaning_answers("(dùng) dè sẻn, một chút thôi") == ["dè sẻn", "dùng dè sẻn", "một chút thôi"]
+    assert meaning_answers("đặt (đúng chỗ, cẩn thận)") == ["đặt", "đặt đúng chỗ, cẩn thận"]
+    assert meaning_answers("cái còi") == ["cái còi", "còi"] and meaning_answers("sự hồi phục") == ["sự hồi phục", "hồi phục"]
+    assert check_text("con meo", meaning_answers("con mèo"), "vi") and check_text("Mèo", meaning_answers("con mèo"), "vi")
+    assert not check_text("con meo", ["con mèo"])  # English answers keep their exact letters
+    assert not check_text("con chó", meaning_answers("con mèo"), "vi")
+    # Hints: what the word is about, then the size of the answer; never the answer itself.
+    assert meaning_hints("cái còi", "vật nhỏ thổi ra tiếng to") == ["Gợi ý: vật nhỏ thổi ra tiếng to", "Nghĩa có 2 tiếng, bắt đầu bằng “cái”"]
+    assert meaning_hints("nhựa", None) == ["Nghĩa có 1 tiếng", "Nghĩa có 1 tiếng, bắt đầu bằng chữ “n”"]
+
+
+def test_word_shooter_stage_created_before_still_takes_the_english_word(client, me, db):
+    from app.models import LearningSessionItem
+    session = start(client, me, variant="word_shooter")
+    turn = session["open_turns"][0]
+    item = db.scalar(select(LearningSessionItem).where(LearningSessionItem.turn_id == turn["turn_id"]))
+    stored = json.loads(item.answer_json)
+    item.answer_json = json.dumps({k: v for k, v in stored.items() if k != "lang"} | {"accepted": [stored["display"]]}, ensure_ascii=False)
+    db.commit()
+    hit = answer(client, me, session, turn, value=stored["display"]).json()["result"]
+    assert hit["correct"] and hit["correct_answer"] == stored["display"]
 
 
 def test_the_two_vocabulary_games_keep_separate_progress(client, me):
@@ -434,20 +489,18 @@ def test_the_two_vocabulary_games_keep_separate_progress(client, me):
     assert sum(1 for s in skills if s["skill_type"] == "spelling") == VOCAB_STAGE_WORDS
 
 
-def test_mixed_vocabulary_starts_at_the_easiest_level_and_moves_up_after_good_stages(client, me):
+def test_mixed_vocabulary_starts_at_the_easiest_level_with_new_words_only(client, me):
+    """Khám phá từ mới (rules and levels: tests/test_vocab_discovery.py): new words only, easy to hard."""
     first = start(client, me, "en.vocab.mix")
     taught = drawn(first)
     assert len({w["word"] for w in taught}) == VOCAB_STAGE_WORDS and {w["difficulty"] for w in taught} == {1}
     assert {w["level"] for w in taught} == {"Mức 1"}  # no CEFR label is claimed without a source for it
+    assert all(w["pick"] == "new" for w in taught)
     complete(client, me, play_all(client, me, first))  # every word right at the first try
     second = start(client, me, "en.vocab.mix")
-    assert {w["difficulty"] for w in drawn(second)} == {1}  # 12 words are not enough to move on
-    assert not {w["word"] for w in drawn(second)} & {w["word"] for w in taught}  # the last stage's words are not repeated
-    complete(client, me, play_all(client, me, second))
-    third = drawn(start(client, me, "en.vocab.mix"))
-    assert {w["difficulty"] for w in third} <= {1, 2} and any(w["difficulty"] == 2 for w in third)
-    # The other game has its own level: Anh → Việt still starts at the easiest words.
-    post(client, me, client.get("/api/learning/sessions/current", headers=me).json()["session"], "abandon")
+    assert not {w["word"] for w in drawn(second)} & {w["word"] for w in taught}  # never a word shown before
+    # The other game has its own history: Anh → Việt starts with new words there too.
+    post(client, me, second, "abandon")
     assert {w["difficulty"] for w in drawn(start(client, me, "en.vocab.mix", variant="word_shooter"))} == {1}
 
 
@@ -460,9 +513,8 @@ def test_a_topic_draws_only_its_own_words(client, me, db):
     assert session["topic"]["code"] == "animals" and session["level"]["code"] == "auto"
 
 
-def test_a_vocabulary_stage_never_starts_short_nor_repeats_a_word_to_fill_up(client, me, db):
-    """Too few words of the topic at the user's level: the stage does not start (a clear code), it is never shorter
-    nor padded with a word asked twice."""
+def test_a_vocabulary_stage_is_short_when_few_new_words_are_left_and_never_repeats_one_to_fill_up(client, me, db):
+    """Fewer new words of the topic than a stage: a stage of those words only; none left: a clear code, no stage."""
     from app.models import LearningSession, LearningVocabEntry
     keep = list(db.scalars(select(LearningVocabEntry).where(LearningVocabEntry.topic == "animals", LearningVocabEntry.status == "active")
                            .order_by(LearningVocabEntry.entry_key)))
@@ -470,9 +522,14 @@ def test_a_vocabulary_stage_never_starts_short_nor_repeats_a_word_to_fill_up(cli
         entry.status = "retired"
     db.commit()
     lesson = lesson_id(client, me, "en.animals.starter")
-    response = client.post("/api/learning/sessions", headers=me, json={"lesson_id": lesson, "mode": "practice", "timezone": "Asia/Ho_Chi_Minh"})
-    assert response.status_code == 409 and response.json()["code"] == "not_enough_words"
-    assert db.scalar(select(func.count()).select_from(LearningSession)) == 0
+    body = {"lesson_id": lesson, "mode": "practice", "timezone": "Asia/Ho_Chi_Minh"}
+    short = client.post("/api/learning/sessions", headers=me, json=body).json()
+    words = [w["word"].lower() for w in drawn(short)]
+    assert 1 <= len(words) <= VOCAB_STAGE_WORDS - 1 and len(set(words)) == len(words) == short["required_count"]
+    complete(client, me, play_all(client, me, short))
+    response = client.post("/api/learning/sessions", headers=me, json=body)
+    assert response.status_code == 409 and response.json()["code"] == "vocabulary_exhausted"
+    assert db.scalar(select(func.count()).select_from(LearningSession)) == 1
 
 
 def test_a_shot_hits_the_matching_word_closest_to_the_ground_and_only_that_one(client, me):
@@ -511,7 +568,7 @@ def test_challenge_words_fall_and_a_miss_shows_the_word_pair(client, me, clock):
     assert missed["result"]["word"]["vi"] == word["meaning_vi"]
     post(client, me, session, "abandon")
     groups = client.get("/api/learning/review?subject=english", headers=me).json()["groups"]
-    assert groups[0]["items"][0]["label"].startswith("Mặt chữ: ")
+    assert groups[0]["items"][0]["label"].startswith("Nghĩa: ")
     review = client.post("/api/learning/review/sessions", headers=me, json={"topic_id": groups[0]["topic"]["id"]}).json()
     assert review["game"] == "word_shooter" and review["open_turns"][0]["kind"] == "word_spelling"
 
