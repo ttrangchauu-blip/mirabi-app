@@ -168,6 +168,9 @@ def _validate(game: str, d: dict, problems: list[str]) -> None:
             problems.append(f"{where}.{spec['id']}: a {item['kind']} turn is not played in {game}")
         if spec["build"] in lg.GAMES:
             lg.validate_task(spec["build"], spec["task"], limits(5), f"{where}.{spec['id']}", problems)
+        if spec["build"] == "step_solver" and len(spec["task"].get("steps") or []) != 1:
+            # A demo is checked without state (nothing saved): one step, so every answer is to the same question.
+            problems.append(f"{where}.{spec['id']}: a Giải toán từng bước demo has one step")
     steps = d.get("steps") or []
     if not 1 <= len(steps) <= MAX_STEPS:
         problems.append(f"{where}: 1–{MAX_STEPS} steps")
@@ -341,6 +344,13 @@ def check(d: dict, turn_id: str, answer: Any) -> dict:
             text = next(t["text"] for t in prompt["tokens"] if t["id"] == answer[0]).strip(".,!?;:")
             prompt.update(step="fix", found=answer[0], options=item["answer"]["options"])
             return {**result, "correct": True, "prompt": prompt, "feedback": f"Đúng rồi, “{text}” viết sai! Giờ chọn cách viết đúng."}
+        elif kind == "story_evidence" and isinstance(answer, list) and len(answer) == 1 \
+                and answer[0] in {o["id"] for o in item["answer"]["options"]}:
+            # The second step: an option can only be chosen once the clue was found (the app got the options then).
+            prompt.update(phase="answer", found=item["answer"]["evidence"][0], options=item["answer"]["options"])
+        elif kind in lg.STAGED and (step := lg.advance(kind, prompt, item["answer"], answer)):
+            # A step solved before the last (Thám tử đọc hiểu: the clue): the turn stays open with its next prompt.
+            return {**result, "correct": True, "prompt": {**prompt, **step[0]}, "feedback": step[1]}
         probe = transient_item({**item, "prompt": prompt}, turn_id)
         if kind in cg.KINDS:
             correct, error_type, _, feedback = cg.check(kind, prompt, item["answer"], answer)

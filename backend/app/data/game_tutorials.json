@@ -370,6 +370,82 @@
         {"id": "read", "action": "tap", "instruction": "Đọc giải thích rồi nhấn Tiếp tục", "target": "play", "demo_animation": "pulse",
          "expected_action": "continue"}
       ]
+    },
+    "number_line": {
+      "game_mode": "practice", "gameplay_version": 1, "tutorial_version": 1, "subject": "math", "hearts": 0, "skippable": true,
+      "done_title": "Pet đã qua cầu! Bạn đã biết đặt số lên trục số!",
+      "ready": ["Số bé bên trái, số lớn bên phải; tự đếm các vạch không ghi số.", "Sai: số đúng vạch được khoá xanh."],
+      "demo": [
+        {"id": "t1", "build": "number_line", "title": "Cầu trục số",
+         "task": {"key": "tutorial", "prompt": "Đặt số 7 lên trục số.", "line": {"from": 0, "to": 10, "step": 5, "snap": 1},
+                  "points": [{"label": "7", "value": 7}], "explanation": "7 đứng sau 5 hai vạch: 5, 6, 7."}}
+      ],
+      "steps": [
+        {"id": "place", "action": "drag", "instruction": "Chạm trên cầu hoặc dùng ▶ để cắm cờ 7, rồi nhấn Kiểm tra", "target": "play",
+         "demo_animation": "hand_drag", "expected_action": "answer", "expected_result": "correct", "release": ["t1"],
+         "success_feedback": "Đúng vạch số 7!", "retry_feedback": "Đếm từ vạch 5: thêm hai vạch nữa là 7."},
+        {"id": "read", "action": "tap", "instruction": "Đọc giải thích rồi nhấn Tiếp tục", "target": "play", "demo_animation": "pulse",
+         "expected_action": "continue"}
+      ]
+    },
+    "step_solver": {
+      "game_mode": "practice", "gameplay_version": 1, "tutorial_version": 1, "subject": "math", "hearts": 0, "skippable": true,
+      "done_title": "Pet đã lên tới đích! Bạn đã biết giải từng bước!",
+      "ready": ["Mỗi bước: chọn hai số, một dấu, điền kết quả.", "Bước đúng thì câu hỏi bước sau mới hiện ra."],
+      "demo": [
+        {"id": "t1", "build": "step_solver", "title": "Giải toán từng bước",
+         "task": {"key": "tutorial", "problem": "Lan có 8 quả táo, Lan cho bạn 3 quả. Lan còn lại bao nhiêu quả táo?", "numbers": [8, 3],
+                  "steps": [{"ask": "Lan còn lại bao nhiêu quả táo?", "expr": "8 - 3", "result": 5, "unit": "quả táo"}],
+                  "explanation": "Cho bạn là bớt đi: 8 − 3 = 5 quả táo."}}
+      ],
+      "steps": [
+        {"id": "solve", "action": "tap", "instruction": "Chạm 8, dấu −, 3, bấm 5 rồi nhấn Kiểm tra", "target": "play",
+         "demo_animation": "hand_tap", "expected_action": "answer", "expected_result": "correct", "release": ["t1"],
+         "success_feedback": "Đúng rồi: 8 − 3 = 5!", "retry_feedback": "Cho bạn là bớt đi: chọn dấu −."},
+        {"id": "read", "action": "tap", "instruction": "Đọc giải thích rồi nhấn Tiếp tục", "target": "play", "demo_animation": "pulse",
+         "expected_action": "continue"}
+      ]
+    },
+    "story_detective": {
+      "game_mode": "practice", "gameplay_version": 1, "tutorial_version": 1, "subject": "vietnamese", "hearts": 0, "skippable": true,
+      "done_title": "Đã phá án! Bạn đã là thám tử đọc hiểu!",
+      "ready": ["Tìm câu bằng chứng trước, đáp án hiện ra sau.", "Chọn sai thì lựa chọn đó bị gạch, kèm gợi ý."],
+      "demo": [
+        {"id": "t1", "build": "story_detective", "title": "Thám tử đọc hiểu",
+         "task": {"key": "tutorial", "passage": "Nhà Na có một chú mèo. Chú mèo tên là Mướp. Mướp rất thích nằm sưởi nắng. Tối đến, Mướp đi bắt chuột.",
+                  "question": "Chú mèo nhà Na tên là gì?", "evidence": [2], "clue": "Tìm câu có chữ “tên”.",
+                  "options": [{"text": "Mướp", "ok": true, "why": "Đúng: “Chú mèo tên là Mướp.”"},
+                              {"text": "Na", "ok": false, "why": "Na là tên bạn nhỏ, chủ của chú mèo."},
+                              {"text": "Mun", "ok": false, "why": "Bài không có tên Mun."}],
+                  "explanation": "Câu 2 nói rõ: Chú mèo tên là Mướp."}}
+      ],
+      "steps": [
+        {"id": "clue", "action": "tap", "instruction": "Chạm câu cho biết tên chú mèo, rồi nhấn Kiểm tra", "target": "play",
+         "demo_animation": "hand_tap", "expected_action": "answer", "expected_result": "correct", "release": ["t1"],
+         "success_feedback": "Đúng manh mối!", "retry_feedback": "Câu đó chưa nói tên mèo. Tìm câu có chữ “tên”."},
+        {"id": "answer", "action": "tap", "instruction": "Dựa vào manh mối, chọn tên chú mèo rồi nhấn Kiểm tra", "target": "play",
+         "demo_animation": "hand_tap", "expected_action": "answer", "expected_result": "correct",
+         "success_feedback": "Đã phá án!", "retry_feedback": "Đọc lại câu manh mối nhé."},
+        {"id": "read", "action": "tap", "instruction": "Đọc giải thích rồi nhấn Tiếp tục", "target": "play", "demo_animation": "pulse",
+         "expected_action": "continue"}
+      ]
+    },
+    "sentence_xray": {
+      "game_mode": "practice", "gameplay_version": 1, "tutorial_version": 1, "subject": "vietnamese", "hearts": 0, "skippable": true,
+      "done_title": "Câu đã sáng lên! Bạn đã biết soi câu!",
+      "ready": ["Mỗi bút màu là một vai trò; từ không thuộc vai trò nào để trống.", "Sai: từ tô đúng được khoá lại."],
+      "demo": [
+        {"id": "t1", "build": "sentence_xray", "title": "Soi câu",
+         "task": {"key": "tutorial", "prompt": "Tô từ chỉ sự vật và từ chỉ hoạt động.", "roles": ["Sự vật", "Hoạt động"],
+                  "sentence": "[Bé|1] [tưới|2] [cây|1].", "explanation": "Bé, cây là từ chỉ sự vật; tưới là từ chỉ hoạt động."}}
+      ],
+      "steps": [
+        {"id": "paint", "action": "tap", "instruction": "Bút Sự vật: tô Bé, cây; bút Hoạt động: tô tưới. Rồi nhấn Kiểm tra", "target": "play",
+         "demo_animation": "hand_tap", "expected_action": "answer", "expected_result": "correct", "release": ["t1"],
+         "success_feedback": "Mỗi từ đúng màu!", "retry_feedback": "Từ tô đúng đã khoá; xem lời nhắc để sửa từ còn lại."},
+        {"id": "read", "action": "tap", "instruction": "Đọc giải thích rồi nhấn Tiếp tục", "target": "play", "demo_animation": "pulse",
+         "expected_action": "continue"}
+      ]
     }
   }
 }

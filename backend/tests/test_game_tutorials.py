@@ -64,6 +64,16 @@ def solve(item: dict):
         return ["angle:90" if answer["target"].get("class") == "right" else f"angle:{answer['target']['degrees']}"]
     if kind == "equation_balance":
         return [str(c) for c in answer["coefficients"]]
+    if kind == "number_line_place":
+        return [f"{p}:{t}" for p, t in answer["tick_of"].items()]
+    if kind == "step_solve":  # a demo has one step: the problem's numbers in order
+        a, op, b = answer["plan"][0]["expr"]
+        chip = {v: f"n{i + 1}" for i, v in enumerate(answer["numbers"])}
+        return [chip[a], op, chip[b], answer["plan"][0]["result"]]
+    if kind == "story_evidence":  # the second step (the clue was found before)
+        return [answer["right"]]
+    if kind == "sentence_paint":
+        return [f"{w}:c{r}" for w, r in answer["role_of"].items() if r]
     raise AssertionError(kind)
 
 
@@ -74,7 +84,8 @@ def counts(db):
 # --- definitions -------------------------------------------------------------------------------------------------
 
 TUTORED = {"word_shooter", "meteor", "gate", "bridge", "grammar", "defense", "math_bridge", "word_builder", "spelling_detective",
-           "sorting", "code_path", "order", "match", "choice", "lab", "timeline", "sentence", "geometry", "balance"}
+           "sorting", "code_path", "order", "match", "choice", "lab", "timeline", "sentence", "geometry", "balance",
+           "number_line", "step_solver", "story_detective", "sentence_xray"}
 
 
 def test_every_game_has_its_own_valid_tutorial():
@@ -98,6 +109,12 @@ def test_every_demo_turn_is_solvable_with_the_games_own_checker():
             if item["kind"] == "spell_fix":
                 found = gt.check(d, tid, [item["answer"]["wrong_id"]])
                 assert found["correct"] and not found["resolved"] and found["prompt"]["step"] == "fix"
+            if item["kind"] == "story_evidence":  # the clue first: the options come with it
+                found = gt.check(d, tid, [item["answer"]["evidence"][0]])
+                assert found["correct"] and not found["resolved"] and found["prompt"]["phase"] == "answer"
+                assert {o["id"] for o in found["prompt"]["options"]} == {o["id"] for o in item["answer"]["options"]}
+                wrong = next(s["id"] for s in item["prompt"]["sentences"] if s["id"] not in item["answer"]["evidence"])
+                assert gt.check(d, tid, [wrong])["retry_allowed"]
             result = gt.check(d, tid, solve(item))
             assert result["correct"] and result["resolved"], (game, tid, result)
             assert result["score_delta"] == 0 and result["hearts_delta"] == 0
