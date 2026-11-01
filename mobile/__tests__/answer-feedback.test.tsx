@@ -162,3 +162,47 @@ it('one card for right and wrong: same layout, only the colours and the words ch
   expect(screen.getByText('Đáp án đúng: 24/10/1945')).toBeTruthy();
   expect(screen.getByRole('button', { name: 'Xem kết quả' })).toBeTruthy();
 });
+
+it('a question asked again to practise (same words, another turn) starts clean and says "Luyện lại"; it is told apart by its id', async () => {
+  // The server asks a question again only later in the stage (never as the next one), its options in another order.
+  const q3 = turn('turn-c3', 'choice_explain', { style: 'quiz', question: 'Thủ đô của Pháp là gì?', options: [{ id: 'o5', text: 'Paris' }, { id: 'o6', text: 'Lyon' }] });
+  const again = { ...q1, turn_id: 'turn-c1p', practice: true, prompt: { ...q1.prompt, options: [...q1.prompt.options!].reverse() } };
+  const server = mockServer({
+    'POST /api/learning/sessions/7/resume': { status: 200, body: { result: null, session: session({ required_count: 2, open_turns: [q1] }), replayed: false } },
+    'POST /api/learning/sessions/7/answer': (req: { body: { turn_id: string } }) => ({ status: 200, body: req.body.turn_id === 'turn-c1'
+      ? { result: result({ correct: false, outcome: 'wrong', correct_answer: '24/10/1945', correct_options: ['o2'], explanation: EXPLAIN_1, practice_added: true }),
+        session: session({ open_turns: [q3], resolved_count: 1, pending_practice: 1, version: 3 }), replayed: false }
+      : req.body.turn_id === 'turn-c3'
+        ? { result: result({ turn_id: 'turn-c3', correct_answer: 'Paris', correct_options: ['o5'], explanation: 'Paris.' }),
+          session: session({ open_turns: [again], resolved_count: 2, pending_practice: 1, version: 4 }), replayed: false }
+        : { result: result({ turn_id: 'turn-c1p', correct_answer: '24/10/1945', correct_options: ['o2'], explanation: EXPLAIN_1 }),
+          session: session({ open_turns: [], resolved_count: 2, pending_practice: 0, can_complete: true, version: 5 }), replayed: false } }),
+  } as never);
+  render(<ToastProvider><ConfirmProvider>
+    <GameScreen initial={session()} petId="fox" petLevel={1} prefs={prefs} onEnded={jest.fn()} />
+  </ConfirmProvider></ToastProvider>);
+  for (let i = 0; i < 5; i++) await ms(1000);
+  fireEvent.press(await screen.findByRole('button', { name: '26/6/1945' }));
+  await answered();
+  expect(screen.getByText('Câu này sẽ quay lại để bạn luyện thêm một lần.')).toBeTruthy();
+  fireEvent.press(screen.getByRole('button', { name: 'Câu tiếp theo' }));
+  await ms(100);
+  expect(screen.getByText('Thủ đô của Pháp là gì?')).toBeTruthy(); // the next question is another one
+  expect(screen.queryByText('Hiến chương Liên Hợp Quốc có hiệu lực ngày nào?')).toBeNull();
+  fireEvent.press(screen.getByRole('button', { name: 'Paris' }));
+  await answered();
+  fireEvent.press(screen.getByRole('button', { name: 'Câu tiếp theo' }));
+  await ms(100);
+  // The practice: the same words, unmarked and playable, the explanation of the first time gone.
+  expect(screen.getByText('Hiến chương Liên Hợp Quốc có hiệu lực ngày nào?')).toBeTruthy();
+  expect(screen.getByText(/^Luyện lại · /)).toBeTruthy();
+  expect(screen.getByRole('button', { name: '26/6/1945' })).toBeTruthy();
+  expect(screen.getByRole('button', { name: '24/10/1945' })).toBeTruthy();
+  expect(screen.queryByText(EXPLAIN_1)).toBeNull();
+  expect(screen.queryByTestId('answer-feedback')).toBeNull();
+  fireEvent.press(screen.getByRole('button', { name: '24/10/1945' }));
+  await answered();
+  expect(screen.getByRole('button', { name: 'Xem kết quả' })).toBeTruthy();
+  expect(server.callsTo('POST /api/learning/sessions/7/answer').map((c) => [c.body.turn_id, c.body.answer]))
+    .toEqual([['turn-c1', 'o1'], ['turn-c3', 'o5'], ['turn-c1p', 'o2']]);
+});

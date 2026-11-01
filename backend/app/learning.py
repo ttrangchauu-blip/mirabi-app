@@ -980,14 +980,28 @@ def _new_item(s: LearningSession, position: int, snap: dict, *, practice_of: Lea
         required=practice_of is None, practice_of_id=practice_of.id if practice_of else None, state="queued")
 
 
+# Questions whose options are a list of ids: a re-practice shows them in another order (the answer refers to the ids).
+REORDERED_ON_PRACTICE = {"choice_explain", "gate_choice"}
+
+
 def add_practice_turn(db: Session, s: LearningSession, items: list[LearningSessionItem], source: LearningSessionItem) -> bool:
-    """Queue the same question again at the end of the stage (bounded per session)."""
+    """Queue the same question again at the end of the stage (bounded per session), only with another question still to
+    come before it: right after its answer was shown, the same question again would only be copied (and "Câu tiếp theo"
+    would seem to show the old question). The options come in another order."""
     rules = _rules(s)
     if sum(1 for i in items if i.practice_of_id is not None) >= rules["max_practice_turns"]:
         return False
+    if not any(i.state in ("queued", "issued") and i.id != source.id for i in items):
+        return False
     root = db.get(LearningSessionItem, source.practice_of_id) if source.practice_of_id else source
+    prompt = _loads(root.prompt_json)
+    if root.kind in REORDERED_ON_PRACTICE and len(prompt.get("options") or []) > 1:
+        shown = list(prompt["options"])
+        rng = random.Random(f"{s.id}:{s.next_position}")
+        while prompt["options"] == shown:
+            rng.shuffle(prompt["options"])
     snap = {"question_id": root.question_id, "question_key": root.question_key, "skill_key": root.skill_key,
-            "skill_label": root.skill_label, "kind": root.kind, "prompt": _loads(root.prompt_json),
+            "skill_label": root.skill_label, "kind": root.kind, "prompt": prompt,
             "answer": _loads(root.answer_json), "hints": _loads(root.hints_json, []), "explanation": root.explanation}
     item = _new_item(s, s.next_position, snap, practice_of=root)
     s.next_position += 1
