@@ -68,9 +68,9 @@ Học tập → môn (chương → bài) → màn bài học (chọn trò, Bắt
 - **Lesson order** (`lesson_api.sort_lessons`, mirrored by `mobile/src/learning/lessonOrder.ts`): *Đang học*
   (`in_progress`) → *Đã mở* (`unlocked`, not started) → *Đã hoàn thành* (`completed`) → *Chưa mở* (`locked`); within a
   group, the curriculum's chapter then lesson order (`chapter_order`, `lesson_order`), never ids or dates. Being open
-  and being done are separate states: a lesson is locked while it is still being written (*Sắp có*) or while a
-  prerequisite (`requires`) is not completed **this school year**; a locked lesson is *Chưa mở* whatever it has done.
-  The backend decides both and refuses to play a locked lesson (`409 lesson_locked`) whatever the request says.
+  and being done are separate states: a lesson is locked while it is still being written (*Sắp có*) or until what opens
+  it is completed **this school year** ([Tự động mở khóa](#tự-động-mở-khóa)); a locked lesson is *Chưa mở* whatever it
+  has done. The backend decides both and refuses to play a locked lesson (`409 lesson_locked`) whatever the request says.
 - **A lesson card**: its state as an icon, the title, the chapter in small type and the state in words, with a thin bar
   while it is being studied. *Đã hoàn thành* opens again for review; *Chưa mở* is neutral and a tap says how it opens
   (*Hoàn thành “…” để mở bài này*, with a link to that lesson) without opening anything.
@@ -85,6 +85,58 @@ Học tập → môn (chương → bài) → màn bài học (chọn trò, Bắt
 - Moving between these screens fades in and rises a few points (0.2 s); nothing moves with reduced motion.
 - **The organisation is declared**: every file is `topic` (by the curriculum's topics, "không theo mục lục bộ sách
   nào"); a file following a textbook would name its series and edition and map each lesson (`textbook_ref`).
+
+### Tự động mở khóa
+
+A subject opens step by step as the learner completes what is required (`backend/app/learning_unlocks.py`; the rules are
+built from the catalog by `lesson_catalog.unlock_path`). Nobody unlocks anything by hand, and the app never says what
+is completed or open.
+
+**The rules**
+
+| Content | Opens when |
+|---|---|
+| First chapter of a subject at a grade | At once |
+| Next chapter | Every required lesson of the chapter before it is completed. A chapter with nothing required is skipped: it never counts as completed and never blocks |
+| First lesson of an open chapter | With the chapter |
+| Next lesson | The required lesson before it is completed. `"progression": "free"` on a chapter opens all its lessons with it. `requires` adds prerequisites of its own (branches that split or join) |
+| A game of an open lesson | With the lesson (all of them) |
+
+- **A `free` subject** (`"progression": "free"` at the top of its file): every chapter and lesson opens at once; a lesson's
+  own `requires` still applies. In the bundled catalog: Âm nhạc, Mĩ thuật, Giáo dục thể chất and Hoạt động trải nghiệm,
+  whose lessons do not build on each other. The other subjects are sequential.
+- **Required**: a ready lesson not marked `"optional": true`, and in it a game not marked `"optional": true`. Optional
+  content opens in its place and never holds anything back; a lesson must keep at least one required game.
+- **Still being written** (`planned`): never open, and skipped by the path.
+- **Completed** is what it always was (`lesson_api.lesson_state`), read from the sessions: each required game passed by a
+  completed stage with `completion.min_first_try` of its answers right at the first try, checked on the stage's own
+  items. Opening a game, leaving it or finishing its tutorial never counts. Playing again opens nothing new.
+- **No loops**: `lesson_catalog.catalog()` refuses to load a catalog whose rules go round (`find_cycle`), whatever the
+  `order` fields say. `requires` names an earlier lesson of the same grade.
+
+**What is stored.** Progress is not stored twice: it stays in the sessions. `learning_unlocks` holds what the rules
+opened, one row per learner, school year and chapter or lesson (`uq_learning_unlock`, so a retry or a second device
+stores it once), with why (`source`: `start`, `migration`, `completed`, `progress`) and when it was celebrated. Stored
+unlocks are **never taken back**: a lesson added to a completed chapter does not close the next one (the chapter simply
+shows as being explored again), and a withdrawn lesson is skipped. Each school year has its own, and last year's stay
+as they were.
+
+**When.** Inside the transaction of `POST /sessions/{id}/complete`, and again on every read of the subject or lesson and
+on `POST /progress/sync`, so a result lost on the way is caught up. `complete` returns `unlocked`: what is open and not
+celebrated yet, until `POST /unlocks/celebrated` says the animation was shown.
+
+**Accounts from before this.** Every lesson used to be open. On the first read of a subject in a school year, every
+lesson up to the furthest one the learner has started stays open (`migration`, not celebrated); beyond it the rules
+apply. A learner who never played a subject starts at its first lesson.
+
+**The app.** A subject opens on its **journey map** (`JourneyMap.tsx`; *Danh sách* keeps the list sorted by state): each
+chapter an area, each lesson a point on one winding path. *Chưa mở*: a lock, slightly faded. *Đã mở*: clear colours and a
+soft light. *Đang học*: a progress bar. *Đã hoàn thành*: a tick and a medal. The pet stands by the lesson the learner is
+at. When something has just opened, the lock shakes and opens, light spreads, the point goes from faded to clear and
+the pet jumps for joy; a small notice (`UnlockNotice.tsx`, never a popup over the screen) names it, with *Khám phá ngay*.
+Nothing waits for the animation, and with reduced motion nothing moves but the notice still appears. The map brings what
+has just opened into view (else, on a first visit, the lesson the learner is at). *Bài tiếp theo* on a result is offered
+only when that lesson is open (`catalog.next.locked`).
 
 ### Games of a lesson
 
@@ -257,6 +309,9 @@ not attributed to any lesson.
 | `GET /api/learning/programme` | Every subject of the learner's grade with type, support, lessons ready / listed and this school year's progress; `academic_year_label`; `selection` (THPT); `resume` (Tiếp tục học); `grade: null` without a school grade. `?grade=` other than the learner's: `403 grade_locked` |
 | `PUT /api/learning/programme/selection` | `{subjects}`: THPT electives (at most 4); `422 not_an_elective`, `too_many_electives` |
 | `GET /api/learning/programme/subjects/{code}?q=` | This school year: `chapters` (by curriculum order) and `lessons` (sorted by state, see [lesson order](#học-theo-bài)), each with `lesson_id`, `subject_id`, `grade_id`, `academic_year`, `chapter_order`, `lesson_order`, `unlock_status`, `progress_status`, `progress_percent`, `unlock_requirements` (`lesson` / `content`), `group`; `progress` (completed / ready); `404 subject_not_in_grade` |
+| `GET /api/learning/unlock-map?subject=` | A subject as a journey: chapters, lessons and games with `status` (`LOCKED`, `UNLOCKED`, `IN_PROGRESS`, `COMPLETED`), `requirements`, `required`, `celebrate`; `pending`. `409 grade_required`, `404 subject_not_in_grade` |
+| `POST /api/learning/progress/sync` | Applies the unlock rules again to the recorded stages (any body is ignored) → `{academic_year, unlocked}`, the unlocks not celebrated yet |
+| `POST /api/learning/unlocks/celebrated` | `{ids}`: the animation was shown, it does not come back (idempotent, only the learner's own) |
 | `GET /api/learning/lesson-catalog/{key}` | A lesson of the learner's grade (`403 grade_locked` otherwise). The lesson screen: objectives, summary, examples, games with progress, completion rule, prerequisites, next lesson, review status and content version |
 | `POST /api/learning/lesson-catalog/{key}/play` | `{game}` (+ `Idempotency-Key`) → a paused session of that game of that lesson; the session's `catalog` names the lesson, its other games and the next lesson |
 
@@ -815,6 +870,7 @@ device's text-to-speech, as in the games), right/wrong counts per game, every an
 | `learning_review_items` | "Cần ôn"; unique `(user_id, lesson_id, question_key)` |
 | `learning_rewards` | Stage reward claim; unique `(user_id, subject_id, local_date)`, unique `session_id` |
 | `vocab_discoveries` | Khám phá từ mới: a word shown for the first time in a game; unique `(user_id, game, canonical)`, its sense, level, topic, school year, session |
+| `learning_unlocks` | Tự động mở khóa: a chapter or lesson opened for a learner in a school year; unique `(user_id, academic_year, content_type, content_key)`, its `source`, `trigger_key`, `celebrated_at`. Never taken back |
 | `vocab_level_progress` | A vocabulary level of a game: unlocked (why, grade), completed (words, school year), celebrated; unique `(user_id, game, level)` |
 
 All timestamps are UTC. Old sessions keep `lesson_version_id`, their item snapshots and `scoring_json`, so editing

@@ -10,7 +10,7 @@ from sqlalchemy import select
 
 from . import auth, campus, career, community, companion, dashboard, profile, study, tasks, streaks
 from . import friends, notifications, realtime, room_chat, study_rooms, study_together, team_quests
-from . import education, garden, inventory, learning, learning_history, lesson_api, memories, pet_room, room_visits
+from . import education, garden, inventory, learning, learning_history, learning_unlocks, lesson_api, memories, pet_room, room_visits
 from . import adventure, careers, finance, game_tutorials, life, town, work
 from .learning_content import seed_learning_content
 from .config import settings
@@ -187,6 +187,7 @@ for feature_router in (
 app.router.routes.extend(memories.router.routes)
 app.router.routes.extend(learning_history.router.routes)
 app.router.routes.extend(lesson_api.router.routes)
+app.router.routes.extend(learning_unlocks.router.routes)  # Tự động mở khóa
 app.router.routes.extend(education.router.routes)
 app.router.routes.extend(education.admin_router.routes)
 # Mirabi Life: Work Quest (work tasks themselves use /api/tasks) and the Healing Room.

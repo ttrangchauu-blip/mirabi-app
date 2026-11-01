@@ -146,7 +146,7 @@ export function ResultScreen({ sessionId, petId, petLevel, onReplay, onReview, o
         {lesson?.title && onLesson && lesson.other_games.length ? (
           <Button title="Trò khác trong bài" icon="game-controller-outline" variant="secondary" onPress={() => onLesson(lesson.lesson)} />
         ) : null}
-        {lesson?.next && onLesson ? (
+        {lesson?.next && !lesson.next.locked && onLesson ? (
           <Button title={`Bài tiếp theo: ${lesson.next.title}`} icon="arrow-forward" variant="secondary" onPress={() => onLesson(lesson.next!.key)} />
         ) : null}
         {lesson?.title && onLesson ? (

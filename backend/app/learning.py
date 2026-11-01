@@ -258,6 +258,9 @@ class EventOut(BaseModel):
     result: TurnResultOut | None
     session: SessionOut
     replayed: bool = False
+    unlocked: list[dict[str, Any]] = Field(default_factory=list, description="`complete` of a lesson's stage: the "
+                                           "chapters and lessons of its subject opened and not celebrated yet "
+                                           "(learning_unlocks.py), the ones this stage opened included. Also on a replay.")
 
 
 class ItemResultOut(BaseModel):
@@ -499,6 +502,11 @@ def session_out(db: Session, s: LearningSession, now: datetime | None = None, it
     can_complete, pending = completion_state(items, rules)
     subject, topic = db.get(LearningSubject, s.subject_id), db.get(LearningTopic, s.topic_id)
     level, lesson = db.get(LearningLevel, s.level_id), db.get(LearningLesson, s.lesson_id)
+    catalog = catalog_ref(rules)
+    if catalog and catalog["next"] and s.status in TERMINAL and s.archive_year is None:
+        # "Bài tiếp theo" on the result: only when it is open for this learner (learning_unlocks.py).
+        from .learning_unlocks import is_open_stored
+        catalog["next"]["locked"] = not is_open_stored(db, s.user_id, s.academic_year, catalog["next"]["key"])
     return {
         "id": s.id, "status": s.status, "kind": s.kind, "mode": s.mode, "game_type": s.game_type,
         "variant": rules.get("variant"), "game": s.game or game_of(s.game_type, rules.get("variant")),
@@ -521,7 +529,7 @@ def session_out(db: Session, s: LearningSession, now: datetime | None = None, it
         "end_reason": s.end_reason,
         "reward": {"status": s.reward_status, "exp": s.reward_exp} if s.status in TERMINAL else None,
         "version": s.version, "server_time": now.isoformat(),
-        "catalog": catalog_ref(rules),
+        "catalog": catalog,
         "archive_year": s.archive_year,
     }
 
@@ -1611,9 +1619,13 @@ def extend_session(session_id: int, data: ExtendInput, user: User = Depends(curr
 
 @router.post("/sessions/{session_id}/complete", response_model=EventOut, summary="Finish the stage and claim its reward once")
 def complete_session(session_id: int, data: ControlInput, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    from . import learning_unlocks
     s = owned_session(db, user, session_id)
-    if s.status == "completed":  # finishing again (retry, other device) never adds EXP again
-        return {"result": None, "session": session_out(db, s), "replayed": True}
+    unlocks = s.catalog_lesson is not None and s.kind == "lesson" and s.archive_year is None
+    opened = lambda: learning_unlocks.pending(db, user.id, s.academic_year, lc.lesson(s.catalog_lesson)["subject"]) \
+        if unlocks and lc.lesson(s.catalog_lesson) else []
+    if s.status == "completed":  # finishing again (retry, other device) never adds EXP again, nor opens anything twice
+        return {"result": None, "session": session_out(db, s), "replayed": True, "unlocked": opened()}
 
     def apply(s, items, now):
         if s.status == "completed":
@@ -1634,10 +1646,12 @@ def complete_session(session_id: int, data: ControlInput, user: User = Depends(c
                      result=result + (f" · +{s.reward_exp} EXP" if s.reward_exp else ""),
                      session={"id": s.id, "topic": topic.name if topic else None, "mode": s.mode, "score": s.score,
                               "max_combo": s.max_combo, "turns": s.required_count, "exp": s.reward_exp or 0})
+        if unlocks:  # in the same transaction: a completed stage and what it opens are stored together or not at all
+            learning_unlocks.after_stage(db, user.id, s.catalog_lesson, s.academic_year)
         return None, LearningEvent()
     out = run_event(db, user, session_id, "complete", data.client_event_id, apply)
     maybe_start_walk(user, db)  # the daily learning task may have completed today's quests
-    return out
+    return {**out, "unlocked": opened()}
 
 
 @router.post("/sessions/{session_id}/abandon", response_model=EventOut, summary="End the session early (no completion reward)")

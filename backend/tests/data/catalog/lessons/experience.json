@@ -1,7 +1,7 @@
 {"subject": "experience", "version": 1, "organization": "topic",
  "source_note": "Bộ bài mẫu cho kiểm thử.",
  "chapters": [
-  {"key": "tn6.ban_than", "grade": 6, "order": 1, "title": "Khám phá bản thân",
+  {"key": "tn6.ban_than", "grade": 6, "order": 1, "title": "Khám phá bản thân", "progression": "free",
    "lessons": [
     {"key": "tn6.tu_danh_gia", "order": 1, "title": "Em tự đánh giá thói quen học tập", "description": "Nhìn lại cách em học.", "status": "ready",
      "review": {"status": "checked"}, "objectives": ["Nhận ra thói quen học tập của mình"], "summary": ["Không có câu trả lời sai."],

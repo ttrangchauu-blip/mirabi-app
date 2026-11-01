@@ -108,12 +108,13 @@ def _vocab_words(entry: dict) -> list[str]:
 
 
 def _unlocked_lessons(db: Session, user, grade: int) -> set[str]:
-    """The ready, unlocked English lessons of the learner's grade this school year (lesson_api's lock rule)."""
-    from . import education
-    from .lesson_api import _all_states, locked
+    """The ready, unlocked English lessons of the learner's grade this school year (learning_unlocks' rules)."""
+    from . import education, learning_unlocks
+    from .lesson_api import _all_states
     keys = [lesson["key"] for c in lc.chapters("english", grade) for lesson in c["lessons"] if lesson["status"] == "ready"]
-    states = _all_states(db, user.id, keys, education.learning_year(db, user.id))
-    return {k for k in keys if not locked(lc.lesson(k), states)}
+    year = education.learning_year(db, user.id)
+    nodes = learning_unlocks.peek(db, user.id, "english", grade, year, _all_states(db, user.id, keys, year))
+    return {k for k in keys if nodes[k]["open"]}
 
 
 def _higher_or_locked_words(grade: int, unlocked: set[str]) -> set[str]:

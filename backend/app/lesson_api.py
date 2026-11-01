@@ -17,7 +17,7 @@ from pydantic import BaseModel, Field
 from sqlalchemy import case, func, select
 from sqlalchemy.orm import Session
 
-from . import education, game_registry as gr, lesson_catalog as lc, vocab_lesson
+from . import education, game_registry as gr, learning_unlocks as unlocks, lesson_catalog as lc, vocab_lesson
 from .db import get_db
 from .errors import APIError
 from .learning import IdempotencyKey, OPEN, create_session, session_out
@@ -134,22 +134,21 @@ def game_passed(spec: dict, progress: dict[str, dict]) -> bool:
 
 
 def lesson_state(entry: dict, progress: dict[str, dict]) -> dict:
+    """Completed: every required game passed (`completion.games: any`: one of them). An optional game is played and
+    passed like the others but never holds the lesson back; a lesson always has a required game (lesson_catalog)."""
     lesson = entry["lesson"]
-    specs = lesson.get("games", []) if lesson["status"] == "ready" else []
+    every = lesson.get("games", []) if lesson["status"] == "ready" else []
+    specs = [g for g in every if not g.get("optional", False)]
     games = [g["game"] for g in specs]
     rule = lesson.get("completion") or DEFAULT_COMPLETION
     passed = [g["game"] for g in specs if game_passed(g, progress)]
     done = bool(games) and (len(passed) == len(games) if rule.get("games", "all") == "all" else bool(passed))
     # Stages of a game a newer one replaced (credit_from) are a start too: the lesson was studied.
-    started = any(progress.get(g, {}).get("stages") for g in games + [g["credit_from"] for g in specs if g.get("credit_from")])
+    started = any(progress.get(g, {}).get("stages") for g in [g["game"] for g in every] + [g["credit_from"] for g in every if g.get("credit_from")])
     status: LessonStatus = "completed" if done else "in_progress" if started else "not_started"
     total = len(games) if rule.get("games", "all") == "all" else min(1, len(games))
     return {"status": status, "label": STATUS_LABEL[status], "games_passed": len(passed), "games_total": total,
             "percent": 100 if done else round(100 * min(len(passed), total) / total) if total else 0}
-
-
-def locked(entry: dict, states: dict[str, dict]) -> bool:
-    return any(states.get(req, {}).get("status") != "completed" for req in entry["lesson"].get("requires", []))
 
 
 def _all_states(db: Session, user_id: int, keys: list[str], academic_year: int | None = None) -> dict[str, dict]:
@@ -251,18 +250,23 @@ LESSON_GROUPS = ("in_progress", "unlocked", "completed", "locked")
 COMING_SOON = "Bài học đang được biên soạn."
 
 
-def lesson_card(entry: dict, states: dict[str, dict], *, subject: str, number: int, year: int | None,
-                chapter_order: int, lesson_order: int) -> dict:
+def lock_note(lesson: dict, node: dict) -> str | None:
+    """Why a lesson is locked: its own explanation of its prerequisite while that is what is missing, else the rule's."""
+    if node["open"]:
+        return None
+    own = any(r["type"] == "lesson" and not r["done"] and r["lesson_id"] in lesson.get("requires", []) for r in node["requirements"])
+    return (lesson.get("requires_note") if own else None) or node["note"]
+
+
+def lesson_card(entry: dict, states: dict[str, dict], node: dict, *, subject: str, number: int, year: int | None,
+                chapter_order: int, lesson_order: int, celebrate: bool = False) -> dict:
     """One lesson of a subject's list, as the backend decides it for this learner and school year. Being open
-    (`unlock_status`) and being done (`progress_status`) are separate: a lesson is locked while it is still being
-    written or while a prerequisite is not completed this school year; the app never sends either."""
+    (`unlock_status`, learning_unlocks.py) and being done (`progress_status`) are separate: a lesson is locked while it
+    is still being written or until what opens it is completed this school year; the app never sends either."""
     lesson = entry["lesson"]
     ready = lesson["status"] == "ready"
     state = states[lesson["key"]] if ready else None
-    requirements: list[dict] = [{"type": "content", "note": COMING_SOON}] if not ready else [
-        {"type": "lesson", "lesson_id": req, "title": lc.lesson(req)["lesson"]["title"] if lc.lesson(req) else req,
-         "done": states.get(req, {}).get("status") == "completed"} for req in lesson.get("requires", [])]
-    is_locked = not ready or locked(entry, states)
+    is_locked = not node["open"]
     progress_status = state["status"] if state else "not_started"
     group = "locked" if is_locked else {"not_started": "unlocked"}.get(progress_status, progress_status)
     return {
@@ -270,8 +274,9 @@ def lesson_card(entry: dict, states: dict[str, dict], *, subject: str, number: i
         "chapter_key": entry["chapter"]["key"], "chapter_title": entry["chapter"]["title"],
         "chapter_order": chapter_order, "lesson_order": lesson_order,
         "unlock_status": "locked" if is_locked else "unlocked", "progress_status": progress_status,
-        "progress_percent": state["percent"] if state else 0, "unlock_requirements": requirements,
-        "unlock_note": (lesson.get("requires_note") if ready else COMING_SOON) if is_locked else None, "group": group,
+        "content_status": node["status"], "required": node["required"], "celebrate": celebrate,
+        "progress_percent": state["percent"] if state else 0, "unlock_requirements": node["requirements"],
+        "unlock_note": lock_note(lesson, node), "group": group,
         # The fields of before, kept for older apps.
         "key": lesson["key"], "title": lesson["title"], "description": lesson["description"], "status": lesson["status"],
         "progress": state, "games": [{"game": g["game"], "title": g["title"]} for g in lesson.get("games", [])],
@@ -297,6 +302,10 @@ def subject_lessons(code: str, grade: GradeId | None = Query(default=None, descr
     chaps = lc.chapters(code, number)
     keys = [lesson["key"] for c in chaps for lesson in c["lessons"]]
     states = _all_states(db, user.id, keys, year)
+    nodes = unlocks.sync(db, user.id, code, number, year, states=states)  # what the rules open now is stored first
+    db.commit()
+    fresh = unlocks.pending(db, user.id, year, code)
+    celebrate = {(u["type"], u["key"]) for u in fresh}
     needle = fold(q) if q else ""
     data = lc.catalog()["subjects"].get(code) or {}
     out = []
@@ -306,15 +315,20 @@ def subject_lessons(code: str, grade: GradeId | None = Query(default=None, descr
         for li, lesson in enumerate(sorted(c["lessons"], key=lambda x: (x.get("order", 0), x["key"])), start=1):
             if needle and needle not in fold(f"{lesson['title']} {lesson['description']}"):
                 continue
-            card = lesson_card(lc.lesson(lesson["key"]), states, subject=code, number=number, year=year,
-                               chapter_order=ci, lesson_order=li)
+            card = lesson_card(lc.lesson(lesson["key"]), states, nodes[lesson["key"]], subject=code, number=number, year=year,
+                               chapter_order=ci, lesson_order=li, celebrate=("lesson", lesson["key"]) in celebrate)
             lessons.append(card)
             cards.append(card)
         if lessons or not needle:
-            out.append({"key": c["key"], "title": c["title"], "order": ci, "lessons": lessons})
+            node = nodes[c["key"]]
+            out.append({"key": c["key"], "title": c["title"], "order": ci, "lessons": lessons,
+                        "unlock_status": "unlocked" if node["open"] else "locked", "content_status": node["status"],
+                        "required_total": node["required_total"], "required_completed": node["required_completed"],
+                        "unlock_requirements": node["requirements"], "unlock_note": node["note"],
+                        "celebrate": ("chapter", c["key"]) in celebrate})
     ready = [k for k in keys if lc.lesson(k)["lesson"]["status"] == "ready"]
     completed = sum(1 for k in ready if states[k]["status"] == "completed")
-    return {"subject": subject, "grade": f"grade{number}", "number": number, "label": f"Lớp {number}",
+    return {"subject": subject, "grade": f"grade{number}", "number": number, "label": f"Lớp {number}", "unlocked": fresh,
             "academic_year": year, "academic_year_label": education.year_label(year) if year is not None else None,
             "organization": data.get("organization", "topic"), "source_note": data.get("source_note"),
             "textbook": data.get("textbook"), "chapters": out, "lessons": sort_lessons(cards),
@@ -327,6 +341,13 @@ def _entry_or_404(key: str) -> dict:
     if entry is None:
         raise APIError(404, "lesson_not_found", "Lesson not found")
     return entry
+
+
+def _unlock_node(db: Session, user: User, entry: dict, year: int | None) -> dict:
+    """Whether a lesson is open for this learner this school year (learning_unlocks), its subject's unlocks stored first."""
+    nodes = unlocks.sync(db, user.id, entry["subject"], entry["grade"], year)
+    db.commit()
+    return nodes[entry["lesson"]["key"]]
 
 
 @router.get("/gameplays", responses=education.errors(*education.AUTH), summary="The game definitions: every gameplay, what the learner does in it, and whether it is built")
@@ -347,6 +368,7 @@ def lesson_detail(key: str, user: User = Depends(current_user), db: Session = De
     lesson = entry["lesson"]
     progress = game_progress(db, user.id, [key], year).get(key, {})
     required = lesson.get("requires", [])
+    node = _unlock_node(db, user, entry, year)
     states = _all_states(db, user.id, required + [key], year)
     codes = {lc.lesson_code(key, g["game"]): g["game"] for g in lesson.get("games", [])}
     ids = dict(db.execute(select(LearningLesson.code, LearningLesson.id).where(LearningLesson.code.in_(codes),
@@ -365,13 +387,17 @@ def lesson_detail(key: str, user: User = Depends(current_user), db: Session = De
         found = explore.get(spec["game"])
         turns = found["next_stage_words"] if found else lc.turns_of(spec)
         gameplay = gr.GAMEPLAYS[spec["game"]]
+        passed = game_passed(spec, progress)
         games.append({"game": spec["game"], "title": spec["title"], "gameplay": lc.GAMES[spec["game"]]["name"],
+                      "required": not spec.get("optional", False),
+                      "status": "LOCKED" if not node["open"] else "COMPLETED" if passed
+                      else "IN_PROGRESS" if row.get("stages") or row.get("open_session") else "UNLOCKED",
                       "family": gameplay["family"], "interaction": gameplay["interaction"],
                       "style": spec.get("style"), "turns": turns,
                       "short_stage": 0 < turns < lc.VOCAB_FULL_STAGE if found else lc.short_stage(spec), "explore": found,
                       "playable": code in ids, "review_count": reviews.get(ids.get(code), 0),
                       "progress": {"stages": row.get("stages", 0), "completed": row.get("completed", 0), "best": row.get("best"),
-                                   "passed": game_passed(spec, progress), "last": row.get("last"), "open_session": row.get("open_session")}})
+                                   "passed": passed, "last": row.get("last"), "open_session": row.get("open_session")}})
     following = lc.lesson(entry["next"]) if entry.get("next") else None
     review = lesson.get("review") or {"status": "draft"}
     return {"key": key, "title": lesson["title"], "description": lesson["description"], "status": lesson["status"],
@@ -382,9 +408,13 @@ def lesson_detail(key: str, user: User = Depends(current_user), db: Session = De
             "review": {"status": review["status"], "label": lc.REVIEW_LABEL[review["status"]]},
             "source_note": entry["file"].get("source_note"), "content_version": entry["version"],
             "completion": lesson.get("completion") or DEFAULT_COMPLETION, "progress": states[key] if lesson["status"] == "ready" else None,
-            "locked": locked(entry, states), "requires": [{"key": r, "title": lc.lesson(r)["lesson"]["title"],
-                                                           "done": states[r]["status"] == "completed"} for r in required],
-            "requires_note": lesson.get("requires_note"), "practice_note": (lc.subject_meta(entry["subject"]) or {}).get("practice_note"),
+            # Open or not is learning_unlocks' (the lesson before it, its chapter, its own prerequisites).
+            "locked": lesson["status"] == "ready" and not node["open"], "content_status": node["status"],
+            "required": node["required"], "unlock_requirements": node["requirements"], "unlock_note": node["note"],
+            "requires": [{"key": r["lesson_id"], "title": r["title"], "done": r["done"]}
+                         for r in node["requirements"] if r["type"] == "lesson"],
+            "requires_note": lock_note(lesson, node) or lesson.get("requires_note"),
+            "practice_note": (lc.subject_meta(entry["subject"]) or {}).get("practice_note"),
             "games": games,
             "next": {"key": following["lesson"]["key"], "title": following["lesson"]["title"],
                      "ready": following["lesson"]["status"] == "ready"} if following else None}
@@ -411,9 +441,9 @@ def play_lesson(key: str, data: LessonPlay, idempotency_key: IdempotencyKey = No
         raise APIError(409, "lesson_not_ready", "This lesson is still being written")
     if lc.game_spec(entry, data.game) is None:
         raise APIError(422, "game_not_in_lesson", "This lesson has no such game")
-    required = entry["lesson"].get("requires", [])
-    if required and locked(entry, _all_states(db, user.id, required, year)):
-        raise APIError(409, "lesson_locked", entry["lesson"].get("requires_note") or "Finish the earlier lesson first")
+    node = _unlock_node(db, user, entry, year)
+    if not node["open"]:
+        raise APIError(409, "lesson_locked", lock_note(entry["lesson"], node) or "Finish the earlier lesson first")
     lesson = db.scalar(select(LearningLesson).where(LearningLesson.code == lc.lesson_code(key, data.game)))
     if lesson is None or lesson.status != "published":
         raise APIError(409, "lesson_not_published", "This game of the lesson is not published yet")

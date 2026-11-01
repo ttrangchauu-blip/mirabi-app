@@ -1,7 +1,7 @@
 import { newIdempotencyKey } from '../api/client';
 import { request } from '../screens/main/shared';
 import type { Band, Catalog, CatalogLesson, EventResponse, GameId, LearningSession, LessonDetail, LessonProgramme, Intro, Mode, ReviewGroup, SessionResult,
-  StartOptions, SubjectLessons, VocabFilter, VocabGame, VocabHistory, VocabPlay, VocabProgress, VocabQuery, VocabWordDetail } from './types';
+  StartOptions, SubjectLessons, UnlockedContent, VocabFilter, VocabGame, VocabHistory, VocabPlay, VocabProgress, VocabQuery, VocabWordDetail } from './types';
 
 export const deviceTimezone = () => Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
 
@@ -73,6 +73,11 @@ export const learningApi = {
   /** The chapters and lessons of a subject at the learner's grade, with each lesson's status and progress. */
   subjectLessons: (code: string): Promise<SubjectLessons> =>
     request(`/api/learning/programme/subjects/${encodeURIComponent(code)}`),
+  /** The backend applies its unlock rules again to the stages it has recorded (the app never says what is completed) and
+   * lists what opened and is not celebrated yet. */
+  syncProgress: (): Promise<{ unlocked?: UnlockedContent[] }> => request('/api/learning/progress/sync', { method: 'POST', body: {} }),
+  /** The unlock animation was shown: it does not come back. */
+  unlocksCelebrated: (ids: number[]): Promise<unknown> => request('/api/learning/unlocks/celebrated', { method: 'POST', body: { ids } }),
   lessonDetail: (key: string): Promise<CatalogLesson> => request(`/api/learning/lesson-catalog/${encodeURIComponent(key)}`),
   /** A game of a lesson, created paused (the countdown resumes it). The same key on a retry returns the same session. */
   playLesson: (key: string, game: GameId, idempotencyKey = newIdempotencyKey()): Promise<LearningSession> =>

@@ -66,7 +66,12 @@ server, so a lesson is never served half right.
   `checked` = written for Mirabi and checked by its author and the validator; `teacher_reviewed` once a teacher has.
 - **Completion** (*Đã hoàn thành*): every published game (`games: "all"`, or one: `"any"`) has a completed stage with at
   least `min_first_try` of its graded questions right at the first try. Opening a lesson or playing once is not enough.
-- A lock (`requires`) is only for a real prerequisite, and `requires_note` says why.
+- A lock (`requires`) is only for a real prerequisite, and `requires_note` says why. Lessons already open one after the
+  other in their chapter ([Tự động mở khóa](LEARNING_GAMES.md#tự-động-mở-khóa)): `requires` is for what that order does
+  not say, such as a lesson joining two branches. It names an earlier lesson of the same grade.
+- `"optional": true` on a lesson or a game: it opens in its place but never holds anything back (a lesson keeps at least
+  one required game). `"progression": "free"` on a chapter: all its lessons open with it, for lessons that do not build
+  on each other. At the top of a subject's file: every chapter and lesson of the subject opens at once.
 
 ## Games
 

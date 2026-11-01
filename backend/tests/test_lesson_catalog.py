@@ -15,7 +15,7 @@ from app.db import SessionLocal
 from app.learning import weakness
 from app.learning_engine import InvalidAnswer
 from app.models import LearningSessionItem
-from conftest import bearer, login, register
+from conftest import bearer, login, open_lessons, register
 from test_subject_games import KINDS as SUBJECT_GAME_KINDS, right as subject_game_answer
 
 FIXTURES = Path(__file__).parent / "data" / "catalog" / "lessons"
@@ -492,6 +492,7 @@ def test_every_kind_of_game_plays_through_from_the_grade_to_the_result(client):
         assert subjects[entry["subject"]]["ready"] >= 1
         listed = client.get(f"/api/learning/programme/subjects/{entry['subject']}", headers=me).json()
         assert key in {lsn["key"] for c in listed["chapters"] for lsn in c["lessons"]}
+        open_lessons(client, me, key)  # reached by completing the lessons before it (tested in test_learning_unlocks.py)
         session = start(client, me, key, game)
         assert session["catalog"]["lesson"] == key and session["game"] == game
         while not session["can_complete"]:
@@ -559,10 +560,14 @@ def test_locks_are_the_backend_own_and_each_school_year_has_its_own_progress(fix
     finish(client, me, start(client, me, "toan2.bang_nhan_2", "match"))
     year = client.get("/api/learning/programme/subjects/math", headers=me).json()["academic_year"]
     assert _order(client, me)[0] == ("toan2.bang_chia_2", "unlocked")
-    # The same stages counted in the school year before: this year starts again, the lock is back.
+    # The same stages counted in the school year before: this year starts again, the lock is back. What opened then
+    # stays that year's (learning_unlocks), as a real change of school year leaves it.
+    from app.models import LearningUnlock
     with SessionLocal() as db:
         for s in db.scalars(select(LearningSession).where(LearningSession.catalog_lesson == "toan2.bang_nhan_2")):
             s.academic_year = year - 1
+        for u in db.scalars(select(LearningUnlock)):
+            u.academic_year = year - 1
         db.commit()
     assert _order(client, me) == [("toan2.bang_nhan_2", "unlocked"), ("toan2.bang_chia_2", "locked"), ("toan2.bang_nhan_5", "locked")]
     start(client, me, "toan2.bang_chia_2", "math_bridge", expect=409)

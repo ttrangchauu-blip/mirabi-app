@@ -306,9 +306,11 @@ def test_the_helper_used_by_the_catalog_tests_plays_every_step():
 
 
 def test_staged_answers_through_the_api(client):
+    from conftest import open_lessons
     from test_lesson_catalog import account, answer
 
     me = account(client, age=8, school_grade="grade3")
+    open_lessons(client, me, "toan3.hai_buoc_tinh")
     # Giải bài toán có hai bước tính (lớp 3): every problem has two steps.
     res = client.post("/api/learning/lesson-catalog/toan3.hai_buoc_tinh/play", headers=me, json={"game": "step_solver", "timezone": "Asia/Ho_Chi_Minh"})
     assert res.status_code == 201, res.json()

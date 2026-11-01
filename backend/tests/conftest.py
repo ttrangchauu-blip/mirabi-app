@@ -112,6 +112,25 @@ def login(client, email="aqua@example.com", password=PASSWORD):
 def bearer(token: str) -> dict:
     return {"Authorization": f"Bearer {token}"}
 
+def open_lessons(client, headers: dict, *keys: str) -> None:
+    """The learner has reached these catalog lessons (learning_unlocks.py stores them as open), so a test of a game can
+    play a lesson without completing every lesson before it. Stored as the unlock rules would have stored them."""
+    from app import clock, lesson_catalog as lc
+    from app.db import SessionLocal
+    from app.models import LearningUnlock
+    user_id = client.get("/api/auth/me", headers=headers).json()["id"]
+    year = client.get("/api/learning/programme", headers=headers).json()["academic_year"] or 0
+    with SessionLocal() as session:
+        for key in keys:
+            entry = lc.lesson(key)
+            for kind, content in (("chapter", entry["chapter"]["key"]), ("lesson", key)):
+                if session.query(LearningUnlock).filter_by(user_id=user_id, academic_year=year, content_type=kind, content_key=content).first():
+                    continue
+                session.add(LearningUnlock(user_id=user_id, academic_year=year, grade=entry["grade"], subject=entry["subject"],
+                                           content_type=kind, content_key=content, source="start", unlocked_at=clock.now(),
+                                           celebrated_at=clock.now()))
+        session.commit()
+
 def adult_signup(client, email="aqua@example.com", password=PASSWORD, age=25):
     """Register an adult (Mirabi Life is for ages 16 and over, app/life_access.py), then sign in."""
     grade = "adult" if age >= 23 else "university" if age >= 18 else "grade11"

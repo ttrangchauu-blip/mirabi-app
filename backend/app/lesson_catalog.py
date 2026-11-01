@@ -40,6 +40,9 @@ LESSON_KEY = re.compile(r"^[a-z]{2,4}(?:[1-9]|1[0-2])\.[a-z0-9_]{2,26}$")
 TASK_KEY = re.compile(r"^[a-z0-9_]{1,16}$")
 
 STATUSES = ("ready", "planned")
+# How a chapter's lessons open (learning_unlocks.py): one after the other, or all with the chapter. On a subject's file,
+# `free` opens every chapter and lesson of the subject at once, for subjects whose lessons do not build on each other.
+PROGRESSIONS = ("sequential", "free")
 REVIEW_STATUSES = ("draft", "checked", "teacher_reviewed")  # a ready lesson is at least `checked`
 REVIEW_LABEL = {"draft": "Bản nháp", "checked": "Mirabi biên soạn và đã soát", "teacher_reviewed": "Giáo viên đã thẩm định"}
 ORGANIZATIONS = ("topic", "textbook")
@@ -420,6 +423,8 @@ def validate_file(data: dict, name: str = "lessons") -> list[str]:
         return [f"{name}: {subject} is marked unsupported in programme.json"]
     if not isinstance(data.get("version"), int):
         problems.append(f"{name}: version (an integer) is required")
+    if data.get("progression", "sequential") not in PROGRESSIONS:
+        problems.append(f"{name}: progression must be one of {', '.join(PROGRESSIONS)}")
     if data.get("organization") not in ORGANIZATIONS:
         problems.append(f"{name}: organization must be topic or textbook")
     if data.get("organization") == "textbook" and not (data.get("textbook") or {}).get("series"):
@@ -440,6 +445,8 @@ def validate_file(data: dict, name: str = "lessons") -> list[str]:
             problems.append(f"{cwhere}: duplicate chapter key")
         chapter_keys.add(key)
         _text(chapter.get("title"), cwhere, problems, 80, "title")
+        if chapter.get("progression", "sequential") not in PROGRESSIONS:
+            problems.append(f"{cwhere}: progression must be one of {', '.join(PROGRESSIONS)}")
         if not chapter.get("lessons"):
             problems.append(f"{cwhere}: a chapter lists its lessons (planned ones too)")
         for lesson in chapter.get("lessons", []):
@@ -462,8 +469,12 @@ def validate_file(data: dict, name: str = "lessons") -> list[str]:
             for req in lesson.get("requires", []):
                 if req not in lesson_keys or req == lkey:
                     problems.append(f"{where}: requires {req}, which is not an earlier lesson of this file")
+                elif not req.startswith(f"{abbr}{grade}."):  # another grade's lesson is never completed this school year
+                    problems.append(f"{where}: requires {req}, which is not a lesson of grade {grade}")
             if lesson.get("requires") and not lesson.get("requires_note"):
                 problems.append(f"{where}: a prerequisite is explained (requires_note)")
+            if not isinstance(lesson.get("optional", False), bool):
+                problems.append(f"{where}: optional is true or false")
             if lesson["status"] == "planned":
                 if lesson.get("games"):
                     problems.append(f"{where}: a planned lesson publishes no game")
@@ -482,6 +493,11 @@ def validate_file(data: dict, name: str = "lessons") -> list[str]:
             ids = [g.get("game") for g in games]
             if len(set(ids)) != len(ids):
                 problems.append(f"{where}: a game is published once per lesson")
+            if any(not isinstance(g.get("optional", False), bool) for g in games):
+                problems.append(f"{where}: a game's optional is true or false")
+            elif games and all(g.get("optional") for g in games):
+                # Completing nothing never completes a lesson (nor opens the next one).
+                problems.append(f"{where}: at least one game is required (not optional)")
             for spec in games:
                 game = spec.get("game")
                 gwhere = f"{where}/{game}"
@@ -565,11 +581,91 @@ def catalog() -> dict:
             for i, key in enumerate(ordered):
                 lessons[key]["next"] = ordered[i + 1] if i + 1 < len(ordered) else None
                 lessons[key]["position"] = i
+            # What opens what (learning_unlocks.py) must never go round in a loop, whatever the `order` fields say.
+            loop = find_cycle(unlock_edges(_unlock_path(sorted((c for c in data["chapters"] if c["grade"] == grade), key=_order),
+                                                        data.get("progression") == "free")))
+            if loop:
+                problems.append(f"{code} grade {grade}: the unlock rules go round in a loop: {' → '.join(loop)}")
+    if problems:
+        raise ContentError("; ".join(problems[:20]))
     return {"subjects": subjects, "lessons": lessons}
 
 
 def _order(entry: dict) -> tuple:
     return (entry.get("order", 0), entry["key"])
+
+
+# ---------------------------------------------------------------------------------------------------------------
+# Unlock rules: what opens a chapter or a lesson (learning_unlocks.py applies them to a learner's progress)
+# ---------------------------------------------------------------------------------------------------------------
+
+def _unlock_path(chaps: list[dict], free_subject: bool = False) -> list[dict]:
+    """A subject's chapters at a grade, in order, each with its lessons in order and what opens them:
+    - a chapter opens once every required lesson of `needs` (the nearest earlier chapter that has one) is completed;
+      the first chapter, or one after chapters with nothing required, opens at once;
+    - in an open chapter a lesson opens once its `after` (the required lesson before it; none in a `free` chapter)
+      and its own `requires` are completed.
+    Required: a ready lesson not marked `optional`. A lesson still being written is never open and holds nothing back.
+    In a `free` subject every chapter and lesson opens at once (a lesson's own `requires` still applies)."""
+    out: list[dict] = []
+    before: dict | None = None
+    for c in chaps:
+        free = free_subject or c.get("progression", "sequential") == "free"
+        lessons, after = [], None
+        for lesson_ in sorted(c["lessons"], key=_order):
+            ready = lesson_["status"] == "ready"
+            required = ready and not lesson_.get("optional", False)
+            lessons.append({"key": lesson_["key"], "title": lesson_["title"], "ready": ready, "required": required,
+                            "requires": list(lesson_.get("requires", [])), "after": None if free else after})
+            if required:
+                after = lesson_["key"]
+        chapter = {"key": c["key"], "title": c["title"], "free": free, "lessons": lessons,
+                   "required": [x["key"] for x in lessons if x["required"]],
+                   "after": before["key"] if before and not free_subject else None,
+                   "after_title": before["title"] if before and not free_subject else None,
+                   "needs": list(before["required"]) if before and not free_subject else []}
+        out.append(chapter)
+        if chapter["required"]:
+            before = chapter
+    return out
+
+
+def unlock_path(subject: str, grade: int) -> list[dict]:
+    data = catalog()["subjects"].get(subject) or {}
+    return _unlock_path(chapters(subject, grade), data.get("progression") == "free")
+
+
+def unlock_edges(path: list[dict]) -> dict[str, list[str]]:
+    """node → the nodes it waits for ("c:<chapter>", "l:<lesson>")."""
+    edges: dict[str, list[str]] = {}
+    for c in path:
+        edges[f"c:{c['key']}"] = [f"l:{k}" for k in c["needs"]]
+        for x in c["lessons"]:
+            edges[f"l:{x['key']}"] = [f"c:{c['key']}"] + [f"l:{k}" for k in ([x["after"]] if x["after"] else []) + x["requires"]]
+    return edges
+
+
+def find_cycle(edges: dict[str, list[str]]) -> list[str] | None:
+    """A loop of the graph (its nodes, the first one repeated at the end), or None."""
+    state: dict[str, int] = {}  # 1: being visited, 2: done
+    stack: list[str] = []
+
+    def visit(node: str) -> list[str] | None:
+        state[node] = 1
+        stack.append(node)
+        for nxt in edges.get(node, ()):
+            if state.get(nxt) == 1:
+                return stack[stack.index(nxt):] + [nxt]
+            if nxt not in state and (found := visit(nxt)):
+                return found
+        state[node] = 2
+        stack.pop()
+        return None
+
+    for node in edges:
+        if node not in state and (found := visit(node)):
+            return found
+    return None
 
 
 def chapters(subject: str, grade: int) -> list[dict]:

@@ -9,7 +9,7 @@ import { useLearningPrefs } from '../../learning/prefs';
 import { groupOf, isCurriculumGame, PLAY_MODE, QUICK_GAMES, QUICK_LESSONS, subjectOfGame } from '../../learning/labels';
 import { useTutorialProgress } from '../../learning/tutorial/progress';
 import type { Band, Catalog, CatalogLesson, FreeLevel, GameGroupId, GameId, LearningSession, LessonGame, LessonProgramme, StartOptions,
-  SubjectCode, VocabCelebrationInfo, VocabGame, VocabPlay, VocabProgress } from '../../learning/types';
+  SubjectCode, UnlockedContent, VocabCelebrationInfo, VocabGame, VocabPlay, VocabProgress } from '../../learning/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useConfirm } from '../../ui/ConfirmDialog';
 import { useToast } from '../../ui/Toast';
@@ -27,6 +27,7 @@ import { PageIn } from './LearningUI';
 import { ArchiveLessonScreen, ArchiveListScreen, ArchiveYearScreen, NotebookScreen } from './ArchiveScreens';
 import type { NoteDraft } from './NotesScreen';
 import { PromotionCelebration } from './PromotionCelebration';
+import { UnlockNotice } from './UnlockNotice';
 import { VocabCelebration } from './VocabExtras';
 import { StudyProfileForm } from '../main/StudyProfileScreen';
 import { request } from '../main/shared';
@@ -448,6 +449,16 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
   const resultGame = route.name === 'result' ? route.game : undefined;
   useEffect(() => { if (englishGames) void loadVocab(); }, [englishGames, loadVocab]);
   useEffect(() => { if (isVocabGame(resultGame)) void loadVocab([resultGame]); }, [resultGame, loadVocab]);
+  // Tự động mở khóa: what a stage opened (also one whose result was lost on the way) is told by a small notice. The
+  // backend decides it; the app only asks once a result is on screen, and says when the notice was shown.
+  const [unlockNews, setUnlockNews] = useState<UnlockedContent[]>([]);
+  const resultSession = route.name === 'result' ? route.sessionId : undefined;
+  useEffect(() => {
+    if (resultSession === undefined) return;
+    void learningApi.syncProgress().then((r) => { if (r.unlocked?.length) setUnlockNews(r.unlocked); }).catch(() => {});
+  }, [resultSession]);
+  const inGame = route.name === 'game';
+  useEffect(() => { if (inGame) setUnlockNews([]); }, [inGame]);
 
   if (route.name === 'tutorial') {
     // The tutorial is played in the game screen itself (Tutorial Mode), full screen like the game.
@@ -474,7 +485,7 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
       // A subject's lessons scroll in their own list (long subjects stay smooth), outside the shared ScrollView.
       <PageIn key={route.subject} reduceMotion={prefs.reduceMotion} style={styles.fill}>
         <SubjectLessonsScreen key={route.subject} code={route.subject} onBack={home} reduceMotion={prefs.reduceMotion}
-          snapshot={snapshotOf(route.subject)} onLeave={keepSnapshot}
+          snapshot={snapshotOf(route.subject)} onLeave={keepSnapshot} petId={user.pet} petLevel={user.level} onUnlocked={setUnlockNews}
           onOpen={(key) => openLesson(key, route)}
           onPractice={practiceOf(route.subject) ? () => setRoute({ name: 'games', subject: practiceOf(route.subject)!, back: route }) : undefined} />
       </PageIn>
@@ -579,6 +590,12 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
           setRoute(list);
           withGuide(game, () => { void play(game, { vocab: 'discover', topic: null }).then((ok) => { if (!ok) setRoute(list); }); }, () => setRoute(list));
         }} />
+    ) : null}
+    {unlockNews.length && !vocabParty && !celebration ? (
+      <UnlockNotice news={unlockNews} petId={user.pet} petLevel={user.level} reduceMotion={prefs.reduceMotion}
+        onSeen={(ids) => { void learningApi.unlocksCelebrated(ids).catch(() => {}); }}
+        onClose={() => setUnlockNews([])}
+        onExplore={(key) => { setUnlockNews([]); openLesson(key); }} />
     ) : null}
     {celebration ? (
       <PromotionCelebration celebration={celebration} petId={user.pet} petLevel={user.level}

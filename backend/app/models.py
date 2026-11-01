@@ -1511,6 +1511,29 @@ class VocabLevelProgress(Base):
     celebrated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
 
+class LearningUnlock(Base):
+    """Tự động mở khóa (learning_unlocks.py): a chapter or lesson of the catalog that the unlock rules opened for a
+    learner in a school year. Stored the first time it opens and never taken back, so content added later to a
+    completed chapter does not close what was open; the unique key keeps a retry or a second device from storing it
+    twice. Progress itself is never stored here: it is read from the sessions (lesson_api.game_progress)."""
+    __tablename__ = "learning_unlocks"
+    __table_args__ = (UniqueConstraint("user_id", "academic_year", "content_type", "content_key", name="uq_learning_unlock"),
+                      Index("ix_learning_unlocks_user_year_subject", "user_id", "academic_year", "subject", "grade"))
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    academic_year: Mapped[int] = mapped_column(Integer)  # its first calendar year (education.py); 0 outside a school year
+    grade: Mapped[int] = mapped_column(Integer)
+    subject: Mapped[str] = mapped_column(String(20))
+    content_type: Mapped[str] = mapped_column(String(10))  # chapter | lesson
+    content_key: Mapped[str] = mapped_column(String(40))
+    # start (open from the beginning) | migration (already studied before unlocks were stored) | completed (a stage
+    # completed `trigger_key` and opened it) | progress (opened on a later read: content became ready meanwhile)
+    source: Mapped[str] = mapped_column(String(12))
+    trigger_key: Mapped[str | None] = mapped_column(String(40), nullable=True)
+    unlocked_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    celebrated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+
 # ------------------------------------------------------------------------------------------------ Mirabi Life, phase 2-3
 class AdventureRewardClaim(Base):
     """A Life Adventure milestone reward taken (adventure.REGIONS). One row per user and milestone."""

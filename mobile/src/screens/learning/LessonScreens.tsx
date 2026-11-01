@@ -1,20 +1,22 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, Animated, Easing, FlatList, LayoutAnimation, Pressable, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Animated, Easing, FlatList, LayoutAnimation, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { errorMessage } from '../../auth/messages';
 import { Text } from '../../components/Typography';
 import { learningApi } from '../../learning/api';
 import { GAME_INFO } from '../../learning/labels';
-import { filterLessons, GROUP_LABEL, LessonCard, lessonCards, LessonFilter, newlyUnlocked, orderChanged, subjectProgress,
-  unlockHint } from '../../learning/lessonOrder';
-import type { CatalogLesson, GameId, LessonExplore, LessonGame, LessonProgramme, SubjectLessons, UnlockRequirement } from '../../learning/types';
+import { currentLesson, filterLessons, focusLesson, GROUP_LABEL, journey, LessonCard, lessonCards, LessonFilter, newlyUnlocked, orderChanged,
+  subjectProgress, unlockHint } from '../../learning/lessonOrder';
+import type { CatalogLesson, GameId, LessonExplore, LessonGame, LessonProgramme, SubjectLessons, UnlockedContent, UnlockRequirement } from '../../learning/types';
 import { appTheme as t } from '../../theme';
 import { Button, Card, IconName, ProgressBar, Segmented } from '../../ui/kit';
 import { BackHeader } from './GamePicker';
+import { JourneySectionView } from './JourneyMap';
 import { gameLook, HeaderIcon, IconBadge, Look } from './LearningUI';
 
 // Học tập theo bài (backend lesson_api.py): Học tập → môn → bài → trò chơi → Cách chơi (lần đầu) → 3-2-1 → Chơi → Kết quả.
-// A subject lists its lessons sorted by the learner's state (learning/lessonOrder.ts); a lesson shows its short content
+// A subject shows its lessons as a journey map (JourneyMap.tsx) or a list sorted by the learner's state
+// (learning/lessonOrder.ts); a lesson shows its short content
 // and its games. Every state comes from the backend; nothing is created there until a game starts.
 
 function Failed({ error, onRetry }: { error: string; onRetry: () => void }) {
@@ -25,13 +27,21 @@ function Failed({ error, onRetry }: { error: string; onRetry: () => void }) {
 
 /** What a subject screen leaves behind for the next visit: its last list and where it was scrolled, so coming back
  * from a lesson shows the list at once and moves only the cards whose state changed. */
-export type SubjectSnapshot = { data: SubjectLessons; offset: number };
+export type SubjectSnapshot = { data: SubjectLessons; offset: number; view?: SubjectView };
+
+/** The same lessons on a journey map (the curriculum's order) or as a list sorted by state. */
+export type SubjectView = 'map' | 'list';
 
 type LessonsProps = { code: string; onBack: () => void; onOpen: (key: string) => void;
   /** The subject's free-practice games (not by lesson), when it has some. */ onPractice?: () => void;
   /** The list of the last visit (this grade and school year). */ snapshot?: SubjectSnapshot | null;
-  onLeave?: (snapshot: SubjectSnapshot) => void; reduceMotion?: boolean };
+  onLeave?: (snapshot: SubjectSnapshot) => void; reduceMotion?: boolean;
+  /** The pet that walks the map. */ petId?: string; petLevel?: number;
+  /** Chapters or lessons opened and not celebrated yet: the small notice. */ onUnlocked?: (news: UnlockedContent[]) => void };
 
+/** Room left above a point brought into view, so it sits clear of the top and of the small notice at the bottom. */
+const MAP_TOP_MARGIN = 150;
+const VIEWS: { value: SubjectView; label: string }[] = [{ value: 'map', label: 'Bản đồ' }, { value: 'list', label: 'Danh sách' }];
 const FILTERS: { value: LessonFilter; label: string }[] = [
   { value: 'all', label: 'Tất cả' }, { value: 'open', label: 'Đã mở' }, { value: 'locked', label: 'Chưa mở' }];
 
@@ -44,19 +54,37 @@ function moveCards(reduceMotion?: boolean) {
   } catch { /* no layout animation here: the cards just take their place */ }
 }
 
-/** A subject: a small header (its icon, name and the learner's grade), its progress, a filter, and every lesson once,
- * sorted by the learner's state (Đang học → Đã mở → Đã hoàn thành → Chưa mở, each in the curriculum's order). */
-export function SubjectLessonsScreen({ code, onBack, onOpen, onPractice, snapshot, onLeave, reduceMotion }: LessonsProps) {
+/** A subject: a small header (its icon, name and the learner's grade), its progress, then every lesson once: on the
+ * journey map, or as a list with a filter, sorted by the learner's state (Đang học → Đã mở → Đã hoàn thành → Chưa mở, each
+ * in the curriculum's order). */
+export function SubjectLessonsScreen({ code, onBack, onOpen, onPractice, snapshot, onLeave, reduceMotion, petId, petLevel, onUnlocked }: LessonsProps) {
   const [data, setData] = useState<SubjectLessons | null>(snapshot?.data ?? null);
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<LessonFilter>('all');
+  const [view, setViewState] = useState<SubjectView>(snapshot?.view ?? 'map');
   const [hint, setHint] = useState<string | null>(null);
   const [glowing, setGlowing] = useState<Set<string>>(new Set());
   // The cards rise in only on a first visit, never when coming back or as the list scrolls.
   const [entering, setEntering] = useState(!snapshot);
-  const latest = useRef<{ data: SubjectLessons | null; offset: number }>({ data: snapshot?.data ?? null, offset: snapshot?.offset ?? 0 });
+  const latest = useRef<{ data: SubjectLessons | null; offset: number; view: SubjectView }>({ data: snapshot?.data ?? null, offset: snapshot?.offset ?? 0, view: snapshot?.view ?? 'map' });
   const restore = useRef(snapshot?.offset ?? 0);
   const list = useRef<FlatList<LessonCard>>(null);
+  const map = useRef<ScrollView>(null);
+  // Bringing a point of the map into view: its area's place in the map and its own place in the area.
+  const placed = useRef({ areas: new Map<string, number>(), points: new Map<string, { area: string; y: number }>() });
+  const focus = useRef<string | null>(null);
+  const bringIntoView = useCallback(() => {
+    const point = focus.current ? placed.current.points.get(focus.current) : undefined;
+    const area = point ? placed.current.areas.get(point.area) : undefined;
+    if (!point || area === undefined) return;
+    focus.current = null;
+    map.current?.scrollTo({ y: Math.max(0, area + point.y - MAP_TOP_MARGIN), animated: !reduceMotion });
+  }, [reduceMotion]);
+  const setView = (next: SubjectView) => {
+    latest.current.view = next; latest.current.offset = 0;
+    if (next === 'map' && latest.current.data) focus.current = currentLesson(journey(latest.current.data));
+    setViewState(next);
+  };
 
   const load = useCallback(async () => {
     setError(null);
@@ -65,22 +93,37 @@ export function SubjectLessonsScreen({ code, onBack, onOpen, onPractice, snapsho
       const before = latest.current.data ? lessonCards(latest.current.data) : null;
       const after = lessonCards(fresh);
       if (before && orderChanged(before, after)) moveCards(reduceMotion);
-      const opened = before ? newlyUnlocked(before, after) : [];
+      // What opened since the last list, or what the backend says has not been celebrated yet (a result lost on the way).
+      const opened = [...(before ? newlyUnlocked(before, after) : []), ...after.filter((c) => c.celebrate).map((c) => c.id),
+        ...fresh.chapters.filter((c) => c.celebrate).map((c) => c.key)];
       if (opened.length) setGlowing(new Set(opened));
+      // What has just opened is brought into view, so its unlock is seen; a first visit starts where the learner is. Coming
+      // back with nothing new, the map stays where it was left.
+      if (opened.length || !before) focus.current = focusLesson(journey(fresh), opened);
       latest.current.data = fresh;
       setData(fresh);
+      if (fresh.unlocked?.length) onUnlocked?.(fresh.unlocked);
     } catch (e) { setError(errorMessage(e)); }
-  }, [code, reduceMotion]);
+  }, [code, reduceMotion, onUnlocked]);
   useEffect(() => { void load(); }, [load]);
+  useEffect(() => { bringIntoView(); }, [data, bringIntoView]);
   useEffect(() => {
     if (!entering || !data) return;
     const done = setTimeout(() => setEntering(false), 700);
     return () => clearTimeout(done);
   }, [entering, data]);
-  useEffect(() => () => { if (latest.current.data) onLeave?.({ data: latest.current.data, offset: latest.current.offset }); }, [onLeave]);
+  useEffect(() => () => { if (latest.current.data) onLeave?.({ data: latest.current.data, offset: latest.current.offset, view: latest.current.view }); }, [onLeave]);
 
   const cards = useMemo(() => (data ? lessonCards(data) : []), [data]);
   const shown = useMemo(() => filterLessons(cards, filter), [cards, filter]);
+  const sections = useMemo(() => (data ? journey(data) : []), [data]);
+  const current = useMemo(() => currentLesson(sections), [sections]);
+  // Each area's first place on the path, which winds on across the chapters.
+  const places = useMemo(() => {
+    const out = new Map<string, number>();
+    sections.reduce((place, s) => { out.set(s.key, place); return place + s.nodes.length; }, 0);
+    return out;
+  }, [sections]);
   const progress = data ? subjectProgress(data, cards) : null;
   const look: Look | null = data ? { icon: data.subject.icon as IconName, bg: data.subject.bg, color: data.subject.color } : null;
 
@@ -106,28 +149,50 @@ export function SubjectLessonsScreen({ code, onBack, onOpen, onPractice, snapsho
           <ProgressBar value={progress.percent / 100} color={look?.color ?? t.success} />
         </View>
       ) : null}
-      {data ? <Segmented<LessonFilter> options={FILTERS} value={filter} onChange={setFilter} compact /> : null}
+      {data && cards.length ? <Segmented<SubjectView> options={VIEWS} value={view} onChange={setView} compact /> : null}
+      {data && view === 'list' ? <Segmented<LessonFilter> options={FILTERS} value={filter} onChange={setFilter} compact /> : null}
       {data?.subject.practice_note ? <Text style={styles.note}>{data.subject.practice_note}</Text> : null}
       {error ? <Failed error={error} onRetry={() => void load()} /> : null}
       {!data && !error ? <ActivityIndicator color={t.accent} style={styles.loading} /> : null}
     </>
   );
 
+  const restoreScroll = (to: { scrollToOffset: (o: { offset: number; animated: boolean }) => void } | null) => {
+    // Back from a lesson: the map or list is where it was left, not at the top.
+    if (!restore.current) return;
+    to?.scrollToOffset({ offset: restore.current, animated: false });
+    restore.current = 0;
+  };
+  const press = (card: LessonCard) => (card.unlocked ? onOpen(card.id) : setHint(hint === card.id ? null : card.id));
+
+  if (view === 'map') {
+    const toOffset = { scrollToOffset: ({ offset, animated }: { offset: number; animated: boolean }) => map.current?.scrollTo({ y: offset, animated }) };
+    return (
+      <ScrollView ref={map} contentContainerStyle={styles.listContent} showsVerticalScrollIndicator={false}
+        onScroll={(e) => { latest.current.offset = e.nativeEvent.contentOffset.y; }} scrollEventThrottle={64}
+        onContentSizeChange={() => restoreScroll(toOffset)}>
+        {header}
+        {data && !sections.length ? <Text style={styles.empty}>Môn này đang được biên soạn bài học.</Text> : null}
+        {sections.map((section) => (
+          <View key={section.key} onLayout={(e) => { placed.current.areas.set(section.key, e.nativeEvent.layout.y); bringIntoView(); }}>
+            <JourneySectionView section={section} firstPlace={places.get(section.key) ?? 0} look={look} current={current} opening={glowing} hint={hint}
+              petId={petId} petLevel={petLevel} reduceMotion={reduceMotion} onPress={press} onOpenRequirement={onOpen}
+              onNodeLayout={(id, y) => { placed.current.points.set(id, { area: section.key, y }); bringIntoView(); }} />
+          </View>
+        ))}
+      </ScrollView>
+    );
+  }
   return (
     <FlatList ref={list} data={shown} keyExtractor={(c) => c.id} ListHeaderComponent={header}
       contentContainerStyle={styles.listContent} showsVerticalScrollIndicator={false} initialNumToRender={12} windowSize={9}
       ListEmptyComponent={data ? <Text style={styles.empty}>{filter === 'locked' ? 'Bạn đã mở mọi bài của môn này.'
         : filter === 'open' ? 'Chưa có bài nào được mở.' : 'Môn này đang được biên soạn bài học.'}</Text> : null}
       onScroll={(e) => { latest.current.offset = e.nativeEvent.contentOffset.y; }} scrollEventThrottle={64}
-      onContentSizeChange={() => {
-        // Back from a lesson: the list is where it was left, not at the top.
-        if (!restore.current) return;
-        list.current?.scrollToOffset({ offset: restore.current, animated: false });
-        restore.current = 0;
-      }}
+      onContentSizeChange={() => restoreScroll(list.current)}
       renderItem={({ item, index }) => (
         <LessonCardView card={item} index={index} entering={entering} reduceMotion={reduceMotion} glow={glowing.has(item.id)}
-          hint={hint === item.id} onPress={() => (item.unlocked ? onOpen(item.id) : setHint(hint === item.id ? null : item.id))}
+          hint={hint === item.id} onPress={() => press(item)}
           onOpenRequirement={onOpen} />
       )} />
   );

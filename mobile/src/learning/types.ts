@@ -156,7 +156,8 @@ export type TurnResult = { turn_id: string; event: string; correct: boolean | nu
   /** Sắp xếp / Ghép cặp, after a wrong answer: the cards in the right place or the right pairs, kept in place. */ kept?: string[] | null;
   /** Multiple-choice games, once the turn is resolved or revealed: the ids of the right options (marked in green). */
   correct_options?: string[] | null };
-export type EventResponse = { result: TurnResult | null; session: LearningSession; replayed: boolean };
+export type EventResponse = { result: TurnResult | null; session: LearningSession; replayed: boolean;
+  /** `complete` of a lesson's stage: what is open and not celebrated yet (older servers: missing). */ unlocked?: UnlockedContent[] };
 
 export type ResultItem = { turn_id: string; position: number; kind: TurnKind; skill_label: string; prompt: Prompt; outcome: Outcome | null;
   practice: boolean; attempts: number; hints_used: number; error_type: string | null; correct_answer: string; explanation: string | null;
@@ -217,7 +218,7 @@ export type LessonGameRef = { game: GameId; title: string };
 export type GameWorld = 'kingdom' | 'space' | 'forest' | 'lab' | 'time' | 'map';
 export type SessionLesson = { lesson: string; title: string | null; grade: number; game: GameId; game_title: string | null;
   short_stage: boolean; subject_name: string | null; other_games: LessonGameRef[];
-  next: { key: string; title: string; ready: boolean } | null;
+  next: { key: string; title: string; ready: boolean; /** Not open yet: the result does not lead there (older servers: missing). */ locked?: boolean } | null;
   /** None for a subject without a world yet; missing on older backends (the app then goes by the subject). */ world?: GameWorld | null };
 
 /** ready: every lesson can be played; partial: some; planned: listed, none ready yet; empty: no lessons written;
@@ -238,8 +239,14 @@ export type LessonProgramme = { curriculum: string; legal_basis: string[]; notes
 
 export type LessonStatus = 'not_started' | 'in_progress' | 'completed';
 export type LessonProgress = { status: LessonStatus; label: string; games_passed: number; games_total: number; percent: number };
-/** Why a lesson is not open yet: a prerequisite lesson (this school year), or content still being written. */
-export type UnlockRequirement = { type: 'lesson'; lesson_id: string; title: string; done: boolean } | { type: 'content'; note: string };
+/** Why a lesson is not open yet: a prerequisite lesson (this school year), the chapter before it, or content still being written. */
+export type UnlockRequirement = { type: 'lesson'; lesson_id: string; title: string; done: boolean }
+  | { type: 'chapter'; chapter_key: string; title: string; done: boolean; remaining: number } | { type: 'content'; note: string };
+/** Where a chapter or lesson stands for this learner (backend learning_unlocks.py). */
+export type ContentStatus = 'LOCKED' | 'UNLOCKED' | 'IN_PROGRESS' | 'COMPLETED';
+/** A chapter or lesson the rules opened, not celebrated yet. `lesson`: where "Khám phá ngay" leads. */
+export type UnlockedContent = { id: number; type: 'chapter' | 'lesson'; key: string; title: string; subject: string; subject_name: string;
+  grade: number; chapter_key: string; chapter_title: string; lesson: string | null; source: string; trigger: string | null; unlocked_at: string };
 /** Where a lesson sits in its subject's list (backend lesson_api.sort_lessons): Đang học → Đã mở → Đã hoàn thành → Chưa mở. */
 export type LessonGroup = 'in_progress' | 'unlocked' | 'completed' | 'locked';
 /** A lesson of a subject's list, as the backend decides it for this learner and school year. Being open (`unlock_status`)
@@ -249,11 +256,16 @@ export type LessonListItem = { key: string; title: string; description: string; 
   lesson_id?: string; subject_id?: string; grade_id?: string; academic_year?: number | null;
   chapter_key?: string; chapter_title?: string; chapter_order?: number; lesson_order?: number;
   unlock_status?: 'unlocked' | 'locked'; progress_status?: LessonStatus; progress_percent?: number;
-  unlock_requirements?: UnlockRequirement[]; unlock_note?: string | null; group?: LessonGroup };
+  unlock_requirements?: UnlockRequirement[]; unlock_note?: string | null; group?: LessonGroup;
+  content_status?: ContentStatus; /** Optional lessons never hold the next one back. */ required?: boolean;
+  /** Opened and not celebrated yet. */ celebrate?: boolean };
 export type SubjectLessons = { subject: ProgrammeSubject; grade: string; number: number; label: string;
   academic_year?: number | null; academic_year_label?: string | null;
   organization: 'topic' | 'textbook'; source_note: string | null; textbook: { series: string; edition?: string } | null;
-  chapters: { key: string; title: string; order?: number; lessons: LessonListItem[] }[];
+  chapters: { key: string; title: string; order?: number; lessons: LessonListItem[];
+    /** Missing on older servers. */ content_status?: ContentStatus; required_total?: number; required_completed?: number;
+    unlock_note?: string | null; celebrate?: boolean }[];
+  /** What opened and is not celebrated yet (missing on older servers). */ unlocked?: UnlockedContent[];
   /** Every lesson once, sorted by the learner's state (missing on older servers: the app sorts `chapters` itself). */
   lessons?: LessonListItem[];
   /** Lessons completed / ready this school year. */ progress?: { completed: number; ready: number; total: number; percent: number } };
@@ -267,7 +279,8 @@ export type LessonExplore = { core_total: number; core_discovered: number; core_
   new_words_left: number; exhausted: boolean; next_stage_words: number; level: number; level_name: string;
   topics: string[]; related_topics: string[] };
 export type LessonGame = LessonGameRef & { gameplay: string; style: string | null; turns: number; short_stage: boolean; playable: boolean;
-  review_count: number; progress: LessonGameProgress; /** Vocabulary games only (older servers: missing). */ explore?: LessonExplore | null };
+  review_count: number; progress: LessonGameProgress; /** Vocabulary games only (older servers: missing). */ explore?: LessonExplore | null;
+  /** An optional game never holds the lesson back (older servers: missing). */ required?: boolean; status?: ContentStatus };
 export type CatalogLesson = { key: string; title: string; description: string; status: 'ready' | 'planned'; grade: number; grade_id: string;
   grade_label: string; subject: { code: CatalogSubjectCode; name: string }; chapter: { key: string; title: string };
   objectives: string[]; summary: string[]; examples: { title: string; lines: string[] }[];

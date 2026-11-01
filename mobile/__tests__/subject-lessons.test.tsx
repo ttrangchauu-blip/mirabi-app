@@ -124,6 +124,7 @@ describe('the subject screen', () => {
     // Header: the subject and the learner's grade (no grade picker), the subject's progress, the filter, the list.
     expect(await screen.findByText('Lớp 3 · Năm học 2026–2027')).toBeTruthy();
     expect(screen.getByLabelText('Tiến độ môn: 1 trên 4 bài hoàn thành')).toBeTruthy();
+    fireEvent.press(screen.getByRole('tab', { name: 'Danh sách' })); // the journey map comes first (unlock-map.test.tsx)
     expect(order()).toEqual(['Cây cần gì để sống', 'Con vật quanh em', 'Các bộ phận của cây', 'Vòng đời con ếch', 'Bầu trời ban ngày']);
     expect(screen.queryByRole('radio', { name: /^Lớp \d/ })).toBeNull();
 

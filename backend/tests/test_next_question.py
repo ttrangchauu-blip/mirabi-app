@@ -11,6 +11,7 @@ from sqlalchemy import select
 
 from app.db import SessionLocal
 from app.models import LearningSessionItem
+from conftest import open_lessons
 from test_lesson_catalog import account, answer, right_answer, start
 
 LESSON, GAME = "toan3.lam_tron", "choice"  # Làm tròn số: 6 quiz questions, played in Học tập
@@ -26,6 +27,7 @@ def stored_prompt(turn_id: str) -> dict:
 
 
 def play(client, me):
+    open_lessons(client, me, LESSON)  # reached by completing the lessons before it (test_learning_unlocks.py)
     session = start(client, me, LESSON, GAME)
     assert session["mode"] == "practice" and session["required_count"] == 6
     return session

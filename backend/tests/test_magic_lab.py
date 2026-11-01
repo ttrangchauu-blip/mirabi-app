@@ -11,7 +11,7 @@ from app import curriculum_games as cg, lesson_catalog as lc
 from app.db import SessionLocal
 from app.learning_engine import InvalidAnswer
 from app.models import LearningSessionItem
-from conftest import bearer, login, register
+from conftest import bearer, login, open_lessons, register
 from test_lesson_catalog import lab_answer
 
 _ids = itertools.count()
@@ -123,6 +123,7 @@ def _expected(turn_id: str) -> dict:
 def test_a_lab_stage_is_played_with_a_wrong_setup_fixed_then_completed(client):
     register(client, "lab@example.com", age=11, school_grade="grade5")
     me = bearer(login(client, "lab@example.com").json()["access_token"])
+    open_lessons(client, me, "kh5.dan_dien_cach_dien")
     res = client.post("/api/learning/lesson-catalog/kh5.dan_dien_cach_dien/play", headers={**me, "Idempotency-Key": eid()},
                       json={"game": "lab", "timezone": "Asia/Ho_Chi_Minh"})
     assert res.status_code in (200, 201), res.json()

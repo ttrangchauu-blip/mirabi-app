@@ -88,6 +88,7 @@ describe('Học tập theo bài', () => {
     expect(screen.getByText('Học bảng nhân 2 trước.')).toBeTruthy();
     expect(server.callsTo('GET /api/learning/lesson-catalog/toan2.bang_chia_2')).toHaveLength(0);
     // Tất cả / Đã mở / Chưa mở.
+    fireEvent.press(screen.getByRole('tab', { name: 'Danh sách' })); // the journey map comes first
     fireEvent.press(screen.getByRole('tab', { name: 'Đã mở' }));
     expect(cardOrder()).toEqual(['Bảng nhân 2. Phép nhân và phép chia. Đang học, 50%']);
     fireEvent.press(screen.getByRole('tab', { name: 'Chưa mở' }));

@@ -2314,6 +2314,184 @@
     }
    }
   },
+  "/api/learning/unlock-map": {
+   "get": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "A subject of the learner's grade as a journey map: chapters, lessons and games with their unlock state",
+    "description": "Every chapter and lesson of the subject this school year with `status` LOCKED / UNLOCKED / IN_PROGRESS /\nCOMPLETED, what opens it (`requirements`), whether it is required, and `celebrate` while its unlock has not been\ncelebrated yet. Nothing the app sends changes a state: they follow from the stages it completed.",
+    "operationId": "unlock_map_api_learning_unlock_map_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "subject",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "maxLength": 30,
+       "title": "Subject"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Unlock Map Api Learning Unlock Map Get"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "code: subject_not_in_grade",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "code: grade_required",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/progress/sync": {
+   "post": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Catch up the unlocks of the learner's grade (after a lost result) and list those not celebrated yet",
+    "description": "The app calls this when it comes back online or after a result: the backend applies the rules again to the\nstages it has recorded (a body, if any, is ignored: the app never says what is completed or open) and returns the\nunlocks still to celebrate. Idempotent.",
+    "operationId": "sync_progress_api_learning_progress_sync_post",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Sync Progress Api Learning Progress Sync Post"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "code: grade_required",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/learning/unlocks/celebrated": {
+   "post": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "The unlock animation was shown: it does not come back (idempotent)",
+    "operationId": "unlocks_celebrated_api_learning_unlocks_celebrated_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/Celebrated"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Unlocks Celebrated Api Learning Unlocks Celebrated Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
   "/api/education": {
    "get": {
     "tags": [
@@ -4487,6 +4665,25 @@
     ],
     "title": "CalendarYearOut"
    },
+   "Celebrated": {
+    "properties": {
+     "ids": {
+      "items": {
+       "type": "integer"
+      },
+      "type": "array",
+      "maxItems": 50,
+      "minItems": 1,
+      "title": "Ids",
+      "description": "The unlocks whose animation was shown."
+     }
+    },
+    "type": "object",
+    "required": [
+     "ids"
+    ],
+    "title": "Celebrated"
+   },
    "CelebrationOut": {
     "properties": {
      "id": {
@@ -4833,6 +5030,15 @@
       "type": "boolean",
       "title": "Replayed",
       "default": false
+     },
+     "unlocked": {
+      "items": {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      "type": "array",
+      "title": "Unlocked",
+      "description": "`complete` of a lesson's stage: the chapters and lessons of its subject opened and not celebrated yet (learning_unlocks.py), the ones this stage opened included. Also on a replay."
      }
     },
     "type": "object",
