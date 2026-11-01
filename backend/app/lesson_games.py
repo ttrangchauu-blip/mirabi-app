@@ -139,9 +139,8 @@ def _check_timeline(prompt: dict, expected: dict, answer) -> tuple[bool, str | N
     if len(right) == len(placed):
         return True, None, given, None
     if not right:
-        return False, "wrong_time", given, "Chưa sự kiện nào đúng mốc. Nhớ lại sự kiện nào xảy ra trước rồi đặt lại nhé."
-    return False, "wrong_time", given, (f"Có {len(right)}/{len(placed)} sự kiện đúng mốc. Các sự kiện đúng được giữ lại, "
-                                        "đặt lại những sự kiện còn lại nhé.")
+        return False, "wrong_time", given, "Chưa sự kiện nào đúng mốc."
+    return False, "wrong_time", given, f"Có {len(right)}/{len(placed)} sự kiện đúng mốc."
 
 
 # ---------------------------------------------------------------------------------------------------------------
@@ -227,11 +226,10 @@ def _check_sentence(prompt: dict, expected: dict, answer) -> tuple[bool, str | N
         return True, None, given, None
     extra = [t for t in texts if normalize_text(t) in {normalize_text(d) for d in expected["distractors"]}]
     if extra:
-        return False, "extra_word", given, f"Thẻ “{extra[0]}” không thuộc câu này. Bỏ thẻ đó ra và dùng thẻ khác nhé."
+        return False, "extra_word", given, f"Thẻ “{extra[0]}” không thuộc câu này."
     at = _sentence_prefix(texts, expected["accepted"]) + 1
     lead = "Thẻ đầu tiên" if at == 1 else f"Từ vị trí {at}"
-    return False, "wrong_order", given, (f"{lead} (“{texts[at - 1]}”) chưa đúng chỗ."
-                                          + (" Các thẻ đứng trước đã đúng, được giữ lại." if at > 1 else ""))
+    return False, "wrong_order", given, f"{lead} (“{texts[at - 1]}”) chưa đúng chỗ."
 
 
 def _kept_sentence(prompt: dict, expected: dict, answer) -> list[str]:
@@ -344,15 +342,14 @@ def _check_geometry(prompt: dict, expected: dict, answer) -> tuple[bool, str | N
             raise InvalidAnswer("an angle of 0–180° on the protractor's steps")
         given = f"{degrees}°"
         if degrees == 0:
-            return False, "invalid_shape", given, "Hai cạnh đang trùng nhau nên chưa có góc. Xoay cạnh để mở góc ra nhé."
+            return False, "invalid_shape", given, "Hai cạnh đang trùng nhau nên chưa có góc."
         if "degrees" in target:
             if degrees == target["degrees"]:
                 return True, None, given, None
             if not prompt.get("readout", True):
                 more = "nhỏ" if degrees < target["degrees"] else "lớn"
-                return False, "wrong_measure", given, f"Góc em tạo còn {more} hơn {target['degrees']}°. Đọc lại vạch trên thước đo góc nhé."
-            more = "Mở rộng góc thêm." if degrees < target["degrees"] else "Thu hẹp góc lại."
-            return False, "wrong_measure", given, f"Góc em tạo là {degrees}°, cần {target['degrees']}°. {more}"
+                return False, "wrong_measure", given, f"Góc em tạo còn {more} hơn {target['degrees']}°."
+            return False, "wrong_measure", given, f"Góc em tạo là {degrees}°, cần {target['degrees']}°."
         made = angle_class(degrees)
         if made == target["class"]:
             return True, None, given, None
@@ -364,7 +361,7 @@ def _check_geometry(prompt: dict, expected: dict, answer) -> tuple[bool, str | N
     unit = prompt.get("measure_unit", "cm")
     given = f"{w} × {h} {unit}"
     if w == 0 or h == 0:
-        return False, "invalid_shape", given, "Một cạnh dài 0 nên chưa thành hình chữ nhật. Kéo góc để mở rộng hình nhé."
+        return False, "invalid_shape", given, "Một cạnh dài 0 nên chưa thành hình chữ nhật."
     if rect_fits(w, h, target):
         return True, None, given, None
     need = []  # only what the shape built does not meet

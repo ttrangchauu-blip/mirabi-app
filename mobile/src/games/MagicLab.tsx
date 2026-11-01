@@ -190,7 +190,7 @@ export function MagicLab({ turn, disabled, feedback, onSubmit, solved, petId, pe
       </DropArea>
       {showing ? null : (
         <>
-          {feedback && feedback.tone === 'bad' ? (
+          {feedback?.text && feedback.tone === 'bad' ? (
             <View style={styles.note} accessibilityRole="alert" accessibilityLiveRegion="polite">
               <Ionicons name="information-circle" size={18} color={t.danger} />
               <Text style={styles.noteText}>{feedback.text}</Text>

@@ -179,10 +179,10 @@ Object.assign(TUTORIALS, {
     { tag: 'Mục tiêu', title: 'Nhìn hình và đoán từ.', body: 'Mỗi câu có một hình. Hãy đoán xem hình đó là gì.',
       scene: { kind: 'word_build', picture: '🐱', unit: 'letter', pieces: ['m', 'è', 'o'], shuffled: [2, 0, 1] } },
     { tag: 'Cách thao tác', title: 'Chọn các chữ theo đúng thứ tự.',
-      body: 'Kéo các chữ (lớp 2: các tiếng) đang phát sáng trên mặt đất vào từng ô của ổ khóa, hoặc chạm để đặt vào ô trống đầu tiên, rồi nhấn Mở cổng. Chạm vào chữ đã đặt để gỡ ra.',
+      body: 'Kéo các chữ (lớp 2: các tiếng) đang phát sáng trên mặt đất lên từng tấm ván của cầu, hoặc chạm để đặt vào tấm ván trống đầu tiên, rồi nhấn Xây cầu. Chạm vào chữ đã đặt để gỡ ra.',
       scene: { kind: 'word_build', picture: '🐱', unit: 'letter', pieces: ['m', 'è', 'o'], shuffled: [2, 0, 1], demo: true } },
     end(`Ghép đủ ${CURRICULUM_STAGE.word_builder} từ để hoàn thành.`, [
-      { icon: 'book-outline', tone: 'good', text: `Mỗi từ đúng, cổng mở, pet nhận một mảnh sách rồi đi tiếp tới cổng sau. Ghép đủ các từ của chặng là xong (thường ${CURRICULUM_STAGE.word_builder} từ, bài học có thể ít hơn).` },
+      { icon: 'book-outline', tone: 'good', text: `Mỗi từ đúng, pet qua cầu và nhận một mảnh sách rồi đi tiếp tới con suối sau. Ghép đủ các từ của chặng là xong (thường ${CURRICULUM_STAGE.word_builder} từ, bài học có thể ít hơn).` },
       { icon: 'refresh-outline', tone: 'info', text: 'Ghép sai thì cầu rung lên, có từ đúng và lời giải thích, từ đó quay lại sau. Gợi ý cho biết chữ đầu tiên.' },
       NO_CLOCK]),
   ],

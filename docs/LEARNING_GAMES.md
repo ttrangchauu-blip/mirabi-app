@@ -418,8 +418,8 @@ spell, the crossing, the door, the experiment) is `begin`…`end` (`useReactions
 - While a **critical** reaction plays, nothing can be sent (`disabled`), the challenge answered stays on screen and the
   next one waits (Ghép chữ, Magic Lab and the falling words hand over themselves), the explanation card waits, and the
   stage does not finish. Independent effects (falling words, a bubbling beaker) are not critical and never wait.
-- A wrong answer never holds the learner by itself: the pieces kept can be fixed at once. Only a reaction that matters
-  holds them (Math Battle's counter-attack, which costs the heart, ~1 s).
+- A wrong answer plays its reaction first (Math Battle's counter-attack, which costs the heart, ~1 s); the card with the
+  right answer comes once it is over.
 - One answer at a time (`busy` while one is validated); the exact answer already judged wrong for a challenge is not sent
   again (*Đáp án này vừa chưa đúng…*: it would only cost another heart); a verdict is shown once per request (its event
   id), so a retried request or a re-render never replays it. Points and EXP stay the backend's (idempotent).
@@ -450,8 +450,8 @@ spell, the crossing, the door, the experiment) is `begin`…`end` (`useReactions
   then the seed grows stage by stage and flowers), **magnet** (the objects put in the magnet's reach: it comes down, the
   magnetic ones fly up and stick under its poles, what was left on the bench stays put). The answer is
   `["slot:part", …]`; a wrong part: the experiment fizzles (a grey puff, a dead spark), the part's own reason shows
-  (`why`), the wrong parts go back to the bench and the right ones stay (`kept`). Right: the experiment plays out (a
-  reaction: *Thí nghiệm tiếp theo* or *Bỏ qua* jumps to its end) with its explanation until *Thí nghiệm tiếp theo* (the
+  (`why`) and the setup stays on the bench, under the right answer. Right: the experiment plays out (a
+  reaction: *Tiếp theo* or *Bỏ qua* jumps to its end) with its explanation until *Tiếp theo* (the
   stage waits for it before completing). Lessons: `kh4.anh_sang`, `kh4.chuyen_the_nuoc`, `kh5.mach_dien`,
   `kh5.dan_dien_cach_dien`, `kh5.cay_con`, `kh7.nam_cham` (magnetic and non-magnetic materials, the two poles; 4–5
   experiments each; `completion.games: any`, so a lesson completed with its first game stays completed). Simulations
@@ -469,8 +469,8 @@ spell, the crossing, the door, the experiment) is `begin`…`end` (`useReactions
     right answer frees it: it runs to the pet to thank it (hearts) and the treasure chest opens on a gem.
 - **Robot Adventure** (`code_path`, in `games/CurriculumGames.tsx`): the pet drives a robot that rolls between cells and
   turns the short way between drawn boulders; `codePath.trace` lights the block being done and `codePath.fault` names
-  the step that went wrong, its block (red) and the cell it could not enter (the robot stops there and bumps it; the
-  program is kept, to be fixed). At the goal it picks up the gem and the flag goes up. Switches, doors and moving
+  the step that went wrong, its block (red) and the cell it could not enter (the robot stops there and bumps it),
+  then a right program and why. At the goal it picks up the gem and the flag goes up. Switches, doors and moving
   obstacles are not in the levels' rules yet (they would need new level data and backend checks).
 - **The worlds of the lesson games** (`mobile/src/games/quests/`): a lesson's Sắp xếp, Ghép cặp, Chọn đáp án and Phân loại
   are played under a drawn scene of its subject's world, which moves on with each right answer (progress is the

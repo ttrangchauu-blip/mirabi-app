@@ -165,7 +165,7 @@
       "steps": [
         {"id": "look", "action": "observe", "instruction": "Nhìn hình: đây là con gì?", "target": "play", "demo_animation": "arrow",
          "expected_action": "next", "release": ["t1"], "advance_ms": 2800},
-        {"id": "build", "action": "drag", "instruction": "Kéo m → è → o vào ổ khoá rồi nhấn Mở cổng", "target": "play",
+        {"id": "build", "action": "drag", "instruction": "Kéo m → è → o lên cầu rồi nhấn Xây cầu", "target": "play",
          "demo_animation": "hand_drag", "expected_action": "answer", "expected_result": "correct",
          "success_feedback": "Hạt giống tri thức nảy mầm!", "retry_feedback": "Chưa đúng. Thứ tự là m → è → o. Câu này sẽ quay lại."},
         {"id": "grow", "action": "observe", "instruction": "Cổng mở, pet nhận một mảnh sách!", "target": "play",

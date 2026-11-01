@@ -214,7 +214,7 @@ export function WordForest({ turn, disabled, feedback, onSubmit, collected, tota
           </Animated.View>
         </View>
         <View style={[styles.floor, { height: floorHeight(tiles.length, Math.max(TILE, W)) }]}>
-          {floorTiles.map((tile) => {
+          {(crossing ? [] : floorTiles).map((tile) => { // the next word's pieces come once the forest has scrolled on
             const spot = spots.find((s) => s.id === tile.id);
             return spot ? (
               <Draggable key={tile.id} disabled={locked || !!crossing} style={[styles.floorTile, { left: spot.x, top: spot.y }]}
@@ -230,7 +230,7 @@ export function WordForest({ turn, disabled, feedback, onSubmit, collected, tota
           })}
         </View>
       </DropArea>
-      {(right || feedback) ? (
+      {(right || feedback?.text) ? (
         <View style={[styles.note, (right || feedback?.tone === 'good') ? styles.noteGood : styles.noteBad]} accessibilityRole="alert" accessibilityLiveRegion="polite">
           <Ionicons name={right || feedback?.tone === 'good' ? 'checkmark-circle' : 'information-circle'} size={18} color={right || feedback?.tone === 'good' ? t.success : t.danger} />
           <Text style={[styles.noteText, { color: right || feedback?.tone === 'good' ? t.success : t.danger }]}>

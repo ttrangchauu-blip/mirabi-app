@@ -102,7 +102,7 @@ def test_word_build_checks_the_order_and_every_piece():
     right = [tiles["m"], tiles["è"], tiles["o"]]
     assert cg.check("word_build", snap["prompt"], snap["answer"], right)[:3] == (True, None, "mèo")
     ok, error, built, feedback = cg.check("word_build", snap["prompt"], snap["answer"], [tiles["o"], tiles["è"], tiles["m"]])
-    assert (ok, error, built) == (False, "wrong_order", "oèm") and "đổi thứ tự" in feedback
+    assert (ok, error, built) == (False, "wrong_order", "oèm") and "chưa đúng thứ tự" in feedback
     for bad in ([tiles["m"], tiles["è"]], [tiles["m"], tiles["m"], tiles["o"]], ["x1", "x2", "x3"], "mèo"):
         with pytest.raises(InvalidAnswer):
             cg.check("word_build", snap["prompt"], snap["answer"], bad)

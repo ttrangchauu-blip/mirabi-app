@@ -61,10 +61,10 @@ def test_number_line_right_wrong_direction_and_kept():
     ids = {p["label"]: p["id"] for p in prompt["points"]}
     assert cg.check("number_line_place", prompt, expected, [f"{ids['47']}:47", f"{ids['74']}:74"])[0]
     ok, error, _, feedback = cg.check("number_line_place", prompt, expected, [f"{ids['47']}:47", f"{ids['74']}:76"])
-    assert not ok and error == "wrong_position" and "“74” đang lệch về bên phải" in feedback and "giữ lại" in feedback
+    assert not ok and error == "wrong_position" and "“74” đang lệch về bên phải" in feedback
     assert cg.kept("number_line_place", prompt, expected, [f"{ids['47']}:47", f"{ids['74']}:76"]) == [f"{ids['47']}:47"]
     _, _, _, both = cg.check("number_line_place", prompt, expected, [f"{ids['47']}:40", f"{ids['74']}:47"])
-    assert "Có 2/2 số chưa đúng chỗ" in both and "giữ lại" not in both
+    assert "Có 2/2 số chưa đúng chỗ" in both
 
 
 def test_number_line_fractions_negative_numbers_ends_only_and_a_rounding_mark():

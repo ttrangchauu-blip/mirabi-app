@@ -154,6 +154,18 @@ def test_the_same_answer_sent_again_after_a_slow_network_counts_once(client):
     assert now["resolved_count"] == 1 and now["open_turns"][0]["turn_id"] == first["session"]["open_turns"][0]["turn_id"]
 
 
+def test_a_reason_never_asks_to_fix_a_question_that_is_over(client):
+    # The reason shows with the right answer, once the question is over: no "thử lại", no "sửa", nothing kept to fix.
+    import re
+    from pathlib import Path
+    code = "".join((Path(__file__).parents[1] / "app" / name).read_text(encoding="utf8") for name in
+                   ("curriculum_games.py", "lesson_games.py", "lesson_games_math.py", "lesson_games_reading.py"))
+    reasons = re.findall(r'return False, "[a-z_]+", \w+, .*', code)
+    assert len(reasons) > 15
+    for reason in reasons:
+        assert not re.search(r"thử|sửa|nhé|giữ lại|đặt lại|Đọc lại", reason, re.I), reason
+
+
 def test_coming_back_to_a_stage_restores_where_it_was(client):
     me = account(client, age=8, school_grade="grade3")
     session = play(client, me)

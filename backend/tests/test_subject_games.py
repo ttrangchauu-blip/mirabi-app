@@ -235,7 +235,7 @@ def test_an_angle_of_a_given_measure():
     assert prompt["shape"] == "angle" and "120" not in str({k: v for k, v in prompt.items() if k != "prompt"})
     assert check(prompt, expected, ["angle:120"], "geometry_build")[0]
     ok, error, given, feedback = check(prompt, expected, ["angle:115"], "geometry_build")
-    assert not ok and error == "wrong_measure" and given == "115°" and "Mở rộng" in feedback
+    assert not ok and error == "wrong_measure" and given == "115°" and "cần 120°" in feedback
 
 
 def test_without_a_readout_the_feedback_never_gives_the_measure_away():

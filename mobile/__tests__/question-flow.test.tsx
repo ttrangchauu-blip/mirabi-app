@@ -35,6 +35,20 @@ const prefs = { sound: false, volume: 'mid' as const, reduceMotion: false, setSo
 const ms = (n: number) => act(async () => { jest.advanceTimersByTime(n); });
 /** The server's reply (a promise) comes first, then the time goes by. */
 const wait = async (n: number) => { await ms(0); await ms(0); await ms(n); };
+/** A line saying something in the game (a note, a reason): none is ever drawn empty. */
+const emptyAlerts = () => {
+  const empty: unknown[] = [];
+  const textOf = (n: unknown): string => (typeof n === 'string' ? n : !n || typeof n !== 'object' ? '' : ((n as { children?: unknown[] }).children ?? []).map(textOf).join(''));
+  const walk = (n: unknown) => {
+    if (Array.isArray(n)) { n.forEach(walk); return; }
+    if (!n || typeof n !== 'object') return;
+    const node = n as { props?: { accessibilityRole?: string }; children?: unknown[] };
+    if (node.props?.accessibilityRole === 'alert' && !textOf(node).replace(/[\uE000-\uF8FF]/g, '').trim()) empty.push(node.props); // an icon's glyph says nothing
+    (node.children ?? []).forEach(walk);
+  };
+  walk(screen.toJSON());
+  return empty;
+};
 /** What is really on screen. */
 const onScreen = () => JSON.stringify(screen.toJSON());
 const next = () => screen.getByRole('button', { name: 'Tiếp theo' });
@@ -379,7 +393,9 @@ describe('the required cases, on the real game screen', () => {
 describe('every game goes the same way', () => {
   // One question of each kind, how to answer it, and what to press: the same result card and the same "Tiếp theo".
   const tokens = [{ id: 'w1', text: 'Bé' }, { id: 'w2', text: 'lước' }];
-  const cases: [string, Turn, () => void][] = [
+  const press = (name: string, times = 1) => { for (let i = 0; i < times; i++) fireEvent.press(screen.getByRole('button', { name })); };
+  const check = () => press('Kiểm tra');
+  const cases: [string, Turn, () => void, Partial<LearningSession>?][] = [
     ['Chọn đáp án', turn('t1', 'choice_explain', { style: 'quiz', question: 'Hỏi?', options: [{ id: 'a', text: 'A' }, { id: 'b', text: 'B' }] }), () => fireEvent.press(screen.getByRole('button', { name: 'A' }))],
     ['Chọn cổng', turn('t1', 'gate_choice', { sentence: 'She __ a cat.', options: [{ id: 'a', text: 'is' }, { id: 'b', text: 'are' }] }), () => fireEvent.press(screen.getByRole('button', { name: 'Đáp án is' }))],
     ['Xếp câu', turn('t1', 'bridge_order', { tokens: [{ id: 'a', text: 'I' }], end: '.' }), () => { fireEvent.press(screen.getByRole('button', { name: 'Từ I' })); fireEvent.press(screen.getByRole('button', { name: 'Kiểm tra câu' })); }],
@@ -389,23 +405,46 @@ describe('every game goes the same way', () => {
     ['Thám tử chính tả', turn('t1', 'spell_fix', { step: 'fix', tokens, found: 'w2', options: [{ id: 'o1', text: 'nước' }] }), () => fireEvent.press(screen.getByRole('button', { name: 'Cách viết nước' }))],
     ['Phân loại', turn('t1', 'sort_card', { title: 'Nhóm?', groups: [{ id: 'g', label: 'Động vật', icon: '🐾' }], card: { text: 'Mèo', picture: '🐱' } }), () => fireEvent.press(screen.getByRole('button', { name: 'Nhóm Động vật' }))],
     ['Sắp xếp', turn('t1', 'order_steps', { prompt: 'Xếp', cards: [{ id: 'c', text: 'Một' }] }), () => { fireEvent.press(screen.getByRole('button', { name: 'Thẻ Một' })); fireEvent.press(screen.getByRole('button', { name: 'Kiểm tra' })); }],
+    ['Ghép cặp', turn('t1', 'match_pairs', { prompt: 'Ghép', lefts: [{ id: 'a1', text: 'Hai' }], rights: [{ id: 'b1', text: 'Bốn' }] }), () => { press('Hai'); press('Bốn'); check(); }],
+    ['Lập trình đường đi', turn('t1', 'code_path', { number: 1, cols: 3, rows: 1, start: { x: 0, y: 0, dir: 'E' }, goal: { x: 2, y: 0 }, walls: [], blocks: ['forward', 'left', 'right'], max_blocks: 5 } as never),
+      () => { press('Thêm lệnh Tiến'); press('Chạy'); }],
+    ['Phòng thí nghiệm', turn('t1', 'lab_experiment', { title: 'Lắp mạch', scene: 'circuit', aim: 'Lắp mạch để đèn sáng.', slots: [{ id: 'power', label: 'Nguồn điện' }],
+      parts: [{ id: 'p2', name: 'Viên pin', art: 'battery' }] } as never), () => { press('Đặt Viên pin'); press('Bật công tắc'); }],
+    ['Dòng thời gian', turn('t1', 'timeline_place', { prompt: 'Đặt', years: 'shown', markers: [{ id: 'm1', label: '938', slots: 1 }], events: [{ id: 'e1', text: 'Ngô Quyền' }] }),
+      () => { press('Sự kiện: Ngô Quyền'); press('Đặt “Ngô Quyền” vào mốc 938'); check(); }],
+    ['Xây câu', turn('t1', 'sentence_build', { prompt: 'Xếp câu.', vi: 'Chào.', length: 1, lang: 'en', tiles: [{ id: 't1', text: 'Hello.' }] }), () => { press('Thẻ Hello.'); check(); }],
+    ['Xưởng hình học', turn('t1', 'geometry_build', { prompt: 'Tạo một góc tù.', shape: 'angle', angle_step: 5, readout: true, initial: 30 }), () => { press('Tăng góc'); check(); }],
+    ['Cân bằng phương trình', turn('t1', 'equation_balance', { prompt: 'Cân bằng.', max: 12, condition: 't°', elements: ['H', 'O'],
+      species: [{ id: 's1', formula: 'H2', side: 'left', atoms: { H: 2 } }, { id: 's2', formula: 'O2', side: 'left', atoms: { O: 2 } }, { id: 's3', formula: 'H2O', side: 'right', atoms: { H: 2, O: 1 } }] }),
+      () => { press('Tăng hệ số của H2O'); press('Tăng hệ số của H2'); check(); }],
+    ['Cầu trục số', turn('t1', 'number_line_place', { prompt: 'Đặt số.', ticks: 20, major: 5, labels: [{ at: 0, text: '0' }], marks: [], points: [{ id: 'p1', label: '7' }] }), () => { press('Tiến một vạch'); check(); }],
+    ['Giải toán từng bước', turn('t1', 'step_solve', { problem: 'Lan có 48 viên bi, cho bạn 12 viên.', chips: [{ id: 'n1', text: '48' }, { id: 'n2', text: '12' }], at_step: 1, steps: 1, ask: 'Lan còn lại bao nhiêu viên bi?', ask_unit: 'viên bi', done: [] }),
+      () => { press('Thẻ số 48'); press('Dấu trừ'); press('Thẻ số 12'); press('Số 3'); press('Số 6'); check(); }],
+    ['Thám tử đọc hiểu', turn('t1', 'story_evidence', { question: 'An mấy tuổi?', lang: 'vi', phase: 'find', sentences: [{ id: 's1', text: 'An chín tuổi.' }] }), () => { press('Câu 1: An chín tuổi.'); check(); }],
+    ['Soi câu', turn('t1', 'sentence_paint', { prompt: 'Tô từ.', lang: 'vi', roles: [{ id: 'c1', name: 'Sự vật' }], words: [{ id: 'w1', text: 'Mẹ' }] }), () => { press('Mẹ, chưa tô'); check(); }],
+    ['Bảo vệ căn cứ', turn('t1', 'math_input', { expression: '12 + 7' }, { hints_total: 1 }), () => { press('1'); press('9'); press('Tấn công'); }, { game_type: 'defense', game: 'defense', hearts: 3, hearts_max: 3 }],
   ];
+  // Every row has its four values: with fewer, `it.each` would hand the callback's last parameter a `done` to wait for.
+  const games = cases.map(([name, first, answer, over]) => [name, first, answer, over ?? {}] as [string, Turn, () => void, Partial<LearningSession>]);
+  /** Long enough for each game's own reaction (a robot's run, a pet's strike, an experiment) to play and the card to come. */
+  const untilItSettles = async () => { for (let i = 0; i < 16; i++) await wait(500); };
 
-  it.each(cases)('%s: wrong, then "Tiếp theo" brings one new question and leaves nothing behind', async (_name, first, answer) => {
+  it.each(games)('%s: wrong, then "Tiếp theo" brings one new question and leaves nothing behind', async (_name, first, answer, over) => {
     const second = q(2);
-    const s = base({ open_turns: [first] });
+    const s = base({ open_turns: [first], ...over });
     await play(s, {
       'POST /api/learning/sessions/7/answer': { status: 200, body: { result: result({ turn_id: 't1', correct: false, outcome: 'wrong', correct_answer: 'Đáp án A', correct_options: [], explanation: 'Vì lý do A.' }),
-        session: base({ open_turns: [second], resolved_count: 1, version: 2 }), replayed: false } },
+        session: base({ open_turns: [second], resolved_count: 1, version: 2, ...over }), replayed: false } },
     });
     answer();
-    await wait(3000);
+    await untilItSettles();
+    expect(emptyAlerts()).toEqual([]);
     expect(screen.getByText('Chưa chính xác!')).toBeTruthy();
     expect(screen.getByText(/: Đáp án A$/)).toBeTruthy(); // the right answer, named after the game ("Thứ tự đúng"…)
     expect(screen.getByText('Vì lý do A.')).toBeTruthy();
     expect(onScreen()).not.toContain('Câu hỏi số 2?');
     fireEvent.press(next());
-    await wait(3000);
+    await untilItSettles();
     const shown = onScreen();
     expect(shown).toContain('Câu hỏi số 2?');
     expect(shown).not.toContain('Vì lý do A.');
@@ -413,18 +452,37 @@ describe('every game goes the same way', () => {
     expect(screen.getByRole('button', { name: 'Đúng 2' }).props.accessibilityState.disabled).toBeFalsy();
   });
 
-  it.each(cases)('%s: right, then the explanation and "Tiếp theo", never by itself', async (_name, first, answer) => {
-    const s = base({ open_turns: [first] });
+  it.each(games)('%s: right, then the explanation and "Tiếp theo", never by itself', async (_name, first, answer, over) => {
+    const s = base({ open_turns: [first], ...over });
     await play(s, {
       'POST /api/learning/sessions/7/answer': { status: 200, body: { result: result({ turn_id: 't1', correct_options: [] }),
-        session: base({ open_turns: [q(2)], resolved_count: 1, version: 2 }), replayed: false } },
+        session: base({ open_turns: [q(2)], resolved_count: 1, version: 2, ...over }), replayed: false } },
     });
     answer();
-    await wait(8000);
+    await untilItSettles();
     expect(screen.getByText('Chính xác!')).toBeTruthy();
     expect(screen.getByText('Vì lý do A.')).toBeTruthy();
     expect(next()).toBeTruthy();
     expect(onScreen()).not.toContain('Câu hỏi số 2?');
+  });
+
+  it('Ghép chữ: while the forest scrolls on, the next word\'s pieces wait: never next to the bridge just crossed', async () => {
+    const cat = turn('w1', 'word_build', { picture: '🐱', unit: 'letter', tiles: [{ id: 'a', text: 'm' }] });
+    const dog = turn('w2', 'word_build', { picture: '🐶', unit: 'letter', tiles: [{ id: 'd', text: 'ch' }] });
+    await play(base({ open_turns: [cat], required_count: 2 }), {
+      'POST /api/learning/sessions/7/answer': { status: 200, body: { result: result({ turn_id: 'w1' }), session: base({ open_turns: [dog], required_count: 2, resolved_count: 1, version: 2 }), replayed: false } },
+    });
+    press('Chữ m');
+    press('Xây cầu');
+    await untilItSettles();
+    expect(screen.getByLabelText('Cây cầu: m')).toBeTruthy();
+    fireEvent.press(next());
+    await ms(LEAVE_MS + ENTER_MS + 50);
+    expect(screen.getByLabelText('Cây cầu: m')).toBeTruthy(); // scrolling away
+    expect(screen.queryByRole('button', { name: 'Chữ ch' })).toBeNull();
+    await untilItSettles();
+    expect(screen.getByLabelText('Cây cầu: _')).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Chữ ch' })).toBeTruthy();
   });
 
   it('in a world: a wrong answer never plays the right answer\'s victory; a right practice does', async () => {

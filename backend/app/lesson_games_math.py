@@ -142,8 +142,7 @@ def _check_number_line(prompt: dict, expected: dict, answer) -> tuple[bool, str 
     side = "phải" if placed[first] > expected["tick_of"][first] else "trái"
     lead = (f"“{names[first]}” đang lệch về bên {side}." if len(wrong) == 1
             else f"Có {len(wrong)}/{len(placed)} số chưa đúng chỗ; “{names[first]}” đang lệch về bên {side}.")
-    kept = " Các số đúng chỗ được giữ lại." if len(wrong) < len(placed) else ""
-    return False, "wrong_position", given, f"{lead}{kept} Đếm lại các vạch nhé."
+    return False, "wrong_position", given, lead
 
 
 def _kept_number_line(prompt: dict, expected: dict, answer) -> list[str]:
@@ -309,9 +308,8 @@ def _check_step_solver(prompt: dict, expected: dict, answer) -> tuple[bool, str 
         return prompt["at_step"] == prompt["steps"], None, given, None  # a step before the last is `advance`d, not checked
     calc = given.split(" = ")[0]
     if op_right:
-        return False, "calc", given, f"Phép tính {calc} chọn đúng rồi, nhưng kết quả chưa đúng. Tính lại nhé."
-    return False, "wrong_operation", given, (f"Phép tính {calc} chưa trả lời câu hỏi “{plan['ask']}”. "
-                                             "Đọc lại đề: cần gộp, bớt, gấp lên hay chia ra?")
+        return False, "calc", given, f"Phép tính {calc} chọn đúng rồi, nhưng kết quả chưa đúng."
+    return False, "wrong_operation", given, f"Phép tính {calc} chưa trả lời câu hỏi “{plan['ask']}”."
 
 
 def _kept_step_solver(prompt: dict, expected: dict, answer) -> list[str]:

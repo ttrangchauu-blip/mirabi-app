@@ -525,19 +525,19 @@ def check(kind: str, prompt: dict, expected: dict, answer) -> tuple[bool, str | 
         built = ("" if prompt["unit"] == "letter" else " ").join(tiles[i] for i in ids)
         ok = normalize_text(built) in {normalize_text(a) for a in expected["accepted"]}
         piece = "chữ" if prompt["unit"] == "letter" else "tiếng"
-        return ok, None if ok else "wrong_order", built, None if ok else f"Chưa đúng: “{built}”. Thử đổi thứ tự các {piece} nhé."
+        return ok, None if ok else "wrong_order", built, None if ok else f"“{built}” chưa đúng thứ tự các {piece}."
     if kind == "spell_fix":
         if prompt.get("step") == "find":  # a word that is spelled right was tapped (the right one is spell_found)
             word = _ids(answer, {t["id"] for t in prompt["tokens"]}, exact=1)[0]
             text = next(t["text"] for t in prompt["tokens"] if t["id"] == word).strip(".,!?;:")
-            return False, "wrong_word", text, f"“{text}” viết đúng rồi. Đọc lại câu và tìm tiếng viết sai nhé."
+            return False, "wrong_word", text, f"“{text}” viết đúng rồi, tiếng viết sai là một tiếng khác."
         options = {o["id"]: o["text"] for o in prompt["options"]}
         word, option = _ids(answer, {prompt["found"], *options}, exact=2)
         if word != prompt["found"] or option not in options:
             raise InvalidAnswer("expected the found word and an option")
         ok = option == expected["right_option"]
         return ok, None if ok else "wrong_fix", options[option], None if ok else (
-            f"“{options[option]}” chưa đúng trong câu này. Chọn cách viết khác nhé.")
+            f"“{options[option]}” chưa đúng trong câu này.")
     if kind == "sort_card":
         groups = {g["id"]: g["label"] for g in prompt["groups"]}
         if not isinstance(answer, str) or answer not in groups:
@@ -555,9 +555,9 @@ def check(kind: str, prompt: dict, expected: dict, answer) -> tuple[bool, str | 
         given = solution_text(answer)
         if outcome["ok"]:
             return True, None, given, None
-        feedback = {"wall": f"Pet gặp vật cản ở bước {outcome['step']}. Sửa lệnh rồi chạy lại nhé.",
-                    "edge": f"Pet đi ra ngoài bản đồ ở bước {outcome['step']}. Sửa lệnh rồi chạy lại nhé.",
-                    "short": "Pet đã chạy hết lệnh nhưng chưa tới đích. Thêm hoặc sửa lệnh nhé."}[outcome["reason"]]
+        feedback = {"wall": f"Pet gặp vật cản ở bước {outcome['step']}.",
+                    "edge": f"Pet đi ra ngoài bản đồ ở bước {outcome['step']}.",
+                    "short": "Pet đã chạy hết lệnh nhưng chưa tới đích."}[outcome["reason"]]
         return False, f"path_{outcome['reason']}", given, feedback
     if kind == "order_steps":
         cards = {c["id"]: c["text"] for c in prompt["cards"]}
@@ -567,7 +567,7 @@ def check(kind: str, prompt: dict, expected: dict, answer) -> tuple[bool, str | 
         in_place = sum(1 for a, b in zip(ids, expected["order"]) if a == b)
         ok = in_place == len(ids)
         return ok, None if ok else "wrong_order", " → ".join(cards[i] for i in ids), None if ok else (
-            f"Có {in_place}/{len(ids)} thẻ đúng vị trí. Đổi chỗ các thẻ còn lại rồi kiểm tra lại nhé.")
+            f"Có {in_place}/{len(ids)} thẻ đúng vị trí.")
     if kind == "match_pairs":
         pairs = _pairs(prompt, answer)
         right = sum(1 for a, b in pairs.items() if expected["pairs"].get(a) == b)
@@ -575,7 +575,7 @@ def check(kind: str, prompt: dict, expected: dict, answer) -> tuple[bool, str | 
         texts = {c["id"]: c["text"] for c in prompt["lefts"] + prompt["rights"]}
         given = "; ".join(f"{texts[a]} – {texts[b]}" for a, b in pairs.items())
         return ok, None if ok else "wrong_pair", given, None if ok else (
-            f"Đúng {right}/{len(pairs)} cặp. Các cặp đúng được giữ lại, ghép lại những cặp còn lại nhé.")
+            f"Đúng {right}/{len(pairs)} cặp.")
     if kind == "choice_explain":
         options = {o["id"]: o["text"] for o in prompt["options"]}
         if not isinstance(answer, str) or answer not in options:
@@ -590,7 +590,7 @@ def check(kind: str, prompt: dict, expected: dict, answer) -> tuple[bool, str | 
         if not wrong:
             return True, None, given, None
         part = placed[wrong[0]["id"]]
-        return False, "wrong_setup", given, expected["why"].get(part) or f"“{names[part]}” chưa hợp ở chỗ “{wrong[0]['label']}”. Thử vật khác nhé."
+        return False, "wrong_setup", given, expected["why"].get(part) or f"“{names[part]}” chưa hợp ở chỗ “{wrong[0]['label']}”."
     if kind in lg.KINDS:
         return lg.check(kind, prompt, expected, answer)
     raise InvalidAnswer(f"unknown kind {kind}")

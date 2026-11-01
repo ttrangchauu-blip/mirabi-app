@@ -115,13 +115,13 @@ def _check_story(prompt: dict, expected: dict, answer) -> tuple[bool, str | None
         if picked in expected["evidence"]:
             return False, None, text, None  # right, but only a step: `advance` opens the options
         clue = expected.get("clue")
-        return False, "wrong_evidence", text, ("Câu này chưa chứng minh được câu trả lời. "
-                                               + (f"Gợi ý: {clue}" if clue else "Tìm câu có từ khoá của câu hỏi nhé."))
+        return False, "wrong_evidence", text, ("Câu này chưa chứng minh được câu trả lời."
+                                               + (f" Gợi ý: {clue}" if clue else ""))
     picked = _one({o["id"] for o in prompt["options"]}, answer)
     text = next(o["text"] for o in prompt["options"] if o["id"] == picked)
     if picked == expected["right"]:
         return True, None, text, None
-    return False, "wrong_answer", text, expected["why"][picked] + " Đọc lại câu bằng chứng em đã tìm nhé."
+    return False, "wrong_answer", text, expected["why"][picked]
 
 
 def _advance_story(prompt: dict, expected: dict, answer) -> tuple[dict, str] | None:
@@ -230,9 +230,9 @@ def _check_xray(prompt: dict, expected: dict, answer) -> tuple[bool, str | None,
     else:
         why = f"“{text[first]}” cũng cần được tô màu."
     if expected["role_of"][first] == 0 and painted.get(first):
-        why = f"“{text[first]}” không thuộc màu nào, để trống nhé."
+        why = f"“{text[first]}” không thuộc màu nào."
     more = f" Còn {len(wrong)} chỗ chưa đúng." if len(wrong) > 1 else ""
-    return False, "wrong_role", given, why + more + " Những từ tô đúng được giữ lại."
+    return False, "wrong_role", given, why + more
 
 
 def _kept_xray(prompt: dict, expected: dict, answer) -> list[str]:
