@@ -17,37 +17,13 @@ from decimal import Decimal, InvalidOperation
 # Kinds, policies and scoring
 # ---------------------------------------------------------------------------------------------------------------
 
-# What a wrong answer does. "retry": the user may correct it (the object keeps moving in Challenge).
-# "reveal": the answer and explanation are shown and the turn ends ("Tiếp tục").
-WRONG_POLICY = {
-    "vocab_typing": "retry",
-    "word_spelling": "retry",
-    "math_input": "retry",
-    "missing_number": "retry",
-    "gate_choice": "reveal",
-    "bridge_order": "reveal",
-    "compare": "reveal",
-    # Curriculum games (curriculum_games.py): a wrong answer is explained and fixed, never revealed or lost.
-    "word_build": "retry",
-    "spell_fix": "retry",
-    "sort_card": "retry",
-    "code_path": "retry",
-    # Lesson games (lesson_catalog.py): the same, with the reason for a wrong answer.
-    "order_steps": "retry",
-    "match_pairs": "retry",
-    # Chọn đáp án is a quiz: one answer, then the right option and the explanation, then "Câu tiếp theo".
-    "choice_explain": "reveal",
-    "lab_experiment": "retry",
-    # Subject gameplays (lesson_games.py): the same.
-    "timeline_place": "retry",
-    "sentence_build": "retry",
-    "geometry_build": "retry",
-    "equation_balance": "retry",
-    "number_line_place": "retry",
-    "step_solve": "retry",
-    "story_evidence": "retry",
-    "sentence_paint": "retry",
-}
+# What a wrong answer does. "reveal": the question is over, its answer and explanation stay on screen until "Tiếp theo"
+# (every game answered one question at a time). "retry": the target is still there and the user may correct it, only
+# where targets race each other in real time: the falling words, and Math Battle in Thử thách.
+def wrong_policy(kind: str, mode: str) -> str:
+    return "retry" if kind in TYPED_TARGET_KINDS or (kind == "math_input" and mode == "challenge") else "reveal"
+
+
 # Kinds whose wrong answers cost a heart in Challenge. For moving targets (meteor, monster) only a miss does.
 # In Học tập targets never land, so every wrong answer costs a heart.
 HEART_ON_WRONG = {"gate_choice", "bridge_order", "missing_number", "compare"}

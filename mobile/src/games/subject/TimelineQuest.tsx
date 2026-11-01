@@ -36,13 +36,14 @@ export function TimelineQuest({ turn, disabled, feedback, solved, onSubmit, redu
   // A wrong check: what is right stays (locked), the rest shakes, then goes back to the pile.
   const keep = useRef<Placement>({});
   useEffect(() => {
-    if (!feedback || feedback.tone !== 'bad') return;
+    if (!feedback || feedback.tone !== 'bad' || feedback.final) return;
     keep.current = keptPlacement(feedback.kept);
     setLocked(new Set(Object.keys(keep.current)));
     setBad(new Set(Object.keys(own).filter((e) => !(e in keep.current))));
     setSelected(null);
   }, [feedback]); // eslint-disable-line react-hooks/exhaustive-deps
   const shake = useWrongShake(feedback, 'timeline:wrong', reduceMotion, () => {
+    if (feedback?.final) return;
     setOwn((now) => Object.fromEntries(Object.entries(now).filter(([e]) => e in keep.current)));
     setBad(new Set());
   });

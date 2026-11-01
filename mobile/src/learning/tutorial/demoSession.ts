@@ -24,8 +24,8 @@ export const DEMO_SESSION_ID = -1;
  * (`check`, POST /api/games/{game}/tutorial/check, which saves nothing).
  *
  * - Demo turns come in when a step releases them (`release`), never by themselves.
- * - A wrong answer in a game that retries keeps the turn open; in a game that reveals (gates, comparisons, choices)
- *   the turn ends with its explanation and comes back once more, as a stage plays it again later.
+ * - A wrong answer in a game that retries (the falling words) keeps the turn open; in every other game the turn ends with
+ *   its explanation and comes back once more, as a stage plays it again later.
  * - A falling word that lands takes a demo heart (never below one): the hearts shown are the tutorial's own.
  */
 export class DemoSession implements GameBackend {
@@ -139,10 +139,13 @@ export class DemoSession implements GameBackend {
   }
 
   private again(turn: Turn): Turn {
-    const id = `${this.origin.get(turn.turn_id) ?? turn.turn_id}~${++this.copies}`;
-    this.origin.set(id, this.origin.get(turn.turn_id) ?? turn.turn_id);
+    const first = this.origin.get(turn.turn_id) ?? turn.turn_id;
+    const id = `${first}~${++this.copies}`;
+    this.origin.set(id, first);
     this.current = { ...this.current, required_count: this.current.required_count + 1 };
-    return { ...turn, turn_id: id, attempts: 0, wrong_attempts: 0, practice: true };
+    // From its first step (a turn solved in steps may have moved on).
+    const prompt = this.def.demo.find((t) => t.turn_id === first)?.prompt ?? turn.prompt;
+    return { ...turn, prompt, turn_id: id, attempts: 0, wrong_attempts: 0, practice: true };
   }
 
   next = async () => this.reply(null);

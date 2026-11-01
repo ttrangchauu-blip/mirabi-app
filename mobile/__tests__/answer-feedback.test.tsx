@@ -12,7 +12,7 @@ import { mockServer } from '../test/mockServer';
 
 // The answer's feedback in the quiz games: no popup. The question and its options stay, locked and marked (the one chosen
 // green or red, the right one green); one card under them says right or wrong, gives the answer and the explanation and
-// waits for "Câu tiếp theo" ("Xem kết quả" after the last question). Nothing moves on by itself.
+// waits for "Tiếp theo" ("Xem kết quả" after the last question). Nothing moves on by itself.
 
 const ref = (id: number, code: string, name: string) => ({ id, code, name });
 const turn = (id: string, kind: Turn['kind'], prompt: Turn['prompt']): Turn => ({ turn_id: id, position: 0, kind, skill_label: 'x', prompt,
@@ -90,11 +90,11 @@ it('a wrong answer: marked red, the right option green, the explanation under th
   expect(screen.queryByText('Liên Hợp Quốc có trụ sở chính ở đâu?')).toBeNull();
 });
 
-it('"Câu tiếp theo" moves on once, even tapped twice; the next question starts clean; the last one says "Xem kết quả"', async () => {
+it('"Tiếp theo" moves on once, even tapped twice; the next question starts clean; the last one says "Xem kết quả"', async () => {
   const { server, onEnded } = await play(session(), quizRoutes);
   fireEvent.press(await screen.findByRole('button', { name: '26/6/1945' }));
   await answered();
-  const next = screen.getByRole('button', { name: 'Câu tiếp theo' });
+  const next = screen.getByRole('button', { name: 'Tiếp theo' });
   fireEvent.press(next);
   fireEvent.press(next);
   await ms(100);
@@ -111,7 +111,7 @@ it('"Câu tiếp theo" moves on once, even tapped twice; the next question start
   expect(screen.getByText('Đáp án: New York')).toBeTruthy();
   expect(screen.getByText(EXPLAIN_2)).toBeTruthy();
   expect(StyleSheet.flatten(screen.getByTestId('answer-feedback').props.style).backgroundColor).toBe('#F0FAF5');
-  expect(screen.queryByRole('button', { name: 'Câu tiếp theo' })).toBeNull();
+  expect(screen.queryByRole('button', { name: 'Tiếp theo' })).toBeNull();
   // The stage finishes only once the last explanation is closed.
   await ms(10000);
   expect(server.callsTo('POST /api/learning/sessions/7/complete')).toHaveLength(0);
@@ -123,7 +123,7 @@ it('"Câu tiếp theo" moves on once, even tapped twice; the next question start
   expect(server.callsTo('POST /api/learning/sessions/7/answer').map((c) => c.body.answer)).toEqual(['o1', 'o3']);
 });
 
-it('Chọn cổng: a right answer stays with its explanation until "Câu tiếp theo" (it no longer moves on by itself)', async () => {
+it('Chọn cổng: a right answer stays with its explanation until "Tiếp theo" (it no longer moves on by itself)', async () => {
   const gate = turn('turn-g1', 'gate_choice', { sentence: 'She ___ a student.', options: [{ id: 'o1', text: 'is' }, { id: 'o2', text: 'are' }] });
   const gate2 = turn('turn-g2', 'gate_choice', { sentence: 'They ___ friends.', options: [{ id: 'o1', text: 'is' }, { id: 'o2', text: 'are' }] });
   const grammar = (over: Partial<LearningSession> = {}) => session({ game_type: 'grammar', game: 'gate', variant: 'gate', subject: ref(1, 'english', 'Tiếng Anh'),
@@ -140,7 +140,7 @@ it('Chọn cổng: a right answer stays with its explanation until "Câu tiếp 
   await ms(10000);
   expect(screen.getByText('She ___ a student.')).toBeTruthy();
   expect(screen.queryByText('They ___ friends.')).toBeNull();
-  fireEvent.press(screen.getByRole('button', { name: 'Câu tiếp theo' }));
+  fireEvent.press(screen.getByRole('button', { name: 'Tiếp theo' }));
   await ms(100);
   expect(screen.getByText('They ___ friends.')).toBeTruthy();
 });
@@ -149,11 +149,11 @@ it('one card for right and wrong: same layout, only the colours and the words ch
   const long = 'Giải thích dài. '.repeat(60).trim();
   const onNext = jest.fn();
   const view = render(<AnswerFeedback result={result({ correct: true, correct_answer: '24/10/1945', explanation: long })} kind="choice_explain"
-    nextLabel="Câu tiếp theo" onNext={onNext} reduceMotion />);
+    nextLabel="Tiếp theo" onNext={onNext} reduceMotion />);
   expect(screen.getByText('Chính xác!')).toBeTruthy();
   expect(screen.getByText(long).props.numberOfLines).toBeUndefined();
-  fireEvent.press(screen.getByRole('button', { name: 'Câu tiếp theo' }));
-  fireEvent.press(screen.getByRole('button', { name: 'Câu tiếp theo' }));
+  fireEvent.press(screen.getByRole('button', { name: 'Tiếp theo' }));
+  fireEvent.press(screen.getByRole('button', { name: 'Tiếp theo' }));
   expect(onNext).toHaveBeenCalledTimes(1);
   view.unmount();
   render(<AnswerFeedback result={result({ correct: false, outcome: 'wrong', correct_answer: '24/10/1945', explanation: long, hearts_delta: -1 })}
@@ -185,13 +185,13 @@ it('a question asked again to practise (same words, another turn) starts clean a
   fireEvent.press(await screen.findByRole('button', { name: '26/6/1945' }));
   await answered();
   expect(screen.getByText('Câu này sẽ quay lại để bạn luyện thêm một lần.')).toBeTruthy();
-  fireEvent.press(screen.getByRole('button', { name: 'Câu tiếp theo' }));
+  fireEvent.press(screen.getByRole('button', { name: 'Tiếp theo' }));
   await ms(100);
   expect(screen.getByText('Thủ đô của Pháp là gì?')).toBeTruthy(); // the next question is another one
   expect(screen.queryByText('Hiến chương Liên Hợp Quốc có hiệu lực ngày nào?')).toBeNull();
   fireEvent.press(screen.getByRole('button', { name: 'Paris' }));
   await answered();
-  fireEvent.press(screen.getByRole('button', { name: 'Câu tiếp theo' }));
+  fireEvent.press(screen.getByRole('button', { name: 'Tiếp theo' }));
   await ms(100);
   // The practice: the same words, unmarked and playable, the explanation of the first time gone.
   expect(screen.getByText('Hiến chương Liên Hợp Quốc có hiệu lực ngày nào?')).toBeTruthy();

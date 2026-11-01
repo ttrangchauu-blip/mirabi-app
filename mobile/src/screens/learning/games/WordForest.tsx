@@ -15,13 +15,14 @@ import { useReactions } from '../../../games/engine/feedback';
 // Word Forest (Tiếng Việt, Ghép chữ): the pet explores a magic forest. Each word is a brook to cross: the bridge is
 // missing its planks, one plank per letter (lớp 1) or syllable (lớp 2). The pieces glow on the forest floor as stones:
 // drag one onto a plank (or tap it: it goes to the first free plank; it drops into place), then "Xây cầu". Right: the
-// planks light up one after another, the pet runs across, gets a book piece and the forest scrolls on to the next brook
-// (a reaction of the feedback loop: the next word waits for it, "Bỏ qua" jumps to the far bank). Wrong: the bridge
-// wobbles, the reason shows and the pieces stay, to be fixed. The backend checks every word.
+// planks light up one after another and the pet runs across and gets a book piece (a reaction of the feedback loop: the
+// explanation waits for it, "Bỏ qua" jumps to the far bank); on "Tiếp theo" the forest scrolls on to the next brook. Wrong:
+// the bridge wobbles and the pieces stay under the right answer. The backend checks every word.
 
 type Note = { text: string; tone: 'good' | 'bad' } | null;
 type Props = {
   turn: Turn; disabled: boolean; feedback?: Note; onSubmit: (ids: string[]) => void; collected: number; total: number;
+  /** The word was built right: the pet crosses, and waits on the far bank for the next word. */ solved?: boolean;
   petId: string; petLevel: number; reduceMotion: boolean;
   /** The guide: what is placed, in order (nothing can be touched). */
   demo?: { placed: string[]; result?: 'ok' };
@@ -70,10 +71,13 @@ const FOREST: Layer[] = [
 
 type Crossed = { pieces: string[]; picture: string; joiner: string };
 
-export function WordForest({ turn, disabled, feedback, onSubmit, collected, total, petId, petLevel, reduceMotion, demo }: Props) {
+export function WordForest({ turn, disabled, feedback, onSubmit, collected, total, solved, petId, petLevel, reduceMotion, demo }: Props) {
   const tiles = turn.prompt.tiles ?? [];
   const letters = turn.prompt.unit === 'letter';
   const [own, setOwn] = useState<(string | null)[]>(() => tiles.map(() => null));
+  // A new word: empty planks, from its very first frame.
+  const [ownFor, setOwnFor] = useState(turn.turn_id);
+  if (ownFor !== turn.turn_id) { setOwnFor(turn.turn_id); setOwn(tiles.map(() => null)); }
   const slots = demo ? tiles.map((_, i) => demo.placed[i] ?? null) : own;
   const locked = disabled || !!demo;
   const text = (id: string | null) => (id ? tiles.find((x) => x.id === id)?.text ?? '' : '');
@@ -93,27 +97,36 @@ export function WordForest({ turn, disabled, feedback, onSubmit, collected, tota
   const sound = useSfx();
   const sent = useRef<(Crossed & { turnId: string }) | null>(null);
   const shownTurn = useRef(turn.turn_id);
+  const ms = (n: number) => (reduceMotion ? 0 : n);
+  // Built right: the planks light up, the pet runs across and waits on the far bank (the explanation comes then).
   useEffect(() => {
-    if (shownTurn.current === turn.turn_id) return;
-    const before = sent.current?.turnId === shownTurn.current ? sent.current : null;
-    shownTurn.current = turn.turn_id;
-    setOwn(tiles.map(() => null));
-    if (!before || demo) { travel.setValue(collected); run.setValue(0); return; }
+    if (!solved || demo) return;
+    const before = sent.current?.turnId === turn.turn_id ? sent.current : null;
+    if (!before) return;
     setCrossing({ pieces: before.pieces, picture: before.picture, joiner: before.joiner });
-    const ms = (n: number) => (reduceMotion ? 0 : n);
     glow.setValue(1); run.setValue(0); lay.setValue(0);
     pet.play('jump');
     sound('unlock');
-    const toEnd = () => { anim.stop(); travel.setValue(collected); run.setValue(0); glow.setValue(0); lay.setValue(0); setCrossing(null); };
-    const end = react.begin('forest:cross', { maxMs: 5000, finish: toEnd });
+    const toEnd = () => { anim.stop(); run.setValue(1); lay.setValue(1); };
+    const end = react.begin('forest:cross', { maxMs: 3500, finish: toEnd });
     const anim = Animated.sequence([
       Animated.timing(lay, { toValue: 1, duration: ms(Math.min(900, 140 * before.pieces.length)), easing: Easing.linear, useNativeDriver: false }),
       Animated.timing(run, { toValue: 1, duration: ms(1100), easing: Easing.inOut(Easing.quad), useNativeDriver: false }),
-      Animated.parallel([
-        Animated.timing(travel, { toValue: collected, duration: ms(900), easing: Easing.inOut(Easing.quad), useNativeDriver: false }),
-        Animated.timing(run, { toValue: 0, duration: ms(900), easing: Easing.inOut(Easing.quad), useNativeDriver: false }),
-        Animated.timing(glow, { toValue: 0, duration: ms(900), useNativeDriver: false }),
-      ]),
+    ]);
+    anim.start(() => end());
+    return () => { anim.stop(); end(); };
+  }, [solved]); // eslint-disable-line react-hooks/exhaustive-deps
+  // The next word ("Tiếp theo"): the forest scrolls on to its brook, the pet comes along to this bank.
+  useEffect(() => {
+    if (shownTurn.current === turn.turn_id) return;
+    shownTurn.current = turn.turn_id;
+    if (!crossing || demo) { travel.setValue(collected); run.setValue(0); return; }
+    const toEnd = () => { anim.stop(); travel.setValue(collected); run.setValue(0); glow.setValue(0); lay.setValue(0); setCrossing(null); };
+    const end = react.begin('forest:scroll', { maxMs: 2000, finish: toEnd });
+    const anim = Animated.parallel([
+      Animated.timing(travel, { toValue: collected, duration: ms(900), easing: Easing.inOut(Easing.quad), useNativeDriver: false }),
+      Animated.timing(run, { toValue: 0, duration: ms(900), easing: Easing.inOut(Easing.quad), useNativeDriver: false }),
+      Animated.timing(glow, { toValue: 0, duration: ms(900), useNativeDriver: false }),
     ]);
     anim.start(() => { setCrossing(null); lay.setValue(0); end(); });
     return () => { anim.stop(); end(); };

@@ -52,7 +52,7 @@ describe('visual feedback in Math Battle', () => {
   };
   const attack = () => screen.getByRole('button', { name: 'Tấn công' });
 
-  it('a right answer: the solved problem stays while the pet strikes; the pad is locked; then the next problem', async () => {
+  it('a right answer: the solved problem stays while the pet strikes; the pad is locked; "Tiếp theo" brings the next problem', async () => {
     const after = session({ resolved_count: 1, open_turns: [problem('m2', '9 + 4')], version: 2 });
     const server = await play(session(), {
       'POST /api/learning/sessions/7/answer': { status: 200, body: { result: result({ correct: true, resolved: true, outcome: 'first_try', correct_answer: '19' }),
@@ -63,10 +63,13 @@ describe('visual feedback in Math Battle', () => {
     // The world reacts first: the problem just solved is still on its card, the next one waits, nothing can be sent.
     expect(screen.getByLabelText('Đã giải: 12 + 7')).toBeTruthy();
     expect(screen.queryByLabelText('Bài toán: 9 + 4 bằng mấy?')).toBeNull();
-    expect(attack().props.accessibilityState?.disabled).toBe(true);
+    expect(screen.queryByRole('button', { name: 'Tấn công' })).toBeNull(); // nothing to send: the pad is back with the next problem
     await ms(400);
     expect(screen.getByText('−1')).toBeTruthy(); // the bolt hit
     expect(screen.getByLabelText('Máu của Slime: 1 trên 2')).toBeTruthy();
+    await ms(1500);
+    expect(screen.queryByLabelText('Bài toán: 9 + 4 bằng mấy?')).toBeNull(); // never by itself
+    fireEvent.press(screen.getByRole('button', { name: 'Tiếp theo' }));
     await ms(1500);
     expect(screen.getByLabelText('Bài toán: 9 + 4 bằng mấy?')).toBeTruthy();
     expect(server.callsTo('POST /api/learning/sessions/7/answer')).toHaveLength(1);
@@ -91,7 +94,7 @@ describe('visual feedback in Math Battle', () => {
     expect(screen.getByText('Đáp án này vừa chưa đúng, hãy thử cách khác nhé!')).toBeTruthy();
   });
 
-  it('"Bỏ qua" jumps a long strike (a monster defeated, the next walking in) to its end: the next problem comes at once', async () => {
+  it('"Bỏ qua" jumps a long strike (a monster defeated) to its end: "Tiếp theo" is there at once and brings the next foe in', async () => {
     const after = session({ resolved_count: 2, open_turns: [problem('m2', '9 + 4')], version: 2 });
     await play(session({ resolved_count: 1 }), {
       'POST /api/learning/sessions/7/answer': { status: 200, body: { result: result({ correct: true, resolved: true, outcome: 'first_try' }),
@@ -102,8 +105,10 @@ describe('visual feedback in Math Battle', () => {
     expect(screen.getByLabelText('Đã giải: 12 + 7')).toBeTruthy();
     fireEvent.press(screen.getByRole('button', { name: 'Bỏ qua hiệu ứng' }));
     await ms(20);
+    fireEvent.press(screen.getByRole('button', { name: 'Tiếp theo' }));
+    await ms(1500);
     expect(screen.getByLabelText('Bài toán: 9 + 4 bằng mấy?')).toBeTruthy();
-    expect(screen.getByLabelText('Rừng phép thuật: pet đấu với Nấm phép thuật')).toBeTruthy(); // the next foe already on stage
+    expect(screen.getByLabelText('Rừng phép thuật: pet đấu với Nấm phép thuật')).toBeTruthy(); // the next foe on stage
     expect(screen.getByRole('button', { name: '1' }).props.accessibilityState?.disabled).toBeFalsy(); // the pad is open again
   });
 });

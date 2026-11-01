@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import { ActivityIndicator, Animated, BackHandler, Easing, KeyboardAvoidingView, LayoutChangeEvent, Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { newIdempotencyKey } from '../../api/client';
@@ -37,6 +37,7 @@ import { SentenceTrain } from '../../games/subject/SentenceTrain';
 import { TimelineQuest } from '../../games/subject/TimelineQuest';
 import { SfxProvider, useSfxPlayers, Volume, VOLUME_LABEL } from '../../games/engine/sfx';
 import { answerText, FeedbackLoop, FeedbackProvider, useFeedbackState } from '../../games/engine/feedback';
+import { useQuestionFlow, useQuestionStage } from '../../games/engine/questionFlow';
 import { WorldQuest } from '../../games/quests/WorldQuest';
 import { QUEST_KINDS, worldOf } from '../../games/quests/worlds';
 import type { TutorialController } from '../../learning/tutorial/useTutorialController';
@@ -80,21 +81,18 @@ export type TutorialHost = {
 const MOVING = new Set(['vocab_typing', 'word_spelling', 'math_input']);
 /** Falling words answered by typing (Việt → Anh, Anh → Việt): the answer boxes ride on the aimed word. */
 const TYPED = new Set(['vocab_typing', 'word_spelling']);
-/** The curriculum games: no clock, no hearts; a wrong answer is explained and fixed (no "Xem đáp án"). */
 /** The subject gameplays (games/subject): each draws its own world and plays the result of a right answer in it. */
 const SUBJECT = new Set(['timeline_place', 'sentence_build', 'geometry_build', 'equation_balance', 'number_line_place', 'step_solve',
   'story_evidence', 'sentence_paint']);
+/** The curriculum games: no clock, no hearts. */
 const CURRICULUM = new Set(['word_build', 'spell_fix', 'sort_card', 'code_path', 'order_steps', 'match_pairs', 'choice_explain', 'lab_experiment',
   ...SUBJECT]);
-/** Read the explanation (or why the option chosen fits) before the next question. */
-const EXPLAINED = new Set(['spell_fix', 'order_steps', 'match_pairs', 'choice_explain', ...SUBJECT]);
-/** Multiple choice: one answer per question. Right or wrong, the question stays on screen with its options marked and
- * the explanation under them (AnswerFeedback) until "Câu tiếp theo": no popup, never moving on by itself. */
+/** Multiple choice: the options answered are marked (the one chosen green or red, the right one green). */
 const CHOICE = new Set(['choice_explain', 'gate_choice', 'compare']);
-/** Scenes that move on to the next challenge themselves, with their own hand-over (the bridge crossed, the experiment
- * shown until "Thí nghiệm tiếp theo"), and the falling words (independent targets, never held): every other challenge
- * stays on screen while the world reacts to its answer (games/engine/feedback.ts). */
-const OWN_HANDOVER = new Set(['word_build', 'lab_experiment', 'vocab_typing', 'word_spelling']);
+/** Targets racing each other: the falling words, and Math Battle in Thử thách. They move on by themselves; every other
+ * question goes through the same flow (games/engine/questionFlow.ts): right or wrong, it stays on screen with its result,
+ * the answer and the explanation until "Tiếp theo". */
+const isRealTime = (kind: Turn['kind'], mode: LearningSession['mode']) => TYPED.has(kind) || (kind === 'math_input' && mode === 'challenge');
 /** How long "Bỏ qua" waits before it shows (a short reaction is never interrupted by a button popping up). */
 const SKIP_AFTER_MS = 700;
 const MISSED: Record<string, string> = { vocab_typing: 'Thiên thạch chạm đất', word_spelling: 'Từ chạm đất', math_input: 'Quái vật tới căn cứ' };
@@ -117,7 +115,7 @@ const FALLING_TICK_MS = 250;
 const NO_TURNS: Turn[] = [];
 
 type Notice = { text: string; tone: 'good' | 'bad' | 'info' } | null;
-/** A question answered and resolved, shown with its answer and explanation until "Câu tiếp theo": the turn as it was
+/** A question answered and resolved, shown with its answer and explanation until "Tiếp theo": the turn as it was
  * answered (the session has already moved on), the result and what was sent. */
 type Explained = { turn: Turn; result: TurnResult; answer: string | string[] | null; graded: boolean };
 
@@ -137,12 +135,18 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
   // The scenes' sound effects: one set of players for the whole game, silent while "Âm thanh" is off.
   const sfx = useSfxPlayers(prefs.sound, prefs.volume);
   const world = worldOf(session);
-  const [explained, setExplained] = useState<Explained | null>(null);
+  // One question at a time: ANSWERING → FEEDBACK → TRANSITIONING → NEXT_QUESTION → ANSWERING.
+  const { flow, snap: flowSnap } = useQuestionFlow<Explained>();
+  const explained = flowSnap.held;
+  const answering = flowSnap.phase === 'ANSWERING';
+  const stageStyle = useQuestionStage(flow, flowSnap, prefs.reduceMotion);
   const [notice, setNotice] = useState<Notice>(null);
   // Curriculum games: why the last answer was wrong (or what to do next), shown in the game until the next answer.
-  const [note, setNote] = useState<{ turnId: string; text: string; tone: 'good' | 'bad'; kept?: string[] | null } | null>(null);
-  // Phòng thí nghiệm: the experiment just done right, shown working (and explained) until "Thí nghiệm tiếp theo".
-  const [labSolved, setLabSolved] = useState<{ turnId: string; text: string } | null>(null);
+  const [note, setNote] = useState<{ turnId: string; text: string; tone: 'good' | 'bad'; kept?: string[] | null; final?: boolean } | null>(null);
+  // Questions over without a right answer yet (a right re-practice makes up for one): the world moves on with right
+  // answers only, while the stage's progress counts every question over.
+  const [missed, setMissed] = useState(0);
+  const worldDone = Math.max(0, session.resolved_count - missed);
   // The visual feedback loop (games/engine/feedback.ts): every answer is validated, then the world reacts (the scenes
   // begin and end their reactions in it) before anything moves on. While it reacts nothing can be sent, the next
   // challenge waits and the stage does not finish. The answer's explanation shows at once, under the question (it covers
@@ -167,7 +171,7 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
   const [scratch, setScratch] = useState('');
   const [intro, setIntro] = useState<Intro | 'loading' | null>(null);
   const [howTo, setHowTo] = useState(false); // "Cách chơi" read again from the pause menu
-  const clock = useGameClock(ctl.running && !explained && !intro, prefs.reduceMotion, session.game_type === 'meteor' || session.game_type === 'defense' ? FALLING_TICK_MS : undefined);
+  const clock = useGameClock(ctl.running && answering && !intro, prefs.reduceMotion, session.game_type === 'meteor' || session.game_type === 'defense' ? FALLING_TICK_MS : undefined);
   const spawnedAt = useRef(new Map<string, number>());
   const lastSpawn = useRef<number | null>(null);
   const missSent = useRef(new Set<string>());
@@ -291,6 +295,7 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
     setShots((list) => list.filter((s) => s.id !== id));
     markAnswered(id, false);
   }, [markAnswered, field]);
+  const sessionMode = session.mode;
   const onResult = useCallback((response: { result: TurnResult | null }, aimed: Turn, targets: Turn[], eventId?: string,
     answer: string | string[] | null = null) => {
     const r = response.result;
@@ -302,29 +307,33 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
     if (r.event === 'answer' && eventId && !TYPED.has(target.kind) && !loop.judge(eventId, !!r.correct, r.resolved)) return;
     const hearts = r.hearts_delta < 0 ? ' · −1 tim' : '';
     const word = r.word ?? null;
-    if (r.event === 'hint') {
-      return; // shown in the question card
-    } else if (CHOICE.has(target.kind) && r.event === 'answer' && r.resolved) {
-      setNote(null);
-      setTip(null);
-      if (!r.correct) setWrongKey((k) => k + 1); // the lesson's world feels it
-      setExplained({ turn: target, result: r, answer, graded: target.prompt.graded !== false });
-      return;
-    } else if (CURRICULUM.has(target.kind) && r.event === 'answer') {
-      if (!r.resolved) { // a step done (the misspelled word found) or a wrong answer: the turn stays open
-        setNote({ turnId: target.turn_id, text: r.feedback ?? (r.correct ? '' : 'Chưa đúng, thử lại nhé!'), tone: r.correct ? 'good' : 'bad', kept: r.kept });
-        if (!r.correct) setWrongKey((k) => k + 1);
-        return;
+    if (r.event === 'hint') return; // shown in the question card
+    if (!isRealTime(target.kind, sessionMode) && r.resolved && (r.event === 'answer' || r.event === 'reveal')) {
+      // The question is over, right or wrong. The world plays the result (a wrong answer shakes it, and nothing goes back
+      // to be fixed: `final`); the session has already opened the next question, shown once "Tiếp theo" is pressed.
+      setNotice(null);
+      if (r.correct) {
+        setNote(null);
+        setTip(null);
+        if (target.practice) setMissed((n) => Math.max(0, n - 1));
+        if (target.kind === 'math_input') setFlash({ turnId: target.turn_id, kind: 'hit' });
+      } else {
+        if (!target.practice) setMissed((n) => n + 1);
+        if (r.event === 'answer') {
+          setNote({ turnId: target.turn_id, text: '', tone: 'bad', final: true });
+          setWrongKey((k) => k + 1);
+          if (target.kind === 'math_input') setTip((r.error_type && MATH_TIP[r.error_type]) || null);
+        }
       }
-      setNote(null);
-      if (target.kind === 'lab_experiment') { setLabSolved({ turnId: target.turn_id, text: r.explanation ?? '' }); return; }
-      if (EXPLAINED.has(target.kind) && (r.explanation || r.feedback)) { // read why, then "Câu tiếp theo"
-        setExplained({ turn: target, result: r, answer, graded: target.prompt.graded !== false }); return;
-      }
-      setNotice({ text: target.kind === 'word_build' ? 'Chính xác! Pet nhận một mảnh sách' : target.kind === 'code_path'
-        ? 'Pet đã tới đích!' : 'Chính xác!', tone: 'good' });
+      flow.answered({ turn: target, result: r, answer, graded: target.prompt.graded !== false });
       return;
-    } else if (r.correct) {
+    }
+    if (CURRICULUM.has(target.kind) && r.event === 'answer' && !r.resolved) { // a step done (the misspelled word found): the turn stays open
+      setNote({ turnId: target.turn_id, text: r.feedback ?? (r.correct ? '' : 'Chưa đúng, thử lại nhé!'), tone: r.correct ? 'good' : 'bad', kept: r.kept });
+      if (!r.correct) setWrongKey((k) => k + 1);
+      return;
+    }
+    if (r.correct) {
       if (TYPED.has(target.kind)) {
         // Shoot → hit → break → meaning. The word stopped where it was (the backend has resolved it: it can never be
         // missed or counted again) and the pet's bullets fly to it; it glows at each hit, cracks, breaks, counts and
@@ -364,9 +373,9 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
       if (word) addBurst({ position: target.position, progress: 1, title: word.en, sub: word.vi, tone: 'miss' });
     } else {
       setDraft('');
-      setExplained({ turn: target, result: r, answer, graded: true }); // a wrong answer or "Xem đáp án": read why, then go on
+      flow.answered({ turn: target, result: r, answer, graded: true }); // "Xem đáp án": read why, then go on
     }
-  }, [addBurst, markAnswered, announce, field, loop]);
+  }, [addBurst, markAnswered, announce, field, loop, flow, sessionMode]);
 
   const act = useCallback((action: TurnAction, target: Turn, targets: Turn[] = [target]) =>
     ctl.run(() => api.turn(session.id, action),
@@ -436,7 +445,7 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
   // Every turn done: finish the stage, once the last shots have hit and the meanings have shown (falling words). The
   // reward shown afterwards is whatever the backend confirms.
   // The last explanation is read first: "Xem kết quả" closes it, then the stage finishes.
-  const effectsLeft = (falling && (shots.length > 0 || bursts.length > 0)) || !!labSolved || blocking;
+  const effectsLeft = (falling && (shots.length > 0 || bursts.length > 0)) || blocking;
   useEffect(() => {
     if (!session.can_complete || completing.current || ctl.busy || explained || ctl.offline || effectsLeft || loop.blocking) return;
     completing.current = true;
@@ -465,11 +474,11 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
   };
 
   // The pet, its bullets and the effects stop together with the falling words.
-  const fxRunning = ctl.running && !explained && !intro && !ctl.offline;
+  const fxRunning = ctl.running && answering && !intro && !ctl.offline;
 
   const timeUp = session.time_up && open.length === 0 && !session.can_complete && session.status === 'active' && !explained;
   // An answered question is locked: nothing of it can be sent again.
-  const disabled = ctl.busy || !ctl.running || blocking || !!explained;
+  const disabled = ctl.busy || !ctl.running || blocking || !answering;
   const counting = ctl.countdown !== null;
 
   // Falling words shoot by themselves: no "Bắn", no Enter. A typed text that is right for any falling word (its key is
@@ -535,18 +544,17 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
   const answer = useMemo(() => (session.game_type === 'meteor' && !counting
     ? { value: draft, onChange: setDraft, editable: !ctl.offline, onSubmit: submitTyped } : undefined),
   [session.game_type, counting, draft, ctl.offline, submitTyped]);
-  // Nothing of the first question shows (or can be answered) before "Bắt đầu!". While the world reacts to a right answer
-  // the challenge answered stays on screen; the next one comes once the reaction is over.
+  // Nothing of the first question shows (or can be answered) before "Bắt đầu!". Math Battle in Thử thách: while the world
+  // reacts to a right answer the challenge answered stays on screen; the next one comes once the reaction is over.
   const liveShown = counting ? undefined : turn;
   const shownRef = useRef<Turn | undefined>(undefined);
   const prevShown = shownRef.current;
-  if (!blocking || !prevShown || !liveShown || prevShown.turn_id === liveShown.turn_id || OWN_HANDOVER.has(prevShown.kind)
-    || OWN_HANDOVER.has(liveShown.kind)) shownRef.current = liveShown;
-  // The question answered stays (with its marked options and explanation) until "Câu tiếp theo", even though the session
-  // has already opened the next one. Falling words are independent targets: never held. A subject gameplay plays its
-  // result (`solved`) in the meantime.
+  if (!blocking || !prevShown || !liveShown || !isRealTime(prevShown.kind, session.mode) || TYPED.has(prevShown.kind)) shownRef.current = liveShown;
+  // The question answered stays (with its marked options and explanation) until "Tiếp theo", even though the session has
+  // already opened the next one. Falling words are independent targets: never held. A gameplay plays its result
+  // (`solved`, a right answer only) in the meantime.
   const pinned = explained && !TYPED.has(explained.turn.kind) ? explained.turn : undefined;
-  const pinnedId = pinned?.turn_id ?? null;
+  const solvedId = explained?.result.correct ? explained.turn.turn_id : null;
   const shown = pinned ?? shownRef.current;
   // Tutorial Mode: where the screen's regions are (the tutorial points at them), and the falling word aimed at.
   const [regions, setRegions] = useState<Regions>({});
@@ -573,31 +581,46 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
     chosen: typeof explained.answer === 'string' ? explained.answer : null, // null after "Xem đáp án": only the right one is marked
     correct: explained.result.correct_options ?? [], right: explained.result.correct === true,
   } : null;
-  // "Câu tiếp theo": the next question (already the session's) shows, with nothing of this one. The last one says "Xem kết
+  // "Tiếp theo": the next question (already the session's) comes in, with nothing of this one. The last one says "Xem kết
   // quả": closing it finishes the stage.
   const nextLabel = explained && (TYPED.has(explained.turn.kind) || tutorial) ? 'Tiếp tục'
-    : session.can_complete || session.status !== 'active' ? 'Xem kết quả' : 'Câu tiếp theo';
+    : session.can_complete || session.status !== 'active' ? 'Xem kết quả' : 'Tiếp theo';
   // In a tutorial, closing the explanation can be the step itself ("Đọc giải thích rồi nhấn Tiếp tục").
   const onTutorialEvent = tutorial?.controller.onGameEvent;
-  const goNext = useCallback(() => { setExplained(null); onTutorialEvent?.('continue'); }, [onTutorialEvent]);
+  const goNext = useCallback(() => {
+    const held = flow.getSnapshot().held;
+    if (!held || !flow.next(TYPED.has(held.turn.kind))) return; // a second tap: this one has already moved on
+    loop.skip(); // what still plays of this question ends first: the next one never comes in over it
+    onTutorialEvent?.('continue');
+  }, [flow, loop, onTutorialEvent]);
   // The options are marked at once; the card comes once the world has shown what the answer did (a short moment, or the
   // lesson world's reaction, which "Bỏ qua" ends), and then stays.
   const [cardFor, setCardFor] = useState<string | null>(null);
-  useEffect(() => { if (explained && !blocking) setCardFor(explained.turn.turn_id); }, [explained, blocking]);
+  // (The loop itself is read too: the scenes begin their reactions in this very commit.)
+  useEffect(() => { if (explained && !blocking && !loop.blocking) setCardFor(explained.turn.turn_id); }, [explained, blocking, loop]);
   const cardShown = !!explained && cardFor === explained.turn.turn_id;
   // The explanation can be longer than the screen: it is brought into view smoothly, only as far as needed (the question
   // above stays in sight when it fits), once per question; the learner can scroll on.
   const scrollRef = useRef<ScrollView>(null);
-  const scrollView = useRef({ y: 0, height: 0, revealed: null as string | null });
+  const scrollView = useRef({ y: 0, height: 0, stageTop: 0, revealed: null as string | null });
   const explainedId = explained?.turn.turn_id ?? null;
   const revealCard = useCallback((e: LayoutChangeEvent) => {
     const view = scrollView.current;
     if (!explainedId || view.revealed === explainedId || !view.height) return;
     view.revealed = explainedId;
-    const { y, height } = e.nativeEvent.layout;
+    const { y: inStage, height } = e.nativeEvent.layout;
+    const y = inStage + view.stageTop;
     const to = Math.min(y - 12, y + height - view.height + 12);
     if (to > view.y + 4) scrollRef.current?.scrollTo({ y: to, animated: !prefs.reduceMotion });
   }, [explainedId, prefs.reduceMotion]);
+  // The question has left: nothing of it is kept for the next one (the answer typed, the marks, the notes, where the
+  // explanation had scrolled to), before the next one is painted.
+  useLayoutEffect(() => {
+    if (flowSnap.phase !== 'NEXT_QUESTION') return;
+    setDraft(''); setNote(null); setTip(null); setNotice(null); setFlash(null); setSelectedId(null); setCardFor(null);
+    scrollView.current.y = 0;
+    scrollRef.current?.scrollTo({ y: 0, animated: false });
+  }, [flowSnap.phase]);
   const liveId = falling ? null : liveShown?.turn_id ?? null;
   useEffect(() => { if (!falling) loop.present(liveId); }, [liveId, falling, loop]);
   useEffect(() => { if (draft) loop.touch(); }, [draft, loop]);
@@ -610,9 +633,9 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
   // A lesson names its game ("Dòng thời gian", "Vòng đời kỳ diệu"); otherwise the game's own name.
   const info = { ...GAME_INFO[session.game], ...(session.catalog?.game_title ? { name: session.catalog.game_title } : {}) };
   const playfield = session.game_type === 'defense' ? (
-    <MathBattle problem={shown ?? null} required={session.required_count} resolved={session.resolved_count} hearts={session.hearts}
+    <MathBattle problem={shown ?? null} required={session.required_count} resolved={worldDone} hearts={session.hearts}
       heartsMax={session.hearts_max} flash={flash} wrongKey={wrongKey} petId={petId} petLevel={petLevel} reduceMotion={prefs.reduceMotion}
-      running={fxRunning} tip={tip} />
+      running={fxRunning} tip={tip} hold={flowSnap.phase === 'FEEDBACK'} />
   ) : (
     <Playfield variant={session.game === 'word_shooter' ? 'words' : 'meteor'}
       turns={counting ? NO_TURNS : falling ? pending : live} progress={progress} field={falling ? field : undefined}
@@ -638,14 +661,14 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
           </Pressable>
         </View>
       ) : null}
-      <View onLayout={measure('prompt')}>
+      <Animated.View onLayout={measure('prompt')} style={stageStyle}>
       {falling ? (
         <Steady testID="game-prompt-area">{shown ? <PromptCard turn={shown} game={info.name} notice={notice} /> : <PromptBlank />}</Steady>
       ) : session.game_type === 'defense' || shown?.kind === 'lab_experiment' ? null // the battle and the lab show their own task
         : shown ? <PromptCard turn={shown} game={info.name} notice={notice} /> : (
-        <View style={styles.waiting}>{counting ? null : ctl.busy ? <ActivityIndicator color={t.accent} /> : <Text style={styles.muted}>Chuẩn bị lượt tiếp theo…</Text>}</View>
+        <View style={styles.waiting}>{counting || session.can_complete || session.status !== 'active' ? null : ctl.busy ? <ActivityIndicator color={t.accent} /> : <Text style={styles.muted}>Chuẩn bị lượt tiếp theo…</Text>}</View>
       )}
-      </View>
+      </Animated.View>
       <View style={styles.playWrap} onLayout={measure('play')} pointerEvents={touch} testID="game-play-area">
       {notice && !(shown && TYPED.has(shown.kind)) ? (
         <View style={styles.noticeLayer} pointerEvents="none">
@@ -655,7 +678,7 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
       {fb.skippable && !prefs.reduceMotion ? <SkipButton onSkip={() => loop.skip()} /> : null}
       {explained && !pinned && cardShown ? (
         <View style={styles.feedbackDock}>
-          <AnswerFeedback key={explained.turn.turn_id} result={explained.result} kind={explained.turn.kind} graded={explained.graded}
+          <AnswerFeedback key={`feedback:${explained.turn.turn_id}`} result={explained.result} kind={explained.turn.kind} graded={explained.graded}
             nextLabel={nextLabel} onNext={goNext} reduceMotion={prefs.reduceMotion} />
         </View>
       ) : null}
@@ -669,20 +692,23 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
         onScroll={(e) => { scrollView.current.y = e.nativeEvent.contentOffset.y; }}
         onLayout={(e) => { scrollView.current.height = e.nativeEvent.layout.height; }}>
         {moving ? playfield : null}
-        {shown && shown.kind === 'gate_choice' ? <GateChoice turn={shown} onChoose={(id) => submit(shown, id)} disabled={disabled} result={choiceResult} petId={petId} petLevel={petLevel} reduceMotion={prefs.reduceMotion} /> : null}
-        {shown && shown.kind === 'bridge_order' ? <WordBridge key={shown.turn_id} turn={shown} onSubmit={(ids) => submit(shown, ids)} disabled={disabled} petId={petId} petLevel={petLevel} reduceMotion={prefs.reduceMotion} /> : null}
-        {shown && shown.kind === 'word_build' ? ( // one forest for the stage (no key): it walks from one gate to the next
-          <WordForest turn={shown} disabled={disabled} feedback={note?.turnId === shown.turn_id ? note : null}
-            onSubmit={(ids) => submit(shown, ids)} collected={session.resolved_count} total={session.required_count} petId={petId} petLevel={petLevel}
-            reduceMotion={prefs.reduceMotion} />
-        ) : null}
         {questOn && questKind ? (
           // The lesson's world above its game (Math Kingdom, Space Adventure, Word Forest, Magic Laboratory, Time Traveler,
           // Treasure Explorer): every right answer moves it on, a wrong one is felt in it. While the answered question waits
-          // for "Câu tiếp theo" (`hold`), the world shows what the answer did but brings no next challenge in.
-          <WorldQuest world={world!} kind={questKind} done={session.resolved_count} total={session.required_count}
-            wrongKey={wrongKey} petId={petId} petLevel={petLevel} reduceMotion={prefs.reduceMotion} running={ctl.running} hold={!!pinned} />
+          // for "Tiếp theo" (`hold`), the world shows what the answer did but brings no next challenge in.
+          <WorldQuest world={world!} kind={questKind} done={worldDone} total={session.required_count}
+            wrongKey={wrongKey} petId={petId} petLevel={petLevel} reduceMotion={prefs.reduceMotion} running={ctl.running} hold={flowSnap.phase === 'FEEDBACK'} />
         ) : null}
+        {shown && shown.kind === 'word_build' ? ( // one forest for the stage (no key): it walks from one brook to the next
+          <WordForest turn={shown} disabled={disabled} feedback={note?.turnId === shown.turn_id ? note : null} solved={solvedId === shown.turn_id}
+            onSubmit={(ids) => submit(shown, ids)} collected={worldDone} total={session.required_count} petId={petId} petLevel={petLevel}
+            reduceMotion={prefs.reduceMotion} />
+        ) : null}
+        {/* What is replaced from one question to the next: it fades, the world around it (the HUD, the lesson's world, the
+            forest) stays. Keyed by the question, so nothing of one is ever kept for the next. */}
+        <Animated.View style={stageStyle} onLayout={(e) => { scrollView.current.stageTop = e.nativeEvent.layout.y; }}>
+        {shown && shown.kind === 'gate_choice' ? <GateChoice key={shown.turn_id} turn={shown} onChoose={(id) => submit(shown, id)} disabled={disabled} result={choiceResult} petId={petId} petLevel={petLevel} reduceMotion={prefs.reduceMotion} /> : null}
+        {shown && shown.kind === 'bridge_order' ? <WordBridge key={shown.turn_id} turn={shown} onSubmit={(ids) => submit(shown, ids)} disabled={disabled} petId={petId} petLevel={petLevel} reduceMotion={prefs.reduceMotion} /> : null}
         {shown && shown.kind === 'spell_fix' ? (
           <SpellDetective key={shown.turn_id} turn={shown} disabled={disabled} feedback={note?.turnId === shown.turn_id ? note : null}
             onFind={(id) => submit(shown, [id])} onFix={(word, option) => submit(shown, [word, option])} />
@@ -695,10 +721,9 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
           <CodePath key={shown.turn_id} turn={shown} disabled={disabled} feedback={note?.turnId === shown.turn_id ? note : null}
             onRun={(program) => submit(shown, program)} petId={petId} petLevel={petLevel} reduceMotion={prefs.reduceMotion} />
         ) : null}
-        {shown?.kind === 'lab_experiment' || labSolved ? ( // one bench for the stage: the experiment done shows its result first
-          <MagicLab turn={shown?.kind === 'lab_experiment' ? shown : null} disabled={disabled} solved={labSolved}
-            onContinue={() => { setLabSolved(null); onTutorialEvent?.('continue'); }}
-            feedback={shown && note?.turnId === shown.turn_id ? note : null} onSubmit={(answer) => { if (shown) submit(shown, answer); }}
+        {shown?.kind === 'lab_experiment' ? ( // one bench for the stage
+          <MagicLab turn={shown} disabled={disabled} solved={solvedId === shown.turn_id ? { turnId: shown.turn_id } : null}
+            feedback={note?.turnId === shown.turn_id ? note : null} onSubmit={(answer) => submit(shown, answer)}
             petId={petId} petLevel={petLevel} reduceMotion={prefs.reduceMotion} />
         ) : null}
         {shown && shown.kind === 'order_steps' ? (
@@ -714,52 +739,54 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
             onChoose={(id) => submit(shown, id)} result={choiceResult} reduceMotion={prefs.reduceMotion} />
         ) : null}
         {shown && shown.kind === 'timeline_place' ? (
-          <TimelineQuest key={shown.turn_id} turn={shown} disabled={disabled} solved={pinnedId === shown.turn_id}
+          <TimelineQuest key={shown.turn_id} turn={shown} disabled={disabled} solved={solvedId === shown.turn_id}
             feedback={note?.turnId === shown.turn_id ? note : null} onSubmit={(a) => submit(shown, a)} reduceMotion={prefs.reduceMotion}
             petId={petId} petLevel={petLevel} />
         ) : null}
         {shown && shown.kind === 'sentence_build' ? (
-          <SentenceTrain key={shown.turn_id} turn={shown} disabled={disabled} solved={pinnedId === shown.turn_id}
+          <SentenceTrain key={shown.turn_id} turn={shown} disabled={disabled} solved={solvedId === shown.turn_id}
             feedback={note?.turnId === shown.turn_id ? note : null} onSubmit={(a) => submit(shown, a)} reduceMotion={prefs.reduceMotion}
             speak={shown.prompt.lang === 'en' ? (text) => speakEnglish(text, prefsRef.current) : undefined} />
         ) : null}
         {shown && shown.kind === 'geometry_build' ? (
-          <GeometryWorkshop key={shown.turn_id} turn={shown} disabled={disabled} solved={pinnedId === shown.turn_id}
+          <GeometryWorkshop key={shown.turn_id} turn={shown} disabled={disabled} solved={solvedId === shown.turn_id}
             feedback={note?.turnId === shown.turn_id ? note : null} onSubmit={(a) => submit(shown, a)} reduceMotion={prefs.reduceMotion} />
         ) : null}
         {shown && shown.kind === 'equation_balance' ? (
-          <EquationBalance key={shown.turn_id} turn={shown} disabled={disabled} solved={pinnedId === shown.turn_id}
+          <EquationBalance key={shown.turn_id} turn={shown} disabled={disabled} solved={solvedId === shown.turn_id}
             feedback={note?.turnId === shown.turn_id ? note : null} onSubmit={(a) => submit(shown, a)} reduceMotion={prefs.reduceMotion}
             petId={petId} petLevel={petLevel} />
         ) : null}
         {shown && shown.kind === 'number_line_place' ? (
-          <NumberLineBridge key={shown.turn_id} turn={shown} disabled={disabled} solved={pinnedId === shown.turn_id}
+          <NumberLineBridge key={shown.turn_id} turn={shown} disabled={disabled} solved={solvedId === shown.turn_id}
             feedback={note?.turnId === shown.turn_id ? note : null} onSubmit={(a) => submit(shown, a)} reduceMotion={prefs.reduceMotion}
             petId={petId} petLevel={petLevel} />
         ) : null}
         {shown && shown.kind === 'step_solve' ? (
-          <StepSolver key={shown.turn_id} turn={shown} disabled={disabled} solved={pinnedId === shown.turn_id}
+          <StepSolver key={shown.turn_id} turn={shown} disabled={disabled} solved={solvedId === shown.turn_id}
             feedback={note?.turnId === shown.turn_id ? note : null} onSubmit={(a) => submit(shown, a)} reduceMotion={prefs.reduceMotion}
             petId={petId} petLevel={petLevel} />
         ) : null}
         {shown && shown.kind === 'story_evidence' ? (
-          <StoryDetective key={shown.turn_id} turn={shown} disabled={disabled} solved={pinnedId === shown.turn_id}
+          <StoryDetective key={shown.turn_id} turn={shown} disabled={disabled} solved={solvedId === shown.turn_id}
             feedback={note?.turnId === shown.turn_id ? note : null} onSubmit={(a) => submit(shown, a)} reduceMotion={prefs.reduceMotion}
             petId={petId} petLevel={petLevel} />
         ) : null}
         {shown && shown.kind === 'sentence_paint' ? (
-          <SentenceXray key={shown.turn_id} turn={shown} disabled={disabled} solved={pinnedId === shown.turn_id}
+          <SentenceXray key={shown.turn_id} turn={shown} disabled={disabled} solved={solvedId === shown.turn_id}
             feedback={note?.turnId === shown.turn_id ? note : null} onSubmit={(a) => submit(shown, a)} reduceMotion={prefs.reduceMotion} />
         ) : null}
         {shown && (shown.kind === 'missing_number' || shown.kind === 'compare') ? (
-          <MathBridge turn={shown} built={session.resolved_count} total={session.required_count} draft={draft} setDraft={setDraft}
+          <MathBridge key={shown.turn_id} turn={shown} built={worldDone} total={session.required_count} draft={draft} setDraft={setDraft}
             onSubmit={(a) => submit(shown, a)} disabled={disabled} result={choiceResult} reduceMotion={prefs.reduceMotion} />
         ) : null}
         {explained && pinned && cardShown ? (
-          // Right under the options; keyed by the question, so the next one never shows the last one's explanation.
-          <AnswerFeedback key={explained.turn.turn_id} result={explained.result} kind={explained.turn.kind} graded={explained.graded}
+          // Right under the options; keyed by the question, so the next one never shows the last one's explanation. Its key
+          // is its own: the scene next to it is keyed by the question too, and two with one key leave the old one on screen.
+          <AnswerFeedback key={`feedback:${explained.turn.turn_id}`} result={explained.result} kind={explained.turn.kind} graded={explained.graded}
             nextLabel={nextLabel} onNext={goNext} reduceMotion={prefs.reduceMotion} onLayout={revealCard} />
         ) : null}
+        </Animated.View>
         {session.subject.code === 'math' && !tutorial ? (
           <View style={styles.scratch}>
             <Pressable onPress={() => setScratchOpen((o) => !o)} accessibilityRole="button" accessibilityState={{ expanded: scratchOpen }}
@@ -794,7 +821,7 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
           </View>
         </Steady>
       ) : shown && !explained ? (
-        <View style={styles.inputArea} onLayout={measure('input')} pointerEvents={touch} testID="game-input-area">
+        <Animated.View style={[styles.inputArea, stageStyle]} onLayout={measure('input')} pointerEvents={touch} testID="game-input-area">
           {shown.kind === 'math_input' ? (
             <NumberPad value={draft} onChange={setDraft} onSubmit={() => submit(shown, draft)} allowNegative={!!shown.prompt.allow_negative}
               disabled={disabled} submitLabel="Tấn công" />
@@ -814,7 +841,7 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
               </Pressable>
             ) : null}
           </View>}
-        </View>
+        </Animated.View>
       ) : null}
 
       {tutorial && coach ? (

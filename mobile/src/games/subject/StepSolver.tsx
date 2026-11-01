@@ -45,7 +45,7 @@ export function StepSolver({ turn, disabled, feedback, solved, onSubmit, reduceM
 
   // Wrong: a right calculation stays (kept), only the result is typed again; a wrong one is shaken and rebuilt.
   useEffect(() => {
-    if (!feedback || feedback.tone !== 'bad') return;
+    if (!feedback || feedback.tone !== 'bad' || feedback.final) return;
     setOwnResult('');
     if (!feedback.kept?.length) setOwn((c) => ({ ...c, op: null }));
   }, [feedback]);

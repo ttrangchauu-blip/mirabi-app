@@ -114,7 +114,7 @@
     "defense": {
       "game_mode": "practice", "gameplay_version": 1, "tutorial_version": 4, "subject": "math", "hearts": 3, "skippable": true,
       "done_title": "Đòn đánh tuyệt vời! Bạn đã sẵn sàng bảo vệ căn cứ!",
-      "ready": ["Đúng 3 câu liền, pet tung kỹ năng đặc biệt.", "Sai mất 1 tim: sửa đáp án rồi tấn công tiếp."],
+      "ready": ["Đúng 3 câu liền, pet tung kỹ năng đặc biệt.", "Sai mất 1 tim, câu đó quay lại sau."],
       "demo": [
         {"id": "t1", "build": "item", "item": {"kind": "math_input", "skill_label": "Hướng dẫn",
           "prompt": {"expression": "3 + 4", "allow_negative": false}, "answer": {"value": "7", "op": "add", "operands": [3, 4]},
@@ -125,7 +125,7 @@
          "demo_animation": "arrow", "expected_action": "next", "release": ["t1"], "advance_ms": 3200},
         {"id": "attack", "action": "type", "instruction": "Bấm 7 trên bàn phím số rồi nhấn Tấn công", "target": "input",
          "demo_animation": "hand_tap", "expected_action": "answer", "expected_result": "correct",
-         "success_feedback": "Trúng đòn! Quái vật mất máu!", "retry_feedback": "3 + 4 = 7. Bấm 7 rồi nhấn Tấn công nhé."},
+         "success_feedback": "Trúng đòn! Quái vật mất máu!", "retry_feedback": "3 + 4 = 7. Câu này sẽ quay lại."},
         {"id": "hit", "action": "observe", "instruction": "Thanh máu của quái vật giảm dần. Pet thắng!", "target": "play",
          "demo_animation": "watch", "expected_action": "next", "advance_ms": 2600}
       ]
@@ -133,7 +133,7 @@
     "math_bridge": {
       "game_mode": "practice", "gameplay_version": 1, "tutorial_version": 4, "subject": "math", "hearts": 3, "skippable": true,
       "done_title": "Cây cầu đầu tiên đã xong!",
-      "ready": ["Mỗi câu đúng lát thêm một đoạn cầu.", "Sai mất 1 tim; chọn dấu sai thì câu đó quay lại sau."],
+      "ready": ["Mỗi câu đúng lát thêm một đoạn cầu.", "Sai mất 1 tim, câu đó quay lại sau."],
       "demo": [
         {"id": "t1", "build": "item", "item": {"kind": "missing_number", "skill_label": "Hướng dẫn",
           "prompt": {"equation": "5 + __ = 8", "allow_negative": false},
@@ -146,7 +146,7 @@
       "steps": [
         {"id": "missing", "action": "type", "instruction": "Tìm số còn thiếu: bấm 3 rồi nhấn Đặt đoạn cầu", "target": "play",
          "demo_animation": "hand_tap", "expected_action": "answer", "expected_result": "correct", "release": ["t1"],
-         "success_feedback": "Một đoạn cầu được lát!", "retry_feedback": "8 − 5 = 3. Sửa lại thành 3 nhé."},
+         "success_feedback": "Một đoạn cầu được lát!", "retry_feedback": "8 − 5 = 3. Câu này sẽ quay lại."},
         {"id": "compare", "action": "tap", "instruction": "So sánh 9 và 6: chạm dấu đúng", "target": "play", "demo_animation": "hand_tap",
          "expected_action": "answer", "expected_result": "correct", "release": ["t2"], "success_feedback": "Đúng rồi!",
          "retry_feedback": "9 lớn hơn 6 nên chọn dấu >. Câu này sẽ quay lại."},
@@ -167,7 +167,7 @@
          "expected_action": "next", "release": ["t1"], "advance_ms": 2800},
         {"id": "build", "action": "drag", "instruction": "Kéo m → è → o vào ổ khoá rồi nhấn Mở cổng", "target": "play",
          "demo_animation": "hand_drag", "expected_action": "answer", "expected_result": "correct",
-         "success_feedback": "Hạt giống tri thức nảy mầm!", "retry_feedback": "Chưa đúng. Thứ tự là m → è → o, đổi chỗ rồi mở cổng lại."},
+         "success_feedback": "Hạt giống tri thức nảy mầm!", "retry_feedback": "Chưa đúng. Thứ tự là m → è → o. Câu này sẽ quay lại."},
         {"id": "grow", "action": "observe", "instruction": "Cổng mở, pet nhận một mảnh sách!", "target": "play",
          "demo_animation": "watch", "expected_action": "next", "advance_ms": 2400}
       ]
@@ -184,10 +184,10 @@
       "steps": [
         {"id": "find", "action": "tap", "instruction": "Chạm vào tiếng viết sai trong câu", "target": "play", "demo_animation": "hand_tap",
          "expected_action": "answer", "expected_result": "correct", "release": ["t1"], "success_feedback": "Tìm ra rồi!",
-         "retry_feedback": "Tiếng đó viết đúng. Đọc kĩ lại câu nhé."},
+         "retry_feedback": "Tiếng đó viết đúng. Câu này sẽ quay lại."},
         {"id": "fix", "action": "tap", "instruction": "Chọn cách viết đúng", "target": "play", "demo_animation": "hand_tap",
          "expected_action": "answer", "expected_result": "correct", "success_feedback": "Chính xác!",
-         "retry_feedback": "Chưa đúng. Cốc “nước” cam viết với n."},
+         "retry_feedback": "Chưa đúng. Cốc “nước” cam viết với n. Câu này sẽ quay lại."},
         {"id": "read", "action": "tap", "instruction": "Đọc giải thích rồi nhấn Tiếp tục", "target": "play", "demo_animation": "pulse",
          "expected_action": "continue"}
       ]
@@ -195,7 +195,7 @@
     "sorting": {
       "game_mode": "practice", "gameplay_version": 1, "tutorial_version": 4, "subject": "science", "hearts": 0, "skippable": true,
       "done_title": "Bạn đã biết cách phân loại!",
-      "ready": ["Xếp nhầm nhóm thì thẻ quay về kèm giải thích.", "Không tính giờ, không mất tim."],
+      "ready": ["Xếp nhầm nhóm thì có đáp án kèm giải thích.", "Không tính giờ, không mất tim."],
       "demo": [
         {"id": "t1", "build": "sort_card",
          "set": {"key": "tutorial", "version": 1, "title": "Động vật hay thực vật?",
@@ -205,13 +205,13 @@
       "steps": [
         {"id": "sort", "action": "drag", "instruction": "Kéo thẻ “Con mèo” vào nhóm phù hợp", "target": "play", "demo_animation": "hand_drag",
          "expected_action": "answer", "expected_result": "correct", "release": ["t1"], "success_feedback": "Đúng nhóm rồi!",
-         "retry_feedback": "Thẻ quay về chỗ cũ. Mèo là động vật, thử lại nhé."}
+         "retry_feedback": "Mèo là động vật. Câu này sẽ quay lại."}
       ]
     },
     "code_path": {
       "game_mode": "practice", "gameplay_version": 1, "tutorial_version": 4, "subject": "informatics", "hearts": 0, "skippable": true,
       "done_title": "Robot đã tới đích! Bạn đã biết lập trình đường đi!",
-      "ready": ["Thử lại bao nhiêu lần cũng được.", "Mỗi màn có số lệnh tối đa: dùng khối Lặp lại cho gọn."],
+      "ready": ["Chưa tới đích thì có đáp án kèm giải thích.", "Mỗi màn có số lệnh tối đa: dùng khối Lặp lại cho gọn."],
       "demo": [
         {"id": "t1", "build": "code_path",
          "level": {"key": "tutorial", "cols": 3, "rows": 2, "start": {"x": 0, "y": 1, "dir": "E"}, "goal": {"x": 2, "y": 1}, "walls": [],
@@ -220,13 +220,13 @@
       "steps": [
         {"id": "program", "action": "tap", "instruction": "Chạm Tiến 2 lần rồi nhấn Chạy", "target": "play", "demo_animation": "hand_tap",
          "expected_action": "answer", "expected_result": "correct", "release": ["t1"], "success_feedback": "Robot đã tới cờ đích!",
-         "retry_feedback": "Chưa tới đích. Pet cần đi thẳng 2 ô: sửa lệnh rồi chạy lại."}
+         "retry_feedback": "Chưa tới đích. Pet cần đi thẳng 2 ô. Câu này sẽ quay lại."}
       ]
     },
     "order": {
       "game_mode": "practice", "gameplay_version": 1, "tutorial_version": 4, "subject": "science", "hearts": 0, "skippable": true,
       "done_title": "Bạn đã biết cách sắp xếp!",
-      "ready": ["Xếp sai: thẻ đúng vị trí được giữ lại.", "Không tính giờ, không mất tim."],
+      "ready": ["Xếp sai thì có thứ tự đúng kèm giải thích.", "Không tính giờ, không mất tim."],
       "demo": [
         {"id": "t1", "build": "order", "title": "Vòng đời cây đậu",
          "task": {"key": "tutorial", "prompt": "Sắp xếp vòng đời cây đậu", "items": ["Hạt đậu", "Cây con", "Cây ra hoa"],
@@ -236,7 +236,7 @@
       "steps": [
         {"id": "order", "action": "tap", "instruction": "Chạm Hạt đậu → Cây con → Cây ra hoa rồi Kiểm tra", "target": "play",
          "demo_animation": "hand_tap", "expected_action": "answer", "expected_result": "correct", "release": ["t1"],
-         "success_feedback": "Đúng thứ tự rồi!", "retry_feedback": "Thẻ đúng được khoá lại. Đổi chỗ các thẻ còn lại nhé."},
+         "success_feedback": "Đúng thứ tự rồi!", "retry_feedback": "Chưa đúng thứ tự. Câu này sẽ quay lại."},
         {"id": "read", "action": "tap", "instruction": "Đọc giải thích rồi nhấn Tiếp tục", "target": "play", "demo_animation": "pulse",
          "expected_action": "continue"}
       ]
@@ -244,7 +244,7 @@
     "match": {
       "game_mode": "practice", "gameplay_version": 1, "tutorial_version": 4, "subject": "math", "hearts": 0, "skippable": true,
       "done_title": "Bạn đã biết cách ghép cặp!",
-      "ready": ["Ghép sai: các cặp đúng được giữ lại.", "Không tính giờ, không mất tim."],
+      "ready": ["Ghép sai thì có các cặp đúng kèm giải thích.", "Không tính giờ, không mất tim."],
       "demo": [
         {"id": "t1", "build": "match", "title": "Ghép phép tính",
          "task": {"key": "tutorial", "prompt": "Ghép phép tính với kết quả", "pairs": [["2 × 3", "6"], ["2 × 5", "10"]],
@@ -253,7 +253,7 @@
       "steps": [
         {"id": "match", "action": "tap", "instruction": "Chạm thẻ trái rồi thẻ phải để ghép, xong nhấn Kiểm tra", "target": "play",
          "demo_animation": "hand_tap", "expected_action": "answer", "expected_result": "correct", "release": ["t1"],
-         "success_feedback": "Ghép đúng hết!", "retry_feedback": "Cặp đúng được giữ lại. Ghép lại cặp còn sai nhé."},
+         "success_feedback": "Ghép đúng hết!", "retry_feedback": "Có cặp chưa đúng. Câu này sẽ quay lại."},
         {"id": "read", "action": "tap", "instruction": "Đọc giải thích rồi nhấn Tiếp tục", "target": "play", "demo_animation": "pulse",
          "expected_action": "continue"}
       ]
@@ -280,7 +280,7 @@
     "lab": {
       "game_mode": "practice", "gameplay_version": 1, "tutorial_version": 4, "subject": "science", "hearts": 0, "skippable": true,
       "done_title": "Đèn sáng rồi! Bạn đã biết làm thí nghiệm!",
-      "ready": ["Đây là thí nghiệm mô phỏng, không tự làm với điện thật.", "Lắp chưa đúng: dụng cụ đúng được giữ lại."],
+      "ready": ["Đây là thí nghiệm mô phỏng, không tự làm với điện thật.", "Lắp chưa đúng thì có cách lắp đúng kèm giải thích."],
       "demo": [
         {"id": "t1", "build": "lab", "title": "Lắp mạch điện", "scene": "circuit",
          "task": {"key": "tutorial", "goal": "Kéo pin, bóng đèn và dây đồng vào mạch rồi bật công tắc.",
@@ -296,15 +296,15 @@
       "steps": [
         {"id": "build", "action": "connect", "instruction": "Kéo pin, bóng đèn, dây đồng vào mạch rồi bật công tắc", "target": "play",
          "demo_animation": "hand_drag", "expected_action": "answer", "expected_result": "correct", "release": ["t1"],
-         "success_feedback": "Mạch kín, đèn sáng!", "retry_feedback": "Mạch chưa kín. Dụng cụ đúng được giữ lại, thử vật khác nhé."},
-        {"id": "read", "action": "tap", "instruction": "Quan sát, đọc giải thích rồi nhấn Thí nghiệm tiếp theo", "target": "play",
+         "success_feedback": "Mạch kín, đèn sáng!", "retry_feedback": "Mạch chưa kín. Câu này sẽ quay lại."},
+        {"id": "read", "action": "tap", "instruction": "Quan sát, đọc giải thích rồi nhấn Tiếp tục", "target": "play",
          "demo_animation": "pulse", "expected_action": "continue"}
       ]
     },
     "timeline": {
       "game_mode": "practice", "gameplay_version": 1, "tutorial_version": 4, "subject": "history", "hearts": 0, "skippable": true,
       "done_title": "Dòng thời gian đã sáng! Bạn đã sẵn sàng!",
-      "ready": ["Đặt sai: sự kiện đúng mốc được giữ lại.", "Không tính giờ, không mất tim."],
+      "ready": ["Đặt sai thì có thứ tự đúng kèm giải thích.", "Không tính giờ, không mất tim."],
       "demo": [
         {"id": "t1", "build": "timeline", "title": "Mốc lịch sử",
          "task": {"key": "tutorial", "prompt": "Đặt các sự kiện lên dòng thời gian.",
@@ -315,7 +315,7 @@
       "steps": [
         {"id": "place", "action": "drag", "instruction": "Kéo từng sự kiện lên mốc năm của nó rồi Kiểm tra", "target": "play",
          "demo_animation": "hand_drag", "expected_action": "answer", "expected_result": "correct", "release": ["t1"],
-         "success_feedback": "Đúng hết các mốc!", "retry_feedback": "Sự kiện đúng mốc được giữ lại, đặt lại sự kiện còn sai nhé."},
+         "success_feedback": "Đúng hết các mốc!", "retry_feedback": "Có sự kiện chưa đúng mốc. Câu này sẽ quay lại."},
         {"id": "read", "action": "tap", "instruction": "Đọc giải thích rồi nhấn Tiếp tục", "target": "play", "demo_animation": "pulse",
          "expected_action": "continue"}
       ]
@@ -323,7 +323,7 @@
     "sentence": {
       "game_mode": "practice", "gameplay_version": 1, "tutorial_version": 4, "subject": "english", "hearts": 0, "skippable": true,
       "done_title": "Đoàn tàu câu đã chạy! Bạn đã sẵn sàng!",
-      "ready": ["Có thẻ không thuộc câu: để nó lại bãi.", "Sai: phần đầu câu đúng được khoá lại."],
+      "ready": ["Có thẻ không thuộc câu: để nó lại bãi.", "Sai thì có câu đúng kèm giải thích."],
       "demo": [
         {"id": "t1", "build": "sentence", "title": "Xây câu",
          "task": {"key": "tutorial", "tiles": ["I", "like", "cats."], "distractors": ["is"], "vi": "Tôi thích mèo.",
@@ -332,7 +332,7 @@
       "steps": [
         {"id": "build", "action": "drag", "instruction": "Kéo I → like → cats. lên toa; để thẻ “is” lại", "target": "play",
          "demo_animation": "hand_drag", "expected_action": "answer", "expected_result": "correct", "release": ["t1"],
-         "success_feedback": "Câu đúng! Tàu sáng đèn!", "retry_feedback": "Toa sai viền đỏ: sửa đúng chỗ đó rồi kiểm tra lại."},
+         "success_feedback": "Câu đúng! Tàu sáng đèn!", "retry_feedback": "Câu chưa đúng. Câu này sẽ quay lại."},
         {"id": "read", "action": "tap", "instruction": "Đọc giải thích rồi nhấn Tiếp tục", "target": "play", "demo_animation": "pulse",
          "expected_action": "continue"}
       ]
@@ -349,7 +349,7 @@
       "steps": [
         {"id": "turn", "action": "drag", "instruction": "Kéo tay cầm vàng tới 90° rồi nhấn Kiểm tra", "target": "play",
          "demo_animation": "hand_drag", "expected_action": "answer", "expected_result": "correct", "release": ["t1"],
-         "success_feedback": "Góc vuông rồi!", "retry_feedback": "Chưa phải góc vuông. Xoay tới đúng 90° nhé."},
+         "success_feedback": "Góc vuông rồi!", "retry_feedback": "Chưa phải góc vuông. Câu này sẽ quay lại."},
         {"id": "read", "action": "tap", "instruction": "Đọc giải thích rồi nhấn Tiếp tục", "target": "play", "demo_animation": "pulse",
          "expected_action": "continue"}
       ]
@@ -366,7 +366,7 @@
       "steps": [
         {"id": "balance", "action": "interact", "instruction": "Bấm + để có 2H₂ và 2H₂O rồi nhấn Kiểm tra", "target": "play",
          "demo_animation": "hand_tap", "expected_action": "answer", "expected_result": "correct", "release": ["t1"],
-         "success_feedback": "Cân thăng bằng!", "retry_feedback": "Xem bảng đếm nguyên tử: nguyên tố còn lệch được chỉ ra."},
+         "success_feedback": "Cân thăng bằng!", "retry_feedback": "Hai vế chưa cân bằng. Câu này sẽ quay lại."},
         {"id": "read", "action": "tap", "instruction": "Đọc giải thích rồi nhấn Tiếp tục", "target": "play", "demo_animation": "pulse",
          "expected_action": "continue"}
       ]
@@ -374,7 +374,7 @@
     "number_line": {
       "game_mode": "practice", "gameplay_version": 1, "tutorial_version": 1, "subject": "math", "hearts": 0, "skippable": true,
       "done_title": "Pet đã qua cầu! Bạn đã biết đặt số lên trục số!",
-      "ready": ["Số bé bên trái, số lớn bên phải; tự đếm các vạch không ghi số.", "Sai: số đúng vạch được khoá xanh."],
+      "ready": ["Số bé bên trái, số lớn bên phải; tự đếm các vạch không ghi số.", "Sai thì có vị trí đúng kèm giải thích."],
       "demo": [
         {"id": "t1", "build": "number_line", "title": "Cầu trục số",
          "task": {"key": "tutorial", "prompt": "Đặt số 7 lên trục số.", "line": {"from": 0, "to": 10, "step": 5, "snap": 1},
@@ -383,7 +383,7 @@
       "steps": [
         {"id": "place", "action": "drag", "instruction": "Chạm trên cầu hoặc dùng ▶ để cắm cờ 7, rồi nhấn Kiểm tra", "target": "play",
          "demo_animation": "hand_drag", "expected_action": "answer", "expected_result": "correct", "release": ["t1"],
-         "success_feedback": "Đúng vạch số 7!", "retry_feedback": "Đếm từ vạch 5: thêm hai vạch nữa là 7."},
+         "success_feedback": "Đúng vạch số 7!", "retry_feedback": "Đếm từ vạch 5: thêm hai vạch nữa là 7. Câu này sẽ quay lại."},
         {"id": "read", "action": "tap", "instruction": "Đọc giải thích rồi nhấn Tiếp tục", "target": "play", "demo_animation": "pulse",
          "expected_action": "continue"}
       ]
@@ -401,7 +401,7 @@
       "steps": [
         {"id": "solve", "action": "tap", "instruction": "Chạm 8, dấu −, 3, bấm 5 rồi nhấn Kiểm tra", "target": "play",
          "demo_animation": "hand_tap", "expected_action": "answer", "expected_result": "correct", "release": ["t1"],
-         "success_feedback": "Đúng rồi: 8 − 3 = 5!", "retry_feedback": "Cho bạn là bớt đi: chọn dấu −."},
+         "success_feedback": "Đúng rồi: 8 − 3 = 5!", "retry_feedback": "Cho bạn là bớt đi: chọn dấu −. Câu này sẽ quay lại."},
         {"id": "read", "action": "tap", "instruction": "Đọc giải thích rồi nhấn Tiếp tục", "target": "play", "demo_animation": "pulse",
          "expected_action": "continue"}
       ]
@@ -409,7 +409,7 @@
     "story_detective": {
       "game_mode": "practice", "gameplay_version": 1, "tutorial_version": 1, "subject": "vietnamese", "hearts": 0, "skippable": true,
       "done_title": "Đã phá án! Bạn đã là thám tử đọc hiểu!",
-      "ready": ["Tìm câu bằng chứng trước, đáp án hiện ra sau.", "Chọn sai thì lựa chọn đó bị gạch, kèm gợi ý."],
+      "ready": ["Tìm câu bằng chứng trước, đáp án hiện ra sau.", "Chọn sai thì có đáp án đúng kèm giải thích."],
       "demo": [
         {"id": "t1", "build": "story_detective", "title": "Thám tử đọc hiểu",
          "task": {"key": "tutorial", "passage": "Nhà Na có một chú mèo. Chú mèo tên là Mướp. Mướp rất thích nằm sưởi nắng. Tối đến, Mướp đi bắt chuột.",
@@ -422,10 +422,10 @@
       "steps": [
         {"id": "clue", "action": "tap", "instruction": "Chạm câu cho biết tên chú mèo, rồi nhấn Kiểm tra", "target": "play",
          "demo_animation": "hand_tap", "expected_action": "answer", "expected_result": "correct", "release": ["t1"],
-         "success_feedback": "Đúng manh mối!", "retry_feedback": "Câu đó chưa nói tên mèo. Tìm câu có chữ “tên”."},
+         "success_feedback": "Đúng manh mối!", "retry_feedback": "Câu đó chưa nói tên mèo. Câu này sẽ quay lại."},
         {"id": "answer", "action": "tap", "instruction": "Dựa vào manh mối, chọn tên chú mèo rồi nhấn Kiểm tra", "target": "play",
          "demo_animation": "hand_tap", "expected_action": "answer", "expected_result": "correct",
-         "success_feedback": "Đã phá án!", "retry_feedback": "Đọc lại câu manh mối nhé."},
+         "success_feedback": "Đã phá án!", "retry_feedback": "Chưa đúng. Câu này sẽ quay lại."},
         {"id": "read", "action": "tap", "instruction": "Đọc giải thích rồi nhấn Tiếp tục", "target": "play", "demo_animation": "pulse",
          "expected_action": "continue"}
       ]
@@ -433,7 +433,7 @@
     "sentence_xray": {
       "game_mode": "practice", "gameplay_version": 1, "tutorial_version": 1, "subject": "vietnamese", "hearts": 0, "skippable": true,
       "done_title": "Câu đã sáng lên! Bạn đã biết soi câu!",
-      "ready": ["Mỗi bút màu là một vai trò; từ không thuộc vai trò nào để trống.", "Sai: từ tô đúng được khoá lại."],
+      "ready": ["Mỗi bút màu là một vai trò; từ không thuộc vai trò nào để trống.", "Sai thì có các từ đúng màu kèm giải thích."],
       "demo": [
         {"id": "t1", "build": "sentence_xray", "title": "Soi câu",
          "task": {"key": "tutorial", "prompt": "Tô từ chỉ sự vật và từ chỉ hoạt động.", "roles": ["Sự vật", "Hoạt động"],
@@ -442,7 +442,7 @@
       "steps": [
         {"id": "paint", "action": "tap", "instruction": "Bút Sự vật: tô Bé, cây; bút Hoạt động: tô tưới. Rồi nhấn Kiểm tra", "target": "play",
          "demo_animation": "hand_tap", "expected_action": "answer", "expected_result": "correct", "release": ["t1"],
-         "success_feedback": "Mỗi từ đúng màu!", "retry_feedback": "Từ tô đúng đã khoá; xem lời nhắc để sửa từ còn lại."},
+         "success_feedback": "Mỗi từ đúng màu!", "retry_feedback": "Có từ tô chưa đúng. Câu này sẽ quay lại."},
         {"id": "read", "action": "tap", "instruction": "Đọc giải thích rồi nhấn Tiếp tục", "target": "play", "demo_animation": "pulse",
          "expected_action": "continue"}
       ]

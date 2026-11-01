@@ -238,7 +238,7 @@ describe('the worlds\' scenes', () => {
     view.unmount();
   });
 
-  it('held for "Câu tiếp theo": the answer plays at once, the next challenge comes only once released', () => {
+  it('held for "Tiếp theo": the answer plays at once, the next challenge comes only once released', () => {
     // Math Kingdom: the monster is defeated, the next one walks in (and the stage number moves) only then.
     let { view, set, cues } = scene(KingdomQuest);
     set({ done: 1 }); ms(1500);
@@ -350,7 +350,7 @@ describe('a lesson game in its world', () => {
     expect(screen.getByLabelText('Chuyến du hành hoàn thành: tìm được 1 hiện vật')).toBeTruthy(); // on the shelf
   });
 
-  it('Toán lớp 1, Sắp xếp: until "Câu tiếp theo" only the question answered and its monster are on screen, never the next', async () => {
+  it('Toán lớp 1, Sắp xếp: until "Tiếp theo" only the question answered and its monster are on screen, never the next', async () => {
     const ascending = { ...turn('order_steps', { title: 'Xếp số theo thứ tự', prompt: 'Xếp các số theo thứ tự từ bé đến lớn.',
       cards: [{ id: 'c1', text: '6' }, { id: 'c2', text: '5' }, { id: 'c3', text: '8' }, { id: 'c4', text: '2' }], first: 'Bé nhất', last: 'Lớn nhất' }) };
     const descending = { ...turn('order_steps', { title: 'Xếp số theo thứ tự', prompt: 'Xếp các số theo thứ tự từ lớn đến bé.',
@@ -374,9 +374,11 @@ describe('a lesson game in its world', () => {
     expect(screen.getAllByRole('button', { name: 'Kiểm tra' })).toHaveLength(1);
     expect(screen.getByLabelText('Rừng phép thuật: pet đấu với Slime')).toBeTruthy();
     expect(screen.getByLabelText(/^Màn 1 trên/)).toBeTruthy();
-    fireEvent.press(screen.getByRole('button', { name: 'Câu tiếp theo' }));
+    fireEvent.press(screen.getByRole('button', { name: 'Tiếp theo' }));
     await act(async () => { jest.advanceTimersByTime(0); });
-    // Now the next question, alone, and the next monster walks in.
+    // It leaves first; then the next question, alone, and the next monster walks in.
+    expect(screen.queryByText('Xếp các số theo thứ tự từ lớn đến bé.')).toBeNull();
+    await act(async () => { jest.advanceTimersByTime(500); });
     expect(screen.getByText('Xếp các số theo thứ tự từ lớn đến bé.')).toBeTruthy();
     expect(screen.queryByText('Xếp các số theo thứ tự từ bé đến lớn.')).toBeNull();
     expect(screen.queryByTestId('answer-feedback')).toBeNull();

@@ -268,7 +268,7 @@ def test_catalog_shows_the_programme_of_the_grade_and_never_another_grade(client
     assert client.get("/api/learning/catalog?grade=grade13", headers=me).status_code == 422
 
 
-def test_ghep_chu_stage_no_hearts_no_clock_mistakes_fixed_and_recorded(client, db):
+def test_ghep_chu_stage_no_hearts_no_clock_mistakes_explained_and_recorded(client, db):
     me = account(client, age=6, school_grade="grade1")
     session = play(client, me, "word_builder", grade="grade1")
     assert (session["game"], session["required_count"], session["hearts_max"], session["timed"]) == ("word_builder", 10, 0, False)
@@ -277,14 +277,17 @@ def test_ghep_chu_stage_no_hearts_no_clock_mistakes_fixed_and_recorded(client, d
     right = right_answer(db, turn)
     wrong = list(reversed(right))
     res = answer(client, me, session["id"], turn["turn_id"], wrong).json()
-    assert res["result"]["correct"] is False and res["result"]["retry_allowed"] and res["result"]["feedback"]
-    assert res["result"]["hearts_delta"] == 0 and res["session"]["status"] == "active"
-    res = answer(client, me, session["id"], turn["turn_id"], right).json()
-    assert res["result"]["outcome"] == "corrected"  # right after a mistake is never "first try"
+    # One answer per question: the right one and the explanation come with the result, the next question is already open.
+    result = res["result"]
+    assert result["correct"] is False and result["resolved"] and not result["retry_allowed"] and result["feedback"]
+    assert result["correct_answer"] and result["explanation"] and result["outcome"] == "wrong" and result["practice_added"]
+    assert result["hearts_delta"] == 0 and res["session"]["status"] == "active"
+    assert res["session"]["open_turns"][0]["turn_id"] != turn["turn_id"]
+    assert answer(client, me, session["id"], turn["turn_id"], right).status_code == 409  # that question is over
     done = finish(client, me, db, res["session"])
     assert done["status"] == "completed" and done["reward"]["status"] in ("granted", "daily_task")
     review = client.get("/api/learning/review?subject=vietnamese", headers=me).json()["groups"]
-    assert review and review[0]["items"][0]["reason"] == "corrected"
+    assert review and review[0]["items"][0]["reason"] == "wrong"
     stage = client.post("/api/learning/review/sessions", headers=me,
                         json={"topic_id": review[0]["topic"]["id"], "timezone": "UTC"})
     assert stage.status_code == 201 and stage.json()["open_turns"][0]["kind"] == "word_build"
@@ -298,14 +301,38 @@ def test_tham_tu_chinh_ta_sends_the_spellings_only_after_the_word_is_found(clien
     item = db.scalar(select(LearningSessionItem).where(LearningSessionItem.turn_id == turn["turn_id"]))
     expected = json.loads(item.answer_json)
     other = next(t["id"] for t in turn["prompt"]["tokens"] if t["id"] != expected["wrong_id"])
-    res = answer(client, me, session["id"], turn["turn_id"], [other]).json()
-    assert res["result"]["error_type"] == "wrong_word" and "viết đúng rồi" in res["result"]["feedback"]
     res = answer(client, me, session["id"], turn["turn_id"], [expected["wrong_id"]]).json()
     assert res["result"]["correct"] is True and res["result"]["resolved"] is False and "chọn cách viết đúng" in res["result"]["feedback"]
     opened = res["session"]["open_turns"][0]
-    assert opened["prompt"]["step"] == "fix" and len(opened["prompt"]["options"]) >= 2
+    assert opened["turn_id"] == turn["turn_id"] and opened["prompt"]["step"] == "fix" and len(opened["prompt"]["options"]) >= 2
     res = answer(client, me, session["id"], turn["turn_id"], [expected["wrong_id"], expected["right_option"]]).json()
-    assert res["result"]["outcome"] == "corrected" and res["result"]["explanation"]
+    assert res["result"]["outcome"] == "first_try" and res["result"]["explanation"]
+    # Tapping a word written right ends the question: the sentence written right and why.
+    turn = res["session"]["open_turns"][0]
+    item = db.scalar(select(LearningSessionItem).where(LearningSessionItem.turn_id == turn["turn_id"]))
+    other = next(t["id"] for t in turn["prompt"]["tokens"] if t["id"] != json.loads(item.answer_json)["wrong_id"])
+    res = answer(client, me, session["id"], turn["turn_id"], [other]).json()
+    assert res["result"]["error_type"] == "wrong_word" and "viết đúng rồi" in res["result"]["feedback"]
+    assert res["result"]["resolved"] and res["result"]["correct_answer"] and res["result"]["explanation"]
+
+
+def test_a_question_solved_in_steps_is_asked_again_from_its_first_step(client, db):
+    me = account(client, age=8, school_grade="grade3")
+    session = play(client, me, "spelling_detective")
+    first = session["open_turns"][0]
+    expected = json.loads(db.scalar(select(LearningSessionItem).where(LearningSessionItem.turn_id == first["turn_id"])).answer_json)
+    answer(client, me, session["id"], first["turn_id"], [expected["wrong_id"]])
+    wrong = next(o["id"] for o in client.get(f"/api/learning/sessions/{session['id']}", headers=me).json()["open_turns"][0]["prompt"]["options"]
+                 if o["id"] != expected["right_option"])
+    res = answer(client, me, session["id"], first["turn_id"], [expected["wrong_id"], wrong]).json()
+    assert res["result"]["outcome"] == "wrong" and res["result"]["practice_added"]
+    session = res["session"]
+    while not session["open_turns"][0]["practice"]:
+        session = answer(client, me, session["id"], session["open_turns"][0]["turn_id"], right_answer(db, session["open_turns"][0])).json()["session"]
+    again = session["open_turns"][0]
+    assert again["turn_id"] != first["turn_id"] and again["prompt"]["step"] == "find" and "options" not in again["prompt"]
+    assert "found" not in again["prompt"] and "first_prompt" not in json.dumps(again)
+    assert again["prompt"]["tokens"] == first["prompt"]["tokens"]
 
 
 def test_phan_loai_and_lap_trinh_whole_stages_earn_the_stage_reward(client, db):
@@ -315,9 +342,8 @@ def test_phan_loai_and_lap_trinh_whole_stages_earn_the_stage_reward(client, db):
     code = play(client, me, "code_path")
     assert code["required_count"] == 5 and code["level"]["code"] == "basic"
     turn = code["open_turns"][0]
-    for _ in range(3):  # run and fix as often as needed
-        res = answer(client, me, code["id"], turn["turn_id"], ["left"]).json()
-        assert res["result"]["retry_allowed"] and res["result"]["feedback"]
+    res = answer(client, me, code["id"], turn["turn_id"], ["left"]).json()  # off course: a right program and why
+    assert res["result"]["resolved"] and res["result"]["correct_answer"] and res["result"]["feedback"]
     done = finish(client, me, db, res["session"])
     assert done["status"] == "completed" and done["reward"]["status"] in ("granted", "capped")  # 5 levels are a whole stage
 

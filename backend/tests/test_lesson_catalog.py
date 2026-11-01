@@ -233,14 +233,18 @@ def answer(client, me, session_id, turn_id, value):
 
 
 def finish(client, me, session, wrong_first=0):
-    """Answer every turn right; the first `wrong_first` turns are answered wrong once before."""
+    """Answer every turn right, but the first `wrong_first` turns wrong (they come back at the end, to practise)."""
     done = 0
     while not session["can_complete"]:
         turn = session["open_turns"][0]
         if done < wrong_first:
             wrong = {"order_steps": lambda: list(reversed(right_answer(turn))),
                      "choice_explain": lambda: next(o["id"] for o in turn["prompt"]["options"] if o["id"] != right_answer(turn))}[turn["kind"]]()
-            assert answer(client, me, session["id"], turn["turn_id"], wrong).json()["result"]["correct"] is False
+            res = answer(client, me, session["id"], turn["turn_id"], wrong).json()
+            assert res["result"]["correct"] is False and res["result"]["resolved"]
+            session = res["session"]
+            done += 1
+            continue
         res = answer(client, me, session["id"], turn["turn_id"], right_answer(turn))
         assert res.status_code == 200, res.json()
         assert res.json()["result"]["correct"], res.json()
@@ -338,7 +342,7 @@ def test_completion_needs_enough_right_at_the_first_try(fixture_catalog, client)
     detail = client.get("/api/learning/lesson-catalog/kh3.vong_doi_cay", headers=me).json()
     order = detail["games"][0]["progress"]
     assert order["completed"] == 1 and not order["passed"] and order["best"] == 50
-    assert order["last"]["to_review"] == 2 and order["last"]["attempts"] == 6
+    assert order["last"]["to_review"] == 2 and order["last"]["attempts"] == 4  # one answer per question
     assert detail["games"][0]["review_count"] == 2  # the wrong ones are in Cần ôn
     assert detail["progress"]["status"] == "in_progress"
     review = client.get("/api/learning/review", headers=me).json()
@@ -415,7 +419,7 @@ def test_a_quiz_answer_is_final_and_brings_the_right_option_and_the_explanation(
     assert ok["correct"] and ok["resolved"] and right_answer(nxt) in ok["correct_options"] and ok["explanation"]
 
 
-def test_a_wrong_match_keeps_the_right_pairs(fixture_catalog, client):
+def test_a_wrong_match_shows_the_right_pairs_and_why(fixture_catalog, client):
     me = account(client, age=8, school_grade="grade2")
     session = start(client, me, "toan2.bang_nhan_2", "match")
     turn = session["open_turns"][0]
@@ -423,8 +427,9 @@ def test_a_wrong_match_keeps_the_right_pairs(fixture_catalog, client):
     a, b, c = right
     wrong = [a[:2] + b[2:], b[:2] + a[2:], c]
     result = answer(client, me, session["id"], turn["turn_id"], wrong).json()["result"]
-    assert result["correct"] is False and result["retry_allowed"] and result["kept"] == [c]
-    assert answer(client, me, session["id"], turn["turn_id"], ["a1b1"]).status_code == 422  # malformed: not counted
+    assert result["correct"] is False and result["resolved"] and result["correct_answer"] and result["explanation"] and result["feedback"]
+    next_turn = client.get(f"/api/learning/sessions/{session['id']}", headers=me).json()["open_turns"][0]
+    assert answer(client, me, session["id"], next_turn["turn_id"], ["a1b1"]).status_code == 422  # malformed: not counted
 
 
 # ---------- the bundled catalog, end to end ----------

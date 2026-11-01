@@ -36,7 +36,7 @@ from . import clock, curriculum_games as cg, game_registry, lesson_games as lg
 from .db import get_db
 from .errors import APIError
 from .learning import GameId, check_answer, correct_answer_text, correct_option_ids, word_pair
-from .learning_engine import TYPED_TARGET_KINDS, WRONG_POLICY, InvalidAnswer, answer_key
+from .learning_engine import TYPED_TARGET_KINDS, InvalidAnswer, answer_key, wrong_policy
 from .learning_vocab import snapshot as vocab_snapshot
 from .lesson_catalog import limits
 from .models import LearningSessionItem, LearningTutorialView, User
@@ -359,7 +359,7 @@ def check(d: dict, turn_id: str, answer: Any) -> dict:
     except InvalidAnswer:
         raise APIError(422, "invalid_answer_format", "Empty or malformed answer; it was not counted")
     result.update(correct=correct, error_type=error_type, feedback=feedback)
-    if correct or WRONG_POLICY[kind] == "reveal":
+    if correct or wrong_policy(kind, "practice") == "reveal":
         result.update(resolved=True, outcome="first_try" if correct else "wrong", correct_answer=correct_answer_text(probe),
                       correct_options=correct_option_ids(probe), explanation=item.get("explanation"), word=word_pair(probe))
     else:

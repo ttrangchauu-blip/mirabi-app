@@ -148,20 +148,20 @@ lesson, the lesson to its subject and grade, and that it is ready and unlocked (
 
 | Game | Kind | Used for | Wrong answer |
 |---|---|---|---|
-| Sắp xếp thứ tự (`order`) | `order_steps` | vòng đời, dòng thời gian, quy trình, các bước giải, thứ tự động tác, ghép câu | `retry`; the cards in their right place stay locked (`result.kept`), the rest is placed again |
-| Ghép cặp (`match`) | `match_pairs` | sự kiện–nhân vật, phép tính–kết quả, địa danh–đặc điểm, từ–nghĩa, kí hiệu–tên | `retry`; the right pairs stay (`kept`) |
-| Chọn đáp án có giải thích (`choice`) | `choice_explain` | tình huống, đọc hiểu / đọc tư liệu, dự đoán hiện tượng, kiến thức, tự đánh giá | `retry`; the option chosen explains itself and is crossed out |
+| Sắp xếp thứ tự (`order`) | `order_steps` | vòng đời, dòng thời gian, quy trình, các bước giải, thứ tự động tác, ghép câu | `reveal`; the right order and why |
+| Ghép cặp (`match`) | `match_pairs` | sự kiện–nhân vật, phép tính–kết quả, địa danh–đặc điểm, từ–nghĩa, kí hiệu–tên | `reveal`; the right pairs and why |
+| Chọn đáp án có giải thích (`choice`) | `choice_explain` | tình huống, đọc hiểu / đọc tư liệu, dự đoán hiện tượng, kiến thức, tự đánh giá | `reveal`; the option chosen explains itself, the right one is marked |
 | Phân loại, Thám tử chính tả, Ghép chữ, Lập trình đường đi | as before | with the lesson's own set, sentences, words or levels | as before |
 | Bảo vệ căn cứ, Xây cầu toán học | as before | generated problems of the lesson's settings only (`table: 2` = 2 × 1…10, `no_carry`…) | as before (3 hearts) |
 | Bắn thiên thạch, Bắn từ tiếng Anh | as before | the lesson's own words first, then new words of its themes (*Khám phá từ mới theo bài*) | as before (15 words, 5 hearts; fewer only when fewer new words are left) |
-| Hành trình dòng thời gian (`timeline`) | `timeline_place` | Lịch sử: sự kiện theo thời gian | `retry`; events on their right marker stay (`kept`: `"m2:e1"`), the others go back to the pile |
-| Xây câu (`sentence`) | `sentence_build` | Tiếng Anh: cấu trúc câu, ngữ pháp | `retry`; the right start of the sentence locks (`kept`: tile ids), the first wrong wagon is named |
-| Xưởng hình học (`geometry`) | `geometry_build` | Toán: đo góc, tổng ba góc, chu vi, diện tích | `retry`; the feedback says what was built measures and what is missing |
-| Cân bằng phương trình (`balance`) | `equation_balance` | Hoá học / KHTN: lập phương trình | `retry`; the elements still unbalanced are named, or the factor to divide by |
-| Cầu trục số (`number_line`) | `number_line_place` | Toán: thứ tự, so sánh, làm tròn số, phân số, số thập phân | `retry`; points on their right tick lock (`kept`: `"p1:47"`), the first one off says which way |
-| Giải toán từng bước (`step_solver`) | `step_solve` | Toán: bài toán có lời văn, phương trình giải bằng phép ngược | steps confirmed one by one (`advance`); `retry`; a right calculation with a wrong result is kept |
-| Thám tử đọc hiểu (`story_detective`) | `story_evidence` | Tiếng Việt / Tiếng Anh: đọc hiểu, thể loại, biện pháp tu từ | the clue first (`advance`), then the options; `retry`, each wrong pick explained |
-| Soi câu (`sentence_xray`) | `sentence_paint` | Tiếng Việt: từ loại, kiểu câu, so sánh, từ láy/ghép, điệp ngữ | `retry`; pieces painted right lock (`kept`: `"w1:c1"`), the first wrong one is named |
+| Hành trình dòng thời gian (`timeline`) | `timeline_place` | Lịch sử: sự kiện theo thời gian | `reveal`; the timeline and why |
+| Xây câu (`sentence`) | `sentence_build` | Tiếng Anh: cấu trúc câu, ngữ pháp | `reveal`; the right sentence, the first wrong wagon is named |
+| Xưởng hình học (`geometry`) | `geometry_build` | Toán: đo góc, tổng ba góc, chu vi, diện tích | `reveal`; the feedback says what was built measures and what is missing |
+| Cân bằng phương trình (`balance`) | `equation_balance` | Hoá học / KHTN: lập phương trình | `reveal`; the elements still unbalanced are named, or the factor to divide by |
+| Cầu trục số (`number_line`) | `number_line_place` | Toán: thứ tự, so sánh, làm tròn số, phân số, số thập phân | `reveal`; the first one off says which way, then the right ticks |
+| Giải toán từng bước (`step_solver`) | `step_solve` | Toán: bài toán có lời văn, phương trình giải bằng phép ngược | steps confirmed one by one (`advance`); `reveal` on a wrong step |
+| Thám tử đọc hiểu (`story_detective`) | `story_evidence` | Tiếng Việt / Tiếng Anh: đọc hiểu, thể loại, biện pháp tu từ | the clue first (`advance`), then the options; `reveal`, each wrong pick explained |
+| Soi câu (`sentence_xray`) | `sentence_paint` | Tiếng Việt: từ loại, kiểu câu, so sánh, từ láy/ghép, điệp ngữ | `reveal`; the first wrong piece is named, then the right colours |
 
 ### Subject gameplays
 
@@ -337,12 +337,12 @@ enough reviewed content is not offered (no short or padded stage), and an empty 
 |---|---|---|---|---|
 | Ghép chữ (`word_builder`, *Word Forest*) | Tiếng Việt | 1 (letters), 2 (syllables) | 10 words | A gate per word, its picture on the sign; the pieces glow on the forest floor: drag one onto a stone of the lock (or tap: first free stone), *Mở cổng*. Wrong: the gate shakes, the pieces stay, fix and open again. Right: the gate opens, the pet gets a book piece and walks on to the next gate. |
 | Thám tử chính tả (`spelling_detective`) | Tiếng Việt | 2–5 | 10 sentences | Tap the misspelled syllable; only then are the spellings sent; choose the right one. Wrong word or spelling: a reason, try again. The explanation shows before the next sentence. |
-| Phân loại cùng pet (`sorting`) | TNXH / Khoa học | 1–5 | 10 cards of one set | Drag the card onto its group (or tap the group). Wrong: the card returns with the reason. |
+| Phân loại cùng pet (`sorting`) | TNXH / Khoa học | 1–5 | 10 cards of one set | Drag the card onto its group (or tap the group). Wrong: the reason and the right group. |
 | Lập trình đường đi (`code_path`, *Robot Adventure*) | Tin học | 3–12, outside school | 5 levels | Blocks Tiến / Rẽ trái / Rẽ phải (+ *Lặp lại* from Trung cấp, loops not nested), at most `max_blocks`; *Chạy* rolls the pet's robot step by step (the block being done lights up), then the backend checks the program. Off course: the step that went wrong is named (*Bước 2 (Tiến): robot đụng tảng đá*), its block turns red and the robot bumps the rock. Unlimited retries, *Dừng*, *Đặt lại*. |
 
-All four: no hearts, no clock (`timed: false`), no *Xem đáp án*; a wrong answer is `retry` with `feedback`, and a right
-answer after a mistake is recorded as `corrected` (never `first_try`), in progress and the review list (*Cần ôn*, *Ôn
-lại*). A whole stage earns the usual stage reward (Lập trình đường đi's 5 levels count as a whole stage).
+All four: no hearts, no clock (`timed: false`), no *Xem đáp án*; a wrong answer ends the question with its `feedback`,
+the right answer and the explanation (see [Từ câu này sang câu tiếp theo](#từ-câu-này-sang-câu-tiếp-theo)), and is
+recorded as `wrong` in progress and the review list (*Cần ôn*, *Ôn lại*). A whole stage earns the usual stage reward (Lập trình đường đi's 5 levels count as a whole stage).
 
 **Content** (`backend/app/data/curriculum/*.json`, written for Mirabi and reviewed by hand): every question carries
 curriculum, subject, grades, topic, difficulty, answer, explanation and version, and is validated when loaded (an
@@ -362,6 +362,39 @@ Not built yet (not shown in the app): Đếm cùng pet, Đường đua phép tí
 mạch điện (Dòng thời gian, Cân bằng phương trình, Trục số, Giải toán từng bước and Thám tử đọc hiểu are lesson games
 now: [Subject gameplays](#subject-gameplays)); conditions and functions in
 Lập trình đường đi.
+
+## Từ câu này sang câu tiếp theo
+
+Every game answered one question at a time moves on the same way, whatever it draws. The gameplay, the art and the
+reactions stay each game's own; `games/engine/questionFlow.ts` owns the rest:
+
+```
+ANSWERING → FEEDBACK → TRANSITIONING → NEXT_QUESTION → ANSWERING
+```
+
+- **ANSWERING**: the learner plays. One answer at a time (`FeedbackLoop.submit`), each with its `client_event_id`.
+- **FEEDBACK**: the answer is judged and the question is over, right or wrong. It stays on screen, locked, while the
+  world plays the result (`solved`, or a shake with `final`); then one card under it (`AnswerFeedback`) gives right or
+  wrong, the answer, the reason and the explanation, and waits for *Tiếp theo* (*Xem kết quả* on the last). No popup, and
+  nothing moves on by itself.
+- **TRANSITIONING**: what still plays of this question ends (`FeedbackLoop.skip`) and it fades away (170 ms). Nothing
+  can be touched; a second press does nothing.
+- **NEXT_QUESTION**: the question held is let go, what belonged to it is cleared in one place (the number typed, the
+  notes, the scroll position) and the next one fades in (230 ms). The HUD, the score, the hearts, the lesson's world and
+  the forest are not touched and nothing is remounted but the question's own scene, keyed by `turn_id`.
+
+*Tiếp theo* sends nothing: the backend opened the next question when it judged the answer, so it cannot skip or repeat
+one, and a slow network can only delay the answer's own result. Coming back to a game shows the question the server has
+open. A transition that never reports back ends by itself (`STEP_MAX_MS`), and the callback of an old one is ignored.
+
+**On the server** (`learning_engine.wrong_policy`): `reveal` everywhere but where targets race each other in real time,
+the falling words and Math Battle in the old Thử thách sessions (`retry`, with no held question and no *Tiếp theo*). In
+Học tập a question answered wrong comes back once at the end of the stage (`add_practice_turn`), with another question
+before it, from its first step (`first_prompt`, kept on the server's side) and under a new `turn_id`; that is the only
+repeat within a stage. `turn_id` never changes while a question is open and never comes back.
+
+The world moves on with right answers only (`worldDone`: `resolved_count` minus the questions over without a right
+answer yet); a right re-practice makes up for one. The HUD counts every question over.
 
 ## Visual games: Math Battle, Magic Lab, Word Forest, Robot Adventure, and the lesson worlds
 
@@ -426,9 +459,9 @@ spell, the crossing, the door, the experiment) is `begin`…`end` (`useReactions
 - **Word Forest** (Tiếng Việt): the pet explores a forest drawn in four depths.
   - *Ghép chữ* (`word_builder`, `games/WordForest.tsx`): each word is a brook whose bridge lacks its planks, one per
     letter or syllable. The pieces glow on the forest floor (`scatter`: never touching); drag one onto a plank
-    (`placeTile`) or tap it (it drops onto its plank), then *Xây cầu*. Right: the planks light up one after another,
-    the pet runs across and the forest scrolls to the next brook (*Bỏ qua* jumps to the far bank). Wrong: the bridge
-    wobbles, the pieces stay.
+    (`placeTile`) or tap it (it drops onto its plank), then *Xây cầu*. Right: the planks light up one after another
+    and the pet runs across (*Bỏ qua* jumps to the far bank), then the explanation; *Tiếp theo* scrolls the forest to the
+    next brook. Wrong: the bridge wobbles, the pieces stay under the right answer.
   - The Tiếng Việt lessons' own games get a forest quest above them (`games/ForestQuest.tsx`): *Sắp xếp* (sentences,
     story order) opens a **secret door** (the runes light one after another, the door rumbles, the leaves slide open,
     the pet walks in); *Ghép cặp* and *Chọn đáp án* (synonyms, antonyms, the right word) **free a creature** from three

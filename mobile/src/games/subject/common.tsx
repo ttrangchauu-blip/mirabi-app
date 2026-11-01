@@ -8,16 +8,17 @@ import { useReactions } from '../engine/feedback';
 import { useSfx } from '../engine/sfx';
 
 // What the subject gameplays share (Dòng thời gian, Xây câu, Xưởng hình học, Cân bằng phương trình): the props the
-// game screen gives them, the line saying why an answer is not right yet, the two buttons, a − / + stepper, and the two
+// game screen gives them, the line saying what a step of the answer did, the two buttons, a − / + stepper, and the two
 // reactions: the success one holds the explanation and the next question until it is over (the learning result shown
 // in the world: the timeline completes, the train leaves, the shape fills, the balance levels), the wrong one never
 // holds anything.
 
-export type Note = { text: string; tone: 'good' | 'bad'; kept?: string[] | null } | null;
+export type Note = { text: string; tone: 'good' | 'bad'; kept?: string[] | null;
+  /** A wrong answer that ends the question: what was placed stays on screen, nothing goes back to be fixed. */ final?: boolean } | null;
 export type SceneProps = {
   turn: Turn;
   disabled: boolean;
-  /** Why the last answer is not right yet (from the backend), with what it kept in place. */
+  /** What the last answer did (from the backend). */
   feedback?: Note;
   /** The question was answered right: the world plays the result, then the explanation shows under it. */
   solved?: boolean;

@@ -45,7 +45,8 @@ NOT_STARTED → INTRO → DEMONSTRATING → WAITING_FOR_ACTION → VALIDATING_AC
 any active state → SKIPPED
 ```
 
-- A wrong action never advances or skips: the step stays with its `retry_feedback`.
+- A wrong action never advances or skips: the step stays with its `retry_feedback`. Outside the falling words the
+  question itself ends as in a stage (its answer and explanation, *Tiếp tục*) and comes back under a new id.
 - `TUTORIAL_COMPLETED` needs every hands-on step (`expected_action` ≠ `next`); the backend checks `steps_done` too.
 - Reduced motion: no demo animation (INTRO → WAITING), the ring and hand stay still.
 - Every timer belongs to one phase and is cleared when it changes or the screen is left.

@@ -9,13 +9,13 @@ import { appTheme as t } from '../../../theme';
 import { Boulder, Gem, GoalFlag } from '../../../games/art/effects';
 
 // The curriculum games' play areas (Ghép chữ is WordForest.tsx). Each also draws a guide page: `demo` sets what it shows (the real layout, with the
-// move the page explains) and nothing can be tapped. The backend checks every answer; a wrong one is fixed and tried
-// again, with the reason it sends (`feedback`).
+// move the page explains) and nothing can be tapped. The backend checks every answer; the game screen shows the result
+// and the explanation under the game (AnswerFeedback).
 
 type Common = { turn: Turn; disabled: boolean; feedback?: { text: string; tone: 'good' | 'bad' } | null };
 
 function Feedback({ note }: { note?: Common['feedback'] }) {
-  if (!note) return null;
+  if (!note || !note.text) return null;
   return (
     <View style={[styles.feedback, note.tone === 'good' ? styles.feedbackGood : styles.feedbackBad]} accessibilityRole="alert"
       accessibilityLiveRegion="polite">
@@ -91,7 +91,7 @@ export function zoneAt(point: { x: number; y: number }, zones: Zone[]): string |
   return hit?.id ?? null;
 }
 
-/** Drag the card onto its group (or tap a group). A wrong group sends the card back with the reason. */
+/** Drag the card onto its group (or tap a group). */
 export function SortCards({ turn, disabled, feedback, onPlace, demo }: Common & {
   onPlace: (group: string) => void; demo?: { over?: string; placed?: string };
 }) {
@@ -121,7 +121,7 @@ export function SortCards({ turn, disabled, feedback, onPlace, demo }: Common & 
     onPanResponderRelease: (_, g) => {
       const group = target(g.dx, g.dy);
       setOver(null);
-      // The card goes back to its place: the next one comes if it was right, this one stays if it was wrong.
+      // The card goes back to its place while the answer is checked.
       Animated.spring(drag, { toValue: { x: 0, y: 0 }, useNativeDriver: false, friction: 7 }).start();
       if (group) placeRef.current(group);
     },
@@ -167,8 +167,8 @@ const blockName = (b: Block | undefined) => (!b ? '' : isLoop(b) ? `Lặp ${loop
 
 /** The pet drives a little robot through the maze. Put blocks in the program bar, "Chạy": the robot rolls the program
  * step by step (the block it is doing lights up), then the backend checks it. Off course, it stops at the step that
- * went wrong: that block turns red, the robot bumps into the rock (or the edge) and the step is named, to fix it.
- * "Dừng" stops the run, "Đặt lại" puts the robot back; a program can be fixed and run as often as needed. */
+ * went wrong: that block turns red, the robot bumps into the rock (or the edge) and the step is named.
+ * "Dừng" stops the run, "Đặt lại" puts the robot back. */
 export function CodePath({ turn, disabled, feedback, onRun, petId, petLevel, reduceMotion, demo }: Common & {
   onRun: (program: Block[]) => void; petId: string; petLevel: number; reduceMotion: boolean;
   demo?: { program: Block[]; step?: number };

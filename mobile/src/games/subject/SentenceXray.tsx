@@ -30,7 +30,7 @@ export function SentenceXray({ turn, disabled, feedback, solved, onSubmit, reduc
 
   // Wrong: the pieces painted right lock; the others keep their colour to be fixed.
   useEffect(() => {
-    if (!feedback || feedback.tone !== 'bad') return;
+    if (!feedback || feedback.tone !== 'bad' || feedback.final) return;
     setLocked(keptPaint(feedback.kept));
   }, [feedback]);
   const shake = useWrongShake(feedback, 'xray:wrong', reduceMotion);

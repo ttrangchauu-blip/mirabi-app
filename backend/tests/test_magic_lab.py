@@ -120,7 +120,7 @@ def _expected(turn_id: str) -> dict:
         return json.loads(item.answer_json)
 
 
-def test_a_lab_stage_is_played_with_a_wrong_setup_fixed_then_completed(client):
+def test_a_lab_stage_is_played_with_a_wrong_setup_explained_then_completed(client):
     register(client, "lab@example.com", age=11, school_grade="grade5")
     me = bearer(login(client, "lab@example.com").json()["access_token"])
     open_lessons(client, me, "kh5.dan_dien_cach_dien")
@@ -134,14 +134,16 @@ def test_a_lab_stage_is_played_with_a_wrong_setup_fixed_then_completed(client):
     while not session["can_complete"]:
         turn = session["open_turns"][0]
         expected = _expected(turn["turn_id"])
-        if first:  # one slot (the gap): an insulator first is retried with the reason, nothing kept
+        if first:  # one slot (the gap): an insulator first ends the experiment with the reason and the right setup
             insulator = next(p["id"] for p in turn["prompt"]["parts"] if p["id"] not in expected["accept"]["link"])
             res = client.post(f"/api/learning/sessions/{sid}/answer", headers=me,
                               json={"turn_id": turn["turn_id"], "answer": [f"link:{insulator}"], "client_event_id": eid()})
             body = res.json()["result"]
-            assert body["correct"] is False and body["retry_allowed"] and "cách điện" in body["feedback"]
-            assert body["kept"] == []
+            assert body["correct"] is False and body["resolved"] and "cách điện" in body["feedback"]
+            assert body["correct_answer"] and body["explanation"] and body["practice_added"]
             first = False
+            session = res.json()["session"]
+            continue
         res = client.post(f"/api/learning/sessions/{sid}/answer", headers=me,
                           json={"turn_id": turn["turn_id"], "answer": lab_answer(expected["accept"]), "client_event_id": eid()})
         assert res.status_code == 200, res.json()

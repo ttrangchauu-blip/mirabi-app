@@ -8,8 +8,8 @@ import { ChoiceOption, ChoiceResult, markOf } from './AnswerFeedback';
 
 // The lesson games (backend lesson_catalog.py): one gameplay each, whatever the lesson. Sắp xếp thứ tự (vòng đời, dòng
 // thời gian, quy trình…), Ghép cặp (sự kiện–nhân vật, phép tính–kết quả…) and Chọn đáp án có giải thích (tình huống,
-// đọc hiểu, dự đoán…). The backend checks every answer; a wrong one is fixed and tried again, with the reason it sends,
-// and what was already right (`kept`) stays in place. Each also draws a guide page (`demo`: nothing can be tapped).
+// đọc hiểu, dự đoán…). The backend checks every answer; the game screen shows the result and the explanation under the
+// game (AnswerFeedback). Each also draws a guide page (`demo`: nothing can be tapped).
 
 type Note = { text: string; tone: 'good' | 'bad' } | null;
 type Common = { turn: Turn; disabled: boolean; feedback?: Note;
@@ -204,7 +204,7 @@ const STYLE_HINT: Record<string, string> = {
 
 /** Read (the passage, when there is one), then tap one option: it is the answer. Once answered (`result`) the options
  * lock, the one chosen turns green or red and the right one green; the explanation shows under them (AnswerFeedback)
- * until "Câu tiếp theo". A self-assessment (tự đánh giá) has no wrong answer. */
+ * until "Tiếp theo". A self-assessment (tự đánh giá) has no wrong answer. */
 export function ChoiceExplain({ turn, disabled, feedback, onChoose, demo, result, reduceMotion }: Common & {
   onChoose: (id: string) => void; demo?: { chosen?: string; result?: 'ok' | 'bad' };
   result?: ChoiceResult | null; reduceMotion?: boolean;

@@ -151,7 +151,7 @@ export const TUTORIALS = {
       scene: { kind: 'numpad', expression: '12 + 7', answer: '19', submit: 'Tấn công' } },
     end('Quái vật không bao giờ vào căn cứ, cứ tính cẩn thận.', [
       { icon: 'checkmark-circle-outline', tone: 'good', text: 'Hạ hết các đợt quái vật và trùm (mỗi câu đúng trừ 1 máu của trùm) là hoàn thành chặng.' },
-      { icon: 'heart-outline', tone: 'bad', text: 'Sai mất 1 tim: sửa đáp án rồi tấn công tiếp.' },
+      { icon: 'heart-outline', tone: 'bad', text: 'Sai mất 1 tim: xem đáp án và lời giải thích, câu đó quay lại sau. Trong Thử thách, sửa đáp án rồi tấn công tiếp.' },
       OUT_OF_HEARTS, TIME_UP]),
   ],
   math_bridge: [
@@ -162,7 +162,7 @@ export const TUTORIALS = {
       scene: { kind: 'compare', left: '15', right: '9', signs: ['>', '<', '='], right_sign: 0 } },
     end('Đọc kỹ từng câu trước khi trả lời.', [
       { icon: 'checkmark-circle-outline', tone: 'good', text: 'Làm hết các câu là hoàn thành cây cầu.' },
-      { icon: 'heart-outline', tone: 'bad', text: 'Sai mất 1 tim. Điền số sai thì sửa lại; chọn dấu sai thì xem đáp án, câu đó quay lại sau.' },
+      { icon: 'heart-outline', tone: 'bad', text: 'Sai mất 1 tim: xem đáp án và lời giải thích, câu đó quay lại sau.' },
       OUT_OF_HEARTS, TIME_UP]),
   ],
 } as Record<GameId, TutorialPage[]>;
@@ -183,7 +183,7 @@ Object.assign(TUTORIALS, {
       scene: { kind: 'word_build', picture: '🐱', unit: 'letter', pieces: ['m', 'è', 'o'], shuffled: [2, 0, 1], demo: true } },
     end(`Ghép đủ ${CURRICULUM_STAGE.word_builder} từ để hoàn thành.`, [
       { icon: 'book-outline', tone: 'good', text: `Mỗi từ đúng, cổng mở, pet nhận một mảnh sách rồi đi tiếp tới cổng sau. Ghép đủ các từ của chặng là xong (thường ${CURRICULUM_STAGE.word_builder} từ, bài học có thể ít hơn).` },
-      { icon: 'refresh-outline', tone: 'info', text: 'Ghép sai thì cổng rung lên, các chữ vẫn ở đó: đổi chỗ rồi mở cổng lại. Gợi ý cho biết chữ đầu tiên.' },
+      { icon: 'refresh-outline', tone: 'info', text: 'Ghép sai thì cầu rung lên, có từ đúng và lời giải thích, từ đó quay lại sau. Gợi ý cho biết chữ đầu tiên.' },
       NO_CLOCK]),
   ],
   spelling_detective: [
@@ -193,8 +193,8 @@ Object.assign(TUTORIALS, {
       body: 'Chạm vào tiếng viết sai. Khi tìm đúng, các cách viết mới hiện ra: chọn cách viết đúng.',
       scene: { kind: 'spell_fix', words: ['Bé', 'uống', 'một', 'cốc', 'lước', 'cam.'], wrong: 4, options: ['nước', 'lước', 'nướt'], right: 0, demo: true } },
     end('Xem giải thích rồi chuyển câu tiếp theo.', [
-      { icon: 'checkmark-circle-outline', tone: 'good', text: `Làm đúng các câu của chặng là xong (thường ${CURRICULUM_STAGE.spelling_detective} câu, bài học có thể ít hơn). Sau mỗi câu có lời giải thích, nhấn Câu tiếp theo.` },
-      { icon: 'refresh-outline', tone: 'info', text: 'Chạm nhầm tiếng hay chọn sai cách viết: đọc lời nhắc rồi thử lại.' },
+      { icon: 'checkmark-circle-outline', tone: 'good', text: `Làm đúng các câu của chặng là xong (thường ${CURRICULUM_STAGE.spelling_detective} câu, bài học có thể ít hơn). Sau mỗi câu có lời giải thích, nhấn Tiếp theo.` },
+      { icon: 'refresh-outline', tone: 'info', text: 'Chạm nhầm tiếng hay chọn sai cách viết: có câu viết đúng và lời giải thích, câu đó quay lại sau.' },
       NO_CLOCK]),
   ],
   sorting: [
@@ -204,7 +204,7 @@ Object.assign(TUTORIALS, {
       scene: { kind: 'sort', title: 'Động vật hay thực vật?', groups: SORT_GROUPS, card: { text: 'Con mèo', picture: '🐱' }, right: 'dong_vat', demo: true } },
     end('Xếp đúng tất cả thẻ để hoàn thành.', [
       { icon: 'checkmark-circle-outline', tone: 'good', text: `Xếp đúng các thẻ của chặng là xong (thường ${CURRICULUM_STAGE.sorting} thẻ, bài học có thể ít hơn).` },
-      { icon: 'arrow-undo-outline', tone: 'info', text: 'Xếp nhầm nhóm thì thẻ quay về chỗ cũ kèm lời giải thích: hãy xếp lại.' },
+      { icon: 'arrow-undo-outline', tone: 'info', text: 'Xếp nhầm nhóm thì có nhóm đúng và lời giải thích, thẻ đó quay lại sau.' },
       NO_CLOCK]),
   ],
   code_path: [
@@ -213,9 +213,9 @@ Object.assign(TUTORIALS, {
       scene: { kind: 'code', ...CODE_LEVEL, program: CODE_PROGRAM, mode: 'build' } },
     { tag: 'Cách thao tác', title: 'Nhấn Chạy để robot thực hiện.', body: 'Pet lái robot làm lần lượt từng lệnh, lệnh đang chạy sáng lên. Tới cờ đích là qua màn.',
       scene: { kind: 'code', ...CODE_LEVEL, program: CODE_PROGRAM, mode: 'run' } },
-    end('Nếu chưa tới đích, xem bước bị sai (khối đỏ), sửa lệnh và thử lại.', [
+    end('Nếu chưa tới đích, xem bước bị sai (khối đỏ) và chương trình đúng.', [
       { icon: 'flag-outline', tone: 'good', text: `Đưa pet tới đích ở mọi màn của chặng là xong (thường ${CURRICULUM_STAGE.code_path} màn, bài học có thể ít hơn).` },
-      { icon: 'build-outline', tone: 'info', text: 'Thử lại bao nhiêu lần cũng được. Dừng để ngừng chạy, Đặt lại để đưa pet về chỗ cũ.' },
+      { icon: 'build-outline', tone: 'info', text: 'Màn chưa qua sẽ quay lại sau. Dừng để ngừng chạy, Đặt lại để đưa pet về chỗ cũ.' },
       { icon: 'git-commit-outline', tone: 'info', text: 'Mỗi màn có số lệnh tối đa: dùng khối Lặp lại để chương trình ngắn hơn.' },
       NO_CLOCK]),
   ],
@@ -224,8 +224,8 @@ Object.assign(TUTORIALS, {
 // The lesson games: the number of questions comes from the lesson (shown on the lesson screen and in the game).
 const LIFE = ['Hạt đậu', 'Hạt nảy mầm', 'Cây con', 'Cây ra hoa'];
 const MATCH: [string, string][] = [['2 × 3', '6'], ['2 × 5', '10'], ['2 × 7', '14']];
-const KEEP_RIGHT = (text: string): Rule => ({ icon: 'lock-closed-outline', tone: 'info', text });
-const READ_WHY: Rule = { icon: 'reader-outline', tone: 'good', text: 'Làm đúng: xem kết quả hiện ra, đọc giải thích ngay dưới câu, rồi nhấn Câu tiếp theo.' };
+const READ_WHY: Rule = { icon: 'reader-outline', tone: 'good', text: 'Làm đúng: xem kết quả hiện ra, đọc giải thích ngay dưới câu, rồi nhấn Tiếp theo.' };
+const SHOW_RIGHT = (text: string): Rule => ({ icon: 'bulb-outline', tone: 'info', text });
 // The subject gameplays: each its own world and its own move.
 const SUBJECT_TUTORIALS: Record<SubjectGameId, TutorialPage[]> = {
   timeline: [
@@ -234,7 +234,7 @@ const SUBJECT_TUTORIALS: Record<SubjectGameId, TutorialPage[]> = {
     { tag: 'Cách thao tác', title: 'Kéo sự kiện lên mốc của nó.', body: 'Kéo thẻ sự kiện vào chỗ trống ở mốc (hoặc chạm thẻ rồi chạm mốc). Chạm thẻ đã đặt để gỡ ra. Đủ thẻ thì nhấn Kiểm tra.',
       scene: { kind: 'subject', game: 'timeline', mode: 'demo' } },
     end('Đúng hết là hoàn thành dòng thời gian.', [READ_WHY,
-      KEEP_RIGHT('Đặt sai: sự kiện đúng mốc được giữ lại (khoá xanh), sự kiện sai rung lên rồi quay về để đặt lại.'), NO_CLOCK]),
+      SHOW_RIGHT('Đặt sai: có thứ tự đúng và lời giải thích, câu đó quay lại sau.'), NO_CLOCK]),
   ],
   sentence: [
     { tag: 'Mục tiêu', title: 'Xếp thẻ thành một câu đúng.', body: 'Mỗi toa tàu chở một thẻ của câu. Có thẻ không thuộc câu: để nó lại bãi.',
@@ -242,7 +242,7 @@ const SUBJECT_TUTORIALS: Record<SubjectGameId, TutorialPage[]> = {
     { tag: 'Cách thao tác', title: 'Chất thẻ lên toa theo thứ tự.', body: 'Kéo thẻ lên toa (hoặc chạm: thẻ lên toa trống đầu tiên). Chạm toa để dỡ thẻ xuống. Đủ toa thì nhấn Kiểm tra.',
       scene: { kind: 'subject', game: 'sentence', mode: 'demo' } },
     end('Câu đúng: tàu sáng đèn và câu được đọc lên.', [READ_WHY,
-      KEEP_RIGHT('Sai: các toa đúng từ đầu câu được khoá, toa sai đầu tiên viền đỏ để em sửa đúng chỗ đó.'), NO_CLOCK]),
+      SHOW_RIGHT('Sai: có câu đúng và lời giải thích, câu đó quay lại sau.'), NO_CLOCK]),
   ],
   geometry: [
     { tag: 'Mục tiêu', title: 'Tự tay tạo hình theo yêu cầu.', body: 'Trên bản vẽ có thước đo góc hoặc lưới ô vuông 1 cm. Đọc yêu cầu: góc bao nhiêu độ, hình có diện tích, chu vi bao nhiêu.',
@@ -250,7 +250,7 @@ const SUBJECT_TUTORIALS: Record<SubjectGameId, TutorialPage[]> = {
     { tag: 'Cách thao tác', title: 'Kéo tay cầm màu vàng.', body: 'Kéo đầu cạnh góc (hoặc góc hình chữ nhật), hay dùng nút − / +. Xong thì nhấn Kiểm tra: máy đo hình em tạo.',
       scene: { kind: 'subject', game: 'geometry', mode: 'demo' } },
     end('Đúng: hình được tô và ghi số đo.', [READ_WHY,
-      { icon: 'calculator-outline', tone: 'info', text: 'Sai: lời nhắc cho biết hình em tạo đo được bao nhiêu và còn thiếu gì; sửa rồi kiểm tra lại.' }, NO_CLOCK]),
+      { icon: 'calculator-outline', tone: 'info', text: 'Sai: có lời nhắc hình em tạo đo được bao nhiêu, đáp án và lời giải thích; câu đó quay lại sau.' }, NO_CLOCK]),
   ],
   balance: [
     { tag: 'Mục tiêu', title: 'Làm cho cân thăng bằng.', body: 'Mỗi đĩa cân chứa các phân tử của một vế. Cân chỉ thăng bằng khi mỗi nguyên tố có số nguyên tử bằng nhau ở hai vế.',
@@ -267,7 +267,7 @@ const SUBJECT_TUTORIALS: Record<SubjectGameId, TutorialPage[]> = {
     { tag: 'Cách thao tác', title: 'Cầm một số rồi đặt lên cầu.', body: 'Chạm một lá cờ số để cầm nó, rồi chạm hoặc kéo trên cầu để cắm cờ. Dùng ◀ ▶ để dịch đúng một vạch. Đặt đủ các số thì nhấn Kiểm tra.',
       scene: { kind: 'subject', game: 'number_line', mode: 'demo' } },
     end('Đúng hết: pet đi qua cầu, dừng ở từng số.', [READ_WHY,
-      KEEP_RIGHT('Sai: số đúng vạch được khoá xanh; lời nhắc cho biết số nào đang lệch sang trái hay phải.'), NO_CLOCK]),
+      SHOW_RIGHT('Sai: có vị trí đúng và lời giải thích, câu đó quay lại sau.'), NO_CLOCK]),
   ],
   step_solver: [
     { tag: 'Mục tiêu', title: 'Giải bài toán từng bước một.', body: 'Mỗi bậc thang là một bước, có một câu hỏi nhỏ. Trả lời đúng bước này thì câu hỏi của bước sau mới hiện ra.',
@@ -275,7 +275,7 @@ const SUBJECT_TUTORIALS: Record<SubjectGameId, TutorialPage[]> = {
     { tag: 'Cách thao tác', title: 'Chọn hai số, một dấu, điền kết quả.', body: 'Chạm hai thẻ số lấy từ đề (hoặc kết quả bước trước), chạm dấu + − × :, rồi bấm bàn phím để điền kết quả. Nhấn Kiểm tra.',
       scene: { kind: 'subject', game: 'step_solver', mode: 'demo' } },
     end('Bước cuối đúng là giải xong bài toán.', [READ_WHY,
-      { icon: 'construct-outline', tone: 'info', text: 'Chọn sai phép tính: lời nhắc gợi ý đọc lại đề. Phép tính đúng mà kết quả sai: phép tính được giữ lại, chỉ cần tính lại.' },
+      { icon: 'construct-outline', tone: 'info', text: 'Bước nào sai: có lời giải và lời giải thích, bài đó quay lại sau.' },
       NO_CLOCK]),
   ],
   story_detective: [
@@ -284,7 +284,7 @@ const SUBJECT_TUTORIALS: Record<SubjectGameId, TutorialPage[]> = {
     { tag: 'Cách thao tác', title: 'Chạm câu bằng chứng, rồi chọn đáp án.', body: 'Chạm vào câu em cho là bằng chứng rồi nhấn Kiểm tra. Đúng manh mối thì các đáp án mới hiện ra: chọn một đáp án và nhấn Kiểm tra.',
       scene: { kind: 'subject', game: 'story_detective', mode: 'demo' } },
     end('Đúng đáp án: hồ sơ được đóng dấu “Đã phá án”.', [READ_WHY,
-      { icon: 'close-circle-outline', tone: 'info', text: 'Chọn sai câu hay sai đáp án: lựa chọn đó bị gạch đi, kèm gợi ý nên tìm ở đâu.' }, NO_CLOCK]),
+      { icon: 'close-circle-outline', tone: 'info', text: 'Chọn sai câu hay sai đáp án: có câu trả lời đúng và lời giải thích, câu đó quay lại sau.' }, NO_CLOCK]),
   ],
   sentence_xray: [
     { tag: 'Mục tiêu', title: 'Tô màu mỗi từ theo vai trò của nó.', body: 'Mỗi bút màu là một vai trò (ví dụ: sự vật, hoạt động). Từ không thuộc vai trò nào thì để trống.',
@@ -292,7 +292,7 @@ const SUBJECT_TUTORIALS: Record<SubjectGameId, TutorialPage[]> = {
     { tag: 'Cách thao tác', title: 'Chọn bút, chạm vào từ.', body: 'Chạm một bút màu, rồi chạm các từ để tô. Chạm lại từ đã tô (cùng màu) để xoá. Tô xong nhấn Kiểm tra.',
       scene: { kind: 'subject', game: 'sentence_xray', mode: 'demo' } },
     end('Đúng hết: tia soi quét qua và các từ sáng lên.', [READ_WHY,
-      KEEP_RIGHT('Sai: từ tô đúng được khoá; lời nhắc chỉ ra một từ tô chưa đúng hoặc còn thiếu.'), NO_CLOCK]),
+      SHOW_RIGHT('Sai: có các từ đúng màu và lời giải thích, câu đó quay lại sau.'), NO_CLOCK]),
   ],
 };
 const LESSON_END: Rule = { icon: 'checkmark-circle-outline', tone: 'good',
@@ -304,9 +304,9 @@ Object.assign(TUTORIALS, {
     { tag: 'Cách thao tác', title: 'Chạm từng thẻ, rồi nhấn Kiểm tra.',
       body: 'Mỗi thẻ chạm vào được đặt vào chỗ trống tiếp theo. Chạm thẻ đã đặt để gỡ ra. Đủ thẻ thì nhấn Kiểm tra.',
       scene: { kind: 'order', prompt: 'Sắp xếp vòng đời cây đậu', items: LIFE, shuffled: [2, 0, 3, 1], first: 'Đầu tiên', last: 'Cuối cùng', demo: true } },
-    end('Sai thì giữ thẻ đúng, sửa thẻ sai.', [
+    end('Sai thì xem thứ tự đúng rồi đi tiếp.', [
       LESSON_END,
-      { icon: 'lock-closed-outline', tone: 'info', text: 'Xếp sai: thẻ nào đúng vị trí được giữ lại (có khoá xanh), xếp lại các thẻ còn lại.' },
+      { icon: 'bulb-outline', tone: 'info', text: 'Xếp sai: có thứ tự đúng và lời giải thích, câu đó quay lại sau.' },
       NO_CLOCK]),
   ],
   match: [
@@ -314,15 +314,15 @@ Object.assign(TUTORIALS, {
       scene: { kind: 'match', prompt: 'Ghép phép tính với kết quả', pairs: MATCH, rightOrder: [2, 0, 1] } },
     { tag: 'Cách thao tác', title: 'Chạm thẻ trái, rồi thẻ phải.', body: 'Hai thẻ ghép với nhau cùng màu. Chạm thẻ đã ghép để gỡ ra. Ghép đủ thì nhấn Kiểm tra.',
       scene: { kind: 'match', prompt: 'Ghép phép tính với kết quả', pairs: MATCH, rightOrder: [2, 0, 1], demo: true } },
-    end('Sai thì giữ cặp đúng, ghép lại cặp sai.', [
+    end('Sai thì xem các cặp đúng rồi đi tiếp.', [
       LESSON_END,
-      { icon: 'lock-closed-outline', tone: 'info', text: 'Ghép sai: các cặp đúng được giữ lại, chỉ ghép lại những cặp còn sai.' },
+      { icon: 'bulb-outline', tone: 'info', text: 'Ghép sai: có các cặp đúng và lời giải thích, câu đó quay lại sau.' },
       NO_CLOCK]),
   ],
   choice: [
     { tag: 'Mục tiêu', title: 'Đọc kĩ rồi chọn.', body: 'Có câu là tình huống, có câu là đoạn văn hoặc hiện tượng cần dự đoán. Mỗi lựa chọn đều có lời giải thích.',
       scene: { kind: 'choice', style: 'situation', question: 'Bạn cùng lớp quên bút. Em làm gì?', options: ['Cười bạn', 'Cho bạn mượn bút'], right: 1, wrong: 0 } },
-    { tag: 'Cách thao tác', title: 'Chạm một lựa chọn.', body: 'Chọn chưa phù hợp: đọc lý do, lựa chọn đó bị gạch đi, thử lựa chọn khác. Chọn đúng: đọc giải thích rồi sang câu tiếp.',
+    { tag: 'Cách thao tác', title: 'Chạm một lựa chọn.', body: 'Chọn xong: đọc lý do và lời giải thích ngay dưới câu, rồi nhấn Tiếp theo. Câu chọn sai sẽ quay lại sau.',
       scene: { kind: 'choice', style: 'situation', question: 'Bạn cùng lớp quên bút. Em làm gì?', options: ['Cười bạn', 'Cho bạn mượn bút'], right: 1, wrong: 0, demo: true } },
     end('Câu tự đánh giá không có đáp án sai.', [
       LESSON_END,

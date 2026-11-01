@@ -210,7 +210,7 @@ describe('the games', () => {
     expect(await screen.findByText('“Nước” viết bằng n.')).toBeTruthy();
     expect(screen.getByText('Chính xác!')).toBeTruthy();
     expect(server.callsTo('POST /api/learning/sessions/7/answer').map((c) => c.body.answer)).toEqual([['w2'], ['w3'], ['w3', 'o2']]);
-    fireEvent.press(screen.getByRole('button', { name: 'Câu tiếp theo' }));
+    fireEvent.press(screen.getByRole('button', { name: 'Tiếp theo' }));
     await waitFor(() => expect(screen.queryByText('“Nước” viết bằng n.')).toBeNull());
   });
 

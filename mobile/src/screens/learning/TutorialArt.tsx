@@ -409,7 +409,7 @@ function LabScene({ scene, petId, petLevel, reduceMotion }: { scene: Extract<Tut
   const placed: Record<string, string> = scene.mode === 'empty' ? {} : { power: 'p2', lamp: 'p3', link: 'p1' };
   return (
     <View style={[styles.scene, styles.light, styles.curriculum]} pointerEvents="none">
-      <MagicLab turn={LAB_TURN} disabled onSubmit={() => {}} solved={null} onContinue={() => {}} petId={petId} petLevel={petLevel}
+      <MagicLab turn={LAB_TURN} disabled onSubmit={() => {}} solved={null} petId={petId} petLevel={petLevel}
         reduceMotion={reduceMotion} demo={{ placed, run: scene.mode === 'run' }} />
     </View>
   );

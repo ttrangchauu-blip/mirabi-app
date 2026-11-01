@@ -124,7 +124,7 @@ describe('Magic Lab', () => {
     jest.useFakeTimers();
     const sent: string[][] = [];
     const Lab = (props: Partial<React.ComponentProps<typeof MagicLab>>) => (
-      <MagicLab turn={circuit} disabled={false} onSubmit={(a) => sent.push(a)} solved={null} onContinue={() => {}} petId="cat" petLevel={1}
+      <MagicLab turn={circuit} disabled={false} onSubmit={(a) => sent.push(a)} petId="cat" petLevel={1}
         reduceMotion={false} {...props} />
     );
     const view = render(<Lab />);
@@ -142,15 +142,11 @@ describe('Magic Lab', () => {
     fireEvent.press(screen.getByRole('button', { name: 'Đặt Dây đồng' }));
     fireEvent.press(screen.getByRole('button', { name: 'Bật công tắc' }));
     expect(sent[1]).toEqual(['power:p2', 'lamp:p3', 'link:p4']);
-    // The server counted it and opened the next experiment: this one still shows, working, with its explanation.
+    // The server counted it: this one still shows, working (the game screen's card explains it and moves on).
     const next = turn('lab2', 'lab_experiment', { ...circuit.prompt, aim: 'Thí nghiệm thứ hai.' });
-    const done: string[] = [];
-    view.rerender(<Lab turn={next} solved={{ turnId: 'lab1', text: 'Mạch kín: đèn sáng.' }} onContinue={() => done.push('next')} />);
-    expect(screen.getByText('Thí nghiệm thành công!')).toBeTruthy();
-    expect(screen.getByText('Mạch kín: đèn sáng.')).toBeTruthy();
+    view.rerender(<Lab solved={{ turnId: 'lab1' }} />);
     expect(screen.getByText('Lắp mạch để đèn sáng.')).toBeTruthy();
-    fireEvent.press(screen.getByRole('button', { name: 'Thí nghiệm tiếp theo' }));
-    expect(done).toEqual(['next']);
+    expect(screen.queryByRole('button', { name: 'Bật công tắc' })).toBeNull();
     view.rerender(<Lab turn={next} solved={null} />);
     expect(screen.getByText('Thí nghiệm thứ hai.')).toBeTruthy();
     expect(screen.getByLabelText('Nguồn điện: trống')).toBeTruthy(); // a clean bench
@@ -165,7 +161,7 @@ describe('Magic Lab', () => {
       parts: [{ id: 'p1', name: 'Dây đồng', art: 'copper' }, { id: 'p2', name: 'Đinh sắt', art: 'nail' }, { id: 'p3', name: 'Thước nhựa', art: 'ruler' }] });
     const sent: string[][] = [];
     const Lab = (props: Partial<React.ComponentProps<typeof MagicLab>>) => (
-      <MagicLab turn={magnet} disabled={false} onSubmit={(a) => sent.push(a)} solved={null} onContinue={() => {}} petId="cat" petLevel={1}
+      <MagicLab turn={magnet} disabled={false} onSubmit={(a) => sent.push(a)} petId="cat" petLevel={1}
         reduceMotion={false} {...props} />
     );
     const view = render(<Lab />);
@@ -179,7 +175,7 @@ describe('Magic Lab', () => {
     fireEvent.press(screen.getByRole('button', { name: 'Đặt Đinh sắt' }));
     fireEvent.press(screen.getByRole('button', { name: 'Đưa nam châm lại gần' }));
     expect(sent).toEqual([['pull:p1'], ['pull:p2']]);
-    view.rerender(<Lab solved={{ turnId: 'mg1', text: 'Đinh sắt bị hút.' }} />);
+    view.rerender(<Lab solved={{ turnId: 'mg1' }} />);
     ms(2000);
     expect(screen.getByLabelText('Nam châm đã hạ xuống')).toBeTruthy();
     expect(screen.getByLabelText('Đinh sắt bị nam châm hút')).toBeTruthy();
@@ -194,13 +190,13 @@ describe('Magic Lab', () => {
     const plant = turn('pl1', 'lab_experiment', { scene: 'plant', aim: 'Xếp các giai đoạn.', slots: [{ id: 's1', label: 'Bước 1' }, { id: 's2', label: 'Bước 2' }],
       parts: [{ id: 'p1', name: 'Hạt', art: 'stage:1' }, { id: 'p2', name: 'Cây ra hoa', art: 'stage:5' }] });
     const Lab = (props: Partial<React.ComponentProps<typeof MagicLab>>) => (
-      <MagicLab turn={plant} disabled={false} onSubmit={() => {}} solved={null} onContinue={() => {}} petId="cat" petLevel={1} reduceMotion={false} {...props} />
+      <MagicLab turn={plant} disabled={false} onSubmit={() => {}} petId="cat" petLevel={1} reduceMotion={false} {...props} />
     );
     const view = render(<Lab />);
     fireEvent.press(screen.getByRole('button', { name: 'Đặt Hạt' }));
     fireEvent.press(screen.getByRole('button', { name: 'Đặt Cây ra hoa' }));
     fireEvent.press(screen.getByRole('button', { name: 'Gieo hạt và quan sát' }));
-    view.rerender(<Lab solved={{ turnId: 'pl1', text: 'Cây lớn lên.' }} />);
+    view.rerender(<Lab solved={{ turnId: 'pl1' }} />);
     expect(screen.getByLabelText('Chậu cây, giai đoạn 0')).toBeTruthy();
     ms(900);
     expect(screen.getByLabelText('Chậu cây, giai đoạn 1, đất đã được tưới ẩm')).toBeTruthy(); // watered: the seed is sown
@@ -219,7 +215,7 @@ describe('Magic Lab', () => {
         : scene === 'water' ? [{ id: 'p1', name: 'Làm nóng', art: 'hot' }, { id: 'p2', name: 'Làm lạnh', art: 'cold' }]
           : [{ id: 'p1', name: 'Tấm kính', art: 'glass' }, { id: 'p2', name: 'Quyển sách', art: 'book' }];
       const view = render(<MagicLab turn={turn(`x-${scene}`, 'lab_experiment', { scene, aim: 'Thử', slots, parts, from: 'ice', to: scene === 'shadow' ? 'dark' : 'water' })}
-        disabled={false} onSubmit={() => {}} solved={null} onContinue={() => {}} petId="dolphin" petLevel={1} reduceMotion />);
+        disabled={false} onSubmit={() => {}} petId="dolphin" petLevel={1} reduceMotion />);
       expect(screen.getByRole('button', { name: `Đặt ${parts[0].name}` })).toBeTruthy();
       view.unmount();
     }
@@ -251,23 +247,27 @@ describe('Word Forest', () => {
     }
   });
 
-  it('a right word builds the bridge, the pet runs across and the forest moves on to the next brook', () => {
+  it('a right word builds the bridge, the pet runs across and waits; "Tiếp theo" moves the forest on to the next brook', () => {
     jest.useFakeTimers();
     const cat = turn('w1', 'word_build', { picture: '🐱', unit: 'letter', tiles: [{ id: 'a', text: 'm' }, { id: 'b', text: 'è' }, { id: 'c', text: 'o' }] });
     const dog = turn('w2', 'word_build', { picture: '🐶', unit: 'letter', tiles: [{ id: 'd', text: 'ch' }, { id: 'e', text: 'ó' }] });
     const sent: string[][] = [];
-    const Forest = ({ at, collected }: { at: Turn; collected: number }) => (
-      <WordForest turn={at} disabled={false} onSubmit={(ids) => sent.push(ids)} collected={collected} total={10} petId="cat" petLevel={1} reduceMotion={false} />
+    const Forest = ({ at, collected, solved }: { at: Turn; collected: number; solved?: boolean }) => (
+      <WordForest turn={at} disabled={false} solved={solved} onSubmit={(ids) => sent.push(ids)} collected={collected} total={10} petId="cat" petLevel={1} reduceMotion={false} />
     );
     const view = render(<Forest at={cat} collected={0} />);
     for (const x of ['m', 'è', 'o']) fireEvent.press(screen.getByRole('button', { name: `Chữ ${x}` }));
     expect(screen.getByLabelText('Cây cầu: mèo')).toBeTruthy();
     fireEvent.press(screen.getByRole('button', { name: 'Xây cầu' }));
     expect(sent).toEqual([['a', 'b', 'c']]);
-    view.rerender(<Forest at={dog} collected={1} />);
+    view.rerender(<Forest at={cat} collected={1} solved />);
     expect(screen.getByLabelText('Cây cầu: mèo')).toBeTruthy(); // the bridge stays while the pet runs over it
     expect(screen.getByRole('button', { name: 'Xây cầu' }).props.accessibilityState?.disabled).toBe(true);
     ms(2600);
+    expect(screen.getByLabelText('Cây cầu: mèo')).toBeTruthy(); // and until the next word
+    view.rerender(<Forest at={dog} collected={1} />);
+    expect(screen.getByLabelText('Cây cầu: mèo')).toBeTruthy(); // the forest scrolls it away
+    ms(1000);
     expect(screen.getByLabelText('Cây cầu: __')).toBeTruthy(); // the next brook: two planks missing ("ch", "ó")
     expect(screen.getByLabelText('Pet đã nhận 1 trên 10 mảnh sách')).toBeTruthy();
     view.unmount();

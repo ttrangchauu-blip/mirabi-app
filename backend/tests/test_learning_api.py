@@ -279,25 +279,36 @@ def test_invalid_input_is_rejected_and_not_counted(client, me):
         post(client, me, session, "abandon")
 
 
-def test_practice_mode_wrong_answers_can_be_corrected_and_hints_come_one_by_one(client, me):
+def test_practice_mode_a_wrong_answer_shows_the_right_one_and_hints_come_one_by_one(client, me):
     session = start(client, me, "math.arithmetic.grade2")
     turn = session["open_turns"][0]
     miss = answer(client, me, session, turn, value=wrong(turn)).json()
-    assert miss["result"]["correct"] is False and miss["result"]["retry_allowed"] and miss["result"]["correct_answer"] is None
+    assert miss["result"]["correct"] is False and miss["result"]["resolved"] and not miss["result"]["retry_allowed"]
+    assert miss["result"]["correct_answer"] and miss["result"]["explanation"] and miss["result"]["practice_added"]
     assert miss["result"]["hearts_delta"] == -1 and miss["session"]["hearts"] == 2  # Học tập: a wrong answer costs a heart
-    hint = post(client, me, session, "hint", turn_id=turn["turn_id"], client_event_id=eid()).json()
+    following = miss["session"]["open_turns"][0]
+    assert following["turn_id"] != turn["turn_id"]
+    hint = post(client, me, session, "hint", turn_id=following["turn_id"], client_event_id=eid()).json()
     assert hint["result"]["hint"] and hint["session"]["open_turns"][0]["hints_shown"] == [hint["result"]["hint"]]
     assert hint["session"]["hearts"] == 2  # hints are free
-    fixed = answer(client, me, session, turn).json()
-    assert fixed["result"]["outcome"] == "corrected" and fixed["session"]["hearts"] == 2
     review = client.get("/api/learning/review", headers=me).json()
-    assert review["total"] == 1 and review["groups"][0]["items"][0]["reason"] == "corrected"
+    assert review["total"] == 1 and review["groups"][0]["items"][0]["reason"] == "wrong"
+
+
+def test_challenge_mode_math_battle_is_still_fixed_in_real_time(client, me):
+    session = start(client, me, "math.arithmetic.grade2", mode="challenge")
+    turn = session["open_turns"][0]
+    miss = answer(client, me, session, turn, value=wrong(turn)).json()
+    assert miss["result"]["correct"] is False and miss["result"]["retry_allowed"] and not miss["result"]["resolved"]
+    assert miss["result"]["correct_answer"] is None
+    fixed = answer(client, me, session, turn).json()
+    assert fixed["result"]["outcome"] == "corrected"
 
 
 def test_practice_mode_ends_when_the_hearts_run_out(client, me):
     session = start(client, me, "math.arithmetic.grade2")
-    turn = session["open_turns"][0]
     for expected_hearts in (2, 1, 0):
+        turn = session["open_turns"][0]
         response = answer(client, me, session, turn, value=wrong(turn)).json()
         assert response["result"]["hearts_delta"] == -1
         session = response["session"]
@@ -305,7 +316,7 @@ def test_practice_mode_ends_when_the_hearts_run_out(client, me):
     assert session["status"] == "failed" and session["end_reason"] == "out_of_hearts"
     assert session["reward"] == {"status": "not_eligible", "exp": 0}
     result = client.get(f"/api/learning/sessions/{session['id']}/result", headers=me).json()
-    assert result["counts"]["wrong"] == 1  # the open turn's confirmed mistake still counts for review
+    assert result["counts"]["wrong"] == 3
 
 
 def test_revealed_answer_needs_a_correct_repractice_and_keeps_the_original_result(client, me):

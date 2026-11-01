@@ -8,10 +8,9 @@ import { appTheme as t } from '../../../theme';
 import { Button } from '../../../ui/kit';
 import { showNumber } from './NumberPad';
 
-// The answer's feedback, shared by every game that answers one question at a time (Chọn đáp án, Chọn cổng, So sánh,
-// and the explanations of Sắp xếp, Ghép cặp, Thám tử chính tả, a wrong sentence or "Xem đáp án"). Nothing pops up: the
-// options answered stay on screen, locked and marked (the one chosen green or red, the right one green), and one card
-// under them says right or wrong, gives the answer and the explanation, and waits for "Câu tiếp theo".
+// The answer's feedback, shared by every game that answers one question at a time. Nothing pops up: the question answered
+// stays on screen, locked (multiple choice: marked, the option chosen green or red, the right one green), and one card
+// under it says right or wrong, gives the answer and the explanation, and waits for "Tiếp theo".
 
 /** After an answer: the option chosen, the right ones (from the backend, only once answered) and whether it was right. */
 export type ChoiceResult = { chosen: string | null; correct: string[]; right: boolean };
@@ -87,10 +86,10 @@ export function ChoiceOption({ label, onPress, disabled, mark, idle, style, redu
 }
 
 const ANSWER_LABEL: Partial<Record<Turn['kind'], string>> = { order_steps: 'Thứ tự đúng', match_pairs: 'Các cặp đúng', spell_fix: 'Câu viết đúng',
-  timeline_place: 'Dòng thời gian', sentence_build: 'Câu đúng', geometry_build: 'Đã tạo', equation_balance: 'Phương trình đã cân bằng',
+  timeline_place: 'Dòng thời gian', sentence_build: 'Câu đúng', equation_balance: 'Phương trình đã cân bằng',
   number_line_place: 'Vị trí đúng', step_solve: 'Lời giải', story_evidence: 'Câu trả lời', sentence_paint: 'Các từ đúng màu' };
 
-/** The card under the options: right or wrong, the answer, why, and "Câu tiếp theo" (never moves on by itself). */
+/** The card under the question: right or wrong, the answer, why, and "Tiếp theo" (never moves on by itself). */
 export function AnswerFeedback({ result, kind, graded = true, nextLabel, onNext, reduceMotion, onLayout }: {
   result: TurnResult; kind?: Turn['kind'] | null;
   /** false: a self-assessment (tự đánh giá), which has no right answer to show. */ graded?: boolean;
@@ -116,9 +115,9 @@ export function AnswerFeedback({ result, kind, graded = true, nextLabel, onNext,
   const title = !graded ? 'Đã ghi nhận câu trả lời' : right ? 'Chính xác!' : revealed ? 'Đáp án' : 'Chưa chính xác!';
   const hearts = result.hearts_delta < 0 ? ' · −1 tim' : '';
   const answer = result.correct_answer ? showNumber(result.correct_answer) : '';
-  const label = (kind && ANSWER_LABEL[kind]) ?? (right ? 'Đáp án' : 'Đáp án đúng');
-  // Chọn đáp án: why the option chosen is (or is not) right, then the lesson's explanation.
-  const why = kind === 'choice_explain' && result.feedback ? result.feedback : null;
+  const label = (kind && ANSWER_LABEL[kind]) ?? (right ? (kind === 'geometry_build' ? 'Đã tạo' : 'Đáp án') : 'Đáp án đúng');
+  // Why the answer given is not right (Chọn đáp án: why the option chosen is or is not), then the lesson's explanation.
+  const why = (!right || kind === 'choice_explain') && result.feedback && result.feedback !== result.explanation ? result.feedback : null;
   const good = tone === 'right';
   return (
     <Animated.View testID="answer-feedback" onLayout={onLayout}

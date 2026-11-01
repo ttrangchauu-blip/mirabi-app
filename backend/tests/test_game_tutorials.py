@@ -114,7 +114,7 @@ def test_every_demo_turn_is_solvable_with_the_games_own_checker():
                 assert found["correct"] and not found["resolved"] and found["prompt"]["phase"] == "answer"
                 assert {o["id"] for o in found["prompt"]["options"]} == {o["id"] for o in item["answer"]["options"]}
                 wrong = next(s["id"] for s in item["prompt"]["sentences"] if s["id"] not in item["answer"]["evidence"])
-                assert gt.check(d, tid, [wrong])["retry_allowed"]
+                assert gt.check(d, tid, [wrong])["resolved"]
             result = gt.check(d, tid, solve(item))
             assert result["correct"] and result["resolved"], (game, tid, result)
             assert result["score_delta"] == 0 and result["hearts_delta"] == 0
@@ -185,7 +185,7 @@ def test_checking_a_demo_answer_saves_nothing(client, me, db):
     check = lambda answer: client.post("/api/games/defense/tutorial/check", headers=me,
                                        json={"tutorial_version": version, "turn_id": "t1", "answer": answer}).json()["result"]
     wrong = check("8")
-    assert not wrong["correct"] and wrong["retry_allowed"] and not wrong["resolved"] and wrong["error_type"]
+    assert not wrong["correct"] and wrong["resolved"] and wrong["correct_answer"] == "7" and wrong["error_type"]
     right = check("7")
     assert right["correct"] and right["resolved"] and right["explanation"] == "3 + 4 = 7"
     assert right["score_delta"] == 0 and right["hearts_delta"] == 0
@@ -197,6 +197,13 @@ def test_checking_a_demo_answer_saves_nothing(client, me, db):
     assert old.status_code == 409 and old.json()["code"] == "tutorial_outdated"
     other = client.post("/api/games/defense/tutorial/check", headers=me, json={"tutorial_version": version, "turn_id": "x9", "answer": "7"})
     assert other.status_code == 404
+
+
+def test_the_falling_words_are_the_game_that_keeps_a_wrong_demo_answer_open(client, me):
+    version = gt.definitions()["word_shooter"]["tutorial_version"]
+    wrong = client.post("/api/games/word_shooter/tutorial/check", headers=me,
+                        json={"tutorial_version": version, "turn_id": "t1", "answer": "zzz"}).json()["result"]
+    assert not wrong["correct"] and wrong["retry_allowed"] and not wrong["resolved"]
 
 
 def test_a_reveal_game_resolves_a_wrong_demo_answer_as_a_stage_does(client, me):
@@ -213,7 +220,7 @@ def test_the_spelling_detective_demo_plays_its_two_steps(client, me):
                                       json={"tutorial_version": d["tutorial_version"], "turn_id": "t1", "answer": answer}).json()
     right_word = [t["id"] for t in item["prompt"]["tokens"] if t["id"] != item["answer"]["wrong_id"]][0]
     missed = post([right_word])["result"]
-    assert not missed["correct"] and missed["retry_allowed"] and missed["feedback"]
+    assert not missed["correct"] and missed["resolved"] and missed["feedback"]
     found = post([item["answer"]["wrong_id"]])["result"]
     assert found["correct"] and not found["resolved"] and {o["text"] for o in found["prompt"]["options"]} == {"nước", "lước", "nướt"}
     fixed = post([item["answer"]["wrong_id"], item["answer"]["right_option"]])["result"]

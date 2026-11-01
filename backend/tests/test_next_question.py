@@ -108,3 +108,58 @@ def test_a_stage_reopened_keeps_its_place(client):
     again = client.post(f"/api/learning/sessions/{session['id']}/resume", headers=me, json={}).json()["session"]
     assert [t["turn_id"] for t in again["open_turns"]] == [current["turn_id"]] and again["resolved_count"] == 1
     assert stored_prompt(current["turn_id"]) == current["prompt"] or current["prompt"]["question"] == stored_prompt(current["turn_id"])["question"]
+
+
+# ---------- moving from one question to the next: what the app relies on ----------
+
+def test_every_question_has_its_own_id_and_is_asked_once_unless_it_is_being_practised(client):
+    me = account(client, age=8, school_grade="grade3")
+    session = play(client, me)
+    ids, questions = [], []
+    while session["open_turns"]:
+        turn = session["open_turns"][0]
+        assert turn["turn_id"] not in ids
+        ids.append(turn["turn_id"])
+        if not turn["practice"]:
+            assert turn["prompt"]["question"] not in questions, "the same question twice in a stage"
+            questions.append(turn["prompt"]["question"])
+        session = answer(client, me, session["id"], turn["turn_id"], right_answer(turn)).json()["session"]
+    assert len(questions) == 6 and session["can_complete"]
+
+
+def test_the_id_of_a_question_stays_the_same_while_it_is_on_screen(client):
+    me = account(client, age=8, school_grade="grade3")
+    session = play(client, me)
+    turn = session["open_turns"][0]
+    again = client.get(f"/api/learning/sessions/{session['id']}", headers=me).json()
+    assert again["open_turns"][0]["turn_id"] == turn["turn_id"] and again["open_turns"][0]["prompt"] == turn["prompt"]
+
+
+def test_the_same_answer_sent_again_after_a_slow_network_counts_once(client):
+    me = account(client, age=8, school_grade="grade3")
+    session = play(client, me)
+    turn = session["open_turns"][0]
+    body = {"turn_id": turn["turn_id"], "answer": wrong_option(turn), "client_event_id": "retry-of-the-same-answer-1"}
+    url = f"/api/learning/sessions/{session['id']}/answer"
+    first = client.post(url, headers=me, json=body).json()
+    second = client.post(url, headers=me, json=body).json()
+    assert second["replayed"] and second["result"] == first["result"]
+    assert second["session"]["resolved_count"] == first["session"]["resolved_count"] == 1
+    assert second["session"]["pending_practice"] == first["session"]["pending_practice"]
+    assert second["session"]["open_turns"][0]["turn_id"] == first["session"]["open_turns"][0]["turn_id"]
+    # Another tap with another event id on the question already over: refused, nothing counted.
+    late = client.post(url, headers=me, json={**body, "client_event_id": "another-tap-on-the-same-turn"})
+    assert late.status_code == 409 and late.json()["code"] == "turn_not_open"
+    now = client.get(f"/api/learning/sessions/{session['id']}", headers=me).json()
+    assert now["resolved_count"] == 1 and now["open_turns"][0]["turn_id"] == first["session"]["open_turns"][0]["turn_id"]
+
+
+def test_coming_back_to_a_stage_restores_where_it_was(client):
+    me = account(client, age=8, school_grade="grade3")
+    session = play(client, me)
+    turn = session["open_turns"][0]
+    answered = answer(client, me, session["id"], turn["turn_id"], right_answer(turn)).json()["session"]
+    client.post(f"/api/learning/sessions/{session['id']}/pause", headers=me, json={})
+    back = client.post(f"/api/learning/sessions/{session['id']}/resume", headers=me, json={}).json()["session"]
+    assert back["resolved_count"] == 1 and back["hearts"] == answered["hearts"]
+    assert [t["turn_id"] for t in back["open_turns"]] == [t["turn_id"] for t in answered["open_turns"]]  # the next one, not the old one

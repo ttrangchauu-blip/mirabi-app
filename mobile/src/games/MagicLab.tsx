@@ -19,15 +19,15 @@ import { useSfx } from './engine/sfx';
 // is then shown by the objects themselves: the bulb lights and current flows, a shadow falls on the screen, the ice
 // melts, the plant grows stage by stage. A wrong part: the experiment does not work, the reason is given, the right parts
 // stay in place. Simulations only: nothing here is a procedure to try for real. Both are reactions of the feedback loop
-// (engine/feedback.ts): the stage waits for them, and "Bỏ qua" (or "Thí nghiệm tiếp theo") jumps to their end.
+// (engine/feedback.ts): the explanation waits for them, and "Bỏ qua" (or "Tiếp theo") jumps to their end.
 
 type Part = { id: string; name: string; art: string };
 type Slot = { id: string; label: string };
-type Note = { text: string; tone: 'good' | 'bad'; kept?: string[] | null } | null;
+type Note = { text: string; tone: 'good' | 'bad'; kept?: string[] | null; final?: boolean } | null;
 type Props = {
   turn: Turn | null; disabled: boolean; feedback?: Note; onSubmit: (answer: string[]) => void;
-  /** The experiment just done right: its result is shown until "Thí nghiệm tiếp theo" (`onContinue`). */
-  solved: { turnId: string; text: string } | null; onContinue: () => void;
+  /** The experiment just done right: it runs and stays working until "Tiếp theo" (the game screen's). */
+  solved?: { turnId: string } | null;
   petId: string; petLevel: number; reduceMotion: boolean;
   /** The guide: what is placed, and whether it runs (nothing can be touched). */
   demo?: { placed: Record<string, string>; run: boolean };
@@ -61,8 +61,8 @@ export function PartArt({ art, size, lit }: { art: string; size: number; lit?: b
   return <Material kind={art as MaterialKind} size={size} />;
 }
 
-export function MagicLab({ turn, disabled, feedback, onSubmit, solved, onContinue, petId, petLevel, reduceMotion, demo }: Props) {
-  // The experiment on the bench: the open one, or the one just done (its result shows until "Thí nghiệm tiếp theo").
+export function MagicLab({ turn, disabled, feedback, onSubmit, solved, petId, petLevel, reduceMotion, demo }: Props) {
+  // The experiment on the bench: the open one, or the one just done (it shows working until "Tiếp theo").
   const sound = useSfx();
   const done = useRef<{ turn: Turn; placed: Record<string, string> } | null>(null);
   const [placed, setPlaced] = useState<Record<string, string>>({});
@@ -85,7 +85,6 @@ export function MagicLab({ turn, disabled, feedback, onSubmit, solved, onContinu
   const run = useRef(new Animated.Value(0)).current; // 0 → 1: the experiment working
   const fizzle = useRef(new Animated.Value(0)).current; // a wrong setup: a spark, then nothing
   const react = useReactions();
-  const runEnd = useRef<(() => void) | null>(null);
   // Going away: late animation callbacks (stopped as the views detach) must not touch state.
   const live = useRef(true);
   useLayoutEffect(() => () => { live.current = false; }, []);
@@ -102,11 +101,10 @@ export function MagicLab({ turn, disabled, feedback, onSubmit, solved, onContinu
     sound('unlock');
     const toEnd = () => { run.stopAnimation(); run.setValue(1); };
     const end = react.begin('lab:run', { maxMs: 5000, finish: toEnd });
-    runEnd.current = () => { toEnd(); end(); };
     const anim = Animated.timing(run, { toValue: 1, duration: reduceMotion ? 1 : scene === 'plant' ? 2600 : scene === 'magnet' ? 1800 : 1400,
       easing: Easing.inOut(Easing.quad), useNativeDriver: false });
     anim.start(() => { end(); if (live.current) sound('complete'); });
-    return () => { anim.stop(); end(); runEnd.current = null; };
+    return () => { anim.stop(); end(); };
   }, [showing?.turn.turn_id]); // eslint-disable-line react-hooks/exhaustive-deps
   // A wrong setup: it does not work, the wrong parts flash and go back to the bench, the right ones stay.
   const lastNote = useRef(feedback);
@@ -120,9 +118,10 @@ export function MagicLab({ turn, disabled, feedback, onSubmit, solved, onContinu
     pet.play('hit');
     sound('wrong');
     fizzle.setValue(1);
-    // The wrong parts go back to the bench once it has fizzled (the right ones stay).
+    // The question goes on (an older server): the wrong parts go back to the bench once it has fizzled, the right ones
+    // stay. Otherwise the setup stays on the bench, under the right answer.
     const back = () => {
-      if (!live.current) return;
+      if (!live.current || feedback.final) return;
       setPlaced((p) => Object.fromEntries(Object.entries(p).filter(([s]) => kept.has(s))));
       setWrong([]);
     };
@@ -189,15 +188,7 @@ export function MagicLab({ turn, disabled, feedback, onSubmit, solved, onContinu
           </View>
         ) : null}
       </DropArea>
-      {showing ? (
-        <View style={styles.result} accessibilityRole="alert" accessibilityLiveRegion="polite">
-          <View style={styles.resultHead}><Ionicons name="sparkles" size={18} color={t.success} /><Text style={styles.resultTitle}>Thí nghiệm thành công!</Text></View>
-          <Text style={styles.resultText}>{solved?.text}</Text>
-          <Pressable onPress={() => { runEnd.current?.(); onContinue(); }} accessibilityRole="button" accessibilityLabel="Thí nghiệm tiếp theo" style={styles.primary}>
-            <Text style={styles.primaryText}>Thí nghiệm tiếp theo</Text>
-          </Pressable>
-        </View>
-      ) : (
+      {showing ? null : (
         <>
           {feedback && feedback.tone === 'bad' ? (
             <View style={styles.note} accessibilityRole="alert" accessibilityLiveRegion="polite">
@@ -594,10 +585,6 @@ const styles = StyleSheet.create({
   pressed: { opacity: 0.85, transform: [{ scale: 0.96 }] },
   note: { flexDirection: 'row', alignItems: 'flex-start', gap: 8, borderRadius: 14, padding: 10, backgroundColor: t.dangerBg },
   noteText: { flex: 1, fontSize: 14, fontWeight: '700', lineHeight: 20, color: t.danger },
-  result: { gap: 8, borderRadius: 16, padding: 12, backgroundColor: t.successBg },
-  resultHead: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  resultTitle: { fontSize: 16, fontWeight: '900', color: t.success },
-  resultText: { fontSize: 14, fontWeight: '700', lineHeight: 20, color: t.ink },
   actions: { flexDirection: 'row', gap: 8 },
   primary: { minHeight: 46, borderRadius: 14, backgroundColor: '#5141A8', alignItems: 'center', justifyContent: 'center', paddingHorizontal: 14 },
   primaryText: { color: '#FFFFFF', fontWeight: '900', fontSize: 15 },

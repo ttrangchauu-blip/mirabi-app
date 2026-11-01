@@ -29,9 +29,9 @@ from .learning_content import BANK_LESSON_CODES
 from .learning_vocab import POS_VI, TOPIC_CODES, bank_items, travel_for
 from .learning_engine import (DEFAULT_SCORING, answer_key, HEART_ON_WRONG, MASTERED_AT, MOVING_KINDS, TYPED_TARGET_KINDS, VOCAB_KINDS,
                               VOCAB_STAGE_WORDS,
-                              WRONG_POLICY, InvalidAnswer, bridge_sentence, check_bridge, check_choice, check_number, check_text,
+                              InvalidAnswer, bridge_sentence, check_bridge, check_choice, check_number, check_text,
                               compare_error_type, correct_outcome, default_variant, fmt, game_of, generate_math_items,
-                              hearts_for, mastery_after, math_error_type, parse_number, score_for)
+                              hearts_for, mastery_after, math_error_type, parse_number, score_for, wrong_policy)
 from .models import (Activity, LearningEvent, LearningLesson, LearningLessonVersion, LearningLevel, LearningQuestion,
                      LearningReviewItem, LearningReward, LearningSession, LearningSessionItem, LearningSkillProgress,
                      LearningSubject, LearningTopic, LearningTutorialView, LearningVocabEntry, LearningVocabItem,
@@ -931,7 +931,7 @@ def create_session(db: Session, user: User, *, lesson: LearningLesson, mode: str
              "max_targets": game.get("max_targets", {}).get(mode, 1),
              "variant": default_variant(game["game_type"], variant),
              "generator": game.get("generator")}
-    if "curriculum" in generator or generator.get("catalog"):  # no hearts, no clock: a wrong answer is fixed and tried again
+    if "curriculum" in generator or generator.get("catalog"):  # no hearts, no clock
         rules.update(hearts=0, timed=False, stage_turns=game["turns"] if generator.get("catalog") else cg.STAGE_TURNS[game["game_type"]],
                      max_attempts=cg.MAX_ATTEMPTS.get(game["game_type"], DEFAULT_SCORING["max_attempts"]))
     if generator.get("lesson"):
@@ -1002,7 +1002,8 @@ def add_practice_turn(db: Session, s: LearningSession, items: list[LearningSessi
     if not any(i.state in ("queued", "issued") and i.id != source.id for i in items):
         return False
     root = db.get(LearningSessionItem, source.practice_of_id) if source.practice_of_id else source
-    prompt = _loads(root.prompt_json)
+    answer = _loads(root.answer_json)
+    prompt = answer.pop("first_prompt", None) or _loads(root.prompt_json)
     if root.kind in REORDERED_ON_PRACTICE and len(prompt.get("options") or []) > 1:
         shown = list(prompt["options"])
         rng = random.Random(f"{s.id}:{s.next_position}")
@@ -1010,7 +1011,7 @@ def add_practice_turn(db: Session, s: LearningSession, items: list[LearningSessi
             rng.shuffle(prompt["options"])
     snap = {"question_id": root.question_id, "question_key": root.question_key, "skill_key": root.skill_key,
             "skill_label": root.skill_label, "kind": root.kind, "prompt": prompt,
-            "answer": _loads(root.answer_json), "hints": _loads(root.hints_json, []), "explanation": root.explanation}
+            "answer": answer, "hints": _loads(root.hints_json, []), "explanation": root.explanation}
     item = _new_item(s, s.next_position, snap, practice_of=root)
     s.next_position += 1
     db.add(item)
@@ -1194,11 +1195,20 @@ def check_answer(item: LearningSessionItem, answer) -> tuple[bool, str | None, s
     return ok, None if ok else math_error_type({"kind": item.kind, "answer": expected}, value), str(value)
 
 
+def keep_first_prompt(item: LearningSessionItem, prompt: dict) -> None:
+    """A question solved in steps is about to move on: its first prompt is kept on the server's side (never sent), so
+    asking it again to practise starts from the first step, not with the steps already done on screen."""
+    expected = _loads(item.answer_json, {})
+    if "first_prompt" not in expected:
+        item.answer_json = json.dumps({**expected, "first_prompt": prompt}, ensure_ascii=False)
+
+
 def found_word(item: LearningSessionItem, answer: list[str], s: LearningSession) -> tuple[dict, LearningEvent]:
     """Thám tử chính tả: the misspelled word was found. The turn stays open for its second step, and only now are the
     spellings to choose from sent (before, they would show which word is wrong)."""
     prompt, expected = _loads(item.prompt_json, {}), _loads(item.answer_json, {})
     item.attempts += 1
+    keep_first_prompt(item, prompt)
     prompt.update(step="fix", found=answer[0], options=expected["options"])
     item.prompt_json = json.dumps(prompt, ensure_ascii=False)
     text = next(t["text"] for t in prompt["tokens"] if t["id"] == answer[0]).strip(".,!?;:")
@@ -1214,6 +1224,7 @@ def staged_step(item: LearningSessionItem, update: dict, feedback: str, s: Learn
     prompt moves on to the next step (only now is what that step needs sent: the next question, the options)."""
     prompt = _loads(item.prompt_json, {})
     item.attempts += 1
+    keep_first_prompt(item, prompt)
     prompt.update(update)
     item.prompt_json = json.dumps(prompt, ensure_ascii=False)
     result = {"turn_id": item.turn_id, "event": "answer", "correct": True, "outcome": None, "resolved": False,
@@ -1274,7 +1285,7 @@ def answer_event(db: Session, user: User, session_id: int, data: AnswerInput) ->
             item.error_type = error_type or item.error_type
             if s.mode == "challenge":
                 s.combo = 0
-            if WRONG_POLICY[item.kind] == "reveal":
+            if wrong_policy(item.kind, s.mode) == "reveal":
                 resolve(db, s, item, "wrong", now)
                 result.update(outcome="wrong", resolved=True, correct_answer=correct_answer_text(item),
                               correct_options=correct_option_ids(item), explanation=item.explanation, word=word_pair(item))

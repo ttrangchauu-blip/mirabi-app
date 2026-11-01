@@ -42,7 +42,7 @@ export function NumberLineBridge({ turn, disabled, feedback, solved, onSubmit, r
 
   // Wrong: the flags on their right plank lock; the hand goes to the first one still to move.
   useEffect(() => {
-    if (!feedback || feedback.tone !== 'bad') return;
+    if (!feedback || feedback.tone !== 'bad' || feedback.final) return;
     const keep = keptTicks(feedback.kept);
     setLocked(keep);
     setActive(points.find((x) => keep[x.id] === undefined)?.id ?? null);

@@ -42,7 +42,7 @@ export function SentenceTrain({ turn, disabled, feedback, solved, onSubmit, redu
 
   // Wrong: the right start (kept) locks, the first wrong wagon is pointed out.
   useEffect(() => {
-    if (!feedback || feedback.tone !== 'bad') return;
+    if (!feedback || feedback.tone !== 'bad' || feedback.final) return;
     const keep = feedback.kept ?? [];
     setLocked(keep.length);
     setWrongAt(keep.length < length ? keep.length : null);
