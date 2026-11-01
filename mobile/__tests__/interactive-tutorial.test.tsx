@@ -332,12 +332,12 @@ describe('first time a game is played', () => {
     await wait(400);
     fireEvent.press(screen.getByRole('button', { name: 'Tiếp' }));
     await wait(700);
-    expect(await screen.findByText('Gõ nghĩa của “apple”: quả táo')).toBeTruthy();
-    const field = await screen.findByLabelText('Nghĩa tiếng Việt');
-    fireEvent.changeText(field, 'quả cam');
+    expect(await screen.findByText('Gõ lại từ đang rơi: apple')).toBeTruthy();
+    const field = await screen.findByLabelText('Đáp án tiếng Anh');
+    fireEvent.changeText(field, 'appel');
     fireEvent(field, 'submitEditing');
-    expect(await screen.findByText(/Chưa đúng\. Gõ “quả táo” nhé/)).toBeTruthy();
-    fireEvent.changeText(field, 'qua tao'); // right without tone marks: the pet shoots at once, as in a stage
+    expect(await screen.findByText(/Chưa đúng\. Gõ lại “apple” nhé/)).toBeTruthy();
+    fireEvent.changeText(field, 'apple'); // right: the pet shoots at once, as in a stage
     expect(await screen.findByText(/Chính xác! Pet bắn ngay!/)).toBeTruthy();
     await wait(1500);
     expect(await screen.findByText('Đạn trúng: từ vỡ ra và hiện nghĩa tiếng Việt.')).toBeTruthy();
@@ -346,7 +346,7 @@ describe('first time a game is played', () => {
     await waitFor(() => expect(server.callsTo('POST /api/games/word_shooter/tutorial/complete')).toHaveLength(1));
     expect(server.callsTo('POST /api/games/word_shooter/tutorial/complete')[0].body).toEqual({ game_mode: 'practice',
       tutorial_version: defs.word_shooter.tutorial_version, gameplay_version: 1, steps_done: ['watch', 'type', 'break'] });
-    expect(server.callsTo('POST /api/games/word_shooter/tutorial/check').map((c) => c.body.answer)).toEqual(['quả cam', 'qua tao']);
+    expect(server.callsTo('POST /api/games/word_shooter/tutorial/check').map((c) => c.body.answer)).toEqual(['appel', 'apple']);
     expect(noStage(server)).toEqual([]); // nothing of a stage during the tutorial
     fireEvent.press(screen.getByRole('button', { name: 'Bắt đầu chơi' }));
     await waitFor(() => expect(server.callsTo('POST /api/learning/play')).toHaveLength(1));

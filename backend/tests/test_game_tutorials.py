@@ -244,7 +244,9 @@ def test_progress_completed_and_skipped_are_kept_apart(client, me, db):
     assert client.post("/api/games/word_shooter/tutorial/progress", headers=me,
                        json={"tutorial_version": v, "status": "skipped"}).json()["status"] == "completed"
     # Skipping another game is recorded as skipped (not completed), and it is no longer asked for.
-    skipped = client.post("/api/games/meteor/tutorial/progress", headers=me, json={"tutorial_version": v, "status": "skipped"}).json()
+    meteor = gt.definitions()["meteor"]["tutorial_version"]
+    skipped = client.post("/api/games/meteor/tutorial/progress", headers=me,
+                          json={"tutorial_version": meteor, "status": "skipped"}).json()
     assert skipped["status"] == "skipped" and not skipped["required"]
     everything = client.get("/api/games/tutorials/progress", headers=me).json()["games"]
     assert set(everything) == set(gt.definitions())
@@ -252,11 +254,11 @@ def test_progress_completed_and_skipped_are_kept_apart(client, me, db):
     assert db.scalar(select(func.count(LearningSession.id))) == 0
     # Bad requests.
     assert client.post("/api/games/meteor/tutorial/progress", headers=me,
-                       json={"tutorial_version": v, "current_step": 5}).json()["code"] == "step_out_of_range"
+                       json={"tutorial_version": meteor, "current_step": 5}).json()["code"] == "step_out_of_range"
     assert client.post("/api/games/meteor/tutorial/progress", headers=me,
-                       json={"tutorial_version": v, "game_mode": "challenge"}).status_code == 422
+                       json={"tutorial_version": meteor, "game_mode": "challenge"}).status_code == 422
     assert client.post("/api/games/meteor/tutorial/progress", headers=me,
-                       json={"tutorial_version": v + 1}).json()["code"] == "tutorial_outdated"
+                       json={"tutorial_version": meteor + 1}).json()["code"] == "tutorial_outdated"
 
 
 def test_a_new_tutorial_or_a_changed_gameplay_asks_again(client, me, db, monkeypatch):

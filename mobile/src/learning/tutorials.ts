@@ -87,15 +87,15 @@ const end = (body: string, items: Rule[]): TutorialPage => ({ tag: 'Kết thúc'
 export const TUTORIALS = {
   word_shooter: [
     { tag: 'Mục tiêu', title: 'Bắn vỡ từ tiếng Anh',
-      body: `Mỗi chặng có ${VOCAB_STAGE_WORDS} từ tiếng Anh lần lượt rơi xuống, có lúc vài từ cùng lúc. Gõ nghĩa tiếng Việt của từ để pet bắn vỡ trước khi từ chạm đất.`,
-      scene: { kind: 'fall', variant: 'word', targets: [{ label: 'cat' }, { label: 'apple' }, { label: 'dog' }] } },
-    { tag: 'Cách thao tác', title: 'Gõ nghĩa, pet tự bắn',
-      body: 'Ô trả lời nằm ngay dưới từ gần mặt đất nhất. Gõ đúng nghĩa (có dấu hay không đều được) là từ dừng lại, pet tự bắn, không cần nhấn gì, và ô trống lại để gõ tiếp. Đạn trúng thì từ phát sáng, nứt rồi vỡ, hiện nghĩa (và đọc phát âm khi bật Âm thanh). Muốn trả lời từ khác thì chạm vào từ đó.',
-      scene: { kind: 'type', variant: 'word', target: { label: 'cat' }, answer: 'con mèo', result: 'con mèo', sub: 'cat /kæt/' } },
+      body: `Mỗi chặng có ${VOCAB_STAGE_WORDS} từ tiếng Anh lần lượt rơi xuống, có lúc vài từ cùng lúc. Gõ lại đúng từ để pet bắn vỡ trước khi từ chạm đất, và xem nghĩa tiếng Việt.`,
+      scene: { kind: 'fall', variant: 'word', targets: [{ label: 'cat', letters: [3] }, { label: 'apple', letters: [5] }, { label: 'dog', letters: [3] }] } },
+    { tag: 'Cách thao tác', title: 'Gõ lại từ, pet tự bắn',
+      body: 'Ô chữ nằm ngay dưới từ gần mặt đất nhất. Gõ đúng từ là từ dừng lại, pet tự bắn, không cần nhấn gì, và ô chữ trống lại để gõ tiếp. Đạn trúng thì từ phát sáng, nứt rồi vỡ, hiện nghĩa (và đọc phát âm khi bật Âm thanh). Muốn gõ từ khác thì chạm vào từ đó.',
+      scene: { kind: 'type', variant: 'word', target: { label: 'cat', letters: [3] }, answer: 'cat', result: 'con mèo', sub: 'cat /kæt/' } },
     end(`Bạn có ${VOCAB_HEARTS} tim. Thanh trên cùng cho biết số tim và “Đã xử lý” bao nhiêu từ.`, [
       { icon: 'checkmark-circle-outline', tone: 'good', text: `Xử lý đủ ${VOCAB_STAGE_WORDS} từ (bắn vỡ hoặc để rơi) là xong chặng.` },
       { icon: 'heart-outline', tone: 'bad', text: `Mỗi từ chạm đất mất 1 tim. Hết ${VOCAB_HEARTS} tim thì chặng dừng lại, bạn có thể chơi lại.` },
-      { icon: 'create-outline', tone: 'info', text: 'Gõ sai không mất tim: sửa lại khi từ còn rơi. Gợi ý cho biết từ nói về gì, rồi số tiếng và tiếng đầu. Xem đáp án không mất tim.' },
+      { icon: 'create-outline', tone: 'info', text: 'Gõ sai không mất tim: sửa lại khi từ còn rơi. Gợi ý cho biết số chữ cái, rồi từng chữ.' },
       TIME_UP]),
   ],
   meteor: [

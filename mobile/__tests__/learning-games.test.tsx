@@ -242,7 +242,7 @@ test('Học tập opens on the subject screen; English lists four games that sta
 
   fireEvent.press(screen.getByRole('button', { name: /^Tiếng Anh\./ }));
   expect(screen.getByText('Chọn trò chơi')).toBeTruthy();
-  for (const name of ['Bắn từ tiếng Anh (Anh → Việt). Gõ nghĩa tiếng Việt của từ tiếng Anh đang rơi.',
+  for (const name of ['Bắn từ tiếng Anh (Anh → Việt). Gõ lại từ tiếng Anh đang rơi, xem nghĩa tiếng Việt.',
     'Bắn thiên thạch (Việt → Anh). Nhìn nghĩa tiếng Việt, gõ từ tiếng Anh.',
     'Chọn đáp án ngữ pháp. Chọn đáp án đúng cho chỗ trống trong câu.', 'Sắp xếp câu. Ghép các mảnh từ thành câu đúng.']) {
     expect(screen.getByRole('button', { name })).toBeTruthy();
@@ -392,7 +392,7 @@ test('Math: closing the lesson before playing drops the unplayed session', async
 const word = (id: string, en: string, position: number, travel = 24): Turn =>
   turn({ turn_id: id, position, kind: 'word_spelling', skill_label: 'Gõ từ', prompt: { word: en, letters: [en.length], answer_keys: [answerKey(id, en)] },
     travel_seconds: travel });
-/** Anh → Việt: the English word falls and its Vietnamese meaning is typed (any accepted form, tone marks optional). */
+/** Anh → Việt, a stage created while the meaning was asked: its Vietnamese meaning is typed (any accepted form, tone marks optional). */
 const meaningWord = (id: string, en: string, accepted: string[], position: number, travel = 24): Turn =>
   turn({ turn_id: id, position, kind: 'word_spelling', skill_label: 'Gõ từ', travel_seconds: travel,
     prompt: { word: en, answer_lang: 'vi', phonetic: null, answer_keys: accepted.map((a) => answerKey(id, a, 'vi')) } });
@@ -413,7 +413,7 @@ async function startShooter(open: Turn[], over: Partial<LearningSession> = {}, r
   return server;
 }
 
-test('Anh → Việt: type the meaning (tone marks optional); the word stops at once, the pet shoots it, it glows, breaks and shows its meaning', async () => {
+test('Anh → Việt, a stage created while the meaning was asked: type the meaning (tone marks optional); the word stops at once, the pet shoots it, it glows, breaks and shows its meaning', async () => {
   const next = meaningWord('turn-0002-abcdef', 'dog', ['con chó', 'chó'], 1);
   const nextReply = deferred<{ status: number; body: unknown }>();
   const server = await startShooter([meaningWord('turn-0001-abcdef', 'cat', ['con mèo', 'mèo'], 0)], {}, {
@@ -466,7 +466,7 @@ test('Anh → Việt: type the meaning (tone marks optional); the word stops at 
   expect(server.callsTo('POST /api/learning/sessions/5/answer')[1].body).toMatchObject({ turn_id: 'turn-0002-abcdef', answer: 'chó' });
 });
 
-test('Anh → Việt: a wrong meaning is checked with Enter, counted wrong once, and shoots nothing', async () => {
+test('Anh → Việt, a stage created while the meaning was asked: a wrong meaning is checked with Enter, counted wrong once, and shoots nothing', async () => {
   const server = await startShooter([meaningWord('turn-0001-abcdef', 'cat', ['con mèo'], 0)], {}, {
     'POST /api/learning/sessions/5/answer': { status: 200, body: { result: { ...correct, correct: false, outcome: null, resolved: false, retry_allowed: true },
       session: shooter({ open_turns: [meaningWord('turn-0001-abcdef', 'cat', ['con mèo'], 0)], version: 3 }), replayed: false } },
@@ -484,7 +484,7 @@ test('Anh → Việt: a wrong meaning is checked with Enter, counted wrong once,
   expect(screen.getByLabelText('Nghĩa tiếng Việt').props.value).toBe('con chó');
 });
 
-test('Anh → Việt, a stage created before: the shown word is typed again, and the word stops and breaks when it is shot', async () => {
+test('Anh → Việt: the shown word is typed again, and the word stops and breaks when it is shot', async () => {
   const next = word('turn-0002-abcdef', 'dog', 1);
   const server = await startShooter([word('turn-0001-abcdef', 'cat', 0)], {}, {
     'POST /api/learning/sessions/5/answer': { status: 200, body: { result: { ...hit('turn-0001-abcdef', 'cat', 'con mèo', '/kæt/'), score_delta: 10 },
@@ -921,12 +921,13 @@ test('every game has its own guide: goal, controls and how it ends, true to its 
     expect(all(game)).toMatch(/Đạn trúng thì/); // it breaks when the bullets reach it
   }
   for (const game of ['gate', 'bridge', 'grammar', 'defense', 'math_bridge']) expect(rules(game)).toMatch(/Hết 3 tim/);
-  // Anh → Việt: the Vietnamese meaning is typed (that is what is checked); the word stops, glows, cracks and breaks.
-  expect(all('word_shooter')).toMatch(/Gõ nghĩa tiếng Việt/);
-  expect(all('word_shooter')).toMatch(/có dấu hay không đều được/);
+  // Anh → Việt: the shown word is typed again; the word stops, glows, cracks, breaks and shows its meaning.
+  expect(all('word_shooter')).toMatch(/Gõ lại đúng từ/);
+  expect(all('word_shooter')).not.toMatch(/có dấu hay không đều được|Gõ nghĩa/);
   expect(all('word_shooter')).toMatch(/từ dừng lại/);
   expect(all('word_shooter')).toMatch(/phát sáng, nứt rồi vỡ/);
-  expect(all('word_shooter')).toMatch(/Xem đáp án/);
+  expect(all('word_shooter')).toMatch(/số chữ cái/);
+  expect(all('word_shooter')).not.toMatch(/Xem đáp án/); // the word to type is on screen
   expect(all('meteor')).toMatch(/ngữ cảnh/);
   // Only the games played by tapping show a tap; the number games press their own button.
   expect(all('gate')).toMatch(/Chạm/);
@@ -953,15 +954,15 @@ test('every guide page draws, and the typing picture plays: the meaning typed un
   render(<GameTutorial game="word_shooter" petId="fox" petLevel={2} reduceMotion={false} onFinish={jest.fn()} onClose={jest.fn()} />);
   fireEvent.press(screen.getByRole('button', { name: 'Tiếp' }));
   fireEvent(screen.getByLabelText(/^Minh họa:/), 'layout', { nativeEvent: { layout: { x: 0, y: 0, width: 330, height: 210 } } });
-  const art = () => within(screen.getByLabelText(/^Minh họa: Gõ “con mèo” vào ô dưới “cat”/));
-  // The real field's pieces: the word tile and its answer field, the meaning typed into it letter by letter.
+  const art = () => within(screen.getByLabelText(/^Minh họa: Gõ “cat” vào ô dưới “cat”/));
+  // The real field's pieces: the word tile and its letter boxes, the word typed into them, then its meaning.
   const seen = new Set<string>();
   for (let i = 0; i < 14; i++) {
-    for (const typed of ['c', 'co', 'con m']) if (art().queryByText(typed)) seen.add(typed);
+    for (const letter of ['c', 'a', 't']) if (art().queryAllByText(letter).length) seen.add(letter);
     if (art().queryByText('con mèo')) seen.add('meaning');
     act(() => { jest.advanceTimersByTime(750); });
   }
-  expect([...seen].sort()).toEqual(['c', 'co', 'con m', 'meaning']);
+  expect([...seen].sort()).toEqual(['a', 'c', 'meaning', 't']);
   expect(art().getByText('cat')).toBeTruthy();
   expect(screen.queryByText('Bắn')).toBeNull();
 });

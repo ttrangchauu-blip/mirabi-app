@@ -662,22 +662,19 @@ Reused, not duplicated: `users` (identity, pet, level), `exp_events` + `award_ex
   | | Anh → Việt — *Bắn từ vựng* (`word_shooter`, kind `word_spelling`) | Việt → Anh — *Bắn thiên thạch* (`meteor`, kind `vocab_typing`, default) |
   |---|---|---|
   | Falls | the English word (`prompt.word`) | a meteor with the Vietnamese meaning |
-  | User types | the Vietnamese meaning, tone marks optional (`answer.lang = "vi"`, `prompt.answer_lang`) | the English word; declared equivalents accepted |
+  | User types | the word shown, letter by letter in its answer boxes (`prompt.letters`) | the English word; declared equivalents accepted |
   | After a hit | the Vietnamese meaning, shown where the word broke, plus pronunciation | the pair to remember (*apple — quả táo*) with its phonetic, plus pronunciation |
-  | Progress skill | `en.spell.<word>` (`skill_type` `spelling`): recognising the word | `en.word.<word>` (`skill_type` `word`): recalling the word, the vocabulary mastery |
+  | Progress skill | `en.spell.<word>` (`skill_type` `spelling`): the word's spelling; never counts as knowing the word | `en.word.<word>` (`skill_type` `word`): recalling the word, the vocabulary mastery |
 
-  **Anh → Việt answers** (`learning_engine.meaning_answers`): every sense of the bank's `meaning_vi` (split at `,` `;`
-  `/` outside brackets: *thiểu số, nhóm thiểu số* takes either), each with or without what is in brackets (*(dùng) dè
-  sẻn* → *dè sẻn* or *dùng dè sẻn*) and without a leading classifier (*cái còi* → *còi*, *sự hồi phục* → *hồi phục*).
-  They are compared without case, spacing, end punctuation or tone marks (`normalize_vi`: *con meo* = *con mèo*, *đ* =
-  *d*), so a phone without a Vietnamese keyboard can answer. Hints: what the word is about (`context_vi`), then the
-  number of syllables and the first one (the first letter for a one-syllable meaning). The meaning is never sent before
-  the word is resolved (`result.word = {en, vi, phonetic}` on a hit, miss or reveal; `correct_answer` is the meaning).
-  The two games keep separate progress, review items (`<lesson>.spell.<word>`, labelled *Nghĩa: …*) and mastery. A
-  review session of Anh → Việt items only is played as *Bắn từ vựng*. The meaning shown after a hit pops in, stays about
-  1.3 s, then floats up and fades (0.5 s), under the other falling words, and never blocks typing. A miss shows the
-  English–Vietnamese pair. *Xem đáp án* is offered. Stages created before keep their frozen answers (no `lang`): the
-  word shown is typed again, with letter boxes and no *Xem đáp án*, as it was.
+  **Anh → Việt answers**: only the word shown (`accepted = [word]`). Hints help to type it: the number of letters, then
+  letter by letter (`spelling_hints`), never its meaning. The meaning is never sent before the word is resolved
+  (`result.word = {en, vi, phonetic}` on a hit, miss or reveal; `correct_answer` is the word). The two games keep
+  separate progress, review items (`<lesson>.spell.<word>`, labelled *Mặt chữ: …*) and mastery. A review session of
+  Anh → Việt items only is played as *Bắn từ vựng*. The meaning shown after a hit pops in, stays about 1.3 s, then floats
+  up and fades (0.5 s), under the other falling words, and never blocks typing. A miss shows the English–Vietnamese pair.
+  *Xem đáp án* is not offered: the word to type is on screen. Stages created while the meaning was typed instead keep
+  their frozen answers (`answer.lang = "vi"`, `prompt.answer_lang`): they can still be finished as they were, with a free
+  answer field, tone marks optional, and *Xem đáp án*.
 - **A typed shot** (both vocabulary games) hits whichever open word it matches, not only the aimed one; when several
   match, the one closest to the ground (issued first) is destroyed, one per shot. `result.turn_id` is the turn hit. A
   wrong shot counts against the aimed word.
@@ -688,9 +685,9 @@ Reused, not duplicated: `users` (identity, pet, level), `exp_events` + `award_ex
   `prompt.answer_keys` (SHA-256 of `turn_id|normalized answer`, 16 hex digits, one per accepted answer, never the
   answers; `learning_engine.answer_key` and `mobile/src/learning/answerKey.ts`); the backend still checks what is
   sent. Every box filled but not right is sent after a 0.7 s pause (time to finish a longer equivalent) and counts as
-  wrong, as before; Enter sends what is typed too. Anh → Việt has no boxes (a meaning can be typed several ways): the
-  aimed word carries one bright answer field with a caret (*Gõ nghĩa tiếng Việt…*), the others a small *Nghĩa?* field,
-  and a wrong meaning is checked with Enter. The same text is never sent twice. Behind the boxes there is one text
+  wrong, as before; Enter sends what is typed too. Only Anh → Việt stages created while the meaning was typed have no
+  boxes: the aimed word carries one bright answer field with a caret (*Gõ nghĩa tiếng Việt…*), the others a small
+  *Nghĩa?* field, and a wrong meaning is checked with Enter. The same text is never sent twice. Behind the boxes there is one text
   field for the whole play field (`Playfield`, never remounted), so a falling target, choosing another one or a word
   breaking never closes and reopens the keyboard, and the typed text is kept. Hints: first letter, then last letter.
 - **The falling-word engine** (`games/wordField.ts`, plain TypeScript, tested in `__tests__/word-field.test.ts`): every

@@ -37,7 +37,7 @@ GAMEPLAYS: dict[str, dict] = {
                       kind="missing_number"),
     "meteor": _g("Bắn thiên thạch (Việt → Anh)", "falling_typing", "Gõ từ tiếng Anh cho nghĩa trên thiên thạch đang rơi", (1, 12),
                  world="space", kind="vocab_typing"),
-    "word_shooter": _g("Bắn từ tiếng Anh (Anh → Việt)", "falling_typing", "Gõ nghĩa tiếng Việt của từ đang rơi", (1, 12),
+    "word_shooter": _g("Bắn từ tiếng Anh (Anh → Việt)", "falling_typing", "Gõ lại từ tiếng Anh đang rơi, xem nghĩa tiếng Việt", (1, 12),
                        world="space", kind="word_spelling"),
     "word_builder": _g("Ghép chữ", "tile_word", "Kéo chữ/tiếng vào ổ khoá để mở cổng rừng", (1, 2), world="forest", kind="word_build"),
     "spelling_detective": _g("Thám tử chính tả", "find_fix", "Chạm tiếng viết sai rồi chọn cách viết đúng", (2, 9), kind="spell_fix"),

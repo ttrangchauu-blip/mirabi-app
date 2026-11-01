@@ -55,8 +55,8 @@ HEART_ON_WRONG = {"gate_choice", "bridge_order", "missing_number", "compare"}
 MOVING_KINDS = {"vocab_typing", "word_spelling", "math_input"}
 # Falling words answered by typing: a shot hits whichever open target it matches (see learning.answer_event).
 TYPED_TARGET_KINDS = {"vocab_typing", "word_spelling"}
-# Vocabulary turns: vocab_typing = Việt → Anh (recall the English word), word_spelling = Anh → Việt (type the meaning of
-# the shown word; stages created before typed the word itself: their frozen answers have no "lang").
+# Vocabulary turns: vocab_typing = Việt → Anh (recall the English word), word_spelling = Anh → Việt (type the shown word;
+# stages created while its meaning was typed instead keep their frozen answers, marked "lang": "vi").
 VOCAB_KINDS = ("vocab_typing", "word_spelling")
 
 GAME_KINDS = {
@@ -186,57 +186,6 @@ def check_text(answer: str, accepted: list[str], lang: str | None = None) -> boo
     return given in {norm(a) for a in accepted}
 
 
-# A leading classifier is optional in a typed meaning: "cái còi" or "còi", "sự hồi phục" or "hồi phục".
-_VI_CLASSIFIERS = ("sự ", "việc ", "cái ", "con ", "chiếc ", "quả ", "trái ", "cuộc ", "nỗi ", "niềm ")
-
-
-def _split_meaning(meaning: str) -> list[str]:
-    """The senses of a bank meaning, split at commas, semicolons and slashes outside brackets."""
-    parts, depth, current = [], 0, ""
-    for ch in meaning:
-        depth += ch == "("
-        depth -= ch == ")" and depth > 0
-        if ch in ",;/" and depth == 0:
-            parts.append(current)
-            current = ""
-        else:
-            current += ch
-    return [p.strip() for p in [*parts, current] if p.strip()]
-
-
-def meaning_answers(meaning: str) -> list[str]:
-    """Anh → Việt: the Vietnamese answers accepted for a bank meaning. Each sense alone ("thiểu số, nhóm thiểu số"),
-    with or without what is in brackets ("(dùng) dè sẻn" → "dè sẻn", "dùng dè sẻn") and without a leading classifier.
-    The first one is the meaning's first sense as written, without brackets."""
-    out: list[str] = []
-    for sense in _split_meaning(meaning):
-        bare = re.sub(r"\([^)]*\)", " ", sense)
-        full = sense.replace("(", " ").replace(")", " ")
-        for text in (bare, full):
-            # One space between words, none before punctuation, no full stop at the end ("Phôn (đơn vị)." → "Phôn").
-            text = re.sub(r"\s+([.,;:!?])", r"\1", re.sub(r"\s+", " ", text)).strip().strip(" .;:!?").strip()
-            if not text:
-                continue
-            out.append(text)
-            for classifier in _VI_CLASSIFIERS:
-                rest = text[len(classifier):].strip()
-                if text.lower().startswith(classifier) and len(rest) >= 2:
-                    out.append(rest)
-    seen: set[str] = set()
-    return [a for a in out if not (normalize_vi(a) in seen or seen.add(normalize_vi(a)))] or [meaning.strip()]
-
-
-def meaning_hints(meaning: str, context_vi: str | None) -> list[str]:
-    """Anh → Việt: first what the word is about (its context, never its meaning), then the size and first syllable of
-    the answer."""
-    first = meaning_answers(meaning)[0]
-    words = first.split()
-    # One syllable: its first letter (the syllable would be the answer).
-    shape = f"Nghĩa có {len(words)} tiếng, bắt đầu bằng “{words[0]}”" if len(words) > 1 \
-        else f"Nghĩa có 1 tiếng, bắt đầu bằng chữ “{words[0][0]}”"
-    return [f"Gợi ý: {context_vi}", shape] if context_vi else [f"Nghĩa có {len(words)} tiếng", shape]
-
-
 def check_choice(answer: str, options: list[dict], correct: str) -> bool:
     if answer not in {o["id"] for o in options}:
         raise InvalidAnswer("unknown option")
@@ -266,6 +215,14 @@ def check_bridge(token_ids: list[str], tokens: list[dict], accepted: list[str]) 
 def vocab_hints(word: str) -> list[str]:
     # The number of letters is always shown (letter boxes), so the hints reveal the first, then the last letter.
     return [f"Chữ cái đầu: “{word[0]}”", f"Chữ cái cuối: “{word[-1]}”"]
+
+
+def spelling_hints(word: str) -> list[str]:
+    # Anh → Việt: the word is on screen, so the hints help to type it letter by letter, never with its meaning.
+    parts = word.split()
+    counts = " + ".join(str(len(p)) for p in parts)
+    return [f"Từ có {counts} chữ cái" + (f" ({len(parts)} từ)" if len(parts) > 1 else ""),
+            "Gõ từng chữ: " + " · ".join(" ".join(p) for p in parts)]
 
 
 # ---------------------------------------------------------------------------------------------------------------

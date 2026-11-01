@@ -140,8 +140,7 @@ function Target({ variant, target, aimed, typed = '' }: { variant: 'word' | 'met
         </>
       )}
       <View style={aimed ? styles.slotsAimed : styles.slotsCompact}>
-        <AnswerSlots letters={target.letters} value={typed} width={TARGET_W - 8} compact={!aimed}
-          placeholder={target.letters ? undefined : aimed ? 'Gõ nghĩa tiếng Việt…' : 'Nghĩa?'} />
+        <AnswerSlots letters={target.letters} value={typed} width={TARGET_W - 8} compact={!aimed} />
       </View>
     </View>
   );

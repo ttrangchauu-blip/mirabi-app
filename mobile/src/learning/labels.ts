@@ -16,8 +16,8 @@ const VOCAB_MODES: Record<Mode, string> = {
 
 export const GAME_INFO: Record<GameId, GameInfo> = {
   word_shooter: { name: 'Bắn từ tiếng Anh', direction: 'Anh → Việt', icon: 'text-outline', gameType: 'meteor', variant: 'word_shooter',
-    detail: 'Gõ nghĩa tiếng Việt của từ tiếng Anh đang rơi.',
-    howTo: 'Từ tiếng Anh rơi xuống. Gõ đúng nghĩa tiếng Việt là từ dừng lại, pet tự bắn: từ phát sáng, vỡ ra và hiện nghĩa.', modes: VOCAB_MODES },
+    detail: 'Gõ lại từ tiếng Anh đang rơi, xem nghĩa tiếng Việt.',
+    howTo: 'Từ tiếng Anh rơi xuống. Gõ lại đúng từ đó là từ dừng lại, pet tự bắn: từ phát sáng, vỡ ra và hiện nghĩa tiếng Việt.', modes: VOCAB_MODES },
   meteor: { name: 'Bắn thiên thạch', direction: 'Việt → Anh', icon: 'planet-outline', gameType: 'meteor', variant: 'meteor',
     detail: 'Nhìn nghĩa tiếng Việt, gõ từ tiếng Anh.',
     howTo: 'Thiên thạch mang nghĩa tiếng Việt. Gõ đúng từ tiếng Anh là pet tự bắn vỡ nó.', modes: VOCAB_MODES },

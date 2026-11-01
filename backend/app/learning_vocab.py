@@ -613,10 +613,9 @@ def level_label(difficulty: int | None, cefr: str | None) -> str:
 
 
 def snapshot(lesson_code: str, e, kind: str, reason: str) -> dict:
-    """One turn: Việt → Anh (vocab_typing) recalls the word from its meaning; Anh → Việt (word_spelling) shows the
-    English word and its answer is the Vietnamese meaning (`lang: "vi"`, any of meaning_answers, tone marks optional).
-    Everything is frozen, so editing the bank never changes a session."""
-    from .learning_engine import meaning_answers, meaning_hints, vocab_hints
+    """One turn: Việt → Anh (vocab_typing) recalls the word from its meaning; Anh → Việt (word_spelling) types the
+    word shown and only then sees its meaning. Everything is frozen, so editing the bank never changes a session."""
+    from .learning_engine import spelling_hints, vocab_hints
     spelled = kind == "word_spelling"
     letters = [len(p) for p in e.word.split()]
     context = f" ({e.context_vi})" if e.context_vi else ""
@@ -624,14 +623,13 @@ def snapshot(lesson_code: str, e, kind: str, reason: str) -> dict:
     difficulty = getattr(e, "difficulty", None)
     cefr = getattr(e, "cefr", None)
     label = level_label(difficulty, cefr) or e.level
-    answer = {"accepted": meaning_answers(e.meaning_vi) if spelled else json.loads(e.accepted_json), "display": e.word,
+    answer = {"accepted": [e.word] if spelled else json.loads(e.accepted_json), "display": e.word,
               "meaning_vi": e.meaning_vi, "context_vi": e.context_vi, "phonetic": e.phonetic,
               "part_of_speech": e.part_of_speech, "level": label, "difficulty": difficulty, "cefr": cefr, "topic": e.topic,
               "example_en": e.example_en, "example_vi": e.example_vi, "entry_key": e.entry_key, "pick": reason,
-              "content_version": getattr(e, "content_version", None) or 1, **({"lang": "vi"} if spelled else {})}
+              "content_version": getattr(e, "content_version", None) or 1}
     if spelled:
-        # No letter boxes: a meaning can be typed several ways. The phonetic helps to read the word, never the meaning.
-        prompt = {"word": e.word, "phonetic": e.phonetic, "part_of_speech": e.part_of_speech, "level": label, "answer_lang": "vi"}
+        prompt = {"word": e.word, "part_of_speech": e.part_of_speech, "letters": letters, "level": label}
         explanation = f"“{e.word}”{phonetic} nghĩa là “{e.meaning_vi}”{context}. Ví dụ: {e.example_en} — {e.example_vi}"
     else:
         prompt = {"meaning_vi": e.meaning_vi, "context_vi": e.context_vi, "part_of_speech": e.part_of_speech,
@@ -640,9 +638,9 @@ def snapshot(lesson_code: str, e, kind: str, reason: str) -> dict:
     return {"kind": kind, "question_id": None,
             "question_key": f"{lesson_code}.{'spell.' if spelled else ''}{e.entry_key}",
             "skill_key": f"en.{'spell' if spelled else 'word'}.{e.entry_key}",
-            "skill_label": f"{'Nghĩa: ' if spelled else ''}{e.word} – {e.meaning_vi}"[:120],
+            "skill_label": f"{'Mặt chữ: ' if spelled else ''}{e.word} – {e.meaning_vi}"[:120],
             "prompt": prompt, "answer": answer,
-            "hints": meaning_hints(e.meaning_vi, e.context_vi) if spelled else vocab_hints(e.word), "explanation": explanation}
+            "hints": spelling_hints(e.word) if spelled else vocab_hints(e.word), "explanation": explanation}
 
 
 def _shows_answer(e) -> bool:

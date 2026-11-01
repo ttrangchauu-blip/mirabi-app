@@ -378,7 +378,7 @@ def correct_answer_text(item: LearningSessionItem) -> str:
     if item.kind == "compare":
         prompt = _loads(item.prompt_json, {})
         return f"{prompt['left']} {answer['value']} {prompt['right']}"
-    if answer.get("lang") == "vi":  # Anh → Việt: the answer is the meaning
+    if answer.get("lang") == "vi":  # Anh → Việt stages created while the meaning was typed: the answer is the meaning
         return answer.get("meaning_vi") or (answer.get("accepted") or [""])[0]
     return answer.get("display", "")
 
@@ -414,7 +414,7 @@ def item_travel(item: LearningSessionItem, rules: dict) -> int:
     if item.kind in VOCAB_KINDS:
         answer = _loads(item.answer_json, {})
         shown = answer.get("display", "")
-        if answer.get("lang") == "vi":  # Anh → Việt: a long meaning to type falls slower too
+        if answer.get("lang") == "vi":  # the same stages: a long meaning to type falls slower too
             shown = max(shown, min(answer.get("accepted") or [""], key=len), key=len)
         return travel_for(shown, base)
     return base

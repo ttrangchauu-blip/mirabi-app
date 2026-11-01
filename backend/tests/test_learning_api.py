@@ -220,7 +220,8 @@ def test_falling_words_carry_keys_of_every_accepted_answer_not_the_answers(clien
         stored = stored_answer(turn)
         accepted = stored["accepted"]
         assert turn["prompt"]["answer_keys"] == [answer_key(turn["turn_id"], a, stored.get("lang")) for a in accepted]
-        assert not any(leaks(a, turn) for a in accepted)  # keys, never answers
+        if turn["kind"] == "vocab_typing":  # Anh → Việt: the word to type is on screen by design
+            assert not any(leaks(a, turn) for a in accepted)  # keys, never answers
         post(client, me, session, "abandon")
     grammar = start(client, me, "en.to_be.basic")
     assert "answer_keys" not in grammar["open_turns"][0]["prompt"]  # only the typed falling words
@@ -415,60 +416,50 @@ def test_falling_words_allow_three_at_once_in_both_modes(client, me):
 
 # --- vocabulary: Anh → Việt (word_shooter) and Việt → Anh (meteor) ------------------------------------------------
 
-def test_word_shooter_shows_the_english_word_and_asks_its_vietnamese_meaning(client, me):
+def test_word_shooter_shows_the_english_word_and_it_is_typed_again_in_letter_boxes(client, me):
     session = start(client, me, variant="word_shooter")
     assert session["game"] == "word_shooter" and session["variant"] == "word_shooter" and session["hearts_max"] == VOCAB_HEARTS
     turn = session["open_turns"][0]
     word = stored_answer(turn)
     assert turn["kind"] == "word_spelling" and turn["prompt"]["word"] == word["display"] and turn["skill_label"] == "Gõ từ"
-    assert turn["prompt"]["answer_lang"] == "vi" and "letters" not in turn["prompt"]  # typed freely: no letter boxes
+    assert turn["prompt"]["letters"] == [len(p) for p in word["display"].split()] and "answer_lang" not in turn["prompt"]
+    assert word["accepted"] == [word["display"]] and "lang" not in word
     assert word["meaning_vi"] not in json.dumps(turn, ensure_ascii=False)  # never sent before it is answered
-    retyped = answer(client, me, session, turn, value=word["display"]).json()  # the English word itself is not the answer
-    assert retyped["result"]["correct"] is False and retyped["result"]["retry_allowed"] and retyped["result"]["word"] is None
-    assert retyped["result"]["hearts_delta"] == 0 and retyped["session"]["hearts"] == VOCAB_HEARTS  # a wrong answer: no heart lost
-    meaning = word["accepted"][0]
-    unaccented = "".join(c for c in unicodedata.normalize("NFD", meaning.replace("đ", "d").replace("Đ", "D")) if not unicodedata.combining(c))
-    hit = answer(client, me, session, turn, value=f"  {unaccented.upper()} ").json()["result"]  # tone marks optional
-    assert hit["correct"] and hit["outcome"] == "corrected"
+    wrong = answer(client, me, session, turn, value=word["meaning_vi"]).json()  # its meaning is not the answer
+    assert wrong["result"]["correct"] is False and wrong["result"]["retry_allowed"] and wrong["result"]["word"] is None
+    assert wrong["result"]["hearts_delta"] == 0 and wrong["session"]["hearts"] == VOCAB_HEARTS  # a wrong answer: no heart lost
+    hit = answer(client, me, session, turn, value=f"  {word['display'].upper()} ").json()["result"]
+    assert hit["correct"] and hit["outcome"] == "corrected" and hit["correct_answer"] == word["display"]
     assert hit["word"] == {"en": word["display"], "vi": word["meaning_vi"], "phonetic": word["phonetic"]}
 
 
-def test_word_shooter_accepts_each_sense_of_the_meaning(client, db):
-    from app.learning_engine import check_text, meaning_answers, meaning_hints, normalize_vi
+def test_word_shooter_hints_help_to_type_the_word_and_never_give_its_meaning(client, db):
+    from app.learning_engine import check_text, spelling_hints
     from app.learning_vocab import snapshot
     from app.models import LearningVocabEntry
     entries = list(db.scalars(select(LearningVocabEntry)))
     spelled = [snapshot("en.vocab.mix", e, "word_spelling", "new") for e in entries]
-    assert len(spelled) >= 400 and all(q["answer"]["lang"] == "vi" and q["answer"]["accepted"] for q in spelled)
-    # The English word is not the answer, unless Vietnamese borrowed it ("dong" → "đồng", "zero" → "zêrô").
-    assert all(not check_text(q["answer"]["display"], q["answer"]["accepted"], "vi") for q in spelled
-               if normalize_vi(q["answer"]["display"]) not in normalize_vi(q["answer"]["meaning_vi"]))
-    assert meaning_answers("Phôn (đơn vị âm lượng).") == ["Phôn", "Phôn đơn vị âm lượng"]
-    # Never in what the prompt shows (its values: "ho" is in the key "phonetic", not a leak).
+    assert len(spelled) >= 400 and all(q["answer"]["accepted"] == [q["answer"]["display"]] for q in spelled)
+    assert all(q["hints"] == spelling_hints(q["answer"]["display"]) and q["skill_label"].startswith("Mặt chữ: ") for q in spelled)
+    # Never in what the prompt shows.
     assert all(q["answer"]["meaning_vi"] not in json.dumps(list(q["prompt"].values()), ensure_ascii=False) for q in spelled)
-    # The senses, with or without what is in brackets and a leading classifier; tone marks optional.
-    assert meaning_answers("thiểu số, nhóm thiểu số") == ["thiểu số", "nhóm thiểu số"]
-    assert meaning_answers("(dùng) dè sẻn, một chút thôi") == ["dè sẻn", "dùng dè sẻn", "một chút thôi"]
-    assert meaning_answers("đặt (đúng chỗ, cẩn thận)") == ["đặt", "đặt đúng chỗ, cẩn thận"]
-    assert meaning_answers("cái còi") == ["cái còi", "còi"] and meaning_answers("sự hồi phục") == ["sự hồi phục", "hồi phục"]
-    assert check_text("con meo", meaning_answers("con mèo"), "vi") and check_text("Mèo", meaning_answers("con mèo"), "vi")
+    assert spelling_hints("cat") == ["Từ có 3 chữ cái", "Gõ từng chữ: c a t"]
+    assert spelling_hints("ice cream") == ["Từ có 3 + 5 chữ cái (2 từ)", "Gõ từng chữ: i c e · c r e a m"]
     assert not check_text("con meo", ["con mèo"])  # English answers keep their exact letters
-    assert not check_text("con chó", meaning_answers("con mèo"), "vi")
-    # Hints: what the word is about, then the size of the answer; never the answer itself.
-    assert meaning_hints("cái còi", "vật nhỏ thổi ra tiếng to") == ["Gợi ý: vật nhỏ thổi ra tiếng to", "Nghĩa có 2 tiếng, bắt đầu bằng “cái”"]
-    assert meaning_hints("nhựa", None) == ["Nghĩa có 1 tiếng", "Nghĩa có 1 tiếng, bắt đầu bằng chữ “n”"]
 
 
-def test_word_shooter_stage_created_before_still_takes_the_english_word(client, me, db):
+def test_word_shooter_stage_created_while_the_meaning_was_typed_still_takes_the_meaning(client, me, db):
     from app.models import LearningSessionItem
     session = start(client, me, variant="word_shooter")
     turn = session["open_turns"][0]
     item = db.scalar(select(LearningSessionItem).where(LearningSessionItem.turn_id == turn["turn_id"]))
     stored = json.loads(item.answer_json)
-    item.answer_json = json.dumps({k: v for k, v in stored.items() if k != "lang"} | {"accepted": [stored["display"]]}, ensure_ascii=False)
+    item.answer_json = json.dumps(stored | {"accepted": ["con mèo", "mèo"], "meaning_vi": "con mèo", "lang": "vi"}, ensure_ascii=False)
     db.commit()
-    hit = answer(client, me, session, turn, value=stored["display"]).json()["result"]
-    assert hit["correct"] and hit["correct_answer"] == stored["display"]
+    retyped = answer(client, me, session, turn, value=stored["display"]).json()["result"]
+    assert retyped["correct"] is False
+    hit = answer(client, me, session, turn, value="  CON MEO ").json()["result"]  # tone marks optional
+    assert hit["correct"] and hit["correct_answer"] == "con mèo"
 
 
 def test_the_two_vocabulary_games_keep_separate_progress(client, me):
@@ -568,7 +559,7 @@ def test_challenge_words_fall_and_a_miss_shows_the_word_pair(client, me, clock):
     assert missed["result"]["word"]["vi"] == word["meaning_vi"]
     post(client, me, session, "abandon")
     groups = client.get("/api/learning/review?subject=english", headers=me).json()["groups"]
-    assert groups[0]["items"][0]["label"].startswith("Nghĩa: ")
+    assert groups[0]["items"][0]["label"].startswith("Mặt chữ: ")
     review = client.post("/api/learning/review/sessions", headers=me, json={"topic_id": groups[0]["topic"]["id"]}).json()
     assert review["game"] == "word_shooter" and review["open_turns"][0]["kind"] == "word_spelling"
 

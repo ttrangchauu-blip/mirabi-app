@@ -77,7 +77,7 @@ const HIT_Y = 40;
  * another word never resizes anything). Its width follows its answer: a long word takes a wider box. */
 const WORD_MIN_W = FIELD.laneWidth;
 const WORD_MAX_W = 220;
-/** Anh → Việt: the meaning is typed freely, in a field this wide. */
+/** Anh → Việt stages created while the meaning was asked: it is typed freely, in a field this wide. */
 const MEANING_W = 168;
 const WORD_H = 120;
 const ROCK_H = 146;

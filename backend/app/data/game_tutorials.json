@@ -3,7 +3,7 @@
   "about": "Interactive tutorials, one per game (game_tutorials.py validates this file at startup; rules: docs/GAME_TUTORIALS.md). Each is played in the real game screen with its own demo content and never counts.",
   "games": {
     "word_shooter": {
-      "game_mode": "practice", "gameplay_version": 1, "tutorial_version": 4, "subject": "english", "hearts": 5, "skippable": true,
+      "game_mode": "practice", "gameplay_version": 1, "tutorial_version": 5, "subject": "english", "hearts": 5, "skippable": true,
       "done_title": "Giỏi lắm! Bạn đã biết cách bắn từ rồi!",
       "ready": ["Mỗi chặng có 15 từ, có lúc vài từ rơi cùng lúc.", "Từ nào chạm đất thì mất 1 tim."],
       "demo": [
@@ -14,9 +14,9 @@
       "steps": [
         {"id": "watch", "action": "observe", "instruction": "Nhìn kìa! Một từ đang rơi xuống!", "target": "aimed",
          "demo_animation": "arrow", "expected_action": "next", "release": ["t1"], "advance_ms": 3500},
-        {"id": "type", "action": "type", "instruction": "Gõ nghĩa của “apple”: quả táo", "target": "aimed", "demo_animation": "hand_type",
+        {"id": "type", "action": "type", "instruction": "Gõ lại từ đang rơi: apple", "target": "aimed", "demo_animation": "hand_type",
          "expected_action": "answer", "expected_result": "correct", "success_feedback": "Chính xác! Pet bắn ngay!",
-         "retry_feedback": "Chưa đúng. Gõ “quả táo” nhé (có dấu hay không đều được)."},
+         "retry_feedback": "Chưa đúng. Gõ lại “apple” nhé."},
         {"id": "break", "action": "observe", "instruction": "Đạn trúng: từ vỡ ra và hiện nghĩa tiếng Việt.", "target": "play",
          "demo_animation": "watch", "expected_action": "next", "advance_ms": 2600}
       ]

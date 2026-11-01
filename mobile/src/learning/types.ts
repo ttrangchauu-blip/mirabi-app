@@ -67,12 +67,12 @@ export type LessonDetail = LessonBrief & { intro: Intro };
 export type Option = { id: string; text: string };
 export type Prompt = {
   meaning_vi?: string; context_vi?: string | null; part_of_speech?: string | null; // vocab_typing
-  letters?: number[]; // vocab_typing (and word_spelling of older stages): letters per word of the answer
+  letters?: number[]; // vocab_typing, word_spelling: letters per word of the answer
   word?: string; // word_spelling: the English word shown
-  /** word_spelling: 'vi' = type the word's Vietnamese meaning (no letter boxes, tone marks optional). Stages created
-   * before have none: the English word itself is typed again. */
+  /** word_spelling of stages created while the meaning was asked: 'vi' = type the word's Vietnamese meaning (no letter
+   * boxes, tone marks optional). Otherwise the English word itself is typed again. */
   answer_lang?: 'vi';
-  phonetic?: string | null; // word_spelling: how the shown word reads
+  phonetic?: string | null; // word_spelling of those same stages: how the shown word reads
   answer_keys?: string[]; // vocab_typing, word_spelling: keys of the accepted answers (learning/answerKey.ts), to shoot when right
   level?: string; // vocabulary bank: CEFR level of the word
   sentence?: string; options?: Option[]; // gate_choice, compare

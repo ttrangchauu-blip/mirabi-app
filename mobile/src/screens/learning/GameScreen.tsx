@@ -783,7 +783,7 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
                 <Ionicons name="bulb-outline" size={16} color={t.accent} />
                 <Text style={styles.helpText}>{shown ? `Gợi ý ${shown.hints_shown.length}/${shown.hints_total}` : 'Gợi ý'}</Text>
               </Pressable>
-              {!retyped(shown) ? ( // older Anh → Việt stages: the word to type is already on screen
+              {!retyped(shown) ? ( // Anh → Việt: the word to type is already on screen
                 <Pressable onPress={() => { if (shown) reveal(shown); }} disabled={!shown || disabled} accessibilityRole="button" accessibilityLabel="Xem đáp án"
                   style={[styles.help, (!shown || disabled) && styles.dimmed]}>
                   <Ionicons name="eye-outline" size={16} color={t.accent} />
@@ -806,7 +806,7 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
               <Ionicons name="bulb-outline" size={16} color={t.accent} />
               <Text style={styles.helpText}>Gợi ý {shown.hints_shown.length}/{shown.hints_total}</Text>
             </Pressable>
-            {!retyped(shown) && !CURRICULUM.has(shown.kind) ? ( // older Anh → Việt stages: the word to type is already on screen
+            {!retyped(shown) && !CURRICULUM.has(shown.kind) ? ( // Anh → Việt: the word to type is already on screen
               <Pressable onPress={() => reveal(shown)} disabled={disabled} accessibilityRole="button" accessibilityLabel="Xem đáp án"
                 style={[styles.help, disabled && styles.dimmed]}>
                 <Ionicons name="eye-outline" size={16} color={t.accent} />
@@ -1081,7 +1081,7 @@ function PromptCard({ turn, game, notice }: { turn: Turn; game: string; notice?:
   );
 }
 
-/** Anh → Việt of stages created before the meaning was asked: the shown English word is typed again. */
+/** Anh → Việt: the shown English word is typed again (stages created while the meaning was asked have `answer_lang`). */
 function retyped(turn: Turn | undefined) {
   return turn?.kind === 'word_spelling' && turn.prompt.answer_lang !== 'vi';
 }

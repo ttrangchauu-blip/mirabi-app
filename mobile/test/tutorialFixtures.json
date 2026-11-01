@@ -4,7 +4,7 @@
    "game_id": "word_shooter",
    "game_mode": "practice",
    "gameplay_version": 1,
-   "tutorial_version": 4,
+   "tutorial_version": 5,
    "subject": "english",
    "hearts": 5,
    "skippable": true,
@@ -33,11 +33,11 @@
      "release": [],
      "id": "type",
      "action": "type",
-     "instruction": "Gõ nghĩa của “apple”: quả táo",
+     "instruction": "Gõ lại từ đang rơi: apple",
      "target": "aimed",
      "expected_action": "answer",
      "success_feedback": "Chính xác! Pet bắn ngay!",
-     "retry_feedback": "Chưa đúng. Gõ “quả táo” nhé (có dấu hay không đều được)."
+     "retry_feedback": "Chưa đúng. Gõ lại “apple” nhé."
     },
     {
      "expected_result": "correct",
@@ -59,13 +59,13 @@
      "skill_label": "Hướng dẫn",
      "prompt": {
       "word": "apple",
-      "phonetic": "/ˈæp.əl/",
       "part_of_speech": "noun",
+      "letters": [
+       5
+      ],
       "level": "",
-      "answer_lang": "vi",
       "answer_keys": [
-       "70c549e33737e619",
-       "997d9814288302fb"
+       "cbb8c6ca3c6db04e"
       ]
      },
      "hints_shown": [],
@@ -938,7 +938,7 @@
  },
  "answers": {
   "word_shooter": {
-   "t1": "quả táo"
+   "t1": "apple"
   },
   "meteor": {
    "t1": "cat",

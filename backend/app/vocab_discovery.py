@@ -30,7 +30,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from .curriculum import grade_number
-from .learning_engine import meaning_answers, normalize_text
+from .learning_engine import normalize_text
 from .learning_vocab import gives_answer
 
 GAMES = ("meteor", "word_shooter")
@@ -138,8 +138,6 @@ def senses(rows, policy: Policy, game: str) -> list[Word]:
             continue
         if game == "meteor" and gives_answer(r.meaning_vi, r.context_vi, json.loads(r.accepted_json or "[]") or [r.word]):
             continue  # Việt → Anh never shows a meaning that holds the answer
-        if game == "word_shooter" and canonical(r.word) in {canonical(m) for m in meaning_answers(r.meaning_vi)}:
-            continue  # Anh → Việt: "logo" means "logo", the word shown would be its own answer
         out.append(Word(r.entry_key, canonical(r.word), level, r.topic, complexity(r.word, r.part_of_speech)))
     return out
 

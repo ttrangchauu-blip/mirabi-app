@@ -53,7 +53,7 @@ any active state → SKIPPED
 ## A step
 
 ```json
-{"id": "type", "action": "type", "instruction": "Gõ nghĩa của “apple”: quả táo", "target": "aimed",
+{"id": "type", "action": "type", "instruction": "Gõ lại từ đang rơi: apple", "target": "aimed",
  "demo_animation": "hand_type", "expected_action": "answer", "expected_result": "correct",
  "success_feedback": "Chính xác! Pet bắn ngay!", "retry_feedback": "Chưa đúng. Gõ “quả táo” nhé.",
  "release": ["t1"], "fall_seconds": 6, "advance_ms": 3500}
