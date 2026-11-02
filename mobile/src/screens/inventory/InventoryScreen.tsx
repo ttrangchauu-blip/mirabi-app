@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, FlatList, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -18,6 +18,8 @@ type Sort = 'newest' | 'name';
 type Props = {
   /** Whose inventory: the offline copy is kept per account. */
   userId: number;
+  /** The tab it opens on ("Thành tựu" in Tiện ích: Kỷ vật, where the badges are). */
+  initialTab?: InventoryTab;
   onBack: () => void;
   /** Opened while decorating a room: "Đặt vào phòng này" puts a copy into that room's draft (saved with the room). */
   placeInto?: { room: RoomKind; onPlace: (item: InventoryItem) => void };
@@ -62,13 +64,15 @@ const keyOf = (i: Pick<InventoryItem, 'id' | 'variant'>) => `${i.id}.${i.variant
  * shows what is still free ("Còn 1 · Đang đặt 2"). The detail tells where copies are and when they came, and offers
  * what the item is for: a room, the garden, the album. No capacity limit.
  */
-export function InventoryScreen({ userId, onBack, placeInto, onPlace, onPlant, onOpenAlbum }: Props) {
+export function InventoryScreen({ userId, initialTab, onBack, placeInto, onPlace, onPlant, onOpenAlbum }: Props) {
   const insets = useSafeAreaInsets();
   const [data, setData] = useState<InventoryData | null>(null);
   const [offline, setOffline] = useState(false);
   const [error, setError] = useState<unknown>(null);
   const [loading, setLoading] = useState(true);
-  const [tab, setTab] = useState<InventoryTab>(placeInto ? 'decor' : 'all');
+  const [tab, setTab] = useState<InventoryTab>(placeInto ? 'decor' : initialTab ?? 'all');
+  // Opened on a tab further along the row: that tab is brought into view, or nothing would show which one this is.
+  const tabBar = useRef<ScrollView>(null);
   const [query, setQuery] = useState('');
   const [rarity, setRarity] = useState('all');
   const [use, setUse] = useState<ItemUse | 'all'>('all');
@@ -124,11 +128,11 @@ export function InventoryScreen({ userId, onBack, placeInto, onPlace, onPlant, o
           <Text style={s.offlineText}>Đang ngoại tuyến · hiển thị kho đồ đã lưu. Cần kết nối để dùng đồ. Chạm để thử lại.</Text>
         </Pressable>
       ) : null}
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={s.bar} contentContainerStyle={s.chips} accessibilityRole="tablist">
+      <ScrollView ref={tabBar} horizontal showsHorizontalScrollIndicator={false} style={s.bar} contentContainerStyle={s.chips} accessibilityRole="tablist">
         {TABS.map((tb) => {
           const on = tb.id === tab;
           const n = tb.id === 'all' ? data.items.length : data.items.filter((i) => i.tab === tb.id).length;
-          return <Pressable key={tb.id} onPress={() => setTab(tb.id)} accessibilityRole="tab" accessibilityState={{ selected: on }}
+          return <Pressable key={tb.id} onPress={() => setTab(tb.id)} onLayout={tb.id === initialTab ? (e) => tabBar.current?.scrollTo({ x: e.nativeEvent.layout.x - 16, animated: false }) : undefined} accessibilityRole="tab" accessibilityState={{ selected: on }}
             accessibilityLabel={`${tb.label}, ${n} món`} style={[s.tab, on && s.tabOn]}>
             <Text style={[s.tabText, on && s.tabTextOn]}>{tb.label}</Text>
             <Text style={[s.tabCount, on && s.tabTextOn]}>{n}</Text>

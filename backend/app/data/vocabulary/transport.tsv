@@ -1,0 +1,58 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic	source	status
+bike	bike	noun	1	transport	xe đạp		I ride my bike to school.	Tôi đạp xe đạp đến trường.	bicycle	/baɪk/	mirabi-ai-2026-10	active
+boat	boat	noun	1	transport	con thuyền, chiếc tàu nhỏ		We went across the river by boat.	Chúng tôi đi thuyền qua sông.		/bəʊt/	mirabi-ai-2026-10	active
+motorbike	motorbike	noun	1	transport	xe máy		My dad goes to work by motorbike.	Bố tôi đi làm bằng xe máy.	motorcycle	/ˈməʊtəbaɪk/	mirabi-ai-2026-10	active
+truck	truck	noun	1	transport	xe tải		A big truck is carrying sand.	Một chiếc xe tải lớn đang chở cát.	lorry	/trʌk/	mirabi-ai-2026-10	active
+street	street	noun	1	transport	đường phố, con phố		There are many shops on this street.	Có nhiều cửa hàng trên con phố này.		/striːt/	mirabi-ai-2026-10	active
+drive	drive	verb	1	transport	lái (ô tô, xe)		My mum drives a small car.	Mẹ tôi lái một chiếc ô tô nhỏ.		/draɪv/	mirabi-ai-2026-10	active
+bus_stop	bus stop	noun	1	transport	trạm xe buýt, điểm dừng xe buýt		Wait for me at the bus stop.	Đợi tôi ở trạm xe buýt nhé.			mirabi-ai-2026-10	active
+traffic_light	traffic light	noun	1	transport	đèn giao thông		Stop when the traffic light is red.	Hãy dừng lại khi đèn giao thông màu đỏ.	traffic lights		mirabi-ai-2026-10	active
+ride_a_bike	ride a bike	phrase	1	transport	đi xe đạp, đạp xe		I learned to ride a bike when I was six.	Tôi học đi xe đạp khi lên sáu tuổi.	ride a bicycle		mirabi-ai-2026-10	active
+by_bus	by bus	phrase	1	transport	bằng xe buýt		We go to the zoo by bus.	Chúng tôi đi sở thú bằng xe buýt.			mirabi-ai-2026-10	active
+on_foot	on foot	phrase	1	transport	đi bộ, bằng chân	nói về cách đi đến đâu đó	My house is near, so I go to school on foot.	Nhà tôi gần nên tôi đi bộ đến trường.			mirabi-ai-2026-10	active
+station	station	noun	2	transport	nhà ga, bến	nơi tàu hoặc xe dừng đón khách	The train leaves the station at nine.	Tàu rời ga lúc chín giờ.	train station	/ˈsteɪʃn/	mirabi-ai-2026-10	active
+traffic	traffic	noun	2	transport	xe cộ qua lại, giao thông		There is a lot of traffic in the morning.	Buổi sáng có rất nhiều xe cộ qua lại.		/ˈtræfɪk/	mirabi-ai-2026-10	active
+passenger	passenger	noun	2	transport	hành khách		The bus has thirty passengers.	Xe buýt có ba mươi hành khách.		/ˈpæsɪndʒə/	mirabi-ai-2026-10	active
+bridge	bridge	noun	2	transport	cây cầu		We walked across the old bridge.	Chúng tôi đi bộ qua cây cầu cũ.		/brɪdʒ/	mirabi-ai-2026-10	active
+crossroads	crossroads	noun	2	transport	ngã tư		Turn left at the crossroads.	Rẽ trái ở ngã tư.	intersection	/ˈkrɒsrəʊdz/	mirabi-ai-2026-10	active
+get_on	get on	phrasal_verb	2	transport	lên (xe buýt, tàu, máy bay)		We got on the bus at eight.	Chúng tôi lên xe buýt lúc tám giờ.			mirabi-ai-2026-10	active
+get_off	get off	phrasal_verb	2	transport	xuống (xe buýt, tàu, máy bay)		Get off the bus at the next stop.	Xuống xe buýt ở trạm tiếp theo nhé.			mirabi-ai-2026-10	active
+subway	subway	noun	2	transport	tàu điện ngầm		In Tokyo, many people take the subway.	Ở Tokyo, nhiều người đi tàu điện ngầm.	underground|metro|tube	/ˈsʌbweɪ/	mirabi-ai-2026-10	active
+ferry	ferry	noun	2	transport	phà		We crossed the river by ferry.	Chúng tôi qua sông bằng phà.		/ˈferi/	mirabi-ai-2026-10	active
+scooter	scooter	noun	2	transport	xe tay ga		My sister rides a scooter to work.	Chị tôi đi xe tay ga đi làm.		/ˈskuːtə/	mirabi-ai-2026-10	active
+petrol	petrol	noun	2	transport	xăng	nhiên liệu cho xe máy, ô tô	The car needs more petrol.	Chiếc xe cần đổ thêm xăng.	gasoline	/ˈpetrəl/	mirabi-ai-2026-10	active
+fare	fare	noun	2	transport	giá vé, tiền vé	tiền trả khi đi xe, tàu	The bus fare is seven thousand dong.	Giá vé xe buýt là bảy nghìn đồng.		/feə/	mirabi-ai-2026-10	active
+platform	platform	noun	2	transport	sân ga		The train to Hue is at platform two.	Tàu đi Huế ở sân ga số hai.		/ˈplætfɔːm/	mirabi-ai-2026-10	active
+wheel	wheel	noun	2	transport	bánh xe		A bicycle has two wheels.	Xe đạp có hai bánh.		/wiːl/	mirabi-ai-2026-10	active
+engine	engine	noun	2	transport	động cơ		The engine of the old car is very loud.	Động cơ của chiếc xe cũ rất ồn.	motor	/ˈendʒɪn/	mirabi-ai-2026-10	active
+van	van	noun	2	transport	xe thùng, xe tải nhỏ		The van brings bread to the shop every morning.	Chiếc xe thùng chở bánh mì đến cửa hàng mỗi sáng.		/væn/	mirabi-ai-2026-10	active
+turn_left	turn left	phrase	2	transport	rẽ trái		Turn left at the traffic light.	Rẽ trái ở đèn giao thông.			mirabi-ai-2026-10	active
+turn_right	turn right	phrase	2	transport	rẽ phải		Turn right and you will see the school.	Rẽ phải là bạn sẽ thấy trường học.			mirabi-ai-2026-10	active
+go_straight	go straight	phrase	2	transport	đi thẳng		Go straight for two hundred metres.	Đi thẳng khoảng hai trăm mét.	go straight ahead|go straight on		mirabi-ai-2026-10	active
+catch_the_bus	catch the bus	phrase	2	transport	bắt xe buýt, đón xe buýt		I catch the bus at seven every day.	Tôi bắt xe buýt lúc bảy giờ mỗi ngày.	take the bus		mirabi-ai-2026-10	active
+miss_the_bus	miss the bus	phrase	2	transport	lỡ chuyến xe buýt		Hurry up or we will miss the bus!	Nhanh lên kẻo chúng ta lỡ chuyến xe buýt!			mirabi-ai-2026-10	active
+take_a_taxi	take a taxi	phrase	2	transport	đi taxi, bắt taxi		It is late, so let's take a taxi.	Muộn rồi, mình bắt taxi đi.	get a taxi		mirabi-ai-2026-10	active
+helicopter	helicopter	noun	2	transport	máy bay trực thăng		A helicopter flew over the city.	Một chiếc trực thăng bay qua thành phố.		/ˈhelɪkɒptə/	mirabi-ai-2026-10	active
+cyclo	cyclo	noun	2	transport	xích lô		Tourists love riding a cyclo around the Old Quarter.	Du khách thích đi xích lô quanh phố cổ.		/ˈsaɪkləʊ/	mirabi-ai-2026-10	active
+motorbike_taxi	motorbike taxi	noun	2	transport	xe ôm		He took a motorbike taxi to the station.	Anh ấy đi xe ôm ra ga.			mirabi-ai-2026-10	active
+electric_car	electric car	noun	2	transport	ô tô điện		Electric cars do not use petrol.	Ô tô điện không dùng xăng.			mirabi-ai-2026-10	active
+railway	railway	noun	2	transport	đường sắt, đường ray xe lửa		The railway goes from Hanoi to Ho Chi Minh City.	Tuyến đường sắt đi từ Hà Nội đến Thành phố Hồ Chí Minh.	railroad	/ˈreɪlweɪ/	mirabi-ai-2026-10	active
+tunnel	tunnel	noun	2	transport	đường hầm		The train goes through a long tunnel.	Tàu chạy qua một đường hầm dài.		/ˈtʌnl/	mirabi-ai-2026-10	active
+traffic_jam	traffic jam	noun	3	transport	tắc đường, kẹt xe		We were late because of a traffic jam.	Chúng tôi đến muộn vì tắc đường.			mirabi-ai-2026-10	active
+rush_hour	rush hour	noun	3	transport	giờ cao điểm		The roads are busy during rush hour.	Đường phố đông đúc vào giờ cao điểm.			mirabi-ai-2026-10	active
+pedestrian	pedestrian	noun	3	transport	người đi bộ		Drivers must stop for pedestrians.	Người lái xe phải dừng lại nhường người đi bộ.		/pəˈdestriən/	mirabi-ai-2026-10	active
+zebra_crossing	zebra crossing	noun	3	transport	vạch kẻ đường cho người đi bộ		Cross the road at the zebra crossing.	Hãy qua đường ở vạch kẻ dành cho người đi bộ.	crosswalk|pedestrian crossing		mirabi-ai-2026-10	active
+speed_limit	speed limit	noun	3	transport	giới hạn tốc độ		The speed limit here is forty kilometres an hour.	Giới hạn tốc độ ở đây là bốn mươi ki-lô-mét một giờ.			mirabi-ai-2026-10	active
+road_sign	road sign	noun	3	transport	biển báo giao thông		This road sign means 'no parking'.	Biển báo này có nghĩa là 'cấm đỗ xe'.	traffic sign		mirabi-ai-2026-10	active
+vehicle	vehicle	noun	3	transport	phương tiện, xe cộ		Cars, buses and trucks are vehicles.	Ô tô, xe buýt và xe tải là các phương tiện giao thông.		/ˈviːəkl/	mirabi-ai-2026-10	active
+public_transport	public transport	noun	3	transport	phương tiện giao thông công cộng		Using public transport helps reduce traffic.	Sử dụng phương tiện công cộng giúp giảm ùn tắc.	public transportation		mirabi-ai-2026-10	active
+driving_licence	driving licence	noun	3	transport	bằng lái xe		You need a driving licence to drive a car.	Bạn cần có bằng lái xe để lái ô tô.	driving license|driver's license		mirabi-ai-2026-10	active
+overtake	overtake	verb	3	transport	vượt (xe khác)		Never overtake on a bridge.	Không bao giờ được vượt xe trên cầu.	pass	/ˌəʊvəˈteɪk/	mirabi-ai-2026-10	active
+one-way_street	one-way street	noun	3	transport	đường một chiều		You cannot turn here, it is a one-way street.	Bạn không thể rẽ ở đây, đây là đường một chiều.			mirabi-ai-2026-10	active
+roundabout	roundabout	noun	3	transport	vòng xuyến, bùng binh		Take the second exit at the roundabout.	Đi vào lối ra thứ hai ở vòng xuyến.	traffic circle	/ˈraʊndəbaʊt/	mirabi-ai-2026-10	active
+pavement	pavement	noun	3	transport	vỉa hè		Please walk on the pavement, not on the road.	Hãy đi trên vỉa hè, đừng đi dưới lòng đường.	sidewalk	/ˈpeɪvmənt/	mirabi-ai-2026-10	active
+departure	departure	noun	3	transport	sự khởi hành, giờ khởi hành		Our departure is at six in the morning.	Giờ khởi hành của chúng ta là sáu giờ sáng.		/dɪˈpɑːtʃə/	mirabi-ai-2026-10	active
+arrival	arrival	noun	3	transport	sự đến nơi, giờ đến		The arrival of the train was late.	Tàu đến nơi muộn.		/əˈraɪvl/	mirabi-ai-2026-10	active
+motorway	motorway	noun	3	transport	đường cao tốc		The new motorway makes the trip much shorter.	Đường cao tốc mới giúp chuyến đi ngắn hơn nhiều.	highway|expressway|freeway	/ˈməʊtəweɪ/	mirabi-ai-2026-10	active
+car_park	car park	noun	3	transport	bãi đỗ xe		The car park is behind the supermarket.	Bãi đỗ xe ở phía sau siêu thị.	parking lot		mirabi-ai-2026-10	active
+petrol_station	petrol station	noun	3	transport	trạm xăng, cây xăng		Let's stop at the next petrol station.	Mình dừng ở cây xăng tiếp theo nhé.	gas station|filling station		mirabi-ai-2026-10	active

@@ -1,0 +1,1738 @@
+{
+ "subject": "defense",
+ "version": 1,
+ "organization": "topic",
+ "source_note": "Theo yêu cầu cần đạt môn Giáo dục quốc phòng và an ninh (CT GDPT 2018); tổ chức theo chủ đề, không theo mục lục bộ sách nào. Trò chơi chỉ ôn kiến thức, an toàn và sơ cứu; không thay thế giờ học thực hành với giáo viên.",
+ "chapters": [
+  {
+   "key": "qp10.truyen_thong",
+   "grade": 10,
+   "order": 1,
+   "title": "Truyền thống đánh giặc giữ nước",
+   "lessons": [
+    {
+     "key": "qp10.truyen_thong_dan_toc",
+     "order": 1,
+     "title": "Truyền thống đánh giặc giữ nước của dân tộc Việt Nam",
+     "description": "Những nét chính của nghệ thuật lấy nhỏ thắng lớn, lấy ít địch nhiều và tinh thần yêu nước.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "qp10.qdnd_cand",
+     "order": 2,
+     "title": "Truyền thống của Quân đội nhân dân và Công an nhân dân",
+     "description": "Quá trình hình thành, phát triển và những truyền thống vẻ vang của hai lực lượng.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "qp10.an_toan_giao_thong",
+   "grade": 10,
+   "order": 2,
+   "title": "Trật tự, an toàn giao thông",
+   "lessons": [
+    {
+     "key": "qp10.luat_giao_thong",
+     "order": 1,
+     "title": "Phòng, chống vi phạm trật tự, an toàn giao thông",
+     "description": "Hiểu các quy tắc giao thông cơ bản và chọn cách đi đường an toàn, đúng luật.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả và trình kiểm tra đã soát."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được một số quy tắc cơ bản về trật tự, an toàn giao thông đường bộ áp dụng với học sinh",
+      "Nhận ra hành vi vi phạm thường gặp và hậu quả của chúng",
+      "Biết cách xử lí khi chứng kiến tai nạn giao thông"
+     ],
+     "summary": [
+      "Người tham gia giao thông phải đi bên phải theo chiều đi của mình, đúng làn đường và chấp hành đèn tín hiệu, biển báo, hiệu lệnh của người điều khiển giao thông.",
+      "Học sinh chưa đủ 18 tuổi không được điều khiển xe mô tô; từ đủ 16 tuổi chỉ được điều khiển xe gắn máy theo quy định hiện hành.",
+      "Đi xe máy, xe gắn máy, xe đạp điện phải đội mũ bảo hiểm cài quai đúng quy cách.",
+      "Pháp luật cấm điều khiển phương tiện khi trong máu hoặc hơi thở có nồng độ cồn, cấm dùng điện thoại khi đang lái xe.",
+      "Khi gặp tai nạn: giữ an toàn cho mình, gọi 115 (cấp cứu) và 113 (công an), giúp đỡ trong khả năng, giữ nguyên hiện trường."
+     ],
+     "examples": [
+      {
+       "title": "Đèn vàng nghĩa là gì?",
+       "lines": [
+        "Đèn vàng báo hiệu sắp chuyển sang đèn đỏ: phải giảm tốc và dừng trước vạch dừng.",
+        "Chỉ được đi tiếp nếu đã đi quá vạch dừng khi đèn vàng bật."
+       ]
+      },
+      {
+       "title": "Số điện thoại khẩn cấp",
+       "lines": [
+        "113: công an",
+        "114: cứu nạn, cứu hộ, cứu hoả",
+        "115: cấp cứu y tế"
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Tình huống trên đường",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "tuoi_lai_xe",
+         "question": "Minh 15 tuổi. Anh trai đi công tác, để lại chiếc xe máy 110 cm³ và bảo Minh cứ lấy đi học cho nhanh. Minh nên làm gì?",
+         "options": [
+          {
+           "text": "Đi xe đạp hoặc xe buýt đến trường như thường lệ",
+           "ok": true,
+           "why": "Đúng. Minh chưa đủ tuổi điều khiển xe máy; chọn phương tiện phù hợp với lứa tuổi là tôn trọng pháp luật và giữ an toàn cho mình, cho người khác."
+          },
+          {
+           "text": "Lấy xe đi, chỉ chạy đường nhỏ cho đỡ bị kiểm tra",
+           "ok": false,
+           "why": "Chưa đúng. Vi phạm vẫn là vi phạm dù ở đường nhỏ; người chưa đủ tuổi chưa có kĩ năng và giấy phép nên dễ gây tai nạn, người giao xe cũng bị xử phạt."
+          },
+          {
+           "text": "Lấy xe đi nhưng chạy thật chậm",
+           "ok": false,
+           "why": "Chưa đúng. Đi chậm không làm cho việc chưa đủ tuổi trở thành hợp pháp, và vẫn không có kĩ năng xử lí tình huống."
+          }
+         ],
+         "explanation": "Học sinh chưa đủ 18 tuổi không được điều khiển xe mô tô; từ đủ 16 tuổi chỉ được điều khiển xe gắn máy theo quy định hiện hành. Người giao xe cho người không đủ điều kiện cũng vi phạm."
+        },
+        {
+         "key": "mu_bao_hiem",
+         "question": "Lan đi xe đạp điện đến trường, nhà chỉ cách trường 1 km. Bạn bảo: \"Gần thế, đội mũ bảo hiểm làm gì cho nóng\". Lan nên làm gì?",
+         "options": [
+          {
+           "text": "Vẫn đội mũ bảo hiểm và cài quai cẩn thận",
+           "ok": true,
+           "why": "Đúng. Đi xe đạp điện phải đội mũ bảo hiểm; chấn thương đầu có thể xảy ra ở bất kì quãng đường nào, kể cả rất ngắn."
+          },
+          {
+           "text": "Treo mũ ở tay lái, khi nào gặp công an thì đội",
+           "ok": false,
+           "why": "Chưa đúng. Mũ bảo hiểm để bảo vệ đầu chứ không phải để đối phó với việc kiểm tra; treo ở tay lái thì không bảo vệ được gì khi ngã."
+          },
+          {
+           "text": "Đội mũ nhưng không cài quai cho thoải mái",
+           "ok": false,
+           "why": "Chưa đúng. Không cài quai thì mũ dễ văng ra khi va chạm, gần như không còn tác dụng bảo vệ."
+          }
+         ],
+         "explanation": "Người đi xe máy, xe gắn máy, xe đạp điện phải đội mũ bảo hiểm và cài quai đúng quy cách. Phần lớn ca tử vong do tai nạn xe hai bánh là do chấn thương sọ não."
+        },
+        {
+         "key": "dan_hang",
+         "question": "Tan học, ba bạn đi xe đạp rủ nhau đi hàng ngang để vừa đi vừa nói chuyện. Cách làm nào đúng?",
+         "options": [
+          {
+           "text": "Đi nối đuôi nhau, sát bên phải, đến nơi rồi nói chuyện",
+           "ok": true,
+           "why": "Đúng. Đi thành hàng một sát bên phải giúp các xe khác vượt an toàn; câu chuyện có thể để lúc dừng lại."
+          },
+          {
+           "text": "Đi hàng ba nhưng đi chậm",
+           "ok": false,
+           "why": "Chưa đúng. Đi dàn hàng ngang chiếm lòng đường, cản trở và dễ va chạm với xe phía sau, dù đi nhanh hay chậm."
+          },
+          {
+           "text": "Đi hàng ba, hai bạn ngoài cùng nắm tay nhau cho đỡ lạng",
+           "ok": false,
+           "why": "Chưa đúng. Nắm tay nhau khi đi xe là hành vi bị cấm: chỉ một bạn mất thăng bằng là cả nhóm cùng ngã."
+          }
+         ],
+         "explanation": "Người đi xe đạp không được đi dàn hàng ngang, không bám, kéo, đẩy hay nắm tay nhau khi đang đi. Đi đúng phần đường là tôn trọng người khác."
+        },
+        {
+         "key": "ruou_bia",
+         "question": "Sau bữa liên hoan, chú của Hà đã uống mấy cốc bia nhưng nói vẫn tỉnh và muốn chở Hà về bằng xe máy. Hà nên làm gì?",
+         "options": [
+          {
+           "text": "Lễ phép từ chối, đề nghị gọi xe dịch vụ hoặc nhờ người không uống rượu bia chở",
+           "ok": true,
+           "why": "Đúng. Đã uống rượu bia thì không lái xe; từ chối khéo léo vừa giữ an toàn cho cả hai chú cháu vừa giúp chú không vi phạm pháp luật."
+          },
+          {
+           "text": "Đồng ý vì chú nói vẫn tỉnh",
+           "ok": false,
+           "why": "Chưa đúng. Cồn làm chậm phản xạ ngay cả khi người uống cảm thấy tỉnh; đây là nguyên nhân của rất nhiều vụ tai nạn nghiêm trọng."
+          },
+          {
+           "text": "Đồng ý nhưng nhắc chú đi chậm",
+           "ok": false,
+           "why": "Chưa đúng. Đi chậm không loại bỏ được tác động của cồn, và lái xe khi có nồng độ cồn vẫn là vi phạm."
+          }
+         ],
+         "explanation": "Pháp luật hiện hành cấm điều khiển phương tiện giao thông khi trong máu hoặc hơi thở có nồng độ cồn, không có mức cho phép."
+        },
+        {
+         "key": "den_vang",
+         "question": "Hùng đi xe đạp sắp đến ngã tư thì đèn tín hiệu chuyển từ xanh sang vàng, Hùng còn cách vạch dừng một đoạn. Hùng nên làm gì?",
+         "options": [
+          {
+           "text": "Giảm tốc độ và dừng lại trước vạch dừng",
+           "ok": true,
+           "why": "Đúng. Đèn vàng báo sắp chuyển đỏ; khi chưa đến vạch dừng thì phải dừng lại, chỉ được đi tiếp nếu đã đi quá vạch."
+          },
+          {
+           "text": "Đạp thật nhanh để kịp qua trước khi đèn đỏ",
+           "ok": false,
+           "why": "Chưa đúng. Tăng tốc khi đèn vàng dễ va chạm với xe hướng khác vừa xuất phát, đây là kiểu tai nạn rất hay gặp ở ngã tư."
+          },
+          {
+           "text": "Đi tiếp vì đèn vàng chưa phải đèn đỏ",
+           "ok": false,
+           "why": "Chưa đúng. Đèn vàng không phải tín hiệu được đi; người chưa qua vạch dừng phải dừng lại."
+          }
+         ],
+         "explanation": "Đèn xanh: được đi; đèn vàng: dừng trước vạch dừng, trừ khi đã đi quá vạch (đèn vàng nhấp nháy: được đi nhưng phải giảm tốc, chú ý quan sát, nhường người đi bộ); đèn đỏ: cấm đi."
+        },
+        {
+         "key": "tai_nan",
+         "question": "Trên đường về, Mai thấy một người đi xe máy bị ngã, nằm bất động bên lề đường, nhiều người đứng xem và quay video. Việc nên làm trước tiên là gì?",
+         "options": [
+          {
+           "text": "Gọi 115 báo địa điểm, tình trạng người bị nạn, rồi giúp cảnh báo các xe khác",
+           "ok": true,
+           "why": "Đúng. Gọi cấp cứu sớm là việc quan trọng nhất; cảnh báo xe khác giúp tránh tai nạn chồng lên tai nạn. Đó là trách nhiệm và lòng nhân ái."
+          },
+          {
+           "text": "Đỡ người bị nạn ngồi dậy ngay cho tỉnh",
+           "ok": false,
+           "why": "Chưa đúng. Người bất động có thể bị chấn thương cột sống; nâng đỡ sai có thể gây liệt. Chỉ di chuyển khi nạn nhân đang ở chỗ nguy hiểm."
+          },
+          {
+           "text": "Quay video đăng lên mạng để mọi người biết",
+           "ok": false,
+           "why": "Chưa đúng. Quay và đăng hình người bị nạn không giúp gì, còn xâm phạm hình ảnh, danh dự của họ và làm chậm việc cấp cứu."
+          }
+         ],
+         "explanation": "Khi chứng kiến tai nạn: giữ an toàn cho mình, gọi 115 và 113, cảnh báo phương tiện khác, giúp đỡ trong khả năng, không di chuyển nạn nhân nếu không cần thiết, giữ nguyên hiện trường."
+        },
+        {
+         "key": "dien_thoai",
+         "question": "Đang đi xe đạp điện, điện thoại trong túi Nam rung liên tục, có thể là mẹ gọi. Nam nên làm gì?",
+         "options": [
+          {
+           "text": "Tấp vào lề, dừng hẳn xe ở nơi an toàn rồi mới nghe máy",
+           "ok": true,
+           "why": "Đúng. Dừng xe an toàn rồi nghe máy giúp Nam vừa không bỏ lỡ cuộc gọi vừa không mất tập trung khi lái."
+          },
+          {
+           "text": "Một tay lái, một tay nghe máy thật nhanh",
+           "ok": false,
+           "why": "Chưa đúng. Pháp luật cấm dùng điện thoại khi đang điều khiển xe; một tay lái thì không kịp phanh và dễ mất lái."
+          },
+          {
+           "text": "Kẹp điện thoại vào mũ bảo hiểm để nghe",
+           "ok": false,
+           "why": "Chưa đúng. Nghe điện thoại khi đang đi vẫn làm mất tập trung và không nghe được tiếng còi, tiếng xe xung quanh."
+          }
+         ],
+         "explanation": "Sử dụng điện thoại khi đang điều khiển phương tiện là hành vi bị cấm. Mất tập trung chỉ vài giây cũng đủ gây tai nạn."
+        }
+       ]
+      },
+      {
+       "game": "order",
+       "title": "Các bước đi đường an toàn",
+       "tasks": [
+        {
+         "key": "qua_duong",
+         "prompt": "Sắp xếp các bước sang đường an toàn ở nơi có vạch kẻ đường và đèn tín hiệu.",
+         "items": [
+          "Dừng lại trên vỉa hè, ở đầu vạch kẻ đường",
+          "Chờ đèn dành cho người đi bộ chuyển sang màu xanh",
+          "Quan sát xe từ hai phía, chắc chắn xe đã dừng",
+          "Đi thẳng, nhanh gọn trên vạch, không dùng điện thoại"
+         ],
+         "explanation": "Người đi bộ sang đường ở nơi có vạch kẻ và theo đèn tín hiệu; dù đèn xanh vẫn phải quan sát vì có thể có xe vượt đèn."
+        },
+        {
+         "key": "re_trai",
+         "prompt": "Sắp xếp các bước rẽ trái an toàn bằng xe đạp điện tại ngã tư.",
+         "items": [
+          "Quan sát phía sau và hai bên",
+          "Báo hiệu rẽ trái bằng đèn xi nhan hoặc tay",
+          "Chuyển dần sang làn bên trái khi an toàn",
+          "Giảm tốc, nhường người đi bộ và xe ngược chiều rồi mới rẽ"
+         ],
+         "explanation": "Muốn chuyển hướng phải quan sát trước, báo hiệu cho người khác biết, chuyển làn từ từ và nhường đường đúng quy định."
+        },
+        {
+         "key": "doi_mu",
+         "prompt": "Sắp xếp các bước đội mũ bảo hiểm đúng cách.",
+         "items": [
+          "Chọn mũ vừa đầu, có dấu hợp quy",
+          "Đội mũ ngay ngắn, vành mũ ngay trên lông mày",
+          "Cài khoá quai dưới cằm",
+          "Kéo thử quai, chỉ luồn vừa một đến hai ngón tay"
+         ],
+         "explanation": "Mũ vừa đầu, đội ngay ngắn và cài quai chặt mới bảo vệ được đầu khi va chạm."
+        },
+        {
+         "key": "gap_tai_nan",
+         "prompt": "Sắp xếp các việc nên làm khi chứng kiến một vụ tai nạn giao thông.",
+         "items": [
+          "Đứng ở nơi an toàn, cảnh báo xe khác",
+          "Gọi 115 và 113, nói rõ địa điểm và tình trạng",
+          "Sơ cứu trong khả năng, không di chuyển nạn nhân nếu không cần",
+          "Giữ nguyên hiện trường, cung cấp thông tin cho lực lượng chức năng"
+         ],
+         "explanation": "An toàn của người giúp đỡ là trước tiên; sau đó gọi cấp cứu, giúp nạn nhân và hỗ trợ cơ quan chức năng làm rõ vụ việc."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "qp10.van_hoa_giao_thong",
+     "order": 2,
+     "title": "Văn hoá giao thông của học sinh",
+     "description": "Nhường nhịn, giúp đỡ người khác và tuyên truyền đi đường an toàn.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "qp10.so_cuu",
+   "grade": 10,
+   "order": 3,
+   "title": "Sơ cứu ban đầu",
+   "lessons": [
+    {
+     "key": "qp10.cam_mau",
+     "order": 1,
+     "title": "Sơ cứu vết thương chảy máu",
+     "description": "Biết cầm máu, băng vết thương và khi nào phải gọi cấp cứu.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả và trình kiểm tra đã soát."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nhận biết mức độ chảy máu và khi nào cần gọi 115",
+      "Nêu được các bước cầm máu bằng cách ấn trực tiếp lên vết thương",
+      "Biết những việc không được làm: rút dị vật cắm sâu, đắp các chất không sạch lên vết thương"
+     ],
+     "summary": [
+      "Trước khi sơ cứu, bảo đảm nơi đó an toàn và tự bảo vệ: rửa tay, đeo găng hoặc dùng túi ni lông sạch.",
+      "Cách cầm máu đầu tiên và quan trọng nhất: dùng gạc hoặc vải sạch ấn mạnh, liên tục trực tiếp lên vết thương.",
+      "Gạc thấm máu thì đặt thêm gạc mới chồng lên, tiếp tục ấn, không gỡ lớp cũ ra.",
+      "Không rút dị vật cắm sâu (mảnh kính, que…): chèn gạc quanh dị vật, băng cố định và gọi 115.",
+      "Chảy máu nhiều, máu phun thành tia hay ấn không cầm được: gọi 115 ngay, tiếp tục ấn. Garô chỉ dùng cho chảy máu ồ ạt ở tay, chân khi ấn không hiệu quả, ghi giờ đặt và chuyển ngay đến cơ sở y tế."
+     ],
+     "examples": [
+      {
+       "title": "Chảy máu cam",
+       "lines": [
+        "Ngồi xuống, hơi cúi đầu về phía trước.",
+        "Bóp chặt hai cánh mũi khoảng 10 phút, thở bằng miệng.",
+        "Không ngửa đầu ra sau vì máu sẽ chảy xuống họng."
+       ]
+      },
+      {
+       "title": "Vết xước nhỏ",
+       "lines": [
+        "Rửa tay, rửa vết xước dưới vòi nước sạch.",
+        "Lau khô xung quanh, che bằng băng dán hoặc gạc sạch."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Xử lí vết thương",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "dut_tay",
+         "question": "Khi gọt hoa quả, Linh bị dao cứa vào lòng bàn tay, máu chảy khá nhiều. Việc cần làm ngay là gì?",
+         "options": [
+          {
+           "text": "Lấy gạc hoặc khăn sạch ấn mạnh, giữ liên tục lên vết thương",
+           "ok": true,
+           "why": "Đúng. Ấn trực tiếp là cách cầm máu nhanh và hiệu quả nhất; giữ liên tục vài phút để máu đông lại."
+          },
+          {
+           "text": "Rửa liên tục dưới vòi nước cho trôi hết máu",
+           "ok": false,
+           "why": "Chưa đúng. Với vết thương đang chảy máu nhiều, việc đầu tiên là cầm máu; xả nước liên tục làm máu khó đông hơn."
+          },
+          {
+           "text": "Rắc bột cà phê hoặc thuốc lào lên cho cầm máu",
+           "ok": false,
+           "why": "Chưa đúng. Các chất này không sạch, gây nhiễm trùng và làm bác sĩ khó xử lí vết thương sau đó."
+          }
+         ],
+         "explanation": "Cầm máu bằng cách ấn trực tiếp lên vết thương với gạc hoặc vải sạch. Không đắp lên vết thương những thứ không vô khuẩn."
+        },
+        {
+         "key": "cam_mau_mui",
+         "question": "Đang ngồi học, bạn cùng bàn bị chảy máu cam. Cách giúp bạn nào đúng?",
+         "options": [
+          {
+           "text": "Cho bạn ngồi, hơi cúi đầu về trước, bóp chặt hai cánh mũi khoảng 10 phút",
+           "ok": true,
+           "why": "Đúng. Bóp cánh mũi ép vào chỗ chảy máu; cúi về trước để máu không chảy xuống họng."
+          },
+          {
+           "text": "Bảo bạn ngửa đầu ra sau thật lâu",
+           "ok": false,
+           "why": "Chưa đúng. Ngửa đầu làm máu chảy xuống họng, có thể gây sặc hoặc nôn, và không làm máu ngừng chảy."
+          },
+          {
+           "text": "Nhét giấy vệ sinh sâu vào mũi rồi cho bạn chạy ra sân",
+           "ok": false,
+           "why": "Chưa đúng. Nhét giấy sâu có thể làm tổn thương niêm mạc; vận động mạnh làm máu chảy nhiều hơn."
+          }
+         ],
+         "explanation": "Chảy máu cam: ngồi, cúi đầu về trước, bóp hai cánh mũi khoảng 10 phút. Nếu sau khoảng 20 phút vẫn chảy, hoặc chảy sau va đập mạnh, cần đến cơ sở y tế."
+        },
+        {
+         "key": "di_vat",
+         "question": "Trong giờ lao động, một mảnh kính cắm sâu vào bắp chân bạn Tuấn. Em nên làm gì?",
+         "options": [
+          {
+           "text": "Không rút mảnh kính, chèn gạc quanh nó, băng cố định và gọi 115",
+           "ok": true,
+           "why": "Đúng. Dị vật cắm sâu có thể đang bịt mạch máu; giữ nguyên và cố định nó để không chảy máu ồ ạt trên đường đến viện."
+          },
+          {
+           "text": "Rút ngay mảnh kính ra rồi băng lại",
+           "ok": false,
+           "why": "Chưa đúng. Rút dị vật cắm sâu có thể làm máu phun mạnh và làm tổn thương thêm; việc lấy ra phải do nhân viên y tế làm."
+          },
+          {
+           "text": "Ấn mạnh thẳng lên mảnh kính cho máu ngừng",
+           "ok": false,
+           "why": "Chưa đúng. Ấn lên dị vật đẩy nó vào sâu hơn; chỉ ấn ở hai bên mép vết thương."
+          }
+         ],
+         "explanation": "Không tự rút dị vật cắm sâu. Chèn gạc quanh dị vật, băng cố định, ấn hai bên mép vết thương và gọi cấp cứu."
+        },
+        {
+         "key": "gac_tham",
+         "question": "Em đang ấn gạc lên vết thương của bạn thì thấy gạc đã thấm đầy máu. Em nên làm gì?",
+         "options": [
+          {
+           "text": "Đặt thêm gạc mới chồng lên và tiếp tục ấn",
+           "ok": true,
+           "why": "Đúng. Giữ lớp gạc cũ để không làm bong cục máu đông đang hình thành; thêm lớp mới và ấn tiếp, nếu máu vẫn chảy nhiều thì gọi 115."
+          },
+          {
+           "text": "Gỡ lớp gạc cũ ra để thay gạc sạch",
+           "ok": false,
+           "why": "Chưa đúng. Gỡ lớp gạc cũ kéo theo cục máu đông, máu sẽ chảy lại từ đầu."
+          },
+          {
+           "text": "Ngừng ấn để xem vết thương đã cầm máu chưa",
+           "ok": false,
+           "why": "Chưa đúng. Thả tay liên tục để kiểm tra làm máu không kịp đông; cần ấn liên tục."
+          }
+         ],
+         "explanation": "Ấn liên tục là chìa khoá. Gạc thấm máu thì chồng thêm gạc, không gỡ lớp cũ."
+        },
+        {
+         "key": "tu_bao_ve",
+         "question": "Em gặp một người lạ bị ngã xe, vết thương ở tay đang chảy máu. Em có một túi ni lông sạch và một chiếc khăn. Cách giúp nào đúng?",
+         "options": [
+          {
+           "text": "Lồng tay vào túi ni lông sạch rồi dùng khăn ấn lên vết thương",
+           "ok": true,
+           "why": "Đúng. Tự bảo vệ để tránh tiếp xúc trực tiếp với máu là một phần của sơ cứu an toàn; vẫn cầm máu được cho người bị thương."
+          },
+          {
+           "text": "Dùng tay trần ấn lên vết thương cho nhanh",
+           "ok": false,
+           "why": "Chưa đúng. Tiếp xúc trực tiếp với máu của người khác có nguy cơ lây bệnh qua đường máu; hãy dùng vật ngăn cách nếu có."
+          },
+          {
+           "text": "Đứng xem vì sợ dính máu",
+           "ok": false,
+           "why": "Chưa đúng. Có thể giúp an toàn bằng vật ngăn cách; nếu không thể giúp, ít nhất hãy gọi 115."
+          }
+         ],
+         "explanation": "Sơ cứu viên tự bảo vệ: đeo găng hoặc dùng túi ni lông sạch, rửa tay sau khi sơ cứu."
+        },
+        {
+         "key": "chay_mau_dui",
+         "question": "Một người bị thương ở đùi do tai nạn, máu chảy ồ ạt, em và một người lớn đã ấn mạnh nhưng máu vẫn chảy. Việc nào cần làm?",
+         "options": [
+          {
+           "text": "Gọi 115 ngay, tiếp tục ấn mạnh; người được huấn luyện có thể đặt garô và ghi giờ đặt",
+           "ok": true,
+           "why": "Đúng. Chảy máu ồ ạt đe doạ tính mạng: cần cấp cứu ngay. Garô chỉ dùng khi ấn không hiệu quả và phải ghi giờ để bác sĩ xử lí."
+          },
+          {
+           "text": "Cho người bị thương uống thật nhiều nước rồi chờ",
+           "ok": false,
+           "why": "Chưa đúng. Uống nước không cầm được máu, có thể gây nôn sặc; người mất máu nhiều cần cấp cứu khẩn cấp."
+          },
+          {
+           "text": "Buộc chặt một sợi dây nhỏ quanh đùi rồi để đó, không báo ai",
+           "ok": false,
+           "why": "Chưa đúng. Dây nhỏ gây tổn thương, và garô để lâu không được theo dõi rất nguy hiểm; phải gọi cấp cứu và ghi giờ."
+          }
+         ],
+         "explanation": "Chảy máu ồ ạt: gọi 115, ấn mạnh liên tục. Garô là biện pháp cuối cùng cho tay, chân, dùng dải băng bản rộng, ghi giờ và chuyển ngay đến cơ sở y tế."
+        }
+       ]
+      },
+      {
+       "game": "order",
+       "title": "Các bước sơ cứu",
+       "tasks": [
+        {
+         "key": "cam_mau",
+         "prompt": "Sắp xếp các bước sơ cứu một vết thương đang chảy máu.",
+         "items": [
+          "Bảo đảm an toàn, đeo găng hoặc dùng túi ni lông sạch",
+          "Ấn mạnh gạc sạch trực tiếp lên vết thương",
+          "Băng ép để giữ gạc tại chỗ",
+          "Theo dõi, gọi 115 hoặc đưa đến cơ sở y tế"
+         ],
+         "explanation": "An toàn trước, cầm máu bằng ấn trực tiếp, băng giữ gạc rồi đưa người bị thương đến nơi điều trị."
+        },
+        {
+         "key": "mau_mui",
+         "prompt": "Sắp xếp các bước xử lí chảy máu cam.",
+         "items": [
+          "Cho người bị chảy máu ngồi xuống",
+          "Hơi cúi đầu về phía trước",
+          "Bóp chặt hai cánh mũi khoảng 10 phút",
+          "Vẫn chảy sau khoảng 20 phút thì đến cơ sở y tế"
+         ],
+         "explanation": "Ngồi, cúi về trước, bóp cánh mũi đủ lâu; không ngửa đầu ra sau."
+        },
+        {
+         "key": "vet_xuoc",
+         "prompt": "Sắp xếp các bước chăm sóc một vết xước nhỏ ở đầu gối.",
+         "items": [
+          "Rửa sạch tay của người sơ cứu",
+          "Rửa vết xước dưới vòi nước sạch",
+          "Thấm khô vùng da xung quanh",
+          "Che vết xước bằng băng dán hoặc gạc sạch"
+         ],
+         "explanation": "Vết thương nhỏ cần sạch và được che lại để không nhiễm trùng."
+        },
+        {
+         "key": "di_vat",
+         "prompt": "Sắp xếp các bước sơ cứu khi có dị vật cắm sâu vào chân.",
+         "items": [
+          "Giữ nguyên dị vật, không rút ra",
+          "Chèn gạc quanh dị vật để giữ nó đứng yên",
+          "Băng cố định gạc, không đè lên dị vật",
+          "Gọi 115 và theo dõi người bị thương"
+         ],
+         "explanation": "Dị vật cắm sâu chỉ được lấy ra tại cơ sở y tế; người sơ cứu chỉ cố định và gọi cấp cứu."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "qp10.so_cuu_bong",
+     "order": 2,
+     "title": "Sơ cứu khi bị bỏng",
+     "description": "Làm mát vết bỏng bằng nước sạch, che phủ và khi nào cần đến cơ sở y tế.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "qp10.doi_ngu",
+   "grade": 10,
+   "order": 4,
+   "title": "Kĩ năng quân sự cơ bản",
+   "lessons": [
+    {
+     "key": "qp10.doi_ngu_tung_nguoi",
+     "order": 1,
+     "title": "Đội ngũ từng người: các động tác cơ bản",
+     "description": "Ý nghĩa và yêu cầu của các động tác nghiêm, nghỉ, quay, đi đều; ôn kiến thức, không thay giờ tập.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "qp10.doi_ngu_don_vi",
+     "order": 2,
+     "title": "Đội ngũ đơn vị: tập hợp hàng ngang, hàng dọc",
+     "description": "Thứ tự tập hợp và chỉnh đốn đội hình của một tiểu đội.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "qp11.quoc_phong",
+   "grade": 11,
+   "order": 1,
+   "title": "Quốc phòng toàn dân, an ninh nhân dân",
+   "lessons": [
+    {
+     "key": "qp11.nen_quoc_phong",
+     "order": 1,
+     "title": "Nền quốc phòng toàn dân, an ninh nhân dân",
+     "description": "Đặc trưng của nền quốc phòng toàn dân gắn với an ninh nhân dân.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "qp11.nghia_vu_quan_su",
+     "order": 2,
+     "title": "Nghĩa vụ quân sự và trách nhiệm của học sinh",
+     "description": "Nghĩa vụ quân sự theo quy định hiện hành và trách nhiệm của học sinh.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "qp11.te_nan",
+   "grade": 11,
+   "order": 2,
+   "title": "Phòng, chống tệ nạn xã hội",
+   "lessons": [
+    {
+     "key": "qp11.phong_chong_ma_tuy",
+     "order": 1,
+     "title": "Phòng, chống ma tuý trong học đường",
+     "description": "Nhận diện ma tuý trá hình và biết từ chối, báo tin để bảo vệ mình và bạn bè.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả và trình kiểm tra đã soát."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được tác hại của ma tuý và các dạng ma tuý trá hình thường gặp",
+      "Biết từ chối lời mời sử dụng hoặc vận chuyển ma tuý",
+      "Biết báo tin và hỗ trợ bạn bè đúng cách, không kì thị"
+     ],
+     "summary": [
+      "Ma tuý gây nghiện, tổn hại não bộ, sức khoẻ, có thể gây loạn thần, tử vong và dẫn đến vi phạm pháp luật.",
+      "Ma tuý tổng hợp hay được trộn vào nước uống (\"nước vui\"), kẹo, bánh, tinh dầu, thuốc lá điện tử: không ăn, uống, hút thứ không rõ nguồn gốc.",
+      "Pháp luật nghiêm cấm trồng cây có chứa chất ma tuý, sử dụng, tàng trữ, vận chuyển, mua bán ma tuý; nhận vận chuyển hàng không rõ nội dung có thể khiến mình phạm tội.",
+      "Từ chối dứt khoát, rời khỏi nơi đó và báo cho cha mẹ, thầy cô hoặc công an.",
+      "Người nghiện là người bệnh cần được điều trị; giúp bạn bằng cách khuyên bạn tìm hỗ trợ, không xa lánh, không lan truyền chuyện riêng."
+     ],
+     "examples": [
+      {
+       "title": "Câu từ chối gọn",
+       "lines": [
+        "\"Mình không dùng thứ không rõ nguồn gốc. Mình về đây.\"",
+        "\"Không, cảm ơn. Mình có việc phải đi.\""
+       ]
+      },
+      {
+       "title": "Dấu hiệu nên cảnh giác",
+       "lines": [
+        "Đồ uống, bánh kẹo được mời ở nơi lạ, gói nhỏ không nhãn mác.",
+        "Lời mời \"thử một lần cho biết\", \"giúp tỉnh táo khi ôn thi\"."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Nói không với ma tuý",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "nuoc_vui",
+         "question": "Tại một buổi sinh nhật ở quán, một người quen của bạn mang đến các gói \"nước vui\" pha sẵn, mời cả nhóm thử cho vui. Em nên làm gì?",
+         "options": [
+          {
+           "text": "Từ chối dứt khoát, rời đi và báo cho người lớn tin cậy",
+           "ok": true,
+           "why": "Đúng. \"Nước vui\" thường chứa ma tuý tổng hợp; từ chối và rời đi bảo vệ sức khoẻ của em, báo tin giúp cả nhóm bạn được an toàn."
+          },
+          {
+           "text": "Uống một ngụm cho khỏi mất lòng",
+           "ok": false,
+           "why": "Chưa đúng. Ma tuý tổng hợp có thể gây ngộ độc, loạn thần ngay từ lần đầu; giữ an toàn quan trọng hơn sự ngại ngùng."
+          },
+          {
+           "text": "Không uống nhưng ở lại chơi và giữ im lặng",
+           "ok": false,
+           "why": "Chưa hẳn. Ở lại nơi đang có người dùng ma tuý vẫn nguy hiểm; im lặng khiến các bạn khác không được giúp."
+          }
+         ],
+         "explanation": "Đồ uống, đồ ăn không rõ nguồn gốc ở nơi lạ có thể là ma tuý trá hình. Từ chối, rời đi, báo tin."
+        },
+        {
+         "key": "cho_hang",
+         "question": "Một người mới quen trên mạng nhờ em mang một gói hàng nhỏ đến một địa chỉ, hứa trả tiền công rất cao và dặn không được mở. Em nên làm gì?",
+         "options": [
+          {
+           "text": "Từ chối, lưu lại tin nhắn và báo cho cha mẹ hoặc công an",
+           "ok": true,
+           "why": "Đúng. Tiền công cao bất thường cho một việc đơn giản là dấu hiệu lợi dụng người khác vận chuyển hàng cấm; báo tin là bảo vệ mình và cộng đồng."
+          },
+          {
+           "text": "Nhận làm vì chỉ là chuyển hộ, không biết thì không có lỗi",
+           "ok": false,
+           "why": "Chưa đúng. Người vận chuyển vẫn có thể bị điều tra, xử lí; nhiều học sinh đã bị lợi dụng đúng theo cách này."
+          },
+          {
+           "text": "Nhận gói hàng rồi mở ra xem trước",
+           "ok": false,
+           "why": "Chưa đúng. Tự mở gói hàng có thể tiếp xúc với chất độc và vẫn khiến em liên quan đến vụ việc; đừng nhận ngay từ đầu."
+          }
+         ],
+         "explanation": "Không nhận giữ hộ, chuyển hộ đồ vật không rõ nội dung. Vận chuyển ma tuý là tội phạm nghiêm trọng."
+        },
+        {
+         "key": "thuoc_la_dt",
+         "question": "Bạn thân của Hoa rủ thử một loại thuốc lá điện tử có mùi trái cây, nói \"cái này không phải ma tuý đâu\". Hoa nên làm gì?",
+         "options": [
+          {
+           "text": "Không thử, nói cho bạn biết tác hại và rủ bạn cùng tìm người lớn hỏi",
+           "ok": true,
+           "why": "Đúng. Thuốc lá điện tử gây hại sức khoẻ, đã bị cấm theo quy định hiện hành và có thể bị trộn ma tuý; Hoa vừa tự bảo vệ vừa giúp bạn."
+          },
+          {
+           "text": "Thử một hơi vì bạn thân không hại mình",
+           "ok": false,
+           "why": "Chưa đúng. Bạn có thể cũng không biết trong đó có gì; nhiều vụ ngộ độc xảy ra từ những lần thử như vậy."
+          },
+          {
+           "text": "Thử nếu bạn cho xem bao bì có nhãn",
+           "ok": false,
+           "why": "Chưa đúng. Nhãn mác có thể làm giả, và thuốc lá điện tử vẫn gây nghiện, hại phổi dù không có ma tuý."
+          }
+         ],
+         "explanation": "Không thử các sản phẩm hút, ngửi lạ. Bảo vệ bạn bằng thông tin đúng và sự giúp đỡ của người lớn."
+        },
+        {
+         "key": "kim_tiem",
+         "question": "Trong công viên gần trường, em thấy một bơm kim tiêm đã qua sử dụng nằm cạnh ghế đá, nơi trẻ nhỏ hay chơi. Em nên làm gì?",
+         "options": [
+          {
+           "text": "Không chạm vào, nhắc trẻ tránh xa và báo bảo vệ hoặc chính quyền xã",
+           "ok": true,
+           "why": "Đúng. Kim tiêm đã dùng có thể lây bệnh qua đường máu; để người có dụng cụ thu gom và báo tin giúp người khác an toàn."
+          },
+          {
+           "text": "Nhặt bằng tay vứt vào thùng rác",
+           "ok": false,
+           "why": "Chưa đúng. Kim có thể đâm vào tay; thùng rác thường cũng làm người dọn vệ sinh bị đâm phải."
+          },
+          {
+           "text": "Đá vào bụi cây cho khuất",
+           "ok": false,
+           "why": "Chưa đúng. Kim vẫn ở đó và người khác, nhất là trẻ nhỏ, có thể dẫm phải."
+          }
+         ],
+         "explanation": "Không chạm vào bơm kim tiêm vứt bừa bãi; tránh xa và báo cho người có trách nhiệm thu gom."
+        },
+        {
+         "key": "ban_thay_doi",
+         "question": "Dạo này một bạn cùng lớp hay bỏ học, sút cân, lúc thì buồn ngủ, lúc lại kích động; em nghe nói bạn chơi với một nhóm lạ. Em nên làm gì?",
+         "options": [
+          {
+           "text": "Quan tâm hỏi han bạn và chia sẻ điều lo lắng với thầy cô chủ nhiệm",
+           "ok": true,
+           "why": "Đúng. Quan tâm và nhờ người lớn có trách nhiệm giúp bạn được hỗ trợ sớm mà vẫn tôn trọng bạn."
+          },
+          {
+           "text": "Kể cho cả lớp biết bạn có thể đang nghiện",
+           "ok": false,
+           "why": "Chưa đúng. Lan truyền điều chưa chắc chắn làm tổn thương bạn, khiến bạn bị kì thị và càng khó tìm sự giúp đỡ."
+          },
+          {
+           "text": "Tránh xa bạn vì sợ bị liên luỵ",
+           "ok": false,
+           "why": "Chưa hẳn. Giữ an toàn cho mình là cần, nhưng bỏ mặc bạn khiến bạn dễ sa vào nhóm xấu hơn; báo người lớn là cách giúp an toàn."
+          }
+         ],
+         "explanation": "Người sử dụng ma tuý cần được giúp đỡ và điều trị. Quan tâm, báo người lớn tin cậy, không kì thị."
+        },
+        {
+         "key": "thu_mot_lan",
+         "question": "Có người nói: \"Thử một lần cho biết, không nghiện được đâu\". Nhận định nào đúng?",
+         "options": [
+          {
+           "text": "Sai: ma tuý tổng hợp có thể gây ngộ độc, loạn thần ngay lần đầu và dễ dẫn đến nghiện",
+           "ok": true,
+           "why": "Đúng. Không có liều \"thử an toàn\": hàm lượng trong các sản phẩm trôi nổi không ai biết trước."
+          },
+          {
+           "text": "Đúng: chỉ dùng nhiều lần mới nghiện",
+           "ok": false,
+           "why": "Chưa đúng. Nhiều trường hợp ngộ độc nặng, loạn thần xảy ra ngay sau lần đầu sử dụng."
+          },
+          {
+           "text": "Đúng nếu thử ở nhà với bạn bè thân",
+           "ok": false,
+           "why": "Chưa đúng. Nơi sử dụng không làm giảm độc tính của ma tuý; ở nhà còn khó được cấp cứu kịp thời."
+          }
+         ],
+         "explanation": "\"Thử một lần\" là lời dụ dỗ phổ biến nhất. Cách an toàn duy nhất là không thử."
+        }
+       ]
+      },
+      {
+       "game": "sorting",
+       "title": "Nên hay không nên?",
+       "set": {
+        "title": "Việc nào giúp phòng, chống ma tuý?",
+        "groups": [
+         {
+          "id": "nen",
+          "label": "Nên làm",
+          "icon": "✅"
+         },
+         {
+          "id": "khong_nen",
+          "label": "Không nên làm",
+          "icon": "⛔"
+         }
+        ],
+        "cards": [
+         {
+          "key": "tu_choi",
+          "text": "Từ chối đồ uống lạ được mời ở quán",
+          "picture": "🥤",
+          "group": "nen",
+          "explanation": "Đồ uống lạ có thể chứa ma tuý trá hình; từ chối là tự bảo vệ."
+         },
+         {
+          "key": "bao_tin",
+          "text": "Báo công an khi bị nhờ chở hàng lạ với tiền công cao",
+          "picture": "📞",
+          "group": "nen",
+          "explanation": "Báo tin giúp ngăn kẻ xấu lợi dụng học sinh vận chuyển hàng cấm."
+         },
+         {
+          "key": "the_thao",
+          "text": "Tham gia thể thao, câu lạc bộ lành mạnh",
+          "picture": "⚽",
+          "group": "nen",
+          "explanation": "Hoạt động lành mạnh giúp giảm căng thẳng và tránh xa nhóm xấu."
+         },
+         {
+          "key": "hoi_nguoi_lon",
+          "text": "Hỏi thầy cô khi thấy bạn có dấu hiệu lạ",
+          "picture": "🧑‍🏫",
+          "group": "nen",
+          "explanation": "Người lớn có trách nhiệm biết cách hỗ trợ bạn kịp thời."
+         },
+         {
+          "key": "thu_cho_biet",
+          "text": "Thử một lần cho biết cảm giác",
+          "picture": "🚫",
+          "group": "khong_nen",
+          "explanation": "Ma tuý có thể gây hại nghiêm trọng ngay lần đầu."
+         },
+         {
+          "key": "giu_ho",
+          "text": "Giữ hộ túi đồ của người mới quen",
+          "picture": "🎒",
+          "group": "khong_nen",
+          "explanation": "Đồ giữ hộ không rõ nội dung có thể là hàng cấm, em sẽ bị liên luỵ."
+         },
+         {
+          "key": "tinh_dau_la",
+          "text": "Hút tinh dầu lạ để tỉnh táo ôn thi",
+          "picture": "💨",
+          "group": "khong_nen",
+          "explanation": "Tinh dầu, thuốc lá điện tử trôi nổi có thể bị trộn ma tuý và gây nghiện."
+         },
+         {
+          "key": "che_giau",
+          "text": "Giấu chuyện bạn bị dụ dùng ma tuý",
+          "picture": "🤐",
+          "group": "khong_nen",
+          "explanation": "Giấu kín khiến bạn mất cơ hội được giúp đỡ sớm."
+         },
+         {
+          "key": "ki_thi",
+          "text": "Chế giễu, xa lánh người đang cai nghiện",
+          "picture": "🙅",
+          "group": "khong_nen",
+          "explanation": "Kì thị khiến người cai nghiện khó hoà nhập và dễ tái nghiện."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "qp11.co_bac_truc_tuyen",
+     "order": 2,
+     "title": "Phòng, chống cờ bạc, cá độ trực tuyến",
+     "description": "Nhận diện các hình thức cờ bạc trá hình trên mạng và hậu quả của chúng.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "qp11.vat_no",
+   "grade": 11,
+   "order": 3,
+   "title": "Phòng tránh bom mìn, vật nổ và cháy nổ",
+   "lessons": [
+    {
+     "key": "qp11.bom_min_sot_lai",
+     "order": 1,
+     "title": "Phòng tránh bom mìn, vật liệu nổ còn sót lại",
+     "description": "Nhận biết nguy cơ và làm đúng khi phát hiện vật nghi là bom mìn, vật nổ.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả và trình kiểm tra đã soát."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được những nơi và tình huống dễ gặp bom mìn, vật nổ còn sót lại sau chiến tranh",
+      "Thực hiện đúng nguyên tắc: không chạm, rời xa, đánh dấu, báo tin",
+      "Tuyên truyền cho người thân, em nhỏ cách phòng tránh"
+     ],
+     "summary": [
+      "Bom mìn, vật nổ sót lại sau chiến tranh vẫn còn ở nhiều vùng; dù đã hoen gỉ nhiều năm, chúng vẫn có thể phát nổ.",
+      "Nguyên tắc vàng: không chạm, không di chuyển, không đập, không đốt, không cưa, không nhặt bán phế liệu.",
+      "Phát hiện vật nghi là vật nổ: dừng việc đang làm, rời xa theo đúng lối đã đi, đánh dấu từ xa và báo chính quyền xã, công an hoặc cơ quan quân sự địa phương.",
+      "Không đi vào khu vực có biển cảnh báo bom mìn; không tự dùng máy dò kim loại tìm phế liệu.",
+      "Việc rà phá, xử lí vật nổ chỉ do lực lượng chuyên trách thực hiện."
+     ],
+     "examples": [
+      {
+       "title": "Ví dụ đánh dấu",
+       "lines": [
+        "Cắm một cành cây, buộc mảnh vải đỏ ở lối vào, cách xa vật lạ.",
+        "Nhờ người lớn giữ không cho ai lại gần trong khi chờ lực lượng chức năng."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Gặp vật lạ phải làm sao?",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "dao_dat",
+         "question": "Khi đào hố trồng cây ở vườn, cuốc của Sơn chạm vào một vật kim loại hình trụ đã hoen gỉ. Sơn nên làm gì?",
+         "options": [
+          {
+           "text": "Dừng đào, rời xa theo lối cũ, đánh dấu chỗ đó và báo người lớn, chính quyền xã",
+           "ok": true,
+           "why": "Đúng. Vật kim loại lạ trong đất có thể là bom, đạn sót lại; dừng ngay và báo tin là cách bảo vệ mình và cả xóm."
+          },
+          {
+           "text": "Đào nhẹ tay để lấy lên xem là gì",
+           "ok": false,
+           "why": "Chưa đúng. Va chạm hay rung động nhỏ cũng có thể làm vật nổ phát nổ, dù đã nằm dưới đất nhiều năm."
+          },
+          {
+           "text": "Lấp đất lại và trồng cây chỗ khác, không nói với ai",
+           "ok": false,
+           "why": "Chưa hẳn. Rời xa là đúng nhưng không báo tin thì người khác có thể đào trúng; cần đánh dấu và báo để lực lượng chuyên trách xử lí."
+          }
+         ],
+         "explanation": "Phát hiện vật nghi là vật nổ: không chạm, rời xa, đánh dấu, báo tin."
+        },
+        {
+         "key": "phe_lieu",
+         "question": "Một nhóm bạn rủ Quân dùng búa đập một quả đạn cũ nhặt được ngoài bãi để lấy kim loại bán phế liệu. Quân nên làm gì?",
+         "options": [
+          {
+           "text": "Kiên quyết từ chối, khuyên các bạn tránh xa và báo người lớn ngay",
+           "ok": true,
+           "why": "Đúng. Đập, cưa đạn cũ là nguyên nhân của nhiều vụ nổ làm chết và bị thương; ngăn bạn và báo tin có thể cứu sống nhiều người."
+          },
+          {
+           "text": "Đứng xa xem các bạn làm",
+           "ok": false,
+           "why": "Chưa đúng. Mảnh văng của vụ nổ có thể bay rất xa; đứng xem vẫn nguy hiểm và không ngăn được tai nạn."
+          },
+          {
+           "text": "Đề nghị đốt lửa để tách vỏ cho an toàn hơn",
+           "ok": false,
+           "why": "Chưa đúng. Đốt vật nổ rất dễ gây nổ; không có cách tự xử lí nào an toàn."
+          }
+         ],
+         "explanation": "Không đập, cưa, đốt hay bán vật nổ làm phế liệu. Chỉ lực lượng chuyên trách mới được xử lí."
+        },
+        {
+         "key": "tre_cam",
+         "question": "Em thấy một em bé đang cầm một vật lạ hình quả trứng bằng kim loại, đầy gỉ, nhặt được ở bờ ruộng. Em nên làm gì?",
+         "options": [
+          {
+           "text": "Bình tĩnh bảo bé đặt nhẹ vật xuống đất, dắt bé ra xa rồi báo người lớn",
+           "ok": true,
+           "why": "Đúng. Không giật hay làm bé hoảng để vật không rơi mạnh; đặt nhẹ xuống, rời xa và báo tin là an toàn nhất."
+          },
+          {
+           "text": "Giật lấy và ném thật xa ra ruộng",
+           "ok": false,
+           "why": "Chưa đúng. Ném làm vật va đập mạnh, rất dễ phát nổ ngay gần các em."
+          },
+          {
+           "text": "Cầm lấy mang về nhà cho bố mẹ xem",
+           "ok": false,
+           "why": "Chưa đúng. Mang vật nổ về nhà đưa nguy hiểm đến cả gia đình; hãy để nó tại chỗ và báo tin."
+          }
+         ],
+         "explanation": "Vật nổ không được di chuyển, va đập. Đặt nhẹ, rời xa, báo tin; dạy em nhỏ không nhặt vật lạ."
+        },
+        {
+         "key": "bien_canh_bao",
+         "question": "Đi dã ngoại, nhóm bạn thấy lối tắt qua một bãi cỏ có biển \"Nguy hiểm – khu vực bom mìn\". Một bạn bảo đi tắt cho nhanh vì người khác cũng đi rồi. Em nên làm gì?",
+         "options": [
+          {
+           "text": "Không đi vào, thuyết phục cả nhóm đi theo đường chính",
+           "ok": true,
+           "why": "Đúng. Biển cảnh báo cho biết khu vực chưa được rà phá; người khác đi qua an toàn không có nghĩa là không còn vật nổ."
+          },
+          {
+           "text": "Đi vào nhưng bước theo dấu chân người trước",
+           "ok": false,
+           "why": "Chưa đúng. Bước theo dấu chân không bảo đảm an toàn trong khu vực chưa rà phá; đừng vào ngay từ đầu."
+          },
+          {
+           "text": "Đi vào nhưng nhổ biển ra để mọi người đỡ sợ",
+           "ok": false,
+           "why": "Chưa đúng. Nhổ biển cảnh báo khiến người khác không biết nguy hiểm; đây là hành vi gây hại cho cộng đồng."
+          }
+         ],
+         "explanation": "Tôn trọng biển cảnh báo bom mìn: không vào, không di dời biển."
+        },
+        {
+         "key": "may_do",
+         "question": "Anh họ của Vy mua máy dò kim loại để đi tìm sắt vụn ở đồi cũ bán lấy tiền. Vy nên nói gì với anh?",
+         "options": [
+          {
+           "text": "Khuyên anh không làm vì đồi cũ có thể còn vật nổ, việc rà tìm chỉ lực lượng chuyên trách được làm",
+           "ok": true,
+           "why": "Đúng. Tự dò tìm và đào bới ở nơi từng có chiến sự là việc rất nguy hiểm; khuyên anh là quan tâm đến tính mạng người thân."
+          },
+          {
+           "text": "Đồng ý đi cùng để giúp anh đào",
+           "ok": false,
+           "why": "Chưa đúng. Đào bới chỗ có tín hiệu kim loại ở vùng từng có chiến tranh có thể gặp vật nổ."
+          },
+          {
+           "text": "Bảo anh chỉ dò ban ngày cho an toàn",
+           "ok": false,
+           "why": "Chưa đúng. Nguy hiểm đến từ vật nổ chứ không phải thời gian trong ngày."
+          }
+         ],
+         "explanation": "Không tự rà tìm, đào bới phế liệu ở nơi từng có chiến sự."
+        }
+       ]
+      },
+      {
+       "game": "match",
+       "title": "Ghép tình huống",
+       "tasks": [
+        {
+         "key": "hanh_vi_hau_qua",
+         "prompt": "Ghép mỗi hành vi sai với hậu quả có thể xảy ra.",
+         "pairs": [
+          [
+           "Đập quả đạn cũ bằng búa",
+           "Gây nổ ngay tại chỗ, làm chết hoặc bị thương"
+          ],
+          [
+           "Nhổ biển cảnh báo bom mìn",
+           "Người sau không biết, đi vào khu vực nguy hiểm"
+          ],
+          [
+           "Đốt rác trên bãi đất có vật nổ",
+           "Nhiệt làm vật nổ dưới đất phát nổ"
+          ],
+          [
+           "Mang vật lạ về nhà cất",
+           "Đưa nguy cơ nổ đến cả gia đình"
+          ]
+         ],
+         "explanation": "Mọi tác động như đập, đốt, di chuyển đều có thể làm vật nổ cũ phát nổ."
+        },
+        {
+         "key": "viec_va_ly_do",
+         "prompt": "Ghép mỗi việc nên làm với lí do của nó.",
+         "pairs": [
+          [
+           "Dừng việc đang làm",
+           "Tránh tác động thêm vào vật nổ"
+          ],
+          [
+           "Rời xa theo đúng lối đã đi",
+           "Lối vừa đi là lối đã biết là an toàn"
+          ],
+          [
+           "Đánh dấu từ xa",
+           "Cảnh báo người khác không lại gần"
+          ],
+          [
+           "Báo chính quyền xã hoặc công an",
+           "Để lực lượng chuyên trách đến xử lí"
+          ]
+         ],
+         "explanation": "Mỗi bước trong nguyên tắc \"không chạm, rời xa, đánh dấu, báo tin\" đều có lí do riêng."
+        },
+        {
+         "key": "noi_va_nguy_co",
+         "prompt": "Ghép mỗi nơi với lí do có thể còn vật nổ.",
+         "pairs": [
+          [
+           "Đồi, núi từng là trận địa",
+           "Bom đạn rơi nhiều trong chiến tranh"
+          ],
+          [
+           "Bờ sông sau lũ",
+           "Nước lũ làm trôi, lộ ra vật nổ bị vùi lấp"
+          ],
+          [
+           "Ruộng vườn mới khai hoang",
+           "Đất chưa từng được rà phá, đào xới"
+          ]
+         ],
+         "explanation": "Biết nơi có nguy cơ giúp em cảnh giác hơn khi lao động, vui chơi."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "qp11.chay_no",
+     "order": 2,
+     "title": "Phòng cháy, chữa cháy ở gia đình và trường học",
+     "description": "Nguyên nhân cháy nổ thường gặp, cách thoát nạn và báo cháy qua số 114.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "qp11.cap_cuu",
+   "grade": 11,
+   "order": 4,
+   "title": "Cấp cứu và chuyển thương",
+   "lessons": [
+    {
+     "key": "qp11.co_dinh_gay_xuong",
+     "order": 1,
+     "title": "Cố định tạm thời xương gãy",
+     "description": "Nhận biết gãy xương và nguyên tắc cố định tạm thời trước khi chuyển đến cơ sở y tế.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "qp11.chuyen_thuong",
+     "order": 2,
+     "title": "Vận chuyển người bị thương an toàn",
+     "description": "Khi nào được di chuyển người bị thương và các cách vận chuyển cơ bản.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "qp12.an_ninh",
+   "grade": 12,
+   "order": 1,
+   "title": "Bảo vệ an ninh quốc gia và trật tự, an toàn xã hội",
+   "lessons": [
+    {
+     "key": "qp12.an_ninh_quoc_gia",
+     "order": 1,
+     "title": "An ninh quốc gia và trách nhiệm của học sinh",
+     "description": "Nội dung bảo vệ an ninh quốc gia và việc học sinh có thể làm.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "qp12.an_ninh_mang",
+     "order": 2,
+     "title": "Bảo vệ an ninh mạng và thông tin cá nhân",
+     "description": "Nhận diện lừa đảo, tin giả trên mạng và bảo vệ tài khoản, thông tin của mình.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả và trình kiểm tra đã soát."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nhận biết các thủ đoạn lừa đảo trực tuyến thường gặp",
+      "Thực hiện được các biện pháp bảo vệ tài khoản và thông tin cá nhân",
+      "Biết kiểm chứng thông tin và có trách nhiệm khi đăng tải, chia sẻ trên mạng"
+     ],
+     "summary": [
+      "Bảo vệ an ninh mạng là bảo vệ an ninh quốc gia, trật tự xã hội và quyền lợi của mỗi người trên không gian mạng.",
+      "Không cung cấp mật khẩu, mã OTP cho bất kì ai; dùng mật khẩu mạnh, khác nhau cho từng tài khoản và bật xác thực hai lớp.",
+      "Cơ quan công an không yêu cầu chuyển tiền hay cài ứng dụng qua điện thoại; cuộc gọi như vậy là lừa đảo.",
+      "Không bấm vào đường link lạ, không cài ứng dụng ngoài kho chính thức, cẩn thận với việc làm online \"việc nhẹ lương cao\".",
+      "Đăng tải, chia sẻ thông tin sai sự thật, xúc phạm người khác là vi phạm pháp luật; kiểm chứng ở nguồn chính thống trước khi chia sẻ."
+     ],
+     "examples": [
+      {
+       "title": "Mật khẩu mạnh",
+       "lines": [
+        "Dài, có chữ hoa, chữ thường, số và kí tự đặc biệt.",
+        "Ví dụ cách nghĩ: một câu dài chỉ em nhớ, rồi biến đổi thành chuỗi kí tự."
+       ]
+      },
+      {
+       "title": "Khi bị lừa hoặc bị chiếm tài khoản",
+       "lines": [
+        "Báo ngay cho ngân hàng hoặc nhà mạng, đổi mật khẩu.",
+        "Lưu bằng chứng và trình báo cơ quan công an."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Tỉnh táo trên mạng",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "gia_cong_an",
+         "question": "Một người gọi điện xưng là công an, nói em liên quan đến một vụ án và yêu cầu chuyển tiền vào \"tài khoản tạm giữ\" để chứng minh trong sạch. Em nên làm gì?",
+         "options": [
+          {
+           "text": "Cúp máy, không chuyển tiền, kể với cha mẹ và báo công an nơi cư trú",
+           "ok": true,
+           "why": "Đúng. Công an không làm việc và yêu cầu chuyển tiền qua điện thoại; bình tĩnh và báo người lớn giúp em không bị mất tiền."
+          },
+          {
+           "text": "Chuyển tiền rồi xin lại sau khi được minh oan",
+           "ok": false,
+           "why": "Chưa đúng. Không có \"tài khoản tạm giữ\" nào như vậy; tiền chuyển đi gần như không lấy lại được."
+          },
+          {
+           "text": "Làm theo nhưng yêu cầu họ gửi ảnh thẻ ngành trước",
+           "ok": false,
+           "why": "Chưa đúng. Ảnh thẻ, giấy tờ rất dễ làm giả; dấu hiệu lừa đảo là yêu cầu chuyển tiền qua điện thoại."
+          }
+         ],
+         "explanation": "Giả danh cơ quan nhà nước để đe doạ, yêu cầu chuyển tiền là thủ đoạn lừa đảo phổ biến."
+        },
+        {
+         "key": "ma_otp",
+         "question": "Một tài khoản mạng xã hội của bạn thân nhắn: \"Mình bị khoá tài khoản, có mã gửi về máy cậu, đọc giúp mình nhé\". Em nên làm gì?",
+         "options": [
+          {
+           "text": "Không gửi mã, gọi điện trực tiếp cho bạn để kiểm tra",
+           "ok": true,
+           "why": "Đúng. Tài khoản của bạn có thể đã bị chiếm; mã OTP gửi đến máy em là để chiếm tài khoản của em."
+          },
+          {
+           "text": "Gửi mã ngay vì là bạn thân",
+           "ok": false,
+           "why": "Chưa đúng. Kẻ gian thường mượn tài khoản người quen để lấy mã; gửi mã là trao tài khoản của em cho họ."
+          },
+          {
+           "text": "Gửi mã nhưng đổi mật khẩu sau",
+           "ok": false,
+           "why": "Chưa đúng. Khi có mã, kẻ gian có thể đổi mật khẩu và khoá em lại ngay lập tức."
+          }
+         ],
+         "explanation": "Mã OTP là chìa khoá tài khoản: không bao giờ đưa cho ai, kể cả người quen."
+        },
+        {
+         "key": "tin_gia",
+         "question": "Trong nhóm lớp có tin nhắn \"khẩn cấp\" nói sắp có lệnh cho học sinh nghỉ học dài ngày, kèm lời kêu gọi chia sẻ thật nhanh. Em nên làm gì?",
+         "options": [
+          {
+           "text": "Không chia sẻ, kiểm tra trên trang chính thức của nhà trường hoặc cơ quan quản lí giáo dục",
+           "ok": true,
+           "why": "Đúng. Kiểm chứng ở nguồn chính thống trước khi chia sẻ giúp ngăn tin giả lan truyền gây hoang mang."
+          },
+          {
+           "text": "Chia sẻ ngay để mọi người biết sớm",
+           "ok": false,
+           "why": "Chưa đúng. Chia sẻ tin chưa kiểm chứng khiến tin giả lan nhanh; người đăng tải, chia sẻ tin sai sự thật có thể bị xử lí."
+          },
+          {
+           "text": "Chia sẻ kèm câu \"không biết thật không\"",
+           "ok": false,
+           "why": "Chưa đúng. Thêm câu nghi ngờ không làm tin bớt lan; vẫn là góp phần phát tán."
+          }
+         ],
+         "explanation": "Tin \"khẩn cấp\", kêu gọi chia sẻ gấp là dấu hiệu của tin giả. Kiểm chứng ở nguồn chính thống."
+        },
+        {
+         "key": "viec_online",
+         "question": "Một trang mạng tuyển cộng tác viên \"chốt đơn\" online, được hoa hồng ngay nhưng phải nạp tiền trước để nhận đơn lớn hơn. Nhận định nào đúng?",
+         "options": [
+          {
+           "text": "Đây là dấu hiệu lừa đảo; không nạp tiền, không cung cấp giấy tờ cá nhân",
+           "ok": true,
+           "why": "Đúng. Các trang này thường trả ít tiền lúc đầu để tạo lòng tin, rồi chiếm đoạt số tiền lớn khi nạn nhân nạp thêm."
+          },
+          {
+           "text": "Làm thử với số tiền nhỏ thì không sao",
+           "ok": false,
+           "why": "Chưa đúng. Số tiền nhỏ là mồi; kẻ gian còn có thể dùng thông tin của em để làm việc phạm pháp khác."
+          },
+          {
+           "text": "An toàn nếu trang có nhiều lượt thích và bình luận khen",
+           "ok": false,
+           "why": "Chưa đúng. Lượt thích, bình luận có thể mua hoặc tạo giả rất dễ."
+          }
+         ],
+         "explanation": "Công việc thật không bắt người làm nạp tiền trước. \"Việc nhẹ lương cao\" là dấu hiệu cần cảnh giác."
+        },
+        {
+         "key": "wifi_cong_cong",
+         "question": "Ngồi ở quán có wifi miễn phí không mật khẩu, em cần chuyển tiền học thêm cho thầy qua ứng dụng ngân hàng. Cách nào an toàn hơn?",
+         "options": [
+          {
+           "text": "Tắt wifi, dùng dữ liệu di động của mình hoặc đợi về nhà",
+           "ok": true,
+           "why": "Đúng. Mạng công cộng không mật khẩu có thể bị kẻ gian theo dõi; giao dịch tài chính nên dùng mạng tin cậy."
+          },
+          {
+           "text": "Vẫn dùng wifi quán vì ứng dụng ngân hàng đã có mật khẩu",
+           "ok": false,
+           "why": "Chưa an toàn. Ứng dụng có bảo mật nhưng mạng không tin cậy vẫn làm tăng rủi ro, nhất là khi có trang giả mạo."
+          },
+          {
+           "text": "Nhờ người ngồi bàn bên dùng máy họ chuyển hộ",
+           "ok": false,
+           "why": "Chưa đúng. Đưa thông tin tài khoản cho người lạ có thể khiến em mất tiền."
+          }
+         ],
+         "explanation": "Giao dịch quan trọng nên làm trên mạng tin cậy, thiết bị của mình."
+        },
+        {
+         "key": "anh_ban",
+         "question": "Một bạn trong lớp lấy ảnh chụp lén một bạn khác, ghép chữ chế giễu và nhờ em chia sẻ lên nhóm trường. Em nên làm gì?",
+         "options": [
+          {
+           "text": "Không chia sẻ, khuyên bạn gỡ ảnh và báo thầy cô nếu ảnh đã lan truyền",
+           "ok": true,
+           "why": "Đúng. Phát tán hình ảnh để xúc phạm người khác là bắt nạt trên mạng và vi phạm quyền về hình ảnh, danh dự của bạn ấy."
+          },
+          {
+           "text": "Chia sẻ vì chỉ là trò đùa",
+           "ok": false,
+           "why": "Chưa đúng. Với người bị chế giễu đó không phải trò đùa; bắt nạt trên mạng gây tổn thương sâu sắc và có thể bị xử lí."
+          },
+          {
+           "text": "Thả biểu tượng cười nhưng không chia sẻ",
+           "ok": false,
+           "why": "Chưa đúng. Tương tác vẫn làm bài đăng lan rộng hơn và khích lệ người đăng."
+          }
+         ],
+         "explanation": "Tôn trọng quyền về hình ảnh, danh dự của người khác trên không gian mạng."
+        }
+       ]
+      },
+      {
+       "game": "sorting",
+       "title": "An toàn hay rủi ro?",
+       "set": {
+        "title": "Thói quen nào giúp bảo vệ tài khoản và thông tin cá nhân?",
+        "groups": [
+         {
+          "id": "an_toan",
+          "label": "Thói quen an toàn",
+          "icon": "🔒"
+         },
+         {
+          "id": "rui_ro",
+          "label": "Thói quen rủi ro",
+          "icon": "⚠️"
+         }
+        ],
+        "cards": [
+         {
+          "key": "hai_lop",
+          "text": "Bật xác thực hai lớp cho tài khoản",
+          "picture": "📱",
+          "group": "an_toan",
+          "explanation": "Kẻ gian có mật khẩu vẫn cần thêm mã từ máy em mới đăng nhập được."
+         },
+         {
+          "key": "mk_rieng",
+          "text": "Dùng mật khẩu khác nhau cho từng tài khoản",
+          "picture": "🔑",
+          "group": "an_toan",
+          "explanation": "Một tài khoản bị lộ không kéo theo các tài khoản khác."
+         },
+         {
+          "key": "cap_nhat",
+          "text": "Cập nhật hệ điều hành và ứng dụng",
+          "picture": "🔄",
+          "group": "an_toan",
+          "explanation": "Bản cập nhật vá các lỗ hổng bảo mật đã biết."
+         },
+         {
+          "key": "kho_chinh_thuc",
+          "text": "Chỉ cài ứng dụng từ kho chính thức",
+          "picture": "🛒",
+          "group": "an_toan",
+          "explanation": "Ứng dụng ngoài kho chính thức có thể chứa mã độc."
+         },
+         {
+          "key": "dang_xuat",
+          "text": "Đăng xuất khi dùng máy tính chung",
+          "picture": "🚪",
+          "group": "an_toan",
+          "explanation": "Người dùng sau không thể vào tài khoản của em."
+         },
+         {
+          "key": "mk_sinh_nhat",
+          "text": "Đặt mật khẩu là ngày sinh của mình",
+          "picture": "🎂",
+          "group": "rui_ro",
+          "explanation": "Ngày sinh dễ tìm thấy trên mạng, mật khẩu rất dễ bị đoán."
+         },
+         {
+          "key": "dang_cccd",
+          "text": "Đăng ảnh căn cước công dân lên mạng",
+          "picture": "🪪",
+          "group": "rui_ro",
+          "explanation": "Kẻ gian có thể dùng thông tin giấy tờ để mạo danh, vay tiền."
+         },
+         {
+          "key": "link_qua",
+          "text": "Bấm link \"nhận quà miễn phí\" trong tin nhắn lạ",
+          "picture": "🎁",
+          "group": "rui_ro",
+          "explanation": "Link lạ có thể dẫn đến trang giả để lấy mật khẩu hoặc cài mã độc."
+         },
+         {
+          "key": "check_in",
+          "text": "Đăng vị trí nhà mình mỗi khi về đến nhà",
+          "picture": "📍",
+          "group": "rui_ro",
+          "explanation": "Thông tin vị trí giúp người lạ biết nơi ở và thói quen của em."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "qp12.phong_chong_toi_pham",
+     "order": 3,
+     "title": "Phòng ngừa tội phạm và vi phạm pháp luật",
+     "description": "Tự bảo vệ trước các thủ đoạn phạm tội và tham gia phong trào toàn dân bảo vệ an ninh Tổ quốc.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "qp12.thien_tai",
+   "grade": 12,
+   "order": 2,
+   "title": "Phòng, chống thiên tai",
+   "lessons": [
+    {
+     "key": "qp12.bao_lu_sat_lo",
+     "order": 1,
+     "title": "Ứng phó với bão, lũ và sạt lở đất",
+     "description": "Biết chuẩn bị, ứng phó và khắc phục khi có bão, lũ, sạt lở đất.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả và trình kiểm tra đã soát."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được việc cần làm trước, trong và sau bão, lũ",
+      "Nhận biết dấu hiệu sạt lở đất, lũ quét để kịp di chuyển",
+      "Biết phối hợp với gia đình, cộng đồng và chính quyền khi có thiên tai"
+     ],
+     "summary": [
+      "Trước bão, lũ: theo dõi bản tin dự báo, chằng chống nhà cửa, chuẩn bị nước uống, lương thực, đèn pin, thuốc, sạc dự phòng; sơ tán khi chính quyền yêu cầu.",
+      "Khi bão đổ bộ: ở trong nhà kiên cố, tránh xa cửa kính, không ra ngoài. Khi mắt bão đi qua, trời lặng gió nhưng gió mạnh sẽ quay lại: vẫn ở yên trong nhà.",
+      "Khi có lũ: không đi qua ngầm, tràn, dòng nước chảy xiết; ngắt điện khi nước vào nhà; di chuyển lên nơi cao.",
+      "Dấu hiệu sạt lở, lũ quét: vết nứt mới trên đất hoặc tường, cây cột nghiêng, nước suối đục bất thường, tiếng động lạ trong núi: phải rời đi ngay.",
+      "Sau thiên tai: chỉ về nhà khi có thông báo an toàn, kiểm tra điện trước khi dùng, dọn vệ sinh, dùng nước sạch để phòng dịch bệnh."
+     ],
+     "examples": [
+      {
+       "title": "Túi đồ khẩn cấp",
+       "lines": [
+        "Nước uống, lương khô, đèn pin, sạc dự phòng.",
+        "Thuốc thông thường, áo mưa, giấy tờ quan trọng bọc ni lông."
+       ]
+      },
+      {
+       "title": "Mắt bão",
+       "lines": [
+        "Vùng giữa cơn bão có thể lặng gió trong một thời gian ngắn.",
+        "Sau đó gió mạnh trở lại từ hướng ngược lại, thường rất nguy hiểm."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Ứng phó thiên tai",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "mat_bao",
+         "question": "Bão đang đổ bộ, gió đột nhiên lặng hẳn, trời quang. Em trai muốn ra sân xem cây đổ. Em nên làm gì?",
+         "options": [
+          {
+           "text": "Giữ em ở trong nhà vì có thể đang ở vùng mắt bão, gió mạnh sẽ quay lại",
+           "ok": true,
+           "why": "Đúng. Mắt bão lặng gió chỉ trong thời gian ngắn, sau đó gió quay lại rất mạnh từ hướng ngược lại; ra ngoài lúc này rất nguy hiểm."
+          },
+          {
+           "text": "Cho em ra nhanh rồi vào vì bão đã tan",
+           "ok": false,
+           "why": "Chưa đúng. Lặng gió giữa bão không có nghĩa là bão đã qua; hãy chờ thông báo chính thức."
+          },
+          {
+           "text": "Cùng em ra dọn cây đổ cho kịp",
+           "ok": false,
+           "why": "Chưa đúng. Dọn dẹp chỉ làm sau khi có thông báo bão đã qua và nơi đó an toàn."
+          }
+         ],
+         "explanation": "Chỉ ra ngoài khi có thông báo bão đã đi qua. Lặng gió đột ngột có thể là mắt bão."
+        },
+        {
+         "key": "qua_tran",
+         "question": "Trời mưa lớn, Hải đi học về gặp một đoạn đường tràn nước đang chảy xiết, vài người vẫn cố đi qua. Hải nên làm gì?",
+         "options": [
+          {
+           "text": "Không qua, quay lại hoặc chờ ở nơi cao, báo gia đình",
+           "ok": true,
+           "why": "Đúng. Dòng nước chảy xiết chỉ ngập ngang đầu gối cũng có thể cuốn người, xe đi; chờ an toàn là lựa chọn có trách nhiệm với bản thân."
+          },
+          {
+           "text": "Dắt xe đi sát mép đường cho an toàn",
+           "ok": false,
+           "why": "Chưa đúng. Mép đường tràn thường bị xói, sụt; đi mép càng dễ bị cuốn trôi."
+          },
+          {
+           "text": "Đi qua vì người khác đi được",
+           "ok": false,
+           "why": "Chưa đúng. Mực nước và sức chảy có thể tăng lên bất cứ lúc nào; nhiều vụ đuối nước xảy ra đúng như vậy."
+          }
+         ],
+         "explanation": "Không đi qua ngầm, tràn, đường ngập khi nước chảy xiết."
+        },
+        {
+         "key": "vet_nut",
+         "question": "Sau nhiều ngày mưa, nhà Lan ở chân đồi thấy vết nứt mới trên tường và nghe tiếng răng rắc từ sườn đồi. Gia đình nên làm gì?",
+         "options": [
+          {
+           "text": "Rời ngay đến nơi an toàn, báo hàng xóm và chính quyền xã",
+           "ok": true,
+           "why": "Đúng. Đây là dấu hiệu sạt lở; rời đi sớm và báo cho mọi người có thể cứu sống nhiều người."
+          },
+          {
+           "text": "Thu dọn hết đồ đạc giá trị rồi mới đi",
+           "ok": false,
+           "why": "Chưa đúng. Sạt lở có thể xảy ra rất nhanh; tính mạng quan trọng hơn tài sản, chỉ mang túi đồ khẩn cấp."
+          },
+          {
+           "text": "Trát lại vết nứt và theo dõi thêm",
+           "ok": false,
+           "why": "Chưa đúng. Trát tường không ngăn được đất chuyển động; ở lại là nguy hiểm."
+          }
+         ],
+         "explanation": "Dấu hiệu sạt lở: vết nứt mới, cây cột nghiêng, tiếng động lạ, nước đục bất thường. Rời đi ngay, báo tin."
+        },
+        {
+         "key": "nuoc_vao_nha",
+         "question": "Nước lũ bắt đầu tràn vào tầng một nhà Minh, ổ điện sát chân tường sắp bị ngập. Việc làm trước tiên là gì?",
+         "options": [
+          {
+           "text": "Ngắt cầu dao điện tổng khi chỗ đứng còn khô ráo",
+           "ok": true,
+           "why": "Đúng. Nước dẫn điện, điện giật là nguy cơ chết người trong lũ; ngắt điện khi còn an toàn rồi mới chuyển đồ."
+          },
+          {
+           "text": "Rút từng phích cắm đang ngâm nước",
+           "ok": false,
+           "why": "Chưa đúng. Chạm vào thiết bị đang ngâm nước có thể bị điện giật; hãy ngắt cầu dao tổng từ chỗ khô."
+          },
+          {
+           "text": "Bê tivi lên tầng trước rồi tính sau",
+           "ok": false,
+           "why": "Chưa đúng. Tài sản để sau; ngắt điện trước để không ai bị điện giật."
+          }
+         ],
+         "explanation": "Khi nước vào nhà: ngắt điện, đưa người và đồ cần thiết lên cao, sẵn sàng sơ tán."
+        },
+        {
+         "key": "so_tan",
+         "question": "Chính quyền xã thông báo sơ tán khu vực trũng vì lũ sắp về. Ông nội của Bình không muốn đi vì sợ mất trộm. Bình nên làm gì?",
+         "options": [
+          {
+           "text": "Giải thích nguy hiểm, cùng bố mẹ thuyết phục ông đi và nhờ cán bộ xã hỗ trợ",
+           "ok": true,
+           "why": "Đúng. Sơ tán theo hướng dẫn của chính quyền là bảo vệ tính mạng; tài sản có thể được lực lượng địa phương trông coi."
+          },
+          {
+           "text": "Để ông ở lại, cả nhà đi trước",
+           "ok": false,
+           "why": "Chưa đúng. Người cao tuổi rất dễ gặp nguy hiểm khi nước lên nhanh; không để ai ở lại vùng nguy hiểm."
+          },
+          {
+           "text": "Cả nhà cùng ở lại với ông",
+           "ok": false,
+           "why": "Chưa đúng. Ở lại khiến cả gia đình gặp nguy hiểm và gây khó cho lực lượng cứu hộ."
+          }
+         ],
+         "explanation": "Chấp hành lệnh sơ tán. Người cao tuổi, trẻ nhỏ, người khuyết tật cần được ưu tiên giúp đỡ."
+        },
+        {
+         "key": "sau_lu",
+         "question": "Nước lũ vừa rút, giếng nhà Thảo bị nước đục tràn vào. Cách dùng nước nào an toàn?",
+         "options": [
+          {
+           "text": "Dùng nước đóng chai hoặc nước đã xử lí, đun sôi; khử khuẩn giếng theo hướng dẫn của y tế",
+           "ok": true,
+           "why": "Đúng. Nước sau lũ dễ nhiễm vi khuẩn gây tiêu chảy; xử lí và đun sôi giúp phòng dịch bệnh."
+          },
+          {
+           "text": "Để lắng một đêm rồi uống trực tiếp",
+           "ok": false,
+           "why": "Chưa đúng. Nước lắng trong vẫn có thể chứa vi khuẩn và hoá chất; phải xử lí và đun sôi."
+          },
+          {
+           "text": "Dùng nước giếng nấu ăn ngay vì đun nấu thì sạch",
+           "ok": false,
+           "why": "Chưa đủ. Giếng bị nhiễm bẩn cần được thau rửa, khử khuẩn trước; khi chưa xử lí, nên dùng nguồn nước sạch khác."
+          }
+         ],
+         "explanation": "Sau lũ: ăn chín, uống sôi, khử khuẩn nguồn nước, dọn vệ sinh để phòng dịch."
+        }
+       ]
+      },
+      {
+       "game": "order",
+       "title": "Trước, trong và sau thiên tai",
+       "tasks": [
+        {
+         "key": "dien_bien_bao",
+         "prompt": "Sắp xếp các việc của một gia đình theo diễn biến của cơn bão.",
+         "items": [
+          "Nghe bản tin dự báo bão sắp đổ bộ",
+          "Chằng chống nhà, cất đồ dễ bị gió cuốn",
+          "Ở yên trong nhà kiên cố khi bão đổ bộ",
+          "Kiểm tra nhà cửa, đường điện khi có thông báo bão đã qua"
+         ],
+         "explanation": "Chuẩn bị trước khi bão đến, trú ẩn an toàn khi bão đổ bộ, chỉ khắc phục khi bão đã qua."
+        },
+        {
+         "key": "lu_vao_nha",
+         "prompt": "Sắp xếp các việc khi nước lũ dâng vào nhà.",
+         "items": [
+          "Ngắt cầu dao điện tổng",
+          "Kê, đưa giấy tờ và lương thực lên cao",
+          "Di chuyển đến nơi cao, an toàn theo hướng dẫn",
+          "Khi nước rút, dọn bùn và khử khuẩn nhà cửa"
+         ],
+         "explanation": "Ngắt điện trước để tránh điện giật, rồi bảo vệ đồ cần thiết, sơ tán và khắc phục khi nước rút."
+        },
+        {
+         "key": "sat_lo",
+         "prompt": "Sắp xếp các việc khi phát hiện dấu hiệu sạt lở đất.",
+         "items": [
+          "Nhận thấy vết nứt mới trên sườn đồi sau mưa lớn",
+          "Hô hoán báo gia đình và hàng xóm",
+          "Cùng di chuyển nhanh đến nơi an toàn",
+          "Báo chính quyền xã, không quay lại lấy đồ"
+         ],
+         "explanation": "Phát hiện sớm, báo cho mọi người, rời đi nhanh và không quay lại khi chưa có thông báo an toàn."
+        },
+        {
+         "key": "dung_dien_lai",
+         "prompt": "Sắp xếp các việc trước khi dùng lại điện sau khi nhà bị ngập.",
+         "items": [
+          "Chờ thông báo nước đã rút an toàn",
+          "Nhờ thợ điện kiểm tra đường dây, ổ cắm",
+          "Lau khô, kiểm tra từng thiết bị đã bị ngấm nước",
+          "Đóng điện và dùng lại thiết bị đã được kiểm tra"
+         ],
+         "explanation": "Thiết bị ngấm nước có thể bị chập; chỉ dùng điện lại khi đã được kiểm tra an toàn."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "qp12.han_han_xam_nhap_man",
+     "order": 2,
+     "title": "Ứng phó với hạn hán và xâm nhập mặn",
+     "description": "Tiết kiệm, trữ nước ngọt và bảo vệ sức khoẻ khi hạn mặn.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "qp12.chu_quyen",
+   "grade": 12,
+   "order": 3,
+   "title": "Bảo vệ chủ quyền biển, đảo và biên giới",
+   "lessons": [
+    {
+     "key": "qp12.chu_quyen_bien_dao",
+     "order": 1,
+     "title": "Chủ quyền biển, đảo Việt Nam",
+     "description": "Vùng biển, đảo của Việt Nam và trách nhiệm bảo vệ chủ quyền bằng biện pháp hoà bình.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "qp12.bien_gioi_hoa_binh",
+     "order": 2,
+     "title": "Xây dựng biên giới hoà bình, hữu nghị",
+     "description": "Ý nghĩa của đường biên giới quốc gia và quan hệ hữu nghị với các nước láng giềng.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "qp12.ban_do",
+   "grade": 12,
+   "order": 4,
+   "title": "Kĩ năng quân sự cơ bản",
+   "lessons": [
+    {
+     "key": "qp12.ban_do_dia_hinh",
+     "order": 1,
+     "title": "Bản đồ địa hình: kí hiệu và tỉ lệ",
+     "description": "Đọc kí hiệu, tỉ lệ và xác định phương hướng trên bản đồ.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "qp12.dinh_huong_thuc_dia",
+     "order": 2,
+     "title": "Xác định phương hướng ngoài thực địa",
+     "description": "Dùng la bàn, mặt trời và các dấu hiệu tự nhiên để định hướng.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  }
+ ]
+}

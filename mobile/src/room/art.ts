@@ -46,7 +46,16 @@ const DEFAULTS = (ART as any).defaults as Record<RoomKind, Layout>;
 export const itemArt = (id: string): ItemArt | undefined => ITEMS[id];
 /** What tells placements apart: a found decoration's copy by its uid, any other item by its id (once per room). */
 export const keyOf = (p: Placement) => p.uid ?? p.item;
-export const variantOf = (art: ItemArt, id: string) => art.variants.find((v) => v.id === id) ?? art.variants[0];
+/** A variant by id. "<own>~<sky>" (display only, never saved: see withLiveSky) is the item in its own variant with another
+ * variant's sky: a window keeps the curtains its owner chose and shows the sky of the hour. */
+export function variantOf(art: ItemArt, id: string): Variant {
+  const [own, sky] = id.split('~');
+  const base = art.variants.find((v) => v.id === own) ?? art.variants[0];
+  const skyVariant = sky ? art.variants.find((v) => v.id === sky) : undefined;
+  if (!skyVariant) return base;
+  const { curtain: _curtain, curtain2: _curtain2, ...skyColors } = skyVariant.colors;
+  return { ...base, colors: { ...base.colors, ...skyColors } };
+}
 const transformOf = (p: Placement) => `translate(${p.x} ${p.y})${p.rotate ? ` rotate(${p.rotate})` : ''}${p.flip ? ' scale(-1 1)' : ''}`;
 const paint = (svg: string, colors: Record<string, string>) => svg.replace(/@(\w+)/g, (_, key: string) => colors[key] ?? '#000000');
 const num = (value: number) => String(Math.round(value * 10) / 10);

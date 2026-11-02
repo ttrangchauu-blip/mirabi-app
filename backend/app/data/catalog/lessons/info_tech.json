@@ -1,0 +1,1706 @@
+{
+ "subject": "info_tech",
+ "version": 1,
+ "organization": "topic",
+ "source_note": "Theo yêu cầu cần đạt môn Tin học và Công nghệ cấp Tiểu học (CT GDPT 2018): phần Tin học và phần Công nghệ; tổ chức theo chủ đề của chương trình, không theo mục lục bộ sách giáo khoa nào.",
+ "chapters": [
+  {
+   "key": "thcn3.may_tinh_va_em",
+   "grade": 3,
+   "order": 1,
+   "title": "Tin học: Máy tính và em",
+   "lessons": [
+    {
+     "key": "thcn3.bo_phan_may_tinh",
+     "order": 1,
+     "title": "Các bộ phận của máy tính và thao tác cơ bản",
+     "description": "Biết tên các bộ phận chính của máy tính, việc mỗi bộ phận làm và các thao tác với chuột, bàn phím.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Gọi đúng tên màn hình, bàn phím, chuột, thân máy và nói được mỗi bộ phận dùng để làm gì",
+      "Phân biệt nháy chuột, nháy đúp chuột, kéo thả chuột và nháy nút phải chuột",
+      "Biết công dụng của một số phím hay dùng: phím cách, Enter, Backspace, Shift"
+     ],
+     "summary": [
+      "Máy tính để bàn thường có màn hình, bàn phím, chuột và thân máy.",
+      "Bàn phím và chuột giúp em đưa lệnh, chữ, số vào máy tính; màn hình và loa đưa kết quả ra cho em xem, nghe.",
+      "Thân máy chứa bộ phận xử lí thông tin, giống như bộ não của máy tính.",
+      "Máy tính xách tay gộp màn hình, bàn phím và bàn di chuột vào một khối gọn nhẹ."
+     ],
+     "examples": [
+      {
+       "title": "Em gõ tên mình",
+       "lines": [
+        "Em gõ phím trên bàn phím → máy tính xử lí → chữ hiện ra trên màn hình."
+       ]
+      },
+      {
+       "title": "Nháy đúp để mở",
+       "lines": [
+        "Muốn mở một biểu tượng trên màn hình, em bấm nhanh nút trái chuột hai lần."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Ghép bộ phận với việc nó làm",
+       "tasks": [
+        {
+         "key": "bo_phan",
+         "prompt": "Ghép mỗi bộ phận của máy tính để bàn với việc nó làm.",
+         "pairs": [
+          [
+           "Màn hình",
+           "Hiện chữ và hình ảnh cho em xem"
+          ],
+          [
+           "Bàn phím",
+           "Gõ chữ và số vào máy tính"
+          ],
+          [
+           "Chuột",
+           "Di chuyển con trỏ để chọn và mở"
+          ],
+          [
+           "Thân máy",
+           "Chứa bộ phận xử lí thông tin"
+          ]
+         ],
+         "explanation": "Mỗi bộ phận có một việc riêng: bàn phím và chuột đưa thông tin vào, thân máy xử lí, màn hình hiện kết quả ra."
+        },
+        {
+         "key": "thiet_bi",
+         "prompt": "Ghép mỗi thiết bị với việc nó giúp máy tính làm.",
+         "pairs": [
+          [
+           "Loa",
+           "Phát ra âm thanh"
+          ],
+          [
+           "Micrô",
+           "Thu tiếng nói đưa vào máy tính"
+          ],
+          [
+           "Máy in",
+           "In chữ và hình ra giấy"
+          ],
+          [
+           "Bàn di chuột",
+           "Lướt ngón tay thay cho dùng chuột"
+          ]
+         ],
+         "explanation": "Loa và máy in đưa kết quả ra; micrô đưa âm thanh vào; bàn di chuột ở máy tính xách tay làm việc của chuột."
+        },
+        {
+         "key": "thao_tac",
+         "prompt": "Ghép mỗi thao tác với chuột với cách làm đúng.",
+         "pairs": [
+          [
+           "Nháy chuột",
+           "Bấm nút trái chuột một lần rồi thả"
+          ],
+          [
+           "Nháy đúp chuột",
+           "Bấm nhanh nút trái chuột hai lần"
+          ],
+          [
+           "Kéo thả chuột",
+           "Giữ nút trái, di chuyển chuột rồi thả"
+          ],
+          [
+           "Nháy nút phải chuột",
+           "Bấm nút phải một lần để mở bảng chọn"
+          ]
+         ],
+         "explanation": "Nháy chuột để chọn, nháy đúp để mở, kéo thả để di chuyển đối tượng, nháy nút phải để mở bảng chọn nhanh.",
+         "hint": "Nút trái dùng cho hầu hết các thao tác; nút phải mở bảng chọn."
+        },
+        {
+         "key": "phim",
+         "prompt": "Ghép mỗi phím với việc nó làm khi em gõ chữ.",
+         "pairs": [
+          [
+           "Phím cách",
+           "Tạo khoảng trống giữa hai chữ"
+          ],
+          [
+           "Phím Enter",
+           "Xuống dòng mới"
+          ],
+          [
+           "Phím Backspace",
+           "Xoá chữ ngay bên trái con trỏ"
+          ],
+          [
+           "Phím Shift",
+           "Giữ cùng phím chữ để gõ chữ hoa"
+          ]
+         ],
+         "explanation": "Phím cách là phím dài nhất; Enter để xuống dòng; Backspace xoá chữ đứng trước con trỏ; giữ Shift khi gõ để được chữ in hoa."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "thcn3.thong_tin",
+     "order": 2,
+     "title": "Thông tin quanh em và cách em xử lí thông tin",
+     "description": "Nhận ra thông tin em nhìn, nghe được hằng ngày và cách em dùng nó để quyết định.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn3.tu_the_ngoi",
+     "order": 3,
+     "title": "Ngồi đúng tư thế khi dùng máy tính",
+     "description": "Ngồi thẳng lưng, mắt cách màn hình vừa phải, nghỉ mắt sau mỗi lúc làm việc.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn3.luyen_go_phim",
+     "order": 4,
+     "title": "Luyện gõ phím ở hàng phím cơ sở",
+     "description": "Đặt tay đúng vị trí trên hàng phím cơ sở và luyện gõ với phần mềm.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "thcn3.internet_sap_xep",
+   "grade": 3,
+   "order": 2,
+   "title": "Tin học: Internet và sắp xếp để dễ tìm",
+   "lessons": [
+    {
+     "key": "thcn3.thong_tin_web",
+     "order": 1,
+     "title": "Thông tin trên trang web",
+     "description": "Biết trang web có chữ, hình ảnh, âm thanh và xem trang web cùng người lớn.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn3.sap_xep_de_tim",
+     "order": 2,
+     "title": "Sắp xếp đồ vật để dễ tìm",
+     "description": "Hiểu vì sao sắp xếp gọn gàng, theo nhóm giúp tìm đồ vật và thông tin nhanh hơn.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn3.so_do_hinh_cay",
+     "order": 3,
+     "title": "Sơ đồ hình cây",
+     "description": "Dùng sơ đồ hình cây để nhóm đồ vật, sách vở và thông tin.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "thcn3.dao_duc",
+   "grade": 3,
+   "order": 3,
+   "title": "Tin học: Đạo đức, pháp luật và văn hoá trong môi trường số",
+   "lessons": [
+    {
+     "key": "thcn3.bao_ve_thong_tin",
+     "order": 1,
+     "title": "Bảo vệ thông tin cá nhân khi lên mạng",
+     "description": "Biết điều gì có thể kể trên mạng và điều gì phải giữ kín, chỉ nói với bố mẹ, thầy cô.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nhận ra thông tin cá nhân: họ tên đầy đủ, địa chỉ nhà, số điện thoại, mật khẩu, trường lớp",
+      "Biết giữ kín thông tin cá nhân khi dùng Internet",
+      "Biết hỏi bố mẹ, thầy cô trước khi chia sẻ điều gì lên mạng"
+     ],
+     "summary": [
+      "Thông tin cá nhân là những điều giúp người lạ tìm ra em: địa chỉ nhà, số điện thoại, trường lớp, mật khẩu…",
+      "Người lạ trên mạng có thể dùng thông tin đó để lừa em hoặc làm hại em và gia đình.",
+      "Sở thích chung như món ăn, môn học hay con vật em yêu có thể kể, vì chúng không giúp ai tìm ra em.",
+      "Khi không chắc, em hỏi bố mẹ hoặc thầy cô trước."
+     ],
+     "examples": [
+      {
+       "title": "Một tin nhắn lạ",
+       "lines": [
+        "Người lạ hỏi: 'Nhà em ở đâu?'",
+        "Em không trả lời và kể ngay với bố mẹ."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Giữ kín hay chia sẻ?",
+       "set": {
+        "title": "Trên mạng, điều nào em có thể kể, điều nào em phải giữ kín?",
+        "groups": [
+         {
+          "id": "ke",
+          "label": "Có thể kể",
+          "icon": "💬"
+         },
+         {
+          "id": "kin",
+          "label": "Phải giữ kín",
+          "icon": "🔒"
+         }
+        ],
+        "cards": [
+         {
+          "key": "mon_hoc",
+          "text": "Môn học em thích nhất",
+          "picture": "📚",
+          "group": "ke",
+          "explanation": "Môn học em thích không giúp người lạ tìm ra em, nên có thể kể."
+         },
+         {
+          "key": "con_vat",
+          "text": "Con vật em yêu thích",
+          "picture": "🐶",
+          "group": "ke",
+          "explanation": "Kể con vật em thích là chuyện vui, không lộ thông tin cá nhân."
+         },
+         {
+          "key": "mon_an",
+          "text": "Món ăn em thích",
+          "picture": "🍜",
+          "group": "ke",
+          "explanation": "Món ăn yêu thích không cho biết em là ai hay ở đâu."
+         },
+         {
+          "key": "tranh_ve",
+          "text": "Bức tranh em vẽ về mùa hè",
+          "picture": "🎨",
+          "group": "ke",
+          "explanation": "Bức tranh không có tên, ảnh mặt hay địa chỉ của em thì có thể chia sẻ, khi bố mẹ đồng ý."
+         },
+         {
+          "key": "mat_khau",
+          "text": "Mật khẩu tài khoản học tập",
+          "picture": "🔑",
+          "group": "kin",
+          "explanation": "Mật khẩu chỉ mình em và bố mẹ biết. Ai có mật khẩu là vào được tài khoản của em."
+         },
+         {
+          "key": "dia_chi",
+          "text": "Địa chỉ nhà em",
+          "picture": "🏠",
+          "group": "kin",
+          "explanation": "Địa chỉ nhà giúp người lạ tìm đến nhà em, nên phải giữ kín."
+         },
+         {
+          "key": "so_dt",
+          "text": "Số điện thoại của bố mẹ",
+          "picture": "📱",
+          "group": "kin",
+          "explanation": "Kẻ xấu có thể dùng số điện thoại để gọi lừa gia đình em."
+         },
+         {
+          "key": "truong_lop",
+          "text": "Tên trường và lớp em đang học",
+          "picture": "🏫",
+          "group": "kin",
+          "explanation": "Biết trường lớp, người lạ có thể tìm đến chỗ em, nên không kể với người lạ trên mạng."
+         },
+         {
+          "key": "o_nha_mot_minh",
+          "text": "Giờ em ở nhà một mình",
+          "picture": "⏰",
+          "group": "kin",
+          "explanation": "Đây là điều kẻ xấu muốn biết. Không bao giờ kể điều này trên mạng."
+         },
+         {
+          "key": "anh_the",
+          "text": "Ảnh thẻ học sinh của em",
+          "picture": "🪪",
+          "group": "kin",
+          "explanation": "Thẻ học sinh có ảnh, họ tên và tên trường: đó là nhiều thông tin cá nhân cùng lúc."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "thcn3.thong_tin_phu_hop",
+     "order": 2,
+     "title": "Chỉ xem thông tin phù hợp với lứa tuổi",
+     "description": "Biết tránh trang web, video không phù hợp và báo người lớn khi gặp.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "thcn3.cac_buoc",
+   "grade": 3,
+   "order": 4,
+   "title": "Tin học: Giải quyết vấn đề với sự trợ giúp của máy tính",
+   "lessons": [
+    {
+     "key": "thcn3.lam_viec_theo_buoc",
+     "order": 1,
+     "title": "Thực hiện công việc theo các bước",
+     "description": "Chia một công việc thành các bước, làm đúng thứ tự và chỉ dẫn pet đi đến đích từng bước một.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được các bước của một việc quen thuộc theo đúng thứ tự",
+      "Hiểu rằng làm sai thứ tự thì công việc không thành",
+      "Ra lệnh tiến, rẽ trái, rẽ phải theo đúng thứ tự để pet đến đích"
+     ],
+     "summary": [
+      "Nhiều việc phải làm theo các bước, bước trước rồi mới đến bước sau.",
+      "Máy tính cũng làm việc theo từng lệnh, đúng thứ tự em đưa ra.",
+      "Muốn pet đến đích, em đếm số ô cần đi và xem chỗ nào cần rẽ."
+     ],
+     "examples": [
+      {
+       "title": "Rửa tay",
+       "lines": [
+        "Làm ướt tay → xoa xà phòng → xả sạch → lau khô."
+       ]
+      },
+      {
+       "title": "Chỉ đường cho pet",
+       "lines": [
+        "Pet đang nhìn sang phải, đích ở cách 3 ô: tiến, tiến, tiến."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Việc nào làm trước?",
+       "tasks": [
+        {
+         "key": "rua_tay",
+         "prompt": "Sắp xếp các bước rửa tay sạch.",
+         "items": [
+          "Làm ướt hai bàn tay",
+          "Xoa xà phòng khắp lòng và mu bàn tay",
+          "Xả sạch xà phòng dưới vòi nước",
+          "Lau khô tay bằng khăn sạch"
+         ],
+         "explanation": "Phải làm ướt tay để xà phòng tạo bọt, xoa kĩ rồi mới xả sạch, cuối cùng lau khô."
+        },
+        {
+         "key": "tat_may",
+         "prompt": "Sắp xếp các bước tắt máy tính đúng cách.",
+         "items": [
+          "Lưu bài và đóng các phần mềm đang dùng",
+          "Nháy nút Start",
+          "Chọn Power",
+          "Chọn Shut down"
+         ],
+         "explanation": "Lưu bài trước để không mất bài; sau đó nháy Start, chọn Power rồi chọn Shut down. Không tắt máy bằng cách rút điện."
+        },
+        {
+         "key": "cap_sach",
+         "prompt": "Sắp xếp các bước chuẩn bị cặp sách cho ngày mai.",
+         "items": [
+          "Xem thời khoá biểu ngày mai",
+          "Lấy sách vở của các môn đó",
+          "Xếp sách vở vào cặp",
+          "Kiểm tra lại bút, thước trong cặp"
+         ],
+         "explanation": "Phải biết mai học môn gì rồi mới lấy đúng sách vở; xếp vào cặp rồi kiểm tra lại cho đủ."
+        },
+        {
+         "key": "nuoc_cam",
+         "prompt": "Sắp xếp các bước pha một cốc nước cam.",
+         "items": [
+          "Rửa sạch quả cam rồi bổ đôi",
+          "Vắt nước cam vào cốc",
+          "Thêm nước lọc và một chút đường",
+          "Khuấy đều rồi uống"
+         ],
+         "explanation": "Có nước cam trong cốc rồi mới thêm nước và đường, khuấy đều sau cùng."
+        }
+       ]
+      },
+      {
+       "game": "code_path",
+       "title": "Dẫn pet về đích",
+       "levels": [
+        "b1",
+        "b2",
+        "b3"
+       ]
+      }
+     ]
+    },
+    {
+     "key": "thcn3.may_tinh_tro_giup",
+     "order": 2,
+     "title": "Nhiệm vụ của em và sự trợ giúp của máy tính",
+     "description": "Nhận ra việc nào máy tính giúp em làm nhanh hơn và việc nào em phải tự làm.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "thcn3.cn_doi_song",
+   "grade": 3,
+   "order": 5,
+   "title": "Công nghệ: Công nghệ và đời sống",
+   "lessons": [
+    {
+     "key": "thcn3.tu_nhien_cong_nghe",
+     "order": 1,
+     "title": "Tự nhiên và công nghệ",
+     "description": "Phân biệt đối tượng tự nhiên với sản phẩm công nghệ do con người làm ra.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn3.den_hoc",
+     "order": 2,
+     "title": "Sử dụng đèn học đúng cách",
+     "description": "Biết các bộ phận của đèn học, bật tắt và chỉnh đèn đúng cách, an toàn.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn3.quat_dien",
+     "order": 3,
+     "title": "Sử dụng quạt điện an toàn",
+     "description": "Biết việc nên làm và việc không được làm khi dùng quạt điện trong gia đình.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được việc nên làm khi dùng quạt điện",
+      "Nhận ra việc nguy hiểm với quạt điện và không làm",
+      "Biết nhờ người lớn khi cần lau chùi hoặc khi quạt hỏng"
+     ],
+     "summary": [
+      "Quạt điện có cánh quay nhanh và dùng điện: dùng sai có thể bị thương hoặc bị điện giật.",
+      "Đặt quạt chỗ chắc chắn, không thò tay vào lồng quạt, không cắm phích bằng tay ướt.",
+      "Tắt quạt khi không dùng; rút phích điện và nhờ người lớn khi lau quạt hoặc quạt có tiếng kêu lạ."
+     ],
+     "examples": [
+      {
+       "title": "Rút phích đúng cách",
+       "lines": [
+        "Cầm vào thân phích cắm rồi rút ra, không kéo dây điện."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Nên hay không nên?",
+       "set": {
+        "title": "Khi dùng quạt điện, việc nào nên làm, việc nào không được làm?",
+        "groups": [
+         {
+          "id": "nen",
+          "label": "Nên làm",
+          "icon": "✅"
+         },
+         {
+          "id": "khong",
+          "label": "Không được làm",
+          "icon": "⛔"
+         }
+        ],
+        "cards": [
+         {
+          "key": "tay_kho",
+          "text": "Lau khô tay rồi mới cắm phích điện",
+          "picture": "🖐️",
+          "group": "nen",
+          "explanation": "Nước dẫn điện: tay khô giúp em không bị điện giật."
+         },
+         {
+          "key": "cho_chac",
+          "text": "Đặt quạt ở chỗ chắc chắn, bằng phẳng",
+          "picture": "🪑",
+          "group": "nen",
+          "explanation": "Quạt đặt chắc chắn sẽ không bị đổ khi đang quay."
+         },
+         {
+          "key": "tat_quat",
+          "text": "Tắt quạt khi ra khỏi phòng",
+          "picture": "🔌",
+          "group": "nen",
+          "explanation": "Tắt quạt khi không dùng giúp tiết kiệm điện và an toàn hơn."
+         },
+         {
+          "key": "rut_phich_lau",
+          "text": "Rút phích điện, nhờ người lớn khi lau quạt",
+          "picture": "🧽",
+          "group": "nen",
+          "explanation": "Lau quạt khi còn cắm điện rất nguy hiểm. Rút phích và nhờ người lớn giúp."
+         },
+         {
+          "key": "so_vua",
+          "text": "Chọn số gió vừa phải, không để quạt thổi sát mặt",
+          "picture": "🌬️",
+          "group": "nen",
+          "explanation": "Gió quá mạnh, thổi sát mặt lâu dễ làm em khô mắt, nhức đầu."
+         },
+         {
+          "key": "tho_tay",
+          "text": "Thò ngón tay qua lồng quạt",
+          "picture": "👆",
+          "group": "khong",
+          "explanation": "Cánh quạt quay rất nhanh, có thể làm đứt, dập ngón tay."
+         },
+         {
+          "key": "keo_day",
+          "text": "Kéo dây điện để rút phích cắm",
+          "picture": "➰",
+          "group": "khong",
+          "explanation": "Kéo dây làm dây bị đứt, hở lõi điện, gây điện giật. Hãy cầm vào phích để rút."
+         },
+         {
+          "key": "gan_rem",
+          "text": "Để quạt chạy sát rèm cửa",
+          "picture": "🪟",
+          "group": "khong",
+          "explanation": "Rèm có thể bị hút vào cánh quạt, làm quạt kẹt, nóng và hỏng."
+         },
+         {
+          "key": "long_vo",
+          "text": "Dùng quạt khi lồng quạt bị vỡ",
+          "picture": "💔",
+          "group": "khong",
+          "explanation": "Lồng quạt vỡ không che được cánh quạt, tay em dễ chạm vào cánh đang quay."
+         },
+         {
+          "key": "treo_khan",
+          "text": "Vắt khăn, quần áo lên lồng quạt",
+          "picture": "🧣",
+          "group": "khong",
+          "explanation": "Khăn có thể lọt vào cánh quạt, làm quạt kẹt và nóng lên."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "thcn3.may_thu_thanh",
+     "order": 4,
+     "title": "Sử dụng máy thu thanh",
+     "description": "Biết các bộ phận của máy thu thanh, chọn kênh và chỉnh âm lượng.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn3.may_thu_hinh",
+     "order": 5,
+     "title": "Sử dụng máy thu hình (ti vi)",
+     "description": "Biết chọn kênh, chỉnh âm lượng và xem ti vi đúng khoảng cách, đúng giờ.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn3.an_toan_gia_dinh",
+     "order": 6,
+     "title": "An toàn với môi trường công nghệ trong gia đình",
+     "description": "Nhận biết tình huống nguy hiểm với đồ dùng điện trong nhà và cách phòng tránh.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "thcn3.thu_cong",
+   "grade": 3,
+   "order": 6,
+   "title": "Công nghệ: Thủ công kĩ thuật",
+   "lessons": [
+    {
+     "key": "thcn3.vat_lieu_dung_cu",
+     "order": 1,
+     "title": "Vật liệu và dụng cụ làm thủ công",
+     "description": "Biết giấy, bìa, kéo, hồ dán, thước và cách dùng kéo an toàn.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn3.do_dung_hoc_tap",
+     "order": 2,
+     "title": "Làm đồ dùng học tập",
+     "description": "Làm một ống đựng bút hoặc thước kẻ từ giấy, bìa.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn3.bien_bao",
+     "order": 3,
+     "title": "Làm biển báo giao thông",
+     "description": "Làm mô hình biển báo giao thông quen thuộc và nói ý nghĩa của nó.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn3.do_choi",
+     "order": 4,
+     "title": "Làm đồ chơi",
+     "description": "Làm một đồ chơi đơn giản từ vật liệu dễ tìm.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "thcn4.phan_cung_mem",
+   "grade": 4,
+   "order": 1,
+   "title": "Tin học: Phần cứng và phần mềm",
+   "lessons": [
+    {
+     "key": "thcn4.phan_cung_phan_mem",
+     "order": 1,
+     "title": "Phân biệt phần cứng và phần mềm",
+     "description": "Biết phần cứng là các thiết bị cầm, chạm được; phần mềm là các chương trình chạy trên máy.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu được ví dụ về phần cứng và phần mềm",
+      "Biết phần mềm cần phần cứng để chạy, phần cứng cần phần mềm để làm việc",
+      "Biết dùng máy tính đúng cách để không làm hỏng phần cứng"
+     ],
+     "summary": [
+      "Phần cứng là các bộ phận, thiết bị của máy tính mà em nhìn thấy và chạm vào được: bàn phím, chuột, màn hình…",
+      "Phần mềm là các chương trình máy tính, ví dụ phần mềm soạn thảo, phần mềm vẽ, trò chơi.",
+      "Phần cứng và phần mềm luôn đi cùng nhau: máy tính không có phần mềm thì không làm được việc gì."
+     ],
+     "examples": [
+      {
+       "title": "Vẽ một bức tranh",
+       "lines": [
+        "Em cầm chuột (phần cứng) và dùng phần mềm vẽ (phần mềm) để vẽ."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Phần cứng hay phần mềm?",
+       "set": {
+        "title": "Mỗi thứ dưới đây là phần cứng hay phần mềm?",
+        "groups": [
+         {
+          "id": "cung",
+          "label": "Phần cứng",
+          "icon": "🖥️"
+         },
+         {
+          "id": "mem",
+          "label": "Phần mềm",
+          "icon": "💿"
+         }
+        ],
+        "cards": [
+         {
+          "key": "ban_phim",
+          "text": "Bàn phím",
+          "picture": "⌨️",
+          "group": "cung",
+          "explanation": "Bàn phím là thiết bị em chạm vào được, nên là phần cứng."
+         },
+         {
+          "key": "man_hinh",
+          "text": "Màn hình",
+          "picture": "🖥️",
+          "group": "cung",
+          "explanation": "Màn hình là thiết bị hiện hình ảnh: phần cứng."
+         },
+         {
+          "key": "chuot",
+          "text": "Chuột máy tính",
+          "picture": "🖱️",
+          "group": "cung",
+          "explanation": "Chuột là thiết bị cầm được: phần cứng."
+         },
+         {
+          "key": "loa",
+          "text": "Loa",
+          "picture": "🔊",
+          "group": "cung",
+          "explanation": "Loa là thiết bị phát âm thanh: phần cứng."
+         },
+         {
+          "key": "may_in",
+          "text": "Máy in",
+          "picture": "🖨️",
+          "group": "cung",
+          "explanation": "Máy in là thiết bị in ra giấy: phần cứng."
+         },
+         {
+          "key": "soan_thao",
+          "text": "Phần mềm soạn thảo văn bản",
+          "picture": "📝",
+          "group": "mem",
+          "explanation": "Đây là chương trình để gõ và sửa văn bản: phần mềm."
+         },
+         {
+          "key": "luyen_go",
+          "text": "Phần mềm luyện gõ phím",
+          "picture": "🔤",
+          "group": "mem",
+          "explanation": "Đây là chương trình giúp em tập gõ: phần mềm."
+         },
+         {
+          "key": "trinh_duyet",
+          "text": "Trình duyệt web để xem trang web",
+          "picture": "🌐",
+          "group": "mem",
+          "explanation": "Trình duyệt là chương trình mở trang web: phần mềm."
+         },
+         {
+          "key": "ve_tranh",
+          "text": "Phần mềm vẽ tranh",
+          "picture": "🎨",
+          "group": "mem",
+          "explanation": "Phần mềm vẽ là chương trình chạy trên máy tính: phần mềm."
+         },
+         {
+          "key": "tro_choi",
+          "text": "Trò chơi học toán trên máy tính",
+          "picture": "🎮",
+          "group": "mem",
+          "explanation": "Trò chơi trên máy tính là một chương trình: phần mềm."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "thcn4.go_muoi_ngon",
+     "order": 2,
+     "title": "Gõ bàn phím bằng mười ngón",
+     "description": "Đặt tay đúng hàng phím cơ sở và gõ các hàng phím bằng đúng ngón tay.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn4.tac_hai_sai_cach",
+     "order": 3,
+     "title": "Dùng máy tính đúng cách để bảo vệ sức khoẻ",
+     "description": "Biết tác hại của dùng máy tính quá lâu, sai tư thế và cách phòng tránh.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "thcn4.internet_luu_tru",
+   "grade": 4,
+   "order": 2,
+   "title": "Tin học: Internet, tìm kiếm và lưu trữ thông tin",
+   "lessons": [
+    {
+     "key": "thcn4.sieu_lien_ket",
+     "order": 1,
+     "title": "Trang web và siêu liên kết",
+     "description": "Nhận ra siêu liên kết trên trang web và dùng nó để mở trang khác.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn4.tim_kiem_internet",
+     "order": 2,
+     "title": "Tìm kiếm thông tin trên Internet",
+     "description": "Dùng máy tìm kiếm với từ khoá đơn giản, có người lớn hướng dẫn.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn4.cay_thu_muc",
+     "order": 3,
+     "title": "Thư mục, tệp và cây thư mục",
+     "description": "Biết tệp, thư mục và tạo, đổi tên thư mục để cất bài làm.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "thcn4.dao_duc",
+   "grade": 4,
+   "order": 3,
+   "title": "Tin học: Đạo đức, pháp luật và văn hoá trong môi trường số",
+   "lessons": [
+    {
+     "key": "thcn4.ban_quyen_phan_mem",
+     "order": 1,
+     "title": "Bản quyền phần mềm",
+     "description": "Biết phần mềm có bản quyền và vì sao không dùng phần mềm sao chép trái phép.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn4.ton_trong_san_pham",
+     "order": 2,
+     "title": "Tôn trọng sản phẩm số của người khác",
+     "description": "Không sửa, xoá bài làm của bạn trên máy tính khi chưa được đồng ý.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "thcn4.ung_dung_lap_trinh",
+   "grade": 4,
+   "order": 4,
+   "title": "Tin học: Ứng dụng tin học và lập trình trực quan",
+   "lessons": [
+    {
+     "key": "thcn4.soan_thao",
+     "order": 1,
+     "title": "Soạn thảo văn bản tiếng Việt",
+     "description": "Gõ văn bản tiếng Việt có dấu, chọn và sửa chữ.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn4.trinh_chieu",
+     "order": 2,
+     "title": "Tạo bài trình chiếu đơn giản",
+     "description": "Tạo vài trang chiếu có tiêu đề, chữ và hình ảnh.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn4.lam_quen_scratch",
+     "order": 3,
+     "title": "Làm quen với phần mềm lập trình trực quan",
+     "description": "Biết nhân vật, sân khấu, khối lệnh và kéo thả khối lệnh để tạo chương trình.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn4.chuong_trinh_tuan_tu",
+     "order": 4,
+     "title": "Chương trình tuần tự: tiến và rẽ",
+     "description": "Ghép các lệnh tiến, rẽ trái, rẽ phải theo đúng thứ tự để nhân vật đi đến đích.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Hiểu chương trình là dãy lệnh được thực hiện lần lượt từ lệnh đầu đến lệnh cuối",
+      "Biết rẽ trái, rẽ phải làm nhân vật đổi hướng nhưng không đi thêm ô nào",
+      "Tìm và sửa lệnh sai khi nhân vật không đến được đích"
+     ],
+     "summary": [
+      "Máy tính thực hiện các lệnh lần lượt, đúng thứ tự em ghép: đó là cấu trúc tuần tự.",
+      "Lệnh tiến đưa nhân vật đi một ô theo hướng nó đang nhìn.",
+      "Lệnh rẽ trái hay rẽ phải chỉ quay nhân vật tại chỗ, sau đó mới cần lệnh tiến.",
+      "Khi nhân vật đi sai, em chạy lại từng lệnh trong đầu để tìm lệnh đặt nhầm chỗ."
+     ],
+     "examples": [
+      {
+       "title": "Đi rồi rẽ",
+       "lines": [
+        "Tiến, tiến, rẽ phải, tiến: nhân vật đi 2 ô, quay phải rồi đi thêm 1 ô."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "code_path",
+       "title": "Lập trình đường đi",
+       "levels": [
+        "b4",
+        "b5",
+        "b6",
+        "b7"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "thcn4.hoa_cay_canh",
+   "grade": 4,
+   "order": 5,
+   "title": "Công nghệ: Hoa và cây cảnh quanh em",
+   "lessons": [
+    {
+     "key": "thcn4.loi_ich_hoa",
+     "order": 1,
+     "title": "Lợi ích của hoa và cây cảnh",
+     "description": "Biết hoa, cây cảnh làm đẹp nhà cửa, làm không khí trong lành và một số loại phổ biến.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn4.trong_hoa_chau",
+     "order": 2,
+     "title": "Gieo hạt và trồng cây hoa trong chậu",
+     "description": "Làm đúng thứ tự các bước gieo hạt, trồng cây con, bón phân và thay chậu cho cây hoa.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nêu đúng thứ tự các bước gieo hạt hoa trong chậu",
+      "Nêu đúng thứ tự các bước trồng cây hoa con vào chậu",
+      "Biết các giai đoạn lớn lên của cây hoa và cách chăm sóc"
+     ],
+     "summary": [
+      "Chậu trồng hoa cần có lỗ thoát nước để rễ cây không bị úng.",
+      "Gieo hạt: cho đất vào chậu, gieo hạt, phủ một lớp đất mỏng rồi tưới nhẹ.",
+      "Trồng cây con: đặt cây thẳng giữa chậu, lấp đất, ấn nhẹ quanh gốc rồi tưới.",
+      "Rửa tay sạch sau khi làm đất và bón phân."
+     ],
+     "examples": [
+      {
+       "title": "Chậu hoa mười giờ",
+       "lines": [
+        "Chuẩn bị chậu có lỗ thoát nước → cho đất → gieo hạt → tưới nhẹ."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Các bước trồng hoa",
+       "tasks": [
+        {
+         "key": "gieo_hat",
+         "prompt": "Sắp xếp các bước gieo hạt hoa trong chậu.",
+         "items": [
+          "Chuẩn bị chậu có lỗ thoát nước",
+          "Cho đất trồng vào chậu",
+          "Gieo hạt và phủ một lớp đất mỏng",
+          "Tưới nhẹ cho đất đủ ẩm"
+         ],
+         "explanation": "Có chậu rồi mới cho đất; gieo hạt lên đất, phủ đất mỏng để hạt không bị trôi, rồi tưới nhẹ."
+        },
+        {
+         "key": "cay_con",
+         "prompt": "Sắp xếp các bước trồng một cây hoa con vào chậu.",
+         "items": [
+          "Cho một lớp đất vào đáy chậu",
+          "Đặt cây con thẳng đứng giữa chậu",
+          "Cho thêm đất và ấn nhẹ quanh gốc",
+          "Tưới nước nhẹ quanh gốc cây"
+         ],
+         "explanation": "Lớp đất đáy giúp cây đứng đúng độ cao; ấn nhẹ đất để cây đứng vững; tưới sau cùng cho đất ôm lấy rễ."
+        },
+        {
+         "key": "lon_len",
+         "prompt": "Sắp xếp các giai đoạn lớn lên của cây hoa trồng từ hạt.",
+         "items": [
+          "Hạt",
+          "Cây mầm",
+          "Cây con có lá thật",
+          "Cây ra nụ",
+          "Hoa nở"
+         ],
+         "explanation": "Hạt nảy mầm thành cây mầm, cây lớn dần và ra lá thật, sau đó ra nụ rồi nụ nở thành hoa."
+        },
+        {
+         "key": "bon_phan",
+         "prompt": "Sắp xếp các bước bón phân cho chậu hoa.",
+         "items": [
+          "Xới nhẹ đất quanh gốc, cách xa gốc một chút",
+          "Rắc phân theo lượng ghi trên bao",
+          "Phủ một lớp đất mỏng lên phân",
+          "Tưới nước cho phân tan dần"
+         ],
+         "explanation": "Xới đất để phân dễ ngấm; rắc vừa đủ lượng; phủ đất rồi tưới để phân tan từ từ, không làm cháy rễ."
+        },
+        {
+         "key": "thay_chau",
+         "prompt": "Sắp xếp các bước thay chậu cho cây hoa đã lớn.",
+         "items": [
+          "Tưới ẩm chậu cũ cho đất mềm",
+          "Nhẹ nhàng lấy cả cây và bầu đất ra",
+          "Đặt cây vào chậu mới đã có lớp đất lót",
+          "Lấp thêm đất, ấn nhẹ rồi tưới nước"
+         ],
+         "explanation": "Đất ẩm giúp lấy cây ra mà không đứt rễ; chậu mới có sẵn đất lót; lấp đất và tưới để cây nhanh bén rễ."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "thcn4.cham_soc_hoa",
+     "order": 3,
+     "title": "Chăm sóc hoa trong chậu",
+     "description": "Tưới nước, tỉa lá úa và để chậu hoa ở nơi đủ ánh sáng.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "thcn4.thu_cong",
+   "grade": 4,
+   "order": 6,
+   "title": "Công nghệ: Thủ công kĩ thuật",
+   "lessons": [
+    {
+     "key": "thcn4.bo_lap_ghep",
+     "order": 1,
+     "title": "Bộ lắp ghép mô hình kĩ thuật",
+     "description": "Nhận biết chi tiết, dụng cụ trong bộ lắp ghép và cách lắp, tháo đúng cách.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn4.lap_mo_hinh",
+     "order": 2,
+     "title": "Lắp ghép mô hình cái đu",
+     "description": "Lắp mô hình theo hướng dẫn và kiểm tra mô hình chuyển động được.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn4.do_choi_dan_gian",
+     "order": 3,
+     "title": "Làm đồ chơi dân gian",
+     "description": "Làm một đồ chơi dân gian như chong chóng, diều giấy.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "thcn5.may_tinh_internet",
+   "grade": 5,
+   "order": 1,
+   "title": "Tin học: Máy tính, Internet và tìm kiếm thông tin",
+   "lessons": [
+    {
+     "key": "thcn5.may_tinh_giup_em",
+     "order": 1,
+     "title": "Những việc máy tính giúp em làm",
+     "description": "Nêu được những việc máy tính giúp em học tập, vui chơi và giao tiếp.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn5.tim_kiem_website",
+     "order": 2,
+     "title": "Tìm kiếm thông tin trên website",
+     "description": "Tìm thông tin cho bài học trên một website tin cậy, có người lớn hướng dẫn.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn5.tu_khoa",
+     "order": 3,
+     "title": "Chọn từ khoá để tìm kiếm",
+     "description": "Chọn từ khoá ngắn, đúng ý để tìm thông tin nhanh và đúng.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "thcn5.dao_duc",
+   "grade": 5,
+   "order": 2,
+   "title": "Tin học: Đạo đức, pháp luật và văn hoá trong môi trường số",
+   "lessons": [
+    {
+     "key": "thcn5.ban_quyen_noi_dung",
+     "order": 1,
+     "title": "Bản quyền nội dung thông tin",
+     "description": "Biết bài viết, ảnh, nhạc trên mạng có tác giả và cần được tôn trọng.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn5.ghi_nguon",
+     "order": 2,
+     "title": "Ghi nguồn khi dùng ảnh và bài viết",
+     "description": "Ghi rõ nguồn khi dùng ảnh, bài viết của người khác trong bài làm.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "thcn5.ung_dung",
+   "grade": 5,
+   "order": 3,
+   "title": "Tin học: Ứng dụng tin học",
+   "lessons": [
+    {
+     "key": "thcn5.thu_muc_tep",
+     "order": 1,
+     "title": "Sao chép, di chuyển và xoá tệp, thư mục",
+     "description": "Sắp xếp bài làm vào thư mục và sao chép, di chuyển, xoá tệp đúng cách.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn5.dinh_dang_van_ban",
+     "order": 2,
+     "title": "Định dạng văn bản và chèn ảnh",
+     "description": "Đổi phông, cỡ, màu chữ và chèn ảnh vào văn bản.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn5.chen_bang",
+     "order": 3,
+     "title": "Chèn bảng vào văn bản",
+     "description": "Tạo bảng đơn giản để trình bày thông tin trong văn bản.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "thcn5.giai_quyet_van_de",
+   "grade": 5,
+   "order": 4,
+   "title": "Tin học: Giải quyết vấn đề với sự trợ giúp của máy tính",
+   "lessons": [
+    {
+     "key": "thcn5.thuat_toan_cac_buoc",
+     "order": 1,
+     "title": "Mô tả công việc thành các bước (thuật toán)",
+     "description": "Viết các bước của một công việc sao cho ai làm theo cũng ra cùng một kết quả.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Hiểu thuật toán là dãy các bước rõ ràng, làm theo thì giải quyết được việc",
+      "Sắp xếp đúng thứ tự các bước của một việc quen thuộc",
+      "Nhận ra bước có điều kiện: nếu… thì…"
+     ],
+     "summary": [
+      "Thuật toán là cách làm một việc, gồm các bước rõ ràng, theo thứ tự nhất định.",
+      "Đổi chỗ hai bước có thể làm hỏng cả công việc.",
+      "Có bước chỉ làm khi một điều kiện đúng: nếu đèn xanh thì đi, nếu đèn đỏ thì dừng."
+     ],
+     "examples": [
+      {
+       "title": "Gọi điện cho ông bà",
+       "lines": [
+        "Mở khoá điện thoại → mở danh bạ → chọn tên ông bà → bấm gọi."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "order",
+       "title": "Sắp xếp các bước",
+       "tasks": [
+        {
+         "key": "goi_dien",
+         "prompt": "Sắp xếp các bước gọi điện cho ông bà bằng điện thoại thông minh.",
+         "items": [
+          "Mở khoá điện thoại",
+          "Mở danh bạ",
+          "Chọn tên ông bà",
+          "Bấm nút gọi"
+         ],
+         "explanation": "Điện thoại phải mở khoá mới dùng được danh bạ; chọn đúng người rồi mới bấm gọi."
+        },
+        {
+         "key": "sao_chep",
+         "prompt": "Sắp xếp các bước sao chép một tệp sang thư mục khác.",
+         "items": [
+          "Nháy chọn tệp cần sao chép",
+          "Nhấn Ctrl + C",
+          "Mở thư mục muốn đặt bản sao",
+          "Nhấn Ctrl + V"
+         ],
+         "explanation": "Chọn tệp rồi mới sao chép được (Ctrl + C); mở thư mục đích rồi dán (Ctrl + V)."
+        },
+        {
+         "key": "qua_duong",
+         "prompt": "Sắp xếp các bước đi bộ qua đường ở nơi có đèn tín hiệu.",
+         "items": [
+          "Đi đến vạch kẻ đường dành cho người đi bộ",
+          "Nhìn đèn tín hiệu dành cho người đi bộ",
+          "Nếu đèn đỏ thì đứng chờ đến khi đèn xanh",
+          "Đèn xanh: quan sát xe rồi đi thẳng sang đường"
+         ],
+         "explanation": "Đến đúng chỗ qua đường, nhìn đèn, chờ khi đèn đỏ; chỉ đi khi đèn xanh và đã quan sát xe. Bước 'nếu… thì…' là bước có điều kiện."
+        },
+        {
+         "key": "luu_bai",
+         "prompt": "Sắp xếp các bước lưu bài văn vào thư mục Học tập.",
+         "items": [
+          "Nháy vào bảng chọn File",
+          "Chọn Save As",
+          "Chọn thư mục Học tập và gõ tên tệp",
+          "Nháy nút Save"
+         ],
+         "explanation": "Mở File, chọn Save As để mở hộp thoại lưu; chọn nơi lưu và đặt tên; nháy Save sau cùng."
+        },
+        {
+         "key": "tim_sach",
+         "prompt": "Sắp xếp các bước tìm một cuốn truyện trong thư viện lớp.",
+         "items": [
+          "Đọc tên truyện cần tìm",
+          "Đến ngăn sách Truyện thiếu nhi",
+          "Xem lần lượt từng cuốn trên ngăn",
+          "Thấy đúng tên thì lấy ra, chưa thấy thì xem cuốn tiếp theo"
+         ],
+         "explanation": "Biết tên truyện, đến đúng ngăn, rồi xem từng cuốn. Bước cuối được làm lại nhiều lần: đó là một vòng lặp."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "thcn5.lap_va_re_nhanh",
+     "order": 2,
+     "title": "Cấu trúc lặp và cấu trúc rẽ nhánh",
+     "description": "Đọc một kịch bản ngắn có lặp, có nếu… thì… và dự đoán nhân vật sẽ làm gì.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Hiểu khối lặp lại làm các lệnh bên trong nhiều lần",
+      "Hiểu khối nếu… thì… nếu không thì… chỉ làm một trong hai nhánh",
+      "Dự đoán kết quả và tìm lỗi trong kịch bản ngắn"
+     ],
+     "summary": [
+      "Lặp lại n lần: các lệnh nằm bên trong khối được làm n lần; lệnh nằm sau khối chỉ làm một lần.",
+      "Nếu điều kiện đúng thì làm nhánh 'thì', nếu sai thì làm nhánh 'nếu không thì'.",
+      "Lặp lại mãi mãi: chương trình cứ làm lại cho đến khi em bấm dừng.",
+      "Muốn vẽ hình vuông, nhân vật phải đi 4 cạnh và xoay 90 độ ở mỗi góc."
+     ],
+     "examples": [
+      {
+       "title": "Lặp 3 lần",
+       "lines": [
+        "Lặp lại 3 lần: nhảy lên.",
+        "Nhân vật nhảy 3 lần rồi dừng."
+       ]
+      },
+      {
+       "title": "Rẽ nhánh",
+       "lines": [
+        "Nếu trời mưa thì mang áo mưa, nếu không thì đội mũ."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Tìm lỗi logic",
+       "style": "predict",
+       "tasks": [
+        {
+         "key": "lap_noi",
+         "passage": "Khi nháy vào lá cờ xanh\nLặp lại 3 lần:\n    Nói \"Chào bạn!\" trong 1 giây",
+         "question": "Nhân vật nói \"Chào bạn!\" mấy lần?",
+         "options": [
+          {
+           "text": "1 lần",
+           "ok": false,
+           "why": "Lệnh nói nằm trong khối lặp nên được làm nhiều hơn một lần."
+          },
+          {
+           "text": "3 lần",
+           "ok": true,
+           "why": "Đúng. Khối lặp lại 3 lần làm lệnh bên trong 3 lần."
+          },
+          {
+           "text": "4 lần",
+           "ok": false,
+           "why": "Khối chỉ lặp 3 lần, không có lần nói thêm nào."
+          }
+         ],
+         "explanation": "Mọi lệnh nằm bên trong khối \"Lặp lại 3 lần\" được thực hiện đúng 3 lần."
+        },
+        {
+         "key": "lap_buoc",
+         "passage": "Khi nháy vào lá cờ xanh\nLặp lại 4 lần:\n    Di chuyển 10 bước",
+         "question": "Sau khi chạy xong, nhân vật đã đi tổng cộng bao nhiêu bước?",
+         "options": [
+          {
+           "text": "10 bước",
+           "ok": false,
+           "why": "Đó chỉ là số bước của một lần lặp."
+          },
+          {
+           "text": "14 bước",
+           "ok": false,
+           "why": "Không cộng số lần lặp với số bước; mỗi lần lặp đi 10 bước."
+          },
+          {
+           "text": "40 bước",
+           "ok": true,
+           "why": "Đúng. 4 lần, mỗi lần 10 bước: 4 × 10 = 40 bước."
+          }
+         ],
+         "explanation": "Mỗi lần lặp nhân vật đi 10 bước; lặp 4 lần nên đi 4 × 10 = 40 bước."
+        },
+        {
+         "key": "ngoai_lap",
+         "passage": "Lặp lại 2 lần:\n    Di chuyển 10 bước\n    Nói \"Thêm chút nữa!\" trong 1 giây\nNói \"Đến nơi rồi!\" trong 2 giây",
+         "question": "Nhân vật nói \"Đến nơi rồi!\" mấy lần?",
+         "options": [
+          {
+           "text": "1 lần",
+           "ok": true,
+           "why": "Đúng. Lệnh này nằm sau khối lặp nên chỉ chạy một lần, khi đã lặp xong."
+          },
+          {
+           "text": "2 lần",
+           "ok": false,
+           "why": "Chỉ các lệnh bên trong khối mới lặp 2 lần. Lệnh này nằm ngoài khối."
+          },
+          {
+           "text": "3 lần",
+           "ok": false,
+           "why": "Không có cách nào để lệnh này chạy 3 lần."
+          }
+         ],
+         "explanation": "Hãy nhìn lệnh nằm trong hay ngoài khối lặp: trong khối thì lặp, ngoài khối thì chạy một lần.",
+         "hint": "Xem lệnh đó có thụt vào bên trong khối lặp không."
+        },
+        {
+         "key": "re_nhanh",
+         "passage": "Nếu đang chạm vào màu đỏ thì\n    Nói \"Nóng quá!\"\nnếu không thì\n    Nói \"Mát quá!\"",
+         "question": "Nhân vật đang đứng trên ô màu xanh lá. Nhân vật nói gì?",
+         "options": [
+          {
+           "text": "\"Nóng quá!\"",
+           "ok": false,
+           "why": "Câu này chỉ nói khi nhân vật chạm màu đỏ, mà ô đang là màu xanh lá."
+          },
+          {
+           "text": "\"Mát quá!\"",
+           "ok": true,
+           "why": "Đúng. Điều kiện chạm màu đỏ sai nên nhân vật làm nhánh 'nếu không thì'."
+          },
+          {
+           "text": "Nói cả hai câu",
+           "ok": false,
+           "why": "Khối rẽ nhánh chỉ chọn một trong hai nhánh, không bao giờ làm cả hai."
+          }
+         ],
+         "explanation": "Khối nếu… thì… nếu không thì… kiểm tra điều kiện rồi chỉ làm một nhánh."
+        },
+        {
+         "key": "hinh_vuong",
+         "passage": "An muốn nhân vật vẽ hình vuông:\nHạ bút\nLặp lại 4 lần:\n    Di chuyển 100 bước\n    Xoay phải 45 độ",
+         "question": "Hình vẽ ra không phải hình vuông. Lỗi ở đâu?",
+         "options": [
+          {
+           "text": "Mỗi góc phải xoay 90 độ",
+           "ok": true,
+           "why": "Đúng. Hình vuông có 4 góc vuông, mỗi góc phải xoay 90 độ."
+          },
+          {
+           "text": "Phải lặp lại 8 lần",
+           "ok": false,
+           "why": "Lặp 8 lần với góc 45 độ sẽ vẽ ra hình 8 cạnh, không phải hình vuông."
+          },
+          {
+           "text": "Phải nhấc bút trước khi vẽ",
+           "ok": false,
+           "why": "Nhấc bút thì nhân vật đi mà không vẽ gì cả."
+          }
+         ],
+         "explanation": "4 lần xoay phải cộng lại thành một vòng: 4 × 90 = 360 độ. Với 45 độ, nhân vật mới quay được nửa vòng."
+        },
+        {
+         "key": "mai_mai",
+         "passage": "Khi nháy vào lá cờ xanh\nLặp lại mãi mãi:\n    Nếu phím mũi tên phải được bấm thì\n        Di chuyển 10 bước",
+         "question": "Chương trình đang chạy và em không bấm phím nào. Điều gì xảy ra?",
+         "options": [
+          {
+           "text": "Nhân vật đứng yên, chờ em bấm phím",
+           "ok": true,
+           "why": "Đúng. Điều kiện sai nên không di chuyển, nhưng vòng lặp vẫn kiểm tra liên tục."
+          },
+          {
+           "text": "Nhân vật tự đi sang phải",
+           "ok": false,
+           "why": "Nhân vật chỉ đi khi điều kiện 'phím mũi tên phải được bấm' đúng."
+          },
+          {
+           "text": "Chương trình dừng hẳn",
+           "ok": false,
+           "why": "Khối lặp mãi mãi không tự dừng; nó vẫn chạy và chờ em bấm phím."
+          }
+         ],
+         "explanation": "Lặp mãi mãi kết hợp nếu… thì… giúp nhân vật luôn sẵn sàng phản ứng khi em bấm phím."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "thcn5.bien_trong_chuong_trinh",
+     "order": 3,
+     "title": "Biến trong chương trình",
+     "description": "Dùng biến để đếm điểm, đếm số lần trong trò chơi đơn giản.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "thcn5.cn_doi_song",
+   "grade": 5,
+   "order": 5,
+   "title": "Công nghệ: Công nghệ và đời sống",
+   "lessons": [
+    {
+     "key": "thcn5.vai_tro_cong_nghe",
+     "order": 1,
+     "title": "Vai trò của công nghệ",
+     "description": "Nêu được lợi ích của sản phẩm công nghệ và tác hại khi dùng sai.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn5.sang_che",
+     "order": 2,
+     "title": "Nhà sáng chế và sáng chế",
+     "description": "Biết một số sáng chế quen thuộc và tinh thần sáng tạo của nhà sáng chế.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn5.thiet_ke_don_gian",
+     "order": 3,
+     "title": "Tìm hiểu thiết kế: làm một sản phẩm đơn giản",
+     "description": "Từ ý tưởng đến sản phẩm: xác định yêu cầu, phác thảo, chọn vật liệu, làm thử và sửa.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; tác giả đã soát nội dung và đáp án, trình kiểm tra đã kiểm tra."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Biết các bước thiết kế: xác định yêu cầu, phác thảo, làm sản phẩm, kiểm tra và sửa",
+      "Chọn phương án, vật liệu theo các yêu cầu đã đặt ra",
+      "Dùng dụng cụ an toàn khi làm sản phẩm"
+     ],
+     "summary": [
+      "Thiết kế bắt đầu bằng câu hỏi: sản phẩm dùng để làm gì, cần đạt những yêu cầu nào?",
+      "Bản phác thảo giúp em hình dung hình dạng, kích thước, vật liệu trước khi làm.",
+      "Một phương án tốt là phương án đạt đủ các yêu cầu; có thể có nhiều phương án tốt.",
+      "Làm xong, em dùng thử, thấy chỗ chưa đạt thì sửa lại."
+     ],
+     "examples": [
+      {
+       "title": "Hộp đựng bút",
+       "lines": [
+        "Yêu cầu: đứng vững, đựng được 10 cây bút, không có cạnh sắc."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Chọn phương án theo yêu cầu",
+       "style": "situation",
+       "tasks": [
+        {
+         "key": "buoc_dau",
+         "question": "Em muốn làm một hộp đựng bút từ vật liệu tái chế. Em nên làm gì đầu tiên?",
+         "options": [
+          {
+           "text": "Xác định hộp cần đựng bao nhiêu bút và đặt ở đâu",
+           "ok": true,
+           "why": "Đúng. Biết yêu cầu trước thì mới chọn được kích thước, vật liệu phù hợp."
+          },
+          {
+           "text": "Cắt ngay một vỏ chai nhựa",
+           "ok": false,
+           "why": "Chưa biết yêu cầu mà cắt ngay dễ làm hỏng vật liệu, phải làm lại."
+          },
+          {
+           "text": "Chọn màu sơn để trang trí",
+           "ok": false,
+           "why": "Trang trí là bước sau cùng, khi sản phẩm đã dùng được."
+          }
+         ],
+         "explanation": "Bước đầu của thiết kế là xác định sản phẩm dùng để làm gì và cần đạt những yêu cầu nào."
+        },
+        {
+         "key": "hop_but",
+         "question": "Hộp bút cần: đứng vững, đựng được 10 cây bút, an toàn khi dùng. Phương án nào đạt?",
+         "options": [
+          {
+           "text": "Ống giấy cuộn dán chặt lên đế bìa cứng, vừa 10 cây bút",
+           "ok": true,
+           "why": "Đạt cả ba yêu cầu: đế giúp đứng vững, đủ chỗ, không có cạnh sắc."
+          },
+          {
+           "text": "Vỏ lon đã cắt, mép cắt sắc chưa được xử lí",
+           "ok": false,
+           "why": "Chưa đạt yêu cầu an toàn: mép kim loại sắc dễ làm đứt tay."
+          },
+          {
+           "text": "Cốc giấy nhỏ chỉ vừa 3 cây bút",
+           "ok": false,
+           "why": "Chưa đạt yêu cầu đựng được 10 cây bút."
+          },
+          {
+           "text": "Hộp sữa giấy rửa sạch, cắt bỏ nắp, dán băng dính quanh mép",
+           "ok": true,
+           "why": "Đạt cả ba yêu cầu: hộp vững, rộng, mép đã được dán an toàn."
+          }
+         ],
+         "explanation": "Hai phương án đều tốt vì đạt đủ yêu cầu. Thiết kế không chỉ có một đáp án, miễn là đạt các yêu cầu đặt ra."
+        },
+        {
+         "key": "bi_do",
+         "question": "Khi dùng thử, hộp bút bị đổ mỗi khi cắm nhiều bút vào. Em nên làm gì?",
+         "options": [
+          {
+           "text": "Làm đế rộng hơn hoặc cho vật nặng vào đáy hộp rồi thử lại",
+           "ok": true,
+           "why": "Đúng. Đế rộng, đáy nặng giúp hộp vững hơn; thử lại để chắc chắn đã sửa được."
+          },
+          {
+           "text": "Bỏ dở, làm một sản phẩm khác",
+           "ok": false,
+           "why": "Sản phẩm chưa đạt thì sửa, không cần bỏ. Sửa lỗi là một bước của thiết kế."
+          },
+          {
+           "text": "Chỉ cắm 2 cây bút cho hộp khỏi đổ",
+           "ok": false,
+           "why": "Như vậy hộp không còn đạt yêu cầu đựng được 10 cây bút."
+          }
+         ],
+         "explanation": "Kiểm tra và sửa là bước quan trọng: tìm nguyên nhân (đế hẹp, đáy nhẹ) rồi sửa đúng chỗ đó."
+        },
+        {
+         "key": "phac_thao",
+         "question": "Vì sao nên vẽ phác thảo trước khi làm sản phẩm?",
+         "options": [
+          {
+           "text": "Để hình dung hình dạng, kích thước, vật liệu trước khi làm",
+           "ok": true,
+           "why": "Đúng. Phác thảo giúp phát hiện chỗ chưa hợp lí trước khi tốn vật liệu."
+          },
+          {
+           "text": "Để không cần làm thử sản phẩm nữa",
+           "ok": false,
+           "why": "Phác thảo không thay được việc làm thử và kiểm tra."
+          },
+          {
+           "text": "Chỉ để bài làm trông đẹp hơn",
+           "ok": false,
+           "why": "Phác thảo có mục đích: giúp em chuẩn bị và làm đúng."
+          }
+         ],
+         "explanation": "Bản phác thảo là bản kế hoạch bằng hình: có hình dạng, kích thước, vật liệu."
+        },
+        {
+         "key": "thuyen",
+         "question": "Em làm mô hình thuyền thả chơi trên chậu nước. Yêu cầu: nổi được, không ngấm nước, dễ kiếm. Vật liệu nào đạt?",
+         "options": [
+          {
+           "text": "Khay xốp đựng thực phẩm đã rửa sạch",
+           "ok": true,
+           "why": "Đạt: xốp nhẹ nên nổi, không ngấm nước và dễ kiếm."
+          },
+          {
+           "text": "Vỏ chai nhựa có nắp vặn chặt",
+           "ok": true,
+           "why": "Đạt: chai kín chứa không khí nên nổi, nhựa không ngấm nước."
+          },
+          {
+           "text": "Bìa các-tông thường",
+           "ok": false,
+           "why": "Chưa đạt: bìa ngấm nước, mềm ra rồi chìm."
+          },
+          {
+           "text": "Viên gạch nhỏ",
+           "ok": false,
+           "why": "Chưa đạt: gạch nặng nên chìm ngay."
+          }
+         ],
+         "explanation": "So từng vật liệu với từng yêu cầu: vật liệu đạt đủ cả ba yêu cầu là lựa chọn tốt."
+        },
+        {
+         "key": "dung_cu",
+         "question": "Em cần cắt bìa cứng để làm đế hộp bút. Cách nào an toàn?",
+         "options": [
+          {
+           "text": "Dùng kéo, hoặc nhờ người lớn cắt khi cần dao rọc giấy",
+           "ok": true,
+           "why": "Đúng. Dao rọc giấy rất sắc, chỉ dùng khi có người lớn hướng dẫn."
+          },
+          {
+           "text": "Tự dùng dao rọc giấy, kê bìa lên đùi để cắt",
+           "ok": false,
+           "why": "Rất nguy hiểm: dao trượt có thể cắt vào chân."
+          },
+          {
+           "text": "Cầm kéo chĩa mũi về phía bạn khi đưa kéo",
+           "ok": false,
+           "why": "Khi đưa kéo, cầm phần lưỡi đã khép và đưa phần tay cầm cho bạn."
+          }
+         ],
+         "explanation": "An toàn là một yêu cầu của mọi sản phẩm và của cả lúc làm sản phẩm."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "thcn5.dien_thoai",
+     "order": 4,
+     "title": "Sử dụng điện thoại",
+     "description": "Biết các bộ phận của điện thoại, gọi số khẩn cấp và dùng điện thoại an toàn.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn5.tu_lanh",
+     "order": 5,
+     "title": "Sử dụng tủ lạnh",
+     "description": "Biết các ngăn của tủ lạnh, cất thực phẩm đúng ngăn và dùng tủ tiết kiệm điện.",
+     "status": "planned"
+    }
+   ]
+  },
+  {
+   "key": "thcn5.thu_cong",
+   "grade": 5,
+   "order": 6,
+   "title": "Công nghệ: Thủ công kĩ thuật",
+   "lessons": [
+    {
+     "key": "thcn5.xe_dien",
+     "order": 1,
+     "title": "Lắp ráp mô hình xe điện chạy pin",
+     "description": "Lắp mô hình xe điện theo hướng dẫn và cho xe chạy thử.",
+     "status": "planned"
+    },
+    {
+     "key": "thcn5.dien_mat_troi",
+     "order": 2,
+     "title": "Lắp mô hình điện mặt trời",
+     "description": "Lắp mô hình dùng tấm pin mặt trời để làm quay quạt nhỏ hoặc sáng đèn.",
+     "status": "planned"
+    }
+   ]
+  }
+ ]
+}

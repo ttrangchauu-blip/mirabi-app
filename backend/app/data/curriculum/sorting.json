@@ -1,0 +1,649 @@
+{
+ "game": "sorting",
+ "version": 1,
+ "sets": [
+  {
+   "key": "dong_thuc_vat",
+   "curriculum": "GDPT2018",
+   "subject": "science",
+   "grades": [
+    1,
+    2
+   ],
+   "topic": "Thực vật và động vật",
+   "title": "Động vật hay thực vật?",
+   "difficulty": 1,
+   "version": 1,
+   "groups": [
+    {
+     "id": "dong_vat",
+     "label": "Động vật",
+     "icon": "🐾"
+    },
+    {
+     "id": "thuc_vat",
+     "label": "Thực vật",
+     "icon": "🌱"
+    }
+   ],
+   "cards": [
+    {
+     "key": "meo",
+     "text": "Con mèo",
+     "picture": "🐱",
+     "group": "dong_vat",
+     "explanation": "Con mèo là động vật: nó tự đi lại và cần ăn để sống."
+    },
+    {
+     "key": "ca",
+     "text": "Con cá",
+     "picture": "🐟",
+     "group": "dong_vat",
+     "explanation": "Con cá là động vật: nó bơi trong nước và cần ăn để sống."
+    },
+    {
+     "key": "ga",
+     "text": "Con gà",
+     "picture": "🐔",
+     "group": "dong_vat",
+     "explanation": "Con gà là động vật: nó tự đi lại, mổ thóc để ăn."
+    },
+    {
+     "key": "ong",
+     "text": "Con ong",
+     "picture": "🐝",
+     "group": "dong_vat",
+     "explanation": "Con ong là động vật: nó bay đi tìm mật hoa để ăn."
+    },
+    {
+     "key": "voi",
+     "text": "Con voi",
+     "picture": "🐘",
+     "group": "dong_vat",
+     "explanation": "Con voi là động vật: nó tự đi lại và ăn cỏ, lá cây."
+    },
+    {
+     "key": "ech",
+     "text": "Con ếch",
+     "picture": "🐸",
+     "group": "dong_vat",
+     "explanation": "Con ếch là động vật: nó nhảy và bắt sâu bọ để ăn."
+    },
+    {
+     "key": "buom",
+     "text": "Con bướm",
+     "picture": "🦋",
+     "group": "dong_vat",
+     "explanation": "Con bướm là động vật: nó bay đi hút mật hoa."
+    },
+    {
+     "key": "lua",
+     "text": "Cây lúa",
+     "picture": "🌾",
+     "group": "thuc_vat",
+     "explanation": "Cây lúa là thực vật: nó mọc từ đất, không tự đi lại được."
+    },
+    {
+     "key": "xuong_rong",
+     "text": "Cây xương rồng",
+     "picture": "🌵",
+     "group": "thuc_vat",
+     "explanation": "Cây xương rồng là thực vật: nó mọc từ đất, cần nước và ánh sáng."
+    },
+    {
+     "key": "thong",
+     "text": "Cây thông",
+     "picture": "🌲",
+     "group": "thuc_vat",
+     "explanation": "Cây thông là thực vật: nó mọc từ đất và lớn lên tại chỗ."
+    },
+    {
+     "key": "hoa_hong",
+     "text": "Hoa hồng",
+     "picture": "🌹",
+     "group": "thuc_vat",
+     "explanation": "Hoa hồng là một bộ phận của cây hoa hồng, là thực vật."
+    },
+    {
+     "key": "dua",
+     "text": "Cây dừa",
+     "picture": "🌴",
+     "group": "thuc_vat",
+     "explanation": "Cây dừa là thực vật: nó mọc từ đất, không tự đi lại được."
+    },
+    {
+     "key": "rau_cai",
+     "text": "Rau cải",
+     "picture": "🥬",
+     "group": "thuc_vat",
+     "explanation": "Rau cải là thực vật: nó được trồng và mọc lên từ đất."
+    },
+    {
+     "key": "huong_duong",
+     "text": "Hoa hướng dương",
+     "picture": "🌻",
+     "group": "thuc_vat",
+     "explanation": "Hoa hướng dương là thực vật: cây mọc từ đất và cần ánh sáng."
+    }
+   ]
+  },
+  {
+   "key": "noi_song",
+   "curriculum": "GDPT2018",
+   "subject": "science",
+   "grades": [
+    1,
+    3
+   ],
+   "topic": "Động vật sống ở đâu",
+   "title": "Sống trên cạn hay dưới nước?",
+   "difficulty": 1,
+   "version": 1,
+   "groups": [
+    {
+     "id": "tren_can",
+     "label": "Sống trên cạn",
+     "icon": "🌳"
+    },
+    {
+     "id": "duoi_nuoc",
+     "label": "Sống dưới nước",
+     "icon": "🌊"
+    }
+   ],
+   "cards": [
+    {
+     "key": "voi",
+     "text": "Con voi",
+     "picture": "🐘",
+     "group": "tren_can",
+     "explanation": "Con voi sống trên cạn, ở rừng và đồng cỏ."
+    },
+    {
+     "key": "ho",
+     "text": "Con hổ",
+     "picture": "🐯",
+     "group": "tren_can",
+     "explanation": "Con hổ sống trên cạn, ở trong rừng."
+    },
+    {
+     "key": "tho",
+     "text": "Con thỏ",
+     "picture": "🐰",
+     "group": "tren_can",
+     "explanation": "Con thỏ sống trên cạn, đào hang dưới đất."
+    },
+    {
+     "key": "ngua",
+     "text": "Con ngựa",
+     "picture": "🐴",
+     "group": "tren_can",
+     "explanation": "Con ngựa sống trên cạn, chạy trên đồng cỏ."
+    },
+    {
+     "key": "ga",
+     "text": "Con gà",
+     "picture": "🐔",
+     "group": "tren_can",
+     "explanation": "Con gà sống trên cạn, đi lại và kiếm ăn trên mặt đất."
+    },
+    {
+     "key": "su_tu",
+     "text": "Con sư tử",
+     "picture": "🦁",
+     "group": "tren_can",
+     "explanation": "Con sư tử sống trên cạn, ở đồng cỏ."
+    },
+    {
+     "key": "huou",
+     "text": "Con hươu cao cổ",
+     "picture": "🦒",
+     "group": "tren_can",
+     "explanation": "Con hươu cao cổ sống trên cạn, ăn lá trên cây cao."
+    },
+    {
+     "key": "lac_da",
+     "text": "Con lạc đà",
+     "picture": "🐫",
+     "group": "tren_can",
+     "explanation": "Con lạc đà sống trên cạn, ở sa mạc."
+    },
+    {
+     "key": "ca",
+     "text": "Con cá",
+     "picture": "🐟",
+     "group": "duoi_nuoc",
+     "explanation": "Con cá sống dưới nước và thở bằng mang."
+    },
+    {
+     "key": "ca_heo",
+     "text": "Con cá heo",
+     "picture": "🐬",
+     "group": "duoi_nuoc",
+     "explanation": "Cá heo sống dưới nước. Nó thở bằng phổi nên thỉnh thoảng ngoi lên mặt nước để thở."
+    },
+    {
+     "key": "bach_tuoc",
+     "text": "Con bạch tuộc",
+     "picture": "🐙",
+     "group": "duoi_nuoc",
+     "explanation": "Con bạch tuộc sống dưới biển."
+    },
+    {
+     "key": "ca_voi",
+     "text": "Con cá voi",
+     "picture": "🐳",
+     "group": "duoi_nuoc",
+     "explanation": "Cá voi sống dưới biển. Nó thở bằng phổi và ngoi lên để thở."
+    },
+    {
+     "key": "tom",
+     "text": "Con tôm",
+     "picture": "🦐",
+     "group": "duoi_nuoc",
+     "explanation": "Con tôm sống dưới nước."
+    },
+    {
+     "key": "ca_map",
+     "text": "Con cá mập",
+     "picture": "🦈",
+     "group": "duoi_nuoc",
+     "explanation": "Con cá mập sống dưới biển và thở bằng mang."
+    }
+   ]
+  },
+  {
+   "key": "giac_quan",
+   "curriculum": "GDPT2018",
+   "subject": "science",
+   "grades": [
+    1,
+    1
+   ],
+   "topic": "Các giác quan",
+   "title": "Giác quan nào giúp em?",
+   "difficulty": 4,
+   "version": 1,
+   "groups": [
+    {
+     "id": "mat",
+     "label": "Mắt",
+     "icon": "👁️"
+    },
+    {
+     "id": "tai",
+     "label": "Tai",
+     "icon": "👂"
+    },
+    {
+     "id": "mui",
+     "label": "Mũi",
+     "icon": "👃"
+    },
+    {
+     "id": "luoi",
+     "label": "Lưỡi",
+     "icon": "👅"
+    },
+    {
+     "id": "da",
+     "label": "Da",
+     "icon": "✋"
+    }
+   ],
+   "cards": [
+    {
+     "key": "cau_vong",
+     "text": "Ngắm cầu vồng",
+     "picture": "🌈",
+     "group": "mat",
+     "explanation": "Em dùng mắt để nhìn thấy cầu vồng."
+    },
+    {
+     "key": "doc_truyen",
+     "text": "Đọc truyện tranh",
+     "picture": "📖",
+     "group": "mat",
+     "explanation": "Em dùng mắt để nhìn chữ và tranh khi đọc."
+    },
+    {
+     "key": "den",
+     "text": "Nhìn đèn giao thông",
+     "picture": "🚦",
+     "group": "mat",
+     "explanation": "Em dùng mắt để nhìn màu của đèn giao thông."
+    },
+    {
+     "key": "chim",
+     "text": "Nghe chim hót",
+     "picture": "🐦",
+     "group": "tai",
+     "explanation": "Em dùng tai để nghe tiếng chim hót."
+    },
+    {
+     "key": "chuong",
+     "text": "Nghe tiếng chuông",
+     "picture": "🔔",
+     "group": "tai",
+     "explanation": "Em dùng tai để nghe tiếng chuông."
+    },
+    {
+     "key": "nhac",
+     "text": "Nghe nhạc",
+     "picture": "🎵",
+     "group": "tai",
+     "explanation": "Em dùng tai để nghe nhạc."
+    },
+    {
+     "key": "hoa",
+     "text": "Ngửi mùi hoa thơm",
+     "picture": "🌸",
+     "group": "mui",
+     "explanation": "Em dùng mũi để ngửi mùi thơm của hoa."
+    },
+    {
+     "key": "banh",
+     "text": "Ngửi mùi bánh mì nướng",
+     "picture": "🍞",
+     "group": "mui",
+     "explanation": "Em dùng mũi để ngửi mùi bánh mì nướng."
+    },
+    {
+     "key": "chanh",
+     "text": "Nếm vị chua của chanh",
+     "picture": "🍋",
+     "group": "luoi",
+     "explanation": "Em dùng lưỡi để nếm vị chua."
+    },
+    {
+     "key": "keo",
+     "text": "Nếm vị ngọt của kẹo",
+     "picture": "🍬",
+     "group": "luoi",
+     "explanation": "Em dùng lưỡi để nếm vị ngọt."
+    },
+    {
+     "key": "muoi",
+     "text": "Nếm vị mặn của muối",
+     "picture": "🧂",
+     "group": "luoi",
+     "explanation": "Em dùng lưỡi để nếm vị mặn."
+    },
+    {
+     "key": "da_lanh",
+     "text": "Cảm thấy đá lạnh",
+     "picture": "🧊",
+     "group": "da",
+     "explanation": "Da giúp em cảm thấy nóng, lạnh."
+    },
+    {
+     "key": "long_meo",
+     "text": "Sờ thấy lông mèo mềm",
+     "picture": "🐱",
+     "group": "da",
+     "explanation": "Da ở bàn tay giúp em cảm thấy lông mèo mềm mại."
+    },
+    {
+     "key": "nang",
+     "text": "Cảm thấy nắng nóng",
+     "picture": "☀️",
+     "group": "da",
+     "explanation": "Da giúp em cảm thấy trời nắng nóng."
+    }
+   ]
+  },
+  {
+   "key": "the_cua_chat",
+   "curriculum": "GDPT2018",
+   "subject": "science",
+   "grades": [
+    4,
+    5
+   ],
+   "topic": "Chất và các thể của chất",
+   "title": "Thể rắn, lỏng hay khí?",
+   "difficulty": 2,
+   "version": 1,
+   "groups": [
+    {
+     "id": "ran",
+     "label": "Thể rắn",
+     "icon": "🧊"
+    },
+    {
+     "id": "long",
+     "label": "Thể lỏng",
+     "icon": "💧"
+    },
+    {
+     "id": "khi",
+     "label": "Thể khí",
+     "icon": "🎈"
+    }
+   ],
+   "cards": [
+    {
+     "key": "nuoc_da",
+     "text": "Viên nước đá",
+     "picture": "🧊",
+     "group": "ran",
+     "explanation": "Nước đá là nước ở thể rắn: có hình dạng riêng."
+    },
+    {
+     "key": "thia",
+     "text": "Chiếc thìa sắt",
+     "picture": "🥄",
+     "group": "ran",
+     "explanation": "Chiếc thìa sắt ở thể rắn: có hình dạng riêng, không chảy."
+    },
+    {
+     "key": "chia_khoa",
+     "text": "Chiếc chìa khóa",
+     "picture": "🔑",
+     "group": "ran",
+     "explanation": "Chìa khóa ở thể rắn: có hình dạng riêng."
+    },
+    {
+     "key": "keo",
+     "text": "Viên kẹo cứng",
+     "picture": "🍬",
+     "group": "ran",
+     "explanation": "Kẹo cứng ở thể rắn: giữ nguyên hình dạng."
+    },
+    {
+     "key": "soi",
+     "text": "Hòn sỏi",
+     "picture": "",
+     "group": "ran",
+     "explanation": "Hòn sỏi ở thể rắn: có hình dạng riêng."
+    },
+    {
+     "key": "giot_nuoc",
+     "text": "Giọt nước",
+     "picture": "💧",
+     "group": "long",
+     "explanation": "Nước ở thể lỏng: chảy được và có hình dạng của vật chứa nó."
+    },
+    {
+     "key": "sua",
+     "text": "Cốc sữa",
+     "picture": "🥛",
+     "group": "long",
+     "explanation": "Sữa ở thể lỏng: chảy được và có hình dạng của cái cốc."
+    },
+    {
+     "key": "mat_ong",
+     "text": "Mật ong",
+     "picture": "🍯",
+     "group": "long",
+     "explanation": "Mật ong ở thể lỏng: chảy được, dù chảy chậm."
+    },
+    {
+     "key": "dau_an",
+     "text": "Dầu ăn",
+     "picture": "",
+     "group": "long",
+     "explanation": "Dầu ăn ở thể lỏng: chảy được và có hình dạng của chai đựng nó."
+    },
+    {
+     "key": "nuoc_chanh",
+     "text": "Nước chanh",
+     "picture": "🍋",
+     "group": "long",
+     "explanation": "Nước chanh ở thể lỏng: rót ra được, có hình dạng của cốc."
+    },
+    {
+     "key": "hoi_nuoc",
+     "text": "Hơi nước bốc lên từ nồi canh",
+     "picture": "♨️",
+     "group": "khi",
+     "explanation": "Hơi nước là nước ở thể khí: bay lên và lan ra."
+    },
+    {
+     "key": "khi_bong_bay",
+     "text": "Không khí trong quả bóng bay",
+     "picture": "🎈",
+     "group": "khi",
+     "explanation": "Không khí ở thể khí: không có hình dạng riêng, chiếm đầy quả bóng."
+    },
+    {
+     "key": "oxi",
+     "text": "Khí ô-xi trong không khí",
+     "picture": "",
+     "group": "khi",
+     "explanation": "Ô-xi là một chất khí có trong không khí, giúp con người thở."
+    }
+   ]
+  },
+  {
+   "key": "nhom_thuc_an",
+   "curriculum": "GDPT2018",
+   "subject": "science",
+   "grades": [
+    4,
+    5
+   ],
+   "topic": "Dinh dưỡng ở người",
+   "title": "Thức ăn chứa nhiều chất gì?",
+   "difficulty": 2,
+   "version": 1,
+   "groups": [
+    {
+     "id": "bot_duong",
+     "label": "Nhiều chất bột đường",
+     "icon": "🍚"
+    },
+    {
+     "id": "dam",
+     "label": "Nhiều chất đạm",
+     "icon": "🍗"
+    },
+    {
+     "id": "vitamin",
+     "label": "Nhiều vi-ta-min, chất khoáng",
+     "icon": "🥦"
+    }
+   ],
+   "cards": [
+    {
+     "key": "com",
+     "text": "Cơm",
+     "picture": "🍚",
+     "group": "bot_duong",
+     "explanation": "Cơm (gạo) chứa nhiều chất bột đường, cho cơ thể năng lượng."
+    },
+    {
+     "key": "banh_mi",
+     "text": "Bánh mì",
+     "picture": "🍞",
+     "group": "bot_duong",
+     "explanation": "Bánh mì làm từ bột mì, chứa nhiều chất bột đường."
+    },
+    {
+     "key": "khoai_lang",
+     "text": "Khoai lang",
+     "picture": "🍠",
+     "group": "bot_duong",
+     "explanation": "Khoai lang chứa nhiều chất bột đường."
+    },
+    {
+     "key": "ngo",
+     "text": "Bắp ngô",
+     "picture": "🌽",
+     "group": "bot_duong",
+     "explanation": "Ngô chứa nhiều chất bột đường."
+    },
+    {
+     "key": "thit_bo",
+     "text": "Thịt bò",
+     "picture": "🥩",
+     "group": "dam",
+     "explanation": "Thịt bò chứa nhiều chất đạm, giúp cơ thể lớn lên."
+    },
+    {
+     "key": "ca",
+     "text": "Cá",
+     "picture": "🐟",
+     "group": "dam",
+     "explanation": "Cá chứa nhiều chất đạm."
+    },
+    {
+     "key": "trung",
+     "text": "Trứng",
+     "picture": "🥚",
+     "group": "dam",
+     "explanation": "Trứng chứa nhiều chất đạm."
+    },
+    {
+     "key": "tom",
+     "text": "Tôm",
+     "picture": "🦐",
+     "group": "dam",
+     "explanation": "Tôm chứa nhiều chất đạm."
+    },
+    {
+     "key": "dau_phu",
+     "text": "Đậu phụ",
+     "picture": "",
+     "group": "dam",
+     "explanation": "Đậu phụ làm từ đậu tương, chứa nhiều chất đạm."
+    },
+    {
+     "key": "rau_cai",
+     "text": "Rau cải",
+     "picture": "🥬",
+     "group": "vitamin",
+     "explanation": "Rau cải chứa nhiều vi-ta-min và chất khoáng."
+    },
+    {
+     "key": "ca_rot",
+     "text": "Cà rốt",
+     "picture": "🥕",
+     "group": "vitamin",
+     "explanation": "Cà rốt chứa nhiều vi-ta-min."
+    },
+    {
+     "key": "cam",
+     "text": "Quả cam",
+     "picture": "🍊",
+     "group": "vitamin",
+     "explanation": "Quả cam chứa nhiều vi-ta-min C."
+    },
+    {
+     "key": "bong_cai",
+     "text": "Bông cải xanh",
+     "picture": "🥦",
+     "group": "vitamin",
+     "explanation": "Bông cải xanh chứa nhiều vi-ta-min và chất khoáng."
+    },
+    {
+     "key": "ca_chua",
+     "text": "Cà chua",
+     "picture": "🍅",
+     "group": "vitamin",
+     "explanation": "Cà chua chứa nhiều vi-ta-min."
+    }
+   ]
+  }
+ ]
+}

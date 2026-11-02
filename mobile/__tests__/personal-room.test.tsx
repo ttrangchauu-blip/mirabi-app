@@ -39,7 +39,7 @@ beforeEach(async () => {
 async function openRoom() {
   render(<App />);
   await screen.findByText(HOME_GREETING, {}, { timeout: 5000 });
-  fireEvent.press(screen.getByRole('tab', { name: 'Phòng cá nhân' }));
+  fireEvent.press(screen.getByRole('tab', { name: 'Cuộc sống' }));
 }
 /** "Cài đặt" -> one of its rows ("Trang trí phòng" by default). */
 async function fromSettings(row = 'Trang trí phòng') {
@@ -58,38 +58,38 @@ beforeEach(() => { jest.spyOn(Date, 'now').mockImplementation(() => realNow() + 
 afterEach(() => { (Date.now as jest.Mock).mockRestore?.(); });
 
 describe('personal room', () => {
-  it('takes the place of "Nghề nghiệp" in the menu and opens the pet\'s room', async () => {
+  it('is the first place of "Cuộc sống" in the menu and opens the pet\'s room', async () => {
     mockServer({ 'GET /api/auth/me': { status: 200, body: USER }, 'GET /api/personal-room': { status: 200, body: room() } });
     render(<App />);
     await screen.findByText(HOME_GREETING, {}, { timeout: 5000 });
-    const tabs = screen.getAllByRole('tab', { name: /^(Trang chủ|Học tập|Phòng cá nhân|Bạn bè|Tiện ích)$/ });
-    expect(tabs.map((tab) => tab.props.accessibilityLabel)).toEqual(['Trang chủ', 'Học tập', 'Phòng cá nhân', 'Bạn bè', 'Tiện ích']);
+    const tabs = screen.getAllByRole('tab');
+    expect(tabs.map((tab) => tab.props.accessibilityLabel)).toEqual(['Trang chủ', 'Học tập', 'Cuộc sống', 'Tiện ích']);
     expect(screen.queryByRole('tab', { name: 'Nghề nghiệp' })).toBeNull();
 
-    fireEvent.press(screen.getByRole('tab', { name: 'Phòng cá nhân' }));
-    expect(await screen.findByText('Phòng của Aqua')).toBeTruthy();
+    fireEvent.press(screen.getByRole('tab', { name: 'Cuộc sống' }));
+    expect(await screen.findByTestId('room-header')).toBeTruthy();
     // A tab of the menu, which stays: the room's own buttons float over its wall, with no back button.
-    expect(screen.getByRole('tab', { name: 'Phòng cá nhân' }).props.accessibilityState).toEqual({ selected: true });
+    expect(screen.getByRole('tab', { name: 'Cuộc sống' }).props.accessibilityState).toEqual({ selected: true });
     expect(screen.getByText('0/800')).toBeTruthy();
-    // One compact panel: the stage's name only for screen readers, a short status without the pet's name.
+    // One compact bar: the stage's name only for screen readers, and nothing said while there is nothing to say.
     expect(screen.getByTestId('room-header')).toBeTruthy();
     expect(screen.queryByText(/Sơ Sinh/)).toBeNull();
-    expect(screen.getByLabelText(/^Aqua, cấp 1 Sơ Sinh, 0 trên 800 EXP$/)).toBeTruthy();
-    expect(screen.getByText('Đang thư giãn trong phòng')).toBeTruthy();
-    for (const action of ['Ghé phòng bạn bè', 'Cài đặt', 'Chụp ảnh']) expect(screen.getByRole('button', { name: action })).toBeTruthy();
-    for (const gone of ['Quay lại', 'Tương tác', 'Trang trí']) expect(screen.queryByRole('button', { name: gone })).toBeNull();
+    expect(screen.getByLabelText(/^Phòng của Aqua\. Aqua, cấp 1 Sơ Sinh, 0 trên 800 EXP$/)).toBeTruthy();
+    expect(screen.queryByText('Đang thư giãn trong phòng')).toBeNull();
+    for (const action of ['Cài đặt', 'Chụp ảnh']) expect(screen.getByRole('button', { name: action })).toBeTruthy();
+    for (const gone of ['Quay lại', 'Tương tác', 'Trang trí', 'Ghé phòng bạn bè']) expect(screen.queryByRole('button', { name: gone })).toBeNull();
     expect(screen.getByTestId('room-pet')).toBeTruthy();
 
     fireEvent.press(screen.getByRole('tab', { name: 'Trang chủ' }));
     expect(await screen.findByText(HOME_GREETING)).toBeTruthy();
-    fireEvent.press(screen.getByRole('button', { name: 'Phòng cá nhân: Góc nhỏ của pet' }));  // the home shortcut leads there too
-    expect(await screen.findByText('Phòng của Aqua')).toBeTruthy();
+    fireEvent.press(screen.getByRole('button', { name: 'Nhà của pet: Góc nhỏ của pet' }));  // the home shortcut leads there too
+    expect(await screen.findByTestId('room-header')).toBeTruthy();
   });
 
   it('a tap on the pet opens its menu; an interaction closes it and plays, without asking the backend for anything', async () => {
     const server = mockServer({ 'GET /api/auth/me': { status: 200, body: USER }, 'GET /api/personal-room': { status: 200, body: room() } });
     await openRoom();
-    await screen.findByText('Phòng của Aqua');
+    await screen.findByTestId('room-header');
     const before = server.calls.length;
     fireEvent.press(screen.getByTestId('room-pet'));
     const menu = screen.getByTestId('room-pet-menu');
@@ -142,7 +142,7 @@ describe('personal room', () => {
     // Motion allowed on this device (tests run with "reduce motion" on), so the effects start on.
     jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(false);
     await openRoom();
-    await screen.findByText('Phòng của Aqua');
+    await screen.findByTestId('room-header');
     player.play.mockClear();
     fireEvent.press(screen.getByTestId('room-pet'));
     fireEvent.press(screen.getByRole('button', { name: 'Vuốt ve' }));
@@ -161,14 +161,14 @@ describe('personal room', () => {
     expect(screen.getByText('Thích quá, vuốt thêm chút nữa nha!')).toBeTruthy(); // it still answers
     expect(player.play).not.toHaveBeenCalled();
     expect(screen.queryByTestId('room-hearts')).toBeNull();
-    expect(JSON.parse((await AsyncStorage.getItem(`mirabi.room.prefs:${USER.id}`))!)).toEqual({ sound: false, effects: false });
+    expect(JSON.parse((await AsyncStorage.getItem(`mirabi.room.prefs:${USER.id}`))!)).toMatchObject({ sound: false, effects: false });
     jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(true);
   });
 
   it('"Màu tường, sàn và chủ đề" opens decorating on the walls and floors', async () => {
     mockServer({ 'GET /api/auth/me': { status: 200, body: USER }, 'GET /api/personal-room': { status: 200, body: room() } });
     await openRoom();
-    await screen.findByText('Phòng của Aqua');
+    await screen.findByTestId('room-header');
     await fromSettings('Màu tường, sàn và chủ đề');
     expect(await screen.findByTestId('decorate-panel')).toBeTruthy();
     expect(screen.getByRole('tab', { name: 'Tường và sàn' }).props.accessibilityState).toMatchObject({ selected: true });
@@ -187,14 +187,14 @@ describe('personal room', () => {
       },
     });
     await openRoom();
-    await screen.findByText('Phòng của Aqua');
+    await screen.findByTestId('room-header');
     // The room seen outside decorating: decorating keeps exactly this camera (its header and panel are drawn over it),
     // so an item put somewhere is on the same spot of the screen afterwards.
     const viewing = StyleSheet.flatten(screen.getByTestId('room-canvas').props.style);
     await fromSettings();
     expect(await screen.findByTestId('decorate-panel')).toBeTruthy();
     expect(StyleSheet.flatten(screen.getByTestId('room-canvas').props.style)).toEqual(viewing);
-    expect(screen.getByRole('tab', { name: 'Phòng cá nhân' })).toBeTruthy(); // the menu bar stays while decorating
+    expect(screen.getByRole('tab', { name: 'Cuộc sống' })).toBeTruthy(); // the menu bar stays while decorating
     expect(screen.getByTestId('room-edit-layer')).toBeTruthy();
     expect(screen.getByRole('radio', { name: /Tường kem chấm bi, đang dùng/ })).toBeTruthy();
     fireEvent.press(screen.getByRole('radio', { name: /Tường sọc bạc hà/ }));
@@ -203,7 +203,7 @@ describe('personal room', () => {
     fireEvent.press(screen.getByRole('tab', { name: 'Trang chủ' }));
     fireEvent.press((await screen.findAllByRole('button', { name: 'Trang trí tiếp' }))[0]); // the dialog's backdrop says it too
     expect(screen.getByRole('radio', { name: /Tường sọc bạc hà, đang dùng/ })).toBeTruthy();
-    expect(screen.getByRole('tab', { name: 'Phòng cá nhân' }).props.accessibilityState).toEqual({ selected: true });
+    expect(screen.getByRole('tab', { name: 'Cuộc sống' }).props.accessibilityState).toEqual({ selected: true });
     fireEvent.press(screen.getByRole('button', { name: 'Hủy' }));
     fireEvent.press(await screen.findByRole('button', { name: 'Bỏ thay đổi' }));  // a change is never dropped silently
     expect(await screen.findByRole('button', { name: 'Cài đặt' })).toBeTruthy();
@@ -314,7 +314,7 @@ describe('personal room', () => {
         : { status: 201, body: { id: 9, event_type: 'room_photo', title: 'Chiều yên tĩnh' } }),
     });
     await openRoom();
-    await screen.findByText('Phòng của Aqua');
+    await screen.findByTestId('room-header');
     fireEvent.press(screen.getByRole('button', { name: 'Chụp ảnh' }));
     const sheet = await screen.findByTestId('room-photo-sheet');
     fireEvent.changeText(within(sheet).getByLabelText('Tiêu đề ảnh'), 'Chiều yên tĩnh');
@@ -337,11 +337,11 @@ describe('personal room', () => {
     mockServer({ 'GET /api/auth/me': { status: 200, body: USER },
       'GET /api/personal-room': () => (online ? { status: 200, body: room({}, { name: 'Góc của Aqua' }) } : networkDown()) });
     await openRoom();
-    expect(await screen.findByText('Góc của Aqua')).toBeTruthy();
+    expect(await screen.findByLabelText(/^Góc của Aqua\. /)).toBeTruthy();
     screen.unmount();
     online = false;
     await openRoom();
-    expect(await screen.findByText('Góc của Aqua')).toBeTruthy();
+    expect(await screen.findByLabelText(/^Góc của Aqua\. /)).toBeTruthy();
     expect(screen.getByText(/Ngoại tuyến · phòng đã lưu/)).toBeTruthy();
   });
 
@@ -355,13 +355,13 @@ describe('personal room', () => {
   const soon = () => new Date(Date.now() + 10 * 60_000).toISOString();
   async function openFriendRoom() {
     await openRoom();
-    fireEvent.press(await screen.findByRole('button', { name: 'Ghé phòng bạn bè' }));
+    fireEvent.press(await screen.findByRole('tab', { name: 'Bạn bè' }));
     expect(await screen.findByText('Pet Bông')).toBeTruthy();
     fireEvent.press(screen.getByRole('button', { name: 'Ghé thăm' }));
     expect(await screen.findByText('Phòng của Bông')).toBeTruthy();
   }
 
-  it('the "Bạn bè" tab (was "Cộng đồng") holds friends, its badge follows pending requests, and the feed lives in Tiện ích', async () => {
+  it('the "Bạn bè" place holds friends and the feed, and the badges of "Cuộc sống" and of the place follow pending requests', async () => {
     let pending = 1;
     const request = { id: 4, status: 'pending', direction: 'incoming', created_at: '', user: { ...friend, id: 3, display_name: 'Lim', pet_name: 'Mít' } };
     const server = mockServer({
@@ -376,29 +376,31 @@ describe('personal room', () => {
     render(<App />);
     await screen.findByText(HOME_GREETING, {}, { timeout: 5000 });
     expect(screen.queryByText('Cộng đồng')).toBeNull();
-    expect(await screen.findByTestId('tab-badge-Community')).toBeTruthy();
-    const menuTab = screen.getByRole('tab', { name: 'Bạn bè' });
+    expect(await screen.findByTestId('tab-badge-Room')).toBeTruthy();
+    const menuTab = screen.getByRole('tab', { name: 'Cuộc sống' });
     expect(menuTab.props.accessibilityValue).toEqual({ text: '1 lời mời kết bạn đang chờ' });
 
     fireEvent.press(menuTab);
+    expect(await screen.findByTestId('space-badge-friends')).toBeTruthy();
+    fireEvent.press(screen.getByRole('tab', { name: 'Bạn bè' }));
     expect(await screen.findByText('Pet Bông')).toBeTruthy(); // opens on the friend list
     expect(await screen.findByText('Lời mời kết bạn (1)')).toBeTruthy(); // requests sit above the friend list, no tabs
     fireEvent.press(screen.getByRole('button', { name: 'Chấp nhận' }));
     await waitFor(() => expect(screen.queryByText('Lời mời kết bạn (1)')).toBeNull(), { timeout: 5000 }); // and hide once answered
     expect(server.callsTo('POST /api/friend-requests/4/accept')).toHaveLength(1);
-    await waitFor(() => expect(screen.queryByTestId('tab-badge-Community')).toBeNull());
+    await waitFor(() => expect(screen.queryByTestId('tab-badge-Room')).toBeNull());
+    expect(screen.queryByTestId('space-badge-friends')).toBeNull();
 
-    // The feed is not on "Bạn bè" any more: it opens from Tiện ích, and back returns there.
+    // The feed opens from here, and back returns here.
     expect(screen.queryByText('Hôm nay học xong chương 3!')).toBeNull();
-    fireEvent.press(screen.getByRole('tab', { name: 'Tiện ích' }));
     fireEvent.press(await screen.findByRole('button', { name: 'Bảng tin: Lan tỏa điều tích cực' }));
     expect(await screen.findByText('Hôm nay học xong chương 3!')).toBeTruthy();
     fireEvent.press(screen.getByRole('button', { name: 'Quay lại' }));
-    expect(await screen.findByText('Tính năng khác')).toBeTruthy();
+    expect(await screen.findByText('Pet Bông')).toBeTruthy();
     await act(async () => {});
   });
 
-  it('visits a friend from the "Bạn bè" tab and comes back to the friend list', async () => {
+  it('visits a friend from the "Bạn bè" place and comes back to the friend list', async () => {
     mockServer({
       'GET /api/auth/me': { status: 200, body: USER },
       'GET /api/friends': { status: 200, body: { items: [friend] } },
@@ -406,7 +408,8 @@ describe('personal room', () => {
     });
     render(<App />);
     await screen.findByText(HOME_GREETING, {}, { timeout: 5000 });
-    fireEvent.press(screen.getByRole('tab', { name: 'Bạn bè' }));
+    fireEvent.press(screen.getByRole('tab', { name: 'Cuộc sống' }));
+    fireEvent.press(await screen.findByRole('tab', { name: 'Bạn bè' }));
     fireEvent.press(await screen.findByRole('button', { name: 'Ghé thăm' }));
     expect(await screen.findByText('Phòng của Bông')).toBeTruthy();
     fireEvent.press(screen.getByRole('button', { name: 'Quay lại' }));
@@ -443,7 +446,7 @@ describe('personal room', () => {
     fireEvent.press(screen.getByTestId('room-pet-menu-backdrop'));
     expect(server.callsTo('PUT /api/personal-room')).toHaveLength(0);
     fireEvent.press(screen.getByRole('button', { name: 'Quay lại' }));
-    expect(await screen.findByRole('button', { name: 'Ghé thăm' })).toBeTruthy(); // back on the "Bạn bè" tab the room button opened
+    expect(await screen.findByRole('button', { name: 'Ghé thăm' })).toBeTruthy(); // back on the "Bạn bè" place the room button opened
     expect(screen.getByRole('tab', { name: 'Bạn bè', selected: true })).toBeTruthy();
     await act(async () => {});
   });
@@ -523,7 +526,7 @@ describe('personal room', () => {
         : { status: 403, body: { detail: 'off', code: 'room_visits_disabled' } }),
     });
     await openRoom();
-    fireEvent.press(await screen.findByRole('button', { name: 'Ghé phòng bạn bè' }));
+    fireEvent.press(await screen.findByRole('tab', { name: 'Bạn bè' }));
     fireEvent.press(await screen.findByRole('button', { name: 'Ghé thăm' }));
     expect(await screen.findByText('Bạn ấy đang tắt chế độ cho ghé thăm phòng.')).toBeTruthy();
     expect(screen.queryByRole('button', { name: 'Thử lại' })).toBeNull();

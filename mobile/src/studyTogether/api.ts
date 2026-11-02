@@ -1,7 +1,7 @@
 import { newIdempotencyKey } from '../api/client';
 import { request } from '../screens/main/shared';
 import type {
-  ChatMessage, ChatPage, CodeLookup, EligibleRoom, Friend, FriendRequest, QuestTemplate, ReactionKey, RoomInvitation, RoomPreview, RoomSnapshot, SearchResult,
+  ChatMessage, ChatPage, CodeLookup, EligibleRoom, Friend, FriendRequest, PublicUser, QuestTemplate, ReactionKey, RoomInvitation, RoomPreview, RoomSnapshot, SearchResult,
   SessionBrief, SessionSummary, SocialNotification, SocialSettings, TeamQuest, TogetherHome, Visibility,
 } from './types';
 
@@ -32,6 +32,8 @@ export const togetherApi = {
   cancelRequest: (id: number) => request(`/api/friend-requests/${id}`, { method: 'DELETE' }),
   removeFriend: (userId: number) => request(`/api/friends/${userId}`, { method: 'DELETE' }),
   block: (userId: number) => request(`/api/users/${userId}/block`, { method: 'POST' }),
+  unblock: (userId: number) => request(`/api/users/${userId}/block`, { method: 'DELETE' }),
+  blocks: (): Promise<{ items: PublicUser[] }> => request('/api/blocks'),
   report: (userId: number, reason: string, details?: string, roomId?: number, messageId?: number) =>
     request(`/api/users/${userId}/report`, { method: 'POST', body: { reason, details: details || undefined, room_id: roomId, message_id: messageId } }),
 

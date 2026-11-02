@@ -57,7 +57,7 @@ cake	cake	noun	1	food	bánh ngọt, bánh kem	bánh nướng từ bột, đườ
 soup	soup	noun	1	food	súp, canh	món ăn lỏng nấu từ rau, thịt hoặc cá	This chicken soup is very hot.	Món súp gà này rất nóng.		/suːp/	mirabi-ai-2026-10	active
 sugar	sugar	noun	1	food	đường (ăn)	chất ngọt cho vào đồ uống, món ăn	Do you take sugar in your coffee?	Bạn có cho đường vào cà phê không?		/ˈʃʊɡə/	mirabi-ai-2026-10	active
 salt	salt	noun	1	food	muối	gia vị màu trắng có vị mặn	Add a little salt to the soup.	Cho thêm một chút muối vào súp.		/sɔːlt/	mirabi-ai-2026-10	active
-noodles	noodles	noun	1	food	món sợi (mì, bún, phở)	món ăn dạng sợi làm từ bột mì hoặc bột gạo	Many Vietnamese people eat noodles for breakfast.	Nhiều người Việt Nam ăn các món sợi vào bữa sáng.	noodle	/ˈnuːdlz/	mirabi-ai-2026-10	active
+noodles	noodles	noun	1	food	món sợi (mì, bún, phở)	món ăn dạng sợi làm từ bột mì hoặc bột gạo	Many Vietnamese people eat noodles for breakfast.	Nhiều người Việt Nam ăn các món sợi vào bữa sáng.		/ˈnuːdlz/	mirabi-ai-2026-10	active
 sandwich	sandwich	noun	1	food	bánh mì kẹp	hai lát bánh mì kẹp thịt, trứng hoặc rau ở giữa	I made a cheese sandwich for lunch.	Tôi làm một chiếc bánh mì kẹp phô mai cho bữa trưa.		/ˈsænwɪtʃ/	mirabi-ai-2026-10	active
 candy	candy	noun	1	food	kẹo	đồ ngọt nhỏ làm từ đường, trẻ em rất thích	Don't eat too much candy before dinner.	Đừng ăn quá nhiều kẹo trước bữa tối.	sweets	/ˈkændi/	mirabi-ai-2026-10	active
 chocolate	chocolate	noun	1	food	sô-cô-la	đồ ngọt màu nâu làm từ hạt ca cao	She gave me a box of chocolates.	Cô ấy tặng tôi một hộp sô-cô-la.		/ˈtʃɒklət/	mirabi-ai-2026-10	active
@@ -73,7 +73,7 @@ cup	cup	noun	1	food	cái tách, cái cốc có quai	đồ nhỏ có quai dùng �
 plate	plate	noun	1	food	cái đĩa	đồ dẹt, tròn để đựng thức ăn khi ăn	Put the fish on a big plate.	Đặt con cá lên một cái đĩa lớn.		/pleɪt/	mirabi-ai-2026-10	active
 fork	fork	noun	1	food	cái nĩa, cái dĩa	dụng cụ có răng nhọn để xiên thức ăn	Children often eat with a spoon and a fork.	Trẻ em thường ăn bằng thìa và nĩa.		/fɔːk/	mirabi-ai-2026-10	active
 glass.drinking	glass	noun	1	food	cái ly, cốc thủy tinh	đồ trong suốt để uống nước, không có quai	She broke a glass in the kitchen.	Cô ấy làm vỡ một cái ly trong bếp.		/ɡlɑːs/	mirabi-ai-2026-10	active
-chopsticks	chopsticks	noun	1	food	đôi đũa	hai que dài dùng để gắp thức ăn	In Vietnam, we eat with chopsticks.	Ở Việt Nam, chúng tôi ăn bằng đũa.	chopstick	/ˈtʃɒpstɪks/	mirabi-ai-2026-10	active
+chopsticks	chopsticks	noun	1	food	đôi đũa	hai que dài dùng để gắp thức ăn	In Vietnam, we eat with chopsticks.	Ở Việt Nam, chúng tôi ăn bằng đũa.		/ˈtʃɒpstɪks/	mirabi-ai-2026-10	active
 sweet.taste	sweet	adjective	1	food	ngọt (vị)	vị của đường, mật ong	This mango is very sweet.	Quả xoài này rất ngọt.		/swiːt/	mirabi-ai-2026-10	active
 salty	salty	adjective	1	food	mặn	có nhiều muối, vị như nước biển	The soup is too salty.	Món canh mặn quá.		/ˈsɔːlti/	mirabi-ai-2026-10	active
 sour	sour	adjective	1	food	chua	vị như chanh, giấm	Green apples are a bit sour.	Táo xanh hơi chua.		/ˈsaʊə/	mirabi-ai-2026-10	active
@@ -89,7 +89,7 @@ im_full	I'm full	phrase	1	food	tôi no rồi	câu nói lịch sự khi từ ch�
 meal	meal	noun	2	food	bữa ăn	một lần ăn chính trong ngày: sáng, trưa hoặc tối	We eat three meals a day.	Chúng tôi ăn ba bữa một ngày.		/miːl/	mirabi-ai-2026-10	active
 dish.food	dish	noun	2	food	món ăn	một món được nấu theo cách riêng	Pho is a famous Vietnamese dish.	Phở là một món ăn nổi tiếng của Việt Nam.		/dɪʃ/	mirabi-ai-2026-10	active
 fresh	fresh	adjective	2	food	tươi (thực phẩm)	thực phẩm mới hái, mới làm, chưa bị hỏng	We buy fresh fish at the market every morning.	Sáng nào chúng tôi cũng mua cá tươi ở chợ.		/freʃ/	mirabi-ai-2026-10	active
-tasty	tasty	adjective	2	food	ngon, đậm vị	khen món ăn có hương vị hấp dẫn, thân mật hơn delicious	The street food here is cheap and tasty.	Đồ ăn đường phố ở đây rẻ mà ngon.	delicious	/ˈteɪsti/	mirabi-ai-2026-10	active
+tasty	tasty	adjective	2	food	ngon, đậm vị	khen món ăn có hương vị hấp dẫn, cách nói thân mật hằng ngày	The street food here is cheap and tasty.	Đồ ăn đường phố ở đây rẻ mà ngon.	delicious	/ˈteɪsti/	mirabi-ai-2026-10	active
 taste.verb	taste	verb	2	food	nếm	cho một chút vào miệng để thử vị	Taste the soup and see if it needs salt.	Nếm thử canh xem có cần thêm muối không.		/teɪst/	mirabi-ai-2026-10	active
 taste.flavour	taste	noun	2	food	vị (của đồ ăn)	cảm giác ngọt, mặn, chua, đắng trên lưỡi	This fruit has a sweet taste.	Loại quả này có vị ngọt.		/teɪst/	mirabi-ai-2026-10	active
 mix	mix	verb	2	food	trộn	cho các thứ vào với nhau rồi khuấy đều	Mix the flour with the eggs.	Trộn bột mì với trứng.		/mɪks/	mirabi-ai-2026-10	active
@@ -328,13 +328,13 @@ additive	additive	noun	6	food	chất phụ gia	chất thêm vào thực phẩm �
 zest	zest	noun	6	food	vỏ chanh, vỏ cam bào	lớp vỏ ngoài thơm của chanh, cam được bào nhỏ	Add a little lemon zest to the cake.	Cho một chút vỏ chanh bào vào bánh.		/zest/	mirabi-ai-2026-10	active
 curdle	curdle	verb	6	food	(sữa) vón cục, đóng cợn	sữa, kem bị tách thành cục do chua hoặc quá nóng	The milk will curdle if you add lemon juice.	Sữa sẽ vón cục nếu bạn cho nước chanh vào.		/ˈkɜːdl/	mirabi-ai-2026-10	active
 baste	baste	verb	6	food	rưới mỡ, nước sốt (khi nướng)	rưới nước sốt lên thịt trong lúc nướng cho khỏi khô	Baste the chicken every twenty minutes.	Cứ hai mươi phút lại rưới nước sốt lên gà.		/beɪst/	mirabi-ai-2026-10	active
-caramelize	caramelize	verb	6	food	thắng đường, làm cháy cạnh	đun đường hoặc hành tới khi có màu nâu thơm	Caramelize the sugar to make the sauce for braised pork.	Thắng đường để làm nước màu kho thịt.	caramelise	/ˈkærəməlaɪz/	mirabi-ai-2026-10	active
+caramelize	caramelize	verb	6	food	thắng (đường), làm (hành) chuyển vàng nâu	đun đường hoặc hành tới khi có màu nâu thơm	Caramelize the sugar to make the sauce for braised pork.	Thắng đường để làm nước màu kho thịt.	caramelise	/ˈkærəməlaɪz/	mirabi-ai-2026-10	active
 infuse	infuse	verb	6	food	hãm, ngâm cho ra hương	ngâm lá, gia vị trong nước nóng cho ra mùi vị	Infuse the ginger in hot water for five minutes.	Hãm gừng trong nước nóng năm phút.		/ɪnˈfjuːz/	mirabi-ai-2026-10	active
 ravenous	ravenous	adjective	6	food	đói cồn cào, đói ngấu	cực kỳ đói, thường dùng trong văn viết	After the long hike, we were ravenous.	Sau chuyến leo núi dài, chúng tôi đói cồn cào.		/ˈrævənəs/	mirabi-ai-2026-10	active
 scrumptious	scrumptious	adjective	6	food	ngon tuyệt cú mèo	khẩu ngữ: cực kỳ ngon	Grandma's apple pie is scrumptious.	Bánh táo của bà ngon tuyệt cú mèo.		/ˈskrʌmpʃəs/	mirabi-ai-2026-10	active
 glutinous	glutinous	adjective	6	food	dẻo dính (gạo nếp)	loại gạo khi nấu chín dẻo và dính	Banh chung is made from glutinous rice.	Bánh chưng được làm từ gạo nếp.		/ˈɡluːtənəs/	mirabi-ai-2026-10	active
 piquant	piquant	adjective	6	food	cay nồng, kích thích vị giác	vị cay, chua nhẹ làm món ăn hấp dẫn hơn	The fish comes with a piquant chilli sauce.	Món cá ăn kèm nước sốt ớt cay nồng.		/ˈpiːkənt/	mirabi-ai-2026-10	active
-pasteurized	pasteurized	adjective	6	food	đã tiệt trùng (sữa, nước ép)	được đun nóng ở nhiệt độ nhất định để diệt khuẩn	Pregnant women should only drink pasteurized milk.	Phụ nữ mang thai chỉ nên uống sữa đã tiệt trùng.	pasteurised	/ˈpɑːstʃəraɪzd/	mirabi-ai-2026-10	active
+pasteurized	pasteurized	adjective	6	food	đã thanh trùng (sữa, nước ép)	được đun nóng ở nhiệt độ nhất định để diệt khuẩn	Pregnant women should only drink pasteurized milk.	Phụ nữ mang thai chỉ nên uống sữa đã thanh trùng.	pasteurised	/ˈpɑːstʃəraɪzd/	mirabi-ai-2026-10	active
 polish_off	polish off	phrasal_verb	6	food	chén sạch, ăn sạch sành sanh	ăn hết nhanh chóng một lượng lớn	He polished off a whole plate of spring rolls.	Anh ấy chén sạch cả một đĩa nem rán.			mirabi-ai-2026-10	active
 gorge_on	gorge on	phrasal_verb	6	food	ních căng bụng (một món)	ăn một món đến mức quá no	We gorged on fresh lychees all summer.	Cả mùa hè chúng tôi ních vải tươi căng bụng.			mirabi-ai-2026-10	active
 bread_and_butter	bread and butter	idiom	6	food	kế sinh nhai, nguồn thu chính	công việc hay sản phẩm đem lại thu nhập chính	Wedding cakes are the bread and butter of our bakery.	Bánh cưới là nguồn thu chính của tiệm bánh chúng tôi.			mirabi-ai-2026-10	active
@@ -389,9 +389,9 @@ grab_a_bite	grab a bite	collocation	4	food	ăn vội chút gì	ăn nhanh một c
 place_an_order	place an order	collocation	4	food	đặt món	yêu cầu món ăn ở nhà hàng hoặc qua ứng dụng	I placed an order for two pizzas online.	Tôi đã đặt hai cái pizza trên mạng.			mirabi-ai-2026-10	active
 split_the_bill	split the bill	collocation	4	food	chia tiền hóa đơn	mỗi người trả một phần tiền bữa ăn	Let's split the bill this time.	Lần này mình chia tiền nhé.			mirabi-ai-2026-10	active
 ready_meal	ready meal	collocation	4	food	suất ăn làm sẵn	món đóng hộp bán ở siêu thị, chỉ cần hâm nóng	He lives alone and eats ready meals most nights.	Anh ấy sống một mình và hầu như tối nào cũng ăn đồ làm sẵn.			mirabi-ai-2026-10	active
-set_menu	set menu	collocation	4	food	thực đơn suất cố định, set ăn	bữa có các món định sẵn với giá cố định	The set menu includes soup, a main course and dessert.	Set ăn gồm súp, món chính và tráng miệng.			mirabi-ai-2026-10	active
+set_menu	set menu	collocation	4	food	thực đơn suất cố định	bữa có các món định sẵn với giá cố định	The set menu includes soup, a main course and dessert.	Thực đơn suất cố định gồm súp, món chính và tráng miệng.			mirabi-ai-2026-10	active
 taste_buds	taste buds	noun	4	food	nụ vị giác	những điểm nhỏ trên lưỡi giúp cảm nhận vị	Spicy food wakes up your taste buds.	Đồ cay đánh thức vị giác của bạn.	taste bud		mirabi-ai-2026-10	active
-thirstily	thirstily	adverb	5	food	(uống) một cách khát khao	uống nhanh và nhiều vì đang rất khát	The runners drank thirstily after the race.	Các vận động viên uống nước lấy uống để sau cuộc đua.		/ˈθɜːstɪli/	mirabi-ai-2026-10	active
+thirstily	thirstily	adverb	5	food	(uống) một cách khát khao	uống nhanh và nhiều vì đang rất khát	The runners drank thirstily after the race.	Các vận động viên uống nước ừng ực sau cuộc đua.		/ˈθɜːstɪli/	mirabi-ai-2026-10	active
 wash_down	wash down	phrasal_verb	5	food	uống cho trôi (thức ăn)	uống nước sau khi ăn để thức ăn trôi xuống	He washed down his sandwich with a glass of milk.	Anh ấy uống một cốc sữa cho trôi chiếc bánh mì kẹp.			mirabi-ai-2026-10	active
 fill_up_on	fill up on	phrasal_verb	5	food	ăn no bụng bằng (món gì)	ăn nhiều một món đến mức không ăn được món khác	Don't fill up on bread before the main course.	Đừng ăn no bánh mì trước khi có món chính.			mirabi-ai-2026-10	active
 dish_up	dish up	phrasal_verb	5	food	múc thức ăn ra (bát, đĩa)	chia món từ nồi ra đĩa để dọn lên bàn	Dad dished up the rice and soup.	Bố múc cơm và canh ra bát.			mirabi-ai-2026-10	active

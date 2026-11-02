@@ -175,7 +175,7 @@ describe('Vườn nhà', () => {
       'POST /api/garden/plots/0/plant': () => (++attempt === 1 ? networkDown() : { status: 200, body: { planted: true, replayed: false, garden: garden(true) } }),
     });
     render(<ToastProvider><ConfirmProvider>
-      <GardenScreen user={USER as any} onBack={() => {}} onOpenInventory={() => {}} initialSeed={{ id: 'seed_daisy', variant: 'default' }} />
+      <GardenScreen user={USER as any} onOpenInventory={() => {}} initialSeed={{ id: 'seed_daisy', variant: 'default' }} />
     </ConfirmProvider></ToastProvider>);
     fireEvent.press(await screen.findByLabelText('Ô đất trống 1, chạm để trồng Hạt hoa cúc'));
     await waitFor(() => expect(server.callsTo('POST /api/garden/plots/0/plant')).toHaveLength(1));

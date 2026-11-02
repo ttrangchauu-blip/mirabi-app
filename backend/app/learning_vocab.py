@@ -292,6 +292,22 @@ def _variants(word: str) -> set[str]:
 
 
 _POS_FAMILY = {"noun": "noun", "verb": "verb", "phrasal_verb": "verb", "adjective": "adjective", "adverb": "adverb"}
+# A context written by an import, not by a person: "Dùng trong ngữ cảnh daily life; nghĩa cụ thể: Cảnh sát." only repeats
+# the meaning, so it neither says which sense is meant nor that the meaning was checked.
+_PLACEHOLDER_CONTEXT = re.compile(r"^[\"“]?Dùng trong ngữ cảnh.*nghĩa cụ thể\s*:", re.IGNORECASE)
+
+
+def gives_answer(meaning_vi: str, context_vi: str | None, accepted: list[str]) -> bool:
+    """Việt → Anh shows the meaning and the context: one that holds an accepted answer ("chuột hamster", "feel happy" for
+    feel) gives it away. Such a sense is only asked Anh → Việt, where the word is on screen anyway."""
+    text = f"{meaning_vi} {context_vi or ''}".lower().replace("’", "'")
+    return any(re.search(rf"(?<![a-z']){re.escape(a.lower())}(?![a-z'])", text) for a in accepted if a)
+
+
+def _glosses(meaning: str) -> set[str]:
+    """The Vietnamese meanings of a sense, one per comma: "to, lớn" → {"to", "lớn"}. A part in brackets stays with its
+    gloss ("trang trí (món ăn)"), it is what tells two senses apart."""
+    return {g for g in (normalize_text(part) for part in re.split(r"[,;]", meaning)) if g}
 
 
 def validate(rows: list[Row], report: Report, flags: dict[str, str] | None = None) -> list[Row]:
@@ -353,10 +369,14 @@ def validate(rows: list[Row], report: Report, flags: dict[str, str] | None = Non
             report.flag(r, "untranslated: the meaning is the English word itself")
         if not re.match(r"^[\"“‘'(]?[A-Z0-9]", r.example_en) or not re.search(r"[.!?…\"”’)]$", r.example_en):
             report.flag(r, "example_format: the example must be a full sentence (capital letter, final punctuation)")
+        if r.context_vi and _PLACEHOLDER_CONTEXT.match(r.context_vi):
+            report.flag(r, "placeholder_context: the context only repeats the meaning; write when the word is used")
         if not r.phonetic and " " not in r.word:
             report.warnings.append(f"{r.origin}: no phonetic for “{r.word}”")
         if flags and r.key in flags:
             report.flag(r, f"reviewer_flag: {flags[r.key]}")
+        if gives_answer(r.meaning_vi, r.context_vi, r.accepted):
+            report.warnings.append(f"{r.origin}: the meaning or context shows “{r.word}”: only asked Anh → Việt")
 
     # Several senses of one word: each must say which one it is; two senses must not be near-copies of each other.
     by_word: dict[str, list[Row]] = defaultdict(list)
@@ -406,6 +426,25 @@ def validate(rows: list[Row], report: Report, flags: dict[str, str] | None = Non
                     report.flag(r, f"ambiguous_meaning: “{r.meaning_vi}” is also the meaning of {other.key}; "
                                    "add context_vi or accept both answers")
                     break
+
+    # A meaning shown without a context that another playable sense's meaning fully covers ("lớn" when another word
+    # means "to, lớn"): a player who types that other word would be marked wrong. It needs a context, or to accept it.
+    playable = [r for r in good if not report.issues.get(r.key)]
+    by_gloss: dict[tuple, set[int]] = defaultdict(set)
+    for i, r in enumerate(playable):
+        for gloss in _glosses(r.meaning_vi):
+            by_gloss[(gloss, _POS_FAMILY.get(r.pos, r.pos))].add(i)
+    for i, r in enumerate(playable):
+        glosses = _glosses(r.meaning_vi)
+        if r.context_vi or not glosses:
+            continue
+        family = _POS_FAMILY.get(r.pos, r.pos)
+        covering = set.intersection(*(by_gloss[(g, family)] for g in glosses)) - {i}
+        accepted = {normalize_text(a) for a in r.accepted}
+        other = next((playable[j] for j in sorted(covering) if normalize_text(playable[j].word) not in accepted), None)
+        if other is not None:
+            report.flag(r, f"covered_meaning: “{r.meaning_vi}” is also a meaning of {other.key}; "
+                           f"add context_vi or accept “{other.word}”")
     return good
 
 
@@ -553,45 +592,8 @@ def import_bundled(db, *, force: bool = False) -> dict[str, int]:
 
 
 # ---------------------------------------------------------------------------------------------------------------
-# Picking the words of a stage (pure: unit-tested in tests/test_learning_vocab.py)
+# Falling time of a word
 # ---------------------------------------------------------------------------------------------------------------
-
-PASS_SEEN = 20  # words of a difficulty seen (at most all of them) before moving on
-PASS_RATE = 0.8  # share of first-try correct answers at that difficulty to move on
-RECENT_SESSIONS = 3  # words of the last stages are not drawn again as "learned" or "new"
-
-
-@dataclass(frozen=True)
-class Entry:
-    key: str
-    word: str
-    difficulty: int
-
-
-@dataclass(frozen=True)
-class Seen:
-    attempts: int
-    first_try: int
-    mastery: int
-    last_seen: float = 0.0  # timestamp; older first when reinforcing learned words
-
-
-def working_level(bank: list[Entry], seen: dict[str, Seen]) -> int:
-    """The user's difficulty for one game: the first one not yet mastered, starting at 1. A difficulty is passed once
-    enough of its words were seen (PASS_SEEN, or all of them) and at least 80% of those answers were right at the first
-    try."""
-    by_level: dict[int, list[Entry]] = defaultdict(list)
-    for e in bank:
-        by_level[e.difficulty].append(e)
-    levels = [lv for lv in DIFFICULTIES if by_level[lv]]
-    for lv in levels:
-        stats = [seen[e.key] for e in by_level[lv] if e.key in seen]
-        attempts = sum(s.attempts for s in stats)
-        first = sum(s.first_try for s in stats)
-        if len(stats) < min(PASS_SEEN, len(by_level[lv])) or not attempts or first / attempts < PASS_RATE:
-            return lv
-    return levels[-1] if levels else DIFFICULTIES[0]
-
 
 def travel_for(word: str, base: int) -> int:
     """Long words and phrases fall slower: +1.5 s per letter over 7 and +2 s per extra word, at most 40 s."""
@@ -599,56 +601,6 @@ def travel_for(word: str, base: int) -> int:
         return 0
     letters = len(re.sub(r"[ '-]", "", word))
     return int(min(40, round(base + max(0, letters - 7) * 1.5 + 2 * word.count(" "))))
-
-
-def pick_entries(pool: list[Entry], *, level: int, seen: dict[str, Seen], review: set[str], recent: set[str],
-                 count: int, rng: random.Random) -> list[tuple[Entry, str]]:
-    """The words of a stage, each at most once (and never two senses of the same word: the same answer twice would be
-    a guess): words to review (on the "cần ôn" list: missed, wrong, hinted or revealed, until answered right at the
-    first try in a later stage), some learned words (not seen in the last stages) and new words at the user's level.
-    When there are not enough new words left, the stage becomes a purposeful review instead of coming back empty.
-    Words of the next difficulty only fill a stage the user's level can't fill, never two levels up."""
-    top = level
-    eligible = [e for e in pool if e.difficulty <= top]
-    if not eligible and pool:  # a topic whose words are all above the user's level: start with its easiest ones
-        top = min(e.difficulty for e in pool)
-        eligible = [e for e in pool if e.difficulty == top]
-    stretch = [e for e in pool if e.difficulty == top + 1 and e.key not in seen] if len(eligible) < count * 2 else []
-    stretch.sort(key=lambda e: (e.key in recent, rng.random()))
-    weak = [e for e in eligible if e.key in review]
-    weak.sort(key=lambda e: (seen[e.key].mastery if e.key in seen else 0, rng.random()))
-    weak_keys = {e.key for e in weak}
-    learned = [e for e in eligible if e.key in seen and e.key not in weak_keys]
-    learned.sort(key=lambda e: (e.key in recent, seen[e.key].last_seen, rng.random()))
-    fresh = [e for e in eligible if e.key not in seen]
-    # New words of the user's own level first, then words left over from easier levels; recently shown ones last.
-    fresh.sort(key=lambda e: (e.key in recent, e.difficulty != top, rng.random()))
-
-    picked: list[tuple[Entry, str]] = []
-    used: set[str] = set()
-    words: set[str] = set()
-
-    def take(items: list[Entry], reason: str, limit: int) -> None:
-        for e in items:
-            if len(picked) >= count or limit <= 0:
-                return
-            word = normalize_text(e.word)
-            if e.key not in used and word not in words:
-                used.add(e.key)
-                words.add(word)
-                picked.append((e, reason))
-                limit -= 1
-
-    take(weak, "review", max(1, count // 4))
-    take([e for e in learned if e.key not in recent], "learned", max(1, count // 6))
-    take([e for e in fresh if e.key not in recent], "new", count)
-    # Not enough new words: review on purpose (weakest first, then learned words, the least recent first).
-    take(weak, "review", count)
-    take(learned, "learned", count)
-    take(fresh, "new", count)
-    take(stretch, "new", count)
-    rng.shuffle(picked)
-    return picked
 
 
 # ---------------------------------------------------------------------------------------------------------------
@@ -691,22 +643,14 @@ def snapshot(lesson_code: str, e, kind: str, reason: str) -> dict:
             "hints": spelling_hints(e.word) if spelled else vocab_hints(e.word), "explanation": explanation}
 
 
-def recent_keys(db, user_id: int, game: str, prefix: str) -> set[str]:
-    """The words of the user's last stages of this game (they are not drawn again as "new" or "learned")."""
-    from sqlalchemy import select
-    from .models import LearningSession, LearningSessionItem
-    ids = list(db.scalars(select(LearningSession.id).where(LearningSession.user_id == user_id, LearningSession.game == game)
-                          .order_by(LearningSession.id.desc()).limit(RECENT_SESSIONS)))
-    if not ids:
-        return set()
-    keys = db.scalars(select(LearningSessionItem.skill_key).where(LearningSessionItem.session_id.in_(ids)))
-    return {k[len(prefix):] for k in keys if k.startswith(prefix)}
+def _shows_answer(e) -> bool:
+    return gives_answer(e.meaning_vi, e.context_vi, json.loads(e.accepted_json or "[]") or [e.word])
 
 
 def bank_items(db, user, lesson, game: dict, variant: str | None, seed: int, review_keys: list[str] | None) -> list[dict]:
-    """The turns of a vocabulary stage, picked for this user from the active entries of the bank (see pick_entries)."""
+    """The turns of a vocabulary stage: a review (review_keys), a catalog lesson's own words, or Khám phá từ mới."""
     from sqlalchemy import select
-    from .models import LearningReviewItem, LearningSkillProgress, LearningVocabEntry, as_utc
+    from .models import LearningVocabEntry
     rng = random.Random(seed)
     if review_keys is not None:
         # "Luyện lại": the open review items of this lesson, each as the game it was missed in (retired words included:
@@ -719,37 +663,36 @@ def bank_items(db, user, lesson, game: dict, variant: str | None, seed: int, rev
             LearningVocabEntry.entry_key.in_({k for _, k in wanted.values()}), LearningVocabEntry.status.in_(("active", "retired"))))}
         out = []
         for kind, key in wanted.values():
-            if key in entries and len(out) < 12:
+            if key in entries and len(out) < 12 and not (kind == "vocab_typing" and _shows_answer(entries[key])):
                 out.append(snapshot(lesson.code, entries[key], kind, "review"))
         rng.shuffle(out)
         return out
 
     spelled = variant == "word_shooter"
-    kind, prefix = ("word_spelling", "en.spell.") if spelled else ("vocab_typing", "en.word.")
+    kind = "word_spelling" if spelled else "vocab_typing"
     topic = (game.get("generator") or {}).get("vocab_bank", {}).get("topic")
-    active = db.execute(select(LearningVocabEntry.entry_key, LearningVocabEntry.word, LearningVocabEntry.difficulty,
-                               LearningVocabEntry.level, LearningVocabEntry.topic)
-                        .where(LearningVocabEntry.status == "active").order_by(LearningVocabEntry.entry_key)).all()
-    if not active:
-        return []
-    seen = {row.skill_key[len(prefix):]: Seen(row.attempts, row.first_try, row.mastery,
-                                              as_utc(row.last_seen_at).timestamp() if row.last_seen_at else 0.0)
-            for row in db.scalars(select(LearningSkillProgress).where(LearningSkillProgress.user_id == user.id,
-                                                                     LearningSkillProgress.skill_key.startswith(prefix)))}
-    review = {row.skill_key[len(prefix):] for row in db.scalars(select(LearningReviewItem).where(
-        LearningReviewItem.user_id == user.id, LearningReviewItem.status == "open",
-        LearningReviewItem.skill_key.startswith(prefix)))}
-    recent = recent_keys(db, user.id, "word_shooter" if spelled else "meteor", prefix)
-
-    def entry(row) -> Entry:
-        return Entry(row.entry_key, row.word, row.difficulty or _difficulty(row.level) or 1)
-    # The level comes from the whole bank (all topics): a topic only narrows which words are drawn.
-    level = working_level([entry(e) for e in active], seen)
-    pool = [entry(e) for e in active if topic is None or e.topic == topic]
-    picked = pick_entries(pool, level=level, seen=seen, review=review, recent=recent, count=game["turns"], rng=rng)
-    rows = {e.entry_key: e for e in db.scalars(select(LearningVocabEntry).where(
-        LearningVocabEntry.entry_key.in_([e.key for e, _ in picked])))}
-    return [snapshot(lesson.code, rows[e.key], kind, reason) for e, reason in picked]
+    words = (game.get("generator") or {}).get("vocab_bank", {}).get("words")
+    if words and (game.get("generator") or {}).get("vocab_bank", {}).get("discover"):
+        # A lesson of the catalog that discovers new words: its own words first, then related ones (vocab_lesson.py),
+        # never one already shown in this game.
+        from .vocab_lesson import lesson_words
+        keys = lesson_words(db, user, "word_shooter" if spelled else "meteor", game["generator"], seed, game["turns"])
+        rows = {e.entry_key: e for e in db.scalars(select(LearningVocabEntry).where(LearningVocabEntry.entry_key.in_(keys)))}
+        return [snapshot(lesson.code, rows[k], kind, "new") for k in keys if k in rows]
+    if words:
+        # A lesson of the catalog (lesson_catalog.py): exactly its own words, each once, in a random order; never a
+        # word of another lesson to fill the stage. Retired words are left out.
+        rows = {e.entry_key: e for e in db.scalars(select(LearningVocabEntry).where(
+            LearningVocabEntry.entry_key.in_(words), LearningVocabEntry.status == "active"))}
+        chosen = [rows[k] for k in words if k in rows and (spelled or not _shows_answer(rows[k]))]
+        rng.shuffle(chosen)
+        return [snapshot(lesson.code, e, kind, "new") for e in chosen[:game["turns"]]]
+    # Khám phá từ mới (vocab_discovery.py): only words never shown in this game, at the user's grade and open levels,
+    # easy to hard; fewer than a full stage when fewer are left, none when the scope is exhausted.
+    from .vocab_discovery import discovery_words
+    keys = discovery_words(db, user, "word_shooter" if spelled else "meteor", topic, seed, game["turns"])
+    rows = {e.entry_key: e for e in db.scalars(select(LearningVocabEntry).where(LearningVocabEntry.entry_key.in_(keys)))}
+    return [snapshot(lesson.code, rows[k], kind, "new") for k in keys]
 
 
 # ---------------------------------------------------------------------------------------------------------------

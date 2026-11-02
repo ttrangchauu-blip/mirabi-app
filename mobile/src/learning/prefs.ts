@@ -2,10 +2,11 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Speech from 'expo-speech';
 import { useReduceMotion } from '../components/useReduceMotion';
+import type { Volume } from '../games/engine/sfx';
 // A `mode` saved by older versions (Học tập / Thử thách) is ignored: every game now plays in Học tập.
-type Stored = { sound?: boolean; reduceMotion?: boolean };
+type Stored = { sound?: boolean; volume?: Volume; reduceMotion?: boolean };
 
-/** Sound and "giảm chuyển động" for the learning games, saved per account
+/** Sound (on/off and the effects' volume) and "giảm chuyển động" for the learning games, saved per account
  * on this device. Reduced motion follows the OS setting until the user chooses otherwise. */
 export function useLearningPrefs(userId: number) {
   const osReduce = useReduceMotion();
@@ -28,8 +29,10 @@ export function useLearningPrefs(userId: number) {
   const sound = stored.sound ?? true;
   return {
     sound,
+    volume: (stored.volume === 'low' || stored.volume === 'high' ? stored.volume : 'mid') as Volume,
     reduceMotion: stored.reduceMotion ?? osReduce,
     setSound: (value: boolean) => { if (!value) void Speech.stop(); save({ sound: value }); },
+    setVolume: (value: Volume) => save({ volume: value }),
     setReduceMotion: (value: boolean) => save({ reduceMotion: value }),
   };
 }

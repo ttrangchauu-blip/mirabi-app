@@ -12,6 +12,23 @@ import { Button, Card, ScreenHeader } from '../../ui/kit';
 
 /** Knowledge shown before playing (and again from the pause menu): words, a grammar point, or a math method. */
 export function IntroContent({ intro, prefs }: { intro: Intro; prefs: LearningPrefs }) {
+  if (intro.kind === 'lesson') {
+    return (
+      <View>
+        <Text style={styles.title}>{intro.title}</Text>
+        <Text style={styles.ruleForm}>Bạn sẽ học gì?</Text>
+        {intro.objectives.map((line, i) => <Text key={`o${i}`} style={styles.body}>• {line}</Text>)}
+        <Text style={styles.ruleForm}>Kiến thức tóm tắt</Text>
+        {intro.summary.map((line, i) => <Text key={`s${i}`} style={styles.body}>{line}</Text>)}
+        {intro.examples.map((ex) => (
+          <View key={ex.title} style={styles.rule}>
+            <Text style={styles.ruleForm}>{ex.title}</Text>
+            {ex.lines.map((line, i) => <Text key={i} style={styles.example}>{line}</Text>)}
+          </View>
+        ))}
+      </View>
+    );
+  }
   if (intro.kind === 'vocabulary') {
     return (
       <View>

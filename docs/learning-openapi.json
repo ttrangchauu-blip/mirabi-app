@@ -1,9 +1,9 @@
 {
  "openapi": "3.1.0",
  "info": {
-  "title": "Mirabi API - Learning games (English & Math)",
+  "title": "Mirabi API - Learning (games, lessons, school years, archive)",
   "version": "0.2.0",
-  "description": "Subset of the live OpenAPI document (/docs). Rules: docs/LEARNING_GAMES.md. Regenerate with backend/scripts/export_learning_openapi.py."
+  "description": "Subset of the live OpenAPI document (/docs). Rules: docs/LEARNING_GAMES.md and docs/LEARNING_ARCHIVE.md. Errors are {detail, code}; the codes are listed per response. Regenerate with backend/scripts/export_learning_openapi.py."
  },
  "paths": {
   "/api/learning/tutorials": {
@@ -11,7 +11,7 @@
     "tags": [
      "learning"
     ],
-    "summary": "The games whose first-time guide this account has finished",
+    "summary": "The games whose current first-time guide this account has finished",
     "operationId": "tutorials_api_learning_tutorials_get",
     "responses": {
      "200": {
@@ -39,7 +39,7 @@
     "tags": [
      "learning"
     ],
-    "summary": "Mark a game's guide as finished (idempotent)",
+    "summary": "Mark a game's guide as finished at a version (idempotent, never lowers it)",
     "operationId": "finish_tutorial_api_learning_tutorials__game__post",
     "security": [
      {
@@ -59,13 +59,46 @@
         "bridge",
         "grammar",
         "defense",
-        "math_bridge"
+        "math_bridge",
+        "word_builder",
+        "spelling_detective",
+        "sorting",
+        "code_path",
+        "order",
+        "match",
+        "choice",
+        "lab",
+        "timeline",
+        "sentence",
+        "geometry",
+        "balance",
+        "number_line",
+        "step_solver",
+        "story_detective",
+        "sentence_xray"
        ],
        "type": "string",
        "title": "Game"
       }
      }
     ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "anyOf": [
+         {
+          "$ref": "#/components/schemas/TutorialDone"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Data"
+       }
+      }
+     }
+    },
     "responses": {
      "200": {
       "description": "Successful Response",
@@ -99,6 +132,71 @@
     ],
     "summary": "Subjects with their levels, topics and lessons (no answers)",
     "operationId": "catalog_api_learning_catalog_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "grade",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "enum": [
+          "preschool",
+          "grade1",
+          "grade2",
+          "grade3",
+          "grade4",
+          "grade5",
+          "grade6",
+          "grade7",
+          "grade8",
+          "grade9",
+          "grade10",
+          "grade11",
+          "grade12",
+          "university",
+          "adult"
+         ],
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "description": "Deprecated: only the learner's current grade is accepted (403 grade_locked otherwise).",
+       "title": "Grade"
+      },
+      "description": "Deprecated: only the learner's current grade is accepted (403 grade_locked otherwise)."
+     },
+     {
+      "name": "level",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "enum": [
+          "basic",
+          "intermediate",
+          "advanced"
+         ],
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "description": "Sinh viên / Người đi làm: the level chosen.",
+       "title": "Level"
+      },
+      "description": "Sinh viên / Người đi làm: the level chosen."
+     }
+    ],
     "responses": {
      "200": {
       "description": "Successful Response",
@@ -107,13 +205,38 @@
         "schema": {}
        }
       }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "code: grade_locked",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
      }
-    },
-    "security": [
-     {
-      "HTTPBearer": []
-     }
-    ]
+    }
    }
   },
   "/api/learning/lessons/{lesson_id}": {
@@ -278,7 +401,7 @@
      "learning"
     ],
     "summary": "Start an English game right away (no setup)",
-    "description": "Creates a paused stage of the game's lesson (the app shows a 3-2-1 countdown, then resumes it). The words or\nquestions are chosen from the user's level, history and review list: there is nothing to configure.",
+    "description": "Creates a paused stage of the game's lesson (the app shows a 3-2-1 countdown, then resumes it). The words or\nquestions are chosen from the user's level, history and review list: there is nothing to configure.\nWith a grade (or, outside school, a level) the game must have content for it: the curriculum games always need one.\nThe grade is always the learner's current one (education.py); the app cannot pick another.",
     "operationId": "quick_start_api_learning_play_post",
     "security": [
      {
@@ -321,6 +444,46 @@
        "application/json": {
         "schema": {
          "$ref": "#/components/schemas/SessionOut"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "code: grade_locked",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "code: lesson_not_found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "code: game_not_available | open_session_exists",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
         }
        }
       }
@@ -779,7 +942,7 @@
      "content": {
       "application/json": {
        "schema": {
-        "$ref": "#/components/schemas/TurnEvent"
+        "$ref": "#/components/schemas/HeldTurnEvent"
        }
       }
      }
@@ -1162,7 +1325,10 @@
         {
          "enum": [
           "english",
-          "math"
+          "math",
+          "vietnamese",
+          "science",
+          "informatics"
          ],
          "type": "string"
         },
@@ -1218,7 +1384,10 @@
         {
          "enum": [
           "english",
-          "math"
+          "math",
+          "vietnamese",
+          "science",
+          "informatics"
          ],
          "type": "string"
         },
@@ -1257,8 +1426,8 @@
     "tags": [
      "learning"
     ],
-    "summary": "Words met in the vocabulary games, most recent first, a page at a time",
-    "description": "`counts` are for the whole history (the filter tabs); `total` is the number of words matching the filter and\nsearch, of which `items` is the page from `offset`.",
+    "summary": "Sổ tay từ vựng: words met in the vocabulary games, most recent first, a page at a time",
+    "description": "`counts` are for the whole history (the filter tabs); `total` is the number of words matching the filters and\nsearch, of which `items` is the page from `offset`. filter: review (chưa nhớ, answered wrong), learned (đã học),\nmastered (thành thạo), correct (learned or mastered). `topics` are the topics of the history, for the topic filter.",
     "operationId": "history_api_learning_vocabulary_history_get",
     "security": [
      {
@@ -1293,12 +1462,73 @@
        "enum": [
         "all",
         "correct",
-        "review"
+        "review",
+        "learned",
+        "mastered"
        ],
        "type": "string",
        "default": "all",
        "title": "Filter"
       }
+     },
+     {
+      "name": "topic",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "maxLength": 40
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "description": "A topic code of the bank",
+       "title": "Topic"
+      },
+      "description": "A topic code of the bank"
+     },
+     {
+      "name": "level",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "integer",
+         "maximum": 5,
+         "minimum": 1
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "description": "Vocabulary level 1..5",
+       "title": "Level"
+      },
+      "description": "Vocabulary level 1..5"
+     },
+     {
+      "name": "year",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "integer",
+         "maximum": 2100,
+         "minimum": 2000
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "description": "Only what was played in this school year",
+       "title": "Year"
+      },
+      "description": "Only what was played in this school year"
      },
      {
       "name": "limit",
@@ -1454,6 +1684,2457 @@
      }
     }
    }
+  },
+  "/api/learning/vocabulary/progress": {
+   "get": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Khám phá từ mới: levels, new words left, topics, words due and a level to celebrate",
+    "description": "Per game. The grade is the learner's own (education profile), never one sent by the app. `levels[].status`:\ncompleted | unlocked | locked | above_grade (beyond this grade's highest level). `celebration`: a completed level\nnot celebrated yet; show it once, then POST /levels/{game}/{level}/celebrated.",
+    "operationId": "discovery_progress_api_learning_vocabulary_progress_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "game",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "enum": [
+        "meteor",
+        "word_shooter"
+       ],
+       "type": "string",
+       "default": "meteor",
+       "title": "Game"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/vocabulary/levels/{game}/{level}/celebrated": {
+   "post": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "The celebration of a completed level was shown (it never comes back)",
+    "operationId": "level_celebrated_api_learning_vocabulary_levels__game___level__celebrated_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "game",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "enum": [
+        "meteor",
+        "word_shooter"
+       ],
+       "type": "string",
+       "title": "Game"
+      }
+     },
+     {
+      "name": "level",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Level"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/programme": {
+   "get": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "The subjects of the learner's current grade, with their lessons and progress this school year",
+    "operationId": "programme_api_learning_programme_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "grade",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "enum": [
+          "preschool",
+          "grade1",
+          "grade2",
+          "grade3",
+          "grade4",
+          "grade5",
+          "grade6",
+          "grade7",
+          "grade8",
+          "grade9",
+          "grade10",
+          "grade11",
+          "grade12",
+          "university",
+          "adult"
+         ],
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "description": "Deprecated: only the current grade is accepted (403 grade_locked otherwise).",
+       "title": "Grade"
+      },
+      "description": "Deprecated: only the current grade is accepted (403 grade_locked otherwise)."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Programme Api Learning Programme Get"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "code: grade_locked",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/programme/selection": {
+   "put": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "THPT: the elective subjects the learner studies (shown first)",
+    "operationId": "save_selection_api_learning_programme_selection_put",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/Selection"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Save Selection Api Learning Programme Selection Put"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/learning/programme/subjects/{code}": {
+   "get": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "The chapters and lessons of a subject at a grade, with progress",
+    "description": "The lessons of a subject at the learner's grade, this school year: by chapter (`chapters`) and as one list sorted\nby the learner's state (`lessons`, see sort_lessons), with the subject's progress (lessons completed / ready).",
+    "operationId": "subject_lessons_api_learning_programme_subjects__code__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "code",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Code"
+      }
+     },
+     {
+      "name": "grade",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "enum": [
+          "preschool",
+          "grade1",
+          "grade2",
+          "grade3",
+          "grade4",
+          "grade5",
+          "grade6",
+          "grade7",
+          "grade8",
+          "grade9",
+          "grade10",
+          "grade11",
+          "grade12",
+          "university",
+          "adult"
+         ],
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "description": "Deprecated: only the current grade.",
+       "title": "Grade"
+      },
+      "description": "Deprecated: only the current grade."
+     },
+     {
+      "name": "q",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "maxLength": 60
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Q"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Subject Lessons Api Learning Programme Subjects  Code  Get"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "code: grade_locked",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "code: subject_not_in_grade",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "code: grade_required",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/gameplays": {
+   "get": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "The game definitions: every gameplay, what the learner does in it, and whether it is built",
+    "description": "The game definition table (game_registry.py): each gameplay's family (two of one family play the same way), its\ninteraction, grades, world, turn kind, status (ready / planned) and the learning activities it is made for. The\nlessons that use each one: docs/GAME_AUDIT.md.",
+    "operationId": "gameplays_api_learning_gameplays_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Gameplays Api Learning Gameplays Get"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/learning/lesson-catalog/{key}": {
+   "get": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "One lesson: what is learned, a summary, its games and their progress",
+    "operationId": "lesson_detail_api_learning_lesson_catalog__key__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "key",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Key"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Lesson Detail Api Learning Lesson Catalog  Key  Get"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "code: grade_locked",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "code: lesson_not_found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/lesson-catalog/{key}/play": {
+   "post": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Start a game of a lesson (created paused: 3-2-1 resumes it)",
+    "description": "The backend checks that the game belongs to this lesson, the lesson to its subject and grade, and that it is\nready and unlocked; the stage then draws only this lesson's content. A vocabulary game draws the lesson's own words\nfirst, then new words beyond them (vocab_lesson.py); with no new word left it does not start (409\nvocabulary_exhausted: the app offers Ôn tập).",
+    "operationId": "play_lesson_api_learning_lesson_catalog__key__play_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "key",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Key"
+      }
+     },
+     {
+      "name": "Idempotency-Key",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "pattern": "^[A-Za-z0-9_-]{8,64}$"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Idempotency-Key"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/LessonPlay"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Play Lesson Api Learning Lesson Catalog  Key  Play Post"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "code: grade_locked",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "code: lesson_not_found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "code: lesson_locked | lesson_not_ready | lesson_not_published | open_session_exists | vocabulary_exhausted",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "code: game_not_in_lesson",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/unlock-map": {
+   "get": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "A subject of the learner's grade as a journey map: chapters, lessons and games with their unlock state",
+    "description": "Every chapter and lesson of the subject this school year with `status` LOCKED / UNLOCKED / IN_PROGRESS /\nCOMPLETED, what opens it (`requirements`), whether it is required, and `celebrate` while its unlock has not been\ncelebrated yet. Nothing the app sends changes a state: they follow from the stages it completed.",
+    "operationId": "unlock_map_api_learning_unlock_map_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "subject",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "maxLength": 30,
+       "title": "Subject"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Unlock Map Api Learning Unlock Map Get"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "code: subject_not_in_grade",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "code: grade_required",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/learning/progress/sync": {
+   "post": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "Catch up the unlocks of the learner's grade (after a lost result) and list those not celebrated yet",
+    "description": "The app calls this when it comes back online or after a result: the backend applies the rules again to the\nstages it has recorded (a body, if any, is ignored: the app never says what is completed or open) and returns the\nunlocks still to celebrate. Idempotent.",
+    "operationId": "sync_progress_api_learning_progress_sync_post",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Sync Progress Api Learning Progress Sync Post"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "code: grade_required",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/learning/unlocks/celebrated": {
+   "post": {
+    "tags": [
+     "learning"
+    ],
+    "summary": "The unlock animation was shown: it does not come back (idempotent)",
+    "operationId": "unlocks_celebrated_api_learning_unlocks_celebrated_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/Celebrated"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Unlocks Celebrated Api Learning Unlocks Celebrated Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/education": {
+   "get": {
+    "tags": [
+     "education"
+    ],
+    "summary": "The learner's grade, school year, progress and a pending 'lên lớp' celebration",
+    "description": "Runs the promotion check first, so an app that was offline (or closed for years) gets the right grade.",
+    "operationId": "get_state_api_education_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/EducationStateOut"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/education/celebrations/{promotion_id}/seen": {
+   "post": {
+    "tags": [
+     "education"
+    ],
+    "summary": "The celebration was shown (once per promotion, every device)",
+    "operationId": "celebration_seen_api_education_celebrations__promotion_id__seen_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "promotion_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Promotion Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Celebration Seen Api Education Celebrations  Promotion Id  Seen Post"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "code: celebration_not_found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/education/calendar/current": {
+   "get": {
+    "tags": [
+     "education"
+    ],
+    "summary": "Public: the school year now (registration says which year's grade to give)",
+    "operationId": "current_calendar_api_education_calendar_current_get",
+    "parameters": [
+     {
+      "name": "region",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "maxLength": 8
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Region"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CurrentCalendarOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "code: unknown_region",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/education/archives": {
+   "get": {
+    "tags": [
+     "education"
+    ],
+    "summary": "Kho lưu trữ học tập: the finished school years (the three most recent)",
+    "operationId": "list_archives_api_education_archives_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ArchivesOut"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/education/archives/{year}": {
+   "get": {
+    "tags": [
+     "education"
+    ],
+    "summary": "One finished school year: its subjects, results, words, mistakes, knowledge and notes (owner only)",
+    "operationId": "archive_detail_api_education_archives__year__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "year",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Year"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Archive Detail Api Education Archives  Year  Get"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "code: archive_not_found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/education/archives/{year}/lessons/{key}": {
+   "get": {
+    "tags": [
+     "education"
+    ],
+    "summary": "Read a lesson of a finished year again (as it was studied)",
+    "operationId": "archive_lesson_api_education_archives__year__lessons__key__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "year",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Year"
+      }
+     },
+     {
+      "name": "key",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Key"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Archive Lesson Api Education Archives  Year  Lessons  Key  Get"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "code: archive_not_found | lesson_not_found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/education/archives/{year}/lessons/{key}/play": {
+   "post": {
+    "tags": [
+     "education"
+    ],
+    "summary": "Review a finished year's lesson with its game (kept apart: the year's results never change)",
+    "operationId": "archive_play_api_education_archives__year__lessons__key__play_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "year",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Year"
+      }
+     },
+     {
+      "name": "key",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Key"
+      }
+     },
+     {
+      "name": "Idempotency-Key",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "pattern": "^[A-Za-z0-9_-]{8,64}$"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Idempotency-Key"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ArchivePlay"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Archive Play Api Education Archives  Year  Lessons  Key  Play Post"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "code: archive_not_found | lesson_not_found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "code: lesson_not_published | open_session_exists",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "code: game_not_in_lesson",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/education/notebook": {
+   "get": {
+    "tags": [
+     "education"
+    ],
+    "summary": "Sổ tay kiến thức, tóm tắt tự động: the lessons studied this school year",
+    "operationId": "notebook_api_education_notebook_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Notebook Api Education Notebook Get"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/education/notes": {
+   "get": {
+    "tags": [
+     "education"
+    ],
+    "summary": "Ghi chú cá nhân: the learner's notes, newest first, with search (accents and case ignored)",
+    "operationId": "list_notes_api_education_notes_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "q",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "maxLength": 80
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Q"
+      }
+     },
+     {
+      "name": "academic_year",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "integer"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Academic Year"
+      }
+     },
+     {
+      "name": "subject",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "maxLength": 30
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Subject"
+      }
+     },
+     {
+      "name": "lesson_key",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "maxLength": 60
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Lesson Key"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/NotesOut"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "education"
+    ],
+    "summary": "Write a note for the current school year (its grade), on a subject and optionally a lesson",
+    "operationId": "create_note_api_education_notes_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/NoteInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/NoteOut"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "code: note_subject_invalid | note_lesson_invalid | note_empty",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/education/notes/{note_id}": {
+   "put": {
+    "tags": [
+     "education"
+    ],
+    "summary": "Edit a note (it stays in its own school year and grade)",
+    "operationId": "update_note_api_education_notes__note_id__put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "note_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Note Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/NoteInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/NoteOut"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "code: note_not_found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "code: note_subject_invalid | note_lesson_invalid | note_empty",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "education"
+    ],
+    "summary": "Delete a note",
+    "operationId": "delete_note_api_education_notes__note_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "note_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Note Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "code: note_not_found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/admin/education/regions": {
+   "get": {
+    "tags": [
+     "education-admin"
+    ],
+    "summary": "The education regions whose calendars can be managed",
+    "operationId": "admin_regions_api_admin_education_regions_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Admin Regions Api Admin Education Regions Get"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "code: admin_required",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/admin/education/alerts": {
+   "get": {
+    "tags": [
+     "education-admin"
+    ],
+    "summary": "School years whose calendar is not verified while learners wait (or soon will)",
+    "operationId": "admin_alerts_api_admin_education_alerts_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "$ref": "#/components/schemas/AlertOut"
+         },
+         "type": "array",
+         "title": "Response Admin Alerts Api Admin Education Alerts Get"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "code: admin_required",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/api/admin/education/calendar": {
+   "get": {
+    "tags": [
+     "education-admin"
+    ],
+    "summary": "The configured school years of a region, their recent changes and the alerts",
+    "operationId": "admin_calendar_api_admin_education_calendar_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "region",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "maxLength": 8,
+       "default": "VN",
+       "title": "Region"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CalendarOut"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "code: admin_required",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "code: unknown_region",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     }
+    }
+   },
+   "put": {
+    "tags": [
+     "education-admin"
+    ],
+    "summary": "Set (and verify) a school year's dates. Never re-promotes anyone: promotions are once per year",
+    "operationId": "admin_set_calendar_api_admin_education_calendar_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CalendarInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CalendarYearOut"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "code: admin_required",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "code: unknown_region | invalid_calendar | verification_incomplete",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/admin/education/users": {
+   "get": {
+    "tags": [
+     "education-admin"
+    ],
+    "summary": "Find learners by email or name",
+    "operationId": "admin_find_users_api_admin_education_users_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "q",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "minLength": 2,
+       "maxLength": 80,
+       "title": "Q"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Admin Find Users Api Admin Education Users Get"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "code: admin_required",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/admin/education/users/{user_id}": {
+   "get": {
+    "tags": [
+     "education-admin"
+    ],
+    "summary": "A learner's grade, school year, region and every change with who made it",
+    "operationId": "admin_user_detail_api_admin_education_users__user_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "User Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Admin User Detail Api Admin Education Users  User Id  Get"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "code: admin_required",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "code: user_not_found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/admin/education/users/{user_id}/history": {
+   "get": {
+    "tags": [
+     "education-admin"
+    ],
+    "summary": "Every grade / school year change of a learner",
+    "operationId": "admin_history_api_admin_education_users__user_id__history_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "User Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Admin History Api Admin Education Users  User Id  History Get"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "code: admin_required",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/admin/education/users/{user_id}/grade": {
+   "post": {
+    "tags": [
+     "education-admin"
+    ],
+    "summary": "Correct a grade registered by mistake (verified support request)",
+    "operationId": "admin_correct_grade_api_admin_education_users__user_id__grade_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "User Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GradeCorrection"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Admin Correct Grade Api Admin Education Users  User Id  Grade Post"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "code: admin_required",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "code: user_not_found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "code: not_enrolled",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/admin/education/users/{user_id}/repeat": {
+   "post": {
+    "tags": [
+     "education-admin"
+    ],
+    "summary": "Học lại: the next school year keeps the current grade",
+    "operationId": "admin_repeat_api_admin_education_users__user_id__repeat_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "User Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/SupportInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Admin Repeat Api Admin Education Users  User Id  Repeat Post"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "code: admin_required",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "code: user_not_found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "code: not_enrolled | not_studying",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/admin/education/users/{user_id}/promote": {
+   "post": {
+    "tags": [
+     "education-admin"
+    ],
+    "summary": "Lên lớp now, confirmed by an administrator (e.g. while the calendar awaits verification)",
+    "description": "Closes the learner's school year exactly like the automatic promotion (archive, history, once per year), only\nonce the next school year has begun by its expected date; a \"học lại\" hold keeps the grade as it would.",
+    "operationId": "admin_promote_api_admin_education_users__user_id__promote_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "User Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/SupportInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Admin Promote Api Admin Education Users  User Id  Promote Post"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "code: admin_required",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "code: user_not_found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "code: not_enrolled | not_studying | school_year_not_started | game_in_progress",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/admin/education/users/{user_id}/region": {
+   "post": {
+    "tags": [
+     "education-admin"
+    ],
+    "summary": "Move a learner to another region's school calendar",
+    "description": "The school year already reached is kept: a region whose year starts later never moves the learner back, and one\nwhose year has already started promotes once, through the same per-year unique key as always.",
+    "operationId": "admin_change_region_api_admin_education_users__user_id__region_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "User Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RegionChange"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Admin Change Region Api Admin Education Users  User Id  Region Post"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "code: admin_required",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "code: user_not_found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "code: not_enrolled",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "code: unknown_region",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     }
+    }
+   }
   }
  },
  "components": {
@@ -1486,6 +4167,53 @@
     "type": "object",
     "title": "AbandonInput"
    },
+   "AlertOut": {
+    "properties": {
+     "region": {
+      "type": "string",
+      "title": "Region"
+     },
+     "academic_year": {
+      "type": "integer",
+      "title": "Academic Year"
+     },
+     "label": {
+      "type": "string",
+      "title": "Label"
+     },
+     "level": {
+      "type": "string",
+      "enum": [
+       "overdue",
+       "upcoming"
+      ],
+      "title": "Level"
+     },
+     "expected_start": {
+      "type": "string",
+      "title": "Expected Start"
+     },
+     "configured": {
+      "type": "boolean",
+      "title": "Configured"
+     },
+     "waiting": {
+      "type": "integer",
+      "title": "Waiting"
+     }
+    },
+    "type": "object",
+    "required": [
+     "region",
+     "academic_year",
+     "label",
+     "level",
+     "expected_start",
+     "configured",
+     "waiting"
+    ],
+    "title": "AlertOut"
+   },
    "AnswerInput": {
     "properties": {
      "turn_id": {
@@ -1500,6 +4228,12 @@
       "title": "Client Event Id",
       "description": "Idempotency key chosen by the app per action; a retry with the same id changes nothing."
      },
+     "hold_next": {
+      "type": "boolean",
+      "title": "Hold Next",
+      "description": "Falling words: when this turn ends, open no new turn. The app opens new words on its own timer (/next with refill), so a word comes in at the top on time, never in the place of the last one.",
+      "default": false
+     },
      "answer": {
       "anyOf": [
        {
@@ -1513,7 +4247,7 @@
        }
       ],
       "title": "Answer",
-      "description": "Typed text or number, an option id, or the ordered token ids of a bridge."
+      "description": "Typed text or number, an option id, the ordered token ids of a bridge, or (Phòng thí nghiệm) a part on every place as \"slot:part\". Dòng thời gian: every event on a marker as \"marker:event\"; Xây câu: the tile ids of the sentence in order; Xưởng hình học: [\"angle:<degrees>\"] or [\"rect:<w>x<h>\"]; Cân bằng phương trình: one coefficient per substance, in order. Cầu trục số: every point on a tick as \"point:tick\"; Giải toán từng bước: the current step as [chip, operator (+ - × :), chip, typed result]; Thám tử đọc hiểu: [sentence id] to find the clue, then [option id]; Soi câu: the painted pieces as \"piece:highlighter\" ([\"none\"] when nothing is painted)."
      }
     },
     "type": "object",
@@ -1523,6 +4257,491 @@
      "answer"
     ],
     "title": "AnswerInput"
+   },
+   "ArchiveCardOut": {
+    "properties": {
+     "academic_year": {
+      "type": "integer",
+      "title": "Academic Year"
+     },
+     "academic_year_label": {
+      "type": "string",
+      "title": "Academic Year Label"
+     },
+     "grade": {
+      "type": "string",
+      "title": "Grade"
+     },
+     "grade_label": {
+      "type": "string",
+      "title": "Grade Label"
+     },
+     "subjects": {
+      "type": "integer",
+      "title": "Subjects"
+     },
+     "lessons_completed": {
+      "type": "integer",
+      "title": "Lessons Completed"
+     },
+     "lessons_ready": {
+      "type": "integer",
+      "title": "Lessons Ready"
+     },
+     "percent": {
+      "type": "integer",
+      "title": "Percent"
+     },
+     "had_activity": {
+      "type": "boolean",
+      "title": "Had Activity"
+     },
+     "archived_at": {
+      "type": "string",
+      "title": "Archived At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "academic_year",
+     "academic_year_label",
+     "grade",
+     "grade_label",
+     "subjects",
+     "lessons_completed",
+     "lessons_ready",
+     "percent",
+     "had_activity",
+     "archived_at"
+    ],
+    "title": "ArchiveCardOut"
+   },
+   "ArchivePlay": {
+    "properties": {
+     "game": {
+      "type": "string",
+      "maxLength": 20,
+      "title": "Game"
+     },
+     "timezone": {
+      "type": "string",
+      "maxLength": 80,
+      "title": "Timezone",
+      "default": "UTC"
+     }
+    },
+    "type": "object",
+    "required": [
+     "game"
+    ],
+    "title": "ArchivePlay"
+   },
+   "ArchivesOut": {
+    "properties": {
+     "visible_years": {
+      "type": "integer",
+      "title": "Visible Years"
+     },
+     "items": {
+      "items": {
+       "$ref": "#/components/schemas/ArchiveCardOut"
+      },
+      "type": "array",
+      "title": "Items"
+     }
+    },
+    "type": "object",
+    "required": [
+     "visible_years",
+     "items"
+    ],
+    "title": "ArchivesOut"
+   },
+   "CalendarInput": {
+    "properties": {
+     "region": {
+      "type": "string",
+      "maxLength": 8,
+      "title": "Region"
+     },
+     "academic_year": {
+      "type": "integer",
+      "maximum": 2100.0,
+      "minimum": 2000.0,
+      "title": "Academic Year"
+     },
+     "school_start_date": {
+      "type": "string",
+      "format": "date",
+      "title": "School Start Date",
+      "description": "Tựu trường."
+     },
+     "opening_date": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Opening Date",
+      "description": "Khai giảng."
+     },
+     "promotion_date": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Promotion Date",
+      "description": "The day grades change; tựu trường by default."
+     },
+     "end_date": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "End Date"
+     },
+     "source": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 200
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Source",
+      "description": "The decision that sets the dates (its title / issuer)."
+     },
+     "decision_number": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 80
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Decision Number",
+      "description": "Số văn bản, e.g. 2368/QĐ-BGDĐT."
+     },
+     "verified": {
+      "type": "boolean",
+      "title": "Verified",
+      "description": "Checked against the decision: grades move up on this date only then.",
+      "default": false
+     },
+     "reason": {
+      "type": "string",
+      "maxLength": 300,
+      "minLength": 5,
+      "title": "Reason",
+      "description": "Why this change is made (kept in the audit)."
+     }
+    },
+    "type": "object",
+    "required": [
+     "region",
+     "academic_year",
+     "school_start_date",
+     "reason"
+    ],
+    "title": "CalendarInput"
+   },
+   "CalendarOut": {
+    "properties": {
+     "region": {
+      "type": "string",
+      "title": "Region"
+     },
+     "years": {
+      "items": {
+       "$ref": "#/components/schemas/CalendarYearOut"
+      },
+      "type": "array",
+      "title": "Years"
+     },
+     "changes": {
+      "items": {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      "type": "array",
+      "title": "Changes"
+     },
+     "alerts": {
+      "items": {
+       "$ref": "#/components/schemas/AlertOut"
+      },
+      "type": "array",
+      "title": "Alerts"
+     }
+    },
+    "type": "object",
+    "required": [
+     "region",
+     "years",
+     "changes",
+     "alerts"
+    ],
+    "title": "CalendarOut"
+   },
+   "CalendarYearOut": {
+    "properties": {
+     "region": {
+      "type": "string",
+      "title": "Region"
+     },
+     "academic_year": {
+      "type": "integer",
+      "title": "Academic Year"
+     },
+     "label": {
+      "type": "string",
+      "title": "Label"
+     },
+     "configured": {
+      "type": "boolean",
+      "title": "Configured"
+     },
+     "school_start_date": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "School Start Date"
+     },
+     "opening_date": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Opening Date"
+     },
+     "promotion_date": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Promotion Date"
+     },
+     "end_date": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "End Date"
+     },
+     "source": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Source"
+     },
+     "decision_number": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Decision Number"
+     },
+     "verified": {
+      "type": "boolean",
+      "title": "Verified"
+     },
+     "verified_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Verified At"
+     },
+     "verified_by": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Verified By"
+     },
+     "updated_by": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Updated By"
+     },
+     "updated_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Updated At"
+     },
+     "expected_start": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Expected Start"
+     }
+    },
+    "type": "object",
+    "required": [
+     "region",
+     "academic_year",
+     "label",
+     "configured",
+     "school_start_date",
+     "opening_date",
+     "promotion_date",
+     "end_date",
+     "source",
+     "decision_number",
+     "verified",
+     "verified_at",
+     "verified_by",
+     "updated_by",
+     "updated_at"
+    ],
+    "title": "CalendarYearOut"
+   },
+   "Celebrated": {
+    "properties": {
+     "ids": {
+      "items": {
+       "type": "integer"
+      },
+      "type": "array",
+      "maxItems": 50,
+      "minItems": 1,
+      "title": "Ids",
+      "description": "The unlocks whose animation was shown."
+     }
+    },
+    "type": "object",
+    "required": [
+     "ids"
+    ],
+    "title": "Celebrated"
+   },
+   "CelebrationOut": {
+    "properties": {
+     "id": {
+      "type": "integer",
+      "title": "Id"
+     },
+     "kind": {
+      "type": "string",
+      "enum": [
+       "promotion",
+       "completed"
+      ],
+      "title": "Kind"
+     },
+     "grade": {
+      "type": "string",
+      "title": "Grade"
+     },
+     "grade_label": {
+      "type": "string",
+      "title": "Grade Label"
+     },
+     "from_grade": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "From Grade"
+     },
+     "academic_year": {
+      "type": "integer",
+      "title": "Academic Year"
+     },
+     "academic_year_label": {
+      "type": "string",
+      "title": "Academic Year Label"
+     },
+     "message": {
+      "type": "string",
+      "title": "Message"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "kind",
+     "grade",
+     "grade_label",
+     "from_grade",
+     "academic_year",
+     "academic_year_label",
+     "message"
+    ],
+    "title": "CelebrationOut"
    },
    "ControlInput": {
     "properties": {
@@ -1543,6 +4762,255 @@
     "type": "object",
     "title": "ControlInput"
    },
+   "CurrentCalendarOut": {
+    "properties": {
+     "region": {
+      "type": "string",
+      "title": "Region"
+     },
+     "region_name": {
+      "type": "string",
+      "title": "Region Name"
+     },
+     "today": {
+      "type": "string",
+      "title": "Today"
+     },
+     "academic_year": {
+      "type": "integer",
+      "title": "Academic Year"
+     },
+     "academic_year_label": {
+      "type": "string",
+      "title": "Academic Year Label"
+     },
+     "verified": {
+      "type": "boolean",
+      "title": "Verified",
+      "description": "The current school year's dates are verified."
+     }
+    },
+    "type": "object",
+    "required": [
+     "region",
+     "region_name",
+     "today",
+     "academic_year",
+     "academic_year_label",
+     "verified"
+    ],
+    "title": "CurrentCalendarOut"
+   },
+   "EducationStateOut": {
+    "properties": {
+     "enrolled": {
+      "type": "boolean",
+      "title": "Enrolled"
+     },
+     "locked": {
+      "type": "boolean",
+      "title": "Locked"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "grade_label": {
+      "type": "string",
+      "title": "Grade Label"
+     },
+     "initial_grade": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Initial Grade"
+     },
+     "academic_year": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Academic Year"
+     },
+     "academic_year_label": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Academic Year Label"
+     },
+     "region": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Region"
+     },
+     "region_name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Region Name"
+     },
+     "status": {
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "studying",
+         "completed",
+         "outside_school"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Status"
+     },
+     "status_label": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Status Label"
+     },
+     "enrollment_date": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Enrollment Date"
+     },
+     "progress": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/YearProgressOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "promotion_pending": {
+      "type": "boolean",
+      "title": "Promotion Pending",
+      "description": "A verified new school year has begun; a stage being played finishes first."
+     },
+     "awaiting_calendar": {
+      "type": "boolean",
+      "title": "Awaiting Calendar",
+      "description": "A new school year has begun but its calendar is not verified: the grade stays."
+     },
+     "next_promotion": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/NextPromotionOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "celebration": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/CelebrationOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "archives": {
+      "type": "integer",
+      "title": "Archives"
+     },
+     "support_note": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Support Note"
+     }
+    },
+    "type": "object",
+    "required": [
+     "enrolled",
+     "locked",
+     "grade",
+     "grade_label",
+     "academic_year",
+     "academic_year_label",
+     "status",
+     "progress",
+     "promotion_pending",
+     "awaiting_calendar",
+     "next_promotion",
+     "celebration",
+     "archives"
+    ],
+    "title": "EducationStateOut"
+   },
+   "ErrorOut": {
+    "properties": {
+     "detail": {
+      "type": "string",
+      "title": "Detail"
+     },
+     "code": {
+      "type": "string",
+      "title": "Code"
+     }
+    },
+    "type": "object",
+    "required": [
+     "detail",
+     "code"
+    ],
+    "title": "ErrorOut"
+   },
    "EventOut": {
     "properties": {
      "result": {
@@ -1562,6 +5030,15 @@
       "type": "boolean",
       "title": "Replayed",
       "default": false
+     },
+     "unlocked": {
+      "items": {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      "type": "array",
+      "title": "Unlocked",
+      "description": "`complete` of a lesson's stage: the chapters and lessons of its subject opened and not celebrated yet (learning_unlocks.py), the ones this stage opened included. Also on a replay."
      }
     },
     "type": "object",
@@ -1593,6 +5070,51 @@
     ],
     "title": "ExtendInput"
    },
+   "GradeCorrection": {
+    "properties": {
+     "reason": {
+      "type": "string",
+      "maxLength": 300,
+      "minLength": 5,
+      "title": "Reason"
+     },
+     "verification": {
+      "type": "string",
+      "maxLength": 120,
+      "minLength": 3,
+      "title": "Verification",
+      "description": "The support ticket or check that verified the request."
+     },
+     "grade": {
+      "type": "string",
+      "enum": [
+       "preschool",
+       "grade1",
+       "grade2",
+       "grade3",
+       "grade4",
+       "grade5",
+       "grade6",
+       "grade7",
+       "grade8",
+       "grade9",
+       "grade10",
+       "grade11",
+       "grade12",
+       "university",
+       "adult"
+      ],
+      "title": "Grade"
+     }
+    },
+    "type": "object",
+    "required": [
+     "reason",
+     "verification",
+     "grade"
+    ],
+    "title": "GradeCorrection"
+   },
    "HTTPValidationError": {
     "properties": {
      "detail": {
@@ -1605,6 +5127,34 @@
     },
     "type": "object",
     "title": "HTTPValidationError"
+   },
+   "HeldTurnEvent": {
+    "properties": {
+     "turn_id": {
+      "type": "string",
+      "maxLength": 32,
+      "minLength": 8,
+      "title": "Turn Id"
+     },
+     "client_event_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{8,64}$",
+      "title": "Client Event Id",
+      "description": "Idempotency key chosen by the app per action; a retry with the same id changes nothing."
+     },
+     "hold_next": {
+      "type": "boolean",
+      "title": "Hold Next",
+      "description": "Falling words: when this turn ends, open no new turn. The app opens new words on its own timer (/next with refill), so a word comes in at the top on time, never in the place of the last one.",
+      "default": false
+     }
+    },
+    "type": "object",
+    "required": [
+     "turn_id",
+     "client_event_id"
+    ],
+    "title": "HeldTurnEvent"
    },
    "ItemResultOut": {
     "properties": {
@@ -1706,6 +5256,27 @@
     ],
     "title": "ItemResultOut"
    },
+   "LessonPlay": {
+    "properties": {
+     "game": {
+      "type": "string",
+      "maxLength": 20,
+      "title": "Game",
+      "description": "One of the games the lesson publishes."
+     },
+     "timezone": {
+      "type": "string",
+      "maxLength": 80,
+      "title": "Timezone",
+      "default": "UTC"
+     }
+    },
+    "type": "object",
+    "required": [
+     "game"
+    ],
+    "title": "LessonPlay"
+   },
    "NextInput": {
     "properties": {
      "count": {
@@ -1714,10 +5285,252 @@
       "minimum": 1.0,
       "title": "Count",
       "default": 1
+     },
+     "refill": {
+      "type": "boolean",
+      "title": "Refill",
+      "description": "Open turns only until `count` are open in all (not `count` more): sending it again never opens an extra turn.",
+      "default": false
      }
     },
     "type": "object",
     "title": "NextInput"
+   },
+   "NextPromotionOut": {
+    "properties": {
+     "academic_year": {
+      "type": "integer",
+      "title": "Academic Year"
+     },
+     "academic_year_label": {
+      "type": "string",
+      "title": "Academic Year Label"
+     },
+     "date": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Date",
+      "description": "The verified promotion day; null until the school year's calendar is verified."
+     },
+     "confirmed": {
+      "type": "boolean",
+      "title": "Confirmed"
+     },
+     "to_grade": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "To Grade"
+     },
+     "to_grade_label": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "To Grade Label"
+     },
+     "completes": {
+      "type": "boolean",
+      "title": "Completes"
+     }
+    },
+    "type": "object",
+    "required": [
+     "academic_year",
+     "academic_year_label",
+     "date",
+     "confirmed",
+     "to_grade",
+     "to_grade_label",
+     "completes"
+    ],
+    "title": "NextPromotionOut"
+   },
+   "NoteInput": {
+    "properties": {
+     "title": {
+      "type": "string",
+      "maxLength": 120,
+      "title": "Title",
+      "default": ""
+     },
+     "body": {
+      "type": "string",
+      "maxLength": 5000,
+      "minLength": 1,
+      "title": "Body"
+     },
+     "subject": {
+      "type": "string",
+      "maxLength": 30,
+      "minLength": 1,
+      "title": "Subject",
+      "description": "A subject of the note's grade (lesson catalog code)."
+     },
+     "lesson_key": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 60
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Lesson Key",
+      "description": "Optional: a lesson of that subject and grade."
+     }
+    },
+    "type": "object",
+    "required": [
+     "body",
+     "subject"
+    ],
+    "title": "NoteInput"
+   },
+   "NoteOut": {
+    "properties": {
+     "id": {
+      "type": "integer",
+      "title": "Id"
+     },
+     "academic_year": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Academic Year"
+     },
+     "academic_year_label": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Academic Year Label"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "grade_label": {
+      "type": "string",
+      "title": "Grade Label"
+     },
+     "subject": {
+      "type": "string",
+      "title": "Subject"
+     },
+     "subject_name": {
+      "type": "string",
+      "title": "Subject Name"
+     },
+     "lesson_key": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Lesson Key"
+     },
+     "lesson_title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Lesson Title"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "body": {
+      "type": "string",
+      "title": "Body"
+     },
+     "created_at": {
+      "type": "string",
+      "title": "Created At"
+     },
+     "updated_at": {
+      "type": "string",
+      "title": "Updated At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "academic_year",
+     "academic_year_label",
+     "grade",
+     "grade_label",
+     "subject",
+     "subject_name",
+     "lesson_key",
+     "lesson_title",
+     "title",
+     "body",
+     "created_at",
+     "updated_at"
+    ],
+    "title": "NoteOut"
+   },
+   "NotesOut": {
+    "properties": {
+     "items": {
+      "items": {
+       "$ref": "#/components/schemas/NoteOut"
+      },
+      "type": "array",
+      "title": "Items"
+     },
+     "total": {
+      "type": "integer",
+      "title": "Total"
+     }
+    },
+    "type": "object",
+    "required": [
+     "items",
+     "total"
+    ],
+    "title": "NotesOut"
    },
    "PracticeCreate": {
     "properties": {
@@ -1774,6 +5587,20 @@
       "title": "Start Paused",
       "description": "Create it paused (the app counts down 3-2-1, then /resume).",
       "default": false
+     },
+     "year": {
+      "anyOf": [
+       {
+        "type": "integer",
+        "maximum": 2100.0,
+        "minimum": 2000.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Year",
+      "description": "Kho lưu trữ: the words of a finished school year; the stage never changes the current year."
      }
     },
     "type": "object",
@@ -1790,10 +5617,14 @@
        "word_shooter",
        "meteor",
        "gate",
-       "bridge"
+       "bridge",
+       "word_builder",
+       "spelling_detective",
+       "sorting",
+       "code_path"
       ],
       "title": "Game",
-      "description": "word_shooter: Bắn từ tiếng Anh; meteor: Bắn thiên thạch Việt → Anh; gate: Chọn đáp án ngữ pháp; bridge: Sắp xếp câu. The content is picked by the backend from the user's progress."
+      "description": "word_shooter: Bắn từ tiếng Anh; meteor: Bắn thiên thạch Việt → Anh; gate: Chọn đáp án ngữ pháp; bridge: Sắp xếp câu; word_builder: Ghép chữ; spelling_detective: Thám tử chính tả; sorting: Phân loại cùng pet; code_path: Lập trình đường đi. The content is picked by the backend."
      },
      "mode": {
       "type": "string",
@@ -1816,6 +5647,75 @@
       "maxLength": 80,
       "title": "Timezone",
       "default": "UTC"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "preschool",
+         "grade1",
+         "grade2",
+         "grade3",
+         "grade4",
+         "grade5",
+         "grade6",
+         "grade7",
+         "grade8",
+         "grade9",
+         "grade10",
+         "grade11",
+         "grade12",
+         "university",
+         "adult"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade",
+      "description": "Deprecated: the learner's current grade is always used; another one is refused (403 grade_locked)."
+     },
+     "level": {
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "basic",
+         "intermediate",
+         "advanced"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Level",
+      "description": "Sinh viên / Người đi làm: the chosen level."
+     },
+     "vocab": {
+      "type": "string",
+      "enum": [
+       "discover",
+       "review"
+      ],
+      "title": "Vocab",
+      "description": "word_shooter / meteor: discover (Khám phá từ mới: only words never shown in this game) or review (Ôn tập: words met before, wrong and due ones first).",
+      "default": "discover"
+     },
+     "topic": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 40
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Topic",
+      "description": "word_shooter / meteor, discover: a topic of the vocabulary bank (GET /vocabulary/progress); none: every topic."
      }
     },
     "type": "object",
@@ -1846,6 +5746,35 @@
      "name"
     ],
     "title": "Ref"
+   },
+   "RegionChange": {
+    "properties": {
+     "reason": {
+      "type": "string",
+      "maxLength": 300,
+      "minLength": 5,
+      "title": "Reason"
+     },
+     "verification": {
+      "type": "string",
+      "maxLength": 120,
+      "minLength": 3,
+      "title": "Verification",
+      "description": "The support ticket or check that verified the request."
+     },
+     "region": {
+      "type": "string",
+      "maxLength": 8,
+      "title": "Region"
+     }
+    },
+    "type": "object",
+    "required": [
+     "reason",
+     "verification",
+     "region"
+    ],
+    "title": "RegionChange"
    },
    "ResultOut": {
     "properties": {
@@ -1940,6 +5869,24 @@
     ],
     "title": "RewardOut"
    },
+   "Selection": {
+    "properties": {
+     "subjects": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "maxItems": 9,
+      "title": "Subjects",
+      "description": "THPT: the elective subjects studied (at most 4)."
+     }
+    },
+    "type": "object",
+    "required": [
+     "subjects"
+    ],
+    "title": "Selection"
+   },
    "SessionCreate": {
     "properties": {
      "lesson_id": {
@@ -2022,7 +5969,8 @@
       "type": "string",
       "enum": [
        "lesson",
-       "review"
+       "review",
+       "archive"
       ],
       "title": "Kind"
      },
@@ -2080,6 +6028,11 @@
      "time_up": {
       "type": "boolean",
       "title": "Time Up"
+     },
+     "timed": {
+      "type": "boolean",
+      "title": "Timed",
+      "default": true
      },
      "hearts": {
       "type": "integer",
@@ -2152,6 +6105,31 @@
      "server_time": {
       "type": "string",
       "title": "Server Time"
+     },
+     "catalog": {
+      "anyOf": [
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Catalog",
+      "description": "Học tập by lesson: the lesson, its grade and game, the other games of the lesson and the next lesson."
+     },
+     "archive_year": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Archive Year",
+      "description": "kind archive: the finished school year reviewed from Kho lưu trữ (its results stay as they were)."
      }
     },
     "type": "object",
@@ -2187,6 +6165,29 @@
      "server_time"
     ],
     "title": "SessionOut"
+   },
+   "SupportInput": {
+    "properties": {
+     "reason": {
+      "type": "string",
+      "maxLength": 300,
+      "minLength": 5,
+      "title": "Reason"
+     },
+     "verification": {
+      "type": "string",
+      "maxLength": 120,
+      "minLength": 3,
+      "title": "Verification",
+      "description": "The support ticket or check that verified the request."
+     }
+    },
+    "type": "object",
+    "required": [
+     "reason",
+     "verification"
+    ],
+    "title": "SupportInput"
    },
    "TurnEvent": {
     "properties": {
@@ -2377,6 +6378,21 @@
       "title": "Correct Answer",
       "description": "Only once the turn is resolved or revealed."
      },
+     "correct_options": {
+      "anyOf": [
+       {
+        "items": {
+         "type": "string"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Correct Options",
+      "description": "Multiple-choice games (Chọn đáp án, Chọn cổng, So sánh), once the turn is resolved or revealed: the ids of the right options, which the app marks in green. Never sent before an answer."
+     },
      "explanation": {
       "anyOf": [
        {
@@ -2393,6 +6409,18 @@
       "title": "Practice Added",
       "default": false
      },
+     "feedback": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Feedback",
+      "description": "Curriculum games: why a wrong answer is wrong (it can be tried again), or what to do next."
+     },
      "word": {
       "anyOf": [
        {
@@ -2403,6 +6431,21 @@
        }
       ],
       "description": "Vocabulary: the English word and its Vietnamese meaning, once the turn is resolved or revealed."
+     },
+     "kept": {
+      "anyOf": [
+       {
+        "items": {
+         "type": "string"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Kept",
+      "description": "Sắp xếp / Ghép cặp, after a wrong answer: the cards in the right place or the right pairs, which the app keeps (the subject gameplays likewise: events, tiles, points, painted pieces, or the right calculation of a step)."
      }
     },
     "type": "object",
@@ -2411,6 +6454,20 @@
      "event"
     ],
     "title": "TurnResultOut"
+   },
+   "TutorialDone": {
+    "properties": {
+     "version": {
+      "type": "integer",
+      "maximum": 1000.0,
+      "minimum": 1.0,
+      "title": "Version",
+      "description": "The guide version the user finished (TUTORIAL_VERSION).",
+      "default": 1
+     }
+    },
+    "type": "object",
+    "title": "TutorialDone"
    },
    "ValidationError": {
     "properties": {
@@ -2480,6 +6537,34 @@
      "vi"
     ],
     "title": "WordOut"
+   },
+   "YearProgressOut": {
+    "properties": {
+     "lessons_ready": {
+      "type": "integer",
+      "title": "Lessons Ready"
+     },
+     "lessons_completed": {
+      "type": "integer",
+      "title": "Lessons Completed"
+     },
+     "lessons_in_progress": {
+      "type": "integer",
+      "title": "Lessons In Progress"
+     },
+     "percent": {
+      "type": "integer",
+      "title": "Percent"
+     }
+    },
+    "type": "object",
+    "required": [
+     "lessons_ready",
+     "lessons_completed",
+     "lessons_in_progress",
+     "percent"
+    ],
+    "title": "YearProgressOut"
    }
   },
   "securitySchemes": {

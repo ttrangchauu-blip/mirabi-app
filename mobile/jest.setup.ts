@@ -36,6 +36,14 @@ jest.mock('expo-camera', () => {
   return { CameraView: (props: any) => require('react').createElement(View, { testID: 'qr-camera', ...props }),
     useCameraPermissions: () => [permission, jest.fn(async () => permission)] };
 });
+// Location is off in tests unless a test says otherwise: the living world goes by the clock.
+jest.mock('expo-location', () => ({
+  Accuracy: { Lowest: 1 },
+  getForegroundPermissionsAsync: jest.fn(async () => ({ granted: false, canAskAgain: false, status: 'denied' })),
+  requestForegroundPermissionsAsync: jest.fn(async () => ({ granted: false, canAskAgain: false, status: 'denied' })),
+  getLastKnownPositionAsync: jest.fn(async () => null),
+  getCurrentPositionAsync: jest.fn(async () => null),
+}));
 jest.mock('expo-clipboard', () => ({ setStringAsync: jest.fn(async () => true) }));
 jest.mock('expo-speech', () => ({ speak: jest.fn(), stop: jest.fn(async () => {}) }));
 

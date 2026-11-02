@@ -17,17 +17,13 @@ from decimal import Decimal, InvalidOperation
 # Kinds, policies and scoring
 # ---------------------------------------------------------------------------------------------------------------
 
-# What a wrong answer does. "retry": the user may correct it (the object keeps moving in Challenge).
-# "reveal": the answer and explanation are shown and the turn ends ("Tiếp tục").
-WRONG_POLICY = {
-    "vocab_typing": "retry",
-    "word_spelling": "retry",
-    "math_input": "retry",
-    "missing_number": "retry",
-    "gate_choice": "reveal",
-    "bridge_order": "reveal",
-    "compare": "reveal",
-}
+# What a wrong answer does. "reveal": the question is over, its answer and explanation stay on screen until "Tiếp theo"
+# (every game answered one question at a time). "retry": the target is still there and the user may correct it, only
+# where targets race each other in real time: the falling words, and Math Battle in Thử thách.
+def wrong_policy(kind: str, mode: str) -> str:
+    return "retry" if kind in TYPED_TARGET_KINDS or (kind == "math_input" and mode == "challenge") else "reveal"
+
+
 # Kinds whose wrong answers cost a heart in Challenge. For moving targets (meteor, monster) only a miss does.
 # In Học tập targets never land, so every wrong answer costs a heart.
 HEART_ON_WRONG = {"gate_choice", "bridge_order", "missing_number", "compare"}
@@ -35,7 +31,8 @@ HEART_ON_WRONG = {"gate_choice", "bridge_order", "missing_number", "compare"}
 MOVING_KINDS = {"vocab_typing", "word_spelling", "math_input"}
 # Falling words answered by typing: a shot hits whichever open target it matches (see learning.answer_event).
 TYPED_TARGET_KINDS = {"vocab_typing", "word_spelling"}
-# Vocabulary turns: vocab_typing = Việt → Anh (recall the English word), word_spelling = Anh → Việt (type the shown word).
+# Vocabulary turns: vocab_typing = Việt → Anh (recall the English word), word_spelling = Anh → Việt (type the shown word;
+# stages created while its meaning was typed instead keep their frozen answers, marked "lang": "vi").
 VOCAB_KINDS = ("vocab_typing", "word_spelling")
 
 GAME_KINDS = {
@@ -67,9 +64,17 @@ def default_variant(game_type: str, variant: str | None) -> str | None:
     return None
 
 
+# The vocabulary games (falling words, Anh → Việt and Việt → Anh), in both modes. Every stage has VOCAB_STAGE_WORDS
+# different words. They fall to the ground; a word that lands unbroken costs one of VOCAB_HEARTS hearts (a wrong answer
+# costs none: it is fixed while the word falls). Out of hearts, the stage ends. The app's guide says the same numbers
+# (mobile learning/tutorials.ts VOCAB_HEARTS, VOCAB_STAGE_WORDS): keep them in step.
+VOCAB_STAGE_WORDS = 15
+VOCAB_HEARTS = 5
+
+
 def hearts_for(game_type: str, mode: str) -> int:
-    """Vocabulary in Học tập: each word waits for the user and nothing costs a heart. Everything else has 3."""
-    return 0 if game_type == "meteor" and mode == "practice" else DEFAULT_SCORING["hearts"]
+    """Vocabulary: VOCAB_HEARTS, lost only by words that land. Everything else has 3."""
+    return VOCAB_HEARTS if game_type == "meteor" else DEFAULT_SCORING["hearts"]
 
 DEFAULT_SCORING = {
     "first_try": 100,
@@ -127,22 +132,34 @@ def normalize_text(value: str) -> str:
     return text.strip(" .!?,;:").strip()
 
 
-def answer_key(turn_id: str, text: str) -> str:
+def normalize_vi(value: str) -> str:
+    """A Vietnamese answer compared without case, spacing or tone marks ("con meo" = "con mèo"): learners type on phones
+    with and without a Vietnamese keyboard. Keep in sync with normalizeAnswer(…, 'vi') in mobile answerKey.ts."""
+    text = normalize_text(value).replace("đ", "d")
+    return "".join(c for c in unicodedata.normalize("NFD", text) if not unicodedata.combining(c))
+
+
+def normalize_for(lang: str | None):
+    return normalize_vi if lang == "vi" else normalize_text
+
+
+def answer_key(turn_id: str, text: str, lang: str | None = None) -> str:
     """What the app compares a typed answer against to shoot as soon as it is right (falling words), without being sent
     the answer: SHA-256 of the turn id and the normalized answer, first 16 hex digits. The backend still checks the
     answer that is sent. Keep in sync with answerKey in mobile/src/learning/answerKey.ts."""
-    return hashlib.sha256(f"{turn_id}|{normalize_text(text)}".encode("utf-8")).hexdigest()[:16]
+    return hashlib.sha256(f"{turn_id}|{normalize_for(lang)(text)}".encode("utf-8")).hexdigest()[:16]
 
 
 class InvalidAnswer(ValueError):
     """Empty or malformed input. It is rejected, never counted as a wrong answer."""
 
 
-def check_text(answer: str, accepted: list[str]) -> bool:
-    given = normalize_text(answer)
+def check_text(answer: str, accepted: list[str], lang: str | None = None) -> bool:
+    norm = normalize_for(lang)
+    given = norm(answer)
     if not given:
         raise InvalidAnswer("empty")
-    return given in {normalize_text(a) for a in accepted}
+    return given in {norm(a) for a in accepted}
 
 
 def check_choice(answer: str, options: list[dict], correct: str) -> bool:
@@ -328,6 +345,24 @@ def _arith(rng: random.Random, op: str, g: dict) -> tuple[Op, int]:
     neg = g.get("allow_negative", False)
     top = g["add_max"]
     lo_mul, hi_mul = g.get("mul_min", 2), g.get("mul_max", 9)
+    # A lesson on one times table ("Bảng nhân 2", "Bảng chia 5"): table × 1…10, and (table × k) : table.
+    table = g.get("table")
+    if table and op == "mul":
+        k = rng.randint(*g.get("table_range", (1, 10)))
+        return Op("mul", Num(table), Num(k)), table * k
+    if table and op == "div":
+        k = rng.randint(*g.get("table_range", (1, 10)))
+        return Op("div", Num(table * k), Num(table)), k
+    if g.get("no_carry") and op in ("add", "sub"):  # cộng, trừ không nhớ: digit by digit, nothing carried or borrowed
+        for _ in range(200):
+            a, b = rng.randint(1, top - 1), rng.randint(1, top - 1)
+            if op == "sub" and a < b:
+                a, b = b, a
+            da, db = f"{a:0{len(str(top))}d}", f"{b:0{len(str(top))}d}"
+            if op == "add" and a + b <= top and all(int(x) + int(y) <= 9 for x, y in zip(da, db)):
+                return Op("add", Num(a), Num(b)), a + b
+            if op == "sub" and a > b and all(int(x) >= int(y) for x, y in zip(da, db)):
+                return Op("sub", Num(a), Num(b)), a - b
     if op == "add":
         a = _rand(rng, 1, top - 1, neg)
         b = _rand(rng, 1, top - abs(a) if not neg else top, neg)
@@ -498,9 +533,13 @@ def gen_missing_number(rng: random.Random, g: dict, op: str) -> dict:
         c = a - b
     elif op == "mul":
         a, b = rng.randint(lo_mul, hi_mul), rng.randint(lo_mul, hi_mul)  # never 0, so the factor is unique
+        if g.get("table"):  # one times table: table × k, the unknown being k (the table stays shown)
+            a, b, slot = g["table"], rng.randint(*g.get("table_range", (1, 10))), 1
         c = a * b
     else:
         b, c = rng.randint(lo_mul, hi_mul), rng.randint(lo_mul, hi_mul)
+        if g.get("table"):  # (table × k) : table = k, the unknown being the dividend
+            b, c, slot = g["table"], rng.randint(*g.get("table_range", (1, 10))), 0
         a = b * c
     unknown = a if slot == 0 else b
     shown, solve = MISSING_TEMPLATES[op][slot]

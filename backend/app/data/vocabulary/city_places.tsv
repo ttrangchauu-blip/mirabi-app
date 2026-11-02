@@ -1,0 +1,26 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic	source	status
+city	city	noun	1	city_places	thành phố		Hanoi is a big city.	Hà Nội là một thành phố lớn.		/ˈsɪti/	mirabi-ai-2026-10	active
+post_office	post office	noun	1	city_places	bưu điện		I sent a letter at the post office.	Tôi gửi một lá thư ở bưu điện.			mirabi-ai-2026-10	active
+cafe	cafe	noun	1	city_places	quán cà phê		Let's meet at the cafe near the park.	Mình gặp nhau ở quán cà phê gần công viên nhé.	coffee shop	/ˈkæfeɪ/	mirabi-ai-2026-10	active
+apartment	apartment	noun	1	city_places	căn hộ chung cư		We live in an apartment on the fifth floor.	Chúng tôi sống trong một căn hộ ở tầng năm.	flat	/əˈpɑːtmənt/	mirabi-ai-2026-10	active
+tower	tower	noun	2	city_places	tòa tháp		You can see the whole city from the tower.	Từ tòa tháp có thể nhìn thấy cả thành phố.		/ˈtaʊə/	mirabi-ai-2026-10	active
+neighbourhood	neighbourhood	noun	2	city_places	khu phố, vùng lân cận		There is a good school in our neighbourhood.	Trong khu phố của chúng tôi có một ngôi trường tốt.	neighborhood	/ˈneɪbəhʊd/	mirabi-ai-2026-10	active
+bus_station	bus station	noun	2	city_places	bến xe	nơi xe khách và xe buýt xuất phát	The coach leaves from the bus station.	Xe khách xuất phát từ bến xe.	coach station		mirabi-ai-2026-10	active
+skyscraper	skyscraper	noun	2	city_places	tòa nhà chọc trời		There are many skyscrapers in Ho Chi Minh City.	Thành phố Hồ Chí Minh có nhiều tòa nhà chọc trời.		/ˈskaɪskreɪpə/	mirabi-ai-2026-10	active
+city_centre	city centre	noun	2	city_places	trung tâm thành phố		The museum is in the city centre.	Bảo tàng ở trung tâm thành phố.	city center|downtown|town centre		mirabi-ai-2026-10	active
+art_gallery	art gallery	noun	2	city_places	phòng trưng bày tranh		We saw beautiful paintings at the art gallery.	Chúng tôi xem những bức tranh đẹp ở phòng trưng bày.	gallery		mirabi-ai-2026-10	active
+crowded	crowded	adjective	2	city_places	đông đúc, chật ních người		The market is very crowded at the weekend.	Chợ rất đông đúc vào cuối tuần.	busy	/ˈkraʊdɪd/	mirabi-ai-2026-10	active
+fountain	fountain	noun	2	city_places	đài phun nước		Children are playing near the fountain.	Trẻ em đang chơi gần đài phun nước.		/ˈfaʊntən/	mirabi-ai-2026-10	active
+factory	factory	noun	2	city_places	nhà máy, xưởng sản xuất		My uncle works in a shoe factory.	Chú tôi làm việc ở một nhà máy giày.		/ˈfæktri/	mirabi-ai-2026-10	active
+office_building	office building	noun	2	city_places	tòa nhà văn phòng		My mum works in a tall office building.	Mẹ tôi làm việc trong một tòa nhà văn phòng cao tầng.			mirabi-ai-2026-10	active
+post_box	post box	noun	2	city_places	hòm thư, thùng thư		Put the letter in the post box.	Bỏ lá thư vào hòm thư nhé.	postbox|mailbox		mirabi-ai-2026-10	active
+night_market	night market	noun	2	city_places	chợ đêm		We ate street food at the night market.	Chúng tôi ăn đồ ăn đường phố ở chợ đêm.			mirabi-ai-2026-10	active
+pedestrian_street	pedestrian street	noun	2	city_places	phố đi bộ		On weekends, cars cannot enter the pedestrian street.	Vào cuối tuần, ô tô không được vào phố đi bộ.	walking street		mirabi-ai-2026-10	active
+suburb	suburb	noun	3	city_places	vùng ngoại ô		They moved to a quiet suburb.	Họ chuyển đến một vùng ngoại ô yên tĩnh.	outskirts	/ˈsʌbɜːb/	mirabi-ai-2026-10	active
+town_hall	town hall	noun	3	city_places	tòa thị chính, trụ sở ủy ban		The town hall is next to the park.	Tòa thị chính nằm cạnh công viên.	city hall		mirabi-ai-2026-10	active
+tourist_attraction	tourist attraction	noun	3	city_places	điểm tham quan du lịch		The Temple of Literature is a famous tourist attraction.	Văn Miếu là một điểm tham quan du lịch nổi tiếng.			mirabi-ai-2026-10	active
+nightlife	nightlife	noun	3	city_places	cuộc sống về đêm, hoạt động giải trí ban đêm		This city is famous for its nightlife.	Thành phố này nổi tiếng về cuộc sống về đêm.		/ˈnaɪtlaɪf/	mirabi-ai-2026-10	active
+industrial_zone	industrial zone	noun	3	city_places	khu công nghiệp		Many factories are in the industrial zone.	Nhiều nhà máy nằm trong khu công nghiệp.	industrial park|industrial estate		mirabi-ai-2026-10	active
+floating_market	floating market	noun	3	city_places	chợ nổi		Cai Rang is a famous floating market in Can Tho.	Cái Răng là một chợ nổi nổi tiếng ở Cần Thơ.			mirabi-ai-2026-10	active
+street_vendor	street vendor	noun	3	city_places	người bán hàng rong		A street vendor sells hot corn on the corner.	Một người bán hàng rong bán ngô nóng ở góc phố.	street seller		mirabi-ai-2026-10	active
+public_space	public space	noun	3	city_places	không gian công cộng		Parks are important public spaces in a city.	Công viên là những không gian công cộng quan trọng trong thành phố.			mirabi-ai-2026-10	active

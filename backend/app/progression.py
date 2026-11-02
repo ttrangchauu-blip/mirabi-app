@@ -11,6 +11,14 @@ EVOLUTION_THRESHOLDS = (0, 300, 800, 1500, 2400, 3500, 5000)
 HATCH_EXP = EVOLUTION_THRESHOLDS[1]
 CUSTOM_TASK_EXP = 5
 SYSTEM_TASK_EXP = 10
+# The most one task can earn, whatever its priority; the shared task/learning daily cap (60) still applies.
+MAX_TASK_EXP = 15
+TASK_PRIORITY_EXP = {"low": CUSTOM_TASK_EXP, "medium": CUSTOM_TASK_EXP, "high": 8, "urgent": 10}
+
+
+def task_exp(priority: str | None) -> int:
+    """EXP for completing one occurrence of a user's own task. Older tasks are "medium": the original 5 EXP."""
+    return min(MAX_TASK_EXP, TASK_PRIORITY_EXP.get(priority or "medium", CUSTOM_TASK_EXP))
 STUDY_BLOCK_SECONDS = 5 * 60
 STUDY_EXP_PER_BLOCK = 2
 
@@ -43,7 +51,7 @@ def record_level_ups(db: Session, user: User, previous_level: int, level: int, a
         event = "pet_hatched" if reached == 1 else "pet_evolved"
         title = None if reached == 1 else f"{user.pet_name or 'Pet'} đạt cấp {reached}"
         record_event(db, user, event, f"{'hatch' if reached == 1 else 'evolution'}:{user.pet}:{reached}",
-                     at=at, level=reached, title=title)
+                     at=at, level=reached, title=title, before_level=None if reached == 1 else reached - 1)
 
 
 def hatch(user: User, db: Session, progress: PetEvolution, at: datetime) -> None:

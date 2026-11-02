@@ -1,26 +1,22 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import Svg, { Circle, Defs, Ellipse, G, Path, RadialGradient, Rect, Stop } from 'react-native-svg';
+import Svg, { Circle, Ellipse, G, Path, Rect } from 'react-native-svg';
 import { PetArt, restartFromZero } from '../../components/PetArt';
 import { hasSprite, WALK_CYCLE_MS } from '../../petSprites';
 import { DayPeriod } from '../../components/useDayPeriod';
-import { ArcPoint, Light, lightAt, moonAt, sunAt, useDaylight } from '../../components/daylight';
+import { Light, lightAt, sunAt, useDaylight } from '../../components/daylight';
+import { castBy, type Cast, Glow, SkyBodies, Stars, wave as skyWave } from '../../world/sky';
+import { moodOf, shade } from '../../world/atmosphere';
+import { Rain } from '../../world/living';
+import { useWeather } from '../../world/weather';
 import { useReduceMotion } from '../../components/useReduceMotion';
 
 const HEIGHT = 140;
 const PET_SIZE = 76;
 const PET_X = 0.24;  // where the pet's centre sits, as a share of the scene width
 const PATH_TOP = 104;
-/** A sine-topped band over a strip two scene-widths long. Whole periods per width make the second half repeat the
- * first exactly, so scrolling by one width loops without a jump. It runs past both ends so the SVG clips it cleanly. */
-function wave(width: number, base: number, amp: number, periods: number, bottom = HEIGHT, phase = 0) {
-  const y = (x: number) => (base + amp * Math.sin((x / width) * periods * 2 * Math.PI + phase)).toFixed(1);
-  const end = width * 2 + 4;
-  let d = `M-4 ${bottom}`;
-  for (let x = -4; x < end; x += 6) d += ` L${x} ${y(x)}`;
-  return `${d} L${end} ${y(end)} L${end} ${bottom} Z`;
-}
+const wave = (width: number, base: number, amp: number, periods: number, bottom = HEIGHT, phase = 0) => skyWave(width, base, amp, periods, bottom, phase);
 
 const PERIOD_LABEL: Record<DayPeriod, string> = { morning: 'buổi sáng', noon: 'buổi trưa', afternoon: 'buổi chiều', night: 'buổi tối' };
 /** The sun and moon sit on this line at rise and set. The far hills always cover the sky below HORIZON_CLIP, so the
@@ -35,16 +31,6 @@ function useSame<T>(value: T): T {
   if (JSON.stringify(ref.current) !== JSON.stringify(value)) ref.current = value;
   return ref.current;
 }
-
-const round = (value: number, step: number) => Math.round(value / step) * step;
-/** Shadows fall away from the sun: long and to one side when it is low, short and under things at noon, and gone
- * (just a faint soft patch) while it is below the horizon. */
-function castBy(sun: ArcPoint) {
-  const up = Math.max(0, Math.min(1, sun.altitude / 0.2));
-  const low = 1 - Math.max(0, sun.altitude);
-  return { dx: round(-(sun.x - 0.5) * 16 * low * up, 0.5), stretch: round(1 + 0.4 * low * up, 0.05) };
-}
-type Cast = ReturnType<typeof castBy>;
 
 /** Each scrolling layer is a single SVG two widths long (scenery drawn twice), so there is no seam between copies. */
 function Strip({ width, children }: { width: number; children: (offset: number) => React.ReactNode }) {
@@ -104,54 +90,6 @@ const Ground = React.memo(function Ground({ width, c, cast }: { width: number; c
   </Svg>;
 });
 
-/** Stars stay put in the sky (they are far away); they come out at dusk and fade as the sky gets light. */
-const Stars = React.memo(function Stars({ width, opacity }: { width: number; opacity: number }) {
-  const stars = [[0.06, 14, 1.2], [0.14, 34, 0.8], [0.27, 10, 1], [0.36, 28, 1.4], [0.47, 16, 0.8], [0.55, 40, 1],
-    [0.63, 8, 1.2], [0.71, 30, 0.8], [0.93, 44, 1], [0.97, 18, 0.8]];
-  return <Svg width={width} height={HEIGHT} style={[StyleSheet.absoluteFill, { opacity }]} testID="walk-stars">
-    {stars.map(([f, y, r]) => <Circle key={f} cx={width * f} cy={y} r={r} fill="#FFFFFF" opacity={0.55 + r * 0.25} />)}
-  </Svg>;
-});
-
-/** A soft light that fades out to its edge. */
-function Glow({ id, color, opacity = 1, cx, cy, rx, ry }: { id: string; color: string; opacity?: number; cx: number; cy: number; rx: number; ry: number }) {
-  return <>
-    <Defs><RadialGradient id={id} cx="50%" cy="50%" r="50%"><Stop offset="0" stopColor={color} stopOpacity={opacity} /><Stop offset="1" stopColor={color} stopOpacity={0} /></RadialGradient></Defs>
-    <Ellipse cx={cx} cy={cy} rx={rx} ry={ry} fill={`url(#${id})`} />
-  </>;
-}
-
-const BODY = 72; // the sun's or moon's square, glow included
-/** Below this altitude a body is well under the clip line, so it is not drawn at all. */
-const SET = -0.45;
-const bodyPlace = (width: number, at: ArcPoint) => ({ transform: [
-  { translateX: round(width * (0.07 + 0.86 * at.x) - BODY / 2, 0.1) },
-  { translateY: round(HORIZON_Y - at.altitude * (HORIZON_Y - ZENITH_Y) - BODY / 2, 0.1) },
-] });
-
-/** The sun and moon on their arcs, with a warm band of light on the horizon around the sun while it is low. Clipped
- * just under the horizon, so they rise and set behind the hills. A soft glow only: never bright enough to glare. */
-function SkyBodies({ width, hours, c }: { width: number; hours: number; c: Light }) {
-  const sun = sunAt(hours);
-  const moon = moonAt(hours);
-  const dawnGlow = round(Math.max(0, 1 - Math.abs(sun.altitude) / 0.45) * 0.6, 0.01);
-  return <View pointerEvents="none" style={styles.skyBodies}>
-    {dawnGlow > 0 ? <Svg width={width} height={HORIZON_CLIP} style={StyleSheet.absoluteFill}>
-      <Glow id="walk-horizon" color={c.horizon} opacity={dawnGlow} cx={width * (0.07 + 0.86 * sun.x)} cy={HORIZON_Y} rx={width * 0.5} ry={36} />
-    </Svg> : null}
-    {c.moonOpacity > 0 && moon.altitude > SET ? <Svg width={BODY} height={BODY} viewBox={`${-BODY / 2} ${-BODY / 2} ${BODY} ${BODY}`}
-      style={[styles.body, { opacity: c.moonOpacity }, bodyPlace(width, moon)]} testID="walk-moon">
-      <Glow id="walk-moon-glow" color={c.moon} opacity={0.35} cx={0} cy={0} rx={26} ry={26} />
-      <Path d="M4 -12.4 A13 13 0 1 0 4 12.4 A16 16 0 0 1 4 -12.4 Z" fill={c.moon} />
-    </Svg> : null}
-    {sun.altitude > SET ? <Svg width={BODY} height={BODY} viewBox={`${-BODY / 2} ${-BODY / 2} ${BODY} ${BODY}`}
-      style={[styles.body, bodyPlace(width, sun)]} testID="walk-sun">
-      <Glow id="walk-sun-glow" color={c.sunGlow} opacity={0.5} cx={0} cy={0} rx={BODY / 2} ry={BODY / 2} />
-      <Circle cx={0} cy={0} r={12} fill={c.sun} />
-    </Svg> : null}
-  </View>;
-}
-
 /** Everything behind the pet. A single layer whose colours and lights follow the clock: nothing is swapped or
  * remounted as the day goes on, so the scrolling (and the clouds) carry on undisturbed. */
 function Scenery({ c, hours, cast, width, clouds, hills, ground }: {
@@ -160,8 +98,8 @@ function Scenery({ c, hours, cast, width, clouds, hills, ground }: {
   return <View pointerEvents="none" style={StyleSheet.absoluteFill}>
     <LinearGradient colors={c.sky} style={StyleSheet.absoluteFill} />
     {width ? <>
-      {c.stars > 0 ? <Stars width={width} opacity={c.stars} /> : null}
-      <SkyBodies width={width} hours={hours} c={c} />
+      {c.stars > 0 ? <Stars width={width} height={HEIGHT} opacity={c.stars} testID="walk-stars" /> : null}
+      <SkyBodies width={width} hours={hours} c={c} horizon={HORIZON_Y} zenith={ZENITH_Y} clip={HORIZON_CLIP} />
       <Scroller width={width} progress={clouds}><Clouds width={width} c={c} /></Scroller>
       <Scroller width={width} progress={hills}><FarHills width={width} c={c} /></Scroller>
       <Scroller width={width} progress={ground}><Ground width={width} c={c} cast={cast} /></Scroller>
@@ -191,7 +129,9 @@ const CLOUDS_MS = 70000;
 export function WalkLandscape({ pet, level, now }: { pet: string; level: number; /** A clock for tests. */ now?: () => Date }) {
   const reduceMotion = useReduceMotion();
   const { hours, period } = useDaylight({ now, smooth: !reduceMotion });
-  const c = useSame(lightAt(hours));
+  const { reading } = useWeather();
+  const mood = useMemo(() => moodOf(reading), [reading]);
+  const c = useSame(shade(lightAt(hours), mood));
   const cast = useSame(castBy(sunAt(hours)));
   const drawnGait = hasSprite(pet, level, 'walk');
   const [width, setWidth] = useState(0);
@@ -235,6 +175,7 @@ export function WalkLandscape({ pet, level, now }: { pet: string; level: number;
       <Glow id="pet-light" color="#FFF0C4" opacity={c.petLight} cx={70} cy={24} rx={70} ry={24} />
     </Svg> : null}
     {width ? <>
+      {mood.rain > 0 ? <Rain width={width} height={HEIGHT} strength={mood.rain} wind={mood.wind} ground={0.74} /> : null}
       <Animated.View style={[styles.traveler, { transform: [{ translateX: x }] }]} pointerEvents="none">
         <View style={[styles.cast, { opacity: c.shadow, transform: [{ translateX: cast.dx }, { scaleX: cast.stretch }] }]}>
           <Animated.View style={[styles.shadow, { transform: [{ scaleX: shadow }] }]} />
@@ -252,8 +193,6 @@ export function WalkLandscape({ pet, level, now }: { pet: string; level: number;
 
 const styles = StyleSheet.create({
   scene: { height: HEIGHT, width: '100%', borderRadius: 22, overflow: 'hidden', marginBottom: 12 },
-  skyBodies: { position: 'absolute', left: 0, right: 0, top: 0, height: HORIZON_CLIP, overflow: 'hidden' },
-  body: { position: 'absolute', left: 0, top: 0 },
   petLight: { position: 'absolute', bottom: HEIGHT - PATH_TOP - 30 },
   traveler: { position: 'absolute', left: 0, bottom: HEIGHT - PATH_TOP - 16, width: PET_SIZE, alignItems: 'center', justifyContent: 'flex-end' },
   cast: { position: 'absolute', bottom: 2 },

@@ -31,7 +31,7 @@ loan	loan	noun	1	money	khoản vay	tiền vay, thường từ ngân hàng, phả
 savings	savings	noun	1	money	tiền tiết kiệm	số tiền đã để dành được	She used her savings to buy a laptop.	Cô ấy dùng tiền tiết kiệm để mua máy tính xách tay.		/ˈseɪvɪŋz/	mirabi-ai-2026-10	active
 afford	afford	verb	1	money	có đủ tiền (để mua, làm gì)	thường dùng với can/can't	We can't afford a new car.	Chúng tôi không đủ tiền mua xe mới.		/əˈfɔːd/	mirabi-ai-2026-10	active
 i_cant_afford_it	I can't afford it	phrase	1	money	tôi không đủ tiền mua	nói khi thứ gì đó quá đắt so với túi tiền	I love this bag, but I can't afford it.	Tôi rất thích cái túi này nhưng tôi không đủ tiền mua.			mirabi-ai-2026-10	active
-cash_machine	cash machine	noun	1	money	máy rút tiền (ATM)	máy ngoài đường hoặc ở ngân hàng để rút tiền mặt	Is there a cash machine near here?	Gần đây có máy rút tiền không?	cashpoint		mirabi-ai-2026-10	active
+cash_machine	cash machine	noun	1	money	máy rút tiền (ATM)	máy ngoài đường hoặc ở ngân hàng để rút tiền mặt	Is there a cash machine near here?	Gần đây có máy rút tiền không?	cash machine|cashpoint|ATM		mirabi-ai-2026-10	active
 budget	budget	noun	2	money	ngân sách	số tiền dự định chi cho một việc trong thời gian nhất định	Our budget for the trip is five million dong.	Ngân sách cho chuyến đi của chúng tôi là năm triệu đồng.		/ˈbʌdʒɪt/	mirabi-ai-2026-10	active
 banknote	banknote	noun	2	money	tiền giấy, tờ tiền	tiền bằng giấy hoặc polymer, khác với tiền xu	He paid with a new banknote.	Anh ấy trả bằng một tờ tiền mới.	note|bill	/ˈbæŋknəʊt/	mirabi-ai-2026-10	active
 penny	penny	noun	2	money	đồng xu penny	tiền xu nhỏ của Anh, 100 penny bằng 1 bảng	I found a penny on the street.	Tôi nhặt được một đồng penny trên đường.		/ˈpeni/	mirabi-ai-2026-10	active
@@ -75,7 +75,7 @@ wealthy	wealthy	adjective	2	money	giàu có	trang trọng hơn rich, có nhiều
 broke	broke	adjective	2	money	cháy túi, hết sạch tiền	khẩu ngữ, khi bạn không còn đồng nào	I can't go out tonight, I'm broke.	Tối nay tôi không đi chơi được, tôi cháy túi rồi.		/brəʊk/	mirabi-ai-2026-10	active
 financial	financial	adjective	2	money	(thuộc về) tài chính	liên quan đến tiền bạc, ngân hàng	The company has financial problems.	Công ty đang gặp vấn đề tài chính.		/faɪˈnænʃl/	mirabi-ai-2026-10	active
 currency	currency	noun	2	money	tiền tệ	loại tiền của một quốc gia	The currency of Japan is the yen.	Tiền tệ của Nhật Bản là đồng yên.		/ˈkʌrənsi/	mirabi-ai-2026-10	active
-wealth	wealth	noun	2	money	sự giàu có, của cải	tổng số tiền và tài sản của ai đó	He made his wealth from hotels.	Ông ấy làm giàu từ khách sạn.		/welθ/	mirabi-ai-2026-10	active
+wealth	wealth	noun	2	money	sự giàu có, của cải	tổng số tiền và tài sản của ai đó	His wealth came from his hotels.	Sự giàu có của ông ấy đến từ các khách sạn.		/welθ/	mirabi-ai-2026-10	active
 investment	investment	noun	2	money	khoản đầu tư, sự đầu tư	tiền bỏ ra với mong muốn có lời	Buying land is a good investment.	Mua đất là một khoản đầu tư tốt.		/ɪnˈvestmənt/	mirabi-ai-2026-10	active
 expense	expense	noun	2	money	khoản chi, chi phí	tiền phải chi cho một việc	Rent is my biggest expense.	Tiền thuê nhà là khoản chi lớn nhất của tôi.		/ɪkˈspens/	mirabi-ai-2026-10	active
 scam	scam	noun	2	money	trò lừa đảo (lấy tiền)	mánh khóe lừa người khác để chiếm tiền	Don't click that link, it's a scam.	Đừng bấm vào đường link đó, đó là lừa đảo.		/skæm/	mirabi-ai-2026-10	active

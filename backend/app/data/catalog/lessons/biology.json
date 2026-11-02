@@ -1,0 +1,954 @@
+{
+  "subject": "biology",
+  "version": 1,
+  "organization": "topic",
+  "source_note": "Theo yêu cầu cần đạt môn Sinh học lớp 10–12 (CT GDPT 2018); tổ chức theo chủ đề, không theo mục lục bộ sách nào. Câu hỏi, số liệu và lời giải do Mirabi biên soạn và tự tính lại.",
+  "chapters": [
+    {"key": "sh10.gioi_thieu", "grade": 10, "order": 1, "title": "Giới thiệu chung về sinh học và các cấp độ tổ chức sống",
+     "lessons": [
+       {"key": "sh10.gioi_thieu_mon", "order": 1, "title": "Sinh học, ngành nghề và phát triển bền vững",
+        "description": "Đối tượng, mục tiêu của môn Sinh học, các ngành nghề liên quan và vai trò với phát triển bền vững.", "status": "planned"},
+       {"key": "sh10.phuong_phap_nghien_cuu", "order": 2, "title": "Phương pháp nghiên cứu và học tập môn Sinh học",
+        "description": "Phương pháp quan sát, làm việc trong phòng thí nghiệm, thực nghiệm khoa học và tin sinh học.", "status": "planned"},
+       {"key": "sh10.cap_do_to_chuc", "order": 3, "title": "Các cấp độ tổ chức của thế giới sống",
+        "description": "Cấp độ tổ chức sống từ tế bào đến sinh quyển và đặc điểm chung của chúng.", "status": "planned"}
+     ]},
+    {"key": "sh10.te_bao", "grade": 10, "order": 2, "title": "Thành phần hoá học và cấu trúc của tế bào",
+     "lessons": [
+       {"key": "sh10.hoc_thuyet_te_bao", "order": 1, "title": "Học thuyết tế bào",
+        "description": "Nội dung học thuyết tế bào và tế bào là đơn vị cấu trúc, chức năng của cơ thể sống.", "status": "planned"},
+       {"key": "sh10.nguyen_to_nuoc", "order": 2, "title": "Các nguyên tố hoá học và nước trong tế bào",
+        "description": "Nguyên tố đa lượng, vi lượng; cấu trúc và vai trò sinh học của nước.", "status": "planned"},
+       {"key": "sh10.phan_tu_sinh_hoc", "order": 3, "title": "Các phân tử sinh học",
+        "description": "Carbohydrate, lipid, protein, nucleic acid: cấu tạo và chức năng.", "status": "planned"},
+       {"key": "sh10.te_bao_nhan_so", "order": 4, "title": "Tế bào nhân sơ",
+        "description": "Đặc điểm và cấu tạo của tế bào nhân sơ; nhận biết sinh vật nhân sơ và nhân thực.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Sinh học 10; các ví dụ sinh vật là những ví dụ điển hình."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Nêu được đặc điểm chung của tế bào nhân sơ",
+          "Mô tả được các thành phần cấu tạo của tế bào vi khuẩn",
+          "Phân biệt được sinh vật nhân sơ với sinh vật nhân thực"
+        ],
+        "summary": [
+          "Tế bào nhân sơ có kích thước nhỏ, chưa có nhân hoàn chỉnh: DNA nằm ở vùng nhân, không có màng bao bọc.",
+          "Tế bào chất của tế bào nhân sơ không có hệ thống nội màng và không có bào quan có màng; chỉ có ribosome.",
+          "Tế bào vi khuẩn gồm thành tế bào (peptidoglycan), màng sinh chất, tế bào chất, vùng nhân; có thể có vỏ nhầy, plasmid, lông và roi.",
+          "Sinh vật nhân sơ gồm vi khuẩn và vi khuẩn cổ. Nấm, động vật, thực vật và nguyên sinh vật đều là sinh vật nhân thực."
+        ],
+        "examples": [
+          {"title": "Nhỏ mà lợi thế", "lines": [
+            "Kích thước nhỏ làm tỉ lệ S/V lớn: trao đổi chất với môi trường nhanh.",
+            "Vì thế vi khuẩn sinh trưởng và sinh sản rất nhanh, có loài phân chia khoảng 20 phút một lần trong điều kiện thuận lợi."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "sorting", "title": "Nhân sơ hay nhân thực?",
+           "set": {"title": "Sinh vật này có tế bào nhân sơ hay tế bào nhân thực?",
+            "groups": [
+              {"id": "nhan_so", "label": "Sinh vật nhân sơ", "icon": "🦠"},
+              {"id": "nhan_thuc", "label": "Sinh vật nhân thực", "icon": "🧫"}
+            ],
+            "cards": [
+              {"key": "e_coli", "text": "Vi khuẩn E. coli trong ruột người", "picture": "🦠", "group": "nhan_so",
+               "explanation": "E. coli là vi khuẩn: DNA nằm ở vùng nhân không có màng bao bọc."},
+              {"key": "vk_lam", "text": "Vi khuẩn lam", "picture": "🟢", "group": "nhan_so",
+               "explanation": "Vi khuẩn lam quang hợp được nhưng không có lục lạp; chúng là vi khuẩn, tức sinh vật nhân sơ."},
+              {"key": "vk_lactic", "text": "Vi khuẩn lactic làm sữa chua", "picture": "🥛", "group": "nhan_so",
+               "explanation": "Vi khuẩn lactic là vi khuẩn: tế bào nhân sơ."},
+              {"key": "vk_lao", "text": "Vi khuẩn lao", "picture": "🫁", "group": "nhan_so",
+               "explanation": "Vi khuẩn gây bệnh lao là sinh vật nhân sơ; bệnh được chữa bằng kháng sinh."},
+              {"key": "vk_co", "text": "Vi khuẩn cổ sống ở suối nước nóng", "picture": "♨️", "group": "nhan_so",
+               "explanation": "Vi khuẩn cổ (Archaea) cũng không có nhân hoàn chỉnh: sinh vật nhân sơ."},
+              {"key": "nam_men", "text": "Nấm men làm bánh mì", "picture": "🍞", "group": "nhan_thuc",
+               "explanation": "Nấm men là nấm đơn bào: tế bào có nhân với màng nhân, có ti thể."},
+              {"key": "trung_giay", "text": "Trùng giày", "picture": "🦶", "group": "nhan_thuc",
+               "explanation": "Trùng giày là nguyên sinh vật đơn bào, tế bào có nhân hoàn chỉnh: nhân thực."},
+              {"key": "amoeba", "text": "Trùng biến hình (amoeba)", "picture": "🫧", "group": "nhan_thuc",
+               "explanation": "Amoeba là nguyên sinh vật: đơn bào nhưng nhân thực."},
+              {"key": "tao_luc", "text": "Tảo lục đơn bào Chlorella", "picture": "🌿", "group": "nhan_thuc",
+               "explanation": "Chlorella có nhân và lục lạp có màng: sinh vật nhân thực."},
+              {"key": "nam_rom", "text": "Nấm rơm", "picture": "🍄", "group": "nhan_thuc",
+               "explanation": "Nấm rơm là nấm đa bào, tế bào có nhân hoàn chỉnh."},
+              {"key": "cay_lua", "text": "Cây lúa", "picture": "🌾", "group": "nhan_thuc",
+               "explanation": "Thực vật có tế bào nhân thực với nhân, lục lạp, ti thể."}
+            ]}}
+        ]},
+       {"key": "sh10.te_bao_nhan_thuc", "order": 5, "title": "Tế bào nhân thực",
+        "description": "Cấu tạo và chức năng của nhân, các bào quan, màng sinh chất và thành tế bào.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Sinh học 10; mỗi chức năng chỉ khớp với một bào quan trong cùng câu."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Nêu được cấu tạo và chức năng của nhân và các bào quan chính",
+          "Liên hệ cấu tạo của bào quan với chức năng của nó",
+          "So sánh tế bào thực vật với tế bào động vật"
+        ],
+        "summary": [
+          "Tế bào nhân thực có nhân hoàn chỉnh (màng kép bao bọc), hệ thống nội màng và các bào quan có màng.",
+          "Nhân chứa DNA, điều khiển hoạt động của tế bào. Ribosome (không có màng) tổng hợp protein.",
+          "Ti thể (hai lớp màng) là nơi hô hấp tế bào tạo ATP; lục lạp (hai lớp màng, chỉ ở tế bào quang hợp) là nơi quang hợp.",
+          "Lưới nội chất hạt tổng hợp protein tiết, lưới nội chất trơn tổng hợp lipid và khử độc; bộ máy Golgi chế biến, đóng gói, phân phối sản phẩm; lysosome phân giải chất.",
+          "Tế bào thực vật có thành cellulose, lục lạp, không bào trung tâm lớn; tế bào nấm có thành chitin."
+        ],
+        "examples": [
+          {"title": "Đường đi của một protein tiết", "lines": [
+            "Ribosome trên lưới nội chất hạt tổng hợp protein → túi vận chuyển → bộ máy Golgi chế biến, đóng gói → túi tiết → xuất ra ngoài tế bào.",
+            "Tế bào tuyến tuỵ tiết nhiều enzyme nên có nhiều lưới nội chất hạt và bộ máy Golgi phát triển."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "match", "title": "Ghép bào quan với chức năng",
+           "tasks": [
+             {"key": "bao_quan_chinh", "prompt": "Ghép mỗi thành phần của tế bào nhân thực với chức năng chính của nó.",
+              "pairs": [
+                ["Ti thể", "Hô hấp tế bào, tạo ATP"],
+                ["Lục lạp", "Quang hợp"],
+                ["Ribosome", "Tổng hợp protein"],
+                ["Bộ máy Golgi", "Chế biến, đóng gói, phân phối sản phẩm"],
+                ["Nhân", "Chứa DNA, điều khiển hoạt động tế bào"]
+              ],
+              "explanation": "Ti thể là nhà máy năng lượng, lục lạp chuyển quang năng thành hoá năng, ribosome dịch mã, Golgi là trạm đóng gói, nhân là trung tâm điều khiển.",
+              "left_label": "Bào quan", "right_label": "Chức năng"},
+             {"key": "he_noi_mang", "prompt": "Ghép mỗi thành phần của hệ thống nội màng và không bào với chức năng của nó.",
+              "pairs": [
+                ["Lưới nội chất hạt", "Tổng hợp protein tiết và protein màng"],
+                ["Lưới nội chất trơn", "Tổng hợp lipid, khử độc"],
+                ["Lysosome", "Phân giải chất và bào quan già hỏng"],
+                ["Không bào trung tâm", "Chứa nước, chất dự trữ, tạo áp suất trương"]
+              ],
+              "explanation": "Lưới nội chất hạt có ribosome bám nên tổng hợp protein; lưới trơn không có ribosome; lysosome chứa enzyme thuỷ phân; không bào lớn ở tế bào thực vật."},
+             {"key": "cau_tao", "prompt": "Ghép mỗi cấu trúc với thành phần cấu tạo chủ yếu của nó.",
+              "pairs": [
+                ["Màng sinh chất", "Lớp kép phospholipid xen protein"],
+                ["Thành tế bào thực vật", "Cellulose"],
+                ["Thành tế bào nấm", "Chitin"],
+                ["Khung xương tế bào", "Vi ống, vi sợi, sợi trung gian"]
+              ],
+              "explanation": "Màng sinh chất có cấu trúc khảm động; thành tế bào thực vật và nấm khác nhau về chất cấu tạo; khung xương giúp tế bào giữ hình dạng và vận chuyển nội bào."},
+             {"key": "so_lop_mang", "prompt": "Ghép mỗi bào quan với số lớp màng bao bọc nó.",
+              "pairs": [["Ti thể", "Hai lớp màng"], ["Lysosome", "Một lớp màng"], ["Ribosome", "Không có màng"]],
+              "explanation": "Ti thể (như lục lạp) có màng kép; lysosome có một lớp màng; ribosome gồm rRNA và protein, không có màng nên có cả ở tế bào nhân sơ."}
+           ]}
+        ]}
+     ]},
+    {"key": "sh10.chuyen_hoa", "grade": 10, "order": 3, "title": "Trao đổi chất và chuyển hoá năng lượng ở tế bào",
+     "lessons": [
+       {"key": "sh10.van_chuyen_qua_mang", "order": 1, "title": "Trao đổi chất qua màng sinh chất",
+        "description": "Vận chuyển thụ động, vận chuyển chủ động, nhập bào, xuất bào và hiện tượng co, phản co nguyên sinh.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Sinh học 10; các hiện tượng là kết quả thí nghiệm kinh điển."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Phân biệt vận chuyển thụ động và vận chuyển chủ động",
+          "Dự đoán sự trao đổi nước của tế bào trong môi trường ưu trương, nhược trương, đẳng trương",
+          "Giải thích hiện tượng co nguyên sinh và phản co nguyên sinh"
+        ],
+        "summary": [
+          "Vận chuyển thụ động đi theo chiều gradient nồng độ, không tiêu tốn ATP: khuếch tán qua lớp phospholipid, qua kênh protein; nước thẩm thấu qua kênh aquaporin.",
+          "Vận chuyển chủ động đưa chất ngược chiều gradient nồng độ, cần protein vận chuyển và ATP (ví dụ bơm Na⁺–K⁺).",
+          "Môi trường ưu trương: tế bào mất nước. Nhược trương: tế bào hút nước. Đẳng trương: lượng nước vào bằng lượng nước ra.",
+          "Tế bào thực vật trong dung dịch ưu trương bị co nguyên sinh (màng sinh chất tách khỏi thành); chuyển sang nước cất thì phản co nguyên sinh."
+        ],
+        "examples": [
+          {"title": "Rau muống chẻ cong", "lines": [
+            "Ngâm cọng rau muống chẻ vào nước: tế bào ở phía bị chẻ hút nước, trương lên nhiều hơn phía có lớp biểu bì.",
+            "Hai bên trương không đều nên cọng rau cong ra ngoài."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "choice", "style": "predict", "title": "Tế bào sẽ ra sao?",
+           "tasks": [
+             {"key": "hong_cau_nuoc", "question": "Cho tế bào hồng cầu người vào nước cất. Sau một thời gian, dự đoán điều gì xảy ra.",
+              "options": [
+                {"text": "Hồng cầu trương lên rồi vỡ", "ok": true, "why": "Nước cất là môi trường nhược trương: nước thẩm thấu vào tế bào; hồng cầu không có thành tế bào nên bị vỡ."},
+                {"text": "Hồng cầu teo lại", "ok": false, "why": "Teo lại xảy ra trong môi trường ưu trương, như dung dịch muối đậm đặc."},
+                {"text": "Hồng cầu giữ nguyên hình dạng", "ok": false, "why": "Chỉ trong môi trường đẳng trương (như nước muối sinh lí 0,9 %) hồng cầu mới giữ nguyên."}
+              ],
+              "explanation": "Nước đi từ nơi thế nước cao (nhược trương) đến nơi thế nước thấp (ưu trương)."},
+             {"key": "hong_cau_muoi", "question": "Cho tế bào hồng cầu vào dung dịch NaCl đậm đặc (ưu trương). Dự đoán điều gì xảy ra.",
+              "options": [
+                {"text": "Hồng cầu mất nước và teo nhăn lại", "ok": true, "why": "Nồng độ chất tan bên ngoài cao hơn bên trong nên nước đi ra khỏi tế bào."},
+                {"text": "Hồng cầu trương lên và vỡ", "ok": false, "why": "Đó là hiện tượng trong môi trường nhược trương như nước cất."},
+                {"text": "Muối đi vào làm hồng cầu to ra", "ok": false, "why": "Màng sinh chất cho nước đi qua nhanh hơn nhiều so với ion; nước đi ra trước nên tế bào teo lại."}
+              ],
+              "explanation": "Trong môi trường ưu trương, tế bào mất nước."},
+             {"key": "co_nguyen_sinh", "question": "Nhỏ dung dịch muối ưu trương lên tế bào biểu bì lá thài lài tía và quan sát dưới kính hiển vi. Dự đoán hiện tượng.",
+              "options": [
+                {"text": "Màng sinh chất co lại, tách khỏi thành tế bào", "ok": true, "why": "Tế bào mất nước, khối tế bào chất co lại trong khi thành cellulose cứng giữ nguyên: đó là co nguyên sinh."},
+                {"text": "Cả thành tế bào bị vỡ", "ok": false, "why": "Thành cellulose rất bền và không bị vỡ khi tế bào mất nước."},
+                {"text": "Tế bào trương to hơn", "ok": false, "why": "Tế bào chỉ trương khi ở môi trường nhược trương."}
+              ],
+              "explanation": "Co nguyên sinh chứng tỏ tế bào đang sống và màng sinh chất có tính thấm chọn lọc."},
+             {"key": "phan_co", "question": "Sau khi tế bào thài lài tía đã co nguyên sinh, thay dung dịch muối bằng nước cất. Dự đoán hiện tượng.",
+              "options": [
+                {"text": "Tế bào hút nước, màng sinh chất áp sát trở lại thành tế bào", "ok": true, "why": "Nước cất là môi trường nhược trương nên nước đi vào tế bào: đó là phản co nguyên sinh."},
+                {"text": "Tế bào tiếp tục co lại", "ok": false, "why": "Bên ngoài giờ có thế nước cao hơn bên trong nên nước đi vào, không đi ra."},
+                {"text": "Không thay đổi gì vì tế bào đã chết", "ok": false, "why": "Tế bào co nguyên sinh trong thời gian ngắn vẫn còn sống nên phản co nguyên sinh được."}
+              ],
+              "explanation": "Phản co nguyên sinh xảy ra với tế bào còn sống khi được đưa vào môi trường nhược trương."},
+             {"key": "tv_nuoc_cat", "question": "Ngâm tế bào thực vật vào nước cất trong thời gian dài. Dự đoán điều gì xảy ra.",
+              "options": [
+                {"text": "Tế bào trương nước nhưng không bị vỡ", "ok": true, "why": "Thành cellulose chống lại áp suất trương nước nên tế bào căng lên mà không vỡ, khác với hồng cầu."},
+                {"text": "Tế bào vỡ như hồng cầu", "ok": false, "why": "Hồng cầu vỡ vì không có thành tế bào; tế bào thực vật có thành cellulose bảo vệ."},
+                {"text": "Tế bào co nguyên sinh", "ok": false, "why": "Co nguyên sinh xảy ra trong môi trường ưu trương, còn nước cất là nhược trương."}
+              ],
+              "explanation": "Sự trương nước giúp cây non và lá đứng thẳng, tươi."},
+             {"key": "rau_uop_muoi", "question": "Trộn nhiều muối vào rau sống rồi để lâu. Dự đoán rau sẽ thế nào và vì sao?",
+              "options": [
+                {"text": "Rau héo, ra nước, vì tế bào rau mất nước vào môi trường ưu trương", "ok": true, "why": "Nồng độ muối bên ngoài rất cao nên nước thẩm thấu từ tế bào ra ngoài."},
+                {"text": "Rau tươi giòn hơn vì hút muối", "ok": false, "why": "Tế bào mất nước nhanh hơn nhiều so với lượng muối đi vào; rau sẽ héo."},
+                {"text": "Rau không đổi", "ok": false, "why": "Môi trường quá ưu trương luôn làm tế bào mất nước."}
+              ],
+              "explanation": "Vì thế chỉ nên trộn muối, nước sốt vào rau sống ngay trước khi ăn."},
+             {"key": "thuoc_tim", "question": "Thả một hạt thuốc tím (KMnO₄) vào cốc nước để yên, không khuấy. Dự đoán điều gì xảy ra.",
+              "options": [
+                {"text": "Màu tím lan dần ra khắp cốc", "ok": true, "why": "Các phân tử chất tan khuếch tán từ nơi nồng độ cao đến nơi nồng độ thấp cho tới khi đồng đều."},
+                {"text": "Màu tím giữ nguyên quanh hạt thuốc", "ok": false, "why": "Chuyển động nhiệt làm các phân tử luôn khuếch tán, kể cả khi không khuấy."},
+                {"text": "Màu tím dồn hết về một phía của cốc", "ok": false, "why": "Khuếch tán làm nồng độ đồng đều dần, không dồn chất tan về một chỗ."}
+              ],
+              "explanation": "Khuếch tán là cơ sở của vận chuyển thụ động qua màng: không tốn năng lượng, theo chiều gradient nồng độ."},
+             {"key": "uc_che_atp", "question": "Một chất độc làm tế bào ngừng tạo ATP. Hoạt động nào qua màng sinh chất bị ảnh hưởng trực tiếp nhất?",
+              "options": [
+                {"text": "Bơm Na⁺–K⁺ đưa ion ngược chiều gradient nồng độ", "ok": true, "why": "Đây là vận chuyển chủ động, cần năng lượng từ ATP; thiếu ATP thì bơm ngừng hoạt động."},
+                {"text": "Khuếch tán O₂ qua lớp phospholipid", "ok": false, "why": "Khuếch tán là vận chuyển thụ động, không cần ATP."},
+                {"text": "Nước thẩm thấu qua kênh aquaporin", "ok": false, "why": "Thẩm thấu là vận chuyển thụ động theo chiều thế nước, không tiêu tốn ATP."}
+              ],
+              "explanation": "Chỉ vận chuyển chủ động (và nhập bào, xuất bào) cần năng lượng ATP."}
+           ]}
+        ]},
+       {"key": "sh10.nang_luong_enzyme", "order": 2, "title": "Năng lượng, ATP và enzyme",
+        "description": "Các dạng năng lượng trong tế bào, cấu tạo và vai trò của ATP, cơ chế tác động của enzyme.", "status": "planned"},
+       {"key": "sh10.tong_hop_chat", "order": 3, "title": "Tổng hợp các chất và tích luỹ năng lượng",
+        "description": "Quang tổng hợp, hoá tổng hợp và tổng hợp các phân tử sinh học trong tế bào.", "status": "planned"},
+       {"key": "sh10.phan_giai_chat", "order": 4, "title": "Phân giải các chất và giải phóng năng lượng",
+        "description": "Hô hấp tế bào (đường phân, chu trình Krebs, chuỗi truyền electron) và lên men.", "status": "planned"}
+     ]},
+    {"key": "sh10.phan_bao", "grade": 10, "order": 4, "title": "Chu kì tế bào và phân bào",
+     "lessons": [
+       {"key": "sh10.nguyen_phan", "order": 1, "title": "Chu kì tế bào và nguyên phân",
+        "description": "Các pha của chu kì tế bào, diễn biến các kì của nguyên phân và số lượng nhiễm sắc thể.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Sinh học 10; mọi đáp số đã được tính lại."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Nêu được các pha của chu kì tế bào và diễn biến các kì của nguyên phân",
+          "Tính số nhiễm sắc thể, chromatid, tâm động ở mỗi kì",
+          "Tính số tế bào con và số nhiễm sắc thể môi trường cung cấp"
+        ],
+        "summary": [
+          "Chu kì tế bào gồm kì trung gian (pha G1, S, G2) và pha phân bào M. DNA và nhiễm sắc thể (NST) nhân đôi ở pha S.",
+          "Nguyên phân gồm kì đầu, kì giữa, kì sau, kì cuối, rồi phân chia tế bào chất; từ 1 tế bào 2n tạo 2 tế bào con 2n giống hệt nhau.",
+          "Kì giữa: 2n NST kép, 4n chromatid, 2n tâm động; NST co xoắn cực đại, xếp một hàng ở mặt phẳng xích đạo. Kì sau: 4n NST đơn.",
+          "Một tế bào nguyên phân k lần liên tiếp tạo 2^k tế bào con; môi trường cung cấp 2n · (2^k − 1) NST đơn."
+        ],
+        "examples": [
+          {"title": "Ruồi giấm 2n = 8", "lines": [
+            "Kì giữa: 8 NST kép, 16 chromatid, 8 tâm động.",
+            "Kì sau: 16 NST đơn đi về hai cực, mỗi cực 8.",
+            "Nguyên phân 2 lần: 2² = 4 tế bào con; môi trường cung cấp 8 · (4 − 1) = 24 NST."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "order", "title": "Diễn biến của phân bào",
+           "tasks": [
+             {"key": "cac_ki", "prompt": "Sắp xếp các kì của nguyên phân theo đúng thứ tự diễn ra.",
+              "items": ["Kì đầu", "Kì giữa", "Kì sau", "Kì cuối"],
+              "explanation": "Kì đầu: NST co xoắn, màng nhân tiêu biến; kì giữa: NST xếp ở mặt phẳng xích đạo; kì sau: chromatid tách về hai cực; kì cuối: màng nhân tái hiện.",
+              "first_label": "Đầu tiên", "last_label": "Cuối cùng"},
+             {"key": "su_kien", "prompt": "Sắp xếp các sự kiện của nguyên phân theo đúng thứ tự.",
+              "items": [
+                "NST kép bắt đầu co xoắn, màng nhân và nhân con dần biến mất",
+                "NST kép co xoắn cực đại, xếp thành một hàng trên mặt phẳng xích đạo",
+                "Hai chromatid của mỗi NST tách nhau ở tâm động, đi về hai cực",
+                "Màng nhân hình thành lại, NST dãn xoắn",
+                "Tế bào chất phân chia, tạo hai tế bào con"
+              ],
+              "explanation": "NST phải co xoắn và xếp hàng trước thì mới tách đều về hai cực; nhân mới hình thành trước khi tế bào chất phân chia hoàn tất.",
+              "first_label": "Đầu tiên", "last_label": "Cuối cùng"},
+             {"key": "chu_ki", "prompt": "Sắp xếp các giai đoạn của chu kì tế bào, bắt đầu ngay sau khi tế bào được tạo thành.",
+              "items": [
+                "Pha G1: tế bào tổng hợp chất, sinh trưởng",
+                "Pha S: nhân đôi DNA và NST",
+                "Pha G2: tổng hợp các chất cần cho phân bào",
+                "Pha M: nguyên phân và phân chia tế bào chất"
+              ],
+              "explanation": "Kì trung gian (G1 → S → G2) chuẩn bị cho phân bào; DNA phải được nhân đôi ở pha S trước khi tế bào vào pha M.",
+              "first_label": "Đầu tiên", "last_label": "Cuối cùng"},
+             {"key": "trang_thai_nst", "prompt": "Sắp xếp các trạng thái của một NST trong một chu kì tế bào theo đúng thứ tự.",
+              "items": [
+                "NST đơn dãn xoắn trong nhân (pha G1)",
+                "NST kép gồm hai chromatid dính ở tâm động (sau pha S)",
+                "NST kép co xoắn cực đại (kì giữa)",
+                "Hai chromatid tách thành hai NST đơn (kì sau)",
+                "NST đơn dãn xoắn trong nhân tế bào con (kì cuối)"
+              ],
+              "explanation": "NST nhân đôi ở pha S thành NST kép, co xoắn dần đến cực đại ở kì giữa, tách thành NST đơn ở kì sau rồi dãn xoắn ở kì cuối.",
+              "first_label": "Đầu tiên", "last_label": "Cuối cùng"}
+           ]},
+          {"game": "choice", "style": "quiz", "title": "Đếm nhiễm sắc thể",
+           "tasks": [
+             {"key": "chromatid_nguoi", "question": "Tế bào người có 2n = 46. Ở kì giữa của nguyên phân, mỗi tế bào có bao nhiêu chromatid?",
+              "options": [
+                {"text": "92", "ok": true, "why": "Kì giữa có 46 NST kép, mỗi NST kép gồm 2 chromatid: 46 · 2 = 92."},
+                {"text": "46", "ok": false, "why": "46 là số NST kép (cũng là số tâm động), chưa nhân với 2 chromatid."},
+                {"text": "23", "ok": false, "why": "23 là số NST của giao tử (n), không liên quan đến nguyên phân."},
+                {"text": "184", "ok": false, "why": "Đã nhân đôi hai lần; mỗi NST chỉ nhân đôi một lần ở pha S."}
+              ],
+              "explanation": "Kì giữa: 2n NST kép = 4n chromatid."},
+             {"key": "ki_sau_ruoi", "question": "Ruồi giấm có 2n = 8. Ở kì sau của nguyên phân, mỗi tế bào có bao nhiêu NST?",
+              "options": [
+                {"text": "16 NST đơn", "ok": true, "why": "Ở kì sau, 8 NST kép tách thành 16 NST đơn, chưa chia về hai tế bào con."},
+                {"text": "8 NST kép", "ok": false, "why": "8 NST kép là số NST ở kì đầu và kì giữa; sang kì sau các chromatid đã tách."},
+                {"text": "8 NST đơn", "ok": false, "why": "8 NST đơn là số NST của mỗi tế bào con sau kì cuối."},
+                {"text": "4 NST đơn", "ok": false, "why": "4 là n, số NST của giao tử ruồi giấm."}
+              ],
+              "explanation": "Kì sau: 4n NST đơn trong một tế bào."},
+             {"key": "so_te_bao_con", "question": "Một tế bào nguyên phân liên tiếp 3 lần. Số tế bào con tạo thành là bao nhiêu?",
+              "options": [
+                {"text": "8", "ok": true, "why": "Mỗi lần số tế bào nhân đôi: 1 → 2 → 4 → 8 = 2³."},
+                {"text": "6", "ok": false, "why": "Đã cộng 2 + 2 + 2; số tế bào tăng theo cấp số nhân, không cộng dồn."},
+                {"text": "9", "ok": false, "why": "3² = 9 là sai công thức: số tế bào con là 2^k với k là số lần nguyên phân."}
+              ],
+              "explanation": "Sau k lần nguyên phân, 1 tế bào tạo 2^k tế bào con."},
+             {"key": "nam_te_bao", "question": "5 tế bào cùng nguyên phân liên tiếp 4 lần. Tổng số tế bào con tạo thành là bao nhiêu?",
+              "options": [
+                {"text": "80", "ok": true, "why": "Mỗi tế bào tạo 2⁴ = 16 tế bào con; 5 · 16 = 80."},
+                {"text": "40", "ok": false, "why": "Đã dùng 2 · 4 = 8 thay vì 2⁴ = 16."},
+                {"text": "20", "ok": false, "why": "Đã nhân 5 với 4; phải nhân 5 với 2⁴."}
+              ],
+              "explanation": "a tế bào nguyên phân k lần tạo a · 2^k tế bào con."},
+             {"key": "nst_te_bao_con", "question": "Một tế bào có 2n = 24 nguyên phân bình thường. Mỗi tế bào con có bao nhiêu NST?",
+              "options": [
+                {"text": "24", "ok": true, "why": "Nguyên phân giữ nguyên bộ NST 2n: tế bào con giống hệt tế bào mẹ."},
+                {"text": "12", "ok": false, "why": "Giảm một nửa số NST là kết quả của giảm phân, không phải nguyên phân."},
+                {"text": "48", "ok": false, "why": "48 là số NST đơn ở kì sau, trước khi chia về hai tế bào con."}
+              ],
+              "explanation": "Nguyên phân tạo tế bào con có bộ NST giống hệt tế bào mẹ."},
+             {"key": "tam_dong", "question": "Ruồi giấm có 2n = 8. Ở kì giữa của nguyên phân, mỗi tế bào có bao nhiêu tâm động?",
+              "options": [
+                {"text": "8", "ok": true, "why": "Mỗi NST kép có một tâm động; kì giữa có 8 NST kép nên có 8 tâm động."},
+                {"text": "16", "ok": false, "why": "16 là số chromatid ở kì giữa; hai chromatid dùng chung một tâm động."},
+                {"text": "4", "ok": false, "why": "4 là n, không phải số tâm động của tế bào 2n."}
+              ],
+              "explanation": "Số tâm động bằng số NST (đơn hoặc kép) trong tế bào."},
+             {"key": "nst_cung_cap", "question": "Một tế bào ruồi giấm (2n = 8) nguyên phân liên tiếp 3 lần. Môi trường nội bào cung cấp nguyên liệu tương đương bao nhiêu NST đơn?",
+              "options": [
+                {"text": "56", "ok": true, "why": "8 · (2³ − 1) = 8 · 7 = 56: tổng NST của 8 tế bào con (64) trừ đi 8 NST có sẵn của tế bào mẹ."},
+                {"text": "64", "ok": false, "why": "64 là tổng NST trong 8 tế bào con, trong đó 8 NST là của tế bào mẹ ban đầu."},
+                {"text": "24", "ok": false, "why": "Đã nhân 8 với 3 lần; phải dùng 2³ − 1 = 7."},
+                {"text": "48", "ok": false, "why": "8 · 6 là sai: số tế bào con là 2³ = 8, nên môi trường cung cấp cho 8 − 1 = 7 bộ NST."}
+              ],
+              "explanation": "NST môi trường cung cấp = 2n · (2^k − 1)."}
+           ]}
+        ]},
+       {"key": "sh10.giam_phan", "order": 2, "title": "Giảm phân",
+        "description": "Diễn biến của giảm phân I và II, trao đổi chéo và ý nghĩa của giảm phân.", "status": "planned"},
+       {"key": "sh10.cong_nghe_te_bao", "order": 3, "title": "Công nghệ tế bào",
+        "description": "Nguyên lí và thành tựu của công nghệ tế bào thực vật và động vật.", "status": "planned"}
+     ]},
+    {"key": "sh10.vi_sinh_vat", "grade": 10, "order": 5, "title": "Vi sinh vật và virus",
+     "lessons": [
+       {"key": "sh10.khai_quat_vsv", "order": 1, "title": "Khái quát về vi sinh vật",
+        "description": "Đặc điểm, các nhóm vi sinh vật và các kiểu dinh dưỡng của vi sinh vật.", "status": "planned"},
+       {"key": "sh10.sinh_truong_vsv", "order": 2, "title": "Sinh trưởng và sinh sản ở vi sinh vật",
+        "description": "Các pha sinh trưởng của quần thể vi khuẩn, các yếu tố ảnh hưởng và hình thức sinh sản.", "status": "planned"},
+       {"key": "sh10.virus", "order": 3, "title": "Virus và các bệnh do virus",
+        "description": "Cấu tạo, chu trình nhân lên của virus và cách phòng tránh bệnh do virus.", "status": "planned"},
+       {"key": "sh10.ung_dung_vsv", "order": 4, "title": "Ứng dụng của vi sinh vật",
+        "description": "Vi sinh vật trong sản xuất thực phẩm, nông nghiệp, xử lí môi trường và y học.", "status": "planned"}
+     ]},
+
+    {"key": "sh11.trao_doi_chat", "grade": 11, "order": 1, "title": "Trao đổi chất và chuyển hoá năng lượng ở sinh vật",
+     "lessons": [
+       {"key": "sh11.vai_tro_tdc", "order": 1, "title": "Vai trò của trao đổi chất và chuyển hoá năng lượng",
+        "description": "Các phương thức trao đổi chất và các giai đoạn chuyển hoá năng lượng trong sinh giới.", "status": "planned"},
+       {"key": "sh11.nuoc_khoang", "order": 2, "title": "Trao đổi nước và khoáng ở thực vật",
+        "description": "Hấp thụ nước, khoáng ở rễ, vận chuyển trong cây và thoát hơi nước qua lá.", "status": "planned"},
+       {"key": "sh11.quang_hop", "order": 3, "title": "Quang hợp ở thực vật",
+        "description": "Pha sáng, pha đồng hoá CO₂ ở thực vật C3, C4, CAM và các nhân tố ảnh hưởng đến quang hợp.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Sinh học 11; các thí nghiệm là thí nghiệm kinh điển về quang hợp."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Nêu được phương trình và vai trò của quang hợp",
+          "Mô tả được pha sáng, pha đồng hoá CO₂; phân biệt thực vật C3, C4, CAM",
+          "Dự đoán ảnh hưởng của ánh sáng, CO₂, nhiệt độ đến quang hợp"
+        ],
+        "summary": [
+          "Phương trình tổng quát: 6CO₂ + 12H₂O → C₆H₁₂O₆ + 6O₂ + 6H₂O (ánh sáng, diệp lục).",
+          "Pha sáng diễn ra ở màng thylakoid: hấp thụ ánh sáng, quang phân li nước giải phóng O₂, tạo ATP và NADPH.",
+          "Pha đồng hoá CO₂ diễn ra ở chất nền lục lạp. Thực vật C3 chỉ có chu trình Calvin; thực vật C4 cố định CO₂ ở tế bào mô giậu rồi thực hiện chu trình Calvin ở tế bào bao bó mạch; thực vật CAM mở khí khổng và cố định CO₂ vào ban đêm.",
+          "Diệp lục hấp thụ mạnh ánh sáng đỏ và xanh tím, hấp thụ ít ánh sáng lục. Cường độ quang hợp tăng theo cường độ ánh sáng và nồng độ CO₂ trong giới hạn, giảm khi nhiệt độ quá cao."
+        ],
+        "examples": [
+          {"title": "Cây xương rồng giữ nước", "lines": [
+            "Ban ngày nóng, xương rồng đóng khí khổng để giảm thoát hơi nước.",
+            "Ban đêm khí khổng mở để lấy CO₂, cố định tạm thời thành acid hữu cơ; ban ngày CO₂ được giải phóng cho chu trình Calvin."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "choice", "style": "predict", "title": "Dự đoán thí nghiệm quang hợp",
+           "tasks": [
+             {"key": "rong_anh_sang", "question": "Đặt cành rong đuôi chó trong cốc nước, chiếu đèn sáng mạnh vào. Dự đoán điều gì xảy ra.",
+              "options": [
+                {"text": "Nhiều bọt khí nhỏ thoát ra từ cành rong", "ok": true, "why": "Rong quang hợp mạnh, giải phóng khí O₂ thành bọt khí."},
+                {"text": "Không có bọt khí nào", "ok": false, "why": "Khi có ánh sáng mạnh, rong quang hợp và thải O₂ thấy rõ dưới dạng bọt khí."},
+                {"text": "Bọt khí CO₂ thoát ra", "ok": false, "why": "Quang hợp hấp thụ CO₂; khí thoát ra chủ yếu là O₂."}
+              ],
+              "explanation": "Số bọt khí trong một phút có thể dùng để so sánh cường độ quang hợp."},
+             {"key": "rong_che_toi", "question": "Che tối hoàn toàn cốc rong đuôi chó đang thải bọt khí. Dự đoán điều gì xảy ra.",
+              "options": [
+                {"text": "Bọt khí giảm dần rồi ngừng", "ok": true, "why": "Không có ánh sáng thì pha sáng dừng lại nên không còn O₂ được tạo ra."},
+                {"text": "Bọt khí thoát ra nhiều hơn", "ok": false, "why": "Ánh sáng là nguồn năng lượng của quang hợp; mất ánh sáng thì quang hợp dừng."},
+                {"text": "Bọt khí vẫn như cũ", "ok": false, "why": "Quang hợp phụ thuộc trực tiếp vào ánh sáng."}
+              ],
+              "explanation": "Ánh sáng cần cho pha sáng; thiếu ánh sáng, cây chỉ còn hô hấp."},
+             {"key": "la_che_giay", "question": "Để chậu cây trong tối 2 ngày, sau đó dán băng giấy đen che một phần lá rồi đem ra nắng vài giờ. Ngắt lá, tẩy diệp lục bằng cồn nóng rồi nhỏ dung dịch iodine. Dự đoán kết quả.",
+              "options": [
+                {"text": "Phần lá được chiếu sáng có màu xanh tím, phần bị che không có", "ok": true, "why": "Chỉ phần được chiếu sáng mới quang hợp tạo tinh bột; tinh bột cho màu xanh tím với iodine."},
+                {"text": "Cả lá đều có màu xanh tím", "ok": false, "why": "Cây đã được để trong tối 2 ngày để dùng hết tinh bột cũ; phần bị che không quang hợp nên không có tinh bột mới."},
+                {"text": "Cả lá đều không có màu xanh tím", "ok": false, "why": "Phần lá được chiếu sáng vẫn quang hợp và tạo tinh bột."}
+              ],
+              "explanation": "Thí nghiệm chứng minh ánh sáng cần cho sự tạo thành tinh bột trong quang hợp."},
+             {"key": "tang_co2", "question": "Trong nhà kính đủ sáng, tăng nồng độ CO₂ trong không khí lên vừa phải (chưa vượt giới hạn). Cường độ quang hợp của cây thay đổi thế nào?",
+              "options": [
+                {"text": "Tăng lên", "ok": true, "why": "CO₂ là nguyên liệu của pha đồng hoá CO₂; trong giới hạn, tăng CO₂ làm cường độ quang hợp tăng."},
+                {"text": "Giảm đi", "ok": false, "why": "Chỉ khi nồng độ CO₂ quá cao vượt giới hạn mới gây ức chế."},
+                {"text": "Không đổi", "ok": false, "why": "Nồng độ CO₂ trong không khí thường thấp, là yếu tố hạn chế quang hợp."}
+              ],
+              "explanation": "Bổ sung CO₂ trong nhà kính là một biện pháp tăng năng suất cây trồng."},
+             {"key": "nuoc_o18", "question": "Cho cây quang hợp với nước có oxygen được đánh dấu (H₂¹⁸O), còn CO₂ bình thường. Oxygen đánh dấu ¹⁸O sẽ xuất hiện chủ yếu ở đâu?",
+              "options": [
+                {"text": "Trong khí O₂ cây thải ra", "ok": true, "why": "O₂ được giải phóng từ quang phân li nước ở pha sáng."},
+                {"text": "Trong phân tử glucose", "ok": false, "why": "Oxygen trong glucose đến từ CO₂ qua chu trình Calvin, không đến từ nước."},
+                {"text": "Không xuất hiện ở đâu cả", "ok": false, "why": "Nước là nguyên liệu của quang hợp; oxygen của nó chuyển thành O₂."}
+              ],
+              "explanation": "Thí nghiệm dùng đồng vị ¹⁸O chứng minh O₂ của quang hợp có nguồn gốc từ nước."},
+             {"key": "anh_sang_luc", "question": "Chiếu ba chậu cây giống nhau bằng ánh sáng đỏ, ánh sáng xanh tím và ánh sáng lục có cùng cường độ. Cây dưới ánh sáng nào quang hợp kém nhất?",
+              "options": [
+                {"text": "Ánh sáng lục", "ok": true, "why": "Diệp lục hấp thụ rất ít ánh sáng lục mà phản xạ nó, nên lá có màu xanh lục."},
+                {"text": "Ánh sáng đỏ", "ok": false, "why": "Diệp lục hấp thụ mạnh ánh sáng đỏ, nên quang hợp hiệu quả."},
+                {"text": "Ánh sáng xanh tím", "ok": false, "why": "Diệp lục và carotenoid hấp thụ mạnh ánh sáng xanh tím."}
+              ],
+              "explanation": "Chỉ ánh sáng được sắc tố hấp thụ mới dùng được cho quang hợp."},
+             {"key": "nhiet_qua_cao", "question": "Nhiệt độ không khí tăng lên quá cao (khoảng 45 °C) đối với một cây lúa đang quang hợp tốt ở 30 °C. Dự đoán cường độ quang hợp.",
+              "options": [
+                {"text": "Giảm mạnh", "ok": true, "why": "Nhiệt độ quá cao làm enzyme quang hợp kém hoạt động, khí khổng đóng để giữ nước nên thiếu CO₂."},
+                {"text": "Tăng mạnh", "ok": false, "why": "Nhiệt độ chỉ làm tăng quang hợp đến mức tối ưu; vượt quá thì quang hợp giảm."},
+                {"text": "Không đổi", "ok": false, "why": "Quang hợp là chuỗi phản ứng enzyme nên rất nhạy với nhiệt độ."}
+              ],
+              "explanation": "Mỗi loài cây có một khoảng nhiệt độ tối ưu cho quang hợp."}
+           ]},
+          {"game": "sorting", "title": "Cây C3, C4 hay CAM?",
+           "set": {"title": "Cây này thuộc nhóm thực vật nào theo con đường đồng hoá CO₂?",
+            "groups": [
+              {"id": "c3", "label": "Thực vật C3", "icon": "🌾"},
+              {"id": "c4", "label": "Thực vật C4", "icon": "🌽"},
+              {"id": "cam", "label": "Thực vật CAM", "icon": "🌵"}
+            ],
+            "cards": [
+              {"key": "lua", "text": "Lúa", "picture": "🌾", "group": "c3",
+               "explanation": "Lúa là thực vật C3: CO₂ được cố định trực tiếp bởi chu trình Calvin, sản phẩm đầu tiên có 3 carbon."},
+              {"key": "lua_mi", "text": "Lúa mì", "picture": "🍞", "group": "c3",
+               "explanation": "Lúa mì là cây C3 điển hình của vùng ôn đới."},
+              {"key": "dau_tuong", "text": "Đậu tương", "picture": "🫘", "group": "c3",
+               "explanation": "Đậu tương là thực vật C3."},
+              {"key": "khoai_tay", "text": "Khoai tây", "picture": "🥔", "group": "c3",
+               "explanation": "Khoai tây là thực vật C3."},
+              {"key": "ngo", "text": "Ngô", "picture": "🌽", "group": "c4",
+               "explanation": "Ngô là thực vật C4: sản phẩm cố định CO₂ đầu tiên có 4 carbon, quang hợp tốt ở nơi nắng nóng."},
+              {"key": "mia", "text": "Mía", "picture": "🎋", "group": "c4",
+               "explanation": "Mía là thực vật C4, năng suất sinh học cao."},
+              {"key": "cao_luong", "text": "Cao lương", "picture": "🌿", "group": "c4",
+               "explanation": "Cao lương là thực vật C4 chịu hạn, chịu nóng tốt."},
+              {"key": "rau_den", "text": "Rau dền", "picture": "🥬", "group": "c4",
+               "explanation": "Rau dền là thực vật C4."},
+              {"key": "dua", "text": "Dứa", "picture": "🍍", "group": "cam",
+               "explanation": "Dứa là thực vật CAM: mở khí khổng và cố định CO₂ vào ban đêm."},
+              {"key": "xuong_rong", "text": "Xương rồng", "picture": "🌵", "group": "cam",
+               "explanation": "Xương rồng sống ở sa mạc, là thực vật CAM để tiết kiệm nước."},
+              {"key": "thanh_long", "text": "Thanh long", "picture": "🐉", "group": "cam",
+               "explanation": "Thanh long thuộc họ xương rồng, là thực vật CAM."},
+              {"key": "thuoc_bong", "text": "Cây thuốc bỏng (sống đời)", "picture": "🍃", "group": "cam",
+               "explanation": "Cây thuốc bỏng mọng nước, là thực vật CAM."}
+            ]}}
+        ]},
+       {"key": "sh11.ho_hap_tv", "order": 4, "title": "Hô hấp ở thực vật",
+        "description": "Các con đường hô hấp ở thực vật, mối quan hệ với quang hợp và ứng dụng trong bảo quản nông sản.", "status": "planned"},
+       {"key": "sh11.tieu_hoa", "order": 5, "title": "Dinh dưỡng và tiêu hoá ở động vật",
+        "description": "Các hình thức tiêu hoá ở động vật và quá trình tiêu hoá ở người.", "status": "planned"},
+       {"key": "sh11.ho_hap_dv", "order": 6, "title": "Hô hấp ở động vật",
+        "description": "Các hình thức trao đổi khí ở động vật và hệ hô hấp ở người.", "status": "planned"},
+       {"key": "sh11.tuan_hoan", "order": 7, "title": "Tuần hoàn ở động vật",
+        "description": "Hệ tuần hoàn kép ở người, hoạt động của tim, huyết áp và vận tốc máu.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Sinh học 11; thời gian các pha của chu kì tim theo số liệu thường dùng ở người trưởng thành, đáp số đã được tính lại."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Mô tả được đường đi của máu trong vòng tuần hoàn lớn và vòng tuần hoàn nhỏ",
+          "Nêu được tính tự động, chu kì hoạt động của tim và hệ dẫn truyền tim",
+          "Tính chu kì tim, nhịp tim và lưu lượng tim"
+        ],
+        "summary": [
+          "Người có hệ tuần hoàn kép: vòng nhỏ đưa máu qua phổi để trao đổi khí, vòng lớn đưa máu đến các cơ quan.",
+          "Tim co dãn tự động nhờ hệ dẫn truyền: nút xoang nhĩ → nút nhĩ thất → bó His → mạng Purkinje.",
+          "Ở người trưởng thành, nhịp tim khoảng 75 lần/phút, chu kì tim khoảng 0,8 s: tâm nhĩ co 0,1 s, tâm thất co 0,3 s, dãn chung 0,4 s.",
+          "Lưu lượng tim = nhịp tim × thể tích tâm thu (lượng máu tâm thất tống đi mỗi lần co). Huyết áp giảm dần từ động mạch đến mao mạch rồi tĩnh mạch."
+        ],
+        "examples": [
+          {"title": "Tim nghỉ khi nào?", "lines": [
+            "Chu kì 0,8 s: tâm thất co 0,3 s và nghỉ 0,5 s; tâm nhĩ co 0,1 s và nghỉ 0,7 s.",
+            "Thời gian nghỉ dài hơn thời gian làm việc giúp tim hoạt động suốt đời mà không mỏi."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "order", "title": "Theo dòng máu chảy",
+           "tasks": [
+             {"key": "vong_nho", "prompt": "Sắp xếp đường đi của máu trong vòng tuần hoàn nhỏ (vòng phổi) ở người.",
+              "items": ["Tâm thất phải", "Động mạch phổi", "Mao mạch phổi", "Tĩnh mạch phổi", "Tâm nhĩ trái"],
+              "explanation": "Máu nghèo O₂ từ tâm thất phải theo động mạch phổi lên phổi, nhận O₂ ở mao mạch phổi rồi theo tĩnh mạch phổi về tâm nhĩ trái.",
+              "first_label": "Bắt đầu", "last_label": "Kết thúc"},
+             {"key": "vong_lon", "prompt": "Sắp xếp đường đi của máu trong vòng tuần hoàn lớn ở người.",
+              "items": ["Tâm thất trái", "Động mạch chủ", "Mao mạch ở các cơ quan", "Tĩnh mạch chủ", "Tâm nhĩ phải"],
+              "explanation": "Máu giàu O₂ từ tâm thất trái theo động mạch chủ đến các cơ quan, trao đổi chất ở mao mạch rồi theo tĩnh mạch chủ về tâm nhĩ phải.",
+              "first_label": "Bắt đầu", "last_label": "Kết thúc"},
+             {"key": "chu_ki_tim", "prompt": "Sắp xếp các pha của một chu kì tim, bắt đầu từ pha co tâm nhĩ.",
+              "items": ["Pha co tâm nhĩ", "Pha co tâm thất", "Pha dãn chung"],
+              "explanation": "Tâm nhĩ co đẩy máu xuống tâm thất, rồi tâm thất co đẩy máu vào động mạch, sau đó cả tim dãn ra để nhận máu.",
+              "first_label": "Đầu tiên", "last_label": "Cuối cùng"},
+             {"key": "dan_truyen", "prompt": "Sắp xếp đường đi của xung điện trong hệ dẫn truyền tim.",
+              "items": ["Nút xoang nhĩ", "Nút nhĩ thất", "Bó His", "Mạng Purkinje"],
+              "explanation": "Nút xoang nhĩ tự phát xung, lan ra tâm nhĩ làm tâm nhĩ co, rồi qua nút nhĩ thất, bó His và mạng Purkinje làm tâm thất co.",
+              "first_label": "Phát xung", "last_label": "Cuối đường dẫn"},
+             {"key": "huyet_ap", "prompt": "Sắp xếp các đoạn mạch theo huyết áp giảm dần.",
+              "items": ["Động mạch chủ", "Tiểu động mạch", "Mao mạch", "Tĩnh mạch chủ"],
+              "explanation": "Máu ma sát với thành mạch và các phần tử máu ma sát với nhau nên huyết áp giảm dần trên đường đi; thấp nhất ở tĩnh mạch chủ.",
+              "first_label": "Cao nhất", "last_label": "Thấp nhất"}
+           ]},
+          {"game": "choice", "style": "quiz", "title": "Tính nhịp tim",
+           "tasks": [
+             {"key": "chu_ki_75", "question": "Một người có nhịp tim 75 lần/phút. Thời gian một chu kì tim là bao nhiêu?",
+              "options": [
+                {"text": "0,8 s", "ok": true, "why": "60 s : 75 = 0,8 s mỗi chu kì."},
+                {"text": "1,25 s", "ok": false, "why": "Đã chia 75 cho 60; thời gian một chu kì là 60 giây chia cho số nhịp."},
+                {"text": "75 s", "ok": false, "why": "75 là số nhịp trong một phút, không phải thời gian một chu kì."}
+              ],
+              "explanation": "Chu kì tim = 60 : nhịp tim (giây)."},
+             {"key": "nhi_nghi", "question": "Chu kì tim 0,8 s gồm: tâm nhĩ co 0,1 s, tâm thất co 0,3 s, dãn chung 0,4 s. Trong mỗi chu kì, tâm nhĩ được nghỉ bao lâu?",
+              "options": [
+                {"text": "0,7 s", "ok": true, "why": "Tâm nhĩ chỉ co 0,1 s, thời gian còn lại 0,8 − 0,1 = 0,7 s là nghỉ."},
+                {"text": "0,4 s", "ok": false, "why": "0,4 s là pha dãn chung; tâm nhĩ còn nghỉ cả trong lúc tâm thất co (0,3 s)."},
+                {"text": "0,5 s", "ok": false, "why": "0,5 s là thời gian nghỉ của tâm thất (0,8 − 0,3)."}
+              ],
+              "explanation": "Mỗi ngăn tim đều có thời gian nghỉ dài hơn thời gian co."},
+             {"key": "luu_luong", "question": "Mỗi lần co, tâm thất trái của một người tống đi 70 mL máu; nhịp tim 72 lần/phút. Lưu lượng tim là bao nhiêu?",
+              "options": [
+                {"text": "5,04 L/phút", "ok": true, "why": "70 mL · 72 = 5040 mL/phút = 5,04 L/phút."},
+                {"text": "50,4 L/phút", "ok": false, "why": "Sai khi đổi đơn vị: 1 L = 1000 mL, nên 5040 mL = 5,04 L."},
+                {"text": "0,504 L/phút", "ok": false, "why": "Sai khi đổi đơn vị: 5040 mL chia 1000 là 5,04 L."}
+              ],
+              "explanation": "Lưu lượng tim = thể tích tâm thu × nhịp tim."},
+             {"key": "nhip_120", "question": "Khi chạy nhanh, nhịp tim tăng lên 120 lần/phút. Thời gian một chu kì tim lúc đó là bao nhiêu?",
+              "options": [
+                {"text": "0,5 s", "ok": true, "why": "60 : 120 = 0,5 s."},
+                {"text": "2 s", "ok": false, "why": "Đã chia 120 cho 60; phải lấy 60 chia cho số nhịp."},
+                {"text": "0,8 s", "ok": false, "why": "0,8 s là chu kì ứng với nhịp 75 lần/phút; tim đập nhanh hơn thì chu kì ngắn hơn."}
+              ],
+              "explanation": "Nhịp tim càng nhanh, chu kì tim càng ngắn (chủ yếu do thời gian dãn chung bị rút ngắn)."},
+             {"key": "tim_nhip", "question": "Một người có lưu lượng tim 6 L/phút, mỗi lần tâm thất tống đi 80 mL máu. Nhịp tim của người đó là bao nhiêu?",
+              "options": [
+                {"text": "75 lần/phút", "ok": true, "why": "6000 mL : 80 mL = 75 lần/phút."},
+                {"text": "480 lần/phút", "ok": false, "why": "Đã nhân 6 với 80; nhịp tim là lưu lượng chia cho thể tích mỗi lần co."},
+                {"text": "7,5 lần/phút", "ok": false, "why": "Chưa đổi 6 L thành 6000 mL trước khi chia."}
+              ],
+              "explanation": "Nhịp tim = lưu lượng tim : thể tích tâm thu, đổi về cùng đơn vị."},
+             {"key": "that_nghi_phut", "question": "Nhịp tim 75 lần/phút, mỗi chu kì 0,8 s với tâm thất co 0,3 s. Trong 1 phút, tâm thất được nghỉ tổng cộng bao lâu?",
+              "options": [
+                {"text": "37,5 s", "ok": true, "why": "Mỗi chu kì tâm thất nghỉ 0,8 − 0,3 = 0,5 s; 75 chu kì nghỉ 75 · 0,5 = 37,5 s."},
+                {"text": "22,5 s", "ok": false, "why": "22,5 s = 75 · 0,3 là tổng thời gian tâm thất co."},
+                {"text": "30 s", "ok": false, "why": "75 · 0,4 = 30 s chỉ là pha dãn chung; tâm thất còn nghỉ cả lúc tâm nhĩ co."}
+              ],
+              "explanation": "Thời gian tâm thất nghỉ gồm pha co tâm nhĩ và pha dãn chung."}
+           ]}
+        ]},
+       {"key": "sh11.mien_dich", "order": 8, "title": "Miễn dịch ở người và động vật",
+        "description": "Miễn dịch không đặc hiệu, miễn dịch đặc hiệu và vai trò của vaccine.", "status": "planned"},
+       {"key": "sh11.bai_tiet_noi_moi", "order": 9, "title": "Bài tiết và cân bằng nội môi",
+        "description": "Vai trò của thận, gan trong bài tiết và cơ chế duy trì cân bằng nội môi.", "status": "planned"}
+     ]},
+    {"key": "sh11.cam_ung", "grade": 11, "order": 2, "title": "Cảm ứng ở sinh vật",
+     "lessons": [
+       {"key": "sh11.cam_ung_tv", "order": 1, "title": "Cảm ứng ở thực vật",
+        "description": "Các hình thức hướng động và ứng động ở thực vật, ứng dụng trong trồng trọt.", "status": "planned"},
+       {"key": "sh11.cam_ung_dv", "order": 2, "title": "Cảm ứng ở động vật và hệ thần kinh",
+        "description": "Các dạng hệ thần kinh, cung phản xạ, điện thế nghỉ, điện thế hoạt động và synapse.", "status": "planned"},
+       {"key": "sh11.tap_tinh", "order": 3, "title": "Tập tính ở động vật",
+        "description": "Tập tính bẩm sinh, tập tính học được và ứng dụng trong đời sống.", "status": "planned"}
+     ]},
+    {"key": "sh11.sinh_truong", "grade": 11, "order": 3, "title": "Sinh trưởng và phát triển ở sinh vật",
+     "lessons": [
+       {"key": "sh11.st_thuc_vat", "order": 1, "title": "Sinh trưởng và phát triển ở thực vật",
+        "description": "Mô phân sinh, sinh trưởng sơ cấp, thứ cấp và sự ra hoa ở thực vật.", "status": "planned"},
+       {"key": "sh11.hormone_tv", "order": 2, "title": "Hormone thực vật",
+        "description": "Hormone kích thích, hormone ức chế sinh trưởng và ứng dụng trong nông nghiệp.", "status": "planned"},
+       {"key": "sh11.st_dong_vat", "order": 3, "title": "Sinh trưởng và phát triển ở động vật",
+        "description": "Phát triển qua biến thái và không qua biến thái; hormone và các nhân tố ảnh hưởng.", "status": "planned"}
+     ]},
+    {"key": "sh11.sinh_san", "grade": 11, "order": 4, "title": "Sinh sản ở sinh vật",
+     "lessons": [
+       {"key": "sh11.ss_thuc_vat", "order": 1, "title": "Sinh sản ở thực vật",
+        "description": "Sinh sản vô tính, nhân giống vô tính và sinh sản hữu tính ở thực vật có hoa.", "status": "planned"},
+       {"key": "sh11.ss_dong_vat", "order": 2, "title": "Sinh sản ở động vật",
+        "description": "Các hình thức sinh sản, điều hoà sinh sản và sinh đẻ có kế hoạch ở người.", "status": "planned"}
+     ]},
+
+    {"key": "sh12.phan_tu", "grade": 12, "order": 1, "title": "Di truyền phân tử",
+     "lessons": [
+       {"key": "sh12.gene_tai_ban", "order": 1, "title": "Gene và sự tái bản DNA",
+        "description": "Cấu trúc, chức năng của gene và cơ chế tái bản DNA theo nguyên tắc bổ sung, bán bảo toàn.", "status": "planned"},
+       {"key": "sh12.phien_ma_dich_ma", "order": 2, "title": "Phiên mã và dịch mã",
+        "description": "Mã di truyền, quá trình phiên mã tạo mRNA và dịch mã tạo chuỗi polypeptide.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Sinh học 12; các trình tự đã được kiểm tra theo nguyên tắc bổ sung và chiều 5'–3'."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Viết được trình tự mRNA từ mạch khuôn của gene",
+          "Nêu được diễn biến của phiên mã và dịch mã",
+          "Tính số codon, số amino acid của chuỗi polypeptide"
+        ],
+        "summary": [
+          "Phiên mã: RNA polymerase bám vào vùng khởi động, dùng mạch khuôn (chiều 3' → 5') để tổng hợp mRNA theo chiều 5' → 3', theo nguyên tắc bổ sung A–U, T–A, G–C, C–G.",
+          "Mã di truyền là mã bộ ba: mỗi codon trên mRNA mã hoá một amino acid. AUG là codon mở đầu (Met); UAA, UAG, UGA là codon kết thúc, không mã hoá amino acid.",
+          "Dịch mã diễn ra ở tế bào chất, trên ribosome: anticodon của tRNA khớp bổ sung, ngược chiều với codon; các amino acid nối với nhau bằng liên kết peptide.",
+          "Ở sinh vật nhân thực, phiên mã ở nhân tạo pre-mRNA; các intron bị cắt bỏ, exon nối lại thành mRNA trưởng thành rồi mới ra tế bào chất."
+        ],
+        "examples": [
+          {"title": "Từ gene đến chuỗi amino acid", "lines": [
+            "Mạch khuôn: 3'-TAC AAA CCG ATT-5'",
+            "mRNA: 5'-AUG UUU GGC UAA-3'",
+            "Chuỗi: Met – Phe – Gly (UAA là codon kết thúc)."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "order", "title": "Từ gene đến protein",
+           "tasks": [
+             {"key": "phien_ma", "prompt": "Sắp xếp các bước của quá trình phiên mã.",
+              "items": [
+                "RNA polymerase bám vào vùng khởi động của gene",
+                "Gene tháo xoắn, lộ mạch khuôn chiều 3' → 5'",
+                "mRNA được tổng hợp theo chiều 5' → 3' theo nguyên tắc bổ sung",
+                "Gặp tín hiệu kết thúc, RNA polymerase rời gene, giải phóng mRNA"
+              ],
+              "explanation": "Enzyme phải nhận ra vùng khởi động trước, rồi mạch khuôn mới lộ ra để làm khuôn; mRNA chỉ được giải phóng khi gặp tín hiệu kết thúc.",
+              "first_label": "Đầu tiên", "last_label": "Cuối cùng"},
+             {"key": "dich_ma", "prompt": "Sắp xếp các bước của quá trình dịch mã.",
+              "items": [
+                "Tiểu phần bé của ribosome gắn với mRNA gần codon mở đầu",
+                "tRNA mang amino acid mở đầu khớp với codon AUG, tiểu phần lớn gắn vào",
+                "tRNA mang amino acid tiếp theo khớp codon kế tiếp, liên kết peptide hình thành",
+                "Ribosome dịch đi một codon, quá trình lặp lại",
+                "Gặp codon kết thúc, chuỗi polypeptide được giải phóng"
+              ],
+              "explanation": "Khởi đầu, kéo dài chuỗi (lặp lại cho từng codon) và kết thúc khi gặp codon không có tRNA tương ứng.",
+              "first_label": "Đầu tiên", "last_label": "Cuối cùng"},
+             {"key": "dong_thong_tin", "prompt": "Sắp xếp dòng thông tin di truyền từ gene đến tính trạng.",
+              "items": ["Gene trên DNA", "mRNA", "Chuỗi polypeptide", "Protein có cấu trúc không gian", "Tính trạng"],
+              "explanation": "Gene được phiên mã thành mRNA, mRNA được dịch mã thành chuỗi polypeptide; chuỗi cuộn gập thành protein hoạt động, biểu hiện thành tính trạng.",
+              "first_label": "Bắt đầu", "last_label": "Kết thúc"},
+             {"key": "xu_li_mrna", "prompt": "Ở sinh vật nhân thực, sắp xếp các bước từ phiên mã đến dịch mã.",
+              "items": [
+                "Phiên mã tạo pre-mRNA trong nhân",
+                "Cắt bỏ intron, nối các exon",
+                "mRNA trưởng thành đi ra tế bào chất",
+                "Ribosome dịch mã mRNA"
+              ],
+              "explanation": "Ở nhân thực, phiên mã và dịch mã tách biệt về không gian: mRNA phải được hoàn thiện trong nhân rồi mới ra tế bào chất.",
+              "first_label": "Đầu tiên", "last_label": "Cuối cùng"}
+           ]},
+          {"game": "choice", "style": "quiz", "title": "Giải mã di truyền",
+           "tasks": [
+             {"key": "viet_mrna", "question": "Một đoạn mạch khuôn của gene có trình tự 3'-TAC GGA TTC-5'. Đoạn mRNA được phiên mã từ nó là gì?",
+              "options": [
+                {"text": "5'-AUG CCU AAG-3'", "ok": true, "why": "T → A, A → U, G → C, C → G; mRNA ngược chiều với mạch khuôn nên đọc 5' → 3'."},
+                {"text": "5'-ATG CCT AAG-3'", "ok": false, "why": "RNA không có T; phải dùng U bắt cặp với A."},
+                {"text": "5'-UAC GGA UUC-3'", "ok": false, "why": "Đây là chép lại mạch khuôn và thay T bằng U, không theo nguyên tắc bổ sung."},
+                {"text": "3'-AUG CCU AAG-5'", "ok": false, "why": "Bổ sung đúng nhưng sai chiều: mRNA bắt cặp ngược chiều với mạch khuôn."}
+              ],
+              "explanation": "mRNA bổ sung và ngược chiều với mạch khuôn, có trình tự giống mạch bổ sung của gene (thay T bằng U)."},
+             {"key": "dem_amino_acid", "question": "Vùng mã hoá của một mRNA có 300 nucleotide, tính từ codon mở đầu đến hết codon kết thúc. Chuỗi polypeptide do nó mã hoá (chưa cắt bỏ amino acid mở đầu) có bao nhiêu amino acid?",
+              "options": [
+                {"text": "99", "ok": true, "why": "300 : 3 = 100 codon; codon kết thúc không mã hoá amino acid nên còn 99."},
+                {"text": "100", "ok": false, "why": "Đã tính cả codon kết thúc, nhưng codon này không có amino acid."},
+                {"text": "98", "ok": false, "why": "98 là số amino acid sau khi cắt bỏ Met mở đầu; câu hỏi tính chuỗi chưa cắt."},
+                {"text": "300", "ok": false, "why": "Mỗi amino acid ứng với ba nucleotide, không phải một."}
+              ],
+              "explanation": "Số amino acid = số codon − 1 (codon kết thúc)."},
+             {"key": "anticodon", "question": "Codon trên mRNA là 5'-AUG-3'. Anticodon của tRNA khớp với nó là gì?",
+              "options": [
+                {"text": "3'-UAC-5'", "ok": true, "why": "A–U, U–A, G–C và ngược chiều: 3'-UAC-5'."},
+                {"text": "3'-TAC-5'", "ok": false, "why": "tRNA là RNA nên không có T."},
+                {"text": "3'-AUG-5'", "ok": false, "why": "Đây chỉ là viết ngược codon, không theo nguyên tắc bổ sung."},
+                {"text": "5'-UAC-3'", "ok": false, "why": "Đúng nucleotide nhưng sai chiều; nó sẽ khớp với codon 5'-GUA-3'."}
+              ],
+              "explanation": "Anticodon bổ sung và ngược chiều với codon."},
+             {"key": "codon_mo_dau", "question": "Bộ ba nào trên mRNA là codon mở đầu của quá trình dịch mã?",
+              "options": [
+                {"text": "AUG", "ok": true, "why": "AUG mở đầu dịch mã và mã hoá methionine (Met)."},
+                {"text": "UAA", "ok": false, "why": "UAA là codon kết thúc."},
+                {"text": "UGA", "ok": false, "why": "UGA là codon kết thúc."},
+                {"text": "UUU", "ok": false, "why": "UUU mã hoá phenylalanine, không phải codon mở đầu."}
+              ],
+              "explanation": "Mã di truyền có một codon mở đầu (AUG) và ba codon kết thúc (UAA, UAG, UGA)."},
+             {"key": "polysome", "question": "Có 5 ribosome cùng trượt hết một lần trên một phân tử mRNA (polysome). Có bao nhiêu chuỗi polypeptide được tạo ra?",
+              "options": [
+                {"text": "5", "ok": true, "why": "Mỗi ribosome trượt hết mRNA tạo một chuỗi polypeptide; 5 ribosome tạo 5 chuỗi giống nhau."},
+                {"text": "1", "ok": false, "why": "Các ribosome không cùng làm một chuỗi; mỗi ribosome tự tạo một chuỗi."},
+                {"text": "10", "ok": false, "why": "Mỗi lượt trượt của một ribosome chỉ tạo một chuỗi."}
+              ],
+              "explanation": "Polysome giúp tạo nhiều protein cùng loại từ một mRNA trong thời gian ngắn."},
+             {"key": "noi_dich_ma", "question": "Ở tế bào nhân thực, dịch mã diễn ra ở đâu?",
+              "options": [
+                {"text": "Trên ribosome ở tế bào chất", "ok": true, "why": "mRNA trưởng thành ra tế bào chất, nơi ribosome đọc mã và tổng hợp chuỗi polypeptide."},
+                {"text": "Trong nhân tế bào", "ok": false, "why": "Nhân là nơi phiên mã; dịch mã ở tế bào chất."},
+                {"text": "Trên phân tử DNA", "ok": false, "why": "DNA là khuôn cho phiên mã; dịch mã đọc mRNA."}
+              ],
+              "explanation": "Ở nhân thực, phiên mã ở nhân, dịch mã ở tế bào chất."},
+             {"key": "enzyme_pm", "question": "Enzyme nào tổng hợp mRNA trong quá trình phiên mã?",
+              "options": [
+                {"text": "RNA polymerase", "ok": true, "why": "RNA polymerase vừa tháo xoắn gene vừa nối các ribonucleotide thành mRNA."},
+                {"text": "DNA polymerase", "ok": false, "why": "DNA polymerase tổng hợp DNA trong tái bản, không tổng hợp RNA."},
+                {"text": "Ligase", "ok": false, "why": "Ligase nối các đoạn DNA (như đoạn Okazaki) trong tái bản."}
+              ],
+              "explanation": "Phiên mã chỉ cần RNA polymerase, không cần đoạn mồi."},
+             {"key": "chieu_mrna", "question": "mRNA được tổng hợp theo chiều nào?",
+              "options": [
+                {"text": "5' → 3'", "ok": true, "why": "RNA polymerase gắn nucleotide mới vào đầu 3' của mạch đang tổng hợp, nên mạch dài ra theo chiều 5' → 3'."},
+                {"text": "3' → 5'", "ok": false, "why": "3' → 5' là chiều của mạch khuôn được enzyme đọc."},
+                {"text": "Cả hai chiều cùng lúc", "ok": false, "why": "Mọi mạch nucleic acid mới đều được tổng hợp theo một chiều 5' → 3'."}
+              ],
+              "explanation": "Mạch khuôn được đọc 3' → 5', mRNA mới được tổng hợp 5' → 3'."}
+           ]}
+        ]},
+       {"key": "sh12.dieu_hoa_gene", "order": 3, "title": "Điều hoà biểu hiện gene",
+        "description": "Mô hình operon lac ở vi khuẩn E. coli và ý nghĩa của điều hoà biểu hiện gene.", "status": "planned"},
+       {"key": "sh12.dot_bien_gene", "order": 4, "title": "Đột biến gene",
+        "description": "Các dạng đột biến gene, nguyên nhân, cơ chế phát sinh và vai trò của đột biến gene.", "status": "planned"}
+     ]},
+    {"key": "sh12.di_truyen_nst", "grade": 12, "order": 2, "title": "Di truyền nhiễm sắc thể",
+     "lessons": [
+       {"key": "sh12.nst_dot_bien_nst", "order": 1, "title": "Nhiễm sắc thể và đột biến nhiễm sắc thể",
+        "description": "Cấu trúc siêu hiển vi của NST, đột biến cấu trúc và đột biến số lượng NST.", "status": "planned"},
+       {"key": "sh12.mendel", "order": 2, "title": "Quy luật phân li và phân li độc lập của Mendel",
+        "description": "Phương pháp nghiên cứu của Mendel, quy luật phân li, quy luật phân li độc lập và cơ sở tế bào học.", "status": "planned"},
+       {"key": "sh12.lien_ket_hoan_vi", "order": 3, "title": "Liên kết gene và hoán vị gene",
+        "description": "Thí nghiệm của Morgan, liên kết hoàn toàn, hoán vị gene và bản đồ di truyền.", "status": "planned"},
+       {"key": "sh12.gioi_tinh_ngoai_nhan", "order": 4, "title": "Di truyền giới tính, liên kết giới tính và di truyền ngoài nhân",
+        "description": "NST giới tính, gene trên X và Y, di truyền theo dòng mẹ.", "status": "planned"},
+       {"key": "sh12.kieu_gene_moi_truong", "order": 5, "title": "Mối quan hệ giữa kiểu gene, môi trường và kiểu hình",
+        "description": "Thường biến, mức phản ứng và ứng dụng trong sản xuất.", "status": "planned"}
+     ]},
+    {"key": "sh12.quan_the", "grade": 12, "order": 3, "title": "Di truyền quần thể và ứng dụng di truyền học",
+     "lessons": [
+       {"key": "sh12.tu_phoi", "order": 1, "title": "Cấu trúc di truyền của quần thể tự phối",
+        "description": "Tần số allele, tần số kiểu gene và sự thay đổi cấu trúc di truyền qua tự thụ phấn, giao phối gần.", "status": "planned"},
+       {"key": "sh12.hardy_weinberg", "order": 2, "title": "Quần thể ngẫu phối và định luật Hardy – Weinberg",
+        "description": "Trạng thái cân bằng di truyền p² : 2pq : q² và cách tính tần số allele, kiểu gene.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Sinh học 12; mọi đáp số đã được tính lại (gene một locus hai allele trên NST thường)."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Tính tần số allele từ thành phần kiểu gene",
+          "Kiểm tra một quần thể có ở trạng thái cân bằng Hardy – Weinberg hay không",
+          "Tính tần số kiểu gene khi biết tỉ lệ kiểu hình lặn ở quần thể cân bằng"
+        ],
+        "summary": [
+          "Với một gene hai allele A, a trên NST thường: p(A) = tỉ lệ AA + ½ tỉ lệ Aa; q(a) = 1 − p.",
+          "Quần thể ngẫu phối, đủ lớn, không có đột biến, chọn lọc, di nhập gene thì đạt cân bằng sau một thế hệ: p² AA : 2pq Aa : q² aa.",
+          "Quần thể cân bằng khi thành phần kiểu gene thực tế trùng với p² : 2pq : q².",
+          "Ở quần thể cân bằng, tỉ lệ kiểu hình lặn bằng q², nên q = căn bậc hai của tỉ lệ đó."
+        ],
+        "examples": [
+          {"title": "Bệnh bạch tạng", "lines": [
+            "Một quần thể cân bằng có 1 người bạch tạng (aa) trên 10 000 người: q² = 0,0001 nên q = 0,01, p = 0,99.",
+            "Tỉ lệ người mang allele bệnh nhưng không biểu hiện (Aa): 2pq = 2 · 0,99 · 0,01 = 0,0198."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "choice", "style": "quiz", "title": "Tính tần số allele",
+           "tasks": [
+             {"key": "p_tu_kieu_gene", "question": "Một quần thể có thành phần kiểu gene 0,36 AA : 0,48 Aa : 0,16 aa. Tần số allele A là bao nhiêu?",
+              "options": [
+                {"text": "0,6", "ok": true, "why": "p = 0,36 + 0,48 : 2 = 0,36 + 0,24 = 0,6."},
+                {"text": "0,36", "ok": false, "why": "0,36 chỉ là tỉ lệ kiểu gene AA; còn phải cộng một nửa tỉ lệ Aa."},
+                {"text": "0,84", "ok": false, "why": "Đã cộng cả tỉ lệ Aa; mỗi cá thể Aa chỉ mang một allele A trong hai allele."},
+                {"text": "0,4", "ok": false, "why": "0,4 là tần số allele a."}
+              ],
+              "explanation": "Tần số allele A = tỉ lệ AA + ½ tỉ lệ Aa."},
+             {"key": "kiem_tra_cb", "question": "Quần thể có thành phần kiểu gene 0,5 AA : 0,2 Aa : 0,3 aa. Quần thể này đã ở trạng thái cân bằng Hardy – Weinberg chưa?",
+              "options": [
+                {"text": "Chưa cân bằng", "ok": true, "why": "p = 0,6, q = 0,4; nếu cân bằng phải là 0,36 AA : 0,48 Aa : 0,16 aa, khác thành phần thực tế."},
+                {"text": "Đã cân bằng vì 0,5 + 0,2 + 0,3 = 1", "ok": false, "why": "Tổng tỉ lệ các kiểu gene của mọi quần thể đều bằng 1; điều đó không chứng tỏ cân bằng."},
+                {"text": "Đã cân bằng vì có đủ ba kiểu gene", "ok": false, "why": "Có đủ ba kiểu gene chưa đủ; tỉ lệ phải đúng p² : 2pq : q²."}
+              ],
+              "explanation": "Tính p, q rồi so sánh thành phần kiểu gene mong đợi với thực tế."},
+             {"key": "f1_ngau_phoi", "question": "Quần thể 0,5 AA : 0,2 Aa : 0,3 aa ngẫu phối, không chịu tác động của nhân tố tiến hoá. Ở thế hệ sau, tỉ lệ kiểu gene aa là bao nhiêu?",
+              "options": [
+                {"text": "0,16", "ok": true, "why": "q = 0,3 + 0,1 = 0,4; sau một thế hệ ngẫu phối, aa = q² = 0,16."},
+                {"text": "0,3", "ok": false, "why": "Ngẫu phối làm thành phần kiểu gene đổi về p² : 2pq : q² ngay thế hệ sau."},
+                {"text": "0,4", "ok": false, "why": "0,4 là tần số allele a, không phải tỉ lệ kiểu gene aa."},
+                {"text": "0,09", "ok": false, "why": "0,09 = 0,3²: đã bình phương tỉ lệ aa thay vì bình phương tần số allele a."}
+              ],
+              "explanation": "Với gene trên NST thường, quần thể ngẫu phối đạt cân bằng sau một thế hệ."},
+             {"key": "di_hop_benh", "question": "Một quần thể người cân bằng di truyền có tỉ lệ người mắc bệnh do allele lặn a là 1/10 000. Tỉ lệ người mang kiểu gene dị hợp Aa là bao nhiêu?",
+              "options": [
+                {"text": "0,0198", "ok": true, "why": "q² = 0,0001 nên q = 0,01, p = 0,99; 2pq = 2 · 0,99 · 0,01 = 0,0198."},
+                {"text": "0,01", "ok": false, "why": "0,01 là tần số allele a (q), không phải tỉ lệ dị hợp."},
+                {"text": "0,0001", "ok": false, "why": "0,0001 là tỉ lệ người mắc bệnh (aa)."},
+                {"text": "0,99", "ok": false, "why": "0,99 là tần số allele A (p)."}
+              ],
+              "explanation": "Từ kiểu hình lặn tìm q, rồi tính 2pq. Số người mang allele bệnh lớn hơn nhiều số người mắc bệnh."},
+             {"key": "p_tu_so_luong", "question": "Một quần thể có 1000 cá thể: 490 AA, 420 Aa, 90 aa. Tần số allele A là bao nhiêu?",
+              "options": [
+                {"text": "0,7", "ok": true, "why": "Số allele A = 2 · 490 + 420 = 1400 trên tổng 2000 allele: p = 0,7."},
+                {"text": "0,49", "ok": false, "why": "0,49 là tỉ lệ kiểu gene AA."},
+                {"text": "0,91", "ok": false, "why": "Đã lấy (490 + 420) : 1000; cá thể Aa chỉ góp một allele A."},
+                {"text": "0,3", "ok": false, "why": "0,3 là tần số allele a."}
+              ],
+              "explanation": "Mỗi cá thể lưỡng bội có hai allele: AA góp 2 allele A, Aa góp 1."},
+             {"key": "di_hop_q2", "question": "Một quần thể cân bằng có 9 % cá thể mang kiểu hình lặn (aa). Tỉ lệ cá thể dị hợp Aa là bao nhiêu?",
+              "options": [
+                {"text": "0,42", "ok": true, "why": "q² = 0,09 nên q = 0,3, p = 0,7; 2pq = 2 · 0,7 · 0,3 = 0,42."},
+                {"text": "0,21", "ok": false, "why": "Quên hệ số 2: pq = 0,21, còn tỉ lệ dị hợp là 2pq."},
+                {"text": "0,49", "ok": false, "why": "0,49 là tỉ lệ đồng hợp trội AA (p²)."},
+                {"text": "0,3", "ok": false, "why": "0,3 là tần số allele a."}
+              ],
+              "explanation": "Biết q² → q → p → 2pq."}
+           ]},
+          {"game": "order", "title": "Sắp xếp quần thể",
+           "tasks": [
+             {"key": "buoc_tu_lan", "prompt": "Quần thể ở trạng thái cân bằng. Sắp xếp các bước tính tỉ lệ kiểu gene khi biết tỉ lệ kiểu hình lặn.",
+              "items": [
+                "Ghi tỉ lệ kiểu hình lặn, đó là q²",
+                "Lấy căn bậc hai để được q",
+                "Tính p = 1 − q",
+                "Tính tỉ lệ AA = p² và Aa = 2pq"
+              ],
+              "explanation": "Chỉ kiểu hình lặn cho biết trực tiếp một kiểu gene (aa); từ q² suy ra q, rồi p, rồi các kiểu gene còn lại.",
+              "first_label": "Làm trước", "last_label": "Làm sau cùng"},
+             {"key": "q_tang_dan", "prompt": "Sắp xếp các quần thể theo tần số allele a tăng dần.",
+              "items": [
+                "0,64 AA : 0,32 Aa : 0,04 aa",
+                "0,49 AA : 0,42 Aa : 0,09 aa",
+                "0,25 AA : 0,50 Aa : 0,25 aa",
+                "0,10 AA : 0,20 Aa : 0,70 aa"
+              ],
+              "explanation": "q = aa + ½Aa: 0,04 + 0,16 = 0,2; 0,09 + 0,21 = 0,3; 0,25 + 0,25 = 0,5; 0,70 + 0,10 = 0,8.",
+              "first_label": "Nhỏ nhất", "last_label": "Lớn nhất"},
+             {"key": "di_hop_tang", "prompt": "Các quần thể đều cân bằng. Sắp xếp theo tỉ lệ kiểu gene dị hợp Aa tăng dần.",
+              "items": ["q(a) = 0,1", "q(a) = 0,8", "q(a) = 0,4", "q(a) = 0,5"],
+              "explanation": "2pq: 2 · 0,9 · 0,1 = 0,18; 2 · 0,2 · 0,8 = 0,32; 2 · 0,6 · 0,4 = 0,48; 2 · 0,5 · 0,5 = 0,50. Tỉ lệ dị hợp lớn nhất khi p = q = 0,5.",
+              "first_label": "Nhỏ nhất", "last_label": "Lớn nhất"},
+             {"key": "buoc_kiem_tra", "prompt": "Sắp xếp các bước kiểm tra một quần thể có ở trạng thái cân bằng Hardy – Weinberg hay không.",
+              "items": [
+                "Tính tần số allele p, q từ thành phần kiểu gene",
+                "Tính thành phần kiểu gene mong đợi p², 2pq, q²",
+                "So sánh với thành phần kiểu gene thực tế",
+                "Kết luận: trùng khớp thì quần thể cân bằng"
+              ],
+              "explanation": "Thành phần mong đợi được tính từ p, q; chỉ khi có cả hai bộ số mới so sánh và kết luận được.",
+              "first_label": "Làm trước", "last_label": "Làm sau cùng"}
+           ]}
+        ]},
+       {"key": "sh12.ung_dung_di_truyen", "order": 3, "title": "Thành tựu chọn giống và di truyền học người",
+        "description": "Ứng dụng di truyền học trong chọn giống, công nghệ gene, di truyền y học và tư vấn di truyền.", "status": "planned"}
+     ]},
+    {"key": "sh12.tien_hoa", "grade": 12, "order": 4, "title": "Tiến hoá",
+     "lessons": [
+       {"key": "sh12.bang_chung_tien_hoa", "order": 1, "title": "Các bằng chứng tiến hoá",
+        "description": "Bằng chứng hoá thạch, giải phẫu so sánh, tế bào học và sinh học phân tử.", "status": "planned"},
+       {"key": "sh12.darwin", "order": 2, "title": "Học thuyết tiến hoá của Darwin",
+        "description": "Biến dị, chọn lọc tự nhiên, chọn lọc nhân tạo và sự hình thành các đặc điểm thích nghi.", "status": "planned"},
+       {"key": "sh12.nhan_to_tien_hoa", "order": 3, "title": "Thuyết tiến hoá tổng hợp hiện đại và các nhân tố tiến hoá",
+        "description": "Tiến hoá nhỏ, tiến hoá lớn và vai trò của đột biến, di nhập gene, chọn lọc tự nhiên, phiêu bạt di truyền.", "status": "planned"},
+       {"key": "sh12.hinh_thanh_loai", "order": 4, "title": "Loài và quá trình hình thành loài",
+        "description": "Khái niệm loài sinh học, cơ chế cách li và các con đường hình thành loài.", "status": "planned"},
+       {"key": "sh12.phat_sinh_su_song", "order": 5, "title": "Sự phát sinh sự sống và sự hình thành loài người",
+        "description": "Các giai đoạn phát sinh sự sống, sinh giới qua các đại địa chất và quá trình phát sinh loài người.", "status": "planned"}
+     ]},
+    {"key": "sh12.sinh_thai", "grade": 12, "order": 5, "title": "Sinh thái học và môi trường",
+     "lessons": [
+       {"key": "sh12.nhan_to_sinh_thai", "order": 1, "title": "Môi trường và các nhân tố sinh thái",
+        "description": "Các loại môi trường sống, nhân tố vô sinh, nhân tố hữu sinh và giới hạn sinh thái.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Sinh học 12; con người được xếp vào nhân tố hữu sinh như trong sinh thái học."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Phân biệt nhân tố sinh thái vô sinh và nhân tố sinh thái hữu sinh",
+          "Nêu được khái niệm giới hạn sinh thái và ổ sinh thái"
+        ],
+        "summary": [
+          "Nhân tố sinh thái là những nhân tố của môi trường tác động đến sinh vật.",
+          "Nhân tố vô sinh là các yếu tố vật lí, hoá học: ánh sáng, nhiệt độ, độ ẩm, lượng mưa, gió, khí CO₂, O₂, độ pH và thành phần của đất, nước.",
+          "Nhân tố hữu sinh là các sinh vật khác và mối quan hệ giữa chúng: cạnh tranh, vật ăn thịt – con mồi, kí sinh, cộng sinh… Con người là nhân tố hữu sinh có tác động rất mạnh.",
+          "Giới hạn sinh thái là khoảng giá trị của một nhân tố mà sinh vật tồn tại và phát triển được; ngoài giới hạn đó sinh vật chết."
+        ],
+        "examples": [
+          {"title": "Cá rô phi", "lines": [
+            "Cá rô phi ở Việt Nam sống được trong khoảng nhiệt độ từ 5,6 °C đến 42 °C, phát triển thuận lợi nhất ở khoảng 20–35 °C.",
+            "Mùa đông rét đậm dưới 5,6 °C, cá rô phi có thể bị chết hàng loạt."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "sorting", "title": "Vô sinh hay hữu sinh?",
+           "set": {"title": "Đối với cây lúa trên một cánh đồng, đây là nhân tố sinh thái vô sinh hay hữu sinh?",
+            "groups": [
+              {"id": "vo_sinh", "label": "Nhân tố vô sinh", "icon": "☀️"},
+              {"id": "huu_sinh", "label": "Nhân tố hữu sinh", "icon": "🐛"}
+            ],
+            "cards": [
+              {"key": "anh_sang", "text": "Ánh sáng mặt trời chiếu xuống ruộng", "picture": "☀️", "group": "vo_sinh",
+               "explanation": "Ánh sáng là yếu tố vật lí của môi trường: nhân tố vô sinh."},
+              {"key": "nhiet_do", "text": "Đợt rét đậm làm nhiệt độ xuống dưới 13 °C", "picture": "🥶", "group": "vo_sinh",
+               "explanation": "Nhiệt độ là yếu tố vật lí: nhân tố vô sinh."},
+              {"key": "luong_mua", "text": "Lượng mưa trong mùa vụ", "picture": "🌧️", "group": "vo_sinh",
+               "explanation": "Mưa, độ ẩm thuộc khí hậu: nhân tố vô sinh."},
+              {"key": "ph_dat", "text": "Độ chua (pH) của đất ruộng", "picture": "🧪", "group": "vo_sinh",
+               "explanation": "pH là đặc điểm hoá học của đất: nhân tố vô sinh."},
+              {"key": "khi_co2", "text": "Nồng độ khí CO₂ trong không khí", "picture": "💨", "group": "vo_sinh",
+               "explanation": "Thành phần khí của không khí là nhân tố vô sinh, dù CO₂ có thể do sinh vật thải ra."},
+              {"key": "ray_nau", "text": "Rầy nâu hút nhựa cây lúa", "picture": "🦗", "group": "huu_sinh",
+               "explanation": "Rầy nâu là côn trùng hút nhựa, gây hại cho lúa: nhân tố hữu sinh."},
+              {"key": "co_dai", "text": "Cỏ dại mọc chen, cạnh tranh ánh sáng và dinh dưỡng", "picture": "🌱", "group": "huu_sinh",
+               "explanation": "Cỏ dại là sinh vật cạnh tranh với lúa: nhân tố hữu sinh."},
+              {"key": "nam_benh", "text": "Nấm gây bệnh đạo ôn", "picture": "🍄", "group": "huu_sinh",
+               "explanation": "Nấm gây bệnh là sinh vật: nhân tố hữu sinh."},
+              {"key": "ech_an_sau", "text": "Ếch nhái bắt sâu hại lúa", "picture": "🐸", "group": "huu_sinh",
+               "explanation": "Ếch là sinh vật có quan hệ dinh dưỡng với sâu và gián tiếp với lúa: nhân tố hữu sinh."},
+              {"key": "nong_dan", "text": "Nông dân cấy, bón phân và làm cỏ", "picture": "👩‍🌾", "group": "huu_sinh",
+               "explanation": "Con người là một sinh vật nên là nhân tố hữu sinh, có tác động rất mạnh đến cây trồng."}
+            ]}}
+        ]},
+       {"key": "sh12.quan_the_sv", "order": 2, "title": "Quần thể sinh vật",
+        "description": "Các đặc trưng cơ bản của quần thể, kiểu tăng trưởng và biến động số lượng cá thể.", "status": "planned"},
+       {"key": "sh12.quan_xa", "order": 3, "title": "Quần xã sinh vật",
+        "description": "Đặc trưng của quần xã, quan hệ giữa các loài và diễn thế sinh thái.", "status": "planned"},
+       {"key": "sh12.he_sinh_thai", "order": 4, "title": "Hệ sinh thái, chuỗi và lưới thức ăn",
+        "description": "Thành phần hệ sinh thái, chuỗi và lưới thức ăn, tháp sinh thái và dòng năng lượng.", "status": "planned"},
+       {"key": "sh12.chu_trinh", "order": 5, "title": "Chu trình sinh – địa – hoá và sinh quyển",
+        "description": "Chu trình nước, carbon, nitrogen; các khu sinh học trên Trái Đất.", "status": "planned"},
+       {"key": "sh12.bao_ton", "order": 6, "title": "Sinh thái học phục hồi, bảo tồn và phát triển bền vững",
+        "description": "Phục hồi hệ sinh thái, bảo tồn đa dạng sinh học và phát triển bền vững.", "status": "planned"}
+     ]}
+  ]
+}

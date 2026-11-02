@@ -8,6 +8,7 @@
 docs/
 mobile/
 !mobile/assets/room/room-art.json
+!mobile/assets/memory-art.json
 !mobile/assets/pets/*/Lv*.png
 README.md
 package-lock.json

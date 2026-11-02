@@ -1,13 +1,12 @@
-"""The vocabulary bank: bundled data, validation and quality gate, lifecycle, bulk import and how a stage picks its words."""
-import random
+"""The vocabulary bank: bundled data, validation and quality gate, lifecycle and bulk import (word choice: test_vocab_discovery)."""
 from collections import Counter
 
 import pytest
 from sqlalchemy import func, select
 
 from app.learning_engine import normalize_text
-from app.learning_vocab import (COLUMNS, DIFFICULTIES, PASS_SEEN, POS, TOPIC_CODES, Entry, Seen, check, effective_status,
-                                import_rows, pick_entries, promote, set_statuses, travel_for, working_level)
+from app.learning_vocab import (COLUMNS, DIFFICULTIES, POS, TOPIC_CODES, check, effective_status, import_rows, promote,
+                                set_statuses, travel_for)
 
 HEADER = "\t".join(COLUMNS)
 
@@ -32,7 +31,9 @@ def test_bundled_bank_is_valid_and_large_enough():
     # Nothing with a quality issue is ever active.
     assert not [r.key for r in active if report.issues.get(r.key)]
     words = {normalize_text(r.word) for r in active}
-    assert len(words) >= 10000, f"{len(words)} unique active words"
+    # Reviewed words only: the dictionary import with placeholder contexts (and wrong meanings) is never served.
+    assert len(words) >= 8000, f"{len(words)} unique active words"
+    assert not [r.key for r in active if r.context_vi and r.context_vi.startswith("Dùng trong ngữ cảnh")]
     topics = Counter(r.topic for r in active)
     assert len(topics) >= 30 and set(topics) <= TOPIC_CODES
     assert set(r.difficulty for r in active) == set(DIFFICULTIES)
@@ -101,6 +102,39 @@ def test_duplicates_are_dropped_and_doubtful_rows_stay_drafts(tmp_path):
     rows, report = check([tsv(tmp_path, row(key="big", word="big", pos="adjective", meaning="to, lớn", example="A big house.", accepted="large"),
                               row(key="large", word="large", pos="adjective", meaning="to, lớn", example="A large house.", accepted="big"))])
     assert len(rows) == 2 and not report.issues
+
+
+def test_a_meaning_another_word_also_has_needs_a_context_and_imported_contexts_do_not_count(tmp_path):
+    # "lớn" is also a meaning of "big" (to, lớn): Việt → Anh on "lớn" alone would mark "big" wrong.
+    rows, report = check([tsv(tmp_path, row(key="big", word="big", pos="adjective", meaning="to, lớn", example="A big house."),
+                              row(key="large", word="large", pos="adjective", meaning="lớn", example="A large house."))])
+    assert "big" not in report.issues and "covered_meaning" in report.issues["large"][0]
+    assert effective_status(next(r for r in rows if r.key == "large"), report) == "draft"
+    # A context that says which word is meant, or accepting the other word, makes it playable.
+    for fix in ({"context": "kích thước, số lượng lớn hơn mức thường (hay dùng trong văn viết)"}, {"accepted": "big"}):
+        rows, report = check([tsv(tmp_path, row(key="big", word="big", pos="adjective", meaning="to, lớn", example="A big house."),
+                                  row(key="large", word="large", pos="adjective", meaning="lớn", example="A large house.", **fix))])
+        assert not report.issues, fix
+    # Another part of speech is another question ("lớn lên" is a verb): no conflict.
+    rows, report = check([tsv(tmp_path, row(key="big", word="big", pos="adjective", meaning="to, lớn", example="A big house."),
+                              row(key="grow", word="grow", pos="verb", meaning="lớn", example="Children grow fast."))])
+    assert not report.issues
+    # An imported "context" that only repeats the meaning is no context: the entry is never served.
+    rows, report = check([tsv(tmp_path, row(key="scud", word="scud", meaning="Máy bay.", example="A scud flew over.",
+                                            context="Dùng trong ngữ cảnh travel; nghĩa cụ thể: Máy bay."))])
+    assert "placeholder_context" in report.issues["scud"][0] and effective_status(rows[0], report) == "draft"
+
+
+def test_a_meaning_that_shows_the_word_is_never_asked_viet_to_anh():
+    from app.learning_vocab import gives_answer
+    assert gives_answer("chuột hamster", "thú cưng nhỏ", ["hamster"])
+    assert gives_answer("cảm thấy", "nói về cảm xúc: feel happy, feel sad", ["feel"])
+    assert gives_answer("có lẽ", "cách nói lịch sự hơn maybe", ["perhaps", "maybe"])  # an accepted answer too
+    assert not gives_answer("con mèo", "thú cưng kêu meo meo", ["cat"])
+    assert not gives_answer("vui vẻ", "categorically happy", ["cat"])  # only the whole word counts
+    rows, report = check()
+    shown = {r.key for r in rows if effective_status(r, report) == "active" and gives_answer(r.meaning_vi, r.context_vi, r.accepted)}
+    assert "hamster" in shown and "cat" not in shown
 
 
 def test_inflected_forms_spelling_variants_and_unused_examples_are_not_new_words(tmp_path):
@@ -201,78 +235,7 @@ def test_the_bundled_bank_imports_once(client, db):
     assert set(counts) == {"unchanged"} and db.scalar(select(func.count()).select_from(LearningVocabEntry)) == total
 
 
-# --- level and word choice ----------------------------------------------------------------------------------------
-
-def bank(per_level=30):
-    return [Entry(f"d{d}_{i}", f"word{d}x{i}", d) for d in DIFFICULTIES for i in range(per_level)]
-
-
-def test_level_starts_at_the_easiest_and_rises_only_with_first_try_answers():
-    b = bank()
-    assert working_level(b, {}) == 1
-    d1 = [e for e in b if e.difficulty == 1][:PASS_SEEN]
-    assert working_level(b, {e.key: Seen(1, 1, 20) for e in d1}) == 2
-    assert working_level(b, {e.key: Seen(1, 1, 20) for e in d1[:PASS_SEEN - 1]}) == 1  # not enough words seen
-    shaky = {e.key: Seen(2, 1, 5) for e in d1}  # half right at the first try
-    assert working_level(b, shaky) == 1
-
-
-def test_a_stage_has_different_words_at_the_users_level_and_mixes_new_review_and_learned():
-    b = bank()
-    d1 = [e for e in b if e.difficulty == 1]
-    seen = {e.key: Seen(1, 1, 90, last_seen=i) for i, e in enumerate(d1[:8])}
-    seen[d1[8].key] = Seen(2, 0, 10)  # answered wrong: on the review list
-    picked = pick_entries(b, level=1, seen=seen, review={d1[8].key, d1[9].key}, recent=set(), count=12, rng=random.Random(1))
-    keys = [e.key for e, _ in picked]
-    assert len(keys) == 12 == len(set(keys))  # never twice in a stage
-    assert all(e.difficulty == 1 for e, _ in picked)  # nothing above the user's level
-    reasons = Counter(r for _, r in picked)
-    assert reasons["review"] == 2 and reasons["learned"] == 2 and reasons["new"] == 8
-    assert {d1[8].key, d1[9].key} <= set(keys)
-
-
-def test_two_senses_of_one_word_are_never_in_the_same_stage():
-    pool = [Entry("bank.money", "bank", 1), Entry("bank.river", "bank", 1)] + [Entry(f"w{i}", f"word{i}", 1) for i in range(20)]
-    for seed in range(20):
-        words = [e.word for e, _ in pick_entries(pool, level=1, seen={}, review=set(), recent=set(), count=12, rng=random.Random(seed))]
-        assert words.count("bank") <= 1
-
-
-def test_recent_words_are_not_drawn_again_while_others_are_left():
-    b = bank(per_level=20)
-    first = pick_entries(b, level=1, seen={}, review=set(), recent=set(), count=12, rng=random.Random(2))
-    recent = {e.key for e, _ in first}
-    second = pick_entries(b, level=1, seen={}, review=set(), recent=recent, count=12, rng=random.Random(3))
-    # 20 easy words: the 8 not shown last time come first; the rest comes back from the words drawn (and never answered)
-    # last time, before any harder word.
-    assert len({e.key for e, _ in second} - recent) == 8 and all(e.difficulty == 1 for e, _ in second)
-
-
-def test_a_right_answer_is_not_reviewed_again_at_once():
-    b = bank(per_level=20)
-    d1 = [e for e in b if e.difficulty == 1]
-    first = {e.key: Seen(1, 1, 20) for e in d1[:12]}  # one right answer each: mastery 20, but nothing to review
-    picked = pick_entries(b, level=1, seen=first, review=set(), recent={e.key for e in d1[:12]}, count=12, rng=random.Random(6))
-    reasons = Counter(r for _, r in picked)
-    assert reasons["review"] == 0 and sum(1 for e, r in picked if r == "new" and e.difficulty == 1) == 8
-
-
-def test_when_new_words_run_out_the_stage_becomes_a_purposeful_review():
-    b = [e for e in bank(per_level=12) if e.difficulty == 1]
-    seen = {e.key: Seen(2, 1, 30) for e in b}  # every word of the level seen, half of them missed
-    review = {e.key for e in b[:6]}
-    picked = pick_entries(b, level=1, seen=seen, review=review, recent=set(), count=12, rng=random.Random(4))
-    reasons = Counter(r for _, r in picked)
-    assert len(picked) == 12 and reasons == {"review": 6, "learned": 6}  # never empty, never harder words
-    # A small pool (6 words at the user's level) is filled with words of the next level only, never two levels up.
-    small = bank(per_level=6)
-    picked = pick_entries(small, level=1, seen={}, review=set(), recent=set(), count=12, rng=random.Random(7))
-    assert Counter(e.difficulty for e, _ in picked) == {1: 6, 2: 6}
-    # A topic whose words are all above the user's level still gives a stage, with its easiest words.
-    hard = [e for e in bank() if e.difficulty in (5, 6)]
-    picked = pick_entries(hard, level=1, seen={}, review=set(), recent=set(), count=12, rng=random.Random(5))
-    assert picked and all(e.difficulty == 5 for e, _ in picked)
-
+# --- falling time ----------------------------------------------------------------------------------------------
 
 def test_long_words_and_phrases_fall_slower():
     assert travel_for("cat", 24) == 24

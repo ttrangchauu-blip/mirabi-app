@@ -16,15 +16,16 @@ import { appTheme as t } from '../../theme';
 import { Avatar, Button, Card, formatNumber, IconCircle, IconName, ProgressBar, SectionHeader } from '../../ui/kit';
 import { useToast } from '../../ui/Toast';
 import { WalkLandscape } from './WalkLandscape';
-import { Dashboard, Quest, request, resolveQuestId, ScheduledTask, showError, taskRepeatDetail, WalkStatus } from './shared';
+import { formatRemaining, normalizePetSpace, type PetSpace } from './petSpace';
+import { Dashboard, Quest, request, resolveQuestId, ScheduledTask, showError, taskRepeatDetail } from './shared';
 
 const DAYS = ['Chủ nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
 const todayLabel = (d = new Date()) => `${DAYS[d.getDay()]}, ${d.getDate()} tháng ${d.getMonth() + 1}`;
 
-const SHORTCUTS: { icon: IconName; title: string; subtitle: string; tab: TabKey; color: string; bg: string; together?: boolean; focus?: boolean }[] = [
+const SHORTCUTS: { icon: IconName; title: string; subtitle: string; tab: TabKey; color: string; bg: string; together?: boolean; focus?: boolean; friends?: boolean }[] = [
   { icon: 'timer-outline', title: 'Tập trung', subtitle: 'Pomodoro 25 phút', tab: 'Study', color: '#136FA8', bg: '#DDF0FA', focus: true },
-  { icon: 'bed-outline', title: 'Phòng cá nhân', subtitle: 'Góc nhỏ của pet', tab: 'Room', color: '#5141A8', bg: '#EEEAFF' },
-  { icon: 'people-outline', title: 'Bạn bè', subtitle: 'Kết bạn, ghé phòng', tab: 'Community', color: '#B23A0A', bg: '#FFEBDD' },
+  { icon: 'bed-outline', title: 'Nhà của pet', subtitle: 'Góc nhỏ của pet', tab: 'Room', color: '#5141A8', bg: '#EEEAFF' },
+  { icon: 'people-outline', title: 'Bạn bè', subtitle: 'Kết bạn, ghé phòng', tab: 'Room', color: '#B23A0A', bg: '#FFEBDD', friends: true },
   { icon: 'people-circle-outline', title: 'Học cùng bạn', subtitle: 'Phòng học nhóm', tab: 'Study', color: '#0B6577', bg: '#DFF6FA', together: true },
 ];
 
@@ -38,38 +39,11 @@ type Props = { user: User; dashboard: Dashboard | null; onNavigate: (tab: TabKey
   /** Opens the private pet memory album. */ onOpenMemories?: () => void;
   /** The egg's hatching (usePetHatch): it plays in the pet frame, ahead of anything else there. */
   hatch?: { phase: HatchPhase; level: number | null; waitingReturn: boolean; onPlayed: () => void };
-  /** Every answer of /api/pet/space, for the hatching to follow. */ onPetSpace?: (space: unknown) => void };
-type PetSpace = { status: WalkStatus; seconds_left: number; walk_minutes: number; started_at?: string | null; return_at?: string | null; server_now?: string; task_cycle_id?: string | null; last_find?: FoundItem | null; collection: { id: string; name: string; emoji: string; count: number }[] };
-type FoundItem = { id?: string; name: string; emoji: string };
-/** Server times are UTC. Older backends sent them without an offset, which JS would read as local time. */
-function serverTime(value: unknown): string | null {
-  if (typeof value !== 'string' || !value) return null;
-  const hasZone = /(Z|[+-]\d{2}:?\d{2})$/i.test(value);
-  const date = new Date(hasZone ? value : `${value.replace(' ', 'T')}Z`);
-  return Number.isNaN(date.getTime()) ? null : date.toISOString();
-}
-function normalizePetSpace(value: any): PetSpace | null {
-  if (!value || typeof value !== 'object' || !Array.isArray(value.collection)) return null;
-  const aliases: Record<string, WalkStatus> = {
-    locked: 'locked', idle: 'locked', ready: 'ready', waiting_hatch: 'waiting_hatch', walking: 'walking', exploring: 'walking',
-    returned: 'returned', return_ready: 'returned', returning: 'returned', rested: 'rested', completed: 'rested',
-  };
-  const returnAt = serverTime(value.return_at ?? value.returns_at);
-  const rawStatus = String(value.status ?? value.state ?? '').toLowerCase();
-  const status = aliases[rawStatus] ?? (returnAt && new Date(returnAt).getTime() > Date.now() ? 'walking' : 'locked');
-  const minutes = Number(value.walk_minutes);
-  const serverNowIso = serverTime(value.server_now);
-  const serverNow = serverNowIso ? new Date(serverNowIso).getTime() : Date.now();
-  const fromReturnAt = returnAt ? Math.max(0, Math.ceil((new Date(returnAt).getTime() - serverNow) / 1000)) : 0;
-  const secondsLeft = Number(value.seconds_left);
-  return { ...value, status, return_at: returnAt, started_at: serverTime(value.started_at), server_now: serverNowIso ?? undefined,
-    walk_minutes: Number.isFinite(minutes) && minutes > 0 ? minutes : 480,
-    seconds_left: Number.isFinite(secondsLeft) && secondsLeft > 0 ? secondsLeft : fromReturnAt } as PetSpace;
-}
-function formatRemaining(seconds: number) { const h = Math.floor(seconds / 3600); const m = Math.floor((seconds % 3600) / 60); const s = seconds % 60; return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`; }
+  /** Every answer of /api/pet/space, for the hatching to follow. */ onPetSpace?: (space: unknown) => void;
+  /** Cuộc sống Mirabi → Bạn bè. */ onOpenFriends?: () => void };
 function localTodayIso() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; }
 
-export function HomeTab({ user, dashboard, onNavigate, onOpenProfile, onOpenStreak, onOpenDailyQuests, onOpenTaskCreate, onQuestChanged, petSpaceVersion = 0, onPetReturned, onOpenPetGifts, onOpenStudyTogether, onOpenFreeStudy, onOpenMemories, onOpenNotifications, hatch, onPetSpace }: Props) {
+export function HomeTab({ user, dashboard, onNavigate, onOpenProfile, onOpenStreak, onOpenDailyQuests, onOpenTaskCreate, onQuestChanged, petSpaceVersion = 0, onPetReturned, onOpenPetGifts, onOpenStudyTogether, onOpenFreeStudy, onOpenFriends, onOpenMemories, onOpenNotifications, hatch, onPetSpace }: Props) {
   const pet = petById(user.pet);
   const petName = user.pet_name ?? pet.name;
   const today = dashboard?.study?.today_sessions ?? 0;
@@ -265,7 +239,7 @@ export function HomeTab({ user, dashboard, onNavigate, onOpenProfile, onOpenStre
       <View style={styles.grid}>
         {SHORTCUTS.map((s) => (
           <Pressable key={s.title} onPress={() => (s.together && onOpenStudyTogether ? onOpenStudyTogether()
-            : s.focus && onOpenFreeStudy ? onOpenFreeStudy() : onNavigate(s.tab))} accessibilityRole="button"
+            : s.focus && onOpenFreeStudy ? onOpenFreeStudy() : s.friends && onOpenFriends ? onOpenFriends() : onNavigate(s.tab))} accessibilityRole="button"
             accessibilityLabel={`${s.title}: ${s.subtitle}`} style={({ pressed }) => [styles.tile, pressed && styles.pressed]}>
             <IconCircle name={s.icon} color={s.color} bg={s.bg} />
             <Text style={styles.tileTitle}>{s.title}</Text>

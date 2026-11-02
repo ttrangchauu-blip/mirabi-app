@@ -2,7 +2,7 @@
 // PetArt plays: the same COLS x ROWS grid of square CELL px frames, read left to right then top to bottom, every frame
 // cropped to the same box so the pet stays put, feet on the bottom edge. `steady` (0 to 1) also pulls each frame's
 // horizontal centre that far toward the frames' average, for a sheet whose pet drifts side to side between frames.
-// Nothing of a pose is cut: frames that touch are parted along winding seams, and a pose the picture's own edge cut
+// Nothing of a pose is cut: frames that touch are parted where they join and along winding seams, and a pose the picture's own edge cut
 // off is mended from a matching frame. The result is cleaned of background haze and lightly sharpened (polish-pet-art).
 // Usage: node scripts/slice-sprite-sheet.mjs <sheet.png> <out.png> [cols=8] [rows=1] [cell=256] [steady=0]
 import fs from 'node:fs';
@@ -140,6 +140,75 @@ function mendEdges({ width: W0, height: H0, data: d0 }) {
 const { W, H, data, mended } = mendEdges(src);
 const alpha = (x, y) => data[(y * W + x) * 4 + 3];
 
+// Poses side by side that touch (a cheek against the next frame's tail) would make one blob, and a seam across it knows
+// nothing of whose pixel is whose: it can hand a tail tip to the frame before. So each such pair is parted first along the
+// cheapest line between the two frames' centres (a minimum vertex cut over visible pixels, found with augmenting paths),
+// where a pixel costs more the paler it is: a line along the dark outlines where the poses meet, never across a pale cheek
+// that happens to be as narrow. Those few pixels go. Poses that do not touch lose nothing. Returns the pixels cleared.
+function partTouchingPoses() {
+  const STEPS = [[-1, -1], [0, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [0, 1], [1, 1]]; // step d and step 7 - d are opposites
+  let cleared = 0;
+  for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS - 1; c++) {
+    const x0 = Math.round((c + 0.5) * pitchX), y0 = Math.round(r * pitchY);
+    const w = Math.round((c + 1.5) * pitchX) - x0 + 1, h = (r === ROWS - 1 ? H : Math.round((r + 1) * pitchY)) - y0, n = w * h;
+    const solid = (i) => data[((y0 + ((i / w) | 0)) * W + x0 + i % w) * 4 + 3] > 24;
+    const neighbour = (i, d) => {
+      const x = i % w + STEPS[d][0], y = ((i / w) | 0) + STEPS[d][1];
+      if (x < 0 || y < 0 || x >= w || y >= h) return -1;
+      const j = y * w + x;
+      return solid(j) ? j : -1;
+    };
+    // Each pixel is two nodes, in (2i) and out (2i + 1), joined by what the pixel costs.
+    const used = new Int32Array(n), flow = new Int32Array(n * 8), cameFrom = new Int32Array(n * 2);
+    const cost = new Int32Array(n);
+    for (let i = 0; i < n; i++) {
+      const p = ((y0 + ((i / w) | 0)) * W + x0 + i % w) * 4;
+      cost[i] = 1 + Math.floor((Math.min(data[p], data[p + 1], data[p + 2]) * data[p + 3]) / 65025 * 24);
+    }
+    const search = () => {
+      cameFrom.fill(-1);
+      const queue = [];
+      for (let y = 0; y < h; y++) if (solid(y * w)) { cameFrom[(y * w) * 2 + 1] = -2; queue.push((y * w) * 2 + 1); }
+      for (let q = 0; q < queue.length; q++) {
+        const node = queue[q], i = node >> 1;
+        const visit = (to) => { if (cameFrom[to] === -1) { cameFrom[to] = node; queue.push(to); } };
+        if (node & 1) {
+          for (let d = 0; d < 8; d++) { const j = neighbour(i, d); if (j >= 0) visit(j * 2); }
+          if (used[i] > 0) visit(i * 2);
+        } else {
+          if (i % w === w - 1) return node;
+          if (used[i] < cost[i]) visit(i * 2 + 1);
+          for (let d = 0; d < 8; d++) { const j = neighbour(i, d); if (j >= 0 && flow[j * 8 + 7 - d] > 0) visit(j * 2 + 1); }
+        }
+      }
+      return -1;
+    };
+    const stepTo = (a, b) => STEPS.findIndex(([dx, dy]) => a % w + dx === b % w && ((a / w) | 0) + dy === ((b / w) | 0));
+    for (let end = search(); end >= 0; end = search()) {
+      let room = Infinity;
+      for (let to = end, from = cameFrom[to]; from !== -2; to = from, from = cameFrom[to]) {
+        const a = from >> 1, b = to >> 1;
+        if (a === b) room = Math.min(room, from & 1 ? used[a] : cost[a] - used[a]);
+        else if (!(from & 1)) room = Math.min(room, flow[b * 8 + 7 - stepTo(a, b)]);
+      }
+      for (let to = end, from = cameFrom[to]; from !== -2; to = from, from = cameFrom[to]) {
+        const a = from >> 1, b = to >> 1;
+        if (a === b) used[a] += from & 1 ? -room : room;
+        else if (from & 1) flow[a * 8 + stepTo(a, b)] += room;
+        else flow[b * 8 + 7 - stepTo(a, b)] -= room;
+      }
+    }
+    for (let i = 0; i < n; i++) {
+      if (cameFrom[i * 2] === -1 || cameFrom[i * 2 + 1] !== -1 || !solid(i)) continue;
+      const p = (y0 + ((i / w) | 0)) * W + x0 + i % w;
+      data.fill(0, p * 4, p * 4 + 4);
+      cleared++;
+    }
+  }
+  return cleared;
+}
+const parted = partTouchingPoses();
+
 // Drop specks left over from background removal: small blobs that are not part of the pet. Every other blob is
 // owned by the frame its centre falls in, so a frame that overlaps its neighbour's cell keeps its own pixels.
 // Blobs spanning several frames (poses that touch) are owned per grid cell instead (owner -1, see `seamsX`/`seamsY`).
@@ -264,4 +333,4 @@ for (let f = 0; f < FRAMES; f++) for (let oy = 0; oy < CELL; oy++) for (let ox =
 sharpen(out.data, out.width, out.height);
 fs.writeFileSync(output, PNG.sync.write(out));
 const span = (path) => `${Math.min(...path)}-${Math.max(...path)}`;
-console.log(`${output}: ${COLS}x${ROWS} frames, seams at x ${seamsX.map(span).join(', ')} / y ${seamsY.map(span).join(', ') || '-'}, source box ${side}px${mended ? `, mended ${mended}px past the right or bottom edge` : ''}`);
+console.log(`${output}: ${COLS}x${ROWS} frames, seams at x ${seamsX.map(span).join(', ')} / y ${seamsY.map(span).join(', ') || '-'}, source box ${side}px${parted ? `, parted touching poses at ${parted}px` : ''}${mended ? `, mended ${mended}px past the right or bottom edge` : ''}`);

@@ -1,0 +1,1060 @@
+{
+  "subject": "chemistry",
+  "version": 1,
+  "organization": "topic",
+  "source_note": "Theo yêu cầu cần đạt môn Hoá học lớp 10–12 (CT GDPT 2018), tên chất theo danh pháp IUPAC như chương trình; tổ chức theo chủ đề, không theo mục lục bộ sách nào. Câu hỏi, số liệu và lời giải do Mirabi biên soạn và tự tính lại.",
+  "chapters": [
+    {"key": "hh10.nguyen_tu", "grade": 10, "order": 1, "title": "Cấu tạo nguyên tử",
+     "lessons": [
+       {"key": "hh10.thanh_phan_nguyen_tu", "order": 1, "title": "Thành phần của nguyên tử",
+        "description": "Hạt nhân và lớp vỏ; proton, neutron, electron; kích thước và khối lượng nguyên tử.", "status": "planned"},
+       {"key": "hh10.nguyen_to_dong_vi", "order": 2, "title": "Nguyên tố hoá học, số khối và đồng vị",
+        "description": "Số hiệu nguyên tử, số khối, kí hiệu nguyên tử, đồng vị và nguyên tử khối trung bình.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Hoá học 10; mọi đáp số đã được tính lại."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Nêu được nguyên tố hoá học là tập hợp nguyên tử có cùng số proton",
+          "Tính số proton, neutron, electron từ kí hiệu nguyên tử",
+          "Tính nguyên tử khối trung bình từ phần trăm các đồng vị"
+        ],
+        "summary": [
+          "Số hiệu nguyên tử Z = số proton = số electron (nguyên tử trung hoà điện).",
+          "Số khối A = Z + N (N là số neutron). Trong kí hiệu nguyên tử, số khối ghi ở trên, số hiệu nguyên tử ghi ở dưới, bên trái kí hiệu nguyên tố: ²³₁₁Na có 11 proton, 12 neutron.",
+          "Nguyên tố hoá học gồm các nguyên tử cùng Z. Đồng vị là những nguyên tử cùng Z nhưng khác số neutron, nên khác số khối.",
+          "Nguyên tử khối trung bình = tổng (số khối × phần trăm số nguyên tử của từng đồng vị) : 100."
+        ],
+        "examples": [
+          {"title": "Hai đồng vị của chlorine", "lines": [
+            "³⁵Cl chiếm 75 %, ³⁷Cl chiếm 25 % số nguyên tử.",
+            "Nguyên tử khối trung bình = (35 · 75 + 37 · 25) : 100 = 35,5."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "choice", "style": "quiz", "title": "Đếm hạt và tính nguyên tử khối",
+           "tasks": [
+             {"key": "neutron_na", "question": "Nguyên tử sodium có kí hiệu ²³₁₁Na. Số neutron trong nguyên tử này là bao nhiêu?",
+              "options": [
+                {"text": "12", "ok": true, "why": "N = A − Z = 23 − 11 = 12."},
+                {"text": "11", "ok": false, "why": "11 là số proton (và số electron), không phải số neutron."},
+                {"text": "23", "ok": false, "why": "23 là số khối, bằng tổng proton và neutron."},
+                {"text": "34", "ok": false, "why": "Cộng A với Z không có ý nghĩa: số neutron là hiệu A − Z."}
+              ],
+              "explanation": "Số khối ghi ở trên, số hiệu nguyên tử ghi ở dưới; số neutron bằng hiệu của hai số đó."},
+             {"key": "so_khoi_cl", "question": "Một nguyên tử có 17 proton và 18 neutron. Số khối của nguyên tử đó là bao nhiêu?",
+              "options": [
+                {"text": "35", "ok": true, "why": "A = Z + N = 17 + 18 = 35 (đây là nguyên tử chlorine-35)."},
+                {"text": "17", "ok": false, "why": "17 là số hiệu nguyên tử Z."},
+                {"text": "52", "ok": false, "why": "Đã cộng cả electron (17 + 18 + 17); số khối chỉ tính proton và neutron vì khối lượng electron rất nhỏ."}
+              ],
+              "explanation": "Số khối là tổng số proton và neutron trong hạt nhân."},
+             {"key": "tong_hat_fe", "question": "Nguyên tử iron có kí hiệu ⁵⁶₂₆Fe. Tổng số hạt proton, neutron và electron trong nguyên tử là bao nhiêu?",
+              "options": [
+                {"text": "82", "ok": true, "why": "p = e = 26, n = 56 − 26 = 30; tổng 26 + 30 + 26 = 82."},
+                {"text": "56", "ok": false, "why": "56 là số khối, chỉ gồm proton và neutron, chưa có electron."},
+                {"text": "52", "ok": false, "why": "52 là p + e, còn thiếu 30 neutron."},
+                {"text": "30", "ok": false, "why": "30 chỉ là số neutron."}
+              ],
+              "explanation": "Trong nguyên tử trung hoà, số electron bằng số proton; tổng số hạt = 2Z + N."},
+             {"key": "chon_dong_vi", "question": "Cặp nguyên tử nào dưới đây là hai đồng vị của cùng một nguyên tố?",
+              "options": [
+                {"text": "Carbon-12 (Z = 6) và carbon-14 (Z = 6)", "ok": true, "why": "Cùng 6 proton, khác số neutron (6 và 8): hai đồng vị của carbon."},
+                {"text": "Carbon-14 (Z = 6) và nitrogen-14 (Z = 7)", "ok": false, "why": "Cùng số khối nhưng khác số proton nên là hai nguyên tố khác nhau."},
+                {"text": "Argon-40 (Z = 18) và calcium-40 (Z = 20)", "ok": false, "why": "Cùng số khối 40 nhưng Z khác nhau: không phải đồng vị."}
+              ],
+              "explanation": "Đồng vị phải có cùng số proton; số khối giống nhau không đủ để là đồng vị."},
+             {"key": "ntk_chlorine", "question": "Chlorine có hai đồng vị: ³⁵Cl chiếm 75 % và ³⁷Cl chiếm 25 % số nguyên tử. Nguyên tử khối trung bình của chlorine là bao nhiêu?",
+              "options": [
+                {"text": "35,5", "ok": true, "why": "(35 · 75 + 37 · 25) : 100 = (2625 + 925) : 100 = 35,5."},
+                {"text": "36", "ok": false, "why": "36 là trung bình cộng của 35 và 37, bỏ qua tỉ lệ phần trăm của mỗi đồng vị."},
+                {"text": "36,5", "ok": false, "why": "Đã đổi chỗ hai tỉ lệ: 35 · 25 % + 37 · 75 % = 36,5."}
+              ],
+              "explanation": "Đồng vị chiếm tỉ lệ lớn hơn kéo nguyên tử khối trung bình về gần số khối của nó."},
+             {"key": "ntk_copper", "question": "Copper có hai đồng vị: ⁶³Cu chiếm 73 % và ⁶⁵Cu chiếm 27 % số nguyên tử. Nguyên tử khối trung bình của copper là bao nhiêu?",
+              "options": [
+                {"text": "63,54", "ok": true, "why": "63 · 0,73 + 65 · 0,27 = 45,99 + 17,55 = 63,54."},
+                {"text": "64", "ok": false, "why": "64 là trung bình cộng của 63 và 65, chưa tính tỉ lệ đồng vị."},
+                {"text": "64,46", "ok": false, "why": "Đã đổi chỗ hai tỉ lệ: 63 · 0,27 + 65 · 0,73 = 64,46."}
+              ],
+              "explanation": "Nhân số khối với phần trăm của từng đồng vị rồi cộng lại."},
+             {"key": "dinh_nghia_nt", "question": "Đại lượng nào quyết định một nguyên tử thuộc nguyên tố hoá học nào?",
+              "options": [
+                {"text": "Số proton trong hạt nhân", "ok": true, "why": "Mỗi nguyên tố có một số hiệu nguyên tử Z riêng, chính là số proton."},
+                {"text": "Số neutron", "ok": false, "why": "Các đồng vị của cùng nguyên tố có số neutron khác nhau."},
+                {"text": "Số khối", "ok": false, "why": "Hai nguyên tố khác nhau có thể có cùng số khối, như carbon-14 và nitrogen-14."}
+              ],
+              "explanation": "Nguyên tố hoá học là tập hợp các nguyên tử có cùng số proton."}
+           ]},
+          {"game": "match", "title": "Ghép nguyên tố và kí hiệu",
+           "tasks": [
+             {"key": "kim_loai_ki_hieu", "prompt": "Ghép tên mỗi nguyên tố với kí hiệu hoá học của nó.",
+              "pairs": [["Sodium", "Na"], ["Potassium", "K"], ["Calcium", "Ca"], ["Magnesium", "Mg"], ["Iron (sắt)", "Fe"]],
+              "explanation": "Na (natrium), K (kalium) và Fe (ferrum) bắt nguồn từ tên Latin, nên kí hiệu không giống chữ đầu của tên IUPAC tiếng Anh.",
+              "left_label": "Nguyên tố", "right_label": "Kí hiệu"},
+             {"key": "phi_kim_ki_hieu", "prompt": "Ghép tên mỗi nguyên tố phi kim với kí hiệu hoá học của nó.",
+              "pairs": [["Sulfur", "S"], ["Phosphorus", "P"], ["Chlorine", "Cl"], ["Nitrogen", "N"], ["Fluorine", "F"]],
+              "explanation": "Kí hiệu có một hoặc hai chữ cái; chữ đầu viết hoa, chữ sau viết thường (Cl, không phải CL).",
+              "left_label": "Nguyên tố", "right_label": "Kí hiệu"},
+             {"key": "dem_neutron", "prompt": "Ghép mỗi nguyên tử với số neutron của nó.",
+              "pairs": [["Aluminium-27 (Z = 13)", "14 neutron"], ["Sulfur-32 (Z = 16)", "16 neutron"], ["Calcium-40 (Z = 20)", "20 neutron"], ["Fluorine-19 (Z = 9)", "10 neutron"]],
+              "explanation": "N = A − Z: 27 − 13 = 14; 32 − 16 = 16; 40 − 20 = 20; 19 − 9 = 10."}
+           ]}
+        ]},
+       {"key": "hh10.cau_hinh_electron", "order": 3, "title": "Cấu trúc lớp vỏ và cấu hình electron",
+        "description": "Lớp, phân lớp, orbital và cách viết cấu hình electron của 20 nguyên tố đầu.", "status": "planned"}
+     ]},
+    {"key": "hh10.bang_tuan_hoan", "grade": 10, "order": 2, "title": "Bảng tuần hoàn các nguyên tố hoá học",
+     "lessons": [
+       {"key": "hh10.cau_tao_bang", "order": 1, "title": "Cấu tạo của bảng tuần hoàn",
+        "description": "Ô nguyên tố, chu kì, nhóm và khối nguyên tố s, p, d, f.", "status": "planned"},
+       {"key": "hh10.xu_huong_bien_doi", "order": 2, "title": "Xu hướng biến đổi tính chất trong chu kì và nhóm",
+        "description": "Bán kính, độ âm điện, tính kim loại, tính phi kim và tính acid – base của oxide, hydroxide.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Hoá học 10; các so sánh chỉ dùng nguyên tố nhóm A."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Nêu được xu hướng biến đổi bán kính, độ âm điện, tính kim loại, tính phi kim theo chu kì và theo nhóm A",
+          "Phân loại kim loại, phi kim, khí hiếm theo vị trí trong bảng tuần hoàn",
+          "So sánh tính acid, tính base của oxide và hydroxide cao nhất trong chu kì 3"
+        ],
+        "summary": [
+          "Trong một chu kì, từ trái sang phải: bán kính nguyên tử giảm, độ âm điện tăng, tính kim loại giảm, tính phi kim tăng.",
+          "Trong một nhóm A, từ trên xuống dưới: bán kính tăng, độ âm điện giảm, tính kim loại tăng, tính phi kim giảm.",
+          "Trong chu kì 3, tính base của hydroxide giảm (NaOH > Mg(OH)₂ > Al(OH)₃), tính acid tăng (H₂SiO₃ < H₃PO₄ < H₂SO₄ < HClO₄).",
+          "Nguyên tử kim loại thường có 1–3 electron lớp ngoài cùng, phi kim thường có 5–7, khí hiếm có 8 (helium có 2)."
+        ],
+        "examples": [
+          {"title": "Chu kì 3", "lines": [
+            "Na, Mg, Al, Si, P, S, Cl, Ar.",
+            "Na có bán kính lớn nhất và tính kim loại mạnh nhất; Cl có độ âm điện lớn nhất và tính phi kim mạnh nhất chu kì."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "sorting", "title": "Kim loại, phi kim hay khí hiếm?",
+           "set": {"title": "Xếp mỗi nguyên tố vào đúng nhóm.",
+            "groups": [
+              {"id": "kim_loai", "label": "Kim loại", "icon": "🔩"},
+              {"id": "phi_kim", "label": "Phi kim", "icon": "🧪"},
+              {"id": "khi_hiem", "label": "Khí hiếm", "icon": "🎈"}
+            ],
+            "cards": [
+              {"key": "li", "text": "Lithium (Li, Z = 3)", "picture": "🔋", "group": "kim_loai",
+               "explanation": "Li ở nhóm IA, có 1 electron lớp ngoài cùng, dễ nhường electron: kim loại kiềm."},
+              {"key": "na", "text": "Sodium (Na, Z = 11)", "picture": "🧂", "group": "kim_loai",
+               "explanation": "Na ở nhóm IA, có 1 electron lớp ngoài cùng: kim loại mạnh nhất chu kì 3."},
+              {"key": "mg", "text": "Magnesium (Mg, Z = 12)", "picture": "✨", "group": "kim_loai",
+               "explanation": "Mg ở nhóm IIA, có 2 electron lớp ngoài cùng nên dễ nhường electron: kim loại."},
+              {"key": "al", "text": "Aluminium (Al, Z = 13)", "picture": "🥫", "group": "kim_loai",
+               "explanation": "Al ở nhóm IIIA, có 3 electron lớp ngoài cùng: kim loại."},
+              {"key": "k", "text": "Potassium (K, Z = 19)", "picture": "🍌", "group": "kim_loai",
+               "explanation": "K ở nhóm IA, chu kì 4, có 1 electron lớp ngoài cùng: kim loại kiềm, mạnh hơn Na."},
+              {"key": "ca", "text": "Calcium (Ca, Z = 20)", "picture": "🦴", "group": "kim_loai",
+               "explanation": "Ca ở nhóm IIA, có 2 electron lớp ngoài cùng: kim loại."},
+              {"key": "n", "text": "Nitrogen (N, Z = 7)", "picture": "💨", "group": "phi_kim",
+               "explanation": "N ở nhóm VA, có 5 electron lớp ngoài cùng, có xu hướng nhận electron: phi kim."},
+              {"key": "o", "text": "Oxygen (O, Z = 8)", "picture": "🫁", "group": "phi_kim",
+               "explanation": "O ở nhóm VIA, có 6 electron lớp ngoài cùng: phi kim có độ âm điện lớn."},
+              {"key": "f", "text": "Fluorine (F, Z = 9)", "picture": "🦷", "group": "phi_kim",
+               "explanation": "F ở nhóm VIIA, có 7 electron lớp ngoài cùng: phi kim có độ âm điện lớn nhất."},
+              {"key": "p", "text": "Phosphorus (P, Z = 15)", "picture": "🔥", "group": "phi_kim",
+               "explanation": "P ở nhóm VA, có 5 electron lớp ngoài cùng: phi kim."},
+              {"key": "s", "text": "Sulfur (S, Z = 16)", "picture": "🟡", "group": "phi_kim",
+               "explanation": "S ở nhóm VIA, có 6 electron lớp ngoài cùng: phi kim."},
+              {"key": "cl", "text": "Chlorine (Cl, Z = 17)", "picture": "🏊", "group": "phi_kim",
+               "explanation": "Cl ở nhóm VIIA, có 7 electron lớp ngoài cùng: phi kim mạnh nhất chu kì 3."},
+              {"key": "he", "text": "Helium (He, Z = 2)", "picture": "🎈", "group": "khi_hiem",
+               "explanation": "He có 2 electron, lớp vỏ đã bão hoà nên rất bền: khí hiếm (nhóm VIIIA)."},
+              {"key": "ne", "text": "Neon (Ne, Z = 10)", "picture": "💡", "group": "khi_hiem",
+               "explanation": "Ne có 8 electron lớp ngoài cùng, rất khó tham gia phản ứng: khí hiếm."},
+              {"key": "ar", "text": "Argon (Ar, Z = 18)", "picture": "🫧", "group": "khi_hiem",
+               "explanation": "Ar có 8 electron lớp ngoài cùng: khí hiếm, dùng làm khí trơ trong bóng đèn."}
+            ]}},
+          {"game": "choice", "style": "quiz", "title": "So sánh trong bảng tuần hoàn",
+           "tasks": [
+             {"key": "ban_kinh_lon", "question": "Trong các nguyên tố cùng chu kì 3 là Na, Mg, Al, Cl, nguyên tử nào có bán kính lớn nhất?",
+              "options": [
+                {"text": "Na", "ok": true, "why": "Trong chu kì, điện tích hạt nhân tăng dần từ trái sang phải, hút electron mạnh hơn nên bán kính giảm; Na đứng đầu chu kì."},
+                {"text": "Cl", "ok": false, "why": "Cl đứng cuối dãy này, điện tích hạt nhân lớn nhất nên bán kính nhỏ nhất."},
+                {"text": "Al", "ok": false, "why": "Al đứng sau Na và Mg nên bán kính nhỏ hơn hai nguyên tố đó."}
+              ],
+              "explanation": "Cùng số lớp electron, điện tích hạt nhân càng lớn thì bán kính càng nhỏ."},
+             {"key": "kim_loai_manh", "question": "Trong ba kim loại nhóm IA là Li, Na, K, kim loại nào có tính kim loại mạnh nhất?",
+              "options": [
+                {"text": "K", "ok": true, "why": "Trong nhóm A, từ trên xuống bán kính tăng, electron ngoài cùng bị hút yếu hơn nên dễ nhường hơn; K ở dưới cùng."},
+                {"text": "Li", "ok": false, "why": "Li ở trên cùng, bán kính nhỏ nhất nên khó nhường electron nhất trong ba nguyên tố."},
+                {"text": "Na", "ok": false, "why": "Na mạnh hơn Li nhưng yếu hơn K vì ở phía trên K."}
+              ],
+              "explanation": "Tính kim loại tăng từ trên xuống trong một nhóm A."},
+             {"key": "do_am_dien", "question": "Nguyên tố nào trong các nguyên tố N, O, F, Cl có độ âm điện lớn nhất?",
+              "options": [
+                {"text": "F", "ok": true, "why": "F ở cuối chu kì 2 và đầu nhóm VIIA: độ âm điện lớn nhất trong bảng tuần hoàn."},
+                {"text": "Cl", "ok": false, "why": "Cl cùng nhóm nhưng ở dưới F; trong nhóm, độ âm điện giảm từ trên xuống."},
+                {"text": "O", "ok": false, "why": "O đứng trước F trong chu kì 2 nên độ âm điện nhỏ hơn F."}
+              ],
+              "explanation": "Độ âm điện tăng từ trái sang phải trong chu kì, giảm từ trên xuống trong nhóm."},
+             {"key": "phi_kim_manh", "question": "Trong các nguyên tố chu kì 3 là Si, P, S, Cl, nguyên tố nào có tính phi kim mạnh nhất?",
+              "options": [
+                {"text": "Cl", "ok": true, "why": "Tính phi kim tăng từ trái sang phải trong chu kì; Cl đứng sau cùng trong bốn nguyên tố."},
+                {"text": "Si", "ok": false, "why": "Si đứng đầu dãy này nên tính phi kim yếu nhất."},
+                {"text": "S", "ok": false, "why": "S là phi kim mạnh nhưng đứng trước Cl nên yếu hơn Cl."}
+              ],
+              "explanation": "Điện tích hạt nhân tăng, bán kính giảm, nguyên tử càng dễ nhận electron."},
+             {"key": "base_manh", "question": "Hydroxide nào có tính base mạnh nhất: NaOH, Mg(OH)₂ hay Al(OH)₃?",
+              "options": [
+                {"text": "NaOH", "ok": true, "why": "Tính kim loại giảm từ Na đến Al nên tính base của hydroxide cũng giảm; NaOH là base mạnh."},
+                {"text": "Mg(OH)₂", "ok": false, "why": "Mg(OH)₂ là base yếu hơn NaOH vì Mg có tính kim loại yếu hơn Na."},
+                {"text": "Al(OH)₃", "ok": false, "why": "Al(OH)₃ là hydroxide lưỡng tính, tính base yếu nhất trong ba chất."}
+              ],
+              "explanation": "Trong chu kì, tính base của hydroxide giảm dần từ trái sang phải."},
+             {"key": "acid_manh", "question": "Acid nào có tính acid mạnh nhất: H₂SiO₃, H₃PO₄, H₂SO₄ hay HClO₄?",
+              "options": [
+                {"text": "HClO₄", "ok": true, "why": "Tính phi kim tăng từ Si đến Cl nên tính acid của hydroxide cao nhất cũng tăng; HClO₄ mạnh nhất."},
+                {"text": "H₂SO₄", "ok": false, "why": "H₂SO₄ là acid mạnh nhưng S đứng trước Cl nên H₂SO₄ yếu hơn HClO₄."},
+                {"text": "H₃PO₄", "ok": false, "why": "H₃PO₄ có tính acid trung bình, yếu hơn H₂SO₄ và HClO₄."},
+                {"text": "H₂SiO₃", "ok": false, "why": "H₂SiO₃ là acid rất yếu vì Si có tính phi kim yếu nhất dãy."}
+              ],
+              "explanation": "Trong chu kì 3, tính acid của oxide và hydroxide cao nhất tăng từ trái sang phải."},
+             {"key": "ban_kinh_viia", "question": "Trong nhóm VIIA gồm F, Cl, Br, I, nguyên tử nào có bán kính nhỏ nhất?",
+              "options": [
+                {"text": "F", "ok": true, "why": "F ở chu kì 2, chỉ có 2 lớp electron nên bán kính nhỏ nhất nhóm."},
+                {"text": "I", "ok": false, "why": "I ở chu kì 5, nhiều lớp electron nhất nên bán kính lớn nhất nhóm."},
+                {"text": "Br", "ok": false, "why": "Br có 4 lớp electron, lớn hơn F và Cl."}
+              ],
+              "explanation": "Trong nhóm A, từ trên xuống số lớp electron tăng nên bán kính tăng."}
+           ]}
+        ]},
+       {"key": "hh10.dinh_luat_tuan_hoan", "order": 3, "title": "Định luật tuần hoàn và ý nghĩa của bảng tuần hoàn",
+        "description": "Phát biểu định luật tuần hoàn; từ vị trí suy ra cấu tạo và tính chất của nguyên tố.", "status": "planned"}
+     ]},
+    {"key": "hh10.lien_ket", "grade": 10, "order": 3, "title": "Liên kết hoá học",
+     "lessons": [
+       {"key": "hh10.quy_tac_octet", "order": 1, "title": "Quy tắc octet",
+        "description": "Vì sao nguyên tử liên kết với nhau; xu hướng đạt lớp vỏ 8 electron bền vững.", "status": "planned"},
+       {"key": "hh10.lien_ket_ion", "order": 2, "title": "Liên kết ion",
+        "description": "Sự hình thành ion, liên kết ion và tinh thể ion như sodium chloride.", "status": "planned"},
+       {"key": "hh10.lien_ket_cong_hoa_tri", "order": 3, "title": "Liên kết cộng hoá trị",
+        "description": "Liên kết đơn, đôi, ba; liên kết phân cực và không phân cực; liên kết σ và π.", "status": "planned"},
+       {"key": "hh10.lien_ket_hydrogen", "order": 4, "title": "Liên kết hydrogen và tương tác van der Waals",
+        "description": "Ảnh hưởng của liên kết hydrogen và tương tác van der Waals đến nhiệt độ sôi của chất.", "status": "planned"}
+     ]},
+    {"key": "hh10.oxi_hoa_khu", "grade": 10, "order": 4, "title": "Phản ứng oxi hoá – khử",
+     "lessons": [
+       {"key": "hh10.so_oxi_hoa", "order": 1, "title": "Số oxi hoá",
+        "description": "Quy tắc xác định số oxi hoá của nguyên tử trong đơn chất, hợp chất và ion.", "status": "planned"},
+       {"key": "hh10.lap_pt_oxi_hoa_khu", "order": 2, "title": "Phản ứng oxi hoá – khử và lập phương trình",
+        "description": "Chất oxi hoá, chất khử, quá trình oxi hoá, quá trình khử và phương pháp thăng bằng electron.", "status": "planned"}
+     ]},
+    {"key": "hh10.nang_luong_toc_do", "grade": 10, "order": 5, "title": "Năng lượng hoá học và tốc độ phản ứng",
+     "lessons": [
+       {"key": "hh10.enthalpy", "order": 1, "title": "Phản ứng toả nhiệt, thu nhiệt và biến thiên enthalpy",
+        "description": "Enthalpy tạo thành chuẩn, biến thiên enthalpy chuẩn của phản ứng và sơ đồ năng lượng.", "status": "planned"},
+       {"key": "hh10.tinh_bien_thien_enthalpy", "order": 2, "title": "Tính biến thiên enthalpy của phản ứng",
+        "description": "Tính ΔrH° từ enthalpy tạo thành và từ năng lượng liên kết.", "status": "planned"},
+       {"key": "hh10.toc_do_phan_ung", "order": 3, "title": "Tốc độ phản ứng và định luật tác dụng khối lượng",
+        "description": "Tốc độ trung bình của phản ứng và biểu thức tốc độ.", "status": "planned"},
+       {"key": "hh10.yeu_to_toc_do", "order": 4, "title": "Các yếu tố ảnh hưởng đến tốc độ phản ứng",
+        "description": "Nồng độ, áp suất, nhiệt độ, diện tích bề mặt và chất xúc tác.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Hoá học 10; các thí nghiệm được so sánh khi chỉ khác nhau một hoặc hai yếu tố cùng chiều."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Dự đoán được ảnh hưởng của nồng độ, áp suất, nhiệt độ, diện tích bề mặt, chất xúc tác đến tốc độ phản ứng",
+          "Vận dụng hệ số nhiệt độ Van't Hoff γ",
+          "Giải thích các biện pháp làm nhanh hoặc làm chậm phản ứng trong đời sống"
+        ],
+        "summary": [
+          "Tăng nồng độ chất phản ứng (hoặc áp suất với chất khí) làm tăng tốc độ phản ứng vì số va chạm hiệu quả tăng.",
+          "Tăng nhiệt độ làm tăng tốc độ phản ứng. Quy tắc Van't Hoff: tăng 10 °C thì tốc độ tăng γ lần; tăng Δt thì tăng γ^(Δt/10) lần.",
+          "Chất rắn càng nhỏ (diện tích bề mặt càng lớn) thì phản ứng càng nhanh.",
+          "Chất xúc tác làm tăng tốc độ phản ứng nhưng không bị tiêu hao sau phản ứng."
+        ],
+        "examples": [
+          {"title": "Đá vôi và hydrochloric acid", "lines": [
+            "CaCO₃ + 2HCl → CaCl₂ + CO₂ + H₂O",
+            "Đá vôi dạng bột cho khí CO₂ thoát ra nhanh hơn đá vôi dạng viên cùng khối lượng, vì diện tích tiếp xúc lớn hơn."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "choice", "style": "predict", "title": "Phản ứng nào nhanh hơn?",
+           "tasks": [
+             {"key": "da_voi_bot", "question": "Cho cùng khối lượng đá vôi vào hai cốc chứa cùng thể tích dung dịch HCl 1 M ở cùng nhiệt độ: cốc 1 là đá vôi dạng viên, cốc 2 là đá vôi đã nghiền thành bột. Dự đoán điều gì xảy ra?",
+              "options": [
+                {"text": "Cốc 2 sủi bọt khí mạnh hơn", "ok": true, "why": "Bột có diện tích bề mặt lớn hơn nhiều, nhiều hạt CaCO₃ tiếp xúc với acid cùng lúc nên phản ứng nhanh hơn."},
+                {"text": "Cốc 1 sủi bọt khí mạnh hơn", "ok": false, "why": "Viên đá vôi chỉ phản ứng ở bề mặt ngoài nên phản ứng chậm hơn bột."},
+                {"text": "Hai cốc sủi bọt như nhau", "ok": false, "why": "Cùng khối lượng nhưng diện tích bề mặt khác nhau thì tốc độ phản ứng khác nhau."}
+              ],
+              "explanation": "Diện tích bề mặt tiếp xúc càng lớn, tốc độ phản ứng càng lớn."},
+             {"key": "kem_nong_do", "question": "Thả hai viên zinc giống nhau vào hai ống nghiệm ở cùng nhiệt độ: ống 1 chứa HCl 1 M, ống 2 chứa HCl 2 M. Khí H₂ thoát ra ở ống nào nhanh hơn?",
+              "options": [
+                {"text": "Ống 2 (HCl 2 M)", "ok": true, "why": "Nồng độ HCl lớn hơn thì số va chạm giữa H⁺ và bề mặt zinc trong mỗi giây nhiều hơn."},
+                {"text": "Ống 1 (HCl 1 M)", "ok": false, "why": "Nồng độ nhỏ hơn làm phản ứng chậm hơn, không nhanh hơn."},
+                {"text": "Như nhau vì cùng là HCl", "ok": false, "why": "Cùng chất nhưng khác nồng độ thì tốc độ phản ứng khác nhau."}
+              ],
+              "explanation": "Zn + 2HCl → ZnCl₂ + H₂. Tăng nồng độ chất phản ứng làm tăng tốc độ phản ứng."},
+             {"key": "mno2_h2o2", "question": "Nhỏ một ít bột MnO₂ vào ống nghiệm chứa dung dịch H₂O₂. Dự đoán hiện tượng.",
+              "options": [
+                {"text": "Bọt khí O₂ thoát ra mạnh; sau phản ứng vẫn còn nguyên lượng MnO₂", "ok": true, "why": "MnO₂ là chất xúc tác cho phản ứng 2H₂O₂ → 2H₂O + O₂: phản ứng nhanh hẳn lên và MnO₂ không bị tiêu hao."},
+                {"text": "Bọt khí thoát ra mạnh và MnO₂ tan hết", "ok": false, "why": "Chất xúc tác không bị tiêu hao: khối lượng MnO₂ sau phản ứng không đổi."},
+                {"text": "Không có hiện tượng gì khác", "ok": false, "why": "H₂O₂ tự phân huỷ rất chậm; MnO₂ làm tốc độ phân huỷ tăng rõ rệt."}
+              ],
+              "explanation": "Chất xúc tác làm tăng tốc độ phản ứng và còn lại sau phản ứng."},
+             {"key": "tu_lanh", "question": "Hai phần thịt tươi như nhau: một phần để trên bàn bếp mùa hè, một phần để trong ngăn mát tủ lạnh. Phần nào hỏng chậm hơn và vì sao?",
+              "options": [
+                {"text": "Phần trong tủ lạnh, vì nhiệt độ thấp làm chậm các phản ứng gây hỏng", "ok": true, "why": "Nhiệt độ thấp làm giảm tốc độ các phản ứng hoá học và hoạt động của vi khuẩn."},
+                {"text": "Phần trên bàn, vì có nhiều không khí hơn", "ok": false, "why": "Có nhiều oxygen và nhiệt độ cao hơn càng làm thịt hỏng nhanh hơn."},
+                {"text": "Hai phần hỏng như nhau", "ok": false, "why": "Nhiệt độ khác nhau làm tốc độ phân huỷ thực phẩm khác nhau."}
+              ],
+              "explanation": "Giảm nhiệt độ làm chậm phản ứng: đó là nguyên tắc bảo quản lạnh."},
+             {"key": "thoi_bep", "question": "Quạt thêm không khí vào bếp than đang cháy. Dự đoán điều gì xảy ra?",
+              "options": [
+                {"text": "Than cháy mạnh và nóng hơn", "ok": true, "why": "Quạt đưa thêm oxygen đến bề mặt than, tăng nồng độ chất phản ứng nên tốc độ cháy tăng."},
+                {"text": "Than cháy yếu đi vì bị làm lạnh", "ok": false, "why": "Với bếp than đang cháy đỏ, lượng oxygen tăng thêm quan trọng hơn sự làm lạnh."},
+                {"text": "Không thay đổi", "ok": false, "why": "Lượng oxygen đến bề mặt than tăng nên tốc độ phản ứng cháy thay đổi."}
+              ],
+              "explanation": "Tăng nồng độ chất phản ứng (oxygen) làm tăng tốc độ phản ứng cháy."},
+             {"key": "van_t_hoff", "question": "Một phản ứng có hệ số nhiệt độ Van't Hoff γ = 2. Khi tăng nhiệt độ từ 20 °C lên 40 °C, tốc độ phản ứng thay đổi thế nào?",
+              "options": [
+                {"text": "Tăng 4 lần", "ok": true, "why": "Tăng 20 °C là hai lần 10 °C: tốc độ tăng 2² = 4 lần."},
+                {"text": "Tăng 2 lần", "ok": false, "why": "Tăng 2 lần chỉ ứng với tăng 10 °C."},
+                {"text": "Tăng 20 lần", "ok": false, "why": "Không nhân γ với độ tăng nhiệt độ; tốc độ tăng theo lũy thừa γ^(Δt/10)."},
+                {"text": "Tăng 40 lần", "ok": false, "why": "Tốc độ không tỉ lệ với nhiệt độ; dùng quy tắc γ^(Δt/10) = 2² = 4."}
+              ],
+              "explanation": "v₂/v₁ = γ^((t₂ − t₁)/10)."},
+             {"key": "nen_khi", "question": "Nén một hỗn hợp khí đang phản ứng vào một thể tích nhỏ hơn ở nhiệt độ không đổi. Tốc độ phản ứng thay đổi thế nào?",
+              "options": [
+                {"text": "Tăng lên", "ok": true, "why": "Nén khí làm tăng áp suất, tức tăng nồng độ các chất khí, nên số va chạm tăng."},
+                {"text": "Giảm đi", "ok": false, "why": "Các phân tử bị dồn gần nhau hơn nên va chạm nhiều hơn, không ít hơn."},
+                {"text": "Không đổi", "ok": false, "why": "Với chất khí, áp suất ảnh hưởng đến nồng độ và do đó đến tốc độ phản ứng."}
+              ],
+              "explanation": "Với phản ứng có chất khí, tăng áp suất làm tăng tốc độ phản ứng."},
+             {"key": "nhai_ki", "question": "Vì sao nhai kĩ thức ăn giúp quá trình tiêu hoá ở dạ dày và ruột diễn ra nhanh hơn?",
+              "options": [
+                {"text": "Thức ăn được chia nhỏ, tăng diện tích tiếp xúc với enzyme tiêu hoá", "ok": true, "why": "Mẩu thức ăn nhỏ có tổng diện tích bề mặt lớn, enzyme tác dụng được nhiều chỗ cùng lúc."},
+                {"text": "Nhai làm tăng nhiệt độ thức ăn rất nhiều", "ok": false, "why": "Nhiệt độ trong miệng gần như không đổi; tác dụng chính là chia nhỏ thức ăn."},
+                {"text": "Nhai làm thức ăn có thêm chất mới", "ok": false, "why": "Nhai chủ yếu là quá trình cơ học; tốc độ tăng là do diện tích bề mặt tăng."}
+              ],
+              "explanation": "Đây là ảnh hưởng của diện tích bề mặt; enzyme là chất xúc tác sinh học."}
+           ]},
+          {"game": "order", "title": "Từ chậm đến nhanh",
+           "tasks": [
+             {"key": "zn_hcl", "prompt": "Sắp xếp các thí nghiệm zinc tác dụng với dung dịch HCl theo tốc độ phản ứng tăng dần (cùng khối lượng zinc).",
+              "items": [
+                "Zinc viên, HCl 1 M, 25 °C",
+                "Zinc viên, HCl 2 M, 25 °C",
+                "Zinc bột, HCl 2 M, 25 °C",
+                "Zinc bột, HCl 2 M, 50 °C"
+              ],
+              "explanation": "Mỗi thí nghiệm sau thêm đúng một yếu tố làm nhanh so với thí nghiệm trước: nồng độ lớn hơn, rồi diện tích bề mặt lớn hơn, rồi nhiệt độ cao hơn.",
+              "first_label": "Chậm nhất", "last_label": "Nhanh nhất"},
+             {"key": "caco3_hcl", "prompt": "Sắp xếp các thí nghiệm đá vôi tác dụng với dung dịch HCl theo tốc độ phản ứng tăng dần (cùng khối lượng đá vôi).",
+              "items": [
+                "Đá vôi cục, HCl 0,5 M, 20 °C",
+                "Đá vôi cục, HCl 1 M, 20 °C",
+                "Đá vôi cục, HCl 1 M, 40 °C",
+                "Đá vôi bột, HCl 1 M, 40 °C"
+              ],
+              "explanation": "Lần lượt tăng nồng độ acid, tăng nhiệt độ, rồi nghiền nhỏ đá vôi: mỗi bước đều làm phản ứng nhanh hơn.",
+              "first_label": "Chậm nhất", "last_label": "Nhanh nhất"},
+             {"key": "phan_huy_h2o2", "prompt": "Sắp xếp các thí nghiệm phân huỷ dung dịch H₂O₂ theo tốc độ thoát khí O₂ tăng dần.",
+              "items": [
+                "H₂O₂ 3 %, 20 °C, không có xúc tác",
+                "H₂O₂ 6 %, 20 °C, không có xúc tác",
+                "H₂O₂ 6 %, 40 °C, không có xúc tác",
+                "H₂O₂ 6 %, 40 °C, có MnO₂"
+              ],
+              "explanation": "Tăng nồng độ, rồi tăng nhiệt độ, rồi thêm chất xúc tác MnO₂: tốc độ tăng sau mỗi bước.",
+              "first_label": "Chậm nhất", "last_label": "Nhanh nhất"},
+             {"key": "fe_hcl", "prompt": "Sắp xếp các thí nghiệm iron tác dụng với dung dịch HCl theo tốc độ phản ứng tăng dần (cùng khối lượng iron).",
+              "items": [
+                "Iron lá, HCl 1 M, 25 °C",
+                "Iron bột, HCl 1 M, 25 °C",
+                "Iron bột, HCl 1 M, 50 °C",
+                "Iron bột, HCl 2 M, 50 °C"
+              ],
+              "explanation": "Fe + 2HCl → FeCl₂ + H₂. Tăng diện tích bề mặt, rồi nhiệt độ, rồi nồng độ: phản ứng nhanh dần.",
+              "first_label": "Chậm nhất", "last_label": "Nhanh nhất"}
+           ]}
+        ]}
+     ]},
+    {"key": "hh10.halogen", "grade": 10, "order": 6, "title": "Nguyên tố nhóm VIIA (halogen)",
+     "lessons": [
+       {"key": "hh10.don_chat_halogen", "order": 1, "title": "Tính chất của các đơn chất halogen",
+        "description": "Trạng thái tự nhiên, tính chất vật lí và tính oxi hoá của fluorine, chlorine, bromine, iodine.", "status": "planned"},
+       {"key": "hh10.hydrogen_halide", "order": 2, "title": "Hydrogen halide và muối halide",
+        "description": "Tính acid của hydrohalic acid, tính khử của ion halide và nhận biết ion halide.", "status": "planned"}
+     ]},
+
+    {"key": "hh11.can_bang", "grade": 11, "order": 1, "title": "Cân bằng hoá học",
+     "lessons": [
+       {"key": "hh11.hang_so_can_bang", "order": 1, "title": "Phản ứng thuận nghịch và hằng số cân bằng",
+        "description": "Trạng thái cân bằng, biểu thức và cách tính hằng số cân bằng Kc.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Hoá học 11; mọi đáp số đã được tính lại."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Nêu được thế nào là phản ứng thuận nghịch và trạng thái cân bằng",
+          "Viết được biểu thức hằng số cân bằng Kc",
+          "Tính Kc từ nồng độ các chất ở trạng thái cân bằng"
+        ],
+        "summary": [
+          "Ở trạng thái cân bằng, tốc độ phản ứng thuận bằng tốc độ phản ứng nghịch; nồng độ các chất không đổi nữa (cân bằng động).",
+          "Với aA + bB ⇌ cC + dD: Kc = [C]^c · [D]^d / ([A]^a · [B]^b), nồng độ tính bằng mol/L ở trạng thái cân bằng.",
+          "Chất rắn và nước (dung môi) không có mặt trong biểu thức Kc.",
+          "Kc chỉ phụ thuộc nhiệt độ. Kc càng lớn thì ở trạng thái cân bằng càng nhiều sản phẩm."
+        ],
+        "examples": [
+          {"title": "Tính Kc", "lines": [
+            "H₂(g) + I₂(g) ⇌ 2HI(g); cân bằng: [H₂] = [I₂] = 0,1 M, [HI] = 0,8 M.",
+            "Kc = 0,8² : (0,1 · 0,1) = 0,64 : 0,01 = 64."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "choice", "style": "quiz", "title": "Tính hằng số cân bằng",
+           "tasks": [
+             {"key": "kc_hi", "question": "Cho cân bằng H₂(g) + I₂(g) ⇌ 2HI(g). Ở trạng thái cân bằng: [H₂] = 0,1 M, [I₂] = 0,1 M, [HI] = 0,8 M. Kc bằng bao nhiêu?",
+              "options": [
+                {"text": "64", "ok": true, "why": "Kc = [HI]² / ([H₂][I₂]) = 0,64 : 0,01 = 64."},
+                {"text": "80", "ok": false, "why": "Quên bình phương [HI]: hệ số 2 của HI là số mũ trong Kc."},
+                {"text": "0,016", "ok": false, "why": "Đây là nghịch đảo của Kc: sản phẩm ở tử số, chất phản ứng ở mẫu số."},
+                {"text": "3,2", "ok": false, "why": "Đã cộng [H₂] và [I₂] ở mẫu; phải nhân các nồng độ."}
+              ],
+              "explanation": "Mỗi nồng độ được nâng lên lũy thừa bằng hệ số của chất trong phương trình."},
+             {"key": "kc_n2o4", "question": "Cho cân bằng N₂O₄(g) ⇌ 2NO₂(g). Ở trạng thái cân bằng: [N₂O₄] = 0,04 M, [NO₂] = 0,02 M. Kc bằng bao nhiêu?",
+              "options": [
+                {"text": "0,01", "ok": true, "why": "Kc = [NO₂]² / [N₂O₄] = 0,0004 : 0,04 = 0,01."},
+                {"text": "0,5", "ok": false, "why": "0,02 : 0,04 = 0,5 là đã quên bình phương [NO₂]."},
+                {"text": "100", "ok": false, "why": "Đây là [N₂O₄] / [NO₂]², đảo ngược tử và mẫu."}
+              ],
+              "explanation": "Kc nhỏ hơn 1 cho biết ở nhiệt độ này cân bằng nghiêng về phía N₂O₄."},
+             {"key": "kc_so3", "question": "Cho cân bằng 2SO₂(g) + O₂(g) ⇌ 2SO₃(g). Ở trạng thái cân bằng: [SO₂] = 0,2 M, [O₂] = 0,1 M, [SO₃] = 0,4 M. Kc bằng bao nhiêu?",
+              "options": [
+                {"text": "40", "ok": true, "why": "Kc = [SO₃]² / ([SO₂]²[O₂]) = 0,16 : (0,04 · 0,1) = 0,16 : 0,004 = 40."},
+                {"text": "20", "ok": false, "why": "0,4 : (0,2 · 0,1) = 20 là đã bỏ các số mũ 2 của SO₃ và SO₂."},
+                {"text": "4", "ok": false, "why": "0,16 : 0,04 = 4 là đã quên nồng độ O₂ ở mẫu số."},
+                {"text": "0,025", "ok": false, "why": "Đây là nghịch đảo của Kc."}
+              ],
+              "explanation": "Viết đúng biểu thức trước khi thay số: mọi chất khí đều có mặt, mỗi chất với số mũ là hệ số của nó."},
+             {"key": "kc_nh3", "question": "Cho cân bằng N₂(g) + 3H₂(g) ⇌ 2NH₃(g). Ở trạng thái cân bằng: [N₂] = 0,5 M, [H₂] = 1 M, [NH₃] = 0,5 M. Kc bằng bao nhiêu?",
+              "options": [
+                {"text": "0,5", "ok": true, "why": "Kc = [NH₃]² / ([N₂][H₂]³) = 0,25 : (0,5 · 1) = 0,5."},
+                {"text": "1", "ok": false, "why": "0,5 : (0,5 · 1) = 1 là đã quên bình phương [NH₃]."},
+                {"text": "2", "ok": false, "why": "Đây là nghịch đảo của Kc."}
+              ],
+              "explanation": "Với [H₂] = 1 M thì [H₂]³ = 1; số mũ vẫn phải viết đúng trong biểu thức."},
+             {"key": "kc_chat_ran", "question": "Biểu thức hằng số cân bằng của phản ứng CaCO₃(s) ⇌ CaO(s) + CO₂(g) là gì?",
+              "options": [
+                {"text": "Kc = [CO₂]", "ok": true, "why": "CaCO₃ và CaO là chất rắn nên không có mặt trong biểu thức Kc."},
+                {"text": "Kc = [CaO][CO₂] / [CaCO₃]", "ok": false, "why": "Chất rắn không đưa vào biểu thức hằng số cân bằng."},
+                {"text": "Kc = [CaCO₃] / ([CaO][CO₂])", "ok": false, "why": "Vừa đảo ngược tử và mẫu, vừa đưa chất rắn vào biểu thức."}
+              ],
+              "explanation": "Chỉ chất khí và chất tan trong dung dịch mới có mặt trong biểu thức Kc."},
+             {"key": "kc_phu_thuoc", "question": "Hằng số cân bằng Kc của một phản ứng xác định chỉ thay đổi khi thay đổi yếu tố nào?",
+              "options": [
+                {"text": "Nhiệt độ", "ok": true, "why": "Kc là hằng số ở một nhiệt độ xác định; đổi nhiệt độ thì Kc đổi."},
+                {"text": "Nồng độ ban đầu của các chất", "ok": false, "why": "Đổi nồng độ ban đầu thì nồng độ cân bằng đổi, nhưng tỉ số trong Kc vẫn như cũ."},
+                {"text": "Chất xúc tác", "ok": false, "why": "Xúc tác chỉ làm cân bằng đạt nhanh hơn, không làm đổi Kc."}
+              ],
+              "explanation": "Kc chỉ phụ thuộc bản chất phản ứng và nhiệt độ."},
+             {"key": "kc_rat_lon", "question": "Một phản ứng có Kc = 10¹⁰ ở 25 °C. Có thể kết luận gì?",
+              "options": [
+                {"text": "Ở trạng thái cân bằng, hỗn hợp chủ yếu là sản phẩm", "ok": true, "why": "Kc rất lớn nghĩa là tử số (sản phẩm) lớn hơn rất nhiều mẫu số (chất phản ứng)."},
+                {"text": "Phản ứng xảy ra rất nhanh", "ok": false, "why": "Kc cho biết mức độ phản ứng ở cân bằng, không cho biết tốc độ đạt cân bằng."},
+                {"text": "Ở trạng thái cân bằng, hỗn hợp chủ yếu là chất phản ứng", "ok": false, "why": "Điều này ứng với Kc rất nhỏ, không phải Kc rất lớn."}
+              ],
+              "explanation": "Độ lớn của Kc cho biết cân bằng nghiêng về phía sản phẩm hay chất phản ứng."}
+           ]}
+        ]},
+       {"key": "hh11.chuyen_dich_can_bang", "order": 2, "title": "Sự chuyển dịch cân bằng hoá học",
+        "description": "Nguyên lí Le Chatelier: ảnh hưởng của nồng độ, áp suất, nhiệt độ đến cân bằng.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Hoá học 11; dấu của biến thiên enthalpy được ghi trong mỗi câu."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Phát biểu được nguyên lí chuyển dịch cân bằng Le Chatelier",
+          "Dự đoán chiều chuyển dịch khi thay đổi nồng độ, áp suất, nhiệt độ",
+          "Nêu được chất xúc tác không làm chuyển dịch cân bằng"
+        ],
+        "summary": [
+          "Nguyên lí Le Chatelier: cân bằng chuyển dịch theo chiều làm giảm tác động bên ngoài.",
+          "Tăng nồng độ một chất: cân bằng chuyển dịch theo chiều làm giảm nồng độ chất đó, và ngược lại.",
+          "Tăng áp suất: cân bằng chuyển dịch theo chiều làm giảm số mol khí; nếu hai vế có số mol khí bằng nhau thì áp suất không làm chuyển dịch.",
+          "Tăng nhiệt độ: cân bằng chuyển dịch theo chiều thu nhiệt (ΔrH > 0); giảm nhiệt độ: theo chiều toả nhiệt. Chất xúc tác không làm chuyển dịch cân bằng."
+        ],
+        "examples": [
+          {"title": "Tổng hợp ammonia", "lines": [
+            "N₂(g) + 3H₂(g) ⇌ 2NH₃(g), ΔrH°₂₉₈ < 0.",
+            "Vế trái 4 mol khí, vế phải 2 mol khí: tăng áp suất có lợi cho tạo NH₃.",
+            "Chiều thuận toả nhiệt: hạ nhiệt độ có lợi cho tạo NH₃, nhưng phản ứng lại chậm, nên cần chất xúc tác và nhiệt độ vừa phải."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "choice", "style": "predict", "title": "Cân bằng dịch về phía nào?",
+           "tasks": [
+             {"key": "nh3_ap_suat", "question": "Cân bằng N₂(g) + 3H₂(g) ⇌ 2NH₃(g), ΔrH < 0. Nén hệ để tăng áp suất (nhiệt độ không đổi). Cân bằng chuyển dịch theo chiều nào?",
+              "options": [
+                {"text": "Chiều thuận", "ok": true, "why": "Vế phải có 2 mol khí, ít hơn vế trái (4 mol): chiều thuận làm giảm số mol khí, chống lại sự tăng áp suất."},
+                {"text": "Chiều nghịch", "ok": false, "why": "Chiều nghịch làm tăng số mol khí, càng làm áp suất tăng thêm."},
+                {"text": "Không chuyển dịch", "ok": false, "why": "Số mol khí hai vế khác nhau nên áp suất có ảnh hưởng."}
+              ],
+              "explanation": "Tăng áp suất: cân bằng dịch về phía có ít mol khí hơn."},
+             {"key": "nh3_nhiet_do", "question": "Cân bằng N₂(g) + 3H₂(g) ⇌ 2NH₃(g), ΔrH < 0. Tăng nhiệt độ của hệ. Cân bằng chuyển dịch theo chiều nào?",
+              "options": [
+                {"text": "Chiều nghịch", "ok": true, "why": "Chiều thuận toả nhiệt nên chiều nghịch thu nhiệt; tăng nhiệt độ làm cân bằng dịch theo chiều thu nhiệt."},
+                {"text": "Chiều thuận", "ok": false, "why": "Chiều thuận toả nhiệt, chỉ được ưu tiên khi hạ nhiệt độ."},
+                {"text": "Không chuyển dịch", "ok": false, "why": "Phản ứng có ΔrH khác 0 nên nhiệt độ làm chuyển dịch cân bằng."}
+              ],
+              "explanation": "Tăng nhiệt độ: cân bằng dịch theo chiều thu nhiệt."},
+             {"key": "nh3_them_n2", "question": "Cân bằng N₂(g) + 3H₂(g) ⇌ 2NH₃(g) trong bình kín. Bơm thêm khí N₂ vào bình (thể tích, nhiệt độ không đổi). Cân bằng chuyển dịch theo chiều nào?",
+              "options": [
+                {"text": "Chiều thuận", "ok": true, "why": "Cân bằng dịch theo chiều tiêu thụ bớt N₂ vừa thêm vào, tức chiều thuận."},
+                {"text": "Chiều nghịch", "ok": false, "why": "Chiều nghịch tạo thêm N₂, làm nồng độ N₂ càng tăng: ngược với nguyên lí."},
+                {"text": "Không chuyển dịch", "ok": false, "why": "Thay đổi nồng độ một chất trong cân bằng luôn làm cân bằng chuyển dịch."}
+              ],
+              "explanation": "Tăng nồng độ chất phản ứng: cân bằng dịch theo chiều thuận."},
+             {"key": "nh3_lay_ra", "question": "Trong sản xuất, NH₃ được hoá lỏng và tách liên tục ra khỏi hỗn hợp N₂(g) + 3H₂(g) ⇌ 2NH₃(g). Việc này làm cân bằng chuyển dịch theo chiều nào?",
+              "options": [
+                {"text": "Chiều thuận, tạo thêm NH₃", "ok": true, "why": "Giảm nồng độ NH₃ thì cân bằng dịch theo chiều tạo ra NH₃ để bù lại."},
+                {"text": "Chiều nghịch", "ok": false, "why": "Chiều nghịch tiêu thụ NH₃, làm nồng độ NH₃ càng giảm."},
+                {"text": "Không chuyển dịch", "ok": false, "why": "Nồng độ sản phẩm thay đổi nên cân bằng bị phá vỡ và chuyển dịch."}
+              ],
+              "explanation": "Giảm nồng độ sản phẩm: cân bằng dịch theo chiều thuận. Đây là cách tăng hiệu suất tổng hợp ammonia."},
+             {"key": "xuc_tac", "question": "Thêm chất xúc tác vào hệ đang cân bằng N₂(g) + 3H₂(g) ⇌ 2NH₃(g). Điều gì xảy ra với cân bằng?",
+              "options": [
+                {"text": "Không chuyển dịch", "ok": true, "why": "Chất xúc tác làm tăng tốc độ cả phản ứng thuận và nghịch như nhau nên không làm chuyển dịch cân bằng."},
+                {"text": "Chuyển dịch theo chiều thuận", "ok": false, "why": "Xúc tác chỉ giúp đạt cân bằng nhanh hơn, không làm thay đổi lượng NH₃ ở cân bằng."},
+                {"text": "Chuyển dịch theo chiều nghịch", "ok": false, "why": "Xúc tác không ưu tiên chiều nào."}
+              ],
+              "explanation": "Chất xúc tác không có mặt trong nguyên lí Le Chatelier: nó không làm chuyển dịch cân bằng."},
+             {"key": "no2_lanh", "question": "Bình kín chứa cân bằng 2NO₂(g) (màu nâu đỏ) ⇌ N₂O₄(g) (không màu), ΔrH < 0. Ngâm bình vào nước đá. Màu của khí trong bình thay đổi thế nào?",
+              "options": [
+                {"text": "Nhạt dần", "ok": true, "why": "Hạ nhiệt độ: cân bằng dịch theo chiều toả nhiệt (chiều thuận), NO₂ nâu đỏ chuyển bớt thành N₂O₄ không màu."},
+                {"text": "Đậm hơn", "ok": false, "why": "Màu đậm hơn xảy ra khi ngâm bình vào nước nóng: cân bằng dịch theo chiều nghịch, tạo thêm NO₂."},
+                {"text": "Không đổi", "ok": false, "why": "Phản ứng toả nhiệt nên nhiệt độ ảnh hưởng đến cân bằng và màu khí."}
+              ],
+              "explanation": "Giảm nhiệt độ: cân bằng dịch theo chiều toả nhiệt."},
+             {"key": "hi_ap_suat", "question": "Cân bằng H₂(g) + I₂(g) ⇌ 2HI(g). Nén hệ để tăng áp suất (nhiệt độ không đổi). Cân bằng chuyển dịch theo chiều nào?",
+              "options": [
+                {"text": "Không chuyển dịch", "ok": true, "why": "Hai vế đều có 2 mol khí nên áp suất không làm chuyển dịch cân bằng."},
+                {"text": "Chiều thuận", "ok": false, "why": "Chiều thuận không làm giảm số mol khí (2 mol → 2 mol)."},
+                {"text": "Chiều nghịch", "ok": false, "why": "Chiều nghịch cũng không làm thay đổi số mol khí."}
+              ],
+              "explanation": "Áp suất chỉ làm chuyển dịch cân bằng khi số mol khí hai vế khác nhau."},
+             {"key": "caco3_nung", "question": "Cân bằng CaCO₃(s) ⇌ CaO(s) + CO₂(g), ΔrH > 0. Nâng nhiệt độ lò nung. Cân bằng chuyển dịch theo chiều nào?",
+              "options": [
+                {"text": "Chiều thuận, tạo thêm CaO", "ok": true, "why": "Chiều thuận thu nhiệt; tăng nhiệt độ làm cân bằng dịch theo chiều thu nhiệt."},
+                {"text": "Chiều nghịch", "ok": false, "why": "Chiều nghịch toả nhiệt, được ưu tiên khi hạ nhiệt độ."},
+                {"text": "Không chuyển dịch vì có chất rắn", "ok": false, "why": "Chất rắn không có mặt trong Kc, nhưng nhiệt độ vẫn làm chuyển dịch cân bằng."}
+              ],
+              "explanation": "Nung vôi ở nhiệt độ cao và thổi khí CO₂ ra khỏi lò đều làm cân bằng dịch về phía tạo vôi sống."}
+           ]}
+        ]},
+       {"key": "hh11.su_dien_li", "order": 3, "title": "Sự điện li, chất điện li mạnh và chất điện li yếu",
+        "description": "Chất điện li, chất không điện li; phân biệt chất điện li mạnh và yếu qua tính dẫn điện.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Hoá học 11; chỉ dùng các chất điện li mạnh, yếu điển hình."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Nêu được sự điện li, chất điện li và chất không điện li",
+          "Phân biệt chất điện li mạnh và chất điện li yếu",
+          "Dự đoán tính dẫn điện của một dung dịch"
+        ],
+        "summary": [
+          "Sự điện li là quá trình phân li các chất thành ion khi tan trong nước. Chất tan tạo ion là chất điện li; dung dịch của nó dẫn điện.",
+          "Chất điện li mạnh phân li gần như hoàn toàn (mũi tên một chiều): các acid mạnh HCl, HNO₃, H₂SO₄; base mạnh NaOH, KOH, Ba(OH)₂; hầu hết muối tan.",
+          "Chất điện li yếu chỉ phân li một phần (mũi tên hai chiều ⇌): acid yếu như CH₃COOH, HF, H₂S, HNO₂.",
+          "Chất không điện li như ethanol, glucose, saccharose tan trong nước ở dạng phân tử, không tạo ion."
+        ],
+        "examples": [
+          {"title": "Viết phương trình điện li", "lines": [
+            "NaCl → Na⁺ + Cl⁻ (điện li mạnh)",
+            "CH₃COOH ⇌ CH₃COO⁻ + H⁺ (điện li yếu)"
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "sorting", "title": "Phân loại chất điện li",
+           "set": {"title": "Chất này khi tan trong nước là chất điện li mạnh, chất điện li yếu hay chất không điện li?",
+            "groups": [
+              {"id": "manh", "label": "Điện li mạnh", "icon": "⚡"},
+              {"id": "yeu", "label": "Điện li yếu", "icon": "🔅"},
+              {"id": "khong", "label": "Không điện li", "icon": "⛔"}
+            ],
+            "cards": [
+              {"key": "hcl", "text": "HCl (hydrochloric acid)", "picture": "🧪", "group": "manh",
+               "explanation": "HCl là acid mạnh, phân li hoàn toàn: HCl → H⁺ + Cl⁻."},
+              {"key": "hno3", "text": "HNO₃ (nitric acid)", "picture": "🧪", "group": "manh",
+               "explanation": "HNO₃ là acid mạnh: HNO₃ → H⁺ + NO₃⁻."},
+              {"key": "naoh", "text": "NaOH (sodium hydroxide)", "picture": "🧼", "group": "manh",
+               "explanation": "NaOH là base mạnh: NaOH → Na⁺ + OH⁻."},
+              {"key": "baoh2", "text": "Ba(OH)₂ (barium hydroxide)", "picture": "🧴", "group": "manh",
+               "explanation": "Ba(OH)₂ là base mạnh tan được: Ba(OH)₂ → Ba²⁺ + 2OH⁻."},
+              {"key": "nacl", "text": "NaCl (sodium chloride)", "picture": "🧂", "group": "manh",
+               "explanation": "NaCl là muối tan, phân li hoàn toàn: NaCl → Na⁺ + Cl⁻."},
+              {"key": "kno3", "text": "KNO₃ (potassium nitrate)", "picture": "🌱", "group": "manh",
+               "explanation": "KNO₃ là muối tan, phân li hoàn toàn: KNO₃ → K⁺ + NO₃⁻."},
+              {"key": "ch3cooh", "text": "CH₃COOH (acetic acid)", "picture": "🍶", "group": "yeu",
+               "explanation": "Acetic acid là acid yếu, chỉ một phần nhỏ phân tử phân li: CH₃COOH ⇌ CH₃COO⁻ + H⁺."},
+              {"key": "hf", "text": "HF (hydrofluoric acid)", "picture": "🧪", "group": "yeu",
+               "explanation": "Khác các hydrohalic acid còn lại, HF là acid yếu: HF ⇌ H⁺ + F⁻."},
+              {"key": "h2s", "text": "H₂S tan trong nước", "picture": "🥚", "group": "yeu",
+               "explanation": "Dung dịch H₂S là acid rất yếu, phân li một phần: H₂S ⇌ H⁺ + HS⁻."},
+              {"key": "hno2", "text": "HNO₂ (nitrous acid)", "picture": "🧪", "group": "yeu",
+               "explanation": "HNO₂ là acid yếu: HNO₂ ⇌ H⁺ + NO₂⁻ (khác hẳn nitric acid HNO₃ là acid mạnh)."},
+              {"key": "ethanol", "text": "C₂H₅OH (ethanol)", "picture": "🍷", "group": "khong",
+               "explanation": "Ethanol tan trong nước ở dạng phân tử, không tạo ion: dung dịch không dẫn điện."},
+              {"key": "saccharose", "text": "C₁₂H₂₂O₁₁ (saccharose)", "picture": "🍬", "group": "khong",
+               "explanation": "Đường saccharose tan nhưng không phân li thành ion: chất không điện li."},
+              {"key": "glucose", "text": "C₆H₁₂O₆ (glucose)", "picture": "🍇", "group": "khong",
+               "explanation": "Glucose tan trong nước ở dạng phân tử: chất không điện li."}
+            ]}},
+          {"game": "choice", "style": "predict", "title": "Đèn có sáng không?",
+           "tasks": [
+             {"key": "den_hcl", "question": "Nhúng hai điện cực của một mạch điện có bóng đèn vào dung dịch HCl 0,1 M. Dự đoán bóng đèn sẽ thế nào?",
+              "options": [
+                {"text": "Sáng rõ", "ok": true, "why": "HCl điện li mạnh, dung dịch chứa nhiều ion H⁺ và Cl⁻ chuyển động nên dẫn điện tốt."},
+                {"text": "Sáng yếu", "ok": false, "why": "Sáng yếu ứng với chất điện li yếu như acetic acid cùng nồng độ."},
+                {"text": "Không sáng", "ok": false, "why": "Dung dịch có ion tự do nên dẫn điện; đèn có sáng."}
+              ],
+              "explanation": "Dung dịch chất điện li mạnh dẫn điện tốt."},
+             {"key": "den_ch3cooh", "question": "Thay dung dịch HCl 0,1 M bằng dung dịch CH₃COOH 0,1 M. Dự đoán độ sáng của bóng đèn.",
+              "options": [
+                {"text": "Sáng yếu hơn so với dung dịch HCl", "ok": true, "why": "Acetic acid chỉ phân li một phần nên số ion ít hơn nhiều so với HCl cùng nồng độ."},
+                {"text": "Sáng như dung dịch HCl", "ok": false, "why": "Cùng nồng độ nhưng mức độ phân li khác nhau nên số ion khác nhau."},
+                {"text": "Sáng hơn dung dịch HCl", "ok": false, "why": "Acetic acid là chất điện li yếu nên dẫn điện kém hơn HCl."}
+              ],
+              "explanation": "Độ sáng của đèn cho biết mức độ điện li: mạnh hay yếu."},
+             {"key": "den_duong", "question": "Nhúng hai điện cực vào dung dịch đường saccharose. Dự đoán bóng đèn sẽ thế nào?",
+              "options": [
+                {"text": "Không sáng", "ok": true, "why": "Saccharose tan ở dạng phân tử, không tạo ion nên dung dịch không dẫn điện."},
+                {"text": "Sáng yếu", "ok": false, "why": "Saccharose không phân li chút nào thành ion, nên không phải chất điện li yếu."},
+                {"text": "Sáng rõ", "ok": false, "why": "Tan được trong nước không có nghĩa là tạo ion."}
+              ],
+              "explanation": "Chất không điện li tan trong nước không tạo ion."},
+             {"key": "den_nacl_ran", "question": "Đặt hai điện cực vào một cốc chứa tinh thể NaCl khan (khô). Dự đoán bóng đèn sẽ thế nào?",
+              "options": [
+                {"text": "Không sáng", "ok": true, "why": "Trong tinh thể rắn, ion Na⁺ và Cl⁻ bị giữ cố định trong mạng tinh thể, không chuyển động tự do."},
+                {"text": "Sáng rõ vì NaCl là chất điện li mạnh", "ok": false, "why": "NaCl chỉ dẫn điện khi tan trong nước hoặc nóng chảy, lúc các ion chuyển động được."},
+                {"text": "Sáng yếu", "ok": false, "why": "Tinh thể NaCl khan gần như không có hạt mang điện chuyển động nên đèn không sáng."}
+              ],
+              "explanation": "Muốn dẫn điện cần có hạt mang điện chuyển động tự do."},
+             {"key": "den_hoa_tan_nacl", "question": "Đổ nước cất vào cốc NaCl khan ở câu trước rồi khuấy cho tan hết. Dự đoán bóng đèn sẽ thế nào?",
+              "options": [
+                {"text": "Sáng rõ", "ok": true, "why": "NaCl tan và điện li hoàn toàn thành Na⁺ và Cl⁻ chuyển động tự do: dung dịch dẫn điện tốt."},
+                {"text": "Vẫn không sáng", "ok": false, "why": "Khi tan trong nước, NaCl phân li thành ion nên dung dịch dẫn điện."},
+                {"text": "Sáng yếu", "ok": false, "why": "NaCl là chất điện li mạnh, không phải yếu."}
+              ],
+              "explanation": "Sự điện li xảy ra khi chất tan trong nước."},
+             {"key": "den_nuoc_cat", "question": "Nhúng hai điện cực vào nước cất tinh khiết. Dự đoán bóng đèn sẽ thế nào?",
+              "options": [
+                {"text": "Không sáng", "ok": true, "why": "Nước cất điện li cực kì yếu, số ion quá ít nên dòng điện không đủ làm đèn sáng."},
+                {"text": "Sáng rõ", "ok": false, "why": "Nước máy có thể dẫn điện nhờ muối hoà tan, nhưng nước cất gần như không có ion."},
+                {"text": "Sáng yếu như acetic acid", "ok": false, "why": "Nước điện li yếu hơn acetic acid rất nhiều, không đủ để đèn sáng."}
+              ],
+              "explanation": "Nước tinh khiết dẫn điện rất kém; nước thường dẫn điện là nhờ các chất điện li hoà tan trong nó."}
+           ]}
+        ]},
+       {"key": "hh11.ph_chuan_do", "order": 4, "title": "Thuyết Brønsted – Lowry, pH và chuẩn độ acid – base",
+        "description": "Acid, base theo Brønsted – Lowry; pH của dung dịch; chất chỉ thị và chuẩn độ.", "status": "planned"}
+     ]},
+    {"key": "hh11.nitrogen_sulfur", "grade": 11, "order": 2, "title": "Nitrogen và sulfur",
+     "lessons": [
+       {"key": "hh11.nitrogen", "order": 1, "title": "Đơn chất nitrogen",
+        "description": "Trạng thái tự nhiên, cấu tạo phân tử N₂ và tính chất hoá học của nitrogen.", "status": "planned"},
+       {"key": "hh11.ammonia", "order": 2, "title": "Ammonia và muối ammonium",
+        "description": "Cấu tạo, tính base, tính khử của ammonia; tính chất và nhận biết muối ammonium.", "status": "planned"},
+       {"key": "hh11.oxide_nitric_acid", "order": 3, "title": "Một số hợp chất với oxygen của nitrogen",
+        "description": "Các oxide của nitrogen, mưa acid, nitric acid và hiện tượng phú dưỡng.", "status": "planned"},
+       {"key": "hh11.sulfur_so2", "order": 4, "title": "Sulfur và sulfur dioxide",
+        "description": "Tính chất của sulfur, sulfur dioxide và tác hại của SO₂ với môi trường.", "status": "planned"},
+       {"key": "hh11.sulfuric_acid", "order": 5, "title": "Sulfuric acid và muối sulfate",
+        "description": "Tính chất của sulfuric acid loãng và đặc, an toàn khi sử dụng; nhận biết ion sulfate.", "status": "planned"}
+     ]},
+    {"key": "hh11.huu_co", "grade": 11, "order": 3, "title": "Đại cương về hoá học hữu cơ",
+     "lessons": [
+       {"key": "hh11.hop_chat_huu_co", "order": 1, "title": "Hợp chất hữu cơ và nhóm chức",
+        "description": "Đặc điểm của hợp chất hữu cơ, phân loại và nhóm chức thường gặp.", "status": "planned"},
+       {"key": "hh11.tach_tinh_che", "order": 2, "title": "Phương pháp tách và tinh chế hợp chất hữu cơ",
+        "description": "Chưng cất, chiết, kết tinh và sắc kí cột.", "status": "planned"},
+       {"key": "hh11.cong_thuc_phan_tu", "order": 3, "title": "Công thức phân tử hợp chất hữu cơ",
+        "description": "Công thức đơn giản nhất, công thức phân tử và phổ khối lượng.", "status": "planned"},
+       {"key": "hh11.cau_tao_hoa_hoc", "order": 4, "title": "Cấu tạo hoá học hợp chất hữu cơ",
+        "description": "Thuyết cấu tạo hoá học, công thức cấu tạo, đồng đẳng và đồng phân.", "status": "planned"}
+     ]},
+    {"key": "hh11.hydrocarbon", "grade": 11, "order": 4, "title": "Hydrocarbon",
+     "lessons": [
+       {"key": "hh11.alkane", "order": 1, "title": "Alkane",
+        "description": "Danh pháp, tính chất vật lí, phản ứng thế, phản ứng cháy và ứng dụng của alkane.", "status": "planned"},
+       {"key": "hh11.alkene_alkyne", "order": 2, "title": "Hydrocarbon không no: alkene và alkyne",
+        "description": "Danh pháp, đồng phân hình học, phản ứng cộng, phản ứng trùng hợp và nhận biết.", "status": "planned"},
+       {"key": "hh11.arene", "order": 3, "title": "Arene (hydrocarbon thơm)",
+        "description": "Cấu tạo benzene, tính chất của arene và an toàn khi dùng.", "status": "planned"}
+     ]},
+    {"key": "hh11.dan_xuat", "grade": 11, "order": 5, "title": "Dẫn xuất halogen, alcohol, phenol",
+     "lessons": [
+       {"key": "hh11.dan_xuat_halogen", "order": 1, "title": "Dẫn xuất halogen",
+        "description": "Danh pháp, phản ứng thế nguyên tử halogen, phản ứng tách và ứng dụng.", "status": "planned"},
+       {"key": "hh11.alcohol", "order": 2, "title": "Alcohol",
+        "description": "Danh pháp, liên kết hydrogen, tính chất hoá học của alcohol và tác hại của rượu bia.", "status": "planned"},
+       {"key": "hh11.phenol", "order": 3, "title": "Phenol",
+        "description": "Cấu tạo, tính acid yếu, phản ứng thế ở vòng benzene và ứng dụng của phenol.", "status": "planned"}
+     ]},
+    {"key": "hh11.carbonyl", "grade": 11, "order": 6, "title": "Hợp chất carbonyl và carboxylic acid",
+     "lessons": [
+       {"key": "hh11.aldehyde_ketone", "order": 1, "title": "Aldehyde và ketone",
+        "description": "Danh pháp, phản ứng khử, phản ứng oxi hoá aldehyde và nhận biết bằng thuốc thử Tollens.", "status": "planned"},
+       {"key": "hh11.carboxylic_acid", "order": 2, "title": "Carboxylic acid",
+        "description": "Danh pháp, tính acid, phản ứng ester hoá và ứng dụng của carboxylic acid.", "status": "planned"}
+     ]},
+
+    {"key": "hh12.ester_lipid", "grade": 12, "order": 1, "title": "Ester – lipid",
+     "lessons": [
+       {"key": "hh12.ester", "order": 1, "title": "Ester",
+        "description": "Khái niệm, danh pháp, tính chất vật lí, phản ứng thuỷ phân và điều chế ester.", "status": "planned"},
+       {"key": "hh12.lipid", "order": 2, "title": "Lipid và chất béo",
+        "description": "Acid béo, chất béo, phản ứng thuỷ phân và hydrogen hoá chất béo.", "status": "planned"},
+       {"key": "hh12.xa_phong", "order": 3, "title": "Xà phòng và chất giặt rửa",
+        "description": "Thành phần, cơ chế giặt rửa, phương pháp sản xuất và sử dụng hợp lí.", "status": "planned"}
+     ]},
+    {"key": "hh12.carbohydrate", "grade": 12, "order": 2, "title": "Carbohydrate",
+     "lessons": [
+       {"key": "hh12.glucose_fructose", "order": 1, "title": "Carbohydrate; glucose và fructose",
+        "description": "Phân loại carbohydrate; cấu tạo và tính chất hoá học của glucose, fructose.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Hoá học 12; phương trình đã cân bằng, đáp số đã được tính lại (C = 12, H = 1, O = 16, Ag = 108)."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Nêu được cách phân loại carbohydrate và công thức phân tử của glucose, fructose",
+          "Dự đoán được các phản ứng đặc trưng của glucose, fructose",
+          "Tính theo phương trình lên men và phản ứng tráng bạc"
+        ],
+        "summary": [
+          "Carbohydrate thường có công thức chung Cn(H₂O)m, gồm monosaccharide (glucose, fructose), disaccharide (saccharose, maltose) và polysaccharide (tinh bột, cellulose).",
+          "Glucose và fructose là đồng phân, cùng công thức C₆H₁₂O₆ (M = 180). Glucose có nhóm –CHO, fructose có nhóm ketone; cả hai có nhiều nhóm –OH kề nhau.",
+          "Nhóm –OH kề nhau hoà tan Cu(OH)₂ ở nhiệt độ thường tạo dung dịch xanh lam. Glucose bị oxi hoá bởi thuốc thử Tollens (1 mol glucose tạo 2 mol Ag) và làm mất màu nước bromine; fructose cũng tráng bạc (trong môi trường base nó chuyển thành glucose) nhưng không làm mất màu nước bromine.",
+          "Lên men glucose: C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂ (enzyme, 30–35 °C)."
+        ],
+        "examples": [
+          {"title": "Lên men rượu", "lines": [
+            "360 g glucose = 2 mol.",
+            "Theo phương trình tạo 4 mol C₂H₅OH = 4 · 46 = 184 g (hiệu suất 100 %)."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "choice", "style": "predict", "title": "Đoán hiện tượng với đường",
+           "tasks": [
+             {"key": "cu_oh2", "question": "Cho dung dịch glucose vào ống nghiệm chứa kết tủa Cu(OH)₂ (vừa điều chế), lắc đều ở nhiệt độ thường. Dự đoán hiện tượng.",
+              "options": [
+                {"text": "Kết tủa tan, tạo dung dịch màu xanh lam", "ok": true, "why": "Glucose có nhiều nhóm –OH kề nhau, tạo phức tan màu xanh lam với Cu(OH)₂."},
+                {"text": "Xuất hiện kết tủa đỏ gạch ngay", "ok": false, "why": "Kết tủa đỏ gạch Cu₂O chỉ tạo ra khi đun nóng trong môi trường base, không phải ở nhiệt độ thường."},
+                {"text": "Không có hiện tượng gì", "ok": false, "why": "Tính chất của polyalcohol làm kết tủa Cu(OH)₂ tan ngay ở nhiệt độ thường."}
+              ],
+              "explanation": "Đây là phản ứng đặc trưng của các nhóm –OH kề nhau."},
+             {"key": "trang_bac", "question": "Cho dung dịch glucose vào ống nghiệm sạch chứa thuốc thử Tollens (AgNO₃ trong NH₃), đun nóng nhẹ. Dự đoán hiện tượng.",
+              "options": [
+                {"text": "Thành ống nghiệm phủ một lớp bạc sáng như gương", "ok": true, "why": "Nhóm –CHO của glucose khử ion bạc thành Ag kim loại bám lên thành ống."},
+                {"text": "Dung dịch chuyển màu xanh lam", "ok": false, "why": "Màu xanh lam là hiện tượng với Cu(OH)₂, không phải với thuốc thử Tollens."},
+                {"text": "Có bọt khí thoát ra mạnh", "ok": false, "why": "Phản ứng tráng bạc không tạo khí; sản phẩm thấy được là bạc kim loại."}
+              ],
+              "explanation": "Phản ứng tráng bạc dùng để nhận biết nhóm –CHO; trước đây được dùng để tráng gương, ruột phích."},
+             {"key": "brom_glucose", "question": "Nhỏ nước bromine (màu vàng nâu) vào dung dịch glucose. Dự đoán hiện tượng.",
+              "options": [
+                {"text": "Nước bromine mất màu", "ok": true, "why": "Bromine oxi hoá nhóm –CHO của glucose, bromine bị khử thành Br⁻ không màu."},
+                {"text": "Màu vàng nâu giữ nguyên", "ok": false, "why": "Đó là hiện tượng với fructose, chất không có nhóm –CHO."},
+                {"text": "Tạo kết tủa bạc", "ok": false, "why": "Kết tủa bạc chỉ có khi dùng thuốc thử Tollens."}
+              ],
+              "explanation": "Nước bromine oxi hoá được nhóm aldehyde."},
+             {"key": "brom_fructose", "question": "Nhỏ nước bromine vào dung dịch fructose. Dự đoán hiện tượng.",
+              "options": [
+                {"text": "Nước bromine không mất màu", "ok": true, "why": "Fructose có nhóm ketone, không có nhóm –CHO, và nước bromine không phải môi trường base nên fructose không chuyển thành glucose."},
+                {"text": "Nước bromine mất màu như với glucose", "ok": false, "why": "Fructose chỉ phản ứng giống glucose trong môi trường base (như thuốc thử Tollens)."},
+                {"text": "Có kết tủa trắng", "ok": false, "why": "Không có chất kết tủa nào được tạo thành."}
+              ],
+              "explanation": "Nước bromine dùng để phân biệt glucose (mất màu) với fructose (không mất màu)."},
+             {"key": "nho_tollens", "question": "Cho nước ép nho chín (đã lọc trong) vào thuốc thử Tollens rồi đun nóng nhẹ. Dự đoán hiện tượng.",
+              "options": [
+                {"text": "Có lớp bạc bám trên thành ống", "ok": true, "why": "Nho chín chứa nhiều glucose (đường nho) nên có phản ứng tráng bạc."},
+                {"text": "Không có hiện tượng vì nước nho không phải hoá chất", "ok": false, "why": "Thực phẩm cũng chứa hoá chất; glucose trong nước nho vẫn phản ứng."},
+                {"text": "Dung dịch hoá xanh tím", "ok": false, "why": "Màu xanh tím là phản ứng của tinh bột với iodine."}
+              ],
+              "explanation": "Phản ứng tráng bạc giúp phát hiện glucose trong mẫu thật."},
+             {"key": "len_men", "question": "Trộn nấm men vào dung dịch glucose, để ở khoảng 30–35 °C trong bình có ống dẫn khí. Sau vài giờ, dự đoán điều gì xảy ra.",
+              "options": [
+                {"text": "Có bọt khí CO₂ thoát ra và dung dịch có mùi ethanol", "ok": true, "why": "Enzyme của nấm men lên men glucose: C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂."},
+                {"text": "Có khí O₂ thoát ra", "ok": false, "why": "Lên men rượu tạo CO₂, không tạo O₂."},
+                {"text": "Dung dịch chuyển màu xanh lam", "ok": false, "why": "Không có Cu(OH)₂ nên không có màu xanh lam."}
+              ],
+              "explanation": "Đây là cơ sở của sản xuất ethanol sinh học và làm bánh mì nở."}
+           ]}
+        ]},
+       {"key": "hh12.tinh_toan_glucose", "order": 2, "title": "Luyện tập: tính theo phản ứng lên men và tráng bạc",
+        "description": "Tính lượng ethanol, CO₂, bạc tạo thành từ glucose, fructose và hiệu suất phản ứng.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Hoá học 12; phương trình đã cân bằng, đáp số đã được tính lại (C = 12, H = 1, O = 16, Ag = 108)."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Đổi khối lượng sang số mol và tính theo tỉ lệ hệ số của phương trình",
+          "Tính lượng sản phẩm thực tế từ hiệu suất phản ứng",
+          "Vận dụng tỉ lệ 1 mol glucose (hoặc fructose) : 2 mol Ag"
+        ],
+        "summary": [
+          "M(C₆H₁₂O₆) = 180; M(C₂H₅OH) = 46; M(CO₂) = 44; M(Ag) = 108.",
+          "Lên men: C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂, tức 1 mol glucose cho 2 mol ethanol và 2 mol CO₂.",
+          "Tráng bạc: 1 mol glucose (hoặc fructose, trong môi trường base của thuốc thử Tollens) cho 2 mol Ag.",
+          "Lượng thực tế = lượng lí thuyết × hiệu suất (H < 100 % thì thu được ít hơn lí thuyết)."
+        ],
+        "examples": [
+          {"title": "Tính theo ba bước", "lines": [
+            "Đề: lên men 45 g glucose, hiệu suất 80 %. Tính khối lượng ethanol.",
+            "1) n(glucose) = 45 : 180 = 0,25 mol. 2) n(C₂H₅OH) lí thuyết = 0,5 mol = 23 g.",
+            "3) Thực tế: 23 · 0,8 = 18,4 g."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "choice", "style": "quiz", "title": "Tính theo phương trình",
+           "tasks": [
+             {"key": "ethanol_90g", "question": "Lên men 90 g glucose với hiệu suất 100 % theo C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂. Khối lượng ethanol thu được là bao nhiêu?",
+              "options": [
+                {"text": "46 g", "ok": true, "why": "90 : 180 = 0,5 mol glucose → 1 mol C₂H₅OH = 46 g."},
+                {"text": "23 g", "ok": false, "why": "Quên hệ số 2: mỗi mol glucose tạo 2 mol ethanol."},
+                {"text": "92 g", "ok": false, "why": "92 g là lượng ethanol từ 1 mol (180 g) glucose, còn ở đây chỉ có 0,5 mol."},
+                {"text": "90 g", "ok": false, "why": "Khối lượng không giữ nguyên: một phần khối lượng glucose chuyển thành khí CO₂."}
+              ],
+              "explanation": "Đổi khối lượng ra số mol, dùng tỉ lệ hệ số, rồi đổi lại ra khối lượng (C₂H₅OH: M = 46)."},
+             {"key": "co2_180g", "question": "Lên men hoàn toàn 180 g glucose. Khối lượng khí CO₂ tạo thành là bao nhiêu?",
+              "options": [
+                {"text": "88 g", "ok": true, "why": "1 mol glucose → 2 mol CO₂ = 2 · 44 = 88 g."},
+                {"text": "44 g", "ok": false, "why": "Quên hệ số 2 của CO₂."},
+                {"text": "92 g", "ok": false, "why": "92 g là khối lượng ethanol, không phải CO₂."}
+              ],
+              "explanation": "Kiểm tra bảo toàn khối lượng: 180 g glucose = 92 g ethanol + 88 g CO₂."},
+             {"key": "hieu_suat_75", "question": "Lên men 180 g glucose với hiệu suất 75 %. Khối lượng ethanol thu được là bao nhiêu?",
+              "options": [
+                {"text": "69 g", "ok": true, "why": "Theo lí thuyết 2 mol = 92 g ethanol; thực tế 92 · 0,75 = 69 g."},
+                {"text": "92 g", "ok": false, "why": "92 g là lượng lí thuyết khi hiệu suất 100 %."},
+                {"text": "122,7 g", "ok": false, "why": "Đã chia cho 0,75 thay vì nhân; lượng thực tế luôn nhỏ hơn lượng lí thuyết."},
+                {"text": "135 g", "ok": false, "why": "Đây là 75 % khối lượng glucose, không phải khối lượng ethanol."}
+              ],
+              "explanation": "Lượng sản phẩm thực tế = lượng lí thuyết × hiệu suất."},
+             {"key": "ag_tu_glucose", "question": "Cho 18 g glucose tác dụng hoàn toàn với lượng dư thuốc thử Tollens. Khối lượng bạc thu được là bao nhiêu?",
+              "options": [
+                {"text": "21,6 g", "ok": true, "why": "18 : 180 = 0,1 mol glucose → 0,2 mol Ag = 0,2 · 108 = 21,6 g."},
+                {"text": "10,8 g", "ok": false, "why": "Quên tỉ lệ 1 glucose : 2 Ag."},
+                {"text": "43,2 g", "ok": false, "why": "Tỉ lệ là 1 : 2, không phải 1 : 4."}
+              ],
+              "explanation": "Mỗi nhóm –CHO khử được 2 ion Ag⁺ thành 2 nguyên tử Ag."},
+             {"key": "ag_tu_fructose", "question": "Cho 36 g fructose tác dụng hoàn toàn với lượng dư thuốc thử Tollens, đun nóng. Khối lượng bạc thu được là bao nhiêu?",
+              "options": [
+                {"text": "43,2 g", "ok": true, "why": "36 : 180 = 0,2 mol fructose; trong môi trường base fructose chuyển thành glucose nên tạo 0,4 mol Ag = 43,2 g."},
+                {"text": "0 g, vì fructose không có nhóm –CHO", "ok": false, "why": "Trong môi trường ammonia của thuốc thử Tollens, fructose chuyển hoá thành glucose nên vẫn tráng bạc."},
+                {"text": "21,6 g", "ok": false, "why": "Đã dùng tỉ lệ 1 : 1; tỉ lệ đúng là 1 mol fructose : 2 mol Ag."}
+              ],
+              "explanation": "Vì thế thuốc thử Tollens không phân biệt được glucose với fructose; muốn phân biệt, dùng nước bromine."},
+             {"key": "glucose_can", "question": "Muốn thu được 46 g ethanol bằng cách lên men glucose với hiệu suất 50 %, cần dùng bao nhiêu gam glucose?",
+              "options": [
+                {"text": "180 g", "ok": true, "why": "46 g = 1 mol ethanol cần 0,5 mol glucose theo lí thuyết; hiệu suất 50 % nên cần 0,5 : 0,5 = 1 mol = 180 g."},
+                {"text": "90 g", "ok": false, "why": "90 g là lượng cần khi hiệu suất 100 %; hiệu suất thấp thì phải dùng nhiều nguyên liệu hơn."},
+                {"text": "45 g", "ok": false, "why": "Đã nhân với hiệu suất thay vì chia: tính lượng nguyên liệu cần dùng thì chia cho H."},
+                {"text": "360 g", "ok": false, "why": "Quên tỉ lệ 1 glucose : 2 ethanol nên lấy gấp đôi lượng glucose cần thiết."}
+              ],
+              "explanation": "Tính ngược từ sản phẩm: lượng nguyên liệu thực tế = lượng lí thuyết : hiệu suất."}
+           ]}
+        ]},
+       {"key": "hh12.saccharose_maltose", "order": 3, "title": "Saccharose và maltose",
+        "description": "Cấu tạo, phản ứng thuỷ phân và ứng dụng của saccharose, maltose.", "status": "planned"},
+       {"key": "hh12.tinh_bot_cellulose", "order": 4, "title": "Tinh bột và cellulose",
+        "description": "Cấu tạo, phản ứng thuỷ phân, phản ứng màu với iodine và sự tạo thành tinh bột trong cây xanh.", "status": "planned"}
+     ]},
+    {"key": "hh12.hop_chat_nitrogen", "grade": 12, "order": 3, "title": "Hợp chất chứa nitrogen",
+     "lessons": [
+       {"key": "hh12.amine", "order": 1, "title": "Amine",
+        "description": "Phân loại, danh pháp, tính base và phản ứng đặc trưng của amine, aniline.", "status": "planned"},
+       {"key": "hh12.amino_acid_peptide", "order": 2, "title": "Amino acid và peptide",
+        "description": "Cấu tạo lưỡng cực, tính lưỡng tính, phản ứng tạo peptide và phản ứng biuret.", "status": "planned"},
+       {"key": "hh12.protein_enzyme", "order": 3, "title": "Protein và enzyme",
+        "description": "Cấu trúc, sự đông tụ, thuỷ phân protein và vai trò xúc tác của enzyme.", "status": "planned"}
+     ]},
+    {"key": "hh12.polymer", "grade": 12, "order": 4, "title": "Polymer",
+     "lessons": [
+       {"key": "hh12.dai_cuong_polymer", "order": 1, "title": "Đại cương về polymer",
+        "description": "Khái niệm, phân loại theo nguồn gốc, phản ứng trùng hợp và trùng ngưng.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Hoá học 12; phân loại theo nguồn gốc (thiên nhiên, tổng hợp, bán tổng hợp)."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Nêu được khái niệm polymer, monomer, hệ số polymer hoá",
+          "Phân loại polymer theo nguồn gốc: thiên nhiên, tổng hợp, bán tổng hợp",
+          "Nhận ra polymer tạo bởi phản ứng trùng hợp và trùng ngưng"
+        ],
+        "summary": [
+          "Polymer là chất có phân tử khối rất lớn, gồm nhiều mắt xích liên kết với nhau; số mắt xích n là hệ số polymer hoá.",
+          "Polymer thiên nhiên có sẵn trong tự nhiên (cellulose, tinh bột, cao su thiên nhiên, tơ tằm).",
+          "Polymer tổng hợp do con người tổng hợp từ monomer (polyethylene, PVC, polystyrene, nylon-6,6, cao su buna).",
+          "Polymer bán tổng hợp được chế biến hoá học từ polymer thiên nhiên (tơ visco, tơ cellulose acetate)."
+        ],
+        "examples": [
+          {"title": "Trùng hợp ethylene", "lines": [
+            "n CH₂=CH₂ → (–CH₂–CH₂–)n (xúc tác, nhiệt độ, áp suất)",
+            "Sản phẩm là polyethylene (PE), dùng làm túi, màng bọc."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "sorting", "title": "Polymer từ đâu mà có?",
+           "set": {"title": "Xếp mỗi polymer theo nguồn gốc của nó.",
+            "groups": [
+              {"id": "thien_nhien", "label": "Thiên nhiên", "icon": "🌿"},
+              {"id": "tong_hop", "label": "Tổng hợp", "icon": "🏭"},
+              {"id": "ban_tong_hop", "label": "Bán tổng hợp", "icon": "⚗️"}
+            ],
+            "cards": [
+              {"key": "cellulose", "text": "Cellulose trong sợi bông", "picture": "☁️", "group": "thien_nhien",
+               "explanation": "Cây bông tự tạo ra cellulose: polymer thiên nhiên."},
+              {"key": "tinh_bot", "text": "Tinh bột trong hạt gạo", "picture": "🍚", "group": "thien_nhien",
+               "explanation": "Tinh bột được cây xanh tạo ra qua quang hợp: polymer thiên nhiên."},
+              {"key": "cao_su_tn", "text": "Cao su thiên nhiên từ mủ cây cao su", "picture": "🌳", "group": "thien_nhien",
+               "explanation": "Cao su thiên nhiên là polyisoprene có sẵn trong mủ cây: polymer thiên nhiên."},
+              {"key": "to_tam", "text": "Tơ tằm", "picture": "🐛", "group": "thien_nhien",
+               "explanation": "Tơ tằm là protein do con tằm nhả ra: polymer thiên nhiên."},
+              {"key": "pe", "text": "Polyethylene (PE) làm túi nilon", "picture": "🛍️", "group": "tong_hop",
+               "explanation": "PE được trùng hợp từ ethylene: polymer tổng hợp."},
+              {"key": "pvc", "text": "Poly(vinyl chloride) (PVC) làm ống nước", "picture": "🚰", "group": "tong_hop",
+               "explanation": "PVC được trùng hợp từ vinyl chloride: polymer tổng hợp."},
+              {"key": "ps", "text": "Polystyrene (PS) làm hộp xốp", "picture": "📦", "group": "tong_hop",
+               "explanation": "PS được trùng hợp từ styrene: polymer tổng hợp."},
+              {"key": "nylon66", "text": "Tơ nylon-6,6", "picture": "🧵", "group": "tong_hop",
+               "explanation": "Nylon-6,6 được trùng ngưng từ hexamethylenediamine và adipic acid: polymer tổng hợp."},
+              {"key": "cao_su_buna", "text": "Cao su buna", "picture": "🛞", "group": "tong_hop",
+               "explanation": "Cao su buna được trùng hợp từ buta-1,3-diene: polymer tổng hợp."},
+              {"key": "to_visco", "text": "Tơ visco", "picture": "👗", "group": "ban_tong_hop",
+               "explanation": "Tơ visco được chế biến hoá học từ cellulose (polymer thiên nhiên): polymer bán tổng hợp."},
+              {"key": "cel_acetate", "text": "Tơ cellulose acetate", "picture": "🎞️", "group": "ban_tong_hop",
+               "explanation": "Cellulose được ester hoá một phần bằng hoá chất: polymer bán tổng hợp."}
+            ]}}
+        ]},
+       {"key": "hh12.vat_lieu_polymer", "order": 2, "title": "Vật liệu polymer",
+        "description": "Chất dẻo, tơ, cao su, keo dán; vật liệu composite và sử dụng polymer an toàn, bền vững.", "status": "planned"}
+     ]},
+    {"key": "hh12.pin_dien_phan", "grade": 12, "order": 5, "title": "Pin điện và điện phân",
+     "lessons": [
+       {"key": "hh12.the_dien_cuc_pin", "order": 1, "title": "Thế điện cực chuẩn và pin Galvani",
+        "description": "Cặp oxi hoá – khử, thế điện cực chuẩn, cấu tạo pin Galvani và sức điện động chuẩn.",
+        "status": "ready",
+        "review": {"status": "checked", "note": "Mirabi biên soạn theo yêu cầu cần đạt Hoá học 12; thế điện cực chuẩn làm tròn đến 0,01 V, đáp số đã được tính lại."},
+        "source": "mirabi-original",
+        "objectives": [
+          "Nêu được ý nghĩa của thế điện cực chuẩn: so sánh tính khử của kim loại, tính oxi hoá của ion",
+          "Xác định cực âm, cực dương và chiều dòng electron trong pin Galvani",
+          "Tính sức điện động chuẩn E°pin = E°(cực dương) − E°(cực âm)"
+        ],
+        "summary": [
+          "Thế điện cực chuẩn E° (V) ở 25 °C: K⁺/K −2,93; Mg²⁺/Mg −2,37; Zn²⁺/Zn −0,76; Fe²⁺/Fe −0,44; 2H⁺/H₂ 0,00; Cu²⁺/Cu +0,34; Ag⁺/Ag +0,80.",
+          "E° càng nhỏ thì kim loại có tính khử càng mạnh; E° càng lớn thì ion kim loại có tính oxi hoá càng mạnh.",
+          "Trong pin Galvani, kim loại có E° nhỏ hơn là cực âm (anode, bị oxi hoá); electron đi ở mạch ngoài từ cực âm sang cực dương; cầu muối giữ cho hai dung dịch trung hoà điện.",
+          "E°pin = E°(cực dương) − E°(cực âm), luôn dương. Pin Zn–Cu: E°pin = 0,34 − (−0,76) = 1,10 V."
+        ],
+        "examples": [
+          {"title": "Pin Zn–Cu", "lines": [
+            "Cực âm: Zn → Zn²⁺ + 2e. Cực dương: Cu²⁺ + 2e → Cu.",
+            "Phản ứng trong pin: Zn + Cu²⁺ → Zn²⁺ + Cu; E°pin = 1,10 V."
+          ]}
+        ],
+        "requires": [],
+        "games": [
+          {"game": "choice", "style": "quiz", "title": "Pin điện hoá",
+           "tasks": [
+             {"key": "epin_zn_cu", "question": "Cho E°(Zn²⁺/Zn) = −0,76 V và E°(Cu²⁺/Cu) = +0,34 V. Sức điện động chuẩn của pin Zn–Cu là bao nhiêu?",
+              "options": [
+                {"text": "1,10 V", "ok": true, "why": "E°pin = E°(cực dương) − E°(cực âm) = 0,34 − (−0,76) = 1,10 V."},
+                {"text": "0,42 V", "ok": false, "why": "Đã cộng hai thế điện cực (−0,76 + 0,34 = −0,42) rồi bỏ dấu; phải lấy hiệu."},
+                {"text": "−1,10 V", "ok": false, "why": "Đã lấy cực âm trừ cực dương; sức điện động của pin luôn dương."}
+              ],
+              "explanation": "Lấy thế điện cực của cực dương (lớn hơn) trừ thế điện cực của cực âm (nhỏ hơn)."},
+             {"key": "tim_e_ni", "question": "Pin tạo bởi kim loại M (cặp M²⁺/M) và bạc có E°pin = 1,06 V, trong đó M là cực âm. Biết E°(Ag⁺/Ag) = +0,80 V. Thế điện cực chuẩn của cặp M²⁺/M là bao nhiêu?",
+              "options": [
+                {"text": "−0,26 V", "ok": true, "why": "1,06 = 0,80 − E°(M²⁺/M), nên E°(M²⁺/M) = 0,80 − 1,06 = −0,26 V (đó là cặp Ni²⁺/Ni)."},
+                {"text": "+0,26 V", "ok": false, "why": "M là cực âm nên E° của M phải nhỏ hơn của Ag; tính lại: 0,80 − 1,06 = −0,26 V."},
+                {"text": "+1,86 V", "ok": false, "why": "Đã cộng 0,80 với 1,06; từ E°pin = E°(+) − E°(−) suy ra E°(−) = E°(+) − E°pin."}
+              ],
+              "explanation": "Biết E°pin và thế điện cực của một cực, suy ra thế điện cực của cực còn lại."},
+             {"key": "cuc_am_zn_cu", "question": "Trong pin Galvani Zn–Cu đang hoạt động, điện cực nào là cực âm và điều gì xảy ra ở đó?",
+              "options": [
+                {"text": "Điện cực Zn, kẽm bị oxi hoá thành Zn²⁺", "ok": true, "why": "Zn có E° nhỏ hơn nên là chất khử mạnh hơn: Zn → Zn²⁺ + 2e, thanh kẽm mòn dần."},
+                {"text": "Điện cực Cu, đồng bị oxi hoá", "ok": false, "why": "Cu là cực dương; tại đó ion Cu²⁺ bị khử thành Cu bám lên điện cực."},
+                {"text": "Điện cực Zn, ion Zn²⁺ bị khử thành Zn", "ok": false, "why": "Ở cực âm của pin xảy ra sự oxi hoá, không phải sự khử."}
+              ],
+              "explanation": "Trong pin: cực âm (anode) xảy ra sự oxi hoá, cực dương (cathode) xảy ra sự khử."},
+             {"key": "chieu_electron", "question": "Trong pin Zn–Cu, electron chuyển động ở mạch ngoài theo chiều nào?",
+              "options": [
+                {"text": "Từ điện cực Zn sang điện cực Cu", "ok": true, "why": "Electron sinh ra ở cực âm (Zn bị oxi hoá) đi qua dây dẫn đến cực dương, nơi Cu²⁺ nhận electron."},
+                {"text": "Từ điện cực Cu sang điện cực Zn", "ok": false, "why": "Đó là chiều quy ước của dòng điện ở mạch ngoài, ngược với chiều electron."},
+                {"text": "Qua cầu muối từ dung dịch này sang dung dịch kia", "ok": false, "why": "Electron chỉ đi qua dây dẫn; trong cầu muối và dung dịch, điện tích được chuyển bởi các ion."}
+              ],
+              "explanation": "Electron đi từ cực âm sang cực dương qua mạch ngoài."},
+             {"key": "phan_ung_xay_ra", "question": "Dựa vào thế điện cực chuẩn (Fe²⁺/Fe −0,44 V; Cu²⁺/Cu +0,34 V; Ag⁺/Ag +0,80 V), phản ứng nào xảy ra được?",
+              "options": [
+                {"text": "Fe + Cu²⁺ → Fe²⁺ + Cu", "ok": true, "why": "Fe (E° nhỏ hơn) khử được Cu²⁺ (E° lớn hơn): chất khử mạnh tác dụng với chất oxi hoá mạnh."},
+                {"text": "Cu + Fe²⁺ → Cu²⁺ + Fe", "ok": false, "why": "Cu là chất khử yếu hơn Fe, không khử được Fe²⁺."},
+                {"text": "2Ag + Cu²⁺ → 2Ag⁺ + Cu", "ok": false, "why": "Ag có E° lớn hơn Cu nên là chất khử yếu hơn, không khử được Cu²⁺."}
+              ],
+              "explanation": "Kim loại của cặp có E° nhỏ hơn khử được ion kim loại của cặp có E° lớn hơn (quy tắc alpha)."},
+             {"key": "cau_muoi", "question": "Nếu nhấc cầu muối ra khỏi pin Zn–Cu đang hoạt động, điều gì xảy ra?",
+              "options": [
+                {"text": "Pin ngừng tạo dòng điện", "ok": true, "why": "Không có cầu muối thì mạch hở và hai dung dịch không được trung hoà điện tích, nên phản ứng dừng lại."},
+                {"text": "Pin vẫn chạy bình thường", "ok": false, "why": "Cầu muối là một phần của mạch kín; thiếu nó thì ion không di chuyển giữa hai dung dịch được."},
+                {"text": "Sức điện động tăng lên", "ok": false, "why": "Bỏ cầu muối không làm tăng sức điện động; mạch bị hở nên không còn dòng điện."}
+              ],
+              "explanation": "Cầu muối chứa dung dịch chất điện li, khép kín mạch và giữ cho hai dung dịch trung hoà điện."}
+           ]},
+          {"game": "order", "title": "Dãy thế điện cực",
+           "tasks": [
+             {"key": "tinh_khu_giam", "prompt": "Sắp xếp các kim loại theo tính khử giảm dần.",
+              "items": ["K", "Mg", "Zn", "Cu", "Ag"],
+              "explanation": "E° tăng dần: K −2,93; Mg −2,37; Zn −0,76; Cu +0,34; Ag +0,80 (V). E° càng nhỏ thì tính khử của kim loại càng mạnh.",
+              "first_label": "Khử mạnh nhất", "last_label": "Khử yếu nhất"},
+             {"key": "tinh_oxh_tang", "prompt": "Sắp xếp các ion theo tính oxi hoá tăng dần.",
+              "items": ["Zn²⁺", "Fe²⁺", "Cu²⁺", "Ag⁺"],
+              "explanation": "E°: Zn²⁺/Zn −0,76; Fe²⁺/Fe −0,44; Cu²⁺/Cu +0,34; Ag⁺/Ag +0,80 (V). E° càng lớn thì ion có tính oxi hoá càng mạnh.",
+              "first_label": "Oxi hoá yếu nhất", "last_label": "Oxi hoá mạnh nhất"},
+             {"key": "epin_tang", "prompt": "Dùng bảng thế điện cực chuẩn trong phần tóm tắt, sắp xếp các pin theo sức điện động chuẩn tăng dần.",
+              "items": ["Pin Cu–Ag", "Pin Zn–Cu", "Pin Zn–Ag", "Pin Mg–Cu"],
+              "explanation": "Cu–Ag: 0,80 − 0,34 = 0,46 V; Zn–Cu: 0,34 + 0,76 = 1,10 V; Zn–Ag: 0,80 + 0,76 = 1,56 V; Mg–Cu: 0,34 + 2,37 = 2,71 V.",
+              "first_label": "Nhỏ nhất", "last_label": "Lớn nhất"},
+             {"key": "buoc_tinh_epin", "prompt": "Sắp xếp các bước tính sức điện động chuẩn của một pin Galvani.",
+              "items": [
+                "Tra thế điện cực chuẩn của hai cặp oxi hoá – khử",
+                "Xác định cực âm (E° nhỏ hơn) và cực dương (E° lớn hơn)",
+                "Tính E°pin = E°(cực dương) − E°(cực âm)"
+              ],
+              "explanation": "Cần biết hai giá trị E° để biết cực nào âm, cực nào dương, rồi mới lấy hiệu cho đúng chiều.",
+              "first_label": "Làm trước", "last_label": "Làm sau cùng"}
+           ]}
+        ]},
+       {"key": "hh12.dien_phan", "order": 2, "title": "Điện phân",
+        "description": "Điện phân nóng chảy và điện phân dung dịch; thứ tự điện phân ở các điện cực và ứng dụng.", "status": "planned"}
+     ]},
+    {"key": "hh12.kim_loai", "grade": 12, "order": 6, "title": "Kim loại, nguyên tố nhóm IA – IIA và kim loại chuyển tiếp",
+     "lessons": [
+       {"key": "hh12.cau_tao_tinh_chat_kl", "order": 1, "title": "Cấu tạo và tính chất của kim loại",
+        "description": "Liên kết kim loại, tính chất vật lí chung và tính khử của kim loại.", "status": "planned"},
+       {"key": "hh12.dieu_che_kl", "order": 2, "title": "Điều chế kim loại",
+        "description": "Nguyên tắc và các phương pháp nhiệt luyện, thuỷ luyện, điện phân; tái chế kim loại.", "status": "planned"},
+       {"key": "hh12.hop_kim_an_mon", "order": 3, "title": "Hợp kim và sự ăn mòn kim loại",
+        "description": "Hợp kim thường gặp, ăn mòn hoá học, ăn mòn điện hoá và cách chống ăn mòn.", "status": "planned"},
+       {"key": "hh12.nhom_ia", "order": 4, "title": "Nguyên tố nhóm IA",
+        "description": "Tính chất của kim loại kiềm và một số hợp chất quan trọng của sodium.", "status": "planned"},
+       {"key": "hh12.nhom_iia", "order": 5, "title": "Nguyên tố nhóm IIA",
+        "description": "Tính chất của kim loại nhóm IIA, hợp chất của calcium và nước cứng.", "status": "planned"},
+       {"key": "hh12.chuyen_tiep", "order": 6, "title": "Kim loại chuyển tiếp dãy thứ nhất",
+        "description": "Đặc điểm cấu hình electron, tính chất vật lí và màu của ion kim loại chuyển tiếp.", "status": "planned"},
+       {"key": "hh12.phuc_chat", "order": 7, "title": "Phức chất",
+        "description": "Nguyên tử trung tâm, phối tử, liên kết trong phức chất và một số ứng dụng.", "status": "planned"}
+     ]}
+  ]
+}

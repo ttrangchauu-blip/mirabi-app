@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../../components/Typography';
 import { GAME_INFO, gameTitle, lessonsForGame, PLAY_MODE } from '../../learning/labels';
 import type { Catalog, GameId, LearningSession, Level, StartOptions, SubjectCode, Topic } from '../../learning/types';
+import type { StudyRecommendations } from '../../studyProfile';
 import { appTheme as t } from '../../theme';
 import { Button, Card, Chip, SectionHeader } from '../../ui/kit';
 import { BackHeader } from './GamePicker';
@@ -27,11 +28,16 @@ type Props = {
   onBack: () => void;
   onStart: (options: StartOptions) => void;
   onResume: (session: LearningSession) => void;
+  /** Suggestions for the user's grade: the suggested grade is chosen first and its topics are marked. */
+  recommended?: StudyRecommendations | null;
+  /** The grade being studied decides the Math grade (level code, e.g. grade3); null outside school: every grade. */
+  onlyLevel?: string | null;
 };
 
 /** One game's setup: English picks the topic then the level, Math the grade then the topic; then the duration.
  * "Bắt đầu" is the only thing that creates a session on the backend. */
-export function GameSetup({ subject, game, catalog, error, onRetry, defaultDuration, preset, current, starting, onBack, onStart, onResume }: Props) {
+export function GameSetup({ subject, game, catalog, error, onRetry, defaultDuration, preset, current, starting, onBack, onStart, onResume,
+  recommended, onlyLevel }: Props) {
   const info = GAME_INFO[game];
   const data = catalog?.subjects.find((s) => s.code === subject);
   const lessons = useMemo(() => (data ? lessonsForGame(data.lessons, game) : []), [data, game]);
@@ -43,7 +49,7 @@ export function GameSetup({ subject, game, catalog, error, onRetry, defaultDurat
 
   const has = (topic?: Topic, level?: Level) => lessons.some((l) => (!topic || l.topic_id === topic.id) && (!level || l.level_id === level.id));
   const topics = data?.topics.filter((x) => has(x)) ?? [];
-  const levels = data?.levels.filter((lv) => has(undefined, lv)) ?? [];
+  const levels = data?.levels.filter((lv) => has(undefined, lv) && (!onlyLevel || lv.code === onlyLevel)) ?? [];
   const gradeFirst = subject === 'math';
   // Vocabulary: "Tổng hợp" (all topics, the level follows the user) is chosen already, so "Bắt đầu" is one tap away;
   // a topic is an optional filter, shown as small chips.
@@ -52,8 +58,9 @@ export function GameSetup({ subject, game, catalog, error, onRetry, defaultDurat
   let level: Level | undefined;
   let topicChoices = topics;
   let levelChoices = levels;
+  const suggestedTopic = (x: Topic) => !!recommended?.topics[subject]?.includes(x.code);
   if (gradeFirst) {
-    level = levels.find((lv) => lv.id === levelId) ?? levels[0];
+    level = levels.find((lv) => lv.id === levelId) ?? levels.find((lv) => lv.code === recommended?.math_level) ?? levels[0];
     topicChoices = topics.filter((x) => has(x, level));
     topic = topicChoices.find((x) => x.id === topicId);
   } else {
@@ -88,9 +95,12 @@ export function GameSetup({ subject, game, catalog, error, onRetry, defaultDurat
         const selected = x.id === topic?.id;
         return (
           <Pressable key={x.id} onPress={() => setTopicId(x.id)} accessibilityRole="radio" accessibilityState={{ selected }}
-            accessibilityLabel={x.name} style={[styles.option, selected && styles.optionOn]}>
+            accessibilityLabel={suggestedTopic(x) ? `${x.name} (gợi ý)` : x.name} style={[styles.option, selected && styles.optionOn]}>
             <View style={styles.flex}>
-              <Text style={[styles.optionName, selected && styles.onText]}>{x.name}</Text>
+              <View style={styles.nameRow}>
+                <Text style={[styles.optionName, selected && styles.onText]}>{x.name}</Text>
+                {suggestedTopic(x) ? <Text style={[styles.suggested, selected && styles.suggestedOn]}>Gợi ý</Text> : null}
+              </View>
               {x.description ? <Text style={[styles.optionDesc, selected && styles.onText]}>{x.description}</Text> : null}
             </View>
             {x.review_count ? <Text style={styles.badge}>{x.review_count} cần ôn</Text> : null}
@@ -114,13 +124,16 @@ export function GameSetup({ subject, game, catalog, error, onRetry, defaultDurat
         {levelChoices.map((lv) => <Chip key={lv.id} label={lv.name} selected={lv.id === level?.id} onPress={() => setLevelId(lv.id)} />)}
       </View>
       {level?.description ? <Text style={styles.muted}>{level.description}</Text> : null}
+      {gradeFirst && recommended && levelChoices.some((lv) => lv.code === recommended.math_level) ? (
+        <Text style={styles.muted}>Gợi ý cho {recommended.grade_label}: {levelChoices.find((lv) => lv.code === recommended.math_level)!.name}</Text>
+      ) : null}
     </>
   ) : null;
 
   return (
     <>
       <BackHeader title={info.direction ? `${info.direction} · ${info.name}` : info.name}
-        subtitle={`${subject === 'english' ? 'Tiếng Anh' : 'Toán'} · ${info.detail}`} onBack={onBack} />
+        subtitle={`${catalog?.subjects.find((s) => s.code === subject)?.name ?? ''} · ${info.detail}`} onBack={onBack} />
       {error ? <Card><Text style={styles.error}>{error}</Text><Button title="Thử lại" icon="refresh" variant="secondary" onPress={onRetry} /></Card> : null}
       {!catalog && !error ? <ActivityIndicator color={t.accent} /> : null}
       {data ? (
@@ -157,6 +170,10 @@ const styles = StyleSheet.create({
   option: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: '#FFFFFF', borderRadius: 18, padding: 14, marginBottom: 8 },
   optionOn: { backgroundColor: t.accent },
   optionName: { fontSize: 16, fontWeight: '900', color: t.ink },
+  nameRow: { flexDirection: 'row', alignItems: 'center', gap: 8, flexWrap: 'wrap' },
+  suggested: { fontSize: 11, fontWeight: '900', color: t.success, backgroundColor: t.successBg, borderRadius: 8, paddingHorizontal: 7,
+    paddingVertical: 2, overflow: 'hidden' },
+  suggestedOn: { color: t.accent, backgroundColor: '#FFFFFF' },
   optionDesc: { fontSize: 13, color: t.muted, marginTop: 2 },
   onText: { color: '#FFFFFF' },
   badge: { fontSize: 12, fontWeight: '800', color: t.danger, backgroundColor: t.dangerBg, borderRadius: 10, paddingHorizontal: 8, paddingVertical: 3, overflow: 'hidden' },

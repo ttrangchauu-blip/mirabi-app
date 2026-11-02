@@ -1,24 +1,44 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Animated, Easing, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
 import { PetArt, restartFromZero } from '../../components/PetArt';
+import { attackWindupMs, SPRITE_LAYOUT } from '../../petSprites';
 import { Text } from '../../components/Typography';
-import type { TutorialScene } from '../../learning/tutorials';
+import type { TutorialScene, TutorialTarget } from '../../learning/tutorials';
 import { appTheme as t } from '../../theme';
+import { AnswerSlots } from './games/LetterInput';
+import { Rock, WordTile } from './games/Playfield';
+import { CodePath, SortCards, SpellDetective } from './games/CurriculumGames';
+import { WordForest } from './games/WordForest';
+import { MagicLab } from '../../games/MagicLab';
+import { EquationBalance } from '../../games/subject/EquationBalance';
+import { NumberLineBridge } from '../../games/subject/NumberLineBridge';
+import { SentenceXray } from '../../games/subject/SentenceXray';
+import { StepSolver } from '../../games/subject/StepSolver';
+import { StoryDetective } from '../../games/subject/StoryDetective';
+import { GeometryWorkshop } from '../../games/subject/GeometryWorkshop';
+import { SentenceTrain } from '../../games/subject/SentenceTrain';
+import { TimelineQuest } from '../../games/subject/TimelineQuest';
+import { ChoiceExplain, MatchPairs, OrderSteps } from './games/LessonGames';
+import type { SubjectGameId, Turn } from '../../learning/types';
 
 const HEIGHT = 210;
 const STEP_MS = 750;
 const BASE_W = 70;
 const MONSTER_W = 120;
+/** The falling words' frame, as in the game (Playfield METEOR_W), and the pet at the bottom. */
+const TARGET_W = 112;
+const PET = 48;
+const PET_BOTTOM = 12;
 
 type Props = { scene: TutorialScene; petId: string; petLevel: number; reduceMotion: boolean };
 
 /** What a scene shows, read out instead of the drawing. */
 export function describeScene(scene: TutorialScene): string {
   switch (scene.kind) {
-    case 'fall': return scene.variant === 'word' ? `Từ “${scene.label}” rơi xuống` : `Thiên thạch “${scene.label}” rơi xuống`;
-    case 'type': return `Gõ “${scene.answer}” rồi nhấn Bắn: hiện “${scene.result}”`;
+    case 'fall': return `${scene.targets.length} ${scene.variant === 'word' ? 'từ' : 'thiên thạch'} đang rơi, pet đứng dưới đất. `
+      + `Ô chữ nằm dưới “${scene.targets[0].label}”, gần mặt đất nhất`;
+    case 'type': return `Gõ “${scene.answer}” vào ô dưới “${scene.target.label}”: từ dừng lại, pet tự bắn, trúng thì vỡ và hiện “${scene.result}”`;
     case 'monster': return `Quái vật mang phép tính ${scene.expression} tiến về căn cứ`;
     case 'numpad': return `Bấm ${scene.answer} cho ${scene.expression} rồi nhấn ${scene.submit}`;
     case 'gates': return `Câu “${scene.sentence}”, các cổng ${scene.options.join(', ')}${scene.demo ? `: chạm cổng ${scene.options[scene.right]}` : ''}`;
@@ -26,6 +46,18 @@ export function describeScene(scene: TutorialScene): string {
     case 'spans': return `Điền ${scene.answer} vào ${scene.equation} để đặt đoạn cầu`;
     case 'compare': return `So sánh ${scene.left} và ${scene.right}: chạm dấu ${scene.signs[scene.right_sign]}`;
     case 'rules': return scene.items.map((i) => i.text).join(' ');
+    case 'word_build': return `Hình ${scene.picture}, các ${scene.unit === 'letter' ? 'chữ' : 'tiếng'} ${scene.shuffled.map((i) => scene.pieces[i]).join(', ')}`
+      + (scene.demo ? `: chạm ${scene.pieces.join(', ')} rồi Kiểm tra` : '');
+    case 'spell_fix': return `Câu “${scene.words.join(' ')}”` + (scene.demo ? `: chạm “${scene.words[scene.wrong]}”, chọn “${scene.options[scene.right]}”` : '');
+    case 'sort': return `Thẻ ${scene.card.text}, các nhóm ${scene.groups.map((g) => g.label).join(', ')}`
+      + (scene.demo ? `: kéo thẻ vào nhóm ${scene.groups.find((g) => g.id === scene.right)?.label}` : '');
+    case 'order': return `${scene.prompt}: ` + (scene.demo ? `chạm ${scene.items.join(', ')} rồi Kiểm tra` : `các thẻ ${scene.shuffled.map((i) => scene.items[i]).join(', ')}`);
+    case 'match': return `${scene.prompt}: ` + scene.pairs.map(([a, b]) => `${a} với ${b}`).join(', ');
+    case 'choice': return `${scene.question} ` + (scene.demo ? `Chọn “${scene.options[scene.wrong]}”: chưa phù hợp, có lý do. Chọn “${scene.options[scene.right]}”: đúng.` : scene.options.join(', '));
+    case 'code': return scene.mode === 'build' ? `Xếp các lệnh ${scene.program.length} lệnh vào thanh chương trình` : 'Nhấn Chạy: pet đi theo từng lệnh tới cờ đích';
+    case 'lab': return scene.mode === 'empty' ? 'Bàn thí nghiệm: mạch điện còn trống, pin, bóng đèn và dây dẫn trên bàn'
+      : scene.mode === 'build' ? 'Kéo pin, bóng đèn và dây đồng vào mạch' : 'Bật công tắc: đèn sáng, dòng điện chạy trong mạch';
+    case 'subject': return SUBJECT_DESCRIPTION[scene.game] + (scene.mode === 'demo' ? '. Thao tác mẫu đang chạy.' : '');
   }
 }
 
@@ -55,10 +87,12 @@ function useLoop(ms: number, reduceMotion: boolean, still = 0.5) {
 
 /** A small working copy of the game, drawn like the real one, that shows the move the page explains. */
 export function TutorialArt({ scene, petId, petLevel, reduceMotion }: Props) {
+  // The sky scenes place the words, the bullet and the pet from the frame's width.
+  const [width, setWidth] = useState(0);
   const body = (() => {
     switch (scene.kind) {
-      case 'fall': return <FallScene scene={scene} petId={petId} petLevel={petLevel} reduceMotion={reduceMotion} />;
-      case 'type': return <TypeScene scene={scene} reduceMotion={reduceMotion} />;
+      case 'fall': return <FallScene scene={scene} width={width} petId={petId} petLevel={petLevel} reduceMotion={reduceMotion} />;
+      case 'type': return <TypeScene scene={scene} width={width} petId={petId} petLevel={petLevel} reduceMotion={reduceMotion} />;
       case 'monster': return <MonsterScene scene={scene} petId={petId} petLevel={petLevel} reduceMotion={reduceMotion} />;
       case 'numpad': return <NumpadScene scene={scene} reduceMotion={reduceMotion} />;
       case 'gates': return <GatesScene scene={scene} petId={petId} petLevel={petLevel} reduceMotion={reduceMotion} />;
@@ -66,10 +100,16 @@ export function TutorialArt({ scene, petId, petLevel, reduceMotion }: Props) {
       case 'spans': return <SpansScene scene={scene} reduceMotion={reduceMotion} />;
       case 'compare': return <CompareScene scene={scene} reduceMotion={reduceMotion} />;
       case 'rules': return <RulesScene scene={scene} />;
+      case 'order': case 'match': case 'choice': return <LessonScene scene={scene} reduceMotion={reduceMotion} />;
+      case 'lab': return <LabScene scene={scene} petId={petId} petLevel={petLevel} reduceMotion={reduceMotion} />;
+      case 'subject': return <SubjectScene scene={scene} petId={petId} petLevel={petLevel} reduceMotion={reduceMotion} />;
+      case 'word_build': case 'spell_fix': case 'sort': case 'code':
+        return <CurriculumScene scene={scene} petId={petId} petLevel={petLevel} reduceMotion={reduceMotion} />;
     }
   })();
   return (
-    <View accessible accessibilityRole="image" accessibilityLabel={`Minh họa: ${describeScene(scene)}`} style={styles.frame}>
+    <View accessible accessibilityRole="image" accessibilityLabel={`Minh họa: ${describeScene(scene)}`} style={styles.frame}
+      onLayout={(e) => setWidth(e.nativeEvent.layout.width)}>
       {body}
     </View>
   );
@@ -89,61 +129,97 @@ function Sky({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Target({ variant, label, hit }: { variant: 'word' | 'meteor'; label: string; hit?: boolean }) {
-  if (hit) return <Text style={styles.boom}>💥</Text>;
-  if (variant === 'word') {
-    return (
-      <LinearGradient colors={['#7FD3FF', '#4C6FFF']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.tile}>
-        <Text style={styles.tileText}>{label}</Text>
-      </LinearGradient>
-    );
-  }
+/** A falling target as the game draws it: the word tile (Anh → Việt) or the rock with its meaning (Việt → Anh), and the
+ * answer boxes in its frame, right under it. The aimed one is larger and shows what is typed. */
+function Target({ variant, target, aimed, typed = '' }: { variant: 'word' | 'meteor'; target: TutorialTarget; aimed: boolean; typed?: string }) {
   return (
-    <View style={styles.center}>
-      <LinearGradient colors={['#FFE29A', '#F58A3A', '#8E3B1F']} start={{ x: 0.2, y: 0.1 }} end={{ x: 0.85, y: 1 }} style={styles.rock} />
-      <Text style={styles.rockWord}>{label}</Text>
+    <View style={styles.target}>
+      {variant === 'word' ? <WordTile word={target.label} danger={false} big={aimed} /> : (
+        <>
+          <Rock danger={false} big={aimed} />
+          <Text style={[styles.rockWord, aimed && styles.rockWordAimed]} numberOfLines={1}>{target.label}</Text>
+        </>
+      )}
+      <View style={aimed ? styles.slotsAimed : styles.slotsCompact}>
+        <AnswerSlots letters={target.letters} value={typed} width={TARGET_W - 8} compact={!aimed} />
+      </View>
     </View>
   );
 }
 
-function FallScene({ scene, petId, petLevel, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'fall' }> } & Omit<Props, 'scene'>) {
-  const fall = useLoop(3200, reduceMotion);
-  const top = fall.interpolate({ inputRange: [0, 1], outputRange: [6, HEIGHT - 100] });
+/** Several words falling at once in their lanes, each at its own height; the one closest to the ground is aimed. */
+function FallScene({ scene, width, petId, petLevel, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'fall' }>; width: number } & Omit<Props, 'scene'>) {
+  const fall = useLoop(4200, reduceMotion, 0.4);
+  const drop = fall.interpolate({ inputRange: [0, 1], outputRange: [0, 28] });
+  const lanes = [0.27, 0.73, 0.5];
+  // A meteor's frame (rock, meaning, boxes) is taller than a word tile's: it starts higher, so it stays above the ground.
+  const tops = scene.variant === 'word' ? [50, 22, -6] : [34, 0, -24];
   return (
     <Sky>
-      <View style={styles.petCorner}><PetArt pet={petId} size={56} stage={petLevel} still={reduceMotion} /></View>
-      <Animated.View style={[styles.faller, { transform: [{ translateY: top }] }]}>
-        <Target variant={scene.variant} label={scene.label} />
-      </Animated.View>
+      {width > 0 ? scene.targets.slice(0, 3).map((target, i) => (
+        <Animated.View key={target.label} style={[styles.faller, { left: Math.max(4, Math.min(width - TARGET_W - 4, width * lanes[i] - TARGET_W / 2)),
+          top: tops[i], transform: [{ translateY: drop }] }]}>
+          <Target variant={scene.variant} target={target} aimed={i === 0} />
+        </Animated.View>
+      )) : null}
+      <View style={[styles.shooter, { left: width * 0.6 - PET / 2 }]}><PetArt pet={petId} size={PET} stage={petLevel} still={reduceMotion} /></View>
     </Sky>
   );
 }
 
-function TypeScene({ scene, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'type' }>; reduceMotion: boolean }) {
+/**
+ * Typing the answer under the aimed word, as in the game: nothing to press. 0: empty field · 1…n: one more letter ·
+ * n+1: right, the field is empty again (ready for the next word), the word stops where it is and the pet's bullet flies
+ * to it · n+2, n+3: the bullet reaches it, it breaks, and its meaning shows where it was hit.
+ */
+function TypeScene({ scene, width, petId, petLevel, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'type' }>; width: number } & Omit<Props, 'scene'>) {
   const letters = scene.answer.length;
-  // 0: empty boxes · 1…n: one more letter · n+1: "Bắn" pressed · n+2: hit, the result shows.
-  const step = useStep(letters + 3, reduceMotion);
-  const typed = scene.answer.slice(0, Math.min(step, letters));
-  const firing = step >= letters + 1;
-  const hit = step === letters + 2;
+  const step = useStep(letters + 4, reduceMotion);
+  const typed = step <= letters ? scene.answer.slice(0, step) : '';
+  const firing = step === letters + 1;
+  const hit = step >= letters + 2;
+  const top = 8 + Math.min(step, letters) * 4; // it falls while the answer is typed, then stops for the shot
+  const bullet = useRef(new Animated.Value(0)).current;
+  // As in the game: a pet with a drawn attack strikes, and the bullet leaves as it lunges.
+  const strike = useRef(new Animated.Value(0)).current;
+  const windup = attackWindupMs(petId, petLevel, reduceMotion);
+  useEffect(() => {
+    if (!firing) return;
+    bullet.setValue(0); strike.setValue(0);
+    const flight = Animated.timing(bullet, { toValue: 1, duration: STEP_MS * 0.9 - windup, easing: Easing.in(Easing.quad), useNativeDriver: true });
+    const run = windup ? Animated.parallel([
+      Animated.sequence([Animated.delay(windup), flight]),
+      Animated.timing(strike, { toValue: 1, duration: SPRITE_LAYOUT.attack.cycleMs, easing: Easing.linear, useNativeDriver: false }),
+    ]) : flight;
+    run.start();
+    return () => run.stop();
+  }, [firing, bullet, strike, windup]);
+  const muzzle = HEIGHT - PET_BOTTOM - PET + 8;
+  const hitY = top + (scene.variant === 'word' ? 38 : 43); // the middle of the tile, or of the rock
   return (
     <Sky>
-      <View style={styles.typeTarget}>
-        <Target variant={scene.variant} label={scene.label} hit={hit} />
-        {hit ? <Text style={styles.result}>{scene.result}</Text> : null}
-      </View>
-      <View style={styles.typeRow}>
-        <View style={styles.boxes}>
-          {Array.from({ length: letters }, (_, i) => (
-            <View key={i} style={[styles.box, typed[i] ? styles.boxFilled : null]}><Text style={styles.boxLetter}>{typed[i] ?? ''}</Text></View>
-          ))}
-        </View>
-        <View style={[styles.fire, typed.length === letters && styles.fireLit, firing && !hit && styles.fireDown]}>
-          <Ionicons name="flame" size={16} color="#FFFFFF" />
-          <Text style={styles.fireText}>Bắn</Text>
-        </View>
-        {firing && !hit ? <Text style={styles.pointerFire}>👆</Text> : null}
-      </View>
+      {width > 0 ? (
+        <>
+          {hit ? (
+            <View style={[styles.burst, { top: Math.max(4, hitY - 24), left: width / 2 - 75 }]}>
+              <Text style={styles.burstTitle}>{scene.result}</Text>
+              {scene.sub ? <Text style={styles.burstSub}>{scene.sub}</Text> : null}
+            </View>
+          ) : (
+            <View style={[styles.faller, { left: width / 2 - TARGET_W / 2, top }]}>
+              <Target variant={scene.variant} target={scene.target} aimed typed={typed} />
+            </View>
+          )}
+          {hit && step === letters + 2 ? [0, 1, 2, 3, 4, 5].map((i) => (
+            <View key={i} style={[styles.shard, { left: width / 2 + Math.cos(i * 1.05) * 46 - 3, top: hitY + Math.sin(i * 1.05) * 30 - 3 },
+              i % 2 ? styles.shardAlt : null, scene.variant === 'meteor' && styles.shardRock]} />
+          )) : null}
+          {firing ? (
+            <Animated.View style={[styles.bullet, { left: width / 2 - 3, top: 0, opacity: windup ? bullet.interpolate({ inputRange: [0, 0.001], outputRange: [0, 1], extrapolate: 'clamp' }) : 1, transform: [{ translateY: bullet.interpolate({ inputRange: [0, 1], outputRange: [muzzle, hitY + 6] }) }] }]} />
+          ) : null}
+        </>
+      ) : null}
+      <View style={[styles.shooter, { left: width / 2 - PET / 2 }]}><PetArt pet={petId} size={PET} stage={petLevel} still={reduceMotion} strike={strike} /></View>
     </Sky>
   );
 }
@@ -252,7 +328,7 @@ function GatesScene({ scene, petId, petLevel, reduceMotion }: { scene: Extract<T
       </View>
       <View style={styles.petRow}>
         <PetArt pet={petId} size={44} stage={petLevel} still={reduceMotion} />
-        {filled ? <Text style={styles.good}>Chính xác! Pet qua cổng.</Text> : null}
+        {filled ? <Text style={styles.good}>Chính xác!</Text> : null}
       </View>
     </View>
   );
@@ -289,6 +365,169 @@ function PlanksScene({ scene, reduceMotion }: { scene: Extract<TutorialScene, { 
   );
 }
 
+// --- Curriculum games: their real play area, playing the move -------------------------------------------------------
+
+const demoTurn = (kind: Turn['kind'], prompt: Turn['prompt']): Turn => ({ turn_id: `guide-${kind}`, position: 0, kind, skill_label: '',
+  prompt, hints_shown: [], hints_total: 0, attempts: 0, wrong_attempts: 0, practice: false, travel_seconds: 0 });
+
+function CurriculumScene({ scene, petId, petLevel, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'word_build' | 'spell_fix' | 'sort' | 'code' }> } & Omit<Props, 'scene'>) {
+  const frames = scene.kind === 'word_build' ? scene.pieces.length + 2 : scene.kind === 'code' ? scene.program.length + 2 : 4;
+  const animated = scene.kind === 'code' || ('demo' in scene && !!scene.demo);
+  const step = useStep(frames, reduceMotion || !animated);
+  let body: React.ReactNode = null;
+  if (scene.kind === 'word_build') {
+    const tiles = scene.shuffled.map((i, n) => ({ id: `t${n + 1}`, text: scene.pieces[i] }));
+    const order = scene.pieces.map((_, i) => `t${scene.shuffled.indexOf(i) + 1}`);
+    const placed = scene.demo ? order.slice(0, Math.min(step, order.length)) : [];
+    body = <WordForest turn={demoTurn('word_build', { picture: scene.picture, unit: scene.unit, tiles })} disabled onSubmit={() => {}}
+      collected={scene.demo && step === frames - 1 ? 1 : 0} total={CURRICULUM_TOTAL} petId={petId} petLevel={petLevel} reduceMotion={reduceMotion}
+      demo={{ placed, result: scene.demo && step === frames - 1 ? 'ok' : undefined }} />;
+  } else if (scene.kind === 'spell_fix') {
+    const tokens = scene.words.map((w, i) => ({ id: `w${i + 1}`, text: w }));
+    const options = scene.options.map((o, i) => ({ id: `o${i + 1}`, text: o }));
+    const wrong = `w${scene.wrong + 1}`;
+    // 0: the sentence · 1: the misspelled word tapped · 2: the spellings · 3: the right one chosen
+    const found = scene.demo && step >= 1 ? wrong : undefined;
+    body = <SpellDetective turn={demoTurn('spell_fix', { step: found ? 'fix' : 'find', tokens, found, options: found ? options : undefined })}
+      disabled onFind={() => {}} onFix={() => {}}
+      feedback={scene.demo && step === 3 ? { text: `Chính xác! “${scene.options[scene.right]}” mới đúng chính tả.`, tone: 'good' } : null}
+      demo={{ found, tapped: scene.demo && step === 1 ? wrong : undefined, chosen: scene.demo && step === 3 ? `o${scene.right + 1}` : undefined }} />;
+  } else if (scene.kind === 'sort') {
+    body = <SortCards turn={demoTurn('sort_card', { title: scene.title, groups: scene.groups, card: scene.card })} disabled onPlace={() => {}}
+      demo={{ over: scene.demo && step >= 1 && step < 3 ? scene.right : undefined, placed: scene.demo && step === 3 ? scene.right : undefined }} />;
+  } else {
+    const { kind: _kind, program, mode, ...level } = scene;
+    const shown = mode === 'build' ? program.slice(0, Math.min(step, program.length)) : program;
+    body = <CodePath turn={demoTurn('code_path', { ...level, number: 1, max_blocks: program.length + 1, blocks: ['forward', 'left', 'right'] })}
+      disabled onRun={() => {}} petId={petId} petLevel={petLevel} reduceMotion={reduceMotion}
+      demo={{ program: shown, step: mode === 'run' ? step : 0 }} />;
+  }
+  return <View style={[styles.scene, styles.light, styles.curriculum]} pointerEvents="none">{body}</View>;
+}
+
+const CURRICULUM_TOTAL = 10;
+
+const LAB_TURN = demoTurn('lab_experiment', { scene: 'circuit', aim: 'Lắp pin, bóng đèn và dây nối để đèn sáng.',
+  slots: [{ id: 'power', label: 'Nguồn điện' }, { id: 'lamp', label: 'Bóng đèn' }, { id: 'link', label: 'Chỗ nối' }],
+  parts: [{ id: 'p1', name: 'Dây đồng', art: 'copper' }, { id: 'p2', name: 'Viên pin', art: 'battery' }, { id: 'p3', name: 'Bóng đèn', art: 'bulb' },
+    { id: 'p4', name: 'Sợi len', art: 'wool' }] });
+
+/** Phòng thí nghiệm: the real bench, empty, set up, then running. */
+function LabScene({ scene, petId, petLevel, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'lab' }> } & Omit<Props, 'scene'>) {
+  const placed: Record<string, string> = scene.mode === 'empty' ? {} : { power: 'p2', lamp: 'p3', link: 'p1' };
+  return (
+    <View style={[styles.scene, styles.light, styles.curriculum]} pointerEvents="none">
+      <MagicLab turn={LAB_TURN} disabled onSubmit={() => {}} solved={null} petId={petId} petLevel={petLevel}
+        reduceMotion={reduceMotion} demo={{ placed, run: scene.mode === 'run' }} />
+    </View>
+  );
+}
+
+// --- The subject gameplays: the real scene, the move played step by step (empty → half done → solved) ---------------
+
+const SUBJECT_DESCRIPTION: Record<SubjectGameId, string> = {
+  number_line: 'Cầu trục số từ 0 đến 100 và hai lá cờ số 47, 74',
+  step_solver: 'Bài toán 48 viên bi chia vào 4 hộp, bước 1: 48 − 12',
+  story_detective: 'Hồ sơ vụ án: bài đọc về gia đình An và câu hỏi An bao nhiêu tuổi',
+  sentence_xray: 'Hộp soi câu “Mẹ đang nấu cơm trong bếp.” với bút Sự vật và bút Hoạt động',
+  timeline: 'Dòng thời gian với các mốc 938, 1010, 1070 và ba sự kiện cần đặt',
+  sentence: 'Đoàn tàu bốn toa và các thẻ They, didn’t, go, went, to the park.',
+  geometry: 'Thước đo góc trên bản vẽ: tạo một góc tù',
+  balance: 'Cân đĩa với phương trình H₂ + O₂ → H₂O',
+};
+const TIMELINE_TURN = demoTurn('timeline_place', { prompt: 'Đặt các sự kiện lên dòng thời gian.', years: 'shown',
+  markers: [{ id: 'm1', label: '938', slots: 1 }, { id: 'm2', label: '1010', slots: 1 }, { id: 'm3', label: '1070', slots: 1 }],
+  events: [{ id: 'e1', text: 'Nhà Lý dời đô ra Thăng Long' }, { id: 'e2', text: 'Xây dựng Văn Miếu' }, { id: 'e3', text: 'Ngô Quyền thắng quân Nam Hán' }] });
+const SENTENCE_TURN = demoTurn('sentence_build', { prompt: 'Kéo các thẻ vào dòng để tạo câu đúng.', vi: 'Họ đã không đi công viên.', length: 4,
+  lang: 'en', tiles: [{ id: 't1', text: 'go' }, { id: 't2', text: 'They' }, { id: 't3', text: 'went' }, { id: 't4', text: 'to the park.' },
+    { id: 't5', text: 'didn’t' }] });
+const GEOMETRY_TURN = demoTurn('geometry_build', { prompt: 'Xoay cạnh để tạo một góc tù.', shape: 'angle', angle_step: 5, readout: true, initial: 30 });
+const BALANCE_TURN = demoTurn('equation_balance', { prompt: 'Chọn hệ số để hai vế cân bằng.', max: 12, condition: 't°', elements: ['H', 'O'],
+  species: [{ id: 's1', formula: 'H2', side: 'left', atoms: { H: 2 } }, { id: 's2', formula: 'O2', side: 'left', atoms: { O: 2 } },
+    { id: 's3', formula: 'H2O', side: 'right', atoms: { H: 2, O: 1 } }] });
+
+const NUMBER_LINE_TURN = demoTurn('number_line_place', { prompt: 'Đặt các số 47 và 74 lên trục số.', ticks: 100, major: 10,
+  labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((n) => ({ at: n, text: String(n) })), marks: [],
+  points: [{ id: 'p1', label: '47' }, { id: 'p2', label: '74' }] });
+const STEP_TURN = demoTurn('step_solve', { problem: 'Lan có 48 viên bi. Lan cho em 12 viên rồi chia đều số bi còn lại vào 4 hộp. Mỗi hộp có bao nhiêu viên bi?',
+  chips: [{ id: 'n1', text: '48' }, { id: 'n2', text: '12' }, { id: 'n3', text: '4' }], at_step: 1, steps: 2,
+  ask: 'Lan còn lại bao nhiêu viên bi?', ask_unit: 'viên bi', done: [] });
+const STORY_TURN = demoTurn('story_evidence', { question: 'How old is An?', lang: 'en', phase: 'find',
+  sentences: [{ id: 's1', text: 'Hello!' }, { id: 's2', text: 'My name is An.' }, { id: 's3', text: 'I am nine years old.' },
+    { id: 's4', text: 'My sister Mi is four.' }],
+  options: [{ id: 'o1', text: 'Four.' }, { id: 'o2', text: 'Nine.' }, { id: 'o3', text: 'Eight.' }] });
+const XRAY_TURN = demoTurn('sentence_paint', { prompt: 'Tô từ chỉ sự vật và từ chỉ hoạt động.', lang: 'vi',
+  roles: [{ id: 'c1', name: 'Sự vật' }, { id: 'c2', name: 'Hoạt động' }],
+  words: [{ id: 'w1', text: 'Mẹ' }, { id: 'w2', text: 'đang' }, { id: 'w3', text: 'nấu' }, { id: 'w4', text: 'cơm' }, { id: 'w5', text: 'trong' },
+    { id: 'w6', text: 'bếp' }, { id: 'w7', text: '.', fixed: true }] });
+
+function SubjectScene({ scene, petId, petLevel, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'subject' }> } & Omit<Props, 'scene'>) {
+  const step = useStep(3, reduceMotion || scene.mode !== 'demo');
+  const frame = scene.mode === 'demo' ? step : 0; // 0 empty · 1 half done · 2 solved
+  const solved = frame === 2;
+  const common = { disabled: true, onSubmit: () => {}, reduceMotion, petId, petLevel };
+  let body: React.ReactNode;
+  if (scene.game === 'timeline') {
+    const placed: Record<string, string> = [{}, { e3: 'm1' }, { e3: 'm1', e1: 'm2', e2: 'm3' }][frame] as Record<string, string>;
+    body = <TimelineQuest turn={TIMELINE_TURN} {...common} demo={{ placed, solved }} />;
+  } else if (scene.game === 'sentence') {
+    const line = [[null, null, null, null], ['t2', 't5', null, null], ['t2', 't5', 't1', 't4']][frame];
+    body = <SentenceTrain turn={SENTENCE_TURN} {...common} demo={{ line, solved }} />;
+  } else if (scene.game === 'geometry') {
+    body = <GeometryWorkshop turn={GEOMETRY_TURN} {...common} demo={{ value: [30, 80, 120][frame], solved }} />;
+  } else if (scene.game === 'balance') {
+    body = <EquationBalance turn={BALANCE_TURN} {...common} demo={{ coefficients: [[1, 1, 1], [1, 1, 2], [2, 1, 2]][frame], solved }} />;
+  } else if (scene.game === 'number_line') {
+    const placed: Record<string, number> = [{}, { p1: 47 }, { p1: 47, p2: 74 }][frame];
+    body = <NumberLineBridge turn={NUMBER_LINE_TURN} {...common} demo={{ placed, active: ['p1', 'p2', null][frame], solved }} />;
+  } else if (scene.game === 'step_solver') {
+    const calc = [{ left: null, op: null, right: null }, { left: 'n1', op: '−', right: null }, { left: 'n1', op: '−', right: 'n2' }][frame];
+    body = <StepSolver turn={STEP_TURN} {...common} demo={{ calc, result: ['', '', '36'][frame] }} />;
+  } else if (scene.game === 'story_detective') {
+    body = <StoryDetective turn={STORY_TURN} {...common}
+      demo={[{ picked: null }, { picked: 's3' }, { found: 's3', option: 'o2', solved: true }][frame]} />;
+  } else {
+    const paint: Record<string, string> = [{}, { w1: 'c1' }, { w1: 'c1', w3: 'c2', w4: 'c1', w6: 'c1' }][frame];
+    body = <SentenceXray turn={XRAY_TURN} {...common} demo={{ paint, pen: frame === 1 ? 'c2' : 'c1', solved }} />;
+  }
+  return <View style={[styles.scene, styles.light, styles.curriculum]} pointerEvents="none">{body}</View>;
+}
+
+/** The lesson games: their real play area, the move played step by step. */
+function LessonScene({ scene, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'order' | 'match' | 'choice' }>; reduceMotion: boolean }) {
+  const frames = scene.kind === 'order' ? scene.items.length + 2 : scene.kind === 'match' ? scene.pairs.length * 2 + 2 : 4;
+  const step = useStep(frames, reduceMotion || !scene.demo);
+  let body: React.ReactNode;
+  if (scene.kind === 'order') {
+    const cards = scene.shuffled.map((i, n) => ({ id: `c${n + 1}`, text: scene.items[i] }));
+    const right = scene.items.map((_, i) => `c${scene.shuffled.indexOf(i) + 1}`);
+    const placed = scene.demo ? right.slice(0, Math.min(step, right.length)) : [];
+    body = <OrderSteps turn={demoTurn('order_steps', { prompt: scene.prompt, cards, first: scene.first, last: scene.last })} disabled onSubmit={() => {}}
+      demo={{ placed, result: scene.demo && step === frames - 1 ? 'ok' : undefined }} />;
+  } else if (scene.kind === 'match') {
+    const lefts = scene.pairs.map(([a], i) => ({ id: `a${i + 1}`, text: a }));
+    const rights = scene.rightOrder.map((i, n) => ({ id: `b${n + 1}`, text: scene.pairs[i][1] }));
+    const pairs: Record<string, string> = {};
+    let selected: string | undefined;
+    if (scene.demo) {
+      for (let i = 0; i < scene.pairs.length; i += 1) {
+        const left = `a${i + 1}`;
+        if (step >= i * 2 + 2) pairs[left] = `b${scene.rightOrder.indexOf(i) + 1}`;
+        else if (step === i * 2 + 1) selected = left;
+      }
+    }
+    body = <MatchPairs turn={demoTurn('match_pairs', { prompt: scene.prompt, lefts, rights })} disabled onSubmit={() => {}}
+      demo={{ pairs, selected, result: scene.demo && step === frames - 1 ? 'ok' : undefined }} />;
+  } else {
+    const options = scene.options.map((text, i) => ({ id: `o${i + 1}`, text }));
+    // 0: the question · 1: a wrong option tried, its reason · 2: … · 3: the right one
+    const chosen = !scene.demo || step === 0 ? undefined : step < 3 ? `o${scene.wrong + 1}` : `o${scene.right + 1}`;
+    body = <ChoiceExplain turn={demoTurn('choice_explain', { style: scene.style, question: scene.question, options })} disabled onChoose={() => {}}
+      demo={{ chosen, result: chosen ? (step < 3 ? 'bad' : 'ok') : undefined }} />;
+  }
+  return <View style={[styles.scene, styles.light, styles.curriculum]} pointerEvents="none">{body}</View>;
+}
+
 // --- How the stage ends -----------------------------------------------------------------------------------------------
 
 const TONE = { good: { color: t.success, bg: t.successBg }, bad: { color: t.danger, bg: t.dangerBg }, info: { color: t.accent, bg: t.tint } };
@@ -314,31 +553,29 @@ const styles = StyleSheet.create({
   scene: { height: HEIGHT, borderRadius: 20, overflow: 'hidden', padding: 12 },
   sky: { backgroundColor: '#142349' },
   light: { backgroundColor: '#F2FAFF', gap: 8, justifyContent: 'center' },
+  // The real play area: as tall as it needs.
+  curriculum: { height: undefined, minHeight: HEIGHT },
   meadow: { backgroundColor: '#DDF3E4' },
   star: { position: 'absolute', width: 3, height: 3, borderRadius: 2, backgroundColor: '#FFFFFF' },
   ground: { position: 'absolute', left: 0, right: 0, bottom: 0, height: 18, backgroundColor: '#3E5F45' },
-  petCorner: { position: 'absolute', left: 10, bottom: 12 },
-  faller: { position: 'absolute', top: 0, left: 0, right: 0, alignItems: 'center' },
-  tile: { paddingHorizontal: 16, paddingVertical: 10, borderRadius: 14, shadowColor: '#7FB8FF', shadowOpacity: 0.9, shadowRadius: 12,
-    shadowOffset: { width: 0, height: 0 }, elevation: 8 },
-  tileText: { fontSize: 22, fontWeight: '900', color: '#FFFFFF', letterSpacing: 0.5 },
-  rock: { width: 46, height: 46, borderRadius: 23, shadowColor: '#FF8A3D', shadowOpacity: 0.9, shadowRadius: 14, shadowOffset: { width: 0, height: 0 }, elevation: 8 },
-  rockWord: { marginTop: 6, fontSize: 18, fontWeight: '900', color: '#FFE9B8', textShadowColor: 'rgba(0,0,0,0.6)', textShadowRadius: 6 },
-  boom: { fontSize: 40 },
-  typeTarget: { alignItems: 'center', marginTop: 4, minHeight: 92 },
-  result: { fontSize: 20, fontWeight: '900', color: '#FFE9B8', marginTop: 2 },
-  typeRow: { position: 'absolute', left: 0, right: 0, bottom: 28, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 10 },
-  boxes: { flexDirection: 'row', gap: 5 },
-  box: { width: 28, height: 36, borderRadius: 8, borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.4)', backgroundColor: 'rgba(255,255,255,0.12)',
-    alignItems: 'center', justifyContent: 'center' },
-  boxFilled: { backgroundColor: '#FFFFFF', borderColor: '#FFFFFF' },
-  boxLetter: { fontSize: 20, fontWeight: '900', color: '#142349' },
-  fire: { flexDirection: 'row', alignItems: 'center', gap: 4, height: 38, paddingHorizontal: 14, borderRadius: 19,
-    backgroundColor: 'rgba(255,255,255,0.14)', borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.3)' },
-  fireLit: { backgroundColor: '#FF7A3D', borderColor: '#FF7A3D' },
-  fireDown: { transform: [{ scale: 0.92 }] },
-  fireText: { color: '#FFFFFF', fontWeight: '900', fontSize: 15 },
-  pointerFire: { position: 'absolute', right: '18%', bottom: -24, fontSize: 24 },
+  faller: { position: 'absolute', width: TARGET_W },
+  target: { alignItems: 'center' },
+  rockWord: { marginTop: 4, fontSize: 13, lineHeight: 17, fontWeight: '800', color: '#FFFFFF', textAlign: 'center',
+    textShadowColor: 'rgba(0,0,0,0.6)', textShadowRadius: 6, textShadowOffset: { width: 0, height: 1 } },
+  rockWordAimed: { fontSize: 15, lineHeight: 19, color: '#FFE9B8' },
+  slotsAimed: { marginTop: 6, alignItems: 'center' },
+  slotsCompact: { marginTop: 3 },
+  shooter: { position: 'absolute', bottom: PET_BOTTOM },
+  bullet: { position: 'absolute', width: 6, height: 6, borderRadius: 3, backgroundColor: '#FFF4B0',
+    shadowColor: '#FFD84D', shadowOpacity: 1, shadowRadius: 4, shadowOffset: { width: 0, height: 0 }, elevation: 4 },
+  shard: { position: 'absolute', width: 6, height: 6, borderRadius: 2, backgroundColor: '#7FD3FF' },
+  shardAlt: { backgroundColor: '#4C6FFF' },
+  shardRock: { backgroundColor: '#F58A3A' },
+  // The meaning where the word broke, as the game shows it (Playfield `burst`).
+  burst: { position: 'absolute', width: 150, minHeight: 50, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 8, paddingVertical: 5,
+    borderRadius: 12, backgroundColor: 'rgba(12,22,52,0.55)' },
+  burstTitle: { fontSize: 15, fontWeight: '800', color: '#FFE9B8', textAlign: 'center' },
+  burstSub: { fontSize: 12, fontWeight: '600', color: '#C9D6F2', textAlign: 'center' },
   base: { position: 'absolute', left: 0, top: 0, bottom: 0, width: BASE_W, backgroundColor: '#C7E5CF', alignItems: 'center', paddingTop: 10 },
   baseIcon: { fontSize: 30 },
   petBase: { position: 'absolute', left: 10, bottom: 10 },

@@ -79,7 +79,9 @@ export type NotificationKind = 'friend_request' | 'friend_accepted' | 'room_invi
   /** A friend visited the personal room: "Chào pet", "Động viên" or "Rủ học". */
   | 'room_visit'
   /** Friends watered or tended plants in Vườn nhà (merged while unread). */
-  | 'garden_care';
+  | 'garden_care'
+  /** A friend sent a gift from Thị trấn Mirabi. */
+  | 'town_gift';
 export type NotificationData = {
   user_id?: number; room_id?: number; session_id?: number; quest_id?: number; invitation_id?: number; request_id?: number;
   /** room_visit: what was sent; unread greetings or cheers of one kind are merged (`actor_ids`, newest first, `count`). */

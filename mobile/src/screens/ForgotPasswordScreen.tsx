@@ -6,12 +6,13 @@ import { validateEmail, validateNewPassword, validatePasswordConfirmation } from
 import { AuthLayout } from '../components/AuthLayout';
 import { AuthTextField, FormBanner, GradientButton, TextLink } from '../components/AuthForm';
 
-type Props = { email: string; onEmailChange: (email: string) => void; onBackToLogin: (notice?: string) => void };
+type Props = { email: string; onEmailChange: (email: string) => void; onBackToLogin: (notice?: string) => void;
+  /** Opened from "Đổi mật khẩu" while signed in: the account's own email, which can't be changed here. */ account?: boolean };
 
 const SENT_MESSAGE = 'Nếu email này đã đăng ký, Mirabi đã gửi mã đặt lại mật khẩu. Hãy kiểm tra hộp thư (kể cả mục Spam).';
 export const RESET_DONE_MESSAGE = 'Đã đặt lại mật khẩu. Hãy đăng nhập bằng mật khẩu mới nhé!';
 
-export function ForgotPasswordScreen({ email, onEmailChange, onBackToLogin }: Props) {
+export function ForgotPasswordScreen({ email, onEmailChange, onBackToLogin, account = false }: Props) {
   const { requestPasswordReset, resetPassword } = useAuth();
   const [step, setStep] = useState<'request' | 'reset'>('request');
   const [code, setCode] = useState('');
@@ -56,13 +57,14 @@ export function ForgotPasswordScreen({ email, onEmailChange, onBackToLogin }: Pr
 
   if (step === 'request') {
     return (
-      <AuthLayout title="Quên mật khẩu?" subtitle="Nhập email bạn đã đăng ký, Mirabi sẽ gửi mã để bạn đặt lại mật khẩu." onBack={() => onBackToLogin()}>
+      <AuthLayout title={account ? 'Đổi mật khẩu' : 'Quên mật khẩu?'} onBack={() => onBackToLogin()}
+        subtitle={account ? 'Mirabi sẽ gửi mã đến email của bạn. Sau khi đổi, bạn cần đăng nhập lại trên mọi thiết bị.' : 'Nhập email bạn đã đăng ký, Mirabi sẽ gửi mã để bạn đặt lại mật khẩu.'}>
         {apiError ? <FormBanner tone="error" message={apiError} /> : null}
         {sent ? <FormBanner tone="success" message={SENT_MESSAGE} /> : null}
         <AuthTextField label="Email" icon="mail-outline" placeholder="ban@example.com" value={email}
           onChangeText={(v) => { onEmailChange(v); setErrors({}); }} error={errors.email}
           keyboardType="email-address" autoCapitalize="none" autoCorrect={false} autoComplete="email" textContentType="username"
-          returnKeyType="send" onSubmitEditing={sendCode} editable={!submitting} testID="forgot-email" />
+          returnKeyType="send" onSubmitEditing={sendCode} editable={!submitting && !account} testID="forgot-email" />
         <GradientButton title={sent ? 'Gửi lại mã' : 'Gửi mã đặt lại'} onPress={sendCode} loading={submitting} loadingTitle="Đang gửi…" />
         <TextLink title="Tôi đã có mã" onPress={() => { setApiError(null); setErrors({}); setStep('reset'); }} />
       </AuthLayout>

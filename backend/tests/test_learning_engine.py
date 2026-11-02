@@ -29,6 +29,20 @@ def test_declared_equivalent_answers_are_accepted_and_nothing_else():
     assert not check_text("hare", ["rabbit", "bunny"])
 
 
+def test_a_text_answer_is_the_answer_itself_never_a_near_one():
+    # Misspelt, a letter short or too many: wrong. Nothing is matched loosely or as a part of the answer.
+    for typed in ("recieve", "receiv", "receives", "receiver", "re ceive", "rec"):
+        assert not check_text(typed, ["receive"]), typed
+    # A phrase keeps its spaces, hyphens and apostrophes: removing them makes another (or no) word.
+    assert check_text("give   up", ["give up"]) and not check_text("giveup", ["give up"])
+    assert not check_text("every day", ["everyday"]) and not check_text("everyday", ["every day"])
+    assert not check_text("parttime", ["part-time"]) and not check_text("part time", ["part-time"])
+    assert check_text("I’m", ["I'm"]) and not check_text("Im", ["I'm"])
+    # One number, one form: only the forms the data declares.
+    assert not check_text("cats", ["cat"]) and not check_text("went", ["go"]) and not check_text("big", ["large"])
+    assert check_text("Colour ", ["colour", "color"]) and check_text("COLOR", ["colour", "color"])
+
+
 @pytest.mark.parametrize("blank", ["", "   ", "\t", "..."])
 def test_empty_text_is_invalid_not_wrong(blank):
     with pytest.raises(InvalidAnswer):

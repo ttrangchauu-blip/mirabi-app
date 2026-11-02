@@ -111,6 +111,10 @@ def record_pomodoro(cycle: str, data: PomodoroEvent, user: User = Depends(curren
     occurred = as_utc(data.occurred_at) if data.occurred_at else utcnow()
     if occurred > utcnow() + timedelta(seconds=5) or occurred < utcnow() - timedelta(days=30):
         raise HTTPException(422, detail={"code": "invalid_event_time"})
+    # "Today" in the statistics is the day where the user is now: a session dated in its own zone must not land on
+    # "tomorrow" because the settings still hold another zone (the app's settings sync may not have arrived yet).
+    if "timezone" in data.model_fields_set:
+        preferences(db, user.id).timezone = data.timezone
     row = db.scalar(select(StudySession).where(StudySession.user_id == user.id, StudySession.pomodoro_cycle == cycle))
     if row is None:
         if data.event != "started":

@@ -11,7 +11,7 @@ import { BackHeader, EmptyState, ErrorState, LoadingState, SmallButton } from '.
 const ICONS: Record<NotificationKind, IconName> = {
   friend_request: 'person-add-outline', friend_accepted: 'people-outline', room_invitation: 'mail-outline',
   session_started: 'play-circle-outline', session_completed: 'trophy-outline', team_quest_completed: 'flag-outline',
-  room_visit: 'home-outline', garden_care: 'leaf-outline',
+  room_visit: 'home-outline', garden_care: 'leaf-outline', town_gift: 'gift-outline',
 };
 const iconFor = (n: SocialNotification): IconName => (n.kind === 'room_visit' && n.data.action === 'cheer' ? 'heart-outline'
   : n.kind === 'room_visit' && n.data.action === 'hello' ? 'hand-left-outline' : ICONS[n.kind] ?? 'notifications-outline');

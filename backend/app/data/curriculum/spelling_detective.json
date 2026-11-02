@@ -1,0 +1,883 @@
+{
+ "game": "spelling_detective",
+ "version": 1,
+ "topics": {
+  "s_x": "Phân biệt s / x",
+  "ch_tr": "Phân biệt ch / tr",
+  "l_n": "Phân biệt l / n",
+  "d_gi_r": "Phân biệt d / gi / r",
+  "hoi_nga": "Dấu hỏi / dấu ngã",
+  "g_gh": "Phân biệt g / gh",
+  "c_k": "Phân biệt c / k",
+  "ng_ngh": "Phân biệt ng / ngh",
+  "n_ng": "Vần kết thúc bằng n / ng",
+  "c_t": "Vần kết thúc bằng c / t",
+  "iu_ieu": "Phân biệt iu / iêu"
+ },
+ "items": [
+  {
+   "key": "s01",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    5
+   ],
+   "topic": "s_x",
+   "difficulty": 1,
+   "sentence": "Mẹ mua cho em một quyển sách mới.",
+   "right": "sách",
+   "wrong": "xách",
+   "options": [
+    "sách",
+    "xách",
+    "sạch"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa s và x."
+   ],
+   "explanation": "“Sách” (quyển sách để đọc) viết bằng s. “Xách” viết bằng x có nghĩa là cầm đồ bằng tay để mang đi.",
+   "version": 1
+  },
+  {
+   "key": "s02",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    5
+   ],
+   "topic": "s_x",
+   "difficulty": 1,
+   "sentence": "Bà xách giỏ rau đi chợ.",
+   "right": "xách",
+   "wrong": "sách",
+   "options": [
+    "xách",
+    "sách",
+    "xạch"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa s và x."
+   ],
+   "explanation": "“Xách” (cầm giỏ bằng tay để mang đi) viết bằng x. “Sách” viết bằng s là quyển sách.",
+   "version": 1
+  },
+  {
+   "key": "s03",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    3,
+    5
+   ],
+   "topic": "s_x",
+   "difficulty": 2,
+   "sentence": "Sân trường em rất sạch sẽ.",
+   "right": "sạch",
+   "wrong": "xạch",
+   "options": [
+    "sạch",
+    "xạch",
+    "sách"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa s và x."
+   ],
+   "explanation": "“Sạch sẽ” viết bằng s.",
+   "version": 1
+  },
+  {
+   "key": "s04",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    5
+   ],
+   "topic": "ch_tr",
+   "difficulty": 1,
+   "sentence": "Em thích ăn quả chuối chín.",
+   "right": "chuối",
+   "wrong": "truối",
+   "options": [
+    "chuối",
+    "truối",
+    "chuổi"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa ch và tr."
+   ],
+   "explanation": "“Chuối” viết bằng ch.",
+   "version": 1
+  },
+  {
+   "key": "s05",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    5
+   ],
+   "topic": "ch_tr",
+   "difficulty": 1,
+   "sentence": "Ông trồng cây bưởi ở trong vườn.",
+   "right": "trồng",
+   "wrong": "chồng",
+   "options": [
+    "trồng",
+    "chồng",
+    "trổng"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa ch và tr."
+   ],
+   "explanation": "“Trồng” (trồng cây) viết bằng tr. “Chồng” viết bằng ch có nghĩa khác, như xếp chồng lên nhau.",
+   "version": 1
+  },
+  {
+   "key": "s06",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    3,
+    5
+   ],
+   "topic": "ch_tr",
+   "difficulty": 2,
+   "sentence": "Những chiếc lá vàng rơi đầy sân.",
+   "right": "chiếc",
+   "wrong": "triếc",
+   "options": [
+    "chiếc",
+    "triếc",
+    "chiết"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa ch và tr."
+   ],
+   "explanation": "“Chiếc” viết bằng ch.",
+   "version": 1
+  },
+  {
+   "key": "s07",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    3,
+    5
+   ],
+   "topic": "ch_tr",
+   "difficulty": 2,
+   "sentence": "Bầu trời hôm nay trong xanh.",
+   "right": "trời",
+   "wrong": "chời",
+   "options": [
+    "trời",
+    "chời",
+    "trởi"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa ch và tr."
+   ],
+   "explanation": "“Trời” (bầu trời) viết bằng tr.",
+   "version": 1
+  },
+  {
+   "key": "s08",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    5
+   ],
+   "topic": "l_n",
+   "difficulty": 1,
+   "sentence": "Cô giáo dạy chúng em làm toán.",
+   "right": "làm",
+   "wrong": "nàm",
+   "options": [
+    "làm",
+    "nàm",
+    "lầm"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa l và n."
+   ],
+   "explanation": "“Làm” (làm toán) viết bằng l.",
+   "version": 1
+  },
+  {
+   "key": "s09",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    3,
+    5
+   ],
+   "topic": "l_n",
+   "difficulty": 2,
+   "sentence": "Nước suối trong veo và mát lạnh.",
+   "right": "lạnh",
+   "wrong": "nạnh",
+   "options": [
+    "lạnh",
+    "nạnh",
+    "lạng"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa l và n."
+   ],
+   "explanation": "“Lạnh” (mát lạnh) viết bằng l.",
+   "version": 1
+  },
+  {
+   "key": "s10",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    5
+   ],
+   "topic": "l_n",
+   "difficulty": 1,
+   "sentence": "Bé uống một cốc nước cam.",
+   "right": "nước",
+   "wrong": "lước",
+   "options": [
+    "nước",
+    "lước",
+    "nướt"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa l và n."
+   ],
+   "explanation": "“Nước” viết bằng n.",
+   "version": 1
+  },
+  {
+   "key": "s11",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    4,
+    5
+   ],
+   "topic": "l_n",
+   "difficulty": 3,
+   "sentence": "Chú mèo nằm lười biếng bên bếp.",
+   "right": "nằm",
+   "wrong": "lằm",
+   "options": [
+    "nằm",
+    "lằm",
+    "nắm"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa l và n."
+   ],
+   "explanation": "“Nằm” viết bằng n.",
+   "version": 1
+  },
+  {
+   "key": "s12",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    3,
+    5
+   ],
+   "topic": "d_gi_r",
+   "difficulty": 2,
+   "sentence": "Mẹ dặn em đi học về sớm.",
+   "right": "dặn",
+   "wrong": "giặn",
+   "options": [
+    "dặn",
+    "giặn",
+    "dặng"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa d, gi và r."
+   ],
+   "explanation": "“Dặn” (dặn dò) viết bằng d.",
+   "version": 1
+  },
+  {
+   "key": "s13",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    4,
+    5
+   ],
+   "topic": "d_gi_r",
+   "difficulty": 3,
+   "sentence": "Gió thổi làm cánh diều bay cao.",
+   "right": "Gió",
+   "wrong": "Dó",
+   "options": [
+    "Gió",
+    "Dó",
+    "Giỏ"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa d, gi và r."
+   ],
+   "explanation": "“Gió” viết bằng gi. “Dó” viết bằng d là tên một loài cây, như trong giấy dó.",
+   "version": 1
+  },
+  {
+   "key": "s14",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    4,
+    5
+   ],
+   "topic": "d_gi_r",
+   "difficulty": 3,
+   "sentence": "Em rửa tay sạch trước khi ăn.",
+   "right": "rửa",
+   "wrong": "dửa",
+   "options": [
+    "rửa",
+    "dửa",
+    "rữa"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa d, gi và r."
+   ],
+   "explanation": "“Rửa” (rửa tay) viết bằng r.",
+   "version": 1
+  },
+  {
+   "key": "s15",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    5,
+    5
+   ],
+   "topic": "d_gi_r",
+   "difficulty": 4,
+   "sentence": "Bạn Lan có giọng hát rất hay.",
+   "right": "giọng",
+   "wrong": "dọng",
+   "options": [
+    "giọng",
+    "dọng",
+    "giọn"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa d, gi và r."
+   ],
+   "explanation": "“Giọng” (giọng hát) viết bằng gi.",
+   "version": 1
+  },
+  {
+   "key": "s16",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    3,
+    5
+   ],
+   "topic": "hoi_nga",
+   "difficulty": 2,
+   "sentence": "Em vẽ một bức tranh thật đẹp.",
+   "right": "vẽ",
+   "wrong": "vẻ",
+   "options": [
+    "vẽ",
+    "vẻ",
+    "vẹ"
+   ],
+   "hints": [
+    "Có một tiếng bị đặt sai dấu thanh."
+   ],
+   "explanation": "“Vẽ” (vẽ tranh) mang dấu ngã. “Vẻ” mang dấu hỏi, như trong vẻ đẹp, dáng vẻ.",
+   "version": 1
+  },
+  {
+   "key": "s17",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    4,
+    5
+   ],
+   "topic": "hoi_nga",
+   "difficulty": 3,
+   "sentence": "Bạn nhỏ bị ngã rồi tự đứng dậy.",
+   "right": "ngã",
+   "wrong": "ngả",
+   "options": [
+    "ngã",
+    "ngả",
+    "ngà"
+   ],
+   "hints": [
+    "Có một tiếng bị đặt sai dấu thanh."
+   ],
+   "explanation": "“Ngã” (té xuống) mang dấu ngã. “Ngả” mang dấu hỏi, như ngả lưng, ngả màu.",
+   "version": 1
+  },
+  {
+   "key": "s18",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    4,
+    5
+   ],
+   "topic": "hoi_nga",
+   "difficulty": 3,
+   "sentence": "Chúng em giữ gìn sách vở cẩn thận.",
+   "right": "giữ",
+   "wrong": "giử",
+   "options": [
+    "giữ",
+    "giử",
+    "dữ"
+   ],
+   "hints": [
+    "Có một tiếng bị đặt sai dấu thanh."
+   ],
+   "explanation": "“Giữ” (giữ gìn) mang dấu ngã.",
+   "version": 1
+  },
+  {
+   "key": "s19",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    5,
+    5
+   ],
+   "topic": "hoi_nga",
+   "difficulty": 4,
+   "sentence": "Mỗi buổi sáng, em đều tập thể dục.",
+   "right": "Mỗi",
+   "wrong": "Mổi",
+   "options": [
+    "Mỗi",
+    "Mổi",
+    "Mội"
+   ],
+   "hints": [
+    "Có một tiếng bị đặt sai dấu thanh."
+   ],
+   "explanation": "“Mỗi” mang dấu ngã.",
+   "version": 1
+  },
+  {
+   "key": "s20",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    5,
+    5
+   ],
+   "topic": "hoi_nga",
+   "difficulty": 4,
+   "sentence": "Bà kể cho em nghe một câu chuyện cổ tích.",
+   "right": "cổ",
+   "wrong": "cỗ",
+   "options": [
+    "cổ",
+    "cỗ",
+    "cộ"
+   ],
+   "hints": [
+    "Có một tiếng bị đặt sai dấu thanh."
+   ],
+   "explanation": "“Cổ tích” mang dấu hỏi. “Cỗ” mang dấu ngã, như mâm cỗ.",
+   "version": 1
+  },
+  {
+   "key": "s21",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    5
+   ],
+   "topic": "g_gh",
+   "difficulty": 1,
+   "sentence": "Bé ngồi trên chiếc ghế nhỏ.",
+   "right": "ghế",
+   "wrong": "gế",
+   "options": [
+    "ghế",
+    "gế",
+    "ghề"
+   ],
+   "hints": [
+    "Nhớ quy tắc: trước e, ê, i viết gh."
+   ],
+   "explanation": "Trước e, ê, i viết gh: “ghế”.",
+   "version": 1
+  },
+  {
+   "key": "s22",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    5
+   ],
+   "topic": "c_k",
+   "difficulty": 1,
+   "sentence": "Con kiến bò trên cành cây.",
+   "right": "kiến",
+   "wrong": "ciến",
+   "options": [
+    "kiến",
+    "ciến",
+    "kiếng"
+   ],
+   "hints": [
+    "Nhớ quy tắc: trước e, ê, i viết k."
+   ],
+   "explanation": "Trước e, ê, i viết k: “kiến”.",
+   "version": 1
+  },
+  {
+   "key": "s23",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    3,
+    5
+   ],
+   "topic": "ng_ngh",
+   "difficulty": 2,
+   "sentence": "Em ngồi nghe cô giáo kể chuyện.",
+   "right": "nghe",
+   "wrong": "nge",
+   "options": [
+    "nghe",
+    "nge",
+    "nhe"
+   ],
+   "hints": [
+    "Nhớ quy tắc: trước e, ê, i viết ngh."
+   ],
+   "explanation": "Trước e, ê, i viết ngh: “nghe”.",
+   "version": 1
+  },
+  {
+   "key": "s24",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    4,
+    5
+   ],
+   "topic": "n_ng",
+   "difficulty": 3,
+   "sentence": "Cánh đồng lúa chín vàng óng.",
+   "right": "đồng",
+   "wrong": "đồn",
+   "options": [
+    "đồng",
+    "đồn",
+    "đòng"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa vần kết thúc bằng n và ng."
+   ],
+   "explanation": "“Cánh đồng” có vần ông, kết thúc bằng ng. “Đồn” kết thúc bằng n là một từ khác, như đồn biên phòng.",
+   "version": 1
+  },
+  {
+   "key": "s25",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    5,
+    5
+   ],
+   "topic": "n_ng",
+   "difficulty": 4,
+   "sentence": "Em lắng nghe tiếng chim hót.",
+   "right": "lắng",
+   "wrong": "lắn",
+   "options": [
+    "lắng",
+    "lắn",
+    "lẳng"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa vần kết thúc bằng n và ng."
+   ],
+   "explanation": "“Lắng nghe” có vần ăng, kết thúc bằng ng.",
+   "version": 1
+  },
+  {
+   "key": "s26",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    4,
+    5
+   ],
+   "topic": "c_t",
+   "difficulty": 3,
+   "sentence": "Bé ngồi học bài rất chăm chú.",
+   "right": "học",
+   "wrong": "họt",
+   "options": [
+    "học",
+    "họt",
+    "hộc"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa vần kết thúc bằng c và t."
+   ],
+   "explanation": "“Học” kết thúc bằng c.",
+   "version": 1
+  },
+  {
+   "key": "s27",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    5,
+    5
+   ],
+   "topic": "n_ng",
+   "difficulty": 4,
+   "sentence": "Mặt trời lặn sau rặng núi.",
+   "right": "lặn",
+   "wrong": "lặng",
+   "options": [
+    "lặn",
+    "lặng",
+    "lận"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa vần kết thúc bằng n và ng."
+   ],
+   "explanation": "“Lặn” (mặt trời lặn) kết thúc bằng n. “Lặng” kết thúc bằng ng, như yên lặng.",
+   "version": 1
+  },
+  {
+   "key": "s28",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    5,
+    5
+   ],
+   "topic": "c_t",
+   "difficulty": 4,
+   "sentence": "Ông nội em rất thích đọc báo.",
+   "right": "đọc",
+   "wrong": "đọt",
+   "options": [
+    "đọc",
+    "đọt",
+    "độc"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa vần kết thúc bằng c và t."
+   ],
+   "explanation": "“Đọc” (đọc báo) kết thúc bằng c.",
+   "version": 1
+  },
+  {
+   "key": "s29",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    3,
+    5
+   ],
+   "topic": "iu_ieu",
+   "difficulty": 2,
+   "sentence": "Chiều nay em đi thả diều.",
+   "right": "diều",
+   "wrong": "dìu",
+   "options": [
+    "diều",
+    "dìu",
+    "diêu"
+   ],
+   "hints": [
+    "Có một tiếng bị viết sai vần."
+   ],
+   "explanation": "“Diều” (cánh diều) có vần iêu. “Dìu” có vần iu, như dìu bạn đi.",
+   "version": 1
+  },
+  {
+   "key": "s30",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    5,
+    5
+   ],
+   "topic": "d_gi_r",
+   "difficulty": 4,
+   "sentence": "Bạn Hoa luôn giúp đỡ mọi người.",
+   "right": "giúp",
+   "wrong": "dúp",
+   "options": [
+    "giúp",
+    "dúp",
+    "giụp"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa d, gi và r."
+   ],
+   "explanation": "“Giúp đỡ” viết bằng gi.",
+   "version": 1
+  },
+  {
+   "key": "s31",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    4,
+    5
+   ],
+   "topic": "ch_tr",
+   "difficulty": 3,
+   "sentence": "Em chăm chỉ học tập mỗi ngày.",
+   "right": "chăm",
+   "wrong": "trăm",
+   "options": [
+    "chăm",
+    "trăm",
+    "chằm"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa ch và tr."
+   ],
+   "explanation": "“Chăm chỉ” viết bằng ch. “Trăm” viết bằng tr là số 100.",
+   "version": 1
+  },
+  {
+   "key": "s32",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    3,
+    5
+   ],
+   "topic": "l_n",
+   "difficulty": 2,
+   "sentence": "Mẹ nấu canh cua rất ngon.",
+   "right": "nấu",
+   "wrong": "lấu",
+   "options": [
+    "nấu",
+    "lấu",
+    "nầu"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa l và n."
+   ],
+   "explanation": "“Nấu” (nấu canh) viết bằng n.",
+   "version": 1
+  },
+  {
+   "key": "s33",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    5
+   ],
+   "topic": "hoi_nga",
+   "difficulty": 1,
+   "sentence": "Em bé đang ngủ say trong nôi.",
+   "right": "ngủ",
+   "wrong": "ngũ",
+   "options": [
+    "ngủ",
+    "ngũ",
+    "ngụ"
+   ],
+   "hints": [
+    "Có một tiếng bị đặt sai dấu thanh."
+   ],
+   "explanation": "“Ngủ” mang dấu hỏi. “Ngũ” mang dấu ngã có nghĩa là năm.",
+   "version": 1
+  },
+  {
+   "key": "s34",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    5
+   ],
+   "topic": "ch_tr",
+   "difficulty": 1,
+   "sentence": "Chú gà trống gáy vang buổi sáng.",
+   "right": "trống",
+   "wrong": "chống",
+   "options": [
+    "trống",
+    "chống",
+    "trông"
+   ],
+   "hints": [
+    "Có một tiếng bị nhầm giữa ch và tr."
+   ],
+   "explanation": "“Gà trống” viết bằng tr.",
+   "version": 1
+  },
+  {
+   "key": "s35",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    5
+   ],
+   "topic": "hoi_nga",
+   "difficulty": 1,
+   "sentence": "Bà kể chuyện cho em nghe.",
+   "right": "kể",
+   "wrong": "kễ",
+   "options": [
+    "kể",
+    "kễ",
+    "kệ"
+   ],
+   "hints": [
+    "Có một tiếng bị đặt sai dấu thanh."
+   ],
+   "explanation": "“Kể” (kể chuyện) mang dấu hỏi.",
+   "version": 1
+  },
+  {
+   "key": "s36",
+   "curriculum": "GDPT2018",
+   "subject": "vietnamese",
+   "grades": [
+    2,
+    5
+   ],
+   "topic": "hoi_nga",
+   "difficulty": 1,
+   "sentence": "Lá cờ đỏ tung bay trước gió.",
+   "right": "đỏ",
+   "wrong": "đõ",
+   "options": [
+    "đỏ",
+    "đõ",
+    "đọ"
+   ],
+   "hints": [
+    "Có một tiếng bị đặt sai dấu thanh."
+   ],
+   "explanation": "“Đỏ” (màu đỏ) mang dấu hỏi.",
+   "version": 1
+  }
+ ]
+}

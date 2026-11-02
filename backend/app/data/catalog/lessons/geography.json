@@ -1,0 +1,1754 @@
+{
+ "subject": "geography",
+ "version": 1,
+ "organization": "topic",
+ "source_note": "Theo yêu cầu cần đạt môn Địa lí cấp THPT (CT GDPT 2018, sửa đổi theo Thông tư 17/2025); tổ chức theo chủ đề, không theo mục lục bộ sách nào. Lãnh thổ Việt Nam được mô tả theo vùng, miền và yếu tố tự nhiên; số liệu được ghi rõ là làm tròn hoặc giả định.",
+ "chapters": [
+  {
+   "key": "dl10.ban_do",
+   "grade": 10,
+   "order": 1,
+   "title": "Địa lí với định hướng nghề nghiệp và sử dụng bản đồ",
+   "lessons": [
+    {
+     "key": "dl10.dinh_huong_nghe",
+     "order": 1,
+     "title": "Môn Địa lí với định hướng nghề nghiệp",
+     "description": "Đặc điểm môn học và những ngành nghề liên quan.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl10.phuong_phap_ban_do",
+     "order": 2,
+     "title": "Một số phương pháp biểu hiện đối tượng địa lí trên bản đồ",
+     "description": "Kí hiệu, đường chuyển động, chấm điểm, khoanh vùng, bản đồ – biểu đồ.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl10.su_dung_ban_do",
+     "order": 3,
+     "title": "Sử dụng bản đồ, GPS và bản đồ số",
+     "description": "Đọc bản đồ trong học tập, đời sống và ứng dụng định vị.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "dl10.trai_dat_thach_quyen",
+   "grade": 10,
+   "order": 2,
+   "title": "Trái Đất và thạch quyển",
+   "lessons": [
+    {
+     "key": "dl10.vo_trai_dat",
+     "order": 1,
+     "title": "Trái Đất, vỏ Trái Đất và vật liệu cấu tạo",
+     "description": "Nguồn gốc Trái Đất, cấu trúc và các loại đá.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl10.he_qua_chuyen_dong",
+     "order": 2,
+     "title": "Hệ quả địa lí các chuyển động của Trái Đất",
+     "description": "Giờ, ngày đêm, mùa và lệch hướng chuyển động.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl10.thach_quyen",
+     "order": 3,
+     "title": "Thạch quyển và thuyết kiến tạo mảng",
+     "description": "Các mảng kiến tạo và hệ quả của sự dịch chuyển.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl10.noi_luc_ngoai_luc",
+     "order": 4,
+     "title": "Nội lực và ngoại lực",
+     "description": "Phân biệt các quá trình do nội lực và do ngoại lực tạo nên địa hình bề mặt Trái Đất.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Trình bày được khái niệm, nguồn gốc của nội lực và ngoại lực",
+      "Phân biệt được tác động của nội lực và ngoại lực đến địa hình"
+     ],
+     "summary": [
+      "Nội lực sinh ra từ bên trong Trái Đất (năng lượng phân huỷ chất phóng xạ, sự dịch chuyển vật chất…): vận động kiến tạo theo phương thẳng đứng và phương nằm ngang (uốn nếp, đứt gãy), động đất, núi lửa.",
+      "Ngoại lực sinh ra ở bên ngoài, trên bề mặt Trái Đất, nguồn năng lượng chủ yếu từ Mặt Trời: phong hoá, bóc mòn, vận chuyển, bồi tụ.",
+      "Nội lực thường làm bề mặt Trái Đất gồ ghề hơn; ngoại lực có xu hướng san bằng địa hình.",
+      "Địa hình là kết quả tác động đồng thời, ngược nhau của nội lực và ngoại lực."
+     ],
+     "examples": [
+      {
+       "title": "Một dãy núi qua hàng triệu năm",
+       "lines": [
+        "Nội lực uốn nếp, nâng đá lên thành núi.",
+        "Ngoại lực (nước, gió, nhiệt) bào mòn, mang vật liệu xuống bồi tụ ở chân núi."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Nội lực hay ngoại lực?",
+       "set": {
+        "title": "Quá trình này do nội lực hay ngoại lực gây ra?",
+        "groups": [
+         {
+          "id": "noi",
+          "label": "Nội lực",
+          "icon": "🌋"
+         },
+         {
+          "id": "ngoai",
+          "label": "Ngoại lực",
+          "icon": "🌬️"
+         }
+        ],
+        "cards": [
+         {
+          "key": "dong_dat",
+          "text": "Động đất làm rung chuyển mặt đất",
+          "picture": "📳",
+          "group": "noi",
+          "explanation": "Động đất do sự dịch chuyển, đứt gãy đá trong lòng Trái Đất – tác động của nội lực."
+         },
+         {
+          "key": "nui_lua",
+          "text": "Núi lửa phun trào dung nham",
+          "picture": "🌋",
+          "group": "noi",
+          "explanation": "Mác-ma từ bên trong Trái Đất trào lên – biểu hiện của nội lực."
+         },
+         {
+          "key": "uon_nep",
+          "text": "Các lớp đá bị uốn nếp, tạo thành dãy núi",
+          "picture": "⛰️",
+          "group": "noi",
+          "explanation": "Uốn nếp là kết quả vận động nằm ngang của vỏ Trái Đất do nội lực."
+         },
+         {
+          "key": "dut_gay",
+          "text": "Đá bị đứt gãy, hình thành địa hào, địa luỹ",
+          "picture": "🪨",
+          "group": "noi",
+          "explanation": "Đứt gãy xảy ra ở vùng đá cứng khi chịu lực nén ép, tách giãn từ bên trong."
+         },
+         {
+          "key": "nang_ha",
+          "text": "Lục địa được nâng lên, hạ xuống chậm qua thời gian dài",
+          "picture": "↕️",
+          "group": "noi",
+          "explanation": "Vận động theo phương thẳng đứng là vận động kiến tạo do nội lực."
+         },
+         {
+          "key": "phong_hoa_li",
+          "text": "Đá nứt vỡ do nhiệt độ thay đổi đột ngột",
+          "picture": "🌡️",
+          "group": "ngoai",
+          "explanation": "Đây là phong hoá lí học, một quá trình ngoại lực."
+         },
+         {
+          "key": "hoa_tan",
+          "text": "Nước mưa hoà tan đá vôi, tạo hang động",
+          "picture": "💧",
+          "group": "ngoai",
+          "explanation": "Đây là phong hoá hoá học, tạo địa hình các-xtơ – ngoại lực."
+         },
+         {
+          "key": "xam_thuc",
+          "text": "Dòng sông đào sâu lòng, mở rộng thung lũng",
+          "picture": "🏞️",
+          "group": "ngoai",
+          "explanation": "Xâm thực của dòng chảy là quá trình bóc mòn do ngoại lực."
+         },
+         {
+          "key": "gio_mai_mon",
+          "text": "Gió thổi mòn đá, tạo nấm đá ở hoang mạc",
+          "picture": "🍄",
+          "group": "ngoai",
+          "explanation": "Thổi mòn, mài mòn do gió là quá trình ngoại lực."
+         },
+         {
+          "key": "boi_tu",
+          "text": "Phù sa bồi tụ thành đồng bằng châu thổ",
+          "picture": "🌾",
+          "group": "ngoai",
+          "explanation": "Bồi tụ là giai đoạn cuối của ngoại lực: vật liệu được tích tụ lại."
+         }
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "dl10.khi_quyen_thuy_quyen",
+   "grade": 10,
+   "order": 3,
+   "title": "Khí quyển và thuỷ quyển",
+   "lessons": [
+    {
+     "key": "dl10.nhiet_do",
+     "order": 1,
+     "title": "Nhiệt độ không khí",
+     "description": "Sự phân bố nhiệt độ không khí trên Trái Đất.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl10.khi_ap_gio",
+     "order": 2,
+     "title": "Khí áp và gió",
+     "description": "Các đai khí áp, các loại gió chính trên Trái Đất và một số loại gió địa phương.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Trình bày được sự phân bố các đai khí áp và nguyên nhân thay đổi khí áp",
+      "Trình bày được một số loại gió chính và gió địa phương"
+     ],
+     "summary": [
+      "Khí áp thay đổi theo độ cao (càng lên cao càng giảm), theo nhiệt độ (nhiệt độ tăng, khí áp giảm) và theo độ ẩm.",
+      "Các đai áp cao và áp thấp phân bố xen kẽ, đối xứng qua đai áp thấp xích đạo.",
+      "Gió Mậu dịch (Tín phong) thổi từ áp cao cận chí tuyến về áp thấp xích đạo; gió Tây ôn đới từ áp cao cận chí tuyến về áp thấp ôn đới; gió Đông cực từ áp cao cực về áp thấp ôn đới.",
+      "Gió địa phương: gió biển, gió đất, gió phơn; gió mùa đổi hướng theo mùa."
+     ],
+     "examples": [
+      {
+       "title": "Gió phơn ở nước ta",
+       "lines": [
+        "Gió mùa tây nam vượt dãy Trường Sơn, xuống sườn đông trở nên khô nóng.",
+        "Người dân miền Trung gọi là “gió Lào”."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Khí áp và gió",
+       "tasks": [
+        {
+         "key": "gio_chinh",
+         "prompt": "Ghép mỗi loại gió chính với nơi nó thổi.",
+         "pairs": [
+          [
+           "Gió Mậu dịch (Tín phong)",
+           "Từ áp cao cận chí tuyến về áp thấp xích đạo"
+          ],
+          [
+           "Gió Tây ôn đới",
+           "Từ áp cao cận chí tuyến về áp thấp ôn đới"
+          ],
+          [
+           "Gió Đông cực",
+           "Từ áp cao ở cực về áp thấp ôn đới"
+          ]
+         ],
+         "explanation": "Gió luôn thổi từ nơi áp cao đến nơi áp thấp; các loại gió chính thổi quanh năm giữa các đai khí áp.",
+         "left_label": "Loại gió",
+         "right_label": "Hướng thổi"
+        },
+        {
+         "key": "gio_dia_phuong",
+         "prompt": "Ghép mỗi loại gió với đặc điểm.",
+         "pairs": [
+          [
+           "Gió biển",
+           "Thổi từ biển vào đất liền vào ban ngày"
+          ],
+          [
+           "Gió đất",
+           "Thổi từ đất liền ra biển vào ban đêm"
+          ],
+          [
+           "Gió phơn",
+           "Khô, nóng khi vượt núi xuống sườn khuất gió"
+          ],
+          [
+           "Gió mùa",
+           "Đổi hướng theo mùa trong năm"
+          ]
+         ],
+         "explanation": "Ban ngày đất nóng nhanh hơn biển nên gió thổi từ biển vào; ban đêm ngược lại. Gió phơn mất hơi nước khi vượt núi.",
+         "left_label": "Loại gió",
+         "right_label": "Đặc điểm"
+        },
+        {
+         "key": "thay_doi_khi_ap",
+         "prompt": "Ghép mỗi điều kiện với sự thay đổi của khí áp.",
+         "pairs": [
+          [
+           "Lên cao",
+           "Không khí loãng dần nên khí áp giảm"
+          ],
+          [
+           "Nhiệt độ tăng",
+           "Không khí nở ra, nhẹ đi nên khí áp giảm"
+          ],
+          [
+           "Nhiệt độ giảm",
+           "Không khí co lại, nặng hơn nên khí áp tăng"
+          ],
+          [
+           "Không khí chứa nhiều hơi nước",
+           "Hơi nước nhẹ hơn không khí khô nên khí áp giảm"
+          ]
+         ],
+         "explanation": "Khí áp phụ thuộc độ cao, nhiệt độ và độ ẩm của không khí.",
+         "left_label": "Điều kiện",
+         "right_label": "Khí áp"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "dl10.mua",
+     "order": 3,
+     "title": "Mưa và sự phân bố mưa",
+     "description": "Các nhân tố ảnh hưởng đến lượng mưa.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl10.doi_khi_hau",
+     "order": 4,
+     "title": "Các đới và kiểu khí hậu",
+     "description": "Đọc biểu đồ nhiệt độ, lượng mưa của các kiểu khí hậu.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl10.thuy_quyen",
+     "order": 5,
+     "title": "Thuỷ quyển và nước trên lục địa",
+     "description": "Chế độ nước sông, hồ, nước ngầm, băng tuyết.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl10.bien_dai_duong",
+     "order": 6,
+     "title": "Nước biển và đại dương",
+     "description": "Sóng, thuỷ triều, dòng biển.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "dl10.sinh_quyen_quy_luat",
+   "grade": 10,
+   "order": 4,
+   "title": "Thổ nhưỡng, sinh quyển và các quy luật của vỏ địa lí",
+   "lessons": [
+    {
+     "key": "dl10.tho_nhuong",
+     "order": 1,
+     "title": "Thổ nhưỡng quyển",
+     "description": "Các nhân tố hình thành đất.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl10.sinh_quyen",
+     "order": 2,
+     "title": "Sinh quyển",
+     "description": "Các nhân tố ảnh hưởng đến sự phát triển, phân bố sinh vật.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl10.quy_luat",
+     "order": 3,
+     "title": "Các quy luật của vỏ địa lí",
+     "description": "Quy luật thống nhất và hoàn chỉnh, địa đới và phi địa đới.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "dl10.dan_cu",
+   "grade": 10,
+   "order": 5,
+   "title": "Địa lí dân cư",
+   "lessons": [
+    {
+     "key": "dl10.dan_so_the_gioi",
+     "order": 1,
+     "title": "Dân số và gia tăng dân số thế giới",
+     "description": "Đọc bảng số liệu, tính tỉ suất gia tăng dân số và chọn biểu đồ phù hợp.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nhận xét được sự gia tăng dân số thế giới qua bảng số liệu",
+      "Tính được tỉ suất gia tăng dân số tự nhiên và gia tăng dân số thực tế",
+      "Chọn được dạng biểu đồ phù hợp để thể hiện số liệu dân số"
+     ],
+     "summary": [
+      "Dân số thế giới tăng ngày càng nhanh: thời gian để tăng thêm 1 tỉ người ngày càng ngắn.",
+      "Tỉ suất gia tăng dân số tự nhiên = tỉ suất sinh thô − tỉ suất tử thô (‰).",
+      "Gia tăng dân số thực tế = gia tăng tự nhiên + gia tăng cơ học (nhập cư − xuất cư).",
+      "Biểu đồ đường hoặc cột thể hiện quy mô qua thời gian; biểu đồ tròn thể hiện cơ cấu trong một năm."
+     ],
+     "examples": [
+      {
+       "title": "Đổi ‰ sang %",
+       "lines": [
+        "20‰ − 8‰ = 12‰.",
+        "12‰ = 1,2%."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Đọc số liệu dân số",
+       "style": "reading",
+       "tasks": [
+        {
+         "key": "ti_dau",
+         "passage": "Mốc dân số thế giới (làm tròn): 1 tỉ người (năm 1804), 2 tỉ (1927), 3 tỉ (1960), 4 tỉ (1974), 5 tỉ (1987), 6 tỉ (1999), 7 tỉ (2011), 8 tỉ (2022).",
+         "question": "Dân số thế giới tăng từ 1 tỉ lên 2 tỉ người trong bao nhiêu năm?",
+         "options": [
+          {
+           "text": "123 năm",
+           "ok": true,
+           "why": "Đúng. 1927 − 1804 = 123 năm."
+          },
+          {
+           "text": "33 năm",
+           "ok": false,
+           "why": "33 năm là thời gian từ 2 tỉ (1927) lên 3 tỉ (1960)."
+          },
+          {
+           "text": "12 năm",
+           "ok": false,
+           "why": "Đây là thời gian để tăng thêm 1 tỉ người ở cuối thế kỉ XX."
+          }
+         ],
+         "explanation": "Lấy năm đạt 2 tỉ trừ năm đạt 1 tỉ."
+        },
+        {
+         "key": "xu_huong",
+         "passage": "Mốc dân số thế giới (làm tròn): 1 tỉ người (năm 1804), 2 tỉ (1927), 3 tỉ (1960), 4 tỉ (1974), 5 tỉ (1987), 6 tỉ (1999), 7 tỉ (2011), 8 tỉ (2022).",
+         "question": "Từ năm 1804 đến năm 1999, thời gian để dân số thế giới tăng thêm 1 tỉ người thay đổi như thế nào?",
+         "options": [
+          {
+           "text": "Ngày càng rút ngắn",
+           "ok": true,
+           "why": "Đúng. 123 năm → 33 → 14 → 13 → 12 năm."
+          },
+          {
+           "text": "Ngày càng kéo dài",
+           "ok": false,
+           "why": "Tính lại khoảng cách giữa các mốc: các khoảng ngắn dần."
+          },
+          {
+           "text": "Không thay đổi",
+           "ok": false,
+           "why": "Các khoảng cách rất khác nhau, từ 123 năm xuống còn 12 năm."
+          }
+         ],
+         "explanation": "Dân số thế giới tăng ngày càng nhanh trong thế kỉ XX."
+        },
+        {
+         "key": "tu_nhien",
+         "passage": "Năm X, quốc gia A (số liệu giả định) có tỉ suất sinh thô là 18‰ và tỉ suất tử thô là 6‰.",
+         "question": "Tỉ suất gia tăng dân số tự nhiên của quốc gia A là bao nhiêu?",
+         "options": [
+          {
+           "text": "1,2%",
+           "ok": true,
+           "why": "Đúng. 18‰ − 6‰ = 12‰ = 1,2%."
+          },
+          {
+           "text": "2,4%",
+           "ok": false,
+           "why": "Đây là kết quả của phép cộng 18‰ + 6‰; cần lấy sinh trừ tử."
+          },
+          {
+           "text": "12%",
+           "ok": false,
+           "why": "12‰ là 12 phần nghìn, bằng 1,2%, không phải 12%."
+          }
+         ],
+         "explanation": "Gia tăng tự nhiên = sinh thô − tử thô; chia 10 để đổi từ ‰ sang %."
+        },
+        {
+         "key": "thuc_te",
+         "passage": "Quốc gia B (số liệu giả định) trong một năm có tỉ suất gia tăng dân số tự nhiên 1,0%, tỉ suất nhập cư 0,5% và tỉ suất xuất cư 0,2%.",
+         "question": "Tỉ suất gia tăng dân số thực tế của quốc gia B là bao nhiêu?",
+         "options": [
+          {
+           "text": "1,3%",
+           "ok": true,
+           "why": "Đúng. 1,0 + (0,5 − 0,2) = 1,3%."
+          },
+          {
+           "text": "1,7%",
+           "ok": false,
+           "why": "Không cộng xuất cư: người xuất cư làm dân số giảm."
+          },
+          {
+           "text": "0,3%",
+           "ok": false,
+           "why": "0,3% chỉ là gia tăng cơ học; cần cộng thêm gia tăng tự nhiên."
+          }
+         ],
+         "explanation": "Gia tăng thực tế = gia tăng tự nhiên + (nhập cư − xuất cư)."
+        },
+        {
+         "key": "bieu_do",
+         "passage": "Mốc dân số thế giới (làm tròn): 1 tỉ người (năm 1804), 2 tỉ (1927), 3 tỉ (1960), 4 tỉ (1974), 5 tỉ (1987), 6 tỉ (1999), 7 tỉ (2011), 8 tỉ (2022).",
+         "question": "Để thể hiện quy mô dân số thế giới qua các năm trong bảng, nên vẽ biểu đồ nào?",
+         "options": [
+          {
+           "text": "Biểu đồ đường (hoặc cột) theo thời gian",
+           "ok": true,
+           "why": "Đúng. Biểu đồ đường, cột thể hiện quy mô và tốc độ thay đổi qua thời gian."
+          },
+          {
+           "text": "Biểu đồ tròn",
+           "ok": false,
+           "why": "Biểu đồ tròn thể hiện cơ cấu (các phần của một tổng) tại một thời điểm."
+          },
+          {
+           "text": "Biểu đồ miền",
+           "ok": false,
+           "why": "Biểu đồ miền thể hiện sự thay đổi cơ cấu qua thời gian, không phải quy mô."
+          }
+         ],
+         "explanation": "Chọn biểu đồ theo yêu cầu: quy mô, tốc độ → đường, cột; cơ cấu → tròn, miền."
+        },
+        {
+         "key": "co_cau_tuoi",
+         "passage": "Quốc gia C (số liệu giả định): nhóm 0–14 tuổi chiếm 40%, nhóm 15–64 tuổi chiếm 56%, nhóm 65 tuổi trở lên chiếm 4% dân số.",
+         "question": "Quốc gia C có cơ cấu dân số theo tuổi thuộc loại nào?",
+         "options": [
+          {
+           "text": "Cơ cấu dân số trẻ",
+           "ok": true,
+           "why": "Đúng. Trẻ em chiếm tỉ lệ cao, người già chiếm tỉ lệ rất thấp."
+          },
+          {
+           "text": "Cơ cấu dân số già",
+           "ok": false,
+           "why": "Dân số già có tỉ lệ người từ 65 tuổi trở lên cao; ở đây chỉ 4%."
+          },
+          {
+           "text": "Không xác định được",
+           "ok": false,
+           "why": "Số liệu ba nhóm tuổi đủ để nhận xét."
+          }
+         ],
+         "explanation": "Nhóm 0–14 tuổi chiếm tỉ lệ cao (trên 35%) và nhóm già thấp là dấu hiệu của cơ cấu dân số trẻ."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "dl10.co_cau_dan_so",
+     "order": 2,
+     "title": "Cơ cấu dân số",
+     "description": "Cơ cấu theo tuổi, giới tính, lao động, trình độ văn hoá.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl10.phan_bo_do_thi_hoa",
+     "order": 3,
+     "title": "Phân bố dân cư và đô thị hoá",
+     "description": "Các nhân tố ảnh hưởng và tác động của đô thị hoá.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "dl10.kinh_te",
+   "grade": 10,
+   "order": 6,
+   "title": "Địa lí kinh tế và phát triển bền vững",
+   "lessons": [
+    {
+     "key": "dl10.nguon_luc",
+     "order": 1,
+     "title": "Các nguồn lực phát triển kinh tế",
+     "description": "Vị trí, tự nhiên, kinh tế – xã hội.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl10.co_cau_kinh_te",
+     "order": 2,
+     "title": "Cơ cấu nền kinh tế, GDP và GNI",
+     "description": "Các tiêu chí đánh giá sự phát triển kinh tế.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl10.nong_nghiep",
+     "order": 3,
+     "title": "Địa lí nông nghiệp, lâm nghiệp, thuỷ sản",
+     "description": "Vai trò, đặc điểm và sự phân bố.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl10.cong_nghiep",
+     "order": 4,
+     "title": "Địa lí công nghiệp",
+     "description": "Vai trò, các ngành công nghiệp và tổ chức lãnh thổ công nghiệp.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl10.dich_vu",
+     "order": 5,
+     "title": "Địa lí dịch vụ",
+     "description": "Giao thông vận tải, bưu chính viễn thông, thương mại, du lịch, tài chính.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl10.phat_trien_ben_vung",
+     "order": 6,
+     "title": "Môi trường và phát triển bền vững",
+     "description": "Tăng trưởng xanh và phát triển bền vững.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "dl11.kinh_te_the_gioi",
+   "grade": 11,
+   "order": 1,
+   "title": "Một số vấn đề kinh tế – xã hội thế giới",
+   "lessons": [
+    {
+     "key": "dl11.nhom_nuoc",
+     "order": 1,
+     "title": "Sự khác biệt về trình độ phát triển giữa các nhóm nước",
+     "description": "GNI bình quân đầu người, cơ cấu kinh tế, HDI.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl11.toan_cau_hoa",
+     "order": 2,
+     "title": "Toàn cầu hoá, khu vực hoá và các tổ chức quốc tế",
+     "description": "Biểu hiện của toàn cầu hoá và các tổ chức kinh tế, chính trị quốc tế, khu vực.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Trình bày được biểu hiện và hệ quả của toàn cầu hoá kinh tế",
+      "Nhận biết được một số tổ chức quốc tế và khu vực"
+     ],
+     "summary": [
+      "Toàn cầu hoá kinh tế: thương mại thế giới phát triển mạnh, đầu tư nước ngoài tăng nhanh, thị trường tài chính mở rộng, các công ty đa quốc gia có vai trò lớn.",
+      "Khu vực hoá: các nước gần nhau liên kết thành tổ chức khu vực như EU, ASEAN.",
+      "Tổ chức quốc tế: Liên hợp quốc (UN), Tổ chức Thương mại Thế giới (WTO), Quỹ Tiền tệ Quốc tế (IMF); diễn đàn APEC.",
+      "Việt Nam là thành viên ASEAN (1995), APEC (1998), WTO (2007)."
+     ],
+     "examples": [
+      {
+       "title": "Toàn cầu hoá quanh em",
+       "lines": [
+        "Điện thoại lắp ráp ở một nước bằng linh kiện của nhiều nước khác.",
+        "Hàng Việt Nam xuất khẩu tới nhiều châu lục."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "match",
+       "title": "Toàn cầu hoá",
+       "tasks": [
+        {
+         "key": "ten_to_chuc",
+         "prompt": "Ghép mỗi tên viết tắt với tổ chức.",
+         "pairs": [
+          [
+           "WTO",
+           "Tổ chức Thương mại Thế giới"
+          ],
+          [
+           "IMF",
+           "Quỹ Tiền tệ Quốc tế"
+          ],
+          [
+           "APEC",
+           "Diễn đàn Hợp tác Kinh tế châu Á – Thái Bình Dương"
+          ],
+          [
+           "ASEAN",
+           "Hiệp hội các quốc gia Đông Nam Á"
+          ],
+          [
+           "EU",
+           "Liên minh châu Âu"
+          ]
+         ],
+         "explanation": "Biết tên đầy đủ giúp hiểu phạm vi và lĩnh vực hoạt động của mỗi tổ chức.",
+         "left_label": "Viết tắt",
+         "right_label": "Tổ chức"
+        },
+        {
+         "key": "bieu_hien",
+         "prompt": "Ghép mỗi biểu hiện của toàn cầu hoá với ví dụ.",
+         "pairs": [
+          [
+           "Thương mại thế giới phát triển mạnh",
+           "Hàng hoá của nhiều nước bày bán trong cùng một siêu thị"
+          ],
+          [
+           "Đầu tư nước ngoài tăng nhanh",
+           "Doanh nghiệp nước ngoài xây nhà máy ở Việt Nam"
+          ],
+          [
+           "Công ty đa quốc gia mở rộng",
+           "Một tập đoàn có chi nhánh ở hàng chục quốc gia"
+          ],
+          [
+           "Thị trường tài chính quốc tế mở rộng",
+           "Ngân hàng các nước kết nối, chuyển tiền xuyên biên giới"
+          ]
+         ],
+         "explanation": "Toàn cầu hoá làm các nền kinh tế phụ thuộc, gắn bó với nhau chặt chẽ hơn.",
+         "left_label": "Biểu hiện",
+         "right_label": "Ví dụ"
+        },
+        {
+         "key": "tru_so",
+         "prompt": "Ghép mỗi tổ chức với nơi đặt trụ sở chính.",
+         "pairs": [
+          [
+           "Liên hợp quốc",
+           "Niu Oóc (Hoa Kỳ)"
+          ],
+          [
+           "Liên minh châu Âu",
+           "Bru-xen (Bỉ)"
+          ],
+          [
+           "Ban Thư kí ASEAN",
+           "Gia-các-ta (In-đô-nê-xi-a)"
+          ],
+          [
+           "Tổ chức Thương mại Thế giới",
+           "Giơ-ne-vơ (Thuỵ Sĩ)"
+          ]
+         ],
+         "explanation": "Trụ sở thường đặt ở nơi có vai trò lịch sử hoặc thuận lợi cho hoạt động của tổ chức.",
+         "left_label": "Tổ chức",
+         "right_label": "Trụ sở"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "dl11.an_ninh_toan_cau",
+     "order": 3,
+     "title": "Một số vấn đề an ninh toàn cầu",
+     "description": "An ninh lương thực, năng lượng, nguồn nước, an ninh mạng.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl11.kinh_te_tri_thuc",
+     "order": 4,
+     "title": "Nền kinh tế tri thức",
+     "description": "Đặc điểm và biểu hiện của nền kinh tế tri thức.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "dl11.my_latinh_eu",
+   "grade": 11,
+   "order": 2,
+   "title": "Khu vực Mỹ La-tinh và Liên minh châu Âu",
+   "lessons": [
+    {
+     "key": "dl11.my_latinh",
+     "order": 1,
+     "title": "Tự nhiên, dân cư, xã hội và kinh tế Mỹ La-tinh",
+     "description": "Đô thị hoá và rừng A-ma-dôn.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl11.eu",
+     "order": 2,
+     "title": "Liên minh châu Âu",
+     "description": "Quy mô, mục tiêu và vị thế của EU trong nền kinh tế thế giới.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "dl11.dna_tna",
+   "grade": 11,
+   "order": 3,
+   "title": "Khu vực Đông Nam Á và Tây Nam Á",
+   "lessons": [
+    {
+     "key": "dl11.tu_nhien_dna",
+     "order": 1,
+     "title": "Tự nhiên Đông Nam Á lục địa và Đông Nam Á biển đảo",
+     "description": "Phân loại quốc gia và đặc điểm tự nhiên của hai bộ phận Đông Nam Á.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Phân biệt được Đông Nam Á lục địa và Đông Nam Á biển đảo",
+      "Nêu được đặc điểm địa hình, sông ngòi, khí hậu của mỗi bộ phận"
+     ],
+     "summary": [
+      "Đông Nam Á lục địa: Việt Nam, Lào, Campuchia, Thái Lan, Mi-an-ma; núi hướng bắc – nam và tây bắc – đông nam, nhiều sông lớn (Mê Công, I-ra-oa-đi, Mê Nam).",
+      "Đông Nam Á biển đảo: In-đô-nê-xi-a, Phi-líp-pin, Bru-nây, Xin-ga-po, Đông Ti-mo; nhiều đảo, núi lửa, động đất; ít đồng bằng lớn.",
+      "Ma-lai-xi-a có lãnh thổ ở cả bán đảo Mã Lai và đảo Ca-li-man-tan (Bóc-nê-ô).",
+      "Khí hậu nhiệt đới gió mùa ở phần lớn lục địa; khí hậu xích đạo ở nhiều nơi thuộc biển đảo."
+     ],
+     "examples": [
+      {
+       "title": "Vành đai lửa",
+       "lines": [
+        "Phần biển đảo nằm trong vùng tiếp xúc của các mảng kiến tạo.",
+        "Vì vậy ở đây có nhiều núi lửa và động đất, sóng thần."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Lục địa hay biển đảo?",
+       "set": {
+        "title": "Quốc gia hoặc đặc điểm này thuộc bộ phận nào của Đông Nam Á?",
+        "groups": [
+         {
+          "id": "luc_dia",
+          "label": "Đông Nam Á lục địa",
+          "icon": "🏔️"
+         },
+         {
+          "id": "bien_dao",
+          "label": "Đông Nam Á biển đảo",
+          "icon": "🏝️"
+         }
+        ],
+        "cards": [
+         {
+          "key": "viet_nam",
+          "text": "Việt Nam",
+          "picture": "🇻🇳",
+          "group": "luc_dia",
+          "explanation": "Việt Nam nằm trên bán đảo Đông Dương, thuộc Đông Nam Á lục địa."
+         },
+         {
+          "key": "thai_lan",
+          "text": "Thái Lan",
+          "picture": "🐘",
+          "group": "luc_dia",
+          "explanation": "Thái Lan thuộc Đông Nam Á lục địa."
+         },
+         {
+          "key": "mi_an_ma",
+          "text": "Mi-an-ma",
+          "picture": "🛕",
+          "group": "luc_dia",
+          "explanation": "Mi-an-ma thuộc Đông Nam Á lục địa, có sông I-ra-oa-đi."
+         },
+         {
+          "key": "huong_nui",
+          "text": "Núi hướng bắc – nam, tây bắc – đông nam, xen thung lũng rộng",
+          "picture": "⛰️",
+          "group": "luc_dia",
+          "explanation": "Đây là đặc điểm địa hình của Đông Nam Á lục địa."
+         },
+         {
+          "key": "song_lon",
+          "text": "Nhiều sông lớn như Mê Công, I-ra-oa-đi, Mê Nam",
+          "picture": "🏞️",
+          "group": "luc_dia",
+          "explanation": "Các sông lớn bắt nguồn từ vùng núi phía bắc, chảy qua Đông Nam Á lục địa."
+         },
+         {
+          "key": "indonesia",
+          "text": "In-đô-nê-xi-a",
+          "picture": "🌋",
+          "group": "bien_dao",
+          "explanation": "In-đô-nê-xi-a là quốc gia quần đảo lớn nhất thế giới."
+         },
+         {
+          "key": "philippines",
+          "text": "Phi-líp-pin",
+          "picture": "🏝️",
+          "group": "bien_dao",
+          "explanation": "Phi-líp-pin gồm hàng nghìn đảo."
+         },
+         {
+          "key": "brunei",
+          "text": "Bru-nây",
+          "picture": "🕌",
+          "group": "bien_dao",
+          "explanation": "Bru-nây nằm trên đảo Ca-li-man-tan (Bóc-nê-ô)."
+         },
+         {
+          "key": "nui_lua",
+          "text": "Nhiều núi lửa, thường xảy ra động đất",
+          "picture": "📳",
+          "group": "bien_dao",
+          "explanation": "Phần biển đảo nằm ở nơi tiếp xúc của các mảng kiến tạo."
+         },
+         {
+          "key": "dong_bang_nho",
+          "text": "Nhiều đảo, đồi núi; đồng bằng nhỏ hẹp ven biển",
+          "picture": "🌊",
+          "group": "bien_dao",
+          "explanation": "Các đảo phần lớn là đồi núi, đồng bằng nhỏ hẹp ven biển."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "dl11.kinh_te_dna",
+     "order": 2,
+     "title": "Kinh tế Đông Nam Á và Hiệp hội các quốc gia Đông Nam Á",
+     "description": "Cơ cấu kinh tế, các ngành chủ chốt và hợp tác ASEAN.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl11.tay_nam_a",
+     "order": 3,
+     "title": "Tự nhiên, dân cư và kinh tế Tây Nam Á",
+     "description": "Vị trí chiến lược, tài nguyên dầu khí, nguồn nước.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "dl11.hoa_ky_nga",
+   "grade": 11,
+   "order": 4,
+   "title": "Hoa Kỳ và Liên bang Nga",
+   "lessons": [
+    {
+     "key": "dl11.hoa_ky",
+     "order": 1,
+     "title": "Hoa Kỳ: tự nhiên, dân cư và kinh tế",
+     "description": "Nền kinh tế lớn của thế giới.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl11.lien_bang_nga",
+     "order": 2,
+     "title": "Liên bang Nga: tự nhiên, dân cư và kinh tế",
+     "description": "Quốc gia có diện tích lớn nhất thế giới.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "dl11.nhat_trung",
+   "grade": 11,
+   "order": 5,
+   "title": "Nhật Bản và Trung Quốc",
+   "lessons": [
+    {
+     "key": "dl11.nhat_ban",
+     "order": 1,
+     "title": "Nhật Bản: tự nhiên, dân cư và kinh tế",
+     "description": "Quốc gia quần đảo, nền kinh tế phát triển.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl11.dan_so_nhat_ban",
+     "order": 2,
+     "title": "Đọc số liệu: dân số già ở Nhật Bản",
+     "description": "Nhận xét số liệu về người cao tuổi ở Nhật Bản, hệ quả và giải pháp.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nhận xét được xu hướng già hoá dân số của Nhật Bản từ số liệu",
+      "Nêu được hệ quả của dân số già và giải pháp của Nhật Bản"
+     ],
+     "summary": [
+      "Nhật Bản có cơ cấu dân số già: tỉ lệ người từ 65 tuổi trở lên tăng nhanh, tỉ lệ trẻ em giảm; số dân đang giảm.",
+      "Hệ quả: thiếu lao động, chi phí phúc lợi xã hội và y tế cho người cao tuổi lớn.",
+      "Giải pháp: tự động hoá, dùng rô-bốt; khuyến khích sinh con; kéo dài tuổi lao động; tiếp nhận lao động nước ngoài.",
+      "Nhận xét số liệu: nêu xu hướng chung, dẫn chứng bằng con số, so sánh các mốc."
+     ],
+     "examples": [
+      {
+       "title": "Cách nhận xét bảng số liệu",
+       "lines": [
+        "1. Xu hướng chung (tăng/giảm).",
+        "2. Dẫn chứng: từ … năm … lên … năm …",
+        "3. Tốc độ: tăng nhanh hay chậm, giai đoạn nào nhanh nhất."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Đọc số liệu Nhật Bản",
+       "style": "reading",
+       "tasks": [
+        {
+         "key": "xu_huong",
+         "passage": "Tỉ lệ người từ 65 tuổi trở lên trong dân số Nhật Bản (số liệu làm tròn): năm 1990 khoảng 12%, năm 2000 khoảng 17%, năm 2010 khoảng 23%, năm 2020 khoảng 29%.",
+         "question": "Nhận xét nào đúng về tỉ lệ người từ 65 tuổi trở lên ở Nhật Bản?",
+         "options": [
+          {
+           "text": "Tăng liên tục qua các năm",
+           "ok": true,
+           "why": "Đúng. 12% → 17% → 23% → 29%."
+          },
+          {
+           "text": "Giảm liên tục qua các năm",
+           "ok": false,
+           "why": "Các con số tăng dần, không giảm."
+          },
+          {
+           "text": "Tăng rồi giảm",
+           "ok": false,
+           "why": "Không có mốc nào giảm so với mốc trước."
+          }
+         ],
+         "explanation": "Tỉ lệ người cao tuổi tăng liên tục: dân số Nhật Bản già đi nhanh."
+        },
+        {
+         "key": "tang_bao_nhieu",
+         "passage": "Tỉ lệ người từ 65 tuổi trở lên trong dân số Nhật Bản (số liệu làm tròn): năm 1990 khoảng 12%, năm 2000 khoảng 17%, năm 2010 khoảng 23%, năm 2020 khoảng 29%.",
+         "question": "Từ năm 1990 đến năm 2020, tỉ lệ người từ 65 tuổi trở lên tăng thêm bao nhiêu điểm phần trăm?",
+         "options": [
+          {
+           "text": "Khoảng 17 điểm phần trăm",
+           "ok": true,
+           "why": "Đúng. 29% − 12% = 17 điểm phần trăm."
+          },
+          {
+           "text": "Khoảng 41 điểm phần trăm",
+           "ok": false,
+           "why": "41 là tổng 29 + 12, không phải mức tăng."
+          },
+          {
+           "text": "Khoảng 6 điểm phần trăm",
+           "ok": false,
+           "why": "6 điểm phần trăm chỉ là mức tăng của giai đoạn 2010–2020."
+          }
+         ],
+         "explanation": "Mức tăng = giá trị năm sau − giá trị năm trước."
+        },
+        {
+         "key": "nhanh_nhat",
+         "passage": "Tỉ lệ người từ 65 tuổi trở lên trong dân số Nhật Bản (số liệu làm tròn): năm 1990 khoảng 12%, năm 2000 khoảng 17%, năm 2010 khoảng 23%, năm 2020 khoảng 29%.",
+         "question": "Trong ba giai đoạn 1990–2000, 2000–2010, 2010–2020, giai đoạn nào tỉ lệ này tăng nhiều nhất?",
+         "options": [
+          {
+           "text": "2000–2010 và 2010–2020 (cùng tăng 6 điểm phần trăm)",
+           "ok": true,
+           "why": "Đúng. 1990–2000 tăng 5; 2000–2010 tăng 6; 2010–2020 tăng 6."
+          },
+          {
+           "text": "1990–2000",
+           "ok": false,
+           "why": "1990–2000 chỉ tăng 5 điểm phần trăm, ít nhất trong ba giai đoạn."
+          },
+          {
+           "text": "Ba giai đoạn tăng bằng nhau",
+           "ok": false,
+           "why": "Giai đoạn 1990–2000 tăng ít hơn (5 so với 6)."
+          }
+         ],
+         "explanation": "Tính mức tăng từng giai đoạn rồi so sánh."
+        },
+        {
+         "key": "he_qua",
+         "passage": "Tỉ lệ người từ 65 tuổi trở lên trong dân số Nhật Bản (số liệu làm tròn): năm 1990 khoảng 12%, năm 2000 khoảng 17%, năm 2010 khoảng 23%, năm 2020 khoảng 29%.",
+         "question": "Hệ quả lớn nhất của xu hướng trong bảng là gì?",
+         "options": [
+          {
+           "text": "Thiếu lao động, chi phí chăm sóc người cao tuổi tăng",
+           "ok": true,
+           "why": "Đúng. Ít người trong tuổi lao động, nhiều người cần chăm sóc."
+          },
+          {
+           "text": "Thừa lao động, khó giải quyết việc làm",
+           "ok": false,
+           "why": "Thừa lao động là vấn đề của những nước có dân số trẻ."
+          },
+          {
+           "text": "Số trẻ em đi học tăng nhanh",
+           "ok": false,
+           "why": "Dân số già đi đi kèm tỉ lệ trẻ em giảm."
+          }
+         ],
+         "explanation": "Dân số già tạo áp lực lớn lên thị trường lao động và hệ thống phúc lợi."
+        },
+        {
+         "key": "giai_phap",
+         "passage": "Tỉ lệ người từ 65 tuổi trở lên trong dân số Nhật Bản (số liệu làm tròn): năm 1990 khoảng 12%, năm 2000 khoảng 17%, năm 2010 khoảng 23%, năm 2020 khoảng 29%.",
+         "question": "Giải pháp nào giúp Nhật Bản ứng phó với tình trạng trong bảng?",
+         "options": [
+          {
+           "text": "Đẩy mạnh tự động hoá, dùng rô-bốt và khuyến khích sinh con",
+           "ok": true,
+           "why": "Đúng. Rô-bốt bù đắp thiếu hụt lao động; chính sách hỗ trợ sinh con giúp trẻ hoá dân số."
+          },
+          {
+           "text": "Hạn chế sinh con để giảm dân số",
+           "ok": false,
+           "why": "Điều này làm dân số già nhanh hơn."
+          },
+          {
+           "text": "Giảm tuổi nghỉ hưu xuống thấp hơn",
+           "ok": false,
+           "why": "Giảm tuổi nghỉ hưu làm thiếu lao động trầm trọng hơn."
+          }
+         ],
+         "explanation": "Giải pháp phải vừa bù đắp lao động, vừa cải thiện cơ cấu dân số."
+        },
+        {
+         "key": "bieu_do",
+         "passage": "Tỉ lệ người từ 65 tuổi trở lên trong dân số Nhật Bản (số liệu làm tròn): năm 1990 khoảng 12%, năm 2000 khoảng 17%, năm 2010 khoảng 23%, năm 2020 khoảng 29%.",
+         "question": "Để thể hiện sự thay đổi tỉ lệ người từ 65 tuổi trở lên qua bốn năm, nên dùng dạng biểu đồ nào?",
+         "options": [
+          {
+           "text": "Biểu đồ đường (hoặc cột)",
+           "ok": true,
+           "why": "Đúng. Biểu đồ đường thể hiện rõ xu hướng thay đổi qua thời gian."
+          },
+          {
+           "text": "Bốn biểu đồ tròn riêng lẻ chỉ có một nhóm tuổi",
+           "ok": false,
+           "why": "Biểu đồ tròn cần đủ các thành phần của tổng thể; ở đây chỉ có một chỉ tiêu."
+          },
+          {
+           "text": "Bản đồ chấm điểm",
+           "ok": false,
+           "why": "Bản đồ chấm điểm thể hiện sự phân bố trong không gian, không phải thay đổi theo thời gian."
+          }
+         ],
+         "explanation": "Một chỉ tiêu thay đổi theo thời gian: dùng biểu đồ đường hoặc cột."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "dl11.trung_quoc",
+     "order": 3,
+     "title": "Trung Quốc: tự nhiên, dân cư và kinh tế",
+     "description": "Sự khác biệt giữa miền Đông và miền Tây, công cuộc hiện đại hoá.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "dl11.uc_nam_phi",
+   "grade": 11,
+   "order": 6,
+   "title": "Ô-xtrây-li-a và Cộng hoà Nam Phi",
+   "lessons": [
+    {
+     "key": "dl11.o_xtray_li_a",
+     "order": 1,
+     "title": "Ô-xtrây-li-a",
+     "description": "Tự nhiên, dân cư và kinh tế.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl11.nam_phi",
+     "order": 2,
+     "title": "Cộng hoà Nam Phi",
+     "description": "Tự nhiên, dân cư và kinh tế.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "dl12.tu_nhien",
+   "grade": 12,
+   "order": 1,
+   "title": "Địa lí tự nhiên Việt Nam",
+   "lessons": [
+    {
+     "key": "dl12.vi_tri",
+     "order": 1,
+     "title": "Vị trí địa lí và phạm vi lãnh thổ",
+     "description": "Ảnh hưởng của vị trí địa lí đến tự nhiên, kinh tế – xã hội và quốc phòng.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl12.nhiet_doi_am_gio_mua",
+     "order": 2,
+     "title": "Thiên nhiên nhiệt đới ẩm gió mùa",
+     "description": "Biểu hiện qua khí hậu và các thành phần tự nhiên khác.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl12.phan_hoa",
+     "order": 3,
+     "title": "Sự phân hoá đa dạng của thiên nhiên",
+     "description": "Phân hoá bắc – nam, đông – tây và theo độ cao.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl12.ba_mien_tu_nhien",
+     "order": 4,
+     "title": "Ba miền địa lí tự nhiên",
+     "description": "Phân loại đặc điểm địa hình, khí hậu của ba miền địa lí tự nhiên Việt Nam.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Trình bày được đặc điểm tự nhiên nổi bật của ba miền địa lí tự nhiên",
+      "Giải thích được sự khác nhau giữa các miền"
+     ],
+     "summary": [
+      "Miền Bắc và Đông Bắc Bắc Bộ: đồi núi thấp, các dãy núi hình cánh cung; gió mùa đông bắc mạnh nhất, mùa đông lạnh nhất cả nước.",
+      "Miền Tây Bắc và Bắc Trung Bộ: địa hình cao nhất, các dãy núi hướng tây bắc – đông nam; gió phơn tây nam khô nóng ở Bắc Trung Bộ.",
+      "Miền Nam Trung Bộ và Nam Bộ (từ dãy Bạch Mã trở vào): khí hậu cận xích đạo gió mùa, nóng quanh năm, mùa mưa và mùa khô rõ rệt; có các cao nguyên ba dan và đồng bằng sông Cửu Long rộng lớn.",
+      "Sự phân hoá do vị trí, hình dạng lãnh thổ, địa hình và hoạt động của gió mùa."
+     ],
+     "examples": [
+      {
+       "title": "Ranh giới khí hậu",
+       "lines": [
+        "Dãy Bạch Mã là ranh giới khí hậu giữa miền Bắc và miền Nam.",
+        "Phía bắc có mùa đông lạnh; phía nam nóng quanh năm."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "sorting",
+       "title": "Miền nào đây?",
+       "set": {
+        "title": "Đặc điểm này thuộc miền địa lí tự nhiên nào?",
+        "groups": [
+         {
+          "id": "bac",
+          "label": "Miền Bắc và Đông Bắc Bắc Bộ",
+          "icon": "🧣"
+         },
+         {
+          "id": "tay_bac",
+          "label": "Miền Tây Bắc và Bắc Trung Bộ",
+          "icon": "🏔️"
+         },
+         {
+          "id": "nam",
+          "label": "Miền Nam Trung Bộ và Nam Bộ",
+          "icon": "☀️"
+         }
+        ],
+        "cards": [
+         {
+          "key": "dong_lanh",
+          "text": "Mùa đông lạnh nhất cả nước, đến sớm, kết thúc muộn",
+          "picture": "❄️",
+          "group": "bac",
+          "explanation": "Miền Bắc và Đông Bắc chịu tác động mạnh nhất của gió mùa đông bắc."
+         },
+         {
+          "key": "canh_cung",
+          "text": "Các dãy núi hình cánh cung mở rộng về phía bắc",
+          "picture": "🌀",
+          "group": "bac",
+          "explanation": "Vùng núi Đông Bắc có các cánh cung lớn, quy tụ ở phía nam."
+         },
+         {
+          "key": "ha_long",
+          "text": "Đồng bằng sông Hồng mở rộng; vịnh Hạ Long có nhiều đảo đá vôi",
+          "picture": "🏝️",
+          "group": "bac",
+          "explanation": "Đồng bằng sông Hồng và vịnh Hạ Long thuộc miền Bắc và Đông Bắc Bắc Bộ."
+         },
+         {
+          "key": "cao_nhat",
+          "text": "Địa hình cao nhất cả nước, có dãy Hoàng Liên Sơn",
+          "picture": "🗻",
+          "group": "tay_bac",
+          "explanation": "Dãy Hoàng Liên Sơn với đỉnh Phan-xi-păng thuộc miền Tây Bắc và Bắc Trung Bộ."
+         },
+         {
+          "key": "huong_tb_dn",
+          "text": "Các dãy núi chủ yếu chạy hướng tây bắc – đông nam",
+          "picture": "↘️",
+          "group": "tay_bac",
+          "explanation": "Hướng tây bắc – đông nam là hướng núi nổi bật của miền này."
+         },
+         {
+          "key": "gio_phon",
+          "text": "Gió phơn tây nam khô nóng mạnh vào đầu mùa hạ ở vùng ven biển",
+          "picture": "🔥",
+          "group": "tay_bac",
+          "explanation": "Gió phơn hoạt động mạnh ở Bắc Trung Bộ, thuộc miền Tây Bắc và Bắc Trung Bộ."
+         },
+         {
+          "key": "can_xich_dao",
+          "text": "Khí hậu cận xích đạo gió mùa, nóng quanh năm",
+          "picture": "🌡️",
+          "group": "nam",
+          "explanation": "Miền Nam Trung Bộ và Nam Bộ ở gần Xích đạo, không có mùa đông lạnh."
+         },
+         {
+          "key": "hai_mua",
+          "text": "Một năm có mùa mưa và mùa khô rõ rệt",
+          "picture": "🌦️",
+          "group": "nam",
+          "explanation": "Mùa mưa và mùa khô sâu sắc là đặc điểm của miền Nam Trung Bộ và Nam Bộ."
+         },
+         {
+          "key": "ba_dan",
+          "text": "Các cao nguyên ba dan xếp tầng rộng lớn",
+          "picture": "🟫",
+          "group": "nam",
+          "explanation": "Các cao nguyên ba dan ở Tây Nguyên thuộc miền Nam Trung Bộ và Nam Bộ."
+         },
+         {
+          "key": "cuu_long",
+          "text": "Đồng bằng châu thổ sông Cửu Long rộng lớn, thấp, bằng phẳng",
+          "picture": "🌾",
+          "group": "nam",
+          "explanation": "Đồng bằng sông Cửu Long thuộc miền Nam Trung Bộ và Nam Bộ."
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "key": "dl12.tai_nguyen_moi_truong",
+     "order": 5,
+     "title": "Sử dụng hợp lí tài nguyên và bảo vệ môi trường",
+     "description": "Tài nguyên rừng, đa dạng sinh học, đất và môi trường.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl12.thien_tai",
+     "order": 6,
+     "title": "Phòng chống thiên tai và ứng phó với biến đổi khí hậu",
+     "description": "Bão, lũ, hạn hán, xâm nhập mặn và giải pháp.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "dl12.dan_cu",
+   "grade": 12,
+   "order": 2,
+   "title": "Địa lí dân cư Việt Nam",
+   "lessons": [
+    {
+     "key": "dl12.dan_so_vn",
+     "order": 1,
+     "title": "Dân số Việt Nam qua các cuộc tổng điều tra",
+     "description": "Đọc số liệu tổng điều tra dân số, tính mức tăng, tỉ lệ dân thành thị và chọn biểu đồ.",
+     "status": "ready",
+     "review": {
+      "status": "checked",
+      "note": "Mirabi biên soạn theo yêu cầu cần đạt của CT GDPT 2018; dữ kiện là các mốc đã được thừa nhận rộng rãi."
+     },
+     "source": "mirabi-original",
+     "objectives": [
+      "Nhận xét được sự thay đổi quy mô dân số và tỉ lệ dân thành thị",
+      "Tính toán được từ số liệu thống kê",
+      "Nêu được thuận lợi và khó khăn của dân số đông"
+     ],
+     "summary": [
+      "Dân số nước ta tăng liên tục; mức tăng mỗi thập kỉ khoảng 10 triệu người, tốc độ tăng đã chậm lại.",
+      "Tỉ lệ dân thành thị tăng nhưng phần lớn dân cư vẫn sống ở nông thôn (năm 2019).",
+      "Dân số đông: nguồn lao động dồi dào, thị trường tiêu thụ lớn; nhưng gây sức ép lên việc làm, nhà ở, môi trường.",
+      "Số dân thành thị = tổng số dân × tỉ lệ dân thành thị."
+     ],
+     "examples": [
+      {
+       "title": "Ví dụ tính",
+       "lines": [
+        "Năm 2019: 96,2 triệu × 34,4% ≈ 33,1 triệu người sống ở thành thị."
+       ]
+      }
+     ],
+     "requires": [],
+     "requires_note": null,
+     "games": [
+      {
+       "game": "choice",
+       "title": "Đọc biểu đồ dân số",
+       "style": "reading",
+       "tasks": [
+        {
+         "key": "tang_them",
+         "passage": "Dân số Việt Nam qua các cuộc tổng điều tra (làm tròn): năm 1979 khoảng 52,7 triệu người; 1989: 64,4 triệu; 1999: 76,3 triệu; 2009: 85,8 triệu; 2019: 96,2 triệu.",
+         "question": "Từ năm 1979 đến năm 2019, dân số nước ta tăng thêm khoảng bao nhiêu?",
+         "options": [
+          {
+           "text": "Khoảng 43,5 triệu người",
+           "ok": true,
+           "why": "Đúng. 96,2 − 52,7 = 43,5 triệu người."
+          },
+          {
+           "text": "Khoảng 148,9 triệu người",
+           "ok": false,
+           "why": "Đây là tổng của hai số, không phải mức tăng."
+          },
+          {
+           "text": "Khoảng 10,4 triệu người",
+           "ok": false,
+           "why": "10,4 triệu chỉ là mức tăng giai đoạn 2009–2019."
+          }
+         ],
+         "explanation": "Mức tăng = số dân năm cuối − số dân năm đầu."
+        },
+        {
+         "key": "it_nhat",
+         "passage": "Dân số Việt Nam qua các cuộc tổng điều tra (làm tròn): năm 1979 khoảng 52,7 triệu người; 1989: 64,4 triệu; 1999: 76,3 triệu; 2009: 85,8 triệu; 2019: 96,2 triệu.",
+         "question": "Trong bốn giai đoạn mười năm, giai đoạn nào dân số tăng ít nhất?",
+         "options": [
+          {
+           "text": "1999–2009",
+           "ok": true,
+           "why": "Đúng. Mức tăng: 11,7; 11,9; 9,5; 10,4 triệu — ít nhất là 1999–2009."
+          },
+          {
+           "text": "1979–1989",
+           "ok": false,
+           "why": "Giai đoạn này tăng 11,7 triệu người."
+          },
+          {
+           "text": "1989–1999",
+           "ok": false,
+           "why": "Giai đoạn này tăng 11,9 triệu người, nhiều nhất."
+          },
+          {
+           "text": "2009–2019",
+           "ok": false,
+           "why": "Giai đoạn này tăng 10,4 triệu người."
+          }
+         ],
+         "explanation": "Tính mức tăng từng giai đoạn rồi so sánh."
+        },
+        {
+         "key": "bieu_do",
+         "passage": "Dân số Việt Nam qua các cuộc tổng điều tra (làm tròn): năm 1979 khoảng 52,7 triệu người; 1989: 64,4 triệu; 1999: 76,3 triệu; 2009: 85,8 triệu; 2019: 96,2 triệu.",
+         "question": "Để thể hiện quy mô dân số nước ta qua các năm tổng điều tra, nên dùng biểu đồ nào?",
+         "options": [
+          {
+           "text": "Biểu đồ cột (hoặc đường)",
+           "ok": true,
+           "why": "Đúng. Cột hoặc đường thể hiện quy mô và sự thay đổi theo thời gian."
+          },
+          {
+           "text": "Biểu đồ tròn",
+           "ok": false,
+           "why": "Biểu đồ tròn dùng cho cơ cấu tại một thời điểm."
+          },
+          {
+           "text": "Biểu đồ miền",
+           "ok": false,
+           "why": "Biểu đồ miền dùng cho sự thay đổi cơ cấu qua nhiều năm."
+          }
+         ],
+         "explanation": "Quy mô theo thời gian → biểu đồ cột hoặc đường."
+        },
+        {
+         "key": "thanh_thi",
+         "passage": "Tỉ lệ dân thành thị của Việt Nam (làm tròn): năm 1999 khoảng 23,5%; năm 2009 khoảng 29,6%; năm 2019 khoảng 34,4%.",
+         "question": "Nhận xét nào đúng về tỉ lệ dân thành thị nước ta?",
+         "options": [
+          {
+           "text": "Tăng liên tục nhưng năm 2019 vẫn dưới một nửa dân số",
+           "ok": true,
+           "why": "Đúng. Từ 23,5% lên 34,4%, vẫn dưới 50%."
+          },
+          {
+           "text": "Giảm liên tục",
+           "ok": false,
+           "why": "Các con số tăng dần qua ba mốc."
+          },
+          {
+           "text": "Năm 2019 đã vượt quá một nửa dân số",
+           "ok": false,
+           "why": "34,4% nhỏ hơn 50%: phần lớn dân cư vẫn sống ở nông thôn."
+          }
+         ],
+         "explanation": "Đô thị hoá đang diễn ra nhưng tỉ lệ dân thành thị còn thấp."
+        },
+        {
+         "key": "so_dan_tt",
+         "passage": "Dân số Việt Nam qua các cuộc tổng điều tra (làm tròn): năm 1979 khoảng 52,7 triệu người; 1989: 64,4 triệu; 1999: 76,3 triệu; 2009: 85,8 triệu; 2019: 96,2 triệu. Tỉ lệ dân thành thị của Việt Nam (làm tròn): năm 1999 khoảng 23,5%; năm 2009 khoảng 29,6%; năm 2019 khoảng 34,4%.",
+         "question": "Năm 2019, số dân thành thị nước ta khoảng bao nhiêu?",
+         "options": [
+          {
+           "text": "Khoảng 33,1 triệu người",
+           "ok": true,
+           "why": "Đúng. 96,2 × 34,4% ≈ 33,1 triệu người."
+          },
+          {
+           "text": "Khoảng 63,1 triệu người",
+           "ok": false,
+           "why": "Đây là số dân nông thôn (96,2 − 33,1)."
+          },
+          {
+           "text": "Khoảng 3,3 triệu người",
+           "ok": false,
+           "why": "Kiểm tra lại dấu phẩy: 96,2 × 0,344 ≈ 33,1."
+          }
+         ],
+         "explanation": "Số dân thành thị = tổng số dân × tỉ lệ dân thành thị."
+        },
+        {
+         "key": "thuan_loi",
+         "passage": "Dân số Việt Nam qua các cuộc tổng điều tra (làm tròn): năm 1979 khoảng 52,7 triệu người; 1989: 64,4 triệu; 1999: 76,3 triệu; 2009: 85,8 triệu; 2019: 96,2 triệu.",
+         "question": "Đâu là một thuận lợi của quy mô dân số như trong bảng số liệu?",
+         "options": [
+          {
+           "text": "Nguồn lao động dồi dào, thị trường tiêu thụ lớn",
+           "ok": true,
+           "why": "Đúng. Dân số đông vừa là nguồn lao động, vừa là thị trường."
+          },
+          {
+           "text": "Không còn sức ép về việc làm, nhà ở",
+           "ok": false,
+           "why": "Dân số đông làm tăng sức ép về việc làm, nhà ở."
+          },
+          {
+           "text": "Tài nguyên thiên nhiên bình quân đầu người tăng lên",
+           "ok": false,
+           "why": "Dân số tăng làm tài nguyên bình quân đầu người giảm."
+          }
+         ],
+         "explanation": "Dân số đông vừa là thế mạnh, vừa là thách thức."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "dl12.lao_dong",
+     "order": 2,
+     "title": "Lao động và việc làm",
+     "description": "Nguồn lao động, cơ cấu lao động và vấn đề việc làm.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl12.do_thi_hoa",
+     "order": 3,
+     "title": "Đô thị hoá",
+     "description": "Đặc điểm đô thị hoá và mạng lưới đô thị.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "dl12.nganh_kinh_te",
+   "grade": 12,
+   "order": 3,
+   "title": "Địa lí các ngành kinh tế",
+   "lessons": [
+    {
+     "key": "dl12.chuyen_dich",
+     "order": 1,
+     "title": "Chuyển dịch cơ cấu kinh tế",
+     "description": "Theo ngành, theo thành phần và theo lãnh thổ.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl12.nong_nghiep",
+     "order": 2,
+     "title": "Nông nghiệp, lâm nghiệp và thuỷ sản",
+     "description": "Thế mạnh, tình hình phát triển và phân bố.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl12.cong_nghiep",
+     "order": 3,
+     "title": "Công nghiệp",
+     "description": "Cơ cấu ngành và tổ chức lãnh thổ công nghiệp.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl12.giao_thong_vien_thong",
+     "order": 4,
+     "title": "Giao thông vận tải và bưu chính viễn thông",
+     "description": "Các loại hình giao thông, tuyến đường và đầu mối quan trọng.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl12.thuong_mai_du_lich",
+     "order": 5,
+     "title": "Thương mại và du lịch",
+     "description": "Nội thương, ngoại thương và tài nguyên du lịch.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "dl12.vung_kinh_te",
+   "grade": 12,
+   "order": 4,
+   "title": "Địa lí các vùng kinh tế",
+   "lessons": [
+    {
+     "key": "dl12.vung_tdmnbb",
+     "order": 1,
+     "title": "Khai thác thế mạnh ở Trung du và miền núi Bắc Bộ",
+     "description": "Khoáng sản, thuỷ điện, cây công nghiệp, chăn nuôi.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl12.vung_dbsh",
+     "order": 2,
+     "title": "Phát triển kinh tế – xã hội ở Đồng bằng sông Hồng",
+     "description": "Chuyển dịch cơ cấu kinh tế theo ngành.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl12.vung_btb",
+     "order": 3,
+     "title": "Phát triển kinh tế – xã hội ở Bắc Trung Bộ",
+     "description": "Hình thành cơ cấu nông – lâm – ngư nghiệp.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl12.vung_dhntb",
+     "order": 4,
+     "title": "Phát triển kinh tế – xã hội ở Duyên hải Nam Trung Bộ",
+     "description": "Kinh tế biển, cảng biển và du lịch.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl12.vung_tay_nguyen",
+     "order": 5,
+     "title": "Khai thác thế mạnh ở Tây Nguyên",
+     "description": "Cây công nghiệp, lâm nghiệp, thuỷ điện và khoáng sản.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl12.vung_dnb",
+     "order": 6,
+     "title": "Phát triển kinh tế – xã hội ở Đông Nam Bộ",
+     "description": "Khai thác lãnh thổ theo chiều sâu.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl12.vung_dbscl",
+     "order": 7,
+     "title": "Sử dụng hợp lí tự nhiên ở Đồng bằng sông Cửu Long",
+     "description": "Thích ứng với biến đổi khí hậu, xâm nhập mặn.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  },
+  {
+   "key": "dl12.bien_dong",
+   "grade": 12,
+   "order": 5,
+   "title": "Kinh tế biển, quốc phòng và an ninh ở Biển Đông",
+   "lessons": [
+    {
+     "key": "dl12.kinh_te_bien",
+     "order": 1,
+     "title": "Phát triển tổng hợp kinh tế biển",
+     "description": "Khai thác tài nguyên sinh vật, khoáng sản, du lịch, giao thông biển.",
+     "status": "planned",
+     "source": "mirabi-original"
+    },
+    {
+     "key": "dl12.quoc_phong_bien",
+     "order": 2,
+     "title": "Bảo vệ chủ quyền và đảm bảo an ninh quốc phòng ở Biển Đông",
+     "description": "Ý nghĩa của các đảo, quần đảo và việc bảo vệ chủ quyền.",
+     "status": "planned",
+     "source": "mirabi-original"
+    }
+   ]
+  }
+ ]
+}

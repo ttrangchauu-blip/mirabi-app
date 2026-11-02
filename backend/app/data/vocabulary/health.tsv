@@ -12,7 +12,7 @@ cold.illness	cold	noun	2	health	cảm lạnh	bệnh, không phải thời tiết
 dentist	dentist	noun	2	health	nha sĩ		I see the dentist twice a year.	Tôi đi khám nha sĩ hai lần một năm.		/ˈdentɪst/	mirabi-original	active
 exercise	exercise	verb	2	health	tập thể dục		My grandparents exercise every morning.	Ông bà tôi tập thể dục mỗi sáng.	work out	/ˈeksəsaɪz/	mirabi-original	active
 healthy	healthy	adjective	2	health	khỏe mạnh, lành mạnh		Eat healthy food and sleep well.	Hãy ăn đồ lành mạnh và ngủ đủ giấc.		/ˈhelθi/	mirabi-original	active
-rest	rest	verb	2	health	nghỉ ngơi		The doctor told me to rest for two days.	Bác sĩ dặn tôi nghỉ ngơi hai ngày.		/rest/	mirabi-original	active
+rest	rest	verb	2	health	nghỉ ngơi	nghỉ để cơ thể lấy lại sức, nhất là khi mệt hoặc ốm	The doctor told me to rest for two days.	Bác sĩ dặn tôi nghỉ ngơi hai ngày.		/rest/	mirabi-original	active
 injury	injury	noun	3	health	chấn thương		He missed the match because of an injury.	Anh ấy lỡ trận đấu vì chấn thương.		/ˈɪndʒəri/	mirabi-original	active
 symptom	symptom	noun	3	health	triệu chứng		What are the symptoms of flu?	Cúm có những triệu chứng gì?		/ˈsɪmptəm/	mirabi-original	active
 prescription	prescription	noun	3	health	đơn thuốc		You need a prescription for this medicine.	Thuốc này cần có đơn của bác sĩ.		/prɪˈskrɪpʃn/	mirabi-original	active
@@ -34,7 +34,7 @@ convalescence	convalescence	noun	6	health	thời kỳ dưỡng bệnh		She spent
 hypochondriac	hypochondriac	noun	6	health	người hay lo mình mắc bệnh		He is a hypochondriac who visits the doctor every week.	Anh ấy là người hay lo mình có bệnh, tuần nào cũng đi khám.		/ˌhaɪpəˈkɒndriæk/	mirabi-original	active
 health	health	noun	1	health	sức khỏe	tình trạng của cơ thể và tinh thần	Smoking is bad for your health.	Hút thuốc có hại cho sức khỏe của bạn.		/helθ/	mirabi-ai-2026-10	active
 body	body	noun	1	health	cơ thể	toàn bộ phần thân thể của người hoặc con vật	Exercise is good for your body and mind.	Tập thể dục tốt cho cơ thể và tinh thần của bạn.		/ˈbɒdi/	mirabi-ai-2026-10	active
-ill	ill	adjective	1	health	ốm, không khỏe	thường đứng sau động từ: be ill, feel ill, fall ill	She was ill, so she stayed at home.	Cô ấy bị ốm nên ở nhà.	sick	/ɪl/	mirabi-ai-2026-10	active
+ill	ill	adjective	1	health	ốm, không khỏe	bị bệnh, trong người mệt; thường đứng sau động từ to be, feel, fall	She was ill, so she stayed at home.	Cô ấy bị ốm nên ở nhà.	sick	/ɪl/	mirabi-ai-2026-10	active
 pain	pain	noun	1	health	cơn đau, sự đau đớn	cảm giác khó chịu khi bị thương hoặc bị bệnh	I have a pain in my leg.	Tôi bị đau ở chân.		/peɪn/	mirabi-ai-2026-10	active
 hurt	hurt	verb	1	health	đau, bị đau	khi một bộ phận cơ thể đang đau	My head hurts.	Đầu tôi đau.		/hɜːt/	mirabi-ai-2026-10	active
 cough	cough	verb	1	health	ho	đẩy mạnh hơi ra khỏi cổ họng khi bị cảm, đau họng	He coughed all night.	Anh ấy ho suốt đêm.		/kɒf/	mirabi-ai-2026-10	active
@@ -51,7 +51,7 @@ shoulder	shoulder	noun	1	health	vai	phần nối cánh tay với thân	He carrie
 knee	knee	noun	1	health	đầu gối	khớp ở giữa chân, giúp chân gập lại	I fell and hurt my knee.	Tôi bị ngã và đau đầu gối.		/niː/	mirabi-ai-2026-10	active
 finger	finger	noun	1	health	ngón tay	một trong năm phần dài ở cuối bàn tay	I cut my finger.	Tôi bị đứt ngón tay.		/ˈfɪŋɡə/	mirabi-ai-2026-10	active
 toe	toe	noun	1	health	ngón chân	một trong năm phần nhỏ ở đầu bàn chân	I hit my toe on the door.	Tôi bị va ngón chân vào cửa.		/təʊ/	mirabi-ai-2026-10	active
-blood	blood	noun	1	health	máu	chất lỏng màu đỏ chảy trong cơ thể	There was blood on his shirt.	Có máu trên áo anh ấy.		/blʌd/	mirabi-ai-2026-10	active
+blood	blood	noun	1	health	máu	chất lỏng màu đỏ chảy trong cơ thể	The nurse cleaned the blood from my knee.	Cô y tá lau vết máu trên đầu gối tôi.		/blʌd/	mirabi-ai-2026-10	active
 bone	bone	noun	1	health	xương	phần cứng bên trong cơ thể	Milk is good for your bones.	Sữa tốt cho xương của bạn.		/bəʊn/	mirabi-ai-2026-10	active
 skin	skin	noun	1	health	da	lớp ngoài cùng bao phủ cơ thể	The sun can hurt your skin.	Ánh nắng có thể làm hại da của bạn.		/skɪn/	mirabi-ai-2026-10	active
 brain	brain	noun	1	health	não, bộ não	cơ quan trong đầu dùng để suy nghĩ	Sleep is good for your brain.	Ngủ tốt cho não của bạn.		/breɪn/	mirabi-ai-2026-10	active

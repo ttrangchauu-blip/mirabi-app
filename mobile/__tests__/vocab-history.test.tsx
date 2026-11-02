@@ -35,7 +35,8 @@ function historyPage(all: VocabHistoryItem[], url: string) {
   const q = fold(params.get('q') ?? '');
   const limit = Number(params.get('limit') ?? 15);
   const offset = Number(params.get('offset') ?? 0);
-  const matching = all.filter((i) => (filter === 'all' || i.status === filter)
+  const memory = (i: VocabHistoryItem) => (i.status === 'review' ? 'review' : 'learned');
+  const matching = all.filter((i) => (filter === 'all' || i.status === filter || memory(i) === filter)
     && (!q || [i.word, i.meaning_vi, i.context_vi ?? ''].some((v) => fold(v).includes(q))));
   const due = (d: 'en_vi' | 'vi_en') => all.filter((i) => i.directions[d] && i.directions[d]!.last_result !== 'correct').length;
   return { items: matching.slice(offset, offset + limit), total: matching.length, limit, offset,
@@ -84,7 +85,7 @@ function renderLearning() {
 async function openHistory() {
   renderLearning();
   fireEvent.press(await screen.findByRole('button', { name: /^Tiếng Anh\./ }));
-  fireEvent.press(screen.getByRole('button', { name: 'Từ đã học' }));
+  fireEvent.press(screen.getByRole('button', { name: 'Sổ tay từ vựng' }));
 }
 
 beforeEach(async () => {
@@ -96,21 +97,21 @@ test('"Từ đã học" sits on the English game list (not on Math) and lists wo
   const { listCalls } = serve();
   renderLearning();
   fireEvent.press(await screen.findByRole('button', { name: /^Toán\./ }));
-  expect(screen.queryByRole('button', { name: 'Từ đã học' })).toBeNull();
+  expect(screen.queryByRole('button', { name: 'Sổ tay từ vựng' })).toBeNull();
   fireEvent.press(screen.getByRole('button', { name: 'Quay lại' }));
   fireEvent.press(await screen.findByRole('button', { name: /^Tiếng Anh\./ }));
   expect(screen.getByRole('button', { name: /^Bắn thiên thạch \(Việt → Anh\)\./ })).toBeTruthy(); // the games stay as they were
-  fireEvent.press(screen.getByRole('button', { name: 'Từ đã học' }));
+  fireEvent.press(screen.getByRole('button', { name: 'Sổ tay từ vựng' }));
 
-  expect(await screen.findByText('3 từ · 2 cần ôn · mới học gần nhất trước')).toBeTruthy();
-  const rows = () => screen.getAllByRole('button', { name: /, (đúng|cần ôn)$/ }).map((b) => b.props.accessibilityLabel);
-  expect(rows()).toEqual(['bank, ngân hàng, đúng', 'bank, bờ sông, cần ôn', 'cold, lạnh, cần ôn']);
+  expect(await screen.findByText('3 từ · 2 chưa nhớ · mới học gần nhất trước')).toBeTruthy();
+  const rows = () => screen.getAllByRole('button', { name: /, (đã học|chưa nhớ)$/ }).map((b) => b.props.accessibilityLabel);
+  expect(rows()).toEqual(['bank, ngân hàng, đã học', 'bank, bờ sông, chưa nhớ', 'cold, lạnh, chưa nhớ']);
   expect(screen.getAllByText(/^Học gần nhất: Hôm nay, \d\d:\d\d$/)).toHaveLength(3);
 
   expect(screen.queryByRole('button', { name: 'Trang sau' })).toBeNull(); // one page: no pager
 
   fireEvent.changeText(screen.getByLabelText('Tìm từ đã học'), 'song'); // "sông" without accents, in the meaning
-  await waitFor(() => expect(rows()).toEqual(['bank, bờ sông, cần ôn']));
+  await waitFor(() => expect(rows()).toEqual(['bank, bờ sông, chưa nhớ']));
   expect(listCalls.at(-1)!.get('q')).toBe('song');
   fireEvent.changeText(screen.getByLabelText('Tìm từ đã học'), 'BANK');
   await waitFor(() => expect(rows()).toHaveLength(2));
@@ -119,10 +120,10 @@ test('"Từ đã học" sits on the English game list (not on Math) and lists wo
   fireEvent.press(screen.getByRole('button', { name: 'Xóa tìm kiếm' }));
   await waitFor(() => expect(rows()).toHaveLength(3));
 
-  fireEvent.press(screen.getByRole('tab', { name: 'Trả lời đúng' }));
-  await waitFor(() => expect(rows()).toEqual(['bank, ngân hàng, đúng']));
-  fireEvent.press(screen.getByRole('tab', { name: 'Cần ôn' }));
-  await waitFor(() => expect(rows()).toEqual(['bank, bờ sông, cần ôn', 'cold, lạnh, cần ôn']));
+  fireEvent.press(screen.getByRole('tab', { name: 'Đã học' }));
+  await waitFor(() => expect(rows()).toEqual(['bank, ngân hàng, đã học']));
+  fireEvent.press(screen.getByRole('tab', { name: 'Chưa nhớ' }));
+  await waitFor(() => expect(rows()).toEqual(['bank, bờ sông, chưa nhớ', 'cold, lạnh, chưa nhớ']));
   expect(listCalls.at(-1)!.get('filter')).toBe('review');
 });
 
@@ -132,7 +133,7 @@ test('15 words a page: next and previous, the page is kept while a word is open,
   const { listCalls } = serve({ 'GET /api/learning/vocabulary/history/w17': { status: 200, body: { ...many[17], phonetic: null, example_en: null,
     example_vi: null, can_practice: true, attempts: [] } } }, many);
   await openHistory();
-  const rows = async () => (await screen.findAllByRole('button', { name: /, (đúng|cần ôn)$/ })).map((b) => b.props.accessibilityLabel.split(',')[0]);
+  const rows = async () => (await screen.findAllByRole('button', { name: /, (đã học|chưa nhớ)$/ })).map((b) => b.props.accessibilityLabel.split(',')[0]);
   expect(await rows()).toEqual(many.slice(0, 15).map((i) => i.word));
   expect(listCalls[0].get('limit')).toBe('15');
   expect(listCalls[0].get('offset')).toBe('0');
@@ -151,12 +152,12 @@ test('15 words a page: next and previous, the page is kept while a word is open,
   expect(await screen.findByText('Trang 2/3')).toBeTruthy();
 
   // Open a word and come back: still on page 2.
-  fireEvent.press(await screen.findByRole('button', { name: 'word17, nghĩa 17, đúng' }));
+  fireEvent.press(await screen.findByRole('button', { name: 'word17, nghĩa 17, đã học' }));
   expect(await screen.findByText('Lịch sử trả lời')).toBeTruthy();
   fireEvent.press(screen.getByRole('button', { name: 'Quay lại' }));
   expect(await screen.findByText('Trang 2/3')).toBeTruthy();
 
-  fireEvent.press(screen.getByRole('tab', { name: 'Cần ôn' })); // 8 words: one page, from the start
+  fireEvent.press(screen.getByRole('tab', { name: 'Chưa nhớ' })); // 8 words: one page, from the start
   await waitFor(() => expect(listCalls.at(-1)!.get('offset')).toBe('0'));
   expect(await rows()).toEqual(many.filter((i) => i.status === 'review').map((i) => i.word));
   expect(screen.queryByText(/^Trang /)).toBeNull();
@@ -166,7 +167,7 @@ test('a word shows its meaning, example, results per game and every answer; no p
   serve();
   const speak = jest.spyOn(Speech, 'speak').mockImplementation(() => {});
   await openHistory();
-  fireEvent.press(await screen.findByRole('button', { name: 'bank, bờ sông, cần ôn' }));
+  fireEvent.press(await screen.findByRole('button', { name: 'bank, bờ sông, chưa nhớ' }));
   expect(await screen.findByText('bờ sông')).toBeTruthy();
   expect(screen.getByText('vùng đất dọc hai bên sông')).toBeTruthy();
   expect(screen.getByText('We had a picnic on the river bank.')).toBeTruthy();
@@ -180,13 +181,13 @@ test('a word shows its meaning, example, results per game and every answer; no p
   fireEvent.press(screen.getByRole('button', { name: 'Nghe phát âm bank' }));
   expect(speak).toHaveBeenCalledWith('bank', expect.objectContaining({ language: 'en-US' }));
   fireEvent.press(screen.getByRole('button', { name: 'Quay lại' }));
-  expect(await screen.findByText('3 từ · 2 cần ôn · mới học gần nhất trước')).toBeTruthy();
+  expect(await screen.findByText('3 từ · 2 chưa nhớ · mới học gần nhất trước')).toBeTruthy();
 });
 
 test('"Luyện lại" plays one word, or every "Cần ôn" word, in the game chosen', async () => {
   const { server } = serve({ 'POST /api/learning/vocabulary/practice': { status: 201, body: review() } });
   await openHistory();
-  fireEvent.press(await screen.findByRole('button', { name: 'bank, bờ sông, cần ôn' }));
+  fireEvent.press(await screen.findByRole('button', { name: 'bank, bờ sông, chưa nhớ' }));
   fireEvent.press(await screen.findByRole('button', { name: 'Luyện lại' }));
   expect(screen.getByText('Có từ cần ôn ở chiều này')).toBeTruthy(); // Anh → Việt is the one due
   fireEvent.press(screen.getByRole('button', { name: 'Bắn từ tiếng Anh (Anh → Việt)' }));
@@ -199,8 +200,8 @@ test('"Luyện lại" plays one word, or every "Cần ôn" word, in the game cho
 test('practising the whole "Cần ôn" group sends no word list (the backend takes the words due)', async () => {
   const { server } = serve({ 'POST /api/learning/vocabulary/practice': { status: 201, body: review({ game: 'meteor', variant: 'meteor', required_count: 2 }) } });
   await openHistory();
-  fireEvent.press(await screen.findByRole('tab', { name: 'Cần ôn' }));
-  fireEvent.press(screen.getByRole('button', { name: 'Luyện tất cả từ cần ôn (2)' }));
+  fireEvent.press(await screen.findByRole('tab', { name: 'Chưa nhớ' }));
+  fireEvent.press(screen.getByRole('button', { name: 'Ôn tất cả từ chưa nhớ (2)' }));
   fireEvent.press(screen.getByRole('button', { name: 'Bắn thiên thạch (Việt → Anh)' }));
   await waitFor(() => expect(server.callsTo('POST /api/learning/vocabulary/practice')).toHaveLength(1));
   const body = server.callsTo('POST /api/learning/vocabulary/practice')[0].body;

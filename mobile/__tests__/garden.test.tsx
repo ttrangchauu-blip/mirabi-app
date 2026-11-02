@@ -39,7 +39,7 @@ describe('Vườn của tôi', () => {
       'POST /api/garden/plots/0/care': () => (++attempt === 1 ? networkDown()
         : { status: 200, body: { cared: true, replayed: false, reason: null, garden: garden(daisy(0, { water: WATERED })) } }),
     });
-    wrap(<GardenScreen user={USER as any} onBack={() => {}} onOpenInventory={() => {}} />);
+    wrap(<GardenScreen user={USER as any} onOpenInventory={() => {}} />);
     expect(await screen.findByText('1/6 ô')).toBeTruthy();
     expect(screen.getByText('1 cần tưới')).toBeTruthy();
     fireEvent.press(screen.getByLabelText(/^Hạt hoa cúc, Đang lớn.*chưa tưới hôm nay.*chạm để xem chi tiết$/));
@@ -57,23 +57,6 @@ describe('Vườn của tôi', () => {
     fireEvent.press(screen.getByLabelText(/^Hạt hoa cúc, Đang lớn, lớn tiếp sau khoảng \d giờ, đã tưới hôm nay · bạn/));
     expect(await screen.findByLabelText('Tưới nước, Đã tưới hôm nay')).toBeTruthy();
     expect(server.callsTo('POST /api/garden/plots/0/care')).toHaveLength(2);
-  });
-
-  it('lists friends in "Vườn bạn bè" with "Thăm vườn", and says when there is nobody yet', async () => {
-    mockServer({ 'GET /api/garden': { status: 200, body: garden() }, 'GET /api/friends': { status: 200, body: { items: [FRIEND] } } });
-    const onVisitGarden = jest.fn();
-    const onTabChange = jest.fn();
-    wrap(<GardenScreen user={USER as any} onBack={() => {}} onOpenInventory={() => {}} onVisitGarden={onVisitGarden} onTabChange={onTabChange} />);
-    fireEvent.press(await screen.findByText('Vườn bạn bè'));
-    expect(onTabChange).toHaveBeenCalledWith('friends');
-    expect(await screen.findByText('May')).toBeTruthy();
-    fireEvent.press(screen.getByLabelText('Thăm vườn'));
-    expect(onVisitGarden).toHaveBeenCalledWith(7);
-
-    mockServer({ 'GET /api/friends': { status: 200, body: { items: [] } } });
-    screen.unmount();
-    wrap(<GardenScreen user={USER as any} onBack={() => {}} onOpenInventory={() => {}} tab="friends" />);
-    expect(await screen.findByText('Chưa có bạn bè')).toBeTruthy();
   });
 });
 
@@ -118,9 +101,7 @@ describe('Vườn bạn bè', () => {
   });
 });
 
-it('opens Vườn nhà from Tiện ích', () => {
-  const onOpenGarden = jest.fn();
-  wrap(<MoreTab user={USER as any} onOpenProfile={() => {}} onOpenGarden={onOpenGarden} />);
-  fireEvent.press(screen.getByLabelText('Vườn nhà: Trồng và chăm cây'));
-  expect(onOpenGarden).toHaveBeenCalled();
+it('is a place of Cuộc sống Mirabi, so Tiện ích has no way into it of its own', () => {
+  wrap(<MoreTab user={USER as any} onOpenProfile={() => {}} />);
+  expect(screen.queryByText('Vườn nhà')).toBeNull();
 });

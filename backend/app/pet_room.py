@@ -34,7 +34,8 @@ from .companion import latest_walk
 from .db import get_db
 from .errors import APIError
 from .friends import no_control_chars, presence_for
-from .memories import create_once, pet_data_uri, view as memory_view
+from .memories import Caption, create_once, pet_data_uri, view as memory_view
+from .memory_render import clean, ellipsize
 from .models import (FocusRoomLayout, InventoryStack, Memory, PetRoom, PetRoomItem, PlacedItem, PomodoroSettings, StudySession,
                      User, as_utc, utcnow)
 from .security import current_user
@@ -227,8 +228,8 @@ class RoomInput(LayoutInput):
 
 class PhotoInput(BaseModel):
     pose: Literal["rug", "study", "rest"] = "rug"
-    title: str | None = Field(default=None, max_length=40)
-    message: str | None = Field(default=None, max_length=60)
+    title: Caption | None = Field(default=None, max_length=40)
+    message: Caption | None = Field(default=None, max_length=60)
 
     @field_validator("title", "message")
     @classmethod
@@ -820,8 +821,8 @@ def scene_markup(room_layout: dict, pose: str, pet_id: str, level: int) -> str:
     return room_markup(room_layout) + pet + front
 
 
-FONT_BOLD = "Nunito_800ExtraBold, Nunito, sans-serif"
-FONT_TEXT = "Nunito_600SemiBold, Nunito, sans-serif"
+# One family; `font-weight` picks the Nunito file (see memories.FONT).
+FONT = "Nunito"
 
 
 def photo_area() -> tuple[float, float, float]:
@@ -840,8 +841,11 @@ def render_photo(snapshot: dict, title: str, message: str | None, date_text: str
     scene_width, scene_height = width * scale, height * scale
     left = (1080 - scene_width) / 2
     scene = scene_markup(snapshot["room"]["layout"], snapshot["pose"], snapshot["pet_id"], snapshot["level"])
-    caption = html.escape(message) if message else html.escape(f"{snapshot['pet_name']} · Cấp {snapshot['level']}")
-    meta = html.escape(f"{snapshot['pet_name']} · Cấp {snapshot['level']} · {date_text}" if message else date_text)
+    # Each caption line is measured to stay inside the card (936 px from x 72); the last one also clears "Mirabi".
+    pet = f"{snapshot['pet_name']} · Cấp {snapshot['level']}"
+    title = ellipsize(clean(title), 42, 936)
+    caption = html.escape(ellipsize(clean(message or "") or clean(pet), 28, 936, 600), quote=False)
+    meta = html.escape(ellipsize(clean(f"{pet} · {date_text}" if message else date_text), 26, 800, 600), quote=False)
     frame = f'x="{left:.1f}" y="48" width="{scene_width:.1f}" height="{scene_height:.1f}" rx="44"'
     return (
         '<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">'
@@ -849,10 +853,10 @@ def render_photo(snapshot: dict, title: str, message: str | None, date_text: str
         '<rect width="1080" height="1350" fill="#FBF6EE"/>'
         f'<g clip-path="url(#room-photo-frame)"><g transform="translate({left:.1f} {48 - top * scale:.1f}) scale({scale:.4f})">{scene}</g></g>'
         f'<rect {frame} fill="none" stroke="#FFFFFF" stroke-width="6"/>'
-        f'<text x="72" y="1196" font-size="42" font-weight="800" fill="#173B52" font-family="{FONT_BOLD}">{html.escape(title)}</text>'
-        f'<text x="72" y="1246" font-size="28" font-weight="600" fill="#4F6C79" font-family="{FONT_TEXT}">{caption}</text>'
-        f'<text x="72" y="1296" font-size="26" font-weight="600" fill="#6A8492" font-family="{FONT_TEXT}">{meta}</text>'
-        f'<text x="1008" y="1296" text-anchor="end" font-size="30" font-weight="800" fill="#136FA8" font-family="{FONT_BOLD}">Mirabi</text>'
+        f'<text x="72" y="1196" font-size="42" font-weight="800" fill="#173B52" font-family="{FONT}">{html.escape(title, quote=False)}</text>'
+        f'<text x="72" y="1246" font-size="28" font-weight="600" fill="#4F6C79" font-family="{FONT}">{caption}</text>'
+        f'<text x="72" y="1296" font-size="26" font-weight="600" fill="#6A8492" font-family="{FONT}">{meta}</text>'
+        f'<text x="1008" y="1296" text-anchor="end" font-size="30" font-weight="800" fill="#136FA8" font-family="{FONT}">Mirabi</text>'
         '</svg>')
 
 

@@ -5,6 +5,7 @@ from fastapi import APIRouter, BackgroundTasks, Depends, Header, Request, Respon
 from sqlalchemy import select, update
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
+from . import education
 from .config import settings
 from .db import get_db
 from .email import email_delivery_configured, send_password_reset_email
@@ -46,14 +47,18 @@ def register(data: RegisterInput, request: Request, db: Session = Depends(get_db
     if db.scalar(select(User.id).where(User.email == data.email)):
         raise APIError(409, "email_taken", "Email already registered")
     display_name = data.display_name or data.email.split("@")[0][:80] or "Lunaria"
+    region = education.check_region(data.education_region) if data.school_grade else None
     user = User(email=data.email, password_hash=hash_password(data.password), display_name=display_name,
-                role="admin" if data.email.lower() in settings.admin_email_list else "user")
+                role="admin" if data.email.lower() in settings.admin_email_list else "user",
+                age=data.age)
     db.add(user)
     try:
         db.flush()
     except IntegrityError:  # lost a race with a concurrent registration
         db.rollback()
         raise APIError(409, "email_taken", "Email already registered")
+    if data.school_grade:  # the confirmed grade, locked from now on (education.py moves it on each school year)
+        education.enroll(db, user, data.school_grade, region)
     db.commit()
     db.refresh(user)
     return user
@@ -72,6 +77,13 @@ def login(data: LoginInput, request: Request, db: Session = Depends(get_db),
     # Only reached with the correct password, so this doesn't leak account existence.
     if user.status != "active":
         raise APIError(403, "account_disabled", "This account is disabled")
+    try:
+        # A school year that began while the user was away moves the grade on now (never twice). It commits its own
+        # work, so it runs before this request changes anything; a failure never blocks signing in.
+        education.sync(db, user)
+    except Exception:
+        log.exception("School year check failed on login for user %s", user.id)
+        db.rollback()
     # Admin assignment follows backend deployment configuration, not client input.
     expected_role = "admin" if user.email.lower() in settings.admin_email_list else "user"
     if user.role != expected_role:

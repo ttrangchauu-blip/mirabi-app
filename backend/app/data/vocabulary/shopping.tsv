@@ -1,0 +1,43 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic	source	status
+buy	buy	verb	1	shopping	mua		I want to buy a new pen.	Tôi muốn mua một cái bút mới.		/baɪ/	mirabi-ai-2026-10	active
+price	price	noun	1	shopping	giá, giá tiền		What is the price of this bag?	Giá của chiếc túi này là bao nhiêu?		/praɪs/	mirabi-ai-2026-10	active
+cheap	cheap	adjective	1	shopping	rẻ		These apples are cheap today.	Hôm nay táo rẻ.	inexpensive	/tʃiːp/	mirabi-ai-2026-10	active
+expensive	expensive	adjective	1	shopping	đắt, đắt tiền		That watch is too expensive.	Chiếc đồng hồ đó đắt quá.		/ɪkˈspensɪv/	mirabi-ai-2026-10	active
+supermarket	supermarket	noun	1	shopping	siêu thị		We buy food at the supermarket.	Chúng tôi mua thức ăn ở siêu thị.		/ˈsuːpəmɑːkɪt/	mirabi-ai-2026-10	active
+pay	pay	verb	1	shopping	trả tiền, thanh toán		Can I pay for the book now?	Tôi trả tiền quyển sách bây giờ được không?		/peɪ/	mirabi-ai-2026-10	active
+go_shopping	go shopping	phrase	1	shopping	đi mua sắm		We go shopping on Sunday.	Chúng tôi đi mua sắm vào Chủ nhật.			mirabi-ai-2026-10	active
+toy_shop	toy shop	noun	1	shopping	cửa hàng đồ chơi		There is a big toy shop near my house.	Gần nhà tôi có một cửa hàng đồ chơi lớn.	toy store		mirabi-ai-2026-10	active
+shopping_bag	shopping bag	noun	2	shopping	túi đựng đồ mua sắm		Bring a shopping bag to the market.	Hãy mang theo túi đựng đồ khi đi chợ.			mirabi-ai-2026-10	active
+shop_assistant	shop assistant	noun	2	shopping	nhân viên bán hàng	người phục vụ khách trong cửa hàng	The shop assistant helped me find a size.	Nhân viên bán hàng giúp tôi tìm cỡ phù hợp.	sales assistant|shop clerk		mirabi-ai-2026-10	active
+discount	discount	noun	2	shopping	sự giảm giá, khoản giảm giá		Students get a ten percent discount.	Học sinh được giảm giá mười phần trăm.		/ˈdɪskaʊnt/	mirabi-ai-2026-10	active
+receipt	receipt	noun	2	shopping	biên lai, phiếu thu	giấy nhận khi đã trả tiền	Keep the receipt in case you want to return it.	Hãy giữ biên lai phòng khi bạn muốn trả lại hàng.		/rɪˈsiːt/	mirabi-ai-2026-10	active
+cashier	cashier	noun	2	shopping	nhân viên thu ngân		Pay the cashier at the front of the shop.	Hãy trả tiền cho thu ngân ở phía trước cửa hàng.		/kæˈʃɪə/	mirabi-ai-2026-10	active
+shopping_list	shopping list	noun	2	shopping	danh sách đồ cần mua		Mum wrote a shopping list for me.	Mẹ viết cho tôi danh sách đồ cần mua.			mirabi-ai-2026-10	active
+basket	basket	noun	2	shopping	cái giỏ, cái rổ		Put the fruit in the basket.	Hãy bỏ trái cây vào giỏ.		/ˈbɑːskɪt/	mirabi-ai-2026-10	active
+trolley	trolley	noun	2	shopping	xe đẩy hàng	trong siêu thị	We need a trolley for all these things.	Chúng ta cần một xe đẩy cho chỗ đồ này.	shopping cart|cart	/ˈtrɒli/	mirabi-ai-2026-10	active
+bakery	bakery	noun	2	shopping	tiệm bánh		I buy bread at the bakery every morning.	Sáng nào tôi cũng mua bánh mì ở tiệm bánh.		/ˈbeɪkəri/	mirabi-ai-2026-10	active
+bookshop	bookshop	noun	2	shopping	hiệu sách, nhà sách		There is a new bookshop in town.	Có một hiệu sách mới trong thị trấn.	bookstore	/ˈbʊkʃɒp/	mirabi-ai-2026-10	active
+shopping_mall	shopping mall	noun	2	shopping	trung tâm thương mại		The shopping mall has a cinema on the top floor.	Trung tâm thương mại có rạp chiếu phim ở tầng trên cùng.	shopping centre|shopping center|mall		mirabi-ai-2026-10	active
+gift_shop	gift shop	noun	2	shopping	cửa hàng quà lưu niệm		We bought postcards at the gift shop.	Chúng tôi mua bưu thiếp ở cửa hàng quà lưu niệm.	souvenir shop		mirabi-ai-2026-10	active
+cost	cost	verb	2	shopping	có giá, trị giá		How much does this hat cost?	Chiếc mũ này giá bao nhiêu?		/kɒst/	mirabi-ai-2026-10	active
+price_tag	price tag	noun	2	shopping	nhãn ghi giá		Look at the price tag before you buy.	Hãy xem nhãn giá trước khi mua.			mirabi-ai-2026-10	active
+half_price	half price	phrase	2	shopping	nửa giá, giảm một nửa		All the shoes are half price today.	Hôm nay tất cả giày đều giảm một nửa giá.	half-price		mirabi-ai-2026-10	active
+clothes_shop	clothes shop	noun	2	shopping	cửa hàng quần áo		She works in a clothes shop.	Cô ấy làm việc ở một cửa hàng quần áo.	clothing store|clothes store		mirabi-ai-2026-10	active
+flower_shop	flower shop	noun	2	shopping	cửa hàng hoa		We bought roses at the flower shop.	Chúng tôi mua hoa hồng ở cửa hàng hoa.	florist's|florist		mirabi-ai-2026-10	active
+convenience_store	convenience store	noun	2	shopping	cửa hàng tiện lợi		The convenience store is open all night.	Cửa hàng tiện lợi mở cửa suốt đêm.			mirabi-ai-2026-10	active
+shopkeeper	shopkeeper	noun	2	shopping	chủ cửa hàng		The shopkeeper said hello with a smile.	Chủ cửa hàng mỉm cười chào chúng tôi.	store owner	/ˈʃɒpkiːpə/	mirabi-ai-2026-10	active
+pay_by_card	pay by card	phrase	2	shopping	trả bằng thẻ		Can I pay by card here?	Ở đây tôi trả bằng thẻ được không?			mirabi-ai-2026-10	active
+bargain	bargain	verb	2	shopping	mặc cả, trả giá	khi mua hàng ở chợ	My aunt is good at bargaining at the market.	Dì tôi rất giỏi mặc cả ở chợ.	haggle	/ˈbɑːɡən/	mirabi-ai-2026-10	active
+refund	refund	noun	3	shopping	khoản tiền hoàn lại		The shop gave me a refund for the broken toy.	Cửa hàng hoàn lại tiền cho tôi vì món đồ chơi bị hỏng.		/ˈriːfʌnd/	mirabi-ai-2026-10	active
+on_sale	on sale	phrase	3	shopping	đang được bán giảm giá		These jackets are on sale this week.	Những chiếc áo khoác này đang giảm giá trong tuần này.			mirabi-ai-2026-10	active
+special_offer	special offer	noun	3	shopping	ưu đãi đặc biệt, khuyến mãi		There is a special offer: buy one, get one free.	Có ưu đãi đặc biệt: mua một tặng một.			mirabi-ai-2026-10	active
+in_stock	in stock	phrase	3	shopping	còn hàng		Is this phone still in stock?	Chiếc điện thoại này còn hàng không?			mirabi-ai-2026-10	active
+out_of_stock	out of stock	phrase	3	shopping	hết hàng		Sorry, that size is out of stock.	Xin lỗi, cỡ đó hết hàng rồi.	sold out		mirabi-ai-2026-10	active
+delivery	delivery	noun	3	shopping	sự giao hàng		The delivery is free for orders over 200,000 dong.	Miễn phí giao hàng cho đơn trên 200.000 đồng.		/dɪˈlɪvəri/	mirabi-ai-2026-10	active
+order_online	order online	phrase	3	shopping	đặt hàng trực tuyến		Many people order online now.	Bây giờ nhiều người đặt hàng trực tuyến.	buy online		mirabi-ai-2026-10	active
+voucher	voucher	noun	3	shopping	phiếu mua hàng, phiếu giảm giá		I used a voucher to get a discount.	Tôi dùng phiếu giảm giá để được bớt tiền.	coupon	/ˈvaʊtʃə/	mirabi-ai-2026-10	active
+checkout	checkout	noun	3	shopping	quầy thanh toán		There is a long queue at the checkout.	Có một hàng dài ở quầy thanh toán.		/ˈtʃekaʊt/	mirabi-ai-2026-10	active
+department_store	department store	noun	3	shopping	cửa hàng bách hóa		The department store sells clothes, toys and furniture.	Cửa hàng bách hóa bán quần áo, đồ chơi và đồ nội thất.			mirabi-ai-2026-10	active
+online_shopping	online shopping	noun	3	shopping	mua sắm trực tuyến		Online shopping is quick and easy.	Mua sắm trực tuyến nhanh và tiện.			mirabi-ai-2026-10	active
+window_shopping	window shopping	noun	3	shopping	ngắm hàng (không mua)		We went window shopping in the city centre.	Chúng tôi đi ngắm hàng ở trung tâm thành phố.			mirabi-ai-2026-10	active
+best_seller	best seller	noun	3	shopping	món hàng bán chạy nhất		This book is a best seller.	Quyển sách này bán chạy nhất.	bestseller		mirabi-ai-2026-10	active

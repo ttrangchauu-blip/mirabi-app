@@ -37,6 +37,8 @@ Each feature router lives in its own `backend/app` module and is registered in `
 | `profile.py` | Profile, pet adoption, onboarding |
 | `companion.py` | Pet room, daily quests, walks and collection |
 | `tasks.py` | Personal scheduled tasks and calendar occurrences |
+| `work.py` | Work Quest: projects, dashboard, statistics, reward chests (tasks themselves stay in `tasks.py`) — docs/MIRABI_LIFE.md |
+| `life.py` | Góc thư giãn: moods, private journal, relaxation sessions, room ambience — docs/MIRABI_LIFE.md |
 | `friends.py` | Study Together: social profile and privacy, search, friend requests, blocks, reports (+ admin queue) |
 | `study_rooms.py` | Study Together: rooms, invitations, server-driven group session, summaries, history, background sweep |
 | `team_quests.py` | Study Together: cooperative room quests from fixed templates |

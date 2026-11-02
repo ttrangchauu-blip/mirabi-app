@@ -14,6 +14,13 @@ A runnable MVP scaffold inspired by the provided reference image. It includes:
 - Private pet memory album with automatic milestones, manual captures, filters, favorites, download and privacy-safe sharing
 - English & Math learning games (vocabulary, grammar, arithmetic, missing numbers, comparison, order of operations)
   with server-side scoring, progress, review list and EXP — see [docs/LEARNING_GAMES.md](docs/LEARNING_GAMES.md)
+- Cuộc sống Mirabi, for users aged 16 and over: Nhiệm vụ công việc (projects as islands, a mission board, steps, deadlines,
+  reward chests; on top of the existing tasks and EXP cap), Góc thư giãn (a Healing mode of the personal room), Phiêu lưu
+  cuộc sống (real-life activities on an adventure map), Vườn tài chính (savings goals as trees, budgets; whole VND),
+  Thị trấn Mirabi (friends' houses, gifts, community buildings) and Hành trình sự nghiệp (career skill trees from
+  `backend/app/data/careers.json`) — see [docs/MIRABI_LIFE.md](docs/MIRABI_LIFE.md)
+- Lớp học & Kho lưu trữ học tập: the grade is locked at registration and moves up on the configured first day of
+  each school year; finished years (the last three) can be reread and reviewed — see [docs/LEARNING_ARCHIVE.md](docs/LEARNING_ARCHIVE.md)
 
 > This is a functional starter, not a production-ready clone of every visual detail in the reference. Icons, illustrations and art assets (the pets are built-in vector art) can be replaced separately — see [Pet artwork and animation](#pet-artwork-and-animation).
 
@@ -173,6 +180,13 @@ code invalidates older ones.
 ## First sign-in: pet adoption and welcome tour
 1. **Register** creates the account only (`201` with the public profile, no tokens). The app returns to the
    login screen with email and password pre-filled (kept in memory only, never stored).
+   The form also asks for the age (a number picker, 4–100, nothing chosen in advance) and shows the grade it
+   suggests ("Lớp học gợi ý", plus "Chưa đi học", "Sinh viên", "Người đi làm/Học tự do"), which the user confirms or
+   changes; both are sent as `age` and `school_grade`. Rules and suggestions live in
+   [`backend/app/study_profile.py`](backend/app/study_profile.py) (mirrored by `mobile/src/studyProfile.ts`). They are
+   edited in Tiện ích → Cài đặt → "Độ tuổi & lớp học" (`PUT /api/profile/study`); accounts created before have none
+   (`null`) and are asked on their next visit to Học tập. `GET /api/learning/catalog` returns the suggestions for the
+   grade as `study_profile` (subjects, games, math grade, topics; `null` until a grade is given).
 2. **First login**: while `user.pet_name` is `null` the app shows the pet picker. The user chooses one of six pets
    — one per element: Water (Sóng, dolphin), Fire (Hỏa, fox), Grass (Mầm, turtle), Ice (Tuyết, penguin chick),
    Electric (Tia, bunny), Mist (Mây, cat); elements live in [`mobile/src/elements.ts`](mobile/src/elements.ts) —
@@ -230,14 +244,20 @@ Mobile `.env`:
 - `GET /api/campus/courses`
 - `GET /api/career/recommendations`, `POST /api/career/quiz`
 - `GET /api/community/posts`, `POST /api/community/posts`, `POST /api/community/posts/{id}/like`
-- `GET /api/profile`, `PATCH /api/profile`
+- `GET /api/profile`, `PATCH /api/profile`, `PUT /api/profile/study` (age and school grade)
 - `GET /api/room/items`, `POST /api/room/equip`
 - Personal pet room: `GET/PUT /api/personal-room`, `POST /api/personal-room/photo/preview`, `POST /api/personal-room/photo`,
   `GET /api/personal-room/visit/{user_id}`, `POST /api/personal-room/visit/{user_id}/greetings`,
   `POST /api/personal-room/visit/{user_id}/study-invite`. See [docs/personal-room.md](docs/personal-room.md) and
   [docs/friend-visits.md](docs/friend-visits.md) (friends, friend code/QR, visits, greetings, cheers, study invites).
-- Memory album: `GET/POST /api/memories`, `GET/PATCH/DELETE /api/memories/{id}`,
-  `GET /api/memories/pending`, `POST /api/memories/{id}/acknowledge`
+- Memory album: `GET/POST /api/memories`, `POST /api/memories/preview`, `GET/PATCH/DELETE /api/memories/{id}`,
+  `GET /api/memories/{id}/image`, `GET /api/memories/pending`, `POST /api/memories/{id}/acknowledge`. Each picture is
+  drawn by the backend from a snapshot taken when the event happened (pet, level, name, accessory, session result,
+  friends, keepsake) and stored; the app shows it as stored and never redraws it (see `backend/app/memories.py`). The
+  detail view, the create preview and "Tải ảnh" / "Chia sẻ" all use one 1080 x 1350 PNG rendered from the stored
+  picture with the app's Nunito files (`backend/app/memory_render.py`, fonts in `backend/app/data/fonts`, kept equal
+  to `@expo-google-fonts/nunito` by `mobile/__tests__/memory-art.test.ts`). Item and plant drawings reach the
+  backend through `mobile/assets/memory-art.json` (`node mobile/scripts/export-memory-art.mjs`).
 - Learning games: `/api/learning/catalog`, `/api/learning/lessons/{id}`, `/api/learning/sessions` (+ `/current`,
   `/{id}/answer|hint|reveal|miss|next|pause|resume|extend|complete|abandon|result`), `/api/learning/review`,
   `/api/learning/progress`. See [docs/LEARNING_GAMES.md](docs/LEARNING_GAMES.md).

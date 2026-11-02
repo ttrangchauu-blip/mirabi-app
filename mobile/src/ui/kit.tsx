@@ -5,6 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { avatarById } from '../avatars';
 import { Text, TextInput } from '../components/Typography';
 import { appTheme as t } from '../theme';
+import { elevation, radius } from './design';
 
 export type IconName = React.ComponentProps<typeof Ionicons>['name'];
 
@@ -136,7 +137,7 @@ export function Segmented<T extends string>({ options, value, onChange, compact 
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },
-  card: { backgroundColor: t.card, borderRadius: 24, padding: 18, marginBottom: 14,
+  card: { backgroundColor: t.card, borderRadius: radius.lg, padding: 18, marginBottom: 14, ...elevation.card,
     shadowColor: t.shadow, shadowOpacity: 0.08, shadowRadius: 16, shadowOffset: { width: 0, height: 6 }, elevation: 2 },
   header: { flexDirection: 'row', alignItems: 'center', marginBottom: 18, gap: 12 },
   title: { fontSize: 30, fontWeight: '900', color: t.ink, letterSpacing: -0.3 },
@@ -146,13 +147,13 @@ const styles = StyleSheet.create({
   sectionAction: { fontSize: 14, fontWeight: '800', color: t.accent },
   buttonWrap: { borderRadius: 16, marginTop: 10 },
   buttonShadow: { shadowColor: t.shadow, shadowOpacity: 0.22, shadowRadius: 10, shadowOffset: { width: 0, height: 5 }, elevation: 4 },
-  button: { minHeight: 50, borderRadius: 16, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, paddingHorizontal: 18 },
+  button: { minHeight: 50, borderRadius: radius.md, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, paddingHorizontal: 18 },
   secondary: { backgroundColor: t.tint },
   dangerBtn: { backgroundColor: t.dangerBg },
   buttonText: { fontSize: 16, fontWeight: '800' },
   pressed: { transform: [{ scale: 0.98 }], opacity: 0.92 },
   dimmed: { opacity: 0.55 },
-  chip: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 14, paddingVertical: 9, borderRadius: 999,
+  chip: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 14, paddingVertical: 9, borderRadius: radius.pill,
     backgroundColor: t.tint, minHeight: 38 },
   chipSelected: { backgroundColor: t.accent },
   chipText: { fontSize: 14, fontWeight: '700', color: t.accent },

@@ -1,0 +1,58 @@
+key	word	pos	difficulty	topic	meaning_vi	context_vi	example_en	example_vi	accepted	phonetic	source	status
+shirt	shirt	noun	1	clothes	áo sơ mi		He wears a white shirt to school.	Bạn ấy mặc áo sơ mi trắng đi học.		/ʃɜːt/	mirabi-ai-2026-10	active
+t-shirt	T-shirt	noun	1	clothes	áo phông, áo thun		I like this blue T-shirt.	Tôi thích chiếc áo phông màu xanh này.	tee shirt	/ˈtiː ʃɜːt/	mirabi-ai-2026-10	active
+dress	dress	noun	1	clothes	váy liền, đầm		She has a new red dress.	Bạn ấy có một chiếc váy liền màu đỏ mới.		/dres/	mirabi-ai-2026-10	active
+skirt	skirt	noun	1	clothes	chân váy		Her skirt is long and blue.	Chân váy của cô ấy dài và màu xanh.		/skɜːt/	mirabi-ai-2026-10	active
+trousers	trousers	noun	1	clothes	quần dài		These trousers are too long for me.	Chiếc quần dài này quá dài với tôi.	pants	/ˈtraʊzəz/	mirabi-ai-2026-10	active
+shorts	shorts	noun	1	clothes	quần soóc, quần đùi		We wear shorts in summer.	Chúng tôi mặc quần soóc vào mùa hè.		/ʃɔːts/	mirabi-ai-2026-10	active
+jacket	jacket	noun	1	clothes	áo khoác		Put on your jacket, it's cold.	Mặc áo khoác vào đi, trời lạnh đấy.		/ˈdʒækɪt/	mirabi-ai-2026-10	active
+coat	coat	noun	1	clothes	áo khoác dài, áo choàng		Grandpa wears a warm coat in winter.	Ông mặc áo khoác dài ấm áp vào mùa đông.		/kəʊt/	mirabi-ai-2026-10	active
+hat	hat	noun	1	clothes	cái mũ, cái nón		Wear a hat when you go out in the sun.	Hãy đội mũ khi ra ngoài nắng.		/hæt/	mirabi-ai-2026-10	active
+cap	cap	noun	1	clothes	mũ lưỡi trai		He has a red cap on his head.	Cậu ấy đội một chiếc mũ lưỡi trai màu đỏ.		/kæp/	mirabi-ai-2026-10	active
+shoes	shoes	noun	1	clothes	đôi giày		Take off your shoes at the door.	Hãy cởi giày ở cửa.		/ʃuːz/	mirabi-ai-2026-10	active
+boots	boots	noun	1	clothes	đôi ủng, giày bốt		Wear your boots on rainy days.	Hãy đi ủng vào những ngày mưa.		/buːts/	mirabi-ai-2026-10	active
+sandals	sandals	noun	1	clothes	dép xăng-đan, dép quai hậu		She wears sandals at the beach.	Cô ấy đi dép xăng-đan ở bãi biển.		/ˈsændlz/	mirabi-ai-2026-10	active
+scarf	scarf	noun	1	clothes	khăn quàng cổ		My mum made me a warm scarf.	Mẹ đan cho tôi một chiếc khăn quàng cổ ấm.		/skɑːf/	mirabi-ai-2026-10	active
+gloves	gloves	noun	1	clothes	đôi găng tay		Wear gloves to keep your hands warm.	Hãy đeo găng tay để giữ ấm đôi tay.		/ɡlʌvz/	mirabi-ai-2026-10	active
+sweater	sweater	noun	1	clothes	áo len		This sweater is very soft.	Chiếc áo len này rất mềm.	jumper	/ˈswetə/	mirabi-ai-2026-10	active
+uniform	uniform	noun	1	clothes	đồng phục		We wear a uniform on Mondays.	Chúng em mặc đồng phục vào thứ Hai.	school uniform	/ˈjuːnɪfɔːm/	mirabi-ai-2026-10	active
+pyjamas	pyjamas	noun	1	clothes	bộ đồ ngủ		Put on your pyjamas and go to bed.	Mặc đồ ngủ vào rồi đi ngủ nhé.	pajamas	/pəˈdʒɑːməz/	mirabi-ai-2026-10	active
+belt	belt	noun	1	clothes	thắt lưng, dây nịt		Dad has a black leather belt.	Bố có một chiếc thắt lưng da màu đen.		/belt/	mirabi-ai-2026-10	active
+backpack	backpack	noun	1	clothes	ba lô		My backpack is full of books.	Ba lô của tôi đầy sách.	rucksack	/ˈbækpæk/	mirabi-ai-2026-10	active
+watch	watch	noun	1	clothes	đồng hồ đeo tay		Look at my new watch!	Nhìn chiếc đồng hồ đeo tay mới của tớ này!	wristwatch	/wɒtʃ/	mirabi-ai-2026-10	active
+blouse	blouse	noun	2	clothes	áo cánh, áo sơ mi nữ		The teacher is wearing a pink blouse.	Cô giáo đang mặc một chiếc áo cánh màu hồng.		/blaʊz/	mirabi-ai-2026-10	active
+raincoat	raincoat	noun	2	clothes	áo mưa		Don't forget your raincoat today.	Hôm nay đừng quên áo mưa nhé.		/ˈreɪnkəʊt/	mirabi-ai-2026-10	active
+slippers	slippers	noun	2	clothes	dép đi trong nhà		I wear slippers at home.	Tôi đi dép trong nhà khi ở nhà.		/ˈslɪpəz/	mirabi-ai-2026-10	active
+trainers	trainers	noun	2	clothes	giày thể thao		You need trainers for the PE lesson.	Em cần giày thể thao cho tiết thể dục.	sneakers	/ˈtreɪnəz/	mirabi-ai-2026-10	active
+hoodie	hoodie	noun	2	clothes	áo nỉ có mũ		He put on his grey hoodie.	Cậu ấy mặc chiếc áo nỉ có mũ màu xám.		/ˈhʊdi/	mirabi-ai-2026-10	active
+pocket	pocket	noun	2	clothes	túi (áo, quần)		The key is in my pocket.	Chìa khóa ở trong túi của tôi.		/ˈpɒkɪt/	mirabi-ai-2026-10	active
+button	button	noun	2	clothes	cúc áo, khuy áo		A button fell off my shirt.	Một chiếc cúc rơi khỏi áo sơ mi của tôi.		/ˈbʌtn/	mirabi-ai-2026-10	active
+sleeve	sleeve	noun	2	clothes	tay áo		The sleeves of this shirt are too short.	Tay áo của chiếc sơ mi này quá ngắn.		/sliːv/	mirabi-ai-2026-10	active
+zip	zip	noun	2	clothes	khóa kéo, phéc-mơ-tuya		The zip on my bag is broken.	Khóa kéo của túi tôi bị hỏng.	zipper	/zɪp/	mirabi-ai-2026-10	active
+handbag	handbag	noun	2	clothes	túi xách tay		Mum keeps her phone in her handbag.	Mẹ để điện thoại trong túi xách.	purse	/ˈhændbæɡ/	mirabi-ai-2026-10	active
+necklace	necklace	noun	2	clothes	dây chuyền, vòng đeo cổ		She got a silver necklace for her birthday.	Cô ấy được tặng một sợi dây chuyền bạc vào ngày sinh nhật.		/ˈnekləs/	mirabi-ai-2026-10	active
+earrings	earrings	noun	2	clothes	đôi bông tai, khuyên tai		Her earrings are small and gold.	Đôi bông tai của cô ấy nhỏ và bằng vàng.		/ˈɪərɪŋz/	mirabi-ai-2026-10	active
+ring	ring	noun	2	clothes	chiếc nhẫn		He gave her a ring.	Anh ấy tặng cô ấy một chiếc nhẫn.		/rɪŋ/	mirabi-ai-2026-10	active
+bracelet	bracelet	noun	2	clothes	vòng tay, lắc tay		I made a bracelet for my friend.	Tôi làm một chiếc vòng tay tặng bạn.		/ˈbreɪslət/	mirabi-ai-2026-10	active
+try_on	try on	phrasal_verb	2	clothes	mặc thử, đi thử	quần áo, giày dép trước khi mua	Can I try on this jacket?	Tôi mặc thử chiếc áo khoác này được không?			mirabi-ai-2026-10	active
+ao_dai	ao dai	noun	2	clothes	áo dài	trang phục truyền thống của Việt Nam	Girls wear the ao dai on the first day of Tet.	Các bạn nữ mặc áo dài vào ngày đầu năm mới.		/ˌaʊ ˈzaɪ/	mirabi-ai-2026-10	active
+conical_hat	conical hat	noun	2	clothes	nón lá		The farmer wears a conical hat in the field.	Người nông dân đội nón lá trên cánh đồng.			mirabi-ai-2026-10	active
+tracksuit	tracksuit	noun	2	clothes	bộ quần áo thể thao		We wear a tracksuit for sports day.	Chúng em mặc bộ quần áo thể thao vào ngày hội thể thao.		/ˈtræksuːt/	mirabi-ai-2026-10	active
+high_heels	high heels	noun	2	clothes	giày cao gót		It is hard to run in high heels.	Đi giày cao gót thì khó chạy.			mirabi-ai-2026-10	active
+swimsuit	swimsuit	noun	2	clothes	đồ bơi		Bring your swimsuit to the pool.	Hãy mang đồ bơi đến hồ bơi.	swimming costume	/ˈswɪmsuːt/	mirabi-ai-2026-10	active
+fashionable	fashionable	adjective	3	clothes	hợp thời trang		She always wears fashionable clothes.	Cô ấy luôn mặc quần áo hợp thời trang.	stylish	/ˈfæʃnəbl/	mirabi-ai-2026-10	active
+cotton	cotton	noun	3	clothes	vải bông		This T-shirt is made of cotton.	Chiếc áo phông này làm bằng vải bông.		/ˈkɒtn/	mirabi-ai-2026-10	active
+leather	leather	noun	3	clothes	da thuộc	chất liệu làm giày, túi, thắt lưng	These shoes are made of leather.	Đôi giày này làm bằng da thuộc.		/ˈleðə/	mirabi-ai-2026-10	active
+denim	denim	noun	3	clothes	vải bò, vải jean		I like jackets made of denim.	Tôi thích những chiếc áo khoác làm bằng vải bò.		/ˈdenɪm/	mirabi-ai-2026-10	active
+outfit	outfit	noun	3	clothes	bộ trang phục		She chose a nice outfit for the party.	Cô ấy chọn một bộ trang phục đẹp cho bữa tiệc.		/ˈaʊtfɪt/	mirabi-ai-2026-10	active
+fabric	fabric	noun	3	clothes	vải, chất liệu vải		This fabric feels soft and light.	Chất vải này mềm và nhẹ.	material	/ˈfæbrɪk/	mirabi-ai-2026-10	active
+accessory	accessory	noun	3	clothes	phụ kiện (thời trang)		A scarf is a useful accessory in winter.	Khăn quàng là một phụ kiện hữu ích vào mùa đông.		/əkˈsesəri/	mirabi-ai-2026-10	active
+sleeveless	sleeveless	adjective	3	clothes	không tay, sát nách	áo không có tay áo	She wore a sleeveless dress on the hot day.	Cô ấy mặc chiếc váy sát nách vào ngày nóng.		/ˈsliːvləs/	mirabi-ai-2026-10	active
+checked	checked	adjective	3	clothes	kẻ ca rô	hoa văn ô vuông trên vải	He has a red and black checked shirt.	Anh ấy có một chiếc áo sơ mi kẻ ca rô đỏ đen.	checkered|plaid	/tʃekt/	mirabi-ai-2026-10	active
+second-hand	second-hand	adjective	3	clothes	cũ, đã qua sử dụng	đồ mua lại của người khác	I bought a second-hand jacket at the market.	Tôi mua một chiếc áo khoác cũ ở chợ.	secondhand	/ˌsekənd ˈhænd/	mirabi-ai-2026-10	active
+sew	sew	verb	3	clothes	may, khâu		My grandmother can sew beautiful clothes.	Bà tôi có thể may những bộ quần áo đẹp.		/səʊ/	mirabi-ai-2026-10	active
+mittens	mittens	noun	3	clothes	găng tay liền ngón, bao tay		The baby wears mittens in winter.	Em bé đeo bao tay vào mùa đông.		/ˈmɪtnz/	mirabi-ai-2026-10	active
+cardigan	cardigan	noun	3	clothes	áo len cài khuy		Take a cardigan in case it gets cold.	Mang theo áo len cài khuy phòng khi trời trở lạnh.		/ˈkɑːdɪɡən/	mirabi-ai-2026-10	active
+button_up	button up	phrasal_verb	3	clothes	cài cúc (áo)		Button up your coat before you go out.	Cài cúc áo khoác lại trước khi ra ngoài.			mirabi-ai-2026-10	active
+in_fashion	in fashion	phrase	3	clothes	đang thịnh hành, hợp mốt		Wide trousers are in fashion this year.	Quần ống rộng đang thịnh hành năm nay.	fashionable		mirabi-ai-2026-10	active
+out_of_fashion	out of fashion	phrase	3	clothes	lỗi mốt, lạc mốt		These shoes went out of fashion years ago.	Đôi giày này lỗi mốt từ nhiều năm trước.	old-fashioned		mirabi-ai-2026-10	active
