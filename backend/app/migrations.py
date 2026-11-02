@@ -14,7 +14,8 @@ from .db import Base
 
 log = logging.getLogger("refmi.migrations")
 
-# table -> [(column, DDL fragment)]; keep DDL portable between SQLite and PostgreSQL.
+# table -> [(column, DDL fragment)]; keep DDL portable between SQLite and PostgreSQL: a boolean default is quoted, DEFAULT '0',
+# because PostgreSQL refuses a bare number.
 ADDED_COLUMNS: dict[str, list[tuple[str, str]]] = {
     "users": [
         ("status", "VARCHAR(20) NOT NULL DEFAULT 'active'"),
@@ -35,7 +36,7 @@ ADDED_COLUMNS: dict[str, list[tuple[str, str]]] = {
         ("description", "TEXT"),
         ("start_time", "VARCHAR(5)"),
         ("end_time", "VARCHAR(5)"),
-        ("all_day", "BOOLEAN NOT NULL DEFAULT 1"),
+        ("all_day", "BOOLEAN NOT NULL DEFAULT '1'"),
         ("repeat_interval", "INTEGER NOT NULL DEFAULT 1"),
         ("repeat_frequency", "VARCHAR(10)"),
         ("repeat_weekdays", "TEXT"),
@@ -78,13 +79,13 @@ ADDED_COLUMNS: dict[str, list[tuple[str, str]]] = {
                                ("content_version", "INTEGER NOT NULL DEFAULT 1"), ("review_notes", "TEXT")],
     "login_streak_days": [("popup_claim_key", "VARCHAR(64)")],
     "user_reports": [("message_id", "INTEGER"), ("message_body", "VARCHAR(500)")],
-    "social_profiles": [("allow_room_visits", "BOOLEAN NOT NULL DEFAULT 1"),
-                        ("allow_study_invites", "BOOLEAN NOT NULL DEFAULT 1")],
+    "social_profiles": [("allow_room_visits", "BOOLEAN NOT NULL DEFAULT '1'"),
+                        ("allow_study_invites", "BOOLEAN NOT NULL DEFAULT '1'")],
     "memories": [("notified_at", "TIMESTAMP"),
-                 ("featured", "BOOLEAN NOT NULL DEFAULT 0"),
+                 ("featured", "BOOLEAN NOT NULL DEFAULT '0'"),
                  ("template_key", "VARCHAR(24) NOT NULL DEFAULT 'auto'"),
                  ("palette_key", "VARCHAR(24) NOT NULL DEFAULT 'sky'"),
-                 ("include_message", "BOOLEAN NOT NULL DEFAULT 0")],
+                 ("include_message", "BOOLEAN NOT NULL DEFAULT '0'")],
 }
 
 def upgrade_schema(engine: Engine) -> None:

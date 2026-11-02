@@ -1,5 +1,10 @@
+import re
+
 from sqlalchemy import create_engine, inspect, text
-from app.migrations import STUDY_TOGETHER_TABLES, downgrade_study_together_schema, upgrade_schema
+from sqlalchemy.dialects import postgresql
+from sqlalchemy.schema import CreateTable
+from app.db import Base
+from app.migrations import ADDED_COLUMNS, STUDY_TOGETHER_TABLES, downgrade_study_together_schema, upgrade_schema
 
 
 def test_study_together_tables_upgrade_idempotently_and_roll_back_alone(tmp_path):
@@ -107,3 +112,14 @@ def test_mirabi_life_upgrade_keeps_old_tasks_and_rolls_back_alone(tmp_path):
         assert conn.execute(text("SELECT title, project_id FROM user_tasks")).one() == ("Đọc sách", None)
     upgrade_schema(engine)
     assert inspect(engine).has_table("work_projects")
+
+
+def test_every_boolean_default_is_one_postgresql_accepts():
+    # The tests run on SQLite, which takes DEFAULT 0 on a boolean. PostgreSQL refuses it and the service does not start.
+    from app import models  # noqa: F401  every table must be registered
+    bare = re.compile(r"BOOLEAN\b[^,\n]*\bDEFAULT [01]\b")
+    for table in Base.metadata.sorted_tables:
+        assert not bare.search(str(CreateTable(table).compile(dialect=postgresql.dialect()))), table.name
+    for table, columns in ADDED_COLUMNS.items():
+        for name, ddl in columns:
+            assert not bare.search(ddl), f"{table}.{name}"
