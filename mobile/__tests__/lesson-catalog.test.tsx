@@ -114,6 +114,45 @@ describe('Học tập theo bài', () => {
     expect(await screen.findByText('Trò chơi này của bài đang được cập nhật. Bạn thử lại sau nhé.')).toBeTruthy();
     expect(await screen.findByText('Chọn trò chơi')).toBeTruthy();
   });
+
+  it('a stage left open elsewhere: the lesson offers to play it on, or to end it and start the game tapped', async () => {
+    const OPEN = { id: 77, status: 'paused', kind: 'lesson', game: 'order', subject: { id: 1, code: 'vietnamese', name: 'Tiếng Việt' },
+      lesson: { id: 9, code: 'tv2.doc', name: 'Đọc hiểu' }, catalog: { lesson: 'tv2.doc', title: 'Đọc hiểu', subject_name: 'Tiếng Việt' } };
+    let plays = 0;
+    const server = mockServer({
+      'GET /api/learning/programme': { status: 200, body: PROGRAMME },
+      'GET /api/learning/catalog': { status: 200, body: { subjects: [], default_duration_minutes: 25, study_profile: null, programme: null } },
+      'GET /api/learning/programme/subjects/math': { status: 200, body: LESSONS },
+      'GET /api/learning/lesson-catalog/toan2.bang_nhan_2': { status: 200, body: LESSON },
+      'POST /api/learning/lesson-catalog/toan2.bang_nhan_2/play': () => (++plays === 1
+        ? { status: 409, body: { detail: 'x', code: 'open_session_exists' } }
+        : { status: 409, body: { detail: 'x', code: 'lesson_not_published' } }),
+      'GET /api/learning/sessions/current': () => ({ status: 200, body: { session: plays ? OPEN : null } }),
+      'POST /api/learning/sessions/77/abandon': { status: 200, body: { result: null, session: { ...OPEN, status: 'abandoned' }, replayed: false } },
+      'GET /api/games/match/tutorial': { status: 200, body: fixtures.definitions.match },
+      'POST /api/games/match/tutorial/progress': { status: 200, body: {} },
+    });
+    renderLearning();
+    fireEvent.press(await screen.findByRole('button', { name: /^Toán\./ }));
+    fireEvent.press(await screen.findByRole('button', { name: /^Bảng nhân 2\./ }));
+    fireEvent.press(await screen.findByRole('button', { name: 'Bắt đầu' }));
+    fireEvent.press(await screen.findByRole('button', { name: 'Bỏ qua hướng dẫn' }));
+
+    // Which stage is open, and the choice to play it on…
+    expect(await screen.findByText('Bạn còn một chặng chưa xong')).toBeTruthy();
+    expect(screen.getByText(/Tiếng Việt · Đọc hiểu/)).toBeTruthy();
+    fireEvent.press(screen.getAllByRole('button', { name: 'Không' }).at(-1)!);
+    // …or to end it (no reward) and start this lesson's game; nothing ends without that second answer.
+    expect(await screen.findByText('Kết thúc chặng cũ?')).toBeTruthy();
+    expect(server.callsTo('POST /api/learning/sessions/77/abandon')).toHaveLength(0);
+    fireEvent.press(screen.getByRole('button', { name: 'Xác nhận kết thúc & chơi' }));
+    await waitFor(() => expect(server.callsTo('POST /api/learning/sessions/77/abandon')).toHaveLength(1));
+    await waitFor(() => expect(server.callsTo('POST /api/learning/lesson-catalog/toan2.bang_nhan_2/play')).toHaveLength(2));
+    // The same tap, retried: one key, so a timeout never makes two stages.
+    const [first, again] = server.callsTo('POST /api/learning/lesson-catalog/toan2.bang_nhan_2/play');
+    expect(again.headers['Idempotency-Key']).toBe(first.headers['Idempotency-Key']);
+    expect(await screen.findByText('Trò chơi này của bài đang được cập nhật. Bạn thử lại sau nhé.')).toBeTruthy();
+  });
 });
 
 const turn = (kind: Turn['kind'], prompt: Turn['prompt']): Turn => ({ turn_id: 't1', position: 0, kind, skill_label: '', prompt, hints_shown: [],

@@ -6,7 +6,7 @@ import { errorMessage } from '../../auth/messages';
 import { learningApi } from '../../learning/api';
 import { educationApi, useEducation } from '../../learning/education';
 import { useLearningPrefs } from '../../learning/prefs';
-import { groupOf, isCurriculumGame, PLAY_MODE, QUICK_GAMES, QUICK_LESSONS, subjectOfGame } from '../../learning/labels';
+import { gameTitle, groupOf, isCurriculumGame, PLAY_MODE, QUICK_GAMES, QUICK_LESSONS, subjectOfGame } from '../../learning/labels';
 import { useTutorialProgress } from '../../learning/tutorial/progress';
 import type { Band, Catalog, CatalogLesson, FreeLevel, GameGroupId, GameId, LearningSession, LessonGame, LessonProgramme, StartOptions,
   SubjectCode, UnlockedContent, VocabCelebrationInfo, VocabGame, VocabPlay, VocabProgress } from '../../learning/types';
@@ -72,6 +72,8 @@ type Props = {
   onImmersiveChange?: (immersive: boolean) => void;
   /** Personal study / Study Together switch, shown on the subject screen. */
   modeSwitch?: React.ReactNode;
+  /** Opens on Sổ tay kiến thức or Kho lưu trữ (from Tiện ích) instead of the subjects. */
+  initialView?: 'notebook' | 'archive';
   /** Age and grade were saved (asked here once when the account has none; the grade is then locked). */
   onUserUpdated?: (user: User) => void;
 };
@@ -92,8 +94,8 @@ const gamesOf = (subject: SubjectCode, game: GameId): Route => ({ name: 'games',
  * exists when the game is known in advance, or with the session still paused).
  * Only a tap on an English game or "Bắt đầu" creates a session, one at a time; the backend keeps it, so leaving and
  * coming back (or another device) offers to continue it. */
-export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRewards, onImmersiveChange, modeSwitch, onUserUpdated }: Props) {
-  const [route, setRoute] = useState<Route>({ name: 'subjects' });
+export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRewards, onImmersiveChange, modeSwitch, onUserUpdated, initialView }: Props) {
+  const [route, setRoute] = useState<Route>(initialView === 'notebook' ? { name: 'notebook' } : initialView === 'archive' ? { name: 'archive' } : { name: 'subjects' });
   const [busy, setBusy] = useState<'start' | number | null>(null);
   const [catalog, setCatalog] = useState<Catalog | null>(null);
   const [current, setCurrent] = useState<LearningSession | null>(null);
@@ -203,6 +205,39 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
     launching.current = true;
     try { return await create(); } finally { launching.current = false; }
   }, []);
+  /** Stages of Kho lưu trữ and their school year: their result screen goes back to that year's lesson. */
+  const archiveStages = useRef(new Map<number, number>());
+  const retryingOpen = useRef(false);
+
+  /** The backend keeps one open stage at a time: one left paused (the app closed, "Thoát" without ending it, another
+   * device) refuses every new start with `open_session_exists`. The same stage is simply resumed; another one is offered
+   * to resume, or to end so that `retry` starts what was tapped. Null for any other error; else true once a game opens. */
+  const resolveOpenStage = useCallback(async (e: unknown, retry: () => Promise<boolean>,
+    same: (open: LearningSession) => boolean = () => false): Promise<boolean | null> => {
+    if ((e as { code?: string })?.code !== 'open_session_exists') return null;
+    let open: LearningSession | null;
+    try { open = await learningApi.current(); } catch (err) { toast(errorMessage(err), 'error'); return false; }
+    if (!open) { // it expired meanwhile (reading the current stage expires a forgotten one): one more try
+      if (retryingOpen.current) { toast(errorMessage(e), 'error'); return false; }
+      retryingOpen.current = true;
+      try { return await retry(); } finally { retryingOpen.current = false; }
+    }
+    const stage = open;
+    const resume = () => {
+      if (stage.kind === 'archive' && stage.archive_year) archiveStages.current.set(stage.id, stage.archive_year);
+      setCurrent(null); setRoute({ name: 'game', session: stage, autoStart: false }); return true;
+    };
+    if (same(stage)) return resume();
+    const name = `${stage.catalog?.subject_name ?? stage.subject.name} · ${stage.catalog?.title ?? gameTitle(stage.game)}`;
+    if (await confirm({ title: 'Bạn còn một chặng chưa xong', message: `${name}\n\nChơi tiếp chặng đó nhé?`,
+      confirmLabel: 'Chơi tiếp', cancelLabel: 'Không', icon: 'play-circle-outline' })) return resume();
+    if (!await confirm({ title: 'Kết thúc chặng cũ?',
+      message: 'Chặng cũ sẽ kết thúc và không nhận thưởng (tiến độ đã làm vẫn được lưu). Sau đó trò bạn vừa chọn sẽ bắt đầu.',
+      confirmLabel: 'Kết thúc & chơi', cancelLabel: 'Để sau', destructive: true, icon: 'flag-outline' })) return false;
+    try { await learningApi.abandon(stage.id); } catch (err) { toast(errorMessage(err), 'error'); return false; }
+    setCurrent(null);
+    return retry();
+  }, [toast, confirm]);
 
   /** The first time a game is played (or when its tutorial or gameplay changed), its tutorial comes first: "Bắt đầu chơi"
    * or "Bỏ qua" runs `begin`, leaving it goes `back`. Afterwards `begin` runs at once. */
@@ -214,13 +249,20 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
   const start = useCallback(async (options: StartOptions) => {
     // One key per "Bắt đầu" tap: a retry after a timeout returns the same session instead of creating another.
     startKey.current ??= newIdempotencyKey();
-    setBusy('start');
-    try {
-      const s = await launch(() => learningApi.start({ ...options, mode: PLAY_MODE }, startKey.current!));
-      if (s) { setRoute({ name: 'intro', session: s }); startKey.current = null; }
-    } catch (e) { toast(errorMessage(e), 'error'); }
-    finally { setBusy(null); }
-  }, [toast, launch]);
+    const attempt = async (): Promise<boolean> => {
+      setBusy('start');
+      try {
+        const s = await launch(() => learningApi.start({ ...options, mode: PLAY_MODE }, startKey.current!));
+        if (!s) return false;
+        setRoute({ name: 'intro', session: s }); startKey.current = null;
+        return true;
+      } catch (e) {
+        if (await resolveOpenStage(e, attempt) === null) toast(errorMessage(e), 'error');
+        return false;
+      } finally { setBusy(null); }
+    };
+    await attempt();
+  }, [toast, launch, resolveOpenStage]);
 
   // Khám phá từ mới / Ôn tập of the two vocabulary games: their levels and words left, the topic chosen for each.
   const [vocabProgress, setVocabProgress] = useState<Partial<Record<VocabGame, VocabProgress>>>({});
@@ -247,20 +289,25 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
     const id = `${game}|${options?.vocab ?? ''}|${options?.topic ?? ''}`;
     if (playKey.current?.game !== id) playKey.current = { game: id, key: newIdempotencyKey() };
     const key = playKey.current.key;
-    setStarting(game); setPlayError(null);
-    try {
-      const s = await launch(() => learningApi.play(game, PLAY_MODE, key, playBand(), options));
-      if (!s) return false;
-      playKey.current = null;
-      setRoute({ name: 'game', session: s, autoStart: true });
-      return true;
-    } catch (e) {
-      setPlayError({ game, message: errorMessage(e), code: (e as { code?: string })?.code });
-      if (isVocabGame(game)) void loadVocab([game]);
-      return false;
-    }
-    finally { setStarting(null); }
-  }, [launch, playBand, vocabTopic, loadVocab]);
+    const attempt = async (): Promise<boolean> => {
+      setStarting(game); setPlayError(null);
+      try {
+        const s = await launch(() => learningApi.play(game, PLAY_MODE, key, playBand(), options));
+        if (!s) return false;
+        playKey.current = null;
+        setRoute({ name: 'game', session: s, autoStart: true });
+        return true;
+      } catch (e) {
+        const open = await resolveOpenStage(e, attempt);
+        if (open !== null) return open;
+        setPlayError({ game, message: errorMessage(e), code: (e as { code?: string })?.code });
+        if (isVocabGame(game)) void loadVocab([game]);
+        return false;
+      }
+      finally { setStarting(null); }
+    };
+    return attempt();
+  }, [launch, playBand, vocabTopic, loadVocab, resolveOpenStage]);
 
   /** An English game from its list: the guide first time, then "Chơi ngay". A failed start shows why on the list. */
   const quickPlay = useCallback((game: GameId) => {
@@ -285,14 +332,21 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
   }, [withGuide]);
 
   const practise = useCallback(async (topicId: number) => {
-    setBusy(topicId);
-    try {
-      // Created paused: its game is only known now, so a first-time guide is shown with nothing running behind it.
-      const s = await launch(() => learningApi.startReview(topicId, PLAY_MODE));
-      if (s) playSession(s, () => { void learningApi.abandon(s.id).catch(() => {}); setRoute({ name: 'review' }); });
-    } catch (e) { toast(errorMessage(e), 'error'); }
-    finally { setBusy(null); }
-  }, [toast, launch, playSession]);
+    const attempt = async (): Promise<boolean> => {
+      setBusy(topicId);
+      try {
+        // Created paused: its game is only known now, so a first-time guide is shown with nothing running behind it.
+        const s = await launch(() => learningApi.startReview(topicId, PLAY_MODE));
+        if (!s) return false;
+        playSession(s, () => { void learningApi.abandon(s.id).catch(() => {}); setRoute({ name: 'review' }); });
+        return true;
+      } catch (e) {
+        if (await resolveOpenStage(e, attempt) === null) toast(errorMessage(e), 'error');
+        return false;
+      } finally { setBusy(null); }
+    };
+    await attempt();
+  }, [toast, launch, playSession, resolveOpenStage]);
 
   // "Luyện lại" from "Từ đã học": a review stage of the chosen words (or every "Cần ôn" word) in an existing game.
   const [practisingWords, setPractisingWords] = useState(false);
@@ -300,16 +354,22 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
   const scroll = useRef<ScrollView>(null);
   const wordStages = useRef(new Set<number>());
   const practiseWordsNow = useCallback(async (game: PractiseGame, entryKeys: string[] | null): Promise<boolean> => {
-    setPractisingWords(true);
-    try {
-      const s = await launch(() => learningApi.practiseWords(game, entryKeys));
-      if (!s) return false;
-      wordStages.current.add(s.id);
-      setRoute({ name: 'game', session: s, autoStart: true });
-      return true;
-    } catch (e) { toast(errorMessage(e), 'error'); return false; }
-    finally { setPractisingWords(false); }
-  }, [toast, launch]);
+    const attempt = async (): Promise<boolean> => {
+      setPractisingWords(true);
+      try {
+        const s = await launch(() => learningApi.practiseWords(game, entryKeys));
+        if (!s) return false;
+        wordStages.current.add(s.id);
+        setRoute({ name: 'game', session: s, autoStart: true });
+        return true;
+      } catch (e) {
+        const open = await resolveOpenStage(e, attempt);
+        if (open === null) toast(errorMessage(e), 'error');
+        return open ?? false;
+      } finally { setPractisingWords(false); }
+    };
+    return attempt();
+  }, [toast, launch, resolveOpenStage]);
   const practiseWords = (game: PractiseGame, entryKeys: string[] | null) => {
     const here = route;
     withGuide(game, () => { void practiseWordsNow(game, entryKeys).then((ok) => { if (!ok) setRoute(here); }); }, () => setRoute(here));
@@ -318,28 +378,35 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
   /** A game of a lesson: the guide the first time, then the stage (created paused; the countdown resumes it). */
   const lessonKey = useRef<{ id: string; key: string } | null>(null);
   const playLesson = useCallback((lessonId: string, game: GameId, back: Route) => {
-    withGuide(game, () => {
-      const id = `${lessonId}|${game}`;
+    const id = `${lessonId}|${game}`;
+    const attempt = async (): Promise<boolean> => {
       if (lessonKey.current?.id !== id) lessonKey.current = { id, key: newIdempotencyKey() };
       setStarting(game);
-      void launch(() => learningApi.playLesson(lessonId, game, lessonKey.current!.key)).then((s) => {
-        if (!s) return;
+      try {
+        const s = await launch(() => learningApi.playLesson(lessonId, game, lessonKey.current!.key));
+        if (!s) return false;
         lessonKey.current = null;
         setRoute({ name: 'game', session: s, autoStart: true });
-      }).catch(async (e) => {
+        return true;
+      } catch (e) {
         setRoute(back);
+        // This very game of this lesson left open: it is simply resumed.
+        const open = await resolveOpenStage(e, attempt, (o) => o.kind === 'lesson' && o.catalog?.lesson === lessonId && o.game === game);
+        if (open !== null) return open;
         if ((e as { code?: string })?.code === 'vocabulary_exhausted' && isVocabGame(game)) {
           // Khám phá từ mới: every new word of this lesson's game is discovered; old words are never served as new.
           const review = await confirm({ title: 'Đã khám phá hết từ mới!',
             message: 'Bạn đã khám phá hết từ mới phù hợp với lớp của bạn trong trò này. Ôn tập các từ đã học để nhớ thật lâu nhé!',
             confirmLabel: 'Ôn tập từ đã học', cancelLabel: 'Để sau', icon: 'trophy-outline' });
           if (review) reviewVocab(game, back);
-          return;
+          return false;
         }
         toast(errorMessage(e), 'error');
-      }).finally(() => setStarting(null));
-    }, () => setRoute(back));
-  }, [withGuide, launch, toast, confirm, reviewVocab]);
+        return false;
+      } finally { setStarting(null); }
+    };
+    withGuide(game, () => { void attempt(); }, () => setRoute(back));
+  }, [withGuide, launch, toast, confirm, reviewVocab, resolveOpenStage]);
   // The subject list the learner came from (cleared on Học tập): a lesson opened after a game goes back to it, and that
   // list is shown at once from its snapshot, moving only the lessons whose state changed.
   const subjectRoute = useRef<Route | null>(null);
@@ -359,33 +426,39 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
   const openLesson = useCallback((key: string, back?: Route) =>
     setRoute({ name: 'lesson', key, back: back ?? subjectRoute.current ?? { name: 'subjects' } }), []);
   /** A finished year's lesson reviewed with one of its games (kind 'archive': kept apart from that year's results). */
-  const archiveStages = useRef(new Map<number, number>());
   const archiveKey = useRef<{ id: string; key: string } | null>(null);
   const playArchive = useCallback((year: number, lessonId: string, game: GameId) => {
     const back: Route = { name: 'archiveLesson', year, key: lessonId };
-    withGuide(game, () => {
-      const id = `${year}|${lessonId}|${game}`;
+    const id = `${year}|${lessonId}|${game}`;
+    const attempt = async (): Promise<boolean> => {
       if (archiveKey.current?.id !== id) archiveKey.current = { id, key: newIdempotencyKey() };
       setStarting(game);
-      void launch(() => educationApi.playArchive(year, lessonId, game, archiveKey.current!.key)).then((s) => {
-        if (!s) return;
+      try {
+        const s = await launch(() => educationApi.playArchive(year, lessonId, game, archiveKey.current!.key));
+        if (!s) return false;
         archiveKey.current = null;
         archiveStages.current.set(s.id, year);
         setRoute({ name: 'game', session: s, autoStart: true });
-      }).catch(async (e) => {
+        return true;
+      } catch (e) {
         setRoute(back);
+        const open = await resolveOpenStage(e, attempt,
+          (o) => o.kind === 'archive' && o.archive_year === year && o.catalog?.lesson === lessonId && o.game === game);
+        if (open !== null) return open;
         if ((e as { code?: string })?.code === 'vocabulary_exhausted' && isVocabGame(game)) {
           // Khám phá từ mới: every new word of this lesson's game is discovered; old words are never served as new.
           const review = await confirm({ title: 'Đã khám phá hết từ mới!',
             message: 'Bạn đã khám phá hết từ mới phù hợp với lớp của bạn trong trò này. Ôn tập các từ đã học để nhớ thật lâu nhé!',
             confirmLabel: 'Ôn tập từ đã học', cancelLabel: 'Để sau', icon: 'trophy-outline' });
           if (review) reviewVocab(game, back);
-          return;
+          return false;
         }
         toast(errorMessage(e), 'error');
-      }).finally(() => setStarting(null));
-    }, () => setRoute(back));
-  }, [withGuide, launch, toast, confirm, reviewVocab]);
+        return false;
+      } finally { setStarting(null); }
+    };
+    withGuide(game, () => { void attempt(); }, () => setRoute(back));
+  }, [withGuide, launch, toast, confirm, reviewVocab, resolveOpenStage]);
   const resumeById = useCallback(async (id: number) => {
     try { setRoute({ name: 'game', session: await learningApi.session(id), autoStart: false }); } catch (e) { toast(errorMessage(e), 'error'); }
   }, [toast]);
