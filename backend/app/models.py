@@ -1324,7 +1324,7 @@ class UserEducationProfile(Base):
     education_region: Mapped[str] = mapped_column(String(8), default="VN", server_default="VN")
     status: Mapped[str] = mapped_column(String(16), default="studying", server_default="studying")
     # Support workflow "học lại": the next school year keeps the grade (consumed by that promotion).
-    hold_next_promotion: Mapped[bool] = mapped_column(Boolean, default=False, server_default=text("0"))
+    hold_next_promotion: Mapped[bool] = mapped_column(Boolean, default=False, server_default="0")
     locked_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     version: Mapped[int] = mapped_column(Integer, default=1, server_default="1")
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
@@ -1348,7 +1348,7 @@ class AcademicYearConfig(Base):
     end_date: Mapped[date | None] = mapped_column(Date, nullable=True)
     source: Mapped[str | None] = mapped_column(String(200), nullable=True)
     decision_number: Mapped[str | None] = mapped_column(String(80), nullable=True)  # số văn bản, e.g. 2368/QĐ-BGDĐT
-    verified: Mapped[bool] = mapped_column(Boolean, default=False, server_default=text("0"))
+    verified: Mapped[bool] = mapped_column(Boolean, default=False, server_default="0")
     verified_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     verified_by: Mapped[int | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
     updated_by: Mapped[int | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
@@ -1370,7 +1370,7 @@ class GradePromotion(Base):
     from_grade: Mapped[str | None] = mapped_column(String(20), nullable=True)
     to_grade: Mapped[str] = mapped_column(String(20))
     # The year was closed without any learning in it (the app was not opened): nothing is made up for it.
-    skipped: Mapped[bool] = mapped_column(Boolean, default=False, server_default=text("0"))
+    skipped: Mapped[bool] = mapped_column(Boolean, default=False, server_default="0")
     archive_id: Mapped[int | None] = mapped_column(ForeignKey("learning_year_archives.id", ondelete="SET NULL"), nullable=True)
     reason: Mapped[str | None] = mapped_column(String(300), nullable=True)
     actor_id: Mapped[int | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
@@ -1404,7 +1404,7 @@ class LearningYearArchive(Base):
     region: Mapped[str] = mapped_column(String(8))
     curriculum_version_id: Mapped[int | None] = mapped_column(ForeignKey("curriculum_versions.id", ondelete="SET NULL"), nullable=True)
     snapshot_version: Mapped[int] = mapped_column(Integer, default=1, server_default="1")
-    had_activity: Mapped[bool] = mapped_column(Boolean, default=False, server_default=text("0"))
+    had_activity: Mapped[bool] = mapped_column(Boolean, default=False, server_default="0")
     summary_json: Mapped[str] = mapped_column(Text)  # subjects → chapters → lessons (titles, content versions, status)
     stats_json: Mapped[str] = mapped_column(Text)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
@@ -1424,7 +1424,7 @@ class ArchivedLearningResult(Base):
     completed: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
     best: Mapped[int | None] = mapped_column(Integer, nullable=True)  # best share right at the first try, %
     best_score: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
-    passed: Mapped[bool] = mapped_column(Boolean, default=False, server_default=text("0"))
+    passed: Mapped[bool] = mapped_column(Boolean, default=False, server_default="0")
     detail_json: Mapped[str | None] = mapped_column(Text, nullable=True)
 
 
