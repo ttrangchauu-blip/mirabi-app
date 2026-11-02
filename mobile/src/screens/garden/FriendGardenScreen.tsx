@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { BackHandler, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { BackHandler, Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { ApiError, newIdempotencyKey } from '../../api/client';
 import { Text } from '../../components/Typography';
@@ -9,7 +9,9 @@ import { appTheme as t } from '../../theme';
 import { Button } from '../../ui/kit';
 import { useToast } from '../../ui/Toast';
 import { EmptyState, ErrorState, LoadingState, OptionSheet, PetAvatar } from '../together/ui';
-import { CARE, careActions, careOf, careText, hoursLeft, planted, PlotDetail, PlotGrid, SummaryBar, ToolBar, type Tool } from './gardenUi';
+import { WorldPanel } from '../../world/living';
+import { GardenWorld, type GardenFx } from './GardenWorld';
+import { CARE, careActions, careOf, careText, hoursLeft, planted, PlotDetail, SummaryBar, ToolBar, type Tool } from './gardenUi';
 
 type Props = { userId: number; onBack: () => void };
 
@@ -33,6 +35,8 @@ export function FriendGardenScreen({ userId, onBack }: Props) {
   const [busy, setBusy] = useState<number | null>(null);
   const [detail, setDetail] = useState<number | null>(null);
   const requests = useRef(new Map<string, string>());
+  const [fx, setFx] = useState<GardenFx | null>(null);
+  const fxKey = useRef(0);
 
   const load = useCallback(async () => {
     try { setData(await inventoryApi.visit(userId)); setError(null); } catch (e) { setError(e); }
@@ -57,6 +61,7 @@ export function FriendGardenScreen({ userId, onBack }: Props) {
       const result = await inventoryApi.careFriend(userId, plot.plot, kind, id);
       requests.current.delete(key);
       setData({ owner: result.owner, garden: result.garden, care: result.care });
+      if (result.cared) setFx({ plot: plot.plot, kind, key: ++fxKey.current });
       toast(result.cared ? `Đã ${CARE[kind].label.toLowerCase()} cho ${plot.name} của ${host}!`
         : `${plot.name} vừa được ${CARE[kind].label.toLowerCase()} hôm nay rồi.`, result.cared ? 'success' : 'info');
     } catch (e) {
@@ -114,21 +119,24 @@ export function FriendGardenScreen({ userId, onBack }: Props) {
   return (
     <View style={s.fill} testID="friend-garden">
       {header}
-      <ScrollView style={s.fill} contentContainerStyle={s.body}>
-        <SummaryBar stats={[
-          { icon: 'leaf-outline', text: `${plants.length}/${data.garden.size} ô`, label: `${plants.length} trên ${data.garden.size} ô đã có cây` },
-          ...(plants.length ? [{ icon: 'water-outline' as const, text: thirsty ? `${thirsty} cần tưới` : 'Đã tưới hết' }] : []),
-          { icon: 'heart-outline', text: `Còn ${left}/${data.care.daily_limit} lượt chăm`, tone: left <= 0 ? 'warn' : undefined,
-            label: left > 0 ? `Hôm nay bạn còn ${left} lượt chăm vườn bạn bè` : 'Hôm nay bạn đã hết lượt chăm vườn bạn bè' },
-        ]} />
-        {plants.length ? <>
-          <ToolBar tools={tools} active={tool} onChange={(id) => setTool(id as CareKind | null)} />
-          <Text style={s.hint} accessibilityLiveRegion="polite">{left <= 0 ? 'Hôm nay bạn đã hết lượt chăm, vẫn xem vườn được nhé.'
-            : tool ? `Chạm cây để ${CARE[tool].label.toLowerCase()}.` : `Chạm cây để xem chi tiết và chăm giúp ${host}.`}</Text>
-          <PlotGrid plots={data.garden.plots} busy={busy} labelFor={labelFor} onPress={tapPlot}
-            ready={(plot) => !plot.empty && !!tool && left > 0 && !careOf(plot, tool).done} />
-        </> : <EmptyState icon="leaf-outline" title={`Vườn của ${host} chưa có cây`} body={`Khi ${host} trồng cây, bạn có thể ghé tưới nước và chăm sóc giúp nhé.`} />}
-      </ScrollView>
+      {plants.length ? (
+        <GardenWorld plots={data.garden.plots} busy={busy} labelFor={labelFor} onPress={tapPlot} top={56} bottom={92} fx={fx}
+          ready={(plot) => !plot.empty && !!tool && left > 0 && !careOf(plot, tool).done}>
+          <WorldPanel style={s.summary}>
+            <SummaryBar stats={[
+              { icon: 'leaf-outline', text: `${plants.length}/${data.garden.size} ô`, label: `${plants.length} trên ${data.garden.size} ô đã có cây` },
+              { icon: 'water-outline' as const, text: thirsty ? `${thirsty} cần tưới` : 'Đã tưới hết' },
+              { icon: 'heart-outline', text: `Còn ${left}/${data.care.daily_limit} lượt chăm`, tone: left <= 0 ? 'warn' : undefined,
+                label: left > 0 ? `Hôm nay bạn còn ${left} lượt chăm vườn bạn bè` : 'Hôm nay bạn đã hết lượt chăm vườn bạn bè' },
+            ]} />
+          </WorldPanel>
+          <View style={s.dock} pointerEvents="box-none">
+            <Text style={s.hint} accessibilityLiveRegion="polite" numberOfLines={2}>{left <= 0 ? 'Hôm nay bạn đã hết lượt chăm, vẫn xem vườn được nhé.'
+              : tool ? `Chạm cây để ${CARE[tool].label.toLowerCase()}.` : `Chạm cây để xem chi tiết và chăm giúp ${host}.`}</Text>
+            <ToolBar tools={tools} active={tool} onChange={(id) => setTool(id as CareKind | null)} />
+          </View>
+        </GardenWorld>
+      ) : <EmptyState icon="leaf-outline" title={`Vườn của ${host} chưa có cây`} body={`Khi ${host} trồng cây, bạn có thể ghé tưới nước và chăm sóc giúp nhé.`} />}
       <OptionSheet visible={!!openPlant} title={openPlant?.name ?? ''} onClose={() => setDetail(null)}>
         {openPlant ? <PlotDetail plot={openPlant} actions={careActions(openPlant, blocked)}
           note={blocked ? 'Hôm nay bạn đã hết lượt chăm vườn bạn bè.' : undefined}
@@ -141,10 +149,11 @@ export function FriendGardenScreen({ userId, onBack }: Props) {
 const s = StyleSheet.create({
   fill: { flex: 1 },
   flex: { flex: 1, minWidth: 0 },
-  body: { paddingBottom: 24 },
   header: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 16, marginBottom: 8 },
   round: { width: 36, height: 36, borderRadius: 18, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
   title: { color: t.ink, fontSize: 16, fontWeight: '800' },
   subtitle: { color: t.muted, fontSize: 11, fontWeight: '600' },
-  hint: { marginHorizontal: 16, marginBottom: 8, color: '#2E5A30', fontSize: 11.5, lineHeight: 15, fontWeight: '600' },
+  hint: { alignSelf: 'center', maxWidth: '100%', paddingHorizontal: 10, paddingVertical: 3, borderRadius: 10, overflow: 'hidden', backgroundColor: 'rgba(255,255,255,0.88)', color: '#2E5A30', fontSize: 11.5, lineHeight: 15, fontWeight: '700', textAlign: 'center' },
+  summary: { position: 'absolute', top: 6, left: 12, right: 12, paddingVertical: 4 },
+  dock: { position: 'absolute', left: 12, right: 12, bottom: 8, gap: 6 },
 });

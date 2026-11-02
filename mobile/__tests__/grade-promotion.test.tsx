@@ -84,7 +84,7 @@ describe('Học tập follows the locked grade and school year', () => {
       'GET /api/education/archives': { status: 200, body: { visible_years: 3, items: [ARCHIVE] } },
       'GET /api/education/archives/2026': { status: 200, body: YEAR },
       'GET /api/education/archives/2026/lessons/toan1.dem': { status: 200, body: LESSON },
-      'POST /api/education/archives/2026/lessons/toan1.dem/play': { status: 409, body: { detail: 'x', code: 'open_session_exists' } },
+      'POST /api/education/archives/2026/lessons/toan1.dem/play': { status: 409, body: { detail: 'x', code: 'lesson_not_published' } },
     });
     renderLearning();
     fireEvent.press(await screen.findByRole('button', { name: 'Kho lưu trữ học tập' }));

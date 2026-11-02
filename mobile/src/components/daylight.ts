@@ -109,7 +109,7 @@ function keyframes({ sunrise, noon, sunset }: SunTimes): [number, Light][] {
 }
 
 const hex = (c: string) => [1, 3, 5].map((i) => parseInt(c.slice(i, i + 2), 16));
-function mixColor(a: string, b: string, t: number) {
+export function mixColor(a: string, b: string, t: number) {
   const [p, q] = [hex(a), hex(b)];
   return '#' + p.map((v, i) => Math.round(v + (q[i] - v) * t).toString(16).padStart(2, '0')).join('').toUpperCase();
 }

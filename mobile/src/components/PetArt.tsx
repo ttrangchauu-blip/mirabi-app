@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Animated, Easing, Image, ImageSourcePropType } from 'react-native';
 import { petById, PetId } from '../pets';
 import { moveActivity, PetActivity, petSprite, SPRITE_LAYOUT, SpriteLayout, stageIndex, WALK_CYCLE_MS } from '../petSprites';
+import { restartFromZero } from '../world/motion';
 import { useReduceMotion } from './useReduceMotion';
 
 type Props = { pet?: string | null; size: number; stage?: number; /** No idle motion (e.g. small picker cards). */ still?: boolean; /** Add a visible alternating gait while the pet is exploring. */ walking?: boolean;
@@ -15,6 +16,8 @@ type Props = { pet?: string | null; size: number; stage?: number; /** No idle mo
    * clock. */ phase?: Animated.Value };
 
 const SILHOUETTE_COLOR = '#93A9BA';
+/** The idle strip's blinks and waves come at uneven moments: it rests on its first frame this long between rounds. */
+const IDLE_REST = [300, 2600] as const;
 
 /** Evolution artwork, Lv.0 (egg) to Lv.6 (king), cut from each element's character sheet. */
 const STAGE_ART: Record<PetId, ImageSourcePropType[]> = {
@@ -76,12 +79,7 @@ const STAGE_ART: Record<PetId, ImageSourcePropType[]> = {
 
 export const petStageArt = (petId: string | null | undefined, stage: number) => STAGE_ART[petById(petId).id][stageIndex(stage)];
 
-/** One linear run from 0 to `toValue`, then a snap back to 0, for use inside Animated.loop. The loop's own reset
- * does not rewind the value on web, so a bare timing would play once and then sit on its last value. */
-export const restartFromZero = (value: Animated.Value, toValue: number, duration: number) => Animated.sequence([
-  Animated.timing(value, { toValue, duration, easing: Easing.linear, useNativeDriver: true }),
-  Animated.timing(value, { toValue: 0, duration: 0, useNativeDriver: true }),
-]);
+export { restartFromZero };
 
 /** A size in whole points. Scenes size the pet from their own width (89.5 points, say); on web a large image shrunk
  * into a box that is not a whole number of pixels is drawn without smoothing, so its edges come out jagged. */
@@ -98,11 +96,13 @@ export const markSheetsLoaded = (sources: ImageSourcePropType[]) => sources.forE
 /** Plays a sprite sheet by sliding it behind a one-frame window, holding each frame (native driver, no re-renders).
  * `paused` holds the first frame. The sheets are large, so `placeholder` (the still artwork) shows until the sheet
  * has loaded, instead of an empty window. */
-export function SpriteCycle({ source, size: rawSize, layout: { cols, rows, cycleMs }, paused, placeholder, once = false, onDone, phase }: {
+export function SpriteCycle({ source, size: rawSize, layout: { cols, rows, cycleMs }, paused, placeholder, once = false, onDone, phase, naturalRest }: {
   source: ImageSourcePropType; size: number; layout: SpriteLayout; paused: boolean; placeholder: ImageSourcePropType;
   /** Drives the frame from outside (1 = one loop) instead of the strip's own clock. */ phase?: Animated.Value;
   /** Play through a single time, starting once the sheet has loaded, then hold the last frame and call `onDone`. */
   once?: boolean; onDone?: () => void;
+  /** Between two runs of the strip it holds its first frame for a while in this range (ms), a different one each time. */
+  naturalRest?: readonly [number, number];
 }) {
   const size = wholePixels(rawSize);
   const frames = cols * rows;
@@ -118,12 +118,29 @@ export function SpriteCycle({ source, size: rawSize, layout: { cols, rows, cycle
   useEffect(() => {
     progress.setValue(0);
     if (paused || !ready || phase) return;
+    if (naturalRest) {
+      let stopped = false;
+      let timer: ReturnType<typeof setTimeout> | null = null;
+      let play: Animated.CompositeAnimation | null = null;
+      const round = () => {
+        if (stopped) return;
+        progress.setValue(0);
+        play = Animated.timing(progress, { toValue: frames, duration: cycleMs, easing: Easing.linear, useNativeDriver: true });
+        play.start(({ finished }) => {
+          if (!finished || stopped) return;
+          progress.setValue(0);
+          timer = setTimeout(round, naturalRest[0] + Math.random() * (naturalRest[1] - naturalRest[0]));
+        });
+      };
+      round();
+      return () => { stopped = true; play?.stop(); if (timer) clearTimeout(timer); };
+    }
     const run = once
       ? Animated.timing(progress, { toValue: frames, duration: cycleMs, easing: Easing.linear, useNativeDriver: true })
       : Animated.loop(restartFromZero(progress, frames, cycleMs));
     run.start(({ finished }) => { if (once && finished) done.current?.(); });
     return () => run.stop();
-  }, [progress, frames, cycleMs, paused, once, ready, phase]);
+  }, [progress, frames, cycleMs, paused, once, ready, phase, naturalRest]);
   const inputRange: number[] = [];
   const xs: number[] = [];
   const ys: number[] = [];
@@ -202,7 +219,7 @@ export function PetArt({ pet: petId, size: rawSize, stage = 1, still: stillProp,
     const paced = activity === 'walk' || activity === 'moveRight' || activity === 'moveLeft' ? phase : undefined;
     const strip = <SpriteCycle key={paced ? 'paced' : 'clock'} source={sprite} size={size}
       layout={drawnMove && strolling ? { ...layout, cycleMs: layout.cycleMs * 2 } : layout}
-      paused={reduceMotion} placeholder={petStageArt(petId, stage)} phase={paced} />;
+      paused={reduceMotion} placeholder={petStageArt(petId, stage)} phase={paced} naturalRest={activity === 'idle' ? IDLE_REST : undefined} />;
     if (!eggBreath) return strip;
     return <Animated.View style={{ transformOrigin: '50% 100%', transform: [
       { scaleX: breathe.interpolate({ inputRange: [0, 1], outputRange: [1, 0.985] }) },

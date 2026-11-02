@@ -19,6 +19,7 @@ import type { FoundStack, Layout, OwnRoom, Pose } from '../../room/types';
 import { appTheme as t } from '../../theme';
 import { AppModal } from '../../ui/AppModal';
 import { useConfirm } from '../../ui/ConfirmDialog';
+import { elevation, glass, radius } from '../../ui/design';
 import { Button, ProgressBar, SoftInput } from '../../ui/kit';
 import { useToast } from '../../ui/Toast';
 import type { FocusTimer } from '../main/MainApp';
@@ -32,7 +33,11 @@ import { TAB_BAR_RADIUS } from '../main/TabBar';
 import { useRoomEditor } from './useRoomEditor';
 import { HealingDock } from '../healing/HealingDock';
 import { HealingLayer } from '../healing/HealingLayer';
-import { RoomAmbience, skyOf, withLiveSky } from '../healing/RoomAmbience';
+import { isLamp, lampLit, RoomAmbience, skyOf, withLiveSky } from '../healing/RoomAmbience';
+import { useAtmosphere } from '../../world/atmosphere';
+import { useFrameWatch } from '../../world/budget';
+import { WeatherChip } from '../../world/living';
+import { useWeather } from '../../world/weather';
 import { useDayPeriod } from '../../components/useDayPeriod';
 import type { Ambience } from '../../life/types';
 
@@ -43,17 +48,21 @@ type Props = {
    * changes are confirmed first); false keeps the user here. Null when nothing needs asking. */
   leaveGuard?: React.MutableRefObject<(() => Promise<boolean>) | null>;
   onOpenAlbum: () => void;
-  /** Opens Community → Bạn bè, where friends' rooms are visited. */
-  onOpenFriends?: () => void;
+  /** Khám phá: from the note saying the pet is out on its walk. */
+  onOpenExplore?: () => void;
+  /** Where its own content starts (under the switcher of places). */
+  contentTop?: number;
+  /** Decorating started or ended: it takes the whole screen. */
+  onDecorating?: (decorating: boolean) => void;
   /** The egg is hatching on the Home screen (its animation or congratulations): no interactions with it here. */
   hatching?: boolean;
-  /** "Kho đồ" and "Vườn nhà" in the room's settings. */
+  /** "Kho đồ" in the room's settings. */
   onOpenInventory?: () => void;
-  onOpenGarden?: () => void;
-  /** Bumped to open the room straight in Góc thư giãn (from Tiện ích → Cuộc sống Mirabi). */
-  healingRequest?: number;
   /** Góc thư giãn is for users aged 16 and over (life/access.ts): without it the room has no Healing button. */
   healingAllowed?: boolean;
+  /** "Nhật ký phản tư" in Tiện ích: opens in Góc thư giãn with the journal on top; said back once it is open. */
+  startJournal?: boolean;
+  onJournalStarted?: () => void;
 };
 
 const LINES: Record<Pose, string[]> = {
@@ -76,22 +85,24 @@ function ownerPose(timer: FocusTimer, room: OwnRoom): Pose {
   return poseFor(wanted, room.room.layout);
 }
 
-/** Points kept at the top for the floating header panel (8 above it, its 96 and a gap of 6). Fixed, so nothing in the
- * panel (a longer name, the offline notice) ever moves or rescales the room. */
-const HEADER_RESERVE = 110;
+/** Points kept at the top for the floating panel (6 above it, its 48 and a gap of 6). Fixed, so nothing in the panel (a
+ * longer name, the notes under it) ever moves or rescales the room. */
+const HEADER_RESERVE = 60;
 /** The decorating header's height under the safe area: one row of 40-point buttons. */
 const EDIT_HEADER = 56;
 
 /**
- * Phòng cá nhân, a tab of the main menu: the room edge to edge over the whole space above the menu bar (and under its
- * rounded corners), with one compact panel floating over its wall: the room's name and the icons (Bạn bè, Cài đặt,
- * Chụp ảnh), the pet's level and EXP, and what it is doing. Its camera depends only on the screen and a fixed reserve
+ * Nhà của pet, the first place of Cuộc sống Mirabi: the room edge to edge over the whole space above the menu bar (and
+ * under its rounded corners), with one compact bar floating over its wall: the pet, its level and EXP, and the room's
+ * few actions (Góc thư giãn, Chụp ảnh, Cài đặt); a small note under it says what the pet is doing when that is worth
+ * saying. Its camera depends only on the screen and a fixed reserve
  * (`HEADER_RESERVE`), so nothing in the panel ever moves it. Decorating keeps the menu bar and puts the room between its own header and the decorating panel, never
  * under them (every item, up to the top of the wall, can be reached and dragged); both have fixed heights, so nothing
  * selected, moved or stored ever moves the room.
  */
-export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenFriends, hatching = false, onOpenInventory, onOpenGarden, healingRequest = 0, healingAllowed = false }: Props) {
+export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenExplore, contentTop, onDecorating, hatching = false, onOpenInventory, healingAllowed = false, startJournal = false, onJournalStarted }: Props) {
   const insets = useSafeAreaInsets();
+  const barTop = contentTop ?? insets.top;
   const { height: screenHeight } = useViewportSize();
   const toast = useToast();
   const confirm = useConfirm();
@@ -115,16 +126,15 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenFriends, h
   // Until when the pet's last interaction plays: taps meanwhile neither open its menu nor start it again.
   const playing = useRef(0);
   // Where the floating header ends: the room's content starts under it, and the pet's menu and lines stay below it.
-  const [headerBottom, setHeaderBottom] = useState(insets.top + 104);
+  const [headerBottom, setHeaderBottom] = useState(barTop + HEADER_RESERVE);
   const onHeaderLayout = (e: LayoutChangeEvent) => {
     const bottom = Math.round(e.nativeEvent.layout.y + e.nativeEvent.layout.height);
     setHeaderBottom((b) => (b === bottom ? b : bottom));
   };
   // Góc thư giãn: a mode of this same room (its ambience drawn over it and the Healing panel), never a second room.
-  const [healing, setHealing] = useState(false);
+  const [healing, setHealing] = useState(startJournal && healingAllowed);
   const [ambience, setAmbience] = useState<Ambience>('cozy_night');
   const [healingRest, setHealingRest] = useState(false);
-  useEffect(() => { if (healingRequest && healingAllowed) setHealing(true); }, [healingRequest, healingAllowed]);
   useEffect(() => { if (!healingAllowed) setHealing(false); }, [healingAllowed]);
   const prefs = useRoomPrefs(user.id);
   const playSound = useRoomSounds(prefs.sound);
@@ -155,6 +165,10 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenFriends, h
   }, [data?.walk.away, data?.walk.return_at, load]);
 
   const decorating = draft !== null;
+  const reportDecorating = useRef(onDecorating);
+  reportDecorating.current = onDecorating;
+  useEffect(() => { reportDecorating.current?.(decorating); }, [decorating]);
+  useEffect(() => () => reportDecorating.current?.(false), []);
   const cancel = editor.stop;
   const changed = !!draft && !!data && JSON.stringify(draft) !== JSON.stringify(data.room.layout);
   /** Leaves decorating, after asking when there are unsaved changes; false when the user keeps decorating. */
@@ -188,9 +202,14 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenFriends, h
   // The windows show the sky of the hour (drawing only: the saved room is unchanged). While decorating they show the
   // saved variant, the one being chosen.
   const sky = skyOf(useDayPeriod());
+  const { reading } = useWeather();
+  const { hours, mood, night } = useAtmosphere(reading);
+  useFrameWatch('room');
   const sceneLayout = useMemo(() => (shown && !draft ? withLiveSky(shown.room.layout, sky) : shown?.room.layout), [shown, draft, sky]);
-  const underlay = useCallback((k: number) => (sceneLayout ? <RoomAmbience layout={sceneLayout} ambience={ambience} sky={sky} k={k} /> : null),
-    [sceneLayout, ambience, sky]);
+  // The whole room's light, by the quarter hour: it changes far too slowly to redraw more often.
+  const lightHours = Math.round(hours * 4) / 4;
+  const underlay = useCallback((k: number) => (sceneLayout ? <RoomAmbience layout={sceneLayout} ambience={healing ? ambience : null} sky={sky} k={k} hours={lightHours} mood={mood} lamps={prefs.lamps} /> : null),
+    [sceneLayout, healing, ambience, sky, lightHours, mood, prefs.lamps]);
   // "Đặt vào phòng" from Kho đồ: decorating opens on "Đồ khám phá" with one more copy of it.
   useEffect(() => {
     if (!queued || !data) return;
@@ -225,7 +244,7 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenFriends, h
     : pose === 'rest' ? { icon: 'cafe-outline' as const, text: 'Đang nghỉ giải lao' }
     : healing ? { icon: 'leaf-outline' as const, text: 'Đang thư giãn cùng bạn' }
     : stage === 0 ? { icon: 'egg-outline' as const, text: 'Trứng đang được ủ ấm' }
-    : { icon: 'home-outline' as const, text: 'Đang thư giãn trong phòng' };
+    : null;
 
   const say = (text: string, action?: PetAction) => setReaction((r) => ({ key: (r?.key ?? 0) + 1, text, action }));
   /** A tap on the pet: its menu, or, while it can't play (out walking, an egg, hatching), what it is doing. */
@@ -312,7 +331,6 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenFriends, h
     if ('problem' in result) { refused(result.problem); return; }
     toast(`Đã cất ${result.stored.map(nameOf).join(', ')} vào kho.`, 'info');
   }
-  const openFriends = () => { setSettings(false); setPetMenu(false); onOpenFriends?.(); };
   const openSettings = () => { setPetMenu(false); setSettings(true); };
   // The photo is drawn by the backend from the room and the pet only, so no button or menu is ever in it.
   const takePhoto = () => {
@@ -323,8 +341,9 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenFriends, h
   };
 
   const scene = (
-    <RoomScene layout={sceneLayout ?? shown.room.layout} underlay={healing && !decorating ? underlay : undefined} pet={{ id: data.pet.id, name: petName, level }} pose={pose} away={away} fullScreen
-      safeTop={insets.top + HEADER_RESERVE} safeBottom={TAB_BAR_RADIUS}
+    <RoomScene layout={sceneLayout ?? shown.room.layout} underlay={!decorating ? underlay : undefined} pet={{ id: data.pet.id, name: petName, level }} pose={pose} away={away} fullScreen
+      safeTop={barTop + HEADER_RESERVE} safeBottom={TAB_BAR_RADIUS}
+      onItemPress={(item) => { if (isLamp(item.item)) prefs.setLamp(keyOf(item), !lampLit(item, sky, mood, healing ? ambience : null, prefs.lamps)); }}
       chrome={decorating ? { top: insets.top + EDIT_HEADER, bottom: decoratePanelHeight(screenHeight) + TAB_BAR_RADIUS } : undefined}
       menuTop={decorating ? undefined : headerBottom + 6}
       onPetPress={decorating ? undefined : tapPet} petLabel={`${petName}, chạm để mở menu tương tác`}
@@ -359,41 +378,40 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenFriends, h
       ) : null}
       {/* Over the room's wall, never on a band of its own: the room goes on behind it up to the top of the screen. */}
       {tools ? null : (
-        <View style={[s.overlay, sides, { paddingTop: insets.top + 8 }]} pointerEvents="box-none" onLayout={onHeaderLayout}>
-          {/* One translucent panel: name and icons, the pet's level and EXP, what it is doing. Every row has a fixed height. */}
+        <View style={[s.overlay, sides, { paddingTop: barTop + 6 }]} pointerEvents="box-none" onLayout={onHeaderLayout}>
+          {/* One translucent bar with a fixed height: who the pet is, how far along, the weather, the room's actions. */}
           <View style={s.panel} testID="room-header">
-            <View style={s.topRow}>
-              <Text style={s.title} accessibilityRole="header" numberOfLines={1}>{data.room.name}</Text>
-              {healingAllowed ? <Pressable onPress={() => { setPetMenu(false); setHealing((h) => !h); setHealingRest(false); }} hitSlop={6}
-                style={({ pressed }) => [s.icon, healing && s.iconOn, pressed && s.pressed]} accessibilityRole="switch"
-                accessibilityState={{ checked: healing }} accessibilityLabel="Góc thư giãn" testID="healing-toggle">
-                <Ionicons name={healing ? 'leaf' : 'leaf-outline'} size={20} color={healing ? '#FFFFFF' : '#2F7A55'} />
-              </Pressable> : null}
-              <Pressable onPress={openFriends} hitSlop={6} style={({ pressed }) => [s.icon, pressed && s.pressed]} accessibilityRole="button"
-                accessibilityLabel="Ghé phòng bạn bè">
-                <Ionicons name="people" size={20} color={t.ink} />
-              </Pressable>
-              <Pressable onPress={openSettings} hitSlop={6} style={({ pressed }) => [s.icon, pressed && s.pressed]} accessibilityRole="button"
-                accessibilityLabel="Cài đặt">
-                <Ionicons name="settings" size={20} color={t.ink} />
-              </Pressable>
-              <Pressable onPress={takePhoto} hitSlop={6} style={({ pressed }) => [s.icon, pressed && s.pressed]} accessibilityRole="button"
-                accessibilityLabel="Chụp ảnh">
-                <Ionicons name="camera" size={20} color={t.accent} />
-              </Pressable>
-            </View>
             {/* The stage's name (Sơ Sinh…) is left to the pet's details; screen readers still hear it. */}
-            <View style={s.petRow} accessible accessibilityLabel={`${petName}, cấp ${stage} ${PET_STAGE_NAMES[stage]}, ${next ? `${xp} trên ${next}` : xp} EXP`}>
-              <PetAvatar user={{ pet: data.pet.id, pet_level: level }} size={24} />
-              <Text style={s.petName} numberOfLines={1}>{petName}<Text style={s.petLevel}>{` · Cấp ${stage}`}</Text></Text>
-              <View style={s.expBar}><ProgressBar value={next ? Math.min(1, xp / next) : 1} /></View>
-              <Text style={s.expText} numberOfLines={1}>{next ? `${xp}/${next}` : `${xp} EXP`}</Text>
+            <View style={s.pet} accessible accessibilityRole="header" accessibilityLabel={`${data.room.name}. ${petName}, cấp ${stage} ${PET_STAGE_NAMES[stage]}, ${next ? `${xp} trên ${next}` : xp} EXP`}>
+              <PetAvatar user={{ pet: data.pet.id, pet_level: level }} size={30} />
+              <View style={s.petInfo}>
+                <Text style={s.petName} numberOfLines={1}>{petName}<Text style={s.petLevel}>{` · Cấp ${stage}`}</Text></Text>
+                <View style={s.petRow}>
+                  <View style={s.expBar}><ProgressBar value={next ? Math.min(1, xp / next) : 1} /></View>
+                  <Text style={s.expText} numberOfLines={1}>{next ? `${xp}/${next}` : `${xp} EXP`}</Text>
+                </View>
+              </View>
             </View>
-            <View style={s.status} accessibilityLiveRegion="polite">
+            <WeatherChip night={night} />
+            {healingAllowed ? <Pressable onPress={() => { setPetMenu(false); setHealing((h) => !h); setHealingRest(false); }} hitSlop={6}
+              style={({ pressed }) => [s.icon, healing && s.iconOn, pressed && s.pressed]} accessibilityRole="switch"
+              accessibilityState={{ checked: healing }} accessibilityLabel="Góc thư giãn" testID="healing-toggle">
+              <Ionicons name={healing ? 'leaf' : 'leaf-outline'} size={20} color={healing ? '#FFFFFF' : '#2F7A55'} />
+            </Pressable> : null}
+            <Pressable onPress={takePhoto} hitSlop={6} style={({ pressed }) => [s.icon, pressed && s.pressed]} accessibilityRole="button" accessibilityLabel="Chụp ảnh">
+              <Ionicons name="camera" size={20} color={t.accent} />
+            </Pressable>
+            <Pressable onPress={openSettings} hitSlop={6} style={({ pressed }) => [s.icon, pressed && s.pressed]} accessibilityRole="button" accessibilityLabel="Cài đặt">
+              <Ionicons name="settings" size={20} color={t.ink} />
+            </Pressable>
+          </View>
+          {notice ? (
+            <Pressable onPress={away ? onOpenExplore : undefined} disabled={!away || !onOpenExplore} style={s.status} accessibilityLiveRegion="polite"
+              accessibilityRole={away && onOpenExplore ? 'button' : undefined} accessibilityLabel={notice.text}>
               <Ionicons name={notice.icon} size={13} color={t.accent} />
               <Text style={s.statusText} numberOfLines={1}>{notice.text}</Text>
-            </View>
-          </View>
+            </Pressable>
+          ) : null}
           {offline ? (
             <Pressable onPress={() => { void load(); }} style={s.offline} accessibilityRole="button" accessibilityLabel="Đang ngoại tuyến, chạm để thử lại">
               <Ionicons name="cloud-offline-outline" size={15} color={t.muted} />
@@ -405,7 +423,7 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenFriends, h
 
       {healing && !tools ? (
         <HealingDock userId={user.id} ambience={ambience} onAmbience={setAmbience} bottom={TAB_BAR_RADIUS + 8}
-          onPetResponse={(response) => say(response.line)} onResting={setHealingRest}
+          onPetResponse={(response) => say(response.line)} onResting={setHealingRest} startJournal={startJournal} onJournalStarted={onJournalStarted}
           onPet={() => { if (away) toast(`${petName} đang đi dạo, về lúc ${clockLabel(data.walk.return_at!)} nhé.`, 'info'); else if (stage === 0) tapPet(); else act('pet'); }} />
       ) : null}
       {tools ? (
@@ -430,10 +448,7 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenFriends, h
             onChange={prefs.setEffects} />
           {onOpenInventory ? <OptionRow icon="cube-outline" label="Kho đồ" description="Đồ pet mang về từ những chuyến khám phá"
             onPress={() => { setSettings(false); onOpenInventory(); }} /> : null}
-          {onOpenGarden ? <OptionRow icon="leaf-outline" label="Vườn nhà" description="Trồng hạt giống pet mang về"
-            onPress={() => { setSettings(false); onOpenGarden(); }} /> : null}
-          <OptionRow icon="create-outline" label="Đổi tên phòng" onPress={() => { setSettings(false); setRename(data.room.name); }} />
-          <OptionRow icon="images-outline" label="Album kỷ niệm" onPress={() => { setSettings(false); onOpenAlbum(); }} />
+          <OptionRow icon="create-outline" label="Đổi tên phòng" description={data.room.name} onPress={() => { setSettings(false); setRename(data.room.name); }} />
         </ScrollView>
       </OptionSheet>
       <AppModal visible={inventory} animationType="slide" onRequestClose={() => setInventory(false)}>
@@ -465,28 +480,26 @@ const s = StyleSheet.create({
   centerText: { color: t.muted, fontSize: 14, lineHeight: 20, textAlign: 'center' },
   // The room goes on under the menu bar's rounded corners, so no other background shows beside them.
   underBar: { marginBottom: -TAB_BAR_RADIUS },
-  // The header floating over the room's wall: one panel of three fixed rows (8 + 32 + 4 + 24 + 4 + 16 + 8 = 96 points),
-  // white enough for its text on the night wall as on the cream one.
+  // The bar floating over the room's wall: one row of a fixed 48 points, white enough for its text on the night wall as
+  // on the cream one.
   overlay: { position: 'absolute', top: 0, left: 0, right: 0, gap: 6 },
-  panel: { paddingHorizontal: 10, paddingVertical: 8, gap: 4, borderRadius: 14, backgroundColor: 'rgba(255,255,255,0.86)',
-    borderWidth: 1, borderColor: 'rgba(18,59,92,0.08)', shadowColor: t.shadow, shadowOpacity: 0.12, shadowRadius: 8,
-    shadowOffset: { width: 0, height: 2 }, elevation: 2 },
-  topRow: { height: 32, flexDirection: 'row', alignItems: 'center' },
-  title: { flex: 1, minWidth: 0, color: t.ink, fontSize: 16, lineHeight: 20, fontWeight: '900', marginRight: 4 },
-  // 44 wide and, with its hit slop, 44 tall to touch; no circle of its own.
-  icon: { width: 44, height: 32, alignItems: 'center', justifyContent: 'center', borderRadius: 10 },
+  panel: { height: 48, flexDirection: 'row', alignItems: 'center', paddingLeft: 8, paddingRight: 2, borderRadius: radius.md, ...glass, ...elevation.floating },
+  pet: { flex: 1, minWidth: 0, flexDirection: 'row', alignItems: 'center', gap: 7 },
+  petInfo: { flex: 1, minWidth: 0 },
+  // 40 wide and, with its hit slop, 44 tall to touch; no circle of its own.
+  icon: { width: 40, height: 36, alignItems: 'center', justifyContent: 'center', borderRadius: 10 },
   iconOn: { backgroundColor: '#2F7A55' },
-  petRow: { height: 24, flexDirection: 'row', alignItems: 'center', gap: 6 },
+  petRow: { height: 14, flexDirection: 'row', alignItems: 'center', gap: 6 },
   editHeader: { position: 'absolute', top: 0, left: 0, right: 0, paddingBottom: 8, backgroundColor: '#FFFFFF', borderBottomWidth: 1,
     borderBottomColor: '#E3EDF4' },
   // Over the bottom of the room, above the menu bar (its last points under the bar's rounded corners).
   panelDock: { position: 'absolute', left: 0, right: 0, bottom: 0, paddingBottom: TAB_BAR_RADIUS, backgroundColor: '#FFFFFF' },
-  status: { height: 16, flexDirection: 'row', alignItems: 'center', gap: 5 },
+  status: { alignSelf: 'flex-start', maxWidth: '100%', minHeight: 26, flexDirection: 'row', alignItems: 'center', gap: 5, paddingHorizontal: 10, borderRadius: radius.pill, ...glass },
   statusText: { flexShrink: 1, color: t.ink, fontSize: 12, lineHeight: 16, fontWeight: '800' },
-  // The name gives way first on a narrow screen; the bar takes what is left, the numbers keep their place.
-  petName: { flexShrink: 1, maxWidth: '46%', color: t.ink, fontSize: 13, lineHeight: 17, fontWeight: '900' },
+  // The numbers keep their place; the name gives way first on a narrow screen.
+  petName: { color: t.ink, fontSize: 13, lineHeight: 17, fontWeight: '900' },
   petLevel: { color: t.muted, fontSize: 12, fontWeight: '700' },
-  expBar: { flex: 1, minWidth: 40, height: 5, borderRadius: 3, overflow: 'hidden', justifyContent: 'center' },
+  expBar: { flex: 1, minWidth: 24, height: 5, borderRadius: 3, overflow: 'hidden', justifyContent: 'center' },
   expText: { flexShrink: 0, color: t.muted, fontSize: 11, fontWeight: '800' },
   offline: { alignSelf: 'flex-start', maxWidth: '100%', flexDirection: 'row', alignItems: 'center', gap: 5, paddingHorizontal: 8,
     paddingVertical: 4, borderRadius: 12, backgroundColor: '#FFF6E8E6' },

@@ -53,7 +53,7 @@ beforeEach(async () => {
 });
 
 test('each vocabulary game shows its level, new words left and Ôn tập; a tap discovers new words of the topic chosen', async () => {
-  const server = mockServer({ ...base, 'POST /api/learning/play': { status: 409, body: { detail: 'x', code: 'open_session_exists' } } });
+  const server = mockServer({ ...base, 'POST /api/learning/play': { status: 409, body: { detail: 'x', code: 'lesson_not_published' } } });
   await openEnglish();
   expect(await screen.findAllByLabelText('Cấp 1, Rất dễ: đã khám phá 35 trên 420 từ')).toHaveLength(2);
   expect(screen.getByRole('button', { name: 'Ôn tập, 6 từ cần ôn' })).toBeTruthy();
@@ -70,7 +70,7 @@ test('each vocabulary game shows its level, new words left and Ôn tập; a tap 
   await waitFor(() => expect(server.callsTo('POST /api/learning/play')).toHaveLength(1));
   expect(server.callsTo('POST /api/learning/play')[0].body).toMatchObject({ game: 'meteor', vocab: 'discover', topic: 'animals' });
 
-  expect(await screen.findByText('Bạn đang có một chặng chưa xong. Hãy tiếp tục hoặc kết thúc chặng đó trước.')).toBeTruthy();
+  expect(await screen.findByText('Trò chơi này của bài đang được cập nhật. Bạn thử lại sau nhé.')).toBeTruthy();
   fireEvent.press(screen.getByRole('button', { name: 'Ôn tập, 6 từ cần ôn' }));
   await waitFor(() => expect(server.callsTo('POST /api/learning/play')).toHaveLength(2));
   expect(server.callsTo('POST /api/learning/play')[1].body).toMatchObject({ game: 'meteor', vocab: 'review' });
@@ -102,7 +102,7 @@ test('a completed level is celebrated once: shown, recorded as seen, and gone th
       celebration: shown ? null : party, current_level: 2,
       levels: progress('meteor').levels.map((l) => (l.level === 1 ? { ...l, status: 'completed', discovered: 420 } : l.level === 2 ? { ...l, status: 'unlocked' } : l)) }) }),
     'POST /api/learning/vocabulary/levels/meteor/1/celebrated': () => { shown = true; return { status: 200, body: { celebrated: true } }; },
-    'POST /api/learning/play': { status: 409, body: { detail: 'x', code: 'open_session_exists' } } });
+    'POST /api/learning/play': { status: 409, body: { detail: 'x', code: 'lesson_not_published' } } });
   await openEnglish();
   const overlay = await screen.findByTestId('vocab-celebration');
   expect(within(overlay).getByText(party.title)).toBeTruthy();
@@ -124,7 +124,7 @@ test('an older server without levels: the games play as before, no strip', async
   const server = mockServer({ ...base,
     'GET /api/learning/vocabulary/progress?game=meteor': { status: 404, body: { detail: 'Not found', code: 'not_found' } },
     'GET /api/learning/vocabulary/progress?game=word_shooter': { status: 404, body: { detail: 'Not found', code: 'not_found' } },
-    'POST /api/learning/play': { status: 409, body: { detail: 'x', code: 'open_session_exists' } } });
+    'POST /api/learning/play': { status: 409, body: { detail: 'x', code: 'lesson_not_published' } } });
   await openEnglish();
   fireEvent.press(await screen.findByRole('button', { name: /^Bắn thiên thạch \(Việt → Anh\)\./ }));
   await waitFor(() => expect(server.callsTo('POST /api/learning/play')).toHaveLength(1));

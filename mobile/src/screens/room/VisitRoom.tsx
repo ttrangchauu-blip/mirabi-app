@@ -19,6 +19,10 @@ import { SUBJECTS } from '../together/labels';
 import { OptionRow, OptionSheet, PetAvatar } from '../together/ui';
 import { PLAY_MS } from '../../room/prefs';
 import { RoomScene, type PetMenuAction } from './RoomScene';
+import { RoomAmbience, skyOf } from '../healing/RoomAmbience';
+import { useDayPeriod } from '../../components/useDayPeriod';
+import { useAtmosphere } from '../../world/atmosphere';
+import { useWeather } from '../../world/weather';
 
 type Props = {
   userId: number;
@@ -63,6 +67,13 @@ export function VisitRoom({ userId, me, onBack, onOpenStudyRoom }: Props) {
   const failed = useRef<{ key: string; id: string } | null>(null);
   const [hearts, setHearts] = useState(0);
   const [petMenu, setPetMenu] = useState(false);
+  const sky = skyOf(useDayPeriod());
+  const { reading } = useWeather();
+  const { hours, mood } = useAtmosphere(reading);
+  const lightHours = Math.round(hours * 4) / 4;
+  const shownLayout = data?.room.layout;
+  const underlay = useCallback((k: number) => (shownLayout ? <RoomAmbience layout={shownLayout} ambience={null} sky={sky} k={k} hours={lightHours} mood={mood} /> : null),
+    [shownLayout, sky, lightHours, mood]);
   // Until when the last "Chào pet" plays: taps meanwhile neither open the menu nor start it again.
   const playing = useRef(0);
   // Playing with the pet: asked the backend at most once a visit (the same id again after a lost connection).
@@ -245,7 +256,7 @@ export function VisitRoom({ userId, me, onBack, onOpenStudyRoom }: Props) {
         </View>
       </View>
       <View style={s.sceneWrap}>
-        <RoomScene layout={room.room.layout} pet={{ ...room.pet, name: petName }} pose={pose} away={away}
+        <RoomScene layout={room.room.layout} underlay={underlay} pet={{ ...room.pet, name: petName }} pose={pose} away={away}
           guest={{ ...room.guest_pet, name: room.guest_pet.name ?? me.pet_name }} reaction={reaction}
           onPetPress={away ? undefined : openMenu} petLabel={`${petName}, chạm để chào hoặc động viên`} hearts={hearts}
           petMenu={petMenu ? { actions: menuActions, onAction: onMenu, onClose: () => setPetMenu(false) } : null}

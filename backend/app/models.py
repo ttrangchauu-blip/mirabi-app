@@ -1740,3 +1740,23 @@ class UserCareerAchievement(Base):
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
     milestone_id: Mapped[int] = mapped_column(ForeignKey("career_milestones.id", ondelete="CASCADE"))
     earned_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class WeatherCache(Base):
+    """The last weather read for one map cell (about 11 km, see world.py). It holds no user id: nothing here says who
+    asked. `payload` is NULL until a read succeeds; `expires_at` is when the provider may be asked again."""
+    __tablename__ = "weather_cache"
+    cell: Mapped[str] = mapped_column(String(16), primary_key=True)
+    payload: Mapped[str | None] = mapped_column(Text, nullable=True)  # JSON from world.fetch_current
+    fetched_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
+
+
+class WorldPreference(Base):
+    """How the living world looks and sounds for one user (sound, effects, motion, lamps switched by hand). `version`
+    grows on every save, so a save from an outdated screen is refused instead of silently undoing another."""
+    __tablename__ = "world_preferences"
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
+    settings_json: Mapped[str] = mapped_column(Text, default="{}", server_default="{}")
+    version: Mapped[int] = mapped_column(Integer, default=1, server_default="1")
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)

@@ -160,4 +160,12 @@ export function along(path: Point[], distance: number): { at: Point; facing: 1 |
   return { at: last, facing: last.x < before.x - 0.5 ? -1 : 1, done: true };
 }
 
+/** How fast a walking pet goes after `elapsedMs`, with `remaining` units to go: it picks up over its first steps and
+ * slows into its last, never to a stop before it arrives. */
+export function walkSpeedAt(elapsedMs: number, remaining: number) {
+  const starting = Math.min(1, 0.35 + elapsedMs / 280);
+  const stopping = Math.max(0.4, Math.min(1, remaining / 28));
+  return WALK_SPEED * Math.min(starting, stopping);
+}
+
 export const pathLength = (path: Point[]) => path.slice(1).reduce((sum, b, i) => sum + Math.hypot(b.x - path[i].x, b.feet - path[i].feet), 0);

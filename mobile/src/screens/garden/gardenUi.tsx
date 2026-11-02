@@ -1,14 +1,15 @@
 import React from 'react';
-import { ActivityIndicator, Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { SvgXml } from 'react-native-svg';
 import { Text } from '../../components/Typography';
-import { GARDEN_PLANTS, SOIL_PLOT } from '../../gardenArt';
+import { GARDEN_PLANTS } from '../../gardenArt';
 import type { CareKind, GardenPlot, PlantedPlot, PlotCare } from '../../inventory/types';
 import { appTheme as t } from '../../theme';
+import { radius } from '../../ui/design';
 import type { IconName } from '../../ui/kit';
 
-/** The pieces both gardens share (yours and a friend's): the summary bar, the tools, the plots and a plant's detail. */
+/** The pieces both gardens share (yours and a friend's), besides the scene itself: the summary bar, the tools and a plant's detail. */
 
 export const CARE: Record<CareKind, { label: string; short: string; done: string; icon: IconName; color: string; bg: string }> = {
   water: { label: 'Tưới nước', short: 'Tưới', done: 'Đã tưới', icon: 'water', color: '#1B6FA8', bg: '#DCEFFB' },
@@ -32,7 +33,7 @@ export function careText(plot: PlantedPlot, kind: CareKind) {
 // ------------------------------------------------------------------------------------------------ summary bar
 export type Stat = { icon: IconName; text: string; label?: string; tone?: 'warn' };
 
-/** One small line of numbers above the garden instead of separate cards. */
+/** One small line of numbers over the garden instead of separate cards. */
 export function SummaryBar({ stats }: { stats: Stat[] }) {
   return (
     <View style={s.summary} accessibilityRole="summary">
@@ -63,42 +64,6 @@ export function ToolBar({ tools, active, onChange }: { tools: Tool[]; active: st
               <Ionicons name={tool.icon} size={15} color={on ? '#FFFFFF' : tool.color} />
             </View>
             <Text style={[s.toolText, on && s.toolTextOn]} numberOfLines={1}>{tool.label}</Text>
-          </Pressable>
-        );
-      })}
-    </View>
-  );
-}
-
-// ------------------------------------------------------------------------------------------------ plots
-/** Three plots a row, so the whole garden fits on screen; the soil and plant stay large enough to see and tap. */
-export function PlotGrid({ plots, busy, ready, labelFor, onPress }: {
-  plots: GardenPlot[]; busy: number | null; /** Plots the chosen tool would act on (outlined). */ ready: (plot: GardenPlot) => boolean;
-  labelFor: (plot: GardenPlot) => string; onPress: (plot: GardenPlot) => void;
-}) {
-  return (
-    <View style={s.plots}>
-      {plots.map((plot) => {
-        const art = plot.empty ? null : (GARDEN_PLANTS[plot.item_id] ?? GARDEN_PLANTS.seedling)?.[plot.stage];
-        const on = ready(plot);
-        return (
-          <Pressable key={plot.plot} onPress={() => onPress(plot)} style={({ pressed }) => [s.plot, on && s.plotReady, pressed && s.pressed]}
-            accessibilityRole="button" accessibilityLabel={labelFor(plot)} testID={`garden-plot-${plot.plot}`}>
-            <View style={s.plotArt}>
-              <View style={s.soil}><SvgXml xml={SOIL_PLOT} width="100%" height="100%" /></View>
-              {art ? <View style={s.plant}><SvgXml xml={art} width="100%" height="100%" /></View>
-                : <Ionicons name={on ? 'add-circle' : 'add-circle-outline'} size={24} color={on ? '#2E8C3A' : '#8A6A48'} style={s.plus} />}
-              {plot.empty ? null : (
-                <View style={s.badges}>
-                  {CARE_KINDS.filter((k) => careOf(plot, k).done).map((k) => (
-                    <View key={k} style={[s.badge, { backgroundColor: CARE[k].bg }]}><Ionicons name={CARE[k].icon} size={10} color={CARE[k].color} /></View>
-                  ))}
-                </View>
-              )}
-              {busy === plot.plot ? <ActivityIndicator style={StyleSheet.absoluteFill} color={t.accent} /> : null}
-            </View>
-            <Text style={s.plotName} numberOfLines={1}>{plot.empty ? 'Ô trống' : plot.name}</Text>
-            <Text style={s.plotStage} numberOfLines={1}>{plot.empty ? ' ' : growthText(plot)}</Text>
           </Pressable>
         );
       })}
@@ -156,28 +121,16 @@ const s = StyleSheet.create({
   flex: { flex: 1, minWidth: 0 },
   pressed: { opacity: 0.85, transform: [{ scale: 0.97 }] },
   dimmed: { opacity: 0.45 },
-  summary: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', columnGap: 10, rowGap: 4, marginHorizontal: 16, marginBottom: 8,
-    paddingHorizontal: 10, paddingVertical: 6, borderRadius: 12, backgroundColor: '#E6F4E4' },
+  summary: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', columnGap: 10, rowGap: 2, paddingHorizontal: 2, paddingVertical: 2 },
   stat: { flexDirection: 'row', alignItems: 'center', gap: 4 },
   statText: { color: '#1F5A26', fontSize: 11, fontWeight: '700' },
   statWarn: { color: '#A15C00' },
-  tools: { flexDirection: 'row', gap: 6, marginHorizontal: 16, marginBottom: 8 },
-  tool: { flex: 1, minWidth: 0, minHeight: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 5, paddingHorizontal: 6,
-    borderRadius: 14, backgroundColor: '#FFFFFF', borderWidth: 1.5, borderColor: '#D3E6D0' },
-  toolIcon: { width: 24, height: 24, borderRadius: 12, alignItems: 'center', justifyContent: 'center' },
+  tools: { flexDirection: 'row', gap: 6 },
+  tool: { flex: 1, minWidth: 0, minHeight: 44, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 4, paddingHorizontal: 3,
+    borderRadius: radius.md, backgroundColor: '#FFFFFF', borderWidth: 1.5, borderColor: '#D3E6D0' },
+  toolIcon: { width: 22, height: 22, borderRadius: 11, alignItems: 'center', justifyContent: 'center' },
   toolText: { flexShrink: 1, color: t.ink, fontSize: 11.5, fontWeight: '700' },
   toolTextOn: { color: '#FFFFFF' },
-  plots: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, paddingHorizontal: 16 },
-  plot: { width: '31.5%', flexGrow: 1, borderRadius: 16, padding: 6, backgroundColor: '#CFE9B8', borderWidth: 2, borderColor: '#A9D48A' },
-  plotReady: { borderColor: '#2E8C3A', backgroundColor: '#BFE3A4' },
-  plotArt: { height: 84, alignItems: 'center', justifyContent: 'flex-end' },
-  soil: { position: 'absolute', left: 2, right: 2, bottom: 0, height: 38 },
-  plant: { position: 'absolute', left: '10%', right: '10%', bottom: 13, top: 0 },
-  plus: { position: 'absolute', bottom: 10 },
-  badges: { position: 'absolute', top: 0, right: 0, gap: 3 },
-  badge: { width: 18, height: 18, borderRadius: 9, alignItems: 'center', justifyContent: 'center' },
-  plotName: { color: '#21401A', fontSize: 11, fontWeight: '800', marginTop: 4 },
-  plotStage: { color: '#3F5E33', fontSize: 10, fontWeight: '600' },
   detail: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 6 },
   detailArt: { width: 64, height: 64, borderRadius: 16, backgroundColor: '#E6F4E4', padding: 4 },
   detailStage: { color: t.ink, fontSize: 14, fontWeight: '800' },

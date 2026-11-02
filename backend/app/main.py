@@ -11,7 +11,7 @@ from sqlalchemy import select
 from . import auth, campus, career, community, companion, dashboard, profile, study, tasks, streaks
 from . import friends, notifications, realtime, room_chat, study_rooms, study_together, team_quests
 from . import education, garden, inventory, learning, learning_history, learning_unlocks, lesson_api, memories, pet_room, room_visits
-from . import adventure, careers, finance, game_tutorials, life, town, work
+from . import adventure, careers, finance, game_tutorials, life, town, work, world
 from .learning_content import seed_learning_content
 from .config import settings
 from .db import SessionLocal, engine
@@ -175,6 +175,7 @@ for feature_router in (
     room_visits.router,
     inventory.router,
     garden.router,
+    world.router,
     learning.router,
 ):
     app.include_router(feature_router)

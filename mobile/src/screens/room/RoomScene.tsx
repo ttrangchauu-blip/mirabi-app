@@ -5,12 +5,15 @@ import { SvgXml } from 'react-native-svg';
 import { PetArt } from '../../components/PetArt';
 import { Text } from '../../components/Typography';
 import { useReduceMotion } from '../../components/useReduceMotion';
-import { hasSprite } from '../../petSprites';
+import { hasSprite, WALK_CYCLE_MS } from '../../petSprites';
 import { frontSvg, geometry, GUEST_SPOT, homeOf, itemArt, itemAt, itemsInFront, keyOf, liftedSvg, petSpot, placedBox, roomSvg, roomView, seatCover, Spot } from '../../room/art';
 import type { PetAction } from '../../room/prefs';
 import { PROBLEM_TEXT, ridersOf, type Change, type Problem } from '../../room/rules';
 import type { Layout, Placement, Pose, RoomKind, RoomPet } from '../../room/types';
-import { along, findPath, pathLength, Point, WALK_SPEED } from '../../room/walk';
+import { along, findPath, pathLength, Point, walkSpeedAt, WALK_SPEED } from '../../room/walk';
+import { useSwing, useWorldMotion } from '../../world/budget';
+import { actTransform, EASE, newActValues, PET_ACTS, playAct } from '../../world/motion';
+import { ACT_OF_INTERACTION, artFor, type PetState, usePetMachine } from '../../world/petMachine';
 import { appTheme as t } from '../../theme';
 
 // Until the first layout pass (and in tests, which have none) the room is drawn in a phone-sized space.
@@ -65,12 +68,16 @@ type Props = {
   walkable?: boolean;
   /** A burst of little hearts over the pet; a new number plays it again. */
   hearts?: number;
-  /** Drawn on the room's canvas under the pets, given the points per canvas unit (Góc thư giãn's windows and lamps). */
+  /** Drawn on the room's canvas under the pets, given the points per canvas unit (the light, windows and lamps). */
   underlay?: (k: number) => React.ReactNode;
+  /** The owner's room: a tap on one of its things. The thing answers with a small bounce; a lamp also switches here. */
+  onItemPress?: (item: Placement) => void;
 };
 
 export type PetMenuAction = { id: string; label: string; icon: React.ComponentProps<typeof Ionicons>['name']; disabled?: boolean; note?: string };
 
+/** Canvas units along the floor per full loop of the walk strip, at its walking pace. Its steps follow the distance. */
+const STRIDE = (WALK_SPEED * WALK_CYCLE_MS) / 1000;
 const TAP_SLOP = 8; // a touch that moves more than this (screen points) is a drag, not a tap
 /** Decorating zoom, around the room's own camera (1): the buttons go from level to level, two fingers anywhere between
  * the first and the last. */
@@ -87,8 +94,9 @@ function useWalker(layout: Layout, home: Spot, enabled: boolean) {
   const [moving, setMoving] = useState(false);
   const [facing, setFacing] = useState<1 | -1>(1);
   const [target, setTarget] = useState<{ key: number; at: Point } | null>(null);
-  const live = useRef<{ at: Point | null; path: Point[] | null; walked: number; frame: number | null; last: number }>(
-    { at: null, path: null, walked: 0, frame: null, last: 0 });
+  const live = useRef<{ at: Point | null; path: Point[] | null; walked: number; total: number; started: number; frame: number | null; last: number }>(
+    { at: null, path: null, walked: 0, total: 0, started: 0, frame: null, last: 0 });
+  const phase = useRef(new Animated.Value(0)).current;
   const stop = useCallback(() => {
     if (live.current.frame !== null) cancelAnimationFrame(live.current.frame);
     live.current.frame = null;
@@ -106,8 +114,10 @@ function useWalker(layout: Layout, home: Spot, enabled: boolean) {
   const step = useCallback((now: number) => {
     const w = live.current;
     if (!w.path) return;
-    w.walked += (WALK_SPEED * Math.min(100, now - w.last)) / 1000; // a stalled frame never makes it jump ahead
+    // Real time, not frames: the same pace at any refresh rate. A stalled frame never makes it jump ahead.
+    w.walked += (walkSpeedAt(now - w.started, w.total - w.walked) * Math.min(100, now - w.last)) / 1000;
     w.last = now;
+    phase.setValue(w.walked / STRIDE);
     const next = along(w.path, w.walked);
     w.at = next.at;
     setAt(next.at);
@@ -123,15 +133,15 @@ function useWalker(layout: Layout, home: Spot, enabled: boolean) {
     if (!path || pathLength(path) < 1) return false;
     if (live.current.frame !== null) cancelAnimationFrame(live.current.frame);
     if (!live.current.at) setAt(from); // leaves its spot: from now on it is drawn where it walks
-    Object.assign(live.current, { path, walked: 0, last: Date.now(), at: from });
+    Object.assign(live.current, { path, walked: 0, total: pathLength(path), started: Date.now(), last: Date.now(), at: from });
     setTarget((t) => ({ key: (t?.key ?? 0) + 1, at: path[path.length - 1] }));
     setMoving(true);
-    live.current.frame = requestAnimationFrame((now) => { live.current.last = now; step(now); });
+    live.current.frame = requestAnimationFrame((now) => { live.current.last = now; live.current.started = now; step(now); });
     return true;
   }, [layout, home.x, home.feet, home.size, step]);
   /** Stops where it is (its menu opened on it). */
   const halt = useCallback(() => { stop(); setMoving(false); setTarget(null); }, [stop]);
-  return { at, moving, facing, target, walkTo, halt };
+  return { at, moving, facing, target, walkTo, halt, phase };
 }
 
 /**
@@ -144,7 +154,7 @@ function useWalker(layout: Layout, home: Spot, enabled: boolean) {
  * the finger on its own layer; it is put back in its place among the others when it is dropped.
  */
 export const RoomScene = memo(function RoomScene({ layout, kind = 'personal', resting = false, pet, pose, away, guest, onPetPress, petLabel, reaction, petMenu,
-  awayMarker, effects = true, fullScreen = false, safeTop = 0, safeBottom = 0, menuTop = safeTop, description, editor, chrome, walkable = false, hearts, underlay }: Props) {
+  awayMarker, effects = true, fullScreen = false, safeTop = 0, safeBottom = 0, menuTop = safeTop, description, editor, chrome, walkable = false, hearts, underlay, onItemPress }: Props) {
   const [box, setBox] = useState<{ width: number; height: number } | null>(null);
   // The items a drag picked up (the dragged one and what stands on it), and how far they are moved, in points.
   const [lifted, setLifted] = useState<string[] | null>(null);
@@ -263,11 +273,15 @@ export const RoomScene = memo(function RoomScene({ layout, kind = 'personal', re
 
   /** A tap on the floor (not on the wall, a piece of furniture or the pet, which have their own taps). */
   const onFloorTap = (x: number, y: number) => {
-    if (y < CANVAS.floorY) return;
     const hit = itemAt(layout, x, y);
+    if (hit) { setPoke((p) => ({ key: (p?.key ?? 0) + 1, item: hit })); onItemPress?.(hit); }
+    if (!canWalk || y < CANVAS.floorY) return;
     if (hit && itemArt(hit.item)?.mount === 'floor') return;
     walker.walkTo({ x, feet: y });
   };
+  // The thing just tapped, playing its small bounce (drawn again over itself: the room's drawing isn't redone).
+  const [poke, setPoke] = useState<{ key: number; item: Placement } | null>(null);
+  const pokeSvg = useMemo(() => (poke ? liftedSvg([poke.item], kind) : null), [poke, kind]);
 
   return (
     <View style={[s.fill, bounded && s.fillBounded]} onLayout={onLayout}>
@@ -280,14 +294,15 @@ export const RoomScene = memo(function RoomScene({ layout, kind = 'personal', re
         </View>
         <View style={[s.canvas, canvasStyle]} pointerEvents="box-none" testID="room-canvas">
           {underlay && !editor ? underlay(kz) : null}
-          {canWalk ? <FloorTaps k={k} onTap={onFloorTap} /> : null}
+          {canWalk || (walkable && kind === 'personal' && !editor) ? <FloorTaps k={k} onTap={onFloorTap} testID={canWalk ? 'room-floor' : 'room-items'} /> : null}
           {canWalk && effects && walker.target ? <TargetMark key={walker.target.key} at={walker.target.at} k={k} /> : null}
           {away ? null : <ScenePet pet={pet} spot={spot} k={kz} pose={pose} resting={resting} onPress={editor ? undefined : onPetPress} label={petLabel}
-            reaction={editor ? null : reaction} effects={effects} moving={walker.moving} facing={walker.facing}
+            reaction={editor ? null : reaction} effects={effects} moving={walker.moving} facing={walker.facing} phase={walker.phase}
             hearts={editor || !effects ? undefined : hearts} canvasWidth={CANVAS.width} minTop={bounds.top} />}
           {cover && !away ? <View style={StyleSheet.absoluteFill} pointerEvents="none" testID="room-seat-cover"><Picture xml={cover.svg} /></View> : null}
           {overlay && !away ? <View style={StyleSheet.absoluteFill} pointerEvents="none" testID="room-front"><Picture xml={overlay} /></View> : null}
           {guest ? <ScenePet pet={guest} spot={GUEST_SPOT} k={kz} pose="rug" guest /> : null}
+          {poke && pokeSvg && !editor && effects ? <Bounce key={poke.key} xml={pokeSvg} x={poke.item.x * kz} y={poke.item.y * kz} onDone={() => setPoke(null)} /> : null}
           {ghost ? (
             <Animated.View style={[StyleSheet.absoluteFill, { transform: offset.getTranslateTransform() }]} pointerEvents="none" testID="room-lifted">
               <Picture xml={ghost} />
@@ -311,12 +326,31 @@ const Picture = memo(function Picture({ xml }: { xml: string }) {
   return <SvgXml xml={xml} width="100%" height="100%" />;
 });
 
+/** A thing answering a tap: gives a little (down first), springs up past its size and settles, from where it stands.
+ * It only ever grows, so the same thing in the room's drawing under it never shows at its edges. */
+function Bounce({ xml, x, y, onDone }: { xml: string; x: number; y: number; onDone: () => void }) {
+  const { animate } = useWorldMotion();
+  const run = useRef(new Animated.Value(0)).current;
+  const done = useRef(onDone);
+  done.current = onDone;
+  useEffect(() => {
+    if (!animate) { done.current(); return; }
+    const anim = Animated.timing(run, { toValue: 1, duration: 420, easing: (v) => v, useNativeDriver: true });
+    anim.start(({ finished }) => { if (finished) done.current(); });
+    return () => anim.stop();
+  }, [animate, run]);
+  return <Animated.View pointerEvents="none" testID="room-poke" style={[StyleSheet.absoluteFill, { transformOrigin: `${x}px ${y}px`, transform: [
+    { scaleY: run.interpolate({ inputRange: [0, 0.18, 0.5, 0.8, 1], outputRange: [1, 1.012, 1.07, 1.015, 1] }) },
+    { scaleX: run.interpolate({ inputRange: [0, 0.18, 0.5, 0.8, 1], outputRange: [1, 1.045, 1.012, 1.02, 1] }) },
+  ] }]}><Picture xml={xml} /></Animated.View>;
+}
+
 /** Taps on the floor, under the pets. A drag (the page scrolling) or a second finger is never a tap. */
-function FloorTaps({ k, onTap }: { k: number; onTap: (x: number, y: number) => void }) {
+function FloorTaps({ k, onTap, testID = 'room-floor' }: { k: number; onTap: (x: number, y: number) => void; testID?: string }) {
   const touch = useRef<{ x: number; y: number; px: number; py: number; ok: boolean } | null>(null);
   const many = (e: GestureResponderEvent) => (e.nativeEvent.touches?.length ?? 1) > 1;
   return (
-    <View style={StyleSheet.absoluteFill} testID="room-floor"
+    <View style={StyleSheet.absoluteFill} testID={testID}
       onStartShouldSetResponder={() => true}
       onResponderGrant={(e) => {
         const { locationX, locationY, pageX, pageY } = e.nativeEvent;
@@ -575,56 +609,67 @@ function ZoomControls({ zoom, top, onZoom }: { zoom: number; top: number; onZoom
 }
 
 function ScenePet({ pet, spot, k, pose, resting: atDeskResting = false, guest = false, onPress, label, reaction, effects = true, moving = false, facing = 1, hearts,
-  canvasWidth = 400, minTop = 0 }: {
+  canvasWidth = 400, minTop = 0, phase }: {
   pet: RoomPet; spot: Spot; k: number; pose: Pose; resting?: boolean; guest?: boolean; onPress?: () => void; label?: string; reaction?: Props['reaction'];
   effects?: boolean;
   /** Walking across the room: its walk strip (or, without one, the still artwork with a light bob), facing its way. */
   moving?: boolean; facing?: 1 | -1; hearts?: number; canvasWidth?: number;
+  /** How far through its strip its steps are, set from the distance it walked. */ phase?: Animated.Value;
   /** Its line never goes above this (the header over the room). */
   minTop?: number;
 }) {
   const reduce = useReduceMotion();
-  const hop = useRef(new Animated.Value(0)).current;
-  const squish = useRef(new Animated.Value(0)).current;
   const size = spot.size * k;
   const left = (spot.x - spot.size / 2) * k;
   const top = (spot.feet - spot.size) * k;
-  const studying = pose === 'study' && !atDeskResting && hasSprite(pet.id, pet.level, 'study');
+  const canStudy = hasSprite(pet.id, pet.level, 'study');
   const resting = pose === 'rest' || atDeskResting;
+  const seated: PetState = resting ? 'rest' : pose === 'study' ? 'study' : 'idle';
+  // One state for the pet (world/petMachine.ts): what it plays is read from there, never from separate flags.
+  const [state, send] = usePetMachine(moving ? 'walk' : seated);
+  useEffect(() => { send(seated === 'rest' ? 'REST' : seated === 'study' ? 'STUDY' : 'WAKE'); }, [seated, send]);
+  const values = useRef(newActValues()).current;
+  const running = useRef<Animated.CompositeAnimation | null>(null);
+  const perform = useCallback((name: keyof typeof PET_ACTS, then?: () => void) => {
+    running.current?.stop();
+    running.current = playAct(PET_ACTS[name], values);
+    running.current.start(({ finished }) => { if (finished) then?.(); });
+  }, [values]);
+  useEffect(() => () => running.current?.stop(), []);
 
-  const animate = !!reaction && !reduce && effects;
+  const motion = !reduce && effects;
+  // Weight shifts before the first step, and the body carries on a little at the stop.
+  const wasMoving = useRef(moving);
+  useEffect(() => {
+    send(moving ? 'WALK' : 'ARRIVE');
+    if (wasMoving.current !== moving && motion) perform(moving ? 'stepOff' : 'stop');
+    wasMoving.current = moving;
+  }, [moving, motion, perform, send]);
+
+  const animate = !!reaction && motion;
   useEffect(() => {
     if (!animate) return;
-    hop.setValue(0); squish.setValue(0);
-    const jump = (height: number, ms: number) => [
-      Animated.timing(hop, { toValue: height, duration: ms, easing: Easing.out(Easing.quad), useNativeDriver: true }),
-      Animated.timing(hop, { toValue: 0, duration: ms, easing: Easing.in(Easing.quad), useNativeDriver: true }),
-    ];
-    const lean = (ms: number) => [
-      Animated.timing(squish, { toValue: 1, duration: ms, easing: Easing.out(Easing.quad), useNativeDriver: true }),
-      Animated.timing(squish, { toValue: 0, duration: ms, easing: Easing.inOut(Easing.quad), useNativeDriver: true }),
-    ];
-    const action = reaction!.action;
-    const run = action === 'pet' ? Animated.sequence([...lean(220), ...lean(220)]) // leans into the hand, twice
-      : action === 'feed' ? Animated.sequence([Animated.delay(480), ...jump(0.25, 110), ...jump(0.25, 110)]) // nibbles the treat
-      : action === 'play' ? Animated.sequence([...jump(1, 200), ...jump(0.6, 170)]) // jumps after the ball
-      : Animated.sequence([
-        Animated.timing(hop, { toValue: 1, duration: 200, easing: Easing.out(Easing.quad), useNativeDriver: true }),
-        Animated.spring(hop, { toValue: 0, friction: 3, tension: 140, useNativeDriver: true }),
-      ]);
-    run.start();
-    return () => run.stop();
-  }, [reaction?.key, animate, hop, squish]); // eslint-disable-line react-hooks/exhaustive-deps
+    send('INTERACT');
+    perform(ACT_OF_INTERACTION[reaction!.action ?? 'talk'], () => send('DONE'));
+  }, [reaction?.key, animate]); // eslint-disable-line react-hooks/exhaustive-deps
+  // An act that was cut short (the effects turned off, the screen left) can't leave the machine in it.
+  useEffect(() => { if (!reaction && state === 'interact') send('DONE'); }, [reaction, state, send]);
 
+  const shown = artFor(state);
+  // Breathing from its feet while it stands around; its baseline and its size at rest never change.
+  const breath = useSwing({ ms: 1900, jitter: 0.2, rest: [0, 500], enabled: state === 'idle' && effects });
   const name = pet.name || 'Pet';
   const art = (
-    <Animated.View style={{ transform: [{ translateY: hop.interpolate({ inputRange: [0, 1], outputRange: [0, -size * 0.16] }) },
-      { scaleX: squish.interpolate({ inputRange: [0, 1], outputRange: [1, 1.08] }) },
-      { scaleY: squish.interpolate({ inputRange: [0, 1], outputRange: [1, 0.9] }) },
-      // The walk strips face right; walking left mirrors it. Standing still it faces the room again.
-      { scaleX: moving ? facing : 1 }] }}>
-      {/* A resting pet has no drawn sleep strip, so it keeps its still artwork (with a small moon). */}
-      <Art pet={pet.id} size={size} stage={pet.level} studying={studying && !moving} still={resting && !moving} walking={moving} />
+    <Animated.View testID={`room-pet-state-${state}`} style={{ transformOrigin: '50% 100%', transform: actTransform(values, size) }}>
+      <Animated.View style={{ transformOrigin: '50% 100%', transform: [
+        { scaleY: breath.interpolate({ inputRange: [-1, 1], outputRange: [1, 1.014] }) },
+        { scaleX: breath.interpolate({ inputRange: [-1, 1], outputRange: [1, 0.996] }) },
+        // The walk strips face right; walking left mirrors it. Standing still it faces the room again.
+        { scaleX: moving ? facing : 1 }] }}>
+        {/* A resting pet has no drawn sleep strip, so it keeps its still artwork (with a small moon). */}
+        <Art pet={pet.id} size={size} stage={pet.level} studying={shown.studying && canStudy} still={shown.still} walking={shown.walking}
+          phase={shown.walking ? phase : undefined} />
+      </Animated.View>
     </Animated.View>
   );
   return (

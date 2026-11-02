@@ -16,7 +16,7 @@ import { authTheme } from '../theme';
 
 type Slide = { icon?: string; tab?: TabKey; title: string; body: string; tip: string };
 
-/** Welcome + feature tour, shown once after the pet is named. `name` is the pet's name. */
+/** Welcome + feature tour, shown once after the pet is named (`name`), and again from Trợ giúp. */
 const slides = (name: string): Slide[] => [
   { title: 'Chào mừng đến với Mirabi!', body: `${name} sẽ đồng hành cùng bạn mỗi ngày. Cùng xem nhanh những gì bạn có thể làm nhé.`,
     tip: `Mình là ${name}, rất vui được gặp bạn!` },
@@ -26,18 +26,15 @@ const slides = (name: string): Slide[] => [
   { icon: '📚', tab: 'Study', title: 'Học tập: Pomodoro & khóa học',
     body: 'Bấm giờ 25 phút cho một việc nhỏ, lưu phiên học để nhận XP, và khám phá các khóa học ngắn về sáng tạo, công nghệ, kỹ năng sống.',
     tip: 'Mỗi phiên tập trung giúp mình lớn thêm đó!' },
-  { icon: '🏡', tab: 'Room', title: 'Phòng cá nhân của pet',
-    body: 'Trang trí căn phòng nhỏ của pet, chụp ảnh lưu vào Album kỷ niệm và ghé thăm phòng của bạn bè.',
-    tip: 'Mình rất mong được ở trong một căn phòng thật xinh!' },
-  { icon: '💬', tab: 'Community', title: 'Bạn bè',
-    body: 'Kết bạn bằng mã hoặc mã QR và ghé thăm phòng của nhau.',
-    tip: 'Lan tỏa năng lượng tốt cùng mình nhé!' },
-  { icon: '✨', tab: 'More', title: 'Tiện ích: phòng, cửa hàng & cài đặt',
-    body: 'Chạm vào ảnh đại diện ở trang chủ để xem hồ sơ và thú cưng. Mục Tiện ích có thêm Bảng tin, cửa hàng, thành tựu và cài đặt.',
+  { icon: '🏡', tab: 'Room', title: 'Cuộc sống Mirabi',
+    body: 'Bốn nơi của pet: Nhà để trang trí và chơi cùng, Vườn để trồng cây, Khám phá để pet đi xa và mang quà về, Bạn bè để ghé thăm nhà của nhau.',
+    tip: 'Thế giới của mình đổi theo giờ trong ngày và thời tiết nơi bạn ở đó!' },
+  { icon: '✨', tab: 'More', title: 'Tiện ích: tập trung, kỷ niệm & cá nhân hóa',
+    body: 'Chạm vào ảnh đại diện ở trang chủ để xem hồ sơ và thú cưng. Mục Tiện ích gom Pomodoro, sổ tay, album kỷ niệm, thống kê và cài đặt.',
     tip: 'Sẵn sàng chưa? Bắt đầu thôi!' },
 ];
 
-export function WelcomeTour() {
+export function WelcomeTour({ onDone }: { /** Seen again from Trợ giúp: finishing just goes back, onboarding is long done. */ onDone?: () => void } = {}) {
   const { user, completeOnboarding } = useAuth();
   const { height } = useViewportSize();
   const insets = useSafeAreaInsets();
@@ -60,6 +57,7 @@ export function WelcomeTour() {
 
   async function finish() {
     if (finishing) return;
+    if (onDone) { onDone(); return; }
     setFinishing(true);
     await completeOnboarding();
   }

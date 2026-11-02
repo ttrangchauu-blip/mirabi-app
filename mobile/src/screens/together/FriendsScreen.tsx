@@ -11,11 +11,11 @@ import { useConfirm } from '../../ui/ConfirmDialog';
 import { Card, ScreenHeader, SectionHeader } from '../../ui/kit';
 import { useToast } from '../../ui/Toast';
 import { showError } from '../main/shared';
-import { FriendCode, FriendDirectory, ProfileCard, QrScannerSheet } from './friendsUi';
+import { FriendCode, FriendDirectory, ProfileCard, QrScannerSheet, SocialToggles } from './friendsUi';
 import { REPORT_REASONS } from './labels';
 import { usePullToRefresh } from './navigation';
 import {
-  BackHeader, EmptyState, ErrorState, LoadingState, OptionRow, OptionSheet, PersonRow, PetAvatar, SmallButton, ToggleRow,
+  BackHeader, EmptyState, ErrorState, LoadingState, OptionRow, OptionSheet, PersonRow, PetAvatar, SmallButton,
 } from './ui';
 
 /** Where a shortcut points inside the friends screen. Everything is on one screen; 'search' focuses the code box. */
@@ -33,6 +33,10 @@ type Props = {
   onOpenStudyRoom?: (roomId: number) => void;
   /** A friend request was accepted, declined or withdrawn (the Home badge counts the pending ones). */
   onRequestsChanged?: () => void;
+  /** The friend list, whenever it is loaded: the street above the list draws its houses from it. */
+  onFriends?: (friends: Friend[]) => void;
+  /** Inside the Bạn bè place, whose name is already on the switcher: a plain heading instead of a screen title. */
+  embedded?: boolean;
 };
 
 /** Incoming requests shown before "Xem tất cả". */
@@ -42,7 +46,7 @@ const REQUESTS_SHOWN = 3;
  * The "Bạn bè" screen, one scroll without tabs: header with Cài đặt, add a friend by code (search, QR, "Mã của tôi"),
  * incoming requests (hidden when there are none), sent requests folded into one row, then the friend list.
  */
-export function FriendsScreen({ initialTab = 'friends', onBack, onVisit, onVisitGarden, onOpenStudyRoom, onRequestsChanged }: Props) {
+export function FriendsScreen({ initialTab = 'friends', onBack, onVisit, onVisitGarden, onOpenStudyRoom, onRequestsChanged, onFriends, embedded = false }: Props) {
   const confirm = useConfirm();
   const toast = useToast();
   const [settings, setSettings] = useState<SocialSettings | null>(null);
@@ -56,8 +60,10 @@ export function FriendsScreen({ initialTab = 'friends', onBack, onVisit, onVisit
   const [menuFor, setMenuFor] = useState<Friend | null>(null);
   const [reportFor, setReportFor] = useState<Friend | null>(null);
 
+  const onFriendsRef = useRef(onFriends);
+  onFriendsRef.current = onFriends;
   const loadFriends = useCallback(async () => {
-    try { setFriends(await togetherApi.friends()); setFriendsError(null); } catch (e) { setFriendsError(e); }
+    try { const list = await togetherApi.friends(); setFriends(list); setFriendsError(null); onFriendsRef.current?.(list); } catch (e) { setFriendsError(e); }
   }, []);
   const loadRequests = useCallback(async () => {
     try {
@@ -117,7 +123,7 @@ export function FriendsScreen({ initialTab = 'friends', onBack, onVisit, onVisit
 
   return (
     <>
-      {onBack ? <BackHeader title="Bạn bè" onBack={onBack} right={settingsButton} /> : <ScreenHeader title="Bạn bè" right={settingsButton} />}
+      {onBack ? <BackHeader title="Bạn bè" onBack={onBack} right={settingsButton} /> : embedded ? <View style={embeddedStyles.header}><Text style={embeddedStyles.title} accessibilityRole="header">Kết bạn</Text>{settingsButton}</View> : <ScreenHeader title="Bạn bè" right={settingsButton} />}
 
       <AddFriend autoFocus={initialTab === 'search'} hasCode={!!settings?.public_code} onMyCode={() => setSheet('code')}
         onSent={() => { void loadRequests(); }} onFriend={() => { void loadFriends(); }} />
@@ -147,16 +153,7 @@ export function FriendsScreen({ initialTab = 'friends', onBack, onVisit, onVisit
 
       <OptionSheet visible={sheet === 'settings'} title="Cài đặt" onClose={() => setSheet(null)}>
         {settings ? <ScrollView>
-          <ToggleRow label="Cho bạn bè ghé thăm phòng" description="Chỉ bạn bè đã kết bạn mới ghé phòng và vườn được. Tắt để không ai ghé phòng và vườn của bạn."
-            value={settings.allow_room_visits} onChange={(v) => { void updateSettings({ allow_room_visits: v }); }} />
-          <ToggleRow label="Nhận lời mời học" description="Bạn bè có thể rủ bạn vào phòng học nhóm."
-            value={settings.allow_study_invites} onChange={(v) => { void updateSettings({ allow_study_invites: v }); }} />
-          <ToggleRow label="Cho bạn bè thấy trạng thái" description="Trực tuyến hoặc đang học. Tắt để luôn hiện “Ẩn trạng thái”."
-            value={settings.presence_visibility === 'friends'} onChange={(v) => { void updateSettings({ presence_visibility: v ? 'friends' : 'nobody' }); }} />
-          <ToggleRow label="Chia sẻ số phút học trong phòng" description="Thành viên khác thấy số phút và đóng góp nhiệm vụ của bạn."
-            value={settings.share_study_stats} onChange={(v) => { void updateSettings({ share_study_stats: v }); }} />
-          <ToggleRow label="Cho phép tìm theo tên" description="Khi tắt, người khác chỉ tìm được bạn bằng mã kết bạn."
-            value={settings.discoverable} onChange={(v) => { void updateSettings({ discoverable: v }); }} />
+          <SocialToggles settings={settings} onChange={(patch) => { void updateSettings(patch); }} />
         </ScrollView> : <LoadingState />}
       </OptionSheet>
       <OptionSheet visible={sheet === 'code'} title="Mã của tôi" onClose={() => setSheet(null)}>
@@ -310,6 +307,11 @@ function IconButton({ icon, label, primary, loading, onPress }: {
     </Pressable>
   );
 }
+
+const embeddedStyles = StyleSheet.create({
+  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 },
+  title: { fontSize: 19, lineHeight: 25, fontWeight: '900', color: t.ink },
+});
 
 const styles = StyleSheet.create({
   flex: { flex: 1, minWidth: 0 },

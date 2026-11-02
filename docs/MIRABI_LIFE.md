@@ -10,7 +10,7 @@ audit, the six features, who can use them, how to test them, and what is still m
 | 1 | Work Quest (**Nhiệm vụ công việc**), Healing Room (**Góc thư giãn**) | Implemented, backend and mobile tests pass |
 | 2 | Life Adventure (**Phiêu lưu cuộc sống**), Money Garden (**Vườn tài chính**) | Implemented, backend and mobile tests pass |
 | 3 | Mirabi Town (**Thị trấn Mirabi**), Career Journey (**Hành trình sự nghiệp**) | Implemented, backend and mobile tests pass |
-| 4 | Polish, regression, device builds | Partly: automated regression run, web bundle built; no device/simulator run (see "Known gaps") |
+| 4 | Polish, regression, device builds | Partly: automated regression run, web bundle built; no device/simulator run (see "Known gaps"). Scenes, weather and navigation: `docs/LIVING_WORLD.md` |
 
 **Who can use it:** accounts whose age (given at registration or in "Độ tuổi & lớp học") is **16 or over**. Every
 endpoint depends on `life_access.life_user` (403 `age_restricted` otherwise); the app hides the six entries, the
@@ -40,9 +40,11 @@ tables, then additive, idempotent `ALTER TABLE ADD COLUMN` statements run. There
 | Career (`career.py`) | Static recommendations and a quiz, not in the menu | Left as is (old route `/api/career`) | None | `careers.py` + `data/careers.json` (`/api/careers`) |
 | Assets | Pet sprite sheets: idle, walk, study, move, hatch; ambient audio: rain, forest, stream, lofi, cafe, white noise | Idle/walk/study sheets, audio files | None | Vector art for the desk, islands, chests and window scenes (no bitmaps) |
 
-Navigation: five fixed tabs (Trang chủ, Học tập, Phòng cá nhân, Bạn bè, Tiện ích). No tab was added. The features
-open from **Tiện ích → Cuộc sống Mirabi** (six cards). Góc thư giãn is a mode of **Phòng cá nhân** (the leaf button
-in the room's header), so it is not a separate room. Every user-facing text is Vietnamese.
+Navigation: since the Living World redesign (`docs/LIVING_WORLD.md`) there are four fixed tabs (Trang chủ, Học tập, Cuộc
+sống, Tiện ích), and Cuộc sống holds four places (Nhà, Vườn, Khám phá, Bạn bè). The six features open from where they
+belong: Nhiệm vụ công việc, Hành trình sự nghiệp and Vườn tài chính from **Tiện ích → Học tập và tập trung**, Phiêu lưu cuộc
+sống from **Khám phá**, Thị trấn Mirabi from **Bạn bè**. Góc thư giãn is a mode of **Nhà của pet** (the leaf button in the
+room's bar), so it is not a separate room. Every user-facing text is Vietnamese.
 
 ## 2. Design rules kept
 

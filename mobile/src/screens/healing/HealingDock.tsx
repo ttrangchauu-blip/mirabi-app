@@ -17,6 +17,8 @@ import { showError } from '../main/shared';
 import { AMBIENCES, AMBIENCE_ORDER, BREATH_CYCLE, BREATH_STEPS, MOODS, moodOf } from './ambience';
 
 type Props = {
+  /** Opens on the journal ("Nhật ký phản tư" in Tiện ích); `onJournalStarted` says it has. */
+  startJournal?: boolean; onJournalStarted?: () => void;
   userId: number;
   ambience: Ambience;
   onAmbience: (a: Ambience) => void;
@@ -54,7 +56,7 @@ function useAmbientSound(source: number, on: boolean, volume: number) {
  * activities (breathing, nature sound, journal, three good things, a short rest, petting). It folds down to one row so
  * the room stays in view. Opens with the last known state even offline.
  */
-export function HealingDock({ userId, ambience, onAmbience, onPetResponse, onPet, onResting, bottom }: Props) {
+export function HealingDock({ userId, ambience, onAmbience, onPetResponse, onPet, onResting, bottom, startJournal = false, onJournalStarted }: Props) {
   const toast = useToast();
   const [summary, setSummary] = useState<HealingSummary | null>(null);
   const [offline, setOffline] = useState(false);
@@ -65,7 +67,8 @@ export function HealingDock({ userId, ambience, onAmbience, onPetResponse, onPet
   // Sound is opt-in for each visit, whatever was saved.
   const [soundOn, setSoundOn] = useState(false);
   const [volume, setVolume] = useState(0.4);
-  const [modal, setModal] = useState<'breathing' | 'rest' | 'journal' | 'gratitude' | null>(null);
+  const [modal, setModal] = useState<'breathing' | 'rest' | 'journal' | 'gratitude' | null>(startJournal ? 'journal' : null);
+  useEffect(() => { if (startJournal) onJournalStarted?.(); }, [startJournal, onJournalStarted]);
   useAmbientSound(AMBIENCES[ambience].sound, soundOn, volume);
   const soundStarted = useRef<number | null>(null);
 

@@ -6,15 +6,33 @@ import * as Clipboard from 'expo-clipboard';
 import Svg, { Path, Rect } from 'react-native-svg';
 import { Text, TextInput } from '../../components/Typography';
 import { friendQrPayload, parseFriendCode, qrPath } from '../../room/visit';
-import type { CodeLookup, Friend } from '../../studyTogether/types';
+import type { CodeLookup, Friend, SocialSettings } from '../../studyTogether/types';
 import { appTheme as t } from '../../theme';
 import { Button, Card } from '../../ui/kit';
 import { useToast } from '../../ui/Toast';
-import { EmptyState, ErrorState, LoadingState, OptionSheet, PetAvatar, PresenceLabel, SmallButton } from './ui';
+import { EmptyState, ErrorState, LoadingState, OptionSheet, PetAvatar, PresenceLabel, SmallButton, ToggleRow } from './ui';
 
 /** Case- and accent-insensitive, so "linh" finds "Lĩnh" and "dao" finds "Đào". */
 export function foldName(value: string) {
   return value.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase().trim();
+}
+
+/** Who may reach you and what they see (`/api/social/me`): the gear in Bạn bè and Quyền riêng tư show the same switches. */
+export function SocialToggles({ settings, onChange }: { settings: SocialSettings; onChange: (patch: Partial<SocialSettings>) => void }) {
+  return (
+    <>
+    <ToggleRow label="Cho bạn bè ghé thăm phòng" description="Chỉ bạn bè đã kết bạn mới ghé phòng và vườn được. Tắt để không ai ghé phòng và vườn của bạn."
+      value={settings.allow_room_visits} onChange={(v) => { onChange({ allow_room_visits: v }); }} />
+    <ToggleRow label="Nhận lời mời học" description="Bạn bè có thể rủ bạn vào phòng học nhóm."
+      value={settings.allow_study_invites} onChange={(v) => { onChange({ allow_study_invites: v }); }} />
+    <ToggleRow label="Cho bạn bè thấy trạng thái" description="Trực tuyến hoặc đang học. Tắt để luôn hiện “Ẩn trạng thái”."
+      value={settings.presence_visibility === 'friends'} onChange={(v) => { onChange({ presence_visibility: v ? 'friends' : 'nobody' }); }} />
+    <ToggleRow label="Chia sẻ số phút học trong phòng" description="Thành viên khác thấy số phút và đóng góp nhiệm vụ của bạn."
+      value={settings.share_study_stats} onChange={(v) => { onChange({ share_study_stats: v }); }} />
+    <ToggleRow label="Cho phép tìm theo tên" description="Khi tắt, người khác chỉ tìm được bạn bằng mã kết bạn."
+      value={settings.discoverable} onChange={(v) => { onChange({ discoverable: v }); }} />
+    </>
+  );
 }
 
 // ------------------------------------------------------------------------------------------------ my code and QR

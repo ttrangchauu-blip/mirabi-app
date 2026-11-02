@@ -84,6 +84,15 @@ class Settings(BaseSettings):
     # Redirect plain HTTP to HTTPS and send HSTS. Defaults to on in production.
     force_https: bool | None = None
     # Per-process sliding-window limits: "<requests>/<seconds>". Use a shared store (Redis/gateway) when scaling out.
+    # The living world's weather (world.py). Off, the world goes by the clock only. The default provider is free for
+    # non-commercial use and asks for attribution: check its terms, or point this at a paid plan, before a commercial launch.
+    weather_enabled: bool = True
+    weather_api_url: str = "https://api.open-meteo.com/v1/forecast"
+    weather_timeout_seconds: float = 3.0
+    weather_ttl_minutes: int = 30  # a reading is good for this long
+    weather_stale_hours: int = 6  # the provider is down: a reading this old may still be shown, marked stale
+    weather_retry_minutes: int = 5  # the provider just failed: not asked again for this long
+    rate_limit_world_weather: str = "30/60"
     rate_limit_enabled: bool = True
     rate_limit_login: str = "10/300"  # per account
     rate_limit_login_ip: str = "50/300"  # per client IP (generous: classrooms often share one IP)

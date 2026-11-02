@@ -16,8 +16,11 @@ import { MoreTab } from './MoreTab';
 import { PetHatchedPopup } from './PetHatchedPopup';
 import { PetRewardPopup } from './PetRewardPopup';
 import { ProfileScreen } from './ProfileScreen';
+import { HelpScreen, InviteScreen, PrivacyScreen, SettingsScreen } from './SettingsScreens';
 import { StudyProfileScreen } from './StudyProfileScreen';
 import { EducationAdminScreen } from '../admin/EducationAdminScreen';
+import { ForgotPasswordScreen } from '../ForgotPasswordScreen';
+import { WelcomeTour } from '../WelcomeTour';
 import { StudyTab } from './StudyTab';
 import { usePomodoroTimer } from './usePomodoroTimer';
 import { TabBar } from './TabBar';
@@ -33,10 +36,15 @@ import { formatClock } from '../../learning/labels';
 import { MemoryAlbumScreen } from './MemoryAlbumScreen';
 import { RoomTab } from '../room/RoomTab';
 import { VisitRoom } from '../room/VisitRoom';
-import { FriendsScreen, FriendsTab } from '../together/FriendsScreen';
+import type { FriendsTab } from '../together/FriendsScreen';
+import { ExploreSpace } from '../life/ExploreSpace';
+import { FriendsSpace } from '../life/FriendsSpace';
+import { LifeHub } from '../life/LifeHub';
+import { lifeTop, type LifeSpace } from '../life/spaces';
+import { WeatherProvider } from '../../world/weather';
 import { InventoryScreen } from '../inventory/InventoryScreen';
 import { FriendGardenScreen } from '../garden/FriendGardenScreen';
-import { GardenScreen, type GardenTab } from '../garden/GardenScreen';
+import { GardenScreen } from '../garden/GardenScreen';
 import { requestPlace } from '../../inventory/api';
 import type { InventoryItem } from '../../inventory/types';
 import type { RoomKind } from '../../room/types';
@@ -49,10 +57,10 @@ import { lifeEligible } from '../../life/access';
 
 export type FocusTimer = ReturnType<typeof usePomodoroTimer>;
 
-type Overlay = 'profile' | 'studyProfile' | 'educationAdmin' | 'quests' | 'streak' | 'album' | 'visit' | 'feed' | 'inventory' | 'garden' | 'gardenVisit' | 'work' | 'adventure' | 'money' | 'town' | 'career';
+type Overlay = 'profile' | 'studyProfile' | 'educationAdmin' | 'quests' | 'streak' | 'album' | 'visit' | 'feed' | 'inventory' | 'achievements' | 'settings' | 'privacy' | 'help' | 'invite' | 'password' | 'tour' | 'gardenVisit' | 'work' | 'adventure' | 'money' | 'town' | 'career';
 
 export function MainApp() {
-  const { user, setUser, streakPopup, dismissStreakPopup } = useAuth();
+  const { user, setUser, streakPopup, dismissStreakPopup, logout } = useAuth();
   const insets = useSafeAreaInsets();
   const [tab, setTab] = useState<TabKey>('Home');
   // The Study tab holds both modes: the personal focus space and Study Together.
@@ -67,7 +75,11 @@ export function MainApp() {
   const roomLeave = useRef<(() => Promise<boolean>) | null>(null);
   // A friend's room shown over the current tab (from Bạn bè or a notification); back returns there.
   const [visitUserId, setVisitUserId] = useState<number | null>(null);
-  // The part of the "Bạn bè" tab a shortcut opens (the room, Study Together or a notification).
+  // The place of Cuộc sống Mirabi on show, kept while another tab is open.
+  const [lifeSpace, setLifeSpace] = useState<LifeSpace>('home');
+  // Decorating the pet's home takes the whole screen: the switcher of places steps aside (RoomTab says when).
+  const [decorating, setDecorating] = useState(false);
+  // The part of the "Bạn bè" place a shortcut opens (the room, Study Together or a notification).
   const [friendsTab, setFriendsTab] = useState<FriendsTab>('friends');
   // A Study Together screen to open directly (inbox from the Home bell, friend search or a study room from the Room tab).
   const [togetherRoute, setTogetherRoute] = useState<{ route: TogetherRoute; key: number } | null>(null);
@@ -78,11 +90,15 @@ export function MainApp() {
   // The album opened on one memory (a keepsake's), and the seed "Trồng" chose in Kho đồ for the garden.
   const [albumMemory, setAlbumMemory] = useState<number | null>(null);
   const [gardenSeed, setGardenSeed] = useState<{ id: string; variant: string } | null>(null);
-  // Vườn nhà's tab (kept while a friend's garden is open over it) and the friend whose garden is visited.
-  const [gardenTab, setGardenTab] = useState<GardenTab>('mine');
+  // The friend whose garden is visited.
   const [gardenOwnerId, setGardenOwnerId] = useState<number | null>(null);
-  // Tiện ích → Góc thư giãn opens the personal room in its Healing mode.
-  const [healingRequest, setHealingRequest] = useState(0);
+  // Học tập opened from Tiện ích on one of its screens (Sổ tay, Lịch sử, Thống kê) instead of its first one.
+  const [studyView, setStudyView] = useState<'notebook' | 'archive' | null>(null);
+  const [focusStatistics, setFocusStatistics] = useState(false);
+  // "Nhật ký phản tư" in Tiện ích: the pet's home opens in Góc thư giãn with the journal, once.
+  const [startJournal, setStartJournal] = useState(false);
+  // The weather starts on the first visit to the living world, not at login.
+  const [worldVisited, setWorldVisited] = useState(false);
   const [dashboard, setDashboard] = useState<Dashboard | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
   const [taskModal, setTaskModal] = useState<{ visible: boolean; initialDate: string; onCreated: (date: string) => void }>({
@@ -156,9 +172,10 @@ export function MainApp() {
   if (!user) return null;
   // Every visit to "Học tập" from the menu starts on the subject screen.
   const navigate = (key: TabKey) => {
-    setOverlays([]); setFreeStudy(false); setStudyMode('personal'); setTab(key); setTogetherRoute(null); setFriendsTab('friends');
+    setOverlays([]); setFreeStudy(false); setStudyMode('personal'); setTab(key); setTogetherRoute(null); setFriendsTab('friends'); setStudyView(null); setFocusStatistics(false); setStartJournal(false);
     if (key === 'Study') setStudyVisit((v) => v + 1);
-    if (key === 'Home' || key === 'Community') void loadDashboard(); // fresh counts on the bell and the "Bạn bè" badge
+    if (key === 'Room') setWorldVisited(true);
+    if (key === 'Home' || key === 'Room') void loadDashboard(); // fresh counts on the bell and the "Bạn bè" badge
   };
   /** A tab from the tab bar: away from a room being decorated only once its changes are dropped (or there are none). */
   const leaveTo = async (key: TabKey) => {
@@ -173,18 +190,23 @@ export function MainApp() {
   const openTogether = (route: TogetherRoute) => { openStudyTogether(); setTogetherRoute({ route, key: ++togetherKey.current }); };
   const openFreeStudy = () => { navigate('Study'); setFreeStudy(true); };
   const visitRoom = (userId: number) => { setVisitUserId(userId); open('visit'); };
-  const openFriends = (friends: FriendsTab = 'friends') => { navigate('Community'); setFriendsTab(friends); };
+  const openSpace = (space: LifeSpace) => { navigate('Room'); setLifeSpace(space); };
+  const openFriends = (friends: FriendsTab = 'friends') => { openSpace('friends'); setFriendsTab(friends); };
+  const openNotebook = () => { navigate('Study'); setStudyView('notebook'); };
+  const openArchive = () => { navigate('Study'); setStudyView('archive'); };
+  const openStatistics = () => { openFreeStudy(); setFocusStatistics(true); };
+  const openJournal = () => { openSpace('home'); setStartJournal(true); };
   const pendingRequests = dashboard?.pending_friend_requests ?? 0;
   const openInventory = () => open('inventory');
-  /** Every way into Vườn nhà (Tiện ích, the room's settings, "Trồng" in Kho đồ, a notification) opens this one screen. */
-  const openGarden = (seed: { id: string; variant: string } | null = null) => { setGardenSeed(seed); setGardenTab('mine'); open('garden'); };
+  /** Every way into Vườn nhà ("Trồng" in Kho đồ, a notification) leads to this one place. */
+  const openGarden = (seed: { id: string; variant: string } | null = null) => { setGardenSeed(seed); openSpace('garden'); };
   const visitGarden = (userId: number) => { setGardenOwnerId(userId); open('gardenVisit'); };
   const openAlbum = (memoryId: number | null = null) => { setAlbumMemory(memoryId); open('album'); };
   /** "Đặt vào phòng" in Kho đồ: that room opens its decorating with one more copy of the item. */
   const placeInRoom = (item: InventoryItem, room: RoomKind) => {
     if (!item.art) return;
     requestPlace({ room, item: item.art, variant: item.variant, name: item.name });
-    if (room === 'personal') navigate('Room'); else openFreeStudy();
+    if (room === 'personal') openSpace('home'); else openFreeStudy();
   };
   const openStudyRoom = (roomId: number) => openTogether({ name: 'room', roomId });
   // A "Học tự chọn" session under way (running or paused) is offered on the subject screen.
@@ -195,19 +217,27 @@ export function MainApp() {
   const together = !overlay && tab === 'Study' && studyMode === 'together';
   const games = !overlay && tab === 'Study' && studyMode === 'personal' && !freeStudy;
   const album = overlay === 'album';
-  const inventory = overlay === 'inventory';
-  const garden = overlay === 'garden';
+  const inventory = overlay === 'inventory' || overlay === 'achievements'; // Thành tựu: Kho đồ on its Kỷ vật tab, where the badges are
+  // These bring their own whole-screen layout (the signed-out shell): nothing of the app around them.
+  const fullScreen = overlay === 'password' || overlay === 'tour';
   const gardenVisit = overlay === 'gardenVisit' && gardenOwnerId !== null;
   const visiting = overlay === 'visit' && visitUserId !== null;
   const room = !overlay && tab === 'Room';
+  const lifeContentTop = lifeTop(insets.top);
   // Cuộc sống Mirabi's screens: only for users aged 16 and over (the backend refuses anyone else too).
   const lifeScreen = lifeEligible(user) && (overlay === 'work' || overlay === 'adventure' || overlay === 'money' || overlay === 'town'
     || overlay === 'career') ? overlay : null;
 
   return (
+    <WeatherProvider enabled={worldVisited || room}>
     <LinearGradient colors={appTheme.backdrop} style={styles.fill}>
       <StatusBar barStyle="dark-content" />
-      {album ? (
+      {overlay === 'password' ? (
+        <ForgotPasswordScreen account email={user.email} onEmailChange={() => {}}
+          onBackToLogin={(done) => { if (done) { toast(done, 'success'); void logout(); } else back(); }} />
+      ) : overlay === 'tour' ? (
+        <WelcomeTour onDone={back} />
+      ) : album ? (
         <View style={[styles.fill, { paddingTop: insets.top + 10 }]}><MemoryAlbumScreen user={user} onBack={back} initialMemoryId={albumMemory} /></View>
       ) : lifeScreen ? (
         <View style={[styles.fill, { paddingTop: insets.top + 10 }]}>
@@ -219,13 +249,8 @@ export function MainApp() {
         </View>
       ) : inventory ? (
         <View style={[styles.fill, { paddingTop: insets.top + 10 }]}>
-          <InventoryScreen userId={user.id} onBack={back} onPlace={placeInRoom} onPlant={(item) => openGarden({ id: item.id, variant: item.variant })}
+          <InventoryScreen key={overlay} userId={user.id} initialTab={overlay === 'achievements' ? 'keepsake' : undefined} onBack={back} onPlace={placeInRoom} onPlant={(item) => openGarden({ id: item.id, variant: item.variant })}
             onOpenAlbum={openAlbum} />
-        </View>
-      ) : garden ? (
-        <View style={[styles.fill, { paddingTop: insets.top + 10 }]}>
-          <GardenScreen key={gardenSeed ? `${gardenSeed.id}.${gardenSeed.variant}` : 'garden'} user={user} onBack={back} onOpenInventory={openInventory} initialSeed={gardenSeed}
-            tab={gardenTab} onTabChange={setGardenTab} onVisitGarden={visitGarden} />
         </View>
       ) : gardenVisit ? (
         <View style={[styles.fill, { paddingTop: insets.top + 10 }]}>
@@ -239,11 +264,25 @@ export function MainApp() {
             onRewards={loadDashboard} onVisitRoom={visitRoom} onOpenFriends={openFriends} onOpenGarden={() => openGarden()} initialRoute={togetherRoute?.route} />
         </View>
       ) : room ? (
-        <RoomTab user={user} timer={timer} leaveGuard={roomLeave} healingRequest={healingRequest} healingAllowed={lifeEligible(user)} onOpenAlbum={() => openAlbum()} onOpenFriends={() => openFriends()}
-          hatching={petHatch.phase !== 'idle'} onOpenInventory={openInventory} onOpenGarden={() => openGarden()} />
+        <LifeHub space={lifeSpace} onSpace={setLifeSpace} immersive={lifeSpace === 'home' && decorating} badges={{ friends: pendingRequests }}>
+          {lifeSpace === 'home' ? (
+            <RoomTab user={user} timer={timer} leaveGuard={roomLeave} healingAllowed={lifeEligible(user)} onOpenAlbum={() => openAlbum()}
+              contentTop={lifeContentTop} onDecorating={setDecorating} onOpenExplore={() => setLifeSpace('explore')}
+              hatching={petHatch.phase !== 'idle'} onOpenInventory={openInventory} startJournal={startJournal} onJournalStarted={() => setStartJournal(false)} />
+          ) : lifeSpace === 'garden' ? (
+            <GardenScreen key={gardenSeed ? `${gardenSeed.id}.${gardenSeed.variant}` : 'garden'} user={user} onOpenInventory={openInventory} initialSeed={gardenSeed}
+              top={lifeContentTop} petAway={petHatch.phase !== 'idle'} />
+          ) : lifeSpace === 'explore' ? (
+            <ExploreSpace user={user} top={lifeContentTop} bottom={0} version={petReward.version + hatchVersion} onOpenGifts={openPetGifts} onOpenInventory={openInventory}
+              onOpenQuests={openDailyQuests} onOpenAdventure={() => open('adventure')} onPetSpace={petHatch.sync} />
+          ) : (
+            <FriendsSpace top={lifeContentTop} initialTab={friendsTab} onVisit={visitRoom} onVisitGarden={visitGarden} onOpenStudyRoom={openStudyRoom}
+              onRequestsChanged={() => { void loadDashboard(); }} onOpenFeed={() => open('feed')} onOpenTown={lifeEligible(user) ? () => open('town') : undefined} />
+          )}
+        </LifeHub>
       ) : games ? (
         <View style={[styles.fill, { paddingTop: insets.top + 10, paddingBottom: immersive ? insets.bottom : 0 }]}>
-          <LearningScreen key={studyVisit} user={user} defaultDuration={timer.focusMinutes} focus={focus} onFreeStudy={() => setFreeStudy(true)}
+          <LearningScreen key={`${studyVisit}.${studyView ?? ''}`} user={user} defaultDuration={timer.focusMinutes} focus={focus} onFreeStudy={() => setFreeStudy(true)} initialView={studyView ?? undefined}
             onRewards={loadDashboard} onImmersiveChange={setImmersive} onUserUpdated={setUser} modeSwitch={<StudyModeSwitch value="personal" onChange={setStudyMode} />} />
         </View>
       ) : (
@@ -252,29 +291,32 @@ export function MainApp() {
         {overlay === 'profile' ? <ProfileScreen user={user} onBack={back} />
           : overlay === 'studyProfile' ? <StudyProfileScreen user={user} onBack={back} onUserUpdated={setUser} />
           : overlay === 'educationAdmin' && user.role === 'admin' ? <EducationAdminScreen onBack={back} />
+          : overlay === 'settings' ? <SettingsScreen user={user} onBack={back} onOpenProfile={() => open('profile')} onChangePassword={() => open('password')}
+              onOpenNotifications={() => openTogether({ name: 'notifications' })} onOpenPrivacy={() => open('privacy')} onOpenHelp={() => open('help')} />
+          : overlay === 'privacy' ? <PrivacyScreen onBack={back} />
+          : overlay === 'invite' ? <InviteScreen onBack={back} />
+          : overlay === 'help' ? <HelpScreen onBack={back} onReplayTour={() => open('tour')} onOpenFeed={() => open('feed')} />
           : overlay === 'quests' ? <DailyQuestsScreen onBack={back} onChanged={loadDashboard} onOpenTaskCreate={openTaskCreate} />
             : overlay === 'streak' ? <LoginStreakScreen onBack={back} user={user} onUserUpdated={setUser} />
             : overlay === 'feed' ? <FeedScreen user={user} posts={posts} onPosts={setPosts} onPosted={loadDashboard} onBack={back} /> : <>
             {tab === 'Home' && <HomeTab user={user} dashboard={dashboard} onNavigate={navigate} onOpenProfile={() => open('profile')} onOpenStreak={openStreak} onOpenDailyQuests={openDailyQuests} onOpenTaskCreate={openTaskCreate} onQuestChanged={onQuestChanged}
-              petSpaceVersion={petReward.version + hatchVersion} onPetReturned={() => { void petReward.check(); }} onOpenPetGifts={openPetGifts} onOpenStudyTogether={openStudyTogether} onOpenFreeStudy={openFreeStudy} onOpenMemories={() => openAlbum()}
+              petSpaceVersion={petReward.version + hatchVersion} onPetReturned={() => { void petReward.check(); }} onOpenPetGifts={openPetGifts} onOpenStudyTogether={openStudyTogether} onOpenFreeStudy={openFreeStudy} onOpenFriends={() => openFriends()} onOpenMemories={() => openAlbum()}
               onOpenNotifications={() => openTogether({ name: 'notifications' })} onPetSpace={petHatch.sync}
               hatch={{ phase: petHatch.phase, level: petHatch.level, waitingReturn: petHatch.waitingReturn, onPlayed: petHatch.played }} />}
-            {tab === 'Study' && <StudyTab timer={timer} petId={user.pet} petName={user.pet_name} petLevel={user.level} userId={user.id} onBack={() => setFreeStudy(false)} />}
-            {tab === 'Community' && <FriendsScreen key={friendsTab} initialTab={friendsTab} onVisit={visitRoom} onVisitGarden={visitGarden} onOpenStudyRoom={openStudyRoom}
-              onRequestsChanged={() => { void loadDashboard(); }} />}
-            {tab === 'More' && <MoreTab user={user} onOpenProfile={() => open('profile')} onOpenRoom={() => navigate('Room')} onOpenFeed={() => open('feed')}
-              onOpenGarden={() => openGarden()} onOpenStudyProfile={() => open('studyProfile')}
-              onOpenEducationAdmin={() => open('educationAdmin')}
-              life={{ work: () => open('work'), healing: () => { navigate('Room'); setHealingRequest((n) => n + 1); }, adventure: () => open('adventure'),
-                money: () => open('money'), town: () => open('town'), career: () => open('career') }} />}
+            {tab === 'Study' && <StudyTab timer={timer} petId={user.pet} petName={user.pet_name} petLevel={user.level} userId={user.id} onBack={() => { setFreeStudy(false); setFocusStatistics(false); }} showStatistics={focusStatistics} />}
+            {tab === 'More' && <MoreTab user={user} onOpenProfile={() => open('profile')} onOpenStudyProfile={() => open('studyProfile')}
+              onOpenEducationAdmin={() => open('educationAdmin')} onOpenFocus={openFreeStudy} onOpenNotebook={openNotebook} onOpenAlbum={() => openAlbum()} onOpenStreak={openStreak}
+              onOpenStatistics={openStatistics} onOpenArchive={openArchive} onOpenTeamQuests={() => openTogether({ name: 'quests' })} onOpenAchievements={() => open('achievements')}
+              onOpenInvite={() => open('invite')} onOpenSettings={() => open('settings')} onOpenJournal={openJournal}
+              life={{ work: () => open('work'), money: () => open('money'), career: () => open('career') }} />}
           </>}
       </ScrollView>
       )}
       {/* Keeps the status bar readable when content scrolls underneath it; the room's wall goes up to the top instead. */}
-      {room ? null : <LinearGradient pointerEvents="none" colors={[appTheme.backdrop[0], 'rgba(217,240,252,0)']}
+      {room || fullScreen ? null : <LinearGradient pointerEvents="none" colors={[appTheme.backdrop[0], 'rgba(217,240,252,0)']}
         style={[styles.scrim, { height: insets.top + 12 }]} />}
-      {(games && immersive) || album ? null : <TabBar active={tab} onChange={(key) => { void leaveTo(key); }} bottomInset={insets.bottom}
-        badges={{ Community: pendingRequests }} />}
+      {(games && immersive) || fullScreen ? null : <TabBar active={tab} onChange={(key) => { void leaveTo(key); }} bottomInset={insets.bottom}
+        badges={{ Room: pendingRequests }} />}
       <TaskCreateModal visible={taskModal.visible} initialDate={taskModal.initialDate}
         onClose={() => setTaskModal((current) => ({ ...current, visible: false }))}
         onCreated={(date) => taskModal.onCreated(date)} />
@@ -287,6 +329,7 @@ export function MainApp() {
           level={petHatch.level} walkNext={petHatch.walkWaiting} confirming={petHatch.confirming} error={petHatch.error}
           onConfirm={() => { void petHatch.confirm(); }} /> : null}
     </LinearGradient>
+    </WeatherProvider>
   );
 }
 

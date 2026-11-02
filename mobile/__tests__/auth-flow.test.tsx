@@ -258,7 +258,7 @@ describe('first sign-in: adopt a pet, then the welcome tour', () => {
     expect(await screen.findByText('Chào mừng đến với Mirabi!')).toBeTruthy();
     expect(server.callsTo('PUT /api/pet')[0].body).toEqual({ pet: 'fox', name: 'Bé Hỏa' });
     expect(screen.getByText('Mình là Bé Hỏa, rất vui được gặp bạn!')).toBeTruthy();
-    for (const title of ['Trang chủ & nhiệm vụ hằng ngày', 'Học tập: Pomodoro & khóa học', 'Phòng cá nhân của pet', 'Bạn bè', 'Tiện ích: phòng, cửa hàng & cài đặt']) {
+    for (const title of ['Trang chủ & nhiệm vụ hằng ngày', 'Học tập: Pomodoro & khóa học', 'Cuộc sống Mirabi', 'Tiện ích: tập trung, kỷ niệm & cá nhân hóa']) {
       fireEvent.press(screen.getByRole('button', { name: 'Tiếp tục' }));
       expect(await screen.findByText(title)).toBeTruthy();
     }
@@ -337,14 +337,14 @@ describe('password recovery', () => {
 });
 
 describe('main app', () => {
-  it('has the five main sections and Học tập opens on the subject screen; Học tự chọn is the focus space', async () => {
+  it('has the four main sections and Học tập opens on the subject screen; Học tự chọn is the focus space', async () => {
     store.set(SESSION_KEY, JSON.stringify({ accessToken: 'access-1', refreshToken: tokens(1).refresh_token }));
     mockServer({ 'GET /api/auth/me': { status: 200, body: USER },
       'GET /api/learning/catalog': { status: 200, body: { subjects: [], default_duration_minutes: 25 } },
       'GET /api/learning/sessions/current': { status: 200, body: { session: null } } });
     render(<App />);
     await screen.findByText(`Chào bạn, ${USER.display_name}!`);
-    expect(screen.getAllByRole('tab', { name: /Trang chủ|Học tập|Phòng cá nhân|Bạn bè|Tiện ích/ })).toHaveLength(5);
+    expect(screen.getAllByRole('tab', { name: /Trang chủ|Học tập|Cuộc sống|Tiện ích/ })).toHaveLength(4);
     expect(screen.queryByRole('button', { name: /^Khóa học/ })).toBeNull();
 
     fireEvent.press(screen.getByRole('tab', { name: 'Học tập' }));

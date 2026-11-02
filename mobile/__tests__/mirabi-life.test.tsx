@@ -211,25 +211,22 @@ describe('Góc thư giãn', () => {
   });
 });
 
-describe('Tiện ích → Cuộc sống Mirabi', () => {
-  const worlds = ['work', 'healing', 'adventure', 'money', 'town', 'career'] as const;
-  const handlers = () => Object.fromEntries(worlds.map((w) => [w, jest.fn()])) as Record<(typeof worlds)[number], jest.Mock>;
+describe('where the worlds of Cuộc sống Mirabi live', () => {
+  const tools = ['work', 'career', 'money'] as const;
+  const handlers = () => Object.fromEntries(tools.map((w) => [w, jest.fn()])) as Record<(typeof tools)[number], jest.Mock>;
 
-  it('shows the six worlds in Vietnamese to users aged 16 and over, and opens each', () => {
+  it('Tiện ích has the tools for adults, in Vietnamese, aged 16 and over; the others live in their places, one way in each', () => {
     const life = handlers();
     wrap(<MoreTab user={{ ...USER, age: 16 } as any} onOpenProfile={() => {}} life={life} />);
-    expect(screen.getByText('Cuộc sống Mirabi')).toBeTruthy();
-    for (const title of ['Nhiệm vụ công việc', 'Góc thư giãn', 'Phiêu lưu cuộc sống', 'Vườn tài chính', 'Thị trấn Mirabi', 'Hành trình sự nghiệp']) {
-      expect(screen.getByText(title)).toBeTruthy();
-    }
-    for (const w of worlds) fireEvent.press(screen.getByTestId(`open-${w}`));
-    for (const w of worlds) expect(life[w]).toHaveBeenCalledTimes(1);
+    for (const title of ['Nhiệm vụ công việc', 'Vườn tài chính', 'Hành trình sự nghiệp']) expect(screen.getByText(title)).toBeTruthy();
+    for (const w of tools) fireEvent.press(screen.getByTestId(`open-${w}`));
+    for (const w of tools) expect(life[w]).toHaveBeenCalledTimes(1);
+    for (const elsewhere of ['Góc thư giãn', 'Phiêu lưu cuộc sống', 'Thị trấn Mirabi']) expect(screen.queryByText(elsewhere)).toBeNull();
     expect(screen.queryByText(/Work Quest|Life Adventure|Money Garden|Mirabi Town|Career Journey/)).toBeNull();
   });
 
   it('hides them under 16, and asks for the age when it is unknown', () => {
     const { unmount } = wrap(<MoreTab user={{ ...USER, age: 15 } as any} onOpenProfile={() => {}} life={handlers()} onOpenStudyProfile={() => {}} />);
-    expect(screen.queryByText('Cuộc sống Mirabi')).toBeNull();
     expect(screen.queryByTestId('open-work')).toBeNull();
     expect(screen.queryByText(/Cập nhật "Độ tuổi & lớp học"/)).toBeNull();
     unmount();

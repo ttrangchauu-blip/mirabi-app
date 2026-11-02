@@ -30,12 +30,13 @@ const tools = [
   { id: 'notes' as const, icon: 'create-outline' as const, label: 'Ghi chú', accessible: 'Ghi chú học tập' },
 ];
 
-type Props = { timer: FocusTimer; petId: string; petName: string | null; petLevel: number; userId: number };
+type Props = { timer: FocusTimer; petId: string; petName: string | null; petLevel: number; userId: number;
+  /** Opens with this tool's panel showing (Thống kê, from Tiện ích). */ initialPanel?: Panel };
 
-export function PomodoroPanel({ timer, petId, petName, petLevel, userId }: Props) {
+export function PomodoroPanel({ timer, petId, petName, petLevel, userId, initialPanel }: Props) {
   const { width } = useViewportSize();
   const desktop = width >= 1024;
-  const [panel, setPanel] = useState<Panel | null>(null);
+  const [panel, setPanel] = useState<Panel | null>(initialPanel ?? null);
   const [reading, setReading] = useState(false);
   const [readText, setReadText] = useState('');
   const [note, setNote] = useState('');
@@ -53,7 +54,7 @@ export function PomodoroPanel({ timer, petId, petName, petLevel, userId }: Props
   const noteKey = `mirabi.study.note:${userId}`;
   const goalKey = `mirabi.study.goal:${userId}`;
   useEffect(() => { mounted.current = true; return () => { mounted.current = false; void Speech.stop(); }; }, []);
-  useEffect(() => { setPanel(null); setReadText(''); setReading(false); speechRun.current += 1; void Speech.stop(); }, [userId]);
+  useEffect(() => { setPanel(initialPanel ?? null); setReadText(''); setReading(false); speechRun.current += 1; void Speech.stop(); }, [userId]);
   useEffect(() => {
     let disposed = false;
     setNotesReady(false); setNote(''); setGoal('');
