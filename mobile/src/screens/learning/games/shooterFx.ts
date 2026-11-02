@@ -45,13 +45,19 @@ const STROLL_REST_MS = 700;
 export const WIGGLE_MS = 420;
 
 export type Bounds = { min: number; max: number };
-export type Move = { t: number; from: number; to: number; dur: number };
+/** `hold`: how long it stays once there before strolling again, when not HOLD_MS. */
+export type Move = { t: number; from: number; to: number; dur: number; hold?: number };
 export type Point = { x: number; y: number };
 /** One shot at a word that was answered. The word stopped where it was when it was answered (`target`, its centre):
  * the pet fires at `fireAt`, the first bullet reaches it at `impactAt` and each one after it `gap` later (the word flashes
- * at each), it cracks after the last one and breaks at `breakAt` into glowing pieces, gone at `doneAt`. */
+ * at each), it cracks after the last one and breaks at `breakAt` into glowing pieces, gone at `doneAt`. A pet with a drawn
+ * attack plays it from `strikeAt`, for `strikeMs` (null: it has none, and `shotPoseAt` squashes and stretches it instead),
+ * turned to `facing`. A pet with a drawn jump leaps for `jumpMs` as the word breaks (0: it has none, and hops), then
+ * celebrates for `cheerMs` if it has that drawn too. `move`: the walk under the word. */
 export type ShotPlan = { createdAt: number; fireAt: number; impactAt: number; breakAt: number; doneAt: number; target: Point;
-  flight: number; bullets: number; gap: number };
+  flight: number; bullets: number; gap: number; strikeAt: number | null; strikeMs: number; facing: 1 | -1; jumpMs: number; cheerMs: number; move: Move };
+/** A pet's drawn attack: how long it winds up before the shot leaves, and how long all of it lasts (ms). */
+export type DrawnAttack = { windupMs: number; totalMs: number };
 
 const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
 const easeInOut = (k: number) => (k < 0.5 ? 2 * k * k : 1 - (-2 * k + 2) ** 2 / 2);
@@ -71,7 +77,7 @@ export function petX(moves: Move[], t: number, home: number, bounds: Bounds, wan
   let restFrom: number;
   if (!m) { x = home; restFrom = 0; }
   else if (t < m.t + m.dur) return clamp(m.from + (m.to - m.from) * easeInOut((t - m.t) / m.dur), bounds.min, bounds.max);
-  else { x = m.to; restFrom = m.t + m.dur + HOLD_MS; }
+  else { x = m.to; restFrom = m.t + m.dur + (m.hold ?? HOLD_MS); }
   if (wander && t > restFrom) x = strollX(clamp(x, bounds.min, bounds.max), t - restFrom, bounds);
   return clamp(x, bounds.min, bounds.max);
 }
@@ -125,22 +131,56 @@ export const muzzle = (x: number, fieldHeight: number, petBottom: number): Point
 
 /**
  * A shot at `target` (the centre of the word that was answered) decided at `now`: the pet walks under it (a short,
- * quick move, appended to `moves`), stops to aim, then fires; the first bullet breaks the word.
+ * quick move, appended to `moves`), stops to aim, then fires; the first bullet breaks the word. With a drawn `attack` it
+ * winds up once it has stopped, fires as it lunges, and stands there until the attack is over; with a drawn jump (`jumpMs`)
+ * it stands until it has landed from the jump of joy, and with a drawn celebration (`cheerMs`) until that is over too (its
+ * feet never slide).
  */
 export function planShot(moves: Move[], now: number, target: Point, home: number, bounds: Bounds, wander: boolean,
-  fieldHeight: number, petBottom: number, tuning: ShotTuning = SHOT_TUNING): ShotPlan {
+  fieldHeight: number, petBottom: number, tuning: ShotTuning = SHOT_TUNING, attack: DrawnAttack | null = null, jumpMs = 0, cheerMs = 0): ShotPlan {
   const from = petX(moves, now, home, bounds, wander);
   const to = clamp(target.x - PET_SIZE / 2, bounds.min, bounds.max);
   const distance = Math.abs(to - from);
   const dur = distance < 4 ? 0 : clamp(distance / MOVE_SPEED, MOVE_MIN_MS, MOVE_MAX_MS);
-  moves.push({ t: now, from, to: distance < 4 ? from : to, dur });
-  const fireAt = now + dur + AIM_MS;
+  const move: Move = { t: now, from, to: distance < 4 ? from : to, dur, ...(attack ? { hold: attack.totalMs } : {}) };
+  moves.push(move);
+  const fireAt = now + dur + Math.max(AIM_MS, attack?.windupMs ?? 0);
   const start = muzzle(distance < 4 ? from : to, fieldHeight, petBottom);
   const flight = clamp(Math.hypot(target.x - start.x, target.y - start.y) / tuning.bulletSpeed, tuning.flightMinMs, tuning.flightMaxMs);
   const impactAt = fireAt + flight;
   const bullets = clamp(Math.round(tuning.bullets), 2, 3);
   const breakAt = impactAt + (bullets - 1) * tuning.bulletGapMs + CRACK_MS;
-  return { createdAt: now, fireAt, impactAt, breakAt, doneAt: breakAt + SHATTER_MS, target, flight, bullets, gap: tuning.bulletGapMs };
+  if (jumpMs || cheerMs) move.hold = breakAt + jumpMs + cheerMs - (now + dur);
+  return { createdAt: now, fireAt, impactAt, breakAt, doneAt: breakAt + SHATTER_MS, target, flight, bullets, gap: tuning.bulletGapMs,
+    strikeAt: attack ? now + dur : null, strikeMs: attack?.totalMs ?? 0, facing: target.x >= from + PET_SIZE / 2 ? 1 : -1, jumpMs, cheerMs, move };
+}
+
+/** The word waits for the server this much longer: so does the break, and the jump of joy the pet stands for. */
+export function delayBreak(plan: ShotPlan, by: number) {
+  plan.breakAt += by;
+  plan.doneAt += by;
+  if (plan.jumpMs || plan.cheerMs) plan.move.hold = (plan.move.hold ?? HOLD_MS) + by;
+}
+
+/** How far through its drawn jump of joy the pet is at time `t`: 0 at rest (before it, after it, or a pet with none), then
+ * up towards 1. */
+export function leapProgress(plan: ShotPlan, t: number): number {
+  if (!plan.jumpMs || t < plan.breakAt || t >= plan.breakAt + plan.jumpMs) return 0;
+  return (t - plan.breakAt) / plan.jumpMs;
+}
+
+/** How far through its drawn celebration the pet is at time `t`, right after the jump of joy: 0 at rest, then up towards 1. */
+export function cheerProgress(plan: ShotPlan, t: number): number {
+  const from = plan.breakAt + plan.jumpMs;
+  if (!plan.cheerMs || t < from || t >= from + plan.cheerMs) return 0;
+  return (t - from) / plan.cheerMs;
+}
+
+/** How far through its drawn attack the pet is at time `t`: 0 at rest (before it, after it, or a pet with none), then up
+ * towards 1. */
+export function strikeProgress(plan: ShotPlan, t: number): number {
+  if (plan.strikeAt === null || t < plan.strikeAt || t >= plan.strikeAt + plan.strikeMs) return 0;
+  return (t - plan.strikeAt) / plan.strikeMs;
 }
 
 /** How the word looks while it is shot: `glow` 0..1 (a soft pulse while locked on, a flash at each bullet that hits,
@@ -252,6 +292,10 @@ const easeOut = (k: number) => 1 - (1 - k) ** 3;
 /** The pet's pose for one shot at `t`, or null when the shot does not move it. Crouch → release (stretch, recoil) →
  * a damped settle (follow-through) → a hop when the word breaks. */
 export function shotPoseAt(plan: ShotPlan, t: number): Pose | null {
+  // The hop of joy: a drawn jump has its own (leapProgress).
+  const hop = () => (!plan.jumpMs && t >= plan.breakAt && t < plan.breakAt + HOP_MS ? hopAt((t - plan.breakAt) / HOP_MS) : null);
+  // A drawn attack has its own crouch and lunge: its body is not stretched on top of them.
+  if (plan.strikeAt !== null) return hop();
   const crouchFrom = plan.fireAt - ANTICIPATE_MS;
   if (t >= crouchFrom && t < plan.fireAt) {
     const k = easeOut((t - crouchFrom) / ANTICIPATE_MS);
@@ -267,8 +311,7 @@ export function shotPoseAt(plan: ShotPlan, t: number): Pose | null {
     const wobble = Math.exp(-4 * k) * Math.cos(3 * Math.PI * k);
     return { sx: 1 - 0.06 * wobble, sy: 1 + 0.1 * wobble, lift: 3 * (1 - k) * Math.max(0, wobble), tilt: 0, back: 0 };
   }
-  if (t >= plan.breakAt && t < plan.breakAt + HOP_MS) return hopAt((t - plan.breakAt) / HOP_MS);
-  return null;
+  return hop();
 }
 
 /** A small jump of joy (0..1 through it): squat, up in an arc with a little turn, squash on landing. */

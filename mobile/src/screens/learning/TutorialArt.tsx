@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Animated, Easing, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { PetArt, restartFromZero } from '../../components/PetArt';
+import { attackWindupMs, SPRITE_LAYOUT } from '../../petSprites';
 import { Text } from '../../components/Typography';
 import type { TutorialScene, TutorialTarget } from '../../learning/tutorials';
 import { appTheme as t } from '../../theme';
@@ -179,13 +180,20 @@ function TypeScene({ scene, width, petId, petLevel, reduceMotion }: { scene: Ext
   const hit = step >= letters + 2;
   const top = 8 + Math.min(step, letters) * 4; // it falls while the answer is typed, then stops for the shot
   const bullet = useRef(new Animated.Value(0)).current;
+  // As in the game: a pet with a drawn attack strikes, and the bullet leaves as it lunges.
+  const strike = useRef(new Animated.Value(0)).current;
+  const windup = attackWindupMs(petId, petLevel, reduceMotion);
   useEffect(() => {
     if (!firing) return;
-    bullet.setValue(0);
-    const run = Animated.timing(bullet, { toValue: 1, duration: STEP_MS * 0.9, easing: Easing.in(Easing.quad), useNativeDriver: true });
+    bullet.setValue(0); strike.setValue(0);
+    const flight = Animated.timing(bullet, { toValue: 1, duration: STEP_MS * 0.9 - windup, easing: Easing.in(Easing.quad), useNativeDriver: true });
+    const run = windup ? Animated.parallel([
+      Animated.sequence([Animated.delay(windup), flight]),
+      Animated.timing(strike, { toValue: 1, duration: SPRITE_LAYOUT.attack.cycleMs, easing: Easing.linear, useNativeDriver: false }),
+    ]) : flight;
     run.start();
     return () => run.stop();
-  }, [firing, bullet]);
+  }, [firing, bullet, strike, windup]);
   const muzzle = HEIGHT - PET_BOTTOM - PET + 8;
   const hitY = top + (scene.variant === 'word' ? 38 : 43); // the middle of the tile, or of the rock
   return (
@@ -207,11 +215,11 @@ function TypeScene({ scene, width, petId, petLevel, reduceMotion }: { scene: Ext
               i % 2 ? styles.shardAlt : null, scene.variant === 'meteor' && styles.shardRock]} />
           )) : null}
           {firing ? (
-            <Animated.View style={[styles.bullet, { left: width / 2 - 3, top: 0, transform: [{ translateY: bullet.interpolate({ inputRange: [0, 1], outputRange: [muzzle, hitY + 6] }) }] }]} />
+            <Animated.View style={[styles.bullet, { left: width / 2 - 3, top: 0, opacity: windup ? bullet.interpolate({ inputRange: [0, 0.001], outputRange: [0, 1], extrapolate: 'clamp' }) : 1, transform: [{ translateY: bullet.interpolate({ inputRange: [0, 1], outputRange: [muzzle, hitY + 6] }) }] }]} />
           ) : null}
         </>
       ) : null}
-      <View style={[styles.shooter, { left: width / 2 - PET / 2 }]}><PetArt pet={petId} size={PET} stage={petLevel} still={reduceMotion} /></View>
+      <View style={[styles.shooter, { left: width / 2 - PET / 2 }]}><PetArt pet={petId} size={PET} stage={petLevel} still={reduceMotion} strike={strike} /></View>
     </Sky>
   );
 }

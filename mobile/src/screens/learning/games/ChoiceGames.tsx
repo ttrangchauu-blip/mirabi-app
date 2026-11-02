@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Text } from '../../../components/Typography';
 import { PetArt } from '../../../components/PetArt';
+import { usePetCheer } from '../../../games/engine/rig';
 import type { Turn } from '../../../learning/types';
 import { appTheme as t } from '../../../theme';
 import { NumberPad } from './NumberPad';
@@ -16,6 +17,7 @@ type PetProps = { petId: string; petLevel: number; reduceMotion: boolean };
 export function GateChoice({ turn, onChoose, disabled, result, petId, petLevel, reduceMotion }: {
   turn: Turn; onChoose: (id: string) => void; disabled: boolean; result?: ChoiceResult | null } & PetProps) {
   const options = turn.prompt.options ?? [];
+  const cheer = usePetCheer(petId, petLevel, !!result?.right, reduceMotion);
   const grid = options.length > 3 || options.some((o) => o.text.length > 10);
   return (
     <View style={styles.scene}>
@@ -29,14 +31,16 @@ export function GateChoice({ turn, onChoose, disabled, result, petId, petLevel, 
           </ChoiceOption>
         ))}
       </View>
-      <View style={styles.petRow} pointerEvents="none"><PetArt pet={petId} size={56} stage={petLevel} still={reduceMotion} /></View>
+      <View style={styles.petRow} pointerEvents="none"><PetArt pet={petId} size={56} stage={petLevel} still={reduceMotion} cheer={cheer} /></View>
     </View>
   );
 }
 
 /** "Sắp xếp câu": tap the pieces in order to lay planks; every piece must be used. Each piece has its own id, so the same
  * word twice can be placed and removed one by one. The final punctuation is shown after the last plank. */
-export function WordBridge({ turn, onSubmit, disabled, petId, petLevel, reduceMotion }: { turn: Turn; onSubmit: (ids: string[]) => void; disabled: boolean } & PetProps) {
+export function WordBridge({ turn, onSubmit, disabled, solved = false, petId, petLevel, reduceMotion }: { turn: Turn; onSubmit: (ids: string[]) => void; disabled: boolean;
+  /** Answered right: the pet is glad. */ solved?: boolean } & PetProps) {
+  const cheer = usePetCheer(petId, petLevel, solved, reduceMotion);
   const tokens = turn.prompt.tokens ?? [];
   const [placed, setPlaced] = useState<string[]>([]);
   const text = (id: string) => tokens.find((tk) => tk.id === id)?.text ?? '';
@@ -45,7 +49,7 @@ export function WordBridge({ turn, onSubmit, disabled, petId, petLevel, reduceMo
   return (
     <View style={styles.scene}>
       <View style={styles.bridgeRow}>
-        <View pointerEvents="none"><PetArt pet={petId} size={52} stage={petLevel} still={reduceMotion} /></View>
+        <View pointerEvents="none"><PetArt pet={petId} size={52} stage={petLevel} still={reduceMotion} cheer={cheer} /></View>
         <View style={styles.bridge} accessibilityLabel={`Câu: ${placed.map(text).join(' ') || 'chưa có mảnh nào'}${placed.length ? end : ''}`}>
           {placed.length === 0 ? <Text style={styles.gapText}>Chạm vào các mảnh bên dưới để xếp câu</Text> : placed.map((id) => (
             <Pressable key={id} onPress={() => setPlaced((p) => p.filter((x) => x !== id))} disabled={disabled}

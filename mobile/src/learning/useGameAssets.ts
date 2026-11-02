@@ -7,14 +7,15 @@ import { petSprite } from '../petSprites';
 const ASSET_WAIT_MS = 4000;
 
 /**
- * True once the pictures the game draws from the start (the pet's artwork, its idle strip and its move strips) are
- * loaded, so the 3-2-1 countdown never starts over an empty play field and the pet's first dart is not a still.
+ * True once the pictures the game draws from the start (the pet's artwork, its idle strip, its move strips and its
+ * attack, jump and celebrate strips) are loaded, so the 3-2-1 countdown never starts over an empty play field and the
+ * pet's first dart, attack, jump and celebration are not a still.
  */
 export function useGameAssets(petId: string, petLevel: number) {
   const [ready, setReady] = useState(false);
   useEffect(() => {
     let active = true;
-    const sheets = (['idle', 'moveRight', 'moveLeft'] as const).map((a) => petSprite(petId, petLevel, a)).filter((m): m is number => typeof m === 'number');
+    const sheets = (['idle', 'moveRight', 'moveLeft', 'attack', 'jump', 'celebrate'] as const).map((a) => petSprite(petId, petLevel, a)).filter((m): m is number => typeof m === 'number');
     const modules = [petStageArt(petId, petLevel), ...sheets].filter((m): m is number => typeof m === 'number');
     const timer = setTimeout(() => { if (active) setReady(true); }, ASSET_WAIT_MS);
     // Downloaded sheets show at once: a move lasts a fraction of a second, too short to wait for the picture to load.

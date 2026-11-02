@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Animated, Easing, Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { PetArt } from '../../../components/PetArt';
+import { drawnActions, hasSprite } from '../../../petSprites';
 import { Text } from '../../../components/Typography';
 import type { Turn } from '../../../learning/types';
 import { appTheme as t } from '../../../theme';
@@ -93,7 +94,7 @@ export function WordForest({ turn, disabled, feedback, onSubmit, collected, tota
   const wobble = useRef(new Animated.Value(0)).current;
   const react = useReactions();
   const [crossing, setCrossing] = useState<Crossed | null>(null);
-  const pet = useRig({ facing: 1, reduceMotion });
+  const pet = useRig({ facing: 1, reduceMotion, ...drawnActions(petId, petLevel) });
   const sound = useSfx();
   const sent = useRef<(Crossed & { turnId: string }) | null>(null);
   const shownTurn = useRef(turn.turn_id);
@@ -113,7 +114,7 @@ export function WordForest({ turn, disabled, feedback, onSubmit, collected, tota
       Animated.timing(lay, { toValue: 1, duration: ms(Math.min(900, 140 * before.pieces.length)), easing: Easing.linear, useNativeDriver: false }),
       Animated.timing(run, { toValue: 1, duration: ms(1100), easing: Easing.inOut(Easing.quad), useNativeDriver: false }),
     ]);
-    anim.start(() => end());
+    anim.start(({ finished }) => { if (finished) pet.play('cheer'); end(); }); // across: it is glad on the far bank
     return () => { anim.stop(); end(); };
   }, [solved]); // eslint-disable-line react-hooks/exhaustive-deps
   // The next word ("Tiếp theo"): the forest scrolls on to its brook, the pet comes along to this bank.
@@ -121,6 +122,7 @@ export function WordForest({ turn, disabled, feedback, onSubmit, collected, tota
     if (shownTurn.current === turn.turn_id) return;
     shownTurn.current = turn.turn_id;
     if (!crossing || demo) { travel.setValue(collected); run.setValue(0); return; }
+    if (hasSprite(petId, petLevel, 'jump') || hasSprite(petId, petLevel, 'celebrate')) pet.stop(); // it comes along: no drawn jump or celebrating on the move
     const toEnd = () => { anim.stop(); travel.setValue(collected); run.setValue(0); glow.setValue(0); lay.setValue(0); setCrossing(null); };
     const end = react.begin('forest:scroll', { maxMs: 2000, finish: toEnd });
     const anim = Animated.parallel([
@@ -210,7 +212,7 @@ export function WordForest({ turn, disabled, feedback, onSubmit, collected, tota
             <Animated.View pointerEvents="none" style={[styles.light, { opacity: glow }]} />
           </Animated.View>
           <Animated.View pointerEvents="none" style={[styles.pet, { top: bridgeY - 50, transform: [{ translateX: petX }] }]}>
-            <Animated.View style={pet.style}><PetArt pet={petId} size={68} stage={petLevel} walking={!!crossing && !reduceMotion} still={reduceMotion && !crossing} /></Animated.View>
+            <Animated.View style={pet.style}><PetArt pet={petId} size={68} stage={petLevel} walking={!!crossing && !reduceMotion} still={reduceMotion && !crossing} leap={pet.leap} cheer={pet.cheer} /></Animated.View>
           </Animated.View>
         </View>
         <View style={[styles.floor, { height: floorHeight(tiles.length, Math.max(TILE, W)) }]}>

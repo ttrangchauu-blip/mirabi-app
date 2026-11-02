@@ -85,8 +85,10 @@ shooters' `game-shot.wav` and `game-break.wav` are reused as `shot` and `break`.
 
 These need a designer (or a raster pipeline) and are **not** in the app yet:
 
-1. **Pet action sprite sheets.** The pets have idle, walk, move and study strips (`petSprites.ts`). Attack, cast,
-   hit reaction, jump, celebrate and victory are made with transforms of the idle art (`rig.ts`). For real frames:
+1. **Pet action sprite sheets.** The pets have idle, walk, move and study strips (`petSprites.ts`), and hệ Sương and hệ Lửa attack,
+   jump and celebrate strips (imported with `scripts/fit-action-strip.mjs`, see [GAME_ANIMATION.md](GAME_ANIMATION.md)). The
+   other elements' attacks, jumps and celebrations, and every pet's cast and hit reaction, are made with transforms of the
+   idle art (`rig.ts`). For real frames:
    one PNG strip per pet × evolution stage × action, the same grid as the existing strips (`SPRITE_LAYOUT`), 8–12
    frames, the pet's own design and anatomy kept, transparent background, ≤ 2048 px wide. Then add the actions to
    `PetActivity` and `PetArt` plays them.

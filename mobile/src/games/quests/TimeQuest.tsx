@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Animated, Easing, StyleSheet, View } from 'react-native';
 import { PetArt } from '../../components/PetArt';
+import { drawnActions } from '../../petSprites';
 import { Text } from '../../components/Typography';
 import { Artifact, ARTIFACT_NAME, DigMound, ERA_NAME, EraClouds, EraScene, Owl, OwlMood, PortalSwirl, TimeGate } from '../art/timeTravel';
 import { Layer, Parallax } from '../engine/Parallax';
@@ -34,7 +35,7 @@ export function TimeQuest({ done, total, wrongKey, petId, petLevel, reduceMotion
   const [walking, setWalking] = useState(false);
   const [opening, setOpening] = useState(false); // the gate lit for the way into the next era
   const finished = done >= total && total > 0;
-  const pet = useRig({ facing: 1, running, reduceMotion });
+  const pet = useRig({ facing: 1, running, reduceMotion, ...drawnActions(petId, petLevel) });
   const guide = useRig({ facing: -1, running, reduceMotion });
   const mound = useRig({ facing: 1, idle: false, running, reduceMotion });
   const spin = useRef(new Animated.Value(0)).current;
@@ -66,7 +67,7 @@ export function TimeQuest({ done, total, wrongKey, petId, petLevel, reduceMotion
     const nextEra = eraIndex(now, total);
     const all = artifactsFound(now, total);
     const last = now >= total;
-    pet.play('jump');
+    pet.play('jump', () => { if (!last) pet.play('cheer'); });
     mound.play('jump');
     setDigging(all.length - 1);
     rise.setValue(0);
@@ -154,7 +155,7 @@ export function TimeQuest({ done, total, wrongKey, petId, petLevel, reduceMotion
       <Animated.View pointerEvents="none" style={[styles.abs, { left: petAt.x, top: petAt.y, opacity: walk.interpolate({ inputRange: [0, 0.85, 1], outputRange: [1, 1, 0] }),
         transform: [{ translateX: walk.interpolate({ inputRange: [0, 1], outputRange: [0, gateMid] }) },
           { scale: walk.interpolate({ inputRange: [0, 0.7, 1], outputRange: [1, 0.9, 0.4] }) }] }]}>
-        <Animated.View style={pet.style}><PetArt pet={petId} size={PET} stage={petLevel} walking={walking} still={reduceMotion || !running} /></Animated.View>
+        <Animated.View style={pet.style}><PetArt pet={petId} size={PET} stage={petLevel} walking={walking} still={reduceMotion || !running} leap={pet.leap} cheer={pet.cheer} /></Animated.View>
       </Animated.View>
       {/* The era's name and the shelf of finds. */}
       <View style={styles.era} pointerEvents="none">

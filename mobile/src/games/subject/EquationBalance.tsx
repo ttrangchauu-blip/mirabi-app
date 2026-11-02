@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { PetArt } from '../../components/PetArt';
+import { usePetCheer } from '../engine/rig';
 import { Text } from '../../components/Typography';
 import { appTheme as t } from '../../theme';
 import { Actions, NoteLine, SceneProps, Stepper, useSolvedReaction, useWrongShake } from './common';
@@ -62,6 +63,7 @@ export function EquationBalance({ turn, disabled, feedback, solved, onSubmit, re
   const [own, setOwn] = useState<number[]>(() => species.map(() => 1));
   const coefficients = demo?.coefficients ?? own;
   const done = !!solved || !!demo?.solved;
+  const cheer = usePetCheer(petId, petLevel ?? 1, done, reduceMotion);
   const off = disabled || done || !!demo;
   const counts = atomCounts(species, coefficients);
   const level = balanced(counts);
@@ -123,7 +125,7 @@ export function EquationBalance({ turn, disabled, feedback, solved, onSubmit, re
           <Animated.View key={i} pointerEvents="none" style={[st.bubble, { left: `${30 + i * 20}%`, opacity: progress.interpolate({
             inputRange: [0, d, 0.95, 1], outputRange: [0, 0.9, 0.6, 0] }), transform: [{ translateY: bubble(d) }] }]} />
         ))}
-        <View style={st.pet} pointerEvents="none"><PetArt pet={petId} size={34} stage={petLevel} still={reduceMotion || !done} /></View>
+        <View style={st.pet} pointerEvents="none"><PetArt pet={petId} size={34} stage={petLevel} still={reduceMotion || !done} cheer={cheer} /></View>
       </Animated.View>
       <View style={st.table} accessibilityLabel="Số nguyên tử mỗi nguyên tố ở hai vế">
         <View style={st.tableRow}>

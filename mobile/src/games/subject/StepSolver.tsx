@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Animated, Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { PetArt } from '../../components/PetArt';
+import { usePetCheer } from '../engine/rig';
 import { Text } from '../../components/Typography';
 import { appTheme as t } from '../../theme';
 import { Actions, NoteLine, SceneProps, styles as ui, useSolvedReaction, useWrongShake } from './common';
@@ -30,6 +31,7 @@ export function StepSolver({ turn, disabled, feedback, solved, onSubmit, reduceM
   const calc = demo?.calc ?? own;
   const result = demo?.result ?? ownResult;
   const done = !!solved || !!demo?.solved;
+  const cheer = usePetCheer(petId, petLevel ?? 1, done, reduceMotion);
   const off = disabled || done || !!demo;
   const progress = useSolvedReaction(!demo && solved, 'step_solver:done', 900, reduceMotion);
   useEffect(() => { if (demo?.solved) progress.setValue(1); }, [demo?.solved, progress]);
@@ -73,7 +75,7 @@ export function StepSolver({ turn, disabled, feedback, solved, onSubmit, reduceM
           ))}
           <Ionicons name="flag" size={18} color={done ? t.success : '#B86A00'} style={[st.goal, { bottom: topY }]} />
           <Animated.View pointerEvents="none" style={[st.pet, { transform: [{ translateY: petY }] }]}>
-            <PetArt pet={petId} size={30} stage={petLevel} still={reduceMotion || !done} />
+            <PetArt pet={petId} size={30} stage={petLevel} still={reduceMotion || !done} cheer={cheer} />
           </Animated.View>
         </View>
       </View>

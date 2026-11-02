@@ -4,6 +4,7 @@ import { PetArt } from '../../../components/PetArt';
 import { Text } from '../../../components/Typography';
 import type { Turn } from '../../../learning/types';
 import { petById } from '../../../pets';
+import { attackWindupMs, drawnActions } from '../../../petSprites';
 import { appTheme as t } from '../../../theme';
 import { ArenaLayer, CrystalShield, Impact, MagicBolt, MONSTER_ART, MonsterId, MonsterMood, Sparkle, Zone } from '../../../games/art/mathBattle';
 import { Layer, Parallax } from '../../../games/engine/Parallax';
@@ -110,7 +111,8 @@ export const MathBattle = memo(function MathBattle({ problem, required, resolved
   const [combo, setCombo] = useState(0);
   const [burst, setBurst] = useState<{ key: number; skill: 0 | 1 | 2 | 3; text: string } | null>(null);
   const [banner, setBanner] = useState<string | null>(`${ZONE_NAME[now.zone]} · ${MONSTER_ART[now.id].name}`);
-  const pet = useRig({ facing: 1, running, reduceMotion, reach: 30 });
+  const windup = attackWindupMs(petId, petLevel, reduceMotion);
+  const pet = useRig({ facing: 1, running, reduceMotion, reach: 30, ...drawnActions(petId, petLevel) });
   const monster = useRig({ facing: -1, running, reduceMotion, reach: 34 });
   const react = useReactions();
   const advanceFor = useAdvance(hold);
@@ -195,11 +197,11 @@ export const MathBattle = memo(function MathBattle({ problem, required, resolved
     const ended = react.begin('battle:strike', { maxMs: 7000, finish: () => { striking.current = false; settle(); } });
     const end = () => { striking.current = false; ended(); };
     const advance = advanceFor(end);
-    pet.play(skill ? 'attack' : 'cast');
+    pet.play(skill || windup ? 'attack' : 'cast'); // a drawn attack: every spell, and the bolt leaves as it lunges
     sound('cast');
     bolt.setValue(0); pop.setValue(0); charge.setValue(0);
     Animated.sequence([
-      timing(charge, 1, 150, Easing.out(Easing.quad)),
+      timing(charge, 1, windup || 150, Easing.out(Easing.quad)),
       Animated.parallel([timing(charge, 0, 200), timing(bolt, 1, skill ? 320 : 220, Easing.in(Easing.quad))]),
     ]).start(() => {
       if (!alive()) return;
@@ -209,7 +211,7 @@ export const MathBattle = memo(function MathBattle({ problem, required, resolved
       sound(defeated ? 'break' : 'hit');
       pop.setValue(0);
       timing(pop, 1, 650, Easing.out(Easing.cubic)).start(() => { if (alive()) setBurst(null); });
-      if (!defeated) { monster.play('hit', () => { if (!alive()) return; setMood(standing()); end(); }); return; }
+      if (!defeated) { monster.play('hit', () => { if (!alive()) return; setMood(standing()); pet.play('cheer'); end(); }); return; }
       setMood('defeated');
       monster.play('defeat', () => {
         if (!alive()) return;
@@ -313,7 +315,7 @@ export const MathBattle = memo(function MathBattle({ problem, required, resolved
         ) : null}
         <Animated.View pointerEvents="none" style={[styles.actor, { left: petAt.x, top: petAt.y }, pet.style]}>
           {skill && !reduceMotion ? <View style={[styles.aura, { backgroundColor: element.color }]} /> : null}
-          <PetArt pet={petId} size={PET} stage={petLevel} still={reduceMotion || !running} />
+          <PetArt pet={petId} size={PET} stage={petLevel} still={reduceMotion || !running} strike={pet.strike} leap={pet.leap} cheer={pet.cheer} />
           <Animated.View style={[StyleSheet.absoluteFill, styles.hurt, { opacity: pet.flash }]} />
         </Animated.View>
         <Animated.View pointerEvents="none" style={[styles.actor, { left: foeAt.x, top: foeAt.y }, monster.style]}

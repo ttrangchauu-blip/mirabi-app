@@ -64,7 +64,7 @@ describe('visual feedback in Math Battle', () => {
     expect(screen.getByLabelText('Đã giải: 12 + 7')).toBeTruthy();
     expect(screen.queryByLabelText('Bài toán: 9 + 4 bằng mấy?')).toBeNull();
     expect(screen.queryByRole('button', { name: 'Tấn công' })).toBeNull(); // nothing to send: the pad is back with the next problem
-    await ms(400);
+    await ms(500); // the fire pet's drawn attack winds up, and the bolt leaves as it lunges
     expect(screen.getByText('−1')).toBeTruthy(); // the bolt hit
     expect(screen.getByLabelText('Máu của Slime: 1 trên 2')).toBeTruthy();
     await ms(1500);

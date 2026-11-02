@@ -1,6 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Animated, Easing, StyleSheet, View } from 'react-native';
 import { PetArt } from '../components/PetArt';
+import { attackWindupMs, drawnActions } from '../petSprites';
 import { Text } from '../components/Typography';
 import { Gem, HeartFx, Shard } from './art/effects';
 import { Sparkle } from './art/mathBattle';
@@ -62,7 +63,8 @@ export function ForestQuest({ quest, done, total, wrongKey, petId, petLevel, red
   const sound = useSfx();
   const react = useReactions();
   const advanceFor = useAdvance(hold);
-  const pet = useRig({ facing: 1, running, reduceMotion });
+  const windup = attackWindupMs(petId, petLevel, reduceMotion);
+  const pet = useRig({ facing: 1, running, reduceMotion, ...drawnActions(petId, petLevel) });
   const creature = useRig({ facing: -1, running, reduceMotion });
   const ms = (n: number) => (reduceMotion ? 0 : n);
   const timing = (v: Animated.Value, toValue: number, duration: number, easing = Easing.inOut(Easing.quad)) =>
@@ -113,6 +115,7 @@ export function ForestQuest({ quest, done, total, wrongKey, petId, petLevel, red
       const toEnd = () => {
         runSeq.current++;
         opening.stop();
+        pet.stop();
         if (!opened) { glow.setValue(RUNES); rumble.setValue(0); open.setValue(1); through(); return; }
         open.setValue(0); walk.setValue(0); rumble.setValue(0); glow.setValue(0); travel.setValue(done);
         setWalking(false);
@@ -120,37 +123,42 @@ export function ForestQuest({ quest, done, total, wrongKey, petId, petLevel, red
       const end = react.begin('forest:door', { maxMs: 5000, finish: toEnd });
       advance = advanceFor(end);
       runEnd.current = end;
+      pet.play('cheer'); // it is over before the door has opened and the pet walks through
       opening.start(after(alive, through));
       return;
     }
     const freed = done >= total;
     const layer = vinesLeft(done, total) < vinesLeft(before, total) ? vinesLeft(done, total) : null;
     pet.play('attack');
-    sound(freed ? 'complete' : 'hit');
-    glow.setValue(1);
+    // The vines hold until the pet's strike lands (at once for a pet with no drawn attack).
     setBreaking(layer);
     snap.setValue(1);
+    const strike = () => {
+      sound(freed ? 'complete' : 'hit');
+      glow.setValue(1);
+      if (freed) creature.play('celebrate'); else creature.play('jump');
+      anim.start(after(alive, () => { setBreaking(null); pet.play('cheer'); end(); }));
+    };
     const steps: Animated.CompositeAnimation[] = [Animated.parallel([timing(glow, 0, 700), timing(snap, 0, 600, Easing.out(Easing.quad))])];
     if (freed) {
-      creature.play('celebrate');
       thanks.setValue(0); gem.setValue(0);
       steps.push(Animated.parallel([
         Animated.sequence([timing(thanks, 1, 650), Animated.delay(ms(700)), timing(thanks, 0, 550)]),
         Animated.sequence([Animated.delay(ms(300)), timing(gem, 1, 700, Easing.out(Easing.back(1.6)))]),
       ]));
-    } else {
-      creature.play('jump');
     }
     const anim = Animated.sequence(steps);
+    const windingUp = windup ? Animated.delay(windup) : null;
     const toEnd = () => {
       runSeq.current++;
+      windingUp?.stop();
       anim.stop();
       glow.setValue(0); snap.setValue(0); thanks.setValue(0); gem.setValue(freed ? 1 : 0);
       setBreaking(null);
     };
     const end = react.begin('forest:rescue', { maxMs: 5000, finish: toEnd });
     runEnd.current = end;
-    anim.start(after(alive, () => { setBreaking(null); end(); }));
+    if (windingUp) windingUp.start(after(alive, strike)); else strike();
   }, [done]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // A wrong answer: felt in the world, but the lesson game stays playable (not a critical reaction).
@@ -206,7 +214,7 @@ export function ForestQuest({ quest, done, total, wrongKey, petId, petLevel, red
           </Animated.View>
           <Animated.View style={[styles.pet, { transform: [{ translateX: walk.interpolate({ inputRange: [0, 1], outputRange: [0, doorX - 20] }) },
             { scale: walk.interpolate({ inputRange: [0, 0.8, 1], outputRange: [1, 0.85, 0.6] }) }], opacity: walk.interpolate({ inputRange: [0, 0.85, 1], outputRange: [1, 1, 0] }) }]}>
-            <Animated.View style={pet.style}><PetArt pet={petId} size={66} stage={petLevel} walking={walking} still={reduceMotion || !running} /></Animated.View>
+            <Animated.View style={pet.style}><PetArt pet={petId} size={66} stage={petLevel} walking={walking} still={reduceMotion || !running} cheer={pet.cheer} /></Animated.View>
           </Animated.View>
         </>
       ) : (
@@ -232,7 +240,8 @@ export function ForestQuest({ quest, done, total, wrongKey, petId, petLevel, red
                 pointerEvents="none"><Vines size={96} layer={i as 0} /></Animated.View>
             ) : null))}
             {breaking !== null && !reduceMotion ? SHARDS.map((s, i) => (
-              <Animated.View key={i} pointerEvents="none" style={[styles.shard, { opacity: snap,
+              // Only once it is bursting (below 1): a layer still holding has no pieces in the air.
+              <Animated.View key={i} pointerEvents="none" style={[styles.shard, { opacity: snap.interpolate({ inputRange: [0, 0.999, 1], outputRange: [0, 0.999, 0] }),
                 transform: [{ translateX: snap.interpolate({ inputRange: [0, 1], outputRange: [Math.cos(s.a) * s.d, 0] }) },
                   { translateY: snap.interpolate({ inputRange: [0, 1], outputRange: [Math.sin(s.a) * s.d + 30, 0] }) },
                   { rotate: snap.interpolate({ inputRange: [0, 1], outputRange: [`${(i - 2) * 70}deg`, '0deg'] }) }] }]}>
@@ -249,7 +258,7 @@ export function ForestQuest({ quest, done, total, wrongKey, petId, petLevel, red
             )) : null}
           </Animated.View>
           <View style={[styles.pet, { left: petStand }]}>
-            <Animated.View style={pet.style}><PetArt pet={petId} size={66} stage={petLevel} still={reduceMotion || !running} /></Animated.View>
+            <Animated.View style={pet.style}><PetArt pet={petId} size={66} stage={petLevel} still={reduceMotion || !running} strike={pet.strike} cheer={pet.cheer} /></Animated.View>
           </View>
           <View style={styles.counter}><Text style={styles.counterText}>{freed ? 'Đã giải cứu!' : `Dây gai: ${left}/${LAYERS}`}</Text></View>
         </>

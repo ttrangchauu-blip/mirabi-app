@@ -3,6 +3,7 @@ import { Animated, PanResponder, Pressable, StyleSheet, View } from 'react-nativ
 import Svg, { Line, Rect, Text as SvgText } from 'react-native-svg';
 import { Ionicons } from '@expo/vector-icons';
 import { PetArt } from '../../components/PetArt';
+import { usePetCheer } from '../engine/rig';
 import { Text } from '../../components/Typography';
 import { appTheme as t } from '../../theme';
 import { Actions, NoteLine, SceneProps, styles as ui, useSolvedReaction, useWrongShake } from './common';
@@ -33,6 +34,7 @@ export function NumberLineBridge({ turn, disabled, feedback, solved, onSubmit, r
   const placed = demo?.placed ?? own;
   const hand = demo ? demo.active ?? null : active;
   const done = !!solved || !!demo?.solved;
+  const cheer = usePetCheer(petId, petLevel ?? 1, done, reduceMotion);
   const off = disabled || done || !!demo;
   const progress = useSolvedReaction(!demo && solved, 'number_line:done', 700 + 300 * points.length, reduceMotion);
   useEffect(() => { if (demo?.solved) progress.setValue(1); }, [demo?.solved, progress]);
@@ -136,7 +138,7 @@ export function NumberLineBridge({ turn, disabled, feedback, solved, onSubmit, r
         }) : null}
         <View style={[StyleSheet.absoluteFill, { top: 18 }]} {...pan.panHandlers} />
         <Animated.View pointerEvents="none" style={[st.pet, { transform: [{ translateX: walk }] }]}>
-          <PetArt pet={petId} size={30} stage={petLevel} still={reduceMotion || !done} />
+          <PetArt pet={petId} size={30} stage={petLevel} still={reduceMotion || !done} cheer={cheer} />
         </Animated.View>
       </Animated.View>
       {!done ? (

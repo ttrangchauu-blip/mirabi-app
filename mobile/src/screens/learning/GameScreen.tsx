@@ -708,7 +708,7 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
             forest) stays. Keyed by the question, so nothing of one is ever kept for the next. */}
         <Animated.View style={stageStyle} onLayout={(e) => { scrollView.current.stageTop = e.nativeEvent.layout.y; }}>
         {shown && shown.kind === 'gate_choice' ? <GateChoice key={shown.turn_id} turn={shown} onChoose={(id) => submit(shown, id)} disabled={disabled} result={choiceResult} petId={petId} petLevel={petLevel} reduceMotion={prefs.reduceMotion} /> : null}
-        {shown && shown.kind === 'bridge_order' ? <WordBridge key={shown.turn_id} turn={shown} onSubmit={(ids) => submit(shown, ids)} disabled={disabled} petId={petId} petLevel={petLevel} reduceMotion={prefs.reduceMotion} /> : null}
+        {shown && shown.kind === 'bridge_order' ? <WordBridge key={shown.turn_id} turn={shown} onSubmit={(ids) => submit(shown, ids)} disabled={disabled} solved={solvedId === shown.turn_id} petId={petId} petLevel={petLevel} reduceMotion={prefs.reduceMotion} /> : null}
         {shown && shown.kind === 'spell_fix' ? (
           <SpellDetective key={shown.turn_id} turn={shown} disabled={disabled} feedback={note?.turnId === shown.turn_id ? note : null}
             onFind={(id) => submit(shown, [id])} onFix={(word, option) => submit(shown, [word, option])} />

@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 're
 import { Animated, Easing, Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { PetArt } from '../components/PetArt';
+import { drawnActions } from '../petSprites';
 import { Text } from '../components/Typography';
 import type { Turn } from '../learning/types';
 import { appTheme as t } from '../theme';
@@ -81,7 +82,7 @@ export function MagicLab({ turn, disabled, feedback, onSubmit, solved, petId, pe
   const full = slotIds.length > 0 && slotIds.every((s) => shownPlaced[s]);
   const [width, setWidth] = useState(0);
 
-  const pet = useRig({ facing: 1, running: !locked || !!showing, reduceMotion });
+  const pet = useRig({ facing: 1, running: !locked || !!showing, reduceMotion, ...drawnActions(petId, petLevel) });
   const run = useRef(new Animated.Value(0)).current; // 0 → 1: the experiment working
   const fizzle = useRef(new Animated.Value(0)).current; // a wrong setup: a spark, then nothing
   const react = useReactions();
@@ -155,7 +156,7 @@ export function MagicLab({ turn, disabled, feedback, onSubmit, solved, petId, pe
   return (
     <View style={styles.wrap} onLayout={(e) => setWidth(e.nativeEvent.layout.width)}>
       <View style={styles.assistant}>
-        <Animated.View style={[styles.petBox, pet.style]}><PetArt pet={petId} size={58} stage={petLevel} still={reduceMotion} /></Animated.View>
+        <Animated.View style={[styles.petBox, pet.style]}><PetArt pet={petId} size={58} stage={petLevel} still={reduceMotion} leap={pet.leap} cheer={pet.cheer} /></Animated.View>
         <View style={styles.bubble} accessibilityRole="text">
           <View style={styles.sceneHead}>
             <Ionicons name="flask" size={13} color="#5141A8" />

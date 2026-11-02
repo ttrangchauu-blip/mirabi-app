@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Animated, Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { PetArt } from '../../components/PetArt';
+import { usePetCheer } from '../engine/rig';
 import { Text } from '../../components/Typography';
 import { appTheme as t } from '../../theme';
 import { Actions, NoteLine, SceneProps, styles as ui, useSolvedReaction, useWrongShake } from './common';
@@ -24,6 +25,7 @@ export function StoryDetective({ turn, disabled, feedback, solved, onSubmit, red
   const [crossed, setCrossed] = useState<string[]>([]);
   const choice = demo ? (answering ? demo.option ?? null : demo.picked ?? null) : picked;
   const done = !!solved || !!demo?.solved;
+  const cheer = usePetCheer(petId, petLevel ?? 1, done, reduceMotion);
   const off = disabled || done || !!demo;
   const progress = useSolvedReaction(!demo && solved, 'story:done', 900, reduceMotion);
   useEffect(() => { if (demo?.solved) progress.setValue(1); }, [demo?.solved, progress]);
@@ -89,7 +91,7 @@ export function StoryDetective({ turn, disabled, feedback, solved, onSubmit, red
         </Animated.View>
       ) : null}
       <View style={st.petRow} pointerEvents="none">
-        <PetArt pet={petId} size={32} stage={petLevel} still={reduceMotion || !done} />
+        <PetArt pet={petId} size={32} stage={petLevel} still={reduceMotion || !done} cheer={cheer} />
         <Ionicons name="search-circle" size={26} color="#5B3FA0" />
       </View>
       <NoteLine note={demo?.solved ? { text: 'Chính xác! Vụ án đã được phá.', tone: 'good' } : done ? null : feedback} />

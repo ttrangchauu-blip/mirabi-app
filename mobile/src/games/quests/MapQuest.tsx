@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Animated, Easing, StyleSheet, View } from 'react-native';
 import { PetArt } from '../../components/PetArt';
+import { drawnActions, hasSprite } from '../../petSprites';
 import { Text } from '../../components/Typography';
 import { Sparkle } from '../art/mathBattle';
 import { FogCloud, MAP_STOPS, MapBoard, MapFlag, routeAt, stopFractions } from '../art/treasureMap';
@@ -38,7 +39,7 @@ export function MapQuest({ done, total, wrongKey, petId, petLevel, reduceMotion,
   const fog = useRef(MAP_STOPS.map(() => new Animated.Value(1))).current;
   const rain = useRef(new Animated.Value(0)).current;
   const shine = useRef(new Animated.Value(0)).current;
-  const pet = useRig({ facing: 1, running, reduceMotion, idle: false });
+  const pet = useRig({ facing: 1, running, reduceMotion, idle: false, ...drawnActions(petId, petLevel) });
   const ms = (n: number) => (reduceMotion ? 0 : n);
 
   // The trail as interpolation points, for this map's shape (the pet's x and y follow it exactly).
@@ -58,10 +59,11 @@ export function MapQuest({ done, total, wrongKey, petId, petLevel, reduceMotion,
     const f = at(now);
     const next = placesReached(f, aspect);
     play('pickup');
+    if (hasSprite(petId, petLevel, 'jump') || hasSprite(petId, petLevel, 'celebrate')) pet.stop(); // it sets off: no drawn jump or celebrating on the move
     setWalking(!reduceMotion);
     Animated.timing(pos, { toValue: f, duration: ms(900), easing: Easing.inOut(Easing.quad), useNativeDriver: NATIVE }).start(() => {
       setWalking(false);
-      if (next <= reached) { end(); return; }
+      if (next <= reached) { pet.play('cheer'); end(); return; }
       {
         play(now >= total ? 'complete' : 'unlock');
         pet.play('celebrate');
@@ -109,7 +111,7 @@ export function MapQuest({ done, total, wrongKey, petId, petLevel, reduceMotion,
       </View>
       <Animated.View pointerEvents="none" style={[styles.abs, { left: 0, top: 0, transform: [{ translateX: petX }, { translateY: petY }] }]}>
         <View style={styles.shadow} />
-        <Animated.View style={pet.style}><PetArt pet={petId} size={PET} stage={petLevel} walking={walking} still={reduceMotion || !running} /></Animated.View>
+        <Animated.View style={pet.style}><PetArt pet={petId} size={PET} stage={petLevel} walking={walking} still={reduceMotion || !running} leap={pet.leap} cheer={pet.cheer} /></Animated.View>
         <Animated.View style={[styles.abs, { left: PET / 2 - 22, top: -26, opacity: rain }]}><FogCloud size={44} /></Animated.View>
         <Animated.View style={[styles.abs, { left: PET / 2 - 14, top: -10, opacity: shine.interpolate({ inputRange: [0, 0.1, 1], outputRange: [0, 1, 0] }),
           transform: [{ translateY: shine.interpolate({ inputRange: [0, 1], outputRange: [0, -26] }) }] }]}>

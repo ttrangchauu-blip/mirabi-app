@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Animated, Easing, LayoutRectangle, PanResponder, Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { PetArt } from '../../../components/PetArt';
+import { usePetCheer } from '../../../games/engine/rig';
 import { Text } from '../../../components/Typography';
 import { Block, BLOCK_LABEL, blockCount, fault, Fault, isLoop, LOOP_MAX, LOOP_MIN, loopTimes, openLoop, Step, trace, walk, Walk } from '../../../learning/codePath';
 import type { Facing, Turn } from '../../../learning/types';
@@ -181,6 +182,7 @@ export function CodePath({ turn, disabled, feedback, onRun, petId, petLevel, red
   const [running, setRunning] = useState(false);
   const [wrong, setWrong] = useState<Fault | null>(null);
   const [won, setWon] = useState(false);
+  const cheer = usePetCheer(petId, petLevel, won, reduceMotion);
   const [width, setWidth] = useState(0);
   const start = (p.start ?? { x: 0, y: 0, dir: 'E' }) as Step;
   // The robot: where it is (in cells), which way it looks, a bump against a rock, a hop at the goal.
@@ -307,7 +309,7 @@ export function CodePath({ turn, disabled, feedback, onRun, petId, petLevel, red
               hop.interpolate({ inputRange: [0, 1], outputRange: [0, -cell * 0.45] }))) },
           ] }]}>
             <View style={[styles.dome, { width: cell * 0.78, height: cell * 0.6, borderTopLeftRadius: cell * 0.4, borderTopRightRadius: cell * 0.4 }]}>
-              <PetArt pet={petId} size={cell * 0.55} stage={petLevel} still />
+              <PetArt pet={petId} size={cell * 0.55} stage={petLevel} still cheer={cheer} />
             </View>
             <View style={[styles.chassis, { width: cell * 0.86, height: cell * 0.26 }, wrong?.blocked && styles.chassisHurt]}>
               <View style={styles.wheel} /><View style={styles.wheel} />

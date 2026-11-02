@@ -5,11 +5,11 @@ import { useAudioPlayer } from 'expo-audio';
 import { Text, TextInput } from '../../../components/Typography';
 import { PetArt } from '../../../components/PetArt';
 import type { Turn, WordPair } from '../../../learning/types';
-import { hasSprite, moveActivity } from '../../../petSprites';
+import { attackWindupMs, drawnCelebrateMs, drawnJumpMs, hasSprite, moveActivity, SPRITE_LAYOUT } from '../../../petSprites';
 import { appTheme as t } from '../../../theme';
 import { bulletAt, BURST_MS, burstLook, combinePoses, idleTiltAt, JOY, joyAt, LANDING_MS, landingAt, leanAt, Move,
   muzzle, PEBBLES, PET_SIZE, petBounds, petDrift, petMoving, petX, planShot, Point, type Pose, shardsAt, ShotPlan,
-  shotPoseAt, sparksAt, startleAt, STRIDE_PX, targetLook, TRAIL, trailAt, WIGGLE_MS, LITE_CHECK_FRAMES, nextLite } from './shooterFx';
+  shotPoseAt, sparksAt, startleAt, STRIDE_PX, strikeProgress, targetLook, cheerProgress, delayBreak, leapProgress, TRAIL, trailAt, WIGGLE_MS, LITE_CHECK_FRAMES, nextLite } from './shooterFx';
 import { AnswerSlots, SLOT_PITCH } from './LetterInput';
 import { FIELD, FallingWord, laneLefts, WordField, WordSpec } from './wordField';
 
@@ -519,8 +519,12 @@ const ShooterLayer = memo(function ShooterLayer({ width, height, words, petId, p
   const live = useRef(new Map<string, Live>());
   const burstVals = useRef(new Map<string, { born: number; o: Animated.Value; rise: Animated.Value; scale: Animated.Value }>());
   // The pet's whole body, set every frame from its pose: where it is, squash and stretch (from its feet), how high it
-  // is off the ground, its tilt, and how far through its walk strip its steps are (driven by the distance walked).
-  const pet = useRef({ x: value(home.current), lean: value(0), sx: value(1), sy: value(1), lift: value(0), phase: value(0) }).current;
+  // is off the ground, its tilt, how far through its walk strip its steps are (driven by the distance walked), and how
+  // far through its drawn attack it is, facing which way (on the same clock as the bullets, which leave at its lunge), and
+  // through its drawn jump and celebration.
+  const pet = useRef({ x: value(home.current), lean: value(0), sx: value(1), sy: value(1), lift: value(0), phase: value(0), strike: value(0), face: value(1), leap: value(0), cheer: value(0) }).current;
+  /** The last word broken: the pet's joy over it outlasts the shot's effects. */
+  const joyOver = useRef<ShotPlan | null>(null);
   const walked = useRef({ x: null as number | null, distance: 0 });
   const joy = useRef(Array.from({ length: JOY }, () => ({ x: value(), y: value(), o: value(0), s: value(1) }))).current;
   const wiggleSince = useRef<number | null>(null);
@@ -532,7 +536,10 @@ const ShooterLayer = memo(function ShooterLayer({ width, height, words, petId, p
     if (live.current.has(shot.id)) continue;
     const rect = heldRect(shot.id);
     if (!rect) continue;
-    const plan = planShot(moves.current, now(), { x: rect.left + rect.width / 2, y: rect.top + HIT_Y }, home.current, bounds, wander, height, PET_BOTTOM);
+    const windupMs = attackWindupMs(petId, petLevel, reduceMotion);
+    const plan = planShot(moves.current, now(), { x: rect.left + rect.width / 2, y: rect.top + HIT_Y }, home.current, bounds, wander, height, PET_BOTTOM,
+      undefined, windupMs ? { windupMs, totalMs: SPRITE_LAYOUT.attack.cycleMs } : null, drawnJumpMs(petId, petLevel, reduceMotion),
+      drawnCelebrateMs(petId, petLevel, reduceMotion));
     const xy = () => ({ x: value(), y: value(), o: value(0), r: value() });
     live.current.set(shot.id, { plan, fired: false, struck: false, broke: false, done: false, origins: Array(plan.bullets).fill(null),
       bullets: Array.from({ length: plan.bullets }, xy), shards: Array.from({ length: SHARDS }, xy),
@@ -565,22 +572,24 @@ const ShooterLayer = memo(function ShooterLayer({ width, height, words, petId, p
     const startle = startleAt(wiggleSince.current, tNow);
     const poses: (Pose | null)[] = [startle ? { ...startle, back: -walkRef.current.facing * startle.back } : null];
     let lean = 0;
+    let strike = 0;
     let cheer: ShotPlan | null = null;
     for (const shot of held) {
       const s = live.current.get(shot.id);
       if (!s || s.done) continue;
       const { plan } = s;
+      const striking = strikeProgress(plan, tNow);
+      if (striking) { strike = striking; put(pet.face, plan.facing); }
       // Not confirmed yet by the server: it waits, cracked and glowing, just before it would break.
       if (shot.confirmed === false && !s.broke && tNow > plan.breakAt - 20) {
-        const push = tNow - plan.breakAt + 20;
-        plan.breakAt += push;
-        plan.doneAt += push;
+        delayBreak(plan, tNow - plan.breakAt + 20);
       }
       // The word stopped where it was answered: every bullet flies to that spot and hits it. It glows at each hit,
       // cracks after the last one, then breaks (its meaning shows and it counts).
       if (!s.struck && tNow >= plan.impactAt) { s.struck = true; latest.current.onHit?.(shot); }
       if (!s.broke && tNow >= plan.breakAt) {
         s.broke = true;
+        joyOver.current = plan;
         latest.current.play('break');
         latest.current.onImpact?.(shot, plan.target);
       }
@@ -631,14 +640,19 @@ const ShooterLayer = memo(function ShooterLayer({ width, height, words, petId, p
       if (tNow >= plan.doneAt) { s.done = true; latest.current.onShotDone?.(shot.id); }
     }
     const dart = petMoving(moves.current, tNow);
+    const leap = joyOver.current ? leapProgress(joyOver.current, tNow) : 0;
+    const beam = joyOver.current ? cheerProgress(joyOver.current, tNow) : 0;
     // Standing (not shooting, not walking): now and then a little tilt of the head.
-    const idle = !wander || dart.moving || poses.length > 1 || walkRef.current.moving ? 0 : idleTiltAt(tNow);
+    const idle = !wander || dart.moving || poses.length > 1 || walkRef.current.moving || strike || leap || beam ? 0 : idleTiltAt(tNow);
     const pose = reduceMotion ? null : combinePoses(poses);
     put(pet.x, x + (pose?.back ?? 0));
     put(pet.lean, lean + (pose?.tilt ?? 0) + idle);
     put(pet.sx, pose?.sx ?? 1);
     put(pet.sy, pose?.sy ?? 1);
     put(pet.lift, -(pose?.lift ?? 0));
+    put(pet.strike, strike);
+    put(pet.leap, strike || dart.moving ? 0 : leap); // a new shot cuts its joy short, and so does a wrong answer
+    put(pet.cheer, strike || dart.moving || startle ? 0 : beam);
     // Sparks of joy over its head while it hops.
     const sparks = cheer && !reduceMotion && !lite ? joyAt(cheer, tNow) : [];
     joy.forEach((v, i) => {
@@ -754,7 +768,7 @@ const ShooterLayer = memo(function ShooterLayer({ width, height, words, petId, p
             walking left mirrors it. Standing, it faces the player again. */}
         <View style={{ transform: [{ scaleX: running && walk.moving && !hasSprite(petId, petLevel, moveActivity(walk.facing)) ? walk.facing : 1 }] }}>
           <PetArt pet={petId} size={PET_SIZE} stage={petLevel} moving={walk.moving ? walk.facing : undefined} strolling={walk.stroll}
-            still={reduceMotion || !running} phase={walk.stroll ? pet.phase : undefined} />
+            still={reduceMotion || !running} phase={walk.stroll ? pet.phase : undefined} strike={pet.strike} strikeFacing={pet.face} leap={pet.leap} cheer={pet.cheer} />
         </View>
       </Animated.View>
     </View>

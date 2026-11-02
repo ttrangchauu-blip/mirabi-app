@@ -3,6 +3,7 @@ import { ActivityIndicator, Animated, Easing, StyleSheet, View } from 'react-nat
 import { errorMessage } from '../../auth/messages';
 import { Text } from '../../components/Typography';
 import { PetArt } from '../../components/PetArt';
+import { drawnCelebrateMs, drawnJumpMs } from '../../petSprites';
 import { learningApi } from '../../learning/api';
 import { ERROR_TYPE_LABEL, gameTitle, MODE_INFO, OUTCOME_LABEL, rewardMessage, STATUS_TITLE } from '../../learning/labels';
 import type { LearningSession, LessonExplore, Outcome, SessionResult } from '../../learning/types';
@@ -21,12 +22,25 @@ type Props = {
   reduceMotion?: boolean;
 };
 
-/** The victory: a completed stage makes the pet hop twice for joy (squash, up, land), once, as the result comes in. */
+/** The victory: a completed stage makes the pet hop twice for joy (squash, up, land), once, as the result comes in; or its
+ * drawn jump and celebration (`jumpMs`, `cheerMs`), which `children` shows from the values it is given. */
 export const VICTORY_MS = 1100;
-function Victory({ won, reduceMotion, children }: { won: boolean; reduceMotion: boolean; children: React.ReactNode }) {
+function Victory({ won, reduceMotion, jumpMs, cheerMs, children }: { won: boolean; reduceMotion: boolean; jumpMs: number; cheerMs: number;
+  children: (leap: Animated.Value, cheer: Animated.Value) => React.ReactNode }) {
   const k = useRef(new Animated.Value(0)).current;
+  const leap = useRef(new Animated.Value(0)).current;
+  const cheer = useRef(new Animated.Value(0)).current;
   useEffect(() => {
     if (!won || reduceMotion) return;
+    if (jumpMs || cheerMs) {
+      const strip = (v: Animated.Value, duration: number) => Animated.sequence([
+        Animated.timing(v, { toValue: 1, duration, easing: Easing.linear, useNativeDriver: false }),
+        Animated.timing(v, { toValue: 0, duration: 0, useNativeDriver: false }),
+      ]);
+      const run = Animated.sequence([Animated.delay(150), strip(leap, jumpMs), strip(cheer, cheerMs)]);
+      run.start();
+      return () => run.stop();
+    }
     const hop = (ms: number) => Animated.sequence([
       Animated.timing(k, { toValue: 0.15, duration: ms * 0.18, easing: Easing.out(Easing.quad), useNativeDriver: true }),
       Animated.timing(k, { toValue: 0.6, duration: ms * 0.4, easing: Easing.out(Easing.quad), useNativeDriver: true }),
@@ -36,14 +50,14 @@ function Victory({ won, reduceMotion, children }: { won: boolean; reduceMotion: 
     const run = Animated.sequence([Animated.delay(150), hop(VICTORY_MS * 0.52), hop(VICTORY_MS * 0.34)]);
     run.start();
     return () => run.stop();
-  }, [won, reduceMotion, k]);
+  }, [won, reduceMotion, jumpMs, cheerMs, k, leap, cheer]);
   // 0 → 0.15: squat; → 0.6: up; → 1: down and a little squash on landing.
   return (
     <Animated.View style={{ transformOrigin: '50% 100%', transform: [
       { translateY: k.interpolate({ inputRange: [0, 0.15, 0.6, 0.95, 1], outputRange: [0, 0, -22, -2, 0] }) },
       { scaleX: k.interpolate({ inputRange: [0, 0.15, 0.3, 0.95, 1], outputRange: [1, 1.08, 0.95, 1.06, 1] }) },
       { scaleY: k.interpolate({ inputRange: [0, 0.15, 0.3, 0.95, 1], outputRange: [1, 0.88, 1.08, 0.92, 1] }) }] }}>
-      {children}
+      {children(leap, cheer)}
     </Animated.View>
   );
 }
@@ -112,8 +126,9 @@ export function ResultScreen({ sessionId, petId, petLevel, onReplay, onReview, o
   return (
     <>
       <Card style={styles.hero}>
-        <Victory won={s.status === 'completed'} reduceMotion={reduceMotion}>
-          <PetArt pet={petId} size={96} stage={petLevel} still />
+        <Victory won={s.status === 'completed'} reduceMotion={reduceMotion} jumpMs={drawnJumpMs(petId, petLevel, reduceMotion)}
+          cheerMs={drawnCelebrateMs(petId, petLevel, reduceMotion)}>
+          {(leap, cheer) => <PetArt pet={petId} size={96} stage={petLevel} still leap={leap} cheer={cheer} />}
         </Victory>
         <Text style={styles.title} accessibilityRole="header">{STATUS_TITLE[s.status]}</Text>
         {stars ? <Stars stars={stars} reduceMotion={reduceMotion} /> : null}

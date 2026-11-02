@@ -209,7 +209,7 @@ describe('the shooting pet on the play field', () => {
     layout();
     field.shoot();
     screen.rerender(<Field field={field} shots={[shotAt()]} bursts={[burst]} onImpact={onImpact} onBurstDone={onBurstDone} />);
-    ms(300); // the bullets are on their way
+    ms(600); // the fire pet's attack has wound up: the bullets are on their way
     screen.rerender(<Field field={field} shots={[shotAt()]} bursts={[burst]} onImpact={onImpact} onBurstDone={onBurstDone} running={false} />);
     const frozen = petLeft();
     const bullets = flying();
@@ -399,7 +399,7 @@ describe('falling words on the play field', () => {
     const shot: Shot = { ...shotAt(), turn: low };
     render(<Field field={field} shots={[shot]} onImpact={onImpact} onShotDone={onShotDone} />);
     layout();
-    ms(1300);
+    ms(1600); // with the fire pet's wind-up
     expect(onImpact).toHaveBeenCalledTimes(1);
     expect(top(screen.getByTestId('shot-turn-apple', { includeHiddenElements: true }))).toBe(stopped.y);
     expect(Math.abs((onImpact.mock.calls[0][1] as { y: number }).y - (stopped.y + 40))).toBeLessThan(2);

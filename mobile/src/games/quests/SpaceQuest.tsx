@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Animated, Easing, StyleSheet, View } from 'react-native';
 import { PetArt } from '../../components/PetArt';
+import { attackWindupMs, drawnActions } from '../../petSprites';
 import { Text } from '../../components/Typography';
 import { Impact } from '../art/mathBattle';
 import { Asteroid, AsteroidVariant, Laser, Planet, PLANET_NAME, Rocket, ROCKET_SEAT, RocketGlass, Rubble, SpaceLayer, Thruster } from '../art/space';
@@ -37,6 +38,9 @@ export function SpaceQuest({ done, total, wrongKey, petId, petLevel, reduceMotio
   const [rock, setRock] = useState<AsteroidVariant>((done % 3) as AsteroidVariant);
   const [rockGone, setRockGone] = useState(done >= total && total > 0);
   const ship = useRig({ facing: 1, running, reduceMotion, idle: false });
+  // The pet in its dome strikes as the rocket fires (its drawn attack, if it has one): the laser leaves at its lunge.
+  const windup = attackWindupMs(petId, petLevel, reduceMotion);
+  const seat = useRig({ idle: false, running, reduceMotion, ...drawnActions(petId, petLevel) });
   const travel = useRef(new Animated.Value(done)).current; // JS: drives the parallax
   const flame = useRef(new Animated.Value(0)).current;
   const bob = useRef(new Animated.Value(0)).current;
@@ -64,11 +68,12 @@ export function SpaceQuest({ done, total, wrongKey, petId, petLevel, reduceMotio
   useQuestEvents(done, wrongKey, (now, _before, end, advance) => {
     const saved = planetsRescued(now, total);
     const finished = now >= total;
-    play('shot');
+    if (windup) { seat.play('attack'); Animated.delay(windup).start(() => play('shot')); } else play('shot');
     laser.setValue(0); burst.setValue(0);
-    Animated.sequence([timing(laser, 1, 280, Easing.in(Easing.quad))]).start(() => {
+    Animated.sequence([...(windup ? [Animated.delay(windup)] : []), timing(laser, 1, 280, Easing.in(Easing.quad))]).start(() => {
       play('break');
       laser.setValue(0);
+      seat.play('cheer'); // the asteroid is gone: the pet is glad
       Animated.parallel([
         timing(rockAlpha, 0, 90),
         timing(burst, 1, 620, Easing.out(Easing.cubic)),
@@ -167,7 +172,7 @@ export function SpaceQuest({ done, total, wrongKey, petId, petLevel, reduceMotio
           </Animated.View>
           <Rocket size={ROCKET} />
           <View style={[styles.abs, { left: ROCKET * ROCKET_SEAT.left, top: ROCKET * ROCKET_SEAT.top }]}>
-            <PetArt pet={petId} size={ROCKET * ROCKET_SEAT.size} stage={petLevel} still={reduceMotion || !running} />
+            <PetArt pet={petId} size={ROCKET * ROCKET_SEAT.size} stage={petLevel} still={reduceMotion || !running} strike={seat.strike} cheer={seat.cheer} />
           </View>
           <View style={StyleSheet.absoluteFill}><RocketGlass size={ROCKET} /></View>
           <Animated.View style={[StyleSheet.absoluteFill, styles.hurt, { opacity: ship.flash }]} />

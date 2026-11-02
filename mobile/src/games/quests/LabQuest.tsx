@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Animated, Easing, StyleSheet, View } from 'react-native';
 import { PetArt } from '../../components/PetArt';
+import { drawnActions } from '../../petSprites';
 import { Text } from '../../components/Typography';
 import { Impact, Sparkle } from '../art/mathBattle';
 import { Beaker, Bulb, HotPlate, LabBackdrop, Magnet, Microscope } from '../art/magicLab';
@@ -29,7 +30,7 @@ export function LabQuest({ done, total, wrongKey, petId, petLevel, reduceMotion,
   const [drop, setDrop] = useState(0); // the colour of the drop in flight
   const finished = done >= total && total > 0;
   const [brewed, setBrewed] = useState(finished);
-  const pet = useRig({ facing: 1, running, reduceMotion });
+  const pet = useRig({ facing: 1, running, reduceMotion, ...drawnActions(petId, petLevel) });
   const beaker = useRig({ facing: 1, idle: false, running, reduceMotion });
   const fly = useRef(new Animated.Value(0)).current;
   const splash = useRef(new Animated.Value(0)).current;
@@ -50,7 +51,7 @@ export function LabQuest({ done, total, wrongKey, petId, petLevel, reduceMotion,
       setLevel(potionLevel(now, total));
       beaker.play('jump');
       timing(splash, 1, 700, Easing.out(Easing.cubic)).start(() => { splash.setValue(0); end(); });
-      if (last) { setBrewed(true); pet.play('celebrate'); }
+      if (last) { setBrewed(true); pet.play('celebrate'); } else pet.play('cheer');
     });
   }, (end) => {
     play('wrong');
@@ -108,7 +109,7 @@ export function LabQuest({ done, total, wrongKey, petId, petLevel, reduceMotion,
         </View>
       ) : null}
       <Animated.View pointerEvents="none" style={[styles.abs, { left: petAt.x, top: petAt.y }, pet.style]}>
-        <PetArt pet={petId} size={PET} stage={petLevel} still={reduceMotion || !running} />
+        <PetArt pet={petId} size={PET} stage={petLevel} still={reduceMotion || !running} leap={pet.leap} cheer={pet.cheer} />
       </Animated.View>
       <View style={styles.chip} pointerEvents="none">
         <Text style={styles.chipText}>{brewed ? 'Pha chế thành công!' : 'Bình tri thức'}</Text>

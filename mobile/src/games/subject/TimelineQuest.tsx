@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Animated, Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { PetArt } from '../../components/PetArt';
+import { usePetCheer } from '../engine/rig';
 import { Text } from '../../components/Typography';
 import { appTheme as t } from '../../theme';
 import { Draggable, DropArea, DropZone } from '../engine/drag';
@@ -29,6 +30,7 @@ export function TimelineQuest({ turn, disabled, feedback, solved, onSubmit, redu
   const [bad, setBad] = useState<Set<string>>(new Set());
   const placed = demo?.placed ?? own;
   const done = !!solved || !!demo?.solved;
+  const cheer = usePetCheer(petId, petLevel ?? 1, done, reduceMotion);
   const off = disabled || done || !!demo;
   const progress = useSolvedReaction(!demo && solved, 'timeline:done', 500 + 320 * markers.length, reduceMotion);
   useEffect(() => { if (demo?.solved) progress.setValue(1); }, [demo?.solved, progress]);
@@ -75,7 +77,7 @@ export function TimelineQuest({ turn, disabled, feedback, solved, onSubmit, redu
         <View style={st.line} />
         <Animated.View style={[st.lineFill, { height: progress.interpolate({ inputRange: [0, 1], outputRange: ['0%', '100%'] }) }]} />
         <Animated.View style={[st.pet, { transform: [{ translateY: petY }] }]} pointerEvents="none">
-          <PetArt pet={petId} size={36} stage={petLevel} still={reduceMotion || !done} />
+          <PetArt pet={petId} size={36} stage={petLevel} still={reduceMotion || !done} cheer={cheer} />
         </Animated.View>
         <Text style={st.end}>Sớm hơn</Text>
         {markers.map((m, i) => {

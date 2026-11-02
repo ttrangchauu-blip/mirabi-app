@@ -66,12 +66,12 @@ describe('Math Battle (play)', () => {
   it('a right answer: the bolt hits (−1); at zero the monster is defeated and the next one walks in', () => {
     const view = render(<Battle />);
     view.rerender(<Battle problem={problem('m2', '9 − 4')} resolved={1} flash={{ turnId: 'm1', kind: 'hit' }} />);
-    ms(400);
+    ms(520); // the fire pet's drawn attack winds up, and the bolt leaves as it lunges
     expect(screen.getByText('−1')).toBeTruthy();
     expect(screen.getByLabelText('Máu của Slime: 1 trên 2')).toBeTruthy();
     expect(screen.getByLabelText('Combo 1')).toBeTruthy();
     view.rerender(<Battle problem={problem('m3', '6 + 6')} resolved={2} flash={{ turnId: 'm2', kind: 'hit' }} />);
-    ms(400);
+    ms(520);
     expect(screen.getByLabelText('Máu của Slime: 0 trên 2')).toBeTruthy(); // defeated
     ms(3000);
     expect(screen.getByLabelText('Rừng phép thuật: pet đấu với Nấm phép thuật')).toBeTruthy();
