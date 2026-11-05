@@ -341,7 +341,9 @@ describe('main app', () => {
     store.set(SESSION_KEY, JSON.stringify({ accessToken: 'access-1', refreshToken: tokens(1).refresh_token }));
     mockServer({ 'GET /api/auth/me': { status: 200, body: USER },
       'GET /api/learning/catalog': { status: 200, body: { subjects: [], default_duration_minutes: 25 } },
-      'GET /api/learning/sessions/current': { status: 200, body: { session: null } } });
+      'GET /api/learning/sessions/current': { status: 200, body: { session: null } },
+      'GET /api/study-together/home': { status: 200, body: { me: { id: USER.id, display_name: USER.display_name, avatar_theme: 'aqua', pet: USER.pet, pet_name: USER.pet_name, pet_level: 1, public_code: 'CODE0001' },
+        current_room: null, friends: [], invitations: [], incoming_requests: [], outgoing_request_count: 0, rooms: [], team_quests: [], recent_sessions: [], unread_notifications: 0 } } });
     render(<App />);
     await screen.findByText(`Chào bạn, ${USER.display_name}!`);
     expect(screen.getAllByRole('tab', { name: /Trang chủ|Học tập|Cuộc sống|Tiện ích/ })).toHaveLength(4);
@@ -354,6 +356,18 @@ describe('main app', () => {
     expect(await screen.findByTestId('mirabi-focus-space')).toBeTruthy();
     expect(screen.queryByRole('tab', { name: 'Tập trung' })).toBeNull();
     expect(screen.queryByRole('tab', { name: 'Khóa học' })).toBeNull();
+
+    // Its tabs go to the room with friends and back, and the header stays the same.
+    expect(screen.getByRole('tab', { name: 'Phòng tập trung' }).props.accessibilityState).toMatchObject({ selected: true });
+    fireEvent.press(screen.getByRole('tab', { name: 'Phòng học cùng bạn bè' }));
+    expect(await screen.findByRole('tab', { name: 'Phòng học cùng bạn bè', selected: true })).toBeTruthy();
+    expect(screen.queryByTestId('mirabi-focus-space')).toBeNull();
+    expect(await screen.findByRole('button', { name: 'Tạo phòng học' })).toBeTruthy();
+    expect(screen.getByText('Học tự chọn')).toBeTruthy();
+    fireEvent.press(screen.getByRole('tab', { name: 'Phòng tập trung' }));
+    expect(await screen.findByTestId('mirabi-focus-space')).toBeTruthy();
+    // The tab bar was there all along.
+    expect(screen.getAllByRole('tab', { name: /Trang chủ|Học tập|Cuộc sống|Tiện ích/ })).toHaveLength(4);
 
     // Back returns to the subjects; so does every visit to Học tập from the menu.
     fireEvent.press(screen.getByRole('button', { name: 'Quay lại' }));

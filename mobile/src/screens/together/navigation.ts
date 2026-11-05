@@ -23,6 +23,8 @@ export type Nav = {
   replace: (route: Route) => void;
   back: () => void;
   home: () => void;
+  /** Reached from "Học tự chọn": the home has that screen's header and tabs, and this goes back to the subject screen. */
+  roomTabs?: { onBack: () => void };
   /** Leave Study Together for another study mode (the personal space by default). */
   exit: (mode?: Exclude<StudyMode, 'together'>) => void;
   user: User;

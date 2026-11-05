@@ -1,0 +1,79 @@
+<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#000;overflow:hidden}canvas{display:block}</style>
+<script type="importmap">{"imports":{
+  "three":"/node_modules/three/build/three.webgpu.js",
+  "three/webgpu":"/node_modules/three/build/three.webgpu.js",
+  "three/tsl":"/node_modules/three/build/three.tsl.js",
+  "three/addons/":"/node_modules/three/examples/jsm/",
+  "three/examples/jsm/":"/node_modules/three/examples/jsm/",
+  "three-mesh-bvh":"/node_modules/three-mesh-bvh/src/index.js",
+  "three-mesh-bvh/webgpu":"/node_modules/three-mesh-bvh/src/webgpu/index.js",
+  "three-mesh-bvh/":"/node_modules/three-mesh-bvh/"
+}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { WebGPUPathTracer } from '/node_modules/three-gpu-pathtracer/src/webgpu/WebGPUPathTracer.js';
+import '/node_modules/three-gpu-pathtracer/src/webgpu/shims/PhysicalCameraShim.js';
+
+const q = new URLSearchParams(location.search);
+const W = +(q.get('w') || 780), H = +(q.get('h') || 472), SAMPLES = +(q.get('s') || 48), light = q.get('light') || 'day';
+const renderer = new THREE.WebGPURenderer({ antialias: false, requiredLimits: { maxStorageBufferBindingSize: 2147483644, maxBufferSize: 2147483648 } });
+await renderer.init();
+renderer.setSize(W, H); renderer.setPixelRatio(1);
+renderer.toneMapping = q.get('tone') === 'aces' ? THREE.ACESFilmicToneMapping : THREE.NeutralToneMapping; renderer.toneMappingExposure = +(q.get('e') || 1);
+document.body.appendChild(renderer.domElement);
+window.__gpu = renderer.backend?.isWebGPUBackend ? 'webgpu' : 'fallback';
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x000000);
+const load = (id) => new Promise((res, rej) => new GLTFLoader().load(`/assets/${id}/${id}.gltf`, (g) => res(g.scene), undefined, rej));
+const boxOf = (o) => new THREE.Box3().setFromObject(o);
+const texLoader = new THREE.TextureLoader();
+/** A surface's maps from a Poly Haven texture, repeated `u` by `v` times. */
+async function tex(id, u = 1, v = 1) {
+  const one = async (kind, srgb) => {
+    const t = await texLoader.loadAsync(`/assets/${id}/${id}_${kind}.jpg`);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(u, v); t.anisotropy = 8;
+    if (srgb) t.colorSpace = THREE.SRGBColorSpace;
+    return t;
+  };
+  return { map: await one('diff', true), normalMap: await one('nor_gl', false), roughnessMap: await one('rough', false) };
+}
+function put(o, { x = 0, z = 0, y = 0, size, scale, turn = 0 }) {
+  o.rotation.y = turn;
+  o.updateMatrixWorld(true);
+  let b = boxOf(o);
+  const s = scale ?? (size ? size / Math.max(...b.getSize(new THREE.Vector3()).toArray()) : 1);
+  o.scale.setScalar(s);
+  o.updateMatrixWorld(true);
+  b = boxOf(o);
+  const c = b.getCenter(new THREE.Vector3());
+  o.position.set(o.position.x + x - c.x, o.position.y + y - b.min.y, o.position.z + z - c.z);
+  o.updateMatrixWorld(true);
+  scene.add(o);
+  return o;
+}
+const { build } = await import(`/${q.get('scene') || 'scene-work'}.js`);
+const camera = await build({ THREE, scene, load, put, tex, boxOf, W, H, light });
+
+if (light === 'mask') {
+  // Only the shape of what the scene is about, white on black: the alpha of a cut-out.
+  scene.traverse((o) => { if (o.isMesh) o.material = new THREE.MeshBasicMaterial({ color: o.userData.noMask ? 0x000000 : 0xffffff, side: THREE.DoubleSide }); });
+  scene.environment = null; scene.background = new THREE.Color(0x000000); renderer.toneMapping = THREE.NoToneMapping;
+  await renderer.renderAsync(scene, camera);
+  window.__state = 'done';
+} else {
+const pt = new WebGPUPathTracer(renderer);
+pt.maxBounces = 6; pt.maxSamples = SAMPLES; pt.renderDelay = 0; pt.fadeDuration = 0; pt.minSamples = 1; pt.dynamicLowRes = false; pt.adaptiveDynamicRes = false; pt.filterGlossyFactor = 0.5; pt.clampDirect = 12; pt.clampIndirect = 6;
+pt.setScene(scene, camera);
+window.__state = 'tracing';
+const t0 = performance.now();
+const tick = async () => {
+  await pt.renderSample();
+  window.__ms = Math.round(performance.now() - t0);
+  if (pt.complete) { window.__state = 'done'; return; }
+  requestAnimationFrame(tick);
+};
+tick();
+}
+</script>

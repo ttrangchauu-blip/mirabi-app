@@ -183,3 +183,9 @@ Toàn bộ kiểm tra tới nay chạy trên Jest và Chrome giả lập di đ�
 | Rèm động | Đối chiếu từng biến thể cửa sổ | Mép rèm khớp tranh, không lộ khi đứng yên |
 
 Hướng dọc là hướng duy nhất của app (`app.json`), nên không thử xoay ngang. `expo-location` là native module mới: dùng Expo Go thì chạy ngay, dùng dev client hoặc store build thì phải build lại.
+
+## Phòng tập trung 3D
+
+`screens/main/FocusRoomArt.tsx` draws the focus room from rendered pictures (`assets/world/focusroom`, `focusPlates.ts`) through `RoomScene`'s `drawing` prop; the personal room, which shares `RoomScene`, does not pass one and is drawn as before. Decorating still works on the same layout and the same rules: walls and floors have a picture in every colour of the catalog, each thing of the starting layout has a picture that moves, mirrors and tilts with it, and anything else (another colour of those, anything found later) keeps its catalog drawing in the room. A room nobody has saved yet (`version` 1 with the old starting colours) is shown in the colours the room was made for; that is display only until the owner saves.
+
+The pet follows the session and nothing else: `idle` with no session running or paused, `study` while focusing, `rest` on a break, and one celebration when a session is finished (`world/useCelebration.ts`). The panel redraws every tick and `FocusRoom` is memoized on those few props, so the timer and the pictures never slow each other. A weak phone keeps the room still; "reduce motion" stops every loop.

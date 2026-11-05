@@ -50,7 +50,10 @@ export function EmptyState({ icon, title, body, action }: { icon: IconName; titl
   );
 }
 
-const PRESENCE: Record<Presence | 'away', { color: string; label: string }> = {
+type PresenceWord = Presence | 'away' | 'resting' | 'paused';
+const PRESENCE: Record<PresenceWord, { color: string; label: string }> = {
+  resting: { color: '#E0A84E', label: 'Đang nghỉ' },
+  paused: { color: '#A58FC0', label: 'Tạm dừng' },
   studying: { color: '#1F9D6A', label: 'Đang học' },
   online: { color: '#2E9AD6', label: 'Trực tuyến' },
   offline: { color: '#A7B4C0', label: 'Ngoại tuyến' },
@@ -58,7 +61,7 @@ const PRESENCE: Record<Presence | 'away', { color: string; label: string }> = {
   hidden: { color: '#C9D3DC', label: 'Ẩn trạng thái' },
 };
 
-export function PresenceLabel({ presence }: { presence: Presence | 'away' }) {
+export function PresenceLabel({ presence }: { presence: PresenceWord }) {
   const p = PRESENCE[presence];
   return (
     <View style={s.presence}>

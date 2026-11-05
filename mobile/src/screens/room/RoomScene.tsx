@@ -13,14 +13,31 @@ import type { Layout, Placement, Pose, RoomKind, RoomPet } from '../../room/type
 import { along, findPath, pathLength, Point, walkSpeedAt, WALK_SPEED } from '../../room/walk';
 import { useSwing, useWorldMotion } from '../../world/budget';
 import { actTransform, EASE, newActValues, PET_ACTS, playAct } from '../../world/motion';
+import { useCelebration } from '../../world/useCelebration';
 import { ACT_OF_INTERACTION, artFor, type PetState, usePetMachine } from '../../world/petMachine';
 import { appTheme as t } from '../../theme';
 
 // Until the first layout pass (and in tests, which have none) the room is drawn in a phone-sized space.
 const FALLBACK = { width: 320, height: 676 };
 
+/** Draws a room some other way than its catalog drawing (the focus room's rendered pictures). Everything else about the room, its pet and decorating stays as it is. */
+export type RoomDrawing = {
+  /** The room with these things in it. */ room: (layout: Layout) => React.ReactNode;
+  /** These things alone, on the canvas. */ items: (items: Placement[]) => React.ReactNode;
+  /** What goes over the pet at its seat. */ cover: (layout: Layout, pose: Pose) => React.ReactNode;
+  /** No rounded corners: it goes on past its edges (photo mode). */ edgeless?: boolean;
+  /** How much higher than the catalog's desk a pet sits at this one (canvas units): studying, with its book on the desk top, and otherwise. */ seatLift?: { study: number; still: number };
+  /** Over everything, outside decorating. */ front?: React.ReactNode;
+};
+
 type Props = {
   layout: Layout;
+  /** Pictures to draw the room with, in place of its catalog drawing. */
+  drawing?: RoomDrawing;
+  /** At its desk with no session running: its idle strip, not its study strip. */
+  seatIdle?: boolean;
+  /** Goes up each time it finished something: plays its celebration once, then back to what it was doing. */
+  celebrate?: number;
   /** Which room's canvas: Phòng cá nhân (default) or the Focus Space room. */
   kind?: RoomKind;
   /** At its desk on a break (the focus room): its still artwork, lowered behind the desk, with a small moon. */
@@ -153,7 +170,7 @@ function useWalker(layout: Layout, home: Spot, enabled: boolean) {
  * items: a dragged item (with what stands on it) is lifted off the room, which is drawn once without it, and follows
  * the finger on its own layer; it is put back in its place among the others when it is dropped.
  */
-export const RoomScene = memo(function RoomScene({ layout, kind = 'personal', resting = false, pet, pose, away, guest, onPetPress, petLabel, reaction, petMenu,
+export const RoomScene = memo(function RoomScene({ layout, drawing, seatIdle = false, celebrate = 0, kind = 'personal', resting = false, pet, pose, away, guest, onPetPress, petLabel, reaction, petMenu,
   awayMarker, effects = true, fullScreen = false, safeTop = 0, safeBottom = 0, menuTop = safeTop, description, editor, chrome, walkable = false, hearts, underlay, onItemPress }: Props) {
   const [box, setBox] = useState<{ width: number; height: number } | null>(null);
   // The items a drag picked up (the dragged one and what stands on it), and how far they are moved, in points.
@@ -184,8 +201,9 @@ export const RoomScene = memo(function RoomScene({ layout, kind = 'personal', re
   const kz = k * z;
   useEffect(() => { if (!editor) { setZoom(1); zoomNow.current = 1; } }, [!!editor]); // eslint-disable-line react-hooks/exhaustive-deps
   const room = useMemo(() => (lifted ? { ...layout, items: layout.items.filter((p) => !lifted.includes(keyOf(p))) } : layout), [layout, lifted]);
-  const svg = useMemo(() => roomSvg(room, kind, view), [room, kind, viewKey]); // eslint-disable-line react-hooks/exhaustive-deps
-  const ghost = useMemo(() => (lifted ? liftedSvg(layout.items.filter((p) => lifted.includes(keyOf(p))), kind) : null), [layout, lifted, kind]);
+  const svg = useMemo(() => (drawing ? '' : roomSvg(room, kind, view)), [room, kind, viewKey, !drawing]); // eslint-disable-line react-hooks/exhaustive-deps
+  const liftedItems = useMemo(() => (lifted ? layout.items.filter((p) => lifted.includes(keyOf(p))) : null), [layout, lifted]);
+  const ghost = useMemo(() => (liftedItems && !drawing ? liftedSvg(liftedItems, kind) : null), [liftedItems, kind, !drawing]); // eslint-disable-line react-hooks/exhaustive-deps
   // The canvas inside the space, and the part of it on screen between the header and the menu bar (in its own points),
   // for what is placed over the pet.
   const canvasStyle = { left: -view[0] * kz, top: -view[1] * kz, width: CANVAS.width * kz, height: CANVAS.height * kz };
@@ -202,8 +220,8 @@ export const RoomScene = memo(function RoomScene({ layout, kind = 'personal', re
   const desk = pose !== 'rug' ? homeOf(layout, pose) : undefined;
   const deskLifted = !!lifted && !!desk && lifted.includes(keyOf(desk));
   const cover = useMemo(() => (pose === 'rug' || deskLifted ? null : seatCover(layout, pose, kind)), [layout, pose, kind, deskLifted]);
-  const studying = pose === 'study' && !resting && hasSprite(pet.id, pet.level, 'study');
-  const sink = cover ? (studying ? cover.studySink : cover.sink) : 0;
+  const studying = pose === 'study' && !resting && !seatIdle && hasSprite(pet.id, pet.level, 'study');
+  const sink = cover ? (studying ? cover.studySink - (drawing?.seatLift?.study ?? 0) : cover.sink - (drawing?.seatLift?.still ?? 0)) : 0;
   const spot: Spot = walker.at ? { x: walker.at.x, feet: walker.at.feet, size: home.size } : { ...home, feet: home.feet + sink };
   // Layered by where things touch the floor: the floor items standing in front of the pet's feet that overlap it are
   // drawn again on top of it, whether it walked behind them or stands on its spot (never its own bed or desk). Not
@@ -213,7 +231,7 @@ export const RoomScene = memo(function RoomScene({ layout, kind = 'personal', re
   const front = useMemo(() => itemsInFront(room, spot.feet, [spot.x - spot.size / 2, spot.feet - spot.size, spot.x + spot.size / 2, spot.feet], homeItem),
     [room, spot.x, spot.feet, spot.size, homeItem]);
   const frontKey = front.map((p) => `${keyOf(p)}:${p.x}:${p.y}`).join('|');
-  const overlay = useMemo(() => frontSvg(front, kind), [frontKey, kind]); // eslint-disable-line react-hooks/exhaustive-deps
+  const overlay = useMemo(() => (drawing ? null : frontSvg(front, kind)), [frontKey, kind, !drawing]); // eslint-disable-line react-hooks/exhaustive-deps
   const menuOpen = !!petMenu && !editor && (!away || !!awayMarker);
   // Decorating under a header and a panel: how far the room may slide (points, up positive) so that the top of its
   // content clears the header and the bottom of the canvas clears the panel; zoomed in, as far as the drawing goes, and
@@ -285,33 +303,34 @@ export const RoomScene = memo(function RoomScene({ layout, kind = 'personal', re
 
   return (
     <View style={[s.fill, bounded && s.fillBounded]} onLayout={onLayout}>
-      <View style={[s.scene, fullScreen && !bounded && s.sceneScreen, bounded && s.sceneBounded, { width, height }]} testID="room-scene">
+      <View style={[s.scene, (fullScreen || drawing?.edgeless) && !bounded && s.sceneScreen, bounded && s.sceneBounded, { width, height }]} testID="room-scene">
         <Animated.View style={[StyleSheet.absoluteFill, { transform: [{ translateY: slide }, { translateX: slideX }] }]} pointerEvents="box-none"
           testID="room-camera">
         <View style={[s.picture, { width: width * z, height: height * z }]} pointerEvents="none" accessible accessibilityRole="image"
           accessibilityLabel={description}>
-          <Picture xml={svg} />
+          {drawing ? drawing.room(room) : <Picture xml={svg} />}
         </View>
         <View style={[s.canvas, canvasStyle]} pointerEvents="box-none" testID="room-canvas">
           {underlay && !editor ? underlay(kz) : null}
           {canWalk || (walkable && kind === 'personal' && !editor) ? <FloorTaps k={k} onTap={onFloorTap} testID={canWalk ? 'room-floor' : 'room-items'} /> : null}
           {canWalk && effects && walker.target ? <TargetMark key={walker.target.key} at={walker.target.at} k={k} /> : null}
-          {away ? null : <ScenePet pet={pet} spot={spot} k={kz} pose={pose} resting={resting} onPress={editor ? undefined : onPetPress} label={petLabel}
+          {away ? null : <ScenePet pet={pet} spot={spot} k={kz} pose={pose} resting={resting} seatIdle={seatIdle} celebrate={editor ? 0 : celebrate} onPress={editor ? undefined : onPetPress} label={petLabel}
             reaction={editor ? null : reaction} effects={effects} moving={walker.moving} facing={walker.facing} phase={walker.phase}
             hearts={editor || !effects ? undefined : hearts} canvasWidth={CANVAS.width} minTop={bounds.top} />}
-          {cover && !away ? <View style={StyleSheet.absoluteFill} pointerEvents="none" testID="room-seat-cover"><Picture xml={cover.svg} /></View> : null}
-          {overlay && !away ? <View style={StyleSheet.absoluteFill} pointerEvents="none" testID="room-front"><Picture xml={overlay} /></View> : null}
+          {cover && !away ? <View style={StyleSheet.absoluteFill} pointerEvents="none" testID="room-seat-cover">{drawing ? drawing.cover(layout, pose) : <Picture xml={cover.svg} />}</View> : null}
+          {(drawing ? front.length > 0 : overlay) && !away ? <View style={StyleSheet.absoluteFill} pointerEvents="none" testID="room-front">{drawing ? drawing.items(front) : <Picture xml={overlay!} />}</View> : null}
           {guest ? <ScenePet pet={guest} spot={GUEST_SPOT} k={kz} pose="rug" guest /> : null}
           {poke && pokeSvg && !editor && effects ? <Bounce key={poke.key} xml={pokeSvg} x={poke.item.x * kz} y={poke.item.y * kz} onDone={() => setPoke(null)} /> : null}
-          {ghost ? (
+          {ghost || (drawing && liftedItems) ? (
             <Animated.View style={[StyleSheet.absoluteFill, { transform: offset.getTranslateTransform() }]} pointerEvents="none" testID="room-lifted">
-              <Picture xml={ghost} />
+              {drawing ? drawing.items(liftedItems!) : <Picture xml={ghost!} />}
             </Animated.View>
           ) : null}
           {editor ? <EditLayer layout={layout} k={kz} editor={editor} offset={offset} onLift={setLifted} frame={frame} minTop={bounds.top}
             slide={{ at: () => [slid.current, slidX.current], to: (p, px) => slideTo(p, false, px) }}
             zoom={{ at: () => zoom, to: zoomTo }} /> : null}
           {away && awayMarker && !editor ? <AwayMarker marker={awayMarker} spot={home} k={k} width={canvasStyle.width} /> : null}
+          {drawing?.front && !editor ? drawing.front : null}
         </View>
         </Animated.View>
         {menuOpen ? <PetMenu menu={petMenu!} spot={away ? { ...home, size: 56 } : spot} k={k} canvas={canvasStyle} bounds={bounds} /> : null}
@@ -608,9 +627,9 @@ function ZoomControls({ zoom, top, onZoom }: { zoom: number; top: number; onZoom
   );
 }
 
-function ScenePet({ pet, spot, k, pose, resting: atDeskResting = false, guest = false, onPress, label, reaction, effects = true, moving = false, facing = 1, hearts,
+function ScenePet({ pet, spot, k, pose, resting: atDeskResting = false, seatIdle = false, celebrate = 0, guest = false, onPress, label, reaction, effects = true, moving = false, facing = 1, hearts,
   canvasWidth = 400, minTop = 0, phase }: {
-  pet: RoomPet; spot: Spot; k: number; pose: Pose; resting?: boolean; guest?: boolean; onPress?: () => void; label?: string; reaction?: Props['reaction'];
+  pet: RoomPet; spot: Spot; k: number; pose: Pose; resting?: boolean; seatIdle?: boolean; celebrate?: number; guest?: boolean; onPress?: () => void; label?: string; reaction?: Props['reaction'];
   effects?: boolean;
   /** Walking across the room: its walk strip (or, without one, the still artwork with a light bob), facing its way. */
   moving?: boolean; facing?: 1 | -1; hearts?: number; canvasWidth?: number;
@@ -624,10 +643,16 @@ function ScenePet({ pet, spot, k, pose, resting: atDeskResting = false, guest = 
   const top = (spot.feet - spot.size) * k;
   const canStudy = hasSprite(pet.id, pet.level, 'study');
   const resting = pose === 'rest' || atDeskResting;
-  const seated: PetState = resting ? 'rest' : pose === 'study' ? 'study' : 'idle';
+  const seated: PetState = resting ? 'rest' : pose === 'study' && !seatIdle ? 'study' : 'idle';
   // One state for the pet (world/petMachine.ts): what it plays is read from there, never from separate flags.
   const [state, send] = usePetMachine(moving ? 'walk' : seated);
-  useEffect(() => { send(seated === 'rest' ? 'REST' : seated === 'study' ? 'STUDY' : 'WAKE'); }, [seated, send]);
+  const party = useCelebration(celebrate, pet.id, pet.level);
+  // A celebration comes through idle; when it is over the pet goes back to what it should be doing by then.
+  useEffect(() => {
+    if (party.on) { send('WAKE'); send('CELEBRATE'); return; }
+    send('DONE');
+    send(seated === 'rest' ? 'REST' : seated === 'study' ? 'STUDY' : 'WAKE');
+  }, [seated, send, party.on]);
   const values = useRef(newActValues()).current;
   const running = useRef<Animated.CompositeAnimation | null>(null);
   const perform = useCallback((name: keyof typeof PET_ACTS, then?: () => void) => {
@@ -657,10 +682,11 @@ function ScenePet({ pet, spot, k, pose, resting: atDeskResting = false, guest = 
 
   const shown = artFor(state);
   // Breathing from its feet while it stands around; its baseline and its size at rest never change.
-  const breath = useSwing({ ms: 1900, jitter: 0.2, rest: [0, 500], enabled: state === 'idle' && effects });
+  const breath = useSwing({ ms: 1900, jitter: 0.2, rest: [0, 500], enabled: (state === 'idle' || (state === 'rest' && atDeskResting)) && effects });
   const name = pet.name || 'Pet';
   const art = (
     <Animated.View testID={`room-pet-state-${state}`} style={{ transformOrigin: '50% 100%', transform: actTransform(values, size) }}>
+      <Animated.View style={{ transformOrigin: '50% 100%', transform: actTransform(party.values, size) }}>
       <Animated.View style={{ transformOrigin: '50% 100%', transform: [
         { scaleY: breath.interpolate({ inputRange: [-1, 1], outputRange: [1, 1.014] }) },
         { scaleX: breath.interpolate({ inputRange: [-1, 1], outputRange: [1, 0.996] }) },
@@ -668,7 +694,8 @@ function ScenePet({ pet, spot, k, pose, resting: atDeskResting = false, guest = 
         { scaleX: moving ? facing : 1 }] }}>
         {/* A resting pet has no drawn sleep strip, so it keeps its still artwork (with a small moon). */}
         <Art pet={pet.id} size={size} stage={pet.level} studying={shown.studying && canStudy} still={shown.still} walking={shown.walking}
-          phase={shown.walking ? phase : undefined} />
+          phase={shown.walking ? phase : undefined} cheer={celebrate ? party.cheer : undefined} />
+      </Animated.View>
       </Animated.View>
     </Animated.View>
   );
@@ -690,7 +717,7 @@ function ScenePet({ pet, spot, k, pose, resting: atDeskResting = false, guest = 
           {art}
         </View>
       )}
-      {resting ? <View style={[s.moon, { left: left + size * 0.78, top: top + size * 0.02 }]} pointerEvents="none"><Ionicons name="moon" size={14} color="#8B8EA6" /></View> : null}
+      {resting && !party.on ? <View style={[s.moon, { left: left + size * 0.78, top: top + size * 0.02 }]} pointerEvents="none"><Ionicons name="moon" size={14} color="#8B8EA6" /></View> : null}
       {reaction ? (
         <View key={reaction.key} pointerEvents="none" style={[s.bubbleWrap, { top: Math.max(minTop + 4, top - 40), left: 0, right: 0 }]}>
           <View style={[s.bubble, { marginLeft: Math.max(0, Math.min(left + size / 2 - 90, k * canvasWidth - 180)) }]} accessibilityLiveRegion="polite">

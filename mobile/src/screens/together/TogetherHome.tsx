@@ -1,18 +1,22 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { PetCompanion } from '../../components/PetCompanion';
 import { Text } from '../../components/Typography';
 import { togetherApi } from '../../studyTogether/api';
 import { formatMinutes } from '../../studyTogether/timer';
-import type { EligibleRoom, RoomInvitation, TogetherHome as HomeData } from '../../studyTogether/types';
+import type { EligibleRoom, RoomInvitation, RoomMember, TogetherHome as HomeData } from '../../studyTogether/types';
 import { appTheme as t } from '../../theme';
 import { Button, Card, ProgressBar, SectionHeader } from '../../ui/kit';
 import { showError } from '../main/shared';
 import { STATE_LABELS, subjectLabel } from './labels';
-import { StudyModeSwitch } from './StudyModeSwitch';
+import { BackHeader } from '../learning/GamePicker';
+import { StudyModeSwitch, StudyRoomTabs } from './StudyModeSwitch';
+import { StudyRoomScene } from './StudyRoomScene';
 import { usePullToRefresh, useTogetherNav } from './navigation';
 import { EmptyState, ErrorState, LoadingState, PersonRow, PresenceLabel, SmallButton } from './ui';
+
+const NO_REACTIONS: never[] = [];
 
 export function TogetherHome() {
   const nav = useTogetherNav();
@@ -44,7 +48,21 @@ export function TogetherHome() {
   }, 'Không thể tham gia phòng');
 
   const user = nav.user;
-  const header = (
+  // The room with only you in it: nobody else is shown until they really are there.
+  const me = useMemo<RoomMember[]>(() => [{ id: user.id, user_id: user.id, display_name: user.display_name, avatar_theme: user.avatar_theme, pet: user.pet, pet_name: user.pet_name, pet_level: user.level,
+    public_code: null, role: 'member', presence: 'online', joined_at: '', in_session: false, focus_seconds: null, cycles_completed: null }], [user]);
+  const header = nav.roomTabs ? (
+    <>
+      <BackHeader title="Học tự chọn" subtitle="Cùng bạn bè tập trung mỗi ngày" onBack={nav.roomTabs.onBack} right={
+        <Pressable onPress={() => nav.push({ name: 'notifications' })} style={styles.bell} accessibilityRole="button"
+          accessibilityLabel={`Thông báo${data?.unread_notifications ? `, ${data.unread_notifications} chưa đọc` : ''}`}>
+          <Ionicons name="notifications-outline" size={22} color={t.ink} />
+          {data?.unread_notifications ? <View style={styles.badge}><Text style={styles.badgeText}>{Math.min(99, data.unread_notifications)}</Text></View> : null}
+        </Pressable>} />
+      <StudyRoomTabs value="together" onChange={(m) => { if (m !== 'together') nav.exit(m); }} />
+      <View style={styles.preview}><StudyRoomScene members={me} state="waiting" reactions={NO_REACTIONS} meId={user.id} seats={4} noPhoto /></View>
+    </>
+  ) : (
     <>
       <View style={styles.top}>
         <View style={styles.flex}>
@@ -66,13 +84,20 @@ export function TogetherHome() {
   return (
     <>
       {header}
-      <Card style={styles.hero}>
-        <PetCompanion pet={user.pet} stage={user.level} size={86} />
-        <View style={styles.flex}>
+      {nav.roomTabs ? (
+        <View style={styles.heroLine}>
           <Text style={styles.heroTitle}>{user.pet_name ?? 'Pet'} sẵn sàng học cùng nhóm</Text>
           <Text style={styles.heroCode} selectable>Mã kết bạn: {data.me.public_code}</Text>
         </View>
-      </Card>
+      ) : (
+        <Card style={styles.hero}>
+          <PetCompanion pet={user.pet} stage={user.level} size={86} />
+          <View style={styles.flex}>
+            <Text style={styles.heroTitle}>{user.pet_name ?? 'Pet'} sẵn sàng học cùng nhóm</Text>
+            <Text style={styles.heroCode} selectable>Mã kết bạn: {data.me.public_code}</Text>
+          </View>
+        </Card>
+      )}
       {data.current_room ? (
         <Card style={styles.current}>
           <Text style={styles.cardLabel}>Phòng của bạn</Text>
@@ -166,6 +191,8 @@ export function TogetherHome() {
 }
 
 const styles = StyleSheet.create({
+  preview: { marginBottom: 12 },
+  heroLine: { gap: 2, marginBottom: 14, paddingHorizontal: 4 },
   flex: { flex: 1 },
   top: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 14 },
   hello: { fontSize: 24, fontWeight: '900', color: t.ink },

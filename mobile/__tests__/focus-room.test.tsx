@@ -9,7 +9,7 @@ import { defaultLayout, itemArt, supportOf } from '../src/room/art';
 jest.mock('../src/screens/main/shared', () => ({ request: jest.fn(), showError: jest.fn() }));
 jest.mock('../src/components/PetArt', () => ({ PetArt: () => null }));
 // The drawings themselves are tested in room-art/room-rules; parsing them here would only slow the screen down.
-jest.mock('react-native-svg', () => ({ ...jest.requireActual('react-native-svg'), SvgXml: () => null }));
+jest.mock('react-native-svg', () => ({ __esModule: true, ...jest.requireActual('react-native-svg'), SvgXml: () => null }));
 
 const GROUPS = [{ id: 'surface', label: 'Tường và sàn' }, { id: 'table', label: 'Bàn' }, { id: 'study', label: 'Đồ học tập' }];
 const ITEMS = [['wall_mint', 'wall', 'surface', 'Tường sọc bạc hà'], ['wall_sky', 'wall', 'surface', 'Tường xanh biển'],

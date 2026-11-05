@@ -125,11 +125,12 @@ export function RoomScreen({ roomId, initial }: { roomId: number; initial: RoomS
       {/* One surface for the room, the shared timer and its controls, like the personal Focus Space. */}
       <View style={styles.stage}>
         <View style={styles.sceneFrame}>
-          <StudyRoomScene members={room.members} state={room.state} reactions={live.reactions} messages={chat.bubbles} meId={me} />
-          <View style={styles.caption} pointerEvents="none">
+          <StudyRoomScene members={room.members} state={room.state} reactions={live.reactions} messages={chat.bubbles} meId={me} seats={room.max_members}
+            anchor={live.anchor} goal={room.goal} completed={room.session?.completed_cycles ?? 0} />
+          <View style={[styles.caption, room.max_members > 5 && styles.captionBelow]} pointerEvents="none"><View style={styles.captionPill}>
             <View style={[styles.captionDot, active && room.state === 'focus' && styles.captionDotLive]} />
             <Text style={styles.captionText}>{sceneCaption}</Text>
-          </View>
+          </View></View>
         </View>
         {active ? (
           <>
@@ -170,7 +171,7 @@ export function RoomScreen({ roomId, initial }: { roomId: number; initial: RoomS
         {room.members.map((m, i) => (
           <View key={m.user_id} style={i > 0 && styles.rowDivider}>
             <PersonRow user={m.user_id === me ? { ...m, display_name: `${m.display_name} (bạn)` } : m}
-              subtitle={<PresenceLabel presence={m.presence === 'away' ? 'away' : active && m.in_session ? 'studying' : 'online'} />}
+              subtitle={<PresenceLabel presence={m.presence === 'away' ? 'away' : !(active && m.in_session) ? 'online' : room.state === 'break' ? 'resting' : room.state === 'paused' ? 'paused' : 'studying'} />}
               right={<View style={styles.memberRight}>
                 {m.role === 'host' ? <View style={styles.hostBadge}><Ionicons name="star" size={10} color="#9A6400" /><Text style={styles.hostText}>Chủ phòng</Text></View> : null}
                 {active ? <Text style={styles.memberStat}>{m.focus_seconds == null ? 'Ẩn' : formatMinutes(m.focus_seconds)}</Text> : null}
@@ -403,7 +404,9 @@ const styles = StyleSheet.create({
   stage: { backgroundColor: fs.paper, borderRadius: 28, overflow: 'hidden', borderWidth: 1, borderColor: '#FFFFFF', marginBottom: 16,
     shadowColor: fs.shadow, shadowOpacity: 0.1, shadowRadius: 22, shadowOffset: { width: 0, height: 10 }, elevation: 2 },
   sceneFrame: { padding: 8, paddingBottom: 0 },
-  caption: { position: 'absolute', bottom: 9, left: 8, right: 8, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 6 },
+  caption: { position: 'absolute', bottom: 7, left: 8, right: 8, alignItems: 'center' },
+  captionBelow: { position: 'relative', bottom: 0, left: 0, right: 0, marginTop: 6 },
+  captionPill: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 10, paddingVertical: 2, borderRadius: 999, backgroundColor: 'rgba(255,255,255,0.84)' },
   captionDot: { width: 5, height: 5, borderRadius: 3, backgroundColor: '#B9B2A8' },
   captionDotLive: { backgroundColor: '#5FA585' },
   captionText: { color: '#5C6B68', fontSize: 11, fontWeight: '700' },

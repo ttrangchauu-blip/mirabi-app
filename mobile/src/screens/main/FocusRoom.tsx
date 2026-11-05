@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -9,35 +9,58 @@ import { type PlaceRequest, usePlaceRequest } from '../../inventory/api';
 import type { InventoryItem } from '../../inventory/types';
 import { focusRoomApi, focusRoomCache } from '../../room/api';
 import { defaultLayout, geometry, keyOf, poseFor } from '../../room/art';
+import { useDayPeriod } from '../../components/useDayPeriod';
 import { freeCopies } from '../../room/found';
 import { PROBLEM_TEXT, type Problem } from '../../room/rules';
 import type { FocusRoomData, FoundStack, RoomPet } from '../../room/types';
 import { appTheme as t } from '../../theme';
 import { AppModal } from '../../ui/AppModal';
 import { Button } from '../../ui/kit';
+import { useAtmosphere } from '../../world/atmosphere';
+import { PhotoRoom } from '../../world/PhotoRoom';
+import { useWeather } from '../../world/weather';
+import { isLamp, RoomAmbience, skyOf, withLiveSky } from '../healing/RoomAmbience';
 import { InventoryScreen } from '../inventory/InventoryScreen';
 import { DecorateHeader, DecoratePanel, decoratePanelHeight } from '../room/DecoratePanel';
 import { RoomScene } from '../room/RoomScene';
 import { useRoomEditor } from '../room/useRoomEditor';
+import { FOCUS_DRAWING, FOCUS_PHOTO_DRAWING, isPlatedWindow } from './FocusRoomArt';
+import { FOCUS_FLOORS, FOCUS_WALLS } from './focusPlates';
 
 type Props = { petId: string; petName: string | null; petLevel: number; resting: boolean; compact: boolean;
+  /** No session running: the pet sits with you, it isn't studying. */ idle?: boolean;
+  /** Goes up when a session is finished: the pet celebrates once. */ celebrate?: number;
   /** Whose saved focus room to show; without one, the default room. */ userId?: number };
 
 const CANVAS = geometry('focus').canvas;
+/** Until the saved room has loaded (the old starting layout, shown as a room nobody has decorated). */
+const STARTING_LAYOUT = withStartingLook({ room: { name: '', layout: defaultLayout('focus'), version: 1, updated_at: '' }, catalog: { groups: [], surfaces: [], items: [], max_items: 0 } } as FocusRoomData).room.layout;
 const LINES = ['Cùng tập trung nhé!', 'Mình ngồi học cạnh bạn nè.', 'Thêm một chút nữa thôi, cố lên!'];
+
+/**
+ * A room nobody has decorated yet (version 1, the old starting colours) opens in the colours the rendered room was made for. It is only
+ * how it is shown until the owner saves; a room anyone has saved is never touched.
+ */
+export function withStartingLook(data: FocusRoomData): FocusRoomData {
+  const { layout, version } = data.room;
+  if (version > 1 || layout.wall !== 'wall_mint' || layout.floor !== 'floor_wood_light') return data;
+  return { ...data, room: { ...data.room, layout: { ...layout, wall: 'wall_lilac', floor: 'floor_wood_honey',
+    items: layout.items.map((p) => (p.item === 'rug_oval' && p.variant === 'sage' ? { ...p, variant: 'lilac' } : p)) } } };
+}
 
 /**
  * The Focus Space room: the owner's decorated Phòng tập trung (same catalog as the personal room, its own wider canvas
  * and saved layout), with the pet at its desk — studying, or resting on a break. Shows the default room until the saved
  * one loads, and the last saved one offline. "Trang trí" opens the decorating screen.
  */
-export const FocusRoom = memo(function FocusRoom({ petId, petName, petLevel, resting, userId }: Props) {
+export const FocusRoom = memo(function FocusRoom({ petId, petName, petLevel, resting, idle = false, celebrate = 0, userId }: Props) {
   const [data, setData] = useState<FocusRoomData | null>(null);
   const [offline, setOffline] = useState(false);
   const [editing, setEditing] = useState(false);
   // A decoration chosen with "Đặt vào phòng" in Kho đồ: decorating opens with one more copy of it.
   const [queued, setQueued] = useState<PlaceRequest | null>(null);
   const [reaction, setReaction] = useState<{ key: number; text: string } | null>(null);
+  const [photo, setPhoto] = useState(false);
   const lineIndex = useRef(0);
 
   // The newest room version this screen has seen (loaded or saved).
@@ -45,8 +68,9 @@ export const FocusRoom = memo(function FocusRoom({ petId, petName, petLevel, res
   const load = useCallback(async (): Promise<FocusRoomData | null> => {
     if (userId == null) return null;
     try {
-      const fresh = await focusRoomApi.get();
-      if (!Array.isArray(fresh?.room?.layout?.items) || !Array.isArray(fresh?.catalog?.items)) throw new Error('Unexpected focus room');
+      const read = await focusRoomApi.get();
+      if (!Array.isArray(read?.room?.layout?.items) || !Array.isArray(read?.catalog?.items)) throw new Error('Unexpected focus room');
+      const fresh = withStartingLook(read);
       // A read that started before a save must not bring the older room back (on screen or in the cache).
       if (fresh.room.version < newest.current) return fresh;
       newest.current = fresh.room.version;
@@ -55,7 +79,7 @@ export const FocusRoom = memo(function FocusRoom({ petId, petName, petLevel, res
       return fresh;
     } catch {
       const cached = await focusRoomCache.load(userId);
-      if (cached) setData((current) => current ?? cached);
+      if (cached) setData((current) => current ?? withStartingLook(cached));
       setOffline(true);
       return null;
     }
@@ -69,19 +93,34 @@ export const FocusRoom = memo(function FocusRoom({ petId, petName, petLevel, res
     return () => clearTimeout(id);
   }, [reaction]);
 
-  const layout = data?.room.layout ?? defaultLayout('focus');
+  const layout = data?.room.layout ?? STARTING_LAYOUT;
+  // The sky of the hour on windows drawn from the catalog (a picture's window has the live sky already), and the light of the hour over the room.
+  const sky = skyOf(useDayPeriod());
+  const { reading } = useWeather();
+  const { hours, mood } = useAtmosphere(reading);
+  const lightHours = Math.round(hours * 4) / 4;
+  const shown = useMemo(() => withLiveSky(layout, sky), [layout, sky]);
+  // The desk lamp is on while the pet studies; otherwise it comes on by itself at dusk.
+  const lamps = useMemo(() => (resting || idle ? undefined : Object.fromEntries(layout.items.filter((p) => isLamp(p.item)).map((p) => [keyOf(p), true]))), [layout, resting, idle]);
+  const underlay = useCallback((k: number) => <RoomAmbience layout={shown} ambience={null} sky={sky} k={k} hours={lightHours} mood={mood} lamps={lamps} ownCurtains={isPlatedWindow} />,
+    [shown, sky, lightHours, mood, lamps]);
   const pet: RoomPet = { id: petId, name: petName, level: petLevel };
   const name = petName || 'Pet';
+  const doing = resting ? 'đang nghỉ ngơi' : idle ? 'đang ngồi cùng bạn' : 'đang học cùng bạn';
   // The status and the "Trang trí" icon sit under the room, so nothing is ever drawn over the room or its furniture.
   return <View testID="focus-room" style={s.wrap}>
     <View style={s.room}>
-      <RoomScene kind="focus" layout={layout} pet={pet} pose={poseFor('study', layout)} resting={resting} away={false}
-        description={`Phòng tập trung, ${name} ${resting ? 'đang nghỉ ngơi' : 'đang học cùng bạn'}`}
+      <RoomScene kind="focus" layout={shown} drawing={FOCUS_DRAWING} underlay={underlay} pet={pet} pose={poseFor('study', layout)} resting={resting} seatIdle={idle} celebrate={celebrate} away={false}
+        description={`Phòng tập trung, ${name} ${doing}`}
         onPetPress={() => setReaction((r) => ({ key: (r?.key ?? 0) + 1, text: LINES[lineIndex.current++ % LINES.length] }))} reaction={reaction} />
     </View>
     <View style={s.footer}>
-      <View style={s.caption}><View style={[s.dot, resting && s.dotRest]} />
-        <Text style={s.captionText} numberOfLines={1}>{`${name} ${resting ? 'đang nghỉ ngơi bên bạn' : 'đang học cùng bạn'}`}</Text></View>
+      <View style={s.caption}><View style={[s.dot, resting && s.dotRest, idle && s.dotIdle]} />
+        <Text style={s.captionText} numberOfLines={1}>{`${name} ${resting ? 'đang nghỉ ngơi bên bạn' : doing}`}</Text></View>
+      <Pressable onPress={() => setPhoto(true)} hitSlop={6} style={({ pressed }) => [s.photo, pressed && s.pressed]} accessibilityRole="button"
+        accessibilityLabel="Toàn màn hình để ngắm phòng và chụp ảnh" testID="focus-photo-open">
+        <Ionicons name="scan-outline" size={19} color={t.accent} />
+      </Pressable>
       <Pressable onPress={() => setEditing(true)} disabled={!data || offline} hitSlop={6}
         style={({ pressed }) => [s.decorate, (!data || offline) && s.decorateOff, pressed && s.pressed]}
         accessibilityRole="button" accessibilityLabel="Trang trí" accessibilityHint={offline ? 'Cần kết nối mạng để trang trí' : 'Mở kho đồ trang trí phòng tập trung'}
@@ -89,6 +128,11 @@ export const FocusRoom = memo(function FocusRoom({ petId, petName, petLevel, res
         <Ionicons name="color-palette" size={20} color="#FFFFFF" />
       </Pressable>
     </View>
+    {photo ? <PhotoRoom onClose={() => setPhoto(false)} top={(FOCUS_WALLS[layout.wall] ?? FOCUS_WALLS.wall_lilac).top} near={(FOCUS_FLOORS[layout.floor] ?? FOCUS_FLOORS.floor_wood_honey).near}
+      fileName="mirabi-phong-tap-trung" testPrefix="focus-photo">
+      {() => <RoomScene kind="focus" layout={shown} drawing={FOCUS_PHOTO_DRAWING} underlay={underlay} pet={pet} pose={poseFor('study', layout)} resting={resting} seatIdle={idle} away={false}
+        description={`Phòng tập trung, ${name} ${doing}`} />}
+    </PhotoRoom> : null}
     {data && editing ? <FocusRoomEditor data={data} pet={pet} resting={resting} userId={userId} initialCopy={queued}
       onClose={() => { setEditing(false); setQueued(null); }} reload={load}
       onSaved={(next) => { newest.current = Math.max(newest.current, next.room.version); setData(next); if (userId != null) void focusRoomCache.store(userId, next); setEditing(false); setQueued(null); }} /> : null}
@@ -194,7 +238,7 @@ function FocusRoomEditor({ data, pet, resting, userId, initialCopy, onClose, onS
         {/* The panel keeps one height with the selected item's tools docked in it: selecting, dragging or storing never
             moves the room or the tools. The room keeps the space of the folded panel; unfolded, the panel goes over it. */}
         <View style={[s.sceneWrap, { marginBottom: decoratePanelHeight(screenHeight) }]}>
-          {draft ? <RoomScene kind="focus" layout={draft} pet={pet} pose={poseFor('study', draft)} resting={resting} away={false}
+          {draft ? <RoomScene kind="focus" layout={draft} drawing={FOCUS_DRAWING} pet={pet} pose={poseFor('study', draft)} resting={resting} away={false}
             description="Phòng tập trung đang trang trí"
             editor={{ selected: editor.selected, onSelect: editor.select, place: editor.place, preview: editor.preview,
               onMove: (item, x, y) => { const problem = editor.move(item, x, y); if (problem) setMessage(`${PROBLEM_TEXT[problem]}. Đã đưa về chỗ cũ.`); } }} />
@@ -226,14 +270,15 @@ function FocusRoomEditor({ data, pet, resting, userId, initialCopy, onClose, onS
 
 const s = StyleSheet.create({
   wrap: { width: '100%', minWidth: 0, gap: 8 },
-  room: { width: '100%', aspectRatio: CANVAS.width / CANVAS.height, position: 'relative', minWidth: 0 },
+  room: { width: '100%', aspectRatio: CANVAS.width / CANVAS.height, position: 'relative', minWidth: 0, borderRadius: 24, overflow: 'hidden', backgroundColor: '#D9D2EE' },
+  photo: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', backgroundColor: '#EAF4FB', borderWidth: 1, borderColor: '#D6E8F4' },
   footer: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 4 },
   decorate: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', backgroundColor: t.accent,
     shadowColor: '#0A2438', shadowOpacity: 0.18, shadowRadius: 6, shadowOffset: { width: 0, height: 2 }, elevation: 3 },
   decorateOff: { opacity: 0.55 },
   pressed: { transform: [{ scale: 0.97 }] },
   caption: { flex: 1, minWidth: 0, flexDirection: 'row', gap: 6, alignItems: 'center' },
-  dot: { height: 6, width: 6, borderRadius: 3, backgroundColor: '#2E8C6A' }, dotRest: { backgroundColor: '#7C83B5' },
+  dot: { height: 6, width: 6, borderRadius: 3, backgroundColor: '#2E8C6A' }, dotRest: { backgroundColor: '#7C83B5' }, dotIdle: { backgroundColor: '#E0B36A' },
   captionText: { color: '#2E4A55', fontSize: 11, fontWeight: '800' },
   editor: { flex: 1, backgroundColor: '#EAF3F8' },
   flex: { flex: 1, minWidth: 0 },

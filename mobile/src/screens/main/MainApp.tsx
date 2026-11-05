@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { BackHandler, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -219,6 +219,8 @@ export function MainApp() {
   const album = overlay === 'album';
   const inventory = overlay === 'inventory' || overlay === 'achievements'; // Thành tựu: Kho đồ on its Kỷ vật tab, where the badges are
   // These bring their own whole-screen layout (the signed-out shell): nothing of the app around them.
+  // The room with friends, reached from the tabs of "Học tự chọn": one object, so its screens aren't rebuilt for nothing.
+  const roomTabs = useMemo(() => (freeStudy ? { onBack: () => { setStudyMode('personal'); setFreeStudy(false); setFocusStatistics(false); } } : undefined), [freeStudy]);
   const fullScreen = overlay === 'password' || overlay === 'tour';
   const gardenVisit = overlay === 'gardenVisit' && gardenOwnerId !== null;
   const visiting = overlay === 'visit' && visitUserId !== null;
@@ -261,7 +263,8 @@ export function MainApp() {
       ) : together ? (
         <View style={[styles.fill, { paddingTop: insets.top + 10 }]}>
           <StudyTogetherScreen key={togetherRoute?.key ?? 0} user={user} onExit={(mode) => { setTogetherRoute(null); setStudyMode(mode ?? 'personal'); }}
-            onRewards={loadDashboard} onVisitRoom={visitRoom} onOpenFriends={openFriends} onOpenGarden={() => openGarden()} initialRoute={togetherRoute?.route} />
+            onRewards={loadDashboard} onVisitRoom={visitRoom} onOpenFriends={openFriends} onOpenGarden={() => openGarden()} initialRoute={togetherRoute?.route}
+            roomTabs={roomTabs} />
         </View>
       ) : room ? (
         <LifeHub space={lifeSpace} onSpace={setLifeSpace} immersive={lifeSpace === 'home' && decorating} badges={{ friends: pendingRequests }}>
@@ -303,7 +306,7 @@ export function MainApp() {
               petSpaceVersion={petReward.version + hatchVersion} onPetReturned={() => { void petReward.check(); }} onOpenPetGifts={openPetGifts} onOpenStudyTogether={openStudyTogether} onOpenFreeStudy={openFreeStudy} onOpenFriends={() => openFriends()} onOpenMemories={() => openAlbum()}
               onOpenNotifications={() => openTogether({ name: 'notifications' })} onPetSpace={petHatch.sync}
               hatch={{ phase: petHatch.phase, level: petHatch.level, waitingReturn: petHatch.waitingReturn, onPlayed: petHatch.played }} />}
-            {tab === 'Study' && <StudyTab timer={timer} petId={user.pet} petName={user.pet_name} petLevel={user.level} userId={user.id} onBack={() => { setFreeStudy(false); setFocusStatistics(false); }} showStatistics={focusStatistics} />}
+            {tab === 'Study' && <StudyTab timer={timer} petId={user.pet} petName={user.pet_name} petLevel={user.level} userId={user.id} onBack={() => { setFreeStudy(false); setFocusStatistics(false); }} onOpenGroup={() => setStudyMode('together')} showStatistics={focusStatistics} />}
             {tab === 'More' && <MoreTab user={user} onOpenProfile={() => open('profile')} onOpenStudyProfile={() => open('studyProfile')}
               onOpenEducationAdmin={() => open('educationAdmin')} onOpenFocus={openFreeStudy} onOpenNotebook={openNotebook} onOpenAlbum={() => openAlbum()} onOpenStreak={openStreak}
               onOpenStatistics={openStatistics} onOpenArchive={openArchive} onOpenTeamQuests={() => openTogether({ name: 'quests' })} onOpenAchievements={() => open('achievements')}

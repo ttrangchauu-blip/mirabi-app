@@ -50,9 +50,10 @@ export const isLamp = (item: string) => !!LAMPS[item];
 export const lampLit = (p: Placement, sky: Sky, mood: Mood, ambience: Ambience | null, switched: Record<string, boolean> = {}) =>
   switched[keyOf(p)] ?? (sky !== 'morning' || mood.gloom >= 0.6 || (!!ambience && WARM.includes(ambience)));
 
-export const RoomAmbience = memo(function RoomAmbience({ layout, ambience, sky, k, hours, mood = CALM, lamps: switched }: {
+export const RoomAmbience = memo(function RoomAmbience({ layout, ambience, sky, k, hours, mood = CALM, lamps: switched, ownCurtains }: {
   layout: Layout; /** Góc thư giãn's scene; null is the room as it really is outside. */ ambience: Ambience | null; sky: Sky; k: number;
   hours?: number; mood?: Mood; /** Lamps switched by hand. */ lamps?: Record<string, boolean>;
+  /** Windows whose curtains are drawn and moved elsewhere (the focus room's pictures). */ ownCurtains?: (p: Placement) => boolean;
 }) {
   const windows = layout.items.filter((p) => GLASS[p.item]);
   const lamps = layout.items.filter((p) => LAMPS[p.item]);
@@ -60,7 +61,7 @@ export const RoomAmbience = memo(function RoomAmbience({ layout, ambience, sky, 
   return (
     <View style={StyleSheet.absoluteFill} pointerEvents="none" importantForAccessibility="no-hide-descendants" accessibilityElementsHidden
       testID={ambience ? `room-ambience-${ambience}` : 'room-life'}>
-      {windows.map((p) => <WindowWeather key={keyOf(p)} p={p} k={k} ambience={ambience} night={sky === 'starry'} rainy={ambience === 'rainy_day' || (!ambience && mood.rain > 0.3)} wind={mood.wind} cover={mood.cover} items={layout.items} />)}
+      {windows.map((p) => <WindowWeather key={keyOf(p)} p={p} k={k} ownCurtains={ownCurtains?.(p)} ambience={ambience} night={sky === 'starry'} rainy={ambience === 'rainy_day' || (!ambience && mood.rain > 0.3)} wind={mood.wind} cover={mood.cover} items={layout.items} />)}
       {/* Over the windows and curtains too (they are in the room), under the lamps (their light is what stands out). */}
       {wash && wash.opacity > 0 ? <View style={[StyleSheet.absoluteFill, { backgroundColor: wash.color, opacity: wash.opacity }]} testID="room-light" /> : null}
       {lamps.map((p) => <LampGlow key={keyOf(p)} p={p} k={k} on={lampLit(p, sky, mood, ambience, switched)} />)}
@@ -145,7 +146,7 @@ const STARS = [[0.2, 0.18], [0.42, 0.08], [0.7, 0.3], [0.28, 0.42], [0.82, 0.12]
 
 /** What happens behind one window's glass: rain (with a grey sky veil), stars twinkling (only at night), a leaf drifting
  * down, or by day a cloud passing. Then the curtains in front of it, stirring. */
-function WindowWeather({ p, k, ambience, night, rainy, wind, cover, items }: { p: Placement; k: number; ambience: Ambience | null; night: boolean; rainy: boolean; wind: number; cover: number; items: Placement[] }) {
+function WindowWeather({ p, k, ownCurtains = false, ambience, night, rainy, wind, cover, items }: { p: Placement; k: number; ownCurtains?: boolean; ambience: Ambience | null; night: boolean; rainy: boolean; wind: number; cover: number; items: Placement[] }) {
   const g = GLASS[p.item];
   const w = (g.x1 - g.x0) * k, h = (g.y1 - g.y0) * k;
   const shape = g.round ? { borderRadius: w / 2 } : { borderTopLeftRadius: w / 2, borderTopRightRadius: w / 2 };
@@ -161,7 +162,7 @@ function WindowWeather({ p, k, ambience, night, rainy, wind, cover, items }: { p
         {ambience === 'forest_retreat' ? [0.3, 0.7].map((x, i) => <Leaf key={i} x={x * w} h={h} delay={i * 2600} k={k} />) : null}
         {!night && !rainy && !ambience ? <PassingCloud w={w} h={h} k={k} /> : null}
       </View>
-      {g.round ? null : <Curtains p={p} k={k} wind={wind} items={items} />}
+      {g.round || ownCurtains ? null : <Curtains p={p} k={k} wind={wind} items={items} />}
     </>
   );
 }

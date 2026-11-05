@@ -39,11 +39,11 @@ function remember(id: number, key: string, uri: string) {
 
 const fileName = (id: number) => `mirabi-memory-${id}.png`;
 
-async function webBlob(uri: string) {
+export async function webBlob(uri: string) {
   return (await fetch(uri)).blob();
 }
 
-function webDownload(blob: Blob, name: string) {
+export function webDownload(blob: Blob, name: string) {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;

@@ -1,0 +1,41 @@
+# Rendered scenes
+
+The pictures in `mobile/assets/world/` are path traced from the scenes here, all modelled in code (`scenes/kit.js`), so there is
+nothing third-party in them. Nothing here ships in the app and none of it is a dependency of the app: work on a copy of this
+folder outside the repo.
+
+```bash
+npm init -y && npm i three@0.187.0 three-gpu-pathtracer three-mesh-bvh sharp
+bash render-all.sh                                # about 35 minutes; a stopped run goes on where it was
+node cut.mjs raw <repo>/mobile/assets/world       # cuts the sheets, applies the masks, writes jpg and webp
+node cut-street.mjs raw <repo>/mobile/assets/world # the friends' street; prints the numbers for `src/screens/life/streetArt.ts`
+node cut-town.mjs raw/townstreet <repo>/mobile/assets/world # Thị trấn Mirabi; prints the boxes for `src/screens/town/townArt.ts`
+bash render-wild.sh && node cut-wild.mjs raw/wild <out> # Khám phá; about an hour; prints the boxes and the road for `src/screens/life/exploreArt.ts`
+node cut-learn.mjs raw <repo>/mobile/assets/world       # Học tập
+bash render-grove.sh && node cut-grove.mjs raw/grove <repo>/mobile/assets/world # Vườn tài chính; about an hour; prints sizes
+node cut-work.mjs raw/work <repo>/mobile/assets/world   # Nhiệm vụ công việc
+node cut-games.mjs raw/games <repo>/mobile/assets/world # the games' worlds
+```
+
+It needs Chrome with WebGPU and a GPU. The first run compiles shaders for a few minutes. `render.mjs` prints where the desk
+window's glass and the laptop's screen fall in the picture: `PLATE` in `WorkDesk.tsx` must follow them if that camera changes.
+
+- Colours follow the app's palette (`src/theme.ts`): pale sky walls, white trim, light birch wood.
+- All light comes from a sky with a wide sun in it (`sky` in `kit.js`): little noise, and tiles meet without a seam.
+- A cut-out is the colour render plus a white-on-black render of the same camera (`light=mask`). The floor stays in that render
+  as black, so what sinks into the floor doesn't show. Its query must not name a `light`: the first one wins, and the "mask" is then a one-sample picture.
+- The friends' street (`scene-street.js`) is one scene with a real camera and shadows. Each house is a patch of the same picture, cut from a pass with every other plot empty, so any number of friends fits and each house keeps the shadow on its own ground.
+- Thị trấn Mirabi (`scene-townstreet.js`, houses and trees from `village.js`) is built the same way. Its stages of the fountain and the garden and each of the twelve plots are patches of one camera, and the street comes in four tiles. A crop pass uses `&crop=x,y,w,h`, the camera's view offset, so it matches the full picture exactly.
+- Whatever repeats (the Explore road, a subject's trail, the orchard, the sea, the games' strips) is modelled periodic: everything also stands one period away, and its noise repeats too, so tiles meet without a seam.
+- Khám phá's valley (`scene-wild.js`) never ends: everything in it is laid out by picture column and depth and repeats across the column, so any picture of a layer can follow any other. A column must go by the depth along the camera's axis, not along the ground: the pitch makes them differ, by up to 60 points near the bottom of the picture, and the pictures then miss each other at the join. What differs between two pictures of a layer fades out towards their edges. Columns of 770 px: wider ones can hang the screenshot.
+- A path-traced page around 1950 x 1950 can hang for ever at the screenshot. Render big pictures in tiles (`&crop=x,y,w,h`). `render.mjs` gives up after two minutes. A render started right after another on the same port can crash: the batches retry.
+- Vườn nhà (`scene-yard.js`, `scene-beds.js`, `scene-clouds.js`): `bash render-yard.sh` (about 15 minutes) then `node cut-yard.mjs raw/yard <repo>/mobile/assets/world`, which prints the boxes for `YARD_SWAY` and the clouds' sizes for `CLOUDS` in `src/screens/garden/gardenArt.ts`. What sways is cut out of the whole picture; the land under it comes from a pass without it (`&still=1`), so it keeps their shadows and nothing is left behind when a tree moves. `&only=name` builds one of them alone for its mask. If the camera or the fence moves, `YARD_*` in `gardenArt.ts` must follow.
+- The sky behind the garden and the town, the desk's window and screen, books' names and milestones' icons are live: the app draws them.
+- Vườn tài chính has its own scenes. The valley (`scene-vale.js`) is one wide perspective picture that slides slower than the lawn; the near lawn (`scene-meadow.js`) repeats sideways, so it has no perspective and what lies further back in it is simply made smaller. A plant (`scene-grove.js`, shapes in `grove-kit.js`) comes in two pictures of one box: the plant, which sways, and its ground (the ring of stones and the shadow on it and on the lawn, cut by difference from the empty lawn). Plants have their own night render: a tint over a daytime picture looks milky and leaves pale patches on the night lawn. The windmill's sails are a separate picture the app turns. Where things fall in the valley is in `src/screens/money/gardenAssets.ts`: the river's light was measured on the picture, because the near bank hides parts of the river that the camera's projection says are there.
+- A page 4032 wide finishes tracing and then hangs at the screenshot for ever, so `render-grove.sh` renders the sheets in tiles (`&fw&fh&ox`, the camera's view offset) and `join-tiles.mjs` joins them. A scene that throws never reports `done`: `render.mjs` waits for its whole `LIMIT`, so keep `LIMIT` short while drafting.
+- The two study rooms (`scene-focus.js`, `scene-grouproom.js`, shared parts in `study-kit.js`): `node render-study.mjs focus 96`, `node render-study.mjs group 96` (about 30 and 15 minutes on a free GPU; a stopped run goes on where it was), `node cut-study.mjs focus <repo>/mobile/assets/world`, the same for `group`, then `node gen-plates.mjs <repo>/mobile/src/screens raw/group/seats.json`, which writes `focusPlates.ts` and `groupPlates.ts`. `seats.json` is what `scene-grouproom.js` puts in `window.__rect`: `render.mjs` prints it after `rect` for any pass of that scene. `compose-focus.mjs` stacks the layers as the app does, for a look without the app.
+  - Each thing of the focus room's starting layout (`defaults.focus` in `room-art.json`) stands at its anchor on the 640 x 440 canvas, found by casting a ray from the camera (`floorAt`, `wallAt`), and comes as one picture with its own shadow: outside its mask it is black, with the alpha of how much darker the room without it is. So it multiplies over whatever wall or floor it is moved to, and over the things under it. If the camera or an anchor changes, every pass must be made again.
+  - Walls and floors are one render each (a neutral wall, planks, tiles), tinted per colour of the catalog with the mean of a mask pass: thirteen colours, three renders.
+  - What moves or is live is not in the picture: the sky (the glass is empty), the clock's hands, curtains and leaves (cut apart), lamp light, and what is written on the group room's board.
+  - Above and below the picture, `top` and `near` are 860 pixels more of the same camera, for photo mode. Things up there (the shelf, the frames, the hanging lamp) are never seen in the app's normal view.
+  - Two runs at once need different ports: `render.mjs` and `one.sh` use 9444 and 9445, and `one.sh` kills whatever listens on them. Check `netstat` first, and change them in your copy.

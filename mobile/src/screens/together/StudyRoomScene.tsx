@@ -1,243 +1,236 @@
-import React, { memo, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
-import Svg, { Circle, ClipPath, Defs, Ellipse, G, LinearGradient, Path, Polygon, RadialGradient, Rect, Stop } from 'react-native-svg';
+import React, { memo, useEffect, useRef, useState } from 'react';
+import { Animated, Image, type ImageSourcePropType, Pressable, StyleSheet, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import Svg, { Circle, Defs, RadialGradient, Stop } from 'react-native-svg';
 import { PetArt } from '../../components/PetArt';
 import { Text } from '../../components/Typography';
 import { useReduceMotion } from '../../components/useReduceMotion';
+import { formatClock, remainingMs, type TimerAnchor } from '../../studyTogether/timer';
 import type { LiveChatBubble } from '../../studyTogether/useRoomChat';
 import type { LiveReaction } from '../../studyTogether/useStudyRoom';
 import type { RoomMember, RoomState } from '../../studyTogether/types';
+import { roomLight, useAtmosphere } from '../../world/atmosphere';
+import { useSwing, useWorldMotion } from '../../world/budget';
+import { GlassSky } from '../../world/GlassSky';
+import { actTransform } from '../../world/motion';
+import { PhotoRoom } from '../../world/PhotoRoom';
+import { useCelebration } from '../../world/useCelebration';
+import { useWeather } from '../../world/weather';
+import { type Box, GROUP_BOARD, GROUP_FORE, GROUP_FRAME, GROUP_GLASS, GROUP_NEAR, GROUP_ROOM, GROUP_SEATS, GROUP_SWAY, GROUP_TABLE, GROUP_TOP, type SwayPart } from './groupPlates';
 import { reactionEmoji } from './labels';
 
-// The scene is drawn in a 400 x 260 viewBox (400 x 330 with a front row), in the same warm style as the personal Focus Space room.
-const VW = 400;
-const VH = 260;
-/** With more than four members the room gains floor space in front of the desk for a second row. */
-const VH_CROWDED = 330;
-const DESK_TOP = 176;
-/** Back-row pets stand with their feet here, so the desk (drawn over them) hides their legs: they sit at the desk. */
-const BACK_FEET = 192;
-const FRONT_FEET = 290;
+/** The picture's canvas (scene-grouproom.js): five chairs behind the table and three poufs in front. */
+const CW = 640, CH = 440;
 const MAX_SEATS = 8;
 const FALLBACK_WIDTH = 340;
-
-/** Evenly spread seat centres for `count` pets across [from, to]. */
-function spread(count: number, from: number, to: number): number[] {
-  if (count <= 0) return [];
-  if (count === 1) return [(from + to) / 2];
-  const step = (to - from) / (count - 1);
-  return Array.from({ length: count }, (_, i) => from + i * step);
-}
-
-function seatsFor(count: number) {
-  const back = Math.min(4, count);
-  const front = Math.min(MAX_SEATS, count) - back;
-  const backXs = back <= 2 ? spread(back, 140, 260) : spread(back, 82, 318);
-  return [
-    ...backXs.map((x) => ({ x, y: BACK_FEET, row: 'back' as const })),
-    ...spread(front, front <= 2 ? 120 : 70, front <= 2 ? 280 : 330).map((x) => ({ x, y: FRONT_FEET, row: 'front' as const })),
-  ];
-}
-
-/** Y of the fairy-light string at x (a quadratic curve from (20, 18) through (200, 52) to (380, 16)). */
-function lightY(x: number) {
-  const t = (x - 20) / 360;
-  return (1 - t) * (1 - t) * 18 + 2 * (1 - t) * t * 52 + t * t * 16;
-}
-
-type Props = { members: RoomMember[]; state: RoomState; reactions: LiveReaction[]; messages?: LiveChatBubble[]; meId: number };
 const SPEECH_WIDTH = 140;
 const NO_MESSAGES: LiveChatBubble[] = [];
+/** Which seats a room of this many has, evenly over the table: 0-4 behind it from the left, then 5-7 in front. */
+const SEATS_FOR: Record<number, number[]> = { 1: [2], 2: [1, 3], 3: [1, 2, 3], 4: [0, 1, 3, 4], 5: [0, 1, 2, 3, 4], 6: [0, 1, 2, 3, 4, 6], 7: [0, 1, 2, 3, 4, 5, 7], 8: [0, 1, 2, 3, 4, 5, 6, 7] };
+const SEAT_ORDER = [2, 1, 3, 0, 4, 6, 5, 7];
+const LAMPS: [number, number][] = [[228, 34], [448, 34]];
 
-/**
- * The shared study room: one desk with every member's pet seated at it. Daylight while focusing, a sunset during breaks
- * and a soft morning while waiting. Pets stay still when more than four are present or the OS asks for reduced motion,
- * which keeps cheaper phones smooth.
- */
-export const StudyRoomScene = memo(function StudyRoomScene({ members, state, reactions, messages = NO_MESSAGES, meId }: Props) {
+type Mode = 'idle' | 'study' | 'rest' | 'paused' | 'away';
+const WORD: Record<Mode, string> = { idle: 'đã vào phòng', study: 'đang học', rest: 'đang nghỉ', paused: 'tạm dừng', away: 'ngoại tuyến' };
+const MARK: Record<Mode, string> = { idle: '', study: '📖 ', rest: '☕ ', paused: '⏸ ', away: '💤 ' };
+const DOT: Record<Mode, string> = { idle: '#82AEBE', study: '#4F9E7B', rest: '#E0A84E', paused: '#A58FC0', away: '#A9A39A' };
+const modeOf = (m: RoomMember, state: RoomState): Mode => (m.presence === 'away' ? 'away' : state === 'waiting' ? 'idle' : state === 'paused' ? 'paused' : state === 'break' ? 'rest'
+  : m.in_session === false ? 'idle' : 'study');
+
+type Props = { members: RoomMember[]; state: RoomState; reactions: LiveReaction[]; messages?: LiveChatBubble[]; meId: number;
+  /** How many seats the room has: an empty chair waits for each one still free. */ seats?: number;
+  /** The session's clock, for the board. */ anchor?: TimerAnchor | null;
+  /** The room's goal, for the board. */ goal?: string | null;
+  /** Cycles finished: each new one, those in the session celebrate. */ completed?: number;
+  /** No photo mode (a preview). */ noPhoto?: boolean };
+
+const place = ([x, y, w, h]: Box, W: number) => { const k = W / CW; return { position: 'absolute' as const, left: x * k, top: y * k, width: w * k, height: h * k }; };
+const Plate = ({ source, box, W }: { source: ImageSourcePropType; box: Box; W: number }) => (
+  <Image source={source} fadeDuration={0} resizeMode="stretch" accessibilityIgnoresInvertColors style={place(box, W)} />
+);
+function Swaying({ part, W }: { part: SwayPart; W: number }) {
+  const { level } = useWorldMotion();
+  const swing = useSwing({ ms: part.ms, rest: [400, 3200], enabled: level === 'full' });
+  const [x, y, w, h] = part.box;
+  return <Animated.Image source={part.source} fadeDuration={0} resizeMode="stretch" accessibilityIgnoresInvertColors testID="room-sway"
+    style={[place(part.box, W), { transformOrigin: `${((part.origin[0] - x) / w) * 100}% ${((part.origin[1] - y) / h) * 100}%`,
+      transform: [{ rotate: swing.interpolate({ inputRange: [-1, 1], outputRange: [`${-part.deg}deg`, `${part.deg}deg`] }) }] }]} />;
+}
+
+/** The light of a lamp over the table, breathing very slowly. */
+function LampGlow({ x, y, W }: { x: number; y: number; W: number }) {
+  const breath = useSwing({ ms: 3600, jitter: 0.1 });
+  const r = 78 * (W / CW), id = `study-lamp-${x}`;
+  return (
+    <Animated.View pointerEvents="none" style={{ position: 'absolute', left: (x / CW) * W - r, top: (y / CW) * W - r, width: r * 2, height: r * 2,
+      opacity: breath.interpolate({ inputRange: [-1, 1], outputRange: [0.55, 0.85] }) }}>
+      <Svg width={r * 2} height={r * 2}>
+        <Defs><RadialGradient id={id} cx="50%" cy="50%" r="50%"><Stop offset="0" stopColor="#FFE3A8" stopOpacity="0.55" /><Stop offset="0.45" stopColor="#FFE3A8" stopOpacity="0.16" /><Stop offset="1" stopColor="#FFE3A8" stopOpacity="0" /></RadialGradient></Defs>
+        <Circle cx={r} cy={r} r={r} fill={`url(#${id})`} />
+      </Svg>
+    </Animated.View>
+  );
+}
+
+/** The clock on the board, from the server's own (the same anchor as the timer under the room). It counts by itself: the rest of the scene never redraws for it. */
+function BoardClock({ anchor, state, goal, W }: { anchor: TimerAnchor | null; state: RoomState; goal?: string | null; W: number }) {
+  const [, tick] = useState(0);
+  useEffect(() => {
+    if (!anchor?.running) return;
+    const id = setInterval(() => tick((n) => n + 1), 1000);
+    return () => clearInterval(id);
+  }, [anchor]);
+  const k = W / CW;
+  const session = state === 'focus' || state === 'break' || state === 'paused';
+  const label = state === 'focus' ? 'Đang tập trung' : state === 'break' ? 'Giờ nghỉ' : state === 'paused' ? 'Tạm dừng' : 'Chờ bắt đầu';
+  return (
+    <View style={[place(GROUP_BOARD, W), styles.board]} pointerEvents="none" importantForAccessibility="no-hide-descendants" accessibilityElementsHidden testID="study-room-board">
+      <Text style={[styles.boardLabel, { fontSize: 11 * k * 1.25, lineHeight: 15 * k * 1.25 }]} numberOfLines={1}>{label}</Text>
+      {session && anchor ? <Text style={[styles.boardClock, { fontSize: 34 * k, lineHeight: 40 * k }]} testID="study-room-board-clock">{formatClock(remainingMs(anchor))}</Text> : null}
+      {goal ? <Text style={[styles.boardGoal, { fontSize: 10 * k * 1.25, lineHeight: 14 * k * 1.25 }]} numberOfLines={session ? 1 : 3}>{goal}</Text> : null}
+    </View>
+  );
+}
+
+/** A member's pet in its seat, or their first letter when they have none yet (a paw in a photo, which has nobody's name in it). Its place on the screen is its parent's, so nothing here starts over when someone else comes or goes. */
+const SeatPet = memo(function SeatPet({ pet, level, size, mode, still, celebrate, name }: { pet?: string | null; level: number; size: number; mode: Mode; still: boolean; celebrate: number; name: string | null }) {
+  const party = useCelebration(celebrate, pet, level);
+  if (!pet) return <View style={[styles.initial, { width: size * 0.62, height: size * 0.62, borderRadius: size * 0.31 }]} testID="study-room-no-pet">{name === null ? <Ionicons name="paw" size={size * 0.3} color="#2C6E96" /> : <Text style={[styles.initialText, { fontSize: size * 0.3 }]}>{(name.trim()[0] ?? '?').toUpperCase()}</Text>}</View>;
+  return (
+    <Animated.View style={{ transformOrigin: '50% 100%', transform: actTransform(party.values, size) }}>
+      <PetArt pet={pet} size={size} stage={level} studying={mode === 'study' && !still && !party.on} still={still || mode === 'rest' || mode === 'paused' || mode === 'away'} cheer={celebrate ? party.cheer : undefined} />
+    </Animated.View>
+  );
+});
+
+/** The picture of the room with its people in it. `bare` is for photo mode: only the room and the pets, no names, no words of anyone's. */
+function Stage({ members, state, reactions, messages, meId, seats, anchor, goal, completed, W, bare }: Omit<Props, 'noPhoto'> & { W: number; bare?: boolean }) {
   const reduce = useReduceMotion();
-  const [width, setWidth] = useState(0);
-  const W = width || FALLBACK_WIDTH;
-  const vh = members.length > 4 ? VH_CROWDED : VH;
-  const H = (W * vh) / VW;
-  const px = (x: number) => (x / VW) * W;
-  const py = (y: number) => (y / vh) * H;
-
-  const resting = state === 'break' || state === 'paused';
-  const waiting = state === 'waiting';
+  const { level } = useWorldMotion();
+  const { reading } = useWeather();
+  const { hours, mood } = useAtmosphere(reading);
+  const wash = roomLight(Math.round(hours * 4) / 4, mood);
+  const H = (W * CH) / CW, k = W / CW;
   const seated = members.slice(0, MAX_SEATS);
-  const seats = seatsFor(seated.length);
-  const crowded = seated.length > 4;
-  const size = W * (seated.length <= 2 ? 0.2 : seated.length === 3 ? 0.18 : 0.16);
-  // Four seats in a row leave ~78 viewBox units between pets; keep name tags from touching.
-  const tagWidth = Math.min(88, seated.length >= 4 ? px(76) : 88);
-  const description = `Phòng học chung với ${members.length} bạn, ${waiting ? 'đang chờ bắt đầu' : resting ? 'đang nghỉ' : 'đang tập trung'}`;
-  const sky = resting ? ['#F3C3A6', '#FBE3CC'] : waiting ? ['#C3E2F3', '#F1F5F4'] : ['#9ED0EE', '#DDF0FA'];
-
-  const tag = (m: RoomMember) => {
-    const me = m.user_id === meId;
-    const away = m.presence === 'away';
+  const count = Math.max(1, Math.min(MAX_SEATS, Math.max(seats ?? 0, seated.length)));
+  const slots = SEATS_FOR[count];
+  // Who sits where: from the middle of the table outwards, so a small group sits together and nobody moves when someone joins.
+  const order = [...slots].sort((a, b) => SEAT_ORDER.indexOf(a) - SEAT_ORDER.indexOf(b));
+  const taken = seated.map((_, i) => order[i]);
+  // A big group keeps others on their still art: moving sheets are large. The own pet still moves.
+  const crowded = seated.length > 4 || level === 'lite';
+  // With more than the five chairs in use, names get one seat's width each.
+  const tight = count > 5;
+  const tagWidth = tight ? 74 * k : 90;
+  const size = (seat: number) => (GROUP_SEATS[seat].row === 'back' ? 84 : 88) * k;
+  const feet = (m: RoomMember, seat: number) => {
+    const s = GROUP_SEATS[seat], mode = modeOf(m, state);
+    return (s.foot[1] + (s.row === 'back' ? (mode === 'study' ? 5 : 16) : 0)) * k;
+  };
+  const pet = (m: RoomMember, i: number) => {
+    const seat = taken[i], px = size(seat), mode = modeOf(m, state);
     return (
-      <View style={[styles.tag, { maxWidth: tagWidth }, me && styles.tagMe]}>
-        <Text style={[styles.tagText, me && styles.tagTextMe]} numberOfLines={1}>
-          {away ? '💤 ' : resting ? '☕ ' : ''}{me ? 'Bạn' : m.display_name}
-        </Text>
+      <View key={m.user_id} pointerEvents="none" testID={`study-pet-${m.user_id}-${mode}`}
+        style={[styles.pet, { left: GROUP_SEATS[seat].foot[0] * k - px / 2, top: feet(m, seat) - px, width: px, height: px }, mode === 'away' && styles.away]}>
+        <SeatPet pet={m.pet} level={m.pet_level} size={px} mode={mode} name={bare ? null : m.display_name} celebrate={m.in_session && mode !== 'away' ? completed ?? 0 : 0}
+          still={reduce || (crowded && m.user_id !== meId)} />
       </View>
     );
   };
-
   return (
-    <View style={[styles.scene, { aspectRatio: VW / vh }]} testID="study-room-scene" onLayout={(e) => setWidth(e.nativeEvent.layout.width)}>
-      <View style={StyleSheet.absoluteFill} pointerEvents="none" accessible accessibilityRole="image" accessibilityLabel={description}>
-        <Svg width="100%" height="100%" viewBox={`0 0 ${VW} ${vh}`} preserveAspectRatio="xMidYMid slice">
-          <Defs>
-            <LinearGradient id="tg-wall" x1="0" y1="0" x2="1" y2="1"><Stop offset="0" stopColor="#F8F0E5" /><Stop offset="1" stopColor="#E9E6F1" /></LinearGradient>
-            <LinearGradient id="tg-sky" x1="0" y1="0" x2="0" y2="1"><Stop offset="0" stopColor={sky[0]} /><Stop offset="1" stopColor={sky[1]} /></LinearGradient>
-            <LinearGradient id="tg-floor" x1="0" y1="0" x2="0" y2="1"><Stop offset="0" stopColor="#E7D9CB" /><Stop offset="1" stopColor="#F1E8DF" /></LinearGradient>
-            <RadialGradient id="tg-glow"><Stop offset="0" stopColor="#FFEAC0" stopOpacity={resting ? 0.85 : 0.55} /><Stop offset="1" stopColor="#FFEAC0" stopOpacity="0" /></RadialGradient>
-            <ClipPath id="tg-window"><Path d="M158 150V82a42 42 0 0 1 84 0v68Z" /></ClipPath>
-          </Defs>
-          <Rect width={VW} height={vh} fill="url(#tg-wall)" />
-
-          {/* Fairy lights. */}
-          <Path d="M20 18Q200 86 380 16" fill="none" stroke="#BAAE9C" strokeWidth="1.2" />
-          {[52, 100, 148, 200, 252, 300, 348].map((x) => (
-            <G key={x}><Circle cx={x} cy={lightY(x) + 3} r="7" fill="#FFF4D1" opacity="0.55" /><Circle cx={x} cy={lightY(x) + 3} r="2.2" fill="#FFF6DC" /></G>
-          ))}
-
-          {/* Arched window: the sky follows the room's state. */}
-          <Path d="M140 44q-12 58 4 112l14 3q-12-74 0-115Z" fill="#DFD3CF" opacity="0.75" />
-          <Path d="M260 44q12 58-4 112l-14 3q12-74 0-115Z" fill="#DFD3CF" opacity="0.65" />
-          <Path d="M154 152V82a46 46 0 0 1 92 0v70Z" fill="#D1BDAE" />
-          <G clipPath="url(#tg-window)">
-            <Rect x="150" y="36" width="100" height="120" fill="url(#tg-sky)" />
-            {resting ? <Circle cx="216" cy="118" r="13" fill="#FFE2B3" />
-              : waiting ? <Circle cx="220" cy="70" r="9" fill="#FFF4D7" opacity="0.9" />
-              : <G fill="#FFFFFF" opacity="0.9"><Ellipse cx="180" cy="72" rx="12" ry="4.5" /><Ellipse cx="222" cy="90" rx="9" ry="3.5" /></G>}
-            <Path d="M156 140q22-20 44-8t46-6v26h-90Z" fill={resting ? '#D9A98F' : '#9FB9C3'} opacity="0.8" />
-          </G>
-          <Path d="M200 40V150M158 104H242" stroke="#FFF5E7" strokeWidth="4" />
-          <Rect x="148" y="148" width="104" height="7" rx="3" fill="#C5AA94" />
-
-          {/* Shelf with books and a trailing plant. */}
-          <Rect x="24" y="74" width="80" height="5" rx="2" fill="#B9947B" />
-          <Rect x="30" y="50" width="9" height="24" rx="1.5" fill="#B6BBCB" /><Rect x="41" y="54" width="8" height="20" rx="1.5" fill="#D6A89B" />
-          <Rect x="51" y="47" width="10" height="27" rx="1.5" fill="#9EB9AF" />
-          <Path d="M80 74l-3-13h18l-3 13Z" fill="#D9B89F" />
-          <Path d="M86 62q-12-14-18-4 8 8 18 4Zm0 0q0-18 12-16 2 12-12 16Zm2 1q16 6 7 17-8 10-2 18" stroke="#8DA58A" strokeWidth="2" fill="none" />
-
-          {/* Floor and rug. */}
-          <Rect y="196" width={VW} height={vh - 196} fill="url(#tg-floor)" />
-          <Path d={`M0 196H${VW}`} stroke="#D7C8BA" strokeWidth="1.5" />
-          <G stroke="#DCCEC1" strokeWidth="1" opacity="0.55"><Path d={`M0 226H400M70 196L${70 - (vh - 196) * 0.6} ${vh}M200 196V${vh}M330 196L${330 + (vh - 196) * 0.6} ${vh}`} /></G>
-          <Ellipse cx="200" cy="232" rx="176" ry="22" fill="#D4DDDC" opacity="0.85" />
-          <Ellipse cx="200" cy="232" rx="156" ry="15" fill="none" stroke="#EAF0E9" strokeWidth="1.5" />
-
-          {/* Floor plant. */}
-          <Path d="M362 236l-9-34h34l-8 34q-9 4-17 0Z" fill="#CBA58E" />
-          <G fill="#97AF8E">
-            <Ellipse cx="360" cy="180" rx="7" ry="19" transform="rotate(-28 360 180)" /><Ellipse cx="382" cy="180" rx="7" ry="19" transform="rotate(28 382 180)" />
-            <Ellipse cx="371" cy="170" rx="6.5" ry="19" />
-          </G>
-
-          {/* Warm lamp light over the desk, and the desk legs. */}
-          <Ellipse cx="330" cy="160" rx="70" ry="40" fill="url(#tg-glow)" />
-          <Path d="M58 200l-8 42M342 200l8 42" stroke="#B38E75" strokeWidth="6" strokeLinecap="round" />
-        </Svg>
-      </View>
-
-      {/* Back row pets sit behind the desk. */}
-      {seated.map((m, i) => {
-        const seat = seats[i];
-        if (seat.row !== 'back') return null;
-        return (
-          <View key={m.user_id} pointerEvents="none" style={[styles.pet, { left: px(seat.x) - size / 2, top: py(seat.y) - size, width: size, height: size },
-            m.presence === 'away' && styles.away]}>
-            <PetArt pet={m.pet} size={size} stage={m.pet_level} still={reduce || crowded || m.presence === 'away'} />
-          </View>
-        );
-      })}
-
-      {/* The desk top is drawn over the back row, with a book (or a mug during breaks) in front of each pet. */}
-      <View style={StyleSheet.absoluteFill} pointerEvents="none">
-        <Svg width="100%" height="100%" viewBox={`0 0 ${VW} ${vh}`} preserveAspectRatio="xMidYMid slice">
-          <Ellipse cx="200" cy="206" rx="168" ry="6" fill="#9C8676" opacity="0.18" />
-          <Polygon points={`46,${DESK_TOP} 354,${DESK_TOP} 368,190 32,190`} fill="#D8B999" />
-          <Rect x="32" y="189" width="336" height="13" rx="4" fill="#B48C6D" />
-          <Rect x="32" y="189" width="336" height="3" fill="#C79E7F" />
-          {seats.filter((s) => s.row === 'back').map((s) => (
-            <G key={s.x} transform={`translate(${s.x} 184)`}>
-              {resting
-                ? <G><Path d="M-5 -9h10v8q-5 3-10 0Z" fill="#F5E7DA" /><Path d="M5 -7q5 0 3 4-1 2-3 1" stroke="#E5CEB8" strokeWidth="1.5" fill="none" /></G>
-                : <G><Path d="M-16 -4q8-4 16 1 8-5 16-1l-2 6q-7-3-14 0-7-3-14 0Z" fill="#FFF8E6" stroke="#CBB699" strokeWidth="0.8" />
-                  <Path d="M0 -3V3" stroke="#D9CBB6" strokeWidth="0.8" /></G>}
-            </G>
-          ))}
-          {/* Reading lamp at the end of the desk. */}
-          <Path d="M366 176V136l-14-12" fill="none" stroke="#889D9B" strokeWidth="3" strokeLinecap="round" />
-          <Ellipse cx="366" cy="177" rx="9" ry="2" fill="#889D9B" />
-          <Path d="M340 130q0-14 14-12l10 14Z" fill="#91A9A2" />
-          <Rect x="40" y="168" width="20" height="8" rx="1.5" fill="#C5B8D3" /><Rect x="42" y="162" width="16" height="6" rx="1.5" fill="#9EB9AF" />
-        </Svg>
-      </View>
-
-      {/* Front row (more than four members) stands in the foreground. */}
-      {seated.map((m, i) => {
-        const seat = seats[i];
-        if (seat.row !== 'front') return null;
-        return (
-          <View key={m.user_id} pointerEvents="none" style={[styles.pet, { left: px(seat.x) - size / 2, top: py(seat.y) - size, width: size, height: size },
-            m.presence === 'away' && styles.away]}>
-            <PetArt pet={m.pet} size={size} stage={m.pet_level} still />
-          </View>
-        );
-      })}
-
-      {/* Name tags and live reactions sit above everything. */}
-      {seated.map((m, i) => {
-        const seat = seats[i];
+    <View style={{ width: W, height: H }}>
+      <Image source={GROUP_ROOM} fadeDuration={0} resizeMode="stretch" accessibilityIgnoresInvertColors style={{ position: 'absolute', width: W, height: H }} />
+      <View style={place(GROUP_GLASS, W)}><GlassSky idPrefix={bare ? 'groupshot' : 'group'} /></View>
+      <Plate source={GROUP_FRAME.source} box={GROUP_FRAME.box} W={W} />
+      {GROUP_SWAY.map((part) => <Swaying key={part.box.join()} part={part} W={W} />)}
+      {wash.opacity > 0 ? <View pointerEvents="none" style={[StyleSheet.absoluteFill, { backgroundColor: wash.color, opacity: wash.opacity }]} /> : null}
+      {LAMPS.map(([x, y]) => <LampGlow key={x} x={x} y={y} W={W} />)}
+      <BoardClock anchor={anchor ?? null} state={state} goal={bare ? null : goal} W={W} />
+      {slots.map((seat) => <Plate key={seat} source={GROUP_SEATS[seat].source} box={GROUP_SEATS[seat].box} W={W} />)}
+      {seated.map((m, i) => (GROUP_SEATS[taken[i]].row === 'back' ? pet(m, i) : null))}
+      <Plate source={GROUP_TABLE.source} box={GROUP_TABLE.box} W={W} />
+      {seated.map((m, i) => (GROUP_SEATS[taken[i]].row === 'front' ? pet(m, i) : null))}
+      {bare ? null : GROUP_FORE.map((part) => <Swaying key={part.box.join()} part={part} W={W} />)}
+      {bare ? null : seated.map((m, i) => {
+        const seat = taken[i], s = GROUP_SEATS[seat], me = m.user_id === meId, mode = modeOf(m, state);
         const reaction = [...reactions].reverse().find((r) => r.userId === m.user_id);
-        const away = m.presence === 'away';
-        const tagTop = seat.row === 'back' ? py(204) : py(seat.y) - 8;
+        const px = size(seat), tagTop = s.row === 'back' ? (s.foot[1] + 24) * k : (s.foot[1] + 2) * k;
         return (
-          <View key={m.user_id} style={[styles.label, { left: px(seat.x) - 45, top: tagTop }]}
-            accessible accessibilityLabel={`${m.display_name}${m.user_id === meId ? ' (bạn)' : ''}: ${away ? 'tạm vắng' : waiting ? 'đã vào phòng' : resting ? 'đang nghỉ' : 'đang học'}`}>
-            {tag(m)}
-            {reaction ? (
-              <View style={[styles.bubble, { top: py(seat.y) - size - tagTop - 22 }]}>
-                <Text style={styles.bubbleText}>{reactionEmoji(reaction.reaction)}</Text>
+          <View key={m.user_id} style={[styles.label, { left: s.foot[0] * k - tagWidth / 2, top: tagTop, width: tagWidth }]} accessible
+            accessibilityLabel={`${m.display_name}${me ? ' (bạn)' : ''}: ${WORD[mode]}`}>
+            {tight ? (
+              <View style={[styles.tag, styles.tagTight, me && styles.tagMe]}>
+                <View style={[styles.tagDot, { backgroundColor: DOT[mode] }]} />
+                <Text style={[styles.tagText, styles.tagTextTight, me && styles.tagTextMe]} numberOfLines={1}>{me ? 'Bạn' : m.display_name}</Text>
               </View>
-            ) : null}
+            ) : (
+              <View style={[styles.tag, me && styles.tagMe]}>
+                <Text style={[styles.tagText, me && styles.tagTextMe]} numberOfLines={1}>{MARK[mode]}{me ? 'Bạn' : m.display_name}</Text>
+              </View>
+            )}
+            {reaction ? <View style={[styles.bubble, { top: feet(m, seat) - px - tagTop - 22 }]}><Text style={styles.bubbleText}>{reactionEmoji(reaction.reaction)}</Text></View> : null}
           </View>
         );
       })}
-
-      {/* A new chat message pops up over its sender's pet for a few seconds, like a speech bubble. */}
-      {seated.map((m, i) => {
-        const said = [...messages].reverse().find((b) => b.userId === m.user_id);
+      {/* A new chat message pops up over its sender's pet for a few seconds, like a speech bubble. Never in a photo. */}
+      {bare ? null : seated.map((m, i) => {
+        const said = [...(messages ?? NO_MESSAGES)].reverse().find((b) => b.userId === m.user_id);
         if (!said) return null;
-        const seat = seats[i];
-        const left = Math.min(Math.max(4, px(seat.x) - SPEECH_WIDTH / 2), W - SPEECH_WIDTH - 4);
+        const seat = taken[i], s = GROUP_SEATS[seat], left = Math.min(Math.max(4, s.foot[0] * k - SPEECH_WIDTH / 2), W - SPEECH_WIDTH - 4);
         return (
-          <View key={`say${said.key}`} pointerEvents="none" style={[styles.speechSlot, { left, bottom: H - (py(seat.y) - size) - 6 }]}>
+          <View key={`say${said.key}`} pointerEvents="none" style={[styles.speechSlot, { left, bottom: H - (feet(m, seat) - size(seat)) - 6 }]}>
             <View style={styles.speech} accessible accessibilityLiveRegion="polite" accessibilityLabel={`${m.display_name} nhắn: ${said.text}`}>
               <Text style={styles.speechText} numberOfLines={2}>{said.text}</Text>
             </View>
-            <View style={[styles.speechTail, { marginLeft: px(seat.x) - left - SPEECH_WIDTH / 2 }]} />
+            <View style={[styles.speechTail, { marginLeft: s.foot[0] * k - left - SPEECH_WIDTH / 2 }]} />
           </View>
         );
       })}
     </View>
   );
+}
+
+/**
+ * The shared study room, a rendered 3D room in layers (scene-grouproom.js): a seat for each place the room has, every member's own pet in
+ * theirs, doing what the server says they are doing, and a clock on the board that is the session's own. Nothing about anyone is made up:
+ * no one is drawn who is not in the room. Photo mode leaves the room and the pets alone on the screen, with no names and no messages.
+ */
+export const StudyRoomScene = memo(function StudyRoomScene({ members, state, reactions, messages = NO_MESSAGES, meId, seats, anchor, goal, completed, noPhoto = false }: Props) {
+  const [width, setWidth] = useState(0);
+  const [photo, setPhoto] = useState(false);
+  const W = width || FALLBACK_WIDTH;
+  const waiting = state === 'waiting';
+  const description = `Phòng học chung với ${members.length} bạn, ${waiting ? 'đang chờ bắt đầu' : state === 'paused' ? 'đang tạm dừng' : state === 'break' ? 'đang nghỉ' : 'đang tập trung'}`;
+  const shared = { members, state, reactions, messages, meId, seats, anchor, goal, completed };
+  return (
+    <View style={styles.scene} testID="study-room-scene" onLayout={(e) => setWidth(e.nativeEvent.layout.width)}>
+      <View style={StyleSheet.absoluteFill} pointerEvents="none" accessible accessibilityRole="image" accessibilityLabel={description} />
+      <Stage {...shared} W={W} />
+      {noPhoto ? null : (
+        <Pressable onPress={() => setPhoto(true)} style={({ pressed }) => [styles.photoButton, pressed && styles.pressed]} accessibilityRole="button" hitSlop={6}
+          accessibilityLabel="Toàn màn hình để ngắm phòng và chụp ảnh" testID="group-photo-open">
+          <Ionicons name="scan-outline" size={18} color="#FFFFFF" />
+        </Pressable>
+      )}
+      {photo ? <PhotoRoom onClose={() => setPhoto(false)} top={GROUP_TOP} near={GROUP_NEAR} fileName="mirabi-phong-hoc-nhom" testPrefix="group-photo">
+        {(w) => <Stage {...shared} W={w} bare />}
+      </PhotoRoom> : null}
+    </View>
+  );
 });
 
 const styles = StyleSheet.create({
-  scene: { width: '100%', borderRadius: 22, overflow: 'hidden', backgroundColor: '#F8F0E5' },
+  scene: { width: '100%', aspectRatio: CW / CH, borderRadius: 22, overflow: 'hidden', backgroundColor: '#CFE0F2' },
   pet: { position: 'absolute', alignItems: 'center', justifyContent: 'flex-end' },
   away: { opacity: 0.45 },
-  label: { position: 'absolute', width: 90, alignItems: 'center' },
-  tag: { maxWidth: 88, paddingHorizontal: 8, paddingVertical: 2, borderRadius: 999, backgroundColor: 'rgba(255,255,255,0.92)',
+  initial: { alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFFFFF', borderWidth: 2, borderColor: '#9CC3DE' },
+  initialText: { fontWeight: '900', color: '#2C6E96' },
+  label: { position: 'absolute', alignItems: 'center' },
+  tag: { maxWidth: 88, paddingHorizontal: 7, paddingVertical: 1, borderRadius: 999, backgroundColor: 'rgba(255,255,255,0.92)',
     shadowColor: '#657C8A', shadowOpacity: 0.12, shadowRadius: 4, shadowOffset: { width: 0, height: 1 }, elevation: 1 },
+  tagTight: { flexDirection: 'row', alignItems: 'center', gap: 2, maxWidth: '100%', paddingHorizontal: 4 },
+  tagDot: { width: 4, height: 4, borderRadius: 2 },
+  tagTextTight: { fontSize: 9, flexShrink: 1 },
   tagMe: { backgroundColor: '#136FA8' },
   tagText: { fontSize: 10, fontWeight: '800', color: '#304653' },
   tagTextMe: { color: '#FFFFFF' },
@@ -249,4 +242,10 @@ const styles = StyleSheet.create({
     shadowColor: '#1F6E9E', shadowOpacity: 0.18, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, elevation: 3 },
   speechText: { fontSize: 11, lineHeight: 15, fontWeight: '700', color: '#304653' },
   speechTail: { width: 10, height: 10, backgroundColor: '#FFFFFF', transform: [{ rotate: '45deg' }], marginTop: -6 },
+  board: { alignItems: 'center', justifyContent: 'center' },
+  boardLabel: { color: '#D8F0EE', fontWeight: '800' },
+  boardClock: { color: '#FFFFFF', fontWeight: '800', fontVariant: ['tabular-nums'] },
+  boardGoal: { color: '#FFE9A8', fontWeight: '700', textAlign: 'center' },
+  photoButton: { position: 'absolute', top: 8, right: 8, width: 34, height: 34, borderRadius: 17, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(24,40,64,0.42)' },
+  pressed: { transform: [{ scale: 0.92 }], opacity: 0.9 },
 });

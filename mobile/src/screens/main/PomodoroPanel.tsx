@@ -93,6 +93,13 @@ export function PomodoroPanel({ timer, petId, petName, petLevel, userId, initial
   const focusing = timer.running && timer.phase === 'focus';
   useEffect(() => { if (focusing) setPanel(null); }, [focusing]);
   const paused = !timer.running && timer.seconds < phaseSeconds;
+  // A session just finished (or finished while this screen was closed): the pet celebrates once, then rests.
+  const [cheers, setCheers] = useState(timer.completion ? 1 : 0);
+  const lastCycles = useRef(timer.completedCycles);
+  useEffect(() => {
+    if (timer.completedCycles > lastCycles.current) setCheers((n) => n + 1);
+    lastCycles.current = timer.completedCycles;
+  }, [timer.completedCycles]);
   const active = timer.running || paused;
   const stopTitle = timer.phase === 'focus' ? 'Kết thúc phiên' : 'Kết thúc giờ nghỉ';
   async function stopSession() {
@@ -142,7 +149,7 @@ export function PomodoroPanel({ timer, petId, petName, petLevel, userId, initial
           </Pressable>
         </View>
         <View style={[s.heroBody, desktop && s.heroDesktop]}>
-          <View style={s.sceneRegion}><View style={s.sceneFrame}><FocusRoom petId={petId} petName={petName} petLevel={petLevel} resting={timer.phase !== 'focus'} compact={!desktop || hasPanel} userId={userId} /></View></View>
+          <View style={s.sceneRegion}><View style={s.sceneFrame}><FocusRoom petId={petId} petName={petName} petLevel={petLevel} resting={timer.phase !== 'focus'} idle={timer.phase === 'focus' && !timer.running} celebrate={cheers} compact={!desktop || hasPanel} userId={userId} /></View></View>
           <View style={[s.timer, desktop ? { width: hasPanel ? 272 : 330 } : s.compactTimer]}>
             <View style={desktop ? s.timerReadout : s.compactReadout}>
             <View style={s.phase}><View style={[s.phaseDot, timer.phase !== 'focus' && s.breakDot]} /><Text style={s.phaseText}>{label.toUpperCase()}</Text></View>
@@ -188,25 +195,25 @@ export function PomodoroPanel({ timer, petId, petName, petLevel, userId, initial
 
 const s = StyleSheet.create({
   layout: { width: '100%', maxWidth: 1440, alignSelf: 'center', gap: 18, minWidth: 0 }, desktopLayout: { flexDirection: 'row', alignItems: 'flex-start' }, main: { flex: 1, minWidth: 0 },
-  space: { backgroundColor: f.paper, borderRadius: 28, overflow: 'hidden', borderWidth: 1, borderColor: '#FFFFFF', shadowColor: f.shadow, shadowOpacity: .09, shadowRadius: 26, shadowOffset: { width: 0, height: 10 }, elevation: 2 },
-  focusMode: { backgroundColor: '#FAFCF9' }, spaceHeader: { paddingHorizontal: 30, paddingTop: 27, paddingBottom: 12, flexDirection: 'row', alignItems: 'flex-start', gap: 12 }, mobileHeader: { paddingHorizontal: 20, paddingTop: 20, flexWrap: 'wrap' },
+  space: { backgroundColor: '#F2F8FE', borderRadius: 28, overflow: 'hidden', borderWidth: 1, borderColor: '#FFFFFF', shadowColor: f.shadow, shadowOpacity: .09, shadowRadius: 26, shadowOffset: { width: 0, height: 10 }, elevation: 2 },
+  focusMode: { backgroundColor: '#F2F8FE' }, spaceHeader: { paddingHorizontal: 30, paddingTop: 27, paddingBottom: 12, flexDirection: 'row', alignItems: 'flex-start', gap: 12 }, mobileHeader: { paddingHorizontal: 20, paddingTop: 20, flexWrap: 'wrap' },
   headline: { flex: 1, minWidth: 0 }, eyebrowRow: { flexDirection: 'row', alignItems: 'center', gap: 7, marginBottom: 9 }, eyebrow: { fontSize: 10, letterSpacing: 1.8, fontWeight: '800', color: '#67818D' },
-  title: { fontSize: 27, lineHeight: 36, fontWeight: '800', color: f.ink, letterSpacing: -.5 }, mobileTitle: { fontSize: 23, lineHeight: 30 }, subtitle: { color: f.muted, fontSize: 12, lineHeight: 19, marginTop: 5 },
-  soundPill: { flexDirection: 'row', alignItems: 'center', gap: 7, backgroundColor: '#EFF4F3', paddingHorizontal: 12, minHeight: 40, borderRadius: 20 }, soundPillOn: { backgroundColor: '#E5F0F0' }, focusPillOn: { backgroundColor: '#DCEAF1', borderWidth: 1, borderColor: '#B9D5E2' }, soundPillText: { fontSize: 11, color: f.blue, fontWeight: '700' }, playDot: { width: 5, height: 5, borderRadius: 3, backgroundColor: '#709C8F' },
+  title: { fontSize: 27, lineHeight: 36, fontWeight: '800', color: appTheme.ink, letterSpacing: -.5 }, mobileTitle: { fontSize: 23, lineHeight: 30 }, subtitle: { color: f.muted, fontSize: 12, lineHeight: 19, marginTop: 5 },
+  soundPill: { flexDirection: 'row', alignItems: 'center', gap: 7, backgroundColor: '#FFFFFF', paddingHorizontal: 12, minHeight: 40, borderRadius: 20 }, soundPillOn: { backgroundColor: '#E5F0F0' }, focusPillOn: { backgroundColor: '#DCEAF1', borderWidth: 1, borderColor: '#B9D5E2' }, soundPillText: { fontSize: 11, color: f.blue, fontWeight: '700' }, playDot: { width: 5, height: 5, borderRadius: 3, backgroundColor: '#709C8F' },
   heroBody: { alignItems: 'center', minWidth: 0 }, heroDesktop: { flexDirection: 'row', alignItems: 'center', paddingLeft: 16, paddingRight: 16, paddingBottom: 10, minHeight: 405 },
   sceneRegion: { flex: 1, minWidth: 0, alignItems: 'center', justifyContent: 'center', width: '100%', padding: 10 }, sceneFrame: { width: '100%', maxWidth: 660 },
   timer: { alignItems: 'center', justifyContent: 'center', paddingVertical: 22, paddingHorizontal: 14, width: '100%', flexShrink: 0 }, phase: { flexDirection: 'row', alignItems: 'center', gap: 7 }, phaseDot: { width: 5, height: 5, borderRadius: 3, backgroundColor: '#81A9BA' }, breakDot: { backgroundColor: '#96AC92' },
   timerReadout: { alignItems: 'center' }, compactTimer: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 12, paddingHorizontal: 20, gap: 12 },
   compactReadout: { width: 112, alignItems: 'flex-start' }, compactClock: { width: 112, height: 64, marginTop: 0, alignItems: 'flex-start' },
-  compactTime: { fontSize: 44, lineHeight: 55, letterSpacing: -1.5 }, compactTrack: { width: '100%', height: 3, borderRadius: 2, backgroundColor: '#E1E6E4', overflow: 'hidden' }, compactFill: { height: 3, borderRadius: 2, backgroundColor: '#82AEBE' },
+  compactTime: { fontSize: 44, lineHeight: 55, letterSpacing: -1.5 }, compactTrack: { width: '100%', height: 3, borderRadius: 2, backgroundColor: '#E1E6E4', overflow: 'hidden' }, compactFill: { height: 3, borderRadius: 2, backgroundColor: appTheme.accent },
   compactActions: { alignItems: 'center', gap: 6 }, roundRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  roundSettings: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: '#EFF4F3', borderWidth: 1, borderColor: '#DCE7EA' },
+  roundSettings: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: '#DCEAF4' },
   roundPlay: { width: 44, height: 44, borderRadius: 22, shadowColor: appTheme.shadow, shadowOpacity: .2, shadowRadius: 8, shadowOffset: { width: 0, height: 4 }, elevation: 3 },
   roundPlayFill: { flex: 1, borderRadius: 22, alignItems: 'center', justifyContent: 'center' }, playNudge: { marginLeft: 2 },
   roundStop: { backgroundColor: '#FBEFEE', borderColor: '#F1D9D6' }, stopText: { color: appTheme.danger },
   roundPressed:{ transform: [{ scale: .96 }], opacity: .92 }, roundDimmed: { opacity: .55 },
   phaseText: { fontSize: 10, letterSpacing: 2.3, fontWeight: '800', color: '#667F89' }, clock: { width: 236, height: 236, alignItems: 'center', justifyContent: 'center', marginTop: 14 },
-  time: { fontSize: 62, lineHeight: 78, fontWeight: '800', color: f.ink, letterSpacing: -2, fontVariant: ['tabular-nums'] }, timerHint: { color: f.muted, fontSize: 11, marginTop: 4 }, start: { width: 224, maxWidth: '100%', marginTop: 5 },
+  time: { fontSize: 62, lineHeight: 78, fontWeight: '800', color: appTheme.ink, letterSpacing: -2, fontVariant: ['tabular-nums'] }, timerHint: { color: f.muted, fontSize: 11, marginTop: 4 }, start: { width: 224, maxWidth: '100%', marginTop: 5 },
   timeSettings: { flexDirection: 'row', alignItems: 'center', gap: 6, padding: 12, minHeight: 44 }, timeSettingsText: { fontSize: 11, color: f.muted, fontWeight: '600' },
   cycles: { flexDirection: 'row', gap: 5, alignItems: 'center', marginTop: 2 }, cycle: { width: 5, height: 5, borderRadius: 3, backgroundColor: '#DCE2DF' }, cycleDone: { backgroundColor: '#8DAA9E' }, cycleLabel: { marginLeft: 5, fontSize: 10, color: '#71817F' },
   toolsArea: { paddingTop: 20, paddingBottom: 12 }, toolsLabel: { textAlign: 'center', color: '#6B828E', fontSize: 9, letterSpacing: 1.8, fontWeight: '700', marginBottom: 10 }, toolbar: { flexDirection: 'row', justifyContent: 'center', gap: 5, maxWidth: 620, width: '100%', alignSelf: 'center' },

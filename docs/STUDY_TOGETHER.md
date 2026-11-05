@@ -280,3 +280,11 @@ Regenerate the OpenAPI subset after API changes (from `backend/`):
 - Room chat is free text between members, who may have met only through a room code. There is no automatic filter;
   moderation relies on the host removing messages, blocking and reports. For young users, consider limiting chat to
   friends-only (private) rooms or adding a word filter before launch.
+
+## Phòng học 3D
+
+`screens/together/StudyRoomScene.tsx` is a rendered 3D room in layers (`assets/world/grouproom`, `groupPlates.ts`, made by `scripts/render-scenes`): the room, the sky behind its window, curtains that stir, a chair or pouf for each of the room's `max_members` seats, the members' pets, and the table over the back row. Members sit from the middle of the table outwards, so nobody moves when someone joins.
+
+Nothing shown is made up, and no number is the device's: a pet's state comes from the snapshot (`presence`, `in_session`, the room's `state`), and the clock on the board comes from the same anchor as the timer under the room. Each new `completed_cycles` makes those in the session celebrate. Reached from *Học tự chọn*, the home shows the room with only you in it.
+
+**Photo mode** (`world/PhotoRoom.tsx`) only covers the screen: the session, socket and chat under it go on. Its picture has the room and the pets alone, on purpose: no names, no chat bubbles, no reactions and not the room's goal. Nothing is recorded. There is no video call or voice recording in this feature.
