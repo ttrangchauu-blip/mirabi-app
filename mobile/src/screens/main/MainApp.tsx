@@ -243,7 +243,7 @@ export function MainApp() {
         <View style={[styles.fill, { paddingTop: insets.top + 10 }]}>
           {lifeScreen === 'work' ? <WorkQuestScreen user={user} timer={timer} onBack={back} onRewards={loadDashboard} onOpenInventory={openInventory} />
             : lifeScreen === 'adventure' ? <AdventureMapScreen user={user} onBack={back} onRewards={loadDashboard} onOpenInventory={openInventory} />
-            : lifeScreen === 'money' ? <MoneyGardenScreen onBack={back} />
+            : lifeScreen === 'money' ? <MoneyGardenScreen onBack={back} pet={petHatch.phase !== 'idle' || dashboard?.pet_walk === 'walking' ? null : { id: user.pet, level: user.level }} />
             : lifeScreen === 'town' ? <TownScreen user={user} onBack={back} onVisitRoom={visitRoom} onVisitGarden={visitGarden} onOpenFriends={() => openFriends()} />
             : <CareerJourneyScreen user={user} onBack={back} onRewards={loadDashboard} />}
         </View>
