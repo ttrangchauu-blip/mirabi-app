@@ -22,7 +22,7 @@ const FALLBACK = { width: 320, height: 676 };
 
 /** Draws a room some other way than its catalog drawing (the focus room's rendered pictures). Everything else about the room, its pet and decorating stays as it is. */
 export type RoomDrawing = {
-  /** The room with these things in it. */ room: (layout: Layout) => React.ReactNode;
+  /** The room with these things in it, filling the part of the room shown (`view`, canvas units; the canvas when not given). */ room: (layout: Layout, view?: [number, number, number, number]) => React.ReactNode;
   /** These things alone, on the canvas. */ items: (items: Placement[]) => React.ReactNode;
   /** What goes over the pet at its seat. */ cover: (layout: Layout, pose: Pose) => React.ReactNode;
   /** No rounded corners: it goes on past its edges (photo mode). */ edgeless?: boolean;
@@ -299,7 +299,7 @@ export const RoomScene = memo(function RoomScene({ layout, drawing, seatIdle = f
   };
   // The thing just tapped, playing its small bounce (drawn again over itself: the room's drawing isn't redone).
   const [poke, setPoke] = useState<{ key: number; item: Placement } | null>(null);
-  const pokeSvg = useMemo(() => (poke ? liftedSvg([poke.item], kind) : null), [poke, kind]);
+  const pokeSvg = useMemo(() => (poke && !drawing ? liftedSvg([poke.item], kind) : null), [poke, kind, !drawing]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <View style={[s.fill, bounded && s.fillBounded]} onLayout={onLayout}>
@@ -308,7 +308,7 @@ export const RoomScene = memo(function RoomScene({ layout, drawing, seatIdle = f
           testID="room-camera">
         <View style={[s.picture, { width: width * z, height: height * z }]} pointerEvents="none" accessible accessibilityRole="image"
           accessibilityLabel={description}>
-          {drawing ? drawing.room(room) : <Picture xml={svg} />}
+          {drawing ? drawing.room(room, view) : <Picture xml={svg} />}
         </View>
         <View style={[s.canvas, canvasStyle]} pointerEvents="box-none" testID="room-canvas">
           {underlay && !editor ? underlay(kz) : null}
@@ -320,7 +320,9 @@ export const RoomScene = memo(function RoomScene({ layout, drawing, seatIdle = f
           {cover && !away ? <View style={StyleSheet.absoluteFill} pointerEvents="none" testID="room-seat-cover">{drawing ? drawing.cover(layout, pose) : <Picture xml={cover.svg} />}</View> : null}
           {(drawing ? front.length > 0 : overlay) && !away ? <View style={StyleSheet.absoluteFill} pointerEvents="none" testID="room-front">{drawing ? drawing.items(front) : <Picture xml={overlay!} />}</View> : null}
           {guest ? <ScenePet pet={guest} spot={GUEST_SPOT} k={kz} pose="rug" guest /> : null}
-          {poke && pokeSvg && !editor && effects ? <Bounce key={poke.key} xml={pokeSvg} x={poke.item.x * kz} y={poke.item.y * kz} onDone={() => setPoke(null)} /> : null}
+          {poke && (pokeSvg || drawing) && !editor && effects ? <Bounce key={poke.key} x={poke.item.x * kz} y={poke.item.y * kz} onDone={() => setPoke(null)}>
+            {drawing ? drawing.items([poke.item]) : <Picture xml={pokeSvg!} />}
+          </Bounce> : null}
           {ghost || (drawing && liftedItems) ? (
             <Animated.View style={[StyleSheet.absoluteFill, { transform: offset.getTranslateTransform() }]} pointerEvents="none" testID="room-lifted">
               {drawing ? drawing.items(liftedItems!) : <Picture xml={ghost!} />}
@@ -347,7 +349,7 @@ const Picture = memo(function Picture({ xml }: { xml: string }) {
 
 /** A thing answering a tap: gives a little (down first), springs up past its size and settles, from where it stands.
  * It only ever grows, so the same thing in the room's drawing under it never shows at its edges. */
-function Bounce({ xml, x, y, onDone }: { xml: string; x: number; y: number; onDone: () => void }) {
+function Bounce({ x, y, onDone, children }: { x: number; y: number; onDone: () => void; children: React.ReactNode }) {
   const { animate } = useWorldMotion();
   const run = useRef(new Animated.Value(0)).current;
   const done = useRef(onDone);
@@ -361,7 +363,7 @@ function Bounce({ xml, x, y, onDone }: { xml: string; x: number; y: number; onDo
   return <Animated.View pointerEvents="none" testID="room-poke" style={[StyleSheet.absoluteFill, { transformOrigin: `${x}px ${y}px`, transform: [
     { scaleY: run.interpolate({ inputRange: [0, 0.18, 0.5, 0.8, 1], outputRange: [1, 1.012, 1.07, 1.015, 1] }) },
     { scaleX: run.interpolate({ inputRange: [0, 0.18, 0.5, 0.8, 1], outputRange: [1, 1.045, 1.012, 1.02, 1] }) },
-  ] }]}><Picture xml={xml} /></Animated.View>;
+  ] }]}>{children}</Animated.View>;
 }
 
 /** Taps on the floor, under the pets. A drag (the page scrolling) or a second finger is never a tap. */

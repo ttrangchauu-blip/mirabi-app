@@ -1,9 +1,3 @@
-/** Học tập's rendered pictures (`scripts/render-scenes`): by day, and the same at night. */
-export const SCHOOL = { day: require('../../../assets/world/learn/school-day.webp'), night: require('../../../assets/world/learn/school-night.webp') };
-/** The school's width over its height. */
-export const SCHOOL_RATIO = 1170 / 540;
-/** Where the school's ridge is, as a share of its height. */
-export const SCHOOL_RIDGE = 0.1;
 /** A subject's map: the top of the hillside (half as tall as it is wide), then a square that repeats going down. */
 export const TRAIL_TOP = { day: require('../../../assets/world/learn/trail-top-day.webp'), night: require('../../../assets/world/learn/trail-top-night.webp') };
 export const TRAIL_TILE = { day: require('../../../assets/world/learn/trail-tile-day.webp'), night: require('../../../assets/world/learn/trail-tile-night.webp') };

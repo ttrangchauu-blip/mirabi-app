@@ -19,6 +19,7 @@ import { SUBJECTS } from '../together/labels';
 import { OptionRow, OptionSheet, PetAvatar } from '../together/ui';
 import { PLAY_MS } from '../../room/prefs';
 import { RoomScene, type PetMenuAction } from './RoomScene';
+import { HOME_DRAWING, isPlatedHomeWindow } from './HomeRoomArt';
 import { RoomAmbience, skyOf } from '../healing/RoomAmbience';
 import { useDayPeriod } from '../../components/useDayPeriod';
 import { useAtmosphere } from '../../world/atmosphere';
@@ -72,7 +73,7 @@ export function VisitRoom({ userId, me, onBack, onOpenStudyRoom }: Props) {
   const { hours, mood } = useAtmosphere(reading);
   const lightHours = Math.round(hours * 4) / 4;
   const shownLayout = data?.room.layout;
-  const underlay = useCallback((k: number) => (shownLayout ? <RoomAmbience layout={shownLayout} ambience={null} sky={sky} k={k} hours={lightHours} mood={mood} /> : null),
+  const underlay = useCallback((k: number) => (shownLayout ? <RoomAmbience layout={shownLayout} ambience={null} sky={sky} k={k} hours={lightHours} mood={mood} ownCurtains={isPlatedHomeWindow} /> : null),
     [shownLayout, sky, lightHours, mood]);
   // Until when the last "Chào pet" plays: taps meanwhile neither open the menu nor start it again.
   const playing = useRef(0);
@@ -256,7 +257,7 @@ export function VisitRoom({ userId, me, onBack, onOpenStudyRoom }: Props) {
         </View>
       </View>
       <View style={s.sceneWrap}>
-        <RoomScene layout={room.room.layout} underlay={underlay} pet={{ ...room.pet, name: petName }} pose={pose} away={away}
+        <RoomScene layout={room.room.layout} drawing={HOME_DRAWING} underlay={underlay} pet={{ ...room.pet, name: petName }} pose={pose} away={away}
           guest={{ ...room.guest_pet, name: room.guest_pet.name ?? me.pet_name }} reaction={reaction}
           onPetPress={away ? undefined : openMenu} petLabel={`${petName}, chạm để chào hoặc động viên`} hearts={hearts}
           petMenu={petMenu ? { actions: menuActions, onAction: onMenu, onClose: () => setPetMenu(false) } : null}

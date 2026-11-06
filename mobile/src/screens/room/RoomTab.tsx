@@ -29,6 +29,8 @@ import { OptionRow, OptionSheet, PetAvatar, ToggleRow } from '../together/ui';
 import { DecorateHeader, DecoratePanel, decoratePanelHeight } from './DecoratePanel';
 import { PhotoSheet } from './PhotoSheet';
 import { RoomScene } from './RoomScene';
+import { HOME_DRAWING, HOME_PHOTO_DRAWING, isPlatedHomeWindow } from './HomeRoomArt';
+import { HomePhotoMode } from './HomePhotoMode';
 import { TAB_BAR_RADIUS } from '../main/TabBar';
 import { useRoomEditor } from './useRoomEditor';
 import { HealingDock } from '../healing/HealingDock';
@@ -88,6 +90,12 @@ function ownerPose(timer: FocusTimer, room: OwnRoom): Pose {
 /** Points kept at the top for the floating panel (6 above it, its 48 and a gap of 6). Fixed, so nothing in the panel (a
  * longer name, the notes under it) ever moves or rescales the room. */
 const HEADER_RESERVE = 60;
+/** Photo mode: the points shown under the canvas's bottom edge, so the whole room, from its wall's cap (canvas y 135) to under its floor's
+ * slab (827), stands in the middle of the screen; at least the slab and a little more. */
+function photoBelow(width: number, height: number, top: number) {
+  const k = width / 420, below = Math.max(72, (height - (827 - 135) * k) / 2 + (827 - 770) * k);
+  return (height - below - top) / (770 - 160) >= k ? below : 72;
+}
 /** The decorating header's height under the safe area: one row of 40-point buttons. */
 const EDIT_HEADER = 56;
 
@@ -103,7 +111,7 @@ const EDIT_HEADER = 56;
 export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenExplore, contentTop, onDecorating, hatching = false, onOpenInventory, healingAllowed = false, startJournal = false, onJournalStarted }: Props) {
   const insets = useSafeAreaInsets();
   const barTop = contentTop ?? insets.top;
-  const { height: screenHeight } = useViewportSize();
+  const { width: screenWidth, height: screenHeight } = useViewportSize();
   const toast = useToast();
   const confirm = useConfirm();
   const [data, setData] = useState<OwnRoom | null>(null);
@@ -119,6 +127,8 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenExplore, c
   const [reaction, setReaction] = useState<{ key: number; text: string } | null>(null);
   const lineIndex = useRef<Record<PetAction, number>>({ pet: 0, feed: 0, play: 0, talk: 0 });
   const [photo, setPhoto] = useState(false);
+  // Photo mode: the room and the pet alone on the screen ("Chụp ảnh"); the album's sheet opens from there.
+  const [photoMode, setPhotoMode] = useState(false);
   const [settings, setSettings] = useState(false);
   const [petMenu, setPetMenu] = useState(false);
   // The decorating tab "Cài đặt" opened it on: the items, or "Tường và sàn" for colours and themes.
@@ -220,7 +230,7 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenExplore, c
   const sceneLayout = useMemo(() => (shown && !draft ? withLiveSky(shown.room.layout, sky) : shown?.room.layout), [shown, draft, sky]);
   // The whole room's light, by the quarter hour: it changes far too slowly to redraw more often.
   const lightHours = Math.round(hours * 4) / 4;
-  const underlay = useCallback((k: number) => (sceneLayout ? <RoomAmbience layout={sceneLayout} ambience={healing ? ambience : null} sky={sky} k={k} hours={lightHours} mood={mood} lamps={prefs.lamps} /> : null),
+  const underlay = useCallback((k: number) => (sceneLayout ? <RoomAmbience layout={sceneLayout} ambience={healing ? ambience : null} sky={sky} k={k} hours={lightHours} mood={mood} lamps={prefs.lamps} ownCurtains={isPlatedHomeWindow} /> : null),
     [sceneLayout, healing, ambience, sky, lightHours, mood, prefs.lamps]);
   // "Đặt vào phòng" from Kho đồ: decorating opens on "Đồ khám phá" with one more copy of it.
   useEffect(() => {
@@ -355,16 +365,21 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenExplore, c
     toast(`Đã cất ${result.stored.map(nameOf).join(', ')} vào kho.`, 'info');
   }
   const openSettings = () => { setPetMenu(false); setSettings(true); };
-  // The photo is drawn by the backend from the room and the pet only, so no button or menu is ever in it.
+  // "Chụp ảnh": the room and the pet alone on the screen, every button and bar hidden; the shutter saves to the device. The album's
+  // photo is drawn by the backend from the room and the pet only, so no button or menu is ever in it either.
   const takePhoto = () => {
     setPetMenu(false);
     if (away) { toast(`${petName} đang đi dạo. Chờ ${petName} về rồi chụp ảnh nhé!`, 'info'); return; }
+    setPhotoMode(true);
+  };
+  const toAlbum = () => {
+    setPhotoMode(false);
     if (offline) { toast('Cần kết nối mạng để lưu ảnh vào Album.', 'info'); return; }
     setPhoto(true);
   };
 
   const scene = (
-    <RoomScene layout={sceneLayout ?? shown.room.layout} underlay={!decorating ? underlay : undefined} pet={{ id: data.pet.id, name: petName, level }} pose={pose} away={away} fullScreen
+    <RoomScene layout={sceneLayout ?? shown.room.layout} drawing={HOME_DRAWING} underlay={!decorating ? underlay : undefined} pet={{ id: data.pet.id, name: petName, level }} pose={pose} away={away} fullScreen
       safeTop={barTop + HEADER_RESERVE} safeBottom={TAB_BAR_RADIUS}
       onItemPress={(item) => { if (isLamp(item.item)) prefs.setLamp(keyOf(item), !lampLit(item, sky, mood, healing ? ambience : null, prefs.lamps)); }}
       chrome={decorating ? { top: insets.top + EDIT_HEADER, bottom: decoratePanelHeight(screenHeight) + TAB_BAR_RADIUS } : undefined}
@@ -456,6 +471,13 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenExplore, c
         </View>
       ) : null}
 
+      {photoMode ? (
+        <HomePhotoMode onClose={() => setPhotoMode(false)} onAlbum={toAlbum}>
+          {/* The same room, pet and light, from the wall's cap to under the floor's slab; nothing in it can be tapped. */}
+          <RoomScene layout={sceneLayout ?? shown.room.layout} drawing={HOME_PHOTO_DRAWING} underlay={underlay} pet={{ id: data.pet.id, name: petName, level }} pose={pose}
+            away={away} fullScreen safeTop={insets.top + 8} safeBottom={photoBelow(screenWidth, screenHeight, insets.top + 8)} effects={prefs.effects} description={`${data.room.name}, ${petName} đang ở trong phòng`} />
+        </HomePhotoMode>
+      ) : null}
       <PhotoSheet visible={photo} pose={pose} onClose={() => setPhoto(false)} onSaved={() => {
         setPhoto(false);
         toast('Đã lưu ảnh vào Album kỷ niệm!', 'success', { label: 'Xem', onPress: onOpenAlbum });

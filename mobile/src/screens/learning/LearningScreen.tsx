@@ -562,7 +562,7 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
     <ScrollView ref={scroll} key={route.name} contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
       <PageIn reduceMotion={prefs.reduceMotion}>
       {route.name === 'subjects' ? (
-        <SubjectPicker catalog={catalog} lessons={lessons} error={loadError ?? lessonsError} onRetry={() => void load()} current={current} petId={user.pet} petLevel={user.level}
+        <SubjectPicker catalog={catalog} lessons={lessons} error={loadError ?? lessonsError} onRetry={() => void load()} current={current}
           focus={focus} onResume={resume} onDiscard={() => void discard()} onOpenReview={() => setRoute({ name: 'review' })} modeSwitch={modeSwitch}
           education={education} onPickLevel={pickLevel} onOpenLesson={(key) => openLesson(key)} onFreeStudy={onFreeStudy}
           onOpenNotebook={() => setRoute({ name: 'notebook' })} onOpenArchive={() => setRoute({ name: 'archive' })}

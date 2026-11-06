@@ -3,6 +3,7 @@ import { AccessibilityActionEvent, ActivityIndicator, Animated, Easing, NativeSc
   StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { SvgXml } from 'react-native-svg';
+import { ItemThumb } from './HomeRoomArt';
 import { useViewportSize } from '../../components/MobileViewport';
 import { Text } from '../../components/Typography';
 import { RARITY } from '../../inventory/rarity';
@@ -159,7 +160,7 @@ export function DecoratePanel(props: Props) {
                 <Card key={`${stack.item}.${stack.variant}`} label={stack.name} role="button" selected={chosen} locked={!free && !here}
                   badge={here ? `Đang đặt ${here}` : undefined} note={free ? `Còn ${free}` : 'Đã đặt hết'} tone={rarity?.color}
                   mount={itemArt(stack.item)!.mount} onPress={() => props.onCopy?.(stack)}>
-                  <SvgXml xml={itemThumb(stack.item, stack.variant)!} width="100%" height="100%" />
+                  <ItemThumb id={stack.item} variant={stack.variant} fallback={itemThumb(stack.item, stack.variant)!} />
                 </Card>
               );
             }) : <Text style={s.foundEmpty}>Đồ trang trí pet mang về sau mỗi chuyến khám phá sẽ ở đây.</Text>}
@@ -172,7 +173,7 @@ export function DecoratePanel(props: Props) {
                 <Card key={item.id} label={item.name} role="button" selected={selected === item.id} locked={!item.owned}
                   badge={inRoom ? 'Đang dùng' : undefined} note={lockNote(item) ?? (inRoom ? undefined : 'Trong kho')}
                   mount={itemArt(item.id)!.mount} onPress={() => onItem(item.id)}>
-                  <SvgXml xml={itemThumb(item.id, inRoom?.variant)!} width="100%" height="100%" />
+                  <ItemThumb id={item.id} variant={inRoom?.variant} fallback={itemThumb(item.id, inRoom?.variant)!} />
                 </Card>
               );
             })}

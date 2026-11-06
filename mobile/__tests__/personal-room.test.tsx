@@ -316,7 +316,12 @@ describe('personal room', () => {
     await openRoom();
     await screen.findByTestId('room-header');
     fireEvent.press(screen.getByRole('button', { name: 'Chụp ảnh' }));
+    // Photo mode first: the room alone, every bar and button of the room hidden; the album is one of its two ways to keep it.
+    expect(await screen.findByTestId('home-photo-mode')).toBeTruthy();
+    expect(screen.getByLabelText('Chụp ảnh và lưu vào thư viện')).toBeTruthy();
+    fireEvent.press(screen.getByTestId('home-photo-album'));
     const sheet = await screen.findByTestId('room-photo-sheet');
+    expect(screen.queryByTestId('home-photo-mode')).toBeNull();
     fireEvent.changeText(within(sheet).getByLabelText('Tiêu đề ảnh'), 'Chiều yên tĩnh');
     await waitFor(() => expect(server.callsTo('POST /api/personal-room/photo/preview').some((c) => c.body.title === 'Chiều yên tĩnh')).toBe(true), { timeout: 3000 });
     const save = await within(sheet).findByRole('button', { name: 'Lưu vào Album kỷ niệm' });
