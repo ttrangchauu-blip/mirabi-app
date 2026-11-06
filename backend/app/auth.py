@@ -21,6 +21,8 @@ from .streaks import record_successful_login
 log = logging.getLogger("refmi.auth")
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 
+# How long after a rotation the app may retry a refresh whose answer it never received (a timeout on a poor network).
+REFRESH_RETRY_WINDOW = timedelta(minutes=2)
 INVALID_CREDENTIALS = "Email or password is incorrect"
 RESET_REQUESTED = "If an account exists for this email, password reset instructions have been sent."
 
@@ -39,6 +41,29 @@ def _revoke_family(db: Session, family_id: str) -> None:
 
 def _invalid_refresh(code: str = "invalid_refresh_token", detail: str = "Invalid refresh token") -> APIError:
     return APIError(401, code, detail)
+
+def _retry_lost_rotation(db: Session, token: RefreshToken) -> dict | None:
+    """A new session for a token rotated moments ago, or None if this has to count as a replay. Allowed only while the
+    token it was rotated to has never been used, and that token stops working: if someone else did receive it, using it
+    is a replay that ends the session for everyone, so a stolen token gains nothing it can keep."""
+    if utcnow() - as_utc(token.revoked_at) > REFRESH_RETRY_WINDOW:
+        return None
+    successor = db.get(RefreshToken, token.replaced_by_id)
+    user = db.get(User, token.user_id)
+    if successor is None or successor.revoked_at is not None or as_utc(successor.expires_at) <= utcnow():
+        return None
+    if not user or user.status != "active":
+        return None
+    claimed = db.execute(update(RefreshToken).where(RefreshToken.id == successor.id, RefreshToken.revoked_at.is_(None))
+                         .values(revoked_at=utcnow()))
+    if claimed.rowcount != 1:
+        db.rollback()
+        return None
+    new_token, body = _issue_session(db, user, family_id=token.family_id)
+    # Both point at the newest one: the same retry can happen again, and the lost token counts as used.
+    db.execute(update(RefreshToken).where(RefreshToken.id.in_((token.id, successor.id))).values(replaced_by_id=new_token.id))
+    db.commit()
+    return body
 
 # Registration doesn't sign the user in: the app sends them back to the login screen with the form pre-filled.
 @router.post("/register", response_model=UserOut, status_code=201)
@@ -103,13 +128,19 @@ def login(data: LoginInput, request: Request, db: Session = Depends(get_db),
     return body
 
 @router.post("/refresh", response_model=TokenOut)
-def refresh(data: RefreshInput, request: Request, db: Session = Depends(get_db)):
+def refresh(data: RefreshInput, request: Request, db: Session = Depends(get_db),
+            idempotency_key: str | None = Header(default=None)):
     enforce("refresh-ip", settings.rate_limit_refresh, client_ip(request))
     token = db.scalar(select(RefreshToken).where(RefreshToken.token_hash == hash_token(data.refresh_token)))
     if not token:
         raise _invalid_refresh()
     if token.revoked_at is not None:
         if token.replaced_by_id is not None:
+            # The app says it never got the answer to this token's rotation (Idempotency-Key, sent only on such a retry).
+            if idempotency_key:
+                retried = _retry_lost_rotation(db, token)
+                if retried is not None:
+                    return retried
             # A rotated token was presented again: assume theft and end the whole session family.
             log.warning("Refresh token replay detected for user %s; revoking session family", token.user_id)
             _revoke_family(db, token.family_id)

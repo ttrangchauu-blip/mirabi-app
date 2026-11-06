@@ -11,7 +11,8 @@ import { PLAY_MS, useRoomPrefs } from '../src/room/prefs';
 import type { Placement } from '../src/room/types';
 import { walkSpeedAt, WALK_SPEED } from '../src/room/walk';
 import { GardenScreen } from '../src/screens/garden/GardenScreen';
-import { plotPlaces } from '../src/screens/garden/GardenWorld';
+import { BED_FRAME_TOP, BED_TALL, YARD_HILLTOP, YARD_POND_END, YARD_TALL } from '../src/screens/garden/gardenArt';
+import { GardenWorld, gardenPaths, gardenRoute, plotPlaces, yardLayout } from '../src/screens/garden/GardenWorld';
 import { HealingDock } from '../src/screens/healing/HealingDock';
 import { drapeLength, lampLit } from '../src/screens/healing/RoomAmbience';
 import { ExploreSpace } from '../src/screens/life/ExploreSpace';
@@ -313,20 +314,86 @@ describe('the garden scene', () => {
 
   it('every plot is in the scene, apart from the others, whatever the phone', () => {
     for (const [w, h] of [[320, 568], [360, 640], [390, 720], [430, 800], [768, 960]]) {
-      const places = plotPlaces(6, w, h, 118, 92);
+      const { places, content, picTop, tall } = yardLayout(9, w, h, 118, 92);
       for (const p of places) {
         expect(p.x - p.w / 2).toBeGreaterThanOrEqual(0);
         expect(p.x + p.w / 2).toBeLessThanOrEqual(w);
-        expect(p.feet).toBeLessThanOrEqual(h);
+        expect(p.feet).toBeLessThanOrEqual(content - 92);
+        expect(p.feet - p.w * BED_FRAME_TOP).toBeGreaterThan(picTop + tall * YARD_POND_END); // on the grass, not in the pond
         expect(p.w).toBeGreaterThanOrEqual(44); // a finger fits
       }
       for (const [i, a] of places.entries()) for (const b of places.slice(i + 1)) {
         const apart = Math.abs(a.x - b.x) >= (a.w + b.w) / 2 || Math.abs(a.feet - b.feet) >= 1;
         expect(apart).toBe(true);
       }
-      expect(places[0].w).toBeLessThan(places[3].w); // the back row is further away
+      expect(places[0].w).toBeLessThan(places[3].w); // the back rows are further away
+      expect(places[3].w).toBeLessThan(places[6].w);
+      expect(picTop + tall * YARD_HILLTOP).toBeGreaterThanOrEqual(118 + 40); // open sky under what floats at the top
     }
-    expect(plotPlaces(6, 390, 720, 118, 92)).toEqual(plotPlaces(6, 390, 720, 118, 92));
+    expect(plotPlaces(9, 390, 720, 118, 92)).toEqual(plotPlaces(9, 390, 720, 118, 92));
+  });
+
+  it('a taller phone sees more sky', () => {
+    const sky = (h: number) => { const { picTop, tall } = yardLayout(9, 390, h, 118, 160); return picTop + tall * YARD_HILLTOP - 118; };
+    expect(sky(844)).toBeGreaterThan(100);
+    expect(sky(844)).toBeGreaterThan(sky(700));
+  });
+
+  it('the pet walks along the lanes and round the beds, never through one', () => {
+    for (const [w, h] of [[320, 568], [360, 640], [390, 844], [430, 932], [768, 960]]) {
+      const yard = yardLayout(9, w, h, 118, 160);
+      const paths = gardenPaths(yard, w);
+      const beds = yard.places.map((p) => ({ left: p.x - p.w * 0.45, right: p.x + p.w * 0.45, top: p.feet - p.w * BED_FRAME_TOP, bottom: p.feet - p.w * 0.11 }));
+      const spots = paths.lanes.flatMap((lane) => [{ x: lane.left + 30, y: lane.y }, { x: lane.right - 30, y: lane.y }]);
+      for (const from of spots) for (const to of spots) {
+        let here = from;
+        const legs = gardenRoute(paths, from, to);
+        if (from !== to) expect(legs[legs.length - 1]).toEqual(to);
+        for (const leg of legs) {
+          expect(leg.x === here.x || leg.y === here.y).toBe(true); // straight along a lane, a side or the gate
+          for (const bed of beds) {
+            const crossesX = Math.max(here.x, leg.x) > bed.left && Math.min(here.x, leg.x) < bed.right;
+            const crossesY = Math.max(here.y, leg.y) > bed.top && Math.min(here.y, leg.y) < bed.bottom;
+            expect(crossesX && crossesY).toBe(false);
+          }
+          here = leg;
+        }
+      }
+    }
+  });
+
+  describe('the pet in its yard', () => {
+    const empty = Array.from({ length: 9 }, (_, plot) => ({ plot, empty: true })) as any[];
+    /** The states the pet goes through over a while. */
+    async function statesOver(ms: number) {
+      render(<GardenWorld plots={empty} busy={null} ready={() => false} labelFor={() => ''} onPress={() => {}} top={118} bottom={160} pet={{ id: 'fox', level: 2 }} />);
+      await act(async () => {});
+      const seen = new Set<string>();
+      for (let t = 0; t < ms; t += 100) {
+        await act(async () => { jest.advanceTimersByTime(100); });
+        seen.add(screen.getByTestId(/^living-pet-/).props.testID);
+      }
+      return seen;
+    }
+    beforeEach(() => { jest.useFakeTimers(); });
+    afterEach(() => { jest.useRealTimers(); jest.restoreAllMocks(); jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(true); });
+
+    it('strolls about on its own', async () => {
+      jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(false);
+      expect(await statesOver(6000)).toContain('living-pet-walk');
+    });
+
+    it('stays where it is with reduce motion', async () => {
+      expect(await statesOver(6000)).not.toContain('living-pet-walk');
+    });
+  });
+
+  it('keeps the yard at its own shape and only scrolls where the phone is too short', () => {
+    expect(yardLayout(9, 390, 720, 118, 92).content).toBe(720);
+    expect(yardLayout(9, 320, 568, 118, 92).content).toBe(568);
+    expect(yardLayout(9, 320, 400, 118, 92).content).toBeGreaterThan(400);
+    const { zoom, tall } = yardLayout(9, 390, 720, 118, 92);
+    expect(tall / (390 * zoom)).toBeCloseTo(YARD_TALL);
   });
 
   it('shows what the server says: wet soil only once watered, no plant where none was planted', async () => {
@@ -334,8 +401,40 @@ describe('the garden scene', () => {
     wrap(<GardenScreen user={USER as any} onOpenInventory={() => {}} />);
     expect(await screen.findByTestId('garden-soil-wet')).toBeTruthy();
     expect(screen.getByTestId('garden-world')).toBeTruthy();
-    expect(screen.getAllByText('Ô trống')).toHaveLength(5);
-    expect(screen.getByTestId('garden-pond')).toBeTruthy();
+    expect(screen.getAllByLabelText(/^Ô đất trống/)).toHaveLength(5);
+    expect(screen.queryByText('Ô trống', { includeHiddenElements: true })).toBeNull(); // its (+) says it
+    expect(screen.getByText('Đang lớn', { includeHiddenElements: true })).toBeTruthy();
+  });
+
+  it('a finger lands on one plot only, anywhere on it, whatever the phone', () => {
+    for (const [w, h] of [[320, 568], [360, 640], [390, 844], [430, 932], [768, 960]]) {
+      const areas = yardLayout(9, w, h, 98, 88).places.map((p) => ({ left: p.x - p.pitch / 2, right: p.x + p.pitch / 2, top: p.feet - p.h, bottom: p.feet, w: p.w, h: p.h, pitch: p.pitch }));
+      for (const area of areas) {
+        expect(area.pitch).toBeGreaterThanOrEqual(44);
+        expect(area.h).toBeGreaterThanOrEqual(44);
+        expect(area.pitch).toBeGreaterThanOrEqual(area.w); // the whole plot, up to its corners
+        expect(area.h).toBeGreaterThanOrEqual(area.w * BED_TALL - 0.01);
+      }
+      for (const [i, a] of areas.entries()) for (const b of areas.slice(i + 1)) {
+        const overlap = Math.min(a.right, b.right) - Math.max(a.left, b.left) > 0.01 && Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 0.01;
+        expect(overlap).toBe(false);
+      }
+    }
+  });
+
+  it('a plot takes its place from the screen alone, planted or not', async () => {
+    const spot = () => screen.getByTestId('garden-plot-0-area').props.style;
+    const SEED = { id: 'seed_daisy', variant: 'default', name: 'Hạt hoa cúc', rarity: 'common', rarity_label: 'Thường', group: 'seed', available: 2 };
+    mockServer({
+      'GET /api/garden': { status: 200, body: { ...garden([]), seeds: [SEED] } },
+      'POST /api/garden/plots/0/plant': { status: 200, body: { planted: true, replayed: false, garden: { ...garden([daisy(0)]), seeds: [SEED] } } },
+    });
+    wrap(<GardenScreen user={USER as any} onOpenInventory={() => {}} initialSeed={{ id: 'seed_daisy', variant: 'default' }} />);
+    const plot = await screen.findByLabelText('Ô đất trống 1, chạm để trồng Hạt hoa cúc');
+    const before = spot();
+    fireEvent.press(plot);
+    expect(await screen.findByLabelText(/^Hạt hoa cúc, Đang lớn/)).toBeTruthy();
+    expect(spot()).toEqual(before);
   });
 
   it('an answer that left the server before the one on screen can\'t bring the older garden back', async () => {
@@ -375,6 +474,34 @@ describe('the garden scene', () => {
       await act(async () => { answer({ status: 200, body: { cared: true, replayed: false, reason: null, garden: garden([daisy(0, { care: { water: { done: true, by: null, at: null }, tend: { done: false, by: null, at: null } } })]) } }); });
       expect(await screen.findByTestId('garden-water-fx')).toBeTruthy();
       expect(screen.getByTestId('garden-soil-wet')).toBeTruthy();
+    });
+
+    it('seeds are sown only after the server said yes, and not when it answers from a retry', async () => {
+      const SEED = { id: 'seed_daisy', variant: 'default', name: 'Hạt hoa cúc', rarity: 'common', rarity_label: 'Thường', group: 'seed', available: 2 };
+      let answer: (value: { status: number; body: unknown }) => void = () => {};
+      mockServer({
+        'GET /api/garden': { status: 200, body: { ...garden([]), seeds: [SEED] } },
+        'POST /api/garden/plots/0/plant': () => new Promise((r) => { answer = r; }),
+      });
+      wrap(<GardenScreen user={USER as any} onOpenInventory={() => {}} initialSeed={{ id: 'seed_daisy', variant: 'default' }} />);
+      fireEvent.press(await screen.findByLabelText('Ô đất trống 1, chạm để trồng Hạt hoa cúc'));
+      await act(async () => {});
+      expect(screen.queryByTestId('garden-seed-fx')).toBeNull();
+      await act(async () => { answer({ status: 200, body: { planted: false, replayed: true, garden: { ...garden([daisy(0)]), seeds: [SEED] } } }); });
+      expect(screen.queryByTestId('garden-seed-fx')).toBeNull();
+      fireEvent.press(await screen.findByLabelText('Ô đất trống 2, chạm để trồng Hạt hoa cúc'));
+      expect(await screen.findByLabelText('Ô đất trống 2, chạm để trồng Hạt hoa cúc')).toBeTruthy();
+    });
+
+    it('plays the sowing on the plot planted', async () => {
+      const SEED = { id: 'seed_daisy', variant: 'default', name: 'Hạt hoa cúc', rarity: 'common', rarity_label: 'Thường', group: 'seed', available: 2 };
+      mockServer({
+        'GET /api/garden': { status: 200, body: { ...garden([]), seeds: [SEED] } },
+        'POST /api/garden/plots/0/plant': { status: 200, body: { planted: true, replayed: false, garden: { ...garden([daisy(0)]), seeds: [SEED] } } },
+      });
+      wrap(<GardenScreen user={USER as any} onOpenInventory={() => {}} initialSeed={{ id: 'seed_daisy', variant: 'default' }} />);
+      fireEvent.press(await screen.findByLabelText('Ô đất trống 1, chạm để trồng Hạt hoa cúc'));
+      expect(await screen.findByTestId('garden-seed-fx')).toBeTruthy();
     });
   });
 });

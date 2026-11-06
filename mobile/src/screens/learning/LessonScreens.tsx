@@ -10,8 +10,10 @@ import { currentLesson, filterLessons, focusLesson, GROUP_LABEL, journey, Lesson
 import type { CatalogLesson, GameId, LessonExplore, LessonGame, LessonProgramme, SubjectLessons, UnlockedContent, UnlockRequirement } from '../../learning/types';
 import { appTheme as t } from '../../theme';
 import { Button, Card, IconName, ProgressBar, Segmented } from '../../ui/kit';
+import { useAtmosphere } from '../../world/atmosphere';
+import { useWeather } from '../../world/weather';
 import { BackHeader } from './GamePicker';
-import { JourneySectionView } from './JourneyMap';
+import { JourneySectionView, TrailBackdrop, TRAIL_SKY } from './JourneyMap';
 import { gameLook, HeaderIcon, IconBadge, Look } from './LearningUI';
 
 // Học tập theo bài (backend lesson_api.py): Học tập → môn → bài → trò chơi → Cách chơi (lần đầu) → 3-2-1 → Chơi → Kết quả.
@@ -70,6 +72,10 @@ export function SubjectLessonsScreen({ code, onBack, onOpen, onPractice, snapsho
   const restore = useRef(snapshot?.offset ?? 0);
   const list = useRef<FlatList<LessonCard>>(null);
   const map = useRef<ScrollView>(null);
+  const { reading } = useWeather();
+  const { night } = useAtmosphere(reading);
+  const [mapSize, setMapSize] = useState({ width: 0, height: 0 });
+  const [headerHeight, setHeaderHeight] = useState(0);
   // Bringing a point of the map into view: its area's place in the map and its own place in the area.
   const placed = useRef({ areas: new Map<string, number>(), points: new Map<string, { area: string; y: number }>() });
   const focus = useRef<string | null>(null);
@@ -170,13 +176,16 @@ export function SubjectLessonsScreen({ code, onBack, onOpen, onPractice, snapsho
     return (
       <ScrollView ref={map} contentContainerStyle={styles.listContent} showsVerticalScrollIndicator={false}
         onScroll={(e) => { latest.current.offset = e.nativeEvent.contentOffset.y; }} scrollEventThrottle={64}
-        onContentSizeChange={() => restoreScroll(toOffset)}>
-        {header}
+        onContentSizeChange={(width, height) => { setMapSize({ width, height }); restoreScroll(toOffset); }}>
+        {/* The hillside the lessons stand on, behind everything under the header. */}
+        {data && sections.length && mapSize.width ? <TrailBackdrop width={mapSize.width} top={headerHeight} height={mapSize.height - headerHeight} /> : null}
+        <View onLayout={(e) => setHeaderHeight(e.nativeEvent.layout.height)}>{header}</View>
+        {data && sections.length ? <View style={{ height: TRAIL_SKY }} /> : null}
         {data && !sections.length ? <Text style={styles.empty}>Môn này đang được biên soạn bài học.</Text> : null}
         {sections.map((section) => (
           <View key={section.key} onLayout={(e) => { placed.current.areas.set(section.key, e.nativeEvent.layout.y); bringIntoView(); }}>
             <JourneySectionView section={section} firstPlace={places.get(section.key) ?? 0} look={look} current={current} opening={glowing} hint={hint}
-              petId={petId} petLevel={petLevel} reduceMotion={reduceMotion} onPress={press} onOpenRequirement={onOpen}
+              petId={petId} petLevel={petLevel} reduceMotion={reduceMotion} night={night} onPress={press} onOpenRequirement={onOpen}
               onNodeLayout={(id, y) => { placed.current.points.set(id, { area: section.key, y }); bringIntoView(); }} />
           </View>
         ))}
@@ -338,11 +347,12 @@ export function LessonScreen({ lessonKey, onBack, onPlay, onResume, onHowTo, onO
         <View style={styles.actions}>
           {open ? (
             <Button title="Tiếp tục" icon="play" style={styles.flex} disabled={!!starting} onPress={() => onResume(open)} />
-          ) : game.explore?.exhausted && onReview ? (
+          ) : game.explore?.exhausted && game.progress.passed && onReview ? (
             <Button title="Ôn tập từ đã học" icon="refresh-circle-outline" style={styles.flex} loading={starting === game.game}
               disabled={lesson.locked || !!starting} onPress={() => onReview(game)} />
           ) : (
-            <Button title={game.progress.stages ? 'Chơi lại' : 'Bắt đầu'} icon="play" style={styles.flex} loading={starting === game.game}
+            // Not passed yet with no new word left: the backend plays the lesson's own words, which can still pass the game.
+            <Button title={game.explore?.exhausted ? 'Ôn tập từ của bài' : game.progress.stages ? 'Chơi lại' : 'Bắt đầu'} icon="play" style={styles.flex} loading={starting === game.game}
               disabled={lesson.locked || !game.playable || !!starting} onPress={() => onPlay(lesson, game)} />
           )}
           <Pressable onPress={() => onHowTo(game.game)} accessibilityRole="button" accessibilityLabel={`Cách chơi ${game.title}`} hitSlop={6}

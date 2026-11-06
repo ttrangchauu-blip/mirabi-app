@@ -24,6 +24,7 @@ from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
+from . import days
 from . import inventory as inv
 from . import items_catalog as cat
 from . import tasks as task_api
@@ -152,14 +153,14 @@ def map_view(db: Session, user: User, day: date) -> dict:
 
 @router.get("/map")
 def get_map(day: date | None = Query(default=None), user: User = Depends(life_user), db: Session = Depends(get_db)):
-    return map_view(db, user, day or utcnow().date())
+    return map_view(db, user, day or days.today())
 
 
 @router.get("/regions/{code}")
 def get_region(code: str, day: date | None = Query(default=None), user: User = Depends(life_user), db: Session = Depends(get_db)):
     if code not in REGION_BY_CODE:
         raise APIError(404, "region_not_found", "Region not found")
-    return next(r for r in map_view(db, user, day or utcnow().date())["regions"] if r["code"] == code)
+    return next(r for r in map_view(db, user, day or days.today())["regions"] if r["code"] == code)
 
 
 @router.get("/progress")
@@ -176,8 +177,8 @@ def start_activity(code: str, data: AdventureStart, user: User = Depends(life_us
     activity = ACTIVITIES.get(code)
     if activity is None:
         raise APIError(404, "activity_not_found", "Activity not found")
-    today = utcnow().date()
-    # The device's day may be a day off UTC either way; further back or more than a week ahead is refused.
+    today = days.today()
+    # The device's day may be a day off the server's either way; further back or more than a week ahead is refused.
     if not today - timedelta(days=1) <= data.scheduled_date <= today + timedelta(days=7):
         raise APIError(422, "invalid_day", "Pick today or a day in the coming week")
     if not unlocked(region_progress(db, user))[activity["region"]]:
@@ -229,7 +230,7 @@ def claim_milestone(milestone: str, day: date | None = Query(default=None), user
         except IntegrityError:
             db.rollback()
             already = True
-    view = map_view(db, user, day or utcnow().date())
+    view = map_view(db, user, day or days.today())
     region = next(r for r in view["regions"] if r["code"] == entry["region"])
     return {"milestone": next(m for m in region["milestones"] if m["code"] == milestone), "already_claimed": already,
             "rewards": rewards_view(entry["rewards"]), "map": view}

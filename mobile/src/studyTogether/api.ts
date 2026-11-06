@@ -81,7 +81,8 @@ export const togetherApi = {
   createQuest: (roomId: number, templateKey: string): Promise<TeamQuest> =>
     request(`/api/study-rooms/${roomId}/team-quests`, { method: 'POST', body: { template_key: templateKey } }),
 
-  notifications: (): Promise<{ items: SocialNotification[]; unread_count: number }> => request('/api/notifications'),
+  notifications: (beforeId?: number): Promise<{ items: SocialNotification[]; unread_count: number; next_before_id?: number | null }> =>
+    request(`/api/notifications${beforeId ? `?before_id=${beforeId}` : ''}`),
   markRead: (id: number) => request(`/api/notifications/${id}/read`, { method: 'POST' }),
   markAllRead: () => request('/api/notifications/read-all', { method: 'POST' }),
 

@@ -42,7 +42,7 @@ from .security import current_user
 
 router = APIRouter(prefix="/api/garden", tags=["garden"])
 
-PLOTS = 6
+PLOTS = 9
 # Hours after planting at which each stage starts: sprout, growing, grown.
 STAGE_HOURS = (0, 4, 12)
 STAGE_LABELS = ("Mới nảy mầm", "Đang lớn", "Đã lớn")

@@ -1,6 +1,5 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { keyOf } from '../../room/art';
-import { addItem, Change, dragTo, flipItem, moveItem, Problem, rotateItem, storeItem } from '../../room/rules';
+import { addItem, Change, dragTo, flipItem, moveItem, Problem, recolourItem, rotateItem, storeItem } from '../../room/rules';
 import type { Layout, RoomKind } from '../../room/types';
 
 const HISTORY = 50;
@@ -42,10 +41,8 @@ export function useRoomEditor(kind: RoomKind, maxItems: number) {
     move: (item: string, x: number, y: number) => (draft ? apply(moveItem(draft, item, x, y, kind)) : null),
     flip: () => (draft && selected ? apply(flipItem(draft, selected, kind)) : null),
     rotate: () => (draft && selected ? apply(rotateItem(draft, selected, kind)) : null),
-    /** Recolours the selected item (a found decoration's copy keeps the colour it was found in). */
-    variant: (variant: string) => {
-      if (draft && selected) commit({ ...draft, items: draft.items.map((p) => (keyOf(p) === selected && !p.uid ? { ...p, variant } : p)) });
-    },
+    /** Recolours the selected item (a found decoration's copy keeps the colour it was found in); returns the problem. */
+    variant: (variant: string) => (draft && selected ? apply(recolourItem(draft, selected, variant, kind)) : null),
     /** Back to the storage, with what stands on it: the ids stored, or the problem. */
     store: (): { stored: string[] } | { problem: Problem } | null => {
       if (!draft || !selected) return null;

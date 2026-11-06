@@ -1,5 +1,5 @@
 ﻿import React, { useState } from 'react';
-import { ActivityIndicator, Animated, Easing, Pressable, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Animated, AppState, Easing, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { useCallback, useEffect, useRef } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
@@ -18,9 +18,10 @@ import { useToast } from '../../ui/Toast';
 import { WalkLandscape } from './WalkLandscape';
 import { formatRemaining, normalizePetSpace, type PetSpace } from './petSpace';
 import { Dashboard, Quest, request, resolveQuestId, ScheduledTask, showError, taskRepeatDetail } from './shared';
+import { combineLocal, todayOf } from './taskDateTime';
 
 const DAYS = ['Chủ nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
-const todayLabel = (d = new Date()) => `${DAYS[d.getDay()]}, ${d.getDate()} tháng ${d.getMonth() + 1}`;
+const todayLabel = (day: string) => { const d = combineLocal(day, ''); return `${DAYS[d.getDay()]}, ${d.getDate()} tháng ${d.getMonth() + 1}`; };
 
 const SHORTCUTS: { icon: IconName; title: string; subtitle: string; tab: TabKey; color: string; bg: string; together?: boolean; focus?: boolean; friends?: boolean }[] = [
   { icon: 'timer-outline', title: 'Tập trung', subtitle: 'Pomodoro 25 phút', tab: 'Study', color: '#136FA8', bg: '#DDF0FA', focus: true },
@@ -29,7 +30,8 @@ const SHORTCUTS: { icon: IconName; title: string; subtitle: string; tab: TabKey;
   { icon: 'people-circle-outline', title: 'Học cùng bạn', subtitle: 'Phòng học nhóm', tab: 'Study', color: '#0B6577', bg: '#DFF6FA', together: true },
 ];
 
-type Props = { user: User; dashboard: Dashboard | null; onNavigate: (tab: TabKey) => void; onOpenProfile: () => void; onOpenStreak: () => void; onOpenDailyQuests: () => void; onOpenTaskCreate: (date: string, onCreated: (date: string) => void) => void; onQuestChanged: (quests: Quest[]) => Promise<void> | void;
+type Props = { user: User; dashboard: Dashboard | null;
+  /** The dashboard could not be read: nothing is known about today's tasks. */ dashboardFailed?: boolean; onRetryDashboard?: () => void; onNavigate: (tab: TabKey) => void; onOpenProfile: () => void; onOpenStreak: () => void; onOpenDailyQuests: () => void; onOpenTaskCreate: (date: string, onCreated: (date: string) => void) => void; onQuestChanged: (quests: Quest[]) => Promise<void> | void;
   /** Changes after the gift popup is confirmed, so the walk frame reloads. */ petSpaceVersion?: number;
   /** The pet is due back: the app asks the backend for its (already granted) gifts. */ onPetReturned?: () => void;
   /** "Xem quà": reopens the gift popup from the backend, or tells the user why there is none yet. */ onOpenPetGifts?: () => Promise<void>;
@@ -41,9 +43,8 @@ type Props = { user: User; dashboard: Dashboard | null; onNavigate: (tab: TabKey
   hatch?: { phase: HatchPhase; level: number | null; waitingReturn: boolean; onPlayed: () => void };
   /** Every answer of /api/pet/space, for the hatching to follow. */ onPetSpace?: (space: unknown) => void;
   /** Cuộc sống Mirabi → Bạn bè. */ onOpenFriends?: () => void };
-function localTodayIso() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; }
 
-export function HomeTab({ user, dashboard, onNavigate, onOpenProfile, onOpenStreak, onOpenDailyQuests, onOpenTaskCreate, onQuestChanged, petSpaceVersion = 0, onPetReturned, onOpenPetGifts, onOpenStudyTogether, onOpenFreeStudy, onOpenFriends, onOpenMemories, onOpenNotifications, hatch, onPetSpace }: Props) {
+export function HomeTab({ user, dashboard, dashboardFailed = false, onRetryDashboard, onNavigate, onOpenProfile, onOpenStreak, onOpenDailyQuests, onOpenTaskCreate, onQuestChanged, petSpaceVersion = 0, onPetReturned, onOpenPetGifts, onOpenStudyTogether, onOpenFreeStudy, onOpenFriends, onOpenMemories, onOpenNotifications, hatch, onPetSpace }: Props) {
   const pet = petById(user.pet);
   const petName = user.pet_name ?? pet.name;
   const today = dashboard?.study?.today_sessions ?? 0;
@@ -52,6 +53,8 @@ export function HomeTab({ user, dashboard, onNavigate, onOpenProfile, onOpenStre
   const ownTasks = (dashboard?.scheduled_tasks ?? []).filter((task) => task.kind !== 'daily_quest');
   const tasksTotal = quests.length + ownTasks.length;
   const tasksDone = quests.filter((q) => q.progress >= q.target).length + ownTasks.filter((task) => task.completed).length;
+  const tasksSummary = dashboard ? `${tasksDone}/${tasksTotal} nhiệm vụ hoàn thành` : dashboardFailed ? 'Chưa tải được nhiệm vụ' : 'Đang tải nhiệm vụ…';
+  const serverDay = todayOf(dashboard?.today);
   // While the egg hatches (and its congratulations are open) the frame shows the pet as it hatches.
   const hatchShown = !!hatch && hatch.phase !== 'idle' && hatch.level != null;
   const onPetSpaceRef = useRef(onPetSpace);
@@ -65,7 +68,8 @@ export function HomeTab({ user, dashboard, onNavigate, onOpenProfile, onOpenStre
   const serverTimeOffset = useRef(0);
   // Only the latest load may update the frame: an older answer arriving late (e.g. sent before the gift was confirmed) is stale.
   const petSpaceLoad = useRef(0);
-  const loadPetSpace = useCallback(async () => {
+  /** `quiet`: reads nobody asked for (the poll, coming back to the app) never interrupt with an alert; the frame offers its retry. */
+  const loadPetSpace = useCallback(async (quiet = false) => {
     const load = ++petSpaceLoad.current;
     try {
       const result = normalizePetSpace(await request('/api/pet/space'));
@@ -75,14 +79,18 @@ export function HomeTab({ user, dashboard, onNavigate, onOpenProfile, onOpenStre
       setPetSpace(result);
       if (result) onPetSpaceRef.current?.(result);
     }
-    catch (e) { if (load === petSpaceLoad.current) { setPetSpaceError(true); showError('Không tải được trạng thái đi dạo', e); } }
+    catch (e) { if (load === petSpaceLoad.current) { setPetSpaceError(true); if (!quiet) showError('Không tải được trạng thái đi dạo', e); } }
   }, []);
   useEffect(() => { void loadPetSpace(); }, [loadPetSpace, petSpaceVersion]);
+  useEffect(() => {
+    const sub = AppState.addEventListener('change', (next) => { if (next === 'active') void loadPetSpace(true); });
+    return () => sub.remove();
+  }, [loadPetSpace]);
   // Keep the frame in sync when the last quest is completed from another tab or
   // when an initial request fails. The backend remains the source of truth.
   useEffect(() => {
     if (petSpace && petSpace.status !== 'locked' && petSpace.status !== 'ready' && petSpace.status !== 'waiting_hatch') return;
-    const timer = setInterval(() => { void loadPetSpace(); }, 10000);
+    const timer = setInterval(() => { void loadPetSpace(true); }, 10000);
     return () => clearInterval(timer);
   }, [petSpace?.status, loadPetSpace]);
   useEffect(() => {
@@ -142,7 +150,7 @@ export function HomeTab({ user, dashboard, onNavigate, onOpenProfile, onOpenStre
           <Avatar name={user.display_name} theme={user.avatar_theme} size={40} />
         </Pressable>
         <View style={styles.flex}>
-          <Text style={styles.date}>{todayLabel()}</Text>
+          <Text style={styles.date}>{todayLabel(serverDay)}</Text>
           <Text style={styles.greeting} numberOfLines={1}>Chào bạn, {user.display_name}!</Text>
         </View>
         <View style={styles.headerActions}>
@@ -182,8 +190,8 @@ export function HomeTab({ user, dashboard, onNavigate, onOpenProfile, onOpenStre
           <PetEvolutionProgress pet={pet.id} currentPetLevel={hatch!.level!} totalExp={user.xp} hatching={hatch!.phase === 'hatching'} onHatched={hatch!.onPlayed} />
           {petSpace.status === 'waiting_hatch' ? <HatchNote text="Pet sẽ đi khám phá sau khi nở xong" /> : null}
         </> :
-        petSpace.status === 'walking' ? <WalkScene pet={pet.id} level={user.level} color={pet.element.color}
-          seconds={petSpace.seconds_left} walkMinutes={petSpace.walk_minutes} returnAt={petSpace.return_at} hatchNext={!!hatch?.waitingReturn} /> :
+        petSpace.status === 'walking' ? <WalkScene pet={pet.id} level={user.level}
+          seconds={petSpace.seconds_left} returnAt={petSpace.return_at} hatchNext={!!hatch?.waitingReturn} /> :
           petSpace.status === 'returned'
             ? <WalkReturnedScene pet={pet.id} name={petName} level={user.level} onOpenGifts={onOpenPetGifts ?? (async () => onPetReturned?.())} />
             : <>
@@ -193,40 +201,44 @@ export function HomeTab({ user, dashboard, onNavigate, onOpenProfile, onOpenStre
       </LinearGradient>
 
       <View style={styles.stats}>
-        <Stat icon="flame-outline" value={String(today)} label="Phiên hôm nay" />
-        <Stat icon="time-outline" value={formatNumber(dashboard?.study?.total_minutes ?? 0)} label="Phút tập trung" />
+        <Stat icon="flame-outline" value={dashboard ? String(today) : '–'} label="Phiên hôm nay" />
+        <Stat icon="time-outline" value={dashboard ? formatNumber(dashboard.study?.total_minutes ?? 0) : '–'} label="Phút tập trung" />
         <Stat icon="star-outline" value={formatNumber(user.xp)} label="XP" />
       </View>
 
       <Card style={styles.questCard}>
         <Pressable onPress={() => setTasksOpen((open) => !open)} accessibilityRole="button" accessibilityState={{ expanded: tasksOpen }}
-          accessibilityLabel={`Nhiệm vụ hằng ngày: ${tasksDone}/${tasksTotal} nhiệm vụ hoàn thành`} accessibilityHint={tasksOpen ? 'Thu gọn danh sách nhiệm vụ' : 'Mở danh sách nhiệm vụ'}
+          accessibilityLabel={`Nhiệm vụ hằng ngày: ${tasksSummary}`} accessibilityHint={tasksOpen ? 'Thu gọn danh sách nhiệm vụ' : 'Mở danh sách nhiệm vụ'}
           style={styles.questSummary}>
           <LinearGradient colors={t.primary} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.questBadge}><Ionicons name="ribbon" size={22} color="#FFFFFF" /></LinearGradient>
           <View style={styles.questSummaryCopy}>
             <Text style={styles.questSummaryTitle} accessibilityRole="header">Nhiệm vụ hằng ngày</Text>
-            <Text style={styles.questSummaryCount}>{tasksDone}/{tasksTotal} nhiệm vụ hoàn thành</Text>
+            <Text style={styles.questSummaryCount}>{tasksSummary}</Text>
             <ProgressBar value={tasksTotal ? tasksDone / tasksTotal : 0} animated />
           </View>
           <Ionicons name={tasksOpen ? 'chevron-up' : 'chevron-down'} size={20} color={t.muted} />
         </Pressable>
         {tasksOpen ? <View style={styles.questList}>
-        {quests.filter((q) => q.progress < q.target).length === 0 && !(dashboard?.scheduled_tasks?.some((task) => !task.completed)) ? <Text style={[styles.muted, styles.questAllDone]}>Bạn đã hoàn thành tất cả nhiệm vụ hôm nay!</Text> : <>
+        {!dashboard ? (dashboardFailed
+          ? <Pressable onPress={onRetryDashboard} accessibilityRole="button" accessibilityLabel="Tải lại nhiệm vụ" style={[styles.petRetry, styles.questRetry]}><Ionicons name="refresh" size={16} color={t.accent} /><Text style={styles.petRetryText}>Tải lại nhiệm vụ</Text></Pressable>
+          : <ActivityIndicator color={t.accent} style={styles.questAllDone} accessibilityLabel="Đang tải nhiệm vụ" />)
+          : tasksTotal === 0 ? <Text style={[styles.muted, styles.questAllDone]}>Hôm nay chưa có nhiệm vụ nào.</Text>
+          : quests.filter((q) => q.progress < q.target).length === 0 && !(dashboard?.scheduled_tasks?.some((task) => !task.completed)) ? <Text style={[styles.muted, styles.questAllDone]}>Bạn đã hoàn thành tất cả nhiệm vụ hôm nay!</Text> : <>
         {quests.filter((q) => q.progress < q.target).map((q, i) => (
           <Pressable key={q.id || q.title} onPress={() => completeQuest(q)} disabled={!!completing} accessibilityRole="checkbox" accessibilityState={{ checked: false, disabled: !!completing }} style={[styles.quest, i > 0 && styles.questDivider]}>
             <Ionicons name={completing === resolveQuestId(q, quests) ? 'time-outline' : 'ellipse-outline'} size={24} color={t.muted} />
-            <View style={styles.questCopy}><Text style={styles.questTitle}>{q.title}</Text><Text style={styles.questDetail}>{questDetail(resolveQuestId(q, quests) ?? '')}</Text></View>
+            <View style={styles.questCopy}><Text style={styles.questTitle}>{q.title}</Text><Text style={styles.questDetail}>{questDetail(q, resolveQuestId(q, quests) ?? '')}</Text></View>
             <Text style={styles.questProgress}>{q.progress}/{q.target}</Text>
           </Pressable>
         ))}
         {(dashboard?.scheduled_tasks ?? []).filter((task) => task.kind !== 'daily_quest' && !task.completed).map((task, i) => <Pressable key={task.occurrence_id} onPress={() => completeScheduledTask(task)} disabled={!!completing} accessibilityRole="checkbox" accessibilityState={{ checked: false, disabled: !!completing }} style={[styles.quest, (i > 0 || quests.some((q) => q.progress < q.target)) && styles.questDivider]}>
           <Ionicons name={completing === task.occurrence_id ? 'time-outline' : 'ellipse-outline'} size={24} color={t.muted} />
-          <View style={styles.questCopy}><Text style={styles.questTitle}>{task.title}</Text><Text style={styles.questDetail}>{taskCategory(task.category)} · {taskSchedule(task)} · {taskDifficulty()}</Text></View>
+          <View style={styles.questCopy}><Text style={styles.questTitle}>{task.title}</Text><Text style={styles.questDetail}>{taskCategory(task.category)} · {taskSchedule(task)} · +{task.exp ?? 5} EXP</Text></View>
           <Text style={styles.questProgress}>0/1</Text>
         </Pressable>)}
         </>}
         <View style={[styles.questDivider, styles.questFooter]}>
-          <Pressable onPress={() => onOpenTaskCreate(localTodayIso(), () => onQuestChanged(quests))} accessibilityRole="button" accessibilityLabel="Thêm nhiệm vụ mới"
+          <Pressable onPress={() => onOpenTaskCreate(serverDay, () => onQuestChanged(quests))} accessibilityRole="button" accessibilityLabel="Thêm nhiệm vụ mới"
             style={({ pressed }) => [styles.addTaskRow, pressed && styles.pressed]}>
             <View style={styles.addTaskIcon}><Ionicons name="add" size={18} color={t.accent} /></View>
             <Text style={styles.addTaskText}>Thêm nhiệm vụ</Text>
@@ -270,19 +282,28 @@ function HatchNote({ text }: { text: string }) {
   </View>;
 }
 
+const WALK_ONE_LINE_WIDTH = 390;
+
 /** `hatchNext`: the egg got its EXP during the walk; it keeps its shape and hatches once the pet is back. */
-function WalkScene({ pet, level, color, seconds, walkMinutes, returnAt, hatchNext }: { pet: string; level: number; color: string; seconds: number; walkMinutes: number; returnAt?: string | null; hatchNext: boolean }) {
+function WalkScene({ pet, level, seconds, returnAt, hatchNext }: { pet: string; level: number; seconds: number; returnAt?: string | null; hatchNext: boolean }) {
   const opacity = useWalkEntrance();
-  const total = Math.max(1, walkMinutes * 60);
-  const fraction = Math.max(0, Math.min(1, 1 - seconds / total));
+  const { width: screenWidth, fontScale } = useWindowDimensions();
+  // The time left and the arrival share a line where they fit; on a narrow phone or with large text the arrival goes under it.
+  const oneLine = screenWidth / fontScale >= WALK_ONE_LINE_WIDTH;
+  const remaining = formatRemaining(seconds);
   const arrival = returnAt ? new Date(returnAt).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }) : '';
   return <Animated.View style={[styles.walkContent, { opacity, transform: [{ translateY: opacity.interpolate({ inputRange: [0, 1], outputRange: [8, 0] }) }] }]}>
     <WalkLandscape pet={pet} level={level} />
-    <Text style={styles.walkHeroTitle}>Pet đang đi dạo...</Text>
-    <Text style={styles.walkHeroCopy}>Bé đang khám phá thế giới và tìm một món quà bất ngờ cho bạn!</Text>
-    <View style={styles.walkTimerRow}><Ionicons name="time-outline" size={16} color={color} /><Text style={[styles.walkTimer, { color }]}>{formatRemaining(seconds)}</Text><Text style={styles.walkArrival}>{arrival ? `Về lúc ${arrival}` : 'Thời gian trở về'}</Text></View>
-    <ProgressBar value={fraction} color={color} />
-    <View style={styles.walkGiftLine}><Ionicons name="gift-outline" size={15} color="#966718" /><Text style={styles.mysteryRewardText}>Pet sẽ mang quà về cho bạn khi trở về</Text></View>
+    {/* Two lines at most. Very large text may take more: a sentence cut short helps nobody. */}
+    <Text style={styles.walkHeadline} numberOfLines={fontScale > 1.3 ? undefined : 2}>Bé đang khám phá thế giới và tìm kiếm những món quà bất ngờ!</Text>
+    <View style={styles.walkTime} accessible accessibilityLabel={`Còn lại ${remaining}${arrival ? `, dự kiến về lúc ${arrival}` : ''}`}>
+      <View style={styles.walkTimeRow}>
+        <Text style={styles.walkTimer}>{remaining}</Text>
+        <Text style={styles.walkTimerUnit}>còn lại</Text>
+        {arrival ? <Text style={[styles.walkArrival, !oneLine && styles.walkArrivalOwnLine]}>{oneLine ? '· ' : ''}Dự kiến về lúc <Text style={styles.walkArrivalTime}>{arrival}</Text></Text> : null}
+      </View>
+    </View>
+    <View style={styles.walkGiftLine}><Ionicons name="gift-outline" size={15} color="#966718" /><Text style={styles.mysteryRewardText}>Pet sẽ mang quà về sau chuyến khám phá.</Text></View>
     {hatchNext ? <HatchNote text="Trứng đã đủ EXP · sẽ nở khi Pet trở về" /> : null}
   </Animated.View>;
 }
@@ -323,19 +344,19 @@ function Stat({ icon, value, label }: { icon: IconName; value: string; label: st
   );
 }
 
-function questDetail(id: string) {
+/** The server's words and EXP. The three built-in quests of accounts without chosen tasks come without them. */
+function questDetail(quest: Quest, id: string) {
   const descriptions: Record<string, string> = { focus: 'Hoàn thành một phiên tập trung.', lesson: 'Mở và khám phá một bài học.', share: 'Chia sẻ một điều tích cực với cộng đồng.' };
-  return `${descriptions[id] ?? 'Chạm để đánh dấu nhiệm vụ hoàn thành.'} · +10 EXP`;
+  return `${quest.description ?? descriptions[id] ?? 'Chạm để đánh dấu nhiệm vụ hoàn thành.'} · +${quest.exp ?? 10} EXP`;
 }
 
 function taskCategory(category: string) {
-  const labels: Record<string, string> = { study: 'Học tập', health: 'Sức khỏe', habit: 'Thói quen', personal: 'Cá nhân', other: 'Khác' };
+  const labels: Record<string, string> = { study: 'Học tập', health: 'Sức khỏe', habit: 'Thói quen', personal: 'Cá nhân', work: 'Công việc', other: 'Khác' };
   return labels[category] ?? category;
 }
 function taskSchedule(task: ScheduledTask) {
   return `${task.start_time ? `${task.start_time}${task.end_time ? `–${task.end_time}` : ''} · ` : ''}${taskRepeatDetail(task)}`;
 }
-function taskDifficulty() { return '+5 EXP'; }
 function expRewardMessage(awarded: number, remaining: number) {
   if (awarded > 0) return `+${awarded} EXP`;
   if (remaining <= 0) return 'Đã chạm giới hạn EXP nhiệm vụ hôm nay.';
@@ -364,10 +385,16 @@ const styles = StyleSheet.create({
   petRetry: { minHeight: 40, flexDirection: 'row', alignItems: 'center', gap: 7, borderRadius: 13, backgroundColor: t.tint, paddingHorizontal: 14 }, petRetryText: { color: t.accent, fontSize: 12, fontWeight: '900' },
   walkHeroTitle: { color: t.ink, fontSize: 20, fontWeight: '900', textAlign: 'center' },
   walkHeroCopy: { color: t.muted, fontSize: 12, lineHeight: 18, textAlign: 'center', marginTop: 4, maxWidth: 310 },
+  walkHeadline: { color: t.ink, fontSize: 12, lineHeight: 17, fontWeight: '400', textAlign: 'center', maxWidth: 240 },
   walkContent: { alignItems: 'center', paddingHorizontal: 8, paddingBottom: 4 },
-  walkTimerRow: { minHeight: 26, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 5 },
-  walkTimer: { fontSize: 17, fontWeight: '900', fontVariant: ['tabular-nums'] }, walkArrival: { color: t.muted, fontSize: 10, fontWeight: '700', marginLeft: 3 },
-  walkGiftLine: { flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 6 },
+  walkTime: { alignSelf: 'stretch', marginTop: 6 },
+  walkTimeRow: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'center', columnGap: 5 },
+  walkTimer: { color: t.accent, fontSize: 26, lineHeight: 32, fontWeight: '900', fontVariant: ['tabular-nums'] },
+  walkTimerUnit: { color: t.muted, fontSize: 12, fontWeight: '700' },
+  walkArrival: { color: t.muted, fontSize: 12, fontWeight: '600' },
+  walkArrivalOwnLine: { width: '100%', textAlign: 'center' },
+  walkArrivalTime: { color: t.ink, fontWeight: '900' },
+  walkGiftLine: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 8, paddingHorizontal: 12, paddingVertical: 6, borderRadius: 999, backgroundColor: '#FFF8E5' },
   hatchNote: { alignSelf: 'center', flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 8, backgroundColor: '#FFFFFFCC',
     borderRadius: 999, paddingHorizontal: 12, paddingVertical: 6 },
   hatchNoteText: { color: t.accent, fontSize: 11, fontWeight: '800' },
@@ -413,6 +440,7 @@ const styles = StyleSheet.create({
   questSummaryCount: { fontSize: 13, fontWeight: '700', color: t.muted, marginBottom: 2 },
   questList: { marginTop: 12, borderTopWidth: 1, borderTopColor: t.tint },
   questAllDone: { paddingVertical: 12 },
+  questRetry: { alignSelf: 'center', marginVertical: 10 },
   questFooter: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 2 },
   addTaskRow: { minHeight: 44, flexDirection: 'row', alignItems: 'center', gap: 12 },
   addTaskIcon: { width: 24, height: 24, borderRadius: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: t.tint },

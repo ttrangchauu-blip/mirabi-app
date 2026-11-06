@@ -12,6 +12,7 @@ from fastapi import APIRouter, Depends, Query
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import delete, func, select
 from sqlalchemy.orm import Session
+from . import days
 from .db import get_db
 from .errors import APIError
 from .models import User, UserTask, UserTaskCompletion, UserTaskStep, UserTaskStepCompletion, WorkProject, as_utc, utcnow
@@ -144,8 +145,8 @@ def list_occurrences(user: User, start_date: date, end_date: date, db: Session,
     # The built-in daily quests use Activity/StudySession records rather than user_tasks.
     # Include them in today's calendar as all-day entries so completed quests remain visible.
     # The mobile calendar uses the device's local date. Accept it as a display
-    # date so built-in daily quests don't disappear around UTC midnight.
-    today = quest_date or utcnow().date()
+    # date so built-in daily quests don't disappear when it differs from the server's day.
+    today = quest_date or days.today()
     if start_date <= today <= end_date:
         for quest in daily_quests(user, db):
             result.append({"id": quest["id"], "occurrence_id": f"quest:{quest['id']}:{today.isoformat()}",
@@ -189,7 +190,7 @@ def task_detail(db: Session, task: UserTask, day: date) -> dict:
 def get_tasks(start_date: date | None = Query(default=None), end_date: date | None = Query(default=None),
               quest_date: date | None = Query(default=None),
               user: User = Depends(current_user), db: Session = Depends(get_db)):
-    today = utcnow().date()
+    today = days.today()
     start = start_date or today
     end = end_date or start
     return list_occurrences(user, start, end, db, quest_date)
@@ -267,6 +268,8 @@ def complete_task(task_id: int, data: UserTaskComplete, user: User = Depends(cur
     task = owned_task(db, user, task_id)
     if not _occurs(task, data.occurrence_date):
         raise APIError(409, "task_not_scheduled", "Task is not scheduled for this date")
+    # Under the per-user lock: of several taps or devices at once, one completes it and the others see it done.
+    lock_daily_goals(db, user.id)
     completion = db.scalar(select(UserTaskCompletion).where(
         UserTaskCompletion.task_id == task.id,
         UserTaskCompletion.occurrence_date == data.occurrence_date,
@@ -286,6 +289,7 @@ def complete_task(task_id: int, data: UserTaskComplete, user: User = Depends(cur
             already_completed = True
         maybe_start_walk(user, db)  # this may have been the last goal of today
     else:
+        db.commit()  # releases the lock
         awarded = 0
     detail = task_detail(db, task, data.occurrence_date)
     return {**detail, "completed": True, "awarded_exp": awarded,

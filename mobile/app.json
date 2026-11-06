@@ -50,8 +50,8 @@
       [
         "expo-media-library",
         {
-          "photosPermission": "Mirabi cần quyền thư viện ảnh để lưu ảnh kỷ niệm.",
-          "savePhotosPermission": "Mirabi lưu ảnh kỷ niệm vào thư viện ảnh của bạn.",
+          "photosPermission": "Mirabi cần quyền thư viện ảnh để lưu ảnh kỷ niệm và ảnh bạn chụp trong Khám phá.",
+          "savePhotosPermission": "Mirabi lưu ảnh kỷ niệm và ảnh bạn chụp trong Khám phá vào thư viện ảnh của bạn.",
           "isAccessMediaLocationEnabled": false
         }
       ],

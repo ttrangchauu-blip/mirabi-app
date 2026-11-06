@@ -59,7 +59,7 @@ export function MemoryAlbumScreen({ user, onBack, initialMemoryId = null }: { us
     {loading ? <State title="Đang mở album…" loading /> : error ? <State title="Chưa tải được album" action="Thử lại" onPress={() => void load()} /> : !items.length ? <State {...emptyCategory[category]} action="Tạo kỷ niệm" onPress={() => setCreate(true)} />
       : <FlatList data={rows} keyExtractor={x => x.key} contentContainerStyle={s.list} onEndReached={() => cursor && !more && void load(cursor)}
         renderItem={({ item }) => item.kind === 'month' ? <Text style={s.month}>{item.key.slice(2)}</Text> : <View style={s.row}>{item.values.map(x => <MemoryCard key={x.id} item={x} onPress={() => void open(x)} />)}{item.values.length === 1 && <View style={s.spacer} />}</View>} ListFooterComponent={more ? <ActivityIndicator color={t.accent} /> : null} />}
-    <CreateModal visible={create} user={user} onClose={() => setCreate(false)} onSaved={m => { setCreate(false); setItems(old => [m, ...old]); toast('Đã lưu kỷ niệm mới!', 'success', { label: 'Xem', onPress: () => setDetail(m) }); }} />
+    <CreateModal visible={create} user={user} onClose={() => setCreate(false)} onSaved={m => { setCreate(false); if (category === 'all') setItems(old => [m, ...old]); else void load(); toast('Đã lưu kỷ niệm mới!', 'success', { label: 'Xem', onPress: () => setDetail(m) }); }} />
     <DetailModal memory={detail} onClose={() => setDetail(null)} onChanged={changed} onDeleted={id => { setDetail(null); setItems(old => old.filter(x => x.id !== id)); }} />
   </LinearGradient>;
 }

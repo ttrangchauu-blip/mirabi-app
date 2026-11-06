@@ -57,11 +57,13 @@ export function AdventureMapScreen({ user, onBack, onRewards, onOpenInventory }:
       const before = data?.regions.filter((r) => r.unlocked).length ?? 0;
       const result = await adventureApi.complete(taskId, day);
       setBurst((b) => b + 1);
-      const fresh = await adventureApi.map();
-      setData(fresh);
-      const opened = fresh.regions.filter((r) => r.unlocked).length > before;
-      toast(opened ? '🎉 Vùng mới đã mở khóa!' : result.awarded_exp ? `Hoàn thành! +${result.awarded_exp} EXP` : 'Hoàn thành!', 'success');
       if (result.awarded_exp) onRewards?.();
+      // It is done from here on, whether or not the map can be read again right now.
+      const fresh = await adventureApi.map().catch(() => null);
+      if (fresh) setData(fresh);
+      else setData((shown) => shown && { ...shown, regions: shown.regions.map((r) => ({ ...r, tasks_today: r.tasks_today.map((x) => (x.id === taskId ? { ...x, completed: true } : x)) })) });
+      const opened = !!fresh && fresh.regions.filter((r) => r.unlocked).length > before;
+      toast(opened ? '🎉 Vùng mới đã mở khóa!' : result.awarded_exp ? `Hoàn thành! +${result.awarded_exp} EXP` : 'Hoàn thành!', 'success');
     } catch (e) { showError('Chưa đánh dấu được', e); }
     finally { setBusy(null); }
   }

@@ -296,13 +296,22 @@ function JournalSheet({ visible, gratitude, mood, onClose, onSaved }: {
   const [good, setGood] = useState(['', '', '']);
   const [album, setAlbum] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [older, setOlder] = useState<number | null>(null);
+  const [loadingOlder, setLoadingOlder] = useState(false);
   const opened = useRef(Date.now());
   useEffect(() => {
     if (!visible) return;
     opened.current = Date.now();
     setTitle(gratitude ? 'Ba điều tích cực hôm nay' : ''); setContent(''); setGood(['', '', '']); setAlbum(false); setError(false);
-    healingApi.journal().then((r) => setItems(r.items)).catch(() => { setItems([]); setError(true); });
+    healingApi.journal().then((r) => { setItems(r.items); setOlder(r.next_before); }).catch(() => { setItems([]); setOlder(null); setError(true); });
   }, [visible, gratitude]);
+  const loadOlder = async () => {
+    if (older === null) return;
+    setLoadingOlder(true);
+    try { const r = await healingApi.journal(older); setItems((list) => [...(list ?? []), ...r.items]); setOlder(r.next_before); }
+    catch (e) { showError('Chưa tải được nhật ký', e); }
+    finally { setLoadingOlder(false); }
+  };
   const body = gratitude ? good.map((g, i) => (g.trim() ? `${i + 1}. ${g.trim()}` : '')).filter(Boolean).join('\n') : content.trim();
   const save = async () => {
     setSaving(true);
@@ -359,6 +368,7 @@ function JournalSheet({ visible, gratitude, mood, onClose, onSaved }: {
                   <Text style={s.pageBody} numberOfLines={4}>{entry.content}</Text>
                 </View>
               ))}
+            {older !== null && !error ? <Button title="Xem trang nhật ký cũ hơn" variant="ghost" loading={loadingOlder} onPress={() => { void loadOlder(); }} /> : null}
           </ScrollView>
         </View>
       </KeyboardAvoidingView>

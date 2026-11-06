@@ -40,7 +40,8 @@ class User(Base):
     school_grade: Mapped[str | None] = mapped_column(String(20), nullable=True)
     # Học tập, THPT: the elective subjects the learner says they study (JSON list of subject codes), shown first.
     study_subjects: Mapped[str | None] = mapped_column(Text, nullable=True)
-    equipped_item: Mapped[str] = mapped_column(String(80), default="Vương miện pha lê")
+    # The room decoration the user chose (companion.ROOM_ITEMS). Nobody starts with one.
+    equipped_item: Mapped[str | None] = mapped_column(String(80), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     updated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow, nullable=True)
 
@@ -117,6 +118,15 @@ class CommunityPost(Base):
     body: Mapped[str] = mapped_column(Text)
     image_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
     likes: Mapped[int] = mapped_column(Integer, default=0)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+class CommunityPostLike(Base):
+    """Who liked a post, once each (community.py). `community_posts.likes` is the count shown."""
+    __tablename__ = "community_post_likes"
+    __table_args__ = (UniqueConstraint("post_id", "user_id", name="uq_community_post_like"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    post_id: Mapped[int] = mapped_column(ForeignKey("community_posts.id", ondelete="CASCADE"), index=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 
 class Activity(Base):
@@ -1248,7 +1258,7 @@ class LearningSkillProgress(Base):
 
 
 class LearningReviewItem(Base):
-    """An entry on the user's "cần ôn" list. status: open | cleared. Cleared by a first-try correct answer in a later
+    """An entry on the user's "cần ôn" list. status: open | cleared | archived (made for another grade). Cleared by a first-try correct answer in a later
     session; a reveal or a new mistake reopens it."""
     __tablename__ = "learning_review_items"
     __table_args__ = (UniqueConstraint("user_id", "lesson_id", "question_key", name="uq_learning_review_item"),

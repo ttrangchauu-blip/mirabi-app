@@ -159,7 +159,13 @@ def contribute(project_id: int, data: TownContribution, response: Response, user
     if previous is None:
         if project.status != "active":
             raise APIError(409, "project_completed", "This building is already finished")
+        inv.lock_user(db, user.id)
+        # What this user's other requests finished while this one waited: the same contribution, or today's limit.
+        previous = db.scalar(select(CommunityContribution).where(CommunityContribution.user_id == user.id,
+                                                                 CommunityContribution.client_ref == data.client_ref))
+    if previous is None:
         if contributed_today(db, user) + data.amount > DAILY_CONTRIBUTION_LIMIT:
+            db.rollback()
             raise APIError(429, "contribution_limit", f"At most {DAILY_CONTRIBUTION_LIMIT} coins a day")
         paid = db.execute(update(User).where(User.id == user.id, User.coins >= data.amount)
                           .values(coins=User.coins - data.amount).execution_options(synchronize_session=False)).rowcount
@@ -179,6 +185,7 @@ def contribute(project_id: int, data: TownContribution, response: Response, user
             db.rollback()
             previous = True
     else:
+        db.commit()  # lets go of the lock
         response.status_code = 200
     db.refresh(user)
     db.refresh(project)
@@ -213,8 +220,6 @@ def send_gift(data: TownGift, response: Response, user: User = Depends(life_user
     item = cat.ITEMS.get(data.item_id)
     if item is None or item["group"] == "keepsake":
         raise APIError(422, "item_not_giftable", "This item can't be given")
-    if gifts_today(db, user) >= DAILY_GIFT_LIMIT:
-        raise APIError(429, "gift_limit", f"At most {DAILY_GIFT_LIMIT} gifts a day")
     inv.lock_user(db, user.id)
     # The same gift sent a moment ago by another request (it held the lock first): answer as a repeat.
     previous = db.scalar(select(GiftTransfer).where(GiftTransfer.sender_id == user.id, GiftTransfer.client_ref == data.client_ref))
@@ -222,6 +227,9 @@ def send_gift(data: TownGift, response: Response, user: User = Depends(life_user
         db.commit()
         response.status_code = 200
         return {"gift": gift_view(previous, user.id, {}), "already_sent": True}
+    if gifts_today(db, user) >= DAILY_GIFT_LIMIT:  # under the lock, so gifts sent at once can't pass it together
+        db.rollback()
+        raise APIError(429, "gift_limit", f"At most {DAILY_GIFT_LIMIT} gifts a day")
     if not inv.use_one(db, user.id, data.item_id, data.variant):
         db.rollback()
         raise APIError(409, "item_not_available", "You don't have a free copy of this item")
@@ -268,7 +276,10 @@ def giftable_items(user: User = Depends(life_user), db: Session = Depends(get_db
 
 
 def log_visit(db: Session, visitor_id: int, owner_id: int) -> None:
-    """Called when a friend's room is opened (room_visits.visit_room); at most one row per pair and VISIT_LOG_GAP."""
+    """Called when a friend's room is opened (room_visits.visit_room); at most one row per pair and VISIT_LOG_GAP. A
+    visit with someone under 16 is not the town's to keep: it only shows and reaches accounts that may use Mirabi Life."""
+    if not all(person is not None and life_eligible(person) for person in (db.get(User, visitor_id), db.get(User, owner_id))):
+        return
     since = utcnow() - VISIT_LOG_GAP
     if db.scalar(select(VisitLog.id).where(VisitLog.visitor_id == visitor_id, VisitLog.owner_id == owner_id,
                                            VisitLog.visited_at >= since).limit(1)) is None:
@@ -282,7 +293,8 @@ def visit_history(days: int = Query(default=30, ge=1, le=90), user: User = Depen
                                                   VisitLog.visited_at >= since).order_by(VisitLog.visited_at.desc()).limit(100)))
     hidden = blocked_ids(db, user.id)
     other = {r.owner_id if r.visitor_id == user.id else r.visitor_id for r in rows} - hidden
-    names = dict(db.execute(select(User.id, User.display_name).where(User.id.in_(other))).all()) if other else {}
+    # Only accounts of 16 and over, also for visits logged before they (or the rule) said otherwise.
+    names = {u.id: u.display_name for u in db.scalars(select(User).where(User.id.in_(other))) if life_eligible(u)} if other else {}
     return [{"direction": "out" if r.visitor_id == user.id else "in",
              "user_id": r.owner_id if r.visitor_id == user.id else r.visitor_id,
              "display_name": names[r.owner_id if r.visitor_id == user.id else r.visitor_id],

@@ -345,6 +345,87 @@ describe('personal room', () => {
     expect(screen.getByText(/Ngoại tuyến · phòng đã lưu/)).toBeTruthy();
   });
 
+  it('offline the saved room is read only: no decorating and no renaming', async () => {
+    let online = true;
+    const server = mockServer({ 'GET /api/auth/me': { status: 200, body: USER },
+      'GET /api/personal-room': () => (online ? { status: 200, body: room() } : networkDown()) });
+    await openRoom();
+    expect(await screen.findByTestId('room-header')).toBeTruthy();
+    screen.unmount();
+    online = false;
+    await openRoom();
+    expect(await screen.findByText(/Ngoại tuyến · phòng đã lưu/)).toBeTruthy();
+    await fromSettings();
+    expect(await screen.findByText('Cần kết nối mạng để trang trí phòng.')).toBeTruthy();
+    expect(screen.queryByTestId('decorate-panel')).toBeNull();
+    await fromSettings('Đổi tên phòng');
+    expect(await screen.findByText('Cần kết nối mạng để đổi tên phòng.')).toBeTruthy();
+    expect(screen.queryByLabelText('Tên phòng')).toBeNull();
+    expect(server.callsTo('PUT /api/personal-room')).toHaveLength(0);
+  });
+
+  it('a read that arrives while decorating never moves the draft onto a newer version of the room', async () => {
+    let otherDevice = false;
+    const server = mockServer({ 'GET /api/auth/me': { status: 200, body: USER },
+      'GET /api/personal-room': () => ({ status: 200, body: otherDevice
+        ? room({ walk: { away: false, return_at: null } }, { version: 2 })
+        : room({ walk: { away: true, return_at: new Date(realNow() + 500).toISOString() } }) }),
+      // As the backend does: only the version it holds now is accepted.
+      'PUT /api/personal-room': (req) => (req.body.version === (otherDevice ? 2 : 1)
+        ? { status: 200, body: { room: { ...room().room, version: req.body.version + 1 } } }
+        : { status: 409, body: { code: 'room_version_conflict', detail: 'changed' } }) });
+    await openRoom();
+    await fromSettings();
+    expect(await screen.findByTestId('decorate-panel')).toBeTruthy();
+    // Another device saves; then the timer of the walk ending reads the room again, under this draft.
+    otherDevice = true;
+    const reads = server.callsTo('GET /api/personal-room').length;
+    await waitFor(() => expect(server.callsTo('GET /api/personal-room').length).toBeGreaterThan(reads), { timeout: 8000 });
+    await act(async () => { await new Promise((resolve) => setTimeout(resolve, 50)); });
+    fireEvent.press(screen.getByRole('button', { name: 'Lưu' }));
+    expect(await screen.findByText('Phòng vừa được cập nhật')).toBeTruthy();
+    expect(server.callsTo('PUT /api/personal-room')[0].body.version).toBe(1);
+    expect(screen.queryByText('Đã lưu phòng!')).toBeNull();
+  });
+
+  describe('a decoration that arrived after the room was opened', () => {
+    const FOUND_GROUPS = [...GROUPS, { id: 'found', label: 'Đồ khám phá' }];
+    const POT = { item: 'small_pot', item_id: 'small_pot', variant: 'default', name: 'Chậu cây nhỏ', rarity: 'rare', rarity_label: 'Hiếm', owned: 1, placed: 0, available: 1 };
+    const INVENTORY_POT = { id: 'small_pot', variant: 'default', name: 'Chậu cây nhỏ', description: 'Một chậu cây.', group: 'plant', group_label: 'Cây trang trí', tab: 'decor',
+      rarity: 'rare', rarity_label: 'Hiếm', use: 'room', use_label: 'Phòng', rooms: ['personal', 'focus'], art: 'small_pot', owned: 1, placed: 0, available: 1, is_new: false,
+      first_obtained_at: '2026-10-01T08:00:00+00:00', last_obtained_at: '2026-10-01T08:00:00+00:00' };
+
+    it('is in the panel when decorating starts', async () => {
+      let received = false;
+      mockServer({ 'GET /api/auth/me': { status: 200, body: USER },
+        'GET /api/personal-room': () => ({ status: 200, body: room({ catalog: { ...CATALOG, groups: FOUND_GROUPS, found: received ? [POT] : [] } }) }) });
+      await openRoom();
+      expect(await screen.findByTestId('room-header')).toBeTruthy();
+      received = true; // the pet came back, or a friend sent it, with the room on screen
+      await fromSettings();
+      fireEvent.press(await screen.findByRole('tab', { name: 'Đồ khám phá' }));
+      expect(await screen.findByRole('button', { name: /Chậu cây nhỏ.*Còn 1/ })).toBeTruthy();
+    });
+
+    it('can be placed from Kho đồ opened while decorating', async () => {
+      const server = mockServer({ 'GET /api/auth/me': { status: 200, body: USER },
+        'GET /api/inventory': { status: 200, body: { tabs: [], rarities: [], uses: [], server_now: '2026-10-29T08:00:00+00:00', items: [INVENTORY_POT] } },
+        'GET /api/inventory/items/small_pot?variant=default': { status: 200, body: { item: INVENTORY_POT, placements: [], history: [], memory_id: null, walk_id: null } },
+        'GET /api/personal-room': { status: 200, body: room({ catalog: { ...CATALOG, groups: FOUND_GROUPS, found: [] } }) },
+        'PUT /api/personal-room': { status: 200, body: { room: { ...room().room, version: 2 } } } });
+      await openRoom();
+      await fromSettings();
+      fireEvent.press(await screen.findByRole('button', { name: 'Kho đồ' }));
+      fireEvent.press(await screen.findByLabelText('Chậu cây nhỏ, Hiếm, Còn 1'));
+      fireEvent.press(await screen.findByRole('button', { name: 'Đặt vào phòng này' }));
+      expect(await screen.findByText(/^Đã thêm Chậu cây nhỏ/)).toBeTruthy();
+      expect(screen.queryByText(/^Đã đặt hết/)).toBeNull();
+      fireEvent.press(screen.getByRole('button', { name: 'Lưu' }));
+      await waitFor(() => expect(server.callsTo('PUT /api/personal-room')).toHaveLength(1));
+      expect(server.callsTo('PUT /api/personal-room')[0].body.items).toEqual(expect.arrayContaining([expect.objectContaining({ item: 'small_pot', uid: 'new-1' })]));
+    });
+  });
+
   const friend = { id: 2, display_name: 'Mây', avatar_theme: 'aqua', pet: 'cat', pet_name: 'Bông', pet_level: 2, public_code: 'ABCD2345', presence: 'online', room: null,
     can_visit: true, accepts_study_invites: true };
   const visited = (over: Record<string, any> = {}) => ({

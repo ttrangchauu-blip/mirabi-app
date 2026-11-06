@@ -1,34 +1,56 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Animated, Easing, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Animated, Easing, Image, type ImageSourcePropType, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-import Svg, { Circle, Defs, Ellipse, G, LinearGradient as SvgGradient, Path, Polygon, Rect, Stop } from 'react-native-svg';
 import type { User } from '../../auth/AuthContext';
 import { ItemIcon } from '../../components/ItemIcon';
 import { PetArt } from '../../components/PetArt';
 import { Text } from '../../components/Typography';
-import { useDayPeriod } from '../../components/useDayPeriod';
 import { useReduceMotion } from '../../components/useReduceMotion';
+import { ApiError } from '../../api/client';
 import { clientRef, townApi, type GiftableItem, type TownFriend, type TownMap, type TownProject } from '../../life/worlds';
 import { appTheme as t } from '../../theme';
 import { useConfirm } from '../../ui/ConfirmDialog';
 import { Button, ProgressBar } from '../../ui/kit';
 import { useToast } from '../../ui/Toast';
+import { useAtmosphere } from '../../world/atmosphere';
+import { ContactShadow, Plate } from '../../world/diorama';
+import { Rain, Snow, WeatherChip } from '../../world/living';
+import { LiveSky } from '../../world/liveSky';
+import { useWeather } from '../../world/weather';
 import { showError } from '../main/shared';
 import { BackHeader, ErrorState, OptionSheet, PetAvatar } from '../together/ui';
 import { StarBurst, useLoop } from '../work/workArt';
+import { type Box, TOWN_ART, TOWN_BANNER, TOWN_DOORS, TOWN_LAMPS, TOWN_PAVING, TOWN_PLACES, TOWN_RATIO, TOWN_RIDGE, TOWN_SPRAY, type TownArt } from './townArt';
 
 type Props = { user: User; onBack: () => void; onVisitRoom: (userId: number) => void; onVisitGarden: (userId: number) => void;
   onOpenFriends: () => void };
 
-const HEIGHT = 300;
-const HOUSE_GAP = 110;
+/** The land stands on the card's bottom edge; what is above it is open sky. */
+const LAND = 268;
+const HEIGHT = LAND + 52;
+const SKY = HEIGHT - LAND;
+const LENGTH = Math.round(LAND * TOWN_RATIO);
 const MAX_HOUSES = 12;
-const ROOFS = ['#E2715E', '#F0B44C', '#7A9FE0', '#9B5DE5', '#5DAF6A'];
-/** Where each place stands along the street (points from the left). */
-const AT = { square: 20, garden: 230, plaza: 420, shop: 560, hall: 690, houses: 820 };
+/** A place's tappable width and how far down the picture it starts, as shares of the street. */
+const WIDE = { fountain: 0.088, garden: 0.082, plaza: 0.066, shop: 0.066, hall: 0.066 } as const;
+const PLOT = 0.0505;
+const REACH_TOP = 0.3;
+const NAME_MARGIN = 54;
+const PET_SIZE = 56;
+/** A friend's pet waits on the lawn beside the path to the door: how far right of the door, and how far down the picture its feet are. */
+const PET_FROM_DOOR = 8;
+const PET_FOOT = 0.905;
+/** The house on a card: its width in points, and what it shows of the street, as shares across and from the top. */
+const CARD_WIDE = 116;
+const CARD_SHARE = 0.056;
+const CARD_TOP = 0.52;
+const LANTERN = require('../../../assets/world/town/lantern.webp');
 
-type Sheet = null | { kind: 'friend'; friend: TownFriend } | { kind: 'project'; project: TownProject } | { kind: 'events' } | { kind: 'shop' }
+type Sheet = null | { kind: 'friend'; friend: TownFriend } | { kind: 'project'; project: TownProject } | { kind: 'events' } | { kind: 'shop'; to?: number }
   | { kind: 'hall' } | { kind: 'visits' };
+/** One request's `client_ref`: the same until the backend gave a final answer, so a retry after a lost answer counts once. */
+type Requests = { refFor: (key: string) => string; settled: (key: string) => void };
 
 /**
  * Thị trấn Mirabi: the friends system as a little town to walk around. Friends Street has a house for every friend
@@ -43,21 +65,34 @@ export function TownScreen({ user, onBack, onVisitRoom, onVisitGarden, onOpenFri
   const [error, setError] = useState<unknown>(null);
   const [sheet, setSheet] = useState<Sheet>(null);
   const [burst, setBurst] = useState(0);
-  const night = useDayPeriod() === 'night';
+  const [card, setCard] = useState(0);
+  const { reading } = useWeather();
+  const sky = useAtmosphere(reading);
+  const night = sky.night;
   const load = useCallback(async () => {
     try { setTown(await townApi.map()); setError(null); } catch (e) { setError(e); }
   }, []);
   useEffect(() => { void load(); }, [load]);
+  const refs = useRef(new Map<string, string>());
+  const requests: Requests = {
+    refFor: (key) => { const ref = refs.current.get(key) ?? clientRef(); refs.current.set(key, ref); return ref; },
+    settled: (key) => { refs.current.delete(key); },
+  };
 
   async function contribute(project: TownProject, amount: number) {
+    const key = `contribute:${project.id}:${amount}`;
     try {
-      const result = await townApi.contribute(project.id, amount, clientRef());
+      const result = await townApi.contribute(project.id, amount, requests.refFor(key));
+      requests.settled(key);
       setTown((m) => m && { ...m, me: { ...m.me, coins: result.coins }, contribution_left_today: result.contribution_left_today,
         projects: m.projects.map((p) => (p.id === project.id ? result.project : p)) });
       setSheet({ kind: 'project', project: result.project });
       setBurst((b) => b + 1);
       toast(result.project.status === 'completed' ? `🎉 ${result.project.name} đã hoàn thành!` : `Đã góp ${amount} xu. Cảm ơn bạn!`, 'success');
-    } catch (e) { showError('Chưa góp được', e); }
+    } catch (e) {
+      if (e instanceof ApiError) requests.settled(key); // refused: a new tap is a new request
+      showError('Chưa góp được', e);
+    }
   }
   async function report(friend: TownFriend) {
     if (!(await confirm({ title: `Báo cáo ${friend.display_name}?`, message: 'Mirabi sẽ xem xét nội dung không phù hợp. Người này không biết ai đã báo cáo.',
@@ -80,7 +115,10 @@ export function TownScreen({ user, onBack, onVisitRoom, onVisitGarden, onOpenFri
   const lanterns = project('lantern_street');
   const activeEvent = town.events.find((e) => e.status === 'active');
   // The street goes on as far as the last friend's house.
-  const width = AT.houses + Math.max(1, Math.min(MAX_HOUSES, town.friends.length)) * HOUSE_GAP + 40;
+  const shown = town.friends.slice(0, MAX_HOUSES);
+  const width = Math.round(Math.min(1, TOWN_DOORS[Math.max(0, shown.length - 1)][0] + PLOT * 0.8) * LENGTH);
+  const art = TOWN_ART[night ? 'night' : 'day'];
+  const ridge = SKY + LAND * TOWN_RIDGE;
   return (
     <View style={s.fill} testID="town">
       <BackHeader title="Thị trấn Mirabi" subtitle={`${town.friends.length} người bạn trong thị trấn`} onBack={onBack}
@@ -89,30 +127,33 @@ export function TownScreen({ user, onBack, onVisitRoom, onVisitGarden, onOpenFri
           <Pressable onPress={() => setSheet({ kind: 'visits' })} hitSlop={8} style={s.iconBtn} accessibilityRole="button" accessibilityLabel="Lịch sử ghé thăm">
             <Ionicons name="time-outline" size={20} color={t.accent} /></Pressable></View>} />
       <ScrollView contentContainerStyle={s.content} showsVerticalScrollIndicator={false}>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={s.street} contentContainerStyle={{ width, height: HEIGHT }}>
-          <StreetArt night={night} lanternStage={lanterns?.stage ?? 0} width={width} />
-          <Place x={AT.square} label="Quảng trường" onPress={() => fountain && setSheet({ kind: 'project', project: fountain })}>
-            <Fountain stage={fountain?.stage ?? 0} />
-          </Place>
-          <Place x={AT.garden} label="Vườn Cộng đồng" onPress={() => garden && setSheet({ kind: 'project', project: garden })}>
-            <CommunityGarden stage={garden?.stage ?? 0} />
-          </Place>
-          <Place x={AT.plaza} label="Sân Sự kiện" onPress={() => setSheet({ kind: 'events' })}>
-            <Plaza title={activeEvent?.title} />
-          </Place>
-          <Place x={AT.shop} label="Tiệm Quà tặng" onPress={() => setSheet({ kind: 'shop' })}><Shop /></Place>
-          <Place x={AT.hall} label="Sảnh Thành tựu" onPress={() => setSheet({ kind: 'hall' })}><Hall /></Place>
-          {town.friends.length === 0 ? (
-            <Place x={AT.houses} label="Phố Bạn bè" onPress={onOpenFriends}><House roof="#C9D3DC" empty /></Place>
-          ) : null}
-          {town.friends.slice(0, MAX_HOUSES).map((f, i) => (
-            <Place key={f.id} x={AT.houses + i * HOUSE_GAP} label={f.display_name} onPress={() => setSheet({ kind: 'friend', friend: f })}>
-              <House roof={ROOFS[i % ROOFS.length]} lit={night} />
-            </Place>
-          ))}
-          <Walker user={user} width={width} />
-          <StarBurst burstKey={burst} />
-        </ScrollView>
+        <View style={s.street} onLayout={(e) => setCard(e.nativeEvent.layout.width)} testID="town-street">
+          {/* The sky's palest colour meets the land. */}
+          <LinearGradient colors={sky.light.sky} end={{ x: 0, y: Math.min(1, (ridge + 24) / HEIGHT) }} style={StyleSheet.absoluteFill} />
+          {card ? <LiveSky id="town" width={card} ridge={ridge} hours={sky.hours} c={sky.light} cover={sky.mood.cover} /> : null}
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={StyleSheet.absoluteFill} contentContainerStyle={{ width, height: HEIGHT }}>
+            <StreetArt art={art} fountain={fountain?.stage ?? 0} garden={garden?.stage ?? 0} houses={shown.length} night={night} lanternStage={lanterns?.stage ?? 0} width={width} />
+            <Place x={TOWN_PLACES.fountain} wide={WIDE.fountain} label="Quảng trường" onPress={() => fountain && setSheet({ kind: 'project', project: fountain })} />
+            <Place x={TOWN_PLACES.garden} wide={WIDE.garden} label="Vườn Cộng đồng" onPress={() => garden && setSheet({ kind: 'project', project: garden })} />
+            <Place x={TOWN_PLACES.plaza} wide={WIDE.plaza} label="Sân Sự kiện" onPress={() => setSheet({ kind: 'events' })} />
+            <Place x={TOWN_PLACES.shop} wide={WIDE.shop} label="Tiệm Quà tặng" onPress={() => setSheet({ kind: 'shop' })} />
+            <Place x={TOWN_PLACES.hall} wide={WIDE.hall} label="Sảnh Thành tựu" onPress={() => setSheet({ kind: 'hall' })} />
+            {town.friends.length === 0 ? <Place x={TOWN_DOORS[0][0]} wide={PLOT} label="Phố Bạn bè" onPress={onOpenFriends} /> : null}
+            {shown.map((f, i) => <Place key={f.id} x={TOWN_DOORS[i][0]} wide={PLOT} label={f.display_name} onPress={() => setSheet({ kind: 'friend', friend: f })} />)}
+            {shown.map((f, i) => (
+              <View key={f.id} style={[s.housePet, { left: TOWN_DOORS[i][0] * LENGTH + PET_FROM_DOOR, top: SKY + PET_FOOT * LAND - PET_SIZE }]} pointerEvents="none">
+                <ContactShadow width={44} height={10} opacity={0.4} style={s.petShadow} />
+                <PetArt pet={f.pet} stage={f.pet_level} size={PET_SIZE} still />
+              </View>
+            ))}
+            {fountain && fountain.stage >= 2 ? <Spray stage={fountain.stage} /> : null}
+            {activeEvent ? <Banner title={activeEvent.title} /> : null}
+            <Walker user={user} width={width} />
+            <StarBurst burstKey={burst} />
+          </ScrollView>
+          <View style={s.weather} pointerEvents="none"><WeatherChip night={night} tone={night ? 'light' : 'dark'} /></View>
+          {card ? <><Rain width={card} height={HEIGHT} strength={sky.mood.rain} wind={sky.mood.wind} ground={0.94} /><Snow width={card} height={HEIGHT} strength={sky.mood.snow} /></> : null}
+        </View>
         <Text style={s.hint}>Vuốt ngang để dạo quanh thị trấn · chạm vào một nơi để ghé</Text>
 
         <Text style={s.section} accessibilityRole="header">🏘️ Phố Bạn bè</Text>
@@ -124,7 +165,7 @@ export function TownScreen({ user, onBack, onVisitRoom, onVisitGarden, onOpenFri
             {town.friends.map((f, i) => (
               <Pressable key={f.id} onPress={() => setSheet({ kind: 'friend', friend: f })} style={s.houseCard} accessibilityRole="button"
                 accessibilityLabel={`Nhà của ${f.display_name}`} testID={`house-${f.id}`}>
-                <House roof={ROOFS[i % ROOFS.length]} lit={night} />
+                <HouseCardArt art={art} index={i} />
                 <View style={s.houseOwner}><PetAvatar user={{ pet: f.pet, pet_level: f.pet_level }} size={22} /><Text style={s.houseName} numberOfLines={1}>{f.display_name}</Text></View>
               </Pressable>
             ))}
@@ -149,7 +190,7 @@ export function TownScreen({ user, onBack, onVisitRoom, onVisitGarden, onOpenFri
             <Button title="Ghé thăm phòng" icon="home-outline" disabled={!sheet.friend.can_visit} onPress={() => { setSheet(null); onVisitRoom(sheet.friend.id); }} />
             {!sheet.friend.can_visit ? <Text style={s.note}>Bạn này đang tắt chế độ cho ghé thăm.</Text> : null}
             <Button title="Ghé vườn nhà" icon="leaf-outline" variant="secondary" onPress={() => { setSheet(null); onVisitGarden(sheet.friend.id); }} />
-            <Button title="Gửi quà" icon="gift-outline" variant="secondary" onPress={() => setSheet({ kind: 'shop' })} />
+            <Button title="Gửi quà" icon="gift-outline" variant="secondary" onPress={() => setSheet({ kind: 'shop', to: sheet.friend.id })} />
             <Button title="Báo cáo" icon="flag-outline" variant="ghost" onPress={() => { void report(sheet.friend); }} />
           </> : sheet?.kind === 'project' ? <>
             <Text style={s.note}>{sheet.project.description}</Text>
@@ -169,7 +210,7 @@ export function TownScreen({ user, onBack, onVisitRoom, onVisitGarden, onOpenFri
                 <Text style={s.note}>{e.description}</Text>
                 <Text style={s.small}>{e.status === 'active' ? `Kết thúc ${new Date(e.end_at).toLocaleDateString('vi-VN')}` : `Bắt đầu ${new Date(e.start_at).toLocaleDateString('vi-VN')}`}</Text>
               </View>))
-          ) : sheet?.kind === 'shop' ? <GiftShop friends={town.friends} left={town.gifts_left_today} initial={null}
+          ) : sheet?.kind === 'shop' ? <GiftShop friends={town.friends} left={town.gifts_left_today} initial={sheet.to ?? null} requests={requests}
             onSent={() => { setSheet(null); setBurst((b) => b + 1); toast('🎁 Đã gửi quà!', 'success'); void load(); }} />
           : sheet?.kind === 'hall' ? town.achievements.map((a, i) => (
             <View key={a.user_id} style={[s.hallRow, a.me && s.hallMe]}>
@@ -186,13 +227,17 @@ export function TownScreen({ user, onBack, onVisitRoom, onVisitGarden, onOpenFri
 const sheetTitle = (sheet: Sheet) => !sheet ? '' : sheet.kind === 'friend' ? `Nhà của ${sheet.friend.display_name}` : sheet.kind === 'project' ? sheet.project.name
   : sheet.kind === 'events' ? '🎪 Sân Sự kiện' : sheet.kind === 'shop' ? '🎁 Tiệm Quà tặng' : sheet.kind === 'hall' ? '🏆 Sảnh Thành tựu' : 'Lịch sử ghé thăm';
 
-function GiftShop({ friends, left, initial, onSent }: { friends: TownFriend[]; left: number; initial: number | null; onSent: () => void }) {
+function GiftShop({ friends, left, initial, requests, onSent }: { friends: TownFriend[]; left: number; initial: number | null; requests: Requests; onSent: () => void }) {
   const [items, setItems] = useState<GiftableItem[] | null>(null);
   const [to, setTo] = useState<number | null>(initial ?? friends[0]?.id ?? null);
   const [item, setItem] = useState<GiftableItem | null>(null);
   const [sending, setSending] = useState(false);
-  const ref = useRef(clientRef());
-  useEffect(() => { townApi.giftable().then(setItems).catch(() => setItems([])); }, []);
+  const [failed, setFailed] = useState(false);
+  const loadItems = useCallback(() => {
+    setFailed(false);
+    townApi.giftable().then(setItems).catch(() => setFailed(true));
+  }, []);
+  useEffect(loadItems, [loadItems]);
   if (!friends.length) return <Text style={s.note}>Kết bạn để gửi quà nhé.</Text>;
   return (
     <View style={s.sheet}>
@@ -201,7 +246,8 @@ function GiftShop({ friends, left, initial, onSent }: { friends: TownFriend[]; l
         <Pressable key={f.id} onPress={() => setTo(f.id)} style={[s.pick, to === f.id && s.pickOn]} accessibilityRole="radio" accessibilityState={{ selected: to === f.id }}
           accessibilityLabel={f.display_name}><Text style={s.pickText}>{f.display_name}</Text></Pressable>))}</View>
       <Text style={s.label}>Món quà từ Kho đồ</Text>
-      {items === null ? <Text style={s.note}>Đang tải…</Text> : items.length === 0 ? <Text style={s.note}>Kho đồ chưa có món nào có thể tặng.</Text> : (
+      {failed ? <Pressable onPress={loadItems} accessibilityRole="button"><Text style={s.note}>Chưa tải được Kho đồ. Chạm để thử lại.</Text></Pressable>
+        : items === null ? <Text style={s.note}>Đang tải…</Text> : items.length === 0 ? <Text style={s.note}>Kho đồ chưa có món nào có thể tặng.</Text> : (
         <View style={s.rowWrap}>{items.map((i) => (
           <Pressable key={`${i.id}.${i.variant}`} onPress={() => setItem(i)} style={[s.giftItem, item === i && s.pickOn]} accessibilityRole="radio"
             accessibilityState={{ selected: item === i }} accessibilityLabel={`${i.name}, còn ${i.free}`}>
@@ -210,8 +256,13 @@ function GiftShop({ friends, left, initial, onSent }: { friends: TownFriend[]; l
       <Text style={s.small}>Hôm nay còn gửi được {left} món quà.</Text>
       <Button title="Gửi quà" icon="gift" loading={sending} disabled={!to || !item || left <= 0} onPress={async () => {
         setSending(true);
-        try { await townApi.sendGift(to!, item!, ref.current); ref.current = clientRef(); onSent(); }
-        catch (e) { showError('Chưa gửi được quà', e); }
+        // One gift, one request: another friend or item is another gift, never answered "already sent" for this one.
+        const key = `gift:${to}:${item!.id}.${item!.variant}`;
+        try { await townApi.sendGift(to!, item!, requests.refFor(key)); requests.settled(key); onSent(); }
+        catch (e) {
+          if (e instanceof ApiError) requests.settled(key); // refused: a new tap is a new request
+          showError('Chưa gửi được quà', e);
+        }
         finally { setSending(false); }
       }} />
     </View>
@@ -220,7 +271,13 @@ function GiftShop({ friends, left, initial, onSent }: { friends: TownFriend[]; l
 
 function VisitHistory() {
   const [rows, setRows] = useState<Awaited<ReturnType<typeof townApi.visits>> | null>(null);
-  useEffect(() => { townApi.visits().then(setRows).catch(() => setRows([])); }, []);
+  const [failed, setFailed] = useState(false);
+  const loadRows = useCallback(() => {
+    setFailed(false);
+    townApi.visits().then(setRows).catch(() => setFailed(true));
+  }, []);
+  useEffect(loadRows, [loadRows]);
+  if (failed) return <Pressable onPress={loadRows} accessibilityRole="button"><Text style={s.note}>Chưa tải được lịch sử ghé thăm. Chạm để thử lại.</Text></Pressable>;
   if (rows === null) return <Text style={s.note}>Đang tải…</Text>;
   if (!rows.length) return <Text style={s.note}>Chưa có lượt ghé thăm nào trong 30 ngày qua.</Text>;
   return <>{rows.map((r, i) => (
@@ -229,39 +286,72 @@ function VisitHistory() {
       <Text style={s.small}>{new Date(r.visited_at).toLocaleDateString('vi-VN')}</Text></View>))}</>;
 }
 
-function Place({ x, label, onPress, children }: { x: number; label: string; onPress: () => void; children?: React.ReactNode }) {
+/** A place on the street: all of it can be tapped, its name stands on the paving in front of it. */
+function Place({ x, wide, label, onPress }: { x: number; wide: number; label: string; onPress: () => void }) {
+  const center = Math.max(NAME_MARGIN, x * LENGTH);
+  const reach = wide * LENGTH;
   return (
-    <Pressable onPress={onPress} style={[s.place, { left: x }]} accessibilityRole="button" accessibilityLabel={label}>
-      {children}
-      <Text style={s.placeName} numberOfLines={1}>{label}</Text>
+    <Pressable onPress={onPress} style={[s.place, { left: center - reach / 2, width: reach, top: SKY + REACH_TOP * LAND }]} accessibilityRole="button" accessibilityLabel={label}>
+      <View style={[s.nameRow, { left: reach / 2 - NAME_MARGIN, top: (TOWN_PAVING - REACH_TOP) * LAND - 10 }]} pointerEvents="none">
+        <Text style={s.placeName} numberOfLines={1}>{label}</Text>
+      </View>
     </Pressable>
   );
 }
 
-/** Sky (by the clock), hills, the road and street lamps that glow at night; lanterns hang as Phố Đèn lồng is built. */
-function StreetArt({ night, lanternStage, width: STREET }: { night: boolean; lanternStage: number; width: number }) {
+/** The rendered street and what stands on it now. Patches are the same picture with a stage or a house in it, the lamps glow at night, and a lantern hangs on a lamp for each step of Phố Đèn lồng. */
+function StreetArt({ art, fountain, garden, houses, night, lanternStage, width: STREET }: { art: TownArt; fountain: number; garden: number; houses: number; night: boolean; lanternStage: number; width: number }) {
   const glow = useLoop(1800, night);
-  const lamps = Array.from({ length: Math.floor(STREET / 250) }, (_, i) => 140 + i * 250);
+  const tile = LENGTH / art.land.length;
+  const patch = (source: ImageSourcePropType, box: Box, key: string) => <Plate key={key} source={source} width={box[2] * LENGTH} height={box[3] * LAND} style={{ left: box[0] * LENGTH, top: SKY + box[1] * LAND }} />;
+  const fountainAt = Math.min(4, fountain) - 1, gardenAt = Math.min(4, garden) - 1;
+  const lamps = TOWN_LAMPS.filter(([x]) => x * LENGTH < STREET);
   return (
-    <View style={StyleSheet.absoluteFill} pointerEvents="none" importantForAccessibility="no-hide-descendants" accessibilityElementsHidden>
-      <Svg width={STREET} height={HEIGHT}>
-        <Defs><SvgGradient id="tsky" x1="0" y1="0" x2="0" y2="1">
-          <Stop offset="0" stopColor={night ? '#22305E' : '#A9DDF7'} /><Stop offset="1" stopColor={night ? '#4B4F8A' : '#E9F7FF'} /></SvgGradient></Defs>
-        <Rect width={STREET} height={HEIGHT} fill="url(#tsky)" />
-        {night ? Array.from({ length: Math.floor(STREET / 160) }, (_, i) => <Circle key={i} cx={60 + i * 160} cy={24 + (i % 3) * 16} r="1.6" fill="#FFF7D6" />)
-          : <Circle cx={STREET - 100} cy={46} r={22} fill="#FFE59A" />}
-        <Path d={`M0 200 Q160 150 320 190 T640 180 T${STREET} 185 V${HEIGHT} H0 Z`} fill={night ? '#3E5A7A' : '#9BD3A8'} />
-        <Rect x="0" y="244" width={STREET} height="56" fill={night ? '#5B5A6A' : '#CDBFAE'} />
-        <Rect x="0" y="268" width={STREET} height="3" fill={night ? '#E6D9A8' : '#FFFFFF'} opacity={0.7} strokeDasharray="14 10" />
-        {lamps.map((x) => <G key={x}><Rect x={x} y="190" width="4" height="56" fill="#56616E" /><Circle cx={x + 2} cy="188" r="7" fill={night ? '#FFE27A' : '#E8EDF2'} /></G>)}
-        {lanternStage > 0 ? Array.from({ length: Math.min(lanternStage * 4, Math.floor(STREET / 56)) }, (_, i) => (
-          <G key={i}><Rect x={40 + i * 56} y="150" width="1" height="10" fill="#8E5A34" /><Ellipse cx={40.5 + i * 56} cy="164" rx="6" ry="7" fill="#E2715E" /></G>)) : null}
-      </Svg>
-      {night ? lamps.map((x) => (
-        <Animated.View key={x} style={[s.lampGlow, { left: x - 26, opacity: glow ? glow.interpolate({ inputRange: [0, 1], outputRange: [0.35, 0.6] }) : 0.5 }]} />
+    <View style={[StyleSheet.absoluteFill, s.clip]} pointerEvents="none" importantForAccessibility="no-hide-descendants" accessibilityElementsHidden>
+      {art.land.map((source, i) => <Plate key={i} source={source} width={tile + 1} height={LAND} style={{ left: i * tile, top: SKY }} />)}
+      {fountainAt >= 0 ? patch(art.fountain[fountainAt], art.fountainBoxes[fountainAt], 'fountain') : null}
+      {gardenAt >= 0 ? patch(art.garden[gardenAt], art.gardenBoxes[gardenAt], 'garden') : null}
+      {art.houses.slice(0, houses).map((source, i) => patch(source, art.houseBoxes[i], `house-${i}`))}
+      {lamps.slice(0, lanternStage * 4).map(([x, y]) => (
+        <Image key={x} source={LANTERN} style={[s.lantern, { left: x * LENGTH - 8, top: SKY + y * LAND + 6 }]} resizeMode="stretch" fadeDuration={0} accessibilityIgnoresInvertColors />))}
+      {night ? lamps.map(([x, y]) => (
+        <Animated.View key={x} style={[s.lampGlow, { left: x * LENGTH - 40, top: SKY + y * LAND - 40, opacity: glow ? glow.interpolate({ inputRange: [0, 1], outputRange: [0.7, 1] }) : 0.85 }]}><ContactShadow width={80} height={80} color="#FFE9A8" opacity={0.7} /></Animated.View>
       )) : null}
     </View>
   );
+}
+
+/** A friend's house on its own bit of the street, for the card under the street. */
+function HouseCardArt({ art, index }: { art: TownArt; index: number }) {
+  const i = index % art.houses.length;
+  const length = CARD_WIDE / CARD_SHARE;
+  const tall = length / TOWN_RATIO;
+  const tile = length / art.land.length;
+  const left = Math.min(1 - CARD_SHARE, TOWN_DOORS[i][0] - CARD_SHARE / 2) * length;
+  const top = CARD_TOP * tall;
+  const box = art.houseBoxes[i];
+  return (
+    <View style={s.houseArt}>
+      {art.land.map((source, t) => (t * tile < left + CARD_WIDE && (t + 1) * tile > left ? <Plate key={t} source={source} width={tile + 1} height={tall} style={{ left: t * tile - left, top: -top }} /> : null))}
+      <Plate source={art.houses[i]} width={box[2] * length} height={box[3] * tall} style={{ left: box[0] * length - left, top: box[1] * tall - top }} />
+    </View>
+  );
+}
+
+/** Water from the fountain's spout, on the stages that have one. */
+function Spray({ stage }: { stage: number }) {
+  const spray = useLoop(900, true);
+  const [x, y] = TOWN_SPRAY[Math.min(4, stage) - 2];
+  if (!spray) return null;
+  return <Animated.View pointerEvents="none" style={[s.spray, { left: x * LENGTH - 15, top: SKY + y * LAND - 8, opacity: spray.interpolate({ inputRange: [0, 1], outputRange: [0.35, 0.95] }),
+    transform: [{ translateY: spray.interpolate({ inputRange: [0, 1], outputRange: [0, -8] }) }] }]}><View style={s.drop} /><View style={[s.drop, s.dropHigh]} /><View style={s.drop} /></Animated.View>;
+}
+
+/** The running event's name, hung over the stage. */
+function Banner({ title }: { title: string }) {
+  const wave = useLoop(1400, true);
+  return <Animated.View pointerEvents="none" style={[s.banner, { left: TOWN_BANNER[0] * LENGTH - 60, top: SKY + TOWN_BANNER[1] * LAND - 10, transform: [{ rotate: wave ? wave.interpolate({ inputRange: [0, 1], outputRange: ['-2deg', '2deg'] }) : '0deg' }] }]}>
+    <Text style={s.bannerText} numberOfLines={1}>{title}</Text></Animated.View>;
 }
 
 /** My pet strolls along the road, back and forth (still with reduced motion). */
@@ -287,79 +377,6 @@ function Walker({ user, width }: { user: User; width: number }) {
   );
 }
 
-function Fountain({ stage }: { stage: number }) {
-  const spray = useLoop(900, stage >= 2);
-  return (
-    <View style={s.art}>
-      <Svg width={150} height={110} viewBox="0 0 150 110">
-        <Ellipse cx="75" cy="96" rx={20 + stage * 12} ry={6 + stage * 2} fill="#9CC7E4" />
-        {stage >= 1 ? <Ellipse cx="75" cy="92" rx={18 + stage * 10} ry={5 + stage * 2} fill="#BFE6FA" stroke="#C9C2B8" strokeWidth="3" /> : <Rect x="45" y="86" width="60" height="10" fill="#C9C2B8" />}
-        {stage >= 3 ? <Rect x="70" y="56" width="10" height="36" fill="#D8D2C8" /> : null}
-        {stage >= 4 ? <Ellipse cx="75" cy="56" rx="22" ry="6" fill="#BFE6FA" stroke="#C9C2B8" strokeWidth="2" /> : null}
-      </Svg>
-      {stage >= 2 && spray ? <Animated.Text style={[s.spray, { opacity: spray.interpolate({ inputRange: [0, 1], outputRange: [0.4, 0.95] }),
-        transform: [{ translateY: spray.interpolate({ inputRange: [0, 1], outputRange: [0, -8] }) }] }]}>💧</Animated.Text> : null}
-    </View>
-  );
-}
-
-function CommunityGarden({ stage }: { stage: number }) {
-  const sway = useLoop(2000);
-  return (
-    <Animated.View style={[s.art, { transform: [{ rotate: sway ? sway.interpolate({ inputRange: [0, 1], outputRange: ['-1deg', '1deg'] }) : '0deg' }] }]}>
-      <Svg width={150} height={100} viewBox="0 0 150 100">
-        <Rect x="10" y="70" width="130" height="24" rx="6" fill="#8E5A34" />
-        {Array.from({ length: 2 + stage * 3 }, (_, i) => (
-          <G key={i}><Rect x={18 + i * 9} y={70 - 10 - (i % 3) * 4} width="2" height={10 + (i % 3) * 4} fill="#5DAF6A" />
-            <Circle cx={19 + i * 9} cy={60 - (i % 3) * 4} r="4" fill={['#F2A2B0', '#F7CF7A', '#B9A6F0'][i % 3]} /></G>))}
-      </Svg>
-    </Animated.View>
-  );
-}
-
-function Plaza({ title }: { title?: string }) {
-  const wave = useLoop(1400, !!title);
-  return (
-    <View style={s.art}>
-      <Svg width={130} height={100} viewBox="0 0 130 100">
-        <Rect x="10" y="60" width="110" height="34" rx="4" fill="#C98E5A" /><Rect x="18" y="30" width="4" height="34" fill="#8E5A34" /><Rect x="108" y="30" width="4" height="34" fill="#8E5A34" />
-        <Polygon points="10,30 120,30 112,18 18,18" fill="#9B5DE5" />
-      </Svg>
-      {title ? <Animated.View style={[s.banner, { transform: [{ rotate: wave ? wave.interpolate({ inputRange: [0, 1], outputRange: ['-2deg', '2deg'] }) : '0deg' }] }]}>
-        <Text style={s.bannerText} numberOfLines={1}>{title}</Text></Animated.View> : null}
-    </View>
-  );
-}
-
-function Shop() {
-  return (
-    <View style={s.art}><Svg width={110} height={100} viewBox="0 0 110 100">
-      <Rect x="12" y="40" width="86" height="56" fill="#FFF3E0" /><Polygon points="6,42 55,10 104,42" fill="#F27BAA" />
-      <Rect x="12" y="40" width="86" height="10" fill="#F7B5CB" /><Rect x="44" y="64" width="22" height="32" fill="#8E5A34" /><Rect x="20" y="58" width="18" height="16" fill="#BFE6FA" />
-      <Rect x="72" y="58" width="18" height="16" fill="#BFE6FA" /></Svg></View>
-  );
-}
-
-function Hall() {
-  return (
-    <View style={s.art}><Svg width={110} height={100} viewBox="0 0 110 100">
-      <Polygon points="6,36 55,8 104,36" fill="#E9C46A" /><Rect x="10" y="36" width="90" height="8" fill="#F4E3B5" />
-      {[18, 38, 66, 86].map((x) => <Rect key={x} x={x} y="44" width="6" height="46" fill="#F4E3B5" />)}<Rect x="6" y="90" width="98" height="8" fill="#D8C9A0" />
-      <Circle cx="55" cy="26" r="6" fill="#F6C945" /></Svg></View>
-  );
-}
-
-function House({ roof, lit = false, empty = false }: { roof: string; lit?: boolean; empty?: boolean }) {
-  return (
-    <Svg width={90} height={84} viewBox="0 0 90 84">
-      <Rect x="12" y="36" width="66" height="46" fill={empty ? '#EEF2F5' : '#FFF6E5'} /><Polygon points="6,38 45,8 84,38" fill={roof} />
-      <Rect x="38" y="56" width="16" height="26" fill="#8E5A34" /><Rect x="18" y="48" width="14" height="12" fill={lit ? '#FFE27A' : '#BFE6FA'} />
-      <Rect x="58" y="48" width="14" height="12" fill={lit ? '#FFE27A' : '#BFE6FA'} />
-      {empty ? <Polygon points="40,60 50,60 45,70" fill="#A7B4C0" /> : null}
-    </Svg>
-  );
-}
-
 const s = StyleSheet.create({
   fill: { flex: 1, paddingHorizontal: 16 },
   flex: { flex: 1 },
@@ -370,14 +387,22 @@ const s = StyleSheet.create({
   iconBtn: { width: 38, height: 38, borderRadius: 12, backgroundColor: t.tint, alignItems: 'center', justifyContent: 'center' },
   street: { height: HEIGHT, borderRadius: 24, overflow: 'hidden', backgroundColor: '#A9DDF7' },
   skeleton: { opacity: 0.6 },
-  place: { position: 'absolute', bottom: 46, alignItems: 'center' },
-  placeName: { marginTop: -2, fontSize: 11, fontWeight: '900', color: '#2B3A55', backgroundColor: 'rgba(255,255,255,0.88)', borderRadius: 8, paddingHorizontal: 6, overflow: 'hidden' },
-  art: { alignItems: 'center', justifyContent: 'flex-end' },
-  spray: { position: 'absolute', top: 30, fontSize: 18 },
-  banner: { position: 'absolute', top: 4, backgroundColor: '#FFFFFF', borderRadius: 8, paddingHorizontal: 6, paddingVertical: 2, maxWidth: 120 },
+  place: { position: 'absolute', bottom: 0 },
+  nameRow: { position: 'absolute', width: NAME_MARGIN * 2, alignItems: 'center' },
+  housePet: { position: 'absolute', width: PET_SIZE, alignItems: 'center' },
+  petShadow: { position: 'absolute', bottom: 0 },
+  weather: { position: 'absolute', top: 8, right: 10 },
+  placeName: { fontSize: 11, fontWeight: '900', color: '#2B3A55', backgroundColor: 'rgba(255,255,255,0.92)', borderRadius: 8, paddingHorizontal: 7, paddingVertical: 1, overflow: 'hidden' },
+  houseArt: { width: CARD_WIDE, height: 108, borderRadius: 12, overflow: 'hidden', marginBottom: 6 },
+  spray: { position: 'absolute', flexDirection: 'row', alignItems: 'flex-end', gap: 5 },
+  drop: { width: 5, height: 8, borderRadius: 3, backgroundColor: '#8CD5F0' },
+  dropHigh: { marginBottom: 6 },
+  lantern: { position: 'absolute', width: 16, height: 32 },
+  banner: { position: 'absolute', backgroundColor: '#FFFFFF', borderRadius: 8, paddingHorizontal: 6, paddingVertical: 2, width: 120, alignItems: 'center' },
   bannerText: { fontSize: 10, fontWeight: '900', color: '#5141A8' },
-  lampGlow: { position: 'absolute', top: 162, width: 56, height: 56, borderRadius: 28, backgroundColor: '#FFE9A8' },
-  walker: { position: 'absolute', bottom: 22, left: 0 },
+  clip: { overflow: 'hidden' },
+  lampGlow: { position: 'absolute', width: 80, height: 80 },
+  walker: { position: 'absolute', bottom: 6, left: 0 },
   hint: { fontSize: 12, color: t.muted, textAlign: 'center', marginTop: 6 },
   section: { fontSize: 18, fontWeight: '900', color: t.ink, marginTop: 14, marginBottom: 8 },
   card: { backgroundColor: '#FFFFFF', borderRadius: 18, padding: 14, gap: 6, marginBottom: 10 },
@@ -388,8 +413,8 @@ const s = StyleSheet.create({
   small: { fontSize: 11, color: t.muted },
   done: { fontSize: 14, fontWeight: '800', color: '#22703A' },
   houses: { gap: 10, paddingBottom: 4 },
-  houseCard: { width: 110, alignItems: 'center', backgroundColor: '#FFFFFF', borderRadius: 18, padding: 8 },
-  houseOwner: { flexDirection: 'row', alignItems: 'center', gap: 4, maxWidth: 100 },
+  houseCard: { width: 132, alignItems: 'center', backgroundColor: '#FFFFFF', borderRadius: 18, padding: 8 },
+  houseOwner: { flexDirection: 'row', alignItems: 'center', gap: 4, maxWidth: 116 },
   houseName: { fontSize: 12, fontWeight: '800', color: t.ink, flexShrink: 1 },
   sheet: { gap: 10, paddingBottom: 8 },
   friendHead: { alignItems: 'center' },

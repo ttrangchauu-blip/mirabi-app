@@ -40,9 +40,23 @@ export function NotificationsScreen() {
   const nav = useTogetherNav();
   const [items, setItems] = useState<SocialNotification[] | null>(null);
   const [error, setError] = useState<unknown>(null);
+  const [older, setOlder] = useState<number | null>(null);
+  const [loadingOlder, setLoadingOlder] = useState(false);
   const load = useCallback(async () => {
-    try { setItems((await togetherApi.notifications()).items); setError(null); } catch (e) { setError(e); }
+    try {
+      const page = await togetherApi.notifications();
+      setItems(page.items); setOlder(page.next_before_id ?? null); setError(null);
+    } catch (e) { setError(e); }
   }, []);
+  async function loadOlder() {
+    if (older == null || loadingOlder) return;
+    setLoadingOlder(true);
+    try {
+      const page = await togetherApi.notifications(older);
+      setItems((list) => [...(list ?? []), ...page.items.filter((n) => !list?.some((x) => x.id === n.id))]);
+      setOlder(page.next_before_id ?? null);
+    } catch { /* the button stays, so it can be tried again */ } finally { setLoadingOlder(false); }
+  }
   useEffect(() => { void load(); }, [load]);
   usePullToRefresh(load);
   // New ones arrive live; a merged greeting replaces the unread one it grew from.
@@ -58,6 +72,8 @@ export function NotificationsScreen() {
     if (n.kind === 'room_visit' && n.data.user_id && nav.visitRoom) { nav.visitRoom(n.data.user_id); return; }
     // A friend cared for the garden: see it (who watered and tended what today).
     if (n.kind === 'garden_care' && nav.openGarden) { nav.openGarden(); return; }
+    // A friend sent a gift: it is in Kho đồ, as the notification says.
+    if (n.kind === 'town_gift' && nav.openInventory) { nav.openInventory(); return; }
     if ((n.kind === 'friend_request' || n.kind === 'friend_accepted') && nav.openFriends) {
       nav.openFriends(n.kind === 'friend_request' ? 'requests' : 'friends'); return;
     }
@@ -89,6 +105,7 @@ export function NotificationsScreen() {
               {!n.read ? <View style={styles.dot} /> : null}
             </Pressable>
           ))}
+          {older != null ? <SmallButton title={loadingOlder ? 'Đang tải…' : 'Xem thông báo cũ hơn'} icon="chevron-down" onPress={() => { void loadOlder(); }} /> : null}
         </Card>
       )}
     </>

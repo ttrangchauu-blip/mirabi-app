@@ -60,7 +60,7 @@ Quy ước: mỗi nơi chỉ có một lối vào từ menu. Trang chủ giữ l
 có lý do UX: trong phòng để đặt đồ, trong vườn để lấy hạt.
 
 Bản đồ code: `screens/life/LifeHub.tsx` (switcher và chuyển cảnh), `screens/life/spaces.ts`, `screens/life/ExploreSpace.tsx`,
-`screens/life/FriendsSpace.tsx`, `screens/garden/GardenWorld.tsx`, `screens/room/RoomTab.tsx`, `screens/main/MoreTab.tsx`.
+`screens/life/FriendsSpace.tsx`, `streetArt.ts`, `screens/garden/GardenWorld.tsx`, `screens/room/RoomTab.tsx`, `screens/main/MoreTab.tsx`.
 Một nơi không được hiển thị thì không được mount: nó không giữ timer, loop hay texture.
 
 ## 3. Design System (`mobile/src/ui/design.ts`)
@@ -118,9 +118,10 @@ rồi map trạng thái trong `artFor`. Skeletal animation (Rive, Spine) sẽ c�
 
 - **Nhà:** rèm của cửa sổ lay từ dải buộc (`Curtains`, tự dừng lại ở đồ vật đứng trước rèm), ánh sáng theo giờ phủ lên phòng ở dưới lớp pet nên pet giữ nguyên
   màu, đèn tự sáng lúc chiều tối và khi trời tối, chạm đèn để bật tắt có nhấp nháy như bóng thật, chạm đồ vật thì đồ vật nảy nhẹ, cửa sổ có mây bay hoặc mưa theo thời tiết thật.
-- **Vườn:** lá và hoa lay từ gốc theo sức gió, cỏ lay không đồng bộ, ao có gợn, đất sẫm lại khi đã tưới (theo dữ liệu server), cây bật lên khi đổi giai đoạn. Tưới có bình nghiêng,
-  giọt rơi và vòng nước, chỉ chạy sau khi server xác nhận. Pet đi tới cạnh luống rồi nhảy, sau đó quay về.
-- **Khám phá:** sáu lớp parallax. Có cảnh lên đường, đang đi, trở về (đi về từ bên phải, ăn mừng, gói quà rơi xuống) và nghỉ. Không có API mới và không có logic mới: màn hình chỉ đọc `/api/pet/space`.
+- **Vườn:** một cảnh render 3D (`assets/world/yard/`): núi xa, hàng rào trắng, ao viền đá, đường lát đá và 9 ô đất viền đá. Mây 3D trôi trên bầu trời thật; cây và khóm hoa là lớp riêng lay từ gốc theo sức gió, không đồng bộ. Đất sẫm lại khi đã tưới (theo dữ liệu server), cây bật lên khi đổi giai đoạn. Gieo hạt, tưới (bình nghiêng, giọt rơi, vòng nước) và chăm sóc (lấp lánh) chỉ chạy sau khi server xác nhận. Pet đi tới cạnh ô rồi nhảy, sau đó quay về.
+  Mỗi ô có vùng chạm riêng (`yardLayout`: `pitch` × `h`, tối thiểu 44 điểm), giáp nhưng không chồng lên ô bên cạnh; cây cao vẽ vượt lên trên không nhận chạm, nên chạm vào đâu trên ô là đúng ô đó.
+- **Khám phá:** một thung lũng thoáng, ít cây, render 3D (`assets/world/wild/`, cảnh `scene-wild.js`), nhìn từ xa bằng một camera thật. Mọi thứ lặp theo cột của ảnh nên đoạn nào cũng nối được với đoạn nào: ba đoạn đường và đồng cỏ, hai dải đồi (một có suối), hai dải hoa gần. Đang khám phá, pet đi liên tục, không dừng và không quay đầu: pet giữ chỗ trên màn hình, đường và dải bước của pet chạy theo cùng một giá trị nên chân không trượt, các lớp khác trượt theo độ xa (`RATE` trong `exploreArt.ts`). Vị trí trên đường tính từ lúc chuyến đi bắt đầu, nên thoát app rồi mở lại pet đã đi tiếp. Bầu trời do app vẽ. Hết giờ pet dừng ngay chỗ đang đứng, ăn mừng và gói quà rơi xuống; mở màn hình sau đó thì pet đi về từ bên phải. Không có API mới và không có logic mới: màn hình chỉ đọc `/api/pet/space`.
+- **Chế độ chụp ảnh của Khám phá:** nút toàn màn hình hoặc "Ẩn giao diện" chỉ ẩn các thanh và thẻ. Cảnh, pet và đồng hồ vẫn chạy, không có gì bị tháo ra (`display: none` cho phần giao diện), nên hết giờ giữa lúc đang bật cũng đúng. Ảnh chụp đúng khung cảnh (`explore-scene`), các nút nằm ngoài khung đó. Điện thoại lưu vào thư viện ảnh (`exploreShot.ts`), web tải xuống (`exploreCapture.web.ts`; html2canvas không vẽ được phần SVG có gradient như mặt trời).
 - **Bạn bè:** con phố với mỗi bạn một căn nhà; chạm để ghé thăm. Sau chiều tối đèn trong nhà sáng.
 
 ## 5. Thời tiết và ngày đêm
@@ -183,6 +184,57 @@ Toàn bộ kiểm tra tới nay chạy trên Jest và Chrome giả lập di đ�
 | Rèm động | Đối chiếu từng biến thể cửa sổ | Mép rèm khớp tranh, không lộ khi đứng yên |
 
 Hướng dọc là hướng duy nhất của app (`app.json`), nên không thử xoay ngang. `expo-location` là native module mới: dùng Expo Go thì chạy ngay, dùng dev client hoặc store build thì phải build lại.
+
+## 8. Năm không gian học tập và tập trung
+
+Sổ tay kiến thức, Cùng bạn tiến bộ, Nhiệm vụ công việc, Hành trình sự nghiệp và Vườn tài chính là năm nơi trong một thế giới, không còn là các trang thẻ trắng. Pomodoro giữ giao diện phòng tập trung có sẵn. Đợt này chỉ đổi cách hiển thị và tương tác: **không thêm API, trường dữ liệu hay quy tắc nào ở backend**. Ảnh chụp ở `docs/living-spaces-previews/`.
+
+### Bộ dùng chung: `mobile/src/world/diorama.tsx`
+
+| Thành phần | Dùng cho |
+|---|---|
+| `BEAT` | Thời lượng: nhấn 130 ms, mở 280 ms, chuyển cảnh 420 ms, thành tựu 1200 ms |
+| `Hit` | Vật bấm được: lún xuống khi nhấn, chỉ đổi `transform` nên đồ xung quanh không xê dịch |
+| `ContactShadow` | Bóng mềm nơi vật chạm đất, nhạt dần ra mép |
+| `Wood`, `LightFall` | Mặt gỗ có vân và khe ván; ánh sáng từ trên bên trái |
+| `SceneHeader`, `Knob` | Nút quay lại và biển tên nổi trên cảnh, không phải thanh ngang |
+| `Paper`, `Tag`, `Carved` | Chữ cần đọc nằm trên giấy; tên một khu khắc trên gỗ |
+| `SceneIn`, `Triumph` | Cảnh hiện ra; thành tựu mỗi lần số `play` đổi |
+
+Ánh sáng luôn từ trên bên trái. Mọi vòng lặp đi qua `world/budget.ts`: đứng yên khi bật giảm chuyển động, vẽ ít hơn trên máy yếu, dừng khi app xuống nền. Cảnh được tách khỏi logic: file art chỉ vẽ, màn hình giữ nguyên lời gọi API.
+
+### Từng không gian
+
+| Nơi | File | Cảnh | Tương tác và dữ liệu |
+|---|---|---|---|
+| Sổ tay kiến thức | `screens/learning/KnowledgeLibrary.tsx`, `ArchiveScreens.tsx` | Tường kệ sách, mỗi môn một kệ, mỗi bài và nhóm ghi chú một cuốn quay bìa ra ngoài, tên nằm ngang trên nhãn | Mở, lật, đóng sách; tìm không dấu; lọc theo môn và dấu trang. Đồ trên nóc kệ xuất hiện khi đủ 4 và 10 cuốn thật. Ghi chú vẫn sửa ở "Ghi chú của tôi", logic `NotesPanel` không đổi |
+| Cùng bạn tiến bộ | `screens/together/TeamQuestsScreen.tsx`, `StudyHall.tsx` | Phòng chung: bảng phấn ghi mục tiêu, bàn dài, pet của từng thành viên | Pet nhảy khi đóng góp thật tăng giữa hai lần tải, cả phòng ăn mừng khi nhiệm vụ hoàn thành. Tải lại mỗi 30 giây khi đang mở một nhiệm vụ |
+| Nhiệm vụ công việc | `screens/work/WorkQuestScreen.tsx`, `WorkDesk.tsx` | Bàn dưới cửa sổ thật, nhiệm vụ là giấy note theo màu ưu tiên, kèm chữ. Bản đồ dự án là các đảo render theo chủ đề và `build_stage` của server (`workArt.tsx`), rương render theo trạng thái | Kéo ngang hoặc giữ 220 ms để nhấc note; thả vào khay Xong hay bốn cặp ưu tiên. Nút cũ vẫn còn cho người không kéo. Sửa tên, thời lượng, hạn qua `PATCH /api/tasks/{id}` đã có |
+| Hành trình sự nghiệp | `screens/career/CareerJourneyScreen.tsx`, `JourneyMap.tsx` | Con đường qua các vùng đất, mỗi nhóm kỹ năng một vùng, mỗi kỹ năng một cột mốc | Đường chỉ vàng đến chỗ đã làm thật. Pet đứng ở cột mốc kế tiếp và đi tới khi có cột mới. "Nhìn lại hành trình" liệt kê kỹ năng đã xong và huy hiệu |
+| Vườn tài chính | `screens/money/MoneyGardenScreen.tsx`, `GardenScene.tsx`, `GardenArt.tsx` | Thung lũng render 3D (`assets/world/money/`) trượt chậm hơn bãi cỏ, dưới trời và thời tiết thật; bãi cỏ cuộn theo hàng cây; sáu loài cây, sáu giai đoạn theo `stage` của server, mỗi cây có bệ đá và bóng đổ, cả bản ngày lẫn đêm; cánh quạt cối xay, ánh sông, bướm và cánh hoa chuyển động; pet của chính người dùng | Chạm cây chỉ chọn cây và làm lá rung; bình tưới "cho vui" chỉ là hoạt ảnh. Tiền chỉ đổi khi ghi khoản tiết kiệm. Bảng gỗ ghi tổng thật; thẻ có Mục tiêu, Đã tiết kiệm, Còn thiếu, các mốc, và thu gọn được |
+| Thị trấn Mirabi | `screens/town/TownScreen.tsx`, `townArt.ts` | Một con phố render liền một camera (`assets/world/town/`): đài phun nước và Vườn Cộng đồng theo giai đoạn `stage` của server là các miếng của cùng bức ảnh, sân sự kiện, tiệm quà, sảnh thành tựu, mỗi người bạn một nhà (tối đa 12 trên phố) với pet trước nhà; đèn lồng treo trên cột đèn theo `stage`; trời thật theo giờ và thời tiết (`world/liveSky.tsx`); bản ngày và bản đêm sáng đèn | Dữ liệu và thao tác không đổi: góp xu, gửi quà, báo cáo, ghé thăm |
+| Phố bạn bè (Cuộc sống → Bạn bè) | `screens/life/FriendsSpace.tsx`, `streetArt.ts` | Một cảnh render liền có phối cảnh và bóng nắng thật, sáu lô đất dọc con phố. Mỗi người bạn một nhà (ảnh của nhà gồm cả sân và bóng đổ), Pet của họ đứng trước cửa; lô chưa có bạn vẫn là bãi cỏ. Trời và thời tiết là thật | Chạm nhà để vào thăm. Bạn tắt ghé thăm thì nhà có khóa nhỏ và không bấm được |
+| Học tập | `screens/learning/SchoolYard.tsx`, `JourneyMap.tsx`, `learnArt.ts` | Sân trường render ở màn chọn môn, có Pet của người học. Bản đồ môn là triền đồi render lặp theo chiều dài bản đồ (`assets/world/learn/`), mỗi bài một bệ đá theo trạng thái thật, giữa hai bài có đá lát | Bấm và mở khoá không đổi, dữ liệu vẫn từ API bài học |
+| Trò chơi trong môn học | `games/art/rendered.tsx` và các file `games/art/*` | Thế giới của trò chơi render theo lớp (`assets/world/games/`): rừng, hang, lâu đài, trùm, vũ trụ, bốn thời đại, bản đồ kho báu, phòng thí nghiệm, cánh đồng đêm, con suối của Ghép chữ. Trời và mọi thứ người chơi tương tác vẫn do trò chơi vẽ | Luật chơi và điểm không đổi. Các bảng tự vẽ trong `games/subject/*` và trò chơi dạng thẻ chưa có ảnh render. Số thời đại là `required_count / 3` làm tròn lên (`tripEras`); bài lịch sử dài nhất hiện có 7 câu nên Thời hiện đại chưa xuất hiện trong ván thật, cần bài từ 10 câu |
+
+### Không tạo dữ liệu giả
+
+- **Trạng thái trực tuyến:** nhiệm vụ nhóm không trả về presence. Chấm chỉ hiện với bạn bè có chia sẻ, lấy từ `GET /api/friends`. Thành viên khác không có chấm, không hiện "ngoại tuyến" thay.
+- **Đóng góp ẩn:** người tắt chia sẻ vẫn hiện "Ẩn".
+- **Dấu trang:** backend chưa có trường này, nên lưu trong `AsyncStorage` theo tài khoản (`mirabi.library.bookmarks:<id>`), chỉ trên thiết bị đó, và màn hình có ghi rõ.
+- **Thời tiết:** không có dữ liệu thì chỉ theo giờ, không hiện thời tiết giả.
+
+### Tài sản hình ảnh
+
+Cảnh của năm không gian và Thị trấn Mirabi là **ảnh render 3D thật** kiểu đất sét mềm (path tracing), dựng hoàn toàn bằng code nên không có tài sản bên thứ ba: `mobile/assets/world/`, cách làm ở `mobile/scripts/render-scenes/README.md`, tổng khoảng 1 MB. Màu cảnh theo bảng màu của app (`theme.ts`): tường xanh nhạt, viền trắng, gỗ bạch dương sáng. Những gì sống vẫn do app vẽ đè lên: bầu trời, kính cửa sổ, màn hình laptop, tên sách, biểu tượng cột mốc, nội dung bảng phấn. Pet vẫn là tranh vẽ gốc theo hệ và level.
+
+### Pet
+
+Chỉ dùng tranh và strip có sẵn theo hệ và level, không thêm bộ phận. Study, idle và walk là strip vẽ sẵn. Rest là tranh tĩnh kèm mặt trăng nhỏ vì chưa có strip ngủ. Celebrate là strip vẽ sẵn với hệ Sương và hệ Lửa; các hệ khác chưa nhập strip này nên ăn mừng bằng chuyển động cả thân (`PET_ACTS.celebrate`).
+
+### Kiểm thử
+
+`mobile/__tests__/living-spaces.test.tsx` kiểm tra quy tắc mới (xếp kệ, tìm không dấu, đường vàng, ô thả, không có presence giả, không chuyển tiền khi chạm cây). Chưa chạy trên Android, iOS hay thiết bị tầm trung thật: máy phát triển không có `adb` hay simulator. Trước khi phát hành, cần đi qua bảng ở mục 7 và thêm: kéo note khi đang cuộn, cử chỉ lật trang trên máy thật, FPS của vườn khi trời mưa (`EXPO_PUBLIC_WORLD_PERF=1`).
 
 ## Phòng tập trung 3D
 

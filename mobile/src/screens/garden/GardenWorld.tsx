@@ -1,24 +1,25 @@
 import React, { memo, useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, Animated, LayoutChangeEvent, Pressable, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Animated, Image, type ImageSourcePropType, LayoutChangeEvent, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-import Svg, { Circle, Ellipse, G, Path, Rect, SvgXml } from 'react-native-svg';
-import { type Light, mixColor, sunAt } from '../../components/daylight';
+import Svg, { Circle, Path, Rect } from 'react-native-svg';
+import { type Light, sunAt } from '../../components/daylight';
 import { Text } from '../../components/Typography';
-import { GARDEN_PLANTS, SOIL_PLOT } from '../../gardenArt';
 import type { CareKind, GardenPlot } from '../../inventory/types';
 import { appTheme as t } from '../../theme';
-import { radius, type as typeScale } from '../../ui/design';
+import { radius } from '../../ui/design';
 import { useAtmosphere, useSameValue } from '../../world/atmosphere';
-import { useEased, useFrameWatch, useWorldMotion } from '../../world/budget';
-import { CloudDeck, Fireflies, Fog, GrassField, LivingPet, type LivingPetHandle, Pond, Rain, Snow, Sway } from '../../world/living';
+import { useEased, useFrameWatch, useTravel, useWorldMotion } from '../../world/budget';
+import { ContactShadow, Hit, Plate } from '../../world/diorama';
+import { Fireflies, Fog, LivingPet, type LivingPetHandle, Rain, Snow, Sway } from '../../world/living';
 import { EASE } from '../../world/motion';
-import { castBy, SkyBodies, Stars, wave } from '../../world/sky';
+import { castBy, SkyBodies, Stars } from '../../world/sky';
 import { useWeather } from '../../world/weather';
-import { CARE, CARE_KINDS, careOf, growthText } from './gardenUi';
+import { BED, BED_FRAME_TOP, BED_SOIL, BED_TALL, CLOUDS, plantArt, PLANT_FOOT, PLANT_TALL, YARD, YARD_FENCE, YARD_FRONT, YARD_GATE_X, YARD_HILLTOP, YARD_LAWN, YARD_LAWN_X, YARD_POND_END, YARD_POND_RIGHT, YARD_RIDGE, YARD_SWAY, YARD_TALL } from './gardenArt';
+import { CARE, CARE_KINDS, careOf } from './gardenUi';
 
-/** A care just confirmed by the server, played once on its plot. */
-export type GardenFx = { plot: number; kind: CareKind; key: number };
+/** A planting or a care just confirmed by the server, played once on its plot. */
+export type GardenFx = { plot: number; kind: CareKind | 'plant'; key: number };
 
 type Props = {
   plots: GardenPlot[]; busy: number | null;
@@ -30,36 +31,110 @@ type Props = {
   children?: React.ReactNode;
 };
 
-/** The bed's height, as a share of the plot's width. */
-const BED = 0.46;
+/** How wide a plant's picture is, as a share of its plot's: plants stand a bit bigger than life on their beds. */
+const PLANT_WIDE = 1.45;
 // Until the first layout (and in tests) a phone-sized scene.
 const FALLBACK = { width: 390, height: 640 };
-const COLUMNS = [0.2, 0.5, 0.8];
-/** Grass, by share of the ground: [x, y, size]. */
-const GRASS = [[0.05, 0.02, 1], [0.92, 0.1, 1.2], [0.34, 0.1, 0.9], [0.66, 0.06, 1.1], [0.04, 0.42, 1.3], [0.95, 0.5, 1.2], [0.36, 0.48, 1.1], [0.65, 0.52, 1.25], [0.17, 0.92, 1.4], [0.83, 0.94, 1.4], [0.5, 0.96, 1.3], [0.28, 0.72, 1]] as const;
+/** The least a row of plots takes from front to back, so a finger fits on each. */
+const MIN_ROW = 46;
+/** The open sky between what floats at the top and the far hills: it gets all that is left over, and at least this. */
+const MIN_SKY = 44;
+/** How far the yard's picture may shrink, and the least it does: only a screen much wider than tall needs it, since copies then carry
+ * the land on to the edges, a second pond among them. A phone a little short scrolls instead. */
+const MIN_ZOOM = 0.58;
+const SHRINKS_BELOW = 0.8;
 
-/** Where a plot's foot is and how big it is drawn: the back row smaller and higher, for depth; never fewer than the
- * size a finger needs. Same numbers for the same space, so the scene never jumps. */
-export function plotPlaces(count: number, width: number, height: number, top: number, bottom: number) {
-  const area = Math.max(240, height - top - bottom);
-  const base = Math.min(width * 0.29, 118);
-  const rows = [{ feet: top + area * 0.58, scale: 0.84 }, { feet: top + area * 0.93, scale: 1 }];
-  return Array.from({ length: count }, (_, i) => {
-    const row = rows[Math.floor(i / 3) % 2];
-    const w = base * row.scale;
-    return { x: width * COLUMNS[i % 3], feet: row.feet, w, h: w * 1.18, row: Math.floor(i / 3) };
+/** Where everything stands. The rows of plots are packed from the pond's end down, and the yard's picture stands behind
+ * them with the sky above it. The back rows are smaller, for depth. Each plot's area for a finger (`pitch` by `h`) meets its
+ * neighbours' and never overlaps them. A phone too short for all of it scrolls (`content`). Same numbers for the same
+ * space, so the scene never jumps. */
+export function yardLayout(count: number, width: number, height: number, top: number, bottom: number) {
+  const rows = Math.max(1, Math.ceil(count / 3));
+  const base = Math.min(width * 0.295, 122);
+  const widths = Array.from({ length: rows }, (_, r) => base * (rows === 1 ? 1 : 0.86 + (0.14 * r) / (rows - 1)));
+  const bands = widths.map((w) => Math.max(MIN_ROW, w * BED_TALL));
+  const beds = bands.reduce((sum, band) => sum + band, 0);
+  const span = YARD_POND_END - YARD_HILLTOP;
+  const pondEnd = height - bottom - 4 - beds;
+  const natural = width * YARD_TALL;
+  const fits = (pondEnd - top - MIN_SKY) / span / natural;
+  const zoom = fits >= SHRINKS_BELOW ? 1 : Math.max(MIN_ZOOM, fits);
+  const tall = natural * zoom;
+  const extra = Math.max(0, top + MIN_SKY - (pondEnd - span * tall));
+  const picTop = pondEnd + extra - YARD_POND_END * tall;
+  let feet = pondEnd + extra;
+  const rowFeet = bands.map((band) => (feet += band));
+  const places = Array.from({ length: count }, (_, i) => {
+    const row = Math.floor(i / 3);
+    const w = widths[row], pitch = w * 1.08;
+    return { x: width / 2 + ((i % 3) - 1) * pitch, feet: rowFeet[row], w, h: bands[row], pitch, row };
   });
+  return { places, zoom, tall, picTop, content: height + extra, rowFeet, widths };
+}
+export const plotPlaces = (count: number, width: number, height: number, top: number, bottom: number) => yardLayout(count, width, height, top, bottom).places;
+
+type Spot = { x: number; y: number };
+type Lane = { y: number; left: number; right: number; kind: 'lawn' | 'front' | 'aisle' };
+
+/** Where the pet can walk: the lawn behind the fence, the ground in front of it (from the pond on) and the aisles between
+ * the rows of beds. It gets from one to another through the gate or round the outside of the beds. */
+export function gardenPaths(yard: ReturnType<typeof yardLayout>, width: number) {
+  const wide = width * yard.zoom;
+  const across = (share: number) => (width - wide) / 2 + share * wide;
+  const down = (share: number) => yard.picTop + share * yard.tall;
+  const widest = Math.max(...yard.widths);
+  const margin = Math.max(12, ((width - widest * 3.24) / 2) * 0.9);
+  const sides = [margin, width - margin] as const;
+  const lanes: Lane[] = [
+    { y: down(YARD_LAWN), left: across(YARD_LAWN_X[0]), right: across(YARD_LAWN_X[1]), kind: 'lawn' },
+    { y: down(YARD_FRONT), left: across(YARD_POND_RIGHT), right: sides[1], kind: 'front' },
+    ...yard.rowFeet.slice(1).map((feet, r) => ({ y: feet - yard.widths[r + 1] * BED_FRAME_TOP - 2, left: sides[0], right: sides[1], kind: 'aisle' as const })),
+  ];
+  return { lanes, sides, gateX: across(YARD_GATE_X) };
+}
+type Paths = ReturnType<typeof gardenPaths>;
+
+/** The straight legs from one spot to another, along the lanes: never through a bed. */
+export function gardenRoute({ lanes, sides, gateX }: Paths, from: Spot, to: Spot): Spot[] {
+  const laneOf = (y: number) => lanes.reduce((best, lane) => (Math.abs(lane.y - y) < Math.abs(best.y - y) ? lane : best));
+  const front = lanes[1];
+  const legs: Spot[] = [];
+  let here = from;
+  const go = (x: number, y: number) => { if (here.x !== x || here.y !== y) { here = { x, y }; legs.push(here); } };
+  let at = laneOf(from.y);
+  const target = laneOf(to.y);
+  go(from.x, at.y);
+  if (at !== target && at.kind === 'lawn') { go(gateX, at.y); go(gateX, front.y); at = front; }
+  const end = target.kind === 'lawn' && at !== target ? front : target;
+  if (at !== end) {
+    // Only the right-hand side is open from the front ground: the pond is on the left.
+    const side = at === front || end === front || Math.abs(sides[1] - here.x) < Math.abs(sides[0] - here.x) ? sides[1] : sides[0];
+    go(side, at.y); go(side, end.y);
+  }
+  if (end !== target) { go(gateX, end.y); go(gateX, target.y); }
+  go(to.x, target.y);
+  return legs;
+}
+
+const between = (low: number, high: number) => low + Math.random() * (high - low);
+/** Somewhere to go next, away from the edges of its lane. */
+function nextSpot({ lanes }: Paths, from: Spot): Spot {
+  const lane = lanes[Math.floor(Math.random() * lanes.length)];
+  const inset = Math.min(28, (lane.right - lane.left) / 3);
+  const x = between(lane.left + inset, lane.right - inset);
+  return lane.y === from.y && Math.abs(x - from.x) < 40 ? { x: x > (lane.left + lane.right) / 2 ? lane.left + inset : lane.right - inset, y: lane.y } : { x, y: lane.y };
 }
 
 /**
- * The garden as a place: sky and hills by the hour and the weather, a pond, grass that doesn't move in step, and the six
- * plots laid out on the ground. Each plot keeps the same tap, label and data as before. Everything drawn comes from the
+ * The garden as a place: sky and hills by the hour and the weather, a pond, trees and flowers that don't move in step, and
+ * the plots laid out on the ground. Each plot keeps the same tap, label and data as before. Everything drawn comes from the
  * server's state (what is planted, which stage, what was watered today); nothing here changes it.
  */
 export function GardenWorld({ plots, busy, ready, labelFor, onPress, top, bottom, pet, fx, children }: Props) {
   const [size, setSize] = useState(FALLBACK);
   const { reading } = useWeather();
-  const { hours, mood, light: c } = useAtmosphere(reading);
+  const { hours, mood, light: c, night } = useAtmosphere(reading);
+  const { animate } = useWorldMotion();
   useFrameWatch('garden');
   const cast = useSameValue(castBy(sunAt(hours)));
   const { width, height } = size;
@@ -67,94 +142,162 @@ export function GardenWorld({ plots, busy, ready, labelFor, onPress, top, bottom
     const { width: w, height: h } = e.nativeEvent.layout;
     setSize((b) => (b.width === w && b.height === h ? b : { width: w, height: h }));
   };
-  const places = useMemo(() => plotPlaces(plots.length, width, height, top, bottom), [plots.length, width, height, top, bottom]);
+  const yard = useMemo(() => yardLayout(plots.length, width, height, top, bottom), [plots.length, width, height, top, bottom]);
+  const { places, content } = yard;
   const area = Math.max(240, height - top - bottom);
-  const horizon = Math.round(top + area * 0.1);
+  const horizon = Math.round(yard.picTop + yard.tall * YARD_RIDGE);
+  const fence = yard.picTop + yard.tall * YARD_FENCE;
 
-  // The pet stands by the pond; a care just done brings it to that plot's side, then it wanders back.
+  // The pet strolls about its yard on its own, stopping now and then; a care just done brings it to that plot's side first.
   const petRef = useRef<LivingPetHandle>(null);
-  const petSize = Math.round(Math.min(width * 0.2, 84));
-  const homeSpot = { x: width * 0.82, y: horizon + area * 0.2 };
+  const petSize = Math.round(Math.min(width * 0.18, 76));
+  const paths = useMemo(() => gardenPaths(yard, width), [yard, width]);
+  const lastLane = paths.lanes[paths.lanes.length - 1];
+  const homeSpot = useMemo(() => ({ x: width * 0.82, y: paths.lanes[1].y }), [width, paths]);
+  const depth = useMemo(() => ({ farY: paths.lanes[0].y, nearY: Math.max(lastLane.y, paths.lanes[0].y + 1), far: 0.6 }), [paths, lastLane]);
+  const standing = useRef<Spot>(homeSpot);
+  const [petZ, setPetZ] = useState(1);
+  // In front of the rows it has passed, behind the others.
+  const stepTo = async (spot: Spot) => {
+    setPetZ(1 + 2 * yard.rowFeet.filter((feet) => feet <= spot.y).length);
+    standing.current = spot;
+    await petRef.current?.walkTo(spot.x, spot.y);
+  };
+  const [caring, setCaring] = useState(false);
+  const roams = !!pet && pet.level > 0 && animate && !caring;
+  useEffect(() => { standing.current = homeSpot; setPetZ(1 + 2 * yard.rowFeet.filter((feet) => feet <= homeSpot.y).length); }, [homeSpot, yard]);
+  useEffect(() => {
+    if (!roams) return;
+    let live = true;
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    const rest = (ms: number) => new Promise<void>((resolve) => { timer = setTimeout(resolve, ms); });
+    void (async () => {
+      await rest(between(1500, 4000));
+      while (live) {
+        for (const leg of gardenRoute(paths, standing.current, nextSpot(paths, standing.current))) {
+          if (!live) return;
+          await stepTo(leg);
+        }
+        if (!live) return;
+        if (Math.random() < 0.25) await petRef.current?.act('hop');
+        if (live) await rest(between(2500, 6500));
+      }
+    })();
+    return () => { live = false; if (timer) clearTimeout(timer); };
+  }, [roams, paths]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!fx || !places[fx.plot]) return;
     const place = places[fx.plot];
     const side = fx.plot % 3 === 2 ? -1 : 1;
     let live = true;
     let timer: ReturnType<typeof setTimeout> | null = null;
-    void petRef.current?.walkTo(place.x + side * (place.w * 0.62), place.feet - 6).then(() => {
+    setCaring(true);
+    void stepTo({ x: place.x + side * (place.w * 0.62), y: place.feet - 6 }).then(() => {
       if (!live) return undefined;
       return petRef.current?.act('hop');
     }).then(() => {
-      if (live) timer = setTimeout(() => { void petRef.current?.walkTo(homeSpot.x, homeSpot.y); }, 3200);
+      if (live) timer = setTimeout(() => {
+        setCaring(false);
+        if (!animate) void stepTo(homeSpot);
+      }, 3200);
     });
     return () => { live = false; if (timer) clearTimeout(timer); };
   }, [fx?.key]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <View style={s.fill} onLayout={onLayout} testID="garden-world">
-      <Backdrop width={width} height={height} horizon={horizon} c={c} hours={hours} cover={mood.cover} />
-      <Pond x={width * 0.07} y={horizon + area * 0.07} width={width * 0.46} height={area * 0.18} water={mixColor(c.sky[1], '#5FB8D8', 0.55)} edge={mixColor(c.meadow, '#6C8C5A', 0.6)} rain={mood.rain > 0.3} wind={mood.wind} />
-      <GrassField width={width} height={area * 0.62} top={horizon + area * 0.3} color={mixColor(c.front, '#1E5A2A', 0.3)} wind={mood.wind} spots={GRASS} />
-      {pet && pet.level > 0 ? <LivingPet ref={petRef} pet={pet.id} level={pet.level} size={petSize} x={homeSpot.x} y={homeSpot.y} shadow={{ dx: cast.dx, stretch: cast.stretch, opacity: c.shadow }} /> : null}
-      {plots.map((plot, i) => <PlotSpot key={plot.plot} plot={plot} place={places[i]} busy={busy === plot.plot} ready={ready(plot)} label={labelFor(plot)} onPress={onPress} wind={mood.wind}
-        fx={fx && fx.plot === plot.plot ? fx : null} />)}
+      <ScrollView scrollEnabled={content > height + 1} bounces={false} overScrollMode="never" showsVerticalScrollIndicator={false} contentContainerStyle={{ height: content }}>
+        <Backdrop width={width} top={top} yard={yard} horizon={horizon} c={c} hours={hours} cover={mood.cover} wind={mood.wind} />
+        {pet && pet.level > 0 ? <LivingPet ref={petRef} pet={pet.id} level={pet.level} size={petSize} x={homeSpot.x} y={homeSpot.y} depth={depth} zIndex={petZ} shadow={{ dx: cast.dx, stretch: cast.stretch, opacity: c.shadow }} /> : null}
+        {plots.map((plot, i) => <PlotSpot key={plot.plot} plot={plot} place={places[i]} busy={busy === plot.plot} ready={ready(plot)} label={labelFor(plot)} onPress={onPress} wind={mood.wind} night={night}
+          fx={fx && fx.plot === plot.plot ? fx : null} />)}
+        {/* Above every plant, so a tall one in front never hides how the plant behind it is doing. The button's label says the same. */}
+        {plots.map((plot, i) => <PlotSign key={plot.plot} plot={plot} place={places[i]} />)}
+      </ScrollView>
       <Fireflies width={width} top={horizon} height={area * 0.8} strength={c.fireflies} />
       <Fog height={height} strength={mood.fog} top={0.2} />
-      <Rain width={width} height={height} strength={mood.rain} wind={mood.wind} ground={Math.min(0.9, (horizon + area * 0.3) / height)} />
+      <Rain width={width} height={height} strength={mood.rain} wind={mood.wind} ground={Math.min(0.9, fence / height)} />
       <Snow width={width} height={height} strength={mood.snow} />
       {children}
     </View>
   );
 }
 
-/** Sky, hills, fence and ground, redrawn only when their colours change. */
-const Backdrop = memo(function Backdrop({ width, height, horizon, c, hours, cover }: { width: number; height: number; horizon: number; c: Light; hours: number; cover: number }) {
-  const posts = useMemo(() => Array.from({ length: Math.ceil(width / 34) + 1 }, (_, i) => i * 34), [width]);
+const SEAM = 2;
+
+/** The rendered yard at its own shape, narrower than the scene when it has shrunk: mirrored copies carry the land on to
+ * both edges, and a flipped one carries the meadow on below it, under what floats at the bottom. */
+const YardPicture = memo(function YardPicture({ source, width, yard, opacity }: { source: ImageSourcePropType; width: number; yard: ReturnType<typeof yardLayout>; opacity?: number }) {
+  const wide = width * yard.zoom;
+  const left = (width - wide) / 2;
+  const below = yard.picTop + yard.tall < yard.content;
+  // The picture's own copy last and the mirrored ones running under its edges, so no seam shows between them.
+  const row = (top: number, scaleY: number) => [[left - wide + SEAM, -1], [left + wide - SEAM, -1], [left, 1]].filter(([, scaleX]) => scaleX === 1 || yard.zoom < 1).map(([x, scaleX]) =>
+    <Plate key={`${x}-${scaleY}`} source={source} width={wide} height={yard.tall} opacity={opacity} style={{ left: x, top, transform: [{ scaleX }, { scaleY }] }} />);
+  return <>{row(yard.picTop, 1)}{below ? row(yard.picTop + yard.tall - 0.5, -1) : null}</>;
+});
+
+/** [across the width, down the sky, width as a share of the scene's, which cloud, which layer]; the first ones show whatever the weather. */
+const CLOUD_SPOTS = [[0.02, 0.56, 0.34, 0, 1], [0.62, 0.16, 0.24, 1, 0], [0.72, 0.66, 0.26, 2, 1], [0.36, 0.34, 0.14, 2, 0], [0.06, 0.14, 0.17, 1, 0], [0.46, 0.8, 0.15, 0, 0]] as const;
+
+/** The rendered clouds drifting over the live sky: the near ones faster than the far ones. */
+export const YardClouds = memo(function YardClouds({ width, top, horizon, opacity, night, cover }: { width: number; top: number; horizon: number; opacity: number; night: number; cover: number }) {
+  const { count } = useWorldMotion();
+  const far = useTravel({ ms: 170_000 });
+  const near = useTravel({ ms: 100_000 });
+  if (!width) return null;
+  const sky = Math.max(60, horizon - top);
+  const shown = CLOUD_SPOTS.slice(0, count(Math.round(2 + cover * 4)));
+  const layer = (index: number, progress: Animated.Value) => (
+    <Animated.View key={index} pointerEvents="none" style={[StyleSheet.absoluteFill, { width: width * 2, transform: [{ translateX: progress.interpolate({ inputRange: [0, 1], outputRange: [0, -width] }) }] }]}>
+      {[0, width].map((offset) => shown.filter((spot) => spot[4] === index).map(([x, y, wide, cloud]) => {
+        const w = width * wide, h = w * CLOUDS[cloud].tall, style = { left: offset + width * x, top: top + y * sky - h / 2 };
+        return <React.Fragment key={`${offset}-${x}`}>
+          <Plate source={CLOUDS[cloud].day} width={w} height={h} opacity={opacity} style={style} />
+          {night > 0 ? <Plate source={CLOUDS[cloud].night} width={w} height={h} opacity={opacity * night} style={style} /> : null}
+        </React.Fragment>;
+      }))}
+    </Animated.View>
+  );
+  return <View pointerEvents="none" style={StyleSheet.absoluteFill}>{layer(0, far)}{layer(1, near)}</View>;
+});
+
+/** The trees and flowers over the land, each moving from its foot in its own time. The flowers in the grass never stand among the plots, however short the phone. */
+const YardSways = memo(function YardSways({ width, yard, wind, night }: { width: number; yard: ReturnType<typeof yardLayout>; wind: number; night: number }) {
+  const wide = width * yard.zoom, left = (width - wide) / 2;
+  const lastRow = yard.rowFeet[yard.rowFeet.length - 1];
+  return <>{YARD_SWAY.map((sway) => (
+    <Sway key={sway.ms} wind={Math.max(wind, 0.6)} depth={sway.depth} ms={sway.ms} rest={[0, 700]} style={{ position: 'absolute', left: left + sway.x * wide, top: Math.max(yard.picTop + sway.y * yard.tall, sway.low ? lastRow : 0), width: sway.w * wide, height: sway.h * yard.tall }}>
+      <Image source={sway.day} resizeMode="stretch" fadeDuration={0} accessibilityIgnoresInvertColors style={s.layer} />
+      {night > 0 ? <Image source={sway.night} resizeMode="stretch" fadeDuration={0} accessibilityIgnoresInvertColors style={[s.layer, { opacity: night }]} /> : null}
+    </Sway>
+  ))}</>;
+});
+
+/** The real sky behind the rendered yard, whose ridge meets the horizon; night fades in over day. */
+const Backdrop = memo(function Backdrop({ width, top, yard, horizon, c, hours, cover, wind }: { width: number; top: number; yard: ReturnType<typeof yardLayout>; horizon: number; c: Light; hours: number; cover: number; wind: number }) {
   return <View pointerEvents="none" style={StyleSheet.absoluteFill}>
-    <LinearGradient colors={c.sky} style={StyleSheet.absoluteFill} />
-    {c.stars > 0 ? <Stars width={width} height={horizon} opacity={c.stars} scale={2} testID="garden-stars" /> : null}
-    <SkyBodies width={width} hours={hours} c={c} horizon={horizon - 14} zenith={Math.max(48, horizon * 0.4)} clip={horizon + 4} body={92} idPrefix="garden" />
-    <CloudDeck width={width} top={Math.max(60, horizon * 0.36)} color={c.cloud} opacity={c.cloudOpacity} cover={cover} scale={1.15} />
-    <Svg width={width} height={height} style={StyleSheet.absoluteFill}>
-      <Path d={wave(width, horizon - 26, 10, 1, horizon + 30, 0.6, 12)} fill={mixColor(c.hills[0], c.sky[2], 0.3)} />
-      <Path d={wave(width, horizon - 10, 7, 2, horizon + 30, 2.1, 12)} fill={c.hills[1]} />
-    </Svg>
-    <LinearGradient colors={[c.meadow, mixColor(c.meadow, c.front, 0.6), c.front]} style={{ position: 'absolute', left: 0, right: 0, top: horizon + 6, bottom: 0 }} />
-    <Svg width={width} height={height} style={StyleSheet.absoluteFill}>
-      {/* Bushes behind the fence, the garden path from its gate, and the ground's soft hollows give the place its depth. */}
-      {[[0.06, 16], [0.2, 22], [0.33, 14], [0.68, 18], [0.84, 24], [0.97, 15]].map(([fx, r], i) => <G key={fx}>
-        <Circle cx={fx * width} cy={horizon + 4 - r * 0.2} r={r} fill={i % 2 ? c.trees[1] : c.trees[3]} />
-        <Circle cx={fx * width + r * 0.8} cy={horizon + 6} r={r * 0.72} fill={i % 2 ? c.trees[2] : c.trees[1]} />
-      </G>)}
-      {[[0.22, 0.34, 0.34, 0.05], [0.78, 0.62, 0.3, 0.06], [0.2, 0.84, 0.4, 0.07]].map(([fx, fy, rx, ry]) => (
-        <Ellipse key={fx * fy} cx={fx * width} cy={horizon + fy * (height - horizon)} rx={rx * width} ry={ry * height} fill={mixColor(c.front, '#1E5A2A', 0.3)} opacity={0.22} />
-      ))}
-      <Path d={`M${width * 0.56} ${horizon + 8} C${width * 0.5} ${horizon + (height - horizon) * 0.3} ${width * 0.72} ${horizon + (height - horizon) * 0.42} ${width * 0.62} ${height}
-        L${width * 0.36} ${height} C${width * 0.48} ${horizon + (height - horizon) * 0.42} ${width * 0.4} ${horizon + (height - horizon) * 0.3} ${width * 0.5} ${horizon + 8} Z`} fill={c.path[0]} opacity={0.5} />
-      {/* The fence at the back of the garden, on the same light as everything else. */}
-      <Rect x={0} y={horizon + 4} width={width} height={3} fill={mixColor(c.trees[0], '#FFFFFF', 0.25)} />
-      <Rect x={0} y={horizon + 12} width={width} height={3} fill={mixColor(c.trees[0], '#FFFFFF', 0.25)} />
-      {posts.map((x) => <Rect key={x} x={x} y={horizon - 4} width={5} height={24} rx={2} fill={mixColor(c.trees[0], '#FFFFFF', 0.35)} />)}
-      {[[0.3, 0.46, 0], [0.74, 0.64, 1], [0.12, 0.72, 2], [0.9, 0.84, 0], [0.58, 0.92, 2], [0.06, 0.94, 1]].map(([fx, fy, i]) => (
-        <G key={fx} transform={`translate(${fx * width} ${horizon + fy * (height - horizon)})`}>
-          <Ellipse cx={0} cy={0} rx={4} ry={2.4} fill={c.flowers[i]} /><Ellipse cx={5} cy={3} rx={3} ry={2} fill={c.flowers[(i + 1) % 3]} />
-        </G>
-      ))}
-    </Svg>
+    {/* The sky's palest colour meets the hills. */}
+    <LinearGradient colors={c.sky} end={{ x: 0, y: Math.min(1, horizon / yard.content) }} style={StyleSheet.absoluteFill} />
+    {c.stars > 0 ? <Stars width={width} height={horizon} opacity={c.stars} scale={horizon / 44} testID="garden-stars" /> : null}
+    <SkyBodies width={width} hours={hours} c={c} horizon={horizon} zenith={top + 22} clip={horizon + 20} body={92} idPrefix="garden" />
+    {/* More than the weather's own share, so the sky is never empty. */}
+    <YardClouds width={width} top={top} horizon={horizon} opacity={c.cloudOpacity} night={c.stars} cover={Math.max(cover, 0.5)} />
+    <YardPicture source={YARD.day} width={width} yard={yard} />
+    {c.stars > 0 ? <YardPicture source={YARD.night} width={width} yard={yard} opacity={c.stars} /> : null}
+    <YardSways width={width} yard={yard} wind={wind} night={c.stars} />
   </View>;
 });
 
-/** The soil gets dark where it was watered today, and dries back when the day's care is over. */
-function Moist({ wet, w }: { wet: boolean; w: number }) {
-  const opacity = useEased(wet ? 0.5 : 0, 900);
-  // Exactly the soil of SOIL_PLOT (56 x 21 of its 64 x 40), drawn fitted to the bed's height.
-  const unit = (w * BED) / 40;
-  return <Animated.View pointerEvents="none" style={[s.moist, { opacity, width: 54 * unit, height: 20 * unit, left: (w - 54 * unit) / 2, bottom: 10 * unit, borderRadius: 2 }]} testID={wet ? 'garden-soil-wet' : undefined} />;
+/** The bed gets dark where it was watered today, and dries back when the day's care is over. */
+function Moist({ wet, w, night }: { wet: boolean; w: number; night: boolean }) {
+  const opacity = useEased(wet ? 1 : 0, 900);
+  return <Animated.Image source={BED.wet[night ? 'night' : 'day']} resizeMode="stretch" style={[s.bed, { opacity, width: w, height: w * BED_TALL }]} testID={wet ? 'garden-soil-wet' : undefined} />;
 }
 
 /** A plant arriving or moving to its next stage: pushes up from the soil, overshoots, settles. Only for a change seen
  * here: opening the garden shows every plant at rest. */
-function usePop(stage: number | null) {
+function usePop(stage: number | null, delay = 0) {
   const { animate } = useWorldMotion();
   const pop = useRef(new Animated.Value(1)).current;
   const was = useRef(stage);
@@ -163,50 +306,96 @@ function usePop(stage: number | null) {
     was.current = stage;
     if (stage === null || !animate) { pop.setValue(1); return; }
     pop.setValue(0);
-    const run = Animated.timing(pop, { toValue: 1, duration: 620, easing: EASE.land, useNativeDriver: true });
+    const run = Animated.timing(pop, { toValue: 1, duration: 620, delay, easing: EASE.land, useNativeDriver: true });
     run.start();
     return () => run.stop();
   }, [stage, animate, pop]);
   return pop;
 }
 
-function PlotSpot({ plot, place, busy, ready, label, onPress, wind, fx }: { plot: GardenPlot; place: ReturnType<typeof plotPlaces>[number]; busy: boolean; ready: boolean; label: string;
-  onPress: (plot: GardenPlot) => void; wind: number; fx: GardenFx | null }) {
-  const art = plot.empty ? null : (GARDEN_PLANTS[plot.item_id] ?? GARDEN_PLANTS.seedling)?.[plot.stage];
-  const pop = usePop(plot.empty ? null : plot.stage);
-  const { w, h } = place;
+function PlotSpot({ plot, place, busy, ready, label, onPress, wind, night, fx }: { plot: GardenPlot; place: ReturnType<typeof plotPlaces>[number]; busy: boolean; ready: boolean; label: string;
+  onPress: (plot: GardenPlot) => void; wind: number; night: boolean; fx: GardenFx | null }) {
+  const art = plot.empty ? null : plantArt(plot.item_id, plot.stage, night);
+  // The seed lands first, then the sprout comes up.
+  const pop = usePop(plot.empty ? null : plot.stage, fx?.kind === 'plant' ? SEED_LANDS : 0);
+  const { w, h, pitch } = place;
+  const plantW = w * PLANT_WIDE, plantH = plantW * PLANT_TALL;
+  const plus = Math.round(w * 0.26);
   // Taller plants bend more, and no two take the same time.
   const depth = plot.empty ? 0 : 1.6 + plot.stage * 0.9;
   return (
-    <Pressable onPress={() => onPress(plot)} style={({ pressed }) => [s.plot, { left: place.x - w / 2, top: place.feet - h, width: w, height: h + 34 }, pressed && s.pressed]}
-      accessibilityRole="button" accessibilityLabel={label} testID={`garden-plot-${plot.plot}`}>
-      <View style={{ width: w, height: h }}>
-        {ready ? <View pointerEvents="none" style={[s.readyRing, { width: w * 0.86, height: w * 0.44, left: w * 0.07, bottom: 0, borderRadius: w * 0.2 }]} testID={`garden-plot-${plot.plot}-ready`} /> : null}
-        <View style={[s.soil, { height: w * BED }]}><SvgXml xml={SOIL_PLOT} width="100%" height="100%" /></View>
-        {plot.empty ? null : <Moist wet={careOf(plot, 'water').done} w={w} />}
-        {art ? (
-          <Animated.View pointerEvents="none" style={[s.plantWrap, { bottom: w * 0.2, transformOrigin: '50% 100%', transform: [
-            { scaleY: pop.interpolate({ inputRange: [0, 1], outputRange: [0.18, 1] }) },
-            { scaleX: pop.interpolate({ inputRange: [0, 1], outputRange: [0.5, 1] }) },
-          ] }]}>
-            <Sway wind={wind} depth={depth} ms={2100 + (plot.plot * 397) % 1300} rest={[0, 900]} style={s.fillWidth}>
-              <SvgXml xml={art} width="100%" height="100%" />
-            </Sway>
-          </Animated.View>
-        ) : <View style={[s.plus, { bottom: w * 0.14 }]}><Ionicons name={ready ? 'add-circle' : 'add-circle-outline'} size={24} color={ready ? '#FFFFFF' : 'rgba(255,255,255,0.82)'} /></View>}
-        {fx?.kind === 'water' ? <WaterFx key={fx.key} w={w} /> : null}
-        {fx?.kind === 'tend' ? <TendFx key={fx.key} w={w} /> : null}
-        {plot.empty ? null : <View style={s.badges}>
-          {CARE_KINDS.filter((k) => careOf(plot, k).done).map((k) => <View key={k} style={[s.badge, { backgroundColor: CARE[k].bg }]}><Ionicons name={CARE[k].icon} size={10} color={CARE[k].color} /></View>)}
-        </View>}
-        {busy ? <ActivityIndicator style={StyleSheet.absoluteFill} color="#FFFFFF" /> : null}
-      </View>
-      <View style={s.sign}>
-        <Text style={s.signName} numberOfLines={1}>{plot.empty ? 'Ô trống' : plot.name}</Text>
-        {plot.empty ? null : <Text style={s.signStage} numberOfLines={1}>{w < 104 ? plot.stage_label : growthText(plot)}</Text>}
-      </View>
-    </Pressable>
+    <View style={[s.plot, { left: place.x - pitch / 2, top: place.feet - h, width: pitch, height: h, zIndex: 2 * (place.row + 1) }]} testID={`garden-plot-${plot.plot}-area`}>
+      <Hit onPress={() => onPress(plot)} sink={0.96} accessibilityRole="button" accessibilityLabel={label} testID={`garden-plot-${plot.plot}`} style={{ width: pitch, height: h }}>
+        {/* Nothing in it takes a finger: what rises above the plot (a tall plant) doesn't take the taps of the plot behind. */}
+        <View pointerEvents="none" style={[s.bedSpot, { left: (pitch - w) / 2, width: w, height: w * BED_TALL }]}>
+          <ContactShadow width={w * 1.06} height={w * BED_TALL} opacity={night ? 0.45 : 0.28} style={[s.bed, { left: -w * 0.03, bottom: -w * 0.025 }]} />
+          <Image source={BED.dry[night ? 'night' : 'day']} resizeMode="stretch" fadeDuration={0} accessibilityIgnoresInvertColors style={[s.bed, { width: w, height: w * BED_TALL }]} />
+          {plot.empty ? null : <Moist wet={careOf(plot, 'water').done} w={w} night={night} />}
+          {ready ? <View style={[s.readyRing, { width: w * 0.72, height: w * 0.27, left: w * 0.14, bottom: w * (BED_SOIL - 0.135), borderRadius: w * 0.13 }]} testID={`garden-plot-${plot.plot}-ready`} /> : null}
+          {art ? (
+            <Animated.View style={[s.plantWrap, { width: plantW, height: plantH, left: (w - plantW) / 2, bottom: w * BED_SOIL - plantH * (1 - PLANT_FOOT), transformOrigin: `50% ${PLANT_FOOT * 100}%`, transform: [
+              { scaleY: pop.interpolate({ inputRange: [0, 1], outputRange: [0.18, 1] }) },
+              { scaleX: pop.interpolate({ inputRange: [0, 1], outputRange: [0.5, 1] }) },
+            ] }]}>
+              <Sway wind={wind} depth={depth} ms={2100 + (plot.plot * 397) % 1300} rest={[0, 900]} style={s.fillWidth}>
+                <Image source={art} resizeMode="stretch" fadeDuration={0} accessibilityIgnoresInvertColors style={s.fillWidth} />
+              </Sway>
+            </Animated.View>
+          ) : <>
+            <Svg width={w * 0.56} height={w * 0.2} style={[s.bed, { left: w * 0.22, bottom: w * (BED_SOIL - 0.1) }]}>
+              <Rect x={1} y={1} width={w * 0.56 - 2} height={w * 0.2 - 2} rx={w * 0.05} fill="none" stroke="#FFFFFF" strokeOpacity={0.62} strokeWidth={1.1} strokeDasharray="4 3" />
+            </Svg>
+            <View style={[s.bed, { left: (w - plus) / 2, bottom: w * BED_SOIL - plus / 2 }]}><Ionicons name={ready ? 'add-circle' : 'add-circle-outline'} size={plus} color="#FFFFFF" /></View>
+          </>}
+          {fx?.kind === 'plant' ? <SeedFx key={fx.key} w={w} /> : null}
+          {fx?.kind === 'water' ? <WaterFx key={fx.key} w={w} /> : null}
+          {fx?.kind === 'tend' ? <TendFx key={fx.key} w={w} /> : null}
+          {plot.empty ? null : <View style={[s.badges, { bottom: w * BED_FRAME_TOP - 12 }]}>
+            {CARE_KINDS.filter((k) => careOf(plot, k).done).map((k) => <View key={k} style={[s.badge, { backgroundColor: CARE[k].bg }]}><Ionicons name={CARE[k].icon} size={10} color={CARE[k].color} /></View>)}
+          </View>}
+          {busy ? <ActivityIndicator style={StyleSheet.absoluteFill} color="#FFFFFF" /> : null}
+        </View>
+      </Hit>
+    </View>
   );
+}
+
+/** How a plant is doing, on one small line at the foot of its plot. An empty plot needs no words: its (+) says it. */
+function PlotSign({ plot, place }: { plot: GardenPlot; place: ReturnType<typeof plotPlaces>[number] }) {
+  if (plot.empty) return null;
+  const { w } = place;
+  return <View pointerEvents="none" accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={[s.signSpot, { left: place.x - w / 2, top: place.feet - 16, width: w }]}>
+    <View style={s.sign}><Text style={s.signStage} numberOfLines={1}>{plot.stage_label}</Text></View>
+  </View>;
+}
+
+/** How far into the seed's fall it lands, in milliseconds. */
+const SEED_LANDS = 420;
+const SEEDS = [[0.42, 0, -0.1], [0.5, 0.1, 0.02], [0.58, 0.05, 0.1]] as const;
+
+/** Sowing: a few seeds drop into the soil (primary), a little earth jumps where they land (secondary). The sprout comes up after. */
+function SeedFx({ w }: { w: number }) {
+  const { animate } = useWorldMotion();
+  const run = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    if (!animate) return;
+    const anim = Animated.timing(run, { toValue: 1, duration: 900, easing: (x) => x, useNativeDriver: true });
+    anim.start();
+    return () => anim.stop();
+  }, [animate, run]);
+  if (!animate) return null;
+  const land = SEED_LANDS / 900;
+  return <View pointerEvents="none" style={StyleSheet.absoluteFill} testID="garden-seed-fx">
+    {SEEDS.map(([fx, delay, drift], i) => {
+      const end = land - 0.1 + delay;
+      return <React.Fragment key={i}>
+        <Animated.View style={[s.seedDrop, { left: w * fx, bottom: w * BED_SOIL, opacity: run.interpolate({ inputRange: [0, 0.04, end, end + 0.02, 1], outputRange: [0, 1, 1, 0, 0] }),
+          transform: [{ translateY: run.interpolate({ inputRange: [0, end, 1], outputRange: [-w * 0.42, 0, 0], easing: EASE.land }) }, { translateX: run.interpolate({ inputRange: [0, end, 1], outputRange: [0, w * drift, w * drift] }) }] }]} />
+        <Animated.View style={[s.soilPuff, { left: w * (fx + drift) - 5, bottom: w * BED_SOIL - 3, opacity: run.interpolate({ inputRange: [0, end, end + 0.04, end + 0.3, 1], outputRange: [0, 0, 0.9, 0, 0] }),
+          transform: [{ scale: run.interpolate({ inputRange: [0, end, Math.min(1, end + 0.3), 1], outputRange: [0.3, 0.3, 1.5, 1.5] }) }] }]} />
+      </React.Fragment>;
+    })}
+  </View>;
 }
 
 const DROPS = [[0.34, 0], [0.42, 0.14], [0.5, 0.05], [0.56, 0.22], [0.64, 0.1], [0.46, 0.3], [0.6, 0.34]] as const;
@@ -224,7 +413,7 @@ function WaterFx({ w }: { w: number }) {
   }, [animate, run]);
   if (!animate) return null;
   return <View pointerEvents="none" style={StyleSheet.absoluteFill} testID="garden-water-fx">
-    <Animated.View style={{ position: 'absolute', left: w * 0.62, top: -w * 0.04, opacity: run.interpolate({ inputRange: [0, 0.1, 0.86, 1], outputRange: [0, 1, 1, 0] }), transformOrigin: '20% 80%', transform: [
+    <Animated.View style={{ position: 'absolute', left: w * 0.62, top: -w * 0.42, opacity: run.interpolate({ inputRange: [0, 0.1, 0.86, 1], outputRange: [0, 1, 1, 0] }), transformOrigin: '20% 80%', transform: [
       { translateY: run.interpolate({ inputRange: [0, 0.12, 0.86, 1], outputRange: [10, -4, -4, -10] }) },
       { rotate: run.interpolate({ inputRange: [0, 0.12, 0.2, 0.78, 0.88, 1], outputRange: ['6deg', '10deg', '-34deg', '-34deg', '0deg', '0deg'] }) },
     ] }}>
@@ -240,9 +429,9 @@ function WaterFx({ w }: { w: number }) {
       const start = 0.2 + delay, end = Math.min(0.94, start + 0.32);
       const t01 = run.interpolate({ inputRange: [0, start, end, 1], outputRange: [0, 0, 1, 1] });
       return <React.Fragment key={i}>
-        <Animated.View style={[s.waterDrop, { left: w * fx, top: w * 0.14, opacity: t01.interpolate({ inputRange: [0, 0.02, 0.92, 1], outputRange: [0, 1, 1, 0] }),
-          transform: [{ translateY: t01.interpolate({ inputRange: [0, 1], outputRange: [0, w * 0.62] }) }] }]} />
-        <Animated.View style={[s.waterRing, { left: w * fx - 6, top: w * 0.76, opacity: run.interpolate({ inputRange: [0, end - 0.01, end, Math.min(1, end + 0.14)], outputRange: [0, 0, 0.9, 0], extrapolate: 'clamp' }),
+        <Animated.View style={[s.waterDrop, { left: w * fx, top: -w * 0.2, opacity: t01.interpolate({ inputRange: [0, 0.02, 0.92, 1], outputRange: [0, 1, 1, 0] }),
+          transform: [{ translateY: t01.interpolate({ inputRange: [0, 1], outputRange: [0, w * 0.46] }) }] }]} />
+        <Animated.View style={[s.waterRing, { left: w * fx - 6, top: w * 0.26, opacity: run.interpolate({ inputRange: [0, end - 0.01, end, Math.min(1, end + 0.14)], outputRange: [0, 0, 0.9, 0], extrapolate: 'clamp' }),
           transform: [{ scale: run.interpolate({ inputRange: [end - 0.01, Math.min(1, end + 0.14)], outputRange: [0.3, 1.3], extrapolate: 'clamp' }) }] }]} />
       </React.Fragment>;
     })}
@@ -261,7 +450,7 @@ function TendFx({ w }: { w: number }) {
   }, [animate, run]);
   if (!animate) return null;
   return <View pointerEvents="none" style={StyleSheet.absoluteFill} testID="garden-tend-fx">
-    {[[0.2, 0.7, 12], [0.76, 0.6, 14], [0.5, 0.42, 16], [0.34, 0.3, 10]].map(([fx, fy, px], i) => (
+    {[[0.2, 0.2, 12], [0.76, 0.12, 14], [0.5, -0.08, 16], [0.34, -0.2, 10]].map(([fx, fy, px], i) => (
       <Animated.View key={i} style={{ position: 'absolute', left: fx * w, top: fy * w, opacity: run.interpolate({ inputRange: [0, 0.2, 1], outputRange: [0, 1, 0] }),
         transform: [{ translateY: run.interpolate({ inputRange: [0, 1], outputRange: [8, -w * 0.2] }) }, { scale: run.interpolate({ inputRange: [0, 0.3, 1], outputRange: [0.4, 1.1, 0.8] }) }] }}>
         <Ionicons name="sparkles" size={px} color="#F7C53F" />
@@ -273,18 +462,19 @@ function TendFx({ w }: { w: number }) {
 const s = StyleSheet.create({
   fill: { flex: 1, overflow: 'hidden' },
   fillWidth: { width: '100%', height: '100%' },
-  plot: { position: 'absolute', alignItems: 'center' },
-  pressed: { opacity: 0.9, transform: [{ scale: 0.97 }] },
-  soil: { position: 'absolute', left: 0, right: 0, bottom: 0 },
-  moist: { position: 'absolute', backgroundColor: '#3A2412' },
-  readyRing: { position: 'absolute', borderWidth: 2.5, borderColor: '#FFFFFF', backgroundColor: 'rgba(255,255,255,0.18)' },
-  plantWrap: { position: 'absolute', left: '8%', right: '8%', top: 0 },
-  plus: { position: 'absolute', alignSelf: 'center' },
-  badges: { position: 'absolute', top: 2, right: 0, flexDirection: 'row', gap: 2 },
+  layer: { position: 'absolute', left: 0, top: 0, width: '100%', height: '100%' },
+  plot: { position: 'absolute' },
+  bedSpot: { position: 'absolute', bottom: 0 },
+  bed: { position: 'absolute', left: 0, bottom: 0 },
+  readyRing: { position: 'absolute', borderWidth: 2.5, borderColor: '#FFFFFF', backgroundColor: 'rgba(255,255,255,0.08)' },
+  plantWrap: { position: 'absolute' },
+  badges: { position: 'absolute', right: '6%', flexDirection: 'row', gap: 2 },
   badge: { width: 18, height: 18, borderRadius: 9, alignItems: 'center', justifyContent: 'center' },
-  sign: { marginTop: 3, maxWidth: '100%', paddingHorizontal: 7, paddingVertical: 2, borderRadius: radius.sm - 4, backgroundColor: 'rgba(255,255,255,0.88)', alignItems: 'center' },
-  signName: { ...typeScale.micro, color: t.ink },
-  signStage: { fontSize: 10, lineHeight: 12, fontWeight: '600', color: t.muted },
+  signSpot: { position: 'absolute', alignItems: 'center', zIndex: 100 },
+  sign: { maxWidth: '100%', paddingHorizontal: 6, paddingVertical: 1, borderRadius: radius.sm - 4, backgroundColor: 'rgba(255,255,255,0.9)', alignItems: 'center' },
+  signStage: { fontSize: 10, lineHeight: 13, fontWeight: '700', color: t.ink },
+  seedDrop: { position: 'absolute', width: 5, height: 7, borderRadius: 3, backgroundColor: '#5A3A1E' },
+  soilPuff: { position: 'absolute', width: 10, height: 5, borderRadius: 5, backgroundColor: '#C99A68' },
   waterDrop: { position: 'absolute', width: 3.5, height: 7, borderRadius: 3, backgroundColor: '#8ED3F2' },
   waterRing: { position: 'absolute', width: 14, height: 6, borderRadius: 7, borderWidth: 1.2, borderColor: '#BFE8FA' },
 });

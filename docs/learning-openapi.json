@@ -289,7 +289,7 @@
     "tags": [
      "learning"
     ],
-    "summary": "Start a stage of a lesson",
+    "summary": "Start a stage of a lesson (the catalog's have their own route)",
     "operationId": "start_session_api_learning_sessions_post",
     "security": [
      {
@@ -332,6 +332,46 @@
        "application/json": {
         "schema": {
          "$ref": "#/components/schemas/SessionOut"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "code: not_authenticated | invalid_token | token_expired",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "code: grade_locked",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "code: lesson_not_found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "code: open_session_exists",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorOut"
         }
        }
       }
@@ -2203,7 +2243,7 @@
      "learning"
     ],
     "summary": "Start a game of a lesson (created paused: 3-2-1 resumes it)",
-    "description": "The backend checks that the game belongs to this lesson, the lesson to its subject and grade, and that it is\nready and unlocked; the stage then draws only this lesson's content. A vocabulary game draws the lesson's own words\nfirst, then new words beyond them (vocab_lesson.py); with no new word left it does not start (409\nvocabulary_exhausted: the app offers Ôn tập).",
+    "description": "The backend checks that the game belongs to this lesson, the lesson to its subject and grade, and that it is\nready and unlocked; the stage then draws only this lesson's content. A vocabulary game draws the lesson's own words\nfirst, then new words beyond them (vocab_lesson.py). With no new word left: once the game is passed it does not\nstart (409 vocabulary_exhausted: the app offers Ôn tập); before that, it is a review of the lesson's own words\n(`catalog.words_review`), which can pass the game, as nothing else could any more.",
     "operationId": "play_lesson_api_learning_lesson_catalog__key__play_post",
     "security": [
      {

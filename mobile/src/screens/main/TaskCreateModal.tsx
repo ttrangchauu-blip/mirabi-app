@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import DateTimePicker, { DateTimePickerAndroid, type DateTimePickerEvent } from '@react-native-community/datetimepicker';
-import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { BackHandler, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { Text } from '../../components/Typography';
 import { appTheme as t } from '../../theme';
 import { AppModal } from '../../ui/AppModal';
@@ -57,6 +57,12 @@ export function TaskCreateModal({ visible, initialDate, onClose, onCreated }: Pr
   const repeatEnabled = repeat !== 'none';
 
   useEffect(() => { if (visible) setScheduledDate(initialDate); }, [visible, initialDate]);
+  // Android's back button closes the form, not the screen behind it.
+  useEffect(() => {
+    if (!visible) return;
+    const sub = BackHandler.addEventListener('hardwareBackPress', () => { onClose(); return true; });
+    return () => sub.remove();
+  }, [visible, onClose]);
   function toggleWeekday(day: number) {
     setWeekdays((current) => current.includes(day) ? current.filter((value) => value !== day) : [...current, day].sort());
   }

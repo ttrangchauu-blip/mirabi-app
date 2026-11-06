@@ -8,7 +8,9 @@ import pytest
 from sqlalchemy import func, select
 
 from app import adventure, careers
-from app.models import CareerPath, CareerSkill, ExpEvent, InventoryStack, User, UserSkillProgress
+from app.db import SessionLocal
+from app.models import (CareerPath, CareerSkill, CommunityContribution, ExpEvent, GiftTransfer, InventoryStack, User, UserSkillProgress,
+                        VisitLog)
 from conftest import adult_signup, bearer, login, register
 
 
@@ -300,6 +302,93 @@ def test_community_contributions_are_exact_capped_and_idempotent(client, db):
     db.expire_all()
     assert db.get(User, broke.id).coins == 50
     assert db.scalar(select(func.count()).select_from(ExpEvent).where(ExpEvent.source.in_(("town", "community")))) == 0
+
+
+def while_waiting_for_the_lock(monkeypatch, work):
+    """Runs `work` (another request of the same user finishing) as this request waits for the user's lock."""
+    from app import town
+    real = town.inv.lock_user
+
+    def lock(db, user_id):
+        with SessionLocal() as other:
+            work(other)
+            other.commit()
+        real(db, user_id)
+    monkeypatch.setattr(town.inv, "lock_user", lock)
+
+
+def test_the_daily_gift_limit_is_decided_under_the_lock(client, db, monkeypatch):
+    from app import inventory as inv, town
+    a = adult(client, "a@example.com")
+    b = adult(client, "b@example.com")
+    ids = {u["email"]: u["id"] for u in (me(client, a), me(client, b))}
+    befriend(client, a, b, ids["b@example.com"])
+    sender, receiver = ids["a@example.com"], ids["b@example.com"]
+    variant = inv.variants_of("teddy_bear")[0]
+    inv.grant(db, sender, "teddy_bear", variant, 3, kind="walk_reward", ref=None, event_key="test:teddy")
+    for n in range(town.DAILY_GIFT_LIMIT - 1):
+        db.add(GiftTransfer(sender_id=sender, receiver_id=receiver, item_id="shell", variant="default", client_ref=ref(f"old-gift-{n:02}")))
+    db.commit()
+    while_waiting_for_the_lock(monkeypatch, lambda other: other.add(GiftTransfer(
+        sender_id=sender, receiver_id=receiver, item_id="shell", variant="default", client_ref=ref("racing-gift"))))
+    late = client.post("/api/town/gifts", headers=a, json={"receiver_id": receiver, "item_id": "teddy_bear", "variant": variant, "client_ref": ref(70)})
+    assert late.status_code == 429 and late.json()["code"] == "gift_limit"
+    assert db.scalar(select(func.count()).select_from(GiftTransfer).where(GiftTransfer.sender_id == sender)) == town.DAILY_GIFT_LIMIT
+    db.expire_all()
+    assert db.scalar(select(InventoryStack.quantity).where(InventoryStack.user_id == sender, InventoryStack.item_id == "teddy_bear")) == 3
+
+
+def test_the_daily_coin_limit_is_decided_under_the_lock(client, db, monkeypatch):
+    from app import town
+    a = adult(client, "a@example.com")
+    uid = me(client, a)["id"]
+    project = client.get("/api/town/projects", headers=a).json()[0]
+    coins = me(client, a)["coins"]
+    db.get(User, uid).coins = max(coins, 500)
+    db.commit()
+    coins = me(client, a)["coins"]
+    while_waiting_for_the_lock(monkeypatch, lambda other: other.add(CommunityContribution(
+        user_id=uid, project_id=project["id"], amount=town.DAILY_CONTRIBUTION_LIMIT - 100, client_ref=ref("racing-coins"))))
+    late = client.post(f"/api/town/projects/{project['id']}/contribute", headers=a, json={"amount": 200, "client_ref": ref(71)})
+    assert late.status_code == 429 and late.json()["code"] == "contribution_limit"
+    assert me(client, a)["coins"] == coins
+
+
+def test_the_same_contribution_waiting_for_the_lock_counts_once(client, db, monkeypatch):
+    a = adult(client, "a@example.com")
+    uid = me(client, a)["id"]
+    project = client.get("/api/town/projects", headers=a).json()[0]
+    db.get(User, uid).coins = 500
+    db.commit()
+    while_waiting_for_the_lock(monkeypatch, lambda other: other.add(CommunityContribution(
+        user_id=uid, project_id=project["id"], amount=100, client_ref=ref(72))))
+    again = client.post(f"/api/town/projects/{project['id']}/contribute", headers=a, json={"amount": 100, "client_ref": ref(72)})
+    assert again.status_code == 200 and again.json()["already_recorded"] is True
+    assert me(client, a)["coins"] == 500
+
+
+def test_visit_history_never_names_anyone_under_16(client, db):
+    a = adult(client, "a@example.com")
+    b = adult(client, "b@example.com")
+    assert register(client, email="kid@example.com", age=15, school_grade="grade9").status_code == 201
+    kid = bearer(login(client, email="kid@example.com").json()["access_token"])
+    adopt(client, kid)
+    ids = {u["email"]: u["id"] for u in (me(client, a), me(client, b), me(client, kid))}
+    befriend(client, a, kid, ids["kid@example.com"])
+    befriend(client, a, b, ids["b@example.com"])
+    # Their visit works as before (rooms are not a Mirabi Life feature), both ways, but the town keeps no trace of it.
+    assert client.get(f"/api/personal-room/visit/{ids['a@example.com']}", headers=kid).status_code == 200
+    assert client.get(f"/api/personal-room/visit/{ids['kid@example.com']}", headers=a).status_code == 200
+    assert client.get("/api/town/visits/history", headers=a).json() == []
+    assert db.scalar(select(func.count()).select_from(VisitLog)) == 0
+    # Logged while they were older, or by an older version: still never shown.
+    db.add(VisitLog(visitor_id=ids["kid@example.com"], owner_id=ids["a@example.com"]))
+    db.commit()
+    assert client.get("/api/town/visits/history", headers=a).json() == []
+    # Friends of 16 and over are unchanged.
+    assert client.get(f"/api/personal-room/visit/{ids['a@example.com']}", headers=b).status_code == 200
+    history = client.get("/api/town/visits/history", headers=a).json()
+    assert [(h["direction"], h["user_id"]) for h in history] == [("in", ids["b@example.com"])]
 
 
 # ---------------------------------------------------------------------------- Hành trình sự nghiệp

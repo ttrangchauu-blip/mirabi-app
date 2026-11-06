@@ -67,9 +67,34 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const sessionGeneration = useRef(0);
   const checkInKey = useRef<string | null>(null);
   const checkInFlight = useRef<Promise<void> | null>(null);
+  // The welcome tour was finished without a connection: the server still has to hear it.
+  const tourUnsaved = useRef(false);
+  const savingTour = useRef(false);
+
+  const saveTour = useCallback(async () => {
+    if (savingTour.current) return;
+    savingTour.current = true;
+    try {
+      const saved = await apiRequest<User>('/api/onboarding/complete', { method: 'POST', auth: true });
+      tourUnsaved.current = false;
+      setUserState(saved);
+    } catch { /* The next answer from the server tries again. */ }
+    finally { savingTour.current = false; }
+  }, []);
+
+  /** The user as the server last answered. Finishing the tour is never undone, so an answer that hasn't heard of it yet
+   * can't send the user back to it. */
+  const setUser = useCallback((next: User) => {
+    if (tourUnsaved.current) {
+      if (next.onboarded) tourUnsaved.current = false;
+      else void saveTour();
+    }
+    setUserState((current) => (current?.id === next.id && current.onboarded && !next.onboarded ? { ...next, onboarded: true } : next));
+  }, [saveTour]);
 
   const signOutLocally = useCallback(async (message: string | null) => {
     sessionGeneration.current += 1;
+    tourUnsaved.current = false;
     setSession(null);
     await clearSession().catch(() => {});
     if (!mounted.current) return;
@@ -184,7 +209,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUserState(await apiRequest<User>('/api/onboarding/complete', { method: 'POST', auth: true }));
     } catch (e) {
       if (isSessionExpired(e)) return;
-      // The tour is optional: don't trap the user in it. It will simply show again on the next launch.
+      // The tour is optional: don't trap the user in it. It is saved when the server next answers; if the app closes
+      // before that, it simply shows again on the next launch.
+      tourUnsaved.current = true;
       setUserState((u) => (u ? { ...u, onboarded: true } : u));
     }
   }, []);
@@ -211,10 +238,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     status, user, notice, streakPopup,
     clearNotice: () => setNotice(null),
     dismissStreakPopup: () => setStreakPopup(null),
-    setUser: setUserState,
+    setUser,
     login, register, adoptPet, selectDailyTasks, completeOnboarding, logout, requestPasswordReset, resetPassword,
     retryRestore: () => { void restore(); },
-  }), [status, user, notice, streakPopup, login, register, adoptPet, selectDailyTasks, completeOnboarding, logout, requestPasswordReset, resetPassword, restore]);
+  }), [status, user, notice, streakPopup, setUser, login, register, adoptPet, selectDailyTasks, completeOnboarding, logout, requestPasswordReset, resetPassword, restore]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

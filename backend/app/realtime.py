@@ -163,6 +163,13 @@ class Hub:
             for conn in list(self.by_user.get(target, ())):
                 conn.send(message)
             return
+        if kind == "disconnect":
+            for conn in list(self.by_user.get(target, ())):
+                for room_id in list(conn.rooms):
+                    self.unsubscribe(conn, room_id)
+                conn.closing = True
+                asyncio.get_running_loop().create_task(conn._close(CLOSE_UNAUTHORIZED))
+            return
         for conn in list(self.by_room.get(target, ())):
             if conn.user_id in revoke:
                 self.unsubscribe(conn, target)
@@ -187,14 +194,25 @@ def queue_user(db: Session, user_id: int, message: dict) -> None:
     db.info.setdefault(OUTBOX, []).append(("user", user_id, message, (), False, frozenset()))
 
 
+def queue_disconnect(db: Session, user_id: int) -> None:
+    """Close this user's open sockets once the transaction commits (their account was disabled)."""
+    db.info.setdefault(OUTBOX, []).append(("disconnect", user_id, {}, (), False, frozenset()))
+
+
+# SQLAlchemy fires both events for savepoints too (begin_nested). Releasing a savepoint isn't the commit, and rolling
+# one back doesn't undo what was queued outside it: only the outermost transaction decides.
 @event.listens_for(Session, "after_commit")
 def _send_outbox(session: Session) -> None:
+    if session.in_nested_transaction():
+        return
     for kind, target, message, revoke, close, skip in session.info.pop(OUTBOX, None) or ():
         hub.publish(kind, target, message, revoke, close, skip)
 
 
 @event.listens_for(Session, "after_rollback")
 def _drop_outbox(session: Session) -> None:
+    if session.in_nested_transaction():
+        return
     session.info.pop(OUTBOX, None)
 
 
@@ -236,16 +254,23 @@ async def realtime_socket(websocket: WebSocket, ticket: str = ""):
                 continue
             kind = message.get("type")
             if kind == "ping":
-                await asyncio.to_thread(study_rooms.heartbeat_user, user_id, tuple(conn.rooms))
+                if not await asyncio.to_thread(study_rooms.heartbeat_user, user_id, tuple(conn.rooms)):
+                    await websocket.close(code=CLOSE_UNAUTHORIZED)  # the account was disabled since the ticket
+                    break
                 conn.send({"type": "pong"})
             elif kind == "subscribe" and (room_id := _room_id(message)) is not None:
                 if not await asyncio.to_thread(study_rooms.realtime_join, user_id, room_id):
                     conn.send({"type": "error", "code": "room_not_found", "room_id": room_id})
                     continue
                 hub.subscribe(conn, room_id)
-                snapshot = await asyncio.to_thread(study_rooms.load_snapshot, room_id)
-                if snapshot is not None:
-                    conn.send({"type": "room.snapshot", "room_id": room_id, "version": snapshot["version"], "room": snapshot})
+                # Membership again, now that the subscription exists: a leave that committed before this read is seen
+                # here, and one that commits after it revokes the subscription just made.
+                snapshot = await asyncio.to_thread(study_rooms.load_snapshot, room_id, user_id)
+                if snapshot is None:
+                    hub.unsubscribe(conn, room_id)
+                    conn.send({"type": "error", "code": "room_not_found", "room_id": room_id})
+                    continue
+                conn.send({"type": "room.snapshot", "room_id": room_id, "version": snapshot["version"], "room": snapshot})
             elif kind == "typing" and (room_id := _room_id(message)) is not None:
                 # Relayed, never stored. Only for rooms this socket subscribed to (membership was checked then).
                 now = time.monotonic()

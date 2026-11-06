@@ -103,6 +103,20 @@ class PomodoroEvent(BaseModel):
     occurred_at: datetime | None = None
 
 
+LIVE_START_SECONDS = 60
+
+
+def _server_bound(row: StudySession) -> int | None:
+    """The most seconds a session can hold by the server's own clock. A `started` that arrived while it happened
+    (dated within LIVE_START_SECONDS of its receipt) started the server's count, so time since then is all that can be
+    vouched for; a start held back by the network loses only the seconds it was late. A start delivered later than that
+    came from an offline queue, where the device's timestamps are all there is: None, no bound."""
+    received = as_utc(row.created_at)
+    if abs((received - as_utc(row.started_at)).total_seconds()) > LIVE_START_SECONDS:
+        return None
+    return max(0, int((utcnow() - received).total_seconds())) + 2
+
+
 @router.put("/pomodoro/{cycle}")
 def record_pomodoro(cycle: str, data: PomodoroEvent, user: User = Depends(current_user), db: Session = Depends(get_db)):
     if not 8 <= len(cycle) <= 64 or not cycle.isalnum():
@@ -120,7 +134,8 @@ def record_pomodoro(cycle: str, data: PomodoroEvent, user: User = Depends(curren
         if data.event != "started":
             raise HTTPException(409, detail={"code": "pomodoro_not_started"})
         row = StudySession(user_id=user.id, mode="pomodoro", pomodoro_cycle=cycle, completed=False,
-                           status="started", duration_seconds=0, started_at=occurred, timezone=data.timezone)
+                           status="started", duration_seconds=0, started_at=occurred, timezone=data.timezone,
+                           created_at=utcnow())  # when the server received it: see _server_bound
         db.add(row)
         try:
             db.commit()
@@ -132,13 +147,17 @@ def record_pomodoro(cycle: str, data: PomodoroEvent, user: User = Depends(curren
         return {"id": row.id, "status": row.status, "xp_awarded": 0,
                 "statistics": statistics(db, user.id)}
     elapsed = max(0, int((occurred - as_utc(row.started_at)).total_seconds()))
-    if data.duration_seconds > elapsed + 2 or (data.event == "completed" and data.duration_seconds < 60):
+    if data.duration_seconds > elapsed + 2:
+        raise HTTPException(422, detail={"code": "invalid_focus_duration"})
+    bound = _server_bound(row)
+    duration = data.duration_seconds if bound is None else min(data.duration_seconds, bound)
+    if data.event == "completed" and duration < 60:
         raise HTTPException(422, detail={"code": "invalid_focus_duration"})
     # Conditional transition makes competing completion requests award only once.
     from sqlalchemy import update
     changed = db.execute(update(StudySession).where(StudySession.id == row.id, StudySession.status == "started")
                          .values(status=data.event, completed=data.event == "completed", ended_at=occurred,
-                                 duration_seconds=data.duration_seconds)).rowcount
+                                 duration_seconds=duration)).rowcount
     awarded = 0
     if changed:
         db.refresh(row)

@@ -148,13 +148,16 @@ describe('useDaylight', () => {
 
 describe('WalkLandscape daylight', () => {
   let clock: Date;
-  let appStateListener: ((state: string) => void) | undefined;
+  // The clock and the living layers each listen for the app coming back.
+  let appStateListeners: ((state: string) => void)[] = [];
+  const appStateListener = (state: string) => appStateListeners.forEach((listener) => listener(state));
   beforeEach(() => {
     jest.useFakeTimers();
     mockPetMounts.mockClear();
+    appStateListeners = [];
     jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(false);
     jest.spyOn(AppState, 'addEventListener').mockImplementation((_type, listener: any) => {
-      appStateListener = listener;
+      appStateListeners.push(listener);
       return { remove: jest.fn() } as any;
     });
   });
@@ -184,7 +187,7 @@ describe('WalkLandscape daylight', () => {
     clock = at(5, 0);
     await renderScene();
     expect(sunCentre().x).toBeLessThan(40);
-    expect(sunCentre().y).toBeCloseTo(80, 0);
+    expect(sunCentre().y).toBeCloseTo(163, 0); // on the land's horizon line
     expect(screen.getByTestId('walk-stars')).toBeTruthy(); // the last stars, fading
   });
 
@@ -207,8 +210,8 @@ describe('WalkLandscape daylight', () => {
     expect(Math.abs(sunCentre().y - before.y)).toBeLessThan(0.5);
 
     clock = at(9, 0, 0, 29); // the next morning
-    await act(async () => { appStateListener?.('background'); });
-    await act(async () => { appStateListener?.('active'); });
+    await act(async () => { appStateListener('background'); });
+    await act(async () => { appStateListener('active'); });
     expect(screen.getByTestId('walk-scene-morning')).toBeTruthy();
     await act(async () => { jest.advanceTimersByTime(2000); });
     expect(sunCentre().x).toBeCloseTo(340 * (0.07 + 0.86 * sunAt(9).x), 0);

@@ -37,6 +37,8 @@ export type Nav = {
   openFriends?: (tab?: FriendsTab) => void;
   /** Opens your own Vườn nhà (a friend watered or tended it). */
   openGarden?: () => void;
+  /** Opens Kho đồ (a friend sent a gift). */
+  openInventory?: () => void;
 };
 
 export const NavContext = createContext<Nav | null>(null);

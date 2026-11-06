@@ -193,7 +193,7 @@ def test_new_grade_content_frozen_archive_and_separate_reviews(fixture_catalog, 
     after = client.get("/api/education/archives/2026", headers=me).json()
     assert after["lesson_results"] == year["lesson_results"] and after["stats"] == year["stats"]
     assert after["reviews"]["completed"] == 1
-    assert client.get("/api/learning/review", headers=me).json()["total"] == review_before
+    assert review_before >= 1 and client.get("/api/learning/review", headers=me).json()["total"] == 0  # the old grade's left with it
     assert client.get("/api/education", headers=me).json()["progress"] == s["progress"]
     with SessionLocal() as db:
         archived = db.scalar(select(LearningSession).where(LearningSession.id == done["id"]))

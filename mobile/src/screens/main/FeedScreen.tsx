@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import type { User } from '../../auth/AuthContext';
 import { Text } from '../../components/Typography';
 import { appTheme as t } from '../../theme';
 import { Avatar, Button, Card, SoftInput } from '../../ui/kit';
-import { BackHeader } from '../together/ui';
+import { BackHeader, EmptyState, ErrorState, LoadingState } from '../together/ui';
 import { Post, request, showError } from './shared';
 
 type Props = {
@@ -13,10 +13,18 @@ type Props = {
   onBack: () => void;
 };
 
-/** "Bảng tin", the post feed, opened from Tiện ích. */
+/** "Bảng tin", the post feed, opened from Bạn bè and from Trợ giúp. Read again each time it opens. */
 export function FeedScreen({ user, posts, onPosts, onPosted, onBack }: Props) {
   const [draft, setDraft] = useState('');
   const [posting, setPosting] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState<unknown>(null);
+  const load = useCallback(async () => {
+    setError(null);
+    try { onPosts(await request('/api/community/posts')); setLoaded(true); }
+    catch (e) { setError(e); }
+  }, [onPosts]);
+  useEffect(() => { void load(); }, [load]);
 
   async function publish() {
     if (!draft.trim()) return;
@@ -42,6 +50,9 @@ export function FeedScreen({ user, posts, onPosts, onPosted, onBack }: Props) {
         <Button title="Đăng bài" icon="send" onPress={publish} loading={posting} disabled={!draft.trim()} />
       </Card>
 
+      {posts.length ? null : error ? <ErrorState error={error} onRetry={() => { void load(); }} />
+        : !loaded ? <LoadingState />
+        : <EmptyState icon="newspaper-outline" title="Chưa có bài viết nào" body="Hãy là người đầu tiên chia sẻ điều tích cực nhé." />}
       {posts.map((p) => (
         <Card key={p.id}>
           <View style={styles.author}>

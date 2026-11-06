@@ -44,11 +44,11 @@ describe('hatching before the walk', () => {
     expect(await screen.findByText(CONGRATS, {}, { timeout: 15000 })).toBeTruthy();
     expect(screen.getByText(`${USER.pet_name} sẽ bắt đầu đi khám phá ngay sau đây`)).toBeTruthy();
     expect(screen.getByText('Pet sẽ đi khám phá sau khi nở xong', { includeHiddenElements: true })).toBeTruthy();
-    expect(screen.queryByText('Pet đang đi dạo...', { includeHiddenElements: true })).toBeNull();
+    expect(screen.queryByText('Bé đang khám phá thế giới và tìm kiếm những món quà bất ngờ!', { includeHiddenElements: true })).toBeNull();
     expect(api.callsTo(HATCH)).toHaveLength(0); // not before the congratulations are closed
 
     fireEvent.press(screen.getByRole('button', { name: 'Tuyệt vời' }));
-    expect(await screen.findByText('Pet đang đi dạo...', {}, { timeout: 15000 })).toBeTruthy();
+    expect(await screen.findByText('Bé đang khám phá thế giới và tìm kiếm những món quà bất ngờ!', {}, { timeout: 15000 })).toBeTruthy();
     expect(screen.queryByText(CONGRATS)).toBeNull();
     expect(api.callsTo(HATCH)).toHaveLength(1);
   });
@@ -82,7 +82,7 @@ describe('hatching before the walk', () => {
     server(state, () => { state.hatched = true; return networkDown(); });
     render(<App />);
     fireEvent.press(await screen.findByRole('button', { name: 'Tuyệt vời' }, { timeout: 15000 }));
-    expect(await screen.findByText('Pet đang đi dạo...', {}, { timeout: 15000 })).toBeTruthy();
+    expect(await screen.findByText('Bé đang khám phá thế giới và tìm kiếm những món quà bất ngờ!', {}, { timeout: 15000 })).toBeTruthy();
     expect(screen.queryByText(CONGRATS)).toBeNull();
   });
 
@@ -94,7 +94,7 @@ describe('hatching before the walk', () => {
     });
     render(<App />);
     expect(await screen.findByText('Trứng đã đủ EXP · sẽ nở khi Pet trở về', {}, { timeout: 15000 })).toBeTruthy();
-    expect(screen.getByText('Pet đang đi dạo...')).toBeTruthy();
+    expect(screen.getByText('Bé đang khám phá thế giới và tìm kiếm những món quà bất ngờ!')).toBeTruthy();
     expect(screen.queryByText(CONGRATS)).toBeNull();
     expect(api.callsTo(HATCH)).toHaveLength(0);
   });

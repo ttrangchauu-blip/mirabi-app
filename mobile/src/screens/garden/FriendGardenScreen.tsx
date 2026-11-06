@@ -11,7 +11,7 @@ import { useToast } from '../../ui/Toast';
 import { EmptyState, ErrorState, LoadingState, OptionSheet, PetAvatar } from '../together/ui';
 import { WorldPanel } from '../../world/living';
 import { GardenWorld, type GardenFx } from './GardenWorld';
-import { CARE, careActions, careOf, careText, hoursLeft, planted, PlotDetail, SummaryBar, ToolBar, type Tool } from './gardenUi';
+import { CARE, careActions, careOf, careText, hoursLeft, planted, PlotDetail, SummaryBar, ToolBar, type Tool, useNextStage } from './gardenUi';
 
 type Props = { userId: number; onBack: () => void };
 
@@ -42,6 +42,7 @@ export function FriendGardenScreen({ userId, onBack }: Props) {
     try { setData(await inventoryApi.visit(userId)); setError(null); } catch (e) { setError(e); }
   }, [userId]);
   useEffect(() => { void load(); }, [load]);
+  useNextStage(data?.garden, load);
   useEffect(() => {
     const sub = BackHandler.addEventListener('hardwareBackPress', () => { onBack(); return true; });
     return () => sub.remove();

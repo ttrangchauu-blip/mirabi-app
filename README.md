@@ -127,7 +127,7 @@ npm run typecheck
 |---|---|---|
 | `POST /api/auth/register` | – | `{email, password, display_name?}` → `201` + session. `409 email_taken` if the email exists. |
 | `POST /api/auth/login` | – | `{email, password}` → session. `401 invalid_credentials` for a wrong password **or** unknown email (identical response). |
-| `POST /api/auth/refresh` | – | `{refresh_token}` → new session; the old refresh token is revoked (rotation). |
+| `POST /api/auth/refresh` | – | `{refresh_token}` → new session; the old refresh token is revoked (rotation). `Idempotency-Key` marks a retry after a lost answer. |
 | `POST /api/auth/logout` | – | `{refresh_token}` → `204`; revokes that device's session. Idempotent. |
 | `GET /api/auth/me` | Bearer | Current user's public profile. `401` if the token is missing, invalid or expired. |
 | `POST /api/auth/password/forgot` | – | `{email}` → `202` with the same message whether or not the account exists. `503 email_not_configured` if email delivery isn't set up. |
@@ -144,7 +144,7 @@ Errors are `{"detail": "<message>", "code": "<machine code>"}`; validation error
   `ver` claim checked against `users.token_version` (so a password reset kills outstanding access tokens).
 - **Refresh tokens**: random 384‑bit opaque strings, 30 days by default. Only their SHA‑256 is stored.
   Each refresh rotates the token; presenting an already-rotated token is treated as theft and revokes the
-  whole session family on that device.
+  whole session family on that device. One exception: when the answer to a refresh was lost (a timeout), the app retries the same token with an `Idempotency-Key` header, and within 2 minutes, if the token it was rotated to was never used, that retry gets a new session and the unused token stops working. Using that token afterwards is a replay.
 - **Brute-force protection**: sliding-window rate limits per account and per IP on login, plus limits on
   register, refresh and password reset (`429` with `Retry-After`). Unknown emails still pay the hashing cost,
   so timing doesn't reveal which accounts exist.
@@ -201,7 +201,7 @@ Users created before this flow existed see the picker and tour on their next sig
 - Main menu (bottom tab bar): Trang chủ, Học tập (subjects: English and Math games, Học tự chọn = Pomodoro), Phòng cá nhân
   (the pet's room, see [docs/personal-room.md](docs/personal-room.md); it replaced Nghề nghiệp, whose screen and API are kept),
   Bạn bè (friends, requests, friend code/QR and visits; formerly Cộng đồng, see
-  [docs/friend-visits.md](docs/friend-visits.md)), Tiện ích (includes Bảng tin, the post feed).
+  [docs/friend-visits.md](docs/friend-visits.md)), Tiện ích. Bảng tin (the post feed) opens from Bạn bè and from Trợ giúp.
   Screens live in [`mobile/src/screens/main/`](mobile/src/screens/main/); shared UI pieces in [`mobile/src/ui/kit.tsx`](mobile/src/ui/kit.tsx).
 - Designed for Samsung Galaxy S23 Ultra (384×824 dp). On a desktop browser the web build renders inside a Galaxy S23 Ultra
   frame (punch-hole camera, One UI status bar, three-button navigation bar, 32/48 dp safe areas); on devices the real safe
@@ -227,6 +227,7 @@ Backend `.env` (full list with comments in [backend/.env.example](backend/.env.e
 - `ENVIRONMENT`: `development` | `production` (production enables strict checks, HTTPS redirect + HSTS, hides `/docs`)
 - `JWT_SECRET`: required, see above
 - `DATABASE_URL`: defaults to SQLite
+- `DAILY_RESET_TIMEZONE`: the zone whose midnight starts a new day for quests, Home's tasks, the walk and the daily EXP caps; defaults to `Asia/Ho_Chi_Minh`
 - `CORS_ORIGINS`: only needed for the Expo web build; `*` is rejected in production
 - `EMAIL_BACKEND` / `SMTP_*`: password reset delivery
 - `ADMIN_EMAILS`: optional, comma-separated accounts that get the admin role (moderating user reports)
@@ -243,7 +244,7 @@ Mobile `.env`:
 - `POST /api/study/sessions`, `GET /api/study/sessions`
 - `GET /api/campus/courses`
 - `GET /api/career/recommendations`, `POST /api/career/quiz`
-- `GET /api/community/posts`, `POST /api/community/posts`, `POST /api/community/posts/{id}/like`
+- `GET /api/community/posts` (signed in), `POST /api/community/posts`, `POST /api/community/posts/{id}/like` (once per person)
 - `GET /api/profile`, `PATCH /api/profile`, `PUT /api/profile/study` (age and school grade)
 - `GET /api/room/items`, `POST /api/room/equip`
 - Personal pet room: `GET/PUT /api/personal-room`, `POST /api/personal-room/photo/preview`, `POST /api/personal-room/photo`,

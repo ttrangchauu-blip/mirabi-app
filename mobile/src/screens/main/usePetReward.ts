@@ -55,6 +55,18 @@ export function usePetReward(onConfirmed: () => void) {
     }
   }, []);
 
+  /** Another screen read /api/pet/space: a walk it found is watched from here on any tab, and a gift it found is shown. */
+  const pendingRef = useRef(pending);
+  pendingRef.current = pending;
+  const track = useCallback((space: any) => {
+    if (space?.status === 'walking') {
+      const seconds = Number(space.seconds_left);
+      if (seconds > 0) setReturnAt(Date.now() + seconds * 1000);
+    } else if (pendingRewardFrom(space) && !pendingRef.current) {
+      void check(); // read again: that answer may be from before a confirmation
+    }
+  }, [check]);
+
   useEffect(() => { void check(); }, [check]);
   useEffect(() => {
     const sub = AppState.addEventListener('change', (next) => { if (next === 'active') void check(); });
@@ -92,5 +104,5 @@ export function usePetReward(onConfirmed: () => void) {
     }
   }, [pending, check, confirmed]);
 
-  return { pending, confirming, error, version, check, confirm };
+  return { pending, confirming, error, version, check, track, confirm };
 }

@@ -256,6 +256,9 @@ goes on from level 2), and the **core words of lessons of a higher grade or of a
 - **Nothing new left**: the stage does not start (`409 vocabulary_exhausted`); the app offers *Ôn tập từ đã học*
   (`POST /api/learning/play {vocab: "review"}`), which serves words already met (wrong and due ones first) and never
   writes a discovery. Old words are never used to fill a Khám phá stage; the last stage is simply shorter.
+  A game not passed yet would then be out of reach for good, so `POST .../play` starts a review of the lesson's own
+  words instead (*Ôn tập từ của bài*: `kind: "review"`, `catalog.words_review`, at most 12 words). It earns no stage
+  reward and can pass the game at the same `min_first_try`; a stage of it is listed as a review, not a stage.
 - Lesson detail (`GET /api/learning/lesson-catalog/{key}`) gives each vocabulary game an `explore` block:
   `core_total`, `core_discovered`, `core_completed`, `core_completed_session` (the stage that discovered the lesson's
   last own word: its result says *"Bạn đã hoàn thành từ vựng của bài này! Hãy tiếp tục khám phá những từ mới cùng chủ
@@ -297,7 +300,8 @@ not attributed to any lesson.
 
 - **Completed** (*Đã hoàn thành*): every game of the lesson (`completion.games: "all"`, or `"any"`) has a completed
   stage with at least `completion.min_first_try` (default 80%) of its graded questions right at the first try. Opening
-  a lesson or playing a stage is not enough; review stages never count.
+  a lesson or playing a stage is not enough; review stages never count, but for the review of a lesson's own words when
+  its game has no new word left (see *Nothing new left*).
 - Right at the first try, attempts, hints and the questions to review are the turns' own (`first_try`, `attempts`,
   `hints_used`, outcomes); wrong ones go to **Cần ôn** under the lesson's chapter as for every game, and *Ôn lại*
   plays them again from the same lesson.
@@ -329,9 +333,12 @@ enough reviewed content is not offered (no short or padded stage), and an empty 
   older years are reviewed from Kho lưu trữ học tập.
 - **Sinh viên, Người đi làm/Học tự do**: no school grade is assumed. They pick a level (`?level=basic|intermediate|advanced`,
   *Cơ bản / Trung cấp / Nâng cao*, kept on the device) and see Tiếng Anh, Toán and Tin học.
-- Math: the learner's grade is the only grade offered in the setup (content exists for grades 2, 3, 4 and 6).
+- Math: the learner's grade is the only grade offered in the setup (content exists for grades 2, 3, 4 and 6); `POST
+  /api/learning/sessions` refuses another grade's lesson (`403 grade_locked`, not outside school) and the catalog's lessons
+  (`404 lesson_not_found`: they start from their own route, which checks the grade and the unlocks).
 - Flow unchanged: subject → game → first-time guide → 3-2-1 → play. `POST /api/learning/play {game, level?}` (the grade is the learner's)
-  answers `409 game_not_available` for a grade without content.
+  answers `409 game_not_available` for a grade without content (the table below). `vocab: "review"` is never refused for
+  this: it serves words already met, also those of a lesson at grades 1–2.
 
 | Game | Subject | Grades | Stage | Rules (Học tập) |
 |---|---|---|---|---|
@@ -390,8 +397,9 @@ open. A transition that never reports back ends by itself (`STEP_MAX_MS`), and t
 **On the server** (`learning_engine.wrong_policy`): `reveal` everywhere but where targets race each other in real time,
 the falling words and Math Battle in the old Thử thách sessions (`retry`, with no held question and no *Tiếp theo*). In
 Học tập a question answered wrong comes back once at the end of the stage (`add_practice_turn`), with another question
-before it, from its first step (`first_prompt`, kept on the server's side) and under a new `turn_id`; that is the only
-repeat within a stage. `turn_id` never changes while a question is open and never comes back.
+before it, from its first step (`first_prompt`, kept on the server's side) and under a new `turn_id`; that and the
+re-practice after *Xem đáp án* (which comes even with nothing before it, as the stage needs it) are the only repeats
+within a stage. `turn_id` never changes while a question is open and never comes back.
 
 The world moves on with right answers only (`worldDone`: `resolved_count` minus the questions over without a right
 answer yet); a right re-practice makes up for one. The HUD counts every question over.
@@ -686,7 +694,8 @@ Reused, not duplicated: `users` (identity, pet, level), `exp_events` + `award_ex
 | Target reaches ground/base | impossible | −1 heart, turn `missed`, answer shown |
 
 - **"Xem đáp án"** resolves the turn as `revealed` and queues a re-practice turn of the same question. The stage can
-  only complete once every revealed question has a correctly answered re-practice. The original result stays
+  only complete once every revealed question has a correctly answered re-practice (a stage that has used up its
+  `max_practice_turns` has none left to ask, and can complete). The original result stays
   `revealed` (re-practice never rewrites it) and never counts toward mastery.
 - **Time up** is not a loss. Open turns can still be answered; no new turn is issued. The user then chooses
   *Học thêm 5 phút* (`/extend`, max 90 min in total) or *Kết thúc* (`/abandon` with `reason=time_up`, no completion reward).
@@ -867,7 +876,8 @@ device's text-to-speech, as in the games), right/wrong counts per game, every an
 - **Once per subject per local day**: unique `learning_rewards (user_id, subject_id, local_date)`. The local day is
   the **account timezone** (`pomodoro_settings.timezone`; set from the device on first use), not the server's.
 - **Daily task**: if the user picked the *Học một điều mới* (`learning`) daily task and it is not done today, the first
-  completed stage completes that task and gets its task EXP **instead of** the stage reward (`reward.status=daily_task`).
+  completed stage completes that task and gets its task EXP **instead of** the stage reward (`reward.status=daily_task`),
+  also when its subject has already had its stage reward today.
 - **Daily cap 60**: stage EXP shares the existing 60 EXP/day task pool (`TASK_DAILY_EXP_CAP`). The amount can be lower
   than 10 near the cap (`capped`) or 0 (`daily_cap_reached`).
 - Replays, review sessions, `failed` and `abandoned` sessions keep progress but earn no completion reward
@@ -878,8 +888,9 @@ device's text-to-speech, as in the games), right/wrong counts per game, every an
 **Where this differs from the existing reward system (kept compatible)**
 - `TASK_DAILY_EXP_CAP` now counts `task` **and** `learning` EXP (`progression.CAP_POOLS`), so the total of both stays
   ≤ 60. Task-only behaviour is unchanged.
-- Existing daily tasks still use the **UTC** day (unchanged, to avoid moving quest days for current users); the
-  learning reward uses the account's local day. Around local midnight the two "days" can differ by a few hours.
+- Daily tasks use the server's calendar day (`backend/app/days.py`, `DAILY_RESET_TIMEZONE`, default
+  `Asia/Ho_Chi_Minh`; 2026-11-04, replacing the UTC day, which reset quests at 07:00 in Vietnam). The learning reward
+  uses the account's local day. For an account elsewhere the two "days" can differ by a few hours.
 - The 60 EXP cap is not a global cap on all EXP: login streak, study minutes, group and team-quest EXP keep their own
   caps as before.
 
@@ -1042,5 +1053,5 @@ Screenshots of a real end-to-end run (backend → Expo web → headless Chrome) 
 - Time spent in a learning game is not added to the focus-timer statistics or study-minute EXP (the stage reward is
   separate); *Học tự chọn* sessions count exactly as before. Focus-timer rows in `study_sessions` carry
   `study_type = self_study` (Study Together rooms: `together`).
-- Daily tasks still use the UTC day while stage rewards use the account's local day (see above).
+- Daily tasks use the server's calendar day while stage rewards use the account's local day (see above).
 - Play-time and miss checks are plausibility limits, not anti-cheat.

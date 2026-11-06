@@ -1,13 +1,12 @@
-import React from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { Image, Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { SvgXml } from 'react-native-svg';
 import { Text } from '../../components/Typography';
-import { GARDEN_PLANTS } from '../../gardenArt';
 import type { CareKind, GardenPlot, PlantedPlot, PlotCare } from '../../inventory/types';
 import { appTheme as t } from '../../theme';
 import { radius } from '../../ui/design';
 import type { IconName } from '../../ui/kit';
+import { plantArt } from './gardenArt';
 
 /** The pieces both gardens share (yours and a friend's), besides the scene itself: the summary bar, the tools and a plant's detail. */
 
@@ -20,14 +19,26 @@ export const CARE_KINDS: CareKind[] = ['water', 'tend'];
 export const hoursLeft = (iso: string) => Math.max(1, Math.ceil((Date.parse(iso) - Date.now()) / 3_600_000));
 export const careOf = (plot: PlantedPlot, kind: CareKind): PlotCare => plot.care?.[kind] ?? { done: false, by: null, at: null };
 export const planted = (plots: GardenPlot[]) => plots.filter((p): p is PlantedPlot => !p.empty);
-/** "Đang lớn · ~3 giờ nữa" or "Đã lớn". */
-export const growthText = (plot: PlantedPlot) => (plot.grown ? plot.stage_label
-  : plot.next_stage_at ? `${plot.stage_label} · ~${hoursLeft(plot.next_stage_at)} giờ` : plot.stage_label);
 /** Who cared for it today, for the detail and for screen readers. */
 export function careText(plot: PlantedPlot, kind: CareKind) {
   const c = careOf(plot, kind);
   if (!c.done) return kind === 'water' ? 'Chưa tưới hôm nay' : 'Chưa chăm sóc hôm nay';
   return `${CARE[kind].done} hôm nay${c.by ? ` · ${c.by.me ? 'bạn' : c.by.display_name}` : ''}`;
+}
+
+/** Asks the backend again when the next plant reaches its next stage (the backend decides, by its own clock: the wait is
+ * told from its `server_now`), so a garden left open shows it growing and "Dọn ô" once it has. */
+export function useNextStage(garden: { plots: GardenPlot[]; server_now?: string } | null | undefined, reload: () => unknown) {
+  const stages = garden ? planted(garden.plots).flatMap((p) => (p.next_stage_at ? [Date.parse(p.next_stage_at)] : [])) : [];
+  const soonest = stages.length ? Math.min(...stages) : null;
+  const serverNow = garden?.server_now;
+  useEffect(() => {
+    if (soonest === null) return;
+    const now = serverNow ? Date.parse(serverNow) : NaN;
+    const wait = soonest - (Number.isNaN(now) ? Date.now() : now) + 1500;
+    const id = setTimeout(() => { void reload(); }, Math.min(Math.max(wait, 1000), 2 ** 31 - 1));
+    return () => clearTimeout(id);
+  }, [soonest, serverNow, reload]);
 }
 
 // ------------------------------------------------------------------------------------------------ summary bar
@@ -50,18 +61,22 @@ export function SummaryBar({ stats }: { stats: Stat[] }) {
 // ------------------------------------------------------------------------------------------------ tools
 export type Tool = { id: string; label: string; icon: IconName; color: string; bg: string; disabled?: boolean };
 
-/** Icon + short label; a chosen tool is applied to the plots tapped next, tapped again it is put down. */
+/** How tall a tool is on screen; its finger area is taller (`TOOL_SLOP`). What floats at the bottom of a garden is told from this. */
+export const TOOL_HEIGHT = 36;
+const TOOL_SLOP = { top: 6, bottom: 6, left: 4, right: 4 };
+
+/** Icon + short label, small, so they leave the plots in view; a chosen tool is applied to the plots tapped next, tapped again it is put down. */
 export function ToolBar({ tools, active, onChange }: { tools: Tool[]; active: string | null; onChange: (id: string | null) => void }) {
   return (
     <View style={s.tools} accessibilityRole="radiogroup">
       {tools.map((tool) => {
         const on = active === tool.id;
         return (
-          <Pressable key={tool.id} onPress={() => onChange(on ? null : tool.id)} disabled={tool.disabled} accessibilityRole="radio"
+          <Pressable key={tool.id} onPress={() => onChange(on ? null : tool.id)} disabled={tool.disabled} hitSlop={TOOL_SLOP} accessibilityRole="radio"
             accessibilityState={{ selected: on, disabled: !!tool.disabled }} accessibilityLabel={tool.label}
-            style={({ pressed }) => [s.tool, on && { backgroundColor: tool.color, borderColor: tool.color }, tool.disabled && s.dimmed, pressed && s.pressed]}>
+            style={({ pressed }) => [s.tool, on && { backgroundColor: tool.color }, tool.disabled && s.toolOff, pressed && s.pressed]}>
             <View style={[s.toolIcon, { backgroundColor: on ? '#FFFFFF33' : tool.bg }]}>
-              <Ionicons name={tool.icon} size={15} color={on ? '#FFFFFF' : tool.color} />
+              <Ionicons name={tool.icon} size={13} color={on ? '#FFFFFF' : tool.color} />
             </View>
             <Text style={[s.toolText, on && s.toolTextOn]} numberOfLines={1}>{tool.label}</Text>
           </Pressable>
@@ -76,11 +91,10 @@ export type PlotAction = { id: string; label: string; icon: IconName; color?: st
 
 /** Inside an OptionSheet: how the plant grows, today's care, then what this person may do with it. */
 export function PlotDetail({ plot, actions, note, onAction }: { plot: PlantedPlot; actions: PlotAction[]; note?: string; onAction: (id: string) => void }) {
-  const art = (GARDEN_PLANTS[plot.item_id] ?? GARDEN_PLANTS.seedling)?.[plot.stage];
   return (
     <View>
       <View style={s.detail}>
-        <View style={s.detailArt}>{art ? <SvgXml xml={art} width="100%" height="100%" /> : null}</View>
+        <View style={s.detailArt}><Image source={plantArt(plot.item_id, plot.stage)} resizeMode="contain" fadeDuration={0} accessibilityIgnoresInvertColors style={s.detailImage} /></View>
         <View style={s.flex}>
           <Text style={s.detailStage}>{plot.stage_label}</Text>
           <Text style={s.detailSub}>{plot.grown ? 'Cây đã lớn hẳn' : plot.next_stage_at ? `Lớn tiếp sau khoảng ${hoursLeft(plot.next_stage_at)} giờ` : ' '}</Text>
@@ -125,14 +139,16 @@ const s = StyleSheet.create({
   stat: { flexDirection: 'row', alignItems: 'center', gap: 4 },
   statText: { color: '#1F5A26', fontSize: 11, fontWeight: '700' },
   statWarn: { color: '#A15C00' },
-  tools: { flexDirection: 'row', gap: 6 },
-  tool: { flex: 1, minWidth: 0, minHeight: 44, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 4, paddingHorizontal: 3,
-    borderRadius: radius.md, backgroundColor: '#FFFFFF', borderWidth: 1.5, borderColor: '#D3E6D0' },
-  toolIcon: { width: 22, height: 22, borderRadius: 11, alignItems: 'center', justifyContent: 'center' },
-  toolText: { flexShrink: 1, color: t.ink, fontSize: 11.5, fontWeight: '700' },
+  tools: { flexDirection: 'row', justifyContent: 'center', gap: 14 },
+  tool: { flex: 1, minWidth: 0, maxWidth: 104, height: TOOL_HEIGHT, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 5, paddingHorizontal: 4,
+    borderRadius: TOOL_HEIGHT / 2, backgroundColor: '#FFFFFF', shadowColor: '#23452A', shadowOpacity: 0.16, shadowRadius: 5, shadowOffset: { width: 0, height: 2 }, elevation: 2 },
+  toolOff: { backgroundColor: '#F2F6DF', opacity: 0.86, shadowOpacity: 0.06, elevation: 0 },
+  toolIcon: { width: 20, height: 20, borderRadius: 10, alignItems: 'center', justifyContent: 'center' },
+  toolText: { flexShrink: 1, color: t.ink, fontSize: 12, fontWeight: '700' },
   toolTextOn: { color: '#FFFFFF' },
   detail: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 6 },
   detailArt: { width: 64, height: 64, borderRadius: 16, backgroundColor: '#E6F4E4', padding: 4 },
+  detailImage: { width: '100%', height: '100%' },
   detailStage: { color: t.ink, fontSize: 14, fontWeight: '800' },
   detailSub: { color: t.muted, fontSize: 11.5, fontWeight: '600', marginBottom: 3 },
   careLine: { flexDirection: 'row', alignItems: 'center', gap: 5, marginTop: 2 },

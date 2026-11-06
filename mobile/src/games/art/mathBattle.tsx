@@ -1,4 +1,5 @@
 import React from 'react';
+import { ARENA_ART, Strip } from './rendered';
 import Svg, { Circle, Defs, Ellipse, G, LinearGradient, Path, RadialGradient, Rect, Stop } from 'react-native-svg';
 
 /* Vector art for the math battle: six monsters (all facing left, towards the pet), four parallax arenas and a few
@@ -598,45 +599,6 @@ export type ArenaLayerProps = { zone: Zone; layer: ArenaLayerName; width: number
 const scaleOf = (height: number) => height / 260;
 const moveTo = (x: number, y: number, k: number) => `translate(${r1(x)} ${r1(y)}) scale(${k3(k)})`;
 
-/** A sine-topped band over the two-width strip; whole periods per width, sampled at points that repeat every width,
- * so the second half matches the first exactly. `bottom` may be above the wave (a ceiling) or below it (ground). */
-function wave(width: number, base: number, amp: number, periods: number, bottom: number, phase = 0) {
-  const step = width / Math.max(8, Math.round(width / 6));
-  const y = (x: number) => r1(base + amp * Math.sin((x / width) * periods * 2 * Math.PI + phase));
-  let d = `M${r1(-step)} ${r1(bottom)}`;
-  for (let i = -1; i * step <= width * 2 + step; i++) d += ` L${r1(i * step)} ${y(i * step)}`;
-  const end = r1(Math.ceil((width * 2 + step) / step) * step);
-  return `${d} L${end} ${r1(bottom)} Z`;
-}
-
-type Item = readonly [f: number, reach: number, draw: (x: number) => React.ReactNode];
-/** Places each item once per width. Copies just off either end are added where they reach into the strip, so what
- * pokes over one seam also pokes over the other and the two halves stay identical. */
-function tile(width: number, items: readonly Item[]) {
-  const out: React.ReactNode[] = [];
-  [-width, 0, width, width * 2].forEach((offset) => items.forEach(([f, reach, draw], i) => {
-    const x = offset + width * f;
-    if (x + reach < 0 || x - reach > width * 2) return;
-    out.push(<React.Fragment key={`${offset}:${i}`}>{draw(x)}</React.Fragment>);
-  }));
-  return out;
-}
-
-/** Hanging spikes (or, with dir -1, rising ones) at the same spots in both halves, as one path. */
-function spikes(width: number, base: number, s: number, list: readonly (readonly [number, number, number])[], dir = 1) {
-  let d = '';
-  for (const offset of [0, width]) {
-    for (const [f, len, half] of list) {
-      const x = offset + width * f;
-      const hw = half * s;
-      const tip = base + dir * len * s;
-      d += ` M${r1(x - hw)} ${r1(base)} Q${r1(x - hw * 0.3)} ${r1(base + dir * len * s * 0.6)} ${r1(x)} ${r1(tip)}`
-        + ` Q${r1(x + hw * 0.3)} ${r1(base + dir * len * s * 0.6)} ${r1(x + hw)} ${r1(base)} Z`;
-    }
-  }
-  return d.trim();
-}
-
 function Cloud({ x, y, k, color, opacity }: { x: number; y: number; k: number; color: string; opacity: number }) {
   return <G transform={moveTo(x, y, k)} opacity={opacity}>
     <Ellipse cx={0} cy={0} rx={26} ry={9} fill={color} />
@@ -683,87 +645,6 @@ const forestSky: Draw = (w, h) => {
   </>;
 };
 
-const forestFar: Draw = (w, h) => {
-  const s = scaleOf(h);
-  const crowns = (list: readonly (readonly [number, number])[], y: number, fill: string): Item[] =>
-    list.map(([f, r]) => [f, r * s + 2, (x) => <Circle cx={r1(x)} cy={r1(y)} r={r1(r * s)} fill={fill} />]);
-  return <>
-    <Path d={wave(w, h * 0.6, 6 * s, 3, h, 0.4)} fill="#AEDCB6" />
-    {tile(w, crowns([[0.06, 30], [0.2, 24], [0.34, 32], [0.5, 26], [0.66, 30], [0.8, 22], [0.93, 28]], h * 0.57, '#AEDCB6'))}
-    <Path d={wave(w, h * 0.69, 5 * s, 4, h, 1.6)} fill="#96CDA3" />
-    {tile(w, crowns([[0.13, 22], [0.41, 26], [0.58, 20], [0.74, 24], [0.88, 18]], h * 0.67, '#96CDA3'))}
-  </>;
-};
-
-function RoundTree({ x, y, k, tone }: { x: number; y: number; k: number; tone: readonly [string, string] }) {
-  return <G transform={moveTo(x, y, k)}>
-    <Path d="M-6 0 L-4 -46 L4 -46 L6 0 Z" fill="#9B6B4A" />
-    <Circle cx={0} cy={-70} r={34} fill={tone[0]} />
-    <Circle cx={-24} cy={-50} r={20} fill={tone[1]} />
-    <Circle cx={24} cy={-52} r={22} fill={tone[1]} />
-  </G>;
-}
-
-function GlowShroom({ x, y, k, cap, glow }: { x: number; y: number; k: number; cap: string; glow: string }) {
-  return <G transform={moveTo(x, y, k)}>
-    <Ellipse cx={0} cy={-14} rx={24} ry={18} fill={url(glow)} />
-    <Rect x={-4} y={-14} width={8} height={14} rx={3} fill="#FFF1DC" />
-    <Path d="M-14 -12 C-14 -28 14 -28 14 -12 Z" fill={cap} />
-    <Circle cx={-4} cy={-19} r={2.6} fill="#F4FFFF" />
-  </G>;
-}
-
-const forestMid: Draw = (w, h) => {
-  const s = scaleOf(h);
-  const toneA = ['#6FC27F', '#5DB070'] as const;
-  const toneB = ['#7ACB8A', '#62B577'] as const;
-  const base = h * 0.79;
-  return <>
-    <Defs><Fade id="mb-forest-mid-glow" color="#E7B8FF" opacity={0.8} /></Defs>
-    {tile(w, ([[0.1, 1.15, toneA], [0.44, 0.95, toneB], [0.78, 1.25, toneA]] as const).map(([f, k, tone]): Item =>
-      [f, 48 * k * s, (x) => <RoundTree x={x} y={base} k={k * s} tone={tone} />]))}
-    <Path d={wave(w, h * 0.77, 5 * s, 5, h, 0.8)} fill="#5FAE6C" />
-    {tile(w, ([[0.27, 1, '#B57BEA'], [0.62, 0.8, '#FF8FB1']] as const).map(([f, k, cap]): Item =>
-      [f, 24 * k * s, (x) => <GlowShroom x={x} y={h * 0.8} k={k * s} cap={cap} glow="mb-forest-mid-glow" />]))}
-  </>;
-};
-
-/** Four round petals around a point, as one path. */
-function petals(x: number, y: number, r: number) {
-  return [[0, -r], [r, 0], [0, r], [-r, 0]].map(([dx, dy]) => {
-    const cx = x + dx;
-    const cy = y + dy;
-    return `M${r1(cx - r)} ${r1(cy)} a${r1(r)} ${r1(r)} 0 1 0 ${r1(2 * r)} 0 a${r1(r)} ${r1(r)} 0 1 0 ${r1(-2 * r)} 0`;
-  }).join(' ');
-}
-
-const forestNear: Draw = (w, h) => {
-  const s = scaleOf(h);
-  const flowers: Item[] = ([[0.08, '#FF9EC4', 0.84], [0.3, '#FFF1A0', 0.91], [0.55, '#B9A7FF', 0.85], [0.86, '#FF9EC4', 0.94]] as const)
-    .map(([f, color, y]) => [f, 6 * s, (x) => <>
-      <Path d={petals(x, h * y, 2.6 * s)} fill={color} />
-      <Circle cx={r1(x)} cy={r1(h * y)} r={r1(1.8 * s)} fill="#FFD25A" />
-    </>]);
-  const tufts: Item[] = ([[0.18, 0.83], [0.46, 0.89], [0.7, 0.82], [0.95, 0.88]] as const).map(([f, y]) => [f, 7 * s, (x) =>
-    <Path d="M-6 0 Q-5 -8 -2 -10 Q-2 -4 0 0 Q1 -9 4 -12 Q3 -5 6 0 Z" fill="#6DB65E" transform={moveTo(x, h * y, s)} />]);
-  const flies: Item[] = ([[0.14, 0.62], [0.5, 0.55], [0.82, 0.66]] as const).map(([f, y]) => [f, 5 * s, (x) => <>
-    <Circle cx={r1(x)} cy={r1(h * y)} r={r1(5 * s)} fill="#FFF09A" opacity={0.3} />
-    <Circle cx={r1(x)} cy={r1(h * y)} r={r1(1.8 * s)} fill="#FFF3A0" />
-  </>]);
-  const shroom: Item = [0.38, 10 * s, (x) => <G transform={moveTo(x, h * 0.86, s)}>
-    <Rect x={-2.5} y={-8} width={5} height={8} rx={2} fill="#FFF1DC" />
-    <Path d="M-8 -7 C-8 -16 8 -16 8 -7 Z" fill="#FF6F6F" />
-    <Circle cx={-2} cy={-11} r={1.6} fill="#FFFFFF" />
-  </G>];
-  return <>
-    <Path d={wave(w, h * 0.8, 2.5 * s, 3, h, 0.2)} fill="#9ADB84" />
-    <Path d={wave(w, h * 0.87, 2 * s, 4, h, 1.1)} fill="#86CB72" />
-    {tile(w, [...tufts, ...flowers, shroom, ...flies])}
-  </>;
-};
-
-// --- Cave -------------------------------------------------------------------------------------------------------
-
 const caveSky: Draw = (w, h) => {
   const glints = [[0.08, 0.2], [0.22, 0.36], [0.35, 0.14], [0.5, 0.42], [0.62, 0.22], [0.74, 0.38], [0.86, 0.12], [0.95, 0.3]];
   return <>
@@ -779,80 +660,6 @@ const caveSky: Draw = (w, h) => {
     {glints.map(([f, y], i) => <Circle key={f} cx={w * f} cy={h * y} r={i % 2 ? 1.2 : 1.8} fill="#BFF6FF" opacity={0.55} />)}
   </>;
 };
-
-const caveFar: Draw = (w, h) => {
-  const s = scaleOf(h);
-  const glints: Item[] = ([[0.12, 0.56, '#7FE8F0'], [0.37, 0.6, '#C69CFF'], [0.63, 0.55, '#7FE8F0'], [0.88, 0.6, '#C69CFF']] as const)
-    .map(([f, y, color]) => [f, 5 * s, (x) => <Path d={`M0 -6 L4 0 L0 6 L-4 0 Z`} fill={color} opacity={0.75} transform={moveTo(x, h * y, s)} />]);
-  return <>
-    <Path d={`${wave(w, h * 0.09, 4 * s, 3, 0, 0.5)} ${spikes(w, h * 0.07, s,
-      [[0.05, 22, 8], [0.16, 40, 11], [0.29, 28, 9], [0.43, 52, 13], [0.57, 30, 10], [0.7, 46, 12], [0.82, 26, 9], [0.93, 36, 10]])}`} fill="#241F42" />
-    <Path d={wave(w, h * 0.6, 10 * s, 2, h, 0.3)} fill="#2F2852" />
-    {tile(w, glints)}
-    <Path d={wave(w, h * 0.69, 6 * s, 3, h, 2.2)} fill="#383062" />
-  </>;
-};
-
-const CRYSTAL_TONES = { cyan: ['#C4FCFF', '#5FE0EC', '#2AA7C4'], violet: ['#EBD2FF', '#B47CF5', '#7A45C8'] } as const;
-
-function CrystalCluster({ x, y, k, tone, glow }: { x: number; y: number; k: number; tone: keyof typeof CRYSTAL_TONES; glow: string }) {
-  const c = CRYSTAL_TONES[tone];
-  return <G transform={moveTo(x, y, k)}>
-    <Ellipse cx={0} cy={-26} rx={46} ry={40} fill={url(glow)} />
-    <Path d="M-24 0 L-30 -30 L-17 -44 L-10 0 Z" fill={c[2]} />
-    <Path d="M10 0 L20 -36 L30 -26 L26 0 Z" fill={c[2]} />
-    <Path d="M-12 0 L-8 -50 L2 -66 L12 -48 L14 0 Z" fill={c[1]} />
-    <Path d="M2 -66 L12 -48 L14 0 L4 0 Z" fill={c[2]} opacity={0.55} />
-    <Path d="M-5 -44 L0 -58" stroke={c[0]} strokeWidth={3} strokeLinecap="round" />
-  </G>;
-}
-
-function Rock({ x, y, k }: { x: number; y: number; k: number }) {
-  return <G transform={moveTo(x, y, k)}>
-    <Path d="M-26 0 C-28 -14 -18 -26 -4 -28 C12 -30 26 -18 26 0 Z" fill="#4A4176" />
-    <Path d="M-16 -18 C-10 -24 0 -26 8 -24" stroke="#6A5F9C" strokeWidth={4} fill="none" strokeLinecap="round" />
-  </G>;
-}
-
-const caveMid: Draw = (w, h) => {
-  const s = scaleOf(h);
-  const base = h * 0.8;
-  return <>
-    <Defs>
-      <Fade id="mb-cave-mid-cyan" color="#6FF2FF" opacity={0.55} />
-      <Fade id="mb-cave-mid-violet" color="#C58BFF" opacity={0.55} />
-    </Defs>
-    <Path d={`${wave(w, h * 0.04, 3 * s, 2, 0, 1)} ${spikes(w, h * 0.03, s, [[0.12, 62, 16], [0.5, 44, 13], [0.76, 72, 18]])}`} fill="#1E1A38" />
-    <Path d={wave(w, h * 0.76, 4 * s, 3, h, 2)} fill="#3A3263" />
-    <Path d={spikes(w, base + 2, s, [[0.06, 50, 12], [0.55, 34, 9]], -1)} fill="#463D72" />
-    {tile(w, ([[0.2, 1, 'cyan'], [0.68, 1.2, 'violet']] as const).map(([f, k, tone]): Item =>
-      [f, 46 * k * s, (x) => <CrystalCluster x={x} y={base} k={k * s} tone={tone} glow={`mb-cave-mid-${tone}`} />]))}
-    {tile(w, ([[0.42, 1], [0.9, 0.8]] as const).map(([f, k]): Item => [f, 28 * k * s, (x) => <Rock x={x} y={base + 2 * s} k={k * s} />]))}
-  </>;
-};
-
-const caveNear: Draw = (w, h) => {
-  const s = scaleOf(h);
-  const pebbles: Item[] = ([[0.12, 0.9], [0.36, 0.95], [0.58, 0.86], [0.8, 0.93]] as const).map(([f, y]) => [f, 6 * s, (x) =>
-    <Ellipse cx={r1(x)} cy={r1(h * y)} rx={r1(5 * s)} ry={r1(2.4 * s)} fill="#5D5390" />]);
-  const shards: Item[] = ([[0.25, 'cyan'], [0.72, 'violet']] as const).map(([f, tone]) => [f, 14 * s, (x) => {
-    const c = CRYSTAL_TONES[tone];
-    return <G transform={moveTo(x, h * 0.84, s)}>
-      <Circle cx={0} cy={-6} r={13} fill={c[1]} opacity={0.2} />
-      <Path d="M-6 0 L-4 -14 L0 -18 L3 -12 L4 0 Z" fill={c[1]} />
-      <Path d="M3 0 L8 -10 L10 0 Z" fill={c[2]} />
-    </G>;
-  }]);
-  const crack: Item = [0.47, 14 * s, (x) =>
-    <Path d="M-12 0 L-4 4 L2 1 L10 6" stroke="#2F2852" strokeWidth={2} fill="none" strokeLinecap="round" transform={moveTo(x, h * 0.9, s)} />];
-  return <>
-    <Path d={wave(w, h * 0.8, 2 * s, 4, h, 0.5)} fill="#4B4277" />
-    <Path d={wave(w, h * 0.88, 2 * s, 3, h, 2)} fill="#3D3566" />
-    {tile(w, [...pebbles, ...shards, crack])}
-  </>;
-};
-
-// --- Castle -----------------------------------------------------------------------------------------------------
 
 const castleSky: Draw = (w, h) => {
   const s = scaleOf(h);
@@ -872,111 +679,6 @@ const castleSky: Draw = (w, h) => {
     <Cloud x={w * 0.62} y={h * 0.36} k={s * 0.8} color="#9C6AA6" opacity={0.5} />
   </>;
 };
-
-function Tower({ x, y, k, tall, flag }: { x: number; y: number; k: number; tall: number; flag?: boolean }) {
-  return <G transform={moveTo(x, y, k)}>
-    <Rect x={-11} y={-tall} width={22} height={tall} fill="#4B3B78" />
-    <Path d={`M-15 ${-tall} L0 ${-tall - 26} L15 ${-tall} Z`} fill="#3B2D63" />
-    <Rect x={-3} y={-tall + 14} width={6} height={9} rx={3} fill="#FFC96B" opacity={0.85} />
-    {flag ? <Path d={`M0 ${-tall - 26} L0 ${-tall - 40} L12 ${-tall - 35} L0 ${-tall - 31}`} fill="#C2415C" stroke="#3B2D63" strokeWidth={1.5} /> : null}
-  </G>;
-}
-
-const castleFar: Draw = (w, h) => {
-  const s = scaleOf(h);
-  const base = h * 0.64;
-  const keep: Item = [0.5, 70 * s, (x) => <>
-    <Rect x={r1(x - 50 * s)} y={r1(base - 46 * s)} width={r1(100 * s)} height={r1(46 * s)} fill="#4B3B78" />
-    <Tower x={x - 44 * s} y={base} k={s} tall={70} />
-    <Tower x={x} y={base} k={s * 1.2} tall={90} flag />
-    <Tower x={x + 44 * s} y={base} k={s} tall={62} />
-  </>];
-  const lone: Item[] = ([[0.12, 0.9, 50], [0.84, 0.8, 56]] as const).map(([f, k, tall]) => [f, 16 * k * s, (x) =>
-    <Tower x={x} y={base} k={k * s} tall={tall} />]);
-  return <>
-    {tile(w, [keep, ...lone])}
-    <Path d={wave(w, h * 0.68, 6 * s, 2, h, 0.6)} fill="#55437F" />
-    <Path d={wave(w, h * 0.74, 4 * s, 3, h, 1.9)} fill="#6B5490" opacity={0.6} />
-  </>;
-};
-
-/** A crenellated wall top over the whole strip: merlons repeat a whole number of times per width. */
-function battlements(width: number, top: number, bottom: number, s: number) {
-  const n = Math.max(4, Math.round(width / (34 * s)));
-  const step = width / n;
-  const mh = 12 * s;
-  let d = `M${r1(-step)} ${r1(bottom)} L${r1(-step)} ${r1(top)}`;
-  for (let k = -1; k <= 2 * n; k++) {
-    const x = k * step;
-    d += ` L${r1(x)} ${r1(top)} L${r1(x)} ${r1(top - mh)} L${r1(x + step / 2)} ${r1(top - mh)} L${r1(x + step / 2)} ${r1(top)}`;
-  }
-  return `${d} L${r1((2 * n + 1) * step)} ${r1(top)} L${r1((2 * n + 1) * step)} ${r1(bottom)} Z`;
-}
-
-/** Mortar lines in staggered rows, as one path that repeats every width. */
-function bricks(width: number, top: number, bottom: number, s: number, rowH = 18, brickW = 40) {
-  const n = Math.max(4, Math.round(width / (brickW * s)));
-  const step = width / n;
-  const row = rowH * s;
-  let d = '';
-  for (let y = top, i = 0; y < bottom - 1; y += row, i++) {
-    if (i > 0) d += ` M${r1(-step)} ${r1(y)} L${r1(2 * width + step)} ${r1(y)}`;
-    const shift = i % 2 ? step / 2 : 0;
-    const end = Math.min(bottom, y + row);
-    for (let k = -1; k <= 2 * n; k++) d += ` M${r1(k * step + shift)} ${r1(y)} L${r1(k * step + shift)} ${r1(end)}`;
-  }
-  return d.trim();
-}
-
-const castleMid: Draw = (w, h) => {
-  const s = scaleOf(h);
-  const top = h * 0.5;
-  const windows: Item[] = [0.24, 0.7].map((f) => [f, 16 * s, (x) => <G transform={moveTo(x, h * 0.7, s)}>
-    <Path d="M-13 0 L-13 -26 A13 13 0 0 1 13 -26 L13 0 Z" fill="#2E2350" />
-    <Path d="M-9 0 L-9 -25 A9 9 0 0 1 9 -25 L9 0 Z" fill="#FFCF7A" opacity={0.3} />
-    <Path d="M0 -36 L0 0 M-12 -16 L12 -16 M-16 2 L16 2" stroke="#5E5480" strokeWidth={3} strokeLinecap="round" />
-  </G>]);
-  const banners: Item[] = ([[0.06, '#C2415C'], [0.52, '#4F60C8']] as const).map(([f, color]) => [f, 18 * s, (x) =>
-    <G transform={moveTo(x, h * 0.53, s)}>
-      <Path d="M-16 0 L16 0" stroke="#5B4A2E" strokeWidth={4} strokeLinecap="round" />
-      <Path d="M-12 0 L12 0 L12 52 L0 44 L-12 52 Z" fill={color} />
-      <Path d={starPath(0, 20, 7, 3, 5)} fill="#FFD25A" />
-    </G>]);
-  const torches: Item[] = [0.38, 0.86].map((f) => [f, 24 * s, (x) => <G transform={moveTo(x, h * 0.64, s)}>
-    <Path d="M-4 18 L4 18 L6 4 L-6 4 Z" fill="#3E3456" />
-    <Ellipse cx={0} cy={-4} rx={24} ry={24} fill={url('mb-castle-mid-torch')} />
-    <Circle cx={0} cy={-2} r={7} fill="#FFE08A" />
-    <Circle cx={-2} cy={-4} r={2.5} fill="#FFFFFF" opacity={0.9} />
-  </G>]);
-  return <>
-    <Defs>
-      <Vertical id="mb-castle-mid-wall" stops={[[0, '#A397BE'], [1, '#7A6E98']]} />
-      <Fade id="mb-castle-mid-torch" color="#FFB347" opacity={0.75} />
-    </Defs>
-    <Path d={battlements(w, top, h, s)} fill={url('mb-castle-mid-wall')} />
-    <Path d={bricks(w, top, h * 0.8, s)} stroke="#6A5F87" strokeWidth={1.5 * s} opacity={0.6} />
-    <Rect x={0} y={h * 0.74} width={w * 2} height={h * 0.26} fill="#5E5480" opacity={0.35} />
-    {tile(w, [...windows, ...banners, ...torches])}
-  </>;
-};
-
-const castleNear: Draw = (w, h) => {
-  const s = scaleOf(h);
-  const stones: Item[] = ([[0.2, 0.83], [0.62, 0.97], [0.9, 0.84]] as const).map(([f, y]) => [f, 6 * s, (x) =>
-    <Ellipse cx={r1(x)} cy={r1(h * y)} rx={r1(5 * s)} ry={r1(2.6 * s)} fill="#857BA3" />]);
-  const moss: Item[] = [0.4, 0.75].map((f) => [f, 8 * s, (x) =>
-    <Path d="M-7 0 Q-6 -6 -2 -7 Q-1 -3 0 0 Q2 -8 6 -8 Q5 -3 7 0 Z" fill="#7FA76A" transform={moveTo(x, h * 0.82, s)} />]);
-  return <>
-    <Rect x={0} y={h * 0.8} width={w * 2} height={h * 0.2} fill="#6A6088" />
-    <Rect x={0} y={h * 0.8} width={w * 2} height={5 * s} fill="#8C82A6" />
-    <Path d={bricks(w, h * 0.8 + 5 * s, h, s, 22, 56)} stroke="#55497A" strokeWidth={1.5 * s} opacity={0.7} />
-    <Rect x={0} y={h * 0.88} width={w * 2} height={h * 0.07} fill="#9E3A5A" />
-    <Path d={`M0 ${r1(h * 0.88 + 2 * s)} L${w * 2} ${r1(h * 0.88 + 2 * s)} M0 ${r1(h * 0.95 - 2 * s)} L${w * 2} ${r1(h * 0.95 - 2 * s)}`} stroke="#E8B64A" strokeWidth={1.5 * s} />
-    {tile(w, [...stones, ...moss])}
-  </>;
-};
-
-// --- Boss -------------------------------------------------------------------------------------------------------
 
 const BOSS_STARS = [[0.04, 0.1, 1.2], [0.11, 0.3, 0.8], [0.17, 0.06, 1], [0.24, 0.22, 1.4], [0.31, 0.4, 0.8], [0.38, 0.12, 1.1],
   [0.45, 0.32, 0.9], [0.52, 0.05, 1.3], [0.58, 0.24, 0.8], [0.66, 0.44, 1], [0.72, 0.08, 0.9], [0.79, 0.36, 1.2],
@@ -1006,104 +708,12 @@ const bossSky: Draw = (w, h) => {
 };
 
 /** A periodic zigzag ridge (n peaks per width). */
-function ridge(width: number, base: number, amp: number, n: number, bottom: number) {
-  const step = width / n;
-  let d = `M${r1(-step)} ${r1(bottom)}`;
-  for (let k = -1; k <= 2 * n + 1; k++) {
-    const jitter = [0, 0.4, -0.3, 0.2][((k % 4) + 4) % 4] * (n % 4 === 0 ? 1 : 0);  // only when it repeats per width
-    d += ` L${r1(k * step)} ${r1(base + amp * 0.3)} L${r1(k * step + step / 2)} ${r1(base - amp * (1 + jitter))}`;
-  }
-  return `${d} L${r1((2 * n + 2) * step)} ${r1(bottom)} Z`;
-}
-
-const bossFar: Draw = (w, h) => {
-  const s = scaleOf(h);
-  const islands: Item[] = ([[0.22, 0.34, 1], [0.7, 0.26, 0.8]] as const).map(([f, y, k]) => [f, 34 * k * s, (x) =>
-    <G transform={moveTo(x, h * y, k * s)}>
-      <Ellipse cx={0} cy={-10} rx={28} ry={22} fill={url('mb-boss-far-glow')} />
-      <Path d="M-30 0 L30 0 L14 14 L4 30 L-6 16 L-18 10 Z" fill="#3A2266" />
-      <Path d="M-6 0 L-2 -20 L4 -26 L8 -14 L6 0 Z" fill="#7FE8F0" opacity={0.85} />
-    </G>]);
-  const ruins: Item[] = ([[0.08, 64], [0.46, 50], [0.88, 72]] as const).map(([f, tall]) => [f, 14 * s, (x) =>
-    <Path d={`M-12 0 L-12 ${-tall} L-4 ${-tall - 8} L2 ${-tall + 2} L12 ${-tall - 4} L12 0 Z`} fill="#321C5C" transform={moveTo(x, h * 0.72, s)} />]);
-  return <>
-    <Defs><Fade id="mb-boss-far-glow" color="#7FE8F0" opacity={0.35} /></Defs>
-    <Path d={ridge(w, h * 0.64, 18 * s, 4, h)} fill="#24123F" />
-    {tile(w, [...ruins, ...islands])}
-    <Path d={wave(w, h * 0.72, 3 * s, 2, h, 0.9)} fill="#2C1A4E" />
-  </>;
-};
-
-function Pillar({ x, y, k }: { x: number; y: number; k: number }) {
-  return <G transform={moveTo(x, y, k)}>
-    <Rect x={-20} y={-12} width={40} height={12} rx={2} fill="#3E2A66" />
-    <Rect x={-14} y={-118} width={28} height={106} fill={url('mb-boss-mid-pillar')} />
-    <Rect x={-20} y={-130} width={40} height={12} rx={2} fill="#3E2A66" />
-    <Ellipse cx={0} cy={-66} rx={20} ry={20} fill={url('mb-boss-mid-rune')} />
-    <Path d="M0 -76 L7 -62 L-7 -62 Z M0 -56 L0 -66" stroke="#E0B8FF" strokeWidth={2.2} fill="none" strokeLinejoin="round" strokeLinecap="round" />
-    <Path d="M-8 -116 L-8 -16" stroke="#8E6CC4" strokeWidth={3} opacity={0.5} strokeLinecap="round" />
-  </G>;
-}
-
-const bossMid: Draw = (w, h) => {
-  const s = scaleOf(h);
-  const pillars: Item[] = [0.15, 0.6].map((f) => [f, 22 * s, (x) => <Pillar x={x} y={h * 0.8} k={s} />]);
-  const crystals: Item[] = ([[0.38, 0.38, '#7FE8F0'], [0.84, 0.3, '#C58BFF']] as const).map(([f, y, color]) => [f, 16 * s, (x) =>
-    <G transform={moveTo(x, h * y, s)}>
-      <Circle cx={0} cy={0} r={16} fill={color} opacity={0.18} />
-      <Path d="M0 -12 L7 0 L0 14 L-7 0 Z" fill={color} />
-      <Path d="M0 -12 L7 0 L0 14 Z" fill="#FFFFFF" opacity={0.25} />
-    </G>]);
-  return <>
-    <Defs>
-      <LinearGradient id="mb-boss-mid-pillar" x1="0" y1="0" x2="1" y2="0">
-        <Stop offset="0" stopColor="#5A4290" />
-        <Stop offset="0.5" stopColor="#6E54A8" />
-        <Stop offset="1" stopColor="#3E2A66" />
-      </LinearGradient>
-      <Fade id="mb-boss-mid-rune" color="#C77DFF" opacity={0.6} />
-    </Defs>
-    <Path d={wave(w, h * 0.76, 2 * s, 2, h, 0.4)} fill="#2E1C50" />
-    {tile(w, [...pillars, ...crystals])}
-  </>;
-};
-
-const bossNear: Draw = (w, h) => {
-  const s = scaleOf(h);
-  const cy = h * 0.88;
-  const rune: Item = [0.72, 74 * s, (x) => <>
-    <Ellipse cx={r1(x)} cy={r1(cy)} rx={r1(74 * s)} ry={r1(18 * s)} fill={url('mb-boss-near-glow')} />
-    <Ellipse cx={r1(x)} cy={r1(cy)} rx={r1(62 * s)} ry={r1(12 * s)} fill="none" stroke="#C77DFF" strokeWidth={2.5 * s} />
-    <Ellipse cx={r1(x)} cy={r1(cy)} rx={r1(48 * s)} ry={r1(9 * s)} fill="none" stroke="#E0B8FF" strokeWidth={1.5 * s} opacity={0.8} />
-    <Path d={`${starPath(x, cy, 46 * s, 46 * s, 3, -90, 0.19)} ${starPath(x, cy, 46 * s, 46 * s, 3, 90, 0.19)}`}
-      fill="none" stroke="#C77DFF" strokeWidth={1.5 * s} strokeLinejoin="round" opacity={0.85} />
-  </>];
-  const rubble: Item[] = ([[0.18, 0.86, '#4A3478'], [0.42, 0.95, '#4A3478']] as const).map(([f, y, color]) => [f, 6 * s, (x) =>
-    <Ellipse cx={r1(x)} cy={r1(h * y)} rx={r1(5 * s)} ry={r1(2.5 * s)} fill={color} />]);
-  const shards: Item[] = [0.3, 0.95].map((f) => [f, 8 * s, (x) =>
-    <Path d="M-4 0 L-2 -10 L2 -13 L4 0 Z" fill="#7FE8F0" opacity={0.85} transform={moveTo(x, h * 0.84, s)} />]);
-  return <>
-    <Defs><Fade id="mb-boss-near-glow" color="#B05CFF" opacity={0.45} /></Defs>
-    <Rect x={0} y={h * 0.8} width={w * 2} height={h * 0.2} fill="#3A2560" />
-    <Rect x={0} y={h * 0.8} width={w * 2} height={4 * s} fill="#5A3A86" />
-    <Path d={bricks(w, h * 0.8 + 4 * s, h, s, 24, 64)} stroke="#2A1848" strokeWidth={1.5 * s} opacity={0.8} />
-    {tile(w, [rune, ...rubble, ...shards])}
-  </>;
-};
-
 const SKIES: Record<Zone, Draw> = { forest: forestSky, cave: caveSky, castle: castleSky, boss: bossSky };
-const STRIPS: Record<Zone, Record<StripLayer, Draw>> = {
-  forest: { far: forestFar, mid: forestMid, near: forestNear },
-  cave: { far: caveFar, mid: caveMid, near: caveNear },
-  castle: { far: castleFar, mid: castleMid, near: castleNear },
-  boss: { far: bossFar, mid: bossMid, near: bossNear },
-};
-
 /** One parallax layer of a battle arena. `sky` is a still width x height backdrop; `far`, `mid` and `near` are strips
  * two widths long whose halves are identical, so sliding one left by `width` and starting over loops without a seam.
  * The ground line is at 80% of the height; `near` carries the ground from there down. */
 export const ArenaLayer = React.memo(function ArenaLayer({ zone, layer, width, height }: ArenaLayerProps) {
   if (!(width > 0) || !(height > 0)) return null;
   if (layer === 'sky') return <Svg width={width} height={height}>{SKIES[zone](width, height)}</Svg>;
-  return <Svg width={width * 2} height={height}>{STRIPS[zone][layer](width, height)}</Svg>;
+  return <Strip source={ARENA_ART[zone][layer as StripLayer]} width={width} height={height} />;
 });

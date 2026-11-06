@@ -132,14 +132,17 @@ describe('pet gift popup', () => {
       'GET /api/pet/space': { status: 200, body: space({ status: 'walking', seconds_left: 1800, return_at: naive, server_now: new Date().toISOString() }) },
     });
     render(<App />);
-    expect(await screen.findByText('Pet đang đi dạo...', {}, { timeout: 5000 })).toBeTruthy();
+    expect(await screen.findByText('Bé đang khám phá thế giới và tìm kiếm những món quà bất ngờ!', {}, { timeout: 5000 })).toBeTruthy();
     const arrival = returnsAt.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
-    expect(screen.getByText(`Về lúc ${arrival}`)).toBeTruthy();
-    expect(screen.getByText('Pet sẽ mang quà về cho bạn khi trở về')).toBeTruthy();
+    expect(screen.getByText(`Dự kiến về lúc ${arrival}`)).toBeTruthy();
+    expect(screen.queryByText('Pet đang đi dạo...')).toBeNull();
+    expect(screen.getByText('Pet sẽ mang quà về sau chuyến khám phá.')).toBeTruthy();
+    expect(screen.getByText('00:30:00')).toBeTruthy();
+    expect(screen.getByText('còn lại')).toBeTruthy();
     const loads = server.callsTo('GET /api/pet/space').length;
     await act(() => new Promise((resolve) => setTimeout(resolve, 2500)));
     // Still walking: no false "returned" and no reload loop.
-    expect(screen.getByText('Pet đang đi dạo...')).toBeTruthy();
+    expect(screen.getByText('Bé đang khám phá thế giới và tìm kiếm những món quà bất ngờ!')).toBeTruthy();
     expect(server.callsTo('GET /api/pet/space').length).toBe(loads);
   });
 

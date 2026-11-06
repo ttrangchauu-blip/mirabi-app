@@ -1,11 +1,12 @@
 """Pet evolution and source-specific XP accounting."""
 from datetime import datetime, timezone
 
-from sqlalchemy import func, select
+from sqlalchemy import func, select, update
 from sqlalchemy.orm import Session
 
 from .config import settings
-from .models import ExpEvent, PetEvolution, StudySession, User, as_utc, utcnow
+from . import days
+from .models import ExpEvent, PetEvolution, PetWalk, StudySession, User, as_utc, utcnow
 
 EVOLUTION_THRESHOLDS = (0, 300, 800, 1500, 2400, 3500, 5000)
 HATCH_EXP = EVOLUTION_THRESHOLDS[1]
@@ -35,6 +36,37 @@ def stage_for(progress: PetEvolution) -> int:
 def awaiting_hatch(progress: PetEvolution | None) -> bool:
     """The egg has the EXP to hatch, but hasn't hatched yet (companion.complete_hatch)."""
     return progress is not None and progress.hatched_at is None and progress.total_xp >= HATCH_EXP
+
+
+def lock_user(db: Session, user_id: int) -> None:
+    """Serialize, per user, what must not interleave: EXP under a daily cap, the day's walk, inventory changes. Held until
+    the next commit or rollback. PostgreSQL locks the user's row; SQLite has no row locks, so a write that changes
+    nothing takes its database write lock instead."""
+    if db.get_bind().dialect.name == "sqlite":
+        db.execute(update(User).where(User.id == user_id).values(id=User.id).execution_options(synchronize_session=False))
+    else:
+        db.scalar(select(User.id).where(User.id == user_id).with_for_update())
+
+
+def pet_is_away(user: User, db: Session) -> bool:
+    """Out on its walk, or back with a gift popup still open. The pet doesn't change until the user has seen it home."""
+    return db.scalar(select(PetWalk.id).where(PetWalk.user_id == user.id, PetWalk.collected_at.is_(None)).limit(1)) is not None
+
+
+def catch_up_level(user: User, db: Session) -> None:
+    """Bring the active pet's level up to its EXP once it is home (an evolution held back during a walk). In the
+    caller's transaction. A level is never lowered."""
+    if user.pet_name is None or pet_is_away(user, db):
+        return
+    progress = db.scalar(select(PetEvolution).where(PetEvolution.user_id == user.id, PetEvolution.pet_id == user.pet)
+                         .execution_options(populate_existing=True))
+    if progress is None or stage_for(progress) <= progress.level:
+        return
+    previous_level, now = progress.level, utcnow()
+    progress.level = stage_for(progress)
+    progress.updated_at = now
+    user.xp, user.level = progress.total_xp, progress.level
+    record_level_ups(db, user, previous_level, progress.level, now)
 
 
 def new_progress(user: User, pet_id: str, initial_xp: int) -> PetEvolution:
@@ -112,9 +144,12 @@ def award_exp(
     daily_cap: int,
     already_earned: int | None = None,
 ) -> int:
-    """Award XP once per reference, respecting that source's UTC-day cap (or a caller-computed `already_earned`)."""
+    """Award XP once per reference, respecting that source's cap for the day (days.py) or a caller-computed
+    `already_earned`. Taken under the per-user lock, so awards arriving together are counted one after the other: the
+    same reference never raises, and together they never pass the cap."""
     if requested <= 0 or daily_cap <= 0:
         return 0
+    lock_user(db, user.id)
     exists = db.scalar(select(ExpEvent.id).where(
         ExpEvent.user_id == user.id,
         ExpEvent.source == source,
@@ -125,11 +160,10 @@ def award_exp(
 
     now = utcnow()
     if already_earned is None:
-        day_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
         already_earned = db.scalar(select(func.coalesce(func.sum(ExpEvent.amount), 0)).where(
             ExpEvent.user_id == user.id,
             ExpEvent.source.in_(cap_pool(source)),
-            ExpEvent.created_at >= day_start,
+            ExpEvent.created_at >= days.day_start(now),
         )) or 0
     granted = min(requested, max(0, daily_cap - already_earned))
     if granted == 0:
@@ -151,8 +185,10 @@ def award_exp(
         db.refresh(progress)
         previous_level = progress.level
         # Reaching the hatching EXP doesn't hatch the egg: it waits ("chờ nở") for complete_hatch, so it never
-        # hatches while the pet is out on its walk, nor without the app showing it.
-        progress.level = stage_for(progress)
+        # hatches while the pet is out on its walk, nor without the app showing it. A pet that is out evolves the same
+        # way: the EXP counts at once, the new level waits until it is home and its gift was seen (catch_up_level).
+        if not pet_is_away(user, db):
+            progress.level = stage_for(progress)
         user.xp = progress.total_xp
         user.level = progress.level
         record_level_ups(db, user, previous_level, progress.level, now)
@@ -186,6 +222,7 @@ def award_study_exp(user: User, db: Session, session: StudySession) -> int:
     """
     if not counts_for_study_exp(session):
         return 0
+    lock_user(db, user.id)  # two sessions of one day ending together both see each other's minutes
     from .study_statistics import preferences, valid_timezone
 
     zone = valid_timezone(session.timezone or preferences(db, user.id).timezone)
@@ -209,12 +246,10 @@ def award_study_exp(user: User, db: Session, session: StudySession) -> int:
 
 def daily_exp_remaining(user: User, db: Session, *, source: str, daily_cap: int) -> int:
     """Return the unspent cap for this source today, independently of why an award was zero."""
-    now = utcnow()
-    day_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
     earned_today = db.scalar(select(func.coalesce(func.sum(ExpEvent.amount), 0)).where(
         ExpEvent.user_id == user.id,
         ExpEvent.source.in_(cap_pool(source)),
-        ExpEvent.created_at >= day_start,
+        ExpEvent.created_at >= days.day_start(),
     )) or 0
     return max(0, daily_cap - earned_today)
 

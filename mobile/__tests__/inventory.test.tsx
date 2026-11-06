@@ -11,7 +11,7 @@ import { applyPalette, itemArt, PALETTES, roomSvg } from '../src/room/art';
 import { countsLabel, freeCopies } from '../src/room/found';
 import { addItem, moveItem, storeItem } from '../src/room/rules';
 import type { FoundStack, Layout } from '../src/room/types';
-import { filterItems, InventoryScreen, searchKey } from '../src/screens/inventory/InventoryScreen';
+import { filterItems, historyLine, InventoryScreen, searchKey } from '../src/screens/inventory/InventoryScreen';
 import { GardenScreen } from '../src/screens/garden/GardenScreen';
 import { USER, mockServer, networkDown } from '../test/mockServer';
 import { ConfirmProvider } from '../src/ui/ConfirmDialog';
@@ -131,6 +131,20 @@ describe('Kho đồ', () => {
     await waitFor(() => expect(server.callsTo('POST /api/inventory/items/seed_daisy/seen')).toHaveLength(1));
     fireEvent.press(await screen.findByRole('button', { name: 'Trồng' }));
     expect(onPlant).toHaveBeenCalledWith(expect.objectContaining({ id: 'seed_daisy' }));
+  });
+
+  it('says where every change of a stack came from, whatever its kind', () => {
+    const line = (kind: string, delta: number, placed_delta = 0, ref: string | null = null) =>
+      historyLine({ kind, delta, placed_delta, ref, at: '2026-10-01T08:00:00+00:00', walk_id: null, location: null, memory_id: null } as any);
+    expect(line('gift_in', 1)).toBe('Nhận 1 từ quà của bạn bè');
+    expect(line('gift_out', -1)).toBe('Đã tặng 1 cho bạn bè');
+    expect(line('adventure', 2)).toBe('Nhận 2 từ Phiêu lưu cuộc sống');
+    expect(line('work_chest', 1)).toBe('Nhận 1 từ rương công việc');
+    expect(line('place', 0, 1, 'room:focus')).toBe('Đặt 1 vào Phòng tập trung');
+    expect(line('store', 0, -1, 'room:personal')).toBe('Cất 1 về kho từ Phòng cá nhân');
+    // A kind added later never reads as a room's: it says what changed.
+    expect(line('something_new', 2)).toBe('Nhận 2');
+    expect(line('something_new', -1)).toBe('Đã dùng 1');
   });
 
   it('materials are only described, for crafting later', async () => {

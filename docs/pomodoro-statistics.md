@@ -38,7 +38,12 @@ No aggregate/streak/recommendation tables are required.
 - `PUT /api/study/pomodoro/{cycle}`: started/cancelled/completed lifecycle events;
   optional UTC `occurred_at` preserves timestamps during offline delivery.
   Completion requires a start, at least 60 seconds and duration no longer than
-  the event's elapsed wall time. Terminal transitions are conditional and unique
+  the event's elapsed wall time. When `started` arrived live (dated within 60 s of
+  the server receiving it), the stored duration is also limited to the server's
+  own time since that receipt (+2 s); a start the network held back loses only the
+  seconds it was late, and a completion left under 60 s by this is refused. A start
+  delivered later than that came from the offline queue and keeps the device's
+  timestamps. Terminal transitions are conditional and unique
   `(user_id, pomodoro_cycle)` prevents duplicates. The old POST endpoint remains
   for compatibility with earlier clients.
 - `GET /api/study/pomodoro-statistics?period=day|week|month`: daily series,
@@ -58,7 +63,10 @@ No aggregate/streak/recommendation tables are required.
 - `GET /api/dashboard` → `study` uses the same aggregates for the Home screen.
 
 The client persists an ordered per-account event queue and retries every 15
-seconds. Settings are restored from the server on login; unsynchronized settings
+seconds. A 409 or 422 is final for that event: it is dropped and the statistics
+panel says a session could not be recorded, so it never holds back later ones.
+The scheduled end-of-phase notification is one per device and is cancelled on
+sign-out or account change. Settings are restored from the server on login; unsynchronized settings
 show an explicit retry button. The dashboard refreshes after completion/settings
 changes, on returning to the foreground, and every minute while mounted.
 Completion animations honor reduced motion and are hidden during focus.

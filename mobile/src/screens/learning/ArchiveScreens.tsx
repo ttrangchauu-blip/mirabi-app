@@ -1,14 +1,17 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, Pressable, StyleSheet, View } from 'react-native';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { ActivityIndicator, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { errorMessage } from '../../auth/messages';
-import { Text } from '../../components/Typography';
-import { educationApi, type ArchiveCard, type EducationState, type Notebook } from '../../learning/education';
+import { Text, TextInput } from '../../components/Typography';
+import { educationApi, type ArchiveCard, type EducationState, type Note, type Notebook } from '../../learning/education';
 import { GAME_INFO } from '../../learning/labels';
 import type { GameId } from '../../learning/types';
 import { appTheme as t } from '../../theme';
 import { Button, Card, IconName, ProgressBar, SectionHeader } from '../../ui/kit';
+import { SceneHeader, SceneIn } from '../../world/diorama';
 import { BackHeader } from './GamePicker';
+import { type Book, BookReader, buildShelves, EmptyLibrary, filterShelves, ShelfWall, useBookmarks } from './KnowledgeLibrary';
 import { NotesPanel, type NoteDraft, type NoteSubject } from './NotesScreen';
 
 // Kho lưu trữ học tập (backend education.py): the finished school years, read-only. A year can be reread and its
@@ -283,53 +286,84 @@ function Knowledge({ entry }: { entry: { objectives: string[]; summary: string[]
 
 type NotebookProps = { onBack: () => void; onOpenLesson: (key: string) => void;
   /** The subjects of the learner's grade, for personal notes. */ subjects: NoteSubject[];
-  /** Opened from a lesson's "Ghi chú": the notes tab, with that lesson's note started. */ draft?: (NoteDraft & { lessonTitle?: string }) | null };
+  /** Opened from a lesson's "Ghi chú": the notes tab, with that lesson's note started. */ draft?: (NoteDraft & { lessonTitle?: string }) | null;
+  /** Whose bookmarks; and the pet reading in the corner of the library. */ userId?: number; pet?: { id: string; level: number } | null };
 
-/** Sổ tay kiến thức: "Tóm tắt" (what the lessons studied this year teach, written by Mirabi) and "Ghi chú của tôi" (the
- * learner's own notes, per school year). */
-export function NotebookScreen({ onBack, onOpenLesson, subjects, draft }: NotebookProps) {
+/** Sổ tay kiến thức: the library ("Kệ sách": what the lessons studied this year teach, written by Mirabi, and the owner's
+ * notes, as books) and "Ghi chú của tôi" (writing the learner's own notes, per school year). */
+export function NotebookScreen({ onBack, onOpenLesson, subjects, draft, userId, pet }: NotebookProps) {
   const { data, error, retry } = useLoad(useCallback((): Promise<Notebook> => educationApi.notebook(), []));
-  const [open, setOpen] = useState<string | null>(null);
   const [tab, setTab] = useState<'summary' | 'notes'>(draft ? 'notes' : 'summary');
+  const [notes, setNotes] = useState<Note[]>([]);
+  const [query, setQuery] = useState('');
+  const [subject, setSubject] = useState<string | null>(null);
+  const [onlyMarked, setOnlyMarked] = useState(false);
+  const [openBook, setOpenBook] = useState<Book | null>(null);
+  const [marked, toggleMark] = useBookmarks(userId);
+  // The shelf follows what the notes tab wrote: reloaded each time the library is back.
+  useEffect(() => {
+    if (tab !== 'summary' || !data) return;
+    let live = true;
+    educationApi.notes({ academic_year: data.academic_year ?? null }).then((r) => { if (live) setNotes(r.items); }).catch(() => {});
+    return () => { live = false; };
+  }, [tab, data]);
+  const shelves = useMemo(() => buildShelves(data?.entries ?? [], notes), [data, notes]);
+  const shown = useMemo(() => filterShelves(shelves, { query, subject, marked: onlyMarked ? marked : null }), [shelves, query, subject, onlyMarked, marked]);
+  const total = shelves.reduce((sum, sh) => sum + sh.books.length, 0);
   const lessons = (data?.entries ?? []).map((e) => ({ key: e.key, title: e.title, subject: e.subject }));
   if (draft?.lessonKey && draft.lessonTitle && !lessons.some((l) => l.key === draft.lessonKey)) {
     lessons.unshift({ key: draft.lessonKey, title: draft.lessonTitle, subject: draft.subject });
   }
   return (
-    <>
-      <BackHeader title="Sổ tay kiến thức" subtitle={data ? `${data.grade_label}${data.academic_year_label ? ` · Năm học ${data.academic_year_label}` : ''}` : undefined} onBack={onBack} />
-      <View style={styles.tabs} accessibilityRole="tablist">
-        {([['summary', 'Tóm tắt'], ['notes', 'Ghi chú của tôi']] as const).map(([id, label]) => (
-          <Pressable key={id} onPress={() => setTab(id)} accessibilityRole="tab" accessibilityState={{ selected: tab === id }}
-            style={[styles.tab, tab === id && styles.tabOn]}>
-            <Text style={[styles.tabText, tab === id && styles.tabTextOn]}>{label}</Text>
-          </Pressable>
-        ))}
+    <View style={styles.bleed}>
+      <View style={styles.beam}>
+        <LinearGradient colors={['#EAF7FD', '#EAF7FD']} style={StyleSheet.absoluteFill} />
+        <SceneHeader title="Sổ tay kiến thức" subtitle={data ? `${data.grade_label}${data.academic_year_label ? ` · Năm học ${data.academic_year_label}` : ''}` : undefined} onBack={onBack} />
+        <View style={styles.tabs} accessibilityRole="tablist">
+          {([['summary', 'Kệ sách'], ['notes', 'Ghi chú của tôi']] as const).map(([id, label]) => (
+            <Pressable key={id} onPress={() => setTab(id)} accessibilityRole="tab" accessibilityState={{ selected: tab === id }}
+              style={[styles.tab, tab === id && styles.tabOn]}>
+              <Text style={[styles.tabText, tab === id && styles.tabTextOn]}>{label}</Text>
+            </Pressable>
+          ))}
+        </View>
       </View>
       {tab === 'notes' ? (
-        data || error ? <NotesPanel subjects={subjects} lessons={lessons} academicYear={data?.academic_year ?? null} draft={draft} />
-          : <ActivityIndicator color={t.accent} style={styles.loading} />
+        <View style={styles.notesDesk}>
+          {data || error ? <NotesPanel subjects={subjects} lessons={lessons} academicYear={data?.academic_year ?? null} draft={draft} />
+            : <ActivityIndicator color={t.accent} style={styles.loading} />}
+        </View>
       ) : <>
-      {error ? <Failed error={error} onRetry={() => void retry()} /> : null}
-      {!data && !error ? <ActivityIndicator color={t.accent} style={styles.loading} /> : null}
-      {data && !data.entries.length ? <Card><Text style={styles.muted}>Học một bài để kiến thức của bài xuất hiện trong sổ tay nhé.</Text></Card> : null}
-      {data?.entries.map((e) => {
-        const expanded = open === e.key;
-        return (
-          <View key={e.key} style={styles.subject}>
-            <Pressable onPress={() => setOpen(expanded ? null : e.key)} accessibilityRole="button" accessibilityState={{ expanded }} style={styles.row}>
-              <View style={styles.flex}>
-                <Text style={styles.subjectName}>{e.title}</Text>
-                <Text style={styles.small}>{e.subject_name} · {e.chapter}</Text>
-              </View>
-              <Ionicons name={expanded ? 'chevron-up' : 'chevron-down'} size={18} color={t.muted} />
-            </Pressable>
-            {expanded ? <><Knowledge entry={e} /><Button title="Mở bài học" icon="arrow-forward" variant="ghost" onPress={() => onOpenLesson(e.key)} /></> : null}
+        <View style={styles.finder}>
+          <View style={styles.searchRow}>
+            <Ionicons name="search" size={18} color="#136FA8" />
+            <TextInput value={query} onChangeText={setQuery} placeholder="Tìm trong thư viện" placeholderTextColor="#8E7B62" accessibilityLabel="Tìm trong thư viện" returnKeyType="search" style={styles.searchInput} />
           </View>
-        );
-      })}
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.filters}>
+            <Pressable onPress={() => setOnlyMarked((v) => !v)} accessibilityRole="checkbox" accessibilityLabel="Chỉ sách đã đánh dấu" accessibilityState={{ checked: onlyMarked }} style={[styles.filter, onlyMarked && styles.filterOn]}>
+              <Ionicons name={onlyMarked ? 'bookmark' : 'bookmark-outline'} size={14} color={onlyMarked ? '#FFFFFF' : '#123B5C'} /><Text style={[styles.filterText, onlyMarked && styles.filterTextOn]}>Đã đánh dấu</Text>
+            </Pressable>
+            {[{ subject: null as string | null, name: 'Tất cả' }, ...shelves].map((sh) => (
+              <Pressable key={sh.subject ?? 'all'} onPress={() => setSubject(sh.subject)} accessibilityRole="radio" accessibilityLabel={`Môn ${sh.name}`} accessibilityState={{ checked: subject === sh.subject }} style={[styles.filter, subject === sh.subject && styles.filterOn]}>
+                <Text style={[styles.filterText, subject === sh.subject && styles.filterTextOn]}>{sh.name}</Text>
+              </Pressable>
+            ))}
+          </ScrollView>
+        </View>
+        {error ? <Failed error={error} onRetry={() => void retry()} /> : null}
+        {!data && !error ? <ActivityIndicator color={t.accent} style={styles.loading} /> : null}
+        {data ? (
+          <SceneIn>
+            <ShelfWall shelves={shown} marked={marked} onOpen={setOpenBook} pet={pet} total={total} />
+            {!total ? <EmptyLibrary message="Học một bài để kiến thức của bài xuất hiện trong sổ tay nhé." />
+              : !shown.length ? <EmptyLibrary message={onlyMarked && !query ? 'Chưa có sách nào được đánh dấu.' : 'Không tìm thấy sách nào.'} /> : null}
+            <View style={styles.markNote}><Text style={styles.markNoteText}>Dấu trang được lưu trên thiết bị này.</Text></View>
+          </SceneIn>
+        ) : null}
       </>}
-    </>
+      <BookReader book={openBook} marked={!!openBook && marked.has(openBook.id)} onToggleMark={() => { if (openBook) toggleMark(openBook.id); }} onClose={() => setOpenBook(null)}
+        onOpenLesson={onOpenLesson} onEditNotes={() => setTab('notes')} />
+    </View>
   );
 }
 
@@ -357,11 +391,24 @@ const styles = StyleSheet.create({
   statValue: { fontSize: 18, fontWeight: '900', color: t.ink },
   statLabel: { fontSize: 11, fontWeight: '800', color: t.muted },
   summary: { gap: 8 },
-  tabs: { flexDirection: 'row', gap: 8, marginVertical: 10 },
-  tab: { flex: 1, minHeight: 40, borderRadius: 12, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', paddingHorizontal: 6 },
-  tabOn: { backgroundColor: t.accent },
-  tabText: { fontSize: 13, fontWeight: '800', color: t.ink, textAlign: 'center' },
-  tabTextOn: { color: '#FFFFFF' },
+  bleed: { marginHorizontal: -20 },
+  beam: { overflow: 'hidden' },
+  tabs: { flexDirection: 'row', gap: 6, paddingHorizontal: 12, paddingTop: 2 },
+  tab: { flex: 1, minHeight: 44, borderTopLeftRadius: 12, borderTopRightRadius: 12, backgroundColor: '#DDF0FA', alignItems: 'center', justifyContent: 'center', paddingHorizontal: 6 },
+  tabOn: { backgroundColor: '#FFFFFF' },
+  tabText: { fontSize: 13, fontWeight: '800', color: '#123B5C', textAlign: 'center' },
+  tabTextOn: { color: '#123B5C' },
+  notesDesk: { backgroundColor: '#EAF7FD', paddingHorizontal: 14, paddingTop: 12, paddingBottom: 30, minHeight: 420 },
+  finder: { backgroundColor: '#EAF7FD', paddingTop: 10, paddingBottom: 8, gap: 8 },
+  searchRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginHorizontal: 14, paddingHorizontal: 12, minHeight: 44, borderRadius: 12, backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: '#C5E2F2' },
+  searchInput: { flex: 1, minWidth: 0, fontSize: 14, color: '#123B5C', paddingVertical: 8 },
+  filters: { gap: 6, paddingHorizontal: 14 },
+  filter: { flexDirection: 'row', alignItems: 'center', gap: 4, minHeight: 36, borderRadius: 18, paddingHorizontal: 12, backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: '#C5E2F2' },
+  filterOn: { backgroundColor: '#136FA8', borderColor: '#C5E2F2' },
+  filterText: { fontSize: 12, fontWeight: '800', color: '#123B5C' },
+  filterTextOn: { color: '#FFFFFF' },
+  markNote: { backgroundColor: '#EAF7FD', paddingVertical: 8 },
+  markNoteText: { fontSize: 11, lineHeight: 15, fontWeight: '700', color: '#4F6C86', textAlign: 'center' },
   subject: { backgroundColor: '#FFFFFF', borderRadius: 18, padding: 12, marginBottom: 10, gap: 6 },
   subjectIcon: { width: 42, height: 42, borderRadius: 14, alignItems: 'center', justifyContent: 'center' },
   subjectName: { fontSize: 16, fontWeight: '900', color: t.ink },

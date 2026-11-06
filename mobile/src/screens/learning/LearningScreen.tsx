@@ -205,8 +205,6 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
     launching.current = true;
     try { return await create(); } finally { launching.current = false; }
   }, []);
-  /** Stages of Kho lưu trữ and their school year: their result screen goes back to that year's lesson. */
-  const archiveStages = useRef(new Map<number, number>());
   const retryingOpen = useRef(false);
 
   /** The backend keeps one open stage at a time: one left paused (the app closed, "Thoát" without ending it, another
@@ -224,7 +222,6 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
     }
     const stage = open;
     const resume = () => {
-      if (stage.kind === 'archive' && stage.archive_year) archiveStages.current.set(stage.id, stage.archive_year);
       setCurrent(null); setRoute({ name: 'game', session: stage, autoStart: false }); return true;
     };
     if (same(stage)) return resume();
@@ -437,7 +434,6 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
         const s = await launch(() => educationApi.playArchive(year, lessonId, game, archiveKey.current!.key));
         if (!s) return false;
         archiveKey.current = null;
-        archiveStages.current.set(s.id, year);
         setRoute({ name: 'game', session: s, autoStart: true });
         return true;
       } catch (e) {
@@ -477,7 +473,7 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
     if (s.kind === 'archive' && s.archive_year && s.catalog) { // a finished year's review: back to that lesson of the archive
       setRoute({ name: 'archiveLesson', year: s.archive_year, key: s.catalog.lesson }); return;
     }
-    if (s.catalog?.title && s.kind === 'lesson') { // a lesson's game: the same game of the same lesson, its own content
+    if (s.catalog?.title && (s.kind === 'lesson' || s.catalog.words_review)) { // a lesson's game: the same game of the same lesson, its own content
       playLesson(s.catalog.lesson, s.game, { name: 'lesson', key: s.catalog.lesson, back: subjectRoute.current ?? { name: 'subjects' } }); return;
     }
     if (wordStages.current.has(s.id)) { setRoute({ name: 'vocab' }); return; } // pick the words again, with fresh results
@@ -566,7 +562,7 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
     <ScrollView ref={scroll} key={route.name} contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
       <PageIn reduceMotion={prefs.reduceMotion}>
       {route.name === 'subjects' ? (
-        <SubjectPicker catalog={catalog} lessons={lessons} error={loadError ?? lessonsError} onRetry={() => void load()} current={current}
+        <SubjectPicker catalog={catalog} lessons={lessons} error={loadError ?? lessonsError} onRetry={() => void load()} current={current} petId={user.pet} petLevel={user.level}
           focus={focus} onResume={resume} onDiscard={() => void discard()} onOpenReview={() => setRoute({ name: 'review' })} modeSwitch={modeSwitch}
           education={education} onPickLevel={pickLevel} onOpenLesson={(key) => openLesson(key)} onFreeStudy={onFreeStudy}
           onOpenNotebook={() => setRoute({ name: 'notebook' })} onOpenArchive={() => setRoute({ name: 'archive' })}
@@ -619,10 +615,7 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
       {route.name === 'result' ? (
         <ResultScreen sessionId={route.sessionId} petId={user.pet} petLevel={user.level} onReplay={replay} reduceMotion={prefs.reduceMotion}
           onReview={(topicId) => void practise(topicId)} onHome={home} onRewards={onRewards}
-          onLesson={(key) => {
-            const year = archiveStages.current.get(route.sessionId);
-            if (year) setRoute({ name: 'archiveLesson', year, key }); else openLesson(key);
-          }} />
+          onLesson={(key, year) => { if (year) setRoute({ name: 'archiveLesson', year, key }); else openLesson(key); }} />
       ) : null}
       {route.name === 'vocab' ? (
         <VocabHistoryScreen view={vocabView} onViewChange={setVocabView} onPageChange={() => scroll.current?.scrollTo({ y: 0, animated: false })}
@@ -645,7 +638,7 @@ export function LearningScreen({ user, defaultDuration, focus, onFreeStudy, onRe
       ) : null}
       {route.name === 'notebook' ? (
         <NotebookScreen key={route.draft?.lessonKey ?? 'notebook'} onBack={home} onOpenLesson={(key) => openLesson(key, { name: 'notebook' })}
-          subjects={noteSubjects} draft={route.draft} />
+          subjects={noteSubjects} draft={route.draft} userId={user.id} pet={{ id: user.pet, level: user.level }} />
       ) : null}
       {route.name === 'review' ? <ReviewScreen onBack={home} onPractice={(id) => void practise(id)} busyTopicId={typeof busy === 'number' ? busy : null} /> : null}
       </PageIn>

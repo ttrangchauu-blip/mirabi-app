@@ -144,7 +144,7 @@ export function TogetherHome() {
           <Card key={room.id}>
             <Text style={styles.cardTitle}>{room.name}</Text>
             <Text style={styles.sub}>Chủ phòng {room.host?.display_name} · {room.state === 'in_session' ? 'Đang học' : 'Đang chờ'} · {room.member_count}/{room.max_members}</Text>
-            <SmallButton title={room.can_join ? 'Tham gia' : 'Đã đủ người'} variant="primary" icon="enter-outline" disabled={!room.can_join}
+            <SmallButton title={room.can_join ? 'Tham gia' : room.reason === 'room_full' ? 'Đã đủ người' : 'Không thể tham gia'} variant="primary" icon="enter-outline" disabled={!room.can_join}
               loading={busy === `room${room.id}`} onPress={() => { void joinRoom(room); }} />
           </Card>
         ))}

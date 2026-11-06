@@ -77,6 +77,8 @@ class Settings(BaseSettings):
     garden_care_daily_limit: int = 20
     # IANA zone whose calendar days define the login streak (one check-in per local day).
     login_streak_timezone: str = "Asia/Ho_Chi_Minh"
+    # IANA zone whose calendar days define daily quests, Home's tasks, the walk and the daily EXP caps (days.py).
+    daily_reset_timezone: str = "Asia/Ho_Chi_Minh"
     database_url: str = "sqlite:///./refmi.db"
     # Comma-separated accounts that get the admin role (moderating user reports); synced on startup and login.
     admin_emails: str = ""
@@ -148,6 +150,10 @@ class Settings(BaseSettings):
             ZoneInfo(self.login_streak_timezone)
         except (ZoneInfoNotFoundError, ValueError) as exc:
             raise ValueError("LOGIN_STREAK_TIMEZONE must be an IANA timezone such as Asia/Ho_Chi_Minh") from exc
+        try:
+            ZoneInfo(self.daily_reset_timezone)
+        except (ZoneInfoNotFoundError, ValueError) as exc:
+            raise ValueError("DAILY_RESET_TIMEZONE must be an IANA timezone such as Asia/Ho_Chi_Minh") from exc
         try:
             month, day = (int(x) for x in self.academic_year_expected_start.split("-"))
             date(2001, month, day)

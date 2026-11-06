@@ -10,6 +10,7 @@ guessed for sessions played before lessons existed. Rules: docs/LEARNING_GAMES.m
 from __future__ import annotations
 
 import json
+import random
 from typing import Literal
 
 from fastapi import APIRouter, Depends, Query
@@ -108,12 +109,17 @@ def game_progress(db: Session, user_id: int, keys: list[str], academic_year: int
             row["open_session"] = s.id
         if s.kind == "review":
             row["reviews"] += 1
-            continue
-        row["stages"] += 1
+            if not rules.get("words_review"):
+                continue
+        else:
+            row["stages"] += 1
         own = [i for i in items.get(s.id, []) if i.practice_of_id is None and i.required]
         graded = [i for i in own if _graded(i)]
         first = sum(1 for i in graded if i.outcome == "first_try")
         share = first / len(graded) if graded else 1.0
+        if s.kind == "review":  # a review of the lesson's own words with no new word left: the same bar, nothing else
+            row["passed"] = row["passed"] or (s.status == "completed" and share >= need)
+            continue
         if s.status in ("completed", "failed", "abandoned"):
             row["last"] = {"session_id": s.id, "status": s.status, "first_try": first, "total": len(graded),
                            "attempts": sum(i.attempts for i in own), "hints": sum(i.hints_used for i in own),
@@ -430,8 +436,9 @@ def play_lesson(key: str, data: LessonPlay, idempotency_key: IdempotencyKey = No
                 user: User = Depends(current_user), db: Session = Depends(get_db)) -> dict:
     """The backend checks that the game belongs to this lesson, the lesson to its subject and grade, and that it is
     ready and unlocked; the stage then draws only this lesson's content. A vocabulary game draws the lesson's own words
-    first, then new words beyond them (vocab_lesson.py); with no new word left it does not start (409
-    vocabulary_exhausted: the app offers Ôn tập)."""
+    first, then new words beyond them (vocab_lesson.py). With no new word left: once the game is passed it does not
+    start (409 vocabulary_exhausted: the app offers Ôn tập); before that, it is a review of the lesson's own words
+    (`catalog.words_review`), which can pass the game, as nothing else could any more."""
     entry = _entry_or_404(key)
     _, year = learner(db, user)
     own_lesson_or_403(user, entry)
@@ -448,6 +455,15 @@ def play_lesson(key: str, data: LessonPlay, idempotency_key: IdempotencyKey = No
     if lesson is None or lesson.status != "published":
         raise APIError(409, "lesson_not_published", "This game of the lesson is not published yet")
     variant = data.game if data.game in lc.VOCAB_GAMES else None
-    s = create_session(db, user, lesson=lesson, mode="practice", duration_minutes=25, variant=variant,
-                       device_zone=data.timezone, kind="lesson", idempotency_key=idempotency_key, start_paused=True)
+    start = lambda **more: create_session(db, user, lesson=lesson, mode="practice", duration_minutes=25, variant=variant,
+                                          device_zone=data.timezone, idempotency_key=idempotency_key, start_paused=True, **more)
+    try:
+        s = start(kind="lesson")
+    except APIError as e:
+        spec = lc.game_spec(entry, data.game)
+        if e.code != "vocabulary_exhausted" or game_passed(spec, game_progress(db, user.id, [key], year).get(key, {})):
+            raise
+        words = random.sample(spec["words"], len(spec["words"]))  # a review stage holds at most 12 of them
+        prefix = f"{lesson.code}.{'spell.' if data.game == 'word_shooter' else ''}"
+        s = start(kind="review", review_keys=[prefix + word for word in words], words_review=True)
     return session_out(db, s)

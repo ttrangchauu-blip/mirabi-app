@@ -15,7 +15,7 @@ export type InventoryData = {
   items: InventoryItem[]; server_now: string;
 };
 export type ItemHistory = {
-  kind: 'walk_reward' | 'legacy' | 'plant' | 'place' | 'store'; delta: number; placed_delta: number; ref: string | null; at: string;
+  kind: 'walk_reward' | 'legacy' | 'adventure' | 'work_chest' | 'gift_in' | 'gift_out' | 'plant' | 'place' | 'store' | (string & {}); delta: number; placed_delta: number; ref: string | null; at: string;
   walk_id: number | null; location: { id: string; name: string } | null; memory_id: number | null;
 };
 export type ItemDetail = {

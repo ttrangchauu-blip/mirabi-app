@@ -45,6 +45,11 @@ export function Glow({ id, color, opacity = 1, cx, cy, rx, ry }: { id: string; c
   </>;
 }
 
+/** Where a point of the sun's or moon's arc falls in a scene. */
+export function arcPoint(width: number, at: ArcPoint, horizon: number, zenith: number) {
+  return { x: width * (0.07 + 0.86 * at.x), y: horizon - at.altitude * (horizon - zenith) };
+}
+
 /** Below this altitude a body is well under the clip line, so it is not drawn at all. */
 const SET = -0.45;
 
@@ -57,14 +62,14 @@ export function SkyBodies({ width, hours, c, horizon, zenith, clip, body = 72, i
   const sun = sunAt(hours);
   const moon = moonAt(hours);
   const dawnGlow = round(Math.max(0, 1 - Math.abs(sun.altitude) / 0.45) * 0.6, 0.01);
-  const place = (at: ArcPoint) => ({ transform: [
-    { translateX: round(width * (0.07 + 0.86 * at.x) - body / 2, 0.1) },
-    { translateY: round(horizon - at.altitude * (horizon - zenith) - body / 2, 0.1) },
-  ] });
+  const place = (at: ArcPoint) => {
+    const { x, y } = arcPoint(width, at, horizon, zenith);
+    return { transform: [{ translateX: round(x - body / 2, 0.1) }, { translateY: round(y - body / 2, 0.1) }] };
+  };
   const k = body / 72;
   return <View pointerEvents="none" style={[styles.bodies, { height: clip }]}>
     {dawnGlow > 0 ? <Svg width={width} height={clip} style={StyleSheet.absoluteFill}>
-      <Glow id={`${idPrefix}-horizon`} color={c.horizon} opacity={dawnGlow} cx={width * (0.07 + 0.86 * sun.x)} cy={horizon} rx={width * 0.5} ry={36 * k} />
+      <Glow id={`${idPrefix}-horizon`} color={c.horizon} opacity={dawnGlow} cx={arcPoint(width, sun, horizon, zenith).x} cy={horizon} rx={width * 0.5} ry={36 * k} />
     </Svg> : null}
     {c.moonOpacity > 0 && moon.altitude > SET ? <Svg width={body} height={body} viewBox="-36 -36 72 72"
       style={[styles.body, { opacity: c.moonOpacity }, place(moon)]} testID={`${idPrefix}-moon`}>

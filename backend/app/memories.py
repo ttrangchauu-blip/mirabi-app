@@ -30,7 +30,7 @@ from typing import Annotated, Literal
 
 from fastapi import APIRouter, Depends, Query
 from pydantic import BaseModel, BeforeValidator, Field
-from sqlalchemy import select
+from sqlalchemy import and_, or_, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
@@ -455,9 +455,13 @@ def list_memories(category: Literal["all", "pet", "study", "friends", "favorite"
     if cursor: where.append(Memory.id < cursor)
     if pet_id: where.append(Memory.pet_id == pet_id)
     if category == "favorite": where.append(Memory.favorite.is_(True))
-    elif category == "pet": where.append(Memory.event_type.in_(("pet_hatched", "pet_evolved", "manual", "room_photo", "walk_keepsake", "journal_moment")))
-    elif category == "study": where.append(Memory.event_type.in_(("first_learning_session", "first_daily_quests")))
-    elif category == "friends": where.append(Memory.event_type == "first_group_session")
+    # A memory the user saved goes by the template it was made with: "Học tập" under study, "Cùng bạn" under friends.
+    elif category == "pet": where.append(or_(Memory.event_type.in_(("pet_hatched", "pet_evolved", "room_photo", "walk_keepsake", "journal_moment")),
+                                             and_(Memory.event_type == "manual", Memory.template_key.not_in(("study", "together")))))
+    elif category == "study": where.append(or_(Memory.event_type.in_(("first_learning_session", "first_daily_quests")),
+                                               and_(Memory.event_type == "manual", Memory.template_key == "study")))
+    elif category == "friends": where.append(or_(Memory.event_type == "first_group_session",
+                                                 and_(Memory.event_type == "manual", Memory.template_key == "together")))
     rows = list(db.scalars(select(Memory).where(*where).order_by(Memory.id.desc()).limit(limit + 1)))
     retry_drawing(db, rows[:limit])
     featured = db.scalar(select(Memory).where(Memory.user_id == user.id, Memory.deleted_at.is_(None),

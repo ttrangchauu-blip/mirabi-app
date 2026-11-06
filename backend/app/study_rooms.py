@@ -37,7 +37,7 @@ from .models import (StudyRoom, StudyRoomInvitation, StudyRoomMember, StudyRoomP
 from .notifications import notify
 from .progression import award_exp, award_study_exp
 from .ratelimit import client_ip, enforce
-from .realtime import hub, queue_room
+from .realtime import hub, queue_room, queue_user
 from .security import current_user
 from .study_statistics import preferences
 
@@ -362,6 +362,17 @@ def snapshot(db: Session, room: StudyRoom, t: datetime | None = None) -> dict:
             "team_quests": team_quests.room_quests_brief(db, room.id), "server_time": t}
 
 
+def own_stats(db: Session, room: StudyRoom, user_id: int) -> dict | None:
+    """A member's own numbers when they hide them from others (`share_study_stats` off), else None. Goes to that member
+    only, next to the shared snapshot, which shows them as hidden like everyone else sees them."""
+    if shares_stats(ensure_profile(db, user_id)):
+        return None
+    session = _current_session(db, room)
+    p = db.scalar(select(StudyRoomParticipant).where(StudyRoomParticipant.session_id == session.id,
+                                                     StudyRoomParticipant.user_id == user_id)) if session else None
+    return {"focus_seconds": p.focus_ms // 1000 if p else 0, "cycles_completed": p.cycles_completed if p else 0}
+
+
 def _publish(db: Session, room: StudyRoom, event: str, revoke: tuple[int, ...] = (), close: bool = False) -> dict:
     """Bump the room version and queue the new snapshot; it is sent to subscribers only if the transaction commits."""
     room.version = StudyRoom.version + 1
@@ -370,12 +381,17 @@ def _publish(db: Session, room: StudyRoom, event: str, revoke: tuple[int, ...] =
     snap = snapshot(db, room)
     queue_room(db, room.id, {"type": "room.updated", "room_id": room.id, "version": room.version, "event": event,
                              "room": snap}, revoke=revoke, close=close)
+    for m in snap["members"]:
+        if m["focus_seconds"] is None:
+            queue_user(db, m["user_id"], {"type": "room.own_stats", "room_id": room.id,
+                                          "stats": own_stats(db, room, m["user_id"])})
     return snap
 
 
 def preview(db: Session, room: StudyRoom, viewer: User, via_code: bool = False) -> dict:
     """What someone outside the room may see before joining: no code, no member stats."""
-    host = db.get(User, room.host_id)
+    # Someone who blocked you (or whom you blocked) isn't named: a code can reach a room whose host hides from you.
+    host = db.get(User, room.host_id) if room.host_id not in blocked_ids(db, viewer.id) else None
     can_join, reason = _join_check(db, room, viewer, via_code=via_code)
     return {"id": room.id, "name": room.name, "goal": room.goal, "subject": room.subject, "visibility": room.visibility,
             "status": room.status, "state": "closed" if room.status != "open" else
@@ -479,6 +495,8 @@ def _touch(db: Session, room: StudyRoom, member: StudyRoomMember, t: datetime) -
     session = _current_session(db, room)
     if session is not None and session.status in ("active", "paused"):
         sync_session(db, session, t)  # credit everyone up to now before this presence changes
+        if session.status not in ("active", "paused"):
+            return changed  # that was its last moment: nobody takes part in a session from here on
         p = db.scalar(select(StudyRoomParticipant).where(StudyRoomParticipant.session_id == session.id,
                                                          StudyRoomParticipant.user_id == member.user_id))
         if p is None:
@@ -737,9 +755,13 @@ def _room_by_code(db: Session, raw: str, user: User, request: Request) -> StudyR
     return room
 
 
-def _joined(db: Session, room: StudyRoom, joined: bool) -> dict:
-    snap = _publish(db, room, "member_joined") if joined else snapshot(db, room)
+def _joined(db: Session, room: StudyRoom, joined: bool, advanced: tuple[str | None, list[int]]) -> dict:
+    """`advanced` is what `advance_room` did just before the join: a session that ran out belongs to those who were in
+    it, and whoever joins now gets the waiting room, not its summary."""
+    event, rewarded = advanced
+    snap = _publish(db, room, "member_joined" if joined else event) if joined or event else snapshot(db, room)
     db.commit()
+    _after_rewards(rewarded)
     return {"room": snap, "already_member": not joined}
 
 
@@ -747,8 +769,10 @@ def _joined(db: Session, room: StudyRoom, joined: bool) -> dict:
 def join_by_code(data: CodeInput, request: Request, user: User = Depends(current_user), db: Session = Depends(get_db)):
     found = _room_by_code(db, data.code, user, request)
     with locked_room(db, found.id) as room:
-        _, joined = _join(db, room, user, clock.now(), via_code=True)
-        return _joined(db, room, joined)
+        t = clock.now()
+        advanced = advance_room(db, room, t)
+        _, joined = _join(db, room, user, t, via_code=True)
+        return _joined(db, room, joined, advanced)
 
 
 @router.get("/{room_id}")
@@ -791,8 +815,10 @@ def join_room(room_id: int, user: User = Depends(current_user), db: Session = De
         friend_room = room.visibility == "code" and are_friends(db, room.host_id, user.id)
         if invitation is None and not friend_room and _member(db, room.id, user.id) is None:
             raise _not_found()
-        _, joined = _join(db, room, user, clock.now(), invitation=invitation)
-        return _joined(db, room, joined)
+        t = clock.now()
+        advanced = advance_room(db, room, t)
+        _, joined = _join(db, room, user, t, invitation=invitation)
+        return _joined(db, room, joined, advanced)
 
 
 @router.post("/{room_id}/leave")
@@ -852,6 +878,7 @@ def start_session(room_id: int, user: User = Depends(current_user), db: Session 
         _require_host(db, room, user)
         _require_open(room)
         t = clock.now()
+        rewarded: list[int] = []
         if room.current_session_id:  # double tap or retry: the session is already running
             event, rewarded = advance_room(db, room, t)
             if room.current_session_id:
@@ -878,7 +905,9 @@ def start_session(room_id: int, user: User = Depends(current_user), db: Session 
                        f"Phòng “{room.name}” đã bắt đầu {room.focus_minutes} phút tập trung.", {"room_id": room.id})
         snap = _publish(db, room, "session_started")
         db.commit()
-        return {"room": snap, "already_started": False}
+        result = {"room": snap, "already_started": False}
+    _after_rewards(rewarded)  # the session that ran out just before this one
+    return result
 
 
 def _session_control(room_id: int, user: User, db: Session, action: str) -> dict:
@@ -958,9 +987,10 @@ def heartbeat(room_id: int, user: User = Depends(current_user), db: Session = De
             event = "member_status_changed"
         touch_active(db, user.id)
         snap = _publish(db, room, event) if event else snapshot(db, room, t)
+        mine = own_stats(db, room, user.id)
         db.commit()
     _after_rewards(rewarded)
-    return snap
+    return {**snap, "own_stats": mine} if mine else snap
 
 
 @router.post("/{room_id}/reactions", status_code=202)
@@ -1018,8 +1048,10 @@ def accept_invitation(invitation_id: int, user: User = Depends(current_user), db
             invitation.status, invitation.responded_at = "cancelled", clock.now()
             db.commit()
             raise APIError(409, "invitation_not_pending", "This invitation is no longer open")
-        _, joined = _join(db, room, user, clock.now(), invitation=invitation)
-        return _joined(db, room, joined)
+        t = clock.now()
+        advanced = advance_room(db, room, t)
+        _, joined = _join(db, room, user, t, invitation=invitation)
+        return _joined(db, room, joined, advanced)
 
 
 @invitations_router.post("/{invitation_id}/decline")
@@ -1134,8 +1166,12 @@ def realtime_leave(user_id: int, room_id: int) -> None:
             db.commit()
 
 
-def heartbeat_user(user_id: int, room_ids: tuple[int, ...]) -> None:
+def heartbeat_user(user_id: int, room_ids: tuple[int, ...]) -> bool:
+    """A socket's ping. False when the account is no longer active: the socket ends and nothing is touched."""
     with SessionLocal() as db:
+        user = db.get(User, user_id)
+        if user is None or user.status != "active":
+            return False
         touch_active(db, user_id)
         db.commit()
         for room_id in room_ids:
@@ -1152,14 +1188,19 @@ def heartbeat_user(user_id: int, room_ids: tuple[int, ...]) -> None:
                     _publish(db, room, event)
                 db.commit()
             _after_rewards(rewarded)
+    return True
 
 
-def load_snapshot(room_id: int) -> dict | None:
+def load_snapshot(room_id: int, user_id: int | None = None) -> dict | None:
+    """The room's snapshot; with `user_id`, for that member only (None if they aren't one), with their own numbers."""
     with SessionLocal() as db:
         room = db.get(StudyRoom, room_id)
-        result = snapshot(db, room) if room is not None else None
+        if room is None or (user_id is not None and _member(db, room_id, user_id) is None):
+            return None
+        result = snapshot(db, room)
+        mine = own_stats(db, room, user_id) if user_id is not None else None
         db.commit()
-        return result
+        return {**result, "own_stats": mine} if mine else result
 
 
 # ---------------------------------------------------------------------------- background tick
@@ -1215,14 +1256,13 @@ def _sweep_room(room_id: int, t: datetime) -> None:
             if members and all(as_utc(m.last_seen_at) < idle for m in members):
                 rewarded += _close_room(db, room, t, "idle")
                 _publish(db, room, "room_closed", close=True)
-                db.commit()
-                return
-            host = next((m for m in members if m.user_id == room.host_id), None)
-            host_gone = host is None or as_utc(host.last_seen_at) + _grace() < t
-            if host_gone and any(m.presence == "online" and m.user_id != room.host_id for m in members):
-                if _transfer_host(db, room) is not None:
-                    event = "host_changed"
-            if event:
-                _publish(db, room, event)
+            else:
+                host = next((m for m in members if m.user_id == room.host_id), None)
+                host_gone = host is None or as_utc(host.last_seen_at) + _grace() < t
+                if host_gone and any(m.presence == "online" and m.user_id != room.host_id for m in members):
+                    if _transfer_host(db, room) is not None:
+                        event = "host_changed"
+                if event:
+                    _publish(db, room, event)
             db.commit()
     _after_rewards(rewarded)

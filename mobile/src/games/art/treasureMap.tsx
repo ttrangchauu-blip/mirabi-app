@@ -1,9 +1,12 @@
 import React from 'react';
-import Svg, { Circle, Defs, Ellipse, G, Path, Polygon, Rect } from 'react-native-svg';
-import { Art, blob, f1, INK, Lin, Rad, SW, Twinkle, url } from './kit';
+import { StyleSheet } from 'react-native';
+import { Plate } from '../../world/diorama';
+import { MAP_ART } from './rendered';
+import Svg, { Defs, Ellipse, Path, Rect } from 'react-native-svg';
+import { Art, f1, INK, Lin, SW, Twinkle, url } from './kit';
 
-// Vector art for Treasure Explorer (Địa lí): an old parchment map with a village, snowy mountains, a river and its
-// bridge, an old forest, the coast with its lighthouse and the treasure island, joined by a dotted trail; fog clouds over
+// Art for Treasure Explorer (Địa lí): a rendered old map with a village, snowy mountains, a river and its
+// bridge, an old forest, the coast with its lighthouse and the treasure island, joined by a drawn dotted trail; fog clouds over
 // the places not explored yet, flags for the ones reached, and a compass. The trail is a Catmull-Rom curve through
 // MAP_STOPS sampled into a dense polyline: the same points draw it and move the pet along it (`routeAt`), so the pet
 // never leaves the path. Coordinates are fractions of the map's width and height.
@@ -73,96 +76,20 @@ export function routeAt(f: number, aspect: number): P {
 // ---------------------------------------------------------------------------------------------------------------------
 // The board
 
-function Mountain({ x, y, s }: { x: number; y: number; s: number }) {
-  return (
-    <G>
-      <Path d={`M${x - s} ${y} L${x} ${y - s * 1.3} L${x + s} ${y} Z`} fill="#B79C7A" stroke={INK} strokeWidth={1.4} strokeLinejoin="round" />
-      <Path d={`M${x} ${y - s * 1.3} L${x + s} ${y} L${x + s * 0.2} ${y} Z`} fill="#9A7F5E" />
-      <Path d={`M${x - s * 0.38} ${y - s * 0.8} L${x} ${y - s * 1.3} L${x + s * 0.38} ${y - s * 0.8} L${x + s * 0.15} ${y - s * 0.9} L${x} ${y - s * 0.76} L${x - s * 0.18} ${y - s * 0.92} Z`}
-        fill="#FFFFFF" stroke={INK} strokeWidth={1} strokeLinejoin="round" />
-    </G>
-  );
-}
-
-function Pine({ x, y, s }: { x: number; y: number; s: number }) {
-  return (
-    <G>
-      <Path d={`M${x} ${y - s * 1.6} L${x + s * 0.6} ${y - s * 0.5} L${x - s * 0.6} ${y - s * 0.5} Z`} fill="#5FA05A" stroke={INK} strokeWidth={1} strokeLinejoin="round" />
-      <Path d={`M${x} ${y - s * 1.1} L${x + s * 0.75} ${y} L${x - s * 0.75} ${y} Z`} fill="#4E8F4C" stroke={INK} strokeWidth={1} strokeLinejoin="round" />
-    </G>
-  );
-}
-
-function Hut({ x, y, s }: { x: number; y: number; s: number }) {
-  return (
-    <G>
-      <Rect x={x - s * 0.5} y={y - s * 0.7} width={s} height={s * 0.7} fill="#E8C690" stroke={INK} strokeWidth={1.2} />
-      <Path d={`M${x - s * 0.7} ${y - s * 0.65} L${x} ${y - s * 1.3} L${x + s * 0.7} ${y - s * 0.65} Z`} fill="#C9504A" stroke={INK} strokeWidth={1.2} strokeLinejoin="round" />
-      <Rect x={x - s * 0.12} y={y - s * 0.4} width={s * 0.24} height={s * 0.4} fill="#7A4E2E" />
-    </G>
-  );
-}
-
 /** The parchment map, `width` × `height`: land, sea, river, the places and the dotted trail. */
 export const MapBoard = React.memo(function MapBoard({ width: w, height: h }: { width: number; height: number }) {
   if (!w || !h) return null;
   const X = (u: number) => u * w;
   const Y = (v: number) => v * h;
-  const s = Math.min(w, h * 1.6) * 0.06; // the size of a drawn place
   const trail = ROUTE.map((p, i) => `${i ? 'L' : 'M'}${f1(X(p.x))} ${f1(Y(p.y))}`).join(' ');
-  const river = `M${X(0.34)} ${Y(-0.02)} C${X(0.3)} ${Y(0.2)} ${X(0.52)} ${Y(0.3)} ${X(0.46)} ${Y(0.48)} S${X(0.6)} ${Y(0.74)} ${X(0.72)} ${Y(0.8)}`;
   return (
-    <Svg width={w} height={h}>
-      <Defs>
-        <Lin id="map-paper" stops={[[0, '#F8EACB'], [1, '#EAD2A0']]} />
-        <Rad id="map-burn" stops={[[0.6, '#000000', 0], [1, '#8A5A20', 0.35]]} />
-        <Lin id="map-sea" stops={[[0, '#A6DDF0'], [1, '#6FBFE0']]} />
-      </Defs>
-      <Rect width={w} height={h} fill={url('map-paper')} />
-      {/* The sea (bottom right) with waves, and the treasure island. */}
-      <Path d={`M${X(0.58)} ${h} Q${X(0.62)} ${Y(0.74)} ${X(0.8)} ${Y(0.66)} Q${X(0.9)} ${Y(0.48)} ${w} ${Y(0.42)} L${w} ${h} Z`} fill={url('map-sea')} />
-      {[[0.84, 0.6], [0.7, 0.9], [0.95, 0.66]].map(([u, v], i) => (
-        <Path key={i} d={`M${X(u) - s * 0.5} ${Y(v)} q${s * 0.25} ${-s * 0.25} ${s * 0.5} 0 t${s * 0.5} 0`} stroke="#FFFFFF" strokeWidth={1.4} fill="none" opacity={0.85} />
-      ))}
-      <Path d={blob(X(0.9), Y(0.82), s * 0.9, 7, 0.35, 61)} fill="#F2D59A" stroke={INK} strokeWidth={1.4} />
-      <Path d={`M${X(0.9)} ${Y(0.82)} q${-s * 0.1} ${-s * 0.9} ${s * 0.2} ${-s * 1.1}`} stroke="#8F5C36" strokeWidth={2} fill="none" />
-      <Path d={`M${X(0.9) + s * 0.2} ${Y(0.82) - s * 1.1} q${s * 0.5} ${-s * 0.1} ${s * 0.7} ${s * 0.3} M${X(0.9) + s * 0.2} ${Y(0.82) - s * 1.1} q${-s * 0.5} ${-s * 0.1} ${-s * 0.6} ${s * 0.35}`}
-        stroke="#5FA05A" strokeWidth={3} strokeLinecap="round" fill="none" />
-      {/* The river, from the mountains to the sea. */}
-      <Path d={river} stroke="#7CC3E6" strokeWidth={s * 0.5} strokeLinecap="round" fill="none" />
-      <Path d={river} stroke="#BFE6F6" strokeWidth={s * 0.16} strokeLinecap="round" fill="none" opacity={0.9} />
-      {/* Mountains, the old forest, the village. */}
-      <Mountain x={X(0.12)} y={Y(0.34)} s={s * 1.1} />
-      <Mountain x={X(0.24)} y={Y(0.24)} s={s * 1.4} />
-      <Mountain x={X(0.36)} y={Y(0.32)} s={s} />
-      {[[0.58, 0.2], [0.64, 0.14], [0.7, 0.2], [0.76, 0.14], [0.62, 0.3], [0.7, 0.3], [0.82, 0.24]].map(([u, v], i) => <Pine key={i} x={X(u)} y={Y(v)} s={s * 0.8} />)}
-      <Hut x={X(0.13)} y={Y(0.66)} s={s * 0.9} />
-      <Hut x={X(0.22)} y={Y(0.7)} s={s * 0.8} />
-      {/* The bridge over the river. */}
-      <Rect x={X(0.45) - s * 0.9} y={Y(0.48) - s * 0.25} width={s * 1.8} height={s * 0.5} rx={s * 0.1} fill="#B7834F" stroke={INK} strokeWidth={1.4} />
-      {[-0.6, -0.2, 0.2, 0.6].map((k, i) => <Rect key={i} x={X(0.45) + k * s - 1} y={Y(0.48) - s * 0.25} width={2} height={s * 0.5} fill="#8F5C36" />)}
-      {/* The lighthouse on the coast. */}
-      <Path d={`M${X(0.74) - s * 0.3} ${Y(0.62)} L${X(0.74) - s * 0.18} ${Y(0.62) - s * 1.4} L${X(0.74) + s * 0.18} ${Y(0.62) - s * 1.4} L${X(0.74) + s * 0.3} ${Y(0.62)} Z`}
-        fill="#FFFFFF" stroke={INK} strokeWidth={1.3} strokeLinejoin="round" />
-      <Rect x={X(0.74) - s * 0.26} y={Y(0.62) - s * 0.8} width={s * 0.52} height={s * 0.22} fill="#E2574C" />
-      <Rect x={X(0.74) - s * 0.22} y={Y(0.62) - s * 1.7} width={s * 0.44} height={s * 0.3} fill="#FFE27A" stroke={INK} strokeWidth={1.2} />
-      <Path d={`M${X(0.74) - s * 0.3} ${Y(0.62) - s * 1.7} L${X(0.74)} ${Y(0.62) - s * 2} L${X(0.74) + s * 0.3} ${Y(0.62) - s * 1.7} Z`} fill="#C9504A" stroke={INK} strokeWidth={1.2} />
-      {/* The trail. */}
-      <Path d={trail} stroke="#9C5B2E" strokeWidth={2.4} strokeDasharray="6 6" strokeLinecap="round" fill="none" />
-      {/* The X on the island. */}
-      <Path d={`M${X(0.9) - s * 0.3} ${Y(0.8) - s * 0.3} L${X(0.9) + s * 0.3} ${Y(0.8) + s * 0.3} M${X(0.9) + s * 0.3} ${Y(0.8) - s * 0.3} L${X(0.9) - s * 0.3} ${Y(0.8) + s * 0.3}`}
-        stroke="#C2342E" strokeWidth={3.4} strokeLinecap="round" />
-      {/* The compass rose. */}
-      <G transform={`translate(${X(0.92)} ${Y(0.16)})`}>
-        <Circle r={s * 0.9} fill="#FFF6E0" stroke={INK} strokeWidth={1.2} />
-        <Polygon points={`0,${-s * 0.8} ${s * 0.18},0 0,${s * 0.8} ${-s * 0.18},0`} fill="#C2342E" stroke={INK} strokeWidth={0.8} />
-        <Polygon points={`${-s * 0.8},0 0,${s * 0.18} ${s * 0.8},0 0,${-s * 0.18}`} fill="#8A6A3A" stroke={INK} strokeWidth={0.8} />
-        <Circle r={s * 0.12} fill="#FFFFFF" stroke={INK} strokeWidth={0.8} />
-      </G>
-      {/* Old edges. */}
-      <Rect width={w} height={h} fill={url('map-burn')} />
-      <Rect x={2} y={2} width={w - 4} height={h - 4} rx={10} stroke="#B98B4E" strokeWidth={2} fill="none" opacity={0.7} />
-    </Svg>
+    <>
+      <Plate source={MAP_ART} width={w} height={h} />
+      <Svg width={w} height={h} style={StyleSheet.absoluteFill}>
+        <Path d={trail} stroke="#FFF4D6" strokeWidth={3.2} strokeDasharray="6 6" strokeLinecap="round" fill="none" opacity={0.95} />
+        <Path d={trail} stroke="#9C5B2E" strokeWidth={1.8} strokeDasharray="6 6" strokeLinecap="round" fill="none" />
+      </Svg>
+    </>
   );
 });
 

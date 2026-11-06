@@ -2,18 +2,18 @@ import React, { memo, useState } from 'react';
 import { LayoutChangeEvent, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-import Svg, { Circle, Path, Rect } from 'react-native-svg';
-import { type Light, mixColor } from '../../components/daylight';
+import { PetArt } from '../../components/PetArt';
 import { Text } from '../../components/Typography';
 import type { Friend } from '../../studyTogether/types';
 import { appTheme as t } from '../../theme';
 import { radius, tones, type as typeScale } from '../../ui/design';
 import { useAtmosphere } from '../../world/atmosphere';
-import { CloudDeck, Rain, Snow, WeatherChip } from '../../world/living';
-import { SkyBodies, Stars, wave } from '../../world/sky';
+import { ContactShadow, Plate } from '../../world/diorama';
+import { Rain, Snow, WeatherChip } from '../../world/living';
+import { LiveSky } from '../../world/liveSky';
 import { useWeather } from '../../world/weather';
 import { FriendsScreen, type FriendsTab } from '../together/FriendsScreen';
-import { PetAvatar } from '../together/ui';
+import { STREET_ART, STREET_DOORS, STREET_GATES, STREET_LAMPS, STREET_RATIO, STREET_RIDGE } from './streetArt';
 
 type Props = {
   top: number; initialTab: FriendsTab;
@@ -22,7 +22,16 @@ type Props = {
   /** Thị trấn Mirabi, for those aged 16 and over. */ onOpenTown?: () => void;
 };
 
-const STREET_HEIGHT = 176;
+const LAND_HEIGHT = 212;
+/** The land stands on the card's bottom edge at its own size; what is above it is open sky. */
+const STREET_HEIGHT = LAND_HEIGHT + 52;
+/** The street's width at least; the card shows part of it and the rest is a walk along it. */
+const STREET_WIDTH = Math.round(LAND_HEIGHT * STREET_RATIO);
+/** A plot's width and how far down the picture its tappable part starts, as shares of the picture. */
+const PLOT = 0.166;
+const PLOT_TOP = 0.3;
+const NAME_MARGIN = 46;
+const PET_SIZE = 42;
 const SHOWN = 6;
 
 /** Bạn bè: a street with a house per friend, on top of what was already the friends screen (requests, codes, the list).
@@ -55,62 +64,65 @@ function Tile({ icon, title, subtitle, tone, onPress, testID }: { icon: 'newspap
   );
 }
 
-const HOUSE_COLORS = [['#FFD9B8', '#D9734E'], ['#D4E8FF', '#5B86C4'], ['#DFF3D3', '#5E9E5A'], ['#F4DCF4', '#A365A6'], ['#FFF0BC', '#C08A2E'], ['#D6F2EC', '#3F9486']];
-
-/** One friend's house, its own colours by position in the street; lights on after dark. */
-const House = memo(function House({ wall, roof, lit, size }: { wall: string; roof: string; lit: boolean; size: number }) {
-  return (
-    <Svg width={size} height={size} viewBox="0 0 64 64">
-      <Rect x={12} y={28} width={40} height={32} rx={3} fill={wall} stroke="#3C3A3E" strokeOpacity={0.35} strokeWidth={1.4} />
-      <Path d="M6 30 32 8l26 22Z" fill={roof} stroke="#3C3A3E" strokeOpacity={0.35} strokeWidth={1.4} strokeLinejoin="round" />
-      <Rect x={27} y={42} width={11} height={18} rx={2} fill={mixColor(roof, '#3C2C20', 0.3)} />
-      <Rect x={16} y={36} width={8} height={8} rx={1.5} fill={lit ? '#FFE27A' : '#BFE3F5'} />
-      <Rect x={42} y={36} width={7} height={8} rx={1.5} fill={lit ? '#FFE27A' : '#BFE3F5'} />
-      <Circle cx={36} cy={52} r={0.9} fill="#FFE27A" />
-    </Svg>
-  );
-});
-
 const Street = memo(function Street({ friends, onVisit }: { friends: Friend[] | null; onVisit: (userId: number) => void }) {
   const { reading } = useWeather();
   const { hours, mood, light: c, night } = useAtmosphere(reading);
   const [width, setWidth] = useState(0);
   const onLayout = (e: LayoutChangeEvent) => setWidth(e.nativeEvent.layout.width);
   const shown = (friends ?? []).slice(0, SHOWN);
-  const ground = STREET_HEIGHT - 38;
+  const length = Math.max(width, STREET_WIDTH);
+  const tall = length / STREET_RATIO;
+  const top = STREET_HEIGHT - tall;
+  const ridge = top + tall * STREET_RIDGE;
   return (
     <View style={s.street} onLayout={onLayout} testID="friend-street">
-      <LinearGradient colors={c.sky} style={StyleSheet.absoluteFill} />
-      {width ? <StreetBack width={width} ground={ground} hours={hours} c={c} cover={mood.cover} /> : null}
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={s.houses} style={StyleSheet.absoluteFill}>
-        {shown.map((f, i) => (
-          <Pressable key={f.id} onPress={() => onVisit(f.id)} disabled={!f.can_visit} style={({ pressed }) => [s.house, pressed && s.pressed, !f.can_visit && s.closed]} accessibilityRole="button"
-            accessibilityLabel={f.can_visit ? `Nhà của ${f.display_name}, chạm để ghé thăm` : `Nhà của ${f.display_name}, đang tắt ghé thăm`} accessibilityState={{ disabled: !f.can_visit }} testID={`friend-house-${f.id}`}>
-            <House wall={HOUSE_COLORS[i % 6][0]} roof={HOUSE_COLORS[i % 6][1]} lit={night} size={78} />
-            <View style={s.housePet}><PetAvatar user={f} size={26} /></View>
-            <Text style={s.houseName} numberOfLines={1}>{f.display_name}</Text>
-          </Pressable>
-        ))}
-        {friends && !friends.length ? <View style={s.emptyStreet}><Text style={s.emptyText}>Con phố còn vắng. Kết bạn bằng mã bên dưới, nhà của bạn bè sẽ hiện ở đây.</Text></View> : null}
+      {/* The sky's palest colour meets the land. */}
+      <LinearGradient colors={c.sky} end={{ x: 0, y: Math.min(1, (ridge + 24) / STREET_HEIGHT) }} style={StyleSheet.absoluteFill} />
+      {width ? <LiveSky id="street" width={width} ridge={ridge} hours={hours} c={c} cover={mood.cover} /> : null}
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ width: length, height: STREET_HEIGHT }} style={StyleSheet.absoluteFill}>
+        {width ? <StreetLand length={length} tall={tall} top={top} houses={shown.length} night={night} /> : null}
+        {shown.map((f, i) => {
+          const [doorX, doorY] = STREET_DOORS[i];
+          const plotLeft = (doorX - PLOT / 2) * length;
+          const plotTop = top + PLOT_TOP * tall;
+          const nameX = Math.max(NAME_MARGIN, Math.min(length - NAME_MARGIN, STREET_GATES[i][0] * length));
+          return (
+            <Pressable key={f.id} onPress={() => onVisit(f.id)} disabled={!f.can_visit} style={({ pressed }) => [s.plot, { left: plotLeft, top: plotTop, width: PLOT * length }, pressed && s.pressed]} accessibilityRole="button"
+              accessibilityLabel={f.can_visit ? `Nhà của ${f.display_name}, chạm để ghé thăm` : `Nhà của ${f.display_name}, đang tắt ghé thăm`} accessibilityState={{ disabled: !f.can_visit }} testID={`friend-house-${f.id}`}>
+              <View style={[s.pet, { left: doorX * length - plotLeft + 6, top: (doorY - PLOT_TOP) * tall - PET_SIZE + 22 }]} pointerEvents="none">
+                <ContactShadow width={34} height={8} opacity={0.4} style={s.petShadow} />
+                <PetArt pet={f.pet} stage={f.pet_level} size={PET_SIZE} still />
+              </View>
+              <View style={[s.nameRow, { left: nameX - plotLeft - NAME_MARGIN, top: (STREET_GATES[i][1] - PLOT_TOP) * tall - 9 }]} pointerEvents="none">
+                <View style={s.nameChip}>
+                  {f.can_visit ? null : <View testID={`friend-house-closed-${f.id}`}><Ionicons name="lock-closed" size={10} color={t.muted} /></View>}
+                  <Text style={s.houseName} numberOfLines={1}>{f.display_name}</Text>
+                </View>
+              </View>
+            </Pressable>
+          );
+        })}
       </ScrollView>
+      {friends && !friends.length ? <View style={s.emptyStreet} pointerEvents="none"><Text style={s.emptyText}>Con phố còn vắng. Kết bạn bằng mã bên dưới, nhà của bạn bè sẽ hiện ở đây.</Text></View> : null}
       <View style={s.streetChip} pointerEvents="none"><WeatherChip night={night} tone={night ? 'light' : 'dark'} /></View>
-      {width ? <><Rain width={width} height={STREET_HEIGHT} strength={mood.rain} wind={mood.wind} ground={0.82} /><Snow width={width} height={STREET_HEIGHT} strength={mood.snow} /></> : null}
+      {width ? <><Rain width={width} height={STREET_HEIGHT} strength={mood.rain} wind={mood.wind} ground={0.92} /><Snow width={width} height={STREET_HEIGHT} strength={mood.snow} /></> : null}
     </View>
   );
 });
 
-const StreetBack = memo(function StreetBack({ width, ground, hours, c, cover }: { width: number; ground: number; hours: number; c: Light; cover: number }) {
-  return <>
-    {c.stars > 0 ? <Stars width={width} height={ground} opacity={c.stars} /> : null}
-    <SkyBodies width={width} hours={hours} c={c} horizon={ground - 14} zenith={22} clip={ground - 6} idPrefix="street" />
-    <CloudDeck width={width} top={22} color={c.cloud} opacity={c.cloudOpacity} cover={cover} scale={1} />
-    <Svg width={width} height={STREET_HEIGHT} style={StyleSheet.absoluteFill}>
-      <Path d={wave(width, ground - 26, 7, 2, STREET_HEIGHT, 0.6)} fill={c.hills[0]} />
-      <Path d={wave(width, ground - 4, 2, 2, STREET_HEIGHT, 1.2)} fill={c.meadow} />
-      <Rect x={0} y={ground + 12} width={width} height={STREET_HEIGHT} fill={c.path[0]} />
-      <Rect x={0} y={ground + 12} width={width} height={3} fill={c.path[1]} />
-    </Svg>
-  </>;
+/** The rendered street, moving with the houses: the land, then a patch with a house for each friend. Its lamps glow after dark. */
+const StreetLand = memo(function StreetLand({ length, tall, top, houses, night }: { length: number; tall: number; top: number; houses: number; night: boolean }) {
+  const art = STREET_ART[night ? 'night' : 'day'];
+  return (
+    <View style={[StyleSheet.absoluteFill, s.clip]} pointerEvents="none">
+      <Plate source={art.land} width={length} height={tall} style={{ top }} />
+      {art.houses.slice(0, houses).map((source, i) => {
+        const [left, y, w, h] = art.boxes[i];
+        return <Plate key={i} source={source} width={w * length} height={h * tall} style={{ left: left * length, top: top + y * tall }} />;
+      })}
+      {night ? STREET_LAMPS.map(([x, y]) => <ContactShadow key={x} width={56} height={56} color="#FFE9A8" opacity={0.7} style={[s.lampGlow, { left: x * length - 28, top: top + y * tall - 28 }]} />) : null}
+    </View>
+  );
 });
 
 const s = StyleSheet.create({
@@ -119,13 +131,16 @@ const s = StyleSheet.create({
   body: { paddingHorizontal: 16, paddingBottom: 28 },
   pressed: { opacity: 0.88, transform: [{ scale: 0.98 }] },
   street: { height: STREET_HEIGHT, borderRadius: radius.lg, overflow: 'hidden', marginBottom: 12, backgroundColor: t.hero },
-  houses: { minWidth: '100%', flexDirection: 'row', alignItems: 'flex-end', paddingHorizontal: 10, paddingBottom: 6, gap: 6, height: STREET_HEIGHT },
-  house: { width: 84, alignItems: 'center' },
-  closed: { opacity: 0.7 },
-  housePet: { position: 'absolute', right: 6, bottom: 26 },
-  houseName: { ...typeScale.micro, color: t.ink, marginTop: 3, paddingHorizontal: 6, paddingVertical: 1, borderRadius: radius.pill, backgroundColor: 'rgba(255,255,255,0.86)', maxWidth: 84 },
-  emptyStreet: { flex: 1, alignSelf: 'center', paddingHorizontal: 24 },
-  emptyText: { ...typeScale.caption, color: t.ink, textAlign: 'center', backgroundColor: 'rgba(255,255,255,0.86)', borderRadius: radius.sm, padding: 8 },
+  clip: { overflow: 'hidden' },
+  lampGlow: { position: 'absolute' },
+  plot: { position: 'absolute', bottom: 0 },
+  pet: { position: 'absolute', width: PET_SIZE, alignItems: 'center' },
+  petShadow: { position: 'absolute', bottom: 0 },
+  nameRow: { position: 'absolute', width: NAME_MARGIN * 2, alignItems: 'center' },
+  nameChip: { flexDirection: 'row', alignItems: 'center', gap: 3, maxWidth: NAME_MARGIN * 2, paddingHorizontal: 7, paddingVertical: 1, borderRadius: radius.pill, backgroundColor: 'rgba(255,255,255,0.92)' },
+  houseName: { ...typeScale.micro, color: t.ink, flexShrink: 1 },
+  emptyStreet: { position: 'absolute', left: 24, right: 24, top: 118 },
+  emptyText: { ...typeScale.caption, color: t.ink, textAlign: 'center', backgroundColor: 'rgba(255,255,255,0.94)', borderRadius: radius.sm, padding: 8 },
   streetChip: { position: 'absolute', top: 6, right: 8 },
   tiles: { flexDirection: 'row', gap: 10, marginBottom: 12 },
   tile: { flex: 1, minWidth: 0, flexDirection: 'row', alignItems: 'center', gap: 10, padding: 10, borderRadius: radius.lg, backgroundColor: '#FFFFFF' },

@@ -64,7 +64,7 @@ export const financeApi = {
   categories: () => request('/api/finance/categories') as Promise<FinanceCategory[]>,
   setBudget: (body: { category_id: number; period: string; limit_amount: number }) =>
     request('/api/finance/budgets', { method: 'POST', body }) as Promise<FinanceBudget>,
-  summary: (period: string) => request(`/api/finance/summary?period=${period}`) as Promise<FinanceSummary>,
+  summary: (period: string, zone: string) => request(`/api/finance/summary?period=${period}&tz=${encodeURIComponent(zone)}`) as Promise<FinanceSummary>,
 };
 
 /** 20000000 -> "20.000.000 ₫" (whole đồng; amounts are integers). */

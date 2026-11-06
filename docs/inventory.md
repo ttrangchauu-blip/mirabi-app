@@ -12,7 +12,7 @@ in the garden.
 | `backend/app/inventory.py` | Stacks (`inventory_stacks`), the history of every change (`inventory_events`), `GET /api/inventory`, item detail, "seen". The catalog is also written to `item_catalog` at startup. |
 | `backend/app/companion.py` | Rolling and granting a walk's rewards (`roll_rewards`, `grant_rewards`, `walk_rewards` table). |
 | `backend/app/pet_room.py` | Found decorations placed copy by copy (`placed_items`, `sync_copies`, `reconcile_copies`). |
-| `backend/app/garden.py` | Vườn nhà: 6 plots (`garden_plots`), planting, clearing, watering and tending (`garden_care`), friends' visits. |
+| `backend/app/garden.py` | Vườn nhà: 9 plots (`garden_plots`), planting, clearing, watering and tending (`garden_care`), friends' visits. |
 | `mobile/assets/room/room-art.json` | The room drawing of every decoration (also its inventory picture). |
 | `mobile/src/itemArt.ts`, `mobile/src/gardenArt.ts` | Icons of seeds, materials and keepsakes (one badge per place); the garden's plants (3 stages each) and soil. |
 | `mobile/src/inventory/` | API, offline cache, rarity colours, `requestPlace` (Kho đồ → a room's decorating). |
@@ -87,16 +87,27 @@ with its own id, shown as the placement's `uid` `"p<id>"`, its room and position
 - A found decoration's copy keeps its colour (no recolouring, palettes skip it): another colour is another stack.
 - Starter items stay one of each per room, as before.
 - A small pot or moon lantern shelf saved in a room before copies were counted becomes a copy when the room opens; with
-  no free copy left it goes back to the inventory (`reconcile_copies`).
+  no free copy left it goes back to the inventory (`reconcile_copies`). A room still saved with fixed slots is stored in
+  today's form for that, once the user holds such an item.
+- A copy the room no longer draws (a top item with nothing left to stand on, one past the 32 items) goes back to the
+  inventory when the room opens, so it is never "placed" where nobody can see or store it.
+- Moves and gifts of one item in `inventory_events` keep their own kind (`walk_reward`, `adventure`, `work_chest`,
+  `gift_in`, `gift_out`, `plant`, `place`, `store`, `legacy`); the detail's history says each in its own words.
 - Planting (`POST /api/garden/plots/{plot}/plant`, `client_request_id`) takes one seed only when the plot is empty and
   the seed is owned; a retry with the same id plants once (event key `plant:<id>`). Errors: `plot_taken`,
   `not_enough_items`, `not_a_seed`.
 
 ## Vườn nhà
 
-6 plots. A plant is "Mới nảy mầm", then "Đang lớn" after 4 h and "Đã lớn" after 12 h (`garden.STAGE_HOURS`); a grown
+9 plots. A plant is "Mới nảy mầm", then "Đang lớn" after 4 h and "Đã lớn" after 12 h (`garden.STAGE_HOURS`); a grown
 plant can be cleared to free its plot (`POST /api/garden/plots/{plot}/clear`). Offline it shows the last garden the
-server confirmed and every change waits.
+server confirmed and every change waits. A garden left open asks again when its next plant reaches its next stage, timed
+from the backend's `next_stage_at` and `server_now`.
+
+The card over the sky ("Hạt giống: N") adds up `seeds[].available` from `GET /api/garden`, which comes from the inventory:
+it changes only with the backend's answer, and is read again on opening, on coming back to the app and when a walk's gifts
+are received. Its (+) leads to Khám phá and Kho đồ: there is no shop for seeds, so nothing is on sale there. A tool is off
+while it could do nothing (no seed or free plot, nothing left to water or tend today, no connection).
 
 **Ways in**, all to the same screen (`mobile/src/screens/garden/GardenScreen.tsx`, overlay `garden` in `MainApp`):
 Tiện ích → Vườn nhà, Phòng cá nhân → Cài đặt → Vườn nhà, "Trồng" in Kho đồ (with the seed chosen), and a "garden care"

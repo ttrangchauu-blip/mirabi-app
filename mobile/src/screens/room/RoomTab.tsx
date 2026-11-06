@@ -11,7 +11,7 @@ import { type PlaceRequest, usePlaceRequest } from '../../inventory/api';
 import type { InventoryItem } from '../../inventory/types';
 import { roomApi, roomCache } from '../../room/api';
 import { keyOf, poseFor } from '../../room/art';
-import { freeCopies } from '../../room/found';
+import { freeCopies, stackOf, withStack } from '../../room/found';
 import { clockLabel } from '../../room/format';
 import { PET_ACTIONS, PLAY_MS, type PetAction, useRoomPrefs, useRoomSounds } from '../../room/prefs';
 import { PROBLEM_TEXT, type Problem } from '../../room/rules';
@@ -111,6 +111,10 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenExplore, c
   const [loadError, setLoadError] = useState<unknown>(null);
   const editor = useRoomEditor('personal', data?.catalog.max_items ?? 32);
   const { draft, selected } = editor;
+  // Whether the room on screen is the base of a draft, and whether the backend has moved on from that base meanwhile.
+  const onDraft = useRef(false);
+  onDraft.current = draft !== null;
+  const baseOutdated = useRef(false);
   const [saving, setSaving] = useState(false);
   const [reaction, setReaction] = useState<{ key: number; text: string } | null>(null);
   const lineIndex = useRef<Record<PetAction, number>>({ pet: 0, feed: 0, play: 0, talk: 0 });
@@ -146,8 +150,14 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenExplore, c
       const fresh = await roomApi.get();
       // A read that started before a save must not bring the older room back (on screen or in the cache).
       if (fresh.room.version < newest.current) return;
+      // A draft stays on the room it was opened from, and saves with that version: moved onto a newer one, it would
+      // silently undo what another device saved. Only what is around it (the counts, the walk) is brought up to date.
+      if (onDraft.current) {
+        if (fresh.room.version > newest.current) baseOutdated.current = true;
+        setData((current) => (current ? { ...fresh, room: current.room } : fresh));
+      } else setData(fresh);
       newest.current = fresh.room.version;
-      setData(fresh); setOffline(false); setLoadError(null);
+      setOffline(false); setLoadError(null);
       void roomCache.store(user.id, fresh);
     } catch (e) {
       const cached = await roomCache.load(user.id);
@@ -176,8 +186,10 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenExplore, c
     if (changed && !(await confirm({ title: 'Bỏ các thay đổi?', message: 'Phòng sẽ trở lại như lần lưu gần nhất.', confirmLabel: 'Bỏ thay đổi',
       cancelLabel: 'Trang trí tiếp', icon: 'arrow-undo-outline' }))) return false;
     cancel();
+    onDraft.current = false;
+    if (baseOutdated.current) { baseOutdated.current = false; void load(); } // back to the room as it is now
     return true;
-  }, [changed, confirm, cancel]);
+  }, [changed, confirm, cancel, load]);
   useEffect(() => {
     if (!leaveGuard) return;
     leaveGuard.current = decorating ? requestCancel : null;
@@ -270,8 +282,12 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenExplore, c
   }
   function openDecorating(group?: string) {
     setSettings(false); setPetMenu(false);
+    if (offline) { toast('Cần kết nối mạng để trang trí phòng.', 'info'); return; }
     setDecorateGroup(group);
     editor.start(data!.room.layout);
+    onDraft.current = true;
+    baseOutdated.current = false;
+    void load(); // what the pet or a friend brought since the room was read: the panel lists it
   }
 
   async function save(name: string, layout: Layout) {
@@ -279,6 +295,7 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenExplore, c
     try {
       const { room, catalog } = await roomApi.save(name, layout, data!.room.version);
       newest.current = Math.max(newest.current, room.version);
+      baseOutdated.current = false;
       const next = { ...data!, room, catalog: catalog ?? data!.catalog };
       setData(next); setOffline(false); editor.stop(); setRename(null);
       void roomCache.store(user.id, next);
@@ -286,6 +303,8 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenExplore, c
     } catch (e) {
       if (e instanceof ApiError && e.code === 'room_version_conflict') {
         editor.stop(); setRename(null);
+        onDraft.current = false;
+        baseOutdated.current = false;
         await load();
         await confirm({ title: 'Phòng vừa được cập nhật', message: 'Phòng đã được thay đổi ở nơi khác. Mirabi đã mở bản mới nhất, bạn trang trí lại nhé.',
           confirmLabel: 'Đã hiểu', cancelLabel: null, icon: 'sync-outline' });
@@ -306,8 +325,8 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenExplore, c
     else if (result === 'blocks_pet' || result === 'trapped') toast('Phòng chưa còn chỗ trống cho món này. Cất bớt đồ rồi thử lại nhé.', 'info');
   }
   /** One more copy of a found decoration, if one is free (counting this draft); else the first copy already placed. */
-  function pickCopy(want: Pick<FoundStack, 'item' | 'variant' | 'name'>) {
-    const stack = data!.catalog.found?.find((f) => f.item === want.item && f.variant === want.variant);
+  function pickCopy(want: Pick<FoundStack, 'item' | 'variant' | 'name'>, latest?: FoundStack) {
+    const stack = latest ?? data!.catalog.found?.find((f) => f.item === want.item && f.variant === want.variant);
     const layout = editor.draft ?? data!.room.layout;
     if (!stack || freeCopies(stack, data!.room.layout, layout) < 1) {
       const placed = layout.items.find((p) => p.uid && p.item === want.item && p.variant === want.variant);
@@ -323,7 +342,11 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenExplore, c
   }
   const placeFromInventory = (item: InventoryItem) => {
     setInventory(false);
-    if (item.art) pickCopy({ item: item.art, variant: item.variant, name: item.name });
+    if (!item.art) return;
+    // Kho đồ has just read this; the room's catalog may be from before it arrived.
+    const stack = stackOf({ ...item, art: item.art });
+    setData((d) => (d ? { ...d, catalog: withStack(d.catalog, stack) } : d));
+    pickCopy(stack, stack);
   };
   function store() {
     const result = editor.store();
@@ -357,7 +380,7 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenExplore, c
   const sides = { paddingLeft: insets.left + 12, paddingRight: insets.right + 12 };
   // The selected item's tools (docked in the decorating panel) and the panel share these.
   const tools = decorating ? {
-    catalog: data.catalog, draft: draft!, selected, onVariant: editor.variant,
+    catalog: data.catalog, draft: draft!, selected, onVariant: (variant: string) => refused(editor.variant(variant)),
     onFlip: () => refused(editor.flip()), onRotate: () => refused(editor.rotate()), onStore: store,
     onNudge: (dx: number, dy: number) => { const p = draft!.items.find((entry) => keyOf(entry) === selected); if (p) refused(editor.move(keyOf(p), p.x + dx, p.y + dy)); },
     onDeselect: () => editor.select(null),
@@ -448,7 +471,7 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenExplore, c
             onChange={prefs.setEffects} />
           {onOpenInventory ? <OptionRow icon="cube-outline" label="Kho đồ" description="Đồ pet mang về từ những chuyến khám phá"
             onPress={() => { setSettings(false); onOpenInventory(); }} /> : null}
-          <OptionRow icon="create-outline" label="Đổi tên phòng" description={data.room.name} onPress={() => { setSettings(false); setRename(data.room.name); }} />
+          <OptionRow icon="create-outline" label="Đổi tên phòng" description={data.room.name} onPress={() => { setSettings(false); if (offline) toast('Cần kết nối mạng để đổi tên phòng.', 'info'); else setRename(data.room.name); }} />
         </ScrollView>
       </OptionSheet>
       <AppModal visible={inventory} animationType="slide" onRequestClose={() => setInventory(false)}>

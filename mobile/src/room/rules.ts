@@ -141,6 +141,15 @@ export function rotateItem(layout: Layout, key: string, kind: RoomKind): Change 
   return { layout: after, problem: problemOf(layout, after, [key], kind) };
 }
 
+/** Another colour of an item (a found decoration's copy keeps its own). The backend checks a changed placement again, so
+ * one kept from before the rules, still in the pet's way, is refused here too rather than when saving. */
+export function recolourItem(layout: Layout, key: string, variant: string, kind: RoomKind): Change {
+  const p = find(layout, key);
+  if (!p || p.uid) return { layout, problem: null };
+  const after = replace(layout, [{ ...p, variant }]);
+  return { layout: after, problem: problemOf(layout, after, [key], kind) };
+}
+
 /** Puts an item back in the storage, with what stands on it. `stored` lists their item ids (a found decoration's copy
  * goes back to the inventory, where it is free again once the room is saved). */
 export function storeItem(layout: Layout, key: string, kind: RoomKind): Change & { stored: string[] } {

@@ -24,6 +24,8 @@ keeps it only while the outcome is unknown (network error or timeout). If the re
 the retry has the same key and gets the same answer, popup included. Any other request that
 day gets `false`. A malformed key is ignored and doesn't block login.
 
+A check-in that gave EXP reloads the dashboard, so the numbers on Home include it.
+
 If a check-in fails, the app opens normally without a popup. The app keeps the popup in memory from that one response and clears it when the popup is
 closed or the user signs out. Closing it sends nothing to the backend. If `login_streak` is
 missing or its numbers aren't valid, no popup is shown.

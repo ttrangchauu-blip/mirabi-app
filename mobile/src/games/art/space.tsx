@@ -1,6 +1,7 @@
 import React from 'react';
+import { SPACE_ART, Strip } from './rendered';
 import Svg, { Circle, Defs, Ellipse, G, Path, Rect } from 'react-native-svg';
-import { Art, blob, copies, INK, Lin, Rad, seeded, SW, Twinkle, url } from './kit';
+import { Art, blob, INK, Lin, Rad, SW, Twinkle, url } from './kit';
 
 // Vector art for Space Adventure (Tiếng Anh): a deep-space backdrop in three depths, the pet's rocket (the pet rides
 // in its glass dome: the game draws the pet between `Rocket` and `RocketGlass`), its thruster flame, asteroids and their
@@ -38,47 +39,10 @@ function SkyLayer({ width: w, height: h }: { width: number; height: number }) {
 }
 
 /** Small stars and two distant planets: a strip two widths long whose halves match. */
-function FarLayer({ width: w, height: h }: { width: number; height: number }) {
-  const rnd = seeded(7);
-  const stars = Array.from({ length: 34 }, () => ({ x: rnd() * w, y: rnd() * h * 0.92, r: 0.6 + rnd() * 1.1, o: 0.45 + rnd() * 0.5 }));
-  return (
-    <Svg width={w * 2} height={h}>
-      <Defs>
-        <Lin id="space-far-p1" stops={[[0, '#9FD8FF'], [1, '#5A8BE0']]} />
-        <Lin id="space-far-p2" stops={[[0, '#C9F2B5'], [1, '#6DBF8F']]} />
-      </Defs>
-      {stars.map((s, i) => copies(w, s.x, s.r).map((o) => <Circle key={`${i}-${o}`} cx={s.x + o} cy={s.y} r={s.r} fill="#FFFFFF" opacity={s.o} />))}
-      {copies(w, w * 0.3, h * 0.06).map((o) => (
-        <G key={`p1-${o}`}>
-          <Circle cx={w * 0.3 + o} cy={h * 0.62} r={h * 0.05} fill={url('space-far-p1')} opacity={0.9} />
-          <Ellipse cx={w * 0.3 + o} cy={h * 0.62} rx={h * 0.09} ry={h * 0.016} stroke="#D7ECFF" strokeWidth={1.2} fill="none" opacity={0.7} />
-        </G>
-      ))}
-      {copies(w, w * 0.78, h * 0.04).map((o) => <Circle key={`p2-${o}`} cx={w * 0.78 + o} cy={h * 0.36} r={h * 0.032} fill={url('space-far-p2')} opacity={0.85} />)}
-    </Svg>
-  );
-}
-
-/** Bright twinkles and a few small drifting rocks close by. */
-function NearLayer({ width: w, height: h }: { width: number; height: number }) {
-  const rnd = seeded(23);
-  const twinkles = Array.from({ length: 9 }, () => ({ x: rnd() * w, y: rnd() * h * 0.9, r: 2.5 + rnd() * 3 }));
-  const rocks = Array.from({ length: 5 }, (_, i) => ({ x: (i + 0.3 + rnd() * 0.4) * (w / 5), y: h * (0.12 + rnd() * 0.76), r: 3 + rnd() * 4, s: 11 + i }));
-  return (
-    <Svg width={w * 2} height={h}>
-      {twinkles.map((s, i) => copies(w, s.x, s.r).map((o) => <Twinkle key={`t${i}-${o}`} x={s.x + o} y={s.y} r={s.r} color="#FFF6C9" opacity={0.9} />))}
-      {rocks.map((k, i) => copies(w, k.x, k.r).map((o) => (
-        <Path key={`r${i}-${o}`} d={blob(k.x + o, k.y, k.r, 7, 0.45, k.s)} fill="#7A6E86" stroke="#4E4560" strokeWidth={1} opacity={0.8} />
-      )))}
-    </Svg>
-  );
-}
-
 export const SpaceLayer = React.memo(function SpaceLayer({ layer, width, height }: { layer: SpaceLayerKind; width: number; height: number }) {
   if (!width || !height) return null;
   if (layer === 'sky') return <SkyLayer width={width} height={height} />;
-  if (layer === 'far') return <FarLayer width={width} height={height} />;
-  return <NearLayer width={width} height={height} />;
+  return <Strip source={SPACE_ART[layer]} width={width} height={height} />;
 });
 
 // ---------------------------------------------------------------------------------------------------------------------

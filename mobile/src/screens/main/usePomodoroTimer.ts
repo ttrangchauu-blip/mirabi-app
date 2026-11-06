@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAudioPlayer, setAudioModeAsync } from 'expo-audio';
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
+import { ApiError } from '../../api/client';
 import { request } from './shared';
 
 type PendingEvent = { cycle: string; event: 'started' | 'completed' | 'cancelled'; duration_seconds: number; timezone: string; occurred_at: string };
@@ -16,6 +17,14 @@ export type PomodoroState = {
   /** Focus mode hides in-app notices while a focus session is running. */ focusMode: boolean;
 };
 const KEY = 'mirabi.pomodoro.v1';
+// One per device, whoever is signed in: the OS keeps a scheduled notification across accounts.
+const NOTIFICATION_KEY = `${KEY}:notification`;
+const cancelScheduled = async () => {
+  const existing = await AsyncStorage.getItem(NOTIFICATION_KEY);
+  if (!existing) return;
+  await AsyncStorage.removeItem(NOTIFICATION_KEY);
+  await Notifications.cancelScheduledNotificationAsync(existing).catch(() => {});
+};
 export const SOUND_PREVIEW_MS = 10000;
 const soundSources: Record<string, number> = {
   rain: require('../../../assets/audio/rain.wav'), forest: require('../../../assets/audio/forest.wav'),
@@ -98,10 +107,7 @@ export function usePomodoroTimer(onCompleted?: () => void, userId?: number) {
     if (Platform.OS === 'web' || !ready) return;
     let cancelled = false;
     const syncNotification = async () => {
-      const notificationKey = `${storageKey}:notification`;
-      const existing = await AsyncStorage.getItem(notificationKey);
-      if (existing) await Notifications.cancelScheduledNotificationAsync(existing).catch(() => {});
-      await AsyncStorage.removeItem(notificationKey);
+      await cancelScheduled();
       if (!state.running || !state.endsAt || state.endsAt <= Date.now()) return;
       let permission = await Notifications.getPermissionsAsync();
       if (!permission.granted) permission = await Notifications.requestPermissionsAsync();
@@ -112,11 +118,14 @@ export function usePomodoroTimer(onCompleted?: () => void, userId?: number) {
         trigger: { type: Notifications.SchedulableTriggerInputTypes.DATE, date: new Date(state.endsAt), ...(Platform.OS === 'android' ? { channelId: 'pomodoro' } : {}) },
       });
       if (cancelled) await Notifications.cancelScheduledNotificationAsync(identifier).catch(() => {});
-      else await AsyncStorage.setItem(notificationKey, identifier);
+      else await AsyncStorage.setItem(NOTIFICATION_KEY, identifier);
     };
     void syncNotification().catch(() => {});
     return () => { cancelled = true; };
   }, [ready, state.running, state.endsAt, state.phase, storageKey]);
+  // Signing out or switching account: this session's notification must not reach whoever comes next. If the same
+  // account comes back with its timer still running, the effect above schedules it again.
+  useEffect(() => () => { if (Platform.OS !== 'web') void cancelScheduled().catch(() => {}); }, [storageKey]);
   useEffect(() => { const id = setInterval(() => setSyncVersion(v => v + 1), 15000); return () => clearInterval(id); }, []);
   useEffect(() => {
     if (!ready || !state.pending.length || syncing.current) return;
@@ -131,7 +140,13 @@ export function usePomodoroTimer(onCompleted?: () => void, userId?: number) {
         else setSyncMessage('Phiên này đã bị hủy trước đó và không được tính vào thống kê.');
         callback.current?.();
       }
-    }).catch(() => { /* Persist the event and retry without interrupting focus. */ }).finally(() => { syncing.current = false; });
+    }).catch((e) => {
+      // Network and server trouble: keep the event and retry without interrupting focus. A 409 or 422 is the server's
+      // final answer about this event; retrying it forever would hold back every session queued behind it.
+      if (owner.current !== requestOwner || !(e instanceof ApiError && (e.status === 409 || e.status === 422))) return;
+      setState(s => ({ ...s, pending: s.pending.filter(ev => !(ev.cycle === pending.cycle && ev.event === pending.event)) }));
+      setSyncMessage('Một phiên học không ghi nhận được vì thời gian trên thiết bị không khớp. Các phiên khác vẫn được lưu bình thường.');
+    }).finally(() => { syncing.current = false; });
   }, [ready, state.pending, syncVersion, storageKey]);
   useEffect(() => {
     if (!ready || !state.running || !state.endsAt) return;

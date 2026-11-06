@@ -1,4 +1,6 @@
 import React from 'react';
+import { Plate } from '../../world/diorama';
+import { BROOK_ART, FOREST_ART, Strip } from './rendered';
 import Svg, { Circle, Defs, Ellipse, G, LinearGradient, Path, Polygon, RadialGradient, Rect, Stop } from 'react-native-svg';
 
 // Vector art for the Word Forest game: parallax forest layers, a brook with a plank bridge, a stone door with runes, a
@@ -49,20 +51,8 @@ const f1 = (v: number) => v.toFixed(1);
 
 /** A sine-topped band from x = -4 to len + 4. `unit` periods per unit length, so a strip two units long whose
  * periods are whole repeats exactly in its second half. `bottom` may be 0 to fill the region above the line. */
-function wave(len: number, unit: number, base: number, amp: number, periods: number, bottom: number, phase = 0) {
-  const y = (x: number) => f1(base + amp * Math.sin((x / unit) * periods * 2 * Math.PI + phase));
-  const end = len + 4;
-  let d = `M-4 ${f1(bottom)}`;
-  for (let x = -4; x < end; x += 6) d += ` L${x} ${y(x)}`;
-  return `${d} L${end} ${y(end)} L${end} ${f1(bottom)} Z`;
-}
-
 /** The offsets at which a piece at x (within one width) reaching r either side must be drawn on a two-width strip so
  * that the strip's second half repeats its first exactly, including pieces that hang over the seam. */
-function copies(width: number, x: number, r: number) {
-  return [-width, 0, width, 2 * width].filter((o) => o + x + r > 0 && o + x - r < 2 * width);
-}
-
 // ---------------------------------------------------------------------------------------------------------------------
 // Parallax layers
 
@@ -88,142 +78,6 @@ function SkyLayer({ width, height }: { width: number; height: number }) {
   </Svg>;
 }
 
-const FAR_TREES = [[0.04, 0.9, 0], [0.14, 1.1, 1], [0.25, 0.8, 0], [0.34, 1.2, 0], [0.46, 0.95, 1], [0.57, 1.05, 0], [0.69, 0.85, 1],
-  [0.8, 1.15, 0], [0.91, 0.9, 1]] as const;
-
-function pine(x: number, base: number, ht: number, hw: number) {
-  return `M${f1(x)} ${f1(base - ht)} L${f1(x + hw * 0.55)} ${f1(base - ht * 0.55)} L${f1(x + hw * 0.35)} ${f1(base - ht * 0.55)} L${f1(x + hw)} ${f1(base)}`
-    + ` L${f1(x - hw)} ${f1(base)} L${f1(x - hw * 0.35)} ${f1(base - ht * 0.55)} L${f1(x - hw * 0.55)} ${f1(base - ht * 0.55)} Z`;
-}
-
-function FarLayer({ width, height }: { width: number; height: number }) {
-  const base = height * 0.73;
-  return <Svg width={width * 2} height={height}>
-    <Defs><Lin id="wf-far-mist" stops={[[0, '#FFFFFF', 0], [0.5, '#F4FBF6', 0.2], [1, '#F4FBF6', 0.6]]} /></Defs>
-    <Path d={wave(width * 2, width, height * 0.6, height * 0.035, 2, height, 0.5)} fill="#C2E3D8" />
-    {FAR_TREES.flatMap(([f, s, round], i) => {
-      const x = width * f;
-      const ht = height * 0.26 * s;
-      const hw = ht * 0.34;
-      const fill = i % 2 ? '#9CCBBE' : '#AAD4C8';
-      return copies(width, x, round ? ht * 0.38 : hw).map((o) => round
-        ? <Circle key={`${i}:${o}`} cx={f1(o + x)} cy={f1(base - ht * 0.3)} r={f1(ht * 0.38)} fill={fill} />
-        : <Path key={`${i}:${o}`} d={pine(o + x, base, ht, hw)} fill={fill} />);
-    })}
-    <Path d={wave(width * 2, width, height * 0.71, height * 0.025, 3, height, 1.7)} fill="#B1D8CB" />
-    <Rect x={0} y={0} width={width * 2} height={height} fill={url('wf-far-mist')} />
-  </Svg>;
-}
-
-const MID_TREES = [[0.2, 1, 0], [0.68, 0.86, 1]] as const;
-const CANOPY = [['#9BE08E', '#5DB36E', '#D4F7C4'], ['#8EDDC9', '#4AA596', '#CDF7EC']] as const;
-const MID_MUSHROOMS = [[0.43, '#FF8A9A'], [0.9, '#B994FF']] as const;
-const MID_GLOWS = [[0.34, '#FFB8EC'], [0.53, '#A6F3FF'], [0.82, '#FFE98F']] as const;
-
-function MidLayer({ width, height }: { width: number; height: number }) {
-  const ground = height * 0.84;
-  const nodes: React.ReactNode[] = [];
-  MID_TREES.forEach(([f, s, k], i) => {
-    const x = width * f;
-    const th = height * 0.62 * s;
-    const w = th * 0.14;
-    const [light, dark, shine] = CANOPY[k];
-    copies(width, x, th * 0.5).forEach((o) => {
-      const cx = o + x;
-      nodes.push(<G key={`tree${i}:${o}`}>
-        <Path d={`M${f1(cx - w * 0.85)} ${f1(ground)} Q${f1(cx - w * 0.5)} ${f1(ground - th * 0.2)} ${f1(cx - w * 0.5)} ${f1(ground - th * 0.55)} L${f1(cx + w * 0.5)} ${f1(ground - th * 0.55)} Q${f1(cx + w * 0.5)} ${f1(ground - th * 0.2)} ${f1(cx + w * 0.85)} ${f1(ground)} Z`} fill="#A9775A" />
-        <Circle cx={f1(cx - th * 0.22)} cy={f1(ground - th * 0.56)} r={f1(th * 0.24)} fill={dark} />
-        <Circle cx={f1(cx + th * 0.22)} cy={f1(ground - th * 0.6)} r={f1(th * 0.25)} fill={dark} />
-        <Circle cx={f1(cx)} cy={f1(ground - th * 0.75)} r={f1(th * 0.3)} fill={light} />
-        <Circle cx={f1(cx - th * 0.1)} cy={f1(ground - th * 0.86)} r={f1(th * 0.11)} fill={shine} opacity={0.6} />
-      </G>);
-    });
-  });
-  const m = height * 0.13;
-  MID_MUSHROOMS.forEach(([f, color], i) => {
-    const x = width * f;
-    copies(width, x, m * 0.5).forEach((o) => {
-      const cx = o + x;
-      const capY = ground + height * 0.01 - m * 0.5;
-      nodes.push(<G key={`mush${i}:${o}`}>
-        <Rect x={f1(cx - m * 0.13)} y={f1(capY - 1)} width={f1(m * 0.26)} height={f1(m * 0.6)} rx={f1(m * 0.1)} fill="#FFF4E3" />
-        <Path d={`M${f1(cx - m * 0.5)} ${f1(capY)} Q${f1(cx)} ${f1(capY - m * 0.75)} ${f1(cx + m * 0.5)} ${f1(capY)} Z`} fill={color} />
-        <Circle cx={f1(cx - m * 0.17)} cy={f1(capY - m * 0.13)} r={f1(m * 0.06)} fill="#FFFFFF" />
-        <Circle cx={f1(cx + m * 0.14)} cy={f1(capY - m * 0.2)} r={f1(m * 0.05)} fill="#FFFFFF" />
-      </G>);
-    });
-  });
-  MID_GLOWS.forEach(([f, color], i) => {
-    const x = width * f;
-    const y = ground - height * 0.03;
-    copies(width, x, height * 0.05).forEach((o) => nodes.push(<G key={`glow${i}:${o}`}>
-      <Circle cx={f1(o + x)} cy={f1(y)} r={f1(height * 0.05)} fill={color} opacity={0.35} />
-      <Circle cx={f1(o + x)} cy={f1(y)} r={f1(height * 0.018)} fill={color} />
-    </G>));
-  });
-  return <Svg width={width * 2} height={height}>
-    <Path d={wave(width * 2, width, height * 0.8, height * 0.02, 2, height, 2.4)} fill="#86CC8E" />
-    {nodes}
-  </Svg>;
-}
-
-/** A fern frond: a toothed blade rising from (x, y), curving sideways by `lean`. */
-function frond(x: number, y: number, len: number, lean: number) {
-  const n = 8;
-  const left: string[] = [];
-  const right: string[] = [];
-  for (let i = 0; i <= n; i += 1) {
-    const t = i / n;
-    const cx = x + lean * len * 0.55 * t * t;
-    const cy = y - len * t;
-    const tx = lean * 1.1 * t;
-    const m = Math.hypot(tx, 1);
-    const nx = 1 / m;
-    const ny = tx / m;
-    const w = len * 0.2 * (1 - t) * (i % 2 ? 1 : 0.45);
-    left.push(`${f1(cx - nx * w)} ${f1(cy - ny * w)}`);
-    right.push(`${f1(cx + nx * w)} ${f1(cy + ny * w)}`);
-  }
-  return `M${left.join(' L')} L${right.reverse().join(' L')} Z`;
-}
-
-const NEAR_FERNS = [0.08, 0.47, 0.79];
-const NEAR_PEBBLES = [[0.22, 1], [0.31, 0.7], [0.6, 1.2], [0.93, 0.8]] as const;
-const NEAR_GLOWS = [[0.17, '#FFB8EC'], [0.56, '#A6F3FF'], [0.69, '#FFE98F']] as const;
-
-function NearLayer({ width, height }: { width: number; height: number }) {
-  const nodes: React.ReactNode[] = [];
-  const fernLen = height * 0.11;
-  NEAR_FERNS.forEach((f, i) => {
-    const x = width * f;
-    copies(width, x, fernLen * 0.8).forEach((o) => nodes.push(<G key={`fern${i}:${o}`}>
-      <Path d={frond(o + x - 2, height * 0.875, fernLen * 0.9, -1)} fill="#4E9F58" />
-      <Path d={frond(o + x + 2, height * 0.875, fernLen * 0.85, 1)} fill="#4E9F58" />
-      <Path d={frond(o + x, height * 0.875, fernLen, 0.2)} fill="#5DB566" />
-    </G>));
-  });
-  NEAR_PEBBLES.forEach(([f, s], i) => {
-    const x = width * f;
-    const rx = height * 0.017 * s;
-    copies(width, x, rx).forEach((o) => nodes.push(<Ellipse key={`peb${i}:${o}`} cx={f1(o + x)} cy={f1(height * (0.915 + (i % 2) * 0.015))}
-      rx={f1(rx)} ry={f1(rx * 0.55)} fill="#CFC6DD" />));
-  });
-  NEAR_GLOWS.forEach(([f, color], i) => {
-    const x = width * f;
-    const y = height * 0.86;
-    copies(width, x, height * 0.04).forEach((o) => nodes.push(<G key={`glow${i}:${o}`}>
-      <Circle cx={f1(o + x)} cy={f1(y)} r={f1(height * 0.04)} fill={color} opacity={0.4} />
-      <Circle cx={f1(o + x)} cy={f1(y)} r={f1(height * 0.014)} fill="#FFFFFF" />
-    </G>));
-  });
-  return <Svg width={width * 2} height={height}>
-    <Path d={wave(width * 2, width, height * 0.82, height * 0.012, 3, height, 0.3)} fill="#74C273" />
-    <Path d={wave(width * 2, width, height * 0.885, height * 0.008, 2, height * 0.96, 1)} fill="#EBD3A0" />
-    <Path d={wave(width * 2, width, height * 0.955, height * 0.006, 4, height, 2)} fill="#62B266" />
-    {nodes}
-  </Svg>;
-}
-
 export type ForestLayerKind = 'sky' | 'far' | 'mid' | 'near';
 
 /** One depth of the forest. `sky` is a still full-size sky with soft light rays. `far` (misty distant trees), `mid` (big
@@ -233,47 +87,15 @@ export type ForestLayerKind = 'sky' | 'far' | 'mid' | 'near';
 export const ForestLayer = React.memo(function ForestLayer({ layer, width, height }: { layer: ForestLayerKind; width: number; height: number }) {
   if (!width || !height) return null;
   if (layer === 'sky') return <SkyLayer width={width} height={height} />;
-  if (layer === 'far') return <FarLayer width={width} height={height} />;
-  if (layer === 'mid') return <MidLayer width={width} height={height} />;
-  return <NearLayer width={width} height={height} />;
+  return <Strip source={FOREST_ART[layer]} width={width} height={height} />;
 });
 
 // ---------------------------------------------------------------------------------------------------------------------
 // The brook and the bridge
 
-const RIPPLES = [[0.08, 0.36], [0.22, 0.6], [0.36, 0.42], [0.5, 0.68], [0.63, 0.38], [0.76, 0.6], [0.9, 0.46], [0.3, 0.76]] as const;
-const STREAM_STONES = [[0.14, 0.7, 1], [0.45, 0.32, 0.8], [0.7, 0.76, 1.1], [0.88, 0.3, 0.9]] as const;
-const STREAM_SPARKS = [[0.18, 0.46], [0.41, 0.56], [0.58, 0.5], [0.82, 0.68], [0.95, 0.56]] as const;
-
-/** A horizontal brook across the whole width × height: grassy banks top and bottom, blue water with ripples, sparkles
- * and a few mossy stones. */
 export const Stream = React.memo(function Stream({ width, height }: { width: number; height: number }) {
   if (!width || !height) return null;
-  const u = Math.min(height, width) / 100;
-  return <Svg width={width} height={height}>
-    <Defs><Lin id="wf-stream-water" stops={[[0, '#A2EAF0'], [0.5, '#5CC3DB'], [1, '#3A9CC4']]} /></Defs>
-    <Rect x={0} y={0} width={width} height={height} fill={url('wf-stream-water')} />
-    <Path d={`M0 ${f1(height * 0.45)} Q${f1(width * 0.25)} ${f1(height * 0.4)} ${f1(width * 0.5)} ${f1(height * 0.46)} T${f1(width)} ${f1(height * 0.44)}`}
-      stroke="#C9F4FA" strokeWidth={Math.max(2, u * 2.5)} fill="none" opacity={0.5} />
-    {RIPPLES.map(([x, y]) => {
-      const l = Math.max(6, width * 0.035);
-      return <Path key={x} d={`M${f1(width * x - l)} ${f1(height * y)} Q${f1(width * x)} ${f1(height * y - l * 0.3)} ${f1(width * x + l)} ${f1(height * y)}`}
-        stroke="#FFFFFF" strokeWidth={Math.max(1.5, u * 1.6)} strokeLinecap="round" fill="none" opacity={0.7} />;
-    })}
-    {STREAM_STONES.map(([x, y, s]) => {
-      const rx = Math.max(8, height * 0.12) * s;
-      return <G key={x}>
-        <Ellipse cx={width * x} cy={height * y + rx * 0.3} rx={rx * 1.35} ry={rx * 0.45} fill="#FFFFFF" opacity={0.45} />
-        <Ellipse cx={width * x} cy={height * y} rx={rx} ry={rx * 0.62} fill="#B9B3CB" stroke={INK} strokeWidth={Math.max(1.5, u * 1.8)} />
-        <Ellipse cx={width * x - rx * 0.15} cy={height * y - rx * 0.32} rx={rx * 0.6} ry={rx * 0.22} fill="#8ACB7E" />
-      </G>;
-    })}
-    {STREAM_SPARKS.map(([x, y]) => <Sparkle key={x} x={width * x} y={height * y} r={Math.max(2.5, u * 3)} />)}
-    <Path d={wave(width, width, height * 0.17, height * 0.03, 2, 0, 0.4)} fill="#B98D62" />
-    <Path d={wave(width, width, height * 0.13, height * 0.03, 2, 0, 0.4)} fill="#7CC48A" />
-    <Path d={wave(width, width, height * 0.84, height * 0.03, 3, height, 1.3)} fill="#B98D62" />
-    <Path d={wave(width, width, height * 0.88, height * 0.03, 3, height, 1.3)} fill="#6CBF6E" />
-  </Svg>;
+  return <Plate source={BROOK_ART} width={width} height={height} />;
 });
 
 /** One wooden bridge plank seen from the side. viewBox 0 0 100 40: size × 0.4 px. */

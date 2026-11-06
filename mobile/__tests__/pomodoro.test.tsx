@@ -1,5 +1,7 @@
 import { act, renderHook } from '@testing-library/react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Notifications from 'expo-notifications';
+import { ApiError } from '../src/api/client';
 import { SOUND_PREVIEW_MS, usePomodoroTimer } from '../src/screens/main/usePomodoroTimer';
 import { request } from '../src/screens/main/shared';
 
@@ -168,4 +170,82 @@ test('completion carries the EXP awarded by the server', async () => {
   await flush(); act(() => result.current.toggle()); await flush();
   act(() => jest.advanceTimersByTime(60000)); await flush(); await flush();
   expect(result.current.completion.xp_awarded).toBe(2);
+});
+
+test('an event the server refuses for good is dropped, said once, and the next session still syncs', async () => {
+  const refused: string[] = [];
+  mockedRequest.mockImplementation(async (path: string, options?: any) => {
+    if (path.endsWith('pomodoro-settings')) return prefs;
+    if (options?.body?.event === 'cancelled') { refused.push(path); throw new ApiError(422, 'invalid_focus_duration', 'nope'); }
+    return { status: options?.body?.event, statistics: { today_seconds: 60, today_sessions: 1, current_streak: 1, goal_progress: 1 / 90 } };
+  });
+  const { result } = renderHook(() => usePomodoroTimer(undefined, 108));
+  await flush(); act(() => result.current.toggle()); await flush();
+  act(() => jest.advanceTimersByTime(20000)); act(() => result.current.reset()); await flush(); await flush();
+  expect(refused).toHaveLength(1);
+  expect(result.current.pending).toEqual([]);
+  expect(result.current.syncMessage).not.toBe('');
+  act(() => result.current.toggle()); await flush(); await flush();
+  const events = mockedRequest.mock.calls.filter(([, opts]) => opts?.body?.event).map(([, opts]) => opts.body.event);
+  expect(events).toEqual(['started', 'cancelled', 'started']);
+  act(() => jest.advanceTimersByTime(30000)); await flush();
+  expect(refused).toHaveLength(1);
+});
+
+test('a network failure or server error keeps the event for the next retry', async () => {
+  let failure: Error = new ApiError(503, 'unavailable', 'later');
+  mockedRequest.mockImplementation(async (path: string, options?: any) => {
+    if (path.endsWith('pomodoro-settings')) return prefs;
+    if (options?.body?.event) throw failure;
+    return {};
+  });
+  const { result } = renderHook(() => usePomodoroTimer(undefined, 109));
+  await flush(); act(() => result.current.toggle()); await flush(); await flush();
+  expect(result.current.pending).toHaveLength(1);
+  failure = new ApiError(429, 'rate_limited', 'later');
+  act(() => jest.advanceTimersByTime(15000)); await flush(); await flush();
+  expect(result.current.pending).toHaveLength(1);
+  expect(result.current.syncMessage).toBe('');
+});
+
+const settle = async () => { for (let i = 0; i < 8; i += 1) await flush(); };
+
+test('the scheduled focus notification goes with the session that scheduled it', async () => {
+  const schedule = Notifications.scheduleNotificationAsync as jest.Mock;
+  const cancel = Notifications.cancelScheduledNotificationAsync as jest.Mock;
+  schedule.mockReset().mockResolvedValue('notification-of-a');
+  cancel.mockClear();
+  const signedIn = renderHook(() => usePomodoroTimer(undefined, 110));
+  await flush(); await flush();
+  act(() => signedIn.result.current.toggle());
+  await settle();
+  expect(schedule).toHaveBeenCalledTimes(1);
+  expect(cancel).not.toHaveBeenCalledWith('notification-of-a');
+  signedIn.unmount();  // signing out takes the main app with it
+  await settle();
+  expect(cancel).toHaveBeenCalledWith('notification-of-a');
+});
+
+test('another account on the same hook cancels what the first one scheduled', async () => {
+  const schedule = Notifications.scheduleNotificationAsync as jest.Mock;
+  const cancel = Notifications.cancelScheduledNotificationAsync as jest.Mock;
+  schedule.mockReset().mockResolvedValue('notification-of-a');
+  cancel.mockClear();
+  const { result, rerender } = renderHook(({ id }: { id: number }) => usePomodoroTimer(undefined, id), { initialProps: { id: 111 } });
+  await flush(); await flush();
+  act(() => result.current.toggle());
+  await settle();
+  expect(schedule).toHaveBeenCalledTimes(1);
+  rerender({ id: 112 });
+  await settle();
+  expect(cancel).toHaveBeenCalledWith('notification-of-a');
+});
+
+test('a notification left by a session that never signed out is cancelled when the next account opens', async () => {
+  const cancel = Notifications.cancelScheduledNotificationAsync as jest.Mock;
+  cancel.mockClear();
+  await AsyncStorage.setItem('mirabi.pomodoro.v1:notification', 'left-behind');
+  renderHook(() => usePomodoroTimer(undefined, 113));
+  await settle();
+  expect(cancel).toHaveBeenCalledWith('left-behind');
 });

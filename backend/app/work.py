@@ -22,6 +22,7 @@ from sqlalchemy import func, or_, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
+from . import days
 from . import inventory as inv
 from . import items_catalog as cat
 from . import tasks as task_api
@@ -177,10 +178,10 @@ def overdue_tasks(db: Session, user: User, today: date, now: datetime) -> list[d
 
 def counted_completions(db: Session, user: User) -> int:
     """Completed work quests toward the chests: every completion ever (removed tasks included), at most
-    CHEST_DAILY_COUNT per day."""
+    CHEST_DAILY_COUNT per day of the server's calendar (days.py)."""
     rows = db.execute(select(UserTaskCompletion.completed_at).join(UserTask, UserTask.id == UserTaskCompletion.task_id)
                       .where(UserTask.user_id == user.id, work_filter())).all()
-    per_day = Counter(as_utc(at).date() for (at,) in rows)
+    per_day = Counter(days.today(as_utc(at)) for (at,) in rows)
     return sum(min(CHEST_DAILY_COUNT, n) for n in per_day.values())
 
 
@@ -223,7 +224,9 @@ def dashboard(tz: str | None = Query(default=None, max_length=80), user: User = 
     work = [o for o in occurrences if o["id"] in work_ids]
     today_iso = today.isoformat()
     todays = [o for o in work if o["scheduled_date"] == today_iso]
-    upcoming = [o for o in work if o["scheduled_date"] != today_iso and not o["completed"]][:20]
+    # Occurrences come task by task: the nearest ones first, or one daily task would fill the list.
+    upcoming = sorted((o for o in work if o["scheduled_date"] != today_iso and not o["completed"]),
+                      key=lambda o: o["scheduled_date"])[:20]
     overdue = overdue_tasks(db, user, today, now)
     goals = today_goals(user, db)
     walk = current_walk_status(user, db, latest_walk(user, db))

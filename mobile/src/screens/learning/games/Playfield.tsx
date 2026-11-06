@@ -4,6 +4,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useAudioPlayer } from 'expo-audio';
 import { Text, TextInput } from '../../../components/Typography';
 import { PetArt } from '../../../components/PetArt';
+import { FIELD_ART, FIELD_TALL } from '../../../games/art/rendered';
+import { Plate } from '../../../world/diorama';
 import type { Turn, WordPair } from '../../../learning/types';
 import { attackWindupMs, drawnCelebrateMs, drawnJumpMs, hasSprite, moveActivity, SPRITE_LAYOUT } from '../../../petSprites';
 import { appTheme as t } from '../../../theme';
@@ -267,7 +269,7 @@ function FallingField({ variant, turns, selectedId, onSelect, petId, petLevel, r
     <View style={[styles.field, styles.sky]} onLayout={onLayout} accessibilityLabel={variant === 'words' ? 'Bầu trời từ vựng' : 'Bầu trời thiên thạch'}>
       <Animated.View style={[StyleSheet.absoluteFill, { transform: [{ translateY: jolt }] }]} pointerEvents="none">
         <Stars />
-        <View style={styles.ground} />
+        {size.width > 0 ? <Plate source={FIELD_ART} width={size.width} height={size.width * FIELD_TALL} style={{ top: size.height - size.width * FIELD_TALL }} /> : null}
         {size.width > 0 ? <LandingLayer field={field} ticker={ticker} running={running} reduceMotion={reduceMotion} lite={lite} jolt={jolt}
           groundY={size.height - GROUND} /> : null}
       </Animated.View>
@@ -856,7 +858,6 @@ const styles = StyleSheet.create({
   field: { flex: 1, minHeight: 170, borderRadius: 22, overflow: 'hidden', marginBottom: 10 },
   sky: { backgroundColor: '#142349' },
   star: { position: 'absolute', width: 3, height: 3, borderRadius: 2, backgroundColor: '#FFFFFF' },
-  ground: { position: 'absolute', left: 0, right: 0, bottom: 0, height: GROUND, backgroundColor: '#3E5F45' },
   pet: { position: 'absolute' },
   shooter: { position: 'absolute', left: 0, width: PET_SIZE, height: PET_SIZE, transformOrigin: '50% 100%' },
   // A falling word's box, moved by transform only (never by left/top): its own position, in the field's frame.

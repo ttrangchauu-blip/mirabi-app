@@ -2,6 +2,9 @@
 export const localDate = (value: Date) => `${value.getFullYear()}-${String(value.getMonth() + 1).padStart(2, '0')}-${String(value.getDate()).padStart(2, '0')}`;
 export const localTime = (value: Date) => `${String(value.getHours()).padStart(2, '0')}:${String(value.getMinutes()).padStart(2, '0')}`;
 
+/** Which day "today" is for the day's quests and tasks: the server's (/api/dashboard `today`), the phone's until it is known. */
+export const todayOf = (serverToday?: string | null) => (serverToday && /^\d{4}-\d{2}-\d{2}$/.test(serverToday) ? serverToday : localDate(new Date()));
+
 export function combineLocal(date: string, time: string) {
   const [year, month, day] = date.split('-').map(Number);
   const [hour = 9, minute = 0] = time ? time.split(':').map(Number) : [];

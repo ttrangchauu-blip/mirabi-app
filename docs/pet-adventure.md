@@ -9,7 +9,9 @@ the app only shows them and lets the user confirm the popup.
 
 - **locked → walking**: the walk starts by itself once **every goal of today** is done: the daily quests
   *and* the user's own tasks (`user_tasks`) that occur today, i.e. the same list as the Home "Nhiệm vụ hằng ngày"
-  card (UTC day, like the quests). Five quests and two tasks added before the walk: all seven must be done. Tasks of
+  card. A day is a calendar day in `DAILY_RESET_TIMEZONE` (default `Asia/Ho_Chi_Minh`; `backend/app/days.py`), decided by
+  the server, the same for the quests, the tasks, the walk and the daily EXP caps. Three quests and two tasks added
+  before the walk: all five must be done. Tasks of
   other days (or another day's occurrence of a repeating task) never count, and an empty list never starts a walk.
   Completing a quest, a focus session, a lesson, a post or one of the user's tasks checks again; so does reading
   `GET /api/pet/space`.
@@ -51,6 +53,13 @@ The egg (Lv.0) hatches at 300 EXP, and hatching and walking never overlap:
   animation reopens on the congratulations; one closed during it plays the animation again. Nothing hatches until
   the congratulations are closed.
 
+## Evolving and the walk
+
+Past the hatch, a pet that is out evolves the same way: **EXP earned during a walk counts at once, the new level waits.**
+`user.xp` grows and `user.level` stays until the pet is back and its gift popup is confirmed. The confirmation brings the
+level up to the EXP and records one `pet_evolved` memory per level reached, once (`progression.catch_up_level`). A pet at
+home evolves as soon as it has the EXP, as before.
+
 ## When rewards are granted
 
 Rewards don't depend on the app being open:
@@ -89,4 +98,10 @@ item without a drawing shows its `emoji`.
 returns to the foreground, and when the walk is due back. If there's a `pending_reward`, `PetRewardPopup`
 shows it. If confirming fails, the popup stays open with a retry message and the hook reloads the state
 from the backend. If the backend says the walk is already confirmed (a lost response, or another
-device), the popup closes. Malformed data shows no popup.
+device), the popup closes. Malformed data shows no popup. A walk that another screen (Home, Khám phá) reads is watched
+from here too, so the popup opens on whichever tab the user is on when the pet is due back, and a screen that finds a gift
+waiting has it shown.
+
+Home and Khám phá count down by the server's clock (`server_now`, once per answer). Coming back to the app reads the walk and
+`/api/dashboard` again. Home and the task calendar go by the dashboard's `today`, the server's calendar day; the phone's own
+date is used only until that is known. The garden leaves the pet out while the dashboard's `pet_walk` is `walking`.

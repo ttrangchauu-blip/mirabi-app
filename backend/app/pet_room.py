@@ -546,20 +546,37 @@ def ensure_focus_room(db: Session, user: User) -> FocusRoomLayout:
 
 
 def reconcile_copies(db: Session, user: User, room, kind: str):
+    """Makes the room's found decorations and their copies agree when it opens (`claim_copies`, `release_hidden_copies`).
+    Rooms where they already do are returned untouched. Commits."""
+    return release_hidden_copies(db, user, claim_copies(db, user, room, kind), kind)
+
+
+def _placements_as_stored(room, kind: str) -> dict:
+    """The stored JSON in today's form: a room still saved with fixed slots comes as it reads on today's canvas."""
+    stored = json.loads(room.items_json or "{}")
+    if isinstance(stored, dict) and isinstance(stored.get("items"), list):
+        return stored
+    return {"items": layout(room, kind)["items"], "canvas": CANVAS_VERSION}
+
+
+def claim_copies(db: Session, user: User, room, kind: str):
     """A found decoration saved in a room before copies were counted (the small pot, the moon lantern shelf) becomes
-    one of the inventory's copies; with no free copy left it goes back to the storage (still owned). Rooms with no
-    such placement are returned untouched. Commits."""
+    one of the inventory's copies; with no free copy left it goes back to the storage (still owned). A room still saved
+    with fixed slots is stored in today's form for that, but only when the user holds such an item at all. Commits."""
     stored = json.loads(room.items_json or "{}")
     raw = stored.get("items") if isinstance(stored, dict) else None
     if not isinstance(raw, list):
-        return room
+        finds = inv.totals(db, user.id)
+        if not any(finds.get(counted(p["item"]), 0) > 0 for p in layout(room, kind)["items"]):
+            return room
+        raw = layout(room, kind)["items"]
     rows = {f"p{r}" for r in db.scalars(select(PlacedItem.id).where(PlacedItem.user_id == user.id, PlacedItem.room == kind))}
     if not any(isinstance(e, dict) and counted(e.get("item")) and e.get("uid") not in rows for e in raw):
         return room
     inv.lock_user(db, user.id)
     model = type(room)
     room = db.get(model, user.id, populate_existing=True)
-    stored = json.loads(room.items_json or "{}")
+    stored = _placements_as_stored(room, kind)
     rows = {f"p{r}" for r in db.scalars(select(PlacedItem.id).where(PlacedItem.user_id == user.id, PlacedItem.room == kind))}
     placed = inv.placed_counts(db, user.id)
     stacks = inv.owned_stacks(db, user.id)
@@ -581,6 +598,38 @@ def reconcile_copies(db: Session, user: User, room, kind: str):
         inv.record(db, user.id, item_id, stack.variant, kind="place", placed_delta=1, ref=f"room:{kind}")
         placed[(item_id, stack.variant)] = placed.get((item_id, stack.variant), 0) + 1
         items.append({**e, "uid": f"p{copy.id}", "variant": stack.variant})
+    room.items_json = json.dumps({**stored, "items": items}, ensure_ascii=False)
+    room.version += 1
+    db.commit()
+    return room
+
+
+def _hidden_copies(db: Session, user: User, room, kind: str) -> list[PlacedItem]:
+    """The room's placed copies it doesn't draw (`layout`: a top item with nothing to stand on, one past MAX_ITEMS)."""
+    rows = list(db.scalars(select(PlacedItem).where(PlacedItem.user_id == user.id, PlacedItem.room == kind)))
+    if not rows:
+        return []
+    drawn = {p.get("uid") for p in layout(room, kind)["items"]}
+    return [r for r in rows if f"p{r.id}" not in drawn]
+
+
+def release_hidden_copies(db: Session, user: User, room, kind: str):
+    """A copy the room doesn't draw goes back to the storage, or it would count as placed where nobody can see or store
+    it. Taken out of the stored room too, so it is not claimed again. Commits."""
+    if not _hidden_copies(db, user, room, kind):
+        return room
+    inv.lock_user(db, user.id)
+    room = db.get(type(room), user.id, populate_existing=True)
+    hidden = _hidden_copies(db, user, room, kind)
+    if not hidden:
+        db.commit()
+        return room
+    gone = {f"p{r.id}" for r in hidden}
+    stored = _placements_as_stored(room, kind)
+    for row in hidden:
+        inv.record(db, user.id, row.item_id, row.variant, kind="store", placed_delta=-1, ref=f"room:{kind}")
+        db.delete(row)
+    items = [e for e in stored["items"] if not (isinstance(e, dict) and e.get("uid") in gone)]
     room.items_json = json.dumps({**stored, "items": items}, ensure_ascii=False)
     room.version += 1
     db.commit()

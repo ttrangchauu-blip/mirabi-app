@@ -22,7 +22,9 @@ visit. As a tab of the main menu it keeps the menu bar (decorating too) and has 
   `(x, y)`; wall items and rugs are centred on it. Each item is in the room at most once (32 at most); everything else
   the user owns is in the storage ("Trong kho"). Ids of surfaces, items and variants are stable and only ever added.
 - **Rooms saved before items could move** (fixed slots: `background`, `rug`, `study`, …) are read as the same items at
-  their old places (`LEGACY_ITEMS`); the next save stores the new format. Nothing is migrated in the database.
+  their old places (`LEGACY_ITEMS`); the next save stores the new format. Nothing is migrated in the database, except
+  a room holding a found decoration the user owns, stored in today's form when it opens so that its copy is counted
+  ([inventory.md](inventory.md#quantities)).
 - **Inside the room**: wall items stay on the wall, rugs on the floor, floor items stand on the floor, and no item
   sticks out of the room. The app keeps a dragged item inside while it moves, and the backend applies the same rule
   when saving, so a stored position is always one the app drew.
@@ -45,7 +47,10 @@ visit. As a tab of the main menu it keeps the menu bar (decorating too) and has 
 - **Saving** sends the `version` that was opened; an outdated save gets `409 room_version_conflict` and the app reloads
   the latest room. The room is created once with the default layout and never overwritten by a read. "Hủy" asks first
   when something changed. After a save the screen shows the room the backend answered with; a read that started
-  before it and answers later (an older `version`) is ignored, on screen and in the offline cache.
+  before it and answers later (an older `version`) is ignored, on screen and in the offline cache. A read that answers
+  while decorating (decorating starts with one, so the panel lists what arrived since) updates the counts and the walk
+  but leaves the room the draft came from, so its save still sends the `version` that was opened. Offline the saved
+  room is read only: "Trang trí" and "Đổi tên phòng" say a connection is needed.
 - **Pet state** is read, never changed: walk from `pet_walks` (opening the room does not settle or start a walk),
   "studying" from a running focus session (`study_sessions.status = "started"`, within the focus length) or a group room
   in focus. On the owner's device the local Pomodoro timer decides first (focus → desk, break → bed). The pet sits at

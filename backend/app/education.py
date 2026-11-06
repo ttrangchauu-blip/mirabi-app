@@ -19,6 +19,7 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+import re
 from datetime import date, datetime, timedelta
 from functools import lru_cache
 from pathlib import Path
@@ -36,8 +37,8 @@ from .config import settings
 from .db import SessionLocal, get_db
 from .errors import APIError
 from .models import (AcademicCalendarChange, AcademicYearConfig, ArchivedLearningNote, ArchivedLearningResult, CurriculumVersion,
-                     GradePromotion, LearningNote, LearningSession, LearningSessionItem, LearningSubject, LearningYearArchive,
-                     User, UserEducationProfile, as_utc)
+                     GradePromotion, LearningLesson, LearningLevel, LearningNote, LearningReviewItem, LearningSession, LearningSessionItem,
+                     LearningSubject, LearningYearArchive, User, UserEducationProfile, as_utc)
 from .security import admin_user, current_user
 from .study_profile import GRADE_LABELS, GradeId
 
@@ -166,6 +167,13 @@ def next_grade(grade: str) -> str | None:
         return None
     i = SCHOOL_GRADES.index(grade)
     return SCHOOL_GRADES[i + 1] if i + 1 < len(SCHOOL_GRADES) else None
+
+
+def level_grade(code: str) -> int | None:
+    """The school grade a lesson's level is made for (Math: grade3; catalog and curriculum games: g3), or None for a
+    level that is not one grade's (vocabulary "auto", informatics "basic"...)."""
+    found = re.fullmatch(r"g(?:rade)?(\d{1,2})", code)
+    return int(found.group(1)) if found else None
 
 
 def _status_for(grade: str) -> str:
@@ -318,7 +326,21 @@ def _close_year(db: Session, user_id: int, old_year: int, now: datetime, *, acto
     if moved.rowcount != 1:
         raise _LostRace()
     db.execute(update(User).where(User.id == fresh.user_id).values(school_grade=new_grade))
+    if new_grade != old_grade:
+        _archive_old_grade_reviews(db, fresh.user_id, grade_number(new_grade))
     log.info("User %s: %s %s -> %s %s (%s)", fresh.user_id, old_grade, year_label(old_year), new_grade, year_label(old_year + 1), kind)
+
+
+def _archive_old_grade_reviews(db: Session, user_id: int, new_grade: int | None) -> None:
+    """"Cần ôn" holds what can still be practised at the learner's grade: the questions of lessons made for another
+    grade leave it (they stay in the frozen year's `mistakes`). The word bank's belong to no grade, and stay."""
+    rows = db.execute(select(LearningReviewItem, LearningLevel.code).join(LearningLesson, LearningLesson.id == LearningReviewItem.lesson_id)
+                      .join(LearningLevel, LearningLevel.id == LearningLesson.level_id)
+                      .where(LearningReviewItem.user_id == user_id, LearningReviewItem.status == "open")).all()
+    for row, level in rows:
+        needed = level_grade(level)
+        if needed is not None and needed != new_grade:
+            row.status = "archived"
 
 
 def sweep(now: datetime | None = None) -> int:
@@ -640,12 +662,15 @@ def _notes(db: Session, archive_id: int, kind: str) -> list[dict]:
         .order_by(ArchivedLearningNote.id))]
 
 
-def _reviews(db: Session, user_id: int, year: int, lesson_key: str | None = None) -> dict:
-    """The reviews of a finished year played from Kho lưu trữ: stored apart from the frozen results."""
+def _reviews(db: Session, user_id: int, year: int, lesson_key: str | None = None, game: str | None = None) -> dict:
+    """The reviews of a finished year played from Kho lưu trữ: stored apart from the frozen results. With a lesson, its
+    own; with a game too, that game's."""
     query = select(LearningSession).where(LearningSession.user_id == user_id, LearningSession.archive_year == year)
     if lesson_key:
         query = query.where(LearningSession.catalog_lesson == lesson_key)
     rows = list(db.scalars(query.order_by(LearningSession.id.desc())))
+    if game:
+        rows = [s for s in rows if (json.loads(s.scoring_json or "{}").get("lesson") or {}).get("game", s.game) == game]
     done = [s for s in rows if s.status == "completed"]
     last = rows[0] if rows else None
     return {"stages": len(rows), "completed": len(done), "best_score": max((s.score for s in done), default=None),
@@ -833,7 +858,7 @@ def archive_lesson(year: int, key: str, user: User = Depends(current_user), db: 
         codes = {lc.lesson_code(key, g["game"]): g for g in entry["lesson"].get("games", [])}
         published = set(db.scalars(select(LearningLesson.code).where(LearningLesson.code.in_(codes), LearningLesson.status == "published")))
         games = [{"game": g["game"], "title": g["title"], "gameplay": lc.GAMES[g["game"]]["name"], "playable": code in published,
-                  "review": _reviews(db, user.id, year, key)} for code, g in codes.items()]
+                  "review": _reviews(db, user.id, year, key, g["game"])} for code, g in codes.items()]
     return {**content, "academic_year": year, "academic_year_label": year_label(year), "grade_label": grade_label(a.grade),
             "frozen": frozen is not None, "current_content_version": entry["version"] if entry else None,
             "results": results, "games": games, "completion": (entry["lesson"].get("completion") if entry else None) or DEFAULT_COMPLETION,
@@ -1224,6 +1249,7 @@ def admin_correct_grade(user_id: int, data: GradeCorrection, admin: User = Depen
     if not db.scalar(select(func.count()).select_from(LearningYearArchive).where(LearningYearArchive.user_id == user.id)):
         profile.initial_grade = data.grade  # no year closed yet: still the year of registration, it was registered wrong
     user.school_grade = data.grade
+    _archive_old_grade_reviews(db, user.id, grade_number(data.grade))
     db.add(GradePromotion(user_id=user.id, kind="correction", academic_year=profile.academic_year, from_grade=before, to_grade=data.grade,
                           reason=f"{data.reason} [{data.verification}]"[:300], actor_id=admin.id, celebrated_at=clock.now()))
     db.commit()

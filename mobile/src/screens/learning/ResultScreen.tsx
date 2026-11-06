@@ -14,8 +14,9 @@ import { showNumber } from './games/NumberPad';
 type Props = {
   sessionId: number; petId: string; petLevel: number;
   onReplay: (session: LearningSession) => void; onReview: (topicId: number) => void; onHome: () => void;
-  /** A stage of a lesson: open a lesson ("Trò khác trong bài": this one; "Bài tiếp theo": the next). */
-  onLesson?: (key: string) => void;
+  /** A stage of a lesson: open a lesson ("Trò khác trong bài": this one; "Bài tiếp theo": the next), in the finished
+   * school year this stage reviewed (Kho lưu trữ), if any. */
+  onLesson?: (key: string, archiveYear?: number | null) => void;
   /** EXP may have changed: the main app reloads the pet's numbers. */
   onRewards: () => void;
   /** No victory hop or popping stars. */
@@ -159,13 +160,13 @@ export function ResultScreen({ sessionId, petId, petLevel, onReplay, onReview, o
         {result.open_review_count ? <Button title={`Ôn lại (${result.open_review_count})`} icon="refresh-circle-outline" onPress={() => onReview(s.topic.id)} /> : null}
         <Button title="Chơi lại" icon="play" variant={result.open_review_count ? 'secondary' : 'primary'} onPress={() => onReplay(s)} />
         {lesson?.title && onLesson && lesson.other_games.length ? (
-          <Button title="Trò khác trong bài" icon="game-controller-outline" variant="secondary" onPress={() => onLesson(lesson.lesson)} />
+          <Button title="Trò khác trong bài" icon="game-controller-outline" variant="secondary" onPress={() => onLesson(lesson.lesson, s.archive_year)} />
         ) : null}
         {lesson?.next && !lesson.next.locked && onLesson ? (
-          <Button title={`Bài tiếp theo: ${lesson.next.title}`} icon="arrow-forward" variant="secondary" onPress={() => onLesson(lesson.next!.key)} />
+          <Button title={`Bài tiếp theo: ${lesson.next.title}`} icon="arrow-forward" variant="secondary" onPress={() => onLesson(lesson.next!.key, s.archive_year)} />
         ) : null}
         {lesson?.title && onLesson ? (
-          <Button title="Về bài học" variant="ghost" onPress={() => onLesson(lesson.lesson)} />
+          <Button title="Về bài học" variant="ghost" onPress={() => onLesson(lesson.lesson, s.archive_year)} />
         ) : <Button title="Về màn chọn môn" variant="ghost" onPress={onHome} />}
       </View>
       <SectionHeader title="Xem lại từng câu" />

@@ -95,7 +95,8 @@ def weather_at(db: Session, lat: float, lon: float) -> dict:
         row = WeatherCache(cell=cell)
         db.add(row)
     row.payload, row.fetched_at, row.expires_at = payload, fetched_at, expires_at
-    db.execute(delete(WeatherCache).where(WeatherCache.expires_at < now - PRUNE_AFTER))
+    # Not this cell: it was just read again, and deleting its row under the update above would fail the save.
+    db.execute(delete(WeatherCache).where(WeatherCache.expires_at < now - PRUNE_AFTER, WeatherCache.cell != cell))
     try:
         db.commit()
     except IntegrityError:  # another request filled this cell just now: its reading is as good

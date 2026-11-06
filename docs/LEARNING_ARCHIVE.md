@@ -74,8 +74,10 @@ compare-and-set failure, rolls back, and sees the year already closed: never a d
 Every learning session stores `academic_year`; progress (lesson states, *Tiếp tục học*, the header's progress) is read
 for the current year only, so a closed year's results never become the new grade's. After a promotion the programme,
 lessons, curriculum games, Math level, suggestions and statistics are those of the new grade; nothing of the old grade
-is offered as current content. Pets, EXP, coins, inventory, streaks and every other feature are untouched (the
-promotion writes only the tables above and `users.school_grade`).
+is offered as current content. *Cần ôn* too: the open items of lessons made for another grade become `archived` (they
+are in the year's `mistakes`), while the word bank's belong to no grade and stay; a repeated grade keeps its list.
+Pets, EXP, coins, inventory, streaks and every other feature are untouched (the promotion writes only the tables above,
+those review items and `users.school_grade`).
 
 ## Kho lưu trữ học tập
 

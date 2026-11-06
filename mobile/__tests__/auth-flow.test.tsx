@@ -456,7 +456,7 @@ describe('main app', () => {
     render(<App />);
     await screen.findByText(`Chào bạn, ${USER.display_name}!`);
 
-    expect(await screen.findByText('Pet đang đi dạo...')).toBeTruthy();
+    expect(await screen.findByText('Bé đang khám phá thế giới và tìm kiếm những món quà bất ngờ!')).toBeTruthy();
     expect(screen.getByText('00:30:00')).toBeTruthy();
     expect(server.callsTo('GET /api/pet/space').length).toBeGreaterThan(0);
   });

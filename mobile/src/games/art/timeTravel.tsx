@@ -1,6 +1,8 @@
 import React from 'react';
+import { Plate } from '../../world/diorama';
+import { ERA_ART } from './rendered';
 import Svg, { Circle, Defs, Ellipse, G, Line, Path, Polygon, Rect } from 'react-native-svg';
-import { Art, blob, copies, INK, Lin, Rad, seeded, Shadow, SW, Twinkle, url } from './kit';
+import { Art, blob, copies, INK, Lin, Rad, Shadow, SW, Twinkle, url } from './kit';
 
 // Vector art for Time Traveler (Lịch sử): four eras the pet travels through (a scene each, ground at 80% of the height,
 // with a drifting cloud strip over it), the time gate (a stone clock ring; its swirl is a separate drawing so the game
@@ -11,178 +13,10 @@ export type Era = 'stone' | 'bronze' | 'feudal' | 'modern';
 export const ERAS: Era[] = ['stone', 'bronze', 'feudal', 'modern'];
 export const ERA_NAME: Record<Era, string> = { stone: 'Thời nguyên thuỷ', bronze: 'Thời đồ đồng', feudal: 'Thời phong kiến', modern: 'Thời hiện đại' };
 
-const GROUND = 0.8;
-
-function Tuft({ x, y, s, color }: { x: number; y: number; s: number; color: string }) {
-  return <Path d={`M${x - s} ${y} Q${x - s * 0.6} ${y - s * 1.6} ${x} ${y - s * 0.4} Q${x + s * 0.2} ${y - s * 2} ${x + s * 0.5} ${y - s * 0.3} Q${x + s} ${y - s * 1.4} ${x + s * 1.1} ${y} Z`}
-    fill={color} />;
-}
-
-function Tree({ x, y, r, leaf, trunk = '#9A6B44' }: { x: number; y: number; r: number; leaf: string; trunk?: string }) {
-  return (
-    <G>
-      <Rect x={x - r * 0.12} y={y - r * 1.2} width={r * 0.24} height={r * 1.2} fill={trunk} />
-      <Circle cx={x} cy={y - r * 1.5} r={r} fill={leaf} />
-      <Circle cx={x - r * 0.55} cy={y - r * 1.2} r={r * 0.6} fill={leaf} />
-      <Circle cx={x + r * 0.55} cy={y - r * 1.25} r={r * 0.62} fill={leaf} />
-      <Circle cx={x - r * 0.3} cy={y - r * 1.8} r={r * 0.35} fill="#FFFFFF" opacity={0.18} />
-    </G>
-  );
-}
-
-function StoneAge({ w, h }: { w: number; h: number }) {
-  const g = h * GROUND;
-  return (
-    <>
-      <Defs>
-        <Lin id="era-stone-sky" stops={[[0, '#8FCFF0'], [0.7, '#FFD9AE'], [1, '#FFC491']]} />
-        <Lin id="era-stone-ground" stops={[[0, '#D4AB72'], [1, '#B08450']]} />
-        <Lin id="era-stone-mtn" stops={[[0, '#C49A78'], [1, '#9C7356']]} />
-      </Defs>
-      <Rect width={w} height={h} fill={url('era-stone-sky')} />
-      <Circle cx={w * 0.8} cy={h * 0.22} r={h * 0.09} fill="#FFF2B8" opacity={0.9} />
-      {/* Mountains and a smoking volcano. */}
-      <Path d={`M0 ${g} L${w * 0.12} ${h * 0.42} L${w * 0.26} ${h * 0.55} L${w * 0.4} ${h * 0.34} L${w * 0.56} ${g} Z`} fill={url('era-stone-mtn')} />
-      <Path d={`M${w * 0.5} ${g} L${w * 0.68} ${h * 0.3} L${w * 0.74} ${h * 0.3} L${w * 0.94} ${g} Z`} fill="#A87C5C" />
-      <Path d={`M${w * 0.68} ${h * 0.3} L${w * 0.71} ${h * 0.36} L${w * 0.74} ${h * 0.3} Z`} fill="#FF8A4C" />
-      {[0, 1, 2].map((i) => <Circle key={i} cx={w * (0.71 + i * 0.02)} cy={h * (0.24 - i * 0.07)} r={h * (0.035 + i * 0.012)} fill="#E8DDD6" opacity={0.75 - i * 0.18} />)}
-      {/* The cave. */}
-      <Path d={`M${w * 0.02} ${g} Q${w * 0.02} ${h * 0.46} ${w * 0.17} ${h * 0.44} Q${w * 0.32} ${h * 0.46} ${w * 0.3} ${g} Z`} fill="#8E6A52" stroke={INK} strokeWidth={1.5} />
-      <Path d={`M${w * 0.09} ${g} Q${w * 0.1} ${h * 0.58} ${w * 0.17} ${h * 0.57} Q${w * 0.24} ${h * 0.58} ${w * 0.24} ${g} Z`} fill="#3E2E2A" />
-      <Rect y={g} width={w} height={h - g} fill={url('era-stone-ground')} />
-      <Path d={`M0 ${g} Q${w * 0.25} ${g - h * 0.02} ${w * 0.5} ${g} T${w} ${g}`} stroke="#8DBF5A" strokeWidth={h * 0.02} fill="none" />
-      {/* A campfire and standing stones. */}
-      <G>
-        <Path d={`M${w * 0.6} ${g + h * 0.06} L${w * 0.68} ${g + h * 0.03}`} stroke="#7A4E2E" strokeWidth={h * 0.025} strokeLinecap="round" />
-        <Path d={`M${w * 0.6} ${g + h * 0.03} L${w * 0.68} ${g + h * 0.06}`} stroke="#8F5C36" strokeWidth={h * 0.025} strokeLinecap="round" />
-        <Path d={`M${w * 0.64} ${g - h * 0.06} Q${w * 0.61} ${g} ${w * 0.64} ${g + h * 0.03} Q${w * 0.67} ${g} ${w * 0.64} ${g - h * 0.06} Z`} fill="#FF8A3D" />
-        <Path d={`M${w * 0.64} ${g - h * 0.02} Q${w * 0.625} ${g + h * 0.01} ${w * 0.64} ${g + h * 0.03} Q${w * 0.655} ${g + h * 0.01} ${w * 0.64} ${g - h * 0.02} Z`} fill="#FFE27A" />
-      </G>
-      <Rect x={w * 0.86} y={g - h * 0.12} width={w * 0.035} height={h * 0.14} rx={3} fill="#A9A0A0" stroke={INK} strokeWidth={1.2} />
-      <Rect x={w * 0.91} y={g - h * 0.09} width={w * 0.03} height={h * 0.11} rx={3} fill="#B6AEAE" stroke={INK} strokeWidth={1.2} />
-      {[0.36, 0.48, 0.78].map((x, i) => <Tuft key={i} x={w * x} y={g + h * 0.04} s={h * 0.025} color="#7FB24E" />)}
-    </>
-  );
-}
-
-function BronzeAge({ w, h }: { w: number; h: number }) {
-  const g = h * GROUND;
-  return (
-    <>
-      <Defs>
-        <Lin id="era-bronze-sky" stops={[[0, '#9FDCFF'], [1, '#EAF8FF']]} />
-        <Lin id="era-bronze-ground" stops={[[0, '#A4D67E'], [1, '#7DBB5E']]} />
-      </Defs>
-      <Rect width={w} height={h} fill={url('era-bronze-sky')} />
-      <Path d={`M0 ${h * 0.62} Q${w * 0.2} ${h * 0.4} ${w * 0.42} ${h * 0.58} Q${w * 0.62} ${h * 0.42} ${w} ${h * 0.6} L${w} ${g} L0 ${g} Z`} fill="#8FD18A" />
-      {[0, 1, 2].map((i) => <Path key={i} d={`M${w * 0.04} ${h * (0.66 + i * 0.045)} Q${w * 0.22} ${h * (0.6 + i * 0.045)} ${w * 0.4} ${h * (0.66 + i * 0.045)}`}
-        stroke="#6DB86F" strokeWidth={1.6} fill="none" />)}
-      <Rect y={g} width={w} height={h - g} fill={url('era-bronze-ground')} />
-      {/* A rice paddy of still water. */}
-      <Rect x={w * 0.05} y={g + h * 0.05} width={w * 0.34} height={h * 0.08} rx={h * 0.03} fill="#9EDCF2" stroke="#5FA9C9" strokeWidth={1.2} />
-      {[0.1, 0.17, 0.24, 0.31].map((x, i) => <Tuft key={i} x={w * x} y={g + h * 0.1} s={h * 0.018} color="#5FB34F" />)}
-      {/* Bamboo. */}
-      {[0.44, 0.47, 0.5].map((x, i) => (
-        <G key={i}>
-          <Rect x={w * x} y={g - h * (0.42 - i * 0.05)} width={w * 0.012} height={h * (0.42 - i * 0.05)} fill="#7BBF5A" />
-          {[0.12, 0.24, 0.34].map((y, j) => <Rect key={j} x={w * x - 1} y={g - h * y} width={w * 0.012 + 2} height={2} fill="#5A9A42" />)}
-        </G>
-      ))}
-      {/* A stilt house with a boat-shaped thatched roof, back on the hillside (clear of the gate on the right). */}
-      <G transform={`translate(${w * 0.5} ${g - h * 0.07}) scale(${h / 200})`}>
-        {[6, 22, 38, 52].map((x, i) => <Rect key={i} x={x} y={-30} width={4} height={30} fill="#8F5C36" />)}
-        <Rect x={0} y={-38} width={62} height={9} fill="#B7834F" stroke={INK} strokeWidth={1.3} />
-        <Rect x={6} y={-60} width={50} height={22} fill="#D9A86A" stroke={INK} strokeWidth={1.3} />
-        <Rect x={25} y={-54} width={12} height={16} fill="#6E4A2C" />
-        <Path d="M-8 -98 Q2 -70 6 -60 L56 -60 Q60 -70 70 -98 Q31 -80 -8 -98 Z" fill="#E2B866" stroke={INK} strokeWidth={1.5} strokeLinejoin="round" />
-        {[16, 31, 46].map((x, i) => <Line key={i} x1={x} y1={-80} x2={x} y2={-60} stroke="#C89A4A" strokeWidth={1.2} />)}
-        <Path d="M-6 0 L6 -29" stroke="#8F5C36" strokeWidth={2} />
-      </G>
-    </>
-  );
-}
-
-function Feudal({ w, h }: { w: number; h: number }) {
-  const g = h * GROUND;
-  const gx = w * 0.5;
-  return (
-    <>
-      <Defs>
-        <Lin id="era-feudal-sky" stops={[[0, '#FFE3A8'], [1, '#FFF6E0']]} />
-        <Lin id="era-feudal-wall" stops={[[0, '#C9B9A2'], [1, '#A89478']]} />
-        <Lin id="era-feudal-ground" stops={[[0, '#E6CF97'], [1, '#CDB078']]} />
-        <Lin id="era-feudal-roof" stops={[[0, '#C9504A'], [1, '#9C3A36']]} />
-      </Defs>
-      <Rect width={w} height={h} fill={url('era-feudal-sky')} />
-      <Path d={`M0 ${h * 0.5} L${w * 0.16} ${h * 0.34} L${w * 0.3} ${h * 0.46} L${w * 0.82} ${h * 0.36} L${w} ${h * 0.48} L${w} ${g} L0 ${g} Z`} fill="#AFC3D6" opacity={0.8} />
-      {/* The citadel wall with crenels and its gate tower. */}
-      <Rect x={0} y={h * 0.5} width={w} height={g - h * 0.5} fill={url('era-feudal-wall')} stroke={INK} strokeWidth={1.2} />
-      {Array.from({ length: 14 }, (_, i) => <Rect key={i} x={(i / 14) * w + 2} y={h * 0.46} width={w / 28} height={h * 0.05} fill="#BCA98E" stroke={INK} strokeWidth={1} />)}
-      {[0.58, 0.66, 0.74].map((y, i) => <Line key={i} x1={0} y1={h * y} x2={w} y2={h * y} stroke="#9A876C" strokeWidth={1} opacity={0.6} />)}
-      <Rect x={gx - w * 0.11} y={h * 0.38} width={w * 0.22} height={g - h * 0.38} fill="#B8A486" stroke={INK} strokeWidth={1.4} />
-      <Path d={`M${gx - w * 0.05} ${g} L${gx - w * 0.05} ${h * 0.6} Q${gx} ${h * 0.52} ${gx + w * 0.05} ${h * 0.6} L${gx + w * 0.05} ${g} Z`} fill="#5A3E2E" />
-      <Path d={`M${gx - w * 0.15} ${h * 0.4} Q${gx} ${h * 0.33} ${gx + w * 0.15} ${h * 0.4} L${gx + w * 0.17} ${h * 0.37} Q${gx} ${h * 0.27} ${gx - w * 0.17} ${h * 0.37} Z`}
-        fill={url('era-feudal-roof')} stroke={INK} strokeWidth={1.4} strokeLinejoin="round" />
-      <Rect x={gx - w * 0.07} y={h * 0.25} width={w * 0.14} height={h * 0.06} fill="#C8B394" stroke={INK} strokeWidth={1.2} />
-      <Path d={`M${gx - w * 0.11} ${h * 0.26} Q${gx} ${h * 0.2} ${gx + w * 0.11} ${h * 0.26} L${gx + w * 0.12} ${h * 0.23} Q${gx} ${h * 0.14} ${gx - w * 0.12} ${h * 0.23} Z`}
-        fill={url('era-feudal-roof')} stroke={INK} strokeWidth={1.4} strokeLinejoin="round" />
-      <Rect y={g} width={w} height={h - g} fill={url('era-feudal-ground')} />
-      {/* Banners, a stone lantern and a lotus pond. */}
-      {[0.18, 0.82].map((x, i) => (
-        <G key={i}>
-          <Line x1={w * x} y1={g + h * 0.02} x2={w * x} y2={h * 0.42} stroke="#6E4A2C" strokeWidth={2} />
-          <Path d={`M${w * x} ${h * 0.43} L${w * x + w * 0.06} ${h * 0.45} L${w * x + w * 0.045} ${h * 0.5} L${w * x + w * 0.06} ${h * 0.55} L${w * x} ${h * 0.55} Z`}
-            fill={i ? '#F2C14E' : '#E2574C'} stroke={INK} strokeWidth={1} />
-        </G>
-      ))}
-      <Rect x={w * 0.3} y={g - h * 0.1} width={w * 0.03} height={h * 0.1} fill="#B5ADA0" stroke={INK} strokeWidth={1} />
-      <Rect x={w * 0.29} y={g - h * 0.13} width={w * 0.05} height={h * 0.035} fill="#C8C0B2" stroke={INK} strokeWidth={1} />
-      <Ellipse cx={w * 0.72} cy={g + h * 0.1} rx={w * 0.12} ry={h * 0.045} fill="#8FD0E0" stroke="#5FA9C9" strokeWidth={1.2} />
-      <Ellipse cx={w * 0.68} cy={g + h * 0.1} rx={w * 0.025} ry={h * 0.012} fill="#6FBF6A" />
-      <Path d={`M${w * 0.75} ${g + h * 0.1} Q${w * 0.745} ${g + h * 0.07} ${w * 0.755} ${g + h * 0.06} Q${w * 0.765} ${g + h * 0.07} ${w * 0.76} ${g + h * 0.1} Z`} fill="#FF9EC2" />
-    </>
-  );
-}
-
-function Modern({ w, h }: { w: number; h: number }) {
-  const g = h * GROUND;
-  const rnd = seeded(41);
-  const towers = Array.from({ length: 9 }, (_, i) => ({ x: (i / 9) * w, wd: w / 9 - 3, ht: h * (0.22 + rnd() * 0.3), c: ['#A9C4E8', '#C7D7F0', '#9DB6DD', '#B8CBEA'][i % 4] }));
-  return (
-    <>
-      <Defs>
-        <Lin id="era-modern-sky" stops={[[0, '#BEE7FF'], [1, '#F2FBFF']]} />
-        <Lin id="era-modern-road" stops={[[0, '#8E98A8'], [1, '#6F7889']]} />
-      </Defs>
-      <Rect width={w} height={h} fill={url('era-modern-sky')} />
-      {towers.map((t, i) => (
-        <G key={i}>
-          <Rect x={t.x + 1.5} y={g - t.ht} width={t.wd} height={t.ht} fill={t.c} stroke="#7F93B5" strokeWidth={1} />
-          {Array.from({ length: Math.floor(t.ht / (h * 0.06)) }, (_, j) => (
-            <Rect key={j} x={t.x + t.wd * 0.25} y={g - t.ht + h * 0.03 + j * h * 0.06} width={t.wd * 0.5} height={h * 0.025} fill="#FFFFFF" opacity={0.7} />
-          ))}
-        </G>
-      ))}
-      <Rect y={g} width={w} height={h * 0.04} fill="#D9DEE6" />
-      <Rect y={g + h * 0.04} width={w} height={h - g - h * 0.04} fill={url('era-modern-road')} />
-      {Array.from({ length: 6 }, (_, i) => <Rect key={i} x={(i / 6) * w + w * 0.03} y={g + h * 0.11} width={w * 0.07} height={h * 0.012} fill="#FFFFFF" opacity={0.85} />)}
-      {[0.12, 0.62].map((x, i) => <Tree key={i} x={w * x} y={g} r={h * 0.07} leaf={i ? '#7CCB6A' : '#6BBF73'} />)}
-      {[0.36, 0.88].map((x, i) => (
-        <G key={i}>
-          <Rect x={w * x} y={g - h * 0.26} width={3} height={h * 0.26} fill="#55607A" />
-          <Path d={`M${w * x + 1.5} ${g - h * 0.26} Q${w * x + w * 0.03} ${g - h * 0.29} ${w * x + w * 0.04} ${g - h * 0.25}`} stroke="#55607A" strokeWidth={3} fill="none" />
-          <Circle cx={w * x + w * 0.04} cy={g - h * 0.24} r={h * 0.018} fill="#FFE98A" />
-        </G>
-      ))}
-    </>
-  );
-}
-
 /** The scene of an era, `width` × `height` (no scrolling: the pet steps through the gate into the next one). */
 export const EraScene = React.memo(function EraScene({ era, width: w, height: h }: { era: Era; width: number; height: number }) {
   if (!w || !h) return null;
-  const Scene = { stone: StoneAge, bronze: BronzeAge, feudal: Feudal, modern: Modern }[era];
-  return <Svg width={w} height={h}><Scene w={w} h={h} /></Svg>;
+  return <Plate source={ERA_ART[era]} width={w} height={h} />;
 });
 
 /** Soft clouds on a strip two widths long whose halves match (for a slow drift). */

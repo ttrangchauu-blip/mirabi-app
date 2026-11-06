@@ -6,6 +6,7 @@ import { drawnActions, hasSprite } from '../../../petSprites';
 import { Text } from '../../../components/Typography';
 import type { Turn } from '../../../learning/types';
 import { appTheme as t } from '../../../theme';
+import { BROOK_TALL } from '../../../games/art/rendered';
 import { BridgePost, ForestLayer, LetterStone, Plank, Stream } from '../../../games/art/wordForest';
 import { Draggable, DropArea, DropZone } from '../../../games/engine/drag';
 import { Layer, Parallax } from '../../../games/engine/Parallax';
@@ -160,6 +161,9 @@ export function WordForest({ turn, disabled, feedback, onSubmit, collected, tota
   const n = Math.max(1, crossing ? crossing.pieces.length : tiles.length);
   const plankW = Math.min(64, (bankR - bankL) / n);
   const bridgeY = SCENE_H * 0.76; // the planks' middle, level with the banks
+  // The brook is a little wider than the bridge, so that its banks meet the ground on either side of the posts.
+  const brookW = (bankR - bankL) * 1.24;
+  const brookH = brookW * BROOK_TALL;
   const plankAt = (i: number) => bankL + (bankR - bankL - plankW * n) / 2 + i * plankW;
   const floorTiles = tiles.filter((tile) => !slots.includes(tile.id));
   const spots = useMemo(() => scatter(tiles.map((x) => x.id), Math.max(TILE, W), turn.turn_id), [tiles, W, turn.turn_id]);
@@ -184,8 +188,8 @@ export function WordForest({ turn, disabled, feedback, onSubmit, collected, tota
         <View style={[styles.scene, { height: SCENE_H }]}>
           {width ? <Parallax width={W} height={SCENE_H} layers={FOREST} travel={travel} step={STEP} drift={0.6} running={!locked} reduceMotion={reduceMotion} /> : null}
           <Animated.View style={[StyleSheet.absoluteFill, { transform: [{ translateX: leaving }] }]} pointerEvents="box-none">
-            <View pointerEvents="none" style={[styles.brook, { left: bankL, width: bankR - bankL, top: bridgeY + 4 }]}>
-              {width ? <Stream width={bankR - bankL} height={SCENE_H - bridgeY - 4} /> : null}
+            <View pointerEvents="none" style={[styles.brook, { left: (bankL + bankR - brookW) / 2, width: brookW, top: bridgeY - brookH * 0.2 }]}>
+              {width ? <Stream width={brookW} height={brookH} /> : null}
             </View>
             <View pointerEvents="none" style={[styles.post, { left: bankL - 16, top: bridgeY - 50 }]}><BridgePost size={70} /></View>
             <View pointerEvents="none" style={[styles.post, { left: bankR - 14, top: bridgeY - 50 }]}><BridgePost size={70} /></View>
@@ -306,7 +310,7 @@ const styles = StyleSheet.create({
   plankTextOk: { color: '#1F6B33' },
   plankShine: { borderRadius: 8, backgroundColor: 'rgba(255,236,140,0.7)' },
   plankHole: { fontSize: 12, fontWeight: '900', color: '#FFFFFF' },
-  light: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(255,240,170,0.35)' },
+  light: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(255,240,170,0.16)' },
   center: { alignItems: 'center', justifyContent: 'center' },
   pet: { position: 'absolute', left: 0 },
   floor: { borderRadius: 18, backgroundColor: '#E5F3DC', borderWidth: 2, borderColor: '#C3DFB4' },

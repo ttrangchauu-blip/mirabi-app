@@ -46,6 +46,8 @@ dependency, `APIError` codes, the in-memory rate limiter and the additive startu
   short network loss therefore costs nothing; disappearing stops the credit where the grace ends, and coming back
   resumes it. Only focus time while present counts, never paused or break time.
 - A cycle counts for a member who is present at the end of the focus phase **and** studied at least half of it.
+- Joining after a session's time ran out (before the sweep noticed) settles it first: the joiner enters the waiting
+  room and is not a participant of it.
 - Displayed presence (`online` / `away`) is separate: away after 70 s without a heartbeat or when the socket closes.
 
 **Results and EXP** (`finalize_session`, runs exactly once per session via a conditional `finalized_at` update)
@@ -68,14 +70,17 @@ dependency, `APIError` codes, the in-memory rate limiter and the additive startu
   `user_blocked`.
 - Reports (`spam | harassment | inappropriate | impersonation | other`, optional text ≤ 500, optional room) go to an
   admin queue: `GET /api/admin/social/reports`, `POST /api/admin/social/reports/{id}/resolve`
-  `{"action": "dismiss" | "disable_user"}`. Disabling also invalidates the user's tokens.
+  `{"action": "dismiss" | "disable_user"}`. Disabling also invalidates the user's tokens and closes their open sockets
+  (code 4401); a socket of an account disabled any other way ends at its next `ping`.
 - Search and every view of another person return only: id, display name, avatar preset, pet, pet name, pet level and
   public code. Never email, role, personal goals or notes.
 - Friend codes can be looked up exactly (`POST /api/users/lookup`, also from the friend QR code `MIRABI-FRIEND:<code>`).
   Unfriending, like blocking, cancels pending room invitations between the two; accepting an invitation checks the
   friendship again. Friends visit each other's pet room: see [friend-visits.md](friend-visits.md).
+- A room lookup by code never names a host who blocked you or whom you blocked (`host: null`, `room_unavailable`).
 - Settings (`GET/PATCH /api/social/me`): `presence_visibility` (`friends | nobody`), `share_study_stats` (others see
-  your minutes and quest contributions, or "Ẩn"), `discoverable` (name search; the exact code always works),
+  your minutes and quest contributions, or "Ẩn"; you still see your own, sent only to you as `own_stats` next to the
+  shared snapshot), `discoverable` (name search; the exact code always works),
   `allow_room_visits` (friends may visit the pet room), `allow_study_invites` (friends may invite you into rooms; off →
   `skipped: invites_disabled`).
 - The personal session goal in the active room stays on the device only (AsyncStorage).
@@ -132,7 +137,7 @@ Full schemas: live Swagger at `/docs` (development) or [study-together-openapi.j
 | `GET/PATCH /api/social/me` | my public code and privacy settings | |
 | `GET /api/users/search?q=` | by display name (≥ 2 chars, wildcards literal) or exact public code, max 20 | `rate_limited` |
 | `POST /api/users/lookup` `{public_code}` | exact friend code or QR text → short profile + `relationship` | `user_not_found`, `rate_limited` |
-| `GET /api/friends` | friends with presence (`studying/online/offline/hidden`) and joinable room | |
+| `GET /api/friends` | friends with presence (`studying/online/offline/hidden`) and joinable room (a code room hosted by one of your friends) | |
 | `DELETE /api/friends/{user_id}` | unfriend | `not_friends` |
 | `POST /api/friend-requests` | `{user_id}` or `{public_code}` → 201, `auto_accepted` | `friend_request_exists`, `already_friends`, `friend_request_cooldown`, `user_blocked`, `user_not_found`, `cannot_friend_self` |
 | `GET /api/friend-requests?direction=incoming\|outgoing` | pending requests | |
@@ -194,9 +199,11 @@ curl -X POST http://localhost:8001/api/study-rooms -H "Authorization: Bearer $TO
    `member_status_changed`, `host_changed`, `session_started`, `phase_changed`, `session_paused`, `session_resumed`,
    `session_completed`, `settings_changed`, `team_quest_created`, `team_quest_updated`, `room_closed`) and the full
    snapshot, `room.reaction`, `room.message` (`{message}`), `room.message_deleted` (`{message_id, removed_by}`),
-   `room.typing` (`{user_id}`), `room.removed` (you left), `notification`. Chat events carry no `version`; the app
+   `room.typing` (`{user_id}`), `room.removed` (you left), `room.own_stats` (`{stats}`: your own numbers when you hide
+   them, to you only), `notification`. Chat events carry no `version`; the app
    merges messages by id and re-reads the latest page after a reconnect (and every 15 s while offline).
-5. Events are queued on the DB session and sent only **after commit**. Every room event carries `version`; the app keeps
+5. Events are queued on the DB session and sent only **after the outermost commit** (a savepoint neither sends nor
+   drops them). Every room event carries `version`; the app keeps
    the newest (`newerSnapshot`), so late or duplicate events are ignored.
 6. App behaviour: reconnect with exponential backoff (1 s → 30 s) and a fresh ticket, re-subscribe, resync on returning
    to the foreground. After 3 failed attempts it shows "Mất kết nối" and polls `…/heartbeat` every 15 s until the socket

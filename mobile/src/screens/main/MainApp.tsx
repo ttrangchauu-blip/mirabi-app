@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { BackHandler, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
+import { AppState, BackHandler, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useAuth } from '../../auth/AuthContext';
@@ -26,6 +26,7 @@ import { usePomodoroTimer } from './usePomodoroTimer';
 import { TabBar } from './TabBar';
 import { Dashboard, Post, Quest, request, showError } from './shared';
 import { TaskCreateModal } from './TaskCreateModal';
+import { todayOf } from './taskDateTime';
 import { usePetHatch } from './usePetHatch';
 import { usePetReward } from './usePetReward';
 import { StudyMode, StudyModeSwitch } from '../together/StudyModeSwitch';
@@ -79,6 +80,8 @@ export function MainApp() {
   const [lifeSpace, setLifeSpace] = useState<LifeSpace>('home');
   // Decorating the pet's home takes the whole screen: the switcher of places steps aside (RoomTab says when).
   const [decorating, setDecorating] = useState(false);
+  // Khám phá's photo mode: only the scene is left on the screen, nothing else changes (the place stays mounted).
+  const [photoMode, setPhotoMode] = useState(false);
   // The part of the "Bạn bè" place a shortcut opens (the room, Study Together or a notification).
   const [friendsTab, setFriendsTab] = useState<FriendsTab>('friends');
   // A Study Together screen to open directly (inbox from the Home bell, friend search or a study room from the Room tab).
@@ -102,22 +105,52 @@ export function MainApp() {
   const [dashboard, setDashboard] = useState<Dashboard | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
   const [taskModal, setTaskModal] = useState<{ visible: boolean; initialDate: string; onCreated: (date: string) => void }>({
-    visible: false, initialDate: new Date().toISOString().slice(0, 10), onCreated: () => {},
+    visible: false, initialDate: todayOf(), onCreated: () => {},
   });
 
-  const refresh = useCallback(async () => {
+  const [dashboardFailed, setDashboardFailed] = useState(false);
+  // Only the latest read may update the numbers: an older answer arriving late would undo a quest just completed.
+  const dashboardRead = useRef(0);
+  /** Resolves to what went wrong, or null. */
+  const readDashboard = useCallback(async (): Promise<unknown> => {
+    const read = ++dashboardRead.current;
     try {
-      const [d, p] = await Promise.all([request('/api/dashboard'), request('/api/community/posts')]);
-      setDashboard(d); setUser(d.user); setPosts(p);
-    } catch (e) { showError('Không tải được dữ liệu', e); }
+      const d = await request('/api/dashboard');
+      if (read !== dashboardRead.current) return null;
+      setDashboard(d); setDashboardFailed(false); setUser(d.user);
+      return null;
+    } catch (e) {
+      if (read !== dashboardRead.current) return null;
+      setDashboardFailed(true);
+      return e;
+    }
   }, [setUser]);
+  const loadDashboard = useCallback(async () => {
+    const failure = await readDashboard();
+    if (failure) showError('Không tải được dữ liệu', failure);
+  }, [readDashboard]);
+  // Each on its own: the Feed's posts failing must not cost Home its quests. One message for the two.
+  const refresh = useCallback(async () => {
+    const [dashboardError, postsError] = await Promise.all([readDashboard(),
+      request('/api/community/posts').then((p) => { setPosts(p); return null; }, (e: unknown) => e)]);
+    const failure = dashboardError ?? postsError;
+    if (failure) showError('Không tải được dữ liệu', failure);
+  }, [readDashboard]);
   const timer = usePomodoroTimer(refresh, user?.id);
   const muteToasts = useMuteToasts();
   useEffect(() => { muteToasts(timer.quiet); return () => muteToasts(false); }, [muteToasts, timer.quiet]);
   useEffect(() => { void refresh(); }, [refresh]);
-  const loadDashboard = useCallback(async () => {
-    try { const d = await request('/api/dashboard'); setDashboard(d); setUser(d.user); } catch (e) { showError('Không tải được dữ liệu', e); }
-  }, [setUser]);
+  // Back in the app, maybe on another day: the quests and tasks on show may be yesterday's. Quiet: the phone may still be offline.
+  useEffect(() => {
+    const sub = AppState.addEventListener('change', (next) => { if (next === 'active') void readDashboard(); });
+    return () => sub.remove();
+  }, [readDashboard]);
+  // A check-in answered after Home has loaded gave EXP that its numbers don't have yet.
+  const shownClaim = useRef(streakPopup);
+  useEffect(() => {
+    if (streakPopup && streakPopup !== shownClaim.current && streakPopup.daily_exp_awarded + streakPopup.milestone_exp_awarded > 0) void readDashboard();
+    shownClaim.current = streakPopup;
+  }, [streakPopup, readDashboard]);
   const onQuestChanged = useCallback(async (quests: Quest[]) => {
     setDashboard((current) => current ? { ...current, daily_quests: quests } : current);
     await loadDashboard();
@@ -135,6 +168,10 @@ export function MainApp() {
     void loadDashboard();
   }, [setUser, loadDashboard]);
   const petHatch = usePetHatch(user, onHatched);
+  // Every answer of /api/pet/space from a screen, for the hatching and the gift popup to follow.
+  const { sync: syncHatch } = petHatch;
+  const { track: trackWalk } = petReward;
+  const onPetSpace = useCallback((space: unknown) => { syncHatch(space); trackWalk(space); }, [syncHatch, trackWalk]);
   const toast = useToast();
   const checkMemory = useCallback(async () => {
     try {
@@ -219,12 +256,13 @@ export function MainApp() {
   const album = overlay === 'album';
   const inventory = overlay === 'inventory' || overlay === 'achievements'; // Thành tựu: Kho đồ on its Kỷ vật tab, where the badges are
   // These bring their own whole-screen layout (the signed-out shell): nothing of the app around them.
-  // The room with friends, reached from the tabs of "Học tự chọn": one object, so its screens aren't rebuilt for nothing.
-  const roomTabs = useMemo(() => (freeStudy ? { onBack: () => { setStudyMode('personal'); setFreeStudy(false); setFocusStatistics(false); } } : undefined), [freeStudy]);
   const fullScreen = overlay === 'password' || overlay === 'tour';
   const gardenVisit = overlay === 'gardenVisit' && gardenOwnerId !== null;
   const visiting = overlay === 'visit' && visitUserId !== null;
   const room = !overlay && tab === 'Room';
+  const sceneAlone = photoMode && room && lifeSpace === 'explore';
+  // The room with friends, reached from the tabs of "Học tự chọn": one object, so its screens aren't rebuilt for nothing.
+  const roomTabs = useMemo(() => (freeStudy ? { onBack: () => { setStudyMode('personal'); setFreeStudy(false); setFocusStatistics(false); } } : undefined), [freeStudy]);
   const lifeContentTop = lifeTop(insets.top);
   // Cuộc sống Mirabi's screens: only for users aged 16 and over (the backend refuses anyone else too).
   const lifeScreen = lifeEligible(user) && (overlay === 'work' || overlay === 'adventure' || overlay === 'money' || overlay === 'town'
@@ -263,21 +301,21 @@ export function MainApp() {
       ) : together ? (
         <View style={[styles.fill, { paddingTop: insets.top + 10 }]}>
           <StudyTogetherScreen key={togetherRoute?.key ?? 0} user={user} onExit={(mode) => { setTogetherRoute(null); setStudyMode(mode ?? 'personal'); }}
-            onRewards={loadDashboard} onVisitRoom={visitRoom} onOpenFriends={openFriends} onOpenGarden={() => openGarden()} initialRoute={togetherRoute?.route}
+            onRewards={loadDashboard} onVisitRoom={visitRoom} onOpenFriends={openFriends} onOpenGarden={() => openGarden()} onOpenInventory={openInventory} initialRoute={togetherRoute?.route}
             roomTabs={roomTabs} />
         </View>
       ) : room ? (
-        <LifeHub space={lifeSpace} onSpace={setLifeSpace} immersive={lifeSpace === 'home' && decorating} badges={{ friends: pendingRequests }}>
+        <LifeHub space={lifeSpace} onSpace={setLifeSpace} immersive={(lifeSpace === 'home' && decorating) || sceneAlone} badges={{ friends: pendingRequests }}>
           {lifeSpace === 'home' ? (
             <RoomTab user={user} timer={timer} leaveGuard={roomLeave} healingAllowed={lifeEligible(user)} onOpenAlbum={() => openAlbum()}
               contentTop={lifeContentTop} onDecorating={setDecorating} onOpenExplore={() => setLifeSpace('explore')}
               hatching={petHatch.phase !== 'idle'} onOpenInventory={openInventory} startJournal={startJournal} onJournalStarted={() => setStartJournal(false)} />
           ) : lifeSpace === 'garden' ? (
-            <GardenScreen key={gardenSeed ? `${gardenSeed.id}.${gardenSeed.variant}` : 'garden'} user={user} onOpenInventory={openInventory} initialSeed={gardenSeed}
-              top={lifeContentTop} petAway={petHatch.phase !== 'idle'} />
+            <GardenScreen key={gardenSeed ? `${gardenSeed.id}.${gardenSeed.variant}` : 'garden'} user={user} onOpenInventory={openInventory} onOpenExplore={() => setLifeSpace('explore')} initialSeed={gardenSeed}
+              top={lifeContentTop} petAway={petHatch.phase !== 'idle' || dashboard?.pet_walk === 'walking'} petWalking={dashboard?.pet_walk === 'walking'} version={petReward.version} />
           ) : lifeSpace === 'explore' ? (
             <ExploreSpace user={user} top={lifeContentTop} bottom={0} version={petReward.version + hatchVersion} onOpenGifts={openPetGifts} onOpenInventory={openInventory}
-              onOpenQuests={openDailyQuests} onOpenAdventure={() => open('adventure')} onPetSpace={petHatch.sync} />
+              onOpenQuests={openDailyQuests} onOpenAdventure={() => open('adventure')} onPetSpace={onPetSpace} onPhotoMode={setPhotoMode} safeBottom={insets.bottom} />
           ) : (
             <FriendsSpace top={lifeContentTop} initialTab={friendsTab} onVisit={visitRoom} onVisitGarden={visitGarden} onOpenStudyRoom={openStudyRoom}
               onRequestsChanged={() => { void loadDashboard(); }} onOpenFeed={() => open('feed')} onOpenTown={lifeEligible(user) ? () => open('town') : undefined} />
@@ -299,12 +337,12 @@ export function MainApp() {
           : overlay === 'privacy' ? <PrivacyScreen onBack={back} />
           : overlay === 'invite' ? <InviteScreen onBack={back} />
           : overlay === 'help' ? <HelpScreen onBack={back} onReplayTour={() => open('tour')} onOpenFeed={() => open('feed')} />
-          : overlay === 'quests' ? <DailyQuestsScreen onBack={back} onChanged={loadDashboard} onOpenTaskCreate={openTaskCreate} />
+          : overlay === 'quests' ? <DailyQuestsScreen today={dashboard?.today} quests={dashboard?.daily_quests} onBack={back} onChanged={loadDashboard} onOpenTaskCreate={openTaskCreate} />
             : overlay === 'streak' ? <LoginStreakScreen onBack={back} user={user} onUserUpdated={setUser} />
             : overlay === 'feed' ? <FeedScreen user={user} posts={posts} onPosts={setPosts} onPosted={loadDashboard} onBack={back} /> : <>
-            {tab === 'Home' && <HomeTab user={user} dashboard={dashboard} onNavigate={navigate} onOpenProfile={() => open('profile')} onOpenStreak={openStreak} onOpenDailyQuests={openDailyQuests} onOpenTaskCreate={openTaskCreate} onQuestChanged={onQuestChanged}
+            {tab === 'Home' && <HomeTab user={user} dashboard={dashboard} dashboardFailed={dashboardFailed} onRetryDashboard={() => { void loadDashboard(); }} onNavigate={navigate} onOpenProfile={() => open('profile')} onOpenStreak={openStreak} onOpenDailyQuests={openDailyQuests} onOpenTaskCreate={openTaskCreate} onQuestChanged={onQuestChanged}
               petSpaceVersion={petReward.version + hatchVersion} onPetReturned={() => { void petReward.check(); }} onOpenPetGifts={openPetGifts} onOpenStudyTogether={openStudyTogether} onOpenFreeStudy={openFreeStudy} onOpenFriends={() => openFriends()} onOpenMemories={() => openAlbum()}
-              onOpenNotifications={() => openTogether({ name: 'notifications' })} onPetSpace={petHatch.sync}
+              onOpenNotifications={() => openTogether({ name: 'notifications' })} onPetSpace={onPetSpace}
               hatch={{ phase: petHatch.phase, level: petHatch.level, waitingReturn: petHatch.waitingReturn, onPlayed: petHatch.played }} />}
             {tab === 'Study' && <StudyTab timer={timer} petId={user.pet} petName={user.pet_name} petLevel={user.level} userId={user.id} onBack={() => { setFreeStudy(false); setFocusStatistics(false); }} onOpenGroup={() => setStudyMode('together')} showStatistics={focusStatistics} />}
             {tab === 'More' && <MoreTab user={user} onOpenProfile={() => open('profile')} onOpenStudyProfile={() => open('studyProfile')}
@@ -318,7 +356,7 @@ export function MainApp() {
       {/* Keeps the status bar readable when content scrolls underneath it; the room's wall goes up to the top instead. */}
       {room || fullScreen ? null : <LinearGradient pointerEvents="none" colors={[appTheme.backdrop[0], 'rgba(217,240,252,0)']}
         style={[styles.scrim, { height: insets.top + 12 }]} />}
-      {(games && immersive) || fullScreen ? null : <TabBar active={tab} onChange={(key) => { void leaveTo(key); }} bottomInset={insets.bottom}
+      {(games && immersive) || fullScreen || sceneAlone ? null : <TabBar active={tab} onChange={(key) => { void leaveTo(key); }} bottomInset={insets.bottom}
         badges={{ Room: pendingRequests }} />}
       <TaskCreateModal visible={taskModal.visible} initialDate={taskModal.initialDate}
         onClose={() => setTaskModal((current) => ({ ...current, visible: false }))}

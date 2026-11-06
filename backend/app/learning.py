@@ -19,6 +19,7 @@ from sqlalchemy.orm import Session, object_session
 from sqlalchemy.orm.exc import StaleDataError
 
 from . import clock
+from . import days
 from .companion import day_start as quest_day_start, maybe_start_walk
 from .config import settings
 from .db import get_db
@@ -62,6 +63,7 @@ Variant = Literal["mixed", "gate", "bridge", "meteor", "word_shooter"]
 EventId = Annotated[str, Field(pattern=r"^[A-Za-z0-9_-]{8,64}$", description="Idempotency key chosen by the app per action; "
                                                                              "a retry with the same id changes nothing.")]
 TurnId = Annotated[str, Field(min_length=8, max_length=32)]
+MAX_ANSWER_TOKEN = 16  # the longest piece of an answer: "angle:180", "rect:10x12", "slot:part", a typed result
 
 
 # ---------------------------------------------------------------------------------------------------------------
@@ -136,7 +138,7 @@ class AnswerInput(HeldTurnEvent):
         if isinstance(value, str):
             if len(value) > 120:
                 raise ValueError("Answer is too long")
-        elif len(value) > 20 or any(not isinstance(v, str) or len(v) > 8 for v in value):
+        elif len(value) > 20 or any(not isinstance(v, str) or len(v) > MAX_ANSWER_TOKEN for v in value):
             raise ValueError("Too many tokens")
         return value
 
@@ -460,14 +462,21 @@ def _turn_out(item: LearningSessionItem, rules: dict, mode: str, active_ms: int)
             "on_screen_ms": max(0, active_ms - (item.issued_active_ms if item.issued_active_ms is not None else active_ms))}
 
 
+def practice_turns_used_up(items: list[LearningSessionItem], rules: dict) -> bool:
+    return sum(1 for i in items if i.practice_of_id is not None) >= rules.get("max_practice_turns", DEFAULT_SCORING["max_practice_turns"])
+
+
 def completion_state(items: list[LearningSessionItem], rules: dict | None = None) -> tuple[bool, int]:
     """(can complete, pending practice turns). Every turn must be resolved, and every revealed answer needs a
-    correctly answered re-practice turn (not in a stage of words: each word is played once, see stage_of_words).
+    correctly answered re-practice turn (not in a stage of words: each word is played once, see stage_of_words), as
+    long as the stage has re-practice turns left to give: without one nothing more can be asked, and the stage ends.
     Re-practice never rewrites the original result."""
     if any(i.state != "resolved" for i in items):
         pending = sum(1 for i in items if i.state != "resolved" and i.practice_of_id is not None)
         return False, pending
     if rules is not None and stage_of_words(rules):
+        return True, 0
+    if rules is not None and practice_turns_used_up(items, rules):
         return True, 0
     practiced = {i.practice_of_id for i in items if i.practice_of_id is not None and i.outcome in CORRECT}
     unpracticed = [i for i in items if i.outcome == "revealed" and i.practice_of_id is None and i.id not in practiced]
@@ -482,11 +491,13 @@ def catalog_ref(rules: dict) -> dict | None:
     entry = lc.lesson(ref["key"])
     if entry is None:  # a lesson no longer in the catalog: the stage still shows as it was
         return {"lesson": ref["key"], "title": None, "grade": ref["grade"], "game": ref["game"], "game_title": None,
-                "short_stage": ref.get("short_stage", False), "subject_name": None, "other_games": [], "next": None, "world": None}
+                "short_stage": ref.get("short_stage", False), "words_review": ref.get("words_review", False),
+                "subject_name": None, "other_games": [], "next": None, "world": None}
     lesson, spec = entry["lesson"], lc.game_spec(entry, ref["game"])
     following = lc.lesson(entry["next"]) if entry.get("next") else None
     return {"lesson": lesson["key"], "title": lesson["title"], "grade": entry["grade"], "game": ref["game"],
             "game_title": spec["title"] if spec else None, "short_stage": ref.get("short_stage", False),
+            "words_review": ref.get("words_review", False),
             "subject_name": lc.subject_name(entry["subject"], entry["grade"]), "world": lc.world_of(entry),
             "other_games": [{"game": g["game"], "title": g["title"]} for g in lesson.get("games", []) if g["game"] != ref["game"]]
             if lesson["status"] == "ready" else [],
@@ -874,7 +885,7 @@ def math_items(db: Session, user: User, topic: LearningTopic, game: dict, seed: 
 def create_session(db: Session, user: User, *, lesson: LearningLesson, mode: str, duration_minutes: int,
                    variant: str | None, device_zone: str, kind: str, idempotency_key: str | None,
                    review_keys: list[str] | None = None, start_paused: bool = False,
-                   archive_year: int | None = None) -> LearningSession:
+                   archive_year: int | None = None, words_review: bool = False) -> LearningSession:
     _tz(device_zone)
     if idempotency_key and (existing := db.scalar(select(LearningSession).where(
             LearningSession.user_id == user.id, LearningSession.client_request_id == idempotency_key))):
@@ -936,7 +947,9 @@ def create_session(db: Session, user: User, *, lesson: LearningLesson, mode: str
                      max_attempts=cg.MAX_ATTEMPTS.get(game["game_type"], DEFAULT_SCORING["max_attempts"]))
     if generator.get("lesson"):
         rules["lesson"] = {"key": generator["lesson"], "game": generator["game"], "grade": generator["grade"],
-                           "content": generator["content"], "short_stage": words_stage and stage_words < VOCAB_STAGE_WORDS}
+                           "content": generator["content"], "short_stage": words_stage and stage_words < VOCAB_STAGE_WORDS,
+                           # A review of the lesson's own words with no new word left: it can pass the game (lesson_api).
+                           "words_review": words_review}
         if words_stage:  # a short vocabulary stage is still the whole lesson (the reward rule counts it as a stage)
             rules["stage_turns"] = stage_words
     if discovery:
@@ -995,13 +1008,13 @@ REORDERED_ON_PRACTICE = {"choice_explain", "gate_choice"}
 def add_practice_turn(db: Session, s: LearningSession, items: list[LearningSessionItem], source: LearningSessionItem) -> bool:
     """Queue the same question again at the end of the stage (bounded per session), only with another question still to
     come before it: right after its answer was shown, the same question again would only be copied (and "Câu tiếp theo"
-    would seem to show the old question). The options come in another order."""
-    rules = _rules(s)
-    if sum(1 for i in items if i.practice_of_id is not None) >= rules["max_practice_turns"]:
-        return False
-    if not any(i.state in ("queued", "issued") and i.id != source.id for i in items):
+    would seem to show the old question). A question whose answer was revealed is the exception: the stage cannot
+    complete without a right re-practice of it, so it is queued even as the last one. The options come in another order."""
+    if practice_turns_used_up(items, _rules(s)):
         return False
     root = db.get(LearningSessionItem, source.practice_of_id) if source.practice_of_id else source
+    if root.outcome != "revealed" and not any(i.state in ("queued", "issued") and i.id != source.id for i in items):
+        return False
     answer = _loads(root.answer_json)
     prompt = answer.pop("first_prompt", None) or _loads(root.prompt_json)
     if root.kind in REORDERED_ON_PRACTICE and len(prompt.get("options") or []) > 1:
@@ -1400,13 +1413,15 @@ def grant_stage_reward(db: Session, user: User, s: LearningSession, now: datetim
             db.add(claim)
             db.flush()
     except IntegrityError:
+        claim = None  # the subject's stage reward was taken today; that says nothing about the daily task
+    if claim is None and not use_task:
         s.reward_status, s.reward_exp = "already_claimed", 0
         return
     db.scalar(select(User.id).where(User.id == user.id).with_for_update())  # serialize cap checks on PostgreSQL
     if use_task:
         # The stage completed the daily "learning" task: its task reward is given instead of (not on top of) the stage reward.
         db.add(Activity(user_id=user.id, kind=f"quest_{DAILY_LEARNING_TASK}"))
-        granted = award_exp(user, db, source="task", reference_id=f"quest:{DAILY_LEARNING_TASK}:{quest_day_start().date().isoformat()}",
+        granted = award_exp(user, db, source="task", reference_id=f"quest:{DAILY_LEARNING_TASK}:{days.today().isoformat()}",
                             requested=DAILY_TASK_BY_ID[DAILY_LEARNING_TASK]["exp"], daily_cap=settings.task_daily_exp_cap)
         status = "daily_task"
     else:
@@ -1414,7 +1429,8 @@ def grant_stage_reward(db: Session, user: User, s: LearningSession, now: datetim
         granted = award_exp(user, db, source="learning", reference_id=f"learning:{s.subject_id}:{local_date.isoformat()}",
                             requested=settings.learning_stage_exp, daily_cap=settings.task_daily_exp_cap, already_earned=earned)
         status = "granted" if granted == settings.learning_stage_exp else "capped" if granted else "daily_cap_reached"
-    claim.exp_amount = granted
+    if claim is not None:
+        claim.exp_amount = granted
     s.reward_status, s.reward_exp = status, granted
 
 
@@ -1453,12 +1469,25 @@ def settle_on_read(db: Session, s: LearningSession) -> None:
 IdempotencyKey = Annotated[str | None, Header(alias="Idempotency-Key", pattern=r"^[A-Za-z0-9_-]{8,64}$")]
 
 
-@router.post("/sessions", status_code=201, response_model=SessionOut, summary="Start a stage of a lesson")
+def check_lesson_grade(db: Session, user: User, lesson: LearningLesson) -> None:
+    """A lesson made for a school grade (Math: grade3, curriculum games: g3) is for that grade only, as the app offers it.
+    Outside school, and until a grade is given, there is no grade to keep to."""
+    if not user.school_grade or user.school_grade in curriculum.FREE_GRADES:
+        return
+    needed = education.level_grade(db.get(LearningLevel, lesson.level_id).code)
+    if needed is not None and needed != curriculum.grade_number(user.school_grade):
+        raise APIError(403, "grade_locked", education.GRADE_LOCKED)
+
+
+@router.post("/sessions", status_code=201, response_model=SessionOut, responses=education.errors(*education.AUTH, (403, "grade_locked"), (404, "lesson_not_found"), (409, "open_session_exists")), summary="Start a stage of a lesson (the catalog's have their own route)")
 def start_session(data: SessionCreate, idempotency_key: IdempotencyKey = None,
                   user: User = Depends(current_user), db: Session = Depends(get_db)):
     lesson = db.get(LearningLesson, data.lesson_id)
-    if lesson is None or lesson.status != "published":
+    # A lesson of the catalog is only started from its own route, which checks its grade and whether it is unlocked.
+    if lesson is None or lesson.status != "published" or lesson.code.startswith("cat."):
         raise APIError(404, "lesson_not_found", "Lesson not found")
+    education.sync(db, user)
+    check_lesson_grade(db, user, lesson)
     s = create_session(db, user, lesson=lesson, mode=data.mode, duration_minutes=data.duration_minutes,
                        variant=data.variant, device_zone=data.timezone, kind="lesson", idempotency_key=idempotency_key,
                        start_paused=data.start_paused)
@@ -1480,7 +1509,11 @@ def quick_start(data: QuickStart, idempotency_key: IdempotencyKey = None,
     education.sync(db, user)
     education.check_requested_grade(user, data.grade)
     grade = user.school_grade
-    if data.game in cg.GAMES or data.grade or data.level:
+    # The app names no grade for a word game: these draw from the grade's own word list (vocab_discovery), and grades
+    # 1–2 reach them from their English lessons (Ôn tập, and "Khám phá" after a level's celebration). Asked for by
+    # grade or level they follow the free games' list, like the others.
+    word_game = data.game in vocab_discovery.GAMES
+    if data.game in cg.GAMES or data.grade or data.level or (grade and not word_game):
         if not curriculum.offered(data.game, grade, data.level, math_levels(db)):
             raise APIError(409, "game_not_available", "This game has no content for this grade or level yet")
     if data.game in cg.GAMES:
@@ -1632,7 +1665,8 @@ def extend_session(session_id: int, data: ExtendInput, user: User = Depends(curr
 def complete_session(session_id: int, data: ControlInput, user: User = Depends(current_user), db: Session = Depends(get_db)):
     from . import learning_unlocks
     s = owned_session(db, user, session_id)
-    unlocks = s.catalog_lesson is not None and s.kind == "lesson" and s.archive_year is None
+    counts = s.kind == "lesson" or (_rules(s).get("lesson") or {}).get("words_review", False)  # can pass a game
+    unlocks = s.catalog_lesson is not None and counts and s.archive_year is None
     opened = lambda: learning_unlocks.pending(db, user.id, s.academic_year, lc.lesson(s.catalog_lesson)["subject"]) \
         if unlocks and lc.lesson(s.catalog_lesson) else []
     if s.status == "completed":  # finishing again (retry, other device) never adds EXP again, nor opens anything twice

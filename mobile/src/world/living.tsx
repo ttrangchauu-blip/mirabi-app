@@ -222,7 +222,9 @@ export const LivingPet = React.forwardRef<LivingPetHandle, {
   pet: string; level: number; size: number; x: number; y: number;
   /** Soft contact shadow: its offset and stretch follow the sun; `opacity` the light. */ shadow?: { dx: number; stretch: number; opacity: number };
   /** Driven from outside (the road going past on a walk). */ phase?: Animated.Value; walking?: boolean; facing?: 1 | -1; initialState?: PetState;
-}>(function LivingPet({ pet, level, size, x, y, shadow, phase, walking = false, facing = 1, initialState = 'idle' }, ref) {
+  /** Smaller the further back it stands: its scale at the feet line `farY`, full size at `nearY`. */ depth?: { farY: number; nearY: number; far: number };
+  /** Among its siblings: in front of what it has walked past. */ zIndex?: number;
+}>(function LivingPet({ pet, level, size, x, y, shadow, phase, walking = false, facing = 1, initialState = 'idle', depth, zIndex }, ref) {
   const { animate } = useWorldMotion();
   const [state, send] = usePetMachine(initialState);
   const values = useRef(newActValues()).current;
@@ -285,7 +287,8 @@ export const LivingPet = React.forwardRef<LivingPetHandle, {
   const drawn = hasSprite(pet, level, 'walk');
   const motes = useWorldMotion().level === 'full' && level > 0 && state === 'idle';
   return (
-    <Animated.View pointerEvents="none" style={{ position: 'absolute', left: 0, top: 0, width: size, height: size, transform: [{ translateX: left }, { translateY: top }] }} testID={`living-pet-${state}`}
+    <Animated.View pointerEvents="none" style={{ position: 'absolute', left: 0, top: 0, width: size, height: size, zIndex, transformOrigin: '50% 100%', transform: [{ translateX: left }, { translateY: top },
+      ...(depth ? [{ scale: top.interpolate({ inputRange: [depth.farY - size, depth.nearY - size], outputRange: [depth.far, 1], extrapolate: 'clamp' }) }] : [])] }} testID={`living-pet-${state}`}
       accessible accessibilityLabel={`${petById(pet).name}: ${STATE_WORDS[state]}`}>
       {shadow ? <View style={[s.shadow, { left: size * 0.22 + shadow.dx, bottom: 1, width: size * 0.56, height: size * 0.07, opacity: Math.min(0.28, shadow.opacity * 1.4), transform: [{ scaleX: shadow.stretch }] }]} /> : null}
       <Animated.View style={{ transformOrigin: '50% 100%', transform: actTransform(values, size) }}>

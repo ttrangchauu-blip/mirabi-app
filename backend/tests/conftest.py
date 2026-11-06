@@ -15,6 +15,8 @@ os.environ.update({
     # School-year promotions are driven by the tests (education.sweep / the per-request check).
     "GRADE_PROMOTION_SWEEP_SECONDS": "0",
     "EMAIL_BACKEND": "disabled",
+    # Tests compute "today" in UTC; tests of the daily calendar itself set another zone (test_core_flows.py).
+    "DAILY_RESET_TIMEZONE": "UTC",
 })
 
 import pytest

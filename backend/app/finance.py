@@ -9,6 +9,8 @@
 - `client_ref` makes a retried save count once.
 - Only the owner ever reads any of it: no friend, town or public endpoint shows money, and amounts are never logged.
 - No advice: the summary only adds up what was recorded.
+- A month is the user's own calendar month (`tz` sent by the app, else their Pomodoro settings' zone), like the days of
+  life.py: money entries keep the zone of where the user was, not the server's daily calendar (days.py).
 """
 from collections import defaultdict
 from datetime import date, datetime, timedelta, timezone
@@ -21,6 +23,7 @@ from sqlalchemy.orm import Session
 from .companion import lock_daily_goals
 from .db import get_db
 from .errors import APIError
+from .life import zone_of
 from .life_access import life_user
 from .models import FinanceBudget, FinanceCategory, FinanceGoal, FinanceTransaction, User, as_utc, utcnow
 from .schemas import (FinanceBudgetUpsert, FinanceCategoryCreate, FinanceGoalCreate, FinanceGoalUpdate,
@@ -154,6 +157,11 @@ def update_goal(goal_id: int, data: FinanceGoalUpdate, user: User = Depends(life
     for name in ("name", "target_amount", "plant", "status"):
         if name in fields and getattr(data, name) is None:
             raise APIError(422, "field_required", f"{name} cannot be empty")
+    if data.status == "active" and goal.status != "active":
+        active = db.scalar(select(func.count()).select_from(FinanceGoal).where(FinanceGoal.user_id == user.id,
+                                                                               FinanceGoal.status == "active")) or 0
+        if active >= MAX_ACTIVE_GOALS:
+            raise APIError(409, "too_many_goals", f"At most {MAX_ACTIVE_GOALS} active goals")
     for name in ("name", "target_amount", "target_date", "plant", "status"):
         if name in fields:
             setattr(goal, name, getattr(data, name))
@@ -165,17 +173,18 @@ def update_goal(goal_id: int, data: FinanceGoalUpdate, user: User = Depends(life
 # ---------------------------------------------------------------------------- transactions
 @router.get("/transactions")
 def list_transactions(goal_id: int | None = None, period: str | None = Query(default=None, pattern=r"^\d{4}-(0[1-9]|1[0-2])$"),
-                      transaction_type: str | None = Query(default=None, pattern=r"^(deposit|withdraw|income|expense)$"),
+                      transaction_type: str | None = Query(default=None, pattern=r"^(deposit|withdraw|income|expense)(,(deposit|withdraw|income|expense))*$"),
                       limit: int = Query(default=50, ge=1, le=200), before: int | None = None,
+                      tz: str | None = Query(default=None, max_length=80),
                       user: User = Depends(life_user), db: Session = Depends(get_db)):
     where = [FinanceTransaction.user_id == user.id, FinanceTransaction.deleted_at.is_(None)]
     if goal_id is not None:
         own_goal(db, user, goal_id)
         where.append(FinanceTransaction.goal_id == goal_id)
     if transaction_type:
-        where.append(FinanceTransaction.transaction_type == transaction_type)
+        where.append(FinanceTransaction.transaction_type.in_(transaction_type.split(",")))
     if period:
-        start, end = month_bounds(period)
+        start, end = month_bounds(period, user_zone(db, user, tz))
         where += [FinanceTransaction.occurred_at >= start, FinanceTransaction.occurred_at < end]
     if before:
         where.append(FinanceTransaction.id < before)
@@ -301,15 +310,23 @@ def create_category(data: FinanceCategoryCreate, user: User = Depends(life_user)
     return {"id": row.id, "name": row.name, "type": row.type, "icon": row.icon, "custom": True}
 
 
-def month_bounds(period: str) -> tuple[datetime, datetime]:
+def user_zone(db: Session, user: User, tz: str | None):
+    """The zone a month is counted in: what the app sends, else the user's Pomodoro settings' zone (life.zone_of)."""
+    zone = zone_of(db, user, tz)
+    db.commit()  # preferences() may have created the user's settings row
+    return zone
+
+
+def month_bounds(period: str, zone) -> tuple[datetime, datetime]:
+    """A month on the user's own calendar, as the UTC instants stored timestamps compare with."""
     year, month = int(period[:4]), int(period[5:7])
-    start = datetime(year, month, 1, tzinfo=timezone.utc)
-    end = datetime(year + (month == 12), month % 12 + 1, 1, tzinfo=timezone.utc)
-    return start, end
+    start = datetime(year, month, 1, tzinfo=zone)
+    end = datetime(year + (month == 12), month % 12 + 1, 1, tzinfo=zone)
+    return start.astimezone(timezone.utc), end.astimezone(timezone.utc)
 
 
-def spent_by_category(db: Session, user: User, period: str) -> dict[int | None, dict[str, int]]:
-    start, end = month_bounds(period)
+def spent_by_category(db: Session, user: User, period: str, zone) -> dict[int | None, dict[str, int]]:
+    start, end = month_bounds(period, zone)
     rows = db.execute(select(FinanceTransaction.category_id, FinanceTransaction.transaction_type,
                              func.coalesce(func.sum(FinanceTransaction.amount), 0))
                       .where(FinanceTransaction.user_id == user.id, FinanceTransaction.deleted_at.is_(None),
@@ -322,8 +339,8 @@ def spent_by_category(db: Session, user: User, period: str) -> dict[int | None, 
     return out
 
 
-def budgets_view(db: Session, user: User, period: str) -> list[dict]:
-    spent = spent_by_category(db, user, period)
+def budgets_view(db: Session, user: User, period: str, zone) -> list[dict]:
+    spent = spent_by_category(db, user, period, zone)
     categories = {c.id: c for c in categories_of(db, user)}
     rows = db.scalars(select(FinanceBudget).where(FinanceBudget.user_id == user.id, FinanceBudget.period == period))
     out = []
@@ -336,18 +353,22 @@ def budgets_view(db: Session, user: User, period: str) -> list[dict]:
     return out
 
 
-def this_month() -> str:
-    return utcnow().strftime("%Y-%m")
+def this_month(zone) -> str:
+    return utcnow().astimezone(zone).strftime("%Y-%m")
 
 
 @router.get("/budgets")
 def list_budgets(period: str | None = Query(default=None, pattern=r"^\d{4}-(0[1-9]|1[0-2])$"),
+                 tz: str | None = Query(default=None, max_length=80),
                  user: User = Depends(life_user), db: Session = Depends(get_db)):
-    return budgets_view(db, user, period or this_month())
+    zone = user_zone(db, user, tz)
+    return budgets_view(db, user, period or this_month(zone), zone)
 
 
 @router.post("/budgets")
-def upsert_budget(data: FinanceBudgetUpsert, user: User = Depends(life_user), db: Session = Depends(get_db)):
+def upsert_budget(data: FinanceBudgetUpsert, tz: str | None = Query(default=None, max_length=80),
+                  user: User = Depends(life_user), db: Session = Depends(get_db)):
+    zone = user_zone(db, user, tz)
     usable_category(db, user, data.category_id, "expense")
     row = db.scalar(select(FinanceBudget).where(FinanceBudget.user_id == user.id, FinanceBudget.category_id == data.category_id,
                                                 FinanceBudget.period == data.period))
@@ -361,15 +382,17 @@ def upsert_budget(data: FinanceBudgetUpsert, user: User = Depends(life_user), db
                                                         FinanceBudget.period == data.period))
     row.limit_amount = data.limit_amount
     db.commit()
-    return next(b for b in budgets_view(db, user, data.period) if b["id"] == row.id)
+    return next(b for b in budgets_view(db, user, data.period, zone) if b["id"] == row.id)
 
 
 @router.get("/summary")
 def summary(period: str | None = Query(default=None, pattern=r"^\d{4}-(0[1-9]|1[0-2])$"),
+            tz: str | None = Query(default=None, max_length=80),
             user: User = Depends(life_user), db: Session = Depends(get_db)):
     """The month's recorded income and expenses by category, the budgets and the goals. Only sums, no advice."""
-    period = period or this_month()
-    spent = spent_by_category(db, user, period)
+    zone = user_zone(db, user, tz)
+    period = period or this_month(zone)
+    spent = spent_by_category(db, user, period, zone)
     categories = {c.id: c for c in categories_of(db, user)}
     income = sum(v["income"] for v in spent.values())
     expense = sum(v["expense"] for v in spent.values())
@@ -378,5 +401,5 @@ def summary(period: str | None = Query(default=None, pattern=r"^\d{4}-(0[1-9]|1[
                           for cid, v in spent.items()), key=lambda x: -(x["expense"] + x["income"]))
     goals = [goal_view(db, g) for g in db.scalars(select(FinanceGoal).where(FinanceGoal.user_id == user.id, FinanceGoal.status == "active"))]
     return {"period": period, "income": income, "expense": expense, "net": income - expense, "by_category": by_category,
-            "budgets": budgets_view(db, user, period), "goals": goals,
+            "budgets": budgets_view(db, user, period, zone), "goals": goals,
             "saved_total": sum(g["saved_amount"] for g in goals), "target_total": sum(g["target_amount"] for g in goals)}

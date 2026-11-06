@@ -40,7 +40,10 @@ export type RoomSnapshot = {
   status: 'open' | 'closed'; state: RoomState; host_id: number; focus_minutes: number; break_minutes: number; cycles: number;
   max_members: number; member_count: number; version: number; members: RoomMember[]; session: RoomSession | null;
   last_session_id: number | null; team_quests: RoomQuestBrief[]; server_time: string;
+  /** Your own numbers when you hide them from others; `members` shows them as hidden, like everyone else sees them. */
+  own_stats?: OwnStats;
 };
+export type OwnStats = { focus_seconds: number; cycles_completed: number };
 export type JoinRefusal = 'room_closed' | 'room_unavailable' | 'room_invite_only' | 'room_full';
 export type RoomPreview = {
   id: number; name: string; goal: string | null; subject: string; visibility: Visibility; status: 'open' | 'closed';
@@ -112,6 +115,7 @@ export type RealtimeMessage =
   | { type: 'error'; code: string; room_id?: number }
   | { type: 'room.snapshot' | 'room.updated'; room_id: number; version: number; event?: string; room: RoomSnapshot }
   | { type: 'room.removed'; room_id: number }
+  | { type: 'room.own_stats'; room_id: number; stats: OwnStats }
   | { type: 'room.reaction'; room_id: number; user_id: number; reaction: ReactionKey; at: string }
   | { type: 'room.message'; room_id: number; message: ChatMessage }
   | { type: 'room.message_deleted'; room_id: number; message_id: number; removed_by: 'sender' | 'host' }

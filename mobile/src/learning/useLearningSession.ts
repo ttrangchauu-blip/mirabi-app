@@ -30,7 +30,8 @@ type Handler = (response: EventResponse) => void;
  * Keeps the game in sync with the backend, which owns the session. Every request goes through `run`:
  * - only one at a time (taps while a request is in flight are ignored, so nothing is sent twice by accident);
  * - on a network failure the game pauses, what the user typed stays, and the same request (same event id) is retried
- *   every few seconds or on "Thử lại" — the backend recognises the retry, so nothing is counted twice;
+ *   every few seconds or on "Thử lại" — the backend recognises the retry, so nothing is counted twice. What is asked
+ *   meanwhile (a pause, leaving the app) waits behind it, so nothing is lost and everything arrives in order;
  * - if the session was paused or ended elsewhere (another device), it reloads the real state.
  * Every start (first play, "Chơi lại", "Tiếp tục học") goes through a 3-2-1 countdown, then "Bắt đầu!": only then
  * does the backend resume the session, so the clock, the targets, the answers and the score all wait for it.
@@ -55,7 +56,7 @@ export function useLearningSession(initial: LearningSession, notify: (message: s
   const going = useRef(false); // "Bắt đầu!": the resume is on its way
   const busyRef = useRef(false);
   const inflight = useRef<Promise<unknown>>(Promise.resolve());
-  const pending = useRef<{ call: Call; onDone?: Handler } | null>(null);
+  const pending = useRef<{ call: Call; onDone?: Handler }[]>([]); // what waits for the network, oldest first
   const sessionRef = useRef(session);
   sessionRef.current = session;
 
@@ -82,27 +83,29 @@ export function useLearningSession(initial: LearningSession, notify: (message: s
   /** Pause, resume, end, extend, finish: never dropped. If another request is on its way, wait for it first. */
   const control = useCallback(async (call: Call, onDone?: Handler): Promise<EventResponse | null> => {
     while (busyRef.current) await inflight.current.catch(() => null);
+    if (pending.current.length) { pending.current.push({ call, onDone }); return null; } // after what is already waiting
     return run(call, onDone);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const send = async (call: Call, onDone?: Handler): Promise<EventResponse | null> => {
+    const settled = () => { pending.current = pending.current.filter((job) => job.call !== call); };
     try {
       const response = await call();
-      pending.current = null;
+      settled();
       setOffline(false);
       apply(response.session);
       onDone?.(response);
       return response;
     } catch (e) {
       if (e instanceof NetworkError) {
-        pending.current = { call, onDone };
+        if (!pending.current.some((job) => job.call === call)) pending.current.push({ call, onDone });
         setOffline(true);
       } else if (e instanceof ApiError && RELOAD_CODES.has(e.code)) {
-        pending.current = null;
+        settled();
         if (e.code === 'session_ended' || e.code === 'session_not_found') notify('Chặng học đã kết thúc (có thể trên thiết bị khác).', 'info');
         await reload();
       } else {
-        pending.current = null;
+        settled();
         notify(errorMessage(e), 'error');
       }
       return null;
@@ -112,15 +115,18 @@ export function useLearningSession(initial: LearningSession, notify: (message: s
     }
   };
 
-  /** Re-send the request that failed for lack of network, with the same event id. */
+  /** Re-send what failed for lack of network, in order, each with its own event id. The game counts down again, unless
+   * what was sent last left it paused: a pause asked offline is still a pause. */
   const retry = useCallback(async () => {
-    const job = pending.current;
-    if (job) {
+    if (!pending.current.length) { await reload(); return; }
+    let last: EventResponse | null = null;
+    while (pending.current.length) {
+      const job = pending.current[0];
       const done = await run(job.call, job.onDone);
-      if (done && !instant) setCountdown(COUNTDOWN_FROM);
-    } else {
-      await reload();
+      if (done) last = done;
+      else if (pending.current[0] === job) break; // still no network, or another request is on its way
     }
+    if (last && last.session.status !== 'paused' && !instant) setCountdown(COUNTDOWN_FROM);
   }, [reload, run, instant]);
 
   useEffect(() => {
@@ -183,7 +189,7 @@ export function useLearningSession(initial: LearningSession, notify: (message: s
       if (done) return;
       going.current = false;
       // No network: the retry counts down again once it gets through. Any other refusal: back to the pause menu.
-      if (!pending.current) setCountdown(null);
+      if (!pending.current.length) setCountdown(null);
     });
   }, [countdown, ready, foreground, control, api]);
 

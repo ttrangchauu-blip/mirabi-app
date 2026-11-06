@@ -201,12 +201,21 @@ function ItemCard({ item, onPress }: { item: InventoryItem; onPress: () => void 
   );
 }
 
-function historyLine(h: ItemHistory): string {
-  if (h.kind === 'walk_reward') return `Nhận ${h.delta} từ chuyến khám phá${h.location ? ` ${h.location.name}` : ''}`;
-  if (h.kind === 'legacy') return `Nhận ${h.delta} từ những chuyến đi trước`;
-  if (h.kind === 'plant') return 'Đã trồng 1 ở Vườn nhà';
+export function historyLine(h: ItemHistory): string {
   const room = h.ref === 'room:focus' ? ROOM_NAMES.focus : ROOM_NAMES.personal;
-  return h.kind === 'place' ? `Đặt 1 vào ${room}` : `Cất 1 về kho từ ${room}`;
+  switch (h.kind) {
+    case 'walk_reward': return `Nhận ${h.delta} từ chuyến khám phá${h.location ? ` ${h.location.name}` : ''}`;
+    case 'legacy': return `Nhận ${h.delta} từ những chuyến đi trước`;
+    case 'adventure': return `Nhận ${h.delta} từ Phiêu lưu cuộc sống`;
+    case 'work_chest': return `Nhận ${h.delta} từ rương công việc`;
+    case 'gift_in': return `Nhận ${h.delta} từ quà của bạn bè`;
+    case 'gift_out': return `Đã tặng ${-h.delta} cho bạn bè`;
+    case 'plant': return 'Đã trồng 1 ở Vườn nhà';
+    case 'place': return `Đặt 1 vào ${room}`;
+    case 'store': return `Cất 1 về kho từ ${room}`;
+    // A kind added later: what changed, never another kind's words.
+    default: return h.delta >= 0 ? `Nhận ${h.delta}` : `Đã dùng ${-h.delta}`;
+  }
 }
 
 /** One item: its picture, description, how many are owned, placed and free, where its copies are, when it came, and
@@ -277,7 +286,7 @@ function ItemSheet({ item, offline, placeInto, onClose, onSeen, onPlace, onPlant
           <Text style={s.section}>Lịch sử nhận</Text>
           {detail ? detail.history.length ? detail.history.map((h, i) => (
             <View key={i} style={s.history}>
-              <Ionicons name={h.kind === 'walk_reward' || h.kind === 'legacy' ? 'gift-outline' : h.kind === 'plant' ? 'leaf-outline' : 'home-outline'} size={16} color={t.accent} />
+              <Ionicons name={h.kind === 'plant' ? 'leaf-outline' : h.kind === 'place' || h.kind === 'store' ? 'home-outline' : 'gift-outline'} size={16} color={t.accent} />
               <Text style={s.historyText}>{historyLine(h)}</Text>
               <Text style={s.historyDate}>{date(h.at)}</Text>
             </View>

@@ -4,7 +4,7 @@ import { ApiError } from '../api/client';
 import { togetherApi } from './api';
 import type { ConnectionStatus, RealtimeClient } from './realtime';
 import { anchorFor, newerSnapshot, remainingMs, TimerAnchor } from './timer';
-import type { ReactionKey, RoomSnapshot } from './types';
+import type { OwnStats, ReactionKey, RoomSnapshot } from './types';
 
 /** Heartbeat + refresh interval while the socket is unavailable. The socket's own ping covers presence otherwise. */
 export const FALLBACK_POLL_MS = 15000;
@@ -24,11 +24,13 @@ export function useStudyRoom(roomId: number, client: RealtimeClient, initial: Ro
   const [endedSessionId, setEndedSessionId] = useState<number | null>(null);
   const [connection, setConnection] = useState<ConnectionStatus>(client.status);
   const [reactions, setReactions] = useState<LiveReaction[]>([]);
+  const [ownStats, setOwnStats] = useState<OwnStats | null>(null);
   const current = useRef<RoomSnapshot | null>(initial);
   const mounted = useRef(true);
   const reactionKey = useRef(0);
 
   const apply = useCallback((snap: RoomSnapshot) => {
+    if (mounted.current && snap.id === roomId && snap.own_stats) setOwnStats(snap.own_stats);
     if (!mounted.current || snap.id !== roomId || !newerSnapshot(current.current, snap)) return;
     const previous = current.current;
     current.current = snap;
@@ -57,6 +59,7 @@ export function useStudyRoom(roomId: number, client: RealtimeClient, initial: Ro
       if (!('room_id' in m) || m.room_id !== roomId) return;
       if (m.type === 'room.snapshot' || m.type === 'room.updated') apply(m.room);
       else if (m.type === 'room.removed') setGone(true);
+      else if (m.type === 'room.own_stats') setOwnStats(m.stats);
       else if (m.type === 'room.reaction') {
         const key = ++reactionKey.current;
         setReactions((list) => [...list.slice(-5), { key, userId: m.user_id, reaction: m.reaction }]);
@@ -95,6 +98,6 @@ export function useStudyRoom(roomId: number, client: RealtimeClient, initial: Ro
     return result;
   }, [apply]);
 
-  return { room, anchor, error, gone, endedSessionId, connection, reactions, refresh, apply, act,
+  return { room, anchor, error, gone, endedSessionId, connection, reactions, ownStats, refresh, apply, act,
     clearEnded: () => setEndedSessionId(null) };
 }

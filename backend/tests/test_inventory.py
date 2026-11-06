@@ -282,6 +282,73 @@ def test_a_small_pot_saved_in_both_rooms_before_copies_keeps_one_and_stores_the_
     assert db.scalar(select(func.count()).select_from(PlacedItem)) == 1
 
 
+def test_a_copy_the_room_no_longer_draws_goes_back_to_the_storage(client, auth, db):
+    """A top item with nothing left to stand on is not drawn: it must be free again, not "placed" where nobody sees it."""
+    user_id = me(db).id
+    variant = give(db, user_id, "story_book", 1)
+    data = room(client, auth)
+    desk = next(p for p in data["room"]["layout"]["items"] if pet_room.art()["items"][p["item"]].get("tops"))
+    x0, x1, y = pet_room.top_lines(desk)[0]
+    book = {"item": "story_book", "variant": variant, "x": round((x0 + x1) / 2), "y": round(y)}
+    saved = save(client, auth, data, [book])
+    assert saved.status_code == 200, saved.json()
+    assert items(client, auth)[("story_book", variant)]["placed"] == 1
+    # The room as an older canvas could leave it: no desk or shelf at all, the copy still stored.
+    row = db.get(PetRoom, user_id)
+    db.refresh(row)
+    stored = pet_room.json.loads(row.items_json)
+    stored["items"] = [p for p in stored["items"] if not pet_room.art()["items"][p["item"]].get("tops")]
+    row.items_json = pet_room.json.dumps(stored)
+    version = row.version
+    db.commit()
+
+    opened = room(client, auth)
+    assert "story_book" not in [p["item"] for p in opened["room"]["layout"]["items"]]
+    stack = items(client, auth)[("story_book", variant)]
+    assert (stack["owned"], stack["placed"], stack["available"]) == (1, 0, 1)
+    assert db.scalar(select(func.count()).select_from(PlacedItem)) == 0
+    assert opened["room"]["version"] == version + 1
+    db.expire_all()
+    kept = pet_room.json.loads(db.get(PetRoom, user_id).items_json)["items"]
+    assert "story_book" not in [p["item"] for p in kept]  # never claimed again as an uncounted placement
+    assert room(client, auth)["room"]["version"] == version + 1  # settled: reading again changes nothing
+    kinds = [e.kind for e in db.scalars(select(InventoryEvent).where(InventoryEvent.item_id == "story_book"))]
+    assert kinds.count("place") == 1 and kinds.count("store") == 1
+
+
+def test_a_found_decoration_in_a_fixed_slot_room_becomes_a_copy_when_the_room_opens(client, auth, db):
+    user_id = me(db).id
+    room(client, auth)
+    give(db, user_id, "small_pot", 1)
+    row = db.get(PetRoom, user_id)
+    row.items_json = pet_room.json.dumps({"rug": "rug_peach", "plant": "plant_small_pot"})
+    db.commit()
+    pots = [p for p in room(client, auth)["room"]["layout"]["items"] if p["item"] == "small_pot"]
+    assert len(pots) == 1 and pots[0]["uid"]
+    stack = items(client, auth)[("small_pot", "default")]
+    assert (stack["owned"], stack["placed"], stack["available"]) == (1, 1, 0)  # not free to go in a second room too
+    # Stored the way rooms are today, with the rug it already had, and saving it works.
+    data = room(client, auth)
+    assert [p["item"] for p in data["room"]["layout"]["items"]] == ["rug_round", "small_pot"]
+    assert save(client, auth, data, []).status_code == 200
+    focus = client.get("/api/focus-room", headers=auth).json()
+    assert save(client, auth, focus, [{**pot(560), "y": 420}], url="/api/focus-room").json()["code"] == "not_enough_items"
+
+
+def test_a_found_decoration_in_a_fixed_slot_room_with_no_free_copy_goes_back_to_the_storage(client, auth, db):
+    user_id = me(db).id
+    room(client, auth)
+    give(db, user_id, "small_pot", 1)
+    focus = client.get("/api/focus-room", headers=auth).json()
+    assert save(client, auth, focus, [{**pot(560), "y": 420}], url="/api/focus-room").status_code == 200
+    row = db.get(PetRoom, user_id)
+    row.items_json = pet_room.json.dumps({"rug": "rug_peach", "plant": "plant_small_pot"})
+    db.commit()
+    data = room(client, auth)
+    assert [p["item"] for p in data["room"]["layout"]["items"]] == ["rug_round"]
+    assert save(client, auth, data, []).status_code == 200  # no longer refused forever with not_enough_items
+
+
 # ---------------------------------------------------------------------------- the garden
 def test_planting_uses_one_seed_once_per_request_and_only_in_an_empty_plot(client, auth, db):
     give(db, me(db).id, "seed_daisy", 2)
@@ -299,7 +366,7 @@ def test_planting_uses_one_seed_once_per_request_and_only_in_an_empty_plot(clien
     assert plant(2, "request-0005", "shell").json()["code"] == "not_a_seed"
     assert plant(9, "request-0006").status_code == 404
     view = client.get("/api/garden", headers=auth).json()
-    assert [p["empty"] for p in view["plots"]] == [False, False, True, True, True, True] and view["seeds"] == []
+    assert [p["empty"] for p in view["plots"]] == [False, False] + [True] * 7 and view["seeds"] == []
     assert view["plots"][0]["stage"] == 0 and view["plots"][0]["name"] == "Hạt hoa cúc"
     assert client.post("/api/garden/plots/0/clear", headers=auth).json()["code"] == "not_grown"
 

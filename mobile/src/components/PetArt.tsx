@@ -163,7 +163,7 @@ export function SpriteCycle({ source, size: rawSize, layout: { cols, rows, cycle
   // Pinned to the window's top-left corner: left to flex layout, a sheet taller than its window gets shifted.
   return <Animated.View style={{ width: size, height: size, overflow: 'hidden' }}>
     {!loaded && placeholder && <Image source={placeholder} style={{ position: 'absolute', left: 0, top: 0, width: size, height: size }} resizeMode="contain" />}
-    <Animated.Image source={source} onLoad={onLoad} style={{ position: 'absolute', left: 0, top: 0, width: size * cols, height: size * rows, opacity: loaded ? 1 : 0, transform: [{ translateX }, { translateY }] }} />
+    <Animated.Image source={source} onLoad={onLoad} onError={once ? () => done.current?.() : undefined} style={{ position: 'absolute', left: 0, top: 0, width: size * cols, height: size * rows, opacity: loaded ? 1 : 0, transform: [{ translateX }, { translateY }] }} />
   </Animated.View>;
 }
 

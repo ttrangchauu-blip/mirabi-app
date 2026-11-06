@@ -1,6 +1,6 @@
 """Daily quests and the companion's daily walk (Pet Adventure).
 
-When every goal of the (UTC) day is done, the pet automatically starts one eight-hour walk. Today's goals are the
+When every goal of the day (days.py) is done, the pet automatically starts one eight-hour walk. Today's goals are the
 daily quests plus the user's own tasks scheduled for today (the Home "Nhiệm vụ hằng ngày" card): a task added before
 the walk starts must be done too; once the walk has started, nothing added later changes it or starts another one
 that day. The check reads the database under a per-user lock that adding a task also takes, so the two never
@@ -24,6 +24,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy import func, select, update
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
+from . import days
 from .config import settings
 from .db import get_db
 from .errors import APIError
@@ -32,7 +33,7 @@ from . import items_catalog as cat
 from .models import Activity, CommunityPost, ExpEvent, PetEvolution, PetWalk, StudySession, User, WalkReward, as_utc, utcnow
 from .schemas import PetRoomUpdate
 from .security import current_user
-from .progression import awaiting_hatch, award_exp, daily_exp_remaining, hatch, level_for_exp, SYSTEM_TASK_EXP
+from .progression import awaiting_hatch, award_exp, catch_up_level, daily_exp_remaining, hatch, level_for_exp, lock_user, SYSTEM_TASK_EXP
 from .profile import DAILY_TASK_BY_ID
 
 log = logging.getLogger("refmi.companion")
@@ -78,8 +79,7 @@ ROOM_ITEMS = [
     {"id": "poster", "name": "Tranh mơ ước", "category": "Treo tường", "cost": 180},
 ]
 
-def day_start():
-    return utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+day_start = days.day_start
 
 def daily_quests(user: User, db: Session) -> list[dict]:
     since = day_start()
@@ -117,17 +117,20 @@ def complete_quest(quest_id: str, user: User = Depends(current_user), db: Sessio
     if not (is_selected_task or is_legacy_task):
         raise APIError(404, "quest_not_found", "Quest not found")
     since = day_start()
+    # Under the per-user lock: of several taps at once, one completes the quest and the others see it done.
+    lock_daily_goals(db, user.id)
     exists = db.scalar(select(Activity.id).where(Activity.user_id == user.id,
         Activity.kind == f"quest_{quest_id}", Activity.created_at >= since).limit(1))
     awarded = 0
     if not exists:
         db.add(Activity(user_id=user.id, kind=f"quest_{quest_id}"))
         awarded = award_exp(
-            user, db, source="task", reference_id=f"quest:{quest_id}:{utcnow().date().isoformat()}",
+            user, db, source="task", reference_id=f"quest:{quest_id}:{days.today().isoformat()}",
             requested=DAILY_TASK_BY_ID[quest_id]["exp"] if is_selected_task else SYSTEM_TASK_EXP,
             daily_cap=settings.task_daily_exp_cap,
         )
-        db.commit()
+    db.commit()
+    if not exists:
         maybe_start_walk(user, db)
     return {"quests": daily_quests(user, db), "awarded_exp": awarded, "already_completed": bool(exists),
             "daily_exp_remaining": daily_exp_remaining(user, db, source="task", daily_cap=settings.task_daily_exp_cap)}
@@ -136,10 +139,10 @@ def latest_walk(user: User, db: Session) -> PetWalk | None:
     return db.scalar(select(PetWalk).where(PetWalk.user_id == user.id).order_by(PetWalk.id.desc()).limit(1))
 
 def today_goals(user: User, db: Session) -> list[dict]:
-    """What the walk waits for today: the daily quests and the user's own tasks scheduled for today (UTC day, like the
-    quests and the Home card). Tasks of other days never count."""
+    """What the walk waits for today: the daily quests and the user's own tasks scheduled for today (the Home card).
+    Tasks of other days never count."""
     from .tasks import scheduled_occurrences  # tasks imports this module
-    day = day_start().date()
+    day = days.today()
     own = [{"id": f"task:{t['occurrence_id']}", "progress": int(t["completed"]), "target": 1}
            for t in scheduled_occurrences(user, day, day, db)]
     return daily_quests(user, db) + own
@@ -168,13 +171,8 @@ def current_walk_status(user: User, db: Session, walk: PetWalk | None) -> str:
     return walk_status(walk, today_goals(user, db), awaiting_hatch(pet_progress(user, db)))
 
 def lock_daily_goals(db: Session, user_id: int) -> None:
-    """Serialize, per user, what decides the day's walk: adding a task and starting the walk. Held until the next
-    commit or rollback. PostgreSQL locks the user's row; SQLite has no row locks, so a write that changes nothing
-    takes its database write lock instead."""
-    if db.get_bind().dialect.name == "sqlite":
-        db.execute(update(User).where(User.id == user_id).values(id=User.id).execution_options(synchronize_session=False))
-    else:
-        db.scalar(select(User.id).where(User.id == user_id).with_for_update())
+    """Serialize, per user, what decides the day's walk: adding a task and starting the walk."""
+    lock_user(db, user_id)
 
 def maybe_start_walk(user: User, db: Session) -> PetWalk | None:
     """Start the day's eight-hour walk once every goal of today is done; safe to call repeatedly, concurrently, on
@@ -192,7 +190,7 @@ def maybe_start_walk(user: User, db: Session) -> PetWalk | None:
         return current
 
     now = utcnow()
-    day = now.date().isoformat()
+    day = days.today(now).isoformat()
     # This path is shared by explicit quest completion, focus, lesson and share,
     # so the milestone cannot be missed depending on which screen finishes last.
     if not db.scalar(select(ExpEvent.id).where(ExpEvent.user_id == user.id,
@@ -203,7 +201,7 @@ def maybe_start_walk(user: User, db: Session) -> PetWalk | None:
     record_event(db, user, "first_daily_quests", "first:daily-quests", at=now,
                  result="Hoàn thành toàn bộ nhiệm vụ trong ngày")
     walk = PetWalk(user_id=user.id, item_id=CATALOG_GIFT, location_id=pick_location(), started_at=now,
-                   returns_at=now + timedelta(minutes=settings.pet_walk_minutes), task_cycle_id=now.date().isoformat())
+                   returns_at=now + timedelta(minutes=settings.pet_walk_minutes), task_cycle_id=day)
     db.add(walk)
     try:
         # A unique user/cycle index protects against overlapping task-completion requests.
@@ -281,23 +279,28 @@ def grant_rewards(db: Session, walk: PetWalk, user: User, now: datetime) -> list
 def settle_walk(db: Session, walk_id: int, now: datetime | None = None) -> bool:
     """Grant a finished walk's rewards in one transaction. False if it isn't back or was already granted."""
     now = now or utcnow()
+    # The user's lock before the walk's row, the order of everything else that takes both (confirming the gift popup):
+    # the other way round, a grant and a confirmation deadlock on PostgreSQL.
+    user_id = db.scalar(select(PetWalk.user_id).where(PetWalk.id == walk_id))
+    if user_id is None:
+        return False
+    lock_user(db, user_id)
     with db.begin_nested():
         # Claiming the walk first makes the grant happen once, however many requests or workers race here.
         claimed = db.execute(update(PetWalk).where(
             PetWalk.id == walk_id, PetWalk.rewarded_at.is_(None), PetWalk.returns_at <= now,
-        ).values(rewarded_at=now).execution_options(synchronize_session=False))
-        if claimed.rowcount != 1:
-            return False
-        walk = db.get(PetWalk, walk_id, populate_existing=True)
-        user = db.get(User, walk.user_id)
-        inv.migrate_legacy(db, user.id)  # so "Mới" is decided against everything the user had
-        walk.reward_exp = award_exp(user, db, source="pet_adventure", reference_id=f"walk:{walk.id}",
-                                    requested=ADVENTURE_EXP, daily_cap=UNLIMITED_ADVENTURE_EXP_CAP) \
-            if walk.item_id == EXP_GIFT else 0
-        walk.location_id = walk_location(walk)
-        walk.rewards = json.dumps(grant_rewards(db, walk, user, now))
+        ).values(rewarded_at=now).execution_options(synchronize_session=False)).rowcount == 1
+        if claimed:
+            walk = db.get(PetWalk, walk_id, populate_existing=True)
+            user = db.get(User, walk.user_id)
+            inv.migrate_legacy(db, user.id)  # so "Mới" is decided against everything the user had
+            walk.reward_exp = award_exp(user, db, source="pet_adventure", reference_id=f"walk:{walk.id}",
+                                        requested=ADVENTURE_EXP, daily_cap=UNLIMITED_ADVENTURE_EXP_CAP) \
+                if walk.item_id == EXP_GIFT else 0
+            walk.location_id = walk_location(walk)
+            walk.rewards = json.dumps(grant_rewards(db, walk, user, now))
     db.commit()
-    return True
+    return claimed
 
 def settle_returned_walks(db: Session, user_id: int | None = None) -> int:
     """Grant every walk that has ended but not been rewarded yet (one user's, or everyone's). Commits."""
@@ -368,6 +371,7 @@ def hatch_view(progress: PetEvolution | None, status: str) -> dict:
 def pet_space(user: User, db: Session) -> dict:
     settle_returned_walks(db, user.id)
     inv.migrate_legacy(db, user.id)
+    catch_up_level(user, db)
     db.commit()
     walk = maybe_start_walk(user, db)
     quests = daily_quests(user, db)
@@ -491,11 +495,15 @@ def get_inventory(user: User = Depends(current_user), db: Session = Depends(get_
     inv.refresh(db, user)
     return inv.inventory_view(db, user.id)
 
-def _confirm_popup(walk: PetWalk, db: Session) -> bool:
-    """Record that the gift popup was seen. Grants nothing: the rewards were added when the walk ended."""
+def _confirm_popup(walk: PetWalk, user: User, db: Session) -> bool:
+    """Record that the gift popup was seen. Grants nothing: the rewards were added when the walk ended. The pet is home
+    now, so an evolution held back during the walk happens here."""
+    lock_user(db, user.id)
     confirmed = db.execute(update(PetWalk).where(PetWalk.id == walk.id, PetWalk.rewarded_at.is_not(None),
                                                  PetWalk.collected_at.is_(None))
                            .values(collected_at=utcnow()).execution_options(synchronize_session=False))
+    if confirmed.rowcount == 1:
+        catch_up_level(user, db)
     db.commit()
     return confirmed.rowcount == 1
 
@@ -509,7 +517,7 @@ def acknowledge_walk_rewards(walk_id: int, user: User = Depends(current_user), d
     if walk.rewarded_at is None:
         raise APIError(409, "walk_not_returned", "The pet is not back yet")
     rewards = walk_rewards(db, walk)
-    _confirm_popup(walk, db)
+    _confirm_popup(walk, user, db)
     return {"acknowledged": rewards, **pet_space(user, db)}
 
 # Older clients confirm the latest walk here; the find is already in the inventory either way.
@@ -520,6 +528,6 @@ def collect_find(user: User = Depends(current_user), db: Session = Depends(get_d
     status = walk_status(walk, [])
     if status == "walking":
         raise APIError(409, "walk_not_returned", "The pet is not back yet")
-    if status != "returned" or walk.rewarded_at is None or not _confirm_popup(walk, db):
+    if status != "returned" or walk.rewarded_at is None or not _confirm_popup(walk, user, db):
         raise APIError(409, "nothing_to_collect", "There is no find waiting")
     return {"found": last_find(db, walk), **pet_space(user, db)}

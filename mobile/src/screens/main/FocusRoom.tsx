@@ -10,9 +10,9 @@ import type { InventoryItem } from '../../inventory/types';
 import { focusRoomApi, focusRoomCache } from '../../room/api';
 import { defaultLayout, geometry, keyOf, poseFor } from '../../room/art';
 import { useDayPeriod } from '../../components/useDayPeriod';
-import { freeCopies } from '../../room/found';
+import { freeCopies, stackOf, withStack } from '../../room/found';
 import { PROBLEM_TEXT, type Problem } from '../../room/rules';
-import type { FocusRoomData, FoundStack, RoomPet } from '../../room/types';
+import type { FocusRoomData, FoundStack, Layout, RoomPet } from '../../room/types';
 import { appTheme as t } from '../../theme';
 import { AppModal } from '../../ui/AppModal';
 import { Button } from '../../ui/kit';
@@ -157,6 +157,10 @@ function FocusRoomEditor({ data, pet, resting, userId, initialCopy, onClose, onS
   const [inventory, setInventory] = useState(false);
   const { start } = editor;
   useEffect(() => { start(data.room.layout); }, [start]); // eslint-disable-line react-hooks/exhaustive-deps
+  // What the pet or a friend brought since the room was read: the panel lists it. The draft stays on the opened version.
+  useEffect(() => {
+    void focusRoomApi.get().then((fresh) => setCurrent((c) => ({ ...c, catalog: fresh.catalog }))).catch(() => { /* keep the counts shown */ });
+  }, []);
   const copied = useRef(false);
   useEffect(() => {
     if (!editor.draft || !initialCopy || copied.current) return;
@@ -198,8 +202,8 @@ function FocusRoomEditor({ data, pet, resting, userId, initialCopy, onClose, onS
     else if (result === 'blocks_pet' || result === 'trapped') setMessage('Phòng chưa còn chỗ trống cho món này. Cất bớt đồ rồi thử lại nhé.');
   }
   /** One more copy of a found decoration, if one is free (counting this draft); else the first copy already placed. */
-  function pickCopy(want: Pick<FoundStack, 'item' | 'variant' | 'name'>) {
-    const stack = current.catalog.found?.find((f) => f.item === want.item && f.variant === want.variant);
+  function pickCopy(want: Pick<FoundStack, 'item' | 'variant' | 'name'>, latest?: FoundStack) {
+    const stack = latest ?? current.catalog.found?.find((f) => f.item === want.item && f.variant === want.variant);
     const layout = editor.draft ?? current.room.layout;
     if (!stack || freeCopies(stack, current.room.layout, layout) < 1) {
       const placed = layout.items.find((p) => p.uid && p.item === want.item && p.variant === want.variant);
@@ -215,7 +219,11 @@ function FocusRoomEditor({ data, pet, resting, userId, initialCopy, onClose, onS
   }
   const placeFromInventory = (item: InventoryItem) => {
     setInventory(false);
-    if (item.art) pickCopy({ item: item.art, variant: item.variant, name: item.name });
+    if (!item.art) return;
+    // Kho đồ has just read this; the room's catalog may be from before it arrived.
+    const stack = stackOf({ ...item, art: item.art });
+    setCurrent((c) => ({ ...c, catalog: withStack(c.catalog, stack) }));
+    pickCopy(stack, stack);
   };
   function store() {
     const result = editor.store();
@@ -224,7 +232,7 @@ function FocusRoomEditor({ data, pet, resting, userId, initialCopy, onClose, onS
     else setMessage(`Đã cất ${result.stored.map(nameOf).join(', ')} vào kho.`);
   }
   const tools = draft ? {
-    catalog: current.catalog, draft, selected: editor.selected, onVariant: editor.variant,
+    catalog: current.catalog, draft, selected: editor.selected, onVariant: (variant: string) => refused(editor.variant(variant)),
     onFlip: () => refused(editor.flip()), onRotate: () => refused(editor.rotate()), onStore: store,
     onNudge: (dx: number, dy: number) => { const p = draft.items.find((entry) => keyOf(entry) === editor.selected); if (p) refused(editor.move(keyOf(p), p.x + dx, p.y + dy)); },
     onDeselect: () => editor.select(null),

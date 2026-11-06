@@ -5,9 +5,9 @@ import type { IconName } from '../../ui/kit';
 
 export type Post = { id: number; author: string; body: string; likes: number };
 export type Career = { title: string; category: string; match: number; description: string; skills: string[] };
-export type Quest = { id: string; title: string; progress: number; target: number };
+export type Quest = { id: string; title: string; description?: string; exp?: number; progress: number; target: number };
 export type TaskDifficulty = 'easy' | 'medium' | 'hard' | 'very_hard';
-export type ScheduledTask = { id: number | string; occurrence_id: string; title: string; description?: string | null; category: string; difficulty?: TaskDifficulty; scheduled_date: string; repeat: string; start_time?: string | null; end_time?: string | null; all_day?: boolean; repeat_interval?: number; repeat_frequency?: string | null; repeat_weekdays?: number[]; repeat_month_day?: number | null; repeat_month_week?: number | null; repeat_month_weekday?: number | null; repeat_until?: string | null; repeat_count?: number | null; completed: boolean; kind?: 'scheduled' | 'daily_quest' };
+export type ScheduledTask = { id: number | string; occurrence_id: string; title: string; description?: string | null; category: string; difficulty?: TaskDifficulty; scheduled_date: string; repeat: string; start_time?: string | null; end_time?: string | null; all_day?: boolean; repeat_interval?: number; repeat_frequency?: string | null; repeat_weekdays?: number[]; repeat_month_day?: number | null; repeat_month_week?: number | null; repeat_month_weekday?: number | null; repeat_until?: string | null; repeat_count?: number | null; exp?: number; completed: boolean; kind?: 'scheduled' | 'daily_quest' };
 
 export function taskRepeatDetail(task: ScheduledTask): string {
   const labels: Record<string, string> = { none: 'Một lần', daily: 'Hằng ngày', weekly: 'Hằng tuần', monthly: 'Hằng tháng', yearly: 'Hằng năm', custom: 'Tùy chỉnh' };
@@ -27,7 +27,7 @@ export function resolveQuestId(quest: Quest, quests: Quest[]) {
 }
 /** Companion walk, see backend/app/companion.py: locked -> ready -> walking -> returned -> rested (until tomorrow). */
 export type WalkStatus = 'locked' | 'ready' | 'waiting_hatch' | 'walking' | 'returned' | 'rested';
-export type Dashboard = { study?: { total_minutes: number; today_minutes: number; today_sessions: number; current_streak: number; longest_streak: number; daily_goal_minutes: number; goal_progress: number }; daily_quests?: Quest[]; scheduled_tasks?: ScheduledTask[]; pet_walk?: WalkStatus; unread_notifications?: number; pending_friend_requests?: number };
+export type Dashboard = { /** The server's calendar day, which the quests, tasks and walk belong to. */ today?: string; study?: { total_minutes: number; today_minutes: number; today_sessions: number; current_streak: number; longest_streak: number; daily_goal_minutes: number; goal_progress: number }; daily_quests?: Quest[]; scheduled_tasks?: ScheduledTask[]; pet_walk?: WalkStatus; unread_notifications?: number; pending_friend_requests?: number };
 
 export const FOCUS_SECONDS = 25 * 60;
 

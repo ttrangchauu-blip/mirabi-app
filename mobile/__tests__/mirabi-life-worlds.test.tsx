@@ -1,9 +1,11 @@
 import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AdventureMapScreen } from '../src/screens/adventure/AdventureMapScreen';
 import { MoneyGardenScreen } from '../src/screens/money/MoneyGardenScreen';
 import { TownScreen } from '../src/screens/town/TownScreen';
+import { TOWN_ART, TOWN_DOORS, TOWN_LAMPS, TOWN_PLACES, TOWN_SPRAY } from '../src/screens/town/townArt';
 import { CareerJourneyScreen } from '../src/screens/career/CareerJourneyScreen';
 import { formatVnd, localDay, parseVnd } from '../src/life/worlds';
 import { lifeEligible } from '../src/life/access';
@@ -13,7 +15,7 @@ import { ToastProvider } from '../src/ui/Toast';
 
 const wrap = (node: React.ReactElement) => render(<ToastProvider><ConfirmProvider>{node}</ConfirmProvider></ToastProvider>);
 const ADULT = { ...USER, age: 28 } as any;
-beforeEach(async () => { await AsyncStorage.clear(); });
+beforeEach(async () => { await AsyncStorage.clear(); jest.spyOn(Alert, 'alert').mockClear(); });
 
 describe('rules shared with the backend', () => {
   it('opens Cuộc sống Mirabi from 16, never without an age', () => {
@@ -145,6 +147,127 @@ describe('Thị trấn Mirabi', () => {
     fireEvent.press(await screen.findByLabelText('Góp 100 xu'));
     await waitFor(() => expect(server.callsTo('POST /api/town/projects/3/contribute')[0]?.body.amount).toBe(100));
     expect(await screen.findByLabelText('400 xu')).toBeTruthy();
+  });
+
+  it('a contribution retried after a lost answer counts once; the next one is new', async () => {
+    let attempt = 0;
+    const server = mockServer({
+      'GET /api/town/map': { status: 200, body: town() },
+      'POST /api/town/projects/3/contribute': (req) => (++attempt === 1 ? networkDown() : { status: 200, body: {
+        project: { ...town().projects[0], current: 1100, my_contribution: req.body.amount }, coins: 400, already_recorded: false, contribution_left_today: 900 } }),
+    });
+    wrap(<TownScreen user={ADULT} onBack={() => {}} onVisitRoom={() => {}} onVisitGarden={() => {}} onOpenFriends={() => {}} />);
+    fireEvent.press(await screen.findByLabelText('Đài phun nước Quảng trường: 2%', {}, { timeout: 5000 }));
+    fireEvent.press(await screen.findByLabelText('Góp 100 xu'));
+    await waitFor(() => expect(attempt).toBe(1));
+    await waitFor(() => expect((Alert.alert as jest.Mock)).toHaveBeenCalled());
+    fireEvent.press(screen.getByLabelText('Góp 100 xu'));
+    await waitFor(() => expect(attempt).toBe(2));
+    expect(await screen.findByLabelText('400 xu')).toBeTruthy();
+    fireEvent.press(screen.getByLabelText('Góp 100 xu'));
+    await waitFor(() => expect(attempt).toBe(3));
+    const [lost, retry, next] = server.callsTo('POST /api/town/projects/3/contribute').map((c) => c.body.client_ref);
+    expect(retry).toBe(lost);
+    expect(next).not.toBe(lost);
+  });
+
+  describe('gifts', () => {
+    const MAY = town().friends[0] as any;
+    const KAI = { ...MAY, id: 8, display_name: 'Kai' };
+    const gift = (id: string, name: string) => ({ id, variant: 'default', name, art: null, free: 2 });
+
+    it("from a friend's house the gift is for that friend", async () => {
+      const server = mockServer({
+        'GET /api/town/map': { status: 200, body: town({ friends: [MAY, KAI] }) },
+        'GET /api/town/giftable': { status: 200, body: [gift('shell', 'Vỏ sò')] },
+        'POST /api/town/gifts': { status: 201, body: { already_sent: false } },
+      });
+      wrap(<TownScreen user={ADULT} onBack={() => {}} onVisitRoom={() => {}} onVisitGarden={() => {}} onOpenFriends={() => {}} />);
+      fireEvent.press(await screen.findByTestId('house-8', {}, { timeout: 5000 }));
+      fireEvent.press(await screen.findByLabelText('Gửi quà'));
+      expect((await screen.findByRole('radio', { name: 'Kai' })).props.accessibilityState).toMatchObject({ selected: true });
+      fireEvent.press(await screen.findByRole('radio', { name: 'Vỏ sò, còn 2' }));
+      fireEvent.press(screen.getByLabelText('Gửi quà'));
+      await waitFor(() => expect(server.callsTo('POST /api/town/gifts')).toHaveLength(1));
+      expect(server.callsTo('POST /api/town/gifts')[0].body.receiver_id).toBe(8);
+    });
+
+    it('a request id belongs to one gift: another choice is another gift, the same one a retry', async () => {
+      let attempt = 0;
+      const server = mockServer({
+        'GET /api/town/map': { status: 200, body: town() },
+        'GET /api/town/giftable': { status: 200, body: [gift('shell', 'Vỏ sò'), gift('crystal', 'Pha lê')] },
+        'POST /api/town/gifts': () => (++attempt <= 2 ? networkDown() : { status: 201, body: { already_sent: false } }),
+      });
+      wrap(<TownScreen user={ADULT} onBack={() => {}} onVisitRoom={() => {}} onVisitGarden={() => {}} onOpenFriends={() => {}} />);
+      fireEvent.press(await screen.findByTestId('house-7', {}, { timeout: 5000 }));
+      fireEvent.press(await screen.findByLabelText('Gửi quà'));
+      fireEvent.press(await screen.findByRole('radio', { name: 'Vỏ sò, còn 2' }));
+      fireEvent.press(screen.getByLabelText('Gửi quà'));
+      await waitFor(() => expect(attempt).toBe(1));
+      await waitFor(() => expect(screen.getByLabelText('Gửi quà').props.accessibilityState?.busy).not.toBe(true));
+      fireEvent.press(screen.getByRole('radio', { name: 'Pha lê, còn 2' }));
+      fireEvent.press(screen.getByLabelText('Gửi quà'));
+      await waitFor(() => expect(attempt).toBe(2));
+      await waitFor(() => expect(screen.getByLabelText('Gửi quà').props.accessibilityState?.busy).not.toBe(true));
+      fireEvent.press(screen.getByRole('radio', { name: 'Vỏ sò, còn 2' }));
+      fireEvent.press(screen.getByLabelText('Gửi quà'));
+      await waitFor(() => expect(attempt).toBe(3));
+      const [shell, crystal, shellAgain] = server.callsTo('POST /api/town/gifts').map((c) => c.body);
+      expect(crystal.client_ref).not.toBe(shell.client_ref); // never answered "already sent" for what wasn't sent
+      expect(shellAgain.client_ref).toBe(shell.client_ref);
+    });
+  });
+
+  it('the street has its places to tap, and a house for each friend up to twelve', async () => {
+    const friends = Array.from({ length: 13 }, (_, i) => ({ ...town().friends[0], id: 100 + i, display_name: `Bạn ${i + 1}` }));
+    mockServer({ 'GET /api/town/map': { status: 200, body: town({ friends }) } });
+    const onVisitRoom = jest.fn();
+    wrap(<TownScreen user={ADULT} onBack={() => {}} onVisitRoom={onVisitRoom} onVisitGarden={() => {}} onOpenFriends={() => {}} />);
+    await screen.findByTestId('town-street', {}, { timeout: 5000 });
+    expect(screen.getByLabelText('Bạn 12')).toBeTruthy();
+    expect(screen.queryByLabelText('Bạn 13')).toBeNull();
+    // Everyone still has a card below the street.
+    expect(screen.getByTestId('house-112')).toBeTruthy();
+    fireEvent.press(screen.getByLabelText('Bạn 2'));
+    fireEvent.press(await screen.findByLabelText('Ghé thăm phòng'));
+    expect(onVisitRoom).toHaveBeenCalledWith(101);
+  });
+
+  it('the plaza on the street opens its events', async () => {
+    mockServer({ 'GET /api/town/map': { status: 200, body: town() } });
+    wrap(<TownScreen user={ADULT} onBack={() => {}} onVisitRoom={() => {}} onVisitGarden={() => {}} onOpenFriends={() => {}} />);
+    fireEvent.press(await screen.findByLabelText('Sân Sự kiện', {}, { timeout: 5000 }));
+    expect(await screen.findByText('Hiện chưa có sự kiện nào.')).toBeTruthy();
+  });
+
+  it('with no friend yet, the street still leads to making friends', async () => {
+    mockServer({ 'GET /api/town/map': { status: 200, body: town({ friends: [] }) } });
+    const onOpenFriends = jest.fn();
+    wrap(<TownScreen user={ADULT} onBack={() => {}} onVisitRoom={() => {}} onVisitGarden={() => {}} onOpenFriends={onOpenFriends} />);
+    fireEvent.press(await screen.findByLabelText('Phố Bạn bè', {}, { timeout: 5000 }));
+    expect(onOpenFriends).toHaveBeenCalled();
+  });
+
+  it('the rendered town has every picture by day and night, inside the street', () => {
+    for (const art of [TOWN_ART.day, TOWN_ART.night]) {
+      expect(art.land).toHaveLength(4);
+      expect(art.fountain).toHaveLength(4);
+      expect(art.fountainBoxes).toHaveLength(4);
+      expect(art.garden).toHaveLength(4);
+      expect(art.gardenBoxes).toHaveLength(4);
+      expect(art.houses).toHaveLength(TOWN_DOORS.length);
+      expect(art.houseBoxes).toHaveLength(TOWN_DOORS.length);
+      for (const [left, top, width, height] of [...art.fountainBoxes, ...art.gardenBoxes, ...art.houseBoxes]) {
+        expect(left).toBeGreaterThanOrEqual(0);
+        expect(top).toBeGreaterThanOrEqual(0);
+        expect(left + width).toBeLessThanOrEqual(1.0001);
+        expect(top + height).toBeLessThanOrEqual(1.0001);
+      }
+    }
+    expect(TOWN_SPRAY).toHaveLength(3);
+    expect(TOWN_LAMPS.length).toBeGreaterThan(0);
+    for (const x of Object.values(TOWN_PLACES)) expect(x).toBeLessThan(TOWN_DOORS[0][0]);
   });
 
   it('asks to make friends when the street is empty', async () => {

@@ -53,7 +53,7 @@ def test_a_friend_sees_the_plants_and_their_growth_but_never_the_seeds(client, d
     assert body["owner"]["id"] == aqua.id and body["owner"]["display_name"] == "Aqua" and "email" not in body["owner"]
     assert "seeds" not in body["garden"]
     plots = body["garden"]["plots"]
-    assert [p["empty"] for p in plots] == [True, True, False, True, True, True]
+    assert [p["empty"] for p in plots] == [True, True, False] + [True] * 6
     assert plots[2]["name"] == "Củ tulip" and plots[2]["stage"] == 0
     assert plots[2]["care"] == {"water": {"done": False, "by": None, "at": None}, "tend": {"done": False, "by": None, "at": None}}
     assert body["care"] == {"daily_limit": settings.garden_care_daily_limit, "used": 0, "left": settings.garden_care_daily_limit}
@@ -126,7 +126,7 @@ def test_the_owner_waters_their_own_plants_with_the_same_daily_rule(client, db):
     assert water(request_id="own-water-001").json()["replayed"] is True
     assert water().json()["reason"] == "already_cared"
     assert water(plot=0).json()["code"] == "plot_empty"
-    assert water(plot=7).status_code == 404
+    assert water(plot=9).status_code == 404
     assert client.post("/api/garden/plots/1/care", headers=aqua.headers, json={"kind": "harvest", "client_request_id": rid()}).status_code == 422
     assert client.get("/api/notifications", headers=aqua.headers).json()["items"] == []  # caring for one's own: no notice
 
@@ -161,7 +161,7 @@ def test_a_guest_cannot_plant_clear_or_care_for_an_empty_plot(client, db):
     assert client.post(f"/api/garden/visit/{aqua.id}/plots/1/plant", headers=may.headers,
                        json={"item_id": "seed_daisy", "client_request_id": rid()}).status_code in (404, 405)
     assert visit(client, may, aqua).json()["garden"]["plots"][0]["grown"] is True
-    assert [p["empty"] for p in client.get("/api/garden", headers=aqua.headers).json()["plots"]] == [False] + [True] * 5
+    assert [p["empty"] for p in client.get("/api/garden", headers=aqua.headers).json()["plots"]] == [False] + [True] * 8
 
 
 def test_friends_watering_at_once_water_once_and_clearing_starts_over(client, db):

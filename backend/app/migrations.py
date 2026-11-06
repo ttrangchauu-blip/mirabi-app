@@ -3,7 +3,7 @@
 The project has no migration tool yet, and `create_all` only creates missing tables;
 it never adds columns to tables that already exist. This module adds the columns
 introduced after the first release so existing databases keep working. It never
-drops or rewrites data. Switch to Alembic before moving to PostgreSQL in production.
+drops or rewrites data (one exception: clear_default_accessory). Switch to Alembic before moving to PostgreSQL in production.
 """
 import json
 import logging
@@ -88,6 +88,9 @@ ADDED_COLUMNS: dict[str, list[tuple[str, str]]] = {
                  ("include_message", "BOOLEAN NOT NULL DEFAULT '0'")],
 }
 
+DEFAULT_ACCESSORY = "Vương miện pha lê"
+
+
 def upgrade_schema(engine: Engine) -> None:
     from . import models  # noqa: F401  every table must be registered, even when the app itself is not imported
     Base.metadata.create_all(bind=engine)
@@ -101,6 +104,8 @@ def upgrade_schema(engine: Engine) -> None:
                 if name not in existing:
                     log.info("Adding column %s.%s", table, name)
                     conn.execute(text(f"ALTER TABLE {table} ADD COLUMN {name} {ddl}"))
+        if inspector.has_table("users"):
+            clear_default_accessory(conn, inspector)
         if inspector.has_table("user_tasks"):
             conn.execute(text("CREATE INDEX IF NOT EXISTS ix_user_tasks_project_id ON user_tasks (project_id)"))
             conn.execute(text("CREATE INDEX IF NOT EXISTS ix_user_tasks_user_archived ON user_tasks (user_id, archived_at)"))
@@ -139,6 +144,24 @@ def upgrade_schema(engine: Engine) -> None:
                 SELECT 1 FROM pet_evolutions pe WHERE pe.user_id = users.id AND pe.pet_id = users.pet
                 AND pe.hatched_at IS NULL)
         """))
+
+
+def clear_default_accessory(conn, inspector) -> None:
+    """Accounts used to start with a crown nobody chose (it isn't one of companion.ROOM_ITEMS, so it can only be that
+    default), which memory pictures then printed as the pet's accessory. A choice the user made stays, and so do the
+    memories already drawn: only the account's value goes, and the column may now be empty."""
+    column = next((c for c in inspector.get_columns("users") if c["name"] == "equipped_item"), None)
+    if column is None:
+        return
+    if not column["nullable"]:
+        if conn.dialect.name == "sqlite":  # SQLite can't change a column's NOT NULL: the same values move to a new column
+            conn.execute(text("ALTER TABLE users ADD COLUMN equipped_item_new VARCHAR(80)"))
+            conn.execute(text("UPDATE users SET equipped_item_new = equipped_item"))
+            conn.execute(text("ALTER TABLE users DROP COLUMN equipped_item"))
+            conn.execute(text("ALTER TABLE users RENAME COLUMN equipped_item_new TO equipped_item"))
+        else:
+            conn.execute(text("ALTER TABLE users ALTER COLUMN equipped_item DROP NOT NULL"))
+    conn.execute(text("UPDATE users SET equipped_item = NULL WHERE equipped_item = :crown"), {"crown": DEFAULT_ACCESSORY})
 
 
 def backfill_collected_walks(conn) -> None:

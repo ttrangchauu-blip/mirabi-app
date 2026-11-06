@@ -1,4 +1,6 @@
 import React from 'react';
+import { Plate } from '../../world/diorama';
+import { LAB_ART } from './rendered';
 import Svg, { Circle, Defs, Ellipse, G, Line, LinearGradient, Path, Polygon, RadialGradient, Rect, Stop } from 'react-native-svg';
 
 // Vector art for the Magic Lab science game: a cosy lab wall with a wooden bench, and the objects and materials the
@@ -62,109 +64,11 @@ function starPoints(cx: number, cy: number, r: number, squash = 1) {
 // ---------------------------------------------------------------------------------------------------------------------
 // Backdrop
 
-const STRIPES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-const JARS = [[0.06, '#FF9FC3', '#F07BA6'], [0.41, '#9FE6C8', '#5CC79E'], [0.76, '#C7A6FF', '#9F7BEA']] as const;
-const BOOKS = [[0.03, 0.09, 0.86, '#FF8F8F'], [0.13, 0.08, 1, '#8FC8FF'], [0.22, 0.1, 0.78, '#FFD86B'],
-  [0.33, 0.08, 0.94, '#B79CFF'], [0.42, 0.09, 0.72, '#8FE3B0']] as const;
-const HOLES = [0, 1, 2, 3].flatMap((col) => [0, 1, 2, 3, 4].map((row) => [col, row] as const));
-
 /** The lab wall behind the bench: a window onto a sunny sky, a pegboard of tools, shelves of jars and books, and the
  * wooden counter from 66 % of the height down, its front edge and cupboard doors showing. Static, drawn at full size. */
 export const LabBackdrop = React.memo(function LabBackdrop({ width, height }: { width: number; height: number }) {
   if (!width || !height) return null;
-  const X = (f: number) => width * f;
-  const Y = (f: number) => height * f;
-  const sw = Math.max(1.5, Math.min(width, height) * 0.008);
-  const bench = Y(0.66);
-  const lip = Math.max(6, height * 0.05);
-  // Window
-  const wx = X(0.05), wy = Y(0.08), ww = X(0.25), wh = Y(0.4);
-  const pad = Math.max(4, ww * 0.06);
-  const ix = wx + pad, iy = wy + pad, iw = ww - pad * 2, ih = wh - pad * 2;
-  // Pegboard
-  const px = X(0.35), py = Y(0.1), pw = X(0.18), ph = Y(0.36);
-  // Shelves
-  const sx = X(0.58), sWide = X(0.38);
-  const shelf1 = Y(0.28), shelf2 = Y(0.52);
-  const board = Math.max(5, height * 0.025);
-  const jarH = Y(0.12), jarW = sWide * 0.16;
-  const bookMax = Y(0.15);
-  const flaskR = Math.min(sWide * 0.09, Y(0.05));
-  // Cupboards in the bench front
-  const doorTop = bench + lip + Math.max(5, height * 0.03);
-  const doorH = height - doorTop - Math.max(5, height * 0.03);
-  return <Svg width={width} height={height}>
-    <Defs>
-      <Lin id="lb-wall" stops={[[0, '#FFF4E3'], [1, '#FCE1D4']]} />
-      <Lin id="lb-sky" stops={[[0, '#8FD3FF'], [1, '#E2F5FF']]} />
-      <Lin id="lb-wood" stops={[[0, '#D9A26A'], [1, '#B47642']]} />
-      <Lin id="lb-top" stops={[[0, '#F3C58E'], [1, '#E0A86C']]} />
-      <Lin id="lb-flask" stops={[[0, '#EAF7FF'], [0.5, '#EAF7FF'], [0.5, '#A7E59A'], [1, '#5CC06A']]} />
-    </Defs>
-    <Rect x={0} y={0} width={width} height={height} fill={url('lb-wall')} />
-    {STRIPES.map((i) => <Rect key={i} x={X(i * 0.1 + 0.03)} y={0} width={X(0.04)} height={bench} fill="#FFFFFF" opacity={0.32} />)}
-
-    {/* Window with a sunny sky */}
-    <Rect x={wx} y={wy} width={ww} height={wh} rx={10} fill="#D79A66" stroke={INK} strokeWidth={sw} />
-    <Rect x={ix} y={iy} width={iw} height={ih} rx={6} fill={url('lb-sky')} />
-    <Circle cx={ix + iw * 0.74} cy={iy + ih * 0.24} r={Math.min(iw, ih) * 0.12} fill="#FFE27A" />
-    <G opacity={0.95}>
-      <Ellipse cx={ix + iw * 0.3} cy={iy + ih * 0.3} rx={iw * 0.16} ry={ih * 0.07} fill="#FFFFFF" />
-      <Ellipse cx={ix + iw * 0.24} cy={iy + ih * 0.25} rx={iw * 0.08} ry={ih * 0.07} fill="#FFFFFF" />
-    </G>
-    <Path d={`M${ix} ${iy + ih} L${ix} ${iy + ih * 0.78} Q${ix + iw * 0.3} ${iy + ih * 0.6} ${ix + iw * 0.6} ${iy + ih * 0.76} Q${ix + iw * 0.82} ${iy + ih * 0.68} ${ix + iw} ${iy + ih * 0.74} L${ix + iw} ${iy + ih} Z`}
-      fill="#9EDB8F" />
-    <Line x1={ix + iw / 2} y1={iy} x2={ix + iw / 2} y2={iy + ih} stroke="#D79A66" strokeWidth={Math.max(3, pad * 0.7)} />
-    <Line x1={ix} y1={iy + ih / 2} x2={ix + iw} y2={iy + ih / 2} stroke="#D79A66" strokeWidth={Math.max(3, pad * 0.7)} />
-    <Rect x={wx - 6} y={wy + wh - 3} width={ww + 12} height={Math.max(6, height * 0.03)} rx={3} fill="#C4865A" stroke={INK} strokeWidth={sw} />
-    {/* A little cactus on the sill */}
-    <Ellipse cx={wx + ww * 0.78} cy={wy + wh - 3 - Y(0.04)} rx={X(0.012)} ry={Y(0.035)} fill="#7CCB7E" stroke={INK} strokeWidth={sw * 0.8} />
-    <Path d={`M${wx + ww * 0.7} ${wy + wh - 3} L${wx + ww * 0.72} ${wy + wh - 3 - Y(0.035)} L${wx + ww * 0.84} ${wy + wh - 3 - Y(0.035)} L${wx + ww * 0.86} ${wy + wh - 3} Z`}
-      fill="#F08F6A" stroke={INK} strokeWidth={sw * 0.8} strokeLinejoin="round" />
-
-    {/* Pegboard with a magnifier, a ruler and goggles */}
-    <Rect x={px} y={py} width={pw} height={ph} rx={8} fill="#F2C98E" stroke={INK} strokeWidth={sw} />
-    {HOLES.map(([col, row]) => <Circle key={`${col}-${row}`} cx={px + pw * (0.14 + col * 0.24)} cy={py + ph * (0.1 + row * 0.2)} r={Math.max(1.2, pw * 0.02)} fill="#B98950" />)}
-    <Line x1={px + pw * 0.38} y1={py + ph * 0.4} x2={px + pw * 0.5} y2={py + ph * 0.56} stroke={INK} strokeWidth={Math.max(3, pw * 0.06)} strokeLinecap="round" />
-    <Circle cx={px + pw * 0.28} cy={py + ph * 0.28} r={pw * 0.17} fill="#DFF3FF" stroke="#8B6FD6" strokeWidth={Math.max(2.5, pw * 0.05)} />
-    <Rect x={px + pw * 0.68} y={py + ph * 0.12} width={pw * 0.14} height={ph * 0.5} rx={2} fill="#FFE07A" stroke={INK} strokeWidth={sw * 0.8} />
-    <Path d={`M${px + pw * 0.68} ${py + ph * 0.2} h${pw * 0.06} M${px + pw * 0.68} ${py + ph * 0.3} h${pw * 0.04} M${px + pw * 0.68} ${py + ph * 0.4} h${pw * 0.06} M${px + pw * 0.68} ${py + ph * 0.5} h${pw * 0.04}`}
-      stroke={INK} strokeWidth={sw * 0.6} />
-    <Path d={`M${px + pw * 0.14} ${py + ph * 0.8} Q${px + pw * 0.5} ${py + ph * 0.7} ${px + pw * 0.86} ${py + ph * 0.8}`} stroke="#8B6FD6" strokeWidth={Math.max(2, pw * 0.03)} fill="none" />
-    <Circle cx={px + pw * 0.34} cy={py + ph * 0.82} r={pw * 0.12} fill="#BFF0E6" stroke={INK} strokeWidth={sw * 0.8} />
-    <Circle cx={px + pw * 0.66} cy={py + ph * 0.82} r={pw * 0.12} fill="#BFF0E6" stroke={INK} strokeWidth={sw * 0.8} />
-
-    {/* Shelves: jars on top, books and a round flask below */}
-    {JARS.map(([f, liquid, lid]) => {
-      const jx = sx + sWide * f;
-      return <G key={f}>
-        <Rect x={jx} y={shelf1 - jarH} width={jarW} height={jarH} rx={jarW * 0.25} fill="#EAF7FF" stroke={INK} strokeWidth={sw} />
-        <Rect x={jx + sw} y={shelf1 - jarH * 0.58} width={jarW - sw * 2} height={jarH * 0.58 - sw} rx={jarW * 0.2} fill={liquid} />
-        <Rect x={jx - 2} y={shelf1 - jarH - jarH * 0.18} width={jarW + 4} height={jarH * 0.22} rx={3} fill={lid} stroke={INK} strokeWidth={sw} />
-        <Rect x={jx + jarW * 0.18} y={shelf1 - jarH * 0.85} width={jarW * 0.12} height={jarH * 0.5} rx={2} fill="#FFFFFF" opacity={0.7} />
-      </G>;
-    })}
-    <Rect x={sx - 4} y={shelf1} width={sWide + 8} height={board} rx={2} fill="#C98B57" stroke={INK} strokeWidth={sw} />
-    {BOOKS.map(([f, w, h, color]) => <Rect key={f} x={sx + sWide * f} y={shelf2 - bookMax * h} width={sWide * w} height={bookMax * h} rx={2}
-      fill={color} stroke={INK} strokeWidth={sw} />)}
-    <Rect x={sx + sWide * 0.53} y={shelf2 - bookMax * 0.8} width={sWide * 0.08} height={bookMax * 0.8} rx={2} fill="#FFB27A" stroke={INK} strokeWidth={sw}
-      transform={`rotate(18 ${sx + sWide * 0.61} ${shelf2})`} />
-    <Rect x={sx + sWide * 0.8 - flaskR * 0.35} y={shelf2 - flaskR * 3.4} width={flaskR * 0.7} height={flaskR * 1.8} fill="#EAF7FF" stroke={INK} strokeWidth={sw} />
-    <Circle cx={sx + sWide * 0.8} cy={shelf2 - flaskR} r={flaskR} fill={url('lb-flask')} stroke={INK} strokeWidth={sw} />
-    <Rect x={sx - 4} y={shelf2} width={sWide + 8} height={board} rx={2} fill="#C98B57" stroke={INK} strokeWidth={sw} />
-
-    {/* The bench */}
-    <Rect x={0} y={bench - 6} width={width} height={6} fill="#5A3A28" opacity={0.08} />
-    <Rect x={0} y={bench} width={width} height={height - bench} fill={url('lb-wood')} />
-    {[0.04, 0.36, 0.68].map((f) => doorH > 8 ? <G key={f}>
-      <Rect x={X(f)} y={doorTop} width={X(0.28)} height={doorH} rx={6} fill="#C88B54" stroke="#8A5A33" strokeWidth={sw} />
-      <Circle cx={X(f + 0.14)} cy={doorTop + Math.min(10, doorH * 0.3)} r={Math.max(2.5, doorH * 0.08)} fill="#F4D58A" stroke={INK} strokeWidth={sw * 0.8} />
-    </G> : null)}
-    <Rect x={-4} y={bench} width={width + 8} height={lip} rx={3} fill={url('lb-top')} stroke={INK} strokeWidth={sw} />
-    <Rect x={0} y={bench + lip} width={width} height={Math.max(3, lip * 0.4)} fill="#7A4A2A" opacity={0.3} />
-    <Path d={`M${X(0.08)} ${bench + lip * 0.45} Q${X(0.3)} ${bench + lip * 0.25} ${X(0.5)} ${bench + lip * 0.5} T${X(0.92)} ${bench + lip * 0.4}`}
-      stroke="#C98B57" strokeWidth={sw * 0.6} fill="none" opacity={0.7} />
-  </Svg>;
+  return <Plate source={LAB_ART} width={width} height={height} />;
 });
 
 // ---------------------------------------------------------------------------------------------------------------------

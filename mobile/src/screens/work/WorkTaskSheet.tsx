@@ -19,8 +19,8 @@ export const priorityOf = (p: Priority) => PRIORITIES.find((x) => x.id === p) ??
 /** A date as YYYY-MM-DD on the device's clock (the task's day is a local day). */
 export const localDate = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 
-type DuePreset = 'none' | 'today_17' | 'today_end' | 'tomorrow_noon' | 'friday';
-const DUE_PRESETS: { id: DuePreset; label: string }[] = [
+export type DuePreset = 'none' | 'today_17' | 'today_end' | 'tomorrow_noon' | 'friday';
+export const DUE_PRESETS: { id: DuePreset; label: string }[] = [
   { id: 'none', label: 'Không hạn' }, { id: 'today_17', label: 'Hôm nay 17:00' }, { id: 'today_end', label: 'Hôm nay 23:59' },
   { id: 'tomorrow_noon', label: 'Ngày mai 12:00' }, { id: 'friday', label: 'Thứ Sáu 17:00' },
 ];
@@ -38,7 +38,7 @@ export function dueFromPreset(preset: DuePreset, now = new Date()): Date | null 
   return d;
 }
 
-const ESTIMATES = [15, 25, 45, 60, 90];
+export const ESTIMATES = [15, 25, 45, 60, 90];
 const WEEKDAYS = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
 
 type Props = {

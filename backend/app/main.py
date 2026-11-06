@@ -1,6 +1,5 @@
 import asyncio
 import logging
-import secrets
 from contextlib import asynccontextmanager, suppress
 
 from fastapi import FastAPI, Request
@@ -17,8 +16,7 @@ from .config import settings
 from .db import SessionLocal, engine
 from .errors import install_error_handlers
 from .migrations import upgrade_schema
-from .models import CommunityPost, User
-from .security import hash_password
+from .models import User
 
 
 def startup():
@@ -46,20 +44,6 @@ def startup():
         finance.seed_categories(db)
         town.seed_town(db)
         careers.seed_careers(db)
-        if not db.scalar(select(CommunityPost.id).limit(1)):
-            # The demo post author has a random password and cannot sign in.
-            demo = User(
-                email="community@refmi.demo",
-                password_hash=hash_password(secrets.token_urlsafe(32)),
-                display_name="MaiStudy",
-            )
-            db.add(demo)
-            db.flush()
-            db.add(CommunityPost(
-                user_id=demo.id,
-                body="Hôm nay mình hoàn thành 3 phiên Pomodoro rồi nè! Cùng cố gắng mỗi ngày nhé ✨",
-                likes=128,
-            ))
         db.commit()
 
 

@@ -24,6 +24,7 @@ from .models import (Friendship, SocialProfile, StudyRoom, StudyRoomInvitation, 
                      StudyRoomParticipant, StudyRoomSession, User, UserBlock, UserReport, as_utc)
 from .notifications import notify
 from .ratelimit import client_ip, enforce
+from .realtime import queue_disconnect
 from .security import admin_user, current_user
 
 router = APIRouter(prefix="/api", tags=["friends"])
@@ -150,11 +151,13 @@ def _visible_user(db: Session, user_id: int) -> User | None:
 def presence_for(db: Session, viewer_id: int, user_ids: set[int]) -> dict[int, dict]:
     """What friends may see: studying (in a running focus phase), online, offline or hidden by their settings.
 
-    A friend's room is included only when the viewer could join it (a code room); private rooms stay private.
+    A friend's room is included only when the viewer could join it (a code room hosted by one of the viewer's friends,
+    the same rule as joining it); private rooms stay private.
     """
     if not user_ids:
         return {}
     t = clock.now()
+    viewer_friends = friend_ids(db, viewer_id)
     profiles = profiles_for(db, user_ids)
     memberships = {m.user_id: m for m in db.scalars(select(StudyRoomMember).where(
         StudyRoomMember.user_id.in_(user_ids), StudyRoomMember.status == "active"))}
@@ -180,7 +183,8 @@ def presence_for(db: Session, viewer_id: int, user_ids: set[int]) -> dict[int, d
             status = "online"
         else:
             status = "offline"
-        joinable = room is not None and room.status == "open" and room.visibility == "code"
+        joinable = (room is not None and room.status == "open" and room.visibility == "code"
+                    and room.host_id in viewer_friends)
         result[user_id] = {"status": status,
                            "room": {"id": room.id, "name": room.name, "member_count": room.member_count,
                                     "max_members": room.max_members} if joinable else None}
@@ -575,6 +579,7 @@ def admin_resolve_report(report_id: int, data: ResolveReportInput, admin: User =
         if reported is not None and reported.role != "admin":
             reported.status = "disabled"
             reported.token_version = (reported.token_version or 0) + 1  # ends their sessions immediately
+            queue_disconnect(db, reported.id)  # a socket opened before this outlives the token
     report.status = "actioned" if data.action == "disable_user" else "dismissed"
     report.resolved_by_id = admin.id
     report.resolved_at = clock.now()

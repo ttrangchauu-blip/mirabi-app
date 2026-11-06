@@ -29,7 +29,7 @@ tables, then additive, idempotent `ALTER TABLE ADD COLUMN` statements run. There
 | Tasks (`tasks.py`, `user_tasks`, `user_task_completions`) | Recurring tasks, completion per occurrence, EXP once per occurrence | Recurrence engine, completion ledger, `lock_daily_goals` | Columns `project_id, priority, due_at, estimated_minutes, archived_at, updated_at`; `PATCH`/`DELETE` task; steps | `user_task_steps`, `user_task_step_completions` |
 | EXP (`progression.py`, `exp_events`) | Idempotent award per reference, per-source daily caps; tasks and learning share a 60 EXP/day pool | `award_exp`, `daily_exp_remaining`, pool `task` | `task_exp(priority)` with `MAX_TASK_EXP = 15` | None |
 | Pet evolution / hatch (`progression.py`, `companion.py`) | Thresholds, hatch confirmation, level-up memories | Unchanged | None | None |
-| Pet exploration (`companion.py`, `pet_walks`) | One 8-hour walk per UTC day once every goal of the day is done; hatching before walking | `today_goals`, `maybe_start_walk`, walk status | Removed (archived) tasks no longer count as goals | None |
+| Pet exploration (`companion.py`, `pet_walks`) | One 8-hour walk per day (`days.py`) once every goal of the day is done; hatching before walking | `today_goals`, `maybe_start_walk`, walk status | Removed (archived) tasks no longer count as goals | None |
 | Pomodoro (`study.py`, `usePomodoroTimer`) | Device timer + server sessions, study EXP cap | The Work Quest desk drives the same timer | None | None |
 | Personal room (`pet_room.py`, `RoomTab`, `RoomScene`) | Layout, decorating, pet interactions, offline cache | Room scene, pet menu, `poseFor('rest')`, window sky variants | Healing mode toggle, `RoomScene.underlay`, Healing panel | `room_ambience_preferences` |
 | Album (`memories.py`) | Private memories, user and automatic events | `create_once`, album list | Event type `journal_moment` (title only, no "new memory" notice) | None |
@@ -62,8 +62,8 @@ room's bar), so it is not a separate room. Every user-facing text is Vietnamese.
   start the walk, through the same locked `maybe_start_walk`. Evolution-before-exploration ordering is untouched.
 - **Deleting archives.** `DELETE /api/tasks/{id}` sets `archived_at`. The task disappears from lists and goals; its
   completions and EXP stay in the history and statistics.
-- **Chests grant items, never EXP**, so they can't push anyone past the cap. At most 10 completions per day count
-  toward chests, so creating and ticking off empty tasks can't rush them. A chest opens once
+- **Chests grant items, never EXP**, so they can't push anyone past the cap. At most 10 completions per day of the server's
+  calendar (`days.py`) count toward chests, so creating and ticking off empty tasks can't rush them. A chest opens once
   (`work_reward_claims` unique per user/chest, plus inventory `event_key`s; tested with concurrent requests).
 - **Healing data is private.** Moods, journal pages and relaxation sessions are only ever returned to their owner;
   anyone else gets 404. Journal text is never logged or copied: "Lưu vào Album" stores only the page title as a
@@ -97,7 +97,7 @@ All endpoints need `Authorization: Bearer <access token>`. Errors are `{detail, 
 | `GET /api/work/projects?include_archived=` | Projects with `tasks_total/done` (one-time tasks), `recurring_tasks`, `progress`, `build_stage` 0–5, `ready_to_complete`. |
 | `POST /api/work/projects` | `{name, theme, description?}`; themes `meadow, beach, forest, snow, desert, sky`. At most 30 active projects. |
 | `PATCH /api/work/projects/{id}` | Name, theme, description, `status` (`active/completed/archived`). Completing sets `completed_at`, and the island is fully built and lit. |
-| `GET /api/work/dashboard?tz=` | `tasks_today`, `overdue` (one-time work tasks past their day or deadline), `upcoming` (next 6 days), `projects`, `chests`, `summary` (done/total, focus minutes today, EXP left today), `walk` (status, goals done/total), `pet_line`. |
+| `GET /api/work/dashboard?tz=` | `tasks_today`, `overdue` (one-time work tasks past their day or deadline), `upcoming` (next 6 days, nearest first; the app draws a task that is in both `tasks_today` and `overdue` once), `projects`, `chests`, `summary` (done/total, focus minutes today, EXP left today), `walk` (status, goals done/total), `pet_line`. |
 | `GET /api/work/statistics?period=day\|week\|month&tz=` | Completions per local day, on time vs late, by priority, by project, best day. Removed tasks count. |
 | `GET /api/work/rewards` | Chest progress (capped at 10 per day) and chest states. |
 | `POST /api/work/rewards/{code}/claim` | Opens a ready chest once. `409 chest_locked`, `404 chest_not_found`; a repeat returns `already_opened: true` and grants nothing. |
@@ -182,9 +182,15 @@ Behaviour worth knowing:
   lock; `client_ref` makes a retried save count once (tested with concurrent withdrawals).
 - Only the owner can read anything; no friend or town endpoint shows money; amounts are never logged. Only what the
   user records moves the garden: no tasks, coins or bank. No advice is given.
-- API: `GET/POST /api/finance/goals`, `PATCH /api/finance/goals/{id}`, `GET/POST /api/finance/transactions`,
-  `PATCH/DELETE /api/finance/transactions/{id}`, `GET/POST /api/finance/categories`, `GET/POST /api/finance/budgets`,
-  `GET /api/finance/summary?period=YYYY-MM`.
+- A month is the user's own calendar month: `tz` from the app, else their Pomodoro settings' zone (as in `life.py`). An
+  entry is dated when it is saved, so the app records income and expenses only while the current month is on screen; a
+  budget can be set for any month shown.
+- At most 20 active goals, also when an archived goal is brought back (409 `too_many_goals`).
+- The screen (`mobile/src/screens/money`): a 3D garden rendered in advance (`scripts/render-scenes`, `GardenScene.tsx`) with one plant per goal, the live sky and weather, and the user's own pet. Everything it shows comes from the server: the stage, `percent` (held at 100 past the target while `saved_amount` stays real) and the sum on the board (the `saved_amount` of the goals on show). Celebration plays only after the server has answered. The app edits a goal's name, target and species with `PATCH /api/finance/goals/{id}`, sending only what changed.
+- API: `GET/POST /api/finance/goals`, `PATCH /api/finance/goals/{id}`, `GET/POST /api/finance/transactions`
+  (`?period=YYYY-MM&tz=&transaction_type=income,expense&before=`; one type or several, comma-separated),
+  `PATCH/DELETE /api/finance/transactions/{id}`, `GET/POST /api/finance/categories`, `GET/POST /api/finance/budgets?tz=`,
+  `GET /api/finance/summary?period=YYYY-MM&tz=`.
 
 ### Thị trấn Mirabi (`backend/app/town.py`)
 - The map: Quảng trường, Phố Bạn bè (one house per 16+ friend: visit their room or garden through the existing visit
@@ -193,8 +199,8 @@ Behaviour worth knowing:
   an atomic add to the project, at most 1 000 coins a day, `client_ref` for retries, no EXP.
 - Gifts move one free (not placed) inventory copy to a 16+ friend, once per `client_ref` (tested concurrently);
   keepsakes can't be given; 10 a day; the receiver gets a `town_gift` notification.
-- Visits to friends' rooms are logged (`visit_logs`, at most one per pair per 10 minutes). Pet play keeps its existing
-  capped EXP. Blocks and the visit permission are the friends system's own.
+- Visits to friends' rooms are logged (`visit_logs`, at most one per pair per 10 minutes), only between accounts of 16
+  and over, and the history shows only those. Pet play keeps its existing capped EXP. Blocks and the visit permission are the friends system's own.
 - Seeds: three projects and two events by code (events start when first seeded).
 - API: `GET /api/town/map`, `GET /api/town/events`, `GET /api/town/projects`, `POST /api/town/projects/{id}/contribute`,
   `POST /api/town/gifts`, `GET /api/town/gifts`, `GET /api/town/giftable`, `GET /api/town/visits/history`.
@@ -301,6 +307,7 @@ background (16:9, 1080 px wide), six island illustrations × six build stages, a
 - The town's events are seeded once with dates from their first start; there is no admin screen for events or projects
   yet (edit the seed or the rows).
 - Gifts are one copy at a time; coins have no in-app top-up (they are the existing in-game balance).
+- An archived project or goal has no way back in the app yet (the API can restore it): the app asks before archiving.
 - The town street, map, garden trees and skill tree are vector art made for this; final illustration and the pet's
   extra sprite sheets (section 7) are still wanted.
 
@@ -308,7 +315,7 @@ background (16:9, 1080 px wide), six island illustrations × six build stages, a
   Phase 1 report).
 - The pet's walk-to-desk is a horizontal slide using the walk sheet, not a path through the room.
 - Task statistics count completions by their UTC timestamp converted to the requested zone. The walk's goals and the
-  task EXP cap use the UTC day, as before Mirabi Life.
+  task EXP cap use the server's calendar day (`days.py`, `DAILY_RESET_TIMEZONE`).
 - Healing mood and journal limits are per-account database counts, not a gateway rate limit.
 - Child accounts: Phase 1 adds no social features. The privacy review for Mirabi Town (Phase 3) is still to do.
 - `tests/test_education.py::test_the_learning_openapi_document_is_valid_and_up_to_date` needs

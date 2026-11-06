@@ -9,6 +9,7 @@ import type { Catalog, FreeLevel, LearningSession, LessonProgramme, ResumeLesson
 import { appTheme as t } from '../../theme';
 import type { IconName } from '../../ui/kit';
 import { HeaderIcon, IconBadge, Look, shortSubjectName } from './LearningUI';
+import { SchoolYard } from './SchoolYard';
 
 // Vector icons, not emoji: flag emoji (🇬🇧) show as letters ("GB") on Windows and some Android devices. The names
 // here are the defaults; a grade's programme names its subjects as at school (Tiếng Việt / Ngữ văn, Khoa học…).
@@ -64,13 +65,15 @@ type Props = {
   onOpenArchive: () => void;
   /** Asks for age and grade when the account has none yet. */
   profilePrompt?: React.ReactNode;
+  /** The learner's pet, in the school yard. */
+  petId?: string; petLevel?: number;
 };
 
 /** "Học tập" opens here, kept short: the grade and school year (locked: there is no grade picker), at most one
  * "Tiếp tục học", then the subjects of that grade as a grid. Sổ tay, Kho lưu trữ and Cần ôn are icons of the header.
  * A subject leads to its lessons (or, with none yet, to its games). Nothing is created on the backend until a game starts. */
 export function SubjectPicker({ catalog, lessons, error, onRetry, current, focus, onResume, onDiscard, onOpenLesson, onOpenSubject,
-  onFreeStudy, onOpenElectives, onOpenReview, modeSwitch, education, onPickLevel, onOpenNotebook, onOpenArchive, profilePrompt }: Props) {
+  onFreeStudy, onOpenElectives, onOpenReview, modeSwitch, education, onPickLevel, onOpenNotebook, onOpenArchive, profilePrompt, petId, petLevel }: Props) {
   const { width } = useWindowDimensions();
   const columns = Math.min(width, 760) - 40 >= 330 ? 3 : 2;
   const reviewTotal = catalog?.subjects.reduce((n, s) => n + s.topics.reduce((m, x) => m + x.review_count, 0), 0) ?? 0;
@@ -111,6 +114,7 @@ export function SubjectPicker({ catalog, lessons, error, onRetry, current, focus
         </View>
       </View>
       {modeSwitch}
+      <SchoolYard petId={petId} petLevel={petLevel} />
       {profilePrompt}
       {!atSchool && programme?.outside_school && programme.levels.length && onPickLevel ? (
         <View style={styles.chips} accessibilityRole="radiogroup" accessibilityLabel="Trình độ">

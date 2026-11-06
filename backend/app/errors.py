@@ -21,7 +21,9 @@ DEFAULT_CODES = {400: "bad_request", 401: "not_authenticated", 403: "forbidden",
 def install_error_handlers(app: FastAPI) -> None:
     @app.exception_handler(StarletteHTTPException)
     async def http_error(request: Request, exc: StarletteHTTPException):
-        code = getattr(exc, "code", None) or DEFAULT_CODES.get(exc.status_code, "error")
+        # A few routes raise HTTPException(detail={"code": ...}): their code is what the client acts on.
+        own_code = exc.detail.get("code") if isinstance(exc.detail, dict) else None
+        code = getattr(exc, "code", None) or own_code or DEFAULT_CODES.get(exc.status_code, "error")
         detail = exc.detail if isinstance(exc.detail, str) else "Request failed"
         return JSONResponse({"detail": detail, "code": code}, status_code=exc.status_code, headers=getattr(exc, "headers", None))
 

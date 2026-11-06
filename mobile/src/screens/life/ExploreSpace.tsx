@@ -1,25 +1,31 @@
 import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, Animated, Easing, LayoutChangeEvent, Pressable, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Animated, BackHandler, Easing, type ImageSourcePropType, Image, LayoutChangeEvent, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-import Svg, { Circle, G, Path, Rect } from 'react-native-svg';
+import Svg, { Path, Rect } from 'react-native-svg';
 import type { User } from '../../auth/AuthContext';
-import { type Light, mixColor, sunAt } from '../../components/daylight';
+import { sunAt } from '../../components/daylight';
 import { Text } from '../../components/Typography';
 import { lifeEligible } from '../../life/access';
 import { petById } from '../../pets';
-import { hasSprite, WALK_CYCLE_MS } from '../../petSprites';
+import { hasSprite } from '../../petSprites';
 import { appTheme as t } from '../../theme';
-import { type as typeScale } from '../../ui/design';
+import { radius, type as typeScale } from '../../ui/design';
 import { Button, ProgressBar } from '../../ui/kit';
+import { useToast } from '../../ui/Toast';
 import { useAtmosphere, useSameValue } from '../../world/atmosphere';
-import { useFrameWatch, useTravel, useWorldMotion } from '../../world/budget';
-import { CloudDeck, Fireflies, Fog, GrassField, LivingPet, type LivingPetHandle, Rain, Snow, WeatherChip, WorldPanel } from '../../world/living';
-import { EASE } from '../../world/motion';
-import { castBy, type Cast, Glow, SkyBodies, Stars, wave } from '../../world/sky';
+import { useFrameWatch, useWorldMotion } from '../../world/budget';
+import { Plate } from '../../world/diorama';
+import { Fireflies, Fog, LivingPet, type LivingPetHandle, Rain, Snow, Sway, WeatherChip, WorldPanel } from '../../world/living';
+import { EASE, restartFromZero } from '../../world/motion';
+import { castBy, Glow, SkyBodies, Stars } from '../../world/sky';
 import { useWeather } from '../../world/weather';
 import { formatRemaining, normalizePetSpace, type PetSpace } from '../main/petSpace';
 import { request } from '../main/shared';
+import { YardClouds } from '../garden/GardenWorld';
+import { PhotoControls } from './PhotoControls';
+import { loopAt, loopMs, pacing, RATE, roadTrack, shownSlots, SWAY, valleyLayout, type ValleyLayout, WALK_X, WILD } from './exploreArt';
+import { SWITCHER_HEIGHT, SWITCHER_TOP } from './spaces';
 
 type Props = {
   user: User; top: number; bottom: number;
@@ -27,23 +33,36 @@ type Props = {
   onOpenGifts: () => Promise<void> | void; onOpenInventory: () => void; onOpenQuests: () => void;
   /** Phiêu lưu cuộc sống, for those aged 16 and over. */ onOpenAdventure?: () => void;
   /** Every answer of /api/pet/space, for the hatching to follow. */ onPetSpace?: (space: unknown) => void;
+  /** The app hides its own bars while the scene is alone on the screen. */ onPhotoMode?: (on: boolean) => void;
+  /** What the system takes at the bottom of the screen, once the app's own bar has gone. */ safeBottom?: number;
 };
 
 const FALLBACK = { width: 390, height: 680 };
-/** How much road the pet covers per full loop of its walk strip, as a share of its size. */
-const STRIDE_SHARE = 0.62;
+/** From this dark on only the night picture is drawn: the day's pale edge would show through round the hills. */
+const FULL_DARK = 0.9;
 
 /**
  * Khám phá: the pet's walk as a place. All the walk's rules stay in companion.py: this screen only reads
  * /api/pet/space, and never starts, ends or rewards anything by itself (the gift stays in the app's own popup).
- * - On its way, the pet really walks a road: the camera follows it, and the road and the strip are driven by one value,
- *   so its feet stay on the ground at any screen width.
- * - It leaves from the gate and comes back along the same road, glad to be home, with what it found still wrapped up.
+ * - The scene is an open valley seen from far back that never ends (exploreArt.ts). While it is out, the pet walks on and
+ *   on: it holds its place on the screen and the land goes by, each layer at the speed its distance gives it.
+ * - Where it has got to comes from when the walk began, so leaving the app or the screen and coming back finds it further on.
+ * - It comes back along the same road, glad to be home, with what it found still wrapped up.
+ * - Photo mode only hides things: the scene, the pet and the countdown stay mounted and running, so nothing about the
+ *   walk can change by turning it on or off, and the walk may even end while it is on.
  */
-export function ExploreSpace({ user, top, bottom, version, onOpenGifts, onOpenInventory, onOpenQuests, onOpenAdventure, onPetSpace }: Props) {
+export function ExploreSpace({ user, top, bottom, version, onOpenGifts, onOpenInventory, onOpenQuests, onOpenAdventure, onPetSpace, onPhotoMode, safeBottom = 0 }: Props) {
   const [space, setSpace] = useState<PetSpace | null>(null);
   const [failed, setFailed] = useState(false);
   const [size, setSize] = useState(FALLBACK);
+  const [photo, setPhoto] = useState(false);
+  const scene = useRef<View>(null);
+  // When the walk began on this phone's clock, from the server's own times: the same whenever this screen is opened during the walk.
+  const walkedFrom = useMemo(() => {
+    if (space?.status !== 'walking') return null;
+    const left = space.return_at && space.server_now ? Date.parse(space.return_at) - Date.parse(space.server_now) : space.seconds_left * 1000;
+    return Date.now() - Math.max(0, space.walk_minutes * 60_000 - left);
+  }, [space?.status, space?.return_at]); // eslint-disable-line react-hooks/exhaustive-deps
   // Only the latest answer counts: one that started before the gift was confirmed is out of date.
   const loads = useRef(0);
   const onPetSpaceRef = useRef(onPetSpace);
@@ -65,17 +84,45 @@ export function ExploreSpace({ user, top, bottom, version, onOpenGifts, onOpenIn
     return () => clearInterval(timer);
   }, [space?.status, load]);
 
+  // The bars come back however this screen ends.
+  const onPhotoRef = useRef(onPhotoMode);
+  onPhotoRef.current = onPhotoMode;
+  useEffect(() => { onPhotoRef.current?.(photo); }, [photo]);
+  useEffect(() => () => { onPhotoRef.current?.(false); }, []);
+  useEffect(() => {
+    if (!photo) return;
+    const sub = BackHandler.addEventListener('hardwareBackPress', () => { setPhoto(false); return true; });
+    return () => sub.remove();
+  }, [photo]);
+
   const pet = petById(user.pet);
   const name = user.pet_name ?? pet.name;
+  // The scene is laid out for the whole window and never for the space left by the bars, so hiding them moves nothing in it.
+  const { height: windowHeight } = useWindowDimensions();
   const onLayout = (e: LayoutChangeEvent) => {
     const { width, height } = e.nativeEvent.layout;
     setSize((b) => (b.width === width && b.height === height ? b : { width, height }));
   };
+  const screenHeight = Math.max(windowHeight, size.height);
+  const hidden = photo ? s.hidden : null;
   return (
     <View style={s.fill} onLayout={onLayout} testID="explore-space">
-      <Road width={size.width} height={size.height} pet={pet.id} level={user.level} status={space?.status ?? 'rested'} bottom={bottom} />
-      <Weather top={top + 8} />
-      <View style={[s.dock, { bottom: bottom + 10 }]} pointerEvents="box-none">
+      <View ref={scene} collapsable={false} style={[s.scene, { height: screenHeight }]} testID="explore-scene">
+        <Valley width={size.width} height={windowHeight} pet={pet.id} level={user.level} status={space?.status ?? null} walkedFrom={walkedFrom} />
+      </View>
+      <View style={[s.topRow, { top: top + 8 }, hidden]} pointerEvents="box-none">
+        <Weather />
+        <View style={s.topRight}>
+          <Pressable onPress={() => setPhoto(true)} style={s.fullButton} accessibilityRole="button" accessibilityLabel="Toàn màn hình để ngắm cảnh và chụp ảnh" hitSlop={6} testID="explore-photo-open">
+            <Ionicons name="scan-outline" size={21} color={t.accent} />
+          </Pressable>
+          <Pressable onPress={() => setPhoto(true)} style={s.hideToggle} accessibilityRole="switch" accessibilityState={{ checked: false }} accessibilityLabel="Ẩn giao diện" hitSlop={4} testID="explore-photo-toggle">
+            <Text style={s.hideText}>Ẩn giao diện</Text>
+            <View style={s.track}><View style={s.knob} /></View>
+          </Pressable>
+        </View>
+      </View>
+      <View style={[s.dock, { bottom: bottom + 10 }, hidden]} pointerEvents="box-none">
         {!space ? (
           <WorldPanel>
             {failed ? <Pressable onPress={() => { setFailed(false); void load(); }} accessibilityRole="button" style={s.retry}>
@@ -85,16 +132,24 @@ export function ExploreSpace({ user, top, bottom, version, onOpenGifts, onOpenIn
         ) : <Journey space={space} name={name} egg={user.level === 0} onExpired={load} onOpenGifts={onOpenGifts} onOpenInventory={onOpenInventory} onOpenQuests={onOpenQuests}
           onOpenAdventure={lifeEligible(user) ? onOpenAdventure : undefined} />}
       </View>
+      {photo ? <ExplorePhotoControls scene={scene} top={Math.max(8, top - SWITCHER_HEIGHT - SWITCHER_TOP + 8)} bottom={safeBottom + 18} onClose={() => setPhoto(false)} /> : null}
     </View>
   );
 }
 
 /** The real weather, small, in the corner of the sky; nothing at all without a reading. */
-function Weather({ top }: { top: number }) {
+function Weather() {
   const { reading } = useWeather();
   const { night } = useAtmosphere(reading);
-  if (!reading) return null;
-  return <View style={[s.topRow, { top }]} pointerEvents="none"><WorldPanel style={s.weather}><WeatherChip night={night} /></WorldPanel></View>;
+  if (!reading) return <View />;
+  return <View pointerEvents="none"><WorldPanel style={s.weather}><WeatherChip night={night} /></WorldPanel></View>;
+}
+
+// ------------------------------------------------------------------------------------------------ photo mode
+/** All that is left on the screen in photo mode (the two study rooms have the same). */
+function ExplorePhotoControls(props: { scene: React.RefObject<View | null>; top: number; bottom: number; onClose: () => void }) {
+  const toast = useToast();
+  return <PhotoControls {...props} notify={toast} />;
 }
 
 // ------------------------------------------------------------------------------------------------ the panel
@@ -102,11 +157,14 @@ function Weather({ top }: { top: number }) {
 function Journey({ space, name, egg, onExpired, onOpenGifts, onOpenInventory, onOpenQuests, onOpenAdventure }: {
   space: PetSpace; name: string; egg: boolean; onExpired: () => void; onOpenGifts: Props['onOpenGifts']; onOpenInventory: () => void; onOpenQuests: () => void; onOpenAdventure?: () => void;
 }) {
-  const offset = useRef(0);
-  if (space.server_now) offset.current = Date.parse(space.server_now) - Date.now();
-  const left = useCallback(() => (space.return_at ? Math.max(0, Math.ceil((Date.parse(space.return_at) - Date.now() - offset.current) / 1000)) : space.seconds_left),
+  // How far the phone's clock is from the server's, worked out once per answer: redone on a later render, `server_now`
+  // would be old by then and the time left would never go down.
+  const offset = useRef({ answer: null as string | null, ms: 0 });
+  if (space.server_now && offset.current.answer !== space.server_now) offset.current = { answer: space.server_now, ms: Date.parse(space.server_now) - Date.now() };
+  const left = useCallback(() => (space.return_at ? Math.max(0, Math.ceil((Date.parse(space.return_at) - Date.now() - offset.current.ms) / 1000)) : space.seconds_left),
     [space.return_at, space.seconds_left]);
   const [seconds, setSeconds] = useState(left);
+  const [small, setSmall] = useState(false);
   const walking = space.status === 'walking';
   useEffect(() => {
     if (!walking) return;
@@ -140,15 +198,22 @@ function Journey({ space, name, egg, onExpired, onOpenGifts, onOpenInventory, on
     const total = Math.max(1, space.walk_minutes * 60);
     const arrival = space.return_at ? new Date(space.return_at).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }) : '';
     return <WorldPanel style={s.panelBody}>
-      <Text style={s.heading}>{name} đang khám phá</Text>
+      <View style={s.headingRow}>
+        <Text style={[s.heading, s.grow]}>{name} đang khám phá</Text>
+        <Pressable onPress={() => setSmall((was) => !was)} style={s.fold} accessibilityRole="button" accessibilityLabel={small ? 'Mở rộng thẻ' : 'Thu gọn thẻ'} hitSlop={8} testID="explore-card-fold">
+          <Ionicons name={small ? 'chevron-up' : 'chevron-down'} size={18} color={t.muted} />
+        </Pressable>
+      </View>
       <View style={s.timeRow} accessible accessibilityLabel={`Còn ${formatRemaining(seconds)}${arrival ? `, về lúc ${arrival}` : ''}`}>
         <Ionicons name="time-outline" size={15} color={t.accent} />
         <Text style={s.time}>{formatRemaining(seconds)}</Text>
         {arrival ? <Text style={s.body}>Về lúc {arrival}</Text> : null}
       </View>
-      <ProgressBar value={Math.max(0, Math.min(1, 1 - seconds / total))} />
-      <Text style={s.body}>Quà vẫn là bí mật cho tới khi {name} về nhà.</Text>
-      {links}
+      {small ? null : <>
+        <ProgressBar value={Math.max(0, Math.min(1, 1 - seconds / total))} />
+        <Text style={s.body}>Quà vẫn là bí mật cho tới khi {name} về nhà.</Text>
+        {links}
+      </>}
     </WorldPanel>;
   }
   if (space.status === 'returned') {
@@ -179,161 +244,198 @@ function Journey({ space, name, egg, onExpired, onOpenGifts, onOpenInventory, on
   </WorldPanel>;
 }
 
-// ------------------------------------------------------------------------------------------------ the road
-const strip = (width: number, height: number, children: React.ReactNode) => <Svg width={width * 2} height={height}>{children}</Svg>;
-/** Slides a two-width strip left by one width per cycle: an endless band of scenery. */
-function Scroller({ width, progress, children }: { width: number; progress: Animated.Value; children: React.ReactNode }) {
-  return <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFill, { width: width * 2, transform: [{ translateX: progress.interpolate({ inputRange: [0, 1], outputRange: [0, -width] }) }] }]}>{children}</Animated.View>;
+// ------------------------------------------------------------------------------------------------ the valley
+type Art = { day: ImageSourcePropType; night: ImageSourcePropType };
+type Box = { x: number; y: number; w: number; h: number };
+type Picture = Art & Box;
+
+/** One layer's picture at its place along the strip: the same picture by day and at night, crossfading with the dark. */
+const Layer = memo(function Layer({ art, l, left, stars }: { art: Picture; l: ValleyLayout; left: number; stars: number }) {
+  const width = art.w * l.wide + 0.5, height = art.h * l.tall, style = { left: left + art.x * l.wide, top: l.top + art.y * l.tall };
+  return <>
+    {stars < FULL_DARK ? <Plate source={art.day} width={width} height={height} style={style} /> : null}
+    {stars > 0 ? <Plate source={art.night} width={width} height={height} opacity={stars < FULL_DARK ? stars : 1} style={style} /> : null}
+  </>;
+});
+
+/** The trees of a hill picture that move with the wind, each from its foot. Always a little: a still tree looks painted. */
+const Trees = memo(function Trees({ hill, l, left, wind, stars }: { hill: number; l: ValleyLayout; left: number; wind: number; stars: number }) {
+  return <>{SWAY[hill].map((tree) => (
+    <Sway key={tree.ms} wind={Math.max(wind, 0.5)} depth={tree.depth} ms={tree.ms} rest={[0, 800]} style={{ position: 'absolute', left: left + tree.x * l.wide, top: l.top + tree.y * l.tall, width: tree.w * l.wide, height: tree.h * l.tall }}>
+      <Image source={tree.day} resizeMode="stretch" fadeDuration={0} accessibilityIgnoresInvertColors style={s.whole} />
+      {stars > 0 ? <Image source={tree.night} resizeMode="stretch" fadeDuration={0} accessibilityIgnoresInvertColors style={[s.whole, { opacity: stars }]} /> : null}
+    </Sway>
+  ))}</>;
+});
+
+/**
+ * An endless layer: its pictures one after the other and the first again at the end, sliding left once per loop. Which
+ * pictures are mounted follows the same clock as the loop, once a second: only what is on the screen or about to be holds
+ * a texture, and what comes on was mounted long before. Nothing here moves by React: the slide never stops for a render.
+ */
+function Loop({ pictures, l, width, value, ms, clock, moving, render }: { pictures: number; l: ValleyLayout; width: number; value: Animated.Value; ms: number; clock: () => number; moving: boolean;
+  render: (index: number, left: number) => React.ReactNode }) {
+  const span = l.wide * pictures;
+  const [slots, setSlots] = useState(() => shownSlots(pictures, l.wide, width, loopAt(clock(), ms), (span / ms) * 1400));
+  useEffect(() => {
+    const look = () => { const next = shownSlots(pictures, l.wide, width, loopAt(clock(), ms), (span / ms) * 1400); setSlots((old) => (old.join() === next.join() ? old : next)); };
+    look();
+    if (!moving) return;
+    const timer = setInterval(look, 1000);
+    return () => clearInterval(timer);
+  }, [pictures, l.wide, width, clock, ms, moving, span]);
+  const translateX = useMemo(() => value.interpolate({ inputRange: [0, 1], outputRange: [0, -span] }), [value, span]);
+  return <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFill, { width: span + l.wide, transform: [{ translateX }] }]}>
+    {slots.map((slot) => <React.Fragment key={slot}>{render(slot % pictures, slot * l.wide)}</React.Fragment>)}
+  </Animated.View>;
 }
 
-const Far = memo(function Far({ width, height, ground, c }: { width: number; height: number; ground: number; c: Light }) {
-  return strip(width, height, <>
-    <Path d={wave(width, ground - height * 0.2, height * 0.03, 2, ground + 8, 0.6, 10)} fill={mixColor(c.hills[0], c.sky[1], 0.35)} />
-    <Path d={wave(width, ground - height * 0.14, height * 0.022, 3, ground + 8, 2.1, 10)} fill={c.hills[0]} />
-  </>);
-});
-const Near = memo(function Near({ width, height, ground, c }: { width: number; height: number; ground: number; c: Light }) {
-  return strip(width, height, <Path d={wave(width, ground - height * 0.075, height * 0.016, 2, ground + 8, 1.2, 10)} fill={c.hills[1]} />);
-});
-
-function Tree({ x, y, k, c, cast, kind }: { x: number; y: number; k: number; c: Light; cast: Cast; kind: number }) {
-  return <G transform={`translate(${x} ${y}) scale(${k})`}>
-    <Path d={`M${-10 * cast.stretch + cast.dx} 1 Q${cast.dx} 4 ${10 * cast.stretch + cast.dx} 1 Q${cast.dx} -1 ${-10 * cast.stretch + cast.dx} 1Z`} fill="#2E3B2A" opacity={c.shadow} />
-    <Rect x={-2.4} y={-18} width={4.8} height={18} rx={2} fill={c.trees[0]} />
-    {kind === 0 ? <>
-      <Circle cx={0} cy={-27} r={12} fill={c.trees[1]} /><Circle cx={-7} cy={-21} r={9} fill={c.trees[2]} /><Circle cx={7} cy={-22} r={9} fill={c.trees[3]} />
-    </> : <>
-      <Path d="M0 -44 L13 -18 L-13 -18Z" fill={c.trees[1]} /><Path d="M0 -34 L15 -10 L-15 -10Z" fill={c.trees[3]} />
-    </>}
-  </G>;
+/** A value going 0 to 1 and over again, for as long as the pet walks, standing where the walk's own clock says it is: back from the background or reopened, the road has gone on. */
+function useLoop(ms: number, on: boolean, clock: () => number) {
+  const value = useRef(new Animated.Value(loopAt(clock(), ms))).current;
+  useEffect(() => {
+    const from = loopAt(clock(), ms);
+    value.setValue(from);
+    if (!on) return;
+    const first = Animated.timing(value, { toValue: 1, duration: ms * (1 - from), easing: Easing.linear, useNativeDriver: true });
+    const loop = Animated.loop(restartFromZero(value, 1, ms));
+    let stopped = false;
+    first.start(({ finished }) => { if (!finished || stopped) return; value.setValue(0); loop.start(); });
+    return () => { stopped = true; first.stop(); loop.stop(); };
+  }, [on, ms, clock, value]);
+  return value;
 }
-const Trees = memo(function Trees({ width, height, ground, c, cast, k }: { width: number; height: number; ground: number; c: Light; cast: Cast; k: number }) {
-  return strip(width, height, [0, width].map((offset) => <G key={offset}>
-    {[[0.08, 0, 1], [0.27, 1, 0.8], [0.46, 0, 1.15], [0.68, 1, 1], [0.88, 0, 0.9]].map(([f, kind, scale]) =>
-      <Tree key={f} x={offset + width * f} y={ground - 4} k={k * scale} c={c} cast={cast} kind={kind} />)}
-  </G>));
-});
-const Land = memo(function Land({ width, height, ground, c, k }: { width: number; height: number; ground: number; c: Light; k: number }) {
-  const road = ground + 8 * k;
-  return strip(width, height, <>
-    <Path d={wave(width, ground - 2, 2.5, 2, height, 1.2, 8)} fill={c.meadow} />
-    <Path d={wave(width, road, 2, 4, road + 34 * k, 0, 8)} fill={c.path[0]} />
-    <Path d={wave(width, road + 3 * k, 2, 4, road + 11 * k, 0, 8)} fill={c.path[1]} opacity={0.75} />
-    <Path d={wave(width, road + 34 * k, 2.5, 5, height, 0.4, 8)} fill={c.front} />
-    {[0, width].map((offset) => <G key={offset}>
-      {[0.09, 0.3, 0.51, 0.77].map((f) => <Rect key={f} x={offset + width * f} y={road + ((f * 100) % 22) * k} width={7 * k} height={3 * k} rx={1.5 * k} fill={c.pebble} />)}
-      {([[0.04, 0], [0.21, 1], [0.38, 2], [0.59, 0], [0.73, 1], [0.94, 2]] as const).map(([f, i]) =>
-        <Circle key={f} cx={offset + width * f} cy={ground + 4 * k - (f * 10) % 3} r={2.4 * k} fill={c.flowers[i]} />)}
-    </G>)}
-  </>);
-});
-const Front = memo(function Front({ width, height, c }: { width: number; height: number; c: Light }) {
-  const dark = mixColor(c.front, '#1E3A2A', 0.3);
-  return strip(width, height, <>
-    <Path d={wave(width, height - 24, 5, 4, height, 2, 8)} fill={dark} />
-    {[0, width].map((offset) => <G key={offset}>
-      {[0.06, 0.22, 0.41, 0.63, 0.82].map((f) => <Path key={f} d={`M${offset + width * f} ${height - 18} q-3 -16 -7 -24 M${offset + width * f + 4} ${height - 18} q0 -18 3 -30 M${offset + width * f + 8} ${height - 18} q3 -12 9 -20`}
-        stroke={dark} strokeWidth={3} strokeLinecap="round" fill="none" />)}
-    </G>)}
-  </>);
-});
 
-const GRASS = [[0.08, 0.1, 1.1], [0.22, 0.42, 1.4], [0.36, 0.05, 1], [0.52, 0.5, 1.5], [0.67, 0.14, 1.1], [0.84, 0.36, 1.35], [0.94, 0.04, 1], [0.14, 0.6, 1.5]] as const;
-
-/** The whole scene. Layers from far to near slide at rising speeds (parallax); clouds drift on their own clock, also
- * while the pet is home. Only the time of day and the weather recolour it: nothing is remounted, so the pet's walk
- * carries on through any change of light or rain. */
-const Road = memo(function Road({ width, height, pet, level, status, bottom }: { width: number; height: number; pet: string; level: number; status: PetSpace['status']; bottom: number }) {
+/**
+ * The whole scene, far from the panel. While the pet is out it walks and never stops: it holds its place on the screen,
+ * its strip and the road are driven by one value, and every other layer slides by how far away it is. Its pace is a whole
+ * number of steps per picture, so its feet never slide and the strip is on the frame it started from at each join. Only
+ * the time of day and the weather recolour the rest: nothing is remounted, so a walk carries on through any change of
+ * light or rain, and through photo mode.
+ */
+const Valley = memo(function Valley({ width, height, pet, level, status, walkedFrom }: { width: number; height: number; pet: string; level: number; status: PetSpace['status'] | null; /** When the walk began, on this phone's clock. */ walkedFrom: number | null }) {
   const { reading } = useWeather();
   const { hours, period, mood, light: c } = useAtmosphere(reading);
   useFrameWatch('explore');
   const cast = useSameValue(castBy(sunAt(hours)));
   const { animate } = useWorldMotion();
-  const k = Math.max(1, Math.min(1.9, height / 420));
-  // High enough for the panel at the bottom to leave its feet in view on a short screen.
-  const ground = Math.round(Math.min(height * 0.62, height - bottom - 216 - 30 * k));
-  const size = Math.round(Math.max(92, Math.min(150, width * 0.36)));
-  const feet = ground + 30 * k;
-  const on = status === 'walking';
-  // One loop of the road is a whole number of strides, so the strip is on the frame it started on at the seam. The road
-  // moves exactly as fast as the pet's feet: width / strides per strip loop.
-  const strideLength = size * STRIDE_SHARE;
-  const strides = Math.max(1, Math.round(width / strideLength));
-  const roadMs = strides * WALK_CYCLE_MS;
-  const road = useTravel({ ms: roadMs, enabled: on });
-  const trees = useTravel({ ms: roadMs * 1.5, enabled: on });
-  const near = useTravel({ ms: roadMs * 3, enabled: on });
-  const far = useTravel({ ms: roadMs * 6, enabled: on });
-  const front = useTravel({ ms: roadMs * 0.7, enabled: on });
-  const phase = useMemo(() => Animated.multiply(road, strides) as unknown as Animated.Value, [road, strides]);
+  const l = useMemo(() => valleyLayout(width, height), [width, height]);
+  const size = l.pet;
+  const paced = useMemo(() => pacing(l.wide, size), [l.wide, size]);
+  const walkX = width * WALK_X;
+
+  // How long the pet has been out; once it is back, how far it had got.
+  const lastElapsed = useRef(0);
+  // The walk has just ended: the land stops right where it is, with no step back to the last time it was read.
+  const walkStart = useRef(walkedFrom);
+  if (walkedFrom !== null) walkStart.current = walkedFrom;
+  else if (walkStart.current !== null) { lastElapsed.current = Math.max(0, Date.now() - walkStart.current); walkStart.current = null; }
+  const clock = useCallback(() => {
+    if (walkedFrom !== null) lastElapsed.current = Math.max(0, Date.now() - walkedFrom);
+    return lastElapsed.current;
+  }, [walkedFrom]);
+  const walking = status === 'walking';
+  const on = walking && animate;
+  const roadMs = paced.tileMs * WILD.lands.length;
+  const road = useLoop(roadMs, on, clock);
+  const front = useLoop(loopMs(paced.tileMs, WILD.fronts.length, RATE.front), on, clock);
+  const near = useLoop(loopMs(paced.tileMs, WILD.nears.length, RATE.near), on, clock);
+  const mid = useLoop(loopMs(paced.tileMs, WILD.mids.length, RATE.mid), on, clock);
+  const far = useLoop(loopMs(paced.tileMs, 1, RATE.far), on, clock);
+  // Steps go on across the road's loop: a whole number of them per loop, so the strip never skips a frame at the join.
+  const phase = useMemo(() => Animated.multiply(road, paced.steps * WILD.lands.length) as unknown as Animated.Value, [road, paced.steps]);
   // Two steps per loop of the strip: the body dips at each landing, and dust is kicked back from it.
-  const stepping = useMemo(() => Animated.modulo(Animated.multiply(road, strides * 2), 1), [road, strides]);
+  const stepping = useMemo(() => Animated.modulo(Animated.multiply(road, paced.steps * WILD.lands.length * 2), 1), [road, paced.steps]);
+  const track = useMemo(() => roadTrack(walkX / l.wide), [walkX, l.wide]);
+  const feet = useMemo(() => road.interpolate({ inputRange: track.at, outputRange: track.rows.map((row) => l.top + row * l.tall) }), [road, track, l]);
+  const nearer = useMemo(() => road.interpolate({ inputRange: track.at, outputRange: track.scales }), [road, track]);
   const drawn = hasSprite(pet, level, 'walk');
 
   const petRef = useRef<LivingPetHandle>(null);
-  const homeX = width * 0.56;
-  const walkX = width * 0.36;
-  // Starting out it comes in from the gate on the left; the road is moving already, so its pace never jumps.
-  const entrance = useRef(new Animated.Value(on ? 0 : 1)).current;
-  const was = useRef(status);
+  // Setting out, it comes in from the left and the road is already moving, so its pace never jumps. Opened while it is out, it is simply there, walking.
+  const entrance = useRef(new Animated.Value(1)).current;
+  const was = useRef<PetSpace['status'] | null>(null);
   const [arrived, setArrived] = useState(status !== 'returned');
+  const [fromRight, setFromRight] = useState(false);
   useEffect(() => {
+    if (status === null) return undefined;
     const before = was.current;
     was.current = status;
     if (status === 'walking') {
+      if (before === null || before === 'walking') return undefined;
       entrance.setValue(0);
       const run = Animated.timing(entrance, { toValue: 1, duration: animate ? 1100 : 0, easing: Easing.out(Easing.quad), useNativeDriver: true });
       run.start();
       return () => run.stop();
     }
     if (status === 'returned') {
-      let live = true;
+      // It was walking here: it stops where it is, with no jump, and is glad. Opened later: it comes along the road from the right.
+      if (before === 'walking' || before === 'returned') { setArrived(true); if (before === 'walking') void petRef.current?.act('celebrate'); return undefined; }
+      setFromRight(true);
       setArrived(false);
-      void petRef.current?.walkTo(homeX, feet).then(() => {
-        if (!live) return;
-        setArrived(true);
-        return petRef.current?.act('celebrate');
-      });
-      return () => { live = false; };
+      return undefined;
     }
     if (before === 'returned') setArrived(true);
     return undefined;
   }, [status]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Its own effect, so that it runs once the pet is standing off the screen on the right.
+  useEffect(() => {
+    if (!fromRight) return undefined;
+    let live = true;
+    void petRef.current?.walkTo(0, 0).then(() => {
+      if (!live) return;
+      setFromRight(false);
+      setArrived(true);
+      return petRef.current?.act('celebrate');
+    });
+    return () => { live = false; };
+  }, [fromRight]);
 
-  const away = status === 'walking';
-  const startX = status === 'returned' ? width + size * 0.5 : on ? walkX : homeX;
-  const label = on ? `Pet đang đi trên con đường giữa những ngọn đồi, ${PERIOD[period]}` : `Cổng nhà, nơi pet lên đường, ${PERIOD[period]}`;
+  const startX = fromRight ? width * 0.6 + size / 2 : 0;
+  const label = walking ? `Pet đang đi trên con đường giữa thung lũng, ${PERIOD[period]}` : `Thung lũng rộng, pet đang đứng trên con đường, ${PERIOD[period]}`;
+  const ridge = l.top + l.ridge * l.tall;
+  // The low sun warms the land; the pet stands in front of it and keeps its colours.
+  const low = Math.max(0, 1 - Math.abs(sunAt(hours).altitude - 0.14) / 0.34) * (1 - mood.gloom) * (1 - c.stars);
+  const grey = mood.gloom * (1 - c.stars);
+  const loopProps = { l, width, clock, moving: on };
   return (
     <View style={StyleSheet.absoluteFill} accessible accessibilityLabel={label} testID={`explore-road-${period}`}>
-      <LinearGradient colors={c.sky} style={StyleSheet.absoluteFill} />
-      {c.stars > 0 ? <Stars width={width} height={ground} opacity={c.stars} scale={2.4} testID="explore-stars" /> : null}
-      <SkyBodies width={width} hours={hours} c={c} horizon={ground - height * 0.1} zenith={height * 0.14} clip={ground - height * 0.06} body={110} idPrefix="explore" />
-      <CloudDeck width={width} top={height * 0.14} color={c.cloud} opacity={c.cloudOpacity} cover={mood.cover} />
-      <Scroller width={width} progress={far}><Far width={width} height={height} ground={ground} c={c} /></Scroller>
-      <Scroller width={width} progress={near}><Near width={width} height={height} ground={ground} c={c} /></Scroller>
-      <Scroller width={width} progress={trees}><Trees width={width} height={height} ground={ground} c={c} cast={cast} k={k * 1.5} /></Scroller>
-      <Scroller width={width} progress={road}><Land width={width} height={height} ground={ground} c={c} k={k} /></Scroller>
-      {c.petLight > 0 ? <Svg pointerEvents="none" width={size * 2} height={size * 0.6} style={{ position: 'absolute', left: (away ? walkX : homeX) - size, top: feet - size * 0.3 }}>
-        <Glow id="explore-pet-light" color="#FFF0C4" opacity={c.petLight} cx={size} cy={size * 0.3} rx={size} ry={size * 0.3} />
-      </Svg> : null}
-      <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFill, { transform: [
-        { translateX: entrance.interpolate({ inputRange: [0, 1], outputRange: [-width * 0.55, 0] }) },
-        { translateY: on && animate ? stepping.interpolate({ inputRange: [0, 0.5, 1], outputRange: [0, -size * 0.016, 0] }) : 0 },
-      ] }]}>
-        {on && animate ? <Animated.View style={[s.dust, { left: walkX - size * 0.34, top: feet - 8,
+      {/* The sky's palest colour meets the land. */}
+      <LinearGradient colors={c.sky} end={{ x: 0, y: Math.max(0.2, Math.min(1, (ridge + 90) / height)) }} style={StyleSheet.absoluteFill} />
+      {c.stars > 0 ? <Stars width={width} height={Math.max(0, ridge)} opacity={c.stars} scale={2.4} testID="explore-stars" /> : null}
+      <SkyBodies width={width} hours={hours} c={c} horizon={ridge + 40} zenith={Math.max(40, l.top * 0.6)} clip={ridge + 70} body={78} idPrefix="explore" />
+      <YardClouds width={width} top={Math.max(56, l.top * 0.42)} horizon={ridge + 30} opacity={c.cloudOpacity} night={c.stars} cover={Math.max(mood.cover, 0.6)} />
+      <Loop {...loopProps} pictures={1} value={far} ms={loopMs(paced.tileMs, 1, RATE.far)} render={(_, left) => <Layer art={WILD.far} l={l} left={left} stars={c.stars} />} />
+      <Loop {...loopProps} pictures={WILD.mids.length} value={mid} ms={loopMs(paced.tileMs, WILD.mids.length, RATE.mid)} render={(i, left) => <>
+        <Layer art={WILD.mids[i]} l={l} left={left} stars={c.stars} />
+        <Trees hill={i} l={l} left={left} wind={mood.wind} stars={c.stars} />
+      </>} />
+      <Loop {...loopProps} pictures={WILD.lands.length} value={road} ms={roadMs} render={(i, left) => <Layer art={WILD.lands[i]} l={l} left={left} stars={c.stars} />} />
+      <Loop {...loopProps} pictures={WILD.fronts.length} value={front} ms={loopMs(paced.tileMs, WILD.fronts.length, RATE.front)} render={(i, left) => <Layer art={WILD.fronts[i]} l={l} left={left} stars={c.stars} />} />
+      <Loop {...loopProps} pictures={WILD.nears.length} value={near} ms={loopMs(paced.tileMs, WILD.nears.length, RATE.near)} render={(i, left) => <Layer art={WILD.nears[i]} l={l} left={left} stars={c.stars} />} />
+      {low > 0.02 ? <View pointerEvents="none" style={[StyleSheet.absoluteFill, { backgroundColor: '#FFB26B', opacity: Math.round(low * 0.14 * 50) / 50 }]} testID="explore-warm-light" /> : null}
+      {grey > 0.02 ? <View pointerEvents="none" style={[StyleSheet.absoluteFill, { backgroundColor: '#5C6E86', opacity: Math.round(grey * 0.2 * 50) / 50 }]} /> : null}
+      {/* Its feet are this view's origin: the pet's own box hangs from it. It stays at one place across the screen; only the road's rise and fall move it. */}
+      <Animated.View pointerEvents="none" style={[s.traveller, { left: walkX, transform: [{ translateX: entrance.interpolate({ inputRange: [0, 1], outputRange: [-width * 0.6, 0] }) }, { translateY: feet }, { scale: nearer },
+        { translateY: on ? stepping.interpolate({ inputRange: [0, 0.5, 1], outputRange: [0, -size * 0.016, 0] }) : 0 }] }]} testID="explore-pet">
+        {/* A soft shadow on the road, leaning away from the sun. */}
+        <Svg pointerEvents="none" width={size} height={size * 0.26} style={{ position: 'absolute', left: -size / 2 + cast.dx, top: -size * 0.13, transform: [{ scaleX: cast.stretch }] }}>
+          <Glow id="explore-pet-shadow" color="#3A4A2C" opacity={Math.min(0.42, c.shadow * 2.4)} cx={size / 2} cy={size * 0.13} rx={size * 0.42} ry={size * 0.1} />
+        </Svg>
+        {c.petLight > 0 ? <Svg pointerEvents="none" width={size * 2} height={size * 0.6} style={{ position: 'absolute', left: -size, top: -size * 0.3 }}>
+          <Glow id="explore-pet-light" color="#FFF0C4" opacity={c.petLight} cx={size} cy={size * 0.3} rx={size} ry={size * 0.3} />
+        </Svg> : null}
+        {on ? <Animated.View style={[s.dust, { left: -size * 0.34 - 6, top: -8,
           opacity: stepping.interpolate({ inputRange: [0, 0.12, 0.6, 1], outputRange: [0.45, 0.32, 0, 0.45] }),
           transform: [{ translateX: stepping.interpolate({ inputRange: [0, 0.6, 1], outputRange: [0, -size * 0.14, 0] }) }, { scale: stepping.interpolate({ inputRange: [0, 0.6, 1], outputRange: [0.5, 1.3, 0.5] }) }] }]}>
           <View style={s.dustDot} /><View style={s.dustSmall} />
         </Animated.View> : null}
-        <LivingPet ref={petRef} pet={pet} level={level} size={size} x={startX} y={feet} walking={on} phase={on && drawn ? phase : undefined}
-          facing={status === 'returned' && !arrived ? -1 : 1} shadow={{ dx: cast.dx, stretch: cast.stretch, opacity: c.shadow }} />
+        <LivingPet ref={petRef} pet={pet} level={level} size={size} x={startX} y={0} walking={walking} phase={on && drawn ? phase : undefined} facing={fromRight ? -1 : 1} />
+        {status === 'returned' && arrived ? <GiftBundle x={size * 0.48} y={0} /> : null}
       </Animated.View>
-      {status === 'returned' && arrived ? <GiftBundle x={homeX + size * 0.48} y={feet} /> : null}
-      <Fireflies width={width} top={ground - height * 0.14} height={height * 0.3} strength={c.fireflies} />
-      <GrassField width={width} height={Math.max(1, height - feet - bottom * 0.2)} top={feet + 6} color={mixColor(c.front, '#1E3A2A', 0.25)} wind={mood.wind} spots={GRASS} />
-      <Scroller width={width} progress={front}><Front width={width} height={height} c={c} /></Scroller>
+      <Fireflies width={width} top={ridge + 60} height={Math.max(1, l.top + l.tall * 0.5 - ridge)} strength={c.fireflies} />
       <Fog height={height} strength={mood.fog} top={0.32} />
-      <Rain width={width} height={height} strength={mood.rain} wind={mood.wind} ground={0.66} />
+      <Rain width={width} height={height} strength={mood.rain} wind={mood.wind} ground={Math.min(0.9, (l.top + l.tall * 0.46) / height)} />
       <Snow width={width} height={height} strength={mood.snow} />
     </View>
   );
@@ -373,10 +475,24 @@ function GiftBundle({ x, y }: { x: number; y: number }) {
 
 const s = StyleSheet.create({
   fill: { flex: 1, overflow: 'hidden' },
-  topRow: { position: 'absolute', right: 12, flexDirection: 'row' },
+  scene: { position: 'absolute', left: 0, right: 0, top: 0, overflow: 'hidden' },
+  hidden: { display: 'none' },
+  // On the web an image keeps its file's size unless it is told otherwise.
+  whole: { position: 'absolute', left: 0, top: 0, width: '100%', height: '100%' },
+  topRow: { position: 'absolute', left: 12, right: 12, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+  topRight: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  fullButton: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.92)' },
+  hideToggle: { height: 42, borderRadius: 21, paddingLeft: 12, paddingRight: 8, flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: 'rgba(255,255,255,0.86)' },
+  hideText: { ...typeScale.caption, color: t.ink, fontWeight: '800' },
+  track: { width: 34, height: 20, borderRadius: 10, padding: 2, backgroundColor: 'rgba(120,136,160,0.5)' },
+  knob: { width: 16, height: 16, borderRadius: 8, backgroundColor: '#FFFFFF' },
+  traveller: { position: 'absolute', left: 0, top: 0, width: 0, height: 0 },
   weather: { paddingVertical: 2, paddingHorizontal: 4 },
   dock: { position: 'absolute', left: 12, right: 12 },
-  panelBody: { gap: 8, padding: 14 },
+  panelBody: { gap: 8, padding: 16, borderRadius: radius.lg },
+  headingRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  grow: { flex: 1 },
+  fold: { width: 28, height: 28, alignItems: 'center', justifyContent: 'center' },
   heading: { ...typeScale.title, color: t.ink, fontSize: 17, lineHeight: 22 },
   body: { ...typeScale.body, color: t.muted, fontSize: 13, lineHeight: 18 },
   timeRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },

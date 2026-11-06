@@ -1,17 +1,17 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Animated, Easing, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import Svg, { Circle, Defs, Path, RadialGradient, Stop } from 'react-native-svg';
 import type { User } from '../../auth/AuthContext';
-import { PetArt } from '../../components/PetArt';
 import { Text, TextInput } from '../../components/Typography';
-import { useReduceMotion } from '../../components/useReduceMotion';
 import { careerApi, type CareerDetail, type CareerSkill, type CareerSummary, type SkillStatus } from '../../life/worlds';
 import { appTheme as t } from '../../theme';
-import { Button, Chip, ProgressBar } from '../../ui/kit';
+import { Button, Chip } from '../../ui/kit';
 import { useToast } from '../../ui/Toast';
 import { showError } from '../main/shared';
-import { BackHeader, ErrorState, OptionSheet } from '../together/ui';
-import { StarBurst, useLoop } from '../work/workArt';
+import { ErrorState, OptionSheet } from '../together/ui';
+import { Knob, SceneHeader, SceneIn, Triumph, useSize } from '../../world/diorama';
+import { finished, layoutMap, Milestone, RegionSign, RoadMap, RoadPet } from './JourneyMap';
 
 type Props = { user: User; onBack: () => void; onRewards?: () => void };
 
@@ -24,8 +24,8 @@ const STATUS: Record<SkillStatus, { label: string; color: string; bg: string; ic
 };
 
 /**
- * Hành trình sự nghiệp: choose a career, then grow its skill tree. Each branch is a group of skills; a skill opens once
- * its prerequisites are practised. Progress says exactly what it is: the user's own estimate, a practice they did, or
+ * Hành trình sự nghiệp: choose a career, then walk its road. Each region is a group of skills, each milestone a skill; a
+ * skill opens once its prerequisites are practised (the server's rule). Progress says exactly what it is: the user's own estimate, a practice they did, or
  * a short check they passed. Nothing is presented as verified mastery. Careers come from the server (data/careers.json).
  */
 export function CareerJourneyScreen({ user, onBack, onRewards }: Props) {
@@ -38,6 +38,21 @@ export function CareerJourneyScreen({ user, onBack, onRewards }: Props) {
   const [burst, setBurst] = useState(0);
   const [badges, setBadges] = useState<{ title: string }[] | null>(null);
   const [opened, setOpened] = useState<Set<string>>(new Set());
+  const [lookBack, setLookBack] = useState(false);
+  const [size, onLayout] = useSize({ width: 390, height: 700 });
+  const map = useMemo(() => (detail ? layoutMap(detail.groups, size.width) : null), [detail, size.width]);
+  const allSkills = useMemo(() => detail?.groups.flatMap((g) => g.skills) ?? [], [detail]);
+  // The pet stands by the next milestone to take; at the last one when all are done.
+  const nextNode = useMemo(() => map?.nodes.find((n) => n.skill.status === 'available' || n.skill.status === 'in_progress') ?? map?.nodes.filter((n) => finished(n.skill.status)).pop() ?? map?.nodes[0] ?? null, [map]);
+  const scroll = useRef<ScrollView>(null);
+  // Opens on where the owner has got to, once.
+  const placed = useRef(false);
+  useEffect(() => {
+    if (placed.current || !nextNode) return;
+    placed.current = true;
+    const id = setTimeout(() => scroll.current?.scrollTo({ y: Math.max(0, nextNode.y - 170), animated: true }), 360);
+    return () => clearTimeout(id);
+  }, [nextNode]);
 
   const load = useCallback(async () => {
     try {
@@ -84,48 +99,83 @@ export function CareerJourneyScreen({ user, onBack, onRewards }: Props) {
   if (!careers) {
     return (
       <View style={s.fill}>
-        <BackHeader title="Hành trình sự nghiệp" subtitle="Cây kỹ năng cho nghề bạn chọn" onBack={onBack} />
+        <SceneHeader title="Hành trình sự nghiệp" subtitle="Bản đồ kỹ năng cho nghề bạn chọn" onBack={onBack} />
         {error ? <ErrorState error={error} onRetry={() => { setError(null); void load(); }} /> : <View style={s.skeleton} accessibilityLabel="Đang tải" />}
       </View>
     );
   }
+  const done = allSkills.filter((x) => finished(x.status));
   return (
-    <View style={s.fill} testID="career-journey">
-      <BackHeader title="Hành trình sự nghiệp" subtitle={detail ? detail.name : 'Chọn nghề để bắt đầu'} onBack={onBack}
-        right={detail ? <Pressable onPress={() => setPicking(true)} style={s.switch} accessibilityRole="button" accessibilityLabel="Đổi nghề">
-          <Ionicons name="swap-horizontal" size={18} color={t.accent} /></Pressable> : undefined} />
-      {!detail ? <CareerPicker careers={careers} onChoose={(c, g) => { void choose(c, g); }} /> : (
-        <ScrollView contentContainerStyle={s.content} showsVerticalScrollIndicator={false}>
-          <View style={s.hero}>
-            <PetArt pet={user.pet} stage={user.level} size={84} />
-            <View style={s.flex}>
+    <View style={s.fill} testID="career-journey" onLayout={onLayout}>
+      <SceneHeader title="Hành trình sự nghiệp" subtitle={detail ? detail.name : 'Chọn nghề để bắt đầu'} onBack={onBack}
+        right={detail ? <><Knob icon="albums" label="Nhìn lại hành trình" onPress={() => setLookBack(true)} /><Knob icon="swap-horizontal" label="Đổi nghề" onPress={() => setPicking(true)} /></> : undefined} />
+      {!detail || !map ? <CareerPicker careers={careers} onChoose={(c, g) => { void choose(c, g); }} /> : (
+        <ScrollView ref={scroll} contentContainerStyle={s.content} showsVerticalScrollIndicator={false}>
+          <SceneIn>
+            <View style={s.summit}>
               <Text style={s.heroTitle}>{detail.icon} {detail.name}</Text>
-              {detail.current_goal ? <Text style={s.note}>🎯 {detail.current_goal}</Text> : null}
+              {detail.current_goal ? <Text style={s.heroGoal} numberOfLines={2}>Mục tiêu: {detail.current_goal}</Text> : null}
               <Text style={s.heroCount}>{detail.skills_done}/{detail.skills_total} kỹ năng đã thực hành</Text>
-              <ProgressBar value={detail.skills_total ? detail.skills_done / detail.skills_total : 0} color="#22A06B" animated />
+              <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={s.medals}>
+                {detail.milestones.map((m) => <Medal key={m.code} title={m.title} earned={m.earned} />)}
+              </ScrollView>
             </View>
-            <StarBurst burstKey={burst} />
-          </View>
-          <View style={s.badges}>
-            {detail.milestones.map((m) => (
-              <View key={m.code} style={[s.badge, m.earned && s.badgeOn]} accessible accessibilityLabel={`Huy hiệu ${m.title}${m.earned ? ', đã đạt' : ''}`}>
-                <Text style={s.badgeIcon}>{m.earned ? '🏅' : '⚪'}</Text><Text style={[s.badgeText, m.earned && s.badgeTextOn]} numberOfLines={2}>{m.title}</Text>
-              </View>
-            ))}
-          </View>
-          {detail.groups.map((g) => <Branch key={g.name} name={g.name} skills={g.skills} opened={opened} onOpen={setSkill} />)}
-          <Text style={s.legal}>Tiến độ là do bạn tự ghi nhận hoặc qua bài kiểm tra ngắn trong ứng dụng, không phải chứng nhận năng lực chính thức.</Text>
+            <View style={[s.road, { height: map.height }]}>
+              <RoadMap map={map} width={size.width} />
+              {map.regions.map((r, i) => {
+                const skills = detail.groups[i]?.skills ?? [];
+                return <RegionSign key={r.name} region={r} total={skills.length} done={skills.filter((x) => finished(x.status)).length} />;
+              })}
+              {map.nodes.map((n) => <Milestone key={n.skill.id} node={n} justOpened={opened.has(n.skill.code)} onPress={() => setSkill(n.skill)} />)}
+              <RoadPet pet={user.pet} level={user.level} to={nextNode ? { x: Math.max(40, Math.min(size.width - 40, nextNode.x + (nextNode.side > 0 ? -62 : 62))), y: nextNode.y + 30 } : null} />
+              <Triumph play={burst} size={300} style={nextNode ? { left: nextNode.x, top: nextNode.y } : undefined} />
+            </View>
+          </SceneIn>
+          <View style={s.legalWrap}><Text style={s.legal}>Tiến độ là do bạn tự ghi nhận hoặc qua bài kiểm tra ngắn trong ứng dụng, không phải chứng nhận năng lực chính thức.</Text></View>
         </ScrollView>
       )}
       <OptionSheet visible={picking} title="Chọn nghề nghiệp" onClose={() => setPicking(false)}>
         <CareerPicker careers={careers} compact onChoose={(c, g) => { void choose(c, g); }} />
       </OptionSheet>
-      <SkillSheet skill={skill} all={detail?.groups.flatMap((g) => g.skills) ?? []} onClose={() => setSkill(null)}
+      <OptionSheet visible={lookBack} title="Nhìn lại hành trình" onClose={() => setLookBack(false)}>
+        <ScrollView contentContainerStyle={s.sheetBody}>
+          {done.length ? <Text style={s.note}>{done.length} kỹ năng bạn đã đi qua, theo thứ tự trên đường. Chạm để xem lại.</Text>
+            : <Text style={s.note}>Chưa có kỹ năng nào hoàn thành. Thực hành kỹ năng đầu tiên để bắt đầu hành trình nhé.</Text>}
+          {done.map((x, i) => (
+            <Pressable key={x.id} onPress={() => { setLookBack(false); setSkill(x); }} style={s.pastRow} accessibilityRole="button" accessibilityLabel={`Xem lại ${x.name}, ${STATUS[x.status].label}`}>
+              <View style={[s.pastDot, { backgroundColor: STATUS[x.status].bg, borderColor: STATUS[x.status].color }]}><Text style={[s.pastNumber, { color: STATUS[x.status].color }]}>{i + 1}</Text></View>
+              <View style={s.flex}><Text style={s.pastName}>{x.name}</Text><Text style={[s.small, { color: STATUS[x.status].color }]}>{x.group} · {STATUS[x.status].label}</Text></View>
+              <Ionicons name="chevron-forward" size={16} color={t.muted} />
+            </Pressable>
+          ))}
+          {detail?.milestones.some((m) => m.earned) ? <Text style={s.label}>Huy hiệu đã đạt</Text> : null}
+          {detail?.milestones.filter((m) => m.earned).map((m) => <Text key={m.code} style={s.badgeNew}>{m.title}</Text>)}
+        </ScrollView>
+      </OptionSheet>
+      <SkillSheet skill={skill} all={allSkills} onClose={() => setSkill(null)}
         onReport={(x, body) => { void report(x, body); }} onAssess={assess} />
-      <OptionSheet visible={!!badges} title="🏅 Huy hiệu mới!" onClose={() => setBadges(null)}>
-        <View style={s.sheetBody}>{badges?.map((b) => <Text key={b.title} style={s.badgeNew}>🏅 {b.title}</Text>)}
+      <OptionSheet visible={!!badges} title="Huy hiệu mới!" onClose={() => setBadges(null)}>
+        <View style={s.sheetBody}>
+          <View style={s.medalBig}>{badges?.map((b) => <Medal key={b.title} title={b.title} earned />)}<Triumph play={badges ? 1 : 0} size={220} /></View>
           <Button title="Tuyệt vời!" onPress={() => setBadges(null)} /></View>
       </OptionSheet>
+    </View>
+  );
+}
+
+/** A badge: a gold medal once it is earned, an empty mould until then. */
+function Medal({ title, earned }: { title: string; earned: boolean }) {
+  const id = earned ? 'medal-gold' : 'medal-empty';
+  return (
+    <View style={s.medal} accessible accessibilityLabel={`Huy hiệu ${title}${earned ? ', đã đạt' : ''}`}>
+      <Svg width={46} height={54} viewBox="0 0 46 54">
+        <Defs><RadialGradient id={id} cx="36%" cy="30%" r="80%"><Stop offset="0" stopColor={earned ? '#FFF2B8' : '#E4DCCB'} /><Stop offset="0.6" stopColor={earned ? '#EDB84A' : '#BDB3A0'} /><Stop offset="1" stopColor={earned ? '#A86F1B' : '#8E8675'} /></RadialGradient></Defs>
+        <Path d="M12 0 L20 20 L12 24 L4 4 Z" fill={earned ? '#D9534F' : '#A69E8F'} /><Path d="M34 0 L26 20 L34 24 L42 4 Z" fill={earned ? '#3D84C6' : '#958D7F'} />
+        <Circle cx="23" cy="33" r="19" fill={`url(#${id})`} />
+        <Circle cx="23" cy="33" r="13.5" fill="none" stroke={earned ? '#A86F1B' : '#8E8675'} strokeWidth="1.2" opacity={0.7} />
+        {earned ? <Path d="M23 24 L25.8 30 L32 30.7 L27.4 35 L28.7 41.2 L23 38 L17.3 41.2 L18.6 35 L14 30.7 L20.2 30 Z" fill="#FFF6CF" /> : null}
+      </Svg>
+      <Text style={[s.medalText, earned && s.medalTextOn]} numberOfLines={3}>{title}</Text>
     </View>
   );
 }
@@ -135,7 +185,7 @@ function CareerPicker({ careers, onChoose, compact = false }: { careers: CareerS
   const [goal, setGoal] = useState('');
   return (
     <ScrollView contentContainerStyle={[s.content, s.picker]} showsVerticalScrollIndicator={false}>
-      {!compact ? <Text style={s.note}>Chọn một nghề để mở cây kỹ năng. Bạn có thể đổi nghề bất cứ lúc nào, tiến độ của các nghề khác vẫn được giữ.</Text> : null}
+      {!compact ? <Text style={s.pickerIntro}>Chọn một nghề để mở bản đồ kỹ năng. Bạn có thể đổi nghề bất cứ lúc nào, tiến độ của các nghề khác vẫn được giữ.</Text> : null}
       {careers.map((c) => (
         <Pressable key={c.code} onPress={() => setPicked(c.code)} style={[s.careerCard, picked === c.code && s.careerOn]} accessibilityRole="radio"
           accessibilityState={{ selected: picked === c.code }} accessibilityLabel={`${c.name}: ${c.description}`} testID={`career-${c.code}`}>
@@ -156,49 +206,6 @@ function CareerPicker({ careers, onChoose, compact = false }: { careers: CareerS
   );
 }
 
-/** One branch of the tree: its skills as glowing nodes along a vine. */
-function Branch({ name, skills, opened, onOpen }: { name: string; skills: CareerSkill[]; opened: Set<string>; onOpen: (s: CareerSkill) => void }) {
-  return (
-    <View style={s.branch}>
-      <Text style={s.branchName} accessibilityRole="header">🌿 {name}</Text>
-      <View style={s.vine}>
-        <View style={s.vineLine} />
-        {skills.map((skill) => <SkillNode key={skill.id} skill={skill} justOpened={opened.has(skill.code)} onPress={() => onOpen(skill)} />)}
-      </View>
-    </View>
-  );
-}
-
-function SkillNode({ skill, justOpened, onPress }: { skill: CareerSkill; justOpened: boolean; onPress: () => void }) {
-  const st = STATUS[skill.status];
-  const glow = useLoop(1400, skill.status === 'practiced' || skill.status === 'assessed' || skill.status === 'available');
-  const reduce = useReduceMotion();
-  const pop = useRef(new Animated.Value(1)).current;
-  useEffect(() => {
-    if (!justOpened || reduce) return;
-    pop.setValue(0.6);
-    const anim = Animated.sequence([Animated.timing(pop, { toValue: 1.25, duration: 260, easing: Easing.out(Easing.back(2)), useNativeDriver: true }),
-      Animated.spring(pop, { toValue: 1, friction: 4, useNativeDriver: true })]);
-    anim.start();
-    return () => anim.stop();
-  }, [justOpened, reduce, pop]);
-  return (
-    <Pressable onPress={onPress} style={s.nodeRow} accessibilityRole="button"
-      accessibilityLabel={`${skill.name}, ${st.label}${skill.status === 'in_progress' ? ` ${skill.progress_percent}%` : ''}`} testID={`skill-${skill.code}`}>
-      <Animated.View style={[s.node, { backgroundColor: st.bg, borderColor: st.color, transform: [{ scale: pop }] }]}>
-        {glow ? <Animated.View style={[s.halo, { borderColor: st.color, opacity: glow.interpolate({ inputRange: [0, 1], outputRange: [0.15, 0.6] }),
-          transform: [{ scale: glow.interpolate({ inputRange: [0, 1], outputRange: [1, 1.25] }) }] }]} /> : null}
-        <Ionicons name={st.icon} size={20} color={st.color} />
-      </Animated.View>
-      <View style={s.flex}>
-        <Text style={[s.nodeName, skill.status === 'locked' && s.locked]}>{skill.name}</Text>
-        <Text style={[s.small, { color: st.color }]}>{st.label}{skill.status === 'in_progress' ? ` · ${skill.progress_percent}%` : ''} · Cấp {skill.level}</Text>
-      </View>
-      <Ionicons name="chevron-forward" size={16} color={t.muted} />
-    </Pressable>
-  );
-}
-
 function SkillSheet({ skill, all, onClose, onReport, onAssess }: { skill: CareerSkill | null; all: CareerSkill[]; onClose: () => void;
   onReport: (s: CareerSkill, body: { progress_percent?: number; practiced?: boolean }) => void; onAssess: (s: CareerSkill, answers: number[]) => Promise<boolean> }) {
   const [quiz, setQuiz] = useState(false);
@@ -213,7 +220,7 @@ function SkillSheet({ skill, all, onClose, onReport, onAssess }: { skill: Career
       <ScrollView contentContainerStyle={s.sheetBody}>
         <View style={[s.statusPill, { backgroundColor: st.bg }]}><Ionicons name={st.icon} size={14} color={st.color} /><Text style={[s.statusText, { color: st.color }]}>{st.label}</Text></View>
         <Text style={s.body}>{skill.description}</Text>
-        {skill.goal ? <Text style={s.body}>🎯 {skill.goal}</Text> : null}
+        {skill.goal ? <Text style={s.body}>Mục tiêu: {skill.goal}</Text> : null}
         {skill.prerequisites.length ? <Text style={s.note}>Cần trước: {names(skill.prerequisites)}</Text> : null}
         {skill.activities.length ? <><Text style={s.label}>Hoạt động thực hành</Text>{skill.activities.map((a) => <Text key={a} style={s.body}>• {a}</Text>)}</> : null}
         {!skill.unlocked ? <Text style={s.note}>Hãy thực hành các kỹ năng cần trước để mở kỹ năng này.</Text> : quiz ? <>
@@ -245,36 +252,33 @@ function SkillSheet({ skill, all, onClose, onReport, onAssess }: { skill: Career
 }
 
 const s = StyleSheet.create({
-  fill: { flex: 1, paddingHorizontal: 16 },
+  fill: { flex: 1, backgroundColor: '#EAF7FD' },
   flex: { flex: 1, minWidth: 0 },
-  content: { paddingBottom: 120, gap: 12 },
-  skeleton: { height: 300, borderRadius: 24, backgroundColor: '#DCEAF3', opacity: 0.6 },
-  switch: { width: 40, height: 40, borderRadius: 14, backgroundColor: t.tint, alignItems: 'center', justifyContent: 'center' },
-  hero: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: '#FFFFFF', borderRadius: 22, padding: 14 },
-  heroTitle: { fontSize: 17, fontWeight: '900', color: t.ink },
-  heroCount: { fontSize: 13, fontWeight: '800', color: '#22703A', marginVertical: 4 },
-  badges: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  badge: { width: '31%', alignItems: 'center', backgroundColor: '#F2F5F8', borderRadius: 14, padding: 8 },
-  badgeOn: { backgroundColor: '#FFF4CC' },
-  badgeIcon: { fontSize: 22 },
-  badgeText: { fontSize: 10, fontWeight: '700', color: t.muted, textAlign: 'center' },
-  badgeTextOn: { color: '#7A4D00' },
-  branch: { backgroundColor: '#FFFFFF', borderRadius: 22, padding: 14 },
-  branchName: { fontSize: 16, fontWeight: '900', color: '#22603F', marginBottom: 6 },
-  vine: { paddingLeft: 4 },
-  vineLine: { position: 'absolute', left: 25, top: 20, bottom: 20, width: 3, borderRadius: 2, backgroundColor: '#CDE8D4' },
-  nodeRow: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 6, minHeight: 56 },
-  node: { width: 44, height: 44, borderRadius: 22, borderWidth: 3, alignItems: 'center', justifyContent: 'center' },
-  halo: { position: 'absolute', width: 54, height: 54, borderRadius: 27, borderWidth: 3 },
-  nodeName: { fontSize: 15, fontWeight: '800', color: t.ink },
-  locked: { color: t.muted },
-  legal: { fontSize: 11, color: t.muted, textAlign: 'center' },
-  picker: { paddingTop: 4 },
+  content: { paddingBottom: 120 },
+  road: { position: 'relative', overflow: 'hidden' },
+  summit: { paddingHorizontal: 16, paddingTop: 6, paddingBottom: 12, gap: 2 },
+  heroGoal: { fontSize: 13, lineHeight: 18, fontWeight: '700', color: '#4F6C86' },
+  medals: { gap: 10, paddingTop: 10, paddingRight: 16 },
+  medal: { width: 84, alignItems: 'center', gap: 3 },
+  medalText: { fontSize: 10, lineHeight: 13, fontWeight: '700', color: '#4F6C86', textAlign: 'center' },
+  medalTextOn: { color: '#136FA8' },
+  medalBig: { alignItems: 'center', paddingVertical: 16, backgroundColor: '#EAF7FD', borderRadius: 16 },
+  pastRow: { flexDirection: 'row', alignItems: 'center', gap: 10, minHeight: 52 },
+  pastDot: { width: 34, height: 34, borderRadius: 17, borderWidth: 2, alignItems: 'center', justifyContent: 'center' },
+  pastNumber: { fontSize: 13, fontWeight: '900' },
+  pastName: { fontSize: 15, fontWeight: '800', color: t.ink },
+  legalWrap: { paddingHorizontal: 20, paddingTop: 12 },
+  skeleton: { height: 300, margin: 16, borderRadius: 24, backgroundColor: '#EAF7FD', opacity: 0.6 },
+  heroTitle: { fontSize: 17, lineHeight: 23, fontWeight: '900', color: '#123B5C' },
+  heroCount: { fontSize: 13, fontWeight: '800', color: '#136FA8' },
+  legal: { fontSize: 11, lineHeight: 15, color: '#4F6C86', textAlign: 'center' },
+  picker: { paddingTop: 4, paddingHorizontal: 16, gap: 12 },
+  pickerIntro: { fontSize: 13, lineHeight: 18, fontWeight: '700', color: '#4F6C86' },
   careerCard: { flexDirection: 'row', gap: 12, alignItems: 'center', backgroundColor: '#FFFFFF', borderRadius: 18, padding: 12, borderWidth: 2, borderColor: 'transparent' },
   careerOn: { borderColor: '#2E9AD6', backgroundColor: '#F2FAFF' },
   careerIcon: { fontSize: 32 },
   careerName: { fontSize: 15, fontWeight: '900', color: t.ink },
-  note: { fontSize: 13, color: t.muted },
+  note: { fontSize: 13, lineHeight: 18, color: t.muted },
   small: { fontSize: 11, color: t.muted },
   input: { backgroundColor: '#FFFFFF', borderRadius: 14, borderWidth: 1.5, borderColor: t.border, paddingHorizontal: 14, paddingVertical: 12, fontSize: 15, color: t.ink },
   sheetBody: { gap: 10, paddingBottom: 8 },

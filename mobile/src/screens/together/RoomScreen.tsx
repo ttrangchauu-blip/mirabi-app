@@ -7,7 +7,7 @@ import { Text } from '../../components/Typography';
 import { togetherApi } from '../../studyTogether/api';
 import type { ConnectionStatus } from '../../studyTogether/realtime';
 import { formatClock, formatMinutes, phaseProgress, remainingMs, TimerAnchor } from '../../studyTogether/timer';
-import type { Friend, PublicUser, QuestTemplate, RoomSnapshot } from '../../studyTogether/types';
+import type { Friend, PublicUser, QuestTemplate, RoomMember, RoomSnapshot, SessionBrief } from '../../studyTogether/types';
 import { useRoomChat } from '../../studyTogether/useRoomChat';
 import { useStudyRoom } from '../../studyTogether/useStudyRoom';
 import { appTheme as t } from '../../theme';
@@ -44,13 +44,22 @@ export function RoomScreen({ roomId, initial }: { roomId: number; initial: RoomS
   const chat = useRoomChat(roomId, nav.realtime, meUser, live.connection);
   usePullToRefresh(live.refresh);
   useEffect(() => { if (live.gone) setChatOpen(false); }, [live.gone]);
+  // Gone without a last snapshot (closed while the phone was away): the server knows the session that really came last.
+  const [sessions, setSessions] = useState<SessionBrief[] | 'failed' | null>(null);
+  useEffect(() => {
+    if (!live.gone) return;
+    let active = true;
+    togetherApi.history().then((list) => { if (active) setSessions(list); }).catch(() => { if (active) setSessions('failed'); });
+    return () => { active = false; };
+  }, [live.gone]);
 
   const { endedSessionId, clearEnded } = live;
   useEffect(() => {
     if (endedSessionId == null) return;
     clearEnded();
     nav.onRewards();
-    nav.push({ name: 'summary', sessionId: endedSessionId });
+    // In place of the room: coming back to a remounted room would see the same session end again and return here.
+    nav.replace({ name: 'summary', sessionId: endedSessionId });
   }, [clearEnded, endedSessionId, nav]);
 
   const room = live.room;
@@ -92,13 +101,15 @@ export function RoomScreen({ roomId, initial }: { roomId: number; initial: RoomS
   }
 
   if (live.gone) {
+    const lastSessionId = sessions === 'failed' ? room?.last_session_id
+      : sessions?.find((s) => s.room_id === roomId)?.id;
     return (
       <>
         <BackHeader title={room?.name ?? 'Phòng học'} onBack={nav.home} />
         <Card>
           <EmptyState icon="exit-outline" title="Phòng đã đóng hoặc bạn không còn trong phòng"
             action={<View style={styles.rowButtons}>
-              {room?.last_session_id ? <SmallButton title="Xem tổng kết" onPress={() => nav.replace({ name: 'summary', sessionId: room.last_session_id! })} /> : null}
+              {lastSessionId ? <SmallButton title="Xem tổng kết" onPress={() => nav.replace({ name: 'summary', sessionId: lastSessionId })} /> : null}
               <SmallButton title="Về trang chủ" variant="primary" onPress={nav.home} />
             </View>} />
         </Card>
@@ -110,6 +121,7 @@ export function RoomScreen({ roomId, initial }: { roomId: number; initial: RoomS
   }
 
   const active = room.state === 'focus' || room.state === 'break' || room.state === 'paused';
+  const focusOf = (m: RoomMember) => m.focus_seconds ?? (m.user_id === me ? live.ownStats?.focus_seconds : null);
   const away = room.members.filter((m) => m.presence === 'away').length;
   const here = room.members.length - away;
   const sceneCaption = !active ? `${room.member_count} bạn đã vào phòng`
@@ -174,7 +186,7 @@ export function RoomScreen({ roomId, initial }: { roomId: number; initial: RoomS
               subtitle={<PresenceLabel presence={m.presence === 'away' ? 'away' : !(active && m.in_session) ? 'online' : room.state === 'break' ? 'resting' : room.state === 'paused' ? 'paused' : 'studying'} />}
               right={<View style={styles.memberRight}>
                 {m.role === 'host' ? <View style={styles.hostBadge}><Ionicons name="star" size={10} color="#9A6400" /><Text style={styles.hostText}>Chủ phòng</Text></View> : null}
-                {active ? <Text style={styles.memberStat}>{m.focus_seconds == null ? 'Ẩn' : formatMinutes(m.focus_seconds)}</Text> : null}
+                {active ? <Text style={styles.memberStat}>{focusOf(m) == null ? 'Ẩn' : formatMinutes(focusOf(m)!)}</Text> : null}
               </View>} />
           </View>
         ))}
@@ -376,13 +388,15 @@ function InviteSheet({ visible, room, onClose, onInvited }: { visible: boolean; 
 
 function QuestSheet({ visible, roomId, onClose, onCreated }: { visible: boolean; roomId: number; onClose: () => void; onCreated: () => void }) {
   const [templates, setTemplates] = useState<QuestTemplate[] | null>(null);
-  useEffect(() => { if (visible && !templates) void togetherApi.questTemplates().then(setTemplates).catch(() => setTemplates([])); }, [templates, visible]);
+  const [failure, setFailure] = useState<unknown>(null);
+  const load = () => { setFailure(null); void togetherApi.questTemplates().then(setTemplates).catch(setFailure); };
+  useEffect(() => { if (visible && !templates) load(); }, [templates, visible]);
   async function create(key: string) {
     try { await togetherApi.createQuest(roomId, key); onClose(); onCreated(); } catch (e) { showError('Không tạo được nhiệm vụ', e); }
   }
   return (
     <OptionSheet visible={visible} title="Chọn nhiệm vụ nhóm" onClose={onClose}>
-      {templates === null ? <LoadingState /> : templates.map((tpl) => (
+      {failure ? <ErrorState error={failure} onRetry={load} /> : templates === null ? <LoadingState /> : templates.map((tpl) => (
         <OptionRow key={tpl.key} icon="flag-outline" label={tpl.title}
           description={`${tpl.description} · ${tpl.days} ngày · +${tpl.reward_exp} EXP mỗi người góp sức`} onPress={() => { void create(tpl.key); }} />
       ))}

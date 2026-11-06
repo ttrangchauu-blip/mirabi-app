@@ -1,13 +1,18 @@
 import React, { useEffect, useRef } from 'react';
-import { Animated, Easing, Pressable, StyleSheet, View } from 'react-native';
+import { Animated, Easing, Image, Pressable, StyleSheet, View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-import Svg, { Path } from 'react-native-svg';
 import { PetCompanion } from '../../components/PetCompanion';
 import { Text } from '../../components/Typography';
 import { JourneySection, LessonCard, nodeStatus, unlockHint } from '../../learning/lessonOrder';
 import type { ContentStatus, UnlockRequirement } from '../../learning/types';
 import { appTheme as t } from '../../theme';
 import { IconName, ProgressBar } from '../../ui/kit';
+import { useAtmosphere } from '../../world/atmosphere';
+import { ContactShadow, Plate, Tiles } from '../../world/diorama';
+import { LiveSky } from '../../world/liveSky';
+import { useWeather } from '../../world/weather';
+import { POINT, POINT_FACE, STEPS, TRAIL_RIDGE, TRAIL_TILE, TRAIL_TOP } from './learnArt';
 import type { Look } from './LearningUI';
 
 // The journey map of a subject (backend learning_unlocks.py): its chapters are areas and its lessons points on one winding
@@ -16,8 +21,13 @@ import type { Look } from './LearningUI';
 
 const WIDTH = 300;
 const WAVE = 62;
-const LINK = 30;
+const LINK = 58;
 const SIZE = 66;
+/** A point's rendered stone, a bit wider than where it can be tapped. */
+const STONE = 92;
+const STEP = 46;
+/** The sky above the hillside, in points. */
+export const TRAIL_SKY = 58;
 const STATE_LABEL: Record<ContentStatus, string> = { LOCKED: 'Chưa mở', UNLOCKED: 'Đã mở', IN_PROGRESS: 'Đang học', COMPLETED: 'Đã hoàn thành' };
 const CHAPTER_LABEL: Record<ContentStatus, string> = { LOCKED: 'Chưa mở', UNLOCKED: 'Khu vực mới', IN_PROGRESS: 'Đang khám phá', COMPLETED: 'Đã chinh phục' };
 
@@ -26,12 +36,12 @@ export const waveOffset = (place: number) => [0, WAVE, 0, -WAVE][place % 4];
 
 type Props = { section: JourneySection; firstPlace: number; look: Look | null; current: string | null;
   /** Just opened: they play their unlock once. */ opening: Set<string>;
-  hint: string | null; petId?: string; petLevel?: number; reduceMotion?: boolean;
+  hint: string | null; petId?: string; petLevel?: number; reduceMotion?: boolean; night?: boolean;
   onPress: (card: LessonCard) => void; onOpenRequirement: (key: string) => void;
   /** Where a point stands in this area, for bringing it into view. */ onNodeLayout?: (id: string, y: number) => void };
 
 /** One area of the map: its name and how far it is done, then its lessons as points on the path. */
-export function JourneySectionView({ section, firstPlace, look, current, opening, hint, petId, petLevel, reduceMotion, onPress, onOpenRequirement, onNodeLayout }: Props) {
+export function JourneySectionView({ section, firstPlace, look, current, opening, hint, petId, petLevel, reduceMotion, night = false, onPress, onOpenRequirement, onNodeLayout }: Props) {
   const locked = section.status === 'LOCKED';
   const reveal = useRef(new Animated.Value(1)).current;
   const fresh = opening.has(section.key);
@@ -62,9 +72,9 @@ export function JourneySectionView({ section, firstPlace, look, current, opening
         return (
           <React.Fragment key={card.id}>
             <JourneyNode card={card} offset={waveOffset(place)} look={look} here={card.id === current} fresh={opening.has(card.id)}
-              celebrating={opening.size > 0} hint={hint === card.id} petId={petId} petLevel={petLevel} reduceMotion={reduceMotion}
+              celebrating={opening.size > 0} hint={hint === card.id} petId={petId} petLevel={petLevel} reduceMotion={reduceMotion} night={night}
               onPress={() => onPress(card)} onOpenRequirement={onOpenRequirement} onLayoutY={(y) => onNodeLayout?.(card.id, y)} />
-            {following ? <PathLink from={waveOffset(place)} to={waveOffset(place + 1)} open={following.unlocked} color={look?.color} /> : null}
+            {following ? <PathLink from={waveOffset(place)} to={waveOffset(place + 1)} open={following.unlocked} night={night} /> : null}
           </React.Fragment>
         );
       })}
@@ -72,16 +82,36 @@ export function JourneySectionView({ section, firstPlace, look, current, opening
   );
 }
 
-/** The stretch of path between two points: solid up to what is open, dotted beyond. */
-function PathLink({ from, to, open, color }: { from: number; to: number; open: boolean; color?: string }) {
+/** The way between two points: stones in the grass, sharp up to what is open, faded beyond. */
+function PathLink({ from, to, open, night }: { from: number; to: number; open: boolean; night: boolean }) {
   const a = WIDTH / 2 + from;
   const b = WIDTH / 2 + to;
+  const art = night ? 'night' : 'day';
   return (
     <View style={styles.link} importantForAccessibility="no-hide-descendants" accessibilityElementsHidden pointerEvents="none">
-      <Svg width={WIDTH} height={LINK}>
-        <Path d={`M ${a} 0 C ${a} ${LINK / 2}, ${b} ${LINK / 2}, ${b} ${LINK}`} fill="none" stroke={open ? color ?? t.accent : '#CBD6DF'} strokeWidth={4}
-          strokeLinecap="round" strokeDasharray={open ? undefined : '2 9'} />
-      </Svg>
+      {[0.14, 0.5, 0.86].map((u, i) => {
+        // On the same curve as before: it leaves straight down and arrives straight down.
+        const s3 = u * u * (3 - 2 * u);
+        return <Image key={u} source={STEPS[(from + i) % 2 === 0 ? 0 : 1][art]} resizeMode="stretch" fadeDuration={0} accessibilityIgnoresInvertColors
+          style={[styles.step, { opacity: open ? 1 : 0.75, left: a + (b - a) * s3 - STEP / 2, top: u * LINK - STEP * 0.62 }]} />;
+      })}
+    </View>
+  );
+}
+
+/** The hillside behind a subject's map, with the real sky over its ridge. As long as the map is. */
+export function TrailBackdrop({ width, top, height }: { width: number; top: number; height: number }) {
+  const { reading } = useWeather();
+  const { hours, mood, light: c, night } = useAtmosphere(reading);
+  const art = night ? 'night' : 'day';
+  const land = width / 2;
+  const ridge = TRAIL_SKY + land * TRAIL_RIDGE;
+  return (
+    <View pointerEvents="none" style={[styles.backdrop, { top, height: Math.max(0, height) }]} importantForAccessibility="no-hide-descendants" accessibilityElementsHidden testID="trail-backdrop">
+      <LinearGradient colors={c.sky} style={{ height: ridge + 24 }} />
+      <View style={[styles.backdropSky, { height: ridge + 24 }]}><LiveSky id="trail" width={width} ridge={ridge} hours={hours} c={c} cover={mood.cover} /></View>
+      <Plate source={TRAIL_TOP[art]} width={width} height={land + 1.5} style={{ top: TRAIL_SKY }} />
+      <View style={[styles.backdropTiles, { top: TRAIL_SKY + land - 0.5 }]}><Tiles source={TRAIL_TILE[art]} width={width} height={Math.max(0, height - TRAIL_SKY - land)} /></View>
     </View>
   );
 }
@@ -89,12 +119,12 @@ function PathLink({ from, to, open, color }: { from: number; to: number; open: b
 const NODE_ICON: Record<ContentStatus, IconName> = { LOCKED: 'lock-closed', UNLOCKED: 'book', IN_PROGRESS: 'play', COMPLETED: 'checkmark' };
 
 type NodeProps = { card: LessonCard; offset: number; look: Look | null; here: boolean; fresh: boolean; celebrating: boolean; hint: boolean;
-  petId?: string; petLevel?: number; reduceMotion?: boolean; onPress: () => void; onOpenRequirement: (key: string) => void;
+  petId?: string; petLevel?: number; reduceMotion?: boolean; night: boolean; onPress: () => void; onOpenRequirement: (key: string) => void;
   onLayoutY: (y: number) => void };
 
 /** A lesson on the map. Chưa mở: a lock, slightly faded. Đã mở: clear colours and a soft light. Đang học: a progress bar.
  * Hoàn thành: a tick and a small medal. The pet stands by the lesson the learner is at. */
-function JourneyNode({ card, offset, look, here, fresh, celebrating, hint, petId, petLevel, reduceMotion, onPress, onOpenRequirement, onLayoutY }: NodeProps) {
+function JourneyNode({ card, offset, look, here, fresh, celebrating, hint, petId, petLevel, reduceMotion, night, onPress, onOpenRequirement, onLayoutY }: NodeProps) {
   const status = nodeStatus(card);
   const color = look?.color ?? t.accent;
   const shake = useRef(new Animated.Value(0)).current;
@@ -145,7 +175,7 @@ function JourneyNode({ card, offset, look, here, fresh, celebrating, hint, petId
   const locked = status === 'LOCKED';
   const label = card.planned ? 'Sắp có' : STATE_LABEL[status];
   const pending = card.requirements.filter((r): r is Extract<UnlockRequirement, { type: 'lesson' }> => r.type === 'lesson' && !r.done);
-  const fill = locked ? '#E6ECF1' : status === 'COMPLETED' ? '#2FA573' : color;
+  const fill = status === 'COMPLETED' ? '#2FA573' : color;
   const faded = open.interpolate({ inputRange: [0, 1], outputRange: [0.55, 1] });
   return (
     <View style={styles.nodeRow} onLayout={(e) => onLayoutY(e.nativeEvent.layout.y)}>
@@ -160,9 +190,13 @@ function JourneyNode({ card, offset, look, here, fresh, celebrating, hint, petId
           {animated ? <Animated.View pointerEvents="none" testID="map-unlocking" style={[styles.burst, { backgroundColor: '#FFE08A',
             opacity: burst.interpolate({ inputRange: [0, 0.2, 1], outputRange: [0, 0.8, 0] }),
             transform: [{ scale: burst.interpolate({ inputRange: [0, 1], outputRange: [0.8, 2.3] }) }] }]} /> : null}
-          <Animated.View style={[styles.circle, { backgroundColor: fill, opacity: locked ? 0.75 : faded }]}>
+          <ContactShadow width={STONE * 0.9} height={20} opacity={0.32} style={styles.stoneShadow} />
+          <Animated.View style={[styles.stone, { opacity: locked ? 1 : faded }]}>
+            <Image source={POINT[status][night ? 'night' : 'day']} resizeMode="stretch" fadeDuration={0} accessibilityIgnoresInvertColors style={styles.stoneArt} />
+          </Animated.View>
+          <Animated.View style={[styles.circle, { opacity: locked ? 1 : faded }]}>
             <Animated.View style={{ opacity: animated ? open.interpolate({ inputRange: [0, 0.6, 1], outputRange: [0, 0, 1] }) : 1 }}>
-              <Ionicons name={card.planned ? 'time-outline' : NODE_ICON[status]} size={28} color={locked ? '#7A8D9E' : '#FFFFFF'} />
+              <Ionicons name={card.planned ? 'time-outline' : NODE_ICON[status]} size={28} color={locked ? '#5F7384' : '#FFFFFF'} />
             </Animated.View>
             {animated ? (
               <>
@@ -179,9 +213,11 @@ function JourneyNode({ card, offset, look, here, fresh, celebrating, hint, petId
           </Animated.View>
           {status === 'COMPLETED' ? <View style={styles.medal}><Ionicons name="ribbon" size={15} color="#B5850B" /></View> : null}
         </Pressable>
-        <Text style={[styles.nodeTitle, locked && styles.mutedText]} numberOfLines={2}>{card.title}</Text>
-        {!card.required && !card.planned ? <Text style={styles.optional}>Tùy chọn</Text> : null}
-        {status === 'IN_PROGRESS' ? <View style={styles.nodeBar}><ProgressBar value={card.percent / 100} color="#E39A2D" /></View> : null}
+        <View style={styles.nodeLabel}>
+          <Text style={[styles.nodeTitle, locked && styles.mutedText]} numberOfLines={2}>{card.title}</Text>
+          {!card.required && !card.planned ? <Text style={styles.optional}>Tùy chọn</Text> : null}
+          {status === 'IN_PROGRESS' ? <View style={styles.nodeBar}><ProgressBar value={card.percent / 100} color="#E39A2D" /></View> : null}
+        </View>
         {here && petId ? (
           <Animated.View pointerEvents="none" testID="map-pet" importantForAccessibility="no-hide-descendants" accessibilityElementsHidden
             style={[styles.pet, offset > 0 ? styles.petLeft : styles.petRight,
@@ -217,18 +253,25 @@ const styles = StyleSheet.create({
   bannerCount: { fontSize: 13, fontWeight: '900', color: t.muted },
   mutedText: { color: '#6F8394' },
   link: { width: WIDTH, height: LINK },
+  step: { position: 'absolute', width: STEP, height: STEP },
+  backdrop: { position: 'absolute', left: 0, right: 0, overflow: 'hidden' },
+  backdropSky: { position: 'absolute', left: 0, right: 0, top: 0, overflow: 'hidden' },
+  backdropTiles: { position: 'absolute', left: 0, right: 0 },
+  stone: { position: 'absolute', width: STONE, height: STONE, left: (SIZE - STONE) / 2, top: SIZE / 2 - STONE * POINT_FACE },
+  stoneArt: { width: STONE, height: STONE },
+  stoneShadow: { position: 'absolute', top: SIZE - 14, alignSelf: 'center' },
+  nodeLabel: { alignSelf: 'stretch', alignItems: 'stretch', marginTop: 14, paddingHorizontal: 6, paddingVertical: 3, borderRadius: 10, backgroundColor: 'rgba(255,255,255,0.92)' },
   nodeRow: { alignSelf: 'stretch', alignItems: 'center' },
   node: { width: 124, alignItems: 'center' },
   point: { width: SIZE, height: SIZE, alignItems: 'center', justifyContent: 'center' },
   pressed: { opacity: 0.85, transform: [{ scale: 0.96 }] },
   halo: { position: 'absolute', width: SIZE + 18, height: SIZE + 18, borderRadius: (SIZE + 18) / 2 },
   burst: { position: 'absolute', width: SIZE, height: SIZE, borderRadius: SIZE / 2 },
-  circle: { width: SIZE, height: SIZE, borderRadius: SIZE / 2, alignItems: 'center', justifyContent: 'center',
-    shadowColor: t.shadow, shadowOpacity: 0.12, shadowRadius: 6, shadowOffset: { width: 0, height: 3 }, elevation: 2 },
+  circle: { width: SIZE, height: SIZE, alignItems: 'center', justifyContent: 'center' },
   lockOver: { position: 'absolute' },
   medal: { position: 'absolute', top: -2, right: -2, width: 24, height: 24, borderRadius: 12, backgroundColor: '#FFF4CD', alignItems: 'center', justifyContent: 'center' },
-  nodeTitle: { fontSize: 13, fontWeight: '800', color: t.ink, textAlign: 'center', lineHeight: 17, marginTop: 6 },
-  optional: { fontSize: 11, fontWeight: '700', color: t.muted, marginTop: 1 },
+  nodeTitle: { fontSize: 13, fontWeight: '800', color: t.ink, textAlign: 'center', lineHeight: 17 },
+  optional: { fontSize: 11, fontWeight: '700', color: t.muted, marginTop: 1, textAlign: 'center' },
   nodeBar: { alignSelf: 'stretch', marginTop: 4 },
   pet: { position: 'absolute', top: 4 },
   petLeft: { right: 112 },

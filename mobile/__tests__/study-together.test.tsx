@@ -459,3 +459,118 @@ test('a failed chat message can be retried with the same client id', async () =>
   expect(second.body.client_id).toBe(first.body.client_id);
   expect(screen.getAllByText('Cố lên nào 💪')).toHaveLength(1);
 });
+
+const summaryBody = { id: 9, status: 'completed', end_reason: 'completed', finalized: true, started_at: '', ended_at: '', total_cycles: 2,
+  completed_cycles: 2, focus_minutes: 25, break_minutes: 5, room: { id: 7, name: 'Ôn Hóa', goal: null, status: 'open' },
+  me: { focus_seconds: 3000, cycles_completed: 2, study_exp: 20, bonus_exp: 4, exp_awarded: 24, rewarded: true },
+  participants: [], team_quests: [] };
+
+test('back from a session summary does not fall back into the same summary', async () => {
+  const running = room({ version: 3, state: 'focus', session: activeSession });
+  const ended = room({ version: 4, last_session_id: 9 });
+  let now = running;
+  const server = mockServer({
+    'GET /api/study-together/home': { status: 200, body: home({ invitations: [], current_room: running }) },
+    'POST /api/study-rooms/7/heartbeat': () => ({ status: 200, body: now }),
+    'GET /api/group-sessions/9/summary': { status: 200, body: summaryBody },
+  });
+  renderTogether();
+  fireEvent.press(await screen.findByRole('button', { name: 'Vào phòng' }));
+  expect(await screen.findByText('Tập trung')).toBeTruthy();
+  await waitFor(() => expect(server.callsTo('POST /api/study-rooms/7/heartbeat').length).toBeGreaterThan(0));
+  now = ended;
+  realtime.emit({ type: 'room.updated', room_id: 7, version: 4, event: 'session_completed', room: ended });
+  expect(await screen.findByText('Hoàn thành phiên học!')).toBeTruthy();
+  fireEvent.press(screen.getByRole('button', { name: 'Quay lại' }));
+  expect(await screen.findByText('Chào Aqua!')).toBeTruthy();
+  await act(async () => { await new Promise((resolve) => setTimeout(resolve, 50)); });
+  expect(screen.queryByText('Hoàn thành phiên học!')).toBeNull();
+});
+
+test('a room that closed unseen links to its latest session, not the one the phone last knew', async () => {
+  const stale = room({ version: 3, last_session_id: 4 });
+  const server = mockServer({
+    'GET /api/study-together/home': { status: 200, body: home({ invitations: [], current_room: stale }) },
+    'POST /api/study-rooms/7/heartbeat': { status: 404, body: { detail: 'Room not found', code: 'room_not_found' } },
+    'GET /api/group-sessions/history': { status: 200, body: { items: [
+      { id: 12, room_id: 8, room_name: 'Khác' }, { id: 9, room_id: 7, room_name: 'Ôn Hóa' }, { id: 4, room_id: 7, room_name: 'Ôn Hóa' }], next_before_id: null } },
+    'GET /api/group-sessions/9/summary': { status: 200, body: summaryBody },
+  });
+  renderTogether();
+  fireEvent.press(await screen.findByRole('button', { name: 'Vào phòng' }));
+  expect(await screen.findByText('Phòng đã đóng hoặc bạn không còn trong phòng')).toBeTruthy();
+  await waitFor(() => expect(server.callsTo('GET /api/group-sessions/history').length).toBeGreaterThan(0));
+  fireEvent.press(await screen.findByRole('button', { name: 'Xem tổng kết' }));
+  expect(await screen.findByText('Hoàn thành phiên học!')).toBeTruthy();
+  expect(server.callsTo('GET /api/group-sessions/9/summary').length).toBeGreaterThan(0);
+});
+
+test('someone hiding their stats still sees their own minutes, and only their own', async () => {
+  const hidden = { in_session: true, focus_seconds: null, cycles_completed: null };
+  const running = room({ version: 3, state: 'focus', session: activeSession,
+    members: [member(2, 'Linh', 'host', hidden), member(1, 'Aqua', 'member', hidden)] });
+  mockServer({
+    'GET /api/study-together/home': { status: 200, body: home({ invitations: [], current_room: running }) },
+    'POST /api/study-rooms/7/heartbeat': { status: 200, body: { ...running, own_stats: { focus_seconds: 600, cycles_completed: 0 } } },
+  });
+  renderTogether();
+  fireEvent.press(await screen.findByRole('button', { name: 'Vào phòng' }));
+  expect(await screen.findByText('10 phút')).toBeTruthy();
+  expect(screen.getAllByText('Ẩn')).toHaveLength(1);  // Linh's
+  realtime.emit({ type: 'room.own_stats', room_id: 7, stats: { focus_seconds: 900, cycles_completed: 1 } });
+  expect(await screen.findByText('15 phút')).toBeTruthy();
+});
+
+test('quest templates that fail to load say so and can be retried', async () => {
+  let attempts = 0;
+  const hosted = room({ host_id: 1, members: [member(1, 'Aqua', 'host')] });
+  mockServer({
+    'GET /api/study-together/home': { status: 200, body: home({ invitations: [], current_room: hosted }) },
+    'POST /api/study-rooms/7/heartbeat': { status: 200, body: hosted },
+    'GET /api/team-quests/templates': () => (++attempts === 1 ? { status: 500, body: { detail: 'boom', code: 'server_error' } }
+      : { status: 200, body: { items: [{ key: 'daily_hour', title: 'Một giờ học cùng nhau', description: 'x', unit: 'minutes', target: 60, days: 1, reward_exp: 10 }] } }),
+  });
+  renderTogether();
+  fireEvent.press(await screen.findByRole('button', { name: 'Vào phòng' }));
+  fireEvent.press(await screen.findByRole('button', { name: 'Tạo nhiệm vụ nhóm' }));
+  fireEvent.press(await screen.findByRole('button', { name: 'Thử lại' }));
+  expect(await screen.findByText('Một giờ học cùng nhau')).toBeTruthy();
+  expect(attempts).toBe(2);
+});
+
+test('a friend room that can not be joined only says it is full when it is', async () => {
+  const preview = { name: 'Phòng', goal: null, subject: 'science', visibility: 'code' as const, status: 'open' as const, state: 'waiting' as const,
+    focus_minutes: 25, break_minutes: 5, cycles: 2, max_members: 4, host: pub(2, 'Linh'), can_join: false, relation: 'friend_room' as const, invitation_id: null };
+  mockServer({ 'GET /api/study-together/home': { status: 200, body: home({ invitations: [], rooms: [
+    { ...preview, id: 7, member_count: 4, reason: 'room_full' }, { ...preview, id: 8, member_count: 2, reason: 'room_unavailable' }] }) } });
+  renderTogether();
+  expect(await screen.findByText('Đã đủ người')).toBeTruthy();
+  expect(screen.getByText('Không thể tham gia')).toBeTruthy();
+});
+
+test('a friend\'s gift opens Kho đồ, as its notification says', async () => {
+  const onOpenInventory = jest.fn();
+  const gift = { id: 8, kind: 'town_gift' as const, title: 'Linh gửi quà cho bạn!', body: 'Xem trong Kho đồ', read: false, created_at: new Date().toISOString(), data: {} };
+  mockServer({
+    'GET /api/study-together/home': { status: 200, body: home({ invitations: [] }) },
+    'GET /api/notifications': { status: 200, body: { unread_count: 1, items: [gift] } },
+  });
+  renderTogether({ initialRoute: { name: 'notifications' }, onOpenInventory });
+  fireEvent.press(await screen.findByLabelText('Chưa đọc. Linh gửi quà cho bạn!. Xem trong Kho đồ'));
+  expect(onOpenInventory).toHaveBeenCalledTimes(1);
+});
+
+test('older notifications can be read, page after page', async () => {
+  const note = (id: number, title: string) => ({ id, kind: 'session_started' as const, title, body: '', read: true, created_at: new Date().toISOString(), data: {} });
+  const server = mockServer({
+    'GET /api/study-together/home': { status: 200, body: home({ invitations: [] }) },
+    'GET /api/notifications': { status: 200, body: { unread_count: 0, items: [note(30, 'Mới nhất')], next_before_id: 30 } },
+    'GET /api/notifications?before_id=30': { status: 200, body: { unread_count: 0, items: [note(9, 'Cũ hơn')], next_before_id: null } },
+  });
+  renderTogether({ initialRoute: { name: 'notifications' } });
+  fireEvent.press(await screen.findByText('Xem thông báo cũ hơn'));
+  expect(await screen.findByText('Cũ hơn')).toBeTruthy();
+  expect(screen.getByText('Mới nhất')).toBeTruthy();
+  expect(screen.queryByText('Xem thông báo cũ hơn')).toBeNull(); // nothing older
+  expect(server.callsTo('GET /api/notifications?before_id=30')).toHaveLength(1);
+});

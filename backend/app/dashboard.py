@@ -1,13 +1,11 @@
-from datetime import datetime, timezone
-
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from . import tasks
+from . import days, tasks
 from .companion import current_walk_status, daily_quests, latest_walk, settle_returned_walks
 from .db import get_db
 from .friends import incoming_request_count, online_friends
-from .models import User, utcnow
+from .models import User
 from .notifications import unread_count
 from .study_statistics import statistics
 from .schemas import UserOut
@@ -24,9 +22,11 @@ def dashboard(user: User = Depends(current_user), db: Session = Depends(get_db))
     study = statistics(db, user.id)
     friends_online = online_friends(db, user)
     db.commit()
-    today = utcnow().date()
+    today = days.today()
     quests = daily_quests(user, db)
     return {
+        # The day the quests, tasks and walk below belong to; a device's own date may differ.
+        "today": today.isoformat(),
         "user": UserOut.model_validate(user).model_dump(),
         "study": {
             "total_minutes": study["total_seconds"] // 60,

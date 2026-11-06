@@ -7,7 +7,7 @@
 | Study | Pomodoro timer, session persistence, XP award | Background timer behavior, planner, notes, flashcards |
 | Campus | Seeded course catalog | Course/module/lesson tables, progress, quizzes |
 | Career | Career list and interest-based ranking | Validated assessment, Big Five/Holland with consent |
-| Community | Read/create/like posts | Comments, groups, reporting, moderation, image upload |
+| Community | Signed-in users read/create/like posts (one like per person; blocked and disabled authors are left out) | Comments, groups, reporting, moderation, image upload |
 | Companion | Theme field and placeholder mascot | Asset pipeline, evolution states, interaction animations |
 | Room | Inventory list placeholder | User inventory, purchase/equip transactions |
 | Auth | Email/password (Argon2id), short-lived JWT + rotating refresh tokens, logout, password reset by email code, rate limiting, SecureStore session restore | Email verification, deep-link reset, shared (Redis) rate limiting, Alembic migrations |
@@ -33,7 +33,7 @@ Each feature router lives in its own `backend/app` module and is registered in `
 | `study.py` | Study session history and creation |
 | `campus.py` | Course catalog and lesson exploration |
 | `career.py` | Recommendations and interest quiz |
-| `community.py` | Posts and likes |
+| `community.py` | Posts and likes (`community_post_likes` remembers who liked what) |
 | `profile.py` | Profile, pet adoption, onboarding |
 | `companion.py` | Pet room, daily quests, walks and collection |
 | `tasks.py` | Personal scheduled tasks and calendar occurrences |

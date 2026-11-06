@@ -1,6 +1,8 @@
 import { applyPalette, blockingItems, defaultLayout, drawOrder, geometry, itemArt, PALETTES, petSpot, placedBox, roomSvg, seatCover, supportOf, topLines } from '../src/room/art';
-import { addItem, flipItem, moveItem, storeItem } from '../src/room/rules';
+import { addItem, flipItem, moveItem, recolourItem, storeItem } from '../src/room/rules';
 import type { Layout } from '../src/room/types';
+import { ApiError } from '../src/api/client';
+import { errorMessage } from '../src/auth/messages';
 
 const at = (item: string, x: number, y: number, more = {}) => ({ item, variant: itemArt(item)!.variants[0].id, x, y, flip: false, rotate: 0, ...more });
 const deskTop = (x = 96, y = 467) => topLines(at('desk', x, y))[0];
@@ -10,6 +12,27 @@ const ROOM: Layout = { wall: 'wall_cream', floor: 'floor_wood_light', items: [
 ] };
 
 describe('decorating rules', () => {
+  it('a recolour follows the backend: an item in the pet\'s way may not change, anything else may', () => {
+    const spot = petSpot(ROOM, 'rug');
+    const blocker = at('plant_monstera', spot.x, spot.feet + 2);
+    const old: Layout = { ...ROOM, items: [...ROOM.items, blocker] };
+    expect(blockingItems(old, 'personal').has('plant_monstera')).toBe(true); // kept from before the rule
+    const other = itemArt('plant_monstera')!.variants[1].id;
+    const refused = recolourItem(old, 'plant_monstera', other, 'personal');
+    expect(refused.problem).toBe('blocks_pet');
+    const desk = itemArt('desk')!.variants[1].id;
+    const fine = recolourItem(ROOM, 'desk', desk, 'personal');
+    expect(fine.problem).toBeNull();
+    expect(fine.layout.items.find((p) => p.item === 'desk')!.variant).toBe(desk);
+  });
+
+  it('explains every refusal of a room save', () => {
+    const generic = errorMessage(new ApiError(422, 'never_heard_of_it', 'x'));
+    for (const code of ['blocks_pet', 'unsupported_item', 'item_not_owned', 'duplicate_item', 'invalid_variant', 'invalid_transform', 'invalid_item']) {
+      expect(errorMessage(new ApiError(422, code, 'raw server text'))).not.toBe(generic);
+    }
+  });
+
   it('both rooms start complete, with every top item on a support and room left for the pet', () => {
     for (const kind of ['personal', 'focus'] as const) {
       const start = defaultLayout(kind);

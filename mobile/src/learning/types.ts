@@ -218,6 +218,7 @@ export type LessonGameRef = { game: GameId; title: string };
 export type GameWorld = 'kingdom' | 'space' | 'forest' | 'lab' | 'time' | 'map';
 export type SessionLesson = { lesson: string; title: string | null; grade: number; game: GameId; game_title: string | null;
   short_stage: boolean; subject_name: string | null; other_games: LessonGameRef[];
+  /** A review of the lesson's own words with no new word left: it can pass the game. */ words_review?: boolean;
   next: { key: string; title: string; ready: boolean; /** Not open yet: the result does not lead there (older servers: missing). */ locked?: boolean } | null;
   /** None for a subject without a world yet; missing on older backends (the app then goes by the subject). */ world?: GameWorld | null };
 

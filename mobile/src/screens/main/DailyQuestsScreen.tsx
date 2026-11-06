@@ -5,14 +5,15 @@ import { Text } from '../../components/Typography';
 import { useConfirm } from '../../ui/ConfirmDialog';
 import { appTheme as t } from '../../theme';
 import { Card, Segmented } from '../../ui/kit';
-import { request, ScheduledTask, showError, taskRepeatDetail } from './shared';
+import { Quest, request, ScheduledTask, showError, taskRepeatDetail } from './shared';
+import { todayOf } from './taskDateTime';
 
 type ViewMode = 'day' | 'week';
 type Repeat = 'none' | 'daily' | 'weekly' | 'monthly';
 type Category = 'study' | 'health' | 'habit' | 'personal' | 'other';
-type Props = { onBack: () => void; onChanged: () => void; onOpenTaskCreate: (date: string, onCreated: (date: string) => void) => void };
+type Props = { /** The server's calendar day (/api/dashboard); the phone's until it is known. */ today?: string; quests?: Quest[];
+  onBack: () => void; onChanged: () => void; onOpenTaskCreate: (date: string, onCreated: (date: string) => void) => void };
 
-const today = () => toIso(new Date());
 function toIso(date: Date) {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 }
@@ -43,11 +44,22 @@ const CATEGORY_OPTIONS: { id: Category; label: string }[] = [
 const REPEAT_OPTIONS: { id: Repeat; label: string }[] = [
   { id: 'none', label: 'Không lặp' }, { id: 'daily', label: 'Hằng ngày' }, { id: 'weekly', label: 'Hằng tuần' }, { id: 'monthly', label: 'Hằng tháng' },
 ];
-const categoryLabel = (id: string) => id === 'daily' ? 'Nhiệm vụ hằng ngày' : CATEGORY_OPTIONS.find((option) => option.id === id)?.label ?? id;
+const categoryLabel = (id: string) => id === 'daily' ? 'Nhiệm vụ hằng ngày' : id === 'work' ? 'Công việc' : CATEGORY_OPTIONS.find((option) => option.id === id)?.label ?? id;
+/** The calendar's hours: a task can be set at any time of the day. */
+const HOURS = Array.from({ length: 24 }, (_, i) => i);
+const HOUR_HEIGHT = 46;
 const repeatLabel = (id: string) => ({ yearly: 'Hằng năm', custom: 'Tùy chỉnh' } as Record<string, string>)[id] ?? REPEAT_OPTIONS.find((option) => option.id === id)?.label ?? id;
-export function DailyQuestsScreen({ onBack, onChanged, onOpenTaskCreate }: Props) {
+export function DailyQuestsScreen({ today: serverToday, quests, onBack, onChanged, onOpenTaskCreate }: Props) {
+  const today = todayOf(serverToday);
   const [view, setView] = useState<ViewMode>('day');
   const [selectedDate, setSelectedDate] = useState(today);
+  // Looking at today when the day turns (or the server's day becomes known): stay on today.
+  const shownToday = useRef(today);
+  useEffect(() => {
+    const before = shownToday.current;
+    shownToday.current = today;
+    setSelectedDate((current) => (current === before ? today : current));
+  }, [today]);
   const [tasks, setTasks] = useState<ScheduledTask[]>([]);
   const [loadingTasks, setLoadingTasks] = useState(false);
   const [completing, setCompleting] = useState<string | null>(null);
@@ -59,11 +71,11 @@ export function DailyQuestsScreen({ onBack, onChanged, onOpenTaskCreate }: Props
     const sequence = ++loadSequence.current;
     setLoadingTasks(true);
     try {
-      const result = await request(`/api/tasks?start_date=${range.start}&end_date=${range.end}&quest_date=${today()}`) as ScheduledTask[];
+      const result = await request(`/api/tasks?start_date=${range.start}&end_date=${range.end}&quest_date=${today}`) as ScheduledTask[];
       if (sequence === loadSequence.current) setTasks(result);
     } catch (e) { showError('Không tải được nhiệm vụ đã tạo', e); }
     finally { if (sequence === loadSequence.current) setLoadingTasks(false); }
-  }, [range.start, range.end]);
+  }, [range.start, range.end, today]);
   useEffect(() => { void loadTasks(); }, [loadTasks]);
 
   function shiftDate(amount: number) {
@@ -97,7 +109,7 @@ export function DailyQuestsScreen({ onBack, onChanged, onOpenTaskCreate }: Props
     const sequence = ++loadSequence.current;
     setLoadingTasks(true);
     try {
-      const result = await request(`/api/tasks?start_date=${targetRange.start}&end_date=${targetRange.end}&quest_date=${today()}`) as ScheduledTask[];
+      const result = await request(`/api/tasks?start_date=${targetRange.start}&end_date=${targetRange.end}&quest_date=${today}`) as ScheduledTask[];
       if (sequence === loadSequence.current) setTasks(result);
     } catch (e) { showError('Không tải được lịch sau khi tạo nhiệm vụ', e); }
     finally { if (sequence === loadSequence.current) setLoadingTasks(false); }
@@ -120,23 +132,25 @@ export function DailyQuestsScreen({ onBack, onChanged, onOpenTaskCreate }: Props
     <Segmented options={[{ value: 'day', label: 'Ngày' }, { value: 'week', label: 'Tuần' }]} value={view} onChange={setView} />
     <View style={styles.dateNav}>
       <Pressable onPress={() => shiftDate(-1)} hitSlop={10} accessibilityRole="button" accessibilityLabel="Khoảng thời gian trước"><Ionicons name="chevron-back" size={20} color={t.accent} /></Pressable>
-      <View style={styles.dateCenter}><Pressable onPress={() => setSelectedDate(today())} style={styles.todayButton} accessibilityRole="button"><Text style={styles.todayButtonText}>Hôm nay</Text></Pressable><Text style={styles.dateLabel}>{rangeLabel}</Text></View>
+      <View style={styles.dateCenter}><Pressable onPress={() => setSelectedDate(today)} style={styles.todayButton} accessibilityRole="button"><Text style={styles.todayButtonText}>Hôm nay</Text></Pressable><Text style={styles.dateLabel}>{rangeLabel}</Text></View>
       <Pressable onPress={() => shiftDate(1)} hitSlop={10} accessibilityRole="button" accessibilityLabel="Khoảng thời gian tiếp theo"><Ionicons name="chevron-forward" size={20} color={t.accent} /></Pressable>
     </View>
 
-    <TeamCalendar mode={view} dates={dates} selectedDate={selectedDate} tasks={tasks} onSelectDate={setSelectedDate} onCompleteTask={completeTask} />
+    <TeamCalendar mode={view} dates={dates} selectedDate={selectedDate} tasks={tasks} quests={quests} onSelectDate={setSelectedDate} onCompleteTask={completeTask} />
     {loadingTasks ? <Text style={styles.calendarLoading}>Đang đồng bộ lịch…</Text> : null}
 
 
   </>;
 }
 
-function TeamCalendar({ mode, dates, selectedDate, tasks, onSelectDate, onCompleteTask }: {
-  mode: ViewMode; dates: string[]; selectedDate: string; tasks: ScheduledTask[];
+function TeamCalendar({ mode, dates, selectedDate, tasks, quests, onSelectDate, onCompleteTask }: {
+  mode: ViewMode; dates: string[]; selectedDate: string; tasks: ScheduledTask[]; quests?: Quest[];
   onSelectDate: (date: string) => void; onCompleteTask: (task: ScheduledTask) => void | Promise<void>;
 }) {
   const columnWidth = mode === 'day' ? 250 : 132;
-  const hours = Array.from({ length: 17 }, (_, i) => i + 6);
+  const hours = HOURS;
+  // The server's EXP. A built-in quest in this list comes without it: the dashboard's quests have it, where it is set at all.
+  const expOf = (task: ScheduledTask) => task.exp ?? (task.kind === 'daily_quest' ? quests?.find((quest) => quest.id === task.id)?.exp ?? 10 : 5);
   return <Card style={styles.teamCalendarCard}>
     <ScrollView horizontal showsHorizontalScrollIndicator>
       <View>
@@ -158,7 +172,7 @@ function TeamCalendar({ mode, dates, selectedDate, tasks, onSelectDate, onComple
             return <View key={date} style={[styles.teamAllDayCell, { width: columnWidth }]}>
               {dayTasks.length === 0 ? <View style={styles.emptyAllDay} /> : dayTasks.map((task) => <Pressable key={task.occurrence_id} onPress={() => void onCompleteTask(task)} disabled={task.completed} accessibilityRole="checkbox" accessibilityState={{ checked: task.completed, disabled: task.completed }} style={[styles.teamEvent, task.completed && styles.teamEventDone]}>
                 <Text numberOfLines={2} style={[styles.teamEventTitle, task.completed && styles.teamEventTitleDone]}>{task.title}</Text>
-                <Text numberOfLines={1} style={[styles.teamEventMeta, task.completed && styles.teamEventTitleDone]}>{categoryLabel(task.category)} · {task.start_time ? `${task.start_time}${task.end_time ? `–${task.end_time}` : ''} · ` : ''}{taskRepeatDetail(task)} · {task.kind === 'daily_quest' ? '+10 EXP' : '+5 EXP'}</Text>
+                <Text numberOfLines={1} style={[styles.teamEventMeta, task.completed && styles.teamEventTitleDone]}>{categoryLabel(task.category)} · {task.start_time ? `${task.start_time}${task.end_time ? `–${task.end_time}` : ''} · ` : ''}{taskRepeatDetail(task)} · +{expOf(task)} EXP</Text>
               </Pressable>)}
             </View>;
           })}
@@ -170,8 +184,9 @@ function TeamCalendar({ mode, dates, selectedDate, tasks, onSelectDate, onComple
             {tasks.filter((task) => task.scheduled_date === date && task.start_time).map((task) => {
               const [startHour, startMinute] = (task.start_time ?? '06:00').split(':').map(Number);
               const [endHour, endMinute] = (task.end_time ?? task.start_time ?? '06:30').split(':').map(Number);
-              const top = Math.max(0, ((startHour * 60 + startMinute) - 360) / 60 * 46);
-              const height = Math.max(30, ((endHour * 60 + endMinute) - (startHour * 60 + startMinute)) / 60 * 46);
+              const height = Math.max(30, ((endHour * 60 + endMinute) - (startHour * 60 + startMinute)) / 60 * HOUR_HEIGHT);
+              // Inside the grid: one late in the evening would otherwise be cut off at its end.
+              const top = Math.min((startHour * 60 + startMinute) / 60 * HOUR_HEIGHT, HOURS.length * HOUR_HEIGHT - height);
               return <Pressable key={task.occurrence_id} onPress={() => void onCompleteTask(task)} disabled={task.completed} accessibilityRole="checkbox" accessibilityState={{ checked: task.completed, disabled: task.completed }} style={[styles.timedEvent, { top, height }, task.completed && styles.teamEventDone]}>
                 <Text numberOfLines={1} style={[styles.teamEventTitle, task.completed && styles.teamEventTitleDone]}>{task.start_time} {task.title}</Text>
                 {task.end_time ? <Text style={[styles.teamEventMeta, task.completed && styles.teamEventTitleDone]}>{task.start_time}–{task.end_time}</Text> : null}
