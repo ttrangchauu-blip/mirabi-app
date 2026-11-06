@@ -6,11 +6,13 @@ import { Text } from '../../components/Typography';
 import { learningApi } from '../../learning/api';
 import { OUTCOME_LABEL } from '../../learning/labels';
 import type { ReviewGroup } from '../../learning/types';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { Button, Card, ScreenHeader } from '../../ui/kit';
 
 /** "Danh sách cần ôn": weakest first, grouped by topic, each group playable as a review stage. */
 export function ReviewScreen({ onBack, onPractice, busyTopicId }: { onBack: () => void; onPractice: (topicId: number) => void; busyTopicId: number | null }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const [groups, setGroups] = useState<ReviewGroup[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const load = useCallback(async () => {
@@ -43,11 +45,11 @@ export function ReviewScreen({ onBack, onPractice, busyTopicId }: { onBack: () =
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   error: { color: t.danger, fontWeight: '700' },
   empty: { fontSize: 16, color: t.ink, fontWeight: '800', textAlign: 'center' },
   group: { fontSize: 17, fontWeight: '900', color: t.ink, marginBottom: 6 },
   item: { borderTopWidth: 1, borderTopColor: t.border, paddingVertical: 8 },
   label: { fontSize: 15, color: t.ink, fontWeight: '700' },
   reason: { fontSize: 13, color: t.danger, marginTop: 2 },
-});
+}));

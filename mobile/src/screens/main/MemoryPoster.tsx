@@ -6,6 +6,7 @@ import { Text } from '../../components/Typography';
 import { nunito } from '../../fonts';
 import { memoryPicture } from './memoryPicture';
 import type { Memory } from './memoryTypes';
+import { makeStyles, useTheme } from '../../ui/theme';
 
 /** Stored pictures name the font "Nunito" (older ones a list ending in "sans-serif") and a weight. A phone finds a
  * font loaded by expo-font only by its exact name (Nunito_800ExtraBold), and iOS then picks the file nearest the
@@ -24,6 +25,7 @@ export function deviceFonts(svg: string): string {
  * redrawn from the pet, room or garden as they are now. Older thumbnails (360 x 260) fill the same 400 x 280 frame,
  * centred. A picture still being drawn shows that, with no stand-in pet. */
 export function MemoryImage({ memory }: { memory: Pick<Memory, 'title' | 'thumbnail_svg'> }) {
+  const styles = useStyles();
   const xml = useMemo(() => memory.thumbnail_svg ? deviceFonts(memory.thumbnail_svg) : '', [memory.thumbnail_svg]);
   if (!xml) return <PictureState compact />;
   return <View style={styles.compact} testID="memory-image" accessible accessibilityRole="image" accessibilityLabel={memory.title}>
@@ -35,6 +37,7 @@ export function MemoryImage({ memory }: { memory: Pick<Memory, 'title' | 'thumbn
 export function MemoryPicture({ memory, onReady }: {
   memory: Pick<Memory, 'id' | 'title' | 'image_key'>; onReady: (uri: string | null) => void;
 }) {
+  const styles = useStyles();
   const [uri, setUri] = useState<string | null>(null);
   const [state, setState] = useState<'loading' | 'shown' | 'failed'>('loading');
   const [attempt, setAttempt] = useState(0);
@@ -63,10 +66,12 @@ export function MemoryPicture({ memory, onReady }: {
 /** The create sheet's preview: the PNG of the picture "Lưu kỷ niệm" will store, rendered by the server like the
  * album's (POST /api/memories/preview). `updating`: a newer preview is on its way. */
 export function MemoryPreview({ png, label, updating }: { png: string; label: string; updating: boolean }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   return <View style={styles.large}>
     <Image source={{ uri: `data:image/png;base64,${png}` }} style={StyleSheet.absoluteFill} resizeMode="contain"
       testID="memory-preview" accessible accessibilityRole="image" accessibilityLabel={label} />
-    {updating ? <View style={styles.updating}><ActivityIndicator color="#35728E" /></View> : null}
+    {updating ? <View style={styles.updating}><ActivityIndicator color={t.accent} /></View> : null}
   </View>;
 }
 
@@ -75,23 +80,25 @@ export function PictureState({ compact = false, onRetry, retrying = false, loadi
   compact?: boolean; onRetry?: () => void; retrying?: boolean; loading?: boolean; failed?: boolean; overlay?: boolean;
   text?: string;
 }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   return <View style={[styles.waiting, overlay ? StyleSheet.absoluteFill : compact ? styles.compact : styles.large]}
     testID={failed ? 'memory-image-failed' : 'memory-image-pending'}>
-    {retrying || loading ? <ActivityIndicator color="#35728E" />
-      : <Ionicons name={failed ? 'alert-circle-outline' : 'hourglass-outline'} size={compact ? 22 : 34} color="#5F8796" />}
+    {retrying || loading ? <ActivityIndicator color={t.accent} />
+      : <Ionicons name={failed ? 'alert-circle-outline' : 'hourglass-outline'} size={compact ? 22 : 34} color={t.muted} />}
     <Text style={[styles.waitingText, compact && styles.waitingSmall]}>{text}</Text>
     {onRetry && !compact ? <Pressable accessibilityRole="button" onPress={onRetry} disabled={retrying} style={styles.retry}>
       <Text style={styles.retryText}>Thử lại</Text></Pressable> : null}
   </View>;
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   compact: { width: '100%', aspectRatio: 400 / 280 }, large: { width: '100%', aspectRatio: 1080 / 1350 },
-  waiting: { alignItems: 'center', justifyContent: 'center', gap: 8, backgroundColor: '#EAF3F4', padding: 12 },
-  waitingText: { color: '#4F6C79', fontWeight: '800', fontSize: 15, lineHeight: 21, textAlign: 'center' },
+  waiting: { alignItems: 'center', justifyContent: 'center', gap: 8, backgroundColor: t.tint, padding: 12 },
+  waitingText: { color: t.muted, fontWeight: '800', fontSize: 15, lineHeight: 21, textAlign: 'center' },
   waitingSmall: { fontSize: 11, lineHeight: 16 },
-  retry: { marginTop: 4, paddingHorizontal: 18, paddingVertical: 9, borderRadius: 16, backgroundColor: '#FFFFFF' },
-  retryText: { color: '#136FA8', fontWeight: '900' },
+  retry: { marginTop: 4, paddingHorizontal: 18, paddingVertical: 9, borderRadius: 16, backgroundColor: t.card },
+  retryText: { color: t.accent, fontWeight: '900' },
   updating: { position: 'absolute', top: 14, right: 14, width: 38, height: 38, borderRadius: 19, alignItems: 'center',
-    justifyContent: 'center', backgroundColor: '#FFFFFFD9' },
-});
+    justifyContent: 'center', backgroundColor: t.glass },
+}));

@@ -6,7 +6,7 @@ import { errorMessage } from '../../auth/messages';
 import { Text } from '../../components/Typography';
 import { togetherApi } from '../../studyTogether/api';
 import type { InvitationState, RoomInvitation } from '../../studyTogether/types';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { Button, Card } from '../../ui/kit';
 import { showError } from '../main/shared';
 import { subjectLabel } from './labels';
@@ -30,6 +30,8 @@ function untilLabel(iso: string) {
 
 /** One study invitation, opened from a notification: who, which room, which rhythm, and whether it can still be joined. */
 export function InvitationScreen({ invitationId }: { invitationId: number }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const nav = useTogetherNav();
   const [invitation, setInvitation] = useState<RoomInvitation | null>(null);
   const [error, setError] = useState<unknown>(null);
@@ -99,6 +101,8 @@ export function InvitationScreen({ invitationId }: { invitationId: number }) {
 }
 
 function Fact({ icon, text }: { icon: React.ComponentProps<typeof Ionicons>['name']; text: string }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   return (
     <View style={styles.fact}>
       <Ionicons name={icon} size={16} color={t.accent} />
@@ -107,7 +111,7 @@ function Fact({ icon, text }: { icon: React.ComponentProps<typeof Ionicons>['nam
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   flex: { flex: 1 },
   gone: { fontSize: 14, color: t.muted, textAlign: 'center', paddingVertical: 12 },
   room: { fontSize: 18, fontWeight: '900', color: t.ink, marginTop: 8 },
@@ -117,4 +121,4 @@ const styles = StyleSheet.create({
   banner: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 14, padding: 12, borderRadius: 14, backgroundColor: t.bg },
   bannerText: { flex: 1, fontSize: 14, fontWeight: '700', color: t.muted },
   buttons: { flexDirection: 'row', gap: 10, marginTop: 14 },
-});
+}));

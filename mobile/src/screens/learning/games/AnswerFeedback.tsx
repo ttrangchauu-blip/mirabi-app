@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../../../components/Typography';
 import { ERROR_TYPE_LABEL } from '../../../learning/labels';
 import type { Turn, TurnResult } from '../../../learning/types';
-import { appTheme as t } from '../../../theme';
+import { makeStyles, useTheme, type Theme } from '../../../ui/theme';
 import { Button } from '../../../ui/kit';
 import { showNumber } from './NumberPad';
 
@@ -26,18 +26,21 @@ export function markOf(result: ChoiceResult | null | undefined, id: string): Cho
 /** The options' colours fade in this long (150–250 ms), and the card slides in this long (200–300 ms). */
 const MARK_MS = 200;
 const CARD_MS = 260;
-const MARK_COLORS: Record<ChoiceMark, { bg: string; border: string } | null> = {
-  right: { bg: t.successBg, border: t.success },
-  answer: { bg: t.successBg, border: t.success },
-  wrong: { bg: t.dangerBg, border: t.danger },
-  other: null,
-};
-const MARK_ICON: Record<ChoiceMark, { name: 'checkmark-circle' | 'close-circle'; color: string } | null> = {
-  right: { name: 'checkmark-circle', color: t.success },
-  answer: { name: 'checkmark-circle', color: t.success },
-  wrong: { name: 'close-circle', color: t.danger },
-  other: null,
-};
+/** The marked options' colours and icons, per theme (right/answer: success, wrong: danger). */
+const useMarks = makeStyles(({ t }: Theme) => ({
+  colors: {
+    right: { bg: t.successBg, border: t.success },
+    answer: { bg: t.successBg, border: t.success },
+    wrong: { bg: t.dangerBg, border: t.danger },
+    other: null,
+  } as Record<ChoiceMark, { bg: string; border: string } | null>,
+  icons: {
+    right: { name: 'checkmark-circle', color: t.success },
+    answer: { name: 'checkmark-circle', color: t.success },
+    wrong: { name: 'close-circle', color: t.danger },
+    other: null,
+  } as Record<ChoiceMark, { name: 'checkmark-circle' | 'close-circle'; color: string } | null>,
+}));
 const MARK_LABEL: Record<ChoiceMark, string> = { right: ', đúng', wrong: ', chưa đúng', answer: ', đáp án đúng', other: '' };
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
@@ -48,6 +51,8 @@ export function ChoiceOption({ label, onPress, disabled, mark, idle, style, redu
   /** The option's own colours before it is marked. */ idle: { bg: string; border: string };
   style?: StyleProp<ViewStyle>; reduceMotion?: boolean; children: React.ReactNode;
 }) {
+  const styles = useStyles();
+  const { colors: MARK_COLORS, icons: MARK_ICON } = useMarks();
   const press = useRef(new Animated.Value(1)).current;
   const tone = useRef(new Animated.Value(mark ? 1 : 0)).current;
   const pop = useRef(new Animated.Value(mark ? 1 : 0)).current;
@@ -95,6 +100,8 @@ export function AnswerFeedback({ result, kind, graded = true, nextLabel, onNext,
   /** false: a self-assessment (tự đánh giá), which has no right answer to show. */ graded?: boolean;
   nextLabel: string; onNext: () => void; reduceMotion?: boolean; onLayout?: (e: LayoutChangeEvent) => void;
 }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const right = result.correct === true;
   const revealed = result.outcome === 'revealed';
   const tone = right || !graded ? 'right' : 'wrong';
@@ -125,7 +132,7 @@ export function AnswerFeedback({ result, kind, graded = true, nextLabel, onNext,
         { opacity: enter, transform: [{ translateY: enter.interpolate({ inputRange: [0, 1], outputRange: [12, 0] }) }] }]}>
       <View style={styles.head} accessibilityLiveRegion="polite" accessible accessibilityLabel={`${title}${hearts}`}>
         <Animated.View style={[styles.badge, good ? styles.badgeGood : styles.badgeBad, { transform: [{ scale: pop }] }]}>
-          <Ionicons name={good ? 'checkmark' : revealed ? 'eye' : 'close'} size={18} color="#FFFFFF" />
+          <Ionicons name={good ? 'checkmark' : revealed ? 'eye' : 'close'} size={18} color={t.onPrimary} />
         </Animated.View>
         <Text style={[styles.title, { color: good ? t.success : t.danger }]}>{title}{hearts}</Text>
       </View>
@@ -149,12 +156,13 @@ export function AnswerFeedback({ result, kind, graded = true, nextLabel, onNext,
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, dark }) => StyleSheet.create({
   other: { opacity: 0.55 },
   markIcon: { position: 'absolute', top: 6, right: 6 },
   card: { borderRadius: 18, borderWidth: 1.5, padding: 14, gap: 8, marginTop: 12, marginBottom: 8 },
-  cardGood: { backgroundColor: '#F0FAF5', borderColor: '#BFE5D1' },
-  cardBad: { backgroundColor: '#FFF4F1', borderColor: '#F5CDC2' },
+  // Paler than successBg/dangerBg in light; the tokens themselves (with a matching deep border) in dark.
+  cardGood: { backgroundColor: dark ? t.successBg : '#F0FAF5', borderColor: dark ? '#2B5E4C' : '#BFE5D1' },
+  cardBad: { backgroundColor: dark ? t.dangerBg : '#FFF4F1', borderColor: dark ? '#5E3047' : '#F5CDC2' },
   head: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   badge: { width: 28, height: 28, borderRadius: 14, alignItems: 'center', justifyContent: 'center' },
   badgeGood: { backgroundColor: t.success },
@@ -169,4 +177,4 @@ const styles = StyleSheet.create({
   errorType: { fontSize: 13, color: t.danger, fontWeight: '800' },
   muted: { color: t.muted, fontSize: 13, lineHeight: 19 },
   next: { marginTop: 4 },
-});
+}));

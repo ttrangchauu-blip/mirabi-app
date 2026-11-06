@@ -3,18 +3,21 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../../components/Typography';
-import { appTheme as t } from '../../theme';
-import { radius, type Tone, tones, type as typeScale } from '../../ui/design';
+import { radius, type Tone, type as typeScale } from '../../ui/design';
 import { Card, IconName } from '../../ui/kit';
+import { makeStyles, useTheme } from '../../ui/theme';
 
 type RowProps = { icon: IconName; tone: Tone; title: string; subtitle: string; first?: boolean };
 
 export function FeatureGroup({ children }: { children: React.ReactNode }) {
+  const s = useStyles();
   return <Card style={s.group}>{children}</Card>;
 }
 
 /** One way into a feature, the same everywhere: an illustrated badge, what it is, what it is for. */
 export function FeatureRow({ icon, tone, title, subtitle, onPress, testID, first }: RowProps & { onPress?: () => void; testID?: string }) {
+  const { t, tones } = useTheme();
+  const s = useStyles();
   if (!onPress) return null;
   const c = tones[tone];
   return (
@@ -32,6 +35,8 @@ export function FeatureRow({ icon, tone, title, subtitle, onPress, testID, first
 
 /** Something to read, not to open: a fact about the app, or what doesn't exist yet (`soon`). It looks and acts like no button. */
 export function InfoRow({ icon, tone, title, subtitle, soon, first }: RowProps & { soon?: boolean }) {
+  const { tones } = useTheme();
+  const s = useStyles();
   const c = tones[tone];
   return (
     <View style={[s.row, !first && s.divider]} accessible accessibilityLabel={`${title}: ${subtitle}${soon ? '. Sắp có' : ''}`}>
@@ -45,7 +50,7 @@ export function InfoRow({ icon, tone, title, subtitle, soon, first }: RowProps &
   );
 }
 
-const s = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   flex: { flex: 1, minWidth: 0 },
   group: { paddingVertical: 4, paddingHorizontal: 14 },
   pressed: { opacity: 0.88 },
@@ -57,4 +62,4 @@ const s = StyleSheet.create({
   subtitle: { ...typeScale.caption, fontWeight: '600', color: t.muted },
   pill: { paddingHorizontal: 10, paddingVertical: 4, borderRadius: radius.pill, backgroundColor: t.tint },
   pillText: { ...typeScale.micro, color: t.accent },
-});
+}));

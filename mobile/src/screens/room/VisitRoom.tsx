@@ -11,9 +11,9 @@ import { roomApi } from '../../room/api';
 import { poseFor } from '../../room/art';
 import type { PetGiftReason, VisitAction, VisitedRoom } from '../../room/types';
 import { CHEERS, STUDY_PRESETS, waitSeconds } from '../../room/visit';
-import { appTheme as t } from '../../theme';
 import { Button, Chip } from '../../ui/kit';
 import { useToast } from '../../ui/Toast';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { showError } from '../main/shared';
 import { SUBJECTS } from '../together/labels';
 import { OptionRow, OptionSheet, PetAvatar } from '../together/ui';
@@ -55,6 +55,8 @@ const NO_GIFT: Record<PetGiftReason, (pet: string) => string> = {
  */
 export function VisitRoom({ userId, me, onBack, onOpenStudyRoom }: Props) {
   const insets = useSafeAreaInsets();
+  const { t } = useTheme();
+  const s = useStyles();
   const toast = useToast();
   const [data, setData] = useState<VisitedRoom | null>(null);
   const [error, setError] = useState<unknown>(null);
@@ -238,8 +240,8 @@ export function VisitRoom({ userId, me, onBack, onOpenStudyRoom }: Props) {
           accessibilityLabel={inviteSent ? `Rủ học, ${WAIT_NOTE}` : 'Rủ học'} accessibilityHint={inviteOff ? `${host} đang tắt nhận lời mời học` : `Mời ${host} cùng học`}
           accessibilityState={{ disabled: inviteSent || busy !== null, busy: busy === 'study_invite' }}>
           <View style={s.inviteIcon}>
-            {busy === 'study_invite' ? <ActivityIndicator color="#FFFFFF" size="small" />
-              : <Ionicons name={inviteSent ? 'checkmark' : 'book'} size={16} color="#FFFFFF" />}
+            {busy === 'study_invite' ? <ActivityIndicator color={t.onPrimary} size="small" />
+              : <Ionicons name={inviteSent ? 'checkmark' : 'book'} size={16} color={t.onPrimary} />}
           </View>
           <Text style={s.inviteText}>Rủ học</Text>
         </Pressable>
@@ -282,22 +284,22 @@ export function VisitRoom({ userId, me, onBack, onOpenStudyRoom }: Props) {
   );
 }
 
-const s = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   fill: { flex: 1 },
   flex: { flex: 1, minWidth: 0 },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12, padding: 28 },
   centerText: { color: t.muted, fontSize: 14, lineHeight: 20, textAlign: 'center' },
   header: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 20, marginBottom: 10 },
-  back: { width: 44, height: 44, borderRadius: 16, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
+  back: { width: 44, height: 44, borderRadius: 16, backgroundColor: t.card, alignItems: 'center', justifyContent: 'center' },
   title: { color: t.ink, fontSize: 20, lineHeight: 26, fontWeight: '900' },
   subtitle: { color: t.muted, fontSize: 12, marginTop: 1 },
   // The same look as "Cài đặt" in your own room.
-  invite: { height: 44, flexShrink: 0, borderRadius: 16, backgroundColor: '#FFFFFF', flexDirection: 'row', alignItems: 'center', gap: 6,
-    paddingLeft: 7, paddingRight: 12, borderWidth: 1.5, borderColor: '#B9D6EA' },
-  inviteIcon: { width: 30, height: 30, borderRadius: 15, backgroundColor: t.accent, alignItems: 'center', justifyContent: 'center' },
+  invite: { height: 44, flexShrink: 0, borderRadius: 16, backgroundColor: t.card, flexDirection: 'row', alignItems: 'center', gap: 6,
+    paddingLeft: 7, paddingRight: 12, borderWidth: 1.5, borderColor: t.inputBorder },
+  inviteIcon: { width: 30, height: 30, borderRadius: 15, backgroundColor: t.accentFill, alignItems: 'center', justifyContent: 'center' },
   inviteText: { color: t.ink, fontSize: 13, fontWeight: '900' },
   petRow: { flexDirection: 'row', alignItems: 'center', gap: 10, marginHorizontal: 16, marginBottom: 14, paddingHorizontal: 12, paddingVertical: 8,
-    borderRadius: 18, backgroundColor: '#FFFFFFCC' },
+    borderRadius: 18, backgroundColor: t.glass },
   petName: { color: t.ink, fontSize: 15, fontWeight: '900' },
   petLevel: { color: t.muted, fontSize: 12, fontWeight: '700' },
   status: { flexDirection: 'row', alignItems: 'center', gap: 5, marginTop: 3 },
@@ -308,4 +310,4 @@ const s = StyleSheet.create({
   sheetLabel: { fontSize: 14, fontWeight: '800', color: t.ink, marginTop: 4, marginBottom: 8 },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 10 },
   sheetHint: { fontSize: 12, color: t.muted, lineHeight: 17, marginVertical: 10 },
-});
+}));

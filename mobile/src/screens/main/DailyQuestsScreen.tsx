@@ -3,10 +3,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { Text } from '../../components/Typography';
 import { useConfirm } from '../../ui/ConfirmDialog';
-import { appTheme as t } from '../../theme';
 import { Card, Segmented } from '../../ui/kit';
 import { Quest, request, ScheduledTask, showError, taskRepeatDetail } from './shared';
 import { todayOf } from './taskDateTime';
+import { makeStyles, useTheme } from '../../ui/theme';
 
 type ViewMode = 'day' | 'week';
 type Repeat = 'none' | 'daily' | 'weekly' | 'monthly';
@@ -50,6 +50,8 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
 const HOUR_HEIGHT = 46;
 const repeatLabel = (id: string) => ({ yearly: 'Hằng năm', custom: 'Tùy chỉnh' } as Record<string, string>)[id] ?? REPEAT_OPTIONS.find((option) => option.id === id)?.label ?? id;
 export function DailyQuestsScreen({ today: serverToday, quests, onBack, onChanged, onOpenTaskCreate }: Props) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const today = todayOf(serverToday);
   const [view, setView] = useState<ViewMode>('day');
   const [selectedDate, setSelectedDate] = useState(today);
@@ -125,7 +127,7 @@ export function DailyQuestsScreen({ today: serverToday, quests, onBack, onChange
         <Text style={styles.subtitle}>Lên kế hoạch và theo dõi tiến độ của bạn.</Text>
       </View>
       <Pressable onPress={() => onOpenTaskCreate(selectedDate, handleTaskCreated)} style={styles.headerAddButton} accessibilityRole="button" accessibilityLabel="Thêm nhiệm vụ mới">
-        <Ionicons name="add" size={19} color="#FFFFFF" /><Text style={styles.headerAddText}>Thêm mới</Text>
+        <Ionicons name="add" size={19} color={t.onPrimary} /><Text style={styles.headerAddText}>Thêm mới</Text>
       </Pressable>
     </View>
 
@@ -147,6 +149,7 @@ function TeamCalendar({ mode, dates, selectedDate, tasks, quests, onSelectDate, 
   mode: ViewMode; dates: string[]; selectedDate: string; tasks: ScheduledTask[]; quests?: Quest[];
   onSelectDate: (date: string) => void; onCompleteTask: (task: ScheduledTask) => void | Promise<void>;
 }) {
+  const styles = useStyles();
   const columnWidth = mode === 'day' ? 250 : 132;
   const hours = HOURS;
   // The server's EXP. A built-in quest in this list comes without it: the dashboard's quests have it, where it is set at all.
@@ -200,47 +203,47 @@ function TeamCalendar({ mode, dates, selectedDate, tasks, quests, onSelectDate, 
   </Card>;
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, tones, dark }) => StyleSheet.create({
   header: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 18 },
-  back: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFFFFF' },
+  back: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', backgroundColor: t.card },
   headerCopy: { flex: 1 }, title: { fontSize: 24, fontWeight: '900', color: t.ink },
   subtitle: { fontSize: 13, lineHeight: 19, color: t.muted, marginTop: 2 },
-  headerAddButton: { minHeight: 40, borderRadius: 13, paddingHorizontal: 11, flexDirection: 'row', alignItems: 'center', gap: 3, backgroundColor: t.accent },
-  headerAddText: { color: '#FFFFFF', fontSize: 12, fontWeight: '800' },
+  headerAddButton: { minHeight: 40, borderRadius: 13, paddingHorizontal: 11, flexDirection: 'row', alignItems: 'center', gap: 3, backgroundColor: t.accentFill },
+  headerAddText: { color: t.onPrimary, fontSize: 12, fontWeight: '800' },
   dateNav: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginVertical: 14, paddingHorizontal: 6 },
   dateCenter: { flexDirection: 'row', alignItems: 'center', gap: 9 },
-  todayButton: { borderWidth: 1, borderColor: '#D8E2E9', borderRadius: 8, paddingHorizontal: 9, paddingVertical: 6 },
+  todayButton: { borderWidth: 1, borderColor: t.border, borderRadius: 8, paddingHorizontal: 9, paddingVertical: 6 },
   todayButtonText: { color: t.ink, fontSize: 11, fontWeight: '800' },
   dateLabel: { fontSize: 15, fontWeight: '800', color: t.ink, textTransform: 'capitalize' },
   calendarLoading: { color: t.muted, fontSize: 11, textAlign: 'center', marginTop: 8 },
   teamCalendarCard: { paddingHorizontal: 0, paddingVertical: 0, overflow: 'hidden' },
-  teamHeaderRow: { flexDirection: 'row', borderBottomWidth: 1, borderColor: '#D8E2E9' },
+  teamHeaderRow: { flexDirection: 'row', borderBottomWidth: 1, borderColor: t.border },
   timeGutter: { width: 48 },
-  teamDayHeader: { minHeight: 66, paddingHorizontal: 8, paddingVertical: 7, borderLeftWidth: 1, borderColor: '#E3EAF0', justifyContent: 'center' },
-  teamDayHeaderSelected: { borderTopWidth: 3, borderTopColor: '#6C63E8', backgroundColor: '#F5F4FF' },
+  teamDayHeader: { minHeight: 66, paddingHorizontal: 8, paddingVertical: 7, borderLeftWidth: 1, borderColor: t.tint, justifyContent: 'center' },
+  teamDayHeaderSelected: { borderTopWidth: 3, borderTopColor: dark ? '#8C84F0' : '#6C63E8', backgroundColor: dark ? tones.lilac.from : '#F5F4FF' },
   teamWeekday: { fontSize: 11, fontWeight: '700', color: t.muted, textTransform: 'capitalize' },
   teamDate: { fontSize: 21, fontWeight: '700', color: t.ink, marginTop: 2 },
-  teamAccent: { color: '#6258D9' },
-  teamAllDayRow: { flexDirection: 'row', minHeight: 82, borderBottomWidth: 1, borderColor: '#D8E2E9' },
+  teamAccent: { color: dark ? tones.lilac.ink : '#6258D9' },
+  teamAllDayRow: { flexDirection: 'row', minHeight: 82, borderBottomWidth: 1, borderColor: t.border },
   allDayLabel: { width: 48, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 2 },
   allDayText: { color: t.muted, fontSize: 9, fontWeight: '700' },
-  teamAllDayCell: { minHeight: 82, padding: 4, gap: 3, borderLeftWidth: 1, borderColor: '#E3EAF0' },
+  teamAllDayCell: { minHeight: 82, padding: 4, gap: 3, borderLeftWidth: 1, borderColor: t.tint },
   emptyAllDay: { flex: 1 },
-  teamEvent: { borderLeftWidth: 3, borderLeftColor: '#2CA66F', backgroundColor: '#E4F4EC', borderRadius: 5, paddingHorizontal: 5, paddingVertical: 4 },
-  teamEventDone: { borderLeftColor: '#9AACA1', backgroundColor: '#EEF2EF' },
-  teamEventTitle: { color: '#185B3C', fontSize: 10, lineHeight: 13, fontWeight: '800' },
-  teamEventTitleDone: { color: '#77867D', textDecorationLine: 'line-through' },
-  teamEventMeta: { color: '#658273', fontSize: 8, lineHeight: 11 },
+  teamEvent: { borderLeftWidth: 3, borderLeftColor: '#2CA66F', backgroundColor: dark ? t.successBg : '#E4F4EC', borderRadius: 5, paddingHorizontal: 5, paddingVertical: 4 },
+  teamEventDone: { borderLeftColor: '#9AACA1', backgroundColor: dark ? t.surfaceSecondary : '#EEF2EF' },
+  teamEventTitle: { color: dark ? tones.leaf.ink : '#185B3C', fontSize: 10, lineHeight: 13, fontWeight: '800' },
+  teamEventTitleDone: { color: dark ? t.placeholder : '#77867D', textDecorationLine: 'line-through' },
+  teamEventMeta: { color: dark ? '#9FC7AE' : '#658273', fontSize: 8, lineHeight: 11 },
   teamTimeGrid: { flexDirection: 'row' },
   hourLabels: { width: 48 },
   hourLabelCell: { height: 46, alignItems: 'center', paddingTop: 3 },
   hourLabel: { color: t.muted, fontSize: 9 },
-  timeColumn: { borderLeftWidth: 1, borderColor: '#E3EAF0', position: 'relative' },
-  selectedTimeColumn: { backgroundColor: '#FBFAFF' },
-  hourSlot: { height: 46, borderBottomWidth: 1, borderStyle: 'dashed', borderColor: '#E5EBF0' },
-  timedEvent: { position: 'absolute', left: 4, right: 4, zIndex: 2, borderLeftWidth: 3, borderLeftColor: '#6C63E8', backgroundColor: '#EEEAFE', borderRadius: 5, paddingHorizontal: 5, paddingVertical: 3, overflow: 'hidden' },
+  timeColumn: { borderLeftWidth: 1, borderColor: t.tint, position: 'relative' },
+  selectedTimeColumn: { backgroundColor: dark ? 'rgba(198,188,255,0.05)' : '#FBFAFF' },
+  hourSlot: { height: 46, borderBottomWidth: 1, borderStyle: 'dashed', borderColor: t.tint },
+  timedEvent: { position: 'absolute', left: 4, right: 4, zIndex: 2, borderLeftWidth: 3, borderLeftColor: dark ? '#8C84F0' : '#6C63E8', backgroundColor: dark ? tones.lilac.to : '#EEEAFE', borderRadius: 5, paddingHorizontal: 5, paddingVertical: 3, overflow: 'hidden' },
   calendarHint: { paddingHorizontal: 12, paddingVertical: 10, color: t.muted, fontSize: 11 },
-  modalBackdrop: { flex: 1, justifyContent: 'center', backgroundColor: 'rgba(17, 39, 58, 0.48)', padding: 18 },
+  modalBackdrop: { flex: 1, justifyContent: 'center', backgroundColor: t.scrim, padding: 18 },
   modalKeyboard: { maxHeight: '100%' },
   modalContent: { flexGrow: 1, justifyContent: 'center' },
   modalCard: { marginBottom: 0 },
@@ -249,9 +252,9 @@ const styles = StyleSheet.create({
   fieldLabel: { fontSize: 13, fontWeight: '800', color: t.ink, marginTop: 12, marginBottom: 6 },
   choices: { flexDirection: 'row', flexWrap: 'wrap', gap: 7 },
   choice: { paddingHorizontal: 11, paddingVertical: 8, borderRadius: 999, backgroundColor: t.bg },
-  choiceSelected: { backgroundColor: t.accent },
+  choiceSelected: { backgroundColor: t.accentFill },
   choiceText: { fontSize: 12, fontWeight: '700', color: t.accent },
-  choiceTextSelected: { color: '#FFFFFF' },
-  saveButton: { height: 48, marginTop: 18, borderRadius: 15, alignItems: 'center', justifyContent: 'center', backgroundColor: t.accent },
-  saveText: { color: '#FFFFFF', fontSize: 15, fontWeight: '900' }, disabled: { opacity: 0.55 },
-});
+  choiceTextSelected: { color: t.onPrimary },
+  saveButton: { height: 48, marginTop: 18, borderRadius: 15, alignItems: 'center', justifyContent: 'center', backgroundColor: t.accentFill },
+  saveText: { color: t.onPrimary, fontSize: 15, fontWeight: '900' }, disabled: { opacity: 0.55 },
+}));

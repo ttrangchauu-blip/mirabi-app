@@ -5,7 +5,7 @@ import { Text } from '../../../components/Typography';
 import { NATIVE } from '../../../games/quests/worlds';
 import type { TutorialSnapshot } from '../../../learning/tutorial/machine';
 import type { DemoAnimation, TutorialDefinition, TutorialStep, TutorialTarget } from '../../../learning/tutorial/registry';
-import { appTheme as t } from '../../../theme';
+import { makeStyles, useTheme } from '../../../ui/theme';
 import { Button } from '../../../ui/kit';
 
 export type Rect = { x: number; y: number; width: number; height: number };
@@ -19,12 +19,14 @@ const AIM_EVERY_MS = 120; // a falling word is followed this often
  * nothing that is played. */
 export function TutorialCoach({ def, snap, step, onNext }: { def: TutorialDefinition; snap: TutorialSnapshot; step: TutorialStep | undefined;
   onNext: () => void }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   if (!step || snap.state === 'TUTORIAL_COMPLETED' || snap.state === 'SKIPPED') return null;
   const feedback = snap.feedback;
   const checking = snap.state === 'VALIDATING_ACTION';
   return (
     <View style={styles.coach} testID="tutorial-coach">
-      <View style={styles.coachIcon}><Ionicons name="paw" size={18} color="#FFFFFF" /></View>
+      <View style={styles.coachIcon}><Ionicons name="paw" size={18} color={t.onPrimary} /></View>
       <View style={styles.flex}>
         <Text style={styles.coachStep}>Hướng dẫn · Bước {snap.index + 1}/{def.steps.length}</Text>
         <Text style={styles.coachText} accessibilityLiveRegion="polite" accessibilityRole="header">{step.instruction}</Text>
@@ -37,7 +39,7 @@ export function TutorialCoach({ def, snap, step, onNext }: { def: TutorialDefini
       {step.expected_action === 'next' && snap.state !== 'STEP_COMPLETED' ? (
         <Pressable onPress={onNext} accessibilityRole="button" accessibilityLabel="Tiếp" hitSlop={6} style={styles.next}>
           <Text style={styles.nextText}>Tiếp</Text>
-          <Ionicons name="chevron-forward" size={16} color="#FFFFFF" />
+          <Ionicons name="chevron-forward" size={16} color={t.onPrimary} />
         </Pressable>
       ) : null}
     </View>
@@ -46,6 +48,7 @@ export function TutorialCoach({ def, snap, step, onNext }: { def: TutorialDefini
 
 /** Under the game: how far the tutorial is, and "Bỏ qua" when the game allows it. */
 export function TutorialProgressBar({ def, snap, onSkip }: { def: TutorialDefinition; snap: TutorialSnapshot; onSkip?: () => void }) {
+  const styles = useStyles();
   if (snap.state === 'TUTORIAL_COMPLETED' || snap.state === 'SKIPPED') return null;
   return (
     <View style={styles.progress} testID="tutorial-progress">
@@ -68,6 +71,8 @@ export function TutorialProgressBar({ def, snap, onSkip }: { def: TutorialDefini
 /** The tutorial is done: a small card over the bottom of the game (the game stays in sight). */
 export function TutorialReady({ def, startLabel, onStart, onReplay, busy }: { def: TutorialDefinition; startLabel: string; onStart: () => void;
   onReplay: () => void; busy?: boolean }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   // One tap starts one game.
   const [started, setStarted] = useState(false);
   return (
@@ -101,6 +106,7 @@ export function TutorialReady({ def, startLabel, onStart, onReplay, busy }: { de
  */
 export function TutorialSpotlight({ step, demonstrating, regions, aimed, reduceMotion }: { step: TutorialStep | undefined; demonstrating: boolean;
   regions: Regions; aimed: () => Rect | null; reduceMotion: boolean }) {
+  const styles = useStyles();
   const target = step?.target ?? 'none';
   const [aim, setAim] = useState<Rect | null>(null);
   // A falling word moves: it is followed (and the ring goes where it is now, never where it was).
@@ -141,6 +147,7 @@ function useLoop(reduceMotion: boolean, duration: number, deps: unknown[] = []) 
 }
 
 function Ring({ rect, reduceMotion, soft }: { rect: Rect; reduceMotion: boolean; soft: boolean }) {
+  const styles = useStyles();
   const pulse = useLoop(reduceMotion, 1400);
   const opacity = reduceMotion ? 0.9 : pulse.interpolate({ inputRange: [0, 0.5, 1], outputRange: [0.95, 0.45, 0.95] });
   const scale = reduceMotion ? 1 : pulse.interpolate({ inputRange: [0, 0.5, 1], outputRange: [1, 1.02, 1] });
@@ -152,6 +159,7 @@ function Ring({ rect, reduceMotion, soft }: { rect: Rect; reduceMotion: boolean;
 }
 
 function Arrow({ rect, reduceMotion }: { rect: Rect; reduceMotion: boolean }) {
+  const styles = useStyles();
   const bob = useLoop(reduceMotion, 900);
   const above = rect.y > 44; // room above the target: point down at it; else point up from under it
   const shift = reduceMotion ? 0 : bob.interpolate({ inputRange: [0, 0.5, 1], outputRange: [0, above ? 8 : -8, 0] });
@@ -165,6 +173,7 @@ function Arrow({ rect, reduceMotion }: { rect: Rect; reduceMotion: boolean }) {
 }
 
 function Hand({ rect, kind, reduceMotion }: { rect: Rect; kind: 'hand_tap' | 'hand_drag' | 'hand_type'; reduceMotion: boolean }) {
+  const styles = useStyles();
   const t1 = useLoop(reduceMotion, kind === 'hand_drag' ? 1600 : 1000, [kind]);
   const cx = rect.x + rect.width / 2 - 14;
   const top = kind === 'hand_type' ? rect.y + rect.height - 18 : kind === 'hand_drag' ? rect.y + rect.height * 0.7 : rect.y + rect.height / 2 - 10;
@@ -180,10 +189,10 @@ function Hand({ rect, kind, reduceMotion }: { rect: Rect; kind: 'hand_tap' | 'ha
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, tones, dark }) => StyleSheet.create({
   flex: { flex: 1 },
-  coach: { flexDirection: 'row', alignItems: 'center', gap: 10, backgroundColor: '#FFFFFF', borderRadius: 18, paddingVertical: 10, paddingHorizontal: 12,
-    marginBottom: 8, borderWidth: 2, borderColor: '#FFE1A8',
+  coach: { flexDirection: 'row', alignItems: 'center', gap: 10, backgroundColor: t.card, borderRadius: 18, paddingVertical: 10, paddingHorizontal: 12,
+    marginBottom: 8, borderWidth: 2, borderColor: dark ? tones.sun.to : '#FFE1A8',
     shadowColor: t.shadow, shadowOpacity: 0.1, shadowRadius: 10, shadowOffset: { width: 0, height: 4 }, elevation: 3 },
   coachIcon: { width: 34, height: 34, borderRadius: 17, backgroundColor: '#F2A93B', alignItems: 'center', justifyContent: 'center' },
   coachStep: { fontSize: 11, fontWeight: '900', color: t.muted, textTransform: 'uppercase', letterSpacing: 0.4 },
@@ -191,13 +200,13 @@ const styles = StyleSheet.create({
   coachNote: { fontSize: 13, fontWeight: '800', color: t.muted, marginTop: 3 },
   good: { color: t.success },
   bad: { color: t.danger },
-  next: { flexDirection: 'row', alignItems: 'center', gap: 2, backgroundColor: t.accent, borderRadius: 999, paddingHorizontal: 12, minHeight: 36 },
-  nextText: { color: '#FFFFFF', fontWeight: '900', fontSize: 14 },
+  next: { flexDirection: 'row', alignItems: 'center', gap: 2, backgroundColor: t.accentFill, borderRadius: 999, paddingHorizontal: 12, minHeight: 36 },
+  nextText: { color: t.onPrimary, fontWeight: '900', fontSize: 14 },
   progress: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingTop: 8 },
   dots: { flexDirection: 'row', gap: 6 },
-  dot: { width: 8, height: 8, borderRadius: 4, backgroundColor: '#C3DCEB' },
+  dot: { width: 8, height: 8, borderRadius: 4, backgroundColor: dark ? t.track : '#C3DCEB' },
   dotDone: { backgroundColor: t.success },
-  dotOn: { width: 20, backgroundColor: t.accent },
+  dotOn: { width: 20, backgroundColor: t.accentFill },
   progressText: { fontSize: 13, fontWeight: '900', color: t.muted },
   skip: { minHeight: 32, paddingHorizontal: 12, borderRadius: 999, backgroundColor: t.tint, justifyContent: 'center' },
   skipText: { color: t.accent, fontWeight: '900', fontSize: 13 },
@@ -207,8 +216,8 @@ const styles = StyleSheet.create({
   hand: { position: 'absolute', width: 34, height: 34, borderRadius: 17, backgroundColor: 'rgba(242,169,59,0.92)', alignItems: 'center', justifyContent: 'center' },
   handIcon: { transform: [{ rotate: '-20deg' }] },
   readyDock: { position: 'absolute', left: 0, right: 0, bottom: 0, zIndex: 9 },
-  ready: { backgroundColor: '#FFFFFF', borderRadius: 22, padding: 16, gap: 8,
-    shadowColor: '#0B2A4A', shadowOpacity: 0.2, shadowRadius: 14, shadowOffset: { width: 0, height: -2 }, elevation: 8 },
+  ready: { backgroundColor: t.card, borderRadius: 22, padding: 16, gap: 8,
+    shadowColor: dark ? t.shadow : '#0B2A4A', shadowOpacity: 0.2, shadowRadius: 14, shadowOffset: { width: 0, height: -2 }, elevation: 8 },
   readyHead: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   readyTitle: { fontSize: 20, fontWeight: '900', color: t.ink },
   readyLine: { fontSize: 15, fontWeight: '800', color: t.ink },
@@ -216,4 +225,4 @@ const styles = StyleSheet.create({
   readyNote: { flex: 1, fontSize: 13, color: t.muted, lineHeight: 18 },
   replay: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, minHeight: 36 },
   replayText: { color: t.accent, fontWeight: '800', fontSize: 14 },
-});
+}));

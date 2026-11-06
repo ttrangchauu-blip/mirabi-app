@@ -4,7 +4,7 @@ import { Text } from '../../../components/Typography';
 import { PetArt } from '../../../components/PetArt';
 import { usePetCheer } from '../../../games/engine/rig';
 import type { Turn } from '../../../learning/types';
-import { appTheme as t } from '../../../theme';
+import { makeStyles } from '../../../ui/theme';
 import { NumberPad } from './NumberPad';
 import { DoorFrame } from '../../../games/art/wordForest';
 import { ChoiceOption, ChoiceResult, markOf } from './AnswerFeedback';
@@ -16,6 +16,8 @@ type PetProps = { petId: string; petLevel: number; reduceMotion: boolean };
  * gates lock and are marked (the one chosen green or red, the right one green) above the explanation. */
 export function GateChoice({ turn, onChoose, disabled, result, petId, petLevel, reduceMotion }: {
   turn: Turn; onChoose: (id: string) => void; disabled: boolean; result?: ChoiceResult | null } & PetProps) {
+  const idle = useIdle();
+  const styles = useStyles();
   const options = turn.prompt.options ?? [];
   const cheer = usePetCheer(petId, petLevel, !!result?.right, reduceMotion);
   const grid = options.length > 3 || options.some((o) => o.text.length > 10);
@@ -24,7 +26,7 @@ export function GateChoice({ turn, onChoose, disabled, result, petId, petLevel, 
       <View style={[styles.gates, grid && styles.gatesGrid]}>
         {options.map((option) => (
           <ChoiceOption key={option.id} label={`Đáp án ${option.text}`} onPress={() => onChoose(option.id)} disabled={disabled || !!result}
-            mark={markOf(result, option.id)} idle={GATE_IDLE} reduceMotion={reduceMotion}
+            mark={markOf(result, option.id)} idle={idle.gate} reduceMotion={reduceMotion}
             style={[styles.gate, grid && styles.gateGrid, disabled && !result && styles.dimmed]}>
             {grid ? null : <View style={styles.gateArch} pointerEvents="none"><DoorFrame size={40} /></View>}
             <Text style={[styles.gateText, grid && styles.gateTextGrid]}>{option.text}</Text>
@@ -40,6 +42,7 @@ export function GateChoice({ turn, onChoose, disabled, result, petId, petLevel, 
  * word twice can be placed and removed one by one. The final punctuation is shown after the last plank. */
 export function WordBridge({ turn, onSubmit, disabled, solved = false, petId, petLevel, reduceMotion }: { turn: Turn; onSubmit: (ids: string[]) => void; disabled: boolean;
   /** Answered right: the pet is glad. */ solved?: boolean } & PetProps) {
+  const styles = useStyles();
   const cheer = usePetCheer(petId, petLevel, solved, reduceMotion);
   const tokens = turn.prompt.tokens ?? [];
   const [placed, setPlaced] = useState<string[]>([]);
@@ -86,6 +89,8 @@ export function MathBridge({ turn, built, total, draft, setDraft, onSubmit, disa
   turn: Turn; built: number; total: number; draft: string; setDraft: (v: string) => void; onSubmit: (answer: string) => void; disabled: boolean;
   result?: ChoiceResult | null; reduceMotion?: boolean;
 }) {
+  const idle = useIdle();
+  const styles = useStyles();
   return (
     <View style={styles.scene}>
       <View style={styles.spans} accessibilityLabel={`Cầu đã xây ${built} trên ${total} đoạn`}>
@@ -95,7 +100,7 @@ export function MathBridge({ turn, built, total, draft, setDraft, onSubmit, disa
         <View style={styles.compareRow}>
           {(turn.prompt.options ?? []).map((o) => (
             <ChoiceOption key={o.id} label={`Dấu ${o.text}`} onPress={() => onSubmit(o.id)} disabled={disabled || !!result}
-              mark={markOf(result, o.id)} idle={SIGN_IDLE} reduceMotion={reduceMotion} style={[styles.sign, disabled && !result && styles.dimmed]}>
+              mark={markOf(result, o.id)} idle={idle.sign} reduceMotion={reduceMotion} style={[styles.sign, disabled && !result && styles.dimmed]}>
               <Text style={styles.signText}>{o.text}</Text>
             </ChoiceOption>
           ))}
@@ -108,10 +113,13 @@ export function MathBridge({ turn, built, total, draft, setDraft, onSubmit, disa
   );
 }
 
-const GATE_IDLE = { bg: '#FFF4E0', border: '#F2C46D' };
-const SIGN_IDLE = { bg: '#FFFFFF', border: t.border };
+/** The options' colours before they are marked (ChoiceOption): golden gates, white sign cards. */
+const useIdle = makeStyles(({ t, tones, dark }) => ({
+  gate: { bg: dark ? tones.sun.from : '#FFF4E0', border: '#F2C46D' },
+  sign: { bg: t.card, border: t.border },
+}));
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, dark }) => StyleSheet.create({
   scene: { marginBottom: 10 },
   gates: { flexDirection: 'row', gap: 8 },
   gatesGrid: { flexWrap: 'wrap' },
@@ -125,23 +133,23 @@ const styles = StyleSheet.create({
   pressed: { opacity: 0.75, transform: [{ scale: 0.98 }] },
   dimmed: { opacity: 0.5 },
   bridgeRow: { flexDirection: 'row', alignItems: 'flex-end', gap: 8 },
-  bridge: { flex: 1, minHeight: 64, borderRadius: 16, borderWidth: 2, borderStyle: 'dashed', borderColor: '#A9C9DD', padding: 6,
-    flexDirection: 'row', flexWrap: 'wrap', gap: 6, alignItems: 'center', backgroundColor: '#F2FAFF' },
+  bridge: { flex: 1, minHeight: 64, borderRadius: 16, borderWidth: 2, borderStyle: 'dashed', borderColor: dark ? t.inputBorder : '#A9C9DD', padding: 6,
+    flexDirection: 'row', flexWrap: 'wrap', gap: 6, alignItems: 'center', backgroundColor: t.surfaceSecondary },
   gapText: { color: t.muted, fontSize: 13 },
   plank: { backgroundColor: '#C98B4E', borderRadius: 8, paddingHorizontal: 10, paddingVertical: 8 },
   plankText: { color: '#FFFFFF', fontWeight: '800', fontSize: 15 },
   tokens: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 12 },
-  token: { backgroundColor: '#FFFFFF', borderRadius: 12, borderWidth: 1.5, borderColor: t.border, paddingHorizontal: 12, paddingVertical: 10 },
+  token: { backgroundColor: t.card, borderRadius: 12, borderWidth: 1.5, borderColor: t.border, paddingHorizontal: 12, paddingVertical: 10 },
   tokenText: { fontSize: 16, fontWeight: '800', color: t.ink },
   actions: { flexDirection: 'row', gap: 8, marginTop: 12 },
   secondary: { flex: 1, minHeight: 46, borderRadius: 14, backgroundColor: t.tint, alignItems: 'center', justifyContent: 'center' },
   secondaryText: { color: t.accent, fontWeight: '800', fontSize: 15 },
-  primary: { flex: 2, minHeight: 46, borderRadius: 14, backgroundColor: t.accent, alignItems: 'center', justifyContent: 'center' },
-  primaryText: { color: '#FFFFFF', fontWeight: '900', fontSize: 15 },
+  primary: { flex: 2, minHeight: 46, borderRadius: 14, backgroundColor: t.accentFill, alignItems: 'center', justifyContent: 'center' },
+  primaryText: { color: t.onPrimary, fontWeight: '900', fontSize: 15 },
   spans: { flexDirection: 'row', gap: 3, marginBottom: 12 },
-  span: { flex: 1, height: 12, borderRadius: 4, backgroundColor: '#D4E3EC' },
+  span: { flex: 1, height: 12, borderRadius: 4, backgroundColor: dark ? t.track : '#D4E3EC' },
   spanBuilt: { backgroundColor: '#C98B4E' },
   compareRow: { flexDirection: 'row', gap: 10 },
   sign: { flex: 1, minHeight: 64, borderRadius: 16, borderWidth: 2, alignItems: 'center', justifyContent: 'center' },
   signText: { fontSize: 30, fontWeight: '900', color: t.accent },
-});
+}));

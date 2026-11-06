@@ -4,8 +4,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { PetArt } from '../../components/PetArt';
 import { usePetCheer } from '../engine/rig';
 import { Text } from '../../components/Typography';
-import { appTheme as t } from '../../theme';
-import { Actions, NoteLine, SceneProps, styles as ui, useSolvedReaction, useWrongShake } from './common';
+import { makeStyles, useTheme } from '../../ui/theme';
+import { Actions, NoteLine, SceneProps, useCommonStyles, useSolvedReaction, useWrongShake } from './common';
 
 // Thám tử đọc hiểu (Tiếng Việt / Tiếng Anh): a case file. The question is the case; the text is read sentence by
 // sentence, each a clue card. First the learner picks the sentence that proves the answer and presses "Kiểm tra" (the
@@ -16,6 +16,10 @@ import { Actions, NoteLine, SceneProps, styles as ui, useSolvedReaction, useWron
 export function StoryDetective({ turn, disabled, feedback, solved, onSubmit, reduceMotion, petId, petLevel, demo }: SceneProps & {
   demo?: { picked?: string | null; found?: string | null; option?: string | null; solved?: boolean };
 }) {
+  const { t } = useTheme();
+  const ui = useCommonStyles();
+  const st = useStyles();
+  const purple = st.purple.color;
   const p = turn.prompt;
   const sentences = p.sentences ?? [];
   const answering = p.phase === 'answer' || !!demo?.found;
@@ -46,7 +50,7 @@ export function StoryDetective({ turn, disabled, feedback, solved, onSubmit, red
   return (
     <View style={st.world}>
       <View style={st.caseCard} accessibilityLabel={`Câu hỏi: ${p.question ?? ''}`}>
-        <Ionicons name="search" size={20} color="#5B3FA0" />
+        <Ionicons name="search" size={20} color={purple} />
         <Text style={st.question}>{p.question}</Text>
       </View>
       <Text style={ui.hint}>{answering ? 'Dựa vào manh mối, chọn câu trả lời.' : 'Chạm vào câu chứng minh câu trả lời, rồi nhấn Kiểm tra.'}</Text>
@@ -83,7 +87,7 @@ export function StoryDetective({ turn, disabled, feedback, solved, onSubmit, red
                 style={({ pressed }) => [st.option, isPicked && st.optionPicked, isCrossed && st.optionCrossed, done && isPicked && st.optionRight,
                   pressed && ui.pressed]}>
                 <Ionicons name={done && isPicked ? 'checkmark-circle' : isCrossed ? 'close-circle' : isPicked ? 'radio-button-on' : 'radio-button-off'}
-                  size={20} color={done && isPicked ? t.success : isCrossed ? t.danger : '#5B3FA0'} />
+                  size={20} color={done && isPicked ? t.success : isCrossed ? t.danger : purple} />
                 <Text style={[st.optionText, isCrossed && st.crossedText]}>{o.text}</Text>
               </Pressable>
             );
@@ -92,7 +96,7 @@ export function StoryDetective({ turn, disabled, feedback, solved, onSubmit, red
       ) : null}
       <View style={st.petRow} pointerEvents="none">
         <PetArt pet={petId} size={32} stage={petLevel} still={reduceMotion || !done} cheer={cheer} />
-        <Ionicons name="search-circle" size={26} color="#5B3FA0" />
+        <Ionicons name="search-circle" size={26} color={purple} />
       </View>
       <NoteLine note={demo?.solved ? { text: 'Chính xác! Vụ án đã được phá.', tone: 'good' } : done ? null : feedback} />
       {done ? null : (
@@ -103,18 +107,23 @@ export function StoryDetective({ turn, disabled, feedback, solved, onSubmit, red
   );
 }
 
-const st = StyleSheet.create({
-  world: { gap: 10, padding: 12, borderRadius: 20, backgroundColor: '#F5F0FC', borderWidth: 2, borderColor: '#DCCFF3' },
-  caseCard: { flexDirection: 'row', gap: 8, alignItems: 'flex-start', padding: 12, borderRadius: 14, backgroundColor: '#FFFFFF',
-    borderLeftWidth: 5, borderLeftColor: '#5B3FA0' },
+const PURPLE = '#5B3FA0';
+
+const useStyles = makeStyles(({ t, tones, dark }) => StyleSheet.create({
+  purple: { color: dark ? tones.lilac.ink : PURPLE },
+  world: { gap: 10, padding: 12, borderRadius: 20, backgroundColor: dark ? tones.lilac.from : '#F5F0FC', borderWidth: 2,
+    borderColor: dark ? tones.lilac.to : '#DCCFF3' },
+  caseCard: { flexDirection: 'row', gap: 8, alignItems: 'flex-start', padding: 12, borderRadius: 14, backgroundColor: t.card,
+    borderLeftWidth: 5, borderLeftColor: dark ? tones.lilac.ink : PURPLE },
   question: { flex: 1, fontSize: 16, fontWeight: '900', color: t.ink, lineHeight: 22 },
-  file: { gap: 6, padding: 10, borderRadius: 14, backgroundColor: '#FFFDF6', borderWidth: 1, borderColor: '#EADFC4' },
+  file: { gap: 6, padding: 10, borderRadius: 14, backgroundColor: dark ? t.surfaceSecondary : '#FFFDF6', borderWidth: 1,
+    borderColor: dark ? t.border : '#EADFC4' },
   sentence: { flexDirection: 'row', gap: 8, alignItems: 'flex-start', padding: 8, borderRadius: 10, borderWidth: 2, borderColor: 'transparent' },
-  sentencePicked: { borderColor: '#5B3FA0', backgroundColor: '#EFE8FA' },
-  sentenceFound: { borderColor: '#E3B23C', backgroundColor: '#FFF3CF' },
+  sentencePicked: { borderColor: dark ? tones.lilac.ink : PURPLE, backgroundColor: dark ? tones.lilac.to : '#EFE8FA' },
+  sentenceFound: { borderColor: '#E3B23C', backgroundColor: dark ? tones.sun.from : '#FFF3CF' },
   sentenceCrossed: { opacity: 0.55 },
-  number: { width: 22, height: 22, borderRadius: 11, overflow: 'hidden', textAlign: 'center', fontSize: 12, fontWeight: '900', color: '#5B3FA0',
-    backgroundColor: '#EFE8FA', lineHeight: 22 },
+  number: { width: 22, height: 22, borderRadius: 11, overflow: 'hidden', textAlign: 'center', fontSize: 12, fontWeight: '900',
+    color: dark ? tones.lilac.ink : PURPLE, backgroundColor: dark ? tones.lilac.from : '#EFE8FA', lineHeight: 22 },
   sentenceText: { flex: 1, fontSize: 15, lineHeight: 22, fontWeight: '600', color: t.ink },
   crossedText: { textDecorationLine: 'line-through', color: t.muted },
   stamp: { position: 'absolute', right: 14, bottom: 14, paddingHorizontal: 12, paddingVertical: 6, borderWidth: 3, borderColor: '#C0392B',
@@ -122,10 +131,10 @@ const st = StyleSheet.create({
   stampText: { fontSize: 18, fontWeight: '900', color: '#C0392B', letterSpacing: 2 },
   options: { gap: 8 },
   option: { flexDirection: 'row', gap: 10, alignItems: 'center', minHeight: 48, paddingHorizontal: 12, paddingVertical: 8, borderRadius: 14,
-    backgroundColor: '#FFFFFF', borderWidth: 2, borderColor: '#DCCFF3' },
-  optionPicked: { borderColor: '#5B3FA0' },
+    backgroundColor: t.card, borderWidth: 2, borderColor: dark ? tones.lilac.to : '#DCCFF3' },
+  optionPicked: { borderColor: dark ? tones.lilac.ink : PURPLE },
   optionCrossed: { opacity: 0.55, borderColor: t.danger },
   optionRight: { borderColor: t.success, backgroundColor: t.successBg },
   optionText: { flex: 1, fontSize: 15, fontWeight: '700', color: t.ink },
   petRow: { flexDirection: 'row', alignItems: 'center', gap: 4, alignSelf: 'flex-end' },
-});
+}));

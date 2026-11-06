@@ -2,7 +2,7 @@ import React from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../../components/Typography';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { Segmented } from '../../ui/kit';
 
 export type StudyMode = 'personal' | 'together';
@@ -22,6 +22,8 @@ const ROOMS = [
 
 /** In "Học tự chọn": the focus room and the room with friends. Switching only changes what is on screen: a session running in either goes on. */
 export function StudyRoomTabs({ value, onChange }: { value: StudyMode; onChange: (mode: StudyMode) => void }) {
+  const { t } = useTheme();
+  const s = useStyles();
   return (
     <View style={s.tabs} accessibilityRole="tablist">
       {ROOMS.map((room) => {
@@ -38,11 +40,15 @@ export function StudyRoomTabs({ value, onChange }: { value: StudyMode; onChange:
   );
 }
 
-const s = StyleSheet.create({
-  tabs: { flexDirection: 'row', padding: 4, gap: 4, borderRadius: 24, marginBottom: 12, backgroundColor: 'rgba(255,255,255,0.55)', borderWidth: 1, borderColor: 'rgba(255,255,255,0.8)' },
-  tab: { flex: 1, minWidth: 0, minHeight: 44, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 5, paddingHorizontal: 4, borderRadius: 20 },
-  tabWide: { flex: 1.26 },
-  tabActive: { backgroundColor: '#FFFFFF', shadowColor: '#1F6E9E', shadowOpacity: 0.14, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, elevation: 2 },
-  label: { flexShrink: 1, fontSize: 11.5, fontWeight: '700', color: t.muted },
-  labelActive: { color: t.accent, fontWeight: '800' },
+const useStyles = makeStyles(({ t, dark }) => {
+  // The tab bar is a thin pane over the backdrop: lighter than t.glass so the screen behind shows through.
+  const tabsBg = dark ? 'rgba(24,37,62,0.6)' : 'rgba(255,255,255,0.55)';
+  return StyleSheet.create({
+    tabs: { flexDirection: 'row', padding: 4, gap: 4, borderRadius: 24, marginBottom: 12, backgroundColor: tabsBg, borderWidth: 1, borderColor: t.glassBorder },
+    tab: { flex: 1, minWidth: 0, minHeight: 44, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 5, paddingHorizontal: 4, borderRadius: 20 },
+    tabWide: { flex: 1.26 },
+    tabActive: { backgroundColor: t.card, shadowColor: t.shadow, shadowOpacity: 0.14, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, elevation: 2 },
+    label: { flexShrink: 1, fontSize: 11.5, fontWeight: '700', color: t.muted },
+    labelActive: { color: t.accent, fontWeight: '800' },
+  });
 });

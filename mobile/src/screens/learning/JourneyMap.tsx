@@ -6,14 +6,14 @@ import { PetCompanion } from '../../components/PetCompanion';
 import { Text } from '../../components/Typography';
 import { JourneySection, LessonCard, nodeStatus, unlockHint } from '../../learning/lessonOrder';
 import type { ContentStatus, UnlockRequirement } from '../../learning/types';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { IconName, ProgressBar } from '../../ui/kit';
 import { useAtmosphere } from '../../world/atmosphere';
 import { ContactShadow, Plate, Tiles } from '../../world/diorama';
 import { LiveSky } from '../../world/liveSky';
 import { useWeather } from '../../world/weather';
 import { POINT, POINT_FACE, STEPS, TRAIL_RIDGE, TRAIL_TILE, TRAIL_TOP } from './learnArt';
-import type { Look } from './LearningUI';
+import { type Look, themedLook } from './LearningUI';
 
 // The journey map of a subject (backend learning_unlocks.py): its chapters are areas and its lessons points on one winding
 // path. Every state comes from the backend; a lesson that has just opened plays its unlock here, without ever holding
@@ -42,6 +42,9 @@ type Props = { section: JourneySection; firstPlace: number; look: Look | null; c
 
 /** One area of the map: its name and how far it is done, then its lessons as points on the path. */
 export function JourneySectionView({ section, firstPlace, look, current, opening, hint, petId, petLevel, reduceMotion, night = false, onPress, onOpenRequirement, onNodeLayout }: Props) {
+  const theme = useTheme();
+  const { t } = theme;
+  const styles = useStyles();
   const locked = section.status === 'LOCKED';
   const reveal = useRef(new Animated.Value(1)).current;
   const fresh = opening.has(section.key);
@@ -59,7 +62,7 @@ export function JourneySectionView({ section, firstPlace, look, current, opening
     <View style={styles.section}>
       <Animated.View accessible accessibilityRole="header" style={[styles.banner, locked && styles.bannerLocked, { opacity: reveal }]}
         accessibilityLabel={`${section.title}. ${stateLabel}${section.requiredTotal ? `, ${section.requiredCompleted} trên ${section.requiredTotal} bài bắt buộc` : ''}`}>
-        <Ionicons name={locked ? 'lock-closed' : done ? 'trophy' : 'map-outline'} size={18} color={locked ? '#7A8D9E' : done ? '#B5850B' : look?.color ?? t.accent} />
+        <Ionicons name={locked ? 'lock-closed' : done ? 'trophy' : 'map-outline'} size={18} color={locked ? t.placeholder : done ? '#B5850B' : look ? themedLook(look, theme).color : t.accent} />
         <View style={styles.flex}>
           <Text style={[styles.bannerTitle, locked && styles.mutedText]} numberOfLines={2}>{section.title}</Text>
           <Text style={styles.bannerState} numberOfLines={2}>{locked && section.note ? section.note : stateLabel}</Text>
@@ -84,6 +87,7 @@ export function JourneySectionView({ section, firstPlace, look, current, opening
 
 /** The way between two points: stones in the grass, sharp up to what is open, faded beyond. */
 function PathLink({ from, to, open, night }: { from: number; to: number; open: boolean; night: boolean }) {
+  const styles = useStyles();
   const a = WIDTH / 2 + from;
   const b = WIDTH / 2 + to;
   const art = night ? 'night' : 'day';
@@ -101,6 +105,7 @@ function PathLink({ from, to, open, night }: { from: number; to: number; open: b
 
 /** The hillside behind a subject's map, with the real sky over its ridge. As long as the map is. */
 export function TrailBackdrop({ width, top, height }: { width: number; top: number; height: number }) {
+  const styles = useStyles();
   const { reading } = useWeather();
   const { hours, mood, light: c, night } = useAtmosphere(reading);
   const art = night ? 'night' : 'day';
@@ -125,6 +130,8 @@ type NodeProps = { card: LessonCard; offset: number; look: Look | null; here: bo
 /** A lesson on the map. Chưa mở: a lock, slightly faded. Đã mở: clear colours and a soft light. Đang học: a progress bar.
  * Hoàn thành: a tick and a small medal. The pet stands by the lesson the learner is at. */
 function JourneyNode({ card, offset, look, here, fresh, celebrating, hint, petId, petLevel, reduceMotion, night, onPress, onOpenRequirement, onLayoutY }: NodeProps) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const status = nodeStatus(card);
   const color = look?.color ?? t.accent;
   const shake = useRef(new Animated.Value(0)).current;
@@ -242,16 +249,16 @@ function JourneyNode({ card, offset, look, here, fresh, celebrating, hint, petId
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   flex: { flex: 1 },
   section: { alignItems: 'center', marginBottom: 14 },
-  banner: { alignSelf: 'stretch', flexDirection: 'row', alignItems: 'center', gap: 10, backgroundColor: '#FFFFFF', borderRadius: 16,
+  banner: { alignSelf: 'stretch', flexDirection: 'row', alignItems: 'center', gap: 10, backgroundColor: t.card, borderRadius: 16,
     paddingHorizontal: 14, paddingVertical: 10, marginBottom: 14 },
-  bannerLocked: { backgroundColor: '#F2F5F8' },
+  bannerLocked: { backgroundColor: t.surfaceSecondary },
   bannerTitle: { fontSize: 15, fontWeight: '900', color: t.ink },
   bannerState: { fontSize: 12, color: t.muted, marginTop: 1 },
   bannerCount: { fontSize: 13, fontWeight: '900', color: t.muted },
-  mutedText: { color: '#6F8394' },
+  mutedText: { color: t.placeholder },
   link: { width: WIDTH, height: LINK },
   step: { position: 'absolute', width: STEP, height: STEP },
   backdrop: { position: 'absolute', left: 0, right: 0, overflow: 'hidden' },
@@ -260,7 +267,7 @@ const styles = StyleSheet.create({
   stone: { position: 'absolute', width: STONE, height: STONE, left: (SIZE - STONE) / 2, top: SIZE / 2 - STONE * POINT_FACE },
   stoneArt: { width: STONE, height: STONE },
   stoneShadow: { position: 'absolute', top: SIZE - 14, alignSelf: 'center' },
-  nodeLabel: { alignSelf: 'stretch', alignItems: 'stretch', marginTop: 14, paddingHorizontal: 6, paddingVertical: 3, borderRadius: 10, backgroundColor: 'rgba(255,255,255,0.92)' },
+  nodeLabel: { alignSelf: 'stretch', alignItems: 'stretch', marginTop: 14, paddingHorizontal: 6, paddingVertical: 3, borderRadius: 10, backgroundColor: t.glass },
   nodeRow: { alignSelf: 'stretch', alignItems: 'center' },
   node: { width: 124, alignItems: 'center' },
   point: { width: SIZE, height: SIZE, alignItems: 'center', justifyContent: 'center' },
@@ -276,8 +283,8 @@ const styles = StyleSheet.create({
   pet: { position: 'absolute', top: 4 },
   petLeft: { right: 112 },
   petRight: { left: 112 },
-  hint: { alignSelf: 'stretch', backgroundColor: '#FFFFFF', borderRadius: 14, padding: 12, marginTop: 8, gap: 6 },
+  hint: { alignSelf: 'stretch', backgroundColor: t.card, borderRadius: 14, padding: 12, marginTop: 8, gap: 6 },
   hintText: { fontSize: 13, color: t.muted, lineHeight: 18 },
   hintLink: { flexDirection: 'row', alignItems: 'center', gap: 4, alignSelf: 'flex-start', minHeight: 28 },
   hintLinkText: { fontSize: 13, fontWeight: '800', color: t.accent },
-});
+}));

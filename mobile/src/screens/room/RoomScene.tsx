@@ -15,7 +15,7 @@ import { useSwing, useWorldMotion } from '../../world/budget';
 import { actTransform, EASE, newActValues, PET_ACTS, playAct } from '../../world/motion';
 import { useCelebration } from '../../world/useCelebration';
 import { ACT_OF_INTERACTION, artFor, type PetState, usePetMachine } from '../../world/petMachine';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 
 // Until the first layout pass (and in tests, which have none) the room is drawn in a phone-sized space.
 const FALLBACK = { width: 320, height: 676 };
@@ -172,6 +172,7 @@ function useWalker(layout: Layout, home: Spot, enabled: boolean) {
  */
 export const RoomScene = memo(function RoomScene({ layout, drawing, seatIdle = false, celebrate = 0, kind = 'personal', resting = false, pet, pose, away, guest, onPetPress, petLabel, reaction, petMenu,
   awayMarker, effects = true, fullScreen = false, safeTop = 0, safeBottom = 0, menuTop = safeTop, description, editor, chrome, walkable = false, hearts, underlay, onItemPress }: Props) {
+  const s = useStyles();
   const [box, setBox] = useState<{ width: number; height: number } | null>(null);
   // The items a drag picked up (the dragged one and what stands on it), and how far they are moved, in points.
   const [lifted, setLifted] = useState<string[] | null>(null);
@@ -388,6 +389,7 @@ function FloorTaps({ k, onTap, testID = 'room-floor' }: { k: number; onTap: (x: 
 
 /** A small ring where the pet is heading, fading out. */
 function TargetMark({ at, k }: { at: Point; k: number }) {
+  const s = useStyles();
   const fade = useRef(new Animated.Value(0)).current;
   useEffect(() => {
     const run = Animated.timing(fade, { toValue: 1, duration: 900, easing: Easing.out(Easing.quad), useNativeDriver: true });
@@ -408,6 +410,8 @@ function PetMenu({ menu, spot, k, canvas, bounds }: {
   menu: NonNullable<Props['petMenu']>; spot: Spot; k: number; canvas: { left: number; top: number; width: number; height: number };
   bounds: { top: number; bottom: number };
 }) {
+  const { t } = useTheme();
+  const s = useStyles();
   const w = Math.min(canvas.width - 16, 4 + menu.actions.length * 64);
   const h = 66;
   const above = (spot.feet - spot.size) * k - h - 6;
@@ -423,7 +427,7 @@ function PetMenu({ menu, spot, k, canvas, bounds }: {
             <Pressable key={a.id} onPress={() => menu.onAction(a.id)} disabled={a.disabled}
               style={({ pressed }) => [s.menuItem, pressed && s.menuPressed, a.disabled && s.menuOff]}
               accessibilityRole="button" accessibilityLabel={a.note ? `${a.label}, ${a.note}` : a.label} accessibilityState={{ disabled: !!a.disabled }}>
-              <View style={[s.menuIcon, a.disabled && s.menuIconOff]}><Ionicons name={a.icon} size={17} color="#FFFFFF" /></View>
+              <View style={[s.menuIcon, a.disabled && s.menuIconOff]}><Ionicons name={a.icon} size={17} color={t.onPrimary} /></View>
               <Text style={s.menuText} numberOfLines={1}>{a.label}</Text>
             </Pressable>
           ))}
@@ -435,6 +439,8 @@ function PetMenu({ menu, spot, k, canvas, bounds }: {
 
 /** Where an absent pet would be: a small "out on its walk" pill (a tap may open its menu, to leave a greeting). */
 function AwayMarker({ marker, spot, k, width }: { marker: NonNullable<Props['awayMarker']>; spot: Spot; k: number; width: number }) {
+  const { t } = useTheme();
+  const s = useStyles();
   const w = Math.min(width - 16, 220);
   const left = Math.max(8, Math.min(width - w - 8, spot.x * k - w / 2));
   const top = (spot.feet - 28) * k - 22;
@@ -476,6 +482,7 @@ function ActionProp({ action, size }: { action: 'feed' | 'play'; size: number })
 
 /** Little hearts rising over the pet and fading, for a friend's tap. */
 function HeartBurst({ size }: { size: number }) {
+  const s = useStyles();
   const reduce = useReduceMotion();
   const rise = useRef(new Animated.Value(0)).current;
   useEffect(() => {
@@ -516,6 +523,7 @@ function EditLayer({ layout, k, editor, offset, onLift, frame, minTop, slide, zo
   /** Two fingers pinch the room in or out. */
   zoom: { at: () => number; to: (z: number) => void };
 }) {
+  const s = useStyles();
   const [problem, setProblem] = useState<Problem | null>(null);
   const latest = useRef({ layout, k, editor, onLift, slide, zoom });
   latest.current = { layout, k, editor, onLift, slide, zoom };
@@ -608,6 +616,8 @@ function EditLayer({ layout, k, editor, offset, onLift, frame, minTop, slide, zo
 /** Decorating: zoom in and out over the room's top right corner, under the header; the middle shows the zoom and puts
  * the room back to its own camera. */
 function ZoomControls({ zoom, top, onZoom }: { zoom: number; top: number; onZoom: (z: number) => void }) {
+  const { t } = useTheme();
+  const s = useStyles();
   const percent = `${Math.round(zoom * 100)}%`;
   return (
     <View style={[s.zoom, { top }]} testID="room-zoom">
@@ -639,6 +649,7 @@ function ScenePet({ pet, spot, k, pose, resting: atDeskResting = false, seatIdle
   /** Its line never goes above this (the header over the room). */
   minTop?: number;
 }) {
+  const s = useStyles();
   const reduce = useReduceMotion();
   const size = spot.size * k;
   const left = (spot.x - spot.size / 2) * k;
@@ -731,21 +742,21 @@ function ScenePet({ pet, spot, k, pose, resting: atDeskResting = false, seatIdle
   );
 }
 
-const s = StyleSheet.create({
+const useStyles = makeStyles(({ t, elevation }) => StyleSheet.create({
   fill: { flex: 1, alignItems: 'center', justifyContent: 'flex-start', minHeight: 0 },
   scene: { borderRadius: 26, overflow: 'hidden', backgroundColor: '#F6EFE6' },
   sceneScreen: { borderRadius: 0 },
   // Decorating: the room as a card on a plain background, its edges plain to see.
-  fillBounded: { justifyContent: 'center', backgroundColor: '#E9F0F5' },
+  fillBounded: { justifyContent: 'center', backgroundColor: t.bg },
   sceneBounded: { borderRadius: 6 },
   canvas: { position: 'absolute' },
   picture: { position: 'absolute', left: 0, top: 0 },
-  zoom: { position: 'absolute', right: 10, width: 40, alignItems: 'center', borderRadius: 20, backgroundColor: 'rgba(255,255,255,0.92)',
-    borderWidth: 1, borderColor: 'rgba(18,59,92,0.10)', shadowColor: t.shadow, shadowOpacity: 0.14, shadowRadius: 6, shadowOffset: { width: 0, height: 2 },
+  zoom: { position: 'absolute', right: 10, width: 40, alignItems: 'center', borderRadius: 20, backgroundColor: t.glass,
+    borderWidth: 1, borderColor: t.border, shadowColor: t.shadow, shadowOpacity: 0.14, shadowRadius: 6, shadowOffset: { width: 0, height: 2 },
     elevation: 3 },
   zoomButton: { width: 40, height: 40, alignItems: 'center', justifyContent: 'center' },
   zoomLevel: { height: 22, alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center', borderTopWidth: 1, borderBottomWidth: 1,
-    borderColor: 'rgba(18,59,92,0.08)' },
+    borderColor: t.tint },
   zoomText: { color: t.ink, fontSize: 10, fontWeight: '800' },
   pet: { position: 'absolute', alignItems: 'center', justifyContent: 'flex-end' },
   frame: { position: 'absolute', borderRadius: 12, borderWidth: 2, borderStyle: 'dashed', borderColor: '#2E9E6A', backgroundColor: 'rgba(46,158,106,0.10)' },
@@ -759,18 +770,18 @@ const s = StyleSheet.create({
   hearts: { overflow: 'visible' },
   moon: { position: 'absolute', width: 24, height: 24, borderRadius: 12, backgroundColor: '#FFFFFFCC', alignItems: 'center', justifyContent: 'center' },
   bubbleWrap: { position: 'absolute' },
-  bubble: { width: 180, backgroundColor: '#FFFFFF', borderRadius: 16, paddingHorizontal: 12, paddingVertical: 7,
-    shadowColor: '#0A2438', shadowOpacity: 0.12, shadowRadius: 10, shadowOffset: { width: 0, height: 4 }, elevation: 4 },
+  bubble: { width: 180, backgroundColor: t.card, borderRadius: 16, paddingHorizontal: 12, paddingVertical: 7,
+    shadowColor: elevation.floating.shadowColor, shadowOpacity: 0.12, shadowRadius: 10, shadowOffset: { width: 0, height: 4 }, elevation: 4 },
   bubbleText: { color: t.ink, fontSize: 13, lineHeight: 17, fontWeight: '700', textAlign: 'center' },
-  menu: { position: 'absolute', flexDirection: 'row', alignItems: 'stretch', padding: 2, borderRadius: 20, backgroundColor: '#FFFFFF',
-    borderWidth: 1.5, borderColor: '#B9D6EA', shadowColor: '#0A2438', shadowOpacity: 0.18, shadowRadius: 12, shadowOffset: { width: 0, height: 4 }, elevation: 6 },
+  menu: { position: 'absolute', flexDirection: 'row', alignItems: 'stretch', padding: 2, borderRadius: 20, backgroundColor: t.card,
+    borderWidth: 1.5, borderColor: t.inputBorder, shadowColor: elevation.floating.shadowColor, shadowOpacity: 0.18, shadowRadius: 12, shadowOffset: { width: 0, height: 4 }, elevation: 6 },
   menuItem: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 3, borderRadius: 16, minWidth: 44 },
-  menuPressed: { backgroundColor: '#E6F1F8' },
-  menuIcon: { width: 30, height: 30, borderRadius: 15, backgroundColor: t.accent, alignItems: 'center', justifyContent: 'center' },
+  menuPressed: { backgroundColor: t.tint },
+  menuIcon: { width: 30, height: 30, borderRadius: 15, backgroundColor: t.accentFill, alignItems: 'center', justifyContent: 'center' },
   menuText: { color: t.ink, fontSize: 11, fontWeight: '800' },
   menuOff: { opacity: 0.45 },
-  menuIconOff: { backgroundColor: '#8FA6B6' },
+  menuIconOff: { backgroundColor: t.placeholder },
   away: { position: 'absolute', minHeight: 44, flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 12, paddingVertical: 6,
-    borderRadius: 18, backgroundColor: '#FFFFFFE6', borderWidth: 1.5, borderColor: '#B9D6EA' },
+    borderRadius: 18, backgroundColor: t.glass, borderWidth: 1.5, borderColor: t.inputBorder },
   awayText: { flexShrink: 1, color: t.ink, fontSize: 12, fontWeight: '800' },
-});
+}));

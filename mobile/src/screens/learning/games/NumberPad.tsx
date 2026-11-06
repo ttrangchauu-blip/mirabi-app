@@ -2,7 +2,7 @@ import React from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../../../components/Typography';
-import { appTheme as t } from '../../../theme';
+import { makeStyles, useTheme } from '../../../ui/theme';
 
 const MAX_LENGTH = 7;
 
@@ -21,6 +21,8 @@ export const showNumber = (value: string) => value.replace('-', '−');
 export function NumberPad({ value, onChange, onSubmit, allowNegative, disabled, submitLabel }: {
   value: string; onChange: (v: string) => void; onSubmit: () => void; allowNegative: boolean; disabled?: boolean; submitLabel: string;
 }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', allowNegative ? 'sign' : '', '0', 'back'];
   return (
     <View>
@@ -46,15 +48,15 @@ export function NumberPad({ value, onChange, onSubmit, allowNegative, disabled, 
   );
 }
 
-const styles = StyleSheet.create({
-  display: { minHeight: 48, borderRadius: 14, backgroundColor: '#FFFFFF', borderWidth: 1.5, borderColor: t.border, justifyContent: 'center', paddingHorizontal: 14, marginBottom: 8 },
+const useStyles = makeStyles(({ t, dark }) => StyleSheet.create({
+  display: { minHeight: 48, borderRadius: 14, backgroundColor: t.inputBg, borderWidth: 1.5, borderColor: dark ? t.inputBorder : t.border, justifyContent: 'center', paddingHorizontal: 14, marginBottom: 8 },
   displayText: { fontSize: 24, fontWeight: '900', color: t.ink, textAlign: 'right' },
   grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
   key: { width: '31.9%', minHeight: 44, borderRadius: 12, backgroundColor: t.tint, alignItems: 'center', justifyContent: 'center' },
   empty: { backgroundColor: 'transparent' },
   pressed: { opacity: 0.7 },
   keyText: { fontSize: 20, fontWeight: '800', color: t.ink },
-  submit: { marginTop: 8, minHeight: 48, borderRadius: 14, backgroundColor: t.accent, alignItems: 'center', justifyContent: 'center' },
-  submitText: { color: '#FFFFFF', fontSize: 16, fontWeight: '900' },
+  submit: { marginTop: 8, minHeight: 48, borderRadius: 14, backgroundColor: t.accentFill, alignItems: 'center', justifyContent: 'center' },
+  submitText: { color: t.onPrimary, fontSize: 16, fontWeight: '900' },
   dimmed: { opacity: 0.5 },
-});
+}));

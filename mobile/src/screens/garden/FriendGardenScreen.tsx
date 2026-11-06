@@ -5,9 +5,9 @@ import { ApiError, newIdempotencyKey } from '../../api/client';
 import { Text } from '../../components/Typography';
 import { inventoryApi } from '../../inventory/api';
 import type { CareKind, GardenPlot, PlantedPlot, VisitedGarden } from '../../inventory/types';
-import { appTheme as t } from '../../theme';
 import { Button } from '../../ui/kit';
 import { useToast } from '../../ui/Toast';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { EmptyState, ErrorState, LoadingState, OptionSheet, PetAvatar } from '../together/ui';
 import { WorldPanel } from '../../world/living';
 import { GardenWorld, type GardenFx } from './GardenWorld';
@@ -29,6 +29,8 @@ const CLOSED: Record<string, string> = {
  */
 export function FriendGardenScreen({ userId, onBack }: Props) {
   const toast = useToast();
+  const { t } = useTheme();
+  const s = useStyles();
   const [data, setData] = useState<VisitedGarden | null>(null);
   const [error, setError] = useState<unknown>(null);
   const [tool, setTool] = useState<CareKind | null>(null);
@@ -106,7 +108,7 @@ export function FriendGardenScreen({ userId, onBack }: Props) {
   const plants = planted(data.garden.plots);
   const thirsty = plants.filter((p) => !careOf(p, 'water').done).length;
   const blocked = left <= 0 ? 'Hết lượt hôm nay' : undefined;
-  const tools: Tool[] = (['water', 'tend'] as const).map((k) => ({ id: k, label: CARE[k].short, icon: CARE[k].icon, color: CARE[k].color, bg: CARE[k].bg,
+  const tools: Tool[] = (['water', 'tend'] as const).map((k) => ({ id: k, label: CARE[k].short, icon: CARE[k].icon, color: CARE[k].color, bg: CARE[k].bg, tone: CARE[k].tone,
     disabled: !plants.length || left <= 0 }));
   const labelFor = (plot: GardenPlot) => {
     if (plot.empty) return `Ô đất trống ${plot.plot + 1}`;
@@ -147,14 +149,15 @@ export function FriendGardenScreen({ userId, onBack }: Props) {
   );
 }
 
-const s = StyleSheet.create({
+const useStyles = makeStyles(({ t, tones, glass }) => StyleSheet.create({
   fill: { flex: 1 },
   flex: { flex: 1, minWidth: 0 },
   header: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 16, marginBottom: 8 },
-  round: { width: 36, height: 36, borderRadius: 18, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
+  round: { width: 36, height: 36, borderRadius: 18, backgroundColor: t.card, alignItems: 'center', justifyContent: 'center' },
   title: { color: t.ink, fontSize: 16, fontWeight: '800' },
   subtitle: { color: t.muted, fontSize: 11, fontWeight: '600' },
-  hint: { alignSelf: 'center', maxWidth: '100%', paddingHorizontal: 10, paddingVertical: 3, borderRadius: 10, overflow: 'hidden', backgroundColor: 'rgba(255,255,255,0.88)', color: '#2E5A30', fontSize: 11.5, lineHeight: 15, fontWeight: '700', textAlign: 'center' },
-  summary: { position: 'absolute', top: 6, left: 12, right: 12, paddingVertical: 4 },
+  hint: { alignSelf: 'center', maxWidth: '100%', paddingHorizontal: 10, paddingVertical: 3, borderRadius: 10, overflow: 'hidden', backgroundColor: t.glass, color: tones.leaf.ink, fontSize: 11.5, lineHeight: 15, fontWeight: '700', textAlign: 'center' },
+  // The theme's glass over WorldPanel's own, so its numbers (in the theme's inks) read in light and dark.
+  summary: { position: 'absolute', top: 6, left: 12, right: 12, paddingVertical: 4, ...glass },
   dock: { position: 'absolute', left: 12, right: 12, bottom: 8, gap: 6 },
-});
+}));

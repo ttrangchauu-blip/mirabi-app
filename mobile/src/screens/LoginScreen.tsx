@@ -7,12 +7,13 @@ import { errorMessage } from '../auth/messages';
 import { validateEmail, validateLoginPassword } from '../auth/validation';
 import { AuthLayout } from '../components/AuthLayout';
 import { AuthTextField, FormBanner, GradientButton, TextLink } from '../components/AuthForm';
-import { authTheme } from '../theme';
+import { makeStyles } from '../ui/theme';
 import { useToast } from '../ui/Toast';
 
 type Props = { email: string; onEmailChange: (email: string) => void; onRegister: () => void; onForgotPassword: () => void; notice?: string | null; initialPassword?: string };
 
 export function LoginScreen({ email, onEmailChange, onRegister, onForgotPassword, notice: flowNotice, initialPassword = '' }: Props) {
+  const styles = useStyles();
   const { login, notice: authNotice, clearNotice } = useAuth();
   const [password, setPassword] = useState(initialPassword);
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
@@ -123,8 +124,8 @@ export function LoginScreen({ email, onEmailChange, onRegister, onForgotPassword
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ auth }) => StyleSheet.create({
   forgotRow: { marginTop: 6 },
   footerRow: { flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' },
-  footerText: { color: authTheme.ink, fontSize: 14 },
-});
+  footerText: { color: auth.ink, fontSize: 14 },
+}));

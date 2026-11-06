@@ -8,8 +8,8 @@ import { PetArt } from '../../components/PetArt';
 import { Text } from '../../components/Typography';
 import { useReduceMotion } from '../../components/useReduceMotion';
 import { adventureApi, localDay, type AdventureMap, type AdventureRegion, type ItemReward } from '../../life/worlds';
-import { appTheme as t } from '../../theme';
 import { Button, ProgressBar } from '../../ui/kit';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { useToast } from '../../ui/Toast';
 import { showError } from '../main/shared';
 import { BackHeader, ErrorState, OptionSheet } from '../together/ui';
@@ -31,6 +31,7 @@ const MAP_HEIGHT = 470;
  */
 export function AdventureMapScreen({ user, onBack, onRewards, onOpenInventory }: Props) {
   const toast = useToast();
+  const s = useStyles();
   const [data, setData] = useState<AdventureMap | null>(null);
   const [error, setError] = useState<unknown>(null);
   const [selected, setSelected] = useState<string | null>(null);
@@ -122,6 +123,7 @@ export function AdventureMapScreen({ user, onBack, onRewards, onOpenInventory }:
 
 /** The pet on the map, walking to its region whenever that changes (still with reduced motion). */
 function PetMarker({ user, at, width }: { user: User; at: string; width: number }) {
+  const s = useStyles();
   const reduce = useReduceMotion();
   const spot = SPOTS[at];
   const target = { x: (spot.x / 100) * width - 26, y: (spot.y / 100) * MAP_HEIGHT - 58 };
@@ -144,6 +146,7 @@ function PetMarker({ user, at, width }: { user: User; at: string; width: number 
 
 /** The map itself: sky, meadow, the winding trail and each region's landmark; unopened regions sit under a cloud. */
 function MapArt({ regions }: { regions: AdventureRegion[] }) {
+  const s = useStyles();
   const sway = useLoop(2600);
   const shimmer = useLoop(1800, true, 400);
   const open = Object.fromEntries(regions.map((r) => [r.code, r.unlocked]));
@@ -190,6 +193,7 @@ function MapArt({ regions }: { regions: AdventureRegion[] }) {
 }
 
 function Landmark({ spot, open, children }: { spot: string; open: boolean; children: React.ReactNode }) {
+  const s = useStyles();
   const p = SPOTS[spot];
   return (
     <View style={[s.landmark, { left: `${p.x}%`, top: `${p.y}%`, opacity: open ? 1 : 0.45 }]}>
@@ -203,6 +207,8 @@ function RegionPanel({ region, busy, onStart, onComplete, onClaim, limit }: {
   region: AdventureRegion; busy: string | null; onStart: (code: string) => void; onComplete: (taskId: number, day: string) => void;
   onClaim: (code: string) => void; limit: number;
 }) {
+  const { t } = useTheme();
+  const s = useStyles();
   const next = region.next_milestone;
   return (
     <View style={s.panel} testID={`region-panel-${region.code}`}>
@@ -221,7 +227,7 @@ function RegionPanel({ region, busy, onStart, onComplete, onClaim, limit }: {
             <Text style={[s.taskTitle, task.completed && s.done]}>{task.title}</Text>
             {task.completed ? <Ionicons name="checkmark-circle" size={22} color="#22A06B" accessibilityLabel="Đã hoàn thành" />
               : <Pressable onPress={() => onComplete(task.id, task.scheduled_date)} disabled={!!busy} style={s.check} accessibilityRole="button"
-                accessibilityLabel={`Đã làm xong ${task.title}`}><Ionicons name="checkmark" size={18} color="#FFFFFF" /></Pressable>}
+                accessibilityLabel={`Đã làm xong ${task.title}`}><Ionicons name="checkmark" size={18} color={t.onPrimary} /></Pressable>}
           </View>
         ))}
         <Text style={s.label}>Hoạt động</Text>
@@ -254,7 +260,10 @@ function RegionPanel({ region, busy, onStart, onComplete, onClaim, limit }: {
   );
 }
 
-const s = StyleSheet.create({
+// The map (land, trail, landmarks, fog) is the picture and stays as drawn. The region badges and names over it, the panel
+// and its rows follow the theme; the green of the trail's actions stays, with white on it, in both. The pale greens of a
+// row keep their drawn values in light.
+const useStyles = makeStyles(({ t, tones, dark }) => StyleSheet.create({
   fill: { flex: 1, paddingHorizontal: 16 },
   flex: { flex: 1 },
   content: { paddingBottom: 120 },
@@ -265,23 +274,23 @@ const s = StyleSheet.create({
   fogText: { fontSize: 34, opacity: 0.95 },
   shine: { position: 'absolute', left: 30, top: 30, width: 50, height: 4, borderRadius: 2, backgroundColor: '#FFFFFF' },
   spot: { position: 'absolute', marginLeft: -48, marginTop: -4, width: 96, alignItems: 'center' },
-  badge: { width: 40, height: 40, borderRadius: 20, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center',
+  badge: { width: 40, height: 40, borderRadius: 20, backgroundColor: t.card, alignItems: 'center', justifyContent: 'center',
     borderWidth: 3, borderColor: '#5DAF6A', shadowColor: '#1F4F2A', shadowOpacity: 0.2, shadowRadius: 4, shadowOffset: { width: 0, height: 2 }, elevation: 3 },
-  badgeLocked: { borderColor: '#A7B4C0', backgroundColor: '#EEF2F5' },
+  badgeLocked: { borderColor: '#A7B4C0', backgroundColor: t.surfaceSecondary },
   badgeOn: { borderColor: '#E09A2B', transform: [{ scale: 1.12 }] },
   badgeEmoji: { fontSize: 20 },
-  spotName: { marginTop: 2, fontSize: 11, fontWeight: '900', color: '#1F4F2A', backgroundColor: 'rgba(255,255,255,0.85)', borderRadius: 8, paddingHorizontal: 5, overflow: 'hidden' },
+  spotName: { marginTop: 2, fontSize: 11, fontWeight: '900', color: tones.leaf.ink, backgroundColor: t.glass, borderRadius: 8, paddingHorizontal: 5, overflow: 'hidden' },
   spotLocked: { color: t.muted },
   pet: { position: 'absolute', left: 0, top: 0 },
-  panel: { backgroundColor: '#FFFFFF', borderRadius: 22, padding: 16, gap: 8 },
+  panel: { backgroundColor: t.card, borderRadius: 22, padding: 16, gap: 8 },
   panelTitle: { fontSize: 20, fontWeight: '900', color: t.ink },
   panelTheme: { fontSize: 13, color: t.muted },
-  lockBox: { flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: '#F2F5F8', borderRadius: 12, padding: 12 },
+  lockBox: { flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: t.surfaceSecondary, borderRadius: 12, padding: 12 },
   lockText: { flex: 1, color: t.muted, fontWeight: '700' },
   progressRow: { gap: 6 },
-  progressText: { fontSize: 13, fontWeight: '800', color: '#22703A' },
+  progressText: { fontSize: 13, fontWeight: '800', color: t.success },
   label: { fontSize: 14, fontWeight: '900', color: t.ink, marginTop: 6 },
-  taskRow: { flexDirection: 'row', alignItems: 'center', gap: 10, backgroundColor: '#F4FAF2', borderRadius: 12, padding: 10, minHeight: 48 },
+  taskRow: { flexDirection: 'row', alignItems: 'center', gap: 10, backgroundColor: dark ? tones.leaf.from : '#F4FAF2', borderRadius: 12, padding: 10, minHeight: 48 },
   taskTitle: { flex: 1, fontSize: 15, fontWeight: '700', color: t.ink },
   done: { color: t.muted, textDecorationLine: 'line-through' },
   check: { width: 34, height: 34, borderRadius: 17, backgroundColor: '#22A06B', alignItems: 'center', justifyContent: 'center' },
@@ -289,9 +298,9 @@ const s = StyleSheet.create({
   activityEmoji: { fontSize: 22 },
   activityName: { flex: 1, fontSize: 15, color: t.ink },
   take: { backgroundColor: '#5DAF6A', borderRadius: 999, paddingHorizontal: 14, paddingVertical: 8 },
-  takeOff: { backgroundColor: '#E3EFE0' },
-  takeText: { color: '#FFFFFF', fontWeight: '900' },
-  takeTextOff: { color: '#5B7A5F' },
+  takeOff: { backgroundColor: dark ? t.surfaceSecondary : '#E3EFE0' },
+  takeText: { color: t.onPrimary, fontWeight: '900' },
+  takeTextOff: { color: dark ? t.muted : '#5B7A5F' },
   chests: { flexDirection: 'row', gap: 12 },
   chest: { alignItems: 'center' },
   chestText: { fontSize: 11, fontWeight: '800', color: t.muted },
@@ -299,5 +308,5 @@ const s = StyleSheet.create({
   rewardList: { gap: 10 },
   rewardRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   rewardName: { fontSize: 15, fontWeight: '800', color: t.ink },
-});
+}));
 

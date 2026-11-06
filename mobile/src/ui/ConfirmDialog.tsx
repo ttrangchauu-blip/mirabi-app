@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Text } from '../components/Typography';
 import { useReduceMotion } from '../components/useReduceMotion';
-import { appTheme as t } from '../theme';
+import { makeStyles, useTheme } from './theme';
 import type { IconName } from './kit';
 
 export type ConfirmOptions = {
@@ -39,6 +39,7 @@ export function useConfirm() {
  * browser confirm), so it looks the same on every platform and stays inside the phone frame on web.
  */
 export function ConfirmProvider({ children }: { children: React.ReactNode }) {
+  const styles = useStyles();
   const [pending, setPending] = useState<Pending | null>(null);
   const pendingRef = useRef<Pending | null>(null);
   const confirm = useCallback((o: ConfirmOptions) => new Promise<boolean>((resolve) => {
@@ -67,6 +68,8 @@ export function ConfirmProvider({ children }: { children: React.ReactNode }) {
 }
 
 function Dialog({ options, onClose }: { options: ConfirmOptions; onClose: (ok: boolean) => void }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const reduceMotion = useReduceMotion();
   const insets = useSafeAreaInsets();
   const appear = useRef(new Animated.Value(reduceMotion ? 1 : 0)).current;
@@ -81,6 +84,7 @@ function Dialog({ options, onClose }: { options: ConfirmOptions; onClose: (ok: b
   }, [onClose]);
 
   const accent = destructive ? t.danger : t.accent;
+  const fill = destructive ? styles.confirmDanger : styles.confirmFill;
   return (
     <Animated.View style={[StyleSheet.absoluteFill, styles.backdrop, { opacity: appear, paddingTop: insets.top + 16, paddingBottom: insets.bottom + 16 }]}
       accessibilityViewIsModal>
@@ -101,8 +105,8 @@ function Dialog({ options, onClose }: { options: ConfirmOptions; onClose: (ok: b
             <Text style={[styles.buttonText, { color: t.accent }]}>{cancelLabel}</Text>
           </Pressable>}
           <Pressable onPress={() => onClose(true)} accessibilityRole="button" accessibilityLabel={`Xác nhận ${confirmLabel.toLowerCase()}`}
-            style={({ pressed }) => [styles.button, { backgroundColor: accent }, pressed && styles.pressed]}>
-            <Text style={[styles.buttonText, { color: '#FFFFFF' }]}>{confirmLabel}</Text>
+            style={({ pressed }) => [styles.button, fill, pressed && styles.pressed]}>
+            <Text style={[styles.buttonText, { color: t.onPrimary }]}>{confirmLabel}</Text>
           </Pressable>
         </View>
       </Animated.View>
@@ -110,11 +114,11 @@ function Dialog({ options, onClose }: { options: ConfirmOptions; onClose: (ok: b
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, elevation, dark }) => StyleSheet.create({
   fill: { flex: 1 },
-  backdrop: { backgroundColor: 'rgba(10,36,56,0.45)', alignItems: 'center', justifyContent: 'center', padding: 28 },
-  card: { width: '100%', maxWidth: 360, maxHeight: '100%', backgroundColor: '#FFFFFF', borderRadius: 28, padding: 24, alignItems: 'center',
-    shadowColor: '#0A2438', shadowOpacity: 0.25, shadowRadius: 30, shadowOffset: { width: 0, height: 12 }, elevation: 12 },
+  backdrop: { backgroundColor: t.scrim, alignItems: 'center', justifyContent: 'center', padding: 28 },
+  card: { width: '100%', maxWidth: 360, maxHeight: '100%', backgroundColor: t.card, borderRadius: 28, padding: 24, alignItems: 'center',
+    shadowColor: elevation.floating.shadowColor, shadowOpacity: 0.25, shadowRadius: 30, shadowOffset: { width: 0, height: 12 }, elevation: 12 },
   iconCircle: { width: 64, height: 64, borderRadius: 32, alignItems: 'center', justifyContent: 'center', marginBottom: 14 },
   title: { fontSize: 21, fontWeight: '900', color: t.ink, textAlign: 'center' },
   messageScroll: { flexShrink: 1, alignSelf: 'stretch', marginTop: 8 },
@@ -122,6 +126,9 @@ const styles = StyleSheet.create({
   actions: { flexDirection: 'row', gap: 10, marginTop: 22, alignSelf: 'stretch' },
   button: { flex: 1, minHeight: 50, borderRadius: 16, alignItems: 'center', justifyContent: 'center' },
   cancel: { backgroundColor: t.tint },
+  // Filled under white text: on dark, t.danger is a pastel ink, so the danger fill takes a deeper red there (no token).
+  confirmFill: { backgroundColor: t.accentFill },
+  confirmDanger: { backgroundColor: t.dangerFill },
   buttonText: { fontSize: 16, fontWeight: '800' },
   pressed: { opacity: 0.85, transform: [{ scale: 0.98 }] },
-});
+}));

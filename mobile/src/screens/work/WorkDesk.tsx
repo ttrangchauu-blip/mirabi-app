@@ -5,6 +5,7 @@ import { LinearGradient as Gradient } from 'expo-linear-gradient';
 import Svg, { Path } from 'react-native-svg';
 import { Text } from '../../components/Typography';
 import type { Priority, WorkTask } from '../../life/types';
+import { makeStyles } from '../../ui/theme';
 import { useAtmosphere } from '../../world/atmosphere';
 import { useEased, useWorldMotion } from '../../world/budget';
 import { BEAT, hashOf } from '../../world/diorama';
@@ -180,6 +181,7 @@ export function DeskNote({ task, done, state, project, due, stamping, onPress, o
 
 /** The tray and the four folders, only there while a note is being carried, so the desk stays clear otherwise. */
 export const DropDock = React.forwardRef<View, { hover: DropTarget | null; onZones: (zones: Partial<Record<DropTarget, Box>>) => void; bottom: number }>(function DropDock({ hover, onZones, bottom }, ref) {
+  const d = useStyles();
   const views = useRef<Partial<Record<DropTarget, View | null>>>({});
   const rise = useRef(new Animated.Value(0)).current;
   const { level } = useWorldMotion();
@@ -245,12 +247,14 @@ const n = StyleSheet.create({
   stampText: { color: '#C8323F', fontWeight: '900', fontSize: 18, letterSpacing: 2 },
 });
 
-const d = StyleSheet.create({
-  dock: { position: 'absolute', left: 10, right: 10, flexDirection: 'row', alignItems: 'flex-end', gap: 6, padding: 8, borderRadius: 14, backgroundColor: 'rgba(255,255,255,0.97)', borderWidth: 1, borderColor: '#C5E2F2', zIndex: 40, elevation: 20 },
+// The dock floats over the page while a note is carried: it is chrome and follows the theme. The folders keep their
+// priority colours (white text on them in both) and the tray its drawn wood.
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
+  dock: { position: 'absolute', left: 10, right: 10, flexDirection: 'row', alignItems: 'flex-end', gap: 6, padding: 8, borderRadius: 14, backgroundColor: t.glass, borderWidth: 1, borderColor: t.border, zIndex: 40, elevation: 20 },
   folder: { flex: 1, height: 58, borderRadius: 7, borderTopLeftRadius: 2, alignItems: 'center', justifyContent: 'center', borderWidth: 2, borderColor: 'rgba(255,255,255,0.4)' },
   folderTab: { position: 'absolute', left: -2, top: -8, width: 26, height: 10, borderTopLeftRadius: 4, borderTopRightRadius: 4 },
   folderText: { fontSize: 13, fontWeight: '900', color: '#FFFFFF' },
-  tray: { flex: 1.3, height: 58, borderRadius: 7, alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFFFFF', borderWidth: 2, borderColor: '#C5E2F2' },
-  trayText: { fontSize: 13, lineHeight: 16, fontWeight: '900', color: '#22703A' },
+  tray: { flex: 1.3, height: 58, borderRadius: 7, alignItems: 'center', justifyContent: 'center', backgroundColor: t.card, borderWidth: 2, borderColor: t.border },
+  trayText: { fontSize: 13, lineHeight: 16, fontWeight: '900', color: t.success },
   hover: { transform: [{ scale: 1.08 }], borderColor: '#FFE28A', borderWidth: 3 },
-});
+}));

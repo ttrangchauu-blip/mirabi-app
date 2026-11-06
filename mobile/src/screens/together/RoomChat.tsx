@@ -9,10 +9,9 @@ import { useReduceMotion } from '../../components/useReduceMotion';
 import { togetherApi } from '../../studyTogether/api';
 import type { RoomSnapshot } from '../../studyTogether/types';
 import type { ChatItem, useRoomChat } from '../../studyTogether/useRoomChat';
-import { appTheme as t } from '../../theme';
 import { AppModal } from '../../ui/AppModal';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { useToast } from '../../ui/Toast';
-import { focusTheme as fs } from '../main/focusSpaceTheme';
 import { showError } from '../main/shared';
 import { REPORT_REASONS, STATE_LABELS } from './labels';
 import { PetAvatar } from './ui';
@@ -44,6 +43,8 @@ function emojiOnly(body: string) {
 
 /** Full-height room chat, shown over the room inside the app. */
 export function RoomChat({ visible, onClose, room, meId, chat }: Props) {
+  const { t } = useTheme();
+  const s = useStyles();
   const insets = useSafeAreaInsets();
   const reduce = useReduceMotion();
   const toast = useToast();
@@ -122,7 +123,7 @@ export function RoomChat({ visible, onClose, room, meId, chat }: Props) {
       </View>
       {room.state === 'focus' ? (
         <View style={s.banner}>
-          <Ionicons name="moon-outline" size={14} color="#5D7480" />
+          <Ionicons name="moon-outline" size={14} color={t.muted} />
           <Text style={s.bannerText}>Đang trong giờ tập trung · nhắn ngắn gọn để cả phòng giữ nhịp nhé.</Text>
         </View>
       ) : null}
@@ -161,7 +162,7 @@ export function RoomChat({ visible, onClose, room, meId, chat }: Props) {
       <View style={[s.composer, { paddingBottom: Math.max(insets.bottom, 10) }]}>
         <View style={s.inputWrap}>
           <TextInput value={text} onChangeText={(v) => { setText(v); if (v.trim()) chat.notifyTyping(); }} placeholder="Nhắn cho cả phòng…"
-            placeholderTextColor="#8295A5" multiline maxLength={MAX_LENGTH} style={s.input} accessibilityLabel="Tin nhắn"
+            placeholderTextColor={t.placeholder} multiline maxLength={MAX_LENGTH} style={s.input} accessibilityLabel="Tin nhắn"
             onKeyPress={(e: any) => {
               // Web: Enter sends, Shift+Enter adds a line (like Messenger).
               if (Platform.OS === 'web' && e.nativeEvent.key === 'Enter' && !e.nativeEvent.shiftKey) { e.preventDefault?.(); void submit(); }
@@ -171,7 +172,7 @@ export function RoomChat({ visible, onClose, room, meId, chat }: Props) {
         {text.trim() ? (
           <Pressable onPress={() => { void submit(); }} accessibilityRole="button" accessibilityLabel="Gửi" style={({ pressed }) => [s.sendWrap, pressed && s.pressed]}>
             <LinearGradient colors={t.primary} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={s.send}>
-              <Ionicons name="paper-plane" size={18} color="#FFFFFF" style={s.sendIcon} />
+              <Ionicons name="paper-plane" size={18} color={t.onPrimary} style={s.sendIcon} />
             </LinearGradient>
           </Pressable>
         ) : (
@@ -216,6 +217,8 @@ export function RoomChat({ visible, onClose, room, meId, chat }: Props) {
 function MessageRow({ m, mine, first, last, onLongPress, onRetry, onDiscard }: {
   m: ChatItem; mine: boolean; first: boolean; last: boolean; onLongPress: () => void; onRetry: () => void; onDiscard: () => void;
 }) {
+  const { t } = useTheme();
+  const s = useStyles();
   const big = !m.deleted && !!m.body && emojiOnly(m.body);
   const corners = mine
     ? { borderTopRightRadius: first ? 20 : 6, borderBottomRightRadius: last ? 20 : 6 }
@@ -255,6 +258,8 @@ function MessageRow({ m, mine, first, last, onLongPress, onRetry, onDiscard }: {
 }
 
 function ActionRow({ label, icon, danger, onPress }: { label: string; icon?: React.ComponentProps<typeof Ionicons>['name']; danger?: boolean; onPress: () => void }) {
+  const { t } = useTheme();
+  const s = useStyles();
   return (
     <Pressable onPress={onPress} style={({ pressed }) => [s.action, pressed && s.actionPressed]} accessibilityRole="button" accessibilityLabel={label}>
       {icon ? <Ionicons name={icon} size={18} color={danger ? t.danger : t.ink} /> : null}
@@ -264,62 +269,63 @@ function ActionRow({ label, icon, danger, onPress }: { label: string; icon?: Rea
 }
 
 function TypingDots() {
+  const s = useStyles();
   return <View style={s.dots}>{[0, 1, 2].map((i) => <View key={i} style={[s.dot, { opacity: 0.4 + i * 0.25 }]} />)}</View>;
 }
 
-const s = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   flex: { flex: 1 },
-  screen: { flex: 1, backgroundColor: '#F6F9FB' },
-  header: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 14, paddingVertical: 10, backgroundColor: '#FFFFFF',
-    borderBottomWidth: 1, borderBottomColor: '#E7EEF3' },
+  screen: { flex: 1, backgroundColor: t.bg },
+  header: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 14, paddingVertical: 10, backgroundColor: t.card,
+    borderBottomWidth: 1, borderBottomColor: t.border },
   back: { width: 40, height: 40, borderRadius: 14, alignItems: 'center', justifyContent: 'center', backgroundColor: t.bg },
   faces: { flexDirection: 'row' },
-  face: { borderRadius: 13, borderWidth: 2, borderColor: '#FFFFFF', overflow: 'hidden' },
+  face: { borderRadius: 13, borderWidth: 2, borderColor: t.card, overflow: 'hidden' },
   faceOverlap: { marginLeft: -12 },
   title: { fontSize: 16, fontWeight: '900', color: t.ink },
   subtitle: { fontSize: 12, color: t.muted, marginTop: 1 },
-  banner: { flexDirection: 'row', alignItems: 'center', gap: 7, paddingHorizontal: 16, paddingVertical: 8, backgroundColor: '#EEF3F1' },
-  bannerText: { flex: 1, fontSize: 12, color: '#5D7480', fontWeight: '600' },
+  banner: { flexDirection: 'row', alignItems: 'center', gap: 7, paddingHorizontal: 16, paddingVertical: 8, backgroundColor: t.tint },
+  bannerText: { flex: 1, fontSize: 12, color: t.muted, fontWeight: '600' },
 
   list: { paddingHorizontal: 12, paddingTop: 12, paddingBottom: 8, flexGrow: 1 },
   older: { alignSelf: 'center', paddingHorizontal: 14, paddingVertical: 8, marginBottom: 6, minHeight: 36, justifyContent: 'center' },
   olderText: { fontSize: 12, fontWeight: '800', color: t.accent },
   loading: { marginTop: 40 },
-  separator: { alignSelf: 'center', fontSize: 11, fontWeight: '700', color: '#8A9BA8', marginVertical: 10 },
+  separator: { alignSelf: 'center', fontSize: 11, fontWeight: '700', color: t.placeholder, marginVertical: 10 },
   row: { flexDirection: 'row', alignItems: 'flex-end', gap: 6, marginBottom: 2 },
   rowMine: { justifyContent: 'flex-end' },
   rowLast: { marginBottom: 8 },
   avatarSlot: { width: 28 },
   column: { maxWidth: '76%', alignItems: 'flex-start' },
   columnMine: { alignItems: 'flex-end' },
-  name: { fontSize: 11, fontWeight: '700', color: '#6E8191', marginLeft: 10, marginBottom: 3 },
+  name: { fontSize: 11, fontWeight: '700', color: t.muted, marginLeft: 10, marginBottom: 3 },
   bubble: { borderRadius: 20, paddingHorizontal: 14, paddingVertical: 9 },
-  theirs: { backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: '#E7EEF3' },
+  theirs: { backgroundColor: t.card, borderWidth: 1, borderColor: t.border },
   theirsText: { fontSize: 15, lineHeight: 21, color: t.ink },
-  mineText: { fontSize: 15, lineHeight: 21, color: '#FFFFFF' },
-  removed: { backgroundColor: 'transparent', borderWidth: 1, borderColor: '#D5DFE6' },
-  removedText: { fontSize: 13, fontStyle: 'italic', color: '#7D8E9B' },
+  mineText: { fontSize: 15, lineHeight: 21, color: t.onPrimary },
+  removed: { backgroundColor: 'transparent', borderWidth: 1, borderColor: t.border },
+  removedText: { fontSize: 13, fontStyle: 'italic', color: t.placeholder },
   bigEmoji: { fontSize: 38, lineHeight: 46 },
   sending: { opacity: 0.6 },
-  meta: { fontSize: 10, color: '#8A9BA8', marginTop: 3, marginRight: 4 },
+  meta: { fontSize: 10, color: t.placeholder, marginTop: 3, marginRight: 4 },
   failedRow: { flexDirection: 'row', gap: 10, marginTop: 4 },
   failed: { fontSize: 11, fontWeight: '800', color: t.danger },
   discard: { fontSize: 11, fontWeight: '700', color: t.muted },
   typing: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingLeft: 40, paddingVertical: 6 },
-  typingText: { fontSize: 12, color: '#6E8191', fontStyle: 'italic' },
-  dots: { flexDirection: 'row', gap: 3, backgroundColor: '#FFFFFF', borderRadius: 12, paddingHorizontal: 8, paddingVertical: 7, borderWidth: 1, borderColor: '#E7EEF3' },
-  dot: { width: 5, height: 5, borderRadius: 3, backgroundColor: '#7D8E9B' },
+  typingText: { fontSize: 12, color: t.muted, fontStyle: 'italic' },
+  dots: { flexDirection: 'row', gap: 3, backgroundColor: t.card, borderRadius: 12, paddingHorizontal: 8, paddingVertical: 7, borderWidth: 1, borderColor: t.border },
+  dot: { width: 5, height: 5, borderRadius: 3, backgroundColor: t.placeholder },
 
   empty: { alignItems: 'center', paddingHorizontal: 24, paddingTop: 48, gap: 8 },
   emptyIcon: { width: 56, height: 56, borderRadius: 22, backgroundColor: t.tint, alignItems: 'center', justifyContent: 'center', marginBottom: 4 },
   emptyTitle: { fontSize: 16, fontWeight: '900', color: t.ink },
   emptyBody: { fontSize: 13, color: t.muted, textAlign: 'center', lineHeight: 19 },
   quick: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 8, marginTop: 10 },
-  quickChip: { paddingHorizontal: 14, paddingVertical: 9, borderRadius: 999, backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: '#DCE8F0' },
+  quickChip: { paddingHorizontal: 14, paddingVertical: 9, borderRadius: 999, backgroundColor: t.card, borderWidth: 1, borderColor: t.border },
   quickText: { fontSize: 13, fontWeight: '700', color: t.accent },
 
-  composer: { flexDirection: 'row', alignItems: 'flex-end', gap: 8, paddingHorizontal: 12, paddingTop: 8, backgroundColor: '#FFFFFF',
-    borderTopWidth: 1, borderTopColor: '#E7EEF3' },
+  composer: { flexDirection: 'row', alignItems: 'flex-end', gap: 8, paddingHorizontal: 12, paddingTop: 8, backgroundColor: t.card,
+    borderTopWidth: 1, borderTopColor: t.border },
   inputWrap: { flex: 1, backgroundColor: t.bg, borderRadius: 22, paddingHorizontal: 14, paddingVertical: Platform.OS === 'ios' ? 10 : 4, minHeight: 44, justifyContent: 'center' },
   input: { fontSize: 15, color: t.ink, maxHeight: 110, paddingVertical: 6, ...(Platform.OS === 'web' ? { outlineStyle: 'none' } as object : null) },
   counter: { alignSelf: 'flex-end', fontSize: 10, color: t.muted, marginBottom: 2 },
@@ -330,11 +336,11 @@ const s = StyleSheet.create({
   likeText: { fontSize: 26 },
   pressed: { transform: [{ scale: 0.94 }], opacity: 0.9 },
 
-  overlay: { ...StyleSheet.absoluteFillObject, justifyContent: 'flex-end', backgroundColor: 'rgba(18,59,92,0.3)' },
-  actions: { backgroundColor: fs.paper, borderTopLeftRadius: 24, borderTopRightRadius: 24, paddingHorizontal: 16, paddingTop: 16, paddingBottom: 30, gap: 2 },
+  overlay: { ...StyleSheet.absoluteFillObject, justifyContent: 'flex-end', backgroundColor: t.scrim },
+  actions: { backgroundColor: t.card, borderTopLeftRadius: 24, borderTopRightRadius: 24, paddingHorizontal: 16, paddingTop: 16, paddingBottom: 30, gap: 2 },
   actionsQuote: { fontSize: 13, color: t.muted, fontStyle: 'italic', paddingHorizontal: 8, marginBottom: 8 },
   actionsTitle: { fontSize: 14, fontWeight: '800', color: t.ink, paddingHorizontal: 8, marginBottom: 4 },
   action: { flexDirection: 'row', alignItems: 'center', gap: 10, minHeight: 48, paddingHorizontal: 8, borderRadius: 14 },
-  actionPressed: { backgroundColor: '#EEF3F6' },
+  actionPressed: { backgroundColor: t.tint },
   actionText: { fontSize: 15, fontWeight: '700', color: t.ink },
-});
+}));

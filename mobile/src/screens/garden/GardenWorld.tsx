@@ -6,8 +6,8 @@ import Svg, { Circle, Path, Rect } from 'react-native-svg';
 import { type Light, sunAt } from '../../components/daylight';
 import { Text } from '../../components/Typography';
 import type { CareKind, GardenPlot } from '../../inventory/types';
-import { appTheme as t } from '../../theme';
 import { radius } from '../../ui/design';
+import { makeStyles } from '../../ui/theme';
 import { useAtmosphere, useSameValue } from '../../world/atmosphere';
 import { useEased, useFrameWatch, useTravel, useWorldMotion } from '../../world/budget';
 import { ContactShadow, Hit, Plate } from '../../world/diorama';
@@ -369,13 +369,14 @@ function PlotSpot({ plot, place, busy, ready, label, onPress, wind, night, fx }:
 /** How a plant is doing, on one small line at the foot of its plot, with a dot of its tier's colour. A ready plant says
  * "Thu hoạch" in gold. An empty plot needs no words: its (+) says it. */
 function PlotSign({ plot, place }: { plot: GardenPlot; place: ReturnType<typeof plotPlaces>[number] }) {
+  const sign = useSignStyles();
   if (plot.empty) return null;
   const { w } = place;
   const ripe = plot.ready ?? plot.grown;
   return <View pointerEvents="none" accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={[s.signSpot, { left: place.x - w / 2, top: place.feet - 16, width: w }]}>
-    <View style={[s.sign, ripe && s.signReady]} testID={ripe ? `garden-plot-${plot.plot}-harvestable` : undefined}>
+    <View style={[sign.sign, ripe && s.signReady]} testID={ripe ? `garden-plot-${plot.plot}-harvestable` : undefined}>
       {ripe ? <Ionicons name="basket" size={10} color="#7A4E00" /> : <View style={[s.tierDot, { backgroundColor: tierOf(plot.tier).dot }]} />}
-      <Text style={[s.signStage, ripe && s.signStageReady]} numberOfLines={1}>{ripe ? 'Thu hoạch' : plot.stage_label}</Text>
+      <Text style={[sign.signStage, ripe && s.signStageReady]} numberOfLines={1}>{ripe ? 'Thu hoạch' : plot.stage_label}</Text>
     </View>
   </View>;
 }
@@ -531,8 +532,6 @@ const s = StyleSheet.create({
   badges: { position: 'absolute', right: '6%', flexDirection: 'row', gap: 2 },
   badge: { width: 18, height: 18, borderRadius: 9, alignItems: 'center', justifyContent: 'center' },
   signSpot: { position: 'absolute', alignItems: 'center', zIndex: 100 },
-  sign: { maxWidth: '100%', flexDirection: 'row', gap: 3, paddingHorizontal: 6, paddingVertical: 1, borderRadius: radius.sm - 4, backgroundColor: 'rgba(255,255,255,0.9)', alignItems: 'center' },
-  signStage: { fontSize: 10, lineHeight: 13, fontWeight: '700', color: t.ink, flexShrink: 1 },
   signReady: { backgroundColor: '#FFE59A' },
   signStageReady: { color: '#6B4300', fontWeight: '800' },
   tierDot: { width: 6, height: 6, borderRadius: 3 },
@@ -548,3 +547,10 @@ const s = StyleSheet.create({
   waterDrop: { position: 'absolute', width: 3.5, height: 7, borderRadius: 3, backgroundColor: '#8ED3F2' },
   waterRing: { position: 'absolute', width: 14, height: 6, borderRadius: 7, borderWidth: 1.2, borderColor: '#BFE8FA' },
 });
+
+/** A plant's sign is a label over the scene: the theme's glass and ink, so it reads in light and dark (the scene's own
+ * art and effects above stay as drawn; a ripe plant's gold sign too). */
+const useSignStyles = makeStyles(({ t }) => StyleSheet.create({
+  sign: { maxWidth: '100%', flexDirection: 'row', gap: 3, paddingHorizontal: 6, paddingVertical: 1, borderRadius: radius.sm - 4, backgroundColor: t.glass, alignItems: 'center' },
+  signStage: { fontSize: 10, lineHeight: 13, fontWeight: '700', color: t.ink, flexShrink: 1 },
+}));

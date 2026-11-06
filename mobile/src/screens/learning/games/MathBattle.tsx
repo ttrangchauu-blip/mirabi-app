@@ -5,7 +5,7 @@ import { Text } from '../../../components/Typography';
 import type { Turn } from '../../../learning/types';
 import { petById } from '../../../pets';
 import { attackWindupMs, drawnActions } from '../../../petSprites';
-import { appTheme as t } from '../../../theme';
+import { makeStyles } from '../../../ui/theme';
 import { ArenaLayer, CrystalShield, Impact, MagicBolt, MONSTER_ART, MonsterId, MonsterMood, Sparkle, Zone } from '../../../games/art/mathBattle';
 import { Layer, Parallax } from '../../../games/engine/Parallax';
 import { useRig } from '../../../games/engine/rig';
@@ -100,6 +100,7 @@ export const MATH_TIP: Record<string, string> = {
 
 export const MathBattle = memo(function MathBattle({ problem, required, resolved, hearts, heartsMax, flash, wrongKey, petId, petLevel,
   reduceMotion, running, bare = false, tip = null, hold = false }: Props) {
+  const styles = useStyles();
   const sound = useSfx();
   const element = petById(petId).element;
   const [width, setWidth] = useState(0);
@@ -388,12 +389,13 @@ function Bar({ label, value, max, color, right, a11y, lostAt = null, drain }: {
   /** The cell just lost: it empties (red, shrinking) with `drain` going 1 → 0. */
   lostAt?: number | null; drain?: Animated.Value;
 }) {
+  const styles = useStyles();
   return (
     <View style={[styles.bar, right && styles.barRight]} accessibilityLabel={a11y}>
       <Text style={styles.barLabel} numberOfLines={1}>{label}</Text>
       <View style={styles.barTrack}>
         {Array.from({ length: Math.max(1, max) }).map((_, i) => (
-          <View key={i} style={[styles.barCell, { backgroundColor: i < value ? color : '#DDE3EA' }]}>
+          <View key={i} style={[styles.barCell, i < value ? { backgroundColor: color } : styles.barEmpty]}>
             {i === lostAt && drain ? (
               <Animated.View style={[StyleSheet.absoluteFill, styles.barLost, { opacity: drain, transform: [{ scaleX: drain }] }]} />
             ) : null}
@@ -404,7 +406,7 @@ function Bar({ label, value, max, color, right, a11y, lostAt = null, drain }: {
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, tones, dark }) => StyleSheet.create({
   wrap: { gap: 8, marginBottom: 8 },
   hud: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   hudMid: { alignItems: 'center' },
@@ -415,11 +417,12 @@ const styles = StyleSheet.create({
   barLabel: { fontSize: 12, fontWeight: '900', color: t.ink },
   barTrack: { flexDirection: 'row', gap: 3, alignSelf: 'stretch' },
   barCell: { flex: 1, height: 9, borderRadius: 5, overflow: 'hidden' },
+  barEmpty: { backgroundColor: dark ? t.track : '#DDE3EA' },
   barLost: { backgroundColor: '#F0473A', borderRadius: 5 },
-  tip: { position: 'absolute', maxWidth: 210, paddingHorizontal: 10, paddingVertical: 6, borderRadius: 14, backgroundColor: '#FFFFFF',
+  tip: { position: 'absolute', maxWidth: 210, paddingHorizontal: 10, paddingVertical: 6, borderRadius: 14, backgroundColor: t.card,
     borderWidth: 2, borderColor: '#F5B841' },
   tipText: { fontSize: 13, fontWeight: '900', color: t.ink },
-  tipTail: { position: 'absolute', left: 18, bottom: -7, width: 12, height: 12, backgroundColor: '#FFFFFF', borderRightWidth: 2, borderBottomWidth: 2,
+  tipTail: { position: 'absolute', left: 18, bottom: -7, width: 12, height: 12, backgroundColor: t.card, borderRightWidth: 2, borderBottomWidth: 2,
     borderColor: '#F5B841', transform: [{ rotate: '45deg' }] },
   arena: { borderRadius: 22, overflow: 'hidden', backgroundColor: '#2A3B5C' },
   actor: { position: 'absolute' },
@@ -436,9 +439,10 @@ const styles = StyleSheet.create({
   bannerText: { fontSize: 16, fontWeight: '900', color: '#FFFFFF', backgroundColor: 'rgba(20,30,52,0.75)', paddingHorizontal: 14, paddingVertical: 5,
     borderRadius: 14, overflow: 'hidden' },
   bannerBoss: { backgroundColor: 'rgba(176,50,78,0.92)' },
-  problem: { alignItems: 'center', borderRadius: 18, paddingVertical: 10, paddingHorizontal: 12, backgroundColor: '#FFFFFF', borderWidth: 2, borderColor: '#E7D7F5' },
+  problem: { alignItems: 'center', borderRadius: 18, paddingVertical: 10, paddingHorizontal: 12, backgroundColor: t.card, borderWidth: 2,
+    borderColor: dark ? tones.lilac.to : '#E7D7F5' },
   problemText: { fontSize: 30, fontWeight: '900', color: t.ink, letterSpacing: 1 },
-  problemSolved: { borderColor: '#7FD49A', backgroundColor: '#F0FBF3' },
-  problemTextSolved: { color: '#22894A' },
-  phase: { marginTop: 2, fontSize: 13, fontWeight: '800', color: '#B0324E', textAlign: 'center' },
-});
+  problemSolved: { borderColor: dark ? t.success : '#7FD49A', backgroundColor: dark ? t.successBg : '#F0FBF3' },
+  problemTextSolved: { color: dark ? t.success : '#22894A' },
+  phase: { marginTop: 2, fontSize: 13, fontWeight: '800', color: dark ? t.danger : '#B0324E', textAlign: 'center' },
+}));

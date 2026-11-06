@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { errorMessage } from '../../auth/messages';
 import { Text } from '../../components/Typography';
 import { educationApi, type Note, type NoteInput } from '../../learning/education';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { useConfirm } from '../../ui/ConfirmDialog';
 import { Button, Card, SoftInput } from '../../ui/kit';
 import { useToast } from '../../ui/Toast';
@@ -33,6 +33,8 @@ const empty = (subject = '', lessonKey: string | null = null): NoteInput => ({ t
 
 /** The notes list (search, this year / every year), with an inline editor to add, edit or delete one. */
 export function NotesPanel({ subjects, lessons, academicYear, draft }: Props) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const toast = useToast();
   const confirm = useConfirm();
   const [query, setQuery] = useState('');
@@ -169,7 +171,7 @@ export function NotesPanel({ subjects, lessons, academicYear, draft }: Props) {
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   flex: { flex: 1 },
   row: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   loading: { marginVertical: 12 },
@@ -180,14 +182,14 @@ const styles = StyleSheet.create({
   body: { minHeight: 110, textAlignVertical: 'top' },
   label: { fontSize: 13, fontWeight: '800', color: t.muted, marginTop: 4 },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginVertical: 6 },
-  chip: { minHeight: 36, paddingHorizontal: 12, borderRadius: 18, backgroundColor: '#FFFFFF', justifyContent: 'center' },
-  chipOn: { backgroundColor: t.accent },
+  chip: { minHeight: 36, paddingHorizontal: 12, borderRadius: 18, backgroundColor: t.card, justifyContent: 'center' },
+  chipOn: { backgroundColor: t.accentFill },
   chipText: { fontSize: 13, fontWeight: '800', color: t.ink },
-  chipTextOn: { color: '#FFFFFF' },
+  chipTextOn: { color: t.onPrimary },
   search: { marginTop: 12 },
-  note: { backgroundColor: '#FFFFFF', borderRadius: 16, padding: 12, marginTop: 10, gap: 6 },
+  note: { backgroundColor: t.card, borderRadius: 16, padding: 12, marginTop: 10, gap: 6 },
   noteTitle: { fontSize: 15, fontWeight: '900', color: t.ink },
   meta: { fontSize: 12, fontWeight: '700', color: t.muted, marginTop: 1 },
   noteBody: { fontSize: 15, lineHeight: 22, color: t.ink },
   icon: { width: 36, height: 36, alignItems: 'center', justifyContent: 'center' },
-});
+}));

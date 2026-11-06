@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { PetArt } from '../../components/PetArt';
 import { usePetCheer } from '../engine/rig';
 import { Text } from '../../components/Typography';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { Actions, NoteLine, SceneProps, Stepper, useSolvedReaction, useWrongShake } from './common';
 import { atomColor, atomCounts, balanced, formulaParts, Species, tilt } from './logic';
 
@@ -15,10 +15,11 @@ import { atomColor, atomCounts, balanced, formulaParts, Species, tilt } from './
 // counts again (and says when the numbers are not the smallest); right: the beam settles, bubbles rise, the pet
 // cheers. A simulation for learning to write equations: nothing here is an experiment to try.
 
-const BENCH = '#E6F5F2';
 const MOLECULES_SHOWN = 4;
 
-function Formula({ formula, size = 20, color = t.ink }: { formula: string; size?: number; color?: string }) {
+function Formula({ formula, size = 20, color: given }: { formula: string; size?: number; color?: string }) {
+  const { t } = useTheme();
+  const color = given ?? t.ink;
   return (
     <Text style={{ fontSize: size, fontWeight: '900', color }} accessibilityLabel={formula}>
       {formulaParts(formula).map((part, i) => (part.sub
@@ -30,6 +31,7 @@ function Formula({ formula, size = 20, color = t.ink }: { formula: string; size?
 
 /** One molecule: its atoms as small balls, one colour per element. */
 function Molecule({ atoms }: { atoms: Record<string, number> }) {
+  const st = useStyles();
   const balls = Object.entries(atoms).flatMap(([el, n]) => Array.from({ length: n }, () => el)).slice(0, 8);
   return (
     <View style={st.molecule}>
@@ -39,6 +41,7 @@ function Molecule({ atoms }: { atoms: Record<string, number> }) {
 }
 
 function Pan({ species, coefficients, side }: { species: Species[]; coefficients: number[]; side: 'left' | 'right' }) {
+  const st = useStyles();
   return (
     <View style={st.pan} accessibilityLabel={side === 'left' ? 'Đĩa cân vế trái' : 'Đĩa cân vế phải'}>
       <View style={st.panLoad}>
@@ -57,6 +60,8 @@ function Pan({ species, coefficients, side }: { species: Species[]; coefficients
 export function EquationBalance({ turn, disabled, feedback, solved, onSubmit, reduceMotion, petId = 'cat', petLevel = 1, demo }: SceneProps & {
   demo?: { coefficients: number[]; solved?: boolean };
 }) {
+  const { t } = useTheme();
+  const st = useStyles();
   const p = turn.prompt;
   const species: Species[] = useMemo(() => p.species ?? [], [p.species]);
   const max = p.max ?? 12;
@@ -153,9 +158,11 @@ export function EquationBalance({ turn, disabled, feedback, solved, onSubmit, re
 }
 
 
-const st = StyleSheet.create({
-  world: { gap: 10, padding: 12, borderRadius: 20, backgroundColor: BENCH, borderWidth: 2, borderColor: '#BFE3DA' },
-  task: { fontSize: 15, fontWeight: '800', color: '#1F5F54', textAlign: 'center' },
+const useStyles = makeStyles(({ t, tones, dark }) => StyleSheet.create({
+  // The lab bench holds the equation, the table and the buttons: pale teal on light, deep sea on dark.
+  world: { gap: 10, padding: 12, borderRadius: 20,
+    backgroundColor: dark ? tones.sea.from : '#E6F5F2', borderWidth: 2, borderColor: dark ? tones.sea.to : '#BFE3DA' },
+  task: { fontSize: 15, fontWeight: '800', color: dark ? tones.sea.ink : '#1F5F54', textAlign: 'center' },
   equation: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: 6 },
   term: { alignItems: 'center', gap: 4, paddingHorizontal: 4 },
   plus: { fontSize: 22, fontWeight: '900', color: t.ink },
@@ -179,11 +186,11 @@ const st = StyleSheet.create({
   bubble: { position: 'absolute', bottom: 20, width: 14, height: 14, borderRadius: 7, borderWidth: 2, borderColor: '#4CC3A6',
     backgroundColor: 'rgba(76,195,166,0.15)' },
   pet: { position: 'absolute', right: 2, bottom: 0 },
-  table: { borderRadius: 12, backgroundColor: '#FFFFFF', padding: 8, gap: 4 },
+  table: { borderRadius: 12, backgroundColor: t.card, padding: 8, gap: 4 },
   tableRow: { flexDirection: 'row', alignItems: 'center' },
   cell: { flex: 1, textAlign: 'center', fontSize: 15, fontWeight: '800', color: t.ink },
   cellHead: { fontSize: 12, color: t.muted },
   elCell: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6 },
   el: { fontSize: 15, fontWeight: '900', color: t.ink },
   mark: { width: 24 },
-});
+}));

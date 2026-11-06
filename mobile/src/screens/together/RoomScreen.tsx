@@ -10,11 +10,10 @@ import { formatClock, formatMinutes, phaseProgress, remainingMs, TimerAnchor } f
 import type { Friend, PublicUser, QuestTemplate, RoomMember, RoomSnapshot, SessionBrief } from '../../studyTogether/types';
 import { useRoomChat } from '../../studyTogether/useRoomChat';
 import { useStudyRoom } from '../../studyTogether/useStudyRoom';
-import { appTheme as t } from '../../theme';
 import { useConfirm } from '../../ui/ConfirmDialog';
 import { Button, Card, IconName, ProgressBar, SectionHeader, SoftInput } from '../../ui/kit';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { useToast } from '../../ui/Toast';
-import { focusTheme as fs } from '../main/focusSpaceTheme';
 import { showError } from '../main/shared';
 import { REACTIONS, STATE_LABELS, subjectLabel } from './labels';
 import { RoomChat } from './RoomChat';
@@ -22,6 +21,7 @@ import { StudyRoomScene } from './StudyRoomScene';
 import { usePullToRefresh, useTogetherNav } from './navigation';
 import { BackHeader, EmptyState, ErrorState, LoadingState, OptionRow, OptionSheet, PersonRow, PresenceLabel, SmallButton } from './ui';
 
+// Status dots (amber, green, grey): they read the same on a light or a dark card.
 const CONNECTION: Record<ConnectionStatus, { label: string; color: string } | null> = {
   idle: null,
   connecting: { label: 'Đang kết nối…', color: '#E0A43A' },
@@ -31,6 +31,8 @@ const CONNECTION: Record<ConnectionStatus, { label: string; color: string } | nu
 };
 
 export function RoomScreen({ roomId, initial }: { roomId: number; initial: RoomSnapshot | null }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const nav = useTogetherNav();
   const live = useStudyRoom(roomId, nav.realtime, initial);
   const confirm = useConfirm();
@@ -185,7 +187,7 @@ export function RoomScreen({ roomId, initial }: { roomId: number; initial: RoomS
             <PersonRow user={m.user_id === me ? { ...m, display_name: `${m.display_name} (bạn)` } : m}
               subtitle={<PresenceLabel presence={m.presence === 'away' ? 'away' : !(active && m.in_session) ? 'online' : room.state === 'break' ? 'resting' : room.state === 'paused' ? 'paused' : 'studying'} />}
               right={<View style={styles.memberRight}>
-                {m.role === 'host' ? <View style={styles.hostBadge}><Ionicons name="star" size={10} color="#9A6400" /><Text style={styles.hostText}>Chủ phòng</Text></View> : null}
+                {m.role === 'host' ? <View style={styles.hostBadge}><Ionicons name="star" size={10} color={t.warning} /><Text style={styles.hostText}>Chủ phòng</Text></View> : null}
                 {active ? <Text style={styles.memberStat}>{focusOf(m) == null ? 'Ẩn' : formatMinutes(focusOf(m)!)}</Text> : null}
               </View>} />
           </View>
@@ -230,6 +232,8 @@ export function RoomScreen({ roomId, initial }: { roomId: number; initial: RoomS
 
 /** The way into the room chat, as a header icon: a badge counts unread messages, a dot shows someone is typing. */
 function ChatButton({ chat, onOpen }: { chat: ReturnType<typeof useRoomChat>; onOpen: () => void }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const unread = chat.unread;
   const typing = chat.typingIds.length > 0;
   return (
@@ -243,6 +247,8 @@ function ChatButton({ chat, onOpen }: { chat: ReturnType<typeof useRoomChat>; on
 }
 
 function WaitingStrip({ room, isHost, busy, onStart }: { room: RoomSnapshot; isHost: boolean; busy: string | null; onStart: () => void }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const facts: { icon: IconName; label: string }[] = [
     { icon: 'book-outline', label: subjectLabel(room.subject) },
     { icon: 'timer-outline', label: `${room.focus_minutes}/${room.break_minutes} phút` },
@@ -254,7 +260,7 @@ function WaitingStrip({ room, isHost, busy, onStart }: { room: RoomSnapshot; isH
       <View style={styles.facts}>
         {facts.map((f) => (
           <View key={f.label} style={styles.fact} accessible accessibilityLabel={f.label}>
-            <Ionicons name={f.icon} size={13} color={fs.muted} /><Text style={styles.factText}>{f.label}</Text>
+            <Ionicons name={f.icon} size={13} color={t.muted} /><Text style={styles.factText}>{f.label}</Text>
           </View>
         ))}
       </View>
@@ -271,7 +277,7 @@ function WaitingStrip({ room, isHost, busy, onStart }: { room: RoomSnapshot; isH
         ? <Button title="Bắt đầu phiên học" icon="play" onPress={onStart} loading={busy === 'start'} style={styles.startButton} />
         : (
           <View style={styles.waitingNote}>
-            <ActivityIndicator size="small" color={fs.muted} />
+            <ActivityIndicator size="small" color={t.muted} />
             <Text style={styles.waitingText}>Đang chờ chủ phòng bắt đầu phiên học…</Text>
           </View>
         )}
@@ -282,6 +288,8 @@ function WaitingStrip({ room, isHost, busy, onStart }: { room: RoomSnapshot; isH
 function TimerStrip({ room, anchor, isHost, busy, onToggle, onEnd }: {
   room: RoomSnapshot; anchor: TimerAnchor | null; isHost: boolean; busy: string | null; onToggle: () => void; onEnd: () => void;
 }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const [, setTick] = useState(0);
   useEffect(() => {
     if (!anchor?.running) return;
@@ -293,6 +301,7 @@ function TimerStrip({ room, anchor, isHost, busy, onToggle, onEnd }: {
   const left = remainingMs(anchor);
   const paused = room.state === 'paused';
   const phase = paused ? 'Tạm dừng' : session.phase === 'focus' ? 'Tập trung' : 'Nghỉ ngơi';
+  // The phase colours (pause, focus, break) mean the same on both themes.
   const tone = paused ? '#B7A6C9' : session.phase === 'focus' ? '#82AEBE' : '#E0B36A';
   const toggleTitle = paused ? 'Tiếp tục' : 'Tạm dừng';
   return (
@@ -313,8 +322,8 @@ function TimerStrip({ room, anchor, isHost, busy, onToggle, onEnd }: {
               <Pressable onPress={onToggle} disabled={!!busy} accessibilityRole="button" accessibilityLabel={toggleTitle}
                 style={({ pressed }) => [styles.roundPlay, pressed && styles.pressed]}>
                 <LinearGradient colors={t.primary} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.roundFill}>
-                  {busy === 'pause' || busy === 'resume' ? <ActivityIndicator size="small" color="#FFFFFF" />
-                    : <Ionicons name={paused ? 'play' : 'pause'} size={22} color="#FFFFFF" style={paused && styles.playNudge} />}
+                  {busy === 'pause' || busy === 'resume' ? <ActivityIndicator size="small" color={t.onPrimary} />
+                    : <Ionicons name={paused ? 'play' : 'pause'} size={22} color={t.onPrimary} style={paused && styles.playNudge} />}
                 </LinearGradient>
               </Pressable>
             </View>
@@ -322,7 +331,7 @@ function TimerStrip({ room, anchor, isHost, busy, onToggle, onEnd }: {
           </View>
         ) : (
           <View style={styles.controls}>
-            <View style={[styles.round, styles.roundIdle]}><Ionicons name="people-outline" size={18} color={fs.muted} /></View>
+            <View style={[styles.round, styles.roundIdle]}><Ionicons name="people-outline" size={18} color={t.muted} /></View>
             <Text style={styles.controlHint}>Chủ phòng{'\n'}giữ đồng hồ</Text>
           </View>
         )}
@@ -339,6 +348,8 @@ function TimerStrip({ room, anchor, isHost, busy, onToggle, onEnd }: {
 
 /** A private note for this session, kept on this device only (never sent to the room). */
 function PersonalGoal({ roomId, userId }: { roomId: number; userId: number }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const key = `mirabi.together.goal.v1:${userId}:${roomId}`;
   const [text, setText] = useState('');
   useEffect(() => { void AsyncStorage.getItem(key).then((v) => setText(v ?? '')).catch(() => {}); }, [key]);
@@ -346,7 +357,7 @@ function PersonalGoal({ roomId, userId }: { roomId: number; userId: number }) {
     <View style={styles.personal}>
       <View style={styles.personalHead}>
         <Text style={[styles.eyebrow, styles.flex]}>Mục tiêu của bạn</Text>
-        <Ionicons name="lock-closed-outline" size={11} color={fs.muted} /><Text style={styles.privateText}>Chỉ mình bạn thấy</Text>
+        <Ionicons name="lock-closed-outline" size={11} color={t.muted} /><Text style={styles.privateText}>Chỉ mình bạn thấy</Text>
       </View>
       <SoftInput value={text} onChangeText={(v) => { setText(v); void AsyncStorage.setItem(key, v).catch(() => {}); }} maxLength={160}
         placeholder="Ví dụ: làm xong 10 câu trắc nghiệm" accessibilityLabel="Mục tiêu của bạn" style={styles.personalInput} />
@@ -355,6 +366,7 @@ function PersonalGoal({ roomId, userId }: { roomId: number; userId: number }) {
 }
 
 function InviteSheet({ visible, room, onClose, onInvited }: { visible: boolean; room: RoomSnapshot; onClose: () => void; onInvited: (n: number) => void }) {
+  const styles = useStyles();
   const [friends, setFriends] = useState<Friend[] | null>(null);
   const [selected, setSelected] = useState<number[]>([]);
   const [sending, setSending] = useState(false);
@@ -404,65 +416,65 @@ function QuestSheet({ visible, roomId, onClose, onCreated }: { visible: boolean;
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   flex: { flex: 1 },
-  pill: { flexDirection: 'row', alignItems: 'center', gap: 5, backgroundColor: '#FFFFFF', paddingHorizontal: 9, paddingVertical: 6, borderRadius: 999, maxWidth: 130 },
+  pill: { flexDirection: 'row', alignItems: 'center', gap: 5, backgroundColor: t.card, paddingHorizontal: 9, paddingVertical: 6, borderRadius: 999, maxWidth: 130 },
   dot: { width: 8, height: 8, borderRadius: 4 },
   pillCompact: { width: 24, height: 24, paddingHorizontal: 0, paddingVertical: 0, justifyContent: 'center' },
   pillText: { fontSize: 11, fontWeight: '800', color: t.ink },
   headerRight: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  chatButton: { width: 44, height: 44, borderRadius: 16, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
-  typingDot: { position: 'absolute', top: 8, right: 8, width: 10, height: 10, borderRadius: 5, backgroundColor: '#1F9D6A', borderWidth: 2, borderColor: '#FFFFFF' },
+  chatButton: { width: 44, height: 44, borderRadius: 16, backgroundColor: t.card, alignItems: 'center', justifyContent: 'center' },
+  typingDot: { position: 'absolute', top: 8, right: 8, width: 10, height: 10, borderRadius: 5, backgroundColor: '#1F9D6A', borderWidth: 2, borderColor: t.card },
   offline: { fontSize: 12, color: t.muted, marginTop: -8, marginBottom: 10 },
 
-  stage: { backgroundColor: fs.paper, borderRadius: 28, overflow: 'hidden', borderWidth: 1, borderColor: '#FFFFFF', marginBottom: 16,
-    shadowColor: fs.shadow, shadowOpacity: 0.1, shadowRadius: 22, shadowOffset: { width: 0, height: 10 }, elevation: 2 },
+  stage: { backgroundColor: t.card, borderRadius: 28, overflow: 'hidden', borderWidth: 1, borderColor: t.card, marginBottom: 16,
+    shadowColor: t.shadow, shadowOpacity: 0.1, shadowRadius: 22, shadowOffset: { width: 0, height: 10 }, elevation: 2 },
   sceneFrame: { padding: 8, paddingBottom: 0 },
   caption: { position: 'absolute', bottom: 7, left: 8, right: 8, alignItems: 'center' },
   captionBelow: { position: 'relative', bottom: 0, left: 0, right: 0, marginTop: 6 },
-  captionPill: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 10, paddingVertical: 2, borderRadius: 999, backgroundColor: 'rgba(255,255,255,0.84)' },
-  captionDot: { width: 5, height: 5, borderRadius: 3, backgroundColor: '#B9B2A8' },
+  captionPill: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 10, paddingVertical: 2, borderRadius: 999, backgroundColor: t.glass },
+  captionDot: { width: 5, height: 5, borderRadius: 3, backgroundColor: t.disabled },
   captionDotLive: { backgroundColor: '#5FA585' },
-  captionText: { color: '#5C6B68', fontSize: 11, fontWeight: '700' },
+  captionText: { color: t.muted, fontSize: 11, fontWeight: '700' },
   strip: { paddingHorizontal: 20, paddingTop: 16, paddingBottom: 18, gap: 12 },
-  eyebrow: { fontSize: 10, fontWeight: '800', color: '#67818D', textTransform: 'uppercase', letterSpacing: 1.6 },
+  eyebrow: { fontSize: 10, fontWeight: '800', color: t.muted, textTransform: 'uppercase', letterSpacing: 1.6 },
 
   timerRow: { flexDirection: 'row', alignItems: 'center', gap: 16 },
   phaseRow: { flexDirection: 'row', alignItems: 'center', gap: 7 },
   phaseDot: { width: 6, height: 6, borderRadius: 3 },
-  phase: { fontSize: 10, fontWeight: '800', color: '#667F89', textTransform: 'uppercase', letterSpacing: 2.2 },
-  clock: { fontSize: 50, lineHeight: 60, fontWeight: '800', color: fs.ink, letterSpacing: -1.5, fontVariant: ['tabular-nums'] },
-  track: { height: 4, borderRadius: 2, backgroundColor: '#E6E8E4', overflow: 'hidden', maxWidth: 190 },
+  phase: { fontSize: 10, fontWeight: '800', color: t.muted, textTransform: 'uppercase', letterSpacing: 2.2 },
+  clock: { fontSize: 50, lineHeight: 60, fontWeight: '800', color: t.ink, letterSpacing: -1.5, fontVariant: ['tabular-nums'] },
+  track: { height: 4, borderRadius: 2, backgroundColor: t.track, overflow: 'hidden', maxWidth: 190 },
   fill: { height: 4, borderRadius: 2 },
   controls: { alignItems: 'center', gap: 6, minWidth: 104 },
   roundRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   round: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', borderWidth: 1 },
-  roundStop: { backgroundColor: '#FBEFEE', borderColor: '#F1D9D6' },
-  roundIdle: { backgroundColor: '#EFF4F3', borderColor: '#DCE7EA' },
+  roundStop: { backgroundColor: t.dangerBg, borderColor: t.dangerBg },
+  roundIdle: { backgroundColor: t.surfaceSecondary, borderColor: t.border },
   roundPlay: { width: 52, height: 52, borderRadius: 26, shadowColor: t.shadow, shadowOpacity: 0.22, shadowRadius: 8, shadowOffset: { width: 0, height: 4 }, elevation: 3 },
   roundFill: { flex: 1, borderRadius: 26, alignItems: 'center', justifyContent: 'center' },
   playNudge: { marginLeft: 3 },
-  controlHint: { fontSize: 11, color: fs.muted, fontWeight: '600', textAlign: 'center', lineHeight: 15 },
+  controlHint: { fontSize: 11, color: t.muted, fontWeight: '600', textAlign: 'center', lineHeight: 15 },
   cycles: { flexDirection: 'row', alignItems: 'center', gap: 5 },
-  cycleDot: { width: 7, height: 7, borderRadius: 4, backgroundColor: '#E1E5E2' },
+  cycleDot: { width: 7, height: 7, borderRadius: 4, backgroundColor: t.track },
   cycleDone: { backgroundColor: '#8DAA9E' },
-  cycleNow: { backgroundColor: '#FFFFFF', borderWidth: 1.5, borderColor: '#82AEBE' },
-  cycleLabel: { marginLeft: 6, fontSize: 11, color: '#71817F', fontWeight: '600' },
+  cycleNow: { backgroundColor: t.card, borderWidth: 1.5, borderColor: '#82AEBE' },
+  cycleLabel: { marginLeft: 6, fontSize: 11, color: t.muted, fontWeight: '600' },
 
-  reactions: { borderTopWidth: 1, borderTopColor: fs.line, paddingHorizontal: 20, paddingTop: 12, paddingBottom: 14, gap: 8 },
+  reactions: { borderTopWidth: 1, borderTopColor: t.tint, paddingHorizontal: 20, paddingTop: 12, paddingBottom: 14, gap: 8 },
   reactionRow: { flexDirection: 'row', justifyContent: 'space-between' },
-  reaction: { width: 44, height: 44, borderRadius: 22, backgroundColor: '#F4EFE7', alignItems: 'center', justifyContent: 'center' },
+  reaction: { width: 44, height: 44, borderRadius: 22, backgroundColor: t.surfaceSecondary, alignItems: 'center', justifyContent: 'center' },
   reactionEmoji: { fontSize: 20 },
   pressed: { transform: [{ scale: 0.92 }], opacity: 0.9 },
 
   facts: { flexDirection: 'row', flexWrap: 'wrap', columnGap: 14, rowGap: 6 },
   fact: { flexDirection: 'row', alignItems: 'center', gap: 5 },
-  factText: { fontSize: 12, color: fs.muted, fontWeight: '700' },
-  codeBox: { flexDirection: 'row', alignItems: 'center', backgroundColor: fs.cream, borderRadius: 18, paddingVertical: 12, paddingHorizontal: 14, gap: 10 },
-  code: { fontSize: 24, fontWeight: '900', letterSpacing: 4, color: fs.ink, marginTop: 2 },
+  factText: { fontSize: 12, color: t.muted, fontWeight: '700' },
+  codeBox: { flexDirection: 'row', alignItems: 'center', backgroundColor: t.surfaceSecondary, borderRadius: 18, paddingVertical: 12, paddingHorizontal: 14, gap: 10 },
+  code: { fontSize: 24, fontWeight: '900', letterSpacing: 4, color: t.ink, marginTop: 2 },
   startButton: { marginTop: 0 },
   waitingNote: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, paddingVertical: 6 },
-  waitingText: { fontSize: 13, color: fs.muted, fontWeight: '700' },
+  waitingText: { fontSize: 13, color: t.muted, fontWeight: '700' },
 
   goalRow: { flexDirection: 'row', alignItems: 'flex-start', gap: 12 },
   goalIcon: { width: 32, height: 32, borderRadius: 12, backgroundColor: t.tint, alignItems: 'center', justifyContent: 'center' },
@@ -470,18 +482,19 @@ const styles = StyleSheet.create({
   divider: { height: 1, backgroundColor: t.border, marginVertical: 14 },
   personal: { gap: 8 },
   personalHead: { flexDirection: 'row', alignItems: 'center', gap: 4 },
-  privateText: { fontSize: 11, color: fs.muted, fontWeight: '600' },
+  privateText: { fontSize: 11, color: t.muted, fontWeight: '600' },
   personalInput: { minHeight: 48 },
 
+  // The unread badge is the same red with white digits on light and dark.
   badge: { position: 'absolute', top: -4, right: -4, minWidth: 20, height: 20, borderRadius: 10, paddingHorizontal: 5, backgroundColor: '#E5484D',
-    alignItems: 'center', justifyContent: 'center', borderWidth: 2, borderColor: '#FFFFFF' },
+    alignItems: 'center', justifyContent: 'center', borderWidth: 2, borderColor: t.card },
   badgeText: { fontSize: 10, fontWeight: '900', color: '#FFFFFF' },
   listCard: { paddingVertical: 6 },
-  rowDivider: { borderTopWidth: 1, borderTopColor: '#EEF4F8' },
+  rowDivider: { borderTopWidth: 1, borderTopColor: t.tint },
   hint: { fontSize: 13, color: t.muted, lineHeight: 19 },
   memberRight: { alignItems: 'flex-end', gap: 4 },
-  hostBadge: { flexDirection: 'row', alignItems: 'center', gap: 3, backgroundColor: '#FFF4CC', paddingHorizontal: 8, paddingVertical: 3, borderRadius: 999 },
-  hostText: { fontSize: 11, fontWeight: '900', color: '#7A4D00' },
+  hostBadge: { flexDirection: 'row', alignItems: 'center', gap: 3, backgroundColor: t.warningBg, paddingHorizontal: 8, paddingVertical: 3, borderRadius: 999 },
+  hostText: { fontSize: 11, fontWeight: '900', color: t.warning },
   memberStat: { fontSize: 12, fontWeight: '800', color: t.muted },
   quest: { paddingVertical: 12, gap: 8 },
   questHead: { flexDirection: 'row', alignItems: 'center', gap: 8 },
@@ -489,4 +502,4 @@ const styles = StyleSheet.create({
   questEmpty: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 10 },
   footer: { flexDirection: 'row', justifyContent: 'center', gap: 10, marginTop: 4, marginBottom: 8 },
   rowButtons: { flexDirection: 'row', gap: 8, marginTop: 8 },
-});
+}));

@@ -12,7 +12,7 @@ import type { TutorialProgressApi } from '../../../learning/tutorial/progress';
 import { TutorialDefinition, unsupported } from '../../../learning/tutorial/registry';
 import { useTutorialController } from '../../../learning/tutorial/useTutorialController';
 import type { GameId } from '../../../learning/types';
-import { appTheme as t } from '../../../theme';
+import { makeStyles, useTheme } from '../../../ui/theme';
 import { Button } from '../../../ui/kit';
 import { GameScreen } from '../GameScreen';
 
@@ -43,6 +43,8 @@ type Load = { state: 'loading' } | { state: 'ready'; def: TutorialDefinition } |
  * wrong one.
  */
 export function InteractiveTutorial({ game, petId, petLevel, prefs, startLabel = 'Bắt đầu chơi', onStart, onClose, progress, onSkip, busy }: Props) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const [load, setLoad] = useState<Load>({ state: 'loading' });
   const [attempt, setAttempt] = useState(0);
   const reload = useCallback(() => setAttempt((n) => n + 1), []);
@@ -112,6 +114,7 @@ function Played({ def, petId, petLevel, prefs, startLabel, onStart, onClose, pro
 
 function Round({ def, petId, petLevel, prefs, startLabel, onStart, onClose, progress, onSkip, busy, onOutdated, onReplay }: Omit<Props, 'game'> & {
   def: TutorialDefinition; startLabel: string; onOutdated: () => void; onReplay: () => void }) {
+  const styles = useStyles();
   const outdated = useRef(onOutdated);
   outdated.current = onOutdated;
   const demo = useMemo(() => new DemoSession(def, (turnId, answer, event) =>
@@ -148,9 +151,9 @@ function Round({ def, petId, petLevel, prefs, startLabel, onStart, onClose, prog
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   fill: { flex: 1 },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12, padding: 24 },
   title: { fontSize: 20, fontWeight: '900', color: t.ink, textAlign: 'center' },
   muted: { fontSize: 14, color: t.muted, textAlign: 'center', lineHeight: 20 },
-});
+}));

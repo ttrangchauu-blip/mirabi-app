@@ -8,12 +8,12 @@ import { LIFE_MIN_AGE, lifeEligible } from '../../life/access';
 import { petById } from '../../pets';
 import { useRoomPrefs } from '../../room/prefs';
 import { gradeLabel } from '../../studyProfile';
-import { appTheme as t } from '../../theme';
 import { radius, type as typeScale } from '../../ui/design';
 import { Avatar, Button, Card, formatNumber, ScreenHeader, SectionHeader } from '../../ui/kit';
 import { useWeather, weatherNote } from '../../world/weather';
 import { ToggleRow } from '../together/ui';
 import { FeatureGroup, FeatureRow, InfoRow } from './FeatureRow';
+import { makeStyles, useTheme } from '../../ui/theme';
 
 /** The tools for adult life (docs/MIRABI_LIFE.md): shown only to users aged 16 and over (life/access.ts). The others of
  * the six worlds live where they belong: Góc thư giãn in the pet's home, Phiêu lưu in Khám phá, Thị trấn in Bạn bè. */
@@ -36,6 +36,8 @@ type Props = {
  * that there is nothing yet (InfoRow). The garden, the room and friends aren't here: they are places of Cuộc sống Mirabi.
  */
 export function MoreTab({ user, onOpenProfile, onOpenStudyProfile, onOpenFocus, onOpenNotebook, onOpenTeamQuests, onOpenAlbum, onOpenAchievements, onOpenStreak, onOpenStatistics, onOpenArchive, onOpenInvite, onOpenSettings, life, onOpenJournal, onOpenEducationAdmin }: Props) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const confirmLogout = useConfirmLogout();
   const pet = petById(user.pet);
   const prefs = useRoomPrefs(user.id);
@@ -107,7 +109,7 @@ export function MoreTab({ user, onOpenProfile, onOpenStudyProfile, onOpenFocus, 
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   flex: { flex: 1, minWidth: 0 },
   pressed: { opacity: 0.88 },
   profile: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 14 },
@@ -118,4 +120,4 @@ const styles = StyleSheet.create({
   hintText: { flex: 1, ...typeScale.caption, color: t.accent },
   note: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 10 },
   noteText: { flex: 1, ...typeScale.caption, fontWeight: '600', color: t.muted },
-});
+}));

@@ -6,11 +6,13 @@ import { errorMessage } from '../../auth/messages';
 import { PetArt } from '../../components/PetArt';
 import { Text, TextInput } from '../../components/Typography';
 import type { Presence, PublicUser } from '../../studyTogether/types';
-import { appTheme as t } from '../../theme';
 import { AppModal } from '../../ui/AppModal';
 import { Button, IconCircle, IconName } from '../../ui/kit';
+import { makeStyles, useTheme } from '../../ui/theme';
 
 export function BackHeader({ title, subtitle, onBack, right }: { title: string; subtitle?: string; onBack: () => void; right?: React.ReactNode }) {
+  const { t } = useTheme();
+  const s = useStyles();
   return (
     <View style={s.header}>
       <Pressable onPress={onBack} hitSlop={10} accessibilityRole="button" accessibilityLabel="Quay lại" style={s.back}>
@@ -26,10 +28,14 @@ export function BackHeader({ title, subtitle, onBack, right }: { title: string; 
 }
 
 export function LoadingState({ label = 'Đang tải…' }: { label?: string }) {
+  const { t } = useTheme();
+  const s = useStyles();
   return <View style={s.state} accessibilityLiveRegion="polite"><ActivityIndicator color={t.accent} /><Text style={s.stateText}>{label}</Text></View>;
 }
 
 export function ErrorState({ error, onRetry }: { error: unknown; onRetry: () => void }) {
+  const { t } = useTheme();
+  const s = useStyles();
   return (
     <View style={s.state} accessibilityLiveRegion="polite">
       <IconCircle name="cloud-offline-outline" color={t.danger} bg={t.dangerBg} />
@@ -40,6 +46,7 @@ export function ErrorState({ error, onRetry }: { error: unknown; onRetry: () => 
 }
 
 export function EmptyState({ icon, title, body, action }: { icon: IconName; title: string; body?: string; action?: React.ReactNode }) {
+  const s = useStyles();
   return (
     <View style={s.empty}>
       <IconCircle name={icon} />
@@ -62,6 +69,7 @@ const PRESENCE: Record<PresenceWord, { color: string; label: string }> = {
 };
 
 export function PresenceLabel({ presence }: { presence: PresenceWord }) {
+  const s = useStyles();
   const p = PRESENCE[presence];
   return (
     <View style={s.presence}>
@@ -73,6 +81,7 @@ export function PresenceLabel({ presence }: { presence: PresenceWord }) {
 
 /** A person shown by their pet (the app's identity), never by photo or contact details. */
 export function PetAvatar({ user, size = 48 }: { user: Pick<PublicUser, 'pet' | 'pet_level'>; size?: number }) {
+  const s = useStyles();
   return (
     <View style={[s.petAvatar, { width: size, height: size, borderRadius: size / 2.6 }]}>
       <PetArt pet={user.pet} size={size * 0.9} stage={user.pet_level} still />
@@ -81,6 +90,7 @@ export function PetAvatar({ user, size = 48 }: { user: Pick<PublicUser, 'pet' | 
 }
 
 export function PersonRow({ user, subtitle, right, children }: { user: PublicUser; subtitle?: React.ReactNode; right?: React.ReactNode; children?: React.ReactNode }) {
+  const s = useStyles();
   return (
     <View style={s.personRow}>
       <PetAvatar user={user} size={46} />
@@ -97,8 +107,10 @@ export function PersonRow({ user, subtitle, right, children }: { user: PublicUse
 export function SmallButton({ title, onPress, variant = 'secondary', icon, disabled, loading }: {
   title: string; onPress: () => void; variant?: 'primary' | 'secondary' | 'danger'; icon?: IconName; disabled?: boolean; loading?: boolean;
 }) {
-  const color = variant === 'primary' ? '#FFFFFF' : variant === 'danger' ? t.danger : t.accent;
-  const bg = variant === 'primary' ? t.accent : variant === 'danger' ? t.dangerBg : t.tint;
+  const { t } = useTheme();
+  const s = useStyles();
+  const color = variant === 'primary' ? t.onPrimary : variant === 'danger' ? t.danger : t.accent;
+  const bg = variant === 'primary' ? s.smallPrimary.backgroundColor : variant === 'danger' ? t.dangerBg : t.tint;
   return (
     <Pressable onPress={onPress} disabled={disabled || loading} accessibilityRole="button" accessibilityLabel={title}
       accessibilityState={{ disabled: !!(disabled || loading), busy: !!loading }}
@@ -110,10 +122,12 @@ export function SmallButton({ title, onPress, variant = 'secondary', icon, disab
 }
 
 export function Field({ label, error, hint, ...props }: React.ComponentProps<typeof TextInput> & { label: string; error?: string | null; hint?: string }) {
+  const { t } = useTheme();
+  const s = useStyles();
   return (
     <View style={s.field}>
       <Text style={s.label}>{label}</Text>
-      <TextInput placeholderTextColor="#7F95A8" accessibilityLabel={label} {...props}
+      <TextInput placeholderTextColor={t.placeholder} accessibilityLabel={label} {...props}
         style={[s.input, !!error && s.inputError, props.style]} />
       {error ? <Text style={s.error} accessibilityLiveRegion="polite">{error}</Text> : hint ? <Text style={s.hint}>{hint}</Text> : null}
     </View>
@@ -124,6 +138,8 @@ export function Field({ label, error, hint, ...props }: React.ComponentProps<typ
 export function Stepper({ label, value, min, max, step = 1, unit, onChange }: {
   label: string; value: number; min: number; max: number; step?: number; unit?: string; onChange: (v: number) => void;
 }) {
+  const { t } = useTheme();
+  const s = useStyles();
   const set = (v: number) => onChange(Math.min(max, Math.max(min, v)));
   return (
     <View style={s.stepper} accessible accessibilityRole="adjustable" accessibilityLabel={label}
@@ -144,21 +160,28 @@ export function Stepper({ label, value, min, max, step = 1, unit, onChange }: {
   );
 }
 
-export function ToggleRow({ label, description, value, onChange }: { label: string; description?: string; value: boolean; onChange: (v: boolean) => void }) {
+/** A switch with what it does. `disabled` greys it out and keeps its value; `note` says why it can't act right now. */
+export function ToggleRow({ label, description, value, onChange, disabled, note, testID }: { label: string; description?: string; value: boolean;
+  onChange: (v: boolean) => void; disabled?: boolean; note?: string; testID?: string }) {
+  const { t } = useTheme();
+  const s = useStyles();
   return (
-    <View style={s.toggle}>
+    <View style={[s.toggle, disabled && s.toggleDisabled]}>
       <View style={s.flex}>
         <Text style={s.toggleLabel}>{label}</Text>
         {description ? <Text style={s.hint}>{description}</Text> : null}
+        {note ? <Text style={s.toggleNote}>{note}</Text> : null}
       </View>
-      <Switch value={value} onValueChange={onChange} accessibilityLabel={label} trackColor={{ true: '#7CC0E6', false: '#D6E2EA' }}
-        thumbColor={value ? t.accent : '#FFFFFF'} />
+      <Switch value={value} onValueChange={onChange} disabled={disabled} accessibilityLabel={label} accessibilityState={{ checked: value, disabled: !!disabled }}
+        testID={testID} trackColor={{ true: t.switchOn, false: t.switchOff }} thumbColor={value ? t.accent : t.thumbOff} />
     </View>
   );
 }
 
 /** A bottom sheet with a list of choices (report reason, quest template, friends to invite…). */
 export function OptionSheet({ visible, title, onClose, children }: { visible: boolean; title: string; onClose: () => void; children: React.ReactNode }) {
+  const { t } = useTheme();
+  const s = useStyles();
   const insets = useSafeAreaInsets();
   return (
     <AppModal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
@@ -175,6 +198,8 @@ export function OptionSheet({ visible, title, onClose, children }: { visible: bo
 }
 
 export function OptionRow({ label, description, icon, selected, onPress }: { label: string; description?: string; icon?: IconName; selected?: boolean; onPress: () => void }) {
+  const { t } = useTheme();
+  const s = useStyles();
   return (
     <Pressable onPress={onPress} style={({ pressed }) => [s.option, pressed && s.pressed]} accessibilityRole={selected === undefined ? 'button' : 'checkbox'}
       accessibilityState={selected === undefined ? undefined : { checked: selected }} accessibilityLabel={label}>
@@ -188,10 +213,10 @@ export function OptionRow({ label, description, icon, selected, onPress }: { lab
   );
 }
 
-export const s = StyleSheet.create({
+const useStyles = makeStyles(({ t, dark }) => StyleSheet.create({
   flex: { flex: 1 },
   header: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 16 },
-  back: { width: 44, height: 44, borderRadius: 16, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
+  back: { width: 44, height: 44, borderRadius: 16, backgroundColor: t.card, alignItems: 'center', justifyContent: 'center' },
   title: { fontSize: 22, fontWeight: '900', color: t.ink },
   subtitle: { fontSize: 13, color: t.muted, marginTop: 1 },
   state: { alignItems: 'center', gap: 10, paddingVertical: 36 },
@@ -207,12 +232,13 @@ export const s = StyleSheet.create({
   personSub: { fontSize: 12, color: t.muted, marginTop: 2 },
   small: { flexDirection: 'row', alignItems: 'center', gap: 5, minHeight: 36, paddingHorizontal: 12, borderRadius: 12 },
   smallText: { fontSize: 13, fontWeight: '800' },
+  smallPrimary: { backgroundColor: t.accentFill },
   dimmed: { opacity: 0.5 },
   pressed: { opacity: 0.85, transform: [{ scale: 0.98 }] },
   field: { marginBottom: 14 },
   label: { fontSize: 14, fontWeight: '800', color: t.ink, marginBottom: 6 },
-  input: { backgroundColor: t.bg, borderRadius: 14, borderWidth: 1.5, borderColor: 'transparent', paddingHorizontal: 14, minHeight: 48, fontSize: 16, color: t.ink },
-  inputError: { borderColor: t.danger, backgroundColor: '#FFF7F9' },
+  input: { backgroundColor: dark ? t.inputBg : t.bg, borderRadius: 14, borderWidth: 1.5, borderColor: dark ? t.inputBorder : 'transparent', paddingHorizontal: 14, minHeight: 48, fontSize: 16, color: t.ink },
+  inputError: { borderColor: t.danger, backgroundColor: dark ? t.dangerBg : '#FFF7F9' },
   error: { color: t.danger, fontSize: 13, marginTop: 5, fontWeight: '700' },
   hint: { color: t.muted, fontSize: 12, marginTop: 3, lineHeight: 17 },
   stepper: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingVertical: 6, minHeight: 52 },
@@ -222,11 +248,13 @@ export const s = StyleSheet.create({
   stepUnit: { fontSize: 12, fontWeight: '700', color: t.muted },
   toggle: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 10, minHeight: 52 },
   toggleLabel: { fontSize: 15, fontWeight: '700', color: t.ink },
-  backdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(18,59,92,0.35)' },
-  sheet: { position: 'absolute', left: 0, right: 0, bottom: 0, backgroundColor: '#FFFFFF', borderTopLeftRadius: 26,
+  toggleDisabled: { opacity: 0.5 },
+  toggleNote: { color: t.danger, fontSize: 12, fontWeight: '700', marginTop: 3, lineHeight: 17 },
+  backdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: t.scrim },
+  sheet: { position: 'absolute', left: 0, right: 0, bottom: 0, backgroundColor: t.card, borderTopLeftRadius: 26,
     borderTopRightRadius: 26, padding: 20 },
   sheetHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 },
   sheetTitle: { fontSize: 18, fontWeight: '900', color: t.ink },
   option: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 10, minHeight: 52 },
   optionLabel: { fontSize: 15, fontWeight: '800', color: t.ink },
-});
+}));

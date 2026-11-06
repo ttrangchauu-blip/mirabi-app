@@ -5,8 +5,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { PetArt } from '../../components/PetArt';
 import { Text } from '../../components/Typography';
 import type { Friend } from '../../studyTogether/types';
-import { appTheme as t } from '../../theme';
-import { radius, tones, type as typeScale } from '../../ui/design';
+import { radius, type Tone, type as typeScale } from '../../ui/design';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { useAtmosphere } from '../../world/atmosphere';
 import { ContactShadow, Plate } from '../../world/diorama';
 import { Rain, Snow, WeatherChip } from '../../world/living';
@@ -37,6 +37,7 @@ const SHOWN = 6;
 /** Bạn bè: a street with a house per friend, on top of what was already the friends screen (requests, codes, the list).
  * A tap on a house goes straight in; everything else about a friend stays in their menu in the list. */
 export function FriendsSpace({ top, initialTab, onVisit, onVisitGarden, onOpenStudyRoom, onRequestsChanged, onOpenFeed, onOpenTown }: Props) {
+  const s = useStyles();
   const [friends, setFriends] = useState<Friend[] | null>(null);
   return (
     <ScrollView style={s.fill} contentContainerStyle={[s.body, { paddingTop: top + 10 }]} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled" testID="friends-space">
@@ -51,8 +52,9 @@ export function FriendsSpace({ top, initialTab, onVisit, onVisitGarden, onOpenSt
   );
 }
 
-function Tile({ icon, title, subtitle, tone, onPress, testID }: { icon: 'newspaper' | 'business'; title: string; subtitle: string; tone: keyof typeof tones; onPress: () => void; testID?: string }) {
-  const c = tones[tone];
+function Tile({ icon, title, subtitle, tone, onPress, testID }: { icon: 'newspaper' | 'business'; title: string; subtitle: string; tone: Tone; onPress: () => void; testID?: string }) {
+  const s = useStyles();
+  const c = useTheme().tones[tone];
   return (
     <Pressable onPress={onPress} style={({ pressed }) => [s.tile, pressed && s.pressed]} accessibilityRole="button" accessibilityLabel={`${title}: ${subtitle}`} testID={testID}>
       <LinearGradient colors={[c.from, c.to]} style={s.tileIcon}><Ionicons name={icon} size={18} color={c.ink} /></LinearGradient>
@@ -65,6 +67,8 @@ function Tile({ icon, title, subtitle, tone, onPress, testID }: { icon: 'newspap
 }
 
 const Street = memo(function Street({ friends, onVisit }: { friends: Friend[] | null; onVisit: (userId: number) => void }) {
+  const { t } = useTheme();
+  const s = useStyles();
   const { reading } = useWeather();
   const { hours, mood, light: c, night } = useAtmosphere(reading);
   const [width, setWidth] = useState(0);
@@ -112,6 +116,7 @@ const Street = memo(function Street({ friends, onVisit }: { friends: Friend[] | 
 
 /** The rendered street, moving with the houses: the land, then a patch with a house for each friend. Its lamps glow after dark. */
 const StreetLand = memo(function StreetLand({ length, tall, top, houses, night }: { length: number; tall: number; top: number; houses: number; night: boolean }) {
+  const s = useStyles();
   const art = STREET_ART[night ? 'night' : 'day'];
   return (
     <View style={[StyleSheet.absoluteFill, s.clip]} pointerEvents="none">
@@ -125,7 +130,8 @@ const StreetLand = memo(function StreetLand({ length, tall, top, houses, night }
   );
 });
 
-const s = StyleSheet.create({
+// The street, its sky, weather and lamp glow are the scene; the name chips and the note over it are interface glass.
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   fill: { flex: 1 },
   flex: { flex: 1, minWidth: 0 },
   body: { paddingHorizontal: 16, paddingBottom: 28 },
@@ -137,14 +143,14 @@ const s = StyleSheet.create({
   pet: { position: 'absolute', width: PET_SIZE, alignItems: 'center' },
   petShadow: { position: 'absolute', bottom: 0 },
   nameRow: { position: 'absolute', width: NAME_MARGIN * 2, alignItems: 'center' },
-  nameChip: { flexDirection: 'row', alignItems: 'center', gap: 3, maxWidth: NAME_MARGIN * 2, paddingHorizontal: 7, paddingVertical: 1, borderRadius: radius.pill, backgroundColor: 'rgba(255,255,255,0.92)' },
+  nameChip: { flexDirection: 'row', alignItems: 'center', gap: 3, maxWidth: NAME_MARGIN * 2, paddingHorizontal: 7, paddingVertical: 1, borderRadius: radius.pill, backgroundColor: t.glass },
   houseName: { ...typeScale.micro, color: t.ink, flexShrink: 1 },
   emptyStreet: { position: 'absolute', left: 24, right: 24, top: 118 },
-  emptyText: { ...typeScale.caption, color: t.ink, textAlign: 'center', backgroundColor: 'rgba(255,255,255,0.94)', borderRadius: radius.sm, padding: 8 },
+  emptyText: { ...typeScale.caption, color: t.ink, textAlign: 'center', backgroundColor: t.glass, borderRadius: radius.sm, padding: 8 },
   streetChip: { position: 'absolute', top: 6, right: 8 },
   tiles: { flexDirection: 'row', gap: 10, marginBottom: 12 },
-  tile: { flex: 1, minWidth: 0, flexDirection: 'row', alignItems: 'center', gap: 10, padding: 10, borderRadius: radius.lg, backgroundColor: '#FFFFFF' },
+  tile: { flex: 1, minWidth: 0, flexDirection: 'row', alignItems: 'center', gap: 10, padding: 10, borderRadius: radius.lg, backgroundColor: t.card },
   tileIcon: { width: 36, height: 36, borderRadius: radius.sm, alignItems: 'center', justifyContent: 'center' },
   tileTitle: { ...typeScale.label, fontSize: 14, color: t.ink },
   tileSub: { ...typeScale.micro, fontWeight: '600', color: t.muted },
-});
+}));

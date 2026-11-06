@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Animated, Easing, StyleSheet, View } from 'react-native';
-import { authTheme } from '../theme';
+import { useTheme } from '../ui/theme';
 import { useReduceMotion } from './useReduceMotion';
 
 // Positions are percentages so the field adapts to any screen size.
@@ -30,10 +30,11 @@ function Spark({ top, left, size, delay, color, animate }: (typeof SPARKS)[numbe
 
 /** Decorative particle field. Hidden from screen readers; static when the OS "reduce motion" setting is on. */
 export function Sparkles() {
+  const { auth } = useTheme();
   const animate = !useReduceMotion();
   return (
     <View style={StyleSheet.absoluteFill} pointerEvents="none" accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
-      {SPARKS.map((s, i) => <Spark key={i} {...s} color={authTheme.sparkle[i % authTheme.sparkle.length]} animate={animate} />)}
+      {SPARKS.map((s, i) => <Spark key={i} {...s} color={auth.sparkle[i % auth.sparkle.length]} animate={animate} />)}
     </View>
   );
 }

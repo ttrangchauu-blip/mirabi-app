@@ -671,14 +671,15 @@ describe('the navigation', () => {
     expect(journal).toHaveBeenCalledTimes(1);
   });
 
-  it('Cài đặt: each row opens its screen, and language and dark mode are plain facts', () => {
-    const openers = { onOpenProfile: jest.fn(), onChangePassword: jest.fn(), onOpenNotifications: jest.fn(), onOpenPrivacy: jest.fn(), onOpenHelp: jest.fn() };
+  it('Cài đặt: each row opens its screen, and the lines say what is set', async () => {
+    mockServer({ 'GET /api/world/preferences': { status: 200, body: { version: 1, settings: { notifications: { enabled: false, focus: true, pet: true, achievements: true, friends: true } } } } });
+    const openers = { onOpenProfile: jest.fn(), onChangePassword: jest.fn(), onOpenNotifications: jest.fn(), onOpenNotificationSettings: jest.fn(), onOpenLanguage: jest.fn(), onOpenAppearance: jest.fn(), onOpenPrivacy: jest.fn(), onOpenHelp: jest.fn() };
     wrap(<SettingsScreen user={USER as any} onBack={() => {}} {...openers} />);
-    for (const id of ['profile', 'password', 'notifications', 'privacy', 'help']) fireEvent.press(screen.getByTestId(`open-${id}`));
+    for (const id of ['profile', 'password', 'notifications', 'notification-settings', 'language', 'appearance', 'privacy', 'help']) fireEvent.press(screen.getByTestId(`open-${id}`));
     for (const opener of Object.values(openers)) expect(opener).toHaveBeenCalledTimes(1);
-    expect(screen.getByLabelText(/^Ngôn ngữ: Tiếng Việt/)).toBeTruthy();
-    expect(screen.getByLabelText(/^Chế độ tối: .*Sắp có$/)).toBeTruthy();
-    expect(screen.queryByRole('button', { name: /Ngôn ngữ|Chế độ tối/ })).toBeNull();
+    expect(screen.getByLabelText(/^Ngôn ngữ: Theo ngôn ngữ của máy · Tiếng Việt$/)).toBeTruthy();
+    expect(await screen.findByLabelText('Thông báo: Đang tắt')).toBeTruthy();
+    expect(screen.getByLabelText('Giao diện: Theo thiết bị')).toBeTruthy();
   });
 
   const SOCIAL = { id: 1, display_name: 'Lan', public_code: 'ABCD2345', presence_visibility: 'friends', share_study_stats: true, discoverable: true, allow_room_visits: true, allow_study_invites: true };

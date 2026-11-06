@@ -5,7 +5,7 @@ import { PetArt } from '../components/PetArt';
 import { drawnActions } from '../petSprites';
 import { Text } from '../components/Typography';
 import type { Turn } from '../learning/types';
-import { appTheme as t } from '../theme';
+import { makeStyles, useTheme } from '../ui/theme';
 import { Battery, Beaker, Bulb, ColdBox, HotPlate, LabBackdrop, Magnet, Material, MaterialKind, Pot, Screen, Switch, Torch, WateringCan } from './art/magicLab';
 import { FieldLines, Puff, WaterDrop, ZapSpark } from './art/effects';
 import { Sparkle } from './art/mathBattle';
@@ -63,6 +63,8 @@ export function PartArt({ art, size, lit }: { art: string; size: number; lit?: b
 }
 
 export function MagicLab({ turn, disabled, feedback, onSubmit, solved, petId, petLevel, reduceMotion, demo }: Props) {
+  const { t } = useTheme();
+  const styles = useStyles();
   // The experiment on the bench: the open one, or the one just done (it shows working until "Tiếp theo").
   const sound = useSfx();
   const done = useRef<{ turn: Turn; placed: Record<string, string> } | null>(null);
@@ -159,7 +161,7 @@ export function MagicLab({ turn, disabled, feedback, onSubmit, solved, petId, pe
         <Animated.View style={[styles.petBox, pet.style]}><PetArt pet={petId} size={58} stage={petLevel} still={reduceMotion} leap={pet.leap} cheer={pet.cheer} /></Animated.View>
         <View style={styles.bubble} accessibilityRole="text">
           <View style={styles.sceneHead}>
-            <Ionicons name="flask" size={13} color="#5141A8" />
+            <Ionicons name="flask" size={13} color={styles.sceneName.color} />
             <Text style={styles.sceneName}>{SCENE_NAME[scene] ?? 'Thí nghiệm'}</Text>
           </View>
           <Text style={styles.goal}>{prompt.aim}</Text>
@@ -226,6 +228,7 @@ function Place({ slot, at, size, part, wrong, locked, onUnplace, lit, children, 
   slot: Slot; at: { x: number; y: number }; size: number; part?: Part; wrong: boolean; locked: boolean; onUnplace: (s: string) => void;
   lit?: boolean; children?: React.ReactNode; spark?: boolean; reduceMotion?: boolean;
 }) {
+  const styles = useStyles();
   const pop = useRef(new Animated.Value(0)).current;
   const partId = part?.id;
   const seen = useRef(partId);
@@ -258,6 +261,7 @@ function Place({ slot, at, size, part, wrong, locked, onUnplace, lit, children, 
 
 /** What a wrong setup does: a grey puff over `at` (and, in a circuit, a dead spark). */
 function Fizzle({ at, value, dead = false }: { at: { x: number; y: number }; value: Animated.Value; dead?: boolean }) {
+  const styles = useStyles();
   return (
     <Animated.View pointerEvents="none" style={[styles.fizzle, { left: at.x - 26, top: at.y - 26, opacity: value,
       transform: [{ translateY: value.interpolate({ inputRange: [0, 1], outputRange: [-14, 0] }) }, { scale: value.interpolate({ inputRange: [0, 1], outputRange: [1.25, 0.8] }) }] }]}
@@ -271,6 +275,7 @@ function Fizzle({ at, value, dead = false }: { at: { x: number; y: number }; val
 // --- Mạch điện ------------------------------------------------------------------------------------------------------
 
 function CircuitScene({ W, slots, placed, partOf, wrong, run, fizzle, onUnplace, locked, reduceMotion }: SceneProps) {
+  const styles = useStyles();
   const box = { l: W * 0.16, t: 46, r: W * 0.84, b: STAGE_H - 46 };
   const at: Record<string, { x: number; y: number }> = {
     power: { x: box.l, y: (box.t + box.b) / 2 }, lamp: { x: (box.l + box.r) / 2, y: box.t },
@@ -338,6 +343,7 @@ function CircuitScene({ W, slots, placed, partOf, wrong, run, fizzle, onUnplace,
 // --- Ánh sáng và bóng -----------------------------------------------------------------------------------------------
 
 function ShadowScene({ W, slots, placed, partOf, wrong, run, fizzle, onUnplace, locked, prompt, reduceMotion }: SceneProps) {
+  const styles = useStyles();
   const y = STAGE_H * 0.5;
   const torch = { x: W * 0.13, y };
   const screen = { x: W * 0.86, y };
@@ -373,6 +379,7 @@ const BEAKER: Record<string, { state: 'ice' | 'water' | 'boiling' | 'steam'; lev
 };
 
 function WaterScene({ W, slots, placed, partOf, wrong, run, fizzle, locked, onUnplace, prompt, reduceMotion }: SceneProps) {
+  const styles = useStyles();
   const from = (prompt as { from?: string }).from ?? 'water';
   const to = (prompt as { to?: string }).to ?? 'ice';
   const tool = partOf(placed[slots[0]?.id]);
@@ -422,6 +429,7 @@ const STATE_NAME: Record<string, string> = { ice: 'Thể rắn (đá)', water: '
 // --- Hạt nảy mầm -----------------------------------------------------------------------------------------------------
 
 function PlantScene({ W, slots, placed, partOf, wrong, run, fizzle, onUnplace, locked, reduceMotion }: SceneProps) {
+  const styles = useStyles();
   const stages = slots.map((s) => Number(partOf(placed[s.id])?.art.split(':')[1] ?? 0));
   const last = Math.max(1, slots.length);
   // Growing: the seed is sown and watered (the drops fall, the soil darkens), then the big pot shows each stage placed,
@@ -485,6 +493,7 @@ const MAGNET = 78;
  * ones fly up and stick under its poles while what was left on the bench stays put; a wrong one: the magnet comes
  * close, nothing moves, it goes back. */
 function MagnetScene({ W, slots, placed, partOf, wrong, run, fizzle, onUnplace, locked, reduceMotion, parts, ran }: SceneProps) {
+  const styles = useStyles();
   const bench = STAGE_H * 0.74;
   const placeX = (i: number) => (slots.length === 1 ? W * 0.5 : W * (0.38 + i * 0.24));
   const mx = W * 0.5;
@@ -537,14 +546,15 @@ function MagnetScene({ W, slots, placed, partOf, wrong, run, fizzle, onUnplace, 
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, tones, dark }) => StyleSheet.create({
   wrap: { gap: 10, paddingVertical: 4 },
   flex: { flex: 1 },
   assistant: { flexDirection: 'row', alignItems: 'flex-end', gap: 8 },
   petBox: { width: 64, alignItems: 'center' },
-  bubble: { flex: 1, backgroundColor: '#FFFFFF', borderRadius: 16, borderBottomLeftRadius: 4, padding: 10, borderWidth: 1.5, borderColor: '#D9E2F0' },
+  bubble: { flex: 1, backgroundColor: t.card, borderRadius: 16, borderBottomLeftRadius: 4, padding: 10, borderWidth: 1.5,
+    borderColor: dark ? t.border : '#D9E2F0' },
   sceneHead: { flexDirection: 'row', alignItems: 'center', gap: 4 },
-  sceneName: { fontSize: 12, fontWeight: '900', color: '#5141A8' },
+  sceneName: { fontSize: 12, fontWeight: '900', color: tones.lilac.ink },
   goal: { fontSize: 15, fontWeight: '800', color: t.ink, lineHeight: 20 },
   area: { gap: 10 },
   stage: { borderRadius: 22, overflow: 'hidden', backgroundColor: '#FDF3E1' },
@@ -555,8 +565,8 @@ const styles = StyleSheet.create({
   electron: { position: 'absolute', left: -4, top: -4, width: 8, height: 8, borderRadius: 4, backgroundColor: '#FFF7C2', borderWidth: 1.5, borderColor: '#F2A93B' },
   place: { position: 'absolute', borderRadius: 16, alignItems: 'center', justifyContent: 'center' },
   placeEmpty: { borderWidth: 2, borderStyle: 'dashed', borderColor: '#9AA8BC', backgroundColor: 'rgba(255,255,255,0.75)' },
-  placeOver: { borderColor: t.accent, backgroundColor: 'rgba(214,236,255,0.95)', transform: [{ scale: 1.08 }] },
-  placeWrong: { borderWidth: 2, borderStyle: 'solid', borderColor: t.danger, backgroundColor: 'rgba(255,214,220,0.9)' },
+  placeOver: { borderColor: '#136FA8', backgroundColor: 'rgba(214,236,255,0.95)', transform: [{ scale: 1.08 }] },
+  placeWrong: { borderWidth: 2, borderStyle: 'solid', borderColor: '#B4234F', backgroundColor: 'rgba(255,214,220,0.9)' },
   placeFill: { alignItems: 'center', justifyContent: 'center' },
   placeLabel: { fontSize: 11, fontWeight: '900', color: '#6B7A90', textAlign: 'center', paddingHorizontal: 2 },
   fizzle: { position: 'absolute', width: 52, height: 52, alignItems: 'center', justifyContent: 'center' },
@@ -569,27 +579,29 @@ const styles = StyleSheet.create({
   benchPart: { opacity: 0.95 },
   beam: { position: 'absolute', backgroundColor: 'rgba(255,236,150,0.55)', borderRadius: 30 },
   shadowSpot: { position: 'absolute', width: 40, height: 60, borderRadius: 10 },
-  stateTag: { position: 'absolute', top: 8, fontSize: 12, fontWeight: '900', color: '#1559A8', backgroundColor: 'rgba(255,255,255,0.9)', paddingHorizontal: 8,
+  stateTag: { position: 'absolute', top: 8, fontSize: 12, fontWeight: '900', color: dark ? t.info : '#1559A8',
+    backgroundColor: dark ? t.glass : 'rgba(255,255,255,0.9)', paddingHorizontal: 8,
     paddingVertical: 2, borderRadius: 10, overflow: 'hidden' },
   vapour: { position: 'absolute', top: 6, width: 10, height: 18, borderRadius: 6, backgroundColor: 'rgba(230,240,255,0.9)' },
   can: { position: 'absolute', right: -40, top: -10 },
   timeline: { position: 'absolute', top: 14, flexDirection: 'row', flexWrap: 'wrap', gap: 6, justifyContent: 'center', padding: 8, borderRadius: 16,
-    backgroundColor: 'rgba(255,255,255,0.9)', borderWidth: 1.5, borderColor: '#E3D3B8' },
+    backgroundColor: dark ? t.glass : 'rgba(255,255,255,0.9)', borderWidth: 1.5, borderColor: dark ? t.glassBorder : '#E3D3B8' },
   step: { alignItems: 'center', gap: 2 },
-  stepNo: { fontSize: 12, fontWeight: '900', color: '#6B7A90' },
+  stepNo: { fontSize: 12, fontWeight: '900', color: dark ? t.muted : '#6B7A90' },
   stepDone: { color: t.success },
-  tray: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, justifyContent: 'center', padding: 8, borderRadius: 18, backgroundColor: '#EFE3CF', minHeight: 96 },
-  trayEmpty: { alignSelf: 'center', color: '#8A7A62', fontWeight: '800' },
-  part: { width: 84, minHeight: 86, borderRadius: 14, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', padding: 4, borderWidth: 1.5,
-    borderColor: '#E3D3B8' },
+  tray: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, justifyContent: 'center', padding: 8, borderRadius: 18,
+    backgroundColor: dark ? tones.sun.from : '#EFE3CF', minHeight: 96 },
+  trayEmpty: { alignSelf: 'center', color: dark ? t.muted : '#8A7A62', fontWeight: '800' },
+  part: { width: 84, minHeight: 86, borderRadius: 14, backgroundColor: t.card, alignItems: 'center', justifyContent: 'center', padding: 4, borderWidth: 1.5,
+    borderColor: dark ? t.border : '#E3D3B8' },
   partName: { fontSize: 11, fontWeight: '800', color: t.ink, textAlign: 'center' },
   pressed: { opacity: 0.85, transform: [{ scale: 0.96 }] },
   note: { flexDirection: 'row', alignItems: 'flex-start', gap: 8, borderRadius: 14, padding: 10, backgroundColor: t.dangerBg },
   noteText: { flex: 1, fontSize: 14, fontWeight: '700', lineHeight: 20, color: t.danger },
   actions: { flexDirection: 'row', gap: 8 },
   primary: { minHeight: 46, borderRadius: 14, backgroundColor: '#5141A8', alignItems: 'center', justifyContent: 'center', paddingHorizontal: 14 },
-  primaryText: { color: '#FFFFFF', fontWeight: '900', fontSize: 15 },
+  primaryText: { color: t.onPrimary, fontWeight: '900', fontSize: 15 },
   secondary: { minHeight: 46, borderRadius: 14, backgroundColor: t.tint, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 14 },
   secondaryText: { color: t.accent, fontWeight: '900', fontSize: 14 },
   dimmed: { opacity: 0.45 },
-});
+}));

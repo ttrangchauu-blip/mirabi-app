@@ -8,9 +8,9 @@ import { PetArt } from '../../components/PetArt';
 import { Text, TextInput } from '../../components/Typography';
 import { completionQueue, workApi } from '../../life/api';
 import type { Priority, ProjectTheme, WorkChest, WorkDashboard, WorkProject, WorkStatistics, WorkTask } from '../../life/types';
-import { appTheme as t } from '../../theme';
 import { useConfirm } from '../../ui/ConfirmDialog';
 import { Button, Chip, ProgressBar, Segmented } from '../../ui/kit';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { useToast } from '../../ui/Toast';
 import type { FocusTimer } from '../main/MainApp';
 import { showError } from '../main/shared';
@@ -63,6 +63,8 @@ function dueLabel(task: WorkTask): string | null {
 export function WorkQuestScreen({ user, timer, onBack, onRewards, onOpenInventory }: Props) {
   const toast = useToast();
   const confirm = useConfirm();
+  const { t, tones } = useTheme();
+  const s = useStyles();
   const [data, setData] = useState<WorkDashboard | null>(null);
   const [error, setError] = useState<unknown>(null);
   // Completions shown done on screen while the server hasn't confirmed them (sending, or waiting for a connection).
@@ -228,20 +230,20 @@ export function WorkQuestScreen({ user, timer, onBack, onRewards, onOpenInventor
           <View style={s.desktop} testID="mission-board">
             <DeskSurface />
             <View style={s.deskEdge} />
-            <Paper style={s.ledger}>
+            <Paper tint={t.card} style={s.ledger}>
               <View style={s.statsRow} accessible accessibilityLabel={`Hôm nay xong ${todayDone} trên ${data.tasks_today.length} nhiệm vụ, tập trung ${data.summary.focus_minutes_today} phút`}>
-                <Stat icon="flag" color="#B56F12" value={`${todayDone}/${data.tasks_today.length}`} label="Nhiệm vụ" />
-                <Stat icon="timer-outline" color="#136FA8" value={`${data.summary.focus_minutes_today}'`} label="Tập trung" />
-                <Stat icon="sparkles" color="#6A3FB5" value={`${data.summary.exp_remaining_today}`} label="EXP còn nhận" />
+                <Stat icon="flag" color={tones.sun.ink} value={`${todayDone}/${data.tasks_today.length}`} label="Nhiệm vụ" />
+                <Stat icon="timer-outline" color={t.accent} value={`${data.summary.focus_minutes_today}'`} label="Tập trung" />
+                <Stat icon="sparkles" color={tones.lilac.ink} value={`${data.summary.exp_remaining_today}`} label="EXP còn nhận" />
               </View>
               <WalkHint walk={data.walk} />
             </Paper>
-            <Carved right={
+            <Carved onWood right={
               <Pressable onPress={() => setCreating({ project: null })} style={s.addPill} accessibilityRole="button" accessibilityLabel="Nhận nhiệm vụ mới">
-                <Ionicons name="add" size={18} color="#123B5C" /><Text style={s.addPillText}>Thêm note</Text>
+                <Ionicons name="add" size={18} color={t.ink} /><Text style={s.addPillText}>Thêm note</Text>
               </Pressable>}>Trên bàn hôm nay</Carved>
             {board.length === 0 ? (
-              <Paper style={s.boardEmpty}>
+              <Paper tint={t.card} style={s.boardEmpty}>
                 <Text style={s.boardEmptyTitle}>Bảng nhiệm vụ đang trống</Text>
                 <Text style={s.boardEmptyText}>Viết note đầu tiên của hôm nay, pet sẽ cùng bạn hoàn thành!</Text>
                 <Button title="Ghim nhiệm vụ" icon="add" onPress={() => setCreating({ project: null })} />
@@ -301,7 +303,7 @@ export function WorkQuestScreen({ user, timer, onBack, onRewards, onOpenInventor
 
             {data.upcoming.length ? <>
               <Carved>Sắp tới</Carved>
-              <Paper style={s.upcomingSheet}>
+              <Paper tint={t.card} style={s.upcomingSheet}>
                 {data.upcoming.slice(0, 6).map((task) => (
                   <Pressable key={task.occurrence_id} onPress={() => setDetail(task)} style={s.upcoming} accessibilityRole="button" accessibilityLabel={`${task.title}, ngày ${task.scheduled_date}`}>
                     <View style={[s.dot, { backgroundColor: priorityOf(task.priority).color }]} />
@@ -357,6 +359,8 @@ function DeskSurface() {
 function DeskScene({ user, timer, focusing, line, burst, celebrating }: {
   user: User; timer: FocusTimer; focusing: boolean; line: string; burst: number; celebrating: boolean;
 }) {
+  const { t } = useTheme();
+  const s = useStyles();
   const [size, onLayout] = useSize({ width: 390, height: 236 });
   const width = size.width;
   // Exactly the picture's shape, so the glass and the screen stay where the picture has them.
@@ -394,11 +398,11 @@ function DeskScene({ user, timer, focusing, line, burst, celebrating }: {
           {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
         </Text>
         <Pressable onPress={timer.toggle} style={s.timerBtn} accessibilityRole="button" accessibilityLabel={timer.running ? 'Tạm dừng tập trung' : 'Bắt đầu tập trung'}>
-          <Ionicons name={timer.running ? 'pause' : 'play'} size={18} color="#FFFFFF" />
+          <Ionicons name={timer.running ? 'pause' : 'play'} size={18} color={t.onPrimary} />
         </Pressable>
         {timer.running || timer.activeCycle ? (
           <Pressable onPress={timer.reset} style={[s.timerBtn, s.timerStop]} accessibilityRole="button" accessibilityLabel="Kết thúc phiên tập trung">
-            <Ionicons name="stop" size={16} color="#123B5C" />
+            <Ionicons name="stop" size={16} color={t.ink} />
           </Pressable>
         ) : null}
       </View>
@@ -407,6 +411,7 @@ function DeskScene({ user, timer, focusing, line, burst, celebrating }: {
 }
 
 function Stat({ icon, color, value, label }: { icon: React.ComponentProps<typeof Ionicons>['name']; color: string; value: string; label: string }) {
+  const s = useStyles();
   return (
     <View style={s.stat}>
       <Ionicons name={icon} size={18} color={color} />
@@ -418,6 +423,8 @@ function Stat({ icon, color, value, label }: { icon: React.ComponentProps<typeof
 
 /** How the day's goals stand for the pet's exploration (the same rule as everywhere: every goal of today). */
 function WalkHint({ walk }: { walk: WorkDashboard['walk'] }) {
+  const { t } = useTheme();
+  const s = useStyles();
   const text = walk.status === 'walking' ? 'Pet đang đi khám phá, sẽ mang quà về cho bạn!'
     : walk.status === 'rested' ? 'Pet đã đi khám phá hôm nay rồi.'
     : walk.status === 'returned' ? 'Pet đã về, mở quà ở Trang chủ nhé!'
@@ -425,7 +432,7 @@ function WalkHint({ walk }: { walk: WorkDashboard['walk'] }) {
     : walk.goals_total ? `Xong ${walk.goals_done}/${walk.goals_total} mục tiêu hôm nay để pet đi khám phá.` : 'Thêm mục tiêu hôm nay để pet đi khám phá.';
   return (
     <View style={s.walkHint}>
-      <Ionicons name="compass" size={16} color="#22703A" />
+      <Ionicons name="compass" size={16} color={t.success} />
       <Text style={s.walkHintText}>{text}</Text>
     </View>
   );
@@ -433,13 +440,15 @@ function WalkHint({ walk }: { walk: WorkDashboard['walk'] }) {
 
 /** Rewriting a note: its title, how long it should take, its deadline. */
 function TaskEditor({ task, onSave, onCancel }: { task: WorkTask; onSave: (body: Partial<Pick<WorkTask, 'title' | 'due_at' | 'estimated_minutes'>>) => void; onCancel: () => void }) {
+  const { t } = useTheme();
+  const s = useStyles();
   const [title, setTitle] = useState(task.title);
   const [estimate, setEstimate] = useState<number | null>(task.estimated_minutes);
   const [due, setDue] = useState<DuePreset | 'keep'>('keep');
   const name = title.trim();
   return (
     <View style={s.detail} testID="task-editor">
-      <TextInput value={title} onChangeText={setTitle} maxLength={120} style={s.input} accessibilityLabel="Tên nhiệm vụ" placeholder="Tên nhiệm vụ" placeholderTextColor="#7F95A8" />
+      <TextInput value={title} onChangeText={setTitle} maxLength={120} style={s.input} accessibilityLabel="Tên nhiệm vụ" placeholder="Tên nhiệm vụ" placeholderTextColor={t.placeholder} />
       <Text style={s.detailLabel}>Thời gian dự kiến</Text>
       <View style={s.chipRow}>
         <Chip label="Không đặt" selected={estimate === null} onPress={() => setEstimate(null)} />
@@ -465,6 +474,8 @@ function TaskDetail({ task, done, onClose, onComplete, onToggleStep, onRemove, o
   onPriority: (task: WorkTask, p: Priority) => void;
   onEdit: (task: WorkTask, body: Partial<Pick<WorkTask, 'title' | 'due_at' | 'estimated_minutes'>>) => void;
 }) {
+  const { t } = useTheme();
+  const s = useStyles();
   const [editing, setEditing] = useState(false);
   useEffect(() => { setEditing(false); }, [task?.occurrence_id]);
   return (
@@ -479,7 +490,7 @@ function TaskDetail({ task, done, onClose, onComplete, onToggleStep, onRemove, o
           {task.steps.map((step) => (
             <Pressable key={step.id} onPress={() => onToggleStep(task, step.id, !step.done)} style={s.stepRow} accessibilityRole="checkbox"
               accessibilityState={{ checked: step.done }} accessibilityLabel={step.title}>
-              <Ionicons name={step.done ? 'checkbox' : 'square-outline'} size={22} color={step.done ? '#22703A' : t.muted} />
+              <Ionicons name={step.done ? 'checkbox' : 'square-outline'} size={22} color={step.done ? t.success : t.muted} />
               <Text style={[s.stepTitle, step.done && s.stepDone]}>{step.title}</Text>
             </Pressable>
           ))}
@@ -502,6 +513,7 @@ function ProjectSheet({ project, onClose, onAddTask, onUpdate }: {
   project: WorkProject | null; onClose: () => void; onAddTask: (p: WorkProject) => void;
   onUpdate: (p: WorkProject, body: Partial<Pick<WorkProject, 'status'>>) => void;
 }) {
+  const s = useStyles();
   return (
     <OptionSheet visible={!!project} title={project?.name ?? ''} onClose={onClose}>
       {project ? (
@@ -523,6 +535,8 @@ function ProjectSheet({ project, onClose, onAddTask, onUpdate }: {
 }
 
 function NewProjectSheet({ visible, onClose, onCreated }: { visible: boolean; onClose: () => void; onCreated: () => void }) {
+  const { t } = useTheme();
+  const s = useStyles();
   const [name, setName] = useState('');
   const [theme, setTheme] = useState<ProjectTheme>('meadow');
   const [saving, setSaving] = useState(false);
@@ -531,7 +545,7 @@ function NewProjectSheet({ visible, onClose, onCreated }: { visible: boolean; on
     <OptionSheet visible={visible} title="Khám phá hòn đảo mới" onClose={onClose}>
       <View style={s.detail}>
         <View style={s.projectHero}><ProjectIslandArt theme={theme} stage={0} lit={false} size={120} /></View>
-        <TextInput value={name} onChangeText={setName} placeholder="Tên dự án" placeholderTextColor="#7F95A8" maxLength={60} style={s.input}
+        <TextInput value={name} onChangeText={setName} placeholder="Tên dự án" placeholderTextColor={t.placeholder} maxLength={60} style={s.input}
           accessibilityLabel="Tên dự án" />
         <View style={s.chipRow}>{THEMES.map((x) => <Chip key={x.id} label={x.label} selected={theme === x.id} onPress={() => setTheme(x.id)} />)}</View>
         <Button title="Tạo đảo" icon="boat-outline" loading={saving} disabled={!name.trim()} onPress={async () => {
@@ -546,6 +560,7 @@ function NewProjectSheet({ visible, onClose, onCreated }: { visible: boolean; on
 }
 
 function StatsSheet({ visible, onClose }: { visible: boolean; onClose: () => void }) {
+  const s = useStyles();
   const [period, setPeriod] = useState<WorkStatistics['period']>('week');
   const [stats, setStats] = useState<WorkStatistics | null>(null);
   const [error, setError] = useState<unknown>(null);
@@ -583,6 +598,7 @@ function StatsSheet({ visible, onClose }: { visible: boolean; onClose: () => voi
 
 /** Placeholder blocks while the world loads; they shimmer unless motion is reduced. */
 function WorkSkeleton({ compact = false }: { compact?: boolean }) {
+  const s = useStyles();
   const pulse = useLoop(800);
   const opacity = pulse ? pulse.interpolate({ inputRange: [0, 1], outputRange: [0.45, 0.9] }) : 0.6;
   return (
@@ -592,35 +608,38 @@ function WorkSkeleton({ compact = false }: { compact?: boolean }) {
   );
 }
 
-const s = StyleSheet.create({
-  fill: { flex: 1, backgroundColor: '#EAF7FD' },
+// The desk, its wood, the window, the notes, the sea of islands and the shelf are the picture and stay as drawn; what is
+// read off them (the speech bubble, the timer, the ledger, the sheets) follows the theme. Text lying straight on the light
+// wood of the desk keeps its dark ink in both.
+const useStyles = makeStyles(({ t, tones }) => StyleSheet.create({
+  fill: { flex: 1, backgroundColor: t.bg },
   content: { paddingBottom: 120 },
   scene: { overflow: 'hidden', backgroundColor: '#F2E6D3' },
-  bubble: { position: 'absolute', top: 12, right: 12, left: '42%', backgroundColor: '#FFFFFF', borderRadius: 12, paddingHorizontal: 10, paddingVertical: 7, shadowColor: '#1F6E9E', shadowOpacity: 0.22, shadowRadius: 5, shadowOffset: { width: 0, height: 3 }, elevation: 3 },
-  bubbleTail: { position: 'absolute', left: -6, bottom: 12, width: 12, height: 12, backgroundColor: '#FFFFFF', transform: [{ rotate: '45deg' }] },
-  bubbleText: { color: '#123B5C', fontSize: 13, fontWeight: '800', lineHeight: 18 },
-  timerDock: { position: 'absolute', right: 10, bottom: 6, flexDirection: 'row', alignItems: 'center', gap: 6, backgroundColor: 'rgba(255,255,255,0.96)', borderRadius: 22, paddingLeft: 12, paddingRight: 4, paddingVertical: 4, borderWidth: 1, borderColor: '#C5E2F2' },
-  timerText: { fontSize: 17, fontWeight: '900', color: '#136FA8', fontVariant: ['tabular-nums'] },
-  timerBtn: { width: 36, height: 36, borderRadius: 18, backgroundColor: '#136FA8', alignItems: 'center', justifyContent: 'center' },
-  timerStop: { backgroundColor: '#EAF7FD' },
+  bubble: { position: 'absolute', top: 12, right: 12, left: '42%', backgroundColor: t.card, borderRadius: 12, paddingHorizontal: 10, paddingVertical: 7, shadowColor: t.shadow, shadowOpacity: 0.22, shadowRadius: 5, shadowOffset: { width: 0, height: 3 }, elevation: 3 },
+  bubbleTail: { position: 'absolute', left: -6, bottom: 12, width: 12, height: 12, backgroundColor: t.card, transform: [{ rotate: '45deg' }] },
+  bubbleText: { color: t.ink, fontSize: 13, fontWeight: '800', lineHeight: 18 },
+  timerDock: { position: 'absolute', right: 10, bottom: 6, flexDirection: 'row', alignItems: 'center', gap: 6, backgroundColor: t.glass, borderRadius: 22, paddingLeft: 12, paddingRight: 4, paddingVertical: 4, borderWidth: 1, borderColor: t.border },
+  timerText: { fontSize: 17, fontWeight: '900', color: t.accent, fontVariant: ['tabular-nums'] },
+  timerBtn: { width: 36, height: 36, borderRadius: 18, backgroundColor: t.accentFill, alignItems: 'center', justifyContent: 'center' },
+  timerStop: { backgroundColor: t.bg },
   desktop: { paddingTop: 20, paddingBottom: 16, overflow: 'visible', zIndex: 2 },
   deskEdge: { position: 'absolute', left: 0, right: 0, top: 0, height: 7, backgroundColor: '#E3CBA8', borderBottomWidth: 2, borderBottomColor: '#C9AB84' },
   ledger: { marginHorizontal: 14, marginBottom: 14, paddingVertical: 8, paddingHorizontal: 8, gap: 6, transform: [{ rotate: '-0.4deg' }] },
   statsRow: { flexDirection: 'row', gap: 4 },
   stat: { flex: 1, alignItems: 'center', gap: 1 },
-  statValue: { fontSize: 16, lineHeight: 20, fontWeight: '900', color: '#123B5C' },
-  statLabel: { fontSize: 11, lineHeight: 14, fontWeight: '700', color: '#4F6C86' },
+  statValue: { fontSize: 16, lineHeight: 20, fontWeight: '900', color: t.ink },
+  statLabel: { fontSize: 11, lineHeight: 14, fontWeight: '700', color: t.muted },
   walkHint: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 4 },
-  walkHintText: { flex: 1, color: '#22703A', fontSize: 12, lineHeight: 16, fontWeight: '700' },
-  addPill: { flexDirection: 'row', alignItems: 'center', gap: 3, backgroundColor: '#C6E6F8', borderRadius: 999, paddingHorizontal: 12, minHeight: 40, borderWidth: 1, borderColor: '#C5E2F2' },
-  addPillText: { color: '#123B5C', fontWeight: '900', fontSize: 13 },
+  walkHintText: { flex: 1, color: t.success, fontSize: 12, lineHeight: 16, fontWeight: '700' },
+  addPill: { flexDirection: 'row', alignItems: 'center', gap: 3, backgroundColor: tones.sky.to, borderRadius: 999, paddingHorizontal: 12, minHeight: 40, borderWidth: 1, borderColor: t.border },
+  addPillText: { color: t.ink, fontWeight: '900', fontSize: 13 },
   cards: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', rowGap: 16, paddingHorizontal: 14, paddingTop: 6 },
   dragHint: { fontSize: 11, lineHeight: 15, fontWeight: '700', color: '#123B5C', textAlign: 'center', paddingHorizontal: 16, marginTop: 14 },
   boardEmpty: { alignItems: 'center', marginHorizontal: 14, gap: 6 },
-  boardEmptyTitle: { fontSize: 16, fontWeight: '900', color: '#123B5C' },
-  boardEmptyText: { fontSize: 13, lineHeight: 18, color: '#4F6C86', textAlign: 'center' },
-  wall: { backgroundColor: '#EAF7FD', paddingTop: 16, gap: 8 },
-  mapFrame: { marginHorizontal: 14, marginBottom: 14, borderRadius: 22, overflow: 'hidden', borderWidth: 4, borderColor: '#FFFFFF' },
+  boardEmptyTitle: { fontSize: 16, fontWeight: '900', color: t.ink },
+  boardEmptyText: { fontSize: 13, lineHeight: 18, color: t.muted, textAlign: 'center' },
+  wall: { backgroundColor: t.bg, paddingTop: 16, gap: 8 },
+  mapFrame: { marginHorizontal: 14, marginBottom: 14, borderRadius: 22, overflow: 'hidden', borderWidth: 4, borderColor: t.card },
   sea: { gap: 14, padding: 10 },
   island: { width: 132, alignItems: 'center' },
   islandName: { fontSize: 13, fontWeight: '900', color: '#06324D', marginTop: -6, maxWidth: 128 },
@@ -632,8 +651,8 @@ const s = StyleSheet.create({
   chests: { gap: 8, paddingHorizontal: 14, paddingTop: 8 },
   chest: { width: 96, alignItems: 'center', gap: 2, paddingBottom: 4 },
   chestShadow: { marginTop: -8 },
-  chestName: { fontSize: 12, fontWeight: '900', color: '#123B5C' },
-  chestMeta: { fontSize: 11, fontWeight: '800', color: '#136FA8' },
+  chestName: { fontSize: 12, fontWeight: '900', color: t.ink },
+  chestMeta: { fontSize: 11, fontWeight: '800', color: t.accent },
   upcomingSheet: { marginHorizontal: 14, marginBottom: 8, paddingVertical: 6 },
   upcoming: { flexDirection: 'row', alignItems: 'center', gap: 10, minHeight: 44 },
   dot: { width: 10, height: 10, borderRadius: 5 },
@@ -646,9 +665,9 @@ const s = StyleSheet.create({
   stepTitle: { flex: 1, fontSize: 15, color: t.ink },
   stepDone: { color: t.muted, textDecorationLine: 'line-through' },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  doneNote: { fontSize: 15, fontWeight: '800', color: '#22703A' },
+  doneNote: { fontSize: 15, fontWeight: '800', color: t.success },
   projectHero: { alignItems: 'center' },
-  input: { backgroundColor: '#FFFFFF', borderRadius: 14, borderWidth: 1.5, borderColor: t.border, paddingHorizontal: 14, paddingVertical: 12, fontSize: 15, color: t.ink },
+  input: { backgroundColor: t.inputBg, borderRadius: 14, borderWidth: 1.5, borderColor: t.inputBorder, paddingHorizontal: 14, paddingVertical: 12, fontSize: 15, color: t.ink },
   rewardList: { gap: 10 },
   rewardItem: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   rewardName: { fontSize: 15, fontWeight: '800', color: t.ink },
@@ -659,5 +678,5 @@ const s = StyleSheet.create({
   bar: { width: '80%', borderRadius: 4, backgroundColor: '#E09A2B' },
   barLabel: { fontSize: 9, color: t.muted },
   skeleton: { gap: 12, paddingTop: 8, paddingHorizontal: 16 },
-  skeletonBlock: { borderRadius: 18, backgroundColor: '#EAF7FD' },
-});
+  skeletonBlock: { borderRadius: 18, backgroundColor: t.bg },
+}));

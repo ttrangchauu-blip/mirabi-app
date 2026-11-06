@@ -6,8 +6,8 @@ import { PetCompanion } from '../../components/PetCompanion';
 import { Text } from '../../components/Typography';
 import { useReduceMotion } from '../../components/useReduceMotion';
 import { rarityOf } from '../../inventory/rarity';
-import { appTheme as t } from '../../theme';
 import type { PendingPetReward } from './usePetReward';
+import { makeStyles, useTheme } from '../../ui/theme';
 
 type Props = {
   reward: PendingPetReward; petId: string; petName: string; petLevel: number; confirming: boolean; error: string | null;
@@ -24,6 +24,8 @@ type Props = {
  * tapped for the gifts to be kept.
  */
 export function PetRewardPopup({ reward, petId, petName, petLevel, confirming, error, onClose, onOpenInventory }: Props) {
+  const { t, tones } = useTheme();
+  const styles = useStyles();
   const reduceMotion = useReduceMotion();
   const appear = useRef(new Animated.Value(reduceMotion ? 1 : 0)).current;
   const bag = useRef(new Animated.Value(reduceMotion ? 1 : 0)).current;
@@ -62,7 +64,7 @@ export function PetRewardPopup({ reward, petId, petName, petLevel, confirming, e
         <Text style={styles.message}>{message}</Text>
         <ScrollView style={styles.listBox} contentContainerStyle={styles.list}>
           {reward.exp > 0 ? <View style={styles.row}>
-            <View style={[styles.icon, { backgroundColor: '#FFF4CD' }]}><Ionicons name="sparkles" size={20} color="#A46A0A" /></View>
+            <View style={[styles.icon, { backgroundColor: tones.sun.from }]}><Ionicons name="sparkles" size={20} color={tones.sun.ink} /></View>
             <Text style={styles.name}>+{reward.exp} EXP</Text>
           </View> : null}
           {reward.items.map((item, i) => {
@@ -93,7 +95,7 @@ export function PetRewardPopup({ reward, petId, petName, petLevel, confirming, e
           </Pressable>
           <Pressable onPress={onOpenInventory} disabled={confirming} accessibilityRole="button" accessibilityLabel="Xem kho đồ"
             accessibilityState={{ busy: confirming, disabled: confirming }} style={({ pressed }) => [styles.button, styles.primary, pressed && styles.pressed, confirming && styles.busy]}>
-            {confirming ? <ActivityIndicator color="#FFFFFF" /> : <Ionicons name="cube" size={18} color="#FFFFFF" />}
+            {confirming ? <ActivityIndicator color={t.onPrimary} /> : <Ionicons name="cube" size={18} color={t.onPrimary} />}
             <Text style={styles.primaryText}>Xem kho đồ</Text>
           </Pressable>
         </View>
@@ -102,19 +104,19 @@ export function PetRewardPopup({ reward, petId, petName, petLevel, confirming, e
   );
 }
 
-const styles = StyleSheet.create({
-  backdrop: { backgroundColor: 'rgba(10,36,56,0.5)', alignItems: 'center', justifyContent: 'center', padding: 24 },
-  card: { width: '100%', maxWidth: 360, maxHeight: '92%', backgroundColor: '#FFFFFF', borderRadius: 28, padding: 22, alignItems: 'center',
-    shadowColor: '#0A2438', shadowOpacity: 0.25, shadowRadius: 30, shadowOffset: { width: 0, height: 12 }, elevation: 12 },
+const useStyles = makeStyles(({ t, dark }) => StyleSheet.create({
+  backdrop: { backgroundColor: t.scrim, alignItems: 'center', justifyContent: 'center', padding: 24 },
+  card: { width: '100%', maxWidth: 360, maxHeight: '92%', backgroundColor: t.card, borderRadius: 28, padding: 22, alignItems: 'center',
+    shadowColor: dark ? t.shadow : '#0A2438', shadowOpacity: 0.25, shadowRadius: 30, shadowOffset: { width: 0, height: 12 }, elevation: 12 },
   hero: { height: 96, width: 150, alignItems: 'center', justifyContent: 'center', marginBottom: 4 },
   pet: { height: 92, justifyContent: 'center' },
   bag: { position: 'absolute', right: 2, bottom: 2, width: 50, height: 50, borderRadius: 25, backgroundColor: '#E2683C',
-    alignItems: 'center', justifyContent: 'center', borderWidth: 3, borderColor: '#FFFFFF' },
+    alignItems: 'center', justifyContent: 'center', borderWidth: 3, borderColor: t.card },
   title: { fontSize: 21, fontWeight: '900', color: t.ink, textAlign: 'center' },
   message: { fontSize: 14, lineHeight: 21, color: t.muted, textAlign: 'center', marginTop: 6 },
   listBox: { alignSelf: 'stretch', marginTop: 14, flexGrow: 0 },
   list: { gap: 8 },
-  row: { flexDirection: 'row', alignItems: 'center', gap: 10, backgroundColor: '#F7FBFE', borderRadius: 16, padding: 9, borderWidth: 1.5, borderColor: '#E3EDF4' },
+  row: { flexDirection: 'row', alignItems: 'center', gap: 10, backgroundColor: t.surfaceSecondary, borderRadius: 16, padding: 9, borderWidth: 1.5, borderColor: t.border },
   icon: { width: 46, height: 46, borderRadius: 14, alignItems: 'center', justifyContent: 'center' },
   flex: { flex: 1, minWidth: 0 },
   name: { color: t.ink, fontSize: 14, fontWeight: '800' },
@@ -127,10 +129,10 @@ const styles = StyleSheet.create({
   error: { color: t.danger, fontSize: 12, lineHeight: 18, textAlign: 'center', marginTop: 12 },
   actions: { alignSelf: 'stretch', flexDirection: 'row', gap: 10, marginTop: 18 },
   button: { flex: 1, minHeight: 50, borderRadius: 16, flexDirection: 'row', gap: 8, alignItems: 'center', justifyContent: 'center' },
-  primary: { backgroundColor: t.accent },
-  primaryText: { color: '#FFFFFF', fontSize: 15, fontWeight: '800' },
-  secondary: { backgroundColor: '#E6F0F7' },
+  primary: { backgroundColor: t.accentFill },
+  primaryText: { color: t.onPrimary, fontSize: 15, fontWeight: '800' },
+  secondary: { backgroundColor: t.tint },
   secondaryText: { color: t.accent, fontSize: 15, fontWeight: '800' },
   pressed: { opacity: 0.85, transform: [{ scale: 0.98 }] },
   busy: { opacity: 0.8 },
-});
+}));

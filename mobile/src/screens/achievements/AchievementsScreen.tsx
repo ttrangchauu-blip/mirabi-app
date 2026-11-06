@@ -7,11 +7,11 @@ import { Text } from '../../components/Typography';
 import { useReduceMotion } from '../../components/useReduceMotion';
 import { Badge, MATERIAL_INK } from '../../achievements/Badge';
 import type { Achievement, AchievementsOverview, AchievementTier, ClaimAllResult, ClaimResult, Material } from '../../achievements/types';
-import { appTheme as t } from '../../theme';
 import { AppModal } from '../../ui/AppModal';
 import { Card, Chip, formatNumber, IconCircle, type IconName, ProgressBar, SectionHeader, Segmented } from '../../ui/kit';
 import { radius } from '../../ui/design';
 import { useToast } from '../../ui/Toast';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { Triumph } from '../../world/diorama';
 import { request, showError } from '../main/shared';
 
@@ -39,6 +39,10 @@ export function AchievementsScreen({ onBack, onCoins, onOpenKeepsakes }: {
   onOpenKeepsakes?: () => void;
 }) {
   const toast = useToast();
+  const { t } = useTheme();
+  const s = useStyles();
+  const ink = useMaterialInk();
+  const hero = useHero();
   const [data, setData] = useState<AchievementsOverview | null>(null);
   const [loading, setLoading] = useState(true);
   const [failed, setFailed] = useState(false);
@@ -125,7 +129,7 @@ export function AchievementsScreen({ onBack, onCoins, onOpenKeepsakes }: {
         <Pressable onPress={() => { void load(); }} style={s.primary} accessibilityRole="button"><Text style={s.primaryText}>Thử lại</Text></Pressable>
       </Card>
       : data ? <>
-        <LinearGradient colors={['#D3EEFB', '#F4FBFF', '#E2F6F4']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={s.hero}>
+        <LinearGradient colors={hero} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={s.hero}>
           <View style={s.heroTop}>
             <Badge icon="trophy" material={data.summary.unlocked ? 'gold' : null} locked={!data.summary.unlocked} size={84} />
             <View style={s.heroNumbers}>
@@ -138,11 +142,11 @@ export function AchievementsScreen({ onBack, onCoins, onOpenKeepsakes }: {
           <View style={s.materials}>
             {MATERIAL_ORDER.map((m) => <View key={m} style={s.materialCount} accessibilityLabel={`${data.tiers.find((x) => x.material === m)?.name}: ${perMaterial[m]}`}>
               <Badge icon="star" material={m} locked={!perMaterial[m]} size={30} />
-              <Text style={[s.materialNumber, { color: perMaterial[m] ? MATERIAL_INK[m] : t.muted }]}>{perMaterial[m]}</Text>
+              <Text style={[s.materialNumber, { color: perMaterial[m] ? ink[m] : t.muted }]}>{perMaterial[m]}</Text>
             </View>)}
           </View>
           {data.summary.claimable ? <Pressable onPress={() => { void claimAll(); }} disabled={!!busy} style={[s.primary, s.claimAll]} accessibilityRole="button" testID="claim-all">
-            {busy === 'all' ? <ActivityIndicator color="#FFFFFF" /> : <><Ionicons name="cash" size={16} color="#FFFFFF" />
+            {busy === 'all' ? <ActivityIndicator color={t.onPrimary} /> : <><Ionicons name="cash" size={16} color={t.onPrimary} />
               <Text style={s.primaryText}>Nhận {formatNumber(data.summary.claimable_coins)} xu từ {data.summary.claimable} cấp</Text></>}
           </Pressable> : null}
         </LinearGradient>
@@ -154,7 +158,7 @@ export function AchievementsScreen({ onBack, onCoins, onOpenKeepsakes }: {
               accessibilityLabel={`${u.title}, ${u.name}, ${dayOf(u.unlocked_at)}`}>
               <Badge icon={u.icon} material={u.material} size={56} />
               <Text numberOfLines={2} style={s.recentTitle}>{u.title}</Text>
-              <Text style={[s.tierText, { color: MATERIAL_INK[u.material] }]}>{u.name}</Text>
+              <Text style={[s.tierText, { color: ink[u.material] }]}>{u.name}</Text>
               <Text style={s.date}>{dayOf(u.unlocked_at)}</Text>
             </Pressable>)}
           </ScrollView>
@@ -222,6 +226,8 @@ export function AchievementsScreen({ onBack, onCoins, onOpenKeepsakes }: {
 
 function GroupHeader({ meta, opened, claimable, fresh, onPress }: { meta: AchievementsOverview['groups'][number]; opened: boolean;
   claimable: number; fresh: boolean; onPress: () => void }) {
+  const { t } = useTheme();
+  const s = useStyles();
   return <Pressable onPress={onPress} style={[s.groupHeader, opened && s.groupHeaderOpen]} accessibilityRole="button"
     accessibilityState={{ expanded: opened }} accessibilityLabel={`${meta.name}, ${meta.unlocked} trên ${meta.total} cấp`} testID={`group-${meta.id}`}>
     <IconCircle name={(meta.icon in Ionicons.glyphMap ? meta.icon : 'ribbon') as IconName} size={38} />
@@ -243,6 +249,9 @@ function GroupHeader({ meta, opened, claimable, fresh, onPress }: { meta: Achiev
 /** An achievement. With `onToggle` it unfolds in place (its tiers and rewards); otherwise a tap opens the sheet. */
 function Row({ a, expanded = false, onToggle, onOpen, busy = null, onClaim }: { a: Achievement; expanded?: boolean; onToggle?: () => void;
   onOpen: () => void; busy?: number | 'all' | null; onClaim?: (tier: AchievementTier) => void }) {
+  const { t } = useTheme();
+  const s = useStyles();
+  const ink = useMaterialInk();
   const look = shown(a);
   const folds = !!onToggle;
   return <View style={expanded ? s.rowOpen : undefined}>
@@ -253,7 +262,7 @@ function Row({ a, expanded = false, onToggle, onOpen, busy = null, onClaim }: { 
       <View style={s.flex}>
         <View style={s.rowHead}>
           <Text numberOfLines={1} style={[s.rowTitle, s.flexShrink]}>{a.title}</Text>
-          {a.tier ? <Text style={[s.tierPill, { color: MATERIAL_INK[look.material] }]}>{a.tier_name}</Text> : null}
+          {a.tier ? <Text style={[s.tierPill, { color: ink[look.material] }]}>{a.tier_name}</Text> : null}
           {a.new ? <Text style={s.newPill}>Mới</Text> : null}
         </View>
         <Text numberOfLines={1} style={s.goal}>{a.next ? a.next.goal : 'Đã đạt cấp cao nhất'}</Text>
@@ -262,7 +271,7 @@ function Row({ a, expanded = false, onToggle, onOpen, busy = null, onClaim }: { 
           <Text style={s.count}>{a.next ? `${formatNumber(a.progress)}/${formatNumber(a.next.threshold)}` : '✓'}</Text>
         </View>
       </View>
-      {a.claimable ? <View style={s.claimDot}><Ionicons name="cash" size={14} color="#FFFFFF" /></View> : null}
+      {a.claimable ? <View style={s.claimDot}><Ionicons name="cash" size={14} color={t.onPrimary} /></View> : null}
       <Ionicons name={!folds ? 'chevron-forward' : expanded ? 'chevron-up' : 'chevron-down'} size={18} color={t.muted} />
     </Pressable>
     {expanded ? <View style={s.unfolded} testID={`achievement-${a.id}-tiers`}>
@@ -276,17 +285,20 @@ function Row({ a, expanded = false, onToggle, onOpen, busy = null, onClaim }: { 
 }
 
 function TierLadder({ a, busy, onClaim }: { a: Achievement; busy: number | 'all' | null; onClaim?: (tier: AchievementTier) => void }) {
+  const { t } = useTheme();
+  const s = useStyles();
+  const ink = useMaterialInk();
   return <>{a.tiers.map((tier) => <View key={tier.rank} style={s.tierRow} testID={`tier-${a.id}-${tier.rank}`}>
     <Badge icon={a.icon} material={tier.material} locked={!tier.unlocked} size={38} />
     <View style={s.flex}>
-      <Text style={[s.rowTitle, !tier.unlocked && s.mutedTitle]}>{tier.title} <Text style={[s.tierText, { color: tier.unlocked ? MATERIAL_INK[tier.material] : t.muted }]}>· {tier.name}</Text></Text>
+      <Text style={[s.rowTitle, !tier.unlocked && s.mutedTitle]}>{tier.title} <Text style={[s.tierText, { color: tier.unlocked ? ink[tier.material] : t.muted }]}>· {tier.name}</Text></Text>
       <Text style={s.goal}>{tier.goal}</Text>
       <Text style={s.date}>{tier.unlocked ? `Đạt ngày ${dayOf(tier.unlocked_at)}${tier.backfilled ? ' · ghi nhận từ hành trình trước' : ''}`
         : tier.reward_coins ? `Phần thưởng: ${tier.reward_coins} xu` : 'Phần thưởng: huy hiệu'}</Text>
     </View>
     {tier.claimable && onClaim ? <Pressable onPress={() => onClaim(tier)} disabled={!!busy} style={s.claimButton} accessibilityRole="button"
       accessibilityLabel={`Nhận ${tier.reward_coins} xu`} testID={`claim-${a.id}-${tier.rank}`}>
-      {busy === tier.unlock_id ? <ActivityIndicator color="#FFFFFF" size="small" /> : <Text style={s.claimText}>+{tier.reward_coins} xu</Text>}
+      {busy === tier.unlock_id ? <ActivityIndicator color={t.onPrimary} size="small" /> : <Text style={s.claimText}>+{tier.reward_coins} xu</Text>}
     </Pressable>
       : tier.unlocked && tier.claimed_at ? <Text style={s.claimed}>Đã nhận</Text>
       : tier.unlocked ? <Ionicons name="checkmark-circle" size={20} color={t.success} /> : null}
@@ -296,6 +308,9 @@ function TierLadder({ a, busy, onClaim }: { a: Achievement; busy: number | 'all'
 function Detail({ a, group, busy, burst, onClaim, onClose }: { a: Achievement; group: string; busy: number | 'all' | null; burst: number;
   onClaim: (tier: AchievementTier) => void; onClose: () => void }) {
   const insets = useSafeAreaInsets();
+  const { t } = useTheme();
+  const s = useStyles();
+  const ink = useMaterialInk();
   const look = shown(a);
   return <AppModal visible transparent animationType="slide" onRequestClose={onClose}>
     <Pressable style={s.backdrop} onPress={onClose} accessibilityLabel="Đóng" accessibilityRole="button" />
@@ -307,7 +322,7 @@ function Detail({ a, group, busy, burst, onClaim, onClose }: { a: Achievement; g
         </View>
         <Text style={s.eyebrowCenter}>{group.toUpperCase()}</Text>
         <Text style={s.detailTitle}>{a.title}</Text>
-        <Text style={[s.detailTier, { color: a.tier ? MATERIAL_INK[look.material] : t.muted }]}>{a.tier ? `Cấp hiện tại: ${a.tier_name}` : 'Chưa mở khóa'}</Text>
+        <Text style={[s.detailTier, { color: a.tier ? ink[look.material] : t.muted }]}>{a.tier ? `Cấp hiện tại: ${a.tier_name}` : 'Chưa mở khóa'}</Text>
         <Text style={s.detailText}>{a.description}</Text>
         <View style={s.progressBox}>
           <View style={s.barRow}><Text style={s.rowTitle}>Tiến độ</Text>
@@ -323,12 +338,19 @@ function Detail({ a, group, busy, burst, onClaim, onClose }: { a: Achievement; g
   </AppModal>;
 }
 
-const s = StyleSheet.create({
+/** A material's name in its colour: the badge's own deep ink on light, its pale face colours on dark (the deep inks would
+ * not read on a dark card). */
+const useMaterialInk = makeStyles(({ dark }): Record<Material, string> => (dark
+  ? { bronze: '#E8B88E', silver: '#C9D5E0', gold: '#F7D46A', diamond: '#A9E8F8', legendary: '#DCC6FB' } : MATERIAL_INK));
+/** The summary card's soft sea gradient. */
+const useHero = makeStyles(({ t, dark }): readonly [string, string, ...string[]] => (dark ? [t.hero, t.card, t.seaFoam] : ['#D3EEFB', '#F4FBFF', '#E2F6F4']));
+
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   screen: { paddingBottom: 24 },
   flex: { flex: 1 },
   flexShrink: { flexShrink: 1 },
   topRow: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 14 },
-  round: { width: 40, height: 40, borderRadius: 20, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
+  round: { width: 40, height: 40, borderRadius: 20, backgroundColor: t.card, alignItems: 'center', justifyContent: 'center' },
   heading: { flex: 1 },
   title: { color: t.ink, fontSize: 22, lineHeight: 29, fontWeight: '900' },
   subtitle: { color: t.muted, fontSize: 13, lineHeight: 18, fontWeight: '700' },
@@ -336,9 +358,9 @@ const s = StyleSheet.create({
   empty: { alignItems: 'center', gap: 8 },
   emptyTitle: { color: t.ink, fontSize: 16, fontWeight: '900' },
   muted: { color: t.muted, fontSize: 13, lineHeight: 18, fontWeight: '600' },
-  primary: { flexDirection: 'row', gap: 8, alignItems: 'center', justifyContent: 'center', minHeight: 46, paddingHorizontal: 18, borderRadius: radius.pill, backgroundColor: t.accent },
-  primaryText: { color: '#FFFFFF', fontSize: 15, fontWeight: '900' },
-  hero: { borderRadius: radius.xl, padding: 18, gap: 14, marginBottom: 18, borderWidth: 1, borderColor: '#FFFFFF',
+  primary: { flexDirection: 'row', gap: 8, alignItems: 'center', justifyContent: 'center', minHeight: 46, paddingHorizontal: 18, borderRadius: radius.pill, backgroundColor: t.accentFill },
+  primaryText: { color: t.onPrimary, fontSize: 15, fontWeight: '900' },
+  hero: { borderRadius: radius.xl, padding: 18, gap: 14, marginBottom: 18, borderWidth: 1, borderColor: t.glassBorder,
     shadowColor: t.shadow, shadowOpacity: 0.12, shadowRadius: 14, shadowOffset: { width: 0, height: 6 }, elevation: 4 },
   heroTop: { flexDirection: 'row', alignItems: 'center', gap: 14 },
   heroNumbers: { flex: 1 },
@@ -350,7 +372,7 @@ const s = StyleSheet.create({
   materialNumber: { fontSize: 13, fontWeight: '900' },
   claimAll: { alignSelf: 'stretch' },
   recentRow: { gap: 10, paddingBottom: 6, paddingRight: 6, marginBottom: 12 },
-  recentCard: { width: 116, alignItems: 'center', padding: 10, borderRadius: radius.lg, backgroundColor: '#FFFFFF', gap: 3 },
+  recentCard: { width: 116, alignItems: 'center', padding: 10, borderRadius: radius.lg, backgroundColor: t.card, gap: 3 },
   recentTitle: { color: t.ink, fontSize: 13, lineHeight: 17, fontWeight: '900', textAlign: 'center', minHeight: 34 },
   tierText: { fontSize: 12, fontWeight: '900' },
   date: { color: t.muted, fontSize: 11, lineHeight: 15, fontWeight: '700' },
@@ -359,7 +381,7 @@ const s = StyleSheet.create({
   rowHead: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   rowTitle: { color: t.ink, fontSize: 15, lineHeight: 20, fontWeight: '800' },
   mutedTitle: { color: t.muted },
-  tierPill: { fontSize: 11, fontWeight: '900', paddingHorizontal: 7, paddingVertical: 1, borderRadius: radius.pill, backgroundColor: '#F2F7FB', overflow: 'hidden' },
+  tierPill: { fontSize: 11, fontWeight: '900', paddingHorizontal: 7, paddingVertical: 1, borderRadius: radius.pill, backgroundColor: t.surfaceSecondary, overflow: 'hidden' },
   newPill: { color: '#FFFFFF', fontSize: 10, fontWeight: '900', paddingHorizontal: 6, paddingVertical: 1, borderRadius: radius.pill, backgroundColor: '#E2557F', overflow: 'hidden' },
   goal: { color: t.muted, fontSize: 12, lineHeight: 17, fontWeight: '700' },
   barRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 4 },
@@ -370,33 +392,33 @@ const s = StyleSheet.create({
   foldBar: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8, paddingHorizontal: 4 },
   link: { color: t.accent, fontSize: 13, fontWeight: '900' },
   groupBlock: { marginBottom: 10 },
-  groupHeader: { flexDirection: 'row', alignItems: 'center', gap: 12, padding: 12, minHeight: 64, borderRadius: radius.lg, backgroundColor: '#FFFFFF',
+  groupHeader: { flexDirection: 'row', alignItems: 'center', gap: 12, padding: 12, minHeight: 64, borderRadius: radius.lg, backgroundColor: t.card,
     shadowColor: t.shadow, shadowOpacity: 0.07, shadowRadius: 10, shadowOffset: { width: 0, height: 3 }, elevation: 2 },
   groupHeaderOpen: { marginBottom: 8, borderWidth: 1, borderColor: t.border },
-  claimDotText: { color: '#FFFFFF', fontSize: 12, fontWeight: '900' },
-  rowOpen: { backgroundColor: '#F6FAFD', marginHorizontal: -12, paddingHorizontal: 12, borderRadius: radius.md },
+  claimDotText: { color: t.onPrimary, fontSize: 12, fontWeight: '900' },
+  rowOpen: { backgroundColor: t.surfaceSecondary, marginHorizontal: -12, paddingHorizontal: 12, borderRadius: radius.md },
   unfolded: { paddingLeft: 4, paddingBottom: 12, gap: 2 },
   unfoldedText: { color: t.muted, fontSize: 13, lineHeight: 18, fontWeight: '600', marginBottom: 4 },
   bigBadgeLink: { flexDirection: 'row', alignItems: 'center', gap: 6, alignSelf: 'flex-start', paddingVertical: 6 },
   grid: { flexDirection: 'row', flexWrap: 'wrap', paddingHorizontal: 6, paddingVertical: 12 },
   cell: { width: '25%', alignItems: 'center', paddingVertical: 8, paddingHorizontal: 2 },
   cellTitle: { color: t.ink, fontSize: 11, lineHeight: 14, fontWeight: '800', textAlign: 'center', marginTop: 2 },
-  newDot: { position: 'absolute', top: 8, right: 14, width: 10, height: 10, borderRadius: 5, backgroundColor: '#E2557F', borderWidth: 2, borderColor: '#FFFFFF' },
-  keepsakes: { flexDirection: 'row', alignItems: 'center', gap: 12, padding: 14, borderRadius: radius.lg, backgroundColor: '#FFFFFF', marginTop: 4 },
+  newDot: { position: 'absolute', top: 8, right: 14, width: 10, height: 10, borderRadius: 5, backgroundColor: '#E2557F', borderWidth: 2, borderColor: t.card },
+  keepsakes: { flexDirection: 'row', alignItems: 'center', gap: 12, padding: 14, borderRadius: radius.lg, backgroundColor: t.card, marginTop: 4 },
   footnote: { color: t.muted, fontSize: 12, lineHeight: 17, fontWeight: '600', textAlign: 'center', marginTop: 14, paddingHorizontal: 10 },
-  backdrop: { flex: 1, backgroundColor: 'rgba(10,36,56,0.45)' },
-  sheet: { position: 'absolute', left: 0, right: 0, bottom: 0, maxHeight: '88%', backgroundColor: '#FFFFFF', borderTopLeftRadius: 28, borderTopRightRadius: 28 },
+  backdrop: { flex: 1, backgroundColor: t.scrim },
+  sheet: { position: 'absolute', left: 0, right: 0, bottom: 0, maxHeight: '88%', backgroundColor: t.card, borderTopLeftRadius: 28, borderTopRightRadius: 28 },
   sheetBody: { padding: 20, gap: 8 },
   detailBadge: { alignItems: 'center', paddingTop: 4 },
   eyebrowCenter: { color: t.accent, fontSize: 11, fontWeight: '900', letterSpacing: 1, textAlign: 'center' },
   detailTitle: { color: t.ink, fontSize: 22, lineHeight: 29, fontWeight: '900', textAlign: 'center' },
   detailTier: { fontSize: 14, fontWeight: '900', textAlign: 'center' },
   detailText: { color: t.muted, fontSize: 14, lineHeight: 20, fontWeight: '600', textAlign: 'center' },
-  progressBox: { backgroundColor: '#F3F9FD', borderRadius: radius.md, padding: 12, gap: 4, marginTop: 4 },
+  progressBox: { backgroundColor: t.surfaceSecondary, borderRadius: radius.md, padding: 12, gap: 4, marginTop: 4 },
   ladderTitle: { color: t.ink, fontSize: 15, fontWeight: '900', marginTop: 8 },
   tierRow: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 6 },
   claimButton: { minWidth: 76, minHeight: 36, paddingHorizontal: 12, borderRadius: radius.pill, backgroundColor: '#C08A1E', alignItems: 'center', justifyContent: 'center' },
-  claimText: { color: '#FFFFFF', fontSize: 13, fontWeight: '900' },
+  claimText: { color: t.onPrimary, fontSize: 13, fontWeight: '900' },
   claimed: { color: t.success, fontSize: 12, fontWeight: '900' },
   close: { marginTop: 10 },
-});
+}));

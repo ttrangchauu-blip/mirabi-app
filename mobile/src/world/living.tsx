@@ -6,7 +6,8 @@ import { PetArt } from '../components/PetArt';
 import { Text } from '../components/Typography';
 import { petById } from '../pets';
 import { hasSprite, WALK_CYCLE_MS } from '../petSprites';
-import { elevation, glass, radius, type as typeScale } from '../ui/design';
+import { radius, type as typeScale } from '../ui/design';
+import { makeStyles, useTheme } from '../ui/theme';
 import { appTheme as t } from '../theme';
 import { useEased, useSwing, useTravel, useWorldMotion } from './budget';
 import { type ActName, actTransform, EASE, newActValues, PET_ACTS, playAct } from './motion';
@@ -338,11 +339,14 @@ function ElementMotes({ color, size }: { color: string; size: number }) {
 
 // ------------------------------------------------------------------------------------------------ small pieces
 /** The weather as it really is here, small; nothing at all when there is no reading (so it never claims a weather). */
-export function WeatherChip({ night, tone = 'dark' }: { night: boolean; tone?: 'dark' | 'light' }) {
+/** `panel` (on a panel of the interface): the theme's ink. Straight on a scene, which keeps its own daylight: `dark` ink
+ * on a bright scene, `light` (white) on a dark one, whatever the theme. */
+export function WeatherChip({ night, tone = 'panel' }: { night: boolean; tone?: 'panel' | 'dark' | 'light' }) {
   const { reading } = useWeather();
+  const themeInk = useTheme().t.ink;
   if (!reading) return null;
   const { icon, text, label } = describeWeather(reading, night);
-  const color = tone === 'dark' ? t.ink : '#FFFFFF';
+  const color = tone === 'panel' ? themeInk : tone === 'dark' ? t.ink : '#FFFFFF';
   return (
     <View style={s.chip} accessible accessibilityRole="text" accessibilityLabel={label} testID="weather-chip">
       <Ionicons name={icon} size={14} color={color} />
@@ -353,7 +357,8 @@ export function WeatherChip({ night, tone = 'dark' }: { night: boolean; tone?: '
 
 /** A panel over a scene, the same for every space. */
 export function WorldPanel({ children, style, testID }: { children: React.ReactNode; style?: object; testID?: string }) {
-  return <View style={[s.panel, style]} testID={testID}>{children}</View>;
+  const p = usePanel();
+  return <View style={[p.panel, style]} testID={testID}>{children}</View>;
 }
 
 const s = StyleSheet.create({
@@ -369,5 +374,9 @@ const s = StyleSheet.create({
   shadow: { position: 'absolute', borderRadius: 99, backgroundColor: '#2E3B2A' },
   chip: { flexDirection: 'row', alignItems: 'center', gap: 3, paddingHorizontal: 6, height: 24 },
   chipText: { ...typeScale.caption },
-  panel: { ...glass, ...elevation.floating, borderRadius: radius.md, paddingHorizontal: 10, paddingVertical: 8 },
 });
+
+/** The panel is interface, not scenery: it follows the light or dark theme (the scene under it follows the clock). */
+const usePanel = makeStyles(({ glass, elevation }) => StyleSheet.create({
+  panel: { ...glass, ...elevation.floating, borderRadius: radius.md, paddingHorizontal: 10, paddingVertical: 8 },
+}));

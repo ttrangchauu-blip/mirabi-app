@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import { Text } from '../../components/Typography';
 import { togetherApi } from '../../studyTogether/api';
 import type { Friend, Presence, TeamQuest } from '../../studyTogether/types';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { Button, ProgressBar } from '../../ui/kit';
 import { Paper, SceneHeader, SceneIn, Triumph } from '../../world/diorama';
 import { showError } from '../main/shared';
@@ -42,6 +42,8 @@ function questProgress(q: TeamQuest) {
 
 /** The common room: the goals are on the chalkboard, the people they belong to around the table. */
 export function TeamQuestsScreen() {
+  const { t } = useTheme();
+  const styles = useStyles();
   const nav = useTogetherNav();
   const [quests, setQuests] = useState<TeamQuest[] | null>(null);
   const [error, setError] = useState<unknown>(null);
@@ -79,14 +81,14 @@ export function TeamQuestsScreen() {
             </Pressable>
           ))} />
           <View style={styles.floor}>
-            <Paper style={styles.door}>
+            <Paper style={styles.door} tint={t.card}>
               <Text style={styles.doorTitle}>Phòng học chung</Text>
               <Text style={styles.sub}>Tạo phòng, mời bạn hoặc vào học cùng nhau bằng mã phòng.</Text>
               <Button title="Mở phòng học" icon="people-outline" variant="secondary" onPress={() => nav.push({ name: 'home' })} />
             </Paper>
             {quests.length > 4 ? quests.slice(4).map((q) => (
               <Pressable key={q.id} onPress={() => nav.push({ name: 'quest', questId: q.id })} accessibilityRole="button" accessibilityLabel={`${q.title}, ${q.progress} trên ${q.target} ${unit(q)}, ${STATUS[q.status]}`}>
-                <Paper style={styles.door}><Text style={styles.doorTitle}>{q.title}</Text><ProgressBar value={questProgress(q)} color={q.status === 'completed' ? t.success : t.accent} /><Text style={styles.sub}>{q.progress}/{q.target} {unit(q)} · {deadline(q)}</Text></Paper>
+                <Paper style={styles.door} tint={t.card}><Text style={styles.doorTitle}>{q.title}</Text><ProgressBar value={questProgress(q)} color={q.status === 'completed' ? t.success : t.accent} /><Text style={styles.sub}>{q.progress}/{q.target} {unit(q)} · {deadline(q)}</Text></Paper>
               </Pressable>
             )) : null}
           </View>
@@ -98,6 +100,8 @@ export function TeamQuestsScreen() {
 
 /** One goal, up close. The pets hop when the server says someone added to it; the whole room cheers when it is reached. */
 export function TeamQuestDetailScreen({ questId }: { questId: number }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const nav = useTogetherNav();
   const [quest, setQuest] = useState<TeamQuest | null>(null);
   const [error, setError] = useState<unknown>(null);
@@ -154,7 +158,7 @@ export function TeamQuestDetailScreen({ questId }: { questId: number }) {
           <Triumph play={party} size={300} style={styles.partyAt} />
         </StudyHallScene>
         <View style={styles.floor}>
-          <Paper style={styles.door}>
+          <Paper style={styles.door} tint={t.card}>
             {quest.joined ? (
               <Text style={styles.mine}>Bạn đã góp {quest.my_contribution} {unit(quest)}{quest.my_reward_exp ? ` · đã nhận ${quest.my_reward_exp} EXP` : ''}</Text>
             ) : quest.status === 'active' ? <Button title="Tham gia nhiệm vụ" icon="flag-outline" onPress={() => { void join(); }} loading={joining} />
@@ -171,8 +175,9 @@ export function TeamQuestDetailScreen({ questId }: { questId: number }) {
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   bleed: { marginHorizontal: -20 },
+  // The common room's ceiling, above the picture of the room: part of the scene.
   ceiling: { backgroundColor: '#B5DCF3' },
   flex: { flex: 1, minWidth: 0 },
   row: { flexDirection: 'row', alignItems: 'flex-start', gap: 8 },
@@ -184,10 +189,10 @@ const styles = StyleSheet.create({
   chalkState: { fontSize: 12, lineHeight: 16, fontWeight: '800', color: '#FFE9A8' },
   chalkDone: { color: '#9FE3B4' },
   partyAt: { top: '46%' },
-  floor: { backgroundColor: '#EAF7FD', padding: 14, gap: 12, minHeight: 460 },
+  floor: { backgroundColor: t.bg, padding: 14, gap: 12, minHeight: 460 },
   door: { gap: 6 },
-  doorTitle: { fontSize: 15, lineHeight: 20, fontWeight: '900', color: '#123B5C' },
-  sub: { fontSize: 13, lineHeight: 18, color: '#4F6C86' },
+  doorTitle: { fontSize: 15, lineHeight: 20, fontWeight: '900', color: t.ink },
+  sub: { fontSize: 13, lineHeight: 18, color: t.muted },
   mine: { fontSize: 14, fontWeight: '800', color: t.success },
   stat: { fontSize: 13, fontWeight: '800', color: t.muted },
-});
+}));

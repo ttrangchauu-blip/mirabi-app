@@ -9,9 +9,9 @@ import { RARITY_ORDER, rarityOf } from '../../inventory/rarity';
 import type { InventoryData, InventoryItem, InventoryTab, ItemDetail, ItemHistory, ItemUse } from '../../inventory/types';
 import { countsLabel } from '../../room/found';
 import type { RoomKind } from '../../room/types';
-import { appTheme as t } from '../../theme';
 import { AppModal } from '../../ui/AppModal';
 import { Button } from '../../ui/kit';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { EmptyState, ErrorState, LoadingState, OptionRow, OptionSheet } from '../together/ui';
 
 type Sort = 'newest' | 'name';
@@ -66,6 +66,8 @@ const keyOf = (i: Pick<InventoryItem, 'id' | 'variant'>) => `${i.id}.${i.variant
  */
 export function InventoryScreen({ userId, initialTab, onBack, placeInto, onPlace, onPlant, onOpenAlbum }: Props) {
   const insets = useSafeAreaInsets();
+  const { t } = useTheme();
+  const s = useStyles();
   const [data, setData] = useState<InventoryData | null>(null);
   const [offline, setOffline] = useState(false);
   const [error, setError] = useState<unknown>(null);
@@ -141,7 +143,7 @@ export function InventoryScreen({ userId, initialTab, onBack, placeInto, onPlace
       </ScrollView>
       <View style={s.search}>
         <Ionicons name="search" size={17} color={t.muted} />
-        <TextInput value={query} onChangeText={setQuery} placeholder="Tìm theo tên" placeholderTextColor="#7F95A8" style={s.searchInput}
+        <TextInput value={query} onChangeText={setQuery} placeholder="Tìm theo tên" placeholderTextColor={t.placeholder} style={s.searchInput}
           accessibilityLabel="Tìm theo tên" returnKeyType="search" />
         {query ? <Pressable onPress={() => setQuery('')} hitSlop={8} accessibilityRole="button" accessibilityLabel="Xóa tìm kiếm">
           <Ionicons name="close-circle" size={18} color={t.muted} /></Pressable> : null}
@@ -178,13 +180,16 @@ export function InventoryScreen({ userId, initialTab, onBack, placeInto, onPlace
 }
 
 function Filter({ icon, label, on, onPress, name }: { icon: React.ComponentProps<typeof Ionicons>['name']; label: string; on: boolean; onPress: () => void; name: string }) {
+  const { t } = useTheme();
+  const s = useStyles();
   return <Pressable onPress={onPress} style={[s.filter, on && s.filterOn]} accessibilityRole="button" accessibilityLabel={`${name}: ${label}`}>
-    <Ionicons name={icon} size={14} color={on ? '#FFFFFF' : t.accent} />
+    <Ionicons name={icon} size={14} color={on ? t.onPrimary : t.accent} />
     <Text style={[s.filterText, on && s.filterTextOn]}>{label}</Text>
   </Pressable>;
 }
 
 function ItemCard({ item, onPress }: { item: InventoryItem; onPress: () => void }) {
+  const s = useStyles();
   const rarity = rarityOf(item.rarity);
   const counts = countsLabel(item.available, item.placed);
   return (
@@ -224,6 +229,8 @@ function ItemSheet({ item, offline, placeInto, onClose, onSeen, onPlace, onPlant
   item: InventoryItem | null; offline: boolean; onClose: () => void; onSeen: (item: InventoryItem) => void;
 } & Pick<Props, 'placeInto' | 'onPlace' | 'onPlant' | 'onOpenAlbum'>) {
   const insets = useSafeAreaInsets();
+  const { t } = useTheme();
+  const s = useStyles();
   const [detail, setDetail] = useState<ItemDetail | null>(null);
   const [failed, setFailed] = useState(false);
   const [rooms, setRooms] = useState(false);
@@ -305,41 +312,42 @@ function ItemSheet({ item, offline, placeInto, onClose, onSeen, onPlace, onPlant
 }
 
 function Stat({ label, value, strong }: { label: string; value: number; strong?: boolean }) {
+  const s = useStyles();
   return <View style={[s.stat, strong && s.statStrong]} accessible accessibilityLabel={`${label}: ${value}`}>
     <Text style={[s.statValue, strong && s.statValueStrong]}>{value}</Text>
     <Text style={s.statLabel}>{label}</Text>
   </View>;
 }
 
-const s = StyleSheet.create({
+const useStyles = makeStyles(({ t, elevation }) => StyleSheet.create({
   fill: { flex: 1 },
   flex: { flex: 1, minWidth: 0 },
   header: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 20, marginBottom: 10 },
-  back: { width: 40, height: 40, borderRadius: 20, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
+  back: { width: 40, height: 40, borderRadius: 20, backgroundColor: t.card, alignItems: 'center', justifyContent: 'center' },
   title: { color: t.ink, fontSize: 22, fontWeight: '900' },
   subtitle: { color: t.muted, fontSize: 13, fontWeight: '700', marginTop: 1 },
   offline: { marginHorizontal: 20, marginBottom: 8, flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 10, paddingVertical: 7,
-    borderRadius: 14, backgroundColor: '#FFF3DF' },
-  offlineText: { flexShrink: 1, color: '#6B4A12', fontSize: 12, lineHeight: 16, fontWeight: '700' },
+    borderRadius: 14, backgroundColor: t.warningBg },
+  offlineText: { flexShrink: 1, color: t.warning, fontSize: 12, lineHeight: 16, fontWeight: '700' },
   bar: { flexGrow: 0, flexShrink: 0 },
   chips: { gap: 8, paddingHorizontal: 20, paddingBottom: 10 },
-  tab: { minHeight: 38, flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 14, borderRadius: 999, backgroundColor: '#FFFFFF',
-    borderWidth: 1.5, borderColor: '#BBD6E8' },
-  tabOn: { backgroundColor: t.accent, borderColor: t.accent },
+  tab: { minHeight: 38, flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 14, borderRadius: 999, backgroundColor: t.card,
+    borderWidth: 1.5, borderColor: t.inputBorder },
+  tabOn: { backgroundColor: t.accentFill, borderColor: t.accentFill },
   tabText: { color: t.accent, fontSize: 13, fontWeight: '800' },
   tabCount: { color: t.muted, fontSize: 12, fontWeight: '800' },
-  tabTextOn: { color: '#FFFFFF' },
+  tabTextOn: { color: t.onPrimary },
   search: { marginHorizontal: 20, marginBottom: 10, minHeight: 44, flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 12,
-    borderRadius: 14, backgroundColor: '#FFFFFF', borderWidth: 1.5, borderColor: '#C5E2F2' },
+    borderRadius: 14, backgroundColor: t.inputBg, borderWidth: 1.5, borderColor: t.inputBorder },
   searchInput: { flex: 1, minWidth: 0, color: t.ink, fontSize: 14, paddingVertical: 8 },
-  filter: { minHeight: 34, flexDirection: 'row', alignItems: 'center', gap: 5, paddingHorizontal: 12, borderRadius: 999, backgroundColor: '#E4F0F8' },
-  filterOn: { backgroundColor: t.accent },
+  filter: { minHeight: 34, flexDirection: 'row', alignItems: 'center', gap: 5, paddingHorizontal: 12, borderRadius: 999, backgroundColor: t.tint },
+  filterOn: { backgroundColor: t.accentFill },
   filterText: { color: t.accent, fontSize: 12, fontWeight: '800' },
-  filterTextOn: { color: '#FFFFFF' },
+  filterTextOn: { color: t.onPrimary },
   grid: { paddingHorizontal: 16, gap: 10 },
   row: { gap: 10 },
-  card: { flex: 1 / 3, maxWidth: '32%', backgroundColor: '#FFFFFF', borderRadius: 18, padding: 8, borderWidth: 2, alignItems: 'center',
-    shadowColor: t.shadow, shadowOpacity: 0.08, shadowRadius: 6, shadowOffset: { width: 0, height: 2 }, elevation: 1 },
+  card: { flex: 1 / 3, maxWidth: '32%', backgroundColor: t.card, borderRadius: 18, padding: 8, borderWidth: 2, alignItems: 'center',
+    shadowColor: elevation.card.shadowColor, shadowOpacity: 0.08, shadowRadius: 6, shadowOffset: { width: 0, height: 2 }, elevation: 1 },
   cardArt: { alignSelf: 'stretch', height: 76, borderRadius: 14, alignItems: 'center', justifyContent: 'center' },
   newBadge: { position: 'absolute', top: 5, left: 5, borderRadius: 99, backgroundColor: '#D6304A', paddingHorizontal: 7, paddingVertical: 2 },
   newText: { color: '#FFFFFF', fontSize: 10, fontWeight: '900' },
@@ -348,30 +356,30 @@ const s = StyleSheet.create({
   pillText: { fontSize: 10, fontWeight: '900' },
   cardCount: { color: t.muted, fontSize: 10, lineHeight: 13, fontWeight: '800', textAlign: 'center', marginTop: 4 },
   pressed: { opacity: 0.85, transform: [{ scale: 0.97 }] },
-  sheetBackdrop: { flex: 1, backgroundColor: 'rgba(10,36,56,0.45)' },
-  sheet: { position: 'absolute', left: 0, right: 0, bottom: 0, maxHeight: '86%', backgroundColor: '#FFFFFF', borderTopLeftRadius: 28, borderTopRightRadius: 28 },
+  sheetBackdrop: { flex: 1, backgroundColor: t.scrim },
+  sheet: { position: 'absolute', left: 0, right: 0, bottom: 0, maxHeight: '86%', backgroundColor: t.card, borderTopLeftRadius: 28, borderTopRightRadius: 28 },
   sheetBody: { padding: 20, gap: 12 },
   sheetHead: { flexDirection: 'row', gap: 14, alignItems: 'center' },
   bigArt: { width: 104, height: 104, borderRadius: 22, alignItems: 'center', justifyContent: 'center', borderWidth: 2 },
   sheetTitle: { color: t.ink, fontSize: 20, lineHeight: 25, fontWeight: '900' },
   tags: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 4 },
-  groupPill: { backgroundColor: '#EEF4F8' },
+  groupPill: { backgroundColor: t.surfaceSecondary },
   groupText: { color: t.ink, fontSize: 10, fontWeight: '800' },
   useText: { color: t.muted, fontSize: 12, fontWeight: '700', marginTop: 6 },
-  close: { alignSelf: 'flex-start', width: 34, height: 34, borderRadius: 17, alignItems: 'center', justifyContent: 'center', backgroundColor: '#EEF4F8' },
+  close: { alignSelf: 'flex-start', width: 34, height: 34, borderRadius: 17, alignItems: 'center', justifyContent: 'center', backgroundColor: t.surfaceSecondary },
   description: { color: t.ink, fontSize: 14, lineHeight: 21 },
   stats: { flexDirection: 'row', gap: 8 },
-  stat: { flex: 1, borderRadius: 16, backgroundColor: '#F1F6FA', paddingVertical: 10, alignItems: 'center' },
-  statStrong: { backgroundColor: '#DDF0FA' },
+  stat: { flex: 1, borderRadius: 16, backgroundColor: t.surfaceSecondary, paddingVertical: 10, alignItems: 'center' },
+  statStrong: { backgroundColor: t.tint },
   statValue: { color: t.ink, fontSize: 20, fontWeight: '900' },
   statValueStrong: { color: t.accent },
   statLabel: { color: t.muted, fontSize: 11, fontWeight: '800', marginTop: 2 },
   where: { color: t.ink, fontSize: 13, fontWeight: '700' },
-  note: { flexDirection: 'row', gap: 6, alignItems: 'flex-start', backgroundColor: '#EEF6FC', borderRadius: 14, padding: 10 },
+  note: { flexDirection: 'row', gap: 6, alignItems: 'flex-start', backgroundColor: t.infoBg, borderRadius: 14, padding: 10 },
   noteText: { flex: 1, color: t.ink, fontSize: 13, lineHeight: 18, fontWeight: '700' },
   section: { color: t.muted, fontSize: 12, fontWeight: '900', marginTop: 4, textTransform: 'uppercase' },
   history: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingVertical: 4 },
   historyText: { flex: 1, color: t.ink, fontSize: 13, fontWeight: '700' },
   historyDate: { color: t.muted, fontSize: 12, fontWeight: '700' },
   muted: { color: t.muted, fontSize: 13 },
-});
+}));

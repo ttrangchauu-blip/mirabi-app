@@ -6,7 +6,8 @@ import { Button, Chip } from '../../ui/kit';
 import { useReduceMotion } from '../../components/useReduceMotion';
 import { request } from './shared';
 import type { FocusTimer } from './MainApp';
-import { focusTheme as f } from './focusSpaceTheme';
+import { focusThemeOf } from './focusSpaceTheme';
+import { makeStyles, useTheme } from '../../ui/theme';
 
 export const studyMinutes = (seconds: number) => Math.round(seconds / 60 * 10) / 10;
 
@@ -31,16 +32,20 @@ export function useStudyStatistics(timer: FocusTimer, userId: number) {
 export type StudyStatisticsState = ReturnType<typeof useStudyStatistics>;
 
 export function StudyStatsBar({ data, onPress, triggerRef }: { data: StudyStatisticsState; onPress: () => void; triggerRef?: React.Ref<View> }) {
+  const f = focusThemeOf(useTheme().dark);
+  const s = useStyles();
   const { stats, error } = data;
   return <Pressable ref={triggerRef} testID="study-stats-bar" accessibilityRole="button" accessibilityLabel="Mở thống kê học tập" accessibilityHint="Xem biểu đồ và mục tiêu học tập" onPress={onPress} style={s.strip}>
     <View style={s.metric}><Ionicons name="time-outline" size={17} color={f.blue} /><View><Text style={s.metricValue}>{stats ? `${studyMinutes(stats.today_seconds)} phút` : '—'}</Text><Text style={s.metricLabel}>Hôm nay</Text></View></View>
-    <View style={s.metric}><Ionicons name="checkmark-circle-outline" size={17} color="#748D7B" /><View><Text style={s.metricValue}>{stats ? `${stats.today_sessions} phiên` : '—'}</Text><Text style={s.metricLabel}>Hoàn thành</Text></View></View>
-    <View style={s.metric}><Ionicons name="flame-outline" size={17} color="#A37D68" /><View><Text style={s.metricValue}>{stats ? `${stats.current_streak} ngày` : '—'}</Text><Text style={s.metricLabel}>{error ? 'Thử tải lại' : 'Chuỗi học'}</Text></View></View>
+    <View style={s.metric}><Ionicons name="checkmark-circle-outline" size={17} color={s.doneIcon.color} /><View><Text style={s.metricValue}>{stats ? `${stats.today_sessions} phiên` : '—'}</Text><Text style={s.metricLabel}>Hoàn thành</Text></View></View>
+    <View style={s.metric}><Ionicons name="flame-outline" size={17} color={s.streakIcon.color} /><View><Text style={s.metricValue}>{stats ? `${stats.current_streak} ngày` : '—'}</Text><Text style={s.metricLabel}>{error ? 'Thử tải lại' : 'Chuỗi học'}</Text></View></View>
     <Ionicons name="chevron-forward" size={16} color={f.muted} />
   </Pressable>;
 }
 
 export function PomodoroCompletion({ timer }: { timer: FocusTimer }) {
+  const f = focusThemeOf(useTheme().dark);
+  const s = useStyles();
   const reduce = useReduceMotion();
   const fade = useRef(new Animated.Value(1)).current;
   const completed = timer.completion;
@@ -66,6 +71,7 @@ export function PomodoroCompletion({ timer }: { timer: FocusTimer }) {
 
 /** Detail view lives inside the same tool panel as notes and audio. */
 export function PomodoroStatistics({ timer, data }: { timer: FocusTimer; data: StudyStatisticsState }) {
+  const s = useStyles();
   const { stats, period, setPeriod, error } = data;
   const [goal, setGoal] = useState(String(timer.dailyGoalMinutes));
   useEffect(() => { setGoal(String(timer.dailyGoalMinutes)); }, [timer.dailyGoalMinutes]);
@@ -102,16 +108,17 @@ export function PomodoroStatistics({ timer, data }: { timer: FocusTimer; data: S
   </>;
 }
 
-const s = StyleSheet.create({
-  flex: { flex: 1, minWidth: 0 }, strip: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 17, paddingHorizontal: 12, gap: 4, borderTopWidth: 1, borderTopColor: '#E8E8E2' },
+const useStyles = makeStyles(({ t, dark }) => { const f = focusThemeOf(dark); return StyleSheet.create({
+  flex: { flex: 1, minWidth: 0 }, strip: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 17, paddingHorizontal: 12, gap: 4, borderTopWidth: 1, borderTopColor: f.line },
+  doneIcon: { color: dark ? '#9FC2A8' : '#748D7B' }, streakIcon: { color: dark ? '#D9AE94' : '#A37D68' },
   metric: { flexDirection: 'row', alignItems: 'center', gap: 7 }, metricValue: { color: f.ink, fontSize: 13, fontWeight: '800' }, metricLabel: { color: f.muted, fontSize: 10, marginTop: 2 },
-  completion: { backgroundColor: '#EDF5F3', borderRadius: 18, padding: 18, gap: 6, margin: 16 }, completionHeader: { flexDirection: 'row', alignItems: 'center', gap: 10 }, close: { padding: 9 },
+  completion: { backgroundColor: dark ? t.successBg : '#EDF5F3', borderRadius: 18, padding: 18, gap: 6, margin: 16 }, completionHeader: { flexDirection: 'row', alignItems: 'center', gap: 10 }, close: { padding: 9 },
   row: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 8 }, wrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   title: { color: f.ink, fontSize: 16, fontWeight: '800' }, copy: { color: f.ink, fontSize: 13, lineHeight: 21 }, caption: { color: f.muted, fontSize: 11, lineHeight: 18 },
   label: { color: f.muted, fontSize: 12, fontWeight: '700' }, value: { color: f.ink, fontSize: 18, fontWeight: '800', marginTop: 6 }, total: { color: f.ink, fontSize: 42, fontWeight: '800', marginTop: 8 }, unit: { color: f.muted, fontSize: 15 },
   chart: { flexDirection: 'row', alignItems: 'flex-end', height: 118, gap: 3, marginTop: 12 }, column: { flex: 1, minWidth: 0, alignItems: 'center' }, barTrack: { height: 90, width: '100%', alignItems: 'center', justifyContent: 'flex-end' },
   bar: { backgroundColor: '#93B6C2', width: '70%', maxWidth: 23, borderRadius: 4 }, axis: { fontSize: 8, color: f.muted, height: 17, marginTop: 5 },
-  track: { height: 5, backgroundColor: '#E3E9E7', borderRadius: 4, overflow: 'hidden' }, progress: { backgroundColor: '#8DAF9F', height: 5, borderRadius: 4 },
-  input: { borderWidth: 1, borderColor: f.line, borderRadius: 12, padding: 12, color: f.ink, width: 80, backgroundColor: '#FFFFFF' },
+  track: { height: 5, backgroundColor: t.track, borderRadius: 4, overflow: 'hidden' }, progress: { backgroundColor: '#8DAF9F', height: 5, borderRadius: 4 },
+  input: { borderWidth: 1, borderColor: f.line, borderRadius: 12, padding: 12, color: f.ink, width: 80, backgroundColor: t.inputBg },
   divider: { height: 1, backgroundColor: f.line, marginVertical: 8 }, hour: { backgroundColor: f.cream, padding: 10, borderRadius: 10, gap: 2 },
-});
+}); });

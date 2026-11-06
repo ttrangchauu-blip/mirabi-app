@@ -4,6 +4,8 @@ import { useAudioPlayer, setAudioModeAsync } from 'expo-audio';
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
 import { ApiError } from '../../api/client';
+import { useT } from '../../i18n';
+import { permissionToSchedule } from '../../notifications/permission';
 import { request } from './shared';
 
 type PendingEvent = { cycle: string; event: 'started' | 'completed' | 'cancelled'; duration_seconds: number; timezone: string; occurred_at: string };
@@ -38,7 +40,9 @@ const initial: PomodoroState = { phase: 'focus', focusMinutes: 25, shortBreakMin
 let quietNotifications = false;
 Notifications.setNotificationHandler({ handleNotification: async () => ({ shouldShowBanner: !quietNotifications, shouldShowList: true, shouldPlaySound: !quietNotifications, shouldSetBadge: false }) });
 
-export function usePomodoroTimer(onCompleted?: () => void, userId?: number) {
+/** `notify`: Cài đặt > Thông báo allows "Phiên tập trung hoàn thành" (and notifications at all). */
+export function usePomodoroTimer(onCompleted?: () => void, userId?: number, notify = true) {
+  const t = useT();
   const [state, setState] = useState<PomodoroState>(initial);
   // One player for the whole session; tracks are swapped with replace(). Giving useAudioPlayer a new source per track
   // creates a second player, and on web the old one keeps playing underneath the new track.
@@ -108,13 +112,14 @@ export function usePomodoroTimer(onCompleted?: () => void, userId?: number) {
     let cancelled = false;
     const syncNotification = async () => {
       await cancelScheduled();
-      if (!state.running || !state.endsAt || state.endsAt <= Date.now()) return;
-      let permission = await Notifications.getPermissionsAsync();
-      if (!permission.granted) permission = await Notifications.requestPermissionsAsync();
-      if (!permission.granted || cancelled) return;
+      // Paused, stopped, skipped or cancelled: nothing stays scheduled. Turned off in Cài đặt: nothing is scheduled.
+      if (!notify || !state.running || !state.endsAt || state.endsAt <= Date.now()) return;
+      // Starting a session asks the system once, the first time; an answer already given is respected.
+      if (!(await permissionToSchedule()) || cancelled) return;
       if (Platform.OS === 'android') await Notifications.setNotificationChannelAsync('pomodoro', { name: 'Pomodoro', importance: Notifications.AndroidImportance.DEFAULT, sound: 'default' });
       const identifier = await Notifications.scheduleNotificationAsync({
-        content: { title: state.phase === 'focus' ? 'Hoàn thành phiên học!' : 'Hết giờ nghỉ!', body: state.phase === 'focus' ? 'Bạn đã hoàn thành một phiên tập trung.' : 'Sẵn sàng cho phiên học tiếp theo?', sound: 'default' },
+        content: { title: t(state.phase === 'focus' ? 'notification.focusDoneTitle' : 'notification.breakDoneTitle'),
+          body: t(state.phase === 'focus' ? 'notification.focusDoneBody' : 'notification.breakDoneBody'), sound: 'default' },
         trigger: { type: Notifications.SchedulableTriggerInputTypes.DATE, date: new Date(state.endsAt), ...(Platform.OS === 'android' ? { channelId: 'pomodoro' } : {}) },
       });
       if (cancelled) await Notifications.cancelScheduledNotificationAsync(identifier).catch(() => {});
@@ -122,7 +127,7 @@ export function usePomodoroTimer(onCompleted?: () => void, userId?: number) {
     };
     void syncNotification().catch(() => {});
     return () => { cancelled = true; };
-  }, [ready, state.running, state.endsAt, state.phase, storageKey]);
+  }, [ready, state.running, state.endsAt, state.phase, storageKey, notify, t]);
   // Signing out or switching account: this session's notification must not reach whoever comes next. If the same
   // account comes back with its timer still running, the effect above schedules it again.
   useEffect(() => () => { if (Platform.OS !== 'web') void cancelScheduled().catch(() => {}); }, [storageKey]);

@@ -1,8 +1,9 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useEffect, useSyncExternalStore } from 'react';
 import { Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaFrameContext, SafeAreaInsetsContext } from 'react-native-safe-area-context';
+import { makeStyles, useTheme } from '../ui/theme';
 import { Text } from './Typography';
 
 // Samsung Galaxy S23 Ultra: 384x824 dp (1440x3088 px at 3.75x), centred punch-hole camera, One UI status bar
@@ -12,8 +13,22 @@ import { Text } from './Typography';
 const PHONE = { width: 384, height: 824 };
 const INSETS = { top: 32, bottom: 48, left: 0, right: 0 };
 const FRAME_BREAKPOINT = 600;
+/** Status and navigation bar icons: dark on the light theme, light on the dark one. */
+const iconColor = (dark: boolean) => (dark ? '#E8EDF2' : '#1F2328');
 const BEZEL = 7;
-const ICON = '#1F2328';
+
+/** What the screen asked of the status bar (StatusBar's barStyle), for the drawn one: the web has no real status bar. */
+type BarStyle = 'dark-content' | 'light-content';
+let barStyle: BarStyle | null = null;
+const barListeners = new Set<() => void>();
+/** Call next to `<StatusBar barStyle={style} />`: the phone frame on the web draws its status bar the same way. */
+export function useMockStatusBar(style: BarStyle) {
+  useEffect(() => {
+    barStyle = style; barListeners.forEach((l) => l());
+    return () => { barStyle = null; barListeners.forEach((l) => l()); };
+  }, [style]);
+}
+const subscribeBar = (l: () => void) => { barListeners.add(l); return () => { barListeners.delete(l); }; };
 
 type Size = { width: number; height: number };
 const ViewportContext = createContext<Size | null>(null);
@@ -25,14 +40,19 @@ export function useViewportSize(): Size {
 }
 
 function StatusBarMock() {
+  const styles = useStyles();
+  const { dark } = useTheme();
+  const style = useSyncExternalStore(subscribeBar, () => barStyle, () => barStyle);
+  const lightIcons = style ? style === 'light-content' : dark;
+  const ICON = iconColor(lightIcons);
   return (
     <View style={styles.statusBar} pointerEvents="none" accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
-      <Text style={styles.clock}>12:45</Text>
+      <Text style={[styles.clock, { color: ICON }]}>12:45</Text>
       <View style={styles.punchHole}><View style={styles.lens} /></View>
       <View style={styles.statusIcons}>
         <Ionicons name="wifi" size={14} color={ICON} />
         <Ionicons name="cellular" size={13} color={ICON} />
-        <Text style={styles.batteryText}>85%</Text>
+        <Text style={[styles.batteryText, { color: ICON }]}>85%</Text>
         <View style={styles.battery}><View style={styles.batteryLevel} /></View>
       </View>
     </View>
@@ -41,6 +61,8 @@ function StatusBarMock() {
 
 /** One UI default navigation bar: Recents, Home, Back. */
 function NavBarMock() {
+  const styles = useStyles();
+  const ICON = iconColor(useTheme().dark);
   return (
     <View style={styles.navBar} pointerEvents="none" accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
       <View style={styles.recents}>{[0, 1, 2].map((i) => <View key={i} style={styles.recentsBar} />)}</View>
@@ -52,6 +74,7 @@ function NavBarMock() {
 
 export function MobileViewport({ children }: { children: React.ReactNode }) {
   const window = useWindowDimensions();
+  const styles = useStyles();
   if (Platform.OS !== 'web' || window.width < FRAME_BREAKPOINT) return <>{children}</>;
 
   const outer = { width: PHONE.width + BEZEL * 2, height: PHONE.height + BEZEL * 2 };
@@ -81,13 +104,16 @@ export function MobileViewport({ children }: { children: React.ReactNode }) {
   );
 }
 
-const styles = StyleSheet.create({
+// The page around the phone stays as it is; the phone's screen and its system bars follow the app's light or dark theme.
+const useStyles = makeStyles(({ t, dark }) => {
+  const ICON = iconColor(dark);
+  return StyleSheet.create({
   backdrop: { flex: 1, alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
   bezel: { padding: BEZEL, borderRadius: 26, backgroundColor: '#1E2124', borderWidth: 1.5, borderColor: '#3A3F44',
     shadowColor: '#0E3E5E', shadowOpacity: 0.35, shadowRadius: 40, shadowOffset: { width: 0, height: 20 } },
   button: { position: 'absolute', width: 4, borderRadius: 2, backgroundColor: '#3A3F44' },
   sPen: { position: 'absolute', bottom: -2, left: 54, width: 26, height: 3, borderRadius: 2, backgroundColor: '#4A5056' },
-  screen: { borderRadius: 18, overflow: 'hidden', backgroundColor: '#EAF7FD' },
+  screen: { borderRadius: 18, overflow: 'hidden', backgroundColor: t.bg },
   edge: { position: 'absolute', top: 0, bottom: 0, width: 7 },
   statusBar: { position: 'absolute', top: 0, left: 0, right: 0, height: INSETS.top, flexDirection: 'row', alignItems: 'center',
     justifyContent: 'space-between', paddingHorizontal: 18 },
@@ -97,11 +123,12 @@ const styles = StyleSheet.create({
   lens: { width: 5, height: 5, borderRadius: 3, backgroundColor: '#1C2533' },
   statusIcons: { flexDirection: 'row', alignItems: 'center', gap: 4 },
   batteryText: { fontSize: 12, fontWeight: '700', color: ICON, marginLeft: 2 },
-  battery: { width: 20, height: 10, borderRadius: 3, borderWidth: 1.2, borderColor: 'rgba(31,35,40,0.5)', padding: 1.2 },
+  battery: { width: 20, height: 10, borderRadius: 3, borderWidth: 1.2, borderColor: dark ? 'rgba(232,237,242,0.5)' : 'rgba(31,35,40,0.5)', padding: 1.2 },
   batteryLevel: { width: '85%', height: '100%', borderRadius: 1.5, backgroundColor: ICON },
   navBar: { position: 'absolute', bottom: 0, left: 0, right: 0, height: INSETS.bottom, flexDirection: 'row', alignItems: 'center',
-    justifyContent: 'space-around', paddingHorizontal: 28, backgroundColor: 'rgba(255,255,255,0.72)' },
+    justifyContent: 'space-around', paddingHorizontal: 28, backgroundColor: dark ? 'rgba(16,26,46,0.72)' : 'rgba(255,255,255,0.72)' },
   recents: { flexDirection: 'row', gap: 4, width: 22, justifyContent: 'center' },
   recentsBar: { width: 2, height: 14, borderRadius: 1, backgroundColor: ICON },
   home: { width: 17, height: 17, borderRadius: 6, borderWidth: 2, borderColor: ICON },
+  });
 });

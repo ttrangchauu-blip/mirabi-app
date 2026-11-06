@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from '../../components/Typography';
-import { appTheme as t } from '../../theme';
 import { Button, Card, Chip, IconCircle, IconName, ProgressBar, ScreenHeader, SectionHeader } from '../../ui/kit';
+import { makeStyles } from '../../ui/theme';
 import { Career, categoryIcon, request, showError } from './shared';
 
 // The career categories the backend scores against (backend/app/main.py CAREERS).
@@ -13,6 +13,7 @@ const INTERESTS: { label: string; icon: IconName }[] = [
 ];
 
 export function CareerTab({ careers, onResults }: { careers: Career[]; onResults: (c: Career[]) => void }) {
+  const styles = useStyles();
   const [selected, setSelected] = useState<string[]>(['Sáng tạo', 'Công nghệ']);
   const [loading, setLoading] = useState(false);
   const toggle = (label: string) => setSelected((s) => (s.includes(label) ? s.filter((x) => x !== label) : [...s, label]));
@@ -59,7 +60,7 @@ export function CareerTab({ careers, onResults }: { careers: Career[]; onResults
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   flex: { flex: 1 },
   cardTitle: { fontSize: 18, fontWeight: '900', color: t.ink },
   muted: { fontSize: 14, lineHeight: 21, color: t.muted, marginTop: 4 },
@@ -72,4 +73,4 @@ const styles = StyleSheet.create({
   matchLabel: { fontSize: 11, color: t.muted, fontWeight: '700' },
   desc: { fontSize: 14, lineHeight: 21, color: t.muted, marginTop: 10, marginBottom: 10 },
   skills: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 12 },
-});
+}));

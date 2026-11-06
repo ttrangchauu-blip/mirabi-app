@@ -6,7 +6,6 @@ import Svg, { Circle } from 'react-native-svg';
 import * as Speech from 'expo-speech';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { appTheme } from '../../theme';
 import { Button } from '../../ui/kit';
 import { useConfirm } from '../../ui/ConfirmDialog';
 import { Text, TextInput } from '../../components/Typography';
@@ -15,7 +14,8 @@ import { FocusRoom } from './FocusRoom';
 import { FocusToolPanel } from './FocusToolPanel';
 import { FocusSoundSettings, FocusTimeSettings, noSoundOption, soundOptions } from './FocusControls';
 import { PomodoroCompletion, PomodoroStatistics, StudyStatsBar, useStudyStatistics } from './PomodoroStatistics';
-import { focusTheme as f } from './focusSpaceTheme';
+import { focusThemeOf } from './focusSpaceTheme';
+import { makeStyles, useTheme } from '../../ui/theme';
 
 type Panel = 'time' | 'sound' | 'read' | 'notes' | 'statistics';
 const toolInfo = {
@@ -34,6 +34,9 @@ type Props = { timer: FocusTimer; petId: string; petName: string | null; petLeve
   /** Opens with this tool's panel showing (Thống kê, from Tiện ích). */ initialPanel?: Panel };
 
 export function PomodoroPanel({ timer, petId, petName, petLevel, userId, initialPanel }: Props) {
+  const { t, dark } = useTheme();
+  const f = focusThemeOf(dark);
+  const s = useStyles();
   const { width } = useViewportSize();
   const desktop = width >= 1024;
   const [panel, setPanel] = useState<Panel | null>(initialPanel ?? null);
@@ -155,7 +158,7 @@ export function PomodoroPanel({ timer, petId, petName, petLevel, userId, initial
             <View style={s.phase}><View style={[s.phaseDot, timer.phase !== 'focus' && s.breakDot]} /><Text style={s.phaseText}>{label.toUpperCase()}</Text></View>
             <View style={[s.clock, desktop ? { width: clockSize, height: clockSize } : s.compactClock]} accessibilityRole="progressbar" accessibilityLabel="Tiến trình phiên học" accessibilityValue={{ min: 0, max: 100, now: Math.round(progress * 100) }}>
               {desktop ? <Svg width={clockSize} height={clockSize} style={StyleSheet.absoluteFill} pointerEvents="none">
-                <Circle cx={clockSize / 2} cy={clockSize / 2} r={clockRadius} stroke="#E1E6E4" strokeWidth={2} fill="none" />
+                <Circle cx={clockSize / 2} cy={clockSize / 2} r={clockRadius} stroke={t.track} strokeWidth={2} fill="none" />
                 <Circle cx={clockSize / 2} cy={clockSize / 2} r={clockRadius} stroke={timer.phase === 'focus' ? '#82AEBE' : '#9CB59D'} strokeWidth={3} fill="none" strokeLinecap="round" strokeDasharray={`${2 * Math.PI * clockRadius} ${2 * Math.PI * clockRadius}`} strokeDashoffset={2 * Math.PI * clockRadius * (1 - progress)} transform={`rotate(-90 ${clockSize / 2} ${clockSize / 2})`} />
               </Svg> : null}
               <Text style={[s.time, !desktop && s.compactTime]} accessibilityLabel={`Còn lại ${remaining}`}>{remaining}</Text>
@@ -164,14 +167,14 @@ export function PomodoroPanel({ timer, petId, petName, petLevel, userId, initial
             </View>
             {desktop ? <View style={s.timerReadout}>
             <Button title={startTitle} icon={timer.running ? 'pause' : 'play'} onPress={timer.toggle} disabled={!timer.ready} style={s.start} />
-            {active ? <Pressable accessibilityRole="button" accessibilityLabel={stopTitle} onPress={() => { void stopSession(); }} style={s.timeSettings}><Ionicons name="stop-circle-outline" size={16} color={appTheme.danger} /><Text style={[s.timeSettingsText, s.stopText]}>{stopTitle}</Text></Pressable>
+            {active ? <Pressable accessibilityRole="button" accessibilityLabel={stopTitle} onPress={() => { void stopSession(); }} style={s.timeSettings}><Ionicons name="stop-circle-outline" size={16} color={t.danger} /><Text style={[s.timeSettingsText, s.stopText]}>{stopTitle}</Text></Pressable>
             : <Pressable ref={view => { toolRefs.current.time = view; }} accessibilityRole="button" accessibilityLabel="Tùy chỉnh thời gian" onPress={() => openPanel('time')} style={s.timeSettings}><Ionicons name="options-outline" size={15} color={f.muted} /><Text style={s.timeSettingsText}>{`${timer.focusMinutes} phút học / ${timer.shortBreakMinutes} phút nghỉ`}</Text></Pressable>}
             </View> : <View style={s.compactActions}>
               <View style={s.roundRow}>
-                {active ? <Pressable accessibilityRole="button" accessibilityLabel={stopTitle} onPress={() => { void stopSession(); }} style={({ pressed }) => [s.roundSettings, s.roundStop, pressed && s.roundPressed]}><Ionicons name="stop" size={17} color={appTheme.danger} /></Pressable>
+                {active ? <Pressable accessibilityRole="button" accessibilityLabel={stopTitle} onPress={() => { void stopSession(); }} style={({ pressed }) => [s.roundSettings, s.roundStop, pressed && s.roundPressed]}><Ionicons name="stop" size={17} color={t.danger} /></Pressable>
                   : <Pressable ref={view => { toolRefs.current.time = view; }} accessibilityRole="button" accessibilityLabel="Tùy chỉnh thời gian" onPress={() => openPanel('time')} style={({ pressed }) => [s.roundSettings, pressed && s.roundPressed]}><Ionicons name="options-outline" size={19} color={f.blue} /></Pressable>}
                 <Pressable accessibilityRole="button" accessibilityLabel={startTitle} accessibilityState={{ disabled: !timer.ready }} onPress={timer.toggle} disabled={!timer.ready} style={({ pressed }) => [s.roundPlay, pressed && timer.ready && s.roundPressed, !timer.ready && s.roundDimmed]}>
-                  <LinearGradient colors={appTheme.primary} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={s.roundPlayFill}><Ionicons name={timer.running ? 'pause' : 'play'} size={19} color="#FFFFFF" style={!timer.running && s.playNudge} /></LinearGradient>
+                  <LinearGradient colors={t.primary} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={s.roundPlayFill}><Ionicons name={timer.running ? 'pause' : 'play'} size={19} color={t.onPrimary} style={!timer.running && s.playNudge} /></LinearGradient>
                 </Pressable>
               </View>
               <Text style={s.timeSettingsText}>{`${timer.focusMinutes} / ${timer.shortBreakMinutes} phút`}</Text>
@@ -185,7 +188,7 @@ export function PomodoroPanel({ timer, petId, petName, petLevel, userId, initial
       <View style={s.toolsArea}>
         <Text style={s.toolsLabel}>MỘT CHÚT TRỢ GIÚP, KHI BẠN CẦN</Text>
         <View style={s.toolbar} accessibilityLabel="Công cụ học tập">{tools.map(tool => <Pressable key={tool.id} ref={view => { toolRefs.current[tool.id] = view; }} onPress={() => openPanel(tool.id)} accessibilityRole="button" accessibilityLabel={tool.accessible} accessibilityState={{ expanded: panel === tool.id }} style={[s.tool, desktop && s.desktopTool, panel === tool.id && s.toolActive]}>
-          <View style={[s.toolIcon, panel === tool.id && s.toolIconActive]}><Ionicons name={tool.icon} size={20} color={panel === tool.id ? f.blue : '#647D8A'} />{tool.id === 'read' && reading ? <View style={s.readingDot} /> : null}</View><Text style={[s.toolLabel, panel === tool.id && s.toolLabelActive]}>{tool.label}</Text>
+          <View style={[s.toolIcon, panel === tool.id && s.toolIconActive]}><Ionicons name={tool.icon} size={20} color={panel === tool.id ? f.blue : f.muted} />{tool.id === 'read' && reading ? <View style={s.readingDot} /> : null}</View><Text style={[s.toolLabel, panel === tool.id && s.toolLabelActive]}>{tool.label}</Text>
         </Pressable>)}</View>
       </View>
     </View>
@@ -193,32 +196,32 @@ export function PomodoroPanel({ timer, petId, petName, petLevel, userId, initial
   </View>;
 }
 
-const s = StyleSheet.create({
+const useStyles = makeStyles(({ t, dark }) => { const f = focusThemeOf(dark); return StyleSheet.create({
   layout: { width: '100%', maxWidth: 1440, alignSelf: 'center', gap: 18, minWidth: 0 }, desktopLayout: { flexDirection: 'row', alignItems: 'flex-start' }, main: { flex: 1, minWidth: 0 },
-  space: { backgroundColor: '#F2F8FE', borderRadius: 28, overflow: 'hidden', borderWidth: 1, borderColor: '#FFFFFF', shadowColor: f.shadow, shadowOpacity: .09, shadowRadius: 26, shadowOffset: { width: 0, height: 10 }, elevation: 2 },
-  focusMode: { backgroundColor: '#F2F8FE' }, spaceHeader: { paddingHorizontal: 30, paddingTop: 27, paddingBottom: 12, flexDirection: 'row', alignItems: 'flex-start', gap: 12 }, mobileHeader: { paddingHorizontal: 20, paddingTop: 20, flexWrap: 'wrap' },
-  headline: { flex: 1, minWidth: 0 }, eyebrowRow: { flexDirection: 'row', alignItems: 'center', gap: 7, marginBottom: 9 }, eyebrow: { fontSize: 10, letterSpacing: 1.8, fontWeight: '800', color: '#67818D' },
-  title: { fontSize: 27, lineHeight: 36, fontWeight: '800', color: appTheme.ink, letterSpacing: -.5 }, mobileTitle: { fontSize: 23, lineHeight: 30 }, subtitle: { color: f.muted, fontSize: 12, lineHeight: 19, marginTop: 5 },
-  soundPill: { flexDirection: 'row', alignItems: 'center', gap: 7, backgroundColor: '#FFFFFF', paddingHorizontal: 12, minHeight: 40, borderRadius: 20 }, soundPillOn: { backgroundColor: '#E5F0F0' }, focusPillOn: { backgroundColor: '#DCEAF1', borderWidth: 1, borderColor: '#B9D5E2' }, soundPillText: { fontSize: 11, color: f.blue, fontWeight: '700' }, playDot: { width: 5, height: 5, borderRadius: 3, backgroundColor: '#709C8F' },
+  space: { backgroundColor: t.surfaceSecondary, borderRadius: 28, overflow: 'hidden', borderWidth: 1, borderColor: t.glassBorder, shadowColor: f.shadow, shadowOpacity: .09, shadowRadius: 26, shadowOffset: { width: 0, height: 10 }, elevation: 2 },
+  focusMode: { backgroundColor: t.surfaceSecondary }, spaceHeader: { paddingHorizontal: 30, paddingTop: 27, paddingBottom: 12, flexDirection: 'row', alignItems: 'flex-start', gap: 12 }, mobileHeader: { paddingHorizontal: 20, paddingTop: 20, flexWrap: 'wrap' },
+  headline: { flex: 1, minWidth: 0 }, eyebrowRow: { flexDirection: 'row', alignItems: 'center', gap: 7, marginBottom: 9 }, eyebrow: { fontSize: 10, letterSpacing: 1.8, fontWeight: '800', color: f.muted },
+  title: { fontSize: 27, lineHeight: 36, fontWeight: '800', color: t.ink, letterSpacing: -.5 }, mobileTitle: { fontSize: 23, lineHeight: 30 }, subtitle: { color: f.muted, fontSize: 12, lineHeight: 19, marginTop: 5 },
+  soundPill: { flexDirection: 'row', alignItems: 'center', gap: 7, backgroundColor: t.card, paddingHorizontal: 12, minHeight: 40, borderRadius: 20 }, soundPillOn: { backgroundColor: dark ? t.seaFoam : '#E5F0F0' }, focusPillOn: { backgroundColor: t.tint, borderWidth: 1, borderColor: t.inputBorder }, soundPillText: { fontSize: 11, color: f.blue, fontWeight: '700' }, playDot: { width: 5, height: 5, borderRadius: 3, backgroundColor: '#709C8F' },
   heroBody: { alignItems: 'center', minWidth: 0 }, heroDesktop: { flexDirection: 'row', alignItems: 'center', paddingLeft: 16, paddingRight: 16, paddingBottom: 10, minHeight: 405 },
   sceneRegion: { flex: 1, minWidth: 0, alignItems: 'center', justifyContent: 'center', width: '100%', padding: 10 }, sceneFrame: { width: '100%', maxWidth: 660 },
   timer: { alignItems: 'center', justifyContent: 'center', paddingVertical: 22, paddingHorizontal: 14, width: '100%', flexShrink: 0 }, phase: { flexDirection: 'row', alignItems: 'center', gap: 7 }, phaseDot: { width: 5, height: 5, borderRadius: 3, backgroundColor: '#81A9BA' }, breakDot: { backgroundColor: '#96AC92' },
   timerReadout: { alignItems: 'center' }, compactTimer: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 12, paddingHorizontal: 20, gap: 12 },
   compactReadout: { width: 112, alignItems: 'flex-start' }, compactClock: { width: 112, height: 64, marginTop: 0, alignItems: 'flex-start' },
-  compactTime: { fontSize: 44, lineHeight: 55, letterSpacing: -1.5 }, compactTrack: { width: '100%', height: 3, borderRadius: 2, backgroundColor: '#E1E6E4', overflow: 'hidden' }, compactFill: { height: 3, borderRadius: 2, backgroundColor: appTheme.accent },
+  compactTime: { fontSize: 44, lineHeight: 55, letterSpacing: -1.5 }, compactTrack: { width: '100%', height: 3, borderRadius: 2, backgroundColor: t.track, overflow: 'hidden' }, compactFill: { height: 3, borderRadius: 2, backgroundColor: t.accent },
   compactActions: { alignItems: 'center', gap: 6 }, roundRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  roundSettings: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: '#DCEAF4' },
-  roundPlay: { width: 44, height: 44, borderRadius: 22, shadowColor: appTheme.shadow, shadowOpacity: .2, shadowRadius: 8, shadowOffset: { width: 0, height: 4 }, elevation: 3 },
+  roundSettings: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: t.card, borderWidth: 1, borderColor: t.border },
+  roundPlay: { width: 44, height: 44, borderRadius: 22, shadowColor: t.shadow, shadowOpacity: .2, shadowRadius: 8, shadowOffset: { width: 0, height: 4 }, elevation: 3 },
   roundPlayFill: { flex: 1, borderRadius: 22, alignItems: 'center', justifyContent: 'center' }, playNudge: { marginLeft: 2 },
-  roundStop: { backgroundColor: '#FBEFEE', borderColor: '#F1D9D6' }, stopText: { color: appTheme.danger },
+  roundStop: { backgroundColor: t.dangerBg, borderColor: dark ? t.dangerBg : '#F1D9D6' }, stopText: { color: t.danger },
   roundPressed:{ transform: [{ scale: .96 }], opacity: .92 }, roundDimmed: { opacity: .55 },
-  phaseText: { fontSize: 10, letterSpacing: 2.3, fontWeight: '800', color: '#667F89' }, clock: { width: 236, height: 236, alignItems: 'center', justifyContent: 'center', marginTop: 14 },
-  time: { fontSize: 62, lineHeight: 78, fontWeight: '800', color: appTheme.ink, letterSpacing: -2, fontVariant: ['tabular-nums'] }, timerHint: { color: f.muted, fontSize: 11, marginTop: 4 }, start: { width: 224, maxWidth: '100%', marginTop: 5 },
+  phaseText: { fontSize: 10, letterSpacing: 2.3, fontWeight: '800', color: f.muted }, clock: { width: 236, height: 236, alignItems: 'center', justifyContent: 'center', marginTop: 14 },
+  time: { fontSize: 62, lineHeight: 78, fontWeight: '800', color: t.ink, letterSpacing: -2, fontVariant: ['tabular-nums'] }, timerHint: { color: f.muted, fontSize: 11, marginTop: 4 }, start: { width: 224, maxWidth: '100%', marginTop: 5 },
   timeSettings: { flexDirection: 'row', alignItems: 'center', gap: 6, padding: 12, minHeight: 44 }, timeSettingsText: { fontSize: 11, color: f.muted, fontWeight: '600' },
-  cycles: { flexDirection: 'row', gap: 5, alignItems: 'center', marginTop: 2 }, cycle: { width: 5, height: 5, borderRadius: 3, backgroundColor: '#DCE2DF' }, cycleDone: { backgroundColor: '#8DAA9E' }, cycleLabel: { marginLeft: 5, fontSize: 10, color: '#71817F' },
-  toolsArea: { paddingTop: 20, paddingBottom: 12 }, toolsLabel: { textAlign: 'center', color: '#6B828E', fontSize: 9, letterSpacing: 1.8, fontWeight: '700', marginBottom: 10 }, toolbar: { flexDirection: 'row', justifyContent: 'center', gap: 5, maxWidth: 620, width: '100%', alignSelf: 'center' },
-  tool: { flex: 1, minWidth: 0, alignItems: 'center', paddingHorizontal: 4, paddingVertical: 10, borderRadius: 17, gap: 5 }, desktopTool: { flexDirection: 'row', justifyContent: 'center', gap: 8 }, toolActive: { backgroundColor: '#E5EFF3' },
-  toolIcon: { position: 'relative', height: 36, width: 38, borderRadius: 13, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,.6)' }, toolIconActive: { backgroundColor: '#D7E9F1' }, toolLabel: { color: f.muted, fontSize: 12, fontWeight: '700' }, toolLabelActive: { color: f.blue }, readingDot: { position: 'absolute', right: 3, top: 3, height: 5, width: 5, borderRadius: 3, backgroundColor: '#739C83' },
-  fieldLabel: { fontSize: 13, fontWeight: '800', color: f.ink }, input: { borderWidth: 1, borderColor: f.line, backgroundColor: '#FFFFFF', borderRadius: 15, paddingHorizontal: 14, paddingVertical: 13, fontSize: 14, lineHeight: 22, color: f.ink, minWidth: 0 },
-  longInput: { minHeight: 155 }, notebook: { minHeight: 280, backgroundColor: '#FFFEFA', lineHeight: 27 }, caption: { color: f.muted, fontSize: 12, lineHeight: 19 }, wrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 7 },
-});
+  cycles: { flexDirection: 'row', gap: 5, alignItems: 'center', marginTop: 2 }, cycle: { width: 5, height: 5, borderRadius: 3, backgroundColor: t.track }, cycleDone: { backgroundColor: '#8DAA9E' }, cycleLabel: { marginLeft: 5, fontSize: 10, color: f.muted },
+  toolsArea: { paddingTop: 20, paddingBottom: 12 }, toolsLabel: { textAlign: 'center', color: f.muted, fontSize: 9, letterSpacing: 1.8, fontWeight: '700', marginBottom: 10 }, toolbar: { flexDirection: 'row', justifyContent: 'center', gap: 5, maxWidth: 620, width: '100%', alignSelf: 'center' },
+  tool: { flex: 1, minWidth: 0, alignItems: 'center', paddingHorizontal: 4, paddingVertical: 10, borderRadius: 17, gap: 5 }, desktopTool: { flexDirection: 'row', justifyContent: 'center', gap: 8 }, toolActive: { backgroundColor: t.tint },
+  toolIcon: { position: 'relative', height: 36, width: 38, borderRadius: 13, alignItems: 'center', justifyContent: 'center', backgroundColor: dark ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,.6)' }, toolIconActive: { backgroundColor: t.hero }, toolLabel: { color: f.muted, fontSize: 12, fontWeight: '700' }, toolLabelActive: { color: f.blue }, readingDot: { position: 'absolute', right: 3, top: 3, height: 5, width: 5, borderRadius: 3, backgroundColor: '#739C83' },
+  fieldLabel: { fontSize: 13, fontWeight: '800', color: f.ink }, input: { borderWidth: 1, borderColor: f.line, backgroundColor: t.inputBg, borderRadius: 15, paddingHorizontal: 14, paddingVertical: 13, fontSize: 14, lineHeight: 22, color: f.ink, minWidth: 0 },
+  longInput: { minHeight: 155 }, notebook: { minHeight: 280, backgroundColor: dark ? t.inputBg : '#FFFEFA', lineHeight: 27 }, caption: { color: f.muted, fontSize: 12, lineHeight: 19 }, wrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 7 },
+}); });

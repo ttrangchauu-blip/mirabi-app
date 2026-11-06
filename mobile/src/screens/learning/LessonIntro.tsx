@@ -7,11 +7,13 @@ import { learningApi } from '../../learning/api';
 import { GAME_INFO, gameTitle, modeDetail } from '../../learning/labels';
 import { LearningPrefs, speakEnglish } from '../../learning/prefs';
 import type { Intro, LearningSession } from '../../learning/types';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { Button, Card, ScreenHeader } from '../../ui/kit';
 
 /** Knowledge shown before playing (and again from the pause menu): words, a grammar point, or a math method. */
 export function IntroContent({ intro, prefs }: { intro: Intro; prefs: LearningPrefs }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   if (intro.kind === 'lesson') {
     return (
       <View>
@@ -93,6 +95,8 @@ type Props = { session: LearningSession; prefs: LearningPrefs; onBack: () => voi
 /** "Giới thiệu kiến thức trước khi chơi": the words or rule drawn for this session (it is random every time).
  * The session waits paused; its clock starts with "Bắt đầu chơi". Going back drops the unplayed session. */
 export function LessonIntro({ session, prefs, onBack, onPlay }: Props) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const [intro, setIntro] = useState<Intro | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [leaving, setLeaving] = useState(false);
@@ -130,7 +134,7 @@ export function LessonIntro({ session, prefs, onBack, onPlay }: Props) {
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   flex: { flex: 1 },
   title: { fontSize: 19, fontWeight: '900', color: t.ink, marginBottom: 6 },
   muted: { fontSize: 14, color: t.muted, lineHeight: 20, marginTop: 4 },
@@ -147,7 +151,7 @@ const styles = StyleSheet.create({
     paddingVertical: 2, overflow: 'hidden' },
   tag: { fontSize: 11, fontWeight: '800', color: t.success, backgroundColor: t.successBg, borderRadius: 7, paddingHorizontal: 6,
     paddingVertical: 2, overflow: 'hidden' },
-  tagReview: { color: '#8A5A00', backgroundColor: '#FFF1D6' },
+  tagReview: { color: t.warning, backgroundColor: t.warningBg },
   example: { fontSize: 14, color: t.muted, lineHeight: 20, marginTop: 2 },
   rule: { backgroundColor: t.tint, borderRadius: 14, padding: 10, marginTop: 8 },
   ruleForm: { fontSize: 15, fontWeight: '900', color: t.ink },
@@ -155,4 +159,4 @@ const styles = StyleSheet.create({
   howTo: { flexDirection: 'row', gap: 12, alignItems: 'flex-start' },
   howToTitle: { fontSize: 15, fontWeight: '900', color: t.ink },
   error: { color: t.danger, fontWeight: '700', marginTop: 8 },
-});
+}));

@@ -17,6 +17,7 @@ import { PhotoRoom } from '../../world/PhotoRoom';
 import { useCelebration } from '../../world/useCelebration';
 import { useWeather } from '../../world/weather';
 import { type Box, GROUP_BOARD, GROUP_FORE, GROUP_FRAME, GROUP_GLASS, GROUP_NEAR, GROUP_ROOM, GROUP_SEATS, GROUP_SWAY, GROUP_TABLE, GROUP_TOP, type SwayPart } from './groupPlates';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { reactionEmoji } from './labels';
 
 /** The picture's canvas (scene-grouproom.js): five chairs behind the table and three poufs in front. */
@@ -74,6 +75,7 @@ function LampGlow({ x, y, W }: { x: number; y: number; W: number }) {
 
 /** The clock on the board, from the server's own (the same anchor as the timer under the room). It counts by itself: the rest of the scene never redraws for it. */
 function BoardClock({ anchor, state, goal, W }: { anchor: TimerAnchor | null; state: RoomState; goal?: string | null; W: number }) {
+  const styles = useStyles();
   const [, tick] = useState(0);
   useEffect(() => {
     if (!anchor?.running) return;
@@ -94,8 +96,10 @@ function BoardClock({ anchor, state, goal, W }: { anchor: TimerAnchor | null; st
 
 /** A member's pet in its seat, or their first letter when they have none yet (a paw in a photo, which has nobody's name in it). Its place on the screen is its parent's, so nothing here starts over when someone else comes or goes. */
 const SeatPet = memo(function SeatPet({ pet, level, size, mode, still, celebrate, name }: { pet?: string | null; level: number; size: number; mode: Mode; still: boolean; celebrate: number; name: string | null }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const party = useCelebration(celebrate, pet, level);
-  if (!pet) return <View style={[styles.initial, { width: size * 0.62, height: size * 0.62, borderRadius: size * 0.31 }]} testID="study-room-no-pet">{name === null ? <Ionicons name="paw" size={size * 0.3} color="#2C6E96" /> : <Text style={[styles.initialText, { fontSize: size * 0.3 }]}>{(name.trim()[0] ?? '?').toUpperCase()}</Text>}</View>;
+  if (!pet) return <View style={[styles.initial, { width: size * 0.62, height: size * 0.62, borderRadius: size * 0.31 }]} testID="study-room-no-pet">{name === null ? <Ionicons name="paw" size={size * 0.3} color={t.accent} /> : <Text style={[styles.initialText, { fontSize: size * 0.3 }]}>{(name.trim()[0] ?? '?').toUpperCase()}</Text>}</View>;
   return (
     <Animated.View style={{ transformOrigin: '50% 100%', transform: actTransform(party.values, size) }}>
       <PetArt pet={pet} size={size} stage={level} studying={mode === 'study' && !still && !party.on} still={still || mode === 'rest' || mode === 'paused' || mode === 'away'} cheer={celebrate ? party.cheer : undefined} />
@@ -105,6 +109,7 @@ const SeatPet = memo(function SeatPet({ pet, level, size, mode, still, celebrate
 
 /** The picture of the room with its people in it. `bare` is for photo mode: only the room and the pets, no names, no words of anyone's. */
 function Stage({ members, state, reactions, messages, meId, seats, anchor, goal, completed, W, bare }: Omit<Props, 'noPhoto'> & { W: number; bare?: boolean }) {
+  const styles = useStyles();
   const reduce = useReduceMotion();
   const { level } = useWorldMotion();
   const { reading } = useWeather();
@@ -196,6 +201,7 @@ function Stage({ members, state, reactions, messages, meId, seats, anchor, goal,
  * no one is drawn who is not in the room. Photo mode leaves the room and the pets alone on the screen, with no names and no messages.
  */
 export const StudyRoomScene = memo(function StudyRoomScene({ members, state, reactions, messages = NO_MESSAGES, meId, seats, anchor, goal, completed, noPhoto = false }: Props) {
+  const styles = useStyles();
   const [width, setWidth] = useState(0);
   const [photo, setPhoto] = useState(false);
   const W = width || FALLBACK_WIDTH;
@@ -219,33 +225,35 @@ export const StudyRoomScene = memo(function StudyRoomScene({ members, state, rea
   );
 });
 
-const styles = StyleSheet.create({
+// The room, its light, the board and the photo button (dark glass over the picture) are the scene; the name tags and
+// the bubbles floating over it are interface ("Bạn" is filled with the accent fill).
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   scene: { width: '100%', aspectRatio: CW / CH, borderRadius: 22, overflow: 'hidden', backgroundColor: '#CFE0F2' },
   pet: { position: 'absolute', alignItems: 'center', justifyContent: 'flex-end' },
   away: { opacity: 0.45 },
-  initial: { alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFFFFF', borderWidth: 2, borderColor: '#9CC3DE' },
-  initialText: { fontWeight: '900', color: '#2C6E96' },
+  initial: { alignItems: 'center', justifyContent: 'center', backgroundColor: t.card, borderWidth: 2, borderColor: '#9CC3DE' },
+  initialText: { fontWeight: '900', color: t.accent },
   label: { position: 'absolute', alignItems: 'center' },
-  tag: { maxWidth: 88, paddingHorizontal: 7, paddingVertical: 1, borderRadius: 999, backgroundColor: 'rgba(255,255,255,0.92)',
-    shadowColor: '#657C8A', shadowOpacity: 0.12, shadowRadius: 4, shadowOffset: { width: 0, height: 1 }, elevation: 1 },
+  tag: { maxWidth: 88, paddingHorizontal: 7, paddingVertical: 1, borderRadius: 999, backgroundColor: t.glass,
+    shadowColor: t.shadow, shadowOpacity: 0.12, shadowRadius: 4, shadowOffset: { width: 0, height: 1 }, elevation: 1 },
   tagTight: { flexDirection: 'row', alignItems: 'center', gap: 2, maxWidth: '100%', paddingHorizontal: 4 },
   tagDot: { width: 4, height: 4, borderRadius: 2 },
   tagTextTight: { fontSize: 9, flexShrink: 1 },
-  tagMe: { backgroundColor: '#136FA8' },
-  tagText: { fontSize: 10, fontWeight: '800', color: '#304653' },
-  tagTextMe: { color: '#FFFFFF' },
-  bubble: { position: 'absolute', zIndex: 2, backgroundColor: '#FFFFFF', borderRadius: 14, paddingHorizontal: 6, paddingVertical: 2,
-    shadowColor: '#1F6E9E', shadowOpacity: 0.15, shadowRadius: 6, shadowOffset: { width: 0, height: 2 }, elevation: 2 },
+  tagMe: { backgroundColor: t.accentFill },
+  tagText: { fontSize: 10, fontWeight: '800', color: t.ink },
+  tagTextMe: { color: t.onPrimary },
+  bubble: { position: 'absolute', zIndex: 2, backgroundColor: t.card, borderRadius: 14, paddingHorizontal: 6, paddingVertical: 2,
+    shadowColor: t.shadow, shadowOpacity: 0.15, shadowRadius: 6, shadowOffset: { width: 0, height: 2 }, elevation: 2 },
   bubbleText: { fontSize: 16 },
   speechSlot: { position: 'absolute', width: SPEECH_WIDTH, alignItems: 'center', zIndex: 3 },
-  speech: { maxWidth: SPEECH_WIDTH, backgroundColor: '#FFFFFF', borderRadius: 12, paddingHorizontal: 9, paddingVertical: 5,
-    shadowColor: '#1F6E9E', shadowOpacity: 0.18, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, elevation: 3 },
-  speechText: { fontSize: 11, lineHeight: 15, fontWeight: '700', color: '#304653' },
-  speechTail: { width: 10, height: 10, backgroundColor: '#FFFFFF', transform: [{ rotate: '45deg' }], marginTop: -6 },
+  speech: { maxWidth: SPEECH_WIDTH, backgroundColor: t.card, borderRadius: 12, paddingHorizontal: 9, paddingVertical: 5,
+    shadowColor: t.shadow, shadowOpacity: 0.18, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, elevation: 3 },
+  speechText: { fontSize: 11, lineHeight: 15, fontWeight: '700', color: t.ink },
+  speechTail: { width: 10, height: 10, backgroundColor: t.card, transform: [{ rotate: '45deg' }], marginTop: -6 },
   board: { alignItems: 'center', justifyContent: 'center' },
   boardLabel: { color: '#D8F0EE', fontWeight: '800' },
   boardClock: { color: '#FFFFFF', fontWeight: '800', fontVariant: ['tabular-nums'] },
   boardGoal: { color: '#FFE9A8', fontWeight: '700', textAlign: 'center' },
   photoButton: { position: 'absolute', top: 8, right: 8, width: 34, height: 34, borderRadius: 17, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(24,40,64,0.42)' },
   pressed: { transform: [{ scale: 0.92 }], opacity: 0.9 },
-});
+}));

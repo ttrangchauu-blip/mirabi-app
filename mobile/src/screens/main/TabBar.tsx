@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { RoomTabIcon } from '../../components/RoomTabIcon';
 import { Text } from '../../components/Typography';
 import { TabKey, TABS } from '../../tabs';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 
 /** The bar's rounded top corners: a screen drawn edge to edge (the personal room) goes on this far under the bar. */
 export const TAB_BAR_RADIUS = 26;
@@ -13,6 +13,8 @@ export const TAB_BAR_RADIUS = 26;
 export function TabBar({ active, onChange, bottomInset, badges }: {
   active: TabKey; onChange: (key: TabKey) => void; bottomInset: number; badges?: Partial<Record<TabKey, number>>;
 }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   return (
     <View style={[styles.bar, { paddingBottom: Math.max(bottomInset, 10) }]} accessibilityRole="tablist">
       {TABS.map((tab) => {
@@ -37,16 +39,16 @@ export function TabBar({ active, onChange, bottomInset, badges }: {
   );
 }
 
-const styles = StyleSheet.create({
-  bar: { flexDirection: 'row', backgroundColor: '#FFFFFF', paddingTop: 8, paddingHorizontal: 8, borderTopLeftRadius: TAB_BAR_RADIUS,
+const useStyles = makeStyles(({ t, dark }) => StyleSheet.create({
+  bar: { flexDirection: 'row', backgroundColor: t.card, paddingTop: 8, paddingHorizontal: 8, borderTopLeftRadius: TAB_BAR_RADIUS,
     borderTopRightRadius: TAB_BAR_RADIUS,
-    shadowColor: t.shadow, shadowOpacity: 0.1, shadowRadius: 18, shadowOffset: { width: 0, height: -4 }, elevation: 12 },
+    shadowColor: t.shadow, shadowOpacity: dark ? 0.35 : 0.1, shadowRadius: 18, shadowOffset: { width: 0, height: -4 }, elevation: 12 },
   item: { flex: 1, minWidth: 0, alignItems: 'center', justifyContent: 'flex-start', minHeight: 54 },
   iconWrap: { width: 52, height: 32, borderRadius: 16, alignItems: 'center', justifyContent: 'center' },
   iconWrapActive: { backgroundColor: t.tint },
   label: { fontSize: 11, lineHeight: 13, fontWeight: '700', color: t.muted, marginTop: 3, textAlign: 'center', paddingHorizontal: 1 },
   labelActive: { color: t.accent, fontWeight: '800' },
-  badge: { position: 'absolute', top: -3, right: 4, minWidth: 18, height: 18, borderRadius: 9, paddingHorizontal: 4, backgroundColor: t.danger,
-    borderWidth: 2, borderColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
-  badgeText: { color: '#FFFFFF', fontSize: 10, lineHeight: 12, fontWeight: '900' },
-});
+  badge: { position: 'absolute', top: -3, right: 4, minWidth: 18, height: 18, borderRadius: 9, paddingHorizontal: 4, backgroundColor: t.dangerFill,
+    borderWidth: 2, borderColor: t.card, alignItems: 'center', justifyContent: 'center' },
+  badgeText: { color: t.onPrimary, fontSize: 10, lineHeight: 12, fontWeight: '900' },
+}));

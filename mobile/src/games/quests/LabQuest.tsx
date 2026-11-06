@@ -7,6 +7,7 @@ import { Impact, Sparkle } from '../art/mathBattle';
 import { Beaker, Bulb, HotPlate, LabBackdrop, Magnet, Microscope } from '../art/magicLab';
 import { useRig } from '../engine/rig';
 import { useSfx } from '../engine/sfx';
+import { makeStyles } from '../../ui/theme';
 import type { QuestProps } from './QuestProps';
 import { NATIVE, potionLevel, useQuestEvents } from './worlds';
 
@@ -23,6 +24,7 @@ const DROP = 26;
 const DROP_COLORS = ['#FF8FC8', '#7DF9FF', '#FFE27A', '#9BE38A', '#C7A6FF'];
 
 export function LabQuest({ done, total, wrongKey, petId, petLevel, reduceMotion, running }: QuestProps) {
+  const styles = useStyles();
   const play = useSfx();
   const [width, setWidth] = useState(0);
   const W = width || 340;
@@ -119,12 +121,12 @@ export function LabQuest({ done, total, wrongKey, petId, petLevel, reduceMotion,
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, tones, dark }) => StyleSheet.create({
   scene: { borderRadius: 22, overflow: 'hidden', backgroundColor: '#FFF4E3', marginBottom: 10 },
   abs: { position: 'absolute' },
   chip: { position: 'absolute', top: 8, left: 8, flexDirection: 'row', alignItems: 'center', gap: 6, borderRadius: 999, paddingHorizontal: 10,
-    paddingVertical: 4, backgroundColor: 'rgba(255,255,255,0.92)' },
-  chipText: { fontSize: 12, fontWeight: '900', color: '#5B3F8C' },
-  track: { width: 54, height: 8, borderRadius: 4, backgroundColor: '#E6DDF5', overflow: 'hidden' },
+    paddingVertical: 4, backgroundColor: dark ? t.glass : 'rgba(255,255,255,0.92)' }, // the progress pill over the lab: chrome
+  chipText: { fontSize: 12, fontWeight: '900', color: dark ? tones.lilac.ink : '#5B3F8C' },
+  track: { width: 54, height: 8, borderRadius: 4, backgroundColor: dark ? tones.lilac.to : '#E6DDF5', overflow: 'hidden' },
   fill: { height: 8, borderRadius: 4, backgroundColor: '#8E6CF0' },
-});
+}));

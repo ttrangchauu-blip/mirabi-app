@@ -6,7 +6,7 @@ import { Text, TextInput } from '../../components/Typography';
 import { parseFriendCode } from '../../room/visit';
 import { togetherApi } from '../../studyTogether/api';
 import type { CodeLookup, Friend, FriendRequest, SearchResult, SocialSettings } from '../../studyTogether/types';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { useConfirm } from '../../ui/ConfirmDialog';
 import { Card, ScreenHeader, SectionHeader } from '../../ui/kit';
 import { useToast } from '../../ui/Toast';
@@ -47,6 +47,9 @@ const REQUESTS_SHOWN = 3;
  * incoming requests (hidden when there are none), sent requests folded into one row, then the friend list.
  */
 export function FriendsScreen({ initialTab = 'friends', onBack, onVisit, onVisitGarden, onOpenStudyRoom, onRequestsChanged, onFriends, embedded = false }: Props) {
+  const { t } = useTheme();
+  const styles = useStyles();
+  const embeddedStyles = useEmbeddedStyles();
   const confirm = useConfirm();
   const toast = useToast();
   const [settings, setSettings] = useState<SocialSettings | null>(null);
@@ -191,6 +194,7 @@ export function FriendsScreen({ initialTab = 'friends', onBack, onVisit, onVisit
 
 /** An incoming request: the buttons sit under the name so long names still fit on small screens. */
 function RequestRow({ request, busy, onAccept, onDecline }: { request: FriendRequest; busy: boolean; onAccept: () => void; onDecline: () => void }) {
+  const styles = useStyles();
   return (
     <View style={styles.request}>
       <PetAvatar user={request.user} size={46} />
@@ -210,6 +214,8 @@ function RequestRow({ request, busy, onAccept, onDecline }: { request: FriendReq
 function AddFriend({ autoFocus, hasCode, onMyCode, onSent, onFriend }: {
   autoFocus: boolean; hasCode: boolean; onMyCode: () => void; onSent: () => void; onFriend: () => void;
 }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[] | null>(null);
   const [found, setFound] = useState<CodeLookup | null>(null);
@@ -266,7 +272,7 @@ function AddFriend({ autoFocus, hasCode, onMyCode, onSent, onFriend }: {
         <View style={[styles.codeBox, !!error && styles.codeBoxError]}>
           <Ionicons name="person-add-outline" size={18} color={t.muted} />
           <TextInput value={query} onChangeText={(v) => { setQuery(v); if (!v.trim()) clear(); }} placeholder="Nhập mã để thêm bạn"
-            placeholderTextColor="#7F95A8" style={styles.codeInput} accessibilityLabel="Nhập mã để thêm bạn" autoFocus={autoFocus}
+            placeholderTextColor={t.placeholder} style={styles.codeInput} accessibilityLabel="Nhập mã để thêm bạn" autoFocus={autoFocus}
             autoCapitalize="characters" autoCorrect={false} returnKeyType="search" onSubmitEditing={() => { void search(); }} maxLength={40} />
         </View>
         <IconButton icon="search" label="Tìm" primary loading={searching} onPress={() => { void search(); }} />
@@ -300,30 +306,32 @@ function AddFriend({ autoFocus, hasCode, onMyCode, onSent, onFriend }: {
 function IconButton({ icon, label, primary, loading, onPress }: {
   icon: React.ComponentProps<typeof Ionicons>['name']; label: string; primary?: boolean; loading?: boolean; onPress: () => void;
 }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   return (
     <Pressable onPress={onPress} disabled={loading} accessibilityRole="button" accessibilityLabel={label} accessibilityState={{ busy: !!loading }}
       style={({ pressed }) => [styles.iconButton, primary && styles.iconButtonPrimary, (pressed || loading) && styles.pressed]}>
-      <Ionicons name={icon} size={20} color={primary ? '#FFFFFF' : t.accent} />
+      <Ionicons name={icon} size={20} color={primary ? t.onPrimary : t.accent} />
     </Pressable>
   );
 }
 
-const embeddedStyles = StyleSheet.create({
+const useEmbeddedStyles = makeStyles(({ t }) => StyleSheet.create({
   header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 },
   title: { fontSize: 19, lineHeight: 25, fontWeight: '900', color: t.ink },
-});
+}));
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   flex: { flex: 1, minWidth: 0 },
   pressed: { opacity: 0.7 },
-  gear: { width: 44, height: 44, borderRadius: 16, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
+  gear: { width: 44, height: 44, borderRadius: 16, backgroundColor: t.card, alignItems: 'center', justifyContent: 'center' },
   addBar: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  codeBox: { flex: 1, minWidth: 0, flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: '#FFFFFF', borderRadius: 16,
+  codeBox: { flex: 1, minWidth: 0, flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: t.inputBg, borderRadius: 16,
     paddingHorizontal: 14, minHeight: 48, borderWidth: 1, borderColor: 'transparent' },
   codeBoxError: { borderColor: t.danger },
   codeInput: { flex: 1, minWidth: 0, fontSize: 15, color: t.ink, paddingVertical: 10 },
-  iconButton: { width: 48, height: 48, borderRadius: 16, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
-  iconButtonPrimary: { backgroundColor: t.accent },
+  iconButton: { width: 48, height: 48, borderRadius: 16, backgroundColor: t.card, alignItems: 'center', justifyContent: 'center' },
+  iconButtonPrimary: { backgroundColor: t.accentFill },
   error: { fontSize: 13, color: t.danger, marginTop: 6, marginLeft: 4 },
   myCode: { flexDirection: 'row', alignItems: 'center', gap: 6, alignSelf: 'flex-start', minHeight: 40, paddingHorizontal: 4, marginTop: 4, marginBottom: 6 },
   myCodeText: { fontSize: 14, fontWeight: '800', color: t.accent },
@@ -336,4 +344,4 @@ const styles = StyleSheet.create({
   sentLabel: { flex: 1, fontSize: 15, fontWeight: '800', color: t.ink },
   count: { minWidth: 26, height: 22, borderRadius: 11, paddingHorizontal: 7, backgroundColor: t.tint, alignItems: 'center', justifyContent: 'center' },
   countText: { fontSize: 12, fontWeight: '900', color: t.accent },
-});
+}));

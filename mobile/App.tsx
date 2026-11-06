@@ -12,12 +12,13 @@ import { DailyTaskSelectionScreen } from './src/screens/DailyTaskSelectionScreen
 import { WelcomeTour } from './src/screens/WelcomeTour';
 import { MainApp } from './src/screens/main/MainApp';
 import { MobileViewport } from './src/components/MobileViewport';
-import { appTheme } from './src/theme';
 import { Button } from './src/ui/kit';
 import { ConfirmProvider } from './src/ui/ConfirmDialog';
 import { ModalHost } from './src/ui/AppModal';
 import { ToastProvider } from './src/ui/Toast';
 import { useConfirmLogout } from './src/auth/useConfirmLogout';
+import { LanguageProvider } from './src/i18n';
+import { makeStyles, ThemeProvider, useTheme } from './src/ui/theme';
 
 export default function App() {
   const [fontsLoaded, fontError] = useFonts(NUNITO);
@@ -25,7 +26,7 @@ export default function App() {
   if (!fontsLoaded && !fontError) return null;
   return (
     <SafeAreaProvider>
-      <MobileViewport><AuthProvider><ToastProvider><ConfirmProvider><ModalHost><Root /></ModalHost></ConfirmProvider></ToastProvider></AuthProvider></MobileViewport>
+      <ThemeProvider><LanguageProvider><MobileViewport><AuthProvider><ToastProvider><ConfirmProvider><ModalHost><Root /></ModalHost></ConfirmProvider></ToastProvider></AuthProvider></MobileViewport></LanguageProvider></ThemeProvider>
     </SafeAreaProvider>
   );
 }
@@ -33,17 +34,19 @@ export default function App() {
 function Root() {
   const { status, user, retryRestore } = useAuth();
   const confirmLogout = useConfirmLogout();
+  const { t } = useTheme();
+  const styles = useStyles();
   if (status === 'restoring') {
     return (
-      <LinearGradient colors={appTheme.backdrop} style={styles.center}>
-        <ActivityIndicator size="large" color={appTheme.accent} />
+      <LinearGradient colors={t.backdrop} style={styles.center}>
+        <ActivityIndicator size="large" color={t.accent} />
         <Text style={styles.muted}>Đang mở Mirabi…</Text>
       </LinearGradient>
     );
   }
   if (status === 'restoreFailed') {
     return (
-      <LinearGradient colors={appTheme.backdrop} style={styles.center}>
+      <LinearGradient colors={t.backdrop} style={styles.center}>
         <Text style={styles.title}>Không thể kết nối tới Mirabi</Text>
         <Text style={[styles.muted, styles.centerText]}>Hãy kiểm tra kết nối mạng rồi thử lại.</Text>
         <View style={styles.actions}>
@@ -61,10 +64,10 @@ function Root() {
   return <MainApp />;
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12, padding: 24 },
-  title: { fontSize: 18, fontWeight: '900', color: appTheme.ink },
-  muted: { fontSize: 14, color: appTheme.muted, lineHeight: 21 },
+  title: { fontSize: 18, fontWeight: '900', color: t.ink },
+  muted: { fontSize: 14, color: t.muted, lineHeight: 21 },
   centerText: { textAlign: 'center' },
   actions: { width: 240 },
-});
+}));

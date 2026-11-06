@@ -12,7 +12,7 @@ import { Text } from '../components/Typography';
 import { useReduceMotion } from '../components/useReduceMotion';
 import { petById } from '../pets';
 import { tabLabel, TabKey } from '../tabs';
-import { authTheme } from '../theme';
+import { makeStyles, useTheme } from '../ui/theme';
 
 type Slide = { icon?: string; tab?: TabKey; title: string; body: string; tip: string };
 
@@ -35,6 +35,8 @@ const slides = (name: string): Slide[] => [
 ];
 
 export function WelcomeTour({ onDone }: { /** Seen again from Trợ giúp: finishing just goes back, onboarding is long done. */ onDone?: () => void } = {}) {
+  const { t, auth } = useTheme();
+  const styles = useStyles();
   const { user, completeOnboarding } = useAuth();
   const { height } = useViewportSize();
   const insets = useSafeAreaInsets();
@@ -65,8 +67,8 @@ export function WelcomeTour({ onDone }: { /** Seen again from Trợ giúp: finis
   const slideIn = { opacity: enter, transform: [{ translateY: enter.interpolate({ inputRange: [0, 1], outputRange: [16, 0] }) }] };
   const heroSize = compact ? 150 : 190;
   return (
-    <LinearGradient colors={authTheme.gradient} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.fill}>
-      <StatusBar barStyle="dark-content" />
+    <LinearGradient colors={auth.gradient} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.fill}>
+      <StatusBar barStyle={t.statusBar} />
       <Sparkles />
       <View style={[styles.fill, { paddingTop: insets.top, paddingBottom: insets.bottom }]}>
         <View style={styles.topBar}>
@@ -81,7 +83,7 @@ export function WelcomeTour({ onDone }: { /** Seen again from Trợ giúp: finis
           <Animated.View style={[styles.column, slideIn]}>
             <View style={[styles.hero, { height: heroSize + 20 }]}>
               {slide.icon
-                ? <LinearGradient colors={authTheme.halo} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
+                ? <LinearGradient colors={auth.halo} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
                     style={[styles.iconHalo, { width: heroSize, height: heroSize, borderRadius: heroSize / 2 }]}>
                     <Text style={{ fontSize: heroSize * 0.4 }} accessibilityElementsHidden importantForAccessibility="no">{slide.icon}</Text>
                     {slide.tab ? <Text style={styles.tabChip}>Mục {tabLabel(slide.tab)}</Text> : null}
@@ -116,30 +118,30 @@ export function WelcomeTour({ onDone }: { /** Seen again from Trợ giúp: finis
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, auth, dark }) => StyleSheet.create({
   fill: { flex: 1 },
   topBar: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, paddingTop: 12, minHeight: 52 },
-  step: { color: authTheme.muted, fontWeight: '800', fontSize: 14 },
+  step: { color: auth.muted, fontWeight: '800', fontSize: 14 },
   skip: { minHeight: 44, justifyContent: 'center', paddingHorizontal: 6 },
-  skipText: { color: authTheme.link, fontWeight: '800', fontSize: 15 },
+  skipText: { color: auth.link, fontWeight: '800', fontSize: 15 },
   scroll: { flexGrow: 1, justifyContent: 'center', paddingHorizontal: 20, paddingVertical: 8 },
   column: { width: '100%', maxWidth: 440, alignSelf: 'center', alignItems: 'center' },
   hero: { justifyContent: 'center', alignItems: 'center', marginBottom: 8 },
-  iconHalo: { alignItems: 'center', justifyContent: 'center', borderWidth: 2, borderColor: 'rgba(255,255,255,0.9)',
-    shadowColor: authTheme.shadow, shadowOpacity: 0.2, shadowRadius: 18, shadowOffset: { width: 0, height: 8 }, elevation: 6 },
-  tabChip: { position: 'absolute', bottom: -6, backgroundColor: '#FFFFFF', color: authTheme.link, fontWeight: '900', fontSize: 13,
+  iconHalo: { alignItems: 'center', justifyContent: 'center', borderWidth: 2, borderColor: auth.glassBorder,
+    shadowColor: auth.shadow, shadowOpacity: 0.2, shadowRadius: 18, shadowOffset: { width: 0, height: 8 }, elevation: 6 },
+  tabChip: { position: 'absolute', bottom: -6, backgroundColor: t.card, color: auth.link, fontWeight: '900', fontSize: 13,
     paddingHorizontal: 12, paddingVertical: 5, borderRadius: 14, overflow: 'hidden' },
-  title: { fontSize: 24, fontWeight: '900', color: authTheme.ink, textAlign: 'center', marginTop: 10 },
-  body: { fontSize: 15, lineHeight: 23, color: authTheme.muted, textAlign: 'center', marginTop: 8 },
+  title: { fontSize: 24, fontWeight: '900', color: auth.ink, textAlign: 'center', marginTop: 10 },
+  body: { fontSize: 15, lineHeight: 23, color: auth.muted, textAlign: 'center', marginTop: 8 },
   tipRow: { flexDirection: 'row', alignItems: 'flex-end', marginTop: 20, alignSelf: 'stretch' },
-  bubble: { flex: 1, backgroundColor: authTheme.glass, borderColor: authTheme.glassBorder, borderWidth: 1.5, borderRadius: 18,
+  bubble: { flex: 1, backgroundColor: auth.glass, borderColor: auth.glassBorder, borderWidth: 1.5, borderRadius: 18,
     borderBottomLeftRadius: 4, paddingVertical: 10, paddingHorizontal: 14, marginLeft: 6, marginBottom: 14 },
-  bubbleName: { fontSize: 12, fontWeight: '900', color: authTheme.link, marginBottom: 2 },
-  bubbleText: { fontSize: 14, lineHeight: 20, color: authTheme.ink },
+  bubbleName: { fontSize: 12, fontWeight: '900', color: auth.link, marginBottom: 2 },
+  bubbleText: { fontSize: 14, lineHeight: 20, color: auth.ink },
   bottom: { paddingHorizontal: 20, paddingBottom: 18, width: '100%', maxWidth: 480, alignSelf: 'center' },
   dots: { flexDirection: 'row', justifyContent: 'center', gap: 6, marginBottom: 6 },
-  dot: { width: 8, height: 8, borderRadius: 4, backgroundColor: 'rgba(19,111,168,0.25)' },
-  dotActive: { width: 22, backgroundColor: authTheme.link },
+  dot: { width: 8, height: 8, borderRadius: 4, backgroundColor: dark ? 'rgba(124,200,242,0.3)' : 'rgba(19,111,168,0.25)' },
+  dotActive: { width: 22, backgroundColor: auth.link },
   backBtn: { minHeight: 44, justifyContent: 'center', alignSelf: 'center' },
-  backText: { color: authTheme.link, fontWeight: '800', fontSize: 14 },
-});
+  backText: { color: auth.link, fontWeight: '800', fontSize: 14 },
+}));

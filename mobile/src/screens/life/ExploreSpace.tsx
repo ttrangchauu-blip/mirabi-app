@@ -9,8 +9,8 @@ import { Text } from '../../components/Typography';
 import { lifeEligible } from '../../life/access';
 import { petById } from '../../pets';
 import { hasSprite } from '../../petSprites';
-import { appTheme as t } from '../../theme';
 import { radius, type as typeScale } from '../../ui/design';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { Button, ProgressBar } from '../../ui/kit';
 import { useToast } from '../../ui/Toast';
 import { useAtmosphere, useSameValue } from '../../world/atmosphere';
@@ -52,6 +52,8 @@ const FULL_DARK = 0.9;
  *   walk can change by turning it on or off, and the walk may even end while it is on.
  */
 export function ExploreSpace({ user, top, bottom, version, onOpenGifts, onOpenInventory, onOpenQuests, onOpenAdventure, onPetSpace, onPhotoMode, safeBottom = 0 }: Props) {
+  const { t } = useTheme();
+  const s = useStyles();
   const [space, setSpace] = useState<PetSpace | null>(null);
   const [failed, setFailed] = useState(false);
   const [size, setSize] = useState(FALLBACK);
@@ -139,6 +141,7 @@ export function ExploreSpace({ user, top, bottom, version, onOpenGifts, onOpenIn
 
 /** The real weather, small, in the corner of the sky; nothing at all without a reading. */
 function Weather() {
+  const s = useStyles();
   const { reading } = useWeather();
   const { night } = useAtmosphere(reading);
   if (!reading) return <View />;
@@ -157,6 +160,8 @@ function ExplorePhotoControls(props: { scene: React.RefObject<View | null>; top:
 function Journey({ space, name, egg, onExpired, onOpenGifts, onOpenInventory, onOpenQuests, onOpenAdventure }: {
   space: PetSpace; name: string; egg: boolean; onExpired: () => void; onOpenGifts: Props['onOpenGifts']; onOpenInventory: () => void; onOpenQuests: () => void; onOpenAdventure?: () => void;
 }) {
+  const { t } = useTheme();
+  const s = useStyles();
   // How far the phone's clock is from the server's, worked out once per answer: redone on a later render, `server_now`
   // would be old by then and the time left would never go down.
   const offset = useRef({ answer: null as string | null, ms: 0 });
@@ -262,8 +267,8 @@ const Layer = memo(function Layer({ art, l, left, stars }: { art: Picture; l: Va
 const Trees = memo(function Trees({ hill, l, left, wind, stars }: { hill: number; l: ValleyLayout; left: number; wind: number; stars: number }) {
   return <>{SWAY[hill].map((tree) => (
     <Sway key={tree.ms} wind={Math.max(wind, 0.5)} depth={tree.depth} ms={tree.ms} rest={[0, 800]} style={{ position: 'absolute', left: left + tree.x * l.wide, top: l.top + tree.y * l.tall, width: tree.w * l.wide, height: tree.h * l.tall }}>
-      <Image source={tree.day} resizeMode="stretch" fadeDuration={0} accessibilityIgnoresInvertColors style={s.whole} />
-      {stars > 0 ? <Image source={tree.night} resizeMode="stretch" fadeDuration={0} accessibilityIgnoresInvertColors style={[s.whole, { opacity: stars }]} /> : null}
+      <Image source={tree.day} resizeMode="stretch" fadeDuration={0} accessibilityIgnoresInvertColors style={a.whole} />
+      {stars > 0 ? <Image source={tree.night} resizeMode="stretch" fadeDuration={0} accessibilityIgnoresInvertColors style={[a.whole, { opacity: stars }]} /> : null}
     </Sway>
   ))}</>;
 });
@@ -416,7 +421,7 @@ const Valley = memo(function Valley({ width, height, pet, level, status, walkedF
       {low > 0.02 ? <View pointerEvents="none" style={[StyleSheet.absoluteFill, { backgroundColor: '#FFB26B', opacity: Math.round(low * 0.14 * 50) / 50 }]} testID="explore-warm-light" /> : null}
       {grey > 0.02 ? <View pointerEvents="none" style={[StyleSheet.absoluteFill, { backgroundColor: '#5C6E86', opacity: Math.round(grey * 0.2 * 50) / 50 }]} /> : null}
       {/* Its feet are this view's origin: the pet's own box hangs from it. It stays at one place across the screen; only the road's rise and fall move it. */}
-      <Animated.View pointerEvents="none" style={[s.traveller, { left: walkX, transform: [{ translateX: entrance.interpolate({ inputRange: [0, 1], outputRange: [-width * 0.6, 0] }) }, { translateY: feet }, { scale: nearer },
+      <Animated.View pointerEvents="none" style={[a.traveller, { left: walkX, transform: [{ translateX: entrance.interpolate({ inputRange: [0, 1], outputRange: [-width * 0.6, 0] }) }, { translateY: feet }, { scale: nearer },
         { translateY: on ? stepping.interpolate({ inputRange: [0, 0.5, 1], outputRange: [0, -size * 0.016, 0] }) : 0 }] }]} testID="explore-pet">
         {/* A soft shadow on the road, leaning away from the sun. */}
         <Svg pointerEvents="none" width={size} height={size * 0.26} style={{ position: 'absolute', left: -size / 2 + cast.dx, top: -size * 0.13, transform: [{ scaleX: cast.stretch }] }}>
@@ -425,10 +430,10 @@ const Valley = memo(function Valley({ width, height, pet, level, status, walkedF
         {c.petLight > 0 ? <Svg pointerEvents="none" width={size * 2} height={size * 0.6} style={{ position: 'absolute', left: -size, top: -size * 0.3 }}>
           <Glow id="explore-pet-light" color="#FFF0C4" opacity={c.petLight} cx={size} cy={size * 0.3} rx={size} ry={size * 0.3} />
         </Svg> : null}
-        {on ? <Animated.View style={[s.dust, { left: -size * 0.34 - 6, top: -8,
+        {on ? <Animated.View style={[a.dust, { left: -size * 0.34 - 6, top: -8,
           opacity: stepping.interpolate({ inputRange: [0, 0.12, 0.6, 1], outputRange: [0.45, 0.32, 0, 0.45] }),
           transform: [{ translateX: stepping.interpolate({ inputRange: [0, 0.6, 1], outputRange: [0, -size * 0.14, 0] }) }, { scale: stepping.interpolate({ inputRange: [0, 0.6, 1], outputRange: [0.5, 1.3, 0.5] }) }] }]}>
-          <View style={s.dustDot} /><View style={s.dustSmall} />
+          <View style={a.dustDot} /><View style={a.dustSmall} />
         </Animated.View> : null}
         <LivingPet ref={petRef} pet={pet} level={level} size={size} x={startX} y={0} walking={walking} phase={on && drawn ? phase : undefined} facing={fromRight ? -1 : 1} />
         {status === 'returned' && arrived ? <GiftBundle x={size * 0.48} y={0} /> : null}
@@ -473,20 +478,18 @@ function GiftBundle({ x, y }: { x: number; y: number }) {
   );
 }
 
-const s = StyleSheet.create({
+// Over the valley: the buttons, the switch and the panel's words are interface (glass, theme ink).
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   fill: { flex: 1, overflow: 'hidden' },
   scene: { position: 'absolute', left: 0, right: 0, top: 0, overflow: 'hidden' },
   hidden: { display: 'none' },
-  // On the web an image keeps its file's size unless it is told otherwise.
-  whole: { position: 'absolute', left: 0, top: 0, width: '100%', height: '100%' },
   topRow: { position: 'absolute', left: 12, right: 12, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   topRight: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  fullButton: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.92)' },
-  hideToggle: { height: 42, borderRadius: 21, paddingLeft: 12, paddingRight: 8, flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: 'rgba(255,255,255,0.86)' },
+  fullButton: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', backgroundColor: t.glass },
+  hideToggle: { height: 42, borderRadius: 21, paddingLeft: 12, paddingRight: 8, flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: t.glass },
   hideText: { ...typeScale.caption, color: t.ink, fontWeight: '800' },
-  track: { width: 34, height: 20, borderRadius: 10, padding: 2, backgroundColor: 'rgba(120,136,160,0.5)' },
-  knob: { width: 16, height: 16, borderRadius: 8, backgroundColor: '#FFFFFF' },
-  traveller: { position: 'absolute', left: 0, top: 0, width: 0, height: 0 },
+  track: { width: 34, height: 20, borderRadius: 10, padding: 2, backgroundColor: t.switchOff },
+  knob: { width: 16, height: 16, borderRadius: 8, backgroundColor: t.thumbOff },
   weather: { paddingVertical: 2, paddingHorizontal: 4 },
   dock: { position: 'absolute', left: 12, right: 12 },
   panelBody: { gap: 8, padding: 16, borderRadius: radius.lg },
@@ -502,6 +505,13 @@ const s = StyleSheet.create({
   linkText: { ...typeScale.caption, color: t.accent, fontWeight: '800' },
   retry: { minHeight: 44, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6 },
   retryText: { ...typeScale.caption, color: t.accent },
+}));
+
+// Inside the picture: the layers' frames and the dust under the pet's feet.
+const a = StyleSheet.create({
+  // On the web an image keeps its file's size unless it is told otherwise.
+  whole: { position: 'absolute', left: 0, top: 0, width: '100%', height: '100%' },
+  traveller: { position: 'absolute', left: 0, top: 0, width: 0, height: 0 },
   dust: { position: 'absolute', flexDirection: 'row', alignItems: 'flex-end', gap: 2 },
   dustDot: { width: 7, height: 7, borderRadius: 4, backgroundColor: 'rgba(214,196,160,0.9)' },
   dustSmall: { width: 4, height: 4, borderRadius: 2, marginBottom: 3, backgroundColor: 'rgba(214,196,160,0.9)' },

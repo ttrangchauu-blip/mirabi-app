@@ -4,6 +4,7 @@
     "slug": "mirabi-app",
     "version": "0.1.1",
     "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
     "icon": "./assets/icon.png",
     "ios": {
       "bundleIdentifier": "com.mirabi.app",

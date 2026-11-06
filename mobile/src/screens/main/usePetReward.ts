@@ -104,5 +104,6 @@ export function usePetReward(onConfirmed: () => void) {
     }
   }, [pending, check, confirmed]);
 
-  return { pending, confirming, error, version, check, track, confirm };
+  /** `returnAt`: when the walk under way ends (ms), or null when no walk is under way. */
+  return { pending, confirming, error, version, check, track, confirm, returnAt };
 }

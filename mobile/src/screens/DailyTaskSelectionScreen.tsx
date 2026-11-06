@@ -7,7 +7,7 @@ import { errorMessage, isSessionExpired } from '../auth/messages';
 import { AuthLayout } from '../components/AuthLayout';
 import { FormBanner, GradientButton } from '../components/AuthForm';
 import { Text } from '../components/Typography';
-import { authTheme } from '../theme';
+import { makeStyles, useTheme } from '../ui/theme';
 import { useConfirmLogout } from '../auth/useConfirmLogout';
 
 type DailyTask = { id: string; group: string; title: string; description: string; exp: number; icon: string };
@@ -24,6 +24,8 @@ const TASK_FALLBACK: DailyTask[] = [
 ];
 
 export function DailyTaskSelectionScreen() {
+  const { t, auth } = useTheme();
+  const styles = useStyles();
   const { user, selectDailyTasks } = useAuth();
   const confirmLogout = useConfirmLogout();
   const [tasks, setTasks] = useState<DailyTask[]>([]);
@@ -70,7 +72,7 @@ export function DailyTaskSelectionScreen() {
       <View style={styles.counterRow}>
         <Text style={styles.counter}>Đã chọn {selected.length}/3</Text>
       </View>
-      {loading ? <ActivityIndicator color={authTheme.link} style={styles.loader} /> : tasks.map((task) => {
+      {loading ? <ActivityIndicator color={auth.link} style={styles.loader} /> : tasks.map((task) => {
         const checked = selected.includes(task.id);
         const disabled = !checked && selected.length >= 3;
         return (
@@ -78,7 +80,7 @@ export function DailyTaskSelectionScreen() {
             accessibilityRole="checkbox" accessibilityState={{ checked, disabled: disabled || submitting }}
             style={[styles.task, checked && styles.taskSelected, disabled && styles.taskDisabled]}>
             <View style={[styles.iconWrap, checked && styles.iconWrapSelected]}>
-              <Ionicons name={task.icon as React.ComponentProps<typeof Ionicons>['name']} size={20} color={checked ? '#FFFFFF' : authTheme.link} />
+              <Ionicons name={task.icon as React.ComponentProps<typeof Ionicons>['name']} size={20} color={checked ? t.onPrimary : auth.link} />
             </View>
             <View style={styles.taskBody}>
               <Text style={styles.group}>{task.group}</Text>
@@ -86,7 +88,7 @@ export function DailyTaskSelectionScreen() {
               <Text style={styles.description}>{task.description}</Text>
             </View>
             <View style={styles.trailing}>
-              <Ionicons name={checked ? 'checkbox' : 'square-outline'} size={22} color={checked ? authTheme.link : '#8AA5B9'} />
+              <Ionicons name={checked ? 'checkbox' : 'square-outline'} size={22} color={checked ? auth.link : t.placeholder} />
             </View>
           </Pressable>
         );
@@ -96,19 +98,19 @@ export function DailyTaskSelectionScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, auth }) => StyleSheet.create({
   counterRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 },
-  counter: { color: authTheme.ink, fontWeight: '900', fontSize: 15 },
+  counter: { color: auth.ink, fontWeight: '900', fontSize: 15 },
   loader: { marginVertical: 32 },
-  task: { flexDirection: 'row', alignItems: 'center', gap: 10, padding: 12, borderRadius: 18, borderWidth: 1.5, borderColor: '#D9EAF5', backgroundColor: '#FFFFFF', marginBottom: 10 },
-  taskSelected: { borderColor: authTheme.link, backgroundColor: '#F0F9FF' },
+  task: { flexDirection: 'row', alignItems: 'center', gap: 10, padding: 12, borderRadius: 18, borderWidth: 1.5, borderColor: t.border, backgroundColor: t.card, marginBottom: 10 },
+  taskSelected: { borderColor: auth.link, backgroundColor: t.surfaceSecondary },
   taskDisabled: { opacity: 0.48 },
-  iconWrap: { width: 38, height: 38, borderRadius: 14, alignItems: 'center', justifyContent: 'center', backgroundColor: '#E7F4FC' },
-  iconWrapSelected: { backgroundColor: authTheme.link },
+  iconWrap: { width: 38, height: 38, borderRadius: 14, alignItems: 'center', justifyContent: 'center', backgroundColor: t.tint },
+  iconWrapSelected: { backgroundColor: t.accentFill },
   taskBody: { flex: 1, gap: 2 },
-  group: { color: authTheme.link, fontSize: 11, fontWeight: '900' },
-  taskTitle: { color: authTheme.ink, fontSize: 14, fontWeight: '800', lineHeight: 19 },
-  description: { color: authTheme.muted, fontSize: 11, lineHeight: 16 },
+  group: { color: auth.link, fontSize: 11, fontWeight: '900' },
+  taskTitle: { color: auth.ink, fontSize: 14, fontWeight: '800', lineHeight: 19 },
+  description: { color: auth.muted, fontSize: 11, lineHeight: 16 },
   trailing: { alignItems: 'center', gap: 7 },
-  logout: { color: authTheme.link, fontWeight: '800', fontSize: 14 },
-});
+  logout: { color: auth.link, fontWeight: '800', fontSize: 14 },
+}));

@@ -3,42 +3,57 @@ import { StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import type { User } from '../../auth/AuthContext';
 import { Text } from '../../components/Typography';
+import { languageName, useLanguage } from '../../i18n';
+import { useNotificationPermission } from '../../notifications/permission';
+import { useAccountSettings } from '../../settings/accountSettings';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { togetherApi } from '../../studyTogether/api';
 import type { PublicUser, SocialSettings } from '../../studyTogether/types';
-import { appTheme as t } from '../../theme';
 import { type as typeScale } from '../../ui/design';
 import { Card, SectionHeader } from '../../ui/kit';
 import { useToast } from '../../ui/Toast';
 import { FriendCode, SocialToggles } from '../together/friendsUi';
 import { BackHeader, EmptyState, ErrorState, LoadingState, PersonRow, SmallButton } from '../together/ui';
+import { modeLabel, notificationSummary } from './AppSettingsScreens';
 import { FeatureGroup, FeatureRow, InfoRow } from './FeatureRow';
 import { showError } from './shared';
 
-/** Cài đặt và trợ giúp, one level under Tiện ích: every row opens what it says, or says plainly that there is nothing yet. */
-export function SettingsScreen({ user, onBack, onOpenProfile, onChangePassword, onOpenNotifications, onOpenPrivacy, onOpenHelp }: {
-  user: User; onBack: () => void; onOpenProfile: () => void; onChangePassword: () => void; onOpenNotifications: () => void; onOpenPrivacy: () => void; onOpenHelp: () => void;
+/**
+ * Cài đặt và trợ giúp, one level under Tiện ích: every row opens what it says, or says plainly that there is nothing yet.
+ * The lines under Thông báo and Ngôn ngữ say what is really set (the account's choice and the device's permission).
+ */
+export function SettingsScreen({ user, onBack, onOpenProfile, onChangePassword, onOpenNotifications, onOpenNotificationSettings, onOpenLanguage, onOpenAppearance, onOpenPrivacy, onOpenHelp }: {
+  user: User; onBack: () => void; onOpenProfile: () => void; onChangePassword: () => void; onOpenNotifications: () => void;
+  onOpenNotificationSettings: () => void; onOpenLanguage: () => void; onOpenAppearance: () => void; onOpenPrivacy: () => void; onOpenHelp: () => void;
 }) {
+  const { t: tr, choice, language } = useLanguage();
+  const { settings } = useAccountSettings(user.id);
+  const { permission } = useNotificationPermission();
+  const { mode } = useTheme();
+  const languageLine = choice === null ? `${tr('settings.language.device')} · ${languageName(language)}` : languageName(language);
   return (
     <>
-      <BackHeader title="Cài đặt và trợ giúp" onBack={onBack} />
-      <SectionHeader title="Tài khoản" />
+      <BackHeader title={tr('settings.title')} onBack={onBack} />
+      <SectionHeader title={tr('settings.account')} />
       <FeatureGroup>
-        <FeatureRow first icon="person" tone="sky" title="Hồ sơ" subtitle={user.email} onPress={onOpenProfile} testID="open-profile" />
-        <FeatureRow icon="key" tone="sun" title="Đổi mật khẩu" subtitle="Nhận mã qua email của bạn" onPress={onChangePassword} testID="open-password" />
+        <FeatureRow first icon="person" tone="sky" title={tr('settings.profile')} subtitle={user.email} onPress={onOpenProfile} testID="open-profile" />
+        <FeatureRow icon="key" tone="sun" title={tr('settings.password')} subtitle={tr('settings.passwordHint')} onPress={onChangePassword} testID="open-password" />
       </FeatureGroup>
-      <SectionHeader title="Thông báo và quyền riêng tư" />
+      <SectionHeader title={tr('settings.notificationsAndPrivacy')} />
       <FeatureGroup>
-        <FeatureRow first icon="notifications" tone="rose" title="Thông báo" subtitle="Xem trong ứng dụng" onPress={onOpenNotifications} testID="open-notifications" />
-        <FeatureRow icon="shield-checkmark" tone="leaf" title="Quyền riêng tư" subtitle="Ghé thăm, trạng thái, người đã chặn" onPress={onOpenPrivacy} testID="open-privacy" />
+        <FeatureRow first icon="notifications" tone="rose" title={tr('settings.notifications.title')} subtitle={notificationSummary(settings.notifications, permission, tr)}
+          onPress={onOpenNotificationSettings} testID="open-notification-settings" />
+        <FeatureRow icon="mail" tone="sky" title={tr('settings.inbox')} subtitle={tr('settings.inboxHint')} onPress={onOpenNotifications} testID="open-notifications" />
+        <FeatureRow icon="shield-checkmark" tone="leaf" title={tr('settings.privacy')} subtitle={tr('settings.privacyHint')} onPress={onOpenPrivacy} testID="open-privacy" />
       </FeatureGroup>
-      <SectionHeader title="Hiển thị" />
+      <SectionHeader title={tr('settings.display')} />
       <FeatureGroup>
-        <InfoRow first icon="language" tone="sea" title="Ngôn ngữ" subtitle="Tiếng Việt, ngôn ngữ duy nhất hiện có" />
-        <InfoRow soon icon="moon" tone="lilac" title="Chế độ tối" subtitle="Cảnh trong Cuộc sống đã tự tối theo giờ" />
+        <FeatureRow first icon="language" tone="sea" title={tr('settings.language.title')} subtitle={languageLine} onPress={onOpenLanguage} testID="open-language" />
+        <FeatureRow icon="contrast" tone="lilac" title={tr('settings.appearance.title')} subtitle={tr(modeLabel(mode))} onPress={onOpenAppearance} testID="open-appearance" />
       </FeatureGroup>
-      <SectionHeader title="Trợ giúp" />
+      <SectionHeader title={tr('settings.help')} />
       <FeatureGroup>
-        <FeatureRow first icon="help-buoy" tone="sky" title="Trợ giúp và cộng đồng" subtitle="Câu hỏi thường gặp, giới thiệu, Bảng tin" onPress={onOpenHelp} testID="open-help" />
+        <FeatureRow first icon="help-buoy" tone="sky" title={tr('settings.helpRow')} subtitle={tr('settings.helpHint')} onPress={onOpenHelp} testID="open-help" />
       </FeatureGroup>
     </>
   );
@@ -46,6 +61,8 @@ export function SettingsScreen({ user, onBack, onOpenProfile, onChangePassword, 
 
 /** Quyền riêng tư: the same settings as the gear in Bạn bè, and the one place to take back a block. */
 export function PrivacyScreen({ onBack }: { onBack: () => void }) {
+  const { t } = useTheme();
+  const s = useStyles();
   const toast = useToast();
   const [settings, setSettings] = useState<SocialSettings | null>(null);
   const [blocked, setBlocked] = useState<PublicUser[] | null>(null);
@@ -119,6 +136,7 @@ const QUESTIONS = [
 ];
 
 export function HelpScreen({ onBack, onReplayTour, onOpenFeed }: { onBack: () => void; onReplayTour: () => void; onOpenFeed: () => void }) {
+  const s = useStyles();
   return (
     <>
       <BackHeader title="Trợ giúp và cộng đồng" onBack={onBack} />
@@ -139,11 +157,11 @@ export function HelpScreen({ onBack, onReplayTour, onOpenFeed }: { onBack: () =>
   );
 }
 
-const s = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   group: { paddingVertical: 4, paddingHorizontal: 14 },
   note: { flexDirection: 'row', gap: 10 },
   noteText: { flex: 1, ...typeScale.caption, fontWeight: '600', color: t.muted },
   questions: { gap: 10 },
   q: { ...typeScale.label, color: t.ink },
   a: { ...typeScale.body, color: t.muted, marginTop: 4 },
-});
+}));

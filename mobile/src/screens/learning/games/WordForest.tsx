@@ -5,7 +5,7 @@ import { PetArt } from '../../../components/PetArt';
 import { drawnActions, hasSprite } from '../../../petSprites';
 import { Text } from '../../../components/Typography';
 import type { Turn } from '../../../learning/types';
-import { appTheme as t } from '../../../theme';
+import { makeStyles, useTheme } from '../../../ui/theme';
 import { BROOK_TALL } from '../../../games/art/rendered';
 import { BridgePost, ForestLayer, LetterStone, Plank, Stream } from '../../../games/art/wordForest';
 import { Draggable, DropArea, DropZone } from '../../../games/engine/drag';
@@ -74,6 +74,8 @@ const FOREST: Layer[] = [
 type Crossed = { pieces: string[]; picture: string; joiner: string };
 
 export function WordForest({ turn, disabled, feedback, onSubmit, collected, total, solved, petId, petLevel, reduceMotion, demo }: Props) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const tiles = turn.prompt.tiles ?? [];
   const letters = turn.prompt.unit === 'letter';
   const [own, setOwn] = useState<(string | null)[]>(() => tiles.map(() => null));
@@ -177,7 +179,7 @@ export function WordForest({ turn, disabled, feedback, onSubmit, collected, tota
     <View style={styles.wrap} onLayout={(e) => setWidth(e.nativeEvent.layout.width)}>
       <View style={styles.bookRow}>
         <View style={styles.bookChip} accessibilityLabel={`Pet đã nhận ${collected} trên ${total} mảnh sách`}>
-          <Ionicons name="book" size={15} color="#8A5A00" />
+          <Ionicons name="book" size={15} color={styles.bookText.color} />
           <Text style={styles.bookText}>Mảnh sách: {collected}/{total}</Text>
         </View>
         <View style={styles.trail} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
@@ -249,7 +251,7 @@ export function WordForest({ turn, disabled, feedback, onSubmit, collected, tota
           style={[styles.secondary, (locked || !slots.some(Boolean)) && styles.dimmed]}><Text style={styles.secondaryText}>Xếp lại</Text></Pressable>
         <Pressable onPress={check} disabled={locked || !complete || !!crossing} accessibilityRole="button" accessibilityLabel="Xây cầu"
           accessibilityState={{ disabled: locked || !complete || !!crossing }} style={[styles.primary, (locked || !complete || !!crossing) && styles.dimmed]}>
-          <Ionicons name="hammer" size={17} color="#FFFFFF" />
+          <Ionicons name="hammer" size={17} color={t.onPrimary} />
           <Text style={styles.primaryText}>Xây cầu</Text>
         </Pressable>
       </View>
@@ -262,6 +264,7 @@ export function WordForest({ turn, disabled, feedback, onSubmit, collected, tota
 function LaidPlank({ piece, size, ok, lay, index, count, reduceMotion }: {
   piece: string; size: number; ok: boolean; lay: Animated.Value; index: number; count: number; reduceMotion: boolean;
 }) {
+  const styles = useStyles();
   const drop = useRef(new Animated.Value(reduceMotion ? 0 : 1)).current;
   useEffect(() => {
     if (reduceMotion) { drop.setValue(0); return; }
@@ -285,14 +288,14 @@ function LaidPlank({ piece, size, ok, lay, index, count, reduceMotion }: {
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, tones, dark }) => StyleSheet.create({
   wrap: { gap: 10, paddingVertical: 4 },
   area: { gap: 10 },
   bookRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 8 },
   bookChip: { flexDirection: 'row', alignItems: 'center', gap: 5 },
-  bookText: { fontSize: 14, fontWeight: '900', color: '#8A5A00' },
+  bookText: { fontSize: 14, fontWeight: '900', color: dark ? tones.sun.ink : '#8A5A00' },
   trail: { flexDirection: 'row', gap: 4, flexShrink: 1, flexWrap: 'wrap', justifyContent: 'flex-end' },
-  trailDot: { width: 10, height: 10, borderRadius: 5, backgroundColor: '#D9E6D2' },
+  trailDot: { width: 10, height: 10, borderRadius: 5, backgroundColor: dark ? t.track : '#D9E6D2' },
   trailDone: { backgroundColor: '#3E8E4F' },
   trailNow: { backgroundColor: '#F2C46D' },
   scene: { borderRadius: 22, overflow: 'hidden', backgroundColor: '#CFEBC8' },
@@ -324,8 +327,8 @@ const styles = StyleSheet.create({
   noteText: { flex: 1, fontSize: 14, fontWeight: '700', lineHeight: 20 },
   actions: { flexDirection: 'row', gap: 8 },
   primary: { flex: 1, minHeight: 46, borderRadius: 14, backgroundColor: '#3E8E4F', alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: 6 },
-  primaryText: { color: '#FFFFFF', fontWeight: '900', fontSize: 16 },
+  primaryText: { color: t.onPrimary, fontWeight: '900', fontSize: 16 },
   secondary: { flex: 1, minHeight: 46, borderRadius: 14, backgroundColor: t.tint, alignItems: 'center', justifyContent: 'center' },
   secondaryText: { color: t.accent, fontWeight: '900', fontSize: 15 },
   dimmed: { opacity: 0.45 },
-});
+}));

@@ -6,7 +6,7 @@ import { learningApi } from '../../learning/api';
 import { GAME_INFO, OUTCOME_LABEL } from '../../learning/labels';
 import { speakEnglish } from '../../learning/prefs';
 import type { VocabAttempt, VocabDirection, VocabFilter, VocabHistory, VocabHistoryItem, VocabMemory, VocabResult, VocabWordDetail } from '../../learning/types';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { Button, Card, Segmented } from '../../ui/kit';
 import { EmptyState, ErrorState, LoadingState, OptionRow, OptionSheet } from '../together/ui';
 import { BackHeader } from './GamePicker';
@@ -25,10 +25,10 @@ const FILTERS: { value: VocabFilter; label: string }[] = [
   { value: 'all', label: 'Tất cả' }, { value: 'learned', label: 'Đã học' }, { value: 'review', label: 'Chưa nhớ' }, { value: 'mastered', label: 'Thành thạo' }];
 const LEVELS = [1, 2, 3, 4, 5];
 const LEVEL_NAMES: Record<number, string> = { 1: 'Rất dễ', 2: 'Dễ', 3: 'Trung bình', 4: 'Khó', 5: 'Nâng cao' };
-const MEMORY: Record<VocabMemory, { label: string; color: string; bg: string }> = {
-  review: { label: 'Chưa nhớ', color: '#9A4B00', bg: '#FFF0DC' },
-  learned: { label: 'Đã học', color: '#136FA8', bg: '#DDF0FA' },
-  mastered: { label: 'Thành thạo', color: '#1E7A4E', bg: '#E2F6EC' },
+const MEMORY: Record<VocabMemory, { label: string }> = {
+  review: { label: 'Chưa nhớ' },
+  learned: { label: 'Đã học' },
+  mastered: { label: 'Thành thạo' },
 };
 /** How well a word is remembered; an older server only says right or "cần ôn". */
 const memoryOf = (item: Pick<VocabHistoryItem, 'status' | 'memory'>): VocabMemory => item.memory ?? (item.status === 'review' ? 'review' : 'learned');
@@ -45,10 +45,12 @@ export function studiedAt(iso: string | null, now = new Date()) {
 }
 
 function StatusPill({ item }: { item: Pick<VocabHistoryItem, 'status' | 'memory'> }) {
-  const look = MEMORY[memoryOf(item)];
+  const s = useStyles();
+  const memory = memoryOf(item);
+  const look = s[`memory_${memory}`];
   return (
-    <View style={[s.pill, { backgroundColor: look.bg }]}>
-      <Text style={[s.pillText, { color: look.color }]}>{look.label}</Text>
+    <View style={[s.pill, { backgroundColor: look.backgroundColor }]}>
+      <Text style={[s.pillText, { color: look.color }]}>{MEMORY[memory].label}</Text>
     </View>
   );
 }
@@ -78,6 +80,8 @@ export function VocabHistoryScreen({ view, onViewChange, onOpen, onBack, onPract
   view: VocabView; onViewChange: (view: VocabView) => void; onOpen: (entryKey: string) => void; onBack: () => void;
   onPractise: Practise; practising: boolean; /** A new page is shown (the screen scrolls back to the top). */ onPageChange?: () => void;
 }) {
+  const { t } = useTheme();
+  const s = useStyles();
   const [data, setData] = useState<VocabHistory | null>(null);
   const [error, setError] = useState<unknown>(null);
   const [loading, setLoading] = useState(false);
@@ -129,7 +133,7 @@ export function VocabHistoryScreen({ view, onViewChange, onOpen, onBack, onPract
         ) : <>
           <View style={s.search}>
             <Ionicons name="search" size={18} color={t.muted} />
-            <TextInput value={typed} onChangeText={setTyped} placeholder="Tìm từ tiếng Anh hoặc nghĩa tiếng Việt" placeholderTextColor="#7F95A8"
+            <TextInput value={typed} onChangeText={setTyped} placeholder="Tìm từ tiếng Anh hoặc nghĩa tiếng Việt" placeholderTextColor={t.placeholder}
               style={s.searchInput} accessibilityLabel="Tìm từ đã học" autoCorrect={false} autoCapitalize="none" returnKeyType="search" maxLength={60}
               onSubmitEditing={() => onViewChange({ ...view, query: typed, page: 0 })} />
             {typed ? <Pressable onPress={() => { setTyped(''); onViewChange({ ...view, query: '', page: 0 }); }} hitSlop={8}
@@ -229,6 +233,8 @@ function attemptLabel(a: VocabAttempt) {
 export function VocabWordScreen({ entryKey, onBack, onPractise, practising }: {
   entryKey: string; onBack: () => void; onPractise: Practise; practising: boolean;
 }) {
+  const { t } = useTheme();
+  const s = useStyles();
   const [word, setWord] = useState<VocabWordDetail | null>(null);
   const [error, setError] = useState<unknown>(null);
   const [choose, setChoose] = useState(false);
@@ -301,7 +307,7 @@ export function VocabWordScreen({ entryKey, onBack, onPractise, practising }: {
         {word.attempts.map((a, i) => (
           <View key={a.turn_id} style={[s.attempt, i > 0 && s.divider]}>
             <Ionicons name={a.result === 'correct' ? 'checkmark-circle' : a.result === 'wrong' ? 'close-circle' : 'ellipse-outline'} size={20}
-              color={a.practice ? t.muted : a.result === 'correct' ? '#1E9E62' : a.result === 'wrong' ? t.danger : t.muted} />
+              color={a.practice ? t.muted : a.result === 'correct' ? t.success : a.result === 'wrong' ? t.danger : t.muted} />
             <View style={s.flex}>
               <Text style={s.attemptLabel}>{attemptLabel(a)}{a.practice ? ' · luyện lại sau khi xem đáp án' : ''}</Text>
               <Text style={s.when}>{studiedAt(a.at)} · {GAME_INFO[GAME_FOR[a.direction]].direction}</Text>
@@ -314,15 +320,15 @@ export function VocabWordScreen({ entryKey, onBack, onPractise, practising }: {
   );
 }
 
-const s = StyleSheet.create({
+const useStyles = makeStyles(({ t, tones }) => StyleSheet.create({
   flex: { flex: 1, minWidth: 0 },
   pressed: { opacity: 0.7 },
-  search: { flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: '#FFFFFF', borderRadius: 16, paddingHorizontal: 14, minHeight: 48, marginBottom: 12 },
+  search: { flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: t.inputBg, borderRadius: 16, paddingHorizontal: 14, minHeight: 48, marginBottom: 12 },
   searchInput: { flex: 1, minWidth: 0, fontSize: 15, color: t.ink, paddingVertical: 10 },
   practiseAll: { marginBottom: 14 },
   stale: { opacity: 0.55 },
   pager: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 14 },
-  pageButton: { flexDirection: 'row', alignItems: 'center', gap: 4, minHeight: 44, paddingHorizontal: 14, borderRadius: 14, backgroundColor: '#FFFFFF' },
+  pageButton: { flexDirection: 'row', alignItems: 'center', gap: 4, minHeight: 44, paddingHorizontal: 14, borderRadius: 14, backgroundColor: t.card },
   pageOff: { opacity: 0.4 },
   pageButtonText: { fontSize: 14, fontWeight: '800', color: t.accent },
   pageInfo: { flex: 1, alignItems: 'center' },
@@ -338,18 +344,21 @@ const s = StyleSheet.create({
   when: { fontSize: 12, color: t.muted, marginTop: 3 },
   pill: { borderRadius: 99, paddingHorizontal: 10, paddingVertical: 4 },
   filters: { flexDirection: 'row', gap: 8, marginTop: 10, marginBottom: 12 },
-  filter: { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 6, minHeight: 40, paddingHorizontal: 12, borderRadius: 14, backgroundColor: '#FFFFFF' },
+  filter: { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 6, minHeight: 40, paddingHorizontal: 12, borderRadius: 14, backgroundColor: t.card },
   filterOn: { backgroundColor: t.tint },
   filterText: { flex: 1, fontSize: 13, fontWeight: '800', color: t.accent },
   sheetList: { maxHeight: 420 },
-  levelTag: { fontSize: 12, fontWeight: '800', color: '#4B3FB5' },
+  levelTag: { fontSize: 12, fontWeight: '800', color: tones.lilac.ink },
   pillText: { fontSize: 12, fontWeight: '900' },
+  memory_review: { color: t.warning, backgroundColor: t.warningBg },
+  memory_learned: { color: t.accent, backgroundColor: t.tint },
+  memory_mastered: { color: t.success, backgroundColor: t.successBg },
   headRow: { flexDirection: 'row', alignItems: 'flex-start', gap: 12 },
   bigWord: { fontSize: 28, fontWeight: '900', color: t.ink },
   phonetic: { fontSize: 15, color: t.muted, marginTop: 2 },
   speak: { width: 44, height: 44, borderRadius: 16, backgroundColor: t.tint, alignItems: 'center', justifyContent: 'center' },
   bigMeaning: { fontSize: 18, fontWeight: '800', color: t.ink, marginTop: 12 },
-  example: { marginTop: 12, padding: 12, borderRadius: 14, backgroundColor: '#F4F9FC' },
+  example: { marginTop: 12, padding: 12, borderRadius: 14, backgroundColor: t.surfaceSecondary },
   exampleEn: { fontSize: 15, color: t.ink, fontWeight: '700', lineHeight: 21 },
   exampleVi: { fontSize: 14, color: t.muted, marginTop: 3, lineHeight: 20 },
   statusRow: { flexDirection: 'row', alignItems: 'center', gap: 10, marginTop: 14 },
@@ -357,9 +366,9 @@ const s = StyleSheet.create({
   dirRow: { paddingVertical: 12 },
   dirName: { fontSize: 15, fontWeight: '800', color: t.ink },
   dirStats: { fontSize: 14, color: t.ink, marginTop: 3 },
-  dirLast: { fontSize: 13, color: '#1E7A4E', fontWeight: '700', marginTop: 2 },
-  dirLastReview: { color: '#9A4B00' },
+  dirLast: { fontSize: 13, color: t.success, fontWeight: '700', marginTop: 2 },
+  dirLastReview: { color: t.warning },
   note: { fontSize: 13, color: t.muted, textAlign: 'center', marginBottom: 14 },
   attempt: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 10 },
   attemptLabel: { fontSize: 14, fontWeight: '700', color: t.ink },
-});
+}));

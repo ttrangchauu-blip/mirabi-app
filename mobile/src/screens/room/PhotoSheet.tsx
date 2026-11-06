@@ -8,9 +8,9 @@ import { errorMessage } from '../../auth/messages';
 import { Text } from '../../components/Typography';
 import { roomApi } from '../../room/api';
 import type { Pose } from '../../room/types';
-import { appTheme as t } from '../../theme';
 import { AppModal } from '../../ui/AppModal';
 import { Button, SoftInput } from '../../ui/kit';
+import { makeStyles, useTheme } from '../../ui/theme';
 import type { Memory } from '../main/memoryTypes';
 
 type Props = { visible: boolean; pose: Pose; onClose: () => void; onSaved: (memory: Memory) => void };
@@ -22,6 +22,8 @@ type Props = { visible: boolean; pose: Pose; onClose: () => void; onSaved: (memo
  */
 export function PhotoSheet({ visible, pose, onClose, onSaved }: Props) {
   const insets = useSafeAreaInsets();
+  const { t } = useTheme();
+  const s = useStyles();
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
   const [preview, setPreview] = useState<{ svg: string; for: string } | null>(null);
@@ -97,10 +99,10 @@ export function PhotoSheet({ visible, pose, onClose, onSaved }: Props) {
   );
 }
 
-const s = StyleSheet.create({
+const useStyles = makeStyles(({ t, dark }) => StyleSheet.create({
   flex: { flex: 1, minWidth: 0 },
-  overlay: { flex: 1, justifyContent: 'flex-end', backgroundColor: 'rgba(18,40,58,0.36)' },
-  sheet: { backgroundColor: '#FFFFFF', borderTopLeftRadius: 28, borderTopRightRadius: 28, maxHeight: '94%', overflow: 'hidden' },
+  overlay: { flex: 1, justifyContent: 'flex-end', backgroundColor: t.scrim },
+  sheet: { backgroundColor: t.card, borderTopLeftRadius: 28, borderTopRightRadius: 28, maxHeight: '94%', overflow: 'hidden' },
   header: { flexDirection: 'row', alignItems: 'flex-start', gap: 10, paddingHorizontal: 20, paddingTop: 18, paddingBottom: 10 },
   title: { color: t.ink, fontSize: 19, fontWeight: '900' },
   subtitle: { color: t.muted, fontSize: 12, lineHeight: 17, marginTop: 3 },
@@ -108,8 +110,10 @@ const s = StyleSheet.create({
   body: { paddingHorizontal: 20 },
   preview: { width: '100%', maxWidth: 300, aspectRatio: 1080 / 1350, alignSelf: 'center', borderRadius: 18, overflow: 'hidden',
     backgroundColor: '#FBF6EE', borderWidth: 1, borderColor: '#EDE4D8' },
-  previewBusy: { ...StyleSheet.absoluteFillObject, alignItems: 'center', justifyContent: 'center', gap: 10, padding: 16, backgroundColor: '#FBF6EEB3' },
+  // The photo's paper (above) is part of the picture; the veil over it while it loads or fails carries text, so it follows the theme.
+  previewBusy: { ...StyleSheet.absoluteFillObject, alignItems: 'center', justifyContent: 'center', gap: 10, padding: 16,
+    backgroundColor: dark ? 'rgba(27,41,68,0.82)' : '#FBF6EEB3' },
   label: { color: t.ink, fontSize: 13, fontWeight: '800', marginTop: 14, marginBottom: 6 },
   errorText: { color: t.danger, fontSize: 13, lineHeight: 18, fontWeight: '700', marginTop: 10, textAlign: 'center' },
   save: { marginTop: 16 },
-});
+}));

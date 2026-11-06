@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import { Text } from '../../components/Typography';
 import { togetherApi } from '../../studyTogether/api';
 import type { NotificationKind, SocialNotification } from '../../studyTogether/types';
-import { appTheme as t } from '../../theme';
+import { makeStyles } from '../../ui/theme';
 import { Card, IconCircle, IconName } from '../../ui/kit';
 import { Route, usePullToRefresh, useTogetherNav } from './navigation';
 import { BackHeader, EmptyState, ErrorState, LoadingState, SmallButton } from './ui';
@@ -37,6 +37,7 @@ function ago(iso: string) {
 }
 
 export function NotificationsScreen() {
+  const styles = useStyles();
   const nav = useTogetherNav();
   const [items, setItems] = useState<SocialNotification[] | null>(null);
   const [error, setError] = useState<unknown>(null);
@@ -112,7 +113,7 @@ export function NotificationsScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   flex: { flex: 1 },
   row: { flexDirection: 'row', gap: 12, paddingVertical: 10, alignItems: 'flex-start' },
   title: { fontSize: 15, fontWeight: '700', color: t.ink },
@@ -120,4 +121,4 @@ const styles = StyleSheet.create({
   body: { fontSize: 13, color: t.muted, lineHeight: 19, marginTop: 2 },
   time: { fontSize: 11, color: t.muted, marginTop: 4 },
   dot: { width: 10, height: 10, borderRadius: 5, backgroundColor: t.accent, marginTop: 6 },
-});
+}));

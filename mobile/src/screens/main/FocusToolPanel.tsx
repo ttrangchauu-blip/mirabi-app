@@ -4,14 +4,17 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Text } from '../../components/Typography';
 import { useReduceMotion } from '../../components/useReduceMotion';
-import { focusTheme as f } from './focusSpaceTheme';
+import { focusThemeOf } from './focusSpaceTheme';
 import { useViewportSize } from '../../components/MobileViewport';
 import { AppModal } from '../../ui/AppModal';
+import { makeStyles, useTheme } from '../../ui/theme';
 
 type Props = { title: string; subtitle: string; desktop: boolean; onClose: () => void; children: React.ReactNode };
 
 /** Inline desktop companion; modal sheet inside the app on narrow screens. Neither owns the timer. */
 export function FocusToolPanel({ title, subtitle, desktop, onClose, children }: Props) {
+  const f = focusThemeOf(useTheme().dark);
+  const s = useStyles();
   const insets = useSafeAreaInsets();
   const reduce = useReduceMotion();
   const { height } = useViewportSize();
@@ -44,14 +47,14 @@ export function FocusToolPanel({ title, subtitle, desktop, onClose, children }: 
   </AppModal>;
 }
 
-const s = StyleSheet.create({
+const useStyles = makeStyles(({ t, dark }) => { const f = focusThemeOf(dark); return StyleSheet.create({
   side: { width: 350, height: 700, flexShrink: 0, minWidth: 0, maxHeight: 760, backgroundColor: f.paper, borderRadius: f.radius,
-    borderWidth: 1, borderColor: '#FFFFFF', overflow: 'hidden', shadowColor: f.shadow, shadowOpacity: .07, shadowRadius: 18, shadowOffset: { width: 0, height: 6 } },
-  overlay: { flex: 1, justifyContent: 'flex-end', backgroundColor: 'rgba(30,49,65,.28)' },
+    borderWidth: 1, borderColor: t.glassBorder, overflow: 'hidden', shadowColor: f.shadow, shadowOpacity: .07, shadowRadius: 18, shadowOffset: { width: 0, height: 6 } },
+  overlay: { flex: 1, justifyContent: 'flex-end', backgroundColor: t.scrim },
   sheet: { backgroundColor: f.paper, borderTopLeftRadius: 28, borderTopRightRadius: 28, maxHeight: '86%', minHeight: '55%', overflow: 'hidden' },
-  handle: { width: 36, height: 4, borderRadius: 2, backgroundColor: '#CDD4D6', alignSelf: 'center', marginBottom: 6 },
+  handle: { width: 36, height: 4, borderRadius: 2, backgroundColor: t.disabled, alignSelf: 'center', marginBottom: 6 },
   header: { flexDirection: 'row', alignItems: 'flex-start', gap: 10, padding: 22, borderBottomWidth: 1, borderBottomColor: f.line },
   heading: { flex: 1, minWidth: 0 }, title: { color: f.ink, fontSize: 19, fontWeight: '800' }, subtitle: { color: f.muted, fontSize: 12, lineHeight: 18, marginTop: 5 },
   close: { width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center', backgroundColor: f.cream },
   body: { padding: 22, gap: 14 },
-});
+}); });

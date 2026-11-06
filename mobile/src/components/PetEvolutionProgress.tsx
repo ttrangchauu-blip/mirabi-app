@@ -4,8 +4,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { PetArt } from './PetArt';
 import { PetHatch } from './PetHatch';
 import { Text } from './Typography';
-import { appTheme as t } from '../theme';
 import { ProgressBar, formatNumber } from '../ui/kit';
+import { makeStyles, useTheme } from '../ui/theme';
 
 /** Cumulative EXP that reaches each stage (backend progression.py); shown wherever the pet's EXP progress appears. */
 export const PET_THRESHOLDS = [0, 300, 800, 1500, 2400, 3500, 5000];
@@ -16,6 +16,8 @@ type Props = { pet: string; currentPetLevel: number; totalExp: number;
   /** The egg has just reached Lv.1: hatch it here, then call `onHatched`. */ hatching?: boolean; onHatched?: () => void };
 
 export function PetEvolutionProgress({ pet, currentPetLevel, totalExp, hatching = false, onHatched }: Props) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const currentLevel = Math.max(0, Math.min(6, currentPetLevel));
   const exp = Math.max(0, totalExp);
   const [viewingPetLevel, setViewingPetLevel] = useState(currentLevel);
@@ -71,7 +73,7 @@ export function PetEvolutionProgress({ pet, currentPetLevel, totalExp, hatching 
     <View style={styles.viewer}>
       <Pressable onPress={() => navigateTo(viewingPetLevel - 1)} disabled={viewingPetLevel === 0 || !!hatchPhase}
         accessibilityRole="button" accessibilityLabel={'Xem c\u1ea5p tr\u01b0\u1edbc'} style={styles.arrow}>
-        <Ionicons name="chevron-back" size={18} color={viewingPetLevel === 0 || hatchPhase ? '#B7CBD8' : t.accent} />
+        <Ionicons name="chevron-back" size={18} color={viewingPetLevel === 0 || hatchPhase ? t.disabled : t.accent} />
       </Pressable>
       <Animated.View style={[styles.petFocus, { transform: [{ translateX: slide }] }]}>
         <View style={[styles.petImage, isLockedPreview && styles.lockedPreview]}>
@@ -87,7 +89,7 @@ export function PetEvolutionProgress({ pet, currentPetLevel, totalExp, hatching 
       </Animated.View>
       <Pressable onPress={() => navigateTo(viewingPetLevel + 1)} disabled={viewingPetLevel === 6 || !!hatchPhase}
         accessibilityRole="button" accessibilityLabel={'Xem c\u1ea5p ti\u1ebfp theo'} style={styles.arrow}>
-        <Ionicons name="chevron-forward" size={18} color={viewingPetLevel === 6 || hatchPhase ? '#B7CBD8' : t.accent} />
+        <Ionicons name="chevron-forward" size={18} color={viewingPetLevel === 6 || hatchPhase ? t.disabled : t.accent} />
       </Pressable>
     </View>
 
@@ -99,15 +101,15 @@ export function PetEvolutionProgress({ pet, currentPetLevel, totalExp, hatching 
   </View>;
 }
 
-const styles = StyleSheet.create({
-  progress: { paddingHorizontal: 12, paddingTop: 12, paddingBottom: 16, borderTopWidth: 1, borderTopColor: 'rgba(19,111,168,0.10)' },
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
+  progress: { paddingHorizontal: 12, paddingTop: 12, paddingBottom: 16, borderTopWidth: 1, borderTopColor: t.tint },
   heading: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginBottom: 4 },
   headingCopy: { flex: 1 },
   title: { fontSize: 15, fontWeight: '900', color: t.ink }, subtitle: { fontSize: 11, color: t.muted, marginTop: 2 },
   returnButton: { paddingHorizontal: 9, paddingVertical: 6, borderRadius: 999, backgroundColor: t.tint },
   returnText: { fontSize: 10, fontWeight: '800', color: t.accent },
   viewer: { minHeight: 170, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  arrow: { width: 30, height: 38, borderRadius: 19, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.66)' },
+  arrow: { width: 30, height: 38, borderRadius: 19, alignItems: 'center', justifyContent: 'center', backgroundColor: t.glass },
   petFocus: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   petImage: { width: 146, height: 142, alignItems: 'center', justifyContent: 'center' },
   lockedPreview: { opacity: 0.6 },
@@ -117,4 +119,4 @@ const styles = StyleSheet.create({
   expRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 7, gap: 8 },
   expLabel: { flex: 1, fontSize: 11, fontWeight: '800', color: t.accent },
   viewingHint: { fontSize: 10, color: t.muted },
-});
+}));

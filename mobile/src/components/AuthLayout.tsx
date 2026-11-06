@@ -3,7 +3,7 @@ import { Image, KeyboardAvoidingView, Platform, Pressable, ScrollView, StatusBar
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { appTheme as t } from '../theme';
+import { makeStyles, useTheme } from '../ui/theme';
 import { useViewportSize } from './MobileViewport';
 import { PetCompanion } from './PetCompanion';
 import { Sparkles } from './Sparkles';
@@ -29,6 +29,8 @@ type Props = {
  * header; secondary screens (register, password reset) get a back button and a left-aligned title like the main app.
  */
 export function AuthLayout({ title, subtitle, children, footer, showLogo = false, showCompanion = false, pet, onBack }: Props) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const { height, width } = useViewportSize();
   const insets = useSafeAreaInsets();
   const compact = height < 760;
@@ -37,7 +39,7 @@ export function AuthLayout({ title, subtitle, children, footer, showLogo = false
   const logoSize = compact ? 96 : 120;
   return (
     <LinearGradient colors={t.backdrop} style={styles.fill}>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle={t.statusBar} />
       <Sparkles />
       <View style={[styles.fill, { paddingTop: insets.top, paddingBottom: Math.max(insets.bottom, 12) }]}>
         <KeyboardAvoidingView style={styles.fill} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
@@ -68,11 +70,11 @@ export function AuthLayout({ title, subtitle, children, footer, showLogo = false
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   fill: { flex: 1 },
   scroll: { flexGrow: 1, paddingHorizontal: 24 },
   column: { flexGrow: 1, width: '100%', maxWidth: 440, alignSelf: 'center' },
-  back: { width: 44, height: 44, borderRadius: 22, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', marginTop: 8,
+  back: { width: 44, height: 44, borderRadius: 22, backgroundColor: t.card, alignItems: 'center', justifyContent: 'center', marginTop: 8,
     shadowColor: t.shadow, shadowOpacity: 0.1, shadowRadius: 10, shadowOffset: { width: 0, height: 4 }, elevation: 2 },
   topSpacer: { height: 16 },
   main: { flexGrow: 1, paddingTop: 16 },
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
   titleCompact: { fontSize: 26 },
   subtitle: { fontSize: 15, lineHeight: 22, color: t.muted, marginTop: 6 },
   textCentered: { textAlign: 'center' },
-  card: { backgroundColor: '#FFFFFF', borderRadius: 28, padding: 20,
+  card: { backgroundColor: t.card, borderRadius: 28, padding: 20,
     shadowColor: t.shadow, shadowOpacity: 0.1, shadowRadius: 22, shadowOffset: { width: 0, height: 10 }, elevation: 4 },
   footer: { alignItems: 'center', paddingTop: 20, paddingBottom: 4 },
-});
+}));

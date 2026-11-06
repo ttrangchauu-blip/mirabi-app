@@ -6,9 +6,9 @@ import { Text } from '../../components/Typography';
 import { educationAdminApi, type CalendarAlert, type CalendarChange, type CalendarInput, type CalendarYear, type LearnerDetail,
   type LearnerRow } from '../../learning/education';
 import { GRADES, gradeLabel } from '../../studyProfile';
-import { appTheme as t } from '../../theme';
 import { useConfirm } from '../../ui/ConfirmDialog';
 import { Button, Card, Segmented, SoftInput } from '../../ui/kit';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { useToast } from '../../ui/Toast';
 import { BackHeader } from '../learning/GamePicker';
 
@@ -25,6 +25,7 @@ const KIND_LABEL: Record<string, string> = {
 const when = (iso: string) => iso.slice(0, 16).replace('T', ' ');
 
 function Field({ label, ...props }: React.ComponentProps<typeof SoftInput> & { label: string }) {
+  const styles = useStyles();
   return (
     <View style={styles.field}>
       <Text style={styles.label}>{label}</Text>
@@ -35,6 +36,7 @@ function Field({ label, ...props }: React.ComponentProps<typeof SoftInput> & { l
 
 function Chips<T extends string>({ label, options, value, onChange }: { label: string; options: { id: T; label: string }[]; value: T | null;
   onChange: (id: T) => void }) {
+  const styles = useStyles();
   return (
     <View style={styles.field}>
       <Text style={styles.label}>{label}</Text>
@@ -51,10 +53,12 @@ function Chips<T extends string>({ label, options, value, onChange }: { label: s
 }
 
 function Alerts({ alerts }: { alerts: CalendarAlert[] }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   if (!alerts.length) return null;
   return (
     <View style={styles.alert} accessibilityRole="alert">
-      <Ionicons name="warning-outline" size={18} color="#8A5A00" />
+      <Ionicons name="warning-outline" size={18} color={t.warning} />
       <View style={styles.flex}>
         {alerts.map((a) => (
           <Text key={`${a.region}.${a.academic_year}`} style={styles.alertText}>
@@ -68,6 +72,7 @@ function Alerts({ alerts }: { alerts: CalendarAlert[] }) {
 }
 
 export function EducationAdminScreen({ onBack }: { onBack: () => void }) {
+  const styles = useStyles();
   const [tab, setTab] = useState<'learners' | 'calendar'>('learners');
   const [alerts, setAlerts] = useState<CalendarAlert[]>([]);
   const [regions, setRegions] = useState<{ id: string; label: string }[]>([{ id: 'VN', label: 'Việt Nam' }]);
@@ -97,6 +102,8 @@ type Action = 'grade' | 'repeat' | 'promote' | 'region';
 const ACTION_LABEL: Record<Action, string> = { grade: 'Sửa lớp', repeat: 'Xác nhận học lại', promote: 'Xác nhận lên lớp', region: 'Đổi địa phương' };
 
 function Learners({ regions, onChanged }: { regions: { id: string; label: string }[]; onChanged: () => void }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const toast = useToast();
   const confirm = useConfirm();
   const [query, setQuery] = useState('');
@@ -227,6 +234,8 @@ const formOf = (y: CalendarYear | null, year: number): Form => ({
 });
 
 function Calendar({ regions, onChanged }: { regions: { id: string; label: string }[]; onChanged: () => void }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const toast = useToast();
   const confirm = useConfirm();
   const [region, setRegion] = useState('VN');
@@ -299,8 +308,8 @@ function Calendar({ regions, onChanged }: { regions: { id: string; label: string
         <View key={y.academic_year} style={styles.year}>
           <View style={styles.row}>
             <Text style={[styles.historyTitle, styles.flex]}>Năm học {y.label}</Text>
-            <View style={[styles.badge, { backgroundColor: y.verified ? t.successBg : '#FFF1D6' }]}>
-              <Text style={[styles.badgeText, { color: y.verified ? t.success : '#8A5A00' }]}>{y.verified ? 'Đã xác minh' : 'Chưa xác minh'}</Text>
+            <View style={[styles.badge, { backgroundColor: y.verified ? t.successBg : t.warningBg }]}>
+              <Text style={[styles.badgeText, { color: y.verified ? t.success : t.warning }]}>{y.verified ? 'Đã xác minh' : 'Chưa xác minh'}</Text>
             </View>
           </View>
           <Text style={styles.small}>Tựu trường {y.school_start_date} · Lên lớp {y.promotion_date}{y.opening_date ? ` · Khai giảng ${y.opening_date}` : ''}</Text>
@@ -319,7 +328,7 @@ function Calendar({ regions, onChanged }: { regions: { id: string; label: string
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   flex: { flex: 1 },
   gap: { height: 12 },
   row: { flexDirection: 'row', alignItems: 'center', gap: 8 },
@@ -329,25 +338,25 @@ const styles = StyleSheet.create({
   muted: { color: t.muted, fontSize: 14, lineHeight: 20, marginTop: 6 },
   line: { fontSize: 14, color: t.ink, lineHeight: 20, flexShrink: 1 },
   small: { fontSize: 12, color: t.muted, lineHeight: 17, marginTop: 2 },
-  note: { fontSize: 13, fontWeight: '700', color: '#8A5A00', lineHeight: 18 },
+  note: { fontSize: 13, fontWeight: '700', color: t.warning, lineHeight: 18 },
   error: { color: t.danger, fontWeight: '700', marginVertical: 8 },
   section: { fontSize: 15, fontWeight: '900', color: t.ink, marginTop: 16, marginBottom: 6 },
   field: { marginBottom: 6 },
   label: { fontSize: 12, fontWeight: '800', color: t.muted, marginBottom: 4 },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
-  chip: { minHeight: 34, paddingHorizontal: 10, borderRadius: 17, backgroundColor: '#FFFFFF', justifyContent: 'center' },
+  chip: { minHeight: 34, paddingHorizontal: 10, borderRadius: 17, backgroundColor: t.card, justifyContent: 'center' },
   chipOn: { backgroundColor: t.accent },
   chipText: { fontSize: 13, fontWeight: '800', color: t.ink },
-  chipTextOn: { color: '#FFFFFF' },
-  alert: { flexDirection: 'row', gap: 8, backgroundColor: '#FFF6E5', borderRadius: 14, padding: 10, marginBottom: 12 },
-  alertText: { fontSize: 13, fontWeight: '700', color: '#8A5A00', lineHeight: 18 },
+  chipTextOn: { color: t.onPrimary },
+  alert: { flexDirection: 'row', gap: 8, backgroundColor: t.warningBg, borderRadius: 14, padding: 10, marginBottom: 12 },
+  alertText: { fontSize: 13, fontWeight: '700', color: t.warning, lineHeight: 18 },
   actions: { gap: 8, marginTop: 4 },
-  result: { flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: '#FFFFFF', borderRadius: 14, padding: 12, marginTop: 8 },
+  result: { flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: t.card, borderRadius: 14, padding: 12, marginTop: 8 },
   pressed: { opacity: 0.85 },
-  history: { backgroundColor: '#FFFFFF', borderRadius: 12, padding: 10, marginBottom: 6 },
+  history: { backgroundColor: t.card, borderRadius: 12, padding: 10, marginBottom: 6 },
   historyTitle: { fontSize: 14, fontWeight: '800', color: t.ink },
-  year: { backgroundColor: '#FFFFFF', borderRadius: 14, padding: 12, marginTop: 8 },
+  year: { backgroundColor: t.card, borderRadius: 14, padding: 12, marginTop: 8 },
   badge: { borderRadius: 10, paddingHorizontal: 8, paddingVertical: 3 },
   badgeText: { fontSize: 11, fontWeight: '900' },
   toggle: { flexDirection: 'row', alignItems: 'center', gap: 8, minHeight: 44 },
-});
+}));

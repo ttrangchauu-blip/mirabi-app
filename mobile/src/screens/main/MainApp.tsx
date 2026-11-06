@@ -5,7 +5,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useAuth } from '../../auth/AuthContext';
 import { petById } from '../../pets';
 import { TabKey } from '../../tabs';
-import { appTheme } from '../../theme';
+import { useTheme } from '../../ui/theme';
+import { useMockStatusBar } from '../../components/MobileViewport';
 import { useMuteToasts, useToast } from '../../ui/Toast';
 import { DailyQuestsScreen } from './DailyQuestsScreen';
 import { FeedScreen } from './FeedScreen';
@@ -57,10 +58,15 @@ import { CareerJourneyScreen } from '../career/CareerJourneyScreen';
 import { lifeEligible } from '../../life/access';
 import { AchievementsScreen } from '../achievements/AchievementsScreen';
 import { useAchievementNotices } from '../../achievements/useAchievementNotices';
+import { useLanguage } from '../../i18n';
+import { wants } from '../../notifications/permission';
+import { usePetReturnNotice } from '../../notifications/usePetReturnNotice';
+import { useAccountSettings } from '../../settings/accountSettings';
+import { AppearanceScreen, LanguageScreen, NotificationSettingsScreen } from './AppSettingsScreens';
 
 export type FocusTimer = ReturnType<typeof usePomodoroTimer>;
 
-type Overlay = 'profile' | 'studyProfile' | 'educationAdmin' | 'quests' | 'streak' | 'album' | 'visit' | 'feed' | 'inventory' | 'achievements' | 'keepsakes' | 'settings' | 'privacy' | 'help' | 'invite' | 'password' | 'tour' | 'gardenVisit' | 'work' | 'adventure' | 'money' | 'town' | 'career';
+type Overlay = 'profile' | 'studyProfile' | 'educationAdmin' | 'quests' | 'streak' | 'album' | 'visit' | 'feed' | 'inventory' | 'achievements' | 'keepsakes' | 'settings' | 'notificationSettings' | 'language' | 'appearance' | 'privacy' | 'help' | 'invite' | 'password' | 'tour' | 'gardenVisit' | 'work' | 'adventure' | 'money' | 'town' | 'career';
 
 export function MainApp() {
   const { user, setUser, streakPopup, dismissStreakPopup, logout } = useAuth();
@@ -138,7 +144,23 @@ export function MainApp() {
     const failure = dashboardError ?? postsError;
     if (failure) showError('Không tải được dữ liệu', failure);
   }, [readDashboard]);
-  const timer = usePomodoroTimer(refresh, user?.id);
+  // The settings that follow the account: which notices Mirabi sends, and the language (applied on this device too).
+  const account = useAccountSettings(user?.id ?? 0);
+  const notices = account.settings.notifications;
+  const { choice: languageChoice, setChoice: setLanguageChoice } = useLanguage();
+  const accountLanguage = account.stored.language;
+  useEffect(() => { if (accountLanguage !== undefined && accountLanguage !== languageChoice) setLanguageChoice(accountLanguage); },
+    // Only when the account's value arrives or changes: a choice made here is saved to the account at the same time.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [accountLanguage]);
+  // Light, dark or the device's: the account's choice, applied on this device (which also keeps it for before sign-in).
+  const theme = useTheme();
+  const { t } = theme;
+  const accountTheme = account.stored.theme;
+  useEffect(() => { if (accountTheme !== undefined && accountTheme !== theme.mode) theme.setMode(accountTheme); },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [accountTheme]);
+  const timer = usePomodoroTimer(refresh, user?.id, wants(notices, 'focus'));
   const muteToasts = useMuteToasts();
   useEffect(() => { muteToasts(timer.quiet); return () => muteToasts(false); }, [muteToasts, timer.quiet]);
   useEffect(() => { void refresh(); }, [refresh]);
@@ -159,6 +181,7 @@ export function MainApp() {
   }, [loadDashboard]);
   // The walk's EXP was granted when the pet came back; reloading shows the latest numbers.
   const petReward = usePetReward(loadDashboard);
+  usePetReturnNotice(petReward.returnAt, user?.pet_name ?? petById(user?.pet ?? 'fox').name, wants(notices, 'pet'));
   // Hatching first, the walk after: the hatch's confirmation may have started it, so the pet frame reloads.
   const [hatchVersion, setHatchVersion] = useState(0);
   const userRef = useRef(user);
@@ -191,7 +214,7 @@ export function MainApp() {
   }, [checkMemory]);
   // "🏅 Mở khóa thành tựu": not while focus mode mutes notices, nor on the achievements screen, which shows them itself.
   const openAchievements = useCallback(() => setOverlays((s) => (s[s.length - 1] === 'achievements' ? s : [...s, 'achievements'])), []);
-  useAchievementNotices(!!user && !timer.quiet && overlay !== 'achievements', openAchievements);
+  useAchievementNotices(!!user && !timer.quiet && overlay !== 'achievements' && wants(notices, 'achievements'), openAchievements);
   // "Xem quà" on the pet frame: always answer, even when the backend has nothing to show yet.
   const openPetGifts = useCallback(async () => {
     const found = await petReward.check();
@@ -211,6 +234,9 @@ export function MainApp() {
     return () => sub.remove();
   }, [inFreeStudy]);
 
+  // Over the living world's scenes the status bar keeps dark icons, as before: the scenes keep their own daylight.
+  const barStyle = !overlay && tab === 'Room' ? 'dark-content' : t.statusBar;
+  useMockStatusBar(barStyle);
   if (!user) return null;
   // Every visit to "Học tập" from the menu starts on the subject screen.
   const navigate = (key: TabKey) => {
@@ -275,8 +301,8 @@ export function MainApp() {
 
   return (
     <WeatherProvider enabled={worldVisited || room}>
-    <LinearGradient colors={appTheme.backdrop} style={styles.fill}>
-      <StatusBar barStyle="dark-content" />
+    <LinearGradient colors={t.backdrop} style={styles.fill}>
+      <StatusBar barStyle={barStyle} />
       {overlay === 'password' ? (
         <ForgotPasswordScreen account email={user.email} onEmailChange={() => {}}
           onBackToLogin={(done) => { if (done) { toast(done, 'success'); void logout(); } else back(); }} />
@@ -339,7 +365,11 @@ export function MainApp() {
           : overlay === 'studyProfile' ? <StudyProfileScreen user={user} onBack={back} onUserUpdated={setUser} />
           : overlay === 'educationAdmin' && user.role === 'admin' ? <EducationAdminScreen onBack={back} />
           : overlay === 'settings' ? <SettingsScreen user={user} onBack={back} onOpenProfile={() => open('profile')} onChangePassword={() => open('password')}
-              onOpenNotifications={() => openTogether({ name: 'notifications' })} onOpenPrivacy={() => open('privacy')} onOpenHelp={() => open('help')} />
+              onOpenNotifications={() => openTogether({ name: 'notifications' })} onOpenNotificationSettings={() => open('notificationSettings')}
+              onOpenLanguage={() => open('language')} onOpenAppearance={() => open('appearance')} onOpenPrivacy={() => open('privacy')} onOpenHelp={() => open('help')} />
+          : overlay === 'notificationSettings' ? <NotificationSettingsScreen userId={user.id} onBack={back} />
+          : overlay === 'language' ? <LanguageScreen userId={user.id} onBack={back} />
+          : overlay === 'appearance' ? <AppearanceScreen userId={user.id} onBack={back} />
           : overlay === 'privacy' ? <PrivacyScreen onBack={back} />
           : overlay === 'invite' ? <InviteScreen onBack={back} />
           : overlay === 'help' ? <HelpScreen onBack={back} onReplayTour={() => open('tour')} onOpenFeed={() => open('feed')} />
@@ -361,7 +391,7 @@ export function MainApp() {
       </ScrollView>
       )}
       {/* Keeps the status bar readable when content scrolls underneath it; the room's wall goes up to the top instead. */}
-      {room || fullScreen ? null : <LinearGradient pointerEvents="none" colors={[appTheme.backdrop[0], 'rgba(217,240,252,0)']}
+      {room || fullScreen ? null : <LinearGradient pointerEvents="none" colors={[t.backdrop[0], `${t.backdrop[0]}00`]}
         style={[styles.scrim, { height: insets.top + 12 }]} />}
       {(games && immersive) || fullScreen || sceneAlone ? null : <TabBar active={tab} onChange={(key) => { void leaveTo(key); }} bottomInset={insets.bottom}
         badges={{ Room: pendingRequests }} />}

@@ -5,7 +5,8 @@ import { PetArt, restartFromZero } from '../../components/PetArt';
 import { attackWindupMs, SPRITE_LAYOUT } from '../../petSprites';
 import { Text } from '../../components/Typography';
 import type { TutorialScene, TutorialTarget } from '../../learning/tutorials';
-import { appTheme as t } from '../../theme';
+import { appTheme } from '../../theme';
+import { makeStyles } from '../../ui/theme';
 import { AnswerSlots } from './games/LetterInput';
 import { Rock, WordTile } from './games/Playfield';
 import { CodePath, SortCards, SpellDetective } from './games/CurriculumGames';
@@ -87,6 +88,7 @@ function useLoop(ms: number, reduceMotion: boolean, still = 0.5) {
 
 /** A small working copy of the game, drawn like the real one, that shows the move the page explains. */
 export function TutorialArt({ scene, petId, petLevel, reduceMotion }: Props) {
+  const styles = useStyles();
   // The sky scenes place the words, the bullet and the pet from the frame's width.
   const [width, setWidth] = useState(0);
   const body = (() => {
@@ -118,6 +120,7 @@ export function TutorialArt({ scene, petId, petLevel, reduceMotion }: Props) {
 // --- Vocabulary: the night sky ------------------------------------------------------------------------------------------
 
 function Sky({ children }: { children: React.ReactNode }) {
+  const styles = useStyles();
   return (
     <View style={[styles.scene, styles.sky]}>
       {[[10, 14], [26, 48], [44, 10], [62, 30], [80, 16], [90, 54], [18, 76], [70, 70]].map(([x, y], i) => (
@@ -132,6 +135,7 @@ function Sky({ children }: { children: React.ReactNode }) {
 /** A falling target as the game draws it: the word tile (Anh → Việt) or the rock with its meaning (Việt → Anh), and the
  * answer boxes in its frame, right under it. The aimed one is larger and shows what is typed. */
 function Target({ variant, target, aimed, typed = '' }: { variant: 'word' | 'meteor'; target: TutorialTarget; aimed: boolean; typed?: string }) {
+  const styles = useStyles();
   return (
     <View style={styles.target}>
       {variant === 'word' ? <WordTile word={target.label} danger={false} big={aimed} /> : (
@@ -149,6 +153,7 @@ function Target({ variant, target, aimed, typed = '' }: { variant: 'word' | 'met
 
 /** Several words falling at once in their lanes, each at its own height; the one closest to the ground is aimed. */
 function FallScene({ scene, width, petId, petLevel, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'fall' }>; width: number } & Omit<Props, 'scene'>) {
+  const styles = useStyles();
   const fall = useLoop(4200, reduceMotion, 0.4);
   const drop = fall.interpolate({ inputRange: [0, 1], outputRange: [0, 28] });
   const lanes = [0.27, 0.73, 0.5];
@@ -173,6 +178,7 @@ function FallScene({ scene, width, petId, petLevel, reduceMotion }: { scene: Ext
  * to it · n+2, n+3: the bullet reaches it, it breaks, and its meaning shows where it was hit.
  */
 function TypeScene({ scene, width, petId, petLevel, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'type' }>; width: number } & Omit<Props, 'scene'>) {
+  const styles = useStyles();
   const letters = scene.answer.length;
   const step = useStep(letters + 4, reduceMotion);
   const typed = step <= letters ? scene.answer.slice(0, step) : '';
@@ -227,6 +233,7 @@ function TypeScene({ scene, width, petId, petLevel, reduceMotion }: { scene: Ext
 // --- Math: the meadow and the bridge -----------------------------------------------------------------------------------
 
 function MonsterScene({ scene, petId, petLevel, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'monster' }> } & Omit<Props, 'scene'>) {
+  const styles = useStyles();
   const walk = useLoop(3600, reduceMotion);
   const [width, setWidth] = useState(0);
   // From the right edge to just before the base, where it stops and waits (Học tập).
@@ -247,6 +254,7 @@ function MonsterScene({ scene, petId, petLevel, reduceMotion }: { scene: Extract
 const PAD_KEYS = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 function NumpadScene({ scene, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'numpad' }>; reduceMotion: boolean }) {
+  const styles = useStyles();
   const digits = scene.answer.length;
   const step = useStep(digits + 3, reduceMotion);
   const typed = scene.answer.slice(0, Math.min(step, digits));
@@ -271,6 +279,7 @@ function NumpadScene({ scene, reduceMotion }: { scene: Extract<TutorialScene, { 
 }
 
 function SpansScene({ scene, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'spans' }>; reduceMotion: boolean }) {
+  const styles = useStyles();
   const SPANS = 5;
   // One more span per step; the answer is shown in the gap while a span is being laid.
   const step = useStep(SPANS + 1, reduceMotion);
@@ -288,6 +297,7 @@ function SpansScene({ scene, reduceMotion }: { scene: Extract<TutorialScene, { k
 }
 
 function CompareScene({ scene, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'compare' }>; reduceMotion: boolean }) {
+  const styles = useStyles();
   // 0: the question · 1: the right sign is tapped · 2: it fills the gap.
   const step = useStep(3, reduceMotion);
   const sign = scene.signs[scene.right_sign];
@@ -310,6 +320,7 @@ function CompareScene({ scene, reduceMotion }: { scene: Extract<TutorialScene, {
 // --- Grammar: gates and planks ----------------------------------------------------------------------------------------
 
 function GatesScene({ scene, petId, petLevel, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'gates' }> } & Omit<Props, 'scene'>) {
+  const styles = useStyles();
   const step = useStep(3, reduceMotion || !scene.demo);
   const chosen = scene.demo && step >= 1;
   const filled = scene.demo && step === 2;
@@ -335,6 +346,7 @@ function GatesScene({ scene, petId, petLevel, reduceMotion }: { scene: Extract<T
 }
 
 function PlanksScene({ scene, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'planks' }>; reduceMotion: boolean }) {
+  const styles = useStyles();
   const n = scene.order.length;
   // 0: nothing placed · 1…n: the next piece in order · n+1: "Kiểm tra", the sentence is right.
   const step = useStep(n + 2, reduceMotion || !scene.demo);
@@ -371,6 +383,7 @@ const demoTurn = (kind: Turn['kind'], prompt: Turn['prompt']): Turn => ({ turn_i
   prompt, hints_shown: [], hints_total: 0, attempts: 0, wrong_attempts: 0, practice: false, travel_seconds: 0 });
 
 function CurriculumScene({ scene, petId, petLevel, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'word_build' | 'spell_fix' | 'sort' | 'code' }> } & Omit<Props, 'scene'>) {
+  const styles = useStyles();
   const frames = scene.kind === 'word_build' ? scene.pieces.length + 2 : scene.kind === 'code' ? scene.program.length + 2 : 4;
   const animated = scene.kind === 'code' || ('demo' in scene && !!scene.demo);
   const step = useStep(frames, reduceMotion || !animated);
@@ -414,6 +427,7 @@ const LAB_TURN = demoTurn('lab_experiment', { scene: 'circuit', aim: 'Lắp pin,
 
 /** Phòng thí nghiệm: the real bench, empty, set up, then running. */
 function LabScene({ scene, petId, petLevel, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'lab' }> } & Omit<Props, 'scene'>) {
+  const styles = useStyles();
   const placed: Record<string, string> = scene.mode === 'empty' ? {} : { power: 'p2', lamp: 'p3', link: 'p1' };
   return (
     <View style={[styles.scene, styles.light, styles.curriculum]} pointerEvents="none">
@@ -462,6 +476,7 @@ const XRAY_TURN = demoTurn('sentence_paint', { prompt: 'Tô từ chỉ sự vậ
     { id: 'w6', text: 'bếp' }, { id: 'w7', text: '.', fixed: true }] });
 
 function SubjectScene({ scene, petId, petLevel, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'subject' }> } & Omit<Props, 'scene'>) {
+  const styles = useStyles();
   const step = useStep(3, reduceMotion || scene.mode !== 'demo');
   const frame = scene.mode === 'demo' ? step : 0; // 0 empty · 1 half done · 2 solved
   const solved = frame === 2;
@@ -495,6 +510,7 @@ function SubjectScene({ scene, petId, petLevel, reduceMotion }: { scene: Extract
 
 /** The lesson games: their real play area, the move played step by step. */
 function LessonScene({ scene, reduceMotion }: { scene: Extract<TutorialScene, { kind: 'order' | 'match' | 'choice' }>; reduceMotion: boolean }) {
+  const styles = useStyles();
   const frames = scene.kind === 'order' ? scene.items.length + 2 : scene.kind === 'match' ? scene.pairs.length * 2 + 2 : 4;
   const step = useStep(frames, reduceMotion || !scene.demo);
   let body: React.ReactNode;
@@ -530,14 +546,13 @@ function LessonScene({ scene, reduceMotion }: { scene: Extract<TutorialScene, { 
 
 // --- How the stage ends -----------------------------------------------------------------------------------------------
 
-const TONE = { good: { color: t.success, bg: t.successBg }, bad: { color: t.danger, bg: t.dangerBg }, info: { color: t.accent, bg: t.tint } };
-
 function RulesScene({ scene }: { scene: Extract<TutorialScene, { kind: 'rules' }> }) {
+  const styles = useStyles();
   return (
     <View style={styles.rules}>
       {scene.items.map((item) => (
         <View key={item.text} style={styles.rule}>
-          <View style={[styles.ruleIcon, { backgroundColor: TONE[item.tone].bg }]}><Ionicons name={item.icon} size={20} color={TONE[item.tone].color} /></View>
+          <View style={[styles.ruleIcon, styles[`${item.tone}Bg`]]}><Ionicons name={item.icon} size={20} color={styles[`${item.tone}Ink`].color} /></View>
           <Text style={styles.ruleText}>{item.text}</Text>
         </View>
       ))}
@@ -545,14 +560,14 @@ function RulesScene({ scene }: { scene: Extract<TutorialScene, { kind: 'rules' }
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   frame: { width: '100%', minHeight: HEIGHT },
   flex: { flex: 1 },
   center: { alignItems: 'center' },
   centerText: { textAlign: 'center' },
   scene: { height: HEIGHT, borderRadius: 20, overflow: 'hidden', padding: 12 },
   sky: { backgroundColor: '#142349' },
-  light: { backgroundColor: '#F2FAFF', gap: 8, justifyContent: 'center' },
+  light: { backgroundColor: t.surfaceSecondary, gap: 8, justifyContent: 'center' },
   // The real play area: as tall as it needs.
   curriculum: { height: undefined, minHeight: HEIGHT },
   meadow: { backgroundColor: '#DDF3E4' },
@@ -582,21 +597,22 @@ const styles = StyleSheet.create({
   monster: { position: 'absolute', right: 12, top: 70, width: MONSTER_W, justifyContent: 'center', flexDirection: 'row', alignItems: 'center', gap: 6, backgroundColor: 'rgba(255,255,255,0.95)',
     borderRadius: 16, borderWidth: 2, borderColor: '#F2A93B', paddingHorizontal: 10, paddingVertical: 8 },
   monsterIcon: { fontSize: 24 },
-  monsterText: { fontSize: 18, fontWeight: '900', color: t.ink },
+  // The monster's label is part of the drawing (white in both themes); the numpad's copy sits on the light card of its scene.
+  monsterText: { fontSize: 18, fontWeight: '900', color: appTheme.ink },
   padHead: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   monsterSmall: { flexDirection: 'row', alignItems: 'center', gap: 6, backgroundColor: '#FFFFFF', borderRadius: 14, borderWidth: 2,
     borderColor: '#F2A93B', paddingHorizontal: 10, paddingVertical: 4 },
   monsterIconSmall: { fontSize: 20 },
-  display: { height: 34, borderRadius: 10, backgroundColor: '#FFFFFF', borderWidth: 1.5, borderColor: t.border, justifyContent: 'center', paddingHorizontal: 10 },
+  display: { height: 34, borderRadius: 10, backgroundColor: t.card, borderWidth: 1.5, borderColor: t.border, justifyContent: 'center', paddingHorizontal: 10 },
   displayText: { fontSize: 20, fontWeight: '900', color: t.ink, textAlign: 'right' },
   pad: { flexDirection: 'row', flexWrap: 'wrap', gap: 4 },
   key: { width: '32%', height: 22, borderRadius: 7, backgroundColor: t.tint, alignItems: 'center', justifyContent: 'center' },
-  keyOn: { backgroundColor: t.accent },
+  keyOn: { backgroundColor: t.accentFill },
   keyText: { fontSize: 14, fontWeight: '800', color: t.ink },
-  onText: { color: '#FFFFFF' },
-  submit: { height: 34, borderRadius: 10, backgroundColor: t.accent, opacity: 0.45, alignItems: 'center', justifyContent: 'center' },
+  onText: { color: t.onPrimary },
+  submit: { height: 34, borderRadius: 10, backgroundColor: t.accentFill, opacity: 0.45, alignItems: 'center', justifyContent: 'center' },
   submitOn: { opacity: 1 },
-  submitText: { color: '#FFFFFF', fontWeight: '900', fontSize: 14 },
+  submitText: { color: t.onPrimary, fontWeight: '900', fontSize: 14 },
   good: { color: t.success, fontWeight: '900', fontSize: 15 },
   mutedText: { color: t.muted, fontSize: 13 },
   spans: { flexDirection: 'row', gap: 4 },
@@ -604,25 +620,25 @@ const styles = StyleSheet.create({
   spanBuilt: { backgroundColor: '#C98B4E' },
   equation: { fontSize: 30, fontWeight: '900', color: t.ink, textAlign: 'center' },
   signs: { flexDirection: 'row', gap: 10 },
-  sign: { flex: 1, height: 54, borderRadius: 14, backgroundColor: '#FFFFFF', borderWidth: 2, borderColor: t.border, alignItems: 'center', justifyContent: 'center' },
-  signOn: { backgroundColor: t.accent, borderColor: t.accent },
+  sign: { flex: 1, height: 54, borderRadius: 14, backgroundColor: t.card, borderWidth: 2, borderColor: t.border, alignItems: 'center', justifyContent: 'center' },
+  signOn: { backgroundColor: t.accentFill, borderColor: t.accentFill },
   signText: { fontSize: 26, fontWeight: '900', color: t.accent },
   pointer: { position: 'absolute', bottom: -18, right: 4, fontSize: 22 },
   sentence: { fontSize: 22, fontWeight: '900', color: t.ink, textAlign: 'center' },
   gates: { flexDirection: 'row', gap: 8 },
-  gate: { flex: 1, height: 74, borderRadius: 16, backgroundColor: '#FFF4E0', borderWidth: 2, borderColor: '#F2C46D', alignItems: 'center', justifyContent: 'center' },
+  gate: { flex: 1, height: 74, borderRadius: 16, backgroundColor: t.warningBg, borderWidth: 2, borderColor: '#F2C46D', alignItems: 'center', justifyContent: 'center' },
   gateOn: { borderColor: t.success, backgroundColor: t.successBg },
   gateArch: { fontSize: 20 },
   gateText: { fontSize: 17, fontWeight: '900', color: t.ink },
   petRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 },
   meaning: { fontSize: 18, fontWeight: '900', color: t.ink, textAlign: 'center' },
-  bridge: { minHeight: 48, borderRadius: 14, borderWidth: 2, borderStyle: 'dashed', borderColor: '#A9C9DD', padding: 6, flexDirection: 'row',
-    flexWrap: 'wrap', gap: 6, alignItems: 'center', backgroundColor: '#FFFFFF' },
+  bridge: { minHeight: 48, borderRadius: 14, borderWidth: 2, borderStyle: 'dashed', borderColor: t.inputBorder, padding: 6, flexDirection: 'row',
+    flexWrap: 'wrap', gap: 6, alignItems: 'center', backgroundColor: t.card },
   plank: { backgroundColor: '#C98B4E', borderRadius: 8, paddingHorizontal: 10, paddingVertical: 6 },
   plankText: { color: '#FFFFFF', fontWeight: '800', fontSize: 15 },
   endMark: { fontSize: 18, fontWeight: '900', color: t.ink },
   tokens: { flexDirection: 'row', gap: 8, minHeight: 36 },
-  token: { backgroundColor: '#FFFFFF', borderRadius: 10, borderWidth: 1.5, borderColor: t.border, paddingHorizontal: 12, paddingVertical: 6 },
+  token: { backgroundColor: t.card, borderRadius: 10, borderWidth: 1.5, borderColor: t.border, paddingHorizontal: 12, paddingVertical: 6 },
   tokenNext: { borderColor: t.accent, borderWidth: 2 },
   tokenText: { fontSize: 15, fontWeight: '800', color: t.ink },
   checkRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
@@ -630,4 +646,7 @@ const styles = StyleSheet.create({
   rule: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   ruleIcon: { width: 40, height: 40, borderRadius: 14, alignItems: 'center', justifyContent: 'center' },
   ruleText: { flex: 1, fontSize: 15, color: t.ink, lineHeight: 21, fontWeight: '700' },
-});
+  goodBg: { backgroundColor: t.successBg }, goodInk: { color: t.success },
+  badBg: { backgroundColor: t.dangerBg }, badInk: { color: t.danger },
+  infoBg: { backgroundColor: t.tint }, infoInk: { color: t.accent },
+}));

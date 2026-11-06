@@ -3,7 +3,7 @@ import { Animated, Easing, Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../../components/Typography';
 import type { Turn } from '../../learning/types';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { useReactions } from '../engine/feedback';
 import { useSfx } from '../engine/sfx';
 
@@ -29,6 +29,8 @@ export type SceneProps = {
 };
 
 export function NoteLine({ note }: { note?: Note }) {
+  const { t } = useTheme();
+  const styles = useCommonStyles();
   if (!note || !note.text) return null;
   const good = note.tone === 'good';
   return (
@@ -42,6 +44,7 @@ export function NoteLine({ note }: { note?: Note }) {
 export function Actions({ onReset, resetDisabled, onCheck, checkDisabled, resetLabel = 'Xếp lại' }: {
   onReset: () => void; resetDisabled: boolean; onCheck: () => void; checkDisabled: boolean; resetLabel?: string;
 }) {
+  const styles = useCommonStyles();
   return (
     <View style={styles.actions}>
       <Pressable onPress={onReset} disabled={resetDisabled} accessibilityRole="button" accessibilityLabel={resetLabel}
@@ -58,7 +61,9 @@ export function Stepper({ value, onChange, min, max, step = 1, disabled, label, 
   value: number; onChange: (v: number) => void; min: number; max: number; step?: number; disabled?: boolean; label: string; unit?: string;
   light?: boolean;
 }) {
-  const ink = light ? '#FFFFFF' : t.ink;
+  const { t } = useTheme();
+  const styles = useCommonStyles();
+  const ink = light ? '#FFFFFF' : t.ink; // light: the value is drawn on the dark scene (art), white on both themes
   return (
     <View style={styles.stepper} accessibilityLabel={`${label}: ${value}${unit}`}>
       <Pressable onPress={() => onChange(Math.max(min, value - step))} disabled={disabled || value <= min} accessibilityRole="button"
@@ -119,7 +124,8 @@ export function useWrongShake(feedback: Note | undefined, name: string, reduceMo
   return shake.interpolate({ inputRange: [-1, 1], outputRange: [-6, 6] });
 }
 
-export const styles = StyleSheet.create({
+/** The shared styles, per theme: `const ui = useCommonStyles();` in each component. */
+export const useCommonStyles = makeStyles(({ t, dark }) => StyleSheet.create({
   scene: { gap: 12, paddingVertical: 4 },
   instruction: { fontSize: 16, fontWeight: '800', color: t.ink, textAlign: 'center' },
   hint: { fontSize: 13, fontWeight: '700', color: t.muted, textAlign: 'center' },
@@ -128,14 +134,14 @@ export const styles = StyleSheet.create({
   noteBad: { backgroundColor: t.dangerBg },
   noteText: { flex: 1, fontSize: 14, fontWeight: '700', lineHeight: 20 },
   actions: { flexDirection: 'row', gap: 8 },
-  primary: { flex: 1, minHeight: 46, borderRadius: 14, backgroundColor: t.accent, alignItems: 'center', justifyContent: 'center' },
-  primaryText: { color: '#FFFFFF', fontWeight: '900', fontSize: 16 },
+  primary: { flex: 1, minHeight: 46, borderRadius: 14, backgroundColor: t.accentFill, alignItems: 'center', justifyContent: 'center' },
+  primaryText: { color: t.onPrimary, fontWeight: '900', fontSize: 16 },
   secondary: { flex: 1, minHeight: 46, borderRadius: 14, backgroundColor: t.tint, alignItems: 'center', justifyContent: 'center' },
   secondaryText: { color: t.accent, fontWeight: '900', fontSize: 15 },
   dimmed: { opacity: 0.45 },
   pressed: { opacity: 0.8, transform: [{ scale: 0.97 }] },
   stepper: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  stepBtn: { width: 34, height: 34, borderRadius: 17, backgroundColor: '#FFFFFF', borderWidth: 2, borderColor: t.accent, alignItems: 'center',
+  stepBtn: { width: 34, height: 34, borderRadius: 17, backgroundColor: t.card, borderWidth: 2, borderColor: t.accent, alignItems: 'center',
     justifyContent: 'center' },
   stepValue: { minWidth: 40, textAlign: 'center', fontSize: 18, fontWeight: '900' },
-});
+}));

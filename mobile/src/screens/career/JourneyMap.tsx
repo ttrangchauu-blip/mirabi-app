@@ -5,6 +5,7 @@ import Svg, { Path } from 'react-native-svg';
 import { PetArt } from '../../components/PetArt';
 import { Text } from '../../components/Typography';
 import type { CareerSkill, SkillStatus } from '../../life/worlds';
+import { makeStyles } from '../../ui/theme';
 import { useSwing, useWorldMotion } from '../../world/budget';
 import { ContactShadow, Plate, Tag, Tiles } from '../../world/diorama';
 import { EASE } from '../../world/motion';
@@ -75,11 +76,18 @@ const STONE: Record<SkillStatus, { art: ImageSourcePropType; icon: React.Compone
   assessed: { art: require('../../../assets/world/career/stone-assessed.webp'), icon: 'star', ink: '#7A4D00' },
 };
 
+/** The status written on a milestone's sign: the stone's own ink on the light sign, the theme's status inks on a dark one. */
+const useSignInk = makeStyles(({ t, tones, dark }): Record<SkillStatus, string> => (dark
+  ? { locked: t.muted, available: tones.sun.ink, in_progress: t.info, practiced: t.success, assessed: t.warning }
+  : { locked: STONE.locked.ink, available: STONE.available.ink, in_progress: STONE.in_progress.ink, practiced: STONE.practiced.ink, assessed: STONE.assessed.ink }));
+
 const WORDS: Record<SkillStatus, string> = { locked: 'Chưa mở', available: 'Sẵn sàng học', in_progress: 'Tự đánh giá', practiced: 'Đã thực hành', assessed: 'Đã qua bài kiểm tra' };
 
 /** One milestone: a stone by the road, its name on a sign, a soft pulse when it is the next one to take. A new opening
  * rises out of the ground. */
 export const Milestone = memo(function Milestone({ node, justOpened, onPress }: { node: MapNode; justOpened: boolean; onPress: () => void }) {
+  const s = useStyles();
+  const signInk = useSignInk();
   const { skill, x, y, side } = node;
   const st = STONE[skill.status];
   const next = skill.status === 'available' || skill.status === 'in_progress';
@@ -108,7 +116,7 @@ export const Milestone = memo(function Milestone({ node, justOpened, onPress }: 
       </View>
       <Tag style={[s.sign, { left: side > 0 ? x + 36 : Math.max(6, x - 36 - 158) }, skill.status === 'locked' && s.signLocked]}>
         <Text style={[s.signName, skill.status === 'locked' && s.signLockedText]} numberOfLines={2}>{skill.name}</Text>
-        <Text style={[s.signMeta, { color: st.ink }]} numberOfLines={1}>{WORDS[skill.status]}{skill.status === 'in_progress' ? ` · ${skill.progress_percent}%` : ''} · Cấp {skill.level}</Text>
+        <Text style={[s.signMeta, { color: signInk[skill.status] }]} numberOfLines={1}>{WORDS[skill.status]}{skill.status === 'in_progress' ? ` · ${skill.progress_percent}%` : ''} · Cấp {skill.level}</Text>
       </Tag>
     </Pressable>
   );
@@ -117,6 +125,7 @@ export const Milestone = memo(function Milestone({ node, justOpened, onPress }: 
 /** The pet on the road: at the next milestone, and walking there whenever one is reached. Its feet stay on the road, its
  * art comes from its own strips. */
 export function RoadPet({ pet, level, to }: { pet: string; level: number; to: { x: number; y: number } | null }) {
+  const s = useStyles();
   const { level: motion } = useWorldMotion();
   const x = useRef(new Animated.Value(to?.x ?? 0)).current;
   const y = useRef(new Animated.Value(to?.y ?? 0)).current;
@@ -170,6 +179,7 @@ export const RoadMap = memo(function RoadMap({ map, width }: { map: MapLayout; w
 
 /** The sign at a region's entry, on its own wooden post. */
 export function RegionSign({ region, done, total }: { region: MapRegion; done: number; total: number }) {
+  const s = useStyles();
   return (
     <View style={[s.regionSign, { top: region.top + 12 }]}>
       <View style={s.regionBoard}>
@@ -180,23 +190,24 @@ export function RegionSign({ region, done, total }: { region: MapRegion; done: n
   );
 }
 
-const s = StyleSheet.create({
+// The land, the road, the stones and the hedges are the picture; the signs over it are chrome and follow the theme.
+const useStyles = makeStyles(({ t, dark }) => StyleSheet.create({
   mile: { position: 'absolute', height: 84 },
   stoneSpot: { position: 'absolute', top: 2, width: 56, height: 72, alignItems: 'center' },
   stoneShadow: { position: 'absolute', top: 54, alignSelf: 'center' },
   stone: { width: 88, height: 93.5 },
   stoneIcon: { position: 'absolute', left: 0, right: 0, top: 22, alignItems: 'center' },
   halo: { position: 'absolute', top: -3, width: 84, height: 84, borderRadius: 42, backgroundColor: '#FFE9A8' },
-  sign: { position: 'absolute', top: 12, width: 158, paddingVertical: 5 },
-  signLocked: { backgroundColor: 'rgba(245,242,235,0.92)' },
-  signLockedText: { color: '#5C5F60' },
-  signName: { fontSize: 13, lineHeight: 17, fontWeight: '900', color: '#123B5C' },
+  sign: { position: 'absolute', top: 12, width: 158, paddingVertical: 5, backgroundColor: t.card, borderColor: t.border },
+  signLocked: { backgroundColor: dark ? t.surfaceSecondary : 'rgba(245,242,235,0.92)' },
+  signLockedText: { color: dark ? t.muted : '#5C5F60' },
+  signName: { fontSize: 13, lineHeight: 17, fontWeight: '900', color: t.ink },
   signMeta: { fontSize: 11, lineHeight: 14, fontWeight: '800' },
   pet: { position: 'absolute', left: 0, top: 0, width: PET, height: PET, zIndex: 3 },
   petShadow: { position: 'absolute', bottom: -3, alignSelf: 'center' },
   regionSign: { position: 'absolute', left: 0, right: 0, alignItems: 'center' },
-  regionBoard: { flexDirection: 'row', alignItems: 'center', gap: 8, maxWidth: '86%', backgroundColor: '#FFFFFF', borderRadius: 16, borderWidth: 1, borderColor: '#D6ECF7', paddingHorizontal: 14, paddingVertical: 6,
-    shadowColor: '#1F6E9E', shadowOpacity: 0.35, shadowRadius: 5, shadowOffset: { width: 0, height: 3 }, elevation: 4 },
-  regionName: { flexShrink: 1, fontSize: 14, lineHeight: 19, fontWeight: '900', color: '#123B5C' },
-  regionCount: { fontSize: 12, fontWeight: '800', color: '#136FA8' },
-});
+  regionBoard: { flexDirection: 'row', alignItems: 'center', gap: 8, maxWidth: '86%', backgroundColor: t.card, borderRadius: 16, borderWidth: 1, borderColor: t.border, paddingHorizontal: 14, paddingVertical: 6,
+    shadowColor: t.shadow, shadowOpacity: 0.35, shadowRadius: 5, shadowOffset: { width: 0, height: 3 }, elevation: 4 },
+  regionName: { flexShrink: 1, fontSize: 14, lineHeight: 19, fontWeight: '900', color: t.ink },
+  regionCount: { fontSize: 12, fontWeight: '800', color: t.accent },
+}));

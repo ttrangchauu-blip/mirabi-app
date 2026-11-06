@@ -6,7 +6,7 @@ import { Text } from '../../components/Typography';
 import { togetherApi } from '../../studyTogether/api';
 import { formatMinutes } from '../../studyTogether/timer';
 import type { EligibleRoom, RoomInvitation, RoomMember, TogetherHome as HomeData } from '../../studyTogether/types';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { Button, Card, ProgressBar, SectionHeader } from '../../ui/kit';
 import { showError } from '../main/shared';
 import { STATE_LABELS, subjectLabel } from './labels';
@@ -19,6 +19,8 @@ import { EmptyState, ErrorState, LoadingState, PersonRow, PresenceLabel, SmallBu
 const NO_REACTIONS: never[] = [];
 
 export function TogetherHome() {
+  const { t } = useTheme();
+  const styles = useStyles();
   const nav = useTogetherNav();
   const [data, setData] = useState<HomeData | null>(null);
   const [error, setError] = useState<unknown>(null);
@@ -190,21 +192,21 @@ export function TogetherHome() {
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   preview: { marginBottom: 12 },
   heroLine: { gap: 2, marginBottom: 14, paddingHorizontal: 4 },
   flex: { flex: 1 },
   top: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 14 },
   hello: { fontSize: 24, fontWeight: '900', color: t.ink },
   sub: { fontSize: 13, color: t.muted, lineHeight: 19 },
-  bell: { width: 46, height: 46, borderRadius: 16, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
+  bell: { width: 46, height: 46, borderRadius: 16, backgroundColor: t.card, alignItems: 'center', justifyContent: 'center' },
   badge: { position: 'absolute', top: 5, right: 5, minWidth: 18, height: 18, borderRadius: 9, backgroundColor: t.danger,
     alignItems: 'center', justifyContent: 'center', paddingHorizontal: 4 },
-  badgeText: { color: '#FFFFFF', fontSize: 10, fontWeight: '900' },
+  badgeText: { color: t.onPrimary, fontSize: 10, fontWeight: '900' },
   hero: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: t.hero },
   heroTitle: { fontSize: 16, fontWeight: '900', color: t.ink },
   heroCode: { fontSize: 13, fontWeight: '800', color: t.accent, marginTop: 4, letterSpacing: 0.5 },
-  current: { borderWidth: 2, borderColor: '#A9D6EE' },
+  current: { borderWidth: 2, borderColor: t.inputFocus },
   cardLabel: { fontSize: 12, fontWeight: '800', color: t.accent, textTransform: 'uppercase' },
   cardTitle: { fontSize: 17, fontWeight: '900', color: t.ink, marginBottom: 2 },
   actions: { flexDirection: 'row', gap: 10, marginBottom: 6 },
@@ -216,4 +218,4 @@ const styles = StyleSheet.create({
   questTitle: { fontSize: 15, fontWeight: '800', color: t.ink },
   history: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 10, minHeight: 52 },
   exp: { fontSize: 14, fontWeight: '900', color: t.success },
-});
+}));

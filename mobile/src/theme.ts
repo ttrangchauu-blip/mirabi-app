@@ -1,10 +1,11 @@
+// The light palette (ui/theme.tsx adds the dark one and the semantic names; screens read colours from there).
 // Mirabi's main color is a light sea blue. Light tints carry the surfaces; text and buttons use deeper
 // ocean blues so they keep >= 4.5:1 contrast (white on primary, ink/muted/link on the glass card ~#F4FAFE).
 export const authTheme = {
-  gradient: ['#E4F6FF', '#CDEDFB', '#DDF6F8'] as const, // morning sea: pale sky -> light sea blue -> sea foam
-  halo: ['#C4EAFB', '#9ED9F5', '#D2F3F8'] as const,
-  primary: ['#1A7BBF', '#0F76B3'] as const, // white text: 4.5:1 / 4.9:1
-  success: ['#1F8A63', '#23966C'] as const,
+  gradient: ['#E4F6FF', '#CDEDFB', '#DDF6F8'] as readonly [string, string, string], // morning sea: pale sky -> light sea blue -> sea foam
+  halo: ['#C4EAFB', '#9ED9F5', '#D2F3F8'] as readonly [string, string, string],
+  primary: ['#1A7BBF', '#0F76B3'] as readonly [string, string], // white text: 4.5:1 / 4.9:1
+  success: ['#1F8A63', '#23966C'] as readonly [string, string],
   ink: '#123B5C',
   muted: '#4A6782',
   link: '#136FA8',
@@ -19,7 +20,7 @@ export const authTheme = {
   infoBg: '#E1F2FC',
   successText: '#17704F',
   successBg: '#E1F6EC',
-  sparkle: ['#FFFFFF', '#9EDBF7', '#7CC8EE', '#C8F0FF'] as const,
+  sparkle: ['#FFFFFF', '#9EDBF7', '#7CC8EE', '#C8F0FF'] as readonly [string, string, string, string],
   shadow: '#1F6E9E',
 };
 
@@ -36,7 +37,7 @@ export const appTheme = {
   track: '#DCEFF9',
   seaFoam: '#D8F6FF',
   /** Screen background, top to bottom. */
-  backdrop: ['#D9F0FC', '#ECF7FD', '#F7FBFE'] as const,
+  backdrop: ['#D9F0FC', '#ECF7FD', '#F7FBFE'] as readonly [string, string, string],
   primary: authTheme.primary,
   shadow: authTheme.shadow,
   danger: '#B4234F',

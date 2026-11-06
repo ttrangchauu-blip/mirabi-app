@@ -114,8 +114,22 @@ def weather(lat: float = Query(ge=-90, le=90), lon: float = Query(ge=-180, le=18
     return weather_at(db, lat, lon)
 
 
-# ---------------------------------------------------------------------------- how the world is shown
+# ---------------------------------------------------------------------------- the account's app settings
+class NotificationSettings(BaseModel):
+    """Which notices Mirabi itself sends (Cài đặt > Thông báo). Only kinds that exist in the app: the device's own
+    permission is not stored here, it belongs to each phone. `enabled` off silences every kind and keeps each choice,
+    so turning it back on brings them back as they were."""
+    model_config = ConfigDict(extra="forbid")
+    enabled: bool = True
+    focus: bool = True  # Pomodoro: a focus session or a break has ended (a notification scheduled on the device)
+    pet: bool = True  # the pet is back from its walk (scheduled on the device for the walk's return time)
+    achievements: bool = True  # "Mở khóa thành tựu" notice in the app
+    friends: bool = True  # friends and Study Together, shown in the app as they arrive (the inbox keeps them all)
+
+
 class WorldSettings(BaseModel):
+    """Settings that follow the account to every device. The path says "world" because the living world's settings
+    came first; the app's language, theme and notification choices live here too, so there is one settings record."""
     model_config = ConfigDict(extra="forbid")
     sound: bool | None = None
     effects: bool | None = None
@@ -123,6 +137,11 @@ class WorldSettings(BaseModel):
     motion: Literal["auto", "reduced"] = "auto"
     # Lamps the user switched by hand, as placement keys of the room (items' uids), and what they chose.
     lamps: dict[str, bool] = Field(default_factory=dict, max_length=64)
+    notifications: NotificationSettings = Field(default_factory=NotificationSettings)
+    # The language chosen in Cài đặt; None follows the device. Only languages the app is fully translated into.
+    language: Literal["vi"] | None = None
+    # The interface's light or dark look ("system" follows the device). Scenes keep following the clock and weather.
+    theme: Literal["system", "light", "dark"] = "system"
 
 
 class PreferencesInput(BaseModel):

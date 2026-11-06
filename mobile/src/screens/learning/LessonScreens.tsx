@@ -8,13 +8,13 @@ import { GAME_INFO } from '../../learning/labels';
 import { currentLesson, filterLessons, focusLesson, GROUP_LABEL, journey, LessonCard, lessonCards, LessonFilter, newlyUnlocked, orderChanged,
   subjectProgress, unlockHint } from '../../learning/lessonOrder';
 import type { CatalogLesson, GameId, LessonExplore, LessonGame, LessonProgramme, SubjectLessons, UnlockedContent, UnlockRequirement } from '../../learning/types';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { Button, Card, IconName, ProgressBar, Segmented } from '../../ui/kit';
 import { useAtmosphere } from '../../world/atmosphere';
 import { useWeather } from '../../world/weather';
 import { BackHeader } from './GamePicker';
 import { JourneySectionView, TrailBackdrop, TRAIL_SKY } from './JourneyMap';
-import { gameLook, HeaderIcon, IconBadge, Look } from './LearningUI';
+import { gameLook, HeaderIcon, IconBadge, Look, themedLook } from './LearningUI';
 
 // Học tập theo bài (backend lesson_api.py): Học tập → môn → bài → trò chơi → Cách chơi (lần đầu) → 3-2-1 → Chơi → Kết quả.
 // A subject shows its lessons as a journey map (JourneyMap.tsx) or a list sorted by the learner's state
@@ -22,6 +22,7 @@ import { gameLook, HeaderIcon, IconBadge, Look } from './LearningUI';
 // and its games. Every state comes from the backend; nothing is created there until a game starts.
 
 function Failed({ error, onRetry }: { error: string; onRetry: () => void }) {
+  const styles = useStyles();
   return <Card><Text style={styles.error}>{error}</Text><Button title="Thử lại" icon="refresh" variant="secondary" onPress={onRetry} /></Card>;
 }
 
@@ -60,6 +61,9 @@ function moveCards(reduceMotion?: boolean) {
  * journey map, or as a list with a filter, sorted by the learner's state (Đang học → Đã mở → Đã hoàn thành → Chưa mở, each
  * in the curriculum's order). */
 export function SubjectLessonsScreen({ code, onBack, onOpen, onPractice, snapshot, onLeave, reduceMotion, petId, petLevel, onUnlocked }: LessonsProps) {
+  const theme = useTheme();
+  const { t } = theme;
+  const styles = useStyles();
   const [data, setData] = useState<SubjectLessons | null>(snapshot?.data ?? null);
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<LessonFilter>('all');
@@ -152,7 +156,7 @@ export function SubjectLessonsScreen({ code, onBack, onOpen, onPractice, snapsho
             <Text style={styles.progressText}>{progress.completed}/{progress.ready} bài hoàn thành</Text>
             <Text style={styles.progressPercent}>{progress.percent}%</Text>
           </View>
-          <ProgressBar value={progress.percent / 100} color={look?.color ?? t.success} />
+          <ProgressBar value={progress.percent / 100} color={look ? themedLook(look, theme).color : t.success} />
         </View>
       ) : null}
       {data && cards.length ? <Segmented<SubjectView> options={VIEWS} value={view} onChange={setView} compact /> : null}
@@ -207,11 +211,11 @@ export function SubjectLessonsScreen({ code, onBack, onOpen, onPractice, snapsho
   );
 }
 
-const CARD_LOOK: Record<LessonCard['group'], { icon: IconName; color: string; bg: string }> = {
-  in_progress: { icon: 'play', color: '#B86A00', bg: '#FFF1D6' },
-  unlocked: { icon: 'book-outline', color: '#136FA8', bg: '#DDF0FA' },
-  completed: { icon: 'checkmark', color: '#17704F', bg: '#E1F6EC' },
-  locked: { icon: 'lock-closed', color: '#7A8D9E', bg: '#EEF2F5' },
+const CARD_LOOK: Record<LessonCard['group'], Look> = {
+  in_progress: { icon: 'play', color: '#B86A00', bg: '#FFF1D6', tone: 'sun' },
+  unlocked: { icon: 'book-outline', color: '#136FA8', bg: '#DDF0FA', tone: 'sky' },
+  completed: { icon: 'checkmark', color: '#17704F', bg: '#E1F6EC', tone: 'leaf' },
+  locked: { icon: 'lock-closed', color: '#7A8D9E', bg: '#EEF2F5', tone: 'neutral' },
 };
 
 type CardProps = { card: LessonCard; index: number; entering: boolean; reduceMotion?: boolean; glow: boolean; hint: boolean;
@@ -220,7 +224,10 @@ type CardProps = { card: LessonCard; index: number; entering: boolean; reduceMot
 /** One lesson: its state as an icon, its title, its chapter and its state in words (a bar while being studied). A
  * locked one is neutral and, when tapped, says how it opens. Rises in on a first visit; glows once when it opens. */
 function LessonCardView({ card, index, entering, reduceMotion, glow, hint, onPress, onOpenRequirement }: CardProps) {
-  const style = card.planned ? { ...CARD_LOOK.locked, icon: 'time-outline' as IconName } : CARD_LOOK[card.group];
+  const theme = useTheme();
+  const { t } = theme;
+  const styles = useStyles();
+  const style = themedLook(card.planned ? { ...CARD_LOOK.locked, icon: 'time-outline' as IconName } : CARD_LOOK[card.group], theme);
   const label = card.planned ? 'Sắp có' : GROUP_LABEL[card.group];
   const animate = entering && !reduceMotion;
   const shown = useRef(new Animated.Value(animate ? 0 : 1)).current;
@@ -288,6 +295,8 @@ function firstGame(games: LessonGame[]): LessonGame | undefined {
 
 /** One lesson: its short content (examples folded), the games that practise it, and one button to play the game picked. */
 export function LessonScreen({ lessonKey, onBack, onPlay, onResume, onHowTo, onOpenLesson, starting, onNote, onReview }: LessonProps) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const [lesson, setLesson] = useState<CatalogLesson | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [examplesOpen, setExamplesOpen] = useState(false);
@@ -378,6 +387,8 @@ export function exploreLine(e: LessonExplore): string {
 /** A game of the lesson as a small card: its picture and name (a tick once passed). Its one line on how it plays is
  * shown under the cards for the game picked. */
 function GameOption({ game, selected, onPress }: { game: LessonGame; selected: boolean; onPress: () => void }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   return (
     <Pressable onPress={onPress} accessibilityRole="radio" accessibilityState={{ checked: selected }}
       accessibilityLabel={`${game.title}. ${gameDetail(game)}${game.progress.passed ? ' Đã đạt.' : ''}`}
@@ -394,6 +405,8 @@ function GameOption({ game, selected, onPress }: { game: LessonGame; selected: b
 /** THPT: the elective subjects the learner studies, chosen here (they then appear among the subjects of Học tập). */
 export function ElectivesScreen({ programme, onBack, onChange }: { programme: LessonProgramme | null; onBack: () => void;
   onChange: (chosen: string[]) => void }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const selection = programme?.selection ?? null;
   const chosen = new Set(selection?.chosen ?? []);
   const toggle = (code: string) => {
@@ -413,7 +426,7 @@ export function ElectivesScreen({ programme, onBack, onChange }: { programme: Le
             <Pressable key={s.code} onPress={() => toggle(s.code)} disabled={full} accessibilityRole="checkbox"
               accessibilityState={{ checked: on, disabled: full }} accessibilityLabel={s.name}
               style={[styles.chip, on && styles.chipOn, full && styles.faded]}>
-              {on ? <Ionicons name="checkmark" size={16} color="#FFFFFF" /> : null}
+              {on ? <Ionicons name="checkmark" size={16} color={t.onPrimary} /> : null}
               <Text style={[styles.chipText, on && styles.chipTextOn]}>{s.name}</Text>
             </Pressable>
           );
@@ -423,7 +436,7 @@ export function ElectivesScreen({ programme, onBack, onChange }: { programme: Le
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, dark }) => StyleSheet.create({
   flex: { flex: 1 },
   loading: { marginVertical: 12 },
   error: { color: t.danger, fontWeight: '700', marginBottom: 8 },
@@ -434,7 +447,7 @@ const styles = StyleSheet.create({
   rowPressed: { backgroundColor: t.bg },
   faded: { opacity: 0.5 },
   header: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 14 },
-  back: { width: 40, height: 40, borderRadius: 20, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
+  back: { width: 40, height: 40, borderRadius: 20, backgroundColor: t.card, alignItems: 'center', justifyContent: 'center' },
   title: { fontSize: 21, fontWeight: '900', color: t.ink },
   progress: { gap: 6, marginBottom: 14 },
   progressRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline' },
@@ -442,13 +455,13 @@ const styles = StyleSheet.create({
   progressPercent: { fontSize: 13, fontWeight: '900', color: t.ink },
   listContent: { paddingHorizontal: 20, paddingBottom: 28, width: '100%', maxWidth: 760, alignSelf: 'center' },
   empty: { color: t.muted, fontSize: 14, textAlign: 'center', marginTop: 24 },
-  card: { backgroundColor: '#FFFFFF', borderRadius: 16, marginBottom: 8, overflow: 'hidden',
+  card: { backgroundColor: t.card, borderRadius: 16, marginBottom: 8, overflow: 'hidden',
     shadowColor: t.shadow, shadowOpacity: 0.05, shadowRadius: 6, shadowOffset: { width: 0, height: 2 }, elevation: 1 },
-  glow: { backgroundColor: '#FFF2B8', borderRadius: 16 },
+  glow: { backgroundColor: dark ? 'rgba(255,214,102,0.22)' : '#FFF2B8', borderRadius: 16 },
   cardMain: { flexDirection: 'row', alignItems: 'center', gap: 12, minHeight: 64, paddingHorizontal: 12, paddingVertical: 10 },
   state: { width: 34, height: 34, borderRadius: 17, alignItems: 'center', justifyContent: 'center' },
   cardTitle: { fontSize: 15, fontWeight: '800', color: t.ink, lineHeight: 20 },
-  lockedText: { color: '#6F8394' },
+  lockedText: { color: t.placeholder },
   chapter: { fontSize: 12, color: t.muted, marginTop: 1 },
   cardBar: { marginTop: 6, maxWidth: 160 },
   cardState: { fontSize: 12, fontWeight: '800', maxWidth: 92, textAlign: 'right' },
@@ -462,23 +475,23 @@ const styles = StyleSheet.create({
   examplesToggleText: { fontSize: 14, fontWeight: '800', color: t.accent },
   example: { borderLeftWidth: 3, borderLeftColor: t.tint, paddingLeft: 10, marginTop: 6 },
   exampleTitle: { fontSize: 13, fontWeight: '900', color: t.accent, marginBottom: 2 },
-  locked: { backgroundColor: '#FFF6E5', borderRadius: 16, padding: 14, marginBottom: 14 },
-  lockedTitle: { fontSize: 14, fontWeight: '800', color: '#8A5A00', lineHeight: 20 },
+  locked: { backgroundColor: t.warningBg, borderRadius: 16, padding: 14, marginBottom: 14 },
+  lockedTitle: { fontSize: 14, fontWeight: '800', color: t.warning, lineHeight: 20 },
   section: { fontSize: 17, fontWeight: '900', color: t.ink, marginTop: 4, marginBottom: 10 },
   games: { flexDirection: 'row', flexWrap: 'wrap', marginHorizontal: -5 },
   gameCell: { width: '50%', padding: 5 },
-  option: { alignItems: 'center', gap: 8, backgroundColor: '#FFFFFF', borderRadius: 18, paddingVertical: 14, paddingHorizontal: 10, minHeight: 112,
+  option: { alignItems: 'center', gap: 8, backgroundColor: t.card, borderRadius: 18, paddingVertical: 14, paddingHorizontal: 10, minHeight: 112,
     borderWidth: 2, borderColor: 'transparent' },
-  optionOn: { borderColor: '#8CC8EA', backgroundColor: '#F7FCFF' },
+  optionOn: { borderColor: t.inputFocus, backgroundColor: t.surfaceSecondary },
   optionTitle: { fontSize: 14, fontWeight: '900', color: t.ink, textAlign: 'center', lineHeight: 18 },
   passed: { position: 'absolute', top: 8, right: 8 },
   gameDetail: { fontSize: 13, color: t.muted, lineHeight: 18, marginTop: 6 },
   explore: { fontSize: 13, fontWeight: '700', color: t.accent, lineHeight: 18, marginTop: 4 },
   actions: { flexDirection: 'row', alignItems: 'flex-end', gap: 10, marginTop: 4 },
-  howTo: { width: 50, height: 50, borderRadius: 16, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
+  howTo: { width: 50, height: 50, borderRadius: 16, backgroundColor: t.card, alignItems: 'center', justifyContent: 'center' },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  chip: { flexDirection: 'row', alignItems: 'center', gap: 6, minHeight: 40, paddingHorizontal: 14, borderRadius: 20, backgroundColor: '#FFFFFF' },
-  chipOn: { backgroundColor: t.accent },
+  chip: { flexDirection: 'row', alignItems: 'center', gap: 6, minHeight: 40, paddingHorizontal: 14, borderRadius: 20, backgroundColor: t.card },
+  chipOn: { backgroundColor: t.accentFill },
   chipText: { fontSize: 14, fontWeight: '800', color: t.ink },
-  chipTextOn: { color: '#FFFFFF' },
-});
+  chipTextOn: { color: t.onPrimary },
+}));

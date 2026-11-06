@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../../components/Typography';
 import { GAME_GROUPS, GAME_INFO, gameTitle, isGroup, lessonsForGame, QUICK_GAMES, SUBJECT_GAMES } from '../../learning/labels';
 import type { Catalog, GameGroupId, GameId, LearningSession, SubjectCode, VocabGame, VocabProgress } from '../../learning/types';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { Button, Card } from '../../ui/kit';
 import { gameLook, IconBadge, Look } from './LearningUI';
 import { SUBJECT_LOOK } from './SubjectPicker';
@@ -52,6 +52,8 @@ type Props = {
  * English and the curriculum games start right away (the backend picks the content); Math games open their setup.
  * Each game offers its "Cách chơi". */
 export function GamePicker({ subject, group, catalog, onBack, onPick, onOpenGroup, quick, onHowTo, onOpenHistory, vocab }: Props) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const [topicFor, setTopicFor] = React.useState<VocabGame | null>(null);
   // The grade being studied decides the games (only those with content for it), and names the subject as at school.
   const offered = catalog?.programme?.subjects.find((s) => s.code === subject);
@@ -88,7 +90,7 @@ export function GamePicker({ subject, group, catalog, onBack, onPick, onOpenGrou
           const g = GAME_GROUPS[id];
           const none = g.games.every(empty);
           return (
-            <Entry key={id} look={{ icon: g.icon, bg: card.bg, color: card.color }} title={g.name} detail={none ? 'Sắp có' : g.detail} disabled={none}
+            <Entry key={id} look={{ icon: g.icon, bg: card.bg, color: card.color, tone: card.tone }} title={g.name} detail={none ? 'Sắp có' : g.detail} disabled={none}
               label={`${g.name}. ${g.detail}`} onPress={() => onOpenGroup(id)} />
           );
         }
@@ -149,6 +151,8 @@ type EntryProps = { look: Look; title: string; tag?: string; detail: string;
   onHowTo?: () => void; howToLabel?: string };
 
 function Entry({ look, title, tag, detail, disabled, busy, label, onPress, onHowTo, howToLabel }: EntryProps) {
+  const { t } = useTheme();
+  const styles = useStyles();
   return (
     <View style={[styles.card, disabled && !busy && styles.dimmed]}>
       <Pressable onPress={onPress} disabled={disabled} accessibilityRole="button" accessibilityState={{ disabled, busy }}
@@ -175,6 +179,8 @@ function Entry({ look, title, tag, detail, disabled, busy, label, onPress, onHow
 export function BackHeader({ title, subtitle, onBack, disabled, right }: {
   title: string; subtitle?: string; onBack: () => void; disabled?: boolean; right?: React.ReactNode;
 }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   return (
     <View style={styles.header}>
       <Pressable onPress={onBack} disabled={disabled} accessibilityRole="button" accessibilityLabel="Quay lại" hitSlop={8} style={styles.back}>
@@ -189,9 +195,9 @@ export function BackHeader({ title, subtitle, onBack, disabled, right }: {
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   flex: { flex: 1 },
-  card: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#FFFFFF', borderRadius: 18, marginBottom: 10,
+  card: { flexDirection: 'row', alignItems: 'center', backgroundColor: t.card, borderRadius: 18, marginBottom: 10,
     shadowColor: t.shadow, shadowOpacity: 0.06, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, elevation: 1 },
   pressed: { opacity: 0.85, transform: [{ scale: 0.99 }] },
   dimmed: { opacity: 0.5 },
@@ -201,9 +207,9 @@ const styles = StyleSheet.create({
   header: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 16 },
   title: { fontSize: 22, fontWeight: '900', color: t.ink },
   subtitle: { fontSize: 14, color: t.muted, marginTop: 2 },
-  history: { flexDirection: 'row', alignItems: 'center', gap: 6, minHeight: 40, paddingHorizontal: 12, borderRadius: 20, backgroundColor: '#FFFFFF' },
+  history: { flexDirection: 'row', alignItems: 'center', gap: 6, minHeight: 40, paddingHorizontal: 12, borderRadius: 20, backgroundColor: t.card },
   historyText: { fontSize: 13, fontWeight: '800', color: t.accent },
-  back: { width: 40, height: 40, borderRadius: 20, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
+  back: { width: 40, height: 40, borderRadius: 20, backgroundColor: t.card, alignItems: 'center', justifyContent: 'center' },
   entryMain: { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 12, padding: 12, minHeight: 72 },
   howTo: { width: 48, alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center' },
   resume: { gap: 8, marginBottom: 12, padding: 14 },
@@ -211,6 +217,6 @@ const styles = StyleSheet.create({
   muted: { color: t.muted, fontSize: 14, lineHeight: 20 },
   error: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 8, backgroundColor: t.dangerBg, borderRadius: 14, padding: 10, marginTop: -4, marginBottom: 12 },
   errorText: { flex: 1, color: t.danger, fontSize: 13, fontWeight: '700' },
-  retry: { backgroundColor: '#FFFFFF', borderRadius: 10, paddingHorizontal: 10, paddingVertical: 6 },
+  retry: { backgroundColor: t.card, borderRadius: 10, paddingHorizontal: 10, paddingVertical: 6 },
   retryText: { color: t.danger, fontWeight: '900' },
-});
+}));

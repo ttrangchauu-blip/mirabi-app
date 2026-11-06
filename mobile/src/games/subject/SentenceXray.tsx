@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Animated, Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../../components/Typography';
-import { appTheme as t } from '../../theme';
-import { Actions, NoteLine, SceneProps, styles as ui, useSolvedReaction, useWrongShake } from './common';
+import { makeStyles, useTheme } from '../../ui/theme';
+import { Actions, NoteLine, SceneProps, useCommonStyles, useSolvedReaction, useWrongShake } from './common';
 import { HIGHLIGHTERS, keptPaint, Paint, paintAnswer, paintWord } from './logic';
 
 // Soi câu (Tiếng Việt / Tiếng Anh): a sentence on a light box. Each role is a highlighter (sự vật, hoạt động, đặc
@@ -14,6 +14,11 @@ import { HIGHLIGHTERS, keptPaint, Paint, paintAnswer, paintWord } from './logic'
 export function SentenceXray({ turn, disabled, feedback, solved, onSubmit, reduceMotion, demo }: SceneProps & {
   demo?: { paint: Paint; pen?: string; solved?: boolean };
 }) {
+  const { dark } = useTheme();
+  const ui = useCommonStyles();
+  const st = useStyles();
+  // The legend sits on the panel: the highlighter's ink on light, its (pale) fill on dark.
+  const legendInk = (c: { fill: string; ink: string }) => (dark ? c.fill : c.ink);
   const p = turn.prompt;
   const roles = p.roles ?? [];
   const words = p.words ?? [];
@@ -72,7 +77,7 @@ export function SentenceXray({ turn, disabled, feedback, solved, onSubmit, reduc
                 accessibilityLabel={`${w.text}${c ? `, tô ${roleName(paint[w.id])}` : ', chưa tô'}${isLocked ? ', đúng' : ''}`}
                 style={({ pressed }) => [st.word, c && { backgroundColor: c.fill, borderColor: c.ink }, isLocked && st.wordLocked, pressed && ui.pressed]}>
                 <Text style={[st.wordText, c && { color: c.ink }]}>{w.text}</Text>
-                {isLocked && !done ? <Ionicons name="lock-closed" size={10} color={c?.ink ?? t.success} /> : null}
+                {isLocked && !done ? <Ionicons name="lock-closed" size={10} color={c?.ink ?? '#17704F'} /> : null}
                 {c && done ? <Animated.View pointerEvents="none" style={[st.glow, { opacity: glow }]} /> : null}
               </Pressable>
             );
@@ -84,7 +89,7 @@ export function SentenceXray({ turn, disabled, feedback, solved, onSubmit, reduc
         {roles.map((r) => {
           const c = colour(r.id);
           const count = Object.values(paint).filter((x) => x === r.id).length;
-          return <Text key={r.id} style={[st.legendText, { color: c.ink }]}>{`${r.name}: ${count}`}</Text>;
+          return <Text key={r.id} style={[st.legendText, { color: legendInk(c) }]}>{`${r.name}: ${count}`}</Text>;
         })}
       </View>
       <NoteLine note={demo?.solved ? { text: 'Chính xác! Mỗi từ đã đúng màu.', tone: 'good' } : done ? null : feedback} />
@@ -97,8 +102,10 @@ export function SentenceXray({ turn, disabled, feedback, solved, onSubmit, reduc
   );
 }
 
-const st = StyleSheet.create({
-  world: { gap: 10, padding: 12, borderRadius: 20, backgroundColor: '#FFF2F6', borderWidth: 2, borderColor: '#F6CFDC' },
+const useStyles = makeStyles(({ tones, dark }) => StyleSheet.create({
+  // The panel follows the theme; the light box (dark) and its white word cards are drawn the same on both.
+  world: { gap: 10, padding: 12, borderRadius: 20, backgroundColor: dark ? tones.rose.from : '#FFF2F6', borderWidth: 2,
+    borderColor: dark ? tones.rose.to : '#F6CFDC' },
   pens: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, justifyContent: 'center' },
   pen: { flexDirection: 'row', alignItems: 'center', gap: 6, minHeight: 44, paddingHorizontal: 12, borderRadius: 22, borderWidth: 3 },
   penText: { fontSize: 14, fontWeight: '900' },
@@ -107,10 +114,10 @@ const st = StyleSheet.create({
   word: { flexDirection: 'row', alignItems: 'center', gap: 3, minHeight: 40, paddingHorizontal: 10, borderRadius: 10, backgroundColor: '#FFFFFF',
     borderWidth: 2, borderColor: '#FFFFFF', overflow: 'hidden' },
   wordLocked: { borderStyle: 'solid' },
-  wordText: { fontSize: 17, fontWeight: '800', color: t.ink },
+  wordText: { fontSize: 17, fontWeight: '800', color: '#123B5C' }, // on the white word card
   punct: { fontSize: 20, fontWeight: '900', color: '#FFFFFF' },
   glow: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(255,255,255,0.45)' },
   scan: { position: 'absolute', top: 0, bottom: 0, left: 0, width: 6, backgroundColor: 'rgba(120,230,255,0.85)' },
   legend: { flexDirection: 'row', flexWrap: 'wrap', gap: 12, justifyContent: 'center' },
   legendText: { fontSize: 13, fontWeight: '800' },
-});
+}));

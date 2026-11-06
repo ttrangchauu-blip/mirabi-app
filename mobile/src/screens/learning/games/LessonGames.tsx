@@ -3,7 +3,7 @@ import { Platform, Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../../../components/Typography';
 import type { Turn } from '../../../learning/types';
-import { appTheme as t } from '../../../theme';
+import { makeStyles, useTheme } from '../../../ui/theme';
 import { ChoiceOption, ChoiceResult, markOf } from './AnswerFeedback';
 
 // The lesson games (backend lesson_catalog.py): one gameplay each, whatever the lesson. Sắp xếp thứ tự (vòng đời, dòng
@@ -16,6 +16,8 @@ type Common = { turn: Turn; disabled: boolean; feedback?: Note;
   /** After a wrong answer: the cards in the right place, or the right pairs ("a1b3"), from the backend. */ kept?: string[] | null };
 
 function Feedback({ note }: { note?: Note }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   if (!note || !note.text) return null;
   const good = note.tone === 'good';
   return (
@@ -27,6 +29,7 @@ function Feedback({ note }: { note?: Note }) {
 }
 
 function Actions({ onReset, resetDisabled, onCheck, checkDisabled }: { onReset: () => void; resetDisabled: boolean; onCheck: () => void; checkDisabled: boolean }) {
+  const styles = useStyles();
   return (
     <View style={styles.actions}>
       <Pressable onPress={onReset} disabled={resetDisabled} accessibilityRole="button" accessibilityLabel="Xếp lại"
@@ -46,6 +49,8 @@ function Actions({ onReset, resetDisabled, onCheck, checkDisabled }: { onReset: 
 export function OrderSteps({ turn, disabled, feedback, kept, onSubmit, demo }: Common & {
   onSubmit: (ids: string[]) => void; demo?: { placed: string[]; result?: 'ok' };
 }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const p = turn.prompt;
   const cards = p.cards ?? [];
   const n = cards.length;
@@ -107,13 +112,19 @@ export function OrderSteps({ turn, disabled, feedback, kept, onSubmit, demo }: C
 
 // --- Ghép cặp ---------------------------------------------------------------------------------------------------------
 
-const PAIR_COLORS = ['#FFE3B3', '#D7ECFF', '#DDF5DF', '#F6DDF7', '#FFE0DA'];
+/** The pairs' colours (pale on light, deep on dark: the card's text is t.ink), and the options' colours before they are marked. */
+const useColors = makeStyles(({ t, tones, dark }) => ({
+  pairs: dark ? [tones.sun.to, tones.sky.to, tones.leaf.to, tones.rose.to, '#4A2E2C'] : ['#FFE3B3', '#D7ECFF', '#DDF5DF', '#F6DDF7', '#FFE0DA'],
+  choiceIdle: { bg: t.card, border: t.border },
+}));
 
 /** Tap a card on the left, then its partner on the right. Tap a paired card to undo. "Kiểm tra" once every left card
  * has a partner. After a wrong answer the right pairs stay (locked); the others are undone. */
 export function MatchPairs({ turn, disabled, feedback, kept, onSubmit, demo }: Common & {
   onSubmit: (pairs: string[]) => void; demo?: { pairs: Record<string, string>; selected?: string; result?: 'ok' };
 }) {
+  const styles = useStyles();
+  const { pairs: PAIR_COLORS } = useColors();
   const p = turn.prompt;
   const lefts = p.lefts ?? [];
   const rights = p.rights ?? [];
@@ -209,6 +220,9 @@ export function ChoiceExplain({ turn, disabled, feedback, onChoose, demo, result
   onChoose: (id: string) => void; demo?: { chosen?: string; result?: 'ok' | 'bad' };
   result?: ChoiceResult | null; reduceMotion?: boolean;
 }) {
+  const { t } = useTheme();
+  const styles = useStyles();
+  const { choiceIdle: CHOICE_IDLE } = useColors();
   const p = turn.prompt;
   const [tried, setTried] = useState<string[]>([]);
   const [last, setLast] = useState<string | null>(null);
@@ -250,9 +264,7 @@ export function ChoiceExplain({ turn, disabled, feedback, onChoose, demo, result
   );
 }
 
-const CHOICE_IDLE = { bg: '#FFFFFF', border: t.border };
-
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, tones, dark }) => StyleSheet.create({
   scene: { gap: 12, paddingVertical: 4 },
   pressed: { opacity: 0.8, transform: [{ scale: 0.98 }] },
   dimmed: { opacity: 0.45 },
@@ -263,8 +275,8 @@ const styles = StyleSheet.create({
   feedbackBad: { backgroundColor: t.dangerBg },
   feedbackText: { flex: 1, fontSize: 14, fontWeight: '700', lineHeight: 20 },
   actions: { flexDirection: 'row', gap: 8 },
-  primary: { flex: 1, minHeight: 46, borderRadius: 14, backgroundColor: t.accent, alignItems: 'center', justifyContent: 'center' },
-  primaryText: { color: '#FFFFFF', fontWeight: '900', fontSize: 16 },
+  primary: { flex: 1, minHeight: 46, borderRadius: 14, backgroundColor: t.accentFill, alignItems: 'center', justifyContent: 'center' },
+  primaryText: { color: t.onPrimary, fontWeight: '900', fontSize: 16 },
   secondary: { flex: 1, minHeight: 46, borderRadius: 14, backgroundColor: t.tint, alignItems: 'center', justifyContent: 'center' },
   secondaryText: { color: t.accent, fontWeight: '900', fontSize: 15 },
   // Sắp xếp
@@ -274,35 +286,35 @@ const styles = StyleSheet.create({
   numberFixed: { backgroundColor: t.successBg },
   numberText: { fontSize: 14, fontWeight: '900', color: t.accent },
   placed: { flex: 1, minHeight: 46, flexDirection: 'row', alignItems: 'center', gap: 6, borderRadius: 14, borderWidth: 2, borderColor: t.accent,
-    backgroundColor: '#FFFFFF', paddingHorizontal: 12, paddingVertical: 8 },
+    backgroundColor: t.card, paddingHorizontal: 12, paddingVertical: 8 },
   placedFixed: { borderColor: t.success, backgroundColor: t.successBg },
   placedText: { flex: 1, fontSize: 15, fontWeight: '800', color: t.ink },
   empty: { flex: 1, minHeight: 46, borderRadius: 14, borderWidth: 2, borderStyle: 'dashed', borderColor: t.border, justifyContent: 'center',
     paddingHorizontal: 12 },
   emptyText: { fontSize: 13, color: t.muted, fontWeight: '700' },
   pool: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, justifyContent: 'center' },
-  card: { minHeight: 46, maxWidth: '100%', paddingHorizontal: 14, paddingVertical: 8, borderRadius: 14, backgroundColor: '#FFF6E5',
+  card: { minHeight: 46, maxWidth: '100%', paddingHorizontal: 14, paddingVertical: 8, borderRadius: 14, backgroundColor: dark ? tones.sun.from : '#FFF6E5',
     borderWidth: 2, borderColor: '#F2C46D', justifyContent: 'center' },
-  cardText: { fontSize: 15, fontWeight: '800', color: '#8A5A00' },
+  cardText: { fontSize: 15, fontWeight: '800', color: dark ? tones.sun.ink : '#8A5A00' },
   // Ghép cặp
   columns: { flexDirection: 'row', gap: 10 },
   column: { flex: 1, gap: 8 },
   columnLabel: { fontSize: 12, fontWeight: '900', color: t.muted, textAlign: 'center' },
-  matchCard: { minHeight: 50, borderRadius: 14, borderWidth: 2, borderColor: t.border, backgroundColor: '#FFFFFF', justifyContent: 'center',
+  matchCard: { minHeight: 50, borderRadius: 14, borderWidth: 2, borderColor: t.border, backgroundColor: t.card, justifyContent: 'center',
     paddingHorizontal: 10, paddingVertical: 8 },
   matchChosen: { borderColor: t.accent, borderWidth: 3 },
   matchLocked: { borderColor: t.success },
   matchText: { fontSize: 15, fontWeight: '800', color: t.ink, textAlign: 'center' },
   // Chọn đáp án
-  passage: { backgroundColor: '#FFFFFF', borderRadius: 16, padding: 12, gap: 6 },
+  passage: { backgroundColor: t.card, borderRadius: 16, padding: 12, gap: 6 },
   passageHead: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   passageLabel: { flex: 1, fontSize: 13, fontWeight: '900', color: t.accent },
   passageText: { fontSize: 15, lineHeight: 22, color: t.ink },
-  code: { fontFamily: MONO, fontSize: 14, lineHeight: 20, backgroundColor: '#F4F6F8', borderRadius: 8, padding: 8 },
+  code: { fontFamily: MONO, fontSize: 14, lineHeight: 20, backgroundColor: dark ? t.surfaceSecondary : '#F4F6F8', borderRadius: 8, padding: 8 },
   question: { fontSize: 17, fontWeight: '900', color: t.ink, lineHeight: 24 },
   choices: { gap: 8 },
   // Room on the right for the ✓ / ✕ shown once answered.
   choice: { minHeight: 50, borderRadius: 14, borderWidth: 2, justifyContent: 'center', paddingLeft: 14, paddingRight: 36, paddingVertical: 10 },
   choiceWrongText: { color: t.danger, textDecorationLine: 'line-through' },
   choiceText: { fontSize: 15, fontWeight: '800', color: t.ink },
-});
+}));

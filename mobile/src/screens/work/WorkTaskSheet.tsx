@@ -4,9 +4,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Text, TextInput } from '../../components/Typography';
 import type { NewWorkTask, Priority, WorkProject } from '../../life/types';
-import { appTheme as t } from '../../theme';
 import { AppModal } from '../../ui/AppModal';
 import { Button, Chip } from '../../ui/kit';
+import { makeStyles, useTheme } from '../../ui/theme';
 
 export const PRIORITIES: { id: Priority; label: string; color: string; exp: number }[] = [
   { id: 'low', label: 'Thấp', color: '#5DAF6A', exp: 5 },
@@ -54,6 +54,8 @@ type Props = {
 /** "Nhận nhiệm vụ": a new work task, its project, priority, deadline, estimate, repeat and steps. */
 export function WorkTaskSheet({ visible, projects, initialProject = null, saving, onClose, onSave }: Props) {
   const insets = useSafeAreaInsets();
+  const { t } = useTheme();
+  const s = useStyles();
   const [title, setTitle] = useState('');
   const [priority, setPriority] = useState<Priority>('medium');
   const [project, setProject] = useState<number | null>(initialProject);
@@ -99,7 +101,7 @@ export function WorkTaskSheet({ visible, projects, initialProject = null, saving
           </View>
           <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={s.body}>
             <TextInput value={title} onChangeText={(v) => { setTitle(v); setError(null); }} placeholder="Ví dụ: Hoàn thành báo cáo tháng"
-              placeholderTextColor="#7F95A8" maxLength={120} style={s.input} accessibilityLabel="Tên nhiệm vụ" autoFocus />
+              placeholderTextColor={t.placeholder} maxLength={120} style={s.input} accessibilityLabel="Tên nhiệm vụ" autoFocus />
             <Text style={s.label}>Mức ưu tiên</Text>
             <View style={s.row}>
               {PRIORITIES.map((p) => <Chip key={p.id} label={`${p.label} · +${p.exp} EXP`} selected={priority === p.id} onPress={() => setPriority(p.id)} />)}
@@ -144,9 +146,9 @@ export function WorkTaskSheet({ visible, projects, initialProject = null, saving
               </View>
             ))}
             <View style={s.stepAdd}>
-              <TextInput value={step} onChangeText={setStep} placeholder="Thêm một bước…" placeholderTextColor="#7F95A8" maxLength={120}
+              <TextInput value={step} onChangeText={setStep} placeholder="Thêm một bước…" placeholderTextColor={t.placeholder} maxLength={120}
                 style={[s.input, s.flex]} onSubmitEditing={addStep} returnKeyType="done" accessibilityLabel="Bước nhỏ mới" />
-              <Pressable onPress={addStep} style={s.addBtn} accessibilityRole="button" accessibilityLabel="Thêm bước"><Ionicons name="add" size={22} color="#FFFFFF" /></Pressable>
+              <Pressable onPress={addStep} style={s.addBtn} accessibilityRole="button" accessibilityLabel="Thêm bước"><Ionicons name="add" size={22} color={t.onPrimary} /></Pressable>
             </View>
             {error ? <Text style={s.error} accessibilityLiveRegion="polite">{error}</Text> : null}
             <Button title="Nhận nhiệm vụ" icon="flag-outline" loading={saving} onPress={submit} />
@@ -157,20 +159,21 @@ export function WorkTaskSheet({ visible, projects, initialProject = null, saving
   );
 }
 
-const s = StyleSheet.create({
+// The sheet is a sheet of parchment in light; in dark it is the app's card.
+const useStyles = makeStyles(({ t, dark }) => StyleSheet.create({
   wrap: { flex: 1, justifyContent: 'flex-end' },
-  backdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(10,36,56,0.45)' },
-  sheet: { maxHeight: '88%', backgroundColor: '#FFF9EF', borderTopLeftRadius: 28, borderTopRightRadius: 28, paddingTop: 16 },
+  backdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: t.scrim },
+  sheet: { maxHeight: '88%', backgroundColor: dark ? t.card : '#FFF9EF', borderTopLeftRadius: 28, borderTopRightRadius: 28, paddingTop: 16 },
   header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 20, marginBottom: 6 },
   title: { fontSize: 19, fontWeight: '900', color: t.ink },
   body: { paddingHorizontal: 20, paddingBottom: 12, gap: 8 },
   label: { fontSize: 14, fontWeight: '800', color: t.ink, marginTop: 8 },
   row: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  input: { backgroundColor: '#FFFFFF', borderRadius: 14, borderWidth: 1.5, borderColor: '#EADBC2', paddingHorizontal: 14, paddingVertical: 12, fontSize: 15, color: t.ink },
+  input: { backgroundColor: t.inputBg, borderRadius: 14, borderWidth: 1.5, borderColor: dark ? t.inputBorder : '#EADBC2', paddingHorizontal: 14, paddingVertical: 12, fontSize: 15, color: t.ink },
   flex: { flex: 1 },
   step: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingVertical: 6 },
   stepText: { flex: 1, fontSize: 14, color: t.ink },
   stepAdd: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  addBtn: { width: 46, height: 46, borderRadius: 14, backgroundColor: t.accent, alignItems: 'center', justifyContent: 'center' },
+  addBtn: { width: 46, height: 46, borderRadius: 14, backgroundColor: t.accentFill, alignItems: 'center', justifyContent: 'center' },
   error: { color: t.danger, fontWeight: '700', fontSize: 13 },
-});
+}));

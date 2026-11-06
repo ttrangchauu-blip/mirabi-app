@@ -6,6 +6,7 @@ import type { Presence } from '../../studyTogether/types';
 import { useWorldMotion } from '../../world/budget';
 import { ContactShadow, Plate, useSize } from '../../world/diorama';
 import { newActValues, actTransform, PET_ACTS, playAct } from '../../world/motion';
+import { makeStyles } from '../../ui/theme';
 
 /**
  * Cùng bạn tiến bộ's common room: a chalkboard with the group's goal, a long table, and each member's own pet around it.
@@ -23,6 +24,7 @@ const PRESENCE: Partial<Record<Presence, { color: string; word: string }>> = {
 
 /** A member's pet at the table. A new `cheer` number makes it hop: that member has just added to the goal. */
 const MemberPet = memo(function MemberPet({ member, size, cheer, still }: { member: HallMember; size: number; cheer: number; still: boolean }) {
+  const h = useStyles();
   const values = useRef(newActValues()).current;
   const { level } = useWorldMotion();
   useEffect(() => {
@@ -53,6 +55,7 @@ const TABLE = require('../../../assets/world/hall/table.webp');
 
 /** The room: the wall with its flags, the chalkboard (its contents are `board`), the table and the pets around it. */
 export function StudyHallScene({ members, cheers, board, children }: { members: HallMember[]; cheers?: Record<number, number>; board: React.ReactNode; children?: React.ReactNode }) {
+  const h = useStyles();
   const [size, onLayout] = useSize({ width: 390, height: 420 });
   const [boardSize, onBoard] = useSize({ width: 350, height: 170 });
   const { level } = useWorldMotion();
@@ -79,6 +82,7 @@ export function StudyHallScene({ members, cheers, board, children }: { members: 
 
 /** A progress line written in chalk: what has been done of the goal, no more. */
 export function ChalkBar({ value, done = false, height = 12 }: { value: number; done?: boolean; height?: number }) {
+  const h = useStyles();
   return (
     <View style={[h.chalkTrack, { height }]}>
       <View style={[h.chalkFill, { width: `${Math.max(0, Math.min(1, value)) * 100}%`, backgroundColor: done ? '#9FE3B4' : '#FFE9A8' }]} />
@@ -86,7 +90,8 @@ export function ChalkBar({ value, done = false, height = 12 }: { value: number; 
   );
 }
 
-const h = StyleSheet.create({
+// The room, the board and the chalk are the picture; the name tags floating over it are interface (glass, theme ink).
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   hall: { overflow: 'hidden', paddingTop: 52, paddingBottom: 22, backgroundColor: '#F4FAFE' },
   boardFrame: { marginHorizontal: 16 },
   board: { minHeight: 132, paddingHorizontal: 22, paddingTop: 20, paddingBottom: 28, gap: 6 },
@@ -95,10 +100,10 @@ const h = StyleSheet.create({
   rowEmpty: { height: 66 },
   member: { alignItems: 'center' },
   memberShadow: { position: 'absolute', top: '42%', alignSelf: 'center' },
-  nameTag: { flexDirection: 'row', alignItems: 'center', gap: 4, maxWidth: '100%', backgroundColor: 'rgba(255,247,230,0.95)', borderRadius: 7, paddingHorizontal: 6, paddingVertical: 1, marginTop: -2 },
-  name: { flexShrink: 1, fontSize: 12, lineHeight: 16, fontWeight: '900', color: '#123B5C' },
-  dot: { width: 8, height: 8, borderRadius: 4, borderWidth: 1, borderColor: '#FFFFFF' },
+  nameTag: { flexDirection: 'row', alignItems: 'center', gap: 4, maxWidth: '100%', backgroundColor: t.glass, borderRadius: 7, paddingHorizontal: 6, paddingVertical: 1, marginTop: -2 },
+  name: { flexShrink: 1, fontSize: 12, lineHeight: 16, fontWeight: '900', color: t.ink },
+  dot: { width: 8, height: 8, borderRadius: 4, borderWidth: 1, borderColor: t.card },
   contribution: { fontSize: 11, lineHeight: 14, fontWeight: '800', color: '#FFE9A8', textShadowColor: 'rgba(30,15,5,0.9)', textShadowOffset: { width: 0, height: 1 }, textShadowRadius: 1 },
   chalkTrack: { borderRadius: 6, borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.55)', overflow: 'hidden' },
   chalkFill: { height: '100%', borderRadius: 4 },
-});
+}));

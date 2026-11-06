@@ -5,8 +5,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { PetArt } from '../../components/PetArt';
 import { usePetCheer } from '../engine/rig';
 import { Text } from '../../components/Typography';
-import { appTheme as t } from '../../theme';
-import { Actions, NoteLine, SceneProps, styles as ui, useSolvedReaction, useWrongShake } from './common';
+import { makeStyles, useTheme } from '../../ui/theme';
+import { Actions, NoteLine, SceneProps, useCommonStyles, useSolvedReaction, useWrongShake } from './common';
 import { keptTicks, numberLineAnswer, tickAt, Ticks } from './logic';
 
 // Cầu trục số (Toán): the number line is a bridge over a river, its ticks the planks. The numbers to place wait on the
@@ -19,10 +19,15 @@ import { keptTicks, numberLineAnswer, tickAt, Ticks } from './logic';
 const PAD = 18;
 const HEIGHT = 128;
 const DECK = 78;
+const TEAL = '#16707F';
 
 export function NumberLineBridge({ turn, disabled, feedback, solved, onSubmit, reduceMotion, petId, petLevel, demo }: SceneProps & {
   demo?: { placed: Ticks; active?: string | null; solved?: boolean };
 }) {
+  const { t, tones, dark } = useTheme();
+  const ui = useCommonStyles();
+  const st = useStyles();
+  const teal = dark ? tones.sea.ink : TEAL;
   const p = turn.prompt;
   const ticks = p.ticks ?? 10;
   const major = p.major ?? 1;
@@ -97,7 +102,7 @@ export function NumberLineBridge({ turn, disabled, feedback, solved, onSubmit, r
               accessibilityState={{ selected: inHand, disabled: off || isLocked }}
               accessibilityLabel={isLocked ? `${x.label}, đã đúng chỗ` : `${x.label}${on ? ', đã đặt' : ''}. ${inHand ? 'Đang cầm' : 'Chạm để cầm'}`}
               style={({ pressed }) => [st.flagChip, on && st.flagChipOn, inHand && st.flagChipHand, isLocked && st.flagChipLocked, pressed && ui.pressed]}>
-              <Ionicons name={isLocked ? 'lock-closed' : on ? 'flag' : 'flag-outline'} size={14} color={isLocked ? t.success : '#16707F'} />
+              <Ionicons name={isLocked ? 'lock-closed' : on ? 'flag' : 'flag-outline'} size={14} color={isLocked ? t.success : teal} />
               <Text style={st.flagChipText}>{x.label}</Text>
             </Pressable>
           );
@@ -132,7 +137,7 @@ export function NumberLineBridge({ turn, disabled, feedback, solved, onSubmit, r
               <View style={[st.flagCloth, right && st.flagRight, hand === x.id && !right && st.flagHand]}>
                 <Text style={[st.flagText, right && { color: '#FFFFFF' }]} numberOfLines={1}>{x.label}</Text>
               </View>
-              <View style={[st.pole, right && { backgroundColor: t.success }]} />
+              <View style={[st.pole, right && st.poleRight]} />
             </Pressable>
           );
         }) : null}
@@ -162,34 +167,41 @@ export function NumberLineBridge({ turn, disabled, feedback, solved, onSubmit, r
 
 function Nudge({ icon, label, off, onPress }: { icon: React.ComponentProps<typeof Ionicons>['name']; label: string; off: boolean;
   onPress: () => void }) {
+  const { tones, dark } = useTheme();
+  const ui = useCommonStyles();
+  const st = useStyles();
   return (
     <Pressable onPress={onPress} disabled={off} accessibilityRole="button" accessibilityLabel={label} hitSlop={4}
       style={[st.nudge, off && ui.dimmed]}>
-      <Ionicons name={icon} size={18} color="#16707F" />
+      <Ionicons name={icon} size={18} color={dark ? tones.sea.ink : TEAL} />
     </Pressable>
   );
 }
 
-const st = StyleSheet.create({
-  world: { gap: 10, padding: 12, borderRadius: 20, backgroundColor: '#EAF7F2', borderWidth: 2, borderColor: '#BFE3D3' },
+const useStyles = makeStyles(({ t, tones, dark }) => StyleSheet.create({
+  // The panel round the game (its text and buttons follow the theme); the bridge itself (Svg, flags) stays as drawn.
+  world: { gap: 10, padding: 12, borderRadius: 20, backgroundColor: dark ? tones.sea.from : '#EAF7F2', borderWidth: 2,
+    borderColor: dark ? tones.sea.to : '#BFE3D3' },
   bank: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, justifyContent: 'center' },
-  flagChip: { flexDirection: 'row', alignItems: 'center', gap: 6, minHeight: 44, paddingHorizontal: 14, borderRadius: 12, backgroundColor: '#FFFFFF',
+  flagChip: { flexDirection: 'row', alignItems: 'center', gap: 6, minHeight: 44, paddingHorizontal: 14, borderRadius: 12, backgroundColor: t.card,
     borderWidth: 2, borderColor: '#9AD3DC' },
   flagChipOn: { borderStyle: 'dashed' },
-  flagChipHand: { borderColor: t.accent, backgroundColor: '#FFF4DC' },
+  flagChipHand: { borderColor: t.accent, backgroundColor: dark ? tones.sun.from : '#FFF4DC' },
   flagChipLocked: { borderColor: t.success, backgroundColor: t.successBg },
-  flagChipText: { fontSize: 16, fontWeight: '900', color: '#0E4C57' },
+  flagChipText: { fontSize: 16, fontWeight: '900', color: dark ? tones.sea.ink : '#0E4C57' },
   bridge: { height: HEIGHT, borderRadius: 14, overflow: 'hidden', backgroundColor: '#F4FBF8' },
   flag: { position: 'absolute', top: 6, alignItems: 'flex-start' },
   flagCloth: { minWidth: 30, paddingHorizontal: 6, paddingVertical: 3, borderRadius: 6, borderBottomLeftRadius: 0, backgroundColor: '#FFFFFF',
     borderWidth: 2, borderColor: '#16707F' },
-  flagHand: { borderColor: t.accent, backgroundColor: '#FFF4DC' },
-  flagRight: { backgroundColor: t.success, borderColor: t.success },
+  flagHand: { borderColor: '#136FA8', backgroundColor: '#FFF4DC' }, // on the drawn bridge: as drawn
+  // The flags stand on the drawn bridge (light on both themes): a right one is the light success green.
+  flagRight: { backgroundColor: '#17704F', borderColor: '#17704F' },
   flagText: { fontSize: 12, fontWeight: '900', color: '#0E4C57' },
   pole: { width: 2, height: DECK - 30, backgroundColor: '#16707F' },
+  poleRight: { backgroundColor: '#17704F' },
   pet: { position: 'absolute', top: DECK - 40, left: 0 },
   nudges: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6 },
-  nudge: { width: 44, height: 44, borderRadius: 22, backgroundColor: '#FFFFFF', borderWidth: 2, borderColor: '#9AD3DC', alignItems: 'center',
+  nudge: { width: 44, height: 44, borderRadius: 22, backgroundColor: t.card, borderWidth: 2, borderColor: '#9AD3DC', alignItems: 'center',
     justifyContent: 'center' },
-  handText: { flexShrink: 1, minWidth: 96, textAlign: 'center', fontSize: 14, fontWeight: '800', color: '#0E4C57' },
-});
+  handText: { flexShrink: 1, minWidth: 96, textAlign: 'center', fontSize: 14, fontWeight: '800', color: dark ? tones.sea.ink : '#0E4C57' },
+}));

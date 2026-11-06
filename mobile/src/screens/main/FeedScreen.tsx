@@ -3,10 +3,10 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import type { User } from '../../auth/AuthContext';
 import { Text } from '../../components/Typography';
-import { appTheme as t } from '../../theme';
 import { Avatar, Button, Card, SoftInput } from '../../ui/kit';
 import { BackHeader, EmptyState, ErrorState, LoadingState } from '../together/ui';
 import { Post, request, showError } from './shared';
+import { makeStyles } from '../../ui/theme';
 
 type Props = {
   user: User; posts: Post[]; onPosts: (p: Post[]) => void; /** After the user shares a post (counts toward a daily quest). */ onPosted?: () => void;
@@ -15,6 +15,7 @@ type Props = {
 
 /** "Bảng tin", the post feed, opened from Bạn bè and from Trợ giúp. Read again each time it opens. */
 export function FeedScreen({ user, posts, onPosts, onPosted, onBack }: Props) {
+  const styles = useStyles();
   const [draft, setDraft] = useState('');
   const [posting, setPosting] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -73,7 +74,7 @@ export function FeedScreen({ user, posts, onPosts, onPosted, onBack }: Props) {
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   composer: { flexDirection: 'row', gap: 12, alignItems: 'flex-start' },
   input: { flex: 1 },
   author: { flexDirection: 'row', alignItems: 'center', gap: 10 },
@@ -82,4 +83,4 @@ const styles = StyleSheet.create({
   body: { fontSize: 16, lineHeight: 24, color: t.ink, marginVertical: 12 },
   like: { flexDirection: 'row', alignItems: 'center', gap: 6, alignSelf: 'flex-start', minHeight: 36 },
   likeText: { fontSize: 14, fontWeight: '800', color: t.muted },
-});
+}));

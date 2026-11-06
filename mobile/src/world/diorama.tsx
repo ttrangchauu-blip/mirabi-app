@@ -5,6 +5,7 @@ import Svg, { Defs, Ellipse, RadialGradient, Stop } from 'react-native-svg';
 import { Text } from '../components/Typography';
 import { appTheme } from '../theme';
 import { type as typeScale } from '../ui/design';
+import { makeStyles, useTheme } from '../ui/theme';
 import { useWorldMotion } from './budget';
 import { DURATION, EASE } from './motion';
 
@@ -19,6 +20,7 @@ import { DURATION, EASE } from './motion';
 /** How long things take: a press, something opening, a change of scene, an achievement. */
 export const BEAT = { press: 130, open: 280, scene: 420, triumph: 1200 } as const;
 
+/** Ink for text drawn on the scenes' own wood and paper, which stay light in both themes. */
 export const ink = { dark: appTheme.ink, soft: appTheme.muted, paper: appTheme.ink, onWood: appTheme.ink, onWoodSoft: appTheme.muted } as const;
 
 // ------------------------------------------------------------------------------------------------ measuring
@@ -99,16 +101,18 @@ export const ContactShadow = memo(function ContactShadow({ width, height, opacit
 export function SceneHeader({ title, subtitle, onBack, right, leading, tone = 'wood' }: {
   title: string; subtitle?: string; onBack: () => void; right?: React.ReactNode; /** A small picture before the title. */ leading?: React.ReactNode; tone?: 'wood' | 'sky';
 }) {
+  const { t } = useTheme();
+  const c = useChrome();
   return (
     <View style={s.header}>
-      <Hit onPress={onBack} hitSlop={8} accessibilityRole="button" accessibilityLabel="Quay lại" style={s.knob}>
-        <Ionicons name="chevron-back" size={22} color={appTheme.ink} />
+      <Hit onPress={onBack} hitSlop={8} accessibilityRole="button" accessibilityLabel="Quay lại" style={c.knob}>
+        <Ionicons name="chevron-back" size={22} color={t.ink} />
       </Hit>
-      <View style={[s.plaque, tone === 'sky' && s.plaqueSky, !!leading && s.plaqueRow]}>
+      <View style={[c.plaque, !!leading && s.plaqueRow]}>
         {leading}
         <View style={s.plaqueText}>
-          <Text style={s.plaqueTitle} accessibilityRole="header" numberOfLines={1}>{title}</Text>
-          {subtitle ? <Text style={s.plaqueSub} numberOfLines={1}>{subtitle}</Text> : null}
+          <Text style={c.plaqueTitle} accessibilityRole="header" numberOfLines={1}>{title}</Text>
+          {subtitle ? <Text style={c.plaqueSub} numberOfLines={1}>{subtitle}</Text> : null}
         </View>
       </View>
       {right}
@@ -120,30 +124,36 @@ export function SceneHeader({ title, subtitle, onBack, right, leading, tone = 'w
 export function Knob({ icon, label, hint, on = false, onPress, disabled, testID, dot = false }: {
   icon: React.ComponentProps<typeof Ionicons>['name']; label: string; hint?: string; on?: boolean; onPress: () => void; disabled?: boolean; testID?: string; dot?: boolean;
 }) {
+  const { t } = useTheme();
+  const c = useChrome();
   return (
     <Hit onPress={onPress} disabled={disabled} hitSlop={6} testID={testID} accessibilityRole="button" accessibilityLabel={label} accessibilityHint={hint}
-      accessibilityState={{ disabled: !!disabled }} style={[s.knob, on && s.knobOn]}>
-      <Ionicons name={icon} size={19} color={appTheme.accent} />
-      {dot ? <View style={s.knobDot} /> : null}
+      accessibilityState={{ disabled: !!disabled }} style={[c.knob, on && c.knobOn]}>
+      <Ionicons name={icon} size={19} color={t.accent} />
+      {dot ? <View style={c.knobDot} /> : null}
     </Hit>
   );
 }
 
 /** A label cut from paper, lying on a scene: a name and its numbers, nothing more. */
 export function Tag({ children, style, testID }: { children: React.ReactNode; style?: StyleProp<ViewStyle>; testID?: string }) {
-  return <View style={[s.tag, style]} testID={testID}>{children}</View>;
+  const c = useChrome();
+  return <View style={[c.tag, style]} testID={testID}>{children}</View>;
 }
 
 /** A sheet of paper with a soft shadow: where text that has to be read lives in a scene. */
-export function Paper({ children, style, testID, tint = '#FFFFFF' }: { children: React.ReactNode; style?: StyleProp<ViewStyle>; testID?: string; tint?: string }) {
-  return <View style={[s.paper, { backgroundColor: tint }, style]} testID={testID}>{children}</View>;
+export function Paper({ children, style, testID, tint }: { children: React.ReactNode; style?: StyleProp<ViewStyle>; testID?: string; tint?: string }) {
+  const { t } = useTheme();
+  const c = useChrome();
+  return <View style={[c.paper, { backgroundColor: tint ?? t.card }, style]} testID={testID}>{children}</View>;
 }
 
-/** The name of a part of a scene. */
-export function Carved({ children, right }: { children: string; right?: React.ReactNode }) {
+/** The name of a part of a scene. `onWood`: written on the scene's own (light) wood, so it keeps its dark ink in both themes. */
+export function Carved({ children, right, onWood = false }: { children: string; right?: React.ReactNode; onWood?: boolean }) {
+  const c = useChrome();
   return (
     <View style={s.carvedRow}>
-      <Text style={s.carved} accessibilityRole="header">{children}</Text>
+      <Text style={[s.carved, !onWood && c.carved]} accessibilityRole="header">{children}</Text>
       {right}
     </View>
   );
@@ -212,21 +222,25 @@ const s = StyleSheet.create({
   tiles: { position: 'absolute', left: 0, top: 0, overflow: 'hidden' },
   off: { opacity: 0.55 },
   header: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 12, paddingVertical: 8 },
-  knob: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: '#D6ECF7',
-    shadowColor: appTheme.shadow, shadowOpacity: 0.16, shadowRadius: 6, shadowOffset: { width: 0, height: 3 }, elevation: 3 },
-  knobOn: { backgroundColor: '#C6E6F8', borderColor: '#9ED9F5' },
-  knobDot: { position: 'absolute', top: 7, right: 7, width: 7, height: 7, borderRadius: 4, backgroundColor: '#7CE0A3', borderWidth: 1, borderColor: '#FFFFFF' },
-  plaque: { flexShrink: 1, flexGrow: 1, minWidth: 0, minHeight: 44, justifyContent: 'center', paddingHorizontal: 14, paddingVertical: 3, borderRadius: 16, backgroundColor: 'rgba(255,255,255,0.92)', borderWidth: 1, borderColor: 'rgba(255,255,255,0.95)' },
-  plaqueSky: { backgroundColor: 'rgba(255,255,255,0.92)' },
   plaqueRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: 8, paddingHorizontal: 10 },
   plaqueText: { flexShrink: 1, minWidth: 0 },
-  plaqueTitle: { ...typeScale.label, color: ink.onWood },
-  plaqueSub: { ...typeScale.micro, fontWeight: '700', color: ink.onWoodSoft },
-  tag: { backgroundColor: '#FFFFFF', borderRadius: 12, paddingHorizontal: 9, paddingVertical: 4, borderWidth: 1, borderColor: '#D6ECF7',
-    shadowColor: appTheme.shadow, shadowOpacity: 0.14, shadowRadius: 4, shadowOffset: { width: 0, height: 2 }, elevation: 2 },
-  paper: { borderRadius: 18, padding: 14, shadowColor: appTheme.shadow, shadowOpacity: 0.12, shadowRadius: 12, shadowOffset: { width: 0, height: 5 }, elevation: 3 },
   carvedRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 8, paddingHorizontal: 16, marginBottom: 8 },
   carved: { ...typeScale.label, color: appTheme.ink, flexShrink: 1 },
   triumph: { position: 'absolute', left: '50%', top: '42%', width: 0, height: 0 },
   spark: { position: 'absolute', left: -4, top: -4, width: 8, height: 8, borderRadius: 2 },
 });
+
+/** What floats over a scene (knobs, plaques, tags, paper): glass and cards of the interface, so they follow the theme. */
+const useChrome = makeStyles(({ t, glass, dark }) => StyleSheet.create({
+  knob: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: t.card, borderWidth: 1, borderColor: t.border,
+    shadowColor: t.shadow, shadowOpacity: dark ? 0.4 : 0.16, shadowRadius: 6, shadowOffset: { width: 0, height: 3 }, elevation: 3 },
+  knobOn: { backgroundColor: dark ? t.hero : '#C6E6F8', borderColor: dark ? t.accent : '#9ED9F5' },
+  knobDot: { position: 'absolute', top: 7, right: 7, width: 7, height: 7, borderRadius: 4, backgroundColor: '#7CE0A3', borderWidth: 1, borderColor: t.card },
+  plaque: { flexShrink: 1, flexGrow: 1, minWidth: 0, minHeight: 44, justifyContent: 'center', paddingHorizontal: 14, paddingVertical: 3, borderRadius: 16, ...glass },
+  plaqueTitle: { ...typeScale.label, color: t.ink },
+  plaqueSub: { ...typeScale.micro, fontWeight: '700', color: t.muted },
+  tag: { backgroundColor: t.card, borderRadius: 12, paddingHorizontal: 9, paddingVertical: 4, borderWidth: 1, borderColor: t.border,
+    shadowColor: t.shadow, shadowOpacity: dark ? 0.4 : 0.14, shadowRadius: 4, shadowOffset: { width: 0, height: 2 }, elevation: 2 },
+  paper: { borderRadius: 18, padding: 14, shadowColor: t.shadow, shadowOpacity: dark ? 0.4 : 0.12, shadowRadius: 12, shadowOffset: { width: 0, height: 5 }, elevation: 3 },
+  carved: { color: t.ink },
+}));

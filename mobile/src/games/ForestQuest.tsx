@@ -11,6 +11,7 @@ import { Layer, Parallax } from './engine/Parallax';
 import { useRig } from './engine/rig';
 import { useSfx } from './engine/sfx';
 import { type Advance, useAdvance } from './quests/worlds';
+import { makeStyles } from '../ui/theme';
 
 // Word Forest's quests for the Tiếng Việt lessons, drawn above the lesson game being played (its content is the
 // lesson's own):
@@ -48,6 +49,7 @@ export function ForestQuest({ quest, done, total, wrongKey, petId, petLevel, red
   /** The answered question waits for "Câu tiếp theo": the door opens, but the pet walks through to the next one only then. */
   hold?: boolean;
 }) {
+  const styles = useStyles();
   const [width, setWidth] = useState(0);
   const travel = useRef(new Animated.Value(quest === 'door' ? done : 0)).current;
   const open = useRef(new Animated.Value(0)).current;
@@ -267,7 +269,7 @@ export function ForestQuest({ quest, done, total, wrongKey, petId, petLevel, red
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, dark }) => StyleSheet.create({
   scene: { borderRadius: 22, overflow: 'hidden', backgroundColor: '#CFEBC8', marginBottom: 10 },
   door: { position: 'absolute', bottom: 14, width: DOOR, height: DOOR * 1.2 },
   leaf: { position: 'absolute', top: DOOR_OPENING.top * DOOR },
@@ -282,6 +284,7 @@ const styles = StyleSheet.create({
   chest: { position: 'absolute', bottom: 24 },
   gem: { position: 'absolute', left: 10, top: 0 },
   flower: { position: 'absolute', bottom: 26 },
-  counter: { position: 'absolute', top: 8, left: 8, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 3, backgroundColor: 'rgba(255,255,255,0.9)' },
-  counterText: { fontSize: 12, fontWeight: '900', color: '#22703A' },
-});
+  counter: { position: 'absolute', top: 8, left: 8, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 3,
+    backgroundColor: dark ? t.glass : 'rgba(255,255,255,0.9)' }, // the counter pill over the forest: chrome
+  counterText: { fontSize: 12, fontWeight: '900', color: dark ? t.success : '#22703A' },
+}));

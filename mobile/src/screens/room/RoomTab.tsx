@@ -16,12 +16,12 @@ import { clockLabel } from '../../room/format';
 import { PET_ACTIONS, PLAY_MS, type PetAction, useRoomPrefs, useRoomSounds } from '../../room/prefs';
 import { PROBLEM_TEXT, type Problem } from '../../room/rules';
 import type { FoundStack, Layout, OwnRoom, Pose } from '../../room/types';
-import { appTheme as t } from '../../theme';
 import { AppModal } from '../../ui/AppModal';
 import { useConfirm } from '../../ui/ConfirmDialog';
-import { elevation, glass, radius } from '../../ui/design';
+import { radius } from '../../ui/design';
 import { Button, ProgressBar, SoftInput } from '../../ui/kit';
 import { useToast } from '../../ui/Toast';
+import { makeStyles, useTheme } from '../../ui/theme';
 import type { FocusTimer } from '../main/MainApp';
 import { showError } from '../main/shared';
 import { InventoryScreen } from '../inventory/InventoryScreen';
@@ -110,6 +110,8 @@ const EDIT_HEADER = 56;
  */
 export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenExplore, contentTop, onDecorating, hatching = false, onOpenInventory, healingAllowed = false, startJournal = false, onJournalStarted }: Props) {
   const insets = useSafeAreaInsets();
+  const { t, tones } = useTheme();
+  const s = useStyles();
   const barTop = contentTop ?? insets.top;
   const { width: screenWidth, height: screenHeight } = useViewportSize();
   const toast = useToast();
@@ -434,7 +436,7 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenExplore, c
             {healingAllowed ? <Pressable onPress={() => { setPetMenu(false); setHealing((h) => !h); setHealingRest(false); }} hitSlop={6}
               style={({ pressed }) => [s.icon, healing && s.iconOn, pressed && s.pressed]} accessibilityRole="switch"
               accessibilityState={{ checked: healing }} accessibilityLabel="Góc thư giãn" testID="healing-toggle">
-              <Ionicons name={healing ? 'leaf' : 'leaf-outline'} size={20} color={healing ? '#FFFFFF' : '#2F7A55'} />
+              <Ionicons name={healing ? 'leaf' : 'leaf-outline'} size={20} color={healing ? t.onPrimary : tones.leaf.ink} />
             </Pressable> : null}
             <Pressable onPress={takePhoto} hitSlop={6} style={({ pressed }) => [s.icon, pressed && s.pressed]} accessibilityRole="button" accessibilityLabel="Chụp ảnh">
               <Ionicons name="camera" size={20} color={t.accent} />
@@ -518,7 +520,7 @@ export function RoomTab({ user, timer, leaveGuard, onOpenAlbum, onOpenExplore, c
   );
 }
 
-const s = StyleSheet.create({
+const useStyles = makeStyles(({ t, elevation, glass }) => StyleSheet.create({
   fill: { flex: 1 },
   flex: { flex: 1, minWidth: 0 },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12, padding: 28 },
@@ -535,10 +537,10 @@ const s = StyleSheet.create({
   icon: { width: 40, height: 36, alignItems: 'center', justifyContent: 'center', borderRadius: 10 },
   iconOn: { backgroundColor: '#2F7A55' },
   petRow: { height: 14, flexDirection: 'row', alignItems: 'center', gap: 6 },
-  editHeader: { position: 'absolute', top: 0, left: 0, right: 0, paddingBottom: 8, backgroundColor: '#FFFFFF', borderBottomWidth: 1,
-    borderBottomColor: '#E3EDF4' },
+  editHeader: { position: 'absolute', top: 0, left: 0, right: 0, paddingBottom: 8, backgroundColor: t.card, borderBottomWidth: 1,
+    borderBottomColor: t.border },
   // Over the bottom of the room, above the menu bar (its last points under the bar's rounded corners).
-  panelDock: { position: 'absolute', left: 0, right: 0, bottom: 0, paddingBottom: TAB_BAR_RADIUS, backgroundColor: '#FFFFFF' },
+  panelDock: { position: 'absolute', left: 0, right: 0, bottom: 0, paddingBottom: TAB_BAR_RADIUS, backgroundColor: t.card },
   status: { alignSelf: 'flex-start', maxWidth: '100%', minHeight: 26, flexDirection: 'row', alignItems: 'center', gap: 5, paddingHorizontal: 10, borderRadius: radius.pill, ...glass },
   statusText: { flexShrink: 1, color: t.ink, fontSize: 12, lineHeight: 16, fontWeight: '800' },
   // The numbers keep their place; the name gives way first on a narrow screen.
@@ -547,14 +549,14 @@ const s = StyleSheet.create({
   expBar: { flex: 1, minWidth: 24, height: 5, borderRadius: 3, overflow: 'hidden', justifyContent: 'center' },
   expText: { flexShrink: 0, color: t.muted, fontSize: 11, fontWeight: '800' },
   offline: { alignSelf: 'flex-start', maxWidth: '100%', flexDirection: 'row', alignItems: 'center', gap: 5, paddingHorizontal: 8,
-    paddingVertical: 4, borderRadius: 12, backgroundColor: '#FFF6E8E6' },
+    paddingVertical: 4, borderRadius: 12, backgroundColor: t.warningBg },
   offlineText: { flexShrink: 1, color: t.muted, fontSize: 11, lineHeight: 15, fontWeight: '700' },
   settingsList: { flexGrow: 0 },
   settingsBody: { gap: 4, paddingBottom: 4 },
   pressed: { opacity: 0.85, transform: [{ scale: 0.97 }] },
-  dialogBackdrop: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 28, backgroundColor: 'rgba(10,36,56,0.45)' },
-  dialog: { width: '100%', maxWidth: 360, backgroundColor: '#FFFFFF', borderRadius: 26, padding: 22, gap: 14 },
+  dialogBackdrop: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 28, backgroundColor: t.scrim },
+  dialog: { width: '100%', maxWidth: 360, backgroundColor: t.card, borderRadius: 26, padding: 22, gap: 14 },
   dialogTitle: { color: t.ink, fontSize: 19, fontWeight: '900' },
   dialogActions: { flexDirection: 'row', gap: 10 },
-  inventoryModal: { flex: 1, backgroundColor: '#EEF6FB' },
-});
+  inventoryModal: { flex: 1, backgroundColor: t.bg },
+}));

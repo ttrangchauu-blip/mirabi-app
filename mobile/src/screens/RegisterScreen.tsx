@@ -9,12 +9,13 @@ import { AuthLayout } from '../components/AuthLayout';
 import { AuthTextField, FormBanner, GradientButton, TextLink } from '../components/AuthForm';
 import { StudyProfileFields } from '../components/StudyProfileFields';
 import { validateAge, validateGrade, type GradeId } from '../studyProfile';
-import { authTheme } from '../theme';
+import { makeStyles } from '../ui/theme';
 
 type Props = { email: string; onEmailChange: (email: string) => void; onLogin: () => void; onRegistered: (email: string, password: string) => void };
 type Errors = { displayName?: string; age?: string; grade?: string; email?: string; password?: string; confirm?: string };
 
 export function RegisterScreen({ email, onEmailChange, onLogin, onRegistered }: Props) {
+  const styles = useStyles();
   const { register } = useAuth();
   const [displayName, setDisplayName] = useState('');
   const [age, setAge] = useState<number | null>(null); // never chosen in advance
@@ -112,8 +113,8 @@ export function RegisterScreen({ email, onEmailChange, onLogin, onRegistered }: 
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ auth }) => StyleSheet.create({
   footerRow: { flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' },
-  footerText: { color: authTheme.ink, fontSize: 14 },
-  gradeNote: { color: authTheme.muted, fontSize: 12, lineHeight: 17, marginTop: -6, marginBottom: 14, marginLeft: 2 },
-});
+  footerText: { color: auth.ink, fontSize: 14 },
+  gradeNote: { color: auth.muted, fontSize: 12, lineHeight: 17, marginTop: -6, marginBottom: 14, marginLeft: 2 },
+}));

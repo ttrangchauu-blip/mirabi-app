@@ -8,11 +8,11 @@ import { useReduceMotion } from '../../components/useReduceMotion';
 import { NetworkError } from '../../api/client';
 import { healingApi, healingCache } from '../../life/api';
 import type { Ambience, AmbiencePrefs, HealingSummary, JournalEntry, Mood, PetMoodResponse, RelaxActivity } from '../../life/types';
-import { appTheme as t } from '../../theme';
 import { AppModal } from '../../ui/AppModal';
 import { useConfirm } from '../../ui/ConfirmDialog';
 import { Button } from '../../ui/kit';
 import { useToast } from '../../ui/Toast';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { showError } from '../main/shared';
 import { AMBIENCES, AMBIENCE_ORDER, BREATH_CYCLE, BREATH_STEPS, MOODS, moodOf } from './ambience';
 
@@ -58,6 +58,8 @@ function useAmbientSound(source: number, on: boolean, volume: number) {
  */
 export function HealingDock({ userId, ambience, onAmbience, onPetResponse, onPet, onResting, bottom, startJournal = false, onJournalStarted }: Props) {
   const toast = useToast();
+  const { t } = useTheme();
+  const s = useStyles();
   const [summary, setSummary] = useState<HealingSummary | null>(null);
   const [offline, setOffline] = useState(false);
   const [open, setOpen] = useState(true);
@@ -153,10 +155,10 @@ export function HealingDock({ userId, ambience, onAmbience, onPetResponse, onPet
           <View style={s.moods}>
             {MOODS.map((m) => (
               <Pressable key={m.id} onPress={() => { void checkIn(m.id); }} disabled={checking}
-                style={[s.mood, { backgroundColor: mood === m.id ? m.color : '#FFFFFF' }]} accessibilityRole="radio"
+                style={[s.mood, mood === m.id ? { backgroundColor: m.color } : s.moodOff]} accessibilityRole="radio"
                 accessibilityState={{ selected: mood === m.id, disabled: checking }} accessibilityLabel={m.label} testID={`mood-${m.id}`}>
                 <Text style={s.moodEmoji}>{m.emoji}</Text>
-                <Text style={s.moodLabel} numberOfLines={1}>{m.label}</Text>
+                <Text style={[s.moodLabel, mood === m.id && s.moodLabelOn]} numberOfLines={1}>{m.label}</Text>
               </Pressable>
             ))}
           </View>
@@ -191,9 +193,11 @@ export function HealingDock({ userId, ambience, onAmbience, onPetResponse, onPet
 }
 
 function Activity({ icon, label, onPress, active }: { icon: React.ComponentProps<typeof Ionicons>['name']; label: string; onPress: () => void; active?: boolean }) {
+  const { t, tones } = useTheme();
+  const s = useStyles();
   return (
     <Pressable onPress={onPress} style={({ pressed }) => [s.activity, active && s.activityOn, pressed && s.pressed]} accessibilityRole="button" accessibilityLabel={label}>
-      <Ionicons name={icon} size={20} color={active ? '#FFFFFF' : '#2F7A55'} />
+      <Ionicons name={icon} size={20} color={active ? t.onPrimary : tones.leaf.ink} />
       <Text style={[s.activityLabel, active && s.activityLabelOn]} numberOfLines={1}>{label}</Text>
     </Pressable>
   );
@@ -215,6 +219,7 @@ function useElapsed(running: boolean) {
 /** Guided breathing: a circle that grows as you breathe in, holds, and shrinks as you breathe out (4-4-6). With reduced
  * motion the circle stays still and the words and count guide instead. */
 export function BreathingModal({ visible, onClose, onStart }: { visible: boolean; onClose: (seconds: number) => void; onStart?: () => void }) {
+  const s = useStyles();
   const reduce = useReduceMotion();
   const [running, setRunning] = useState(false);
   const elapsed = useElapsed(running);
@@ -255,6 +260,7 @@ export function BreathingModal({ visible, onClose, onStart }: { visible: boolean
 }
 
 function RestModal({ visible, onClose, onStart }: { visible: boolean; onClose: (seconds: number) => void; onStart: () => void }) {
+  const s = useStyles();
   const [length, setLength] = useState<number | null>(null);
   const elapsed = useElapsed(length !== null);
   useEffect(() => { if (!visible) setLength(null); }, [visible]);
@@ -288,6 +294,8 @@ function JournalSheet({ visible, gratitude, mood, onClose, onSaved }: {
   visible: boolean; gratitude: boolean; mood: Mood | null; onClose: () => void; onSaved: (entry: JournalEntry, seconds: number) => void;
 }) {
   const insets = useSafeAreaInsets();
+  const { t } = useTheme();
+  const s = useStyles();
   const confirm = useConfirm();
   const [items, setItems] = useState<JournalEntry[] | null>(null);
   const [error, setError] = useState(false);
@@ -339,17 +347,17 @@ function JournalSheet({ visible, gratitude, mood, onClose, onSaved }: {
           </View>
           <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={s.sheetBody}>
             <Text style={s.private}><Ionicons name="lock-closed" size={12} color={t.muted} /> Chỉ mình bạn đọc được nhật ký này.</Text>
-            <TextInput value={title} onChangeText={setTitle} placeholder="Tiêu đề" placeholderTextColor="#7F95A8" maxLength={120} style={s.input} accessibilityLabel="Tiêu đề nhật ký" />
+            <TextInput value={title} onChangeText={setTitle} placeholder="Tiêu đề" placeholderTextColor={t.placeholder} maxLength={120} style={s.input} accessibilityLabel="Tiêu đề nhật ký" />
             {gratitude ? good.map((g, i) => (
               <TextInput key={i} value={g} onChangeText={(v) => setGood((x) => x.map((y, j) => (j === i ? v : y)))} placeholder={`Điều tốt thứ ${i + 1}…`}
-                placeholderTextColor="#7F95A8" maxLength={300} style={s.input} accessibilityLabel={`Điều tốt thứ ${i + 1}`} />
+                placeholderTextColor={t.placeholder} maxLength={300} style={s.input} accessibilityLabel={`Điều tốt thứ ${i + 1}`} />
             )) : (
               <TextInput value={content} onChangeText={setContent} placeholder={mood ? `Hôm nay bạn thấy ${moodOf(mood).label.toLowerCase()}. Viết vài dòng nhé…` : 'Hôm nay của bạn thế nào?'}
-                placeholderTextColor="#7F95A8" maxLength={5000} multiline style={[s.input, s.multiline]} accessibilityLabel="Nội dung nhật ký" />
+                placeholderTextColor={t.placeholder} maxLength={5000} multiline style={[s.input, s.multiline]} accessibilityLabel="Nội dung nhật ký" />
             )}
             <View style={s.albumRow}>
               <Text style={s.albumText}>Lưu khoảnh khắc này vào Album (chỉ tiêu đề)</Text>
-              <Switch value={album} onValueChange={setAlbum} accessibilityLabel="Lưu vào Album kỷ niệm" />
+              <Switch value={album} onValueChange={setAlbum} trackColor={{ true: t.switchOn, false: t.switchOff }} thumbColor={album ? t.accent : t.thumbOff} accessibilityLabel="Lưu vào Album kỷ niệm" />
             </View>
             <Button title="Lưu nhật ký" icon="save-outline" loading={saving} disabled={!body} onPress={() => { void save(); }} />
             <Text style={s.label}>Những trang trước</Text>
@@ -376,40 +384,49 @@ function JournalSheet({ visible, gratitude, mood, onClose, onSaved }: {
   );
 }
 
-const s = StyleSheet.create({
+/** Góc thư giãn's own warm paper and green; on dark the theme's surfaces and the leaf tone's ink. */
+const useStyles = makeStyles(({ t, tones, dark }) => {
+  const paper = dark ? t.card : '#FFFCF6';
+  const tile = dark ? t.surfaceSecondary : '#FFFFFF';
+  const green = dark ? tones.leaf.ink : '#2F7A55';
+  return StyleSheet.create({
   flex: { flex: 1 },
-  dock: { position: 'absolute', left: 10, right: 10, borderRadius: 22, backgroundColor: 'rgba(255,252,246,0.95)',
-    shadowColor: '#3B2A1A', shadowOpacity: 0.18, shadowRadius: 12, shadowOffset: { width: 0, height: 4 }, elevation: 5, overflow: 'hidden' },
+  dock: { position: 'absolute', left: 10, right: 10, borderRadius: 22, backgroundColor: dark ? t.glass : 'rgba(255,252,246,0.95)',
+    shadowColor: dark ? '#000000' : '#3B2A1A', shadowOpacity: 0.18, shadowRadius: 12, shadowOffset: { width: 0, height: 4 }, elevation: 5, overflow: 'hidden' },
   head: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 14, minHeight: 46 },
   headTitle: { flex: 1, fontSize: 14, fontWeight: '900', color: t.ink },
   headMeta: { fontSize: 12, fontWeight: '700', color: t.muted },
   body: { maxHeight: 300 },
   bodyContent: { paddingHorizontal: 12, paddingBottom: 12, gap: 8 },
   scenes: { gap: 8 },
-  scene: { width: 76, alignItems: 'center', paddingVertical: 6, borderRadius: 14, backgroundColor: '#FFFFFF', borderWidth: 2, borderColor: 'transparent' },
-  sceneOn: { borderColor: '#2F7A55', backgroundColor: '#E8F6EC' },
+  scene: { width: 76, alignItems: 'center', paddingVertical: 6, borderRadius: 14, backgroundColor: tile, borderWidth: 2, borderColor: 'transparent' },
+  sceneOn: { borderColor: green, backgroundColor: tones.leaf.from },
   sceneEmoji: { fontSize: 22 },
   sceneLabel: { fontSize: 11, fontWeight: '700', color: t.muted },
-  sceneLabelOn: { color: '#22603F', fontWeight: '900' },
+  sceneLabelOn: { color: tones.leaf.ink, fontWeight: '900' },
   label: { fontSize: 13, fontWeight: '900', color: t.ink, marginTop: 2 },
   moods: { flexDirection: 'row', justifyContent: 'space-between', gap: 4 },
   mood: { flex: 1, alignItems: 'center', borderRadius: 14, paddingVertical: 6, minHeight: 56 },
   moodEmoji: { fontSize: 22 },
+  moodOff: { backgroundColor: tile },
   moodLabel: { fontSize: 10, fontWeight: '700', color: t.ink },
-  hint: { fontSize: 12, color: '#7A4D00', fontWeight: '700', backgroundColor: '#FFF4CC', borderRadius: 10, padding: 8 },
+  // On a mood's own pastel colour, the same in light and dark.
+  moodLabelOn: { color: '#123B5C' },
+  hint: { fontSize: 12, color: t.warning, fontWeight: '700', backgroundColor: t.warningBg, borderRadius: 10, padding: 8 },
   activities: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  activity: { width: '31.5%', alignItems: 'center', gap: 2, paddingVertical: 8, borderRadius: 14, backgroundColor: '#E8F6EC', minHeight: 52 },
+  activity: { width: '31.5%', alignItems: 'center', gap: 2, paddingVertical: 8, borderRadius: 14, backgroundColor: tones.leaf.from, minHeight: 52 },
   activityOn: { backgroundColor: '#2F7A55' },
-  activityLabel: { fontSize: 11, fontWeight: '800', color: '#22603F' },
-  activityLabelOn: { color: '#FFFFFF' },
+  activityLabel: { fontSize: 11, fontWeight: '800', color: tones.leaf.ink },
+  activityLabelOn: { color: t.onPrimary },
   pressed: { opacity: 0.85, transform: [{ scale: 0.97 }] },
   week: { fontSize: 11, color: t.muted, fontWeight: '700', textAlign: 'center' },
-  modalBackdrop: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 24, backgroundColor: 'rgba(10,30,40,0.5)' },
-  modalBackdropFill: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(10,30,40,0.45)' },
-  modal: { width: '100%', maxWidth: 360, backgroundColor: '#FFFCF6', borderRadius: 26, padding: 22, gap: 8, alignItems: 'stretch' },
+  modalBackdrop: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 24, backgroundColor: t.scrim },
+  modalBackdropFill: { ...StyleSheet.absoluteFillObject, backgroundColor: t.scrim },
+  modal: { width: '100%', maxWidth: 360, backgroundColor: paper, borderRadius: 26, padding: 22, gap: 8, alignItems: 'stretch' },
   modalTitle: { fontSize: 19, fontWeight: '900', color: t.ink },
   modalNote: { fontSize: 14, color: t.muted, textAlign: 'center' },
   breathArea: { height: 220, alignItems: 'center', justifyContent: 'center' },
+  // The breathing circle and its words are one picture: pale green with deep green words, in light and dark.
   breathCircle: { position: 'absolute', width: 200, height: 200, borderRadius: 100, backgroundColor: '#BFE8D2' },
   breathText: { alignItems: 'center' },
   breathStep: { fontSize: 22, fontWeight: '900', color: '#22603F' },
@@ -417,17 +434,18 @@ const s = StyleSheet.create({
   restClock: { fontSize: 48, fontWeight: '900', color: t.ink, textAlign: 'center', fontVariant: ['tabular-nums'] },
   restChoices: { flexDirection: 'row', gap: 10 },
   sheetWrap: { flex: 1, justifyContent: 'flex-end' },
-  sheet: { maxHeight: '90%', backgroundColor: '#FFFCF6', borderTopLeftRadius: 28, borderTopRightRadius: 28, paddingTop: 16 },
+  sheet: { maxHeight: '90%', backgroundColor: paper, borderTopLeftRadius: 28, borderTopRightRadius: 28, paddingTop: 16 },
   sheetHead: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 20 },
   sheetBody: { padding: 20, gap: 10 },
   private: { fontSize: 12, color: t.muted, fontWeight: '700' },
-  input: { backgroundColor: '#FFFFFF', borderRadius: 14, borderWidth: 1.5, borderColor: '#EADBC2', paddingHorizontal: 14, paddingVertical: 12, fontSize: 15, color: t.ink },
+  input: { backgroundColor: t.inputBg, borderRadius: 14, borderWidth: 1.5, borderColor: dark ? t.inputBorder : '#EADBC2', paddingHorizontal: 14, paddingVertical: 12, fontSize: 15, color: t.ink },
   multiline: { minHeight: 120, textAlignVertical: 'top' },
   albumRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   albumText: { flex: 1, fontSize: 13, color: t.ink, fontWeight: '700' },
-  page: { backgroundColor: '#FFFFFF', borderRadius: 14, padding: 12, gap: 2 },
+  page: { backgroundColor: tile, borderRadius: 14, padding: 12, gap: 2 },
   pageHead: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   pageTitle: { flex: 1, fontSize: 15, fontWeight: '900', color: t.ink },
   pageDate: { fontSize: 11, color: t.muted, fontWeight: '700' },
   pageBody: { fontSize: 14, color: t.ink, lineHeight: 20 },
+});
 });

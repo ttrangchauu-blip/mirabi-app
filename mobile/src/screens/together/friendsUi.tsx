@@ -7,8 +7,8 @@ import Svg, { Path, Rect } from 'react-native-svg';
 import { Text, TextInput } from '../../components/Typography';
 import { friendQrPayload, parseFriendCode, qrPath } from '../../room/visit';
 import type { CodeLookup, Friend, SocialSettings } from '../../studyTogether/types';
-import { appTheme as t } from '../../theme';
 import { Button, Card } from '../../ui/kit';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { useToast } from '../../ui/Toast';
 import { EmptyState, ErrorState, LoadingState, OptionSheet, PetAvatar, PresenceLabel, SmallButton, ToggleRow } from './ui';
 
@@ -43,7 +43,8 @@ export function FriendQr({ code, size = 176 }: { code: string; size?: number }) 
     <View accessible accessibilityRole="image" accessibilityLabel={`Mã QR kết bạn ${code}`} testID="friend-qr">
       <Svg width={size} height={size} viewBox={`${-quiet} ${-quiet} ${qr.size + quiet * 2} ${qr.size + quiet * 2}`}>
         <Rect x={-quiet} y={-quiet} width={qr.size + quiet * 2} height={qr.size + quiet * 2} fill="#FFFFFF" />
-        <Path d={qr.d} fill={t.ink} />
+        {/* Dark modules on white in both themes, so any camera reads it. */}
+        <Path d={qr.d} fill="#123B5C" />
       </Svg>
     </View>
   );
@@ -51,6 +52,7 @@ export function FriendQr({ code, size = 176 }: { code: string; size?: number }) 
 
 /** The user's own friend code and QR code, to show a friend, copy or share ("Mã của tôi"). */
 export function FriendCode({ code }: { code: string }) {
+  const s = useStyles();
   const toast = useToast();
   const spaced = `${code.slice(0, 4)} ${code.slice(4)}`;
   async function copy() {
@@ -73,6 +75,8 @@ export function FriendCode({ code }: { code: string }) {
 
 /** Reads a friend QR code with the camera; hands back the friend code. Web browsers without a camera get a note. */
 export function QrScannerSheet({ visible, onClose, onCode }: { visible: boolean; onClose: () => void; onCode: (code: string) => void }) {
+  const { t } = useTheme();
+  const s = useStyles();
   const [permission, requestPermission] = useCameraPermissions();
   const [wrong, setWrong] = useState(false);
   const handled = useRef(false);
@@ -120,6 +124,7 @@ export function QrScannerSheet({ visible, onClose, onCode }: { visible: boolean;
 export function ProfileCard({ person, busy, onAdd, onAnswer }: {
   person: CodeLookup; busy: boolean; onAdd: () => void; onAnswer: () => void;
 }) {
+  const s = useStyles();
   const r = person.relationship;
   return (
     <Card style={s.profile}>
@@ -143,6 +148,8 @@ export function ProfileCard({ person, busy, onAdd, onAnswer }: {
 function FriendRow({ friend, onVisit, onMenu, actionLabel = 'Ghé thăm' }: {
   friend: Friend; onVisit: (f: Friend) => void; onMenu?: (f: Friend) => void; actionLabel?: string;
 }) {
+  const { t } = useTheme();
+  const s = useStyles();
   const pet = friend.pet_name ? `Pet ${friend.pet_name}` : 'Chưa có pet'; // the level shows in the avatar's art
   return (
     <View style={s.row} testID={`friend-${friend.id}`}>
@@ -171,6 +178,8 @@ export function FriendDirectory({ friends, error, onRetry, onVisit, onMenu, empt
   friends: Friend[] | null; error: unknown; onRetry: () => void; onVisit: (f: Friend) => void; onMenu?: (f: Friend) => void;
   emptyAction?: React.ReactNode; actionLabel?: string; emptyBody?: string;
 }) {
+  const { t } = useTheme();
+  const s = useStyles();
   const [query, setQuery] = useState('');
   if (!friends) return error ? <ErrorState error={error} onRetry={onRetry} /> : <LoadingState label="Đang tải danh sách bạn bè…" />;
   if (friends.length === 0) {
@@ -182,7 +191,7 @@ export function FriendDirectory({ friends, error, onRetry, onVisit, onMenu, empt
     <>
       {friends.length >= SEARCH_FROM || query ? <View style={s.search}>
         <Ionicons name="search" size={18} color={t.muted} />
-        <TextInput value={query} onChangeText={setQuery} placeholder="Tìm bạn theo tên" placeholderTextColor="#7F95A8" style={s.searchInput}
+        <TextInput value={query} onChangeText={setQuery} placeholder="Tìm bạn theo tên" placeholderTextColor={t.placeholder} style={s.searchInput}
           accessibilityLabel="Tìm bạn theo tên" autoCorrect={false} returnKeyType="search" maxLength={40} />
         {query ? <Pressable onPress={() => setQuery('')} hitSlop={8} accessibilityRole="button" accessibilityLabel="Xóa tìm kiếm">
           <Ionicons name="close-circle" size={18} color={t.muted} />
@@ -197,7 +206,7 @@ export function FriendDirectory({ friends, error, onRetry, onVisit, onMenu, empt
   );
 }
 
-const s = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   flex: { flex: 1, minWidth: 0 },
   codeCard: { alignItems: 'center', paddingBottom: 4 },
   qrFrame: { padding: 6, borderRadius: 18, backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: t.tint },
@@ -219,6 +228,6 @@ const s = StyleSheet.create({
   name: { fontSize: 15, fontWeight: '800', color: t.ink },
   sub: { fontSize: 12, color: t.muted, marginTop: 1 },
   more: { width: 32, height: 40, alignItems: 'center', justifyContent: 'center' },
-  search: { flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: '#FFFFFF', borderRadius: 16, paddingHorizontal: 14, minHeight: 48, marginBottom: 12 },
+  search: { flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: t.card, borderRadius: 16, paddingHorizontal: 14, minHeight: 48, marginBottom: 12 },
   searchInput: { flex: 1, fontSize: 15, color: t.ink, paddingVertical: 10 },
-});
+}));

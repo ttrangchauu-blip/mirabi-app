@@ -44,6 +44,7 @@ jest.mock('expo-location', () => ({
   getLastKnownPositionAsync: jest.fn(async () => null),
   getCurrentPositionAsync: jest.fn(async () => null),
 }));
+jest.mock('expo-system-ui', () => ({ setBackgroundColorAsync: jest.fn(async () => {}) }));
 jest.mock('expo-clipboard', () => ({ setStringAsync: jest.fn(async () => true) }));
 jest.mock('expo-speech', () => ({ speak: jest.fn(), stop: jest.fn(async () => {}) }));
 

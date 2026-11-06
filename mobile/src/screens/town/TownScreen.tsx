@@ -9,9 +9,9 @@ import { Text } from '../../components/Typography';
 import { useReduceMotion } from '../../components/useReduceMotion';
 import { ApiError } from '../../api/client';
 import { clientRef, townApi, type GiftableItem, type TownFriend, type TownMap, type TownProject } from '../../life/worlds';
-import { appTheme as t } from '../../theme';
 import { useConfirm } from '../../ui/ConfirmDialog';
 import { Button, ProgressBar } from '../../ui/kit';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { useToast } from '../../ui/Toast';
 import { useAtmosphere } from '../../world/atmosphere';
 import { ContactShadow, Plate } from '../../world/diorama';
@@ -59,6 +59,8 @@ type Requests = { refFor: (key: string) => string; settled: (key: string) => voi
  * friends aged 16 and over appear here, and never across a block.
  */
 export function TownScreen({ user, onBack, onVisitRoom, onVisitGarden, onOpenFriends }: Props) {
+  const { t } = useTheme();
+  const s = useStyles();
   const toast = useToast();
   const confirm = useConfirm();
   const [town, setTown] = useState<TownMap | null>(null);
@@ -228,6 +230,7 @@ const sheetTitle = (sheet: Sheet) => !sheet ? '' : sheet.kind === 'friend' ? `Nh
   : sheet.kind === 'events' ? '🎪 Sân Sự kiện' : sheet.kind === 'shop' ? '🎁 Tiệm Quà tặng' : sheet.kind === 'hall' ? '🏆 Sảnh Thành tựu' : 'Lịch sử ghé thăm';
 
 function GiftShop({ friends, left, initial, requests, onSent }: { friends: TownFriend[]; left: number; initial: number | null; requests: Requests; onSent: () => void }) {
+  const s = useStyles();
   const [items, setItems] = useState<GiftableItem[] | null>(null);
   const [to, setTo] = useState<number | null>(initial ?? friends[0]?.id ?? null);
   const [item, setItem] = useState<GiftableItem | null>(null);
@@ -270,6 +273,8 @@ function GiftShop({ friends, left, initial, requests, onSent }: { friends: TownF
 }
 
 function VisitHistory() {
+  const { t } = useTheme();
+  const s = useStyles();
   const [rows, setRows] = useState<Awaited<ReturnType<typeof townApi.visits>> | null>(null);
   const [failed, setFailed] = useState(false);
   const loadRows = useCallback(() => {
@@ -288,6 +293,7 @@ function VisitHistory() {
 
 /** A place on the street: all of it can be tapped, its name stands on the paving in front of it. */
 function Place({ x, wide, label, onPress }: { x: number; wide: number; label: string; onPress: () => void }) {
+  const s = useStyles();
   const center = Math.max(NAME_MARGIN, x * LENGTH);
   const reach = wide * LENGTH;
   return (
@@ -301,6 +307,7 @@ function Place({ x, wide, label, onPress }: { x: number; wide: number; label: st
 
 /** The rendered street and what stands on it now. Patches are the same picture with a stage or a house in it, the lamps glow at night, and a lantern hangs on a lamp for each step of Phố Đèn lồng. */
 function StreetArt({ art, fountain, garden, houses, night, lanternStage, width: STREET }: { art: TownArt; fountain: number; garden: number; houses: number; night: boolean; lanternStage: number; width: number }) {
+  const s = useStyles();
   const glow = useLoop(1800, night);
   const tile = LENGTH / art.land.length;
   const patch = (source: ImageSourcePropType, box: Box, key: string) => <Plate key={key} source={source} width={box[2] * LENGTH} height={box[3] * LAND} style={{ left: box[0] * LENGTH, top: SKY + box[1] * LAND }} />;
@@ -323,6 +330,7 @@ function StreetArt({ art, fountain, garden, houses, night, lanternStage, width: 
 
 /** A friend's house on its own bit of the street, for the card under the street. */
 function HouseCardArt({ art, index }: { art: TownArt; index: number }) {
+  const s = useStyles();
   const i = index % art.houses.length;
   const length = CARD_WIDE / CARD_SHARE;
   const tall = length / TOWN_RATIO;
@@ -340,6 +348,7 @@ function HouseCardArt({ art, index }: { art: TownArt; index: number }) {
 
 /** Water from the fountain's spout, on the stages that have one. */
 function Spray({ stage }: { stage: number }) {
+  const s = useStyles();
   const spray = useLoop(900, true);
   const [x, y] = TOWN_SPRAY[Math.min(4, stage) - 2];
   if (!spray) return null;
@@ -349,6 +358,7 @@ function Spray({ stage }: { stage: number }) {
 
 /** The running event's name, hung over the stage. */
 function Banner({ title }: { title: string }) {
+  const s = useStyles();
   const wave = useLoop(1400, true);
   return <Animated.View pointerEvents="none" style={[s.banner, { left: TOWN_BANNER[0] * LENGTH - 60, top: SKY + TOWN_BANNER[1] * LAND - 10, transform: [{ rotate: wave ? wave.interpolate({ inputRange: [0, 1], outputRange: ['-2deg', '2deg'] }) : '0deg' }] }]}>
     <Text style={s.bannerText} numberOfLines={1}>{title}</Text></Animated.View>;
@@ -356,6 +366,7 @@ function Banner({ title }: { title: string }) {
 
 /** My pet strolls along the road, back and forth (still with reduced motion). */
 function Walker({ user, width }: { user: User; width: number }) {
+  const s = useStyles();
   const reduce = useReduceMotion();
   const x = useRef(new Animated.Value(0)).current;
   const [facing, setFacing] = useState<1 | -1>(1);
@@ -377,55 +388,60 @@ function Walker({ user, width }: { user: User; width: number }) {
   );
 }
 
-const s = StyleSheet.create({
-  fill: { flex: 1, paddingHorizontal: 16 },
-  flex: { flex: 1 },
-  content: { paddingBottom: 120 },
-  headRight: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  coins: { backgroundColor: '#FFF4CC', borderRadius: 999, paddingHorizontal: 10, paddingVertical: 6 },
-  coinsText: { fontWeight: '900', color: '#7A4D00' },
-  iconBtn: { width: 38, height: 38, borderRadius: 12, backgroundColor: t.tint, alignItems: 'center', justifyContent: 'center' },
-  street: { height: HEIGHT, borderRadius: 24, overflow: 'hidden', backgroundColor: '#A9DDF7' },
-  skeleton: { opacity: 0.6 },
-  place: { position: 'absolute', bottom: 0 },
-  nameRow: { position: 'absolute', width: NAME_MARGIN * 2, alignItems: 'center' },
-  housePet: { position: 'absolute', width: PET_SIZE, alignItems: 'center' },
-  petShadow: { position: 'absolute', bottom: 0 },
-  weather: { position: 'absolute', top: 8, right: 10 },
-  placeName: { fontSize: 11, fontWeight: '900', color: '#2B3A55', backgroundColor: 'rgba(255,255,255,0.92)', borderRadius: 8, paddingHorizontal: 7, paddingVertical: 1, overflow: 'hidden' },
-  houseArt: { width: CARD_WIDE, height: 108, borderRadius: 12, overflow: 'hidden', marginBottom: 6 },
-  spray: { position: 'absolute', flexDirection: 'row', alignItems: 'flex-end', gap: 5 },
-  drop: { width: 5, height: 8, borderRadius: 3, backgroundColor: '#8CD5F0' },
-  dropHigh: { marginBottom: 6 },
-  lantern: { position: 'absolute', width: 16, height: 32 },
-  banner: { position: 'absolute', backgroundColor: '#FFFFFF', borderRadius: 8, paddingHorizontal: 6, paddingVertical: 2, width: 120, alignItems: 'center' },
-  bannerText: { fontSize: 10, fontWeight: '900', color: '#5141A8' },
-  clip: { overflow: 'hidden' },
-  lampGlow: { position: 'absolute', width: 80, height: 80 },
-  walker: { position: 'absolute', bottom: 6, left: 0 },
-  hint: { fontSize: 12, color: t.muted, textAlign: 'center', marginTop: 6 },
-  section: { fontSize: 18, fontWeight: '900', color: t.ink, marginTop: 14, marginBottom: 8 },
-  card: { backgroundColor: '#FFFFFF', borderRadius: 18, padding: 14, gap: 6, marginBottom: 10 },
-  cardTitle: { fontSize: 15, fontWeight: '900', color: t.ink },
-  rowBetween: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  pct: { fontWeight: '900', color: '#B4691A' },
-  note: { fontSize: 13, color: t.muted },
-  small: { fontSize: 11, color: t.muted },
-  done: { fontSize: 14, fontWeight: '800', color: '#22703A' },
-  houses: { gap: 10, paddingBottom: 4 },
-  houseCard: { width: 132, alignItems: 'center', backgroundColor: '#FFFFFF', borderRadius: 18, padding: 8 },
-  houseOwner: { flexDirection: 'row', alignItems: 'center', gap: 4, maxWidth: 116 },
-  houseName: { fontSize: 12, fontWeight: '800', color: t.ink, flexShrink: 1 },
-  sheet: { gap: 10, paddingBottom: 8 },
-  friendHead: { alignItems: 'center' },
-  rowWrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  label: { fontSize: 14, fontWeight: '900', color: t.ink },
-  pick: { borderRadius: 999, paddingHorizontal: 12, paddingVertical: 8, backgroundColor: t.tint, minHeight: 38 },
-  pickOn: { backgroundColor: '#FFE3C2', borderColor: '#E09A2B', borderWidth: 2 },
-  pickText: { fontWeight: '800', color: t.ink },
-  giftItem: { width: 76, alignItems: 'center', padding: 6, borderRadius: 14, backgroundColor: '#FFFFFF', borderWidth: 2, borderColor: 'transparent' },
-  hallRow: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 6, minHeight: 44 },
-  hallMe: { backgroundColor: '#FFF4CC', borderRadius: 12, paddingHorizontal: 6 },
-  rank: { width: 20, fontWeight: '900', color: t.muted, textAlign: 'center' },
-  hallName: { flex: 1, fontSize: 14, fontWeight: '800', color: t.ink },
+// The street, its sky, the water and the lamps are the scene; the coins, the place names, the event banner and the cards
+// are interface. The coin-amber of the projects' bars reads on both themes.
+const useStyles = makeStyles(({ t, tones, dark }) => {
+  const amber = dark ? '#F2B867' : '#B4691A';
+  return StyleSheet.create({
+    fill: { flex: 1, paddingHorizontal: 16 },
+    flex: { flex: 1 },
+    content: { paddingBottom: 120 },
+    headRight: { flexDirection: 'row', alignItems: 'center', gap: 6 },
+    coins: { backgroundColor: t.warningBg, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 6 },
+    coinsText: { fontWeight: '900', color: t.warning },
+    iconBtn: { width: 38, height: 38, borderRadius: 12, backgroundColor: t.tint, alignItems: 'center', justifyContent: 'center' },
+    street: { height: HEIGHT, borderRadius: 24, overflow: 'hidden', backgroundColor: '#A9DDF7' },
+    skeleton: { opacity: 0.6 },
+    place: { position: 'absolute', bottom: 0 },
+    nameRow: { position: 'absolute', width: NAME_MARGIN * 2, alignItems: 'center' },
+    housePet: { position: 'absolute', width: PET_SIZE, alignItems: 'center' },
+    petShadow: { position: 'absolute', bottom: 0 },
+    weather: { position: 'absolute', top: 8, right: 10 },
+    placeName: { fontSize: 11, fontWeight: '900', color: t.ink, backgroundColor: t.glass, borderRadius: 8, paddingHorizontal: 7, paddingVertical: 1, overflow: 'hidden' },
+    houseArt: { width: CARD_WIDE, height: 108, borderRadius: 12, overflow: 'hidden', marginBottom: 6 },
+    spray: { position: 'absolute', flexDirection: 'row', alignItems: 'flex-end', gap: 5 },
+    drop: { width: 5, height: 8, borderRadius: 3, backgroundColor: '#8CD5F0' },
+    dropHigh: { marginBottom: 6 },
+    lantern: { position: 'absolute', width: 16, height: 32 },
+    banner: { position: 'absolute', backgroundColor: t.card, borderRadius: 8, paddingHorizontal: 6, paddingVertical: 2, width: 120, alignItems: 'center' },
+    bannerText: { fontSize: 10, fontWeight: '900', color: tones.lilac.ink },
+    clip: { overflow: 'hidden' },
+    lampGlow: { position: 'absolute', width: 80, height: 80 },
+    walker: { position: 'absolute', bottom: 6, left: 0 },
+    hint: { fontSize: 12, color: t.muted, textAlign: 'center', marginTop: 6 },
+    section: { fontSize: 18, fontWeight: '900', color: t.ink, marginTop: 14, marginBottom: 8 },
+    card: { backgroundColor: t.card, borderRadius: 18, padding: 14, gap: 6, marginBottom: 10 },
+    cardTitle: { fontSize: 15, fontWeight: '900', color: t.ink },
+    rowBetween: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+    pct: { fontWeight: '900', color: amber },
+    note: { fontSize: 13, color: t.muted },
+    small: { fontSize: 11, color: t.muted },
+    done: { fontSize: 14, fontWeight: '800', color: t.success },
+    houses: { gap: 10, paddingBottom: 4 },
+    houseCard: { width: 132, alignItems: 'center', backgroundColor: t.card, borderRadius: 18, padding: 8 },
+    houseOwner: { flexDirection: 'row', alignItems: 'center', gap: 4, maxWidth: 116 },
+    houseName: { fontSize: 12, fontWeight: '800', color: t.ink, flexShrink: 1 },
+    sheet: { gap: 10, paddingBottom: 8 },
+    friendHead: { alignItems: 'center' },
+    rowWrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+    label: { fontSize: 14, fontWeight: '900', color: t.ink },
+    pick: { borderRadius: 999, paddingHorizontal: 12, paddingVertical: 8, backgroundColor: t.tint, minHeight: 38 },
+    pickOn: { backgroundColor: t.warningBg, borderColor: '#E09A2B', borderWidth: 2 },
+    pickText: { fontWeight: '800', color: t.ink },
+    giftItem: { width: 76, alignItems: 'center', padding: 6, borderRadius: 14, backgroundColor: t.card, borderWidth: 2, borderColor: 'transparent' },
+    hallRow: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 6, minHeight: 44 },
+    hallMe: { backgroundColor: t.warningBg, borderRadius: 12, paddingHorizontal: 6 },
+    rank: { width: 20, fontWeight: '900', color: t.muted, textAlign: 'center' },
+    hallName: { flex: 1, fontSize: 14, fontWeight: '800', color: t.ink },
+  });
 });

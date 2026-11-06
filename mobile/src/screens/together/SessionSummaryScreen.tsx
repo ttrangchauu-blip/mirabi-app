@@ -5,7 +5,7 @@ import { Text } from '../../components/Typography';
 import { togetherApi } from '../../studyTogether/api';
 import { formatMinutes } from '../../studyTogether/timer';
 import type { SessionSummary } from '../../studyTogether/types';
-import { appTheme as t } from '../../theme';
+import { makeStyles } from '../../ui/theme';
 import { Button, Card, ProgressBar, SectionHeader } from '../../ui/kit';
 import { usePullToRefresh, useTogetherNav } from './navigation';
 import { BackHeader, ErrorState, LoadingState, PersonRow } from './ui';
@@ -14,6 +14,7 @@ const SETTLE_RETRY_MS = 2000;
 const SETTLE_ATTEMPTS = 5;
 
 export function SessionSummaryScreen({ sessionId }: { sessionId: number }) {
+  const styles = useStyles();
   const nav = useTogetherNav();
   const [summary, setSummary] = useState<SessionSummary | null>(null);
   const [error, setError] = useState<unknown>(null);
@@ -84,6 +85,7 @@ export function SessionSummaryScreen({ sessionId }: { sessionId: number }) {
 }
 
 function Tile({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
+  const styles = useStyles();
   return (
     <View style={styles.tile} accessible accessibilityLabel={`${label}: ${value}`}>
       <Text style={[styles.tileValue, accent && styles.tileAccent]}>{value}</Text>
@@ -92,12 +94,12 @@ function Tile({ label, value, accent }: { label: string; value: string; accent?:
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   hero: { alignItems: 'center', gap: 6, backgroundColor: t.hero },
   title: { fontSize: 21, fontWeight: '900', color: t.ink, textAlign: 'center' },
   sub: { fontSize: 13, color: t.muted, textAlign: 'center', lineHeight: 19 },
   tiles: { flexDirection: 'row', gap: 10, marginBottom: 8 },
-  tile: { flex: 1, backgroundColor: '#FFFFFF', borderRadius: 18, paddingVertical: 14, paddingHorizontal: 8, alignItems: 'center' },
+  tile: { flex: 1, backgroundColor: t.card, borderRadius: 18, paddingVertical: 14, paddingHorizontal: 8, alignItems: 'center' },
   tileValue: { fontSize: 19, fontWeight: '900', color: t.ink },
   tileAccent: { color: t.success },
   tileLabel: { fontSize: 11, fontWeight: '700', color: t.muted, textAlign: 'center', marginTop: 3 },
@@ -105,4 +107,4 @@ const styles = StyleSheet.create({
   stat: { fontSize: 13, fontWeight: '800', color: t.muted },
   quest: { paddingVertical: 8, gap: 6 },
   questTitle: { fontSize: 15, fontWeight: '800', color: t.ink },
-});
+}));

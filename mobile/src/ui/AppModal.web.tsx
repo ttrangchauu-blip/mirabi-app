@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { Modal, ModalProps, StyleSheet, View } from 'react-native';
+import { makeStyles } from './theme';
 
 // react-dom comes with react-native-web; its type package is not installed.
 const { createPortal } = require('react-dom') as { createPortal: (children: React.ReactNode, container: Element) => React.ReactPortal };
@@ -13,6 +14,7 @@ const openModals: object[] = [];
  * phone frame. Modals render into this layer instead, which sits over the app inside its own view.
  */
 export function ModalHost({ children }: { children: React.ReactNode }) {
+  const styles = useStyles();
   const [host, setHost] = useState<HTMLElement | null>(null);
   return (
     <HostContext.Provider value={host}>
@@ -25,6 +27,7 @@ export function ModalHost({ children }: { children: React.ReactNode }) {
 }
 
 export function AppModal({ visible = true, transparent, onRequestClose, children }: ModalProps) {
+  const styles = useStyles();
   const host = useContext(HostContext);
   const onClose = useRef(onRequestClose);
   onClose.current = onRequestClose;
@@ -44,7 +47,7 @@ export function AppModal({ visible = true, transparent, onRequestClose, children
     <View style={[StyleSheet.absoluteFill, !transparent && styles.opaque]} accessibilityViewIsModal>{children}</View>, host);
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   fill: { flex: 1 },
-  opaque: { backgroundColor: '#FFFFFF' },
-});
+  opaque: { backgroundColor: t.card },
+}));

@@ -6,10 +6,10 @@ import { errorMessage } from '../../auth/messages';
 import { StudyProfileFields } from '../../components/StudyProfileFields';
 import { Text } from '../../components/Typography';
 import { validateAge, validateGrade, type GradeId } from '../../studyProfile';
-import { appTheme as t } from '../../theme';
 import { Button, Card } from '../../ui/kit';
 import { useToast } from '../../ui/Toast';
 import { request } from './shared';
+import { makeStyles, useTheme } from '../../ui/theme';
 
 type FormProps = {
   user: User;
@@ -24,6 +24,7 @@ type FormProps = {
 /** Age and grade, saved to the profile. The grade can be chosen only the first time (an account created before
  * registration asked for it); after that it is locked and only the age can be corrected. */
 export function StudyProfileForm({ user, title, description, onSaved, onSkip }: FormProps) {
+  const styles = useStyles();
   const toast = useToast();
   const gradeLocked = !!user.school_grade;
   const [age, setAge] = useState<number | null>(user.age ?? null);
@@ -59,6 +60,8 @@ export function StudyProfileForm({ user, title, description, onSaved, onSkip }: 
 
 /** Cài đặt → "Độ tuổi & lớp học". */
 export function StudyProfileScreen({ user, onBack, onUserUpdated }: { user: User; onBack: () => void; onUserUpdated: (user: User) => void }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   return (
     <>
       <View style={styles.header}>
@@ -75,13 +78,13 @@ export function StudyProfileScreen({ user, onBack, onUserUpdated }: { user: User
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   card: { gap: 4, padding: 18 },
   title: { fontSize: 18, fontWeight: '900', color: t.ink },
   description: { fontSize: 14, lineHeight: 20, color: t.muted, marginBottom: 12 },
   header: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 14 },
-  back: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFFFFF',
+  back: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', backgroundColor: t.card,
     shadowColor: t.shadow, shadowOpacity: 0.06, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, elevation: 1 },
   pressed: { transform: [{ scale: 0.97 }] },
   screenTitle: { fontSize: 22, fontWeight: '900', color: t.ink },
-});
+}));

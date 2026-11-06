@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Animated, Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../../components/Typography';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { Draggable, DropArea, DropZone } from '../engine/drag';
-import { Actions, NoteLine, SceneProps, styles as ui, useSolvedReaction, useWrongShake } from './common';
+import { Actions, NoteLine, SceneProps, useCommonStyles, useSolvedReaction, useWrongShake } from './common';
 import { placeTile, removeTile } from './logic';
 
 // Xây câu (Tiếng Anh): the sentence is a train at the station. Its wagons wait empty, one per word of the sentence; the
@@ -13,12 +13,13 @@ import { placeTile, removeTile } from './logic';
 // the wagons before it are right and lock (green), that one is outlined in red, the rest stays to be fixed. Right: the
 // wagons light up one after the other, the train sounds and moves off a little, and the sentence is read aloud.
 
-const SKY = '#E3F2FC';
-
 export function SentenceTrain({ turn, disabled, feedback, solved, onSubmit, reduceMotion, speak, demo }: SceneProps & {
   /** Reads the finished sentence (English, when sound is on). */ speak?: (text: string) => void;
   demo?: { line: (string | null)[]; solved?: boolean };
 }) {
+  const { t } = useTheme();
+  const ui = useCommonStyles();
+  const st = useStyles();
   const p = turn.prompt;
   const tiles = p.tiles ?? [];
   const length = p.length ?? tiles.length;
@@ -66,7 +67,7 @@ export function SentenceTrain({ turn, disabled, feedback, solved, onSubmit, redu
     <DropArea style={st.world}>
       {p.vi ? (
         <View style={st.ticket} accessibilityLabel={`Nghĩa của câu: ${p.vi}`}>
-          <Ionicons name="ticket-outline" size={16} color="#136FA8" />
+          <Ionicons name="ticket-outline" size={16} color={t.accent} />
           <Text style={st.ticketText}>{p.vi}</Text>
         </View>
       ) : null}
@@ -123,21 +124,23 @@ export function SentenceTrain({ turn, disabled, feedback, solved, onSubmit, redu
   );
 }
 
-const st = StyleSheet.create({
-  world: { gap: 10, padding: 12, borderRadius: 20, backgroundColor: SKY, borderWidth: 2, borderColor: '#BFE0F5' },
+const useStyles = makeStyles(({ t, tones, dark }) => StyleSheet.create({
+  // The station: a sky panel round the train, its text and buttons following the theme. The engine and the crates are art.
+  world: { gap: 10, padding: 12, borderRadius: 20, backgroundColor: dark ? tones.sky.from : '#E3F2FC', borderWidth: 2,
+    borderColor: dark ? tones.sky.to : '#BFE0F5' },
   ticket: { flexDirection: 'row', alignItems: 'center', gap: 6, alignSelf: 'center', paddingHorizontal: 12, paddingVertical: 6, borderRadius: 10,
-    backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: '#9CCDEB', borderStyle: 'dashed' },
-  ticketText: { fontSize: 14, fontWeight: '800', color: '#136FA8' },
+    backgroundColor: t.card, borderWidth: 1, borderColor: '#9CCDEB', borderStyle: 'dashed' },
+  ticketText: { fontSize: 14, fontWeight: '800', color: t.accent },
   train: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'flex-end', gap: 6 },
   engine: { width: 54, height: 52, borderRadius: 12, borderTopRightRadius: 22, backgroundColor: '#E8534A', alignItems: 'center',
     justifyContent: 'center' },
-  wagon: { minWidth: 58, minHeight: 52, paddingHorizontal: 8, paddingTop: 6, paddingBottom: 12, borderRadius: 10, backgroundColor: '#FFFFFF',
+  wagon: { minWidth: 58, minHeight: 52, paddingHorizontal: 8, paddingTop: 6, paddingBottom: 12, borderRadius: 10, backgroundColor: t.card,
     borderWidth: 2, borderColor: '#9CCDEB', borderStyle: 'dashed', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
-  wagonLoaded: { borderStyle: 'solid', borderColor: '#136FA8' },
+  wagonLoaded: { borderStyle: 'solid', borderColor: t.accent },
   wagonFixed: { borderColor: t.success, backgroundColor: t.successBg },
   wagonWrong: { borderColor: t.danger, borderWidth: 3, backgroundColor: t.dangerBg },
-  wagonOver: { borderColor: t.accent, backgroundColor: '#FFF4DC' },
-  glow: { ...StyleSheet.absoluteFillObject, backgroundColor: '#FFE38A' },
+  wagonOver: { borderColor: t.accent, backgroundColor: dark ? tones.sun.from : '#FFF4DC' },
+  glow: { ...StyleSheet.absoluteFillObject, backgroundColor: dark ? tones.sun.to : '#FFE38A' },
   cargo: { flexDirection: 'row', alignItems: 'center', gap: 4 },
   cargoText: { fontSize: 15, fontWeight: '900', color: t.ink },
   emptyNumber: { fontSize: 13, fontWeight: '800', color: '#9CCDEB' },
@@ -148,4 +151,4 @@ const st = StyleSheet.create({
   crate: { minHeight: 44, paddingHorizontal: 14, paddingVertical: 8, borderRadius: 10, backgroundColor: '#F6D9A8', borderWidth: 2,
     borderColor: '#C98E3E', justifyContent: 'center' },
   crateText: { fontSize: 15, fontWeight: '900', color: '#6B4210' },
-});
+}));

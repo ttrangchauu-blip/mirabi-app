@@ -5,7 +5,7 @@ import { Text } from '../../components/Typography';
 import { GAME_INFO, gameTitle } from '../../learning/labels';
 import { TUTORIALS } from '../../learning/tutorials';
 import type { GameId } from '../../learning/types';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { Button } from '../../ui/kit';
 import { TutorialArt } from './TutorialArt';
 
@@ -26,6 +26,8 @@ type Props = {
 /** "Cách chơi": a game's own guide, 2–3 short pages (goal, controls, how it ends), each with an animated copy of the
  * game. Nothing runs behind it: no session, no clock, no question. */
 export function GameTutorial({ game, petId, petLevel, reduceMotion, finishLabel = 'Bắt đầu', onFinish, onClose, busy = false }: Props) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const pages = TUTORIALS[game];
   const [index, setIndex] = useState(0);
   // One tap on "Bắt đầu" is enough: a second one never starts a second game.
@@ -85,16 +87,16 @@ export function GameTutorial({ game, petId, petLevel, reduceMotion, finishLabel 
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, dark }) => StyleSheet.create({
   wrap: { gap: 12 },
   flex: { flex: 1 },
   header: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  gameIcon: { width: 44, height: 44, borderRadius: 14, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
+  gameIcon: { width: 44, height: 44, borderRadius: 14, backgroundColor: t.card, alignItems: 'center', justifyContent: 'center' },
   title: { fontSize: 23, fontWeight: '900', color: t.ink },
   subtitle: { fontSize: 14, color: t.muted, marginTop: 2 },
-  close: { width: 40, height: 40, borderRadius: 14, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
-  card: { backgroundColor: '#FFFFFF', borderRadius: 24, padding: 14, gap: 10,
-    shadowColor: '#0B4F75', shadowOpacity: 0.08, shadowRadius: 12, shadowOffset: { width: 0, height: 4 }, elevation: 2 },
+  close: { width: 40, height: 40, borderRadius: 14, backgroundColor: t.card, alignItems: 'center', justifyContent: 'center' },
+  card: { backgroundColor: t.card, borderRadius: 24, padding: 14, gap: 10,
+    shadowColor: dark ? t.shadow : '#0B4F75', shadowOpacity: dark ? 0.32 : 0.08, shadowRadius: 12, shadowOffset: { width: 0, height: 4 }, elevation: 2 },
   tagRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   tag: { fontSize: 12, fontWeight: '900', color: t.accent, backgroundColor: t.tint, textTransform: 'uppercase', letterSpacing: 0.4,
     borderRadius: 8, paddingHorizontal: 8, paddingVertical: 3, overflow: 'hidden' },
@@ -102,8 +104,8 @@ const styles = StyleSheet.create({
   pageTitle: { fontSize: 21, fontWeight: '900', color: t.ink },
   body: { fontSize: 16, color: t.ink, lineHeight: 23 },
   dots: { flexDirection: 'row', justifyContent: 'center', gap: 8 },
-  dot: { width: 8, height: 8, borderRadius: 4, backgroundColor: '#C3DCEB' },
+  dot: { width: 8, height: 8, borderRadius: 4, backgroundColor: t.disabled },
   dotOn: { width: 22, backgroundColor: t.accent },
   actions: { flexDirection: 'row', gap: 10 },
   back: { minWidth: 110 },
-});
+}));

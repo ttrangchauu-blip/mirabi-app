@@ -4,9 +4,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { PetArt } from '../../components/PetArt';
 import { usePetCheer } from '../engine/rig';
 import { Text } from '../../components/Typography';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { Draggable, DropArea, DropZone } from '../engine/drag';
-import { Actions, NoteLine, SceneProps, styles as ui, useSolvedReaction, useWrongShake } from './common';
+import { Actions, NoteLine, SceneProps, useCommonStyles, useSolvedReaction, useWrongShake } from './common';
 import { keptPlacement, Marker, markerLoad, Placement, placeEvent, timelineAnswer, timelineFull } from './logic';
 
 // Hành trình dòng thời gian (Lịch sử): a road through time drawn on parchment, its milestones in time order from the top.
@@ -21,6 +21,10 @@ const PARCHMENT = '#F7ECD9';
 export function TimelineQuest({ turn, disabled, feedback, solved, onSubmit, reduceMotion, petId = 'cat', petLevel = 1, demo }: SceneProps & {
   demo?: { placed: Placement; solved?: boolean };
 }) {
+  const { t } = useTheme();
+  const ui = useCommonStyles();
+  const st = useStyles();
+  const ink = st.headText.color;
   const p = turn.prompt;
   const markers: Marker[] = useMemo(() => p.markers ?? [], [p.markers]);
   const events = p.events ?? [];
@@ -70,7 +74,7 @@ export function TimelineQuest({ turn, disabled, feedback, solved, onSubmit, redu
   return (
     <DropArea style={st.world}>
       <View style={st.head}>
-        <Ionicons name="hourglass-outline" size={20} color={INK} />
+        <Ionicons name="hourglass-outline" size={20} color={ink} />
         <Text style={st.headText}>{p.prompt}</Text>
       </View>
       <View style={st.road} onLayout={(e) => setRoadHeight(e.nativeEvent.layout.height)} accessibilityLabel="Dòng thời gian, sớm nhất ở trên">
@@ -139,7 +143,7 @@ export function TimelineQuest({ turn, disabled, feedback, solved, onSubmit, redu
                 <Pressable onPress={() => setSelected((s) => (s === e.id ? null : e.id))} disabled={off} accessibilityRole="button"
                   accessibilityState={{ selected: selected === e.id }} accessibilityLabel={`Sự kiện: ${e.text}`}
                   style={({ pressed }) => [st.card, selected === e.id && st.cardChosen, pressed && ui.pressed]}>
-                  <Ionicons name="document-text-outline" size={14} color={INK} />
+                  <Ionicons name="document-text-outline" size={14} color={ink} />
                   <Text style={st.cardText}>{e.text}</Text>
                 </Pressable>
               </Draggable>
@@ -161,35 +165,37 @@ export function TimelineQuest({ turn, disabled, feedback, solved, onSubmit, redu
 export const eventsLeft = (placed: Placement, markers: Marker[]) =>
   markers.reduce((sum, m) => sum + m.slots - markerLoad(placed, m.id), 0);
 
-const st = StyleSheet.create({
-  world: { gap: 10, padding: 12, borderRadius: 20, backgroundColor: PARCHMENT, borderWidth: 2, borderColor: '#E3CDA4' },
+const useStyles = makeStyles(({ t, tones, dark }) => StyleSheet.create({
+  // The parchment panel follows the theme (a deep amber on dark); the road, its stones and dots are drawn the same on both.
+  world: { gap: 10, padding: 12, borderRadius: 20, backgroundColor: dark ? tones.sun.from : PARCHMENT, borderWidth: 2,
+    borderColor: dark ? tones.sun.to : '#E3CDA4' },
   head: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  headText: { flex: 1, fontSize: 15, fontWeight: '800', color: INK },
+  headText: { flex: 1, fontSize: 15, fontWeight: '800', color: dark ? tones.sun.ink : INK },
   road: { gap: 8, paddingVertical: 4 },
   line: { position: 'absolute', left: 45, top: 18, bottom: 18, width: 6, borderRadius: 3, backgroundColor: '#E3CDA4' },
   lineFill: { position: 'absolute', left: 45, top: 18, width: 6, borderRadius: 3, backgroundColor: '#E9A23B' },
   pet: { position: 'absolute', left: 30, top: 0, zIndex: 2 },
-  end: { marginLeft: 6, fontSize: 11, fontWeight: '800', color: '#A07A45' },
+  end: { marginLeft: 6, fontSize: 11, fontWeight: '800', color: dark ? t.muted : '#A07A45' },
   stop: { flexDirection: 'row', alignItems: 'flex-start', gap: 8 },
   stone: { width: 96, alignItems: 'flex-start', flexDirection: 'row', gap: 4 },
   dot: { marginLeft: 40, marginTop: 10, width: 16, height: 16, borderRadius: 8, backgroundColor: '#FFFFFF', borderWidth: 3, borderColor: '#B8894A',
     overflow: 'hidden' },
   dotLit: { ...StyleSheet.absoluteFillObject, backgroundColor: '#F4C14F' },
   label: { position: 'absolute', left: 0, top: 30, width: 92 },
-  labelText: { fontSize: 12, fontWeight: '900', color: INK },
+  labelText: { fontSize: 12, fontWeight: '900', color: dark ? tones.sun.ink : INK },
   labelOver: { position: 'absolute', left: 0, top: 0 },
   places: { flex: 1, gap: 6 },
   card: { flexDirection: 'row', alignItems: 'center', gap: 6, minHeight: 44, paddingHorizontal: 10, paddingVertical: 8, borderRadius: 12,
-    backgroundColor: '#FFFDF8', borderWidth: 2, borderColor: '#D9B77E' },
+    backgroundColor: dark ? t.card : '#FFFDF8', borderWidth: 2, borderColor: '#D9B77E' },
   cardPlaced: { borderColor: '#B8894A' },
   cardFixed: { borderColor: t.success, backgroundColor: t.successBg },
   cardWrong: { borderColor: t.danger, backgroundColor: t.dangerBg },
   cardChosen: { borderColor: t.accent, borderWidth: 3 },
-  cardText: { flexShrink: 1, fontSize: 14, fontWeight: '800', color: INK },
+  cardText: { flexShrink: 1, fontSize: 14, fontWeight: '800', color: dark ? tones.sun.ink : INK },
   empty: { minHeight: 44, borderRadius: 12, borderWidth: 2, borderStyle: 'dashed', borderColor: '#D9B77E', justifyContent: 'center' },
-  emptyOver: { borderColor: t.accent, backgroundColor: '#FFF4DC' },
+  emptyOver: { borderColor: t.accent, backgroundColor: dark ? tones.sun.to : '#FFF4DC' },
   emptyTap: { minHeight: 40, justifyContent: 'center', paddingHorizontal: 10 },
-  emptyText: { fontSize: 12, fontWeight: '700', color: '#A07A45' },
-  pileHint: { fontSize: 12, fontWeight: '700', color: '#8A6A3A', textAlign: 'center' },
+  emptyText: { fontSize: 12, fontWeight: '700', color: dark ? t.muted : '#A07A45' },
+  pileHint: { fontSize: 12, fontWeight: '700', color: dark ? t.muted : '#8A6A3A', textAlign: 'center' },
   pile: { gap: 6 },
-});
+}));

@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Animated, BackHandler, LayoutChangeEvent, Pressable, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Text } from '../../components/Typography';
-import { appTheme as t } from '../../theme';
-import { elevation, glass, radius, type as typeScale } from '../../ui/design';
+import { radius, type as typeScale } from '../../ui/design';
+import { makeStyles } from '../../ui/theme';
 import { useMotionLevel } from '../../world/budget';
 import { DURATION, EASE } from '../../world/motion';
 import { SpaceIcon } from './SpaceIcon';
@@ -12,6 +12,7 @@ import { type LifeSpace, SPACES, SWITCHER_HEIGHT, SWITCHER_TOP } from './spaces'
 /** The four places, always in the same spot at the top. The light behind the chosen one slides over: moving between
  * places is one continuous movement, never a page changing. `badges`: a count on a place (friend requests). */
 export function SpaceSwitcher({ space, onChange, badges }: { space: LifeSpace; onChange: (next: LifeSpace) => void; badges?: Partial<Record<LifeSpace, number>> }) {
+  const s = useStyles();
   const insets = useSafeAreaInsets();
   const still = useMotionLevel() === 'still';
   const [width, setWidth] = useState(0);
@@ -56,6 +57,7 @@ export function LifeHub({ space, onSpace, badges, immersive = false, children }:
   space: LifeSpace; onSpace: (next: LifeSpace) => void; badges?: Partial<Record<LifeSpace, number>>;
   /** Decorating needs the whole screen for its own header. */ immersive?: boolean; children: React.ReactNode;
 }) {
+  const s = useStyles();
   const still = useMotionLevel() === 'still';
   const enter = useRef(new Animated.Value(1)).current;
   const first = useRef(true);
@@ -83,13 +85,13 @@ export function LifeHub({ space, onSpace, badges, immersive = false, children }:
   );
 }
 
-const s = StyleSheet.create({
+const useStyles = makeStyles(({ t, glass, elevation }) => StyleSheet.create({
   fill: { flex: 1 },
   bar: { position: 'absolute', left: 0, right: 0, height: SWITCHER_HEIGHT, flexDirection: 'row', borderRadius: radius.lg, ...glass, ...elevation.floating },
   light: { position: 'absolute', top: 3, bottom: 3, borderRadius: radius.md, backgroundColor: t.tint },
   cell: { flex: 1, minWidth: 0, alignItems: 'center', justifyContent: 'center', gap: 1 },
   label: { ...typeScale.micro, color: t.muted, fontWeight: '700' },
   labelOn: { color: t.ink, fontWeight: '900' },
-  badge: { position: 'absolute', top: -4, right: -10, minWidth: 16, height: 16, borderRadius: 8, paddingHorizontal: 3, backgroundColor: t.danger, borderWidth: 1.5, borderColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
-  badgeText: { color: '#FFFFFF', fontSize: 9, lineHeight: 11, fontWeight: '900' },
-});
+  badge: { position: 'absolute', top: -4, right: -10, minWidth: 16, height: 16, borderRadius: 8, paddingHorizontal: 3, backgroundColor: t.danger, borderWidth: 1.5, borderColor: t.card, alignItems: 'center', justifyContent: 'center' },
+  badgeText: { color: t.onPrimary, fontSize: 9, lineHeight: 11, fontWeight: '900' },
+}));

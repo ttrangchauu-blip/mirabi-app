@@ -7,7 +7,7 @@ import { drawnCelebrateMs, drawnJumpMs } from '../../petSprites';
 import { learningApi } from '../../learning/api';
 import { ERROR_TYPE_LABEL, gameTitle, MODE_INFO, OUTCOME_LABEL, rewardMessage, STATUS_TITLE } from '../../learning/labels';
 import type { LearningSession, LessonExplore, Outcome, SessionResult } from '../../learning/types';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { Button, Card, SectionHeader } from '../../ui/kit';
 import { showNumber } from './games/NumberPad';
 
@@ -67,6 +67,7 @@ function Victory({ won, reduceMotion, jumpMs, cheerMs, children }: { won: boolea
  * stay grey. */
 export const STAR_STAGGER_MS = 160;
 function Stars({ stars, reduceMotion }: { stars: number; reduceMotion: boolean }) {
+  const styles = useStyles();
   const pops = useRef([0, 1, 2].map(() => new Animated.Value(reduceMotion ? 1 : 0))).current;
   useEffect(() => {
     if (reduceMotion) return;
@@ -97,6 +98,8 @@ export function stageStars(status: LearningSession['status'], firstTry: number, 
 }
 
 export function ResultScreen({ sessionId, petId, petLevel, onReplay, onReview, onHome, onRewards, onLesson, reduceMotion = false }: Props) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const [result, setResult] = useState<SessionResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const load = useCallback(async () => {
@@ -212,12 +215,12 @@ function promptText(p: SessionResult['items'][number]['prompt']) {
   return `${p.left} ▢ ${p.right}`;
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   hero: { alignItems: 'center', gap: 4 },
   title: { fontSize: 26, fontWeight: '900', color: t.ink, marginTop: 6 },
   stars: { fontSize: 34, color: '#F2A93B', marginHorizontal: 2 },
   starRow: { flexDirection: 'row', justifyContent: 'center' },
-  starsOff: { color: '#E3E8ED' },
+  starsOff: { color: t.track },
   muted: { fontSize: 14, color: t.muted, lineHeight: 20, textAlign: 'left' },
   score: { fontSize: 16, fontWeight: '900', color: t.ink, marginTop: 6 },
   accuracy: { fontSize: 15, fontWeight: '800', color: t.accent },
@@ -246,4 +249,4 @@ const styles = StyleSheet.create({
   outcomeChip: { fontSize: 12, fontWeight: '900', borderRadius: 10, paddingHorizontal: 9, paddingVertical: 4, overflow: 'hidden' },
   chipGood: { color: t.success, backgroundColor: t.successBg },
   chipBad: { color: t.danger, backgroundColor: t.dangerBg },
-});
+}));

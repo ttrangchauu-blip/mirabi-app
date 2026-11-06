@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { ActivityIndicator, Animated, Linking, Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { useWorldMotion } from '../../world/budget';
 import { captureScene, PhotosDenied, saveScene } from './exploreShot';
 
@@ -14,6 +14,8 @@ export type PhotoNotice = (text: string, kind: 'success' | 'error', action?: { l
 export function PhotoControls({ scene, top, bottom, onClose, notify, fileName = 'mirabi-kham-pha', testPrefix = 'explore-photo' }: {
   scene: React.RefObject<View | null>; top: number; bottom: number; onClose: () => void; notify: PhotoNotice; fileName?: string; testPrefix?: string;
 }) {
+  const { t } = useTheme();
+  const s = useStyles();
   const [busy, setBusy] = useState(false);
   const flash = useRef(new Animated.Value(0)).current;
   const { animate } = useWorldMotion();
@@ -42,9 +44,10 @@ export function PhotoControls({ scene, top, bottom, onClose, notify, fileName = 
   </>;
 }
 
-const s = StyleSheet.create({
+// The flash and the dark round "leave" button stay the same over any scene; the shutter's face is interface glass.
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   flash: { backgroundColor: '#FFFFFF' },
   exit: { position: 'absolute', right: 14, width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(24,40,64,0.42)' },
   shutter: { position: 'absolute', alignSelf: 'center', width: 72, height: 72, borderRadius: 36, padding: 5, backgroundColor: 'rgba(255,255,255,0.42)' },
-  shutterFace: { flex: 1, borderRadius: 31, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.92)' },
-});
+  shutterFace: { flex: 1, borderRadius: 31, alignItems: 'center', justifyContent: 'center', backgroundColor: t.glass },
+}));

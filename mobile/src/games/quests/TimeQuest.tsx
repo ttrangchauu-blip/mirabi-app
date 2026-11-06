@@ -7,6 +7,7 @@ import { Artifact, ARTIFACT_NAME, DigMound, ERA_NAME, EraClouds, EraScene, Owl, 
 import { Layer, Parallax } from '../engine/Parallax';
 import { useRig } from '../engine/rig';
 import { useSfx } from '../engine/sfx';
+import { makeStyles } from '../../ui/theme';
 import type { QuestProps } from './QuestProps';
 import { artifactsFound, eraIndex, NATIVE, tripEras, useQuestEvents } from './worlds';
 
@@ -24,6 +25,7 @@ const FIND = 44;
 const SHELF = 22;
 
 export function TimeQuest({ done, total, wrongKey, petId, petLevel, reduceMotion, running, hold = false }: QuestProps) {
+  const styles = useStyles();
   const play = useSfx();
   const [width, setWidth] = useState(0);
   const W = width || 340;
@@ -169,13 +171,14 @@ export function TimeQuest({ done, total, wrongKey, petId, petLevel, reduceMotion
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, tones, dark }) => StyleSheet.create({
   scene: { borderRadius: 22, overflow: 'hidden', backgroundColor: '#FFE9C7', marginBottom: 10 },
   abs: { position: 'absolute' },
-  era: { position: 'absolute', top: 8, left: 8, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 3, backgroundColor: 'rgba(255,255,255,0.9)' },
-  eraText: { fontSize: 12, fontWeight: '900', color: '#7A4E2E' },
+  era: { position: 'absolute', top: 8, left: 8, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 3,
+    backgroundColor: dark ? t.glass : 'rgba(255,255,255,0.9)' }, // the era pill over the scene: chrome
+  eraText: { fontSize: 12, fontWeight: '900', color: dark ? tones.sun.ink : '#7A4E2E' },
   shelf: { position: 'absolute', top: 6, right: 8, flexDirection: 'row', gap: 2, borderRadius: 10, paddingHorizontal: 4, paddingVertical: 2,
     backgroundColor: 'rgba(122,78,46,0.55)', minWidth: SHELF + 8, minHeight: SHELF + 4 },
   slot: { width: SHELF, height: SHELF },
   flash: { backgroundColor: '#FFFFFF' },
-});
+}));

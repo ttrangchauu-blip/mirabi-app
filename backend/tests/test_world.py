@@ -144,6 +144,40 @@ def test_preferences_start_empty_and_are_private(client):
     assert client.get("/api/world/preferences", headers=b).json()["version"] == 0
 
 
+def test_app_settings_follow_the_account_with_the_world_settings(client):
+    headers = login(client)
+    first = client.get("/api/world/preferences", headers=headers).json()["settings"]
+    assert first["notifications"] == {"enabled": True, "focus": True, "pet": True, "achievements": True, "friends": True}
+    assert first["language"] is None and first["theme"] == "system"
+    body = {"version": 0, "settings": {"sound": False, "language": "vi", "theme": "dark",
+                                       "notifications": {"enabled": False, "focus": True, "pet": False, "achievements": True, "friends": True}}}
+    saved = client.put("/api/world/preferences", headers=headers, json=body).json()["settings"]
+    assert saved["theme"] == "dark" and saved["language"] == "vi" and saved["sound"] is False
+    # Turning everything off keeps each choice underneath.
+    assert saved["notifications"] == {"enabled": False, "focus": True, "pet": False, "achievements": True, "friends": True}
+    again = client.get("/api/world/preferences", headers=headers).json()["settings"]
+    assert again == saved
+
+
+def test_app_settings_refuse_what_the_app_does_not_have(client):
+    headers = login(client)
+    for settings in ({"language": "en"}, {"theme": "night"}, {"notifications": {"tasks": True}}):
+        assert client.put("/api/world/preferences", headers=headers, json={"version": 0, "settings": settings}).status_code == 422
+    assert client.get("/api/world/preferences", headers=headers).json()["version"] == 0
+
+
+def test_settings_saved_before_the_app_settings_existed_still_read(client):
+    from app.models import User, WorldPreference
+    headers = login(client)
+    with SessionLocal() as db:
+        user_id = db.scalar(select(User.id).where(User.email == "aqua@example.com"))
+        db.add(WorldPreference(user_id=user_id, settings_json='{"sound": false, "effects": null, "motion": "auto", "lamps": {}}', version=1))
+        db.commit()
+    body = client.get("/api/world/preferences", headers=headers).json()
+    assert body["version"] == 1 and body["settings"]["sound"] is False
+    assert body["settings"]["theme"] == "system" and body["settings"]["notifications"]["enabled"] is True
+
+
 def test_an_outdated_or_late_save_changes_nothing(client):
     headers = login(client)
     assert client.put("/api/world/preferences", headers=headers, json={"version": 0, "settings": {"sound": True}}).json()["version"] == 1

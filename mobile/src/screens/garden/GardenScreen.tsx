@@ -7,9 +7,9 @@ import type { User } from '../../auth/AuthContext';
 import { Text } from '../../components/Typography';
 import { gardenCache, inventoryApi } from '../../inventory/api';
 import type { CareKind, GardenData, GardenPlot, Harvest, InventoryItem, PlantedPlot, Seed as OwnedSeed } from '../../inventory/types';
-import { appTheme as t } from '../../theme';
 import { formatNumber } from '../../ui/kit';
 import { useToast } from '../../ui/Toast';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { ErrorState, LoadingState, OptionRow, OptionSheet } from '../together/ui';
 import { GardenWorld, type GardenFx } from './GardenWorld';
 import { readyArt } from './gardenArt';
@@ -45,6 +45,9 @@ const Sprout = () => <View accessibilityElementsHidden importantForAccessibility
   <Path d="M12 10.4c.5-4 3-6.4 7.8-6.6.1 4.2-2.4 6.9-7.8 6.6Z" fill="#A3D95F" stroke="#3F8A35" strokeWidth={1.2} strokeLinejoin="round" />
 </Svg></View>;
 
+/** The garden's own green: its filled buttons (white on it), the same in light and dark. */
+const GREEN = '#2E8C3A';
+
 const sameSeed = (a: Seed | null, b: Seed) => !!a && a.id === b.id && a.variant === b.variant;
 /** A seed in a list: its tier, how long it grows and how many are left, from the backend's catalog. */
 const seedLine = (x: OwnedSeed) => [x.plant?.tier_label ?? x.rarity_label, x.plant ? duration(x.plant.grow_seconds) : null,
@@ -68,6 +71,8 @@ export function GardenScreen(props: Props) {
 // ------------------------------------------------------------------------------------------------ Vườn của tôi
 function MyGarden({ user, onOpenInventory, onOpenExplore, initialSeed = null, top = 0, bottom = 0, petAway = false, petWalking = false, version = 0, onRewarded }: Props) {
   const toast = useToast();
+  const { t } = useTheme();
+  const s = useStyles();
   const [data, setData] = useState<GardenData | null>(null);
   const [offline, setOffline] = useState(false);
   const [error, setError] = useState<unknown>(null);
@@ -218,9 +223,9 @@ function MyGarden({ user, onOpenInventory, onOpenExplore, initialSeed = null, to
   const seedCount = data.seeds.reduce((n, x) => n + x.available, 0);
   const coins = data.coins ?? user.coins;
   const tools: Tool[] = [
-    { id: 'plant', label: 'Trồng', icon: 'leaf', color: '#2E8C3A', bg: '#E3F5E6', disabled: toolOff('plant', data, offline) },
-    { id: 'water', label: CARE.water.short, icon: CARE.water.icon, color: CARE.water.color, bg: CARE.water.bg, disabled: toolOff('water', data, offline) },
-    { id: 'tend', label: CARE.tend.short, icon: CARE.tend.icon, color: CARE.tend.color, bg: CARE.tend.bg, disabled: toolOff('tend', data, offline) },
+    { id: 'plant', label: 'Trồng', icon: 'leaf', color: GREEN, bg: '#E3F5E6', tone: 'leaf', disabled: toolOff('plant', data, offline) },
+    { id: 'water', label: CARE.water.short, icon: CARE.water.icon, color: CARE.water.color, bg: CARE.water.bg, tone: CARE.water.tone, disabled: toolOff('water', data, offline) },
+    { id: 'tend', label: CARE.tend.short, icon: CARE.tend.icon, color: CARE.tend.color, bg: CARE.tend.bg, tone: CARE.tend.tone, disabled: toolOff('tend', data, offline) },
   ];
   /** A tool in hand. "Trồng" asks which seed first, unless there is only one kind. */
   const pickTool = (id: string | null) => {
@@ -254,16 +259,16 @@ function MyGarden({ user, onOpenInventory, onOpenExplore, initialSeed = null, to
               <Sprout />
               <Text style={s.seedCardText} numberOfLines={1}>{seedCount}</Text>
               <Pressable onPress={() => setGettingSeeds(true)} hitSlop={10} style={({ pressed }) => [s.seedMore, pressed && s.seedMorePressed]} accessibilityRole="button" accessibilityLabel="Nhận thêm hạt giống">
-                <Ionicons name="add" size={18} color="#FFFFFF" />
+                <Ionicons name="add" size={18} color={t.onPrimary} />
               </Pressable>
             </View>
             <Pressable onPress={() => setShopOpen(true)} style={({ pressed }) => [s.seedCard, s.shopButton, pressed && s.seedMorePressed]} accessibilityRole="button" accessibilityLabel="Mở Cửa hàng" testID="garden-open-shop">
-              <Ionicons name="storefront" size={15} color="#FFFFFF" />
+              <Ionicons name="storefront" size={15} color={t.onPrimary} />
               <Text style={s.shopText} numberOfLines={1}>Cửa hàng</Text>
             </Pressable>
           </View>
           {offline ? <Pressable onPress={() => { void load(); }} style={s.offline} accessibilityRole="button" accessibilityLabel="Đang ngoại tuyến, chạm để thử lại">
-            <Ionicons name="cloud-offline-outline" size={14} color="#6B4A12" />
+            <Ionicons name="cloud-offline-outline" size={14} color={t.warning} />
             <Text style={s.offlineText}>Ngoại tuyến · vườn đã lưu. Cần kết nối để trồng và chăm cây.</Text>
           </Pressable> : null}
         </View>
@@ -305,37 +310,39 @@ function MyGarden({ user, onOpenInventory, onOpenExplore, initialSeed = null, to
       </OptionSheet>
       <OptionSheet visible={!!openPlant} title={openPlant?.name ?? ''} onClose={() => setDetail(null)}>
         {openPlant ? <PlotDetail plot={openPlant} onAction={(id) => onDetailAction(openPlant, id)}
-          actions={[...(isReady(openPlant) ? [{ id: 'harvest', label: 'Thu hoạch', icon: 'basket' as const, color: '#B07800',
+          actions={[...(isReady(openPlant) ? [{ id: 'harvest', label: 'Thu hoạch', icon: 'basket' as const, color: '#B07800', tone: 'sun' as const,
             note: openPlant.harvest ? `+${openPlant.harvest.exp} EXP · +${openPlant.harvest.coins} xu` : undefined }] : []), ...careActions(openPlant)]} /> : null}
       </OptionSheet>
       <GardenShop visible={shopOpen} onClose={() => setShopOpen(false)} onBought={() => { void load(); onRewarded?.(); }} />
     </View>
   );
 }
-const s = StyleSheet.create({
+/** The garden's shadow on its grass, black under a dark panel. */
+const SHADOW = (dark: boolean) => (dark ? '#000000' : '#23452A');
+const useStyles = makeStyles(({ t, tones, dark }) => StyleSheet.create({
   fill: { flex: 1 },
   top: { position: 'absolute', left: 12, right: 12, gap: 6, alignItems: 'flex-end' },
   topRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  coinsText: { color: '#7A4D00', fontSize: 13, lineHeight: 18, fontWeight: '900', paddingRight: 6 },
-  shopButton: { backgroundColor: '#2E8C3A', paddingRight: 11 },
-  shopText: { color: '#FFFFFF', fontSize: 12.5, lineHeight: 18, fontWeight: '800' },
+  coinsText: { color: tones.sun.ink, fontSize: 13, lineHeight: 18, fontWeight: '900', paddingRight: 6 },
+  shopButton: { backgroundColor: GREEN, paddingRight: 11 },
+  shopText: { color: t.onPrimary, fontSize: 12.5, lineHeight: 18, fontWeight: '800' },
   reward: { position: 'absolute', alignSelf: 'center', left: 24, right: 24, flexDirection: 'row', alignItems: 'center', gap: 10, padding: 10, borderRadius: 18,
-    backgroundColor: 'rgba(255,255,255,0.97)', borderWidth: 1.5, borderColor: '#F1D27A',
-    shadowColor: '#23452A', shadowOpacity: 0.2, shadowRadius: 10, shadowOffset: { width: 0, height: 4 }, elevation: 6 },
+    backgroundColor: t.card, borderWidth: 1.5, borderColor: '#F1D27A',
+    shadowColor: SHADOW(dark), shadowOpacity: 0.2, shadowRadius: 10, shadowOffset: { width: 0, height: 4 }, elevation: 6 },
   rewardArt: { width: 52, height: 72 },
   rewardBody: { flex: 1, minWidth: 0, gap: 3 },
   rewardTitle: { color: t.ink, fontSize: 15, fontWeight: '900' },
   rewardGains: { flexDirection: 'row', gap: 10 },
-  rewardExp: { color: '#1F6A2E', fontSize: 15, fontWeight: '900' },
-  rewardCoins: { color: '#8A5A00', fontSize: 15, fontWeight: '900' },
+  rewardExp: { color: tones.leaf.ink, fontSize: 15, fontWeight: '900' },
+  rewardCoins: { color: tones.sun.ink, fontSize: 15, fontWeight: '900' },
   rewardNote: { color: t.muted, fontSize: 11, fontWeight: '600' },
-  seedCard: { flexDirection: 'row', alignItems: 'center', gap: 6, height: SEED_CARD, paddingLeft: 9, paddingRight: 4, borderRadius: SEED_CARD / 2, backgroundColor: 'rgba(255,255,255,0.95)',
-    shadowColor: '#23452A', shadowOpacity: 0.16, shadowRadius: 6, shadowOffset: { width: 0, height: 2 }, elevation: 3 },
-  seedCardText: { color: '#1F5A26', fontSize: 13, lineHeight: 18, fontWeight: '800' },
-  seedMore: { width: 26, height: 26, borderRadius: 13, marginLeft: 2, alignItems: 'center', justifyContent: 'center', backgroundColor: '#2E8C3A' },
+  seedCard: { flexDirection: 'row', alignItems: 'center', gap: 6, height: SEED_CARD, paddingLeft: 9, paddingRight: 4, borderRadius: SEED_CARD / 2, backgroundColor: t.glass,
+    shadowColor: SHADOW(dark), shadowOpacity: 0.16, shadowRadius: 6, shadowOffset: { width: 0, height: 2 }, elevation: 3 },
+  seedCardText: { color: tones.leaf.ink, fontSize: 13, lineHeight: 18, fontWeight: '800' },
+  seedMore: { width: 26, height: 26, borderRadius: 13, marginLeft: 2, alignItems: 'center', justifyContent: 'center', backgroundColor: GREEN },
   seedMorePressed: { opacity: 0.8, transform: [{ scale: 0.94 }] },
   dock: { position: 'absolute', left: 12, right: 12, gap: 8 },
-  offline: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 9, paddingVertical: 6, borderRadius: 12, backgroundColor: '#FFF3DFF2' },
-  offlineText: { flexShrink: 1, color: '#6B4A12', fontSize: 11, lineHeight: 15, fontWeight: '600' },
-  hintText: { alignSelf: 'center', maxWidth: '100%', paddingHorizontal: 12, paddingVertical: 4, borderRadius: 13, overflow: 'hidden', backgroundColor: 'rgba(255,255,255,0.92)', color: '#2E5A30', fontSize: 12, lineHeight: 18, fontWeight: '700' },
-});
+  offline: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 9, paddingVertical: 6, borderRadius: 12, backgroundColor: t.warningBg },
+  offlineText: { flexShrink: 1, color: t.warning, fontSize: 11, lineHeight: 15, fontWeight: '600' },
+  hintText: { alignSelf: 'center', maxWidth: '100%', paddingHorizontal: 12, paddingVertical: 4, borderRadius: 13, overflow: 'hidden', backgroundColor: t.glass, color: tones.leaf.ink, fontSize: 12, lineHeight: 18, fontWeight: '700' },
+}));

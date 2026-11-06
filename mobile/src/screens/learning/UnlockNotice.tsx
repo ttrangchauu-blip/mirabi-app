@@ -5,7 +5,7 @@ import { PetCompanion } from '../../components/PetCompanion';
 import { Text } from '../../components/Typography';
 import { unlockNotice } from '../../learning/lessonOrder';
 import type { UnlockedContent } from '../../learning/types';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 
 export const NOTICE_MS = 8000;
 
@@ -16,6 +16,8 @@ type Props = { news: UnlockedContent[]; petId: string; petLevel: number; reduceM
 /** Something has just opened: a small notice at the bottom (never a popup over the screen), with the pet jumping for joy.
  * The screen behind it stays in use; it leaves on its own. */
 export function UnlockNotice({ news, petId, petLevel, reduceMotion, onSeen, onExplore, onClose }: Props) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const notice = unlockNotice(news);
   const rise = useRef(new Animated.Value(reduceMotion ? 1 : 0)).current;
   const hop = useRef(new Animated.Value(0)).current;
@@ -47,7 +49,7 @@ export function UnlockNotice({ news, petId, petLevel, reduceMotion, onSeen, onEx
         </Animated.View>
         <View style={styles.flex}>
           <View style={styles.row}>
-            <Ionicons name="lock-open" size={13} color="#B5850B" />
+            <Ionicons name="lock-open" size={13} color={t.warning} />
             <Text style={styles.kicker}>Vừa mở khóa</Text>
           </View>
           <Text style={styles.title} numberOfLines={2}>{notice.title}</Text>
@@ -67,17 +69,17 @@ export function UnlockNotice({ news, petId, petLevel, reduceMotion, onSeen, onEx
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, dark }) => StyleSheet.create({
   flex: { flex: 1 },
   wrap: { position: 'absolute', left: 0, right: 0, bottom: 12, alignItems: 'center', paddingHorizontal: 14, zIndex: 10 },
-  card: { width: '100%', maxWidth: 520, flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: '#FFFFFF', borderRadius: 18, paddingVertical: 8,
-    paddingLeft: 8, paddingRight: 6, shadowColor: '#0A2438', shadowOpacity: 0.18, shadowRadius: 14, shadowOffset: { width: 0, height: 6 }, elevation: 8 },
+  card: { width: '100%', maxWidth: 520, flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: t.card, borderRadius: 18, paddingVertical: 8,
+    paddingLeft: 8, paddingRight: 6, shadowColor: dark ? '#000000' : '#0A2438', shadowOpacity: 0.18, shadowRadius: 14, shadowOffset: { width: 0, height: 6 }, elevation: 8 },
   row: { flexDirection: 'row', alignItems: 'center', gap: 4 },
-  kicker: { fontSize: 11, fontWeight: '800', color: '#B5850B' },
+  kicker: { fontSize: 11, fontWeight: '800', color: t.warning },
   title: { fontSize: 14, fontWeight: '900', color: t.ink, lineHeight: 18 },
   more: { fontSize: 12, color: t.muted },
-  button: { minHeight: 40, justifyContent: 'center', backgroundColor: t.accent, borderRadius: 12, paddingHorizontal: 10 },
-  buttonText: { color: '#FFFFFF', fontSize: 13, fontWeight: '800' },
+  button: { minHeight: 40, justifyContent: 'center', backgroundColor: t.accentFill, borderRadius: 12, paddingHorizontal: 10 },
+  buttonText: { color: t.onPrimary, fontSize: 13, fontWeight: '800' },
   pressed: { opacity: 0.85, transform: [{ scale: 0.98 }] },
   close: { width: 26, height: 40, alignItems: 'center', justifyContent: 'center' },
-});
+}));

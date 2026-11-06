@@ -6,21 +6,21 @@ import { Text } from '../../components/Typography';
 import type { EducationState } from '../../learning/education';
 import { GAME_INFO, gameTitle } from '../../learning/labels';
 import type { Catalog, FreeLevel, LearningSession, LessonProgramme, ResumeLesson, SubjectCode } from '../../learning/types';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 import type { IconName } from '../../ui/kit';
 import { HeaderIcon, IconBadge, Look, shortSubjectName } from './LearningUI';
 
 // Vector icons, not emoji: flag emoji (🇬🇧) show as letters ("GB") on Windows and some Android devices. The names
 // here are the defaults; a grade's programme names its subjects as at school (Tiếng Việt / Ngữ văn, Khoa học…).
 export const SUBJECT_LOOK: Record<SubjectCode, Look & { name: string }> = {
-  vietnamese: { icon: 'reader-outline', name: 'Tiếng Việt', bg: '#FCE4F0', color: '#A3326B' },
-  english: { icon: 'language-outline', name: 'Tiếng Anh', bg: '#DDF0FA', color: '#136FA8' },
-  math: { icon: 'calculator-outline', name: 'Toán', bg: '#FFF1D6', color: '#B86A00' },
-  science: { icon: 'leaf-outline', name: 'Tự nhiên và Xã hội', bg: '#E3F5E6', color: '#22703A' },
-  informatics: { icon: 'code-slash-outline', name: 'Tin học', bg: '#EEEAFF', color: '#5141A8' },
+  vietnamese: { icon: 'reader-outline', name: 'Tiếng Việt', bg: '#FCE4F0', color: '#A3326B', tone: 'rose' },
+  english: { icon: 'language-outline', name: 'Tiếng Anh', bg: '#DDF0FA', color: '#136FA8', tone: 'sky' },
+  math: { icon: 'calculator-outline', name: 'Toán', bg: '#FFF1D6', color: '#B86A00', tone: 'sun' },
+  science: { icon: 'leaf-outline', name: 'Tự nhiên và Xã hội', bg: '#E3F5E6', color: '#22703A', tone: 'leaf' },
+  informatics: { icon: 'code-slash-outline', name: 'Tin học', bg: '#EEEAFF', color: '#5141A8', tone: 'lilac' },
 };
-const FREE_STUDY: Look = { icon: 'book-outline', bg: '#E6F5E8', color: '#1F8A63' };
-const ELECTIVES: Look = { icon: 'options-outline', bg: '#EEF2F5', color: '#4F6C86' };
+const FREE_STUDY: Look = { icon: 'book-outline', bg: '#E6F5E8', color: '#1F8A63', tone: 'leaf' };
+const ELECTIVES: Look = { icon: 'options-outline', bg: '#EEF2F5', color: '#4F6C86', tone: 'neutral' };
 /** Before a grade has a programme (or on an older server): the subjects that always had games. */
 const LEGACY: SubjectCode[] = ['english', 'math'];
 /** A lesson subject whose free-practice games are listed under another code (Tin học và Công nghệ, lớp 3–5). */
@@ -71,6 +71,8 @@ type Props = {
  * A subject leads to its lessons (or, with none yet, to its games). Nothing is created on the backend until a game starts. */
 export function SubjectPicker({ catalog, lessons, error, onRetry, current, focus, onResume, onDiscard, onOpenLesson, onOpenSubject,
   onFreeStudy, onOpenElectives, onOpenReview, modeSwitch, education, onPickLevel, onOpenNotebook, onOpenArchive, profilePrompt }: Props) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const { width } = useWindowDimensions();
   const columns = Math.min(width, 760) - 40 >= 330 ? 3 : 2;
   const reviewTotal = catalog?.subjects.reduce((n, s) => n + s.topics.reduce((m, x) => m + x.review_count, 0), 0) ?? 0;
@@ -182,6 +184,8 @@ type ContinueProps = { current: LearningSession | null; focus: FocusInProgress |
 /** "Tiếp tục học": one small card, for the stage left open, else the focus timer running, else the lesson last practised.
  * Hidden when there is none. */
 function ContinueCard({ current, focus, resume, onResume, onDiscard, onFreeStudy, onOpenLesson }: ContinueProps) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const item = current ? {
     icon: GAME_INFO[current.game]?.icon ?? 'game-controller-outline',
     detail: `${current.catalog?.subject_name ?? current.subject.name} · ${current.catalog?.title ?? gameTitle(current.game)}`,
@@ -201,7 +205,7 @@ function ContinueCard({ current, focus, resume, onResume, onDiscard, onFreeStudy
       </View>
       <Pressable onPress={item.onPress} accessibilityRole="button" accessibilityLabel="Tiếp tục" style={({ pressed }) => [pressed && styles.pressed]}>
         <LinearGradient colors={t.primary} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.continueButton}>
-          <Ionicons name="play" size={14} color="#FFFFFF" />
+          <Ionicons name="play" size={14} color={t.onPrimary} />
           <Text style={styles.continueButtonText}>Tiếp tục</Text>
         </LinearGradient>
       </Pressable>
@@ -214,7 +218,7 @@ function ContinueCard({ current, focus, resume, onResume, onDiscard, onFreeStudy
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   flex: { flex: 1 },
   header: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 14 },
   title: { fontSize: 24, fontWeight: '900', color: t.ink },
@@ -223,28 +227,28 @@ const styles = StyleSheet.create({
   actions: { flexDirection: 'row', gap: 8 },
   note: { color: t.muted, fontSize: 13, lineHeight: 19, marginBottom: 12 },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 12 },
-  chip: { minHeight: 36, paddingHorizontal: 14, borderRadius: 18, backgroundColor: '#FFFFFF', justifyContent: 'center' },
-  chipOn: { backgroundColor: t.accent },
+  chip: { minHeight: 36, paddingHorizontal: 14, borderRadius: 18, backgroundColor: t.card, justifyContent: 'center' },
+  chipOn: { backgroundColor: t.accentFill },
   chipText: { fontSize: 14, fontWeight: '800', color: t.ink },
-  chipTextOn: { color: '#FFFFFF' },
-  continue: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: '#FFFFFF', borderRadius: 18, paddingVertical: 10,
+  chipTextOn: { color: t.onPrimary },
+  continue: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: t.card, borderRadius: 18, paddingVertical: 10,
     paddingLeft: 10, paddingRight: 12, marginBottom: 18, shadowColor: t.shadow, shadowOpacity: 0.07, shadowRadius: 10,
     shadowOffset: { width: 0, height: 3 }, elevation: 2 },
   continueLabel: { fontSize: 12, fontWeight: '800', color: t.muted },
   continueDetail: { fontSize: 15, fontWeight: '900', color: t.ink, marginTop: 1 },
   continueButton: { flexDirection: 'row', alignItems: 'center', gap: 4, height: 36, paddingHorizontal: 12, borderRadius: 12 },
-  continueButtonText: { fontSize: 14, fontWeight: '800', color: '#FFFFFF' },
+  continueButtonText: { fontSize: 14, fontWeight: '800', color: t.onPrimary },
   dismiss: { width: 28, height: 36, alignItems: 'center', justifyContent: 'center', marginLeft: -4 },
   error: { flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: t.dangerBg, borderRadius: 14, padding: 10, marginBottom: 14 },
   errorText: { flex: 1, color: t.danger, fontSize: 13, fontWeight: '700' },
-  retry: { backgroundColor: '#FFFFFF', borderRadius: 10, paddingHorizontal: 10, paddingVertical: 6 },
+  retry: { backgroundColor: t.card, borderRadius: 10, paddingHorizontal: 10, paddingVertical: 6 },
   retryText: { color: t.danger, fontWeight: '900' },
   section: { fontSize: 17, fontWeight: '900', color: t.ink, marginBottom: 10 },
   loading: { marginVertical: 16 },
   grid: { flexDirection: 'row', flexWrap: 'wrap', marginHorizontal: -6 },
   cell: { padding: 6 },
-  tile: { alignItems: 'center', gap: 8, backgroundColor: '#FFFFFF', borderRadius: 18, paddingVertical: 14, paddingHorizontal: 8, minHeight: 116,
+  tile: { alignItems: 'center', gap: 8, backgroundColor: t.card, borderRadius: 18, paddingVertical: 14, paddingHorizontal: 8, minHeight: 116,
     shadowColor: t.shadow, shadowOpacity: 0.06, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, elevation: 1 },
   tileName: { fontSize: 14, lineHeight: 18, fontWeight: '800', color: t.ink, textAlign: 'center' },
   pressed: { opacity: 0.85, transform: [{ scale: 0.97 }] },
-});
+}));

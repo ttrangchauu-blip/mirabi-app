@@ -3,11 +3,11 @@ import { Ionicons } from '@expo/vector-icons';
 import DateTimePicker, { DateTimePickerAndroid, type DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { BackHandler, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { Text } from '../../components/Typography';
-import { appTheme as t } from '../../theme';
 import { AppModal } from '../../ui/AppModal';
 import { Card, SoftInput } from '../../ui/kit';
 import { request, showError } from './shared';
 import { combineLocal, displayDateTime, localDate, localTime } from './taskDateTime';
+import { makeStyles, useTheme } from '../../ui/theme';
 
 type Repeat = 'none' | 'daily' | 'weekly' | 'monthly' | 'custom';
 type Frequency = 'daily' | 'weekly' | 'monthly' | 'yearly';
@@ -35,6 +35,8 @@ const frequencyLabel: Record<Frequency, string> = { daily: 'ngày', weekly: 'tu�
 const localWeekday = (date: string) => (new Date(`${date}T00:00:00`).getDay() + 6) % 7;
 
 export function TaskCreateModal({ visible, initialDate, onClose, onCreated }: Props) {
+  const { t, scheme } = useTheme();
+  const styles = useStyles();
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState<Category>('study');
   const [scheduledDate, setScheduledDate] = useState(initialDate);
@@ -214,7 +216,7 @@ export function TaskCreateModal({ visible, initialDate, onClose, onCreated }: Pr
           <AppModal visible={iosPickerVisible} transparent animationType="fade" onRequestClose={() => setIosPickerVisible(false)}>
             <View style={styles.pickerOverlay}><Pressable style={StyleSheet.absoluteFill} onPress={() => setIosPickerVisible(false)} />
               <View style={styles.pickerCard}><View style={styles.pickerHeader}><Text style={styles.pickerTitle}>Chọn thời gian</Text><Pressable onPress={() => setIosAllDay(true)}><Text style={styles.pickerAllDay}>Cả ngày</Text></Pressable></View>
-                <DateTimePicker value={iosPickerValue} mode="datetime" display="spinner" locale="vi-VN" onChange={(_event, value) => { if (value) { setIosPickerValue(value); setIosAllDay(false); } }} />
+                <DateTimePicker value={iosPickerValue} mode="datetime" display="spinner" locale="vi-VN" themeVariant={scheme} onChange={(_event, value) => { if (value) { setIosPickerValue(value); setIosAllDay(false); } }} />
                 <Pressable style={styles.pickerDone} onPress={() => { if (iosAllDay) { setScheduledDate(localDate(iosPickerValue)); setStartTime(''); } else applyPickedDateTime(iosPickerValue); setIosPickerVisible(false); }}><Text style={styles.pickerDoneText}>Xong</Text></Pressable>
               </View>
             </View>
@@ -222,7 +224,7 @@ export function TaskCreateModal({ visible, initialDate, onClose, onCreated }: Pr
           <AppModal visible={iosEndDateVisible} transparent animationType="fade" onRequestClose={() => setIosEndDateVisible(false)}>
             <View style={styles.pickerOverlay}><Pressable style={StyleSheet.absoluteFill} onPress={() => setIosEndDateVisible(false)} />
               <View style={styles.pickerCard}><View style={styles.pickerHeader}><Text style={styles.pickerTitle}>Kết thúc lặp vào</Text></View>
-                <DateTimePicker value={iosEndDateValue} mode="date" display="spinner" locale="vi-VN" minimumDate={combineLocal(scheduledDate, '')} onChange={(_event, value) => { if (value) setIosEndDateValue(value); }} />
+                <DateTimePicker value={iosEndDateValue} mode="date" display="spinner" locale="vi-VN" themeVariant={scheme} minimumDate={combineLocal(scheduledDate, '')} onChange={(_event, value) => { if (value) setIosEndDateValue(value); }} />
                 <Pressable style={styles.pickerDone} onPress={() => { setRepeatUntil(localDate(iosEndDateValue)); setIosEndDateVisible(false); }}><Text style={styles.pickerDoneText}>Xong</Text></Pressable>
               </View>
             </View>
@@ -262,33 +264,37 @@ export function TaskCreateModal({ visible, initialDate, onClose, onCreated }: Pr
 }
 
 function Pill({ label, selected, onPress }: { label: string; selected: boolean; onPress: () => void }) {
-  return <Pressable onPress={onPress} style={[styles.choice, selected && styles.choiceSelected]} accessibilityRole="button" accessibilityState={{ selected }}><Text style={[styles.choiceText, selected && styles.choiceTextSelected]}>{label}</Text>{selected ? <Ionicons name="checkmark" size={13} color="#FFFFFF" /> : null}</Pressable>;
+  const { t } = useTheme();
+  const styles = useStyles();
+  return <Pressable onPress={onPress} style={[styles.choice, selected && styles.choiceSelected]} accessibilityRole="button" accessibilityState={{ selected }}><Text style={[styles.choiceText, selected && styles.choiceTextSelected]}>{label}</Text>{selected ? <Ionicons name="checkmark" size={13} color={t.onPrimary} /> : null}</Pressable>;
 }
 
 function SectionTitle({ icon, title }: { icon: React.ComponentProps<typeof Ionicons>['name']; title: string }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   return <View style={styles.sectionTitle}><View style={styles.sectionIcon}><Ionicons name={icon} size={15} color={t.accent} /></View><Text style={styles.sectionText}>{title}</Text></View>;
 }
 
-const styles = StyleSheet.create({
-  overlay: { ...StyleSheet.absoluteFillObject, zIndex: 100, justifyContent: 'center', backgroundColor: 'rgba(17, 39, 58, 0.48)' },
+const useStyles = makeStyles(({ t, dark }) => StyleSheet.create({
+  overlay: { ...StyleSheet.absoluteFillObject, zIndex: 100, justifyContent: 'center', backgroundColor: t.scrim },
   backdrop: { width: '100%', maxWidth: 500, maxHeight: '100%', alignSelf: 'center', justifyContent: 'center', padding: 12 },
   keyboard: { maxHeight: '100%' }, content: { flexGrow: 1, justifyContent: 'center' },
-  card: { marginBottom: 0, paddingHorizontal: 18, paddingTop: 15, paddingBottom: 16, borderRadius: 23, borderWidth: 1, borderColor: 'rgba(255,255,255,0.9)', shadowColor: '#164D70', shadowOpacity: 0.15, shadowRadius: 20, shadowOffset: { width: 0, height: 9 }, elevation: 7 },
-  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 8, borderBottomWidth: 1, borderBottomColor: '#E8F2F8' },
+  card: { marginBottom: 0, paddingHorizontal: 18, paddingTop: 15, paddingBottom: 16, borderRadius: 23, borderWidth: 1, borderColor: t.glassBorder, shadowColor: t.shadow, shadowOpacity: 0.15, shadowRadius: 20, shadowOffset: { width: 0, height: 9 }, elevation: 7 },
+  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 8, borderBottomWidth: 1, borderBottomColor: t.tint },
   title: { color: t.ink, fontSize: 21, fontWeight: '900' }, closeButton: { width: 34, height: 34, borderRadius: 17, alignItems: 'center', justifyContent: 'center', backgroundColor: t.bg },
   sectionTitle: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 20, marginBottom: 7 }, sectionIcon: { width: 25, height: 25, borderRadius: 9, alignItems: 'center', justifyContent: 'center', backgroundColor: t.tint }, sectionText: { color: t.ink, fontSize: 14, fontWeight: '900' },
   label: { color: t.muted, fontSize: 12, fontWeight: '800', marginTop: 12, marginBottom: 7 },
-  input: { minHeight: 46, paddingVertical: 8, borderRadius: 14, textAlignVertical: 'center', backgroundColor: '#F0F8FC', borderColor: '#E6F2F8', borderWidth: 1, fontSize: 15 },
+  input: { minHeight: 46, paddingVertical: 8, borderRadius: 14, textAlignVertical: 'center', backgroundColor: dark ? t.inputBg : '#F0F8FC', borderColor: dark ? t.inputBorder : '#E6F2F8', borderWidth: 1, fontSize: 15 },
   dateTimeWrap: { minHeight: 46, flexDirection: 'row', alignItems: 'center', gap: 7, position: 'relative', marginBottom: 3 },
-  dateTimeField: { minHeight: 46, flex: 1, flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 12, borderRadius: 14, backgroundColor: '#F0F8FC', borderWidth: 1, borderColor: '#E6F2F8' },
+  dateTimeField: { minHeight: 46, flex: 1, flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 12, borderRadius: 14, backgroundColor: dark ? t.inputBg : '#F0F8FC', borderWidth: 1, borderColor: dark ? t.inputBorder : '#E6F2F8' },
   dateTimeText: { flex: 1, color: t.ink, fontSize: 15, fontWeight: '700' }, dateTimePlaceholder: { color: t.muted, fontWeight: '500' },
   clearTimeButton: { width: 44, height: 46, alignItems: 'center', justifyContent: 'center', borderRadius: 14, backgroundColor: t.tint },
-  pickerOverlay: { flex: 1, justifyContent: 'flex-end', backgroundColor: 'rgba(17,39,58,0.38)', padding: 12 },
-  pickerCard: { borderRadius: 20, padding: 14, backgroundColor: '#FFFFFF' }, pickerHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+  pickerOverlay: { flex: 1, justifyContent: 'flex-end', backgroundColor: t.scrim, padding: 12 },
+  pickerCard: { borderRadius: 20, padding: 14, backgroundColor: t.card }, pickerHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   pickerTitle: { fontSize: 15, fontWeight: '900', color: t.ink }, pickerAllDay: { color: t.accent, fontWeight: '800', fontSize: 12 },
-  pickerDone: { height: 42, borderRadius: 13, backgroundColor: t.accent, alignItems: 'center', justifyContent: 'center', marginTop: 6 }, pickerDoneText: { color: '#FFFFFF', fontSize: 13, fontWeight: '900' },
-  choices: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 4 }, choice: { minHeight: 36, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 4, paddingHorizontal: 12, paddingVertical: 7, borderRadius: 999, backgroundColor: '#EFF8FD', borderWidth: 1, borderColor: '#E3F1F9' },
-  choiceSelected: { backgroundColor: t.accent, borderColor: t.accent }, choiceText: { color: t.accent, fontSize: 12, fontWeight: '800' }, choiceTextSelected: { color: '#FFFFFF' },
+  pickerDone: { height: 42, borderRadius: 13, backgroundColor: t.accentFill, alignItems: 'center', justifyContent: 'center', marginTop: 6 }, pickerDoneText: { color: t.onPrimary, fontSize: 13, fontWeight: '900' },
+  choices: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 4 }, choice: { minHeight: 36, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 4, paddingHorizontal: 12, paddingVertical: 7, borderRadius: 999, backgroundColor: dark ? t.surfaceSecondary : '#EFF8FD', borderWidth: 1, borderColor: dark ? t.border : '#E3F1F9' },
+  choiceSelected: { backgroundColor: t.accentFill, borderColor: t.accentFill }, choiceText: { color: t.accent, fontSize: 12, fontWeight: '800' }, choiceTextSelected: { color: t.onPrimary },
   helper: { fontSize: 12, color: t.muted, marginTop: 8, marginBottom: 5 }, customRepeatRow: { flexDirection: 'row', alignItems: 'center', gap: 8 }, intervalInput: { width: 58, textAlign: 'center' }, frequencyOptions: { flex: 1, flexDirection: 'row', flexWrap: 'wrap', gap: 7 },
-  save: { height: 48, marginTop: 17, borderRadius: 14, alignItems: 'center', justifyContent: 'center', backgroundColor: t.accent }, saveText: { color: '#FFFFFF', fontSize: 15, fontWeight: '900' }, disabled: { opacity: 0.55 },
-});
+  save: { height: 48, marginTop: 17, borderRadius: 14, alignItems: 'center', justifyContent: 'center', backgroundColor: t.accentFill }, saveText: { color: t.onPrimary, fontSize: 15, fontWeight: '900' }, disabled: { opacity: 0.55 },
+}));

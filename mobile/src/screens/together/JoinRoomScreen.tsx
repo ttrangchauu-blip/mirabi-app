@@ -4,7 +4,7 @@ import { errorMessage } from '../../auth/messages';
 import { Text } from '../../components/Typography';
 import { togetherApi } from '../../studyTogether/api';
 import type { RoomPreview } from '../../studyTogether/types';
-import { appTheme as t } from '../../theme';
+import { makeStyles } from '../../ui/theme';
 import { Button, Card } from '../../ui/kit';
 import { subjectLabel } from './labels';
 import { useTogetherNav } from './navigation';
@@ -21,6 +21,7 @@ const REFUSALS: Record<string, string> = {
 export const cleanCode = (value: string) => value.replace(/[\s-]/g, '').toUpperCase().slice(0, 8);
 
 export function JoinRoomScreen({ initialCode = '' }: { initialCode?: string }) {
+  const styles = useStyles();
   const nav = useTogetherNav();
   const [code, setCode] = useState(cleanCode(initialCode));
   const [preview, setPreview] = useState<RoomPreview | null>(null);
@@ -68,11 +69,11 @@ export function JoinRoomScreen({ initialCode = '' }: { initialCode?: string }) {
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   code: { fontSize: 22, fontWeight: '900', letterSpacing: 4, textAlign: 'center' },
   name: { fontSize: 19, fontWeight: '900', color: t.ink },
   goal: { fontSize: 14, color: t.ink, marginTop: 4 },
   facts: { gap: 4, marginTop: 6 },
   fact: { fontSize: 13, color: t.muted },
   refusal: { color: t.danger, fontWeight: '800', marginTop: 12, fontSize: 14 },
-});
+}));

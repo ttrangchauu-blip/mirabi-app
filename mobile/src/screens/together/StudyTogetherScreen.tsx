@@ -3,7 +3,7 @@ import { BackHandler, RefreshControl, ScrollView, StyleSheet } from 'react-nativ
 import type { User } from '../../auth/AuthContext';
 import { togetherApi } from '../../studyTogether/api';
 import { RealtimeClient } from '../../studyTogether/realtime';
-import { appTheme as t } from '../../theme';
+import { useTheme } from '../../ui/theme';
 import { useToast } from '../../ui/Toast';
 import { CreateRoomScreen } from './CreateRoomScreen';
 import type { FriendsTab } from './FriendsScreen';
@@ -16,6 +16,8 @@ import { TeamQuestDetailScreen, TeamQuestsScreen } from './TeamQuestsScreen';
 import { TogetherHome } from './TogetherHome';
 import { Nav, NavContext, RefreshContext, Route } from './navigation';
 import type { StudyMode } from './StudyModeSwitch';
+import { wants } from '../../notifications/permission';
+import { useAccountSettings } from '../../settings/accountSettings';
 
 type Props = { user: User; onExit: (mode?: Exclude<StudyMode, 'together'>) => void; onRewards: () => void; createClient?: () => RealtimeClient;
   onVisitRoom?: (userId: number) => void;
@@ -28,6 +30,7 @@ type Props = { user: User; onExit: (mode?: Exclude<StudyMode, 'together'>) => vo
   initialRoute?: Route | null };
 
 export function StudyTogetherScreen({ user, onExit, onRewards, createClient, onVisitRoom, onOpenFriends, onOpenGarden, onOpenInventory, roomTabs, initialRoute }: Props) {
+  const { t } = useTheme();
   const [stack, setStack] = useState<Route[]>(() => (initialRoute && initialRoute.name !== 'home' ? [{ name: 'home' }, initialRoute] : [{ name: 'home' }]));
   const [refreshing, setRefreshing] = useState(false);
   const loader = useRef<(() => Promise<void>) | null>(null);
@@ -35,9 +38,13 @@ export function StudyTogetherScreen({ user, onExit, onRewards, createClient, onV
   const toast = useToast();
   const route = stack[stack.length - 1];
 
+  // "Bạn bè và học cùng" in Cài đặt > Thông báo: off, a notice arriving is not shown over the screen (the inbox keeps it).
+  const { settings } = useAccountSettings(user.id);
+  const showNotices = useRef(wants(settings.notifications, 'friends'));
+  showNotices.current = wants(settings.notifications, 'friends');
   useEffect(() => {
     realtime.start();
-    const off = realtime.onMessage((m) => { if (m.type === 'notification') toast(m.notification.title, 'info'); });
+    const off = realtime.onMessage((m) => { if (m.type === 'notification' && showNotices.current) toast(m.notification.title, 'info'); });
     return () => { off(); realtime.stop(); };
   }, [realtime, toast]);
 

@@ -8,6 +8,7 @@ import { FogCloud, MAP_STOPS, MapBoard, MapFlag, routeAt, stopFractions } from '
 import { Chest } from '../art/wordForest';
 import { useRig } from '../engine/rig';
 import { useSfx } from '../engine/sfx';
+import { makeStyles } from '../../ui/theme';
 import type { QuestProps } from './QuestProps';
 import { NATIVE, useQuestEvents } from './worlds';
 
@@ -27,6 +28,7 @@ export function placesReached(f: number, aspect: number): number {
 }
 
 export function MapQuest({ done, total, wrongKey, petId, petLevel, reduceMotion, running }: QuestProps) {
+  const styles = useStyles();
   const play = useSfx();
   const [width, setWidth] = useState(0);
   const W = width || 340;
@@ -125,11 +127,11 @@ export function MapQuest({ done, total, wrongKey, petId, petLevel, reduceMotion,
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, tones, dark }) => StyleSheet.create({
   scene: { borderRadius: 22, overflow: 'hidden', backgroundColor: '#F2DFB4', marginBottom: 10 },
   abs: { position: 'absolute' },
   shadow: { position: 'absolute', left: PET * 0.2, top: PET - 8, width: PET * 0.6, height: 8, borderRadius: 4, backgroundColor: 'rgba(60,40,20,0.22)' },
-  chip: { position: 'absolute', bottom: 8, left: 8, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 3, backgroundColor: 'rgba(255,248,230,0.92)',
-    borderWidth: 1, borderColor: '#C9A06A' },
-  chipText: { fontSize: 12, fontWeight: '900', color: '#7A4E2E' },
-});
+  chip: { position: 'absolute', bottom: 8, left: 8, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 3,
+    backgroundColor: dark ? t.glass : 'rgba(255,248,230,0.92)', borderWidth: 1, borderColor: '#C9A06A' }, // the route pill over the map: chrome
+  chipText: { fontSize: 12, fontWeight: '900', color: dark ? tones.sun.ink : '#7A4E2E' },
+}));

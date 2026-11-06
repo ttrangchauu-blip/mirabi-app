@@ -5,8 +5,8 @@ import Svg, { Circle, Defs, Path, RadialGradient, Stop } from 'react-native-svg'
 import type { User } from '../../auth/AuthContext';
 import { Text, TextInput } from '../../components/Typography';
 import { careerApi, type CareerDetail, type CareerSkill, type CareerSummary, type SkillStatus } from '../../life/worlds';
-import { appTheme as t } from '../../theme';
 import { Button, Chip } from '../../ui/kit';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { useToast } from '../../ui/Toast';
 import { showError } from '../main/shared';
 import { ErrorState, OptionSheet } from '../together/ui';
@@ -15,13 +15,27 @@ import { finished, layoutMap, Milestone, RegionSign, RoadMap, RoadPet } from './
 
 type Props = { user: User; onBack: () => void; onRewards?: () => void };
 
-const STATUS: Record<SkillStatus, { label: string; color: string; bg: string; icon: React.ComponentProps<typeof Ionicons>['name'] }> = {
-  locked: { label: 'Chưa mở', color: '#8C99A6', bg: '#E9EEF2', icon: 'lock-closed' },
-  available: { label: 'Sẵn sàng học', color: '#2E9AD6', bg: '#FFFFFF', icon: 'sparkles-outline' },
-  in_progress: { label: 'Tự đánh giá', color: '#2E9AD6', bg: '#E1F2FC', icon: 'trending-up' },
-  practiced: { label: 'Đã thực hành', color: '#22A06B', bg: '#E1F6EC', icon: 'checkmark-circle' },
-  assessed: { label: 'Đã qua bài kiểm tra', color: '#C98A00', bg: '#FFF4CC', icon: 'star' },
+const STATUS: Record<SkillStatus, { label: string; icon: React.ComponentProps<typeof Ionicons>['name'] }> = {
+  locked: { label: 'Chưa mở', icon: 'lock-closed' },
+  available: { label: 'Sẵn sàng học', icon: 'sparkles-outline' },
+  in_progress: { label: 'Tự đánh giá', icon: 'trending-up' },
+  practiced: { label: 'Đã thực hành', icon: 'checkmark-circle' },
+  assessed: { label: 'Đã qua bài kiểm tra', icon: 'star' },
 };
+/** Each status's ink and pale fill: the drawn ones in light, the theme's status pairs in dark. */
+const useStatusColors = makeStyles(({ t, dark }): Record<SkillStatus, { color: string; bg: string }> => (dark ? {
+  locked: { color: t.muted, bg: t.surfaceSecondary },
+  available: { color: t.info, bg: t.card },
+  in_progress: { color: t.info, bg: t.infoBg },
+  practiced: { color: t.success, bg: t.successBg },
+  assessed: { color: t.warning, bg: t.warningBg },
+} : {
+  locked: { color: '#8C99A6', bg: '#E9EEF2' },
+  available: { color: '#2E9AD6', bg: '#FFFFFF' },
+  in_progress: { color: '#2E9AD6', bg: '#E1F2FC' },
+  practiced: { color: '#22A06B', bg: '#E1F6EC' },
+  assessed: { color: '#C98A00', bg: '#FFF4CC' },
+}));
 
 /**
  * Hành trình sự nghiệp: choose a career, then walk its road. Each region is a group of skills, each milestone a skill; a
@@ -30,6 +44,9 @@ const STATUS: Record<SkillStatus, { label: string; color: string; bg: string; ic
  */
 export function CareerJourneyScreen({ user, onBack, onRewards }: Props) {
   const toast = useToast();
+  const { t } = useTheme();
+  const s = useStyles();
+  const tint = useStatusColors();
   const [careers, setCareers] = useState<CareerSummary[] | null>(null);
   const [detail, setDetail] = useState<CareerDetail | null>(null);
   const [error, setError] = useState<unknown>(null);
@@ -143,8 +160,8 @@ export function CareerJourneyScreen({ user, onBack, onRewards }: Props) {
             : <Text style={s.note}>Chưa có kỹ năng nào hoàn thành. Thực hành kỹ năng đầu tiên để bắt đầu hành trình nhé.</Text>}
           {done.map((x, i) => (
             <Pressable key={x.id} onPress={() => { setLookBack(false); setSkill(x); }} style={s.pastRow} accessibilityRole="button" accessibilityLabel={`Xem lại ${x.name}, ${STATUS[x.status].label}`}>
-              <View style={[s.pastDot, { backgroundColor: STATUS[x.status].bg, borderColor: STATUS[x.status].color }]}><Text style={[s.pastNumber, { color: STATUS[x.status].color }]}>{i + 1}</Text></View>
-              <View style={s.flex}><Text style={s.pastName}>{x.name}</Text><Text style={[s.small, { color: STATUS[x.status].color }]}>{x.group} · {STATUS[x.status].label}</Text></View>
+              <View style={[s.pastDot, { backgroundColor: tint[x.status].bg, borderColor: tint[x.status].color }]}><Text style={[s.pastNumber, { color: tint[x.status].color }]}>{i + 1}</Text></View>
+              <View style={s.flex}><Text style={s.pastName}>{x.name}</Text><Text style={[s.small, { color: tint[x.status].color }]}>{x.group} · {STATUS[x.status].label}</Text></View>
               <Ionicons name="chevron-forward" size={16} color={t.muted} />
             </Pressable>
           ))}
@@ -165,6 +182,7 @@ export function CareerJourneyScreen({ user, onBack, onRewards }: Props) {
 
 /** A badge: a gold medal once it is earned, an empty mould until then. */
 function Medal({ title, earned }: { title: string; earned: boolean }) {
+  const s = useStyles();
   const id = earned ? 'medal-gold' : 'medal-empty';
   return (
     <View style={s.medal} accessible accessibilityLabel={`Huy hiệu ${title}${earned ? ', đã đạt' : ''}`}>
@@ -181,6 +199,8 @@ function Medal({ title, earned }: { title: string; earned: boolean }) {
 }
 
 function CareerPicker({ careers, onChoose, compact = false }: { careers: CareerSummary[]; onChoose: (code: string, goal: string | null) => void; compact?: boolean }) {
+  const { t } = useTheme();
+  const s = useStyles();
   const [picked, setPicked] = useState<string | null>(null);
   const [goal, setGoal] = useState('');
   return (
@@ -198,7 +218,7 @@ function CareerPicker({ careers, onChoose, compact = false }: { careers: CareerS
         </Pressable>
       ))}
       {picked ? <>
-        <TextInput value={goal} onChangeText={setGoal} placeholder="Mục tiêu của bạn (không bắt buộc), ví dụ: Lên Senior trong 1 năm" placeholderTextColor="#7F95A8"
+        <TextInput value={goal} onChangeText={setGoal} placeholder="Mục tiêu của bạn (không bắt buộc), ví dụ: Lên Senior trong 1 năm" placeholderTextColor={t.placeholder}
           maxLength={200} style={s.input} accessibilityLabel="Mục tiêu nghề nghiệp" />
         <Button title="Bắt đầu hành trình" icon="rocket-outline" onPress={() => onChoose(picked, goal.trim() || null)} />
       </> : null}
@@ -208,13 +228,15 @@ function CareerPicker({ careers, onChoose, compact = false }: { careers: CareerS
 
 function SkillSheet({ skill, all, onClose, onReport, onAssess }: { skill: CareerSkill | null; all: CareerSkill[]; onClose: () => void;
   onReport: (s: CareerSkill, body: { progress_percent?: number; practiced?: boolean }) => void; onAssess: (s: CareerSkill, answers: number[]) => Promise<boolean> }) {
+  const s = useStyles();
+  const tint = useStatusColors();
   const [quiz, setQuiz] = useState(false);
   const [answers, setAnswers] = useState<number[]>([]);
   const [sending, setSending] = useState(false);
   useEffect(() => { setQuiz(false); setAnswers([]); }, [skill?.id]);
   if (!skill) return null;
   const names = (codes: string[]) => codes.map((c) => all.find((x) => x.code === c)?.name ?? c).join(', ');
-  const st = STATUS[skill.status];
+  const st = { ...STATUS[skill.status], ...tint[skill.status] };
   return (
     <OptionSheet visible={!!skill} title={skill.name} onClose={onClose}>
       <ScrollView contentContainerStyle={s.sheetBody}>
@@ -251,36 +273,37 @@ function SkillSheet({ skill, all, onClose, onReport, onAssess }: { skill: Career
   );
 }
 
-const s = StyleSheet.create({
-  fill: { flex: 1, backgroundColor: '#EAF7FD' },
+// The selected outline keeps its drawn blue in light; in dark the theme's accent.
+const useStyles = makeStyles(({ t, dark }) => StyleSheet.create({
+  fill: { flex: 1, backgroundColor: t.bg },
   flex: { flex: 1, minWidth: 0 },
   content: { paddingBottom: 120 },
   road: { position: 'relative', overflow: 'hidden' },
   summit: { paddingHorizontal: 16, paddingTop: 6, paddingBottom: 12, gap: 2 },
-  heroGoal: { fontSize: 13, lineHeight: 18, fontWeight: '700', color: '#4F6C86' },
+  heroGoal: { fontSize: 13, lineHeight: 18, fontWeight: '700', color: t.muted },
   medals: { gap: 10, paddingTop: 10, paddingRight: 16 },
   medal: { width: 84, alignItems: 'center', gap: 3 },
-  medalText: { fontSize: 10, lineHeight: 13, fontWeight: '700', color: '#4F6C86', textAlign: 'center' },
-  medalTextOn: { color: '#136FA8' },
-  medalBig: { alignItems: 'center', paddingVertical: 16, backgroundColor: '#EAF7FD', borderRadius: 16 },
+  medalText: { fontSize: 10, lineHeight: 13, fontWeight: '700', color: t.muted, textAlign: 'center' },
+  medalTextOn: { color: t.accent },
+  medalBig: { alignItems: 'center', paddingVertical: 16, backgroundColor: t.bg, borderRadius: 16 },
   pastRow: { flexDirection: 'row', alignItems: 'center', gap: 10, minHeight: 52 },
   pastDot: { width: 34, height: 34, borderRadius: 17, borderWidth: 2, alignItems: 'center', justifyContent: 'center' },
   pastNumber: { fontSize: 13, fontWeight: '900' },
   pastName: { fontSize: 15, fontWeight: '800', color: t.ink },
   legalWrap: { paddingHorizontal: 20, paddingTop: 12 },
-  skeleton: { height: 300, margin: 16, borderRadius: 24, backgroundColor: '#EAF7FD', opacity: 0.6 },
-  heroTitle: { fontSize: 17, lineHeight: 23, fontWeight: '900', color: '#123B5C' },
-  heroCount: { fontSize: 13, fontWeight: '800', color: '#136FA8' },
-  legal: { fontSize: 11, lineHeight: 15, color: '#4F6C86', textAlign: 'center' },
+  skeleton: { height: 300, margin: 16, borderRadius: 24, backgroundColor: t.bg, opacity: 0.6 },
+  heroTitle: { fontSize: 17, lineHeight: 23, fontWeight: '900', color: t.ink },
+  heroCount: { fontSize: 13, fontWeight: '800', color: t.accent },
+  legal: { fontSize: 11, lineHeight: 15, color: t.muted, textAlign: 'center' },
   picker: { paddingTop: 4, paddingHorizontal: 16, gap: 12 },
-  pickerIntro: { fontSize: 13, lineHeight: 18, fontWeight: '700', color: '#4F6C86' },
-  careerCard: { flexDirection: 'row', gap: 12, alignItems: 'center', backgroundColor: '#FFFFFF', borderRadius: 18, padding: 12, borderWidth: 2, borderColor: 'transparent' },
-  careerOn: { borderColor: '#2E9AD6', backgroundColor: '#F2FAFF' },
+  pickerIntro: { fontSize: 13, lineHeight: 18, fontWeight: '700', color: t.muted },
+  careerCard: { flexDirection: 'row', gap: 12, alignItems: 'center', backgroundColor: t.card, borderRadius: 18, padding: 12, borderWidth: 2, borderColor: 'transparent' },
+  careerOn: { borderColor: dark ? t.accent : '#2E9AD6', backgroundColor: t.surfaceSecondary },
   careerIcon: { fontSize: 32 },
   careerName: { fontSize: 15, fontWeight: '900', color: t.ink },
   note: { fontSize: 13, lineHeight: 18, color: t.muted },
   small: { fontSize: 11, color: t.muted },
-  input: { backgroundColor: '#FFFFFF', borderRadius: 14, borderWidth: 1.5, borderColor: t.border, paddingHorizontal: 14, paddingVertical: 12, fontSize: 15, color: t.ink },
+  input: { backgroundColor: t.inputBg, borderRadius: 14, borderWidth: 1.5, borderColor: t.inputBorder, paddingHorizontal: 14, paddingVertical: 12, fontSize: 15, color: t.ink },
   sheetBody: { gap: 10, paddingBottom: 8 },
   statusPill: { alignSelf: 'flex-start', flexDirection: 'row', alignItems: 'center', gap: 6, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 4 },
   statusText: { fontSize: 12, fontWeight: '900' },
@@ -288,7 +311,7 @@ const s = StyleSheet.create({
   label: { fontSize: 14, fontWeight: '900', color: t.ink },
   chips: { flexDirection: 'row', gap: 8 },
   question: { gap: 6 },
-  option: { borderRadius: 12, padding: 10, backgroundColor: '#F2F5F8', borderWidth: 2, borderColor: 'transparent', minHeight: 44, justifyContent: 'center' },
-  optionOn: { borderColor: '#2E9AD6', backgroundColor: '#E1F2FC' },
-  badgeNew: { fontSize: 16, fontWeight: '900', color: '#7A4D00' },
-});
+  option: { borderRadius: 12, padding: 10, backgroundColor: t.surfaceSecondary, borderWidth: 2, borderColor: 'transparent', minHeight: 44, justifyContent: 'center' },
+  optionOn: { borderColor: dark ? t.accent : '#2E9AD6', backgroundColor: t.infoBg },
+  badgeNew: { fontSize: 16, fontWeight: '900', color: t.warning },
+}));

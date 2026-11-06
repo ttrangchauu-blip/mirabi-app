@@ -6,7 +6,7 @@ import { usePetCheer } from '../../../games/engine/rig';
 import { Text } from '../../../components/Typography';
 import { Block, BLOCK_LABEL, blockCount, fault, Fault, isLoop, LOOP_MAX, LOOP_MIN, loopTimes, openLoop, Step, trace, walk, Walk } from '../../../learning/codePath';
 import type { Facing, Turn } from '../../../learning/types';
-import { appTheme as t } from '../../../theme';
+import { makeStyles, useTheme } from '../../../ui/theme';
 import { Boulder, Gem, GoalFlag } from '../../../games/art/effects';
 
 // The curriculum games' play areas (Ghép chữ is WordForest.tsx). Each also draws a guide page: `demo` sets what it shows (the real layout, with the
@@ -16,6 +16,8 @@ import { Boulder, Gem, GoalFlag } from '../../../games/art/effects';
 type Common = { turn: Turn; disabled: boolean; feedback?: { text: string; tone: 'good' | 'bad' } | null };
 
 function Feedback({ note }: { note?: Common['feedback'] }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   if (!note || !note.text) return null;
   return (
     <View style={[styles.feedback, note.tone === 'good' ? styles.feedbackGood : styles.feedbackBad]} accessibilityRole="alert"
@@ -29,6 +31,7 @@ function Feedback({ note }: { note?: Common['feedback'] }) {
 function Actions({ onReset, resetLabel = 'Xếp lại', resetDisabled, onCheck, checkLabel = 'Kiểm tra', checkDisabled }: {
   onReset: () => void; resetLabel?: string; resetDisabled: boolean; onCheck: () => void; checkLabel?: string; checkDisabled: boolean;
 }) {
+  const styles = useStyles();
   return (
     <View style={styles.actions}>
       <Pressable onPress={onReset} disabled={resetDisabled} accessibilityRole="button" accessibilityLabel={resetLabel}
@@ -48,6 +51,7 @@ export function SpellDetective({ turn, disabled, feedback, onFind, onFix, demo }
   onFind: (id: string) => void; onFix: (word: string, option: string) => void;
   demo?: { found?: string; tapped?: string; chosen?: string };
 }) {
+  const styles = useStyles();
   const p = turn.prompt;
   const found = demo?.found ?? (p.step === 'fix' ? p.found : undefined);
   const locked = disabled || !!demo;
@@ -96,6 +100,7 @@ export function zoneAt(point: { x: number; y: number }, zones: Zone[]): string |
 export function SortCards({ turn, disabled, feedback, onPlace, demo }: Common & {
   onPlace: (group: string) => void; demo?: { over?: string; placed?: string };
 }) {
+  const styles = useStyles();
   const p = turn.prompt;
   const groups = p.groups ?? [];
   const locked = disabled || !!demo;
@@ -174,6 +179,8 @@ export function CodePath({ turn, disabled, feedback, onRun, petId, petLevel, red
   onRun: (program: Block[]) => void; petId: string; petLevel: number; reduceMotion: boolean;
   demo?: { program: Block[]; step?: number };
 }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const p = turn.prompt;
   const [own, setOwn] = useState<Block[]>([]);
   const program = demo?.program ?? own;
@@ -322,7 +329,7 @@ export function CodePath({ turn, disabled, feedback, onRun, petId, petLevel, red
       </View>
       {wrongText ? (
         <View style={styles.fault} accessibilityRole="alert" accessibilityLiveRegion="polite">
-          <Ionicons name="hardware-chip-outline" size={18} color="#9A3B12" />
+          <Ionicons name="hardware-chip-outline" size={18} color={styles.faultText.color} />
           <Text style={styles.faultText}>{wrongText}</Text>
         </View>
       ) : null}
@@ -401,7 +408,7 @@ export function CodePath({ turn, disabled, feedback, onRun, petId, petLevel, red
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, tones, dark }) => StyleSheet.create({
   scene: { gap: 12, paddingVertical: 4 },
   pressed: { opacity: 0.8, transform: [{ scale: 0.97 }] },
   dimmed: { opacity: 0.45 },
@@ -411,26 +418,26 @@ const styles = StyleSheet.create({
   feedbackBad: { backgroundColor: t.dangerBg },
   feedbackText: { flex: 1, fontSize: 14, fontWeight: '700', lineHeight: 20 },
   actions: { flexDirection: 'row', gap: 8 },
-  primary: { flex: 1, minHeight: 46, borderRadius: 14, backgroundColor: t.accent, alignItems: 'center', justifyContent: 'center' },
-  primaryText: { color: '#FFFFFF', fontWeight: '900', fontSize: 16 },
+  primary: { flex: 1, minHeight: 46, borderRadius: 14, backgroundColor: t.accentFill, alignItems: 'center', justifyContent: 'center' },
+  primaryText: { color: t.onPrimary, fontWeight: '900', fontSize: 16 },
   secondary: { flex: 1, minHeight: 46, borderRadius: 14, backgroundColor: t.tint, alignItems: 'center', justifyContent: 'center' },
   secondaryText: { color: t.accent, fontWeight: '900', fontSize: 15 },
   // Thám tử chính tả
-  sentence: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, justifyContent: 'center', backgroundColor: '#FFFFFF', borderRadius: 18, padding: 14 },
+  sentence: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, justifyContent: 'center', backgroundColor: t.card, borderRadius: 18, padding: 14 },
   word: { minHeight: 44, paddingHorizontal: 10, borderRadius: 12, backgroundColor: t.tint, justifyContent: 'center' },
   wordText: { fontSize: 20, fontWeight: '800', color: t.ink },
   wordFound: { backgroundColor: t.dangerBg, borderWidth: 2, borderColor: t.danger },
   wordFoundText: { color: t.danger, textDecorationLine: 'underline' },
   wordTapped: { borderWidth: 2, borderColor: t.accent },
   options: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, justifyContent: 'center' },
-  option: { minWidth: 96, minHeight: 50, paddingHorizontal: 14, borderRadius: 14, backgroundColor: '#FFFFFF', borderWidth: 2, borderColor: t.border,
+  option: { minWidth: 96, minHeight: 50, paddingHorizontal: 14, borderRadius: 14, backgroundColor: t.card, borderWidth: 2, borderColor: t.border,
     alignItems: 'center', justifyContent: 'center' },
   optionText: { fontSize: 20, fontWeight: '900', color: t.ink },
   optionRight: { borderColor: t.success, backgroundColor: t.successBg },
   optionRightText: { color: t.success },
   // Phân loại cùng pet
   cardArea: { alignItems: 'center', minHeight: 150, justifyContent: 'center', zIndex: 2 },
-  sortCard: { width: 150, minHeight: 130, borderRadius: 22, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', padding: 10,
+  sortCard: { width: 150, minHeight: 130, borderRadius: 22, backgroundColor: t.card, alignItems: 'center', justifyContent: 'center', padding: 10,
     borderWidth: 2, borderColor: '#F2C46D', shadowColor: t.shadow, shadowOpacity: 0.15, shadowRadius: 12, shadowOffset: { width: 0, height: 6 }, elevation: 5 },
   sortCardDragged: { transform: [{ translateY: 40 }, { rotate: '-4deg' }] },
   cardEmoji: { fontSize: 54, lineHeight: 64 },
@@ -439,7 +446,7 @@ const styles = StyleSheet.create({
   zone: { width: '46%', minHeight: 92, borderRadius: 18, borderWidth: 2, borderStyle: 'dashed', borderColor: t.accent, backgroundColor: t.tint,
     alignItems: 'center', justifyContent: 'center', padding: 8, gap: 4 },
   zoneSmall: { width: '30%', minHeight: 80 },
-  zoneOver: { borderStyle: 'solid', backgroundColor: '#CFE8F7' },
+  zoneOver: { borderStyle: 'solid', backgroundColor: dark ? t.hero : '#CFE8F7' },
   zoneRight: { borderStyle: 'solid', borderColor: t.success, backgroundColor: t.successBg },
   zoneIcon: { fontSize: 26 },
   zoneLabel: { fontSize: 14, fontWeight: '900', color: t.ink, textAlign: 'center' },
@@ -461,31 +468,33 @@ const styles = StyleSheet.create({
     marginBottom: 1 },
   chassisHurt: { backgroundColor: '#C2414F' },
   wheel: { width: 6, height: 6, borderRadius: 3, backgroundColor: '#1D2B36', marginBottom: -3 },
-  facing: { position: 'absolute', right: -1, top: -1, borderRadius: 999, backgroundColor: t.accent, padding: 1 },
-  fault: { flexDirection: 'row', alignItems: 'flex-start', gap: 6, borderRadius: 12, padding: 10, backgroundColor: '#FFF1E8', borderWidth: 1.5, borderColor: '#F0A37A' },
-  faultText: { flex: 1, fontSize: 14, fontWeight: '800', color: '#9A3B12' },
+  // The robot's direction badge is part of the robot (art): the same blue on both themes.
+  facing: { position: 'absolute', right: -1, top: -1, borderRadius: 999, backgroundColor: '#136FA8', padding: 1 },
+  fault: { flexDirection: 'row', alignItems: 'flex-start', gap: 6, borderRadius: 12, padding: 10,
+    backgroundColor: dark ? t.warningBg : '#FFF1E8', borderWidth: 1.5, borderColor: dark ? '#7A5038' : '#F0A37A' },
+  faultText: { flex: 1, fontSize: 14, fontWeight: '800', color: dark ? '#FFB98F' : '#9A3B12' },
   programHead: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   programTitle: { fontSize: 14, fontWeight: '900', color: t.ink },
   counter: { fontSize: 13, fontWeight: '900', color: t.accent },
   counterFull: { color: t.danger },
-  program: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, minHeight: 52, backgroundColor: '#FFFFFF', borderRadius: 14, padding: 8,
+  program: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, minHeight: 52, backgroundColor: t.card, borderRadius: 14, padding: 8,
     borderWidth: 1.5, borderColor: t.border, alignItems: 'center' },
   programEmpty: { color: t.muted, fontSize: 13 },
   blockWrap: { flexDirection: 'row', alignItems: 'center' },
   block: { minHeight: 36, paddingHorizontal: 10, borderRadius: 10, backgroundColor: t.tint, justifyContent: 'center' },
-  blockInside: { backgroundColor: '#EFE7FF' },
+  blockInside: { backgroundColor: dark ? tones.lilac.from : '#EFE7FF' },
   blockLoop: { backgroundColor: '#5141A8' },
   blockEnd: { backgroundColor: '#5141A8', paddingHorizontal: 8 },
   blockDoing: { backgroundColor: '#F2A93B', transform: [{ scale: 1.08 }] },
   blockWrong: { backgroundColor: t.danger },
   blockText: { fontSize: 13, fontWeight: '900', color: t.accent },
-  blockLoopText: { color: '#FFFFFF' },
-  times: { marginLeft: 2, minHeight: 36, paddingHorizontal: 8, borderRadius: 10, backgroundColor: '#EEEAFF', justifyContent: 'center' },
-  timesText: { fontSize: 13, fontWeight: '900', color: '#5141A8' },
+  blockLoopText: { color: t.onPrimary },
+  times: { marginLeft: 2, minHeight: 36, paddingHorizontal: 8, borderRadius: 10, backgroundColor: dark ? tones.lilac.from : '#EEEAFF', justifyContent: 'center' },
+  timesText: { fontSize: 13, fontWeight: '900', color: tones.lilac.ink },
   palette: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  paletteBlock: { flexGrow: 1, minHeight: 44, minWidth: 90, borderRadius: 12, backgroundColor: '#FFFFFF', borderWidth: 1.5, borderColor: t.border,
+  paletteBlock: { flexGrow: 1, minHeight: 44, minWidth: 90, borderRadius: 12, backgroundColor: t.card, borderWidth: 1.5, borderColor: t.border,
     flexDirection: 'row', gap: 6, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 8 },
   paletteText: { fontSize: 14, fontWeight: '900', color: t.accent },
-  paletteLoop: { borderColor: '#5141A8', backgroundColor: '#EEEAFF' },
-  paletteLoopText: { fontSize: 14, fontWeight: '900', color: '#5141A8' },
-});
+  paletteLoop: { borderColor: tones.lilac.ink, backgroundColor: dark ? tones.lilac.from : '#EEEAFF' },
+  paletteLoopText: { fontSize: 14, fontWeight: '900', color: tones.lilac.ink },
+}));

@@ -12,9 +12,11 @@ import type { HatchPhase } from './usePetHatch';
 import { Text } from '../../components/Typography';
 import { petById } from '../../pets';
 import { TabKey } from '../../tabs';
-import { appTheme as t } from '../../theme';
 import { Avatar, Button, Card, formatNumber, IconCircle, IconName, ProgressBar, SectionHeader } from '../../ui/kit';
+import { type Theme, makeStyles, useTheme } from '../../ui/theme';
 import { useToast } from '../../ui/Toast';
+import { mixColor } from '../../components/daylight';
+import type { Element } from '../../elements';
 import { WalkLandscape } from './WalkLandscape';
 import { formatRemaining, normalizePetSpace, type PetSpace } from './petSpace';
 import { Dashboard, Quest, request, resolveQuestId, ScheduledTask, showError, taskRepeatDetail } from './shared';
@@ -23,12 +25,20 @@ import { combineLocal, todayOf } from './taskDateTime';
 const DAYS = ['Chủ nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
 const todayLabel = (day: string) => { const d = combineLocal(day, ''); return `${DAYS[d.getDay()]}, ${d.getDate()} tháng ${d.getMonth() + 1}`; };
 
-const SHORTCUTS: { icon: IconName; title: string; subtitle: string; tab: TabKey; color: string; bg: string; together?: boolean; focus?: boolean; friends?: boolean }[] = [
-  { icon: 'timer-outline', title: 'Tập trung', subtitle: 'Pomodoro 25 phút', tab: 'Study', color: '#136FA8', bg: '#DDF0FA', focus: true },
-  { icon: 'bed-outline', title: 'Nhà của pet', subtitle: 'Góc nhỏ của pet', tab: 'Room', color: '#5141A8', bg: '#EEEAFF' },
-  { icon: 'people-outline', title: 'Bạn bè', subtitle: 'Kết bạn, ghé phòng', tab: 'Room', color: '#B23A0A', bg: '#FFEBDD', friends: true },
-  { icon: 'people-circle-outline', title: 'Học cùng bạn', subtitle: 'Phòng học nhóm', tab: 'Study', color: '#0B6577', bg: '#DFF6FA', together: true },
+/** `look`: the style (in the theme's styles) that holds the tile's icon colour and its circle. */
+const SHORTCUTS: { icon: IconName; title: string; subtitle: string; tab: TabKey; look: 'shortcutSky' | 'shortcutLilac' | 'shortcutEmber' | 'shortcutSea'; together?: boolean; focus?: boolean; friends?: boolean }[] = [
+  { icon: 'timer-outline', title: 'Tập trung', subtitle: 'Pomodoro 25 phút', tab: 'Study', look: 'shortcutSky', focus: true },
+  { icon: 'bed-outline', title: 'Nhà của pet', subtitle: 'Góc nhỏ của pet', tab: 'Room', look: 'shortcutLilac' },
+  { icon: 'people-outline', title: 'Bạn bè', subtitle: 'Kết bạn, ghé phòng', tab: 'Room', look: 'shortcutEmber', friends: true },
+  { icon: 'people-circle-outline', title: 'Học cùng bạn', subtitle: 'Phòng học nhóm', tab: 'Study', look: 'shortcutSea', together: true },
 ];
+
+/** The pet frame in the element's colours: its pastel on light; on dark a deep wash of the colour and a lighter ink that reads on it. */
+function elementLook(element: Element, { t, dark }: Theme) {
+  return dark
+    ? { ink: mixColor(element.color, '#FFFFFF', 0.55), hero: [mixColor(element.color, t.card, 0.72), t.card] as const }
+    : { ink: element.color, hero: [element.bg, t.card] as const };
+}
 
 type Props = { user: User; dashboard: Dashboard | null;
   /** The dashboard could not be read: nothing is known about today's tasks. */ dashboardFailed?: boolean; onRetryDashboard?: () => void; onNavigate: (tab: TabKey) => void; onOpenProfile: () => void; onOpenStreak: () => void; onOpenDailyQuests: () => void; onOpenTaskCreate: (date: string, onCreated: (date: string) => void) => void; onQuestChanged: (quests: Quest[]) => Promise<void> | void;
@@ -45,7 +55,11 @@ type Props = { user: User; dashboard: Dashboard | null;
   /** Cuộc sống Mirabi → Bạn bè. */ onOpenFriends?: () => void };
 
 export function HomeTab({ user, dashboard, dashboardFailed = false, onRetryDashboard, onNavigate, onOpenProfile, onOpenStreak, onOpenDailyQuests, onOpenTaskCreate, onQuestChanged, petSpaceVersion = 0, onPetReturned, onOpenPetGifts, onOpenStudyTogether, onOpenFreeStudy, onOpenFriends, onOpenMemories, onOpenNotifications, hatch, onPetSpace }: Props) {
+  const theme = useTheme();
+  const { t } = theme;
+  const styles = useStyles();
   const pet = petById(user.pet);
+  const look = elementLook(pet.element, theme);
   const petName = user.pet_name ?? pet.name;
   const today = dashboard?.study?.today_sessions ?? 0;
   const unread = dashboard?.unread_notifications ?? 0;
@@ -172,11 +186,11 @@ export function HomeTab({ user, dashboard, dashboardFailed = false, onRetryDashb
         <Pill icon="diamond" color="#2E9AD6" text={formatNumber(user.gems)} label="Pha lê" />
       </View>
 
-      <LinearGradient colors={[pet.element.bg, '#FFFFFF']} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} style={styles.hero}>
+      <LinearGradient colors={look.hero} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} style={styles.hero}>
         <View style={styles.petHeader} accessible accessibilityLabel={`${petName}, hệ ${pet.element.label}`}>
           <Text style={styles.petName} numberOfLines={1}>{petName}</Text>
-          <View style={[styles.elementChip, { borderColor: `${pet.element.color}2E` }]}>
-            <Text style={[styles.elementChipText, { color: pet.element.color }]}>Hệ {pet.element.label}</Text>
+          <View style={[styles.elementChip, { borderColor: `${look.ink}2E` }]}>
+            <Text style={[styles.elementChipText, { color: look.ink }]}>Hệ {pet.element.label}</Text>
           </View>
           <Pressable onPress={onOpenMemories} accessibilityRole="button" accessibilityLabel="Mở Album kỷ niệm"
             style={({ pressed }) => [styles.albumButton, pressed && styles.pressed]}>
@@ -185,7 +199,7 @@ export function HomeTab({ user, dashboard, dashboardFailed = false, onRetryDashb
         </View>
         {!petSpace ? <View style={styles.petSpaceLoading}>{petSpaceError
           ? <Pressable onPress={() => { void loadPetSpace(); }} accessibilityRole="button" style={styles.petRetry}><Ionicons name="refresh" size={16} color={t.accent} /><Text style={styles.petRetryText}>Tải lại khung Pet</Text></Pressable>
-          : <><ActivityIndicator color={pet.element.color} /><Text style={styles.petLoadingText}>Đang tìm Pet của bạn…</Text></>}</View> :
+          : <><ActivityIndicator color={look.ink} /><Text style={styles.petLoadingText}>Đang tìm Pet của bạn…</Text></>}</View> :
         hatchShown ? <>
           <PetEvolutionProgress pet={pet.id} currentPetLevel={hatch!.level!} totalExp={user.xp} hatching={hatch!.phase === 'hatching'} onHatched={hatch!.onPlayed} />
           {petSpace.status === 'waiting_hatch' ? <HatchNote text="Pet sẽ đi khám phá sau khi nở xong" /> : null}
@@ -210,7 +224,7 @@ export function HomeTab({ user, dashboard, dashboardFailed = false, onRetryDashb
         <Pressable onPress={() => setTasksOpen((open) => !open)} accessibilityRole="button" accessibilityState={{ expanded: tasksOpen }}
           accessibilityLabel={`Nhiệm vụ hằng ngày: ${tasksSummary}`} accessibilityHint={tasksOpen ? 'Thu gọn danh sách nhiệm vụ' : 'Mở danh sách nhiệm vụ'}
           style={styles.questSummary}>
-          <LinearGradient colors={t.primary} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.questBadge}><Ionicons name="ribbon" size={22} color="#FFFFFF" /></LinearGradient>
+          <LinearGradient colors={t.primary} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.questBadge}><Ionicons name="ribbon" size={22} color={t.onPrimary} /></LinearGradient>
           <View style={styles.questSummaryCopy}>
             <Text style={styles.questSummaryTitle} accessibilityRole="header">Nhiệm vụ hằng ngày</Text>
             <Text style={styles.questSummaryCount}>{tasksSummary}</Text>
@@ -253,7 +267,7 @@ export function HomeTab({ user, dashboard, dashboardFailed = false, onRetryDashb
           <Pressable key={s.title} onPress={() => (s.together && onOpenStudyTogether ? onOpenStudyTogether()
             : s.focus && onOpenFreeStudy ? onOpenFreeStudy() : s.friends && onOpenFriends ? onOpenFriends() : onNavigate(s.tab))} accessibilityRole="button"
             accessibilityLabel={`${s.title}: ${s.subtitle}`} style={({ pressed }) => [styles.tile, pressed && styles.pressed]}>
-            <IconCircle name={s.icon} color={s.color} bg={s.bg} />
+            <IconCircle name={s.icon} color={styles[s.look].color} bg={styles[s.look].backgroundColor} />
             <Text style={styles.tileTitle}>{s.title}</Text>
             <Text style={styles.tileSub}>{s.subtitle}</Text>
           </Pressable>
@@ -277,6 +291,8 @@ function useWalkEntrance() {
 }
 
 function HatchNote({ text }: { text: string }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   return <View style={styles.hatchNote} accessibilityLiveRegion="polite">
     <Ionicons name="egg-outline" size={15} color={t.accent} /><Text style={styles.hatchNoteText}>{text}</Text>
   </View>;
@@ -286,6 +302,8 @@ const WALK_ONE_LINE_WIDTH = 390;
 
 /** `hatchNext`: the egg got its EXP during the walk; it keeps its shape and hatches once the pet is back. */
 function WalkScene({ pet, level, seconds, returnAt, hatchNext }: { pet: string; level: number; seconds: number; returnAt?: string | null; hatchNext: boolean }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const opacity = useWalkEntrance();
   const { width: screenWidth, fontScale } = useWindowDimensions();
   // The time left and the arrival share a line where they fit; on a narrow phone or with large text the arrival goes under it.
@@ -303,13 +321,14 @@ function WalkScene({ pet, level, seconds, returnAt, hatchNext }: { pet: string; 
         {arrival ? <Text style={[styles.walkArrival, !oneLine && styles.walkArrivalOwnLine]}>{oneLine ? '· ' : ''}Dự kiến về lúc <Text style={styles.walkArrivalTime}>{arrival}</Text></Text> : null}
       </View>
     </View>
-    <View style={styles.walkGiftLine}><Ionicons name="gift-outline" size={15} color="#966718" /><Text style={styles.mysteryRewardText}>Pet sẽ mang quà về sau chuyến khám phá.</Text></View>
+    <View style={styles.walkGiftLine}><Ionicons name="gift-outline" size={15} color={t.warning} /><Text style={styles.mysteryRewardText}>Pet sẽ mang quà về sau chuyến khám phá.</Text></View>
     {hatchNext ? <HatchNote text="Trứng đã đủ EXP · sẽ nở khi Pet trở về" /> : null}
   </Animated.View>;
 }
 
 /** Behind the gift popup while it is waiting to be confirmed; the button brings the popup back if it couldn't load. */
 function WalkReturnedScene({ pet, name, level, onOpenGifts }: { pet: string; name: string; level: number; onOpenGifts: () => Promise<void> }) {
+  const styles = useStyles();
   const opacity = useWalkEntrance();
   const [opening, setOpening] = useState(false);
   const open = async () => {
@@ -326,6 +345,7 @@ function WalkReturnedScene({ pet, name, level, onOpenGifts }: { pet: string; nam
 }
 
 function Pill({ icon, color, text, label }: { icon: IconName; color: string; text: string; label?: string }) {
+  const styles = useStyles();
   return (
     <View style={styles.pill} accessibilityLabel={label ? `${label}: ${text}` : text}>
       <Ionicons name={icon} size={16} color={color} />
@@ -335,6 +355,8 @@ function Pill({ icon, color, text, label }: { icon: IconName; color: string; tex
 }
 
 function Stat({ icon, value, label }: { icon: IconName; value: string; label: string }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   return (
     <View style={styles.stat}>
       <Ionicons name={icon} size={20} color={t.accent} />
@@ -362,24 +384,24 @@ function expRewardMessage(awarded: number, remaining: number) {
   if (remaining <= 0) return 'Đã chạm giới hạn EXP nhiệm vụ hôm nay.';
   return 'Nhiệm vụ này đã được hoàn thành trước đó; EXP không cộng trùng.';
 }
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, tones, dark }) => StyleSheet.create({
   flex: { flex: 1 },
   headerActions: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  streakButton: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFF1E6',
+  streakButton: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', backgroundColor: dark ? '#3A2A24' : '#FFF1E6',
     shadowColor: t.shadow, shadowOpacity: 0.06, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, elevation: 1 },
   greetRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   date: { fontSize: 12, color: t.muted, fontWeight: '600' },
   greeting: { fontSize: 19, fontWeight: '900', color: t.ink },
-  bell: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFFFFF',
+  bell: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', backgroundColor: t.card,
     shadowColor: t.shadow, shadowOpacity: 0.06, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, elevation: 1 },
   bellBadge: { position: 'absolute', top: 3, right: 3, minWidth: 17, height: 17, borderRadius: 9, backgroundColor: t.danger, alignItems: 'center',
     justifyContent: 'center', paddingHorizontal: 4 },
-  bellBadgeText: { color: '#FFFFFF', fontSize: 10, fontWeight: '900' },
+  bellBadgeText: { color: dark ? t.bg : t.onPrimary, fontSize: 10, fontWeight: '900' },
   wallet: { flexDirection: 'row', gap: 8, marginTop: 14, marginBottom: 16 },
-  pill: { flexDirection: 'row', alignItems: 'center', gap: 6, backgroundColor: '#FFFFFF', borderRadius: 999, paddingHorizontal: 12, paddingVertical: 7,
+  pill: { flexDirection: 'row', alignItems: 'center', gap: 6, backgroundColor: t.card, borderRadius: 999, paddingHorizontal: 12, paddingVertical: 7,
     shadowColor: t.shadow, shadowOpacity: 0.06, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, elevation: 1 },
   pillText: { fontSize: 14, fontWeight: '800', color: t.ink },
-  hero: { borderRadius: 28, padding: 18, marginBottom: 14, borderWidth: 1, borderColor: '#FFFFFF',
+  hero: { borderRadius: 28, padding: 18, marginBottom: 14, borderWidth: 1, borderColor: t.glassBorder,
     shadowColor: t.shadow, shadowOpacity: 0.1, shadowRadius: 18, shadowOffset: { width: 0, height: 8 }, elevation: 3 },
   petSpaceLoading: { minHeight: 230, alignItems: 'center', justifyContent: 'center', gap: 10 }, petLoadingText: { color: t.muted, fontSize: 12, fontWeight: '700' },
   petRetry: { minHeight: 40, flexDirection: 'row', alignItems: 'center', gap: 7, borderRadius: 13, backgroundColor: t.tint, paddingHorizontal: 14 }, petRetryText: { color: t.accent, fontSize: 12, fontWeight: '900' },
@@ -394,41 +416,41 @@ const styles = StyleSheet.create({
   walkArrival: { color: t.muted, fontSize: 12, fontWeight: '600' },
   walkArrivalOwnLine: { width: '100%', textAlign: 'center' },
   walkArrivalTime: { color: t.ink, fontWeight: '900' },
-  walkGiftLine: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 8, paddingHorizontal: 12, paddingVertical: 6, borderRadius: 999, backgroundColor: '#FFF8E5' },
-  hatchNote: { alignSelf: 'center', flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 8, backgroundColor: '#FFFFFFCC',
+  walkGiftLine: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 8, paddingHorizontal: 12, paddingVertical: 6, borderRadius: 999, backgroundColor: t.warningBg },
+  hatchNote: { alignSelf: 'center', flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 8, backgroundColor: t.glass,
     borderRadius: 999, paddingHorizontal: 12, paddingVertical: 6 },
   hatchNoteText: { color: t.accent, fontSize: 11, fontWeight: '800' },
   returnedContent: { alignItems: 'center', paddingHorizontal: 8, paddingBottom: 6 },
   returnedPet: { height: 110, justifyContent: 'center' },
   petHeader: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 12, paddingTop: 2, marginBottom: 10 },
-  albumButton: { marginLeft: 'auto', flexDirection: 'row', alignItems: 'center', gap: 5, backgroundColor: '#FFFFFFCC', borderRadius: 14, paddingHorizontal: 10, paddingVertical: 7 },
+  albumButton: { marginLeft: 'auto', flexDirection: 'row', alignItems: 'center', gap: 5, backgroundColor: t.glass, borderRadius: 14, paddingHorizontal: 10, paddingVertical: 7 },
   albumText: { color: t.accent, fontSize: 13, fontWeight: '900' },
   petName: { flexShrink: 1, fontSize: 22, lineHeight: 27, fontWeight: '900', color: t.ink, letterSpacing: -0.3 },
-  elementChip: { borderRadius: 999, borderWidth: 1, paddingHorizontal: 9, paddingVertical: 2, backgroundColor: 'rgba(255,255,255,0.75)' },
+  elementChip: { borderRadius: 999, borderWidth: 1, paddingHorizontal: 9, paddingVertical: 2, backgroundColor: dark ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.75)' },
   elementChipText: { fontSize: 11, fontWeight: '800', letterSpacing: 0.2 },
   stats: { flexDirection: 'row', gap: 10, marginBottom: 10 },
-  stat: { flex: 1, backgroundColor: '#FFFFFF', borderRadius: 20, paddingVertical: 14, paddingHorizontal: 12,
+  stat: { flex: 1, backgroundColor: t.card, borderRadius: 20, paddingVertical: 14, paddingHorizontal: 12,
     shadowColor: t.shadow, shadowOpacity: 0.06, shadowRadius: 10, shadowOffset: { width: 0, height: 4 }, elevation: 1 },
   statValue: { fontSize: 20, fontWeight: '900', color: t.ink, marginTop: 6 },
   statLabel: { fontSize: 12, color: t.muted, marginTop: 1 },
   grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12, marginBottom: 10 },
-  tile: { width: '47.8%', backgroundColor: '#FFFFFF', borderRadius: 22, padding: 16,
+  tile: { width: '47.8%', backgroundColor: t.card, borderRadius: 22, padding: 16,
     shadowColor: t.shadow, shadowOpacity: 0.06, shadowRadius: 10, shadowOffset: { width: 0, height: 4 }, elevation: 1 },
   pressed: { transform: [{ scale: 0.97 }] },
   tileTitle: { fontSize: 16, fontWeight: '800', color: t.ink, marginTop: 12 },
   tileSub: { fontSize: 13, color: t.muted, marginTop: 2 },
   muted: { fontSize: 14, lineHeight: 21, color: t.muted },
   walkIntro: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 14 },
-  walkIcon: { width: 48, height: 48, borderRadius: 16, alignItems: 'center', justifyContent: 'center', backgroundColor: '#E4F2FC' },
+  walkIcon: { width: 48, height: 48, borderRadius: 16, alignItems: 'center', justifyContent: 'center', backgroundColor: t.tint },
   walkCopy: { flex: 1, gap: 3 },
   walkTitle: { fontSize: 15, fontWeight: '900', color: t.ink },
   walkProgress: { color: t.muted, fontSize: 12, lineHeight: 18, marginTop: 8 },
-  walkCountdown: { height: 44, borderRadius: 14, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, backgroundColor: '#EAF5FC' },
+  walkCountdown: { height: 44, borderRadius: 14, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, backgroundColor: t.tint },
   walkCountdownText: { color: t.accent, fontSize: 16, fontWeight: '900' },
   walkProgressHead: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 8, gap: 8 },
-  mysteryReward: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 7, backgroundColor: '#FFF8E5', paddingVertical: 10, borderRadius: 13, marginTop: 12 },
-  mysteryRewardText: { color: '#805A18', fontSize: 11, fontWeight: '800' },
-  foundItem: { flexDirection: 'row', alignItems: 'center', gap: 10, marginTop: 12, padding: 12, borderRadius: 14, backgroundColor: '#FFF6D9' },
+  mysteryReward: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 7, backgroundColor: t.warningBg, paddingVertical: 10, borderRadius: 13, marginTop: 12 },
+  mysteryRewardText: { color: t.warning, fontSize: 11, fontWeight: '800' },
+  foundItem: { flexDirection: 'row', alignItems: 'center', gap: 10, marginTop: 12, padding: 12, borderRadius: 14, backgroundColor: t.warningBg },
   foundEmoji: { fontSize: 28 },
   foundText: { flex: 1, color: t.ink, fontSize: 13, fontWeight: '800' },
   collectionSummary: { marginTop: 10, color: t.muted, fontSize: 12, fontWeight: '700' },
@@ -453,4 +475,9 @@ const styles = StyleSheet.create({
   questTitle: { flex: 1, fontSize: 15, fontWeight: '700', color: t.ink },
   questDone: { color: t.success },
   questProgress: { fontSize: 14, fontWeight: '800', color: t.muted },
-});
+  // The quick tiles' icon and circle (read as .color / .backgroundColor). Bạn bè keeps its ember, which no tone has.
+  shortcutSky: { color: tones.sky.ink, backgroundColor: t.tint },
+  shortcutLilac: { color: tones.lilac.ink, backgroundColor: dark ? tones.lilac.from : '#EEEAFF' },
+  shortcutEmber: { color: dark ? '#FFB48A' : '#B23A0A', backgroundColor: dark ? '#3D2A24' : '#FFEBDD' },
+  shortcutSea: { color: tones.sea.ink, backgroundColor: tones.sea.from },
+}));

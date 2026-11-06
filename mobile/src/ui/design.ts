@@ -1,9 +1,9 @@
 import type { StyleProp, ViewStyle } from 'react-native';
-import { appTheme } from '../theme';
+import { type Tone, themes } from './theme';
 
 /**
  * Mirabi Design System: the one set of sizes, type, surfaces and tones every screen shares (docs/LIVING_WORLD.md).
- * Colours of the app stay in theme.ts; this says how they are used. The kit (ui/kit.tsx) reads from here, so a screen
+ * Colours are in ui/theme.tsx (light and dark); this says how they are used. The kit (ui/kit.tsx) reads from here, so a screen
  * built with the kit follows it without knowing it.
  */
 
@@ -25,23 +25,11 @@ export const type = {
   micro: { fontSize: 11, lineHeight: 14, fontWeight: '800' },
 } as const;
 
-/** Depth, from a card lying on the page to a panel floating over a scene. */
-export const elevation = {
-  card: { shadowColor: appTheme.shadow, shadowOpacity: 0.07, shadowRadius: 12, shadowOffset: { width: 0, height: 4 }, elevation: 2 },
-  raised: { shadowColor: appTheme.shadow, shadowOpacity: 0.12, shadowRadius: 14, shadowOffset: { width: 0, height: 6 }, elevation: 4 },
-  floating: { shadowColor: '#0A2438', shadowOpacity: 0.16, shadowRadius: 12, shadowOffset: { width: 0, height: 3 }, elevation: 5 },
-} as const satisfies Record<string, StyleProp<ViewStyle>>;
-
-/** A panel over a scene: light enough to see the world through it, solid enough for its text at noon and at night. */
-export const glass = { backgroundColor: 'rgba(255,255,255,0.90)', borderWidth: 1, borderColor: 'rgba(255,255,255,0.95)' } as const;
-
-/** The six tones of icons and tiles: every illustrated badge is one of these, deep on pastel at >= 4.5:1. */
-export const tones = {
-  sky: { ink: '#136FA8', from: '#E2F3FC', to: '#C6E6F8' },
-  leaf: { ink: '#1F6B36', from: '#E4F6E2', to: '#C5EBC2' },
-  sun: { ink: '#7A4D00', from: '#FFF4D2', to: '#FFE3A1' },
-  rose: { ink: '#A3326B', from: '#FDE8F2', to: '#F9CEE2' },
-  lilac: { ink: '#5141A8', from: '#EFECFF', to: '#DAD3FB' },
-  sea: { ink: '#0B6577', from: '#DFF6FA', to: '#BDEBF3' },
-} as const;
-export type Tone = keyof typeof tones;
+/**
+ * Depth, panels over a scene and the six tones depend on light or dark: a screen takes them from useTheme() /
+ * makeStyles (ui/theme.tsx). These are the light ones, for code that has no theme at hand (tests, art).
+ */
+export const elevation = themes.light.elevation satisfies Record<string, StyleProp<ViewStyle>>;
+export const glass = themes.light.glass;
+export const tones = themes.light.tones;
+export type { Tone };

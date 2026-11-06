@@ -12,7 +12,7 @@ import { useGameAssets } from '../../learning/useGameAssets';
 import { useGameClock } from '../../learning/useGameClock';
 import { answerKey } from '../../learning/answerKey';
 import { useLearningSession } from '../../learning/useLearningSession';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { Button, IconName, SoftInput } from '../../ui/kit';
 import { useConfirm } from '../../ui/ConfirmDialog';
 import { useToast } from '../../ui/Toast';
@@ -120,6 +120,8 @@ type Notice = { text: string; tone: 'good' | 'bad' | 'info' } | null;
 type Explained = { turn: Turn; result: TurnResult; answer: string | string[] | null; graded: boolean };
 
 export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs, onEnded, startsAt = null, backend, tutorial }: Props) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const toast = useToast();
   const confirm = useConfirm();
   const notify = useCallback((message: string, tone: 'info' | 'error' = 'info') => toast(message, tone), [toast]);
@@ -928,6 +930,7 @@ export function GameScreen({ initial, autoStart = false, petId, petLevel, prefs,
 /** "3 → 2 → 1 → Bắt đầu!", big in the middle, over a screen dark enough that the first question is not read early. */
 /** "Bỏ qua": jumps the world's reaction to its end. It shows only once a reaction has been playing for a moment. */
 function SkipButton({ onSkip }: { onSkip: () => void }) {
+  const styles = useStyles();
   const [shown, setShown] = useState(false);
   useEffect(() => { const timer = setTimeout(() => setShown(true), SKIP_AFTER_MS); return () => clearTimeout(timer); }, []);
   if (!shown) return null;
@@ -942,6 +945,7 @@ function SkipButton({ onSkip }: { onSkip: () => void }) {
 }
 
 function Countdown({ value, preparing, reduceMotion }: { value: number; preparing: boolean; reduceMotion: boolean }) {
+  const styles = useStyles();
   const pop = useRef(new Animated.Value(1)).current;
   useEffect(() => {
     if (reduceMotion || preparing) { pop.setValue(1); return; }
@@ -968,6 +972,8 @@ function Countdown({ value, preparing, reduceMotion }: { value: number; preparin
  * them). Falling words show their progress as "Đã xử lý X/15" (shot or missed). */
 function Hud({ session, score, resolved, falling, remaining, prefs, onPause }: { session: LearningSession; score: number; resolved: number;
   falling: boolean; remaining: number; prefs: LearningPrefs; onPause: () => void }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const challenge = session.mode === 'challenge';
   const { width } = useViewportSize();
   // Hearts (and in Thử thách the score) take room: on a narrow phone the row only keeps "Tạm dừng" (the back arrow does
@@ -1028,6 +1034,7 @@ function Steady({ children, testID }: { children: React.ReactNode; testID?: stri
 
 /** The falling words' card while no word is falling (before "Bắt đầu!", or the next word is on its way): the same size. */
 function PromptBlank() {
+  const styles = useStyles();
   return (
     <View style={[styles.prompt, styles.promptCompact]} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
       <View style={styles.promptHead}>
@@ -1040,6 +1047,7 @@ function PromptBlank() {
 }
 
 function PromptCard({ turn, game, notice }: { turn: Turn; game: string; notice?: Notice }) {
+  const styles = useStyles();
   const p = turn.prompt;
   let main = '';
   let sub: string | null = null;
@@ -1114,6 +1122,8 @@ function retyped(turn: Turn | undefined) {
 }
 
 function Overlay({ title, icon, message, children }: { title: string; icon: IconName; message: string; children: React.ReactNode }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   return (
     <View style={styles.overlay}>
       <View style={styles.sheet} accessibilityRole="alert">
@@ -1127,16 +1137,18 @@ function Overlay({ title, icon, message, children }: { title: string; icon: Icon
 }
 
 function Toggle({ label, icon, value, onChange }: { label: string; icon: IconName; value: boolean; onChange: (v: boolean) => void }) {
+  const { t } = useTheme();
+  const styles = useStyles();
   return (
     <Pressable onPress={() => onChange(!value)} accessibilityRole="switch" accessibilityState={{ checked: value }} accessibilityLabel={label}
       style={[styles.toggle, value && styles.toggleOn]}>
-      <Ionicons name={icon} size={18} color={value ? '#FFFFFF' : t.accent} />
+      <Ionicons name={icon} size={18} color={value ? t.onPrimary : t.accent} />
       <Text style={[styles.toggleText, value && styles.toggleTextOn]}>{label}</Text>
     </Pressable>
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, dark }) => StyleSheet.create({
   fill: { flex: 1 },
   flex: { flex: 1 },
   center: { alignSelf: 'center' },
@@ -1146,13 +1158,13 @@ const styles = StyleSheet.create({
   // Never wrapped or squeezed: with hearts and score (Thử thách) the row is full on a phone.
   hudText: { fontSize: 15, fontWeight: '900', color: t.ink, flexShrink: 0 },
   hearts: { fontSize: 18, color: '#E0475B', fontWeight: '900', flexShrink: 0 },
-  heartLost: { color: '#D3DCE3' },
+  heartLost: { color: dark ? '#3A4C66' : '#D3DCE3' },
   offline: { flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: t.dangerBg, borderRadius: 14, padding: 10, marginBottom: 8 },
   offlineText: { flex: 1, color: t.danger, fontSize: 13, fontWeight: '700' },
-  retry: { backgroundColor: '#FFFFFF', borderRadius: 10, paddingHorizontal: 10, paddingVertical: 6 },
+  retry: { backgroundColor: t.card, borderRadius: 10, paddingHorizontal: 10, paddingVertical: 6 },
   retryText: { color: t.danger, fontWeight: '900' },
   waiting: { minHeight: 80, alignItems: 'center', justifyContent: 'center' },
-  prompt: { backgroundColor: '#FFFFFF', borderRadius: 20, padding: 14, marginBottom: 8,
+  prompt: { backgroundColor: t.card, borderRadius: 20, padding: 14, marginBottom: 8,
     shadowColor: t.shadow, shadowOpacity: 0.08, shadowRadius: 10, shadowOffset: { width: 0, height: 4 }, elevation: 2 },
   promptCompact: { paddingVertical: 10 },
   promptHead: { flexDirection: 'row', alignItems: 'center', gap: 10 },
@@ -1167,17 +1179,17 @@ const styles = StyleSheet.create({
   promptBlank: { backgroundColor: 'transparent' },
   noticeGood: { color: t.success },
   noticeBad: { color: t.danger },
-  hintRow: { flexDirection: 'row', alignItems: 'flex-start', gap: 6, marginTop: 6, backgroundColor: '#FFF6E5', borderRadius: 10,
+  hintRow: { flexDirection: 'row', alignItems: 'flex-start', gap: 6, marginTop: 6, backgroundColor: t.warningBg, borderRadius: 10,
     paddingHorizontal: 8, paddingVertical: 5 },
-  hint: { flex: 1, fontSize: 14, color: '#8A5A00', fontWeight: '700' },
-  hintInline: { color: '#8A5A00', fontWeight: '700' },
+  hint: { flex: 1, fontSize: 14, color: t.warning, fontWeight: '700' },
+  hintInline: { color: t.warning, fontWeight: '700' },
   // Floats over the top of the play area: showing it never moves the game down.
   noticeLayer: { position: 'absolute', top: 8, left: 0, right: 0, alignItems: 'center', zIndex: 5 },
   skipLayer: { position: 'absolute', top: 6, right: 6, zIndex: 6 },
   skip: { flexDirection: 'row', alignItems: 'center', gap: 4, minHeight: 32, paddingHorizontal: 12, borderRadius: 999, backgroundColor: 'rgba(30,38,60,0.72)' },
   skipText: { color: '#FFFFFF', fontWeight: '900', fontSize: 13 },
   notice: { borderRadius: 999, paddingHorizontal: 14, paddingVertical: 7, fontWeight: '800', overflow: 'hidden', maxWidth: '92%', textAlign: 'center',
-    shadowColor: '#0B2A4A', shadowOpacity: 0.18, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, elevation: 4 },
+    shadowColor: dark ? '#000000' : '#0B2A4A', shadowOpacity: 0.18, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, elevation: 4 },
   playWrap: { flex: 1 },
   // Falling words: the answer's card at the bottom of the paused field (the word card above stays in sight).
   feedbackDock: { position: 'absolute', left: 0, right: 0, bottom: 0, zIndex: 7 },
@@ -1193,10 +1205,10 @@ const styles = StyleSheet.create({
   helpRow: { flexDirection: 'row', gap: 8, marginTop: 8 },
   help: { flex: 1, minHeight: 40, borderRadius: 12, backgroundColor: t.tint, flexDirection: 'row', gap: 6, alignItems: 'center', justifyContent: 'center' },
   helpText: { color: t.accent, fontWeight: '800', fontSize: 14 },
-  overlay: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(18,59,92,0.45)', alignItems: 'center', justifyContent: 'center', padding: 20 },
+  overlay: { ...StyleSheet.absoluteFillObject, backgroundColor: t.scrim, alignItems: 'center', justifyContent: 'center', padding: 20 },
   // The tutorial watched again during a game: over the whole paused game.
-  replayLayer: { ...StyleSheet.absoluteFillObject, backgroundColor: '#EAF6FF', zIndex: 30 },
-  sheet: { width: '100%', maxWidth: 420, backgroundColor: '#FFFFFF', borderRadius: 24, padding: 20, gap: 6 },
+  replayLayer: { ...StyleSheet.absoluteFillObject, backgroundColor: t.bg, zIndex: 30 },
+  sheet: { width: '100%', maxWidth: 420, backgroundColor: t.card, borderRadius: 24, padding: 20, gap: 6 },
   introSheet: { maxHeight: '85%' },
   sheetTitle: { fontSize: 20, fontWeight: '900', color: t.ink, textAlign: 'center' },
   countdownLayer: { backgroundColor: 'rgba(14,44,72,0.9)', gap: 10, zIndex: 20 },
@@ -1205,7 +1217,7 @@ const styles = StyleSheet.create({
   countdownHint: { fontSize: 16, fontWeight: '800', color: 'rgba(255,255,255,0.8)' },
   toggles: { flexDirection: 'row', gap: 8, marginTop: 8 },
   toggle: { flex: 1, minHeight: 44, borderRadius: 12, backgroundColor: t.tint, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6 },
-  toggleOn: { backgroundColor: t.accent },
+  toggleOn: { backgroundColor: t.accentFill },
   toggleText: { color: t.accent, fontWeight: '800', fontSize: 13 },
-  toggleTextOn: { color: '#FFFFFF' },
-});
+  toggleTextOn: { color: t.onPrimary },
+}));

@@ -5,7 +5,8 @@ import { Text, TextInput } from '../../components/Typography';
 import { showAlert } from '../../components/dialogs';
 import { Button, Chip } from '../../ui/kit';
 import type { FocusTimer } from './MainApp';
-import { focusTheme as f } from './focusSpaceTheme';
+import { focusThemeOf } from './focusSpaceTheme';
+import { makeStyles, useTheme } from '../../ui/theme';
 
 export const soundOptions = [
   { id: 'rain', title: 'Mưa nhẹ', icon: 'rainy-outline' as const, hint: 'Bên hiên nhà' },
@@ -19,6 +20,8 @@ export const soundOptions = [
 export const noSoundOption = { id: 'none', title: 'Không có', icon: 'volume-mute-outline' as const, hint: 'Học trong yên lặng' };
 
 export function FocusTimeSettings({ timer, onSaved }: { timer: FocusTimer; onSaved: () => void }) {
+  const f = focusThemeOf(useTheme().dark);
+  const s = useStyles();
   const [focus, setFocus] = useState(String(timer.focusMinutes));
   const [short, setShort] = useState(timer.shortBreakMinutes);
   const [long, setLong] = useState(timer.longBreakMinutes);
@@ -59,6 +62,8 @@ export function FocusTimeSettings({ timer, onSaved }: { timer: FocusTimer; onSav
 }
 
 export function FocusSoundSettings({ timer }: { timer: FocusTimer }) {
+  const f = focusThemeOf(useTheme().dark);
+  const s = useStyles();
   // `timer.sound` remembers the last track; while sound is off, "Không có" is the selected choice.
   const selected = timer.soundOn ? timer.sound : noSoundOption.id;
   return <>
@@ -78,13 +83,13 @@ export function FocusSoundSettings({ timer }: { timer: FocusTimer }) {
   </>;
 }
 
-const s = StyleSheet.create({
+const useStyles = makeStyles(({ t, dark }) => { const f = focusThemeOf(dark); return StyleSheet.create({
   label: { fontSize: 14, fontWeight: '800', color: f.ink, marginTop: 4 }, copy: { color: f.muted, fontSize: 12, lineHeight: 19, flexShrink: 1 },
   wrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 }, row: { flexDirection: 'row', alignItems: 'center', gap: 8 }, half: { flex: 1, minWidth: 0 },
-  number: { width: 72, padding: 12, borderWidth: 1, borderColor: f.line, borderRadius: 12, fontSize: 16, color: f.ink, backgroundColor: '#FFFFFF' },
+  number: { width: 72, padding: 12, borderWidth: 1, borderColor: f.line, borderRadius: 12, fontSize: 16, color: f.ink, backgroundColor: t.inputBg },
   advanced: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 12 }, link: { color: f.blue, fontWeight: '700', fontSize: 13 }, divider: { height: 1, backgroundColor: f.line, marginVertical: 8 },
   sounds: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 }, sound: { flexBasis: '46%', flexGrow: 1, minWidth: 0, padding: 14, borderRadius: 16, backgroundColor: f.cream, gap: 6, borderWidth: 1, borderColor: 'transparent' },
-  soundActive: { backgroundColor: '#EDF5F8', borderColor: '#A7CDDD' }, soundName: { color: f.ink, fontSize: 13, fontWeight: '700' }, soundHint: { fontSize: 10, color: f.muted },
+  soundActive: { backgroundColor: dark ? t.hero : '#EDF5F8', borderColor: dark ? t.inputFocus : '#A7CDDD' }, soundName: { color: f.ink, fontSize: 13, fontWeight: '700' }, soundHint: { fontSize: 10, color: f.muted },
   volumeButton: { width: 44, height: 44, alignItems: 'center', justifyContent: 'center', backgroundColor: f.cream, borderRadius: 14 },
-  volumeTrack: { height: 5, flex: 1, borderRadius: 3, backgroundColor: '#E1E5E5', overflow: 'hidden' }, volumeFill: { height: 5, borderRadius: 3, backgroundColor: f.blue },
-});
+  volumeTrack: { height: 5, flex: 1, borderRadius: 3, backgroundColor: t.track, overflow: 'hidden' }, volumeFill: { height: 5, borderRadius: 3, backgroundColor: f.blue },
+}); });

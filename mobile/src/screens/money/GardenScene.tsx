@@ -6,7 +6,7 @@ import Svg, { Circle, Defs, Ellipse, RadialGradient, Stop } from 'react-native-s
 import { sunAt } from '../../components/daylight';
 import { Text } from '../../components/Typography';
 import { formatVnd, type FinanceGoal } from '../../life/worlds';
-import { appTheme as t } from '../../theme';
+import { makeStyles } from '../../ui/theme';
 import { useAtmosphere } from '../../world/atmosphere';
 import { useFrameWatch, useSwing, useTravel, useWorldMotion } from '../../world/budget';
 import { Hit, Plate, Triumph, useSize } from '../../world/diorama';
@@ -217,6 +217,7 @@ const SlotGround = memo(function SlotGround({ goal, index, l, focus, night }: { 
 const Slot = memo(function Slot({ goal, index, l, focus, picked, wind, rustle, night, still, onPick }: { goal: FinanceGoal; index: number; l: Layout; focus: Animated.Value; picked: boolean; wind: number;
   rustle: number; night: number; still: boolean; onPick: (id: number) => void }) {
   const { level } = useWorldMotion();
+  const tag = useTagStyles();
   const done = goal.percent >= 100;
   const center = l.slot / 2;
   return (
@@ -227,10 +228,10 @@ const Slot = memo(function Slot({ goal, index, l, focus, picked, wind, rustle, n
         <GoalTree plant={goal.plant} stage={goal.stage} size={l.box} wind={wind} rustle={rustle} night={night} still={still} />
         {done && level === 'full' && !still ? <View style={{ position: 'absolute', left: l.box * FOOT.x, top: l.box * BOX_TALL * FOOT.y }}><Sparks world={l.world} color={PLANT_BLOOM.sunflower} /></View> : null}
       </Animated.View>
-      <View pointerEvents="none" style={[s.tag, picked && s.tagOn, { top: l.feet - CHROME + l.world * TAG_BELOW, left: (l.slot - Math.min(l.slot - 8, 128)) / 2, width: Math.min(l.slot - 8, 128) }]}>
-        <Text style={s.tagName} numberOfLines={1}>{goal.name}</Text>
-        <Text style={s.tagPercent}>{goal.percent}%</Text>
-        <View style={s.tagTrack}><View style={[s.tagFill, { width: `${Math.max(0, Math.min(100, goal.percent))}%` }]} /></View>
+      <View pointerEvents="none" style={[tag.tag, picked && tag.tagOn, { top: l.feet - CHROME + l.world * TAG_BELOW, left: (l.slot - Math.min(l.slot - 8, 128)) / 2, width: Math.min(l.slot - 8, 128) }]}>
+        <Text style={tag.tagName} numberOfLines={1}>{goal.name}</Text>
+        <Text style={tag.tagPercent}>{goal.percent}%</Text>
+        <View style={tag.tagTrack}><View style={[s.tagFill, { width: `${Math.max(0, Math.min(100, goal.percent))}%` }]} /></View>
       </View>
     </Pressable>
   );
@@ -244,6 +245,7 @@ const Slot = memo(function Slot({ goal, index, l, focus, picked, wind, rustle, n
 export function GardenScene({ goals, selected, onSelect, onNew, watering, burst, land, pet }: { goals: FinanceGoal[]; selected: number | null; onSelect: (id: number) => void; onNew: () => void;
   watering: number; burst: number; land: number; pet?: { id: string; level: number } | null }) {
   const [size, onLayout] = useSize({ width: 384, height: CHROME + land });
+  const tag = useTagStyles();
   const { width } = size;
   const l = useMemo(() => gardenLayout(width, land), [width, land]);
   const { reading } = useWeather();
@@ -339,7 +341,7 @@ export function GardenScene({ goals, selected, onSelect, onNew, watering, burst,
             </Svg>
             <Ionicons name="add" size={38} color="#F2A92E" />
           </View>
-          <View pointerEvents="none" style={[s.tag, s.plotTag, { top: l.feet - CHROME + l.world * TAG_BELOW, left: (l.slot - Math.min(l.slot - 8, 128)) / 2, width: Math.min(l.slot - 8, 128) }]}><Text style={s.tagName}>Gieo hạt mới</Text></View>
+          <View pointerEvents="none" style={[tag.tag, s.plotTag, { top: l.feet - CHROME + l.world * TAG_BELOW, left: (l.slot - Math.min(l.slot - 8, 128)) / 2, width: Math.min(l.slot - 8, 128) }]}><Text style={tag.tagName}>Gieo hạt mới</Text></View>
         </Pressable>
         {goals.length ? (
           <View style={[s.canSpot, { left: plotCenter + l.slot * 0.42, top: l.feet - 30 }]}>
@@ -367,7 +369,7 @@ export function GardenScene({ goals, selected, onSelect, onNew, watering, burst,
         <Snow width={width} height={l.scene} strength={mood.snow} />
         <Fireflies width={width} top={horizon} height={l.scene - horizon} strength={c.fireflies} />
       </View>
-      {canNote ? <View style={[s.tag, s.canNote]}><Text style={s.canNoteText} accessibilityLiveRegion="polite">Cây vui lắm! Cây chỉ lớn khi bạn ghi một khoản tiết kiệm.</Text></View> : null}
+      {canNote ? <View style={[tag.tag, s.canNote]}><Text style={tag.canNoteText} accessibilityLiveRegion="polite">Cây vui lắm! Cây chỉ lớn khi bạn ghi một khoản tiết kiệm.</Text></View> : null}
     </View>
   );
 }
@@ -390,20 +392,26 @@ const s = StyleSheet.create({
   signIcon: { width: 17, height: 17 },
   signTextNight: { color: '#FFF3D6' },
   signLabel: { flexShrink: 1, fontSize: 11, fontWeight: '800', color: '#4A3418' },
-  signValue: { fontSize: 17, fontWeight: '900', color: t.ink },
+  // Painted on the wooden sign: part of the picture, the same in light and dark.
+  signValue: { fontSize: 17, fontWeight: '900', color: '#123B5C' },
   slot: { position: 'absolute', top: CHROME },
   plantWrap: { position: 'absolute' },
   plus: { position: 'absolute', alignSelf: 'center', width: 72, height: 72, alignItems: 'center', justifyContent: 'center' },
-  tag: { position: 'absolute', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.96)', borderRadius: 14, paddingHorizontal: 8, paddingVertical: 4, borderWidth: 1.5, borderColor: '#F0DFC0',
-    shadowColor: t.shadow, shadowOpacity: 0.18, shadowRadius: 5, shadowOffset: { width: 0, height: 2 }, elevation: 3 },
-  tagOn: { borderColor: '#7CC6F2', backgroundColor: '#FFFFFF' },
   plotTag: { paddingVertical: 8 },
-  tagName: { fontSize: 12, fontWeight: '900', color: t.ink },
-  tagPercent: { fontSize: 11, fontWeight: '800', color: '#22703A' },
-  tagTrack: { alignSelf: 'stretch', height: 5, borderRadius: 3, marginTop: 2, backgroundColor: '#DCEFE2', overflow: 'hidden' },
   tagFill: { height: 5, borderRadius: 3, backgroundColor: '#3FA45A' },
   canSpot: { position: 'absolute' },
   canNote: { left: 14, right: 14, top: 128, zIndex: 4 },
-  canNoteText: { fontSize: 13, lineHeight: 18, fontWeight: '800', color: t.ink },
   driftPetal: { position: 'absolute', left: 0, width: 7, height: 5, borderRadius: 3 },
 });
+
+/** The tags under the plants and the can's note are labels over the scene: the theme's card and ink, so they read in
+ * light and dark (the cream edge is the light garden's; on dark the theme's border). */
+const useTagStyles = makeStyles(({ t, tones, dark }) => StyleSheet.create({
+  tag: { position: 'absolute', alignItems: 'center', backgroundColor: t.card, borderRadius: 14, paddingHorizontal: 8, paddingVertical: 4, borderWidth: 1.5,
+    borderColor: dark ? t.border : '#F0DFC0', shadowColor: t.shadow, shadowOpacity: 0.18, shadowRadius: 5, shadowOffset: { width: 0, height: 2 }, elevation: 3 },
+  tagOn: { borderColor: '#7CC6F2', backgroundColor: t.card },
+  tagName: { fontSize: 12, fontWeight: '900', color: t.ink },
+  tagPercent: { fontSize: 11, fontWeight: '800', color: tones.leaf.ink },
+  tagTrack: { alignSelf: 'stretch', height: 5, borderRadius: 3, marginTop: 2, backgroundColor: tones.leaf.from, overflow: 'hidden' },
+  canNoteText: { fontSize: 13, lineHeight: 18, fontWeight: '800', color: t.ink },
+}));

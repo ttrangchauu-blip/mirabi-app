@@ -10,7 +10,7 @@ import { RARITY } from '../../inventory/rarity';
 import { ItemArt, itemArt, itemThumb, keyOf, surfaceThumb, variantOf } from '../../room/art';
 import { freeCopies, placedHere } from '../../room/found';
 import type { Catalog, CatalogItem, FoundStack, Layout } from '../../room/types';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 
 type Props = {
   catalog: Catalog; draft: Layout; saved: Layout; selected: string | null; bottomInset: number;
@@ -60,6 +60,7 @@ const SNAP_SPEED = 0.3;
  * `decoratePanelHeight`). */
 export function DecoratePanel(props: Props) {
   const { catalog, draft, saved, selected, bottomInset, onSurface, onItem, initialGroup } = props;
+  const s = useStyles();
   const [group, setGroup] = useState(catalog.groups.some((g) => g.id === initialGroup) ? initialGroup : catalog.groups[0]?.id);
   const { height } = useViewportSize();
   const placed = useMemo(() => new Map(draft.items.filter((p) => !p.uid).map((p) => [p.item, p])), [draft.items]);
@@ -192,6 +193,8 @@ export function DecorateHeader({ title, canUndo, saving, canSave = true, onCance
   onInventory?: () => void;
   style?: StyleProp<ViewStyle>;
 }) {
+  const { t } = useTheme();
+  const s = useStyles();
   return (
     <View style={[s.header, style]}>
       <Pressable onPress={onCancel} disabled={saving} hitSlop={4} style={({ pressed }) => [s.iconButton, pressed && s.pressed, saving && s.off]}
@@ -214,7 +217,7 @@ export function DecorateHeader({ title, canUndo, saving, canSave = true, onCance
       </Pressable>
       <Pressable onPress={onSave} disabled={saving || !canSave} style={({ pressed }) => [s.save, pressed && s.pressed, !canSave && s.off]}
         accessibilityRole="button" accessibilityLabel="Lưu" accessibilityState={{ disabled: saving || !canSave, busy: saving }}>
-        {saving ? <ActivityIndicator color="#FFFFFF" size="small" /> : <Ionicons name="checkmark" size={18} color="#FFFFFF" />}
+        {saving ? <ActivityIndicator color={t.onPrimary} size="small" /> : <Ionicons name="checkmark" size={18} color={t.onPrimary} />}
         <Text style={s.saveText}>Lưu</Text>
       </Pressable>
     </View>
@@ -228,6 +231,8 @@ const lockNote = (item: CatalogItem) => (item.owned ? undefined : item.source ==
  * selected. */
 function ItemTools({ catalog, draft, selected, onVariant, onFlip, onRotate, onStore, onNudge, onDeselect }: Pick<Props,
   'catalog' | 'draft' | 'selected' | 'onVariant' | 'onFlip' | 'onRotate' | 'onStore' | 'onNudge' | 'onDeselect'>) {
+  const { t } = useTheme();
+  const s = useStyles();
   const p = selected ? draft.items.find((entry) => keyOf(entry) === selected) : undefined;
   const item = p ? catalog.items.find((entry) => entry.id === p.item) : undefined;
   const art = item && itemArt(item.id);
@@ -274,9 +279,11 @@ function ItemTools({ catalog, draft, selected, onVariant, onFlip, onRotate, onSt
 }
 
 function Tool({ icon, label, onPress, on = false }: { icon: React.ComponentProps<typeof Ionicons>['name']; label: string; onPress: () => void; on?: boolean }) {
+  const { t } = useTheme();
+  const s = useStyles();
   return (
     <Pressable onPress={onPress} style={({ pressed }) => [s.tool, on && s.toolOn, pressed && s.pressed]} accessibilityRole="button" accessibilityLabel={label}>
-      <Ionicons name={icon} size={16} color={on ? '#FFFFFF' : t.accent} />
+      <Ionicons name={icon} size={16} color={on ? t.onPrimary : t.accent} />
       <Text style={[s.toolText, on && s.toolTextOn]}>{label}</Text>
     </Pressable>
   );
@@ -284,7 +291,9 @@ function Tool({ icon, label, onPress, on = false }: { icon: React.ComponentProps
 
 /** The chosen card's mark, at its top right corner (with its accent border). */
 function Tick() {
-  return <View style={s.tick}><Ionicons name="checkmark" size={10} color="#FFFFFF" /></View>;
+  const { t } = useTheme();
+  const s = useStyles();
+  return <View style={s.tick}><Ionicons name="checkmark" size={10} color={t.onPrimary} /></View>;
 }
 
 function Card({ label, note, badge, selected, locked = false, compact = false, role, mount, tone, onPress, children }: {
@@ -296,6 +305,8 @@ function Card({ label, note, badge, selected, locked = false, compact = false, r
   tone?: string;
   onPress: () => void; children: React.ReactNode;
 }) {
+  const { t } = useTheme();
+  const s = useStyles();
   return (
     <Pressable onPress={onPress} disabled={locked} style={({ pressed }) => [s.card, compact && s.cardCompact, badge && s.cardUsed, selected && s.cardOn,
       locked && s.locked, tone ? { borderTopColor: tone, borderTopWidth: 3 } : null, pressed && s.pressed]}
@@ -313,22 +324,22 @@ function Card({ label, note, badge, selected, locked = false, compact = false, r
   );
 }
 
-const s = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   flex: { flex: 1, minWidth: 0 },
   header: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   headerTitle: { color: t.ink, fontSize: 16, lineHeight: 20, fontWeight: '900' },
   headerHint: { color: t.muted, fontSize: 12, marginTop: 1 },
-  iconButton: { width: 40, height: 40, borderRadius: 20, backgroundColor: '#EEF4F8', alignItems: 'center', justifyContent: 'center' },
-  save: { height: 40, flexDirection: 'row', alignItems: 'center', gap: 4, paddingLeft: 12, paddingRight: 16, borderRadius: 20, backgroundColor: t.accent },
-  saveText: { color: '#FFFFFF', fontSize: 14, fontWeight: '900' },
+  iconButton: { width: 40, height: 40, borderRadius: 20, backgroundColor: t.surfaceSecondary, alignItems: 'center', justifyContent: 'center' },
+  save: { height: 40, flexDirection: 'row', alignItems: 'center', gap: 4, paddingLeft: 12, paddingRight: 16, borderRadius: 20, backgroundColor: t.accentFill },
+  saveText: { color: t.onPrimary, fontSize: 14, fontWeight: '900' },
   off: { opacity: 0.45 },
-  panel: { backgroundColor: '#FFFFFF', borderTopLeftRadius: 20, borderTopRightRadius: 20,
+  panel: { backgroundColor: t.card, borderTopLeftRadius: 20, borderTopRightRadius: 20,
     shadowColor: t.shadow, shadowOpacity: 0.12, shadowRadius: 18, shadowOffset: { width: 0, height: -4 }, elevation: 12 },
   // 20 points tall to grab, the bar itself small.
   grip: { height: 20, flexShrink: 0, alignItems: 'center', justifyContent: 'center' },
-  gripBar: { width: 36, height: 4, borderRadius: 2, backgroundColor: '#C3D4E0' },
-  tools: { flexShrink: 0, marginHorizontal: 10, marginBottom: 6, paddingHorizontal: 8, paddingVertical: 6, borderRadius: 14, backgroundColor: '#E4F0F8', gap: 6,
-    borderWidth: 1, borderColor: '#C6DDEC' },
+  gripBar: { width: 36, height: 4, borderRadius: 2, backgroundColor: t.disabled },
+  tools: { flexShrink: 0, marginHorizontal: 10, marginBottom: 6, paddingHorizontal: 8, paddingVertical: 6, borderRadius: 14, backgroundColor: t.tint, gap: 6,
+    borderWidth: 1, borderColor: t.border },
   toolsHead: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   toolsName: { color: t.ink, fontSize: 13, fontWeight: '900' },
   toolsHint: { color: t.muted, fontSize: 11, fontWeight: '700', marginTop: 1 },
@@ -336,20 +347,20 @@ const s = StyleSheet.create({
   swatchRing: { width: 28, height: 28, borderRadius: 14, alignItems: 'center', justifyContent: 'center', borderWidth: 2, borderColor: 'transparent' },
   swatchRingOn: { borderColor: t.accent },
   swatch: { width: 18, height: 18, borderRadius: 9, borderWidth: 1, borderColor: 'rgba(0,0,0,0.08)' },
-  close: { width: 28, height: 28, borderRadius: 14, alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFFFFF' },
+  close: { width: 28, height: 28, borderRadius: 14, alignItems: 'center', justifyContent: 'center', backgroundColor: t.card },
   toolsRow: { gap: 6 },
-  tool: { minHeight: 30, flexDirection: 'row', alignItems: 'center', gap: 4, paddingHorizontal: 10, borderRadius: 999, backgroundColor: '#FFFFFF',
+  tool: { minHeight: 30, flexDirection: 'row', alignItems: 'center', gap: 4, paddingHorizontal: 10, borderRadius: 999, backgroundColor: t.card,
     borderWidth: 1.5, borderColor: t.accent },
-  toolOn: { backgroundColor: t.accent },
+  toolOn: { backgroundColor: t.accentFill, borderColor: t.accentFill },
   toolText: { color: t.accent, fontSize: 12, fontWeight: '800' },
-  toolTextOn: { color: '#FFFFFF' },
+  toolTextOn: { color: t.onPrimary },
   // Never shrunk by the item list below it (a tall list would otherwise clip the tabs on the web).
   groupsBar: { flexGrow: 0, flexShrink: 0 },
   groups: { gap: 6, paddingHorizontal: 12, paddingBottom: 6 },
-  group: { minHeight: 30, justifyContent: 'center', paddingHorizontal: 12, borderRadius: 999, backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: '#BBD6E8' },
-  groupOn: { backgroundColor: t.accent, borderColor: t.accent },
+  group: { minHeight: 30, justifyContent: 'center', paddingHorizontal: 12, borderRadius: 999, backgroundColor: t.card, borderWidth: 1, borderColor: t.inputBorder },
+  groupOn: { backgroundColor: t.accentFill, borderColor: t.accentFill },
   groupText: { color: t.muted, fontSize: 12, fontWeight: '700' },
-  groupTextOn: { color: '#FFFFFF', fontWeight: '900' },
+  groupTextOn: { color: t.onPrimary, fontWeight: '900' },
   body: { flex: 1 },
   section: { marginBottom: 6 },
   sectionTitle: { color: t.ink, fontSize: 12, lineHeight: 16, fontWeight: '800', marginLeft: 12, marginBottom: 6 },
@@ -358,21 +369,21 @@ const s = StyleSheet.create({
   // A wall's or a floor's row: one line, scrolled sideways.
   row: { flexDirection: 'row', alignItems: 'flex-start', gap: 8, paddingHorizontal: 12 },
   itemsOnly: { paddingTop: 2 },
-  card: { width: 76, borderRadius: 12, padding: 4, backgroundColor: '#EEF3F7', borderWidth: 2, borderColor: '#DCE6EE' },
+  card: { width: 76, borderRadius: 12, padding: 4, backgroundColor: t.surfaceSecondary, borderWidth: 2, borderColor: t.border },
   cardCompact: { width: 64 },
-  cardUsed: { backgroundColor: '#DDEFFA', borderColor: '#B7D7EC' },
+  cardUsed: { backgroundColor: t.tint, borderColor: t.inputBorder },
   cardOn: { borderColor: t.accent },
   locked: { opacity: 0.55 },
   pressed: { transform: [{ scale: 0.97 }] },
-  thumb: { height: 48, borderRadius: 8, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
+  thumb: { height: 48, borderRadius: 8, backgroundColor: t.card, alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
   thumbCompact: { height: 36 },
   mount: { position: 'absolute', left: 3, bottom: 3, width: 16, height: 16, borderRadius: 8, alignItems: 'center', justifyContent: 'center',
     backgroundColor: 'rgba(23,59,82,0.72)' },
   tick: { position: 'absolute', top: 2, right: 2, width: 16, height: 16, borderRadius: 8, alignItems: 'center', justifyContent: 'center',
-    backgroundColor: t.accent, borderWidth: 1.5, borderColor: '#FFFFFF' },
+    backgroundColor: t.accentFill, borderWidth: 1.5, borderColor: t.card },
   cardLabel: { color: t.ink, fontSize: 11, lineHeight: 13, fontWeight: '800', marginTop: 3, minHeight: 26 },
   used: { color: t.accent, fontSize: 10, lineHeight: 13, fontWeight: '800', marginTop: 1 },
   noteRow: { flexDirection: 'row', alignItems: 'center', gap: 2, marginTop: 1 },
   note: { flexShrink: 1, color: t.muted, fontSize: 10, lineHeight: 13, fontWeight: '700' },
   foundEmpty: { color: t.muted, fontSize: 12, lineHeight: 17, fontWeight: '700', paddingVertical: 12, maxWidth: 300 },
-});
+}));

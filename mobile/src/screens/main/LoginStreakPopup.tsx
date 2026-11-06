@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../../components/Typography';
 import { useReduceMotion } from '../../components/useReduceMotion';
 import type { LoginStreakClaim } from '../../auth/AuthContext';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 
 const FLAME = '#E77832';
 
@@ -19,6 +19,8 @@ function streakMessage({ current_streak: current, longest_streak: longest }: Log
  * It is an overlay inside the app's own view tree, like ConfirmDialog, so it stays inside the phone frame on web.
  */
 export function LoginStreakPopup({ claim, onClose, onOpenJourney }: { claim: LoginStreakClaim; onClose: () => void; onOpenJourney: () => void }) {
+  const { tones } = useTheme();
+  const styles = useStyles();
   const reduceMotion = useReduceMotion();
   const appear = useRef(new Animated.Value(reduceMotion ? 1 : 0)).current;
   const reward = claim.daily_exp_awarded + claim.milestone_exp_awarded;
@@ -41,17 +43,17 @@ export function LoginStreakPopup({ claim, onClose, onOpenJourney }: { claim: Log
         <Text style={styles.count}>{claim.current_streak} <Text style={styles.unit}>ngày liên tiếp</Text></Text>
         <Text style={styles.message}>{streakMessage(claim)}</Text>
         <View style={styles.stats}>
-          {reward > 0 ? <View style={styles.pill}><Ionicons name="diamond" size={14} color="#1482B8" /><Text style={styles.pillText}>+{reward} EXP</Text></View> : null}
-          <View style={styles.pill}><Ionicons name="trophy-outline" size={14} color="#956317" /><Text style={styles.pillText}>Kỷ lục {claim.longest_streak} ngày</Text></View>
+          {reward > 0 ? <View style={styles.pill}><Ionicons name="diamond" size={14} color={tones.sky.ink} /><Text style={styles.pillText}>+{reward} EXP</Text></View> : null}
+          <View style={styles.pill}><Ionicons name="trophy-outline" size={14} color={tones.sun.ink} /><Text style={styles.pillText}>Kỷ lục {claim.longest_streak} ngày</Text></View>
         </View>
         <View style={styles.actions}>
           <Pressable onPress={onOpenJourney} accessibilityRole="button" accessibilityLabel="Xem hành trình"
             style={({ pressed }) => [styles.button, styles.secondary, pressed && styles.pressed]}>
-            <Text style={[styles.buttonText, { color: t.accent }]}>Xem hành trình</Text>
+            <Text style={[styles.buttonText, styles.secondaryText]}>Xem hành trình</Text>
           </Pressable>
           <Pressable onPress={onClose} accessibilityRole="button" accessibilityLabel="Tiếp tục"
-            style={({ pressed }) => [styles.button, { backgroundColor: t.accent }, pressed && styles.pressed]}>
-            <Text style={[styles.buttonText, { color: '#FFFFFF' }]}>Tiếp tục</Text>
+            style={({ pressed }) => [styles.button, styles.primary, pressed && styles.pressed]}>
+            <Text style={[styles.buttonText, styles.primaryText]}>Tiếp tục</Text>
           </Pressable>
         </View>
       </Animated.View>
@@ -59,21 +61,24 @@ export function LoginStreakPopup({ claim, onClose, onOpenJourney }: { claim: Log
   );
 }
 
-const styles = StyleSheet.create({
-  backdrop: { backgroundColor: 'rgba(10,36,56,0.45)', alignItems: 'center', justifyContent: 'center', padding: 28 },
-  card: { width: '100%', maxWidth: 360, backgroundColor: '#FFFFFF', borderRadius: 28, padding: 24, alignItems: 'center',
-    shadowColor: '#0A2438', shadowOpacity: 0.25, shadowRadius: 30, shadowOffset: { width: 0, height: 12 }, elevation: 12 },
-  flameCircle: { width: 76, height: 76, borderRadius: 38, backgroundColor: '#FFF1E6', alignItems: 'center', justifyContent: 'center', marginBottom: 12 },
+const useStyles = makeStyles(({ t, dark }) => StyleSheet.create({
+  backdrop: { backgroundColor: t.scrim, alignItems: 'center', justifyContent: 'center', padding: 28 },
+  card: { width: '100%', maxWidth: 360, backgroundColor: t.card, borderRadius: 28, padding: 24, alignItems: 'center',
+    shadowColor: dark ? t.shadow : '#0A2438', shadowOpacity: 0.25, shadowRadius: 30, shadowOffset: { width: 0, height: 12 }, elevation: 12 },
+  flameCircle: { width: 76, height: 76, borderRadius: 38, backgroundColor: dark ? '#3A2A24' : '#FFF1E6', alignItems: 'center', justifyContent: 'center', marginBottom: 12 },
   eyebrow: { color: FLAME, fontSize: 11, fontWeight: '900', letterSpacing: 1 },
   count: { color: t.ink, fontSize: 38, fontWeight: '900', marginTop: 2 },
   unit: { color: t.muted, fontSize: 16, fontWeight: '800' },
   message: { fontSize: 15, lineHeight: 22, color: t.muted, textAlign: 'center', marginTop: 6 },
   stats: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 8, marginTop: 14 },
-  pill: { flexDirection: 'row', alignItems: 'center', gap: 5, backgroundColor: '#F4F8FB', borderRadius: 99, paddingHorizontal: 12, paddingVertical: 7 },
+  pill: { flexDirection: 'row', alignItems: 'center', gap: 5, backgroundColor: t.surfaceSecondary, borderRadius: 99, paddingHorizontal: 12, paddingVertical: 7 },
   pillText: { color: t.ink, fontSize: 12, fontWeight: '800' },
   actions: { flexDirection: 'row', gap: 10, marginTop: 22, alignSelf: 'stretch' },
   button: { flex: 1, minHeight: 50, borderRadius: 16, alignItems: 'center', justifyContent: 'center' },
   secondary: { backgroundColor: t.tint },
+  secondaryText: { color: t.accent },
+  primary: { backgroundColor: t.accentFill },
+  primaryText: { color: t.onPrimary },
   buttonText: { fontSize: 16, fontWeight: '800' },
   pressed: { opacity: 0.85, transform: [{ scale: 0.98 }] },
-});
+}));

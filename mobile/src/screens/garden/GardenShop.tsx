@@ -7,10 +7,10 @@ import { ApiError, newIdempotencyKey } from '../../api/client';
 import { Text } from '../../components/Typography';
 import { inventoryApi } from '../../inventory/api';
 import type { GardenShop as Shop, ShopItem } from '../../inventory/types';
-import { appTheme as t } from '../../theme';
 import { AppModal } from '../../ui/AppModal';
 import { formatNumber } from '../../ui/kit';
 import { useToast } from '../../ui/Toast';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { readyArt } from './gardenArt';
 import { duration, TierPill, tierOf } from './tiers';
 
@@ -27,6 +27,9 @@ type Props = { visible: boolean; onClose: () => void;
 export function GardenShop({ visible, onClose, onBought }: Props) {
   const insets = useSafeAreaInsets();
   const toast = useToast();
+  const { t } = useTheme();
+  const s = useStyles();
+  const backdrop = useBackdrop();
   const [shop, setShop] = useState<Shop | null>(null);
   const [failed, setFailed] = useState(false);
   const [tier, setTier] = useState('all');
@@ -72,7 +75,7 @@ export function GardenShop({ visible, onClose, onBought }: Props) {
 
   return (
     <AppModal visible={visible} animationType="slide" onRequestClose={onClose}>
-      <LinearGradient colors={['#E7F5FF', '#F4FBEF']} style={[s.fill, { paddingTop: insets.top + 8 }]} testID="garden-shop">
+      <LinearGradient colors={backdrop} style={[s.fill, { paddingTop: insets.top + 8 }]} testID="garden-shop">
         <View style={s.header}>
           <Pressable onPress={onClose} hitSlop={10} accessibilityRole="button" accessibilityLabel="Đóng cửa hàng" style={s.close}><Ionicons name="close" size={22} color={t.ink} /></Pressable>
           <Text style={s.title} accessibilityRole="header">Cửa hàng hạt giống</Text>
@@ -85,8 +88,8 @@ export function GardenShop({ visible, onClose, onBought }: Props) {
           {[{ id: 'all', label: 'Tất cả' }, ...(shop?.tiers ?? [])].map((f) => {
             const on = tier === f.id, look = tierOf(f.id === 'all' ? undefined : f.id);
             return <Pressable key={f.id} onPress={() => setTier(f.id)} accessibilityRole="tab" accessibilityState={{ selected: on }} accessibilityLabel={f.label}
-              style={[s.filter, on && { backgroundColor: f.id === 'all' ? t.accent : look.color, borderColor: 'transparent' }]}>
-              {f.id !== 'all' ? <View style={[s.dot, { backgroundColor: on ? '#FFFFFF' : look.dot }]} /> : null}
+              style={[s.filter, on && { backgroundColor: f.id === 'all' ? t.accentFill : look.color, borderColor: 'transparent' }]}>
+              {f.id !== 'all' ? <View style={[s.dot, { backgroundColor: on ? t.onPrimary : look.dot }]} /> : null}
               <Text style={[s.filterText, on && s.filterTextOn]}>{f.label}</Text>
             </Pressable>;
           })}
@@ -117,7 +120,7 @@ export function GardenShop({ visible, onClose, onBought }: Props) {
           <Text style={[s.total, total > shop.coins && s.short]}>{total > shop.coins ? `Chưa đủ xu (cần ${formatNumber(total)})` : `Tổng: ${formatNumber(total)} xu`}</Text>
           <Pressable onPress={() => { void buy(picking, quantity); }} disabled={buying || total > shop.coins} accessibilityRole="button" accessibilityLabel={`Mua ${quantity} hạt`}
             style={({ pressed }) => [s.buyBig, (buying || total > shop.coins) && s.dim, pressed && s.pressed]} testID="garden-shop-confirm">
-            {buying ? <ActivityIndicator color="#FFFFFF" /> : <Text style={s.buyBigText}>Mua {quantity} hạt</Text>}
+            {buying ? <ActivityIndicator color={t.onPrimary} /> : <Text style={s.buyBigText}>Mua {quantity} hạt</Text>}
           </Pressable>
         </View> : null}
       </AppModal>
@@ -126,6 +129,8 @@ export function GardenShop({ visible, onClose, onBought }: Props) {
 }
 
 function ShopCard({ item, coins, onBuy }: { item: ShopItem; coins: number; onBuy: () => void }) {
+  const { t, tones } = useTheme();
+  const s = useStyles();
   const look = tierOf(item.tier);
   const short = (item.seed_price ?? 0) > coins;
   const art = <Image source={readyArt(item.art)} resizeMode="contain" fadeDuration={0} accessibilityIgnoresInvertColors style={s.cardImage} />;
@@ -143,7 +148,7 @@ function ShopCard({ item, coins, onBuy }: { item: ShopItem; coins: number; onBuy
       {item.unlocked ? (
         <Pressable onPress={onBuy} accessibilityRole="button" accessibilityLabel={`Mua ${item.seed_name}, ${item.seed_price} xu${short ? ', chưa đủ xu' : ''}`}
           style={({ pressed }) => [s.buy, short && s.buyShort, pressed && s.pressed]} testID={`garden-shop-buy-${item.item_id}`}>
-          <Ionicons name="cash" size={13} color={short ? '#8A6A2A' : '#FFFFFF'} /><Text style={[s.buyText, short && s.buyTextShort]}>{formatNumber(item.seed_price ?? 0)}</Text>
+          <Ionicons name="cash" size={13} color={short ? tones.sun.ink : t.onPrimary} /><Text style={[s.buyText, short && s.buyTextShort]}>{formatNumber(item.seed_price ?? 0)}</Text>
         </Pressable>
       ) : (
         <View style={[s.buy, s.locked]} accessible accessibilityLabel={`${item.seed_name}, mở khi pet đạt cấp ${item.unlock_level}`}>
@@ -154,31 +159,38 @@ function ShopCard({ item, coins, onBuy }: { item: ShopItem; coins: number; onBuy
   );
 }
 
-const Fact = ({ icon, text }: { icon: React.ComponentProps<typeof Ionicons>['name']; text: string }) => (
-  <View style={s.fact}><Ionicons name={icon} size={11} color={t.muted} /><Text style={s.factText} numberOfLines={1}>{text}</Text></View>
-);
+function Fact({ icon, text }: { icon: React.ComponentProps<typeof Ionicons>['name']; text: string }) {
+  const { t } = useTheme();
+  const s = useStyles();
+  return <View style={s.fact}><Ionicons name={icon} size={11} color={t.muted} /><Text style={s.factText} numberOfLines={1}>{text}</Text></View>;
+}
 
-const s = StyleSheet.create({
+/** The garden's own green: its buy buttons (white on it), the same in light and dark. */
+const GREEN = '#2E8C3A';
+/** The shop's screen: sky to meadow, the app's night sea on dark. */
+const useBackdrop = makeStyles(({ t, dark }): readonly [string, string, ...string[]] => (dark ? t.backdrop : ['#E7F5FF', '#F4FBEF']));
+
+const useStyles = makeStyles(({ t, tones, dark }) => StyleSheet.create({
   fill: { flex: 1 },
   flex: { flex: 1, minWidth: 0, gap: 3 },
   header: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 14, paddingBottom: 4 },
-  close: { width: 36, height: 36, borderRadius: 18, alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFFFFFCC' },
+  close: { width: 36, height: 36, borderRadius: 18, alignItems: 'center', justifyContent: 'center', backgroundColor: t.glass },
   title: { flex: 1, color: t.ink, fontSize: 18, fontWeight: '900' },
-  coins: { flexDirection: 'row', alignItems: 'center', gap: 5, paddingHorizontal: 10, height: 32, borderRadius: 16, backgroundColor: '#FFF4CC' },
-  coinsText: { color: '#7A4D00', fontSize: 14, fontWeight: '900' },
+  coins: { flexDirection: 'row', alignItems: 'center', gap: 5, paddingHorizontal: 10, height: 32, borderRadius: 16, backgroundColor: tones.sun.from },
+  coinsText: { color: tones.sun.ink, fontSize: 14, fontWeight: '900' },
   expLine: { paddingHorizontal: 16, color: t.muted, fontSize: 11.5, fontWeight: '600' },
   filterRow: { flexGrow: 0, flexShrink: 0, height: 48, marginTop: 8 },
   filters: { gap: 8, paddingHorizontal: 14, paddingVertical: 6, alignItems: 'center' },
-  filter: { flexDirection: 'row', alignItems: 'center', gap: 5, height: 32, paddingHorizontal: 12, borderRadius: 16, backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: '#D7E3EC' },
+  filter: { flexDirection: 'row', alignItems: 'center', gap: 5, height: 32, paddingHorizontal: 12, borderRadius: 16, backgroundColor: t.card, borderWidth: 1, borderColor: t.border },
   filterText: { color: t.ink, fontSize: 12.5, fontWeight: '700' },
-  filterTextOn: { color: '#FFFFFF' },
+  filterTextOn: { color: t.onPrimary },
   dot: { width: 8, height: 8, borderRadius: 4 },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   retry: { padding: 16 },
   retryText: { color: t.accent, fontWeight: '700' },
   grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, paddingHorizontal: 12, paddingTop: 4 },
-  card: { width: '48%', maxWidth: 260, padding: 8, gap: 4, borderRadius: 18, borderWidth: 1.5, backgroundColor: '#FFFFFF',
-    shadowColor: '#23452A', shadowOpacity: 0.08, shadowRadius: 6, shadowOffset: { width: 0, height: 2 }, elevation: 2 },
+  card: { width: '48%', maxWidth: 260, padding: 8, gap: 4, borderRadius: 18, borderWidth: 1.5, backgroundColor: t.card,
+    shadowColor: dark ? '#000000' : '#23452A', shadowOpacity: 0.08, shadowRadius: 6, shadowOffset: { width: 0, height: 2 }, elevation: 2 },
   cardArt: { height: 120, borderRadius: 13, alignItems: 'center', justifyContent: 'flex-end', overflow: 'hidden' },
   // The picture's foot is at 79 % of its height: the plant stands near the bottom of the card.
   cardImage: { width: 116, height: 162, marginBottom: -26 },
@@ -188,25 +200,25 @@ const s = StyleSheet.create({
   facts: { gap: 2, marginTop: 1 },
   fact: { flexDirection: 'row', alignItems: 'center', gap: 4 },
   factText: { flexShrink: 1, color: t.muted, fontSize: 11, fontWeight: '600' },
-  buy: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 5, height: 34, marginTop: 4, borderRadius: 17, backgroundColor: '#2E8C3A' },
-  buyShort: { backgroundColor: '#F4E9CF' },
-  buyText: { color: '#FFFFFF', fontSize: 13, fontWeight: '900' },
-  buyTextShort: { color: '#8A6A2A' },
-  locked: { backgroundColor: '#EEF2F5' },
+  buy: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 5, height: 34, marginTop: 4, borderRadius: 17, backgroundColor: GREEN },
+  buyShort: { backgroundColor: tones.sun.from },
+  buyText: { color: t.onPrimary, fontSize: 13, fontWeight: '900' },
+  buyTextShort: { color: tones.sun.ink },
+  locked: { backgroundColor: t.surfaceSecondary },
   lockedText: { color: t.muted, fontSize: 12, fontWeight: '700' },
   pressed: { opacity: 0.85, transform: [{ scale: 0.97 }] },
   dim: { opacity: 0.45 },
-  backdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(10,30,20,0.35)' },
-  sheet: { position: 'absolute', left: 0, right: 0, bottom: 0, padding: 18, gap: 12, borderTopLeftRadius: 24, borderTopRightRadius: 24, backgroundColor: '#FFFFFF' },
+  backdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: t.scrim },
+  sheet: { position: 'absolute', left: 0, right: 0, bottom: 0, padding: 18, gap: 12, borderTopLeftRadius: 24, borderTopRightRadius: 24, backgroundColor: t.card },
   sheetHead: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   sheetArt: { width: 64, height: 90 },
   sheetTitle: { color: t.ink, fontSize: 16, fontWeight: '900' },
   sheetSub: { color: t.muted, fontSize: 12, fontWeight: '600' },
   stepper: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 22 },
-  step: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: '#EEF5EC' },
+  step: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: tones.leaf.from },
   count: { minWidth: 40, textAlign: 'center', color: t.ink, fontSize: 24, fontWeight: '900' },
   total: { textAlign: 'center', color: t.ink, fontSize: 14, fontWeight: '800' },
-  short: { color: '#A15C00' },
-  buyBig: { height: 48, borderRadius: 24, alignItems: 'center', justifyContent: 'center', backgroundColor: '#2E8C3A' },
-  buyBigText: { color: '#FFFFFF', fontSize: 15, fontWeight: '900' },
-});
+  short: { color: t.warning },
+  buyBig: { height: 48, borderRadius: 24, alignItems: 'center', justifyContent: 'center', backgroundColor: GREEN },
+  buyBigText: { color: t.onPrimary, fontSize: 15, fontWeight: '900' },
+}));

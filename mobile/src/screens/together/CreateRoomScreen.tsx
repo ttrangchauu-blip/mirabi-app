@@ -5,7 +5,7 @@ import { errorMessage } from '../../auth/messages';
 import { Text } from '../../components/Typography';
 import { togetherApi } from '../../studyTogether/api';
 import type { Friend, Visibility } from '../../studyTogether/types';
-import { appTheme as t } from '../../theme';
+import { makeStyles } from '../../ui/theme';
 import { Button, Card, Chip, Segmented, SectionHeader } from '../../ui/kit';
 import { SUBJECTS } from './labels';
 import { useTogetherNav } from './navigation';
@@ -24,6 +24,7 @@ export function validateRoom(name: string, goal: string): { name?: string; goal?
 }
 
 export function CreateRoomScreen() {
+  const styles = useStyles();
   const nav = useTogetherNav();
   const [name, setName] = useState('');
   const [goal, setGoal] = useState('');
@@ -106,11 +107,11 @@ export function CreateRoomScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   label: { fontSize: 14, fontWeight: '800', color: t.ink, marginBottom: 8 },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   total: { fontSize: 13, color: t.muted, marginTop: 6 },
   hint: { fontSize: 13, color: t.muted, marginTop: -6, marginBottom: 8, lineHeight: 19 },
   failure: { backgroundColor: t.dangerBg, borderRadius: 14, padding: 12, gap: 8, marginTop: 4 },
   failureText: { color: t.danger, fontWeight: '800', fontSize: 14 },
-});
+}));

@@ -6,6 +6,7 @@ import { PetArt } from '../../components/PetArt';
 import { Text } from '../../components/Typography';
 import type { KnowledgeEntry, Note } from '../../learning/education';
 import { AppModal } from '../../ui/AppModal';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { useWorldMotion } from '../../world/budget';
 import { BEAT, ContactShadow, hashOf, Hit, Paper, Plate, Tiles, useSize } from '../../world/diorama';
 import { EASE } from '../../world/motion';
@@ -98,6 +99,7 @@ const BOOK = { width: 104, height: 144 };
 /** One book facing out on the shelf, its name on the label of its cover, so it reads without turning your head. Its colour
  * follows its subject. */
 const BookCover = memo(function BookCover({ book, marked, hue, onPress }: { book: Book; marked: boolean; hue: number; onPress: () => void }) {
+  const l = useStyles();
   const notes = book.kind === 'notes';
   return (
     <Hit onPress={onPress} sink={0.97} accessibilityRole="button" accessibilityLabel={`Mở sách ${book.title}${marked ? ', đã đánh dấu' : ''}`} testID={`book-${book.id}`} style={l.bookSlot}>
@@ -110,6 +112,7 @@ const BookCover = memo(function BookCover({ book, marked, hue, onPress }: { book
 
 /** Things that come to stand on top of the shelves as the library grows; never before the books are really there. */
 const ShelfTop = memo(function ShelfTop({ books }: { books: number }) {
+  const l = useStyles();
   return (
     <View style={l.tops}>
       <Image source={TOP.plant} style={l.top} resizeMode="contain" accessibilityIgnoresInvertColors />
@@ -121,6 +124,7 @@ const ShelfTop = memo(function ShelfTop({ books }: { books: number }) {
 
 /** One shelf of the wall, its board and sides from the picture. */
 function ShelfBay({ children }: { children: React.ReactNode }) {
+  const l = useStyles();
   const [size, onLayout] = useSize({ width: 378, height: 176 });
   return (
     <View style={l.niche} onLayout={onLayout}>
@@ -132,6 +136,7 @@ function ShelfBay({ children }: { children: React.ReactNode }) {
 
 /** The wall of shelves. */
 export function ShelfWall({ shelves, marked, onOpen, pet, total }: { shelves: Shelf[]; marked: Set<string>; onOpen: (book: Book) => void; pet?: { id: string; level: number } | null; total: number }) {
+  const l = useStyles();
   const [size, onLayout] = useSize({ width: 390, height: 500 });
   return (
     <View style={l.wall} onLayout={onLayout}>
@@ -166,6 +171,8 @@ export function ShelfWall({ shelves, marked, onOpen, pet, total }: { shelves: Sh
 export function BookReader({ book, marked, onToggleMark, onClose, onOpenLesson, onEditNotes }: {
   book: Book | null; marked: boolean; onToggleMark: () => void; onClose: () => void; onOpenLesson: (key: string) => void; onEditNotes: () => void;
 }) {
+  const { t } = useTheme();
+  const l = useStyles();
   const { level } = useWorldMotion();
   const still = level === 'still';
   const open = useRef(new Animated.Value(still ? 1 : 0)).current;
@@ -210,21 +217,21 @@ export function BookReader({ book, marked, onToggleMark, onClose, onOpenLesson, 
             <View style={l.pageHead}>
               <View style={l.flex}><Text style={l.bookTitle} numberOfLines={2} accessibilityRole="header">{book.title}</Text><Text style={l.bookMeta} numberOfLines={1}>{book.subjectName} · {book.chapter}</Text></View>
               <Pressable onPress={onToggleMark} hitSlop={8} style={l.markBtn} accessibilityRole="button" accessibilityLabel={marked ? 'Bỏ đánh dấu sách' : 'Đánh dấu sách'} accessibilityState={{ selected: marked }}>
-                <Ionicons name={marked ? 'bookmark' : 'bookmark-outline'} size={24} color={marked ? '#C8323F' : '#6B5740'} />
+                <Ionicons name={marked ? 'bookmark' : 'bookmark-outline'} size={24} color={marked ? '#C8323F' : t.muted} />
               </Pressable>
-              <Pressable onPress={close} hitSlop={8} style={l.markBtn} accessibilityRole="button" accessibilityLabel="Đóng sách"><Ionicons name="close" size={24} color="#4F6C86" /></Pressable>
+              <Pressable onPress={close} hitSlop={8} style={l.markBtn} accessibilityRole="button" accessibilityLabel="Đóng sách"><Ionicons name="close" size={24} color={t.muted} /></Pressable>
             </View>
             <ScrollView style={l.pageScroll} contentContainerStyle={l.pageBody}>
               <Text style={l.pageHeading}>{page.heading}</Text>
               {page.lines.map((line, i) => <Text key={i} style={l.pageLine}>{line}</Text>)}
               {page.note ? <Text style={l.pageNoteMeta}>{[page.note.lesson_title, page.note.academic_year_label ? `${page.note.grade_label} · ${page.note.academic_year_label}` : null].filter(Boolean).join(' · ')}</Text> : null}
             </ScrollView>
-            {book.lessonKey ? <Pressable onPress={() => { const key = book.lessonKey!; close(); onOpenLesson(key); }} style={l.pageLink} accessibilityRole="button" accessibilityLabel="Mở bài học"><Ionicons name="arrow-forward" size={16} color="#136FA8" /><Text style={l.pageLinkText}>Mở bài học</Text></Pressable> : null}
-            {page.note ? <Pressable onPress={() => { close(); onEditNotes(); }} style={l.pageLink} accessibilityRole="button" accessibilityLabel="Sửa trong Ghi chú của tôi"><Ionicons name="create-outline" size={16} color="#136FA8" /><Text style={l.pageLinkText}>Sửa trong Ghi chú của tôi</Text></Pressable> : null}
+            {book.lessonKey ? <Pressable onPress={() => { const key = book.lessonKey!; close(); onOpenLesson(key); }} style={l.pageLink} accessibilityRole="button" accessibilityLabel="Mở bài học"><Ionicons name="arrow-forward" size={16} color={t.accent} /><Text style={l.pageLinkText}>Mở bài học</Text></Pressable> : null}
+            {page.note ? <Pressable onPress={() => { close(); onEditNotes(); }} style={l.pageLink} accessibilityRole="button" accessibilityLabel="Sửa trong Ghi chú của tôi"><Ionicons name="create-outline" size={16} color={t.accent} /><Text style={l.pageLinkText}>Sửa trong Ghi chú của tôi</Text></Pressable> : null}
             <View style={l.pageFoot}>
-              <Pressable disabled={index === 0} onPress={() => flip(index - 1)} style={[l.turn, index === 0 && l.turnOff]} accessibilityRole="button" accessibilityLabel="Trang trước" accessibilityState={{ disabled: index === 0 }}><Ionicons name="chevron-back" size={22} color="#4F6C86" /></Pressable>
+              <Pressable disabled={index === 0} onPress={() => flip(index - 1)} style={[l.turn, index === 0 && l.turnOff]} accessibilityRole="button" accessibilityLabel="Trang trước" accessibilityState={{ disabled: index === 0 }}><Ionicons name="chevron-back" size={22} color={t.muted} /></Pressable>
               <Text style={l.pageNumber} accessibilityLabel={`Trang ${index + 1} trên ${book.pages.length}`}>{index + 1} / {book.pages.length}</Text>
-              <Pressable disabled={index >= book.pages.length - 1} onPress={() => flip(index + 1)} style={[l.turn, index >= book.pages.length - 1 && l.turnOff]} accessibilityRole="button" accessibilityLabel="Trang sau" accessibilityState={{ disabled: index >= book.pages.length - 1 }}><Ionicons name="chevron-forward" size={22} color="#4F6C86" /></Pressable>
+              <Pressable disabled={index >= book.pages.length - 1} onPress={() => flip(index + 1)} style={[l.turn, index >= book.pages.length - 1 && l.turnOff]} accessibilityRole="button" accessibilityLabel="Trang sau" accessibilityState={{ disabled: index >= book.pages.length - 1 }}><Ionicons name="chevron-forward" size={22} color={t.muted} /></Pressable>
             </View>
           </Animated.View>
           {/* The front cover swings open over the first page, once. */}
@@ -241,15 +248,17 @@ export function BookReader({ book, marked, onToggleMark, onClose, onOpenLesson, 
 
 /** Nothing on the shelves yet. */
 export function EmptyLibrary({ message }: { message: string }) {
+  const { t } = useTheme();
+  const l = useStyles();
   return (
-    <Paper style={l.emptyPaper}>
-      <Ionicons name="library-outline" size={30} color="#136FA8" />
+    <Paper style={l.emptyPaper} tint={t.card}>
+      <Ionicons name="library-outline" size={30} color={t.accent} />
       <Text style={l.emptyText}>{message}</Text>
     </Paper>
   );
 }
 
-const l = StyleSheet.create({
+const useStyles = makeStyles(({ t }) => StyleSheet.create({
   flex: { flex: 1, minWidth: 0 },
   wall: { paddingTop: 8, paddingBottom: 18, overflow: 'hidden' },
   topRow: { flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', paddingHorizontal: 14, marginBottom: 4 },
@@ -257,10 +266,10 @@ const l = StyleSheet.create({
   top: { width: 54, height: 54 },
   count: { fontSize: 13, lineHeight: 18, fontWeight: '900', color: '#123B5C', paddingBottom: 6 },
   shelf: { marginBottom: 14 },
-  plate: { flexDirection: 'row', alignSelf: 'center', alignItems: 'center', gap: 8, maxWidth: '84%', backgroundColor: '#FFFFFF', borderRadius: 4, borderWidth: 1, borderColor: '#C5E2F2', paddingHorizontal: 10, paddingVertical: 2, marginBottom: 5,
-    shadowColor: '#1F6E9E', shadowOpacity: 0.45, shadowRadius: 3, shadowOffset: { width: 0, height: 2 }, elevation: 3 },
-  plateText: { flexShrink: 1, fontSize: 13, lineHeight: 18, fontWeight: '900', color: '#123B5C' },
-  plateCount: { fontSize: 11, fontWeight: '900', color: '#123B5C' },
+  plate: { flexDirection: 'row', alignSelf: 'center', alignItems: 'center', gap: 8, maxWidth: '84%', backgroundColor: t.card, borderRadius: 4, borderWidth: 1, borderColor: t.border, paddingHorizontal: 10, paddingVertical: 2, marginBottom: 5,
+    shadowColor: t.shadow, shadowOpacity: 0.45, shadowRadius: 3, shadowOffset: { width: 0, height: 2 }, elevation: 3 },
+  plateText: { flexShrink: 1, fontSize: 13, lineHeight: 18, fontWeight: '900', color: t.ink },
+  plateCount: { fontSize: 11, fontWeight: '900', color: t.ink },
   niche: { marginHorizontal: 6, height: 176, justifyContent: 'flex-end' },
   bookRow: { flexGrow: 0, marginHorizontal: '6%', marginBottom: 13 },
   books: { alignItems: 'flex-end', gap: 6 },
@@ -272,29 +281,29 @@ const l = StyleSheet.create({
   corner: { alignSelf: 'flex-end', marginRight: 14, marginTop: 2 },
   petShadow: { position: 'absolute', bottom: 0, alignSelf: 'center' },
   reader: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 14 },
-  readerDim: { backgroundColor: 'rgba(10,36,56,0.62)' },
+  readerDim: { backgroundColor: t.scrim },
   book: { width: '100%', maxWidth: 420, height: '78%', maxHeight: 620 },
   cover: { position: 'absolute', left: -5, right: -8, top: -7, bottom: -9, borderRadius: 9, backgroundColor: '#136FA8', borderWidth: 2, borderColor: '#C5E2F2', shadowColor: '#000000', shadowOpacity: 0.5, shadowRadius: 18, shadowOffset: { width: 0, height: 12 }, elevation: 18 },
-  leavesEdge: { position: 'absolute', left: 3, right: -4, top: -2, bottom: -4, borderRadius: 5, backgroundColor: '#E8EFF4', borderWidth: 1, borderColor: '#C5E2F2' },
-  page: { flex: 1, backgroundColor: '#FFFFFF', borderRadius: 5, padding: 16, paddingLeft: 22, overflow: 'hidden' },
+  leavesEdge: { position: 'absolute', left: 3, right: -4, top: -2, bottom: -4, borderRadius: 5, backgroundColor: t.surfaceSecondary, borderWidth: 1, borderColor: t.border },
+  page: { flex: 1, backgroundColor: t.card, borderRadius: 5, padding: 16, paddingLeft: 22, overflow: 'hidden' },
   gutter: { position: 'absolute', left: 0, top: 0, bottom: 0, width: 16, backgroundColor: 'rgba(120,84,48,0.13)' },
-  pageHead: { flexDirection: 'row', alignItems: 'flex-start', gap: 2, borderBottomWidth: 1, borderBottomColor: '#C5E2F2', paddingBottom: 8 },
-  bookTitle: { fontSize: 17, lineHeight: 23, fontWeight: '900', color: '#123B5C' },
-  bookMeta: { fontSize: 12, lineHeight: 16, fontWeight: '700', color: '#4F6C86' },
+  pageHead: { flexDirection: 'row', alignItems: 'flex-start', gap: 2, borderBottomWidth: 1, borderBottomColor: t.border, paddingBottom: 8 },
+  bookTitle: { fontSize: 17, lineHeight: 23, fontWeight: '900', color: t.ink },
+  bookMeta: { fontSize: 12, lineHeight: 16, fontWeight: '700', color: t.muted },
   markBtn: { width: 44, height: 44, alignItems: 'center', justifyContent: 'center' },
   pageScroll: { flex: 1 },
   pageBody: { paddingVertical: 12, gap: 8 },
-  pageHeading: { fontSize: 15, lineHeight: 21, fontWeight: '900', color: '#136FA8' },
-  pageLine: { fontSize: 15, lineHeight: 24, color: '#123B5C' },
-  pageNoteMeta: { fontSize: 12, lineHeight: 16, fontWeight: '700', color: '#4F6C86', marginTop: 6 },
+  pageHeading: { fontSize: 15, lineHeight: 21, fontWeight: '900', color: t.accent },
+  pageLine: { fontSize: 15, lineHeight: 24, color: t.ink },
+  pageNoteMeta: { fontSize: 12, lineHeight: 16, fontWeight: '700', color: t.muted, marginTop: 6 },
   pageLink: { flexDirection: 'row', alignItems: 'center', gap: 6, minHeight: 40 },
-  pageLinkText: { fontSize: 13, fontWeight: '900', color: '#136FA8' },
-  pageFoot: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderTopWidth: 1, borderTopColor: '#C5E2F2', paddingTop: 6 },
-  turn: { width: 48, height: 44, borderRadius: 10, alignItems: 'center', justifyContent: 'center', backgroundColor: '#DDF0FA' },
+  pageLinkText: { fontSize: 13, fontWeight: '900', color: t.accent },
+  pageFoot: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderTopWidth: 1, borderTopColor: t.border, paddingTop: 6 },
+  turn: { width: 48, height: 44, borderRadius: 10, alignItems: 'center', justifyContent: 'center', backgroundColor: t.tint },
   turnOff: { opacity: 0.35 },
-  pageNumber: { fontSize: 13, fontWeight: '800', color: '#4F6C86', fontVariant: ['tabular-nums'] },
+  pageNumber: { fontSize: 13, fontWeight: '800', color: t.muted, fontVariant: ['tabular-nums'] },
   frontCover: { position: 'absolute', left: -5, right: -8, top: -7, bottom: -9, borderRadius: 9, backgroundColor: '#136FA8', borderWidth: 3, borderColor: '#C5E2F2', alignItems: 'center', justifyContent: 'center', padding: 30 },
   frontTitle: { fontSize: 22, lineHeight: 30, fontWeight: '900', color: '#FFFFFF', textAlign: 'center' },
   emptyPaper: { margin: 14, alignItems: 'center', gap: 8 },
-  emptyText: { fontSize: 14, lineHeight: 20, fontWeight: '700', color: '#123B5C', textAlign: 'center' },
-});
+  emptyText: { fontSize: 14, lineHeight: 20, fontWeight: '700', color: t.ink, textAlign: 'center' },
+}));

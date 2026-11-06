@@ -13,7 +13,6 @@ import { useDayPeriod } from '../../components/useDayPeriod';
 import { freeCopies, stackOf, withStack } from '../../room/found';
 import { PROBLEM_TEXT, type Problem } from '../../room/rules';
 import type { FocusRoomData, FoundStack, Layout, RoomPet } from '../../room/types';
-import { appTheme as t } from '../../theme';
 import { AppModal } from '../../ui/AppModal';
 import { Button } from '../../ui/kit';
 import { useAtmosphere } from '../../world/atmosphere';
@@ -26,6 +25,7 @@ import { RoomScene } from '../room/RoomScene';
 import { useRoomEditor } from '../room/useRoomEditor';
 import { FOCUS_DRAWING, FOCUS_PHOTO_DRAWING, isPlatedWindow } from './FocusRoomArt';
 import { FOCUS_FLOORS, FOCUS_WALLS } from './focusPlates';
+import { makeStyles, useTheme } from '../../ui/theme';
 
 type Props = { petId: string; petName: string | null; petLevel: number; resting: boolean; compact: boolean;
   /** No session running: the pet sits with you, it isn't studying. */ idle?: boolean;
@@ -54,6 +54,8 @@ export function withStartingLook(data: FocusRoomData): FocusRoomData {
  * one loads, and the last saved one offline. "Trang trí" opens the decorating screen.
  */
 export const FocusRoom = memo(function FocusRoom({ petId, petName, petLevel, resting, idle = false, celebrate = 0, userId }: Props) {
+  const { t } = useTheme();
+  const s = useStyles();
   const [data, setData] = useState<FocusRoomData | null>(null);
   const [offline, setOffline] = useState(false);
   const [editing, setEditing] = useState(false);
@@ -125,7 +127,7 @@ export const FocusRoom = memo(function FocusRoom({ petId, petName, petLevel, res
         style={({ pressed }) => [s.decorate, (!data || offline) && s.decorateOff, pressed && s.pressed]}
         accessibilityRole="button" accessibilityLabel="Trang trí" accessibilityHint={offline ? 'Cần kết nối mạng để trang trí' : 'Mở kho đồ trang trí phòng tập trung'}
         accessibilityState={{ disabled: !data || offline }}>
-        <Ionicons name="color-palette" size={20} color="#FFFFFF" />
+        <Ionicons name="color-palette" size={20} color={t.onPrimary} />
       </Pressable>
     </View>
     {photo ? <PhotoRoom onClose={() => setPhoto(false)} top={(FOCUS_WALLS[layout.wall] ?? FOCUS_WALLS.wall_lilac).top} near={(FOCUS_FLOORS[layout.floor] ?? FOCUS_FLOORS.floor_wood_honey).near}
@@ -147,6 +149,8 @@ function FocusRoomEditor({ data, pet, resting, userId, initialCopy, onClose, onS
   data: FocusRoomData; pet: RoomPet; resting: boolean; userId?: number; initialCopy: PlaceRequest | null; onClose: () => void;
   onSaved: (data: FocusRoomData) => void; reload: () => Promise<FocusRoomData | null>;
 }) {
+  const { t } = useTheme();
+  const s = useStyles();
   const insets = useSafeAreaInsets();
   const { height: screenHeight } = useViewportSize();
   const editor = useRoomEditor('focus', data.catalog.max_items);
@@ -256,7 +260,7 @@ function FocusRoomEditor({ data, pet, resting, userId, initialCopy, onClose, onS
           <DecoratePanel {...tools} saved={current.room.layout} bottomInset={insets.bottom} onSurface={editor.surface} onItem={pick} onCopy={pickCopy} />
         </View> : null}
         {message ? <View style={[s.message, { top: insets.top + 64 }]} accessibilityLiveRegion="polite" pointerEvents="none">
-          <Ionicons name="information-circle" size={16} color="#FFFFFF" /><Text style={s.messageText}>{message}</Text>
+          <Ionicons name="information-circle" size={16} color={t.onPrimary} /><Text style={s.messageText}>{message}</Text>
         </View> : null}
         {inventory && userId != null ? <View style={s.inventory}>
           <InventoryScreen userId={userId} onBack={() => setInventory(false)} placeInto={{ room: 'focus', onPlace: placeFromInventory }} />
@@ -276,31 +280,31 @@ function FocusRoomEditor({ data, pet, resting, userId, initialCopy, onClose, onS
   );
 }
 
-const s = StyleSheet.create({
+const useStyles = makeStyles(({ t, dark }) => StyleSheet.create({
   wrap: { width: '100%', minWidth: 0, gap: 8 },
   room: { width: '100%', aspectRatio: CANVAS.width / CANVAS.height, position: 'relative', minWidth: 0, borderRadius: 24, overflow: 'hidden', backgroundColor: '#D9D2EE' },
-  photo: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', backgroundColor: '#EAF4FB', borderWidth: 1, borderColor: '#D6E8F4' },
+  photo: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', backgroundColor: t.tint, borderWidth: 1, borderColor: t.border },
   footer: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 4 },
-  decorate: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', backgroundColor: t.accent,
-    shadowColor: '#0A2438', shadowOpacity: 0.18, shadowRadius: 6, shadowOffset: { width: 0, height: 2 }, elevation: 3 },
+  decorate: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', backgroundColor: t.accentFill,
+    shadowColor: dark ? t.shadow : '#0A2438', shadowOpacity: 0.18, shadowRadius: 6, shadowOffset: { width: 0, height: 2 }, elevation: 3 },
   decorateOff: { opacity: 0.55 },
   pressed: { transform: [{ scale: 0.97 }] },
   caption: { flex: 1, minWidth: 0, flexDirection: 'row', gap: 6, alignItems: 'center' },
   dot: { height: 6, width: 6, borderRadius: 3, backgroundColor: '#2E8C6A' }, dotRest: { backgroundColor: '#7C83B5' }, dotIdle: { backgroundColor: '#E0B36A' },
-  captionText: { color: '#2E4A55', fontSize: 11, fontWeight: '800' },
-  editor: { flex: 1, backgroundColor: '#EAF3F8' },
+  captionText: { color: t.ink, fontSize: 11, fontWeight: '800' },
+  editor: { flex: 1, backgroundColor: t.bg },
   flex: { flex: 1, minWidth: 0 },
   header: { paddingHorizontal: 16, marginBottom: 10 },
   sceneWrap: { flex: 1, minHeight: 0, paddingHorizontal: 12, paddingBottom: 10, alignItems: 'center', justifyContent: 'center' },
   panelDock: { position: 'absolute', left: 0, right: 0, bottom: 0 },
-  message: { position: 'absolute', left: 16, right: 16, flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: '#173B52',
+  message: { position: 'absolute', left: 16, right: 16, flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: dark ? t.border : '#173B52',
     borderRadius: 16, paddingHorizontal: 14, paddingVertical: 10 },
-  messageText: { flex: 1, color: '#FFFFFF', fontSize: 13, lineHeight: 18, fontWeight: '700' },
-  askBackdrop: { ...StyleSheet.absoluteFillObject, alignItems: 'center', justifyContent: 'center', padding: 28, backgroundColor: 'rgba(10,36,56,0.45)' },
-  ask: { width: '100%', maxWidth: 360, backgroundColor: '#FFFFFF', borderRadius: 26, padding: 22, gap: 10 },
+  messageText: { flex: 1, color: t.onPrimary, fontSize: 13, lineHeight: 18, fontWeight: '700' },
+  askBackdrop: { ...StyleSheet.absoluteFillObject, alignItems: 'center', justifyContent: 'center', padding: 28, backgroundColor: t.scrim },
+  ask: { width: '100%', maxWidth: 360, backgroundColor: t.card, borderRadius: 26, padding: 22, gap: 10 },
   askTitle: { color: t.ink, fontSize: 19, fontWeight: '900' },
   askText: { color: t.muted, fontSize: 14, lineHeight: 20 },
   askActions: { flexDirection: 'row', gap: 10, marginTop: 6 },
   // Kho đồ drawn inside the editor's modal (the app's other screens would be under it).
-  inventory: { ...StyleSheet.absoluteFillObject, backgroundColor: '#EEF6FB' },
-});
+  inventory: { ...StyleSheet.absoluteFillObject, backgroundColor: t.bg },
+}));

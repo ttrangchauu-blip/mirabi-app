@@ -5,7 +5,7 @@ import { Text } from '../../components/Typography';
 import { GAME_INFO, gameTitle, lessonsForGame, PLAY_MODE } from '../../learning/labels';
 import type { Catalog, GameId, LearningSession, Level, StartOptions, SubjectCode, Topic } from '../../learning/types';
 import type { StudyRecommendations } from '../../studyProfile';
-import { appTheme as t } from '../../theme';
+import { makeStyles, useTheme } from '../../ui/theme';
 import { Button, Card, Chip, SectionHeader } from '../../ui/kit';
 import { BackHeader } from './GamePicker';
 
@@ -38,6 +38,8 @@ type Props = {
  * "Bắt đầu" is the only thing that creates a session on the backend. */
 export function GameSetup({ subject, game, catalog, error, onRetry, defaultDuration, preset, current, starting, onBack, onStart, onResume,
   recommended, onlyLevel }: Props) {
+  const { t } = useTheme();
+  const styles = useStyles();
   const info = GAME_INFO[game];
   const data = catalog?.subjects.find((s) => s.code === subject);
   const lessons = useMemo(() => (data ? lessonsForGame(data.lessons, game) : []), [data, game]);
@@ -104,7 +106,7 @@ export function GameSetup({ subject, game, catalog, error, onRetry, defaultDurat
               {x.description ? <Text style={[styles.optionDesc, selected && styles.onText]}>{x.description}</Text> : null}
             </View>
             {x.review_count ? <Text style={styles.badge}>{x.review_count} cần ôn</Text> : null}
-            {selected ? <Ionicons name="checkmark-circle" size={22} color="#FFFFFF" /> : null}
+            {selected ? <Ionicons name="checkmark-circle" size={22} color={t.onPrimary} /> : null}
           </Pressable>
         );
       })}
@@ -161,32 +163,32 @@ export function GameSetup({ subject, game, catalog, error, onRetry, defaultDurat
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, dark }) => StyleSheet.create({
   flex: { flex: 1 },
   muted: { color: t.muted, fontSize: 14, lineHeight: 20, marginTop: 4 },
   error: { color: t.danger, fontWeight: '700' },
-  resume: { borderWidth: 2, borderColor: '#F2C46D', gap: 8, marginTop: 12 },
+  resume: { borderWidth: 2, borderColor: dark ? '#8A6A2C' : '#F2C46D', gap: 8, marginTop: 12 },
   start: { marginTop: 16 },
-  option: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: '#FFFFFF', borderRadius: 18, padding: 14, marginBottom: 8 },
-  optionOn: { backgroundColor: t.accent },
+  option: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: t.card, borderRadius: 18, padding: 14, marginBottom: 8 },
+  optionOn: { backgroundColor: t.accentFill },
   optionName: { fontSize: 16, fontWeight: '900', color: t.ink },
   nameRow: { flexDirection: 'row', alignItems: 'center', gap: 8, flexWrap: 'wrap' },
   suggested: { fontSize: 11, fontWeight: '900', color: t.success, backgroundColor: t.successBg, borderRadius: 8, paddingHorizontal: 7,
     paddingVertical: 2, overflow: 'hidden' },
-  suggestedOn: { color: t.accent, backgroundColor: '#FFFFFF' },
+  suggestedOn: { color: t.accent, backgroundColor: t.card },
   optionDesc: { fontSize: 13, color: t.muted, marginTop: 2 },
-  onText: { color: '#FFFFFF' },
+  onText: { color: t.onPrimary },
   badge: { fontSize: 12, fontWeight: '800', color: t.danger, backgroundColor: t.dangerBg, borderRadius: 10, paddingHorizontal: 8, paddingVertical: 3, overflow: 'hidden' },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   chipScroll: { marginHorizontal: -20, flexGrow: 0 },
   chipRow: { gap: 8, paddingHorizontal: 20 },
-  topicChip: { flexDirection: 'row', alignItems: 'center', gap: 6, backgroundColor: '#FFFFFF', borderRadius: 14,
+  topicChip: { flexDirection: 'row', alignItems: 'center', gap: 6, backgroundColor: t.card, borderRadius: 14,
     paddingHorizontal: 12, paddingVertical: 8, minHeight: 38 },
   topicChipText: { fontSize: 14, fontWeight: '800', color: t.ink },
   topicBadge: { fontSize: 11, fontWeight: '900', color: t.danger, backgroundColor: t.dangerBg, borderRadius: 8, paddingHorizontal: 6,
     paddingVertical: 1, overflow: 'hidden' },
-  topicBadgeOn: { color: t.accent, backgroundColor: '#FFFFFF' },
+  topicBadgeOn: { color: t.accent, backgroundColor: t.card },
   levelInfo: { flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: t.tint, borderRadius: 14, padding: 10, marginTop: 12 },
   levelInfoText: { flex: 1, fontSize: 13, color: t.muted, lineHeight: 18 },
   levelInfoName: { fontWeight: '900', color: t.ink },
-});
+}));

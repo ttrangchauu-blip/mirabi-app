@@ -4,18 +4,14 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Text } from '../components/Typography';
 import { useReduceMotion } from '../components/useReduceMotion';
-import { appTheme as t } from '../theme';
+import { makeStyles, useTheme } from './theme';
 import type { IconName } from './kit';
 
 export type ToastTone = 'success' | 'info' | 'error';
 export type ToastAction = { label: string; onPress: () => void };
 type Toast = { id: number; message: string; tone: ToastTone; action?: ToastAction };
 
-const TONES: Record<ToastTone, { icon: IconName; color: string }> = {
-  success: { icon: 'checkmark-circle', color: '#1F9D6A' },
-  info: { icon: 'information-circle', color: t.accent },
-  error: { icon: 'alert-circle', color: t.danger },
-};
+const ICONS: Record<ToastTone, IconName> = { success: 'checkmark-circle', info: 'information-circle', error: 'alert-circle' };
 const VISIBLE_MS = 2600;
 
 const ToastContext = createContext<((message: string, tone?: ToastTone, action?: ToastAction) => void) | null>(null);
@@ -37,6 +33,7 @@ export function useMuteToasts() {
 
 /** Hosts toasts above every screen, so a toast survives navigation (e.g. from login to home). */
 export function ToastProvider({ children }: { children: React.ReactNode }) {
+  const styles = useStyles();
   const [toast, setToast] = useState<Toast | null>(null);
   const nextId = useRef(1);
   const muted = useRef(false);
@@ -58,7 +55,9 @@ function ToastView({ toast, onHide }: { toast: Toast; onHide: () => void }) {
   const insets = useSafeAreaInsets();
   const reduceMotion = useReduceMotion();
   const anim = useRef(new Animated.Value(reduceMotion ? 1 : 0)).current;
-  const tone = TONES[toast.tone];
+  const { t } = useTheme();
+  const styles = useStyles();
+  const toneColor = toast.tone === 'success' ? styles.successIcon.color : toast.tone === 'error' ? t.danger : t.accent;
   // Parent re-renders pass a new callback; keep the latest without restarting the hide timer.
   const onHideRef = useRef(onHide);
   onHideRef.current = onHide;
@@ -79,7 +78,7 @@ function ToastView({ toast, onHide }: { toast: Toast; onHide: () => void }) {
         <View style={styles.toast}>
           {/* The message is one accessible alert; its button stays a separate element screen readers can reach. */}
           <View accessible accessibilityRole="alert" accessibilityLiveRegion="polite" accessibilityLabel={toast.message} style={styles.message}>
-            <Ionicons name={tone.icon} size={20} color={tone.color} />
+            <Ionicons name={ICONS[toast.tone]} size={20} color={toneColor} />
             <Text style={styles.text}>{toast.message}</Text>
           </View>
           {toast.action ? <Pressable onPress={() => { toast.action?.onPress(); onHide(); }} accessibilityRole="button" hitSlop={8}>
@@ -93,12 +92,14 @@ function ToastView({ toast, onHide }: { toast: Toast; onHide: () => void }) {
   );
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ t, elevation, dark }) => StyleSheet.create({
   fill: { flex: 1 },
   host: { position: 'absolute', left: 16, right: 16, alignItems: 'center' },
-  toast: { flexDirection: 'row', alignItems: 'center', gap: 8, maxWidth: 360, backgroundColor: '#FFFFFF', borderRadius: 999,
+  toast: { flexDirection: 'row', alignItems: 'center', gap: 8, maxWidth: 360, backgroundColor: t.card, borderRadius: 999,
     paddingVertical: 10, paddingLeft: 12, paddingRight: 16,
-    shadowColor: '#0A2438', shadowOpacity: 0.16, shadowRadius: 16, shadowOffset: { width: 0, height: 6 }, elevation: 8 },
+    shadowColor: elevation.floating.shadowColor, shadowOpacity: dark ? 0.45 : 0.16, shadowRadius: 16, shadowOffset: { width: 0, height: 6 }, elevation: 8 },
   message: { flexDirection: 'row', alignItems: 'center', gap: 8, flexShrink: 1 },
   text: { flexShrink: 1, fontSize: 14, fontWeight: '700', color: t.ink },
-});
+  // The toast's own green check (a touch brighter than t.success on light); dark uses the dark success green.
+  successIcon: { color: dark ? t.success : '#1F9D6A' },
+}));
