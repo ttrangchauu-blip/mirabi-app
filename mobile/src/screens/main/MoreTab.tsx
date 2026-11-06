@@ -78,7 +78,7 @@ export function MoreTab({ user, onOpenProfile, onOpenStudyProfile, onOpenFocus, 
       <SectionHeader title="Kỷ niệm và thành tựu" />
       <FeatureGroup>
         <FeatureRow first icon="images" tone="rose" title="Album kỷ niệm" subtitle="Ảnh và khoảnh khắc đã lưu" onPress={onOpenAlbum} testID="open-album" />
-        <FeatureRow icon="ribbon" tone="sun" title="Thành tựu" subtitle="Huy hiệu và kỷ vật pet mang về" onPress={onOpenAchievements} testID="open-achievements" />
+        <FeatureRow icon="ribbon" tone="sun" title="Thành tựu" subtitle="Huy hiệu ghi nhận hành trình của bạn" onPress={onOpenAchievements} testID="open-achievements" />
         <FeatureRow icon="flame" tone="sun" title="Hành trình đăng nhập" subtitle="Chuỗi ngày và quà đã nhận" onPress={onOpenStreak} testID="open-streak" />
         <FeatureRow icon="stats-chart" tone="sky" title="Thống kê tập trung" subtitle="Thời gian học theo ngày và tuần" onPress={onOpenStatistics} testID="open-statistics" />
         <FeatureRow icon="time" tone="lilac" title="Lịch sử học tập" subtitle="Các năm học đã qua" onPress={onOpenArchive} testID="open-archive" />

@@ -54,7 +54,7 @@ def test_a_friend_sees_the_plants_and_their_growth_but_never_the_seeds(client, d
     assert "seeds" not in body["garden"]
     plots = body["garden"]["plots"]
     assert [p["empty"] for p in plots] == [True, True, False] + [True] * 6
-    assert plots[2]["name"] == "Củ tulip" and plots[2]["stage"] == 0
+    assert plots[2]["name"] == "Hoa tulip" and plots[2]["stage"] == 0
     assert plots[2]["care"] == {"water": {"done": False, "by": None, "at": None}, "tend": {"done": False, "by": None, "at": None}}
     assert body["care"] == {"daily_limit": settings.garden_care_daily_limit, "used": 0, "left": settings.garden_care_daily_limit}
     # It is the owner's own data: the same plant, the same stage.
@@ -152,7 +152,7 @@ def test_a_guest_cannot_plant_clear_or_care_for_an_empty_plot(client, db):
     befriend(client, aqua, may)
     plant(client, aqua)
     row = db.scalars(select(GardenPlot).where(GardenPlot.user_id == aqua.id)).one()
-    row.planted_at = utcnow() - timedelta(hours=garden.STAGE_HOURS[-1] + 1)
+    row.planted_at = utcnow() - timedelta(seconds=garden.grow_seconds(row) + 60)
     db.commit()
     assert care(client, may, aqua, plot=3).json()["code"] == "plot_empty"
     # Planting and clearing only ever touch one's own garden: the friend's plant stays where it is.
@@ -181,7 +181,7 @@ def test_friends_watering_at_once_water_once_and_clearing_starts_over(client, db
     assert db.scalar(select(func.count()).select_from(SocialNotification).where(SocialNotification.kind == "garden_care")) == 1
 
     row = db.scalars(select(GardenPlot).where(GardenPlot.user_id == aqua.id)).one()
-    row.planted_at = utcnow() - timedelta(hours=garden.STAGE_HOURS[-1] + 1)
+    row.planted_at = utcnow() - timedelta(seconds=garden.grow_seconds(row) + 60)
     db.commit()
     assert client.post("/api/garden/plots/0/clear", headers=aqua.headers).json()["garden"]["plots"][0]["empty"] is True
     db.expire_all()

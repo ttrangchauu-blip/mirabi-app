@@ -725,11 +725,15 @@ describe('the navigation', () => {
     expect(screen.queryByText(/pha lê/)).toBeNull();
   });
 
-  it('Thành tựu opens Kho đồ on the tab with the badges; Đổi mật khẩu fills the screen with the account email locked', async () => {
-    mockServer({ ...WORLD, 'GET /api/inventory': { status: 200, body: { tabs: [], rarities: [], uses: [], items: [], server_now: new Date().toISOString() } } });
+  it('Thành tựu opens the achievements, whose keepsake link opens Kho đồ on Kỷ vật; Đổi mật khẩu fills the screen with the account email locked', async () => {
+    mockServer({ ...WORLD, 'GET /api/inventory': { status: 200, body: { tabs: [], rarities: [], uses: [], items: [], server_now: new Date().toISOString() } },
+      'GET /api/achievements': { status: 200, body: { summary: { unlocked: 0, total: 0, percent: 0, claimable: 0, claimable_coins: 0 }, groups: [],
+        tiers: [], achievements: [], near: [], recent: [], daily_tasks_counted: 10, coins: 100 } } });
     await start();
     fireEvent.press(screen.getByRole('tab', { name: 'Tiện ích' }));
     fireEvent.press(await screen.findByTestId('open-achievements'));
+    expect(await screen.findByText('Ghi nhận hành trình thật của bạn')).toBeTruthy();
+    fireEvent.press(await screen.findByTestId('open-keepsakes'));
     expect((await screen.findByRole('tab', { name: 'Kỷ vật, 0 món' })).props.accessibilityState.selected).toBe(true);
     fireEvent.press(screen.getByRole('tab', { name: 'Tiện ích' }));
     fireEvent.press(await screen.findByTestId('open-settings'));

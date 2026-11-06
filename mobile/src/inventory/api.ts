@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect } from 'react';
 import { request } from '../screens/main/shared';
 import type { RoomKind } from '../room/types';
-import type { CareKind, CareResult, GardenData, InventoryData, ItemDetail, VisitedGarden } from './types';
+import type { BuyResult, CareKind, CareResult, GardenData, GardenShop, HarvestResult, InventoryData, ItemDetail, VisitedGarden } from './types';
 
 /** The inventory and the garden. The backend decides everything; changes need a connection and its answer. */
 export const inventoryApi = {
@@ -16,6 +16,13 @@ export const inventoryApi = {
   plant: (plot: number, item: string, variant: string, clientRequestId: string): Promise<{ planted: boolean; replayed: boolean; garden: GardenData }> =>
     request(`/api/garden/plots/${plot}/plant`, { method: 'POST', body: { item_id: item, variant, client_request_id: clientRequestId } }),
   clear: (plot: number): Promise<{ garden: GardenData }> => request(`/api/garden/plots/${plot}/clear`, { method: 'POST' }),
+  /** Harvest a ready plant; the backend decides the coins and EXP. The same `clientRequestId` on a retry pays once. */
+  harvest: (plot: number, clientRequestId: string): Promise<HarvestResult> =>
+    request(`/api/garden/plots/${plot}/harvest`, { method: 'POST', body: { client_request_id: clientRequestId } }),
+  shop: (): Promise<GardenShop> => request('/api/garden/shop'),
+  /** No price is sent: the backend charges its own. The same `clientRequestId` on a retry buys once. */
+  buy: (item: string, quantity: number, clientRequestId: string): Promise<BuyResult> =>
+    request('/api/garden/shop/buy', { method: 'POST', body: { item_id: item, quantity, client_request_id: clientRequestId } }),
   /** Water or tend one's own plant; the same `clientRequestId` on a retry is handled once. */
   care: (plot: number, kind: CareKind, clientRequestId: string): Promise<CareResult & { garden: GardenData }> =>
     request(`/api/garden/plots/${plot}/care`, { method: 'POST', body: { kind, client_request_id: clientRequestId } }),

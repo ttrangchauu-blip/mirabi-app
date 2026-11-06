@@ -10,8 +10,14 @@ lantern) are kept, so inventories from before still read. `drop: False` items ar
 """
 from __future__ import annotations
 
+from . import garden_catalog as garden
+
+# What a walk's main gift is drawn as (MAIN_ODDS). The garden's seeds also use "uncommon" and "epic", the tiers of
+# garden_catalog.py; DISPLAY_RARITIES lists every rarity an item can show, in order.
 RARITIES = ("common", "rare", "special", "legendary")
-RARITY_LABELS = {"common": "Thường", "rare": "Hiếm", "special": "Đặc biệt", "legendary": "Huyền thoại"}
+RARITY_LABELS = {"common": "Thường", "uncommon": "Không phổ biến", "rare": "Hiếm", "special": "Đặc biệt", "epic": "Sử thi",
+                 "legendary": "Huyền thoại"}
+DISPLAY_RARITIES = ("common", "uncommon", "rare", "special", "epic", "legendary")
 # The main gift's rarity on every walk, in percent.
 MAIN_ODDS = {"common": 65, "rare": 25, "special": 9, "legendary": 1}
 
@@ -113,6 +119,14 @@ ITEMS: dict[str, dict] = dict([
     _i("small_pot", "plant", "Chậu cây nhỏ", "rare", "Chậu cây nhỏ có mầm xanh.", drop=False),
     _i("moon_lantern", "decor", "Đèn lồng trăng", "special", "Kệ treo đèn lồng hình trăng.", art="lantern_shelf", drop=False),
 ])
+# The garden's seeds: the walk finds above show the tier of their plant (a walk still draws them at the rarity they had,
+# `drop_rarity`, so its odds are unchanged), and the seeds only sold in the garden's shop are never found on walks.
+for _plant in garden.PLANTS.values():
+    _seed = ITEMS.get(_plant["seed_item"])
+    if _seed is None:
+        ITEMS.update([_i(_plant["seed_item"], "seed", _plant["seed_name"], _plant["tier"], _plant["description"], drop=False)])
+    elif _seed["rarity"] != _plant["tier"]:
+        _seed["drop_rarity"], _seed["rarity"] = _seed["rarity"], _plant["tier"]
 for _item in ITEMS.values():
     _item.setdefault("drop", True)
     _item.setdefault("variants", None)  # None: the room artwork's variants (decorations) or just "default"
@@ -144,7 +158,8 @@ BONUS_QUANTITY = (1, 3)
 def pool(location: str, rarity: str) -> list[str]:
     """The items the main gift of a walk to `location` can be, at `rarity`."""
     groups = LOCATIONS[location]["groups"]
-    return [item_id for item_id, item in ITEMS.items() if item["drop"] and item["group"] in groups and item["rarity"] == rarity]
+    return [item_id for item_id, item in ITEMS.items()
+            if item["drop"] and item["group"] in groups and item.get("drop_rarity", item["rarity"]) == rarity]
 
 
 def tab_of(item_id: str) -> str:

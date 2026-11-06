@@ -10,7 +10,7 @@ from sqlalchemy import select
 from . import auth, campus, career, community, companion, dashboard, profile, study, tasks, streaks
 from . import friends, notifications, realtime, room_chat, study_rooms, study_together, team_quests
 from . import education, garden, inventory, learning, learning_history, learning_unlocks, lesson_api, memories, pet_room, room_visits
-from . import adventure, careers, finance, game_tutorials, life, town, work, world
+from . import achievements, adventure, careers, finance, game_tutorials, life, town, work, world
 from .learning_content import seed_learning_content
 from .config import settings
 from .db import SessionLocal, engine
@@ -185,6 +185,8 @@ app.router.routes.extend(careers.router.routes)
 app.router.routes.extend(careers.admin_router.routes)
 # Interactive game tutorials (/api/games/{game}/tutorial...).
 app.router.routes.extend(game_tutorials.router.routes)
+# Thành tựu: badges read from every feature's own records (achievements.py).
+app.router.routes.extend(achievements.router.routes)
 
 
 @app.get("/", tags=["health"])

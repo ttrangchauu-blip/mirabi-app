@@ -79,7 +79,9 @@ def test_every_place_has_something_of_every_rarity_and_every_item_can_be_found()
     groups = {item["group"] for item in cat.ITEMS.values()}
     assert groups == set(cat.GROUPS)
     for item_id, item in cat.ITEMS.items():
-        assert item["rarity"] in cat.RARITIES and item["name"] and item["description"], item_id
+        # Seeds show their plant's tier (garden_catalog), and a walk draws them at the rarity it always did.
+        assert item["rarity"] in cat.DISPLAY_RARITIES and item["name"] and item["description"], item_id
+        assert item.get("drop_rarity", item["rarity"]) in cat.RARITIES or not item["drop"], item_id
         if cat.use_of(item_id) == "room":
             assert item["art"] in pet_room.ITEMS and pet_room.counted(item["art"]) == item_id  # placeable, copy by copy
 
@@ -367,7 +369,7 @@ def test_planting_uses_one_seed_once_per_request_and_only_in_an_empty_plot(clien
     assert plant(9, "request-0006").status_code == 404
     view = client.get("/api/garden", headers=auth).json()
     assert [p["empty"] for p in view["plots"]] == [False, False] + [True] * 7 and view["seeds"] == []
-    assert view["plots"][0]["stage"] == 0 and view["plots"][0]["name"] == "Hạt hoa cúc"
+    assert view["plots"][0]["stage"] == 0 and view["plots"][0]["name"] == "Hoa cúc"
     assert client.post("/api/garden/plots/0/clear", headers=auth).json()["code"] == "not_grown"
 
 
@@ -388,7 +390,7 @@ def test_a_grown_plant_frees_its_plot(client, auth, db):
     give(db, me(db).id, "seed_sunflower", 1)
     client.post("/api/garden/plots/3/plant", headers=auth, json={"item_id": "seed_sunflower", "client_request_id": "grow-request"})
     row = db.scalars(select(GardenPlot)).one()
-    row.planted_at = utcnow() - timedelta(hours=garden.STAGE_HOURS[-1] + 1)
+    row.planted_at = utcnow() - timedelta(seconds=garden.grow_seconds(row) + 60)
     db.commit()
     assert client.get("/api/garden", headers=auth).json()["plots"][3]["grown"] is True
     assert client.post("/api/garden/plots/3/clear", headers=auth).json()["garden"]["plots"][3]["empty"] is True

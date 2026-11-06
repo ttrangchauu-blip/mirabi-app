@@ -15,11 +15,14 @@ import { Fireflies, Fog, LivingPet, type LivingPetHandle, Rain, Snow, Sway } fro
 import { EASE } from '../../world/motion';
 import { castBy, SkyBodies, Stars } from '../../world/sky';
 import { useWeather } from '../../world/weather';
-import { BED, BED_FRAME_TOP, BED_SOIL, BED_TALL, CLOUDS, plantArt, PLANT_FOOT, PLANT_TALL, YARD, YARD_FENCE, YARD_FRONT, YARD_GATE_X, YARD_HILLTOP, YARD_LAWN, YARD_LAWN_X, YARD_POND_END, YARD_POND_RIGHT, YARD_RIDGE, YARD_SWAY, YARD_TALL } from './gardenArt';
+import { BED, BED_FRAME_TOP, BED_SOIL, BED_TALL, CLOUDS, plantArt, PLANT_FOOT, plantScale, PLANT_TALL, YARD, YARD_FENCE, YARD_FRONT, YARD_GATE_X, YARD_HILLTOP, YARD_LAWN, YARD_LAWN_X, YARD_POND_END, YARD_POND_RIGHT, YARD_RIDGE, YARD_SWAY, YARD_TALL } from './gardenArt';
 import { CARE, CARE_KINDS, careOf } from './gardenUi';
+import { tierOf } from './tiers';
 
-/** A planting or a care just confirmed by the server, played once on its plot. */
-export type GardenFx = { plot: number; kind: CareKind | 'plant'; key: number };
+/** A planting, a care or a harvest just confirmed by the server, played once on its plot. A harvest carries what was
+ * picked and what the backend paid for it, since the plot is already empty when it plays. */
+export type GardenFx = { plot: number; kind: CareKind | 'plant' | 'harvest'; key: number;
+  harvest?: { item_id: string; art: string; exp: number; coins: number } };
 
 type Props = {
   plots: GardenPlot[]; busy: number | null;
@@ -315,14 +318,15 @@ function usePop(stage: number | null, delay = 0) {
 
 function PlotSpot({ plot, place, busy, ready, label, onPress, wind, night, fx }: { plot: GardenPlot; place: ReturnType<typeof plotPlaces>[number]; busy: boolean; ready: boolean; label: string;
   onPress: (plot: GardenPlot) => void; wind: number; night: boolean; fx: GardenFx | null }) {
-  const art = plot.empty ? null : plantArt(plot.item_id, plot.stage, night);
+  const art = plot.empty ? null : plantArt(plot, night);
+  const ripe = !plot.empty && (plot.ready ?? plot.grown);
   // The seed lands first, then the sprout comes up.
   const pop = usePop(plot.empty ? null : plot.stage, fx?.kind === 'plant' ? SEED_LANDS : 0);
   const { w, h, pitch } = place;
-  const plantW = w * PLANT_WIDE, plantH = plantW * PLANT_TALL;
+  const plantW = w * PLANT_WIDE * (plot.empty ? 1 : plantScale(plot.art, plot.stage, plot.stage_count)), plantH = plantW * PLANT_TALL;
   const plus = Math.round(w * 0.26);
   // Taller plants bend more, and no two take the same time.
-  const depth = plot.empty ? 0 : 1.6 + plot.stage * 0.9;
+  const depth = plot.empty ? 0 : 1.6 + (plot.stage / Math.max(1, (plot.stage_count ?? 3) - 1)) * 1.8;
   return (
     <View style={[s.plot, { left: place.x - pitch / 2, top: place.feet - h, width: pitch, height: h, zIndex: 2 * (place.row + 1) }]} testID={`garden-plot-${plot.plot}-area`}>
       <Hit onPress={() => onPress(plot)} sink={0.96} accessibilityRole="button" accessibilityLabel={label} testID={`garden-plot-${plot.plot}`} style={{ width: pitch, height: h }}>
@@ -347,7 +351,9 @@ function PlotSpot({ plot, place, busy, ready, label, onPress, wind, night, fx }:
             </Svg>
             <View style={[s.bed, { left: (w - plus) / 2, bottom: w * BED_SOIL - plus / 2 }]}><Ionicons name={ready ? 'add-circle' : 'add-circle-outline'} size={plus} color="#FFFFFF" /></View>
           </>}
+          {ripe && !plot.empty ? <ReadyGlint w={w} color={tierOf(plot.tier).dot} seed={plot.plot} /> : null}
           {fx?.kind === 'plant' ? <SeedFx key={fx.key} w={w} /> : null}
+          {fx?.kind === 'harvest' && fx.harvest ? <HarvestFx key={fx.key} w={w} night={night} harvest={fx.harvest} /> : null}
           {fx?.kind === 'water' ? <WaterFx key={fx.key} w={w} /> : null}
           {fx?.kind === 'tend' ? <TendFx key={fx.key} w={w} /> : null}
           {plot.empty ? null : <View style={[s.badges, { bottom: w * BED_FRAME_TOP - 12 }]}>
@@ -360,12 +366,66 @@ function PlotSpot({ plot, place, busy, ready, label, onPress, wind, night, fx }:
   );
 }
 
-/** How a plant is doing, on one small line at the foot of its plot. An empty plot needs no words: its (+) says it. */
+/** How a plant is doing, on one small line at the foot of its plot, with a dot of its tier's colour. A ready plant says
+ * "Thu hoạch" in gold. An empty plot needs no words: its (+) says it. */
 function PlotSign({ plot, place }: { plot: GardenPlot; place: ReturnType<typeof plotPlaces>[number] }) {
   if (plot.empty) return null;
   const { w } = place;
+  const ripe = plot.ready ?? plot.grown;
   return <View pointerEvents="none" accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={[s.signSpot, { left: place.x - w / 2, top: place.feet - 16, width: w }]}>
-    <View style={s.sign}><Text style={s.signStage} numberOfLines={1}>{plot.stage_label}</Text></View>
+    <View style={[s.sign, ripe && s.signReady]} testID={ripe ? `garden-plot-${plot.plot}-harvestable` : undefined}>
+      {ripe ? <Ionicons name="basket" size={10} color="#7A4E00" /> : <View style={[s.tierDot, { backgroundColor: tierOf(plot.tier).dot }]} />}
+      <Text style={[s.signStage, ripe && s.signStageReady]} numberOfLines={1}>{ripe ? 'Thu hoạch' : plot.stage_label}</Text>
+    </View>
+  </View>;
+}
+
+/** A ready plant: two small sparkles of its tier's colour come and go above it, never in step with its neighbours. No halo. */
+function ReadyGlint({ w, color, seed }: { w: number; color: string; seed: number }) {
+  const { animate } = useWorldMotion();
+  const run = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    if (!animate) return;
+    const loop = Animated.loop(Animated.timing(run, { toValue: 1, duration: 2400 + (seed * 271) % 900, easing: (x) => x, useNativeDriver: true }));
+    loop.start();
+    return () => loop.stop();
+  }, [animate, run, seed]);
+  const spots = [[0.2, -0.5, 11, [0, 1, 0, 0]], [0.7, -0.74, 9, [0, 0, 1, 0]]] as const;
+  return <View pointerEvents="none" style={StyleSheet.absoluteFill} testID="garden-ready-glint">
+    {spots.map(([fx, fy, px, out], i) => (
+      <Animated.View key={i} style={{ position: 'absolute', left: fx * w, top: fy * w, opacity: animate ? run.interpolate({ inputRange: [0, 0.25, 0.5, 1], outputRange: [...out] }) : 0.85 }}>
+        <Ionicons name="sparkles" size={px} color={color} />
+      </Animated.View>
+    ))}
+  </View>;
+}
+
+/** Harvesting: the plant comes up out of its plot and goes (primary), and what the backend paid floats up from it
+ * (secondary): "+40 xu", "+7 EXP". Played after the server's answer, from what it paid, never before. */
+function HarvestFx({ w, night, harvest }: { w: number; night: boolean; harvest: NonNullable<GardenFx['harvest']> }) {
+  const { animate } = useWorldMotion();
+  const run = useRef(new Animated.Value(animate ? 0 : 1)).current;
+  useEffect(() => {
+    if (!animate) return;
+    const anim = Animated.timing(run, { toValue: 1, duration: 1600, easing: (x) => x, useNativeDriver: true });
+    anim.start();
+    return () => anim.stop();
+  }, [animate, run]);
+  if (!animate) return null;
+  const plantW = w * PLANT_WIDE * plantScale(harvest.art, 4, 5), plantH = plantW * PLANT_TALL;
+  const picture = plantArt({ item_id: harvest.item_id, art: harvest.art, stage: 4, stage_count: 5 }, night);
+  const lines = [`+${harvest.coins} xu`, ...(harvest.exp > 0 ? [`+${harvest.exp} EXP`] : [])];
+  return <View pointerEvents="none" style={StyleSheet.absoluteFill} testID="garden-harvest-fx">
+    <Animated.Image source={picture} resizeMode="stretch" fadeDuration={0} style={{ position: 'absolute', width: plantW, height: plantH, left: (w - plantW) / 2,
+      bottom: w * BED_SOIL - plantH * (1 - PLANT_FOOT), opacity: run.interpolate({ inputRange: [0, 0.35, 0.6, 1], outputRange: [1, 1, 0, 0] }),
+      transform: [{ translateY: run.interpolate({ inputRange: [0, 0.12, 0.6, 1], outputRange: [0, 6, -w * 0.5, -w * 0.5] }) },
+        { scale: run.interpolate({ inputRange: [0, 0.12, 0.6, 1], outputRange: [1, 1.04, 0.55, 0.55] }) }] }} />
+    {lines.map((text, i) => (
+      <Animated.View key={text} style={[s.gain, { top: -w * 0.1 - i * 20, opacity: run.interpolate({ inputRange: [0, 0.3 + i * 0.08, 0.45 + i * 0.08, 0.9, 1], outputRange: [0, 0, 1, 1, 0] }),
+        transform: [{ translateY: run.interpolate({ inputRange: [0, 1], outputRange: [10, -w * 0.32] }) }] }]}>
+        <View style={[s.gainPill, i === 0 ? s.gainCoins : s.gainExp]}><Text style={[s.gainText, i === 0 ? s.gainTextCoins : s.gainTextExp]}>{text}</Text></View>
+      </Animated.View>
+    ))}
   </View>;
 }
 
@@ -471,8 +531,18 @@ const s = StyleSheet.create({
   badges: { position: 'absolute', right: '6%', flexDirection: 'row', gap: 2 },
   badge: { width: 18, height: 18, borderRadius: 9, alignItems: 'center', justifyContent: 'center' },
   signSpot: { position: 'absolute', alignItems: 'center', zIndex: 100 },
-  sign: { maxWidth: '100%', paddingHorizontal: 6, paddingVertical: 1, borderRadius: radius.sm - 4, backgroundColor: 'rgba(255,255,255,0.9)', alignItems: 'center' },
-  signStage: { fontSize: 10, lineHeight: 13, fontWeight: '700', color: t.ink },
+  sign: { maxWidth: '100%', flexDirection: 'row', gap: 3, paddingHorizontal: 6, paddingVertical: 1, borderRadius: radius.sm - 4, backgroundColor: 'rgba(255,255,255,0.9)', alignItems: 'center' },
+  signStage: { fontSize: 10, lineHeight: 13, fontWeight: '700', color: t.ink, flexShrink: 1 },
+  signReady: { backgroundColor: '#FFE59A' },
+  signStageReady: { color: '#6B4300', fontWeight: '800' },
+  tierDot: { width: 6, height: 6, borderRadius: 3 },
+  gain: { position: 'absolute', left: -20, right: -20, alignItems: 'center' },
+  gainPill: { paddingHorizontal: 8, paddingVertical: 2, borderRadius: 10 },
+  gainCoins: { backgroundColor: '#FFF1BF' },
+  gainExp: { backgroundColor: '#E3F5E6' },
+  gainText: { fontSize: 12, lineHeight: 16, fontWeight: '900' },
+  gainTextCoins: { color: '#7A4E00' },
+  gainTextExp: { color: '#1F6A2E' },
   seedDrop: { position: 'absolute', width: 5, height: 7, borderRadius: 3, backgroundColor: '#5A3A1E' },
   soilPuff: { position: 'absolute', width: 10, height: 5, borderRadius: 5, backgroundColor: '#C99A68' },
   waterDrop: { position: 'absolute', width: 3.5, height: 7, borderRadius: 3, backgroundColor: '#8ED3F2' },

@@ -27,6 +27,13 @@ const visit = (planted: ReturnType<typeof daisy>[], left = 20) => ({
 const FRIEND = { id: 7, display_name: 'May', avatar_theme: 'aqua', pet: 'cat', pet_name: 'Mochi', pet_level: 1, presence: 'online', room: null,
   can_visit: true, accepts_study_invites: true };
 
+const SHOP_ITEM = (item: string, name: string, tier: string, tier_label: string, price: number, extra: Record<string, unknown> = {}) => ({
+  plant_id: item.replace('seed_', ''), item_id: item, name, seed_name: `Hạt ${name.toLowerCase()}`, description: '', tier, tier_label, art: item.replace('seed_', ''),
+  grow_seconds: 600, harvest_exp: 2, harvest_coins: price + 1, seed_price: price, profit: 1, unlock_level: 0, unlocked: true, owned: 0, ...extra });
+const SHOP = (coins = 100) => ({ coins, pet_level: 1, max_quantity: 20, garden_exp: { daily_cap: 20, earned_today: 7, left: 13 },
+  tiers: [{ id: 'common', label: 'Thường', unlock_level: 0 }, { id: 'uncommon', label: 'Không phổ biến', unlock_level: 1 }, { id: 'rare', label: 'Hiếm', unlock_level: 2 }],
+  items: [SHOP_ITEM('seed_carrot', 'Cà rốt', 'common', 'Thường', 5), SHOP_ITEM('seed_tulip', 'Hoa tulip', 'uncommon', 'Không phổ biến', 11),
+    SHOP_ITEM('seed_crystal_tree', 'Cây pha lê', 'rare', 'Hiếm', 24, { unlocked: false, unlock_level: 2, grow_seconds: 7200, harvest_exp: 7, harvest_coins: 40 })] });
 const wrap = (node: React.ReactElement) => render(<ToastProvider><ConfirmProvider>{node}</ConfirmProvider></ToastProvider>);
 
 beforeEach(async () => { await AsyncStorage.clear(); });
@@ -100,8 +107,8 @@ describe('Vườn của tôi', () => {
       expect(await screen.findByLabelText('Hạt giống: 2')).toBeTruthy();
     });
 
-    it('its (+) leads to where seeds really come from, and sells nothing', async () => {
-      mockServer({ 'GET /api/garden': { status: 200, body: garden() } });
+    it('its (+) leads to where seeds come from: the shop, the walks and the inventory', async () => {
+      mockServer({ 'GET /api/garden': { status: 200, body: garden() }, 'GET /api/garden/shop': { status: 200, body: SHOP() } });
       const onOpenExplore = jest.fn(), onOpenInventory = jest.fn();
       wrap(<GardenScreen user={USER as any} onOpenInventory={onOpenInventory} onOpenExplore={onOpenExplore} />);
       fireEvent.press(await screen.findByLabelText('Nhận thêm hạt giống', {}, { timeout: 8000 }));
@@ -110,7 +117,9 @@ describe('Vườn của tôi', () => {
       fireEvent.press(await screen.findByLabelText('Nhận thêm hạt giống'));
       fireEvent.press(await screen.findByLabelText('Mở Kho đồ'));
       expect(onOpenInventory).toHaveBeenCalledTimes(1);
-      expect(screen.queryByText(/Mua/)).toBeNull();
+      fireEvent.press(await screen.findByLabelText('Nhận thêm hạt giống'));
+      fireEvent.press(await screen.findByLabelText('Cửa hàng hạt giống'));
+      expect(await screen.findByTestId('garden-shop')).toBeTruthy();
     });
   });
 
@@ -183,7 +192,7 @@ describe('Vườn của tôi', () => {
     fireEvent.press(screen.getByLabelText('Tưới'));
     fireEvent.press(await screen.findByLabelText(/^Hạt hoa cúc, Đang lớn.*chạm để tưới nước$/));
     // Watered today: the plant says so, the tool is put down and the action is no longer offered.
-    fireEvent.press(await screen.findByLabelText(/^Hạt hoa cúc, Đang lớn, lớn tiếp sau khoảng \d giờ, đã tưới hôm nay · bạn.*chạm để xem chi tiết$/));
+    fireEvent.press(await screen.findByLabelText(/^Hạt hoa cúc, Đang lớn, lớn tiếp sau \d+ giờ, đã tưới hôm nay · bạn.*chạm để xem chi tiết$/));
     const [first, second] = server.callsTo('POST /api/garden/plots/0/care');
     expect(first.body.kind).toBe('water');
     expect(second.body).toEqual({ kind: 'water', client_request_id: first.body.client_request_id });
@@ -195,6 +204,8 @@ describe('Vườn của tôi', () => {
   it('a new planting in the same plot is a new request, even when the answer of the old one was lost', async () => {
     const SEED = { id: 'seed_daisy', variant: 'default', name: 'Hạt hoa cúc', rarity: 'common', rarity_label: 'Thường', group: 'seed', available: 3 };
     const grown = (plot: number) => ({ ...daisy(plot), stage: 2, stage_label: 'Đã lớn', grown: true, next_stage_at: null });
+    const picked = { plot: 0, item_id: 'seed_daisy', plant_id: 'daisy', name: 'Hoa cúc', art: 'daisy', tier: 'common', tier_label: 'Thường', coins: 6, exp: 2,
+      exp_requested: 2, exp_capped: false, harvested_at: '2026-10-29T09:00:00+00:00' };
     const withSeeds = (...planted: any[]) => ({ ...garden(...planted), seeds: [SEED] });
     let attempt = 0;
     const server = mockServer({
@@ -204,15 +215,14 @@ describe('Vườn của tôi', () => {
         : { status: 200, body: { planted: true, replayed: false, garden: withSeeds(daisy(0)) } }),
       // The next answer shows that first plant in the ground, and grown by now.
       'POST /api/garden/plots/1/plant': { status: 200, body: { planted: true, replayed: false, garden: withSeeds(grown(0), daisy(1)) } },
-      'POST /api/garden/plots/0/clear': { status: 200, body: { garden: withSeeds(daisy(1)) } },
+      'POST /api/garden/plots/0/harvest': { status: 200, body: { harvested: true, replayed: false, harvest: picked, coins: 106, pet_level: 1, xp: 302, garden: withSeeds(daisy(1)) } },
     });
     wrap(<GardenScreen user={USER as any} onOpenInventory={() => {}} initialSeed={{ id: 'seed_daisy', variant: 'default' }} />);
     fireEvent.press(await screen.findByLabelText('Ô đất trống 1, chạm để trồng Hạt hoa cúc', {}, { timeout: 8000 }));
     await waitFor(() => expect(attempt).toBe(1));
     fireEvent.press(await screen.findByLabelText('Ô đất trống 2, chạm để trồng Hạt hoa cúc'));
-    fireEvent.press(await screen.findByLabelText(/^Hạt hoa cúc, Đã lớn.*chạm để xem chi tiết$/));
-    fireEvent.press(await screen.findByLabelText('Dọn ô'));
-    fireEvent.press(await screen.findByRole('button', { name: 'Dọn ô' }));
+    fireEvent.press(await screen.findByLabelText(/^Hạt hoa cúc, Đã lớn.*chạm để thu hoạch$/));
+    fireEvent.press(await screen.findByLabelText('Thu hoạch'));
     fireEvent.press(await screen.findByLabelText('Ô đất trống 1, chạm để trồng Hạt hoa cúc'));
     await waitFor(() => expect(server.callsTo('POST /api/garden/plots/0/plant')).toHaveLength(2));
     const [lost, next] = server.callsTo('POST /api/garden/plots/0/plant');
@@ -276,4 +286,106 @@ describe('Vườn bạn bè', () => {
 it('is a place of Cuộc sống Mirabi, so Tiện ích has no way into it of its own', () => {
   wrap(<MoreTab user={USER as any} onOpenProfile={() => {}} />);
   expect(screen.queryByText('Vườn nhà')).toBeNull();
+});
+
+describe('Thu hoạch và Cửa hàng hạt giống', () => {
+  const ready = (plot: number): any => ({ ...daisy(plot), name: 'Cây pha lê', item_id: 'seed_crystal_tree', art: 'crystal_tree', tier: 'rare', tier_label: 'Hiếm',
+    stage: 4, stage_count: 5, stage_label: 'Sẵn sàng thu hoạch', grown: true, ready: true, next_stage_at: null, harvest: { exp: 7, coins: 40 } });
+  const picked = { plot: 2, item_id: 'seed_crystal_tree', plant_id: 'crystal_tree', name: 'Cây pha lê', art: 'crystal_tree', tier: 'rare', tier_label: 'Hiếm',
+    coins: 40, exp: 7, exp_requested: 7, exp_capped: false, harvested_at: '2026-10-29T09:00:00+00:00' };
+
+  it('shows the coins from the backend and a ready plant asks to be harvested', async () => {
+    mockServer({ 'GET /api/garden': { status: 200, body: { ...garden(ready(2)), coins: 1234 } } });
+    wrap(<GardenScreen user={USER as any} onOpenInventory={() => {}} />);
+    expect(await screen.findByLabelText('1234 xu', {}, { timeout: 8000 })).toBeTruthy();
+    expect(screen.getByTestId('garden-plot-2-harvestable', { includeHiddenElements: true })).toBeTruthy();
+    expect(screen.getByLabelText(/^Cây pha lê, Hiếm, Sẵn sàng thu hoạch.*chạm để thu hoạch$/)).toBeTruthy();
+  });
+
+  it('harvests once with the backend\'s reward, retrying a lost answer with the same request', async () => {
+    let attempt = 0;
+    const onRewarded = jest.fn();
+    const server = mockServer({
+      'GET /api/garden': { status: 200, body: { ...garden(ready(2)), coins: 100 } },
+      'POST /api/garden/plots/2/harvest': () => (++attempt === 1 ? networkDown()
+        : { status: 200, body: { harvested: true, replayed: false, harvest: picked, coins: 140, pet_level: 2, xp: 900, garden: { ...garden(), coins: 140 } } }),
+    });
+    wrap(<GardenScreen user={USER as any} onOpenInventory={() => {}} onRewarded={onRewarded} />);
+    fireEvent.press(await screen.findByLabelText(/^Cây pha lê, Hiếm/, {}, { timeout: 8000 }));
+    expect(await screen.findByText('Thu hoạch: +7 EXP · +40 xu')).toBeTruthy();
+    fireEvent.press(screen.getByLabelText('Thu hoạch, +7 EXP · +40 xu'));
+    expect(await screen.findByText(/Chưa kết nối được/)).toBeTruthy();
+    expect(screen.queryByTestId('garden-harvest-reward')).toBeNull(); // nothing is shown as paid before the backend says so
+    fireEvent.press(await screen.findByLabelText(/^Cây pha lê, Hiếm/));
+    fireEvent.press(await screen.findByLabelText('Thu hoạch, +7 EXP · +40 xu'));
+    const card = await screen.findByTestId('garden-harvest-reward');
+    expect(card.props.accessibilityLabel).toBe('Thu hoạch Cây pha lê: cộng 7 EXP, cộng 40 xu');
+    expect(await screen.findByLabelText('140 xu')).toBeTruthy();
+    const [lost, retry] = server.callsTo('POST /api/garden/plots/2/harvest');
+    expect(retry.body).toEqual({ client_request_id: lost.body.client_request_id });
+    expect(onRewarded).toHaveBeenCalledTimes(1);
+  });
+
+  it('says when the day\'s harvest EXP is used up, and that the coins still came', async () => {
+    mockServer({
+      'GET /api/garden': { status: 200, body: garden(ready(2)) },
+      'POST /api/garden/plots/2/harvest': { status: 200, body: { harvested: true, replayed: false, harvest: { ...picked, exp: 0, exp_capped: true }, coins: 140, pet_level: 2, xp: 900, garden: garden() } },
+    });
+    wrap(<GardenScreen user={USER as any} onOpenInventory={() => {}} />);
+    fireEvent.press(await screen.findByLabelText(/^Cây pha lê, Hiếm/, {}, { timeout: 8000 }));
+    fireEvent.press(await screen.findByLabelText('Thu hoạch, +7 EXP · +40 xu'));
+    expect(await screen.findByText('Đã đủ EXP thu hoạch hôm nay, xu vẫn được cộng.')).toBeTruthy();
+  });
+
+  it('a plant still growing offers no harvest', async () => {
+    mockServer({ 'GET /api/garden': { status: 200, body: garden({ ...daisy(0), stage: 2, stage_count: 5, stage_label: 'Cây non', ready: false,
+      ready_at: new Date(Date.now() + 12 * 60_000).toISOString(), harvest: { exp: 2, coins: 6 } } as any) } });
+    wrap(<GardenScreen user={USER as any} onOpenInventory={() => {}} />);
+    fireEvent.press(await screen.findByLabelText(/^Hạt hoa cúc, Cây non, thu hoạch sau 1\d phút/, {}, { timeout: 8000 }));
+    expect(await screen.findByText('Thu hoạch: +2 EXP · +6 xu')).toBeTruthy();
+    expect(screen.queryByLabelText(/^Thu hoạch,/)).toBeNull();
+  });
+
+  it('the shop filters by tier, shows what is locked, and buys with a request id and no price', async () => {
+    let attempt = 0;
+    const onRewarded = jest.fn();
+    const server = mockServer({
+      'GET /api/garden': { status: 200, body: garden() },
+      'GET /api/garden/shop': { status: 200, body: SHOP(100) },
+      'POST /api/garden/shop/buy': () => (++attempt === 1 ? networkDown()
+        : { status: 200, body: { bought: true, replayed: false, spent: 15, coins: 85, shop: { ...SHOP(85), items: SHOP(85).items.map((i) => (i.item_id === 'seed_carrot' ? { ...i, owned: 3 } : i)) } } }),
+    });
+    wrap(<GardenScreen user={USER as any} onOpenInventory={() => {}} onRewarded={onRewarded} />);
+    fireEvent.press(await screen.findByLabelText('Mở Cửa hàng', {}, { timeout: 8000 }));
+    expect(await screen.findByTestId('garden-shop-item-seed_carrot')).toBeTruthy();
+    expect(screen.getByText('EXP thu hoạch hôm nay: 7/20')).toBeTruthy();
+    expect(screen.getByLabelText('Hạt cây pha lê, mở khi pet đạt cấp 2')).toBeTruthy();
+    fireEvent.press(screen.getByRole('tab', { name: 'Không phổ biến' }));
+    expect(screen.queryByTestId('garden-shop-item-seed_carrot')).toBeNull();
+    expect(screen.getByTestId('garden-shop-item-seed_tulip')).toBeTruthy();
+    fireEvent.press(screen.getByRole('tab', { name: 'Tất cả' }));
+    fireEvent.press(screen.getByTestId('garden-shop-buy-seed_carrot'));
+    fireEvent.press(await screen.findByLabelText('Thêm một hạt'));
+    fireEvent.press(screen.getByLabelText('Thêm một hạt'));
+    expect(screen.getByText('Tổng: 15 xu')).toBeTruthy();
+    fireEvent.press(screen.getByTestId('garden-shop-confirm'));
+    expect(await screen.findByText(/Chạm Mua lần nữa/)).toBeTruthy();
+    fireEvent.press(screen.getByTestId('garden-shop-confirm'));
+    expect(await screen.findByText('Đã mua 3 hạt cà rốt!')).toBeTruthy();
+    expect(screen.getByLabelText('85 xu')).toBeTruthy();
+    const [lost, retry] = server.callsTo('POST /api/garden/shop/buy');
+    expect(lost.body).toEqual({ item_id: 'seed_carrot', quantity: 3, client_request_id: expect.any(String) });
+    expect(retry.body).toEqual(lost.body); // the same purchase: bought once
+    expect(onRewarded).toHaveBeenCalledTimes(1);
+  });
+
+  it('the shop says when the coins are too few and does not buy', async () => {
+    const server = mockServer({ 'GET /api/garden': { status: 200, body: garden() }, 'GET /api/garden/shop': { status: 200, body: SHOP(8) } });
+    wrap(<GardenScreen user={USER as any} onOpenInventory={() => {}} />);
+    fireEvent.press(await screen.findByLabelText('Mở Cửa hàng', {}, { timeout: 8000 }));
+    fireEvent.press(await screen.findByTestId('garden-shop-buy-seed_tulip'));
+    expect(await screen.findByText('Chưa đủ xu (cần 11)')).toBeTruthy();
+    expect(screen.getByTestId('garden-shop-confirm').props.accessibilityState.disabled).toBe(true);
+    expect(server.callsTo('POST /api/garden/shop/buy')).toHaveLength(0);
+  });
 });

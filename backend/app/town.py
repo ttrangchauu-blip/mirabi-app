@@ -24,6 +24,7 @@ from sqlalchemy.orm import Session
 
 from . import inventory as inv
 from . import items_catalog as cat
+from . import wallet
 from .db import get_db
 from .errors import APIError
 from .friends import are_friends, blocked_ids, is_blocked_between, list_friends, profiles_for, shares_stats
@@ -167,11 +168,16 @@ def contribute(project_id: int, data: TownContribution, response: Response, user
         if contributed_today(db, user) + data.amount > DAILY_CONTRIBUTION_LIMIT:
             db.rollback()
             raise APIError(429, "contribution_limit", f"At most {DAILY_CONTRIBUTION_LIMIT} coins a day")
-        paid = db.execute(update(User).where(User.id == user.id, User.coins >= data.amount)
-                          .values(coins=User.coins - data.amount).execution_options(synchronize_session=False)).rowcount
-        if paid != 1:
+        # Never below zero, and written to the coin history (wallet.py) under the same request's key.
+        paid = wallet.spend(db, user.id, data.amount, kind="town_contribution", ref=f"project:{project.id}",
+                            event_key=f"town:{data.client_ref}")
+        if paid is False:
             db.rollback()
             raise APIError(409, "insufficient_coins", "Not enough coins")
+    if previous is None and paid is None:  # paid by the same request from another device: nothing taken twice
+        db.rollback()
+        previous = True
+    elif previous is None:
         db.execute(update(CommunityProject).where(CommunityProject.id == project.id)
                    .values(current_contribution=CommunityProject.current_contribution + data.amount)
                    .execution_options(synchronize_session=False))

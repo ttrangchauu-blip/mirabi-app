@@ -55,10 +55,12 @@ import { MoneyGardenScreen } from '../money/MoneyGardenScreen';
 import { TownScreen } from '../town/TownScreen';
 import { CareerJourneyScreen } from '../career/CareerJourneyScreen';
 import { lifeEligible } from '../../life/access';
+import { AchievementsScreen } from '../achievements/AchievementsScreen';
+import { useAchievementNotices } from '../../achievements/useAchievementNotices';
 
 export type FocusTimer = ReturnType<typeof usePomodoroTimer>;
 
-type Overlay = 'profile' | 'studyProfile' | 'educationAdmin' | 'quests' | 'streak' | 'album' | 'visit' | 'feed' | 'inventory' | 'achievements' | 'settings' | 'privacy' | 'help' | 'invite' | 'password' | 'tour' | 'gardenVisit' | 'work' | 'adventure' | 'money' | 'town' | 'career';
+type Overlay = 'profile' | 'studyProfile' | 'educationAdmin' | 'quests' | 'streak' | 'album' | 'visit' | 'feed' | 'inventory' | 'achievements' | 'keepsakes' | 'settings' | 'privacy' | 'help' | 'invite' | 'password' | 'tour' | 'gardenVisit' | 'work' | 'adventure' | 'money' | 'town' | 'career';
 
 export function MainApp() {
   const { user, setUser, streakPopup, dismissStreakPopup, logout } = useAuth();
@@ -187,6 +189,9 @@ export function MainApp() {
     const timerId = setInterval(() => { void checkMemory(); }, 30000);
     return () => clearInterval(timerId);
   }, [checkMemory]);
+  // "🏅 Mở khóa thành tựu": not while focus mode mutes notices, nor on the achievements screen, which shows them itself.
+  const openAchievements = useCallback(() => setOverlays((s) => (s[s.length - 1] === 'achievements' ? s : [...s, 'achievements'])), []);
+  useAchievementNotices(!!user && !timer.quiet && overlay !== 'achievements', openAchievements);
   // "Xem quà" on the pet frame: always answer, even when the backend has nothing to show yet.
   const openPetGifts = useCallback(async () => {
     const found = await petReward.check();
@@ -254,7 +259,7 @@ export function MainApp() {
   const together = !overlay && tab === 'Study' && studyMode === 'together';
   const games = !overlay && tab === 'Study' && studyMode === 'personal' && !freeStudy;
   const album = overlay === 'album';
-  const inventory = overlay === 'inventory' || overlay === 'achievements'; // Thành tựu: Kho đồ on its Kỷ vật tab, where the badges are
+  const inventory = overlay === 'inventory' || overlay === 'keepsakes'; // Kỷ vật pet mang về (from Thành tựu): Kho đồ on its Kỷ vật tab
   // These bring their own whole-screen layout (the signed-out shell): nothing of the app around them.
   const fullScreen = overlay === 'password' || overlay === 'tour';
   const gardenVisit = overlay === 'gardenVisit' && gardenOwnerId !== null;
@@ -289,7 +294,7 @@ export function MainApp() {
         </View>
       ) : inventory ? (
         <View style={[styles.fill, { paddingTop: insets.top + 10 }]}>
-          <InventoryScreen key={overlay} userId={user.id} initialTab={overlay === 'achievements' ? 'keepsake' : undefined} onBack={back} onPlace={placeInRoom} onPlant={(item) => openGarden({ id: item.id, variant: item.variant })}
+          <InventoryScreen key={overlay} userId={user.id} initialTab={overlay === 'keepsakes' ? 'keepsake' : undefined} onBack={back} onPlace={placeInRoom} onPlant={(item) => openGarden({ id: item.id, variant: item.variant })}
             onOpenAlbum={openAlbum} />
         </View>
       ) : gardenVisit ? (
@@ -312,7 +317,8 @@ export function MainApp() {
               hatching={petHatch.phase !== 'idle'} onOpenInventory={openInventory} startJournal={startJournal} onJournalStarted={() => setStartJournal(false)} />
           ) : lifeSpace === 'garden' ? (
             <GardenScreen key={gardenSeed ? `${gardenSeed.id}.${gardenSeed.variant}` : 'garden'} user={user} onOpenInventory={openInventory} onOpenExplore={() => setLifeSpace('explore')} initialSeed={gardenSeed}
-              top={lifeContentTop} petAway={petHatch.phase !== 'idle' || dashboard?.pet_walk === 'walking'} petWalking={dashboard?.pet_walk === 'walking'} version={petReward.version} />
+              top={lifeContentTop} petAway={petHatch.phase !== 'idle' || dashboard?.pet_walk === 'walking'} petWalking={dashboard?.pet_walk === 'walking'} version={petReward.version}
+              onRewarded={() => { void readDashboard(); }} />
           ) : lifeSpace === 'explore' ? (
             <ExploreSpace user={user} top={lifeContentTop} bottom={0} version={petReward.version + hatchVersion} onOpenGifts={openPetGifts} onOpenInventory={openInventory}
               onOpenQuests={openDailyQuests} onOpenAdventure={() => open('adventure')} onPetSpace={onPetSpace} onPhotoMode={setPhotoMode} safeBottom={insets.bottom} />
@@ -339,6 +345,7 @@ export function MainApp() {
           : overlay === 'help' ? <HelpScreen onBack={back} onReplayTour={() => open('tour')} onOpenFeed={() => open('feed')} />
           : overlay === 'quests' ? <DailyQuestsScreen today={dashboard?.today} quests={dashboard?.daily_quests} onBack={back} onChanged={loadDashboard} onOpenTaskCreate={openTaskCreate} />
             : overlay === 'streak' ? <LoginStreakScreen onBack={back} user={user} onUserUpdated={setUser} />
+            : overlay === 'achievements' ? <AchievementsScreen onBack={back} onCoins={(coins) => setUser({ ...user, coins })} onOpenKeepsakes={() => open('keepsakes')} />
             : overlay === 'feed' ? <FeedScreen user={user} posts={posts} onPosts={setPosts} onPosted={loadDashboard} onBack={back} /> : <>
             {tab === 'Home' && <HomeTab user={user} dashboard={dashboard} dashboardFailed={dashboardFailed} onRetryDashboard={() => { void loadDashboard(); }} onNavigate={navigate} onOpenProfile={() => open('profile')} onOpenStreak={openStreak} onOpenDailyQuests={openDailyQuests} onOpenTaskCreate={openTaskCreate} onQuestChanged={onQuestChanged}
               petSpaceVersion={petReward.version + hatchVersion} onPetReturned={() => { void petReward.check(); }} onOpenPetGifts={openPetGifts} onOpenStudyTogether={openStudyTogether} onOpenFreeStudy={openFreeStudy} onOpenFriends={() => openFriends()} onOpenMemories={() => openAlbum()}

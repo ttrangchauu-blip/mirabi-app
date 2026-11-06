@@ -22,7 +22,7 @@ Mười một mục đó hiện ở đâu và làm gì:
 
 | Mục cũ | Dạng mới | Nằm ở |
 |---|---|---|
-| Thành tựu | Mở Kho đồ ở tab Kỷ vật, nơi có huy hiệu địa điểm. Huy hiệu nghề vẫn ở Hành trình sự nghiệp | Tiện ích → Kỷ niệm và thành tựu |
+| Thành tựu | Màn hình Thành tựu (docs/achievements.md): huy hiệu đọc từ kết quả thật của từng tính năng. Từ đó "Kỷ vật pet mang về" vẫn mở Kho đồ ở tab Kỷ vật; huy hiệu nghề vẫn ở Hành trình sự nghiệp và được đếm trong nhóm Cuộc sống | Tiện ích → Kỷ niệm và thành tựu |
 | Bảng xếp hạng | Đổi tên thành "Cùng bạn tiến bộ", mở Nhiệm vụ nhóm. Nhiệm vụ nhóm cố ý không xếp hạng (`backend/app/team_quests.py`) | Tiện ích → Học tập và tập trung |
 | Nhật ký phản tư | Mở Nhà trong Góc thư giãn, sổ nhật ký hiện sẵn. Chỉ từ 16 tuổi, như Góc thư giãn | Tiện ích → Kỷ niệm và thành tựu |
 | Mời bạn bè | Màn hình mã kết bạn và QR, có nút chia sẻ. Bỏ lời hứa "nhận thêm pha lê" vì không có phần thưởng nào phía sau | Tiện ích → Cá nhân hóa |

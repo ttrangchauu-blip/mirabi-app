@@ -281,5 +281,6 @@ def source_daily_cap(source: str) -> int:
         "study": settings.study_daily_exp_cap,
         "group": settings.group_daily_exp_cap,
         "team_quest": settings.team_quest_daily_exp_cap,
-        "friend_pet": settings.friend_pet_exp_daily_cap,  # per pet and host day, enforced by room_visits.play_with_pet
+        "friend_pet": settings.friend_pet_exp_daily_cap,
+        "garden": settings.garden_daily_exp_cap,  # harvests in Vườn nhà (garden.py)  # per pet and host day, enforced by room_visits.play_with_pet
     }.get(source, 0)

@@ -165,7 +165,7 @@ def totals(db: Session, user_id: int) -> dict[str, int]:
 
 def catalog_view() -> dict:
     return {"tabs": [{"id": t, "label": label} for t, label in cat.TABS],
-            "rarities": [{"id": r, "label": cat.RARITY_LABELS[r]} for r in cat.RARITIES],
+            "rarities": [{"id": r, "label": cat.RARITY_LABELS[r]} for r in cat.DISPLAY_RARITIES],
             "uses": [{"id": u, "label": label} for u, label in cat.USES.items()]}
 
 

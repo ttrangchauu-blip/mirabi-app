@@ -55,6 +55,9 @@ ADDED_COLUMNS: dict[str, list[tuple[str, str]]] = {
         ("adventure_activity", "VARCHAR(32)"),
     ],
     "pet_evolutions": [("hatched_at", "TIMESTAMP")],
+    # Vườn nhà's catalog (garden_catalog.py): what a planting takes and gives, kept from when it was planted. Plants
+    # already in the ground keep None and follow the catalog, so none of them is lost or reset.
+    "garden_plots": [("grow_seconds", "INTEGER"), ("reward_exp", "INTEGER"), ("reward_coins", "INTEGER")],
     "pet_walks": [
         ("task_cycle_id", "VARCHAR(10)"),
         ("rewarded_at", "TIMESTAMP"),

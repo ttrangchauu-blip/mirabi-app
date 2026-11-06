@@ -1,18 +1,21 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { AppState, Pressable, StyleSheet, View } from 'react-native';
+import { AppState, Image, Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Svg, { Path } from 'react-native-svg';
 import { ApiError, newIdempotencyKey } from '../../api/client';
 import type { User } from '../../auth/AuthContext';
 import { Text } from '../../components/Typography';
 import { gardenCache, inventoryApi } from '../../inventory/api';
-import type { CareKind, GardenData, GardenPlot, InventoryItem, PlantedPlot } from '../../inventory/types';
+import type { CareKind, GardenData, GardenPlot, Harvest, InventoryItem, PlantedPlot, Seed as OwnedSeed } from '../../inventory/types';
 import { appTheme as t } from '../../theme';
-import { useConfirm } from '../../ui/ConfirmDialog';
+import { formatNumber } from '../../ui/kit';
 import { useToast } from '../../ui/Toast';
 import { ErrorState, LoadingState, OptionRow, OptionSheet } from '../together/ui';
 import { GardenWorld, type GardenFx } from './GardenWorld';
-import { CARE, careActions, careOf, careText, hoursLeft, planted, PlotDetail, TOOL_HEIGHT, ToolBar, type Tool, useNextStage } from './gardenUi';
+import { readyArt } from './gardenArt';
+import { GardenShop } from './GardenShop';
+import { CARE, careActions, careOf, careText, isReady, planted, PlotDetail, readyText, TOOL_HEIGHT, ToolBar, type Tool, useNextStage } from './gardenUi';
+import { duration, TierPill } from './tiers';
 
 type Seed = Pick<InventoryItem, 'id' | 'variant'>;
 type Props = { user: User; onOpenInventory: () => void;
@@ -21,10 +24,11 @@ type Props = { user: User; onOpenInventory: () => void;
   /** Points under what the space's switcher takes, and over the menu bar. */ top?: number; bottom?: number;
   /** Hatching or out on its walk: the garden without the pet. */ petAway?: boolean;
   /** Out on its walk: says so, or an empty yard looks like something is wrong. */ petWalking?: boolean;
-  /** Changes when a walk's gifts were received: the seeds on show may be old. */ version?: number };
+  /** Changes when a walk's gifts were received: the seeds on show may be old. */ version?: number;
+  /** Coins or EXP changed here (a purchase, a harvest): the app reads the user's numbers again. */ onRewarded?: () => void };
 type ToolId = 'plant' | CareKind;
 
-/** The card with the seeds under the switcher, the one hint and the tools: what the scene keeps free for them, always the same, so a plot never moves. */
+/** The row with the coins, the seeds and the shop under the switcher, the one hint and the tools: what the scene keeps free for them, always the same, so a plot never moves. */
 const SEED_CARD = 34;
 const DOCK = 8 + TOOL_HEIGHT + 8 + 26 + 8;
 
@@ -42,25 +46,28 @@ const Sprout = () => <View accessibilityElementsHidden importantForAccessibility
 </Svg></View>;
 
 const sameSeed = (a: Seed | null, b: Seed) => !!a && a.id === b.id && a.variant === b.variant;
+/** A seed in a list: its tier, how long it grows and how many are left, from the backend's catalog. */
+const seedLine = (x: OwnedSeed) => [x.plant?.tier_label ?? x.rarity_label, x.plant ? duration(x.plant.grow_seconds) : null,
+  x.plant ? `+${x.plant.harvest_exp} EXP · +${x.plant.harvest_coins} xu` : null, `còn ${x.available}`].filter(Boolean).join(' · ');
 /** Newer or as new: an answer that left the server before the one on screen must not bring the older garden back. */
 const notOlder = (shown: GardenData | null, next: GardenData) => !shown?.server_now || !next.server_now || Date.parse(next.server_now) >= Date.parse(shown.server_now);
 
 /**
- * Vườn nhà, one of the four places of Cuộc sống Mirabi: the garden scene (GardenWorld), with the number of seeds over
- * its sky and the tools (Trồng, Tưới, Chăm sóc) on the grass. A friend's garden opens from Bạn bè. A chosen tool acts on
- * the plots tapped next; with none, a tap opens the seeds or the plant's detail. A seed leaves the inventory only once the
- * backend has planted it, one action runs at a time however fast the taps come, and each keeps its request id until the
- * backend answers, so a retry never plants or waters twice. Plants grow by themselves; a grown one can be cleared to free
- * its plot. Offline it shows the last garden the server confirmed, and changes wait.
+ * Vườn nhà, one of the four places of Cuộc sống Mirabi: the garden scene (GardenWorld), with the coins, the number of
+ * seeds and the seed shop over its sky and the tools (Trồng, Tưới, Chăm sóc) on the grass. A friend's garden opens from
+ * Bạn bè. A chosen tool acts on the plots tapped next; with none, a tap opens the seeds or the plant's detail, where a
+ * ready plant is harvested. A seed leaves the inventory only once the backend has planted it, one action runs at a time
+ * however fast the taps come, and each keeps its request id until the backend answers, so a retry never plants, waters or
+ * pays twice. Plants grow by themselves in real time; what a harvest gives is the backend's answer, shown after it, never
+ * before. Offline it shows the last garden the server confirmed, and changes wait.
  */
 export function GardenScreen(props: Props) {
   return <MyGarden {...props} />;
 }
 
 // ------------------------------------------------------------------------------------------------ Vườn của tôi
-function MyGarden({ user, onOpenInventory, onOpenExplore, initialSeed = null, top = 0, bottom = 0, petAway = false, petWalking = false, version = 0 }: Props) {
+function MyGarden({ user, onOpenInventory, onOpenExplore, initialSeed = null, top = 0, bottom = 0, petAway = false, petWalking = false, version = 0, onRewarded }: Props) {
   const toast = useToast();
-  const confirm = useConfirm();
   const [data, setData] = useState<GardenData | null>(null);
   const [offline, setOffline] = useState(false);
   const [error, setError] = useState<unknown>(null);
@@ -73,6 +80,14 @@ function MyGarden({ user, onOpenInventory, onOpenExplore, initialSeed = null, to
   // "Trồng" with several kinds of seed: which one it plants. And the (+) on the card.
   const [pickingSeed, setPickingSeed] = useState(false);
   const [gettingSeeds, setGettingSeeds] = useState(false);
+  const [shopOpen, setShopOpen] = useState(false);
+  // What the last harvest gave, as the backend paid it.
+  const [reward, setReward] = useState<Harvest | null>(null);
+  useEffect(() => {
+    if (!reward) return;
+    const id = setTimeout(() => setReward(null), 3600);
+    return () => clearTimeout(id);
+  }, [reward]);
   // One request id per plot and action, kept until the backend answers, so a retry never plants or waters twice.
   const requests = useRef(new Map<string, string>());
   // Set at once, not at the next render: two taps in one frame both see `busy` still empty.
@@ -159,32 +174,49 @@ function MyGarden({ user, onOpenInventory, onOpenExplore, initialSeed = null, to
       else toast('Chưa kết nối được, bạn thử lại nhé.', 'info');
     } finally { acting.current = false; setBusy(null); }
   }
-  async function clear(plot: PlantedPlot) {
-    if (offline) { toast('Cần kết nối mạng để dọn ô đất.', 'info'); return; }
-    if (!(await confirm({ title: 'Dọn ô đất này?', message: `${plot.name} đã lớn. Dọn ô để trồng cây mới nhé.`, confirmLabel: 'Dọn ô', cancelLabel: 'Để lại', icon: 'leaf-outline' }))) return;
+  /** The detail's "Thu hoạch" is the confirmation; the backend decides what it gives, and a replayed answer (the first one
+   * was lost) shows the same reward. */
+  async function harvest(plot: PlantedPlot) {
+    if (offline) { toast('Cần kết nối mạng để thu hoạch.', 'info'); return; }
     if (acting.current) return;
     acting.current = true;
+    const key = `harvest:${plot.plot}:${plot.planted_at}`;
     setBusy(plot.plot);
-    try { show((await inventoryApi.clear(plot.plot)).garden); } catch { toast('Chưa dọn được ô đất, bạn thử lại nhé.', 'info'); } finally { acting.current = false; setBusy(null); }
+    try {
+      const result = await inventoryApi.harvest(plot.plot, requestId(key));
+      requests.current.delete(key);
+      show(result.garden);
+      const h = result.harvest;
+      setFx({ plot: plot.plot, kind: 'harvest', key: ++fxKey.current, harvest: { item_id: h.item_id, art: h.art, exp: h.exp, coins: h.coins } });
+      setReward(h);
+      onRewarded?.();
+    } catch (e) {
+      if (e instanceof ApiError) {
+        requests.current.delete(key);
+        toast(e.code === 'not_ready' ? `${plot.name} chưa sẵn sàng thu hoạch.` : e.code === 'plot_empty' ? 'Cây này đã được thu hoạch rồi.' : 'Chưa thu hoạch được, bạn thử lại nhé.', 'info');
+        void load();
+      } else toast('Chưa kết nối được. Thử lại nhé: mỗi cây chỉ được nhận thưởng một lần.', 'info'); // the same request id: never paid twice
+    } finally { acting.current = false; setBusy(null); }
   }
   function tapPlot(plot: GardenPlot) {
     if (acting.current) return;
     if (plot.empty) {
       if (tool === 'plant' && chosen) void plant(plot.plot, chosen);
       else if (data?.seeds.length) setChoosing(plot.plot);
-      else toast('Chưa có hạt giống. Pet sẽ mang hạt về sau những chuyến khám phá.', 'info');
+      else setGettingSeeds(true);
     } else if (tool === 'water' || tool === 'tend') void care(plot, tool);
     else setDetail(plot.plot);
   }
   function onDetailAction(plot: PlantedPlot, id: string) {
     setDetail(null);
-    if (id === 'clear') void clear(plot); else void care(plot, id as CareKind);
+    if (id === 'harvest') void harvest(plot); else void care(plot, id as CareKind);
   }
 
   if (!data) return error ? <ErrorState error={error} onRetry={() => { setError(null); void load(); }} /> : <LoadingState label="Đang ra vườn…" />;
 
   const plants = planted(data.plots);
   const seedCount = data.seeds.reduce((n, x) => n + x.available, 0);
+  const coins = data.coins ?? user.coins;
   const tools: Tool[] = [
     { id: 'plant', label: 'Trồng', icon: 'leaf', color: '#2E8C3A', bg: '#E3F5E6', disabled: toolOff('plant', data, offline) },
     { id: 'water', label: CARE.water.short, icon: CARE.water.icon, color: CARE.water.color, bg: CARE.water.bg, disabled: toolOff('water', data, offline) },
@@ -196,13 +228,14 @@ function MyGarden({ user, onOpenInventory, onOpenExplore, initialSeed = null, to
     if (data.seeds.length === 1) { setSeed(data.seeds[0]); setTool('plant'); } else setPickingSeed(true);
   };
   const hint = tool === 'plant' ? (chosen ? `Chạm ô trống để trồng ${chosen.name}.` : 'Chọn hạt giống, rồi chạm ô trống.')
-    : tool ? `Chạm cây để ${CARE[tool].label.toLowerCase()}.` : petWalking ? 'Pet đang đi dạo, về nhà sẽ ra vườn chơi.' : plants.length ? 'Chạm cây để xem chi tiết và chăm sóc.' : null;
+    : tool ? `Chạm cây để ${CARE[tool].label.toLowerCase()}.` : petWalking ? 'Pet đang đi dạo, về nhà sẽ ra vườn chơi.' : plants.some(isReady) ? 'Có cây sẵn sàng thu hoạch: chạm vào cây để thu hoạch.'
+    : plants.length ? 'Chạm cây để xem chi tiết và chăm sóc.' : null;
   const ready = (plot: GardenPlot) => (plot.empty ? tool === 'plant' && !!chosen : (tool === 'water' || tool === 'tend') && !careOf(plot, tool).done);
   const labelFor = (plot: GardenPlot) => {
     if (plot.empty) return `Ô đất trống ${plot.plot + 1}${tool === 'plant' && chosen ? `, chạm để trồng ${chosen.name}` : ''}`;
     const care = plot.care ? `, ${careText(plot, 'water').toLowerCase()}, ${careText(plot, 'tend').toLowerCase()}` : '';
-    const action = tool === 'water' || tool === 'tend' ? `chạm để ${CARE[tool].label.toLowerCase()}` : 'chạm để xem chi tiết';
-    return `${plot.name}, ${plot.stage_label}${plot.next_stage_at ? `, lớn tiếp sau khoảng ${hoursLeft(plot.next_stage_at)} giờ` : ''}${care}, ${action}`;
+    const action = tool === 'water' || tool === 'tend' ? `chạm để ${CARE[tool].label.toLowerCase()}` : isReady(plot) ? 'chạm để thu hoạch' : 'chạm để xem chi tiết';
+    return `${plot.name}${plot.tier_label ? `, ${plot.tier_label}` : ''}, ${plot.stage_label}${isReady(plot) ? '' : `, ${readyText(plot).toLowerCase()}`}${care}, ${action}`;
   };
   const open = detail !== null ? data.plots[detail] : undefined;
   const openPlant = open && !open.empty ? open : null;
@@ -212,11 +245,21 @@ function MyGarden({ user, onOpenInventory, onOpenExplore, initialSeed = null, to
       <GardenWorld plots={data.plots} busy={busy} ready={ready} labelFor={labelFor} onPress={tapPlot} top={top + 8 + SEED_CARD} bottom={bottom + DOCK}
         pet={petAway ? null : { id: user.pet, level: user.level }} fx={fx}>
         <View style={[s.top, { top: top + 8 }]} pointerEvents="box-none">
-          <View style={s.seedCard} accessible accessibilityRole="text" accessibilityLabel={`Hạt giống: ${seedCount}`} testID="garden-seed-count">
-            <Sprout />
-            <Text style={s.seedCardText} numberOfLines={1}>Hạt giống: {seedCount}</Text>
-            <Pressable onPress={() => setGettingSeeds(true)} hitSlop={10} style={({ pressed }) => [s.seedMore, pressed && s.seedMorePressed]} accessibilityRole="button" accessibilityLabel="Nhận thêm hạt giống">
-              <Ionicons name="add" size={18} color="#FFFFFF" />
+          <View style={s.topRow} pointerEvents="box-none">
+            <View style={s.seedCard} accessible accessibilityRole="text" accessibilityLabel={`${coins} xu`} testID="garden-coins">
+              <Ionicons name="cash" size={15} color="#C08A1E" />
+              <Text style={s.coinsText} numberOfLines={1}>{formatNumber(coins)}</Text>
+            </View>
+            <View style={s.seedCard} accessible accessibilityRole="text" accessibilityLabel={`Hạt giống: ${seedCount}`} testID="garden-seed-count">
+              <Sprout />
+              <Text style={s.seedCardText} numberOfLines={1}>{seedCount}</Text>
+              <Pressable onPress={() => setGettingSeeds(true)} hitSlop={10} style={({ pressed }) => [s.seedMore, pressed && s.seedMorePressed]} accessibilityRole="button" accessibilityLabel="Nhận thêm hạt giống">
+                <Ionicons name="add" size={18} color="#FFFFFF" />
+              </Pressable>
+            </View>
+            <Pressable onPress={() => setShopOpen(true)} style={({ pressed }) => [s.seedCard, s.shopButton, pressed && s.seedMorePressed]} accessibilityRole="button" accessibilityLabel="Mở Cửa hàng" testID="garden-open-shop">
+              <Ionicons name="storefront" size={15} color="#FFFFFF" />
+              <Text style={s.shopText} numberOfLines={1}>Cửa hàng</Text>
             </Pressable>
           </View>
           {offline ? <Pressable onPress={() => { void load(); }} style={s.offline} accessibilityRole="button" accessibilityLabel="Đang ngoại tuyến, chạm để thử lại">
@@ -224,6 +267,19 @@ function MyGarden({ user, onOpenInventory, onOpenExplore, initialSeed = null, to
             <Text style={s.offlineText}>Ngoại tuyến · vườn đã lưu. Cần kết nối để trồng và chăm cây.</Text>
           </Pressable> : null}
         </View>
+        {reward ? <Pressable onPress={() => setReward(null)} style={[s.reward, { top: top + 8 + SEED_CARD + 10 }]} accessibilityRole="button" accessibilityLiveRegion="polite"
+          accessibilityLabel={`Thu hoạch ${reward.name}: cộng ${reward.exp} EXP, cộng ${reward.coins} xu${reward.exp_capped ? '. Đã đủ EXP thu hoạch hôm nay' : ''}`} testID="garden-harvest-reward">
+          <Image source={readyArt(reward.art)} resizeMode="contain" fadeDuration={0} style={s.rewardArt} />
+          <View style={s.rewardBody}>
+            <Text style={s.rewardTitle} numberOfLines={1}>Thu hoạch {reward.name}</Text>
+            <TierPill tier={reward.tier} label={reward.tier_label} small />
+            <View style={s.rewardGains}>
+              <Text style={s.rewardExp}>+{reward.exp} EXP</Text>
+              <Text style={s.rewardCoins}>+{reward.coins} xu</Text>
+            </View>
+            {reward.exp_capped ? <Text style={s.rewardNote}>Đã đủ EXP thu hoạch hôm nay, xu vẫn được cộng.</Text> : null}
+          </View>
+        </Pressable> : null}
         <View style={[s.dock, { bottom: bottom + 8 }]} pointerEvents="box-none">
           {hint ? <Text style={s.hintText} accessibilityLiveRegion="polite" numberOfLines={1}>{hint}</Text> : null}
           <ToolBar tools={tools} active={tool} onChange={pickTool} />
@@ -231,15 +287,17 @@ function MyGarden({ user, onOpenInventory, onOpenExplore, initialSeed = null, to
       </GardenWorld>
 
       <OptionSheet visible={choosing !== null} title="Trồng hạt giống nào?" onClose={() => setChoosing(null)}>
-        {data.seeds.map((x) => <OptionRow key={`${x.id}.${x.variant}`} icon="leaf-outline" label={x.name} description={`${x.rarity_label} · còn ${x.available}`}
+        {data.seeds.map((x) => <OptionRow key={`${x.id}.${x.variant}`} icon="leaf-outline" label={x.name} description={seedLine(x)}
           onPress={() => { const plot = choosing!; setChoosing(null); setSeed(x); void plant(plot, x); }} />)}
       </OptionSheet>
       <OptionSheet visible={pickingSeed} title="Chọn hạt giống để trồng" onClose={() => setPickingSeed(false)}>
-        {data.seeds.map((x) => <OptionRow key={`${x.id}.${x.variant}`} icon="leaf-outline" label={x.name} description={`${x.rarity_label} · còn ${x.available}`}
+        {data.seeds.map((x) => <OptionRow key={`${x.id}.${x.variant}`} icon="leaf-outline" label={x.name} description={seedLine(x)}
           onPress={() => { setPickingSeed(false); setSeed(x); setTool('plant'); }} />)}
       </OptionSheet>
-      {/* No shop sells seeds: this says where they really come from. */}
+      {/* Where seeds come from: the shop, the pet's walks, and what is already in the inventory. */}
       <OptionSheet visible={gettingSeeds} title="Nhận thêm hạt giống" onClose={() => setGettingSeeds(false)}>
+        <OptionRow icon="storefront-outline" label="Cửa hàng hạt giống" description="Mua hạt bằng xu: cây càng hiếm, thu hoạch càng nhiều."
+          onPress={() => { setGettingSeeds(false); setShopOpen(true); }} />
         {onOpenExplore ? <OptionRow icon="compass-outline" label="Đến Khám phá" description="Pet có thể mang hạt giống về sau những chuyến khám phá."
           onPress={() => { setGettingSeeds(false); onOpenExplore(); }} /> : null}
         <OptionRow icon="cube-outline" label="Mở Kho đồ" description="Xem hạt giống và các vật phẩm bạn đang có."
@@ -247,14 +305,30 @@ function MyGarden({ user, onOpenInventory, onOpenExplore, initialSeed = null, to
       </OptionSheet>
       <OptionSheet visible={!!openPlant} title={openPlant?.name ?? ''} onClose={() => setDetail(null)}>
         {openPlant ? <PlotDetail plot={openPlant} onAction={(id) => onDetailAction(openPlant, id)}
-          actions={[...careActions(openPlant), ...(openPlant.grown ? [{ id: 'clear', label: 'Dọn ô', icon: 'trash-outline' as const, color: t.danger }] : [])]} /> : null}
+          actions={[...(isReady(openPlant) ? [{ id: 'harvest', label: 'Thu hoạch', icon: 'basket' as const, color: '#B07800',
+            note: openPlant.harvest ? `+${openPlant.harvest.exp} EXP · +${openPlant.harvest.coins} xu` : undefined }] : []), ...careActions(openPlant)]} /> : null}
       </OptionSheet>
+      <GardenShop visible={shopOpen} onClose={() => setShopOpen(false)} onBought={() => { void load(); onRewarded?.(); }} />
     </View>
   );
 }
 const s = StyleSheet.create({
   fill: { flex: 1 },
   top: { position: 'absolute', left: 12, right: 12, gap: 6, alignItems: 'flex-end' },
+  topRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
+  coinsText: { color: '#7A4D00', fontSize: 13, lineHeight: 18, fontWeight: '900', paddingRight: 6 },
+  shopButton: { backgroundColor: '#2E8C3A', paddingRight: 11 },
+  shopText: { color: '#FFFFFF', fontSize: 12.5, lineHeight: 18, fontWeight: '800' },
+  reward: { position: 'absolute', alignSelf: 'center', left: 24, right: 24, flexDirection: 'row', alignItems: 'center', gap: 10, padding: 10, borderRadius: 18,
+    backgroundColor: 'rgba(255,255,255,0.97)', borderWidth: 1.5, borderColor: '#F1D27A',
+    shadowColor: '#23452A', shadowOpacity: 0.2, shadowRadius: 10, shadowOffset: { width: 0, height: 4 }, elevation: 6 },
+  rewardArt: { width: 52, height: 72 },
+  rewardBody: { flex: 1, minWidth: 0, gap: 3 },
+  rewardTitle: { color: t.ink, fontSize: 15, fontWeight: '900' },
+  rewardGains: { flexDirection: 'row', gap: 10 },
+  rewardExp: { color: '#1F6A2E', fontSize: 15, fontWeight: '900' },
+  rewardCoins: { color: '#8A5A00', fontSize: 15, fontWeight: '900' },
+  rewardNote: { color: t.muted, fontSize: 11, fontWeight: '600' },
   seedCard: { flexDirection: 'row', alignItems: 'center', gap: 6, height: SEED_CARD, paddingLeft: 9, paddingRight: 4, borderRadius: SEED_CARD / 2, backgroundColor: 'rgba(255,255,255,0.95)',
     shadowColor: '#23452A', shadowOpacity: 0.16, shadowRadius: 6, shadowOffset: { width: 0, height: 2 }, elevation: 3 },
   seedCardText: { color: '#1F5A26', fontSize: 13, lineHeight: 18, fontWeight: '800' },

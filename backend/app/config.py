@@ -75,6 +75,11 @@ class Settings(BaseSettings):
     # Caring for a friend's garden (garden.py): every plant is watered and tended at most once per owner day (by
     # anyone), and a visitor cares for at most this many plants a day across all friends' gardens. Never EXP or items.
     garden_care_daily_limit: int = 20
+    # Harvests (garden.py) give EXP to the active pet under their own daily cap, apart from the 60 EXP/day of tasks and
+    # learning; coins have no cap, the shop's prices keep them slow (tests/test_garden_economy.py).
+    garden_daily_exp_cap: int = 20
+    # The most seeds one purchase buys.
+    garden_buy_max_quantity: int = 20
     # IANA zone whose calendar days define the login streak (one check-in per local day).
     login_streak_timezone: str = "Asia/Ho_Chi_Minh"
     # IANA zone whose calendar days define daily quests, Home's tasks, the walk and the daily EXP caps (days.py).

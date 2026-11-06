@@ -11,7 +11,7 @@ import { useToast } from '../../ui/Toast';
 import { EmptyState, ErrorState, LoadingState, OptionSheet, PetAvatar } from '../together/ui';
 import { WorldPanel } from '../../world/living';
 import { GardenWorld, type GardenFx } from './GardenWorld';
-import { CARE, careActions, careOf, careText, hoursLeft, planted, PlotDetail, SummaryBar, ToolBar, type Tool, useNextStage } from './gardenUi';
+import { CARE, careActions, careOf, careText, planted, PlotDetail, readyText, SummaryBar, ToolBar, type Tool, useNextStage } from './gardenUi';
 
 type Props = { userId: number; onBack: () => void };
 
@@ -111,7 +111,7 @@ export function FriendGardenScreen({ userId, onBack }: Props) {
   const labelFor = (plot: GardenPlot) => {
     if (plot.empty) return `Ô đất trống ${plot.plot + 1}`;
     const action = tool ? `chạm để ${CARE[tool].label.toLowerCase()}` : 'chạm để xem chi tiết';
-    return `${plot.name}, ${plot.stage_label}${plot.next_stage_at ? `, lớn tiếp sau khoảng ${hoursLeft(plot.next_stage_at)} giờ` : ''}, `
+    return `${plot.name}, ${plot.stage_label}, ${readyText(plot).toLowerCase()}, `
       + `${careText(plot, 'water').toLowerCase()}, ${careText(plot, 'tend').toLowerCase()}, ${action}`;
   };
   const open = detail !== null ? data.garden.plots[detail] : undefined;

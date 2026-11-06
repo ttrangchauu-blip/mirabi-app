@@ -7,6 +7,7 @@ import { appTheme as t } from '../../theme';
 import { radius } from '../../ui/design';
 import type { IconName } from '../../ui/kit';
 import { plantArt } from './gardenArt';
+import { TierPill, timeLeft } from './tiers';
 
 /** The pieces both gardens share (yours and a friend's), besides the scene itself: the summary bar, the tools and a plant's detail. */
 
@@ -16,7 +17,14 @@ export const CARE: Record<CareKind, { label: string; short: string; done: string
 };
 export const CARE_KINDS: CareKind[] = ['water', 'tend'];
 
-export const hoursLeft = (iso: string) => Math.max(1, Math.ceil((Date.parse(iso) - Date.now()) / 3_600_000));
+/** Whether a plant can be harvested (`grown` in answers from before harvests). */
+export const isReady = (plot: PlantedPlot) => plot.ready ?? plot.grown;
+/** When it is ready, told in words: "Sẵn sàng thu hoạch", "Thu hoạch sau 12 phút". */
+export function readyText(plot: PlantedPlot) {
+  if (isReady(plot)) return 'Sẵn sàng thu hoạch';
+  const at = plot.ready_at ?? plot.next_stage_at;
+  return at ? `${plot.ready_at ? 'Thu hoạch sau' : 'Lớn tiếp sau'} ${timeLeft(at)}` : ' ';
+}
 export const careOf = (plot: PlantedPlot, kind: CareKind): PlotCare => plot.care?.[kind] ?? { done: false, by: null, at: null };
 export const planted = (plots: GardenPlot[]) => plots.filter((p): p is PlantedPlot => !p.empty);
 /** Who cared for it today, for the detail and for screen readers. */
@@ -89,15 +97,25 @@ export function ToolBar({ tools, active, onChange }: { tools: Tool[]; active: st
 // ------------------------------------------------------------------------------------------------ a plant's detail
 export type PlotAction = { id: string; label: string; icon: IconName; color?: string; disabled?: boolean; note?: string };
 
-/** Inside an OptionSheet: how the plant grows, today's care, then what this person may do with it. */
+/** Inside an OptionSheet: the plant's tier, how it grows and what harvesting gives (the backend's numbers), today's care,
+ * then what this person may do with it. */
 export function PlotDetail({ plot, actions, note, onAction }: { plot: PlantedPlot; actions: PlotAction[]; note?: string; onAction: (id: string) => void }) {
+  const ready = isReady(plot);
+  const progress = ready ? 1 : Math.max(0, Math.min(1, plot.progress ?? plot.stage / Math.max(1, (plot.stage_count ?? 3) - 1)));
   return (
     <View>
       <View style={s.detail}>
-        <View style={s.detailArt}><Image source={plantArt(plot.item_id, plot.stage)} resizeMode="contain" fadeDuration={0} accessibilityIgnoresInvertColors style={s.detailImage} /></View>
+        <View style={s.detailArt}><Image source={plantArt(plot)} resizeMode="contain" fadeDuration={0} accessibilityIgnoresInvertColors style={s.detailImage} /></View>
         <View style={s.flex}>
-          <Text style={s.detailStage}>{plot.stage_label}</Text>
-          <Text style={s.detailSub}>{plot.grown ? 'Cây đã lớn hẳn' : plot.next_stage_at ? `Lớn tiếp sau khoảng ${hoursLeft(plot.next_stage_at)} giờ` : ' '}</Text>
+          <View style={s.detailHead}>
+            <Text style={s.detailStage} numberOfLines={1}>{plot.stage_label}</Text>
+            {plot.tier_label ? <TierPill tier={plot.tier} label={plot.tier_label} small /> : null}
+          </View>
+          <View style={s.bar} accessibilityRole="progressbar" accessibilityValue={{ min: 0, max: 100, now: Math.round(progress * 100) }}>
+            <View style={[s.barFill, { width: `${progress * 100}%` }, ready && s.barReady]} />
+          </View>
+          <Text style={[s.detailSub, ready && s.detailReady]}>{readyText(plot)}</Text>
+          {plot.harvest ? <Text style={s.reward} testID="garden-plot-reward">Thu hoạch: +{plot.harvest.exp} EXP · +{plot.harvest.coins} xu</Text> : null}
           {CARE_KINDS.map((k) => {
             const done = careOf(plot, k).done;
             return (
@@ -147,9 +165,15 @@ const s = StyleSheet.create({
   toolText: { flexShrink: 1, color: t.ink, fontSize: 12, fontWeight: '700' },
   toolTextOn: { color: '#FFFFFF' },
   detail: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 6 },
-  detailArt: { width: 64, height: 64, borderRadius: 16, backgroundColor: '#E6F4E4', padding: 4 },
+  detailArt: { width: 72, height: 84, borderRadius: 16, backgroundColor: '#E6F4E4', padding: 4 },
+  detailHead: { flexDirection: 'row', alignItems: 'center', gap: 6 },
+  bar: { height: 6, borderRadius: 3, backgroundColor: '#E3EEE0', overflow: 'hidden', marginVertical: 4 },
+  barFill: { height: '100%', borderRadius: 3, backgroundColor: '#5DAE55' },
+  barReady: { backgroundColor: '#E2A72E' },
+  detailReady: { color: '#8A5A00', fontWeight: '800' },
+  reward: { color: '#5A4A12', fontSize: 11.5, fontWeight: '700', marginBottom: 2 },
   detailImage: { width: '100%', height: '100%' },
-  detailStage: { color: t.ink, fontSize: 14, fontWeight: '800' },
+  detailStage: { flexShrink: 1, color: t.ink, fontSize: 14, fontWeight: '800' },
   detailSub: { color: t.muted, fontSize: 11.5, fontWeight: '600', marginBottom: 3 },
   careLine: { flexDirection: 'row', alignItems: 'center', gap: 5, marginTop: 2 },
   careText: { flexShrink: 1, color: t.muted, fontSize: 11.5, fontWeight: '600' },

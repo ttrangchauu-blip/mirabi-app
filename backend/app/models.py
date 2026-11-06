@@ -465,7 +465,9 @@ class PlacedItem(Base):
 
 
 class GardenPlot(Base):
-    """A planted plot of the garden (Vườn nhà); an empty plot has no row."""
+    """A planted plot of the garden (Vườn nhà); an empty plot has no row. What the plant takes to grow and gives at
+    harvest is kept from the moment it was planted (garden_catalog), so a change of the catalog never moves a plant
+    already in the ground. Rows planted before that (all three None) grow and give as the catalog says now."""
     __tablename__ = "garden_plots"
     __table_args__ = (UniqueConstraint("user_id", "plot", name="uq_garden_plot"),)
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -474,7 +476,50 @@ class GardenPlot(Base):
     item_id: Mapped[str] = mapped_column(String(40))
     variant: Mapped[str] = mapped_column(String(24), default="default")
     planted_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    # The planting request's id: unique per user (inventory_events.event_key "plant:<id>"), so it names the planting.
     request_id: Mapped[str] = mapped_column(String(80))
+    grow_seconds: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    reward_exp: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    reward_coins: Mapped[int | None] = mapped_column(Integer, nullable=True)
+
+
+class GardenHarvest(Base):
+    """One harvest (garden.py). A planting is harvested once (`planting_ref` is its planting request's id) and a request
+    id is handled once; `exp_granted` is what the daily cap let through of `exp_requested`."""
+    __tablename__ = "garden_harvests"
+    __table_args__ = (UniqueConstraint("user_id", "planting_ref", name="uq_garden_harvest_planting"),
+                      UniqueConstraint("user_id", "client_request_id", name="uq_garden_harvest_request"),
+                      Index("ix_garden_harvest_user_time", "user_id", "harvested_at"))
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    plot: Mapped[int] = mapped_column(Integer)
+    planting_ref: Mapped[str] = mapped_column(String(80))
+    item_id: Mapped[str] = mapped_column(String(40))
+    plant_id: Mapped[str] = mapped_column(String(40))
+    planted_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    harvested_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    exp_requested: Mapped[int] = mapped_column(Integer, default=0)
+    exp_granted: Mapped[int] = mapped_column(Integer, default=0)
+    coins: Mapped[int] = mapped_column(Integer, default=0)
+    client_request_id: Mapped[str] = mapped_column(String(80))
+
+
+class CoinEvent(Base):
+    """Every change of a user's in-game coins (wallet.py): `delta` (negative when spent) and the balance it left.
+    `event_key` makes a purchase, a harvest or a contribution count once, however often it is sent."""
+    __tablename__ = "coin_events"
+    __table_args__ = (UniqueConstraint("user_id", "event_key", name="uq_coin_event_key"),
+                      Index("ix_coin_events_user_time", "user_id", "created_at"))
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    delta: Mapped[int] = mapped_column(Integer)
+    balance_after: Mapped[int] = mapped_column(Integer)
+    # garden_seed | garden_harvest | town_contribution
+    kind: Mapped[str] = mapped_column(String(24))
+    # What it was for: "seed_carrot x3", "garden:4", "project:2".
+    ref: Mapped[str | None] = mapped_column(String(60), nullable=True)
+    event_key: Mapped[str] = mapped_column(String(100))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 
 
 class GardenCare(Base):
@@ -1770,3 +1815,36 @@ class WorldPreference(Base):
     settings_json: Mapped[str] = mapped_column(Text, default="{}", server_default="{}")
     version: Mapped[int] = mapped_column(Integer, default=1, server_default="1")
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
+
+
+# ------------------------------------------------------------------------------------------------ Thành tựu
+class AchievementUnlock(Base):
+    """A tier of an achievement (achievements.ACHIEVEMENTS) a user reached. Progress itself is never stored: it is read
+    from the records of each feature. A tier is written once (the unique key holds under retries, several devices and
+    concurrent checks) and never taken back. `reward_coins` is what the tier gave when it was reached, so a later change
+    of the catalog never changes what is owed; `claimed_at` is set once, with the coin_events row `achievement:<id>:<tier>`.
+    `backfilled`: found from history the first time the user's achievements were checked (they predate the feature)."""
+    __tablename__ = "achievement_unlocks"
+    __table_args__ = (UniqueConstraint("user_id", "achievement", "tier", name="uq_achievement_unlock"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    achievement: Mapped[str] = mapped_column(String(40))
+    tier: Mapped[int] = mapped_column(Integer)  # 1 Đồng .. 5 Huyền thoại
+    progress: Mapped[int] = mapped_column(Integer, default=0, server_default="0")  # the count when it was reached
+    reward_coins: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
+    backfilled: Mapped[bool] = mapped_column(Boolean, default=False, server_default="0")
+    unlocked_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    # The app showed its "unlocked" notice (on any device).
+    seen_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    claimed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+
+class AchievementCheck(Base):
+    """When a user's achievements were last checked against their records (achievements.evaluate): a check reads many
+    tables, so the app's regular poll runs one at most every few seconds. Its absence means never checked yet."""
+    __tablename__ = "achievement_checks"
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
+    checked_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    # The catalog lessons found completed, with a signature of the learning sessions they were read from: the next
+    # check reads the lessons again only when a session changed (JSON {"sig": str, "lessons": [keys]}).
+    lessons_json: Mapped[str | None] = mapped_column(Text, nullable=True)
